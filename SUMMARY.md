@@ -6,5 +6,5 @@
   * [Entities](/architecture/entity.md)
   * [Authentication](/architecture/authentication.md)
 * [Integrations](/integrations/README.md)
-  * [Platform Requirementst](/integrations/PlatformRequirements.md)
+  * [Platform Requirements](/integrations/platform_requirements.md)
 * [Frontend](/frontend/README.md)
