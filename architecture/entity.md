@@ -1,4 +1,4 @@
-# Entities
+# Entity Architecture
 
 Entities are an abstraction on top of the Home Assistant core.
 
