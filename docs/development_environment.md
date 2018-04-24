@@ -1,5 +1,4 @@
 ---
-layout: page
 title: "Set up Development Environment"
 ---
 

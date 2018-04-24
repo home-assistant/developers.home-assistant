@@ -1,5 +1,4 @@
 ---
-layout: page
 title: "Publishing your add-on"
 ---
 

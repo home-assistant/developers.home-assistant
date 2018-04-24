@@ -1,5 +1,4 @@
 ---
-layout: page
 title: "Example light platform"
 ---
 

@@ -1,5 +1,4 @@
 ---
-layout: page
 title: "Asyncio 101"
 ---
 

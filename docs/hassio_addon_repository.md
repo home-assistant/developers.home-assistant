@@ -1,5 +1,4 @@
 ---
-layout: page
 title: "Create an add-on repository"
 ---
 

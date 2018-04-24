@@ -1,5 +1,4 @@
 ---
-layout: page
 title: "Tutorial: Making your first add-on"
 ---
 

@@ -1,5 +1,4 @@
 ---
-layout: page
 title: "Create a new page"
 ---
 
@@ -11,7 +10,6 @@ If you start from scratch with a page, you need to add a header. Different secti
 
 ```text
 ---
-layout: page
 title: "Awesome Sensor"
 
 

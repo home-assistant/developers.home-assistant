@@ -1,5 +1,4 @@
 ---
-layout: page
 title: "Adding support for a new platform"
 ---
 

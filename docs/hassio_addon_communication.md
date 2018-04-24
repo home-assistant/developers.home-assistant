@@ -1,5 +1,4 @@
 ---
-layout: page
 title: "Add-On Communication"
 ---
 

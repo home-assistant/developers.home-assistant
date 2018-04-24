@@ -1,5 +1,4 @@
 ---
-layout: page
 title: "Developing an add-on"
 ---
 

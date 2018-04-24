@@ -1,5 +1,4 @@
 ---
-layout: page
 title: "Validate the input"
 ---
 

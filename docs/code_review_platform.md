@@ -1,5 +1,4 @@
 ---
-layout: page
 title: "Checklist for creating a platform"
 ---
 
