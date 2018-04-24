@@ -36,6 +36,11 @@ const siteConfig = {
 
   // For no header links in the top nav bar -> headerLinks: [],
   headerLinks: [
+    {doc: 'architecture', label: 'Architecture'},
+    {doc: 'index', label: 'Developers'},
+    {doc: 'index', label: 'Developers'},
+    {doc: 'index', label: 'Developers'},
+    {doc: 'misc', label: 'Misc'},
     {doc: 'index', label: 'Developers'},
     // {doc: 'doc4', label: 'API'},
     // {page: 'help', label: 'Help'},
@@ -46,8 +51,8 @@ const siteConfig = {
   users,
 
   /* path to images for header/footer */
-  headerIcon: 'img/docusaurus.svg',
-  footerIcon: 'img/docusaurus.svg',
+  headerIcon: 'img/logo-white.svg',
+  footerIcon: 'img/logo-white.svg',
   favicon: 'img/favicon.png',
 
   /* colors for website */
@@ -86,12 +91,15 @@ const siteConfig = {
   onPageNav: 'separate',
 
   /* Open Graph and Twitter card images */
-  ogImage: 'img/docusaurus.png',
-  twitterImage: 'img/docusaurus.png',
+  ogImage: 'img/default-social.png',
+  twitterImage: 'img/default-social.png',
 
   // You may provide arbitrary config keys to be used as needed by your
   // template. For example, if you need your repo's URL...
-  //   repoUrl: 'https://github.com/facebook/test-site',
+  repoUrl: 'https://github.com/home-assistant/home-assistant',
+  repoFrontendUrl: 'https://github.com/home-assistant/home-assistant-polymer',
+  repoFrontendWebsite: 'https://github.com/home-assistant/home-assistant.github.io',
+  repoDevWebsite: 'https://github.com/home-assistant/developers.home-assistant',
 };
 
 module.exports = siteConfig;
