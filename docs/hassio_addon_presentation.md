@@ -1,17 +1,11 @@
 ---
 layout: page
 title: "Presenting your add-on"
-description: "Details on how to present your Hass.io add-on."
-date: 2018-01-24 22:15
-sidebar: true
-comments: false
-sharing: true
-footer: true
 ---
 
 If you decide to share your add-on to the public, paying attention to details is recommended. Of course, your add-on should have a proper name and description, but Hass.io also gives you some other tools to present your add-on even nicer.
 
-## {% linkable_title Adding documentation %}
+## Adding documentation
 
 Good documentation helps the consumer of your add-on to understand its usage, explains configuration options, points users in the right direction in the case they have questions or issues, and contains the license under which the add-on was published.
 
@@ -21,7 +15,7 @@ Take a look at other projects for inspiration. For example, see the `README.md` 
 
 In future versions of Hass.io, the `README.md` file will be displayed in the Home Assistant frontend.
 
-## {% linkable_title Add-on icon & logo %}
+## Add-on icon & logo
 
 A picture is worth a thousand words. Therefore, your add-on can be improved by adding a proper image icon and logo. Those images are used when showing your add-on in the Home Assistant Hass.io panel and which will significantly improve the visual representation of your add-on.
 
@@ -38,7 +32,7 @@ Requirements for the icon of your add-on:
 - The aspect ratio of the icon must be 1x1 (square).
 - It is recommended to use an icon size of 128x128px.
 
-## {% linkable_title Keeping a changelog %}
+## Keeping a changelog
 
 It is likely you are going to release newer versions of your add-on in the future. In case that happens, the users of your add-on would see an upgrade notice and probably want to know what changes were made in the latest version.
 
@@ -48,6 +42,6 @@ If you are in need of a guide on keeping a changelog, we would recommend checkin
 
 In future versions of Hass.io, the `CHANGELOG.md` file will be displayed in the Home Assistant frontend.
 
-## {% linkable_title Extended Security %}
+## Extended Security
 
 You can use own security profile for you Add-on with Seccomp or AppArmor. Default it is enabled and use the docker default profile. Put `apparmor` or `seccomp.json` file into your Add-on folder and it will load this file as primary profile.

@@ -1,19 +1,13 @@
 ---
 layout: page
 title: "Creating custom panels"
-description: "Introduction to create custom panels for Home Assistant."
-date: 2016-07-29 13:00
-sidebar: true
-comments: false
-sharing: true
-footer: true
 ---
 
 Panels are pages within Home Assistant that show information within Home Assistant and can allow controlling it. Panels are linked from the sidebar and rendered full screen. The have have real-time access to the Home Assistant object via JavaScript. Examples of panels in the app are map, logbook and history.
 
 Besides components registering panels, users can also register panels using the `panel_custom` component. This allows users to quickly build their own custom interfaces for Home Assistant.
 
-### {% linkable_title Before you get started %}
+### Before you get started
 
 The Home Assistant user interface is currently served to browsers in modern JavaScript and older JavaScript (ES5). The older version has a wider browser support but that comes at a cost of size, performance and more difficult to get started building panels for authors.
 
@@ -24,7 +18,7 @@ frontend:
   javascript_version: latest
 ```
 
-### {% linkable_title Building your first panel %}
+### Building your first panel
 
 Create a file called `hello.html` in your <config dir>/panels/.
 
@@ -45,7 +39,7 @@ The `hello.html` contains the needed building blocks to create the elements insi
 <script>
 class HaPanelHello extends Polymer.Element {
   static get is() { return 'ha-panel-hello'; }
-  
+
   static get properties() {
     return {
       // Home Assistant object

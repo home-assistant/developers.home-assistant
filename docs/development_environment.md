@@ -1,19 +1,13 @@
 ---
 layout: page
 title: "Set up Development Environment"
-description: "Set up your environment to start developing for Home Assistant."
-date: 2014-12-21 13:32
-sidebar: true
-comments: false
-sharing: true
-footer: true
 ---
 
 You'll need to set up a development environment if you want to develop a new feature or component for Home Assistant. Read on to learn how to set up.
 
-### {% linkable_title Preparing your environment %}
+### Preparing your environment
 
-#### {% linkable_title Developing on Linux %}
+#### Developing on Linux
 
 Install the core dependencies.
 
@@ -33,7 +27,7 @@ Different distributions have different package installation mechanisms and somet
 
 Additional dependencies exist if you plan to perform Frontend Development, please read the [Frontend](/developers/frontend/) section to learn more.
 
-#### {% linkable_title Developing on Windows %}
+#### Developing on Windows
 
 If you are using Windows as a development platform, make sure that you have the correct Microsoft [Visual C++ build tools](http://landinghub.visualstudio.com/visual-cpp-build-tools) installed. The installation of the most requirements and validation using `tox` will fail if this is not done correctly. Check the [Windows Compilers](https://wiki.python.org/moin/WindowsCompilers) section on the [Python website](https://www.python.org/) for details.
 
@@ -64,7 +58,7 @@ Also, make sure to install or upgrade the `setuptools` Python package. It contai
 $ pip install --upgrade setuptools
 ```
 
-#### {% linkable_title Developing on OS X %}
+#### Developing on OS X
 
 Install [Homebrew](https://brew.sh/), then use that to install Python 3:
 
@@ -72,7 +66,7 @@ Install [Homebrew](https://brew.sh/), then use that to install Python 3:
 $ brew install python3
 ```
 
-### {% linkable_title Setup Local Repository %}
+### Setup Local Repository
 
 Visit the [Home Assistant repository](https://github.com/home-assistant/home-assistant) and click **Fork**.
 Once forked, setup your local copy of the source using the commands:
@@ -83,7 +77,7 @@ $ cd home-assistant
 $ git remote add upstream https://github.com/home-assistant/home-assistant.git
 ```
 
-### {% linkable_title Setting up virtual environment %}
+### Setting up virtual environment
 
 To isolate your environment from the rest of the system, set up a [`venv`](https://docs.python.org/3/library/venv.html). Within the `home-assistant` directory, create and activate your virtual environment.
 
@@ -103,7 +97,7 @@ Invoke your installation.
 $ hass
 ```
 
-### {% linkable_title Logging %}
+### Logging
 
 By default logging in home-assistant is tuned for operating in production (set to INFO by default, with some modules set to even less verbose logging levels).
 

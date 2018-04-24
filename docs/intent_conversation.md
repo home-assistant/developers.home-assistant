@@ -1,12 +1,6 @@
 ---
 layout: page
 title: "Registering sentences"
-description: "Register sentences with the conversation component."
-date: 2017-07-23 20:00
-sidebar: true
-comments: false
-sharing: true
-footer: true
 ---
 
 The conversation component handles incoming commands from the frontend and converts them to intents. It does this based on registered sentences.

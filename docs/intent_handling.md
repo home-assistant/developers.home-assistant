@@ -1,12 +1,6 @@
 ---
 layout: page
 title: "Handling intents"
-description: "How to handle intents that are fired in Home Assistant."
-date: 2017-07-23 20:00
-sidebar: true
-comments: false
-sharing: true
-footer: true
 ---
 
 Any component can register to handle intents. This allows a single component to handle intents fired from multiple voice assistants.

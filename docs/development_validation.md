@@ -1,12 +1,6 @@
 ---
 layout: page
 title: "Validate the input"
-description: "Validation of entries in configuration.yaml"
-date: 2016-08-11 20:00
-sidebar: true
-comments: false
-sharing: true
-footer: true
 ---
 
 The `configuration.yaml` file contains the configuration options for components and platforms. We use [voluptuous](https://pypi.python.org/pypi/voluptuous) to make sure that the configuration provided by the user is valid. Some entries are optional or could be required to set up a platform or a component. Others must be a defined type or from an already-defined list.
@@ -20,7 +14,7 @@ Besides [voluptuous](https://pypi.python.org/pypi/voluptuous) default types, man
 - Numbers: `small_float` and `positive_int`
 - Time: `time`, `time_zone`
 - Misc: `template`, `slug`, `temperature_unit`, `latitude`, `longitude`, `isfile`, `sun_event`, `ensure_list`, `port`, `url`,  and `icon`
- 
+
 To validate platforms using [MQTT](/components/mqtt/), `valid_subscribe_topic` and `valid_publish_topic` are available.
 
 Some things to keep in mind:
@@ -30,11 +24,11 @@ Some things to keep in mind:
 - Preferred order is `required` first and `optional` second
 - Starting with Home Assistant 0.64 `voluptuous` requires default values for optional configuration keys to be valid values. Don't use a default which is `None` like `vol.Optional(CONF_SOMETHING, default=None): cv.string`, set the default to `default=""` if required.
 
-### {% linkable_title Snippets %} 
+### Snippets
 
 This section contains snippets for the validation we use.
 
-#### {% linkable_title Default name %} 
+#### Default name
 
 It's common to set a default for a sensor if the user doesn't provide a name to use.
 
@@ -46,7 +40,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
 ```
 
-#### {% linkable_title Limit the values %} 
+#### Limit the values
 
 You might want to limit the user's input to a couple of options.
 
@@ -58,9 +52,9 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Optional(CONF_METHOD, default=DEFAULT_METHOD): vol.In(['POST', 'GET']),
 ```
 
-#### {% linkable_title Port %} 
+#### Port
 
-All port numbers are from a range of 1 to 65535. 
+All port numbers are from a range of 1 to 65535.
 
 ```python
 DEFAULT_PORT = 993
@@ -70,7 +64,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     vol.Optional(CONF_PORT, default=DEFAULT_PORT): cv.port,
 ```
 
-#### {% linkable_title Lists %} 
+#### Lists
 
 If a sensor has a pre-defined list of available options, test to make sure the configuration entry matches the list.
 

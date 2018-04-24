@@ -1,17 +1,11 @@
 ---
 layout: page
 title: "Example sensor platform"
-description: "Minimum implementation of a Home Assistant platform."
-date: 2016-04-16 14:24 -07:00
-sidebar: true
-comments: false
-sharing: true
-footer: true
 ---
 
 This is a minimum implementation of a platform for the sensor component.
 
-### {% linkable_title Installation %}
+### Installation
 
 Copy the code below and create it as a file in `<config_dir>/custom_components/sensor/example.py`.
 
@@ -23,7 +17,7 @@ sensor:
   platform: example
 ```
 
-### {% linkable_title Code %}
+### Code
 
 ```python
 from homeassistant.const import TEMP_CELSIUS

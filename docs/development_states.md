@@ -1,12 +1,6 @@
 ---
 layout: page
 title: "Using States"
-description: "Introduction to states in Home Assistant."
-date: 2017-05-13 05:40:00 +0000
-sidebar: true
-comments: false
-sharing: true
-footer: true
 ---
 
 Home Assistant keeps track of the states of entities in a state machine. The state machine has very few requirements:
@@ -17,7 +11,7 @@ Home Assistant keeps track of the states of entities in a state machine. The sta
 
 [Description of the state object.](/docs/configuration/state_object/)
 
-### {% linkable_title Using states in your component %}
+### Using states in your component
 
 This is a simple tutorial/example on how to create and set states. We will do our work in a component called "hello_state". The purpose of this component is to display a given text in the frontend.
 

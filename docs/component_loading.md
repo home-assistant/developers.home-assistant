@@ -1,12 +1,6 @@
 ---
 layout: page
 title: "Loading your components"
-description: "Instructions on how to get your component loaded by Home Assistant."
-date: 2016-04-16 13:32
-sidebar: true
-comments: false
-sharing: true
-footer: true
 ---
 
 A component will be loaded on start if a section (ie. `light:`) for it exists in the config file. A component can also be loaded if another component is loaded that depends on it. When loading a component Home Assistant will check the following paths:

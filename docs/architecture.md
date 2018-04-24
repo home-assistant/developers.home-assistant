@@ -1,13 +1,6 @@
 ---
 layout: page
 title: "Architecture"
-description: "Overview of the Home Assistant architecture."
-date: 2014-12-18 21:49
-sidebar: true
-comments: false
-sharing: true
-footer: true
-og_image: /images/architecture/ha_architecture.svg
 ---
 
 Before we dive into the Home Assistant architecture, let's get a clear overview of the home automation landscape as a whole. This way, we can show how the different parts of Home Assistant fit into the picture.

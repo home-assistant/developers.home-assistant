@@ -1,12 +1,6 @@
 ---
 layout: page
 title: "Development 101"
-description: "Introduction to the basics of Home Assistant."
-date: 2017-05-13 05:40:00 +0000
-sidebar: true
-comments: false
-sharing: true
-footer: true
 ---
 
 The goal of development 101 is to get you familiar with the basics of developing for Home Assistant. Before we start, please make sure you familiarize yourself with the [architecture].

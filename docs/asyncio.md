@@ -1,12 +1,6 @@
 ---
 layout: page
 title: "Asynchronous Programming"
-description: "Introduction to the asynchronous core of Home Assistant."
-date: 2016-10-17 21:49
-sidebar: true
-comments: false
-sharing: true
-footer: true
 ---
 
 On September 29, 2016 we released [Home Assistant 0.29][0.29] as part of our bi-weekly release schedule. This release introduced a complete overhaul of the core spearheaded by [Ben Bangert][ben].

@@ -1,13 +1,6 @@
 ---
 layout: page
 title: "Components Architecture"
-description: "Overview of components within the Home Assistant architecture."
-date: 2016-04-16 14:24 -07:00
-sidebar: true
-comments: false
-sharing: true
-footer: true
-og_image: /images/architecture/component_interaction.png
 ---
 
 Home Assistant can be extended with **components**. Each component is responsible for a specific domain within Home Assistant. Components can listen for or trigger events, offer services, and maintain states. Components are written in Python and can do all the goodness that Python has to offer. Out of the box, Home Assistant offers a bunch of [built-in components]({{site_root}}/components/).
@@ -19,7 +12,7 @@ Diagram showing interaction between components and the Home Assistant core
 
 There are two types of components within Home Assistant: components that interact with an Internet of Things domain, and components that respond to events that happen within Home Assistant. Read on to learn about each type!
 
-#### {% linkable_title Components that interact with an Internet-of-Things domain %}
+#### Components that interact with an Internet-of-Things domain
 
 These components track devices within a specific domain and consist of a core part and platform-specific logic. These components make their information available via the State Machine and the Event Bus. The components also register services in the Service Registry to expose control of the devices.
 
@@ -27,7 +20,7 @@ For example, the built-in [`switch` component](/components/switch/) is responsib
 
 If you want to add support for a new platform, check out the [add new platform section](/developers/add_new_platform/).
 
-#### {% linkable_title Components that respond to events that happen within Home Assistant %}
+#### Components that respond to events that happen within Home Assistant
 
 These components provide small pieces of home automation logic or involve services that do common tasks within your house.
 
@@ -53,7 +46,7 @@ In the event of the sun setting:
 
 Look [here](/python_component_automation/) for a comprehensive example of a home automation component.
 
-### {% linkable_title The full picture %}
+### The full picture
 
 When we put all the different pieces of Home Assistant together, it's a close match for the initial home automation overview sketch. The smart home AI has not been implemented yet, so it's not included in this picture.
 

@@ -1,12 +1,6 @@
 ---
 layout: page
 title: "Generic Platform Discovery"
-description: "Using generic platform discovery."
-date: 2016-05-12 22:00 -02:00
-sidebar: true
-comments: false
-sharing: true
-footer: true
 ---
 
 New controller or hub components often need to add platforms in sub-components (i.e. Lights & Switches) without additional configuration.
@@ -18,7 +12,7 @@ def load_platform(hass, component, platform, discovered=None, hass_config=None)
 
 From more info on how this works, refer to the [load_platform](https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/helpers/discovery.py#L136) method.
 
-### {% linkable_title Example %}
+### Example
 
 Say you need to implement your new MyFlashyHub that controls both Switches & Lights, you can follow these steps:
 
@@ -59,7 +53,7 @@ Add your custom device specific code to the `setup_platform` method in `light/my
 ```python
 import custom_components.myflashyhub as myflashyhub
 
-# 'switch' will receive discovery_info={'optional': 'arguments'} 
+# 'switch' will receive discovery_info={'optional': 'arguments'}
 # as passed in above. 'light' will receive discovery_info=None
 def setup_platform(hass, config, add_devices, discovery_info=None):
     """Your switch/light specific code."""

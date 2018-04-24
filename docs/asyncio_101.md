@@ -1,12 +1,6 @@
 ---
 layout: page
 title: "Asyncio 101"
-description: "An introduction to asyncio."
-date: 2017-04-08 21:49
-sidebar: true
-comments: false
-sharing: true
-footer: true
 ---
 
 If you are not familiar yet with asyncio, please watch the below video. It's a great introduction by [Robert Smallshire][rob] in how and why asyncio works the way it does.

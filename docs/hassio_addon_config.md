@@ -1,13 +1,6 @@
 ---
 layout: page
 title: "Add-On Configuration"
-description: "Steps on how-to create an add-on for Hass.io."
-date: 2017-04-30 13:28
-sidebar: true
-comments: false
-sharing: true
-footer: true
-redirect_from: /hassio/addon_config/
 ---
 
 Each add-on is stored in a folder. The file structure looks like this:
@@ -24,7 +17,7 @@ addon_name/
   run.sh
 ```
 
-## {% linkable_title Add-on script %}
+## Add-on script
 
 As with every Docker container, you will need a script to run when the container is started. A user might run many add-ons, so it is encouraged to try to stick to Bash scripts if you're doing simple things.
 
@@ -45,7 +38,7 @@ So if your `options` contain
 ```
 then there will be a variable `TARGET` containing `beer` in the environment of your bash file afterwards.
 
-## {% linkable_title Add-on Docker file %}
+## Add-on Docker file
 
 All add-ons are based on Alpine Linux 3.6. Hass.io will automatically substitute the right base image based on the machine architecture. Add `tzdata` if you need run in a different timezone. `tzdata` Is is already added to our base images.
 
@@ -72,7 +65,7 @@ LABEL io.hass.version="VERSION" io.hass.type="addon" io.hass.arch="armhf|aarch64
 
 It is possible to use own base image with `build.json` or if you do not need support for automatic multi-arch building you can also use a simple docker `FROM`.
 
-### {% linkable_title Build Args %}
+### Build Args
 
 We support the following build arguments by default:
 
@@ -82,7 +75,7 @@ We support the following build arguments by default:
 | BUILD_VERSION | Add-on version (read from `config.json`).
 | BUILD_ARCH | Hold current build arch inside.
 
-## {% linkable_title Add-on config %}
+## Add-on config
 
 The config for an add-on is stored in `config.json`.
 
@@ -140,7 +133,7 @@ The config for an add-on is stored in `config.json`.
 | timeout | integer | no | Default 10 (second). The timeout to wait until the docker is done or will be killed.
 | tmpfs | string | no | Mount a tmpfs file system in `/tmpfs`. Valide format for this option is : `size=XXXu,uid=N,rw`. Size is mandatory, valid units (`u`) are `k`, `m` and `g` and `XXX` has to be replaced by a number. `uid=N` (with `N` the uid number) and `rw` are optional.
 
-### {% linkable_title Options / Schema %}
+### Options / Schema
 
 The `options` dictionary contains all available options and their default value. Set the default value to `null` if the value is required to be given by the user before the add-on can start, and it show it inside default values. Only nested arrays and dictionaries are supported with a deep of two size. If you want make an option optional, put `?` to the end of data type, otherwise it will be a required value.
 
@@ -184,7 +177,7 @@ We support:
 - port
 - match(REGEX)
 
-## {% linkable_title Add-on extended build %}
+## Add-on extended build
 
 Additional build options for an add-on is stored in `build.json`. This file will be read from our build systems.
 

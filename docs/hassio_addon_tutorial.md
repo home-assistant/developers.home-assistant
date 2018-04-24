@@ -1,13 +1,6 @@
 ---
 layout: page
 title: "Tutorial: Making your first add-on"
-description: "Easy tutorial to get started making your first add-on."
-date: 2017-05-12 13:28
-sidebar: true
-comments: false
-sharing: true
-footer: true
-redirect_from: /hassio/addon_tutorial/
 ---
 
 So you've got Home Assistant going and you've been enjoying the built-in add-ons but you're missing this one application. Time to make your own add-on! In Hass.io 0.24 we introduced the option to have local add-ons be build on your device. This is great for developing new add-ons locally.
@@ -34,7 +27,7 @@ Once you have located your add-on directory, it's time to get started!
 
 [ssh]: /addons/ssh/
 
-## {% linkable_title Step 1: The basics %}
+## Step 1: The basics
 
  - Create a new directory called `hello_world`
  - Inside that directory create three files.
@@ -72,7 +65,7 @@ CMD [ "/run.sh" ]
 echo Hello world!
 ```
 
-## {% linkable_title Step 2: Installing and testing your add-on %}
+## Step 2: Installing and testing your add-on
 
 Now comes the fun part, time to open the Hass.io UI and install and run your add-on.
 
@@ -103,7 +96,7 @@ The Hass.io add-on store will list all available local add-ons.
 The add-on will print Hello world to the logs and then quit.
 </p>
 
-### {% linkable_title I don't see my add-on?! %}
+### I don't see my add-on?!
 
 Oops! You clicked refresh in the store and your add-on didn't show up. Or maybe you just updated an option, clicked refresh and saw your add-on disappear.
 
@@ -111,7 +104,7 @@ When this happens, it means that your `config.json` is invalid. It's either inva
 
 Once you fixed the error, go to the add-on store and click refresh again.
 
-## {% linkable_title Step 3: Hosting a server %}
+## Step 3: Hosting a server
 
 Until now we've been able to do some basic stuff, but it's not very useful yet. So let's take it one step further and host a server that we expose on a port. For this we're going to use the built-in HTTP server that comes with Python 3.
 
@@ -156,7 +149,7 @@ Update `run.sh` to start the Python 3 server:
 python3 -m http.server
 ```
 
-## {% linkable_title Step 4: Installing the update %}
+## Step 4: Installing the update
 
 Since we updated the version number in our `config.json`, Home Assistant will show an update button when looking at the add-on details. You might have to refresh your browser or click the refresh button in the add-on store for it to show up. If you did not update the version number, you can also uninstall and install the add-on again. After installing the add-on again, make sure you start it.
 
@@ -167,7 +160,7 @@ Now navigate to [http://hassio.local:8000](http://hassio.local:8000) to see our 
 The Python 3 server will allow you to browse the /data folder.
 </p>
 
-## {% linkable_title Bonus: Working with add-on options %}
+## Bonus: Working with add-on options
 
 In the screenshot you've probably seen that our server only served up 1 file: `options.json`. This file contains the user configuration for this add-on. Because we specified an empty "config" and "schema" in our `config.json`, the file is currently empty.
 

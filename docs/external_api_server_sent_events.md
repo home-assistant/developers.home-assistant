@@ -1,12 +1,6 @@
 ---
 layout: page
 title: "Server-sent events"
-description: "Home Assistant Server-sent events documentation"
-date: 2016-04-08 07:00
-sidebar: true
-comments: false
-sharing: true
-footer: true
 ---
 
 The [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) feature is a one-way channel from your Home Assistant server to a client which is acting as a consumer. For bi-directional communication check the [RESTful API](/developers/rest_api/) and [Python API](/developers/python_api/).
@@ -42,7 +36,7 @@ You can create a convenient view for this by creating an HTML file (`sse.html`) 
 
 Visit [http://localhost:8123/local/sse.html](http://localhost:8123/local/sse.html) to see the stream of events.
 
-## {% linkable_title Examples %}
+## Examples
 
 A simple way to consume server-sent events is to use a command-line http client like [httpie](https://httpie.org/). Installation info is on the site (if you use Homebrew, it's `brew install httpie`). Once installed, run this snippet from your terminal:
 
@@ -50,11 +44,11 @@ A simple way to consume server-sent events is to use a command-line http client 
 $ http --stream http://localhost:8123/api/stream x-ha-access:YOUR_PASSWORD content-type:application/json
 ```
 
-### {% linkable_title Website %}
+### Website
 
 The [home-assistant-sse](https://github.com/fabaff/home-assistant-sse) repository contains a more advanced example.
 
-### {% linkable_title Python %}
+### Python
 
 If you want to test the server-sent events without creating a website, the Python module [`sseclient` ](https://pypi.python.org/pypi/sseclient/) can help. To install (assuming Python and pip3 are already installed):
 

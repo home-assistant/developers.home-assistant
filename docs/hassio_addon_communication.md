@@ -1,18 +1,11 @@
 ---
 layout: page
 title: "Add-On Communication"
-description: "Description of the internal communication of Hass.io."
-date: 2017-04-30 13:28
-sidebar: true
-comments: false
-sharing: true
-footer: true
-redirect_from: /hassio/addon_config/
 ---
 
 There are different ways for communication between add-ons inside Hass.io.
 
-## {% linkable_title Network %}
+## Network
 
 We use an internal network that allows to communicate with every add-on, even to/from Home Assistant, by using its name or alias. Only the add-ons which run on the host network are a bit limited. These can talk with all internal add-ons by their name but all other add-on can't address these add-on by name - using an alias works for both!
 
@@ -21,7 +14,7 @@ The name is generated using the following format: `{REPO}_{SLUG}`, e.g., `local_
 
 Use `hassio` for communication with the internal API.
 
-## {% linkable_title Home Assistant %}
+## Home Assistant
 
 An add-on can talk to the [Home Assistant API][hass-api] using the internal proxy. That makes it very easy to communicate with the API without knowing the password, port or any other information of the Home Assistant instance. Use this URL: `http://hassio/homeassistant/api` and internal communication is redirected to the right place. The next stept is to add `homeassistant_api: true` to `config.json` and read the environment variable `HASSIO_TOKEN` and use this as Home-Assistant password.
 
@@ -31,7 +24,7 @@ It is also possible to talk direct to the Home Assistant instance which is named
 
 We have severals services for Hass.io inside Home Assistant to run tasks. To send data over STDIN to an add-on use the `hassio.addon_stdin` service.
 
-## {% linkable_title Hass.io API %}
+## Hass.io API
 
 To enables calls to the [Hass.io API][hassio-api], add `hassio_api: true` to `config.json` and read the environment variable `HASSIO_TOKEN`. Now you can use the API over the URL: `http://hassio/`. Use the `HASSIO_TOKEN` with header `X-HASSIO-KEY`.
 

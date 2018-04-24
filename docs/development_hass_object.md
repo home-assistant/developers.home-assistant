@@ -1,18 +1,11 @@
 ---
 layout: page
 title: "Hass object"
-description: "Introduction to developing with the hass object."
-date: 2016-04-16 13:32
-sidebar: true
-comments: false
-sharing: true
-footer: true
-redirect_from: /developers/component_initialization/
 ---
 
 While developing Home Assistant you will see a variable that is everywhere: `hass`. This is the Home Assistant instance that will give you access to all the various parts of the system.
 
-### {% linkable_title The `hass` object %}
+### The `hass` object
 
 The Home Assistant instance contains four objects to help you interact with the system.
 
@@ -24,7 +17,7 @@ The Home Assistant instance contains four objects to help you interact with the 
 | `hass.bus` | This is the EventBus. It allows you to trigger and listen for events. [See available methods.](https://dev-docs.home-assistant.io/en/master/api/core.html#homeassistant.core.EventBus). |
 | `hass.services` | This is the ServiceRegistry. It allows you to register services. [See available methods.](https://dev-docs.home-assistant.io/en/master/api/core.html#homeassistant.core.ServiceRegistry). |
 
-### {% linkable_title Where to find `hass` %}
+### Where to find `hass`
 
 Depending on what you're writing, there are different ways the `hass` object is made available.
 

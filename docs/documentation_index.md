@@ -1,13 +1,6 @@
 ---
 layout: page
 title: "Documentation Home Assistant"
-description: "home-assistant.io web presence for the documentation"
-date: 2015-06-17 08:00
-sidebar: true
-comments: false
-sharing: true
-footer: true
-redirect_from: /developers/website/
 ---
 
 The website you are reading now is the home of Home Assistant: [https://www.home-assistant.io](/). This is the place where we provide documentation and additional details about Home Assistant for end users and developers.

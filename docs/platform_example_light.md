@@ -1,12 +1,6 @@
 ---
 layout: page
 title: "Example light platform"
-description: "Minimum implementation of a Home Assistant platform."
-date: 2016-04-16 14:24 -07:00
-sidebar: true
-comments: false
-sharing: true
-footer: true
 ---
 
 This example is for adding support for the imaginary Awesome Lights. It shows the different best practices for developing a platform.
@@ -53,7 +47,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     import awesomelights
 
     # Assign configuration variables. The configuration check takes care they are
-    # present. 
+    # present.
     host = config.get(CONF_HOST)
     username = config.get(CONF_USERNAME)
     password = config.get(CONF_PASSWORD)

@@ -1,12 +1,6 @@
 ---
 layout: page
 title: "RESTful API"
-description: "Home Assistant RESTful API documentation"
-date: 2014-12-21 13:27
-sidebar: true
-comments: false
-sharing: true
-footer: true
 ---
 
 Home Assistant runs a web server accessible on port 8123.
@@ -16,7 +10,7 @@ Home Assistant runs a web server accessible on port 8123.
 
 The API accepts and returns only JSON encoded objects. All API calls have to be accompanied by the header `X-HA-Access: YOUR_PASSWORD` (YOUR_PASSWORD as specified in your `configuration.yaml` file in the [`http:` section](/components/http/)).
 
-If you are not using the [`frontend`](/components/frontend/) in your setup then you need to add the [`api` component](/components/api/) to your `configuration.yaml` file. 
+If you are not using the [`frontend`](/components/frontend/) in your setup then you need to add the [`api` component](/components/api/) to your `configuration.yaml` file.
 
 There are multiple ways to consume the Home Assistant Rest API. One is with `curl`:
 
@@ -51,11 +45,11 @@ Successful calls will return status code 200 or 201. Other status codes that can
 - 404 (Not Found)
 - 405 (Method not allowed)
 
-### {% linkable_title Actions %}
+### Actions
 
 The API supports the following actions:
 
-#### {% linkable_title GET /api/ %}
+#### GET /api/
 
 Returns a message if the API is up and running.
 
@@ -72,7 +66,7 @@ $ curl -X GET -H "x-ha-access: YOUR_PASSWORD" \
        -H "Content-Type: application/json" http://localhost:8123/api/
 ```
 
-#### {% linkable_title GET /api/config %}
+#### GET /api/config
 
 Returns the current configuration as JSON.
 
@@ -103,7 +97,7 @@ Returns the current configuration as JSON.
    "location_name":"Home",
    "longitude":8.458853651,
    "time_zone":"Europe/Zurich",
-   "unit_system":{  
+   "unit_system":{
       "length":"km",
       "mass":"g",
       "temperature":"\u00b0C",
@@ -124,7 +118,7 @@ $ curl -X GET -H "x-ha-access: YOUR_PASSWORD" \
        -H "Content-Type: application/json" http://localhost:8123/api/config
 ```
 
-#### {% linkable_title GET /api/discovery_info %}
+#### GET /api/discovery_info
 
 Returns basic information about the Home Assistant instance as JSON.
 
@@ -144,7 +138,7 @@ $ curl -X GET -H "x-ha-access: YOUR_PASSWORD" \
        -H "Content-Type: application/json" http://localhost:8123/api/discovery_info
 ```
 
-#### {% linkable_title GET /api/events %}
+#### GET /api/events
 
 Returns an array of event objects. Each event object contains event name and listener count.
 
@@ -168,7 +162,7 @@ $ curl -X GET -H "x-ha-access: YOUR_PASSWORD" \
        -H "Content-Type: application/json" http://localhost:8123/api/events
 ```
 
-#### {% linkable_title GET /api/services %}
+#### GET /api/services
 
 Returns an array of service objects. Each object contains the domain and which services it contains.
 
@@ -197,7 +191,7 @@ $ curl -X GET -H "x-ha-access: YOUR_PASSWORD" \
        -H "Content-Type: application/json" http://localhost:8123/api/services
 ```
 
-#### {% linkable_title GET /api/history/period/&lt;timestamp> %}
+#### GET /api/history/period/&lt;timestamp>
 
 Returns an array of state changes in the past. Each object contains further details for the entities.
 
@@ -255,7 +249,7 @@ $ curl -X GET -H "x-ha-access: YOUR_PASSWORD" \
        http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00?end_time=2016-12-31T00%3A00%3A00%2B02%3A00
 ```
 
-#### {% linkable_title GET /api/states %}
+#### GET /api/states
 
 Returns an array of state objects. Each state has the following attributes: entity_id, state, last_changed and attributes.
 
@@ -283,7 +277,7 @@ $ curl -X GET -H "x-ha-access: YOUR_PASSWORD" \
        -H "Content-Type: application/json" http://localhost:8123/api/states
 ```
 
-#### {% linkable_title GET /api/states/&lt;entity_id> %}
+#### GET /api/states/&lt;entity_id>
 
 Returns a state object for specified entity_id. Returns 404 if not found.
 
@@ -311,7 +305,7 @@ $ curl -X GET -H "x-ha-access: YOUR_PASSWORD" \
        http://localhost:8123/api/states/sensor.kitchen_temperature
 ```
 
-#### {% linkable_title GET /api/error_log %}
+#### GET /api/error_log
 
 Retrieve all errors logged during the current session of Home Assistant as a plaintext response.
 
@@ -329,7 +323,7 @@ $ curl -X GET -H "x-ha-access: YOUR_PASSWORD" \
        http://localhost:8123/api/error_log
 ```
 
-#### {% linkable_title GET /api/camera_proxy/camera.&lt;entity_id> %}
+#### GET /api/camera_proxy/camera.&lt;entity_id>
 
 Returns the data (image) from the specified camera entity_id.
 
@@ -341,7 +335,7 @@ $ curl -X GET -H "x-ha-access: YOUR_PASSWORD" \
        http://localhost:8123/api/camera_proxy/camera.my_sample_camera?time=1462653861261 -o image.jpg
 ```
 
-#### {% linkable_title POST /api/states/&lt;entity_id> %}
+#### POST /api/states/&lt;entity_id>
 
 Updates or creates the current state of an entity.
 
@@ -381,7 +375,7 @@ $ curl -X POST -H "x-ha-access: YOUR_PASSWORD" \
        http://localhost:8123/api/states/sensor.kitchen_temperature
 ```
 
-#### {% linkable_title POST /api/events/&lt;event_type> %}
+#### POST /api/events/&lt;event_type>
 
 Fires an event with event_type
 
@@ -401,7 +395,7 @@ Returns a message if successful.
 }
 ```
 
-#### {% linkable_title POST /api/services/&lt;domain>/&lt;service> %}
+#### POST /api/services/&lt;domain>/&lt;service>
 
 Calls a service within a specific domain. Will return when the service has been executed or after 10 seconds, whichever comes first.
 
@@ -457,7 +451,7 @@ $ curl -X POST \
 The result will include any states that changed while the service was being executed, even if their change was the result of something else happening in the system.
 </p>
 
-#### {% linkable_title POST /api/template %}
+#### POST /api/template
 
 Render a Home Assistant template. [See template docs for more information.](/topics/templating/)
 
@@ -481,7 +475,7 @@ $ curl -X POST -H "x-ha-access: YOUR_PASSWORD" \
        -d '{"template": "It is {{ now }}!"}' http://localhost:8123/api/template
 ```
 
-#### {% linkable_title POST /api/event_forwarding %}
+#### POST /api/event_forwarding
 
 Set up event forwarding to another Home Assistant instance.
 
@@ -503,7 +497,7 @@ It will return a message if event forwarding was set up successfully.
 }
 ```
 
-#### {% linkable_title DELETE /api/event_forwarding %}
+#### DELETE /api/event_forwarding
 
 Cancel event forwarding to another Home Assistant instance.<br>
 

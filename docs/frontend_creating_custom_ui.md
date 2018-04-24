@@ -1,13 +1,6 @@
 ---
 layout: page
 title: "Creating custom UI"
-description: "Introduction to create custom ui for Home Assistant."
-date: 2017-02-04 13:00
-sidebar: true
-comments: false
-sharing: true
-footer: true
-ha_release: 0.38
 ---
 
 If you would like to use your own [State card](/developers/frontend_add_card/) without merging your code into [home-assistant-polymer](https://github.com/home-assistant/home-assistant-polymer/) you can create your own implementation.
@@ -70,7 +63,7 @@ frontend:
 <script>
 class StateCardMyCustomLight extends Polymer.Element {
   static get is() { return 'state-card-my-custom-light'; }
-  
+
   static get properties() {
     return {
       // Home Assistant object

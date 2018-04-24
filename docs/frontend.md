@@ -1,12 +1,6 @@
 ---
 layout: page
 title: "Frontend development"
-description: "Tips and hints if you are starting on Home Assistant frontend development"
-date: 2014-12-21 13:32
-sidebar: true
-comments: false
-sharing: true
-footer: true
 ---
 
 Home Assistant is built on top of the [Polymer](https://www.polymer-project.org/) webcomponents framework. Polymer allows building encapsulated custom HTML elements. [Home-Assistant-Polymer source code on GitHub.][hass-polymer]
@@ -15,7 +9,7 @@ Home Assistant is built on top of the [Polymer](https://www.polymer-project.org/
 Do not use development mode in production. Home Assistant uses aggressive caching to improve the mobile experience. This is disabled during development so that you do not have to restart the server in between changes.
 </p>
 
-## {% linkable_title Setting up the environment %}
+## Setting up the environment
 
 <p class='note'>
 All commands below need to be run from inside the home-assistant-polymer repository.
@@ -61,7 +55,7 @@ $ script/bootstrap
 
 This script will use yarn and bower to install all the necessary dependencies necessary for development and do an initial build.
 
-### {% linkable_title Creating pull requests %}
+### Creating pull requests
 
 If you're planning on issuing a PR back to the Home Assistant codebase you need to fork the polymer project and add your fork as a remote to the Home Assistant Polymer repo.
 
@@ -77,7 +71,7 @@ $ git commit -m "Added new feature X"
 $ git push -u <remote name> HEAD
 ```
 
-## {% linkable_title Development %}
+## Development
 
 If you are changing `html` files under `/src` or `/panels` - just reload the page in your browser to see changes.
 If you are changing javascript files under `/js` you need to have gulp running to watch the source files for changes and build when necessary.
@@ -92,7 +86,7 @@ The source code for the frontend can be found in different directories:
  - Panels: `/home-assistant-polymer/panels/`
  - Javascript code: `/home-assistant-polymer/js/`
 
-# {% linkable_title Building the Polymer frontend %}
+# Building the Polymer frontend
 
 Building a new version of the frontend is as simple as running `script/build_frontend`.
 To use a built version package it: `python setup.py sdist`

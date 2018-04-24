@@ -1,12 +1,6 @@
 ---
 layout: page
 title: "Adding state card"
-description: "Adding a state card to the frontend"
-date: 2016-04-16 14:40 -07:00
-sidebar: true
-comments: false
-sharing: true
-footer: true
 ---
 
 The main interface of Home Assistant is a list of the current entities and their states. For each entity in the system, a state card will be rendered. State cards will show an icon, the name of the entity, when the state has last changed and the current state or a control to interact with it.

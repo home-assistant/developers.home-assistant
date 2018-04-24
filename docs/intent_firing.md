@@ -1,12 +1,6 @@
 ---
 layout: page
 title: "Firing intents"
-description: "How to fire intents to be handled by Home Assistant."
-date: 2017-07-23 20:00
-sidebar: true
-comments: false
-sharing: true
-footer: true
 ---
 
 When you fire an intent, you will get a response back or an error will be raised. It is up to the component to return the result to the user.
