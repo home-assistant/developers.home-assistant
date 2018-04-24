@@ -1,0 +1,100 @@
+{
+  "catch-all": {
+    "Catch all category": [
+      "index"
+    ],
+    "Maintainer docs": [
+      "maintenance",
+      "releasing"
+    ],
+    "Creating Platforms": [
+      "add_new_platform",
+      "code_review_platform",
+      "platform_example_light",
+      "platform_example_sensor"
+    ],
+    "Creating Components": [
+      "code_review_component",
+      "component_deps_and_reqs",
+      "component_discovery",
+      "component_events",
+      "component_generic_discovery",
+      "component_loading",
+      "component_states",
+      "creating_components"
+    ],
+    "Documentation": [
+      "documentation_create_page",
+      "documentation_index",
+      "documentation_standards"
+    ],
+    "Frontend": [
+      "frontend",
+      "frontend_add_card",
+      "frontend_add_more_info",
+      "frontend_creating_custom_panels",
+      "frontend_creating_custom_ui"
+    ],
+    "Intents": [
+      "intent_conversation",
+      "intent_firing",
+      "intent_handling",
+      "intent_index"
+    ],
+    "External API": [
+      "external_api_python",
+      "external_api_rest",
+      "external_api_server_sent_events",
+      "external_api_websocket"
+    ],
+    "Architecture": [
+      "architecture",
+      "architecture_components"
+    ],
+    "asyncio": [
+      "asyncio",
+      "asyncio_101",
+      "asyncio_categorizing_functions",
+      "asyncio_misc",
+      "asyncio_working_with_async"
+    ],
+    "Development": [
+      "development",
+      "development_101",
+      "development_catching_up",
+      "development_checklist",
+      "development_config",
+      "development_environment",
+      "development_events",
+      "development_guidelines",
+      "development_hass_object",
+      "development_services",
+      "development_states",
+      "development_submitting",
+      "development_testing",
+      "development_validation"
+    ],
+    "Internationalization": [
+      "internationalization_backend_localization",
+      "internationalization_custom_component_localization",
+      "internationalization_index",
+      "internationalization_translation"
+    ],
+    "Hass.io": [
+      "hassio_addon_communication",
+      "hassio_addon_config",
+      "hassio_addon_development",
+      "hassio_addon_presentation",
+      "hassio_addon_publishing",
+      "hassio_addon_repository",
+      "hassio_addon_testing",
+      "hassio_addon_tutorial",
+      "hassio_architecture",
+      "hassio_debugging"
+    ]
+  },
+  "Building Integrations": {
+    "Introduction": [
+    ]
+  }
+}
