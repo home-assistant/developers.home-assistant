@@ -21,6 +21,7 @@ const users = [
 const siteConfig = {
   title: 'Home Assistant dev docs' /* title for your website */,
   tagline: 'All you need to start developing for Home Assistant',
+  editUrl: 'https://github.com/home-assistant/developers.home-assistant/edit/master/docs/',
   url: 'https://developers.home-assistant.io' /* your website url */,
   baseUrl: '/' /* base url for your project */,
   // For github.io type URLs, you would set the url and baseUrl like:

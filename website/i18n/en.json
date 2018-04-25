@@ -58,7 +58,6 @@
     "hassio_addon_testing": "Local add-on testing",
     "hassio_addon_tutorial": "Tutorial: Making your first add-on",
     "hassio_debugging": "Debugging Hass.io",
-    "index": "Developers",
     "intent_conversation": "Registering sentences",
     "intent_firing": "Firing intents",
     "intent_handling": "Handling intents",
