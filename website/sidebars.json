@@ -1,40 +1,31 @@
 {
   "Architecture": {
     "Architecture": [
-      "architecture",
+      "architecture_index",
       "architecture_components"
     ],
     "Intents": [
-      "intent_conversation",
+      "intent_index",
       "intent_firing",
       "intent_handling",
-      "intent_index"
-    ],
-    "Catch all category": [
-      "index"
-    ],
-    "Documentation": [
-      "documentation_create_page",
-      "documentation_index",
-      "documentation_standards"
-    ],
-    "Maintainer docs": [
-      "maintenance",
-      "releasing"
+      "intent_conversation"
     ]
   },
-  "Frontend": {
+  "Extending Frontend": {
     "Frontend": [
-      "frontend",
+      "frontend_index",
       "frontend_add_card",
       "frontend_add_more_info",
       "frontend_creating_custom_panels",
       "frontend_creating_custom_ui"
     ]
   },
-  "Development": {
+  "Extending HASS": {
+    "Introduction": [
+      "building_integrations"
+    ],
     "Development": [
-      "development",
+      "development_index",
       "development_101",
       "development_catching_up",
       "development_checklist",
@@ -49,10 +40,39 @@
       "development_testing",
       "development_validation"
     ],
+    "Creating Platforms": [
+      "creating_platform_index",
+      "creating_platform_code_review",
+      "creating_platform_example_light",
+      "creating_platform_example_sensor"
+    ],
+    "Creating Components": [
+      "creating_component_index",
+      "creating_component_code_review",
+      "creating_component_deps_and_reqs",
+      "creating_component_discovery",
+      "creating_component_events",
+      "creating_component_generic_discovery",
+      "creating_component_loading",
+      "creating_component_states"
+    ]
+  },
+  "External APIs": {
+    "External API": [
+      "external_api_rest",
+      "external_api_rest_python",
+      "external_api_websocket",
+      "external_api_server_sent_events"
+    ]
+  },
+  "Misc": {
+    "Introduction": [
+      "misc"
+    ],
     "Internationalization": [
+      "internationalization_index",
       "internationalization_backend_localization",
       "internationalization_custom_component_localization",
-      "internationalization_index",
       "internationalization_translation"
     ],
     "asyncio": [
@@ -61,9 +81,7 @@
       "asyncio_categorizing_functions",
       "asyncio_misc",
       "asyncio_working_with_async"
-    ]
-  },
-  "Hass.io": {
+    ],
     "Hass.io": [
       "hassio_addon_communication",
       "hassio_addon_config",
@@ -75,32 +93,15 @@
       "hassio_addon_tutorial",
       "hassio_architecture",
       "hassio_debugging"
-    ]
-  },
-  "Building Integrations": {
-    "Creating Platforms": [
-      "add_new_platform",
-      "code_review_platform",
-      "platform_example_light",
-      "platform_example_sensor"
     ],
-    "Creating Components": [
-      "code_review_component",
-      "component_deps_and_reqs",
-      "component_discovery",
-      "component_events",
-      "component_generic_discovery",
-      "component_loading",
-      "component_states",
-      "creating_components"
-    ]
-  },
-  "APIs": {
-    "External API": [
-      "external_api_python",
-      "external_api_rest",
-      "external_api_server_sent_events",
-      "external_api_websocket"
+    "Documentation": [
+      "documentation_create_page",
+      "documentation_index",
+      "documentation_standards"
+    ],
+    "Maintainer docs": [
+      "maintenance",
+      "releasing"
     ]
   }
 }

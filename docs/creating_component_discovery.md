@@ -2,9 +2,7 @@
 title: "Component Discovery"
 ---
 
-<p class='note warning'>
-This option is only available for built-in components.
-</p>
+> This option is only available for built-in components.
 
 Home Assistant has a discovery service running in the background to discover new devices. Whenever a new device is discovered, a `SERVICE_DISCOVERED` event will be fired with the found service and the information. The `discovery` component has some knowledge about which components handle which type of services and will ensure those are loaded and listening before firing the `SERVICE_DISCOVERED` event.
 

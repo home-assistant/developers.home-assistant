@@ -2,9 +2,7 @@
 title: "Debugging Hass.io"
 ---
 
-<p class='note warning'>
-This section is not for users. Use the [SSH add-on] to SSH into Hass.io. This is for <b>developers</b> of Hass.io. Do not ask for support if you are using these options.
-</p>
+> This section is not for users. Use the [SSH add-on] to SSH into Hass.io. This is for <b>developers</b> of Hass.io. Do not ask for support if you are using these options.
 
 [SSH add-on]: /addons/ssh/
 
@@ -22,9 +20,7 @@ Follow steps 1-4 under 'Generating a new SSH key' (The other sections are not ap
 
 Step 3 in the link above, shows the path to the private key file `id_rsa` for your chosen operating system. Your public key, `id_rsa.pub`, is saved in the same folder. Next, select all text from text box "Public key for pasting into OpenSSH authorized_keys file" and save it to the root of your SD card as `authorized_keys`.
 
-<p class='note'>
-Make sure when you are copying the public key to the root of the /resin-boot partition of the SD card that you rename the file correctly to `authorized_keys` with no `.pub` file extension.
-</p>
+> Make sure when you are copying the public key to the root of the /resin-boot partition of the SD card that you rename the file correctly to `authorized_keys` with no `.pub` file extension.
 
 You should then be able to SSH into your Hass.io device. On mac/linux, use:
 ```

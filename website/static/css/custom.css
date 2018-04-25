@@ -1,5 +1,15 @@
 /* your custom css */
 
+.homeContainer .projectTitle,
+.indexPage h2 {
+  color: rgb(33, 33, 33) !important;
+}
+
+.introSection {
+  padding-bottom: 20px;
+}
+
+
 @media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
 }
 

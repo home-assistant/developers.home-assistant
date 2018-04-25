@@ -8,11 +8,11 @@ Submit your improvements, fixes, and new features to Home Assistant one at a tim
 
       `git checkout -b some-feature`
 
- 2. Make your changes, create a [new platform](/developers/add_new_platform/), develop a [new component](/developers/creating_components/), or fix [issues](https://github.com/home-assistant/home-assistant/issues).
+ 2. Make your changes, create a [new platform](creating_platform_index.md), develop a [new component](creating_component_index.md), or fix [issues](https://github.com/home-assistant/home-assistant/issues).
 
- 3. [Test your changes](/developers/development_testing/) and check for style violations.
+ 3. [Test your changes](development_testing.md) and check for style violations.
 
- 4. If everything looks good according to these [musts](/developers/development_checklist/), commit your changes:
+ 4. If everything looks good according to these [musts](development_checklist.md), commit your changes:
 
     `git add .`
 

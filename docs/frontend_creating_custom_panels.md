@@ -6,7 +6,7 @@ Panels are pages within Home Assistant that show information within Home Assista
 
 Besides components registering panels, users can also register panels using the `panel_custom` component. This allows users to quickly build their own custom interfaces for Home Assistant.
 
-### Before you get started
+## Before you get started
 
 The Home Assistant user interface is currently served to browsers in modern JavaScript and older JavaScript (ES5). The older version has a wider browser support but that comes at a cost of size, performance and more difficult to get started building panels for authors.
 
@@ -17,7 +17,7 @@ frontend:
   javascript_version: latest
 ```
 
-### Building your first panel
+## Building your first panel
 
 Create a file called `hello.html` in your <config dir>/panels/.
 
@@ -80,5 +80,3 @@ panel_custom:
     sidebar_icon: mdi:hand-pointing-right
     url_path: hello
 ```
-
-For more possibilities, see the [Custom panel section](/cookbook/#user-interface) on our Examples page.

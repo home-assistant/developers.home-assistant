@@ -1,18 +1,15 @@
 ---
 title: "Frontend development"
+sidebar_label: "Introduction"
 ---
 
 Home Assistant is built on top of the [Polymer](https://www.polymer-project.org/) webcomponents framework. Polymer allows building encapsulated custom HTML elements. [Home-Assistant-Polymer source code on GitHub.][hass-polymer]
 
-<p class='note warning'>
-Do not use development mode in production. Home Assistant uses aggressive caching to improve the mobile experience. This is disabled during development so that you do not have to restart the server in between changes.
-</p>
+> Do not use development mode in production. Home Assistant uses aggressive caching to improve the mobile experience. This is disabled during development so that you do not have to restart the server in between changes.
 
 ## Setting up the environment
 
-<p class='note'>
-All commands below need to be run from inside the home-assistant-polymer repository.
-</p>
+> All commands below need to be run from inside the home-assistant-polymer repository.
 
 Home Assistant will by default serve the compiled version of the frontend from the hass_frontend Python package. For development you want to work with the unbundled source files which are in the home-assistant-polymer repository.
 

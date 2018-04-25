@@ -1,5 +1,6 @@
 ---
 title: "Starting with Development"
+sidebar_label: Introduction
 ---
 
 Home Assistant is built from the ground up to be easily extensible using components. Home Assistant uses [Python 3](https://www.python.org/) for the backend and [Polymer (Web components)](https://www.polymer-project.org/) for the frontend.

@@ -1,5 +1,6 @@
 ---
 title: "Adding support for a new platform"
+sidebar_label: "Introduction"
 ---
 
 Components that interact with devices are called "[Entity Components](https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/helpers/entity_component.py)." They are structured in core and platform logic, which means different brands can use the same logic to handle a light.
@@ -8,8 +9,8 @@ For example, the built-in `switch` component consists of various platforms in [`
 
 If you're planning to add support for a new type of device to an existing component, you can get away with only writing platform logic. Have a look at how the component works with other platforms and create a similar file for the platform that you want to add:
 
- - [Example sensor platform](/developers/platform_example_sensor): hello world of platforms.
- - [Example light platform](/developers/platform_example_light): showing best practices.
+ - [Example sensor platform](creating_platform_example_sensor.md): hello world of platforms.
+ - [Example light platform](creating_platform_example_light.md): showing best practices.
 
 ### Interfacing with devices
 
@@ -19,7 +20,7 @@ To integrate the third-party library, create an [Entity class](https://github.co
 
 ### Requirements and dependencies
 
-Platforms can specify dependencies and requirements [the same way as components](/developers/component_deps_and_reqs):
+Platforms can specify dependencies and requirements [the same way as components](creating_component_deps_and_reqs.md):
 
 ```python
 REQUIREMENTS = ['some-package==2.0.0', 'some-other-package==2.5.0']

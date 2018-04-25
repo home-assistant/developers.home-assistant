@@ -1,5 +1,6 @@
 ---
 title: "Creating components"
+sidebar_label: "Introduction"
 ---
 
 Alright, you're ready to make your first component. AWESOME. Don't worry, we've tried hard to keep it as easy as possible.
@@ -16,5 +17,3 @@ def setup(hass, config):
 
     return True
 ```
-
-For more examples, see the [Custom Python Component Examples](/cookbook/#custom-python-component-examples) on our examples page.

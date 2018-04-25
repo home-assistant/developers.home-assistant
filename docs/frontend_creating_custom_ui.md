@@ -2,9 +2,9 @@
 title: "Creating custom UI"
 ---
 
-If you would like to use your own [State card](/developers/frontend_add_card/) without merging your code into [home-assistant-polymer](https://github.com/home-assistant/home-assistant-polymer/) you can create your own implementation.
+If you would like to use your own [State card](frontend_add_card.md) without merging your code into [home-assistant-polymer](https://github.com/home-assistant/home-assistant-polymer/) you can create your own implementation.
 
-Put the element source file and its dependencies in `www/custom_ui/` directory under your Home Assistant [configuration](/docs/configuration/) directory.
+Put the element source file and its dependencies in `www/custom_ui/` directory under your Home Assistant [configuration](https://www.home-assistant.io/docs/configuration/) directory.
 
 For example if creating a state card for the `light` domain named `state-card-my-custom-light` put `state-card-my-custom-light.html` in `www/custom_ui/`.
 
@@ -84,8 +84,7 @@ class StateCardMyCustomLight extends Polymer.Element {
 customElements.define(StateCardMyCustomLight.is, StateCardMyCustomLight);
 </script>
 ```
-<p class='note'>
-Some browsers don't support latest ECMAScript standards, these require a separate ES5 compatible file (`extra_html_url_es5`).
-</p>
 
-For more possibilities, see the [Custom UI section](/cookbook/#user-interface) on our Examples page.
+> Some browsers don't support latest ECMAScript standards, these require a separate ES5 compatible file (`extra_html_url_es5`).
+
+For more possibilities, see the [Custom UI section](https://www.home-assistant.io/cookbook/#user-interface) on our Examples page.

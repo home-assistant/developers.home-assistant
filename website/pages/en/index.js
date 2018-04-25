@@ -19,12 +19,65 @@ function imgUrl(img) {
 }
 
 function docUrl(doc, language) {
-  return siteConfig.baseUrl + 'docs/' + (language ? language + '/' : '') + doc;
+  return siteConfig.baseUrl + 'docs/' + (language ? language + '/' : '') + doc + ".html";
 }
 
 function pageUrl(page, language) {
   return siteConfig.baseUrl + (language ? language + '/' : '') + page;
 }
+
+
+const PopularTopicsSection = ({ language }) => (
+  <div className="introSection lightBackground">
+    <Container>
+      <div
+        style={{
+          display: "flex",
+          flexFlow: "row wrap",
+          justifyContent: "space-evenly"
+        }}
+      >
+        <div style={{ display: "flex", flexDirection: "column", maxWidth: 420 }}>
+          <h2>Documentation Structure</h2>
+          <p>
+            <b>Architecture.</b> Discusses the architecture of the various layers that make up Home Assistant.
+          </p>
+          <p>
+            <b>Frontend.</b> Discusses how to develop the user interface of Home Assistant.
+          </p>
+          <p>
+            <b>Backend.</b> Discusses how to build new integrations for Home Assistant.
+          </p>
+          <p>
+            <b>External APIs.</b> Documentation of the various APIs to extract data from Home Assistant.
+          </p>
+          <p>
+            <b>Misc.</b> Internationalization, asyncio, Hass.io, updating documentation.
+          </p>
+        </div>
+
+        <div style={{ display: "flex", flexDirection: "column" }}>
+          <h2>Popular topics</h2>
+          <ul style={{ flex: "1" }}>
+          <li><a href={docUrl("building_integrations", language)}>
+              Add a new integration
+            </a></li>
+            <li><a href={docUrl("internationalization_index", language)}>
+              Translate Home Assistant
+            </a></li>
+            <li><a href={docUrl("frontend_index", language)}>
+              Improve the frontend
+            </a></li>
+            <li><a href={docUrl("external_api_rest", language)}>
+              Extract data from the Home Assistant API
+            </a></li>
+          </ul>
+        </div>
+      </div>
+    </Container>
+  </div>
+);
+
 
 class Button extends React.Component {
   render() {
@@ -57,10 +110,15 @@ const Logo = props => (
 );
 
 const ProjectTitle = props => (
-  <h2 className="projectTitle">
-    {siteConfig.title}
-    <small>{siteConfig.tagline}</small>
-  </h2>
+  <div>
+    <h2 className="projectTitle">
+      Home Assistant
+      <small>Developer documentation</small>
+    </h2>
+    <div>
+      Not a developer? <a href="https://www.home-assistant.io">Go to the normal website</a>
+    </div>
+  </div>
 );
 
 const PromoSection = props => (
@@ -76,14 +134,14 @@ class HomeSplash extends React.Component {
     let language = this.props.language || '';
     return (
       <SplashContainer>
-        <Logo img_src={imgUrl('docusaurus.svg')} />
+        <Logo img_src={imgUrl('logo-responsive.svg')} />
         <div className="inner">
           <ProjectTitle />
-          <PromoSection>
+          {/* <PromoSection>
             <Button href="#try">Try It Out</Button>
             <Button href={docUrl('doc1.html', language)}>Example Link</Button>
             <Button href={docUrl('doc2.html', language)}>Example Link 2</Button>
-          </PromoSection>
+          </PromoSection> */}
         </div>
       </SplashContainer>
     );
@@ -95,24 +153,36 @@ const Block = props => (
     padding={['bottom', 'top']}
     id={props.id}
     background={props.background}>
-    <GridBlock align="center" contents={props.children} layout={props.layout} />
+    <GridBlock align={props.blockAlign} contents={props.children} layout={props.layout} />
   </Container>
 );
 
 const Features = props => (
-  <Block layout="fourColumn">
+  <Block layout="fourColumn" blockAlign="center">
     {[
       {
-        content: 'This is the content of my feature',
-        image: imgUrl('docusaurus.svg'),
+        title: 'Intents',
+        content: 'Build powerful voice interactions',
+        image: imgUrl('logo-responsive.svg'),
         imageAlign: 'top',
-        title: 'Feature One',
       },
       {
-        content: 'The content of my second feature',
-        image: imgUrl('docusaurus.svg'),
+        title: 'Frontend Panels',
+        content: 'Add a custom panel to control our component or provide rich user interface.',
+        image: imgUrl('logo-responsive.svg'),
         imageAlign: 'top',
-        title: 'Feature Two',
+      },
+      {
+        title: 'Build powerful automations',
+        content: 'Use the power of Python to built any advanced automation that you can dream off.',
+        image: imgUrl('logo-responsive.svg'),
+        imageAlign: 'top',
+      },
+      {
+        title: 'Websocket API',
+        content: 'Use the websocket API to get instantly notified of any change.',
+        image: imgUrl('logo-responsive.svg'),
+        imageAlign: 'top',
       },
     ]}
   </Block>
@@ -132,7 +202,7 @@ const LearnHow = props => (
     {[
       {
         content: 'Talk about learning how to use this',
-        image: imgUrl('docusaurus.svg'),
+        image: imgUrl('logo-responsive.svg'),
         imageAlign: 'right',
         title: 'Learn How',
       },
@@ -145,7 +215,7 @@ const TryOut = props => (
     {[
       {
         content: 'Talk about trying this out',
-        image: imgUrl('docusaurus.svg'),
+        image: imgUrl('logo-responsive.svg'),
         imageAlign: 'left',
         title: 'Try it Out',
       },
@@ -158,13 +228,14 @@ const Description = props => (
     {[
       {
         content: 'This is another description of how this project is useful',
-        image: imgUrl('docusaurus.svg'),
+        image: imgUrl('logo-responsive.svg'),
         imageAlign: 'right',
         title: 'Description',
       },
     ]}
   </Block>
 );
+
 
 const Showcase = props => {
   if ((siteConfig.users || []).length === 0) {
@@ -196,6 +267,13 @@ const Showcase = props => {
   );
 };
 
+const IntroSection = ({ language }) => (
+  <div className="introSection">
+    <Container>
+    </Container>
+  </div>
+)
+
 class Index extends React.Component {
   render() {
     let language = this.props.language || '';
@@ -203,13 +281,15 @@ class Index extends React.Component {
     return (
       <div>
         <HomeSplash language={language} />
-        <div className="mainContainer">
-          <Features />
+        <div className="mainContainer indexPage">
+        <PopularTopicsSection language={language} />
+        <IntroSection language={language} />
+        {/* <Features />
           <FeatureCallout />
           <LearnHow />
           <TryOut />
           <Description />
-          <Showcase language={language} />
+          <Showcase language={language} /> */}
         </div>
       </div>
     );

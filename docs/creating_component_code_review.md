@@ -4,9 +4,7 @@ title: "Checklist for creating a component"
 
 A checklist of things to do when you're adding a new component.
 
-<p class='note'>
-Not all existing platforms follow the requirements in this checklist. This cannot be used as a reason to not follow them!
-</p>
+> Not all existing platforms follow the requirements in this checklist. This cannot be used as a reason to not follow them!
 
 ### 1. Requirements
 

@@ -4,10 +4,10 @@ title: "Adding more info dialogs"
 
 Whenever the user taps or clicks on one of the cards, a more info dialog will show. The header of this dialog will be the state card, followed by the history of this entity for the last 24 hours. Below this the more info component is rendered for that entity. The more info component can show more information or allow more ways of control.
 
-<p class='img' style='max-width: 400px; margin-left: auto; margin-right: auto;'>
-  <img src='/images/frontend/frontend-more-info-light.png'>
-  The more info dialog for a light allows the user to control the color and the brightness.
-</p>
+<img
+  src='/img/en/frontend/frontend-more-info-light.png'
+  alt='The more info dialog for a light allows the user to control the color and the brightness.'
+/>
 
 The instructions to add a more info dialog are very similar to adding a new card type. This example will add a new more info component for the domain `camera`:
 

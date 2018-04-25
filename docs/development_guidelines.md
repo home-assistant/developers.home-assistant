@@ -49,7 +49,7 @@ https://home-assistant.io/components/light.mqtt/
 
 ### Requirements
 
-Please place [Platform requirements](/developers/code_review_platform/#1-requirements) right after the imports.
+Please place [Platform requirements](creating_platform_code_review.md#1-requirements) right after the imports.
 
 ```python
 [...]

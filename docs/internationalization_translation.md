@@ -10,9 +10,7 @@ Translations for Home Assistant are managed through Lokalise, an online translat
 
 For more information about the translation workflow, please see the [Lokalise translation workflow documents](https://docs.lokalise.co/category/iOzEuQPS53-for-team-leads-and-translators).
 
-<p class='note'>
-The translation of the Home Assistant frontend is still a work in progress. More phrases will be available for translation soon.
-</p>
+> The translation of the Home Assistant frontend is still a work in progress. More phrases will be available for translation soon.
 
 ## Translation placeholders
 
@@ -33,9 +31,7 @@ English Name: German
 Native Name: Deutsch
 ```
 
-<p class='note'>
-Region specific translations (`en-US`, `fr-CA`) will only be included if translations for that region need to differ from the base language translation.
-</p>
+> Region specific translations (`en-US`, `fr-CA`) will only be included if translations for that region need to differ from the base language translation.
 
 ### Maintainer steps to add a new language
 1. Language tags  have to follow [BCP 47](https://tools.ietf.org/html/bcp47). A list of most language tags can be found here: [IANA sutbtag registry](http://www.iana.org/assignments/language-subtag-registry/language-subtag-registry). Examples: `fr`, `fr-CA`, `zh-Hans`. Only include the country code if country specific overrides are being included, and the base language is already translated.

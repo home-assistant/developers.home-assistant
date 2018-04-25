@@ -8,7 +8,7 @@ The event system is very flexible. There are no limitations on the event type, a
 
 [List of events that Home Assistant fires.][object]
 
-### Firing events
+## Firing events
 
 To fire an event, you have to interact with the event bus. The event bus is available on the Home Assistant instance as `hass.bus`.
 
@@ -26,7 +26,7 @@ def setup(hass, config):
     })
 ```
 
-### Listening to events
+## Listening to events
 
 Most of the times you'll not be firing events but instead listen to events. For example, the state change of an entity is broadcasted as an event.
 
@@ -47,9 +47,9 @@ def setup(hass, config):
     hass.bus.listen('my_cool_event', handle_event)
 ```
 
-#### Helpers
+### Helpers
 
 Home Assistant comes with a lot of bundled helpers to listen to specific types of event. There are helpers to track a point in time, to track a time interval, a state change or the sun set. [See available methods.][helpers]
 
 [helpers]: https://dev-docs.home-assistant.io/en/master/api/helpers.html#module-homeassistant.helpers.event
-[object]: /docs/configuration/events/
+[object]: https://www.home-assistant.io/docs/configuration/events/

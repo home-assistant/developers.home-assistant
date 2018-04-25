@@ -4,9 +4,9 @@ title: "Set up Development Environment"
 
 You'll need to set up a development environment if you want to develop a new feature or component for Home Assistant. Read on to learn how to set up.
 
-### Preparing your environment
+## Preparing your environment
 
-#### Developing on Linux
+### Developing on Linux
 
 Install the core dependencies.
 
@@ -20,13 +20,11 @@ In order to run `script/setup` below you will need some more dependencies.
 $ sudo apt-get install libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev
 ```
 
-<p class='note'>
-Different distributions have different package installation mechanisms and sometimes packages names as well. For example Centos would use: `sudo yum install epel-release && sudo yum install python34 python34-devel mysql-devel`
-</p>
+> Different distributions have different package installation mechanisms and sometimes packages names as well. For example Centos would use: `sudo yum install epel-release && sudo yum install python34 python34-devel mysql-devel`
 
-Additional dependencies exist if you plan to perform Frontend Development, please read the [Frontend](/developers/frontend/) section to learn more.
+Additional dependencies exist if you plan to perform Frontend Development, please read the [Frontend](frontend_index.md) section to learn more.
 
-#### Developing on Windows
+### Developing on Windows
 
 If you are using Windows as a development platform, make sure that you have the correct Microsoft [Visual C++ build tools](http://landinghub.visualstudio.com/visual-cpp-build-tools) installed. The installation of the most requirements and validation using `tox` will fail if this is not done correctly. Check the [Windows Compilers](https://wiki.python.org/moin/WindowsCompilers) section on the [Python website](https://www.python.org/) for details.
 
@@ -57,7 +55,7 @@ Also, make sure to install or upgrade the `setuptools` Python package. It contai
 $ pip install --upgrade setuptools
 ```
 
-#### Developing on OS X
+### Developing on OS X
 
 Install [Homebrew](https://brew.sh/), then use that to install Python 3:
 
@@ -65,7 +63,7 @@ Install [Homebrew](https://brew.sh/), then use that to install Python 3:
 $ brew install python3
 ```
 
-### Setup Local Repository
+## Setup Local Repository
 
 Visit the [Home Assistant repository](https://github.com/home-assistant/home-assistant) and click **Fork**.
 Once forked, setup your local copy of the source using the commands:
@@ -76,7 +74,7 @@ $ cd home-assistant
 $ git remote add upstream https://github.com/home-assistant/home-assistant.git
 ```
 
-### Setting up virtual environment
+## Setting up virtual environment
 
 To isolate your environment from the rest of the system, set up a [`venv`](https://docs.python.org/3/library/venv.html). Within the `home-assistant` directory, create and activate your virtual environment.
 
@@ -96,8 +94,8 @@ Invoke your installation.
 $ hass
 ```
 
-### Logging
+## Logging
 
 By default logging in home-assistant is tuned for operating in production (set to INFO by default, with some modules set to even less verbose logging levels).
 
-You can use the [logger](/components/logger/) component to adjust logging to DEBUG to see even more details about what is going on.
+You can use the [logger](https://www.home-assistant.io/components/logger/) component to adjust logging to DEBUG to see even more details about what is going on.

@@ -1,12 +1,12 @@
 ---
-title: "Python Remote API"
+title: "Python bindings for the REST API"
 ---
 
 See the [developer documentation][devdocs] for a full overview of the documentation. The rest of this page will contain examples on how to use it.
 
 [devdocs]: https://dev-docs.home-assistant.io/en/master/api/homeassistant.html#module-homeassistant.remote
 
-In the package [`homeassistant.remote`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/remote.py) a Python API on top of the [HTTP API](/developers/api/) can be found. If you are not using the [`frontend`](/components/frontend/) in your setup then you need to add the [`api` component](/components/api/) to your `configuration.yaml` file to use the Python Remote API.
+In the package [`homeassistant.remote`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/remote.py) a Python API on top of the [HTTP API](https://www.home-assistant.io/developers/api/) can be found. If you are not using the [`frontend`](https://www.home-assistant.io/components/frontend/) in your setup then you need to add the [`api` component](https://www.home-assistant.io/components/api/) to your `configuration.yaml` file to use the Python Remote API.
 
 A simple way to get all current entities is to visit the "Set State" page in the "Developer Tools". For the examples below just choose one from the available entries. Here the sensor `sensor.office_temperature` and the switch `switch.livingroom_pin_2` are used.
 
@@ -33,7 +33,7 @@ print(remote.get_config(api))
 
 ### Get details about services, events, and entitites
 
-The output from this is similar to the output you'd find via the frontend, using the [Developer Tools](/docs/tools/dev-tools/).
+The output from this is similar to the output you'd find via the frontend, using the [Developer Tools](https://www.home-assistant.io/docs/tools/dev-tools/).
 
 ```python
 import homeassistant.remote as remote
@@ -197,7 +197,7 @@ for entity in entities:
 
 ### Show difference between `last_changed` and `last_updated`
 
-The documentation about the [State Objects](/docs/configuration/state_object/) describes the
+The documentation about the [State Objects](https://www.home-assistant.io/docs/configuration/state_object/) describes the
 `last_changed` and `last_updated` fields. This example shows how it works in practice.
 
 ```python

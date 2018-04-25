@@ -7,9 +7,9 @@ Home Assistant runs a web server accessible on port 8123.
 * http://IP_ADDRESS:8123/ is an interface to control Home Assistant.
 * http://IP_ADDRESS:8123/api/ is a Rest API.
 
-The API accepts and returns only JSON encoded objects. All API calls have to be accompanied by the header `X-HA-Access: YOUR_PASSWORD` (YOUR_PASSWORD as specified in your `configuration.yaml` file in the [`http:` section](/components/http/)).
+The API accepts and returns only JSON encoded objects. All API calls have to be accompanied by the header `X-HA-Access: YOUR_PASSWORD` (YOUR_PASSWORD as specified in your `configuration.yaml` file in the [`http:` section](https://www.home-assistant.io/components/http/)).
 
-If you are not using the [`frontend`](/components/frontend/) in your setup then you need to add the [`api` component](/components/api/) to your `configuration.yaml` file.
+If you are not using the [`frontend`](https://www.home-assistant.io/components/frontend/) in your setup then you need to add the [`api` component](https://www.home-assistant.io/components/api/) to your `configuration.yaml` file.
 
 There are multiple ways to consume the Home Assistant Rest API. One is with `curl`:
 
@@ -33,9 +33,7 @@ response = get(url, headers=headers)
 print(response.text)
 ```
 
-<p class='note'>
-You can append `?api_password=YOUR_PASSWORD` to any URL to log in automatically.
-</p>
+> You can append `?api_password=YOUR_PASSWORD` to any URL to log in automatically.
 
 Successful calls will return status code 200 or 201. Other status codes that can return are:
 
@@ -446,13 +444,11 @@ $ curl -X POST \
      http://localhost:8123/api/services/mqtt/publish
 ```
 
-<p class='note'>
-The result will include any states that changed while the service was being executed, even if their change was the result of something else happening in the system.
-</p>
+> The result will include any states that changed while the service was being executed, even if their change was the result of something else happening in the system.
 
 #### POST /api/template
 
-Render a Home Assistant template. [See template docs for more information.](/topics/templating/)
+Render a Home Assistant template. [See template docs for more information.](https://www.home-assistant.io/topics/templating/)
 
 ```json
 {
@@ -517,7 +513,3 @@ It will return a message if event forwarding was canceled successfully.
     "message": "Event forwarding cancelled."
 }
 ```
-
-<p class='note'>
-If your client does not support <code>DELETE</code> HTTP requests you can add an optional attribute <code>_METHOD</code> and set its value to <code>DELETE</code>.
-</p>

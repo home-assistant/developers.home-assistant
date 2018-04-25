@@ -98,9 +98,8 @@ If you are don't escape templates then they will be rendered and appear blank on
 The direct usage of HTML is supported but not recommended. The note boxes are an exception.
 
 ```html
-<p class='note warning'>
-  You need to enable telnet on your router.
-</p>
+Hello<br>
+World
 ```
 
 ### Images, icons, and logos

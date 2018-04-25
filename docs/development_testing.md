@@ -2,7 +2,7 @@
 title: "Testing your code"
 ---
 
-As states in the [Style guidelines section](/developers/development_guidelines/) all code is checked to verify all unit tests pass and that the code passes the linting tools. Local testing is done using Tox, which has been installed as part of running `script/setup`. To start the tests, simply run it:
+As states in the [Style guidelines section](development_guidelines.md) all code is checked to verify all unit tests pass and that the code passes the linting tools. Local testing is done using Tox, which has been installed as part of running `script/setup`. To start the tests, simply run it:
 
 ```bash
 $ tox

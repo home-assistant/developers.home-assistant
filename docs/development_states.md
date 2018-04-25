@@ -8,9 +8,9 @@ Home Assistant keeps track of the states of entities in a state machine. The sta
  - Each state has a primary attribute that describes the state of the entity. In the case of a light this could be for example "on" and "off". You can store anything you want in the state, as long as it's a string (will be converted if it's not).
  - You can store more information about an entity by setting attributes. Attributes is a dictionary that can contain any data that you want. The only requirement is that it's JSON serializable, so you're limited to numbers, strings, dictionaries and lists.
 
-[Description of the state object.](/docs/configuration/state_object/)
+[Description of the state object.](https://www.home-assistant.io/docs/configuration/state_object/)
 
-### Using states in your component
+## Using states in your component
 
 This is a simple tutorial/example on how to create and set states. We will do our work in a component called "hello_state". The purpose of this component is to display a given text in the frontend.
 
@@ -40,7 +40,7 @@ def setup(hass, config):
 1. In the file header we decided to add some details: A short description and the link to the documentation.
 2. We want to do some logging. This means that we import the Python logging module and create an alias.
 3. The component name is equal to the domain name.
-4. At the moment this component has no dependencies. For detail check [dependencies](/developers/component_deps_and_reqs/#dependencies) section.
+4. At the moment this component has no dependencies. For detail check [dependencies](creating_component_deps_and_reqs.md#dependencies) section.
 5. The `setup` function will take care of the initialization of our component.
    The component will only write a log message. Keep in mind for later that you have several options for the severity:
 
@@ -126,8 +126,6 @@ def device_state_attributes(self):
     return self._attributes
 ```
 
-<p class='note'>
-Entities also have a similar property `state_attributes`, which normally doesn't need to be defined by new platforms. This property is used by base components to add standard sets of attributes to a state. Example: The light component uses `state_attributes` to add brightness to the state dictionary. If you are designing a new component, you should define `state_attributes` instead.
-</p>
+> Entities also have a similar property `state_attributes`, which normally doesn't need to be defined by new platforms. This property is used by base components to add standard sets of attributes to a state. Example: The light component uses `state_attributes` to add brightness to the state dictionary. If you are designing a new component, you should define `state_attributes` instead.
 
-To get your component included in the Home Assistant releases, follow the steps described in the [Submit your work](/developers/development_submitting/) section. Basically you only need to move your component in the `homeassistant/component/` directory of your fork and create a Pull Request.
+To get your component included in the Home Assistant releases, follow the steps described in the [Submit your work](development_submitting.md) section. Basically you only need to move your component in the `homeassistant/component/` directory of your fork and create a Pull Request.

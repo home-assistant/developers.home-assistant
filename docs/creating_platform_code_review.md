@@ -4,9 +4,7 @@ title: "Checklist for creating a platform"
 
 A checklist of things to do when you're adding a new platform.
 
-<p class='note'>
-Not all existing platforms follow the requirements in this checklist. This cannot be used as a reason to not follow them!
-</p>
+> Not all existing platforms follow the requirements in this checklist. This cannot be used as a reason to not follow them!
 
 ### 1. Requirements
 
