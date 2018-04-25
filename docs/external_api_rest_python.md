@@ -1,5 +1,5 @@
 ---
-title: "Python bindings for the REST API"
+title: "REST API - Python bindings"
 ---
 
 See the [developer documentation][devdocs] for a full overview of the documentation. The rest of this page will contain examples on how to use it.

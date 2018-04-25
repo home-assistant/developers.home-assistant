@@ -38,8 +38,7 @@ const siteConfig = {
   headerLinks: [
     {doc: 'architecture_index', label: 'Architecture'},
     {doc: 'frontend_index', label: 'Frontend'},
-    {doc: 'building_integrations', label: 'Backend'},
-    {doc: 'external_api_rest', label: 'External APIs'},
+    {doc: 'development_index', label: 'Backend'},
     {doc: 'misc', label: 'Misc'},
   ],
 

@@ -25,5 +25,5 @@ Create a new folder for data and add a test _options.json_ file. After that you 
 
 All stdout and stderr are redirected to the Docker logs. The logs can be fetched from the add-on page inside the Hass.io panel in Home Assistant.
 
-[Samba add-on]: /addons/samba/
-[SSH add-on]: /addons/ssh/
+[Samba add-on]: https://www.home-assistant.io/addons/samba/
+[SSH add-on]: https://www.home-assistant.io/addons/ssh/

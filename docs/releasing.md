@@ -64,4 +64,4 @@ Checkout the `master` branch and run `script/release` to publish the new release
 1. Create a pull request from the release branch to `master` with the upcoming release number as the title.
 1. Merge pull request (DO NOT SQUASH!). Use `Merge pull request`.
 1. Go to [releases](https://github.com/home-assistant/home-assistant/releases), click `Draft a new release` and tag a new release on the `master` branch. "Tag version" and "Release title" are the version number (`O.x` for major version, `0.x.y` for minor and bug fix releases). Release description is the text from PR. Press "Publish release" to finish the process.
-1. [Publish](/developers/releasing/#python-package-index) the new release on PyPI.
+1. Publish the new release on PyPI.

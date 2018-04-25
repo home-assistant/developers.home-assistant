@@ -8,6 +8,4 @@ If you are not familiar yet with asyncio, please watch the below video. It's a g
 <iframe width="560" height="315" src="https://www.youtube.com/embed/M-UcUs7IMIM" frameborder="0" allowfullscreen></iframe>
 </div>
 
-### [Next step: Categorizing Functions &raquo;](/developers/asyncio_categorizing_functions/)
-
 [rob]: https://github.com/rob-smallshire

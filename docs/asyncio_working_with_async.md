@@ -22,10 +22,7 @@ def setup(hass, config):
 Will turn into:
 
 ```python
-import asyncio
-
-@asyncio.coroutine
-def async_setup(hass, config):
+async def async_setup(hass, config):
     # Setup your component inside of the event loop.
 ```
 
@@ -41,11 +38,8 @@ setup_platform(hass, config, add_entities, discovery_info=None):
 Will turn into:
 
 ```python
-import asyncio
-
-@asyncio.coroutine
-def async_setup_platform(hass, config, async_add_entities,
-                         discovery_info=None):
+async def async_setup_platform(hass, config, async_add_entities,
+                               discovery_info=None):
     # Setup your platform inside of the event loop
 ```
 
@@ -65,13 +59,10 @@ class MyEntity(Entity):
 Will turn into:
 
 ```python
-import asyncio
-
 class MyEntity(Entity):
-    @asyncio.coroutine
-    def async_update(self):
+    async def async_update(self):
         """Retrieve latest state."""
-        self._state = yield from async_fetch_state()
+        self._state = await async_fetch_state()
 ```
 
 Make sure that all properties defined on your entity do not result in I/O being done. All data has to be fetched inside the update method and cached on the entity. This is because these properties are read from within the event loop and thus doing I/O will result in the core of Home Assistant waiting until your I/O is done.
@@ -114,8 +105,6 @@ Use this method if the function should be called but not get priority over alrea
 | Callback | Schedule for execution on the event loop.
 | Coroutine | Schedule for execution on the event loop.
 | Other functions | Schedule for execution in the thread pool.
-
-### [Next step: Miscellaneous &raquo;](/developers/asyncio_misc/)
 
 [dev-docs]: https://dev-docs.home-assistant.io/en/master/api/core.html
 [dev-docs-async]: https://dev-docs.home-assistant.io/en/dev/api/util.html#module-homeassistant.util.async

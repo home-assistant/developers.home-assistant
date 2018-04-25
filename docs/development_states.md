@@ -114,7 +114,7 @@ Now, when `text:` is missing from the config, Home Assistant will alert the user
 After a start or a restart of Home Assistant the component will be visible in the frontend if the `configuration.yaml` file is up-to-date.
 
 <p class='img'>
-<img src='/images/screenshots/create-component01.png' />
+<img src='/img/en/development/create-component01.png' />
 </p>
 
 In order to expose attributes for a platform, you will need to define a property called `device_state_attributes` on the entity class, which will return a dictionary of attributes:

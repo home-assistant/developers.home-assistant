@@ -15,11 +15,8 @@ Invoking a coroutine function will return a Generator object back, but will not 
 To declare a function a coroutine, import the coroutine annotation from the asyncio package and annotate your function.
 
 ```python
-import asyncio
-
-@asyncio.coroutine
-def async_look_my_coroutine(target):
-    result = yield from entity.async_turn_on()
+async def async_look_my_coroutine(target):
+    result = await entity.async_turn_on()
     if result:
         print("hello {}".format(target))
 
@@ -68,5 +65,3 @@ There is no special annotation to mark functions as part of this category and ca
 These are all the functions that did not fit in the previous categories. These functions are either thread-safe or not considered safe to be run within the event loop. These are functions that use sleep, or perform I/O.
 
 There is no special annotation necessary to be considered part of this category.
-
-### [Next step: Working with Async &raquo;](/developers/asyncio_working_with_async/)

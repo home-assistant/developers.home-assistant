@@ -10,21 +10,15 @@ For Samba, once you have enabled and started it, your Hass.io instance will show
 
 If you are on macOS and the folder is not showing up automatically, go to Finder and press CMD+K then enter 'smb://hassio.local'
 
-<p class='img'>
-<img src='/images/hassio/tutorial/samba.png' />
-With Samba add-on enabled, you can browse to your Hass.io server over the local network. It will contain an addons folder to store your local add-ons.
-</p>
+![Screenshot of Windows Explorer showing a folder on the Hass.io server](/img/en/hass.io/tutorial/samba.png)
 
 For SSH, you will have to install it. Before you can start it, you will have to have a private/public key pair and store your public key in the add-on config ([see docs for more info][ssh]). Once started, you can SSH to Hass.io and store your custom add-ons in "/addons".
 
-<p class='img'>
-<img src='/images/hassio/tutorial/ssh.png' />
-Once you SSH into your Hass.io box, you have access to your add-ons in "/addons".
-</p>
+![Screenshot of Putty connected to Hass.io](/img/en/hass.io/tutorial/ssh.png)
 
 Once you have located your add-on directory, it's time to get started!
 
-[ssh]: /addons/ssh/
+[ssh]: https://www.home-assistant.io/addons/ssh/
 
 ## Step 1: The basics
 
@@ -72,28 +66,19 @@ Now comes the fun part, time to open the Hass.io UI and install and run your add
  - Go to the Hass.io panel
  - On the top right click the shopping basket to go to the add-on store.
 
-<p class='img'>
-<img src='/images/hassio/screenshots/main_panel_addon_store.png' />
-From the Hass.io main panel open the add-on store.
-</p>
+![Screenshot of the Hass.io main panel](/img/en/hass.io/screenshots/main_panel_addon_store.png)
 
  - On the top right click the refresh button
  - You should now see a new card called "Local" that lists your add-on!
 
-<p class='img'>
-<img src='/images/hassio/screenshots/local_repository.png' />
-The Hass.io add-on store will list all available local add-ons.
-</p>
+![Screenshot of the local repository card](/img/en/hass.io/screenshots/local_repository.png)
 
  - Click on your add-on to go to the add-on details page.
  - Install your add-on
  - Start your add-on
  - Refresh the logs of your add-on, you should now see "Hello world!" in your logs.
 
-<p class='img'>
-<img src='/images/hassio/tutorial/addon_hello_world_logs.png' />
-The add-on will print Hello world to the logs and then quit.
-</p>
+![Screenshot of the add-on logs](/img/en/hass.io/tutorial/addon_hello_world_logs.png)
 
 ### I don't see my add-on?!
 
@@ -154,10 +139,7 @@ Since we updated the version number in our `config.json`, Home Assistant will sh
 
 Now navigate to [http://hassio.local:8000](http://hassio.local:8000) to see our server in action!
 
-<p class='img'>
-<img src='/images/hassio/tutorial/python3-http-server.png' />
-The Python 3 server will allow you to browse the /data folder.
-</p>
+![Screenshot of the file index served by the add-on](/img/en/hass.io/tutorial/python3-http-server.png)
 
 ## Bonus: Working with add-on options
 
@@ -192,9 +174,4 @@ Change the options and schema entries in your `config.json` with the following:
 }
 ```
 
-Refresh the add-on store and re-install your add-on. You will now see the options available in the add-on config screen. When you now go back to our Python 3 server and download `options.json`, you'll see the options you set.
-
- - [Learn more about the available schema options.](/hassio/addon_config/#options--schema)
- - [See how options.json can be used inside `run.sh`](https://github.com/home-assistant/hassio-addons/blob/master/mosquitto/run.sh#L4-L6)
-
-### [Next step: Add-on config reference &raquo;](/developers/hassio/addon_config/)
+Refresh the add-on store and re-install your add-on. You will now see the options available in the add-on config screen. When you now go back to our Python 3 server and download `options.json`, you'll see the options you set. [Example of how options.json can be used inside `run.sh`](https://github.com/home-assistant/hassio-addons/blob/master/mosquitto/run.sh#L4-L6)

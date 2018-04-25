@@ -1,5 +1,6 @@
 ---
 title: "Asynchronous Programming"
+sidebar_label: Introduction
 ---
 
 On September 29, 2016 we released [Home Assistant 0.29][0.29] as part of our bi-weekly release schedule. This release introduced a complete overhaul of the core spearheaded by [Ben Bangert][ben].
@@ -13,8 +14,6 @@ The only problem with running everything inside the event loop is when a task is
 For a task to be able to suspend itself, all code that it calls has to have this capability added. This means in practice that each device integration will need a full rewrite of the library that offers the integration! As this is not something that can be achieved, ever, a 100% backwards compatible API has been added so that no platform will require updating.
 
 The backwards compatible API works by scheduling a task from a different thread and blocking that thread until the task has been processed by the event loop.
-
-### [Next step: asyncio 101 &raquo;](/developers/asyncio_101/)
 
 [0.29]: /blog/2016/09/29/async-sleepiq-emoncms-stocks/
 [ben]: https://github.com/bbangert/

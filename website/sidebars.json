@@ -2,13 +2,8 @@
   "Architecture": {
     "Architecture": [
       "architecture_index",
-      "architecture_components"
-    ],
-    "Intents": [
-      "intent_index",
-      "intent_firing",
-      "intent_handling",
-      "intent_conversation"
+      "architecture_components",
+      "architecture_hassio"
     ]
   },
   "Extending Frontend": {
@@ -21,9 +16,6 @@
     ]
   },
   "Extending HASS": {
-    "Introduction": [
-      "building_integrations"
-    ],
     "Development": [
       "development_index",
       "development_101",
@@ -57,17 +49,15 @@
       "creating_component_states"
     ]
   },
-  "External APIs": {
+  "Misc": {
+    "Introduction": [
+      "misc"
+    ],
     "External API": [
       "external_api_rest",
       "external_api_rest_python",
       "external_api_websocket",
       "external_api_server_sent_events"
-    ]
-  },
-  "Misc": {
-    "Introduction": [
-      "misc"
     ],
     "Internationalization": [
       "internationalization_index",
@@ -75,29 +65,30 @@
       "internationalization_custom_component_localization",
       "internationalization_translation"
     ],
+    "Intents": [
+      "intent_index",
+      "intent_firing",
+      "intent_handling",
+      "intent_conversation"
+    ],
     "asyncio": [
-      "asyncio",
+      "asyncio_index",
       "asyncio_101",
       "asyncio_categorizing_functions",
-      "asyncio_misc",
       "asyncio_working_with_async"
     ],
     "Hass.io": [
-      "hassio_addon_communication",
-      "hassio_addon_config",
-      "hassio_addon_development",
-      "hassio_addon_presentation",
-      "hassio_addon_publishing",
-      "hassio_addon_repository",
-      "hassio_addon_testing",
-      "hassio_addon_tutorial",
-      "hassio_architecture",
       "hassio_debugging"
     ],
-    "Documentation": [
-      "documentation_create_page",
-      "documentation_index",
-      "documentation_standards"
+    "Hass.io": [
+      "hassio_addon_index",
+      "hassio_addon_tutorial",
+      "hassio_addon_config",
+      "hassio_addon_communication",
+      "hassio_addon_testing",
+      "hassio_addon_publishing",
+      "hassio_addon_presentation",
+      "hassio_addon_repository"
     ],
     "Maintainer docs": [
       "maintenance",

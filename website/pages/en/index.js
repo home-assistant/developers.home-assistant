@@ -40,19 +40,16 @@ const PopularTopicsSection = ({ language }) => (
         <div style={{ display: "flex", flexDirection: "column", maxWidth: 420 }}>
           <h2>Documentation Structure</h2>
           <p>
-            <b>Architecture.</b> Discusses the architecture of the various layers that make up Home Assistant.
+            <b>Architecture.</b> Explains various layers that make up Home Assistant.
           </p>
           <p>
-            <b>Frontend.</b> Discusses how to develop the user interface of Home Assistant.
+            <b>Frontend.</b> Explains how to develop the user interface of Home Assistant.
           </p>
           <p>
-            <b>Backend.</b> Discusses how to build new integrations for Home Assistant.
+            <b>Backend.</b> Explains how to build new integrations for Home Assistant.
           </p>
           <p>
-            <b>External APIs.</b> Documentation of the various APIs to extract data from Home Assistant.
-          </p>
-          <p>
-            <b>Misc.</b> Internationalization, asyncio, Hass.io, updating documentation.
+            <b>Misc.</b> External APIs, Internationalization, asyncio, Hass.io add-ons, updating documentation.
           </p>
         </div>
 
@@ -148,128 +145,21 @@ class HomeSplash extends React.Component {
   }
 }
 
-const Block = props => (
-  <Container
-    padding={['bottom', 'top']}
-    id={props.id}
-    background={props.background}>
-    <GridBlock align={props.blockAlign} contents={props.children} layout={props.layout} />
-  </Container>
-);
-
-const Features = props => (
-  <Block layout="fourColumn" blockAlign="center">
-    {[
-      {
-        title: 'Intents',
-        content: 'Build powerful voice interactions',
-        image: imgUrl('logo-responsive.svg'),
-        imageAlign: 'top',
-      },
-      {
-        title: 'Frontend Panels',
-        content: 'Add a custom panel to control our component or provide rich user interface.',
-        image: imgUrl('logo-responsive.svg'),
-        imageAlign: 'top',
-      },
-      {
-        title: 'Build powerful automations',
-        content: 'Use the power of Python to built any advanced automation that you can dream off.',
-        image: imgUrl('logo-responsive.svg'),
-        imageAlign: 'top',
-      },
-      {
-        title: 'Websocket API',
-        content: 'Use the websocket API to get instantly notified of any change.',
-        image: imgUrl('logo-responsive.svg'),
-        imageAlign: 'top',
-      },
-    ]}
-  </Block>
-);
-
-const FeatureCallout = props => (
-  <div
-    className="productShowcaseSection paddingBottom"
-    style={{textAlign: 'center'}}>
-    <h2>Feature Callout</h2>
-    <MarkdownBlock>These are features of this project</MarkdownBlock>
-  </div>
-);
-
-const LearnHow = props => (
-  <Block background="light">
-    {[
-      {
-        content: 'Talk about learning how to use this',
-        image: imgUrl('logo-responsive.svg'),
-        imageAlign: 'right',
-        title: 'Learn How',
-      },
-    ]}
-  </Block>
-);
-
-const TryOut = props => (
-  <Block id="try">
-    {[
-      {
-        content: 'Talk about trying this out',
-        image: imgUrl('logo-responsive.svg'),
-        imageAlign: 'left',
-        title: 'Try it Out',
-      },
-    ]}
-  </Block>
-);
-
-const Description = props => (
-  <Block background="dark">
-    {[
-      {
-        content: 'This is another description of how this project is useful',
-        image: imgUrl('logo-responsive.svg'),
-        imageAlign: 'right',
-        title: 'Description',
-      },
-    ]}
-  </Block>
-);
-
-
-const Showcase = props => {
-  if ((siteConfig.users || []).length === 0) {
-    return null;
-  }
-  const showcase = siteConfig.users
-    .filter(user => {
-      return user.pinned;
-    })
-    .map((user, i) => {
-      return (
-        <a href={user.infoLink} key={i}>
-          <img src={user.image} alt={user.caption} title={user.caption} />
-        </a>
-      );
-    });
-
-  return (
-    <div className="productShowcaseSection paddingBottom">
-      <h2>{"Who's Using This?"}</h2>
-      <p>This project is used by all these people</p>
-      <div className="logos">{showcase}</div>
-      <div className="more-users">
-        <a className="button" href={pageUrl('users.html', props.language)}>
-          More {siteConfig.title} Users
-        </a>
-      </div>
-    </div>
-  );
-};
 
 const IntroSection = ({ language }) => (
-  <div className="introSection">
+  <div className="videoSection">
     <Container>
+      <div style={{maxWidth: 600, margin: 'auto'}}>
+        <div className="videoWrapper">
+          <iframe
+            width="560"
+            height="315"
+            src="https://www.youtube.com/embed/Cfasc9EgbMU"
+            frameborder="0"
+            allowfullscreen
+          />
+        </div>
+      </div>
     </Container>
   </div>
 )
@@ -284,12 +174,6 @@ class Index extends React.Component {
         <div className="mainContainer indexPage">
         <PopularTopicsSection language={language} />
         <IntroSection language={language} />
-        {/* <Features />
-          <FeatureCallout />
-          <LearnHow />
-          <TryOut />
-          <Description />
-          <Showcase language={language} /> */}
         </div>
       </div>
     );
