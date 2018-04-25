@@ -16,21 +16,23 @@
     ]
   },
   "Extending HASS": {
-    "Development": [
+    "Developing a feature": [
       "development_index",
-      "development_101",
-      "development_catching_up",
-      "development_checklist",
-      "development_config",
       "development_environment",
-      "development_events",
-      "development_guidelines",
-      "development_hass_object",
-      "development_services",
-      "development_states",
       "development_submitting",
+      "development_checklist",
+      "development_guidelines",
       "development_testing",
+      "development_catching_up",
       "development_validation"
+    ],
+    "HASS Core methods": [
+      "dev_101_index",
+      "dev_101_hass",
+      "dev_101_events",
+      "dev_101_states",
+      "dev_101_services",
+      "dev_101_config"
     ],
     "Creating Platforms": [
       "creating_platform_index",
@@ -42,11 +44,11 @@
       "creating_component_index",
       "creating_component_code_review",
       "creating_component_deps_and_reqs",
-      "creating_component_discovery",
       "creating_component_events",
-      "creating_component_generic_discovery",
+      "creating_component_states",
+      "creating_component_discovery",
       "creating_component_loading",
-      "creating_component_states"
+      "creating_component_generic_discovery"
     ]
   },
   "Misc": {
