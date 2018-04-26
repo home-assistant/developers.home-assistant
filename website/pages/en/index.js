@@ -69,6 +69,16 @@ const PopularTopicsSection = ({ language }) => (
               Extract data from the Home Assistant API
             </a></li>
           </ul>
+          <h2>Source Code</h2>
+          <ul>
+          <li><a href="https://github.com/home-assistant/home-assistant">
+              Home Assistant
+            </a></li>
+            <li><a href="https://github.com/home-assistant/home-assistant-polymer">
+              Home Assistant Frontend
+            </a></li>
+          </ul>
+
         </div>
       </div>
     </Container>
