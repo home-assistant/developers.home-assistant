@@ -74,13 +74,14 @@
     "Backend": "Backend",
     "Misc": "Misc",
     "Developing a feature": "Developing a feature",
-    "HASS Core methods": "HASS Core methods",
+    "Development 101": "Development 101",
     "Creating Platforms": "Creating Platforms",
     "Creating Components": "Creating Components",
     "External API": "External API",
     "Internationalization": "Internationalization",
     "Intents": "Intents",
     "asyncio": "asyncio",
+    "Hass.io Add-Ons": "Hass.io Add-Ons",
     "Maintainer docs": "Maintainer docs"
   },
   "pages-strings": {

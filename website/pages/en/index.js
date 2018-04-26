@@ -56,7 +56,7 @@ const PopularTopicsSection = ({ language }) => (
         <div style={{ display: "flex", flexDirection: "column" }}>
           <h2>Popular topics</h2>
           <ul style={{ flex: "1" }}>
-          <li><a href={docUrl("building_integrations", language)}>
+          <li><a href={docUrl("development_index", language)}>
               Add a new integration
             </a></li>
             <li><a href={docUrl("internationalization_index", language)}>
