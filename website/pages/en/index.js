@@ -113,7 +113,7 @@ const ProjectTitle = props => (
       <small>Developer documentation</small>
     </h2>
     <div>
-      Not a developer? <a href="https://www.home-assistant.io">Go to the normal website</a>
+      <a href="https://www.home-assistant.io">Not a developer? Go to the normal website</a>
     </div>
   </div>
 );
