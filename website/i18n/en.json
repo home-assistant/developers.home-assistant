@@ -6,6 +6,8 @@
     "tagline": "All you need to start developing for Home Assistant",
     "architecture_components": "Components Architecture",
     "Components": "Components",
+    "architecture_entities": "Entity Architecture",
+    "Entity": "Entity",
     "architecture_hassio": "Hass.io Architecture",
     "Hass.io": "Hass.io",
     "architecture_index": "Architecture",

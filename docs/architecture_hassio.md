@@ -3,7 +3,7 @@ title: "Hass.io Architecture"
 sidebar_label: Hass.io
 ---
 
-<img src='/img/en/architecture/hassio.png' alt='Architecture overview of Hass.io'>
+![Architecture overview of Hass.io](/img/en/architecture/hassio.png)
 
 ## Host Control (HC)
 
