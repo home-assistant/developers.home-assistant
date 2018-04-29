@@ -2,6 +2,8 @@
 title: "Creating custom UI"
 ---
 
+### State card
+
 If you would like to use your own [State card](frontend_add_card.md) without merging your code into [home-assistant-polymer](https://github.com/home-assistant/home-assistant-polymer/) you can create your own implementation.
 
 Put the element source file and its dependencies in `www/custom_ui/` directory under your Home Assistant [configuration](https://www.home-assistant.io/docs/configuration/) directory.
@@ -88,3 +90,29 @@ customElements.define(StateCardMyCustomLight.is, StateCardMyCustomLight);
 > Some browsers don't support latest ECMAScript standards, these require a separate ES5 compatible file (`extra_html_url_es5`).
 
 For more possibilities, see the [Custom UI section](https://www.home-assistant.io/cookbook/#user-interface) on our Examples page.
+
+### More info dialog
+
+_Introduced in Home Assistant 0.69._
+
+Similar to the custom State card, if you would like to use your own [More info dialog](frontend_add_more_info.md) you can create your own implementation.
+
+Following a similar example, if creating a more info dialog a light named `more-info-my-custom-light` put `more-info-my-custom-light.html` in `www/custom_ui/`.
+
+1. In the `customize:` section of the `configuration.yaml` file put `custom_ui_more_info: more-info-my-custom-light`.
+2. In the `frontend` section use `extra_html_url` to specify the URL to load.
+
+Example:
+
+`configuration.yaml`:
+
+```yaml
+homeassistant:
+  customize:
+    light.bedroom:
+      custom_ui_more_info: more-info-my-custom-light
+
+frontend:
+  extra_html_url:
+    - /local/custom_ui/more-info-my-custom-light.html
+```
