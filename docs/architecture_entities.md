@@ -7,7 +7,7 @@ sidebar_label: Entity
 
 ## Configuration
 
-Configuration is provided by the configuration.yaml file or by a Config Entry from the Config Manager.
+Configuration is provided by the [configuration.yaml file](configuration_yaml_index.md) or by a [Config Entry](config_entries_index.md).
 
 ## Component
 

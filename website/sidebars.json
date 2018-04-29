@@ -5,6 +5,16 @@
       "architecture_components",
       "architecture_entities",
       "architecture_hassio"
+    ],
+    "Configuration.yaml": [
+      "configuration_yaml_index"
+    ],
+    "Config Entries": [
+      "config_entries_index",
+      "config_entries_config_flow_handler"
+    ],
+    "Data Entry Flow": [
+      "data_entry_flow_index"
     ]
   },
   "Extending Frontend": {
