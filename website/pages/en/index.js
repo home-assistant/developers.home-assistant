@@ -40,16 +40,20 @@ const PopularTopicsSection = ({ language }) => (
         <div style={{ display: "flex", flexDirection: "column", maxWidth: 420 }}>
           <h2>Documentation Structure</h2>
           <p>
-            <b>Architecture.</b> Explains various layers that make up Home Assistant.
+            <b><a href={docUrl('architecture_index', language)}>Architecture</a>.</b>
+            {' '}Explains various layers that make up Home Assistant.
           </p>
           <p>
-            <b>Frontend.</b> Explains how to develop the user interface of Home Assistant.
+            <b><a href={docUrl('frontend_index', language)}>Frontend</a>.</b>
+            {' '}Explains how to develop the user interface of Home Assistant.
           </p>
           <p>
-            <b>Backend.</b> Explains how to build new integrations for Home Assistant.
+            <b><a href={docUrl('development_index', language)}>Backend</a>.</b>
+            {' '}Explains how to build new integrations for Home Assistant.
           </p>
           <p>
-            <b>Misc.</b> External APIs, Internationalization, asyncio, Hass.io add-ons, updating documentation.
+            <b><a href={docUrl('misc', language)}>Misc</a>.</b>
+            {' '}External APIs, Internationalization, asyncio, Hass.io add-ons, updating documentation.
           </p>
         </div>
 
