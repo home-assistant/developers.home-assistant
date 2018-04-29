@@ -30,6 +30,10 @@ The Entity Platform manages all entities for the platform and polls them for upd
 
 When adding entities, the Entity Platform will query the Entity Registry to make sure that the entities to be added have the correct entity IDs.
 
+## Entity Registry
+
+The [Entity Registry](entity_registry_index.md) will track entities and allows users to store extra settings for an entity.
+
 ## Platform
 
 Examples of platforms: `light.hue`, `switch.wemo`.
