@@ -15,6 +15,9 @@
     ],
     "Data Entry Flow": [
       "data_entry_flow_index"
+    ],
+    "Entity Registry": [
+      "entity_registry_index"
     ]
   },
   "Extending Frontend": {
