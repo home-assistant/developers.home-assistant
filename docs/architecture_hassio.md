@@ -26,4 +26,4 @@ The supervisor offers an API to manage the host and running the Docker container
 The configuration panel lives inside the supervisor but is accessible via the Home Assistant user interface. The configuration panel allows the user to manage the installation.
 
 [ResinOS]: https://resinos.io/
-[linux]: /hassio/installation/#alternative-install-on-generic-linux-server
+[linux]: https://www.home-assistant.io/hassio/installation/#alternative-install-on-generic-linux-server
