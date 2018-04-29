@@ -93,6 +93,8 @@ For more possibilities, see the [Custom UI section](https://www.home-assistant.i
 
 ### More info dialog
 
+_Introduced in Home Assistant 0.69._
+
 Similar to the custom State card, if you would like to use your own [More info dialog](frontend_add_more_info.md) you can create your own implementation.
 
 Following a similar example, if creating a more info dialog a light named `more-info-my-custom-light` put `more-info-my-custom-light.html` in `www/custom_ui/`.
