@@ -4,7 +4,7 @@ title: "Debugging Hass.io"
 
 > This section is not for users. Use the [SSH add-on] to SSH into Hass.io. This is for <b>developers</b> of Hass.io. Do not ask for support if you are using these options.
 
-[SSH add-on]: /addons/ssh/
+[SSH add-on]: https://www.home-assistant.io/addons/ssh/
 
 The following debug tips and tricks are for people who are running the Hass.io image and are working on the base image. If you use the generic Linux installer script, you should be able to access your host and logs as per your host.
 
