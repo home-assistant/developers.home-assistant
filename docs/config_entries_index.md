@@ -3,24 +3,25 @@ title: Config Entries
 sidebar_label: Introduction
 ---
 
-Config entries are pieces of configuration that can be consumed by components. Each configuration entry is created via a Config Flow Handler, as defined by each component.
+Config Entries are configuration data that are persistently stored by Home Assistant.
 
 ## Setting up an entry
 
-During startup, Home Assistant will setup the entries during the normal setup
-of a component. It will first call the normal component setup and then call the method
-`async_setup_entry(hass, entry)` for each entry. The same method is called when
-Home Assistant is running while a config entry is created.
+During startup, Home Assistant first call the [normal component setup](link to docs on async_setup()),
+and then call the method `async_setup_entry(hass, entry)` for each entry. If a new Config Entry is
+created at runtime, Home Assistant will also call `async_setup_entry(hass, entry)` ([example](link to example)).
 
-If a component includes platforms, it will need to forward the entry to the component. This can be done by calling the forward function on the config entry manager:
+#### For platforms
+
+If a component includes platforms, it will need to forward the Config Entry to the platform. This can
+be done by calling the forward function on the config entry manager ([example](link to example)):
 
 ```python
+# Use `hass.async_add_job` to avoid a circular dependency between the platform and the component
 hass.async_add_job(hass.config_entries.async_forward_entry_setup(config_entry, 'light'))
 ```
 
-Make sure you use `hass.async_add_job` to avoid a circular dependency between the platform and the component.
-
-For a platform to support config entries, it will need to add a setup entry method:
+For a platform to support config entries, it will need to add a setup entry method ([example](link to example)):
 
 ```python
 async def async_setup_entry(hass, config_entry, async_add_devices):
@@ -28,6 +29,13 @@ async def async_setup_entry(hass, config_entry, async_add_devices):
 
 ## Unloading entries
 
-Components can support unloading a config entry. This is optional. When unloading an entry, it needs to clean up all entities, unsubscribe any event listener and close all connections. To implement this, add `async_unload_entry(hass, entry)` to your component.
+Components can optionally support unloading a config entry. When unloading an entry, the component needs
+to clean up all entities, unsubscribe any event listener and close all connections. To implement this,
+add `async_unload_entry(hass, entry)` to your component ([example](link to example)).
 
-Platforms will not need to add any logic for unloading a config entry. The entity component will take care of this. If you need to clean up resources used for an entity, implement the `async_will_remove_from_hass` method on the Entity.
+Platforms will not need to add any logic for unloading a config entry. The entity component will take care of this.
+If you need to clean up resources used for an entity, implement the `async_will_remove_from_hass` method on the Entity ([example](link to example)).
+
+## Tips for implementing Config Entries
+
+- [] no tips yet
