@@ -83,13 +83,6 @@ $ python3 -m venv .
 $ source bin/activate
 ```
 
-Update `pip` itself
-
-```bash
-$ pip install --upgrade pip
-```
-
-
 Install the requirements with a provided script named `setup`.
 
 ```bash
