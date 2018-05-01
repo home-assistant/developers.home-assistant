@@ -82,6 +82,14 @@ To isolate your environment from the rest of the system, set up a [`venv`](https
 $ python3 -m venv .
 $ source bin/activate
 ```
+
+Update pip
+
+```bash
+$ pip install --upgrade pip
+```
+
+
 Install the requirements with a provided script named `setup`.
 
 ```bash
