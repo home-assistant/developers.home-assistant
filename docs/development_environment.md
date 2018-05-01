@@ -20,7 +20,7 @@ In order to run `script/setup` below you will need some more dependencies.
 $ sudo apt-get install libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev
 ```
 
-> Different distributions have different package installation mechanisms and sometimes packages names as well. For example Centos would use: `sudo yum install epel-release && sudo yum install python34 python34-devel mysql-devel`
+> Different distributions have different package installation mechanisms and sometimes packages names as well. For example Centos would use: `sudo yum install epel-release && sudo yum install python36 python36-devel mysql-devel`
 
 Additional dependencies exist if you plan to perform Frontend Development, please read the [Frontend](frontend_index.md) section to learn more.
 
