@@ -328,6 +328,33 @@ The server will respond with a result message containing the current registered 
 }
 ```
 
+### Fetching camera thumbnails
+
+_Introduced in Home Assistant 0.69._
+
+Return a b64 encoded thumbnail of a camera entity.
+
+```json
+{
+  "id": 19,
+  "type": "camera_thumbnail"
+}
+```
+
+The server will respond with a result message containing the thumbnail.
+
+```json
+{
+  "id": 19,
+  "type": "result",
+  "success": true,
+  "result": {
+    "content_type": "image/jpeg",
+    "content": "<base64 encoded image>"
+  }
+}
+```
+
 ## Error handling
 
 If an error occurs, the `success` key in the `result` message will be set to `false`. It will contain an `error` key containing an object with two keys: `code` and `message`.
