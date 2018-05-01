@@ -179,11 +179,12 @@ We support:
 ## Add-on extended build
 
 Additional build options for an add-on is stored in `build.json`. This file will be read from our build systems.
+You need this only, if you not use the default images or need additionals things.
 
 ```json
 {
   "build_from": {
-    "armhf": "homeassistant/armhf-base:latest"
+    "armhf": "mycustom/base-image:latest"
   },
   "squash": false,
   "args": {
