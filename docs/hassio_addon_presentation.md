@@ -41,6 +41,6 @@ If you are in need of a guide on keeping a changelog, we would recommend checkin
 
 In future versions of Hass.io, the `CHANGELOG.md` file will be displayed in the Home Assistant frontend.
 
-## Extended Security
+## Apparmor
 
-You can use own security profile for you Add-on with Seccomp or AppArmor. Default it is enabled and use the docker default profile. Put `apparmor` or `seccomp.json` file into your Add-on folder and it will load this file as primary profile.
+You can use own security profile for you Add-on with AppArmor. Default it is enabled and use the docker default profile. Put `apparmor` file into your Add-on folder and it will load this file as primary profile. Use the config options to set the name of that profile.
