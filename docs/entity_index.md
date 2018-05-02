@@ -34,7 +34,7 @@ class MySwitch(SwitchDevice):
         self._is_on = False
 ```
 
-That's all there is to it to build a switch entity! Continue reading to learen more or check out the [video tutorial](https://youtu.be/Cfasc9EgbMU?t=737).
+That's all there is to it to build a switch entity! Continue reading to learn more or check out the [video tutorial](https://youtu.be/Cfasc9EgbMU?t=737).
 
 ## Updating the entity
 
