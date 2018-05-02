@@ -118,8 +118,7 @@ The config for an add-on is stored in `config.json`.
 | hassio_api | bool | no | This add-on can access to Hass.io REST API. It set the host alias `hassio`.
 | homeassistant_api | bool | no | This add-on can access to Hass.io Home-Assistant REST API proxy. Use `http://hassio/homeassistant/api`.
 | privileged | list | no | Privilege for access to hardware/system. Available access: `NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_TIME`, `SYS_NICE`
-| apparmor | bool | no | Enable or disable AppArmor support. If it is enable, you can also use custom profiles.
-| seccomp | bool | no | Enable or disable Seccomp support. If it is enable, you can also use custom profiles.
+| apparmor | bool/string | no | Enable or disable AppArmor support. If it is enable, you can also use custom profiles with the name of the profile.
 | map | list | no | List of maps for additional Hass.io folders. Possible values: `config`, `ssl`, `addons`, `backup`, `share`. Defaults to `ro`, which you can change by adding `:rw` to the end of the name.
 | environment | dict | no | A dict of environment variable to run add-on.
 | audio | bool | no | Boolean. Mark this add-on to use internal an audio system. The ALSA configuration for this add-on will be mount automatic.
