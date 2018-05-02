@@ -6,6 +6,12 @@
       "architecture_entities",
       "architecture_hassio"
     ],
+    "Entities": [
+      "entity_index",
+      "entity_binary_sensor",
+      "entity_sensor",
+      "entity_switch"
+    ],
     "Configuration.yaml": [
       "configuration_yaml_index"
     ],
