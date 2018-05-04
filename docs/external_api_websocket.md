@@ -359,7 +359,7 @@ The server will respond with a result message containing the thumbnail.
 
 _Introduced in Home Assistant 0.69._
 
-Fetch a base64 encoded thumbnail picture for a media player
+Fetch a base64 encoded thumbnail picture for a media player.
 
 ```json
 {
@@ -369,7 +369,7 @@ Fetch a base64 encoded thumbnail picture for a media player
 }
 ```
 
-The server will respond with the image encoded via base64
+The server will respond with the image encoded via base64.
 
 ```json
 {
