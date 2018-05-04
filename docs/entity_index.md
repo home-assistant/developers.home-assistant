@@ -60,7 +60,7 @@ The entity base class has a few properties that are common among all entities in
 | ---- | ---- | ------- | -----------
 | assumed_state | boolean | `False` | Return `True` if the state is based on our assumption instead of reading it from the device.
 | available | boolean | `True` | Indiciate if Home Assistant is able to read the state and control the underlying device.
-| device_state_attributes | dict | `None` Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version.
+| device_state_attributes | dict | `None` | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version.
 | entity_picture | URL | `None` | Url of a picture to show for the entity.
 | name | string | `None` | Name of the entity
 | should_poll | boolean | `True` | Should Home Assistant check with the entity for an updated state. If set to `False`, entity will need to notify Home Assistant of new updates by calling one of the [schedule update methods](#methods).
