@@ -355,6 +355,34 @@ The server will respond with a result message containing the thumbnail.
 }
 ```
 
+### Fetching media player thumbnails
+
+_Introduced in Home Assistant 0.69._
+
+Fetch a base64 encoded thumbnail picture for a media player.
+
+```json
+{
+  "id": 19,
+  "type": "media_player_thumbnail",
+  "entity_id": "media_player.living_room"
+}
+```
+
+The server will respond with the image encoded via base64.
+
+```json
+{
+  "id": 19,
+  "type": "result",
+  "success": true,
+  "result": {
+    "content_type": "image/jpeg",
+    "content": "<base64 encoded image>"
+  }
+}
+```
+
 ## Error handling
 
 If an error occurs, the `success` key in the `result` message will be set to `false`. It will contain an `error` key containing an object with two keys: `code` and `message`.
