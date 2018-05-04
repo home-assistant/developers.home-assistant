@@ -23,5 +23,5 @@ If specifying a device class, your sensor entity will need to also return the co
 | ---- | ---- | -----------
 | battery | % | % of battery that is left.
 | humidity | % | % of humidity in the air.
-| light | lx/lm | Light level.
+| illuminance | lx/lm | Light level.
 | temperature | C/F | Temperature.
