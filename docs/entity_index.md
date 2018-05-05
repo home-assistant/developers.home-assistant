@@ -42,7 +42,7 @@ An entity represents a device. There are various strategies to keep your entity 
 
 ### Polling
 
-With polling, Home Assistant will ask the entity from time to time (depending on the update interval of the component) to fetch the latest state. You can either implement your update logic using `update()` or the async method `async_update()`. This method should fetch the latest state from the device and store it in an instance variable for the properties to return it.
+With polling, Home Assistant will ask the entity from time to time (depending on the update interval of the component) to fetch the latest state. Home Assistant will poll an entity when the `should_poll` property returns `True` (the default value). You can either implement your update logic using `update()` or the async method `async_update()`. This method should fetch the latest state from the device and store it in an instance variable for the properties to return it.
 
 ### Subscribing to updates
 
