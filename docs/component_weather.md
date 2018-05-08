@@ -23,7 +23,7 @@ If the data provider supports daily or hourly forecast:
 attributes:
   forecast:
     - datetime     # UNIX timestamp
-    - condition    # same as used in current state
-    - temperature  # °C / °F, current temperature for hourly forcast, higher temperature for daily forecast
-    - templow      # °C / °F, for daily forecast only
+      condition    # same as used in current state
+      temperature  # °C / °F, current temperature for hourly forcast, higher temperature for daily forecast
+      templow      # °C / °F, for daily forecast only
 ```
