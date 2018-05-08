@@ -15,7 +15,7 @@ attributes:
 If the data provider requests a branding text:
 ```yaml
 attributes:
-  - attribution: "Weather details provided by Yahoo! Inc."
+  attribution: "Weather details provided by Yahoo! Inc."
 ```
 
 If the data provider supports daily or hourly forecast:
