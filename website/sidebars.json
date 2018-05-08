@@ -10,7 +10,8 @@
       "entity_index",
       "entity_binary_sensor",
       "entity_sensor",
-      "entity_switch"
+      "entity_switch",
+      "entity_weather"
     ],
     "Configuration.yaml": [
       "configuration_yaml_index"
