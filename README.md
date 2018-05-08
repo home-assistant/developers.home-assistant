@@ -3,3 +3,26 @@
 # Home Assistant Development Documentation
 
 This is the source for the [Home Assistant Development documentation](https://developers.home-assistant.io).
+
+## Updating the docs
+
+Documentation is build using [Docusaurus](https://docusaurus.io/docs/en/doc-markdown.html).
+
+### Preparing environment
+
+Running the documentation locally requires [NodeJS](https://nodejs.org/en/) and [Yarn](https://yarnpkg.com/) to be installed. Inside a cloned fork of this repository, run `script/setup`.
+
+### Running docs locally
+
+```bash
+script/server
+```
+
+It will start a server at [localhost:3000](http://localhost:3000).
+
+### Adding a page
+
+ - Create new page in `docs/`
+ - Add new doc to `website/sidebars.json`
+
+You will need to restart the server when creating a new file or make changes to `sidebars.json`. If you're updating a document, you will only need to refresh your browser to get the latest changes.
