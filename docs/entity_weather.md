@@ -23,10 +23,12 @@ Properties have to follow the units defined in the `unit_system`.
 
 ### Forecast
 
+Forecast data should either be daily or hourly.
+
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| datetime | string | **Required** | The point of time in `.isoformat()`.
-| temperature | float | **Required** | The higher daily or hourly Temperature in °C or °F
+| datetime | string | **Required** | UTC Date time in RFC 3339 format.
+| temperature | float | **Required** | The higher temperature in °C or °F
 | condition | string | `None` | The weather condition at this point.
 | templow | float | `None` | The lower daily Temperature in °C or °F
 
