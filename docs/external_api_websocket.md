@@ -76,7 +76,7 @@ If authentication is necessary, the server sends out `auth_required`.
 }
 ```
 
-This means that the next message from the client should be an auth message:
+This means that the next message from the client should be an auth message. You can authorize with either an API password (legacy auth) or an access token.
 
 ```json
 {
@@ -84,6 +84,16 @@ This means that the next message from the client should be an auth message:
   "api_password": "supersecret"
 }
 ```
+
+or
+
+```json
+{
+  "type": "auth",
+  "access_token": "ABCDEFGH"
+}
+```
+
 
 If the client supplies valid authentication, the authentication phase will complete by the server sending the `auth_ok` message:
 

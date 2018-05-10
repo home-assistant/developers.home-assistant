@@ -3,7 +3,7 @@ title: "Entity Architecture"
 sidebar_label: Entity
 ---
 
-![Architecture overview of Hass.io](/img/en/architecture/entities_architecture.svg)
+![Architecture overview of Hass.io](/img/en/architecture/entities_architecture.png)
 
 ## Configuration
 

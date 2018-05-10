@@ -13,6 +13,10 @@
       "entity_switch",
       "entity_weather"
     ],
+    "Authentication": [
+      "auth_index",
+      "auth_api"
+    ],
     "Configuration.yaml": [
       "configuration_yaml_index"
     ],
