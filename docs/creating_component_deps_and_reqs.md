@@ -34,3 +34,16 @@ If you need to make changes to a requirement to support your component, it's als
 * `git clone https://github.com/balloob/pychromecast.git`
 * `pip install ./pychromecast`
 * `hass --skip-pip`
+
+For testing and development purposes you can also to point to a hosted package in the form of an archive (zip/tar.gz) file as a requirement. GitHub provides archive files for a specific branch, release or even a specific commit. To do that the string in `REQUIREMENTS` needs to be composed of two parts:
+
+* an URL pointing to the archive file (e.g. `https://github.com/my/repo/archive/branch-x.zip`)
+* a hashtag and `pip` string (as described above) to declare what package and version that archive file contains
+
+Note: Components and platforms included in Home Assistant should point to published PyPI packages. This ensures that the unit tests  will not be slowed down as they can be cached.
+
+For example, the Neato robot vacuum components specifies the v.0.0.5 release on GitHub as a requirement that gets installed as pybotvac version 0.0.5 (`pybotvac==0.0.5`).
+
+```python
+REQUIREMENTS = ['https://github.com/jabesq/pybotvac/archive/v0.0.5.zip#pybotvac==0.0.5']
+```
