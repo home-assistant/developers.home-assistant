@@ -31,7 +31,7 @@ The `hello.html` contains the needed building blocks to create the elements insi
         font-weight: bold;
       }
     </style>
-    <p>Hello {% raw %}{{who}}{% endraw %}. Greetings from Home Assistant.</p>
+    <p>Hello {{who}}. Greetings from Home Assistant.</p>
   </template>
 </dom-module>
 
