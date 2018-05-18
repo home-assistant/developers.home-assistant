@@ -73,7 +73,7 @@ If you are changing `html` files under `/src` or `/panels` - just reload the pag
 If you are changing javascript files under `/js` you need to have gulp running to watch the source files for changes and build when necessary.
 
 ```bash
-$ yarn run dev-watch
+$ script/develop
 ```
 
 The source code for the frontend can be found in different directories:
