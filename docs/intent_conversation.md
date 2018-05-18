@@ -9,8 +9,7 @@ As a component, you can register sentences with the conversation component to al
 Example code:
 
 ```python
-@asyncio.coroutine
-def async_setup(hass, config):
+async def async_setup(hass, config):
     hass.components.conversation.async_register('MyCoolIntent', [
         'I think that {object} is very cool',
         'Nothing is cooler than {object}'
