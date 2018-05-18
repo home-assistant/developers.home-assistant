@@ -1,5 +1,5 @@
 ---
-title: "RESTful API"
+title: "REST API"
 ---
 
 Home Assistant runs a web server accessible on port 8123.
