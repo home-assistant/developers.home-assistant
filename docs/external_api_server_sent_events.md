@@ -2,7 +2,7 @@
 title: "Server-sent events"
 ---
 
-The [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) feature is a one-way channel from your Home Assistant server to a client which is acting as a consumer. For bi-directional communication check the [RESTful API](https://www.home-assistant.io/developers/rest_api/) and [Python API](https://www.home-assistant.io/developers/python_api/).
+The [server-sent events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) feature is a one-way channel from your Home Assistant server to a client which is acting as a consumer. For a bi-directional streaming API, check out the [WebSocket API](external_api_websocket.md).
 
 The URI that is generating the data is `/api/stream`.
 
