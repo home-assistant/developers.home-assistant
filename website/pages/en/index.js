@@ -166,11 +166,11 @@ const IntroSection = ({ language }) => (
       <div style={{maxWidth: 600, margin: 'auto'}}>
         <div className="videoWrapper">
           <iframe
-            width="560"
-            height="315"
+            width={560}
+            height={315}
             src="https://www.youtube.com/embed/Cfasc9EgbMU"
-            frameborder="0"
-            allowfullscreen
+            frameBorder={0}
+            allowFullScreen
           />
         </div>
       </div>

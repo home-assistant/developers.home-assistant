@@ -43,6 +43,7 @@ const siteConfig = {
     {doc: 'frontend_index', label: 'Frontend'},
     {doc: 'development_index', label: 'Backend'},
     {doc: 'misc', label: 'Misc'},
+    { blog: true, label: 'Blog' },
   ],
 
   // If you have users set above, you add it here:
