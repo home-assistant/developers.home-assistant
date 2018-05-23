@@ -452,7 +452,7 @@ Render a Home Assistant template. [See template docs for more information.](http
 
 ```json
 {
-    "template": "Paulus is at {% raw %}{{ states('device_tracker.paulus') }}{% endraw %}!"
+    "template": "Paulus is at {{ states('device_tracker.paulus') }}!"
 }
 ```
 
