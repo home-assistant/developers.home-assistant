@@ -1,7 +1,9 @@
 ---
-title: "Hass.io Frontend Development"
-sidebar_label: "Frontend Development"
+title: "Hass.io <> Home Assitant integration development"
+sidebar_label: "HASS Integration development"
 ---
+
+These steps will help you connect your local Home Assistant to a remote Hass.io instance. You can then make changes locally to either the Hass.io component or the frontend and test it out against a real instance.
 
 For this guide, we're going to assume that you have an Hass.io instance up and running. If you don't, you can use the generic installation method to install it inside a [virtual machine](https://github.com/home-assistant/hassio-build/tree/master/install#install-hassio).
 
@@ -15,7 +17,7 @@ To develop for the frontend, we're going to need SSH access to the host machine.
 
 ## Getting connection details
 
-To connect to Hass.io from a remote Home Assistant, we need two pieces of information: the location where the supervisor API is running and an auth token to connect to it.
+To connect to a remote Hass.io from Home Assistant, we need two pieces of information: the location where the supervisor API is running and an auth token to connect to it.
 
 To get these info, do the following steps:
 
@@ -26,9 +28,9 @@ To get these info, do the following steps:
 
  ## Having Home Assistant connect to remote Hass.io
 
- The connection with the supervisor is hidden inside the host and is only accessible from applications running on the host. So to make it accessible for our remote Home Assistant instance, we will need to route the connection to our remote Home Assitant. We're going to do this by forwarding ports via an SSH connection.
+ The connection with the supervisor is hidden inside the host and is only accessible from applications running on the host. So to make it accessible for our Home Assistant instance, we will need to route the connection to our computer running Home Assitant. We're going to do this by forwarding ports via an SSH connection.
 
-We are going to SSH from our machine running the remote Home Assistant into the Hass.io host. We're going to configure our SSH connection to forward all connections from port 10081 to be sent from the Hass.io host to the IP address that we got as `HASSIO` value in the last step.
+We are going to SSH from our machine running Home Assistant into the remote Hass.io host. We're going to configure our SSH connection to forward all local connections to localhost port 10081 to be sent from the Hass.io host to the IP address that we got as `HASSIO` value in the last step.
 
 > These instructions are for non-Windows systems
 
@@ -38,12 +40,15 @@ We can setup port forwarding from the Hass.io machine to our machine by adding t
 ssh paulus@127.0.0.1 -p 10022 -L10081:172.30.32.2:80
 ```
 
-As long as the terminal window with the SSH connection is open, the port forwarding will remain active. Now let's open a new terminal window and start Home Assistant.
+As long as the terminal window with the SSH connection is open, the port forwarding will remain active.
 
-First, make sure Home Assistant will load the Hass.io component by adding `hassio:` to your `configuration.yaml` file. Next, we will need to tell Hass.io component how to connect to the remote Hass.io instance, we do this using environment variables.
+Now let's open a new terminal window and start Home Assistant.
+
+First, make sure Home Assistant will load the Hass.io component by adding `hassio:` to your `configuration.yaml` file. Next, we will need to tell Hass.io component how to connect to the remote Hass.io instance, we do this by setting the `HASSIO` and `HASSIO_TOKEN` environment variables when starting Home Assistant. Note that the `HASSIO` value is not the same as the one that we saw above.
 
 ```bash
 HASSIO=127.0.0.1:10081 HASSIO_TOKEN=<VALUE OF HASSIO_TOKEN> hass
 ```
 
 Voila. Your local Home Assistant installation will now connect to a remote Hass.io instance.
+

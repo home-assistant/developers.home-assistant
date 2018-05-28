@@ -107,7 +107,7 @@
     ],
     "Hass.io": [
       "hassio_debugging",
-      "hassio_frontend"
+      "hassio_hass"
     ],
     "Hass.io Add-Ons": [
       "hassio_addon_index",
