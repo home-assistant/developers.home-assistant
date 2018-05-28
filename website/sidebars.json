@@ -106,7 +106,8 @@
       "asyncio_working_with_async"
     ],
     "Hass.io": [
-      "hassio_debugging"
+      "hassio_debugging",
+      "hassio_frontend"
     ],
     "Hass.io Add-Ons": [
       "hassio_addon_index",
