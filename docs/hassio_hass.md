@@ -52,3 +52,26 @@ HASSIO=127.0.0.1:10081 HASSIO_TOKEN=<VALUE OF HASSIO_TOKEN> hass
 
 Voila. Your local Home Assistant installation will now connect to a remote Hass.io instance.
 
+## Frontend development
+
+> This requires Home Assistant 0.71 or later.
+
+We need a couple more steps to do frontend development. First, make sure you have a Home Assitant frontend development set up ([instructions](frontend_index.md)).
+
+Update the Hass.io component configuration in your `configuration.yaml` to point at the frontend repository:
+
+```yaml
+hassio:
+  development_repo: /home/paulus/dev/hass/home-assistant-polymer
+```
+
+To build a local version of the Hass.io panel, go to the frontend repository and run:
+
+```bash
+cd hassio
+script/build_hassio
+```
+
+Now start Home Assistant as discussed in the previous section and it will now connect to the remote Hass.io but show your local frontend.
+
+We're currently transitioning in how we're building the frontend so we don't have an incremental development mode just yet. For now, after making a local change, run `script/build_hassio` again.
