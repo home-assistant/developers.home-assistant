@@ -61,6 +61,7 @@ We need a couple more steps to do frontend development. First, make sure you hav
 Update the Hass.io component configuration in your `configuration.yaml` to point at the frontend repository:
 
 ```yaml
+# configuration.yaml
 hassio:
   development_repo: /home/paulus/dev/hass/home-assistant-polymer
 ```

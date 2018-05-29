@@ -33,6 +33,9 @@ class Footer extends React.Component {
               />
             )}
           </a>
+          <div>
+            <a href="https://twitter.com/hass_devs">Follow Home Assistant devs on Twitter</a>
+          </div>
           {/* <div>
             <h5>Docs</h5>
             <a href={this.docUrl('doc1.html', this.props.language)}>

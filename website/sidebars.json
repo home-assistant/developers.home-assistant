@@ -35,10 +35,16 @@
   "Extending Frontend": {
     "Frontend": [
       "frontend_index",
+      "frontend_architecture",
+      "frontend_development"
+    ],
+    "Extending the frontend": [
       "frontend_add_card",
-      "frontend_add_more_info",
-      "frontend_creating_custom_panels",
-      "frontend_creating_custom_ui"
+      "frontend_add_more_info"
+    ],
+    "Custom UI": [
+      "frontend_creating_custom_ui",
+      "frontend_creating_custom_panels"
     ]
   },
   "Extending HASS": {
