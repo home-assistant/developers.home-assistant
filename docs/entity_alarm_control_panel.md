@@ -18,7 +18,7 @@ sidebar_label: Alarm Control Panel
 | Value | Description
 | ----- | -----------
 | None | No code required.
-| Number | Code is a number.
+| Number | Code is a number (Shows ten-key pad on frontend).
 | Any | Code is a string.
 
 ## Methods
