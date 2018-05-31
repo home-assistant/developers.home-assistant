@@ -12,8 +12,7 @@ sidebar_label: Media Player
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | sound_mode | string | None | The current sound mode of the media player
-| sound_mode_list | list | None | Dynamic list of available sound modes (set by platform)
-| support_select_sound_mode | boolean | False | Boolean if select sound mode command supported
+| sound_mode_list | list | None | Dynamic list of available sound modes (set by platform, empty means sound mode not supported)
 
 
 ## Methods
