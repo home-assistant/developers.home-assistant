@@ -9,8 +9,16 @@
     "Entities": [
       "entity_index",
       "entity_binary_sensor",
+      "entity_climate",
+      "entity_cover",
+      "entity_fan",
+      "entity_light",
+      "entity_lock",
+      "entity_media_player",
+      "entity_remote",
       "entity_sensor",
       "entity_switch",
+      "entity_vacuum",
       "entity_weather"
     ],
     "Authentication": [
