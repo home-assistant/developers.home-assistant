@@ -8,6 +8,7 @@
     ],
     "Entities": [
       "entity_index",
+      "entity_alarm_control_panel",
       "entity_binary_sensor",
       "entity_climate",
       "entity_cover",
