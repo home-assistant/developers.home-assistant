@@ -50,6 +50,8 @@
     "development_submitting": "Submit your work",
     "development_testing": "Testing your code",
     "development_validation": "Validate the input",
+    "entity_alarm_control_panel": "Alarm Control Panel Entity",
+    "Alarm Control Panel": "Alarm Control Panel",
     "entity_binary_sensor": "Binary Sensor Entity",
     "Binary Sensor": "Binary Sensor",
     "entity_climate": "Climate Entity",
