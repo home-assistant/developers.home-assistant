@@ -102,6 +102,7 @@
     "hassio_debugging": "Debugging Hass.io",
     "hassio_hass": "Hass.io <> Home Assitant integration development",
     "HASS Integration development": "HASS Integration development",
+    "intent_builtin": "Built-in intents",
     "intent_conversation": "Registering sentences",
     "intent_firing": "Firing intents",
     "intent_handling": "Handling intents",

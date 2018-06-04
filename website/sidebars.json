@@ -112,7 +112,8 @@
       "intent_index",
       "intent_firing",
       "intent_handling",
-      "intent_conversation"
+      "intent_conversation",
+      "intent_builtin"
     ],
     "asyncio": [
       "asyncio_index",
