@@ -84,6 +84,7 @@
     "external_api_websocket": "WebSocket API",
     "frontend_add_card": "Adding state card",
     "frontend_add_more_info": "Adding more info dialogs",
+    "frontend_add_websocket_api": "Extending the WebSocket API",
     "frontend_architecture": "Home Assistant Frontend Architecture",
     "Architecture": "Architecture",
     "frontend_creating_custom_panels": "Creating custom panels",

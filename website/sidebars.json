@@ -49,7 +49,8 @@
     ],
     "Extending the frontend": [
       "frontend_add_card",
-      "frontend_add_more_info"
+      "frontend_add_more_info",
+      "frontend_add_websocket_api"
     ],
     "Custom UI": [
       "frontend_creating_custom_ui",
