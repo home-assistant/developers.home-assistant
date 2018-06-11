@@ -60,7 +60,7 @@ The entity base class has a few properties that are common among all entities in
 | ---- | ---- | ------- | -----------
 | assumed_state | boolean | `False` | Return `True` if the state is based on our assumption instead of reading it from the device.
 | available | boolean | `True` | Indiciate if Home Assistant is able to read the state and control the underlying device.
-| device_state_attributes | dict | `None` | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version.
+| device_state_attributes | dict | `None` | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version. See [below](entity_index.md#standard_attributes) for details of standard attributes.
 | entity_picture | URL | `None` | Url of a picture to show for the entity.
 | name | string | `None` | Name of the entity
 | should_poll | boolean | `True` | Should Home Assistant check with the entity for an updated state. If set to `False`, entity will need to notify Home Assistant of new updates by calling one of the [schedule update methods](#methods).
@@ -75,6 +75,14 @@ The following properties are also available on entities. However, they are for a
 | force_update | boolean | `False` | Write each update to the state machine, even if the data is the same. Example use: when you are directly reading the value from a connected sensor instead of a cache. Use with caution, will spam the state machine.
 | hidden | boolean | `False` | Indicate if the entity should not be shown on the frontend.
 | icon | icon | `None` | Icon to use in the frontend. Icons start with `mdi:` plus an [identifier](https://materialdesignicons.com/). You probably don't need this since Home Assistant already provides default icons for all devices.
+
+## Standard attributes
+
+The following `device_state_attributes` are considered standard and should follow the convention below. The constant should be imported from `homeassistant/const.py`.
+
+| Name | Type | Unit | Constant | Description
+| ---- | ---- | ---- | -------- | -----------
+| battery_level | integer | % | `ATTR_BATTERY_LEVEL` | Battery level of the entity, shown as an integer percentage between 0-100.
 
 ## Lifecycle hooks
 
