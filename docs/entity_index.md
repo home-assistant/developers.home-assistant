@@ -82,6 +82,7 @@ The following `device_state_attributes` are considered standard and should follo
 
 | Name | Type | Unit | Constant | Description
 | ---- | ---- | ---- | -------- | -----------
+| battery_charging | boolean | N/A | `ATTR_BATTERY_CHARGING` | Battery charging status of the entity, shown as a boolean `true` or `false`. If charging is not supported, then this attribute should not be created.
 | battery_level | integer | % | `ATTR_BATTERY_LEVEL` | Battery level of the entity, shown as an integer percentage between 0-100.
 
 ## Lifecycle hooks
