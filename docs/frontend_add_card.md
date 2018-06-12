@@ -18,4 +18,4 @@ Adding a custom card type can be done with a few simple steps. For this example 
 
  1. Add `'camera'` to the array `DOMAINS_WITH_CARD` in the file [/common/const.js](https://github.com/home-assistant/home-assistant-polymer/blob/master/src/common/const.js).
  2. Create the files `state-card-camera.js` in the folder [/state-summary/](https://github.com/home-assistant/home-assistant-polymer/tree/master/src/state-summary).
- 4. Add `import './state-card-camera.js';` to [state-card-content.js](https://github.com/home-assistant/home-assistant-polymer/blob/master/src/state-summary/state-card-content.js).
+ 3. Add `import './state-card-camera.js';` to [state-card-content.js](https://github.com/home-assistant/home-assistant-polymer/blob/master/src/state-summary/state-card-content.js).
