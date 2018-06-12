@@ -16,6 +16,6 @@ The different badges are located in the file [`/src/components/entity/ha-state-l
 
 Adding a custom card type can be done with a few simple steps. For this example we will add a new state card for the domain `camera`:
 
- 1. Add `'camera'` to the array `DOMAINS_WITH_CARD` in the file [/util/hass-util.html](https://github.com/home-assistant/home-assistant-polymer/blob/master/src/util/hass-util.html#L11).
- 2. Create the files `state-card-camera.html` in the folder [/state-summary/](https://github.com/home-assistant/home-assistant-polymer/tree/master/src/state-summary).
- 4. Add `<link rel="import" href="state-card-camera.html">` to [state-card-content.html](https://github.com/home-assistant/home-assistant-polymer/blob/master/src/state-summary/state-card-content.html).
+ 1. Add `'camera'` to the array `DOMAINS_WITH_CARD` in the file [/common/entity/state_more_info_type.js](https://github.com/home-assistant/home-assistant-polymer/blob/master/src/common/entity/state_more_info_type.js).
+ 2. Create the files `state-card-camera.js` in the folder [/state-summary/](https://github.com/home-assistant/home-assistant-polymer/tree/master/src/state-summary).
+ 4. Add `import './state-card-camera.js';` to [state-card-content.js](https://github.com/home-assistant/home-assistant-polymer/blob/master/src/state-summary/state-card-content.js).
