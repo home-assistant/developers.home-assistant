@@ -11,6 +11,6 @@ Whenever the user taps or clicks on one of the cards, a more info dialog will sh
 
 The instructions to add a more info dialog are very similar to adding a new card type. This example will add a new more info component for the domain `camera`:
 
- 1. Add `'camera'` to the array `DOMAINS_WITH_MORE_INFO` in the file [util/hass-util.html](https://github.com/home-assistant/home-assistant-polymer/blob/master/src/util/hass-util.html#L24).
- 2. Create the files `more-info-camera.html` in the folder [/more-infos](https://github.com/home-assistant/home-assistant-polymer/tree/master/src/more-infos).
- 4. Add `<link rel="import" href="more-info-camera.html">` to [more-info-content.html](https://github.com/home-assistant/home-assistant-polymer/blob/master/src/more-infos/more-info-content.html)
+ 1. Add `'camera'` to the array `DOMAINS_WITH_MORE_INFO` in the file [/common/entity/state_more_info_type.js](https://github.com/home-assistant/home-assistant-polymer/blob/master/src/common/entity/state_more_info_type.js).
+ 2. Create the files `more-info-camera.js` in the folder [/dialogs/more-info/controls](https://github.com/home-assistant/home-assistant-polymer/tree/master/src/dialogs/more-info/controls).
+ 4. Add `import './more-info-camera.js';` to [/dialogs/more-info/controls/more-info-content.js](https://github.com/home-assistant/home-assistant-polymer/blob/master/src/dialogs/more-info/controls/more-info-content.js)
