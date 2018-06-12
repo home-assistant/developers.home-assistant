@@ -12,7 +12,7 @@ Sensors, when not grouped, are shown as so-called badges on top of the state car
 
 ![Badges in the frontend](/img/en/frontend/frontend-badges.png)
 
-The different badges are located in the file [`/src/components/entity/ha-state-label-badge.html`](https://github.com/home-assistant/home-assistant-polymer/blob/master/src/components/entity/ha-state-label-badge.html).
+The different badges are located in the file [`/src/components/entity/ha-state-label-badge.js`](https://github.com/home-assistant/home-assistant-polymer/blob/master/src/components/entity/ha-state-label-badge.js).
 
 Adding a custom card type can be done with a few simple steps. For this example we will add a new state card for the domain `camera`:
 
