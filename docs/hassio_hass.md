@@ -47,7 +47,7 @@ Now let's open a new terminal window and start Home Assistant.
 First, make sure Home Assistant will load the Hass.io component by adding `hassio:` to your `configuration.yaml` file. Next, we will need to tell Hass.io component how to connect to the remote Hass.io instance, we do this by setting the `HASSIO` and `HASSIO_TOKEN` environment variables when starting Home Assistant. Note that the `HASSIO` value is not the same as the one that we saw above.
 
 ```bash
-HASSIO=127.0.0.1:10081 HASSIO_TOKEN=<VALUE OF HASSIO_TOKEN> hass
+HASSIO=127.0.0.1:10081/api/hassio HASSIO_TOKEN=<VALUE OF HASSIO_TOKEN> hass
 ```
 
 Voila. Your local Home Assistant installation will now connect to a remote Hass.io instance.
