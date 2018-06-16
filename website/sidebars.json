@@ -55,6 +55,9 @@
     "Custom UI": [
       "frontend_creating_custom_ui",
       "frontend_creating_custom_panels"
+    ],
+    "Experimental UI": [
+      "frontend_experiment_index"
     ]
   },
   "Extending HASS": {
