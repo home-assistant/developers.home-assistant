@@ -74,7 +74,12 @@ $ git push -u fork HEAD
 
 ## Building the Polymer frontend
 
-If you're making changes to the way the frontend is packaged, it might be necessary to try out a new packaged build of the frontend in the main repository (instead of pointing it at the frontend repo). To do so, first build a production version of the frontend by running `script/build_frontend`.
+If you're making changes to the way the frontend is packaged, it might be necessary to try out a new packaged build of the frontend in the main repository (instead of pointing it at the frontend repo). To do so, first build a production version of the frontend by running:
+
+```bash
+$ script/build_frontend
+$ python3 setup.py sdist
+```
 
 To test it out inside Home assistant, run the following command from the main Home Assistant repository:
 
