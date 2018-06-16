@@ -79,7 +79,7 @@ If you're making changes to the way the frontend is packaged, it might be necess
 To test it out inside Home assistant, run the following command from the main Home Assistant repository:
 
 ```bash
-$ pip3 install --upgrade /path/to/home-assistant-polymer/dist/home-assistant-frontend-xxxxxxxx.x.tar.gz
+$ pip3 install -e /path/to/home-assistant-polymer/
 $ hass --skip-pip
 ```
 
