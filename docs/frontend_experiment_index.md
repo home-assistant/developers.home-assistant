@@ -17,7 +17,7 @@ views:
   # The name of a view will be used as tab title.
   # Might be used for other things in the future.
 - name: Example
-  # Each view can have a different theme applied.
+  # Each view can have a different theme applied. Theme should be defined in the frontend.
   theme: dark-mode
   # The cards to show on this view.
   cards:
