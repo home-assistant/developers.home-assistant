@@ -57,7 +57,7 @@ def setup_platform(hass, config, add_devices, discovery_info=None):
     # Verify that passed in configuration works
     if not hub.is_valid_login():
         _LOGGER.error("Could not connect to AwesomeLight hub")
-        return False
+        return
 
     # Add devices
     add_devices(AwesomeLight(light) for light in hub.lights())
