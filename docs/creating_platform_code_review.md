@@ -49,10 +49,11 @@ A checklist of things to do when you're adding a new platform.
 
 ### 5. Entity
 
- 1. Extend entity from component, e.g., `class HueLight(Light)`
- 2. Do not call `update()` in constructor, use `add_devices(devices, True)` instead.
- 3. Do not do any I/O inside properties. Cache values inside `update()` instead.
- 4. The state and/or attributes should not contain relative time since something happened. Instead it should store UTC timestamps.
+ 1. Extend entity from component, e.g., `class HueLight(Light)`.
+ 2. Avoid passing in `hass` as a parameter to the entity. When the entity has been added to Home Assistant, `hass` will be set on the entity by the helper in entity_platform.py. This means you can access `hass` as `self.hass` inside the entity.
+ 3. Do not call `update()` in constructor, use `add_devices(devices, True)` instead.
+ 4. Do not do any I/O inside properties. Cache values inside `update()` instead.
+ 5. The state and/or attributes should not contain relative time since something happened. Instead it should store UTC timestamps.
 
 ### 6. Communication with devices/services
 
