@@ -49,6 +49,7 @@
     "development_index": "Starting with Development",
     "development_submitting": "Submit your work",
     "development_testing": "Testing your code",
+    "development_typing": "Adding type hints to your code",
     "development_validation": "Validate the input",
     "entity_alarm_control_panel": "Alarm Control Panel Entity",
     "Alarm Control Panel": "Alarm Control Panel",
