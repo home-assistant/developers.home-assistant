@@ -42,12 +42,6 @@ views:
         card_config:
           title: Input booleans that are on
 
-        # Use the HTML imports to load custom UI to render cards.
-        # Custom UI needs to be custom element that takes in `config` and `hass`
-      - type: 'custom:my-custom-ui'
-        # Any value here is made available to your element via the `config` property.
-        some: value
-
     # Specify a tab_icon if you want the view tab to be an icon.
   - tab_icon: mdi:home-assistant
     # Name of the view. Will be used as the tooltip for tab icon

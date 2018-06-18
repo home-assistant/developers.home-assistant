@@ -57,7 +57,8 @@
       "frontend_creating_custom_panels"
     ],
     "Experimental UI": [
-      "frontend_experiment_index"
+      "frontend_experiment_index",
+      "frontend_experiment_custom_card"
     ]
   },
   "Extending HASS": {
