@@ -58,6 +58,7 @@
     ],
     "Experimental UI": [
       "frontend_experiment_index",
+      "frontend_experiment_card_types",
       "frontend_experiment_custom_card"
     ]
   },
