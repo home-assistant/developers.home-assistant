@@ -24,7 +24,7 @@ These cards are WIP and things may change.
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| type | string | **Required** | `entitiey-filter`
+| type | string | **Required** | `entity-filter`
 (wip: check introduction meanwhile)
 
 ## History graph
