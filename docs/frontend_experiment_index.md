@@ -77,6 +77,26 @@ Now restart Home Assistant, navigate to `<YOUR HASS URL>/experimental-ui`. When 
 
 This is the very very early version aimed at gathering feedback. Discussion and suggestions are welcome in the [ui-schema repository](https://github.com/home-assistant/ui-schema).
 
+## Card types
+
+| Card name | Entity domain | Description
+| --------- | ------------- | -----------
+| camera-preview | `camera` | Displays camera card.
+| entities | `*` | Displays entities in one card.
+| entitiey-filter | `*` | Displays entities, that match the filters, in one card.
+| history-graph | `history_graph` | Displays history graph card.
+| media-control | `media_player` | Displays media player card.
+| plant-status | `plant` | Displays plant card.
+| weather-forecast | `weather` | Displays weather card.
+
+The domain specific cards are configured like below. For `entities` and `entity-filter` check the example above.
+```yaml
+- type: media-control
+  entity: media_player.mini
+- type: weather-forecast
+  entity: weather.yweather
+```
+
 ## Change log
 
 **Home Assistant 0.72**
