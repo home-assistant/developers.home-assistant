@@ -3,9 +3,20 @@ title: "Lovelace UI"
 sidebar_label: Introduction
 ---
 
-Starting with Home Assistant 0.72, we're experimenting with a way of defining your user interface. We're calling it the Lovelace UI.
+> This is an experimental feature. Configuration might change in future versions.
 
-The aproach is fundamentally different from the current approach. The old user interface relied solely on the state machine. This caused trouble as it meant that people wanted to store things in the state machine to control the user interface. That's a big violation of seperation of concern. With Lovelace, we're taking a completely different approach. All user interface configuration will live in a seperate file, controlled by the user. This means that we only have to build up the user interface when the UI configuration changes and can just render the states. It will also allow for more configuration options to be added.
+Starting with Home Assistant 0.72, we're experimenting with a new way of defining your interface. We're calling it the Lovelace UI.
+
+The Lovelace UI is:
+
+ - **Extremely fast**. We create the user interface when the UI configuration changes. When a state changes, we just make the UI represent the current state.
+ - **Extremely customizable**. We have a new file for just configuration. In the past, we declined UI specific options because they did not fit in the state machine. They will fit in a configuration file for a user interface.
+ - **Extremely extensible**. It's based on the web standard [custom elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements). Don't like the built-in cards? Make your own! Custom cards are treated the same as built-in cards and care configured the same way.
+ - **Making the backend faster**. With Lovelace, the backend will no longer need to maintain entities like groups for the sole purpose of showing them on the frontend.
+
+## How it works
+
+The old user interface relied solely on the state machine. This caused trouble as it meant that the state machine was now not only the source for device states, but also for user interface configuration. With Lovelace, we're taking a completely different approach. All user interface configuration will live in a seperate file, controlled by the user.
 
 ![Visual comparison of old configuration versus new configuration](/img/en/frontend/lovelace-ui-comparison.png)
 
@@ -13,10 +24,10 @@ The aproach is fundamentally different from the current approach. The old user i
 
 ## Trying it out
 
-Create a new file `<config>/experimental-ui.yaml` and add the following content:
+Create a new file `<config>/ui-lovelace.yaml` and add the following content:
 
 ```yaml
-title: My Awesome Home
+name: My Awesome Home
 views:
     # The name of a view will be used as tab title.
     # Might be used for other things in the future.
@@ -75,7 +86,7 @@ input_boolean:
     name: TV
 ```
 
-Now restart Home Assistant, navigate to `<YOUR HASS URL>/experimental-ui`. When you make changes to `experimental-ui.yaml`, you don't have to restart Home Assistant or refresh the page. Just hit the refresh button at the top of the UI.
+Now restart Home Assistant, navigate to `<YOUR HASS URL>/lovelace`. When you make changes to `ui-lovelace.yaml`, you don't have to restart Home Assistant or refresh the page. Just hit the refresh button at the top of the UI.
 
 ## Current limitations
 
@@ -85,4 +96,4 @@ This is the very very early version aimed at gathering feedback. Discussion and 
 
 **Home Assistant 0.72**
 
-- Initial release supporting title, defining views with a name, tab icon, theme and cards. Supported cards are entities, entity-filter and custom.
+- Initial release of the Lovelace UI.

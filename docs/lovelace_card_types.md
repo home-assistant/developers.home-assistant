@@ -27,6 +27,14 @@ These cards are WIP and things may change.
 | type | string | **Required** | `entity-filter`
 (wip: check introduction meanwhile)
 
+## Glance
+
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| type | string | **Required** | `glance`
+| entities | list | **Required** | Entity id's
+| title | string | `None` | Card title
+
 ## History graph
 
 | Name | Type | Default | Description

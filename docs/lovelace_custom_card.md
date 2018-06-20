@@ -70,10 +70,10 @@ Home Assistant is currently transitioning away from HTML imports but have not fi
 
 ## Referencing your new card
 
-To use a custom card, set the card type in `experimental-ui.yaml` to `custom:<YOUR CUSTOM ELEMENT TAG>`. In the following example we're going to use a custom card which is registered as custom element `example-card`. Any other config defined with your card will be made available as the `config` property to your card.
+To use a custom card, set the card type in `ui-lovelace.yaml` to `custom:<YOUR CUSTOM ELEMENT TAG>`. In the following example we're going to use a custom card which is registered as custom element `example-card`. Any other config defined with your card will be made available as the `config` property to your card.
 
 ```yaml
-# experimental-ui.yaml example
+# ui-lovelace.yaml example
 title: Example Main title
 views:
 - name: Example
