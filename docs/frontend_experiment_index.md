@@ -7,6 +7,8 @@ Starting with Home Assistant 0.72, we're experimenting with a way of defining yo
 
 ![Visual comparison of old configuration versus new configuration](/img/en/frontend/experimental-ui-comparison.png)
 
+<!-- source: https://docs.google.com/drawings/d/1O1o7-wRlnsU1lLgfdtn3s46P5StJjSL5to5RU9SV8zs/edit?usp=sharing -->
+
 ## Trying it out
 
 Create a new file `<config>/experimental-ui.yaml` and add the following content:
