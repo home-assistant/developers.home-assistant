@@ -13,7 +13,7 @@ The aproach is fundamentally different from the current approach. The old user i
 
 ## Trying it out
 
-Create a new file `<config>/experimental-ui.yaml` and add the following content:
+Create a new file `<config>/ui-lovelace.yaml` and add the following content:
 
 ```yaml
 title: My Awesome Home
@@ -75,11 +75,14 @@ input_boolean:
     name: TV
 ```
 
-Now restart Home Assistant, navigate to `<YOUR HASS URL>/experimental-ui`. When you make changes to `experimental-ui.yaml`, you don't have to restart Home Assistant or refresh the page. Just hit the refresh button at the top of the UI.
+Now restart Home Assistant, navigate to `<YOUR HASS URL>/lovelace`. When you make changes to `ui-lovelace.yaml`, you don't have to restart Home Assistant or refresh the page. Just hit the refresh button at the top of the UI.
 
 ## Current limitations
 
 This is the very very early version aimed at gathering feedback. Discussion and suggestions are welcome in the [ui-schema repository](https://github.com/home-assistant/ui-schema).
+
+## We want your feedback
+Post feedback and feature request for the new UI this [GitHub repo](https://github.com/home-assistant/ui-schema/issues).
 
 ## Change log
 
