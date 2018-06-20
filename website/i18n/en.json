@@ -92,6 +92,8 @@
     "frontend_creating_custom_ui": "Creating custom UI",
     "frontend_development": "Frontend development",
     "Development": "Development",
+    "frontend_experiment_card_types": "Type Of Cards",
+    "Cards": "Cards",
     "frontend_experiment_custom_card": "Custom Cards",
     "frontend_experiment_index": "Experimental UI",
     "frontend_index": "Home Assistant Frontend",

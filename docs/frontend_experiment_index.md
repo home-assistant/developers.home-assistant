@@ -3,13 +3,13 @@ title: "Experimental UI"
 sidebar_label: Introduction
 ---
 
-Starting with Home Assistant 0.72, we're experimenting with a way of defining your user interface. The aproach is fundamentally different from the current approach.
+Starting with Home Assistant 0.72, we're experimenting with a way of defining your user interface. The aproach is fundamentally different from the current approach. The old user interface relied solely on the state machine. This caused trouble as it meant that people wanted to store things in the state machine to control the user interface. That's a big violation of seperation of concern. With the new user interface, we're taking a completely different approach. All user interface configuration will live in a seperate file, controlled by the user. This allows us to build a faster user interface that is more customizable.
 
-The current approach will look at your groups and entities and will sort them on the fly. With our experimental UI, it is purely based on configuration that is provided by the user, defined in `<config>/experimental-ui.yaml`.
+![Visual comparison of old configuration versus new configuration](/img/en/frontend/experimental-ui-comparison.png)
 
 ## Trying it out
 
-Create `<config>/experimental-ui.yaml`:
+Create a new file `<config>/experimental-ui.yaml` and add the following content:
 
 ```yaml
 title: My Awesome Home
