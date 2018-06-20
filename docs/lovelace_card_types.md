@@ -25,7 +25,14 @@ These cards are WIP and things may change.
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | type | string | **Required** | `entity-filter`
-(wip: check introduction meanwhile)
+| filter | object | **Required** | See filter description
+
+Filter options:
+
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| domain | string | **Optional** | Filter all entities that match the domain
+| state | string | **Optional** | Match entities that match state. Note, in YAML, make sure you wrap it in quotes to make sure it is parsed as a string.
 
 ## Glance
 
