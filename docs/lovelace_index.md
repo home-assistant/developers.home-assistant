@@ -92,6 +92,9 @@ Now restart Home Assistant, navigate to `<YOUR HASS URL>/lovelace`. When you mak
 
 This is the very very early version aimed at gathering feedback. Discussion and suggestions are welcome in the [ui-schema repository](https://github.com/home-assistant/ui-schema).
 
+## We want your feedback
+Post feedback and feature request for the new UI this [GitHub repo](https://github.com/home-assistant/ui-schema/issues).
+
 ## Change log
 
 **Home Assistant 0.72**

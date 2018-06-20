@@ -42,6 +42,16 @@ Filter options:
 | entities | list | **Required** | Entity id's
 | title | string | `None` | Card title
 
+## Glance
+
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| type | string | **Required** | `glance`
+| entities | list | **Required** | Entity id's
+| title | string | `None` | Card title
+
+<img src='/img/lovelace-ui/glace-card.png' alt='service developer tool icon' />
+
 ## History graph
 
 | Name | Type | Default | Description
