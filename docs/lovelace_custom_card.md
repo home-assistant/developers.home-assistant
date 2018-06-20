@@ -2,7 +2,7 @@
 title: "Custom Cards"
 ---
 
-You're not just limited to the cards that we decided to include in the experimental UI. You can build and use your own!
+You're not just limited to the cards that we decided to include in the Lovelace UI. You can build and use your own!
 
 ## API
 

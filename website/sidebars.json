@@ -56,10 +56,10 @@
       "frontend_creating_custom_ui",
       "frontend_creating_custom_panels"
     ],
-    "Experimental UI": [
-      "frontend_experiment_index",
-      "frontend_experiment_card_types",
-      "frontend_experiment_custom_card"
+    "Lovelace UI": [
+      "lovelace_index",
+      "lovelace_card_types",
+      "lovelace_custom_card"
     ]
   },
   "Extending HASS": {
