@@ -74,7 +74,6 @@ To use a custom card, set the card type in `ui-lovelace.yaml` to `custom:<YOUR C
 
 ```yaml
 # ui-lovelace.yaml example
-title: Example Main title
 views:
 - name: Example
   cards:
