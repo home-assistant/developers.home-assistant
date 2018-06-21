@@ -12,84 +12,101 @@ You're not just limited to the cards that we decided to include in the Lovelace 
 
 ## Defining your card
 
-```html
-<!-- custom-card.html -->
-<script>
-class CustomCard extends HTMLElement {
-  constructor() {
-    super();
-    this.config = null;
-    this._hass = null;
-    this._connected = false;
+Create a new file in your Home Assistant config dir as `<config>/www/wired-cards.js` and put in the following contents:
+
+```js
+import 'https://unpkg.com/wired-card@0.6.5/wired-card.js?module';
+import 'https://unpkg.com/wired-toggle@0.6.5/wired-toggle.js?module';
+import {
+  LitElement, html
+} from 'https://unpkg.com/@polymer/lit-element@^0.5.2/lit-element.js?module';
+
+function loadCSS(url) {
+  const link = document.createElement('link');
+  link.type = 'text/css';
+  link.rel = 'stylesheet';
+  link.href = url;
+  document.head.appendChild(link);
+}
+
+loadCSS('https://fonts.googleapis.com/css?family=Gloria+Hallelujah');
+
+class WiredToggleCard extends LitElement {
+  static get properties() {
+    return {
+      hass: Object,
+      config: Object,
+    }
   }
 
-  // Called when the element is connected to the DOM.
-  // We assume that both hass and config properties have been set.
-  connectedCallback() {
-    this._connected = true;
-    this.innerHTML = `
-      <div style='background-color: lightsalmon; padding: 8px;'>
-        ${this.config.entity_id}
-        <input type='checkbox'>
-      </div>
+  _render({ hass, config }) {
+    return html`
+      <style>
+        :host {
+          font-family: 'Gloria Hallelujah', cursive;
+        }
+        wired-card {
+          background-color: white;
+          padding: 16px;
+          display: block;
+          font-size: 18px;
+        }
+        .state {
+          display: flex;
+          justify-content: space-between;
+          padding: 8px;
+          align-items: center;
+        }
+        wired-toggle {
+          margin-left: 8px;
+        }
+      </style>
+      <wired-card elevation="2">
+        ${config.entities.map(ent => hass.states[ent]).map((state) =>
+          html`
+            <div class='state'>
+              ${state.attributes.friendly_name}
+              <wired-toggle
+                checked="${state.state === 'on'}"
+                on-change="${ev => this._toggle(state)}"
+              ></wired-toggle>
+            </div>
+          `
+        )}
+      </wired-card>
     `;
-    this._checkbox = this.querySelector('input');
-    this._checkbox.addEventListener('change', () =>
-      this._hass.callService('homeassistant', 'toggle',
-                             { entity_id: this.config.entity_id }));
-    this._render();
+  }
+
+  _toggle(state) {
+    this.hass.callService('homeassistant', 'toggle', {
+      entity_id: state.entity_id
+    });
   }
 
   // The height of your card. Home Assistant uses this to automatically
   // distribute all cards over the available columns.
   getCardSize() {
-    return 1;
-  }
-
-  set hass(value) {
-    this._hass = value;
-
-    if (this._connected) {
-      this._render();
-    }
-  }
-
-  _render() {
-    const state = this._hass.states[this.config.entity_id];
-    this._checkbox.checked = state.state === 'on';
+    return this.config.entities.length + 1;
   }
 }
-
-customElements.define('example-card', CustomCard);
-</script>
-```
-
-## Loading your card in the frontend
-
-Home Assistant is currently transitioning away from HTML imports but have not finished yet. To include your custom card, you will have to create an HTML file that will be imported by the frontend. Create a new HTML file in `<hass config dir>/www/custom-card.html`.
-
-Then update your configuration to be like this:
-
-```yaml
-# configuration.yaml example
-frontend:
-  extra_html_url:
-   - "/local/wired-cards.html"
+customElements.define('wired-toggle-card', WiredToggleCard);
 ```
 
 ## Referencing your new card
 
-To use a custom card, set the card type in `ui-lovelace.yaml` to `custom:<YOUR CUSTOM ELEMENT TAG>`. In the following example we're going to use a custom card which is registered as custom element `example-card`. Any other config defined with your card will be made available as the `config` property to your card.
+In our example card we defined a card with the tag `wired-toggle-card` (see last line), so our card type will be `custom:wired-toggle-card`. And because you created the file in your `<config>/www` directory, it will be accessible in your browser via the url `/local/`.
 
 ```yaml
-# ui-lovelace.yaml example
+# Example ui-lovelace.yaml
+resources:
+  - url: /local/wired-cards.js
+    type: module
 views:
 - name: Example
   cards:
-  - type: 'custom:example-card'
-    entity_id: input_boolean.switch_ac_kitchen
+  - type: "custom:wired-toggle-card"
+    entities:
+      - input_boolean.switch_ac_kitchen
+      - input_boolean.switch_ac_livingroom
+      - input_boolean.switch_tv
 ```
-
-## Other examples
-
- - Example card using [WiredJS](https://wiredjs.com) - [source](https://gist.github.com/balloob/d86afbecab97b34f9eaeb33b0c0be424)
