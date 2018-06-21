@@ -26,6 +26,8 @@ These cards are WIP and things may change.
 | ---- | ---- | ------- | -----------
 | type | string | **Required** | `entity-filter`
 | filter | object | **Required** | See filter description
+| card_config | object | `None` | Extra options to pass down to the card rendering the result.
+| card | string | `entities` | Card to use to render the result. Follows same rules as card type.
 
 Filter options:
 
@@ -33,6 +35,14 @@ Filter options:
 | ---- | ---- | ------- | -----------
 | domain | string | **Optional** | Filter all entities that match the domain
 | state | string | **Optional** | Match entities that match state. Note, in YAML, make sure you wrap it in quotes to make sure it is parsed as a string.
+
+## Entity picture
+
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| type | string | **Required** | `entity-picture`
+| image | string | **Required** | URL of an image.
+| entity | string | **Required** | Entity id to control via picture.
 
 ## Glance
 
@@ -49,12 +59,29 @@ Filter options:
 | type | string | **Required** | `history-graph`
 | entity | string | **Required** | Entity id of `history_graph` domain
 
+## Markdown
+
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| type | string | **Required** | `markdown`
+| content | string | **Required** | Content to render as [markdown](http://commonmark.org/help/).
+| title | string | `None` | Card title
+
 ## Media controler
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | type | string | **Required** | `media-control`
 | entity | string | **Required** | Entity id of `media_player` domain
+
+## Picture glance
+
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| type | string | **Required** | `picture-glance`
+| image | string | **Required** | URL of an image.
+| entities | list | **Required** | Entity id's
+| title | string | `None` | Card title
 
 ## Plant info
 
