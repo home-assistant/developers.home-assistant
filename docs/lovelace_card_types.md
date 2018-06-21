@@ -35,7 +35,7 @@ Filter options:
 | ---- | ---- | ------- | -----------
 | domain | string | Optional | Filter all entities that match the domain
 | state | string | Optional | Match entities that match state. Note, in YAML, make sure you wrap it in quotes to make sure it is parsed as a string.
-| entity_id | string | Optional | Filter all entities, supports wildcards (`*living_room*`)
+| entity_id | string | Optional | Filter entities by id, supports wildcards (`*living_room*`)
 
 ## Entity picture
 
