@@ -66,7 +66,16 @@ customElements.define('example-card', CustomCard);
 
 ## Loading your card in the frontend
 
-Home Assistant is currently transitioning away from HTML imports but have not finished yet. To include your custom card, you will have to create an HTML file that will be imported by the frontend. Instructions on how to configure the frontend are [here](https://www.home-assistant.io/components/frontend/#extra_html_url). Create a new HTML file in `<hass config dir>/www/custom-card.html`. You will be able to load it by referencing it as `/local/custom-card.html`.
+Home Assistant is currently transitioning away from HTML imports but have not finished yet. To include your custom card, you will have to create an HTML file that will be imported by the frontend. Create a new HTML file in `<hass config dir>/www/custom-card.html`.
+
+Then update your configuration to be like this:
+
+```yaml
+# configuration.yaml example
+frontend:
+  extra_html_url:
+   - "/local/wired-cards.html"
+```
 
 ## Referencing your new card
 
