@@ -18,14 +18,14 @@ These cards are WIP and things may change.
 | ---- | ---- | ------- | -----------
 | type | string | **Required** | `entities`
 | entities | list | **Required** | Entity id's
-| title | string | `None` | Card title
+| title | string | Optional | Card title
 
 ## Entity filter
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | type | string | **Required** | `entity-filter`
-| filter | object | **Required** | See filter description
+| filter | list | **Required** | See filter description
 | card_config | object | `None` | Extra options to pass down to the card rendering the result.
 | card | string | `entities` | Card to use to render the result. Follows same rules as card type.
 
@@ -33,8 +33,9 @@ Filter options:
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| domain | string | **Optional** | Filter all entities that match the domain
-| state | string | **Optional** | Match entities that match state. Note, in YAML, make sure you wrap it in quotes to make sure it is parsed as a string.
+| domain | string | Optional | Filter all entities that match the domain
+| state | string | Optional | Match entities that match state. Note, in YAML, make sure you wrap it in quotes to make sure it is parsed as a string.
+| entity_id | string | Optional | Filter entities by id, supports wildcards (`*living_room*`)
 
 ## Entity picture
 
@@ -50,7 +51,7 @@ Filter options:
 | ---- | ---- | ------- | -----------
 | type | string | **Required** | `glance`
 | entities | list | **Required** | Entity id's
-| title | string | `None` | Card title
+| title | string | Optional | Card title
 
 ## History graph
 
@@ -65,9 +66,9 @@ Filter options:
 | ---- | ---- | ------- | -----------
 | type | string | **Required** | `markdown`
 | content | string | **Required** | Content to render as [markdown](http://commonmark.org/help/).
-| title | string | `None` | Card title
+| title | string | Optional | Card title
 
-## Media controler
+## Media controller
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
@@ -81,7 +82,7 @@ Filter options:
 | type | string | **Required** | `picture-glance`
 | image | string | **Required** | URL of an image.
 | entities | list | **Required** | Entity id's
-| title | string | `None` | Card title
+| title | string | Optional | Card title
 
 ## Plant info
 
