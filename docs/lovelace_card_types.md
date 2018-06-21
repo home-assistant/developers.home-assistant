@@ -68,7 +68,7 @@ Filter options:
 | content | string | **Required** | Content to render as [markdown](http://commonmark.org/help/).
 | title | string | Optional | Card title
 
-## Media controler
+## Media controller
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
