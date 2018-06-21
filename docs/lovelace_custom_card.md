@@ -89,3 +89,7 @@ views:
   - type: 'custom:example-card'
     entity_id: input_boolean.switch_ac_kitchen
 ```
+
+## Other examples
+
+ - Example card using [WiredJS](https://wiredjs.com) - [source](https://gist.github.com/balloob/d86afbecab97b34f9eaeb33b0c0be424)
