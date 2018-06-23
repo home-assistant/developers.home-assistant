@@ -51,8 +51,8 @@ views:
       - type: entity-filter
         # Filter criteria. They are all optional.
         filter:
-          domain: input_boolean
-          state: 'on'
+          - domain: input_boolean
+            state: 'on'
         # This config will be passed to the card rendering the filter results
         card_config:
           title: Input booleans that are on
