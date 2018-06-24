@@ -57,6 +57,15 @@ views:
         card_config:
           title: Input booleans that are on
 
+      - type: entity-filter
+        # Filter criteria can also be passed as a list of dicts.
+        filter: [{"domain": "input_boolean", "entity_id": "*ac*", "state": "on"},
+                 {"domain": "input_boolean", "entity_id": "*ac*", "state": "off"}]
+        # This config will be passed to the card rendering the filter results
+        card_config:
+          title: Input booleans that are on
+
+
     # Specify a tab_icon if you want the view tab to be an icon.
   - tab_icon: mdi:home-assistant
     # Name of the view. Will be used as the tooltip for tab icon
