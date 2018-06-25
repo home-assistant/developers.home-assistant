@@ -66,7 +66,8 @@ Filter options:
 | ---- | ---- | ------- | -----------
 | type | string | **Required** | `iframe`
 | url | string | **Required** | iframe source url
-| aspect_ratio | string | `'50%'` | Iframe height-width-ratio
+| aspect_ratio | string | `"50%"` | Iframe height-width-ratio
+| title | string | Optional | Card title
 
 ## Markdown
 
