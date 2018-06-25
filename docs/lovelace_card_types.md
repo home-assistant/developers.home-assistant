@@ -60,6 +60,14 @@ Filter options:
 | type | string | **Required** | `history-graph`
 | entity | string | **Required** | Entity id of `history_graph` domain
 
+## Iframe
+
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| type | string | **Required** | `iframe`
+| url | string | **Required** | iframe source url
+| aspect_ratio | string | `'50%'` | Iframe height-width-ratio
+
 ## Markdown
 
 | Name | Type | Default | Description
