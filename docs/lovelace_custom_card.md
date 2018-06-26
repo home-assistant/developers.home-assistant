@@ -36,6 +36,12 @@ class ContentCardExample extends HTMLElement {
       <img src="http://via.placeholder.com/350x150">
     `;
   }
+
+  // The height of your card. Home Assistant uses this to automatically
+  // distribute all cards over the available columns.
+  getCardSize() {
+    return 3;
+  }
 }
 
 customElements.define('content-card-example', ContentCardExample);
