@@ -12,6 +12,55 @@ You're not just limited to the cards that we decided to include in the Lovelace 
 
 ## Defining your card
 
+Create a new file in your Home Assistant config dir as `<config>/www/content-card-example.js` and put in the following contents:
+
+```js
+class ContentCardExample extends HTMLElement {
+  set hass(hass) {
+    if (!this.content) {
+      const card = document.createElement('ha-card');
+      card.header = 'Example card';
+      this.content = document.createElement('div');
+      this.content.style.padding = '0 16px 16px';
+      card.appendChild(this.content);
+      this.appendChild(card);
+    }
+
+    const entityId = this.config.entity;
+    const state = hass.states[entityId];
+    const stateStr = state ? state.state : 'unavailable';
+
+    this.content.innerHTML = `
+      The state of ${entityId} is ${stateStr}!
+      <br><br>
+      <img src="http://via.placeholder.com/350x150">
+    `;
+  }
+}
+
+customElements.define('content-card-example', ContentCardExample);
+```
+
+## Referencing your new card
+
+In our example card we defined a card with the tag `content-card-example` (see last line), so our card type will be `custom:content-card-example`. And because you created the file in your `<config>/www` directory, it will be accessible in your browser via the url `/local/`.
+
+```yaml
+# Example ui-lovelace.yaml
+resources:
+  - url: /local/content-card-example.js
+    type: js
+views:
+- name: Example
+  cards:
+  - type: "custom:custom-card-example"
+    entity: input_boolean.switch_tv
+```
+
+## Advanced example
+
+Resources to load in Lovelace can be imported as a JS script, an HTML import or as a JS module import. Below is an example of a custom card using JS modules that does all the fancy things.
+
 Create a new file in your Home Assistant config dir as `<config>/www/wired-cards.js` and put in the following contents:
 
 ```js
@@ -92,9 +141,7 @@ class WiredToggleCard extends LitElement {
 customElements.define('wired-toggle-card', WiredToggleCard);
 ```
 
-## Referencing your new card
-
-In our example card we defined a card with the tag `wired-toggle-card` (see last line), so our card type will be `custom:wired-toggle-card`. And because you created the file in your `<config>/www` directory, it will be accessible in your browser via the url `/local/`.
+And for your configuration:
 
 ```yaml
 # Example ui-lovelace.yaml
