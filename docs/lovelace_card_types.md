@@ -26,8 +26,7 @@ These cards are WIP and things may change.
 | ---- | ---- | ------- | -----------
 | type | string | **Required** | `entity-filter`
 | filter | list | **Required** | See filter description
-| card_config | object | `None` | Extra options to pass down to the card rendering the result.
-| card | string | `entities` | Card to use to render the result. Follows same rules as card type.
+| card | object | `{type: "entities"}` | Extra options to pass down to the card rendering the result.
 
 Filter options:
 
