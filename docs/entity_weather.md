@@ -51,3 +51,5 @@ These weather conditions are included in our translation files and also show the
 | sunny | Sunshine
 | windy | Wind
 | windy-variant | Wind and clouds
+
+This means that the `weather` platforms don't need to support languages.
