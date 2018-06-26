@@ -25,7 +25,7 @@ These cards are WIP and things may change.
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | type | string | **Required** | `entity-filter`
-| filter | list | **Required** | See filter description
+| filter | list | **Required** | The filter can either be specified as YAML, as described in the Filter options, or as a list of Python dicts.  
 | card_config | object | `None` | Extra options to pass down to the card rendering the result.
 | card | string | `entities` | Card to use to render the result. Follows same rules as card type.
 
