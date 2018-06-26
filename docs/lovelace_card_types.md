@@ -19,6 +19,7 @@ These cards are WIP and things may change.
 | type | string | **Required** | `entities`
 | entities | list | **Required** | Entity id's
 | title | string | Optional | Card title
+| show_header_toggle | boolean | true | Button to turn on/off all entities 
 
 ## Entity filter
 
