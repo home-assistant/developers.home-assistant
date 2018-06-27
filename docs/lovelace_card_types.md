@@ -84,12 +84,38 @@ Filter options:
 | type | string | **Required** | `media-control`
 | entity | string | **Required** | Entity id of `media_player` domain
 
+## Picture elements
+
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| type | string | **Required** | `picture-elements`
+| image | string | **Required** | URL of an image
+| elements | list | **Required** | List of elements
+
+Element types:
+
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| type | string | **Required** | `picture-elements`
+| entity | string | **Required** | Entity_id
+| style | object | **Required** | See "Style options"
+| action | string | dialog | Set to `toggle` to change state
+
+Style options:
+
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| left | string | **Required** | Position from left, `25%`
+| top | string | **Required** | Position from top, `50%`
+| ... | string | inherit | ...
+| `--paper-item-icon-color` | string | inherit | Badge-icon off-color
+
 ## Picture glance
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | type | string | **Required** | `picture-glance`
-| image | string | **Required** | URL of an image.
+| image | string | **Required** | URL of an image
 | entities | list | **Required** | Entity id's
 | title | string | Optional | Card title
 
