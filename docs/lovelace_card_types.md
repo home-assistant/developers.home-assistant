@@ -91,6 +91,7 @@ Filter options:
 | type | string | **Required** | `picture-elements`
 | image | string | **Required** | URL of an image
 | elements | list | **Required** | List of elements
+| title | string | Optional | Card title
 
 Element types:
 
@@ -101,14 +102,14 @@ Element types:
 | style | object | **Required** | See "Style options"
 | action | string | dialog | Set to `toggle` to change state
 
-Style options:
+Style options (CSS):
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | left | string | **Required** | Position from left, `25%`
 | top | string | **Required** | Position from top, `50%`
 | ... | string | inherit | ...
-| `--paper-item-icon-color` | string | inherit | Badge-icon off-color
+| "--paper-item-icon-color" | string | inherit | Badge-icon off-color, `green`
 
 ## Picture glance
 
