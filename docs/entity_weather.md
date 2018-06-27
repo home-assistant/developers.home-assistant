@@ -11,7 +11,7 @@ sidebar_label: Weather
 | ---- | ---- | ------- | -----------
 | state | string | **Required** | The current weather condition.
 | temperature | float | **Required** | The current temperature in °C or °F.
-| air_pressure | float | `None` | The current air pressure in hPa.
+| pressure | float | `None` | The current air pressure in hPa or inHg.
 | humidity | float | `None` | The current humidity in %.
 | visibility | float | `None` | The current visibility in km or mi.
 | wind_speed | float | `None` | The current wind speed in km/h or mi/h.
