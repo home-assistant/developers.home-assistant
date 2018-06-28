@@ -12,6 +12,13 @@ These cards are WIP and things may change.
 | type | string | **Required** | `camera-preview`
 | entity | string | **Required** | Entity id of `camera` domain
 
+## Column
+
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| type | string | **Required** | `column`
+| cards | list | **Required** | List of cards
+
 ## Entities
 
 | Name | Type | Default | Description
@@ -97,10 +104,24 @@ Element types:
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| type | string | **Required** | `picture-elements`
-| entity | string | **Required** | Entity_id
+| type | string | **Required** | `state-badge`
+| entity | string | **Required** | Entity id
 | style | object | **Required** | See "Style options"
 | action | string | dialog | Set to `toggle` to change state
+
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| type | string | **Required** | `state-text`
+| entity | string | **Required** | Entity id
+| style | object | **Required** | See "Style options"
+
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| type | string | **Required** | `service button`
+| service | object | **Required** | `{ 'domain': 'light', 'service': 'turn_on', 'data': {'entity_id': 'light.floor'}}`
+| style | object | **Required** | See "Style options"
+| text | string | optional | Text on button
+
 
 Style options (CSS):
 
@@ -126,6 +147,13 @@ Style options (CSS):
 | ---- | ---- | ------- | -----------
 | type | string | **Required** | `plant-status`
 | entity | string | **Required** | Entity id of `plant` domain
+
+## Row
+
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| type | string | **Required** | `row`
+| cards | list | **Required** | List of cards
 
 ## Weather forecast
 
