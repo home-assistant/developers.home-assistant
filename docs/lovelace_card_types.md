@@ -66,6 +66,8 @@ Filter options:
 | ---- | ---- | ------- | -----------
 | type | string | **Required** | `history-graph`
 | entity | string | **Required** | Entity id of `history_graph` domain
+| hours_to_show | integer | 24 | Hours to show
+| refresh_interval | integer | 0 | Refresh interval in seconds
 
 ## Iframe
 
@@ -120,7 +122,7 @@ Element types:
 | type | string | **Required** | `service-button`
 | service | object | **Required** | `{'domain': 'light', 'service': 'turn_on', 'data': {'entity_id': 'light.floor'}}`
 | style | object | **Required** | See "Style options"
-| text | string | optional | Text on button
+| title | string | optional | Button label
 
 
 Style options (CSS):
