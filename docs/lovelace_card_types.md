@@ -44,14 +44,6 @@ Filter options:
 | state | string | Optional | Match entities that match state. Note, in YAML, make sure you wrap it in quotes to make sure it is parsed as a string.
 | entity_id | string | Optional | Filter entities by id, supports wildcards (`*living_room*`)
 
-## Entity picture
-
-| Name | Type | Default | Description
-| ---- | ---- | ------- | -----------
-| type | string | **Required** | `entity-picture`
-| image | string | **Required** | URL of an image.
-| entity | string | **Required** | Entity id to control via picture.
-
 ## Glance
 
 | Name | Type | Default | Description
@@ -133,6 +125,16 @@ Style options (CSS):
 | top | string | **Required** | Position from top, `50%`
 | ... | string | inherit | ...
 | "--paper-item-icon-color" | string | inherit | Badge-icon off-color, `green`
+
+## Picture entity
+
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| type | string | **Required** | `picture-entity`
+| entity | string | **Required** | Entity id to control via picture.
+| image | string | optional| URL of an image.
+| state_image | object | optional| `{'on': '/on.png', ... 'default': '/default.png'}`
+| title | string | Optional | Card title
 
 ## Picture glance
 
