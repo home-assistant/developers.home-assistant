@@ -117,8 +117,8 @@ Element types:
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| type | string | **Required** | `service button`
-| service | object | **Required** | `{ 'domain': 'light', 'service': 'turn_on', 'data': {'entity_id': 'light.floor'}}`
+| type | string | **Required** | `service-button`
+| service | object | **Required** | `{'domain': 'light', 'service': 'turn_on', 'data': {'entity_id': 'light.floor'}}`
 | style | object | **Required** | See "Style options"
 | text | string | optional | Text on button
 
