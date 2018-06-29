@@ -1,0 +1,150 @@
+{
+  "version-0.72-Architecture": {
+    "Architecture": [
+      "version-0.72-architecture_index",
+      "version-0.72-architecture_components",
+      "version-0.72-architecture_entities",
+      "version-0.72-architecture_hassio"
+    ],
+    "Entities": [
+      "version-0.72-entity_index",
+      "version-0.72-entity_alarm_control_panel",
+      "version-0.72-entity_binary_sensor",
+      "version-0.72-entity_climate",
+      "version-0.72-entity_cover",
+      "version-0.72-entity_fan",
+      "version-0.72-entity_light",
+      "version-0.72-entity_lock",
+      "version-0.72-entity_media_player",
+      "version-0.72-entity_remote",
+      "version-0.72-entity_sensor",
+      "version-0.72-entity_switch",
+      "version-0.72-entity_vacuum",
+      "version-0.72-entity_weather"
+    ],
+    "Authentication": [
+      "version-0.72-auth_index",
+      "version-0.72-auth_api",
+      "version-0.72-auth_auth_provider"
+    ],
+    "Configuration.yaml": [
+      "version-0.72-configuration_yaml_index"
+    ],
+    "Config Entries": [
+      "version-0.72-config_entries_index",
+      "version-0.72-config_entries_config_flow_handler"
+    ],
+    "Data Entry Flow": [
+      "version-0.72-data_entry_flow_index"
+    ],
+    "Entity Registry": [
+      "version-0.72-entity_registry_index"
+    ]
+  },
+  "version-0.72-Extending Frontend": {
+    "Frontend": [
+      "version-0.72-frontend_index",
+      "version-0.72-frontend_architecture",
+      "version-0.72-frontend_development"
+    ],
+    "Extending the frontend": [
+      "version-0.72-frontend_add_card",
+      "version-0.72-frontend_add_more_info",
+      "version-0.72-frontend_add_websocket_api"
+    ],
+    "Custom UI": [
+      "version-0.72-frontend_creating_custom_ui",
+      "version-0.72-frontend_creating_custom_panels"
+    ],
+    "Lovelace UI": [
+      "version-0.72-lovelace_index",
+      "version-0.72-lovelace_card_types",
+      "version-0.72-lovelace_custom_card"
+    ]
+  },
+  "version-0.72-Extending HASS": {
+    "Developing a feature": [
+      "version-0.72-development_index",
+      "version-0.72-development_environment",
+      "version-0.72-development_submitting",
+      "version-0.72-development_checklist",
+      "version-0.72-development_guidelines",
+      "version-0.72-development_testing",
+      "version-0.72-development_catching_up",
+      "version-0.72-development_validation",
+      "version-0.72-development_typing"
+    ],
+    "Development 101": [
+      "version-0.72-dev_101_index",
+      "version-0.72-dev_101_hass",
+      "version-0.72-dev_101_events",
+      "version-0.72-dev_101_states",
+      "version-0.72-dev_101_services",
+      "version-0.72-dev_101_config"
+    ],
+    "Creating Platforms": [
+      "version-0.72-creating_platform_index",
+      "version-0.72-creating_platform_code_review",
+      "version-0.72-creating_platform_example_light",
+      "version-0.72-creating_platform_example_sensor"
+    ],
+    "Creating Components": [
+      "version-0.72-creating_component_index",
+      "version-0.72-creating_component_code_review",
+      "version-0.72-creating_component_deps_and_reqs",
+      "version-0.72-creating_component_events",
+      "version-0.72-creating_component_states",
+      "version-0.72-creating_component_discovery",
+      "version-0.72-creating_component_loading",
+      "version-0.72-creating_component_generic_discovery"
+    ]
+  },
+  "version-0.72-Misc": {
+    "Introduction": [
+      "version-0.72-misc"
+    ],
+    "External API": [
+      "version-0.72-external_api_rest",
+      "version-0.72-external_api_rest_python",
+      "version-0.72-external_api_websocket",
+      "version-0.72-external_api_server_sent_events"
+    ],
+    "Internationalization": [
+      "version-0.72-internationalization_index",
+      "version-0.72-internationalization_backend_localization",
+      "version-0.72-internationalization_custom_component_localization",
+      "version-0.72-internationalization_translation"
+    ],
+    "Intents": [
+      "version-0.72-intent_index",
+      "version-0.72-intent_firing",
+      "version-0.72-intent_handling",
+      "version-0.72-intent_conversation",
+      "version-0.72-intent_builtin"
+    ],
+    "asyncio": [
+      "version-0.72-asyncio_index",
+      "version-0.72-asyncio_101",
+      "version-0.72-asyncio_categorizing_functions",
+      "version-0.72-asyncio_working_with_async"
+    ],
+    "Hass.io": [
+      "version-0.72-hassio_debugging",
+      "version-0.72-hassio_hass"
+    ],
+    "Hass.io Add-Ons": [
+      "version-0.72-hassio_addon_index",
+      "version-0.72-hassio_addon_tutorial",
+      "version-0.72-hassio_addon_config",
+      "version-0.72-hassio_addon_communication",
+      "version-0.72-hassio_addon_testing",
+      "version-0.72-hassio_addon_publishing",
+      "version-0.72-hassio_addon_presentation",
+      "version-0.72-hassio_addon_repository"
+    ],
+    "Maintainer docs": [
+      "version-0.72-maintenance",
+      "version-0.72-releasing"
+    ]
+  }
+}
