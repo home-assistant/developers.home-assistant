@@ -56,6 +56,22 @@ $ nvm use
 $ script/develop
 ```
 
+Make sure you have cache disabled and correct settings to avoid stale content:
+
+> Instructions are for Google Chrome
+
+1. Disable cache by ticking the box in `Network` > `Disable cache`
+
+<p class='img'>
+<img src='/img/en/development/disable-cache.png' />
+</p>
+
+2. Enable Bypass for network in `Application` > `Service Workers` > `Bypass for network`
+
+<p class='img'>
+<img src='/img/en/development/bypass-for-network.png' />
+</p>
+
 ## Creating pull requests
 
 If you're planning on issuing a PR back to the Home Assistant codebase you need to fork the polymer project and add your fork as a remote to the Home Assistant Polymer repo.
