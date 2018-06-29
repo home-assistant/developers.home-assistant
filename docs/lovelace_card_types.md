@@ -49,7 +49,7 @@ Filter options:
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | type | string | **Required** | `glance`
-| entities | list | **Required** | Entity id's
+| entities | list | **Required** | Entity id's or `{'entity': ''entity_id', 'title': 'title'}`
 | title | string | Optional | Card title
 
 ## History graph
