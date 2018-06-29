@@ -56,6 +56,22 @@ $ nvm use
 $ script/develop
 ```
 
+Make sure you have cache disabled and correct settings to avoid stale content:
+
+> Instructions are for Google Chrome
+
+1. Disable cache by ticking the box in `Network` > `Disable cache`
+
+<p class='img'>
+<img src='/img/en/development/disable-cache.png' />
+</p>
+
+2. Enable Bypass for network in `Application` > `Service Workers` > `Bypass for network`
+
+<p class='img'>
+<img src='/img/en/development/bypass-for-network.png' />
+</p>
+
 ## Creating pull requests
 
 If you're planning on issuing a PR back to the Home Assistant codebase you need to fork the polymer project and add your fork as a remote to the Home Assistant Polymer repo.
@@ -84,17 +100,3 @@ $ hass --skip-pip
 ```
 
 [hass-polymer]: https://github.com/home-assistant/home-assistant-polymer
-
-## Troubleshooting
-
-If you've set up everything according to the documentation, but it still looks like your frontend isn't using the correct source, you might need to check and change a few things:
-
-> Instructions are for Google Chrome
-
-1. Disable cache by ticking the box in `Network` > `Disable cache`
-
-<img width="367" alt="disable-cache" src="https://user-images.githubusercontent.com/7738048/42022916-cfb9bc8c-7abe-11e8-82d3-ca125c949766.png">
-
-2. Enable Bypass for network in `Application` > `Service Workers` > `Bypass for network` or `Unregister` the service worker
-
-<img width="592" alt="service-worker" src="https://user-images.githubusercontent.com/7738048/42022917-cfd5d6e2-7abe-11e8-98c2-51b35e057c65.png">
