@@ -16,6 +16,8 @@ const CWD = process.cwd();
 const siteConfig = require(CWD + '/siteConfig.js');
 const versions = require(CWD + '/versions.json');
 
+const versionUrl = (language, version) => `${siteConfig.baseUrl}docs/${language}/${version}/architecture_index.html`
+
 class Versions extends React.Component {
   render() {
     const latestVersion = versions[0];
@@ -26,40 +28,40 @@ class Versions extends React.Component {
             <header className="postHeader">
               <h2>{siteConfig.title + ' Versions'}</h2>
             </header>
-            <p>New versions of this project are released every so often.</p>
+            <p>New versions of this project are released every 2 weeks.</p>
             <h3 id="latest">Current version (Stable)</h3>
             <table className="versions">
               <tbody>
                 <tr>
                   <th>{latestVersion}</th>
                   <td>
-                    <a href={''}>Documentation</a>
+                    <a href={`${siteConfig.baseUrl}${this.props.language}/`}>Documentation</a>
                   </td>
                   <td>
-                    <a href={''}>Release Notes</a>
+                    <a href={`https://www.home-assistant.io/latest-release-notes/`}>Release Notes</a>
                   </td>
                 </tr>
               </tbody>
             </table>
-            <p>
+            {/* <p>
               This is the version that is configured automatically when you
               first install this project.
-            </p>
+            </p> */}
             <h3 id="rc">Pre-release versions</h3>
             <table className="versions">
               <tbody>
                 <tr>
-                  <th>master</th>
+                  <th>next</th>
                   <td>
-                    <a href={''}>Documentation</a>
+                    <a href={versionUrl(this.props.language, 'next')}>Documentation</a>
                   </td>
                   <td>
-                    <a href={''}>Release Notes</a>
+                    <a href={'https://rc.home-assistant.io'}>Release Notes</a>
                   </td>
                 </tr>
               </tbody>
             </table>
-            <p>Other text describing this section.</p>
+            {/* <p>Other text describing this section.</p> */}
             <h3 id="archive">Past Versions</h3>
             <table className="versions">
               <tbody>
@@ -71,18 +73,18 @@ class Versions extends React.Component {
                         <td>
                           <a href={''}>Documentation</a>
                         </td>
-                        <td>
+                        {/* <td>
                           <a href={''}>Release Notes</a>
-                        </td>
+                        </td> */}
                       </tr>
                     )
                 )}
               </tbody>
             </table>
-            <p>
+            {/* <p>
               You can find past versions of this project{' '}
               <a href="https://github.com/"> on GitHub </a>.
-            </p>
+            </p> */}
           </div>
         </Container>
       </div>
