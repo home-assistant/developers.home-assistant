@@ -100,6 +100,8 @@ views:
 
 Resources to load in Lovelace can be imported as a JS script, an HTML import or as a JS module import. Below is an example of a custom card using JS modules that does all the fancy things.
 
+![Screenshot of the wired card](/img/en/frontend/lovelace-ui-custom-card-screenshot.png)
+
 Create a new file in your Home Assistant config dir as `<config>/www/wired-cards.js` and put in the following contents:
 
 ```js
