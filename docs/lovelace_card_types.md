@@ -26,7 +26,7 @@ These cards are WIP and things may change.
 | type | string | **Required** | `entities`
 | entities | list | **Required** | Entity id's
 | title | string | Optional | Card title
-| show_header_toggle | boolean | true | Button to turn on/off all entities 
+| show_header_toggle | boolean | true | Button to turn on/off all entities
 
 ## Entity filter
 
@@ -34,7 +34,7 @@ These cards are WIP and things may change.
 | ---- | ---- | ------- | -----------
 | type | string | **Required** | `entity-filter`
 | filter | list | **Required** | See filter description
-| card | object | `{type: "entities"}` | Extra options to pass down to the card rendering the result.
+| card | object | `{'type': 'entities'}` | Extra options to pass down to the card rendering the result.
 
 Filter options:
 
@@ -101,7 +101,7 @@ Element types:
 | type | string | **Required** | `state-badge`
 | entity | string | **Required** | Entity id
 | style | object | **Required** | See "Style options"
-| action | string | dialog | Set to `toggle` to change state
+| tap_action | string | more-info | Set to `toggle` to change state
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
