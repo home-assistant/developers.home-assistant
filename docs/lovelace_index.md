@@ -27,11 +27,12 @@ The old user interface relied solely on the state machine. This caused trouble a
 Create a new file `<config>/ui-lovelace.yaml` and add the following content:
 
 ```yaml
-name: My Awesome Home
+title: My Awesome Home
 views:
-    # The name of a view will be used as tab title.
-    # Might be used for other things in the future.
-  - name: Example
+    # View tab title.
+  - title: Example
+    # Optional unique id for direct access /lovelace/${id}
+    id: example
     # Each view can have a different theme applied. Theme should be defined in the frontend.
     theme: dark-mode
     # The cards to show on this view.
@@ -57,10 +58,10 @@ views:
         card_config:
           title: Input booleans that are on
 
-    # Specify a tab_icon if you want the view tab to be an icon.
-  - tab_icon: mdi:home-assistant
-    # Name of the view. Will be used as the tooltip for tab icon
-    name: Second view
+    # Specify a tab icon if you want the view tab to be an icon.
+  - icon: mdi:home-assistant
+    # Title of the view. Will be used as the tooltip for tab icon
+    title: Second view
     cards:
       - type: entities
         title: Lots of Kitchen AC

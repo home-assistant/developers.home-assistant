@@ -11,6 +11,38 @@ You're not just limited to the cards that we decided to include in the Lovelace 
 - Home Assistant will set the `hass` property when the state of Home Assistant changes (frequent). Whenever the state changes, the component will have to update itself to represent the latest state.
 - Home Assistant will call `getCardSize()` to request the size of the card. Size of the card is used for the automatic distribution of cards across columns. Both `config` and `hass` properties will be available. Defaults to `1` if function is not defined.
 
+You define your custom card as a [custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements). It's up to you to decide how to render your DOM inside your element. You can use Polymer, Angular, Preact or any other popular framework (except for React – [more info here](https://custom-elements-everywhere.com/)).
+
+```js
+const element = document.createElement('some-custom-card');
+```
+
+Home Assistant will call `setConfig(config)` when the configuration changes (rare). If you throw an exception if the configuration is invalid, an error card will render to notify the user.
+
+```js
+try {
+  element.setConfig(config);
+} catch (err) {
+  showErrorCard(err.message, config);
+}
+```
+
+Home Assistant will set the `hass` property when the state of Home Assistant changes (frequent). Whenever the state changes, the component will have to update itself to represent the latest state.
+
+```js
+element.hass = hass;
+```
+
+Your card can define a `getCardSize` method that returns the size of your card as a number. A height of 1 is equivalent to 50 pixels. This will help Home Assistant distribute the cards evenly over the columns. A card size of `1` will be assumed if the method is not defined.
+
+```js
+if ('getCardSize' in element) {
+  return element.getCardSize();
+} else {
+  return 1;
+}
+```
+
 ## Defining your card
 
 Create a new file in your Home Assistant config dir as `<config>/www/content-card-example.js` and put in the following contents:
@@ -133,16 +165,23 @@ class WiredToggleCard extends LitElement {
     `;
   }
 
-  _toggle(state) {
-    this.hass.callService('homeassistant', 'toggle', {
-      entity_id: state.entity_id
-    });
+  setConfig(config) {
+    if (!config.entities) {
+      throw new Error('You need to define entities');
+    }
+    this.config = config;
   }
 
   // The height of your card. Home Assistant uses this to automatically
   // distribute all cards over the available columns.
   getCardSize() {
     return this.config.entities.length + 1;
+  }
+
+  _toggle(state) {
+    this.hass.callService('homeassistant', 'toggle', {
+      entity_id: state.entity_id
+    });
   }
 }
 customElements.define('wired-toggle-card', WiredToggleCard);
