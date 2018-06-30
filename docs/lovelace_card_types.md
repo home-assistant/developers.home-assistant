@@ -12,13 +12,6 @@ These cards are WIP and things may change.
 | type | string | **Required** | `camera-preview`
 | entity | string | **Required** | Entity id of `camera` domain
 
-## Column
-
-| Name | Type | Default | Description
-| ---- | ---- | ------- | -----------
-| type | string | **Required** | `column`
-| cards | list | **Required** | List of cards
-
 ## Entities
 
 | Name | Type | Default | Description
@@ -60,6 +53,13 @@ Filter options:
 | entity | string | **Required** | Entity id of `history_graph` domain
 | hours_to_show | integer | 24 | Hours to show
 | refresh_interval | integer | 0 | Refresh interval in seconds
+
+## Horizontal stack
+
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| type | string | **Required** | `horizontal-stack`
+| cards | list | **Required** | List of cards
 
 ## Iframe
 
@@ -152,11 +152,11 @@ Style options (CSS):
 | type | string | **Required** | `plant-status`
 | entity | string | **Required** | Entity id of `plant` domain
 
-## Row
+## Vertical stack
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| type | string | **Required** | `row`
+| type | string | **Required** | `vertical-stack`
 | cards | list | **Required** | List of cards
 
 ## Weather forecast
