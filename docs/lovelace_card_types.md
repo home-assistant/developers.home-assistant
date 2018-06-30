@@ -101,18 +101,25 @@ Element types:
 | type | string | **Required** | `state-badge`
 | entity | string | **Required** | Entity id
 | style | object | **Required** | See "Style options"
+
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| type | string | **Required** | `state-icon`
+| entity | string | **Required** | Entity id
+| style | object | **Required** | See "Style options"
 | tap_action | string | more-info | Set to `toggle` to change state
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| type | string | **Required** | `state-text`
+| type | string | **Required** | `state-label`
 | entity | string | **Required** | Entity id
 | style | object | **Required** | See "Style options"
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | type | string | **Required** | `service-button`
-| service | object | **Required** | `{'domain': 'light', 'service': 'turn_on', 'data': {'entity_id': 'light.floor'}}`
+| service | string | **Required** | `light.turn_on`
+| service_data | object | optional | `{'entity_id': 'light.floor'}`
 | style | object | **Required** | See "Style options"
 | title | string | optional | Button label
 
