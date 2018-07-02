@@ -17,17 +17,24 @@ These cards are WIP and things may change.
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | type | string | **Required** | `entities`
-| entities | list | **Required** | Entity id's
+| entities | list | **Required** | Entity id's or entity objects (see description below)
 | title | string | Optional | Card title
 | show_header_toggle | boolean | true | Button to turn on/off all entities
+
+Entity object:
+
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| entity | Entity ID | **Required** | The Entity ID to show
+| name | string | **Optional** | Override the name of the entity in the card.
 
 ## Entity filter
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | type | string | **Required** | `entity-filter`
-| filter | list | **Required** | See filter description
-| card | object | `{'type': 'entities'}` | Extra options to pass down to the card rendering the result.
+| filter | list | **Required** | See filter description below.
+| card | object | **Optional** | A card configuration to use to render the results. See any other card on this page.
 
 Filter options:
 
@@ -42,8 +49,15 @@ Filter options:
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | type | string | **Required** | `glance`
-| entities | list | **Required** | Entity id's or `{'entity': ''entity_id', 'title': 'title'}`
+| entities | list | **Required** | Entity id's or entity objects (see description below)
 | title | string | Optional | Card title
+
+Entity object:
+
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| entity | Entity ID | **Required** | The Entity ID to show
+| name | string | **Optional** | Override the name of the entity in the card.
 
 ## History graph
 
