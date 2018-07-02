@@ -115,6 +115,11 @@
       "internationalization_custom_component_localization",
       "internationalization_translation"
     ],
+    "Documentation": [
+      "documentation_index",
+      "documentation_standards",
+      "documentation_create_page"
+    ],
     "Intents": [
       "intent_index",
       "intent_firing",
