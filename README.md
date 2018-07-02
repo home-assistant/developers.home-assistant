@@ -10,12 +10,18 @@ Documentation is build using [Docusaurus](https://docusaurus.io/docs/en/doc-mark
 
 ### Preparing environment
 
-Running the documentation locally requires [NodeJS](https://nodejs.org/en/) and [Yarn](https://yarnpkg.com/) to be installed. Inside a cloned fork of this repository, run `script/setup`.
+Running the documentation locally requires [NodeJS](https://nodejs.org/en/) and [Yarn](https://yarnpkg.com/) to be installed. Inside a cloned fork of this repository, run:
+
+```bash
+$ script/setup
+```
+
+This will install [docusaurus](https://www.npmjs.com/package/docusaurus) amongst other things. 
 
 ### Running docs locally
 
 ```bash
-script/server
+$ script/server
 ```
 
 It will start a server at [localhost:3000](http://localhost:3000).
