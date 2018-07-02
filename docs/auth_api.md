@@ -12,10 +12,9 @@ This page will describe the steps required to fetch an access token for a user a
 A client needs to be created inside Home Assistant before a client can request users to authorize it or fetch a new access token. The only way currently to create a client is programmatically:
 
 ```python
-client = await hass.auth.async_create_client(
+client = await hass.auth.async_get_or_create_client(
     'Example client',
-    redirect_uris=['http://www.example.com/hass_callback'],
-    no_secret=True,
+    redirect_uris=['http://www.example.com/hass_callback']
 )
 print(client.id)
 ```
