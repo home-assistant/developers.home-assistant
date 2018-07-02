@@ -14,7 +14,7 @@ For Home Assistant 0.73, I've sprinted together with [@awarecan] to ensure that 
  - If you opt-in for the new system, the API password will no longer work.
  - To not force a hard break with the ecosystem around Home Assistant, a temporary legacy mode has been added to turn API password support back on. This will be removed in the future.
 
-The system is not yet ready for mainstream consumption, we still need to add Hass.io support and a user interface to help guiding the user to create their first user account and to manage users. You can follow (and join!) the work to be done [here](https://github.com/home-assistant/home-assistant/issues?q=is%3Aissue+is%3Aopen+label%3Aauth).
+**The system is not yet ready for mainstream consumption**, we still need to add Hass.io support and a user interface to help guiding the user to create their first user account and to manage users. You can follow (and join!) the work to be done [here](https://github.com/home-assistant/home-assistant/issues?q=is%3Aissue+is%3Aopen+label%3Aauth).
 
 If you're interested in trying it out, keep on reading.
 
