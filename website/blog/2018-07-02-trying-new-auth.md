@@ -46,6 +46,6 @@ Next step is to create users. Open a terminal and navigate to your Home Assistan
 
 If you restart Home Assistant and navigate to the frontend, you'll be prompted with a new login screen. If you enabled both auth providers, you will first have to pick which auth provider to use for authentication.
 
-Once logged in, the frontend will store the access and a refresh token. The access token expires every 30 minutes and whenever Home Assistant restarts. The fronend will automatically fetch a new access token using the stored refresh token. We're using the OAuth2 standard for this. [More info in the docs](auth_api.md).
+Once logged in, the frontend will store the access and a refresh token. The access token expires every 30 minutes and whenever Home Assistant restarts. The fronend will automatically fetch a new access token using the stored refresh token. We're using the OAuth2 standard for this. [More info in the docs](/docs/en/auth_api.html).
 
 [@awarecan]: https://github.com/awarecan
