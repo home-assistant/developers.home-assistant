@@ -70,6 +70,13 @@ class ContentCardExample extends HTMLElement {
     `;
   }
 
+  setConfig(config) {
+    if (!config.entity) {
+      throw new Error('You need to define an entity');
+    }
+    this.config = config;
+  }
+
   // The height of your card. Home Assistant uses this to automatically
   // distribute all cards over the available columns.
   getCardSize() {
