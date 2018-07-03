@@ -72,3 +72,12 @@ _LOGGER.error("No route to device: %s", self._resource)
 
 Don't print out wrong API keys, tokens, usernames, or passwords.
 Also note that `_LOGGER.info` is reserved for the core, use `_LOGGER.debug` in anything else.
+
+### Ordering of imports
+
+Instead of order the imports manually, use [`isort`](https://github.com/timothycrosley/isort).
+
+```bash
+$ pip3 install isort
+$ isort homeassistant/components/sensor/fixer.py 
+```
