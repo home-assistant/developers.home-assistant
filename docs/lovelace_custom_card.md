@@ -92,7 +92,7 @@ resources:
 views:
 - name: Example
   cards:
-  - type: "custom:custom-card-example"
+  - type: "custom:content-card-example"
     entity: input_boolean.switch_tv
 ```
 
