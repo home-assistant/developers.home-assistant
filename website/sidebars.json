@@ -58,7 +58,6 @@
     ],
     "Lovelace UI": [
       "lovelace_index",
-      "lovelace_card_types",
       "lovelace_custom_card"
     ]
   },
