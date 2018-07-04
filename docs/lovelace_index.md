@@ -14,6 +14,8 @@ The Lovelace UI is:
  - **Extremely extensible**. It's based on the web standard [custom elements](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements). Don't like the built-in cards? Make your own! Custom cards are treated the same as built-in cards and are configured the same way. [Check the docs.](lovelace_custom_card.md)
  - **Making the backend faster**. With Lovelace, the backend will no longer need to maintain entities like groups for the sole purpose of showing them on the frontend.
 
+Documentation is still in flux. Latest card descriptions can currently be found [here](https://github.com/ciotlosm/docs-lovelace).
+
 ## How it works
 
 The old user interface relied solely on the state machine. This caused trouble as it meant that the state machine was now not only the source for device states, but also for user interface configuration. With Lovelace, we're taking a completely different approach. All user interface configuration will live in a seperate file, controlled by the user.
@@ -95,6 +97,4 @@ This is the very very early version aimed at gathering feedback. Discussion and 
 
 ## Change log
 
-**Home Assistant 0.72**
-
-- Initial release of the Lovelace UI.
+[See here](https://github.com/ciotlosm/docs-lovelace/blob/master/changelog.md)
