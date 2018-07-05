@@ -5,7 +5,7 @@ authorFBID: 297400035
 title: Trying the new auth system
 ---
 
-In Home Assistant 0.69 we introduced the foundation for a new [authentication API](auth_index.md). We're switching from a single hardcoded API password to a refresh/access token based authentication system (powered by OAuth2).
+In Home Assistant 0.69 we introduced the foundation for a new [authentication API](/docs/en/auth_index.html). We're switching from a single hardcoded API password to a refresh/access token based authentication system (powered by OAuth2).
 
 For Home Assistant 0.73, I've sprinted together with [@awarecan] to ensure that we have reached a minimum viable product of the auth system:
 
