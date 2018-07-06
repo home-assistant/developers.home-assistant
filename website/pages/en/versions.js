@@ -71,7 +71,7 @@ class Versions extends React.Component {
                       <tr>
                         <th>{version}</th>
                         <td>
-                          <a href={''}>Documentation</a>
+                          <a href={versionUrl(this.props.language, version)}>Documentation</a>
                         </td>
                         {/* <td>
                           <a href={''}>Release Notes</a>
