@@ -1,23 +1,18 @@
 ---
-title: "Custom Cards"
+title: "Lovelace: Custom Cards"
 ---
 
-You're not just limited to the cards that we decided to include in the Lovelace UI. You can build and use your own!
+[Lovelace](https://www.home-assistant.io/lovelace/) is our new approach to defining your user interface for Home Assistant. We offer a lot of built-in cards, but you're not just limited to the ones that we decided to include in the Lovelace UI. You can build and use your own!
 
 ## API
 
-- You define your custom card as a [custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements). It's up to you to decide how to render your DOM inside your element. You can use Polymer, Angular, Preact or any other popular framework (except for React – more info [here](https://custom-elements-everywhere.com/)).
-- Home Assistant will set the `config` property when the configuration changes (rare).
-- Home Assistant will set the `hass` property when the state of Home Assistant changes (frequent). Whenever the state changes, the component will have to update itself to represent the latest state.
-- Home Assistant will call `getCardSize()` to request the size of the card. Size of the card is used for the automatic distribution of cards across columns. Both `config` and `hass` properties will be available. Defaults to `1` if function is not defined.
-
-You define your custom card as a [custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements). It's up to you to decide how to render your DOM inside your element. You can use Polymer, Angular, Preact or any other popular framework (except for React – [more info here](https://custom-elements-everywhere.com/)).
+You define your custom card as a [custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements). It's up to you to decide how to render your DOM inside your element. You can use Polymer, Angular, Preact or any other popular framework (except for React – [more info on React here](https://custom-elements-everywhere.com/#react)).
 
 ```js
 const element = document.createElement('some-custom-card');
 ```
 
-Home Assistant will call `setConfig(config)` when the configuration changes (rare). If you throw an exception if the configuration is invalid, an error card will render to notify the user.
+Home Assistant will call `setConfig(config)` when the configuration changes (rare). If you throw an exception if the configuration is invalid, Lovelace will render an error card to notify the user.
 
 ```js
 try {

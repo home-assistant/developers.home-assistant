@@ -53,12 +53,9 @@
       "frontend_add_websocket_api"
     ],
     "Custom UI": [
+      "lovelace_custom_card",
       "frontend_creating_custom_ui",
       "frontend_creating_custom_panels"
-    ],
-    "Lovelace UI": [
-      "lovelace_index",
-      "lovelace_custom_card"
     ]
   },
   "Extending HASS": {

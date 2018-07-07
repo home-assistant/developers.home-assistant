@@ -116,7 +116,7 @@
     "internationalization_custom_component_localization": "Custom Component Localization",
     "internationalization_index": "Internationalization",
     "internationalization_translation": "Translation",
-    "lovelace_custom_card": "Custom Cards",
+    "lovelace_custom_card": "Lovelace: Custom Cards",
     "lovelace_index": "Lovelace UI",
     "maintenance": "Maintenance",
     "misc": "Miscellaneous",
@@ -133,7 +133,6 @@
     "Entity Registry": "Entity Registry",
     "Extending the frontend": "Extending the frontend",
     "Custom UI": "Custom UI",
-    "Lovelace UI": "Lovelace UI",
     "Developing a feature": "Developing a feature",
     "Development 101": "Development 101",
     "Creating Platforms": "Creating Platforms",
@@ -144,7 +143,8 @@
     "Intents": "Intents",
     "asyncio": "asyncio",
     "Hass.io Add-Ons": "Hass.io Add-Ons",
-    "Maintainer docs": "Maintainer docs"
+    "Maintainer docs": "Maintainer docs",
+    "Lovelace UI": "Lovelace UI"
   },
   "pages-strings": {
     "Learn more using the [documentation on this site.](/test-site/docs/en/doc1.html)|no description given": "Learn more using the [documentation on this site.](/test-site/docs/en/doc1.html)",
