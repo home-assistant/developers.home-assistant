@@ -8,20 +8,23 @@ Multi-factor Authentication Modules are used in conjunction with [Authentication
 
 > We currently only support built-in mfa auth modules. Support for custom auth modules might arrive in the future.
 
-Multi-facor Auth modules are defined in `homeassistant/auth/modules/<name of module>.py`. The auth module will need to provide an implementation of the `AuthModule` class.
+Multi-facor Auth modules are defined in `homeassistant/auth/mfa_modules/<name of module>.py`. The auth module will need to provide an implementation of the `MultiFactorAuthModule` class.
 
-For an example of a fully implemented auth module, please see [insecure_example.py](https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/auth/modules/insecure_example.py).
+For an example of a fully implemented auth module, please see [insecure_example.py](https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/auth/mfa_modules/insecure_example.py).
 
-Auth modules shall extend the following methods of `AuthModule` class.
+Multi-factor Auth modules shall extend the following methods of `MultiFactorAuthModule` class.
 
 | method | Required | Description
 | ------ | -------- | -----------
 | `@property def input_schema(self)` | Yes | Return a schema defined the user input form.
 | `async def async_setup_user(self, user_id, **kwargs)` | Yes | Setup user for use this auth module
+| `async def async_depose_user(self, user_id)` | Yes | Remove user information from this auth module
 | `async def async_validation_flow(self, user_id, user_input)` | Yes | Given a user_id and user input, return valid user_id or raise InvalidAuth exception.
 | `async def async_initialize(self)` | No | Optional intialization callback.
 
 ## Workflow
+
+To use a MFA auth module, user has to be created first, then call `AuthManager.async_enable_user_mfa` to setup.
 
 > TODO: draw a diagram
 
@@ -48,4 +51,4 @@ In this example, user will first select from `homeassistant` or `legacy_api_pass
 
 ## Validation session
 
-Not like auth provider, auth module use session to manage the validation. After auth provider validated, auth module will create a validation session, include an experiation time and user_id from auth provider validate result. Auth moudle will not only verify the user input, and also verify the session is not experied. The validatoin session data storges in login flow instance.
+Not like auth provider, auth module use session to manage the validation. After auth provider validated, mfa module will create a validation session, include an experiation time and user_id from auth provider validate result. Mutli-factor auth moudle will not only verify the user input, and also verify the session is not experied. The validatoin session data storges in login flow instance.
