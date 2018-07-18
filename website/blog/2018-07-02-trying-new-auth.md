@@ -40,6 +40,8 @@ homeassistant:
 auth:
 ```
 
+> This rest of the instructions are no longer necessary in Home Assistant 0.74 or later.
+
 Next step is to create users. Open a terminal and navigate to your Home Assistant installation. The script for managing users is built into Home Assistant and can be invoked using `hass --script auth --config /path/to/config`.
 
 ![Screenshot showing the help output of the auth script](/img/en/blog/2018-07-experimental-auth/cli.png)
