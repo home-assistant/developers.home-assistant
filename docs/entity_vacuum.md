@@ -19,12 +19,14 @@ sidebar_label: Vacuum
 
 
 ## States
-`STATE_CLEANING`: The vacuum is currently cleaning.
-`STATE_DOCKED`: The vacuum is currently docked, it is assumed that docked can also mean charging.
-`STATE_PAUSED`: The vacuum was cleaning but was paused without returning to the dock.
-`STATE_IDLE`: The vacuum is not paused, not docked and does not have any errors.
-`STATE_RETURNING`: The vacuum is done cleaning and is currently returning to the dock, but not yet docked.
-`STATE_ERROR`: The vacuum encountered an error while cleaning, the error can be specified as a property on the entity.
+| State | Description
+| ----- | -----------
+| `STATE_CLEANING` | The vacuum is currently cleaning.
+| `STATE_DOCKED` | The vacuum is currently docked, it is assumed that docked can also mean charging.
+| `STATE_PAUSED` | The vacuum was cleaning but was paused without returning to the dock.
+| `STATE_IDLE` | The vacuum is not paused, not docked and does not have any errors.
+| `STATE_RETURNING` | The vacuum is done cleaning and is currently returning to the dock, but not yet docked.
+| `STATE_ERROR` | The vacuum encountered an error while cleaning, the error can be specified as a property on the entity.
 
 ## Methods
 
