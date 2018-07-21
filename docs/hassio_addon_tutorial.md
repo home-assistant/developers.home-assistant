@@ -57,6 +57,7 @@ CMD [ "/run.sh" ]
 ```bash
 echo Hello world!
 ```
+Make sure your editor is using UNIX-like line breaks (LF), not Dos/Windows (CRLF).
 
 ## Step 2: Installing and testing your add-on
 
