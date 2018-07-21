@@ -76,7 +76,7 @@ The return response will be an access token:
 
 Once you have an access token, you can make authenticated requests to the Home Assistant APIs.
 
-For the websocket connection, pass the access token in the [authentication message](http://localhost:3000/docs/en/external_api_websocket.html#authentication-phase).
+For the websocket connection, pass the access token in the [authentication message](https://developers.home-assistant.io/docs/en/external_api_websocket.html#authentication-phase).
 
 For HTTP requests, pass the token type and access token as the authorization header:
 
