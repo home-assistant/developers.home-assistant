@@ -6,7 +6,7 @@ Although we have a backwards compatible API, using the async core directly will 
 
 ## Interacting with the core
 
-[All methods in the Home Assistant core][dev-docs] are implemented in two flavors: an async version and a version to be called from other threads. The versions for other are merely wrappers that call the async version in a threadsafe manner using [the available async utilities][dev-docs-async].
+[All methods in the Home Assistant core][dev-docs] are implemented in two flavors: an async version and a version to be called from other threads. The versions for other are merely wrappers that call the async version in a threadsafe manner.
 
 So if you are making calls to the core (the hass object) from within a callback or coroutine, use the methods that start with async_. If you need to call an async_ function that is a coroutine, your task must also be a coroutine.
 
@@ -74,37 +74,33 @@ Sometimes it will happen that you’re in a thread and you want to call a functi
 In the following example, `say_hello` will schedule `async_say_hello` and block till the function has run and get the result back.
 
 ```python
-from homeassistant.util.async import run_callback_threadsafe
+from homeassistant.util.async_ import run_callback_threadsafe
 
 def say_hello(hass, target):
     return run_callback_threadsafe(
         hass.loop, async_say_hello, target).result()
 
-def async_say_hello(hass, target):
+async def async_say_hello(hass, target):
     return "Hello {}!".format(target)
 ```
 
-## Dealing with passed in functions
+## Calling sync functions from async
 
-If your code takes in functions from other code, you will not know which category the function belongs to and how they should be invoked. This usually only occurs if your code supplies an event helper like `mqtt.async_subscribe` or `track_state_change_listener`.
+If you are running inside an async context, it might sometimes be necessary to call a sync function. Do this like this:
 
-To help with this, there are two helper methods on the hass object that you can call from inside the event loop:
+```python
+# hub.update() is a sync function.
+result = await hass.async_add_executor_job(hub.update)
+```
 
-#### hass.async_run_job
+## Starting independent task from async
 
-Use this method if the function should be called as soon as possible. This will call callbacks immediately, schedule coroutines for execution on the event loop and schedule other functions to be run inside the thread pool.
+If you want to spawn a task that will not block the current async context, you can choose to create it as a task on the event loop. It will then be executed in parallel.
 
-| Callback | Call immediately.
-| Coroutine | Schedule for execution on the event loop.
-| Other functions | Schedule for execution in the thread pool.
+```python
+hass.async_create_task(async_say_hello(hass, target))
+```
 
-#### hass.async_add_job
-
-Use this method if the function should be called but not get priority over already scheduled calls.
-
-| Callback | Schedule for execution on the event loop.
-| Coroutine | Schedule for execution on the event loop.
-| Other functions | Schedule for execution in the thread pool.
 
 [dev-docs]: https://dev-docs.home-assistant.io/en/master/api/core.html
 [dev-docs-async]: https://dev-docs.home-assistant.io/en/dev/api/util.html#module-homeassistant.util.async
