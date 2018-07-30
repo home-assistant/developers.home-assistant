@@ -76,6 +76,8 @@
     "Remote": "Remote",
     "entity_sensor": "Sensor Entity",
     "Sensor": "Sensor",
+    "entity_sous_vide": "Sous-Vide Entity",
+    "Sous-Vide": "Sous-Vide",
     "entity_switch": "Switch Entity",
     "Switch": "Switch",
     "entity_vacuum": "Vacuum Entity",

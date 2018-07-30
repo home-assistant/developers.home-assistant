@@ -18,6 +18,7 @@
       "entity_media_player",
       "entity_remote",
       "entity_sensor",
+      "entity_sous_vide",
       "entity_switch",
       "entity_vacuum",
       "entity_weather"
