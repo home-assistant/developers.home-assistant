@@ -1,5 +1,5 @@
 ---
-title: "Hass.io <> Home Assitant integration development"
+title: "Hass.io <> Home Assistant integration development"
 sidebar_label: "HASS Integration development"
 ---
 
