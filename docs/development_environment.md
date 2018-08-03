@@ -33,8 +33,8 @@ Due to Home Assistant is mainly designed and developed on Linux distributions it
 Setup Linux subsystem.
 
 ```bash
-$ apt-get update
-$ apt-get upgrade
+$ sudo apt-get update
+$ sudo apt-get upgrade
 $ echo 'export DISPLAY=:0' >> ~/.bashrc && . ~/.bashrc
 $ sudo apt-get install xubuntu-desktop -y
 ```
