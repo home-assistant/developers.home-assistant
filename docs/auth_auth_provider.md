@@ -12,7 +12,7 @@ Once an authentication provider has confirmed the identity of a user, it will pa
 
 Auth providers are defined in `homeassistant/auth_providers/<name of provider>.py`. The auth provider module will need to provide an implementation of the `AuthProvider` class and contain a credential flow. This flow is what asks user for information and validates it.
 
-For an example of a fully implemented auth provider, please see [insecure_example.py](https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/auth_providers/insecure_example.py).
+For an example of a fully implemented auth provider, please see [insecure_example.py](https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/auth/providers/insecure_example.py).
 
 Auth providers can extend the following methods.
 
