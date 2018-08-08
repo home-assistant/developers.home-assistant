@@ -128,7 +128,7 @@ The config for an add-on is stored in `config.json`.
 | legacy | bool | no | Boolean. If the docker image have no hass.io labels, you can enable the legacy mode to use the config data.
 | options | dict | yes | Default options value of the add-on
 | schema | dict | yes | Schema for options value of the add-on. It can be `False` to disable schema validation and use custom options.
-| image | string | no | For use with Docker Hub.
+| image | string | no | For use with Docker Hub and other docker registries.
 | timeout | integer | no | Default 10 (second). The timeout to wait until the docker is done or will be killed.
 | tmpfs | string | no | Mount a tmpfs file system in `/tmpfs`. Valide format for this option is : `size=XXXu,uid=N,rw`. Size is mandatory, valid units (`u`) are `k`, `m` and `g` and `XXX` has to be replaced by a number. `uid=N` (with `N` the uid number) and `rw` are optional.
 
