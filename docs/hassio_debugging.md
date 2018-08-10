@@ -35,10 +35,10 @@ ssh root@hassio.local -p 22222
 
 ```bash
 # Logs from the supervisor service on the Host OS
-journalctl -f -u resin-supervisor.service
+journalctl -f -u hassos-supervisor.service
 
 # Hass.io supervisor logs
-docker logs resin_supervisor
+docker logs hassos_supervisor
 
 # Home Assistant logs
 docker logs homeassistant
