@@ -10,7 +10,11 @@ The following debug tips and tricks are for people who are running the Hass.io i
 
 ## SSH access to the host
 
+### resinOS based Hass.io (deprecated)
 Create an `authorized_keys` file containing your public key, and place it in the root of the boot partition of your SD card. Once the device is booted, you can access your device as root over SSH on port 22222.
+
+### HassOS based Hass.io
+Use a USB drive formatted with FAT, ext4, or NTFS and name it CONFIG (case sensitive). Create an `authorized_keys` file containing your public key, and place it in the root of the USB drive. From the UI, navigate to the hass.io system page and choose "Import from USB". You can now access your device as root over SSH on port 22222. Alternatively, the file will be imported from the USB when the hass.io device is rebooted.
 
 Windows instructions how to generate and use private/public keys with Putty are [here][windows-keys]. Instead of the droplet instructions, add the public key as per above instructions.
 
