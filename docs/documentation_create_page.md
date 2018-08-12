@@ -40,7 +40,7 @@ A couple of points to remember:
 
 Every platform page should contain a configuration sample. This sample must contain only the **required** variables to make it easy to copy and paste it for users into their `configuration.yaml` file.
 
-The **Configuration Variables** section must use the {% raw %}`{% configuration %} ... {% endconfiguration %}`{% endraw %} tag.
+The **Configuration Variables** section must use the `{% configuration %} ... {% endconfiguration %}` tag.
 
 ```text
 {% configuration %}
@@ -63,7 +63,6 @@ monitored_conditions:
     temperature:
       description: The current temperature.
 {% endconfiguration %}
-
 ```
 
 Available keys:
@@ -83,7 +82,7 @@ required: any string here #=> Any string here
 
 ### Embedding Code
 
-You can use the [default markdown syntax](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#code) to generate syntax highlighted code. For inline code wrap your code in {% raw %}`{% endraw %}. 
+You can use the [default markdown syntax](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#code) to generate syntax highlighted code. For inline code wrap your code in back-ticks. 
 
 When you're writing code that is to be executed on the terminal, prefix it with `$`.
 
