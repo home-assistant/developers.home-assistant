@@ -56,7 +56,7 @@ name:
 monitored_conditions:
   description: Conditions to display in the frontend.
   required: true
-  type: list
+  type: map
   keys:
     weather:
       description: A human-readable text summary.
@@ -77,7 +77,7 @@ required: inclusive       #=> Inclusive
 required: exclusive       #=> Exclusive
 required: any string here #=> Any string here
 ```
-- **`type:`**: The type of the variable. Allowed entries: `string`, `int`, `time`, `template` or `map`. For multiple possibilities use `[string, int]`. If you use `map` then you need to define `keys:` (see the [`template` sensor](/components/sensor.template/) for an example).
+- **`type:`**: The type of the variable. Allowed entries: `string`, `int`, `time`, `template` or `map` (for a list of entries). For multiple possibilities use `[string, int]`. If you use `map` then you need to define `keys:` (see the [`template` sensor](/components/sensor.template/) for an example).
 - **`default:`**: The default value for the variable.
 
 ### Embedding Code
