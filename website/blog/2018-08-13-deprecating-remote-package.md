@@ -2,7 +2,7 @@
 author: Paulus Schoutsen
 authorURL: https://twitter.com/balloob
 authorFBID: 297400035
-title: Depreacrating homeassistant.remote
+title: Deprecating homeassistant.remote
 ---
 
 With the release of Home Assistant 0.76, the functions in the `homeassistant.remote` package will be deprecated and will be removed in 0.77. This package contains functions to call the Home Assistant REST API in a non-async way.
