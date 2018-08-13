@@ -105,7 +105,7 @@
     "hassio_addon_testing": "Local add-on testing",
     "hassio_addon_tutorial": "Tutorial: Making your first add-on",
     "hassio_debugging": "Debugging Hass.io",
-    "hassio_hass": "Hass.io <> Home Assitant integration development",
+    "hassio_hass": "Hass.io <> Home Assistant integration development",
     "HASS Integration development": "HASS Integration development",
     "intent_builtin": "Built-in intents",
     "intent_conversation": "Registering sentences",
