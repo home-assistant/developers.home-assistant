@@ -6,77 +6,37 @@ Panels are pages that show information within Home Assistant and can allow contr
 
 Besides components registering panels, users can also register panels using the `panel_custom` component. This allows users to quickly build their own custom interfaces for Home Assistant.
 
-## Before you get started
+## Introduction
 
-The Home Assistant user interface is currently served to browsers in modern JavaScript and older JavaScript (ES5). The older version has a wider browser support but that comes at a cost of size, performance and more difficult to get started building panels for authors.
+Panels are defined as custom elements. You can use any framework that you want, as long as you wrap it up as a custom element. To quickly get started with a panel, we've created a [React custom panel starter kit](https://github.com/home-assistant/custom-panel-starter-kit-react).
 
-We therefore advise you to set up Home Assistant to serve the modern version of the frontend so that you won't need any build tools while developing. If you realize that your audience requires both, you can add a transpilation step in the future. To set up your frontend to always serve the latest version, add this to your config:
+## API reference
 
-```
+The Home Assistant frontend will pass information to your panel by setting properties on your custom element. The following properties are set:
+
+| Property | Type | Description
+| -------- | ---- | -----------
+| hass     | object | Current state of Home Assistant
+| narrow   | boolean | if the panel should render in narrow mode
+| showMenu | boolean | if the sidebar is currently shown
+| panel    | object | Panel information. Config is available as `panel.config`.
+
+## JavaScript versions
+
+The Home Assistant user interface is currently served to browsers in modern JavaScript and older JavaScript (ES5). The older version has a wider browser support but that comes at a cost of size and performance.
+
+To keep things easy, we advice you to tell your users to force the modern version of the frontend. That way you won't need any build tools while developing your panel. Add this to your config:
+
+```yaml
+# configuration.yaml example
 frontend:
   javascript_version: latest
 ```
 
-## Building your first panel
+If you do need to run with ES5 support, you will need to load the ES5 custom elements adapter before defining your element:
 
-Create a file called `hello.html` in your <config dir>/panels/.
-
-The `hello.html` contains the needed building blocks to create the elements inside the view.
-
-```html
-<dom-module id='ha-panel-hello'>
-  <template>
-    <style>
-      p {
-        font-weight: bold;
-      }
-    </style>
-    <p>Hello {{who}}. Greetings from Home Assistant.</p>
-  </template>
-</dom-module>
-
-<script>
-class HaPanelHello extends Polymer.Element {
-  static get is() { return 'ha-panel-hello'; }
-
-  static get properties() {
-    return {
-      // Home Assistant object
-      hass: Object,
-      // If should render in narrow mode
-      narrow: {
-        type: Boolean,
-        value: false,
-      },
-      // If sidebar is currently shown
-      showMenu: {
-        type: Boolean,
-        value: false,
-      },
-      // Home Assistant panel info
-      // panel.config contains config passed to register_panel serverside
-      panel: Object,
-      who: {
-        type: String,
-        computed: 'computeWho(panel)',
-      },
-    };
-  }
-
-  computeWho(panel) {
-    return panel && panel.config && panel.config.who ? panel.config.who : 'World';
-  }
-}
-customElements.define(HaPanelHello.is, HaPanelHello);
-</script>
-```
-
-Create an entry for the new panel in your `configuration.yaml` file:
-
-```yaml
-panel_custom:
-  - name: hello
-    sidebar_title: Hello World
-    sidebar_icon: mdi:hand-pointing-right
-    url_path: hello
+```js
+window.loadES5Adapter().then(function() {
+  customElements.define('my-panel', MyCustomPanel)
+});
 ```
