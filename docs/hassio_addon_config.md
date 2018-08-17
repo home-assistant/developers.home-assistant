@@ -117,8 +117,9 @@ The config for an add-on is stored in `config.json`.
 | auto_uart | bool | no | Default False. Auto mapping all UART/Serial device from host into add-on.
 | hassio_api | bool | no | This add-on can access to Hass.io REST API. It set the host alias `hassio`.
 | homeassistant_api | bool | no | This add-on can access to Hass.io Home-Assistant REST API proxy. Use `http://hassio/homeassistant/api`.
-| docker_api | bool | no | Allow read-oly access to docker API for add-on.
+| docker_api | bool | no | Allow read-oly access to docker API for add-on. Work only for not protected add-ons.
 | privileged | list | no | Privilege for access to hardware/system. Available access: `NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_TIME`, `SYS_NICE`, `S40-DFS-P01`
+| full_access | bool | no | Give full access to hardware like the privileged mode in docker. Work only for not protected add-ons.
 | apparmor | bool/string | no | Enable or disable AppArmor support. If it is enable, you can also use custom profiles with the name of the profile.
 | map | list | no | List of maps for additional Hass.io folders. Possible values: `config`, `ssl`, `addons`, `backup`, `share`. Defaults to `ro`, which you can change by adding `:rw` to the end of the name.
 | environment | dict | no | A dict of environment variable to run add-on.
