@@ -45,7 +45,8 @@
     "Frontend": [
       "frontend_index",
       "frontend_architecture",
-      "frontend_development"
+      "frontend_development",
+      "frontend_data"
     ],
     "Extending the frontend": [
       "frontend_add_card",
