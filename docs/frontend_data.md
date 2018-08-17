@@ -97,7 +97,7 @@ The logged in user.
 
 All method starting with `call` are async methods. This means that they will return a `Promise` that will resolve with the result of the call.
 
-### `hass.callService`
+### `hass.callService(domain, service, data)`
 
 Call a service on the backend.
 
@@ -107,7 +107,7 @@ hass.callService('light', 'turn_on', {
 });
 ```
 
-### `hass.callWS`
+### `hass.callWS(message)`
 
 Call a WebSocket command on the backend.
 
@@ -119,7 +119,7 @@ this.hass.callWS({
   console.log("Created user", userResponse.user.id));
 ```
 
-### `async hass.callApi(method, path, data)`
+### `hass.callApi(method, path, data)`
 
 Call an API on the Home Assistant server. For example, if you want to fetch all Hass.io snapshots by issueing a GET request to `/api/hassio/snapshots`:
 
@@ -134,4 +134,4 @@ If you need to pass in data, pass a third argument:
 hass.callApi('delete', 'notify.html5', { subscription: 'abcdefgh' });
 ```
 
-_We're moving away from API calls and are migrating everything to [making calls over our WebSocket connection](#hasscallws)._
+_We're moving away from API calls and are migrating everything to `hass.callWS(message)` calls._
