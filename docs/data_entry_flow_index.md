@@ -18,11 +18,32 @@ async def async_create_flow(handler, context=context, data=data)
 The manager delegates instantiating of config flow handlers to this async callback. This allows the parent of the manager to define their own way of finding handlers and preparing a handler for instantiation. For example, in the case of the config entry manager, it will make sure that the dependencies and requirements are setup.
 
 ```python
-async def async_finish_flow(context, result)
+async def async_finish_flow(flow, result)
 ```
 
-This async callback is called when a flow is finished. The result is a dictionary that looks like this:
+This async callback is called when a flow is finished or aborted. i.e. `result['type'] in [RESULT_TYPE_CREATE_ENTRY, RESULT_TYPE_ABORT]`. The callback function can modify result and return it back, if the result type changed to `RESULT_TYPE_FORM`, the flow will continue running, display another form.
 
+If the result type is `RESULT_TYPE_FORM`, the result should like:
+```python
+{
+    # The result type of the flow
+    'type': RESULT_TYPE_FORM,
+    # the id of the flow
+    'flow_id': 'abcdfgh1234,
+    # handler name
+    'handler': 'hue',
+    # name of the step, flow.async_step_[step_id] will be called when form submitted
+    'step_id': 'init',
+    # a voluptuous schema to build and validate user input
+    'data_schema': vol.Schema(),
+    # an errors dict, None if no errors
+    'errors': errors,
+    # a detail information about the step
+    'description_placeholders': description_placeholders,
+}
+```
+
+If the result type is `RESULT_TYPE_CREATE_ENTRY`, the result should like:
 ```python
 {
     # Data schema version of the entry
@@ -35,13 +56,26 @@ This async callback is called when a flow is finished. The result is a dictionar
     'handler': 'hue',
     # title and data as created by the handler
     'title': 'Some title',
-    'data': {
+    'result': {
         'some': 'data'
     },
-    # Source that instantiated the flow
-    'source': self.source,
 }
 ```
+
+If the result type is `RESULT_TYPE_ABORT`, the result should like:
+```python
+{
+    # The result type of the flow
+    'type': RESULT_TYPE_ABORT,
+    # the id of the flow
+    'flow_id': 'abcdfgh1234,
+    # handler name
+    'handler': 'hue',
+    # the abort reason
+    'reason': 'already_configured',
+}
+```
+
 
 ## Flow Handler
 
