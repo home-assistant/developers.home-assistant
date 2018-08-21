@@ -82,7 +82,6 @@
     "Vacuum": "Vacuum",
     "entity_weather": "Weather Entity",
     "Weather": "Weather",
-    "external_api_rest_python": "REST API - Python bindings",
     "external_api_rest": "REST API",
     "external_api_server_sent_events": "Server-sent events",
     "external_api_websocket": "WebSocket API",
