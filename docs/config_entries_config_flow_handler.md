@@ -38,8 +38,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         # Handle discovery info
 ```
 
-If the result of the step is to show a form, the user will be able to continue
-the flow from the config panel.
+If the result of the step is to show a form, the user will be able to continue the flow from the config panel.
 
 ## Translations
 
