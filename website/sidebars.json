@@ -102,7 +102,6 @@
     ],
     "External API": [
       "external_api_rest",
-      "external_api_rest_python",
       "external_api_websocket",
       "external_api_server_sent_events"
     ],
