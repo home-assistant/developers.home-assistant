@@ -12,13 +12,13 @@ Data Entry Flow is being used in Home Assistant to create config entries.
 This is the class that manages the flows that are in progress. When instantiating one, you pas in two async callbacks:
 
 ```python
-async def async_create_flow(handler, source=source, data=data)
+async def async_create_flow(handler, context=context, data=data)
 ```
 
 The manager delegates instantiating of config flow handlers to this async callback. This allows the parent of the manager to define their own way of finding handlers and preparing a handler for instantiation. For example, in the case of the config entry manager, it will make sure that the dependencies and requirements are setup.
 
 ```python
-async def async_finish_flow(result)
+async def async_finish_flow(context, result)
 ```
 
 This async callback is called when a flow is finished. The result is a dictionary that looks like this:
@@ -43,11 +43,11 @@ This async callback is called when a flow is finished. The result is a dictionar
 }
 ```
 
-## Config Flow Handler
+## Flow Handler
 
-Config flow handlers will handle a single flow. A flow contains 1 or more steps. When a flow is instantiated by the user, the `init` step will be called. Each step has three different possible results: "Show Form", "Abort" and "Create Entry".
+Flow handlers will handle a single flow. A flow contains one or more steps. When a flow is instantiated, the `FlowHandler.init_step` step will be called. Each step has three different possible results: "Show Form", "Abort" and "Create Entry".
 
-At a minimum, each config flow handler will have to define a version number and a step. This doens't have to be `init`, as different steps will be called when instantiated by a non-user (ie discovery).
+At a minimum, each flow handler will have to define a version number and a step. This doens't have to be `init`, as `async_create_flow` can assign `init_step` depends on diffreent workflow, for example in configuration, `context.source` will be use as `init_step`.
 
 The bare minimum config flow:
 
@@ -175,7 +175,7 @@ Data entry flows depend on translations for showing the text in the forms. It de
 You might want to initialize a config flow programmatically. For example, if we discover a device on the network that requires user interaction to finish setup. To do so, pass a source parameter and optional user input when initializing a flow:
 
 ```python
-await flow_mgr.async_init('hue', source=data_entry_flow.SOURCE_DISCOVERY, data=discovery_info)
+await flow_mgr.async_init('hue', context={'source': data_entry_flow.SOURCE_DISCOVERY}, data=discovery_info)
 ```
 
 The config flow handler will not start with the `init` step. Instead, it will be instantiated with a step name equal to the source. The step should follow the same return values as a normal step.
