@@ -9,7 +9,7 @@ Data Entry Flow is being used in Home Assistant to create config entries.
 
 ## Flow Manager
 
-This is the class that manages the flows that are in progress. When instantiating one, you pas in two async callbacks:
+This is the class that manages the flows that are in progress. When instantiating one, you pass in two async callbacks:
 
 ```python
 async def async_create_flow(handler, context=context, data=data)
@@ -88,6 +88,7 @@ The bare minimum config flow:
 ```python
 from homeassistant import data_entry_flow
 
+@config_entries.HANDLERS.register(DOMAIN)
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
 
     # The schema version of the entries that it creates
@@ -95,7 +96,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
     # (this is not implemented yet)
     VERSION = 1
 
-    async def async_step_init(self, user_input=None):
+    async def async_step_user(self, user_input=None):
         # Do something
 ```
 
@@ -106,7 +107,7 @@ This result type will show a form to the user to fill in. You define the current
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
 
-    async def async_step_init(self, user_input=None):
+    async def async_step_user(self, user_input=None):
         # Use OrderedDict to guarantee order of the form shown to the user
         data_schema = OrderedDict()
         data_schema[vol.Required('username')] = str
@@ -125,14 +126,14 @@ If something is wrong, you can return a dictionary with errors. Each key in the 
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
 
-    async def async_step_init(self, user_input=None):
+    async def async_step_user(self, user_input=None):
         errors = {}
         if user_input is not None:
             # Validate user input
             valid = await is_valid(user_input)
             if valid:
                 # See next section on create entry usage
-                return self.create_entry(…)
+                return self.create_entry(...)
 
             errors['base'] = 'auth_error'
 
@@ -150,9 +151,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
 
 #### Multi-step flows
 
-If the user input passes validation, you can again return one of the three
-return values. If you want to navigate the user to the next step, return the
-return value of that step:
+If the user input passes validation, you can again return one of the three return values. If you want to navigate the user to the next step, return the return value of that step:
 
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
@@ -168,7 +167,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
                 # Return the form of the next step
                 return await self.async_step_account()
 
-        …
+        ...
 ```
 
 ### Create Entry
@@ -178,7 +177,7 @@ When the result is "Create Entry", an entry will be created and passed to the pa
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
 
-    async def async_step_init(self, user_input=None):
+    async def async_step_user(self, user_input=None):
         return self.create_entry(
             title='Title of the entry',
             data={
@@ -194,7 +193,7 @@ When a flow cannot be finished, you need to abort it. This will finish the flow 
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
 
-    async def async_step_init(self, user_input=None):
+    async def async_step_user(self, user_input=None):
         return self.async_abort(
             reason='not_supported'
         )
