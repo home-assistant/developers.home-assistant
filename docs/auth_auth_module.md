@@ -17,10 +17,11 @@ Multi-factor Auth modules shall extend the following methods of `MultiFactorAuth
 | method | Required | Description
 | ------ | -------- | -----------
 | `@property def input_schema(self)` | Yes | Return a schema defined the user input form.
-| `async def async_setup_user(self, user_id, **kwargs)` | Yes | Setup user for use this auth module
-| `async def async_depose_user(self, user_id)` | Yes | Remove user information from this auth module
-| `async def async_validation_flow(self, user_id, user_input)` | Yes | Given a user_id and user input, return valid user_id or raise InvalidAuth exception.
-| `async def async_initialize(self)` | No | Optional intialization callback.
+| `@property def setup_schema(self)` | No | Return a schema defined the setup input form.
+| `async def async_setup_user(self, user_id, setup_data)` | Yes | Set up user for use this auth module.
+| `async def async_depose_user(self, user_id)` | Yes | Remove user information from this auth module.
+| `async def async_is_user_setup(self, user_id)` | Yes | Return whether user is set up.
+| `async def async_validation(self, user_id, user_input)` | Yes | Given a user_id and user input, return valiidation result.
 
 ## Workflow
 
@@ -28,7 +29,7 @@ To use a MFA auth module, user has to be created first, then call `AuthManager.a
 
 > TODO: draw a diagram
 
-User == select auth provider ==> LoginFlow.init == input/validate username/password ==> LoginFlow.select_mfa_module ==> LoginFlow.mfa == input/validate MFA code ==> LoginFlow.finish ==> AuthProvider.get_or_create_credentials
+User == select auth provider ==> LoginFlow.init == input/validate username/password ==> LoginFlow.finish ==> if user enabled mfa ==> LoginFlow.select_mfa_module ==> LoginFlow.mfa == input/validate MFA code ==> LoginFlow.finish ==> Done
 
 ## Configuration example
 
