@@ -15,7 +15,7 @@ const changed = newVal !== oldVal;
 
 ### `hass.states`
 
-An object containing the states of all entities in Home Assistant. The key is the entity_id, thte value is the state object.
+An object containing the states of all entities in Home Assistant. The key is the entity_id, the value is the state object.
 
 ```json
 {
@@ -95,7 +95,7 @@ The logged in user.
 
 ## Methods
 
-All method starting with `call` are async methods. This means that they will return a `Promise` that will resolve with the result of the call.
+All methods starting with `call` are async methods. This means that they will return a `Promise` that will resolve with the result of the call.
 
 ### `hass.callService(domain, service, data)`
 
@@ -121,7 +121,7 @@ this.hass.callWS({
 
 ### `hass.callApi(method, path, data)`
 
-Call an API on the Home Assistant server. For example, if you want to fetch all Hass.io snapshots by issueing a GET request to `/api/hassio/snapshots`:
+Call an API on the Home Assistant server. For example, if you want to fetch all Hass.io snapshots by issuing a GET request to `/api/hassio/snapshots`:
 
 ```js
 hass.callApi('get', 'hassio/snapshots')
