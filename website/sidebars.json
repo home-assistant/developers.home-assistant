@@ -25,7 +25,8 @@
     "Authentication": [
       "auth_index",
       "auth_api",
-      "auth_auth_provider"
+      "auth_auth_provider",
+      "auth_auth_module"
     ],
     "Configuration.yaml": [
       "configuration_yaml_index"
