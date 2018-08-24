@@ -30,7 +30,7 @@ Before user can use a multi-factor auth module, it has to be enabled or set up. 
 
 Each MFA module need to implement a setup flow handler extends from `mfa_modules.SetupFlow` (if only one simple setup step need, `SetupFlow` can be used as well). For example for Google Authenticator (TOTP, Time-based One Time Password) module, the flow will need to be:
 - Generate a secret and store it on instance of setup flow
-- Return `async_show_form` with a QR code in the description (injected as base64 via description_placeholder)
+- Return `async_show_form` with a QR code in the description (injected as base64 via `description_placeholders`)
 - User scans code and enters a code to verify it scanned correctly and clock in synced
 - TOTP module saved the secret along with user_id, module is enabled for user
 
