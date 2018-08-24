@@ -17,8 +17,7 @@ Multi-factor Auth modules shall extend the following methods of `MultiFactorAuth
 | method | Required | Description
 | ------ | -------- | -----------
 | `@property def input_schema(self)` | Yes | Return a schema defined the user input form.
-| `@property def setup_schema(self)` | No | Return a schema defined the setup input form.
-| `async def async_setup_flow(self, user_id)` | No | Return a SetupFlow to handle the setup workflow.
+| `async def async_setup_flow(self, user_id)` | Yes | Return a SetupFlow to handle the setup workflow.
 | `async def async_setup_user(self, user_id, setup_data)` | Yes | Set up user for use this auth module.
 | `async def async_depose_user(self, user_id)` | Yes | Remove user information from this auth module.
 | `async def async_is_user_setup(self, user_id)` | Yes | Return whether user is set up.
