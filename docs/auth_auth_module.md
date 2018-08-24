@@ -18,14 +18,23 @@ Multi-factor Auth modules shall extend the following methods of `MultiFactorAuth
 | ------ | -------- | -----------
 | `@property def input_schema(self)` | Yes | Return a schema defined the user input form.
 | `@property def setup_schema(self)` | No | Return a schema defined the setup input form.
+| `async def async_setup_flow(self, user_id)` | No | Return a SetupFlow to handle the setup workflow.
 | `async def async_setup_user(self, user_id, setup_data)` | Yes | Set up user for use this auth module.
 | `async def async_depose_user(self, user_id)` | Yes | Remove user information from this auth module.
 | `async def async_is_user_setup(self, user_id)` | Yes | Return whether user is set up.
 | `async def async_validation(self, user_id, user_input)` | Yes | Given a user_id and user input, return valiidation result.
 
-## Workflow
+## Setup Flow
 
-To use a MFA auth module, user has to be created first, then call `AuthManager.async_enable_user_mfa` to setup.
+Before user can use a multi-factor auth module, it has to be enabled or set up. All availiable modules will be listed in user profile page, user can enable the module he/she wants to use. A setup data entry flow will guide user finish the neccessary steps.
+
+Each MFA module need to implement a setup flow handler extends from `mfa_modules.SetupFlow` (if only one simple setup step need, `SetupFlow` can be used as well). For example for Google Authenticator (TOTP, Time-based One Time Password) module, the flow will need to be:
+- Generate a secret and store it on instance of setup flow
+- Return `async_show_form` with a QR code in the description (injected as base64 via description_placeholder)
+- User scans code and enters a code to verify it scanned correctly and clock in synced
+- TOTP module saved the secret along with user_id, module is enabled for user
+
+## Workflow
 
 > TODO: draw a diagram
 
