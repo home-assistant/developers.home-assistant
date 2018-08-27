@@ -25,7 +25,8 @@ You might want to initialize a config flow programmatically. For example, if we 
 
 ```python
 await hass.config_entries.flow.async_init(
-    'hue', source=data_entry_flow.SOURCE_DISCOVERY, data=discovery_info)
+    'hue', data=discovery_info,
+    context={'source': config_entries.SOURCE_DISCOVERY})
 ```
 
 The config flow handler will need to add a step to support the given source. The step should follow the same return values as a normal step.
