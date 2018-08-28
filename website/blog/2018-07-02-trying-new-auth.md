@@ -22,8 +22,6 @@ If you're interested in trying it out, keep on reading.
 
 ## Trying it out
 
-> If you are using Hass.io, you must enable legacy API password support.
-
 This requires you to be running Home Assistant 0.73 beta or a later version.
 
 First step will be to configure an auth provider. We are going to configure the built-in `homeassistant` auth provider. This provider will be the default one and stores users securely in the config directory.
