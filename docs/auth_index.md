@@ -3,8 +3,6 @@ title: "Authentication"
 sidebar_label: Introduction
 ---
 
-> This is an experimental and unfinished API introduced in Home Assistant 0.69 and later. This is not enabled by default, it's not persisted to disk and should not be used in production.
-
 Home Assistant has a built-in authentication system allowing different users to interact with Home Assistant. The authentication system consist of various parts.
 
 ![Overview of how the different parts interact](/img/en/auth/architecture.png)
