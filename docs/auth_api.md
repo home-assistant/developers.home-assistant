@@ -28,7 +28,7 @@ Home Assistant will scan the first 10kB of a website for these tags.
 
 [![Authorization flow sequence diagram](/img/en/auth/authorize_flow.png)](https://www.websequencediagrams.com/?lz=dGl0bGUgQXV0aG9yaXphdGlvbiBGbG93CgpVc2VyIC0-IENsaWVudDogTG9nIGludG8gSG9tZSBBc3Npc3RhbnQKABoGIC0-IFVzZXI6AEMJZSB1cmwgAD4JACgOOiBHbyB0bwAeBWFuZCBhAC0ICgBQDgB1DACBFw5jb2RlAHELAE4RZXQgdG9rZW5zIGZvcgAoBgBBGlQAJQUK&s=qsd)
 
-> All example URLs here are shown with extra spaces and new lines for clarity. Those should not be in the final url.
+> All example URLs here are shown with extra spaces and new lines for display purposes only.
 
 The authorize url should contain `client_id` and `redirect_uri` as query parameters.
 
@@ -59,7 +59,7 @@ This authorization code can be exchanged for tokens by sending it to the token e
 
 ## Token
 
-The token endpoint returns tokens given valid grants. This grant is either an authorization code retrieved from the authorize endpoint or a refresh token.
+The token endpoint returns tokens given valid grants. This grant is either an authorization code retrieved from the authorize endpoint or a refresh token. In thee case of refresh token, the token endpoint is also capable of revoking a token.
 
 All interactions with this endpoint need to be HTTP POST requests to `http://your-instance.com/auth/token` with the request body encoded in `application/x-www-form-urlencoded`.
 
@@ -88,6 +88,15 @@ The return response will be an access and refresh token:
 
 The access token is a short lived token that can be used to access the API. The refresh token can be used to fetch new access tokens. The `expires_in` value is seconds that the access token is valid.
 
+An HTTP status code of 400 will be returned if an invalid request has been issued. The HTTP status code will be 403 if a token is requested for an inactive user.
+
+```json
+{
+    "error": "invalid_request",
+    "error_description": "Invalid client id",
+}
+```
+
 ### Refresh token
 
 Once you have retrieved a refresh token via the grant type `authorization_code`, you can use it to fetch new access tokens. The request body is:
@@ -106,6 +115,26 @@ The return response will be an access token:
     "token_type": "Bearer"
 }
 ```
+
+An HTTP status code of 400 will be returned if an invalid request has been issued.
+
+```json
+{
+    "error": "invalid_request",
+    "error_description": "Invalid client id",
+}
+```
+
+### Revoking a refresh token
+
+The token endpoint is also capable of revoking a refresh token. Revoking a refresh token will immedeatly revoke the refresh token and all access tokens that it has ever granted. To revoke a refresh token, make the following request:
+
+```
+token=IJKLMNOPQRST&
+action=revoke
+```
+
+The request will always respond with an empty body and HTTP status 200, regardless if the request was successful.
 
 ## Making authenticated requests
 
