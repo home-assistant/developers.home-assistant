@@ -1,6 +1,8 @@
 ---
 title: "Authentication API"
 sidebar_label: API
+id: version-0.77.0-auth_api
+original_id: auth_api
 ---
 
 This page will describe the steps required for your application to authorize against and integrate with Home Assistant instances. [See a demo](https://hass-auth-demo.glitch.me) powered by our helper lib [home-assistant-js-websocket](https://github.com/home-assistant/home-assistant-js-websocket).

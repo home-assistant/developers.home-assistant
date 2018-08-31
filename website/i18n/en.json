@@ -18,7 +18,7 @@
     "asyncio_working_with_async": "Working with Async",
     "auth_api": "Authentication API",
     "API": "API",
-    "auth_auth_module": "Authentication Modules",
+    "auth_auth_module": "Multi-factor Authentication Modules",
     "auth_auth_provider": "Authentication Providers",
     "auth_index": "Authentication",
     "config_entries_config_flow_handler": "Config Flow Handlers",
