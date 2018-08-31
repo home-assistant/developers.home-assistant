@@ -25,3 +25,18 @@ A checklist of things to do when you're adding a new component.
 
  1. If you need to share global data with platforms, use the dictionary `hass.data`. `hass.data[DATA_XY]` while `XY` is the component is preferred over `hass.data[DOMAIN]`.
  2. If the component fetches data that causes its related platform entities to update, you can notify them using the dispatcher code in `homeassistant.helpers.dispatcher`.
+
+
+### 4. Communication with devices/services
+
+ 1. All API specific code has to be part of a third party library hosted on PyPi. Home Assistant should only interact with objects and not make direct calls to the API.
+
+```python
+# bad
+status = requests.get(url('/status'))
+
+# good
+from phue import Bridge
+bridge = Bridge(…)
+status = bridge.status()
+```
