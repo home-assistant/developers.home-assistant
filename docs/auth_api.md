@@ -16,13 +16,13 @@ The client ID you need to use is the website of your application. The redirect u
  - client id: `https://www.my-application.io`
  - redirect uri: `https://www.my-application.io/hass/auth_callback`
 
-If you require a different redirect url (ie, if building a native app), you can add an HTML tag to the content of the website of your application (the client ID) with an approved redirect url. For example:
+If you require a different redirect url (ie, if building a native app), you can add an HTML tag to the content of the website of your application (the client ID) with an approved redirect url. For example, add this to your site to whitelist redirect uri `hass://auth`:
 
 ```html
 <link rel='redirect_uri' href='hass://auth'>
 ```
 
-Home Assistant will scan the first 10kB of a website for these tags.
+Home Assistant will scan the first 10kB of a website for link tags.
 
 ## Authorize
 
@@ -103,7 +103,8 @@ Once you have retrieved a refresh token via the grant type `authorization_code`,
 
 ```
 grant_type=refresh_token&
-refresh_token=IJKLMNOPQRST
+refresh_token=IJKLMNOPQRST&
+client_id=https%3A%2F%2Fwww.home-assistant.io%2Fios
 ```
 
 The return response will be an access token:
