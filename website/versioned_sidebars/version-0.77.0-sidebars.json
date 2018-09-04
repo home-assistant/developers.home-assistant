@@ -142,8 +142,7 @@
       "version-0.77.0-hassio_addon_testing",
       "version-0.77.0-hassio_addon_publishing",
       "version-0.77.0-hassio_addon_presentation",
-      "version-0.77.0-hassio_addon_repository",
-      "version-0.77.0-hassio_addon_security"
+      "version-0.77.0-hassio_addon_repository"
     ],
     "Maintainer docs": [
       "version-0.77.0-maintenance",

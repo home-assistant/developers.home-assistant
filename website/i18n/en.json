@@ -105,7 +105,7 @@
     "hassio_addon_presentation": "Presenting your add-on",
     "hassio_addon_publishing": "Publishing your add-on",
     "hassio_addon_repository": "Create an add-on repository",
-    "hassio_addon_security": "hassio_addon_security",
+    "hassio_addon_security": "Add-on security",
     "hassio_addon_testing": "Local add-on testing",
     "hassio_addon_tutorial": "Tutorial: Making your first add-on",
     "hassio_debugging": "Debugging Hass.io",

@@ -145,7 +145,8 @@
       "hassio_addon_testing",
       "hassio_addon_publishing",
       "hassio_addon_presentation",
-      "hassio_addon_repository"
+      "hassio_addon_repository",
+      "hassio_addon_security"
     ],
     "Maintainer docs": [
       "maintenance",

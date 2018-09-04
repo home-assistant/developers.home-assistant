@@ -1,17 +1,17 @@
+---
+title: "Add-on security"
+---
 
-# Add-on Security
+Hass.io rates every add-on based on the wanted rights. A add-on with a rating of 6 is very secure. If an add-on has a rating of 1, you shouldn't run this add-on unless you are 100% sure that you can trust the source.
 
-## Rating
+## Protection
 
-Hass.io rating every add-on of his wanted rights. A add-on with rating of 6 is very secure in other case with 1, you don't should run this add-on if you are not 100% sure that you can trust him.
+Default, all add-on run in a protection enabled modu. This mode prevents the add-on from getting any rights on the system. If an add-on requires more rights, you can disable this protection via the API add-on options for that add-on. But be carful, a add-on with disabled protection can destroy your system!
 
-## Protectetion
+## Making a secure add-on
 
-Default, all add-on run in a protection enabled modus and they protect the user that the add-on can grant to high rights on his system. If you want run a add-on with options they need to disable this add-on, you can disable this for you add-on over the API add-on options for that add-on. But be carfuly, a add-on with disabled protection can destroy your system!
+As a developer, follow the following best practices to make your add-on secure:
 
-# Make you add-on secure
-
-Follow best praxis make your add-on secure:
 - Don't run on host network
-- Create a AppArmor profile
+- Create an AppArmor profile
 - Map folders read only if you don't need write access
