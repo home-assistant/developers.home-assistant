@@ -22,7 +22,7 @@ Multi-factor Auth modules shall extend the following methods of `MultiFactorAuth
 | `async def async_depose_user(self, user_id)` | Yes | Remove user information from this auth module.
 | `async def async_is_user_setup(self, user_id)` | Yes | Return whether user is set up.
 | `async def async_validate(self, user_id, user_input)` | Yes | Given a user_id and user input, return valiidation result.
-| `async def async_generate(self, user_id)` | No | Generate a init code, if return result, the result will be shown as `description_placeholders['mfa_init_code']` in  login flow's `mfa` step.
+| `async def async_generate(self, user_id)` | No | Generate a init code. Be called once before display the mfa step of login flow.
 
 ## Setup Flow
 
@@ -38,7 +38,7 @@ Each MFA module need to implement a setup flow handler extends from `mfa_modules
 
 > TODO: draw a diagram
 
-User == select auth provider ==> LoginFlow.init == input/validate username/password ==> LoginFlow.finish ==> if user enabled mfa ==> LoginFlow.select_mfa_module ==> generate init code (optional) ==> LoginFlow.mfa == input/validate MFA code ==> LoginFlow.finish ==> Done
+User == select auth provider ==> LoginFlow.init == input/validate username/password ==> LoginFlow.finish ==> if user enabled mfa ==> LoginFlow.select_mfa_module ==> generate code (optional) ==> LoginFlow.mfa == input/validate MFA code ==> LoginFlow.finish ==> Done
 
 ## Configuration example
 
