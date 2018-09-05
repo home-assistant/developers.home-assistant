@@ -2,13 +2,13 @@
 title: "WebSocket API"
 ---
 
-Home Assistant contains a WebSocket API. This API can be used to stream information from a Home Assistant instance to any client that implements WebSocket. Implementations in different languages:
+Home Assistant contains a WebSocket API. This API can be used to stream information from a Home Assistant instance to any client that implements WebSockets. Implementations in different languages:
 
 - [JavaScript](https://github.com/home-assistant/home-assistant-js-websocket) - powers the frontend
 - [Python](https://raw.githubusercontent.com/home-assistant/home-assistant-dev-helper/master/ha-websocket-client.py) - CLI client using [`asyncws`](https://async-websockets.readthedocs.io/en/latest/)
 - [JavaScript/HTML](https://raw.githubusercontent.com/home-assistant/home-assistant-dev-helper/master/ha-websocket.html) - WebSocket connection in your browser
 
-Connect your websocket implementation to `ws://localhost:8123/api/websocket`.
+Connect your websocket implementation to `ws://localhost:8123/api/websocket`. You will need a valid access token.
 
 If you are not using the [`frontend`](https://www.home-assistant.io/components/frontend/) in your setup then you need to add the [`websocket_api` component](https://www.home-assistant.io/components/websocket_api/) to your `configuration.yaml` file to use the WebSocket API.
 
@@ -16,7 +16,6 @@ If you are not using the [`frontend`](https://www.home-assistant.io/components/f
 
 1. Client connects.
 1. Authentication phase starts.
-    - If no further authentication necessary for the user: go to 3.
     - Server sends `auth_required` message.
     - Client sends `auth` message.
     - If `auth` message correct: go to 3.
@@ -39,13 +38,13 @@ Example of an auth message:
 ```json
 {
   "type": "auth",
-  "api_password": "supersecret"
+  "access_token": "ABCDEFGHIJKLMNOPQ"
 }
 ```
 
 ```json
 {
-   "id" 5,
+   "id": 5,
    "type":"event",
    "event":{
       "data":{},
@@ -76,16 +75,7 @@ If authentication is necessary, the server sends out `auth_required`.
 }
 ```
 
-This means that the next message from the client should be an auth message. You can authorize with either an API password (legacy auth) or an access token.
-
-```json
-{
-  "type": "auth",
-  "api_password": "supersecret"
-}
-```
-
-or
+This means that the next message from the client should be an auth message. You can authorize with an access token.
 
 ```json
 {
@@ -94,6 +84,14 @@ or
 }
 ```
 
+For now, we also support authentication with an API password (legacy auth).
+
+```json
+{
+  "type": "auth",
+  "api_password": "supersecret"
+}
+```
 
 If the client supplies valid authentication, the authentication phase will complete by the server sending the `auth_ok` message:
 
