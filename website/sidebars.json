@@ -50,7 +50,8 @@
       "frontend_index",
       "frontend_architecture",
       "frontend_development",
-      "frontend_data"
+      "frontend_data",
+      "frontend_external_auth"
     ],
     "Extending the frontend": [
       "frontend_add_card",

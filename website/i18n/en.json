@@ -98,6 +98,7 @@
     "Data": "Data",
     "frontend_development": "Frontend development",
     "Development": "Development",
+    "frontend_external_auth": "External Authentication",
     "frontend_index": "Home Assistant Frontend",
     "hassio_addon_communication": "Add-On Communication",
     "hassio_addon_config": "Add-On Configuration",
