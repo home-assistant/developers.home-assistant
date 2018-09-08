@@ -17,15 +17,27 @@ To ensure that the documentation for Home Assistant is consistent and easy to fo
 ## Component and Platform Pages
 
 * The **Configuration Variables** section must use the `{% configuration %}` tag.
-* Configuration variables must document the requirement status.
+* Configuration variables must document the requirement status (`false` or `true`)
 * Configuration variables must document the default value, if any.
-* Configuration variables must document the accepted value types.
+* Configuration variables must document the accepted value types (`string`, `boolean`, `integer`, `list`)
   * For configuration variables that accept multiple types, separate the types with a comma (i.e. `string, int`).
 * Use YAML sequence syntax in the sample code if it is supported.
 * All examples should be formatted to be included in `configuration.yaml` unless explicitly stated.
   * Use capital letters and `_` to indicate that the value needs to be replaced. E.g., `api_key: YOUR_API_KEY` or `api_key: REPLACE_ME`.
   * If you know that the API key or value contains [control characters](https://en.wikipedia.org/wiki/YAML#Syntax), e.g., `#`, `[`, `?`, etc., wrap it in quotes and add a note.
 * Component and platform names should be a link to their respective documentation pages.
+
+Example configuration block
+
+```yaml
+{% configuration %}
+some_key:
+  description: This is a description of what this key is for.
+  required: false
+  type: string, list
+  default: Optional default value - leave out if there isn't one
+{% endconfiguration %}
+```
 
 ## Templates
 
