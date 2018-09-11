@@ -6,7 +6,7 @@ By default, the frontend will take care of its own authentication tokens. If non
 
 If you want to embed the Home Assistant frontend in an external app, you will want to store the authentication inside the app but make it available to the frontend. To support this, Home Assistant exposes an external authentication API.
 
-To activate this API, load the frontend with `?external_auth=1` appended to the URL. If this is passed in, Home Assistant will expect  either `window.externalApp` to be defined or `window.webkit.messageHandlers` containing the methods described below.
+To activate this API, load the frontend with `?external_auth=1` appended to the URL. If this is passed in, Home Assistant will expect  either `window.externalApp` (for Android) or `window.webkit.messageHandlers` (for iOS) to be defined containing the methods described below.
 
 ## Get Access Token
 
@@ -24,14 +24,17 @@ window.webkit.messageHandlers.getExternalAuth.postMessage({
 });
 ```
 
-The response should contain an access token and the number of seconds that it will remain valid. Pass the response to the function defined in the options object.
+The response should contain a boolean if it was successful and an object containing an access token and the number of seconds that it will remain valid. Pass the response to the function defined in the options object.
 
 ```js
 // To be called by external app
-window.externalAuthSetToken({
+window.externalAuthSetToken(true, {
   "access_token": "qwere",
   "expires_in": 1800
 });
+
+// If unable to get new access token
+window.externalAuthSetToken(false);
 ```
 
 The frontend will call this method when the page first loads and whenever it needs a valid token but the previous received token has expired.
@@ -56,5 +59,8 @@ When done, the external app has to call the function defined in the options obje
 
 ```js
 // To be called by external app
-window.externalAuthRevokeToken();
+window.externalAuthRevokeToken(true);
+
+// If unable to logout
+window.externalAuthRevokeToken(false);
 ```
