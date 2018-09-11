@@ -145,6 +145,7 @@ A long-lived access token is usally used for 3rd party API calls and webhook-ish
 
 Send websocket command `auth/long_lived_access_token` will create a long-lived access token for current user. Access token will not be saved in Home Assistant. User need to record the token in secure place.
 
+```json
 {
     "id": 11,
     "type": "auth/long_lived_access_token",
@@ -152,15 +153,18 @@ Send websocket command `auth/long_lived_access_token` will create a long-lived a
     "client_icon": null,
     "lifespan": 365
 }
+```
 
 Result will be a long-lived access token:
 
+```json
 {
     "id": 11,
     "type": "result",
     "success": true,
     "result": "ABCDEFGH"
 }
+```
 
 ## Making authenticated requests
 
