@@ -178,6 +178,42 @@ For HTTP requests, pass the token type and access token as the authorization hea
 Authorization: Bearer ABCDEFGH
 ```
 
+### Example: cURL
+
+```shell
+curl -X GET \
+  https://your.awesome.home/api/error/all \
+  -H 'Authorization: Bearer ABCDEFGH'
+```
+
+### Example: Python
+
+```python
+import requests
+
+url = "https://your.awesome.home/api/error/all"
+headers = {
+    'Authorization': "Bearer ABCDEFGH",
+}
+response = requests.request('GET', url, headers=headers)
+
+print(response.text)
+```
+
+### Example: NodeJS
+```JavaScript
+fetch('https://your.awesome.home/api/error/all', {
+  headers: { Authorization: 'Bearer ABCDEFGH' }
+}).then(function (response) {
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+  return response.text();
+}).then(function (body ) {
+  console.log(body);
+});
+```
+
 If the access token is no longer valid, you will get a response with HTTP status code 401 unauthorized. This means that you will need to refresh the token. If the refresh token doesn't work, the tokens are no longer valid and so the user is no longer logged in. You should clear the user's data and ask the user to authorize again.
 
 [oauth2-spec]: https://tools.ietf.org/html/rfc6749
