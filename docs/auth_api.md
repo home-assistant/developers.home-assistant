@@ -179,6 +179,7 @@ Authorization: Bearer ABCDEFGH
 ```
 
 ### Example: cURL
+
 ```shell
 curl -X GET \
   https://your.awesome.home/api/error/all \
@@ -186,6 +187,7 @@ curl -X GET \
 ```
 
 ### Example: Python
+
 ```python
 import requests
 
@@ -200,16 +202,14 @@ print(response.text)
 
 ### Example: NodeJS
 ```JavaScript
-var request = require("request");
-
-var options = {
-  method: 'GET',
-  url: 'https://your.awesome.home/api/error/all',
+fetch('https://your.awesome.home/api/error/all', {
   headers: { Authorization: 'Bearer ABCDEFGH' }
-};
-
-request(options, function (error, response, body) {
-  if (error) throw new Error(error);
+}).then(function (response) {
+  if (!response.ok) {
+    return Promise.reject(response);
+  }
+  return response.text();
+}).then(function (body ) {
   console.log(body);
 });
 ```
