@@ -21,7 +21,8 @@ Multi-factor Auth modules shall extend the following methods of `MultiFactorAuth
 | `async def async_setup_user(self, user_id, setup_data)` | Yes | Set up user for use this auth module.
 | `async def async_depose_user(self, user_id)` | Yes | Remove user information from this auth module.
 | `async def async_is_user_setup(self, user_id)` | Yes | Return whether user is set up.
-| `async def async_validation(self, user_id, user_input)` | Yes | Given a user_id and user input, return valiidation result.
+| `async def async_validate(self, user_id, user_input)` | Yes | Given a user_id and user input, return valiidation result.
+| `async def async_initialize_login_mfa_step(self, user_id)` | No | Will be called once before display the mfa step of login flow. This is not initialization for the MFA module but the mfa step in login flow.
 
 ## Setup Flow
 
@@ -37,7 +38,7 @@ Each MFA module need to implement a setup flow handler extends from `mfa_modules
 
 > TODO: draw a diagram
 
-User == select auth provider ==> LoginFlow.init == input/validate username/password ==> LoginFlow.finish ==> if user enabled mfa ==> LoginFlow.select_mfa_module ==> LoginFlow.mfa == input/validate MFA code ==> LoginFlow.finish ==> Done
+User == select auth provider ==> LoginFlow.init == input/validate username/password ==> LoginFlow.finish ==> if user enabled mfa ==> LoginFlow.select_mfa_module ==> initialize(optional) ==> LoginFlow.mfa == input/validate MFA code ==> LoginFlow.finish ==> Done
 
 ## Configuration example
 
@@ -51,7 +52,6 @@ homeassistant:
     - type: totp
     - type: insecure_example
       users: [{'user_id': 'a_32_bytes_length_user_id', 'pin': '123456'}]
-auth:        
 ```
 
 In this example, user will first select from `homeassistant` or `legacy_api_password` auth provider. For `homeassistant` auth provider, user will first input username/password, if that user enabled both `totp` and `insecure_example`, then user need select one auth module, then input Google Authenticator code or input pin code base on the selection.
