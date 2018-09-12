@@ -3,8 +3,6 @@ title: Device Registry
 sidebar_label: Introduction
 ---
 
-> Entities can only be added to the device registry if they have been loaded via a [config entry](config_entries_index.md).
-
 The device registry is a registry where Home Assistant keeps track of devices. A device is represented in Home Assistant via one or more entities. For example, a battery-powered temperature and a humidity sensor might expose entities for temperature, humidity and battery level.
 
 <img
@@ -24,6 +22,8 @@ The device registry is a registry where Home Assistant keeps track of devices. A
 | sw_version | The firmware version of the device.
 
 ## Defining devices
+
+> Entity device info is only read if the entity is loaded via a [config entry](config_entries_index.md).
 
 Each entity is able to define a device via the `device_info` property. This property is read when an entity is added to Home Assistant via a config entry. A device will be be matched up with an existing device via supplied identifiers and connections, like serial numbers or MAC addresses.
 
