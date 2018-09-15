@@ -49,7 +49,7 @@ We use a unidirectional data flow (like Flux, Redux). When you make a change in 
 
 ## Routing
 
-The frontend uses decentralized routing. Each component only knows enough about the routing to know how to handle the part it's repsonsible for. Further routing is passed down the component tree.
+The frontend uses decentralized routing. Each component only knows enough about the routing to know how to handle the part it's responsible for. Further routing is passed down the component tree.
 
 For example, the `<home-assistant>` main component will look at the first part of the url to decide which panel should be loaded. Each panel can have its own mapping between the url and what content to show.
 

@@ -14,7 +14,7 @@ sidebar_label: Vacuum
 | battery_level | int | `none` | Current battery level.
 | battery_icon | string | function | Battery icon to show in UI.
 | cleaning_mode | string | `none` | The current cleaning mode.
-| cleaning_mode_list | list | `NotImplementedError()`| List of avaliable fan speeds and cleaning modes.
+| cleaning_mode_list | list | `NotImplementedError()`| List of available fan speeds and cleaning modes.
 | error | string | **Required** with `STATE_ERROR` | An error message if the vacuum is in `STATE_ERROR`.
 
 

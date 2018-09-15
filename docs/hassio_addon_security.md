@@ -2,11 +2,11 @@
 title: "Add-on security"
 ---
 
-Hass.io rates every add-on based on the wanted rights. A add-on with a rating of 6 is very secure. If an add-on has a rating of 1, you shouldn't run this add-on unless you are 100% sure that you can trust the source.
+Hass.io rates every add-on based on the wanted rights. An add-on with a rating of 6 is very secure. If an add-on has a rating of 1, you shouldn't run this add-on unless you are 100% sure that you can trust the source.
 
 ## Protection
 
-Default, all add-on run in a protection enabled modu. This mode prevents the add-on from getting any rights on the system. If an add-on requires more rights, you can disable this protection via the API add-on options for that add-on. But be carful, a add-on with disabled protection can destroy your system!
+Default, all add-ons run in protection enabled mode. This mode prevents the add-on from getting any rights on the system. If an add-on requires more rights, you can disable this protection via the API add-on options for that add-on. But be carful, an add-on with disabled protection can destroy your system!
 
 ## Making a secure add-on
 

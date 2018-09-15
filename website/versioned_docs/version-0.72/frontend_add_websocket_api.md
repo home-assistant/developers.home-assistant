@@ -12,7 +12,7 @@ To register a command, you need to have a message type, a message schema and a m
 
 ### Message Types
 
-Message types are made up the domain and the message type, seperated by a forward slash. In the below example, we're defining `media_player/thumbnail`.
+Message types are made up the domain and the message type, separated by a forward slash. In the below example, we're defining `media_player/thumbnail`.
 
 ```python
 # The type of the message

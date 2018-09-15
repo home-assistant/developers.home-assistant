@@ -130,7 +130,7 @@ An HTTP status code of 400 will be returned if an invalid request has been issue
 
 > client_id is not need for revoke refresh token
 
-The token endpoint is also capable of revoking a refresh token. Revoking a refresh token will immedeatly revoke the refresh token and all access tokens that it has ever granted. To revoke a refresh token, make the following request:
+The token endpoint is also capable of revoking a refresh token. Revoking a refresh token will immediately revoke the refresh token and all access tokens that it has ever granted. To revoke a refresh token, make the following request:
 
 ```
 token=IJKLMNOPQRST&
@@ -141,7 +141,7 @@ The request will always respond with an empty body and HTTP status 200, regardle
 
 ## Long-lived access token
 
-A long-lived access token is usally used for 3rd party API calls and webhook-ish integrations. To generate a long-lived access token, an active websocket connection has to be established.
+A long-lived access token is usually used for 3rd party API calls and webhook-ish integrations. To generate a long-lived access token, an active websocket connection has to be established.
 
 Send websocket command `auth/long_lived_access_token` will create a long-lived access token for current user. Access token will not be saved in Home Assistant. User need to record the token in secure place.
 

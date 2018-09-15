@@ -18,7 +18,7 @@ The Lovelace UI is:
 
 ## How it works
 
-The old user interface relied solely on the state machine. This caused trouble as it meant that the state machine was now not only the source for device states, but also for user interface configuration. With Lovelace, we're taking a completely different approach. All user interface configuration will live in a seperate file, controlled by the user.
+The old user interface relied solely on the state machine. This caused trouble as it meant that the state machine was now not only the source for device states, but also for user interface configuration. With Lovelace, we're taking a completely different approach. All user interface configuration will live in a separate file, controlled by the user.
 
 ![Visual comparison of old configuration versus new configuration](/img/en/frontend/lovelace-ui-comparison.png)
 

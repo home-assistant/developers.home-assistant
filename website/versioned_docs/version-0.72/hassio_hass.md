@@ -1,5 +1,5 @@
 ---
-title: Hass.io <> Home Assitant integration development
+title: Hass.io <> Home Assistant integration development
 sidebar_label: HASS Integration development
 id: version-0.72-hassio_hass
 original_id: hassio_hass
@@ -30,7 +30,7 @@ To get these info, do the following steps:
 
  ## Having Home Assistant connect to remote Hass.io
 
- The connection with the supervisor is hidden inside the host and is only accessible from applications running on the host. So to make it accessible for our Home Assistant instance, we will need to route the connection to our computer running Home Assitant. We're going to do this by forwarding ports via an SSH connection.
+ The connection with the supervisor is hidden inside the host and is only accessible from applications running on the host. So to make it accessible for our Home Assistant instance, we will need to route the connection to our computer running Home Assistant. We're going to do this by forwarding ports via an SSH connection.
 
 We are going to SSH from our machine running Home Assistant into the remote Hass.io host. We're going to configure our SSH connection to forward all local connections to localhost port 10081 to be sent from the Hass.io host to the IP address that we got as `HASSIO` value in the last step.
 
@@ -58,7 +58,7 @@ Voila. Your local Home Assistant installation will now connect to a remote Hass.
 
 > This requires Home Assistant 0.71 or later.
 
-We need a couple more steps to do frontend development. First, make sure you have a Home Assitant frontend development set up ([instructions](frontend_index.md)).
+We need a couple more steps to do frontend development. First, make sure you have a Home Assistant frontend development set up ([instructions](frontend_index.md)).
 
 Update the Hass.io component configuration in your `configuration.yaml` to point at the frontend repository:
 
