@@ -123,7 +123,7 @@ this.hass.callWS({
 
 ### `hass.callApi(method, path, data)`
 
-Call an API on the Home Assistant server. For example, if you want to fetch all Hass.io snapshots by issueing a GET request to `/api/hassio/snapshots`:
+Call an API on the Home Assistant server. For example, if you want to fetch all Hass.io snapshots by issuing a GET request to `/api/hassio/snapshots`:
 
 ```js
 hass.callApi('get', 'hassio/snapshots')

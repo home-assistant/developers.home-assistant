@@ -130,7 +130,7 @@ An HTTP status code of 400 will be returned if an invalid request has been issue
 
 ### Revoking a refresh token
 
-The token endpoint is also capable of revoking a refresh token. Revoking a refresh token will immedeatly revoke the refresh token and all access tokens that it has ever granted. To revoke a refresh token, make the following request:
+The token endpoint is also capable of revoking a refresh token. Revoking a refresh token will immediately revoke the refresh token and all access tokens that it has ever granted. To revoke a refresh token, make the following request:
 
 ```
 token=IJKLMNOPQRST&

@@ -64,7 +64,7 @@ The entity base class has a few properties that are common among all entities in
 | entity_picture | URL | `None` | Url of a picture to show for the entity.
 | name | string | `None` | Name of the entity
 | should_poll | boolean | `True` | Should Home Assistant check with the entity for an updated state. If set to `False`, entity will need to notify Home Assistant of new updates by calling one of the [schedule update methods](#methods).
-| unique_id | string | `None` | A unique identifier for this entity. Needs to be unique within a platform (ie `light.hue`). Should not be configurable by the user or be changable. [Learn more.](entity_registry_index.md#unique-id-requirements)
+| unique_id | string | `None` | A unique identifier for this entity. Needs to be unique within a platform (ie `light.hue`). Should not be configurable by the user or be changeable. [Learn more.](entity_registry_index.md#unique-id-requirements)
 
 ## Advanced properties
 

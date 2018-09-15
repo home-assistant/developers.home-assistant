@@ -4,7 +4,7 @@ id: version-0.77.0-auth_auth_module
 original_id: auth_auth_module
 ---
 
-Multi-factor Authentication Modules are used in conjunction with [Authentication Provider](auth_auth_provider.html) to provide a fully configurable authentication framework. Each MFA module may provide one multi-factor authentication function. User can enable mulitple mfa module, but can only select one module in login process.
+Multi-factor Authentication Modules are used in conjunction with [Authentication Provider](auth_auth_provider.html) to provide a fully configurable authentication framework. Each MFA module may provide one multi-factor authentication function. User can enable multiple mfa modules, but can only select one module in login process.
 
 ## Defining an mfa auth module
 
@@ -27,7 +27,7 @@ Multi-factor Auth modules shall extend the following methods of `MultiFactorAuth
 
 ## Setup Flow
 
-Before user can use a multi-factor auth module, it has to be enabled or set up. All availiable modules will be listed in user profile page, user can enable the module he/she wants to use. A setup data entry flow will guide user finish the neccessary steps.
+Before user can use a multi-factor auth module, it has to be enabled or set up. All availaable modules will be listed in user profile page, user can enable the module he/she wants to use. A setup data entry flow will guide user finish the necessary steps.
 
 Each MFA module need to implement a setup flow handler extends from `mfa_modules.SetupFlow` (if only one simple setup step need, `SetupFlow` can be used as well). For example for Google Authenticator (TOTP, Time-based One Time Password) module, the flow will need to be:
 - Generate a secret and store it on instance of setup flow
