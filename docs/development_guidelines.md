@@ -81,3 +81,12 @@ Instead of order the imports manually, use [`isort`](https://github.com/timothyc
 $ pip3 install isort
 $ isort homeassistant/components/sensor/fixer.py 
 ```
+
+### Use new style string formatting
+
+Prefer [new style string formatting](https://www.python.org/dev/peps/pep-3101/) over old.
+
+```python
+"{} {}".format('New', 'style')
+"%s %s" % ('Old', 'style')
+```
