@@ -113,12 +113,14 @@ The config for an add-on is stored in `config.json`.
 | host_network | bool | no | If that is True, the add-on run on host network.
 | host_ipc | bool | no | Default False. Allow to share the IPC namespace with others.
 | host_dbus | bool | no | Default False. Map Host dbus service into add-on.
+| host_pid | bool | no | Default False. Allow to run container on host PID namespace. Work only for not protected add-ons.
 | devices | list | no | Device list to map into the add-on. Format is: `<path_on_host>:<path_in_container>:<cgroup_permissions>`. i.e. `/dev/ttyAMA0:/dev/ttyAMA0:rwm`
 | auto_uart | bool | no | Default False. Auto mapping all UART/Serial device from host into add-on.
+| hassio_role | str | no | Default `default`. Role based access to Hass.io API. Available: `default`, `homeassistant`, `manager`, `admin`.
 | hassio_api | bool | no | This add-on can access to Hass.io REST API. It set the host alias `hassio`.
 | homeassistant_api | bool | no | This add-on can access to Hass.io Home-Assistant REST API proxy. Use `http://hassio/homeassistant/api`.
 | docker_api | bool | no | Allow read-oly access to docker API for add-on. Work only for not protected add-ons.
-| privileged | list | no | Privilege for access to hardware/system. Available access: `NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_TIME`, `SYS_NICE`, `S40-DFS-P01`
+| privileged | list | no | Privilege for access to hardware/system. Available access: `NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_TIME`, `SYS_NICE`, `SYS_RESOURCE`, `SYS_PTRACE`.
 | full_access | bool | no | Give full access to hardware like the privileged mode in docker. Work only for not protected add-ons.
 | apparmor | bool/string | no | Enable or disable AppArmor support. If it is enable, you can also use custom profiles with the name of the profile.
 | map | list | no | List of maps for additional Hass.io folders. Possible values: `config`, `ssl`, `addons`, `backup`, `share`. Defaults to `ro`, which you can change by adding `:rw` to the end of the name.
