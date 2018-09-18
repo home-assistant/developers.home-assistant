@@ -28,4 +28,4 @@ As a developer, follow the following best practices to make your add-on secure:
 - Don't run on host network
 - Create an AppArmor profile
 - Map folders read only if you don't need write access
-- If you need any API Access, make sure you grant not the highst permission if you don't need it
+- If you need any API access, make sure you that you not grant to highest permission if you don't need it
