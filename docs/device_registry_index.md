@@ -20,7 +20,7 @@ The device registry is a registry where Home Assistant keeps track of devices. A
 | model | The model of the device.
 | config_entries | Config entries that are linked to this device.
 | sw_version | The firmware version of the device.
-| via_hub | A single identifier of a device that routes messages between this device and Home Assistant. Examples of such devices are hubs.
+| via_hub | Identifier of a device that routes messages between this device and Home Assistant. Examples of such devices are hubs. This is used to show device topology in Home Assistant.
 
 ## Defining devices
 
