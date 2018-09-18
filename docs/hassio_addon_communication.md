@@ -32,6 +32,7 @@ Add-ons can call some API commands without need set `hassio_api: true`:
 - `/supervisor/info`
 - `/addons`
 - `/addons/self/...`
+- `/services*`
 
 [hass-api]: https://www.home-assistant.io/developers/rest_api/
 [hass-websocket]: https://www.home-assistant.io/developers/websocket_api/
