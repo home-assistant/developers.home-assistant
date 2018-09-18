@@ -25,7 +25,7 @@ We have severals services for Hass.io inside Home Assistant to run tasks. To sen
 
 ## Hass.io API
 
-To enables calls to the [Hass.io API][hassio-api], add `hassio_api: true` to `config.json` and read the environment variable `HASSIO_TOKEN`. Now you can use the API over the URL: `http://hassio/`. Use the `HASSIO_TOKEN` with header `X-HASSIO-KEY`.
+To enables calls to the [Hass.io API][hassio-api], add `hassio_api: true` to `config.json` and read the environment variable `HASSIO_TOKEN`. Now you can use the API over the URL: `http://hassio/`. Use the `HASSIO_TOKEN` with header `X-HASSIO-KEY`. It could be that you need also change the Hass.io API role like `hassio_role: default`.
 
 Add-ons can call some API commands without need set `hassio_api: true`:
 - `/homeassistant/info`
