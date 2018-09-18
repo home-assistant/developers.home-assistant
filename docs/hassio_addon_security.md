@@ -8,7 +8,7 @@ Hass.io rates every add-on based on the wanted rights. An add-on with a rating o
 
 For access to Hass.io API you need define a role or you run in default mode. This is only required for Hass.io API not Home Assistant proxy. Any of the role have also the default API calls inheret for that are no settings are required.
 
-Available Roles:
+### Available Roles
 
 | Role | Description |
 |------|-------------|
