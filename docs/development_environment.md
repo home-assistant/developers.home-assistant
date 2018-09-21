@@ -99,4 +99,14 @@ $ hass
 
 By default logging in home-assistant is tuned for operating in production (set to INFO by default, with some modules set to even less verbose logging levels).
 
-You can use the [logger](https://www.home-assistant.io/components/logger/) component to adjust logging to DEBUG to see even more details about what is going on.
+You can use the [logger](https://www.home-assistant.io/components/logger/) component to adjust logging to DEBUG to see even more details about what is going on:
+
+```yaml
+logger:
+  default: info
+  logs:
+    homeassistant.core: debug
+    nest.nest: debug
+    asyncio: debug
+    homeassistant.components.cloud.iot: debug
+```
