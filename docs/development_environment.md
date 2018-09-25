@@ -17,10 +17,8 @@ $ sudo apt-get install python3-pip python3-dev python3-venv
 In order to run `script/setup` below you will need some more dependencies.
 
 ```bash
-$ sudo apt-get install libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev
+$ sudo apt-get install autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev
 ```
-
-> For tox to run without issues, it might be necessary to install `autoconf` first with `$ sudo apt-get install autoconf`.
 
 > Different distributions have different package installation mechanisms and sometimes packages names as well. For example Centos would use: `sudo yum install epel-release && sudo yum install python36 python36-devel mysql-devel gcc`
 
