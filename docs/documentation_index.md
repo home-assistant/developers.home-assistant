@@ -14,13 +14,13 @@ To test your changes locally, you need to install **Ruby** and its dependencies 
 
 - [Install Ruby](https://www.ruby-lang.org/en/documentation/installation/) if you don't have it already. Ruby version 2.3.0 or higher is required.
 - Install `bundler`, a dependency manager for Ruby: `$ gem install bundler`
-- In your home-assistant.github.io root directory, run `$ bundle` to install the gems you need.
+- In your home-assistant.io root directory, run `$ bundle` to install the gems you need.
 
 Shortcut for Fedora: `$ sudo dnf -y install gcc-c++ ruby ruby-devel rubygem-bundler rubygem-json && bundle`
 
 Then you can work on the documentation:
 
-- Fork home-assistant.io [git repository](https://github.com/home-assistant/home-assistant.github.io).
+- Fork home-assistant.io [git repository](https://github.com/home-assistant/home-assistant.io).
 - Create/edit/update a page in the directory `source/_components/` for your platform/component.
 - Test your changes to home-assistant.io locally: run `rake preview` and navigate to [http://127.0.0.1:4000](http://127.0.0.1:4000)
 - Create a Pull Request (PR) against the **next** branch of home-assistant.github.io if your documentation is a new feature, platform, or component.
