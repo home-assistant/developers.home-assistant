@@ -34,7 +34,7 @@ This is a solid integration that is able to survive poor conditions and can be c
 - Creating a config entry should make sure that there are no other config entries for the same device.
 - Discoverable (if available)
 - Entities have device info (if available) ([docs](device_registry_index.md#defining-devices))
-- States are translated in the frontend ([docs](internationalization_index.md))
+- States are translated in the frontend (sensors only, [docs](internationalization_index.md))
 - Tests for all parts (config flow, reading data from/controlling the integration) ([docs](development_testing.md))
 - Has a code owner
 
