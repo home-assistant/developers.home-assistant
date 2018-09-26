@@ -19,7 +19,7 @@ This integration passes the bare minimum requirements to become part of the inde
 This integration is able to cope when things go wrong. It will not print any exceptions nor will it fill the log with retry attempts.
 
 - Set an appropriate `SCAN_INTERVAL` (if a polling integration)
-- Raise `PlatformNotReady` if unable to connect during setup (if appropriate)
+- Raise `PlatformNotReady` if unable to connect during platform setup (if appropriate)
 - Handles expiration of auth credentials. Refresh if possible or print correct error and fail setup. If based on a config entry, should trigger a new config entry flow to re-authorize.
 - Handles internet unavailable. Log a warning once when unavailable, log once when reconnected.
 - Handles device/service unavailable. Log a warning once when unavailable, log once when reconnected.
@@ -30,12 +30,13 @@ This integration is able to cope when things go wrong. It will not print any exc
 
 This is a solid integration that is able to survive poor conditions and can be configured via the user interface.
 
-- Configurable via config entries
-- Creating a config entry should make sure that there are no other config entries for the same device.
-- Discoverable (if available)
+- Configurable via config entries.
+  - Don't allow configuring already configired device/service (example: no 2 entries for same hub)
+  - Tests for the config flow
+  - Discoverable (if available)
 - Entities have device info (if available) ([docs](device_registry_index.md#defining-devices))
 - States are translated in the frontend (sensors only, [docs](internationalization_index.md))
-- Tests for all parts (config flow, reading data from/controlling the integration) ([docs](development_testing.md))
+- Tests for reading data from/controlling the integration ([docs](development_testing.md))
 - Has a code owner
 
 # Platinum 🏆
