@@ -3,7 +3,7 @@ title: "Integration Quality Scale"
 sidebar_label: "Introduction"
 ---
 
-The Integration Quality Scale scores each integration based on the code quality and user experience. Each level of the quality scale consists of a list of requirements. If an integration matches all requirements, it's considered that level.
+The Integration Quality Scale scores each integration based on the code quality and user experience. Each level of the quality scale consists of a list of requirements. t If an integration matches all requirements, it's considered to have reached that level.
 
 > Suggestions for changes can be done by creating an issue in the [architecture repo](https://github.com/home-assistant/architecture/issues/).
 
@@ -16,14 +16,14 @@ This integration passes the bare minimum requirements to become part of the inde
 
 # Silver 🥈
 
-This integration is able to cope when things go wrong. It will not print any exceptions not will it fill the log with retry attempts.
+This integration is able to cope when things go wrong. It will not print any exceptions nor will it fill the log with retry attempts.
 
 - Set an appropriate `SCAN_INTERVAL` (if a polling integration)
 - Raise `PlatformNotReady` if unable to connect during setup (if appropriate)
 - Handles expiration of auth credentials. Refresh if possible or print correct error and fail setup. If based on a config entry, should trigger a new config entry flow to re-authorize.
 - Handles internet unavailable. Log a warning once when unavailable, log once when reconnected.
 - Handles device/service unavailable. Log a warning once when unavailable, log once when reconnected.
-- Set unavailable property to False if appropriate ([docs](entity_index.md#generic-properties))
+- Set `available` property to `False` if appropriate ([docs](entity_index.md#generic-properties))
 - Entities have unique ID (if available) ([docs](entity_registry_index.md#unique-id-requirements))
 
 # Gold 🥇
@@ -35,12 +35,12 @@ This is a solid integration that is able to survive poor conditions and can be c
 - Discoverable (if available)
 - Entities have device info (if available) ([docs](device_registry_index.md#defining-devices))
 - States are translated in the frontend ([docs](internationalization_index.md))
-- Tests ([docs](development_testing.md))
+- Tests for all parts (config flow, reading data from/controlling the integration) ([docs](development_testing.md))
 - Has a code owner
 
-# Platinum 🎖
+# Platinum 🏆
 
-Best of the best. The integration is completely async, meaning it's super fast. Integrations that reach expert level will require the code owner approval for each PR.
+Best of the best. The integration is completely async, meaning it's super fast. Integrations that reach platinumn level will require  approval by the code owner for each PR.
 
 - Set appropriate `PARALLEL_UPDATES` constant
 - Support config entry unloading (called when config entry is removed)
