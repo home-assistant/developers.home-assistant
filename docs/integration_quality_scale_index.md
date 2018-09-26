@@ -40,7 +40,7 @@ This is a solid integration that is able to survive poor conditions and can be c
 
 # Platinum 🏆
 
-Best of the best. The integration is completely async, meaning it's super fast. Integrations that reach platinumn level will require  approval by the code owner for each PR.
+Best of the best. The integration is completely async, meaning it's super fast. Integrations that reach platinum level will require  approval by the code owner for each PR.
 
 - Set appropriate `PARALLEL_UPDATES` constant
 - Support config entry unloading (called when config entry is removed)
