@@ -84,6 +84,9 @@
       "dev_101_services",
       "dev_101_config"
     ],
+    "Integration Quality Scale": [
+      "integration_quality_scale_index"
+    ],
     "Creating Platforms": [
       "creating_platform_index",
       "creating_platform_code_review",

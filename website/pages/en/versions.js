@@ -68,7 +68,7 @@ class Versions extends React.Component {
                 {versions.map(
                   version =>
                     version !== latestVersion && (
-                      <tr>
+                      <tr key={version}>
                         <th>{version}</th>
                         <td>
                           <a href={versionUrl(this.props.language, version)}>Documentation</a>
