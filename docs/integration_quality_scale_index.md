@@ -31,7 +31,7 @@ This integration is able to cope when things go wrong. It will not print any exc
 This is a solid integration that is able to survive poor conditions and can be configured via the user interface.
 
 - Configurable via config entries.
-  - Don't allow configuring already configired device/service (example: no 2 entries for same hub)
+  - Don't allow configuring already configured device/service (example: no 2 entries for same hub)
   - Tests for the config flow
   - Discoverable (if available)
 - Entities have device info (if available) ([docs](device_registry_index.md#defining-devices))
