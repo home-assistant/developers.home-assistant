@@ -6,6 +6,12 @@ A checklist of things to do when you're adding a new component.
 
 > Not all existing platforms follow the requirements in this checklist. This cannot be used as a reason to not follow them!
 
+### 0. Common
+
+ 1. Follow our [Style guidelines](development_guidelines.md)
+ 2. Use existing constants from [`const.py`](https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/const.py)
+    * Only add new constants to `const.py` if they are widely used. Otherwise keep them on components level
+
 ### 1. Requirements
 
  1. Requirement version pinned: `REQUIREMENTS = ['phue==0.8.1']`
@@ -14,7 +20,7 @@ A checklist of things to do when you're adding a new component.
 
 ### 2. Configuration
 
- 1. Voluptuous schema present for config validation
+ 1. Voluptuous schema present for [configuration validation](development_validation.md)
  2. Default parameters specified in voluptuous schema, not in `setup(…)`
  3. Schema using as many generic config keys as possible from `homeassistant.const`
  4. If your component has platforms, define a `PLATFORM_SCHEMA` instead of a `CONFIG_SCHEMA`.
