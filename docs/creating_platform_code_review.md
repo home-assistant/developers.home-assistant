@@ -20,7 +20,7 @@ A checklist of things to do when you're adding a new platform.
 
  1. Voluptuous schema present for config validation
  2. Voluptuous schema extends schema from component<br>(e.g., `light.hue.PLATFORM_SCHEMA` extends `light.PLATFORM_SCHEMA`)
- 3. Default parameters specified in voluptuous schema, not in `setup_platform(…)`
+ 3. Default parameters specified in voluptuous schema, not in `setup_platform(...)`
  4. Your `PLATFORM_SCHEMA` should use as many generic config keys as possible from `homeassistant.const`
     ```python
     import voluptuous as vol
@@ -51,7 +51,7 @@ A checklist of things to do when you're adding a new platform.
 
  1. Extend entity from component, e.g., `class HueLight(Light)`.
  2. Avoid passing in `hass` as a parameter to the entity. When the entity has been added to Home Assistant, `hass` will be set on the entity by the helper in entity_platform.py. This means you can access `hass` as `self.hass` inside the entity.
- 3. Do not call `update()` in constructor, use `add_devices(devices, True)` instead.
+ 3. Do not call `update()` in constructor, use `add_entities(devices, True)` instead.
  4. Do not do any I/O inside properties. Cache values inside `update()` instead.
  5. The state and/or attributes should not contain relative time since something happened. Instead it should store UTC timestamps.
 
@@ -65,6 +65,6 @@ status = requests.get(url('/status'))
 
 # good
 from phue import Bridge
-bridge = Bridge(…)
+bridge = Bridge(...)
 status = bridge.status()
 ```

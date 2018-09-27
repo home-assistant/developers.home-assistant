@@ -37,6 +37,6 @@ status = requests.get(url('/status'))
 
 # good
 from phue import Bridge
-bridge = Bridge(…)
+bridge = Bridge(...)
 status = bridge.status()
 ```
