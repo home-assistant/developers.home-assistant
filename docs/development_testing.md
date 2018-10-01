@@ -2,7 +2,7 @@
 title: "Testing your code"
 ---
 
-As it states in the [Style guidelines section](development_guidelines.md) all code is checked to verify all the unit tests pass and that the code passes the linting tools. Local testing is done using Tox, which has been installed as part of running `script/setup` in the [virtual environment](development_environment.md). To start the tests, activate the virtual environment and simply run the command:
+As it states in the [Style guidelines section](development_guidelines.md) all code is checked to verify all that the unit tests pass and that the code passes the checks from the linting tools. Local testing is done using Tox, which has been installed as part of running `script/setup` in the [virtual environment](development_environment.md). To start the tests, activate the virtual environment and simply run the command:
 
 ```bash
 $ tox
