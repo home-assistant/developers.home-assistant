@@ -37,7 +37,7 @@ Additional keys for the file header:
 - `logo`: Please check the separate section below.
 - `ha_release`: The release when the intregration was included, e.g., "0.38". If the current release is 0.37, make `ha_release` 0.38. If it's 0.30 or 0.40 please quote it with `" "`.
 - `ha_category`: This entry is used to group the integration on the [Components overview](https://www.home-assistant.io/components/).
-- `ha_iot_class`: [IoT class(/blog/2016/02/12/classifying-the-internet-of-things) is the classifier for the device's behavior.
+- `ha_iot_class`: [IoT class](https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things) is the classifier for the device's behavior.
 - `ha_qa_scale`: [Quality scale](https://www.home-assistant.io/docs/quality_scale/) is the representation of the integration's quality.
 
 There are [pre-definied variables](https://jekyllrb.com/docs/variables/) available but usually, it's not necessary to use them when writing documentation.
