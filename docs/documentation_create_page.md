@@ -24,7 +24,7 @@ ha_iot_class: "Local Polling"
 ha_qa_scale: silver
 ---
 
-Content...Written in markdown. 
+Content... Written in markdown. 
 
 ### {% linkable_title Linkable Header %}
 ...
@@ -35,17 +35,17 @@ Please keep in mind that if the `date:` entry is in the future then the page wil
 Additional keys for the file header:
 
 - `logo`: Please check the separate section below.
-- `ha_release`: The release when the intregration was included, e.g., "0.38". If the current release is 0.37, make `ha_release` 0.38. If it's 0.30 or 0.40 please quote it with `" "`.
+- `ha_release`: The release when the integration was included, e.g., "0.38". If the current release is 0.37, make `ha_release` 0.38. If it's 0.30 or 0.40 please quote it with `" "`.
 - `ha_category`: This entry is used to group the integration on the [Components overview](https://www.home-assistant.io/components/).
-- `ha_iot_class`: [IoT class(/blog/2016/02/12/classifying-the-internet-of-things) is the classifier for the device's behavior.
+- `ha_iot_class`: [IoT class](https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things) is the classifier for the device's behavior.
 - `ha_qa_scale`: [Quality scale](https://www.home-assistant.io/docs/quality_scale/) is the representation of the integration's quality.
 
-There are [pre-definied variables](https://jekyllrb.com/docs/variables/) available but usually, it's not necessary to use them when writing documentation.
+There are [pre-defined variables](https://jekyllrb.com/docs/variables/) available but usually, it's not necessary to use them when writing documentation.
 
 A couple of points to remember:
 
 - Document the needed steps to retrieve API keys or access token for the third party service or device if needed.
-- Add screenshot to support the user where it make sense.
+- Add screenshots to support the user where it makes sense.
 - Add the type of the device(s) (incl. firmware) you have tested when you know that there are multiple out there.
 
 ### Configuration
@@ -89,7 +89,7 @@ required: inclusive       #=> Inclusive
 required: exclusive       #=> Exclusive
 required: any string here #=> Any string here
 ```
-- **`type:`**: The type of the variable. Allowed entries: `string`, `int`, `time`, `template` or `map` (for a list of entries). For multiple possibilities use `[string, int]`. If you use `map` then you need to define `keys:` (see the [`template` sensor](/components/sensor.template/) for an example).
+- **`type:`**: The type of the variable. Allowed entries: `string`, `int`, `time`, `template` or `map` (for a list of entries). For multiple possibilities use `[string, int]`. If you use `map` then you need to define `keys:` (see the [`template` sensor](https://www.home-assistant.io/components/sensor.template/) for an example).
 - **`default:`**: The default value for the variable.
 
 ### Embedding Code
@@ -100,7 +100,7 @@ When you're writing code that is to be executed on the terminal, prefix it with 
 
 ### Templates
 
-For the [configuration templating](https://www.home-assistant.io/docs/configuration/templating/) is [Jinja](http://jinja.pocoo.org/) used. Check the [Documentation Standards](documentation_standards.md) for further details.
+For the [configuration templating](https://www.home-assistant.io/docs/configuration/templating/) [Jinja](http://jinja.pocoo.org/) is used. Check the [Documentation Standards](documentation_standards.md) for further details.
 
 If you are don't escape templates then they will be rendered and appear blank on the website.
 
@@ -128,4 +128,4 @@ Not everything (product, component, etc.) should have a logo. To show something 
 
 ### Linking From The Sidebar
 
-If you are adding a new page that requires linking from the sidebar you need to edit the `docs_navigation.html` file in `home-assistant.github.io/source/_includes/asides/docs_navigation.html`.
+If you are adding a new page that requires linking from the sidebar, you need to edit the `docs_navigation.html` file in `source/_includes/asides/docs_navigation.html`.
