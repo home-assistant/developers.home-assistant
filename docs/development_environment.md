@@ -60,7 +60,7 @@ $ pip install --upgrade setuptools
 Install [Homebrew](https://brew.sh/), then use that to install Python 3:
 
 ```bash
-$ brew install python3
+$ brew install python3 autoconf
 ```
 
 ## Setup Local Repository

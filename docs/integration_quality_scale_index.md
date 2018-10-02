@@ -47,3 +47,8 @@ Best of the best. The integration is completely async, meaning it's super fast. 
 - Support config entry unloading (called when config entry is removed)
 - Integration + dependency are async
 - Uses aiohttp and allows passing in websession (if making HTTP requests)
+
+# Internal 🏠
+
+Integrations which are part of Home Assistant are not rated but marked as **internal**.
+

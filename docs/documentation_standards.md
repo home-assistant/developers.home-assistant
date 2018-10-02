@@ -34,7 +34,7 @@ Example configuration block
 some_key:
   description: This is a description of what this key is for.
   required: false
-  type: string, list
+  type: string
   default: Optional default value - leave out if there isn't one
 {% endconfiguration %}
 ```
