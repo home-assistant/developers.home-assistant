@@ -39,22 +39,6 @@ $ echo 'export DISPLAY=:0' >> ~/.bashrc && . ~/.bashrc
 $ sudo apt-get install xubuntu-desktop -y
 ```
 
-It is recommended using [PyCharm](https://www.jetbrains.com/pycharm/download/) as debugger. Download and start PyCharm.
-
-```bash
-$ wget https://download.jetbrains.com/python/pycharm-community-20XX.X.tar.gz
-$ tar -xzf pycharm-community-20XX.X
-$ ./pycharm.sh
-```
-
-In order to display the PyCharm GUI on Windows you need to run a X-Server like [VcXserv](https://sourceforge.net/projects/vcxsrv/).
-
-Also, make sure to install or upgrade the `setuptools` Python package. It contains compatibility improvements and adds automatic use of compilers:
-
-```bash
-$ pip install --upgrade setuptools
-```
-
 ### Developing on OS X
 
 Install [Homebrew](https://brew.sh/), then use that to install Python 3:
