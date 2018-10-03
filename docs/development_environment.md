@@ -73,7 +73,7 @@ Install the requirements with a provided script named `setup`.
 $ script/setup
 ```
 
-Invoke your installation.
+Invoke your installation. The location of the config folder can be determined by opening the Home Assistant front end and select the service developer tool icon; "Path to configuration.yaml". Alternatively use the command line options to override the default settings.
 
 ```bash
 $ hass
