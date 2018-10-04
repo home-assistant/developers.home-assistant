@@ -83,7 +83,7 @@ Use single quotes (`'`) for strings inside of a template. It is more obvious to 
 
 ### Examples
 
-#### {% linkable_title Double Quotes Outside, Single Quotes Inside (Valid) %}
+#### Double Quotes Outside, Single Quotes Inside (Valid)
 
 ```yaml
 automation:
