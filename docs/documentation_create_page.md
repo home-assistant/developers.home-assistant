@@ -89,7 +89,7 @@ required: inclusive       #=> Inclusive
 required: exclusive       #=> Exclusive
 required: any string here #=> Any string here
 ```
-- **`type:`**: The type of the variable. Allowed entries: `boolean`, `string`, `integer`, `time`, `template` or `map`/`list` (for a list of entries). For multiple possibilities use `[string, integer]`. If you use `map`/`list` then you need to define `keys:` (see the [`template` sensor](https://www.home-assistant.io/components/sensor.template/) for an example).
+- **`type:`**: The type of the variable. Allowed entries: `boolean`, `string`, `integer`, `time`, `template`, `device_class`, `icon` or `map`/`list` (for a list of entries). For multiple possibilities use `[string, integer]`. If you use `map`/`list` then you need to define `keys:` (see the [`template` sensor](https://www.home-assistant.io/components/sensor.template/) for an example).
 - **`default:`**: The default value for the variable.
 
 ### Embedding Code
