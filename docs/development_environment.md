@@ -73,7 +73,7 @@ Install the requirements with a provided script named `setup`.
 $ script/setup
 ```
 
-Invoke your installation.
+Invoke your installation, adjusting the [configuration](https://www.home-assistant.io/docs/configuration/) if required. 
 
 ```bash
 $ hass
