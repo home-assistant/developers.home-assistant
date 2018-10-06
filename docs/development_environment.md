@@ -45,6 +45,13 @@ $ sudo apt-get install autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev 
 
 Hint: Git is included in Linux subsytem.
 
+When invoking your installation (see below), make sure to specify a folder for configuration which is accessible from Windows.
+
+```bash
+mkdir -p ../config
+hass -c ../config
+```
+
 ### Developing on OS X
 
 Install [Homebrew](https://brew.sh/), then use that to install Python 3:
