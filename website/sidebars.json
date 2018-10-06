@@ -20,6 +20,7 @@
       "entity_sensor",
       "entity_switch",
       "entity_vacuum",
+      "entity_water_heater",
       "entity_weather"
     ],
     "Authentication": [

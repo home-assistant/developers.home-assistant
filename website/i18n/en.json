@@ -4,6 +4,7 @@
     "next": "Next",
     "previous": "Previous",
     "tagline": "All you need to start developing for Home Assistant",
+<<<<<<< HEAD
     "docs": {
       "architecture_components": {
         "title": "Components Architecture",
@@ -216,6 +217,10 @@
       "entity_vacuum": {
         "title": "Vacuum Entity",
         "sidebar_label": "Vacuum"
+      },
+      "entity_water_heater": {
+        "title": "Water Heater Entity",
+        "sidebar_label": "Water Heater"
       },
       "entity_weather": {
         "title": "Weather Entity",
