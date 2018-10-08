@@ -26,17 +26,30 @@ Additional dependencies exist if you plan to perform Frontend Development, pleas
 
 ### Developing on Windows
 
-If you are using Windows as a development platform, make sure that you have the correct Microsoft [Visual C++ build tools](http://landinghub.visualstudio.com/visual-cpp-build-tools) installed. The installation of the most requirements and validation using `tox` will fail if this is not done correctly. Check the [Windows Compilers](https://wiki.python.org/moin/WindowsCompilers) section on the [Python website](https://www.python.org/) for details.
+Due to Home Assistant is mainly designed and developed on Linux distributions, on Windows 10 you can setup a [Linux subsystem](https://docs.microsoft.com/windows/wsl/install-win10).
 
-Due to Home Assistant is mainly designed and developed on Linux distributions it is not recommended to develop on Windows machines. However on Windows 10 machines you should decide to set up a [Linux subsystem](https://docs.microsoft.com/de-de/windows/wsl/install-win10).
+Open Powershell as an Administrator and run
+```
+Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+```
 
-Setup Linux subsystem.
+From Windows Store install Ubuntu.
+
+When the Linux subsystem is setup, perform install as for Linux
 
 ```bash
 $ sudo apt-get update
-$ sudo apt-get upgrade
-$ echo 'export DISPLAY=:0' >> ~/.bashrc && . ~/.bashrc
-$ sudo apt-get install xubuntu-desktop -y
+$ sudo apt-get install python3-pip python3-dev python3-venv
+$ sudo apt-get install autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev
+```
+
+Hint: Git is included in Linux subsytem.
+
+When invoking your installation (see below), make sure to specify a folder for configuration which is accessible from Windows.
+
+```bash
+mkdir -p ../config
+hass -c ../config
 ```
 
 ### Developing on OS X
