@@ -37,13 +37,13 @@ $ ssh -L 4000:localhost:4000 user_on_headless_machine@ip_of_headless_machine
 ```
 ## Speeding up site generation
 
-Every release we post long changelogs to the website. This slows down generation of the website significantly! We include some tools to temporarily exclude the blog posts that you're not working on out of the way.
+Every release we post long changelogs to the website. This slows down generation of the website significantly! We include some tools to temporarily exclude components and blog posts that you're not working on out of the way.
 
 ```bash
-bundle exec rake isolate[filename-of-blogpost]
+bundle exec rake isolate[filename-of-blogpost-or-component]
 ```
 
-When you're done working on the site, run the following command to move the posts back again:
+When you're done working on the site, run the following command to move the pages back again:
 
 ```bash
 bundle exec rake integrate
