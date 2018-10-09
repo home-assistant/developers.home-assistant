@@ -16,7 +16,7 @@ Running the documentation locally requires [NodeJS](https://nodejs.org/en/) and 
 $ script/setup
 ```
 
-This will install [docusaurus](https://www.npmjs.com/package/docusaurus) amongst other things. 
+This will install [docusaurus](https://www.npmjs.com/package/docusaurus) amongst other things.
 
 ### Running docs locally
 
@@ -24,7 +24,7 @@ This will install [docusaurus](https://www.npmjs.com/package/docusaurus) amongst
 $ script/server
 ```
 
-It will start a server at [localhost:3000](http://localhost:3000).
+It will start a server at [localhost:3000](http://localhost:3000). You probably need to navigate the the `next` version of the docs to see your changes applied. To do so click on the version number in the header and select `next` -> `Documentation`.
 
 ### Adding a page
 
