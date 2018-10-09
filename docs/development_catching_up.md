@@ -24,6 +24,8 @@ After rebasing your branch, you will have rewritten history relative to your Git
 $ git push origin --force
 ```
 
+> If you try to `git push` after the rebase, git might prompt you to do `git pull` first. **DO NOT** do that! Instead force push as described above.
+
 Other workflows are covered in detail in the [Github documentation](https://help.github.com/articles/fork-a-repo/). Add an additional `remote` after you clone your fork.
 
 ```bash
