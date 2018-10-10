@@ -4,7 +4,9 @@ title: "Permissions"
 
 > This is an experimental feature that is not enabled or enforced yet
 
-Permissions limit the things a user has access to or can control. Permissions are attached to groups, of which a user can be a member. The combined permissions of all groups decides what a user can and cannot see or control.
+Permissions limit the things a user has access to or can control. Permissions are attached to groups, of which a user can be a member. The combined permissions of all groups a user is a member of decides what a user can and cannot see or control.
+
+Permissions do not apply to the user that is flagged as "owner". This user  will always have access to everything.
 
 ## General permission structure
 
@@ -27,15 +29,9 @@ Each category can further split into subcategories that describe parts of that c
 }
 ```
 
-
 If a category is ommitted, the user will not have permission to that category.
 
-When defining a policy, any value at any place can be replaced with `True`, `False` or `None`. `True` means that permission is granted, `False` means that access is denied and `None` means no opinion.
-
-Note that if we apply just a single policy, `False` and `None` result in the same result: access is denied. If a user is a member of multiple groups, the permission policies will be merged. In that case, a `False` overrules all other values of the other policies and access is denied:
-
- - `True` merged with `None` becomes `True`
- - `True` merged with `False` becomes `False`
+When defining a policy, any dictionary value at any place can be replaced with `True` or `None`. `True` means that permission is granted and `None` means use default, which is deny access.
 
 ## Entities
 
@@ -52,6 +48,44 @@ If an entity is specified in both the `entity_ids` and `domains` subcategory, th
     "entity_ids": {
       "light.kitchen": False
     }
+  }
+}
+```
+
+## Merging policies
+
+If a user is a member of multiple groups, the groups permission policies will be combined into a single policy at runtime. When merging policies, we will look at each level of the dictionary and compare the values for each source using the following methodology:
+
+1. If any of the values is `True`, the merged value becomes `True`.
+2. If any value is a dictionary, the merged value becomes a dictionary created by recursively checking each value using this methodology.
+3. If all values are `None`, the merged value becomes `None`.
+
+Let's look at an example:
+
+```python
+{
+  "entities": {
+    "entity_ids": {
+      "light.kitchen": True
+    }
+  }
+}
+```
+
+```python
+{
+  "entities": {
+    "entity_ids": True
+  }
+}
+```
+
+Once merged becomes
+
+```python
+{
+  "entities": {
+    "entity_ids": True
   }
 }
 ```
