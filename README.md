@@ -24,7 +24,7 @@ This will install [docusaurus](https://www.npmjs.com/package/docusaurus) amongst
 $ script/server
 ```
 
-It will start a server at [localhost:3000](http://localhost:3000). You probably need to navigate the the `next` version of the docs to see your changes applied. To do so click on the version number in the header and select `next` -> `Documentation`.
+It will start a server at [localhost:3000](http://localhost:3000). You will need to navigate to the `next` version of the docs to see your changes applied. To do so click on the version number in the header and select `next` -> `Documentation`.
 
 ### Adding a page
 
