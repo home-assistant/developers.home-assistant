@@ -4,6 +4,8 @@ title: "Catching up with Reality"
 
 If it's taking a while to develop your feature, and you want to catch up with what's in the current Home Assistant `dev` branch, you can use `git rebase`. This will pull the latest Home Assistant changes locally, rewind your commits, bring in the latest changes from Home Assistant, and replay all of your commits on top.
 
+> If you use the workflow below, it is important that you force push the update as described. Git might prompt you to do `git pull` first. Do **NOT** do that! It would mess up your commit history.
+
 ```bash
 # Run this from your feature branch
 $ git fetch upstream dev  # to pull the latest changes into a local dev branch
