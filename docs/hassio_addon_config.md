@@ -116,7 +116,7 @@ The config for an add-on is stored in `config.json`.
 | host_pid | bool | no | Default False. Allow to run container on host PID namespace. Work only for not protected add-ons.
 | devices | list | no | Device list to map into the add-on. Format is: `<path_on_host>:<path_in_container>:<cgroup_permissions>`. i.e. `/dev/ttyAMA0:/dev/ttyAMA0:rwm`
 | auto_uart | bool | no | Default False. Auto mapping all UART/Serial device from host into add-on.
-| hassio_role | str | no | Default `default`. Role based access to Hass.io API. Available: `default`, `homeassistant`, `manager`, `admin`.
+| hassio_role | str | no | Default `default`. Role based access to Hass.io API. Available: `default`, `homeassistant`, `backup`, `manager`, `admin`.
 | hassio_api | bool | no | This add-on can access to Hass.io REST API. It set the host alias `hassio`.
 | homeassistant_api | bool | no | This add-on can access to Hass.io Home-Assistant REST API proxy. Use `http://hassio/homeassistant/api`.
 | docker_api | bool | no | Allow read-oly access to docker API for add-on. Work only for not protected add-ons.
@@ -137,6 +137,7 @@ The config for an add-on is stored in `config.json`.
 | tmpfs | string | no | Mount a tmpfs file system in `/tmpfs`. Valide format for this option is : `size=XXXu,uid=N,rw`. Size is mandatory, valid units (`u`) are `k`, `m` and `g` and `XXX` has to be replaced by a number. `uid=N` (with `N` the uid number) and `rw` are optional.
 | discovery | list | no | A list of services they this Add-on allow to provide for Home Assistant. Currently supported: `mqtt`
 | services | list | no | A list of services they will be provided or consumed with this Add-on. Format is `service`:`function` and functions are: `provide` (this add-on can provide this service), `want` (this add-on can use this service) or `need` (this add-on need this service to work correctly).
+| login_backend | bool | no | Allow access to Home Assistent user backend.
 
 ### Options / Schema
 
