@@ -14,6 +14,7 @@ For access to Hass.io API you need define a role or you run in default mode. Thi
 |------|-------------|
 | default | Have access to all `info` calls |
 | homeassistant | Can access to all Home Assistant API endpoints |
+| backup | Can access to all snapshot API endpoints |
 | manager | Is for Add-ons they run CLIs and need extended rights |
 | admin | Have access to every API call. That is the only one they can disable/enable the Add-on protection mode |
 
