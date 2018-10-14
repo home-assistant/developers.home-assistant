@@ -33,7 +33,7 @@ Each page in Home Assistant is a panel. Components can register extra panels to 
 
 Folder: `src/dialogs/more-info`
 
-This is a dialog that allows users to see more information about an entity and control it's state.
+This is a dialog that allows users to see more information about an entity and control its state.
 
 The more info dialog can be triggered from any component in the app by firing a DOM event `hass-more-info` with as detail `{ entityId: 'light.kitchen' }`.
 
