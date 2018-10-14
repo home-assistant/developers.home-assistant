@@ -19,6 +19,7 @@ To test your changes locally, you need to install **Ruby** and its dependencies 
 - In your home-assistant.io root directory, run `$ bundle` to install the gems you need.
 
 Shortcut for Fedora: `$ sudo dnf -y install gcc-c++ ruby ruby-devel rubygem-bundler rubygem-json && bundle`
+For Ubuntu: `$ sudo apt install -y g++ ruby-dev ruby-bundler ruby-json && bundle`
 
 Then you can work on the documentation:
 
