@@ -851,6 +851,62 @@
       "version-0.79.0-integration_quality_scale_index": {
         "title": "Integration Quality Scale",
         "sidebar_label": "Introduction"
+      },
+      "version-0.80.0-auth_index": {
+        "title": "Authentication",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.80.0-auth_permissions": {
+        "title": "Permissions"
+      },
+      "version-0.80.0-development_catching_up": {
+        "title": "Catching up with Reality"
+      },
+      "version-0.80.0-development_environment": {
+        "title": "Set up Development Environment"
+      },
+      "version-0.80.0-development_submitting": {
+        "title": "Submit your work"
+      },
+      "version-0.80.0-development_testing": {
+        "title": "Testing your code"
+      },
+      "version-0.80.0-documentation_create_page": {
+        "title": "Create a new page"
+      },
+      "version-0.80.0-documentation_index": {
+        "title": "Documentation"
+      },
+      "version-0.80.0-documentation_standards": {
+        "title": "Standards"
+      },
+      "version-0.80.0-entity_sensor": {
+        "title": "Sensor Entity",
+        "sidebar_label": "Sensor"
+      },
+      "version-0.80.0-entity_water_heater": {
+        "title": "Water Heater Entity",
+        "sidebar_label": "Water Heater"
+      },
+      "version-0.80.0-frontend_architecture": {
+        "title": "Home Assistant Frontend Architecture",
+        "sidebar_label": "Architecture"
+      },
+      "version-0.80.0-hassio_addon_communication": {
+        "title": "Add-On Communication"
+      },
+      "version-0.80.0-hassio_addon_config": {
+        "title": "Add-On Configuration"
+      },
+      "version-0.80.0-hassio_addon_security": {
+        "title": "Add-on security"
+      },
+      "version-0.80.0-hassio_debugging": {
+        "title": "Debugging Hass.io"
+      },
+      "version-0.80.0-integration_quality_scale_index": {
+        "title": "Integration Quality Scale",
+        "sidebar_label": "Introduction"
       }
     },
     "links": {
