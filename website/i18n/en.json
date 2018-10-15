@@ -48,6 +48,9 @@
         "title": "Authentication",
         "sidebar_label": "Introduction"
       },
+      "auth_permissions": {
+        "title": "Permissions"
+      },
       "config_entries_config_flow_handler": {
         "title": "Config Flow Handlers"
       },
