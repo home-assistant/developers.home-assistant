@@ -21,12 +21,12 @@ Multi-factor Auth modules shall extend the following methods of `MultiFactorAuth
 | `async def async_setup_user(self, user_id, setup_data)` | Yes | Set up user for use this auth module.
 | `async def async_depose_user(self, user_id)` | Yes | Remove user information from this auth module.
 | `async def async_is_user_setup(self, user_id)` | Yes | Return whether user is set up.
-| `async def async_validate(self, user_id, user_input)` | Yes | Given a user_id and user input, return valiidation result.
+| `async def async_validate(self, user_id, user_input)` | Yes | Given a user_id and user input, return validation result.
 | `async def async_initialize_login_mfa_step(self, user_id)` | No | Will be called once before display the mfa step of login flow. This is not initialization for the MFA module but the mfa step in login flow.
 
 ## Setup Flow
 
-Before user can use a multi-factor auth module, it has to be enabled or set up. All availaable modules will be listed in user profile page, user can enable the module he/she wants to use. A setup data entry flow will guide user finish the necessary steps.
+Before user can use a multi-factor auth module, it has to be enabled or set up. All available modules will be listed in user profile page, user can enable the module he/she wants to use. A setup data entry flow will guide user finish the necessary steps.
 
 Each MFA module need to implement a setup flow handler extends from `mfa_modules.SetupFlow` (if only one simple setup step need, `SetupFlow` can be used as well). For example for Google Authenticator (TOTP, Time-based One Time Password) module, the flow will need to be:
 - Generate a secret and store it on instance of setup flow
@@ -60,4 +60,4 @@ In this example, user will first select from `homeassistant` or `legacy_api_pass
 
 ## Validation session
 
-Not like auth provider, auth module use session to manage the validation. After auth provider validated, mfa module will create a validation session, include an experiation time and user_id from auth provider validate result. Mutli-factor auth moudle will not only verify the user input, and also verify the session is not experied. The validatoin session data storges in login flow instance.
+Not like auth provider, auth module use session to manage the validation. After auth provider validated, mfa module will create a validation session, include an experiation time and user_id from auth provider validate result. Mutli-factor auth module will not only verify the user input, but also verify the session is not expired. The validation session data is stored in your configuration directory.
