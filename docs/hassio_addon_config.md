@@ -137,7 +137,7 @@ The config for an add-on is stored in `config.json`.
 | tmpfs | string | no | Mount a tmpfs file system in `/tmpfs`. Valide format for this option is : `size=XXXu,uid=N,rw`. Size is mandatory, valid units (`u`) are `k`, `m` and `g` and `XXX` has to be replaced by a number. `uid=N` (with `N` the uid number) and `rw` are optional.
 | discovery | list | no | A list of services they this Add-on allow to provide for Home Assistant. Currently supported: `mqtt`
 | services | list | no | A list of services they will be provided or consumed with this Add-on. Format is `service`:`function` and functions are: `provide` (this add-on can provide this service), `want` (this add-on can use this service) or `need` (this add-on need this service to work correctly).
-| login_backend | bool | no | Allow access to Home Assistent user backend.
+| auth_api | bool | no | Allow access to Home Assistent user backend.
 
 ### Options / Schema
 
