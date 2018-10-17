@@ -21,5 +21,7 @@ When contributing Home Assistant code:
  - [Tox](http://tox.readthedocs.org/en/latest/)
  - [TravisCl](https://travis-ci.org/)
 
+Home Assistant follows [Debian Stable](https://packages.debian.org/stable/python/python3) for the minimum Python version, which is currently [Python 3.5.3](https://www.python.org/downloads/release/python-353/).
+
 When contributing 3rd Party code to be used by Home Assistant:
  - [Publishing your own PyPI package](https://jeffknupp.com/blog/2013/08/16/open-sourcing-a-python-project-the-right-way/)
