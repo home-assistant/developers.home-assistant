@@ -219,3 +219,34 @@ If the access token is no longer valid, you will get a response with HTTP status
 [oauth2-spec]: https://tools.ietf.org/html/rfc6749
 [indieauth-spec]: https://indieauth.spec.indieweb.org/
 [indieauth-clients]: https://indieauth.spec.indieweb.org/#client-identifier
+
+## Signed paths
+
+Sometimes you want a user to make a GET request to Home Assistant to download data. In this case the normal auth system won't do, as we can't link the user to an API with the auth header attached to it. In that case, a signed path can help.
+
+A signed path is a normal path on our server, like `/api/states`, but with an attached secure authentication signature. The user is able to navigate to this path and will be authorised as the access token that created the signed path. Signed paths can be created via the websocket connection and are meant to be shortlived. The default expiration is 30 seconds.
+
+To get a signed path, send the following command:
+
+```js
+{
+  "type": "auth/sign_path",
+  "path": "/api/states",
+  // optional, expiration time in seconds. Defaults to 30 seconds
+  "expires": 20
+}
+```
+
+The response will contain the signed path:
+
+```js
+{
+  "path": "/api/states?authSig=ABCDEFGH"
+}
+```
+
+Some things to note about a signed path:
+
+ - If the refresh token is deleted, the signed url is no longer valid.
+ - If the user is deleted, the signed url is no longer valid (because the refresh token will be deleted).
+ - If Home Assistant is restarted, the signed url is no longer valid.
