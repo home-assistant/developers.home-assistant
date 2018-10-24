@@ -14,8 +14,8 @@ If you are not using the [`frontend`](https://www.home-assistant.io/components/f
 There are multiple ways to consume the Home Assistant Rest API. One is with `curl`:
 
 ```bash
-curl -X GET \
-    -H "x-ha-access: YOUR_PASSWORD" \
+$ curl -X GET \
+    -H "Authorization: Bearer ABCDEFGH" \
     -H "Content-Type: application/json" \
     http://IP_ADDRESS:8123/ENDPOINT
 ```
@@ -26,14 +26,14 @@ Another option is to use Python and the [Requests](http://docs.python-requests.o
 from requests import get
 
 url = 'http://localhost:8123/ENDPOINT'
-headers = {'x-ha-access': 'YOUR_PASSWORD',
-           'content-type': 'application/json'}
+headers = {
+    'Authorization': 'Bearer ABCDEFGH',
+    'content-type': 'application/json',
+}
 
 response = get(url, headers=headers)
 print(response.text)
 ```
-
-> You can append `?api_password=YOUR_PASSWORD` to any URL to log in automatically.
 
 Successful calls will return status code 200 or 201. Other status codes that can return are:
 
@@ -59,7 +59,7 @@ Returns a message if the API is up and running.
 Sample `curl` command:
 
 ```bash
-$ curl -X GET -H "x-ha-access: YOUR_PASSWORD" \
+$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
        -H "Content-Type: application/json" http://localhost:8123/api/
 ```
 
@@ -111,7 +111,7 @@ Returns the current configuration as JSON.
 Sample `curl` command:
 
 ```bash
-$ curl -X GET -H "x-ha-access: YOUR_PASSWORD" \
+$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
        -H "Content-Type: application/json" http://localhost:8123/api/config
 ```
 
@@ -131,7 +131,7 @@ Returns basic information about the Home Assistant instance as JSON.
 Sample `curl` command:
 
 ```bash
-$ curl -X GET -H "x-ha-access: YOUR_PASSWORD" \
+$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
        -H "Content-Type: application/json" http://localhost:8123/api/discovery_info
 ```
 
@@ -155,7 +155,7 @@ Returns an array of event objects. Each event object contains event name and lis
 Sample `curl` command:
 
 ```bash
-$ curl -X GET -H "x-ha-access: YOUR_PASSWORD" \
+$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
        -H "Content-Type: application/json" http://localhost:8123/api/events
 ```
 
@@ -184,7 +184,7 @@ Returns an array of service objects. Each object contains the domain and which s
 Sample `curl` command:
 
 ```bash
-$ curl -X GET -H "x-ha-access: YOUR_PASSWORD" \
+$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
        -H "Content-Type: application/json" http://localhost:8123/api/services
 ```
 
@@ -229,19 +229,19 @@ You can pass the following optional GET parameters:
 Sample `curl` commands:
 
 ```bash
-$ curl -X GET -H "x-ha-access: YOUR_PASSWORD" \
+$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
        -H "Content-Type: application/json" \
        http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00
 ```
 
 ```bash
-$ curl -X GET -H "x-ha-access: YOUR_PASSWORD" \
+$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
        -H "Content-Type: application/json" \
        http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00?filter_entity_id=sensor.temperature
 ```
 
 ```bash
-$ curl -X GET -H "x-ha-access: YOUR_PASSWORD" \
+$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
        -H "Content-Type: application/json" \
        http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00?end_time=2016-12-31T00%3A00%3A00%2B02%3A00
 ```
@@ -270,7 +270,7 @@ Returns an array of state objects. Each state has the following attributes: enti
 Sample `curl` command:
 
 ```bash
-$ curl -X GET -H "x-ha-access: YOUR_PASSWORD" \
+$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
        -H "Content-Type: application/json" http://localhost:8123/api/states
 ```
 
@@ -297,7 +297,7 @@ Returns a state object for specified entity_id. Returns 404 if not found.
 Sample `curl` command:
 
 ```bash
-$ curl -X GET -H "x-ha-access: YOUR_PASSWORD" \
+$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
        -H "Content-Type: application/json" \
        http://localhost:8123/api/states/sensor.kitchen_temperature
 ```
@@ -315,7 +315,7 @@ Retrieve all errors logged during the current session of Home Assistant as a pla
 Sample `curl` command:
 
 ```bash
-$ curl -X GET -H "x-ha-access: YOUR_PASSWORD" \
+$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
        -H "Content-Type: application/json" \
        http://localhost:8123/api/error_log
 ```
@@ -327,7 +327,7 @@ Returns the data (image) from the specified camera entity_id.
 Sample `curl` command:
 
 ```bash
-$ curl -X GET -H "x-ha-access: YOUR_PASSWORD" \
+$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
        -H "Content-Type: application/json" \
        http://localhost:8123/api/camera_proxy/camera.my_sample_camera?time=1462653861261 -o image.jpg
 ```
@@ -366,7 +366,7 @@ The return code is 200 if the entity existed, 201 if the state of a new entity w
 Sample `curl` command:
 
 ```bash
-$ curl -X POST -H "x-ha-access: YOUR_PASSWORD" \
+$ curl -X POST -H "Authorization: Bearer ABCDEFGH" \
        -H "Content-Type: application/json" \
        -d '{"state": "25", "attributes": {"unit_of_measurement": "°C"}}' \
        http://localhost:8123/api/states/sensor.kitchen_temperature
@@ -428,7 +428,7 @@ Sample `curl` commands:
 Turn the light on:
 
 ```bash
-$ curl -X POST -H "x-ha-access: YOUR_PASSWORD" \
+$ curl -X POST -H "Authorization: Bearer ABCDEFGH" \
        -H "Content-Type: application/json" \
        -d '{"entity_id": "switch.christmas_lights"}' \
        http://localhost:8123/api/services/switch/turn_on
@@ -465,7 +465,7 @@ Paulus is at work!
 Sample `curl` command:
 
 ```bash
-$ curl -X POST -H "x-ha-access: YOUR_PASSWORD" \
+$ curl -X POST -H "Authorization: Bearer ABCDEFGH" \
        -H "Content-Type: application/json" \
        -d '{"template": "It is {{ now }}!"}' http://localhost:8123/api/template
 ```
