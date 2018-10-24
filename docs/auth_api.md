@@ -250,4 +250,4 @@ Some things to note about a signed path:
  - If the refresh token is deleted, the signed url is no longer valid.
  - If the user is deleted, the signed url is no longer valid (because the refresh token will be deleted).
  - If Home Assistant is restarted, the signed url is no longer valid.
- - Access is only validated when the request is received. If a response takes longer than the expiration time (ie, downloading a large file), the download will continue after the expiration date has past.
+ - Access is only validated when the request is received. If a response takes longer than the expiration time (ie, downloading a large file), the download will continue after the expiration date has passed.
