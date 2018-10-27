@@ -907,6 +907,36 @@
       "version-0.80.0-integration_quality_scale_index": {
         "title": "Integration Quality Scale",
         "sidebar_label": "Introduction"
+      },
+      "version-0.81.0-asyncio_index": {
+        "title": "Asynchronous Programming",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.81.0-auth_api": {
+        "title": "Authentication API",
+        "sidebar_label": "API"
+      },
+      "version-0.81.0-auth_auth_module": {
+        "title": "Multi-factor Authentication Modules"
+      },
+      "version-0.81.0-development_index": {
+        "title": "Starting with Development",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.81.0-development_testing": {
+        "title": "Testing your code"
+      },
+      "version-0.81.0-documentation_index": {
+        "title": "Documentation"
+      },
+      "version-0.81.0-external_api_rest": {
+        "title": "REST API"
+      },
+      "version-0.81.0-external_api_server_sent_events": {
+        "title": "Server-sent events"
+      },
+      "version-0.81.0-hassio_addon_config": {
+        "title": "Add-On Configuration"
       }
     },
     "links": {
