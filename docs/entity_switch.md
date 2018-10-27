@@ -13,6 +13,18 @@ sidebar_label: Switch
 | current_power_w | float | `None` | The current power usage in W.
 | today_energy_kwh | float | `None` | Total energy usage in kWh.
 | is_standby | boolean | `None` | Indicate if the device connected to the switch is currently in standby.
+| device_class | string | `None` | Type of switch.
+
+### Available device classes
+
+
+| Type | Description
+| ---- | -----------
+| outlet | Switch that turns outlet on/off
+| lights | Switch that turns light on/off
+| camera | Switch that turns camera on/off
+| coffe_maker | Switch that turns coffe maker on/off
+| fan | Switch that turns fan on/off
 
 ## Methods
 
