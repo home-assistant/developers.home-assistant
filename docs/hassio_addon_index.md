@@ -14,3 +14,4 @@ Under the hood, add-ons are Docker images published in [Docker Hub](https://hub.
 1. [Publishing](hassio_addon_publishing.md)
 1. [Presentation](hassio_addon_presentation.md)
 1. [Repositories](hassio_addon_repository.md)
+1. [Security](hassio_addon_security.md)
