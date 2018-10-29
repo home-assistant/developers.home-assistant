@@ -29,7 +29,7 @@ Each category can further split into subcategories that describe parts of that c
 }
 ```
 
-If a category is ommitted, the user will not have permission to that category.
+If a category is omitted, the user will not have permission to that category.
 
 When defining a policy, any dictionary value at any place can be replaced with `True` or `None`. `True` means that permission is granted and `None` means use default, which is deny access.
 
