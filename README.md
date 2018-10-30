@@ -28,7 +28,7 @@ It will start a server at [localhost:3000](http://localhost:3000). You will need
 
 ### Adding a page
 
- - Create new page in `docs/`
- - Add new doc to `website/sidebars.json`
+- Create new page in `docs/`
+- Add new doc to `website/sidebars.json`
 
 You will need to restart the server when creating a new file or make changes to `sidebars.json`. If you're updating a document, you will only need to refresh your browser to get the latest changes.
