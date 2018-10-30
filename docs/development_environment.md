@@ -92,6 +92,17 @@ Invoke your installation, adjusting the [configuration](https://www.home-assista
 $ hass
 ```
 
+## Note
+
+In case you have already installed `hass` on your system it might be shadowing your own build `hass`. Verify by running `which hass` and check the output is something similar to the following (assuming your checkout is in a folder named `code`):
+
+```bash
+$ which hass
+$HOME/code/home-assistant/bin/hass
+```
+
+If it is not (i.e. `/usr/local/bin/hass`) then you should try rerun the `source bin/activate` and `script/setup`.
+
 ## Logging
 
 By default logging in home-assistant is tuned for operating in production (set to INFO by default, with some modules set to even less verbose logging levels).
