@@ -24,7 +24,7 @@ REQUIREMENTS = ['pychromecast==0.6.12']
 
 ### Note
 
-Be aware that actual python imports of these dependencies should be done inside functions that use them. Without it you will get errors on the top-level imports.
+Be aware that actual python imports of these dependencies should be done inside functions that use them. This is because Home Assistant installs requirements on demand and so the requirement won't be loaded the first time your component is loaded.
 
 Example:
 
