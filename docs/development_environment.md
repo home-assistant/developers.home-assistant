@@ -101,7 +101,7 @@ $ which hass
 $HOME/code/home-assistant/bin/hass
 ```
 
-If it is not (i.e. `/usr/local/bin/hass`) then you should try rerun the `source bin/activate` and `script/setup`.
+If it is not (i.e. `/usr/local/bin/hass`) then you make sure you actually ran `source bin/activate`.
 
 ## Logging
 
