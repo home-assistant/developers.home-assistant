@@ -22,6 +22,23 @@ Requirements is a list of strings. Each entry is a `pip` compatible string. For 
 REQUIREMENTS = ['pychromecast==0.6.12']
 ```
 
+### Note
+
+Be aware that actual python imports of these dependencies should be done inside functions that use them. Without it you will get errors on the top-level imports.
+
+Example:
+
+```python
+REQUIREMENTS = ['pychromecast==0.6.12']
+
+def setup(hass, config):
+    import pychromecast
+    
+    <your code goes here>
+```
+
+### Custom requirements during development & testing
+
 During development of a component, it can be useful to test against different versions of a requirement. This can be done in two steps, using pychromecast as an example:
 
 * `pip install pychromecast==0.6.13 --target ~/.homeassistant/deps`
