@@ -6,10 +6,10 @@ New controller or hub components often need to add platforms in sub-components (
 This can be achieved using the `load_platform` or `async_load_platform` methods from `homeassistant.helpers.discovery`:
 
 ```python
-def load_platform(hass, component, platform, discovered=None, hass_config=None)
+def load_platform(hass, component, platform, discovered, hass_config)
 ```
 
-From more info on how this works, refer to the [load_platform](https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/helpers/discovery.py#L136) method.
+From more info on how this works, refer to the [load_platform](https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/helpers/discovery.py#L117) method.
 
 ### Example
 
@@ -30,24 +30,24 @@ The source for your component can be located in your configuration directory for
 ~/.homeassistant/custom_components/switch/myflashyhub.py
 ```
 
-In the hub component `myflashyhub.py` you can call your light and switch components. To pass any non-serializable information to the platforms in the sub-component, you can use a global variable.
+In the hub component `myflashyhub.py` you can call your light and switch components. To pass any non-serializable information to the platforms in the sub-component, you should use `hass.data`.
 
 ```python
 from homeassistant.helpers.discovery import load_platform
-DOMAIN = 'myflashyhub'
 
+DOMAIN = 'myflashyhub'
 DATA_MFH = 'MFH'
 
-def setup(hass, config):
+def setup(hass, hass_config):
     """Your controller/hub specific code."""
-    hass.data[DATA_MFH] = SomeObjectToInitialiseGlobal()
+    hass.data[DATA_MFH] = SomeObjectToInitialise()
 
     #--- snip ---
-    load_platform(hass, 'light', DOMAIN)
-    load_platform(hass, 'switch', DOMAIN, {'optional': 'arguments'})
+    load_platform(hass, 'light', DOMAIN, None, hass_config)
+    load_platform(hass, 'switch', DOMAIN, {'optional': 'arguments'}, hass_config)
 ```
 
-Add your custom device specific code to the `setup_platform` method in `light/myflashyhub.py` and `switch/myflashyhub`.
+Add your custom device specific code to the `setup_platform` method in `light/myflashyhub.py` and `switch/myflashyhub.py`.
 
 ```python
 import custom_components.myflashyhub as myflashyhub
