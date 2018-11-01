@@ -37,6 +37,8 @@ def setup(hass, config):
     <your code goes here>
 ```
 
+Furthermore, due to how `custom_componentes` are loaded, you can sometime get a `ModuleNotFoundError` error on first boot after adding it, to resolve it, restart Home-Assistant.
+
 ### Custom requirements during development & testing
 
 During development of a component, it can be useful to test against different versions of a requirement. This can be done in two steps, using pychromecast as an example:
