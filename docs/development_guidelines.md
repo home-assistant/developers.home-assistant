@@ -90,3 +90,9 @@ Prefer [new style string formatting](https://www.python.org/dev/peps/pep-3101/) 
 "{} {}".format('New', 'style')
 "%s %s" % ('Old', 'style')
 ```
+
+Except when doing logging here the format is:
+
+```python
+_LOGGER.info("Can't connect to the webservice %s at %s", string1, string2)
+```
