@@ -94,7 +94,5 @@ Prefer [new style string formatting](https://www.python.org/dev/peps/pep-3101/) 
 Except when doing logging here the format is:
 
 ```python
-_LOGGER.exception(
-            "Can't connect to the webservice. %s %s %s",
-            error.code(), error.type(), error.message()
+_LOGGER.exception("Can't connect to the webservice %s at %s", string1, string2)
 ```
