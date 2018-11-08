@@ -46,3 +46,6 @@ from phue import Bridge
 bridge = Bridge(...)
 status = bridge.status()
 ```
+
+### 5. Limit platforms included in initial pull request
+Large pull requests mean there is a larger chance of finding problems that need to be addressed, and more code that needs to be reviewed between every requested change. If your new component will have multiple platforms, try and limit your initial pull request to a single platform. Once the initial component is merged, you can submit additional PRs for the remaining platforms. This allows reviewers to sign off on smaller chunks of code one at a time, and lets us get your new feature in sooner. Pull requests containing large code dumps will not be a priority for review.
