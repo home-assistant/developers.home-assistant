@@ -26,7 +26,7 @@ Let's take as an example that we're building an iOS application and that it is s
 The endpoint will register the device with Home Assistant:
 
  - Generate a unique webhook endpoint that the app can use to send data back to Home Assistant.
- - Use the storage helper to store data
+ - Use the storage helper to store data.
  - Registering the iOS device with the [device registry](device_registry_index)
  - Make the device available as a notification target
 
