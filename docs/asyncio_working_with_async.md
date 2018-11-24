@@ -78,7 +78,7 @@ from homeassistant.util.async_ import run_coroutine_threadsafe
 
 def say_hello(hass, target):
     return run_coroutine_threadsafe(
-        hass.loop, async_say_hello, target).result()
+        async_say_hello(hass, target), hass.loop).result()
 
 async def async_say_hello(hass, target):
     return "Hello {}!".format(target)
