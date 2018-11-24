@@ -6,7 +6,7 @@ There are different APIs that your app can use to send data back or communicate 
 
 ## Short note on instance URLs
 
-Some users have configured Home Assistant to be available outside of their home network using a dynamic DNS service. There are some routers that don't support sending data from inside the routers network, via a port on the router, to Home Asisstant, which also resides inside the local network (todo: this has a name).
+Some users have configured Home Assistant to be available outside of their home network using a dynamic DNS service. There are some routers that don't support hairpinning / NAT loopback: a device sending data from inside the routers network, via the externally configured DNS service, to Home Asisstant, which also resides inside the local network.
 
 To work around this, the app will need to record which WiFi is the home network, and use a direct connection when connected to the home WiFi network.
 
