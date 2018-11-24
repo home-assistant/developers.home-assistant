@@ -97,7 +97,7 @@ const siteConfig = {
   // template. For example, if you need your repo's URL...
   repoUrl: 'https://github.com/home-assistant/home-assistant',
   repoFrontendUrl: 'https://github.com/home-assistant/home-assistant-polymer',
-  repoFrontendWebsite: 'https://github.com/home-assistant/home-assistant.github.io',
+  repoFrontendWebsite: 'https://github.com/home-assistant/home-assistant.io',
   repoDevWebsite: 'https://github.com/home-assistant/developers.home-assistant',
 };
 
