@@ -5,6 +5,19 @@
     "previous": "Previous",
     "tagline": "All you need to start developing for Home Assistant",
     "docs": {
+      "app_integration_index": {
+        "title": "Native App Integration",
+        "sidebar_label": "Introduction"
+      },
+      "app_integration_sending_data": {
+        "title": "Sending data home"
+      },
+      "app_integration_setup": {
+        "title": "Connecting to an instance"
+      },
+      "app_integration_webview": {
+        "title": "Authenticated Webview"
+      },
       "architecture_components": {
         "title": "Components Architecture",
         "sidebar_label": "Components"
@@ -937,6 +950,56 @@
       },
       "version-0.81.0-hassio_addon_config": {
         "title": "Add-On Configuration"
+      },
+      "version-0.82.0-architecture_hassio": {
+        "title": "Hass.io Architecture",
+        "sidebar_label": "Hass.io"
+      },
+      "version-0.82.0-asyncio_working_with_async": {
+        "title": "Working with Async"
+      },
+      "version-0.82.0-auth_permissions": {
+        "title": "Permissions"
+      },
+      "version-0.82.0-config_entries_index": {
+        "title": "Config Entries",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.82.0-creating_component_code_review": {
+        "title": "Checklist for creating a component"
+      },
+      "version-0.82.0-creating_component_deps_and_reqs": {
+        "title": "Requirements & Dependencies"
+      },
+      "version-0.82.0-creating_component_generic_discovery": {
+        "title": "Generic Platform Discovery"
+      },
+      "version-0.82.0-development_checklist": {
+        "title": "Development Checklist"
+      },
+      "version-0.82.0-development_guidelines": {
+        "title": "Style guidelines"
+      },
+      "version-0.82.0-development_validation": {
+        "title": "Validate the input"
+      },
+      "version-0.82.0-documentation_index": {
+        "title": "Documentation"
+      },
+      "version-0.82.0-entity_registry_index": {
+        "title": "Entity Registry",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.82.0-entity_sensor": {
+        "title": "Sensor Entity",
+        "sidebar_label": "Sensor"
+      },
+      "version-0.82.0-hassio_addon_config": {
+        "title": "Add-On Configuration"
+      },
+      "version-0.82.0-hassio_addon_index": {
+        "title": "Developing an add-on",
+        "sidebar_label": "Introduction"
       }
     },
     "links": {
@@ -968,6 +1031,7 @@
       "Internationalization": "Internationalization",
       "Documentation": "Documentation",
       "Intents": "Intents",
+      "Native App Integration": "Native App Integration",
       "asyncio": "asyncio",
       "Hass.io": "Hass.io",
       "Hass.io Add-Ons": "Hass.io Add-Ons",

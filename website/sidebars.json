@@ -133,6 +133,12 @@
       "intent_conversation",
       "intent_builtin"
     ],
+    "Native App Integration": [
+      "app_integration_index",
+      "app_integration_setup",
+      "app_integration_sending_data",
+      "app_integration_webview"
+    ],
     "asyncio": [
       "asyncio_index",
       "asyncio_101",
