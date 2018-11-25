@@ -51,7 +51,7 @@ Websocket API requires authentication via an access token and a direct connectio
 
 With the Rest API you are able to query the state of the house and call services. Your component is also able to register new HTTP views to offer other Rest API endpoints.
 
-Websocket API requires authentication via an access token and a direct connection with the instance.
+Rest API requires authentication via an access token and a direct connection with the instance.
 
 - [Rest API Docs](external_api_rest)
 - [Making authenticated requests](auth_api#making-authenticated-requests)
