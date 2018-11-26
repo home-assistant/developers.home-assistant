@@ -166,6 +166,8 @@ Result will be a long-lived access token:
 }
 ```
 
+Additionally, a long-lived access token can be created using the UI tool located at the bottom of the user's Home Assistant profile page.
+
 ## Making authenticated requests
 
 Once you have an access token, you can make authenticated requests to the Home Assistant APIs.
