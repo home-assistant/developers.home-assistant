@@ -43,4 +43,4 @@ In future versions of Hass.io, the `CHANGELOG.md` file will be displayed in the 
 
 ## Apparmor
 
-You can use own security profile for you Add-on with AppArmor. Default it is enabled and use the docker default profile. Put `apparmor.txt` file into your Add-on folder and it will load this file as primary profile. Use the config options to set the name of that profile.
+You can use own security profile for you Add-on with AppArmor. Default it is enabled and use the Docker default profile. Put `apparmor.txt` file into your Add-on folder and it will load this file as primary profile. Use the config options to set the name of that profile.
