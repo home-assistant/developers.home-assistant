@@ -41,6 +41,6 @@ If you are in need of a guide on keeping a changelog, we would recommend checkin
 
 In future versions of Hass.io, the `CHANGELOG.md` file will be displayed in the Home Assistant frontend.
 
-## Apparmor
+## AppArmor
 
 You can use own security profile for you Add-on with AppArmor. Default it is enabled and use the Docker default profile. Put `apparmor.txt` file into your Add-on folder and it will load this file as primary profile. Use the config options to set the name of that profile.
