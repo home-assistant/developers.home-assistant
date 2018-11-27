@@ -23,31 +23,34 @@ All add-ons are simple docker containers. Inside your add-on `config.json` you s
 ```json
 {
   ...
-
   "image": "myhub/image-{arch}-addon-name",
-
   ...
 }
 ```
 
-You can use `{arch}` inside the image name to support multiple architectures with 1 configuration file. It will be replaced with the architecture of the user when we load the image. If you use `Buildargs` you can use the `build.json` to overwrite our default args.
+You can use `{arch}` inside the image name to support multiple architectures with one (1) configuration file. It will be replaced with the architecture of the user when we load the image. If you use `Buildargs` you can use the `build.json` to overwrite our default args.
 
 Hass.io assumes that the `master` branch of your add-on repository matches the latest tag on Docker Hub. When you're building a new version, it's suggested that you use another branch, ie `build` or do it with a PR on GitHub. After you push the add-on to [Docker Hub](https://hub.docker.com/), you can merge this branch to master.
 
 ## Custom Add-ons
 
-You need a Docker Hub account to make your own add-ons. You can build your docker images with docker `build` command or use our script that make it simple. Pull our [builder docker engine][builder] and run one of the following commands.
+You need a Docker Hub account to make your own add-ons. You can build your Docker images with the Docker `build` command or use our script that make it simple. Pull our [Builder Docker engine][builder] and run one of the following commands.
 
 For a git repository:
 
 ```bash
-$ docker run --rm --privileged -v ~/.docker:/root/.docker homeassistant/amd64-builder --all -t addon-folder -r https://github.com/xy/addons -b branchname
+$ docker run --rm --privileged -v \
+    ~/.docker:/root/.docker homeassistant/amd64-builder \
+    --all -t addon-folder -r https://github.com/xy/addons \
+    -b branchname
 ```
 
 For a local repository:
 
 ```bash
-$ docker run --rm --privileged -v ~/.docker:/root/.docker -v /my_addon:/data homeassistant/amd64-builder --all -t /data
+$ docker run --rm --privileged -v \
+    ~/.docker:/root/.docker -v /my_addon:/data homeassistant/amd64-builder \
+    --all -t /data
 ```
 
 > If you are developing on macOS and using Docker for Mac, you may encounter an error message similar to the following: <code>error creating aufs mount to /var/lib/docker/aufs/mnt/<SOME_ID>-init: invalid argument</code>. A proposed workaround is to add the following to the Advanced Daemon JSON configuration via Docker > Preferences > Daemon > Advanced: <code>"storage-driver" : "aufs"</code>.
