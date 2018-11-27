@@ -53,8 +53,6 @@ The [home-assistant-sse](https://github.com/fabaff/home-assistant-sse) repositor
 
 ### Python
 
-> Will no longer work with the new Authentication system.
-
 If you want to test the server-sent events without creating a website, the Python module [`sseclient` ](https://pypi.python.org/pypi/sseclient/) can help. To install (assuming Python and pip3 are already installed):
 
 ```bash
@@ -66,7 +64,9 @@ A simple script to consume SSE in Python looks like this:
 ```python
 from sseclient import SSEClient
 
-messages = SSEClient('http://localhost:8123/api/stream?api_password=YOUR_PASSWORD')
+auth = {'Authorization': 'Bearer ABCDEFGH'}
+messages = SSEClient('http://localhost:8123/api/stream', headers=auth)
+
 for msg in messages:
     print(msg)
 ```
