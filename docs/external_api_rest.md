@@ -20,7 +20,7 @@ $ curl -X GET \
     http://IP_ADDRESS:8123/ENDPOINT
 ```
 
-Another option is to use Python and the [Requests](http://docs.python-requests.org/en/latest/) module. =
+Another option is to use Python and the [Requests](http://docs.python-requests.org/en/latest/) module.
 
 ```python
 from requests import get
