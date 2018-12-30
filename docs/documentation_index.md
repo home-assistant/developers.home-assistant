@@ -19,8 +19,8 @@ To test your changes locally, you need to install **Ruby** and its dependencies 
 - Fork the home-assistant.io [git repository](https://github.com/home-assistant/home-assistant.io).
 - In your home-assistant.io root directory, run `$ bundle` to install the gems you need.
 
-Shortcut for Fedora: `$ sudo dnf -y install gcc-c++ ruby ruby-devel rubygem-bundler rubygem-json && bundle`
-Shortcut for Debian/Ubuntu: `$ sudo apt-get install ruby ruby-dev ruby-bundler ruby-json && bundle`
+- Shortcut for Fedora: `$ sudo dnf -y install gcc-c++ ruby ruby-devel rubygem-bundler rubygem-json && bundle`
+- Shortcut for Debian/Ubuntu: `$ sudo apt-get install ruby ruby-dev ruby-bundler ruby-json g++ zlib1g-dev && bundle`
 
 Then you can work on the documentation:
 
