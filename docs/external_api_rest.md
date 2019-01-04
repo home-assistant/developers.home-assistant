@@ -7,7 +7,7 @@ Home Assistant runs a web server accessible on port 8123.
 * http://IP_ADDRESS:8123/ is an interface to control Home Assistant.
 * http://IP_ADDRESS:8123/api/ is a Rest API.
 
-The API accepts and returns only JSON encoded objects. All API calls have to be accompanied by the header `X-HA-Access: YOUR_PASSWORD` (YOUR_PASSWORD as specified in your `configuration.yaml` file in the [`http:` section](https://www.home-assistant.io/components/http/)).
+The API accepts and returns only JSON encoded objects. All API calls have to be accompanied by the header `Authorization: Bearer ABCDEFGH`. 
 
 If you are not using the [`frontend`](https://www.home-assistant.io/components/frontend/) in your setup then you need to add the [`api` component](https://www.home-assistant.io/components/api/) to your `configuration.yaml` file.
 
