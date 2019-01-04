@@ -24,6 +24,6 @@ If specifying a device class, your sensor entity will need to also return the co
 | battery | % | % of battery that is left.
 | humidity | % | % of humidity in the air.
 | illuminance | lx/lm | Light level.
-| temperature | C/F | Temperature.
+| temperature | °C/°F | Temperature.
 | timestamp | ISO8601 | Timestamp
 | pressure | hPa,mbar | Pressure.
