@@ -2,14 +2,16 @@
 title: "REST API"
 ---
 
-Home Assistant runs a web server accessible on port 8123.
-
-* http://IP_ADDRESS:8123/ is an interface to control Home Assistant.
-* http://IP_ADDRESS:8123/api/ is a Rest API.
-
-The API accepts and returns only JSON encoded objects. All API calls have to be accompanied by the header `Authorization: Bearer ABCDEFGH`. 
+Home Assistant provices a RESTful API on the same port as the web frontend. (default port is port 8123).
 
 If you are not using the [`frontend`](https://www.home-assistant.io/components/frontend/) in your setup then you need to add the [`api` component](https://www.home-assistant.io/components/api/) to your `configuration.yaml` file.
+
+* http(s)://IP_ADDRESS:8123/ is an interface to control Home Assistant.
+* http(s)://IP_ADDRESS:8123/api/ is a RESTful API.
+
+The API accepts and returns only JSON encoded objects. 
+
+All API calls have to be accompanied by the header `Authorization: Bearer ABCDEFGH`. You can obtain a token ("Long-Lived Access Token") by logging into the frontend using a web browser, and going to your profile `http(s)://IP_ADDRESS:8123/profile`.
 
 There are multiple ways to consume the Home Assistant Rest API. One is with `curl`:
 
