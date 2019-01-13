@@ -20,7 +20,7 @@ In order to run `script/setup` below you will need some more dependencies.
 $ sudo apt-get install autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev
 ```
 
-> Different distributions have different package installation mechanisms and sometimes packages names as well. For example Centos would use: `sudo yum install epel-release && sudo yum install python36 python36-devel mysql-devel gcc`
+> Different distributions have different package installation mechanisms and sometimes packages names as well. For example CentOS would use: `sudo yum install epel-release && sudo yum install python36 python36-devel mysql-devel gcc`
 
 Additional dependencies exist if you plan to perform Frontend Development, please read the [Frontend](frontend_index.md) section to learn more.
 
@@ -35,7 +35,7 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-L
 
 From Windows Store install Ubuntu.
 
-When the Linux subsystem is setup, perform install as for Linux
+When the Linux subsystem is set up, perform install as for Linux.
 
 ```bash
 $ sudo apt-get update
@@ -94,7 +94,7 @@ $ hass
 
 ## Logging
 
-By default logging in home-assistant is tuned for operating in production (set to INFO by default, with some modules set to even less verbose logging levels).
+By default logging in Home Assistant is tuned for operating in production (set to INFO by default, with some modules set to even less verbose logging levels).
 
 You can use the [logger](https://www.home-assistant.io/components/logger/) component to adjust logging to DEBUG to see even more details about what is going on:
 
