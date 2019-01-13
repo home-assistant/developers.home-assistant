@@ -11,7 +11,7 @@ You'll need to set up a development environment if you want to develop a new fea
 Install the core dependencies.
 
 ```bash
-$ sudo apt-get install python3-pip python3-dev python3-venv
+$ sudo apt-get install python3-pip python3-dev python3-venv git
 ```
 
 In order to run `script/setup` below you will need some more dependencies.
