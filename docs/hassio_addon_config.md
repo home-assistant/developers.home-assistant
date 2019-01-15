@@ -121,7 +121,7 @@ The config for an add-on is stored in `config.json`.
 | hassio_api | bool | no | This add-on can access to Hass.io REST API. It set the host alias `hassio`.
 | homeassistant_api | bool | no | This add-on can access to Hass.io Home-Assistant REST API proxy. Use `http://hassio/homeassistant/api`.
 | docker_api | bool | no | Allow read-oly access to docker API for add-on. Work only for not protected add-ons.
-| privileged | list | no | Privilege for access to hardware/system. Available access: `NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_TIME`, `SYS_NICE`, `SYS_RESOURCE`, `SYS_PTRACE`, `DAC_READ_SEARCH`.
+| privileged | list | no | Privilege for access to hardware/system. Available access: `NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_TIME`, `SYS_NICE`, `SYS_RESOURCE`, `SYS_PTRACE`, `SYS_MODULE`, `DAC_READ_SEARCH`.
 | full_access | bool | no | Give full access to hardware like the privileged mode in docker. Work only for not protected add-ons.
 | apparmor | bool/string | no | Enable or disable AppArmor support. If it is enable, you can also use custom profiles with the name of the profile.
 | map | list | no | List of maps for additional Hass.io folders. Possible values: `config`, `ssl`, `addons`, `backup`, `share`. Defaults to `ro`, which you can change by adding `:rw` to the end of the name.
@@ -129,6 +129,7 @@ The config for an add-on is stored in `config.json`.
 | audio | bool | no | Boolean. Mark this add-on to use internal an audio system. The ALSA configuration for this add-on will be mount automatic.
 | gpio | bool | no | Boolean. If this is set to True, `/sys/class/gpio` will map into add-on for access to GPIO interface from kernel. Some library need also `/dev/mem` and `SYS_RAWIO` for read/write access to this device. On system with AppArmor enabled, you need disable AppArmor or better for security, provide you own profile for the add-on.
 | devicetree | bool | no | Boolean. If this is set to True, `/device-tree` will map into add-on.
+| kernel_modules | bool | no | Map host kernel modules and config into add-on (readonly).
 | stdin | bool | no | Boolean. If that is enable, you can use the STDIN with Hass.io API.
 | legacy | bool | no | Boolean. If the docker image have no hass.io labels, you can enable the legacy mode to use the config data.
 | options | dict | yes | Default options value of the add-on
