@@ -24,7 +24,7 @@ To test your changes locally, you need to install **Ruby** and its dependencies 
 
 Then you can work on the documentation:
 
-- Run `bundle exec rake generate` to generate the every first preview. This will take a couple of minutes.
+- Run `bundle exec rake generate` to generate the very first preview. This will take a couple of minutes.
 - Create/edit/update a page. The components/platforms documentation is located in `source/_components/`. `source/_docs/` contains the Home Assistant documentation itself.
 - Test your changes to home-assistant.io locally: run `bundle exec rake preview` and navigate to [http://127.0.0.1:4000](http://127.0.0.1:4000). While this command is working, any changes to a file are automatically detected and will update the affected pages. You will have to manually reload them in the browser though.
 - Create a Pull Request (PR) against the **next** branch of home-assistant.io if your documentation is a new feature, platform, or component.
