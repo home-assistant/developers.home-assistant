@@ -84,7 +84,7 @@ customElements.define('content-card-example', ContentCardExample);
 
 ## Referencing your new card
 
-In our example card we defined a card with the tag `content-card-example` (see last line), so our card type will be `custom:content-card-example`. And because you created the file in your `<config>/www` directory, it will be accessible in your browser via the url `/local/`.
+In our example card we defined a card with the tag `content-card-example` (see last line), so our card type will be `custom:content-card-example`. And because you created the file in your `<config>/www` directory, it will be accessible in your browser via the url `/local/` (if you have recently added the www folder you will need to re-start home assistant for files to be picked up).
 
 ```yaml
 # Example ui-lovelace.yaml
