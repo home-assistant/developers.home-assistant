@@ -198,7 +198,7 @@ The `<timestamp>` (`YYYY-MM-DDThh:mm:ssTZD`) is optional and defaults to 1 day b
 
 You can pass the following optional GET parameters:
 
-- `filter_entity_id=<entity_id>` to filter on a single entity
+- `filter_entity_id=<entity_ids>` to filter on one or more entities - comma separated.
 - `end_time=<timestamp>` to choose the end of the period in URL encoded format (defaults to 1 day).
 
 ```json
