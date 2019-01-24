@@ -177,6 +177,10 @@
       "documentation_standards": {
         "title": "Standards"
       },
+      "entity_air_quality": {
+        "title": "Air Quality Entity",
+        "sidebar_label": "Air Quality"
+      },
       "entity_alarm_control_panel": {
         "title": "Alarm Control Panel Entity",
         "sidebar_label": "Alarm Control Panel"
@@ -1000,6 +1004,77 @@
       "version-0.82.0-hassio_addon_index": {
         "title": "Developing an add-on",
         "sidebar_label": "Introduction"
+      },
+      "version-0.83.0-app_integration_index": {
+        "title": "Native App Integration",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.83.0-app_integration_sending_data": {
+        "title": "Sending data home"
+      },
+      "version-0.83.0-app_integration_setup": {
+        "title": "Connecting to an instance"
+      },
+      "version-0.83.0-app_integration_webview": {
+        "title": "Authenticated Webview"
+      },
+      "version-0.83.0-auth_api": {
+        "title": "Authentication API",
+        "sidebar_label": "API"
+      },
+      "version-0.83.0-external_api_server_sent_events": {
+        "title": "Server-sent events"
+      },
+      "version-0.83.0-hassio_addon_presentation": {
+        "title": "Presenting your add-on"
+      },
+      "version-0.83.0-hassio_addon_publishing": {
+        "title": "Publishing your add-on"
+      },
+      "version-0.84.0-creating_component_code_review": {
+        "title": "Checklist for creating a component"
+      },
+      "version-0.84.0-external_api_rest": {
+        "title": "REST API"
+      },
+      "version-0.85-asyncio_categorizing_functions": {
+        "title": "Categorizing Functions"
+      },
+      "version-0.85-documentation_index": {
+        "title": "Documentation"
+      },
+      "version-0.85-entity_air_pollutants": {
+        "title": "Air Pollutants Entity",
+        "sidebar_label": "Air Pollutants"
+      },
+      "version-0.85-entity_sensor": {
+        "title": "Sensor Entity",
+        "sidebar_label": "Sensor"
+      },
+      "version-0.85-external_api_rest": {
+        "title": "REST API"
+      },
+      "version-0.85-frontend_add_card": {
+        "title": "Adding state card"
+      },
+      "version-0.85-frontend_add_more_info": {
+        "title": "Adding more info dialogs"
+      },
+      "version-0.86.0-development_environment": {
+        "title": "Set up Development Environment"
+      },
+      "version-0.86.0-documentation_index": {
+        "title": "Documentation"
+      },
+      "version-0.86.0-entity_air_quality": {
+        "title": "Air Quality Entity",
+        "sidebar_label": "Air Quality"
+      },
+      "version-0.86.0-external_api_rest": {
+        "title": "REST API"
+      },
+      "version-0.86.0-hassio_addon_config": {
+        "title": "Add-On Configuration"
       }
     },
     "links": {
