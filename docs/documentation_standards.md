@@ -10,16 +10,16 @@ To ensure that the documentation for Home Assistant is consistent and easy to fo
 * Don't put two spaces after a period and avoid the "Oxford comma".
 * There is no limit for the line length. You are allowed to write in a flowing text style. This will make it easier to use the GitHub online editor in the future.
 * Be objective and not gender favoring, polarizing, race related or religion inconsiderate.
-* The case of brand names, services, protocols, components, and platforms must match its respective counterpart. e.g., "Z-Wave" **not** "Zwave", "Z-wave", "Z Wave" or "ZWave". Also, "Input Select" **not** "input select" or "Input select".
+* The case of brand names, services, protocols, components and platforms must match its respective counterpart. e.g., "Z-Wave" **not** "Zwave", "Z-wave", "Z Wave" or "ZWave". Also, "Input Select" **not** "input select" or "Input select".
 * All headings should use the `{% linkable_title %}` tag.
-* Do not use ALL CAPITALS for emphasis - use italics instead
+* Do not use ALL CAPITALS for emphasis - use italics instead.
 
 ## Component and Platform Pages
 
 * The **Configuration Variables** section must use the `{% configuration %}` tag.
-* Configuration variables must document the requirement status (`false` or `true`)
+* Configuration variables must document the requirement status (`false` or `true`).
 * Configuration variables must document the default value, if any.
-* Configuration variables must document the accepted value types (see [Configuration variables details](documentation_create_page.md#configuration))
+* Configuration variables must document the accepted value types (see [Configuration variables details](documentation_create_page.md#configuration)).
   * For configuration variables that accept multiple types, separate the types with a comma (i.e. `string, int`).
 * Use YAML sequence syntax in the sample code if it is supported.
 * All examples should be formatted to be included in `configuration.yaml` unless explicitly stated.
