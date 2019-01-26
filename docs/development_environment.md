@@ -29,7 +29,8 @@ Additional dependencies exist if you plan to perform Frontend Development, pleas
 Due to Home Assistant is mainly designed and developed on Linux distributions, on Windows 10 you can setup a [Linux subsystem](https://docs.microsoft.com/windows/wsl/install-win10).
 
 Open Powershell as an Administrator and run
-```
+
+```bash
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 ```
 
@@ -48,8 +49,8 @@ Hint: Git is included in Linux subsytem.
 When invoking your installation (see below), make sure to specify a folder for configuration which is accessible from Windows.
 
 ```bash
-mkdir -p ../config
-hass -c ../config
+$ mkdir -p ../config
+$ hass -c ../config
 ```
 
 ### Developing on OS X
