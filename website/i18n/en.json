@@ -1075,6 +1075,9 @@
       },
       "version-0.86.0-hassio_addon_config": {
         "title": "Add-On Configuration"
+      },
+      "version-0.86.0-lovelace_custom_card": {
+        "title": "Lovelace: Custom Cards"
       }
     },
     "links": {

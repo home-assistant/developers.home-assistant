@@ -1,5 +1,7 @@
 ---
 title: "Lovelace: Custom Cards"
+id: version-0.86.0-lovelace_custom_card
+original_id: lovelace_custom_card
 ---
 
 [Lovelace](https://www.home-assistant.io/lovelace/) is our new approach to defining your user interface for Home Assistant. We offer a lot of built-in cards, but you're not just limited to the ones that we decided to include in the Lovelace UI. You can build and use your own!
