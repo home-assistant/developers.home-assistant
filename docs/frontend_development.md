@@ -13,20 +13,23 @@ The Home Assistant frontend is built using web components and powered by the [Po
 
 ### Getting the code
 
-First step is to git clone the [home-assistant-polymer repository][hass-polymer]. You can place the repository anywhere on your system.
+First step is to fork the [home-assistant-polymer repository][hass-polymer] and add the upstream remote. You can place the forked repository anywhere on your system.
 
 ```bash
-$ git clone https://github.com/home-assistant/home-assistant-polymer.git
+$ git clone https://github.com/YOUR_GIT_USERNAME/home-assistant-polymer.git
 $ cd home-assistant-polymer
+$ git remote add upstream https://github.com/home-assistant-polymer/home-assistant-polymer.git
 ```
 
 ### Configuring Home Assistant
+
+You will need to have an instance of Home Assistant set up. For example see [macOS installation instructions](https://www.home-assistant.io/docs/installation/macos/).
 
 Next step is to configure Home Assistant to use the development mode for the frontend. Do this by updating the frontend config in your `configuration.yaml` and set the path to the home-assistant-polymer repository that you cloned in the last step:
 
 ```yaml
 frontend:
-  # Example absolute path: /home/paulus/dev/hass/home-assistant-polymer
+  # Example absolute path on macOS: /Users/paulus/dev/hass/home-assistant-polymer/
   development_repo: <absolute path to home-assistant-polymer repo>
 ```
 
