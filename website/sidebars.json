@@ -8,6 +8,7 @@
     ],
     "Entities": [
       "entity_index",
+      "entity_air_quality",
       "entity_alarm_control_panel",
       "entity_binary_sensor",
       "entity_climate",
