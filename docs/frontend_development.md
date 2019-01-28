@@ -29,7 +29,7 @@ Next step is to configure Home Assistant to use the development mode for the fro
 
 ```yaml
 frontend:
-  # Example absolute path on macOS: /Users/paulus/dev/hass/home-assistant-polymer/
+  # Example absolute path: /home/paulus/dev/hass/home-assistant-polymer
   development_repo: <absolute path to home-assistant-polymer repo>
 ```
 
