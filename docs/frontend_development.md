@@ -23,7 +23,7 @@ $ git remote add upstream https://github.com/home-assistant-polymer/home-assista
 
 ### Configuring Home Assistant
 
-You will need to have an instance of Home Assistant set up. See the [Installation Guide](https://www.home-assistant.io/docs/installation/).
+You will need to have an instance of Home Assistant set up. See our guide on [setting up a development environment](https://developers.home-assistant.io/docs/en/development_environment.html).
 
 Next step is to configure Home Assistant to use the development mode for the frontend. Do this by updating the frontend config in your `configuration.yaml` and set the path to the home-assistant-polymer repository that you cloned in the last step:
 
