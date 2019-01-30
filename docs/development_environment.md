@@ -11,13 +11,13 @@ You'll need to set up a development environment if you want to develop a new fea
 Install the core dependencies.
 
 ```bash
-$ sudo apt-get install python3-pip python3-dev python3-venv
+sudo apt-get install python3-pip python3-dev python3-venv
 ```
 
 In order to run `script/setup` below you will need some more dependencies.
 
 ```bash
-$ sudo apt-get install autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev
+sudo apt-get install autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev
 ```
 
 > Different distributions have different package installation mechanisms and sometimes packages names as well. For example CentOS would use: `sudo yum install epel-release && sudo yum install python36 python36-devel mysql-devel gcc`
@@ -38,10 +38,11 @@ From Windows Store install Ubuntu.
 
 When the Linux subsystem is set up, perform install as for Linux.
 
+Install the core dependencies.
+
 ```bash
-$ sudo apt-get update
-$ sudo apt-get install python3-pip python3-dev python3-venv
-$ sudo apt-get install autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev
+sudo apt-get update
+sudo apt-get install python3-pip python3-dev python3-venv
 ```
 
 > It might be a good idea to upgrade to Python 3.6 in Linux Subsystem on Windows. Instructions for Ubuntu 16.04:
@@ -51,6 +52,12 @@ $ sudo apt-get install autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev 
 > sudo apt-get install python3.6 python3.6-venv python3.6-dev
 > ```
 > Source: https://askubuntu.com/a/865569
+
+In order to run script/setup below you will need some more dependencies.
+
+```bash
+sudo apt-get install autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev
+```
 
 Hint: Git is included in Linux subsytem.
 
@@ -75,9 +82,9 @@ Visit the [Home Assistant repository](https://github.com/home-assistant/home-ass
 Once forked, setup your local copy of the source using the commands:
 
 ```bash
-$ git clone https://github.com/YOUR_GIT_USERNAME/home-assistant.git
-$ cd home-assistant
-$ git remote add upstream https://github.com/home-assistant/home-assistant.git
+git clone https://github.com/YOUR_GIT_USERNAME/home-assistant.git
+cd home-assistant
+git remote add upstream https://github.com/home-assistant/home-assistant.git
 ```
 
 ## Setting up virtual environment
@@ -96,13 +103,13 @@ source bin/activate
 Install the requirements with a provided script named `setup`.
 
 ```bash
-$ script/setup
+script/setup
 ```
 
 Invoke your installation, adjusting the [configuration](https://www.home-assistant.io/docs/configuration/) if required. 
 
 ```bash
-$ hass
+hass
 ```
 
 ## Logging
