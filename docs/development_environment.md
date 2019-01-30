@@ -30,7 +30,7 @@ Due to Home Assistant is mainly designed and developed on Linux distributions, o
 
 Open Powershell as an Administrator and run
 
-```bash
+```powershell
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 ```
 
@@ -44,13 +44,21 @@ $ sudo apt-get install python3-pip python3-dev python3-venv
 $ sudo apt-get install autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev
 ```
 
+> It might be a good idea to upgrade to Python 3.6 in Linux Subsystem on Windows. Instructions for Ubuntu 16.04:
+> ```bash
+> sudo add-apt-repository ppa:deadsnakes/ppa
+> sudo apt-get update
+> sudo apt-get install python3.6 python3.6-venv python3.6-dev
+> ```
+> Source: https://askubuntu.com/a/865569
+
 Hint: Git is included in Linux subsytem.
 
 When invoking your installation (see below), make sure to specify a folder for configuration which is accessible from Windows.
 
 ```bash
-$ mkdir -p ../config
-$ hass -c ../config
+mkdir -p ../config
+hass -c ../config
 ```
 
 ### Developing on OS X
@@ -58,7 +66,7 @@ $ hass -c ../config
 Install [Homebrew](https://brew.sh/), then use that to install Python 3:
 
 ```bash
-$ brew install python3 autoconf
+brew install python3 autoconf
 ```
 
 ## Setup Local Repository
@@ -77,9 +85,13 @@ $ git remote add upstream https://github.com/home-assistant/home-assistant.git
 To isolate your environment from the rest of the system, set up a [`venv`](https://docs.python.org/3/library/venv.html). Within the `home-assistant` directory, create and activate your virtual environment.
 
 ```bash
-$ python3 -m venv .
-$ source bin/activate
+python3 -m venv .
+source bin/activate
 ```
+> If Python 3.6 installed as above in Linux Subsystem on Windows, use command:
+> ```bash
+> python3.6 -m venv .
+> ```
 
 Install the requirements with a provided script named `setup`.
 
