@@ -51,7 +51,7 @@ The frontend uses decentralized routing. Each component only knows enough about 
 
 For example, the `<home-assistant>` main component will look at the first part of the url to decide which panel should be loaded. Each panel can have its own mapping between the url and what content to show.
 
-For the routing, we use the [`<app-route>`](https://www.polymer-project.org/3.0/toolbox/routing) web component.
+For the routing, we use the [`<app-route>`](https://www.polymer-project.org/blog/routing) web component.
 
 ## Bundling
 
