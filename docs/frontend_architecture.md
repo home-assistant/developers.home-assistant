@@ -3,7 +3,7 @@ title: "Home Assistant Frontend Architecture"
 sidebar_label: "Architecture"
 ---
 
-The Home Assistant frontend is built using web components. This is a modern web technology allowing us to encapsulate templates, styling and logic into a single file and expose it as an HTML tag in the browser. These componens are composable, allowing a very dynamic and powerful foundation of our application.
+The Home Assistant frontend is built using web components. This is a modern web technology allowing us to encapsulate templates, styling and logic into a single file and expose it as an HTML tag in the browser. These components are composable, allowing a very dynamic and powerful foundation of our application.
 
 ## Structure
 
