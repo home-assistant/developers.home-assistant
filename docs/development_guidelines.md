@@ -36,15 +36,10 @@ SENSOR_TYPES = {
 
 ### File headers
 
-The docstring in the file header should contain a link to the documentation to make it easy to find further information, especially about the configuration or details which are not mentioned in the code.
+The docstring in the file header should describe what the file is about.
 
 ```python
-"""
-Support for MQTT lights.
-
-For more details about this platform, please refer to the documentation at
-https://home-assistant.io/components/light.mqtt/
-"""
+"""Support for MQTT lights."""
 ```
 
 ### Requirements
