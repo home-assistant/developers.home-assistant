@@ -2,7 +2,7 @@
 title: "Debugging Hass.io"
 ---
 
-> This section is not for end users. End users should use the [SSH add-on] to SSH into Hass.io CLI. This is for <b>developers</b> of Hass.io. Do not ask for support if you are using these options.
+> This section is not for end users. End users should use the [SSH add-on] to SSH into Hass.io. This is for <b>developers</b> of Hass.io. Do not ask for support if you are using these options.
 
 [SSH add-on]: https://www.home-assistant.io/addons/ssh/
 
@@ -18,7 +18,8 @@ Use a USB drive formatted with FAT, ext4, or NTFS and name it CONFIG (case sensi
 
 > Make sure when you are copying the public key to the root of the USB drive that you rename the file correctly to `authorized_keys` with no `.pub` file extension.
 
-You should then be able to SSH into your Hass.io device. On mac/linux, use:
+You should then be able to SSH into your Hass.io device. On Mac/Linux, use:
+
 ```
 ssh root@hassio.local -p 22222
 ```
@@ -37,6 +38,7 @@ docker logs hassos_supervisor
 # Home Assistant logs
 docker logs homeassistant
 ```
+
 ## Accessing the container bash
 
 ```bash
@@ -46,6 +48,7 @@ docker exe -it homeassistant /bin/bash
 [windows-keys]: https://www.digitalocean.com/community/tutorials/how-to-use-ssh-keys-with-putty-on-digitalocean-droplets-windows-users
 
 ### Generating SSH Keys
+
 Windows instructions for how to generate and use private/public keys with Putty are [here][windows-keys]. Instead of the droplet instructions, add the public key as per above instructions.
 
 Alternative instructions, for Mac, Windows and Linux can be found [here](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#platform-mac).
