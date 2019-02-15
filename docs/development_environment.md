@@ -11,16 +11,16 @@ You'll need to set up a development environment if you want to develop a new fea
 Install the core dependencies.
 
 ```bash
-sudo apt-get install python3-pip python3-dev python3-venv
+$ sudo apt-get install python3-pip python3-dev python3-venv
 ```
 
 In order to run `script/setup` below you will need some more dependencies.
 
 ```bash
-sudo apt-get install autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev
+$ sudo apt-get install autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev
 ```
 
-> Different distributions have different package installation mechanisms and sometimes packages names as well. For example CentOS would use: `sudo yum install epel-release && sudo yum install python36 python36-devel mysql-devel gcc`
+> Different distributions have different package installation mechanisms and sometimes packages names as well. For example CentOS would use: `$ sudo yum install epel-release && sudo yum install python36 python36-devel mysql-devel gcc`
 
 Additional dependencies exist if you plan to perform Frontend Development, please read the [Frontend](frontend_index.md) section to learn more.
 
@@ -31,7 +31,7 @@ Due to Home Assistant is mainly designed and developed on Linux distributions, o
 Open Powershell as an Administrator and run
 
 ```powershell
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
+> Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 ```
 
 From Windows Store install Ubuntu.
@@ -41,22 +41,22 @@ When the Linux subsystem is set up, perform install as for Linux.
 Install the core dependencies.
 
 ```bash
-sudo apt-get update
-sudo apt-get install python3-pip python3-dev python3-venv
+$ sudo apt-get update
+$ sudo apt-get install python3-pip python3-dev python3-venv
 ```
 
 > It might be a good idea to upgrade to Python 3.6 in Linux Subsystem on Windows. Instructions for Ubuntu 16.04:
 > ```bash
-> sudo add-apt-repository ppa:deadsnakes/ppa
-> sudo apt-get update
-> sudo apt-get install python3.6 python3.6-venv python3.6-dev
+> $ sudo add-apt-repository ppa:deadsnakes/ppa
+> $ sudo apt-get update
+> $ sudo apt-get install python3.6 python3.6-venv python3.6-dev
 > ```
 > Source: https://askubuntu.com/a/865569
 
 In order to run script/setup below you will need some more dependencies.
 
 ```bash
-sudo apt-get install autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev
+$ sudo apt-get install autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev
 ```
 
 Hint: Git is included in Linux subsytem.
@@ -64,8 +64,8 @@ Hint: Git is included in Linux subsytem.
 When invoking your installation (see below), make sure to specify a folder for configuration which is accessible from Windows.
 
 ```bash
-mkdir -p ../config
-hass -c ../config
+$ mkdir -p ../config
+$ hass -c ../config
 ```
 
 ### Developing on OS X
@@ -73,7 +73,7 @@ hass -c ../config
 Install [Homebrew](https://brew.sh/), then use that to install Python 3:
 
 ```bash
-brew install python3 autoconf
+$ brew install python3 autoconf
 ```
 
 ## Setup Local Repository
@@ -82,9 +82,9 @@ Visit the [Home Assistant repository](https://github.com/home-assistant/home-ass
 Once forked, setup your local copy of the source using the commands:
 
 ```bash
-git clone https://github.com/YOUR_GIT_USERNAME/home-assistant.git
-cd home-assistant
-git remote add upstream https://github.com/home-assistant/home-assistant.git
+$ git clone https://github.com/YOUR_GIT_USERNAME/home-assistant.git
+$ cd home-assistant
+$ git remote add upstream https://github.com/home-assistant/home-assistant.git
 ```
 
 ## Setting up virtual environment
@@ -92,24 +92,24 @@ git remote add upstream https://github.com/home-assistant/home-assistant.git
 To isolate your environment from the rest of the system, set up a [`venv`](https://docs.python.org/3/library/venv.html). Within the `home-assistant` directory, create and activate your virtual environment.
 
 ```bash
-python3 -m venv .
-source bin/activate
+$ python3 -m venv .
+$ source bin/activate
 ```
 > If Python 3.6 installed as above in Linux Subsystem on Windows, use command:
 > ```bash
-> python3.6 -m venv .
+> $ python3.6 -m venv .
 > ```
 
-Install the requirements with a provided script named `setup`.
+Install the requirements with a provided script named `$ setup`.
 
 ```bash
-script/setup
+$ script/setup
 ```
 
-Invoke your installation, adjusting the [configuration](https://www.home-assistant.io/docs/configuration/) if required. 
+Invoke your installation, adjusting the [configuration](https://www.home-assistant.io/docs/configuration/) if required.
 
 ```bash
-hass
+$ hass
 ```
 
 ## Logging
