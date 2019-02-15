@@ -107,71 +107,58 @@ Resources to load in Lovelace can be imported as a JS script, an HTML import or 
 Create a new file in your Home Assistant config dir as `<config>/www/wired-cards.js` and put in the following contents:
 
 ```js
-import 'https://unpkg.com/wired-card@0.6.5/wired-card.js?module';
-import 'https://unpkg.com/wired-toggle@0.6.5/wired-toggle.js?module';
+import "https://unpkg.com/wired-card@0.8.1/wired-card.js?module";
+import "https://unpkg.com/wired-toggle@0.8.0/wired-toggle.js?module";
 import {
-  LitElement, html
-} from 'https://unpkg.com/@polymer/lit-element@^0.5.2/lit-element.js?module';
+  LitElement,
+  html,
+  css
+} from "https://unpkg.com/lit-element@2.0.1/lit-element.js?module";
 
 function loadCSS(url) {
-  const link = document.createElement('link');
-  link.type = 'text/css';
-  link.rel = 'stylesheet';
+  const link = document.createElement("link");
+  link.type = "text/css";
+  link.rel = "stylesheet";
   link.href = url;
   document.head.appendChild(link);
 }
 
-loadCSS('https://fonts.googleapis.com/css?family=Gloria+Hallelujah');
+loadCSS("https://fonts.googleapis.com/css?family=Gloria+Hallelujah");
 
 class WiredToggleCard extends LitElement {
   static get properties() {
     return {
       hass: Object,
-      config: Object,
-    }
+      config: Object
+    };
   }
 
-  _render({ hass, config }) {
+  render() {
     return html`
-      <style>
-        :host {
-          font-family: 'Gloria Hallelujah', cursive;
-        }
-        wired-card {
-          background-color: white;
-          padding: 16px;
-          display: block;
-          font-size: 18px;
-        }
-        .state {
-          display: flex;
-          justify-content: space-between;
-          padding: 8px;
-          align-items: center;
-        }
-        wired-toggle {
-          margin-left: 8px;
-        }
-      </style>
       <wired-card elevation="2">
-        ${config.entities.map(ent => hass.states[ent]).map((state) =>
-          html`
-            <div class='state'>
-              ${state.attributes.friendly_name}
-              <wired-toggle
-                checked="${state.state === 'on'}"
-                on-change="${ev => this._toggle(state)}"
-              ></wired-toggle>
-            </div>
-          `
-        )}
+        ${this.config.entities.map(ent => {
+          const stateObj = this.hass.states[ent];
+          return stateObj
+            ? html`
+                <div class="state">
+                  ${stateObj.attributes.friendly_name}
+                  <wired-toggle
+                    .checked="${stateObj.state === "on"}"
+                    @change="${ev => this._toggle(stateObj)}"
+                  ></wired-toggle>
+                </div>
+              `
+            : html`
+                <div class="not-found">Entity ${ent} not found.</div>
+              `;
+        })}
       </wired-card>
     `;
   }
 
   setConfig(config) {
     if (!config.entities) {
-      throw new Error('You need to define entities');
+      throw new Error("You need to define entities");
     }
     this.config = config;
   }
@@ -183,12 +170,41 @@ class WiredToggleCard extends LitElement {
   }
 
   _toggle(state) {
-    this.hass.callService('homeassistant', 'toggle', {
+    this.hass.callService("homeassistant", "toggle", {
       entity_id: state.entity_id
     });
   }
+
+  static get styles() {
+    return css`
+      :host {
+        font-family: "Gloria Hallelujah", cursive;
+      }
+      wired-card {
+        background-color: white;
+        padding: 16px;
+        display: block;
+        font-size: 18px;
+      }
+      .state {
+        display: flex;
+        justify-content: space-between;
+        padding: 8px;
+        align-items: center;
+      }
+      .not-found {
+        background-color: yellow;
+        font-family: sans-serif;
+        font-size: 14px;
+        padding: 8px;
+      }
+      wired-toggle {
+        margin-left: 8px;
+      }
+    `;
+  }
 }
-customElements.define('wired-toggle-card', WiredToggleCard);
+customElements.define("wired-toggle-card", WiredToggleCard);
 ```
 
 And for your configuration:
