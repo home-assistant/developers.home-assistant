@@ -128,8 +128,8 @@ loadCSS("https://fonts.googleapis.com/css?family=Gloria+Hallelujah");
 class WiredToggleCard extends LitElement {
   static get properties() {
     return {
-      hass: Object,
-      config: Object
+      hass: {},
+      config: {}
     };
   }
 
