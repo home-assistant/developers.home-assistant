@@ -59,7 +59,7 @@ The entity base class has a few properties that are common among all entities in
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | assumed_state | boolean | `False` | Return `True` if the state is based on our assumption instead of reading it from the device.
-| available | boolean | `True` | Indiciate if Home Assistant is able to read the state and control the underlying device.
+| available | boolean | `True` | Indicate if Home Assistant is able to read the state and control the underlying device.
 | device_state_attributes | dict | `None` | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version. See [below](entity_index.md#standard_attributes) for details of standard attributes.
 | entity_picture | URL | `None` | Url of a picture to show for the entity.
 | name | string | `None` | Name of the entity
