@@ -11,15 +11,39 @@ sidebar_label: Alarm Control Panel
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| code_format | string | `None` | The format of the panel code.
+| state	| string | **Required** | One of the states listed in the states section.
+| code_format | string | `None` | Regex for code format or `None` if no code is required.
+| changed_by | string | `None` | Last change triggered by.
 
-### Available code formats
 
-| Value | Description
+## States
+| State | Description
 | ----- | -----------
-| None | No code required.
-| Number | Code is a number (Shows ten-key pad on frontend).
-| Any | Code is a string.
+| `SERVICE_ALARM_TRIGGER` | The alarm is triggered.
+| `SERVICE_ALARM_DISARM` | The alarm is disarmed (`off`).
+| `SERVICE_ALARM_ARM_HOME` | The alarm is armed in home mode.
+| `SERVICE_ALARM_ARM_AWAY` | The alarm is armed in away mode.
+| `SERVICE_ALARM_ARM_NIGHT` | The alarm is armed in night mode.
+| `SERVICE_ALARM_ARM_CUSTOM_BYPASS` |  The alarm is armed in bypass mode.
+
 
 ## Methods
+Note, the methods also have corresponding `async_` commands (e.g., `acync_alarm_disarm`) and optinal `code` parameter.
 
+### `alarm_disarm`
+Send disarm command.
+
+### `alarm_arm_home`
+Send arm home command.
+
+### `alarm_arm_away`
+Send arm away command.
+
+### `alarm_arm_night`
+Send arm night command.
+
+### `alarm_trigger`
+Send alarm trigger command.
+
+### `alarm_arm_custom_bypass`
+Send arm custom bypass command.
