@@ -42,7 +42,7 @@ docker logs homeassistant
 ## Accessing the container bash
 
 ```bash
-docker exe -it homeassistant /bin/bash
+docker exec -it homeassistant /bin/bash
 ```
 
 [windows-keys]: https://www.digitalocean.com/community/tutorials/how-to-use-ssh-keys-with-putty-on-digitalocean-droplets-windows-users
