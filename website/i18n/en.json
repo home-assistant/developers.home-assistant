@@ -34,6 +34,10 @@
         "title": "Architecture",
         "sidebar_label": "Introduction"
       },
+      "area_registry_index": {
+        "title": "Area Registry",
+        "sidebar_label": "Introduction"
+      },
       "asyncio_101": {
         "title": "Asyncio 101"
       },
@@ -1078,6 +1082,31 @@
       },
       "version-0.86.0-lovelace_custom_card": {
         "title": "Lovelace: Custom Cards"
+      },
+      "version-0.87.0-area_registry_index": {
+        "title": "Area Registry",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.87.0-development_environment": {
+        "title": "Set up Development Environment"
+      },
+      "version-0.87.0-device_registry_index": {
+        "title": "Device Registry",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.87.0-documentation_create_page": {
+        "title": "Create a new page"
+      },
+      "version-0.87.0-documentation_standards": {
+        "title": "Standards"
+      },
+      "version-0.87.0-frontend_architecture": {
+        "title": "Home Assistant Frontend Architecture",
+        "sidebar_label": "Architecture"
+      },
+      "version-0.87.0-frontend_development": {
+        "title": "Frontend development",
+        "sidebar_label": "Development"
       }
     },
     "links": {
@@ -1096,6 +1125,7 @@
       "Data Entry Flow": "Data Entry Flow",
       "Entity Registry": "Entity Registry",
       "Device Registry": "Device Registry",
+      "Area Registry": "Area Registry",
       "Frontend": "Frontend",
       "Extending the frontend": "Extending the frontend",
       "Custom UI": "Custom UI",
