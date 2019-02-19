@@ -11,20 +11,30 @@ sidebar_label: Alarm Control Panel
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| state	| string | **Required** | One of the states listed in the states section.
-| code_format | string | `None` | Regex for code format or `None` if no code is required.
+| state	| string | **Required** | One of the states listed in the **states** section.
+| code_format | string | `None` | One of the states listed in the **code formats** section.
 | changed_by | string | `None` | Last change triggered by.
 
 
-## States
-| State | Description
+### States
+| Value | Description
 | ----- | -----------
-| `SERVICE_ALARM_TRIGGER` | The alarm is triggered.
-| `SERVICE_ALARM_DISARM` | The alarm is disarmed (`off`).
-| `SERVICE_ALARM_ARM_HOME` | The alarm is armed in home mode.
-| `SERVICE_ALARM_ARM_AWAY` | The alarm is armed in away mode.
-| `SERVICE_ALARM_ARM_NIGHT` | The alarm is armed in night mode.
-| `SERVICE_ALARM_ARM_CUSTOM_BYPASS` |  The alarm is armed in bypass mode.
+| `disarmed` | The alarm is disarmed (`off`).
+| `armed_home` | The alarm is armed in home mode.
+| `armed_away` | The alarm is armed in away mode.
+| `armed_night` | The alarm is armed in night mode.
+| `armed_custom_bypass` |  The alarm is armed in bypass mode.
+| `pending` | The alarm is pending (towards `triggered`).
+| `arming` | The alarm is arming.
+| `disarming` | The alarm is disarming.
+| `triggered` | The alarm is triggered.
+
+### Available code formats
+| Value | Description
+| ----- | -----------
+| None | No code required.
+| Number | Code is a number (Shows ten-key pad on frontend).
+| Any | Code is a string.
 
 
 ## Methods
