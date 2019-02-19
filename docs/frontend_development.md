@@ -16,9 +16,9 @@ The Home Assistant frontend is built using web components and powered by the [Po
 First step is to fork the [home-assistant-polymer repository][hass-polymer] and add the upstream remote. You can place the forked repository anywhere on your system.
 
 ```bash
-$ git clone https://github.com/YOUR_GIT_USERNAME/home-assistant-polymer.git
+$ git clone git@github.com:YOUR_GIT_USERNAME/home-assistant-polymer.git
 $ cd home-assistant-polymer
-$ git remote add upstream https://github.com/home-assistant-polymer/home-assistant-polymer.git
+$ git remote add upstream https://github.com/home-assistant/home-assistant-polymer.git
 ```
 
 ### Configuring Home Assistant
