@@ -17,6 +17,7 @@ sidebar_label: Alarm Control Panel
 
 
 ### States
+
 | Value | Description
 | ----- | -----------
 | `disarmed` | The alarm is disarmed (`off`).
@@ -29,7 +30,9 @@ sidebar_label: Alarm Control Panel
 | `disarming` | The alarm is disarming.
 | `triggered` | The alarm is triggered.
 
+
 ### Available code formats
+
 | Value | Description
 | ----- | -----------
 | None | No code required.
