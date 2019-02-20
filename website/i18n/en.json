@@ -1107,6 +1107,20 @@
       "version-0.87.0-frontend_development": {
         "title": "Frontend development",
         "sidebar_label": "Development"
+      },
+      "version-0.88.0-development_guidelines": {
+        "title": "Style guidelines"
+      },
+      "version-0.88.0-entity_index": {
+        "title": "Entity",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.88.0-frontend_development": {
+        "title": "Frontend development",
+        "sidebar_label": "Development"
+      },
+      "version-0.88.0-lovelace_custom_card": {
+        "title": "Lovelace: Custom Cards"
       }
     },
     "links": {
