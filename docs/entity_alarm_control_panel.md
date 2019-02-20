@@ -31,7 +31,7 @@ sidebar_label: Alarm Control Panel
 | `triggered` | The alarm is triggered.
 
 
-### Available code formats
+### Code Formats
 
 | Value | Description
 | ----- | -----------
@@ -41,22 +41,87 @@ sidebar_label: Alarm Control Panel
 
 
 ## Methods
-Note, the methods also have corresponding `async_` commands (e.g., `acync_alarm_disarm`) and optinal `code` parameter.
 
-### `alarm_disarm`
+### Alarm Disarm
 Send disarm command.
 
-### `alarm_arm_home`
+```python
+class MyAlarm(AlarmControlPanel):
+    # Implement one of these methods.
+
+    def alarm_disarm(self, code=None) -> None:
+        """Send disarm command."""
+
+    async def async_alarm_disarm(self, code=None) -> None:
+        """Send disarm command."""
+```
+
+### Alarm Arm Home
 Send arm home command.
 
-### `alarm_arm_away`
+```python
+class MyAlarm(AlarmControlPanel):
+    # Implement one of these methods.
+
+    def alarm_arm_home(self, code=None) -> None:
+        """Send arm home command."""
+
+    def async_alarm_arm_home(self, code=None) -> None:
+        """Send arm home command."""
+```
+
+### Alarm Arm Away
 Send arm away command.
 
-### `alarm_arm_night`
+```python
+class MyAlarm(AlarmControlPanel):
+    # Implement one of these methods.
+
+    def alarm_arm_away(self, code=None) -> None:
+        """Send arm away command."""
+
+    def async_alarm_arm_away(self, code=None) -> None:
+        """Send arm away command."""
+```
+
+### Alarm Arm Night
 Send arm night command.
 
-### `alarm_trigger`
+```python
+class MyAlarm(AlarmControlPanel):
+    # Implement one of these methods.
+
+    def alarm_arm_night(self, code=None) -> None:
+        """Send arm night command."""
+
+    def async_alarm_arm_night(self, code=None) -> None:
+        """Send arm night command."""
+```
+
+### Alarm Trigger
 Send alarm trigger command.
 
-### `alarm_arm_custom_bypass`
+```python
+class MyAlarm(AlarmControlPanel):
+    # Implement one of these methods.
+
+    def alarm_trigger(self, code=None) -> None:
+        """Send alarm trigger command."""
+
+    def async_alarm_trigger(self, code=None) -> None:
+        """Send alarm trigger command."""
+```
+
+### Alarm Custom Bypass
 Send arm custom bypass command.
+
+```python
+class MyAlarm(AlarmControlPanel):
+    # Implement one of these methods.
+
+    def alarm_arm_custom_bypass(self, code=None) -> None:
+        """Send arm custom bypass command."""
+
+    def async_alarm_arm_custom_bypass(self, code=None) -> None:
+        """Send arm custom bypass command."""
+```
