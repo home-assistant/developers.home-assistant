@@ -6,7 +6,7 @@ Config Entry Options uses the [Data Flow Entry framework](data_entry_flow_index.
 
 ## Options support
 
-For a component to support options it needs to have a `async_get_options_flow` method in its config flow handler. Calling it will return an instance of the components options flow handler.
+For a component to support options it needs to have an `async_get_options_flow` method in its config flow handler. Calling it will return an instance of the components options flow handler.
 
 ```python
 @staticmethod
@@ -32,7 +32,7 @@ If the component should act on updated options, you can register an update liste
 entry.add_update_listener(update_listener)
 ```
 
-The Listener shall be an async function that takes the same input as async_setup_entry. The Entry will then contain the options dictionary.
+The Listener shall be an async function that takes the same input as async_setup_entry. Options can then be accessed from entry.options.
 
 ```python
 async def update_listener(hass, entry):
