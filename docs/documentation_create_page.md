@@ -111,9 +111,11 @@ required: any string here #=> Any string here
 
 ### Embedding Code
 
-You can use the [default markdown syntax](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#code) to generate syntax highlighted code. For inline code wrap your code in back-ticks. 
+You can use the [default markdown syntax](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#code) to generate syntax highlighted code. For inline code wrap your code in back-ticks.
 
 When you're writing code that is to be executed on the terminal, prefix it with `$`.
+
+If YAML code raises errors (For example when containing `value_template` strings), you have to wrap the entire YAML block with `{% raw %} ... {% endraw %}`.
 
 ### Templates
 
