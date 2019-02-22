@@ -34,7 +34,10 @@ class Footer extends React.Component {
             )}
           </a>
           <div>
-            <a href="https://twitter.com/hass_devs">Follow Home Assistant devs on Twitter</a>
+            <ul>
+              <li><a href="https://twitter.com/hass_devs">Follow Home Assistant devs on Twitter</a></li>
+              <li><a href="https://github.com/home-assistant/developers.home-assistant">Contribute to this documentation on GitHub</a></li>
+            </ul>
           </div>
           {/* <div>
             <h5>Docs</h5>
