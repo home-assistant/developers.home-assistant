@@ -32,7 +32,7 @@ If the component should act on updated options, you can register an update liste
 entry.add_update_listener(update_listener)
 ```
 
-The Listener shall be an async function that takes the same input as async_setup_entry. Options can then be accessed from entry.options.
+The Listener shall be an async function that takes the same input as async_setup_entry. Options can then be accessed from `entry.options`.
 
 ```python
 async def update_listener(hass, entry):
