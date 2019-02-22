@@ -36,7 +36,8 @@
     ],
     "Config Entries": [
       "config_entries_index",
-      "config_entries_config_flow_handler"
+      "config_entries_config_flow_handler",
+      "config_entries_options_flow_handler"
     ],
     "Data Entry Flow": [
       "data_entry_flow_index"
