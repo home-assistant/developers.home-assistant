@@ -24,7 +24,6 @@ A cover entity is a device that controls an opening or cover, such as a garage d
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | device_class | string | None | Describes the type/class of the cover. Must be `None` or one of the valid values from the table below.
-| state | string | Value determined from `is_opening`, `is_closing`, and `is_closed` | Describes the current state of the cover. Must be `None` (unknown) or one of the valid values from the table below.
 | supported_features | int (bitwise) | Value determined from `current_cover_position` and `current_cover_tilt_position` | Describes the supported features. See the related table below for details.
 
 ### Device Classes
