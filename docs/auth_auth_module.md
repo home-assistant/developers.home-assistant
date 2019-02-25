@@ -8,7 +8,7 @@ Multi-factor Authentication Modules are used in conjunction with [Authentication
 
 > We currently only support built-in mfa auth modules. Support for custom auth modules might arrive in the future.
 
-Multi-facor Auth modules are defined in `homeassistant/auth/mfa_modules/<name of module>.py`. The auth module will need to provide an implementation of the `MultiFactorAuthModule` class.
+Multi-factor Auth modules are defined in `homeassistant/auth/mfa_modules/<name of module>.py`. The auth module will need to provide an implementation of the `MultiFactorAuthModule` class.
 
 For an example of a fully implemented auth module, please see [insecure_example.py](https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/auth/mfa_modules/insecure_example.py).
 
