@@ -17,7 +17,7 @@ A checklist of things to do when you're adding a new platform.
 
  1. Requirement version should be pinned: `REQUIREMENTS = ['phue==0.8.1']`
  2. We no longer want requirements hosted on GitHub. Please upload to PyPi.
- 3. Requirements should only be imported inside functions. This is necessary because requirements are installed on the fly.
+ 3. Requirements should [only be imported inside functions](creating_component_deps_and_reqs.md). This is necessary because requirements are installed on the fly.
 
 ### 2. Dependencies
 
