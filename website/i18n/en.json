@@ -75,6 +75,9 @@
         "title": "Config Entries",
         "sidebar_label": "Introduction"
       },
+      "config_entries_options_flow_handler": {
+        "title": "Options Flow Handlers"
+      },
       "configuration_yaml_index": {
         "title": "Configuration.yaml",
         "sidebar_label": "Introduction"
