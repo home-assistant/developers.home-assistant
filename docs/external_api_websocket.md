@@ -391,6 +391,26 @@ The server will respond with the image encoded via base64.
 }
 ```
 
+## Pings and Pongs
+
+The API supports receiving a ping from the client and returning a pong. This serves as a heartbeat to ensure the connection is still alive:
+
+```json
+{
+    "id": 19,
+    "type": "ping"
+}
+```
+
+The server must send a pong back as quickly as possible, if the connection is still active:
+
+```json
+{
+    "id": 19,
+    "type": "pong"
+}
+```
+
 ## Error handling
 
 If an error occurs, the `success` key in the `result` message will be set to `false`. It will contain an `error` key containing an object with two keys: `code` and `message`.
