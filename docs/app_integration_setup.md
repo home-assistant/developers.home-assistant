@@ -10,6 +10,9 @@ The local instance can be discovered if Home Assistant has the [zeroconf compone
 
 When the address of the instance is known, the app will ask the user to authenticate via [OAuth2 with Home Assistant]. Home Assistant uses IndieAuth, which means that to be able to redirect to a url that triggers your app, you need to take some extra steps. Make sure to read the last paragraph of the "Clients" section thoroughly.
 
+[zeroconf component]: https://www.home-assistant.io/components/zeroconf
+[OAuth2 with Home Assistant]: auth_api.md
+
 ## Registering the device
 
 > This is an experimental feature. We expect to evolve the API in the upcoming releases.
