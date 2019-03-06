@@ -1124,6 +1124,53 @@
       },
       "version-0.88.0-lovelace_custom_card": {
         "title": "Lovelace: Custom Cards"
+      },
+      "version-0.89.0-app_integration_index": {
+        "title": "Native App Integration",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.89.0-app_integration_sending_data": {
+        "title": "Sending data home"
+      },
+      "version-0.89.0-app_integration_setup": {
+        "title": "Connecting to an instance"
+      },
+      "version-0.89.0-auth_auth_module": {
+        "title": "Multi-factor Authentication Modules"
+      },
+      "version-0.89.0-config_entries_index": {
+        "title": "Config Entries",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.89.0-config_entries_options_flow_handler": {
+        "title": "Options Flow Handlers"
+      },
+      "version-0.89.0-creating_component_code_review": {
+        "title": "Checklist for creating a component"
+      },
+      "version-0.89.0-creating_platform_code_review": {
+        "title": "Checklist for creating a platform"
+      },
+      "version-0.89.0-development_checklist": {
+        "title": "Development Checklist"
+      },
+      "version-0.89.0-development_environment": {
+        "title": "Set up Development Environment"
+      },
+      "version-0.89.0-device_registry_index": {
+        "title": "Device Registry",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.89.0-entity_alarm_control_panel": {
+        "title": "Alarm Control Panel Entity",
+        "sidebar_label": "Alarm Control Panel"
+      },
+      "version-0.89.0-entity_cover": {
+        "title": "Cover Entity",
+        "sidebar_label": "Cover"
+      },
+      "version-0.89.0-internationalization_translation": {
+        "title": "Translation"
       }
     },
     "links": {
