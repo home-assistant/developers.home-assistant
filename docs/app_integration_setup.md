@@ -6,33 +6,77 @@ When a user first opens the app, they will need to connect to their local instan
 
 ## Authenticating the user
 
-The local instance can be discovered if Home Assistant has the [zeroconf component] configured. If not configured, the user will need to be asked for the local address of their instance.
+The local instance can be discovered if Home Assistant has the [zeroconf component] configured by searching for `_home-assistant._tcp.local.`. If not configured, the user will need to be asked for the local address of their instance.
 
 When the address of the instance is known, the app will ask the user to authenticate via [OAuth2 with Home Assistant]. Home Assistant uses IndieAuth, which means that to be able to redirect to a url that triggers your app, you need to take some extra steps. Make sure to read the last paragraph of the "Clients" section thoroughly.
 
 ## Registering the device
 
-Once you have tokens to authenticate as a user, it's time to register the app with the app component in Home Assistant. Each native app will need to build their own support layer for their app. The setup of your component will need to use a config flow so that it is configurable via the user interface and can access advanced Home Assistant features like the device registry.
+> This is an experimental feature. We expect to evolve the API in the upcoming releases.
 
-Let's take as an example that we're building an iOS application and that it is supported by the `ios` component in Home Assistant. If the component is loaded, it will register a new API endpoint on `/api/ios/register` (requiring authentication). The app can post to this endpoint to register the users' device with Home Assistant. Example payload:
+_This requires Home Assistant 0.89 or later._
+
+Home Assistant has a `mobile_app` component that allows applications to register themselves and interact with the instance. This is a generic component to handle most common mobile application tasks. This component is extendable with custom interactions if your app needs more types of interactions than are offered by this component.
+
+Once you have tokens to authenticate as a user, it's time to register the app with the mobile app component in Home Assistant. You can do so by making an authenticated POST request to `/api/mobile_app/devices`. [More info on making authenticated requests.](auth_api.md#making-authenticated-requests)
+
+If you get a 404 when making this request, it means the user does not have the mobile_app component enabled. Prompt the user to enable the `mobile_app` component. The mobile_app component is set up as part of the default Home Assistant configuration.
+
+Example payload to send to the registration endpoint:
 
 ```json
 {
-  "device_type": "iPhone 6",
-  "firmware": "zxcx"
+  "app_id": "awesome_home",
+  "app_name": "Awesome Home",
+  "app_version": "1.2.0",
+  "device_name": "Robbies iPhone",
+  "manufacturer": "Apple, Inc.",
+  "model": "iPhone X",
+  "os_version": "iOS 10.12",
+  "supports_encryption": true,
+  "app_data": {
+    "push_notification_key": "abcdef",
+  }
 }
 ```
 
-The endpoint will register the device with Home Assistant:
+| Key | Required | Type | Description |
+| --- | -------- | ---- | ----------- |
+| `app_id` | V | string | A unique identifier for this app.
+| `app_name` | V | string | Name of the mobile app.
+| `app_version` | V | string | Version of the mobile app.
+| `device_name` | V | string | Name of the device running the app.
+| `manufacturer` | V | string | The manufacturer of the device running the app.
+| `model` | V | string | The model of the device running the app.
+| `os_version` | V | string | The OS version of the device running the app.
+| `supports_encryption` | V | bool | If the app supports encryption. See also the [encryption section](#encryption).
+| `app_data` |  | Dict | App data can be used if the app has a supporting component that extends mobile_app functionality.
 
- - Generate a unique webhook endpoint that the app can use to send data back to Home Assistant.
- - Use the storage helper to store data.
- - Register the iOS device with the [device registry](device_registry_index).
- - Make the device available as a notification target.
+When you get a 200 response, the mobile app is registered with Home Assistant. The response is a JSON document and will contain the urls on how to interact with the Home Assistant instance. Store this information.
 
-> The following section is not implemented yet.
+```json
+{
+  "webhook_id": "abcdefgh",
+  "secret": "qwerty"
+}
+```
 
-If the app receives a 404 HTTP status code when trying to register the device, it means the `ios` component is not loaded. In this case, the app can load the `ios` component by posting to `/api/config_entry_discovery`. This will trigger the `http_discovery` step of the config flow for the `ios` component and it will be loaded. The app can now retry the device registration.
+| Key | Type | Description
+| --- | ---- | -----------
+| `webhook_id` | string | The webhook ID that can be used to send data back.
+| `secret` | string | The secret to use for encrypted communication. Will only be included if encryption is supported by both the app and the Home Assistant instance.
 
-[zeroconf component]: https://www.home-assistant.io/components/zeroconf
-[OAuth2 with Home Assistant]: auth_api
+
+## Encryption
+
+The mobile app component supports encryption to make sure all communication between the app and Home Assistant is encrypted. The encryption is powered by [libsodium](https://libsodium.gitbook.io). Example to encrypt the message using libsodium on Python:
+
+```python
+from nacl.secret import SecretBox
+from nacl.encoding import Base64Encoder
+
+data = SecretBox(key).encrypt(
+  payload,
+  encoder=Base64Encoder
+).decode("utf-8")
+```

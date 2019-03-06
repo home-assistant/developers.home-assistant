@@ -7,4 +7,5 @@ This guide describes how to build a native Home Assistant app that communicates 
 
 - Allow the user to establish a connection and authenticate with their own Home Assistant instance.
 - Send location and device info back to Home Assistant.
+- Call services, fire events and render templates.
 - A view to control the house via an authenticated webview.
