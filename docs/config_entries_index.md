@@ -123,3 +123,12 @@ add `async_unload_entry(hass, entry)` to your component ([example](https://githu
 
 Platforms will not need to add any logic for unloading a config entry. The entity component will take care of this.
 If you need to clean up resources used for an entity, implement the `async_will_remove_from_hass` method on the Entity ([example](https://github.com/home-assistant/home-assistant/blob/0.68.0/homeassistant/components/media_player/cast.py#L313)).
+
+## Removal of entries
+
+If a component needs to clean up code when an entry is removed, it can define a removal method:
+
+```python
+def async_remove_entry(hass, entry) -> None:
+    """Handle removal of an entry."""
+```
