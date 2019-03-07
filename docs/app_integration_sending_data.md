@@ -71,7 +71,7 @@ Call a service in Home Assistant.
 | Key | Type | Description
 | --- | ---- | -----------
 | `domain` | string | The domain of the service
-| `service` | string | The service namae
+| `service` | string | The service name
 | `service_data` | dict | The data to send to the service
 
 ## Fire an event
