@@ -129,6 +129,6 @@ If you need to clean up resources used for an entity, implement the `async_will_
 If a component needs to clean up code when an entry is removed, it can define a removal method:
 
 ```python
-def async_remove_entry(hass, entry) -> None:
+async def async_remove_entry(hass, entry) -> None:
     """Handle removal of an entry."""
 ```
