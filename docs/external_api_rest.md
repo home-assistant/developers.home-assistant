@@ -36,6 +36,17 @@ headers = {
 response = get(url, headers=headers)
 print(response.text)
 ```
+Another option is to use the Restful Command component https://www.home-assistant.io/components/rest_command/ in a Home Assistant automation or script.
+
+```yaml
+turn_light_on:
+  url: http://localhost:8123/api/states/light.study_light
+  method: POST
+  headers: 
+    authorization: 'Bearer ABCDEFGH'
+    content-type: 'application/json'
+  payload: '{"state":"on"}'
+```
 
 Successful calls will return status code 200 or 201. Other status codes that can return are:
 
