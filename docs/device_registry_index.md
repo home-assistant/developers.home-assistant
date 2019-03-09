@@ -37,7 +37,7 @@ If you connect a sensor to another device to read some of its data, it should st
 
 > Entity device info is only read if the entity is loaded via a [config entry](config_entries_index.md).
 
-Each entity is able to define a device via the `device_info` property. This property is read when an entity is added to Home Assistant via a config entry. A device will be be matched up with an existing device via supplied identifiers and connections, like serial numbers or MAC addresses.
+Each entity is able to define a device via the `device_info` property. This property is read when an entity is added to Home Assistant via a config entry. A device will be matched up with an existing device via supplied identifiers and connections, like serial numbers or MAC addresses.
 
 ```python
 # Inside a platform
