@@ -35,18 +35,21 @@ When defining a policy, any dictionary value at any place can be replaced with `
 
 ## Entities
 
-Entity permissions can be set on a per entity and per domain basis using the subcategories `entity_ids` and `domains`. Granting access to an entity means a user will be able to read the state and control it.
+Entity permissions can be set on a per entity and per domain basis using the subcategories `entity_ids`, `device_ids`, `area_ids` and `domains`. You can either grant all access by setting the value to `True`, or you can specify each entity individually using the "read", "control", "edit" permissions.
 
-If an entity is specified in both the `entity_ids` and `domains` subcategory, the `entity_ids` result will be used, unless it is `None`. In the following example, the user will have access to all light entities except for `light.kitchen`.
+The system will return the first matching result, based on the order: `entity_ids`, `device_ids`, `area_ids`, `domains`, `all`.
 
-```python
+```json
 {
   "entities": {
     "domains": {
-      "light": True
+      "switch": true
     },
     "entity_ids": {
-      "light.kitchen": False
+      "light.kitchen": {
+        "read": true,
+        "control": true
+      }
     }
   }
 }
