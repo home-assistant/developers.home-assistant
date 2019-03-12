@@ -202,19 +202,16 @@ Starting Home Assistant 0.90, there is a special decorator to help protect
 services that require admin access.
 
 ```python
-from homeassistant.exceptions import Unauthorized, UnknownUser
-from homeassistant.helpers import service
-
 # New in Home Assistant 0.90
-@service.require_admin
 async def handle_admin_service(call):
     """Handle a service call."""
     # Do admin action
 
 
 async def async_setup(hass, config):
-    hass.services.async_register(DOMAIN, 'my_service',
-                                 handle_admin_service(hass))
+    hass.helpers.service.async_register_admin_service(
+        DOMAIN, 'my_service', handle_admin_service, vol.Schema({})
+    )
     return True
 ```
 
