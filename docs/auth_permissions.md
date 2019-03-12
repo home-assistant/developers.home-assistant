@@ -92,3 +92,182 @@ Once merged becomes
   }
 }
 ```
+
+## Checking permissions
+
+We currently have two different permission checks: can the user do the read/control/edit operation on an entity, and is the user an admin and thus allowed to change this configuration setting.
+
+Certain APIs will always be accessible to all users, but might offer a limited scope based on the permissions, like rendering a template.
+
+### Checking permissions
+
+To check a permission, you will need to have access to the user object. Once you have the user object, checking the permission is easy.
+
+```python
+from homeassistant.exceptions import Unauthorized
+from homeasistant.permissions.const import (
+  POLICY_READ, POLICY_CONTROL, POLICY_EDIT
+)
+
+# Raise error if user is not an admin
+if not user.is_admin:
+    raise Unauthorized()
+
+
+# Raise error if user does not have access to an enitty
+if not user.permissions.check_entity(entity_id, POLICY_CONTROL):
+    raise Unauthorized()
+```
+
+### The context object
+
+All service calls, fired events and states in Home Assistant have a context object. This object allows us to attribute changes to events and services. These context objects also contain a user id, which is used for checking the permissions.
+
+It's crucial for permission checking that actions taken on behalf of the user are done with a context containing the user ID. If you are in a service handler, you should re-use the incoming context `call.context`. If you are inside a WebSocket API or Rest API endpoint, you should create a context with the correct user:
+
+```python
+from homeassistant.core import Context
+
+await hass.services.async_call('homeassistant', 'stop', context=Context(
+  user_id=user.id
+), blocking=True)
+```
+
+### If a permission check fails
+
+When you detect an anauthorized action, you should raise the `homeassistant.exceptions.Unauthorized` exception. This exception will cancel the current action and notifies the user that their action is unauthorized.
+
+The `Unauthorized` exception has various parameters, to identify the permission check that failed. All fields are optional.
+
+| # Not all actions have an ID (like adding config entry)
+| # We then use this fallback to know what category was unauth
+
+
+| Parameter | Description
+| --------- | -----------
+| context | The context of the current call.
+| user_id | The user ID that we tried to operate on.
+| entity_id | The entity ID that we tried to operate on.
+| config_entry_id | The config entry ID that we tried to operate on.
+| perm_category | The permission category that we tested. Only necessary if we don't have an object ID that the user tried to operate on (like when we create a config entry).
+| permission | The permission that we tested, ie `POLICY_READ`.
+
+### Securing a service call handler
+
+Service calls allow a user to control entities or with the integration as a whole. A service call uses the attached context to see which user invoked the command. Because context is used, it is important that you also pass the call context to all service calls.
+
+All services that are registered via the entity component (`component.async_register_entity_service()`) will automatically have their permissions checked.
+
+#### Checking entity permissions
+
+Your service call handler will need to check the permissions for each entity that it will act on.
+
+```python
+from homeassistant.exceptions import Unauthorized, UnknownUser
+from homeassistant.auth.permissions.const import POLICY_CONTROL
+
+async def handle_entity_service(call):
+    """Handle a service call."""
+    entity_ids = call.data['entity_id']
+
+    for entity_id in entity_ids:
+        if call.context.user_id:
+            user = await hass.auth.async_get_user(call.context.user_id)
+
+            if user is None:
+                raise UnknownUser(
+                    context=call.context,
+                    entity_id=entity_id,
+                    policy=POLICY_CONTROL,
+                )
+
+            if not user.permissions.check_entity(entity_id, POLICY_CONTROL):
+                raise Unauthorized(
+                    context=call.context,
+                    entity_id=entity_id,
+                    policy=POLICY_CONTROL,
+                )
+
+        # Do action on entity
+
+
+async def async_setup(hass, config):
+    hass.services.async_register(DOMAIN, 'my_service', handle_entity_service)
+    return True
+```
+
+#### Checking admin permission
+
+Starting Home Assistant 0.90, there is a special decorator to help protect
+services that require admin access.
+
+```python
+from homeassistant.exceptions import Unauthorized, UnknownUser
+from homeassistant.helpers import service
+
+# New in Home Assistant 0.90
+@service.require_admin
+async def handle_admin_service(call):
+    """Handle a service call."""
+    # Do admin action
+
+
+async def async_setup(hass, config):
+    hass.services.async_register(DOMAIN, 'my_service',
+                                 handle_admin_service(hass))
+    return True
+```
+
+### Securing a REST API endpoint
+
+```python
+from homeassistant.core import Context
+from homeassistant.components.http.view import HomeAssistantView
+from homeassistant.exceptions import Unauthorized
+
+
+class MyView(HomeAssistantView):
+    """View to handle Status requests."""
+
+    url = '/api/my-component/my-api'
+    name = 'api:my-component:my-api'
+
+    async def post(self, request):
+        """Notify that the API is running."""
+        hass = request.app['hass']
+        user = request['hass_user']
+
+        if not user.is_admin:
+            raise Unauthorized()
+
+        hass.bus.async_fire('my-component-api-running', context=Context(
+            user_id=user.id
+        ))
+
+        return self.json_message("Done.")
+```
+
+### Securing a Websocket API endpoint
+
+Verifying permissions in a Websocket API endpoint can be done by accessing the
+user via `connection.user`. If you need to check admin access, you can use the
+built-in `@require_admin` decorator.
+
+```python
+from homeassistant.compnents import websocket_api
+
+
+async def async_setup(hass, config):
+    hass.components.websocket_api.async_register_command(websocket_create)
+    return True
+
+
+@websocket_api.require_admin
+@websocket_api.async_response
+@websocket_api.websocket_command({
+    vol.Required('type'): 'my-component/my-action',
+})
+async def websocket_create(hass, connection, msg):
+    """Create a user."""
+    # Do action
+```
