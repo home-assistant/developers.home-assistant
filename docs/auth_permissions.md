@@ -114,7 +114,8 @@ if not user.is_admin:
     raise Unauthorized()
 
 
-# Raise error if user does not have access to an enitty
+# Raise error if user does not have access to control an entity
+# Available policies: POLICY_READ, POLICY_CONTROL, POLICY_EDIT
 if not user.permissions.check_entity(entity_id, POLICY_CONTROL):
     raise Unauthorized()
 ```
