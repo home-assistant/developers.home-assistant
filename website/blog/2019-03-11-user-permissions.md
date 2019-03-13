@@ -33,7 +33,7 @@ Turn off Home Assistant and open up `<config>/.storage/auth`. Find the key `"gro
     "entities": {
       "entity_ids": {
         "light.kitchen": true,
-        "swtich.ac": {
+        "switch.ac": {
           "read": true
         }
       }
