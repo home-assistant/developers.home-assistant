@@ -18,11 +18,6 @@ In order to run `script/setup` below you will need some more dependencies.
 
 ```bash
 $ sudo apt-get install autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev
-```
-
-And run
-
-```bash
 $ sudo apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev
 ```
 
@@ -48,6 +43,7 @@ When the Linux subsystem is set up, perform install as for Linux.
 $ sudo apt-get update
 $ sudo apt-get install python3-pip python3-dev python3-venv
 $ sudo apt-get install autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev
+$ sudo apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev
 ```
 
 Hint: Git is included in Linux subsytem.
@@ -66,6 +62,20 @@ Install [Homebrew](https://brew.sh/), then use that to install Python 3:
 ```bash
 $ brew install python3 autoconf
 ```
+
+Then execute:
+
+```bash
+$ brew install ffmpeg
+```
+
+This installs the following libraries, needed to run tox:
+
+```
+libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev
+```
+
+WARNING: This is not tested yet.
 
 ## Setup Local Repository
 
