@@ -9,7 +9,7 @@ This page describes the steps for publishing a new Home Assistant release. Those
 ### GitHub
 
 1. Merge `master` into `dev` to make the PR mergeable.
-1. Cut a release branch from `dev`. Example name `release-0-57`.
+1. Cut a release branch from `master`. Example name `release-0-57`.
 1. Create a pull request from the release branch to `master` with the upcoming release number as the title.
 1. Update `homeassistant/const.py` with the correct version number (remove the `dev` tag) and push that commit to release branch.
 
