@@ -63,19 +63,11 @@ Install [Homebrew](https://brew.sh/), then use that to install Python 3:
 $ brew install python3 autoconf
 ```
 
-Then execute:
+Then install ffmpeg:
 
 ```bash
 $ brew install ffmpeg
 ```
-
-This installs the following libraries, needed to run tox:
-
-```
-libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev
-```
-
-WARNING: This is not tested yet.
 
 ## Setup Local Repository
 
