@@ -1171,6 +1171,38 @@
       },
       "version-0.89.0-internationalization_translation": {
         "title": "Translation"
+      },
+      "version-0.90.0-app_integration_sending_data": {
+        "title": "Sending data home"
+      },
+      "version-0.90.0-auth_permissions": {
+        "title": "Permissions"
+      },
+      "version-0.90.0-config_entries_index": {
+        "title": "Config Entries",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.90.0-development_environment": {
+        "title": "Set up Development Environment"
+      },
+      "version-0.90.0-device_registry_index": {
+        "title": "Device Registry",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.90.0-external_api_rest": {
+        "title": "REST API"
+      },
+      "version-0.90.0-external_api_websocket": {
+        "title": "WebSocket API"
+      },
+      "version-0.90.0-hassio_addon_config": {
+        "title": "Add-On Configuration"
+      },
+      "version-0.90.0-hassio_addon_tutorial": {
+        "title": "Tutorial: Making your first add-on"
+      },
+      "version-0.90.0-maintenance": {
+        "title": "Maintenance"
       }
     },
     "links": {
