@@ -18,6 +18,7 @@ This integration passes the bare minimum requirements to become part of the inde
 
 This integration is able to cope when things go wrong. It will not print any exceptions nor will it fill the log with retry attempts.
 
+- Connection/configuration is handled via a component.
 - Set an appropriate `SCAN_INTERVAL` (if a polling integration)
 - Raise `PlatformNotReady` if unable to connect during platform setup (if appropriate)
 - Handles expiration of auth credentials. Refresh if possible or print correct error and fail setup. If based on a config entry, should trigger a new config entry flow to re-authorize.
