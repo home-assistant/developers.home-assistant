@@ -6,7 +6,7 @@ This is a minimum implementation of a platform for the sensor component.
 
 ### Installation
 
-Copy the code below and create it as a file in `<config_dir>/custom_components/sensor/example.py`.
+Copy the code below and create it as a file in `<config_dir>/custom_components/example/sensor.py`.
 
 Add the following to your `configuration.yaml` file:
 
