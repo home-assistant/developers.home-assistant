@@ -4,7 +4,7 @@ title: "Example light platform"
 
 This example is for adding support for the imaginary Awesome Lights. It shows the different best practices for developing a platform.
 
-Similar to Example Sensor Platform, copy the code below, and create it as a file in `<config_dir>/custom_components/light/awesomelights.py`.
+Similar to Example Sensor Platform, copy the code below, and create it as a file in `<config_dir>/custom_components/awesomelights/light.py`.
 
 Add the following to your configuration.yaml:
 
@@ -16,7 +16,7 @@ light:
     password: PASSWORD_HERE_OR_secrets.yaml
 ```
 
-Note the `platform` name matches the filename for the source code.
+Note the `platform` name matches the directory name that contains the source code.
 
 ```python
 import logging
