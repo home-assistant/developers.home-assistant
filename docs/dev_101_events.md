@@ -12,18 +12,21 @@ The event system is very flexible. There are no limitations on the event type, a
 
 To fire an event, you have to interact with the event bus. The event bus is available on the Home Assistant instance as `hass.bus`.
 
-Example component that will fire an event when loaded.
+Example component that will fire an event when loaded. Note that custom event names are prefixed with the component name.
 
 ```python
-DOMAIN = 'hello_event'
+DOMAIN = 'example_component'
 
 def setup(hass, config):
     """Set up is called when Home Assistant is loading our component."""
 
-    # Fire event my_cool_event with event data answer=42
-    hass.bus.fire('my_cool_event', {
+    # Fire event example_component_my_cool_event with event data answer=42
+    hass.bus.fire('example_component_my_cool_event', {
         'answer': 42
     })
+
+    # Return successful setup
+    return True
 ```
 
 ## Listening to events
@@ -31,7 +34,7 @@ def setup(hass, config):
 Most of the times you'll not be firing events but instead listen to events. For example, the state change of an entity is broadcasted as an event.
 
 ```python
-DOMAIN = 'hello_event'
+DOMAIN = 'example_component'
 
 def setup(hass, config):
     """Set up is called when Home Assistant is loading our component."""
@@ -41,10 +44,13 @@ def setup(hass, config):
     def handle_event(event):
         nonlocal count
         count += 1
-        print('Total events received:', count)
+        print('Answer {0} is: {1}'.format(count, event.data.get('answer')))
 
-    # Listen for when my_cool_event is fired
-    hass.bus.listen('my_cool_event', handle_event)
+    # Listen for when example_component_my_cool_event is fired
+    hass.bus.listen('example_component_my_cool_event', handle_event)
+
+    # Return successful setup
+    return True
 ```
 
 ### Helpers
