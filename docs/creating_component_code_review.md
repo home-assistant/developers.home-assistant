@@ -12,7 +12,7 @@ A checklist of things to do when you're adding a new component.
  2. Use existing constants from [`const.py`](https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/const.py)
     * Only add new constants to `const.py` if they are widely used. Otherwise keep them on components level
  3. Add yourself to [`CODEOWNERS`](https://github.com/home-assistant/home-assistant/blob/dev/CODEOWNERS) so you [automatically get requested to review](https://help.github.com/en/articles/about-code-owners#codeowners-syntax) the code when it changes in the future
- 4. Rebase (**do not merge**) to (catch up with latest dev branch)[https://developers.home-assistant.io/docs/en/development_catching_up.html]
+ 4. Rebase (**do not merge**) to [catch up with latest dev branch](development_catching_up.html)
 
 ### 1. Requirements
 
