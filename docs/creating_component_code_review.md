@@ -11,8 +11,7 @@ A checklist of things to do when you're adding a new component.
  1. Follow our [Style guidelines](development_guidelines.md)
  2. Use existing constants from [`const.py`](https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/const.py)
     * Only add new constants to `const.py` if they are widely used. Otherwise keep them on components level
- 3. Add yourself to [`CODEOWNERS`](https://github.com/home-assistant/home-assistant/blob/dev/CODEOWNERS) so you [automatically get requested to review](https://help.github.com/en/articles/about-code-owners#codeowners-syntax) the code when it changes in the future
- 4. Rebase (**do not merge**) to [catch up with latest dev branch](development_catching_up.html)
+ 3. Rebase (**do not merge**) to [catch up with latest dev branch](development_catching_up.html)
 
 ### 1. Requirements
 
@@ -49,15 +48,16 @@ bridge = Bridge(...)
 status = bridge.status()
 ```
 
-### 5. Limit initial pull request to Minimum Viable Product (MVP)
-Large pull requests mean there is a larger chance of finding problems that need to be addressed, and more code that needs to be reviewed between every requested change. Limit the initial pull request to the minimum functionality needed for someone to get value out of the integration. Once the initial pull request is merged, you can submit additional PRs for the remaining features. This allows reviewers to sign off on smaller chunks of code one at a time, and lets us get your new integration/features in sooner. **Pull requests containing large code dumps (> 800 line adds excluding tests) will not be a priority for review and may be closed.** Limit MVPs to the following:
-- A single platform
-- No custom services 
-- Loaded via `configuration.yaml` _or_ config flow (if `configuration.yaml` cannot be used)
-- No other features outside of supporting the single platform
+### 5. Make your pull request as small as possible
+Limit a new integration to the minimum functionality needed for someone to get value out of the integration. This allows reviewers to sign off on smaller chunks of code one at a time, and lets us get your new integration/features in sooner. **Pull requests containing large code dumps (> 800 line adds excluding tests) will not be a priority for review and may be closed.**
+- Limit to a single platform 
+- Do not add features not needed to directly support the single platform (such as custom services)
+- Do not mix clean-ups and new features in a single pull request.
+- Do not solve several issues in a single pull request.
+- Do not submit pull requests that depend on other work which is still unmerged.
 
 ### 6. Event names
 Prefix component event names with the component name itself. For example, use `netatmo_person` instead of `person` for the `netatmo` component.
 
 ### 7. Tests
-Strongly consider adding tests for your component to ensure it works correctly. Pull Requests with tests are treated with a higher priority than those without.
+Strongly consider adding tests for your component to ensure it works correctly.
