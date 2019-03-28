@@ -41,3 +41,26 @@ Optional. Switch the selected input source for the media player.
 
       def async_select_source(self, source):
           """Select input source."""
+
+### Mediatype
+Required. Returns one of the defined constants from the below list that matches the mediatype
+
+| CONST |
+|-------|
+|MEDIA_TYPE_MUSIC|
+|MEDIA_TYPE_TVSHOW|
+|MEDIA_TYPE_MOVIE|
+|MEDIA_TYPE_VIDEO|
+|MEDIA_TYPE_EPISODE|
+|MEDIA_TYPE_CHANNEL|
+|MEDIA_TYPE_PLAYLIST|
+|MEDIA_TYPE_IMAGE|
+|MEDIA_TYPE_URL|
+|MEDIA_TYPE_GAME|
+
+    class MyMediaPlayer(MediaPlayerDevice):
+      # Implement the following method.
+
+      def media_content_type(self):
+        """Content type of current playing media."""
+
