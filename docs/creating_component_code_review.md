@@ -48,7 +48,7 @@ status = bridge.status()
 ```
 
 ### 5. Make your pull request as small as possible
-Keep a new integration to the minimum functionality needed for someone to get value out of the integration. This allows reviewers to sign off on smaller chunks of code one at a time, and lets us get your new integration/features in sooner. **Pull requests containing large code dumps (> 800 line adds excluding tests) will not be a priority for review and may be closed.**
+Keep a new integration to the minimum functionality needed for someone to get value out of the integration. This allows reviewers to sign off on smaller chunks of code one at a time, and lets us get your new integration/features in sooner. **Pull requests containing large code dumps will not be a priority for review and may be closed.**
 - Limit to a single platform 
 - Do not add features not needed to directly support the single platform (such as custom services)
 - Do not mix clean-ups and new features in a single pull request.
