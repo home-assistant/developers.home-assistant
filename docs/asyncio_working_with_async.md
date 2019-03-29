@@ -74,10 +74,10 @@ Sometimes it will happen that you’re in a thread and you want to call a functi
 In the following example, `say_hello` will schedule `async_say_hello` and block till the function has run and get the result back.
 
 ```python
-from homeassistant.util.async_ import run_coroutine_threadsafe
+import asyncio
 
 def say_hello(hass, target):
-    return run_coroutine_threadsafe(
+    return asyncio.run_coroutine_threadsafe(
         async_say_hello(hass, target), hass.loop).result()
 
 async def async_say_hello(hass, target):
