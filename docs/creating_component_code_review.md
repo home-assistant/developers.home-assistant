@@ -59,4 +59,4 @@ Keep a new integration to the minimum functionality needed for someone to get va
 Prefix component event names with the component name itself. For example, use `netatmo_person` instead of `person` for the `netatmo` component.
 
 ### 7. Tests
-Strongly consider adding tests for your component to ensure it works correctly.
+Strongly consider adding tests for your component to minimize future regressions.
