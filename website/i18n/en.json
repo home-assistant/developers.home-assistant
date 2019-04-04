@@ -378,831 +378,858 @@
       "releasing": {
         "title": "Releasing"
       },
-      "version-0.72-architecture_components": {
+      "version-0.72/version-0.72-architecture_components": {
         "title": "Components Architecture",
         "sidebar_label": "Components"
       },
-      "version-0.72-architecture_entities": {
+      "version-0.72/version-0.72-architecture_entities": {
         "title": "Entity Architecture",
         "sidebar_label": "Entity"
       },
-      "version-0.72-architecture_hassio": {
+      "version-0.72/version-0.72-architecture_hassio": {
         "title": "Hass.io Architecture",
         "sidebar_label": "Hass.io"
       },
-      "version-0.72-architecture_index": {
+      "version-0.72/version-0.72-architecture_index": {
         "title": "Architecture",
         "sidebar_label": "Introduction"
       },
-      "version-0.72-asyncio_101": {
+      "version-0.72/version-0.72-asyncio_101": {
         "title": "Asyncio 101"
       },
-      "version-0.72-asyncio_categorizing_functions": {
+      "version-0.72/version-0.72-asyncio_categorizing_functions": {
         "title": "Categorizing Functions"
       },
-      "version-0.72-asyncio_index": {
+      "version-0.72/version-0.72-asyncio_index": {
         "title": "Asynchronous Programming",
         "sidebar_label": "Introduction"
       },
-      "version-0.72-asyncio_working_with_async": {
+      "version-0.72/version-0.72-asyncio_working_with_async": {
         "title": "Working with Async"
       },
-      "version-0.72-auth_api": {
+      "version-0.72/version-0.72-auth_api": {
         "title": "Authentication API",
         "sidebar_label": "API"
       },
-      "version-0.72-auth_auth_provider": {
+      "version-0.72/version-0.72-auth_auth_provider": {
         "title": "Authentication Providers"
       },
-      "version-0.72-auth_index": {
+      "version-0.72/version-0.72-auth_index": {
         "title": "Authentication",
         "sidebar_label": "Introduction"
       },
-      "version-0.72-config_entries_config_flow_handler": {
+      "version-0.72/version-0.72-config_entries_config_flow_handler": {
         "title": "Config Flow Handlers"
       },
-      "version-0.72-config_entries_index": {
+      "version-0.72/version-0.72-config_entries_index": {
         "title": "Config Entries",
         "sidebar_label": "Introduction"
       },
-      "version-0.72-configuration_yaml_index": {
+      "version-0.72/version-0.72-configuration_yaml_index": {
         "title": "Configuration.yaml",
         "sidebar_label": "Introduction"
       },
-      "version-0.72-creating_component_code_review": {
+      "version-0.72/version-0.72-creating_component_code_review": {
         "title": "Checklist for creating a component"
       },
-      "version-0.72-creating_component_deps_and_reqs": {
+      "version-0.72/version-0.72-creating_component_deps_and_reqs": {
         "title": "Requirements & Dependencies"
       },
-      "version-0.72-creating_component_discovery": {
+      "version-0.72/version-0.72-creating_component_discovery": {
         "title": "Component Discovery"
       },
-      "version-0.72-creating_component_events": {
+      "version-0.72/version-0.72-creating_component_events": {
         "title": "Handling events"
       },
-      "version-0.72-creating_component_generic_discovery": {
+      "version-0.72/version-0.72-creating_component_generic_discovery": {
         "title": "Generic Platform Discovery"
       },
-      "version-0.72-creating_component_index": {
+      "version-0.72/version-0.72-creating_component_index": {
         "title": "Creating components",
         "sidebar_label": "Introduction"
       },
-      "version-0.72-creating_component_loading": {
+      "version-0.72/version-0.72-creating_component_loading": {
         "title": "Loading your components"
       },
-      "version-0.72-creating_component_states": {
+      "version-0.72/version-0.72-creating_component_states": {
         "title": "Handling states"
       },
-      "version-0.72-creating_platform_code_review": {
+      "version-0.72/version-0.72-creating_platform_code_review": {
         "title": "Checklist for creating a platform"
       },
-      "version-0.72-creating_platform_example_light": {
+      "version-0.72/version-0.72-creating_platform_example_light": {
         "title": "Example light platform"
       },
-      "version-0.72-creating_platform_example_sensor": {
+      "version-0.72/version-0.72-creating_platform_example_sensor": {
         "title": "Example sensor platform"
       },
-      "version-0.72-creating_platform_index": {
+      "version-0.72/version-0.72-creating_platform_index": {
         "title": "Adding support for a new platform",
         "sidebar_label": "Introduction"
       },
-      "version-0.72-data_entry_flow_index": {
+      "version-0.72/version-0.72-data_entry_flow_index": {
         "title": "Data Entry Flow",
         "sidebar_label": "Introduction"
       },
-      "version-0.72-dev_101_config": {
+      "version-0.72/version-0.72-dev_101_config": {
         "title": "Using Config"
       },
-      "version-0.72-dev_101_events": {
+      "version-0.72/version-0.72-dev_101_events": {
         "title": "Using Events"
       },
-      "version-0.72-dev_101_hass": {
+      "version-0.72/version-0.72-dev_101_hass": {
         "title": "Hass object"
       },
-      "version-0.72-dev_101_index": {
+      "version-0.72/version-0.72-dev_101_index": {
         "title": "Development 101",
         "sidebar_label": "Introduction"
       },
-      "version-0.72-dev_101_services": {
+      "version-0.72/version-0.72-dev_101_services": {
         "title": "Using Services"
       },
-      "version-0.72-dev_101_states": {
+      "version-0.72/version-0.72-dev_101_states": {
         "title": "Using States"
       },
-      "version-0.72-development_catching_up": {
+      "version-0.72/version-0.72-development_catching_up": {
         "title": "Catching up with Reality"
       },
-      "version-0.72-development_checklist": {
+      "version-0.72/version-0.72-development_checklist": {
         "title": "Development Checklist"
       },
-      "version-0.72-development_environment": {
+      "version-0.72/version-0.72-development_environment": {
         "title": "Set up Development Environment"
       },
-      "version-0.72-development_guidelines": {
+      "version-0.72/version-0.72-development_guidelines": {
         "title": "Style guidelines"
       },
-      "version-0.72-development_index": {
+      "version-0.72/version-0.72-development_index": {
         "title": "Starting with Development",
         "sidebar_label": "Introduction"
       },
-      "version-0.72-development_submitting": {
+      "version-0.72/version-0.72-development_submitting": {
         "title": "Submit your work"
       },
-      "version-0.72-development_testing": {
+      "version-0.72/version-0.72-development_testing": {
         "title": "Testing your code"
       },
-      "version-0.72-development_typing": {
+      "version-0.72/version-0.72-development_typing": {
         "title": "Adding type hints to your code"
       },
-      "version-0.72-development_validation": {
+      "version-0.72/version-0.72-development_validation": {
         "title": "Validate the input"
       },
-      "version-0.72-entity_alarm_control_panel": {
+      "version-0.72/version-0.72-entity_alarm_control_panel": {
         "title": "Alarm Control Panel Entity",
         "sidebar_label": "Alarm Control Panel"
       },
-      "version-0.72-entity_binary_sensor": {
+      "version-0.72/version-0.72-entity_binary_sensor": {
         "title": "Binary Sensor Entity",
         "sidebar_label": "Binary Sensor"
       },
-      "version-0.72-entity_climate": {
+      "version-0.72/version-0.72-entity_climate": {
         "title": "Climate Entity",
         "sidebar_label": "Climate"
       },
-      "version-0.72-entity_cover": {
+      "version-0.72/version-0.72-entity_cover": {
         "title": "Cover Entity",
         "sidebar_label": "Cover"
       },
-      "version-0.72-entity_fan": {
+      "version-0.72/version-0.72-entity_fan": {
         "title": "Fan Entity",
         "sidebar_label": "Fan"
       },
-      "version-0.72-entity_index": {
+      "version-0.72/version-0.72-entity_index": {
         "title": "Entity",
         "sidebar_label": "Introduction"
       },
-      "version-0.72-entity_light": {
+      "version-0.72/version-0.72-entity_light": {
         "title": "Light Entity",
         "sidebar_label": "Light"
       },
-      "version-0.72-entity_lock": {
+      "version-0.72/version-0.72-entity_lock": {
         "title": "Lock Entity",
         "sidebar_label": "Lock"
       },
-      "version-0.72-entity_media_player": {
+      "version-0.72/version-0.72-entity_media_player": {
         "title": "Media Player Entity",
         "sidebar_label": "Media Player"
       },
-      "version-0.72-entity_registry_index": {
+      "version-0.72/version-0.72-entity_registry_index": {
         "title": "Entity Registry",
         "sidebar_label": "Introduction"
       },
-      "version-0.72-entity_remote": {
+      "version-0.72/version-0.72-entity_remote": {
         "title": "Remote Entity",
         "sidebar_label": "Remote"
       },
-      "version-0.72-entity_sensor": {
+      "version-0.72/version-0.72-entity_sensor": {
         "title": "Sensor Entity",
         "sidebar_label": "Sensor"
       },
-      "version-0.72-entity_switch": {
+      "version-0.72/version-0.72-entity_switch": {
         "title": "Switch Entity",
         "sidebar_label": "Switch"
       },
-      "version-0.72-entity_vacuum": {
+      "version-0.72/version-0.72-entity_vacuum": {
         "title": "Vacuum Entity",
         "sidebar_label": "Vacuum"
       },
-      "version-0.72-entity_weather": {
+      "version-0.72/version-0.72-entity_weather": {
         "title": "Weather Entity",
         "sidebar_label": "Weather"
       },
-      "version-0.72-external_api_rest_python": {
+      "version-0.72/version-0.72-external_api_rest_python": {
         "title": "REST API - Python bindings"
       },
-      "version-0.72-external_api_rest": {
+      "version-0.72/version-0.72-external_api_rest": {
         "title": "REST API"
       },
-      "version-0.72-external_api_server_sent_events": {
+      "version-0.72/version-0.72-external_api_server_sent_events": {
         "title": "Server-sent events"
       },
-      "version-0.72-external_api_websocket": {
+      "version-0.72/version-0.72-external_api_websocket": {
         "title": "WebSocket API"
       },
-      "version-0.72-frontend_add_card": {
+      "version-0.72/version-0.72-frontend_add_card": {
         "title": "Adding state card"
       },
-      "version-0.72-frontend_add_more_info": {
+      "version-0.72/version-0.72-frontend_add_more_info": {
         "title": "Adding more info dialogs"
       },
-      "version-0.72-frontend_add_websocket_api": {
+      "version-0.72/version-0.72-frontend_add_websocket_api": {
         "title": "Extending the WebSocket API"
       },
-      "version-0.72-frontend_architecture": {
+      "version-0.72/version-0.72-frontend_architecture": {
         "title": "Home Assistant Frontend Architecture",
         "sidebar_label": "Architecture"
       },
-      "version-0.72-frontend_creating_custom_panels": {
+      "version-0.72/version-0.72-frontend_creating_custom_panels": {
         "title": "Creating custom panels"
       },
-      "version-0.72-frontend_creating_custom_ui": {
+      "version-0.72/version-0.72-frontend_creating_custom_ui": {
         "title": "Creating custom UI"
       },
-      "version-0.72-frontend_development": {
+      "version-0.72/version-0.72-frontend_development": {
         "title": "Frontend development",
         "sidebar_label": "Development"
       },
-      "version-0.72-frontend_index": {
+      "version-0.72/version-0.72-frontend_index": {
         "title": "Home Assistant Frontend",
         "sidebar_label": "Introduction"
       },
-      "version-0.72-hassio_addon_communication": {
+      "version-0.72/version-0.72-hassio_addon_communication": {
         "title": "Add-On Communication"
       },
-      "version-0.72-hassio_addon_config": {
+      "version-0.72/version-0.72-hassio_addon_config": {
         "title": "Add-On Configuration"
       },
-      "version-0.72-hassio_addon_index": {
+      "version-0.72/version-0.72-hassio_addon_index": {
         "title": "Developing an add-on",
         "sidebar_label": "Introduction"
       },
-      "version-0.72-hassio_addon_presentation": {
+      "version-0.72/version-0.72-hassio_addon_presentation": {
         "title": "Presenting your add-on"
       },
-      "version-0.72-hassio_addon_publishing": {
+      "version-0.72/version-0.72-hassio_addon_publishing": {
         "title": "Publishing your add-on"
       },
-      "version-0.72-hassio_addon_repository": {
+      "version-0.72/version-0.72-hassio_addon_repository": {
         "title": "Create an add-on repository"
       },
-      "version-0.72-hassio_addon_testing": {
+      "version-0.72/version-0.72-hassio_addon_testing": {
         "title": "Local add-on testing"
       },
-      "version-0.72-hassio_addon_tutorial": {
+      "version-0.72/version-0.72-hassio_addon_tutorial": {
         "title": "Tutorial: Making your first add-on"
       },
-      "version-0.72-hassio_debugging": {
+      "version-0.72/version-0.72-hassio_debugging": {
         "title": "Debugging Hass.io"
       },
-      "version-0.72-hassio_hass": {
+      "version-0.72/version-0.72-hassio_hass": {
         "title": "Hass.io <> Home Assistant integration development",
         "sidebar_label": "HASS Integration development"
       },
-      "version-0.72-intent_builtin": {
+      "version-0.72/version-0.72-intent_builtin": {
         "title": "Built-in intents"
       },
-      "version-0.72-intent_conversation": {
+      "version-0.72/version-0.72-intent_conversation": {
         "title": "Registering sentences"
       },
-      "version-0.72-intent_firing": {
+      "version-0.72/version-0.72-intent_firing": {
         "title": "Firing intents"
       },
-      "version-0.72-intent_handling": {
+      "version-0.72/version-0.72-intent_handling": {
         "title": "Handling intents"
       },
-      "version-0.72-intent_index": {
+      "version-0.72/version-0.72-intent_index": {
         "title": "Intents",
         "sidebar_label": "Introduction"
       },
-      "version-0.72-internationalization_backend_localization": {
+      "version-0.72/version-0.72-internationalization_backend_localization": {
         "title": "Backend Localization"
       },
-      "version-0.72-internationalization_custom_component_localization": {
+      "version-0.72/version-0.72-internationalization_custom_component_localization": {
         "title": "Custom Component Localization"
       },
-      "version-0.72-internationalization_index": {
+      "version-0.72/version-0.72-internationalization_index": {
         "title": "Internationalization"
       },
-      "version-0.72-internationalization_translation": {
+      "version-0.72/version-0.72-internationalization_translation": {
         "title": "Translation"
       },
-      "version-0.72-lovelace_card_types": {
+      "version-0.72/version-0.72-lovelace_card_types": {
         "title": "Type Of Cards",
         "sidebar_label": "Cards"
       },
-      "version-0.72-lovelace_custom_card": {
+      "version-0.72/version-0.72-lovelace_custom_card": {
         "title": "Custom Cards"
       },
-      "version-0.72-lovelace_index": {
+      "version-0.72/version-0.72-lovelace_index": {
         "title": "Lovelace UI",
         "sidebar_label": "Introduction"
       },
-      "version-0.72-maintenance": {
+      "version-0.72/version-0.72-maintenance": {
         "title": "Maintenance"
       },
-      "version-0.72-misc": {
+      "version-0.72/version-0.72-misc": {
         "title": "Miscellaneous"
       },
-      "version-0.72-releasing": {
+      "version-0.72/version-0.72-releasing": {
         "title": "Releasing"
       },
-      "version-0.73.0-auth_api": {
+      "version-0.73.0/version-0.73.0-auth_api": {
         "title": "Authentication API",
         "sidebar_label": "API"
       },
-      "version-0.73.0-development_guidelines": {
+      "version-0.73.0/version-0.73.0-development_guidelines": {
         "title": "Style guidelines"
       },
-      "version-0.73.0-documentation_create_page": {
+      "version-0.73.0/version-0.73.0-documentation_create_page": {
         "title": "Create a new page"
       },
-      "version-0.73.0-documentation_index": {
+      "version-0.73.0/version-0.73.0-documentation_index": {
         "title": "Documentation"
       },
-      "version-0.73.0-documentation_standards": {
+      "version-0.73.0/version-0.73.0-documentation_standards": {
         "title": "Standards"
       },
-      "version-0.73.0-frontend_development": {
+      "version-0.73.0/version-0.73.0-frontend_development": {
         "title": "Frontend development",
         "sidebar_label": "Development"
       },
-      "version-0.73.0-hassio_addon_config": {
+      "version-0.73.0/version-0.73.0-hassio_addon_config": {
         "title": "Add-On Configuration"
       },
-      "version-0.73.0-lovelace_custom_card": {
+      "version-0.73.0/version-0.73.0-lovelace_custom_card": {
         "title": "Custom Cards"
       },
-      "version-0.73.0-lovelace_index": {
+      "version-0.73.0/version-0.73.0-lovelace_index": {
         "title": "Lovelace UI",
         "sidebar_label": "Introduction"
       },
-      "version-0.74.0-asyncio_working_with_async": {
+      "version-0.74.0/version-0.74.0-asyncio_working_with_async": {
         "title": "Working with Async"
       },
-      "version-0.74.0-auth_api": {
+      "version-0.74.0/version-0.74.0-auth_api": {
         "title": "Authentication API",
         "sidebar_label": "API"
       },
-      "version-0.74.0-entity_media_player": {
+      "version-0.74.0/version-0.74.0-entity_media_player": {
         "title": "Media Player Entity",
         "sidebar_label": "Media Player"
       },
-      "version-0.74.0-entity_vacuum": {
+      "version-0.74.0/version-0.74.0-entity_vacuum": {
         "title": "Vacuum Entity",
         "sidebar_label": "Vacuum"
       },
-      "version-0.74.0-hassio_addon_tutorial": {
+      "version-0.74.0/version-0.74.0-hassio_addon_tutorial": {
         "title": "Tutorial: Making your first add-on"
       },
-      "version-0.74.0-internationalization_index": {
+      "version-0.74.0/version-0.74.0-internationalization_index": {
         "title": "Internationalization"
       },
-      "version-0.74.0-lovelace_custom_card": {
+      "version-0.74.0/version-0.74.0-lovelace_custom_card": {
         "title": "Lovelace: Custom Cards"
       },
-      "version-0.76.0-auth_api": {
+      "version-0.76.0/version-0.76.0-auth_api": {
         "title": "Authentication API",
         "sidebar_label": "API"
       },
-      "version-0.76.0-auth_auth_provider": {
+      "version-0.76.0/version-0.76.0-auth_auth_provider": {
         "title": "Authentication Providers"
       },
-      "version-0.76.0-development_environment": {
+      "version-0.76.0/version-0.76.0-development_environment": {
         "title": "Set up Development Environment"
       },
-      "version-0.76.0-documentation_create_page": {
+      "version-0.76.0/version-0.76.0-documentation_create_page": {
         "title": "Create a new page"
       },
-      "version-0.76.0-documentation_standards": {
+      "version-0.76.0/version-0.76.0-documentation_standards": {
         "title": "Standards"
       },
-      "version-0.76.0-frontend_creating_custom_panels": {
+      "version-0.76.0/version-0.76.0-frontend_creating_custom_panels": {
         "title": "Creating custom panels"
       },
-      "version-0.76.0-frontend_data": {
+      "version-0.76.0/version-0.76.0-frontend_data": {
         "title": "Frontend data",
         "sidebar_label": "Data"
       },
-      "version-0.76.0-hassio_addon_config": {
+      "version-0.76.0/version-0.76.0-hassio_addon_config": {
         "title": "Add-On Configuration"
       },
-      "version-0.76.0-hassio_debugging": {
+      "version-0.76.0/version-0.76.0-hassio_debugging": {
         "title": "Debugging Hass.io"
       },
-      "version-0.77.0-auth_api": {
+      "version-0.77.0/version-0.77.0-auth_api": {
         "title": "Authentication API",
         "sidebar_label": "API"
       },
-      "version-0.77.0-auth_auth_module": {
+      "version-0.77.0/version-0.77.0-auth_auth_module": {
         "title": "Multi-factor Authentication Modules"
       },
-      "version-0.77.0-auth_auth_provider": {
+      "version-0.77.0/version-0.77.0-auth_auth_provider": {
         "title": "Authentication Providers"
       },
-      "version-0.77.0-auth_index": {
+      "version-0.77.0/version-0.77.0-auth_index": {
         "title": "Authentication",
         "sidebar_label": "Introduction"
       },
-      "version-0.77.0-config_entries_config_flow_handler": {
+      "version-0.77.0/version-0.77.0-config_entries_config_flow_handler": {
         "title": "Config Flow Handlers"
       },
-      "version-0.77.0-data_entry_flow_index": {
+      "version-0.77.0/version-0.77.0-data_entry_flow_index": {
         "title": "Data Entry Flow",
         "sidebar_label": "Introduction"
       },
-      "version-0.77.0-frontend_data": {
+      "version-0.77.0/version-0.77.0-frontend_data": {
         "title": "Frontend data",
         "sidebar_label": "Data"
       },
-      "version-0.78.0-asyncio_working_with_async": {
+      "version-0.78.0/version-0.78.0-asyncio_working_with_async": {
         "title": "Working with Async"
       },
-      "version-0.78.0-auth_api": {
+      "version-0.78.0/version-0.78.0-auth_api": {
         "title": "Authentication API",
         "sidebar_label": "API"
       },
-      "version-0.78.0-auth_auth_module": {
+      "version-0.78.0/version-0.78.0-auth_auth_module": {
         "title": "Multi-factor Authentication Modules"
       },
-      "version-0.78.0-auth_index": {
+      "version-0.78.0/version-0.78.0-auth_index": {
         "title": "Authentication",
         "sidebar_label": "Introduction"
       },
-      "version-0.78.0-creating_component_code_review": {
+      "version-0.78.0/version-0.78.0-creating_component_code_review": {
         "title": "Checklist for creating a component"
       },
-      "version-0.78.0-development_guidelines": {
+      "version-0.78.0/version-0.78.0-development_guidelines": {
         "title": "Style guidelines"
       },
-      "version-0.78.0-device_registry_index": {
+      "version-0.78.0/version-0.78.0-device_registry_index": {
         "title": "Device Registry",
         "sidebar_label": "Introduction"
       },
-      "version-0.78.0-documentation_standards": {
+      "version-0.78.0/version-0.78.0-documentation_standards": {
         "title": "Standards"
       },
-      "version-0.78.0-external_api_websocket": {
+      "version-0.78.0/version-0.78.0-external_api_websocket": {
         "title": "WebSocket API"
       },
-      "version-0.78.0-frontend_add_more_info": {
+      "version-0.78.0/version-0.78.0-frontend_add_more_info": {
         "title": "Adding more info dialogs"
       },
-      "version-0.78.0-frontend_external_auth": {
+      "version-0.78.0/version-0.78.0-frontend_external_auth": {
         "title": "External Authentication"
       },
-      "version-0.78.0-hassio_addon_communication": {
+      "version-0.78.0/version-0.78.0-hassio_addon_communication": {
         "title": "Add-On Communication"
       },
-      "version-0.78.0-hassio_addon_config": {
+      "version-0.78.0/version-0.78.0-hassio_addon_config": {
         "title": "Add-On Configuration"
       },
-      "version-0.78.0-hassio_addon_security": {
+      "version-0.78.0/version-0.78.0-hassio_addon_security": {
         "title": "Add-on security"
       },
-      "version-0.79.0-creating_component_code_review": {
+      "version-0.79.0/version-0.79.0-creating_component_code_review": {
         "title": "Checklist for creating a component"
       },
-      "version-0.79.0-creating_platform_code_review": {
+      "version-0.79.0/version-0.79.0-creating_platform_code_review": {
         "title": "Checklist for creating a platform"
       },
-      "version-0.79.0-development_environment": {
+      "version-0.79.0/version-0.79.0-development_environment": {
         "title": "Set up Development Environment"
       },
-      "version-0.79.0-documentation_create_page": {
+      "version-0.79.0/version-0.79.0-documentation_create_page": {
         "title": "Create a new page"
       },
-      "version-0.79.0-documentation_index": {
+      "version-0.79.0/version-0.79.0-documentation_index": {
         "title": "Documentation"
       },
-      "version-0.79.0-hassio_addon_communication": {
+      "version-0.79.0/version-0.79.0-hassio_addon_communication": {
         "title": "Add-On Communication"
       },
-      "version-0.79.0-hassio_hass": {
+      "version-0.79.0/version-0.79.0-hassio_hass": {
         "title": "Hass.io <> Home Assistant integration development",
         "sidebar_label": "HASS Integration development"
       },
-      "version-0.79.0-integration_quality_scale_index": {
+      "version-0.79.0/version-0.79.0-integration_quality_scale_index": {
         "title": "Integration Quality Scale",
         "sidebar_label": "Introduction"
       },
-      "version-0.80.0-auth_index": {
+      "version-0.80.0/version-0.80.0-auth_index": {
         "title": "Authentication",
         "sidebar_label": "Introduction"
       },
-      "version-0.80.0-auth_permissions": {
+      "version-0.80.0/version-0.80.0-auth_permissions": {
         "title": "Permissions"
       },
-      "version-0.80.0-development_catching_up": {
+      "version-0.80.0/version-0.80.0-development_catching_up": {
         "title": "Catching up with Reality"
       },
-      "version-0.80.0-development_environment": {
+      "version-0.80.0/version-0.80.0-development_environment": {
         "title": "Set up Development Environment"
       },
-      "version-0.80.0-development_submitting": {
+      "version-0.80.0/version-0.80.0-development_submitting": {
         "title": "Submit your work"
       },
-      "version-0.80.0-development_testing": {
+      "version-0.80.0/version-0.80.0-development_testing": {
         "title": "Testing your code"
       },
-      "version-0.80.0-documentation_create_page": {
+      "version-0.80.0/version-0.80.0-documentation_create_page": {
         "title": "Create a new page"
       },
-      "version-0.80.0-documentation_index": {
+      "version-0.80.0/version-0.80.0-documentation_index": {
         "title": "Documentation"
       },
-      "version-0.80.0-documentation_standards": {
+      "version-0.80.0/version-0.80.0-documentation_standards": {
         "title": "Standards"
       },
-      "version-0.80.0-entity_sensor": {
+      "version-0.80.0/version-0.80.0-entity_sensor": {
         "title": "Sensor Entity",
         "sidebar_label": "Sensor"
       },
-      "version-0.80.0-entity_water_heater": {
+      "version-0.80.0/version-0.80.0-entity_water_heater": {
         "title": "Water Heater Entity",
         "sidebar_label": "Water Heater"
       },
-      "version-0.80.0-frontend_architecture": {
+      "version-0.80.0/version-0.80.0-frontend_architecture": {
         "title": "Home Assistant Frontend Architecture",
         "sidebar_label": "Architecture"
       },
-      "version-0.80.0-hassio_addon_communication": {
+      "version-0.80.0/version-0.80.0-hassio_addon_communication": {
         "title": "Add-On Communication"
       },
-      "version-0.80.0-hassio_addon_config": {
+      "version-0.80.0/version-0.80.0-hassio_addon_config": {
         "title": "Add-On Configuration"
       },
-      "version-0.80.0-hassio_addon_security": {
+      "version-0.80.0/version-0.80.0-hassio_addon_security": {
         "title": "Add-on security"
       },
-      "version-0.80.0-hassio_debugging": {
+      "version-0.80.0/version-0.80.0-hassio_debugging": {
         "title": "Debugging Hass.io"
       },
-      "version-0.80.0-integration_quality_scale_index": {
+      "version-0.80.0/version-0.80.0-integration_quality_scale_index": {
         "title": "Integration Quality Scale",
         "sidebar_label": "Introduction"
       },
-      "version-0.81.0-asyncio_index": {
+      "version-0.81.0/version-0.81.0-asyncio_index": {
         "title": "Asynchronous Programming",
         "sidebar_label": "Introduction"
       },
-      "version-0.81.0-auth_api": {
+      "version-0.81.0/version-0.81.0-auth_api": {
         "title": "Authentication API",
         "sidebar_label": "API"
       },
-      "version-0.81.0-auth_auth_module": {
+      "version-0.81.0/version-0.81.0-auth_auth_module": {
         "title": "Multi-factor Authentication Modules"
       },
-      "version-0.81.0-development_index": {
+      "version-0.81.0/version-0.81.0-development_index": {
         "title": "Starting with Development",
         "sidebar_label": "Introduction"
       },
-      "version-0.81.0-development_testing": {
+      "version-0.81.0/version-0.81.0-development_testing": {
         "title": "Testing your code"
       },
-      "version-0.81.0-documentation_index": {
+      "version-0.81.0/version-0.81.0-documentation_index": {
         "title": "Documentation"
       },
-      "version-0.81.0-external_api_rest": {
+      "version-0.81.0/version-0.81.0-external_api_rest": {
         "title": "REST API"
       },
-      "version-0.81.0-external_api_server_sent_events": {
+      "version-0.81.0/version-0.81.0-external_api_server_sent_events": {
         "title": "Server-sent events"
       },
-      "version-0.81.0-hassio_addon_config": {
+      "version-0.81.0/version-0.81.0-hassio_addon_config": {
         "title": "Add-On Configuration"
       },
-      "version-0.82.0-architecture_hassio": {
+      "version-0.82.0/version-0.82.0-architecture_hassio": {
         "title": "Hass.io Architecture",
         "sidebar_label": "Hass.io"
       },
-      "version-0.82.0-asyncio_working_with_async": {
+      "version-0.82.0/version-0.82.0-asyncio_working_with_async": {
         "title": "Working with Async"
       },
-      "version-0.82.0-auth_permissions": {
+      "version-0.82.0/version-0.82.0-auth_permissions": {
         "title": "Permissions"
       },
-      "version-0.82.0-config_entries_index": {
+      "version-0.82.0/version-0.82.0-config_entries_index": {
         "title": "Config Entries",
         "sidebar_label": "Introduction"
       },
-      "version-0.82.0-creating_component_code_review": {
+      "version-0.82.0/version-0.82.0-creating_component_code_review": {
         "title": "Checklist for creating a component"
       },
-      "version-0.82.0-creating_component_deps_and_reqs": {
+      "version-0.82.0/version-0.82.0-creating_component_deps_and_reqs": {
         "title": "Requirements & Dependencies"
       },
-      "version-0.82.0-creating_component_generic_discovery": {
+      "version-0.82.0/version-0.82.0-creating_component_generic_discovery": {
         "title": "Generic Platform Discovery"
       },
-      "version-0.82.0-development_checklist": {
+      "version-0.82.0/version-0.82.0-development_checklist": {
         "title": "Development Checklist"
       },
-      "version-0.82.0-development_guidelines": {
+      "version-0.82.0/version-0.82.0-development_guidelines": {
         "title": "Style guidelines"
       },
-      "version-0.82.0-development_validation": {
+      "version-0.82.0/version-0.82.0-development_validation": {
         "title": "Validate the input"
       },
-      "version-0.82.0-documentation_index": {
+      "version-0.82.0/version-0.82.0-documentation_index": {
         "title": "Documentation"
       },
-      "version-0.82.0-entity_registry_index": {
+      "version-0.82.0/version-0.82.0-entity_registry_index": {
         "title": "Entity Registry",
         "sidebar_label": "Introduction"
       },
-      "version-0.82.0-entity_sensor": {
+      "version-0.82.0/version-0.82.0-entity_sensor": {
         "title": "Sensor Entity",
         "sidebar_label": "Sensor"
       },
-      "version-0.82.0-hassio_addon_config": {
+      "version-0.82.0/version-0.82.0-hassio_addon_config": {
         "title": "Add-On Configuration"
       },
-      "version-0.82.0-hassio_addon_index": {
+      "version-0.82.0/version-0.82.0-hassio_addon_index": {
         "title": "Developing an add-on",
         "sidebar_label": "Introduction"
       },
-      "version-0.83.0-app_integration_index": {
+      "version-0.83.0/version-0.83.0-app_integration_index": {
         "title": "Native App Integration",
         "sidebar_label": "Introduction"
       },
-      "version-0.83.0-app_integration_sending_data": {
+      "version-0.83.0/version-0.83.0-app_integration_sending_data": {
         "title": "Sending data home"
       },
-      "version-0.83.0-app_integration_setup": {
+      "version-0.83.0/version-0.83.0-app_integration_setup": {
         "title": "Connecting to an instance"
       },
-      "version-0.83.0-app_integration_webview": {
+      "version-0.83.0/version-0.83.0-app_integration_webview": {
         "title": "Authenticated Webview"
       },
-      "version-0.83.0-auth_api": {
+      "version-0.83.0/version-0.83.0-auth_api": {
         "title": "Authentication API",
         "sidebar_label": "API"
       },
-      "version-0.83.0-external_api_server_sent_events": {
+      "version-0.83.0/version-0.83.0-external_api_server_sent_events": {
         "title": "Server-sent events"
       },
-      "version-0.83.0-hassio_addon_presentation": {
+      "version-0.83.0/version-0.83.0-hassio_addon_presentation": {
         "title": "Presenting your add-on"
       },
-      "version-0.83.0-hassio_addon_publishing": {
+      "version-0.83.0/version-0.83.0-hassio_addon_publishing": {
         "title": "Publishing your add-on"
       },
-      "version-0.84.0-creating_component_code_review": {
+      "version-0.84.0/version-0.84.0-creating_component_code_review": {
         "title": "Checklist for creating a component"
       },
-      "version-0.84.0-external_api_rest": {
+      "version-0.84.0/version-0.84.0-external_api_rest": {
         "title": "REST API"
       },
-      "version-0.85-asyncio_categorizing_functions": {
+      "version-0.85/version-0.85-asyncio_categorizing_functions": {
         "title": "Categorizing Functions"
       },
-      "version-0.85-documentation_index": {
+      "version-0.85/version-0.85-documentation_index": {
         "title": "Documentation"
       },
-      "version-0.85-entity_air_pollutants": {
+      "version-0.85/version-0.85-entity_air_pollutants": {
         "title": "Air Pollutants Entity",
         "sidebar_label": "Air Pollutants"
       },
-      "version-0.85-entity_sensor": {
+      "version-0.85/version-0.85-entity_sensor": {
         "title": "Sensor Entity",
         "sidebar_label": "Sensor"
       },
-      "version-0.85-external_api_rest": {
+      "version-0.85/version-0.85-external_api_rest": {
         "title": "REST API"
       },
-      "version-0.85-frontend_add_card": {
+      "version-0.85/version-0.85-frontend_add_card": {
         "title": "Adding state card"
       },
-      "version-0.85-frontend_add_more_info": {
+      "version-0.85/version-0.85-frontend_add_more_info": {
         "title": "Adding more info dialogs"
       },
-      "version-0.86.0-development_environment": {
+      "version-0.86.0/version-0.86.0-development_environment": {
         "title": "Set up Development Environment"
       },
-      "version-0.86.0-documentation_index": {
+      "version-0.86.0/version-0.86.0-documentation_index": {
         "title": "Documentation"
       },
-      "version-0.86.0-entity_air_quality": {
+      "version-0.86.0/version-0.86.0-entity_air_quality": {
         "title": "Air Quality Entity",
         "sidebar_label": "Air Quality"
       },
-      "version-0.86.0-external_api_rest": {
+      "version-0.86.0/version-0.86.0-external_api_rest": {
         "title": "REST API"
       },
-      "version-0.86.0-hassio_addon_config": {
+      "version-0.86.0/version-0.86.0-hassio_addon_config": {
         "title": "Add-On Configuration"
       },
-      "version-0.86.0-lovelace_custom_card": {
+      "version-0.86.0/version-0.86.0-lovelace_custom_card": {
         "title": "Lovelace: Custom Cards"
       },
-      "version-0.87.0-area_registry_index": {
+      "version-0.87.0/version-0.87.0-area_registry_index": {
         "title": "Area Registry",
         "sidebar_label": "Introduction"
       },
-      "version-0.87.0-development_environment": {
+      "version-0.87.0/version-0.87.0-development_environment": {
         "title": "Set up Development Environment"
       },
-      "version-0.87.0-device_registry_index": {
+      "version-0.87.0/version-0.87.0-device_registry_index": {
         "title": "Device Registry",
         "sidebar_label": "Introduction"
       },
-      "version-0.87.0-documentation_create_page": {
+      "version-0.87.0/version-0.87.0-documentation_create_page": {
         "title": "Create a new page"
       },
-      "version-0.87.0-documentation_standards": {
+      "version-0.87.0/version-0.87.0-documentation_standards": {
         "title": "Standards"
       },
-      "version-0.87.0-frontend_architecture": {
+      "version-0.87.0/version-0.87.0-frontend_architecture": {
         "title": "Home Assistant Frontend Architecture",
         "sidebar_label": "Architecture"
       },
-      "version-0.87.0-frontend_development": {
+      "version-0.87.0/version-0.87.0-frontend_development": {
         "title": "Frontend development",
         "sidebar_label": "Development"
       },
-      "version-0.88.0-development_guidelines": {
+      "version-0.88.0/version-0.88.0-development_guidelines": {
         "title": "Style guidelines"
       },
-      "version-0.88.0-entity_index": {
+      "version-0.88.0/version-0.88.0-entity_index": {
         "title": "Entity",
         "sidebar_label": "Introduction"
       },
-      "version-0.88.0-frontend_development": {
+      "version-0.88.0/version-0.88.0-frontend_development": {
         "title": "Frontend development",
         "sidebar_label": "Development"
       },
-      "version-0.88.0-lovelace_custom_card": {
+      "version-0.88.0/version-0.88.0-lovelace_custom_card": {
         "title": "Lovelace: Custom Cards"
       },
-      "version-0.89.0-app_integration_index": {
+      "version-0.89.0/version-0.89.0-app_integration_index": {
         "title": "Native App Integration",
         "sidebar_label": "Introduction"
       },
-      "version-0.89.0-app_integration_sending_data": {
+      "version-0.89.0/version-0.89.0-app_integration_sending_data": {
         "title": "Sending data home"
       },
-      "version-0.89.0-app_integration_setup": {
+      "version-0.89.0/version-0.89.0-app_integration_setup": {
         "title": "Connecting to an instance"
       },
-      "version-0.89.0-auth_auth_module": {
+      "version-0.89.0/version-0.89.0-auth_auth_module": {
         "title": "Multi-factor Authentication Modules"
       },
-      "version-0.89.0-config_entries_index": {
+      "version-0.89.0/version-0.89.0-config_entries_index": {
         "title": "Config Entries",
         "sidebar_label": "Introduction"
       },
-      "version-0.89.0-config_entries_options_flow_handler": {
+      "version-0.89.0/version-0.89.0-config_entries_options_flow_handler": {
         "title": "Options Flow Handlers"
       },
-      "version-0.89.0-creating_component_code_review": {
+      "version-0.89.0/version-0.89.0-creating_component_code_review": {
         "title": "Checklist for creating a component"
       },
-      "version-0.89.0-creating_platform_code_review": {
+      "version-0.89.0/version-0.89.0-creating_platform_code_review": {
         "title": "Checklist for creating a platform"
       },
-      "version-0.89.0-development_checklist": {
+      "version-0.89.0/version-0.89.0-development_checklist": {
         "title": "Development Checklist"
       },
-      "version-0.89.0-development_environment": {
+      "version-0.89.0/version-0.89.0-development_environment": {
         "title": "Set up Development Environment"
       },
-      "version-0.89.0-device_registry_index": {
+      "version-0.89.0/version-0.89.0-device_registry_index": {
         "title": "Device Registry",
         "sidebar_label": "Introduction"
       },
-      "version-0.89.0-entity_alarm_control_panel": {
+      "version-0.89.0/version-0.89.0-entity_alarm_control_panel": {
         "title": "Alarm Control Panel Entity",
         "sidebar_label": "Alarm Control Panel"
       },
-      "version-0.89.0-entity_cover": {
+      "version-0.89.0/version-0.89.0-entity_cover": {
         "title": "Cover Entity",
         "sidebar_label": "Cover"
       },
-      "version-0.89.0-internationalization_translation": {
+      "version-0.89.0/version-0.89.0-internationalization_translation": {
         "title": "Translation"
       },
-      "version-0.90.0-app_integration_sending_data": {
+      "version-0.90.0/version-0.90.0-app_integration_sending_data": {
         "title": "Sending data home"
       },
-      "version-0.90.0-auth_permissions": {
+      "version-0.90.0/version-0.90.0-auth_permissions": {
         "title": "Permissions"
       },
-      "version-0.90.0-config_entries_index": {
+      "version-0.90.0/version-0.90.0-config_entries_index": {
         "title": "Config Entries",
         "sidebar_label": "Introduction"
       },
-      "version-0.90.0-development_environment": {
+      "version-0.90.0/version-0.90.0-development_environment": {
         "title": "Set up Development Environment"
       },
-      "version-0.90.0-device_registry_index": {
+      "version-0.90.0/version-0.90.0-device_registry_index": {
         "title": "Device Registry",
         "sidebar_label": "Introduction"
       },
-      "version-0.90.0-external_api_rest": {
+      "version-0.90.0/version-0.90.0-external_api_rest": {
         "title": "REST API"
       },
-      "version-0.90.0-external_api_websocket": {
+      "version-0.90.0/version-0.90.0-external_api_websocket": {
         "title": "WebSocket API"
       },
-      "version-0.90.0-hassio_addon_config": {
+      "version-0.90.0/version-0.90.0-hassio_addon_config": {
         "title": "Add-On Configuration"
       },
-      "version-0.90.0-hassio_addon_tutorial": {
+      "version-0.90.0/version-0.90.0-hassio_addon_tutorial": {
         "title": "Tutorial: Making your first add-on"
       },
-      "version-0.90.0-maintenance": {
+      "version-0.90.0/version-0.90.0-maintenance": {
         "title": "Maintenance"
+      },
+      "version-0.91.0/version-0.91.0-asyncio_working_with_async": {
+        "title": "Working with Async"
+      },
+      "version-0.91.0/version-0.91.0-creating_component_code_review": {
+        "title": "Checklist for creating a component"
+      },
+      "version-0.91.0/version-0.91.0-creating_platform_example_light": {
+        "title": "Example light platform"
+      },
+      "version-0.91.0/version-0.91.0-creating_platform_example_sensor": {
+        "title": "Example sensor platform"
+      },
+      "version-0.91.0/version-0.91.0-dev_101_events": {
+        "title": "Using Events"
+      },
+      "version-0.91.0/version-0.91.0-entity_media_player": {
+        "title": "Media Player Entity",
+        "sidebar_label": "Media Player"
+      },
+      "version-0.91.0/version-0.91.0-entity_sensor": {
+        "title": "Sensor Entity",
+        "sidebar_label": "Sensor"
+      },
+      "version-0.91.0/version-0.91.0-integration_quality_scale_index": {
+        "title": "Integration Quality Scale",
+        "sidebar_label": "Introduction"
       }
     },
     "links": {
