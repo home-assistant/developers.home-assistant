@@ -10,6 +10,12 @@ If you were provided a Cloudhook URL during registration, you should use that by
 
 If you were provided a remote UI URL during registration, you should use that as the `instance_url` when constructing a URL and only fallback to the user provided URL if the remote UI URL fails.
 
+To summarize, here's how requests should be made:
+
+1. If you have a Cloudhook URL, use that until a request fails. When a request fails, go to step 2.
+2. If you have a remote UI URL, use that to construct a webhook URL: `<remote_ui_url>/api/webhook/<webhook_id>`. When a request fails, go to step 3.
+3. Construct a webhook URL using the instance URL provided during setup: `<instance_url>/api/webhook/<webhook_id>`.
+
 ## Short note on instance URLs
 
 Some users have configured Home Assistant to be available outside of their home network using a dynamic DNS service. There are some routers that don't support hairpinning / NAT loopback: a device sending data from inside the routers network, via the externally configured DNS service, to Home Asisstant, which also resides inside the local network.
