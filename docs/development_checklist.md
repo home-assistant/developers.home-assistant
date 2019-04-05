@@ -9,7 +9,7 @@ Before you commit any changes, check your work against these requirements:
 - New dependencies are added to `requirements_all.txt` (if applicable), using `script/gen_requirements_all.py`
 - The `.coveragerc` file is updated to exclude your platform if there are no tests available or your new code uses a third-party library for communication with the device, service, or sensor
 - Documentation is developed for [home-assistant.io](https://home-assistant.io/)
-   * It's OK to start with adding a docstring with configuration details (for example, sample entry for `configuration.yaml` file) to the file header. Visit the [website documentation](https://www.home-assistant.io/developers/documentation/) for more information about contributing to [home-assistant.io](https://github.com/home-assistant/home-assistant.github.io).
+   * Visit the [website documentation](https://www.home-assistant.io/developers/documentation/) for more information about contributing to [home-assistant.io](https://github.com/home-assistant/home-assistant.github.io).
 - All dependencies are [only imported inside functions](creating_component_deps_and_reqs.md) that use them.
 - Add _the manifest file_. What is _the manifest file_? Keep reading to find out!
 
