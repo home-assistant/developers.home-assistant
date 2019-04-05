@@ -330,9 +330,17 @@
         "title": "Hass.io <> Home Assistant integration development",
         "sidebar_label": "HASS Integration development"
       },
+      "integration_index": {
+        "title": "Integrations",
+        "sidebar_label": "Introduction"
+      },
+      "integration_manifest": {
+        "title": "Integration Manifests",
+        "sidebar_label": "Manifests"
+      },
       "integration_quality_scale_index": {
         "title": "Integration Quality Scale",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Integration Quality Scale"
       },
       "intent_builtin": {
         "title": "Built-in intents"
@@ -1254,7 +1262,7 @@
       "Custom UI": "Custom UI",
       "Developing a feature": "Developing a feature",
       "Development 101": "Development 101",
-      "Integration Quality Scale": "Integration Quality Scale",
+      "Integrations": "Integrations",
       "Creating Platforms": "Creating Platforms",
       "Creating Components": "Creating Components",
       "Introduction": "Introduction",
@@ -1267,6 +1275,7 @@
       "Hass.io": "Hass.io",
       "Hass.io Add-Ons": "Hass.io Add-Ons",
       "Maintainer docs": "Maintainer docs",
+      "Integration Quality Scale": "Integration Quality Scale",
       "Lovelace UI": "Lovelace UI"
     }
   },
