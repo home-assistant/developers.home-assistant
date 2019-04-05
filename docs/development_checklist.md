@@ -13,7 +13,7 @@ Before you commit any changes, check your work against these requirements:
 - All dependencies are [only imported inside functions](creating_component_deps_and_reqs.md) that use them.
 - Add _the manifest file_. What is _the manifest file_? Keep reading to find out!
 
-## _The Manifest file_
+## _The Manifest File_
 
 As of Home Assistant 0.91, we have begun a migration to a new concept we call _the manifest file_. What is _the manifest file_? _The manifest file_ contains information about a Home Assistant integration. It looks like this:
 
