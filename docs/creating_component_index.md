@@ -1,15 +1,15 @@
 ---
-title: "Creating components"
-sidebar_label: "Introduction"
+title: "Creating a Minimal Component"
+sidebar_label: "Minimal Component"
 ---
 
 Alright, you learned about the [manifest](creating_integration_manifest.md), so it's time to write your first code for your integration. AWESOME. Don't worry, we've tried hard to keep it as easy as possible.
 
-Examples of integrations are available from [our example repository](https://github.com/home-assistant/example-custom-config/tree/master/custom_components/).
+More extensive examples of integrations are available from [our example repository](https://github.com/home-assistant/example-custom-config/tree/master/custom_components/).
 
-## Example component
+## The code
 
-Add `hello_state:` to your `configuration.yaml` file and create a file `<config_dir>/custom_components/hello_state/__init__.py` with the below code to test it locally.
+Each component needs to have 2 basic parts: it needs to define a `DOMAIN` constant that contains the domain of the integration. The second part is that it needs to define a setup method that returns a boolean if set up was successful. So let's take a look at how this looks:
 
 ```python
 DOMAIN = 'hello_state'
@@ -34,3 +34,5 @@ async def async_setup(hass, config):
 ```
 
 That's it! If you load this, you will see a new state in the state machine.
+
+To load this, add `hello_state:` to your `configuration.yaml` file and create a file `<config_dir>/custom_components/hello_state/__init__.py` with the below code to test it locally.

@@ -16,14 +16,14 @@ A checklist of things to do when you're adding a new platform.
 
 ### 1. Requirements
 
- 1. Requires have been added to `manifest.json`. The `REQUIREMENTS` constant is deprecated.
+ 1. Requires have been added to [`manifest.json`](creating_integration_manifest.md). The `REQUIREMENTS` constant is deprecated.
  2. Requirement version should be pinned: `"requirements": ['phue==0.8.1']`
  3. We no longer want requirements hosted on GitHub. Please upload to PyPi.
  4. Requirements should only be imported inside functions. This is necessary because requirements are installed on the fly.
 
 ### 2. Dependencies
 
- 1. If you depend on a component for the connection, add it to your dependencies in `manifest.json`: `"dependencies": ['nest']`. The `DEPENDENCIES` constant is deprecated.
+ 1. If you depend on a component for the connection, add it to your dependencies in [`manifest.json`](creating_integration_manifest.md): `"dependencies": ['nest']`. The `DEPENDENCIES` constant is deprecated.
 
 ### 3. Configuration
 

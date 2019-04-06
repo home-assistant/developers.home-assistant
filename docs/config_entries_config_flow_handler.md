@@ -78,6 +78,8 @@ Translations for the config flow handlers are defined under the `config` key in 
 }
 ```
 
+When the translations are merged into Home Assistant, they will be automatically uploaded to [Lokalise](https://lokalise.co/) where the translation team will help to translate them in other languages. [More info on translating Home Assistant.](internationalization_translation.md)
+
 ## Triggering other config flows
 
 If you are writing an integration that discovers other integrations, you will want to trigger their config flows so the user can set them up. Do this by passing a source parameter and optional user input when initializing the config entry:

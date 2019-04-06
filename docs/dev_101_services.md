@@ -49,3 +49,28 @@ Pressing "Call Service" will now call your service without any parameters. This 
 ```
 
 The service will now overwrite the previous state with "Planet".
+
+## Service descriptions
+
+Adding services is only useful if users know about them. In Home Assistant we use a `services.yaml` as part of your integration to describe the services.
+
+Services are published under the domain name of your integration, so in `services.yaml` we only use the service name as the base key.
+
+```yaml
+# Example services.yaml entry
+
+set_speed:
+  # Description of the service
+  description: Sets fan speed.
+  # Different fields that your service accepts
+  fields:
+    # Key of the field
+    entity_id:
+      # Description of the field
+      description: Name(s) of the entities to set
+      # Example value that can be passed for this field
+      example: 'fan.living_room'
+    speed:
+      description: Speed setting
+      example: 'low'
+```
