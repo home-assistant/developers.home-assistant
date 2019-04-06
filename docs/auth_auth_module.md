@@ -36,9 +36,7 @@ Each MFA module need to implement a setup flow handler extends from `mfa_modules
 
 ## Workflow
 
-> TODO: draw a diagram
-
-User == select auth provider ==> LoginFlow.init == input/validate username/password ==> LoginFlow.finish ==> if user enabled mfa ==> LoginFlow.select_mfa_module ==> initialize(optional) ==> LoginFlow.mfa == input/validate MFA code ==> LoginFlow.finish ==> Done
+![Multi Factor Authentication Workflow](/img/en/auth/mfa_workflow.png)
 
 ## Configuration example
 
