@@ -1,8 +1,11 @@
 ---
-title: Config Flow Handlers
+title: Integration Configuration
+sidebar_label: Configuration
 ---
 
-Config Entries uses the [Data Flow Entry framework](data_entry_flow_index.md) to allow users to create entries. Components that want to support config entries will need to define a Config Flow Handler. This handler will manage the creation of entries from user input, discovery or other sources (like hassio).
+> This option is currently only available for built-in components.
+
+Integrations can be set up via the user interface by adding support for config entries. Config entries uses the [data flow entry framework](data_entry_flow_index.md) to allow users to create entries. Components that want to support config entries will need to define a Config Flow Handler. This handler will manage the creation of entries from user input, discovery or other sources (like hassio).
 
 Config Flow Handlers control the data that is stored in a config entry. This means that there is no need to validate that the config is correct when Home Assistant starts up. It will also prevent breaking changes, because we will be able to migrate configuration entries to new formats if the version changes.
 
@@ -11,25 +14,25 @@ When instantiating the handler, Home Assistant will make sure to load all depend
 To register your config flow handler with Home Assistant, register it with the config entries `HANDLERS` registry:
 
 ```python
-from homeassistant import config_entries, data_entry_flow
+from homeassistant import config_entries
 
 @config_entries.HANDLERS.register(DOMAIN)
-class ExampleConfigFlow(data_entry_flow.FlowHandler):
+class ExampleConfigFlow(config_entries.ConfigFlow):
 ```
 
-> Temporarily, all config flow handlers will also need to add their component name to the `FLOWS` constant in `homeassistant/config_entries.py`. We are working on automating discovery.
+All config flow handlers will also need to add their domain name to the `FLOWS` constant in `homeassistant/config_entries.py`.
 
-## Initializing a config flow from an external source
+## Discovering your config flow
 
-You might want to initialize a config flow programmatically. For example, if we discover a device on the network that requires user interaction to finish setup. To do so, pass a source parameter and optional user input when initializing the config entry:
+Home Assistant has a discovery integration that scans the network for available devices and services  and will trigger the config flow of the appropriate integration. Discovery is limited to uPnP and zeroconf/mDNS.
 
-```python
-await hass.config_entries.flow.async_init(
-    'hue', data=discovery_info,
-    context={'source': config_entries.SOURCE_DISCOVERY})
-```
+To have your integration be discovered, you will have to extend the NetDisco library to be able to find your device. This is done by adding a new discoverable. [See the repository for examples of existing discoverable.](https://github.com/home-assistant/netdisco/tree/master/netdisco/discoverables)
 
-The config flow handler will need to add a step to support the given source. The step should follow the same return values as a normal step.
+Once done, you will have to update the discovery integration to make it aware which discovery maps to which integration, by updating [this list](https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/discovery/__init__.py#L55).
+
+Finally, you will have to add support to your config flow to be triggered from discovery. This is done by adding a new discovery step. Make sure that your discovery step does not automatically create an entry. All discovered config flows are required to have a confirmation from the user.
+
+Once discovered, the user will be notified that they can continue the flow from the config panel.
 
 ```python
 @config_entries.HANDLERS.register(DOMAIN)
@@ -38,8 +41,6 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
     async def async_step_discovery(self, info):
         # Handle discovery info
 ```
-
-If the result of the step is to show a form, the user will be able to continue the flow from the config panel.
 
 ## Translations
 
@@ -75,4 +76,14 @@ Translations for the config flow handlers are defined under the `config` key in 
     }
   }
 }
+```
+
+## Triggering other config flows
+
+If you are writing an integration that discovers other integrations, you will want to trigger their config flows so the user can set them up. Do this by passing a source parameter and optional user input when initializing the config entry:
+
+```python
+await hass.config_entries.flow.async_init(
+    'hue', data=discovery_info,
+    context={'source': config_entries.SOURCE_DISCOVERY})
 ```

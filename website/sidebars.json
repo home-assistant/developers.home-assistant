@@ -31,13 +31,8 @@
       "auth_auth_provider",
       "auth_auth_module"
     ],
-    "Configuration.yaml": [
-      "configuration_yaml_index"
-    ],
     "Config Entries": [
-      "config_entries_index",
-      "config_entries_config_flow_handler",
-      "config_entries_options_flow_handler"
+      "config_entries_index"
     ],
     "Data Entry Flow": [
       "data_entry_flow_index"
@@ -72,45 +67,41 @@
     ]
   },
   "Extending HASS": {
-    "Developing a feature": [
+    "Development Workflow": [
       "development_index",
       "development_environment",
       "development_submitting",
-      "development_checklist",
       "development_guidelines",
       "development_testing",
-      "development_catching_up",
-      "development_validation",
-      "development_typing"
+      "development_catching_up"
     ],
-    "Development 101": [
+    "Building Integrations": [
+      "creating_integration_file_structure",
+      "creating_integration_manifest",
+      "creating_component_index",
+      "config_entries_config_flow_handler",
+      "config_entries_options_flow_handler",
+      "configuration_yaml_index",
+      "dev_101_services",
+      "creating_platform_index",
+      "creating_component_generic_discovery"
+    ],
+    "Development Checklist": [
+      "development_checklist",
+      "creating_component_code_review",
+      "creating_platform_code_review",
+      "integration_quality_scale_index"
+    ],
+    "Home Assistant Core 101": [
       "dev_101_index",
       "dev_101_hass",
       "dev_101_events",
       "dev_101_states",
-      "dev_101_services",
       "dev_101_config"
     ],
-    "Integrations": [
-      "integration_index",
-      "integration_manifest",
-      "integration_quality_scale_index"
-    ],
-    "Creating Platforms": [
-      "creating_platform_index",
-      "creating_platform_code_review",
-      "creating_platform_example_light",
-      "creating_platform_example_sensor"
-    ],
-    "Creating Components": [
-      "creating_component_index",
-      "creating_component_code_review",
-      "creating_component_deps_and_reqs",
-      "creating_component_events",
-      "creating_component_states",
-      "creating_component_discovery",
-      "creating_component_loading",
-      "creating_component_generic_discovery"
+    "Misc": [
+      "development_validation",
+      "development_typing"
     ]
   },
   "Misc": {

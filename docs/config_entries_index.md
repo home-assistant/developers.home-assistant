@@ -117,12 +117,15 @@ async def async_setup_entry(hass, config_entry, async_add_devices):
 
 ## Unloading entries
 
-Components can optionally support unloading a config entry. When unloading an entry, the component needs
-to clean up all entities, unsubscribe any event listener and close all connections. To implement this,
-add `async_unload_entry(hass, entry)` to your component ([example](https://github.com/home-assistant/home-assistant/blob/0.68.0/homeassistant/components/hue/__init__.py#L136)).
+Components can optionally support unloading a config entry. When unloading an entry, the component needs to clean up all entities, unsubscribe any event listener and close all connections. To implement this, add `async_unload_entry(hass, entry)` to your component ([example](https://github.com/home-assistant/home-assistant/blob/0.68.0/homeassistant/components/hue/__init__.py#L136)).
 
-Platforms will not need to add any logic for unloading a config entry. The entity component will take care of this.
-If you need to clean up resources used for an entity, implement the `async_will_remove_from_hass` method on the Entity ([example](https://github.com/home-assistant/home-assistant/blob/0.68.0/homeassistant/components/media_player/cast.py#L313)).
+For each platform that you forwarded the config entry to, you will need to forward the unloading too.
+
+```python
+await self.hass.config_entries.async_forward_entry_unload(self.config_entry, 'light')
+```
+
+If you need to clean up resources used by an entity in a platform, have the entity implement the [`async_will_remove_from_hass`](entity_index.md#async_will_remove_from_hass) method.
 
 ## Removal of entries
 

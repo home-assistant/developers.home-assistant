@@ -2,7 +2,7 @@
 title: "Style guidelines"
 ---
 
-Home Assistant enforces strict [PEP8 style](https://www.python.org/dev/peps/pep-0008/) and [PEP 257 (Docstring Conventions)](https://www.python.org/dev/peps/pep-0257/) compliance on all code submitted. We automatically test every pull request as part of the linting process with [Coveralls](https://coveralls.io/github/home-assistant/home-assistant) and [Travis CI](https://travis-ci.org/home-assistant/home-assistant).
+Home Assistant enforces strict [PEP8 style](https://www.python.org/dev/peps/pep-0008/) and [PEP 257 (Docstring Conventions)](https://www.python.org/dev/peps/pep-0257/) compliance on all code submitted. We automatically test every pull request as part of the linting process.
 
 Summary of the most relevant points:
 
@@ -42,17 +42,6 @@ The docstring in the file header should describe what the file is about.
 """Support for MQTT lights."""
 ```
 
-### Requirements
-
-Please place [Platform requirements](creating_platform_code_review.md#1-requirements) right after the imports.
-
-```python
-[...]
-from homeassistant.helpers.entity import Entity
-
-REQUIREMENTS = ['xmltodict==0.11.0']
-```
-
 ### Log messages
 
 There is no need to add the platform or component name to the log messages. This will be added automatically. Like `syslog` messages there shouldn't be any period at the end. Try to avoid brackets and additional quotes around the output to make it easier for users to parse the log. A widely style is shown below but you are free to compose the messages as you like.
@@ -74,7 +63,7 @@ Instead of order the imports manually, use [`isort`](https://github.com/timothyc
 
 ```bash
 $ pip3 install isort
-$ isort homeassistant/components/sensor/fixer.py 
+$ isort homeassistant/components/sensor/fixer.py
 ```
 
 ### Use new style string formatting

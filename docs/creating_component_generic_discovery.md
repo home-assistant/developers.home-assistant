@@ -1,70 +1,21 @@
 ---
-title: "Generic Platform Discovery"
+title: "Integration with Multiple Platforms"
+sidebar_label: Multiple platforms
 ---
 
-New controller or hub components often need to add platforms in sub-components (i.e. Lights & Switches) without additional configuration.
-This can be achieved using the `load_platform` or `async_load_platform` methods from `homeassistant.helpers.discovery`:
+Most integrations consist of a single platform. And in that case it's fine to just define that one platform. However, if you are goign to add a second platform, you will want to centralize your connection logic. This is done inside the component (`__init__.py`).
 
-```python
-def load_platform(hass, component, platform, discovered, hass_config)
-```
+If your integration is configurable via `configuration.yaml`, it will cause the entry point of your configuration to change, as now users will need to set up your integration directly, and it is up to your integration to set up the platforms.
 
-From more info on how this works, refer to the [load_platform](https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/helpers/discovery.py#L117) method.
+## Loading platforms when configured via a config entry
 
-### Example
+If your integration is set up via a config entry, you will need to forward the config entry to the appropriate integration to set up your platform. For more info, see the [config entry documentation](config_entries_index.md#for-platforms).
 
-Say you need to implement your new MyFlashyHub that controls both Switches & Lights, you can follow these steps:
+## Loading platforms when configured via configuration.yaml
 
-Configuration required for your new hub component:
+If your integration is not using config entries, it will have to use our discovery helpers to set up its platforms. Note, this approach does not support unloading.
 
-```yaml
-myflashyhub:
-   example: setting
-```
-
-The source for your component can be located in your configuration directory for now:
-
-```bash
-~/.homeassistant/custom_components/myflashyhub.py
-~/.homeassistant/custom_components/light/myflashyhub.py
-~/.homeassistant/custom_components/switch/myflashyhub.py
-```
-
-In the hub component `myflashyhub.py` you can call your light and switch components. To pass any non-serializable information to the platforms in the sub-component, you should use `hass.data`.
-
-```python
-from homeassistant.helpers.discovery import load_platform
-
-DOMAIN = 'myflashyhub'
-DATA_MFH = 'MFH'
-
-def setup(hass, hass_config):
-    """Your controller/hub specific code."""
-    hass.data[DATA_MFH] = SomeObjectToInitialise()
-
-    #--- snip ---
-    load_platform(hass, 'light', DOMAIN, None, hass_config)
-    load_platform(hass, 'switch', DOMAIN, {'optional': 'arguments'}, hass_config)
-```
-
-Add your custom device specific code to the `setup_platform` method in `light/myflashyhub.py` and `switch/myflashyhub.py`.
-
-```python
-import custom_components.myflashyhub as myflashyhub
-
-# 'switch' will receive discovery_info={'optional': 'arguments'}
-# as passed in above. 'light' will receive discovery_info=None
-def setup_platform(hass, config, add_devices, discovery_info=None):
-    """Your switch/light specific code."""
-    # You can now use hass.data[myflashyhub.DATA_MFH]
-```
+To do this, you will need to use the `load_platform` and `async_load_platform` methods from the discovery helper.
 
 
-The `load_platform` method allows the platforms to be loaded without the need for any additional platform entries in your `configuration.yaml` file, which normally would have been:
-
-```yaml
-#light:
-#  platform: myflashyhub
-#switch:
-#  platform: myflashyhub
-```
+- See also a [full example that implementing this logic](https://github.com/home-assistant/example-custom-config/tree/master/custom_components/example_load_platform/)

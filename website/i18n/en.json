@@ -69,56 +69,57 @@
         "title": "Permissions"
       },
       "config_entries_config_flow_handler": {
-        "title": "Config Flow Handlers"
+        "title": "Integration Configuration",
+        "sidebar_label": "Configuration"
       },
       "config_entries_index": {
         "title": "Config Entries",
         "sidebar_label": "Introduction"
       },
       "config_entries_options_flow_handler": {
-        "title": "Options Flow Handlers"
+        "title": "Integration Configuration Options",
+        "sidebar_label": "Configuration Options"
       },
       "configuration_yaml_index": {
-        "title": "Configuration.yaml",
-        "sidebar_label": "Introduction"
+        "title": "Integration Configuration via YAML",
+        "sidebar_label": "Configuration via YAML"
       },
       "creating_component_code_review": {
-        "title": "Checklist for creating a component"
+        "title": "Checklist for creating a component",
+        "sidebar_label": "Component Checklist"
       },
       "creating_component_deps_and_reqs": {
-        "title": "Requirements & Dependencies"
-      },
-      "creating_component_discovery": {
-        "title": "Component Discovery"
-      },
-      "creating_component_events": {
-        "title": "Handling events"
+        "title": "creating_component_deps_and_reqs"
       },
       "creating_component_generic_discovery": {
-        "title": "Generic Platform Discovery"
+        "title": "Integration with Multiple Platforms",
+        "sidebar_label": "Multiple platforms"
       },
       "creating_component_index": {
         "title": "Creating components",
         "sidebar_label": "Introduction"
       },
-      "creating_component_loading": {
-        "title": "Loading your components"
+      "creating_integration_file_structure": {
+        "title": "Integration File Structure",
+        "sidebar_label": "File Structure"
       },
-      "creating_component_states": {
-        "title": "Handling states"
+      "creating_integration_manifest": {
+        "title": "Integration Manifest",
+        "sidebar_label": "Manifest"
       },
       "creating_platform_code_review": {
-        "title": "Checklist for creating a platform"
+        "title": "Checklist for creating a platform",
+        "sidebar_label": "Platform Checklist"
       },
       "creating_platform_example_light": {
-        "title": "Example light platform"
+        "title": "creating_platform_example_light"
       },
       "creating_platform_example_sensor": {
-        "title": "Example sensor platform"
+        "title": "creating_platform_example_sensor"
       },
       "creating_platform_index": {
-        "title": "Adding support for a new platform",
-        "sidebar_label": "Introduction"
+        "title": "Integration Platforms",
+        "sidebar_label": "Platforms"
       },
       "data_entry_flow_index": {
         "title": "Data Entry Flow",
@@ -138,7 +139,8 @@
         "sidebar_label": "Introduction"
       },
       "dev_101_services": {
-        "title": "Using Services"
+        "title": "Integration Services",
+        "sidebar_label": "Custom Services"
       },
       "dev_101_states": {
         "title": "Using States"
@@ -147,7 +149,8 @@
         "title": "Catching up with Reality"
       },
       "development_checklist": {
-        "title": "Development Checklist"
+        "title": "Development Checklist",
+        "sidebar_label": "Introduction"
       },
       "development_environment": {
         "title": "Set up Development Environment"
@@ -329,14 +332,6 @@
       "hassio_hass": {
         "title": "Hass.io <> Home Assistant integration development",
         "sidebar_label": "HASS Integration development"
-      },
-      "integration_index": {
-        "title": "Integrations",
-        "sidebar_label": "Introduction"
-      },
-      "integration_manifest": {
-        "title": "Integration Manifests",
-        "sidebar_label": "Manifests"
       },
       "integration_quality_scale_index": {
         "title": "Integration Quality Scale",
@@ -1251,7 +1246,6 @@
       "Architecture": "Architecture",
       "Entities": "Entities",
       "Authentication": "Authentication",
-      "Configuration.yaml": "Configuration.yaml",
       "Config Entries": "Config Entries",
       "Data Entry Flow": "Data Entry Flow",
       "Entity Registry": "Entity Registry",
@@ -1260,11 +1254,11 @@
       "Frontend": "Frontend",
       "Extending the frontend": "Extending the frontend",
       "Custom UI": "Custom UI",
-      "Developing a feature": "Developing a feature",
-      "Development 101": "Development 101",
-      "Integrations": "Integrations",
-      "Creating Platforms": "Creating Platforms",
-      "Creating Components": "Creating Components",
+      "Development Workflow": "Development Workflow",
+      "Building Integrations": "Building Integrations",
+      "Development Checklist": "Development Checklist",
+      "Home Assistant Core 101": "Home Assistant Core 101",
+      "Misc": "Misc",
       "Introduction": "Introduction",
       "External API": "External API",
       "Internationalization": "Internationalization",
@@ -1275,7 +1269,12 @@
       "Hass.io": "Hass.io",
       "Hass.io Add-Ons": "Hass.io Add-Ons",
       "Maintainer docs": "Maintainer docs",
+      "Configuration.yaml": "Configuration.yaml",
+      "Developing a feature": "Developing a feature",
+      "Development 101": "Development 101",
       "Integration Quality Scale": "Integration Quality Scale",
+      "Creating Platforms": "Creating Platforms",
+      "Creating Components": "Creating Components",
       "Lovelace UI": "Lovelace UI"
     }
   },
