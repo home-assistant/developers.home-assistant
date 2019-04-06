@@ -35,12 +35,11 @@ The domain is a short name consisting of characters and underscores. This domain
 
 ## Name
 
-The name of thet integration.
+The name of the integration.
 
 ## Documentation
 
 Website that contains documentation on how to use your integration. If this integration is being submitted for inclusion in Home Assistant, it should be `https://www.home-assistant.io/components/<domain>`
-
 
 ## Dependencies
 
@@ -48,7 +47,7 @@ Dependencies are other Home Assistant integrations that you want Home Assistant 
 
 ## Code Owners
 
-GitHub usernames of people that are responsible for this integration.
+GitHub usernames or team names of people that are responsible for this integration. You should add at least your GitHub username here, as well as anyone who helped you to write code that is being included.
 
 ## Requirements
 

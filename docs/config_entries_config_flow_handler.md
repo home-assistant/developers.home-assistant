@@ -26,7 +26,7 @@ All config flow handlers will also need to add their domain name to the `FLOWS` 
 
 Home Assistant has a discovery integration that scans the network for available devices and services  and will trigger the config flow of the appropriate integration. Discovery is limited to uPnP and zeroconf/mDNS.
 
-To have your integration be discovered, you will have to extend the NetDisco library to be able to find your device. This is done by adding a new discoverable. [See the repository for examples of existing discoverable.](https://github.com/home-assistant/netdisco/tree/master/netdisco/discoverables)
+To have your integration be discovered, you will have to extend the [NetDisco library](https://github.com/home-assistant/netdisco) to be able to find your device. This is done by adding a new discoverable. [See the repository for examples of existing discoverable.](https://github.com/home-assistant/netdisco/tree/master/netdisco/discoverables)
 
 Once done, you will have to update the discovery integration to make it aware which discovery maps to which integration, by updating [this list](https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/discovery/__init__.py#L55).
 
