@@ -102,8 +102,8 @@
         "sidebar_label": "Multiple platforms"
       },
       "creating_component_index": {
-        "title": "Creating components",
-        "sidebar_label": "Introduction"
+        "title": "Creating a Minimal Component",
+        "sidebar_label": "Minimal Component"
       },
       "creating_integration_file_structure": {
         "title": "Integration File Structure",
@@ -1239,6 +1239,101 @@
       "version-0.91.0/version-0.91.0-integration_quality_scale_index": {
         "title": "Integration Quality Scale",
         "sidebar_label": "Introduction"
+      },
+      "version-0.91.2/version-0.91.2-app_integration_notifications": {
+        "title": "Push Notifications"
+      },
+      "version-0.91.2/version-0.91.2-app_integration_sending_data": {
+        "title": "Sending data home"
+      },
+      "version-0.91.2/version-0.91.2-app_integration_sensors": {
+        "title": "Sensors"
+      },
+      "version-0.91.2/version-0.91.2-app_integration_setup": {
+        "title": "Connecting to an instance"
+      },
+      "version-0.91.2/version-0.91.2-auth_auth_module": {
+        "title": "Multi-factor Authentication Modules"
+      },
+      "version-0.91.2/version-0.91.2-config_entries_config_flow_handler": {
+        "title": "Integration Configuration",
+        "sidebar_label": "Configuration"
+      },
+      "version-0.91.2/version-0.91.2-config_entries_index": {
+        "title": "Config Entries",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.91.2/version-0.91.2-config_entries_options_flow_handler": {
+        "title": "Integration Configuration Options",
+        "sidebar_label": "Configuration Options"
+      },
+      "version-0.91.2/version-0.91.2-creating_component_code_review": {
+        "title": "Checklist for creating a component",
+        "sidebar_label": "Component Checklist"
+      },
+      "version-0.91.2/version-0.91.2-creating_component_deps_and_reqs": {
+        "title": "creating_component_deps_and_reqs"
+      },
+      "version-0.91.2/version-0.91.2-creating_component_generic_discovery": {
+        "title": "Integration with Multiple Platforms",
+        "sidebar_label": "Multiple platforms"
+      },
+      "version-0.91.2/version-0.91.2-creating_component_index": {
+        "title": "Creating a Minimal Component",
+        "sidebar_label": "Minimal Component"
+      },
+      "version-0.91.2/version-0.91.2-creating_integration_file_structure": {
+        "title": "Integration File Structure",
+        "sidebar_label": "File Structure"
+      },
+      "version-0.91.2/version-0.91.2-creating_integration_manifest": {
+        "title": "Integration Manifest",
+        "sidebar_label": "Manifest"
+      },
+      "version-0.91.2/version-0.91.2-creating_platform_code_review": {
+        "title": "Checklist for creating a platform",
+        "sidebar_label": "Platform Checklist"
+      },
+      "version-0.91.2/version-0.91.2-creating_platform_example_light": {
+        "title": "creating_platform_example_light"
+      },
+      "version-0.91.2/version-0.91.2-creating_platform_example_sensor": {
+        "title": "creating_platform_example_sensor"
+      },
+      "version-0.91.2/version-0.91.2-creating_platform_index": {
+        "title": "Integration Platforms",
+        "sidebar_label": "Platforms"
+      },
+      "version-0.91.2/version-0.91.2-dev_101_services": {
+        "title": "Integration Services",
+        "sidebar_label": "Custom Services"
+      },
+      "version-0.91.2/version-0.91.2-dev_101_states": {
+        "title": "Using States"
+      },
+      "version-0.91.2/version-0.91.2-development_checklist": {
+        "title": "Development Checklist",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.91.2/version-0.91.2-development_guidelines": {
+        "title": "Style guidelines"
+      },
+      "version-0.91.2/version-0.91.2-development_index": {
+        "title": "Starting with Development",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.91.2/version-0.91.2-development_validation": {
+        "title": "Validate the input"
+      },
+      "version-0.91.2/version-0.91.2-entity_sensor": {
+        "title": "Sensor Entity",
+        "sidebar_label": "Sensor"
+      },
+      "version-0.91.2/version-0.91.2-internationalization_translation": {
+        "title": "Translation"
+      },
+      "version-0.91.2/version-0.91.2-maintenance": {
+        "title": "Maintenance"
       }
     },
     "links": {
