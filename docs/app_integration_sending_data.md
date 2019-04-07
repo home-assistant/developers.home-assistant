@@ -20,9 +20,11 @@ To summarize, here's how requests should be made:
 
 Some users have configured Home Assistant to be available outside of their home network using a dynamic DNS service. There are some routers that don't support hairpinning / NAT loopback: a device sending data from inside the routers network, via the externally configured DNS service, to Home Asisstant, which also resides inside the local network.
 
-To work around this, the app will need to record which WiFi is the home network, and use a direct connection when connected to the home WiFi network.
+To work around this, the app should record which WiFi SSID is the users home network, and use a direct connection when connected to the home WiFi network.
 
 ## Interaction basics
+
+### Request
 
 All interaction will be done by making HTTP POST requests to the webhook url. These requests do not need to contain authentication.
 
@@ -35,7 +37,7 @@ The payload format depends on the type of interaction, but it all shares a commo
 }
 ```
 
-If you received a `secret` during registration, you will need to encrypt your message and wrap it in an encrypted message:
+If you received a `secret` during registration, you **MUST** encrypt your message and put it in the payload like this:
 
 ```json5
 {
@@ -44,6 +46,15 @@ If you received a `secret` during registration, you will need to encrypt your me
   "encrypted_data": "<encrypted message>"
 }
 ```
+
+### Response
+
+As a general rule, expect to receive a 200 response for all your requests. There are a few cases in which you will receive another code:
+
+- You will receive a 400 status code if your JSON is invalid. However, you will not receive this error if the encrypted JSON is invalid.
+- You will receive a 201 when creating a sensor
+- If you receive a 404, the `mobile_app` component most likely isn't loaded.
+- Receiving a 410 means the integration has been deleted. You should notify the user and most likely register again.
 
 ## Implementing encryption
 
@@ -63,6 +74,11 @@ For other languages, please see the list of [Bindings for other languages](https
 ### Configuration
 
 We use the [secret-key cryptography](https://download.libsodium.org/doc/secret-key_cryptography) features of Sodium to encrypt and decrypt payloads. All payloads are JSON encoded in Base64. For Base64 type, use `sodium_base64_VARIANT_ORIGINAL` (that is, "original", no padding, not URL safe).
+
+### Signaling encryption support
+
+During registration, you must set `supports_encryption` to `true` to enable encryption. The Home Assistant instance must be able to install `libsodium` to enable encryption. Confirm that you should make all future webhook requests encrypted by the presence of the key `secret` in the initial registration response.
+You must store this secret forever. There is no way to recover it via the Home Assistant UI and you should **not** ask users to investigate hidden storage files to re-enter the encryption key. You should create a new registration if encryption ever fails and alert the user.
 
 ## Update device location
 
@@ -198,5 +214,15 @@ Get all enabled zones.
 ```json
 {
 	"type": "get_zones"
+}
+```
+
+## Get config
+
+Returns a version of `/api/config` with values useful for configuring your app.
+
+```json
+{
+  "type": "get_config"
 }
 ```

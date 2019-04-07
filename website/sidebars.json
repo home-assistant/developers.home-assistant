@@ -142,6 +142,8 @@
       "app_integration_index",
       "app_integration_setup",
       "app_integration_sending_data",
+      "app_integration_sensors",
+      "app_integration_notifications",
       "app_integration_webview"
     ],
     "asyncio": [
