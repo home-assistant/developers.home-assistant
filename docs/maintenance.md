@@ -29,7 +29,7 @@ Most files don't need to the be executable. `0644` is fine.
 
 A lot of components and platforms depends on third-party Python modules. The dependencies which are stored in the `requirements_*.txt` files are tracked by [Requires.io](https://requires.io/github/home-assistant/home-assistant/requirements/?branch=dev).
 
-If you update the requirements of a component/platform through the `REQUIREMENTS = ['modules-xyz==0.3']` entry, run the provided script to update the `requirements_*.txt` file(s).
+If you update the requirements of a component/platform by updating `manifest.json`, run the provided script to update the `requirements_*.txt` file(s).
 
 ```bash
 $ script/gen_requirements_all.py

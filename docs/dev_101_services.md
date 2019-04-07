@@ -1,13 +1,15 @@
 ---
-title: "Using Services"
+title: "Integration Services"
+sidebar_label: "Custom Services"
 ---
 
-This is a simple "hello world" example to show the basics of registering a service. To use this example, create the file `<config dir>/custom_components/hello_service.py` and copy the below example code.
+Home Assistant provides ready-made services for a lot of things, but it doesn't always cover everything. Instead of trying to change Home Assistant, it is preferred to add it as a service under your own integration first. Once we see a pattern in these services, we can talk about generalizing them.
 
-Services can be called from automation and from the service "Developer tools" in the frontend.
+This is a simple "hello world" example to show the basics of registering a service. To use this example, create the file `<config dir>/custom_components/hello_service/__init__.py` and copy the below example code.
+
+Services can be called from automations and from the service "Developer tools" in the frontend.
 
 ```python
-# The domain of your component. Should be equal to the name of your component.
 DOMAIN = 'hello_service'
 
 ATTR_NAME = 'name'
@@ -18,6 +20,7 @@ def setup(hass, config):
     """Set up is called when Home Assistant is loading our component."""
 
     def handle_hello(call):
+        """Handle the service call."""
         name = call.data.get(ATTR_NAME, DEFAULT_NAME)
 
         hass.states.set('hello_service.hello', name)
@@ -28,7 +31,7 @@ def setup(hass, config):
     return True
 ```
 
-Load the component by adding the following to your `configuration.yaml`. When your component is loaded, a new service should be available to call.
+Load the integration by adding the following to your `configuration.yaml`. When your component is loaded, a new service should be available to call.
 
 ```yaml
 # configuration.yaml entry
@@ -46,3 +49,28 @@ Pressing "Call Service" will now call your service without any parameters. This 
 ```
 
 The service will now overwrite the previous state with "Planet".
+
+## Service descriptions
+
+Adding services is only useful if users know about them. In Home Assistant we use a `services.yaml` as part of your integration to describe the services.
+
+Services are published under the domain name of your integration, so in `services.yaml` we only use the service name as the base key.
+
+```yaml
+# Example services.yaml entry
+
+set_speed:
+  # Description of the service
+  description: Sets fan speed.
+  # Different fields that your service accepts
+  fields:
+    # Key of the field
+    entity_id:
+      # Description of the field
+      description: Name(s) of the entities to set
+      # Example value that can be passed for this field
+      example: 'fan.living_room'
+    speed:
+      description: Speed setting
+      example: 'low'
+```

@@ -28,7 +28,6 @@ import logging
 _LOGGER = logging.getLogger(__name__)
 
 DOMAIN = 'hello_state'
-DEPENDENCIES = []
 
 def setup(hass, config):
     """Setup the Hello State component. """
@@ -40,8 +39,7 @@ def setup(hass, config):
 1. In the file header we decided to add some details: A short description and the link to the documentation.
 2. We want to do some logging. This means that we import the Python logging module and create an alias.
 3. The component name is equal to the domain name.
-4. At the moment this component has no dependencies. For detail check [dependencies](creating_component_deps_and_reqs.md#dependencies) section.
-5. The `setup` function will take care of the initialization of our component.
+4. The `setup` function will take care of the initialization of our component.
    The component will only write a log message. Keep in mind for later that you have several options for the severity:
 
    - `_LOGGER.info(msg)`
@@ -50,7 +48,7 @@ def setup(hass, config):
    - `_LOGGER.critical(msg)`
    - `_LOGGER.exception(msg)`
 
-7. We return `True` if everything is ok.
+5. We return `True` if everything is ok.
 
 Add the component to your `configuration.yaml` file.
 
@@ -72,7 +70,6 @@ import logging
 _LOGGER = logging.getLogger(__name__)
 
 DOMAIN = 'hello_state'
-DEPENDENCIES = []
 
 CONF_TEXT = 'text'
 DEFAULT_TEXT = 'No text!'
