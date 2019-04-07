@@ -15,15 +15,24 @@ When the address of the instance is known, the app will ask the user to authenti
 
 ## Registering the device
 
-> This is an experimental feature. We expect to evolve the API in the upcoming releases.
-
-_This requires Home Assistant 0.89 or later._
+_This requires Home Assistant 0.90 or later._
 
 Home Assistant has a `mobile_app` component that allows applications to register themselves and interact with the instance. This is a generic component to handle most common mobile application tasks. This component is extendable with custom interactions if your app needs more types of interactions than are offered by this component.
 
-Once you have tokens to authenticate as a user, it's time to register the app with the mobile app component in Home Assistant. You can do so by making an authenticated POST request to `/api/mobile_app/devices`. [More info on making authenticated requests.](auth_api.md#making-authenticated-requests)
+Once you have tokens to authenticate as a user, it's time to register the app with the mobile app component in Home Assistant.
 
-If you get a 404 when making this request, it means the user does not have the mobile_app component enabled. Prompt the user to enable the `mobile_app` component. The mobile_app component is set up as part of the default Home Assistant configuration.
+### Getting Ready
+
+First, you must ensure that the `mobile_app` component is loaded. There are two ways to do this:
+
+- You can publish a Zeroconf/Bonjour record `_hass-mobile-app._tcp.local.` to trigger the automatic load of the `mobile_app` component. You should wait at least 60 seconds after publishing the record before continuing.
+- You can ask the user to add `mobile_app` to their configuration.yaml and restart Home Assistant. If the user already has `default_config` in their configuration, then `mobile_app` will have been already loaded.
+
+You can confirm the `mobile_app` component has been loaded by checking the `components` array of the [`/api/config` REST API call](external_api_rest.md#get-api-config). If you continue to device registration and receive a 404 status code, then it most likely hasn't been loaded yet.
+
+### Registering the device
+
+To register the device, make an authenticated POST request to `/api/mobile_app/devices`. [More info on making authenticated requests.](auth_api.md#making-authenticated-requests)
 
 Example payload to send to the registration endpoint:
 
@@ -53,33 +62,22 @@ Example payload to send to the registration endpoint:
 | `model` | V | string | The model of the device running the app.
 | `os_version` | V | string | The OS version of the device running the app.
 | `supports_encryption` | V | bool | If the app supports encryption. See also the [encryption section](#encryption).
-| `app_data` |  | Dict | App data can be used if the app has a supporting component that extends mobile_app functionality.
+| `app_data` |  | Dict | App data can be used if the app has a supporting component that extends `mobile_app` functionality.
 
-When you get a 200 response, the mobile app is registered with Home Assistant. The response is a JSON document and will contain the urls on how to interact with the Home Assistant instance. Store this information.
+When you get a 200 response, the mobile app is registered with Home Assistant. The response is a JSON document and will contain the URLs on how to interact with the Home Assistant instance. You should permanently store this information.
 
 ```json
 {
-  "webhook_id": "abcdefgh",
-  "secret": "qwerty"
+  "cloudhook_url": "https://hooks.nabu.casa/randomlongstring123",
+  "remote_ui_url": "https://randomlongstring123.ui.nabu.casa",
+  "secret": "qwerty",
+  "webhook_id": "abcdefgh"
 }
 ```
 
 | Key | Type | Description
 | --- | ---- | -----------
+| `cloudhook_url` | string | The cloudhook URL provided by Home Assistant Cloud. Only will be provided if user is actively subscribed to Nabu Casa.
+| `remote_ui_url` | string | The remote UI URL provided by Home Assistant Cloud. Only will be provided if user is actively subscribed to Nabu Casa.
+| `secret` | string | The secret to use for encrypted communication. Will only be included if encryption is supported by both the app and the Home Assistant instance. [More info](app_integration_sending_data.md#implementing-encryption).
 | `webhook_id` | string | The webhook ID that can be used to send data back.
-| `secret` | string | The secret to use for encrypted communication. Will only be included if encryption is supported by both the app and the Home Assistant instance.
-
-
-## Encryption
-
-The mobile app component supports encryption to make sure all communication between the app and Home Assistant is encrypted. The encryption is powered by [libsodium](https://libsodium.gitbook.io). Example to encrypt the message using libsodium on Python:
-
-```python
-from nacl.secret import SecretBox
-from nacl.encoding import Base64Encoder
-
-data = SecretBox(key).encrypt(
-  payload,
-  encoder=Base64Encoder
-).decode("utf-8")
-```

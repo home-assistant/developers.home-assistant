@@ -9,8 +9,14 @@
         "title": "Native App Integration",
         "sidebar_label": "Introduction"
       },
+      "app_integration_notifications": {
+        "title": "Push Notifications"
+      },
       "app_integration_sending_data": {
         "title": "Sending data home"
+      },
+      "app_integration_sensors": {
+        "title": "Sensors"
       },
       "app_integration_setup": {
         "title": "Connecting to an instance"
