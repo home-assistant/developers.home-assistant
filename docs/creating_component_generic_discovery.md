@@ -3,7 +3,7 @@ title: "Integration with Multiple Platforms"
 sidebar_label: Multiple platforms
 ---
 
-Most integrations consist of a single platform. And in that case it's fine to just define that one platform. However, if you are goign to add a second platform, you will want to centralize your connection logic. This is done inside the component (`__init__.py`).
+Most integrations consist of a single platform. And in that case, it's fine to just define that one platform. However, if you are going to add a second platform, you will want to centralize your connection logic. This is done inside the component (`__init__.py`).
 
 If your integration is configurable via `configuration.yaml`, it will cause the entry point of your configuration to change, as now users will need to set up your integration directly, and it is up to your integration to set up the platforms.
 

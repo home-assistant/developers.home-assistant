@@ -39,7 +39,7 @@ The name of the integration.
 
 ## Documentation
 
-Website that contains documentation on how to use your integration. If this integration is being submitted for inclusion in Home Assistant, it should be `https://www.home-assistant.io/components/<domain>`
+The website containing documentation on how to use your integration. If this integration is being submitted for inclusion in Home Assistant, it should be `https://www.home-assistant.io/components/<domain>`
 
 ## Dependencies
 
@@ -51,7 +51,7 @@ GitHub usernames or team names of people that are responsible for this integrati
 
 ## Requirements
 
-Requirements are Python libraries or modules that you would normally install using `pip` for your component. Home Assistant will try to install the requirements into the `deps` subdirectory of the Home Assistant [configuration directory](https://www.home-assistant.io/docs/configuration/) if you are not using a `venv` or in something like `path/to/venv/lib/python3.6/site-packages` if you running in a virtual environment. This will make sure that all requirements are present at startup. If steps fails like missing packages for the compilation of a module or other install errors, the component will fail to load.
+Requirements are Python libraries or modules that you would normally install using `pip` for your component. Home Assistant will try to install the requirements into the `deps` subdirectory of the Home Assistant [configuration directory](https://www.home-assistant.io/docs/configuration/) if you are not using a `venv` or in something like `path/to/venv/lib/python3.6/site-packages` if you running in a virtual environment. This will make sure that all requirements are present at startup. If steps fail, like missing packages for the compilation of a module or other install errors, the component will fail to load.
 
 Requirements is a list of strings. Each entry is a `pip` compatible string. For example, the media player Cast platform depends on the Python package PyChromecast v0.6.12: `['pychromecast==0.6.12']`.
 
@@ -59,7 +59,7 @@ Requirements is a list of strings. Each entry is a `pip` compatible string. For 
 
 ### Custom requirements during development & testing
 
-During development of a component, it can be useful to test against different versions of a requirement. This can be done in two steps, using pychromecast as an example:
+During the development of a component, it can be useful to test against different versions of a requirement. This can be done in two steps, using `pychromecast` as an example:
 
 ```bash
 pip install pychromecast==0.6.13 --target ~/.homeassistant/deps

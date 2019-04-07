@@ -55,11 +55,11 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 
  1. Verify that the passed in configuration (user/pass/host etc.) works.
  2. Group your calls to `add_devices` if possible.
- 3. If platform adds extra services, format should be `<domain>.<service name>`. Make sure that your services [verify permissions](auth_permissions.md#checking-permissions).
+ 3. If the platform adds extra services, the format should be `<domain>.<service name>`. Make sure that your services [verify permissions](auth_permissions.md#checking-permissions).
 
 ### 5. Entity
 
- 1. Extend entity from the integration you're building a platform for.
+ 1. Extend the entity from the integration you're building a platform for.
 
     ```python
     from homeassistant.components.light import Light
@@ -71,7 +71,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
  2. Avoid passing in `hass` as a parameter to the entity. When the entity has been added to Home Assistant, `hass` will be set on the entity when the entity is added to Home Assistant. This means you can access `hass` as `self.hass` inside the entity.
  3. Do not call `update()` in constructor, use `add_entities(devices, True)` instead.
  4. Do not do any I/O inside properties. Cache values inside `update()` instead.
- 5. When dealing with time, state and/or attributes should not contain relative time since something happened. Instead it should store UTC timestamps.
+ 5. When dealing with time, state and/or attributes should not contain relative time since something happened. Instead, it should store UTC timestamps.
  6. Leverage the [entity lifecycle callbacks](entity_index.md#lifecycle-hooks) to attach event listeners or clean up connections.
 
 ### 6. Communication with devices/services

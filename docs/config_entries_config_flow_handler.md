@@ -5,7 +5,7 @@ sidebar_label: Configuration
 
 > This option is currently only available for built-in components.
 
-Integrations can be set up via the user interface by adding support for config entries. Config entries uses the [data flow entry framework](data_entry_flow_index.md) to allow users to create entries. Components that want to support config entries will need to define a Config Flow Handler. This handler will manage the creation of entries from user input, discovery or other sources (like hassio).
+Integrations can be set up via the user interface by adding support for config entries. Config entries uses the [data flow entry framework](data_entry_flow_index.md) to allow users to create entries. Components that want to support config entries will need to define a Config Flow Handler. This handler will manage the creation of entries from user input, discovery or other sources (like Hass.io).
 
 Config Flow Handlers control the data that is stored in a config entry. This means that there is no need to validate that the config is correct when Home Assistant starts up. It will also prevent breaking changes, because we will be able to migrate configuration entries to new formats if the version changes.
 
@@ -24,7 +24,7 @@ All config flow handlers will also need to add their domain name to the `FLOWS` 
 
 ## Discovering your config flow
 
-Home Assistant has a discovery integration that scans the network for available devices and services  and will trigger the config flow of the appropriate integration. Discovery is limited to uPnP and zeroconf/mDNS.
+Home Assistant has a discovery integration that scans the network for available devices and services and will trigger the config flow of the appropriate integration. Discovery is limited to UPnP and zeroconf/mDNS.
 
 To have your integration be discovered, you will have to extend the [NetDisco library](https://github.com/home-assistant/netdisco) to be able to find your device. This is done by adding a new discoverable. [See the repository for examples of existing discoverable.](https://github.com/home-assistant/netdisco/tree/master/netdisco/discoverables)
 

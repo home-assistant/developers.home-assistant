@@ -9,7 +9,7 @@ More extensive examples of integrations are available from [our example reposito
 
 ## The code
 
-Each component needs to have 2 basic parts: it needs to define a `DOMAIN` constant that contains the domain of the integration. The second part is that it needs to define a setup method that returns a boolean if set up was successful. So let's take a look at how this looks:
+Each component needs to have 2 basic parts: it needs to define a `DOMAIN` constant that contains the domain of the integration. The second part is that it needs to define a setup method that returns a boolean if the set up was successful. So let's take a look at how this looks:
 
 ```python
 DOMAIN = 'hello_state'
@@ -17,7 +17,7 @@ DOMAIN = 'hello_state'
 def setup(hass, config):
     hass.states.set('hello_state.world', 'Paulus')
 
-    # Return boolean to indicate that initialization was successfully.
+    # Return boolean to indicate that initialization was successful.
     return True
 ```
 
@@ -29,7 +29,7 @@ DOMAIN = 'hello_state'
 async def async_setup(hass, config):
     hass.states.async_set('hello_state.world', 'Paulus')
 
-    # Return boolean to indicate that initialization was successfully.
+    # Return boolean to indicate that initialization was successful.
     return True
 ```
 
