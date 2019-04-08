@@ -29,8 +29,8 @@ To enables calls to the [Hass.io API][hassio-api], add `hassio_api: true` to `co
 
 Add-ons can call some API commands without need set `hassio_api: true`:
 - `/homeassistant/api`
+- `/homeassistant/api/stream`
 - `/homeassistant/websocket`
-- `/homeassistant/stream`
 - `/addons/self/*`
 - `/services*`
 - `/discovery*`
