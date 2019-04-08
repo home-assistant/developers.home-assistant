@@ -38,6 +38,10 @@ Each MFA module need to implement a setup flow handler extends from `mfa_modules
 
 ![Multi Factor Authentication Workflow](/img/en/auth/mfa_workflow.png)
 
+<!--
+Source: https://drive.google.com/file/d/12_nANmOYnOdqM56BND01nPjJmGXe-M9a/view
+-->
+
 ## Configuration example
 
 ```yaml
