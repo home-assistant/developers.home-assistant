@@ -33,7 +33,7 @@ As a developer, follow the following best practices to make your add-on secure:
 
 ## Use Home Assistant User backend
 
-Instead to allow users to set new login credential in plain text config, use the Home Assistant [Auth backend][hassio-api-auth]. You can enable the access to API with `hassio_auth: true`. Now you are able to send the login credential to auth backend and validate it again Home Assistant.
+Instead to allow users to set new login credential in plain text config, use the Home Assistant [Auth backend][hassio-api-auth]. You can enable the access to API with `auth_api: true`. Now you are able to send the login credential to auth backend and validate it again Home Assistant.
 
 We have some sample and helper around that system collected in a [GitHub repository][hassio-auth]. Feel free to copy past it or provide your usefully scripts.
 
