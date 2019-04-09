@@ -44,3 +44,16 @@ In future versions of Hass.io, the `CHANGELOG.md` file will be displayed in the 
 ## AppArmor
 
 You can use own security profile for you Add-on with AppArmor. Default it is enabled and use the Docker default profile. Put `apparmor.txt` file into your Add-on folder and it will load this file as primary profile. Use the config options to set the name of that profile.
+
+## Ingress
+
+Ingress allow to reach the Add-on web interface inside Home Assistant UI. User and Add-on developer need not care about the security or port forwarding. This feature would be loved by user and is not every time simple to implement for Add-on developer.
+
+The Add-on need provide the webinterface on port `8099`. This is configurable over the Add-on config, like a lot more. Make sure that the Add-on accept only connection from `172.30.32.2` on that port and he don't need provide any user login mechanics on this port. Now set `ingress: true` on Add-on configuration. You can read all details around path/port from your Add-on info API endpoint if you need this details to configure the web app.
+
+If your web interface don't support relative path or you can't set a base url, you can use nginx filter to replace the URL with correct path.
+
+Ingress API gateway support:
+ * HTTP/1.x
+ * Streaming content
+ * Websockets

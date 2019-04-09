@@ -30,3 +30,12 @@ As a developer, follow the following best practices to make your add-on secure:
 - Create an AppArmor profile
 - Map folders read only if you don't need write access
 - If you need any API access, make sure you that you not grant to highest permission if you don't need it
+
+## Use Home Assistant User backend
+
+Instead to allow users to set new login credential in plain text config, use the Home Assistant [Auth backend][hassio-api-auth]. You can enable the access to API with `hassio_auth: true`. Now you are able to send the login credential to auth backend and validate it again Home Assistant.
+
+We have some sample and helper around that system collected in a [GitHub repository][hassio-auth]. Feel free to copy past it or provide your usefully scripts.
+
+[hassio-auth]: https://github.com/home-assistant/hassio-auth
+[hassio-api-auth]: https://github.com/home-assistant/hassio/blob/dev/API.md#auth--sso-api

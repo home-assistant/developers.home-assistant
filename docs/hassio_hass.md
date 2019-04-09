@@ -14,6 +14,11 @@ To develop for the frontend, we're going to need API access to the supervisor.
 - Add our developer Add-on repository: https://github.com/home-assistant/hassio-addons-development
 - Install the Add-on "Remote API proxy"
 
+For some API commands you need explicit the Home Assistant API token, but 99% of the functionality work with `Remote API proxy`. This token change some times but you can read the current legal token on host system with:
+```sh
+$ docker inspect homeassistant | grep HASSIO_TOKEN
+```
+
  ## Having Home Assistant connect to remote Hass.io
 
  The connection with the supervisor is hidden inside the host and is only accessible from applications running on the host. So to make it accessible for our Home Assistant instance, we will need to route the connection to our computer running Home Assistant. We're going to do this by forwarding the API with "Remote API proxy" Add-on.
