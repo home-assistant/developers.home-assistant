@@ -6,6 +6,7 @@ Each add-on is stored in a folder. The file structure looks like this:
 
 ```text
 addon_name/
+  apparmor.txt
   build.json
   CHANGELOG.md
   config.json
