@@ -6,6 +6,7 @@ Each add-on is stored in a folder. The file structure looks like this:
 
 ```text
 addon_name/
+  apparmor.txt
   build.json
   CHANGELOG.md
   config.json
@@ -20,10 +21,12 @@ addon_name/
 
 As with every Docker container, you will need a script to run when the container is started. A user might run many add-ons, so it is encouraged to try to stick to Bash scripts if you're doing simple things.
 
+All our Images have also [bashio][bashio] installed. It contains a set of commonly used operations and can be used to be included in add-ons to reduce code duplication across add-ons and therefore making it easier to develop and maintain add-ons.
+
 When developing your script:
 
  - `/data` is a volume for persistent storage.
- - `/data/options.json` contains the user configuration. You can use `jq` inside your shell script to parse this data. However, you might have to install `jq` as a separate package in your container (see `Dockerfile` below).
+ - `/data/options.json` contains the user configuration. You can use bashio or `jq` inside your shell script to parse this data.
 
 ```bash
 CONFIG_PATH=/data/options.json
@@ -37,9 +40,11 @@ So if your `options` contain
 ```
 then there will be a variable `TARGET` containing `beer` in the environment of your bash file afterwards.
 
+[bashio]: https://github.com/hassio-addons/bashio
+
 ## Add-on Docker file
 
-All add-ons are based on Alpine Linux 3.6. Hass.io will automatically substitute the right base image based on the machine architecture. Add `tzdata` if you need run in a different timezone. `tzdata` Is is already added to our base images.
+All add-ons are based on latest Alpine Linux. Hass.io will automatically substitute the right base image based on the machine architecture. Add `tzdata` if you need run in a different timezone. `tzdata` Is is already added to our base images.
 
 ```
 ARG BUILD_FROM
@@ -117,6 +122,7 @@ The config for an add-on is stored in `config.json`.
 | host_pid | bool | no | Default False. Allow to run container on host PID namespace. Work only for not protected add-ons.
 | devices | list | no | Device list to map into the add-on. Format is: `<path_on_host>:<path_in_container>:<cgroup_permissions>`. i.e. `/dev/ttyAMA0:/dev/ttyAMA0:rwm`
 | auto_uart | bool | no | Default False. Auto mapping all UART/Serial device from host into add-on.
+| homeassistant | string | no | Pin a minimun required Home Assistant version for such Add-on. Value is a version string like `0.91.2`.
 | hassio_role | str | no | Default `default`. Role based access to Hass.io API. Available: `default`, `homeassistant`, `backup`, `manager`, `admin`.
 | hassio_api | bool | no | This add-on can access to Hass.io REST API. It set the host alias `hassio`.
 | homeassistant_api | bool | no | This add-on can access to Hass.io Home-Assistant REST API proxy. Use `http://hassio/homeassistant/api`.
@@ -140,6 +146,10 @@ The config for an add-on is stored in `config.json`.
 | discovery | list | no | A list of services they this Add-on allow to provide for Home Assistant. Currently supported: `mqtt`
 | services | list | no | A list of services they will be provided or consumed with this Add-on. Format is `service`:`function` and functions are: `provide` (this add-on can provide this service), `want` (this add-on can use this service) or `need` (this add-on need this service to work correctly).
 | auth_api | bool | no | Allow access to Home Assistent user backend.
+| ingress | bool | no | Enable the ingress feature for the Add-on
+| ingress_port | integer | no | Default `8099`. For Add-ons they run on host network, you can use `0` and read the port later on API.
+| ingress_entry | string | no | Modify the URL entry point from `/`.
+
 
 ### Options / Schema
 
@@ -207,3 +217,7 @@ You need this only, if you not use the default images or need additionals things
 | build_from | no | A dictionary with the hardware architecture as the key and the base Docker image as value.
 | squash | no | Default `False`. Be carfully with this option, you can not use the image for caching stuff after that!
 | args | no | Allow to set additional Docker build arguments as a dictionary.
+
+We provide a set of [Base-Images][hassio-base] which should cover a lot of needs. If you don't want use the Alpine based version or need a specific Image tag, feel free to pin this requirements for you build with `build_from` option.
+
+[hassio-base]: https://github.com/home-assistant/hassio-base

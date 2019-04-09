@@ -36,6 +36,8 @@ Add-ons can call some API commands without need set `hassio_api: true`:
 - `/discovery*`
 - `/info`
 
+***Note:*** Fore Home Assistant API access requirements look above.
+
 [hass-api]: https://www.home-assistant.io/developers/rest_api/
 [hass-websocket]: https://www.home-assistant.io/developers/websocket_api/
 [hassio-api]: https://github.com/home-assistant/hassio/blob/master/API.md
