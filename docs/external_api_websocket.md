@@ -116,7 +116,7 @@ During this phase the client can give commands to the server. The server will re
 
 ```json
 {
-  "id": 6.
+  "id": 6,
   "type": "result",
   "success": true,
   // Can contain extra result info
@@ -220,7 +220,7 @@ The server will respond with a result message to indicate that unsubscribing was
 }
 ```
 
-### Calling a service
+## Calling a service
 
 This will call a service in Home Assistant. Right now there is no return value. The client can listen to `state_changed` events if it is interested in changed entities as a result of a service call.
 
@@ -248,7 +248,7 @@ The server will indicate with a message indicating that the service is done exec
 }
 ```
 
-### Fetching states
+## Fetching states
 
 This will get a dump of all the current states in Home Assistant.
 
@@ -270,7 +270,7 @@ The server will respond with a result message containing the states.
 }
 ```
 
-### Fetching config
+## Fetching config
 
 This will get a dump of the current config in Home Assistant.
 
@@ -292,7 +292,7 @@ The server will respond with a result message containing the config.
 }
 ```
 
-### Fetching services
+## Fetching services
 
 This will get a dump of the current services in Home Assistant.
 
@@ -314,7 +314,7 @@ The server will respond with a result message containing the services.
 }
 ```
 
-### Fetching panels
+## Fetching panels
 
 This will get a dump of the current registered panels in Home Assistant.
 
@@ -336,7 +336,7 @@ The server will respond with a result message containing the current registered 
 }
 ```
 
-### Fetching camera thumbnails
+## Fetching camera thumbnails
 
 _Introduced in Home Assistant 0.69._
 
@@ -363,7 +363,7 @@ The server will respond with a result message containing the thumbnail.
 }
 ```
 
-### Fetching media player thumbnails
+## Fetching media player thumbnails
 
 _Introduced in Home Assistant 0.69._
 
