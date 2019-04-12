@@ -20,4 +20,4 @@ With all these changes, we had to drop a few depreacted things and change some b
     - Rename the folder name from `mqtt` to `mqtt_custom`
     - Open `mqtt_custom/manifest.json` and change the value for `domain` from `mqtt` to `mqtt_custom`
     - Open `mqtt_custom/__init__.py` and change the value of `DOMAIN` from `mqtt` to `mqtt_custom`
-    - Anywhere in your config where you referenced `mqttt`, reference `mqtt_custom`. So use `mqtt_custom:` to specify the host and use `platform: mqtt` when specifying platforms.
+    - Anywhere in your config where you referenced `mqtt`, reference `mqtt_custom`. So use `mqtt_custom:` to specify the host and use `platform: mqtt_custom` when specifying platforms.
