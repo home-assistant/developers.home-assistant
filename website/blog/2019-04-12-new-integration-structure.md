@@ -9,7 +9,7 @@ We have finished [the great migration](/blog/2019/02/19/the-great-migration.html
 
 Home Assistant 0.92 introduces a new [`manifest.json`](/docs/en/creating_integration_file_structure.html) for integrations. This file, which is optional for custom components, is used by integrations to specify metadata: name, link to the documentation, dependencies, requirements and code owners. We are exploring leveraging `manifest.json` for additional future features, like tracking breaking changes or allowing custom components to provide config flows and being discovered.
 
-With all these changes, we had to drop a few depreacted things and change some behavior:
+With all these changes, we had to drop a few deprecated things and change some behavior:
 
  - Platforms can no longer be in the directory of the entity component, like `light/my_platform.py`. Instead, create a new `my_platform` folder in your custom_components, create an empty `__init__.py` file and move `light/my_platform.py` to `my_platform/light.py`.
  - Platforms can no longer have dependencies or requirements. Instead, create a [`manifest.json`](/docs/en/creating_integration_file_structure.html) in the `my_platform` folder to specify them, or add `REQUIREMENTS` or `DEPENDENCIES` constants to the `__init__.py` file.
