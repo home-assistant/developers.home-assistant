@@ -11,7 +11,7 @@ A user is also able to override the name of an entity in the entity registry. Wh
 
 ## Unique ID requirements
 
-An entity is looked up in the registry based on a combination of the plaform type (ie light), and the integraion name (domain) (ie hue) and the unique ID of the entity. It is therefore very important that the unique ID is unique! It is also important that it is not possible for the user to change the unique ID, because that means it will lose all its settings related to it.
+An entity is looked up in the registry based on a combination of the plaform type (ie `light`), and the integraion name (domain) (ie hue) and the unique ID of the entity. It is therefore very important that the unique ID is unique! It is also important that it is not possible for the user to change the unique ID, because that means it will lose all its settings related to it.
 
 Good sources for a unique ID:
 
