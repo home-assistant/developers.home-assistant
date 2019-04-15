@@ -18,7 +18,7 @@ Submit your improvements, fixes, and new features to Home Assistant one at a tim
 
     `git add .`
 
-    `git commit -m "Added some-feature"`
+    `git commit -m "Add some-feature"`
 
      * Write a meaningful commit message and not only `Update` or `Fix`.
      * Use a capital letter to start with your commit message.
