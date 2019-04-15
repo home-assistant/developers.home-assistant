@@ -47,13 +47,16 @@ You can use own security profile for you Add-on with AppArmor. Default it is ena
 
 ## Ingress
 
-Ingress allow to reach the Add-on web interface inside Home Assistant UI. User and Add-on developer need not care about the security or port forwarding. This feature would be loved by user and is not every time simple to implement for Add-on developer.
+Ingress allow users to access the add-on web interface via the Home Assistant UI. Authentication is handled by Home Assistanto, so neither the user nor the add-on developer will need to care about the security or port forwarding. Users love this feature, however it is not every time simple to implement for the add-on developer.
 
-The Add-on need provide the webinterface on port `8099`. This is configurable over the Add-on config, like a lot more. Make sure that the Add-on accept only connection from `172.30.32.2` on that port and he don't need provide any user login mechanics on this port. Now set `ingress: true` on Add-on configuration. You can read all details around path/port from your Add-on info API endpoint if you need this details to configure the web app.
+To add Ingress support, follow the following steps:
+- The add-on will need to provide the web interface on port `8099`. Make sure that the add-on accepts only connections from `172.30.32.2` on that port and that the connections are treated as authenticated.
+- Update add-on configuration and set `ingress: true`. Here it is also possible to configure the Ingress port (default 8099). 
+- If you need to configure the application inside your add-on with the right path and port, query the add-on info API endpoint.
+- If the application doesn't support relative paths or you can't set a base url, you can use nginx filter to replace the URL with correct path.
 
-If your web interface don't support relative path or you can't set a base url, you can use nginx filter to replace the URL with correct path.
+Ingress API gateway supports the following:
 
-Ingress API gateway support:
  * HTTP/1.x
  * Streaming content
  * Websockets
