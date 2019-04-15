@@ -53,6 +53,6 @@ $ docker run --rm --privileged -v \
     --all -t /data
 ```
 
-> If you are developing on macOS and using Docker for Mac, you may encounter an error message similar to the following: <code>error creating aufs mount to /var/lib/docker/aufs/mnt/<SOME_ID>-init: invalid argument</code>. A proposed workaround is to add the following to the Advanced Daemon JSON configuration via Docker > Preferences > Daemon > Advanced: <code>"storage-driver" : "aufs"</code>.
+> If you are developing on macOS and using Docker for Mac, you may encounter an error message similar to the following: <code>error creating aufs mount to /var/lib/docker/aufs/mnt/<SOME_ID>-init: invalid argument</code>. A proposed workaround is to add the following to the Advanced Daemon JSON configuration via Docker > Preferences > Daemon > Advanced: <code>"storage-driver" : "aufs"</code> or map the docker socket into container.
 
-[builder]: https://github.com/home-assistant/hassio-build/tree/master/builder
+[builder]: https://github.com/home-assistant/hassio-builder
