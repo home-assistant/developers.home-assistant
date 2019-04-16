@@ -47,7 +47,7 @@ You can use own security profile for you Add-on with AppArmor. Default it is ena
 
 ## Ingress
 
-Ingress allow users to access the add-on web interface via the Home Assistant UI. Authentication is handled by Home Assistanto, so neither the user nor the add-on developer will need to care about the security or port forwarding. Users love this feature, however it is not every time simple to implement for the add-on developer.
+Ingress allow users to access the add-on web interface via the Home Assistant UI. Authentication is handled by Home Assistant, so neither the user nor the add-on developer will need to care about the security or port forwarding. Users love this feature, however it is not every time simple to implement for the add-on developer.
 
 To add Ingress support, follow the following steps:
 - The add-on will need to provide the web interface on port `8099`. Make sure that the add-on accepts only connections from `172.30.32.2` on that port and that the connections are treated as authenticated.
