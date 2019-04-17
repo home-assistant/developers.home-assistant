@@ -13,9 +13,9 @@ sidebar_label: Climate
 | ---- | ---- | ------- | -----------
 | current_fan_mode | string | None | Returns the current fan mode.
 | current_hold_mode | string | None | The current hold mode, e.g., home, away, temp.
-| current_humidity | float/int | None | The current humidity.
+| current_humidity | float | None | The current humidity.
 | current_operation | string | None | The current operation (e.g. heat, cool, idle). Used to determine `state`.
-| current_swing_mode | ??? | None | Returns the fan setting.
+| current_swing_mode | string | None | Returns the fan setting.
 | current_temperature | float | None | The current temperature.
 | fan_list | list | None | Returns the list of available fan modes.
 | is_aux_heat_on | bool | None | Returns True if an auxiliary heater is on.
@@ -29,83 +29,47 @@ sidebar_label: Climate
 | precision | float | PRECISION_WHOLE | The precision of the temperature in the system: tenths for TEMP_CELSIUS, whole number otherwise.
 | state | string | None | Returns the current state.
 | state_attributes | dictionary | N/A | The optional state attributes: current temperature, minimum temperature, maximum temperature, and target temperature.
-| supported_features | list | ??? | Returns list of supported features.
+| supported_features | list | `NotImplementedError()` | Returns list of supported features.
 | swing_list | list | None | Returns the list of available swing modes.
-| target_humidity | ??? | None | The target humidity.
+| target_humidity | float | None | The target humidity.
 | target_temperature | float | None | The temperature currently set to be reached.
 | target_temperature_high | float | None | The upper bound target temperature
 | target_temperature_low | float | None | The lower bound target temperature
-| target_temperature_step | ??? | None | The supported step of target temperature
+| target_temperature_step | float | None | The supported step of target temperature
 | temperature_unit | string | `NotImplementedError` | The unit of temperature measurement for the system (e.g. Celsius).
-
-### Attributes
-
-| Name | Description
-| ---- | -----------
-| ATTR_AUX_HEAT | 
-| ATTR_AWAY_MODE | 
-| ATTR_CURRENT_HUMIDITY | 
-| ATTR_CURRENT_TEMPERATURE | 
-| ATTR_FAN_LIST | 
-| ATTR_FAN_MODE | 
-| ATTR_HOLD_MODE | 
-| ATTR_HUMIDITY | 
-| ATTR_MAX_HUMIDITY | 
-| ATTR_MAX_TEMP | 
-| ATTR_MIN_HUMIDITY | 
-| ATTR_MIN_TEMP | 
-| ATTR_OPERATION_LIST | 
-| ATTR_OPERATION_MODE | 
-| ATTR_SWING_LIST | 
-| ATTR_SWING_MODE | 
-| ATTR_TARGET_TEMP_HIGH | 
-| ATTR_TARGET_TEMP_LOW | 
-| ATTR_TARGET_TEMP_STEP | 
-
-### Services
-
-| Name | Description
-| ---- | -----------
-| SERVICE_SET_AUX_HEAT | 
-| SERVICE_SET_AWAY_MODE | 
-| SERVICE_SET_FAN_MODE | 
-| SERVICE_SET_HOLD_MODE | 
-| SERVICE_SET_HUMIDITY | 
-| SERVICE_SET_OPERATION_MODE | 
-| SERVICE_SET_SWING_MODE | 
-| SERVICE_SET_TEMPERATURE | 
-
 
 ### States
 
 | Name | Description
 | ---- | -----------
-| STATE_HEAT | 
-| STATE_COOL | 
-| STATE_IDLE | 
-| STATE_AUTO | 
-| STATE_MANUAL | 
-| STATE_DRY | 
-| STATE_FAN_ONLY | 
-| STATE_ECO | 
+| STATE_HEAT | The device is set to heat.
+| STATE_COOL | The device is set to cool.
+| STATE_IDLE | The device is idle.
+| STATE_AUTO | The device is set to auto.
+| STATE_MANUAL | The device is set to manual.
+| STATE_DRY | The device is set to dry.
+| STATE_FAN_ONLY | The device is set to fan-only.
+| STATE_ECO | The device is set to eco-mode.
 
 ### Supported features
 
+Supported features constants are combined using the bitwise or (`|`) operator.
+
 | Name | Description
 | ---- | -----------
-| SUPPORT_TARGET_TEMPERATURE | 
-| SUPPORT_TARGET_TEMPERATURE_HIGH | 
-| SUPPORT_TARGET_TEMPERATURE_LOW | 
-| SUPPORT_TARGET_HUMIDITY | 
-| SUPPORT_TARGET_HUMIDITY_HIGH | 
-| SUPPORT_TARGET_HUMIDITY_LOW | 
-| SUPPORT_FAN_MODE | 
-| SUPPORT_OPERATION_MODE | 
-| SUPPORT_HOLD_MODE | 
-| SUPPORT_SWING_MODE | 
-| SUPPORT_AWAY_MODE | 
-| SUPPORT_AUX_HEAT | 
-| SUPPORT_ON_OFF | 
+| SUPPORT_TARGET_TEMPERATURE | The device supports a target temperature.
+| SUPPORT_TARGET_TEMPERATURE_HIGH | The device supports an upper bound target temperature.
+| SUPPORT_TARGET_TEMPERATURE_LOW | The device supports a lower bound target temperature.
+| SUPPORT_TARGET_HUMIDITY | The device supports a target humidity.
+| SUPPORT_TARGET_HUMIDITY_HIGH | The device supports an upper bound target humidity.
+| SUPPORT_TARGET_HUMIDITY_LOW | The device supports a lower bound target humidity.
+| SUPPORT_FAN_MODE | The device supports fan modes.
+| SUPPORT_OPERATION_MODE | The device supports operation modes.
+| SUPPORT_HOLD_MODE | The device supports hold modes.
+| SUPPORT_SWING_MODE | The device supports swing modes.
+| SUPPORT_AWAY_MODE | The device supports away mode.
+| SUPPORT_AUX_HEAT | The device supports auxiliary heaters.
+| SUPPORT_ON_OFF | The device supports on/off states.
 
 
 ## Methods
