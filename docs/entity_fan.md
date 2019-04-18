@@ -35,7 +35,7 @@ A fan entity is a device that controls the different vetors of your fan susch as
 
 Only implement this method if the flag `SUPPORT_DIRECTION` is set.
 
-'''python
+```python
 class FanEntity(ToggleEntity):
     # Implement one of these methods.
 
@@ -44,13 +44,13 @@ class FanEntity(ToggleEntity):
 
         async def async_set_direction(self, direction: str):
             """Set the direction of the fan."""
-'''
+```
 
 ### Set speed
 
 Only implement this method if the flag `SUPPORT_SET_SPEED` is set.
 
-'''python
+```python
 class FanEntity(ToggleEntity):
     # Implement one of these methods.
 
@@ -59,11 +59,11 @@ class FanEntity(ToggleEntity):
 
      async def async_set_speed(self, speed: str):
         """Set the speed of the fan."""
-'''
+```
 
 ### Turn on
 
-'''python
+```python
 class FanEntity(ToggleEntity):
     # Implement one of these methods.
 
@@ -72,13 +72,13 @@ class FanEntity(ToggleEntity):
 
  	    async def async_turn_on(self, speed: str = None, **kwargs):
         	"""Turn on the fan."""
-'''
+```
 
 ### Oscillate
 
 Only implement this method if the flag `SUPPORT_OSCILLATE` is set.
 
-'''python
+```python
 class FanEntity(ToggleEntity):
     # Implement one of these methods.
 
@@ -87,7 +87,7 @@ class FanEntity(ToggleEntity):
 
  	    def async_oscillate(self, oscillating: bool):
         	"""Oscillate the fan."""
-'''
+```
 
 
 
