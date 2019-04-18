@@ -32,7 +32,7 @@ You can confirm the `mobile_app` component has been loaded by checking the `comp
 
 ### Registering the device
 
-To register the device, make an authenticated POST request to `/api/mobile_app/devices`. [More info on making authenticated requests.](auth_api.md#making-authenticated-requests)
+To register the device, make an authenticated POST request to `/api/mobile_app/registrations`. [More info on making authenticated requests.](auth_api.md#making-authenticated-requests)
 
 Example payload to send to the registration endpoint:
 
