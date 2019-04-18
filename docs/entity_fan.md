@@ -39,11 +39,11 @@ Only implement this method if the flag `SUPPORT_DIRECTION` is set.
 class FanEntity(ToggleEntity):
     # Implement one of these methods.
 
-        def set_direction(self, direction: str) -> None:
-            """Set the direction of the fan."""
+    def set_direction(self, direction: str) -> None:
+        """Set the direction of the fan."""
 
-        async def async_set_direction(self, direction: str):
-            """Set the direction of the fan."""
+    async def async_set_direction(self, direction: str):
+        """Set the direction of the fan."""
 ```
 
 ### Set speed
@@ -67,11 +67,11 @@ class FanEntity(ToggleEntity):
 class FanEntity(ToggleEntity):
     # Implement one of these methods.
 
-    	def turn_on(self, speed: str = None, **kwargs) -> None:
-        	"""Turn on the fan."""
+    def turn_on(self, speed: str = None, **kwargs) -> None:
+        """Turn on the fan."""
 
- 	    async def async_turn_on(self, speed: str = None, **kwargs):
-        	"""Turn on the fan."""
+    async def async_turn_on(self, speed: str = None, **kwargs):
+        """Turn on the fan."""
 ```
 
 ### Oscillate
@@ -82,11 +82,11 @@ Only implement this method if the flag `SUPPORT_OSCILLATE` is set.
 class FanEntity(ToggleEntity):
     # Implement one of these methods.
 
-    	def oscillate(self, oscillating: bool) -> None:
-        	"""Oscillate the fan."""
+    def oscillate(self, oscillating: bool) -> None:
+        """Oscillate the fan."""
 
- 	    def async_oscillate(self, oscillating: bool):
-        	"""Oscillate the fan."""
+    def async_oscillate(self, oscillating: bool):
+        """Oscillate the fan."""
 ```
 
 
