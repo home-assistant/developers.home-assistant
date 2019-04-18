@@ -4,23 +4,7 @@ sidebar_label: Light
 ---
 
 > This entry is incomplete. Contribution welcome.
-
-## Properties
-
-> Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
-
-| Name | Type | Default | Description
-| ---- | ---- | ------- | -----------
-
-## Methods
-
----
-title: Light Entity
-sidebar_label: Light
----
-
-> This entry is incomplete. Contribution welcome.
-A light entity is a device that controls the brightness, RGB value,color temperature and effects of a light source.
+A light entity is a device that controls the brightness, RGB value, color temperature and effects of a light source.
 
 ## Properties
 
@@ -41,8 +25,9 @@ A light entity is a device that controls the brightness, RGB value,color tempera
 
 
 ### Device Classes
+
 | Constant | Description 
-|----------|-----------------------|
+|----------|-----------------------
 | 'ATTR_RGB_COLOR' | Supports RGB color 
 | 'ATTR_XY_COLOR' | Supports user selecting a color from a color gradient graph
 | 'ATTR_HS_COLOR' | Supports picking a color based on shade and light
@@ -66,9 +51,10 @@ A light entity is a device that controls the brightness, RGB value,color tempera
 
 
 
-## Support Feature  
+## Supported Features
+
 | Constant | Description 
-|----------|-----------------------|
+|----------|-----------------------
 | 'SUPPORT_BRIGHTNESS' | Controls the brightness of a light source
 | 'SUPPORT_COLOR' | Controls the color a light source shows
 | 'SUPPORT_COLOR_TEMP' | Controls the representation a light source shows based on temperature
@@ -77,9 +63,10 @@ A light entity is a device that controls the brightness, RGB value,color tempera
 | 'SUPPORT_TRANSITION' | Controls the duration of transitions between color and effects
 | 'SUPPORT_WHITE_VALUE' | Controls the white light a light source shows.
 
+
 ## Methods
 
-'''
+```python
 class Profiles:
     """Representation of available color profiles."""
 	
@@ -96,13 +83,12 @@ class Profiles:
 	def get_default(cls, entity_id):
         	"""Return the default turn-on profile for the given light."""
 
-'''
+```
 
 
-'''
+```python
 class Light(ToggleEntity):
 	"""Representation of a light."""
 	class MyLight(Device):
 	
-
-'''
+```
