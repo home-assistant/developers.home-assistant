@@ -3,12 +3,10 @@ title: Light Entity
 sidebar_label: Light
 ---
 
-> This entry is incomplete. Contribution welcome.
-A light entity is a device that controls the brightness, RGB value, color temperature and effects of a light source.
+
+A light entity is a device that controls the brightness, RGB value,color temperature and effects of a light source.
 
 ## Properties
-
-> Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 
 | Name | Type | Default | Description
 | ---- | ---- | ---- | ----
@@ -25,7 +23,6 @@ A light entity is a device that controls the brightness, RGB value, color temper
 
 
 ### Device Classes
-
 | Constant | Description 
 |----------|-----------------------
 | 'ATTR_RGB_COLOR' | Supports RGB color 
@@ -39,7 +36,7 @@ A light entity is a device that controls the brightness, RGB value, color temper
 | 'ATTR_WHITE_VALUE' | Supports white light 
 | 'ATTR_BRIGHTNESS' | Supports adjusting the brightness
 | 'ATTR_BRIGHTNESS_PCT' | Supports adjusting the brightness
-| 'ATTR_PROFILE' | 
+| 'ATTR_PROFILE' | Representing a user profile
 | 'ATTR_FLASH' | Supports flash effects 
 | 'FLASH_SHORT' | Supports short flashes
 | 'FLASH_LONG' | Supports long flashes
@@ -51,8 +48,7 @@ A light entity is a device that controls the brightness, RGB value, color temper
 
 
 
-## Supported Features
-
+## Support Feature  
 | Constant | Description 
 |----------|-----------------------
 | 'SUPPORT_BRIGHTNESS' | Controls the brightness of a light source
@@ -63,10 +59,44 @@ A light entity is a device that controls the brightness, RGB value, color temper
 | 'SUPPORT_TRANSITION' | Controls the duration of transitions between color and effects
 | 'SUPPORT_WHITE_VALUE' | Controls the white light a light source shows.
 
-
 ## Methods
 
-```python
+
+'''python
+
+def preprocess_turn_on_alternatives(params):
+    """Process extra data for turn light on request."""
+
+
+'''
+
+'''python
+
+class SetIntentHandler(intent.IntentHandler):  
+    """Handle set color intents."""
+        async def async_handle(self, intent_obj):  
+		"""Handle the hass intent."""  
+	
+	async def async_setup(hass, config):  
+		"""Expose light control via state machine and services."""  
+
+	async def async_handle_light_on_service(service):  
+        	"""Handle a turn light on service call."""
+
+	async def async_setup_entry(hass, entry):  
+		"""Set up a config entry."""  
+
+	async def async_unload_entry(hass, entry):  
+		"""Unload a config entry."""  
+
+
+'''
+
+
+
+
+'''python
+
 class Profiles:
     """Representation of available color profiles."""
 	
@@ -83,12 +113,13 @@ class Profiles:
 	def get_default(cls, entity_id):
         	"""Return the default turn-on profile for the given light."""
 
-```
+'''
 
 
-```python
+'''python
 class Light(ToggleEntity):
 	"""Representation of a light."""
-	class MyLight(Device):
+	class MyLight(Device): 
 	
-```
+
+'''
