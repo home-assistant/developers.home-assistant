@@ -149,6 +149,9 @@ The config for an add-on is stored in `config.json`.
 | ingress | bool | no | Enable the ingress feature for the Add-on
 | ingress_port | integer | no | Default `8099`. For Add-ons they run on host network, you can use `0` and read the port later on API.
 | ingress_entry | string | no | Modify the URL entry point from `/`.
+| ingress_panel_icon | string | no | Default: mdi:puzzle. MDI icon for the menu panel integration.
+| ingress_panel_title | string | no | Default add-on name, but can Modify with this options.
+| ingress_panel_admin | bool | no | Default True. Make menu entry only available with admin privileged.
 
 
 ### Options / Schema
