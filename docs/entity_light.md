@@ -17,7 +17,6 @@ A light entity is a device that controls the brightness, RGB value,color tempera
 | hs_color | list | None | Return the hue and saturation color value [float, float].
 | max_minreds | int | int | Return the warmest color_temp that this light supports.
 | min_mireds | int | int | Return the coldest color_temp that this light supports.
-| state_attributes | list | list | Return optional state attributes.
 | supported_features | int | int | Flag supported features.
 | white_value | int | None | Return the white value of this light between 0..255.
 
