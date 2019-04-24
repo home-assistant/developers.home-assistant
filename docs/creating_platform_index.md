@@ -16,6 +16,6 @@ We have created two example integrations that should give you a look at how this
 
 One Home Assistant rule is that the integration should never interface directly with devices. Instead, it should interact with a third-party Python 3 library. This way, Home Assistant can share code with the Python community and keep the project maintainable.
 
-Once you have your Python library ready and published to PyPi, add it to the [manifest](creating_integration_manifest.md). It will now be time to implement the Entity base class that is provided by the integration that you are creating a platform for.
+Once you have your Python library ready and published to PyPI, add it to the [manifest](creating_integration_manifest.md). It will now be time to implement the Entity base class that is provided by the integration that you are creating a platform for.
 
 Find your integration at the [entity index](entity_index.md) to see what methods and properties are available to implement.
