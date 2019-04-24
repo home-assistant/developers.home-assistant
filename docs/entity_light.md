@@ -24,17 +24,17 @@ A light entity is a device that controls the brightness, RGB value,color tempera
 ## Support Feature  
 | Constant | Description 
 |----------|-----------------------
-| 'SUPPORT_BRIGHTNESS' | Controls the brightness of a light source
-| 'SUPPORT_COLOR' | Controls the color a light source shows
-| 'SUPPORT_COLOR_TEMP' | Controls the representation a light source shows based on temperature
-| 'SUPPORT_EFFECT' | Controls the effect a light source shows
-| 'SUPPORT_FLASH' | Controls the duration of a flash a light source shows
-| 'SUPPORT_TRANSITION' | Controls the duration of transitions between color and effects
-| 'SUPPORT_WHITE_VALUE' | Controls the white light a light source shows.
+| `SUPPORT_BRIGHTNESS` | Controls the brightness of a light source
+| `SUPPORT_COLOR` | Controls the color a light source shows
+| `SUPPORT_COLOR_TEMP` | Controls the representation a light source shows based on temperature
+| `SUPPORT_EFFECT` | Controls the effect a light source shows
+| `SUPPORT_FLASH` | Controls the duration of a flash a light source shows
+| `SUPPORT_TRANSITION` | Controls the duration of transitions between color and effects
+| `SUPPORT_WHITE_VALUE` | Controls the white light a light source shows.
 
 ## Methods
 
-'''python
+```python
 class MyLightDevice(LightDevice):
   def turn_on(self):
     """Turn the device on."""
@@ -42,11 +42,11 @@ class MyLightDevice(LightDevice):
   async def async_turn_on(self):
     """Turn device on."""
 
-'''
+```
 
 
-'''python
-class MyLightDevice(LightDevice):
+```python
+class MyLightDevice(ToggleEntity):
 
   def turn_off(self):
     """Turn the device off."""
@@ -54,4 +54,4 @@ class MyLightDevice(LightDevice):
   async def async_turn_off(self):
     """Turn device off."""
 
-'''
+```
