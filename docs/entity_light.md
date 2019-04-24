@@ -21,32 +21,6 @@ A light entity is a device that controls the brightness, RGB value,color tempera
 | white_value | int | None | Return the white value of this light between 0..255.
 
 
-### Device Classes
-| Constant | Description 
-|----------|-----------------------
-| 'ATTR_RGB_COLOR' | Supports RGB color 
-| 'ATTR_XY_COLOR' | Supports user selecting a color from a color gradient graph
-| 'ATTR_HS_COLOR' | Supports picking a color based on shade and light
-| 'ATTR_COLOR_TEMP' | Supports color correlation with temperature
-| 'ATTR_KELVIN' | Supports Kelvin readings
-| 'ATTR_MIN_MIREDS' | Supports minimum micro reciprocal degree reading
-| 'ATTR_MAX_MIREDS' | Supports maximum micro reciprocal degree reading
-| 'ATTR_COLOR_NAME' | Supports naming of colors
-| 'ATTR_WHITE_VALUE' | Supports white light 
-| 'ATTR_BRIGHTNESS' | Supports adjusting the brightness
-| 'ATTR_BRIGHTNESS_PCT' | Supports adjusting the brightness
-| 'ATTR_PROFILE' | Representing a user profile
-| 'ATTR_FLASH' | Supports flash effects 
-| 'FLASH_SHORT' | Supports short flashes
-| 'FLASH_LONG' | Supports long flashes
-| 'ATTR_EFFECT_LIST' | Supports a list of effects
-| 'ATTR_EFFECT' | Shows which effect is being showed
-| 'EFFECT_COLORLOOP' | Supports a color loop
-| 'EFFECT_RANDOM' | Supports a random effects
-| 'EFFECT_WHITE' | Supports white light effects
-
-
-
 ## Support Feature  
 | Constant | Description 
 |----------|-----------------------
@@ -58,3 +32,26 @@ A light entity is a device that controls the brightness, RGB value,color tempera
 | 'SUPPORT_TRANSITION' | Controls the duration of transitions between color and effects
 | 'SUPPORT_WHITE_VALUE' | Controls the white light a light source shows.
 
+## Methods
+
+'''python
+class MyLightDevice(LightDevice):
+  def turn_on(self):
+    """Turn the device on."""
+    
+  async def async_turn_on(self):
+    """Turn device on."""
+
+'''
+
+
+'''python
+class MyLightDevice(LightDevice):
+
+  def turn_off(self):
+    """Turn the device off."""
+  
+  async def async_turn_off(self):
+    """Turn device off."""
+
+'''
