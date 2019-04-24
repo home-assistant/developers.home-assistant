@@ -53,7 +53,7 @@ GitHub usernames or team names of people that are responsible for this integrati
 
 Requirements are Python libraries or modules that you would normally install using `pip` for your component. Home Assistant will try to install the requirements into the `deps` subdirectory of the Home Assistant [configuration directory](https://www.home-assistant.io/docs/configuration/) if you are not using a `venv` or in something like `path/to/venv/lib/python3.6/site-packages` if you running in a virtual environment. This will make sure that all requirements are present at startup. If steps fail, like missing packages for the compilation of a module or other install errors, the component will fail to load.
 
-Requirements is a list of strings. Each entry is a `pip` compatible string. For example, the media player Cast platform depends on the Python package PyChromecast v0.6.12: `['pychromecast==0.6.12']`.
+Requirements is an array of strings. Each entry is a `pip` compatible string. For example, the media player Cast platform depends on the Python package PyChromecast v3.2.0: `["pychromecast==3.2.0"]`.
 
 > Because of how Home Assistant installs requirements on demand, actual Python imports of your requirements should be done inside functions instead of at the root level of your Python files.
 
@@ -62,7 +62,7 @@ Requirements is a list of strings. Each entry is a `pip` compatible string. For 
 During the development of a component, it can be useful to test against different versions of a requirement. This can be done in two steps, using `pychromecast` as an example:
 
 ```bash
-pip install pychromecast==0.6.13 --target ~/.homeassistant/deps
+pip install pychromecast==3.2.0 --target ~/.homeassistant/deps
 hass --skip-pip
 ```
 
@@ -72,6 +72,6 @@ If you need to make changes to a requirement to support your component, it's als
 
 ```bash
 git clone https://github.com/balloob/pychromecast.git
-pip install ./pychromecast
+pip install -e ./pychromecast
 hass --skip-pip
 ```
