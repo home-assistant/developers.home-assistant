@@ -17,6 +17,7 @@ sidebar_label: Media Player
 | source_list | list | None | The list of possible input sources for the media player. (This list should contain human readable names, suitible for frontend display)
 | media_image_url | string | None | URL that represents the current image.
 | media_image_remotely_accessible | boolean | False | Return `True` if property `media_image_url` is accessible outside of the home network.
+| device_class | string | `None` | Type of binary sensor.
 
 ## Methods
 ### Select sound mode
@@ -65,3 +66,9 @@ Required. Returns one of the defined constants from the below list that matches 
       def media_content_type(self):
         """Content type of current playing media."""
 
+### Available device classes
+Optional. What type of media device is this. It will possibly map to google device types.
+| Value | Description
+| ----- | -----------
+| tv | Device is a television type device.
+| speaker | Device is speakers or stereo type device.
