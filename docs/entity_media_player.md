@@ -15,7 +15,8 @@ sidebar_label: Media Player
 | sound_mode_list | list | None | Dynamic list of available sound modes (set by platform, empty means sound mode not supported)
 | source | string | None | The currently selected input source for the media player.
 | source_list | list | None | The list of possible input sources for the media player. (This list should contain human readable names, suitible for frontend display)
-
+| media_image_url | string | None | URL that represents the current image.
+| media_image_remotely_accessible | boolean | False | Return `True` if property `media_image_url` is accessible outside of the home network.
 
 ## Methods
 ### Select sound mode
@@ -23,7 +24,7 @@ Optional. Switch the sound mode of the media player.
 
     class MyMediaPlayer(MediaPlayerDevice):
       # Implement one of these methods.
-      
+
       def select_sound_mode(self, sound_mode):
           """Switch the sound mode of the entity."""
 
