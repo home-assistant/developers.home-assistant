@@ -5,7 +5,7 @@ authorFBID: 297400035
 title: Introducing Integrations
 ---
 
-We have finished [the great migration](/blog/2019/02/19/the-great-migration.html). The result will be released as part of Home Assistant 0.92. The release has been a bit delayed because we had a lot of things to fix! With the migration done, we now consider components and platforms that share the same name to be part of the same integration. Each integration is either a single Python file, or a folder with an `__init__.py`. file. We have updated the documentation and introduced a new section for [integrations]([`manifest.json`](/docs/en/creating_integration_file_structure.html)).
+We have finished [the great migration](/blog/2019/02/19/the-great-migration.html). The result will be released as part of Home Assistant 0.92. The release has been a bit delayed because we had a lot of things to fix! With the migration done, we now consider components and platforms that share the same name to be part of the same integration. Each integration is either a single Python file, or a folder with an `__init__.py`. file. We have updated the documentation and introduced a new section for [integrations](/docs/en/creating_integration_file_structure.html).
 
 Home Assistant 0.92 introduces a new [`manifest.json`](/docs/en/creating_integration_manifest.html) for integrations. This file, which is optional for custom components, is used by integrations to specify metadata: name, link to the documentation, dependencies, requirements and code owners. We are exploring leveraging `manifest.json` for additional future features, like tracking breaking changes or allowing custom components to provide config flows and being discovered.
 
