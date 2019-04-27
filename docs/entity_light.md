@@ -35,24 +35,27 @@ A light entity is a device that controls the brightness, RGB value,color tempera
 
 ## Methods
 
+# Turn on Light Device
+
 ```python
-class MyLightDevice(ToggleEntity):
-  def turn_on(self):
+class MyLightDevice(LightDevice):
+  def turn_on(self, **kwargs):
     """Turn the device on."""
     
-  async def async_turn_on(self):
+  async def async_turn_on(self, **kwargs):
     """Turn device on."""
 
 ```
 
+# Turn Off Light Device
 
 ```python
-class MyLightDevice(ToggleEntity):
+class MyLightDevice(LightDevice):
 
-  def turn_off(self):
+  def turn_off(self, **kwargs):
     """Turn the device off."""
   
-  async def async_turn_off(self):
+  async def async_turn_off(self, **kwargs):
     """Turn device off."""
 
 ```
