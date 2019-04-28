@@ -261,6 +261,9 @@
         "title": "Weather Entity",
         "sidebar_label": "Weather"
       },
+      "external_api_rest_python": {
+        "title": "REST API - Python bindings"
+      },
       "external_api_rest": {
         "title": "REST API"
       },
@@ -810,6 +813,10 @@
         "title": "Data Entry Flow",
         "sidebar_label": "Introduction"
       },
+      "version-0.77.0/version-0.77.0-external_api_rest_python": {
+        "title": "REST API - Python bindings",
+        "sidebar_label": "REST API - Python bindings"
+      },
       "version-0.77.0/version-0.77.0-frontend_data": {
         "title": "Frontend data",
         "sidebar_label": "Data"
@@ -1334,6 +1341,71 @@
       },
       "version-0.91.2/version-0.91.2-maintenance": {
         "title": "Maintenance"
+      },
+      "version-0.92.0/version-0.92.0-app_integration_setup": {
+        "title": "Connecting to an instance"
+      },
+      "version-0.92.0/version-0.92.0-auth_auth_module": {
+        "title": "Multi-factor Authentication Modules"
+      },
+      "version-0.92.0/version-0.92.0-creating_integration_manifest": {
+        "title": "Integration Manifest",
+        "sidebar_label": "Manifest"
+      },
+      "version-0.92.0/version-0.92.0-creating_platform_index": {
+        "title": "Integration Platforms",
+        "sidebar_label": "Platforms"
+      },
+      "version-0.92.0/version-0.92.0-development_submitting": {
+        "title": "Submit your work"
+      },
+      "version-0.92.0/version-0.92.0-entity_climate": {
+        "title": "Climate Entity",
+        "sidebar_label": "Climate"
+      },
+      "version-0.92.0/version-0.92.0-entity_fan": {
+        "title": "Fan Entity",
+        "sidebar_label": "Fan"
+      },
+      "version-0.92.0/version-0.92.0-entity_media_player": {
+        "title": "Media Player Entity",
+        "sidebar_label": "Media Player"
+      },
+      "version-0.92.0/version-0.92.0-entity_registry_index": {
+        "title": "Entity Registry",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.92.0/version-0.92.0-external_api_websocket": {
+        "title": "WebSocket API"
+      },
+      "version-0.92.0/version-0.92.0-hassio_addon_communication": {
+        "title": "Add-On Communication"
+      },
+      "version-0.92.0/version-0.92.0-hassio_addon_config": {
+        "title": "Add-On Configuration"
+      },
+      "version-0.92.0/version-0.92.0-hassio_addon_index": {
+        "title": "Developing an add-on",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.92.0/version-0.92.0-hassio_addon_presentation": {
+        "title": "Presenting your add-on"
+      },
+      "version-0.92.0/version-0.92.0-hassio_addon_publishing": {
+        "title": "Publishing your add-on"
+      },
+      "version-0.92.0/version-0.92.0-hassio_addon_security": {
+        "title": "Add-on security"
+      },
+      "version-0.92.0/version-0.92.0-hassio_addon_testing": {
+        "title": "Local add-on testing"
+      },
+      "version-0.92.0/version-0.92.0-hassio_debugging": {
+        "title": "Debugging Hass.io"
+      },
+      "version-0.92.0/version-0.92.0-hassio_hass": {
+        "title": "Hass.io <> Home Assistant integration development",
+        "sidebar_label": "HASS Integration development"
       }
     },
     "links": {

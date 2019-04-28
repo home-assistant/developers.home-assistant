@@ -112,6 +112,7 @@
     ],
     "External API": [
       "version-0.83.0-external_api_rest",
+      "version-0.83.0-external_api_rest_python",
       "version-0.83.0-external_api_websocket",
       "version-0.83.0-external_api_server_sent_events"
     ],
