@@ -52,7 +52,11 @@ A couple of points to remember:
 
 If you have a component that is taking care of setting up platforms then you don't need to create a new page for every supported platform. Simply add all supported types to `ha_category:` and use `redirect_from:` to list the dummy URL of the platforms.
 
-```text
+<p class='note'>
+Use the `redirect_from` only if you want to redirect urls from existing pages. When you add documentation for a new component / integration, you don't need to add this and can even cause you to not see your page in the netlify builds.
+</p>
+
+```yaml
 ...
 ha_category:
   - DIY
