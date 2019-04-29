@@ -1406,6 +1406,29 @@
       "version-0.92.0/version-0.92.0-hassio_hass": {
         "title": "Hass.io <> Home Assistant integration development",
         "sidebar_label": "HASS Integration development"
+      },
+      "version-0.92.1/version-0.92.1-creating_integration_manifest": {
+        "title": "Integration Manifest",
+        "sidebar_label": "Manifest"
+      },
+      "version-0.92.1/version-0.92.1-development_checklist": {
+        "title": "Development Checklist",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.92.1/version-0.92.1-entity_fan": {
+        "title": "Fan Entity",
+        "sidebar_label": "Fan"
+      },
+      "version-0.92.1/version-0.92.1-entity_light": {
+        "title": "Light Entity",
+        "sidebar_label": "Light"
+      },
+      "version-0.92.1/version-0.92.1-entity_media_player": {
+        "title": "Media Player Entity",
+        "sidebar_label": "Media Player"
+      },
+      "version-0.92.1/version-0.92.1-internationalization_custom_component_localization": {
+        "title": "Custom Component Localization"
       }
     },
     "links": {
