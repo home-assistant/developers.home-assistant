@@ -3,7 +3,7 @@ title: Fan Entity
 sidebar_label: Fan
 ---
 
-A fan entity is a device that controls the different vetors of your fan susch as speed, direction and oscillation. Derive enitity platforms from ['homeassistant.components.fan.FanDevice'](https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/fan/__init__.py).
+A fan entity is a device that controls the different vectors of your fan such as speed, direction and oscillation. Derive enitity platforms from ['homeassistant.components.fan.FanDevice'](https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/fan/__init__.py).
 
 ## Properties
 
