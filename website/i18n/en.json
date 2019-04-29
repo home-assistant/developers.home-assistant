@@ -813,10 +813,6 @@
         "title": "Data Entry Flow",
         "sidebar_label": "Introduction"
       },
-      "version-0.77.0/version-0.77.0-external_api_rest_python": {
-        "title": "REST API - Python bindings",
-        "sidebar_label": "REST API - Python bindings"
-      },
       "version-0.77.0/version-0.77.0-frontend_data": {
         "title": "Frontend data",
         "sidebar_label": "Data"
