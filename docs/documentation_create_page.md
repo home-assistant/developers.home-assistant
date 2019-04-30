@@ -48,23 +48,6 @@ A couple of points to remember:
 - Add screenshots to support the user where it makes sense.
 - Add the type of the device(s) (incl. firmware) you have tested when you know that there are multiple out there.
 
-### Components and platforms
-
-If you have a component that is taking care of setting up platforms then you don't need to create a new page for every supported platform. Simply add all supported types to `ha_category:` and use `redirect_from:` to list the dummy URL of the platforms.
-
-```text
-...
-ha_category:
-  - DIY
-  - Binary Sensor
-  - Switch
-redirect_from:
-  - /components/binary_sensor.raspihats/
-  - /components/switch.raspihats/
----
-...
-```
-
 ### Configuration
 
 Every platform page should contain a configuration sample. This sample must contain only the **required** variables to make it easy to copy and paste it for users into their `configuration.yaml` file.
