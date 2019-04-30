@@ -21,7 +21,7 @@ Or a minimal example that you can copy into your project:
 ```json
 {
   "domain": "your_domain_name",
-  "name": "Your Intgration",
+  "name": "Your Integration",
   "documentation": "https://www.example.com",
   "dependencies": [],
   "codeowners": [],
