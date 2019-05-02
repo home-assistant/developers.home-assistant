@@ -61,3 +61,10 @@ class MySwitch(SwitchDevice):
     async def async_toggle(self, **kwargs):
         """Toggle the entity."""
 ```
+
+### Available device classes
+Optional. What type of device this. It will possibly map to google device types.
+| Value | Description
+| ----- | -----------
+| outlet | Device is an outlet for power.
+| switch | Device is switch for some type of entity.
