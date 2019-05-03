@@ -59,6 +59,7 @@ Required. Returns one of the defined constants from the below list that matches 
 |MEDIA_TYPE_IMAGE|
 |MEDIA_TYPE_URL|
 |MEDIA_TYPE_GAME|
+|MEDIA_TYPE_APP|
 
     class MyMediaPlayer(MediaPlayerDevice):
       # Implement the following method.
