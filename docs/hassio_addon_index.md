@@ -17,7 +17,7 @@ Under the hood, add-ons are Docker images published in [Docker Hub](https://hub.
 1. [Security](hassio_addon_security.md)
 
 
-Usefully links:
+Useful links:
 
 * [Hass.io Supervisor](https://github.com/home-assistant/hassio)
 * [Hass.io Core Add-ons](https://github.com/home-assistant/hassio-addons)
