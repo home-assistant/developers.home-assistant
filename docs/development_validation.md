@@ -11,8 +11,9 @@ Besides [voluptuous](https://pypi.python.org/pypi/voluptuous) default types, man
 - Types: `string`, `byte`, and `boolean`
 - Entity ID: `entity_id` and `entity_ids`
 - Numbers: `small_float` and `positive_int`
-- Time: `time`, `time_zone`
-- Misc: `template`, `slug`, `temperature_unit`, `latitude`, `longitude`, `isfile`, `sun_event`, `ensure_list`, `port`, `url`,  and `icon`
+- Time: `time` and `time_zone`
+- Network: `port`, `url`, `ip_address`, `ipv4_address`, `ipv6_address`, `mac48_address` and `mac64_address`
+- Misc: `template`, `slug`, `temperature_unit`, `latitude`, `longitude`, `isfile`, `sun_event`, `ensure_list` and `icon`
 
 To validate platforms using [MQTT](https://www.home-assistant.io/components/mqtt/), `valid_subscribe_topic` and `valid_publish_topic` are available.
 
