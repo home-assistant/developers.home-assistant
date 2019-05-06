@@ -44,7 +44,7 @@ $ tox -e py36 -- tests/test_core.py --duration=10
 Running tox will invoke the full test suite. Even if you specify which tox target to run, you still run all tests inside that target. That's not very convenient to quickly iterate on your code! To be able to run the specific test suites without Tox, you'll need to install the test dependencies into your Python environment:
 
 ```bash
-$ pip3 install -r requirements_test_all.txt
+$ pip3 install -r requirements_test_all.txt -c homeassistant/package_constraints.txt
 ```
 
 Now that you have all test dependencies installed, you can run tests on individual files:
