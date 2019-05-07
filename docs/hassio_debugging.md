@@ -8,6 +8,35 @@ title: "Debugging Hass.io"
 
 The following debug tips and tricks are for developers who are running the Hass.io image and are working on the base image. If you use the generic Linux installer script, you should be able to access your host and logs as per your host.
 
+## Debug Supervisor
+
+Visual Studio Code config:
+```json
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Hass.io remote debug",
+            "type": "python",
+            "request": "attach",
+            "port": 33333,
+            "host": "IP",
+            "pathMappings": [
+                {
+                    "localRoot": "${workspaceFolder}",
+                    "remoteRoot": "/usr/src/hassio"
+                }
+            ]
+        }
+    ]
+}
+```
+
+You need set the dev mode on supervisor and enable debug with options. You need also install the Remote debug Add-on from Developer Repository to expose the debug port to Host.
+
 ## SSH access to the host
 
 ### resinOS based Hass.io (deprecated)
