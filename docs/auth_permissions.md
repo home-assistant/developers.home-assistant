@@ -179,14 +179,14 @@ async def handle_entity_service(call):
                 raise UnknownUser(
                     context=call.context,
                     entity_id=entity_id,
-                    policy=POLICY_CONTROL,
+                    permission=POLICY_CONTROL,
                 )
 
             if not user.permissions.check_entity(entity_id, POLICY_CONTROL):
                 raise Unauthorized(
                     context=call.context,
                     entity_id=entity_id,
-                    policy=POLICY_CONTROL,
+                    permission=POLICY_CONTROL,
                 )
 
         # Do action on entity
