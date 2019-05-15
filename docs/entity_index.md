@@ -91,7 +91,7 @@ Use these lifecycle hooks to execute code when certain events happen to the enti
 
 ### `async_added_to_hass()`
 
-Called when an entity has their entity_id and hass object assigned, before it is written to the state machine for the first time. Example uses: restore the state or subscribe to updates.
+Called when an entity has their entity_id and hass object assigned, before it is written to the state machine for the first time. Example uses: restore the state, subscribe to updates or set callback/dispatch function/listener.
 
 ### `async_will_remove_from_hass()`
 
