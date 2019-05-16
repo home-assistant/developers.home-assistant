@@ -1,0 +1,16 @@
+#!/bin/sh
+
+cd website
+npm install
+npm run write-translations
+
+wget -q https://downloads.crowdin.com/cli/v2/crowdin-cli.zip
+
+unzip crowdin-cli.zip -d crowdin-cli
+
+cp crowdin-cli/**/crowdin-cli.jar .
+
+java -jar crowdin-cli.jar --config ../crowdin.yaml upload sources --auto-update -b master
+java -jar crowdin-cli.jar --config ../crowdin.yaml download -b master
+
+npm run build
