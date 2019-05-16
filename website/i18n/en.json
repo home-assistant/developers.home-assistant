@@ -1429,6 +1429,45 @@
       },
       "version-0.92.1/version-0.92.1-internationalization_custom_component_localization": {
         "title": "Custom Component Localization"
+      },
+      "version-0.93.0/version-0.93.0-auth_permissions": {
+        "title": "Permissions"
+      },
+      "version-0.93.0/version-0.93.0-creating_integration_manifest": {
+        "title": "Integration Manifest",
+        "sidebar_label": "Manifest"
+      },
+      "version-0.93.0/version-0.93.0-development_testing": {
+        "title": "Testing your code"
+      },
+      "version-0.93.0/version-0.93.0-documentation_create_page": {
+        "title": "Create a new page"
+      },
+      "version-0.93.0/version-0.93.0-entity_index": {
+        "title": "Entity",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.93.0/version-0.93.0-entity_media_player": {
+        "title": "Media Player Entity",
+        "sidebar_label": "Media Player"
+      },
+      "version-0.93.0/version-0.93.0-entity_registry_index": {
+        "title": "Entity Registry",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.93.0/version-0.93.0-entity_switch": {
+        "title": "Switch Entity",
+        "sidebar_label": "Switch"
+      },
+      "version-0.93.0/version-0.93.0-hassio_addon_index": {
+        "title": "Developing an add-on",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.93.0/version-0.93.0-hassio_addon_security": {
+        "title": "Add-on security"
+      },
+      "version-0.93.0/version-0.93.0-hassio_debugging": {
+        "title": "Debugging Hass.io"
       }
     },
     "links": {
