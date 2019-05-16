@@ -35,4 +35,4 @@ async def async_setup(hass, config):
 
 That's it! If you load this, you will see a new state in the state machine.
 
-To load this, add `hello_state:` to your `configuration.yaml` file and create a file `<config_dir>/custom_components/hello_state/__init__.py` with the below code to test it locally.
+To load this, add `hello_state:` to your `configuration.yaml` file and create a file `<config_dir>/custom_components/hello_state/__init__.py` with one of the two codeblocks above to test it locally.
