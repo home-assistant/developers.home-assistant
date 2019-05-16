@@ -44,6 +44,7 @@ const siteConfig = {
     {doc: 'development_index', label: 'Backend'},
     {doc: 'misc', label: 'Misc'},
     { blog: true, label: 'Blog' },
+    { languages: true },
   ],
 
   // If you have users set above, you add it here:
