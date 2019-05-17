@@ -1,3 +1,4 @@
+
 /**
  * Copyright (c) 2017-present, Facebook, Inc.
  *
@@ -99,6 +100,12 @@ const siteConfig = {
   repoFrontendUrl: 'https://github.com/home-assistant/home-assistant-polymer',
   repoFrontendWebsite: 'https://github.com/home-assistant/home-assistant.io',
   repoDevWebsite: 'https://github.com/home-assistant/developers.home-assistant',
+
+  algolia: {
+    apiKey: 'd0245452c36b10cec4b8b5bad04e06fc',
+    indexName: 'my-index-name',
+    algoliaOptions: {}
+  },
 };
 
 module.exports = siteConfig;
