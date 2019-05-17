@@ -103,7 +103,7 @@ const siteConfig = {
 
   algolia: {
     apiKey: 'd0245452c36b10cec4b8b5bad04e06fc',
-    indexName: 'my-index-name',
+    indexName: 'home-assistant-dev',
     algoliaOptions: {}
   },
 };
