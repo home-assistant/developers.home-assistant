@@ -27,7 +27,7 @@ const languages = [
     tag: 'bs-BA',
   },
   {
-    enabled: false,
+    enabled: true,
     name: 'Català',
     tag: 'ca',
   },
@@ -47,7 +47,7 @@ const languages = [
     tag: 'de',
   },
   {
-    enabled: false,
+    enabled: true,
     name: 'Ελληνικά',
     tag: 'el',
   },
@@ -97,7 +97,7 @@ const languages = [
     tag: 'af',
   },
   {
-    enabled: false,
+    enabled: true,
     name: '한국어',
     tag: 'ko',
   },
@@ -172,7 +172,7 @@ const languages = [
     tag: 'vi',
   },
   {
-    enabled: false,
+    enabled: true,
     name: '中文',
     tag: 'zh-CN',
   },
