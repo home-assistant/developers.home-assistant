@@ -6,20 +6,20 @@ sidebar_label: Light
 
 A light entity is a device that controls the brightness, RGB value,color temperature and effects of a light source.
 
-## Properties
+## Propietats
 
-| Name               | Tipus  | Default | Descripció                                                |
-| ------------------ | ------ | ------- | --------------------------------------------------------- |
-| brightness         | int    | None    | Return the brightness of this light between 0..255        |
-| color_temp         | int    | None    | Return the CT color value in mireds.                      |
-| effect             | String | None    | Return the current effect.                                |
-| effect_list        | list   | None    | Return the list of supported effects.                     |
-| hs_color           | list   | None    | Return the hue and saturation color value [float, float]. |
-| is_on              | bool   | bool    | Returns if the light entity is on or not.                 |
-| max_minreds        | int    | int     | Return the warmest color_temp that this light supports.   |
-| min_mireds         | int    | int     | Return the coldest color_temp that this light supports.   |
-| supported_features | int    | int     | Flag supported features.                                  |
-| white_value        | int    | None    | Return the white value of this light between 0..255.      |
+| Name               | Tipus  | Per defecte | Descripció                                                |
+| ------------------ | ------ | ----------- | --------------------------------------------------------- |
+| brightness         | int    | Cap         | Return the brightness of this light between 0..255        |
+| color_temp         | int    | Cap         | Return the CT color value in mireds.                      |
+| effect             | String | Cap         | Return the current effect.                                |
+| effect_list        | list   | Cap         | Return the list of supported effects.                     |
+| hs_color           | list   | Cap         | Return the hue and saturation color value [float, float]. |
+| is_on              | bool   | bool        | Returns if the light entity is on or not.                 |
+| max_minreds        | int    | int         | Return the warmest color_temp that this light supports.   |
+| min_mireds         | int    | int         | Return the coldest color_temp that this light supports.   |
+| supported_features | int    | int         | Flag supported features.                                  |
+| white_value        | int    | Cap         | Return the white value of this light between 0..255.      |
 
 ## Support Feature
 
