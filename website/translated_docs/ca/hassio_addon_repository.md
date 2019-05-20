@@ -22,8 +22,8 @@ Each repository is required to contain `repository.json` at the root in the git 
 }
 ```
 
-| Clau       | Required | Descripció                                                            |
-| ---------- | -------- | --------------------------------------------------------------------- |
-| name       | yes      | Name of the repository                                                |
-| url        | no       | Homepage of the repository. Here you can explain the various add-ons. |
-| maintainer | no       | Contact info of the maintainer.                                       |
+| Clau       | Obligatori | Descripció                                                            |
+| ---------- | ---------- | --------------------------------------------------------------------- |
+| name       | yes        | Name of the repository                                                |
+| url        | no         | Homepage of the repository. Here you can explain the various add-ons. |
+| maintainer | no         | Contact info of the maintainer.                                       |
