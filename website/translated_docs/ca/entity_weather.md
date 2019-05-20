@@ -3,34 +3,34 @@ title: Weather Entity
 sidebar_label: Weather
 ---
 
-## Properties
+## Propietats
 
-> Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+> Les propietats han de retornar només informació en memòria i no fer transaccions I/O (com peticions web). Implementa el mètode `update()` or `async_update()` per obtenir les dades.
 
-| Name         | Tipus  | Default      | Descripció                                      |
-| ------------ | ------ | ------------ | ----------------------------------------------- |
-| state        | string | **Required** | The current weather condition.                  |
-| temperature  | float  | **Required** | The current temperature in °C or °F.            |
-| pressure     | float  | `None`       | The current air pressure in hPa or inHg.        |
-| humidity     | float  | `None`       | The current humidity in %.                      |
-| visibility   | float  | `None`       | The current visibility in km or mi.             |
-| wind_speed   | float  | `None`       | The current wind speed in km/h or mi/h.         |
-| wind_bearing | string | `None`       | The current wind bearing, 1-3 letters.          |
-| forecast     | array  | `None`       | Daily or Hourly forecast data.                  |
-| attribution  | string | `None`       | The branding text required by the API provider. |
+| Name         | Tipus   | Per defecte    | Descripció                                      |
+| ------------ | ------- | -------------- | ----------------------------------------------- |
+| state        | string  | **Obligatori** | The current weather condition.                  |
+| temperature  | flotant | **Obligatori** | The current temperature in °C or °F.            |
+| pressure     | flotant | `Cap`          | The current air pressure in hPa or inHg.        |
+| humidity     | flotant | `Cap`          | The current humidity in %.                      |
+| visibility   | flotant | `Cap`          | The current visibility in km or mi.             |
+| wind_speed   | flotant | `Cap`          | The current wind speed in km/h or mi/h.         |
+| wind_bearing | string  | `Cap`          | The current wind bearing, 1-3 letters.          |
+| forecast     | array   | `Cap`          | Daily or Hourly forecast data.                  |
+| attribution  | string  | `Cap`          | The branding text required by the API provider. |
 
-Properties have to follow the units defined in the `unit_system`.
+Les propietats han de estar en les unitats definides a `unit_system`.
 
 ### Forecast
 
 Forecast data should either be daily or hourly.
 
-| Name        | Tipus  | Default      | Descripció                              |
-| ----------- | ------ | ------------ | --------------------------------------- |
-| datetime    | string | **Required** | UTC Date time in RFC 3339 format.       |
-| temperature | float  | **Required** | The higher temperature in °C or °F      |
-| condition   | string | `None`       | The weather condition at this point.    |
-| templow     | float  | `None`       | The lower daily Temperature in °C or °F |
+| Name        | Tipus   | Per defecte    | Descripció                              |
+| ----------- | ------- | -------------- | --------------------------------------- |
+| datetime    | string  | **Obligatori** | UTC Date time in RFC 3339 format.       |
+| temperature | flotant | **Obligatori** | The higher temperature in °C or °F      |
+| condition   | string  | `Cap`          | The weather condition at this point.    |
+| templow     | flotant | `Cap`          | The lower daily Temperature in °C or °F |
 
 ### Recommended values for state and condition
 
