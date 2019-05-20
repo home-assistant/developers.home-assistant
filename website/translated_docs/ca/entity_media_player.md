@@ -5,19 +5,19 @@ sidebar_label: Media Player
 
 > This entry is incomplete. Contribution welcome.
 
-## Properties
+## Propietats
 
-> Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+> Les propietats han de retornar només informació en memòria i no fer transaccions I/O (com peticions web). Implementa el mètode `update()` or `async_update()` per obtenir les dades.
 
-| Name                              | Tipus   | Default | Descripció                                                                                                                              |
-| --------------------------------- | ------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| sound_mode                        | string  | None    | The current sound mode of the media player                                                                                              |
-| sound_mode_list                 | list    | None    | Dynamic list of available sound modes (set by platform, empty means sound mode not supported)                                           |
-| source                            | string  | None    | The currently selected input source for the media player.                                                                               |
-| source_list                       | list    | None    | The list of possible input sources for the media player. (This list should contain human readable names, suitible for frontend display) |
-| media_image_url                 | string  | None    | URL that represents the current image.                                                                                                  |
-| media_image_remotely_accessible | boolean | False   | Return `True` if property `media_image_url` is accessible outside of the home network.                                                  |
-| device_class                      | string  | `None`  | Type of binary sensor.                                                                                                                  |
+| Name                              | Tipus   | Per defecte | Descripció                                                                                                                              |
+| --------------------------------- | ------- | ----------- | --------------------------------------------------------------------------------------------------------------------------------------- |
+| sound_mode                        | string  | Cap         | The current sound mode of the media player                                                                                              |
+| sound_mode_list                 | list    | Cap         | Dynamic list of available sound modes (set by platform, empty means sound mode not supported)                                           |
+| source                            | string  | Cap         | The currently selected input source for the media player.                                                                               |
+| source_list                       | list    | Cap         | The list of possible input sources for the media player. (This list should contain human readable names, suitible for frontend display) |
+| media_image_url                 | string  | Cap         | URL that represents the current image.                                                                                                  |
+| media_image_remotely_accessible | boolean | False       | Return `True` if property `media_image_url` is accessible outside of the home network.                                                  |
+| device_class                      | string  | `Cap`       | Type of binary sensor.                                                                                                                  |
 
 ## Methods
 
