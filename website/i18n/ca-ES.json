@@ -194,8 +194,8 @@
         "title": "Standards"
       },
       "entity_air_quality": {
-        "title": "Air Quality Entity",
-        "sidebar_label": "Air Quality"
+        "title": "Entitat de qualitat de l'aire",
+        "sidebar_label": "Qualitat de l'aire"
       },
       "entity_alarm_control_panel": {
         "title": "Alarm Control Panel Entity",
@@ -1090,8 +1090,8 @@
         "title": "Documentation"
       },
       "version-0.86.0/version-0.86.0-entity_air_quality": {
-        "title": "Air Quality Entity",
-        "sidebar_label": "Air Quality"
+        "title": "Entitat de qualitat de l'aire",
+        "sidebar_label": "Qualitat de l'aire"
       },
       "version-0.86.0/version-0.86.0-external_api_rest": {
         "title": "REST API"
