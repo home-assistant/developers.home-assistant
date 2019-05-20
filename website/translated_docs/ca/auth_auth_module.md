@@ -14,15 +14,15 @@ For an example of a fully implemented auth module, please see [insecure_example.
 
 Multi-factor Auth modules shall extend the following methods of `MultiFactorAuthModule` class.
 
-| method                                                     | Required | Descripció                                                                                                                                   |
-| ---------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
-| `@property def input_schema(self)`                         | Yes      | Return a schema defined the user input form.                                                                                                 |
-| `async def async_setup_flow(self, user_id)`                | Yes      | Return a SetupFlow to handle the setup workflow.                                                                                             |
-| `async def async_setup_user(self, user_id, setup_data)`    | Yes      | Set up user for use this auth module.                                                                                                        |
-| `async def async_depose_user(self, user_id)`               | Yes      | Remove user information from this auth module.                                                                                               |
-| `async def async_is_user_setup(self, user_id)`             | Yes      | Return whether user is set up.                                                                                                               |
-| `async def async_validate(self, user_id, user_input)`      | Yes      | Given a user_id and user input, return validation result.                                                                                    |
-| `async def async_initialize_login_mfa_step(self, user_id)` | No       | Will be called once before display the mfa step of login flow. This is not initialization for the MFA module but the mfa step in login flow. |
+| method                                                     | Obligatori | Descripció                                                                                                                                   |
+| ---------------------------------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
+| `@property def input_schema(self)`                         | Sí         | Return a schema defined the user input form.                                                                                                 |
+| `async def async_setup_flow(self, user_id)`                | Sí         | Return a SetupFlow to handle the setup workflow.                                                                                             |
+| `async def async_setup_user(self, user_id, setup_data)`    | Sí         | Set up user for use this auth module.                                                                                                        |
+| `async def async_depose_user(self, user_id)`               | Sí         | Remove user information from this auth module.                                                                                               |
+| `async def async_is_user_setup(self, user_id)`             | Sí         | Return whether user is set up.                                                                                                               |
+| `async def async_validate(self, user_id, user_input)`      | Sí         | Given a user_id and user input, return validation result.                                                                                    |
+| `async def async_initialize_login_mfa_step(self, user_id)` | No         | Will be called once before display the mfa step of login flow. This is not initialization for the MFA module but the mfa step in login flow. |
 
 ## Setup Flow
 
