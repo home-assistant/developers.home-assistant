@@ -10,7 +10,7 @@
         "sidebar_label": "Introduction"
       },
       "app_integration_notifications": {
-        "title": "Push Notifications"
+        "title": "Notification en temps réel"
       },
       "app_integration_sending_data": {
         "title": "Sending data home"
@@ -1248,7 +1248,7 @@
         "sidebar_label": "Introduction"
       },
       "version-0.91.2/version-0.91.2-app_integration_notifications": {
-        "title": "Push Notifications"
+        "title": "Notification en temps réel"
       },
       "version-0.91.2/version-0.91.2-app_integration_sending_data": {
         "title": "Sending data home"
