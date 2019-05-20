@@ -3,14 +3,14 @@ title: Vacuum Entity
 sidebar_label: Vacuum
 ---
 
-## Properties
+## Propietats
 
-> Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+> Les propietats han de retornar només informació en memòria i no fer transaccions I/O (com peticions web). Implementa el mètode `update()` or `async_update()` per obtenir les dades.
 
-| Name                 | Tipus  | Default                         | Descripció                                          |
+| Name                 | Tipus  | Per defecte                     | Descripció                                          |
 | -------------------- | ------ | ------------------------------- | --------------------------------------------------- |
-| name                 | string | **Required**                    | Name of the device.                                 |
-| state                | string | **Required**                    | One of the states listed in the states section.     |
+| name                 | string | **Obligatori**                  | Name of the device.                                 |
+| state                | string | **Obligatori**                  | One of the states listed in the states section.     |
 | battery_level        | int    | `none`                          | Current battery level.                              |
 | battery_icon         | string | function                        | Battery icon to show in UI.                         |
 | cleaning_mode        | string | `none`                          | The current cleaning mode.                          |
