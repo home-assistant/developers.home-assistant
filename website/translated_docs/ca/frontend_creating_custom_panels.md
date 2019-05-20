@@ -16,10 +16,10 @@ The Home Assistant frontend will pass information to your panel by setting prope
 
 | Property | Tipus   | Descripció                                                |
 | -------- | ------- | --------------------------------------------------------- |
-| hass     | object  | Current state of Home Assistant                           |
+| hass     | objecte | Current state of Home Assistant                           |
 | narrow   | boolean | if the panel should render in narrow mode                 |
 | showMenu | boolean | if the sidebar is currently shown                         |
-| panel    | object  | Panel information. Config is available as `panel.config`. |
+| panel    | objecte | Panel information. Config is available as `panel.config`. |
 
 ## JavaScript versions
 
