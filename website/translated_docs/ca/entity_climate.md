@@ -5,37 +5,37 @@ sidebar_label: Climate
 
 > A climate entity is a device that controls temperature, humidity, or fans, such as A/C systems and humidifiers. Derive entity platforms from [`homeassistant.components.climate.ClimateDevice`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/climate/__init__.py)
 
-## Properties
+## Propietats
 
-> Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+> Les propietats han de retornar només informació en memòria i no fer transaccions I/O (com peticions web). Implementa el mètode `update()` or `async_update()` per obtenir les dades.
 
-| Name                      | Tipus      | Default                              | Descripció                                                                                                            |
+| Name                      | Tipus      | Per defecte                          | Descripció                                                                                                            |
 | ------------------------- | ---------- | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
-| current_fan_mode        | string     | None                                 | Returns the current fan mode.                                                                                         |
-| current_hold_mode       | string     | None                                 | The current hold mode, e.g., home, away, temp.                                                                        |
-| current_humidity          | float      | None                                 | The current humidity.                                                                                                 |
-| current_operation         | string     | None                                 | The current operation (e.g. heat, cool, idle). Used to determine `state`.                                             |
-| current_swing_mode      | string     | None                                 | Returns the fan setting.                                                                                              |
-| current_temperature       | float      | None                                 | The current temperature.                                                                                              |
-| fan_list                  | list       | None                                 | Returns the list of available fan modes.                                                                              |
-| is_aux_heat_on          | bool       | None                                 | Returns True if an auxiliary heater is on.                                                                            |
-| is_away_mode_on         | bool       | None                                 | Return true if away mode is on.                                                                                       |
-| is_on                     | bool       | None                                 | Returns True if device is on. Used to determine `state`.                                                              |
+| current_fan_mode        | string     | Cap                                  | Returns the current fan mode.                                                                                         |
+| current_hold_mode       | string     | Cap                                  | The current hold mode, e.g., home, away, temp.                                                                        |
+| current_humidity          | flotant    | Cap                                  | The current humidity.                                                                                                 |
+| current_operation         | string     | Cap                                  | The current operation (e.g. heat, cool, idle). Used to determine `state`.                                             |
+| current_swing_mode      | string     | Cap                                  | Returns the fan setting.                                                                                              |
+| current_temperature       | flotant    | Cap                                  | The current temperature.                                                                                              |
+| fan_list                  | list       | Cap                                  | Returns the list of available fan modes.                                                                              |
+| is_aux_heat_on          | bool       | Cap                                  | Returns True if an auxiliary heater is on.                                                                            |
+| is_away_mode_on         | bool       | Cap                                  | Return true if away mode is on.                                                                                       |
+| is_on                     | bool       | Cap                                  | Returns True if device is on. Used to determine `state`.                                                              |
 | max_humidity              | int        | `DEFAULT_MAX_HUMIDITY` (value == 99) | Returns the maximum humidity.                                                                                         |
 | max_temp                  | int        | `DEFAULT_MAX_TEMP` (value == 35)     | Returns the maximum temperature.                                                                                      |
 | min_humidity              | int        | `DEFAULT_MIN_HUMIDITY` (value == 30) | Returns the minimum humidity.                                                                                         |
 | min_temp                  | int        | `DEFAULT_MIN_TEMP` (value == 7)      | Returns the minimum temperature.                                                                                      |
-| operation_list            | list       | None                                 | List of available operation modes.                                                                                    |
-| precision                 | float      | PRECISION_WHOLE                      | The precision of the temperature in the system: tenths for TEMP_CELSIUS, whole number otherwise.                      |
-| state                     | string     | None                                 | Returns the current state.                                                                                            |
+| operation_list            | list       | Cap                                  | List of available operation modes.                                                                                    |
+| precision                 | flotant    | PRECISION_WHOLE                      | The precision of the temperature in the system: tenths for TEMP_CELSIUS, whole number otherwise.                      |
+| state                     | string     | Cap                                  | Returns the current state.                                                                                            |
 | state_attributes          | dictionary | N/A                                  | The optional state attributes: current temperature, minimum temperature, maximum temperature, and target temperature. |
 | supported_features        | list       | `NotImplementedError()`              | Returns list of supported features.                                                                                   |
-| swing_list                | list       | None                                 | Returns the list of available swing modes.                                                                            |
-| target_humidity           | float      | None                                 | The target humidity.                                                                                                  |
-| target_temperature        | float      | None                                 | The temperature currently set to be reached.                                                                          |
-| target_temperature_high | float      | None                                 | The upper bound target temperature                                                                                    |
-| target_temperature_low  | float      | None                                 | The lower bound target temperature                                                                                    |
-| target_temperature_step | float      | None                                 | The supported step of target temperature                                                                              |
+| swing_list                | list       | Cap                                  | Returns the list of available swing modes.                                                                            |
+| target_humidity           | flotant    | Cap                                  | The target humidity.                                                                                                  |
+| target_temperature        | flotant    | Cap                                  | The temperature currently set to be reached.                                                                          |
+| target_temperature_high | flotant    | Cap                                  | The upper bound target temperature                                                                                    |
+| target_temperature_low  | flotant    | Cap                                  | The lower bound target temperature                                                                                    |
+| target_temperature_step | flotant    | Cap                                  | The supported step of target temperature                                                                              |
 | temperature_unit          | string     | `NotImplementedError`                | The unit of temperature measurement for the system (e.g. Celsius).                                                    |
 
 ### States
