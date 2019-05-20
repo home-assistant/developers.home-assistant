@@ -3,16 +3,16 @@ title: Switch Entity
 sidebar_label: Switch
 ---
 
-## Properties
+## Propietats
 
-> Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+> Les propietats han de retornar només informació en memòria i no fer transaccions I/O (com peticions web). Implementa el mètode `update()` or `async_update()` per obtenir les dades.
 
-| Name               | Tipus   | Default      | Descripció                                                              |
-| ------------------ | ------- | ------------ | ----------------------------------------------------------------------- |
-| is_on              | boolean | **Required** | If the switch is currently on or off.                                   |
-| current_power_w  | float   | `None`       | The current power usage in W.                                           |
-| today_energy_kwh | float   | `None`       | Total energy usage in kWh.                                              |
-| is_standby         | boolean | `None`       | Indicate if the device connected to the switch is currently in standby. |
+| Name               | Tipus   | Per defecte    | Descripció                                                              |
+| ------------------ | ------- | -------------- | ----------------------------------------------------------------------- |
+| is_on              | boolean | **Obligatori** | If the switch is currently on or off.                                   |
+| current_power_w  | flotant | `Cap`          | The current power usage in W.                                           |
+| today_energy_kwh | flotant | `Cap`          | Total energy usage in kWh.                                              |
+| is_standby         | boolean | `Cap`          | Indicate if the device connected to the switch is currently in standby. |
 
 ## Methods
 
