@@ -5,7 +5,7 @@ sidebar_label: "Introduction"
 
 在我们深入讨论Home Assistant架构之前，让我们先厘清整个家庭自动化领域。 这样，我们就能够展示Home Assistant各部分是如何满足家庭自动化的场景。
 
-关于此概述的每一部分的更多信息， 请[查看我们的博客](https://www.home-assistant.io/blog/2014/12/26/home-control-home-automation-and-the-smart-home/)。 这里是博客的 tl;dr 版本:
+关于此概述的每一部分的更多信息， [查看我们的博客](https://www. home-assistant. io/blog/2014/12/26/home-control-home-automation-and-the-smart-home/)。 这里是博客的 tl;dr 版本:
 
 - Home Control is responsible for collecting information and controlling devices.
 - Home Automation triggers commands based on user configurations.
