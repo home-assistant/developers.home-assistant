@@ -1,25 +1,25 @@
 ---
-title: Air Quality Entity
-sidebar_label: Air Quality
+title: Entitat de qualitat de l'aire
+sidebar_label: Qualitat de l'aire
 ---
 
-## Properties
+## Propietats
 
-> Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+> Les propietats han de retornar només informació en memòria i no fer transaccions I/O (com peticions web). Implementa el mètode `update()` or `async_update()` per obtenir les dades.
 
-| Name                         | Tipus | Default      | Descripció                                    |
-| ---------------------------- | ----- | ------------ | --------------------------------------------- |
-| particulate_matter_2_5     | float | **Required** | The particulate matter 2.5 (<= 2.5 μm) level. |
-| particulate_matter_10      | float | **Required** | The particulate matter 10 (<= 10 μm) level.   |
-| particulate_matter_0_1     | float | `None`       | The particulate matter 0.1 (<= 0.1 μm) level. |
-| air_quality_index          | float | `None`       | The Air Quality Index (AQI).                  |
-| ozone                        | float | `None`       | The O3 (ozone) level.                         |
-| carbon_monoxide              | float | `None`       | The CO (carbon monoxide) level.               |
-| carbon_dioxide               | float | `None`       | The CO2 (carbon dioxide) level.               |
-| sulphur_dioxide              | float | `None`       | The SO2 (sulphur dioxide) level.              |
-| nitrogen_oxide               | float | `None`       | The N2O (nitrogen oxide) level.               |
-| nitrogen_monoxide            | float | `None`       | The NO (nitrogen monoxide) level.             |
-| nitrogen_dioxide             | float | `None`       | The NO2 (nitrogen dioxide) level.             |
-| volatile_organic_compounds | float | `None`       | The volatile organic compounds (VOC) level.   |
+| Name                         | Tipus   | Per defecte    | Descripció                                         |
+| ---------------------------- | ------- | -------------- | -------------------------------------------------- |
+| particulate_matter_2_5     | flotant | **Obligatori** | Nivell de partícules PM2.5 (<= 2.5 μm) level.      |
+| particulate_matter_10      | flotant | **Obligatori** | Nivell de partícules PM10 (<= 10 μm) level.        |
+| particulate_matter_0_1     | flotant | `Cap`          | Nivell de partícules ultrafines (<= 0.1 μm) level. |
+| air_quality_index          | flotant | `Cap`          | Índex de qualitat de l'aire (AQI).                 |
+| ozone                        | flotant | `Cap`          | Nivell d'ozó (O3).                                 |
+| carbon_monoxide              | flotant | `Cap`          | Nivell de monòxid de carboni (CO).                 |
+| carbon_dioxide               | flotant | `Cap`          | Nivell de diòxid de carboni (CO2).                 |
+| sulphur_dioxide              | flotant | `Cap`          | Nivell de diòxid de sofre (SO2).                   |
+| nitrogen_oxide               | flotant | `Cap`          | Nivell d'òxid de nitrogen (N2O).                   |
+| nitrogen_monoxide            | flotant | `Cap`          | Nivell de monòxid de nitrogen (NO).                |
+| nitrogen_dioxide             | flotant | `Cap`          | Nivell de diòxid de nitrogen (NO2).                |
+| volatile_organic_compounds | flotant | `Cap`          | Nivell de compostos orgànics volàtils (COV).       |
 
-Properties have to follow the units defined in the `unit_system`.
+Les propietats han de estar en les unitats definides a `unit_system`.
