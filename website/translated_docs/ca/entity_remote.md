@@ -5,12 +5,12 @@ sidebar_label: Remote
 
 > This entry is incomplete. Contribution welcome.
 
-## Properties
+## Propietats
 
-> Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+> Les propietats han de retornar només informació en memòria i no fer transaccions I/O (com peticions web). Implementa el mètode `update()` or `async_update()` per obtenir les dades.
 
-| Name | Tipus | Default | Descripció |
-| ---- | ----- | ------- | ---------- |
-|      |       |         |            |
+| Name | Tipus | Per defecte | Descripció |
+| ---- | ----- | ----------- | ---------- |
+|      |       |             |            |
 
 ## Methods
