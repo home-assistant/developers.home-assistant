@@ -2,13 +2,13 @@
 title: "Sensors"
 ---
 
-The `mobile_app` component supports exposing custom sensors that can be managed entirely via your app.
+El component `mobile_app` permet exposar sensors personalitzats que es poden gestionar completament des de l'aplicació.
 
-## Registering a sensor
+## Registre d'un sensor
 
-All sensors must be registered before they can get updated. You can only register one sensor at a time, unlike updating sensors.
+Els sensor han d'estar registrats abans de poder ser actualitzats. Només pots registrar els sensors d'un en un però, els pots actualitzar tots a la vegada.
 
-To register a sensor, make a request to the webhook like this:
+Per registrar un sensor has de fer una petició al "webhook" com aquesta:
 
 ```json
 {
@@ -28,26 +28,26 @@ To register a sensor, make a request to the webhook like this:
 }
 ```
 
-The valid keys are:
+Les claus vàlides són:
 
-| Clau                  | Tipus                         | Required | Descripció                                                                                                                                                                                                      |
-| --------------------- | ----------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| attributes            | object                        | No       | Attributes to attach to the sensor                                                                                                                                                                              |
-| device_class          | string                        | No       | One of the valid device classes. [Binary Sensor Classes](https://www.home-assistant.io/components/binary_sensor/#device-class), [Sensor Classes](https://www.home-assistant.io/components/sensor/#device-class) |
-| icon                  | Material Design Icon (string) | No       | Must be prefixed `mdi:`. If not provided, default value is `mdi:cellphone`                                                                                                                                      |
-| name                  | string                        | Yes      | The name of the sensor                                                                                                                                                                                          |
-| state                 | bool, float, int, string      | Yes      | The state of the sensor                                                                                                                                                                                         |
-| type                  | string                        | Yes      | The type of the sensor. Must be one of `binary_sensor` or `sensor`                                                                                                                                              |
-| unique_id             | string                        | Yes      | A identifier unique to this installation of your app. You'll need this later. Usually best when its a safe version of the sensor name                                                                           |
-| unit_of_measurement | string                        | No       | The unit of measurement for the sensor                                                                                                                                                                          |
+| Clau                  | Tipus                           | Obligatori | Descripció                                                                                                                                                                                                           |
+| --------------------- | ------------------------------- | ---------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| attributes            | objecte                         | No         | Atributs afegits al sensor.                                                                                                                                                                                          |
+| device_class          | string                          | No         | Una de les classes disponibles. [Classes de Sensor binari](https://www.home-assistant.io/components/binary_sensor/#device-class), [Classes de Sensor](https://www.home-assistant.io/components/sensor/#device-class) |
+| icon                  | Material Design Icon (string)   | No         | Ha de començar amb el prefix `mdi:`. Si no es proporciona, el valor per defecte serà `mdi:cellphone`                                                                                                                 |
+| name                  | string                          | Sí         | Nom del sensor.                                                                                                                                                                                                      |
+| state                 | booleà, flotant, enter o string | Sí         | Estat del sensor.                                                                                                                                                                                                    |
+| type                  | string                          | Sí         | Tipus de sensor. Pot ser `binary_sensor` o bé `sensor`.                                                                                                                                                              |
+| unique_id             | string                          | Sí         | Identificador únic en la instal·lació de l'aplicació. El necessitaràs més endavant. Normalment el millor és que sigui similar al nom del sensor.                                                                     |
+| unit_of_measurement | string                          | No         | Unitat de mesura del sensor.                                                                                                                                                                                         |
 
-Sensors will appear as soon as they are registered.
+Els sensors apareixeran tan bon punt s'hagin registrat.
 
-## Updating a sensor
+## Actualització d'un sensor
 
-Once a sensor has been registered, you need to update it. This is very similar to registering it, but you can update all your sensors at the same time.
+Un cop un sensor estigui registrat, s'ha d'actualitzar. És un procés similar al del registre, però pots actualitzar-los tots a la vegada.
 
-For example, to update the sensor we registered above, you would send this:
+Per exemple, per actualitzar un sensor que ja ha estat registrat (com el de sobre), has d'enviar això:
 
 ```json
 {
@@ -66,12 +66,12 @@ For example, to update the sensor we registered above, you would send this:
 }
 ```
 
-Only some of the keys are allowed during updates:
+En les actualitzacions només algunes de les claus estan permeses:
 
-| Clau       | Tipus                         | Required | Descripció                                                                                                                            |
-| ---------- | ----------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| attributes | object                        | No       | Attributes to attach to the sensor                                                                                                    |
-| icon       | Material Design Icon (string) | No       | Must be prefixed `mdi:`                                                                                                               |
-| state      | bool, float, int, string      | Yes      | The state of the sensor                                                                                                               |
-| type       | string                        | Yes      | The type of the sensor. Must be one of `binary_sensor` or `sensor`                                                                    |
-| unique_id  | string                        | Yes      | A identifier unique to this installation of your app. You'll need this later. Usually best when its a safe version of the sensor name |
+| Clau       | Tipus                           | Obligatori | Descripció                                                                                                                                       |
+| ---------- | ------------------------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
+| attributes | objecte                         | No         | Atributs afegits al sensor.                                                                                                                      |
+| icon       | Material Design Icon (string)   | No         | Ha de començar amb el prefix `mdi:`.                                                                                                             |
+| state      | booleà, flotant, enter o string | Sí         | Estat del sensor.                                                                                                                                |
+| type       | string                          | Sí         | Tipus de sensor. Pot ser `binary_sensor` o bé `sensor`.                                                                                          |
+| unique_id  | string                          | Sí         | Identificador únic en la instal·lació de l'aplicació. El necessitaràs més endavant. Normalment el millor és que sigui similar al nom del sensor. |
