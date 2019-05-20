@@ -49,17 +49,17 @@ Example payload to send to the registration endpoint:
 }
 ```
 
-| Clau                  | Required | Tipus  | Descripció                                                                                          |
-| --------------------- | -------- | ------ | --------------------------------------------------------------------------------------------------- |
-| `app_id`              | V        | string | A unique identifier for this app.                                                                   |
-| `app_name`            | V        | string | Name of the mobile app.                                                                             |
-| `app_version`         | V        | string | Version of the mobile app.                                                                          |
-| `device_name`         | V        | string | Name of the device running the app.                                                                 |
-| `manufacturer`        | V        | string | The manufacturer of the device running the app.                                                     |
-| `model`               | V        | string | The model of the device running the app.                                                            |
-| `os_version`          | V        | string | The OS version of the device running the app.                                                       |
-| `supports_encryption` | V        | bool   | If the app supports encryption. See also the [encryption section](#encryption).                     |
-| `app_data`            |          | Dict   | App data can be used if the app has a supporting component that extends `mobile_app` functionality. |
+| Clau                  | Obligatori | Tipus  | Descripció                                                                                          |
+| --------------------- | ---------- | ------ | --------------------------------------------------------------------------------------------------- |
+| `app_id`              | V          | string | A unique identifier for this app.                                                                   |
+| `app_name`            | V          | string | Name of the mobile app.                                                                             |
+| `app_version`         | V          | string | Version of the mobile app.                                                                          |
+| `device_name`         | V          | string | Name of the device running the app.                                                                 |
+| `manufacturer`        | V          | string | The manufacturer of the device running the app.                                                     |
+| `model`               | V          | string | The model of the device running the app.                                                            |
+| `os_version`          | V          | string | The OS version of the device running the app.                                                       |
+| `supports_encryption` | V          | bool   | If the app supports encryption. See also the [encryption section](#encryption).                     |
+| `app_data`            |            | Dict   | App data can be used if the app has a supporting component that extends `mobile_app` functionality. |
 
 When you get a 200 response, the mobile app is registered with Home Assistant. The response is a JSON document and will contain the URLs on how to interact with the Home Assistant instance. You should permanently store this information.
 
