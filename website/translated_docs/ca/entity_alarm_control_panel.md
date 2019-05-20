@@ -5,15 +5,15 @@ sidebar_label: Alarm Control Panel
 
 > This entry is incomplete. Contribution welcome.
 
-## Properties
+## Propietats
 
-> Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+> Les propietats han de retornar només informació en memòria i no fer transaccions I/O (com peticions web). Implementa el mètode `update()` or `async_update()` per obtenir les dades.
 
-| Name        | Tipus  | Default      | Descripció                                                |
-| ----------- | ------ | ------------ | --------------------------------------------------------- |
-| state       | string | **Required** | One of the states listed in the **states** section.       |
-| code_format | string | `None`       | One of the states listed in the **code formats** section. |
-| changed_by  | string | `None`       | Last change triggered by.                                 |
+| Name        | Tipus  | Per defecte    | Descripció                                                |
+| ----------- | ------ | -------------- | --------------------------------------------------------- |
+| state       | string | **Obligatori** | One of the states listed in the **states** section.       |
+| code_format | string | `Cap`          | One of the states listed in the **code formats** section. |
+| changed_by  | string | `Cap`          | Last change triggered by.                                 |
 
 ### States
 
@@ -33,7 +33,7 @@ sidebar_label: Alarm Control Panel
 
 | Value  | Descripció                                        |
 | ------ | ------------------------------------------------- |
-| None   | No code required.                                 |
+| Cap    | No code required.                                 |
 | Number | Code is a number (Shows ten-key pad on frontend). |
 | Any    | Code is a string.                                 |
 
