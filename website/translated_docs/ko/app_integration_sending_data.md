@@ -56,25 +56,25 @@ title: "집으로 데이터 보내기"
 - 404 상태 코드 응답을 받은 경우 `mobile_app` 컴포넌트는 대체로 로드되지 않은 경우 입니다.
 - 410 상태 코드를 받은것은 통합 구성요소가 삭제되었음을 의미합니다. 이 경우 사용자에게 알려주어야하며 대개는 다시 등록해야합니다.
 
-## Implementing encryption
+## 암호화 구현
 
-`mobile_app` supports two way encrypted communication via [Sodium](https://libsodium.gitbook.io/doc/).
+`mobile_app` 은 [Sodium](https://libsodium.gitbook.io/doc/) 을 통한 양방향 암호화 통신을 지원합니다.
 
-> Sodium is a modern, easy-to-use software library for encryption, decryption, signatures, password hashing and more.
+> Sodium 은 암호화, 복호화, 서명, 비밀번호 해시 등을 위한 현대적이고 사용하기 쉬운 소프트웨어 라이브러리입니다.
 
-### Choosing a library
+### 라이브러리 선택
 
-Libraries that wrap Sodium exist for most modern programming languages and platforms. Sodium itself is written in C.
+Sodium 을 래핑하는 라이브러리는 대부분의 최신 프로그래밍 언어와 플랫폼에 제공됩니다. Sodium 자체는 C 언어로 작성되었습니다.
 
-Here are the libraries we suggest using, although you should feel free to use whatever works well for you.
+제안드리는 라이브러리가 여기 있습니다만, 잘 작동하는 라이브러리라면 어떤것이든 자유롭게 사용이 가능합니다.
 
-- Swift/Objective-C: [swift-sodium](https://github.com/jedisct1/swift-sodium) (official library maintained by Sodium developers.
+- Swift/Objective-C: [swift-sodium](https://github.com/jedisct1/swift-sodium) (Sodium 개발자 공식 라이브러리)
 
-For other languages, please see the list of [Bindings for other languages](https://download.libsodium.org/doc/bindings_for_other_languages). If more than one choice is available, we recommend using the choice most recently updated.
+다른 언어용은 [다른 언어로 바인딩하기](https://download.libsodium.org/doc/bindings_for_other_languages) 의 목록을 참고해주세요. 둘 이상의 선택 항목이 있는 경우 가장 최근에 업데이트 된 항목을 사용하는 것이 좋습니다.
 
-### Configuration
+### 구성
 
-We use the [secret-key cryptography](https://download.libsodium.org/doc/secret-key_cryptography) features of Sodium to encrypt and decrypt payloads. All payloads are JSON encoded in Base64. For Base64 type, use `sodium_base64_VARIANT_ORIGINAL` (that is, "original", no padding, not URL safe).
+페이로드를 암호화하고 복호화하기 위해 Sodium 의 [secret-key crytography](https://download.libsodium.org/doc/secret-key_cryptography) 기능을 사용합니다. 모든 페이로드는 Base64 로 인코딩 된 JSON 입니다. Base64 의 경우, `sodium_base64_VARIANT_ORIGINAL` 을 사용합니다 (즉, "original", no padding, not URL safe).
 
 ### Signaling encryption support
 
