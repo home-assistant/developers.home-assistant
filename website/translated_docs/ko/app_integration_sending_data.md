@@ -76,13 +76,13 @@ Sodium 을 래핑하는 라이브러리는 대부분의 최신 프로그래밍 �
 
 페이로드를 암호화하고 복호화하기 위해 Sodium 의 [secret-key crytography](https://download.libsodium.org/doc/secret-key_cryptography) 기능을 사용합니다. 모든 페이로드는 Base64 로 인코딩 된 JSON 입니다. Base64 의 경우, `sodium_base64_VARIANT_ORIGINAL` 을 사용합니다 (즉, "original", no padding, not URL safe).
 
-### Signaling encryption support
+### 시그널링 암호화 지원
 
-During registration, you must set `supports_encryption` to `true` to enable encryption. The Home Assistant instance must be able to install `libsodium` to enable encryption. Confirm that you should make all future webhook requests encrypted by the presence of the key `secret` in the initial registration response. You must store this secret forever. There is no way to recover it via the Home Assistant UI and you should **not** ask users to investigate hidden storage files to re-enter the encryption key. You should create a new registration if encryption ever fails and alert the user.
+등록하는 중에 암호화를 사용하려면 `supports_encryption` 을 `true` 로 설정해야합니다. Home Assistant 인스턴스는 암호화를 사용하려면 `libsodium` 을 설치해야합니다. 초기 등록 응답에서 `secret` 키가 있으면 모든 향후 webhook 요청을 암호화해야 함을 알아두세요. 해당 secret 키는 계속 보관해두어야 합니다. Home Assistant UI 를 통해 복구 할 수있는 방법은 없으며 사용자에게 꿍쳐놓은 파일을 이용해서 암호화 키를 다시 입력하도록 요청해서는 **안됩니다**. 암호화가 실패한 경우 새 등록을 만들어 사용자에게 알려야주어야 합니다.
 
-## Update device location
+## 기기 위치 업데이트
 
-This message will inform Home Assistant of new location information.
+이 메시지는 Home Assistant 에게 새로운 위치 정보를 알려줍니다.
 
 ```json
 {
@@ -95,20 +95,20 @@ This message will inform Home Assistant of new location information.
 }
 ```
 
-| 키                   | 구분      | 설명                                                                                                                     |
-| ------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `location_name`     | string  | Name of the zone the device is in.                                                                                     |
-| `gps`               | latlong | Current location as latitude and longitude.                                                                            |
-| `gps_accuracy`      | int     | GPS accurracy in meters. Must be greater than 0.                                                                       |
-| `battery`           | int     | Percentage of battery the device has left. Must be greater than 0.                                                     |
-| `speed`             | int     | Speed of the device in meters per second. Must be greater than 0.                                                      |
-| `altitude`          | int     | Altitude of the device in meters. Must be greater than 0.                                                              |
-| `course`            | int     | The direction in which the device is traveling, measured in degrees and relative to due north. Must be greater than 0. |
-| `vertical_accuracy` | int     | The accuracy of the altitude value, measured in meters. Must be greater than 0.                                        |
+| 키                   | 구분      | 설명                                    |
+| ------------------- | ------- | ------------------------------------- |
+| `location_name`     | string  | 기기가 위치한 지역의 이름                        |
+| `gps`               | latlong | 현재 위치의 위도와 경도                         |
+| `gps_accuracy`      | int     | GPS 정확도 (미터). 반드시 0 이상.               |
+| `battery`           | int     | 기기의 남은 배터리양 (%) 반드시 0 이상.             |
+| `speed`             | int     | 기기의 이동속도 (미터/초). 반드시 0 이상.            |
+| `altitude`          | int     | 기기의 고도. 반드시 0 이상.                     |
+| `course`            | int     | 기기의 이동 방향. 북쪽 기준으로 측정된 상대값. 반드시 0 이상. |
+| `vertical_accuracy` | int     | 고도 정확도 (미터). 반드시 0 이상.                |
 
-## Call a service
+## 서비스 호출
 
-Call a service in Home Assistant.
+Home Assistant 의 서비스 호출하기.
 
 ```json
 {
@@ -123,15 +123,15 @@ Call a service in Home Assistant.
 }
 ```
 
-| 키              | 구분     | 설명                              |
-| -------------- | ------ | ------------------------------- |
-| `domain`       | string | The domain of the service       |
-| `service`      | string | The service name                |
-| `service_data` | dict   | The data to send to the service |
+| 키              | 구분     | 설명           |
+| -------------- | ------ | ------------ |
+| `domain`       | string | 서비스 도메인      |
+| `service`      | string | 서비스 명        |
+| `service_data` | dict   | 서비스에 보내는 데이터 |
 
-## Fire an event
+## 이벤트 실행
 
-Fire an event in Home Assistant.
+Home Assistant 에서 이벤트 실행하기.
 
 ```json
 {
@@ -145,21 +145,21 @@ Fire an event in Home Assistant.
 }
 ```
 
-| 키            | 구분     | 설명                        |
-| ------------ | ------ | ------------------------- |
-| `event_type` | string | Type of the event to fire |
-| `event_data` | string | Date of the event to fire |
+| 키            | 구분     | 설명           |
+| ------------ | ------ | ------------ |
+| `event_type` | string | 실행할 이벤트의 종류  |
+| `event_data` | string | 실행할 이벤트의 데이터 |
 
-## Render templates
+## 템플릿 해석
 
-Renders one or more templates and returns the result(s).
+하나 혹은 그 이상의 템플릿 해석과 결과값 리턴하기.
 
 ```json
 {
     "type": "render_template",
     "data": {
         "my_tpl": {
-            "template": "Hello {{ name }}, you are {{ states('person.paulus') }}.",
+            "template": "안녕 {{ name }}, 너는 {{ states('person.paulus') }} 에 있구나.",
             "variables": {
                 "name": "Paulus"
             }
@@ -168,16 +168,16 @@ Renders one or more templates and returns the result(s).
 }
 ```
 
-`data` must contain a map of `key`: `dictionary`. Results will be returned like `{"my_tpl": "Hello Paulus, you are home"}`. This allows for rendering multiple templates in a single call.
+`data` 는 반드시 `key`:`dictionary` 형식으로 작성되어야 합니다. 위의 예시 결과값은 `{"my_tpl": "안녕 Paulus, 너는 집 에 있구나"}` 와 같이 리턴되어집니다. 이를 통해 단일 호출로 여러 템플릿을 해석할 수 있습니다.
 
-| 키           | 구분     | 설명                                       |
-| ----------- | ------ | ---------------------------------------- |
-| `template`  | string | The template to render                   |
-| `variables` | Dict   | The extra template variables to include. |
+| 키           | 구분     | 설명              |
+| ----------- | ------ | --------------- |
+| `template`  | string | 해석할 템플릿         |
+| `variables` | Dict   | 포함할 여분의 템플릿 변수. |
 
-## Update registration
+## 등록 업데이트
 
-Update your app registration. Use this if the app version changed or any of the other values.
+앱 등록 업데이트. 앱 버전이 바뀌거나 다른 값을 가질때 사용.
 
 ```json
 {
@@ -196,20 +196,20 @@ Update your app registration. Use this if the app version changed or any of the 
 }
 ```
 
-All keys are optional.
+모든 키는 선택사항임.
 
-| 키              | 구분     | 설명                                                                                                                                              |
-| -------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `app_data`     | Dict   | App data can be used if the app has a supporting component that extends mobile_app functionality or wishes to enable the notification platform. |
-| `app_version`  | string | Version of the mobile app.                                                                                                                      |
-| `device_name`  | string | Name of the device running the app.                                                                                                             |
-| `manufacturer` | string | The manufacturer of the device running the app.                                                                                                 |
-| `model`        | string | The model of the device running the app.                                                                                                        |
-| `os_version`   | string | The OS version of the device running the app.                                                                                                   |
+| 키              | 구분     | 설명                                                                        |
+| -------------- | ------ | ------------------------------------------------------------------------- |
+| `app_data`     | Dict   | 앱에 mobile_app 기능을 확장하거나 알림 플랫폼을 활성화하려는 지원 구성 요소가 있는 경우 앱 데이터를 사용할 수 있습니다. |
+| `app_version`  | string | mobile_app 의 버전                                                           |
+| `device_name`  | string | 앱을 구동하는 기기의 이름                                                            |
+| `manufacturer` | string | 앱을 구동하는 기기의 제조사                                                           |
+| `model`        | string | 앱을 구동하는 기기의 모델명                                                           |
+| `os_version`   | string | 앱을 구동하는 OS의 버전                                                            |
 
-## Get zones
+## 지역 가져오기
 
-Get all enabled zones.
+활성화 된 모든 지역 가져오기.
 
 ```json
 {
@@ -217,9 +217,9 @@ Get all enabled zones.
 }
 ```
 
-## Get config
+## 구성 가져오기
 
-Returns a version of `/api/config` with values useful for configuring your app.
+앱을 구성하는 유용한 구성값과 `/api/config` 의 버전을 리턴합니다.
 
 ```json
 {
