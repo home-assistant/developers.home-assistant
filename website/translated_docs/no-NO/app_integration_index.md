@@ -1,11 +1,11 @@
 ---
-title: "Native App Integration"
-sidebar_label: "Introduction"
+title: "Integrasjon av Lokal applikasjon"
+sidebar_label: "Introduksjon"
 ---
 
-This guide describes how to build a native Home Assistant app that communicates with Home Assistant and offers a seamless integration. Below is a list of the things that we will discuss in this guide.
+Denne veiledningen beskriver hvordan man lager en lokal Home Assistant app som kommuniserer med Home Assistant og tilbyr en sømløs integrasjon. Nedenfor er en liste over emner vi vil kartlegge i denne veiledningen.
 
-- Allow the user to establish a connection and authenticate with their own Home Assistant instance.
-- Send location and device info back to Home Assistant.
-- Call services, fire events and render templates.
-- A view to control the house via an authenticated webview.
+- Tillate brukeren å etablere og godkjenne en forbindelse med Home Assistant instansen.
+- Sende plassering og enhets-info til Home Assistant.
+- Vekke tjenester, utløse hendelser og muliggjøre maler.
+- En oversikt for å kontrollere huset via et godkjent web-grensesnitt.
