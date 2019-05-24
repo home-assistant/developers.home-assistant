@@ -1,63 +1,63 @@
 ---
-title: Vacuum Entity
-sidebar_label: Vacuum
+title: Entitat aspiradora
+sidebar_label: Aspiradora
 ---
 
 ## Propietats
 
 > Les propietats han de retornar només informació en memòria i no fer transaccions I/O (com peticions web). Implementa el mètode `update()` or `async_update()` per obtenir les dades.
 
-| Name                 | Tipus  | Per defecte                     | Descripció                                          |
-| -------------------- | ------ | ------------------------------- | --------------------------------------------------- |
-| name                 | string | **Obligatori**                  | Name of the device.                                 |
-| state                | string | **Obligatori**                  | One of the states listed in the states section.     |
-| battery_level        | int    | `none`                          | Current battery level.                              |
-| battery_icon         | string | function                        | Battery icon to show in UI.                         |
-| cleaning_mode        | string | `none`                          | The current cleaning mode.                          |
-| cleaning_mode_list | list   | `NotImplementedError()`         | List of available fan speeds and cleaning modes.    |
-| error                | string | **Required** with `STATE_ERROR` | An error message if the vacuum is in `STATE_ERROR`. |
+| Name                 | Tipus  | Per defecte                             | Descripció                                                                         |
+| -------------------- | ------ | --------------------------------------- | ---------------------------------------------------------------------------------- |
+| name                 | string | **Obligatori**                          | Nom del dispositiu.                                                                |
+| state                | string | **Obligatori**                          | Un dels estats presents en la secció Estats.                                       |
+| battery_level        | int    | `Cap`                                   | Nivell de càrrega actual.                                                          |
+| battery_icon         | string | Funció                                  | Icona de bateria per mostrar a la interfície d'usuari.                             |
+| cleaning_mode        | string | `Cap`                                   | Mode de neteja actual.                                                             |
+| cleaning_mode_list | list   | `NotImplementedError()`                 | Llista de les possibles velocitats del ventilador i els possibles modes de neteja. |
+| error                | string | Obligatori, ha d'incloure `STATE_ERROR` | Missatge d'error en el cas de que l'aspirador es trobi en `STATE_ERROR`.           |
 
 ## States
 
-| State             | Descripció                                                                                              |
-| ----------------- | ------------------------------------------------------------------------------------------------------- |
-| `STATE_CLEANING`  | The vacuum is currently cleaning.                                                                       |
-| `STATE_DOCKED`    | The vacuum is currently docked, it is assumed that docked can also mean charging.                       |
-| `STATE_PAUSED`    | The vacuum was cleaning but was paused without returning to the dock.                                   |
-| `STATE_IDLE`      | The vacuum is not paused, not docked and does not have any errors.                                      |
-| `STATE_RETURNING` | The vacuum is done cleaning and is currently returning to the dock, but not yet docked.                 |
-| `STATE_ERROR`     | The vacuum encountered an error while cleaning, the error can be specified as a property on the entity. |
+| State             | Descripció                                                                                                              |
+| ----------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `STATE_CLEANING`  | L'aspiradora està funcionant.                                                                                           |
+| `STATE_DOCKED`    | L'aspiradora està aparcada, segurament, també carregant-se.                                                             |
+| `STATE_PAUSED`    | L'aspiradora estava en funcionament però s'ha aturat sense retornar a la base.                                          |
+| `STATE_IDLE`      | L'aspiradora no està aturada ni aparcada a la base, no hi ha errors.                                                    |
+| `STATE_RETURNING` | L'aspiradora ha acabat i està retornant a la base però encara no hi ha arribat.                                         |
+| `STATE_ERROR`     | Hi ha hagut un error mentre l'aspiradora estava en funcionament. L'error pot ser descrit en una propietat de l'entitat. |
 
 ## Methods
 
-### `turn_on` or `async_turn_on`
+### `turn_on` o `async_turn_on`
 
-Turn the vacuum on and start cleaning.
+Engega l'aspiradora i comença a funcionar.
 
-### `turn_off`or `async_turn_off`
+### `turn_off` o `async_turn_off`
 
-Turn the vacuum off stopping the cleaning and returning home.
+Apaga l'aspiradora i retorna a la base.
 
-### `return_to_base` or `async_return_to_base`
+### `return_to_base` o `async_return_to_base`
 
-Set the vacuum cleaner to return to the dock.
+Posa l'aspiradora en mode tornar a la base.
 
-### `stop` or `async_stop`
+### `stop` o `async_stop`
 
-Stop the vacuum cleaner, do not return to base.
+Atura l'aspiradora sense retornar a la base.
 
-### `clean_spot` or `async_clean_spot`
+### `clean_spot` o `async_clean_spot`
 
-Perform a spot clean-up.
+Realitza una neteja focalitzada.
 
-### `locate` or `async_locate`
+### `locate` o `async_locate`
 
-Locate the vacuum cleaner.
+Localitza l'aspiradora.
 
-### `set_cleaning_mode` or `async_set_cleaning_mode`
+### `set_cleaning_mode` o `async_set_cleaning_mode`
 
-Set the cleaning mode.
+Especifica el mode de neteja.
 
-### `send_command` or `async_send_command`
+### `send_command` o `async_send_command`
 
-Send a command to a vacuum cleaner.
+Envia una missatge de control a l'aspiradora.
