@@ -82,9 +82,7 @@ If your integration supports discovery via [Zeroconf](https://en.wikipedia.org/w
 
 ```json5
 {
-  // …
-  "zeroconf": ["_googlecast._tcp.local."],
-  // …
+  "zeroconf": ["_googlecast._tcp.local."]
 }
 ```
 
