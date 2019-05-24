@@ -75,3 +75,35 @@ git clone https://github.com/balloob/pychromecast.git
 pip install -e ./pychromecast
 hass --skip-pip
 ```
+
+## Zeroconf
+
+If your integration supports discovery via [Zeroconf](https://en.wikipedia.org/wiki/Zero-configuration_networking), you can add the type to your manifest. If the user has the `zeroconf` integration loaded, it will load the `zeroconf` step of your integration's config flow when it is discovered.
+
+```json5
+{
+  // …
+  "zeroconf": ["_googlecast._tcp.local."],
+  // …
+}
+```
+
+## SSDP
+
+If your integration supports discovery via [SSDP](https://en.wikipedia.org/wiki/Simple_Service_Discovery_Protocol), you can add the type to your manifest. If the user has the `ssdp` integration loaded, it will load the `ssdp` step of your integration's config flow when it is discovered. We support SSDP discovery by ST, manufacturer and device type. Your integration is discovered if any of the specified info is found. It's up to your config flow to filter out duplicates.
+
+```json5
+{
+  "ssdp": {
+    "st": [
+      "roku:ecp"
+    ],
+    "manufacturer": [
+      "Roku"
+    ],
+    "device_type": [
+      "urn:roku-com:device:player:1-0"
+    ]
+  }
+}
+```
