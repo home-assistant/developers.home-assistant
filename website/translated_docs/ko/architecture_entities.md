@@ -5,7 +5,7 @@ sidebar_label: Entity
 
 ![Architecture overview of Hass.io](/img/en/architecture/entities_architecture.png)
 
-## Configuration
+## 구성
 
 Configuration is provided by the [configuration.yaml file](configuration_yaml_index.md) or by a [Config Entry](config_entries_index.md).
 
