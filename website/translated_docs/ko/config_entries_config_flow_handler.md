@@ -1,6 +1,6 @@
 ---
 title: Integration Configuration
-sidebar_label: Configuration
+sidebar_label: 구성
 ---
 
 > This option is currently only available for built-in components.
