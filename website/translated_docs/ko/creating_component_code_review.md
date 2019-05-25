@@ -20,7 +20,7 @@ A checklist of things to do when you're adding a new component.
 3. We no longer want requirements hosted on GitHub. Please upload to PyPi.
 4. Requirements should only be imported inside functions. This is necessary because requirements are installed on the fly.
 
-### 2. Configuration
+### 2. 구성
 
 1. Voluptuous schema present for [configuration validation](development_validation.md)
 2. Default parameters specified in voluptuous schema, not in `setup(…)`
