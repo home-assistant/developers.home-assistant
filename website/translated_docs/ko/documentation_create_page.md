@@ -48,7 +48,7 @@ A couple of points to remember:
 - Add screenshots to support the user where it makes sense.
 - Add the type of the device(s) (incl. firmware) you have tested when you know that there are multiple out there.
 
-### Configuration
+### 구성
 
 Every platform page should contain a configuration sample. This sample must contain only the **required** variables to make it easy to copy and paste it for users into their `configuration.yaml` file.
 
