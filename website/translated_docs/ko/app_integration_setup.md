@@ -1,37 +1,37 @@
 ---
-title: "Connecting to an instance"
+title: "인스턴스에 연결하기"
 ---
 
-When a user first opens the app, they will need to connect to their local instance to authenticate and register the device.
+사용자가 처음 앱을 열면, 기기를 인증하고 등록하기 위해 로컬 인스턴스에 연결해야합니다.
 
-## Authenticating the user
+## 사용자 인증하기
 
-The local instance can be discovered if Home Assistant has the [zeroconf component](https://www.home-assistant.io/components/zeroconf) configured by searching for `_home-assistant._tcp.local.`. If not configured, the user will need to be asked for the local address of their instance.
+Home Assistant 에 `_home-assistant._tcp.local.` 을 검색해서 구성된 [zeroconf 컴포넌트](https://www.home-assistant.io/components/zeroconf)가 있는 경우, 로컬 인스턴스가 검색 될 수 있습니다. 구성되지 않은 경우엔 사용자에게 해당 인스턴스의 로컬 주소를 물어봐야합니다.
 
-When the address of the instance is known, the app will ask the user to authenticate via [OAuth2 with Home Assistant](auth_api.md). Home Assistant uses IndieAuth, which means that to be able to redirect to a url that triggers your app, you need to take some extra steps. Make sure to read the last paragraph of the "Clients" section thoroughly.
+인스턴스의 주소가 확인되면, 앱은 사용자에게 [Home Assistant 의 OAuth2](auth_api.md)를 통해 인증을 요청합니다. Home Assistant 는 IndieAuth 를 사용합니다. 즉, 앱을 트리거하는 url 로 리디렉션 할 수 있도록 하려면 몇 가지 추가 조치가 필요합니다. "Client" 섹션의 마지막 단락을 확실히 읽어주세요.
 
-## Registering the device
+## 기기 등록하기
 
-*This requires Home Assistant 0.90 or later.*
+*Home Assistant 0.90 혹은 그 이후 버전에 필요.*
 
-Home Assistant has a `mobile_app` component that allows applications to register themselves and interact with the instance. This is a generic component to handle most common mobile application tasks. This component is extendable with custom interactions if your app needs more types of interactions than are offered by this component.
+Home Assistant 에는 애플리케이션을 등록하고 인스턴스와 상호 작용할 수있는 `mobile_app` 컴포넌트가 있습니다. 이것은 가장 일반적인 모바일 애플리케이션 작업을 처리하기 위한 일반적인 컴포넌트 입니다. 이 컴포넌트는, 이 컴포넌트가 제공하는 것보다 많은 유형의 상호 작용이 필요한 경우, 별도의 상호 작용을 통해 확장할 수 있습니다.
 
-Once you have tokens to authenticate as a user, it's time to register the app with the mobile app component in Home Assistant.
+사용자로 인증 할 토큰이 있다면, 이제 Home Assistant 의 모바일 앱 구성 요소에 앱을 등록 할 차례입니다.
 
-### Getting Ready
+### 준비하기
 
-First, you must ensure that the `mobile_app` component is loaded. There are two ways to do this:
+먼저, `mobile_app` 컴포넌트가 로드되었는지 확인해야합니다. 다음의 2가지 방법이 있습니다:
 
-- You can publish a Zeroconf/Bonjour record `_hass-mobile-app._tcp.local.` to trigger the automatic load of the `mobile_app` component. You should wait at least 60 seconds after publishing the record before continuing.
-- You can ask the user to add `mobile_app` to their configuration.yaml and restart Home Assistant. If the user already has `default_config` in their configuration, then `mobile_app` will have been already loaded.
+- `mobile_app` 컴포넌트의 자동 로드를 트리거하기 위해 Zeroconf/Bonjour 레코드`_hass-mobile-app._tcp.local.` 를 게시할 수 있습니다. 계속 진행하기 전에 레코드를 게시한 후엔 최소 60초 정도 기다려주세요.
+- 사용자에게 configuration.yaml 에 `mobile_app` 을 추가하고 Home Assistant 를 재시작 하도록 요청할 수 있습니다. 사용자가 구성파일에 `default_config` 를 넣어둔 상태라면, ` mobile_app` 은 이미 로드되었을겁니다.
 
-You can confirm the `mobile_app` component has been loaded by checking the `components` array of the [`/api/config` REST API call](external_api_rest.md#get-api-config). If you continue to device registration and receive a 404 status code, then it most likely hasn't been loaded yet.
+`mobile_app` 컴포넌트가 로드되었는지 확인하려면 [`/api/config` REST API 호출](external_api_rest.md#get-api-config)의 `components` 배열을 확인해보면 됩니다. 기기 등록을 진행하는데 404 상태 코드를 받는다면 대부분 로드되지 않은 경우 입니다.
 
-### Registering the device
+### 기기 등록하기
 
-To register the device, make an authenticated POST request to `/api/mobile_app/registrations`. [More info on making authenticated requests.](auth_api.md#making-authenticated-requests)
+기기를 등록하려면 `/api/mobile_app/registrations` 에 인증 된 POST 요청을 해주세요. [인증된 요청 만드는 방법에 대해 자세히 알아보기](auth_api.md#making-authenticated-requests)
 
-Example payload to send to the registration endpoint:
+앤드포인트에 보내는 페이로드 예제:
 
 ```json
 {
@@ -49,19 +49,19 @@ Example payload to send to the registration endpoint:
 }
 ```
 
-| 키                     | Required | 구분     | 설명                                                                                                  |
-| --------------------- | -------- | ------ | --------------------------------------------------------------------------------------------------- |
-| `app_id`              | V        | string | A unique identifier for this app.                                                                   |
-| `app_name`            | V        | string | Name of the mobile app.                                                                             |
-| `app_version`         | V        | string | Version of the mobile app.                                                                          |
-| `device_name`         | V        | string | Name of the device running the app.                                                                 |
-| `manufacturer`        | V        | string | The manufacturer of the device running the app.                                                     |
-| `model`               | V        | string | The model of the device running the app.                                                            |
-| `os_version`          | V        | string | The OS version of the device running the app.                                                       |
-| `supports_encryption` | V        | bool   | If the app supports encryption. See also the [encryption section](#encryption).                     |
-| `app_data`            |          | Dict   | App data can be used if the app has a supporting component that extends `mobile_app` functionality. |
+| 키                     | 필수여부 | 구분     | 설명                                                        |
+| --------------------- | ---- | ------ | --------------------------------------------------------- |
+| `app_id`              | 예    | string | 앱에 대한 고유식별자                                               |
+| `app_name`            | 예    | string | 모바일 앱 이름                                                  |
+| `app_version`         | 예    | string | mobile_app 의 버전                                           |
+| `device_name`         | 예    | string | 앱을 구동하는 기기의 이름                                            |
+| `manufacturer`        | 예    | string | 앱을 구동하는 기기의 제조사                                           |
+| `model`               | 예    | string | 앱을 구동하는 기기의 모델명                                           |
+| `os_version`          | 예    | string | 앱을 구동하는 OS의 버전                                            |
+| `supports_encryption` | 예    | bool   | 앱이 암호화를 지원하는 경우. [암호화 섹션](#encryption) 참고.                |
+| `app_data`            |      | Dict   | 앱에 `mobile_app` 기능을 확장하는 컴포넌트 지원이 있는 경우, 앱 데이터를 사용할 수 있슴. |
 
-When you get a 200 response, the mobile app is registered with Home Assistant. The response is a JSON document and will contain the URLs on how to interact with the Home Assistant instance. You should permanently store this information.
+200 응답코드를 받으면 모바일 앱이 Home Assistant 에 등록됩니다. 응답은 JSON 문서이며 Home Assistant 인스턴스와 상호 작용하는 방법에 대한 URL을 포함합니다. 이 정보는 영구적으로 저장해야 합니다.
 
 ```json
 {
@@ -72,9 +72,9 @@ When you get a 200 response, the mobile app is registered with Home Assistant. T
 }
 ```
 
-| 키               | 구분     | 설명                                                                                                                                                                                                                     |
-| --------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `cloudhook_url` | string | The cloudhook URL provided by Home Assistant Cloud. Only will be provided if user is actively subscribed to Nabu Casa.                                                                                                 |
-| `remote_ui_url` | string | The remote UI URL provided by Home Assistant Cloud. Only will be provided if user is actively subscribed to Nabu Casa.                                                                                                 |
-| `secret`        | string | The secret to use for encrypted communication. Will only be included if encryption is supported by both the app and the Home Assistant instance. [More info](app_integration_sending_data.md#implementing-encryption). |
-| `webhook_id`    | string | The webhook ID that can be used to send data back.                                                                                                                                                                     |
+| 키               | 구분     | 설명                                                                                                                              |
+| --------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------- |
+| `cloudhook_url` | string | Home Assistant Cloud 에서 제공한 클라우드훅 URL. 사용자가 Nabu Casa 에 가입 활성화 된 경우에만 제공.                                                       |
+| `remote_ui_url` | string | Home Assistant Cloud 에서 제공한 원격 UI URL. 사용자가 Nabu Casa 에 가입 활성화 된 경우에만 제공.                                                       |
+| `secret`        | string | 암호화 통신을 위한 키. 앱과 Home Assistant 인스턴스 모두 암호화가 지원되는 경우에만 포함. [자세히 알아보기](app_integration_sending_data.md#implementing-encryption). |
+| `webhook_id`    | string | 보낸 데이터를 되받을수 있는 웹훅 ID.                                                                                                          |
