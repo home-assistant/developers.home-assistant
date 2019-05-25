@@ -11,10 +11,10 @@ sidebar_label: Water Heater
 | -------------- | ------- | ----------- | ------------------------------------------ |
 | min_temp       | flotant | 110°F       | The minimum temperature that can be set.   |
 | max_temp       | flotant | 140°F       | The maximum temperature that can be set.   |
-| temperature    | flotant | none        | The current temperature in °C or °F.       |
-| operation_mode | string  | none        | The current operation mode.                |
-| operation_list | list    | none        | List of possible operation modes.          |
-| away_mode      | string  | none        | The current status of away mode. (on, off) |
+| temperature    | flotant | Cap         | The current temperature in °C or °F.       |
+| operation_mode | string  | Cap         | The current operation mode.                |
+| operation_list | list    | Cap         | List of possible operation modes.          |
+| away_mode      | string  | Cap         | The current status of away mode. (on, off) |
 
 The allowed operation modes are specified in the base component and implementations of the water_heater component cannot differ.
 
