@@ -25,7 +25,7 @@ A checklist of things to do when you're adding a new platform.
 
 1. If you depend on a component for the connection, add it to your dependencies in [`manifest.json`](creating_integration_manifest.md): `"dependencies": ['nest']`. The `DEPENDENCIES` constant is deprecated.
 
-### 3. Configuration
+### 3. 구성
 
 1. Voluptuous schema present for [configuration validation](development_validation.md)
 2. Voluptuous schema extends schema from component  
