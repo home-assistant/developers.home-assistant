@@ -16,17 +16,17 @@ For an example of a fully implemented auth provider, please see [insecure_exampl
 
 Auth providers shall extend the following methods of `AuthProvider` class.
 
-| method                                                           | Required | 설명                                                                                                                                     |
-| ---------------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------- |
-| async def async_login_flow(self)                               | Yes      | Return an instance of the login flow for a user to identify itself.                                                                    |
-| async def async_get_or_create_credentials(self, flow_result) | Yes      | Given the result of a login flow, return a credentials object. This can either be an existing one or a new one.                        |
-| async def async_user_meta_for_credentials(credentials)       | No       | Callback called Home Assistant is going to create a user from a Credentials object. Can be used to populate extra fields for the user. |
+| method                                                           | 필수여부 | 설명                                                                                                                                     |
+| ---------------------------------------------------------------- | ---- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| async def async_login_flow(self)                               | 예    | Return an instance of the login flow for a user to identify itself.                                                                    |
+| async def async_get_or_create_credentials(self, flow_result) | 예    | Given the result of a login flow, return a credentials object. This can either be an existing one or a new one.                        |
+| async def async_user_meta_for_credentials(credentials)       | 아니오  | Callback called Home Assistant is going to create a user from a Credentials object. Can be used to populate extra fields for the user. |
 
 Auth providers shall extend the following methods of `LoginFlow` class.
 
-| method                                             | Required | 설명                                               |
-| -------------------------------------------------- | -------- | ------------------------------------------------ |
-| async def async_step_init(self, user_input=None) | Yes      | Handle the login form, see more detail in below. |
+| method                                             | 필수여부 | 설명                                               |
+| -------------------------------------------------- | ---- | ------------------------------------------------ |
+| async def async_step_init(self, user_input=None) | 예    | Handle the login form, see more detail in below. |
 
 ## async_step_init of LoginFlow
 
