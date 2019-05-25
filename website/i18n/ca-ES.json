@@ -33,7 +33,7 @@
         "sidebar_label": "Entity"
       },
       "architecture_hassio": {
-        "title": "Hass.io Architecture",
+        "title": "Arquitectura de Hass.io",
         "sidebar_label": "Hass.io"
       },
       "architecture_index": {
@@ -41,7 +41,7 @@
         "sidebar_label": "Introducció"
       },
       "area_registry_index": {
-        "title": "Area Registry",
+        "title": "Registre d'àrees",
         "sidebar_label": "Introducció"
       },
       "asyncio_101": {
@@ -250,8 +250,8 @@
         "sidebar_label": "Switch"
       },
       "entity_vacuum": {
-        "title": "Vacuum Entity",
-        "sidebar_label": "Vacuum"
+        "title": "Entitat aspiradora",
+        "sidebar_label": "Aspiradora"
       },
       "entity_water_heater": {
         "title": "Water Heater Entity",
@@ -399,7 +399,7 @@
         "sidebar_label": "Entity"
       },
       "version-0.72/version-0.72-architecture_hassio": {
-        "title": "Hass.io Architecture",
+        "title": "Arquitectura de Hass.io",
         "sidebar_label": "Hass.io"
       },
       "version-0.72/version-0.72-architecture_index": {
@@ -583,8 +583,8 @@
         "sidebar_label": "Switch"
       },
       "version-0.72/version-0.72-entity_vacuum": {
-        "title": "Vacuum Entity",
-        "sidebar_label": "Vacuum"
+        "title": "Entitat aspiradora",
+        "sidebar_label": "Aspiradora"
       },
       "version-0.72/version-0.72-entity_weather": {
         "title": "Weather Entity",
@@ -751,8 +751,8 @@
         "sidebar_label": "Media Player"
       },
       "version-0.74.0/version-0.74.0-entity_vacuum": {
-        "title": "Vacuum Entity",
-        "sidebar_label": "Vacuum"
+        "title": "Entitat aspiradora",
+        "sidebar_label": "Aspiradora"
       },
       "version-0.74.0/version-0.74.0-hassio_addon_tutorial": {
         "title": "Tutorial: Making your first add-on"
@@ -979,7 +979,7 @@
         "title": "Add-On Configuration"
       },
       "version-0.82.0/version-0.82.0-architecture_hassio": {
-        "title": "Hass.io Architecture",
+        "title": "Arquitectura de Hass.io",
         "sidebar_label": "Hass.io"
       },
       "version-0.82.0/version-0.82.0-asyncio_working_with_async": {
@@ -1103,7 +1103,7 @@
         "title": "Lovelace: Custom Cards"
       },
       "version-0.87.0/version-0.87.0-area_registry_index": {
-        "title": "Area Registry",
+        "title": "Registre d'àrees",
         "sidebar_label": "Introducció"
       },
       "version-0.87.0/version-0.87.0-development_environment": {
@@ -1485,7 +1485,7 @@
       "Data Entry Flow": "Data Entry Flow",
       "Entity Registry": "Entity Registry",
       "Device Registry": "Device Registry",
-      "Area Registry": "Area Registry",
+      "Area Registry": "Registre d'àrees",
       "Frontend": "Frontend",
       "Extending the frontend": "Extending the frontend",
       "Custom UI": "Custom UI",
