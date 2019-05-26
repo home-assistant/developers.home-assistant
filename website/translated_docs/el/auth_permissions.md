@@ -142,7 +142,7 @@ The `Unauthorized` exception has various parameters, to identify the permission 
 
 | # Not all actions have an ID (like adding config entry) | # We then use this fallback to know what category was unauth
 
-| Parameter         | Description                                                                                                                                                  |
+| Parameter         | Περιγραφή                                                                                                                                                    |
 | ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | context           | The context of the current call.                                                                                                                             |
 | user_id           | The user ID that we tried to operate on.                                                                                                                     |
