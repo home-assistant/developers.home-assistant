@@ -9,14 +9,14 @@ A binary sensor is a sensor that can only have two states.
 
 > Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 
-| Name         | Type    | Default      | Description                                  |
+| Name         | Τύπος   | Default      | Περιγραφή                                    |
 | ------------ | ------- | ------------ | -------------------------------------------- |
 | is_on        | boolean | **Required** | If the binary sensor is currently on or off. |
-| device_class | string  | `None`       | Type of binary sensor.                       |
+| device_class | νήμα    | `None`       | Type of binary sensor.                       |
 
 ### Available device classes
 
-| Value        | Description                                            |
+| Value        | Περιγραφή                                              |
 | ------------ | ------------------------------------------------------ |
 | battery      | On means low, Off means normal.                        |
 | cold         | On means cold, Off means normal.                       |
