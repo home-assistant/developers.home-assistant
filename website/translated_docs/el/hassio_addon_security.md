@@ -10,7 +10,7 @@ For access to Hass.io API you need define a role or you run in default mode. Thi
 
 ### Available Roles
 
-| Role          | Description                                                                                            |
+| Role          | Περιγραφή                                                                                              |
 | ------------- | ------------------------------------------------------------------------------------------------------ |
 | default       | Have access to all `info` calls                                                                        |
 | homeassistant | Can access all Home Assistant API endpoints                                                            |
