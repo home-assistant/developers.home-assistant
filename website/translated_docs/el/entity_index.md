@@ -56,21 +56,21 @@ The entity base class has a few properties that are common among all entities in
 
 > Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 
-| Name                      | Type    | Default | Description                                                                                                                                                                                                                                                  |
+| Name                      | Τύπος   | Default | Περιγραφή                                                                                                                                                                                                                                                    |
 | ------------------------- | ------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | assumed_state             | boolean | `False` | Return `True` if the state is based on our assumption instead of reading it from the device.                                                                                                                                                                 |
 | available                 | boolean | `True`  | Indicate if Home Assistant is able to read the state and control the underlying device.                                                                                                                                                                      |
 | device_state_attributes | dict    | `None`  | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version. See [below](entity_index.md#standard_attributes) for details of standard attributes. |
 | entity_picture            | URL     | `None`  | Url of a picture to show for the entity.                                                                                                                                                                                                                     |
-| name                      | string  | `None`  | Name of the entity                                                                                                                                                                                                                                           |
+| name                      | νήμα    | `None`  | Name of the entity                                                                                                                                                                                                                                           |
 | should_poll               | boolean | `True`  | Should Home Assistant check with the entity for an updated state. If set to `False`, entity will need to notify Home Assistant of new updates by calling one of the [schedule update methods](#methods).                                                     |
-| unique_id                 | string  | `None`  | A unique identifier for this entity. Needs to be unique within a platform (ie `light.hue`). Should not be configurable by the user or be changeable. [Learn more.](entity_registry_index.md#unique-id-requirements)                                          |
+| unique_id                 | νήμα    | `None`  | A unique identifier for this entity. Needs to be unique within a platform (ie `light.hue`). Should not be configurable by the user or be changeable. [Learn more.](entity_registry_index.md#unique-id-requirements)                                          |
 
 ## Advanced properties
 
 The following properties are also available on entities. However, they are for advanced use only and should be used with caution.
 
-| Name         | Type    | Default | Description                                                                                                                                                                                                           |
+| Name         | Τύπος   | Default | Περιγραφή                                                                                                                                                                                                             |
 | ------------ | ------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | force_update | boolean | `False` | Write each update to the state machine, even if the data is the same. Example use: when you are directly reading the value from a connected sensor instead of a cache. Use with caution, will spam the state machine. |
 | hidden       | boolean | `False` | Indicate if the entity should not be shown on the frontend.                                                                                                                                                           |
@@ -80,7 +80,7 @@ The following properties are also available on entities. However, they are for a
 
 The following `device_state_attributes` are considered standard and should follow the convention below. The constant should be imported from `homeassistant/const.py`.
 
-| Name             | Type    | Unit | Constant                | Description                                                                                                                                           |
+| Name             | Τύπος   | Unit | Constant                | Περιγραφή                                                                                                                                             |
 | ---------------- | ------- | ---- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | battery_charging | boolean | N/A  | `ATTR_BATTERY_CHARGING` | Battery charging status of the entity, shown as a boolean `true` or `false`. If charging is not supported, then this attribute should not be created. |
 | battery_level    | integer | %    | `ATTR_BATTERY_LEVEL`    | Battery level of the entity, shown as an integer percentage between 0-100.                                                                            |
