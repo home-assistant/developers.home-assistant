@@ -8,7 +8,7 @@ While developing Home Assistant you will see a variable that is everywhere: `has
 
 The Home Assistant instance contains four objects to help you interact with the system.
 
-| Object          | Description                                                                                                                                                                                                                           |
+| Object          | Περιγραφή                                                                                                                                                                                                                             |
 | --------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `hass`          | This is the instance of Home Assistant. Allows starting, stopping and enqueing new jobs. [See available methods.](https://dev-docs.home-assistant.io/en/master/api/core.html#homeassistant.core.HomeAssistant)                        |
 | `hass.config`   | This is the core configuration of Home Assistant exposing location, temperature preferences and config directory path. [See available methods.](https://dev-docs.home-assistant.io/en/master/api/core.html#homeassistant.core.Config) |
