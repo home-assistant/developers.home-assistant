@@ -14,7 +14,6 @@
   padding-bottom: 56.25%; /* 16:9 */
   height: 0;
   background: #000;
-
 }
 
 .videoWrapper iframe {
@@ -25,7 +24,6 @@
   height: 100%;
 }
 
-
 .introSection {
   padding-bottom: 20px;
 }
@@ -34,6 +32,9 @@ img.inline {
   display: inline-block;
 }
 
+small {
+  font-size: smaller;
+}
 
 @media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
 }
