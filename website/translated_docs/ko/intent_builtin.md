@@ -10,25 +10,25 @@ Home Assistant comes with a couple of built-in intents. These intents aim to off
 
 Turn an entity off.
 
-| Slot name | 구분     | Required | 설명                              |
-| --------- | ------ | -------- | ------------------------------- |
-| name      | string | Yes      | Name of the entity to turn off. |
+| Slot name | 구분     | 필수여부 | 설명                              |
+| --------- | ------ | ---- | ------------------------------- |
+| name      | string | 예    | Name of the entity to turn off. |
 
 ### HassTurnOn
 
 Turn an entity on.
 
-| Slot name | 구분     | Required | 설명                             |
-| --------- | ------ | -------- | ------------------------------ |
-| name      | string | Yes      | Name of the entity to turn on. |
+| Slot name | 구분     | 필수여부 | 설명                             |
+| --------- | ------ | ---- | ------------------------------ |
+| name      | string | 예    | Name of the entity to turn on. |
 
 ### HassToggle
 
 Toggle the state of an entity.
 
-| Slot name | 구분     | Required | 설명                            |
-| --------- | ------ | -------- | ----------------------------- |
-| name      | string | Yes      | Name of the entity to toggle. |
+| Slot name | 구분     | 필수여부 | 설명                            |
+| --------- | ------ | ---- | ----------------------------- |
+| name      | string | 예    | Name of the entity to toggle. |
 
 ## Cover
 
@@ -36,17 +36,17 @@ Toggle the state of an entity.
 
 Open a cover.
 
-| Slot name | 구분     | Required | 설명                                |
-| --------- | ------ | -------- | --------------------------------- |
-| name      | string | Yes      | Name of the cover entity to open. |
+| Slot name | 구분     | 필수여부 | 설명                                |
+| --------- | ------ | ---- | --------------------------------- |
+| name      | string | 예    | Name of the cover entity to open. |
 
 ### HassCloseCover
 
 Close a cover.
 
-| Slot name | 구분     | Required | 설명                                 |
-| --------- | ------ | -------- | ---------------------------------- |
-| name      | string | Yes      | Name of the cover entity to close. |
+| Slot name | 구분     | 필수여부 | 설명                                 |
+| --------- | ------ | ---- | ---------------------------------- |
+| name      | string | 예    | Name of the cover entity to close. |
 
 ## Light
 
@@ -54,11 +54,11 @@ Close a cover.
 
 Set the state of a light.
 
-| Slot name  | 구분                          | Required | 설명                                 |
-| ---------- | --------------------------- | -------- | ---------------------------------- |
-| name       | string                      | Yes      | Name of the entity to toggle.      |
-| color      | string, name of valid color | No       | Color to change the light to.      |
-| brightness | integer, 0-100              | No       | Brightness to change the light to. |
+| Slot name  | 구분                          | 필수여부 | 설명                                 |
+| ---------- | --------------------------- | ---- | ---------------------------------- |
+| name       | string                      | 예    | Name of the entity to toggle.      |
+| color      | string, name of valid color | 아니오  | Color to change the light to.      |
+| brightness | integer, 0-100              | 아니오  | Brightness to change the light to. |
 
 ## Shopping List
 
@@ -66,9 +66,9 @@ Set the state of a light.
 
 Add an item to the shopping list.
 
-| Slot name | 구분     | Required | 설명                               |
-| --------- | ------ | -------- | -------------------------------- |
-| item      | string | Yes      | Name of item to add to the list. |
+| Slot name | 구분     | 필수여부 | 설명                               |
+| --------- | ------ | ---- | -------------------------------- |
+| item      | string | 예    | Name of item to add to the list. |
 
 ### HassShoppingListLastItems
 
