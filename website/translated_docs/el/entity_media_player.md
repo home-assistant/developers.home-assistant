@@ -9,15 +9,15 @@ sidebar_label: Media Player
 
 > Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 
-| Name                              | Type    | Default | Description                                                                                                                             |
+| Name                              | Τύπος   | Default | Περιγραφή                                                                                                                               |
 | --------------------------------- | ------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
-| sound_mode                        | string  | None    | The current sound mode of the media player                                                                                              |
+| sound_mode                        | νήμα    | None    | The current sound mode of the media player                                                                                              |
 | sound_mode_list                 | list    | None    | Dynamic list of available sound modes (set by platform, empty means sound mode not supported)                                           |
-| source                            | string  | None    | The currently selected input source for the media player.                                                                               |
+| source                            | νήμα    | None    | The currently selected input source for the media player.                                                                               |
 | source_list                       | list    | None    | The list of possible input sources for the media player. (This list should contain human readable names, suitible for frontend display) |
-| media_image_url                 | string  | None    | URL that represents the current image.                                                                                                  |
+| media_image_url                 | νήμα    | None    | URL that represents the current image.                                                                                                  |
 | media_image_remotely_accessible | boolean | False   | Return `True` if property `media_image_url` is accessible outside of the home network.                                                  |
-| device_class                      | string  | `None`  | Type of binary sensor.                                                                                                                  |
+| device_class                      | νήμα    | `None`  | Type of binary sensor.                                                                                                                  |
 
 ## Methods
 
@@ -78,7 +78,7 @@ Required. Returns one of the defined constants from the below list that matches 
 
 Optional. What type of media device is this. It will possibly map to google device types. 
 
-| Value   | Description                               |
+| Value   | Περιγραφή                                 |
 | ------- | ----------------------------------------- |
 | tv      | Device is a television type device.       |
 | speaker | Device is speakers or stereo type device. |
