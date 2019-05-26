@@ -7,12 +7,12 @@ sidebar_label: Switch
 
 > Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 
-| Name               | 구분      | Default      | 설명                                                                      |
-| ------------------ | ------- | ------------ | ----------------------------------------------------------------------- |
-| is_on              | boolean | **Required** | If the switch is currently on or off.                                   |
-| current_power_w  | float   | `None`       | The current power usage in W.                                           |
-| today_energy_kwh | float   | `None`       | Total energy usage in kWh.                                              |
-| is_standby         | boolean | `None`       | Indicate if the device connected to the switch is currently in standby. |
+| Name               | 구분      | Default  | 설명                                                                      |
+| ------------------ | ------- | -------- | ----------------------------------------------------------------------- |
+| is_on              | boolean | **필수여부** | If the switch is currently on or off.                                   |
+| current_power_w  | float   | `None`   | The current power usage in W.                                           |
+| today_energy_kwh | float   | `None`   | Total energy usage in kWh.                                              |
+| is_standby         | boolean | `None`   | Indicate if the device connected to the switch is currently in standby. |
 
 ## Methods
 
