@@ -7,19 +7,19 @@ sidebar_label: Vacuum
 
 > Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 
-| Name                 | Type   | Default                         | Description                                         |
-| -------------------- | ------ | ------------------------------- | --------------------------------------------------- |
-| name                 | string | **Required**                    | Name of the device.                                 |
-| state                | string | **Required**                    | One of the states listed in the states section.     |
-| battery_level        | int    | `none`                          | Current battery level.                              |
-| battery_icon         | string | function                        | Battery icon to show in UI.                         |
-| cleaning_mode        | string | `none`                          | The current cleaning mode.                          |
-| cleaning_mode_list | list   | `NotImplementedError()`         | List of available fan speeds and cleaning modes.    |
-| error                | string | **Required** with `STATE_ERROR` | An error message if the vacuum is in `STATE_ERROR`. |
+| Name                 | Τύπος | Default                         | Περιγραφή                                           |
+| -------------------- | ----- | ------------------------------- | --------------------------------------------------- |
+| name                 | νήμα  | **Required**                    | Name of the device.                                 |
+| state                | νήμα  | **Required**                    | One of the states listed in the states section.     |
+| battery_level        | int   | `none`                          | Current battery level.                              |
+| battery_icon         | νήμα  | function                        | Battery icon to show in UI.                         |
+| cleaning_mode        | νήμα  | `none`                          | The current cleaning mode.                          |
+| cleaning_mode_list | list  | `NotImplementedError()`         | List of available fan speeds and cleaning modes.    |
+| error                | νήμα  | **Required** with `STATE_ERROR` | An error message if the vacuum is in `STATE_ERROR`. |
 
 ## States
 
-| State             | Description                                                                                             |
+| State             | Περιγραφή                                                                                               |
 | ----------------- | ------------------------------------------------------------------------------------------------------- |
 | `STATE_CLEANING`  | The vacuum is currently cleaning.                                                                       |
 | `STATE_DOCKED`    | The vacuum is currently docked, it is assumed that docked can also mean charging.                       |
