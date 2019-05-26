@@ -95,9 +95,9 @@ This message will inform Home Assistant of new location information.
 }
 ```
 
-| Key                 | Type    | Description                                                                                                            |
+| Κλειδί              | Τύπος   | Περιγραφή                                                                                                              |
 | ------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------- |
-| `location_name`     | string  | Name of the zone the device is in.                                                                                     |
+| `location_name`     | νήμα    | Name of the zone the device is in.                                                                                     |
 | `gps`               | latlong | Current location as latitude and longitude.                                                                            |
 | `gps_accuracy`      | int     | GPS accurracy in meters. Must be greater than 0.                                                                       |
 | `battery`           | int     | Percentage of battery the device has left. Must be greater than 0.                                                     |
@@ -123,11 +123,11 @@ Call a service in Home Assistant.
 }
 ```
 
-| Key            | Type   | Description                     |
-| -------------- | ------ | ------------------------------- |
-| `domain`       | string | The domain of the service       |
-| `service`      | string | The service name                |
-| `service_data` | dict   | The data to send to the service |
+| Κλειδί         | Τύπος | Περιγραφή                       |
+| -------------- | ----- | ------------------------------- |
+| `domain`       | νήμα  | The domain of the service       |
+| `service`      | νήμα  | The service name                |
+| `service_data` | dict  | The data to send to the service |
 
 ## Fire an event
 
@@ -145,10 +145,10 @@ Fire an event in Home Assistant.
 }
 ```
 
-| Key          | Type   | Description               |
-| ------------ | ------ | ------------------------- |
-| `event_type` | string | Type of the event to fire |
-| `event_data` | string | Date of the event to fire |
+| Κλειδί       | Τύπος | Περιγραφή                 |
+| ------------ | ----- | ------------------------- |
+| `event_type` | νήμα  | Type of the event to fire |
+| `event_data` | νήμα  | Date of the event to fire |
 
 ## Render templates
 
@@ -170,10 +170,10 @@ Renders one or more templates and returns the result(s).
 
 `data` must contain a map of `key`: `dictionary`. Results will be returned like `{"my_tpl": "Hello Paulus, you are home"}`. This allows for rendering multiple templates in a single call.
 
-| Key         | Type   | Description                              |
-| ----------- | ------ | ---------------------------------------- |
-| `template`  | string | The template to render                   |
-| `variables` | Dict   | The extra template variables to include. |
+| Κλειδί      | Τύπος | Περιγραφή                                |
+| ----------- | ----- | ---------------------------------------- |
+| `template`  | νήμα  | The template to render                   |
+| `variables` | Dict  | The extra template variables to include. |
 
 ## Update registration
 
@@ -198,14 +198,14 @@ Update your app registration. Use this if the app version changed or any of the 
 
 All keys are optional.
 
-| Key            | Type   | Description                                                                                                                                     |
-| -------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| `app_data`     | Dict   | App data can be used if the app has a supporting component that extends mobile_app functionality or wishes to enable the notification platform. |
-| `app_version`  | string | Version of the mobile app.                                                                                                                      |
-| `device_name`  | string | Name of the device running the app.                                                                                                             |
-| `manufacturer` | string | The manufacturer of the device running the app.                                                                                                 |
-| `model`        | string | The model of the device running the app.                                                                                                        |
-| `os_version`   | string | The OS version of the device running the app.                                                                                                   |
+| Κλειδί         | Τύπος | Περιγραφή                                                                                                                                       |
+| -------------- | ----- | ----------------------------------------------------------------------------------------------------------------------------------------------- |
+| `app_data`     | Dict  | App data can be used if the app has a supporting component that extends mobile_app functionality or wishes to enable the notification platform. |
+| `app_version`  | νήμα  | Version of the mobile app.                                                                                                                      |
+| `device_name`  | νήμα  | Name of the device running the app.                                                                                                             |
+| `manufacturer` | νήμα  | The manufacturer of the device running the app.                                                                                                 |
+| `model`        | νήμα  | The model of the device running the app.                                                                                                        |
+| `os_version`   | νήμα  | The OS version of the device running the app.                                                                                                   |
 
 ## Get zones
 
