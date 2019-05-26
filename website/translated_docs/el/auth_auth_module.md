@@ -14,7 +14,7 @@ For an example of a fully implemented auth module, please see [insecure_example.
 
 Multi-factor Auth modules shall extend the following methods of `MultiFactorAuthModule` class.
 
-| method                                                     | Required | Description                                                                                                                                  |
+| method                                                     | Required | Περιγραφή                                                                                                                                    |
 | ---------------------------------------------------------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------- |
 | `@property def input_schema(self)`                         | Yes      | Return a schema defined the user input form.                                                                                                 |
 | `async def async_setup_flow(self, user_id)`                | Yes      | Return a SetupFlow to handle the setup workflow.                                                                                             |
