@@ -9,15 +9,15 @@ sidebar_label: Alarm Control Panel
 
 > Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 
-| Name        | Type   | Default      | Description                                               |
-| ----------- | ------ | ------------ | --------------------------------------------------------- |
-| state       | string | **Required** | One of the states listed in the **states** section.       |
-| code_format | string | `None`       | One of the states listed in the **code formats** section. |
-| changed_by  | string | `None`       | Last change triggered by.                                 |
+| Name        | Τύπος | Default      | Περιγραφή                                                 |
+| ----------- | ----- | ------------ | --------------------------------------------------------- |
+| state       | νήμα  | **Required** | One of the states listed in the **states** section.       |
+| code_format | νήμα  | `None`       | One of the states listed in the **code formats** section. |
+| changed_by  | νήμα  | `None`       | Last change triggered by.                                 |
 
 ### States
 
-| Value                  | Description                                 |
+| Value                  | Περιγραφή                                   |
 | ---------------------- | ------------------------------------------- |
 | `disarmed`             | The alarm is disarmed (`off`).              |
 | `armed_home`           | The alarm is armed in home mode.            |
@@ -31,7 +31,7 @@ sidebar_label: Alarm Control Panel
 
 ### Code Formats
 
-| Value  | Description                                       |
+| Value  | Περιγραφή                                         |
 | ------ | ------------------------------------------------- |
 | None   | No code required.                                 |
 | Number | Code is a number (Shows ten-key pad on frontend). |
