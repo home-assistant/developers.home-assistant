@@ -1,6 +1,6 @@
 ---
 title: Device Registry
-sidebar_label: Introduction
+sidebar_label: Introduksjon
 ---
 
 The device registry is a registry where Home Assistant keeps track of devices. A device is represented in Home Assistant via one or more entities. For example, a battery-powered temperature and a humidity sensor might expose entities for temperature, humidity and battery level.
