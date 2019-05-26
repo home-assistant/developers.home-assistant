@@ -7,7 +7,7 @@ sidebar_label: Switch
 
 > Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 
-| Name               | Type    | Default      | Description                                                             |
+| Name               | Τύπος   | Default      | Περιγραφή                                                               |
 | ------------------ | ------- | ------------ | ----------------------------------------------------------------------- |
 | is_on              | boolean | **Required** | If the switch is currently on or off.                                   |
 | current_power_w  | float   | `None`       | The current power usage in W.                                           |
@@ -66,7 +66,7 @@ class MySwitch(SwitchDevice):
 
 Optional. What type of device this. It will possibly map to google device types. 
 
-| Value  | Description                               |
+| Value  | Περιγραφή                                 |
 | ------ | ----------------------------------------- |
 | outlet | Device is an outlet for power.            |
 | switch | Device is switch for some type of entity. |
