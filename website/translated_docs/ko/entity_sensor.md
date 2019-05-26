@@ -9,11 +9,11 @@ A sensor is a read-only entity that provides some information. Information has a
 
 > Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 
-| Name                  | 구분     | Default      | 설명                                                       |
-| --------------------- | ------ | ------------ | -------------------------------------------------------- |
-| state                 | string | **Required** | The value of the sensor.                                 |
-| unit_of_measurement | string | `None`       | The unit of measurement that the sensor is expressed in. |
-| device_class          | string | `None`       | Type of sensor.                                          |
+| Name                  | 구분     | Default  | 설명                                                       |
+| --------------------- | ------ | -------- | -------------------------------------------------------- |
+| state                 | string | **필수여부** | The value of the sensor.                                 |
+| unit_of_measurement | string | `None`   | The unit of measurement that the sensor is expressed in. |
+| device_class          | string | `None`   | Type of sensor.                                          |
 
 ### Available device classes
 
