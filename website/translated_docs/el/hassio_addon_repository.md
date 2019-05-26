@@ -22,7 +22,7 @@ Each repository is required to contain `repository.json` at the root in the git 
 }
 ```
 
-| Key        | Required | Description                                                           |
+| Κλειδί     | Required | Περιγραφή                                                             |
 | ---------- | -------- | --------------------------------------------------------------------- |
 | name       | yes      | Name of the repository                                                |
 | url        | no       | Homepage of the repository. Here you can explain the various add-ons. |
