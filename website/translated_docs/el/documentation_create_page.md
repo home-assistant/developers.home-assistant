@@ -119,7 +119,7 @@ The direct usage of HTML is supported but not recommended. The note boxes are an
 
 The images which are displayed on the pages are stored in various directories according to their purpose. If you want to use a logo and placed `logo:` in the file header then this image should be stored in `source/images/supported_brands`. The background must be transparent.
 
-| Type        | Location                       |
+| Τύπος       | Location                       |
 |:----------- |:------------------------------ |
 | logos       | source/images/supported_brands |
 | blog        | source/images/blog             |
