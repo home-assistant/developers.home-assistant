@@ -11,24 +11,24 @@ A cover entity is a device that controls an opening or cover, such as a garage d
 
 ### Platform Properties (to be implemented by deriving platform classes)
 
-| Name                          | Type | Default                 | Description                                                                                                                                    |
-| ----------------------------- | ---- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
-| current_cover_position      | int  | None                    | The current position of cover where 0 means closed and 100 is fully open. Required with `SUPPORT_SET_POSITION`.                                |
-| current_cover_tilt_position | int  | None                    | The current tilt position of the cover where 0 means closed/no tilt and 100 means open/maximum tilt. Required with `SUPPORT_SET_TILT_POSITION` |
-| is_opening                    | bool | None                    | If the cover is opening or not. Used to determine `state`.                                                                                     |
-| is_closing                    | bool | None                    | If the cover is closing or not. Used to determine `state`.                                                                                     |
-| is_closed                     | bool | `NotImplementedError()` | If the cover is closed or not. if the state is unknown, return `None`. Used to determine `state`.                                              |
+| Name                          | Τύπος | Default                 | Περιγραφή                                                                                                                                      |
+| ----------------------------- | ----- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
+| current_cover_position      | int   | None                    | The current position of cover where 0 means closed and 100 is fully open. Required with `SUPPORT_SET_POSITION`.                                |
+| current_cover_tilt_position | int   | None                    | The current tilt position of the cover where 0 means closed/no tilt and 100 means open/maximum tilt. Required with `SUPPORT_SET_TILT_POSITION` |
+| is_opening                    | bool  | None                    | If the cover is opening or not. Used to determine `state`.                                                                                     |
+| is_closing                    | bool  | None                    | If the cover is closing or not. Used to determine `state`.                                                                                     |
+| is_closed                     | bool  | `NotImplementedError()` | If the cover is closed or not. if the state is unknown, return `None`. Used to determine `state`.                                              |
 
 ### Entity Properties (base class properties which may be overriden)
 
-| Name               | Type          | Default                                                                          | Description                                                                                            |
+| Name               | Τύπος         | Default                                                                          | Περιγραφή                                                                                              |
 | ------------------ | ------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
-| device_class       | string        | None                                                                             | Describes the type/class of the cover. Must be `None` or one of the valid values from the table below. |
+| device_class       | νήμα          | None                                                                             | Describes the type/class of the cover. Must be `None` or one of the valid values from the table below. |
 | supported_features | int (bitwise) | Value determined from `current_cover_position` and `current_cover_tilt_position` | Describes the supported features. See the related table below for details.                             |
 
 ### Device Classes
 
-| Constant               | Description                                                                                                                                                                   |
+| Constant               | Περιγραφή                                                                                                                                                                     |
 | ---------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `DEVICE_CLASS_AWNING`  | Control of an awning, such as an exterior retractible window, door, or patio cover.                                                                                           |
 | `DEVICE_CLASS_BLIND`   | Control of blinds, which are linked slats that expand or collapse to cover an opening or may be tilted to partially cover an opening, such as window blinds.                  |
@@ -42,7 +42,7 @@ A cover entity is a device that controls an opening or cover, such as a garage d
 
 ### States
 
-| Constant        | Description                                                     |
+| Constant        | Περιγραφή                                                       |
 | --------------- | --------------------------------------------------------------- |
 | `STATE_OPENING` | The cover is in the process of opening to reach a set position. |
 | `STATE_OPEN`    | The cover has reached the open position.                        |
@@ -53,7 +53,7 @@ A cover entity is a device that controls an opening or cover, such as a garage d
 
 Supported features constants are combined using the bitwise or (`|`) operator.
 
-| Constant                    | Description                                                                      |
+| Constant                    | Περιγραφή                                                                        |
 | --------------------------- | -------------------------------------------------------------------------------- |
 | `SUPPORT_OPEN`              | The cover supports being opened.                                                 |
 | `SUPPORT_CLOSE`             | The cover supports being closed.                                                 |
