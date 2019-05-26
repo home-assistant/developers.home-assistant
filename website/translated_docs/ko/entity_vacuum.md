@@ -9,8 +9,8 @@ sidebar_label: Vacuum
 
 | Name                 | 구분     | Default                         | 설명                                                  |
 | -------------------- | ------ | ------------------------------- | --------------------------------------------------- |
-| name                 | string | **Required**                    | Name of the device.                                 |
-| state                | string | **Required**                    | One of the states listed in the states section.     |
+| name                 | string | **필수여부**                        | Name of the device.                                 |
+| state                | string | **필수여부**                        | One of the states listed in the states section.     |
 | battery_level        | int    | `none`                          | Current battery level.                              |
 | battery_icon         | string | function                        | Battery icon to show in UI.                         |
 | cleaning_mode        | string | `none`                          | The current cleaning mode.                          |
