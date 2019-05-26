@@ -8,7 +8,7 @@ A light entity is a device that controls the brightness, RGB value,color tempera
 
 ## Properties
 
-| Name               | Type   | Default | Description                                               |
+| Name               | Τύπος  | Default | Περιγραφή                                                 |
 | ------------------ | ------ | ------- | --------------------------------------------------------- |
 | brightness         | int    | None    | Return the brightness of this light between 0..255        |
 | color_temp         | int    | None    | Return the CT color value in mireds.                      |
@@ -23,7 +23,7 @@ A light entity is a device that controls the brightness, RGB value,color tempera
 
 ## Support Feature
 
-| Constant              | Description                                                           |
+| Constant              | Περιγραφή                                                             |
 | --------------------- | --------------------------------------------------------------------- |
 | `SUPPORT_BRIGHTNESS`  | Controls the brightness of a light source                             |
 | `SUPPORT_COLOR`       | Controls the color a light source shows                               |
