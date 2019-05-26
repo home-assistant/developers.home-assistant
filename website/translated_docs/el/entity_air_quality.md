@@ -7,7 +7,7 @@ sidebar_label: Air Quality
 
 > Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 
-| Name                         | Type  | Default      | Description                                   |
+| Name                         | Τύπος | Default      | Περιγραφή                                     |
 | ---------------------------- | ----- | ------------ | --------------------------------------------- |
 | particulate_matter_2_5     | float | **Required** | The particulate matter 2.5 (<= 2.5 μm) level. |
 | particulate_matter_10      | float | **Required** | The particulate matter 10 (<= 10 μm) level.   |
