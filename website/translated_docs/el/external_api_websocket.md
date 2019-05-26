@@ -415,7 +415,7 @@ The server must send a pong back as quickly as possible, if the connection is st
 
 If an error occurs, the `success` key in the `result` message will be set to `false`. It will contain an `error` key containing an object with two keys: `code` and `message`.
 
-| Code | Description                                                               |
+| Code | Περιγραφή                                                                 |
 | ---- | ------------------------------------------------------------------------- |
 | 1    | A non-increasing identifier has been supplied.                            |
 | 2    | Received message is not in expected format (voluptuous validation error). |
