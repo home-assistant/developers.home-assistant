@@ -49,17 +49,17 @@ Example payload to send to the registration endpoint:
 }
 ```
 
-| Key                   | Required | Type   | Description                                                                                         |
-| --------------------- | -------- | ------ | --------------------------------------------------------------------------------------------------- |
-| `app_id`              | V        | string | A unique identifier for this app.                                                                   |
-| `app_name`            | V        | string | Name of the mobile app.                                                                             |
-| `app_version`         | V        | string | Version of the mobile app.                                                                          |
-| `device_name`         | V        | string | Name of the device running the app.                                                                 |
-| `manufacturer`        | V        | string | The manufacturer of the device running the app.                                                     |
-| `model`               | V        | string | The model of the device running the app.                                                            |
-| `os_version`          | V        | string | The OS version of the device running the app.                                                       |
-| `supports_encryption` | V        | bool   | If the app supports encryption. See also the [encryption section](#encryption).                     |
-| `app_data`            |          | Dict   | App data can be used if the app has a supporting component that extends `mobile_app` functionality. |
+| Κλειδί                | Required | Τύπος | Περιγραφή                                                                                           |
+| --------------------- | -------- | ----- | --------------------------------------------------------------------------------------------------- |
+| `app_id`              | V        | νήμα  | A unique identifier for this app.                                                                   |
+| `app_name`            | V        | νήμα  | Name of the mobile app.                                                                             |
+| `app_version`         | V        | νήμα  | Version of the mobile app.                                                                          |
+| `device_name`         | V        | νήμα  | Name of the device running the app.                                                                 |
+| `manufacturer`        | V        | νήμα  | The manufacturer of the device running the app.                                                     |
+| `model`               | V        | νήμα  | The model of the device running the app.                                                            |
+| `os_version`          | V        | νήμα  | The OS version of the device running the app.                                                       |
+| `supports_encryption` | V        | bool  | If the app supports encryption. See also the [encryption section](#encryption).                     |
+| `app_data`            |          | Dict  | App data can be used if the app has a supporting component that extends `mobile_app` functionality. |
 
 When you get a 200 response, the mobile app is registered with Home Assistant. The response is a JSON document and will contain the URLs on how to interact with the Home Assistant instance. You should permanently store this information.
 
@@ -72,9 +72,9 @@ When you get a 200 response, the mobile app is registered with Home Assistant. T
 }
 ```
 
-| Key             | Type   | Description                                                                                                                                                                                                            |
-| --------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `cloudhook_url` | string | The cloudhook URL provided by Home Assistant Cloud. Only will be provided if user is actively subscribed to Nabu Casa.                                                                                                 |
-| `remote_ui_url` | string | The remote UI URL provided by Home Assistant Cloud. Only will be provided if user is actively subscribed to Nabu Casa.                                                                                                 |
-| `secret`        | string | The secret to use for encrypted communication. Will only be included if encryption is supported by both the app and the Home Assistant instance. [More info](app_integration_sending_data.md#implementing-encryption). |
-| `webhook_id`    | string | The webhook ID that can be used to send data back.                                                                                                                                                                     |
+| Κλειδί          | Τύπος | Περιγραφή                                                                                                                                                                                                              |
+| --------------- | ----- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cloudhook_url` | νήμα  | The cloudhook URL provided by Home Assistant Cloud. Only will be provided if user is actively subscribed to Nabu Casa.                                                                                                 |
+| `remote_ui_url` | νήμα  | The remote UI URL provided by Home Assistant Cloud. Only will be provided if user is actively subscribed to Nabu Casa.                                                                                                 |
+| `secret`        | νήμα  | The secret to use for encrypted communication. Will only be included if encryption is supported by both the app and the Home Assistant instance. [More info](app_integration_sending_data.md#implementing-encryption). |
+| `webhook_id`    | νήμα  | The webhook ID that can be used to send data back.                                                                                                                                                                     |
