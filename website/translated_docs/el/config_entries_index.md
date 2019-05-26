@@ -7,7 +7,7 @@ Config Entries are configuration data that are persistently stored by Home Assis
 
 ## Lifecycle
 
-| State           | Description                                                                                                                                                                             |
+| State           | Περιγραφή                                                                                                                                                                               |
 | --------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | not loaded      | The config entry has not been loaded. This is the initial state when a config entry is created or when Home Assistant is restarted.                                                     |
 | loaded          | The config entry has been loaded.                                                                                                                                                       |
