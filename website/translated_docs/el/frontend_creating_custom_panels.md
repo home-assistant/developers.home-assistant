@@ -14,7 +14,7 @@ Panels are defined as custom elements. You can use any framework that you want, 
 
 The Home Assistant frontend will pass information to your panel by setting properties on your custom element. The following properties are set:
 
-| Property | Type    | Description                                               |
+| Property | Τύπος   | Περιγραφή                                                 |
 | -------- | ------- | --------------------------------------------------------- |
 | hass     | object  | Current state of Home Assistant                           |
 | narrow   | boolean | if the panel should render in narrow mode                 |
