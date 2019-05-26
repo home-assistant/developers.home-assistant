@@ -31,7 +31,7 @@ except intent.IntentError:
 
 The intent response is an instance of `homeassistant.helpers.intent.IntentResponse`.
 
-| Name     | Type       | Description                                                                 |
+| Name     | Τύπος      | Περιγραφή                                                                   |
 | -------- | ---------- | --------------------------------------------------------------------------- |
 | `intent` | Intent     | Instance of intent that triggered response.                                 |
 | `speech` | Dictionary | Speech responses. Each key is a type. Allowed types are `plain` and `ssml`. |
@@ -39,14 +39,14 @@ The intent response is an instance of `homeassistant.helpers.intent.IntentRespon
 
 Speech dictionary values:
 
-| Name         | Type   | Description                               |
+| Name         | Τύπος  | Περιγραφή                                 |
 | ------------ | ------ | ----------------------------------------- |
 | `speech`     | String | The text to say                           |
 | `extra_data` | Any    | Extra information related to this speech. |
 
 Card dictionary values:
 
-| Name      | Type   | Description             |
+| Name      | Τύπος  | Περιγραφή               |
 | --------- | ------ | ----------------------- |
 | `title`   | String | The title of the card   |
 | `content` | Any    | The content of the card |
