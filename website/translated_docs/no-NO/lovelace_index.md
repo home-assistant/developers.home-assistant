@@ -1,6 +1,6 @@
 ---
 title: "Lovelace UI"
-sidebar_label: Introduction
+sidebar_label: Introduksjon
 ---
 
 This page has been moved to https://www.home-assistant.io/lovelace/
