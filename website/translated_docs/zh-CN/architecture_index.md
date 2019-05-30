@@ -7,17 +7,17 @@ sidebar_label: "Introduction"
 
 关于此概述的每一部分的更多信息， [查看我们的博客](https://www. home-assistant. io/blog/2014/12/26/home-control-home-automation-and-the-smart-home/)。 这里是博客的 tl;dr 版本:
 
-- Home Control is responsible for collecting information and controlling devices.
-- Home Automation triggers commands based on user configurations.
-- Smart Home triggers commands based on previous behavior.
+- 家庭控制(Home Control)负责收集信息和控制设备。
+- 家庭自动化(Home Automation)基于用户的配置来触发指令。
+- 智能家居(Smart Home)基于先前的行为触发指令。
 
-![Home Automation landscape](/img/en/architecture/home_automation_landscape.svg)
+![家庭自动化领域](/img/en/architecture/home_automation_landscape.svg)
 
-The Home Assistant core is responsible for Home Control. Home Assistant contains four parts which make this possible:
+Home Assistant的核心负责家庭控制。 Home Assistant包括四个部分使其可能：
 
-- **Event Bus**: facilitates the firing and listening of events -- the beating heart of Home Assistant.
-- **State Machine**: keeps track of the states of things and fires a `state_changed` event when a state has been changed.
-- **Service Registry**: listens on the event bus for `call_service` events and allows other code to register services.
-- **Timer**: sends a `time_changed` event every 1 second on the event bus.
+- **事件总线(Event Bus)**: 使事件发布和监听变得方便 - 是Home Assistant跳动的心脏。
+- **状态机(State Machine)**: 持续跟踪状态并在状态发生变化时触发 `state_changed` 事件。
+- **服务注册表(Service Registry)**: 监听事件总线上的`call_service`事件并允许其他代码注册服务。
+- **计时器(Timer)**: 每秒发送一次`time_changed`事件。
 
-![Overview of the Home Assistant core architecture](/img/en/architecture/ha_architecture.svg)
+![Home Assistant核心架构概览](/img/en/architecture/ha_architecture.svg)
