@@ -1,6 +1,6 @@
 ---
 title: Entity Registry
-sidebar_label: Introduction
+sidebar_label: Introduksjon
 ---
 
 The entity registry is a registry where Home Assistant keeps track of entities. Any entity that is added to Home Assistant and has a unique ID will be registered in the registry.
