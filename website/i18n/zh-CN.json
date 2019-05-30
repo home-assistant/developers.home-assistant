@@ -6,7 +6,7 @@
     "tagline": "All you need to start developing for Home Assistant",
     "docs": {
       "app_integration_index": {
-        "title": "Native App Integration",
+        "title": "原生应用集成",
         "sidebar_label": "Introduction"
       },
       "app_integration_notifications": {
@@ -1029,7 +1029,7 @@
         "sidebar_label": "Introduction"
       },
       "version-0.83.0/version-0.83.0-app_integration_index": {
-        "title": "Native App Integration",
+        "title": "原生应用集成",
         "sidebar_label": "Introduction"
       },
       "version-0.83.0/version-0.83.0-app_integration_sending_data": {
@@ -1142,7 +1142,7 @@
         "title": "Lovelace: Custom Cards"
       },
       "version-0.89.0/version-0.89.0-app_integration_index": {
-        "title": "Native App Integration",
+        "title": "原生应用集成",
         "sidebar_label": "Introduction"
       },
       "version-0.89.0/version-0.89.0-app_integration_sending_data": {
@@ -1499,7 +1499,7 @@
       "Internationalization": "Internationalization",
       "Documentation": "Documentation",
       "Intents": "Intents",
-      "Native App Integration": "Native App Integration",
+      "Native App Integration": "原生应用集成",
       "asyncio": "asyncio",
       "Hass.io": "Hass.io",
       "Hass.io Add-Ons": "Hass.io Add-Ons",
