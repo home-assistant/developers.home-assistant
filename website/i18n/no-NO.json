@@ -6,11 +6,11 @@
     "tagline": "All you need to start developing for Home Assistant",
     "docs": {
       "app_integration_index": {
-        "title": "Native App Integration",
-        "sidebar_label": "Introduction"
+        "title": "Integrasjon av Lokal applikasjon",
+        "sidebar_label": "Introduksjon"
       },
       "app_integration_notifications": {
-        "title": "Push Notifications"
+        "title": "Push-varslinger"
       },
       "app_integration_sending_data": {
         "title": "Sending data home"
@@ -38,11 +38,11 @@
       },
       "architecture_index": {
         "title": "Architecture",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "area_registry_index": {
         "title": "Area Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "asyncio_101": {
         "title": "Asyncio 101"
@@ -52,7 +52,7 @@
       },
       "asyncio_index": {
         "title": "Asynchronous Programming",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "asyncio_working_with_async": {
         "title": "Working with Async"
@@ -69,7 +69,7 @@
       },
       "auth_index": {
         "title": "Authentication",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "auth_permissions": {
         "title": "Permissions"
@@ -80,7 +80,7 @@
       },
       "config_entries_index": {
         "title": "Config Entries",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "config_entries_options_flow_handler": {
         "title": "Integration Configuration Options",
@@ -129,7 +129,7 @@
       },
       "data_entry_flow_index": {
         "title": "Data Entry Flow",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "dev_101_config": {
         "title": "Using Config"
@@ -142,7 +142,7 @@
       },
       "dev_101_index": {
         "title": "Development 101",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "dev_101_services": {
         "title": "Integration Services",
@@ -156,7 +156,7 @@
       },
       "development_checklist": {
         "title": "Development Checklist",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "development_environment": {
         "title": "Set up Development Environment"
@@ -166,7 +166,7 @@
       },
       "development_index": {
         "title": "Starting with Development",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "development_submitting": {
         "title": "Submit your work"
@@ -182,7 +182,7 @@
       },
       "device_registry_index": {
         "title": "Device Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "documentation_create_page": {
         "title": "Create a new page"
@@ -219,7 +219,7 @@
       },
       "entity_index": {
         "title": "Entity",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "entity_light": {
         "title": "Light Entity",
@@ -235,7 +235,7 @@
       },
       "entity_registry_index": {
         "title": "Entity Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "entity_remote": {
         "title": "Remote Entity",
@@ -305,7 +305,7 @@
       },
       "frontend_index": {
         "title": "Home Assistant Frontend",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "hassio_addon_communication": {
         "title": "Add-On Communication"
@@ -315,7 +315,7 @@
       },
       "hassio_addon_index": {
         "title": "Developing an add-on",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "hassio_addon_presentation": {
         "title": "Presenting your add-on"
@@ -360,7 +360,7 @@
       },
       "intent_index": {
         "title": "Intents",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "internationalization_backend_localization": {
         "title": "Backend Localization"
@@ -379,7 +379,7 @@
       },
       "lovelace_index": {
         "title": "Lovelace UI",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "maintenance": {
         "title": "Maintenance"
@@ -404,7 +404,7 @@
       },
       "version-0.72/version-0.72-architecture_index": {
         "title": "Architecture",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.72/version-0.72-asyncio_101": {
         "title": "Asyncio 101"
@@ -414,7 +414,7 @@
       },
       "version-0.72/version-0.72-asyncio_index": {
         "title": "Asynchronous Programming",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.72/version-0.72-asyncio_working_with_async": {
         "title": "Working with Async"
@@ -428,18 +428,18 @@
       },
       "version-0.72/version-0.72-auth_index": {
         "title": "Authentication",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.72/version-0.72-config_entries_config_flow_handler": {
         "title": "Config Flow Handlers"
       },
       "version-0.72/version-0.72-config_entries_index": {
         "title": "Config Entries",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.72/version-0.72-configuration_yaml_index": {
         "title": "Configuration.yaml",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.72/version-0.72-creating_component_code_review": {
         "title": "Checklist for creating a component"
@@ -458,7 +458,7 @@
       },
       "version-0.72/version-0.72-creating_component_index": {
         "title": "Creating components",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.72/version-0.72-creating_component_loading": {
         "title": "Loading your components"
@@ -477,11 +477,11 @@
       },
       "version-0.72/version-0.72-creating_platform_index": {
         "title": "Adding support for a new platform",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.72/version-0.72-data_entry_flow_index": {
         "title": "Data Entry Flow",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.72/version-0.72-dev_101_config": {
         "title": "Using Config"
@@ -494,7 +494,7 @@
       },
       "version-0.72/version-0.72-dev_101_index": {
         "title": "Development 101",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.72/version-0.72-dev_101_services": {
         "title": "Using Services"
@@ -516,7 +516,7 @@
       },
       "version-0.72/version-0.72-development_index": {
         "title": "Starting with Development",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.72/version-0.72-development_submitting": {
         "title": "Submit your work"
@@ -552,7 +552,7 @@
       },
       "version-0.72/version-0.72-entity_index": {
         "title": "Entity",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.72/version-0.72-entity_light": {
         "title": "Light Entity",
@@ -568,7 +568,7 @@
       },
       "version-0.72/version-0.72-entity_registry_index": {
         "title": "Entity Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.72/version-0.72-entity_remote": {
         "title": "Remote Entity",
@@ -627,7 +627,7 @@
       },
       "version-0.72/version-0.72-frontend_index": {
         "title": "Home Assistant Frontend",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.72/version-0.72-hassio_addon_communication": {
         "title": "Add-On Communication"
@@ -637,7 +637,7 @@
       },
       "version-0.72/version-0.72-hassio_addon_index": {
         "title": "Developing an add-on",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.72/version-0.72-hassio_addon_presentation": {
         "title": "Presenting your add-on"
@@ -675,7 +675,7 @@
       },
       "version-0.72/version-0.72-intent_index": {
         "title": "Intents",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.72/version-0.72-internationalization_backend_localization": {
         "title": "Backend Localization"
@@ -698,7 +698,7 @@
       },
       "version-0.72/version-0.72-lovelace_index": {
         "title": "Lovelace UI",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.72/version-0.72-maintenance": {
         "title": "Maintenance"
@@ -737,7 +737,7 @@
       },
       "version-0.73.0/version-0.73.0-lovelace_index": {
         "title": "Lovelace UI",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.74.0/version-0.74.0-asyncio_working_with_async": {
         "title": "Working with Async"
@@ -804,14 +804,14 @@
       },
       "version-0.77.0/version-0.77.0-auth_index": {
         "title": "Authentication",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.77.0/version-0.77.0-config_entries_config_flow_handler": {
         "title": "Config Flow Handlers"
       },
       "version-0.77.0/version-0.77.0-data_entry_flow_index": {
         "title": "Data Entry Flow",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.77.0/version-0.77.0-external_api_rest_python": {
         "title": "REST API - Python bindings",
@@ -833,7 +833,7 @@
       },
       "version-0.78.0/version-0.78.0-auth_index": {
         "title": "Authentication",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.78.0/version-0.78.0-creating_component_code_review": {
         "title": "Checklist for creating a component"
@@ -843,7 +843,7 @@
       },
       "version-0.78.0/version-0.78.0-device_registry_index": {
         "title": "Device Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.78.0/version-0.78.0-documentation_standards": {
         "title": "Standards"
@@ -890,11 +890,11 @@
       },
       "version-0.79.0/version-0.79.0-integration_quality_scale_index": {
         "title": "Integration Quality Scale",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.80.0/version-0.80.0-auth_index": {
         "title": "Authentication",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.80.0/version-0.80.0-auth_permissions": {
         "title": "Permissions"
@@ -946,11 +946,11 @@
       },
       "version-0.80.0/version-0.80.0-integration_quality_scale_index": {
         "title": "Integration Quality Scale",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.81.0/version-0.81.0-asyncio_index": {
         "title": "Asynchronous Programming",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.81.0/version-0.81.0-auth_api": {
         "title": "Authentication API",
@@ -961,7 +961,7 @@
       },
       "version-0.81.0/version-0.81.0-development_index": {
         "title": "Starting with Development",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.81.0/version-0.81.0-development_testing": {
         "title": "Testing your code"
@@ -990,7 +990,7 @@
       },
       "version-0.82.0/version-0.82.0-config_entries_index": {
         "title": "Config Entries",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.82.0/version-0.82.0-creating_component_code_review": {
         "title": "Checklist for creating a component"
@@ -1015,7 +1015,7 @@
       },
       "version-0.82.0/version-0.82.0-entity_registry_index": {
         "title": "Entity Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.82.0/version-0.82.0-entity_sensor": {
         "title": "Sensor Entity",
@@ -1026,11 +1026,11 @@
       },
       "version-0.82.0/version-0.82.0-hassio_addon_index": {
         "title": "Developing an add-on",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.83.0/version-0.83.0-app_integration_index": {
-        "title": "Native App Integration",
-        "sidebar_label": "Introduction"
+        "title": "Integrasjon av Lokal applikasjon",
+        "sidebar_label": "Introduksjon"
       },
       "version-0.83.0/version-0.83.0-app_integration_sending_data": {
         "title": "Sending data home"
@@ -1104,14 +1104,14 @@
       },
       "version-0.87.0/version-0.87.0-area_registry_index": {
         "title": "Area Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.87.0/version-0.87.0-development_environment": {
         "title": "Set up Development Environment"
       },
       "version-0.87.0/version-0.87.0-device_registry_index": {
         "title": "Device Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.87.0/version-0.87.0-documentation_create_page": {
         "title": "Create a new page"
@@ -1132,7 +1132,7 @@
       },
       "version-0.88.0/version-0.88.0-entity_index": {
         "title": "Entity",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.88.0/version-0.88.0-frontend_development": {
         "title": "Frontend development",
@@ -1142,8 +1142,8 @@
         "title": "Lovelace: Custom Cards"
       },
       "version-0.89.0/version-0.89.0-app_integration_index": {
-        "title": "Native App Integration",
-        "sidebar_label": "Introduction"
+        "title": "Integrasjon av Lokal applikasjon",
+        "sidebar_label": "Introduksjon"
       },
       "version-0.89.0/version-0.89.0-app_integration_sending_data": {
         "title": "Sending data home"
@@ -1156,7 +1156,7 @@
       },
       "version-0.89.0/version-0.89.0-config_entries_index": {
         "title": "Config Entries",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.89.0/version-0.89.0-config_entries_options_flow_handler": {
         "title": "Options Flow Handlers"
@@ -1175,7 +1175,7 @@
       },
       "version-0.89.0/version-0.89.0-device_registry_index": {
         "title": "Device Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.89.0/version-0.89.0-entity_alarm_control_panel": {
         "title": "Alarm Control Panel Entity",
@@ -1196,14 +1196,14 @@
       },
       "version-0.90.0/version-0.90.0-config_entries_index": {
         "title": "Config Entries",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.90.0/version-0.90.0-development_environment": {
         "title": "Set up Development Environment"
       },
       "version-0.90.0/version-0.90.0-device_registry_index": {
         "title": "Device Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.90.0/version-0.90.0-external_api_rest": {
         "title": "REST API"
@@ -1245,10 +1245,10 @@
       },
       "version-0.91.0/version-0.91.0-integration_quality_scale_index": {
         "title": "Integration Quality Scale",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.91.2/version-0.91.2-app_integration_notifications": {
-        "title": "Push Notifications"
+        "title": "Push-varslinger"
       },
       "version-0.91.2/version-0.91.2-app_integration_sending_data": {
         "title": "Sending data home"
@@ -1268,7 +1268,7 @@
       },
       "version-0.91.2/version-0.91.2-config_entries_index": {
         "title": "Config Entries",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.91.2/version-0.91.2-config_entries_options_flow_handler": {
         "title": "Integration Configuration Options",
@@ -1320,14 +1320,14 @@
       },
       "version-0.91.2/version-0.91.2-development_checklist": {
         "title": "Development Checklist",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.91.2/version-0.91.2-development_guidelines": {
         "title": "Style guidelines"
       },
       "version-0.91.2/version-0.91.2-development_index": {
         "title": "Starting with Development",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.91.2/version-0.91.2-development_validation": {
         "title": "Validate the input"
@@ -1373,7 +1373,7 @@
       },
       "version-0.92.0/version-0.92.0-entity_registry_index": {
         "title": "Entity Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.92.0/version-0.92.0-external_api_websocket": {
         "title": "WebSocket API"
@@ -1386,7 +1386,7 @@
       },
       "version-0.92.0/version-0.92.0-hassio_addon_index": {
         "title": "Developing an add-on",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.92.0/version-0.92.0-hassio_addon_presentation": {
         "title": "Presenting your add-on"
@@ -1413,7 +1413,7 @@
       },
       "version-0.92.1/version-0.92.1-development_checklist": {
         "title": "Development Checklist",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.92.1/version-0.92.1-entity_fan": {
         "title": "Fan Entity",
@@ -1445,7 +1445,7 @@
       },
       "version-0.93.0/version-0.93.0-entity_index": {
         "title": "Entity",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.93.0/version-0.93.0-entity_media_player": {
         "title": "Media Player Entity",
@@ -1453,7 +1453,7 @@
       },
       "version-0.93.0/version-0.93.0-entity_registry_index": {
         "title": "Entity Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.93.0/version-0.93.0-entity_switch": {
         "title": "Switch Entity",
@@ -1461,7 +1461,7 @@
       },
       "version-0.93.0/version-0.93.0-hassio_addon_index": {
         "title": "Developing an add-on",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "Introduksjon"
       },
       "version-0.93.0/version-0.93.0-hassio_addon_security": {
         "title": "Add-on security"
@@ -1494,12 +1494,12 @@
       "Development Checklist": "Development Checklist",
       "Home Assistant Core 101": "Home Assistant Core 101",
       "Misc": "Misc",
-      "Introduction": "Introduction",
+      "Introduction": "Introduksjon",
       "External API": "External API",
       "Internationalization": "Internationalization",
       "Documentation": "Documentation",
       "Intents": "Intents",
-      "Native App Integration": "Native App Integration",
+      "Native App Integration": "Integrasjon av Lokal applikasjon",
       "asyncio": "asyncio",
       "Hass.io": "Hass.io",
       "Hass.io Add-Ons": "Hass.io Add-Ons",
