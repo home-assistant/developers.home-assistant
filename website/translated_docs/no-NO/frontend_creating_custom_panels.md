@@ -6,7 +6,7 @@ Panels are pages that show information within Home Assistant and can allow contr
 
 Besides components registering panels, users can also register panels using the `panel_custom` component. This allows users to quickly build their own custom interfaces for Home Assistant.
 
-## Introduction
+## Introduksjon
 
 Panels are defined as custom elements. You can use any framework that you want, as long as you wrap it up as a custom element. To quickly get started with a panel, we've created a [React custom panel starter kit](https://github.com/home-assistant/custom-panel-starter-kit-react).
 
@@ -18,20 +18,11 @@ The Home Assistant frontend will pass information to your panel by setting prope
 | -------- | ------- | --------------------------------------------------------- |
 | hass     | object  | Current state of Home Assistant                           |
 | narrow   | boolean | if the panel should render in narrow mode                 |
-| showMenu | boolean | if the sidebar is currently shown                         |
 | panel    | object  | Panel information. Config is available as `panel.config`. |
 
 ## JavaScript versions
 
 The Home Assistant user interface is currently served to browsers in modern JavaScript and older JavaScript (ES5). The older version has a wider browser support but that comes at a cost of size and performance.
-
-To keep things easy, we advice you to tell your users to force the modern version of the frontend. That way you won't need any build tools while developing your panel. Add this to your config:
-
-```yaml
-# configuration.yaml example
-frontend:
-  javascript_version: latest
-```
 
 If you do need to run with ES5 support, you will need to load the ES5 custom elements adapter before defining your element:
 
