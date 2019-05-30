@@ -1,9 +1,9 @@
 ---
-title: "Components Architecture"
-sidebar_label: "Components"
+title: "컴포넌트 아키텍쳐"
+sidebar_label: "컴포넌트"
 ---
 
-Home Assistant can be extended with **components**. Each component is responsible for a specific domain within Home Assistant. Components can listen for or trigger events, offer services, and maintain states. Components are written in Python and can do all the goodness that Python has to offer. Out of the box, Home Assistant offers a bunch of [built-in components](https://www.home-assistant.io/components/).
+Home Assistant 는 **컴포넌트 **로 확장될 수 있습니다. 각 컴포넌트는 Home Assistant 내의 특정 도메인을 담당합니다. 컴포넌트는 이벤트를 수신하거나 트리거하고, 서비스를 제공하고, 상태를 유지 관리 할 수 ​​있습니다. 컴포넌트는 파이썬으로 작성되며 파이썬에서 제공하는 모든 유용한 점을 이용할 수 있습니다. Home Assistant 는 바로 사용가능한 다양한 [내장 컴포넌트](https://www.home-assistant.io/components/)를 제공합니다.
 
 <img src='/img/en/architecture/component_interaction.png' alt='Diagram showing interaction between components and the Home Assistant core.' />
 
