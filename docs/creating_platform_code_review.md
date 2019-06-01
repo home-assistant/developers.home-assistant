@@ -19,15 +19,10 @@ A checklist of things to do when you're adding a new platform.
  1. Requirements have been added to [`manifest.json`](creating_integration_manifest.md). The `REQUIREMENTS` constant is deprecated.
  2. Requirement version should be pinned: `"requirements": ['phue==0.8.1']`
  3. We no longer want requirements hosted on GitHub. Please upload to PyPi.
- 4. Requirements should only be imported inside functions. This is necessary because requirements are installed on the fly.
 
-### 2. Dependencies
+### 2. Configuration
 
- 1. If you depend on a component for the connection, add it to your dependencies in [`manifest.json`](creating_integration_manifest.md): `"dependencies": ['nest']`. The `DEPENDENCIES` constant is deprecated.
-
-### 3. Configuration
-
- 1. Voluptuous schema present for [configuration validation](development_validation.md)
+ 1. If the platform can be set up directly, add a voluptuous schema for [configuration validation](development_validation.md)
  2. Voluptuous schema extends schema from component<br>(e.g., `hue.light.PLATFORM_SCHEMA` extends `light.PLATFORM_SCHEMA`)
  3. Default parameters specified in voluptuous schema, not in `setup_platform(...)`
  4. Your `PLATFORM_SCHEMA` should use as many generic config keys as possible from `homeassistant.const`
@@ -51,7 +46,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 })
 ```
 
-### 4. Setup Platform
+### 3. Setup Platform
 
  1. Verify that the passed in configuration (user/pass/host etc.) works.
  2. Group your calls to `add_devices` if possible.
@@ -74,7 +69,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
  5. When dealing with time, state and/or attributes should not contain relative time since something happened. Instead, it should store UTC timestamps.
  6. Leverage the [entity lifecycle callbacks](entity_index.md#lifecycle-hooks) to attach event listeners or clean up connections.
 
-### 6. Communication with devices/services
+### 4. Communication with devices/services
 
  1. All API specific code has to be part of a third party library hosted on PyPi. Home Assistant should only interact with objects and not make direct calls to the API.
 
