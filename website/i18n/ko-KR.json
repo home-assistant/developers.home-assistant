@@ -16,17 +16,17 @@
         "title": "집으로 데이터 보내기"
       },
       "app_integration_sensors": {
-        "title": "Sensors"
+        "title": "센서"
       },
       "app_integration_setup": {
-        "title": "Connecting to an instance"
+        "title": "인스턴스에 연결하기"
       },
       "app_integration_webview": {
-        "title": "Authenticated Webview"
+        "title": "인증된 웹뷰"
       },
       "architecture_components": {
-        "title": "Components Architecture",
-        "sidebar_label": "Components"
+        "title": "컴포넌트 아키텍쳐",
+        "sidebar_label": "컴포넌트"
       },
       "architecture_entities": {
         "title": "Entity Architecture",
@@ -76,7 +76,7 @@
       },
       "config_entries_config_flow_handler": {
         "title": "Integration Configuration",
-        "sidebar_label": "Configuration"
+        "sidebar_label": "구성"
       },
       "config_entries_index": {
         "title": "Config Entries",
@@ -391,8 +391,8 @@
         "title": "Releasing"
       },
       "version-0.72/version-0.72-architecture_components": {
-        "title": "Components Architecture",
-        "sidebar_label": "Components"
+        "title": "컴포넌트 아키텍쳐",
+        "sidebar_label": "컴포넌트"
       },
       "version-0.72/version-0.72-architecture_entities": {
         "title": "Entity Architecture",
@@ -1036,10 +1036,10 @@
         "title": "집으로 데이터 보내기"
       },
       "version-0.83.0/version-0.83.0-app_integration_setup": {
-        "title": "Connecting to an instance"
+        "title": "인스턴스에 연결하기"
       },
       "version-0.83.0/version-0.83.0-app_integration_webview": {
-        "title": "Authenticated Webview"
+        "title": "인증된 웹뷰"
       },
       "version-0.83.0/version-0.83.0-auth_api": {
         "title": "Authentication API",
@@ -1149,7 +1149,7 @@
         "title": "집으로 데이터 보내기"
       },
       "version-0.89.0/version-0.89.0-app_integration_setup": {
-        "title": "Connecting to an instance"
+        "title": "인스턴스에 연결하기"
       },
       "version-0.89.0/version-0.89.0-auth_auth_module": {
         "title": "Multi-factor Authentication Modules"
@@ -1254,17 +1254,17 @@
         "title": "집으로 데이터 보내기"
       },
       "version-0.91.2/version-0.91.2-app_integration_sensors": {
-        "title": "Sensors"
+        "title": "센서"
       },
       "version-0.91.2/version-0.91.2-app_integration_setup": {
-        "title": "Connecting to an instance"
+        "title": "인스턴스에 연결하기"
       },
       "version-0.91.2/version-0.91.2-auth_auth_module": {
         "title": "Multi-factor Authentication Modules"
       },
       "version-0.91.2/version-0.91.2-config_entries_config_flow_handler": {
         "title": "Integration Configuration",
-        "sidebar_label": "Configuration"
+        "sidebar_label": "구성"
       },
       "version-0.91.2/version-0.91.2-config_entries_index": {
         "title": "Config Entries",
@@ -1343,7 +1343,7 @@
         "title": "Maintenance"
       },
       "version-0.92.0/version-0.92.0-app_integration_setup": {
-        "title": "Connecting to an instance"
+        "title": "인스턴스에 연결하기"
       },
       "version-0.92.0/version-0.92.0-auth_auth_module": {
         "title": "Multi-factor Authentication Modules"
