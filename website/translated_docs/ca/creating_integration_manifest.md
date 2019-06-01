@@ -105,3 +105,23 @@ If your integration supports discovery via [SSDP](https://en.wikipedia.org/wiki/
   }
 }
 ```
+
+## HomeKit
+
+If your integration supports discovery via HomeKit, you can add the supported model names to your manifest. If the user has the `zeroconf` integration loaded, it will load the `homekit` step of your integration's config flow when it is discovered.
+
+HomeKit discovery works by testing if the discovered modelname starts with any of the model names specified in the manifest.json.
+
+```json5
+{
+  "homekit": {
+    "models": [
+      "LIFX"
+    ]
+  }
+}
+```
+
+Discovery via HomeKit does not mean that you have to talk the HomeKit protocol to communicate with your device. You can communicate with the device however you see fit.
+
+When a discovery info is routed to your integration because of this entry in your manifest, the discovery info is no longer routed to integrations that listen to the HomeKit zeroconf type.
