@@ -5,7 +5,7 @@ sidebar_label: Component Checklist
 
 A checklist of things to do when you're adding a new component.
 
-> Not all existing platforms follow the requirements in this checklist. This cannot be used as a reason to not follow them!
+> Not all existing code follow the requirements in this checklist. This cannot be used as a reason to not follow them!
 
 ### 0. Common
 
@@ -18,7 +18,6 @@ A checklist of things to do when you're adding a new component.
  1. Requirements have been added to [`manifest.json`](creating_integration_manifest.md). The `REQUIREMENTS` constant is deprecated.
  2. Requirement version should be pinned: `"requirements": ['phue==0.8.1']`
  3. We no longer want requirements hosted on GitHub. Please upload to PyPi.
- 4. Requirements should only be imported inside functions. This is necessary because requirements are installed on the fly.
 
 ### 2. Configuration
 
