@@ -1,6 +1,6 @@
 ---
 title: Entity
-sidebar_label: Introduction
+sidebar_label: 簡介
 ---
 
 Each device is represented in Home Assistant as an entity. An entity abstracts away the internal working of Home Assistant. As an integrator you don't have to worry about how services or the state machine work. Instead, you extend an entity class and implement the necessary properties and methods for the device type that you're integrating.
@@ -56,7 +56,7 @@ The entity base class has a few properties that are common among all entities in
 
 > Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 
-| Name                      | Type    | Default | Description                                                                                                                                                                                                                                                  |
+| Name                      | 類型      | Default | Description                                                                                                                                                                                                                                                  |
 | ------------------------- | ------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
 | assumed_state             | boolean | `False` | Return `True` if the state is based on our assumption instead of reading it from the device.                                                                                                                                                                 |
 | available                 | boolean | `True`  | Indicate if Home Assistant is able to read the state and control the underlying device.                                                                                                                                                                      |
@@ -70,7 +70,7 @@ The entity base class has a few properties that are common among all entities in
 
 The following properties are also available on entities. However, they are for advanced use only and should be used with caution.
 
-| Name         | Type    | Default | Description                                                                                                                                                                                                           |
+| Name         | 類型      | Default | Description                                                                                                                                                                                                           |
 | ------------ | ------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | force_update | boolean | `False` | Write each update to the state machine, even if the data is the same. Example use: when you are directly reading the value from a connected sensor instead of a cache. Use with caution, will spam the state machine. |
 | hidden       | boolean | `False` | Indicate if the entity should not be shown on the frontend.                                                                                                                                                           |
@@ -80,7 +80,7 @@ The following properties are also available on entities. However, they are for a
 
 The following `device_state_attributes` are considered standard and should follow the convention below. The constant should be imported from `homeassistant/const.py`.
 
-| Name             | Type    | Unit | Constant                | Description                                                                                                                                           |
+| Name             | 類型      | Unit | Constant                | Description                                                                                                                                           |
 | ---------------- | ------- | ---- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | battery_charging | boolean | N/A  | `ATTR_BATTERY_CHARGING` | Battery charging status of the entity, shown as a boolean `true` or `false`. If charging is not supported, then this attribute should not be created. |
 | battery_level    | integer | %    | `ATTR_BATTERY_LEVEL`    | Battery level of the entity, shown as an integer percentage between 0-100.                                                                            |
