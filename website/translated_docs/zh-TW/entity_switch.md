@@ -7,7 +7,7 @@ sidebar_label: Switch
 
 > Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 
-| Name               | Type    | Default      | Description                                                             |
+| Name               | 類型      | Default      | Description                                                             |
 | ------------------ | ------- | ------------ | ----------------------------------------------------------------------- |
 | is_on              | boolean | **Required** | If the switch is currently on or off.                                   |
 | current_power_w  | float   | `None`       | The current power usage in W.                                           |
