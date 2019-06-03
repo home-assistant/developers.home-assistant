@@ -8,7 +8,7 @@ A light entity is a device that controls the brightness, RGB value,color tempera
 
 ## Properties
 
-| Name               | Type   | Default | Description                                               |
+| Name               | 類型     | Default | Description                                               |
 | ------------------ | ------ | ------- | --------------------------------------------------------- |
 | brightness         | int    | None    | Return the brightness of this light between 0..255        |
 | color_temp         | int    | None    | Return the CT color value in mireds.                      |
