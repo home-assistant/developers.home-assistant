@@ -9,7 +9,7 @@ A binary sensor is a sensor that can only have two states.
 
 > Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 
-| Name         | Type    | Default      | Description                                  |
+| Name         | 類型      | Default      | Description                                  |
 | ------------ | ------- | ------------ | -------------------------------------------- |
 | is_on        | boolean | **Required** | If the binary sensor is currently on or off. |
 | device_class | string  | `None`       | Type of binary sensor.                       |
