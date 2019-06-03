@@ -9,7 +9,7 @@ sidebar_label: Climate
 
 > Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 
-| Name                      | Type       | Default                              | Description                                                                                                           |
+| Name                      | 類型         | Default                              | Description                                                                                                           |
 | ------------------------- | ---------- | ------------------------------------ | --------------------------------------------------------------------------------------------------------------------- |
 | current_fan_mode        | string     | None                                 | Returns the current fan mode.                                                                                         |
 | current_hold_mode       | string     | None                                 | The current hold mode, e.g., home, away, temp.                                                                        |
