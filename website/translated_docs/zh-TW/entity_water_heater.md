@@ -7,7 +7,7 @@ sidebar_label: Water Heater
 
 > Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 
-| Name           | Type   | Default | Description                                |
+| Name           | 類型     | Default | Description                                |
 | -------------- | ------ | ------- | ------------------------------------------ |
 | min_temp       | float  | 110°F   | The minimum temperature that can be set.   |
 | max_temp       | float  | 140°F   | The maximum temperature that can be set.   |
