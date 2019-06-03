@@ -1,6 +1,6 @@
 ---
 title: Data Entry Flow
-sidebar_label: Introduction
+sidebar_label: 簡介
 ---
 
 Data Entry Flow is a data entry framework that is part of Home Assistant. Data entry is done via data entry flows. A flow can represent a simple login form or a multi-step setup wizard for a component. A Flow Manager is managing all flows that are in progress and handles creation of new flows.
