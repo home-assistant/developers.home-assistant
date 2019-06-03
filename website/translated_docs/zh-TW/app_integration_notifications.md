@@ -1,14 +1,14 @@
 ---
-title: "Push Notifications"
+title: "推播通知"
 ---
 
 The `mobile_app` component has a notify platform built in that allows for a generic way to send push notifications to your users without requiring installation of a external custom component.
 
-## Enabling push notifications
+## 開啟推播通知
 
 To enable the notify platform for your application, you must set two keys in the `app_data` object during the initial registration or later update of an existing registration.
 
-| Key          | Type   | Description                                                                                                                |
+| Key          | 類型     | Description                                                                                                                |
 | ------------ | ------ | -------------------------------------------------------------------------------------------------------------------------- |
 | `push_token` | string | A push notification token unique to your users device. For example, this could be a APNS token or a FCM Instance ID/token. |
 | `push_url`   | string | The URL on your server that push notifications will be HTTP POSTed to.                                                     |
@@ -45,7 +45,7 @@ It should respond with a 201 status code assuming the notification was queued fo
 
 If an error occurs you should return a description of what went wrong with a status code *other than* 201 or 429. An error response must be a JSON object and can contain one of the following keys:
 
-| Key            | Type   | Description                                                                                                                                                                                                                                          |
+| Key            | 類型     | Description                                                                                                                                                                                                                                          |
 | -------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `errorMessage` | string | If provided, it will be appended to a preset error message. For example, if `errorMessage` is "Could not communicate with Apple" it will be output in the log like "Internal server error, please try again later: Could not communicate with Apple" |
 | `message`      | string | If provided, it will be output directly to the logs at the warning log level.                                                                                                                                                                        |
@@ -69,7 +69,7 @@ If you choose to implement rate limiting, your successful server response should
 }
 ```
 
-| Key          | Type              | Description                                                                                      |
+| Key          | 類型                | Description                                                                                      |
 | ------------ | ----------------- | ------------------------------------------------------------------------------------------------ |
 | `successful` | integer           | The number of successful push notifications the user has sent during the rate limit period.      |
 | `errors`     | integer           | The number of failed push notifications the user has sent during the rate limit period.          |
