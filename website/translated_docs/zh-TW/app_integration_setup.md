@@ -49,7 +49,7 @@ Example payload to send to the registration endpoint:
 }
 ```
 
-| Key                   | Required | Type   | Description                                                                                         |
+| Key                   | Required | 類型     | Description                                                                                         |
 | --------------------- | -------- | ------ | --------------------------------------------------------------------------------------------------- |
 | `app_id`              | V        | string | A unique identifier for this app.                                                                   |
 | `app_name`            | V        | string | Name of the mobile app.                                                                             |
@@ -72,7 +72,7 @@ When you get a 200 response, the mobile app is registered with Home Assistant. T
 }
 ```
 
-| Key             | Type   | Description                                                                                                                                                                                                            |
+| Key             | 類型     | Description                                                                                                                                                                                                            |
 | --------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `cloudhook_url` | string | The cloudhook URL provided by Home Assistant Cloud. Only will be provided if user is actively subscribed to Nabu Casa.                                                                                                 |
 | `remote_ui_url` | string | The remote UI URL provided by Home Assistant Cloud. Only will be provided if user is actively subscribed to Nabu Casa.                                                                                                 |
