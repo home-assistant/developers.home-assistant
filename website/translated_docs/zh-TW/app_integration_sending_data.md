@@ -95,7 +95,7 @@ This message will inform Home Assistant of new location information.
 }
 ```
 
-| Key                 | Type    | Description                                                                                                            |
+| Key                 | 類型      | Description                                                                                                            |
 | ------------------- | ------- | ---------------------------------------------------------------------------------------------------------------------- |
 | `location_name`     | string  | Name of the zone the device is in.                                                                                     |
 | `gps`               | latlong | Current location as latitude and longitude.                                                                            |
@@ -123,7 +123,7 @@ Call a service in Home Assistant.
 }
 ```
 
-| Key            | Type   | Description                     |
+| Key            | 類型     | Description                     |
 | -------------- | ------ | ------------------------------- |
 | `domain`       | string | The domain of the service       |
 | `service`      | string | The service name                |
@@ -145,7 +145,7 @@ Fire an event in Home Assistant.
 }
 ```
 
-| Key          | Type   | Description               |
+| Key          | 類型     | Description               |
 | ------------ | ------ | ------------------------- |
 | `event_type` | string | Type of the event to fire |
 | `event_data` | string | Date of the event to fire |
@@ -170,7 +170,7 @@ Renders one or more templates and returns the result(s).
 
 `data` must contain a map of `key`: `dictionary`. Results will be returned like `{"my_tpl": "Hello Paulus, you are home"}`. This allows for rendering multiple templates in a single call.
 
-| Key         | Type   | Description                              |
+| Key         | 類型     | Description                              |
 | ----------- | ------ | ---------------------------------------- |
 | `template`  | string | The template to render                   |
 | `variables` | Dict   | The extra template variables to include. |
@@ -198,7 +198,7 @@ Update your app registration. Use this if the app version changed or any of the 
 
 All keys are optional.
 
-| Key            | Type   | Description                                                                                                                                     |
+| Key            | 類型     | Description                                                                                                                                     |
 | -------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | `app_data`     | Dict   | App data can be used if the app has a supporting component that extends mobile_app functionality or wishes to enable the notification platform. |
 | `app_version`  | string | Version of the mobile app.                                                                                                                      |
