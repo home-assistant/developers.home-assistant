@@ -11,7 +11,7 @@ A cover entity is a device that controls an opening or cover, such as a garage d
 
 ### Platform Properties (to be implemented by deriving platform classes)
 
-| Name                          | Type | Default                 | Description                                                                                                                                    |
+| Name                          | 類型   | Default                 | Description                                                                                                                                    |
 | ----------------------------- | ---- | ----------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------- |
 | current_cover_position      | int  | None                    | The current position of cover where 0 means closed and 100 is fully open. Required with `SUPPORT_SET_POSITION`.                                |
 | current_cover_tilt_position | int  | None                    | The current tilt position of the cover where 0 means closed/no tilt and 100 means open/maximum tilt. Required with `SUPPORT_SET_TILT_POSITION` |
@@ -21,7 +21,7 @@ A cover entity is a device that controls an opening or cover, such as a garage d
 
 ### Entity Properties (base class properties which may be overriden)
 
-| Name               | Type          | Default                                                                          | Description                                                                                            |
+| Name               | 類型            | Default                                                                          | Description                                                                                            |
 | ------------------ | ------------- | -------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------ |
 | device_class       | string        | None                                                                             | Describes the type/class of the cover. Must be `None` or one of the valid values from the table below. |
 | supported_features | int (bitwise) | Value determined from `current_cover_position` and `current_cover_tilt_position` | Describes the supported features. See the related table below for details.                             |
