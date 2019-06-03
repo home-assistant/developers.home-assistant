@@ -1,6 +1,6 @@
 ---
 title: "Developing an add-on"
-sidebar_label: Introduction
+sidebar_label: 簡介
 ---
 
 Add-ons for Hass.io allow the user to extend the functionality around Home Assistant. This can be running an application that Home Assistant can integrate with (like an MQTT broker) or to share the configuration via Samba for easy editing from other computers. Add-ons can be configured via the Hass.io panel in Home Assistant.
