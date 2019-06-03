@@ -9,7 +9,7 @@ sidebar_label: Alarm Control Panel
 
 > Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 
-| Name        | Type   | Default      | Description                                               |
+| Name        | 類型     | Default      | Description                                               |
 | ----------- | ------ | ------------ | --------------------------------------------------------- |
 | state       | string | **Required** | One of the states listed in the **states** section.       |
 | code_format | string | `None`       | One of the states listed in the **code formats** section. |
