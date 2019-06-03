@@ -1,6 +1,6 @@
 ---
 title: "Home Assistant 前端"
-sidebar_label: "Introduction"
+sidebar_label: "簡介"
 ---
 
 Home Assistant 前端為使用者瀏覽並控制其家庭狀態、管理其自動化與設定整合之用。
