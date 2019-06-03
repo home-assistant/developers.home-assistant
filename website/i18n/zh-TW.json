@@ -6,11 +6,11 @@
     "tagline": "進行 Home Assistant 開發所需要的相關資料",
     "docs": {
       "app_integration_index": {
-        "title": "Native App Integration",
-        "sidebar_label": "Introduction"
+        "title": "原生應用程式整合",
+        "sidebar_label": "簡介"
       },
       "app_integration_notifications": {
-        "title": "Push Notifications"
+        "title": "推播通知"
       },
       "app_integration_sending_data": {
         "title": "Sending data home"
@@ -38,11 +38,11 @@
       },
       "architecture_index": {
         "title": "Architecture",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "area_registry_index": {
         "title": "Area Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "asyncio_101": {
         "title": "Asyncio 101"
@@ -52,7 +52,7 @@
       },
       "asyncio_index": {
         "title": "Asynchronous Programming",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "asyncio_working_with_async": {
         "title": "Working with Async"
@@ -69,7 +69,7 @@
       },
       "auth_index": {
         "title": "Authentication",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "auth_permissions": {
         "title": "Permissions"
@@ -80,7 +80,7 @@
       },
       "config_entries_index": {
         "title": "Config Entries",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "config_entries_options_flow_handler": {
         "title": "Integration Configuration Options",
@@ -129,7 +129,7 @@
       },
       "data_entry_flow_index": {
         "title": "Data Entry Flow",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "dev_101_config": {
         "title": "Using Config"
@@ -142,7 +142,7 @@
       },
       "dev_101_index": {
         "title": "Development 101",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "dev_101_services": {
         "title": "Integration Services",
@@ -156,7 +156,7 @@
       },
       "development_checklist": {
         "title": "Development Checklist",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "development_environment": {
         "title": "Set up Development Environment"
@@ -166,7 +166,7 @@
       },
       "development_index": {
         "title": "Starting with Development",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "development_submitting": {
         "title": "Submit your work"
@@ -182,7 +182,7 @@
       },
       "device_registry_index": {
         "title": "Device Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "documentation_create_page": {
         "title": "Create a new page"
@@ -219,7 +219,7 @@
       },
       "entity_index": {
         "title": "Entity",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "entity_light": {
         "title": "Light Entity",
@@ -235,7 +235,7 @@
       },
       "entity_registry_index": {
         "title": "Entity Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "entity_remote": {
         "title": "Remote Entity",
@@ -305,7 +305,7 @@
       },
       "frontend_index": {
         "title": "Home Assistant 前端",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "hassio_addon_communication": {
         "title": "Add-On Communication"
@@ -315,7 +315,7 @@
       },
       "hassio_addon_index": {
         "title": "Developing an add-on",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "hassio_addon_presentation": {
         "title": "Presenting your add-on"
@@ -360,7 +360,7 @@
       },
       "intent_index": {
         "title": "Intents",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "internationalization_backend_localization": {
         "title": "Backend Localization"
@@ -379,7 +379,7 @@
       },
       "lovelace_index": {
         "title": "Lovelace UI",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "maintenance": {
         "title": "Maintenance"
@@ -404,7 +404,7 @@
       },
       "version-0.72/version-0.72-architecture_index": {
         "title": "Architecture",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.72/version-0.72-asyncio_101": {
         "title": "Asyncio 101"
@@ -414,7 +414,7 @@
       },
       "version-0.72/version-0.72-asyncio_index": {
         "title": "Asynchronous Programming",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.72/version-0.72-asyncio_working_with_async": {
         "title": "Working with Async"
@@ -428,18 +428,18 @@
       },
       "version-0.72/version-0.72-auth_index": {
         "title": "Authentication",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.72/version-0.72-config_entries_config_flow_handler": {
         "title": "Config Flow Handlers"
       },
       "version-0.72/version-0.72-config_entries_index": {
         "title": "Config Entries",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.72/version-0.72-configuration_yaml_index": {
         "title": "Configuration.yaml",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.72/version-0.72-creating_component_code_review": {
         "title": "Checklist for creating a component"
@@ -451,37 +451,37 @@
         "title": "Component Discovery"
       },
       "version-0.72/version-0.72-creating_component_events": {
-        "title": "Handling events"
+        "title": "處理事件"
       },
       "version-0.72/version-0.72-creating_component_generic_discovery": {
         "title": "Generic Platform Discovery"
       },
       "version-0.72/version-0.72-creating_component_index": {
-        "title": "Creating components",
-        "sidebar_label": "Introduction"
+        "title": "新增元件",
+        "sidebar_label": "簡介"
       },
       "version-0.72/version-0.72-creating_component_loading": {
-        "title": "Loading your components"
+        "title": "載入元件"
       },
       "version-0.72/version-0.72-creating_component_states": {
-        "title": "Handling states"
+        "title": "處理狀態"
       },
       "version-0.72/version-0.72-creating_platform_code_review": {
         "title": "Checklist for creating a platform"
       },
       "version-0.72/version-0.72-creating_platform_example_light": {
-        "title": "Example light platform"
+        "title": "燈光平台範例"
       },
       "version-0.72/version-0.72-creating_platform_example_sensor": {
-        "title": "Example sensor platform"
+        "title": "感測器平台範例"
       },
       "version-0.72/version-0.72-creating_platform_index": {
         "title": "Adding support for a new platform",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.72/version-0.72-data_entry_flow_index": {
         "title": "Data Entry Flow",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.72/version-0.72-dev_101_config": {
         "title": "Using Config"
@@ -494,10 +494,10 @@
       },
       "version-0.72/version-0.72-dev_101_index": {
         "title": "Development 101",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.72/version-0.72-dev_101_services": {
-        "title": "Using Services"
+        "title": "呼叫服務"
       },
       "version-0.72/version-0.72-dev_101_states": {
         "title": "Using States"
@@ -516,7 +516,7 @@
       },
       "version-0.72/version-0.72-development_index": {
         "title": "Starting with Development",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.72/version-0.72-development_submitting": {
         "title": "Submit your work"
@@ -552,7 +552,7 @@
       },
       "version-0.72/version-0.72-entity_index": {
         "title": "Entity",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.72/version-0.72-entity_light": {
         "title": "Light Entity",
@@ -568,7 +568,7 @@
       },
       "version-0.72/version-0.72-entity_registry_index": {
         "title": "Entity Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.72/version-0.72-entity_remote": {
         "title": "Remote Entity",
@@ -627,7 +627,7 @@
       },
       "version-0.72/version-0.72-frontend_index": {
         "title": "Home Assistant 前端",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.72/version-0.72-hassio_addon_communication": {
         "title": "Add-On Communication"
@@ -637,7 +637,7 @@
       },
       "version-0.72/version-0.72-hassio_addon_index": {
         "title": "Developing an add-on",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.72/version-0.72-hassio_addon_presentation": {
         "title": "Presenting your add-on"
@@ -675,7 +675,7 @@
       },
       "version-0.72/version-0.72-intent_index": {
         "title": "Intents",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.72/version-0.72-internationalization_backend_localization": {
         "title": "Backend Localization"
@@ -690,15 +690,15 @@
         "title": "Translation"
       },
       "version-0.72/version-0.72-lovelace_card_types": {
-        "title": "Type Of Cards",
-        "sidebar_label": "Cards"
+        "title": "卡片類型",
+        "sidebar_label": "卡片"
       },
       "version-0.72/version-0.72-lovelace_custom_card": {
-        "title": "Custom Cards"
+        "title": "自訂卡片"
       },
       "version-0.72/version-0.72-lovelace_index": {
         "title": "Lovelace UI",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.72/version-0.72-maintenance": {
         "title": "Maintenance"
@@ -733,11 +733,11 @@
         "title": "Add-On Configuration"
       },
       "version-0.73.0/version-0.73.0-lovelace_custom_card": {
-        "title": "Custom Cards"
+        "title": "自訂卡片"
       },
       "version-0.73.0/version-0.73.0-lovelace_index": {
         "title": "Lovelace UI",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.74.0/version-0.74.0-asyncio_working_with_async": {
         "title": "Working with Async"
@@ -804,14 +804,14 @@
       },
       "version-0.77.0/version-0.77.0-auth_index": {
         "title": "Authentication",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.77.0/version-0.77.0-config_entries_config_flow_handler": {
         "title": "Config Flow Handlers"
       },
       "version-0.77.0/version-0.77.0-data_entry_flow_index": {
         "title": "Data Entry Flow",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.77.0/version-0.77.0-external_api_rest_python": {
         "title": "REST API - Python bindings",
@@ -833,7 +833,7 @@
       },
       "version-0.78.0/version-0.78.0-auth_index": {
         "title": "Authentication",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.78.0/version-0.78.0-creating_component_code_review": {
         "title": "Checklist for creating a component"
@@ -843,7 +843,7 @@
       },
       "version-0.78.0/version-0.78.0-device_registry_index": {
         "title": "Device Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.78.0/version-0.78.0-documentation_standards": {
         "title": "Standards"
@@ -890,11 +890,11 @@
       },
       "version-0.79.0/version-0.79.0-integration_quality_scale_index": {
         "title": "Integration Quality Scale",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.80.0/version-0.80.0-auth_index": {
         "title": "Authentication",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.80.0/version-0.80.0-auth_permissions": {
         "title": "Permissions"
@@ -946,11 +946,11 @@
       },
       "version-0.80.0/version-0.80.0-integration_quality_scale_index": {
         "title": "Integration Quality Scale",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.81.0/version-0.81.0-asyncio_index": {
         "title": "Asynchronous Programming",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.81.0/version-0.81.0-auth_api": {
         "title": "Authentication API",
@@ -961,7 +961,7 @@
       },
       "version-0.81.0/version-0.81.0-development_index": {
         "title": "Starting with Development",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.81.0/version-0.81.0-development_testing": {
         "title": "Testing your code"
@@ -990,7 +990,7 @@
       },
       "version-0.82.0/version-0.82.0-config_entries_index": {
         "title": "Config Entries",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.82.0/version-0.82.0-creating_component_code_review": {
         "title": "Checklist for creating a component"
@@ -1015,7 +1015,7 @@
       },
       "version-0.82.0/version-0.82.0-entity_registry_index": {
         "title": "Entity Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.82.0/version-0.82.0-entity_sensor": {
         "title": "Sensor Entity",
@@ -1026,11 +1026,11 @@
       },
       "version-0.82.0/version-0.82.0-hassio_addon_index": {
         "title": "Developing an add-on",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.83.0/version-0.83.0-app_integration_index": {
-        "title": "Native App Integration",
-        "sidebar_label": "Introduction"
+        "title": "原生應用程式整合",
+        "sidebar_label": "簡介"
       },
       "version-0.83.0/version-0.83.0-app_integration_sending_data": {
         "title": "Sending data home"
@@ -1068,7 +1068,7 @@
       },
       "version-0.85/version-0.85-entity_air_pollutants": {
         "title": "Air Pollutants Entity",
-        "sidebar_label": "Air Pollutants"
+        "sidebar_label": "空氣污染"
       },
       "version-0.85/version-0.85-entity_sensor": {
         "title": "Sensor Entity",
@@ -1104,14 +1104,14 @@
       },
       "version-0.87.0/version-0.87.0-area_registry_index": {
         "title": "Area Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.87.0/version-0.87.0-development_environment": {
         "title": "Set up Development Environment"
       },
       "version-0.87.0/version-0.87.0-device_registry_index": {
         "title": "Device Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.87.0/version-0.87.0-documentation_create_page": {
         "title": "Create a new page"
@@ -1132,7 +1132,7 @@
       },
       "version-0.88.0/version-0.88.0-entity_index": {
         "title": "Entity",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.88.0/version-0.88.0-frontend_development": {
         "title": "Frontend development",
@@ -1142,8 +1142,8 @@
         "title": "Lovelace: Custom Cards"
       },
       "version-0.89.0/version-0.89.0-app_integration_index": {
-        "title": "Native App Integration",
-        "sidebar_label": "Introduction"
+        "title": "原生應用程式整合",
+        "sidebar_label": "簡介"
       },
       "version-0.89.0/version-0.89.0-app_integration_sending_data": {
         "title": "Sending data home"
@@ -1156,7 +1156,7 @@
       },
       "version-0.89.0/version-0.89.0-config_entries_index": {
         "title": "Config Entries",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.89.0/version-0.89.0-config_entries_options_flow_handler": {
         "title": "Options Flow Handlers"
@@ -1175,7 +1175,7 @@
       },
       "version-0.89.0/version-0.89.0-device_registry_index": {
         "title": "Device Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.89.0/version-0.89.0-entity_alarm_control_panel": {
         "title": "Alarm Control Panel Entity",
@@ -1196,14 +1196,14 @@
       },
       "version-0.90.0/version-0.90.0-config_entries_index": {
         "title": "Config Entries",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.90.0/version-0.90.0-development_environment": {
         "title": "Set up Development Environment"
       },
       "version-0.90.0/version-0.90.0-device_registry_index": {
         "title": "Device Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.90.0/version-0.90.0-external_api_rest": {
         "title": "REST API"
@@ -1227,10 +1227,10 @@
         "title": "Checklist for creating a component"
       },
       "version-0.91.0/version-0.91.0-creating_platform_example_light": {
-        "title": "Example light platform"
+        "title": "燈光平台範例"
       },
       "version-0.91.0/version-0.91.0-creating_platform_example_sensor": {
-        "title": "Example sensor platform"
+        "title": "感測器平台範例"
       },
       "version-0.91.0/version-0.91.0-dev_101_events": {
         "title": "Using Events"
@@ -1245,10 +1245,10 @@
       },
       "version-0.91.0/version-0.91.0-integration_quality_scale_index": {
         "title": "Integration Quality Scale",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.91.2/version-0.91.2-app_integration_notifications": {
-        "title": "Push Notifications"
+        "title": "推播通知"
       },
       "version-0.91.2/version-0.91.2-app_integration_sending_data": {
         "title": "Sending data home"
@@ -1268,7 +1268,7 @@
       },
       "version-0.91.2/version-0.91.2-config_entries_index": {
         "title": "Config Entries",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.91.2/version-0.91.2-config_entries_options_flow_handler": {
         "title": "Integration Configuration Options",
@@ -1320,14 +1320,14 @@
       },
       "version-0.91.2/version-0.91.2-development_checklist": {
         "title": "Development Checklist",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.91.2/version-0.91.2-development_guidelines": {
         "title": "Style guidelines"
       },
       "version-0.91.2/version-0.91.2-development_index": {
         "title": "Starting with Development",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.91.2/version-0.91.2-development_validation": {
         "title": "Validate the input"
@@ -1373,7 +1373,7 @@
       },
       "version-0.92.0/version-0.92.0-entity_registry_index": {
         "title": "Entity Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.92.0/version-0.92.0-external_api_websocket": {
         "title": "WebSocket API"
@@ -1386,7 +1386,7 @@
       },
       "version-0.92.0/version-0.92.0-hassio_addon_index": {
         "title": "Developing an add-on",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.92.0/version-0.92.0-hassio_addon_presentation": {
         "title": "Presenting your add-on"
@@ -1413,7 +1413,7 @@
       },
       "version-0.92.1/version-0.92.1-development_checklist": {
         "title": "Development Checklist",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.92.1/version-0.92.1-entity_fan": {
         "title": "Fan Entity",
@@ -1445,7 +1445,7 @@
       },
       "version-0.93.0/version-0.93.0-entity_index": {
         "title": "Entity",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.93.0/version-0.93.0-entity_media_player": {
         "title": "Media Player Entity",
@@ -1453,7 +1453,7 @@
       },
       "version-0.93.0/version-0.93.0-entity_registry_index": {
         "title": "Entity Registry",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.93.0/version-0.93.0-entity_switch": {
         "title": "Switch Entity",
@@ -1461,7 +1461,7 @@
       },
       "version-0.93.0/version-0.93.0-hassio_addon_index": {
         "title": "Developing an add-on",
-        "sidebar_label": "Introduction"
+        "sidebar_label": "簡介"
       },
       "version-0.93.0/version-0.93.0-hassio_addon_security": {
         "title": "Add-on security"
@@ -1488,37 +1488,37 @@
       "Area Registry": "Area Registry",
       "Frontend": "前端",
       "Extending the frontend": "Extending the frontend",
-      "Custom UI": "Custom UI",
-      "Development Workflow": "Development Workflow",
-      "Building Integrations": "Building Integrations",
+      "Custom UI": "自訂介面",
+      "Development Workflow": "開發流程",
+      "Building Integrations": "建立整合",
       "Development Checklist": "Development Checklist",
       "Home Assistant Core 101": "Home Assistant Core 101",
       "Misc": "其他",
-      "Introduction": "Introduction",
-      "External API": "External API",
+      "Introduction": "簡介",
+      "External API": "外部 API",
       "Internationalization": "Internationalization",
       "Documentation": "Documentation",
       "Intents": "Intents",
-      "Native App Integration": "Native App Integration",
+      "Native App Integration": "原生應用程式整合",
       "asyncio": "asyncio",
       "Hass.io": "Hass.io",
-      "Hass.io Add-Ons": "Hass.io Add-Ons",
-      "Maintainer docs": "Maintainer docs",
+      "Hass.io Add-Ons": "Hass.io 附加元件",
+      "Maintainer docs": "維護者文件",
       "Configuration.yaml": "Configuration.yaml",
-      "Developing a feature": "Developing a feature",
+      "Developing a feature": "開發新功能",
       "Development 101": "Development 101",
       "Integration Quality Scale": "Integration Quality Scale",
-      "Creating Platforms": "Creating Platforms",
-      "Creating Components": "Creating Components",
+      "Creating Platforms": "新增平台",
+      "Creating Components": "新增元件",
       "Lovelace UI": "Lovelace UI"
     }
   },
   "pages-strings": {
-    "Learn more using the [documentation on this site.](/test-site/docs/en/doc1.html)|no description given": "Learn more using the [documentation on this site.](/test-site/docs/en/doc1.html)",
+    "Learn more using the [documentation on this site.](/test-site/docs/en/doc1.html)|no description given": "從[網站文件](/test-site/docs/en/doc1.html)中了解更多資訊。",
     "Browse Docs|no description given": "瀏覽文件",
-    "Ask questions about the documentation and project|no description given": "Ask questions about the documentation and project",
+    "Ask questions about the documentation and project|no description given": "詢問關於文件與專案的問題",
     "Join the community|no description given": "加入社群",
-    "Find out what's new with this project|no description given": "Find out what's new with this project",
+    "Find out what's new with this project|no description given": "了解此專案最新消息",
     "Stay up to date|no description given": "獲取最新訊息",
     "Need help?|no description given": "需要協助？",
     "This project is maintained by a dedicated group of people.|statement made to reader": "此專案由一群熱心貢獻的人們所維護。",
