@@ -10,7 +10,7 @@ Home Assistant comes with a couple of built-in intents. These intents aim to off
 
 Turn an entity off.
 
-| Slot name | Type   | Required | Description                     |
+| Slot name | 類型     | Required | Description                     |
 | --------- | ------ | -------- | ------------------------------- |
 | name      | string | Yes      | Name of the entity to turn off. |
 
@@ -18,7 +18,7 @@ Turn an entity off.
 
 Turn an entity on.
 
-| Slot name | Type   | Required | Description                    |
+| Slot name | 類型     | Required | Description                    |
 | --------- | ------ | -------- | ------------------------------ |
 | name      | string | Yes      | Name of the entity to turn on. |
 
@@ -26,7 +26,7 @@ Turn an entity on.
 
 Toggle the state of an entity.
 
-| Slot name | Type   | Required | Description                   |
+| Slot name | 類型     | Required | Description                   |
 | --------- | ------ | -------- | ----------------------------- |
 | name      | string | Yes      | Name of the entity to toggle. |
 
@@ -36,7 +36,7 @@ Toggle the state of an entity.
 
 Open a cover.
 
-| Slot name | Type   | Required | Description                       |
+| Slot name | 類型     | Required | Description                       |
 | --------- | ------ | -------- | --------------------------------- |
 | name      | string | Yes      | Name of the cover entity to open. |
 
@@ -44,7 +44,7 @@ Open a cover.
 
 Close a cover.
 
-| Slot name | Type   | Required | Description                        |
+| Slot name | 類型     | Required | Description                        |
 | --------- | ------ | -------- | ---------------------------------- |
 | name      | string | Yes      | Name of the cover entity to close. |
 
@@ -54,7 +54,7 @@ Close a cover.
 
 Set the state of a light.
 
-| Slot name  | Type                        | Required | Description                        |
+| Slot name  | 類型                          | Required | Description                        |
 | ---------- | --------------------------- | -------- | ---------------------------------- |
 | name       | string                      | Yes      | Name of the entity to toggle.      |
 | color      | string, name of valid color | No       | Color to change the light to.      |
@@ -66,7 +66,7 @@ Set the state of a light.
 
 Add an item to the shopping list.
 
-| Slot name | Type   | Required | Description                      |
+| Slot name | 類型     | Required | Description                      |
 | --------- | ------ | -------- | -------------------------------- |
 | item      | string | Yes      | Name of item to add to the list. |
 
