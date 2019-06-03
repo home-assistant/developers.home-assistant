@@ -30,7 +30,7 @@ To register a sensor, make a request to the webhook like this:
 
 The valid keys are:
 
-| Key                   | Type                          | Required | Description                                                                                                                                                                                                     |
+| Key                   | 類型                            | Required | Description                                                                                                                                                                                                     |
 | --------------------- | ----------------------------- | -------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | attributes            | object                        | No       | Attributes to attach to the sensor                                                                                                                                                                              |
 | device_class          | string                        | No       | One of the valid device classes. [Binary Sensor Classes](https://www.home-assistant.io/components/binary_sensor/#device-class), [Sensor Classes](https://www.home-assistant.io/components/sensor/#device-class) |
@@ -68,7 +68,7 @@ For example, to update the sensor we registered above, you would send this:
 
 Only some of the keys are allowed during updates:
 
-| Key        | Type                          | Required | Description                                                                                                                           |
+| Key        | 類型                            | Required | Description                                                                                                                           |
 | ---------- | ----------------------------- | -------- | ------------------------------------------------------------------------------------------------------------------------------------- |
 | attributes | object                        | No       | Attributes to attach to the sensor                                                                                                    |
 | icon       | Material Design Icon (string) | No       | Must be prefixed `mdi:`                                                                                                               |
