@@ -9,7 +9,7 @@ sidebar_label: Media Player
 
 > Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 
-| Name                              | Type    | Default | Description                                                                                                                             |
+| Name                              | 類型      | Default | Description                                                                                                                             |
 | --------------------------------- | ------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------- |
 | sound_mode                        | string  | None    | The current sound mode of the media player                                                                                              |
 | sound_mode_list                 | list    | None    | Dynamic list of available sound modes (set by platform, empty means sound mode not supported)                                           |
