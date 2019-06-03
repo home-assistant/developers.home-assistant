@@ -1,6 +1,6 @@
 ---
 title: "Development Checklist"
-sidebar_label: Introduction
+sidebar_label: 簡介
 ---
 
 
