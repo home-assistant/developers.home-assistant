@@ -1,6 +1,6 @@
 ---
-title: "Native App Integration"
-sidebar_label: "Introduction"
+title: "原生應用程式整合"
+sidebar_label: "簡介"
 ---
 
 This guide describes how to build a native Home Assistant app that communicates with Home Assistant and offers a seamless integration. Below is a list of the things that we will discuss in this guide.
