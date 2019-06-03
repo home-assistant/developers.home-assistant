@@ -7,7 +7,7 @@ sidebar_label: Weather
 
 > Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 
-| Name         | Type   | Default      | Description                                     |
+| Name         | 類型     | Default      | Description                                     |
 | ------------ | ------ | ------------ | ----------------------------------------------- |
 | state        | string | **Required** | The current weather condition.                  |
 | temperature  | float  | **Required** | The current temperature in °C or °F.            |
@@ -25,7 +25,7 @@ Properties have to follow the units defined in the `unit_system`.
 
 Forecast data should either be daily or hourly.
 
-| Name        | Type   | Default      | Description                             |
+| Name        | 類型     | Default      | Description                             |
 | ----------- | ------ | ------------ | --------------------------------------- |
 | datetime    | string | **Required** | UTC Date time in RFC 3339 format.       |
 | temperature | float  | **Required** | The higher temperature in °C or °F      |
