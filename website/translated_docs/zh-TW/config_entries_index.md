@@ -1,6 +1,6 @@
 ---
 title: Config Entries
-sidebar_label: Introduction
+sidebar_label: 簡介
 ---
 
 Config Entries are configuration data that are persistently stored by Home Assistant. A config entry is created by a user via the UI. The UI flow is powered by a [config flow handler](config_entries_config_flow_handler.md) as defined by the component. Config entries can also have an extra [options flow handler](config_entries_options_flow_handler.md), also defined by the component.
