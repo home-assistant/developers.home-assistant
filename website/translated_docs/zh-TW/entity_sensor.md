@@ -9,7 +9,7 @@ A sensor is a read-only entity that provides some information. Information has a
 
 > Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 
-| Name                  | Type   | Default      | Description                                              |
+| Name                  | 類型     | Default      | Description                                              |
 | --------------------- | ------ | ------------ | -------------------------------------------------------- |
 | state                 | string | **Required** | The value of the sensor.                                 |
 | unit_of_measurement | string | `None`       | The unit of measurement that the sensor is expressed in. |
@@ -19,7 +19,7 @@ A sensor is a read-only entity that provides some information. Information has a
 
 If specifying a device class, your sensor entity will need to also return the correct unit of measurement.
 
-| Type            | Unit     | Description                |
+| 類型              | Unit     | Description                |
 | --------------- | -------- | -------------------------- |
 | battery         | %        | % of battery that is left. |
 | humidity        | %        | % of humidity in the air.  |
