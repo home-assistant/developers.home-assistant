@@ -68,7 +68,7 @@ Supported features constants are combined using the bitwise or (`|`) operator.
 
 ### Open cover
 
-Only implement this method if the flag `SUPPORT_CLOSE` is set.
+Only implement this method if the flag `SUPPORT_OPEN` is set.
 
 ```python
 class MyCover(CoverDevice):
