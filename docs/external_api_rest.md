@@ -483,6 +483,28 @@ $ curl -X POST -H "Authorization: Bearer ABCDEFGH" \
        -d '{"template": "It is {{ now }}!"}' http://localhost:8123/api/template
 ```
 
+#### POST /api/config/core/check_config
+
+Trigger a check of `configuration.yaml`. No additional data needs to be passed in with this request.
+
+If the check is successful, the following will be returned:
+
+```javascript
+{
+    "errors": null,
+    "result": "valid"
+}
+```
+
+If the check fails, the errors attribute in the object will list what caused the check to fail. For example:
+
+```javascript
+{
+    "errors": "Integration not found: frontend:",
+    "result": "invalid"
+}
+```
+
 #### POST /api/event_forwarding
 
 Set up event forwarding to another Home Assistant instance.
