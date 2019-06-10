@@ -1,11 +1,11 @@
 ---
 title: "Native App Integration"
-sidebar_label: "Introduction"
+sidebar_label: "Introductie"
 ---
 
-This guide describes how to build a native Home Assistant app that communicates with Home Assistant and offers a seamless integration. Below is a list of the things that we will discuss in this guide.
+Deze handleiding legt je uit hoe je een native Home Assistant app kan maken, die communiceert met Home Assistant en een naadloze integratie biedt. Hieronder is een lijst van de zaken die we in deze handleiding zullen bespreken.
 
-- Allow the user to establish a connection and authenticate with their own Home Assistant instance.
-- Send location and device info back to Home Assistant.
-- Call services, fire events and render templates.
-- A view to control the house via an authenticated webview.
+- Sta de gebruiker toe om een verbinding te maken en te verifiëren met zijn eigen Home Assistant instantie.
+- Stuur locatie en apparaat info terug naar Home Assistant.
+- Oproep services, evenementen en maak sjablonen.
+- Een weergave om het huis te beheren via een ingelogd webview.
