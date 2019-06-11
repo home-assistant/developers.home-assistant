@@ -1,6 +1,6 @@
 ---
 title: "Development 101"
-sidebar_label: Introduction
+sidebar_label: Introductie
 ---
 
 The goal of development 101 is to get you familiar with the basics of developing for Home Assistant. Before we start, please make sure you familiarize yourself with the [architecture](architecture_index.md).
