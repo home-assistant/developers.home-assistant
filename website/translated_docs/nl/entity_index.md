@@ -1,6 +1,6 @@
 ---
 title: Entity
-sidebar_label: Introduction
+sidebar_label: Introductie
 ---
 
 Each device is represented in Home Assistant as an entity. An entity abstracts away the internal working of Home Assistant. As an integrator you don't have to worry about how services or the state machine work. Instead, you extend an entity class and implement the necessary properties and methods for the device type that you're integrating.
