@@ -1,6 +1,6 @@
 ---
 title: "Home Assistant Frontend"
-sidebar_label: "Introduction"
+sidebar_label: "Introductie"
 ---
 
 The Home Assistant frontend allows users to browse and control the state of their house, manage their automations and configure integrations.
