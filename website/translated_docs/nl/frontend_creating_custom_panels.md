@@ -6,7 +6,7 @@ Panels are pages that show information within Home Assistant and can allow contr
 
 Besides components registering panels, users can also register panels using the `panel_custom` component. This allows users to quickly build their own custom interfaces for Home Assistant.
 
-## Introduction
+## Introductie
 
 Panels are defined as custom elements. You can use any framework that you want, as long as you wrap it up as a custom element. To quickly get started with a panel, we've created a [React custom panel starter kit](https://github.com/home-assistant/custom-panel-starter-kit-react).
 
