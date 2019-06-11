@@ -1,6 +1,6 @@
 ---
 title: "Asynchronous Programming"
-sidebar_label: Introduction
+sidebar_label: Introductie
 ---
 
 On September 29, 2016 we released [Home Assistant 0.29](https://www.home-assistant.io/blog/2016/09/29/async-sleepiq-emoncms-stocks/) as part of our bi-weekly release schedule. This release introduced a complete overhaul of the core spearheaded by [Ben Bangert](https://github.com/bbangert/).
