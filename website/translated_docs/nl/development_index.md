@@ -1,6 +1,6 @@
 ---
 title: "Starting with Development"
-sidebar_label: Introduction
+sidebar_label: Introductie
 ---
 
 Home Assistant is built from the ground up to be easily extensible using integrations. In this section, we're focusing on how to develop integrations.
