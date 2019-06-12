@@ -88,13 +88,14 @@ interface ErrorResult {
 
 ### Get External Config
 
+Available in: Home Assistant 0.92
 Type: `config/get`
 Direction: frontend to external app.
 Expects answer: yes
 
 Query the external app for the external configuration. The external configuration is used to customize the experience in the frontend.
 
-Payload structure:
+Expected response payload:
 
 ```ts
 {
@@ -104,16 +105,18 @@ Payload structure:
 
 - `hasSettingsScreen` set to true if the external app will show a configuration screen when it receives the command `config_screen/show`. If so, a new option will be added to the sidebar to trigger the configuration screen.
 
-### Show Config Screen `config/get`
+### Show Config Screen `config_screen/show`
 
+Available in: Home Assistant 0.92
 Type: `config_screen/show`
 Direction: frontend to external app.
 Expect answer: no
 
 Show the configuration screen of the external app.
 
-### Connection Status update
+### Connection Status update `connection-status`
 
+Available in: Home Assistant 0.92
 Type: `connection-status`
 Direction: frontend to external app.
 Expect answer: no
@@ -128,8 +131,9 @@ Payload structure:
 }
 ```
 
-### Trigger Haptic
+### Trigger Haptic `haptic`
 
+Available in: Home Assistant 0.92
 Type: `haptic`
 Direction: frontend to external app.
 Expect answer: no
