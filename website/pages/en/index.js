@@ -221,8 +221,8 @@ const LatestNews = ({ language }) => (
         >
           <h2>Latest Blog Posts</h2>
           <ul>
-            {MetadataBlog.slice(0, 5).map(item => (
-              <li>
+            {MetadataBlog.slice(0, 5).map((item, index) => (
+              <li key={index}>
                 <a href={item.path}>{item.title}</a>{" "}
                 <small>
                   {new Date(item.date).toLocaleDateString("en-US", {
@@ -243,7 +243,7 @@ const LatestNews = ({ language }) => (
             style={{ borderWidth: 0, margin: "auto", display: "block" }}
             width="300"
             height="200"
-            frameborder="0"
+            frameBorder="0"
             scrolling="no"
           />
         </div>
