@@ -78,13 +78,14 @@ If your integration is discoverable without requiring any authentication, you'll
 """Config flow for LIFX."""
 from homeassistant.helpers import config_entry_flow
 from homeassistant import config_entries
+
+import aiolifx
+
 from .const import DOMAIN
 
 
 async def _async_has_devices(hass):
     """Return if there are devices that can be discovered."""
-    import aiolifx
-
     lifx_ip_addresses = await aiolifx.LifxScan(hass.loop).scan()
     return len(lifx_ip_addresses) > 0
 
