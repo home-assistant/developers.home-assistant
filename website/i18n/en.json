@@ -303,6 +303,9 @@
       "frontend_external_auth": {
         "title": "External Authentication"
       },
+      "frontend_external_bus": {
+        "title": "External Bus"
+      },
       "frontend_index": {
         "title": "Home Assistant Frontend",
         "sidebar_label": "Introduction"
