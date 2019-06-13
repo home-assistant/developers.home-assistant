@@ -1,14 +1,14 @@
 ---
-title: "Releasing"
+title: "Έκδοση"
 ---
 
-This page describes the steps for publishing a new Home Assistant release. Those steps requires that you don't use forks but work with the repositories themself. The [hass-release](https://github.com/home-assistant/hass-release) script is a helper to do a release.
+Αυτή η σελίδα περιγράφει τα βήματα για την κυκλοφορία νέας έκδοσης του Home Assistant. Αυτά τα βήματα απαιτούν τη μη χρήση διακλαδώσεων αλλά απευθείας των αποθετηρίων αυτών. Η δέσμη εντολών [hass-release](https://github.com/home-assistant/hass-release) βοηθά στη δημιουργία μιας έκδοσης.
 
-### Release preparation (3 days before release)
+### Προετοιμασία έκδοσης (3 μέρες πριν την έκδοση)
 
 ### GitHub
 
-1. Merge `master` into `dev` to make the PR mergeable.
+1. Συγχωνεύστε το `master` μέσα στο `dev` ώστε η προετοιμασία έκδοσης να είναι συγχωνεύσιμη.
 2. Cut a release branch from `dev`. Example name `release-0-57`.
 3. Create a pull request from the release branch to `master` with the upcoming release number as the title.
 4. Update `homeassistant/const.py` with the correct version number (remove the `dev` tag) and push that commit to release branch.
