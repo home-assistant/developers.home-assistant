@@ -25,6 +25,22 @@ $ sudo apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavut
 
 Additional dependencies exist if you plan to perform Frontend Development, please read the [Frontend](frontend_index.md) section to learn more.
 
+### Developing in Docker (Beta)
+
+You need `docker` and `docker-compose` installed on your system.
+
+Clone the main repo
+```bash
+$ git clone https://github.com/home-assistant/home-assistant 
+```
+
+Start home-assistant server
+```bash
+$ docker-compose up
+```
+
+Note: configuratin files and python cache files created as root but you can edit them.
+
 ### Developing on Windows
 
 Due to Home Assistant is mainly designed and developed on Linux distributions, on Windows 10 you can setup a [Linux subsystem](https://docs.microsoft.com/windows/wsl/install-win10).
