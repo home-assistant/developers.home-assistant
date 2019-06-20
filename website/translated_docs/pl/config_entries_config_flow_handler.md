@@ -5,13 +5,21 @@ sidebar_label: Configuration
 
 > This option is currently only available for built-in components.
 
-Integrations can be set up via the user interface by adding support for config entries. Config entries uses the [data flow entry framework](data_entry_flow_index.md) to allow users to create entries. Components that want to support config entries will need to define a Config Flow Handler. This handler will manage the creation of entries from user input, discovery or other sources (like Hass.io).
+Integrations can be set up via the user interface by adding support for a config config to create a config entry. Components that want to support config entries will need to define a Config Flow Handler. This handler will manage the creation of entries from user input, discovery or other sources (like Hass.io).
 
 Config Flow Handlers control the data that is stored in a config entry. This means that there is no need to validate that the config is correct when Home Assistant starts up. It will also prevent breaking changes, because we will be able to migrate configuration entries to new formats if the version changes.
 
 When instantiating the handler, Home Assistant will make sure to load all dependencies and install the requirements of the component.
 
-To register your config flow handler with Home Assistant, register it with the config entries `HANDLERS` registry:
+## Updating the manifest
+
+You need to update your integrations manifest to inform Home Assistant that your integration has a config flow. This is done by adding `config_flow: true` to your manifest ([docs](creating_integration_manifest.md#config-flow)).
+
+## Defining your config flow
+
+Config entries uses the [data flow entry framework](data_entry_flow_index.md) to define their config flows. The config flow needs to be defined in the file `config_flow.py` in your integration folder.
+
+To define it, extend the ConfigFlow base class from the config entries module, and decorate it with the `HANDLERS.register` decorator:
 
 ```python
 from homeassistant import config_entries
@@ -20,26 +28,78 @@ from homeassistant import config_entries
 class ExampleConfigFlow(config_entries.ConfigFlow):
 ```
 
-All config flow handlers will also need to add their domain name to the `FLOWS` constant in `homeassistant/config_entries.py`.
+## Defining steps
 
-## Discovering your config flow
-
-Home Assistant has a discovery integration that scans the network for available devices and services and will trigger the config flow of the appropriate integration. Discovery is limited to UPnP and zeroconf/mDNS.
-
-To have your integration be discovered, you will have to extend the [NetDisco library](https://github.com/home-assistant/netdisco) to be able to find your device. This is done by adding a new discoverable. [See the repository for examples of existing discoverable.](https://github.com/home-assistant/netdisco/tree/master/netdisco/discoverables)
-
-Once done, you will have to update the discovery integration to make it aware which discovery maps to which integration, by updating [this list](https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/discovery/__init__.py#L55).
-
-Finally, you will have to add support to your config flow to be triggered from discovery. This is done by adding a new discovery step. Make sure that your discovery step does not automatically create an entry. All discovered config flows are required to have a confirmation from the user.
-
-Once discovered, the user will be notified that they can continue the flow from the config panel.
+Your config flow will need to define steps of your configuration flow. The docs for [Data Entry Flow](data_entry_flow_index.md) describe the different return values of a step. Here is an example on how to define the `user` step.
 
 ```python
 @config_entries.HANDLERS.register(DOMAIN)
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
 
-    async def async_step_discovery(self, info):
-        # Handle discovery info
+    async def async_step_user(self, info):
+        if info is not None:
+            # process info
+
+        return self.async_show_form(
+            step_id='init',
+            data_schema=vol.Schema({
+              vol.Required('password'): str
+            })
+        )
+```
+
+There are a few step names reserved for system use:
+
+| Step name   | Description                                                                                                                                                   |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `user`      | Invoked when a user initiates a flow via the user interface.                                                                                                  |
+| `zeroconf`  | Invoked if your integration has been discovered via Zeroconf/mDNS as specified [using `zeroconf` in the manifest](creating_integration_manifest.md#zeroconf). |
+| `homekit`   | Invoked if your integration has been discovered via HomeKit as specified [using `homekit` in the manifest](creating_integration_manifest.md#homekit).         |
+| `ssdp`      | Invoked if your integration has been discovered via SSDP/uPnP as specified [using `ssdp` in the manifest](creating_integration_manifest.md#ssdp).             |
+| `discovery` | *DEPRECATED* Invoked if your integration has been discovered by the discovery integration.                                                                    |
+
+## Discovery steps
+
+When an integration is discovered, their respective discovery step is invoked with the discovery information. The step will have to check the following things:
+
+- Make sure there are no other instances of this config flow in progress of setting up the discovered device. This can happen if there are multiple ways of discovering that a device is on the network.
+- Make sure that the device is not already set up.
+- Invoking a discovery step should never result in a finished flow and a config entry. Always confirm with the user.
+    
+    ## Discoverable integrations that require no authentication
+
+If your integration is discoverable without requiring any authentication, you'll be able to use the Discoverable Flow that is built-in. This flow offers the following features:
+
+- Detect if devices/services can be discovered on the network before finishing the config flow.
+- Support all manifest-based discovery protocols.
+- Limit to only 1 config entry. It is up to the config entry to discover all available devices.
+
+```python
+"""Config flow for LIFX."""
+from homeassistant.helpers import config_entry_flow
+from homeassistant import config_entries
+
+import aiolifx
+
+from .const import DOMAIN
+
+
+async def _async_has_devices(hass):
+    """Return if there are devices that can be discovered."""
+    lifx_ip_addresses = await aiolifx.LifxScan(hass.loop).scan()
+    return len(lifx_ip_addresses) > 0
+
+
+config_entry_flow.register_discovery_flow(
+    # Domain of your integration
+    DOMAIN,
+    # Title of the created config entry
+    'LIFX',
+    # async method that returns a boolean if devices/services are found
+    _async_has_devices,
+    # Connection class of the integration
+    config_entries.CONN_CLASS_LOCAL_POLL
+)
 ```
 
 ## Translations
@@ -79,13 +139,3 @@ Translations for the config flow handlers are defined under the `config` key in 
 ```
 
 When the translations are merged into Home Assistant, they will be automatically uploaded to [Lokalise](https://lokalise.co/) where the translation team will help to translate them in other languages. [More info on translating Home Assistant.](internationalization_translation.md)
-
-## Triggering other config flows
-
-If you are writing an integration that discovers other integrations, you will want to trigger their config flows so the user can set them up. Do this by passing a source parameter and optional user input when initializing the config entry:
-
-```python
-await hass.config_entries.flow.async_init(
-    'hue', data=discovery_info,
-    context={'source': config_entries.SOURCE_DISCOVERY})
-```
