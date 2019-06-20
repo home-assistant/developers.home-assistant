@@ -6,7 +6,7 @@
     "tagline": "Alles wat je nodig hebt om te ontwikkelen voor Home Assistant",
     "docs": {
       "app_integration_index": {
-        "title": "Native App Integration",
+        "title": "Native App integratie",
         "sidebar_label": "Introductie"
       },
       "app_integration_notifications": {
@@ -302,6 +302,9 @@
       },
       "frontend_external_auth": {
         "title": "External Authentication"
+      },
+      "frontend_external_bus": {
+        "title": "External Bus"
       },
       "frontend_index": {
         "title": "Home Assistant Frontend",
@@ -1029,7 +1032,7 @@
         "sidebar_label": "Introductie"
       },
       "version-0.83.0/version-0.83.0-app_integration_index": {
-        "title": "Native App Integration",
+        "title": "Native App integratie",
         "sidebar_label": "Introductie"
       },
       "version-0.83.0/version-0.83.0-app_integration_sending_data": {
@@ -1142,7 +1145,7 @@
         "title": "Lovelace: Custom Cards"
       },
       "version-0.89.0/version-0.89.0-app_integration_index": {
-        "title": "Native App Integration",
+        "title": "Native App integratie",
         "sidebar_label": "Introductie"
       },
       "version-0.89.0/version-0.89.0-app_integration_sending_data": {
@@ -1468,6 +1471,56 @@
       },
       "version-0.93.0/version-0.93.0-hassio_debugging": {
         "title": "Debugging Hass.io"
+      },
+      "version-0.94.0/version-0.94.0-config_entries_config_flow_handler": {
+        "title": "Integration Configuration",
+        "sidebar_label": "Configuration"
+      },
+      "version-0.94.0/version-0.94.0-creating_component_code_review": {
+        "title": "Checklist for creating a component",
+        "sidebar_label": "Component Checklist"
+      },
+      "version-0.94.0/version-0.94.0-creating_component_index": {
+        "title": "Creating a Minimal Component",
+        "sidebar_label": "Minimal Component"
+      },
+      "version-0.94.0/version-0.94.0-creating_integration_manifest": {
+        "title": "Integration Manifest",
+        "sidebar_label": "Manifest"
+      },
+      "version-0.94.0/version-0.94.0-creating_platform_code_review": {
+        "title": "Checklist for creating a platform",
+        "sidebar_label": "Platform Checklist"
+      },
+      "version-0.94.0/version-0.94.0-data_entry_flow_index": {
+        "title": "Data Entry Flow",
+        "sidebar_label": "Introductie"
+      },
+      "version-0.94.0/version-0.94.0-device_registry_index": {
+        "title": "Device Registry",
+        "sidebar_label": "Introductie"
+      },
+      "version-0.94.0/version-0.94.0-entity_cover": {
+        "title": "Cover Entity",
+        "sidebar_label": "Cover"
+      },
+      "version-0.94.0/version-0.94.0-external_api_rest": {
+        "title": "REST API"
+      },
+      "version-0.94.0/version-0.94.0-frontend_creating_custom_panels": {
+        "title": "Creating custom panels"
+      },
+      "version-0.94.0/version-0.94.0-frontend_creating_custom_ui": {
+        "title": "Creating custom UI"
+      },
+      "version-0.94.0/version-0.94.0-frontend_external_bus": {
+        "title": "External Bus"
+      },
+      "version-0.94.0/version-0.94.0-hassio_addon_communication": {
+        "title": "Add-On Communication"
+      },
+      "version-0.94.0/version-0.94.0-hassio_debugging": {
+        "title": "Debugging Hass.io"
       }
     },
     "links": {
@@ -1499,7 +1552,7 @@
       "Internationalization": "Internationalization",
       "Documentation": "Documentation",
       "Intents": "Intents",
-      "Native App Integration": "Native App Integration",
+      "Native App Integration": "Native App integratie",
       "asyncio": "asyncio",
       "Hass.io": "Hass.io",
       "Hass.io Add-Ons": "Hass.io Add-ons",
