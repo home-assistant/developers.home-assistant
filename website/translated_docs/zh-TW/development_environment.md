@@ -55,7 +55,7 @@ $ mkdir -p ../config
 $ hass -c ../config
 ```
 
-### Developing on OS X
+### Developing on macOS
 
 Install [Homebrew](https://brew.sh/), then use that to install Python 3:
 
