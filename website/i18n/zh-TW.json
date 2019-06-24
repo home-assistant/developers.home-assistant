@@ -303,6 +303,9 @@
       "frontend_external_auth": {
         "title": "External Authentication"
       },
+      "frontend_external_bus": {
+        "title": "External Bus"
+      },
       "frontend_index": {
         "title": "Home Assistant 前端",
         "sidebar_label": "簡介"
@@ -1467,6 +1470,56 @@
         "title": "Add-on security"
       },
       "version-0.93.0/version-0.93.0-hassio_debugging": {
+        "title": "Debugging Hass.io"
+      },
+      "version-0.94.0/version-0.94.0-config_entries_config_flow_handler": {
+        "title": "Integration Configuration",
+        "sidebar_label": "Configuration"
+      },
+      "version-0.94.0/version-0.94.0-creating_component_code_review": {
+        "title": "Checklist for creating a component",
+        "sidebar_label": "Component Checklist"
+      },
+      "version-0.94.0/version-0.94.0-creating_component_index": {
+        "title": "Creating a Minimal Component",
+        "sidebar_label": "Minimal Component"
+      },
+      "version-0.94.0/version-0.94.0-creating_integration_manifest": {
+        "title": "Integration Manifest",
+        "sidebar_label": "Manifest"
+      },
+      "version-0.94.0/version-0.94.0-creating_platform_code_review": {
+        "title": "Checklist for creating a platform",
+        "sidebar_label": "Platform Checklist"
+      },
+      "version-0.94.0/version-0.94.0-data_entry_flow_index": {
+        "title": "Data Entry Flow",
+        "sidebar_label": "簡介"
+      },
+      "version-0.94.0/version-0.94.0-device_registry_index": {
+        "title": "Device Registry",
+        "sidebar_label": "簡介"
+      },
+      "version-0.94.0/version-0.94.0-entity_cover": {
+        "title": "Cover Entity",
+        "sidebar_label": "Cover"
+      },
+      "version-0.94.0/version-0.94.0-external_api_rest": {
+        "title": "REST API"
+      },
+      "version-0.94.0/version-0.94.0-frontend_creating_custom_panels": {
+        "title": "Creating custom panels"
+      },
+      "version-0.94.0/version-0.94.0-frontend_creating_custom_ui": {
+        "title": "Creating custom UI"
+      },
+      "version-0.94.0/version-0.94.0-frontend_external_bus": {
+        "title": "External Bus"
+      },
+      "version-0.94.0/version-0.94.0-hassio_addon_communication": {
+        "title": "Add-On Communication"
+      },
+      "version-0.94.0/version-0.94.0-hassio_debugging": {
         "title": "Debugging Hass.io"
       }
     },
