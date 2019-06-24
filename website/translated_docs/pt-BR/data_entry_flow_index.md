@@ -201,6 +201,69 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         )
 ```
 
+### External Step & External Step Done
+
+It is possible that a user needs to finish a config flow by doing actions on an external website. For example, setting up an integration by being redirected to an external webpage. This is commonly used by integrations that use OAuth2 to authorize a user.
+
+*The example is about config entries, but works with other parts that use data entry flows too.*
+
+The flow works as follows:
+
+1. User starts config flow in Home Assistant
+2. Config flow prompts user to finish the flow on an external website
+3. User opens the external website
+4. Upon completion of the external step, the user's browser will be redirected to a Home Assistant endpoint to deliver the response.
+5. The endpoint validates the response, and upon validation, marks the external step as done and returns JavaScript code to close the window: `<script>window.close()</script>`.
+    
+    To be able to route the result of the external step to the Home Assistant endpoint, you will need to make sure the config flow ID is included. If your external step is an OAuth2 flow, you can leverage the oauth2 state for this. This is a variable that is not interpreted by the authorization page but is passed as-is to the Home Assistant endpoint.
+
+6. The window closes and the Home Assistant user interface with the config flow will be visible to the user again.
+
+7. The config flow has automatically advanced to the next step when the external step was marked as done. The user is prompted with the next step.
+
+Example configuration flow that includes an external step.
+
+```python
+from homeassistant import config_entries
+
+@config_entries.HANDLERS.register(DOMAIN)
+class ExampleConfigFlow(data_entry_flow.FlowHandler):
+    VERSION = 1
+    data = None
+
+    async def async_step_user(self, user_input=None):
+        if not user_input:
+            return self.async_external_step(
+                step_id='user',
+                url='https://example.com/?config_flow_id={}'.format(
+                    self.flow_id
+                ),
+            )
+
+        self.data = user_input
+        return self.async_external_step_done(next_step_id='finish')
+
+    async def async_step_finish(self, user_input=None):
+        return self.async_create_entry(
+            title=self.data['title'],
+            data=self.data
+        )
+```
+
+Example code to mark an external step as done:
+
+```python
+from homeassistant import data_entry_flow
+
+async def handle_result(hass, flow_id, data):
+  result = await hass.config_entries.async_configure(flow_id, data)
+
+  if result['type'] == data_entry_flow.RESULT_TYPE_EXTERNAL_STEP_DONE:
+      return "success!"
+  else:
+      return "Invalid config flow specified"
+```
+
 ## Translations
 
 Data entry flows depend on translations for showing the text in the forms. It depends on the parent of a data entry flow manager where this is stored.
