@@ -223,7 +223,7 @@ const LatestNews = ({ language }) => (
           <ul>
             {MetadataBlog.slice(0, 5).map((item, index) => (
               <li key={index}>
-                <a href={item.path}>{item.title}</a>{" "}
+                <a href={`/blog/${item.path}`}>{item.title}</a>{" "}
                 <small>
                   {new Date(item.date).toLocaleDateString("en-US", {
                     weekday: undefined,
