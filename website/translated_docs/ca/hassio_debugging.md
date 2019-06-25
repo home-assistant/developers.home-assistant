@@ -35,6 +35,8 @@ You need set the dev mode on supervisor and enable debug with options. You need 
 
 ## SSH access to the host
 
+> SSH access through the [SSH add-on](https://www.home-assistant.io/addons/ssh/) (which will give you SSH access through port 22) will not provide you with all the necessary privileges, and you will be asked for a username and password when typing the 'login' command. You need to follow the steps below, which will setup a separate SSH access through port 22222 with all necessary privileges.
+
 ### resinOS based Hass.io (deprecated)
 
 Create an `authorized_keys` file containing your public key, and place it in the root of the boot partition of your SD card. See [Generating SSH Keys](#generating-ssh-keys) section below if you need help generating keys. Once the device is booted, you can access your device as root over SSH on port 22222.
