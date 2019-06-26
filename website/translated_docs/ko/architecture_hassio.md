@@ -1,26 +1,26 @@
 ---
-title: "Hass.io Architecture"
+title: "Hass.io 아키텍쳐"
 sidebar_label: Hass.io
 ---
 
-![Architecture overview of Hass.io](/img/en/architecture/hassio.png)
+![Hass.io 의 아키텍쳐 개요](/img/en/architecture/hassio.png)
 
-## Host Control (HC)
+## 호스트 제어 (HC)
 
-This is a daemon running on the host machine that allows the supervisor to control certain aspects of the host OS:
+이는 호스트 시스템에서 실행되는 데몬으로, 관리자가 호스트 OS 의 특정 요소를 제어 할 수 있습니다.
 
-- Power cycle (restart, turn off)
-- Manage network settings
-- Local updates
+- 전원 조작 (다시 시작, 꺼짐)
+- 네트워크 설정 관리
+- 로컬 업데이트
 
-## Host
+## 호스트
 
-Our pre-build images are based on [HassOS](https://github.com/home-assistant/hassos) which is based on [BuildRoot](https://buildroot.org/). Any Linux machine can be turned into a Hass.io host by running [the installer](https://www.home-assistant.io/hassio/installation/#alternative-install-on-generic-linux-server).
+사전 빌드 이미지는 [BuildRoot](https://buildroot.org/) 기반의 [HassOS](https://github.com/home-assistant/hassos) 를 기반으로 합니다. 어떤 리눅스 시스템이든지 [설치 프로그램](https://www.home-assistant.io/hassio/installation/#alternative-install-on-generic-linux-server)을 실행해서 Hass.io 호스트로 사용할 수 있습니다.
 
-## Supervisor
+## 관리자
 
-The supervisor offers an API to manage the host and running the Docker containers.
+관리자는 호스트를 관리하고 Docker 컨테이너를 실행하는 API 를 제공합니다.
 
-## Configuration panel
+## 설정 패널
 
-The configuration panel lives inside the supervisor but is accessible via the Home Assistant user interface. The configuration panel allows the user to manage the installation.
+설정 패널은 관리자 내부에 있지만 Home Assistant 사용자 인터페이스를 통해 액세스 할 수 있습니다. 설정 패널은 사용자가 설치를 관리 할 수 ​​있도록 해줍니다.
