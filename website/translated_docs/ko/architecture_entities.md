@@ -1,41 +1,41 @@
 ---
-title: "Entity Architecture"
-sidebar_label: Entity
+title: "엔티티 아키텍쳐"
+sidebar_label: 엔티티
 ---
 
-![Architecture overview of Hass.io](/img/en/architecture/entities_architecture.png)
+![Hass.io 의 아키텍쳐 개요](/img/en/architecture/entities_architecture.png)
 
 ## 구성
 
-Configuration is provided by the [configuration.yaml file](configuration_yaml_index.md) or by a [Config Entry](config_entries_index.md).
+설정은 [configuration.yaml 파일](configuration_yaml_index.md) 혹은 [컨피그 엔트리](config_entries_index.md)에 의해 제공됩니다.
 
-## Component
+## 컴포넌트
 
-Examples of components: `light`, `switch`.
+컴포넌트 예: `light`, `switch`.
 
-The component is responsible for defining the Abstract Entity Class and services to control the entities.
+컴포넌트는 Abstract Entity Class 와 엔티티를 제어하기 위한 서비스를 정의합니다.
 
-## Entity Component
+## 엔티티 컴포넌트
 
-The Entity Component is responsible for:
+엔티티 컴포넌트는:
 
-- Distributing the configuration to the platforms
-- Forward config entries and discoveries
-- Collect entities for service calls
-- Optionally maintain a group of all entities
+- 플랫폼에 설정 배포
+- 설정 항목 전달과 검색
+- 서비스 호출에 대한 엔티티 수집
+- 부수적으로 모든 엔티티 그룹을 유지 관리
 
-## Entity Platform
+## 엔티티 플랫폼
 
-The Entity Platform manages all entities for the platform and polls them for updates if necessary.
+엔티티 플랫폼은 플랫폼에 대한 모든 엔티티를 관리하고 필요한 경우 업데이트를 폴링합니다.
 
-When adding entities, the Entity Platform will query the Entity Registry to make sure that the entities to be added have the correct entity IDs.
+엔티티를 추가 할 때, 엔티티 플랫폼은 엔티티 레지스트리를 쿼리해서 추가 할 엔티티에 올바른 엔티티 ID가 있는지 확인합니다.
 
-## Entity Registry
+## 엔티티 레지스트리
 
-The [Entity Registry](entity_registry_index.md) will track entities and allows users to store extra settings for an entity.
+[엔티티 레지스트리](entity_registry_index.md)는 엔티티를 추적하고 사용자가 엔티티에 대해 추가 설정을 저장할 수 있도록 해줍니다.
 
-## Platform
+## 플랫폼
 
-Examples of platforms: `light.hue`, `switch.wemo`.
+플랫폼 예: `light.hue`, `switch.wemo`.
 
-Platform uses configuration to query the external device/service and add entities to the entity platform.
+플랫폼은 설정을 사용하여 외부 기기/서비스를 쿼리하고 엔티티를 엔티티 플랫폼에 추가합니다.
