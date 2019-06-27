@@ -11,13 +11,13 @@ Home Assistant 아키텍처로 들어가기에 앞서, 홈 자동화 환경에 �
 - 홈 자동화는 사용자 설정을 기반으로 명령을 트리거 합니다.
 - 스마트 홈은 이전 동작을 기반으로 명령을 트리거 합니다.
 
-![Home Automation landscape](/img/en/architecture/home_automation_landscape.svg)
+![홈 자동화 환경](/img/en/architecture/home_automation_landscape.svg)
 
 Home Assistant 코어는 홈 제어를 담당합니다. Home Assistant 는 이를 위해 네 부분으로 구성되어 있습니다:
 
-- **Event Bus**: facilitates the firing and listening of events -- the beating heart of Home Assistant.
-- **State Machine**: keeps track of the states of things and fires a `state_changed` event when a state has been changed.
-- **Service Registry**: listens on the event bus for `call_service` events and allows other code to register services.
-- **Timer**: sends a `time_changed` event every 1 second on the event bus.
+- **이벤트 버스**: 이벤트 방출 및 수신 편의 제공 -- Home Assistant 의 뛰는 심장
+- **상태 시스템**: 상태가 변경되면 사물의 상태를 추적하고 `state_changed` 이벤트를 방출.
+- **서비스 레지스트리**: 이벤트 버스에서 `call_service` 이벤트를 수신하고 코드의 서비스 등록을 허용.
+- **타이머**: `time_changed` 를 이벤트 버스에서 매 1초마다 송출
 
-![Overview of the Home Assistant core architecture](/img/en/architecture/ha_architecture.svg)
+![Home Assistant 코어 아키텍쳐 개요](/img/en/architecture/ha_architecture.svg)
