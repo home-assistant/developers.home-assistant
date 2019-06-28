@@ -1,18 +1,18 @@
 ---
-title: "Categorizing Functions"
+title: "카테고리화 기능"
 ---
 
-A piece of work within Home Assistant is represented by a function that will be invoked. It will either run inside our event loop or inside our thread pool, depending on if it is async safe.
+Home Assistant 내에서 작업은 호출 될 함수로 표현됩니다. 비동기 안전성에 따라 Home Assistant 의 내부에서 이벤트 루프 또는 내부 스레드 풀에서 실행됩니다.
 
-Home Assistant uses the convention that all functions that must be run from within the event loop are prefixed with `async_`.
+Home Assistant 는 이벤트 루프 내에서 실행해야 할 모든 기능 앞에 `async_` 접두어가 붙는 규칙을 사용합니다.
 
-## The coroutine function
+## 코루틴 함수
 
-Coroutines are special functions based on Python’s generators syntax which allows them to suspend execution while waiting on a result.
+코루틴은 결과를 기다리는 동안 실행을 일시 중단 할 수있는 Python 의 생성자 구문을 기반으로하는 특수 함수입니다.
 
-Invoking a coroutine function will return a Generator object back, but will not actually begin execution. This object will execute the task when it is either yielded from (from within another coroutine) or it is scheduled on the event loop.
+코루틴 함수를 호출하면 생성자 객체가 다시 반환되지만 실제로 실행되지는 않습니다. 이 객체는 작업이 (다른 코루틴 내로 부터) 파생되거나 이벤트 루프에서 예약될 때 작업을 실행합니다.
 
-To declare a function a coroutine, import the coroutine annotation from the asyncio package and annotate your function.
+함수를 코루틴으로 선언하려면 비동기 패키지에서 코루틴 어노테이션을 가져 와서 함수에 어노테이션을 달아주면 됩니다.
 
 ```python
 async def async_look_my_coroutine(target):
@@ -23,11 +23,11 @@ async def async_look_my_coroutine(target):
 hass.loop.create_task(async_look_my_coroutine("world"))
 ```
 
-In this example, we schedule the coroutine by calling `hass.loop.create_task`. This will add the coroutine to the queue of tasks to be run. When the event loop is running `async_look_my_coroutine` it will suspend the task when `await entity.async_turn_on()` is called. At that point a new task will be scheduled to execute `entity.async_turn_on()`. When that job has been executed, `async_look_my_coroutine` will resume.
+이 예제에서는, `hass.loop.create_task` 를 호출해서 코루틴을 예약했습니다. 이는 실행 될 작업 큐에 코루틴을 추가합니다. 이벤트 루프가 `async_look_my_coroutine` 을 실행중이면 `await entity.async_turn_on()` 이 호출 될 때 작업을 일시 중단합니다. 이 시점에서 `entity.async_turn_on()` 을 실행할 새 작업이 예약됩니다. 해당 작업이 실행되면, `async_look_my_coroutine` 이 다시 재개됩니다.
 
-## The callback function
+## 콜백 함수
 
-This is a normal function that is considered safe to be run from within the event loop. A callback is unable to suspend itself and thus cannot do any I/O or call a coroutine. A callback is capable of scheduling a new task but it will not be able to wait for the results.
+콜백 함수는 이벤트 루프 내에서 실행되는 것이 안전하다고 간주되는 일반 함수입니다. 콜백은 콜백 자신을 일시 중단 할 수 없으므로 I/O를 수행하거나 코루틴을 호출 할 수 없습니다. 콜백은 새 작업을 예약 할 수는 있지만 결과를 기다릴 수는 없습니다.
 
 To declare a function as a callback, import the callback annotation from the core package and annotate your function.
 
