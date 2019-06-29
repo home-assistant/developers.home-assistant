@@ -29,9 +29,9 @@ hass.loop.create_task(async_look_my_coroutine("world"))
 
 콜백 함수는 이벤트 루프 내에서 실행되는 것이 안전하다고 간주되는 일반 함수입니다. 콜백은 콜백 자신을 일시 중단 할 수 없으므로 I/O를 수행하거나 코루틴을 호출 할 수 없습니다. 콜백은 새 작업을 예약 할 수는 있지만 결과를 기다릴 수는 없습니다.
 
-To declare a function as a callback, import the callback annotation from the core package and annotate your function.
+함수를 콜백으로 선언하려면 코어 패키지에서 콜백 어노테이션을 가져 와서 함수에 어노테이션을 달아주면 됩니다.
 
-A common use case for a callback in Home Assistant is as a listener for an event or a service call. It can process the incoming information and then schedule the right calls to be made. Example from the automation component.
+Home Assistant 에서 콜백의 일반적인 사용법은 이벤트 또는 서비스 호출의 수신입니다. 콜백은 들어오는 정보를 처리 한 다음 올바른 호출을 예약 할 수 있습니다. 자동화 컴포넌트의 예제입니다.
 
 ```python
 from homeassistant.core import callback
@@ -44,9 +44,9 @@ def async_trigger_service_handler(service_call):
         hass.loop.create_task(entity.async_trigger(vars, True))
 ```
 
-In this example, `entity.async_trigger` is a coroutine function. Invoking the coroutine function will return a coroutine task. The passed in parameters will be used when the task gets executed.
+이 예제에서 `entity.async_trigger` 는 코루틴 함수 입니다. 코루틴 함수를 호출하면 코루틴 작업이 반환됩니다. 전달 된 매개변수는 작업이 실행될 때 사용됩니다.
 
-To execute the task we have to schedule it for execution on the event loop. This is done by calling `hass.loop.create_task`.
+작업을 실행하려면 이벤트 루프에서 실행하도록 예약해야 합니다. 이는 `hass.loop.create_task` 를 호출하면 됩니다.
 
 ### Why even have callbacks?
 
