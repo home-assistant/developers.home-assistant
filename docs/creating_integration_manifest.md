@@ -3,7 +3,7 @@ title: "Integration Manifest"
 sidebar_label: "Manifest"
 ---
 
-Since 0.92.0, every integration has a manifest file to specify basic information about an integration. This file is stored as `manifest.json` in your integration directory. It is required to add such a file, except for custom components.
+Since 0.92.0, every integration has a manifest file to specify basic information about an integration. This file is stored as `manifest.json` in your integration directory. It is required to add such a file, also for custom components that use libraries or modules that are as a default not available in Home Assistant. When the custom component does not have such REQUIREMENTS, the file can be omitted.
 
 ```json
 {
