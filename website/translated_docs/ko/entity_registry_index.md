@@ -1,5 +1,5 @@
 ---
-title: Entity Registry
+title: 엔티티 레지스트리
 sidebar_label: 대하여
 ---
 
