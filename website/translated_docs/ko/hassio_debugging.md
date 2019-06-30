@@ -52,7 +52,7 @@ You should then be able to SSH into your Hass.io device. On Mac/Linux, use:
     ssh root@hassio.local -p 22222
     
 
-You will initially be logged in to Hass.io CLI for HassOS where you can perform normal [CLI functions](https://www.home-assistant.io/hassio/commandline/). If you need access to the host system use the 'login' command. [Hass.io OS](https://github.com/home-assistant/hassos) is a hypervisor for Docker. See the [Hass.io Architecture](https://developers.home-assistant.io/docs/en/architecture_hassio.html) documentation for information regarding the Hass.io supervisor. The supervisor offers an API to manage the host and running the Docker containers. Home Assistant itself and all installed addon's run in separate Docker containers.
+You will initially be logged in to Hass.io CLI for HassOS where you can perform normal [CLI functions](https://www.home-assistant.io/hassio/commandline/). If you need access to the host system use the 'login' command. [Hass.io OS](https://github.com/home-assistant/hassos) is a hypervisor for Docker. See the [Hass.io Architecture](https://developers.home-assistant.io/docs/en/architecture_hassio.html) documentation for information regarding the Hass.io supervisor. 관리자는 호스트를 관리하고 Docker 컨테이너를 실행하는 API 를 제공합니다. Home Assistant itself and all installed addon's run in separate Docker containers.
 
 ## Checking the logs
 
