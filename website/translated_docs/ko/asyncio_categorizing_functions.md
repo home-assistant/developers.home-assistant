@@ -1,5 +1,5 @@
 ---
-title: "카테고리화 기능"
+title: "함수의 유형"
 ---
 
 Home Assistant 내에서 작업은 호출 될 함수로 표현됩니다. 비동기 안전성에 따라 Home Assistant 의 내부에서 이벤트 루프 또는 내부 스레드 풀에서 실행됩니다.
@@ -48,20 +48,20 @@ def async_trigger_service_handler(service_call):
 
 작업을 실행하려면 이벤트 루프에서 실행하도록 예약해야 합니다. 이는 `hass.loop.create_task` 를 호출하면 됩니다.
 
-### Why even have callbacks?
+### 왜 콜백이 필요한가요?
 
-You might wonder, if a coroutine can do everything a callback can do, why even have a callback. The reason is performance and better state consistency of the core API objects.
+코루틴은 콜백이 할 수있는 모든 것을 할 수 있는데 왜 콜백이 필요한지 궁금 할 겁니다. 그 이유는 성능과 코어 API 객체의 상태 일관성이 더 좋기 때문입니다.
 
-When coroutine A waits for coroutine B, it will suspend itself and schedule a new task to run B. This means that the event loop is now running A, B and then A again. If B is a callback, A will never have to suspend itself and thus the event loop is just running A. The consistency implication is that other events queued to run on the event loop continue to wait until callbacks complete, but will be interleaved when yielding to another coroutine.
+코루틴 A 가 코루틴 B 를 기다리면, 코루틴 자체를 일시 중단하고 코루틴 B 를 실행하는 새 작업을 예약합니다. 이는 이벤트 루프가 A, B 를 실행하고나서 A를 다시 실행함을 의미합니다. 만약 B 가 콜백이면, A 는 절대로 자신을 일시 중지 할 필요가 없으므로 이벤트 루프는 A를 실행 중일뿐입니다. 여기서 일관성의 의미는 이벤트 루프에서 실행되도록 대기중인 다른 이벤트는 콜백이 완료 될 때까지 계속 대기하지만, 콜백은 다른 코루틴으로 파생될 때 인터리빙(끼워넣기) 되게 됩니다.
 
-## Event loop and thread safe
+## 이벤트 루프와 스레드 안전
 
-These are functions that are safe to run both in a thread and inside the event loop. These functions are usually performing a computation or transform data in memory. Anything that does I/O does not fall under this category. Many standard library functions fall in this category. For example generating the sum of a set of numbers using sum or merging two dictionaries.
+이 함수들은 스레드 와 이벤트 루프 내에서 실행하기에 안전한 함수들입니다. 이러한 함수는 대개 메모리에서 계산 또는 데이터 변조를 수행합니다. I/O 를 수행하는 것은 이 범주에 속하지 않습니다. 많은 표준 라이브러리 함수가 이 범주에 속합니다. 예를 들면, 합계 혹은 두 딕셔너리 자료의 병합을 사용해서 숫자 셋트의 합계를 생성하는 함수들입니다.
 
-There is no special annotation to mark functions as part of this category and care should be taken when using these functions from inside the event loop. When in doubt, look at their implementation.
+이 부류의 일부로 함수를 마크하는 특별한 어노테이션은 없으며 이벤트 루프 내에서 이러한 함수를 사용할 때는 주의를 기울여야 합니다. 의심스럽다면 구현된 내용을 살펴봐주세요.
 
-## Other functions
+## 기타 함수
 
-These are all the functions that did not fit in the previous categories. These functions are either thread-safe or not considered safe to be run within the event loop. These are functions that use sleep, or perform I/O.
+이 함수들은 이전 부류에 맞지 않는 모든 함수들을 말합니다. 이러한 함수는 스레드 혹은 이벤트 루프 내에서 실행하기에 안전하지 않은 것으로 간주합니다. 이들은 슬립을 사용하거나 I/O 를 수행하는 함수입니다.
 
-There is no special annotation necessary to be considered part of this category.
+이 부류의 일부로 간주되기위해 필요한 특별한 어노테이션은 없습니다.
