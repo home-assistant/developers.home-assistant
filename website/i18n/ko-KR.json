@@ -29,26 +29,26 @@
         "sidebar_label": "컴포넌트"
       },
       "architecture_entities": {
-        "title": "Entity Architecture",
-        "sidebar_label": "Entity"
+        "title": "엔티티 아키텍쳐",
+        "sidebar_label": "엔티티"
       },
       "architecture_hassio": {
-        "title": "Hass.io Architecture",
+        "title": "Hass.io 아키텍쳐",
         "sidebar_label": "Hass.io"
       },
       "architecture_index": {
-        "title": "Architecture",
+        "title": "아키텍쳐",
         "sidebar_label": "대하여"
       },
       "area_registry_index": {
-        "title": "Area Registry",
+        "title": "영역 레지스트리",
         "sidebar_label": "대하여"
       },
       "asyncio_101": {
-        "title": "Asyncio 101"
+        "title": "비동기 기본지식 101"
       },
       "asyncio_categorizing_functions": {
-        "title": "Categorizing Functions"
+        "title": "함수의 유형"
       },
       "asyncio_index": {
         "title": "Asynchronous Programming",
@@ -218,7 +218,7 @@
         "sidebar_label": "Fan"
       },
       "entity_index": {
-        "title": "Entity",
+        "title": "엔티티",
         "sidebar_label": "대하여"
       },
       "entity_light": {
@@ -234,7 +234,7 @@
         "sidebar_label": "Media Player"
       },
       "entity_registry_index": {
-        "title": "Entity Registry",
+        "title": "엔티티 레지스트리",
         "sidebar_label": "대하여"
       },
       "entity_remote": {
@@ -284,7 +284,7 @@
       },
       "frontend_architecture": {
         "title": "Home Assistant Frontend Architecture",
-        "sidebar_label": "Architecture"
+        "sidebar_label": "아키텍쳐"
       },
       "frontend_creating_custom_panels": {
         "title": "Creating custom panels"
@@ -398,22 +398,22 @@
         "sidebar_label": "컴포넌트"
       },
       "version-0.72/version-0.72-architecture_entities": {
-        "title": "Entity Architecture",
-        "sidebar_label": "Entity"
+        "title": "엔티티 아키텍쳐",
+        "sidebar_label": "엔티티"
       },
       "version-0.72/version-0.72-architecture_hassio": {
-        "title": "Hass.io Architecture",
+        "title": "Hass.io 아키텍쳐",
         "sidebar_label": "Hass.io"
       },
       "version-0.72/version-0.72-architecture_index": {
-        "title": "Architecture",
+        "title": "아키텍쳐",
         "sidebar_label": "대하여"
       },
       "version-0.72/version-0.72-asyncio_101": {
-        "title": "Asyncio 101"
+        "title": "비동기 기본지식 101"
       },
       "version-0.72/version-0.72-asyncio_categorizing_functions": {
-        "title": "Categorizing Functions"
+        "title": "함수의 유형"
       },
       "version-0.72/version-0.72-asyncio_index": {
         "title": "Asynchronous Programming",
@@ -554,7 +554,7 @@
         "sidebar_label": "Fan"
       },
       "version-0.72/version-0.72-entity_index": {
-        "title": "Entity",
+        "title": "엔티티",
         "sidebar_label": "대하여"
       },
       "version-0.72/version-0.72-entity_light": {
@@ -570,7 +570,7 @@
         "sidebar_label": "Media Player"
       },
       "version-0.72/version-0.72-entity_registry_index": {
-        "title": "Entity Registry",
+        "title": "엔티티 레지스트리",
         "sidebar_label": "대하여"
       },
       "version-0.72/version-0.72-entity_remote": {
@@ -616,7 +616,7 @@
       },
       "version-0.72/version-0.72-frontend_architecture": {
         "title": "Home Assistant Frontend Architecture",
-        "sidebar_label": "Architecture"
+        "sidebar_label": "아키텍쳐"
       },
       "version-0.72/version-0.72-frontend_creating_custom_panels": {
         "title": "Creating custom panels"
@@ -933,7 +933,7 @@
       },
       "version-0.80.0/version-0.80.0-frontend_architecture": {
         "title": "Home Assistant Frontend Architecture",
-        "sidebar_label": "Architecture"
+        "sidebar_label": "아키텍쳐"
       },
       "version-0.80.0/version-0.80.0-hassio_addon_communication": {
         "title": "Add-On Communication"
@@ -982,7 +982,7 @@
         "title": "Add-On Configuration"
       },
       "version-0.82.0/version-0.82.0-architecture_hassio": {
-        "title": "Hass.io Architecture",
+        "title": "Hass.io 아키텍쳐",
         "sidebar_label": "Hass.io"
       },
       "version-0.82.0/version-0.82.0-asyncio_working_with_async": {
@@ -1017,7 +1017,7 @@
         "title": "Documentation"
       },
       "version-0.82.0/version-0.82.0-entity_registry_index": {
-        "title": "Entity Registry",
+        "title": "엔티티 레지스트리",
         "sidebar_label": "대하여"
       },
       "version-0.82.0/version-0.82.0-entity_sensor": {
@@ -1064,7 +1064,7 @@
         "title": "REST API"
       },
       "version-0.85/version-0.85-asyncio_categorizing_functions": {
-        "title": "Categorizing Functions"
+        "title": "함수의 유형"
       },
       "version-0.85/version-0.85-documentation_index": {
         "title": "Documentation"
@@ -1106,7 +1106,7 @@
         "title": "Lovelace: Custom Cards"
       },
       "version-0.87.0/version-0.87.0-area_registry_index": {
-        "title": "Area Registry",
+        "title": "영역 레지스트리",
         "sidebar_label": "대하여"
       },
       "version-0.87.0/version-0.87.0-development_environment": {
@@ -1124,7 +1124,7 @@
       },
       "version-0.87.0/version-0.87.0-frontend_architecture": {
         "title": "Home Assistant Frontend Architecture",
-        "sidebar_label": "Architecture"
+        "sidebar_label": "아키텍쳐"
       },
       "version-0.87.0/version-0.87.0-frontend_development": {
         "title": "Frontend development",
@@ -1134,7 +1134,7 @@
         "title": "Style guidelines"
       },
       "version-0.88.0/version-0.88.0-entity_index": {
-        "title": "Entity",
+        "title": "엔티티",
         "sidebar_label": "대하여"
       },
       "version-0.88.0/version-0.88.0-frontend_development": {
@@ -1375,7 +1375,7 @@
         "sidebar_label": "Media Player"
       },
       "version-0.92.0/version-0.92.0-entity_registry_index": {
-        "title": "Entity Registry",
+        "title": "엔티티 레지스트리",
         "sidebar_label": "대하여"
       },
       "version-0.92.0/version-0.92.0-external_api_websocket": {
@@ -1447,7 +1447,7 @@
         "title": "Create a new page"
       },
       "version-0.93.0/version-0.93.0-entity_index": {
-        "title": "Entity",
+        "title": "엔티티",
         "sidebar_label": "대하여"
       },
       "version-0.93.0/version-0.93.0-entity_media_player": {
@@ -1455,7 +1455,7 @@
         "sidebar_label": "Media Player"
       },
       "version-0.93.0/version-0.93.0-entity_registry_index": {
-        "title": "Entity Registry",
+        "title": "엔티티 레지스트리",
         "sidebar_label": "대하여"
       },
       "version-0.93.0/version-0.93.0-entity_switch": {
@@ -1524,21 +1524,21 @@
       }
     },
     "links": {
-      "Architecture": "Architecture",
+      "Architecture": "아키텍쳐",
       "Frontend": "Frontend",
       "Backend": "Backend",
       "Misc": "Misc",
       "Blog": "Blog"
     },
     "categories": {
-      "Architecture": "Architecture",
+      "Architecture": "아키텍쳐",
       "Entities": "Entities",
       "Authentication": "Authentication",
       "Config Entries": "Config Entries",
       "Data Entry Flow": "Data Entry Flow",
-      "Entity Registry": "Entity Registry",
+      "Entity Registry": "엔티티 레지스트리",
       "Device Registry": "Device Registry",
-      "Area Registry": "Area Registry",
+      "Area Registry": "영역 레지스트리",
       "Frontend": "Frontend",
       "Extending the frontend": "Extending the frontend",
       "Custom UI": "Custom UI",
