@@ -53,7 +53,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 2. Group your calls to `add_devices` if possible.
 3. If the platform adds extra services, the format should be `<domain of your integration>.<service name>`. So if your integration's domain is "awesome_sauce" and you are making a light platform, you would register services under the `awesome_sauce` domain. Make sure that your services [verify permissions](auth_permissions.md#checking-permissions).
 
-### 5. Entity
+### 5. 엔티티
 
 1. Extend the entity from the integration you're building a platform for.
     
