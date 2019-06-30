@@ -1,5 +1,5 @@
 ---
-title: Entity
+title: 엔티티
 sidebar_label: 대하여
 ---
 
