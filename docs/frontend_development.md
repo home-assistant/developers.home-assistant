@@ -3,13 +3,11 @@ title: "Frontend development"
 sidebar_label: "Development"
 ---
 
-The Home Assistant frontend is built using web components and powered by the [Polymer](https://www.polymer-project.org/) framework.
+The Home Assistant frontend is built using web components. For more background about our technology choices, [see this blog post](https://developers.home-assistant.io/blog/2019/05/22/internet-of-things-and-the-modern-web.html).
 
 > Do not use development mode in production. Home Assistant uses aggressive caching to improve the mobile experience. This is disabled during development so that you do not have to restart the server in between changes.
 
 ## Setting up the environment
-
-> All commands below need to be run from inside the home-assistant-polymer repository.
 
 ### Getting the code
 
