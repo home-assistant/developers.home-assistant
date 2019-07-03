@@ -12,7 +12,7 @@ If you are on macOS and the folder is not showing up automatically, go to Finder
 
 ![Screenshot of Windows Explorer showing a folder on the Hass.io server](/img/en/hass.io/tutorial/samba.png)
 
-For SSH, you will have to install it. Before you can start it, you will have to have a private/public key pair and store your public key in the add-on config ([see docs for more info][ssh]). Once started, you can SSH to Hass.io and store your custom add-ons in "/addons".
+For SSH, you will have to install it. Before you can start it, you will have to have a private/public key pair and store your public key in the add-on config ([see docs for more info][ssh]). Once started, you can SSH to Hass.io and store your custom add-ons in "/addons/local".
 
 ![Screenshot of Putty connected to Hass.io](/img/en/hass.io/tutorial/ssh.png)
 
