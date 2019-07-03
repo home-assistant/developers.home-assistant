@@ -23,7 +23,7 @@ A gist of the changes:
 
  - `operation_mode` has been renamed to `hvac_mode` to emphasize what the mode is for.
  - `hvac_action` is introduced for integrations that know the current action.
- - `set_away_mode` and `set_hold_mode` have been removed.
+ - `set_away_mode` and `set_hold_mode` have been merged into `set_preset_mode`.
  - `turn_off` and `turn_on` have been removed. Instead, integrations should expose two HVAC modes, one of them being `HVAC_MODE_OFF`.
  - Property names have been aligned,
 
