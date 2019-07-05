@@ -11,7 +11,6 @@ To ensure that the documentation for Home Assistant is consistent and easy to fo
 * There is no limit for the line length. You are allowed to write in a flowing text style. This will make it easier to use the GitHub online editor in the future.
 * Be objective and not gender favoring, polarizing, race related or religion inconsiderate.
 * The case of brand names, services, protocols, components and platforms must match its respective counterpart. e.g., "Z-Wave" **not** "Zwave", "Z-wave", "Z Wave" or "ZWave". Also, "Input Select" **not** "input select" or "Input select".
-* All headings should use the `{% linkable_title %}` tag.
 * Do not use ALL CAPITALS for emphasis - use italics instead.
 
 ## Component and Platform Pages
