@@ -1,7 +1,7 @@
 ---
 author: Paulus Schoutsen
 authorURL: https://twitter.com/balloob
-authorFBID: 297400035
+authorImageURL: /img/profile/paulus.jpg
 title: The Great Migration
 ---
 
