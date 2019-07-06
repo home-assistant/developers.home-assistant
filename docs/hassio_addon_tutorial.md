@@ -133,7 +133,7 @@ Add "ports" to `config.json`. This will make TCP on port 8000 inside the contain
 Update `run.sh` to start the Python 3 server:
 
 ```
-python3 -m http.server
+python3 -m http.server 8000
 ```
 
 ## Step 4: Installing the update
