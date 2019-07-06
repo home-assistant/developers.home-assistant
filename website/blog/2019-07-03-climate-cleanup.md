@@ -22,10 +22,10 @@ You might wonder, why go for a preset instead of allowing to overload operation 
 A gist of the changes:
 
  - `operation_mode` has been renamed to `hvac_mode` to emphasize what the mode is for.
- - `hvac_action` is introduced for integrations that know the current action.
- - `set_away_mode` and `set_hold_mode` have been merged into `set_preset_mode`.
+ - `hvac_action` is introduced for integrations that know the current action: heating, cooling, idle.
+ - `set_away_mode` and `set_hold_mode` have been merged into `set_preset_mode`. So instead of `turn_away_mode_on()`, we will now call `set_preset_mode("away")`.
  - `turn_off` and `turn_on` have been removed. Instead, integrations should expose two HVAC modes, one of them being `HVAC_MODE_OFF`.
- - Property names have been aligned,
+ - Property names have been aligned, anything ending with "_list" is now named "_modes".
 
 If you are a maintainer of an integration that has a climate platform or maintain a custom component that has one, make sure you [follow the pull request](https://github.com/home-assistant/home-assistant/pull/23899) and test your integration during the beta to make sure that it works like expected.
 
