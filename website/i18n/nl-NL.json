@@ -1521,6 +1521,33 @@
       },
       "version-0.94.0/version-0.94.0-hassio_debugging": {
         "title": "Debugging Hass.io"
+      },
+      "version-0.95.0/version-0.95.0-config_entries_config_flow_handler": {
+        "title": "Integration Configuration",
+        "sidebar_label": "Configuration"
+      },
+      "version-0.95.0/version-0.95.0-development_environment": {
+        "title": "Set up Development Environment"
+      },
+      "version-0.95.0/version-0.95.0-development_testing": {
+        "title": "Testing your code"
+      },
+      "version-0.95.0/version-0.95.0-device_registry_index": {
+        "title": "Device Registry",
+        "sidebar_label": "Introductie"
+      },
+      "version-0.95.0/version-0.95.0-documentation_standards": {
+        "title": "Standards"
+      },
+      "version-0.95.0/version-0.95.0-frontend_development": {
+        "title": "Frontend development",
+        "sidebar_label": "Development"
+      },
+      "version-0.95.0/version-0.95.0-hassio_addon_tutorial": {
+        "title": "Tutorial: Making your first add-on"
+      },
+      "version-0.95.0/version-0.95.0-hassio_debugging": {
+        "title": "Debugging Hass.io"
       }
     },
     "links": {
