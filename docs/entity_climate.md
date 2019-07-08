@@ -33,7 +33,7 @@ A climate entity is a device that controls temperature, humidity, or fans, such 
 | fan_modes               | list   | `NotImplementedError()`              | Returns the list of available fan modes. Requires `SUPPORT_FAN_MODE`.                                        |
 | swing_mode              | string | `NotImplementedError()`              | Returns the fan setting.                                                                                     |
 | swing_modes             | list   | `NotImplementedError()`              | Returns the list of available swing modes.                                                                   |
-| is_aux_heat_on          | bool   | None                                 | Returns True if an auxiliary heater is on. Requires `SUPPORT_AUX_HEAT`.                                      |
+| is_aux_heat             | bool   | None                                 | Returns True if an auxiliary heater is on. Requires `SUPPORT_AUX_HEAT`.                                      |
 | supported_features      | int    | `NotImplementedError()`              | Bitmap of supported features. See below.                                                                     |
 
 ### HVAC modes
