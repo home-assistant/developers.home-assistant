@@ -42,6 +42,7 @@ You are only allowed to use the built-in HVAC modes. If you want another mode, a
 
 | Name                  | Description                                                         |
 | --------------------- | ------------------------------------------------------------------- |
+| `HVAC_MODE_OFF`       | The device is turned off.                                           |
 | `HVAC_MODE_HEAT`      | The device is set to heat to a target temperature.                  |
 | `HVAC_MODE_COOL`      | The device is set to cool to a target temperature.                  |
 | `HVAC_MODE_HEAT_COOL` | The device supports heating/cooling to a range                      |
