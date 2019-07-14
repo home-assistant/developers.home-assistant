@@ -14,7 +14,7 @@ For larger changes, we suggest that you clone the website repository. This way, 
 
 To test your changes locally, you need to install **Ruby** and its dependencies (gems):
 
-- [Install Ruby](https://www.ruby-lang.org/en/documentation/installation/) if you don't have it already. Ruby version 2.3.0 or higher is required.
+- [Install Ruby](https://www.ruby-lang.org/en/documentation/installation/) if you don't have it already. Ruby version 2.5.0 or higher is required.
 - Install `bundler`, a dependency manager for Ruby: `$ gem install bundler` (You might have to run this command as `sudo`).
 - Fork the home-assistant.io [git repository](https://github.com/home-assistant/home-assistant.io).
 - In your home-assistant.io root directory, run `$ bundle` to install the gems you need.
