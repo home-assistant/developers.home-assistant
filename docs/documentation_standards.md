@@ -10,10 +10,10 @@ To ensure that the documentation for Home Assistant is consistent and easy to fo
 * Don't put two spaces after a period and avoid the "Oxford comma".
 * There is no limit for the line length. You are allowed to write in a flowing text style. This will make it easier to use the GitHub online editor in the future.
 * Be objective and not gender favoring, polarizing, race related or religion inconsiderate.
-* The case of brand names, services, protocols, components and platforms must match its respective counterpart. e.g., "Z-Wave" **not** "Zwave", "Z-wave", "Z Wave" or "ZWave". Also, "Input Select" **not** "input select" or "Input select".
+* The case of brand names, services, protocols, integrations and platforms must match its respective counterpart. e.g., "Z-Wave" **not** "Zwave", "Z-wave", "Z Wave" or "ZWave". Also, "Input Select" **not** "input select" or "Input select".
 * Do not use ALL CAPITALS for emphasis - use italics instead.
 
-## Component and Platform Pages
+## Integration and Platform Pages
 
 * The **Configuration Variables** section must use the `{% configuration %}` tag.
 * Configuration variables must document the requirement status (`false` or `true`).
@@ -24,7 +24,7 @@ To ensure that the documentation for Home Assistant is consistent and easy to fo
 * All examples should be formatted to be included in `configuration.yaml` unless explicitly stated.
   * Use capital letters and `_` to indicate that the value needs to be replaced. E.g., `api_key: YOUR_API_KEY` or `api_key: REPLACE_ME`.
   * If you know that the API key or value contains [control characters](https://en.wikipedia.org/wiki/YAML#Syntax), e.g., `#`, `[`, `?`, etc., wrap it in quotes and add a note.
-* Component and platform names should be a link to their respective documentation pages.
+* Integration and platform names should be a link to their respective documentation pages.
 
 Example configuration block
 
@@ -65,7 +65,7 @@ some_key:
 
 ## Renaming Pages
 
-It can happen that a component or platform is renamed, in this case the documentation needs to be updated as well. If you rename a page, add  `redirect_from:` to the file header and let it point to the old location/name of the page. Please consider to add details, like release number or old component/platform name, to the page in a [note](/developers/documentation/create_page/#html).
+It can happen that a integration or platform is renamed, in this case the documentation needs to be updated as well. If you rename a page, add  `redirect_from:` to the file header and let it point to the old location/name of the page. Please consider to add details, like release number or old integration/platform name, to the page in a [note](/developers/documentation/create_page/#html).
 
 ```text
 ---
@@ -106,7 +106,6 @@ automation:
 
 #### Multi-Line Template (Valid)
 
-
 ```yaml
 automation:
   ...
@@ -120,4 +119,3 @@ automation:
             It's just another door.
           {% endif %}
 ```
-
