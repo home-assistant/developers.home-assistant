@@ -22,6 +22,8 @@ You might wonder, why go for a preset instead of allowing to overload operation 
 A gist of the changes:
 
 - `operation_mode` has been renamed to `hvac_mode` to emphasize what the mode is for.
+- We split HVAC mode `auto` into `auto` and `heat_cool`. If it's `heat_cool`, the user has set a temperature range the device has to use heating and cooling to stay within. Auto mode is now limited to devices that are running on a schedule or AI.
+- The state of a climate entity is now always equal to the HVAC mode.
 - `hvac_action` is introduced for integrations that know the current action: heating, cooling, idle.
 - `set_away_mode` and `set_hold_mode` have been merged into `set_preset_mode`. So instead of `turn_away_mode_on()`, we will now call `set_preset_mode("away")`.
 - The `is_on` property has been removed. If a device is able to turn off, it should include the hvac mode `HVAC_MODE_OFF`.
