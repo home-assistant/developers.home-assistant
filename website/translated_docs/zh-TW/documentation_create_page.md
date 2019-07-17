@@ -2,7 +2,7 @@
 title: "Create a new page"
 ---
 
-For a platform or component page, the fastest way is to make a copy of an existing page and edit it. The [Component overview](https://www.home-assistant.io/components/) and the [Examples section](https://www.home-assistant.io/cookbook/) are generated automatically, so there is no need to add a link to those pages.
+For a platform or integration page, the fastest way is to make a copy of an existing page and edit it. The [Integration overview](https://www.home-assistant.io/components/) and the [Examples section](https://www.home-assistant.io/cookbook/) are generated automatically, so there is no need to add a link to those pages.
 
 Please honor the [Standards](documentation_standards.md) we have for the documentation.
 
@@ -10,35 +10,29 @@ If you start from scratch with a page, you need to add a header. Different secti
 
 ```text
 ---
-layout: page
 title: "Awesome Sensor"
 description: "home-assistant.io web presence"
-date: 2015-06-17 08:00
-sidebar: true
-comments: false
-sharing: true
-footer: true
 ha_release: "0.38"
 ha_category: Sensor
 ha_iot_class: "Local Polling"
 ha_qa_scale: silver
+ha_config_flow: true
 ---
 
-Content... Written in markdown. 
+Content... Written in markdown.
 
-### {% linkable_title Linkable Header %}
+### Title Header
 ...
 ```
-
-Please keep in mind that if the `date:` entry is in the future then the page will not show up.
 
 Additional keys for the file header:
 
 - `logo`: Please check the separate section below.
 - `ha_release`: The release when the integration was included, e.g., "0.38". If the current release is 0.37, make `ha_release` 0.38. If it's 0.30 or 0.40 please quote it with `" "`.
-- `ha_category`: This entry is used to group the integration on the [Components overview](https://www.home-assistant.io/components/).
+- `ha_category`: This entry is used to group the integration on the [Integration overview](https://www.home-assistant.io/components/).
 - `ha_iot_class`: [IoT class](https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things) is the classifier for the device's behavior.
 - `ha_qa_scale`: [Quality scale](https://www.home-assistant.io/docs/quality_scale/) is the representation of the integration's quality.
+- `ha_config_flow`: Set to `true` if the integration has a [Data Entry Flow](https://developers.home-assistant.io/docs/en/data_entry_flow_index.html), omit otherwise.
 
 There are [pre-defined variables](https://jekyllrb.com/docs/variables/) available but usually, it's not necessary to use them when writing documentation.
 
@@ -97,7 +91,7 @@ required: any string here #=> Any string here
 
 You can use the [default markdown syntax](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#code) to generate syntax highlighted code. For inline code wrap your code in back-ticks.
 
-When you're writing code that is to be executed on the terminal, prefix it with `$`.
+When you're writing code that is to be executed on the terminal, do not prefix them with `$`, since this makes it hard to copy and paste the commands. However, an exception is made when there is a need to distinguish between typed commands and command output. In those cases, prefixing the commands with a `$` is required.
 
 ### Templates
 
@@ -110,9 +104,17 @@ If you are don't escape templates then they will be rendered and appear blank on
 The direct usage of HTML is supported but not recommended. The note boxes are an exception.
 
 ```html
-<p class='note warning'>
-  You need to enable telnet on your router. 
-</p>
+<div class='note warning'>
+  You need to enable telnet on your router.
+</div>
+```
+
+Please note, if you want to use Markdown inside an HTML block, it has to be surrounded by a new line.
+
+```html
+<div class='note warning'>
+  You need to enable [**telnet**](https://en.wikipedia.org/wiki/Telnet) on your router.
+</div>
 ```
 
 ### Images, icons and logos
@@ -125,7 +127,7 @@ The images which are displayed on the pages are stored in various directories ac
 | blog        | source/images/blog             |
 | screenshots | source/images/components       |
 
-Not everything (product, component, etc.) should have a logo. To show something for internal parts of Home Assistant we are using the [Material Design Icons](https://materialdesignicons.com/).
+Not everything (product, integration, etc.) should have a logo. To show something for internal parts of Home Assistant we are using the [Material Design Icons](https://materialdesignicons.com/).
 
 ### Linking From The Sidebar
 
