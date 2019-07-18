@@ -10,9 +10,9 @@ Home Assistant 는 이벤트 루프 내에서 실행해야 할 모든 기능 앞
 
 코루틴은 결과를 기다리는 동안 실행을 일시 중단 할 수있는 Python 의 생성자 구문을 기반으로하는 특수 함수입니다.
 
-코루틴 함수를 호출하면 생성자 객체가 다시 반환되지만 실제로 실행되지는 않습니다. 이 객체는 작업이 (다른 코루틴 내로 부터) 파생되거나 이벤트 루프에서 예약될 때 작업을 실행합니다.
+코루틴 함수를 호출하면 생성자 객체가 다시 반환되지만 실제로 실행되지는 않습니다. This object will execute the task when it is either awaited (from within another coroutine) or it is scheduled on the event loop.
 
-함수를 코루틴으로 선언하려면 비동기 패키지에서 코루틴 어노테이션을 가져 와서 함수에 어노테이션을 달아주면 됩니다.
+To declare a function a coroutine, add `async` before the `def` of the function definition.
 
 ```python
 async def async_look_my_coroutine(target):
