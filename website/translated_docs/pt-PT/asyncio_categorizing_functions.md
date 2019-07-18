@@ -10,9 +10,9 @@ Home Assistant uses the convention that all functions that must be run from with
 
 Coroutines are special functions based on Python’s generators syntax which allows them to suspend execution while waiting on a result.
 
-Invoking a coroutine function will return a Generator object back, but will not actually begin execution. This object will execute the task when it is either yielded from (from within another coroutine) or it is scheduled on the event loop.
+Invoking a coroutine function will return a Generator object back, but will not actually begin execution. This object will execute the task when it is either awaited (from within another coroutine) or it is scheduled on the event loop.
 
-To declare a function a coroutine, import the coroutine annotation from the asyncio package and annotate your function.
+To declare a function a coroutine, add `async` before the `def` of the function definition.
 
 ```python
 async def async_look_my_coroutine(target):
