@@ -9,7 +9,7 @@ image: /img/en/blog/2019-07-building-all-the-things/social.png
 
 _How Home Assistant is using Azure Pipelines to automate all the things._
 
-Here at Home Assistant we love automation. Not only in our homes, but also when doing development work. We do a release every three weeks and it includes code from over 80 different people. This all is managed by only two people working on this full-time (thanks [Nabu Casa](https://www.nabucasa.com)!).
+Here at Home Assistant, we love automation! Not only in our homes, but also when doing development work. We do a release every three weeks and it includes code from over 80 different people. All is managed by only two people working on this full-time (thanks [Nabu Casa](https://www.nabucasa.com)!).
 
 We distribute Home Assistant as a Python package, and as part of our all-in-one system called Hass.io. Hass.io has its own operating system, a supervisor Docker container and the Home Assistant docker container. Besides that, Hass.io supports add-ons, of which we have a set of official add-ons that we also maintain. Everything we do for Hass.io, we have to do five times, once for each of our supported architectures: amd64, i386, armv6, armv7, aarch64.
 
@@ -19,7 +19,7 @@ We started out with Travis but realized that we could significantly speed up our
 
 [Pascal Vizeli](https://www.github.com/pvizeli) had experience with Azure from a previous job, and he was able to migrate and build all the YAML based pipelines in days. He did this with support from [Kees Schollaart](https://twitter.com/keesschollaart), who is a DevRel at Azure but famous in our community for creating the [Home Assistant Companion extension for VS Code](https://marketplace.visualstudio.com/items?itemName=keesschollaart.vscode-home-assistant). He helped us a lot whenever we got stuck.
 
-Azure’s open source plan comes with 10 free agents, and after we reached out to Microsoft, we were provided 20 additional agents to help us automate all the things.
+Azure’s open source plan comes with 10 free agents, and after we reached out to Microsoft, we were provided 20 additional agents to help us automate all the things!
 
 The rest of this post will talk about the different things that we have automated.
 
@@ -29,7 +29,7 @@ The rest of this post will talk about the different things that we have automate
 
 All changes to Home Assistant go through our CI pipeline. When a pull request to the Home Assistant repository comes in, it will trigger a pipeline as configured in [`azure-pipelines-ci.yml`](https://github.com/home-assistant/home-assistant/blob/dev/azure-pipelines-ci.yml).
 
-Contributions to Home Assistant are tested against our test suite, code style and typing, to make sure that the contribution does not break things. We have split our test suite in 3 different stages. By using stages, we can run a quick validation stage and fail fast if it’s not correct.
+Contributions to Home Assistant are tested against our test suite, code style and typing, to make sure that the contribution does not break things. We have split our test suite into 3 different stages. By using stages, we can run a quick validation stage and fail fast if it’s not correct.
 
 This strategy allows us to not waste any of our workers time on running a full test suite if we know that basic linting is not going to pass.
 
@@ -44,7 +44,7 @@ Another optimization that we do is that we use our own base images for the test 
 
 CircleCI had a nice feature that it could distribute your tests over multiple workers by keeping track of the duration of each test. This was reducing the duration of the PyTest suite to around 10 minutes. This is using more agents and we would quickly run out of agents, creating a big backlog. Subsequent stages are only enqueued once the “Overview” stage finishes, causing them to be in the queue behind other contributions that came in.
 
-With Azure, we get more runners which are more powerful and faster, but no parallelization. This means that an individual build will take longer, however with many builds coming in, the individual build time remains roughly the same, as we are not experiencing any backlog.
+With Azure, we get more runners which are more powerful and faster, but no parallelization. This means that an individual build will take longer, however, with many builds coming in, the individual build time remains roughly the same, as we are not experiencing any backlog.
 
 <center>
 ![Screenshot of the Home Assistant CI pipeline.](/img/en/blog/2019-07-building-all-the-things/test-results.png)<br>
@@ -53,11 +53,11 @@ Screenshot of the [test results](https://dev.azure.com/home-assistant/Home%20Ass
 
 ## Building HassOS
 
-HassOS is our own embedded Linux distribution. It is tailored to run the bare minimum of what we need to run Home Assistant in a Docker container. The build is powered by BuildRoot and we’re targeting five different processor architectures.
+HassOS is our own embedded Linux distribution. It is tailored to run the bare minimum of what we need to run Home Assistant in a Docker container. BuildRoot powers the build and we’re targeting five different processor architectures.
 
-The Azure Pipelines agents are using the amd64 CPU architecture. It is possible to compile for different architectures using a method called cross compiling. We gave it a shot but realized that it is significant slower than compiling a build using the same CPU as that we’re targeting.
+The Azure Pipelines agents are using the amd64 CPU architecture. It is possible to compile for different architectures using a method called cross-compiling. We gave it a shot but realized that it is significanty slower than compiling a build using the same native CPU's as that we’re targeting.
 
-We use a feature on Azure Pipelines called [self-hosted agents](https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/agents?view=azure-devops#install) to host build agents on our own hardware with the right architecture. The pipeline definition and the orchestration are managed by Azure Pipelines but the execution runs blazing fast on our own hardware.
+We use a feature on Azure Pipelines called [self-hosted agents](https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/agents?view=azure-devops#install) to host build agents on our own hardware with the right architecture. Azure Pipelines manages the pipeline definition and the orchestration, but the execution runs blazing fast on our own hardware.
 
 <center>
 ![Screenshot of the Home Assistant CI pipeline.](/img/en/blog/2019-07-building-all-the-things/build-cabinet.jpg)<br>
@@ -66,15 +66,15 @@ Our build cabinet.
 
 ## Building Python Wheels
 
-Home Assistant ships as a standalone Python package, and bundled up in Docker containers. Our Docker containers contain all the Python packages for our different integrations pre-installed. Because of this, creating a Docker container took a long time, as we had to install and build each Python package for each architecture. Home Assistant + all integrations relies on over a 1000 different Python packages.
+Home Assistant ships as a standalone Python package, and bundled up in Docker containers. Our Docker containers contain all the Python packages for our different integrations pre-installed. Because of this, creating a Docker container took a long time, as we had to install and build each Python package for each architecture. Home Assistant + all integrations rely upon over a 1000 different Python packages.
 
 To speed this up, we’re leveraging Python Wheels. Wheels are a binary format that contains pre-build Python packages for a specific operating system and CPU architecture. We have an Azure pipeline to help build wheels for all the different packages on all supported CPU architectures. That’s a total of 5000 wheels!
 
-There is a special wheels format that can target many platforms with a single build. We are unable to use that because it is not compatible with musl libc, which is what Alpine uses.
+A special wheels format that can target many platforms with a single build. We are unable to use that because it is not compatible with musl libc, which is what Alpine uses.
 
 This pipeline is triggered automatically when a contribution has been accepted and merged into development and it changed any requirements ([pipeline definition](https://github.com/home-assistant/home-assistant/blob/de3d28d9d5bd5dd69cf9f84d021d683da2c322d6/azure-pipelines-wheels.yml#L3-L10)). We also run it daily to make sure that all changes have been captured.
 
-Because installation using a wheel is significant faster, we also offer custom integrations to [register themselves](https://github.com/home-assistant/custom-components-wheels). We will scan each custom integration once a day to make sure we have wheels for the Python packages that they use.
+Because installation using a wheel is significantly faster, we also offer custom integrations to [register themselves](https://github.com/home-assistant/custom-components-wheels). We will scan each custom integration once a day to make sure we have wheels for the Python packages that they use.
 
 By leveraging wheels, we have been able to reduce the build time of our Home Assistant containers for Hass.io from 1 hour to 10 minutes (measurement from the amd64 build).
 
@@ -82,7 +82,7 @@ _(sidenote. Python is named after Monty Python, and the package index got called
 
 ## Building Home Assistant releases
 
-Home Assistant does a stable release every three weeks. Prior to this stable release, we usually have around 6 beta releases. After a stable release we usually have 2 or 3 patch releases.
+Home Assistant does a stable release every three weeks. Prior to this stable release, we usually have around 6 beta releases. After a stable release, we usually have 2 or 3 patch releases.
 
 Each release will need to be built as a standalone Python package, and a Docker container for each of the five supported CPU architectures.
 
