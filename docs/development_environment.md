@@ -69,6 +69,33 @@ Then install ffmpeg:
 $ brew install ffmpeg
 ```
 
+### Developing with devcontainer
+
+The devcontainer is a preconfigured development environment with all the tools you need.
+
+**Prerequisittes**
+
+- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- [docker](https://docs.docker.com/install/)
+- [VS Code](https://code.visualstudio.com/)
+- [Remote - Containers (VSC Extension)](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+
+[More info about requirements and devcontainer in general](https://code.visualstudio.com/docs/remote/containers#_getting-started)
+
+**Getting started:**
+
+1. Fork this repository.
+1. Clone the repository to your computer.
+1. Open the repository using VS Code.
+
+When you open this repository with Visual Studio code you are asked to "Reopen in Container", this will start the build of the container.
+
+_If you don't see this notification, open the command pallet and select `Remote-Containers: Reopen Folder in Container`._
+
+The devcontainter comes with some useful tasks to help you with development, you can start these tasks by opening the the command pallet and select `Tasks: Run Task` then select the task you want to run.
+
+Running tasks like `Preview` can be restarted by opening the the command pallet and selecting `Tasks: Restart Running Task`, then select the task you want to restart.
+
 ## Setup Local Repository
 
 Visit the [Home Assistant repository](https://github.com/home-assistant/home-assistant) and click **Fork**.
