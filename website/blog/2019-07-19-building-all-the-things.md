@@ -21,7 +21,7 @@ We started out with Travis but realized that we could significantly speed up our
 
 Azure’s open source plan comes with 10 free agents, and after we reached out to Microsoft, we were provided 20 additional agents to help us automate all the things!
 
-The rest of this post will talk about the different things that we have automated.
+Interested to see what we do with all this Azure power?
 
 <!--truncate-->
 
