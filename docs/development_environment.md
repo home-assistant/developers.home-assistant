@@ -77,16 +77,16 @@ The devcontainer is a preconfigured development environment with all the tools y
 
 - [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - [docker](https://docs.docker.com/install/)
-- [VS Code](https://code.visualstudio.com/)
+- [Visual Studio code](https://code.visualstudio.com/)
 - [Remote - Containers (VSC Extension)](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
 [More info about requirements and devcontainer in general](https://code.visualstudio.com/docs/remote/containers#_getting-started)
 
 **Getting started:**
 
-1. Fork this repository.
+1. Fork the repository.
 1. Clone the repository to your computer.
-1. Open the repository using VS Code.
+1. Open the repository using Visual Studio code.
 
 When you open this repository with Visual Studio code you are asked to "Reopen in Container", this will start the build of the container.
 
