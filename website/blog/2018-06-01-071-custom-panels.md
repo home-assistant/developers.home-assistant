@@ -2,6 +2,7 @@
 author: Paulus Schoutsen
 authorURL: https://twitter.com/balloob
 authorImageURL: /img/profile/paulus.jpg
+authorTwitter: balloob
 title: 0.71: Improved custom panels and minor changes for custom UI
 ---
 
