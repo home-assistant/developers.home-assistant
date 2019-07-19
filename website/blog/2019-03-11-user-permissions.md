@@ -2,6 +2,7 @@
 author: Paulus Schoutsen
 authorURL: https://twitter.com/balloob
 authorImageURL: /img/profile/paulus.jpg
+authorTwitter: balloob
 title: Can I Have User Permissions?
 ---
 
