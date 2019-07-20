@@ -4,7 +4,6 @@ authorURL: https://twitter.com/balloob
 authorImageURL: /img/profile/paulus.jpg
 authorTwitter: balloob
 title: Building All The Things
-image: /img/en/blog/2019-07-building-all-the-things/social.png
 ---
 
 _How Home Assistant is using Azure Pipelines to automate all the things._
