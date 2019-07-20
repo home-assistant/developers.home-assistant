@@ -1585,25 +1585,25 @@
       "Hass.io Add-Ons": "Hass.io 애드온",
       "Maintainer docs": "관리자 문서",
       "Configuration.yaml": "Configuration.yaml",
-      "Developing a feature": "Developing a feature",
+      "Developing a feature": "기능 개발하기",
       "Development 101": "Development 101",
       "Integration Quality Scale": "Integration Quality Scale",
-      "Creating Platforms": "Creating Platforms",
-      "Creating Components": "Creating Components",
+      "Creating Platforms": "플랫폼 만들기",
+      "Creating Components": "구성요소 만들기",
       "Lovelace UI": "Lovelace UI"
     }
   },
   "pages-strings": {
-    "Learn more using the [documentation on this site.](/test-site/docs/en/doc1.html)|no description given": "Learn more using the [documentation on this site.](/test-site/docs/en/doc1.html)",
-    "Browse Docs|no description given": "Browse Docs",
-    "Ask questions about the documentation and project|no description given": "Ask questions about the documentation and project",
-    "Join the community|no description given": "Join the community",
-    "Find out what's new with this project|no description given": "Find out what's new with this project",
-    "Stay up to date|no description given": "Stay up to date",
-    "Need help?|no description given": "Need help?",
-    "This project is maintained by a dedicated group of people.|statement made to reader": "This project is maintained by a dedicated group of people.",
-    "Help Translate|recruit community translators for your project": "Help Translate",
-    "Edit this Doc|recruitment message asking to edit the doc source": "Edit",
-    "Translate this Doc|recruitment message asking to translate the docs": "Translate"
+    "Learn more using the [documentation on this site.](/test-site/docs/en/doc1.html)|no description given": "이 사이트의 [문서](/test-site/docs/en/doc1.html)에서 자세한 정보를 얻으세요.",
+    "Browse Docs|no description given": "문서 찾아보기",
+    "Ask questions about the documentation and project|no description given": "문서 및 프로젝트에 대해 질문하기",
+    "Join the community|no description given": "커뮤니티에 가입하기",
+    "Find out what's new with this project|no description given": "이 프로젝트의 새로운 정보 확인",
+    "Stay up to date|no description given": "최신 정보 얻기",
+    "Need help?|no description given": "도움이 필요하신가요?",
+    "This project is maintained by a dedicated group of people.|statement made to reader": "이 프로젝트는 지정된 그룹원에 의해 관리되고 있습니다.",
+    "Help Translate|recruit community translators for your project": "번역 도와주기",
+    "Edit this Doc|recruitment message asking to edit the doc source": "편집",
+    "Translate this Doc|recruitment message asking to translate the docs": "번역"
   }
 }
