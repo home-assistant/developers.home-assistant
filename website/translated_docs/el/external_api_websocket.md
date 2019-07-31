@@ -345,7 +345,8 @@ Return a b64 encoded thumbnail of a camera entity.
 ```json
 {
   "id": 19,
-  "type": "camera_thumbnail"
+  "type": "camera_thumbnail",
+  "entity_id": "camera.driveway"
 }
 ```
 
