@@ -65,8 +65,6 @@ Requirements are Python libraries or modules that you would normally install usi
 
 Requirements is an array of strings. Each entry is a `pip` compatible string. For example, the media player Cast platform depends on the Python package PyChromecast v3.2.0: `["pychromecast==3.2.0"]`.
 
-> Because of how Home Assistant installs requirements on demand, actual Python imports of your requirements should be done inside functions instead of at the root level of your Python files.
-
 ### Custom requirements during development & testing
 
 During the development of a component, it can be useful to test against different versions of a requirement. This can be done in two steps, using `pychromecast` as an example:
