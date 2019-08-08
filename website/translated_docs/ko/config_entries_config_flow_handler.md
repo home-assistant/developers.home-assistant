@@ -41,7 +41,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
             # process info
 
         return self.async_show_form(
-            step_id='init',
+            step_id='user',
             data_schema=vol.Schema({
               vol.Required('password'): str
             })
