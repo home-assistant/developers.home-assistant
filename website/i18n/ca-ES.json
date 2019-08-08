@@ -1570,6 +1570,13 @@
       },
       "version-0.96.0/version-0.96.0-hassio_addon_config": {
         "title": "Add-On Configuration"
+      },
+      "version-0.97.0/version-0.97.0-creating_integration_manifest": {
+        "title": "Integration Manifest",
+        "sidebar_label": "Manifest"
+      },
+      "version-0.97.0/version-0.97.0-external_api_websocket": {
+        "title": "WebSocket API"
       }
     },
     "links": {
