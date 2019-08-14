@@ -3,8 +3,6 @@ title: Integration Configuration Options
 sidebar_label: Configuration Options
 ---
 
-> This option is currently only available for built-in components.
-
 An integration that is configured via a config entry can expose options to the user to allow tweaking behavior of the integration, like which devices or locations should be integrated.
 
 Config Entry Options uses the [Data Flow Entry framework](data_entry_flow_index.md) to allow users to update a config entries options. Components that want to support config entry options will need to define a Options Flow Handler.
