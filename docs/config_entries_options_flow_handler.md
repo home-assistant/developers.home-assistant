@@ -14,8 +14,8 @@ For an integration to support options it needs to have an `async_get_options_flo
 ```python
 @staticmethod
 @callback
-def async_get_options_flow(config, options):
-    return OptionsFlowHandler(config, options)
+def async_get_options_flow(config_entry):
+    return OptionsFlowHandler()
 ```
 
 ## Flow handler
@@ -23,8 +23,24 @@ def async_get_options_flow(config, options):
 The Flow handler works just like the config flow handler, except that the first step in the flow will always be `async_step_init`.
 
 ```python
-class OptionsFlowHandler(data_entry_flow.FlowHandler):
-    def __init__(self, config, options):
+class OptionsFlowHandler(config_entries.OptionsFlow):
+
+    async def async_step_init(self, user_input=None):
+        """Manage the options."""
+        if user_input is not None:
+            return self.async_create_entry(title="", data=user_input)
+
+        return self.async_show_form(
+            step_id="init",
+            data_schema=vol.Schema(
+                {
+                    vol.Required(
+                        "show_things",
+                        default=self.config_entry.options.get("show_things"),
+                    ): bool
+                }
+            ),
+        )
 ```
 
 ## Signal updates
@@ -40,4 +56,3 @@ The Listener shall be an async function that takes the same input as async_setup
 ```python
 async def update_listener(hass, entry):
 ```
-
