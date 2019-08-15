@@ -52,17 +52,18 @@ $ isort homeassistant/components/sensor/fixer.py
 
 ### Use new style string formatting
 
-Prefer [new style string formatting](https://www.python.org/dev/peps/pep-3101/) over old.
+Prefer [f-strings](https://docs.python.org/3/reference/lexical_analysis.html#f-strings) over `%` or `str.format`.
 
 ```python
+# New
+f"{some_value} {some_other_value}"
+# Old, wrong
 "{} {}".format('New', 'style')
 "%s %s" % ('Old', 'style')
 ```
 
-For logging we do prefer the old style:
+One exception is for logging which uses the percentage formatting. This is to avoid formatting the log message when it is suppressed.
 
 ```python
 _LOGGER.info("Can't connect to the webservice %s at %s", string1, string2)
 ```
-
-This is to avoid formatting the log message when it is suppressed.
