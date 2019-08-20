@@ -233,6 +233,10 @@
         "title": "Media Player Entity",
         "sidebar_label": "Media Player"
       },
+      "entity_registry_disabled_by": {
+        "title": "Entity Registry and disabling entities",
+        "sidebar_label": "Disabling entities"
+      },
       "entity_registry_index": {
         "title": "Entity Registry",
         "sidebar_label": "Introduction"
