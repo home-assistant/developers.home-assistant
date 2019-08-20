@@ -15,15 +15,13 @@ You need to update your integrations manifest to inform Home Assistant that your
 
 ## Defining your config flow
 
-Config entries uses the [data flow entry framework](data_entry_flow_index.md) to define their config flows. The config flow needs to be defined in the file `config_flow.py` in your integration folder.
-
-To define it, extend the ConfigFlow base class from the config entries module, and decorate it with the `HANDLERS.register` decorator:
+Config entries uses the [data flow entry framework](data_entry_flow_index.md) to define their config flows. The config flow needs to be defined in the file `config_flow.py` in your integration folder, extend `homeassistant.config_entries.ConfigFlow` and pass a `domain` key as part of inheriting `ConfigFlow`.
 
 ```python
 from homeassistant import config_entries
+from .const import DOMAIN
 
-@config_entries.HANDLERS.register(DOMAIN)
-class ExampleConfigFlow(config_entries.ConfigFlow):
+class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 ```
 
 ## Defining steps
@@ -31,8 +29,7 @@ class ExampleConfigFlow(config_entries.ConfigFlow):
 Your config flow will need to define steps of your configuration flow. The docs for [Data Entry Flow](data_entry_flow_index.md) describe the different return values of a step. Here is an example on how to define the `user` step.
 
 ```python
-@config_entries.HANDLERS.register(DOMAIN)
-class ExampleConfigFlow(data_entry_flow.FlowHandler):
+class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     async def async_step_user(self, info):
         if info is not None:
@@ -48,29 +45,29 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
 
 There are a few step names reserved for system use:
 
-| Step name | Description |
-| --------- | ----------- |
-| `user` | Invoked when a user initiates a flow via the user interface.
-| `zeroconf` | Invoked if your integration has been discovered via Zeroconf/mDNS as specified [using `zeroconf` in the manifest](creating_integration_manifest.md#zeroconf).
-| `homekit` | Invoked if your integration has been discovered via HomeKit as specified [using `homekit` in the manifest](creating_integration_manifest.md#homekit).
-| `ssdp` | Invoked if your integration has been discovered via SSDP/uPnP as specified [using `ssdp` in the manifest](creating_integration_manifest.md#ssdp).
-| `discovery` | _DEPRECATED_ Invoked if your integration has been discovered by the discovery integration.
+| Step name   | Description                                                                                                                                                   |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `user`      | Invoked when a user initiates a flow via the user interface.                                                                                                  |
+| `zeroconf`  | Invoked if your integration has been discovered via Zeroconf/mDNS as specified [using `zeroconf` in the manifest](creating_integration_manifest.md#zeroconf). |
+| `homekit`   | Invoked if your integration has been discovered via HomeKit as specified [using `homekit` in the manifest](creating_integration_manifest.md#homekit).         |
+| `ssdp`      | Invoked if your integration has been discovered via SSDP/uPnP as specified [using `ssdp` in the manifest](creating_integration_manifest.md#ssdp).             |
+| `discovery` | _DEPRECATED_ Invoked if your integration has been discovered by the discovery integration.                                                                    |
 
 ## Discovery steps
 
 When an integration is discovered, their respective discovery step is invoked with the discovery information. The step will have to check the following things:
 
- - Make sure there are no other instances of this config flow in progress of setting up the discovered device. This can happen if there are multiple ways of discovering that a device is on the network.
- - Make sure that the device is not already set up.
- - Invoking a discovery step should never result in a finished flow and a config entry. Always confirm with the user.
+- Make sure there are no other instances of this config flow in progress of setting up the discovered device. This can happen if there are multiple ways of discovering that a device is on the network.
+- Make sure that the device is not already set up.
+- Invoking a discovery step should never result in a finished flow and a config entry. Always confirm with the user.
 
- ## Discoverable integrations that require no authentication
+## Discoverable integrations that require no authentication
 
 If your integration is discoverable without requiring any authentication, you'll be able to use the Discoverable Flow that is built-in. This flow offers the following features:
 
- - Detect if devices/services can be discovered on the network before finishing the config flow.
- - Support all manifest-based discovery protocols.
- - Limit to only 1 config entry. It is up to the config entry to discover all available devices.
+- Detect if devices/services can be discovered on the network before finishing the config flow.
+- Support all manifest-based discovery protocols.
+- Limit to only 1 config entry. It is up to the config entry to discover all available devices.
 
 ```python
 """Config flow for LIFX."""
