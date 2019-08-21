@@ -9,7 +9,7 @@ When `disabled_by` is set to a string value, the entity will not be added to Hom
 
 ## Integration Architecture
 
-If an integration uses polling, there are no architectural requirements to work with disabled_by. If an integration notifies Home Assistant of updates, the entity needs to register itself with the incoming push data inside the lifecycle method `async_added_to_hass`. This lifecycle method is only called if the entity is actually added to Home Assistant (and so it's not disabled).
+Integrations will need to make sure that they work correctly when their entities get disabled. If your integration is keeping references to the created entity objects, it should register those references only inside the entity's lifecycle method `async_added_to_hass`. This lifecycle method is only called if the entity is actually added to Home Assistant (and so it's not disabled).
 
 Entity disabling works with entities provided via a config entry or via an entry in configuration.yaml. If your integration is set up via a config entry and supports [unloading](config_entries_index.md#unloading-entries), Home Assistant will be able to reload your integration after entities have been enabled/disabled to apply the changes without a restart.
 
