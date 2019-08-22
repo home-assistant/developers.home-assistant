@@ -18,4 +18,4 @@ If your integration is not using config entries, it will have to use our discove
 To do this, you will need to use the `load_platform` and `async_load_platform` methods from the discovery helper.
 
 
-- See also a [full example that implementing this logic](https://github.com/home-assistant/example-custom-config/tree/master/custom_components/example_load_platform/)
+- See also a [full example that implements this logic](https://github.com/home-assistant/example-custom-config/tree/master/custom_components/example_load_platform/)
