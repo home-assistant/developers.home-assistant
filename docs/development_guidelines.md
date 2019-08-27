@@ -2,7 +2,7 @@
 title: "Style guidelines"
 ---
 
-Home Assistant enforces code formatting with [Black](https://black.readthedocs.io/en/stable/). We automatically test every pull request as part of the build process. We strongly recommend setting up your IDE to automatically format files using black and enabling a pre-commit hock to enforce it. For more information please see [this blog post](/blog/2019/07/31/black.html).
+Home Assistant enforces code formatting with [Black](https://black.readthedocs.io/en/stable/). We automatically test every pull request as part of the build process. We strongly recommend setting up your IDE to automatically format files using Black and enabling a pre-commit hook to enforce it. For more information please see [this blog post](/blog/2019/07/31/black.html).
 
 ## Our recommendations
 
