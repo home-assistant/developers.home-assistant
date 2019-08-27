@@ -2,37 +2,11 @@
 title: "Style guidelines"
 ---
 
-Home Assistant enforces strict [PEP8 style](https://www.python.org/dev/peps/pep-0008/) and [PEP 257 (Docstring Conventions)](https://www.python.org/dev/peps/pep-0257/) compliance on all code submitted. We automatically test every pull request as part of the linting process with [Coveralls](https://coveralls.io/github/home-assistant/home-assistant) and [Travis CI](https://travis-ci.org/home-assistant/home-assistant).
-
-Summary of the most relevant points:
-
-- Line length is limited to 79 characters (see below).
-- Use 4 spaces per indentation level. We don't use tabs.
-- Comments should be full sentences and end with a period.
-- [Imports](https://www.python.org/dev/peps/pep-0008/#imports) should be ordered.
-- Constants and the content of lists and dictionaries should be in alphabetical order.
-- Avoid trailing whitespace but surround binary operators with a single space.
-- Line separator should be set to `LF`.
-
-The maximum line length comes directly from the [PEP8 style guide](https://www.python.org/dev/peps/pep-0008/#maximum-line-length), and is also used by the Python standard library. All code must pass these linting checks, and no exceptions will be made. There have already been numerous requests to increase the maximum line length, but after evaluating the options, the Home Assistant maintainers have decided to stay at 79 characters. This decision is final.
-
-Those points may require that you adjust your IDE or editor settings.
+Home Assistant enforces code formatting with [Black](https://black.readthedocs.io/en/stable/). We automatically test every pull request as part of the build process. We strongly recommend setting up your IDE to automatically format files using black and enabling a pre-commit hock to enforce it. For more information please see [this blog post](/blog/2019/07/31/black.html).
 
 ## Our recommendations
 
 For some cases [PEPs](https://www.python.org/dev/peps/) don't make a statement. This section covers our recommendations about the code style. Those points were collected from the existing code and based on what contributors and developers were using the most. This is basically a majority decision, thus you may not agree with it. But we would like to encourage you follow those recommendations to keep the code unified.
-
-### Quotes
-
-Use single quotes `'` for single word and `"` for multiple words or sentences.
-
-```python
-ATTR_WATERLEVEL = 'level'
-CONF_ATTRIBUTION = "Data provided by the WUnderground weather service"
-SENSOR_TYPES = {
-    'alerts': ['Alerts', None],
-}
-```
 
 ### File headers
 
@@ -40,17 +14,6 @@ The docstring in the file header should describe what the file is about.
 
 ```python
 """Support for MQTT lights."""
-```
-
-### Requirements
-
-Please place [Platform requirements](creating_platform_code_review.md#1-requirements) right after the imports.
-
-```python
-[...]
-from homeassistant.helpers.entity import Entity
-
-REQUIREMENTS = ['xmltodict==0.11.0']
 ```
 
 ### Log messages
@@ -74,7 +37,7 @@ Instead of order the imports manually, use [`isort`](https://github.com/timothyc
 
 ```bash
 $ pip3 install isort
-$ isort homeassistant/components/sensor/fixer.py 
+$ isort homeassistant/components/sensor/fixer.py
 ```
 
 ### Use new style string formatting
