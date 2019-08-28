@@ -77,7 +77,7 @@ The following properties are also available on entities. However, they are for a
 | icon | icon | `None` | Icon to use in the frontend. Icons start with `mdi:` plus an [identifier](https://materialdesignicons.com/). You probably don't need this since Home Assistant already provides default icons for all devices.
 | entity_registry_enabled_default | boolean | `True` | Indicate if the entity should be enabled or disabled when it is first added to the entity registry.
 
-## System Properties
+## System properties
 
 The following properties are used and controlled by Home Assistant, and should not be overriden by integrations.
 
