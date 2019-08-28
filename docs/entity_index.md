@@ -79,7 +79,7 @@ The following properties are also available on entities. However, they are for a
 
 ## System properties
 
-The following properties are used and controlled by Home Assistant, and should not be overriden by integrations.
+The following properties are used and controlled by Home Assistant, and should not be overridden by integrations.
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
