@@ -61,7 +61,6 @@ The entity base class has a few properties that are common among all entities in
 | assumed_state | boolean | `False` | Return `True` if the state is based on our assumption instead of reading it from the device.
 | available | boolean | `True` | Indicate if Home Assistant is able to read the state and control the underlying device.
 | device_state_attributes | dict | `None` | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version. See [below](entity_index.md#standard_attributes) for details of standard attributes.
-| enabled | boolean | `True` | Indicate if entity is enabled in the entity registry. It also returns `True` if the platform doesn't support the entity registry. Disabled entities will not be added to Home Assistant.
 | entity_picture | URL | `None` | Url of a picture to show for the entity.
 | name | string | `None` | Name of the entity
 | should_poll | boolean | `True` | Should Home Assistant check with the entity for an updated state. If set to `False`, entity will need to notify Home Assistant of new updates by calling one of the [schedule update methods](#methods).
@@ -77,6 +76,14 @@ The following properties are also available on entities. However, they are for a
 | hidden | boolean | `False` | Indicate if the entity should not be shown on the frontend.
 | icon | icon | `None` | Icon to use in the frontend. Icons start with `mdi:` plus an [identifier](https://materialdesignicons.com/). You probably don't need this since Home Assistant already provides default icons for all devices.
 | entity_registry_enabled_default | boolean | `True` | Indicate if the entity should be enabled or disabled when it is first added to the entity registry.
+
+## System Properties
+
+The following properties are used and controlled by Home Assistant, and should not be overriden by integrations.
+
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| enabled | boolean | `True` | Indicate if entity is enabled in the entity registry. It also returns `True` if the platform doesn't support the entity registry. Disabled entities will not be added to Home Assistant.
 
 ## Standard attributes
 
