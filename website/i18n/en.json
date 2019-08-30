@@ -1581,6 +1581,38 @@
       },
       "version-0.97.0/version-0.97.0-external_api_websocket": {
         "title": "WebSocket API"
+      },
+      "version-0.98.0/version-0.98.0-config_entries_config_flow_handler": {
+        "title": "Integration Configuration",
+        "sidebar_label": "Configuration"
+      },
+      "version-0.98.0/version-0.98.0-config_entries_options_flow_handler": {
+        "title": "Integration Configuration Options",
+        "sidebar_label": "Configuration Options"
+      },
+      "version-0.98.0/version-0.98.0-creating_component_generic_discovery": {
+        "title": "Integration with Multiple Platforms",
+        "sidebar_label": "Multiple platforms"
+      },
+      "version-0.98.0/version-0.98.0-development_environment": {
+        "title": "Set up Development Environment"
+      },
+      "version-0.98.0/version-0.98.0-development_guidelines": {
+        "title": "Style guidelines"
+      },
+      "version-0.98.0/version-0.98.0-entity_index": {
+        "title": "Entity",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.98.0/version-0.98.0-entity_registry_disabled_by": {
+        "title": "Entity Registry and disabling entities",
+        "sidebar_label": "Disabling entities"
+      },
+      "version-0.98.0/version-0.98.0-hassio_addon_config": {
+        "title": "Add-On Configuration"
+      },
+      "version-0.98.0/version-0.98.0-hassio_addon_tutorial": {
+        "title": "Tutorial: Making your first add-on"
       }
     },
     "links": {
