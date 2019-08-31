@@ -11,14 +11,14 @@ The Integration Quality Scale scores each integration based on the code quality 
 
 This integration passes the bare minimum requirements to become part of the index.
 
- - Satisfy all requirements for [creating components](creating_component_code_review.md) and [creating platforms](creating_platform_code_review.md).
+ - Satisfy all requirements for [creating integrations](development_checklist_integration.md) and [creating platforms](creating_platform_code_review.md).
  - Configurable via `configuration.yaml`
 
 # Silver 🥈
 
 This integration is able to cope when things go wrong. It will not print any exceptions nor will it fill the log with retry attempts.
 
-- Connection/configuration is handled via a component.
+- Connection/configuration is handled via an integration.
 - Set an appropriate `SCAN_INTERVAL` (if a polling integration)
 - Raise `PlatformNotReady` if unable to connect during platform setup (if appropriate)
 - Handles expiration of auth credentials. Refresh if possible or print correct error and fail setup. If based on a config entry, should trigger a new config entry flow to re-authorize.
