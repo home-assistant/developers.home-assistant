@@ -40,7 +40,9 @@ These weather conditions are included in our translation files and also show the
 | --------- | -----------
 | clear-night | Clear night
 | cloudy | Many clouds
+| exceptional | Exceptional
 | fog | Fog
+| hail | Hail
 | lightning | Lightning/ thunderstorms
 | lightning-rainy | Lightning/ thunderstorms and rain
 | partlycloudy | A few clouds
