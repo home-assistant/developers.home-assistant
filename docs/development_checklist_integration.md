@@ -28,10 +28,10 @@ A checklist of things to do when you're adding a new integration.
  5. If using a `PLATFORM_SCHEMA` to be used with `EntityComponent`, import base from `homeassistant.helpers.config_validation`
  6. Never depend on users adding things to `customize` to configure behavior inside your integration.
 
-### 3. Integration/platform communication
+### 3. Component/platform (intra-integration) communication
 
  1. You can share data with your platforms by leveraging `hass.data[DOMAIN]`.
- 2. If the integration fetches data that causes its related platform entities to update, you can notify them using the dispatcher code in `homeassistant.helpers.dispatcher`.
+ 2. If the integration fetches data in the component module that causes the integration platform entities to update, you can notify them using the dispatcher code in `homeassistant.helpers.dispatcher`.
 
 ### 4. Communication with devices/services
 
