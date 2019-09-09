@@ -233,8 +233,8 @@ If an element exists in the below repository for MWC. We recommended using it.
 If an element does not exist in MWC, we default to using Paper Elements.
 - [Paper Elements](https://www.webcomponents.org/collection/PolymerElements/paper-elements)
 
-## Resources
-Community Maintained Boiler Plate Card
+## Advanced Resources
+Community Maintained Boiler Plate Card - Advanced Template (Typescript, Rollup, Linting, etc.)
 - [Boilerplate Card](https://github.com/custom-cards/boilerplate-card)
 
 Developer Documentation for [HACS](https://hacs.netlify.com/) (Home Assitant Community Store).
