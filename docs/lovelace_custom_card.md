@@ -234,5 +234,8 @@ If an element does not exist in MWC, we default to using Paper Elements.
 - [Paper Elements](https://www.webcomponents.org/collection/PolymerElements/paper-elements)
 
 ## Resources
+Community Maintained Boiler Plate Card
 - [Boilerplate Card](https://github.com/custom-cards/boilerplate-card)
-- [HACS (Home Assistant Community Store) Plugin Docs](https://hacs.netlify.com/developer/plugin/)
+
+Developer Documentation for [HACS](https://hacs.netlify.com/) (Home Assitant Community Store).
+- [HACS Plugin Docs](https://hacs.netlify.com/developer/plugin/)
