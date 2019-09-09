@@ -223,3 +223,16 @@ views:
       - input_boolean.switch_ac_livingroom
       - input_boolean.switch_tv
 ```
+
+## Recommended Design Elements
+We are currently migrating from using Paper Elements to MWC (Material Web Component) Elements.
+
+If an element exists in the below repository for MWC. We recommended using it.
+- [MWC (Material Web Components)](https://material-components.github.io/material-components-web-components/demos/index.html)
+
+If an element does not exist in MWC, we default to using Paper Elements.
+- [Paper Elements](https://www.webcomponents.org/collection/PolymerElements/paper-elements)
+
+## Resources
+A good starting point for building a custom card is maintained by the community in this repo.
+- [Boilerplate Card](https://github.com/custom-cards/boilerplate-card)
