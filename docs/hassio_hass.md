@@ -49,9 +49,7 @@ To build a local version of the Hass.io panel, go to the frontend repository and
 
 ```bash
 cd hassio
-script/build_hassio
+script/develop
 ```
 
 Now start Home Assistant as discussed in the previous section and it will now connect to the remote Hass.io but show your local frontend.
-
-We're currently transitioning in how we're building the frontend so we don't have an incremental development mode just yet. For now, after making a local change, run `script/build_hassio` again.
