@@ -43,15 +43,23 @@ These weather conditions are included in our translation files and also show the
 | exceptional | Exceptional
 | fog | Fog
 | hail | Hail
+| hazy | Hazy
 | lightning | Lightning/ thunderstorms
 | lightning-rainy | Lightning/ thunderstorms and rain
 | partlycloudy | A few clouds
+| partlycloudy-night | A few clouds at night
+| partlysnowy-rainy | Cloudy intervals with snowy and rainy
+| partly-lightning | Cloudy intervals with cloudy with lightning
+| partly-rainy | Cloudy intervals with rain
+| partly-snowy | Cloudy intervals with snow
 | pouring | Pouring rain
 | rainy | Rain
 | snowy | Snow
+| snowy-heavy | Heavy snow
 | snowy-rainy | Snow and Rain
 | sunny | Sunshine
 | windy | Wind
 | windy-variant | Wind and clouds
+
 
 This means that the `weather` platforms don't need to support languages.
