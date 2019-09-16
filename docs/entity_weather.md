@@ -48,8 +48,8 @@ These weather conditions are included in our translation files and also show the
 | lightning-rainy | Lightning/ thunderstorms and rain
 | partlycloudy | A few clouds
 | partlycloudy-night | A few clouds at night
-| partlysnowy-rainy | Cloudy intervals with snowy and rainy
-| partly-lightning | Cloudy intervals with cloudy with lightning
+| partlysnowy-rainy | Cloudy intervals with snow and rain
+| partly-lightning | Cloudy intervals with lightning
 | partly-rainy | Cloudy intervals with rain
 | partly-snowy | Cloudy intervals with snow
 | pouring | Pouring rain
