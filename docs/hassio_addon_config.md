@@ -115,7 +115,8 @@ The config for an add-on is stored in `config.json`.
 | startup | bool | yes | `initialize` will start addon on setup of Hass.io. `system` is for things like databases and not dependent on other things. `services` will start before Home Assistant, while `application` is started afterwards. Finally `once` is for applications that don't run as a daemon.
 | webui | string | no | A URL for web interface of this add-on. Like `http://[HOST]:[PORT:2839]/dashboard`, the port needs the internal port, which will be replaced with the effective port. It is also possible to bind the proto part to a config options with: `[PROTO:option_name]://[HOST]:[PORT:2839]/dashboard` and he lookup if they is True and going to `https`.
 | boot | string | yes | `auto` by system and manual or only `manual`
-| ports | dict | no | Network ports to expose from the container. Format is `"container-port/type": host-port`.
+| ports | dict | no | Network ports to expose from the container. Format is `"container-port/type": host-port`. If host-port is `null`, the mapping is disabled.
+| ports_description | dict | no | Network ports description mapping. Format is `"container-port/type": "description of this port"`.
 | host_network | bool | no | If that is True, the add-on run on host network.
 | host_ipc | bool | no | Default False. Allow to share the IPC namespace with others.
 | host_dbus | bool | no | Default False. Map Host dbus service into add-on.
@@ -190,7 +191,7 @@ The `schema` looks like `options` but describes how we should validate the user 
 ```
 
 We support:
-- str
+- str / str(min,) / str(,max) / str(min,max)
 - bool
 - int / int(min,) / int(,max) / int(min,max)
 - float / float(min,) / float(,max) / float(min,max)
@@ -198,6 +199,7 @@ We support:
 - url
 - port
 - match(REGEX)
+- list(val1|val2|...)
 
 ## Add-on extended build
 
