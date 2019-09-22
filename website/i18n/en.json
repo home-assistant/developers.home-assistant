@@ -102,8 +102,7 @@
         "sidebar_label": "Multiple platforms"
       },
       "creating_component_index": {
-        "title": "Creating a Minimal Component",
-        "sidebar_label": "Minimal Component"
+        "title": "Creating your first integration"
       },
       "creating_integration_file_structure": {
         "title": "Integration File Structure",
