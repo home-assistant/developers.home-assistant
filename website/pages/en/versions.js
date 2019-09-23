@@ -28,7 +28,7 @@ class Versions extends React.Component {
             <header className="postHeader">
               <h2>{siteConfig.title + ' Versions'}</h2>
             </header>
-            <p>New versions of this project are released every 2 weeks.</p>
+            <p>New versions of this project are released every 3 weeks.</p>
             <h3 id="latest">Current version (Stable)</h3>
             <table className="versions">
               <tbody>
