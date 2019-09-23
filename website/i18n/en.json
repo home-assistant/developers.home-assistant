@@ -1612,6 +1612,26 @@
       },
       "version-0.98.0/version-0.98.0-hassio_addon_tutorial": {
         "title": "Tutorial: Making your first add-on"
+      },
+      "version-0.99.0/version-0.99.0-creating_component_index": {
+        "title": "Creating your first integration"
+      },
+      "version-0.99.0/version-0.99.0-dev_101_states": {
+        "title": "Using States"
+      },
+      "version-0.99.0/version-0.99.0-development_checklist": {
+        "title": "Development Checklist",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.99.0/version-0.99.0-entity_weather": {
+        "title": "Weather Entity",
+        "sidebar_label": "Weather"
+      },
+      "version-0.99.0/version-0.99.0-hassio_addon_config": {
+        "title": "Add-On Configuration"
+      },
+      "version-0.99.0/version-0.99.0-lovelace_custom_card": {
+        "title": "Lovelace: Custom Cards"
       }
     },
     "links": {
