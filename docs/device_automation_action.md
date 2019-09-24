@@ -11,9 +11,9 @@ To get started with device actions, create a new file `device_action.py`. The fi
 
 ## `ACTION_SCHEMA`
 
-This is the schema for actions. The base schema should be extended from `homeassistant.helpers.config_validation.DEVICE_ACTION_SCHEMA`.
+This is the schema for actions. The base schema should be extended from `homeassistant.helpers.config_validation.DEVICE_ACTION_BASE_SCHEMA`.
 
-## `async async async_get_actions(hass, device_id)
+## `async async async_get_actions(hass, device_id)`
 
 Return a list of actions that this device supports.
 

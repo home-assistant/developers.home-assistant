@@ -11,9 +11,9 @@ To get started with device conditions, create a new file `device_condition.py`. 
 
 ## `CONDITION_SCHEMA`
 
-This is the schema for conditions. The base schema should be extended from `homeassistant.helpers.config_validation.DEVICE_CONDITION_SCHEMA`.
+This is the schema for conditions. The base schema should be extended from `homeassistant.helpers.config_validation.DEVICE_CONDITION_BASE_SCHEMA`.
 
-## `async async_get_conditions(hass, device_id)
+## `async async_get_conditions(hass, device_id)`
 
 Return a list of conditions that this device supports.
 
