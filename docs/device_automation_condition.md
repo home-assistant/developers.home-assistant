@@ -7,7 +7,9 @@ Device conditions allow a user to check if a certain device condition is met. Ex
 
 Device conditions are defined as dictionaries. These dictionaries are created by your integration and are passed to your integration to createa a function that checks the condition.
 
-To get started with device conditions, create a new file `device_condition.py`. The file will need to contain the following functions and constants:
+Home Assistant includes a template to get started with device conditions. To get started, run inside a development environment `python3 -m script.scaffold device_condition`.
+
+The template will create a new file `device_condition.py` in your integration folder and a matching test file. The file contains the following functions and constants:
 
 ## `CONDITION_SCHEMA`
 

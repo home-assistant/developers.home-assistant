@@ -7,7 +7,9 @@ Device actions allow a user to have a device to something. Examples are to turn 
 
 Device actions are defined as dictionaries. These dictionaries are created by your integration and are passed to your integration to create a function that checks the condition.
 
-To get started with device actions, create a new file `device_action.py`. The file will need to contain the following functions and constants:
+Home Assistant includes a template to get started with device actions. To get started, run inside a development environment `python3 -m script.scaffold device_action`.
+
+The template will create a new file `device_action.py` in your integration folder and a matching test file. The file contains the following functions and constants:
 
 ## `ACTION_SCHEMA`
 
