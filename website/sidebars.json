@@ -86,6 +86,12 @@
       "dev_101_states",
       "dev_101_config"
     ],
+    "Device Automations": [
+      "device_automation_index",
+      "device_automation_trigger",
+      "device_automation_condition",
+      "device_automation_action"
+    ],
     "Misc": ["development_validation", "development_typing"]
   },
   "Misc": {

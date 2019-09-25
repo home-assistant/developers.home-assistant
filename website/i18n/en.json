@@ -179,6 +179,22 @@
       "development_validation": {
         "title": "Validate the input"
       },
+      "device_automation_action": {
+        "title": "Device Actions",
+        "sidebar_label": "Actions"
+      },
+      "device_automation_condition": {
+        "title": "Device Conditions",
+        "sidebar_label": "Conditions"
+      },
+      "device_automation_index": {
+        "title": "Device Automations",
+        "sidebar_label": "Introduction"
+      },
+      "device_automation_trigger": {
+        "title": "Device Triggers",
+        "sidebar_label": "Triggers"
+      },
       "device_registry_index": {
         "title": "Device Registry",
         "sidebar_label": "Introduction"
@@ -1657,6 +1673,7 @@
       "Building Integrations": "Building Integrations",
       "Development Checklist": "Development Checklist",
       "Home Assistant Core 101": "Home Assistant Core 101",
+      "Device Automations": "Device Automations",
       "Misc": "Misc",
       "Introduction": "Introduction",
       "External API": "External API",
