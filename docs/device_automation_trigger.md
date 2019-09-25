@@ -7,6 +7,9 @@ Device triggers are automation triggers that are tied to a specific device. Exam
 
 Device triggers are defined as dictionaries. These dictionaries are created by your integration and are consumed by your integration to attach the trigger.
 
+Device triggers can be provided by the integration that provides the device (e.g. ZHA, deCONZ) or the entity integrations that the device has entities with (e.g. light, switch).
+An example of the former is events not tied to an entity e.g. key press on a remote control or touch panel, while an example of the latter could be that a light has been turned on.
+
 Home Assistant includes a template to get started with device triggers. To get started, run inside a development environment `python3 -m script.scaffold device_trigger`.
 
 The template will create a new file `device_trigger.py` in your integration folder and a matching test file. The file contains the following functions and constants:
