@@ -24,4 +24,4 @@ Return a list of conditions that this device supports.
 
 ## `async async_condition_from_config(config, config_validation)`
 
-Create a condition function from a function. The condition functions should be an async-friendly callback that
+Create a condition function from a function. The condition functions should be an async-friendly callback that evaluates the condition and returns a `bool`.
