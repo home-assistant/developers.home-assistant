@@ -14,6 +14,8 @@ Home Assistant supports a wide range of products, and so not each feature that w
 
 To make it easier to get started, we have introduced a new scaffolding script. This script is able to create all the boilerplate necessary to add new features to existing entity integrations. Including tests! You will only need to focus on code to work with the specific integration. Instructions on how to use it are included in each issue linked below.
 
+_We are still working on collecting Hacktoberfest things for the frontend and the documentation. Check back soon for more info on those._
+
 ## Scenes
 
 Scenes allow a user to define how a light should look (ie, it should be on and the color should be blue). When a scene is activated, it is then up to Home Assistant to figure out which services to call to make this happen.
