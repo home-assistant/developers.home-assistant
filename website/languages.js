@@ -8,174 +8,174 @@
 const languages = [
   {
     enabled: true,
-    name: 'English',
-    tag: 'en',
+    name: "English",
+    tag: "en"
   },
   {
     enabled: false,
-    name: '日本語',
-    tag: 'ja',
+    name: "日本語",
+    tag: "ja"
   },
   {
     enabled: false,
-    name: 'العربية',
-    tag: 'ar',
+    name: "العربية",
+    tag: "ar"
   },
   {
     enabled: false,
-    name: 'Bosanski',
-    tag: 'bs-BA',
-  },
-  {
-    enabled: true,
-    name: 'Català',
-    tag: 'ca',
+    name: "Bosanski",
+    tag: "bs-BA"
   },
   {
     enabled: false,
-    name: 'Čeština',
-    tag: 'cs',
+    name: "Català",
+    tag: "ca"
   },
   {
     enabled: false,
-    name: 'Dansk',
-    tag: 'da',
+    name: "Čeština",
+    tag: "cs"
   },
   {
     enabled: false,
-    name: 'Deutsch',
-    tag: 'de',
-  },
-  {
-    enabled: true,
-    name: 'Ελληνικά',
-    tag: 'el',
+    name: "Dansk",
+    tag: "da"
   },
   {
     enabled: false,
-    name: 'Español',
-    tag: 'es-ES',
+    name: "Deutsch",
+    tag: "de"
   },
   {
     enabled: false,
-    name: 'فارسی',
-    tag: 'fa-IR',
+    name: "Ελληνικά",
+    tag: "el"
   },
   {
     enabled: false,
-    name: 'Suomi',
-    tag: 'fi',
+    name: "Español",
+    tag: "es-ES"
   },
   {
     enabled: false,
-    name: 'Français',
-    tag: 'fr',
+    name: "فارسی",
+    tag: "fa-IR"
   },
   {
     enabled: false,
-    name: 'עִברִית',
-    tag: 'he',
+    name: "Suomi",
+    tag: "fi"
   },
   {
     enabled: false,
-    name: 'Magyar',
-    tag: 'hu',
+    name: "Français",
+    tag: "fr"
   },
   {
     enabled: false,
-    name: 'Bahasa Indonesia',
-    tag: 'id-ID',
+    name: "עִברִית",
+    tag: "he"
   },
   {
     enabled: false,
-    name: 'Italiano',
-    tag: 'it',
+    name: "Magyar",
+    tag: "hu"
   },
   {
     enabled: false,
-    name: 'Afrikaans',
-    tag: 'af',
-  },
-  {
-    enabled: true,
-    name: '한국어',
-    tag: 'ko',
+    name: "Bahasa Indonesia",
+    tag: "id-ID"
   },
   {
     enabled: false,
-    name: 'मराठी',
-    tag: 'mr-IN',
+    name: "Italiano",
+    tag: "it"
   },
   {
     enabled: false,
-    name: 'Nederlands',
-    tag: 'nl',
+    name: "Afrikaans",
+    tag: "af"
   },
   {
     enabled: false,
-    name: 'Norsk',
-    tag: 'no-NO',
+    name: "한국어",
+    tag: "ko"
   },
   {
     enabled: false,
-    name: 'Polskie',
-    tag: 'pl',
+    name: "मराठी",
+    tag: "mr-IN"
   },
   {
     enabled: false,
-    name: 'Português',
-    tag: 'pt-PT',
+    name: "Nederlands",
+    tag: "nl"
   },
   {
     enabled: false,
-    name: 'Português (Brasil)',
-    tag: 'pt-BR',
+    name: "Norsk",
+    tag: "no-NO"
   },
   {
     enabled: false,
-    name: 'Română',
-    tag: 'ro',
+    name: "Polskie",
+    tag: "pl"
   },
   {
     enabled: false,
-    name: 'Русский',
-    tag: 'ru',
+    name: "Português",
+    tag: "pt-PT"
   },
   {
     enabled: false,
-    name: 'Slovenský',
-    tag: 'sk-SK',
+    name: "Português (Brasil)",
+    tag: "pt-BR"
   },
   {
     enabled: false,
-    name: 'Српски језик (Ћирилица)',
-    tag: 'sr',
+    name: "Română",
+    tag: "ro"
   },
   {
     enabled: false,
-    name: 'Svenska',
-    tag: 'sv-SE',
+    name: "Русский",
+    tag: "ru"
   },
   {
     enabled: false,
-    name: 'Türkçe',
-    tag: 'tr',
+    name: "Slovenský",
+    tag: "sk-SK"
   },
   {
     enabled: false,
-    name: 'Українська',
-    tag: 'uk',
+    name: "Српски језик (Ћирилица)",
+    tag: "sr"
   },
   {
     enabled: false,
-    name: 'Tiếng Việt',
-    tag: 'vi',
+    name: "Svenska",
+    tag: "sv-SE"
   },
   {
-    enabled: true,
-    name: '中文',
-    tag: 'zh-CN',
+    enabled: false,
+    name: "Türkçe",
+    tag: "tr"
   },
-  {enabled: false, name: '繁體中文', tag: 'zh-TW'},
+  {
+    enabled: false,
+    name: "Українська",
+    tag: "uk"
+  },
+  {
+    enabled: false,
+    name: "Tiếng Việt",
+    tag: "vi"
+  },
+  {
+    enabled: false,
+    name: "中文",
+    tag: "zh-CN"
+  },
+  { enabled: false, name: "繁體中文", tag: "zh-TW" }
 ];
 module.exports = languages;
