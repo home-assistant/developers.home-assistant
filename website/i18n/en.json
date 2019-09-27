@@ -1651,6 +1651,25 @@
       },
       "version-0.99.0/version-0.99.0-lovelace_custom_card": {
         "title": "Lovelace: Custom Cards"
+      },
+      "version-0.99.3/version-0.99.3-device_automation_action": {
+        "title": "Device Actions",
+        "sidebar_label": "Actions"
+      },
+      "version-0.99.3/version-0.99.3-device_automation_condition": {
+        "title": "Device Conditions",
+        "sidebar_label": "Conditions"
+      },
+      "version-0.99.3/version-0.99.3-device_automation_index": {
+        "title": "Device Automations",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.99.3/version-0.99.3-device_automation_trigger": {
+        "title": "Device Triggers",
+        "sidebar_label": "Triggers"
+      },
+      "version-0.99.3/version-0.99.3-reproduce_state_index": {
+        "title": "Reproduce State / Scene support"
       }
     },
     "links": {
