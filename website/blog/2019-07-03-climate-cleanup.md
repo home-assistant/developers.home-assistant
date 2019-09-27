@@ -32,6 +32,8 @@ A gist of the changes:
 
 If you are a maintainer of an integration that has a climate platform or maintain a custom component that has one, make sure you [follow the pull request](https://github.com/home-assistant/home-assistant/pull/23899) and test your integration during the beta to make sure that it works like expected.
 
+<!--truncate-->
+
 <div id='discourse-comments'></div>
 
 <script markdown="0">
