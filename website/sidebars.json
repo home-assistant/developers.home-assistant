@@ -71,7 +71,8 @@
       "configuration_yaml_index",
       "dev_101_services",
       "creating_platform_index",
-      "creating_component_generic_discovery"
+      "creating_component_generic_discovery",
+      "reproduce_state_index"
     ],
     "Development Checklist": [
       "development_checklist",
