@@ -8,7 +8,7 @@ title: Hacktoberfest 2019
 
 This year we're again participating in [Hacktoberfest](https://hacktoberfest.digitalocean.com). Hacktoberfest is a worldwide event to celebrate open source. If you make four pull request in the month of October, you'll get a free Hacktoberfest t-shirt.
 
-Home Assistant is currently racing towards our magical 1.0 release. Home Assistant 1.0 release is all about user friendliness. As part of this, we have recently introduced device automations and are expanding how scenes work in Home Assistant.
+Home Assistant is currently racing towards our magical 1.0 release. Home Assistant 1.0 is all about user friendliness. As part of this, we have recently introduced device automations and are expanding how scenes work in Home Assistant.
 
 Home Assistant supports a wide range of products, and so not each feature that we built supports each product type yet. For this Hacktoberfest, we've prepared issues to help integrations use the latest Home Assistant features.
 
@@ -34,13 +34,13 @@ Device Automations are a device-oriented way for users to create automations. Wh
 
 Device automations rely on integrations to define the possible options for each device. As this is a new technology, we still are looking for help in making all our entity integrations (light, switch etc) support this. We have prepared the following issues:
 
-- [Add device trigger support to entity integrations](https://github.com/home-assistant/home-assistant/issues?utf8=%E2%9C%93&q=label%3AHacktoberfest+device_trigger+is%3Aopen+)
-- [Add device condition support to entity integrations](https://github.com/home-assistant/home-assistant/issues?utf8=%E2%9C%93&q=label%3AHacktoberfest+device_condition+is%3Aopen+)
-- [Add device action support to entity integrations](https://github.com/home-assistant/home-assistant/issues?utf8=%E2%9C%93&q=label%3AHacktoberfest+device_action+is%3Aopen+)
+- [Add device trigger support to entity integrations](https://github.com/home-assistant/home-assistant/issues?utf8=%E2%9C%93&q=label%3AHacktoberfest+device_trigger+is%3Aopen+) (multiple issues)
+- [Add device condition support to entity integrations](https://github.com/home-assistant/home-assistant/issues?utf8=%E2%9C%93&q=label%3AHacktoberfest+device_condition+is%3Aopen+) (multiple issues)
+- [Add device action support to entity integrations](https://github.com/home-assistant/home-assistant/issues?utf8=%E2%9C%93&q=label%3AHacktoberfest+device_action+is%3Aopen+) (multiple issues)
 
 ## Bonus: Almond - Virtual Assistant
 
-[Almond](https://almond.stanford.edu/) is an open, privacy-preserving virtual assistant by Stanford University. We have been [collaborating](https://github.com/stanford-oval/thingpedia-common-devices/pull/80) on getting it to work with Home Assistant. Right now it's limited to contorlling lights in Home Assistant.
+[Almond](https://almond.stanford.edu/) is an open, privacy-preserving virtual assistant by Stanford University. We have been [collaborating](https://github.com/stanford-oval/thingpedia-common-devices/pull/80) on getting it to work with Home Assistant. Right now it's limited to controlling lights in Home Assistant.
 
 For Hacktoberfest, let's see if we can expand the number of supported types!
 
