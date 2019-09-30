@@ -7,14 +7,28 @@ As it states in the [Style guidelines section](development_guidelines.md) all co
 - All the unit tests pass
 - All code passes the checks from the linting tools
 
-Local testing is done using Tox, which has been installed as part of running `script/setup` in the [virtual environment](development_environment.md). To start the tests, activate the virtual environment and simply run the command:
+Local testing is done using Tox, which has been installed as part of running `script/setup` in the [virtual environment](development_environment.md). To start the tests, activate the virtual environment (just as you would to run hass) and simply run the command:
 
 ```bash
 $ tox
 ```
+A complete run of every test can take a couple of hours on a beefy PC and need 5GB of disk space -- you probably don't want to do this on your Raspberry Pi.  If successful, Tox will output something like:
+
+```bash
+___________________________________ summary ____________________________________
+  py36: commands succeeded
+  py37: commands succeeded
+  py38: commands succeeded
+  lint: commands succeeded
+  pylint: commands succeeded
+  typing: commands succeeded
+  cov: commands succeeded
+  congratulations :)
+```
+
 **Important:** Run `tox` before you create your pull request to avoid annoying fixes.
 
-Running Tox will run unit tests against the locally available Pythons, as well as validate the code and document style using `pycodestyle`, `pydocstyle` and  `pylint`. You can run tests on only one tox target -- just use `-e` to select an environment. For example, `tox -e lint` runs the linters only, and `tox -e py36` runs unit tests only on Python 3.6.
+Running Tox will run unit tests against the locally available Pythons, as well as validate the code and document style using `pycodestyle`, `pydocstyle` and  `pylint`. You can run tests on only one tox target -- just use `-e` to select an environment. For example, `tox -e lint` runs the linters only, and `tox -e py36` runs unit tests only on Python 3.6.  (The script `script/lazytox.py` attempts to figure out what you've changed and only tests and lints the files you touched.)
 
 Tox uses virtual environments under the hood to create isolated testing environments. The tox virtual environments will get out-of-date when requirements change, causing test errors. Run `tox -r` to tell Tox to recreate the virtual environments.
 
