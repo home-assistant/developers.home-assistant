@@ -14,7 +14,9 @@ Home Assistant supports a wide range of products, and so not each feature that w
 
 To make it easier to get started, we have introduced a new scaffolding script. This script is able to create all the boilerplate necessary to add new features to existing entity integrations. Including tests! You will only need to focus on code to work with the specific integration. Instructions on how to use it are included in each issue linked below.
 
-_We are still working on collecting Hacktoberfest things for the frontend and the documentation. Check back soon for more info on those._
+If you want to see all available issues instead of the tailored list below, [check here](https://github.com/issues?page=1&q=is%3Aopen+is%3Aissue+org%3Ahome-assistant+archived%3Afalse+label%3AHacktoberfest&utf8=%E2%9C%93) (requires being logged in to GitHub).
+
+**Update Sep 30:** Added docs section, updated the links in the Almond section, added link to all Home Assistant Hacktoberfest issues.
 
 ## Scenes
 
@@ -39,19 +41,22 @@ Device automations rely on integrations to define the possible options for each 
 - [Add device condition support to entity integrations](https://github.com/home-assistant/home-assistant/issues?utf8=%E2%9C%93&q=label%3AHacktoberfest+device_condition+is%3Aopen+) (multiple issues)
 - [Add device action support to entity integrations](https://github.com/home-assistant/home-assistant/issues?utf8=%E2%9C%93&q=label%3AHacktoberfest+device_action+is%3Aopen+) (multiple issues)
 
+## Home Assistant Documentation
+
+Guess what is never done? Documentation.
+
+- [Fill in missing documentation for integrations](https://github.com/home-assistant/home-assistant.io/issues?q=is%3Aissue+is%3Aopen+label%3AHacktoberfest)
+- [Fill in missing documentation for hass.io add-ons](https://github.com/home-assistant/hassio-addons/issues?q=is%3Aissue+is%3Aopen+label%3AHacktoberfest)
+
 ## Bonus: Almond - Virtual Assistant
 
 [Almond](https://almond.stanford.edu/) is an open, privacy-preserving virtual assistant by Stanford University. We have been [collaborating](https://github.com/stanford-oval/thingpedia-common-devices/pull/80) on getting it to work with Home Assistant. Right now it's limited to controlling lights in Home Assistant.
 
-For Hacktoberfest, let's see if we can expand the number of supported types!
+For Hacktoberfest, let's see if we can expand the number of supported types! To get started, check the following links:
 
-The Almond team is working on creating some documentation tailored to Home Assistant specific contributions ([issue](https://github.com/stanford-oval/almond-cloud/issues/496)). I'll update this blog post when it is live.
-
-For now, you can get started contributing to Almond with the following links:
-
+- [Documentation on how to contribute Home Assistant specific types](https://almond.stanford.edu/doc/home-assistant-integration.md)
+- [Documentation on how to run tests](https://almond.stanford.edu/doc/thingpedia-testing.md)
 - Run Almond at [home](https://github.com/stanford-oval/almond-server), use [the Android version](https://play.google.com/store/apps/details?id=edu.stanford.thingengine.engine&hl=en_US) or [the Gnome version](https://flathub.org/apps/details/edu.stanford.Almond)
-- Follow the tutorial on [adding a new type](https://almond.stanford.edu/doc/thingpedia-tutorial-nyt.md)
-- Check out the Home Assistant light implementation: [class](https://github.com/stanford-oval/thingpedia-common-devices/blob/wip/home-assistant/io.home-assistant/light-bulb.js), [metadata](https://github.com/stanford-oval/thingpedia-common-devices/tree/wip/home-assistant/light-bulb)
 
 <div id='discourse-comments'></div>
 
