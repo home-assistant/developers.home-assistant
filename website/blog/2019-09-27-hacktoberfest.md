@@ -18,6 +18,8 @@ If you want to see all available issues instead of the tailored list below, [che
 
 **Update Sep 30:** Added docs section, updated the links in the Almond section, added link to all Home Assistant Hacktoberfest issues.
 
+**Update Okt 1:** Added frontend section.
+
 ## Scenes
 
 Scenes allow a user to define how a light should look (ie, it should be on and the color should be blue). When a scene is activated, it is then up to Home Assistant to figure out which services to call to make this happen.
@@ -47,6 +49,15 @@ Guess what is never done? Documentation.
 
 - [Fill in missing documentation for integrations](https://github.com/home-assistant/home-assistant.io/issues?q=is%3Aissue+is%3Aopen+label%3AHacktoberfest)
 - [Fill in missing documentation for hass.io add-ons](https://github.com/home-assistant/hassio-addons/issues?q=is%3Aissue+is%3Aopen+label%3AHacktoberfest)
+
+## Frontend
+
+We also have some work to do on the Frontend of Home Assistant.
+So we have also prepared some issues to get you started: 
+
+- [Make all text translatable](https://github.com/home-assistant/home-assistant-polymer/issues?utf8=%E2%9C%93&q=label%3AHacktoberfest+label%3Alocalization+is%3Aopen+) (multiple issues)
+- [Help making Home Assistant better accessible](https://github.com/home-assistant/home-assistant-polymer/issues?q=is%3Aopen+label%3AHacktoberfest+label%3Aaccessibility) (multiple issues)
+- [And a lot of other small UX issues](https://github.com/home-assistant/home-assistant-polymer/labels/Hacktoberfest?page=2&q=is%3Aopen+label%3AHacktoberfest)
 
 ## Bonus: Almond - Virtual Assistant
 
