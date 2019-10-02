@@ -101,6 +101,8 @@ Running tasks like `Preview` can be restarted by opening the command pallet and 
 Visit the [Home Assistant repository](https://github.com/home-assistant/home-assistant) and click **Fork**.
 Once forked, setup your local copy of the source using the commands:
 
+_Windows users should be sure to clone to a path that inside the WSL (ex: ~/)._
+
 ```bash
 $ git clone https://github.com/YOUR_GIT_USERNAME/home-assistant.git
 $ cd home-assistant
