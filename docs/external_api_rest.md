@@ -347,7 +347,7 @@ $ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 
 #### POST /api/states/&lt;entity_id>
 
-Updates or creates the current state of an entity.
+Updates or creates a state. You can create any state that you want, it does not have to be backed by an entity in Home Assistant. 
 
 Expects a JSON object that has at least a state attribute:
 
