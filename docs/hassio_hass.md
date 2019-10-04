@@ -41,17 +41,17 @@ Update the Hass.io component configuration in your `configuration.yaml` to point
 
 ```yaml
 # configuration.yaml
-frontend:
+hassio:
   development_repo: /home/paulus/dev/hass/home-assistant-polymer
 ```
 
 To build a local version of the Hass.io panel, go to the frontend repository and run:
 
 ```bash
-script/bootstrap
+cd hassio
 script/develop
 ```
 
 Now start Home Assistant as discussed in the previous section and it will now connect to the remote Hass.io but show your local frontend.
 
-Once you have `script/develop` the frontend will be rebuilt whenever you make changes to the source files.  See [frontend development](frontend_development.html#development) for more information.
+Once you have `script/develop` the hassio panel will be rebuilt whenever you make changes to the source files.
