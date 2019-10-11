@@ -84,7 +84,7 @@ Another ongoing effort that will make it easier for everyone is our Hacktoberfes
 
 <script markdown="0">
   DiscourseEmbed = { discourseUrl: 'https://community.home-assistant.io/',
-                     discourseEmbedUrl: 'https://developers.home-assistant.io/blog/2019/05/22/internet-of-things-and-the-modern-web.html' };
+                     discourseEmbedUrl: 'https://developers.home-assistant.io/blog/2019/10/05/simple-mode.html' };
   (function() {
     var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
     d.src = DiscourseEmbed.discourseUrl + 'javascripts/embed.js';

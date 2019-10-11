@@ -106,7 +106,7 @@ Building out a wide range of automations has really helped Home Assistant scale 
 
 <script markdown="0">
   DiscourseEmbed = { discourseUrl: 'https://community.home-assistant.io/',
-                     discourseEmbedUrl: 'https://developers.home-assistant.io/blog/2019/05/22/internet-of-things-and-the-modern-web.html' };
+                     discourseEmbedUrl: 'https://developers.home-assistant.io/blog/2019/07/19/building-all-the-things.html' };
   (function() {
     var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
     d.src = DiscourseEmbed.discourseUrl + 'javascripts/embed.js';

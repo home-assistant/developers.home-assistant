@@ -53,7 +53,7 @@ Guess what is never done? Documentation.
 ## Frontend
 
 We also have some work to do on the Frontend of Home Assistant.
-So we have also prepared some issues to get you started: 
+So we have also prepared some issues to get you started:
 
 - [Make all text translatable](https://github.com/home-assistant/home-assistant-polymer/issues?utf8=%E2%9C%93&q=label%3AHacktoberfest+label%3Alocalization+is%3Aopen+) (multiple issues)
 - [Help making Home Assistant better accessible](https://github.com/home-assistant/home-assistant-polymer/issues?q=is%3Aopen+label%3AHacktoberfest+label%3Aaccessibility) (multiple issues)
@@ -73,7 +73,7 @@ For Hacktoberfest, let's see if we can expand the number of supported types! To 
 
 <script markdown="0">
   DiscourseEmbed = { discourseUrl: 'https://community.home-assistant.io/',
-                     discourseEmbedUrl: 'https://developers.home-assistant.io/blog/2019/05/22/internet-of-things-and-the-modern-web.html' };
+                     discourseEmbedUrl: 'https://developers.home-assistant.io/blog/2019/09/27/hacktoberfest.html' };
   (function() {
     var d = document.createElement('script'); d.type = 'text/javascript'; d.async = true;
     d.src = DiscourseEmbed.discourseUrl + 'javascripts/embed.js';
