@@ -27,8 +27,8 @@ Scenes allow a user to define how a light should look (ie, it should be on and t
 Scenes are a powerful tool that is easy to understand for users. It's therefore important that we improve our scene support. We have prepared the following issues:
 
 - [Add `scene.create` service to create scenes on the fly.](https://github.com/home-assistant/home-assistant/issues/27023)
-- [Add `scene.apply` service to apply a scene defined as service data.](https://github.com/home-assistant/home-assistant/issues/26813)
-- [Add activate scene to script syntax](https://github.com/home-assistant/home-assistant/issues/27026)
+- ~~[Add `scene.apply` service to apply a scene defined as service data.](https://github.com/home-assistant/home-assistant/issues/26813)~~
+- ~~[Add activate scene to script syntax](https://github.com/home-assistant/home-assistant/issues/27026)~~
 - [Add reproduce state support to entity integrations.](https://github.com/home-assistant/home-assistant/issues?utf8=%E2%9C%93&q=label%3AHacktoberfest+reproduce_state+is%3Aopen+) (multiple issues)
 
 <!--truncate-->
