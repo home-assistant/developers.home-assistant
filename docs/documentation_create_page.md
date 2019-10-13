@@ -112,7 +112,9 @@ Please note, if you want to use Markdown inside an HTML block, it has to be surr
 
 ```html
 <div class='note warning'>
+  
   You need to enable [**telnet**](https://en.wikipedia.org/wiki/Telnet) on your router.
+  
 </div>
 ```
 
