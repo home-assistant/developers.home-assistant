@@ -246,6 +246,10 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         )
 ```
 
+Avoid doing work based on the external step data before you return an `async_mark_external_step_done`. Instead, do the work in the step that you refer to as `next_step_id` when marking the external step done. This will give the user a better user experience by showing a spinner in the UI while the work is done.
+
+If you do the work inside the authorize callback, the user will stare at a blank screen until that all of a sudden closes because the data has forwarded. If you do the work before marking the external step as done, the user will still see the form with the "Open external website" button while the background work is being done. That too is undesirable.
+
 Example code to mark an external step as done:
 
 ```python
