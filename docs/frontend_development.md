@@ -57,6 +57,23 @@ $ nvm use
 $ script/develop
 ```
 
+The first build will take around a minute on a recent machine.
+
+If the development server crashes this may be due to a limit on the amount of
+memory the node process may use. If you get the following error message, you can
+increase the amount of memory that Node can use by setting an environment
+variable:
+```bash
+$ ./script/develop
+...
+FATAL ERROR: Ineffective mark-compacts near heap limit Allocation failed - JavaScript heap out of memory
+...
+# Solve by running with larger heap size
+$ NODE_OPTIONS="--max-old-space-size=4096" ./script/develop
+```
+
+### Browser settings
+
 Make sure you have cache disabled and correct settings to avoid stale content:
 
 > Instructions are for Google Chrome
