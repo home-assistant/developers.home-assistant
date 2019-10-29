@@ -74,7 +74,7 @@ redirect_from: /getting-started/android/
 ---
 ```
 
-Adding a redirect also applies if you move content around in the [documentation](/docs/).
+Adding a redirect also applies if you move content around in the [documentation](/docs/en/documentation_index.html).
 
 ## Single vs. Double Quotation Marks
 
