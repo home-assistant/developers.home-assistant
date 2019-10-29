@@ -9,7 +9,7 @@ For this guide we're going to assume that we're building a library for a Rest AP
 
 This guide is not a perfect fit for every API. You might have to tweak the examples.
 
-> If you are a manufacturer designing a new API for your product, [please read this](TODO).
+> If you are a manufacturer designing a new API for your product, [please read about the best type of API to add to your products here](https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things/#local-device-pushing-new-state).
 
 HTTP API requests consist of four different parts:
 
