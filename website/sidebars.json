@@ -129,6 +129,11 @@
       "app_integration_notifications",
       "app_integration_webview"
     ],
+    "Building a Python library": [
+      "api_lib_index",
+      "api_lib_auth",
+      "api_lib_data_models"
+    ],
     "asyncio": [
       "asyncio_index",
       "asyncio_101",

@@ -69,33 +69,15 @@ If your integration is discoverable without requiring any authentication, you'll
 - Support all manifest-based discovery protocols.
 - Limit to only 1 config entry. It is up to the config entry to discover all available devices.
 
-```python
-"""Config flow for LIFX."""
-from homeassistant.helpers import config_entry_flow
-from homeassistant import config_entries
+To get started, run `python3 -m script.scaffold config_flow_discovery` and follow the instructions. This will create all the boilerplate necessary to configure your integration using discovery.
 
-import aiolifx
+## Configuration via OAuth2
 
-from .const import DOMAIN
+Home Assistant has built-in support for integrations that offer account linking using [the OAuth2 authorization framework](https://tools.ietf.org/html/rfc6749). To be able to leverage this, you will need to structure your Python API library in a way that allows Home Assistant to be responsible for refreshing tokens. See our [API library guide](api_lib_index.md) on how to do this.
 
+The built-in OAuth2 support works out of the box with locally configured client ID / secret and with the Home Assistant Cloud Account Linking service. This service allows users to link their account with a centrally managed client ID/secret. If you want your integration to be part of this service, reach out to us at [hello@home-assistant.io](mailto:hello@home-assistant.io).
 
-async def _async_has_devices(hass):
-    """Return if there are devices that can be discovered."""
-    lifx_ip_addresses = await aiolifx.LifxScan(hass.loop).scan()
-    return len(lifx_ip_addresses) > 0
-
-
-config_entry_flow.register_discovery_flow(
-    # Domain of your integration
-    DOMAIN,
-    # Title of the created config entry
-    'LIFX',
-    # async method that returns a boolean if devices/services are found
-    _async_has_devices,
-    # Connection class of the integration
-    config_entries.CONN_CLASS_LOCAL_POLL
-)
-```
+To get started, run `python3 -m script.scaffold config_flow_oauth2` and follow the instructions. This will create all the boilerplate necessary to configure your integration using OAuth2.
 
 ## Translations
 

@@ -5,6 +5,18 @@
     "previous": "Previous",
     "tagline": "All you need to start developing for Home Assistant",
     "docs": {
+      "api_lib_auth": {
+        "title": "Python Library: Authentication",
+        "sidebar_label": "Authentication"
+      },
+      "api_lib_data_models": {
+        "title": "Python Library: Modelling Data",
+        "sidebar_label": "Modelling Data"
+      },
+      "api_lib_index": {
+        "title": "Building a Python library for an API",
+        "sidebar_label": "Introduction"
+      },
       "app_integration_index": {
         "title": "Native App Integration",
         "sidebar_label": "Introduction"
@@ -73,6 +85,10 @@
       },
       "auth_permissions": {
         "title": "Permissions"
+      },
+      "config_entries_config_flow_handler_oauth2": {
+        "title": "Integration Configuration with OAuth2",
+        "sidebar_label": "Configuration with OAuth2"
       },
       "config_entries_config_flow_handler": {
         "title": "Integration Configuration",
@@ -1720,6 +1736,7 @@
       "Documentation": "Documentation",
       "Intents": "Intents",
       "Native App Integration": "Native App Integration",
+      "Building a Python library": "Building a Python library",
       "asyncio": "asyncio",
       "Hass.io": "Hass.io",
       "Hass.io Add-Ons": "Hass.io Add-Ons",
