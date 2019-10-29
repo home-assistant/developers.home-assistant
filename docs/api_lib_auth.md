@@ -121,7 +121,7 @@ print("HTTP response JSON content", resp.json())
 
 ## OAuth2
 
-OAuth2 is a [standardized version](https://tools.ietf.org/html/rfc6749) of an authentication schema leveraging refresh and access tokens. The access token expires wihtin a short period of time after being issued. The refresh token can be used to acquire new access tokens.
+OAuth2 is a [standardized version](https://tools.ietf.org/html/rfc6749) of an authentication schema leveraging refresh and access tokens. The access token expires within a short period of time after being issued. The refresh token can be used to acquire new access tokens.
 
 Refreshing access tokens relies on a client ID and secret, which might be held by an external service. We need to structure the authentication class to be able to allow the developer to implement their own token refresh logic.
 
