@@ -98,19 +98,17 @@ If your integration supports discovery via [Zeroconf](https://en.wikipedia.org/w
 
 If your integration supports discovery via [SSDP](https://en.wikipedia.org/wiki/Simple_Service_Discovery_Protocol), you can add the type to your manifest. If the user has the `ssdp` integration loaded, it will load the `ssdp` step of your integration's config flow when it is discovered. We support SSDP discovery by ST, and all data in UPnP device description. The manifest value is a list of matcher dictionaries, your integration is discovered if all items of any of the specified matchers are found in the SSDP/UPnP data. It's up to your config flow to filter out duplicates.
 
+The following example has one matcher consisting of three items, all of which must match for discovery to happen by this config.
+
 ```json5
 {
-  "ssdp": [{
-    "st": [
-      "roku:ecp"
-    ],
-    "manufacturer": [
-      "Roku"
-    ],
-    "deviceType": [
-      "urn:roku-com:device:player:1-0"
-    ]
-  }]
+  "ssdp": [
+    {
+      "st": "roku:ecp",
+      "manufacturer": "Roku",
+      "deviceType": "urn:roku-com:device:player:1-0"
+    }
+  ]
 }
 ```
 
