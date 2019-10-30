@@ -74,7 +74,7 @@ redirect_from: /getting-started/android/
 ---
 ```
 
-Adding a redirect also applies if you move content around in the [documentation](/docs/en/documentation_index.html).
+Adding a redirect also applies if you move content around in the [documentation](https://www.home-assistant.io/docs/).
 
 ## Single vs. Double Quotation Marks
 
