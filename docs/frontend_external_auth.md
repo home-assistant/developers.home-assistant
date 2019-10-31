@@ -47,11 +47,11 @@ When the user presses the logout button on the profile page, the external app wi
 
 ```js
 window.externalApp.revokeExternalAuth({
-  callback: 'externalAuthSetToken'
+  callback: 'externalAuthRevokeToken'
 });
 // or
 window.webkit.messageHandlers.revokeExternalAuth.postMessage({
-  callback: 'externalAuthSetToken'
+  callback: 'externalAuthRevokeToken'
 });
 ```
 
