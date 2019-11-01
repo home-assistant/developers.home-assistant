@@ -237,5 +237,5 @@ If an element does not exist in MWC, we default to using Paper Elements.
 Community Maintained Boilerplate Card - Advanced Template (Typescript, Rollup, Linting, etc.)
 - [Boilerplate Card](https://github.com/custom-cards/boilerplate-card)
 
-Developer Documentation for [HACS](https://hacs.netlify.com/) (Home Assitant Community Store).
+Developer Documentation for [HACS](https://hacs.netlify.com/) (Home Assistant Community Store).
 - [HACS Plugin Docs](https://hacs.netlify.com/developer/plugin/)
