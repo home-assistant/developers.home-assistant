@@ -44,6 +44,7 @@ Example payload to send to the registration endpoint:
   "device_name": "Robbies iPhone",
   "manufacturer": "Apple, Inc.",
   "model": "iPhone X",
+  "os_name": "iOS",
   "os_version": "iOS 10.12",
   "supports_encryption": true,
   "app_data": {
@@ -60,6 +61,7 @@ Example payload to send to the registration endpoint:
 | `device_name` | V | string | Name of the device running the app.
 | `manufacturer` | V | string | The manufacturer of the device running the app.
 | `model` | V | string | The model of the device running the app.
+| `os_name` | V | string | The name of the OS running the app. 
 | `os_version` | V | string | The OS version of the device running the app.
 | `supports_encryption` | V | bool | If the app supports encryption. See also the [encryption section](#encryption).
 | `app_data` |  | Dict | App data can be used if the app has a supporting component that extends `mobile_app` functionality.
