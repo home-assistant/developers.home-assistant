@@ -480,7 +480,7 @@ Sample `curl` command:
 ```bash
 $ curl -X POST -H "Authorization: Bearer ABCDEFGH" \
        -H "Content-Type: application/json" \
-       -d '{"template": "It is {{ now }}!"}' http://localhost:8123/api/template
+       -d '{"template": "It is {{ now() }}!"}' http://localhost:8123/api/template
 ```
 
 #### POST /api/config/core/check_config
