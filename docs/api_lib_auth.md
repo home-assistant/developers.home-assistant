@@ -81,7 +81,7 @@ import requests
 class Auth:
     """Class to make authenticated requests."""
 
-    def __init__(self, host: str, , access_token: str):
+    def __init__(self, host: str, access_token: str):
         """Initialize the auth."""
         self.host = host
         self.access_token = access_token
