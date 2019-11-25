@@ -16,7 +16,7 @@ $ tox
 It might be required that you install additional packages depending on your distribution/operating system:
 
 - Fedora: `sudo dnf -y install systemd-devel gcc-c++`
-- Ubuntu: `sudo spt-get install libudev-dev`
+- Ubuntu: `sudo apt-get install libudev-dev`
 
 **Important:** Run `tox` before you create your pull request to avoid annoying fixes.
 
