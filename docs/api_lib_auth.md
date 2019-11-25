@@ -26,7 +26,7 @@ from aiohttp import ClientSession, ClientResponse
 class Auth:
     """Class to make authenticated requests."""
 
-    def __init__(self, websession: ClientSession, host: str, , access_token: str):
+    def __init__(self, websession: ClientSession, host: str, access_token: str):
         """Initialize the auth."""
         self.websession = websession
         self.host = host
