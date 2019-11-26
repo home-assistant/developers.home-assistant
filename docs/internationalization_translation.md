@@ -7,6 +7,7 @@ Translations for Home Assistant are managed through [Lokalise](https://lokalise.
 - [Join the frontend translation team](https://lokalise.co/signup/3420425759f6d6d241f598.13594006/all/)
 - [Join the backend translation team](https://lokalise.co/signup/130246255a974bd3b5e8a1.51616605/all/)
 - [Join the iOS translation team](https://lokalise.co/signup/834452985a05254348aee2.46389241/all/)
+- [Join the Android translation team](https://lokalise.com/public/145814835dd655bc5ab0d0.36753359/)
 
 For more information about the translation workflow, please see the [Lokalise translation workflow documents](https://docs.lokalise.co/category/iOzEuQPS53-for-team-leads-and-translators).
 
