@@ -215,9 +215,11 @@ class Auth:
         self.client_secret = client_secret
         self.token_updater = token_updater
 
+        extra = {"client_id": self.client_id, "client_secret": self.client_secret}
+
         self._oauth = OAuth2Session(
+            auto_refresh_kwargs=extra,
             client_id=client_id,
-            client_secret=client_secret,
             token=token,
             token_updater=token_updater,
         )
