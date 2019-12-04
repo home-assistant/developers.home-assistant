@@ -67,7 +67,7 @@ Libraries that wrap Sodium exist for most modern programming languages and platf
 
 Here are the libraries we suggest using, although you should feel free to use whatever works well for you.
 
-- Swift/Objective-C: [swift-sodium](https://github.com/jedisct1/swift-sodium) (official library maintained by Sodium developers.
+- Swift/Objective-C: [swift-sodium](https://github.com/jedisct1/swift-sodium) (official library maintained by Sodium developers).
 
 For other languages, please see the list of [Bindings for other languages](https://download.libsodium.org/doc/bindings_for_other_languages). If more than one choice is available, we recommend using the choice most recently updated.
 
