@@ -27,7 +27,7 @@ Most files don't need to the be executable. `0644` is fine.
 
 ### Dependencies
 
-A lot of components and platforms depends on third-party Python modules. The dependencies which are stored in the `requirements_all.txt` files can be tracked with [`pur`](https://pypi.org/project/pur/).
+A lot of components and platforms depends on third-party Python modules. The dependencies which are stored in the `requirements_all.txt` files can be tracked with [`pur`](https://pypi.org/project/pur/) or [`pip-upgrader`](https://github.com/simion/pip-upgrader).
 
 If you update the requirements of a component/platform by updating `manifest.json`, run the provided script to update the `requirements_*.txt` file(s).
 
