@@ -27,7 +27,7 @@ Most files don't need to the be executable. `0644` is fine.
 
 ### Dependencies
 
-A lot of components and platforms depends on third-party Python modules. The dependencies which are stored in the `requirements_*.txt` files are tracked by [Requires.io](https://requires.io/github/home-assistant/home-assistant/requirements/?branch=dev).
+A lot of components and platforms depends on third-party Python modules. The dependencies which are stored in the `requirements_all.txt` files can be tracked with [`pur`](https://pypi.org/project/pur/).
 
 If you update the requirements of a component/platform by updating `manifest.json`, run the provided script to update the `requirements_*.txt` file(s).
 
