@@ -112,7 +112,7 @@ The config for an add-on is stored in `config.json`.
 | arch | list | yes | List of supported arch: `armhf`, `armv7`, `aarch64`, `amd64`, `i386`.
 | machine | list | no | Default it support any machine type. You can select that this add-on run only on specific machines.
 | url | url | no | Homepage of the addon. Here you can explain the add-ons and options.
-| startup | bool | yes | `initialize` will start addon on setup of Hass.io. `system` is for things like databases and not dependent on other things. `services` will start before Home Assistant, while `application` is started afterwards. Finally `once` is for applications that don't run as a daemon.
+| startup | string | yes | `initialize` will start addon on setup of Hass.io. `system` is for things like databases and not dependent on other things. `services` will start before Home Assistant, while `application` is started afterwards. Finally `once` is for applications that don't run as a daemon.
 | webui | string | no | A URL for web interface of this add-on. Like `http://[HOST]:[PORT:2839]/dashboard`, the port needs the internal port, which will be replaced with the effective port. It is also possible to bind the proto part to a config options with: `[PROTO:option_name]://[HOST]:[PORT:2839]/dashboard` and he lookup if they is True and going to `https`.
 | boot | string | yes | `auto` by system and manual or only `manual`
 | ports | dict | no | Network ports to expose from the container. Format is `"container-port/type": host-port`. If host-port is `null`, the mapping is disabled.
