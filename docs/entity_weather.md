@@ -45,7 +45,7 @@ These weather conditions are included in our translation files and also show the
 | hail | Hail
 | lightning | Lightning/ thunderstorms
 | lightning-rainy | Lightning/ thunderstorms and rain
-| partlycloudy | A few clouds
+| partly-cloudy | A few clouds
 | pouring | Pouring rain
 | rainy | Rain
 | snowy | Snow
