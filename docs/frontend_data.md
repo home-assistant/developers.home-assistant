@@ -11,11 +11,13 @@ Whenever a state changes, a new version of the objects that changed are created.
 const changed = newVal !== oldVal;
 ```
 
-In order to see the data available in the `hass` object, run the following command in your browser's developer tools console when on your HomeAssistant frontend (this should *NOT* be used in production code and is only useful as a potential initial step to understand what properties are available in the `hass` object):
+In order to see the data available in the `hass` object, visit your HomeAssistant frontend in your favorite browser and open the browser's developer tools. On the elements panel, select the `<home-assistant>` element, or any other element that has the `hass` property, and then run the following command in the console panel:
 
 ```js
 $0.hass
 ```
+
+This method of reading the `hass` object should only be used as a reference. In order to interact with `hass` in your code, make sure it is passed to your code correctly.
 
 ## Data
 
