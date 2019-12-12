@@ -18,13 +18,14 @@ A humidifier entity is a device whose main purpose is to control humidity, i.e. 
 | max_humidity            | int    | `DEFAULT_MAX_HUMIDITY` (value == 100) | Returns the maximum humidity. Requires `SUPPORT_TARGET_HUMIDITY`.                         |
 | min_humidity            | int    | `DEFAULT_MIN_HUMIDITY` (value == 0)   | Returns the minimum humidity. Requires `SUPPORT_TARGET_HUMIDITY`.                         |
 | water_level             | int    | None                                  | The level of water in the device in percent (0-100). Requires `SUPPORT_WATER_LEVEL`.      |
-| operation_mode          | string | `NotImplementedError()`               | The current operation (e.g. humidify, dry, idle). Used to determine `state`.              |
 | humidifier_action       | string | None                                  | The current humidifier action (humidifying, drying)                                       |
-| operation_modes         | list   | `NotImplementedError()`               | List of available operation modes. See below.                                             |
+| operation_mode          | string | (abstract method)                     | The current operation (e.g. humidify, dry, idle). Used to determine `state`.              |
+| operation_modes         | list   | (abstract method)                     | List of available operation modes. See below.                                             |
 | preset_mode             | string | `NotImplementedError()`               | The current active preset. Requires `SUPPORT_PRESET_MODE`.                                |
 | preset_modes            | list   | `NotImplementedError()`               | The available presets. Requires `SUPPORT_PRESET_MODE`.                                    |
 | fan_mode                | string | `NotImplementedError()`               | Returns the current fan mode. Requires `SUPPORT_FAN_MODE`.                                |
 | fan_modes               | list   | `NotImplementedError()`               | Returns the list of available fan modes. Requires `SUPPORT_FAN_MODE`.                     |
+| is_aux_heat             | bool   | `NotImplementedError()`               | Returns True if an auxiliary heater is on. Requires `SUPPORT_AUX_HEAT`.                   |
 | supported_features      | int    | `NotImplementedError()`               | Bitmap of supported features. See below.                                                  |
 
 ### Operation modes
@@ -88,11 +89,11 @@ Supported features constants are combined using the bitwise or (`|`) operator.
 
 | Name                      | Description                                |
 | ------------------------- | ------------------------------------------ |
-| `SUPPORT_TARGET_HUMIDITY` | The device supports a target humidity.     |
+| `SUPPORT_WATER_LEVEL`     | The device supports reporting water level. |
 | `SUPPORT_PRESET_MODE`     | The device supports presets.               |
 | `SUPPORT_FAN_MODE`        | The device supports fan modes.             |
 | `SUPPORT_TEMPERATURE`     | The device supports reporting temperature. |
-| `SUPPORT_WATER_LEVEL`     | The device supports reporting water level. |
+| `SUPPORT_AUX_HEAT`        | The device supports auxiliary heaters.     |
 
 ## Methods
 
@@ -146,4 +147,25 @@ class MyHumidifierDevice(HumidifierDevice):
 
     async def async_set_humidity(self, humidity):
         """Set new target humidity."""
+```
+
+### Control auxiliary heater
+
+```python
+class MyHumidifierDevice(HumidifierDevice):
+    # Implement one of these methods.
+
+    def turn_aux_heat_on(self):
+        """Turn auxiliary heater on."""
+
+    async def async_turn_aux_heat_on(self):
+        """Turn auxiliary heater on."""
+
+    # Implement one of these methods.
+
+    def turn_aux_heat_off(self):
+        """Turn auxiliary heater off."""
+
+    async def async_turn_aux_heat_off(self):
+        """Turn auxiliary heater off."""
 ```
