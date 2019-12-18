@@ -117,4 +117,4 @@ Translations for the config flow handlers are defined under the `config` key in 
 }
 ```
 
-When the translations are merged into Home Assistant, they will be automatically uploaded to [Lokalise](https://lokalise.co/) where the translation team will help to translate them in other languages. [More info on translating Home Assistant.](internationalization_translation.md)
+When the translations are merged into Home Assistant, they will be automatically uploaded to [Lokalise](https://lokalise.co/) where the translation team will help to translate them in other languages. While developing locally, you will need to run `script/translations_develop` to see changes made to `strings.json` [More info on translating Home Assistant.](internationalization_translation.md)
