@@ -24,6 +24,8 @@ from .const import DOMAIN
 class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 ```
 
+Once you have updated your manifest and created the `config_flow.py`, you will need to run `python3 -m script.hassfest` (one time only) for Home Assistant to activate the config entry for your integration.
+
 ## Defining steps
 
 Your config flow will need to define steps of your configuration flow. The docs for [Data Entry Flow](data_entry_flow_index.md) describe the different return values of a step. Here is an example on how to define the `user` step.
