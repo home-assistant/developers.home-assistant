@@ -24,6 +24,8 @@ from .const import DOMAIN
 class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 ```
 
+Once you have updated your manifest and created the `config_flow.py`, you will need to run `python3 -m script.hassfest` (one time only) for Home Assistant to activate the config entry for your integration.
+
 ## Defining steps
 
 Your config flow will need to define steps of your configuration flow. The docs for [Data Entry Flow](data_entry_flow_index.md) describe the different return values of a step. Here is an example on how to define the `user` step.
@@ -115,4 +117,4 @@ Translations for the config flow handlers are defined under the `config` key in 
 }
 ```
 
-When the translations are merged into Home Assistant, they will be automatically uploaded to [Lokalise](https://lokalise.co/) where the translation team will help to translate them in other languages. [More info on translating Home Assistant.](internationalization_translation.md)
+When the translations are merged into Home Assistant, they will be automatically uploaded to [Lokalise](https://lokalise.co/) where the translation team will help to translate them in other languages. While developing locally, you will need to run `script/translations_develop` to see changes made to `strings.json` [More info on translating Home Assistant.](internationalization_translation.md)
