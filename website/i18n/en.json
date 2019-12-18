@@ -86,10 +86,6 @@
       "auth_permissions": {
         "title": "Permissions"
       },
-      "config_entries_config_flow_handler_oauth2": {
-        "title": "Integration Configuration with OAuth2",
-        "sidebar_label": "Configuration with OAuth2"
-      },
       "config_entries_config_flow_handler": {
         "title": "Integration Configuration",
         "sidebar_label": "Configuration"
@@ -103,8 +99,7 @@
         "sidebar_label": "Configuration Options"
       },
       "configuration_yaml_index": {
-        "title": "Integration Configuration via YAML",
-        "sidebar_label": "Configuration via YAML"
+        "title": "Integration Configuration via YAML"
       },
       "creating_component_code_review": {
         "title": "Checklist for creating a component",
@@ -381,8 +376,7 @@
         "sidebar_label": "HASS Integration development"
       },
       "integration_quality_scale_index": {
-        "title": "Integration Quality Scale",
-        "sidebar_label": "Integration Quality Scale"
+        "title": "Integration Quality Scale"
       },
       "intent_builtin": {
         "title": "Built-in intents"
@@ -447,6 +441,105 @@
       "version-0.100.0/version-0.100.0-hassio_hass": {
         "title": "Hass.io <> Home Assistant integration development",
         "sidebar_label": "HASS Integration development"
+      },
+      "version-0.101.0/version-0.101.0-api_lib_auth": {
+        "title": "Python Library: Authentication",
+        "sidebar_label": "Authentication"
+      },
+      "version-0.101.0/version-0.101.0-api_lib_data_models": {
+        "title": "Python Library: Modelling Data",
+        "sidebar_label": "Modelling Data"
+      },
+      "version-0.101.0/version-0.101.0-api_lib_index": {
+        "title": "Building a Python library for an API",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.101.0/version-0.101.0-config_entries_config_flow_handler": {
+        "title": "Integration Configuration",
+        "sidebar_label": "Configuration"
+      },
+      "version-0.101.0/version-0.101.0-config_entries_options_flow_handler": {
+        "title": "Integration Configuration Options",
+        "sidebar_label": "Configuration Options"
+      },
+      "version-0.101.0/version-0.101.0-data_entry_flow_index": {
+        "title": "Data Entry Flow",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.101.0/version-0.101.0-documentation_create_page": {
+        "title": "Create a new page"
+      },
+      "version-0.101.0/version-0.101.0-documentation_index": {
+        "title": "Documentation"
+      },
+      "version-0.101.0/version-0.101.0-documentation_standards": {
+        "title": "Standards"
+      },
+      "version-0.101.0/version-0.101.0-entity_climate": {
+        "title": "Climate Entity",
+        "sidebar_label": "Climate"
+      },
+      "version-0.101.0/version-0.101.0-hassio_addon_config": {
+        "title": "Add-On Configuration"
+      },
+      "version-0.101.0/version-0.101.0-integration_quality_scale_index": {
+        "title": "Integration Quality Scale"
+      },
+      "version-0.101.0/version-0.101.0-lovelace_custom_card": {
+        "title": "Lovelace: Custom Cards"
+      },
+      "version-0.102.0/version-0.102.0-app_integration_setup": {
+        "title": "Connecting to an instance"
+      },
+      "version-0.102.0/version-0.102.0-config_entries_config_flow_handler": {
+        "title": "Integration Configuration",
+        "sidebar_label": "Configuration"
+      },
+      "version-0.102.0/version-0.102.0-development_testing": {
+        "title": "Testing your code"
+      },
+      "version-0.102.0/version-0.102.0-entity_index": {
+        "title": "Entity",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.102.0/version-0.102.0-frontend_external_auth": {
+        "title": "External Authentication"
+      },
+      "version-0.102.0/version-0.102.0-hassio_addon_communication": {
+        "title": "Add-On Communication"
+      },
+      "version-0.102.0/version-0.102.0-lovelace_custom_card": {
+        "title": "Lovelace: Custom Cards"
+      },
+      "version-0.103.0/version-0.103.0-api_lib_auth": {
+        "title": "Python Library: Authentication",
+        "sidebar_label": "Authentication"
+      },
+      "version-0.103.0/version-0.103.0-app_integration_sending_data": {
+        "title": "Sending data home"
+      },
+      "version-0.103.0/version-0.103.0-config_entries_config_flow_handler": {
+        "title": "Integration Configuration",
+        "sidebar_label": "Configuration"
+      },
+      "version-0.103.0/version-0.103.0-creating_integration_manifest": {
+        "title": "Integration Manifest",
+        "sidebar_label": "Manifest"
+      },
+      "version-0.103.0/version-0.103.0-development_testing": {
+        "title": "Testing your code"
+      },
+      "version-0.103.0/version-0.103.0-external_api_rest": {
+        "title": "REST API"
+      },
+      "version-0.103.0/version-0.103.0-hassio_addon_config": {
+        "title": "Add-On Configuration"
+      },
+      "version-0.103.0/version-0.103.0-internationalization_translation": {
+        "title": "Translation"
+      },
+      "version-0.103.0/version-0.103.0-maintenance": {
+        "title": "Maintenance"
       },
       "version-0.72/version-0.72-architecture_components": {
         "title": "Components Architecture",
