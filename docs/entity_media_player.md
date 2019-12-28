@@ -17,7 +17,7 @@ sidebar_label: Media Player
 | source_list | list | None | The list of possible input sources for the media player. (This list should contain human readable names, suitible for frontend display)
 | media_image_url | string | None | URL that represents the current image.
 | media_image_remotely_accessible | boolean | False | Return `True` if property `media_image_url` is accessible outside of the home network.
-| device_class | string | `None` | Type of binary sensor.
+| device_class | string | `None` | Type of media player.
 
 ## Methods
 ### Select sound mode
