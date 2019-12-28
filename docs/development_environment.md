@@ -27,7 +27,7 @@ Additional dependencies exist if you plan to perform Frontend Development, pleas
 
 ### Developing on Windows
 
-Due to Home Assistant is mainly designed and developed on Linux distributions, on Windows 10 you can setup a [Linux subsystem](https://docs.microsoft.com/windows/wsl/install-win10).
+Since Home Assistant is mainly designed and developed on Linux distributions, on Windows 10 you can setup a [Linux subsystem](https://docs.microsoft.com/windows/wsl/install-win10).
 
 Open Powershell as an Administrator and run
 
