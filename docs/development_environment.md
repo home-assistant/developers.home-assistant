@@ -41,7 +41,7 @@ When the Linux subsystem is set up, perform install as for Linux.
 
 ```bash
 $ sudo apt-get update
-$ sudo apt-get install python3-pip python3-dev python3-venv
+$ sudo apt-get install python3-pip python3.7-dev python3.7-venv python-wheel-common
 $ sudo apt-get install autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev
 $ sudo apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev
 ```
@@ -114,7 +114,7 @@ $ git remote add upstream https://github.com/home-assistant/home-assistant.git
 To isolate your environment from the rest of the system, set up a [`venv`](https://docs.python.org/3/library/venv.html). Within the `home-assistant` directory, create and activate your virtual environment.
 
 ```bash
-$ python3 -m venv venv
+$ python3.7 -m venv venv
 $ source venv/bin/activate
 ```
 
