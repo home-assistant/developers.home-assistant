@@ -113,7 +113,7 @@ class MyCover(CoverDevice):
 
 ### Stop cover
 
-Only implement this metohd if the flag `SUPPORT_STOP` is set.
+Only implement this method if the flag `SUPPORT_STOP` is set.
 
 ```python
 class MyCover(CoverDevice):
