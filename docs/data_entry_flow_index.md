@@ -3,9 +3,9 @@ title: Data Entry Flow
 sidebar_label: Introduction
 ---
 
-Data Entry Flow is a data entry framework that is part of Home Assistant. Data entry is done via data entry flows. A flow can represent a simple login form or a multi-step setup wizard for a component. A Flow Manager is managing all flows that are in progress and handles creation of new flows.
+Data Entry Flow is a data entry framework that is part of Home Assistant. Data entry is done via data entry flows. A flow can represent a simple login form or a multi-step setup wizard for a component. A Flow Manager manages all flows that are in progress and handles creation of new flows.
 
-Data Entry Flow is being used in Home Assistant to create config entries.
+Data Entry Flow is used in Home Assistant to create config entries.
 
 ## Flow Manager
 
@@ -23,7 +23,7 @@ async def async_finish_flow(flow, result)
 
 This async callback is called when a flow is finished or aborted. i.e. `result['type'] in [RESULT_TYPE_CREATE_ENTRY, RESULT_TYPE_ABORT]`. The callback function can modify result and return it back, if the result type changed to `RESULT_TYPE_FORM`, the flow will continue running, display another form.
 
-If the result type is `RESULT_TYPE_FORM`, the result should like:
+If the result type is `RESULT_TYPE_FORM`, the result should look like:
 ```python
 {
     # The result type of the flow
@@ -43,7 +43,7 @@ If the result type is `RESULT_TYPE_FORM`, the result should like:
 }
 ```
 
-If the result type is `RESULT_TYPE_CREATE_ENTRY`, the result should like:
+If the result type is `RESULT_TYPE_CREATE_ENTRY`, the result should look like:
 ```python
 {
     # Data schema version of the entry
@@ -62,7 +62,7 @@ If the result type is `RESULT_TYPE_CREATE_ENTRY`, the result should like:
 }
 ```
 
-If the result type is `RESULT_TYPE_ABORT`, the result should like:
+If the result type is `RESULT_TYPE_ABORT`, the result should look like:
 ```python
 {
     # The result type of the flow
@@ -81,7 +81,7 @@ If the result type is `RESULT_TYPE_ABORT`, the result should like:
 
 Flow handlers will handle a single flow. A flow contains one or more steps. When a flow is instantiated, the `FlowHandler.init_step` step will be called. Each step has three different possible results: "Show Form", "Abort" and "Create Entry".
 
-At a minimum, each flow handler will have to define a version number and a step. This doens't have to be `init`, as `async_create_flow` can assign `init_step` depends on diffreent workflow, for example in configuration, `context.source` will be use as `init_step`.
+At a minimum, each flow handler will have to define a version number and a step. This doesn't have to be `init`, as `async_create_flow` can assign `init_step` dependent on the current workflow, for example in configuration, `context.source` will be used as `init_step`.
 
 The bare minimum config flow:
 
