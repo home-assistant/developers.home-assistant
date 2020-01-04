@@ -38,6 +38,7 @@ Example payload to send to the registration endpoint:
 
 ```json
 {
+  "device_id": "ABCDEFGH",
   "app_id": "awesome_home",
   "app_name": "Awesome Home",
   "app_version": "1.2.0",
@@ -48,23 +49,24 @@ Example payload to send to the registration endpoint:
   "os_version": "iOS 10.12",
   "supports_encryption": true,
   "app_data": {
-    "push_notification_key": "abcdef",
+    "push_notification_key": "abcdef"
   }
 }
 ```
 
-| Key | Required | Type | Description |
-| --- | -------- | ---- | ----------- |
-| `app_id` | V | string | A unique identifier for this app.
-| `app_name` | V | string | Name of the mobile app.
-| `app_version` | V | string | Version of the mobile app.
-| `device_name` | V | string | Name of the device running the app.
-| `manufacturer` | V | string | The manufacturer of the device running the app.
-| `model` | V | string | The model of the device running the app.
-| `os_name` | V | string | The name of the OS running the app. 
-| `os_version` | V | string | The OS version of the device running the app.
-| `supports_encryption` | V | bool | If the app supports encryption. See also the [encryption section](#encryption).
-| `app_data` |  | Dict | App data can be used if the app has a supporting component that extends `mobile_app` functionality.
+| Key                   | Required | Type   | Description                                                                                         |
+| --------------------- | -------- | ------ | --------------------------------------------------------------------------------------------------- |
+| `device_id`           | V        | string | A unique identifier for this device. New in Home Assistant 0.104                                    |
+| `app_id`              | V        | string | A unique identifier for this app.                                                                   |
+| `app_name`            | V        | string | Name of the mobile app.                                                                             |
+| `app_version`         | V        | string | Version of the mobile app.                                                                          |
+| `device_name`         | V        | string | Name of the device running the app.                                                                 |
+| `manufacturer`        | V        | string | The manufacturer of the device running the app.                                                     |
+| `model`               | V        | string | The model of the device running the app.                                                            |
+| `os_name`             | V        | string | The name of the OS running the app.                                                                 |
+| `os_version`          | V        | string | The OS version of the device running the app.                                                       |
+| `supports_encryption` | V        | bool   | If the app supports encryption. See also the [encryption section](#encryption).                     |
+| `app_data`            |          | Dict   | App data can be used if the app has a supporting component that extends `mobile_app` functionality. |
 
 When you get a 200 response, the mobile app is registered with Home Assistant. The response is a JSON document and will contain the URLs on how to interact with the Home Assistant instance. You should permanently store this information.
 
@@ -77,9 +79,9 @@ When you get a 200 response, the mobile app is registered with Home Assistant. T
 }
 ```
 
-| Key | Type | Description
-| --- | ---- | -----------
-| `cloudhook_url` | string | The cloudhook URL provided by Home Assistant Cloud. Only will be provided if user is actively subscribed to Nabu Casa.
-| `remote_ui_url` | string | The remote UI URL provided by Home Assistant Cloud. Only will be provided if user is actively subscribed to Nabu Casa.
-| `secret` | string | The secret to use for encrypted communication. Will only be included if encryption is supported by both the app and the Home Assistant instance. [More info](app_integration_sending_data.md#implementing-encryption).
-| `webhook_id` | string | The webhook ID that can be used to send data back.
+| Key             | Type   | Description                                                                                                                                                                                                            |
+| --------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `cloudhook_url` | string | The cloudhook URL provided by Home Assistant Cloud. Only will be provided if user is actively subscribed to Nabu Casa.                                                                                                 |
+| `remote_ui_url` | string | The remote UI URL provided by Home Assistant Cloud. Only will be provided if user is actively subscribed to Nabu Casa.                                                                                                 |
+| `secret`        | string | The secret to use for encrypted communication. Will only be included if encryption is supported by both the app and the Home Assistant instance. [More info](app_integration_sending_data.md#implementing-encryption). |
+| `webhook_id`    | string | The webhook ID that can be used to send data back.                                                                                                                                                                     |
