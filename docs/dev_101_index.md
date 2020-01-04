@@ -34,7 +34,7 @@ Last step is to add `hello_world:` entry to your `configuration.yaml` file.
 hello_world:
 ```
 
-After running `hass`, we should see log entries stating that `hello_world` component was loaded. What is more, additional state card shall appear within main panel.
+After running `hass`, we should see log entries stating that `hello_world` component was loaded. What is more, an additional state card will appear within the main panel.
 
 ```log
 2018-04-03 21:44:20 INFO (MainThread) [homeassistant.loader] Loaded hello_world from custom_components.hello_world
