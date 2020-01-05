@@ -95,7 +95,7 @@ $ git push -u fork HEAD
 
 If you're making changes to the way the frontend is packaged, it might be necessary to try out a new packaged build of the frontend in the main repository (instead of pointing it at the frontend repo). To do so, first build a production version of the frontend by running `script/build_frontend`.
 
-To test it out inside Home assistant, run the following command from the main Home Assistant repository:
+To test it out inside Home Assistant, run the following command from the main Home Assistant repository:
 
 ```bash
 $ pip3 install -e /path/to/home-assistant-polymer/

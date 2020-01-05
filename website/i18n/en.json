@@ -373,7 +373,7 @@
       },
       "hassio_hass": {
         "title": "Hass.io <> Home Assistant integration development",
-        "sidebar_label": "HASS Integration development"
+        "sidebar_label": "Integration development"
       },
       "integration_quality_scale_index": {
         "title": "Integration Quality Scale"

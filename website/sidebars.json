@@ -53,7 +53,7 @@
     ],
     "Custom UI": ["lovelace_custom_card", "frontend_creating_custom_panels"]
   },
-  "Extending HASS": {
+  "Extending Home Assistant": {
     "Development Workflow": [
       "development_index",
       "development_environment",

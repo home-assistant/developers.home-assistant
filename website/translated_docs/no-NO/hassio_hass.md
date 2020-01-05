@@ -1,6 +1,6 @@
 ---
 title: "Hass.io <> Home Assistant integration development"
-sidebar_label: "HASS Integration development"
+sidebar_label: "Integration development"
 ---
 
 These steps will help you connect your local Home Assistant to a remote Hass.io instance. You can then make changes locally to either the Hass.io component or the frontend and test it out against a real instance.
