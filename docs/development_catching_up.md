@@ -6,7 +6,7 @@ If it's taking a while to develop your feature, and you want to catch up with wh
 
 > If you use the workflow below, it is important that you force push the update as described. Git might prompt you to do `git pull` first. Do **NOT** do that! It would mess up your commit history.
 
-```bash
+```shell
 # Run this from your feature branch
 $ git fetch upstream dev  # to pull the latest changes into a local dev branch
 $ git rebase upstream/dev # to put those changes into your feature branch before your changes
@@ -21,14 +21,14 @@ If rebase detects conflicts, repeat this process until all changes have been res
 
 After rebasing your branch, you will have rewritten history relative to your GitHub fork's branch. When you go to push you will see an error that your history has diverged from the original branch. In order to get your GitHub fork up-to-date with your local branch, you will need to force push, using the following command:
 
-```bash
+```shell
 # Run this from your feature branch
 $ git push origin --force
 ```
 
 Other workflows are covered in detail in the [Github documentation](https://help.github.com/articles/fork-a-repo/). Add an additional `remote` after you clone your fork.
 
-```bash
+```shell
 $ git remote add upstream https://github.com/home-assistant/home-assistant.git
 ```
 

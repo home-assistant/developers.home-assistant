@@ -59,7 +59,7 @@ You will initially be logged in to Hass.io CLI for HassOS where you can perform 
 
 ## Checking the logs
 
-```bash
+```shell
 # Logs from the supervisor service on the Host OS
 journalctl -f -u hassos-supervisor.service
 
@@ -72,7 +72,7 @@ docker logs homeassistant
 
 ## Accessing the container bash
 
-```bash
+```shell
 docker exec -it homeassistant /bin/bash
 ```
 

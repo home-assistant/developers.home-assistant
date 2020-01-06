@@ -28,7 +28,7 @@ When developing your script:
  - `/data` is a volume for persistent storage.
  - `/data/options.json` contains the user configuration. You can use bashio or `jq` inside your shell script to parse this data.
 
-```bash
+```shell
 CONFIG_PATH=/data/options.json
 
 TARGET="$(jq --raw-output '.target' $CONFIG_PATH)"

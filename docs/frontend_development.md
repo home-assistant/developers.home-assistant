@@ -13,7 +13,7 @@ The Home Assistant frontend is built using web components. For more background a
 
 First step is to fork the [home-assistant-polymer repository][hass-polymer] and add the upstream remote. You can place the forked repository anywhere on your system.
 
-```bash
+```shell
 $ git clone git@github.com:YOUR_GIT_USERNAME/home-assistant-polymer.git
 $ cd home-assistant-polymer
 $ git remote add upstream https://github.com/home-assistant/home-assistant-polymer.git
@@ -35,7 +35,7 @@ frontend:
 
 Node.js is required to build the frontend. The preferred method of installing node.js is with [nvm](https://github.com/creationix/nvm). Install nvm using the instructions in the [README](https://github.com/creationix/nvm#install-script), and install the correct node.js by running the following command:
 
-```bash
+```shell
 $ nvm install
 ```
 
@@ -43,7 +43,7 @@ $ nvm install
 
 Next, development dependencies need to be installed to bootstrap the frontend development environment. First activate the right Node version and then download all the dependencies:
 
-```bash
+```shell
 $ nvm use
 $ script/bootstrap
 ```
@@ -52,7 +52,7 @@ $ script/bootstrap
 
 During development, you will need to run the development script to maintain a development build of the frontend that auto updates when you change any of the source files. To run this server, run:
 
-```bash
+```shell
 $ nvm use
 $ script/develop
 ```
@@ -77,7 +77,7 @@ Make sure you have cache disabled and correct settings to avoid stale content:
 
 If you're planning on issuing a PR back to the Home Assistant codebase you need to fork the polymer project and add your fork as a remote to the Home Assistant Polymer repo.
 
-```bash
+```shell
 $ git remote add fork <github URL to your fork>
 ```
 
@@ -95,7 +95,7 @@ If you're making changes to the way the frontend is packaged, it might be necess
 
 To test it out inside Home Assistant, run the following command from the main Home Assistant repository:
 
-```bash
+```shell
 $ pip3 install -e /path/to/home-assistant-polymer/
 $ hass --skip-pip
 ```

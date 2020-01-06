@@ -10,13 +10,13 @@ You'll need to set up a development environment if you want to develop a new fea
 
 Install the core dependencies.
 
-```bash
+```shell
 $ sudo apt-get install python3-pip python3-dev python3-venv
 ```
 
 In order to run `script/setup` below you will need some more dependencies.
 
-```bash
+```shell
 $ sudo apt-get install autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev pkg-config
 $ sudo apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev
 ```
@@ -31,7 +31,7 @@ Since Home Assistant is mainly designed and developed on Linux distributions, on
 
 Open Powershell as an Administrator and run
 
-```bash
+```shell
 Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
 ```
 
@@ -39,7 +39,7 @@ From Windows Store install Ubuntu.
 
 When the Linux subsystem is set up, perform install as for Linux.
 
-```bash
+```shell
 $ sudo apt-get update
 $ sudo apt-get install python3-pip python3.7-dev python3.7-venv python-wheel-common
 $ sudo apt-get install autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev
@@ -50,7 +50,7 @@ Hint: Git is included in Linux subsytem.
 
 When invoking your installation (see below), make sure to specify a folder for configuration which is accessible from Windows.
 
-```bash
+```shell
 $ mkdir -p ../config
 $ hass -c ../config
 ```
@@ -59,13 +59,13 @@ $ hass -c ../config
 
 Install [Homebrew](https://brew.sh/), then use that to install Python 3:
 
-```bash
+```shell
 $ brew install python3 autoconf
 ```
 
 Then install ffmpeg:
 
-```bash
+```shell
 $ brew install ffmpeg
 ```
 
@@ -105,7 +105,7 @@ Once forked, setup your local copy of the source using the commands:
 
 _Windows users should be sure to clone to a path that inside the WSL (ex: ~/)._
 
-```bash
+```shell
 $ git clone https://github.com/YOUR_GIT_USERNAME/home-assistant.git
 $ cd home-assistant
 $ git remote add upstream https://github.com/home-assistant/home-assistant.git
@@ -115,20 +115,20 @@ $ git remote add upstream https://github.com/home-assistant/home-assistant.git
 
 To isolate your environment from the rest of the system, set up a [`venv`](https://docs.python.org/3/library/venv.html). Within the `home-assistant` directory, create and activate your virtual environment.
 
-```bash
+```shell
 $ python3.7 -m venv venv
 $ source venv/bin/activate
 ```
 
 Install the requirements with a provided script named `setup`.
 
-```bash
+```shell
 $ script/setup
 ```
 
 Invoke your installation, adjusting the [configuration](https://www.home-assistant.io/docs/configuration/) if required. 
 
-```bash
+```shell
 $ hass
 ```
 

@@ -9,7 +9,7 @@ As it states in the [Style guidelines section](development_guidelines.md) all co
 
 Local testing is done using [Tox](https://tox.readthedocs.io), which has been installed as part of running `script/setup` in the [virtual environment](development_environment.md). To start the tests, activate the virtual environment and simply run the command:
 
-```bash
+```shell
 $ tox
 ```
 
@@ -34,7 +34,7 @@ If you are working on tests for an integeration and you need the dependencies av
 
 You can pass arguments via `tox` to `py.test` to be able to run single test suites or test files. Replace `py38` with the Python version that you use.
 
-```bash
+```shell
 # Stop after the first test fails
 $ tox -e py38 -- tests/test_core.py -x
 # Run test with specified name
@@ -49,13 +49,13 @@ $ tox -e py38 -- tests/test_core.py --duration=10
 
 Running `tox` will invoke the full test suite. Even if you specify which tox target to run, you still run all tests inside that target. That's not very convenient to quickly iterate on your code! To be able to run the specific test suites without `tox`, you'll need to install the test dependencies into your Python environment:
 
-```bash
+```shell
 $ pip3 install -r requirements_test_all.txt -c homeassistant/package_constraints.txt
 ```
 
 Now that you have all test dependencies installed, you can run tests on individual files:
 
-```bash
+```shell
 $ flake8 homeassistant/core.py
 $ pylint homeassistant/core.py
 $ pydocstyle homeassistant/core.py
@@ -64,7 +64,7 @@ $ py.test tests/test_core.py
 
 You can also run linting tests against all changed files, as reported by `git diff upstream/dev... --diff-filter=d --name-only`, using the `lint` script:
 
-```bash
+```shell
 $ script/lint
 ```
 
@@ -72,7 +72,7 @@ $ script/lint
 
 Save yourself the hassle of extra commits just to fix style errors by enabling the Flake8 git commit hook. Flake8 will check your code when you try to commit to the repository and block the commit if there are any style errors, which gives you a chance to fix them!
 
-```bash
+```shell
 $ pip3 install flake8 flake8-docstrings
 $ flake8 --install-hook=git
 ```

@@ -45,7 +45,7 @@ Also note that `_LOGGER.info` is reserved for the core, use `_LOGGER.debug` for 
 
 Instead of order the imports manually, use [`isort`](https://github.com/timothycrosley/isort).
 
-```bash
+```shell
 $ pip3 install isort
 $ isort homeassistant/components/sensor/fixer.py
 ```
