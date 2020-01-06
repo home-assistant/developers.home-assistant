@@ -16,14 +16,16 @@ To make a component async, implement an async_setup.
 
 ```python
 def setup(hass, config):
-    # Setup your component outside of the event loop.
+    """Set up component."""
+    # Code for setting up your component outside of the event loop.
 ```
 
 Will turn into:
 
 ```python
 async def async_setup(hass, config):
-    # Setup your component inside of the event loop.
+    """Set up component."""
+    # Code for setting up your component inside of the event loop.
 ```
 
 ## Implementing an async platform
@@ -31,8 +33,9 @@ async def async_setup(hass, config):
 For platforms we support async setup. Instead of setup_platform you need to have a coroutine async_setup_platform.
 
 ```python
-setup_platform(hass, config, add_entities, discovery_info=None):
-    # Setup your platform outside of the event loop.
+def setup_platform(hass, config, add_entities, discovery_info=None):
+    """Set up platform."""
+    # Code for setting up your platform outside of the event loop.
 ```
 
 Will turn into:
@@ -40,7 +43,8 @@ Will turn into:
 ```python
 async def async_setup_platform(hass, config, async_add_entities,
                                discovery_info=None):
-    # Setup your platform inside of the event loop
+    """Set up platform."""
+    # Code for setting up your platform inside of the event loop.
 ```
 
 The only difference with the original parameters is that the `add_entities` function has been replaced by the async friendly callback `async_add_entities`.

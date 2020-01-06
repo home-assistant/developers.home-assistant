@@ -54,10 +54,10 @@ Only implement this method if the flag `SUPPORT_SET_SPEED` is set.
 class FanEntity(ToggleEntity):
     # Implement one of these methods.
 
- 	 def set_speed(self, speed: str) -> None:
+    def set_speed(self, speed: str) -> None:
         """Set the speed of the fan."""
 
-     async def async_set_speed(self, speed: str):
+    async def async_set_speed(self, speed: str):
         """Set the speed of the fan."""
 ```
 

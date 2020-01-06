@@ -22,6 +22,7 @@ from homeassistant import config_entries
 from .const import DOMAIN
 
 class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
+    """Example config flow."""
 ```
 
 Once you have updated your manifest and created the `config_flow.py`, you will need to run `python3 -m script.hassfest` (one time only) for Home Assistant to activate the config entry for your integration.
@@ -35,7 +36,7 @@ class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     async def async_step_user(self, info):
         if info is not None:
-            # process info
+            pass # TODO: process info
 
         return self.async_show_form(
             step_id='user',

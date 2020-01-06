@@ -36,7 +36,9 @@ Auth providers shall extend the following methods of `LoginFlow` class.
 
 ```python
 async def async_step_init(self, user_input=None):
-    return self.async_show_form(step_id='init', data_schema='some schema to construct ui form') if user_input is None
-    return self.async_show_form(step_id='init', errors) if user_input is invalid
-    return await self.async_finish(username) if user_input is valid
+    if user_input is None:
+        return self.async_show_form(step_id='init', data_schema='some schema to construct ui form')
+    if is_invalid(user_input):
+        return self.async_show_form(step_id='init', errors=errors)
+    return await self.async_finish(user_input)
 ```

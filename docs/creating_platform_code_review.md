@@ -60,7 +60,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
     from homeassistant.components.light import Light
 
     class HueLight(Light):
-        ...
+        """Hue light component."""
     ```
 
  2. Avoid passing in `hass` as a parameter to the entity. When the entity has been added to Home Assistant, `hass` will be set on the entity when the entity is added to Home Assistant. This means you can access `hass` as `self.hass` inside the entity.

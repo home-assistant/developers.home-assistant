@@ -113,6 +113,7 @@ For a platform to support config entries, it will need to add a setup entry meth
 
 ```python
 async def async_setup_entry(hass, config_entry, async_add_devices):
+    """Set up entry."""
 ```
 
 ## Unloading entries

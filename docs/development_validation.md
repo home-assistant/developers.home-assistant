@@ -35,8 +35,9 @@ It's common to set a default for a sensor if the user doesn't provide a name to 
 DEFAULT_NAME = 'Sensor name'
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
-    ...
+    # ...
     vol.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
+})
 ```
 
 #### Limit the values
@@ -47,8 +48,9 @@ You might want to limit the user's input to a couple of options.
 DEFAULT_METHOD = 'GET'
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
-    ...
+    # ...
     vol.Optional(CONF_METHOD, default=DEFAULT_METHOD): vol.In(['POST', 'GET']),
+})
 ```
 
 #### Port
@@ -59,8 +61,9 @@ All port numbers are from a range of 1 to 65535.
 DEFAULT_PORT = 993
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
-    ...
+    # ...
     vol.Optional(CONF_PORT, default=DEFAULT_PORT): cv.port,
+})
 ```
 
 #### Lists
@@ -74,7 +77,8 @@ SENSOR_TYPES = {
 }
 
 PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
-    ...
+    # ...
     vol.Optional(CONF_MONITORED_VARIABLES, default=[]):
         vol.All(cv.ensure_list, [vol.In(SENSOR_TYPES)]),
+})
 ```

@@ -55,4 +55,5 @@ The Listener shall be an async function that takes the same input as async_setup
 
 ```python
 async def update_listener(hass, entry):
+    """Handle options update."""
 ```

@@ -12,13 +12,15 @@ Data Entry Flow is used in Home Assistant to create config entries.
 This is the class that manages the flows that are in progress. When instantiating one, you pass in two async callbacks:
 
 ```python
-async def async_create_flow(handler, context=context, data=data)
+async def async_create_flow(handler, context=context, data=data):
+    """Create flow."""
 ```
 
 The manager delegates instantiating of config flow handlers to this async callback. This allows the parent of the manager to define their own way of finding handlers and preparing a handler for instantiation. For example, in the case of the config entry manager, it will make sure that the dependencies and requirements are setup.
 
 ```python
-async def async_finish_flow(flow, result)
+async def async_finish_flow(flow, result):
+    """Finish flow."""
 ```
 
 This async callback is called when a flow is finished or aborted. i.e. `result['type'] in [RESULT_TYPE_CREATE_ENTRY, RESULT_TYPE_ABORT]`. The callback function can modify result and return it back, if the result type changed to `RESULT_TYPE_FORM`, the flow will continue running, display another form.
@@ -29,7 +31,7 @@ If the result type is `RESULT_TYPE_FORM`, the result should look like:
     # The result type of the flow
     'type': RESULT_TYPE_FORM,
     # the id of the flow
-    'flow_id': 'abcdfgh1234,
+    'flow_id': 'abcdfgh1234',
     # handler name
     'handler': 'hue',
     # name of the step, flow.async_step_[step_id] will be called when form submitted
@@ -51,7 +53,7 @@ If the result type is `RESULT_TYPE_CREATE_ENTRY`, the result should look like:
     # The result type of the flow
     'type': RESULT_TYPE_CREATE_ENTRY,
     # the id of the flow
-    'flow_id': 'abcdfgh1234,
+    'flow_id': 'abcdfgh1234',
     # handler name
     'handler': 'hue',
     # title and data as created by the handler
@@ -68,7 +70,7 @@ If the result type is `RESULT_TYPE_ABORT`, the result should look like:
     # The result type of the flow
     'type': RESULT_TYPE_ABORT,
     # the id of the flow
-    'flow_id': 'abcdfgh1234,
+    'flow_id': 'abcdfgh1234',
     # handler name
     'handler': 'hue',
     # the abort reason
@@ -97,7 +99,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
     VERSION = 1
 
     async def async_step_user(self, user_input=None):
-        # Do something
+        """Handle user step."""
 ```
 
 ### Show Form
@@ -278,7 +280,6 @@ The config flow handler will not start with the `init` step. Instead, it will be
 
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
-
     async def async_step_discovery(self, info):
-        # Handle discovery info
+        """Handle discovery info."""
 ```

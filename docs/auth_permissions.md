@@ -14,7 +14,9 @@ Policies are dictionaries that at the root level consist of different categories
 
 ```python
 {
-  "entities": …
+  "entities": {
+    # …
+  }
 }
 ```
 
@@ -23,8 +25,12 @@ Each category can further split into subcategories that describe parts of that c
 ```python
 {
   "entities": {
-    "domains": …,
-    "entity_ids": …
+    "domains": {
+      # …
+    },
+    "entity_ids": {
+      # …
+    }
   }
 }
 ```
