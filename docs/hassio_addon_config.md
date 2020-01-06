@@ -46,7 +46,7 @@ then there will be a variable `TARGET` containing `beer` in the environment of y
 
 All add-ons are based on latest Alpine Linux. Hass.io will automatically substitute the right base image based on the machine architecture. Add `tzdata` if you need run in a different timezone. `tzdata` Is is already added to our base images.
 
-```
+```dockerfile
 ARG BUILD_FROM
 FROM $BUILD_FROM
 

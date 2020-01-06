@@ -116,7 +116,7 @@ After a start or a restart of Home Assistant the component will be visible in th
 
 In order to expose attributes for a platform, you will need to define a property called `device_state_attributes` on the entity class, which will return a dictionary of attributes:
 
-```
+```python
 @property
 def device_state_attributes(self):
     """Return device specific state attributes."""

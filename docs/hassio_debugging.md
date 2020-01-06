@@ -47,7 +47,7 @@ Use a USB drive formatted with FAT, ext4, or NTFS and name it CONFIG (case sensi
 
 You should then be able to SSH into your Hass.io device. On Mac/Linux, use:
 
-```
+```shell
 ssh root@hassio.local -p 22222
 ```
 
