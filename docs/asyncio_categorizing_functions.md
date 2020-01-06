@@ -18,7 +18,7 @@ To declare a function a coroutine, add `async` before the `def` of the function 
 async def async_look_my_coroutine(target):
     result = await entity.async_turn_on()
     if result:
-        print("hello {}".format(target))
+        print(f"hello {target}")
 
 hass.loop.create_task(async_look_my_coroutine("world"))
 ```

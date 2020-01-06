@@ -81,7 +81,7 @@ def say_hello(hass, target):
         async_say_hello(hass, target), hass.loop).result()
 
 async def async_say_hello(hass, target):
-    return "Hello {}!".format(target)
+    return f"Hello {target}!"
 ```
 
 ## Calling sync functions from async

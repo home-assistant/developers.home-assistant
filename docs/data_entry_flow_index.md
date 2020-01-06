@@ -231,9 +231,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         if not user_input:
             return self.async_external_step(
                 step_id='user',
-                url='https://example.com/?config_flow_id={}'.format(
-                    self.flow_id
-                ),
+                url=f'https://example.com/?config_flow_id={self.flow_id}',
             )
 
         self.data = user_input

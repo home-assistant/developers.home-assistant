@@ -36,7 +36,6 @@ class CountInvocationIntent(intent.IntentHandler):
 
         response = intent_obj.create_response()
         response.async_set_speech(
-            "This intent has been invoked {} times".format(
-                intent_obj.hass.data[DATA_KEY]))
+            f"This intent has been invoked {intent_obj.hass.data[DATA_KEY]} times")
         return response
 ```

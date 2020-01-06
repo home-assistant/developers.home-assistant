@@ -44,7 +44,7 @@ def setup(hass, config):
     def handle_event(event):
         nonlocal count
         count += 1
-        print('Answer {0} is: {1}'.format(count, event.data.get('answer')))
+        print(f"Answer {count} is: {event.data.get('answer')}")
 
     # Listen for when example_component_my_cool_event is fired
     hass.bus.listen('example_component_my_cool_event', handle_event)
