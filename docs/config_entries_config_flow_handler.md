@@ -21,6 +21,7 @@ Config entries uses the [data flow entry framework](data_entry_flow_index.md) to
 from homeassistant import config_entries
 from .const import DOMAIN
 
+
 class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     """Example config flow."""
 ```
@@ -33,16 +34,12 @@ Your config flow will need to define steps of your configuration flow. The docs 
 
 ```python
 class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
-
     async def async_step_user(self, info):
         if info is not None:
-            pass # TODO: process info
+            pass  # TODO: process info
 
         return self.async_show_form(
-            step_id='user',
-            data_schema=vol.Schema({
-              vol.Required('password'): str
-            })
+            step_id="user", data_schema=vol.Schema({vol.Required("password"): str})
         )
 ```
 

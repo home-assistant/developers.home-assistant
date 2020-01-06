@@ -35,15 +35,16 @@ from homeassistant.const import CONF_FILENAME, CONF_HOST
 from homeassistant.components.light import PLATFORM_SCHEMA
 import homeassistant.helpers.config_validation as cv
 
-CONF_ALLOW_UNREACHABLE = 'allow_unreachable'
+CONF_ALLOW_UNREACHABLE = "allow_unreachable"
 DEFAULT_UNREACHABLE = False
 
-PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
-    vol.Required(CONF_HOST): cv.string,
-    vol.Optional(CONF_ALLOW_UNREACHABLE,
-                default=DEFAULT_UNREACHABLE): cv.boolean,
-    vol.Optional(CONF_FILENAME): cv.string,
-})
+PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
+    {
+        vol.Required(CONF_HOST): cv.string,
+        vol.Optional(CONF_ALLOW_UNREACHABLE, default=DEFAULT_UNREACHABLE): cv.boolean,
+        vol.Optional(CONF_FILENAME): cv.string,
+    }
+)
 ```
 
 ### 3. Setup Platform
@@ -58,6 +59,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 
     ```python
     from homeassistant.components.light import Light
+
 
     class HueLight(Light):
         """Hue light component."""
@@ -75,10 +77,10 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend({
 
     ```python
     # bad
-    status = requests.get(url('/status'))
-
+    status = requests.get(url("/status"))
     # good
     from phue import Bridge
+
     bridge = Bridge(...)
     status = bridge.status()
     ```

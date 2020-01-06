@@ -27,10 +27,10 @@ Another option is to use Python and the [Requests](http://docs.python-requests.o
 ```python
 from requests import get
 
-url = 'http://localhost:8123/ENDPOINT'
+url = "http://localhost:8123/ENDPOINT"
 headers = {
-    'Authorization': 'Bearer ABCDEFGH',
-    'content-type': 'application/json',
+    "Authorization": "Bearer ABCDEFGH",
+    "content-type": "application/json",
 }
 
 response = get(url, headers=headers)

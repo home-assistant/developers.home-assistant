@@ -44,21 +44,19 @@ Each entity is able to define a device via the `device_info` property. This prop
 ```python
 # Inside a platform
 class HueLight(LightEntity):
-
     @property
     def device_info(self):
         return {
-            'identifiers': {
+            "identifiers": {
                 # Serial numbers are unique identifiers within a specific domain
                 (hue.DOMAIN, self.unique_id)
             },
-            'name': self.name,
-            'manufacturer': self.light.manufacturername,
-            'model': self.light.productname,
-            'sw_version': self.light.swversion,
-            'via_device': (hue.DOMAIN, self.api.bridgeid),
+            "name": self.name,
+            "manufacturer": self.light.manufacturername,
+            "model": self.light.productname,
+            "sw_version": self.light.swversion,
+            "via_device": (hue.DOMAIN, self.api.bridgeid),
         }
-
 ```
 
 Components are also able to register devices in the case that there are no entities representing them. An example is a hub that communicates with the lights.
@@ -71,13 +69,9 @@ device_registry = await dr.async_get_registry(hass)
 
 device_registry.async_get_or_create(
     config_entry_id=entry.entry_id,
-    connections={
-        (dr.CONNECTION_NETWORK_MAC, config.mac)
-    },
-    identifiers={
-        (DOMAIN, config.bridgeid)
-    },
-    manufacturer='Signify',
+    connections={(dr.CONNECTION_NETWORK_MAC, config.mac)},
+    identifiers={(DOMAIN, config.bridgeid)},
+    manufacturer="Signify",
     name=config.name,
     model=config.modelid,
     sw_version=config.swversion,

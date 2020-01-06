@@ -108,7 +108,6 @@ class MyCover(CoverDevice):
 
     async def async_set_cover_position(self, **kwargs):
         """Move the cover to a specific position."""
-
 ```
 
 ### Stop cover

@@ -24,7 +24,6 @@ The Flow handler works just like the config flow handler, except that the first 
 
 ```python
 class OptionsFlowHandler(config_entries.OptionsFlow):
-
     async def async_step_init(self, user_input=None):
         """Manage the options."""
         if user_input is not None:

@@ -20,6 +20,7 @@ async def async_look_my_coroutine(target):
     if result:
         print(f"hello {target}")
 
+
 hass.loop.create_task(async_look_my_coroutine("world"))
 ```
 
@@ -35,6 +36,7 @@ A common use case for a callback in Home Assistant is as a listener for an event
 
 ```python
 from homeassistant.core import callback
+
 
 @callback
 def async_trigger_service_handler(service_call):

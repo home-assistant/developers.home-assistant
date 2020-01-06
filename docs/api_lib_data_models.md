@@ -58,29 +58,29 @@ class Light:
     @property
     def id(self) -> int:
         """Return the ID of the light."""
-        return self.raw_data['id']
+        return self.raw_data["id"]
 
     @property
     def name(self) -> str:
         """Return the name of the light."""
-        return self.raw_data['name']
+        return self.raw_data["name"]
 
     @property
     def is_on(self) -> bool:
         """Return if the light is on."""
-        return self.raw_data['id']
+        return self.raw_data["id"]
 
     async def async_control(self, is_on: bool):
         """Control the light."""
-        resp = await self.auth.request('post', f'light/{self.id}', json={
-          'is_on': is_on
-        })
+        resp = await self.auth.request(
+            "post", f"light/{self.id}", json={"is_on": is_on}
+        )
         resp.raise_for_status()
         self.raw_data = await resp.json()
 
     async def async_update(self):
         """Update the light data."""
-        resp = await self.auth.request('get', f'light/{self.id}')
+        resp = await self.auth.request("get", f"light/{self.id}")
         resp.raise_for_status()
         self.raw_data = await resp.json()
 ```
@@ -103,16 +103,13 @@ class ExampleHubAPI:
 
     async def async_get_lights(self) -> List[Light]:
         """Return the lights."""
-        resp = await self.auth.request('get', 'lights')
+        resp = await self.auth.request("get", "lights")
         resp.raise_for_status()
-        return [
-          Light(light_data, self.auth)
-          for light_data in await resp.json()
-        ]
+        return [Light(light_data, self.auth) for light_data in await resp.json()]
 
     async def async_get_light(self, light_id) -> Light:
         """Return the lights."""
-        resp = await self.auth.request('get', f'light/{light_id}')
+        resp = await self.auth.request("get", f"light/{light_id}")
         resp.raise_for_status()
         return Light(await resp.json(), self.auth)
 ```

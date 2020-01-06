@@ -58,8 +58,8 @@ Prefer [f-strings](https://docs.python.org/3/reference/lexical_analysis.html#f-s
 # New
 f"{some_value} {some_other_value}"
 # Old, wrong
-"{} {}".format('New', 'style')
-"%s %s" % ('Old', 'style')
+"{} {}".format("New", "style")
+"%s %s" % ("Old", "style")
 ```
 
 One exception is for logging which uses the percentage formatting. This is to avoid formatting the log message when it is suppressed.

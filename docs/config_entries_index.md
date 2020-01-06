@@ -106,7 +106,7 @@ be done by calling the forward function on the config entry manager ([example](h
 
 ```python
 # Use `hass.async_add_job` to avoid a circular dependency between the platform and the component
-hass.async_add_job(hass.config_entries.async_forward_entry_setup(config_entry, 'light'))
+hass.async_add_job(hass.config_entries.async_forward_entry_setup(config_entry, "light"))
 ```
 
 For a platform to support config entries, it will need to add a setup entry method ([example](https://github.com/home-assistant/home-assistant/blob/0.68.0/homeassistant/components/light/hue.py#L60)):
@@ -123,7 +123,7 @@ Components can optionally support unloading a config entry. When unloading an en
 For each platform that you forwarded the config entry to, you will need to forward the unloading too.
 
 ```python
-await self.hass.config_entries.async_forward_entry_unload(self.config_entry, 'light')
+await self.hass.config_entries.async_forward_entry_unload(self.config_entry, "light")
 ```
 
 If you need to clean up resources used by an entity in a platform, have the entity implement the [`async_will_remove_from_hass`](entity_index.md#async_will_remove_from_hass) method.

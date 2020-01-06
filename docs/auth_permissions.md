@@ -14,9 +14,9 @@ Policies are dictionaries that at the root level consist of different categories
 
 ```python
 {
-  "entities": {
-    # …
-  }
+    "entities": {
+        # …
+    }
 }
 ```
 
@@ -24,14 +24,14 @@ Each category can further split into subcategories that describe parts of that c
 
 ```python
 {
-  "entities": {
-    "domains": {
-      # …
-    },
-    "entity_ids": {
-      # …
+    "entities": {
+        "domains": {
+            # …
+        },
+        "entity_ids": {
+            # …
+        },
     }
-  }
 }
 ```
 
@@ -72,31 +72,17 @@ If a user is a member of multiple groups, the groups permission policies will be
 Let's look at an example:
 
 ```python
-{
-  "entities": {
-    "entity_ids": {
-      "light.kitchen": True
-    }
-  }
-}
+{"entities": {"entity_ids": {"light.kitchen": True}}}
 ```
 
 ```python
-{
-  "entities": {
-    "entity_ids": True
-  }
-}
+{"entities": {"entity_ids": True}}
 ```
 
 Once merged becomes
 
 ```python
-{
-  "entities": {
-    "entity_ids": True
-  }
-}
+{"entities": {"entity_ids": True}}
 ```
 
 ## Checking permissions
@@ -111,9 +97,7 @@ To check a permission, you will need to have access to the user object. Once you
 
 ```python
 from homeassistant.exceptions import Unauthorized
-from homeasistant.permissions.const import (
-  POLICY_READ, POLICY_CONTROL, POLICY_EDIT
-)
+from homeasistant.permissions.const import POLICY_READ, POLICY_CONTROL, POLICY_EDIT
 
 # Raise error if user is not an admin
 if not user.is_admin:
@@ -135,9 +119,9 @@ It's crucial for permission checking that actions taken on behalf of the user ar
 ```python
 from homeassistant.core import Context
 
-await hass.services.async_call('homeassistant', 'stop', context=Context(
-  user_id=user.id
-), blocking=True)
+await hass.services.async_call(
+    "homeassistant", "stop", context=Context(user_id=user.id), blocking=True
+)
 ```
 
 ### If a permission check fails
@@ -173,9 +157,10 @@ Your service call handler will need to check the permissions for each entity tha
 from homeassistant.exceptions import Unauthorized, UnknownUser
 from homeassistant.auth.permissions.const import POLICY_CONTROL
 
+
 async def handle_entity_service(call):
     """Handle a service call."""
-    entity_ids = call.data['entity_id']
+    entity_ids = call.data["entity_id"]
 
     for entity_id in entity_ids:
         if call.context.user_id:
@@ -199,7 +184,7 @@ async def handle_entity_service(call):
 
 
 async def async_setup(hass, config):
-    hass.services.async_register(DOMAIN, 'my_service', handle_entity_service)
+    hass.services.async_register(DOMAIN, "my_service", handle_entity_service)
     return True
 ```
 
@@ -217,7 +202,7 @@ async def handle_admin_service(call):
 
 async def async_setup(hass, config):
     hass.helpers.service.async_register_admin_service(
-        DOMAIN, 'my_service', handle_admin_service, vol.Schema({})
+        DOMAIN, "my_service", handle_admin_service, vol.Schema({})
     )
     return True
 ```
@@ -233,20 +218,20 @@ from homeassistant.exceptions import Unauthorized
 class MyView(HomeAssistantView):
     """View to handle Status requests."""
 
-    url = '/api/my-component/my-api'
-    name = 'api:my-component:my-api'
+    url = "/api/my-component/my-api"
+    name = "api:my-component:my-api"
 
     async def post(self, request):
         """Notify that the API is running."""
-        hass = request.app['hass']
-        user = request['hass_user']
+        hass = request.app["hass"]
+        user = request["hass_user"]
 
         if not user.is_admin:
             raise Unauthorized()
 
-        hass.bus.async_fire('my-component-api-running', context=Context(
-            user_id=user.id
-        ))
+        hass.bus.async_fire(
+            "my-component-api-running", context=Context(user_id=user.id)
+        )
 
         return self.json_message("Done.")
 ```
@@ -268,9 +253,9 @@ async def async_setup(hass, config):
 
 @websocket_api.require_admin
 @websocket_api.async_response
-@websocket_api.websocket_command({
-    vol.Required('type'): 'my-component/my-action',
-})
+@websocket_api.websocket_command(
+    {vol.Required("type"): "my-component/my-action",}
+)
 async def websocket_create(hass, connection, msg):
     """Create a user."""
     # Do action

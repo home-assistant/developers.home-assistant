@@ -64,8 +64,8 @@ A simple script to consume SSE in Python looks like this:
 ```python
 from sseclient import SSEClient
 
-auth = {'Authorization': 'Bearer ABCDEFGH'}
-messages = SSEClient('http://localhost:8123/api/stream', headers=auth)
+auth = {"Authorization": "Bearer ABCDEFGH"}
+messages = SSEClient("http://localhost:8123/api/stream", headers=auth)
 
 for msg in messages:
     print(msg)

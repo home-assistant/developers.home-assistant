@@ -41,8 +41,7 @@ def setup_platform(hass, config, add_entities, discovery_info=None):
 Will turn into:
 
 ```python
-async def async_setup_platform(hass, config, async_add_entities,
-                               discovery_info=None):
+async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
     """Set up platform."""
     # Code for setting up your platform inside of the event loop.
 ```
@@ -80,9 +79,12 @@ In the following example, `say_hello` will schedule `async_say_hello` and block 
 ```python
 import asyncio
 
+
 def say_hello(hass, target):
     return asyncio.run_coroutine_threadsafe(
-        async_say_hello(hass, target), hass.loop).result()
+        async_say_hello(hass, target), hass.loop
+    ).result()
+
 
 async def async_say_hello(hass, target):
     return f"Hello {target}!"

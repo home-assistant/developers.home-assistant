@@ -9,24 +9,22 @@ Example code to handle an intent in Home Assistant.
 ```python
 from homeassistant.helpers import intent
 
-intent_type = 'TurnLightOn'
-slots = {
-  'entity': { 'value': 'Kitchen' }
-}
+intent_type = "TurnLightOn"
+slots = {"entity": {"value": "Kitchen"}}
 
 try:
     intent_response = yield from intent.async_handle(
-        hass, 'example_component', intent_type, slots
+        hass, "example_component", intent_type, slots
     )
 
 except intent.UnknownIntent as err:
-    _LOGGER.warning('Received unknown intent %s', intent_type)
+    _LOGGER.warning("Received unknown intent %s", intent_type)
 
 except intent.InvalidSlotInfo as err:
-    _LOGGER.error('Received invalid slot data: %s', err)
+    _LOGGER.error("Received invalid slot data: %s", err)
 
 except intent.IntentError:
-    _LOGGER.exception('Error handling request for %s', intent_type)
+    _LOGGER.exception("Error handling request for %s", intent_type)
 ```
 
 The intent response is an instance of `homeassistant.helpers.intent.IntentResponse`.

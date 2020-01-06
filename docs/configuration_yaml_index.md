@@ -39,17 +39,7 @@ will be passed to the component as
 
 ```python
 {
-    "unrelated_component": {
-        "some_key": "some_value"
-    },
-    "switch": [
-        {
-            "platform": "example1"
-        },
-        {
-            "platform": "example2",
-            "some_config": True
-        }
-    ]
+    "unrelated_component": {"some_key": "some_value"},
+    "switch": [{"platform": "example1"}, {"platform": "example2", "some_config": True}],
 }
 ```

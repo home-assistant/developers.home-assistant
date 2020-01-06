@@ -15,15 +15,14 @@ To fire an event, you have to interact with the event bus. The event bus is avai
 Example component that will fire an event when loaded. Note that custom event names are prefixed with the component name.
 
 ```python
-DOMAIN = 'example_component'
+DOMAIN = "example_component"
+
 
 def setup(hass, config):
     """Set up is called when Home Assistant is loading our component."""
 
     # Fire event example_component_my_cool_event with event data answer=42
-    hass.bus.fire('example_component_my_cool_event', {
-        'answer': 42
-    })
+    hass.bus.fire("example_component_my_cool_event", {"answer": 42})
 
     # Return successful setup
     return True
@@ -34,7 +33,8 @@ def setup(hass, config):
 Most of the times you'll not be firing events but instead listen to events. For example, the state change of an entity is broadcasted as an event.
 
 ```python
-DOMAIN = 'example_component'
+DOMAIN = "example_component"
+
 
 def setup(hass, config):
     """Set up is called when Home Assistant is loading our component."""
@@ -47,7 +47,7 @@ def setup(hass, config):
         print(f"Answer {count} is: {event.data.get('answer')}")
 
     # Listen for when example_component_my_cool_event is fired
-    hass.bus.listen('example_component_my_cool_event', handle_event)
+    hass.bus.listen("example_component_my_cool_event", handle_event)
 
     # Return successful setup
     return True

@@ -10,7 +10,8 @@ A component has to register an intent handler for each type that it wants to han
 import asyncio
 from homeassistant.helpers import intent
 
-DATA_KEY = 'example_key'
+DATA_KEY = "example_key"
+
 
 @asyncio.coroutine
 def async_setup(hass, config):
@@ -22,7 +23,7 @@ class CountInvocationIntent(intent.IntentHandler):
     """Handle CountInvocationIntent intents."""
 
     # Type of intent to handle
-    intent_type = 'CountInvocationIntent'
+    intent_type = "CountInvocationIntent"
 
     # Optional. A validation schema for slots
     # slot_schema = {
@@ -36,6 +37,7 @@ class CountInvocationIntent(intent.IntentHandler):
 
         response = intent_obj.create_response()
         response.async_set_speech(
-            f"This intent has been invoked {intent_obj.hass.data[DATA_KEY]} times")
+            f"This intent has been invoked {intent_obj.hass.data[DATA_KEY]} times"
+        )
         return response
 ```

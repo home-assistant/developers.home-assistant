@@ -27,7 +27,8 @@ import logging
 
 _LOGGER = logging.getLogger(__name__)
 
-DOMAIN = 'hello_state'
+DOMAIN = "hello_state"
+
 
 def setup(hass, config):
     """Setup the Hello State component. """
@@ -69,10 +70,11 @@ import logging
 
 _LOGGER = logging.getLogger(__name__)
 
-DOMAIN = 'hello_state'
+DOMAIN = "hello_state"
 
-CONF_TEXT = 'text'
-DEFAULT_TEXT = 'No text!'
+CONF_TEXT = "text"
+DEFAULT_TEXT = "No text!"
+
 
 def setup(hass, config):
     """Set up the Hello State component. """
@@ -80,7 +82,7 @@ def setup(hass, config):
     text = config[DOMAIN].get(CONF_TEXT, DEFAULT_TEXT)
 
     # States are in the format DOMAIN.OBJECT_ID
-    hass.states.set('hello_state.Hello_State', text)
+    hass.states.set("hello_state.Hello_State", text)
 
     return True
 ```
@@ -99,11 +101,9 @@ import voluptuous as vol
 
 import homeassistant.helpers.config_validation as cv
 
-CONFIG_SCHEMA = vol.Schema({
-    DOMAIN: vol.Schema({
-      vol.Required(CONF_TEXT): cv.string,
-    })
-}, extra=vol.ALLOW_EXTRA)
+CONFIG_SCHEMA = vol.Schema(
+    {DOMAIN: vol.Schema({vol.Required(CONF_TEXT): cv.string,})}, extra=vol.ALLOW_EXTRA
+)
 ```
 
 Now, when `text:` is missing from the config, Home Assistant will alert the user and not setup your component.

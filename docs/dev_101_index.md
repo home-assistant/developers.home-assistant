@@ -21,7 +21,7 @@ DOMAIN = "hello_world"
 def setup(hass, config):
     """Setup the hello_world component."""
     # States are in the format DOMAIN.OBJECT_ID.
-    hass.states.set('hello_world.Hello_World', 'Works!')
+    hass.states.set("hello_world.Hello_World", "Works!")
 
     # Return boolean to indicate that initialization was successfully.
     return True

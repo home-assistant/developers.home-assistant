@@ -14,7 +14,7 @@ Message types are made up the domain and the message type, separated by a forwar
 
 ```python
 # The type of the message
-WS_TYPE_MEDIA_PLAYER_THUMBNAIL = 'media_player/thumbnail'
+WS_TYPE_MEDIA_PLAYER_THUMBNAIL = "media_player/thumbnail"
 ```
 
 ### Message Schema
@@ -29,12 +29,13 @@ import homeassistant.helpers.config_validation as cv
 
 
 # The schema for the message
-SCHEMA_WEBSOCKET_GET_THUMBNAIL = \
-    websocket_api.BASE_COMMAND_MESSAGE_SCHEMA.extend({
-        'type': WS_TYPE_MEDIA_PLAYER_THUMBNAIL,
+SCHEMA_WEBSOCKET_GET_THUMBNAIL = websocket_api.BASE_COMMAND_MESSAGE_SCHEMA.extend(
+    {
+        "type": WS_TYPE_MEDIA_PLAYER_THUMBNAIL,
         # The entity that we want to retrieve the thumbnail for.
-        'entity_id': cv.entity_id
-    })
+        "entity_id": cv.entity_id,
+    }
+)
 ```
 
 ### Defining a handler
@@ -52,9 +53,11 @@ def websocket_handle_thumbnail(hass, connection, msg):
 
     # We know the answer without having to fetch any information,
     # so we send it directly.
-    connection.to_write.put_nowait(websocket_api.result_message(msg['id'], {
-        'thumbnail': 'http://via.placeholder.com/350x150'
-    }))
+    connection.to_write.put_nowait(
+        websocket_api.result_message(
+            msg["id"], {"thumbnail": "http://via.placeholder.com/350x150"}
+        )
+    )
 ```
 
 #### Sending a delayed response
@@ -66,12 +69,15 @@ If your command needs to interact with the network, a device or needs to compute
 def websocket_handle_thumbnail(hass, connection, msg):
     """Handle get media player cover command."""
     # Retrieve media player using passed in entity id.
-    player = hass.data[DOMAIN].get_entity(msg['entity_id'])
+    player = hass.data[DOMAIN].get_entity(msg["entity_id"])
 
     # If the player does not exist, send an error message.
     if player is None:
-        connection.to_write.put_nowait(websocket_api.error_message(
-            msg['id'], 'entity_not_found', 'Entity not found'))
+        connection.to_write.put_nowait(
+            websocket_api.error_message(
+                msg["id"], "entity_not_found", "Entity not found"
+            )
+        )
         return
 
     # Define a function to be enqueued.
@@ -81,16 +87,22 @@ def websocket_handle_thumbnail(hass, connection, msg):
 
         # No media player thumbnail available
         if data is None:
-            connection.send_message_outside(websocket_api.error_message(
-                msg['id'], 'thumbnail_fetch_failed',
-                'Failed to fetch thumbnail'))
+            connection.send_message_outside(
+                websocket_api.error_message(
+                    msg["id"], "thumbnail_fetch_failed", "Failed to fetch thumbnail"
+                )
+            )
             return
 
-        connection.send_message_outside(websocket_api.result_message(
-            msg['id'], {
-                'content_type': content_type,
-                'content': base64.b64encode(data).decode('utf-8')
-            }))
+        connection.send_message_outside(
+            websocket_api.result_message(
+                msg["id"],
+                {
+                    "content_type": content_type,
+                    "content": base64.b64encode(data).decode("utf-8"),
+                },
+            )
+        )
 
     # Player exist. Queue up a job to send the thumbnail.
     hass.async_add_job(send_image())
@@ -104,8 +116,10 @@ With all pieces defined, it's time to register the command. This is done inside 
 async def async_setup(hass, config):
     """Setup of your component."""
     hass.components.websocket_api.async_register_command(
-        WS_TYPE_MEDIA_PLAYER_THUMBNAIL, websocket_handle_thumbnail,
-        SCHEMA_WEBSOCKET_GET_THUMBNAIL)
+        WS_TYPE_MEDIA_PLAYER_THUMBNAIL,
+        websocket_handle_thumbnail,
+        SCHEMA_WEBSOCKET_GET_THUMBNAIL,
+    )
 ```
 
 ## Calling the command from the frontend (JavaScript)
