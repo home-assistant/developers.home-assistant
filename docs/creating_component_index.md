@@ -4,7 +4,7 @@ title: "Creating your first integration"
 
 Alright, you learned about the [manifest](creating_integration_manifest.md), so it's time to write your first code for your integration. AWESOME. Don't worry, we've tried hard to keep it as easy as possible. From a Home Assistant development environment, type the following and follow the instructions:
 
-```python
+```shell
 python3 -m script.scaffold integration
 ```
 

@@ -34,7 +34,7 @@ There is no need to add the platform or component name to the log messages. This
 _LOGGER.error("No route to device: %s", self._resource)
 ```
 
-```bash
+```log
 2017-05-01 14:28:07 ERROR [homeassistant.components.sensor.arest] No route to device: 192.168.0.18
 ```
 

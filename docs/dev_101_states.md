@@ -58,7 +58,7 @@ hello_state:
 
 After a start or a restart of Home Assistant the component will create an entry in the log.
 
-```bash
+```log
 16-03-12 14:16:42 INFO (MainThread) [custom_components.hello_state] The 'hello state' component is ready!
 ```
 
