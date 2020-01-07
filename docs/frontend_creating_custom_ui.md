@@ -2,7 +2,7 @@
 title: "Creating custom UI"
 ---
 
-> This feature has been derepcated and is no longer supported. To add custom UI to Home Assistant, build a [custom Lovelace card](lovelace_custom_card.md) instead.
+> This feature has been deprecated and is no longer supported. To add custom UI to Home Assistant, build a [custom Lovelace card](lovelace_custom_card.md) instead.
 
 ### State card
 
