@@ -2,7 +2,7 @@
 title: "Create a new page"
 ---
 
-For a platform or integration page, the fastest way is to make a copy of an existing page and edit it. The [Integration overview](https://www.home-assistant.io/components/) and the [Examples section](https://www.home-assistant.io/cookbook/) are generated automatically, so there is no need to add a link to those pages.
+For a platform or integration page, the fastest way is to make a copy of an existing page and edit it. The [Integration overview](https://www.home-assistant.io/integrations/) and the [Examples section](https://www.home-assistant.io/cookbook/) are generated automatically, so there is no need to add a link to those pages.
 
 Please honor the [Standards](documentation_standards.md) we have for the documentation.
 
@@ -15,8 +15,10 @@ description: "home-assistant.io web presence"
 ha_release: "0.38"
 ha_category: Sensor
 ha_iot_class: "Local Polling"
-ha_qa_scale: silver
+ha_quality_scale: silver
 ha_config_flow: true
+ha_codeowners:
+  - '@balloob'
 ---
 
 Content... Written in markdown.
@@ -27,12 +29,14 @@ Content... Written in markdown.
 
 Additional keys for the file header:
 
+- `title`: This title should match with the name of the integration as written in the integration manifest file.
 - `logo`: Please check the separate section below.
-- `ha_release`: The release when the integration was included, e.g., "0.38". If the current release is 0.37, make `ha_release` 0.38. If it's 0.30 or 0.40 please quote it with `" "`.
-- `ha_category`: This entry is used to group the integration on the [Integration overview](https://www.home-assistant.io/components/).
+- `ha_release`: The release when the integration was included, e.g., "0.38". If the current release is 0.37, make `ha_release` 0.38. If it's 0.30 or 0.40 please quote it with `' '`.
+- `ha_category`: This entry is used to group the integration on the [Integration overview](https://www.home-assistant.io/integrations/).
 - `ha_iot_class`: [IoT class](https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things) is the classifier for the device's behavior.
-- `ha_qa_scale`: [Quality scale](https://www.home-assistant.io/docs/quality_scale/) is the representation of the integration's quality.
+- `ha_quality_scale`: [Quality scale](https://www.home-assistant.io/docs/quality_scale/) is the representation of the integration's quality.
 - `ha_config_flow`: Set to `true` if the integration has a [Data Entry Flow](https://developers.home-assistant.io/docs/en/data_entry_flow_index.html), omit otherwise.
+- `ha_codeowners`: GitHub usernames or team names (starting with `@`) of people that are responsible for this integration. This should match with the codeowners as listed in the integration manifest file.
 
 There are [pre-defined variables](https://jekyllrb.com/docs/variables/) available but usually, it's not necessary to use them when writing documentation.
 
@@ -83,12 +87,13 @@ required: inclusive       #=> Inclusive
 required: exclusive       #=> Exclusive
 required: any string here #=> Any string here
 ```
+
 - **`type:`**: The type of the variable. Allowed entries: `boolean`, `string`, `integer`, `float`, `time`, `template`, `device_class`, `icon` or `map`/`list` (for a list of entries). For multiple possibilities use `[string, integer]`. If you use `map`/`list` then should define `keys:` (see the [`template` sensor](https://www.home-assistant.io/components/sensor.template/) for an example). If you use `boolean`, then `default:` must be defined.
 - **`default:`**: The default value for the variable.
 
 ### Embedding Code
 
-You can use the [default markdown syntax](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#code) to generate syntax highlighted code. For inline code wrap your code in back-ticks. 
+You can use the [default markdown syntax](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#code) to generate syntax highlighted code. For inline code wrap your code in back-ticks.
 
 When you're writing code that is to be executed on the terminal, do not prefix them with `$`, since this makes it hard to copy and paste the commands. However, an exception is made when there is a need to distinguish between typed commands and command output. In those cases, prefixing the commands with a `$` is required.
 
@@ -122,11 +127,11 @@ Please note, if you want to use Markdown inside an HTML block, it has to be surr
 
 The images which are displayed on the pages are stored in various directories according to their purpose. If you want to use a logo and placed `logo:` in the file header then this image should be stored in `source/images/supported_brands`. The background must be transparent.
 
-| Type         | Location                                      |
-| :----------- |:----------------------------------------------|
-| logos        | source/images/supported_brands                |
-| blog         | source/images/blog                            |
-| screenshots  | source/images/components                      |
+| Type        | Location                       |
+| :---------- | :----------------------------- |
+| logos       | source/images/supported_brands |
+| blog        | source/images/blog             |
+| screenshots | source/images/components       |
 
 Not everything (product, integration, etc.) should have a logo. To show something for internal parts of Home Assistant we are using the [Material Design Icons](https://materialdesignicons.com/).
 
