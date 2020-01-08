@@ -137,9 +137,9 @@ When a discovery info is routed to your integration because of this entry in you
 
 The [Integration Quality Scale](https://www.home-assistant.io/docs/quality_scale/) scores an integration on the code quality and user experience. Each level of the quality scale consists of a list of requirements. If an integration matches all requirements, it's considered to have reached that level.
 
-When your integration has no score, then don't add it to the manifest of your integration. However, be sure to look at the [Integration Quality Scale](https://www.home-assistant.io/docs/quality_scale/) list of requirements it helps to improve the code and user experience tremendously.
+When your integration has no score, then don't add it to the manifest of your integration. However, be sure to look at the [Integration Quality Scale](https://www.home-assistant.io/docs/quality_scale/) list of requirements. It helps to improve the code and user experience tremendously.
 
-We can always highly recommend getting your integration scored.
+We highly recommend getting your integration scored.
 
 ```json5
 {
