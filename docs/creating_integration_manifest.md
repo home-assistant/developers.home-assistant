@@ -12,7 +12,8 @@ Since 0.92.0, every integration has a manifest file to specify basic information
   "documentation": "https://www.home-assistant.io/components/hue",
   "dependencies": ["mqtt"],
   "codeowners": ["@balloob"],
-  "requirements": ["aiohue==1.9.1"]
+  "requirements": ["aiohue==1.9.1"],
+  "quality_scale": "platinum"
 }
 ```
 
@@ -131,3 +132,17 @@ HomeKit discovery works by testing if the discovered modelname starts with any o
 Discovery via HomeKit does not mean that you have to talk the HomeKit protocol to communicate with your device. You can communicate with the device however you see fit.
 
 When a discovery info is routed to your integration because of this entry in your manifest, the discovery info is no longer routed to integrations that listen to the HomeKit zeroconf type.
+
+## Integration Quality Scale
+
+The [Integration Quality Scale](https://www.home-assistant.io/docs/quality_scale/) scores an integration on the code quality and user experience. Each level of the quality scale consists of a list of requirements. If an integration matches all requirements, it's considered to have reached that level.
+
+When your integration has no score, then don't add it to the manifest of your integration. However, be sure to look at the [Integration Quality Scale](https://www.home-assistant.io/docs/quality_scale/) list of requirements it helps to improve the code and user experience tremendously.
+
+We can always highly recommend getting your integration scored.
+
+```json5
+{
+ "quality_scale": "silver"
+}
+```
