@@ -72,17 +72,31 @@ If a user is a member of multiple groups, the groups permission policies will be
 Let's look at an example:
 
 ```python
-{"entities": {"entity_ids": {"light.kitchen": True}}}
+{
+    "entities": {
+        "entity_ids": {
+            "light.kitchen": True
+        }
+    }
+}
 ```
 
 ```python
-{"entities": {"entity_ids": True}}
+{
+    "entities": {
+        "entity_ids": True
+    }
+}
 ```
 
 Once merged becomes
 
 ```python
-{"entities": {"entity_ids": True}}
+{
+    "entities": {
+        "entity_ids": True
+    }
+}
 ```
 
 ## Checking permissions

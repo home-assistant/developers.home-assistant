@@ -58,7 +58,9 @@ If the result type is `RESULT_TYPE_CREATE_ENTRY`, the result should look like:
     "handler": "hue",
     # title and data as created by the handler
     "title": "Some title",
-    "result": {"some": "data"},
+    "result": {
+        "some": "data"
+    },
 }
 ```
 
@@ -172,7 +174,9 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
     async def async_step_user(self, user_input=None):
         return self.create_entry(
             title="Title of the entry",
-            data={"something_special": user_input["username"]},
+            data={
+                "something_special": user_input["username"]
+            },
         )
 ```
 
