@@ -110,10 +110,11 @@ This result type will show a form to the user to fill in. You define the current
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
     async def async_step_user(self, user_input=None):
-        # Use OrderedDict to guarantee order of the form shown to the user
-        data_schema = OrderedDict()
-        data_schema[vol.Required("username")] = str
-        data_schema[vol.Required("password")] = str
+        # Specify items in the order they are to be displayed in the UI
+        data_schema = {
+            vol.Required("username"): str,
+            vol.Required("password"): str,
+        }
 
         return self.async_show_form(step_id="init", data_schema=vol.Schema(data_schema))
 ```
@@ -135,10 +136,11 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
 
             errors["base"] = "auth_error"
 
-        # Use OrderedDict to guarantee order of the form shown to the user
-        data_schema = OrderedDict()
-        data_schema[vol.Required("username")] = str
-        data_schema[vol.Required("password")] = str
+        # Specify items in the order they are to be displayed in the UI
+        data_schema = {
+            vol.Required("username"): str,
+            vol.Required("password"): str,
+        }
 
         return self.async_show_form(
             step_id="init", data_schema=vol.Schema(data_schema), errors=errors
