@@ -70,7 +70,7 @@ Requirements is an array of strings. Each entry is a `pip` compatible string. Fo
 
 During the development of a component, it can be useful to test against different versions of a requirement. This can be done in two steps, using `pychromecast` as an example:
 
-```bash
+```shell
 pip install pychromecast==3.2.0 --target ~/.homeassistant/deps
 hass --skip-pip
 ```
@@ -79,7 +79,7 @@ This will use the specified version, and prevent Home Assistant from trying to o
 
 If you need to make changes to a requirement to support your component, it's also possible to install a development version of the requirement using `pip install -e`:
 
-```bash
+```shell
 git clone https://github.com/balloob/pychromecast.git
 pip install -e ./pychromecast
 hass --skip-pip

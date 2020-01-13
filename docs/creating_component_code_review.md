@@ -39,10 +39,10 @@ A checklist of things to do when you're adding a new component.
 
     ```python
     # bad
-    status = requests.get(url('/status'))
-
+    status = requests.get(url("/status"))
     # good
     from phue import Bridge
+
     bridge = Bridge(...)
     status = bridge.status()
     ```

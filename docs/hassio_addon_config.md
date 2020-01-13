@@ -28,7 +28,7 @@ When developing your script:
  - `/data` is a volume for persistent storage.
  - `/data/options.json` contains the user configuration. You can use bashio or `jq` inside your shell script to parse this data.
 
-```bash
+```shell
 CONFIG_PATH=/data/options.json
 
 TARGET="$(jq --raw-output '.target' $CONFIG_PATH)"
@@ -46,7 +46,7 @@ then there will be a variable `TARGET` containing `beer` in the environment of y
 
 All add-ons are based on latest Alpine Linux. Hass.io will automatically substitute the right base image based on the machine architecture. Add `tzdata` if you need run in a different timezone. `tzdata` Is is already added to our base images.
 
-```
+```dockerfile
 ARG BUILD_FROM
 FROM $BUILD_FROM
 

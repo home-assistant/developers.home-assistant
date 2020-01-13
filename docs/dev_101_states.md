@@ -27,7 +27,8 @@ import logging
 
 _LOGGER = logging.getLogger(__name__)
 
-DOMAIN = 'hello_state'
+DOMAIN = "hello_state"
+
 
 def setup(hass, config):
     """Setup the Hello State component. """
@@ -58,7 +59,7 @@ hello_state:
 
 After a start or a restart of Home Assistant the component will create an entry in the log.
 
-```bash
+```log
 16-03-12 14:16:42 INFO (MainThread) [custom_components.hello_state] The 'hello state' component is ready!
 ```
 
@@ -69,10 +70,11 @@ import logging
 
 _LOGGER = logging.getLogger(__name__)
 
-DOMAIN = 'hello_state'
+DOMAIN = "hello_state"
 
-CONF_TEXT = 'text'
-DEFAULT_TEXT = 'No text!'
+CONF_TEXT = "text"
+DEFAULT_TEXT = "No text!"
+
 
 def setup(hass, config):
     """Set up the Hello State component. """
@@ -80,7 +82,7 @@ def setup(hass, config):
     text = config[DOMAIN].get(CONF_TEXT, DEFAULT_TEXT)
 
     # States are in the format DOMAIN.OBJECT_ID
-    hass.states.set('hello_state.Hello_State', text)
+    hass.states.set("hello_state.Hello_State", text)
 
     return True
 ```
@@ -99,11 +101,9 @@ import voluptuous as vol
 
 import homeassistant.helpers.config_validation as cv
 
-CONFIG_SCHEMA = vol.Schema({
-    DOMAIN: vol.Schema({
-      vol.Required(CONF_TEXT): cv.string,
-    })
-}, extra=vol.ALLOW_EXTRA)
+CONFIG_SCHEMA = vol.Schema(
+    {DOMAIN: vol.Schema({vol.Required(CONF_TEXT): cv.string,})}, extra=vol.ALLOW_EXTRA
+)
 ```
 
 Now, when `text:` is missing from the config, Home Assistant will alert the user and not setup your component.
@@ -116,7 +116,7 @@ After a start or a restart of Home Assistant the component will be visible in th
 
 In order to expose attributes for a platform, you will need to define a property called `device_state_attributes` on the entity class, which will return a dictionary of attributes:
 
-```
+```python
 @property
 def device_state_attributes(self):
     """Return device specific state attributes."""

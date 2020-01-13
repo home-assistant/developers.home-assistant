@@ -10,10 +10,10 @@ Example code:
 
 ```python
 async def async_setup(hass, config):
-    hass.components.conversation.async_register('MyCoolIntent', [
-        'I think that {object} is [very] cool',
-        'Nothing is cooler than {object}'
-    ])
+    hass.components.conversation.async_register(
+        "MyCoolIntent",
+        ["I think that {object} is [very] cool", "Nothing is cooler than {object}"],
+    )
 ```
 
 If a sentence like "I think that beer is cool" comes in, the conversation component will generate an intent of type `MyCoolIntent` and with 1 slot, named `object` and value `beer`.

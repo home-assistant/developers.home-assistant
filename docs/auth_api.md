@@ -176,7 +176,7 @@ For the websocket connection, pass the access token in the [authentication messa
 
 For HTTP requests, pass the token type and access token as the authorization header:
 
-```
+```http
 Authorization: Bearer ABCDEFGH
 ```
 
@@ -195,9 +195,9 @@ import requests
 
 url = "https://your.awesome.home/api/error/all"
 headers = {
-    'Authorization': "Bearer ABCDEFGH",
+    "Authorization": "Bearer ABCDEFGH",
 }
-response = requests.request('GET', url, headers=headers)
+response = requests.request("GET", url, headers=headers)
 
 print(response.text)
 ```

@@ -47,9 +47,9 @@ will be passed to the component as
             "platform": "example1"
         },
         {
-            "platform": "example2,
+            "platform": "example2",
             "some_config": True
         }
-    ]
+    ],
 }
 ```

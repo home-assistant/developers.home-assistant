@@ -34,7 +34,7 @@ class Auth:
 
     async def request(self, method: str, path: str, **kwargs) -> ClientResponse:
         """Make a request."""
-        headers = kwargs.get('headers')
+        headers = kwargs.get("headers")
 
         if headers is None:
             headers = {}
@@ -44,10 +44,7 @@ class Auth:
         headers["authorization"] = self.access_token
 
         return await self.websession.request(
-            method,
-            f"{self.host}/{path}",
-            **kwargs,
-            headers=headers,
+            method, f"{self.host}/{path}", **kwargs, headers=headers,
         )
 ```
 
@@ -65,9 +62,10 @@ async def main():
         auth = Auth(session, "http://example.com/api", "secret_access_token")
 
         # This will fetch data from http://example.com/api/lights
-        resp = await auth.request('get', 'lights')
+        resp = await auth.request("get", "lights")
         print("HTTP response status code", resp.status)
         print("HTTP response JSON content", await resp.json())
+
 
 asyncio.run(main())
 ```
@@ -88,7 +86,7 @@ class Auth:
 
     async def request(self, method: str, path: str, **kwargs) -> requests.Response:
         """Make a request."""
-        headers = kwargs.get('headers')
+        headers = kwargs.get("headers")
 
         if headers is None:
             headers = {}
@@ -98,10 +96,7 @@ class Auth:
         headers["authorization"] = self.access_token
 
         return requests.request(
-            method,
-            f"{self.host}/{path}",
-            **kwargs,
-            headers=headers,
+            method, f"{self.host}/{path}", **kwargs, headers=headers,
         )
 ```
 
@@ -114,7 +109,7 @@ from my_package import Auth
 auth = Auth("http://example.com/api", "secret_access_token")
 
 # This will fetch data from http://example.com/api/lights
-resp = auth.request('get', 'lights')
+resp = auth.request("get", "lights")
 print("HTTP response status code", resp.status_code)
 print("HTTP response JSON content", resp.json())
 ```
@@ -147,7 +142,7 @@ class AbstractAuth(ABC):
 
     async def request(self, method, url, **kwargs) -> ClientResponse:
         """Make a request."""
-        headers = kwargs.get('headers')
+        headers = kwargs.get("headers")
 
         if headers is None:
             headers = {}
@@ -158,10 +153,7 @@ class AbstractAuth(ABC):
         headers["authorization"] = f"Bearer {access_token}"
 
         return await self.websession.request(
-            method,
-            f"{self.host}/{url}",
-            **kwargs,
-            headers=headers,
+            method, f"{self.host}/{url}", **kwargs, headers=headers,
         )
 ```
 
@@ -172,7 +164,6 @@ from my_package import AbstractAuth
 
 
 class Auth(AbstractAuth):
-
     def __init__(self, websession: ClientSession, host: str, token_manager):
         """Initialize the auth."""
         super().__init__(websession, host)
@@ -255,7 +246,6 @@ from my_package import AbstractAuth
 
 
 class Auth(AbstractAuth):
-
     def refresh_tokens(self) -> Dict[str, Union[str, int]]:
         """Refresh and return new tokens."""
         self.token_manager.fetch_access_token()

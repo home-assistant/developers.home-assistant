@@ -29,7 +29,6 @@ class MySwitch(SwitchDevice):
 
     async def async_turn_on(self, **kwargs):
         """Turn the entity on."""
-
 ```
 
 ### Turn Off

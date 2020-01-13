@@ -10,10 +10,10 @@ This is a simple "hello world" example to show the basics of registering a servi
 Services can be called from automations and from the service "Developer tools" in the frontend.
 
 ```python
-DOMAIN = 'hello_service'
+DOMAIN = "hello_service"
 
-ATTR_NAME = 'name'
-DEFAULT_NAME = 'World'
+ATTR_NAME = "name"
+DEFAULT_NAME = "World"
 
 
 def setup(hass, config):
@@ -23,9 +23,9 @@ def setup(hass, config):
         """Handle the service call."""
         name = call.data.get(ATTR_NAME, DEFAULT_NAME)
 
-        hass.states.set('hello_service.hello', name)
+        hass.states.set("hello_service.hello", name)
 
-    hass.services.register(DOMAIN, 'hello', handle_hello)
+    hass.services.register(DOMAIN, "hello", handle_hello)
 
     # Return boolean to indicate that initialization was successfully.
     return True

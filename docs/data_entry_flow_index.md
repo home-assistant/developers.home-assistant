@@ -12,13 +12,15 @@ Data Entry Flow is used in Home Assistant to create config entries.
 This is the class that manages the flows that are in progress. When instantiating one, you pass in two async callbacks:
 
 ```python
-async def async_create_flow(handler, context=context, data=data)
+async def async_create_flow(handler, context=context, data=data):
+    """Create flow."""
 ```
 
 The manager delegates instantiating of config flow handlers to this async callback. This allows the parent of the manager to define their own way of finding handlers and preparing a handler for instantiation. For example, in the case of the config entry manager, it will make sure that the dependencies and requirements are setup.
 
 ```python
-async def async_finish_flow(flow, result)
+async def async_finish_flow(flow, result):
+    """Finish flow."""
 ```
 
 This async callback is called when a flow is finished or aborted. i.e. `result['type'] in [RESULT_TYPE_CREATE_ENTRY, RESULT_TYPE_ABORT]`. The callback function can modify result and return it back, if the result type changed to `RESULT_TYPE_FORM`, the flow will continue running, display another form.
@@ -27,19 +29,19 @@ If the result type is `RESULT_TYPE_FORM`, the result should look like:
 ```python
 {
     # The result type of the flow
-    'type': RESULT_TYPE_FORM,
+    "type": RESULT_TYPE_FORM,
     # the id of the flow
-    'flow_id': 'abcdfgh1234,
+    "flow_id": "abcdfgh1234",
     # handler name
-    'handler': 'hue',
+    "handler": "hue",
     # name of the step, flow.async_step_[step_id] will be called when form submitted
-    'step_id': 'init',
+    "step_id": "init",
     # a voluptuous schema to build and validate user input
-    'data_schema': vol.Schema(),
+    "data_schema": vol.Schema(),
     # an errors dict, None if no errors
-    'errors': errors,
+    "errors": errors,
     # a detail information about the step
-    'description_placeholders': description_placeholders,
+    "description_placeholders": description_placeholders,
 }
 ```
 
@@ -47,17 +49,17 @@ If the result type is `RESULT_TYPE_CREATE_ENTRY`, the result should look like:
 ```python
 {
     # Data schema version of the entry
-    'version': 2,
+    "version": 2,
     # The result type of the flow
-    'type': RESULT_TYPE_CREATE_ENTRY,
+    "type": RESULT_TYPE_CREATE_ENTRY,
     # the id of the flow
-    'flow_id': 'abcdfgh1234,
+    "flow_id": "abcdfgh1234",
     # handler name
-    'handler': 'hue',
+    "handler": "hue",
     # title and data as created by the handler
-    'title': 'Some title',
-    'result': {
-        'some': 'data'
+    "title": "Some title",
+    "result": {
+        "some": "data"
     },
 }
 ```
@@ -66,13 +68,13 @@ If the result type is `RESULT_TYPE_ABORT`, the result should look like:
 ```python
 {
     # The result type of the flow
-    'type': RESULT_TYPE_ABORT,
+    "type": RESULT_TYPE_ABORT,
     # the id of the flow
-    'flow_id': 'abcdfgh1234,
+    "flow_id": "abcdfgh1234",
     # handler name
-    'handler': 'hue',
+    "handler": "hue",
     # the abort reason
-    'reason': 'already_configured',
+    "reason": "already_configured",
 }
 ```
 
@@ -88,6 +90,7 @@ The bare minimum config flow:
 ```python
 from homeassistant import data_entry_flow
 
+
 @config_entries.HANDLERS.register(DOMAIN)
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
 
@@ -97,7 +100,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
     VERSION = 1
 
     async def async_step_user(self, user_input=None):
-        # Do something
+        """Handle user step."""
 ```
 
 ### Show Form
@@ -106,17 +109,14 @@ This result type will show a form to the user to fill in. You define the current
 
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
-
     async def async_step_user(self, user_input=None):
-        # Use OrderedDict to guarantee order of the form shown to the user
-        data_schema = OrderedDict()
-        data_schema[vol.Required('username')] = str
-        data_schema[vol.Required('password')] = str
+        # Specify items in the order they are to be displayed in the UI
+        data_schema = {
+            vol.Required("username"): str,
+            vol.Required("password"): str,
+        }
 
-        return self.async_show_form(
-            step_id='init',
-            data_schema=vol.Schema(data_schema)
-        )
+        return self.async_show_form(step_id="init", data_schema=vol.Schema(data_schema))
 ```
 
 After the user has filled in the form, the step method will be called again and the user input is passed in. Your step will only be called if the user input passes your data schema. When the user passes in data, you will have to do extra validation of the data. For example, you can verify that the passed in username and password are valid.
@@ -125,7 +125,6 @@ If something is wrong, you can return a dictionary with errors. Each key in the 
 
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
-
     async def async_step_user(self, user_input=None):
         errors = {}
         if user_input is not None:
@@ -135,17 +134,16 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
                 # See next section on create entry usage
                 return self.create_entry(...)
 
-            errors['base'] = 'auth_error'
+            errors["base"] = "auth_error"
 
-        # Use OrderedDict to guarantee order of the form shown to the user
-        data_schema = OrderedDict()
-        data_schema[vol.Required('username')] = str
-        data_schema[vol.Required('password')] = str
+        # Specify items in the order they are to be displayed in the UI
+        data_schema = {
+            vol.Required("username"): str,
+            vol.Required("password"): str,
+        }
 
         return self.async_show_form(
-            step_id='init',
-            data_schema=vol.Schema(data_schema),
-            errors=errors
+            step_id="init", data_schema=vol.Schema(data_schema), errors=errors
         )
 ```
 
@@ -155,7 +153,6 @@ If the user input passes validation, you can again return one of the three retur
 
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
-
     async def async_step_init(self, user_input=None):
         errors = {}
         if user_input is not None:
@@ -176,13 +173,12 @@ When the result is "Create Entry", an entry will be created and passed to the pa
 
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
-
     async def async_step_user(self, user_input=None):
         return self.create_entry(
-            title='Title of the entry',
+            title="Title of the entry",
             data={
-                'something_special': user_input['username']
-            }
+                "something_special": user_input["username"]
+            },
         )
 ```
 
@@ -192,11 +188,8 @@ When a flow cannot be finished, you need to abort it. This will finish the flow 
 
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
-
     async def async_step_user(self, user_input=None):
-        return self.async_abort(
-            reason='not_supported'
-        )
+        return self.async_abort(reason="not_supported")
 ```
 
 ### External Step & External Step Done
@@ -222,6 +215,7 @@ Example configuration flow that includes an external step.
 ```python
 from homeassistant import config_entries
 
+
 @config_entries.HANDLERS.register(DOMAIN)
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
     VERSION = 1
@@ -230,20 +224,15 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
     async def async_step_user(self, user_input=None):
         if not user_input:
             return self.async_external_step(
-                step_id='user',
-                url='https://example.com/?config_flow_id={}'.format(
-                    self.flow_id
-                ),
+                step_id="user",
+                url=f"https://example.com/?config_flow_id={self.flow_id}",
             )
 
         self.data = user_input
-        return self.async_external_step_done(next_step_id='finish')
+        return self.async_external_step_done(next_step_id="finish")
 
     async def async_step_finish(self, user_input=None):
-        return self.async_create_entry(
-            title=self.data['title'],
-            data=self.data
-        )
+        return self.async_create_entry(title=self.data["title"], data=self.data)
 ```
 
 Avoid doing work based on the external step data before you return an `async_mark_external_step_done`. Instead, do the work in the step that you refer to as `next_step_id` when marking the external step done. This will give the user a better user experience by showing a spinner in the UI while the work is done.
@@ -255,13 +244,14 @@ Example code to mark an external step as done:
 ```python
 from homeassistant import data_entry_flow
 
-async def handle_result(hass, flow_id, data):
-  result = await hass.config_entries.async_configure(flow_id, data)
 
-  if result['type'] == data_entry_flow.RESULT_TYPE_EXTERNAL_STEP_DONE:
-      return "success!"
-  else:
-      return "Invalid config flow specified"
+async def handle_result(hass, flow_id, data):
+    result = await hass.config_entries.async_configure(flow_id, data)
+
+    if result["type"] == data_entry_flow.RESULT_TYPE_EXTERNAL_STEP_DONE:
+        return "success!"
+    else:
+        return "Invalid config flow specified"
 ```
 
 ## Translations
@@ -273,14 +263,15 @@ Data entry flows depend on translations for showing the text in the forms. It de
 You might want to initialize a config flow programmatically. For example, if we discover a device on the network that requires user interaction to finish setup. To do so, pass a source parameter and optional user input when initializing a flow:
 
 ```python
-await flow_mgr.async_init('hue', context={'source': data_entry_flow.SOURCE_DISCOVERY}, data=discovery_info)
+await flow_mgr.async_init(
+    "hue", context={"source": data_entry_flow.SOURCE_DISCOVERY}, data=discovery_info
+)
 ```
 
 The config flow handler will not start with the `init` step. Instead, it will be instantiated with a step name equal to the source. The step should follow the same return values as a normal step.
 
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
-
     async def async_step_discovery(self, info):
-        # Handle discovery info
+        """Handle discovery info."""
 ```

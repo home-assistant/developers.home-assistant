@@ -33,12 +33,12 @@ You will need to run an editable version of your library if you want to try your
 
 Do so by going to your Home Assistant development environment, activating the virtual environment and typing:
 
-```
+```shell
 pip3 install -e ../my_lib_folder
 ```
 
 Now run Home Assistant without installing dependencies from PyPI to avoid overriding your package.
 
-```
+```shell
 hass --skip-pip
 ```

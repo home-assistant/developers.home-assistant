@@ -10,15 +10,15 @@ Below is an example switch entity that keeps track of their state in memory.
 ```python
 from homeassistant.components.switch import SwitchDevice
 
-class MySwitch(SwitchDevice):
 
+class MySwitch(SwitchDevice):
     def __init__(self):
         self._is_on = False
 
     @property
     def name(self):
         """Name of the device."""
-        return 'My Switch'
+        return "My Switch"
 
     @property
     def is_on(self):

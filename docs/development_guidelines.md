@@ -34,7 +34,7 @@ There is no need to add the platform or component name to the log messages. This
 _LOGGER.error("No route to device: %s", self._resource)
 ```
 
-```bash
+```log
 2017-05-01 14:28:07 ERROR [homeassistant.components.sensor.arest] No route to device: 192.168.0.18
 ```
 
@@ -45,7 +45,7 @@ Also note that `_LOGGER.info` is reserved for the core, use `_LOGGER.debug` for 
 
 Instead of order the imports manually, use [`isort`](https://github.com/timothycrosley/isort).
 
-```bash
+```shell
 $ pip3 install isort
 $ isort homeassistant/components/sensor/fixer.py
 ```
@@ -58,8 +58,8 @@ Prefer [f-strings](https://docs.python.org/3/reference/lexical_analysis.html#f-s
 # New
 f"{some_value} {some_other_value}"
 # Old, wrong
-"{} {}".format('New', 'style')
-"%s %s" % ('Old', 'style')
+"{} {}".format("New", "style")
+"%s %s" % ("Old", "style")
 ```
 
 One exception is for logging which uses the percentage formatting. This is to avoid formatting the log message when it is suppressed.

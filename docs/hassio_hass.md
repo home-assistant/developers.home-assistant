@@ -15,7 +15,7 @@ To develop for the frontend, we're going to need API access to the supervisor.
 - Install the Add-on "Remote API proxy"
 
 For some API commands you need explicit the Home Assistant API token, but 99% of the functionality work with `Remote API proxy`. This token change sometimes but you can read the current legal token on host system with:
-```sh
+```shell
 $ docker inspect homeassistant | grep HASSIO_TOKEN
 ```
 
@@ -25,7 +25,7 @@ $ docker inspect homeassistant | grep HASSIO_TOKEN
 
 First, make sure Home Assistant will load the Hass.io component by adding `hassio:` to your `configuration.yaml` file. Next, we will need to tell the local Home Assistant instance how to connect to the remote Hass.io instance. We do this by setting the `HASSIO` and `HASSIO_TOKEN` environment variables when starting Home Assistant. Note that the `HASSIO` value is not the same as the one that we saw above and the `HASSIO_TOKEN` is available inside log output of "Remote API Add-on" (This changes every restart of the add-on!).
 
-```bash
+```shell
 HASSIO=<IP OF HASS.IO>:80 HASSIO_TOKEN=<VALUE OF HASSIO_TOKEN> hass
 ```
 
@@ -47,7 +47,7 @@ hassio:
 
 To build a local version of the Hass.io panel, go to the frontend repository and run:
 
-```bash
+```shell
 cd hassio
 script/develop
 ```

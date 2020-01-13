@@ -26,7 +26,7 @@ Once you have located your add-on directory, it's time to get started!
  - Inside that directory create three files.
 
 `Dockerfile`:
-```
+```dockerfile
 ARG BUILD_FROM
 FROM $BUILD_FROM
 
@@ -55,7 +55,7 @@ CMD [ "/run.sh" ]
 ```
 
 `run.sh`:
-```bash
+```shell
 echo Hello world!
 ```
 Make sure your editor is using UNIX-like line breaks (LF), not Dos/Windows (CRLF).
@@ -102,7 +102,7 @@ To do this, we will need to update our files as follows:
 
 Add to your `Dockerfile` before `RUN`:
 
-```
+```dockerfile
 # Install requirements for add-on
 RUN apk add --no-cache python3
 
@@ -132,7 +132,7 @@ Add "ports" to `config.json`. This will make TCP on port 8000 inside the contain
 
 Update `run.sh` to start the Python 3 server:
 
-```
+```shell
 python3 -m http.server 8000
 ```
 

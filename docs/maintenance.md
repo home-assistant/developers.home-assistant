@@ -10,14 +10,14 @@ This page documents a couple of points for maintaining the Home Assistant code. 
 
 People are using various operating systems to develop components and platforms for Home Assistant. This could lead to different line endings on file. We prefer `LN`. Especially Microsoft Windows tools tend to use `CRLF`.
 
-```bash
+```shell
 $ find homeassistant -name "*.py" -exec file {} \; | grep BOM
 $ find homeassistant -name "*.py" -exec file {} \; | grep CRLF
 ```
 
 To fix the line separator, use `dos2unix` or `sed`.
 
-```bash
+```shell
 $ dos2unix homeassistant/components/notify/kodi.py
 ```
 
@@ -31,7 +31,7 @@ A lot of components and platforms depends on third-party Python modules. The dep
 
 If you update the requirements of a component/platform by updating `manifest.json`, run the provided script to update the `requirements_*.txt` file(s).
 
-```bash
+```shell
 $ script/gen_requirements_all.py
 ```
 
