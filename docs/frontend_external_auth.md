@@ -6,21 +6,25 @@ By default, the frontend will take care of its own authentication tokens. If non
 
 If you want to embed the Home Assistant frontend in an external app, you will want to store the authentication inside the app but make it available to the frontend. To support this, Home Assistant exposes an external authentication API.
 
-To activate this API, load the frontend with `?external_auth=1` appended to the URL. If this is passed in, Home Assistant will expect  either `window.externalApp` (for Android) or `window.webkit.messageHandlers` (for iOS) to be defined containing the methods described below.
+To activate this API, load the frontend with `?external_auth=1` appended to the URL. If this is passed in, Home Assistant will expect either `window.externalApp` (for Android) or `window.webkit.messageHandlers` (for iOS) to be defined containing the methods described below.
 
 ## Get Access Token
 
 _This API has been introduced in Home Assistant 0.78._
 
-When the frontend loads, it will request an access token from the external authentication. It does so by calling one of the following methods with an options object. The options object defines the callback method to be called with the response.
+When the frontend loads, it will request an access token from the external authentication. It does so by calling one of the following methods with an options object. The options object defines the callback method to be called with the response and an optional `force` boolean which is set to `true` if the access token should be refreshed, regardless if it has expired or not.
+
+The `force` boolean has been introduced in Home Assistant 0.104 and might not always be available.
 
 ```js
 window.externalApp.getExternalAuth({
-  callback: 'externalAuthSetToken'
+  callback: "externalAuthSetToken",
+  force: true
 });
 // or
 window.webkit.messageHandlers.getExternalAuth.postMessage({
-  callback: 'externalAuthSetToken'
+  callback: "externalAuthSetToken",
+  force: true
 });
 ```
 
@@ -29,8 +33,8 @@ The response should contain a boolean if it was successful and an object contain
 ```js
 // To be called by external app
 window.externalAuthSetToken(true, {
-  "access_token": "qwere",
-  "expires_in": 1800
+  access_token: "qwere",
+  expires_in: 1800
 });
 
 // If unable to get new access token
@@ -47,11 +51,11 @@ When the user presses the logout button on the profile page, the external app wi
 
 ```js
 window.externalApp.revokeExternalAuth({
-  callback: 'externalAuthRevokeToken'
+  callback: "externalAuthRevokeToken"
 });
 // or
 window.webkit.messageHandlers.revokeExternalAuth.postMessage({
-  callback: 'externalAuthRevokeToken'
+  callback: "externalAuthRevokeToken"
 });
 ```
 
