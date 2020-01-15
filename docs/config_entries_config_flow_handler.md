@@ -53,6 +53,33 @@ There are a few step names reserved for system use:
 | `ssdp`      | Invoked if your integration has been discovered via SSDP/uPnP as specified [using `ssdp` in the manifest](creating_integration_manifest.md#ssdp).             |
 | `discovery` | _DEPRECATED_ Invoked if your integration has been discovered by the discovery integration.                                                                    |
 
+## Unique IDs
+
+A config flow can attach a unique ID to a config flow to avoid the same device being set up twice. When a unique ID is set, it will immediately abort if another flow is in progress for this unique ID. You can also quickly abort if there is already an existing config entry for this ID. Config entries will get the unique ID of the flow that creates them.
+
+Call inside a config flow step:
+
+```python
+await self.async_set_unique_id(device_unique_id)
+self._abort_if_unique_id_configured()
+```
+
+By setting a unique ID, users will have the option to ignore the discovery of your config entry. That way they won't be bothered about it anymore.
+
+### Unignoring
+
+Your configuration flow can add support to re-discovered the previously ignored entry by implementing the unignore step in the config flow.
+
+```python
+async def async_step_unignore(self, user_input):
+    unique_id = user_input["unique_id"]
+    await self.async_set_unique_id(unique_id)
+
+    # TODO: Discover devices and find the one that matches the unique ID.
+
+    return self.async_show_form(…)
+```
+
 ## Discovery steps
 
 When an integration is discovered, their respective discovery step is invoked with the discovery information. The step will have to check the following things:
