@@ -10,8 +10,8 @@ The Integration Quality Scale scores each integration based on the code quality 
 
 This integration passes the bare minimum requirements to become part of the index.
 
- - Satisfy all requirements for [creating components](creating_component_code_review.md) and [creating platforms](creating_platform_code_review.md).
- - Configurable via `configuration.yaml`
+- Satisfy all requirements for [creating components](creating_component_code_review.md) and [creating platforms](creating_platform_code_review.md).
+- Configurable via `configuration.yaml`
 
 # Silver 🥈
 
@@ -34,14 +34,17 @@ This is a solid integration that is able to survive poor conditions and can be c
   - Don't allow configuring already configured device/service (example: no 2 entries for same hub)
   - Tests for the config flow
   - Discoverable (if available)
+  - Set unique ID in config flow (if available)
 - Entities have device info (if available) ([docs](device_registry_index.md#defining-devices))
-- States are translated in the frontend (text-based sensors only, [docs](internationalization_index.md))
-- Tests for reading data from/controlling the integration ([docs](development_testing.md))
+- Tests for fetching data from the integration and controlling it ([docs](development_testing.md))
 - Has a code owner ([docs](creating_integration_manifest.md#code-owners))
+- Entities only subscribe to updates inside `async_added_to_hass` and unsubscribe inside `async_will_remove_from_hass` ([docs](entity_index.md#lifecycle-hooks))
+- Entities have correct device classes where appropriate ([docs](entity_index.md#generic-properties))
+- Supports entities being disabled and leverages `Entity.entity_registry_enabled_default` to disable less popuplar entities ([docs](entity_index.md#advanced-properties))
 
 # Platinum 🏆
 
-Best of the best. The integration is completely async, meaning it's super fast. Integrations that reach platinum level will require  approval by the code owner for each PR.
+Best of the best. The integration is completely async, meaning it's super fast. Integrations that reach platinum level will require approval by the code owner for each PR.
 
 - Set appropriate `PARALLEL_UPDATES` constant
 - Support config entry unloading (called when config entry is removed)
@@ -51,4 +54,3 @@ Best of the best. The integration is completely async, meaning it's super fast. 
 # Internal 🏠
 
 Integrations which are part of Home Assistant are not rated but marked as **internal**.
-
