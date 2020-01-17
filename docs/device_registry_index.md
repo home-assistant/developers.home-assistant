@@ -77,3 +77,6 @@ device_registry.async_get_or_create(
     sw_version=config.swversion,
 )
 ```
+
+### Battery
+Within the Home Assistant UI for displaying Devices, all columns are populated from the `device_info` property, except for the Battery which will only be populated if there is a [binary sensor](entity_binary_sensor.md) or [sensor](entity_sensor.md) entity associated with the Device with a `device_class` property set to `battery`.
