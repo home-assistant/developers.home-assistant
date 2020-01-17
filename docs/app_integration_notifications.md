@@ -2,7 +2,7 @@
 title: "Push Notifications"
 ---
 
-The `mobile_app` component has a notify platform built in that allows for a generic way to send push notifications to your users without requiring installation of a external custom component.
+The `mobile_app` component has a notify platform built in that allows for a generic way to send push notifications to your users without requiring installation of an external custom component.
 
 ## Enabling push notifications
 
