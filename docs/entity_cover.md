@@ -19,7 +19,7 @@ A cover entity is a device that controls an opening or cover, such as a garage d
 | is_closing | bool | None | If the cover is closing or not. Used to determine `state`.
 | is_closed | bool | `NotImplementedError()` | If the cover is closed or not.  if the state is unknown, return `None`. Used to determine `state`.
 
-### Entity Properties (base class properties which may be overriden)
+### Entity Properties (base class properties which may be overridden)
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
@@ -35,7 +35,7 @@ A cover entity is a device that controls an opening or cover, such as a garage d
 | `DEVICE_CLASS_DAMPER` | Control of a mechanical damper that reduces air flow, sound, or light.
 | `DEVICE_CLASS_DOOR` | Control of a door or gate that provides access to an area.
 | `DEVICE_CLASS_GARAGE` | Control of a garage door that provides access to a garage.
-| `DEVICE_CLASS_SHADE` | Control of shades, which are a continous plane of material or connected cells that expanded or collapsed over an opening, such as window shades.
+| `DEVICE_CLASS_SHADE` | Control of shades, which are a continuous plane of material or connected cells that expanded or collapsed over an opening, such as window shades.
 | `DEVICE_CLASS_SHUTTER` | Control of shutters, which are linked slats that swing out/in to cover an opening or may be tilted to partially cover an opening, such as indoor or exterior window shutters.
 | `DEVICE_CLASS_WINDOW` | Control of a physical window that opens and closes or may tilt.
 

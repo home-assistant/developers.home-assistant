@@ -122,7 +122,7 @@ The config for an add-on is stored in `config.json`.
 | host_dbus | bool | no | Default False. Map Host dbus service into add-on.
 | host_pid | bool | no | Default False. Allow to run container on host PID namespace. Work only for not protected add-ons.
 | devices | list | no | Device list to map into the add-on. Format is: `<path_on_host>:<path_in_container>:<cgroup_permissions>`. i.e. `/dev/ttyAMA0:/dev/ttyAMA0:rwm`
-| udev | bool | no | Default False. Set this True, if your container run a own udev process.
+| udev | bool | no | Default False. Set this True, if your container runs a udev process of its own.
 | auto_uart | bool | no | Default False. Auto mapping all UART/Serial device from host into add-on.
 | homeassistant | string | no | Pin a minimum required Home Assistant version for such Add-on. Value is a version string like `0.91.2`.
 | hassio_role | str | no | Default `default`. Role based access to Hass.io API. Available: `default`, `homeassistant`, `backup`, `manager`, `admin`.
