@@ -349,7 +349,7 @@ $ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 
 Updates or creates a state. You can create any state that you want, it does not have to be backed by an entity in Home Assistant. 
 
-> :info: NOTE: By using this endpoint, you are only telling Home Assistant what state to consider the entity in; this endpoint has **no impact** on the actual state of the device/integration that the entity is a part of. To control the device/integration itself, use the [POST /api/services/&lt;domain>/&lt;service>](#post-apiservicesltdomainltservice) endpoint instead.
+> :info: NOTE: This endpoint sets the representation of a device within Home Asistant and will not communicate with the actual device. To communicate with the actual device, use the [POST /api/services/&lt;domain>/&lt;service>](#post-apiservicesltdomainltservice) endpoint instead.
 
 Expects a JSON object that has at least a state attribute:
 
