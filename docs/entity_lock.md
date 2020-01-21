@@ -15,12 +15,6 @@ A lock entity is a device which is able to lock and unlock. Locking and unlockin
 | code_format | string | None | Regex for code format or None if no code is required.
 | is_locked | bool | None | Indication of whether the lock is currently locked. Used to determine `state`.
 
-### States
-| Constant | Description
-|----------|------------------------|
-| `STATE_LOCKED` | The lock is locked.
-| `STATE_UNLOCKED` | The lock is unlocked.
-
 ### Supported Features
 
 Supported features constants are combined using the bitwise or (`|`) operator.
@@ -68,31 +62,3 @@ class MyLock(LockDevice):
     async def async_open(self, **kwargs):
         """Open (unlatch) all or specified locks. A code to open the lock with may optionally be specified."""
 ```
-
-### Set usercode
-
-```python
-class MyLock(LockDevice):
-
-    def set_usercode(self, **kwargs):
-        """Set a usercode on the lock."""
-```
-
-### Get usercode
-
-```python
-class MyLock(LockDevice):
-
-    def get_usercode(self, **kwargs):
-        """Retrive a usercode from the lock."""
-```
-
-### Clear usercode
-
-```python
-class MyLock(LockDevice):
-
-    def clear_usercode(self, **kwargs):
-        """Clear a usercode from the lock."""
-```
-
