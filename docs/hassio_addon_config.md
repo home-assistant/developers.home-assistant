@@ -154,7 +154,7 @@ The config for an add-on is stored in `config.json`.
 | panel_icon | string | no | Default: mdi:puzzle. MDI icon for the menu panel integration.
 | panel_title | string | no | Default add-on name, but can Modify with this options.
 | panel_admin | bool | no | Default True. Make menu entry only available with admin privileged.
-| snapshot_exlude | list | no | List of file/path with glob support they are excluded from snapshots.
+| snapshot_exclude | list | no | List of file/path with glob support they are excluded from snapshots.
 
 
 ### Options / Schema
