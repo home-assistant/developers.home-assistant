@@ -84,6 +84,7 @@ The logged in user.
   "id": "758186e6a1854ee2896efbd593cb542c",
   "name": "Paulus",
   "is_owner": true,
+  "is_admin": true,
   "credentials": [
     {
       "auth_provider_type": "homeassistant",
