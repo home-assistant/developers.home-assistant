@@ -1,18 +1,20 @@
 ---
-title: "Presenting your add-on"
+title: "Presenting your addon"
 ---
 
 If you decide to share your add-on to the public, paying attention to details is recommended. Of course, your add-on should have a proper name and description, but Hass.io also gives you some other tools to present your add-on even nicer.
+
+## Adding intro
+
+This shows in add-on store and give the user a short instruction what the addon can.
+
+This file containing the intro is usually referred to as the "README", which is generally published as the `README.md` file.
 
 ## Adding documentation
 
 Good documentation helps the consumer of your add-on to understand its usage, explains configuration options, points users in the right direction in the case they have questions or issues, and contains the license under which the add-on was published.
 
-This file containing the documentation is usually referred to as the "README", which is generally published as the `README.md` file.
-
-Take a look at other projects for inspiration. For example, see the `README.md` of the [Community Hass.io Add-ons: Homebridge](https://github.com/hassio-addons/addon-homebridge/blob/master/README.md) add-on.
-
-In future versions of Hass.io, the `README.md` file will be displayed in the Home Assistant frontend.
+This file containing the documentation is usually referred to as the "DOC", which is generally published as the `DOC.md` file.
 
 ## Add-on icon & logo
 
