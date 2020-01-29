@@ -155,6 +155,8 @@ The config for an add-on is stored in `config.json`.
 | panel_title | string | no | Default add-on name, but can Modify with this options.
 | panel_admin | bool | no | Default True. Make menu entry only available with admin privileged.
 | snapshot_exclude | list | no | List of file/path with glob support they are excluded from snapshots.
+| advanced | bool | no | Default False. Make addon visible on simle mode or not.
+| stage | string | no | Default `stable`. Flag add-on with follow attribute: `stable`, `experimental`, `deprecated`
 
 
 ### Options / Schema
