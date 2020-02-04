@@ -6,6 +6,8 @@ authorTwitter: balloob
 title: Simple Mode in Home Assistant 1.0
 ---
 
+> This blog post references simple and advanced mode. This has since been renamed to standard mode and advanced mode.
+
 The Home Assistant UI has two different modes. There is a simple mode and an advanced mode. Simple mode has been introduced recently in [Home Assistant 0.96](https://www.home-assistant.io/blog/2019/07/17/release-96/#advanced-mode). In this post I want to outline my vision for simple mode in Home Assistant 1.0.
 
 **With simple mode we focus on the core Home Assistant experience. We're trying to answer the question: what is it that we want anyone to be able to do. Can we make it intuitive enough that people, young and old, can install Home Assistant and use it.**
