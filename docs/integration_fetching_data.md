@@ -119,13 +119,13 @@ class MyEntity(entity.Entity):
 
 ## One API endpoint per device
 
-If your one API endpoint is mapping to multiple entities, please see the previous section. Even if there are many endpoints, it's best to use a coordinator per endpoint to manage this data.
+Some APIs will offer an endpoint per device. It sometimes won't be possible to map a device from your API to a single entity. If you create multiple entities from a single API device endpoint, please see the preivous section.
 
-If you can map exactly one endpoint to a single device, you can fetch the data for this entity inside the `update()`/`async_update()` methods. Make sure polling is set to `True` and Home Assistant will call this method regularly.
+If you can map exactly one device endpoint to a single entity, you can fetch the data for this entity inside the `update()`/`async_update()` methods. Make sure polling is set to `True` and Home Assistant will call this method regularly.
 
 If your entities need to fetch data before being written to Home Assistant for the first time, pass `True` to the `add_entities` method: `add_entities([MyEntity()], True)`.
 
-You can control the polling interval for your integration by defining a `SCAN_INTERVAL` constant in your platform.
+You can control the polling interval for your integration by defining a `SCAN_INTERVAL` constant in your platform. Careful with setting this too low. It will take up resources in Home Assistant, can overwelm the device hosting the API or can get you blocked from cloud APIs.
 
 ```python
 from datetime import timedelta
