@@ -62,6 +62,27 @@ These are functions that are safe to run both in a thread and inside the event l
 
 There is no special annotation to mark functions as part of this category and care should be taken when using these functions from inside the event loop. When in doubt, look at their implementation.
 
+## Calling functions in async context
+
+There are mutliple ways to execute the different types of functions when being in the event loop (async context). All of the listed functions are methods of the HomeAssistant object.
+
+- Call sync functions: `async_add_executor_job`
+
+   They will be scheduled in the executor thread pool and can be awaited.
+- Call coroutines: `async_create_task`
+
+   Schedule coroutines. Returns the task object.
+- Call callback functions:
+
+   call directly without await.
+- Call async functions: `await ...`
+
+Additionally there are some legacy functions:
+
+- `add_job` - Same as `async_add_job` but without the possiblity to wait for it.
+- `async_add_job` - Can handle sync and async jobs. Legacy for general use. Still needed in some core places where we can't predict the type of job.
+- `async_run_job` - Legacy for general use. Just used in some core places.
+
 ## Other functions
 
 These are all the functions that did not fit in the previous categories. These functions are either thread-safe or not considered safe to be run within the event loop. These are functions that use sleep, or perform I/O.
