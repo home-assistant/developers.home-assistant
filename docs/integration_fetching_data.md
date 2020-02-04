@@ -14,12 +14,12 @@ With polling, we will fetch the latest data from the API at a specified interval
 
 Because polling is so common, Home Assistant by default assumes that your entity is based on polling. If this is not the case, return `False` from the `should_poll` property. When you disable polling, your integration will be responsible for calling one of the methods to indicate to Home Assistant that it's time to write the entity state to Home Assistant:
 
-- `Entity.schedule_update_ha_state(update_data=False)`/`Entity.async_schedule_update_ha_state(update_data=False)` will schedule an update of the entity. If `update_data` is set to `True`, Home Assistant will call your entities update method (`update()`/`async_update()`) prior to writing the state.
+- `Entity.schedule_update_ha_state(force_refresh=False)`/`Entity.async_schedule_update_ha_state(force_refresh=False)` will schedule an update of the entity. If `force_refresh` is set to `True`, Home Assistant will call your entities update method (`update()`/`async_update()`) prior to writing the state.
 - `Entity.async_write_ha_state()` is an async callback that will write the state to the state machine within yielding to the event loop. It will not call your entity update method.
 
 # Polling API endpoints
 
-We're going to explain a few different API types ones here and the best way to integrate them in Home Assistant. Note that some integrations will encounter a combination of the ones below.
+We're going to explain a few different API types here and the best way to integrate them in Home Assistant. Note that some integrations will encounter a combination of the ones below.
 
 ## One API endpoint with all the data
 
@@ -123,7 +123,7 @@ If your one API endpoint is mapping to multiple entities, please see the previou
 
 If you can map exactly one endpoint to a single device, you can fetch the data for this entity inside the `update()`/`async_update()` methods. Make sure polling is set to `True` and Home Assistant will call this method regularly.
 
-If your entities need to fetch data before being written to Home Assistan for the first time, pass `True` to the `add_entities` method: `add_entities([MyEntity()], True)`.
+If your entities need to fetch data before being written to Home Assistant for the first time, pass `True` to the `add_entities` method: `add_entities([MyEntity()], True)`.
 
 You can control the polling interval for your integration by defining a `SCAN_INTERVAL` constant in your platform.
 
@@ -141,6 +141,6 @@ Home Assistant has built-in logic to make sure that integrations don't hammer se
 
 Home Assistant controls the number of parallel requests by maintaining a [semaphore](https://docs.python.org/3/library/asyncio-sync.html#asyncio.Semaphore). For example, if the semaphore allows 1 parallel connection, updates and service calls will wait if one is in progress. If the value is 0, the integration is itself responsible for limiting the number of parallel requests if necessary.
 
-The default value for parallel requests for a platform is decided based on the first entity that is added to Home Assistant. It's 1 if the entity defines the `async_update` method, else it's 0. (this is a legacy decision)
+The default value for parallel requests for a platform is decided based on the first entity that is added to Home Assistant. It's 0 if the entity defines the `async_update` method, else it's 1. (this is a legacy decision)
 
-Platforms can override teh default by defining the `PARALLEL_UPDATES` constant in their platform (ie `rflink/light.py`).
+Platforms can override the default by defining the `PARALLEL_UPDATES` constant in their platform (ie `rflink/light.py`).
