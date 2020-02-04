@@ -33,8 +33,8 @@ If `disable_new_entities` is set to `True` and `entity_registry_enabled_default`
 
 ## Integrations offering options to control disabled_by
 
-Some integrations will want to offer options to the user to control which entities are being added to Home Assistant. For example, the Unifi integration might want to offer to only include wireless clients but exclude wired clients. Another example is that the Hue integration offers an option to make the groups defined inside Hue available in Home Assistant.
+Some integrations will want to offer options to the user to control which entities are being added to Home Assistant. For example, the Unifi integration offers options to enable/disable wireless and wired clients.
 
 Integrations can offer options to users either via [configuration.yaml](configuration_yaml_index) or using an [Options Flow](config_entries_options_flow_handler.md).
 
-If this option is offered by integrations, you should not leverage the disabled_by property in the entity registry. Instead, when enabled, all entities that are no longer going to be added to Home Assistant should be unloaded and removed from the entity registry.
+If this option is offered by integrations, you should not leverage the disabled_by property in the entity registry. Instead, if entities are disabled via a config options flow, remove them from the device and entity registry.
