@@ -41,6 +41,7 @@ This is a solid integration that is able to survive poor conditions and can be c
 - Entities only subscribe to updates inside `async_added_to_hass` and unsubscribe inside `async_will_remove_from_hass` ([docs](entity_index.md#lifecycle-hooks))
 - Entities have correct device classes where appropriate ([docs](entity_index.md#generic-properties))
 - Supports entities being disabled and leverages `Entity.entity_registry_enabled_default` to disable less popular entities ([docs](entity_index.md#advanced-properties))
+- If the device/service API can remove entities, the integration should make sure to clean up the entity and device registry.
 
 # Platinum 🏆
 
