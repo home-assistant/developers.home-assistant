@@ -21,11 +21,11 @@ Because polling is so common, Home Assistant by default assumes that your entity
 
 We're going to explain a few different API types here and the best way to integrate them in Home Assistant. Note that some integrations will encounter a combination of the ones below.
 
-## One API endpoint with all the data
+## Coordinated, single API poll for data for all entities
 
-This API will have a single method to fetch data for all the entities that you have in Home Assistant. In this case we'll want to poll this endpoint on an interval and then let entities know as soon as new data is available.
+This API will have a single method to fetch data for all the entities that you have in Home Assistant. In this case we will want to have a single periodical poll on this endpoint, and then let entities know as soon as new data is available for them.
 
-Home Assistant provides a Data Update Coordinator class to help you manage this as efficient as possible.
+Home Assistant provides a DataUpdateCoordinator class to help you manage this as efficiently as possible.
 
 ```python
 import logging
@@ -137,9 +137,9 @@ SCAN_INTERVAL = timedelta(seconds=5)
 
 > This is an advanced topic.
 
-Home Assistant has built-in logic to make sure that integrations don't hammer services/APIs and consume all available resources in Home Assistant. This logic is built around limiting the number of parallel requests. This logic is automatically used during service calls and entity updates.
+Home Assistant has built-in logic to make sure that integrations do not hammer APIs and consume all available resources in Home Assistant. This logic is built around limiting the number of parallel requests. This logic is automatically used during service calls and entity updates.
 
-Home Assistant controls the number of parallel requests by maintaining a [semaphore](https://docs.python.org/3/library/asyncio-sync.html#asyncio.Semaphore). For example, if the semaphore allows 1 parallel connection, updates and service calls will wait if one is in progress. If the value is 0, the integration is itself responsible for limiting the number of parallel requests if necessary.
+Home Assistant controls the number of parallel updates (calls to `update()`) by maintaining a [semaphore](https://docs.python.org/3/library/asyncio-sync.html#asyncio.Semaphore) per integration. For example, if the semaphore allows 1 parallel connection, updates and service calls will wait if one is in progress. If the value is 0, the integration is itself responsible for limiting the number of parallel requests if necessary.
 
 The default value for parallel requests for a platform is decided based on the first entity that is added to Home Assistant. It's 0 if the entity defines the `async_update` method, else it's 1. (this is a legacy decision)
 
