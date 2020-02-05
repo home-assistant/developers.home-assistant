@@ -72,7 +72,8 @@
       "dev_101_services",
       "creating_platform_index",
       "creating_component_generic_discovery",
-      "reproduce_state_index"
+      "reproduce_state_index",
+      "integration_fetching_data"
     ],
     "Development Checklist": [
       "development_checklist",
