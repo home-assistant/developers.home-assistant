@@ -12,10 +12,10 @@ With push, we subscribe to an API and we get notified by the API when new data i
 
 With polling, we will fetch the latest data from the API at a specified interval. Your integration will then supply this data to its entity, which is written to Home Assistant.
 
-Because polling is so common, Home Assistant by default assumes that your entity is based on polling. If this is not the case, return `False` from the `should_poll` property. When you disable polling, your integration will be responsible for calling one of the methods to indicate to Home Assistant that it's time to write the entity state to Home Assistant:
+Because polling is so common, Home Assistant by default assumes that your entity is based on polling. If this is not the case, return `False` from the `Entity.should_poll` property. When you disable polling, your integration will be responsible for calling one of the methods to indicate to Home Assistant that it's time to write the entity state to Home Assistant:
 
+- If you are executing from within an async function and don't need your entity update method called, call `Entity.async_write_ha_state()`. This is an async callback that will write the state to the state machine within yielding to the event loop.
 - `Entity.schedule_update_ha_state(force_refresh=False)`/`Entity.async_schedule_update_ha_state(force_refresh=False)` will schedule an update of the entity. If `force_refresh` is set to `True`, Home Assistant will call your entities update method (`update()`/`async_update()`) prior to writing the state.
-- `Entity.async_write_ha_state()` is an async callback that will write the state to the state machine within yielding to the event loop. It will not call your entity update method.
 
 # Polling API endpoints
 
