@@ -49,19 +49,19 @@ async def create_coordinator(api):
         hass,
         _LOGGER,
         # Name of the data. For logging purposes.
-        "sensor",
-        async_update_data,
+        name="sensor",
+        update_method=async_update_data,
         # Polling interval. Will only be polled if there are subscribers.
-        timedelta(seconds=30),
+        update_interval=timedelta(seconds=30),
         # Debouncer to limit request_refresh
-        debounce.Debouncer(
+        request_refresh_debouncer=debounce.Debouncer(
             hass,
             _LOGGER,
             # Timeout to wait between refreshes
-            0.3,
+            cooldown=0.3,
             # When a refresh is requested, should we refresh right await and then wait
             # Or should we wait and refresh at the end of timeout.
-            True
+            immediate=True
         ),
     )
 
