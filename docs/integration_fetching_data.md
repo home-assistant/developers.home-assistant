@@ -32,18 +32,24 @@ import logging
 
 from homeassistant.helpers import debounce, entity
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
-
+from .const import DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 
-async def create_coordinator(api):
+async def async_setup_entry(hass, entry, async_add_entities):
+    # assuming API object stored here by __init__.py
+    api = hass.data[DOMAIN][entry.entry_id]  
+    
     async def async_update_data():
-        """Fetch data from API endpoint."""
+        """Fetch data from API endpoint.
+        
+        This is the place to pre-process the data to lookup tables
+        so entities can quickly look up their data.
+        """
         try:
-            await api.fetch_data()
+            return await api.fetch_data()
         except ApiError:
             raise UpdateFailed
-
 
     coordinator = DataUpdateCoordinator(
         hass,
@@ -53,28 +59,28 @@ async def create_coordinator(api):
         update_method=async_update_data,
         # Polling interval. Will only be polled if there are subscribers.
         update_interval=timedelta(seconds=30),
-        # Debouncer to limit request_refresh
-        request_refresh_debouncer=debounce.Debouncer(
-            hass,
-            _LOGGER,
-            # Timeout to wait between refreshes
-            cooldown=0.3,
-            # When a refresh is requested, should we refresh right await and then wait
-            # Or should we wait and refresh at the end of timeout.
-            immediate=True
-        ),
     )
 
     # Fetch initial data so we have data when entities subscribe
     await coordinator.async_refresh()
 
-    return coordinator
+    async_add_entities(MyEntity(coordinator, idx) for idx, ent
+                       in enumerate(coordinator.data))
 
 
 class MyEntity(entity.Entity):
 
-    def __init__(self, coordinator):
+    def __init__(self, coordinator, idx):
         self.coordinator = coordinator
+        self.idx = idx
+
+    @property
+    def is_on(self):
+      """Return entity state.
+      
+      Example to show how we fetch data from coordinator.
+      """
+      self.coordinator.data[self.idx]['state']
 
     @property
     def should_poll(self):
