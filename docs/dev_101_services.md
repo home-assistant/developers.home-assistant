@@ -69,8 +69,39 @@ set_speed:
       # Description of the field
       description: Name(s) of the entities to set
       # Example value that can be passed for this field
-      example: 'fan.living_room'
+      example: "fan.living_room"
     speed:
       description: Speed setting
-      example: 'low'
+      example: "low"
+```
+
+## Entity Services
+
+Sometimes you want to provide extra services to control your entities. For example, the Sonos integration provides services to group and ungroup devices. Entity services are special because there are many different ways a user can specify entities. It can use areas, a group or a list of entities.
+
+You need to register entity services in your platforms, like `<your-domain>/media_player.py`. These services will be made available under your domain and not the media player domain. Example code:
+
+```python
+from homeassistant.helpers import config_validation as cv, entity_platform, service
+
+async def async_setup_entry(hass, entry):
+    """Set up the media player platform for Sonos."""
+
+    platform = entity_platform.current_platform.get()
+
+    # This will call Entity.set_sleep_timer(sleep_time=VALUE)
+    platform.async_register_entity_service(
+        SERVICE_SET_TIMER,
+        {
+            vol.Required('sleep_time'): cv.time_period,
+        },
+        "set_sleep_timer",
+    )
+```
+
+If you need more control over the service call, you can also pass an async function that instead of `"set_sleep_timer"`:
+
+```python
+async def custom_set_sleep_timer(entity, service_call):
+    await entity.set_sleep_timer(service_call.data['sleep_time'])
 ```
