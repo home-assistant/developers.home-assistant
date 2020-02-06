@@ -202,6 +202,7 @@ We support:
 - float / float(min,) / float(,max) / float(min,max)
 - email
 - url
+- password
 - port
 - match(REGEX)
 - list(val1|val2|...)
