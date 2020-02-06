@@ -136,6 +136,7 @@ The config for an add-on is stored in `config.json`.
 | map | list | no | List of maps for additional Hass.io folders. Possible values: `config`, `ssl`, `addons`, `backup`, `share`. Defaults to `ro`, which you can change by adding `:rw` to the end of the name.
 | environment | dict | no | A dict of environment variable to run add-on.
 | audio | bool | no | Boolean. Mark this add-on to use internal an audio system. The ALSA configuration for this add-on will be mount automatic.
+| video | bool | no | Boolean. Mark this add-on touse internal an video system. All available devices will be mapped into addon.
 | gpio | bool | no | Boolean. If this is set to True, `/sys/class/gpio` will map into add-on for access to GPIO interface from kernel. Some library need also `/dev/mem` and `SYS_RAWIO` for read/write access to this device. On system with AppArmor enabled, you need disable AppArmor or better for security, provide you own profile for the add-on.
 | devicetree | bool | no | Boolean. If this is set to True, `/device-tree` will map into add-on.
 | kernel_modules | bool | no | Map host kernel modules and config into add-on (readonly).
