@@ -734,6 +734,58 @@
       "version-0.104.0/version-0.104.0-reproduce_state_index": {
         "title": "Reproduce State / Scene support"
       },
+      "version-0.105.0/version-0.105.0-app_integration_notifications": {
+        "title": "Push Notifications"
+      },
+      "version-0.105.0/version-0.105.0-app_integration_sensors": {
+        "title": "Sensors"
+      },
+      "version-0.105.0/version-0.105.0-dev_101_services": {
+        "title": "Integration Services",
+        "sidebar_label": "Custom Services"
+      },
+      "version-0.105.0/version-0.105.0-device_automation_condition": {
+        "title": "Device Conditions",
+        "sidebar_label": "Conditions"
+      },
+      "version-0.105.0/version-0.105.0-documentation_standards": {
+        "title": "Standards"
+      },
+      "version-0.105.0/version-0.105.0-entity_cover": {
+        "title": "Cover Entity",
+        "sidebar_label": "Cover"
+      },
+      "version-0.105.0/version-0.105.0-entity_index": {
+        "title": "Entity",
+        "sidebar_label": "Introduction"
+      },
+      "version-0.105.0/version-0.105.0-entity_lock": {
+        "title": "Lock Entity",
+        "sidebar_label": "Lock"
+      },
+      "version-0.105.0/version-0.105.0-entity_registry_disabled_by": {
+        "title": "Entity Registry and disabling entities",
+        "sidebar_label": "Disabling entities"
+      },
+      "version-0.105.0/version-0.105.0-external_api_rest": {
+        "title": "REST API"
+      },
+      "version-0.105.0/version-0.105.0-frontend_data": {
+        "title": "Frontend data",
+        "sidebar_label": "Data"
+      },
+      "version-0.105.0/version-0.105.0-hassio_addon_config": {
+        "title": "Add-On Configuration"
+      },
+      "version-0.105.0/version-0.105.0-hassio_addon_presentation": {
+        "title": "Presenting your addon"
+      },
+      "version-0.105.0/version-0.105.0-integration_fetching_data": {
+        "title": "Fetching Data"
+      },
+      "version-0.105.0/version-0.105.0-integration_quality_scale_index": {
+        "title": "Integration Quality Scale"
+      },
       "version-0.72/version-0.72-architecture_components": {
         "title": "Components Architecture",
         "sidebar_label": "Components"
