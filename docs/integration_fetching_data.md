@@ -28,9 +28,10 @@ This API will have a single method to fetch data for all the entities that you h
 Home Assistant provides a DataUpdateCoordinator class to help you manage this as efficiently as possible.
 
 ```python
+from datetime import timedelta
 import logging
 
-from homeassistant.helpers import debounce, entity
+from homeassistant.helpers import entity
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 from .const import DOMAIN
 
@@ -39,10 +40,10 @@ _LOGGER = logging.getLogger(__name__)
 async def async_setup_entry(hass, entry, async_add_entities):
     # assuming API object stored here by __init__.py
     api = hass.data[DOMAIN][entry.entry_id]  
-    
+
     async def async_update_data():
         """Fetch data from API endpoint.
-        
+
         This is the place to pre-process the data to lookup tables
         so entities can quickly look up their data.
         """
@@ -77,7 +78,7 @@ class MyEntity(entity.Entity):
     @property
     def is_on(self):
       """Return entity state.
-      
+
       Example to show how we fetch data from coordinator.
       """
       self.coordinator.data[self.idx]['state']
@@ -90,7 +91,7 @@ class MyEntity(entity.Entity):
     @property
     def available(self):
         """Return if entity is available."""
-        return not self.coordinator.failed_last_update
+        return self.coordinator.last_update_success
 
     async def async_added_to_hass(self):
         """When entity is added to hass."""
