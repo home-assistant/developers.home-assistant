@@ -11,6 +11,7 @@ Since 0.92.0, every integration has a manifest file to specify basic information
   "name": "Philips Hue",
   "documentation": "https://www.home-assistant.io/components/hue",
   "dependencies": ["mqtt"],
+  "after_dependencies": ["http"],
   "codeowners": ["@balloob"],
   "requirements": ["aiohue==1.9.1"],
   "quality_scale": "platinum"
@@ -45,6 +46,10 @@ The website containing documentation on how to use your integration. If this int
 ## Dependencies
 
 Dependencies are other Home Assistant integrations that you want Home Assistant to set up successfully prior to the integration being loaded. This can be necessary in case you want to offer functionality from that other integration, like using webhooks or an MQTT connection.
+
+## After dependencies
+
+This option is used to specify optional dependencies that might be used. When `after_dependencies` is present, set up of an integration will wait for the other dependency to be set up before being set up. It will also make sure that the requirements of `after_dependencies` are installed so methods from the integration can be safely imported.  
 
 ## Code Owners
 
