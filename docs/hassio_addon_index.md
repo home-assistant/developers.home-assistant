@@ -19,11 +19,11 @@ Under the hood, add-ons are Docker images published in [Docker Hub](https://hub.
 
 Useful links:
 
-* [Hass.io Supervisor](https://github.com/home-assistant/hassio)
-* [Hass.io Core Add-ons](https://github.com/home-assistant/hassio-addons)
-* [Hass.io Build environment](https://github.com/home-assistant/hassio-build)
-* [Hass.io base images](https://github.com/home-assistant/hassio-base)
-* [Hass.io Builder](https://github.com/home-assistant/hassio-builder)
-* [Hass.io community Add-ons](https://github.com/hassio-addons)
+* [Supervisor](https://github.com/home-assistant/supervisor)
+* [Core Add-ons](https://github.com/home-assistant/hassio-addons)
+* [Build environment](https://github.com/home-assistant/hassio-build)
+* [base images](https://github.com/home-assistant/docker-base)
+* [Builder](https://github.com/home-assistant/hassio-builder)
+* [Home Assistant community Add-ons](https://github.com/hassio-addons)
 * [HassOS embedded Linux](https://github.com/home-assistant/hassos)
-* [Home Assistant Dockerfile](https://github.com/home-assistant/hassio-homeassistant)
+* [Home Assistant Dockerfile](https://github.com/home-assistant/docker)
