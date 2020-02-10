@@ -47,3 +47,13 @@ Region specific translations (`en-US`, `fr-CA`) will only be included if transla
 2. Add the language tag and native name in `src/translations/translationMetadata.json`.  Examples: "Français", "Français (CA)"
 3. Add the new language in Lokalize.
 Note: Sometimes you have to change the tag in Lokalise (Language -> Language settings -> custom ISO code).
+
+## Language specific guidelines
+Most languages have multiple possibilities of translating a sentence. Please take a look at the guidelines for your language here, where you can also find some typical mistakes to prevent.
+The sections are written in their corresponding languages, as this makes explaining the grammar easier and only native speakers should submit translations (see [Rules](#rules)).
+
+### German
+- Du/Sie: Dutze in den Übersetzungen, und verwende nicht das formale "Sie".
+
+#### Typische Fehler
+- Achte auf den richtigen Imperativ. Der Imperativ ist die Befehlsform, z. B. "Gib mir das Wasser". Falsch wäre hier: "Gebe mir das Wasser" (siehe (Bildung des Imperativs)[https://www.duden.de/sprachwissen/sprachratgeber/Bildung-des-Imperativs]).
