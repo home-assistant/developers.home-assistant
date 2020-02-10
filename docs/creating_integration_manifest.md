@@ -49,7 +49,7 @@ Dependencies are other Home Assistant integrations that you want Home Assistant 
 
 ## After dependencies
 
-When `after_dependencies` is present, set up of an integration will wait for the other dependency to be set up before being set up.  
+When `after_dependencies` is present, set up of an integration will wait for the other dependency to be set up before being set up. It will also make sure that the requirements of `after_dependencies` are installed so the integration can be safely imported.  
 
 ## Code Owners
 
