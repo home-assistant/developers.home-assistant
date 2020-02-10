@@ -11,7 +11,7 @@ We use an internal network that's allowed to communicate with every add-on, incl
 Names/aliases are used for communication inside Hass.io.
 The name is generated using the following format: `{REPO}_{SLUG}`, e.g., `local_xy` or `3283fh_myaddon`. In this example, `{SLUG}` is defined in an add-on's `config.json` file. You can use this name as the DNS name also, but you need replace any `_` with `-` to have a valid hostname. If an add-on is installed locally, `{REPO}` will be `local`. If the add-on is installed from a Github repository, `{REPO}` is a hashed identifier generated from the GitHub repository's URL (ex: https://github.com/xy/my_hassio_addons). See [here](https://github.com/home-assistant/hassio/blob/587047f9d648b8491dc8eef17dc6777f81938bfd/hassio/addons/utils.py#L17) to understand how this identifier is generated. Note that this identifier is required in certain service calls that use the [Supervisor add-on API][supervisor-addon-api]. You can view the repository identifiers for all currently-installed add-ons via a GET request to the hassio API `addons` endpoint.
 
-Use `hassio` for communication with the internal API.
+Use `supervisor` for communication with the internal API.
 
 ## Home Assistant
 
