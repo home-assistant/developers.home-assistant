@@ -11,7 +11,7 @@ Since 0.92.0, every integration has a manifest file to specify basic information
   "name": "Philips Hue",
   "documentation": "https://www.home-assistant.io/components/hue",
   "dependencies": ["mqtt"],
-  "after_dependencies": ["http"]
+  "after_dependencies": ["http"],
   "codeowners": ["@balloob"],
   "requirements": ["aiohue==1.9.1"],
   "quality_scale": "platinum"
