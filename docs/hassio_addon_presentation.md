@@ -2,7 +2,7 @@
 title: "Presenting your addon"
 ---
 
-If you decide to share your add-on to the public, paying attention to details is recommended. Of course, your add-on should have a proper name and description, but Hass.io also gives you some other tools to present your add-on even nicer.
+If you decide to share your add-on to the public, paying attention to details is recommended. Of course, your add-on should have a proper name and description, but Home Assistant also gives you some other tools to present your add-on even nicer.
 
 ## Adding intro
 
@@ -18,7 +18,7 @@ This file containing the documentation is usually referred to as the "DOC", whic
 
 ## Add-on icon & logo
 
-A picture is worth a thousand words. Therefore, your add-on can be improved by adding a proper image icon and logo. Those images are used when showing your add-on in the Home Assistant Hass.io panel and which will significantly improve the visual representation of your add-on.
+A picture is worth a thousand words. Therefore, your add-on can be improved by adding a proper image icon and logo. Those images are used when showing your add-on in the Home Assistant Supervisor panel and which will significantly improve the visual representation of your add-on.
 
 Requirements for the logo of your add-on:
 
@@ -40,8 +40,6 @@ It is likely you are going to release newer versions of your add-on in the futur
 A changelog is a file which contains a curated, chronologically ordered list of notable changes for each version of your add-on and is generally published as the `CHANGELOG.md` file.
 
 If you are in need of a guide on keeping a changelog, we would recommend checking the [keep a changelog](http://keepachangelog.com) website. They have developed a standard that is used by many opensource projects around the world.
-
-In future versions of Hass.io, the `CHANGELOG.md` file will be displayed in the Home Assistant frontend.
 
 ## AppArmor
 

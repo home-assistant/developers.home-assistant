@@ -2,19 +2,19 @@
 title: "Tutorial: Making your first add-on"
 ---
 
-So you've got Home Assistant going and you've been enjoying the built-in add-ons but you're missing this one application. Time to make your own add-on! In Hass.io 0.24 we introduced the option to have local add-ons be build on your device. This is great for developing new add-ons locally.
+So you've got Home Assistant going and you've been enjoying the built-in add-ons but you're missing this one application. Time to make your own add-on! In Supervisor 24 we introduced the option to have local add-ons be build on your device. This is great for developing new add-ons locally.
 
-To get started with developing add-ons, we first need access to where Hass.io looks for local add-ons. For this you can use the Samba add-on or the SSH add-on.
+To get started with developing add-ons, we first need access to where Home Assistant looks for local add-ons. For this you can use the Samba add-on or the SSH add-on.
 
-For Samba, once you have enabled and started it, your Hass.io instance will show up in your local network tab and share a folder called "addons". This is the folder to store your custom add-ons.
+For Samba, once you have enabled and started it, your Home Assistant instance will show up in your local network tab and share a folder called "addons". This is the folder to store your custom add-ons.
 
 If you are on macOS and the folder is not showing up automatically, go to Finder and press CMD+K then enter 'smb://hassio.local'
 
-![Screenshot of Windows Explorer showing a folder on the Hass.io server](/img/en/hass.io/tutorial/samba.png)
+![Screenshot of Windows Explorer showing a folder on the Home Assistant server](/img/en/hass.io/tutorial/samba.png)
 
-For SSH, you will have to install it. Before you can start it, you will have to have a private/public key pair and store your public key in the add-on config ([see docs for more info][ssh]). Once started, you can SSH to Hass.io and store your custom add-ons in "/addons".
+For SSH, you will have to install it. Before you can start it, you will have to have a private/public key pair and store your public key in the add-on config ([see docs for more info][ssh]). Once started, you can SSH to Home Assistant and store your custom add-ons in "/addons".
 
-![Screenshot of Putty connected to Hass.io](/img/en/hass.io/tutorial/ssh.png)
+![Screenshot of Putty connected to Home Assistant](/img/en/hass.io/tutorial/ssh.png)
 
 Once you have located your add-on directory, it's time to get started!
 
@@ -62,13 +62,13 @@ Make sure your editor is using UNIX-like line breaks (LF), not Dos/Windows (CRLF
 
 ## Step 2: Installing and testing your add-on
 
-Now comes the fun part, time to open the Hass.io UI and install and run your add-on.
+Now comes the fun part, time to open the Home Assistant UI and install and run your add-on.
 
  - Open the Home Assistant frontend
- - Go to the Hass.io panel
+ - Go to the Supervisor panel
  - On the top right click the shopping basket to go to the add-on store.
 
-![Screenshot of the Hass.io main panel](/img/en/hass.io/screenshots/main_panel_addon_store.png)
+![Screenshot of the Home Assistant Supervisor main panel](/img/en/hass.io/screenshots/main_panel_addon_store.png)
 
  - On the top right click the refresh button
  - You should now see a new card called "Local" that lists your add-on!
@@ -86,7 +86,7 @@ Now comes the fun part, time to open the Hass.io UI and install and run your add
 
 Oops! You clicked refresh in the store and your add-on didn't show up. Or maybe you just updated an option, clicked refresh and saw your add-on disappear.
 
-When this happens, it means that your `config.json` is invalid. It's either invalid JSON or one of the specified options is incorrect. To see what went wrong, go to the Hass.io panel and in the supervisor card click on "View logs". This should bring you to a page with the logs of the supervisor. Scroll to the bottom and you should be able to find the validation error.
+When this happens, it means that your `config.json` is invalid. It's either invalid JSON or one of the specified options is incorrect. To see what went wrong, go to the Supervisor panel and in the supervisor card click on "View logs". This should bring you to a page with the logs of the supervisor. Scroll to the bottom and you should be able to find the validation error.
 
 Once you fixed the error, go to the add-on store and click refresh again.
 

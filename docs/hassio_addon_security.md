@@ -2,11 +2,11 @@
 title: "Add-on security"
 ---
 
-Hass.io rates every add-on based on the wanted rights. An add-on with a rating of 6 is very secure. If an add-on has a rating of 1, you shouldn't run this add-on unless you are 100% sure that you can trust the source.
+Home Assistant rates every add-on based on the wanted rights. An add-on with a rating of 6 is very secure. If an add-on has a rating of 1, you shouldn't run this add-on unless you are 100% sure that you can trust the source.
 
 ## API Role
 
-For access to Hass.io API you need define a role or you run in default mode. This is only required for Hass.io API not Home Assistant proxy. Any of the roles already have access to the default API calls, and do not require any additional settings.
+For access to Supervisor API you need define a role or you run in default mode. This is only required for Supervisor API not Home Assistant proxy. Any of the roles already have access to the default API calls, and do not require any additional settings.
 
 ### Available Roles
 
@@ -35,7 +35,4 @@ As a developer, follow the following best practices to make your add-on secure:
 
 Instead of allowing users to set new login credential in plain text config, use the Home Assistant [Auth backend][hassio-api-auth]. You can enable the access to API with `auth_api: true`. Now you are able to send the login credential to auth backend and validate it again Home Assistant.
 
-We have some sample and helpers around that system collected in a [GitHub repository][hassio-auth]. Feel free to copy and paste it or provide your own scripts.
-
-[hassio-auth]: https://github.com/home-assistant/hassio-auth
-[hassio-api-auth]: https://github.com/home-assistant/hassio/blob/dev/API.md#auth--sso-api
+[supervisor-api-auth]: https://github.com/home-assistant/supervisor/blob/dev/API.md#auth--sso-api

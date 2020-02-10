@@ -125,10 +125,10 @@ The config for an add-on is stored in `config.json`.
 | devices | list | no | Device list to map into the add-on. Format is: `<path_on_host>:<path_in_container>:<cgroup_permissions>`. i.e. `/dev/ttyAMA0:/dev/ttyAMA0:rwm`
 | udev | bool | no | Default False. Set this True, if your container runs a udev process of its own.
 | auto_uart | bool | no | Default False. Auto mapping all UART/Serial device from host into add-on.
-| homeassistant | string | no | Pin a minimum required Home Assistant version for such Add-on. Value is a version string like `0.91.2`.
-| hassio_role | str | no | Default `default`. Role based access to Hass.io API. Available: `default`, `homeassistant`, `backup`, `manager`, `admin`.
+| homeassistant | string | no | Pin a minimum required Home Assistant Core version for such Add-on. Value is a version string like `0.91.2`.
+| hassio_role | str | no | Default `default`. Role-based access to Supervisor API. Available: `default`, `homeassistant`, `backup`, `manager`, `admin`.
 | hassio_api | bool | no | This add-on can access to Hass.io REST API. It set the host alias `hassio`.
-| homeassistant_api | bool | no | This add-on can access to Hass.io Home-Assistant REST API proxy. Use `http://hassio/homeassistant/api`.
+| homeassistant_api | bool | no | This add-on can access to Hass.io Home-Assistant REST API proxy. Use `http://supervisor/core/api`.
 | docker_api | bool | no | Allow read-oly access to docker API for add-on. Work only for not protected add-ons.
 | privileged | list | no | Privilege for access to hardware/system. Available access: `NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_TIME`, `SYS_NICE`, `SYS_RESOURCE`, `SYS_PTRACE`, `SYS_MODULE`, `DAC_READ_SEARCH`.
 | full_access | bool | no | Give full access to hardware like the privileged mode in docker. Work only for not protected add-ons.
@@ -230,6 +230,6 @@ You need this only, if you not use the default images or need additionals things
 | squash | no | Default `False`. Be carfully with this option, you can not use the image for caching stuff after that!
 | args | no | Allow to set additional Docker build arguments as a dictionary.
 
-We provide a set of [Base-Images][hassio-base] which should cover a lot of needs. If you don't want use the Alpine based version or need a specific Image tag, feel free to pin this requirements for you build with `build_from` option.
+We provide a set of [Base-Images][docker-base] which should cover a lot of needs. If you don't want use the Alpine based version or need a specific Image tag, feel free to pin this requirements for you build with `build_from` option.
 
-[hassio-base]: https://github.com/home-assistant/hassio-base
+[docker-base]: https://github.com/home-assistant/docker-base

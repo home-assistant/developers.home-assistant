@@ -2,7 +2,7 @@
 title: "Publishing your add-on"
 ---
 
-There are two different ways of publishing add-ons. One is to publish pre-build containers to Docker Hub and the other option is to have users build the containers locally on their Hass.io instance.
+There are two different ways of publishing add-ons. One is to publish pre-build containers to Docker Hub and the other option is to have users build the containers locally on their Home Assistant instance.
 
 #### Pre-build containers
 
@@ -12,7 +12,7 @@ We have automated the process of building and publishing add-ons. See below for 
 
 #### Locally build containers
 
-Starting Hass.io 0.26, it is possible to distribute add-ons that will be built on the users machine. The advantage is that as a developer it is easy to test an idea and see if people are interested in your add-ons. This method includes installing and potentially compiling code. This means that installing such an add-on is slow and adds more wear and tear to users SD card/hard drive than the above mentioned pre-build solution. It also has a higher chance of failure if one of the dependencies of the container has changed or is no longer available.
+Starting Supervisor 26, it is possible to distribute add-ons that will be built on the users machine. The advantage is that as a developer it is easy to test an idea and see if people are interested in your add-ons. This method includes installing and potentially compiling code. This means that installing such an add-on is slow and adds more wear and tear to users SD card/hard drive than the above mentioned pre-build solution. It also has a higher chance of failure if one of the dependencies of the container has changed or is no longer available.
 
 Use this option when you are playing with add-ons and seeing if someone is interested in your work. Once you're an established repository, please migrate to pushing builds to Docker Hub as it greatly improves the user experience. In the future we will mark locally built add-ons in the add-on store to warn users.
 
@@ -30,7 +30,7 @@ All add-ons are simple docker containers. Inside your add-on `config.json` you s
 
 You can use `{arch}` inside the image name to support multiple architectures with one (1) configuration file. It will be replaced with the architecture of the user when we load the image. If you use `Buildargs` you can use the `build.json` to overwrite our default args.
 
-Hass.io assumes that the `master` branch of your add-on repository matches the latest tag on Docker Hub. When you're building a new version, it's suggested that you use another branch, ie `build` or do it with a PR on GitHub. After you push the add-on to [Docker Hub](https://hub.docker.com/), you can merge this branch to master.
+Home Assistant assumes that the `master` branch of your add-on repository matches the latest tag on Docker Hub. When you're building a new version, it's suggested that you use another branch, ie `build` or do it with a PR on GitHub. After you push the add-on to [Docker Hub](https://hub.docker.com/), you can merge this branch to master.
 
 ## Custom Add-ons
 
