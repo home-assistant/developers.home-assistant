@@ -27,7 +27,7 @@ We have several services for Hass.io inside Home Assistant to run tasks. Send da
 
 ## Supervisor API
 
-To enable calls to the [Supervisor API][supervisor-api], add `hassio_api: true` to the `config.json` file and read the environment variable `SUPERVISOR_TOKEN`. Now you can use the API over the URL: `http://supervisor/`. Use the `SUPERVISOR_TOKEN` with header `Authorization: Bearer`. You may also need to change the Hass.io API role to `hassio_role: default`.
+To enable calls to the [Supervisor API][supervisor-api], add `hassio_api: true` to the `config.json` file and read the environment variable `SUPERVISOR_TOKEN`. Now you can use the API over the URL: `http://supervisor/`. Use the `SUPERVISOR_TOKEN` with header `Authorization: Bearer`. You may also need to change the Supervisor API role to `hassio_role: default`.
 
 Add-ons can call some API commands without needing to set `hassio_api: true`:
 - `/core/api`
