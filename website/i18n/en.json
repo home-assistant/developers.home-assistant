@@ -369,7 +369,7 @@
         "title": "Tutorial: Making your first add-on"
       },
       "hassio_debugging": {
-        "title": "Debugging Hass.io"
+        "title": "Debugging Home Assistant"
       },
       "hassio_hass": {
         "title": "Hass.io <> Home Assistant integration development",

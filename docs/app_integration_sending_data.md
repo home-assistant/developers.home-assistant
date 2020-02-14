@@ -69,7 +69,7 @@ Here are the libraries we suggest using, although you should feel free to use wh
 
 - Swift/Objective-C: [swift-sodium](https://github.com/jedisct1/swift-sodium) (official library maintained by Sodium developers).
 
-For other languages, please see the list of [Bindings for other languages](https://download.libsodium.org/doc/bindings_for_other_languages). If more than one choice is available, we recommend using the choice most recently updated.
+For other languages, please see the list of [Bindings for other languages](https://download.libsodium.org/doc/bindings_for_other_languages). If more than one choice is available, we recommend using the choice most recently updated as well as most peer reviewed (a easy way to check this is seeing how many GitHub stars a project has).
 
 ### Configuration
 
@@ -77,8 +77,16 @@ We use the [secret-key cryptography](https://download.libsodium.org/doc/secret-k
 
 ### Signaling encryption support
 
-During registration, you must set `supports_encryption` to `true` to enable encryption. The Home Assistant instance must be able to install `libsodium` to enable encryption. Confirm that you should make all future webhook requests encrypted by the presence of the key `secret` in the initial registration response.
+There are two ways to enable encryption support:
+
+- **During initial registration** you set `supports_encryption` to `true`.
+- **After initial registration** you call the `enable_encryption` webhook action.
+
+The Home Assistant instance must be able to install `libsodium` to enable encryption. Confirm that you should make all future webhook requests encrypted by the presence of the key `secret` in the initial registration or enable encryption response.
+
 You must store this secret forever. There is no way to recover it via the Home Assistant UI and you should **not** ask users to investigate hidden storage files to re-enter the encryption key. You should create a new registration if encryption ever fails and alert the user.
+
+A registration may not initially support encryption due to a lack of Sodium/NaCL on the Home Assistant Core side. You should always strive to encrypt communications if possible. Therefore, we politely request that from time to time you attempt to enable encryption automatically or allow the user to manually enable encryption via a button in your app. That way, they can attempt to first fix whatever error is causing Sodium/NaCL to be uninstallable and then have a encrypted registration later. Home Assistant Core will log exact details if Sodium/NaCL is uninstallable.
 
 ## Update device location
 
@@ -226,3 +234,20 @@ Returns a version of `/api/config` with values useful for configuring your app.
   "type": "get_config"
 }
 ```
+
+## Enable encryption
+
+_This requires Home Assistant 0.106 or later._
+
+Enables encryption support for an existing registration
+
+```json
+{
+	"type": "enable_encryption"
+}
+```
+
+There are two errors you may receive:
+
+- `encryption_already_enabled` - Encryption is already enabled for this registration
+- `encryption_not_available` - Sodium/NaCL is unable to be installed. Cease all future attempts to enable encryption.
