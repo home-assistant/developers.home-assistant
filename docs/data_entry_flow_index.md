@@ -132,7 +132,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
             valid = await is_valid(user_input)
             if valid:
                 # See next section on create entry usage
-                return self.create_entry(...)
+                return self.async_create_entry(...)
 
             errors["base"] = "auth_error"
 
@@ -174,7 +174,7 @@ When the result is "Create Entry", an entry will be created and passed to the pa
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
     async def async_step_user(self, user_input=None):
-        return self.create_entry(
+        return self.async_create_entry(
             title="Title of the entry",
             data={
                 "something_special": user_input["username"]
