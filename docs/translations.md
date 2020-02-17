@@ -56,4 +56,4 @@ The sections are written in their corresponding languages, as this makes explain
 - Du/Sie: Dutze in den Übersetzungen, und verwende nicht das formale "Sie".
 
 #### Typische Fehler
-- Achte auf den richtigen Imperativ. Der Imperativ ist die Befehlsform, z. B. "Gib mir das Wasser". Falsch wäre hier: "Gebe mir das Wasser" (siehe (Bildung des Imperativs)[https://www.duden.de/sprachwissen/sprachratgeber/Bildung-des-Imperativs]).
+- Achte auf den richtigen Imperativ. Der Imperativ ist die Befehlsform, z. B. "Gib mir das Wasser". Falsch wäre hier: "Gebe mir das Wasser" (siehe [Bildung des Imperativs](https://www.duden.de/sprachwissen/sprachratgeber/Bildung-des-Imperativs)).
