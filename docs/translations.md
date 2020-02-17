@@ -49,7 +49,7 @@ Region specific translations (`en-US`, `fr-CA`) will only be included if transla
 Note: Sometimes you have to change the tag in Lokalise (Language -> Language settings -> custom ISO code).
 
 ## Language specific guidelines
-Most languages have multiple possibilities of translating a sentence. Please take a look at the guidelines for your language here, where you can also find some typical mistakes to prevent.
+Most languages have multiple possible translations of a sentence. Please take a look at the guidelines for your language here, where you can also find some typical mistakes to prevent.
 The sections are written in their corresponding languages, as this makes explaining the grammar easier and only native speakers should submit translations (see [Rules](#rules)).
 
 ### German
