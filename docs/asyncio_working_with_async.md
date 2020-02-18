@@ -90,6 +90,8 @@ async def async_say_hello(hass, target):
     return f"Hello {target}!"
 ```
 
+**Warning:** be careful with this! If the async function uses executor jobs, it can lead to a deadlock.
+
 ## Calling sync functions from async
 
 If you are running inside an async context, it might sometimes be necessary to call a sync function. Do this like this:
