@@ -13,3 +13,7 @@
 
   # Default build command.
   command = "yarn build"
+
+[[redirects]]
+    from = "/docs/en/*.html"
+    to = "/docs/:splat"
