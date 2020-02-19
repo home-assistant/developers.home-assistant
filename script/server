@@ -4,5 +4,4 @@ set -e
 
 cd "$(dirname "$0")/.."
 
-cd website
 yarn start

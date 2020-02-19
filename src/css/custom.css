@@ -1,0 +1,102 @@
+/**
+ * Any CSS included here will be global. The classic template
+ * bundles Infima by default. Infima is a CSS framework designed to
+ * work well for content-centric websites.
+ */
+
+/* You can override the default Infima variables here. */
+:root {
+  --ifm-color-primary: #03a9f4;
+  --ifm-color-primary-dark: #0398dc;
+  --ifm-color-primary-darker: #0390cf;
+  --ifm-color-primary-darkest: #0276ab;
+  --ifm-color-primary-light: #14b4fc;
+  --ifm-color-primary-lighter: #20b8fc;
+  --ifm-color-primary-lightest: #44c3fd;
+  --ifm-code-font-size: 95%;
+}
+
+.docusaurus-highlight-code-line {
+  background-color: rgb(72, 77, 91);
+  display: block;
+  margin: 0 calc(-1 * var(--ifm-pre-padding));
+  padding: 0 var(--ifm-pre-padding);
+}
+
+a.hero__text{
+  color: var(--ifm-heading-color);
+}
+
+.videoSection {
+  padding: 20px 0;
+}
+
+.videoWrapper {
+  position: relative;
+  padding-bottom: 56.25%; /* 16:9 */
+  height: 0;
+  background: #000;
+}
+
+.videoWrapper iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.introSection {
+  padding-bottom: 20px;
+}
+
+img.inline {
+  display: inline-block;
+}
+
+small {
+  font-size: smaller;
+}
+
+@media only screen and (min-device-width: 360px) and (max-device-width: 736px) {
+}
+
+@media only screen and (min-width: 1024px) {
+}
+
+@media only screen and (max-width: 1023px) {
+}
+
+@media only screen and (min-width: 1400px) {
+}
+
+@media only screen and (min-width: 1500px) {
+}
+
+#demo {
+  width: 100%;
+  height: 475px;
+  border: 2px solid #03A9F4;
+  border-radius: 4px;
+}
+#discourse-comments {
+  margin-top: 2em;
+}
+.show-small {
+  display: none;
+}
+.onPageNav {
+  display: none;
+}
+@media (max-width: 600px) {
+  .hide-small {
+    display: none;
+  }
+  .show-small {
+    display: initial;
+  }
+}
+
+html[data-theme='dark'] .invertDark {
+  filter: invert(1.0)
+}
