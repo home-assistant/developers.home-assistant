@@ -40,7 +40,28 @@ Add-ons can call some API commands without needing to set `hassio_api: true`:
 
 ***Note:*** For Home Assistant API access requirements, see above.
 
+## Services API
+
+We have an internal services API to make services public to other add-ons without the user need add a configuration. The Add-on can get the full configuration for an service to connect and using. The add-on need mark the usage of an service over his [configuration](hassio_addon_config.md). All supported services with his available options are on [API documentation][supervisor-services-api].
+
+Supported services are:
+- mqtt
+- mysql
+
+You can use bashio to get this information on your add-on init as: `bashio::services <service> <query>`
+
+i.e.
+```bash
+MQTT_HOST=$(bashio::services mqtt "host")
+MQTT_USER=$(bashio::services mqtt "username")
+MQTT_PASSWORD=$(bashio::services mqtt "password")
+```
+
+### mqtt
+
+
 [core-api]: https://www.home-assistant.io/developers/rest_api/
 [core-websocket]: https://www.home-assistant.io/developers/websocket_api/
 [supervisor-api]: https://github.com/home-assistant/supervisor/blob/master/API.md
 [supervisor-addon-api]: https://github.com/home-assistant/supervisor/blob/dev/API.md#restful-for-api-addons
+[supervisor-services-api]:https://github.com/home-assistant/supervisor/blob/dev/API.md#services-1
