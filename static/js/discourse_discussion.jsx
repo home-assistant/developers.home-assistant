@@ -85,6 +85,7 @@ export default class DiscussionBox extends React.Component {
           id='discourse-embed-frame'
           width='100%'
           frameBorder='0'
+          scrolling='no'
         />
       </div>
     );
