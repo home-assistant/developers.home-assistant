@@ -12,7 +12,7 @@
   publish = "build"
 
   # Default build command.
-  command = "yarn; yarn build"
+  command = "yarn build"
 
 [[redirects]]
     from = "/docs/en/*.html"
