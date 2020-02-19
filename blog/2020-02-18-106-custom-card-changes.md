@@ -2,7 +2,7 @@
 author: Bram Kragten
 authorURL: https://github.com/bramkragten
 authorTwitter: bramkragten
-title: Changes that can affect custom cards in 0.106
+title: "Changes that can affect custom cards in 0.106"
 ---
 
 We made some changes that can affect custom Lovelace cards in Home Assistant Core 0.106, if you are a custom card developer, please read the following.
