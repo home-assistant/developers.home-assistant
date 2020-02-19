@@ -42,15 +42,17 @@ Add-ons can call some API commands without needing to set `hassio_api: true`:
 
 ## Services API
 
-We have an internal services API to make services public to other add-ons without the user need add a configuration. The Add-on can get the full configuration for an service to connect and using. The add-on need mark the usage of an service over his [configuration](hassio_addon_config.md). All supported services which are available options are on [API documentation][supervisor-services-api].
+We have an internal services API to make services public to other add-ons without the user need to add additional configuration. An add-on can get the full configuration for a service to use and to connect to. The add-on need to mark the usage of a service over his [configuration](hassio_addon_config.md) in order to be able to access a service. All supported services, including its available options, are documented in the [API documentation][supervisor-services-api].
 
 Supported services are:
+
 - mqtt
 - mysql
 
-You can use bashio to get this information on your add-on init as: `bashio::services <service> <query>`
+You can use Bashio to get this information for your add-on init as: `bashio::services <service> <query>`
 
-i.e.
+For example:
+
 ```bash
 MQTT_HOST=$(bashio::services mqtt "host")
 MQTT_USER=$(bashio::services mqtt "username")
