@@ -15,5 +15,7 @@
   command = "yarn build"
 
 [[redirects]]
-    from = "/docs/en/*.html"
-    to = "/docs/:splat"
+  from = "/docs/en/*"
+  to = "/docs/:splat"
+  status = 301
+  force = true
