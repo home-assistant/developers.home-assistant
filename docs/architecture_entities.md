@@ -3,7 +3,9 @@ title: "Entity Architecture"
 sidebar_label: Entity
 ---
 
-![Architecture overview of Hass.io](/img/en/architecture/entities_architecture.png)
+<img class='invertDark'
+  src='/img/en/architecture/entities_architecture.png'
+  alt='Architecture Overview of Home Assistant' />
 
 ## Configuration
 

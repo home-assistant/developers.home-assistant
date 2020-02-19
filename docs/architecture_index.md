@@ -11,7 +11,7 @@ For more information about each part in this overview, <a href='https://www.home
  * Home Automation triggers commands based on user configurations.
  * Smart Home triggers commands based on previous behavior.
 
-<img
+<img class='invertDark'
   src='/img/en/architecture/home_automation_landscape.svg'
   alt='Home Automation landscape'
 />
@@ -23,7 +23,7 @@ The Home Assistant core is responsible for Home Control. Home Assistant contains
  * **Service Registry**: listens on the event bus for `call_service` events and allows other code to register services.
  * **Timer**: sends a `time_changed` event every 1 second on the event bus.
 
-<img
+<img class='invertDark'
   alt='Overview of the Home Assistant core architecture'
   src='/img/en/architecture/ha_architecture.svg'
 />

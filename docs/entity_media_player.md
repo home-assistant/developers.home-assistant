@@ -69,6 +69,7 @@ Required. Returns one of the defined constants from the below list that matches 
 
 ### Available device classes
 Optional. What type of media device is this. It will possibly map to google device types.
+
 | Value | Description
 | ----- | -----------
 | tv | Device is a television type device.

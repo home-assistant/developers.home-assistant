@@ -25,8 +25,9 @@ If you require a different redirect url (ie, if building a native app), you can 
 Home Assistant will scan the first 10kB of a website for link tags.
 
 ## Authorize
-
-[![Authorization flow sequence diagram](/img/en/auth/authorize_flow.png)](https://www.websequencediagrams.com/?lz=dGl0bGUgQXV0aG9yaXphdGlvbiBGbG93CgpVc2VyIC0-IENsaWVudDogTG9nIGludG8gSG9tZSBBc3Npc3RhbnQKABoGIC0-IFVzZXI6AEMJZSB1cmwgAD4JACgOOiBHbyB0bwAeBWFuZCBhAC0ICgBQDgB1DACBFw5jb2RlAHELAE4RZXQgdG9rZW5zIGZvcgAoBgBBGlQAJQUK&s=qsd)
+<a href='https://www.websequencediagrams.com/?lz=dGl0bGUgQXV0aG9yaXphdGlvbiBGbG93CgpVc2VyIC0-IENsaWVudDogTG9nIGludG8gSG9tZSBBc3Npc3RhbnQKABoGIC0-IFVzZXI6AEMJZSB1cmwgAD4JACgOOiBHbyB0bwAeBWFuZCBhAC0ICgBQDgB1DACBFw5jb2RlAHELAE4RZXQgdG9rZW5zIGZvcgAoBgBBGlQAJQUK&s=qsd'>
+<img class='invertDark' src='/img/en/auth/authorize_flow.png' alt='Overview of how the different parts interact' />
+</a>
 
 > All example URLs here are shown with extra spaces and new lines for display purposes only.
 

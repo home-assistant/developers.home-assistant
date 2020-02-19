@@ -23,7 +23,7 @@ A checklist of things to do when you're adding a new platform.
 ### 2. Configuration
 
  1. If the platform can be set up directly, add a voluptuous schema for [configuration validation](development_validation.md)
- 2. Voluptuous schema extends schema from component<br>(e.g., `hue.light.PLATFORM_SCHEMA` extends `light.PLATFORM_SCHEMA`)
+ 2. Voluptuous schema extends schema from component<br />(e.g., `hue.light.PLATFORM_SCHEMA` extends `light.PLATFORM_SCHEMA`)
  3. Default parameters specified in voluptuous schema, not in `setup_platform(...)`
  4. Your `PLATFORM_SCHEMA` should use as many generic config keys as possible from `homeassistant.const`
  5. Never depend on users adding things to `customize` to configure behavior inside your platform.

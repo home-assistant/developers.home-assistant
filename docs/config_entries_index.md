@@ -16,10 +16,10 @@ Config Entries are configuration data that are persistently stored by Home Assis
 | migration error | The config entry had to be migrated to a newer version, but the migration failed.
 | failed unload | The config entry was attempted to be unloaded, but this was either not supported or it raised an exception.
 
-<svg width="508pt" height="188pt" viewBox="0.00 0.00 508.00 188.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<svg class='invertDark' width="508pt" height="188pt" viewBox="0.00 0.00 508.00 188.00" xmlns="http://www.w3.org/2000/svg">
 <g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 184)">
 <title>G</title>
-<polygon fill="white" stroke="white" points="-4,5 -4,-184 505,-184 505,5 -4,5"></polygon>
+<polygon fill="none" stroke="none" points="-4,5 -4,-184 505,-184 505,5 -4,5"></polygon>
 <g id="node1" class="node"><title>not loaded</title>
 <ellipse fill="none" stroke="black" cx="168" cy="-162" rx="51.3007" ry="18"></ellipse>
 <text text-anchor="middle" x="168" y="-157.8" font-family="Times,serif" font-size="14.00">not loaded</text>

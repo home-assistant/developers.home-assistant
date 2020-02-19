@@ -9,7 +9,7 @@ If you are not using the [`frontend`](https://www.home-assistant.io/components/f
 * http://IP_ADDRESS:8123/ is an interface to control Home Assistant.
 * http://IP_ADDRESS:8123/api/ is a RESTful API.
 
-The API accepts and returns only JSON encoded objects. 
+The API accepts and returns only JSON encoded objects.
 
 All API calls have to be accompanied by the header `Authorization: Bearer ABCDEFGH`, where `ABCDEFGH` is replaced by your token. You can obtain a token ("Long-Lived Access Token") by logging into the frontend using a web browser, and going to [your profile](https://www.home-assistant.io/docs/authentication/#your-account-profile) `http://IP_ADDRESS:8123/profile`.
 
@@ -42,7 +42,7 @@ Another option is to use the Restful Command component https://www.home-assistan
 turn_light_on:
   url: http://localhost:8123/api/states/light.study_light
   method: POST
-  headers: 
+  headers:
     authorization: 'Bearer ABCDEFGH'
     content-type: 'application/json'
   payload: '{"state":"on"}'
@@ -347,7 +347,7 @@ $ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 
 #### POST /api/states/&lt;entity_id>
 
-Updates or creates a state. You can create any state that you want, it does not have to be backed by an entity in Home Assistant. 
+Updates or creates a state. You can create any state that you want, it does not have to be backed by an entity in Home Assistant.
 
 > :info: NOTE: This endpoint sets the representation of a device within Home Asistant and will not communicate with the actual device. To communicate with the device, use the [POST /api/services/&lt;domain>/&lt;service>](#post-apiservicesltdomainltservice) endpoint.
 
@@ -531,7 +531,7 @@ It will return a message if event forwarding was set up successfully.
 
 #### DELETE /api/event_forwarding
 
-Cancel event forwarding to another Home Assistant instance.<br>
+Cancel event forwarding to another Home Assistant instance.<br />
 
 Requires a JSON object that represents the API to cancel forwarding to.
 
