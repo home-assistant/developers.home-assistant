@@ -15,6 +15,12 @@
   command = "yarn build"
 
 [[redirects]]
+  from = "/docs/en/next/*"
+  to = "/docs/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/docs/en/*"
   to = "/docs/:splat"
   status = 301

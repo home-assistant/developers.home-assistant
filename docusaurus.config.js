@@ -52,6 +52,11 @@ module.exports = {
       ],
       copyright: `Copyright © ${new Date().getFullYear()} Home Assistant, Inc. Built with Docusaurus.`,
     },
+    algolia: {
+      apiKey: 'd0245452c36b10cec4b8b5bad04e06fc',
+      indexName: 'home-assistant-dev',
+      algoliaOptions: {}
+    },
   },
   presets: [
     [
