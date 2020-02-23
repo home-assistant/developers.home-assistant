@@ -105,7 +105,7 @@ def websocket_handle_thumbnail(hass, connection, msg):
         )
 
     # Player exist. Queue up a job to send the thumbnail.
-    hass.async_add_job(send_image())
+    hass.async_add_job(send_image)
 ```
 
 ### Registering with the Websocket API
