@@ -47,20 +47,22 @@ You are only allowed to use the built-in HVAC modes. If you want another mode, a
 | `HVAC_MODE_COOL`      | The device is set to cool to a target temperature.                  |
 | `HVAC_MODE_HEAT_COOL` | The device supports heating/cooling to a range                      |
 | `HVAC_MODE_AUTO`      | The device is set to a schedule, learned behavior, AI.              |
-| `HVAC_MODE_DRY`       | The device is set to dry/humidity mode.                             |
+| `HVAC_MODE_DRY`       | The device is set to dry mode.                                      |
+| `HVAC_MODE_MOIST`     | The device is set to humidity mode.                                 |
 | `HVAC_MODE_FAN_ONLY`  | The device only has the fan on. No heating or cooling taking place. |
 
 ### HVAC Action
 
 The HVAC action describes the _current_ action. This is different from the mode, because if a device is set to heat, and the target temperature is already achieved, the device will not be actively heating anymore.
 
-| Name                | Description           |
-| ------------------- | --------------------- |
-| `CURRENT_HVAC_OFF`  | Device is turned off. |
-| `CURRENT_HVAC_HEAT` | Device is heating.    |
-| `CURRENT_HVAC_COOL` | Device is cooling.    |
-| `CURRENT_HVAC_DRY`  | Device is dring.      |
-| `CURRENT_HVAC_IDLE` | Device is idle.       |
+| Name                 | Description           |
+| -------------------- | --------------------- |
+| `CURRENT_HVAC_OFF`   | Device is turned off. |
+| `CURRENT_HVAC_HEAT`  | Device is heating.    |
+| `CURRENT_HVAC_COOL`  | Device is cooling.    |
+| `CURRENT_HVAC_DRY`   | Device is dring.      |
+| `CURRENT_HVAC_MOIST` | Device is moisting.   |
+| `CURRENT_HVAC_IDLE`  | Device is idle.       |
 
 ### Presets
 
