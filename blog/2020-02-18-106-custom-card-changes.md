@@ -16,6 +16,8 @@ Please check if your custom card still works with 0.106 and make adjustments to 
 
 ### Helper functions
 
+> We decided to postpone this change until 0.107.
+
 A second change that was made, is that we no longer load all element types by default. We load them when they are needed. This will also help performance but might break your custom card.
 
 We introduced a set of helpers that you can use to create a Lovelace element, these are the same functions Home Assistant uses internally and will always be up to date to the version the user is using.
