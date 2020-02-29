@@ -135,7 +135,7 @@ The config for an add-on is stored in `config.json`.
 | apparmor | bool/string | no | Enable or disable AppArmor support. If it is enable, you can also use custom profiles with the name of the profile.
 | map | list | no | List of maps for additional Hass.io folders. Possible values: `config`, `ssl`, `addons`, `backup`, `share`. Defaults to `ro`, which you can change by adding `:rw` to the end of the name.
 | environment | dict | no | A dict of environment variable to run add-on.
-| audio | bool | no | Boolean. Mark this add-on to use internal an audio system. The ALSA configuration for this add-on will be mount automatic.
+| audio | bool | no | Boolean. Mark this add-on to use internal an audio system. We map a working PulseAudio setup into container. If you application did not support PulseAudio, you need maybe install: Alpine `alsa-plugins-pulse` or debian/ubunut `libasound2-plugins`.
 | video | bool | no | Boolean. Mark this add-on touse internal an video system. All available devices will be mapped into addon.
 | gpio | bool | no | Boolean. If this is set to True, `/sys/class/gpio` will map into add-on for access to GPIO interface from kernel. Some library need also `/dev/mem` and `SYS_RAWIO` for read/write access to this device. On system with AppArmor enabled, you need disable AppArmor or better for security, provide you own profile for the add-on.
 | devicetree | bool | no | Boolean. If this is set to True, `/device-tree` will map into add-on.
@@ -159,6 +159,7 @@ The config for an add-on is stored in `config.json`.
 | snapshot_exclude | list | no | List of file/path with glob support they are excluded from snapshots.
 | advanced | bool | no | Default False. Make addon visible on simle mode or not.
 | stage | string | no | Default `stable`. Flag add-on with follow attribute: `stable`, `experimental`, `deprecated`
+| init | bool | no | Default `True`. Make it possible to disable the docker default system init because the image have his own init system.
 
 
 ### Options / Schema
