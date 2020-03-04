@@ -31,6 +31,8 @@ Home Assistant provides a DataUpdateCoordinator class to help you manage this as
 from datetime import timedelta
 import logging
 
+import async_timeout
+
 from homeassistant.helpers import entity
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
 from .const import DOMAIN
@@ -48,9 +50,12 @@ async def async_setup_entry(hass, entry, async_add_entities):
         so entities can quickly look up their data.
         """
         try:
-            return await api.fetch_data()
-        except ApiError:
-            raise UpdateFailed
+            # Note: asyncio.TimeoutError and aiohttp.ClientError are already
+            # handled by the data update coordinator.
+            async with async_timeout.timeout(10):
+                return await api.fetch_data()
+        except ApiError as err:
+            raise UpdateFailed(f"Error communicating with API: {err}")
 
     coordinator = DataUpdateCoordinator(
         hass,
