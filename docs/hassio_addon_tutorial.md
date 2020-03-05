@@ -56,6 +56,8 @@ CMD [ "/run.sh" ]
 
 `run.sh`:
 ```shell
+#!/bin/bash
+
 echo Hello world!
 ```
 Make sure your editor is using UNIX-like line breaks (LF), not Dos/Windows (CRLF).
