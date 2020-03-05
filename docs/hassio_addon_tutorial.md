@@ -56,7 +56,7 @@ CMD [ "/run.sh" ]
 
 `run.sh`:
 ```shell
-#!/bin/bash
+#!/usr/bin/with-contenv bashio
 
 echo Hello world!
 ```
