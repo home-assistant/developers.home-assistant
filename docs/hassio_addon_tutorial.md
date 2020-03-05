@@ -56,6 +56,8 @@ CMD [ "/run.sh" ]
 
 `run.sh`:
 ```shell
+#!/usr/bin/with-contenv bashio
+
 echo Hello world!
 ```
 Make sure your editor is using UNIX-like line breaks (LF), not Dos/Windows (CRLF).
