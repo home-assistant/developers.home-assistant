@@ -487,7 +487,7 @@ $ curl -X POST -H "Authorization: Bearer ABCDEFGH" \
 
 #### POST /api/config/core/check_config
 
-Trigger a check of `configuration.yaml`. No additional data needs to be passed in with this request.
+Trigger a check of `configuration.yaml`. No additional data needs to be passed in with this request. Needs config integration enabled.
 
 If the check is successful, the following will be returned:
 
