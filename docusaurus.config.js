@@ -73,6 +73,9 @@ module.exports = {
         },
         blog: {
           postsPerPage: 10,
+          feedOptions: {
+            type: 'all',
+          },
         },
       },
     ],
