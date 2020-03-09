@@ -90,7 +90,7 @@ In our example card we defined a card with the tag `content-card-example` (see l
 # Example Lovelace configuration
 resources:
   - url: /local/content-card-example.js
-    type: js
+    type: module
 views:
 - name: Example
   cards:
