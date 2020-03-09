@@ -19,6 +19,7 @@ ha_quality_scale: silver
 ha_config_flow: true
 ha_codeowners:
   - '@balloob'
+ha_domain: awesome
 ---
 
 Content... Written in markdown.
@@ -30,13 +31,13 @@ Content... Written in markdown.
 Additional keys for the file header:
 
 - `title`: This title should match with the name of the integration as written in the integration manifest file.
-- `logo`: Please check the separate section below.
 - `ha_release`: The release when the integration was included, e.g., "0.38". If the current release is 0.37, make `ha_release` 0.38. If it's 0.30 or 0.40 please quote it with `' '`.
 - `ha_category`: This entry is used to group the integration on the [Integration overview](https://www.home-assistant.io/integrations/).
 - `ha_iot_class`: [IoT class](https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things) is the classifier for the device's behavior.
 - `ha_quality_scale`: [Quality scale](https://www.home-assistant.io/docs/quality_scale/) is the representation of the integration's quality.
 - `ha_config_flow`: Set to `true` if the integration has a [Data Entry Flow](https://developers.home-assistant.io/docs/en/data_entry_flow_index.html), omit otherwise.
 - `ha_codeowners`: GitHub usernames or team names (starting with `@`) of people that are responsible for this integration. This should match with the codeowners as listed in the integration manifest file.
+- `ha_domain`: The domain of the integration in Home Assistant Core. This must match the name from the integration manifest file.
 
 There are [pre-defined variables](https://jekyllrb.com/docs/variables/) available but usually, it's not necessary to use them when writing documentation.
 
@@ -125,15 +126,18 @@ Please note, if you want to use Markdown inside an HTML block, it has to be surr
 
 ### Images, icons and logos
 
-The images which are displayed on the pages are stored in various directories according to their purpose. If you want to use a logo and placed `logo:` in the file header then this image should be stored in `source/images/supported_brands`. The background must be transparent.
+Having a logo with the integration, makes an integration quickly identifiable with the end-user.
+From the documentation side of things, no specific configuration is needed to enable the use of a logo,
+however, the logo must exist in our Brands repository.
+
+To add a logo and icon for your integration, open up a pull request at: the [Home Assistant Brands](https://github.com/home-assistant/brands).
+
+Other images, displayed on the pages, are stored in various directories according to their purpose:
 
 | Type        | Location                       |
 | :---------- | :----------------------------- |
-| logos       | source/images/supported_brands |
 | blog        | source/images/blog             |
-| screenshots | source/images/components       |
-
-Not everything (product, integration, etc.) should have a logo. To show something for internal parts of Home Assistant we are using the [Material Design Icons](https://materialdesignicons.com/).
+| screenshots | source/images/integration      |
 
 ### Linking From The Sidebar
 
