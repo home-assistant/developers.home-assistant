@@ -132,7 +132,7 @@ however, the logo must exist in our Brands repository.
 
 To add a logo and icon for your integration, open up a pull request at: the [Home Assistant Brands](https://github.com/home-assistant/brands).
 
-For other images, displayed on the pages, are stored in various directories according to their purpose:
+Other images, displayed on the pages, are stored in various directories according to their purpose:
 
 | Type        | Location                       |
 | :---------- | :----------------------------- |
