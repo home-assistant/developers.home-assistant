@@ -31,7 +31,7 @@ A climate entity is a device that controls temperature, humidity, or fans, such 
 | preset_modes            | list   | `NotImplementedError()`              | The available presets. Requires `SUPPORT_PRESET_MODE`.                                                       |
 | fan_mode                | string | `NotImplementedError()`              | Returns the current fan mode. Requires `SUPPORT_FAN_MODE`.                                                   |
 | fan_modes               | list   | `NotImplementedError()`              | Returns the list of available fan modes. Requires `SUPPORT_FAN_MODE`.                                        |
-| swing_mode              | string | `NotImplementedError()`              | Returns the fan setting.                                                                                     |
+| swing_mode              | string | `NotImplementedError()`              | Returns the swing setting.                                                                                     |
 | swing_modes             | list   | `NotImplementedError()`              | Returns the list of available swing modes.                                                                   |
 | is_aux_heat             | bool   | None                                 | Returns True if an auxiliary heater is on. Requires `SUPPORT_AUX_HEAT`.                                      |
 | supported_features      | int    | `NotImplementedError()`              | Bitmap of supported features. See below.                                                                     |
@@ -107,15 +107,15 @@ The device fan can have different swing modes that it wants the user to know abo
 
 Supported features constants are combined using the bitwise or (`|`) operator.
 
-| Name                               | Description                                                                                 |
-| ---------------------------------- | ------------------------------------------------------------------------------------------- |
-| `SUPPORT_TARGET_TEMPERATURE`       | The device supports a target temperature.                                                   |
-| `SUPPORT_TARGET_TEMPERATURE_RANGE` | The device supports a ranged target temperature. Used for HVAC modes `heat_cool` and `auto` |
-| `SUPPORT_TARGET_HUMIDITY`          | The device supports a target humidity.                                                      |
-| `SUPPORT_FAN_MODE`                 | The device supports fan modes.                                                              |
-| `SUPPORT_PRESET_MODE`              | The device supports presets.                                                                |
-| `SUPPORT_SWING_MODE`               | The device supports swing modes.                                                            |
-| `SUPPORT_AUX_HEAT`                 | The device supports auxiliary heaters.                                                      |
+| Name                               | Bit value | Description                                                                                 |
+| ---------------------------------- | --- | ------------------------------------------------------------------------------------------- |
+| `SUPPORT_TARGET_TEMPERATURE`       |   1 | The device supports a target temperature.                                                   |
+| `SUPPORT_TARGET_TEMPERATURE_RANGE` |   2 | The device supports a ranged target temperature. Used for HVAC modes `heat_cool` and `auto` |
+| `SUPPORT_TARGET_HUMIDITY`          |   4 | The device supports a target humidity.                                                      |
+| `SUPPORT_FAN_MODE`                 |   8 | The device supports fan modes.                                                              |
+| `SUPPORT_PRESET_MODE`              |  16 | The device supports presets.                                                                |
+| `SUPPORT_SWING_MODE`               |  32 | The device supports swing modes.                                                            |
+| `SUPPORT_AUX_HEAT`                 |  64 | The device supports auxiliary heaters.                                                      |
 
 ## Methods
 
