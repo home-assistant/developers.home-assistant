@@ -67,3 +67,7 @@ One exception is for logging which uses the percentage formatting. This is to av
 ```python
 _LOGGER.info("Can't connect to the webservice %s at %s", string1, string2)
 ```
+
+### Typing of functions
+
+Either completely type a function or do not type a function at all.
