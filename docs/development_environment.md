@@ -100,7 +100,7 @@ Running tasks like `Preview` can be restarted by opening the command pallet and 
 
 ## Setup Local Repository
 
-Visit the [Home Assistant repository](https://github.com/home-assistant/home-assistant) and click **Fork**.
+Visit the [Home Assistant Core repository](https://github.com/home-assistant/core) and click **Fork**.
 Once forked, setup your local copy of the source using the commands:
 
 _Windows users should be sure to clone to a path that inside the WSL (ex: ~/)._
@@ -110,7 +110,9 @@ $ git clone https://github.com/YOUR_GIT_USERNAME/core.git
 $ cd home-assistant
 $ git remote add upstream https://github.com/home-assistant/core.git
 ```
-Note that "core.git" should be replaced by the name of your fork (default being core.git). If unsure check your github repository
+
+Note that `core.git` should be replaced by the name of your fork (default being `core.git`). If unsure check your GitHub repository.
+
 ## Setting up virtual environment
 
 To isolate your environment from the rest of the system, set up a [`venv`](https://docs.python.org/3/library/venv.html). Within the `home-assistant` directory, create and activate your virtual environment.
