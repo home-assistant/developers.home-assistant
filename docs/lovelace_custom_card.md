@@ -86,11 +86,11 @@ customElements.define('content-card-example', ContentCardExample);
 
 In our example card we defined a card with the tag `content-card-example` (see last line), so our card type will be `custom:content-card-example`. And because you created the file in your `<config>/www` directory, it will be accessible in your browser via the url `/local/` (if you have recently added the www folder you will need to re-start Home Assistant for files to be picked up).
 
+Add a resource to your Lovelace config with URL `/local/content-card-example.js` and type `module`.
+
+You can then use your card in your Lovelace config:
 ```yaml
 # Example Lovelace configuration
-resources:
-  - url: /local/content-card-example.js
-    type: module
 views:
 - name: Example
   cards:
@@ -207,13 +207,12 @@ class WiredToggleCard extends LitElement {
 customElements.define("wired-toggle-card", WiredToggleCard);
 ```
 
+Add a resource to your Lovelace config with URL `/local/wired-cards.js` and type `module`.
+
 And for your configuration:
 
 ```yaml
 # Example Lovelace configuration
-resources:
-  - url: /local/wired-cards.js
-    type: module
 views:
 - name: Example
   cards:
