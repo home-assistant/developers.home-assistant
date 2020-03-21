@@ -88,7 +88,7 @@ In our example card we defined a card with the tag `content-card-example` (see l
 
 Add a resource to your Lovelace config with URL `/local/content-card-example.js` and type `module`.
 
-You can then use your card in your Lovelace config:
+You can then use your card in your Lovelace configuration:
 ```yaml
 # Example Lovelace configuration
 views:
