@@ -28,7 +28,7 @@ Next step is to configure Home Assistant to use the development mode for the fro
 ```yaml
 frontend:
   # Example absolute path: /home/paulus/dev/hass/frontend
-  development_repo: <absolute path to home-assistant frontend repo>
+  development_repo: /path/to/hass/frontend/
 ```
 
 ### Installing Node.js
