@@ -11,7 +11,7 @@ The Home Assistant frontend is built using web components. For more background a
 
 ### Getting the code
 
-First step is to fork the [home-assistant frontend repository][hass-frontend] and add the upstream remote. You can place the forked repository anywhere on your system.
+The first step is to fork the [frontend repository][hass-frontend] and add the upstream remote. You can place the forked repository anywhere on your system.
 
 ```shell
 $ git clone git@github.com:YOUR_GIT_USERNAME/frontend.git
