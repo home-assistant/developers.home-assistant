@@ -38,6 +38,8 @@ if ('getCardSize' in element) {
 }
 ```
 
+Your card can define a `getConfigElement` method that returns a custom element for editing the user configuration. Home Assistant will display this element in the card editor in Lovelace.
+
 ## Defining your card
 
 Create a new file in your Home Assistant config dir as `<config>/www/content-card-example.js` and put in the following contents:
@@ -222,6 +224,63 @@ views:
       - input_boolean.switch_ac_livingroom
       - input_boolean.switch_tv
 ```
+
+## Graphical card configuration
+
+Your card can define a `getConfigElement` method that returns a custom element for editing the user configuration. Home Assistant will display this element in the card editor in Lovelace.
+
+Your card can also define a `getStubConfig` method that returns a default card configuration (without the `type:` parameter) in json form for use by the card type picker in Lovelace.
+
+Home Assistant will call the `setConfig` method of the config element on setup.
+Home Assistant will update the `hass` property of the config element on state changes, and the `lovelace` element, which contains information about the lovelace configuration.
+
+Changes to the configuration are comunicated back to lovelace by dispatching an `config-changed` event with the new configuration in it's detail.
+
+To have your card displayed in the card picker dialog in Lovelace, add an object describing it to the array `window.customCards`. Required properties of the object are `type` and `name` (see example below).
+
+```js
+class ContentCardExample extends HTMLElement {
+  static getConfigElement() {
+    return document.createElement("content-card-editor");
+  }
+
+  static getStubConfig() {
+    return { entity: "sun.sun" }
+  }
+
+  ...
+}
+
+customElements.define('content-card-example', ContentCardExample);
+```
+
+```js
+class ContentCardEditor extends LitElement {
+
+  setConfig(config) {
+    this._config = config;
+  }
+
+  configChanged(newConfig) {
+    const event = new Event("config-changed", {
+      bubbles: true,
+      composed: true
+    });
+    event.detail = {config: newConfig};
+    this.dispatchEvent(event);
+  }
+}
+
+customElements.define("content-card-editor", MyCardEditor);
+window.customCards = window.customCards || [];
+wincow.customCards.push({
+  type: "content-card-example",
+  name: "Content Card",
+  preview: false, // Optional - defaults to false
+  description: "A custom card made by me!" // Optional
+});
+```
+
 
 ## Recommended Design Elements
 
