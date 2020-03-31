@@ -107,7 +107,7 @@ _Windows users should be sure to clone to a path that inside the WSL (ex: ~/)._
 
 ```shell
 $ git clone https://github.com/YOUR_GIT_USERNAME/core.git
-$ cd home-assistant
+$ cd core
 $ git remote add upstream https://github.com/home-assistant/core.git
 ```
 
