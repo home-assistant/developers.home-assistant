@@ -27,6 +27,8 @@ Use `docker` to build the test addon: `docker build --build-arg BUILD_FROM="home
 
 Create a new folder for data and add a test _options.json_ file. After that you can run your add-on with: `docker run --rm -v /tmp/my_test_data:/data -p PORT_STUFF_IF_NEEDED local/my-test-addon`
 
+In case your add-on relies on `SUPERVISOR_TOKEN` don't forget to define the environment variable with: `docker run --env SUPERVISOR_TOKEN="<access-token>"` where `<access-token>` might be a long-lived-access token generated in the UI under `/profile`.
+
 ## Logs
 
 All stdout and stderr are redirected to the Docker logs. The logs can be fetched from the add-on page inside the Hass.io panel in Home Assistant.
