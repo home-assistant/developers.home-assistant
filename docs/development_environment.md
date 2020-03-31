@@ -115,7 +115,7 @@ Note that `core.git` should be replaced by the name of your fork (default being 
 
 ## Setting up virtual environment
 
-To isolate your environment from the rest of the system, set up a [`venv`](https://docs.python.org/3/library/venv.html). Within the `home-assistant` directory, create and activate your virtual environment.
+To isolate your environment from the rest of the system, set up a [`venv`](https://docs.python.org/3/library/venv.html). Within the `core` directory, create and activate your virtual environment.
 
 ```shell
 $ python3.7 -m venv venv
