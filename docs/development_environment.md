@@ -4,7 +4,40 @@ title: "Set up Development Environment"
 
 You'll need to set up a development environment if you want to develop a new feature or component for Home Assistant. Read on to learn how to set up.
 
-## Preparing your environment
+# Developing with Visual Studio Code + devcontainer
+
+The easiest way to get started with development is to use Visual Studio Code with devcontainers. This approach will create a preconfigured development environment with all the tools you need. This approach is enabled for all Home Assistant repositories.
+
+**Prerequisites**
+
+- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
+- [Docker](https://docs.docker.com/install/) (Windows only: requires Windows Pro)
+- [Visual Studio code](https://code.visualstudio.com/)
+- [Remote - Containers (VSC Extension)][extension-link]
+
+[More info about requirements and devcontainer in general](https://code.visualstudio.com/docs/remote/containers#_getting-started)
+
+[extension-link]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
+
+**Getting started:**
+
+1. Fork the repository.
+2. Clone the repository to your computer.
+3. Open the repository using Visual Studio code.
+
+When you open this repository with Visual Studio code you are asked to "Reopen in Container", this will start the build of the container.
+
+_If you don't see this notification, open the command pallet and select `Remote-Containers: Reopen Folder in Container`._
+
+## Tasks
+
+The devcontainter comes with some useful tasks to help you with development, you can start these tasks by opening the command pallet and select `Tasks: Run Task` then select the task you want to run.
+
+When a task is currently running (like `Preview` for the docs), it can be restarted by opening the command pallet and selecting `Tasks: Restart Running Task`, then select the task you want to restart.
+
+# Preparing your environment
+
+It is also possible to set up a more traditional development environment. See the section for your operating system.
 
 ### Developing on Linux
 
@@ -68,35 +101,6 @@ Then install ffmpeg:
 ```shell
 $ brew install ffmpeg
 ```
-
-### Developing with devcontainer
-
-The devcontainer is a preconfigured development environment with all the tools you need.
-
-**Prerequisites**
-
-- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-- [Docker](https://docs.docker.com/install/)
-- [Visual Studio code](https://code.visualstudio.com/)
-- [Remote - Containers (VSC Extension)](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
-
-[More info about requirements and devcontainer in general](https://code.visualstudio.com/docs/remote/containers#_getting-started)
-
-**Getting started:**
-
-1. Fork the repository.
-1. Clone the repository to your computer.
-1. Open the repository using Visual Studio code.
-
-When you open this repository with Visual Studio code you are asked to "Reopen in Container", this will start the build of the container.
-
-_If you don't see this notification, open the command pallet and select `Remote-Containers: Reopen Folder in Container`._
-
-_If you get `command 'remote-containers.reopenInContainer' not found` make sure to use a Visual Studio code version with remote container support enabled._
-
-The devcontainter comes with some useful tasks to help you with development, you can start these tasks by opening the command pallet and select `Tasks: Run Task` then select the task you want to run.
-
-Running tasks like `Preview` can be restarted by opening the command pallet and selecting `Tasks: Restart Running Task`, then select the task you want to restart.
 
 ## Setup Local Repository
 
