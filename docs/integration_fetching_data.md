@@ -8,7 +8,7 @@ Your integration will need to fetch data from an API to be able to provide this 
 
 APIs come in many different shapes and forms but at its core they fall in two categories: push and poll.
 
-With push, we subscribe to an API and we get notified by the API when new data is available. It pushes the changes to us. Push APIs are great because they consume less resources. When a change happens, we can get notified of a change and don't have to re-fetch all the data and find changes. Because entities can be disabled, you should make sure that your entity subscribes inside the `async_added_to_hass` callback and unsubscribes inside `async_will_remove_from_hass`.
+With push, we subscribe to an API and we get notified by the API when new data is available. It pushes the changes to us. Push APIs are great because they consume less resources. When a change happens, we can get notified of a change and don't have to re-fetch all the data and find changes. Because entities can be disabled, you should make sure that your entity subscribes inside the `async_added_to_hass` callback and unsubscribes on remove.
 
 With polling, we will fetch the latest data from the API at a specified interval. Your integration will then supply this data to its entity, which is written to Home Assistant.
 
@@ -41,7 +41,7 @@ _LOGGER = logging.getLogger(__name__)
 
 async def async_setup_entry(hass, entry, async_add_entities):
     # assuming API object stored here by __init__.py
-    api = hass.data[DOMAIN][entry.entry_id]  
+    api = hass.data[DOMAIN][entry.entry_id]
 
     async def async_update_data():
         """Fetch data from API endpoint.
@@ -100,14 +100,10 @@ class MyEntity(entity.Entity):
 
     async def async_added_to_hass(self):
         """When entity is added to hass."""
-        self.coordinator.async_add_listener(
-            self.async_write_ha_state
-        )
-
-    async def async_will_remove_from_hass(self):
-        """When entity will be removed from hass."""
-        self.coordinator.async_remove_listener(
-            self.async_write_ha_state
+        self.async_on_remove(
+            self.coordinator.async_add_listener(
+                self.async_write_ha_state
+            )
         )
 
     async def async_turn_on(self, **kwargs):
