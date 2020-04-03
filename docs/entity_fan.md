@@ -66,10 +66,10 @@ class FanEntity(ToggleEntity):
 class FanEntity(ToggleEntity):
     # Implement one of these methods.
 
-    def turn_on(self, speed: str = None, **kwargs: Any) -> None:
+    def turn_on(self, speed: Optional[str] = None, **kwargs: Any) -> None:
         """Turn on the fan."""
 
-    async def async_turn_on(self, speed: str = None, **kwargs: Any) -> None:
+    async def async_turn_on(self, speed: Optional[str] = None, **kwargs: Any) -> None:
         """Turn on the fan."""
 ```
 
@@ -115,7 +115,6 @@ class FanEntity(ToggleEntity):
     async def async_oscillate(self, oscillating: bool) -> None:
         """Oscillate the fan."""
 ```
-
 
 
 
