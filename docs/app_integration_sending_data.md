@@ -30,7 +30,7 @@ All interaction will be done by making HTTP POST requests to the webhook url. Th
 
 The payload format depends on the type of interaction, but it all shares a common base:
 
-```json5
+```json
 {
   "type": "<type of message>",
   "data": {}
@@ -39,7 +39,7 @@ The payload format depends on the type of interaction, but it all shares a commo
 
 If you received a `secret` during registration, you **MUST** encrypt your message and put it in the payload like this:
 
-```json5
+```json
 {
   "type": "encrypted",
   "encrypted": true,
