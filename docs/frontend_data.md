@@ -143,4 +143,6 @@ If you need to pass in data, pass a third argument:
 hass.callApi('delete', 'notify.html5', { subscription: 'abcdefgh' });
 ```
 
-_We're moving away from API calls and are migrating everything to `hass.callWS(message)` calls._
+:::info
+We're moving away from API calls and are migrating everything to `hass.callWS(message)` calls.
+:::

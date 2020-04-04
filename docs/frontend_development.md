@@ -5,7 +5,9 @@ sidebar_label: "Development"
 
 The Home Assistant frontend is built using web components. For more background about our technology choices, [see this blog post](https://developers.home-assistant.io/blog/2019/05/22/internet-of-things-and-the-modern-web.html).
 
-> Do not use development mode in production. Home Assistant uses aggressive caching to improve the mobile experience. This is disabled during development so that you do not have to restart the server in between changes.
+:::caution
+Do not use development mode in production. Home Assistant uses aggressive caching to improve the mobile experience. This is disabled during development so that you do not have to restart the server in between changes.
+:::
 
 ## Setting up the environment
 
@@ -59,7 +61,9 @@ $ script/develop
 
 Make sure you have cache disabled and correct settings to avoid stale content:
 
-> Instructions are for Google Chrome
+:::info
+Instructions are for Google Chrome
+:::
 
 1. Disable cache by ticking the box in `Network` > `Disable cache`
 

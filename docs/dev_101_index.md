@@ -9,7 +9,9 @@ To get our code running inside Home Assistant we're going to create a custom com
 
 Inside your configuration directory create a new folder called `custom_components`. It might be that one already exists, that's fine too. This is the folder that Home Assistant will look at when looking for custom code.
 
-> The Home Assistant API has two variants: a synchronous and an asynchronous version (asyncio). This development course will focus on the synchronous version.
+:::info
+The Home Assistant API has two variants: a synchronous and an asynchronous version (asyncio). This development course will focus on the synchronous version.
+:::
 
 To verify that everything is working correctly, let's create a small Hello World component. To do so, create a file called `hello_world.py` in your custom components folder. Copy paste the following content to it:
 

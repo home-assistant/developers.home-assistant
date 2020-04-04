@@ -5,7 +5,9 @@ sidebar_label: Platform Checklist
 
 A checklist of things to do when you're adding a new platform.
 
-> Not all existing platforms follow the requirements in this checklist. This cannot be used as a reason to not follow them!
+:::info
+Not all existing platforms follow the requirements in this checklist. This cannot be used as a reason to not follow them!
+:::
 
 ### 0. Common
 

@@ -22,7 +22,9 @@ Although we support the creation of custom groups, don't expect it publicly expo
 
 That being said, if you do want to play with it, it's possible.
 
-> This is risky. Make backups, etc.
+:::danger
+This is risky. Make backups, etc.
+:::
 
 Turn off Home Assistant and open up `<config>/.storage/auth`. Find the key `"groups"` and add a new group:
 

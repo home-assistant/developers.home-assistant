@@ -2,8 +2,9 @@
 title: "Creating custom UI"
 ---
 
-> This feature has been deprecated and is no longer supported. To add custom UI to Home Assistant, build a [custom Lovelace card](lovelace_custom_card.md) instead.
-
+:::warning Deprecated
+This feature has been deprecated and is no longer supported. To add custom UI to Home Assistant, build a [custom Lovelace card](lovelace_custom_card.md) instead.
+:::
 ### State card
 
 If you would like to use your own [State card](frontend_add_card.md) without merging your code into [home-assistant-polymer](https://github.com/home-assistant/home-assistant-polymer/) you can create your own implementation.
@@ -89,7 +90,9 @@ customElements.define(StateCardMyCustomLight.is, StateCardMyCustomLight);
 </script>
 ```
 
-> Some browsers don't support latest ECMAScript standards, these require a separate ES5 compatible file (`extra_html_url_es5`).
+:::tip
+Some browsers don't support latest ECMAScript standards, these require a separate ES5 compatible file (`extra_html_url_es5`).
+:::
 
 For more possibilities, see the [Custom UI section](https://www.home-assistant.io/cookbook/#user-interface) on our Examples page.
 

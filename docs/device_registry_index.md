@@ -18,7 +18,9 @@ If you connect a sensor to another device to read some of its data, it should st
 
 A device that offers multiple endpoints, where parts of the device sense or output in different areas, should be split into separate devices and refer back to parent device with the `via_device` attribute. This allows the separate endpoints to be assigned to different areas in the building.
 
-> Although not currently available, we could consider offering an option to users to merge devices.
+:::info
+Although not currently available, we could consider offering an option to users to merge devices.
+:::
 
 ## Device properties
 
@@ -37,7 +39,9 @@ A device that offers multiple endpoints, where parts of the device sense or outp
 
 ## Defining devices
 
-> Entity device info is only read if the entity is loaded via a [config entry](config_entries_index.md).
+:::tip
+Entity device info is only read if the entity is loaded via a [config entry](config_entries_index.md).
+:::
 
 Each entity is able to define a device via the `device_info` property. This property is read when an entity is added to Home Assistant via a config entry. A device will be matched up with an existing device via supplied identifiers and connections, like serial numbers or MAC addresses.
 

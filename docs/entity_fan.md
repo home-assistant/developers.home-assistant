@@ -7,13 +7,15 @@ A fan entity is a device that controls the different vectors of your fan such as
 
 ## Properties
 
-> Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+:::tip
+Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+:::
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | current_direction | str | None | Return the current direction of the fan |
 | is_on | boolean | None |Return true if the entity is on |
-| speed | str | None | Return the current speed. One of the values in speed_list. | 
+| speed | str | None | Return the current speed. One of the values in speed_list. |
 | speed_list | list | None| Get the list of available speeds. The allowed values are "off", "low", "medium" and "high". Use the corresponding constants SPEED_OFF, SPEED_LOW, SPEED_MEDIUM, SPEED_HIGH. |
 | supported_features | int | 0 | Flag supported features |
 
@@ -115,8 +117,3 @@ class FanEntity(ToggleEntity):
     async def async_oscillate(self, oscillating: bool) -> None:
         """Oscillate the fan."""
 ```
-
-
-
-
-

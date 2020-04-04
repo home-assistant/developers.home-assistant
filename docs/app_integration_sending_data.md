@@ -60,7 +60,9 @@ As a general rule, expect to receive a 200 response for all your requests. There
 
 `mobile_app` supports two way encrypted communication via [Sodium](https://libsodium.gitbook.io/doc/).
 
-> Sodium is a modern, easy-to-use software library for encryption, decryption, signatures, password hashing and more.
+:::info
+Sodium is a modern, easy-to-use software library for encryption, decryption, signatures, password hashing and more.
+:::
 
 ### Choosing a library
 Libraries that wrap Sodium exist for most modern programming languages and platforms. Sodium itself is written in C.

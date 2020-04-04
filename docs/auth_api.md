@@ -29,7 +29,9 @@ Home Assistant will scan the first 10kB of a website for link tags.
 <img class='invertDark' src='/img/en/auth/authorize_flow.png' alt='Overview of how the different parts interact' />
 </a>
 
-> All example URLs here are shown with extra spaces and new lines for display purposes only.
+:::info
+ All example URLs here are shown with extra spaces and new lines for display purposes only.
+:::
 
 The authorize url should contain `client_id` and `redirect_uri` as query parameters.
 
@@ -66,7 +68,9 @@ All interactions with this endpoint need to be HTTP POST requests to `http://you
 
 ### Authorization code
 
-> All requests to the token endpoint need to contain the exact same client ID as was used to redirect the user to the authorize endpoint.
+:::tip
+All requests to the token endpoint need to contain the exact same client ID as was used to redirect the user to the authorize endpoint.
+:::
 
 Use the grant type `authorization_code` to retrieve the tokens after a user has successfully finished the authorize step. The request body is:
 
@@ -129,8 +133,9 @@ An HTTP status code of 400 will be returned if an invalid request has been issue
 
 ### Revoking a refresh token
 
-> client_id is not need for revoke refresh token
-
+:::tip
+`client_id` is not need for revoke refresh token
+:::
 The token endpoint is also capable of revoking a refresh token. Revoking a refresh token will immediately revoke the refresh token and all access tokens that it has ever granted. To revoke a refresh token, make the following request:
 
 ```

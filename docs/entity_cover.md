@@ -7,7 +7,9 @@ A cover entity is a device that controls an opening or cover, such as a garage d
 
 ## Properties
 
-> Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+:::tip
+Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+:::
 
 ### Platform Properties (to be implemented by deriving platform classes)
 
@@ -27,7 +29,7 @@ A cover entity is a device that controls an opening or cover, such as a garage d
 | supported_features | int (bitwise) | Value determined from `current_cover_position` and `current_cover_tilt_position` | Describes the supported features. See the related table below for details.
 
 ### Device Classes
-| Constant | Description 
+| Constant | Description
 |----------|-----------------------|
 | `DEVICE_CLASS_AWNING` | Control of an awning, such as an exterior retractible window, door, or patio cover.
 | `DEVICE_CLASS_BLIND` | Control of blinds, which are linked slats that expand or collapse to cover an opening or may be tilted to partially cover an opening, such as window blinds.

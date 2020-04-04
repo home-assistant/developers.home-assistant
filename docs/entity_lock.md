@@ -7,7 +7,9 @@ A lock entity is a device which is able to lock and unlock. Locking and unlockin
 
 ## Properties
 
-> Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+:::tip
+Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+:::
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
@@ -32,7 +34,7 @@ class MyLock(LockDevice):
 
     def lock(self, **kwargs):
         """Lock all or specified locks. A code to lock the lock with may optionally be specified."""
-        
+
     async def async_lock(self, **kwargs):
         """Lock all or specified locks. A code to lock the lock with may optionally be specified."""
 ```
@@ -44,7 +46,7 @@ class MyLock(LockDevice):
 
     def unlock(self, **kwargs):
         """Unlock all or specified locks. A code to unlock the lock with may optionally be specified."""
-        
+
     async def async_unlock(self, **kwargs):
         """Unlock all or specified locks. A code to unlock the lock with may optionally be specified."""
 ```
@@ -58,7 +60,7 @@ class MyLock(LockDevice):
 
     def open(self, **kwargs):
         """Open (unlatch) all or specified locks. A code to open the lock with may optionally be specified."""
-        
+
     async def async_open(self, **kwargs):
         """Open (unlatch) all or specified locks. A code to open the lock with may optionally be specified."""
 ```

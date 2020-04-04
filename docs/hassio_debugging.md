@@ -2,7 +2,9 @@
 title: "Debugging Home Assistant"
 ---
 
-> This section is not for end users. End users should use the [SSH add-on] to SSH into Home Assistant. This is for <b>developers</b> of Home Assistant. Do not ask for support if you are using these options.
+:::info
+This section is not for end users. End users should use the [SSH add-on] to SSH into Home Assistant. This is for <b>developers</b> of Home Assistant. Do not ask for support if you are using these options.
+:::
 
 [SSH add-on]: https://www.home-assistant.io/addons/ssh/
 
@@ -35,12 +37,16 @@ Visual Studio Code config:
 You need set the dev mode on supervisor and enable debug with options. You need also install the Remote debug Add-on from Developer Repository to expose the debug port to Host.
 
 ## SSH access to the host
-> SSH access through the [SSH add-on] (which will give you SSH access through port 22) will not provide you with all the necessary privileges, and you will be asked for a username and password when typing the 'login' command. You need to follow the steps below, which will setup a separate SSH access through port 22222 with all necessary privileges.
+:::info
+SSH access through the [SSH add-on] (which will give you SSH access through port 22) will not provide you with all the necessary privileges, and you will be asked for a username and password when typing the 'login' command. You need to follow the steps below, which will setup a separate SSH access through port 22222 with all necessary privileges.
+:::
 
 ### Home Assistant OS
 Use a USB drive formatted with FAT, ext4, or NTFS and name it CONFIG (case sensitive). Create an `authorized_keys` file (no extension) containing your public key, and place it in the root of the USB drive. File needs to be ANSI encoded (not UTF-8) and must have Unix line ends (LF), not Windows (CR LF). See [Generating SSH Keys](#generating-ssh-keys) section below if you need help generating keys. From the UI, navigate to the Supervisor system page and choose "Import from USB". You can now access your device as root over SSH on port 22222. Alternatively, the file will be imported from the USB when the Home Assistant OS device is rebooted.
 
-> Make sure when you are copying the public key to the root of the USB drive that you rename the file correctly to `authorized_keys` with no `.pub` file extension.
+:::tip
+Make sure when you are copying the public key to the root of the USB drive that you rename the file correctly to `authorized_keys` with no `.pub` file extension.
+:::
 
 You should then be able to SSH into your Home Assistant device. On Mac/Linux, use:
 
@@ -48,7 +54,7 @@ You should then be able to SSH into your Home Assistant device. On Mac/Linux, us
 ssh root@hassio.local -p 22222
 ```
 
-You will initially be logged in to Home Assistant CLI for HassOS where you can perform normal [CLI functions]. If you need access to the host system use the 'login' command. [Home Assistant OS] is a hypervisor for Docker. See the [Supervisor Architecture] documentation for information regarding the supervisor. The supervisor offers an API to manage the host and running the Docker containers. Home Assistant itself and all installed addon's run in separate Docker containers. 
+You will initially be logged in to Home Assistant CLI for HassOS where you can perform normal [CLI functions]. If you need access to the host system use the 'login' command. [Home Assistant OS] is a hypervisor for Docker. See the [Supervisor Architecture] documentation for information regarding the supervisor. The supervisor offers an API to manage the host and running the Docker containers. Home Assistant itself and all installed addon's run in separate Docker containers.
 
 [CLI functions]: https://www.home-assistant.io/hassio/commandline/
 [Home Assistant OS]: https://github.com/home-assistant/hassos
