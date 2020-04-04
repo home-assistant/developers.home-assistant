@@ -59,7 +59,7 @@ GitHub usernames or team names of people that are responsible for this integrati
 
 Specify the `config_flow` key if your integration has a config flow to create a config entry. When specified, the file `config_flow.py` needs to exist in your integration.
 
-```json5
+```json
 {
   "config_flow": true
 }
@@ -94,7 +94,7 @@ hass --skip-pip
 
 If your integration supports discovery via [Zeroconf](https://en.wikipedia.org/wiki/Zero-configuration_networking), you can add the type to your manifest. If the user has the `zeroconf` integration loaded, it will load the `zeroconf` step of your integration's config flow when it is discovered.
 
-```json5
+```json
 {
   "zeroconf": ["_googlecast._tcp.local."]
 }
@@ -106,7 +106,7 @@ If your integration supports discovery via [SSDP](https://en.wikipedia.org/wiki/
 
 The following example has one matcher consisting of three items, all of which must match for discovery to happen by this config.
 
-```json5
+```json
 {
   "ssdp": [
     {
@@ -124,7 +124,7 @@ If your integration supports discovery via HomeKit, you can add the supported mo
 
 HomeKit discovery works by testing if the discovered modelname starts with any of the model names specified in the manifest.json.
 
-```json5
+```json
 {
   "homekit": {
     "models": [
@@ -146,7 +146,7 @@ When your integration has no score, then don't add it to the manifest of your in
 
 We highly recommend getting your integration scored.
 
-```json5
+```json
 {
  "quality_scale": "silver"
 }

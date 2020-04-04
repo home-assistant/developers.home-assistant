@@ -15,7 +15,9 @@ $ curl -X GET -H 'Authorization: Bearer ABCDEFGH' \
        -H "Content-Type: application/json" http://localhost:8123/api/stream
 ```
 
-> Will no longer work with the new Authentication system.
+:::caution
+Will no longer work with the new Authentication system.
+:::
 
 You can create a convenient view for this by creating an HTML file (`sse.html`) in the `www` folder of your Home Assistant configuration directory (`.homeassistant`). Paste this snippet into the file:
 
@@ -47,7 +49,9 @@ $ http --stream http://localhost:8123/api/stream 'Authorization:Bearer ABCDEFGH'
 
 ### Website
 
-> Will no longer work with the new Authentication system.
+:::caution
+Will no longer work with the new Authentication system.
+:::
 
 The [home-assistant-sse](https://github.com/fabaff/home-assistant-sse) repository contains a more advanced example.
 

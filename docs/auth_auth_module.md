@@ -6,7 +6,9 @@ Multi-factor Authentication Modules are used in conjunction with [Authentication
 
 ## Defining an mfa auth module
 
-> We currently only support built-in mfa auth modules. Support for custom auth modules might arrive in the future.
+:::info
+We currently only support built-in mfa auth modules. Support for custom auth modules might arrive in the future.
+:::
 
 Multi-factor Auth modules are defined in `homeassistant/auth/mfa_modules/<name of module>.py`. The auth module will need to provide an implementation of the `MultiFactorAuthModule` class.
 
@@ -59,7 +61,9 @@ homeassistant:
 
 In this example, user will first select from `homeassistant` or `legacy_api_password` auth provider. For `homeassistant` auth provider, user will first input username/password, if that user enabled both `totp` and `insecure_example`, then user need select one auth module, then input Google Authenticator code or input pin code base on the selection.
 
-> insecure_example is only for demo purpose, please do not use it in production.
+:::tip
+`insecure_example` is only for demo purpose, please do not use it in production.
+:::
 
 ## Validation session
 

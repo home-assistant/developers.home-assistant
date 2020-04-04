@@ -5,7 +5,9 @@ sidebar_label: Air Quality
 
 ## Properties
 
-> Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+:::tip
+Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+:::
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
@@ -23,4 +25,3 @@ sidebar_label: Air Quality
 | volatile_organic_compounds | float | `None` | The volatile organic compounds (VOC) level.
 
 Properties have to follow the units defined in the `unit_system`.
-

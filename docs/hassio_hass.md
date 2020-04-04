@@ -33,7 +33,9 @@ Voila. Your local Home Assistant installation will now connect to a remote Hass.
 
 ## Frontend development
 
-> This requires Home Assistant 0.71 or later.
+:::tip
+This requires Home Assistant 0.71 or later.
+:::
 
 We need a couple more steps to do frontend development. First, make sure you have a Home Assistant frontend development set up ([instructions](frontend_index.md)).
 

@@ -2,7 +2,9 @@
 title: "Submit your work"
 ---
 
-> Always base your Pull Requests of of the current **`dev`** branch, not `master`.
+:::tip
+Always base your Pull Requests of of the current **`dev`** branch, not `master`.
+:::
 
 Submit your improvements, fixes, and new features to Home Assistant one at a time, using GitHub [Pull Requests](https://help.github.com/articles/using-pull-requests). Here are the steps:
 
@@ -39,4 +41,3 @@ Submit your improvements, fixes, and new features to Home Assistant one at a tim
      * Click **Create pull request**.
 
  7. Check for comments and suggestions on your pull request and keep an eye on the [CI output](https://travis-ci.org/home-assistant/home-assistant/).
-

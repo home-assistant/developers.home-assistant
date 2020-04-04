@@ -30,7 +30,7 @@ All interaction will be done by making HTTP POST requests to the webhook url. Th
 
 The payload format depends on the type of interaction, but it all shares a common base:
 
-```json5
+```json
 {
   "type": "<type of message>",
   "data": {}
@@ -39,7 +39,7 @@ The payload format depends on the type of interaction, but it all shares a commo
 
 If you received a `secret` during registration, you **MUST** encrypt your message and put it in the payload like this:
 
-```json5
+```json
 {
   "type": "encrypted",
   "encrypted": true,
@@ -60,7 +60,9 @@ As a general rule, expect to receive a 200 response for all your requests. There
 
 `mobile_app` supports two way encrypted communication via [Sodium](https://libsodium.gitbook.io/doc/).
 
-> Sodium is a modern, easy-to-use software library for encryption, decryption, signatures, password hashing and more.
+:::info
+Sodium is a modern, easy-to-use software library for encryption, decryption, signatures, password hashing and more.
+:::
 
 ### Choosing a library
 Libraries that wrap Sodium exist for most modern programming languages and platforms. Sodium itself is written in C.

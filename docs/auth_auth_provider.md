@@ -8,7 +8,9 @@ Once an authentication provider has confirmed the identity of a user, it will pa
 
 ## Defining an auth provider
 
-> We currently only support built-in auth providers. Support for custom auth providers might arrive in the future.
+:::info
+We currently only support built-in auth providers. Support for custom auth providers might arrive in the future.
+:::
 
 Auth providers are defined in `homeassistant/auth/providers/<name of provider>.py`. The auth provider module will need to provide an implementation of the `AuthProvider` class and `LoginFlow` class, it is what asks user for information and validates it base on `data_entry_flow`.
 
@@ -30,7 +32,9 @@ Auth providers shall extend the following methods of `LoginFlow` class.
 
 ## async_step_init of LoginFlow
 
-> We may change this inteface in near future.
+:::info
+We may change this inteface in near future.
+:::
 
 `LoginFlow` extends `data_entry_flow.FlowHandler`. The first step of data entry flow is hard coded as `init`, so each flow has to implement `async_step_init` method. The pattern of `async_step_init` likes following pseudo-code:
 

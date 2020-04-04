@@ -54,7 +54,9 @@ $ sudo apt-get install autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev 
 $ sudo apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev
 ```
 
-> Different distributions have different package installation mechanisms and sometimes packages names as well. For example CentOS would use: `sudo yum install epel-release && sudo yum install python36 python36-devel mysql-devel gcc`
+:::tip
+ Different distributions have different package installation mechanisms and sometimes packages names as well. For example CentOS would use: `sudo yum install epel-release && sudo yum install python36 python36-devel mysql-devel gcc`
+:::
 
 Additional dependencies exist if you plan to perform Frontend Development, please read the [Frontend](frontend_index.md) section to learn more.
 
@@ -132,7 +134,7 @@ Install the requirements with a provided script named `setup`.
 $ script/setup
 ```
 
-Invoke your installation, adjusting the [configuration](https://www.home-assistant.io/docs/configuration/) if required. 
+Invoke your installation, adjusting the [configuration](https://www.home-assistant.io/docs/configuration/) if required.
 
 ```shell
 $ hass

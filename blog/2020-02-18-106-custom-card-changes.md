@@ -16,7 +16,9 @@ Please check if your custom card still works with 0.106 and make adjustments to 
 
 ### Helper functions
 
-> We decided to postpone this change until 0.107.
+:::info
+We decided to postpone this change until 0.107.
+:::
 
 A second change that was made, is that we no longer load all element types by default. We load them when they are needed. This will also help performance but might break your custom card.
 

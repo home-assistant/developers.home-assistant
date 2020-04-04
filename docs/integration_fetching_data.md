@@ -143,7 +143,9 @@ SCAN_INTERVAL = timedelta(seconds=5)
 
 # Request Parallelism
 
-> This is an advanced topic.
+:::info
+This is an advanced topic.
+:::
 
 Home Assistant has built-in logic to make sure that integrations do not hammer APIs and consume all available resources in Home Assistant. This logic is built around limiting the number of parallel requests. This logic is automatically used during service calls and entity updates.
 
