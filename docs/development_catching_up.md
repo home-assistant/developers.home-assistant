@@ -29,7 +29,7 @@ $ git push origin --force
 Other workflows are covered in detail in the [Github documentation](https://help.github.com/articles/fork-a-repo/). Add an additional `remote` after you clone your fork.
 
 ```shell
-$ git remote add upstream https://github.com/home-assistant/home-assistant.git
+$ git remote add upstream https://github.com/home-assistant/core.git
 ```
 
 Then, `git pull --rebase upstream dev`.
