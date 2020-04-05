@@ -8,6 +8,12 @@ If it's taking a while to develop your feature, and you want to catch up with wh
 If you use the workflow below, it is important that you force push the update as described. Git might prompt you to do `git pull` first. Do **NOT** do that! It would mess up your commit history.
 :::
 
+You should have added an additional `remote` after you clone your fork. If you did not, do it now before proceeding.
+
+```shell
+$ git remote add upstream https://github.com/home-assistant/core.git
+```
+
 ```shell
 # Run this from your feature branch
 $ git fetch upstream dev  # to pull the latest changes into a local dev branch
@@ -28,10 +34,4 @@ After rebasing your branch, you will have rewritten history relative to your Git
 $ git push origin --force
 ```
 
-Other workflows are covered in detail in the [Github documentation](https://help.github.com/articles/fork-a-repo/). Add an additional `remote` after you clone your fork.
-
-```shell
-$ git remote add upstream https://github.com/home-assistant/core.git
-```
-
-Then, `git pull --rebase upstream dev`.
+Other workflows are covered in detail in the [Github documentation](https://help.github.com/articles/fork-a-repo/).
