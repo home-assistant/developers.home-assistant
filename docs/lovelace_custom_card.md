@@ -273,7 +273,7 @@ class ContentCardEditor extends LitElement {
 
 customElements.define("content-card-editor", MyCardEditor);
 window.customCards = window.customCards || [];
-wincow.customCards.push({
+window.customCards.push({
   type: "content-card-example",
   name: "Content Card",
   preview: false, // Optional - defaults to false
