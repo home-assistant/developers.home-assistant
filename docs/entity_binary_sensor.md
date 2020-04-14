@@ -21,6 +21,7 @@ Properties should always only return information from memory and not do I/O (lik
 | Value | Description
 | ----- | -----------
 | battery | On means low, Off means normal.
+| battery_charging | On means charging, Off means not charging.
 | cold | On means cold, Off means normal.
 | connectivity | On means connected, Off means disconnected.
 | door | On means open, Off means closed.
