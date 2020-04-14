@@ -27,13 +27,13 @@ The easiest way to get started with development is to use Visual Studio Code wit
 
 When you open this repository with Visual Studio code you are asked to "Reopen in Container", this will start the build of the container.
 
-_If you don't see this notification, open the command pallet and select `Remote-Containers: Reopen Folder in Container`._
+_If you don't see this notification, open the command palette and select `Remote-Containers: Reopen Folder in Container`._
 
 ## Tasks
 
-The devcontainter comes with some useful tasks to help you with development, you can start these tasks by opening the command pallet and select `Tasks: Run Task` then select the task you want to run.
+The devcontainter comes with some useful tasks to help you with development, you can start these tasks by opening the command palette and select `Tasks: Run Task` then select the task you want to run.
 
-When a task is currently running (like `Preview` for the docs), it can be restarted by opening the command pallet and selecting `Tasks: Restart Running Task`, then select the task you want to restart.
+When a task is currently running (like `Preview` for the docs), it can be restarted by opening the command palette and selecting `Tasks: Restart Running Task`, then select the task you want to restart.
 
 # Preparing your environment
 
