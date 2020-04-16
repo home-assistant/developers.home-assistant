@@ -112,8 +112,8 @@ Translations for the config flow handlers are defined under the `config` key in 
 
 ```json
 {
+  "title": "Philips Hue Bridge",
   "config": {
-    "title": "Philips Hue Bridge",
     "step": {
       "init": {
         "title": "Pick Hue bridge",
