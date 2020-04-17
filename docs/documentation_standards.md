@@ -16,6 +16,7 @@ To ensure that the documentation for Home Assistant is consistent and easy to fo
 ## Integration and Platform Pages
 
 * The **Configuration Variables** section must use the `{% configuration %}` tag.
+* The **Configuration Variables** section is only used for YAML configuration.
 * Configuration variables must document the requirement status (`false` or `true`).
 * Configuration variables must document the default value, if any.
 * Configuration variables must document the accepted value types (see [Configuration variables details](documentation_create_page.md#configuration)).
