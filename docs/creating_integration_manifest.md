@@ -90,6 +90,8 @@ pip install -e ./pychromecast
 hass --skip-pip
 ```
 
+Finally, it is also possible to use a valid any public git repository to install a requirement.  This can be useful, for example, to test changes to a requirement dependency before it's been published to Pypi.  For example,`["git+https://github.com/issacg/pycoolmaster.git@except_connect#pycoolmaster==0.2.2-dev.10002"]` will install the `except_connect` branch of the `pycoolmaster` library as version `0.2.2-dev.10002` directly from GitHub.
+
 ## Zeroconf
 
 If your integration supports discovery via [Zeroconf](https://en.wikipedia.org/wiki/Zero-configuration_networking), you can add the type to your manifest. If the user has the `zeroconf` integration loaded, it will load the `zeroconf` step of your integration's config flow when it is discovered.
