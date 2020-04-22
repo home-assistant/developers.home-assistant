@@ -96,6 +96,7 @@ It is also possible to use a public git repository to install a requirement.  Th
 {
   "requirements": ["git+https://github.com/issacg/pycoolmaster.git@except_connect#pycoolmaster==0.2.2"]
 }
+```
 
 ## Zeroconf
 
