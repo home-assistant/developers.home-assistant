@@ -71,6 +71,10 @@ Required. Returns one of the defined constants from the below list that matches 
       @property
       def media_content_type(self):
         """Content type of current playing media."""
+        
+:::info
+Using the integration name as the `media_content_type` is also acceptable within the `play_media` service if the integration provides handling which does not map to the defined constants.
+:::
 
 ### Available device classes
 Optional. What type of media device is this. It will possibly map to google device types.
