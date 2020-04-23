@@ -8,4 +8,12 @@ Some components and platforms will have strings that need to be localized specif
 
 There are also localizable strings that exist only on the frontend. These strings are managed in the [home-assistant-polymer](https://github.com/home-assistant/home-assistant-polymer) repository. These strings are stored with the frontend and don’t depend on the backend configuration.
 
+| Type              | Location |
+| ----------------- | -------- |
+| Entity states     | Core     |
+| Config flows      | Core     |
+| Options flows     | Core     |
+| Device automation | Core     |
+| Text in UI        | Frontend |
+
 Our strings are translated by the community using the online translation tool [Lokalise](https://lokalise.co/).
