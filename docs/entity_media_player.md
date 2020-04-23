@@ -68,6 +68,7 @@ Required. Returns one of the defined constants from the below list that matches 
     class MyMediaPlayer(MediaPlayerDevice):
       # Implement the following method.
 
+      @property
       def media_content_type(self):
         """Content type of current playing media."""
 
