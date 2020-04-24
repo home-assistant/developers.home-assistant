@@ -26,6 +26,7 @@ async def async_finish_flow(flow, result):
 This async callback is called when a flow is finished or aborted. i.e. `result['type'] in [RESULT_TYPE_CREATE_ENTRY, RESULT_TYPE_ABORT]`. The callback function can modify result and return it back, if the result type changed to `RESULT_TYPE_FORM`, the flow will continue running, display another form.
 
 If the result type is `RESULT_TYPE_FORM`, the result should look like:
+
 ```python
 {
     # The result type of the flow
@@ -46,6 +47,7 @@ If the result type is `RESULT_TYPE_FORM`, the result should look like:
 ```
 
 If the result type is `RESULT_TYPE_CREATE_ENTRY`, the result should look like:
+
 ```python
 {
     # Data schema version of the entry
@@ -65,6 +67,7 @@ If the result type is `RESULT_TYPE_CREATE_ENTRY`, the result should look like:
 ```
 
 If the result type is `RESULT_TYPE_ABORT`, the result should look like:
+
 ```python
 {
     # The result type of the flow
@@ -77,7 +80,6 @@ If the result type is `RESULT_TYPE_ABORT`, the result should look like:
     "reason": "already_configured",
 }
 ```
-
 
 ## Flow Handler
 
@@ -115,6 +117,9 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
             vol.Required("username"): str,
             vol.Required("password"): str,
         }
+
+        if self.show_advanced_options:
+            data_schema["allow_groups"]: bool
 
         return self.async_show_form(step_id="init", data_schema=vol.Schema(data_schema))
 ```
@@ -200,15 +205,16 @@ _The example is about config entries, but works with other parts that use data e
 
 The flow works as follows:
 
- 1. User starts config flow in Home Assistant
- 2. Config flow prompts user to finish the flow on an external website
- 3. User opens the external website
- 4. Upon completion of the external step, the user's browser will be redirected to a Home Assistant endpoint to deliver the response.
- 5. The endpoint validates the response, and upon validation, marks the external step as done and returns JavaScript code to close the window: `<script>window.close()</script>`.
+1.  The user starts config flow in Home Assistant.
+2.  Config flow prompts the user to finish the flow on an external website.
+3.  The user opens the external website.
+4.  Upon completion of the external step, the user's browser will be redirected to a Home Assistant endpoint to deliver the response.
+5.  The endpoint validates the response, and upon validation, marks the external step as done and returns JavaScript code to close the window: `<script>window.close()</script>`.
 
     To be able to route the result of the external step to the Home Assistant endpoint, you will need to make sure the config flow ID is included. If your external step is an OAuth2 flow, you can leverage the oauth2 state for this. This is a variable that is not interpreted by the authorization page but is passed as-is to the Home Assistant endpoint.
- 6. The window closes and the Home Assistant user interface with the config flow will be visible to the user again.
- 7. The config flow has automatically advanced to the next step when the external step was marked as done. The user is prompted with the next step.
+
+6.  The window closes and the Home Assistant user interface with the config flow will be visible to the user again.
+7.  The config flow has automatically advanced to the next step when the external step was marked as done. The user is prompted with the next step.
 
 Example configuration flow that includes an external step.
 
@@ -256,7 +262,7 @@ async def handle_result(hass, flow_id, data):
 
 ## Translations
 
-Data entry flows depend on translations for showing the text in the forms. It depends on the parent of a data entry flow manager where this is stored.
+Data entry flows depend on translations for showing the text in the forms. It depends on the parent of a data entry flow manager where this is stored. For config and option flows this is in `strings.json` under `config` and `option`.
 
 ## Initializing a config flow from an external source
 
@@ -275,3 +281,5 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
     async def async_step_discovery(self, info):
         """Handle discovery info."""
 ```
+
+The source of a config flow is available as `self.source` on `FlowHandler`.
