@@ -205,9 +205,9 @@ _The example is about config entries, but works with other parts that use data e
 
 The flow works as follows:
 
-1.  User starts config flow in Home Assistant
-2.  Config flow prompts user to finish the flow on an external website
-3.  User opens the external website
+1.  The user starts config flow in Home Assistant.
+2.  Config flow prompts the user to finish the flow on an external website.
+3.  The user opens the external website.
 4.  Upon completion of the external step, the user's browser will be redirected to a Home Assistant endpoint to deliver the response.
 5.  The endpoint validates the response, and upon validation, marks the external step as done and returns JavaScript code to close the window: `<script>window.close()</script>`.
 
