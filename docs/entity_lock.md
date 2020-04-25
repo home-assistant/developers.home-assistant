@@ -3,7 +3,7 @@ title: Lock Entity
 sidebar_label: Lock
 ---
 
-A lock entity is able to be locked and unlocked. Locking and unlocking can optionally be secured with a user code. Some locks also allow for opening of latches, this may also be secured with a user code. Derive entity platforms from [`homeassistant.components.lock.LockEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/lock/__init__.py).
+A lock entity is able to be locked and unlocked. Locking and unlocking can optionally be secured with a user code. Some locks also allow for opening of latches, this may also be secured with a user code. Derive a platform entity from [`homeassistant.components.lock.LockEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/lock/__init__.py).
 
 ## Properties
 
