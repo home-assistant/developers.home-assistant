@@ -27,7 +27,7 @@ Properties should always only return information from memory and not do I/O (lik
 ### Select sound mode
 Optional. Switch the sound mode of the media player.
 
-    class MyMediaPlayer(MediaPlayerDevice):
+    class MyMediaPlayer(MediaPlayerEntity):
       # Implement one of these methods.
 
       def select_sound_mode(self, sound_mode):
@@ -39,7 +39,7 @@ Optional. Switch the sound mode of the media player.
 ### Select source
 Optional. Switch the selected input source for the media player.
 
-    class MyMediaPlayer(MediaPlayerDevice):
+    class MyMediaPlayer(MediaPlayerEntity):
       # Implement one of these methods.
 
       def select_source(self, source):
