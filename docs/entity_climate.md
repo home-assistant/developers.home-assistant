@@ -3,7 +3,7 @@ title: Climate Entity
 sidebar_label: Climate
 ---
 
-A climate entity is a device that controls temperature, humidity, or fans, such as A/C systems and humidifiers. Derive entity platforms from [`homeassistant.components.climate.ClimateDevice`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/climate/__init__.py)
+A climate entity is a device that controls temperature, humidity, or fans, such as A/C systems and humidifiers. Derive entity platforms from [`homeassistant.components.climate.ClimateEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/climate/__init__.py)
 
 ## Properties
 
@@ -137,7 +137,7 @@ class MyClimateDevice(ClimateDevice):
 ### Set preset mode
 
 ```python
-class MyClimateDevice(ClimateDevice):
+class MyClimateDevice(ClimateEntity):
     # Implement one of these methods.
 
     def set_preset_mode(self, preset_mode):
@@ -150,7 +150,7 @@ class MyClimateDevice(ClimateDevice):
 ### Set fan mode
 
 ```python
-class MyClimateDevice(ClimateDevice):
+class MyClimateDevice(ClimateEntity):
     # Implement one of these methods.
 
     def set_fan_mode(self, fan_mode):
@@ -163,7 +163,7 @@ class MyClimateDevice(ClimateDevice):
 ### Set humidity
 
 ```python
-class MyClimateDevice(ClimateDevice):
+class MyClimateDevice(ClimateEntity):
     # Implement one of these methods.
 
     def set_humidity(self, humidity):
@@ -176,7 +176,7 @@ class MyClimateDevice(ClimateDevice):
 ### Set swing mode
 
 ```python
-class MyClimateDevice(ClimateDevice):
+class MyClimateDevice(ClimateEntity):
     # Implement one of these methods.
 
     def set_swing_mode(self, swing_mode):
@@ -189,7 +189,7 @@ class MyClimateDevice(ClimateDevice):
 ### Set temperature
 
 ```python
-class MyClimateDevice(ClimateDevice):
+class MyClimateDevice(ClimateEntity):
     # Implement one of these methods.
 
     def set_temperature(self, **kwargs):
@@ -202,7 +202,7 @@ class MyClimateDevice(ClimateDevice):
 ### Control auxiliary heater
 
 ```python
-class MyClimateDevice(ClimateDevice):
+class MyClimateDevice(ClimateEntity):
     # Implement one of these methods.
 
     def turn_aux_heat_on(self):
