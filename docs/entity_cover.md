@@ -3,7 +3,7 @@ title: Cover Entity
 sidebar_label: Cover
 ---
 
-A cover entity is a device that controls an opening or cover, such as a garage door and window shade.  Derive entity platforms from [`homeassistant.components.cover.CoverDevice`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/cover/__init__.py).
+A cover entity is a device that controls an opening or cover, such as a garage door and window shade.  Derive entity platforms from [`homeassistant.components.cover.CoverEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/cover/__init__.py).
 
 ## Properties
 
@@ -73,7 +73,7 @@ Supported features constants are combined using the bitwise or (`|`) operator.
 Only implement this method if the flag `SUPPORT_OPEN` is set.
 
 ```python
-class MyCover(CoverDevice):
+class MyCover(CoverEntity):
     # Implement one of these methods.
 
     def open_cover(self, **kwargs):
@@ -88,7 +88,7 @@ class MyCover(CoverDevice):
 Only implement this method if the flag `SUPPORT_CLOSE` is set.
 
 ```python
-class MyCover(CoverDevice):
+class MyCover(CoverEntity):
     # Implement one of these methods.
 
     def close_cover(self, **kwargs):
@@ -103,7 +103,7 @@ class MyCover(CoverDevice):
 Only implement this method if the flag `SUPPORT_SET_POSITION` is set.
 
 ```python
-class MyCover(CoverDevice):
+class MyCover(CoverEntity):
     # Implement one of these methods.
 
     def set_cover_position(self, **kwargs):
@@ -118,7 +118,7 @@ class MyCover(CoverDevice):
 Only implement this method if the flag `SUPPORT_STOP` is set.
 
 ```python
-class MyCover(CoverDevice):
+class MyCover(CoverEntity):
     # Implement one of these methods.
 
     def stop_cover(self, **kwargs):
@@ -133,7 +133,7 @@ class MyCover(CoverDevice):
 Only implement this method if the flag `SUPPORT_OPEN_TILT` is set.
 
 ```python
-class MyCover(CoverDevice):
+class MyCover(CoverEntity):
     # Implement one of these methods.
 
     def open_cover_tilt(self, **kwargs):
@@ -148,7 +148,7 @@ class MyCover(CoverDevice):
 Only implement this method if the flag `SUPPORT_CLOSE_TILT` is set.
 
 ```python
-class MyCover(CoverDevice):
+class MyCover(CoverEntity):
     # Implement one of these methods.
 
     def close_cover_tilt(self, **kwargs):
@@ -163,7 +163,7 @@ class MyCover(CoverDevice):
 Only implement this method if the flag `SUPPORT_SET_TILT_POSITION` is set.
 
 ```python
-class MyCover(CoverDevice):
+class MyCover(CoverEntity):
     # Implement one of these methods.
 
     def set_cover_tilt_position(self, **kwargs):
@@ -178,7 +178,7 @@ class MyCover(CoverDevice):
 Only implement this method if the flag `SUPPORT_STOP_TILT` is set.
 
 ```python
-class MyCover(CoverDevice):
+class MyCover(CoverEntity):
     # Implement one of these methods.
 
     def stop_cover_tilt(self, **kwargs):
