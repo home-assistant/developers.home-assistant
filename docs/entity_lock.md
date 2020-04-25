@@ -3,7 +3,7 @@ title: Lock Entity
 sidebar_label: Lock
 ---
 
-A lock entity is a device which is able to lock and unlock. Locking and unlocking can optionally be secured with a user code. Some locks also allow for opening of latches, this may also be secured with a user code.
+A lock entity is able to be locked and unlocked. Locking and unlocking can optionally be secured with a user code. Some locks also allow for opening of latches, this may also be secured with a user code. Derive a platform entity from [`homeassistant.components.lock.LockEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/lock/__init__.py).
 
 ## Properties
 
@@ -30,7 +30,7 @@ Supported features constants are combined using the bitwise or (`|`) operator.
 ### Lock
 
 ```python
-class MyLock(LockDevice):
+class MyLock(LockEntity):
 
     def lock(self, **kwargs):
         """Lock all or specified locks. A code to lock the lock with may optionally be specified."""
@@ -42,7 +42,7 @@ class MyLock(LockDevice):
 ### Unlock
 
 ```python
-class MyLock(LockDevice):
+class MyLock(LockEntity):
 
     def unlock(self, **kwargs):
         """Unlock all or specified locks. A code to unlock the lock with may optionally be specified."""
@@ -56,7 +56,7 @@ class MyLock(LockDevice):
 Only implement this method if the flag `SUPPORT_OPEN` is set.
 
 ```python
-class MyLock(LockDevice):
+class MyLock(LockEntity):
 
     def open(self, **kwargs):
         """Open (unlatch) all or specified locks. A code to open the lock with may optionally be specified."""
