@@ -3,7 +3,7 @@ title: Cover Entity
 sidebar_label: Cover
 ---
 
-A cover entity is a device that controls an opening or cover, such as a garage door and window shade.  Derive entity platforms from [`homeassistant.components.cover.CoverEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/cover/__init__.py).
+A cover entity is a controls an opening or cover, such as a garage door and window shade.  Derive entity platforms from [`homeassistant.components.cover.CoverEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/cover/__init__.py).
 
 ## Properties
 
