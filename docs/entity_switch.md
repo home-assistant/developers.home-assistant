@@ -53,7 +53,7 @@ class MySwitch(SwitchDevice):
 Optional. If not implemented will default to checking what method to call using the `is_on` property.
 
 ```python
-class MySwitch(SwitchDevice):
+class MySwitch(SwitchEntity):
     # Implement one of these methods.
 
     def toggle(self, **kwargs):
