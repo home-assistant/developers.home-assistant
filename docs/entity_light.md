@@ -38,7 +38,7 @@ A light entity is a device that controls the brightness, RGB value,color tempera
 # Turn on Light Device
 
 ```python
-class MyLightDevice(LightDevice):
+class MyLightDevice(LightEntity):
     def turn_on(self, **kwargs):
         """Turn the device on."""
 
@@ -49,7 +49,7 @@ class MyLightDevice(LightDevice):
 # Turn Off Light Device
 
 ```python
-class MyLightDevice(LightDevice):
+class MyLightDevice(LightEntity):
     def turn_off(self, **kwargs):
         """Turn the device off."""
 
