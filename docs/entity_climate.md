@@ -3,7 +3,7 @@ title: Climate Entity
 sidebar_label: Climate
 ---
 
-A climate entity controls temperature, humidity, or fans, such as A/C systems and humidifiers. Derive entity platforms from [`homeassistant.components.climate.ClimateEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/climate/__init__.py)
+A climate entity controls temperature, humidity, or fans, such as A/C systems and humidifiers. Derive a platform entity from [`homeassistant.components.climate.ClimateEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/climate/__init__.py)
 
 ## Properties
 
