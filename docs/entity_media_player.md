@@ -6,7 +6,7 @@ sidebar_label: Media Player
 :::info Incomplete
 This entry is incomplete. Contribution welcome.
 :::
-A media player entity controls a media player.  Derive entity platforms from [`homeassistant.components.media_player.MediaPlayerEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/media_player/__init__.py).
+A media player entity controls a media player.  Derive a platform entity from [`homeassistant.components.media_player.MediaPlayerEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/media_player/__init__.py).
 
 ## Properties
 
