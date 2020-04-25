@@ -50,7 +50,7 @@ Properties should always only return information from memory and not do I/O (lik
 Send disarm command.
 
 ```python
-class MyAlarm(AlarmControlPanel):
+class MyAlarm(AlarmControlPanelEntity):
     # Implement one of these methods.
 
     def alarm_disarm(self, code=None) -> None:
@@ -64,7 +64,7 @@ class MyAlarm(AlarmControlPanel):
 Send arm home command.
 
 ```python
-class MyAlarm(AlarmControlPanel):
+class MyAlarm(AlarmControlPanelEntity):
     # Implement one of these methods.
 
     def alarm_arm_home(self, code=None) -> None:
@@ -78,7 +78,7 @@ class MyAlarm(AlarmControlPanel):
 Send arm away command.
 
 ```python
-class MyAlarm(AlarmControlPanel):
+class MyAlarm(AlarmControlPanelEntity):
     # Implement one of these methods.
 
     def alarm_arm_away(self, code=None) -> None:
@@ -92,7 +92,7 @@ class MyAlarm(AlarmControlPanel):
 Send arm night command.
 
 ```python
-class MyAlarm(AlarmControlPanel):
+class MyAlarm(AlarmControlPanelEntity):
     # Implement one of these methods.
 
     def alarm_arm_night(self, code=None) -> None:
@@ -106,7 +106,7 @@ class MyAlarm(AlarmControlPanel):
 Send alarm trigger command.
 
 ```python
-class MyAlarm(AlarmControlPanel):
+class MyAlarm(AlarmControlPanelEntity):
     # Implement one of these methods.
 
     def alarm_trigger(self, code=None) -> None:
@@ -120,7 +120,7 @@ class MyAlarm(AlarmControlPanel):
 Send arm custom bypass command.
 
 ```python
-class MyAlarm(AlarmControlPanel):
+class MyAlarm(AlarmControlPanelEntity):
     # Implement one of these methods.
 
     def alarm_arm_custom_bypass(self, code=None) -> None:
