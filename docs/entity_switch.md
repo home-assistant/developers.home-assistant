@@ -3,6 +3,10 @@ title: Switch Entity
 sidebar_label: Switch
 ---
 
+A switch entity turns on or off something, for example a relay. Derive a platform entity from [`homeassistant.components.switch.SwitchEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/switch/__init__.py).
+To represent something which can be turned on or off but can't be controlled, for example a wall switch which transmits its state but can't be turned on or off from Home Assistant, a Binary Sensor is a better choice.
+To represent something which doesn't have a state, for example a door bell push button, a custom event or a Device Trigger is a better choice.
+
 ## Properties
 
 :::tip
@@ -23,7 +27,7 @@ Properties should always only return information from memory and not do I/O (lik
 Turn the switch on.
 
 ```python
-class MySwitch(SwitchDevice):
+class MySwitch(SwitchEntity):
     # Implement one of these methods.
 
     def turn_on(self, **kwargs) -> None:
@@ -38,7 +42,7 @@ class MySwitch(SwitchDevice):
 Turn the switch off.
 
 ```python
-class MySwitch(SwitchDevice):
+class MySwitch(SwitchEntity):
     # Implement one of these methods.
 
     def turn_off(self, **kwargs):
@@ -53,7 +57,7 @@ class MySwitch(SwitchDevice):
 Optional. If not implemented will default to checking what method to call using the `is_on` property.
 
 ```python
-class MySwitch(SwitchDevice):
+class MySwitch(SwitchEntity):
     # Implement one of these methods.
 
     def toggle(self, **kwargs):
