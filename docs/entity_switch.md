@@ -27,7 +27,7 @@ Properties should always only return information from memory and not do I/O (lik
 Turn the switch on.
 
 ```python
-class MySwitch(SwitchDevice):
+class MySwitch(SwitchEntity):
     # Implement one of these methods.
 
     def turn_on(self, **kwargs) -> None:
@@ -42,7 +42,7 @@ class MySwitch(SwitchDevice):
 Turn the switch off.
 
 ```python
-class MySwitch(SwitchDevice):
+class MySwitch(SwitchEntity):
     # Implement one of these methods.
 
     def turn_off(self, **kwargs):
