@@ -66,7 +66,7 @@ Required. Returns one of the defined constants from the below list that matches 
 |MEDIA_TYPE_GAME|
 |MEDIA_TYPE_APP|
 
-    class MyMediaPlayer(MediaPlayerDevice):
+    class MyMediaPlayer(MediaPlayerEntity):
       # Implement the following method.
 
       @property
