@@ -124,7 +124,7 @@ Supported features constants are combined using the bitwise or (`|`) operator.
 ### Set hvac mode
 
 ```python
-class MyClimateDevice(ClimateDevice):
+class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
     def set_hvac_mode(self, hvac_mode):
@@ -137,7 +137,7 @@ class MyClimateDevice(ClimateDevice):
 ### Set preset mode
 
 ```python
-class MyClimateDevice(ClimateEntity):
+class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
     def set_preset_mode(self, preset_mode):
@@ -150,7 +150,7 @@ class MyClimateDevice(ClimateEntity):
 ### Set fan mode
 
 ```python
-class MyClimateDevice(ClimateEntity):
+class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
     def set_fan_mode(self, fan_mode):
@@ -163,7 +163,7 @@ class MyClimateDevice(ClimateEntity):
 ### Set humidity
 
 ```python
-class MyClimateDevice(ClimateEntity):
+class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
     def set_humidity(self, humidity):
@@ -176,7 +176,7 @@ class MyClimateDevice(ClimateEntity):
 ### Set swing mode
 
 ```python
-class MyClimateDevice(ClimateEntity):
+class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
     def set_swing_mode(self, swing_mode):
@@ -189,7 +189,7 @@ class MyClimateDevice(ClimateEntity):
 ### Set temperature
 
 ```python
-class MyClimateDevice(ClimateEntity):
+class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
     def set_temperature(self, **kwargs):
@@ -202,7 +202,7 @@ class MyClimateDevice(ClimateEntity):
 ### Control auxiliary heater
 
 ```python
-class MyClimateDevice(ClimateEntity):
+class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
     def turn_aux_heat_on(self):
