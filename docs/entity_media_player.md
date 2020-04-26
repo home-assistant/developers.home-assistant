@@ -6,6 +6,7 @@ sidebar_label: Media Player
 :::info Incomplete
 This entry is incomplete. Contribution welcome.
 :::
+A media player entity controls a media player.  Derive a platform entity from [`homeassistant.components.media_player.MediaPlayerEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/media_player/__init__.py).
 
 ## Properties
 
@@ -27,7 +28,7 @@ Properties should always only return information from memory and not do I/O (lik
 ### Select sound mode
 Optional. Switch the sound mode of the media player.
 
-    class MyMediaPlayer(MediaPlayerDevice):
+    class MyMediaPlayer(MediaPlayerEntity):
       # Implement one of these methods.
 
       def select_sound_mode(self, sound_mode):
@@ -39,7 +40,7 @@ Optional. Switch the sound mode of the media player.
 ### Select source
 Optional. Switch the selected input source for the media player.
 
-    class MyMediaPlayer(MediaPlayerDevice):
+    class MyMediaPlayer(MediaPlayerEntity):
       # Implement one of these methods.
 
       def select_source(self, source):
@@ -65,7 +66,7 @@ Required. Returns one of the defined constants from the below list that matches 
 |MEDIA_TYPE_GAME|
 |MEDIA_TYPE_APP|
 
-    class MyMediaPlayer(MediaPlayerDevice):
+    class MyMediaPlayer(MediaPlayerEntity):
       # Implement the following method.
 
       @property
