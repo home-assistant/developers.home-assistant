@@ -2,6 +2,15 @@
     "version": "2.0.0",
     "tasks": [
         {
+            "label": "Generate",
+            "type": "shell",
+            "command": "yarn build",
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            }
+        },
+        {
             "label": "Preview",
             "type": "shell",
             "command": "yarn start",
@@ -9,6 +18,6 @@
                 "kind": "test",
                 "isDefault": true,
             }
-        }
+        },
     ]
 }
