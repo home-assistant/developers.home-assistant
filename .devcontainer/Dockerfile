@@ -6,5 +6,3 @@ WORKDIR /app
 ENV NODE_ENV=devcontainer
 
 EXPOSE 3000
-COPY ./ /app
-
