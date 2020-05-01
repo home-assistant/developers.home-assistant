@@ -4,7 +4,7 @@ sidebar_label: Light
 ---
 
 
-A light entity is a device that controls the brightness, RGB value,color temperature and effects of a light source.
+A light entity controls the brightness, hue and saturation color value, white value, color temperature and effects of a light source. Derive platform entities from [`homeassistant.components.light.LightEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/light/__init__.py).
 
 ## Properties
 
@@ -38,7 +38,7 @@ A light entity is a device that controls the brightness, RGB value,color tempera
 # Turn on Light Device
 
 ```python
-class MyLightDevice(LightDevice):
+class MyLightEntity(LightEntity):
     def turn_on(self, **kwargs):
         """Turn the device on."""
 
@@ -49,7 +49,7 @@ class MyLightDevice(LightDevice):
 # Turn Off Light Device
 
 ```python
-class MyLightDevice(LightDevice):
+class MyLightEntity(LightEntity):
     def turn_off(self, **kwargs):
         """Turn the device off."""
 
