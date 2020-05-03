@@ -7,12 +7,8 @@
     "postCreateCommand": "yarn install",
     "extensions": [
         "davidanson.vscode-markdownlint",
-        "eamodio.gitlens",
         "editorconfig.editorconfig",
         "github.vscode-pull-request-github",
-        "mrmlnc.vscode-scss",
-        "ms-vsliveshare.vsliveshare",
-        "rebornix.Ruby",
         "streetsidesoftware.code-spell-checker",
         "yzhang.markdown-all-in-one"
     ],
