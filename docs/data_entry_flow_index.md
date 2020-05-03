@@ -107,7 +107,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
 
 ### Show Form
 
-This result type will show a form to the user to fill in. You define the current step, the schema of the data (using voluptuous) and optionally a dictionary of errors. Title and description of the step will be provided via the translation file. Where this is defined depends on the context of the data entry flow.
+This result type will show a form to the user to fill in. You define the current step, the schema of the data (using voluptuous) and optionally a dictionary of errors.
 
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
@@ -123,6 +123,28 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
 
         return self.async_show_form(step_id="init", data_schema=vol.Schema(data_schema))
 ```
+
+If you'd like to pre-fill data in the form, you have two options. The first is to use the `deafult` parameter. This will both pre-fill the field, and act as the default value in case the user leaves the field empty.
+
+```python
+    data_schema = {
+        vol.Optional("field_name", default="default value"): str,
+    }
+```
+
+The other alternative is to use a suggested value - this will also pre-fill the form field, but will allow the user to leave it empty if the user so wishes.
+
+```python
+    data_schema = {
+        vol.Optional(
+            "field_name", description={"suggested_value": "suggested value"}
+        ): str,
+    }
+```
+
+You can also mix and match - pre-fill through `suggested_value`, and use a different value for `default` in case the field is left empty, but that could be confusing to the user so use carefully.
+
+Title and description of the step will be provided via the translation file. Where this is defined depends on the context of the data entry flow.
 
 After the user has filled in the form, the step method will be called again and the user input is passed in. Your step will only be called if the user input passes your data schema. When the user passes in data, you will have to do extra validation of the data. For example, you can verify that the passed in username and password are valid.
 
