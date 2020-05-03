@@ -25,6 +25,7 @@ Or a minimal example that you can copy into your project:
   "domain": "your_domain_name",
   "name": "Your Integration",
   "documentation": "https://www.example.com",
+  "issue_tracker": "https://github.com/example/my_project/issues",
   "dependencies": [],
   "codeowners": [],
   "requirements": []
@@ -41,7 +42,12 @@ The name of the integration.
 
 ## Documentation
 
-The website containing documentation on how to use your integration. If this integration is being submitted for inclusion in Home Assistant, it should be `https://www.home-assistant.io/components/<domain>`
+The website containing documentation on how to use your integration. If this integration is being submitted for inclusion in Home Assistant, it should be `https://www.home-assistant.io/integrations/<domain>`
+
+## Issue Tracker
+
+The issue tracker of your integration, where users reports issues if they run into one.
+If this integration is being submitted for inclusion in Home Assistant, it should be omitted. For built-in integrations, Home Assistant will automatically generate the correct link.
 
 ## Dependencies
 
