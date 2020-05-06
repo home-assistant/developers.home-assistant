@@ -15,6 +15,7 @@ Properties should always only return information from memory and not do I/O (lik
 | ---- | ---- | ------- | -----------
 | current_direction | str | None | Return the current direction of the fan |
 | is_on | boolean | None |Return true if the entity is on |
+| oscillating | boolean | None | Return true if the fan is oscillating |
 | speed | str | None | Return the current speed. One of the values in speed_list. |
 | speed_list | list | None| Get the list of available speeds. The allowed values are "off", "low", "medium" and "high". Use the corresponding constants SPEED_OFF, SPEED_LOW, SPEED_MEDIUM, SPEED_HIGH. |
 | supported_features | int | 0 | Flag supported features |
