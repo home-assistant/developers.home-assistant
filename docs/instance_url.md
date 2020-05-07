@@ -16,7 +16,7 @@ bunch of different URLs available:
 - A user-configured, public accessible, external URL that works from the internet.
 - An URL provided by Home Assistant Cloud by Nabu Casa, in case the user has a subscription.
 
-Extra complexity is added by the fact that URLs can be served non-standard ports
+Extra complexity is added by the fact that URLs can be served on non-standard ports
 (e.g., not 80 or 443) and with or without SSL (`http://` vs `https://`).
 
 Luckily, Home Assistant provides a helper method to ease that a bit.
