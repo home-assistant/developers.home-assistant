@@ -130,7 +130,7 @@ except network.NoURLAvailableError:
 
 The above example shows a little more complex use of the URL helper. In this case
 the requested URL may not be an internal address, the URL may not contain an
-IP address, requires SSL and must be served of a standard port.
+IP address, requires SSL and must be served on a standard port.
 
 If none is available, the `NoURLAvailableError` exception can be caught and
 handled.
