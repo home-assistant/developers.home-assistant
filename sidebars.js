@@ -6,14 +6,14 @@
  */
 
 module.exports = {
-  "Architecture": {
-    "Architecture": [
+  Architecture: {
+    Architecture: [
       "architecture_index",
       "architecture_components",
       "architecture_entities",
-      "architecture_hassio"
+      "architecture_hassio",
     ],
-    "Entities": [
+    Entities: [
       "entity_index",
       "entity_air_quality",
       "entity_alarm_control_panel",
@@ -29,36 +29,36 @@ module.exports = {
       "entity_switch",
       "entity_vacuum",
       "entity_water_heater",
-      "entity_weather"
+      "entity_weather",
     ],
-    "Authentication": [
+    Authentication: [
       "auth_index",
       "auth_permissions",
       "auth_api",
       "auth_auth_provider",
-      "auth_auth_module"
+      "auth_auth_module",
     ],
     "Config Entries": ["config_entries_index"],
     "Data Entry Flow": ["data_entry_flow_index"],
     "Entity Registry": ["entity_registry_index", "entity_registry_disabled_by"],
     "Device Registry": ["device_registry_index"],
-    "Area Registry": ["area_registry_index"]
+    "Area Registry": ["area_registry_index"],
   },
   "Extending Frontend": {
-    "Frontend": [
+    Frontend: [
       "frontend_index",
       "frontend_architecture",
       "frontend_development",
       "frontend_data",
       "frontend_external_auth",
-      "frontend_external_bus"
+      "frontend_external_bus",
     ],
     "Extending the frontend": [
       "frontend_add_card",
       "frontend_add_more_info",
-      "frontend_add_websocket_api"
+      "frontend_add_websocket_api",
     ],
-    "Custom UI": ["lovelace_custom_card", "frontend_creating_custom_panels"]
+    "Custom UI": ["lovelace_custom_card", "frontend_creating_custom_panels"],
   },
   "Extending Home Assistant": {
     "Development Workflow": [
@@ -67,7 +67,7 @@ module.exports = {
       "development_submitting",
       "development_guidelines",
       "development_testing",
-      "development_catching_up"
+      "development_catching_up",
     ],
     "Building Integrations": [
       "creating_integration_file_structure",
@@ -80,54 +80,54 @@ module.exports = {
       "creating_platform_index",
       "creating_component_generic_discovery",
       "reproduce_state_index",
-      "integration_fetching_data"
+      "integration_fetching_data",
     ],
     "Development Checklist": [
       "development_checklist",
       "creating_component_code_review",
       "creating_platform_code_review",
-      "integration_quality_scale_index"
+      "integration_quality_scale_index",
     ],
     "Home Assistant Core 101": [
       "dev_101_index",
       "dev_101_hass",
       "dev_101_events",
       "dev_101_states",
-      "dev_101_config"
+      "dev_101_config",
     ],
     "Device Automations": [
       "device_automation_index",
       "device_automation_trigger",
       "device_automation_condition",
-      "device_automation_action"
+      "device_automation_action",
     ],
-    "Misc": ["development_validation", "development_typing"]
+    Misc: ["development_validation", "development_typing", "instance_url"],
   },
-  "Misc": {
-    "Introduction": ["misc"],
+  Misc: {
+    Introduction: ["misc"],
     "External API": [
       "external_api_rest",
       "external_api_rest_python",
       "external_api_websocket",
-      "external_api_server_sent_events"
+      "external_api_server_sent_events",
     ],
-    "Internationalization": [
+    Internationalization: [
       "internationalization_index",
       "internationalization_backend_localization",
       "internationalization_custom_component_localization",
-      "internationalization_translation"
+      "internationalization_translation",
     ],
-    "Documentation": [
+    Documentation: [
       "documentation_index",
       "documentation_standards",
-      "documentation_create_page"
+      "documentation_create_page",
     ],
-    "Intents": [
+    Intents: [
       "intent_index",
       "intent_firing",
       "intent_handling",
       "intent_conversation",
-      "intent_builtin"
+      "intent_builtin",
     ],
     "Native App Integration": [
       "app_integration_index",
@@ -135,18 +135,18 @@ module.exports = {
       "app_integration_sending_data",
       "app_integration_sensors",
       "app_integration_notifications",
-      "app_integration_webview"
+      "app_integration_webview",
     ],
     "Building a Python library": [
       "api_lib_index",
       "api_lib_auth",
-      "api_lib_data_models"
+      "api_lib_data_models",
     ],
-    "asyncio": [
+    asyncio: [
       "asyncio_index",
       "asyncio_101",
       "asyncio_categorizing_functions",
-      "asyncio_working_with_async"
+      "asyncio_working_with_async",
     ],
     "Hass.io": ["hassio_debugging", "hassio_hass"],
     "Hass.io Add-Ons": [
@@ -158,8 +158,8 @@ module.exports = {
       "hassio_addon_publishing",
       "hassio_addon_presentation",
       "hassio_addon_repository",
-      "hassio_addon_security"
+      "hassio_addon_security",
     ],
-    "Maintainer docs": ["maintenance", "releasing"]
+    "Maintainer docs": ["maintenance", "releasing"],
   },
 };
