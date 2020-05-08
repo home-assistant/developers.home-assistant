@@ -10,6 +10,7 @@ Since 0.92.0, every integration has a manifest file to specify basic information
   "domain": "hue",
   "name": "Philips Hue",
   "documentation": "https://www.home-assistant.io/components/hue",
+  "issue_tracker": "https://github.com/balloob/hue/issues",
   "dependencies": ["mqtt"],
   "after_dependencies": ["http"],
   "codeowners": ["@balloob"],
@@ -25,7 +26,6 @@ Or a minimal example that you can copy into your project:
   "domain": "your_domain_name",
   "name": "Your Integration",
   "documentation": "https://www.example.com",
-  "issue_tracker": "https://github.com/example/my_project/issues",
   "dependencies": [],
   "codeowners": [],
   "requirements": []
