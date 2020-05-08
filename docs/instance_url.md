@@ -24,13 +24,13 @@ Luckily, Home Assistant provides a helper method to ease that a bit.
 ## The URL helper
 
 Home Assistant provides a network helper method to get the instance URL,
-that matches the requirements the integration needs, called `async_get_url`.
+that matches the requirements the integration needs, called `get_url`.
 
 The signature of the helper method:
 
 ```py
-# homeassistant.helpers.network.async_get_url
-def async_get_url(
+# homeassistant.helpers.network.get_url
+def get_url(
     hass: HomeAssistant,
     *,
     require_ssl: bool = False,
@@ -82,7 +82,7 @@ The different parameters of the method:
 
 ## Default behavior
 
-By default, without passing additional parameters (`async_get_url(hass)`),
+By default, without passing additional parameters (`get_url(hass)`),
 it will try to:
 
 - Get an internal URL set by the user, or if not available, try to detect one
@@ -100,9 +100,9 @@ without requirements.
 The most basic example of using the helper:
 
 ```py
-from homeassistant.helpers.network import async_get_url
+from homeassistant.helpers.network import get_url
 
-instance_url = async_get_url(hass)
+instance_url = get_url(hass)
 ```
 
 This example call to the helper method would return an internal URL, preferably,
@@ -117,7 +117,7 @@ an exception will be raised: `NoURLAvailableError`.
 from homeassistant.helpers import network
 
 try:
-    external_url = network.async_get_url(
+    external_url = network.get_url(
         hass,
         allow_internal=False,
         allow_ip=False,
