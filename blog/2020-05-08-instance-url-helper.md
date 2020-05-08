@@ -26,7 +26,7 @@ As a result of this, the previously available `base_url` is now replaced by two
 new core configuration settings for the user: the internal and external URL.
 
 From a development perspective, the use of `hass.config.api.base_url` is now
-deprecated in favor of the new `async_get_url` helper method.
+deprecated in favor of the new `get_url` helper method.
 
 For more information on using and implementing this new URL helper method,
 consult our documentation [here](/docs/instance_url).
