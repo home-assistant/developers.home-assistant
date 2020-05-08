@@ -10,6 +10,7 @@ Since 0.92.0, every integration has a manifest file to specify basic information
   "domain": "hue",
   "name": "Philips Hue",
   "documentation": "https://www.home-assistant.io/components/hue",
+  "issue_tracker": "https://github.com/balloob/hue/issues",
   "dependencies": ["mqtt"],
   "after_dependencies": ["http"],
   "codeowners": ["@balloob"],
@@ -41,7 +42,12 @@ The name of the integration.
 
 ## Documentation
 
-The website containing documentation on how to use your integration. If this integration is being submitted for inclusion in Home Assistant, it should be `https://www.home-assistant.io/components/<domain>`
+The website containing documentation on how to use your integration. If this integration is being submitted for inclusion in Home Assistant, it should be `https://www.home-assistant.io/integrations/<domain>`
+
+## Issue Tracker
+
+The issue tracker of your integration, where users reports issues if they run into one.
+If this integration is being submitted for inclusion in Home Assistant, it should be omitted. For built-in integrations, Home Assistant will automatically generate the correct link.
 
 ## Dependencies
 
