@@ -6,6 +6,23 @@
  */
 
 module.exports = {
+  API: [
+    "api/rest",
+    "api/websocket",
+    "api/server-sent-events",
+    {
+      type: "category",
+      label: "Native App Integration",
+      items: [
+        "api/native-app-integration",
+        "api/native-app-integration/setup",
+        "api/native-app-integration/sending-data",
+        "api/native-app-integration/sensors",
+        "api/native-app-integration/notifications",
+        "api/native-app-integration/webview",
+      ],
+    },
+  ],
   Architecture: {
     Architecture: [
       "architecture_index",
@@ -105,12 +122,6 @@ module.exports = {
   },
   Misc: {
     Introduction: ["misc"],
-    "External API": [
-      "external_api_rest",
-      "external_api_rest_python",
-      "external_api_websocket",
-      "external_api_server_sent_events",
-    ],
     Internationalization: [
       "internationalization_index",
       "internationalization_backend_localization",
@@ -128,14 +139,6 @@ module.exports = {
       "intent_handling",
       "intent_conversation",
       "intent_builtin",
-    ],
-    "Native App Integration": [
-      "app_integration_index",
-      "app_integration_setup",
-      "app_integration_sending_data",
-      "app_integration_sensors",
-      "app_integration_notifications",
-      "app_integration_webview",
     ],
     "Building a Python library": [
       "api_lib_index",

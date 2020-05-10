@@ -1,0 +1,13 @@
+# These redirects are handled by Netlify
+#
+
+# Documentation restructuring redirects
+/docs/app_integration_index /docs/api/native-app-integration
+/docs/app_integration_notifications /docs/api/native-app-integration/notifications
+/docs/app_integration_sending_data /docs/api/native-app-integration/sending-data
+/docs/app_integration_sensors /docs/api/native-app-integration/sensors
+/docs/app_integration_setup /docs/api/native-app-integration/setup
+/docs/app_integration_webview /docs/api/native-app-integration/webview
+/docs/external_api_rest /docs/api/rest
+/docs/external_api_server_sent_events /docs/api/server-sent-events
+/docs/external_api_websocket /docs/api/websocket

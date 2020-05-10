@@ -24,6 +24,19 @@ module.exports = {
         },
         { to: "docs/frontend_index", label: "Frontend", position: "left" },
         { to: "docs/development_index", label: "Backend", position: "left" },
+        {
+          label: "API",
+          position: "left",
+          items: [
+            { label: "REST-API", to: "docs/api/rest" },
+            { label: "WebSocket API", to: "docs/api/websocket" },
+            { label: "Server Sent Events", to: "docs/api/server-sent-events" },
+            {
+              label: "Native App Integration",
+              to: "docs/api/native-app-integration",
+            },
+          ],
+        },
         { to: "docs/misc", label: "Misc", position: "left" },
         { to: "blog", label: "Blog", position: "left" },
       ],
