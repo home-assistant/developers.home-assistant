@@ -10,7 +10,7 @@ addon_name/
   build.json
   CHANGELOG.md
   config.json
-  DOC.md
+  DOCS.md
   Dockerfile
   icon.png
   logo.png
