@@ -9,7 +9,6 @@ module.exports = {
   API: [
     "api/rest",
     "api/websocket",
-    "api/server-sent-events",
     {
       type: "category",
       label: "Native App Integration",

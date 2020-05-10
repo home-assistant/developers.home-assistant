@@ -52,7 +52,6 @@ module.exports = {
           items: [
             { label: "REST-API", to: "docs/api/rest" },
             { label: "WebSocket API", to: "docs/api/websocket" },
-            { label: "Server Sent Events", to: "docs/api/server-sent-events" },
             {
               label: "Native App Integration",
               to: "docs/api/native-app-integration",
