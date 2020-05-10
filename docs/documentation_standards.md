@@ -89,7 +89,7 @@ Use single quotes (`'`) for strings inside of a template. It is more obvious to 
 automation:
   ...
   action:
-    - service: notify.notify
+    - service: notify.YOUR_NOTIFICATION_COMPONENT
       data_template:
         message: "{% if trigger.to_state.name == 'Dale\'s Bedroom' %}Someone's in your base, killing your noobs!{% else %}It's just another door.{% endif %}"
 ```
@@ -100,7 +100,7 @@ automation:
 automation:
   ...
   action:
-    - service: notify.notify
+    - service: notify.YOUR_NOTIFICATION_COMPONENT
       data_template:
         message: '{% if trigger.to_state.name == "Dale's Bedroom" %}Someone's in your base, killing your noobs!{% else %}It's just another door.{% endif %}'
 ```
@@ -111,7 +111,7 @@ automation:
 automation:
   ...
   action:
-    - service: notify.notify
+    - service: notify.YOUR_NOTIFICATION_COMPONENT
       data_template:
         message: >-
           {% if trigger.to_state.name == 'Dale\'s Bedroom' %}
