@@ -9,7 +9,6 @@
 /docs/app_integration_setup /docs/api/native-app-integration/setup
 /docs/app_integration_webview /docs/api/native-app-integration/webview
 /docs/external_api_rest /docs/api/rest
-/docs/external_api_server_sent_events /docs/api/server-sent-events
 /docs/external_api_websocket /docs/api/websocket
 /docs/internationalization_backend_localization /docs/internationalization/core
 /docs/internationalization_custom_component_localization /docs/internationalization/custom_integration
