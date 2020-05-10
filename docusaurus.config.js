@@ -11,7 +11,7 @@ module.exports = {
       trackingID: "UA-57927901-3",
     },
     navbar: {
-      title: "Developer Documentation",
+      title: "Developers",
       logo: {
         alt: "Home Assistant",
         src: "img/logo-pretty.svg",
