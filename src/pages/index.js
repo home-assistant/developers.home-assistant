@@ -1,15 +1,15 @@
-import React from 'react';
-import classnames from 'classnames';
-import Layout from '@theme/Layout';
-import Link from '@docusaurus/Link';
-import useDocusaurusContext from '@docusaurus/useDocusaurusContext';
-import useBaseUrl from '@docusaurus/useBaseUrl';
-import styles from './styles.module.css';
+import React from "react";
+import classnames from "classnames";
+import Layout from "@theme/Layout";
+import Link from "@docusaurus/Link";
+import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
+import useBaseUrl from "@docusaurus/useBaseUrl";
+import styles from "./styles.module.css";
 
 const features = [
   {
     title: <>Document Structure</>,
-    imageUrl: '',
+    imageUrl: "",
     description: (
       <>
         <p>
@@ -42,14 +42,12 @@ const features = [
   },
   {
     title: <>Popular Topics</>,
-    imageUrl: '',
+    imageUrl: "",
     description: (
       <>
         <ul style={{ flex: "1" }}>
           <li>
-            <a href="docs/development_index">
-              Add a new integration
-            </a>
+            <a href="docs/development_index">Add a new integration</a>
           </li>
           <li>
             <a href="docs/internationalization_index">
@@ -57,9 +55,7 @@ const features = [
             </a>
           </li>
           <li>
-            <a href="docs/frontend_index">
-              Improve the frontend
-            </a>
+            <a href="docs/frontend_index">Improve the frontend</a>
           </li>
           <li>
             <a href="docs/external_api_rest">
@@ -85,7 +81,7 @@ const features = [
   },
   {
     title: <>Upcoming Events</>,
-    imageUrl: '',
+    imageUrl: "",
     description: (
       <>
         <iframe
@@ -101,11 +97,10 @@ const features = [
   },
 ];
 
-
-function Feature({imageUrl, title, description}) {
+function Feature({ imageUrl, title, description }) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
-    <div className={classnames('col col--4', styles.feature)}>
+    <div className={classnames("col col--4", styles.feature)}>
       {imgUrl && (
         <div className="text--center">
           <img className={styles.featureImage} src={imgUrl} alt={title} />
@@ -119,16 +114,17 @@ function Feature({imageUrl, title, description}) {
 
 function Home() {
   const context = useDocusaurusContext();
-  const {siteConfig = {}} = context;
+  const { siteConfig = {} } = context;
 
   return (
     <Layout
       title={`Home Assistant Developer Docs`}
-      description="Get started developing for Home Assistant">
-      <header className={classnames('hero hero--primary', styles.heroBanner)}>
+      description="Get started developing for Home Assistant"
+    >
+      <header className={classnames("hero hero--primary", styles.heroBanner)}>
         <div className="container">
-          <h1 className="hero__title">{siteConfig.title}</h1>
-          <p className="hero__subtitle">{siteConfig.tagline}</p>
+          <h1 className={styles.heroTitle}>{siteConfig.title}</h1>
+          <p className={styles.heroTagline}>{siteConfig.tagline}</p>
           <p>
             <a className="hero__text" href="https://www.home-assistant.io">
               Not a developer? Go to the normal website
