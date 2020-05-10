@@ -30,6 +30,7 @@ module.exports = {
               to: "docs/development_index",
             },
             { to: "docs/frontend_index", label: "Frontend" },
+            { to: "docs/internationalization", label: "Internationalization" },
           ],
         },
         {
@@ -44,6 +45,7 @@ module.exports = {
             },
           ],
         },
+        { label: "Translations", to: "docs/translations", position: "left" },
         {
           label: "API",
           position: "left",

@@ -23,6 +23,12 @@ module.exports = {
       ],
     },
   ],
+  Internationalization: [
+    "internationalization",
+    "internationalization/core",
+    "internationalization/custom_integration",
+    "translations",
+  ],
   Architecture: {
     Architecture: [
       "architecture_index",
@@ -122,12 +128,6 @@ module.exports = {
   },
   Misc: {
     Introduction: ["misc"],
-    Internationalization: [
-      "internationalization_index",
-      "internationalization_backend_localization",
-      "internationalization_custom_component_localization",
-      "internationalization_translation",
-    ],
     Documentation: [
       "documentation_index",
       "documentation_standards",
