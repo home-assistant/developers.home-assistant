@@ -104,7 +104,7 @@ $ python3 -m script.translations develop
 
 ### Introducing new strings
 
-To introduce new strings, add them to `strings.json` or to a platform strings file. Try to use as many references to common strings as possible. Common strings live in `homeassistant/components/strings.json`. You can refer to those translations using references. For example:
+To introduce new strings, add them to `strings.json` or to a platform strings file. Try to use as many references to common strings as possible. Common strings live in `homeassistant/strings.json`. You can refer to those translations using references. For example:
 
 ```json
 {
