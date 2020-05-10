@@ -18,12 +18,32 @@ module.exports = {
       },
       links: [
         {
-          to: "docs/architecture_index",
-          label: "Architecture",
+          label: "Home Assistant",
           position: "left",
+          items: [
+            {
+              label: "Architecture",
+              to: "docs/architecture_index",
+            },
+            {
+              label: "Core",
+              to: "docs/development_index",
+            },
+            { to: "docs/frontend_index", label: "Frontend" },
+          ],
         },
-        { to: "docs/frontend_index", label: "Frontend", position: "left" },
-        { to: "docs/development_index", label: "Backend", position: "left" },
+        {
+          label: "Documenting",
+          position: "left",
+          items: [
+            { label: "Documentation", to: "docs/documentation_index" },
+            { label: "Standards", to: "docs/documentation_standards" },
+            {
+              label: "Create a new page",
+              to: "docs/documentation_create_page",
+            },
+          ],
+        },
         {
           label: "API",
           position: "left",
