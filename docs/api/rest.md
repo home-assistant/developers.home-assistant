@@ -6,8 +6,8 @@ Home Assistant provides a RESTful API on the same port as the web frontend. (def
 
 If you are not using the [`frontend`](https://www.home-assistant.io/components/frontend/) in your setup then you need to add the [`api` component](https://www.home-assistant.io/components/api/) to your `configuration.yaml` file.
 
-* http://IP_ADDRESS:8123/ is an interface to control Home Assistant.
-* http://IP_ADDRESS:8123/api/ is a RESTful API.
+- `http://IP_ADDRESS:8123/` is an interface to control Home Assistant.
+- `http://IP_ADDRESS:8123/api/` is a RESTful API.
 
 The API accepts and returns only JSON encoded objects.
 
@@ -16,10 +16,10 @@ All API calls have to be accompanied by the header `Authorization: Bearer ABCDEF
 There are multiple ways to consume the Home Assistant Rest API. One is with `curl`:
 
 ```shell
-$ curl -X GET \
-    -H "Authorization: Bearer ABCDEFGH" \
-    -H "Content-Type: application/json" \
-    http://IP_ADDRESS:8123/ENDPOINT
+curl -X GET \
+  -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" \
+  http://IP_ADDRESS:8123/ENDPOINT
 ```
 
 Another option is to use Python and the [Requests](http://docs.python-requests.org/en/latest/) module.
@@ -36,7 +36,8 @@ headers = {
 response = get(url, headers=headers)
 print(response.text)
 ```
-Another option is to use the Restful Command component https://www.home-assistant.io/components/rest_command/ in a Home Assistant automation or script.
+
+Another option is to use the [Restful Command integration](https://www.home-assistant.io/components/rest_command/) in a Home Assistant automation or script.
 
 ```yaml
 turn_light_on:
@@ -72,8 +73,8 @@ Returns a message if the API is up and running.
 Sample `curl` command:
 
 ```shell
-$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
-       -H "Content-Type: application/json" http://localhost:8123/api/
+curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" http://localhost:8123/api/
 ```
 
 #### GET /api/config
@@ -124,8 +125,8 @@ Returns the current configuration as JSON.
 Sample `curl` command:
 
 ```shell
-$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
-       -H "Content-Type: application/json" http://localhost:8123/api/config
+curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" http://localhost:8123/api/config
 ```
 
 #### GET /api/discovery_info
@@ -144,8 +145,8 @@ Returns basic information about the Home Assistant instance as JSON.
 Sample `curl` command:
 
 ```shell
-$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
-       -H "Content-Type: application/json" http://localhost:8123/api/discovery_info
+curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" http://localhost:8123/api/discovery_info
 ```
 
 #### GET /api/events
@@ -168,8 +169,8 @@ Returns an array of event objects. Each event object contains event name and lis
 Sample `curl` command:
 
 ```shell
-$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
-       -H "Content-Type: application/json" http://localhost:8123/api/events
+curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" http://localhost:8123/api/events
 ```
 
 #### GET /api/services
@@ -197,8 +198,8 @@ Returns an array of service objects. Each object contains the domain and which s
 Sample `curl` command:
 
 ```shell
-$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
-       -H "Content-Type: application/json" http://localhost:8123/api/services
+curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" http://localhost:8123/api/services
 ```
 
 #### GET /api/history/period/&lt;timestamp>
@@ -242,21 +243,21 @@ You can pass the following optional GET parameters:
 Sample `curl` commands:
 
 ```shell
-$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
-       -H "Content-Type: application/json" \
-       http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00
+curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" \
+  http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00
 ```
 
 ```shell
-$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
-       -H "Content-Type: application/json" \
-       http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00?filter_entity_id=sensor.temperature
+curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" \
+  http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00?filter_entity_id=sensor.temperature
 ```
 
 ```shell
-$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
-       -H "Content-Type: application/json" \
-       http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00?end_time=2016-12-31T00%3A00%3A00%2B02%3A00
+curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" \
+  http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00?end_time=2016-12-31T00%3A00%3A00%2B02%3A00
 ```
 
 #### GET /api/states
@@ -283,8 +284,8 @@ Returns an array of state objects. Each state has the following attributes: enti
 Sample `curl` command:
 
 ```shell
-$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
-       -H "Content-Type: application/json" http://localhost:8123/api/states
+curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" http://localhost:8123/api/states
 ```
 
 #### GET /api/states/&lt;entity_id>
@@ -310,9 +311,9 @@ Returns a state object for specified entity_id. Returns 404 if not found.
 Sample `curl` command:
 
 ```shell
-$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
-       -H "Content-Type: application/json" \
-       http://localhost:8123/api/states/sensor.kitchen_temperature
+curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" \
+  http://localhost:8123/api/states/sensor.kitchen_temperature
 ```
 
 #### GET /api/error_log
@@ -328,9 +329,9 @@ Retrieve all errors logged during the current session of Home Assistant as a pla
 Sample `curl` command:
 
 ```shell
-$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
-       -H "Content-Type: application/json" \
-       http://localhost:8123/api/error_log
+curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" \
+  http://localhost:8123/api/error_log
 ```
 
 #### GET /api/camera_proxy/camera.&lt;entity_id>
@@ -340,9 +341,9 @@ Returns the data (image) from the specified camera entity_id.
 Sample `curl` command:
 
 ```shell
-$ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
-       -H "Content-Type: application/json" \
-       http://localhost:8123/api/camera_proxy/camera.my_sample_camera?time=1462653861261 -o image.jpg
+curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" \
+  http://localhost:8123/api/camera_proxy/camera.my_sample_camera?time=1462653861261 -o image.jpg
 ```
 
 #### POST /api/states/&lt;entity_id>
@@ -383,10 +384,10 @@ The return code is 200 if the entity existed, 201 if the state of a new entity w
 Sample `curl` command:
 
 ```shell
-$ curl -X POST -H "Authorization: Bearer ABCDEFGH" \
-       -H "Content-Type: application/json" \
-       -d '{"state": "25", "attributes": {"unit_of_measurement": "°C"}}' \
-       http://localhost:8123/api/states/sensor.kitchen_temperature
+curl -X POST -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" \
+  -d '{"state": "25", "attributes": {"unit_of_measurement": "°C"}}' \
+  http://localhost:8123/api/states/sensor.kitchen_temperature
 ```
 
 #### POST /api/events/&lt;event_type>
@@ -445,20 +446,20 @@ Sample `curl` commands:
 Turn the light on:
 
 ```shell
-$ curl -X POST -H "Authorization: Bearer ABCDEFGH" \
-       -H "Content-Type: application/json" \
-       -d '{"entity_id": "switch.christmas_lights"}' \
-       http://localhost:8123/api/services/switch/turn_on
+curl -X POST -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" \
+  -d '{"entity_id": "switch.christmas_lights"}' \
+  http://localhost:8123/api/services/switch/turn_on
 ```
 
 Send a MQTT message:
 
 ```shell
-$ curl -X POST \
-     -H "Content-Type: application/json" \
-     -H "x-ha-access:YOUR_PASSWORD" \
-     -d '{"payload": "OFF", "topic": "home/fridge", "retain": "True"}' \
-     http://localhost:8123/api/services/mqtt/publish
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -H "x-ha-access:YOUR_PASSWORD" \
+  -d '{"payload": "OFF", "topic": "home/fridge", "retain": "True"}' \
+  http://localhost:8123/api/services/mqtt/publish
 ```
 
 :::tip
@@ -484,9 +485,9 @@ Paulus is at work!
 Sample `curl` command:
 
 ```shell
-$ curl -X POST -H "Authorization: Bearer ABCDEFGH" \
-       -H "Content-Type: application/json" \
-       -d '{"template": "It is {{ now() }}!"}' http://localhost:8123/api/template
+curl -X POST -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" \
+  -d '{"template": "It is {{ now() }}!"}' http://localhost:8123/api/template
 ```
 
 #### POST /api/config/core/check_config
@@ -495,7 +496,7 @@ Trigger a check of `configuration.yaml`. No additional data needs to be passed i
 
 If the check is successful, the following will be returned:
 
-```javascript
+```json
 {
     "errors": null,
     "result": "valid"
@@ -504,7 +505,7 @@ If the check is successful, the following will be returned:
 
 If the check fails, the errors attribute in the object will list what caused the check to fail. For example:
 
-```javascript
+```json
 {
     "errors": "Integration not found: frontend:",
     "result": "invalid"
@@ -517,7 +518,7 @@ Set up event forwarding to another Home Assistant instance.
 
 Requires a JSON object that represents the API to forward to.
 
-```javascript
+```json
 {
     "host": "machine",
     "api_password": "my_super_secret_password",
@@ -535,11 +536,11 @@ It will return a message if event forwarding was set up successfully.
 
 #### DELETE /api/event_forwarding
 
-Cancel event forwarding to another Home Assistant instance.<br />
+Cancel event forwarding to another Home Assistant instance.
 
 Requires a JSON object that represents the API to cancel forwarding to.
 
-```javascript
+```json
 {
     "host": "machine",
     "api_password": "my_super_secret_password",
