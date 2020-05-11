@@ -231,7 +231,7 @@ You need this only, if you not use the default images or need additional things.
 | Key | Required | Description |
 | --- | -------- | ----------- |
 | build_from | no | A dictionary with the hardware architecture as the key and the base Docker image as value.
-| squash | no | Default `False`. Be carefully with this option, you can not use the image for caching stuff after that!
+| squash | no | Default `False`. Be careful with this option, as you can not use the image for caching stuff after that!
 | args | no | Allow to set additional Docker build arguments as a dictionary.
 
 We provide a set of [Base-Images][docker-base] which should cover a lot of needs. If you don't want use the Alpine based version or need a specific Image tag, feel free to pin this requirements for you build with `build_from` option.
