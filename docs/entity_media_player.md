@@ -41,7 +41,7 @@ Properties should always only return information from memory and not do I/O (lik
 | `SUPPORT_STOP` | Entity allows stopping the playback of media.
 | `SUPPORT_TURN_OFF` | Entity is able to be turned off.
 | `SUPPORT_TURN_ON` | Entity is able to be turned on.
-| `SUPPORT_VOLUME_MUTE` | Entity volume is muteable.
+| `SUPPORT_VOLUME_MUTE` | Entity volume can be muted.
 | `SUPPORT_VOLUME_SET` | Entity volume can be set to specific levels.
 | `SUPPORT_VOLUME_STEP` | Entity volume can be adjusted up and down.
 
