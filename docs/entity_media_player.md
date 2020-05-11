@@ -28,22 +28,22 @@ Properties should always only return information from memory and not do I/O (lik
 # Supported Features
 | Constant | Description 
 | -------- | -----------
-| `SUPPORT_CLEAR_PLAYLIST` | TBD
-| `SUPPORT_NEXT_TRACK` | TBD
-| `SUPPORT_PAUSE` | TBD
-| `SUPPORT_PLAY` | TBD
-| `SUPPORT_PLAY_MEDIA` | TBD
-| `SUPPORT_PREVIOUS_TRACK` | TBD
-| `SUPPORT_SEEK` | TBD
-| `SUPPORT_SELECT_SOURCE` | TBD
-| `SUPPORT_SELECT_SOUND_MODE` | TBD
-| `SUPPORT_SHUFFLE_SET` | TBD
-| `SUPPORT_STOP` | TBD
-| `SUPPORT_TURN_OFF` | TBD
-| `SUPPORT_TURN_ON` | TBD
-| `SUPPORT_VOLUME_MUTE` | TBD
-| `SUPPORT_VOLUME_SET` | TBD
-| `SUPPORT_VOLUME_STEP` | TBD
+| `SUPPORT_CLEAR_PLAYLIST` | Entity allows clearing the active playlist.
+| `SUPPORT_NEXT_TRACK` | Entity allows skipping to the next media track.
+| `SUPPORT_PAUSE` | Entity allows pausing the playback of media.
+| `SUPPORT_PLAY` | Entity allows playing/resuming playback of media.
+| `SUPPORT_PLAY_MEDIA` | Entity allows playing media sources.
+| `SUPPORT_PREVIOUS_TRACK` | Entity allows returning back to a previous media track.
+| `SUPPORT_SEEK` | Entity allows seeking position during playback of media.
+| `SUPPORT_SELECT_SOURCE` | Entity allows selecting a source/input.
+| `SUPPORT_SELECT_SOUND_MODE` | Entity allows selecting a sound mode.
+| `SUPPORT_SHUFFLE_SET` | Entity allows shuffling the active playlist.
+| `SUPPORT_STOP` | Entity allows stopping the playback of media.
+| `SUPPORT_TURN_OFF` | Entity is able to be turned off.
+| `SUPPORT_TURN_ON` | Entity is able to be turned on.
+| `SUPPORT_VOLUME_MUTE` | Entity volume is muteable.
+| `SUPPORT_VOLUME_SET` | Entity volume can be set to specific levels.
+| `SUPPORT_VOLUME_STEP` | Entity volume can be adjusted up and down.
 
 ## Methods
 ### Select sound mode
