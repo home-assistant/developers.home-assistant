@@ -29,7 +29,7 @@ module.exports = {
               label: "Core",
               to: "docs/development_index",
             },
-            { to: "docs/frontend_index", label: "Frontend" },
+            { to: "docs/frontend", label: "Frontend" },
             { to: "docs/add-ons", label: "Add-ons" },
             { to: "docs/internationalization", label: "Internationalization" },
           ],
