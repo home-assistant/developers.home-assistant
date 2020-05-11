@@ -38,6 +38,31 @@ module.exports = {
     "documenting/standards",
     "documenting/create-page",
   ],
+  Frontend: [
+    "frontend",
+    "frontend/architecture",
+    "frontend/development",
+    "frontend/data",
+    "frontend/external-authentication",
+    "frontend/external-bus",
+    {
+      type: "category",
+      label: "Extending the frontend",
+      items: [
+        "frontend/extending/adding-state-card",
+        "frontend/extending/adding-more-info-dialogs",
+        "frontend/extending/websocket-api",
+      ],
+    },
+    {
+      type: "category",
+      label: "Custom UI",
+      items: [
+        "frontend/custom-ui/lovelace-custom-card",
+        "frontend/custom-ui/creating-custom-panels",
+      ],
+    },
+  ],
   Internationalization: [
     "internationalization",
     "internationalization/core",
@@ -81,22 +106,6 @@ module.exports = {
     "Entity Registry": ["entity_registry_index", "entity_registry_disabled_by"],
     "Device Registry": ["device_registry_index"],
     "Area Registry": ["area_registry_index"],
-  },
-  "Extending Frontend": {
-    Frontend: [
-      "frontend_index",
-      "frontend_architecture",
-      "frontend_development",
-      "frontend_data",
-      "frontend_external_auth",
-      "frontend_external_bus",
-    ],
-    "Extending the frontend": [
-      "frontend_add_card",
-      "frontend_add_more_info",
-      "frontend_add_websocket_api",
-    ],
-    "Custom UI": ["lovelace_custom_card", "frontend_creating_custom_panels"],
   },
   "Extending Home Assistant": {
     "Development Workflow": [
