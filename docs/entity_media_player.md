@@ -25,7 +25,7 @@ Properties should always only return information from memory and not do I/O (lik
 | media_image_remotely_accessible | boolean | False | Return `True` if property `media_image_url` is accessible outside of the home network.
 | device_class | string | `None` | Type of media player.
 
-# Support Features
+# Supported Features
 | Constant | Description 
 | -------- | -----------
 | `SUPPORT_CLEAR_PLAYLIST` | TBD
