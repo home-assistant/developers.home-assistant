@@ -39,18 +39,18 @@ You need a Docker Hub account to make your own add-ons. You can build your Docke
 For a git repository:
 
 ```shell
-$ docker run --rm --privileged -v \
-    ~/.docker:/root/.docker homeassistant/amd64-builder \
-    --all -t addon-folder -r https://github.com/xy/addons \
-    -b branchname
+docker run --rm --privileged -v \
+  ~/.docker:/root/.docker homeassistant/amd64-builder \
+  --all -t addon-folder -r https://github.com/xy/addons \
+  -b branchname
 ```
 
 For a local repository:
 
 ```shell
-$ docker run --rm --privileged -v \
-    ~/.docker:/root/.docker -v /my_addon:/data homeassistant/amd64-builder \
-    --all -t /data
+docker run --rm --privileged -v \
+  ~/.docker:/root/.docker -v /my_addon:/data homeassistant/amd64-builder \
+  --all -t /data
 ```
 
 :::tip
