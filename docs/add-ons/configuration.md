@@ -27,12 +27,12 @@ All our Images have also [bashio][bashio] installed. It contains a set of common
 When developing your script:
 
 - `/data` is a volume for persistent storage.
-- `/data/options.json` contains the user configuration. You can use Bashio or `jq` inside your shell script to parse this data.
+- `/data/options.json` contains the user configuration. You can use Bashio to parse this data.
 
 ```shell
 CONFIG_PATH=/data/options.json
 
-TARGET="$(jq --raw-output '.target' $CONFIG_PATH)"
+TARGET="$(basio::config 'target')"
 ```
 
 So if your `options` contain
@@ -56,7 +56,7 @@ FROM $BUILD_FROM
 ENV LANG C.UTF-8
 
 # Install requirements for add-on
-RUN apk add --no-cache jq
+RUN apk add --no-cache example_alpine_package
 
 # Copy data for add-on
 COPY run.sh /
@@ -214,7 +214,7 @@ We support:
 ## Add-on extended build
 
 Additional build options for an add-on is stored in `build.json`. This file will be read from our build systems.
-You need this only, if you not use the default images or need additionals things.
+You need this only, if you not use the default images or need additional things.
 
 ```json
 {
