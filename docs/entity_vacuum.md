@@ -19,8 +19,8 @@ Properties should always only return information from memory and not do I/O (lik
 | cleaning_mode_list | list | `NotImplementedError()`| List of available fan speeds and cleaning modes.
 | error | string | **Required** with `STATE_ERROR` | An error message if the vacuum is in `STATE_ERROR`.
 
-
 ## States
+
 | State | Description
 | ----- | -----------
 | `STATE_CLEANING` | The vacuum is currently cleaning.
@@ -33,25 +33,33 @@ Properties should always only return information from memory and not do I/O (lik
 ## Methods
 
 ### `turn_on` or `async_turn_on`
+
 Turn the vacuum on and start cleaning.
 
-### `turn_off`or `async_turn_off`
+### `turn_off` or `async_turn_off`
+
 Turn the vacuum off stopping the cleaning and returning home.
 
 ### `return_to_base` or `async_return_to_base`
+
 Set the vacuum cleaner to return to the dock.
 
 ### `stop` or `async_stop`
+
 Stop the vacuum cleaner, do not return to base.
 
 ### `clean_spot` or `async_clean_spot`
+
 Perform a spot clean-up.
 
 ### `locate` or `async_locate`
+
 Locate the vacuum cleaner.
 
 ### `set_cleaning_mode` or `async_set_cleaning_mode`
+
 Set the cleaning mode.
 
 ### `send_command` or `async_send_command`
+
 Send a command to a vacuum cleaner.

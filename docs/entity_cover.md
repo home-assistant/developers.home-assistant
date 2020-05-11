@@ -29,6 +29,7 @@ Properties should always only return information from memory and not do I/O (lik
 | supported_features | int (bitwise) | Value determined from `current_cover_position` and `current_cover_tilt_position` | Describes the supported features. See the related table below for details.
 
 ### Device Classes
+
 | Constant | Description
 |----------|-----------------------|
 | `DEVICE_CLASS_AWNING` | Control of an awning, such as an exterior retractible window, door, or patio cover.
@@ -43,13 +44,13 @@ Properties should always only return information from memory and not do I/O (lik
 | `DEVICE_CLASS_WINDOW` | Control of a physical window that opens and closes or may tilt.
 
 ### States
+
 | Constant | Description
 |----------|------------------------|
 | `STATE_OPENING` | The cover is in the process of opening to reach a set position.
 | `STATE_OPEN` | The cover has reached the open position.
 | `STATE_CLOSING` | The cover is in the process of closing to reach a set position.
 | `STATE_CLOSED` | The cover has reach the closed position.
-
 
 ### Supported Features
 

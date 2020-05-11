@@ -15,8 +15,8 @@ An entity is looked up in the registry based on a combination of the plaform typ
 
 Good sources for a unique ID:
 
- - Serial number of a device
- - MAC address of a device
- - latitude/longitude
+- Serial number of a device
+- MAC address of a device
+- latitude/longitude
 
 If a device has a single serial but provides multiple entities, combine the serial with unique identifiers for the entities. For example, if a device measures both temperature and humidity, you can uniquely identify the entities using `{serial}-{sensor_type}`.

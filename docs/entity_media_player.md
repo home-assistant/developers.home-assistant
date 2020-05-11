@@ -25,7 +25,8 @@ Properties should always only return information from memory and not do I/O (lik
 | media_image_remotely_accessible | boolean | False | Return `True` if property `media_image_url` is accessible outside of the home network.
 | device_class | string | `None` | Type of media player.
 
-# Supported Features
+## Supported Features
+
 | Constant | Description 
 | -------- | -----------
 | `SUPPORT_CLEAR_PLAYLIST` | Entity allows clearing the active playlist.
@@ -46,31 +47,39 @@ Properties should always only return information from memory and not do I/O (lik
 | `SUPPORT_VOLUME_STEP` | Entity volume can be adjusted up and down.
 
 ## Methods
+
 ### Select sound mode
+
 Optional. Switch the sound mode of the media player.
 
-    class MyMediaPlayer(MediaPlayerEntity):
-      # Implement one of these methods.
+```python
+class MyMediaPlayer(MediaPlayerEntity):
+    # Implement one of these methods.
 
-      def select_sound_mode(self, sound_mode):
-          """Switch the sound mode of the entity."""
+    def select_sound_mode(self, sound_mode):
+        """Switch the sound mode of the entity."""
 
-      def async_select_sound_mode(self, sound_mode):
-          """Switch the sound mode of the entity."""
+    def async_select_sound_mode(self, sound_mode):
+        """Switch the sound mode of the entity."""
+```
 
 ### Select source
+
 Optional. Switch the selected input source for the media player.
 
-    class MyMediaPlayer(MediaPlayerEntity):
-      # Implement one of these methods.
+```python
+class MyMediaPlayer(MediaPlayerEntity):
+    # Implement one of these methods.
 
-      def select_source(self, source):
-          """Select input source."""
+    def select_source(self, source):
+        """Select input source."""
 
-      def async_select_source(self, source):
-          """Select input source."""
+    def async_select_source(self, source):
+        """Select input source."""
+```
 
 ### Mediatype
+
 Required. Returns one of the defined constants from the below list that matches the mediatype
 
 | CONST |
@@ -87,18 +96,21 @@ Required. Returns one of the defined constants from the below list that matches 
 |MEDIA_TYPE_GAME|
 |MEDIA_TYPE_APP|
 
-    class MyMediaPlayer(MediaPlayerEntity):
-      # Implement the following method.
+```python
+class MyMediaPlayer(MediaPlayerEntity):
+    # Implement the following method.
 
-      @property
-      def media_content_type(self):
-        """Content type of current playing media."""
-        
+    @property
+    def media_content_type(self):
+    """Content type of current playing media."""
+```
+
 :::info
 Using the integration name as the `media_content_type` is also acceptable within the `play_media` service if the integration provides handling which does not map to the defined constants.
 :::
 
 ### Available device classes
+
 Optional. What type of media device is this. It will possibly map to google device types.
 
 | Value | Description

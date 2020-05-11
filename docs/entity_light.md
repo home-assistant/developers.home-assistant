@@ -21,8 +21,8 @@ A light entity controls the brightness, hue and saturation color value, white va
 | supported_features | int | int | Flag supported features.
 | white_value | int | None | Return the white value of this light between 0..255.
 
+## Support Feature
 
-## Support Feature  
 | Constant | Description 
 |----------|-----------------------
 | `SUPPORT_BRIGHTNESS` | Controls the brightness of a light source
@@ -35,7 +35,7 @@ A light entity controls the brightness, hue and saturation color value, white va
 
 ## Methods
 
-# Turn on Light Device
+### Turn on Light Device
 
 ```python
 class MyLightEntity(LightEntity):
@@ -46,7 +46,7 @@ class MyLightEntity(LightEntity):
         """Turn device on."""
 ```
 
-# Turn Off Light Device
+### Turn Off Light Device
 
 ```python
 class MyLightEntity(LightEntity):

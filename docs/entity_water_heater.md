@@ -23,6 +23,7 @@ The allowed operation modes are specified in the base component and implementati
 Properties have to follow the units defined in the `unit_system`.
 
 ## States
+
 | State | Description
 | ----- | -----------
 | `STATE_ECO` | Energy efficient mode, provides energy savings and fast heating.
@@ -34,14 +35,19 @@ Properties have to follow the units defined in the `unit_system`.
 | `STATE_OFF` | The water heater is off.
 
 ## Methods
+
 ### `set_temperature` or `async_set_temperature`
+
 Sets the temperature the water heater should heat water to.
 
 ### `set_operation_mode`or `async_set_operation_mode`
+
 Sets the operation mode of the water heater. Must be in the operation_list.
 
 ### `turn_away_mode_on` or `async_turn_away_mode_on`
+
 Set the water heater to away mode.
 
 ### `turn_away_mode_off` or `async_turn_away_mode_off`
+
 Set the water heater back to the previous operation mode. Turn off away mode.
