@@ -21,10 +21,10 @@ The component is responsible for defining the Abstract Entity Class and services
 
 The Entity Component is responsible for:
 
- - Distributing the configuration to the platforms
- - Forward config entries and discoveries
- - Collect entities for service calls
- - Optionally maintain a group of all entities
+- Distributing the configuration to the platforms
+- Forward config entries and discoveries
+- Collect entities for service calls
+- Optionally maintain a group of all entities
 
 ## Entity Platform
 

@@ -3,16 +3,17 @@ title: "Debugging Home Assistant"
 ---
 
 :::info
-This section is not for end users. End users should use the [SSH add-on] to SSH into Home Assistant. This is for <b>developers</b> of Home Assistant. Do not ask for support if you are using these options.
+This section is not for end users. End users should use the [SSH add-on] to SSH into Home Assistant. This is for **developers** of Home Assistant. Do not ask for support if you are using these options.
 :::
 
-[SSH add-on]: https://www.home-assistant.io/addons/ssh/
+[SSH add-on]: https://github.com/home-assistant/hassio-addons/tree/master/ssh
 
 The following debug tips and tricks are for developers who are running the Home Assistant image and are working on the base image. If you use the generic Linux installer script, you should be able to access your host and logs as per your host.
 
 ## Debug Supervisor
 
 Visual Studio Code config:
+
 ```json
 {
     "version": "0.2.0",
@@ -37,11 +38,13 @@ Visual Studio Code config:
 You need set the dev mode on supervisor and enable debug with options. You need also install the Remote debug Add-on from Developer Repository to expose the debug port to Host.
 
 ## SSH access to the host
+
 :::info
 SSH access through the [SSH add-on] (which will give you SSH access through port 22) will not provide you with all the necessary privileges, and you will be asked for a username and password when typing the 'login' command. You need to follow the steps below, which will setup a separate SSH access through port 22222 with all necessary privileges.
 :::
 
-### Home Assistant OS
+### Home Assistant Operating System
+
 Use a USB drive formatted with FAT, ext4, or NTFS and name it CONFIG (case sensitive). Create an `authorized_keys` file (no extension) containing your public key, and place it in the root of the USB drive. File needs to be ANSI encoded (not UTF-8) and must have Unix line ends (LF), not Windows (CR LF). See [Generating SSH Keys](#generating-ssh-keys) section below if you need help generating keys. From the UI, navigate to the Supervisor system page and choose "Import from USB". You can now access your device as root over SSH on port 22222. Alternatively, the file will be imported from the USB when the Home Assistant OS device is rebooted.
 
 :::tip

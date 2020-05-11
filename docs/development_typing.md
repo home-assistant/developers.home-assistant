@@ -13,6 +13,7 @@ See [this instagram blog post](https://instagram-engineering.com/let-your-code-t
 We've added a script to start a run of our test suite or a test module and tell the `monkeytype` program to analyze the run.
 
 ### Basic workflow
+
 1. Run `script/monkeytype tests/path/to/your_test_module.py`.
 2. Run `monkeytype stub homeassistant.your_actual_module`.
 3. Look at output from the monkeytyped typing stub. If not totally bad, apply the stub to your module. You most likely will need to manually edit the typing in the last step.

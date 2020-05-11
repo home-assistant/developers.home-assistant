@@ -13,8 +13,8 @@ Before you can ask the user to authorize their instance with your application, y
 
 The client ID you need to use is the website of your application. The redirect url has to be of the same host and port as the client ID. For example:
 
- - client id: `https://www.my-application.io`
- - redirect uri: `https://www.my-application.io/hass/auth_callback`
+- client id: `https://www.my-application.io`
+- redirect uri: `https://www.my-application.io/hass/auth_callback`
 
 If you require a different redirect url (ie, if building a native app), you can add an HTML tag to the content of the website of your application (the client ID) with an approved redirect url. For example, add this to your site to whitelist redirect uri `hass://auth`:
 
@@ -25,6 +25,7 @@ If you require a different redirect url (ie, if building a native app), you can 
 Home Assistant will scan the first 10kB of a website for link tags.
 
 ## Authorize
+
 <a href='https://www.websequencediagrams.com/?lz=dGl0bGUgQXV0aG9yaXphdGlvbiBGbG93CgpVc2VyIC0-IENsaWVudDogTG9nIGludG8gSG9tZSBBc3Npc3RhbnQKABoGIC0-IFVzZXI6AEMJZSB1cmwgAD4JACgOOiBHbyB0bwAeBWFuZCBhAC0ICgBQDgB1DACBFw5jb2RlAHELAE4RZXQgdG9rZW5zIGZvcgAoBgBBGlQAJQUK&s=qsd'>
 <img class='invertDark' src='/img/en/auth/authorize_flow.png' alt='Overview of how the different parts interact' />
 </a>
@@ -35,7 +36,7 @@ Home Assistant will scan the first 10kB of a website for link tags.
 
 The authorize url should contain `client_id` and `redirect_uri` as query parameters.
 
-```
+```txt
 http://your-instance.com/auth/authorize?
     client_id=https%3A%2F%2Fhass-auth-demo.glitch.me&
     redirect_uri=https%3A%2F%2Fhass-auth-demo.glitch.me%2F%3Fauth_callback%3D1
@@ -43,7 +44,7 @@ http://your-instance.com/auth/authorize?
 
 Optionally you can also include a `state` parameter, this will be added to the redirect uri. The state is perfect to store the instance url that you are authenticating with. Example:
 
-```
+```txt
 http://your-instance.com/auth/authorize?
     client_id=https%3A%2F%2Fhass-auth-demo.glitch.me&
     redirect_uri=https%3A%2F%2Fhass-auth-demo.glitch.me%2Fauth_callback&
@@ -52,7 +53,7 @@ http://your-instance.com/auth/authorize?
 
 The user will navigate to this link and be presented with instructions to log in and authorize your application. Once authorized, the user will be redirected back to the passed in redirect uri with the authorization code and state as part of the query parameters. Example:
 
-```
+```txt
 https://hass-auth-demo.glitch.me/auth_callback
     code=12345&
     state=http%3A%2F%2Fhassio.local%3A8123
@@ -74,7 +75,7 @@ All requests to the token endpoint need to contain the exact same client ID as w
 
 Use the grant type `authorization_code` to retrieve the tokens after a user has successfully finished the authorize step. The request body is:
 
-```
+```txt
 grant_type=authorization_code&
 code=12345&
 client_id=https%3A%2F%2Fhass-auth-demo.glitch.me
@@ -106,7 +107,7 @@ An HTTP status code of 400 will be returned if an invalid request has been issue
 
 Once you have retrieved a refresh token via the grant type `authorization_code`, you can use it to fetch new access tokens. The request body is:
 
-```
+```txt
 grant_type=refresh_token&
 refresh_token=IJKLMNOPQRST&
 client_id=https%3A%2F%2Fhass-auth-demo.glitch.me
@@ -138,7 +139,7 @@ An HTTP status code of 400 will be returned if an invalid request has been issue
 :::
 The token endpoint is also capable of revoking a refresh token. Revoking a refresh token will immediately revoke the refresh token and all access tokens that it has ever granted. To revoke a refresh token, make the following request:
 
-```
+```txt
 token=IJKLMNOPQRST&
 action=revoke
 ```
@@ -209,7 +210,8 @@ print(response.text)
 ```
 
 ### Example: NodeJS
-```JavaScript
+
+```javascript
 fetch('https://your.awesome.home/api/error/all', {
   headers: { Authorization: 'Bearer ABCDEFGH' }
 }).then(function (response) {
@@ -255,7 +257,7 @@ The response will contain the signed path:
 
 Some things to note about a signed path:
 
- - If the refresh token is deleted, the signed url is no longer valid.
- - If the user is deleted, the signed url is no longer valid (because the refresh token will be deleted).
- - If Home Assistant is restarted, the signed url is no longer valid.
- - Access is only validated when the request is received. If a response takes longer than the expiration time (ie, downloading a large file), the download will continue after the expiration date has passed.
+- If the refresh token is deleted, the signed url is no longer valid.
+- If the user is deleted, the signed url is no longer valid (because the refresh token will be deleted).
+- If Home Assistant is restarted, the signed url is no longer valid.
+- Access is only validated when the request is received. If a response takes longer than the expiration time (ie, downloading a large file), the download will continue after the expiration date has passed.

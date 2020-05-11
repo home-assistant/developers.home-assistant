@@ -17,10 +17,9 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| state	| string | **Required** | One of the states listed in the **states** section.
+| state | string | **Required** | One of the states listed in the **states** section.
 | code_format | string | `None` | One of the states listed in the **code formats** section.
 | changed_by | string | `None` | Last change triggered by.
-
 
 ### States
 
@@ -36,7 +35,6 @@ Properties should always only return information from memory and not do I/O (lik
 | `disarming` | The alarm is disarming.
 | `triggered` | The alarm is triggered.
 
-
 ### Code Formats
 
 | Value | Description
@@ -45,10 +43,10 @@ Properties should always only return information from memory and not do I/O (lik
 | Number | Code is a number (Shows ten-key pad on frontend).
 | Any | Code is a string.
 
-
 ## Methods
 
 ### Alarm Disarm
+
 Send disarm command.
 
 ```python
@@ -63,6 +61,7 @@ class MyAlarm(AlarmControlPanelEntity):
 ```
 
 ### Alarm Arm Home
+
 Send arm home command.
 
 ```python
@@ -77,6 +76,7 @@ class MyAlarm(AlarmControlPanelEntity):
 ```
 
 ### Alarm Arm Away
+
 Send arm away command.
 
 ```python
@@ -91,6 +91,7 @@ class MyAlarm(AlarmControlPanelEntity):
 ```
 
 ### Alarm Arm Night
+
 Send arm night command.
 
 ```python
@@ -105,6 +106,7 @@ class MyAlarm(AlarmControlPanelEntity):
 ```
 
 ### Alarm Trigger
+
 Send alarm trigger command.
 
 ```python
@@ -119,6 +121,7 @@ class MyAlarm(AlarmControlPanelEntity):
 ```
 
 ### Alarm Custom Bypass
+
 Send arm custom bypass command.
 
 ```python
