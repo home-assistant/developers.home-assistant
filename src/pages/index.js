@@ -20,7 +20,7 @@ const features = [
         </p>
         <p>
           <b>
-            <a href="docs/frontend_index">Frontend</a>.
+            <a href="docs/frontend">Frontend</a>.
           </b>{" "}
           Explains how to develop the user interface of Home Assistant.
         </p>
@@ -50,17 +50,13 @@ const features = [
             <a href="docs/development_index">Add a new integration</a>
           </li>
           <li>
-            <a href="docs/internationalization_index">
-              Translate Home Assistant
-            </a>
+            <a href="docs/internationalization">Translate Home Assistant</a>
           </li>
           <li>
-            <a href="docs/frontend_index">Improve the frontend</a>
+            <a href="docs/frontend">Improve the frontend</a>
           </li>
           <li>
-            <a href="docs/external_api_rest">
-              Extract data from the Home Assistant API
-            </a>
+            <a href="docs/api/rest">Extract data from the Home Assistant API</a>
           </li>
         </ul>
         <h3>Source Code</h3>

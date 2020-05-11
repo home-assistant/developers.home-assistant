@@ -39,7 +39,7 @@ It is likely you are going to release newer versions of your add-on in the futur
 
 A changelog is a file which contains a curated, chronologically ordered list of notable changes for each version of your add-on and is generally published as the `CHANGELOG.md` file.
 
-If you are in need of a guide on keeping a changelog, we would recommend checking the [keep a changelog](http://keepachangelog.com) website. They have developed a standard that is used by many opensource projects around the world.
+If you are in need of a guide on keeping a changelog, we would recommend checking the [keep a changelog](http://keepachangelog.com) website. They have developed a standard that is used by many open source projects around the world.
 
 ## AppArmor
 
@@ -50,13 +50,14 @@ You can use own security profile for you Add-on with AppArmor. Default it is ena
 Ingress allow users to access the add-on web interface via the Home Assistant UI. Authentication is handled by Home Assistant, so neither the user nor the add-on developer will need to care about the security or port forwarding. Users love this feature, however it is not every time simple to implement for the add-on developer.
 
 To add Ingress support, follow the following steps:
+
 - The add-on will need to provide the web interface on port `8099`. Make sure that the add-on accepts only connections from `172.30.32.2` on that port and that the connections are treated as authenticated.
-- Update add-on configuration and set `ingress: true`. Here it is also possible to configure the Ingress port (default 8099). 
+- Update add-on configuration and set `ingress: true`. Here it is also possible to configure the Ingress port (default 8099).
 - If you need to configure the application inside your add-on with the right path and port, query the add-on info API endpoint.
 - If the application doesn't support relative paths or you can't set a base url, you can use nginx filter to replace the URL with correct path.
 
 Ingress API gateway supports the following:
 
- * HTTP/1.x
- * Streaming content
- * Websockets
+- HTTP/1.x
+- Streaming content
+- Websockets

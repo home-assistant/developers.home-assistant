@@ -4,7 +4,7 @@ title: "Create a new page"
 
 For a platform or integration page, the fastest way is to make a copy of an existing page and edit it. The [Integration overview](https://www.home-assistant.io/integrations/) and the [Examples section](https://www.home-assistant.io/cookbook/) are generated automatically, so there is no need to add a link to those pages.
 
-Please honor the [Standards](documentation_standards.md) we have for the documentation.
+Please honor the [Standards](documenting/standards.md) we have for the documentation.
 
 If you start from scratch with a page, you need to add a header. Different sections of the documentation may need different headers.
 
@@ -100,7 +100,7 @@ When you're writing code that is to be executed on the terminal, do not prefix t
 
 ### Templates
 
-For the [configuration templating](https://www.home-assistant.io/docs/configuration/templating/) [Jinja](http://jinja.pocoo.org/) is used. Check the [Documentation Standards](documentation_standards.md) for further details.
+For the [configuration templating](https://www.home-assistant.io/docs/configuration/templating/) [Jinja](http://jinja.pocoo.org/) is used. Check the [Documentation Standards](documenting/standards.md) for further details.
 
 If you are don't escape templates then they will be rendered and appear blank on the website.
 

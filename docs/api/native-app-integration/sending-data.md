@@ -65,6 +65,7 @@ Sodium is a modern, easy-to-use software library for encryption, decryption, sig
 :::
 
 ### Choosing a library
+
 Libraries that wrap Sodium exist for most modern programming languages and platforms. Sodium itself is written in C.
 
 Here are the libraries we suggest using, although you should feel free to use whatever works well for you.
@@ -96,12 +97,12 @@ This message will inform Home Assistant of new location information.
 
 ```json
 {
-	"type": "update_location",
-	"data": {
-		"gps": [12.34, 56.78],
-		"gps_accuracy": 120,
-		"battery": 45
-	}
+  "type": "update_location",
+  "data": {
+    "gps": [12.34, 56.78],
+    "gps_accuracy": 120,
+    "battery": 45
+  }
 }
 ```
 
@@ -122,14 +123,14 @@ Call a service in Home Assistant.
 
 ```json
 {
-	"type": "call_service",
-	"data": {
-		"domain": "light",
-		"service": "turn_on",
-		"service_data": {
-			"entity_id": "light.kitchen"
-		}
-	}
+  "type": "call_service",
+  "data": {
+    "domain": "light",
+    "service": "turn_on",
+    "service_data": {
+      "entity_id": "light.kitchen"
+    }
+  }
 }
 ```
 
@@ -145,13 +146,13 @@ Fire an event in Home Assistant.
 
 ```json
 {
-	"type": "fire_event",
-	"data": {
-		"event_type": "my_custom_event",
-		"event_data": {
-			"something": 50
-		}
-	}
+  "type": "fire_event",
+  "data": {
+    "event_type": "my_custom_event",
+    "event_data": {
+      "something": 50
+    }
+  }
 }
 ```
 
@@ -166,15 +167,15 @@ Renders one or more templates and returns the result(s).
 
 ```json
 {
-	"type": "render_template",
-	"data": {
-		"my_tpl": {
-			"template": "Hello {{ name }}, you are {{ states('person.paulus') }}.",
-			"variables": {
-				"name": "Paulus"
-			}
-		}
-	}
+  "type": "render_template",
+  "data": {
+    "my_tpl": {
+      "template": "Hello {{ name }}, you are {{ states('person.paulus') }}.",
+      "variables": {
+        "name": "Paulus"
+      }
+    }
+  }
 }
 ```
 
@@ -191,18 +192,18 @@ Update your app registration. Use this if the app version changed or any of the 
 
 ```json
 {
-	"type": "update_registration",
-	"data": {
-		"app_data": {
-			"push_token": "abcd",
-			"push_url": "https://push.mycool.app/push"
-		},
-		"app_version": "2.0.0",
-		"device_name": "Robbies iPhone",
-		"manufacturer": "Apple, Inc.",
-		"model": "iPhone XR",
-		"os_version": "23.02"
-	}
+  "type": "update_registration",
+  "data": {
+    "app_data": {
+      "push_token": "abcd",
+      "push_url": "https://push.mycool.app/push"
+    },
+    "app_version": "2.0.0",
+    "device_name": "Robbies iPhone",
+    "manufacturer": "Apple, Inc.",
+    "model": "iPhone XR",
+    "os_version": "23.02"
+  }
 }
 ```
 
@@ -223,7 +224,7 @@ Get all enabled zones.
 
 ```json
 {
-	"type": "get_zones"
+  "type": "get_zones"
 }
 ```
 
@@ -245,7 +246,7 @@ Enables encryption support for an existing registration
 
 ```json
 {
-	"type": "enable_encryption"
+  "type": "enable_encryption"
 }
 ```
 

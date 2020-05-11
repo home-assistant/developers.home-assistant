@@ -10,7 +10,7 @@ As it states in the [Style guidelines section](development_guidelines.md) all co
 Local testing is done using [Tox](https://tox.readthedocs.io), which has been installed as part of running `script/setup` in the [virtual environment](development_environment.md). To start the tests, activate the virtual environment and simply run the command:
 
 ```shell
-$ tox
+tox
 ```
 
 It might be required that you install additional packages depending on your distribution/operating system:
@@ -50,22 +50,22 @@ $ tox -e py38 -- tests/test_core.py --duration=10
 Running `tox` will invoke the full test suite. Even if you specify which tox target to run, you still run all tests inside that target. That's not very convenient to quickly iterate on your code! To be able to run the specific test suites without `tox`, you'll need to install the test dependencies into your Python environment:
 
 ```shell
-$ pip3 install -r requirements_test_all.txt -c homeassistant/package_constraints.txt
+pip3 install -r requirements_test_all.txt -c homeassistant/package_constraints.txt
 ```
 
 Now that you have all test dependencies installed, you can run tests on individual files:
 
 ```shell
-$ flake8 homeassistant/core.py
-$ pylint homeassistant/core.py
-$ pydocstyle homeassistant/core.py
-$ py.test tests/test_core.py
+flake8 homeassistant/core.py
+pylint homeassistant/core.py
+pydocstyle homeassistant/core.py
+py.test tests/test_core.py
 ```
 
 You can also run linting tests against all changed files, as reported by `git diff upstream/dev... --diff-filter=d --name-only`, using the `lint` script:
 
 ```shell
-$ script/lint
+script/lint
 ```
 
 ### Preventing linter errors
@@ -73,8 +73,8 @@ $ script/lint
 Save yourself the hassle of extra commits just to fix style errors by enabling the Flake8 git commit hook. Flake8 will check your code when you try to commit to the repository and block the commit if there are any style errors, which gives you a chance to fix them!
 
 ```shell
-$ pip3 install flake8 flake8-docstrings
-$ flake8 --install-hook=git
+pip3 install flake8 flake8-docstrings
+flake8 --install-hook=git
 ```
 
 The `flake8-docstrings` extension will check docstrings according to [PEP257](https://www.python.org/dev/peps/pep-0257/) when running Flake8.

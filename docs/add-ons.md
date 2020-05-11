@@ -7,23 +7,21 @@ Add-ons for Hass.io allow the user to extend the functionality around Home Assis
 
 Under the hood, add-ons are Docker images published in [Docker Hub](https://hub.docker.com/). Developers can create [GitHub](https://github.com) repositories that contain multiple references to add-ons for easy sharing with the community.
 
-1. [Tutorial: Making your first add-on](hassio_addon_tutorial.md)
-1. [Configuration](hassio_addon_config.md)
-1. [Communication](hassio_addon_communication.md)
-1. [Local Testing](hassio_addon_testing.md)
-1. [Publishing](hassio_addon_publishing.md)
-1. [Presentation](hassio_addon_presentation.md)
-1. [Repositories](hassio_addon_repository.md)
-1. [Security](hassio_addon_security.md)
-
+- [Tutorial: Making your first add-on](add-ons/tutorial.md)
+- [Configuration](add-ons/configuration.md)
+- [Communication](add-ons/communication.md)
+- [Local Testing](add-ons/testing.md)
+- [Publishing](add-ons/publishing.md)
+- [Presentation](add-ons/presentation.md)
+- [Repositories](add-ons/repository.md)
+- [Security](add-ons/security.md)
 
 Useful links:
 
-* [Supervisor](https://github.com/home-assistant/supervisor)
-* [Core Add-ons](https://github.com/home-assistant/hassio-addons)
-* [Build environment](https://github.com/home-assistant/hassio-build)
-* [base images](https://github.com/home-assistant/docker-base)
-* [Builder](https://github.com/home-assistant/hassio-builder)
-* [Home Assistant community Add-ons](https://github.com/hassio-addons)
-* [HassOS embedded Linux](https://github.com/home-assistant/hassos)
-* [Home Assistant Dockerfile](https://github.com/home-assistant/docker)
+- [Supervisor](https://github.com/home-assistant/supervisor)
+- [Core Add-ons](https://github.com/home-assistant/hassio-addons)
+- [Docker base images](https://github.com/home-assistant/docker-base)
+- [Builder](https://github.com/home-assistant/hassio-builder)
+- [Home Assistant community Add-ons](https://github.com/hassio-addons)
+- [Home Assistant Operating System](https://github.com/home-assistant/operating-system)
+- [Home Assistant Docker](https://github.com/home-assistant/docker)

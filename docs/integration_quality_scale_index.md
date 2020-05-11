@@ -8,14 +8,14 @@ The Integration Quality Scale scores each integration based on the code quality 
 Suggestions for changes can be done by creating an issue in the [architecture repo](https://github.com/home-assistant/architecture/issues/).
 :::
 
-# No score
+## No score
 
 This integration passes the bare minimum requirements to become part of the index.
 
 - Satisfy all requirements for [creating components](creating_component_code_review.md) and [creating platforms](creating_platform_code_review.md).
 - Configurable via `configuration.yaml`
 
-# Silver 🥈
+## Silver 🥈
 
 This integration is able to cope when things go wrong. It will not print any exceptions nor will it fill the log with retry attempts.
 
@@ -28,7 +28,7 @@ This integration is able to cope when things go wrong. It will not print any exc
 - Set `available` property to `False` if appropriate ([docs](entity_index.md#generic-properties))
 - Entities have unique ID (if available) ([docs](entity_registry_index.md#unique-id-requirements))
 
-# Gold 🥇
+## Gold 🥇
 
 This is a solid integration that is able to survive poor conditions and can be configured via the user interface.
 
@@ -45,7 +45,7 @@ This is a solid integration that is able to survive poor conditions and can be c
 - Supports entities being disabled and leverages `Entity.entity_registry_enabled_default` to disable less popular entities ([docs](entity_index.md#advanced-properties))
 - If the device/service API can remove entities, the integration should make sure to clean up the entity and device registry.
 
-# Platinum 🏆
+## Platinum 🏆
 
 Best of the best. The integration is completely async, meaning it's super fast. Integrations that reach platinum level will require approval by the code owner for each PR.
 
@@ -54,6 +54,6 @@ Best of the best. The integration is completely async, meaning it's super fast. 
 - Integration + dependency are async
 - Uses aiohttp and allows passing in websession (if making HTTP requests)
 
-# Internal 🏠
+## Internal 🏠
 
 Integrations which are part of Home Assistant are not rated but marked as **internal**.

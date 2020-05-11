@@ -227,16 +227,16 @@ _The example is about config entries, but works with other parts that use data e
 
 The flow works as follows:
 
-1.  The user starts config flow in Home Assistant.
-2.  Config flow prompts the user to finish the flow on an external website.
-3.  The user opens the external website.
-4.  Upon completion of the external step, the user's browser will be redirected to a Home Assistant endpoint to deliver the response.
-5.  The endpoint validates the response, and upon validation, marks the external step as done and returns JavaScript code to close the window: `<script>window.close()</script>`.
+1. The user starts config flow in Home Assistant.
+2. Config flow prompts the user to finish the flow on an external website.
+3. The user opens the external website.
+4. Upon completion of the external step, the user's browser will be redirected to a Home Assistant endpoint to deliver the response.
+5. The endpoint validates the response, and upon validation, marks the external step as done and returns JavaScript code to close the window: `<script>window.close()</script>`.
 
     To be able to route the result of the external step to the Home Assistant endpoint, you will need to make sure the config flow ID is included. If your external step is an OAuth2 flow, you can leverage the oauth2 state for this. This is a variable that is not interpreted by the authorization page but is passed as-is to the Home Assistant endpoint.
 
-6.  The window closes and the Home Assistant user interface with the config flow will be visible to the user again.
-7.  The config flow has automatically advanced to the next step when the external step was marked as done. The user is prompted with the next step.
+6. The window closes and the Home Assistant user interface with the config flow will be visible to the user again.
+7. The config flow has automatically advanced to the next step when the external step was marked as done. The user is prompted with the next step.
 
 Example configuration flow that includes an external step.
 

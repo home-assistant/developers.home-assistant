@@ -20,7 +20,6 @@ Properties should always only return information from memory and not do I/O (lik
 | speed_list | list | None| Get the list of available speeds. The allowed values are "off", "low", "medium" and "high". Use the corresponding constants SPEED_OFF, SPEED_LOW, SPEED_MEDIUM, SPEED_HIGH. |
 | supported_features | int | 0 | Flag supported features |
 
-
 ## Supported Features
 
 | Constant | Description |
@@ -28,8 +27,6 @@ Properties should always only return information from memory and not do I/O (lik
 | 'SUPPORT_DIRECTION' | The fan supports changing the direction.
 | 'SUPPORT_SET_SPEED' | The fan supports setting the speed.
 | 'SUPPORT_OSCILLATE' | The fan supports oscillation.
-
-
 
 ## Methods
 

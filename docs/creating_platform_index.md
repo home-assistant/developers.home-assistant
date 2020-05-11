@@ -9,8 +9,8 @@ To create a platform, you will need to create a file with the domain name of the
 
 We have created two example integrations that should give you a look at how this works:
 
- - [Example sensor platform](https://github.com/home-assistant/example-custom-config/tree/master/custom_components/example_sensor/): hello world of platforms.
- - [Example light platform](https://github.com/home-assistant/example-custom-config/tree/master/custom_components/example_light/): showing best practices.
+- [Example sensor platform](https://github.com/home-assistant/example-custom-config/tree/master/custom_components/example_sensor/): hello world of platforms.
+- [Example light platform](https://github.com/home-assistant/example-custom-config/tree/master/custom_components/example_light/): showing best practices.
 
 ### Interfacing with devices
 

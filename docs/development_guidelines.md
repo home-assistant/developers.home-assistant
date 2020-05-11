@@ -46,8 +46,8 @@ Also note that `_LOGGER.info` is reserved for the core, use `_LOGGER.debug` for 
 Instead of order the imports manually, use [`isort`](https://github.com/timothycrosley/isort).
 
 ```shell
-$ pip3 install isort
-$ isort homeassistant/components/sensor/fixer.py
+pip3 install isort
+isort homeassistant/components/sensor/fixer.py
 ```
 
 ### Use new style string formatting

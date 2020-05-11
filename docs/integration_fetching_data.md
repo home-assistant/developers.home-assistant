@@ -4,7 +4,7 @@ title: "Fetching Data"
 
 Your integration will need to fetch data from an API to be able to provide this to Home Assistant. This API can be available over the web (local or cloud), sockets, serial ports exposed via USB sticks, etc.
 
-# Push vs Poll
+## Push vs Poll
 
 APIs come in many different shapes and forms but at its core they fall in two categories: push and poll.
 
@@ -17,11 +17,11 @@ Because polling is so common, Home Assistant by default assumes that your entity
 - If you are executing from within an async function and don't need your entity update method called, call `Entity.async_write_ha_state()`. This is an async callback that will write the state to the state machine within yielding to the event loop.
 - `Entity.schedule_update_ha_state(force_refresh=False)`/`Entity.async_schedule_update_ha_state(force_refresh=False)` will schedule an update of the entity. If `force_refresh` is set to `True`, Home Assistant will call your entities update method (`update()`/`async_update()`) prior to writing the state.
 
-# Polling API endpoints
+## Polling API endpoints
 
 We're going to explain a few different API types here and the best way to integrate them in Home Assistant. Note that some integrations will encounter a combination of the ones below.
 
-## Coordinated, single API poll for data for all entities
+### Coordinated, single API poll for data for all entities
 
 This API will have a single method to fetch data for all the entities that you have in Home Assistant. In this case we will want to have a single periodical poll on this endpoint, and then let entities know as soon as new data is available for them.
 
@@ -125,7 +125,7 @@ class MyEntity(entity.Entity):
         await self.coordinator.async_request_refresh()
 ```
 
-## Separate polling for each individual entity
+### Separate polling for each individual entity
 
 Some APIs will offer an endpoint per device. It sometimes won't be possible to map a device from your API to a single entity. If you create multiple entities from a single API device endpoint, please see the previous section.
 
@@ -141,7 +141,7 @@ from datetime import timedelta
 SCAN_INTERVAL = timedelta(seconds=5)
 ```
 
-# Request Parallelism
+## Request Parallelism
 
 :::info
 This is an advanced topic.

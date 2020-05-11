@@ -16,9 +16,9 @@ Do not use development mode in production. Home Assistant uses aggressive cachin
 The first step is to fork the [frontend repository][hass-frontend] and add the upstream remote. You can place the forked repository anywhere on your system.
 
 ```shell
-$ git clone git@github.com:YOUR_GIT_USERNAME/frontend.git
-$ cd frontend
-$ git remote add upstream https://github.com/home-assistant/home-assistant/frontend.git
+git clone git@github.com:YOUR_GIT_USERNAME/frontend.git
+cd frontend
+git remote add upstream https://github.com/home-assistant/home-assistant/frontend.git
 ```
 
 ### Configuring Home Assistant
@@ -38,7 +38,7 @@ frontend:
 Node.js is required to build the frontend. The preferred method of installing node.js is with [nvm](https://github.com/creationix/nvm). Install nvm using the instructions in the [README](https://github.com/creationix/nvm#install-script), and install the correct node.js by running the following command:
 
 ```shell
-$ nvm install
+nvm install
 ```
 
 [Yarn](https://yarnpkg.com/en/) is used as the package manager for node modules. [Install yarn using the instructions here.](https://yarnpkg.com/en/docs/install)
@@ -46,8 +46,8 @@ $ nvm install
 Next, development dependencies need to be installed to bootstrap the frontend development environment. First activate the right Node version and then download all the dependencies:
 
 ```shell
-$ nvm use
-$ script/bootstrap
+nvm use
+script/bootstrap
 ```
 
 ## Development
@@ -55,8 +55,8 @@ $ script/bootstrap
 During development, you will need to run the development script to maintain a development build of the frontend that auto updates when you change any of the source files. To run this server, run:
 
 ```shell
-$ nvm use
-$ script/develop
+nvm use
+script/develop
 ```
 
 Make sure you have cache disabled and correct settings to avoid stale content:
@@ -68,13 +68,13 @@ Instructions are for Google Chrome
 1. Disable cache by ticking the box in `Network` > `Disable cache`
 
 <p class='img'>
-<img src='/img/en/development/disable-cache.png' />
+  <img src='/img/en/development/disable-cache.png' />
 </p>
 
 2. Enable Bypass for network in `Application` > `Service Workers` > `Bypass for network`
 
 <p class='img'>
-<img src='/img/en/development/bypass-for-network.png' />
+  <img src='/img/en/development/bypass-for-network.png' />
 </p>
 
 ## Creating pull requests
@@ -82,15 +82,15 @@ Instructions are for Google Chrome
 If you're planning on issuing a PR back to the Home Assistant codebase you need to fork the frontend project and add your fork as a remote to the Home Assistant frontend repo.
 
 ```shell
-$ git remote add fork <github URL to your fork>
+git remote add fork <github URL to your fork>
 ```
 
 When you've made your changes and are ready to push them change to the working directory for the frontend project and then push your changes
 
 ``` bash
-$ git add -A
-$ git commit -m "Added new feature X"
-$ git push -u fork HEAD
+git add -A
+git commit -m "Added new feature X"
+git push -u fork HEAD
 ```
 
 ## Building the frontend
@@ -100,8 +100,8 @@ If you're making changes to the way the frontend is packaged, it might be necess
 To test it out inside Home Assistant, run the following command from the main Home Assistant repository:
 
 ```shell
-$ pip3 install -e /path/to/hass/frontend/
-$ hass --skip-pip
+pip3 install -e /path/to/hass/frontend/
+hass --skip-pip
 ```
 
 [hass-frontend]: https://github.com/home-assistant/frontend
