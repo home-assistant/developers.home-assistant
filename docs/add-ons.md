@@ -7,14 +7,14 @@ Add-ons for Hass.io allow the user to extend the functionality around Home Assis
 
 Under the hood, add-ons are Docker images published in [Docker Hub](https://hub.docker.com/). Developers can create [GitHub](https://github.com) repositories that contain multiple references to add-ons for easy sharing with the community.
 
-1. [Tutorial: Making your first add-on](hassio_addon_tutorial.md)
-1. [Configuration](hassio_addon_config.md)
-1. [Communication](hassio_addon_communication.md)
-1. [Local Testing](hassio_addon_testing.md)
-1. [Publishing](hassio_addon_publishing.md)
-1. [Presentation](hassio_addon_presentation.md)
-1. [Repositories](hassio_addon_repository.md)
-1. [Security](hassio_addon_security.md)
+1. [Tutorial: Making your first add-on](tutorial)
+2. [Configuration](configuration)
+3. [Communication](communication)
+4. [Local Testing](testing)
+5. [Publishing](publishing)
+6. [Presentation](presentation)
+7. [Repositories](repository)
+8. [Security](security)
 
 
 Useful links:
