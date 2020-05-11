@@ -25,16 +25,22 @@ Right now add-ons will work with images that are stored on Docker Hub (using `im
 
 If you don't want to use the devcontainer environment, you can still build add-ons locally with Docker. The recommended method is to use the [official build tool][hassio-builder] to create the docker images.
 
-Assuming that your addon is in the folder `/path/to/addon` and your docker socket is at `/var/run/docker.sock`, you can build the addon for all supported architectures by running the following: `docker run --rm -ti --name hassio-builder --privileged -v /path/to/addon:/data -v /var/run/docker.sock:/var/run/docker.sock:ro homeassistant/amd64-builder -t /data --all --test -i my-test-addon-{arch} -d local`
+Assuming that your addon is in the folder `/path/to/addon` and your docker socket is at `/var/run/docker.sock`, you can build the addon for all supported architectures by running the following:
+```
+docker run --rm -ti --name hassio-builder --privileged -v /path/to/addon:/data -v /var/run/docker.sock:/var/run/docker.sock:ro homeassistant/amd64-builder -t /data --all --test -i my-test-addon-{arch} -d local
+```
 
-If you don't want to use the official build tool, you can still build with standalone Docker. If you use `FROM $BUILD_FROM` you'll need set a base image with build args. Normally you can use follow base images:
+If you don't want to use the official build tool, you can still build with standalone Docker. If you use `FROM $BUILD_FROM` you'll need to set a base image with build args. Normally you can use follow base images:
 
 - armhf: `homeassistant/armhf-base:latest`
 - aarch64: `homeassistant/aarch64-base:latest`
 - amd64: `homeassistant/amd64-base:latest`
 - i386: `homeassistant/i386-base:latest`
 
-Use `docker` from the directory containing the add-on files to build the test addon: `docker build --build-arg BUILD_FROM="homeassistant/amd64-base:latest" -t local/my-test-addon .`
+Use `docker` from the directory containing the add-on files to build the test addon: 
+```
+docker build --build-arg BUILD_FROM="homeassistant/amd64-base:latest" -t local/my-test-addon .
+```
 
 [hassio-builder]: https://github.com/home-assistant/hassio-builder
 
