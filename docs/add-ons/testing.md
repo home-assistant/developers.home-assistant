@@ -2,28 +2,45 @@
 title: "Local add-on testing"
 ---
 
-The fastest way to develop add-ons is by adding them to your local add-on repository. To access your local add-on repository, install either the [Samba add-on] or [SSH add-on].
+The fastest and recommended way to develop add-ons is using a local Visual Studio Code dev environment. The [Official Add-ons][hassio-addons] repository includes a .devcontainer setup for VS Code which will run Supervisor and Home Assistant, with all of the add-ons mapped as Local Add-ons inside, making it simple for add-on developers on Windows, Mac and Linux desktop OS-es.  Just follow the instructions to download and install the [Remote Containers][remote-containers] VS Code extension, open the root folder inside VS Code, and when prompted re-open the window inside the container (or, from the Command Pallete, select 'Rebuild and Reopen in Container').  For standalone add-ons there also exists an [addon devcontainer template][hassio-addon-devcontainer] on GitHub which provides the same boilerplate devcontainer for new add-on projects.
 
-Right now add-ons will work with images that are stored on Docker Hub (using `image` from add-on config). Without `image` inside local add-ons repository it to be built on the device.
+Once running, you'll need to run the task (Terminal -> Run Task) 'Start Hass.io', which will bootstrap Supervisor and Home Assistant.  You'll then be able to access the normal onboarding process via the Home Assistant instance at http://localhost:8123/
 
-The [Community Add-on][hassio-vagrant] repository create a vagrant based development system. This Vagrant virtual machine allows you to test and play with Supervisor and Home Assistant, and is a great environment for add-on developers
+The add-on(s) under development will be automatically found in the Local Add-ons repository.
+
+[hassio-addons]: https://github.com/home-assistant/hassio-addons
+[remote-containers]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
+[hassio-addon-devcontainer]: https://github.com/issacg/hassio-addon-devcontainer
+
+## Remote development
+
+If you require access to phyiscal hardware or other resources that cannot be locally emulated (for example, serial ports), the next best option to develop add-ons is by adding them to the local add-on repository on a real device running Home Assistant. To access the local add-on repository on a remote device, install either the [Samba add-on] or [SSH add-on] and copy the add-on files to a subdirectory of `/addons`.
+
+Right now add-ons will work with images that are stored on Docker Hub (using `image` from add-on config). To ensure that the add-on is built locally and not fetched from an upstream respository, ensure that the `image` key is *not* present in your `config.json`.
 
 [Samba add-on]: https://www.home-assistant.io/addons/samba/
 [SSH add-on]: https://www.home-assistant.io/addons/ssh/
-[hassio-vagrant]: https://github.com/hassio-addons/hassio-vagrant
 
 ## Local build
 
-You can build and try the addon on your developer machine also. Move all addon stuff into a temp folder. If you use `FROM $BUILD_FROM` you need set a base image with build args. Normally you can use follow base images:
+If you don't want to use the devcontainer environment, you can still build add-ons locally with Docker.  The recommended method is to use the [official build tool][hassio-builder] to create the docker images.
+
+Assuming that your addon is in the folder `/path/to/addon` and your docker socket is at `/var/run/docker.sock`, you can build the addon for all supported architectures by running the following: `docker run --rm -ti --name hassio-builder --privileged -v /path/to/addon:/data -v /var/run/docker.sock:/var/run/docker.sock:ro homeassistant/amd64-builder -t /data --all --test -i my-test-addon-{arch} -d local`
+
+If you don't want to use the official build tool, you can still build with standalone Docker. If you use `FROM $BUILD_FROM` you'll need set a base image with build args. Normally you can use follow base images:
 
 - armhf: `homeassistant/armhf-base:latest`
 - aarch64: `homeassistant/aarch64-base:latest`
 - amd64: `homeassistant/amd64-base:latest`
 - i386: `homeassistant/i386-base:latest`
 
-Use `docker` to build the test addon: `docker build --build-arg BUILD_FROM="homeassistant/amd64-base:latest" -t local/my-test-addon .`
+Use `docker` from the directory containing the add-on files to build the test addon: `docker build --build-arg BUILD_FROM="homeassistant/amd64-base:latest" -t local/my-test-addon .`
+
+[hassio-builder]: https://github.com/home-assistant/hassio-builder
 
 ## Local run
+
+If you don't want to use the devcontainer environment, you can still run add-ons locally with Docker.
 
 Create a new folder for data and add a test _options.json_ file. After that you can run your add-on with: `docker run --rm -v /tmp/my_test_data:/data -p PORT_STUFF_IF_NEEDED local/my-test-addon`
 
