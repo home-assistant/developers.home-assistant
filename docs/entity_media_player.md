@@ -16,6 +16,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
+| supported_features | int | int | Flag supported features.
 | sound_mode | string | None | The current sound mode of the media player
 | sound_mode_list | list | None | Dynamic list of available sound modes (set by platform, empty means sound mode not supported)
 | source | string | None | The currently selected input source for the media player.
@@ -23,6 +24,26 @@ Properties should always only return information from memory and not do I/O (lik
 | media_image_url | string | None | URL that represents the current image.
 | media_image_remotely_accessible | boolean | False | Return `True` if property `media_image_url` is accessible outside of the home network.
 | device_class | string | `None` | Type of media player.
+
+# Supported Features
+| Constant | Description 
+| -------- | -----------
+| `SUPPORT_CLEAR_PLAYLIST` | Entity allows clearing the active playlist.
+| `SUPPORT_NEXT_TRACK` | Entity allows skipping to the next media track.
+| `SUPPORT_PAUSE` | Entity allows pausing the playback of media.
+| `SUPPORT_PLAY` | Entity allows playing/resuming playback of media.
+| `SUPPORT_PLAY_MEDIA` | Entity allows playing media sources.
+| `SUPPORT_PREVIOUS_TRACK` | Entity allows returning back to a previous media track.
+| `SUPPORT_SEEK` | Entity allows seeking position during playback of media.
+| `SUPPORT_SELECT_SOURCE` | Entity allows selecting a source/input.
+| `SUPPORT_SELECT_SOUND_MODE` | Entity allows selecting a sound mode.
+| `SUPPORT_SHUFFLE_SET` | Entity allows shuffling the active playlist.
+| `SUPPORT_STOP` | Entity allows stopping the playback of media.
+| `SUPPORT_TURN_OFF` | Entity is able to be turned off.
+| `SUPPORT_TURN_ON` | Entity is able to be turned on.
+| `SUPPORT_VOLUME_MUTE` | Entity volume can be muted.
+| `SUPPORT_VOLUME_SET` | Entity volume can be set to specific levels.
+| `SUPPORT_VOLUME_STEP` | Entity volume can be adjusted up and down.
 
 ## Methods
 ### Select sound mode
