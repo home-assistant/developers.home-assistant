@@ -26,7 +26,7 @@ The Home Assistant user interface is currently served to browsers in modern Java
 
 If you do need to run with ES5 support, you will need to load the ES5 custom elements adapter before defining your element:
 
-```js
+```javascript
 window.loadES5Adapter().then(function() {
   customElements.define('my-panel', MyCustomPanel)
 });

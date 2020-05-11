@@ -99,7 +99,7 @@ To differentiate entities and their translations, provide different device class
 In order to test changes to translation files, the translation strings must be compiled into Home Assistant’s translation directories by running the following script:
 
 ```shell
-$ python3 -m script.translations develop
+python3 -m script.translations develop
 ```
 
 ### Introducing new strings

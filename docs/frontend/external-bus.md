@@ -2,7 +2,7 @@
 title: "External Bus"
 ---
 
-The frontend is able to set up a message bus with an external app that is embedding the Home Assistant frontend. This system is a generalization of the [external auth](frontend_external_auth.md), making it easier to add more commands in the future without extensive plumbing on either the app or frontend side.
+The frontend is able to set up a message bus with an external app that is embedding the Home Assistant frontend. This system is a generalization of the [external authentication](frontend/external-authentication.md), making it easier to add more commands in the future without extensive plumbing on either the app or frontend side.
 
 ## Message exchange
 

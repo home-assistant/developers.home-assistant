@@ -39,7 +39,7 @@ The more info dialog can be triggered from any component in the app by firing a 
 
 ## Data Flow
 
-The frontend leverages the [Websocket API](external_api_websocket.md) and the [Rest API](external_api_rest.md) to interact with Home Assistant.
+The frontend leverages the [Websocket API](api/websocket.md) and the [Rest API](api/rest.md) to interact with Home Assistant.
 
 The data is made available as the `hass` property which is passed down to every component. The `hass` property contains the whole application state and has methods to call APIs.
 
@@ -57,6 +57,4 @@ For the routing, we use the [`<app-route>`](https://www.polymer-project.org/blog
 
 We use Webpack to bundle up the application. We have various gulp scripts to help with generating the icon set and the index.html.
 
-We're aggresively code splitting our application by leveraging the dynamic import syntax (`import('path/to/some/file.js')`). When encountering an `import()`, Webpack will split the code into different chunks and makes sure that they are loaded when needed.
-
-
+We're aggressively code splitting our application by leveraging the dynamic import syntax (`import('path/to/some/file.js')`). When encountering an `import()`, Webpack will split the code into different chunks and makes sure that they are loaded when needed.
