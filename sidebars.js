@@ -171,6 +171,6 @@ module.exports = {
       "asyncio_working_with_async",
     ],
     "Hass.io": ["hassio_debugging", "hassio_hass"],
-    "Maintainer docs": ["maintenance", "releasing"],
+    "Maintainer docs": ["maintenance"],
   },
 };
