@@ -75,4 +75,3 @@ Only some of the keys are allowed during updates:
 | state               | bool, float, int, string      | Yes      | The state of the sensor                                                                                                               |
 | type                | string                        | Yes      | The type of the sensor. Must be one of `binary_sensor` or `sensor`                                                                    |
 | unique_id           | string                        | Yes      | An identifier unique to this installation of your app. You'll need this later. Usually best when its a safe version of the sensor name |
-

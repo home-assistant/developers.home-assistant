@@ -85,6 +85,7 @@ Once the user hits their maximum amount of notifications sent in the rate limit 
 The notify platform does not itself implement any kind of rate limit protections. Users will be able to keep sending you notifications, so you should reject them with a 429 status code as early in your logic as possible.
 
 ## Example server implementation
+
 The below code is a Firebase Cloud Function that forwards notifications to Firebase Cloud Messaging. To deploy this, you should create a new Firestore database named `rateLimits`. Then, you can deploy the following code.
 Also, ensure that you have properly configured your project with the correct authentication keys for APNS and FCM.
 
