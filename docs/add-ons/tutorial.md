@@ -22,10 +22,11 @@ Once you have located your add-on directory, it's time to get started!
 
 ## Step 1: The basics
 
- - Create a new directory called `hello_world`
- - Inside that directory create three files.
+- Create a new directory called `hello_world`
+- Inside that directory create three files.
 
 `Dockerfile`:
+
 ```dockerfile
 ARG BUILD_FROM
 FROM $BUILD_FROM
@@ -40,6 +41,7 @@ CMD [ "/run.sh" ]
 ```
 
 `config.json`:
+
 ```json
 {
   "name": "Hello world",
@@ -55,32 +57,34 @@ CMD [ "/run.sh" ]
 ```
 
 `run.sh`:
+
 ```shell
 #!/usr/bin/with-contenv bashio
 
 echo Hello world!
 ```
+
 Make sure your editor is using UNIX-like line breaks (LF), not Dos/Windows (CRLF).
 
 ## Step 2: Installing and testing your add-on
 
 Now comes the fun part, time to open the Home Assistant UI and install and run your add-on.
 
- - Open the Home Assistant frontend
- - Go to the Supervisor panel
- - On the top right click the shopping basket to go to the add-on store.
+- Open the Home Assistant frontend
+- Go to the Supervisor panel
+- On the top right click the shopping basket to go to the add-on store.
 
 ![Screenshot of the Home Assistant Supervisor main panel](/img/en/hass.io/screenshots/main_panel_addon_store.png)
 
- - On the top right click the refresh button
- - You should now see a new card called "Local" that lists your add-on!
+- On the top right click the refresh button
+- You should now see a new card called "Local" that lists your add-on!
 
 ![Screenshot of the local repository card](/img/en/hass.io/screenshots/local_repository.png)
 
- - Click on your add-on to go to the add-on details page.
- - Install your add-on
- - Start your add-on
- - Refresh the logs of your add-on, you should now see "Hello world!" in your logs.
+- Click on your add-on to go to the add-on details page.
+- Install your add-on
+- Start your add-on
+- Refresh the logs of your add-on, you should now see "Hello world!" in your logs.
 
 ![Screenshot of the add-on logs](/img/en/hass.io/tutorial/addon_hello_world_logs.png)
 
@@ -98,9 +102,9 @@ Until now we've been able to do some basic stuff, but it's not very useful yet. 
 
 To do this, we will need to update our files as follows:
 
- - `Dockerfile`: Install Python 3
- - `config.json`: Make the port from the container available on the host
- - `run.sh`: Run the Python 3 command to start the HTTP server
+- `Dockerfile`: Install Python 3
+- `config.json`: Make the port from the container available on the host
+- `run.sh`: Run the Python 3 command to start the HTTP server
 
 Add to your `Dockerfile` before `RUN`:
 

@@ -9,7 +9,7 @@ There are different ways for communication between add-ons inside Home Assistant
 We use an internal network that's allowed to communicate with every add-on, including to/from Home Assistant, by using its name or alias. Only add-ons that run on the host network are limited in that they can talk with all internal add-ons by their name, but all other add-ons can't address these add-ons by name. However, using an alias works for both!
 
 Names/aliases are used for communication inside Hass.io.
-The name is generated using the following format: `{REPO}_{SLUG}`, e.g., `local_xy` or `3283fh_myaddon`. In this example, `{SLUG}` is defined in an add-on's `config.json` file. You can use this name as the DNS name also, but you need replace any `_` with `-` to have a valid hostname. If an add-on is installed locally, `{REPO}` will be `local`. If the add-on is installed from a Github repository, `{REPO}` is a hashed identifier generated from the GitHub repository's URL (ex: https://github.com/xy/my_hassio_addons). See [here](https://github.com/home-assistant/hassio/blob/587047f9d648b8491dc8eef17dc6777f81938bfd/hassio/addons/utils.py#L17) to understand how this identifier is generated. Note that this identifier is required in certain service calls that use the [Supervisor add-on API][supervisor-addon-api]. You can view the repository identifiers for all currently-installed add-ons via a GET request to the hassio API `addons` endpoint.
+The name is generated using the following format: `{REPO}_{SLUG}`, e.g., `local_xy` or `3283fh_myaddon`. In this example, `{SLUG}` is defined in an add-on's `config.json` file. You can use this name as the DNS name also, but you need replace any `_` with `-` to have a valid hostname. If an add-on is installed locally, `{REPO}` will be `local`. If the add-on is installed from a Github repository, `{REPO}` is a hashed identifier generated from the GitHub repository's URL (ex: `https://github.com/xy/my_hassio_addons`). See [here](https://github.com/home-assistant/hassio/blob/587047f9d648b8491dc8eef17dc6777f81938bfd/hassio/addons/utils.py#L17) to understand how this identifier is generated. Note that this identifier is required in certain service calls that use the [Supervisor add-on API][supervisor-addon-api]. You can view the repository identifiers for all currently-installed add-ons via a GET request to the hassio API `addons` endpoint.
 
 Use `supervisor` for communication with the internal API.
 
@@ -30,6 +30,7 @@ We have several services for Hass.io inside Home Assistant to run tasks. Send da
 To enable calls to the [Supervisor API][supervisor-api], add `hassio_api: true` to the `config.json` file and read the environment variable `SUPERVISOR_TOKEN`. Now you can use the API over the URL: `http://supervisor/`. Use the `SUPERVISOR_TOKEN` with header `Authorization: Bearer`. You may also need to change the Supervisor API role to `hassio_role: default`.
 
 Add-ons can call some API commands without needing to set `hassio_api: true`:
+
 - `/core/api`
 - `/core/api/stream`
 - `/core/websocket`
@@ -42,7 +43,7 @@ Add-ons can call some API commands without needing to set `hassio_api: true`:
 
 ## Services API
 
-We have an internal services API to make services public to other add-ons without the user need to add additional configuration. An add-on can get the full configuration for a service to use and to connect to. The add-on need to mark the usage of a service over his [configuration](hassio_addon_config.md) in order to be able to access a service. All supported services, including its available options, are documented in the [API documentation][supervisor-services-api].
+We have an internal services API to make services public to other add-ons without the user need to add additional configuration. An add-on can get the full configuration for a service to use and to connect to. The add-on need to mark the usage of a service over his [configuration](configuration.md) in order to be able to access a service. All supported services, including its available options, are documented in the [API documentation][supervisor-services-api].
 
 Supported services are:
 

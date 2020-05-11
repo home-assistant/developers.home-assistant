@@ -26,8 +26,8 @@ All our Images have also [bashio][bashio] installed. It contains a set of common
 
 When developing your script:
 
- - `/data` is a volume for persistent storage.
- - `/data/options.json` contains the user configuration. You can use bashio or `jq` inside your shell script to parse this data.
+- `/data` is a volume for persistent storage.
+- `/data/options.json` contains the user configuration. You can use Bashio or `jq` inside your shell script to parse this data.
 
 ```shell
 CONFIG_PATH=/data/options.json
@@ -36,9 +36,11 @@ TARGET="$(jq --raw-output '.target' $CONFIG_PATH)"
 ```
 
 So if your `options` contain
+
 ```json
 { "target": "beer" }
 ```
+
 then there will be a variable `TARGET` containing `beer` in the environment of your bash file afterwards.
 
 [bashio]: https://github.com/hassio-addons/bashio
@@ -64,7 +66,8 @@ CMD [ "/run.sh" ]
 ```
 
 If you don't use local build on device or our build script, make sure that the Dockerfile have also a set of labels include:
-```
+
+```dockerfile
 LABEL io.hass.version="VERSION" io.hass.type="addon" io.hass.arch="armhf|aarch64|i386|amd64"
 ```
 
@@ -161,7 +164,6 @@ The config for an add-on is stored in `config.json`.
 | stage | string | no | Default `stable`. Flag add-on with follow attribute: `stable`, `experimental`, `deprecated`
 | init | bool | no | Default `True`. Make it possible to disable the docker default system init because the image have his own init system.
 
-
 ### Options / Schema
 
 The `options` dictionary contains all available options and their default value. Set the default value to `null` if the value is required to be given by the user before the add-on can start, and it show it inside default values. Only nested arrays and dictionaries are supported with a deep of two size. If you want make an option optional, put `?` to the end of data type, otherwise it will be a required value.
@@ -197,16 +199,17 @@ The `schema` looks like `options` but describes how we should validate the user 
 ```
 
 We support:
-- str / str(min,) / str(,max) / str(min,max)
-- bool
-- int / int(min,) / int(,max) / int(min,max)
-- float / float(min,) / float(,max) / float(min,max)
-- email
-- url
-- password
-- port
-- match(REGEX)
-- list(val1|val2|...)
+
+- `str` / `str(min,)` / `str(,max)` / `str(min,max)`
+- `bool`
+- `int` / `int(min,)` / `int(,max)` / `int(min,max)`
+- `float` / `float(min,)` / `float(,max)` / `float(min,max)`
+- `email`
+- `url`
+- `password`
+- `port`
+- `match(REGEX)`
+- `list(val1|val2|...)`
 
 ## Add-on extended build
 
@@ -228,7 +231,7 @@ You need this only, if you not use the default images or need additionals things
 | Key | Required | Description |
 | --- | -------- | ----------- |
 | build_from | no | A dictionary with the hardware architecture as the key and the base Docker image as value.
-| squash | no | Default `False`. Be carfully with this option, you can not use the image for caching stuff after that!
+| squash | no | Default `False`. Be carefully with this option, you can not use the image for caching stuff after that!
 | args | no | Allow to set additional Docker build arguments as a dictionary.
 
 We provide a set of [Base-Images][docker-base] which should cover a lot of needs. If you don't want use the Alpine based version or need a specific Image tag, feel free to pin this requirements for you build with `build_from` option.
