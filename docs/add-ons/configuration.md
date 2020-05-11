@@ -108,7 +108,7 @@ The config for an add-on is stored in `config.json`.
 | --- | ---- | -------- | ----------- |
 | name | string | yes | Name of the add-on
 | version | string | yes | Version of the add-on
-| slug | string | yes | Slug of the add-on. This needs to be unique in scope to the [repository][repository] that the add-on is published in, and URI friendly.
+| slug | string | yes | Slug of the add-on. This needs to be unique in scope to the [repository](repository.md) that the add-on is published in, and URI friendly.
 | description | string | yes | Description of the add-on
 | arch | list | yes | List of supported arch: `armhf`, `armv7`, `aarch64`, `amd64`, `i386`.
 | machine | list | no | Default it support any machine type. You can select that this add-on run only on specific machines.
@@ -160,8 +160,6 @@ The config for an add-on is stored in `config.json`.
 | advanced | bool | no | Default False. Make addon visible on simle mode or not.
 | stage | string | no | Default `stable`. Flag add-on with follow attribute: `stable`, `experimental`, `deprecated`
 | init | bool | no | Default `True`. Make it possible to disable the docker default system init because the image have his own init system.
-
-[repository]: repository.md
 
 ### Options / Schema
 
