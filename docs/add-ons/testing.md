@@ -48,7 +48,10 @@ docker build --build-arg BUILD_FROM="homeassistant/amd64-base:latest" -t local/m
 
 If you don't want to use the devcontainer environment, you can still run add-ons locally with Docker.
 
-Create a new folder for data and add a test _options.json_ file. After that you can run your add-on with: `docker run --rm -v /tmp/my_test_data:/data -p PORT_STUFF_IF_NEEDED local/my-test-addon`
+Create a new folder for data and add a test _options.json_ file. After that you can run your add-on with: 
+```
+docker run --rm -v /tmp/my_test_data:/data -p PORT_STUFF_IF_NEEDED local/my-test-addon
+```
 
 ## Logs
 
