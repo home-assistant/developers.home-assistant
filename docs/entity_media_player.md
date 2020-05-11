@@ -16,6 +16,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
+| supported_features | int | int | Flag supported features.
 | sound_mode | string | None | The current sound mode of the media player
 | sound_mode_list | list | None | Dynamic list of available sound modes (set by platform, empty means sound mode not supported)
 | source | string | None | The currently selected input source for the media player.
@@ -23,6 +24,26 @@ Properties should always only return information from memory and not do I/O (lik
 | media_image_url | string | None | URL that represents the current image.
 | media_image_remotely_accessible | boolean | False | Return `True` if property `media_image_url` is accessible outside of the home network.
 | device_class | string | `None` | Type of media player.
+
+# Support Features
+| Constant | Description 
+| -------- | -----------
+| `SUPPORT_CLEAR_PLAYLIST` | TBD
+| `SUPPORT_NEXT_TRACK` | TBD
+| `SUPPORT_PAUSE` | TBD
+| `SUPPORT_PLAY` | TBD
+| `SUPPORT_PLAY_MEDIA` | TBD
+| `SUPPORT_PREVIOUS_TRACK` | TBD
+| `SUPPORT_SEEK` | TBD
+| `SUPPORT_SELECT_SOURCE` | TBD
+| `SUPPORT_SELECT_SOUND_MODE` | TBD
+| `SUPPORT_SHUFFLE_SET` | TBD
+| `SUPPORT_STOP` | TBD
+| `SUPPORT_TURN_OFF` | TBD
+| `SUPPORT_TURN_ON` | TBD
+| `SUPPORT_VOLUME_MUTE` | TBD
+| `SUPPORT_VOLUME_SET` | TBD
+| `SUPPORT_VOLUME_STEP` | TBD
 
 ## Methods
 ### Select sound mode
