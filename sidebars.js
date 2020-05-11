@@ -6,6 +6,17 @@
  */
 
 module.exports = {
+  Addons: [
+    "add-ons",
+    "add-ons/tutorial",
+    "add-ons/configuration",
+    "add-ons/communication",
+    "add-ons/testing",
+    "add-ons/publishing",
+    "add-ons/presentation",
+    "add-ons/repository",
+    "add-ons/security",
+  ],
   API: [
     "api/rest",
     "api/websocket",
@@ -21,6 +32,11 @@ module.exports = {
         "api/native-app-integration/webview",
       ],
     },
+  ],
+  Documenting: [
+    "documenting",
+    "documenting/standards",
+    "documenting/create-page",
   ],
   Internationalization: [
     "internationalization",
@@ -127,11 +143,6 @@ module.exports = {
   },
   Misc: {
     Introduction: ["misc"],
-    Documentation: [
-      "documentation_index",
-      "documentation_standards",
-      "documentation_create_page",
-    ],
     Intents: [
       "intent_index",
       "intent_firing",
@@ -151,17 +162,6 @@ module.exports = {
       "asyncio_working_with_async",
     ],
     "Hass.io": ["hassio_debugging", "hassio_hass"],
-    "Hass.io Add-Ons": [
-      "hassio_addon_index",
-      "hassio_addon_tutorial",
-      "hassio_addon_config",
-      "hassio_addon_communication",
-      "hassio_addon_testing",
-      "hassio_addon_publishing",
-      "hassio_addon_presentation",
-      "hassio_addon_repository",
-      "hassio_addon_security",
-    ],
     "Maintainer docs": ["maintenance", "releasing"],
   },
 };

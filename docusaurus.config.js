@@ -30,6 +30,7 @@ module.exports = {
               to: "docs/development_index",
             },
             { to: "docs/frontend_index", label: "Frontend" },
+            { to: "docs/add-ons", label: "Add-ons" },
             { to: "docs/internationalization", label: "Internationalization" },
           ],
         },
@@ -37,11 +38,11 @@ module.exports = {
           label: "Documenting",
           position: "left",
           items: [
-            { label: "Documentation", to: "docs/documentation_index" },
-            { label: "Standards", to: "docs/documentation_standards" },
+            { label: "Documentation", to: "docs/documenting" },
+            { label: "Standards", to: "docs/documenting/standards" },
             {
               label: "Create a new page",
-              to: "docs/documentation_create_page",
+              to: "docs/documenting/create-page",
             },
           ],
         },
