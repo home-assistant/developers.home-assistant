@@ -1,5 +1,6 @@
 ---
-title: "Debugging Home Assistant"
+title: "Debugging the Home Assistant Operating System"
+sidebar_label: Debugging
 ---
 
 :::info
@@ -7,33 +8,6 @@ This section is not for end users. End users should use the [SSH add-on] to SSH 
 :::
 
 [SSH add-on]: https://github.com/home-assistant/hassio-addons/tree/master/ssh
-
-The following debug tips and tricks are for developers who are running the Home Assistant image and are working on the base image. If you use the generic Linux installer script, you should be able to access your host and logs as per your host.
-
-## Debug Supervisor
-
-Visual Studio Code config:
-
-```json
-{
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "name": "Supervisor remote debug",
-            "type": "python",
-            "request": "attach",
-            "port": 33333,
-            "host": "IP",
-            "pathMappings": [
-                {
-                    "localRoot": "${workspaceFolder}",
-                    "remoteRoot": "/usr/src/hassio"
-                }
-            ]
-        }
-    ]
-}
-```
 
 You need set the dev mode on supervisor and enable debug with options. You need also install the Remote debug Add-on from Developer Repository to expose the debug port to Host.
 
