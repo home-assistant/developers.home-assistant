@@ -1,9 +1,9 @@
 ---
-title: "Home Assistant Supervisor <> Core/Frontend development"
+title: "Develop Supervisor integration in Core & Frontend"
 sidebar_label: "Developing"
 ---
 
-These instructions are for setting up Home Assistant Core to interact with a development or remote supervisor. This allows you to develop the `hassio` integration and the Supervisor frontend with a real instance.
+These instructions are for setting up Home Assistant Core to interact with a development or remote supervisor. This allows you to develop the `hassio` integration and the Supervisor frontend with a real/development Supervisor instance.
 
 For this guide, we're going to assume that you have a [Home Assistant Core development environment](development_environment.md) set up.
 
