@@ -32,6 +32,8 @@
 /docs/hassio_addon_security /docs/add-ons/security
 /docs/hassio_addon_testing /docs/add-ons/testing
 /docs/hassio_addon_tutorial /docs/add-ons/tutorial
+/docs/hassio_debugging /docs/supervisor/debugging
+/docs/hassio_hass /docs/supervisor/developing
 /docs/internationalization_backend_localization /docs/internationalization/core
 /docs/internationalization_custom_component_localization /docs/internationalization/custom_integration
 /docs/internationalization_index /docs/internationalization

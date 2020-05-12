@@ -69,6 +69,9 @@ module.exports = {
     "internationalization/custom_integration",
     "translations",
   ],
+  OperatingSystem: ["operating-system", "operating-system/debugging"],
+  Supervisor: ["supervisor", "supervisor/developing", "supervisor/debugging"],
+  // Old structure, still to move/migrate
   Architecture: {
     Architecture: [
       "architecture_index",
@@ -170,7 +173,6 @@ module.exports = {
       "asyncio_categorizing_functions",
       "asyncio_working_with_async",
     ],
-    "Hass.io": ["hassio_debugging", "hassio_hass"],
     "Maintainer docs": ["maintenance"],
   },
 };
