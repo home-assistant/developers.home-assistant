@@ -3,48 +3,52 @@ title: "Home Assistant Supervisor <> Core/Frontend development"
 sidebar_label: "Developing"
 ---
 
-These steps will help you connect your local Home Assistant to a remote Supervisor instance. You can then make changes locally to either the Hass.io integration or the frontend and test it out against a real instance.
+These instructions are for setting up Home Assistant Core to interact with a development or remote supervisor. This allows you to develop the `hassio` integration and the Supervisor frontend with a real instance.
 
-For this guide, we're going to assume that you have an Home Assistant instance up and running. If you don't, you can use the generic installation method to install it inside a [virtual machine](https://github.com/home-assistant/hassio-build/tree/master/install#install-hassio).
+For this guide, we're going to assume that you have a [Home Assistant Core development environment](development_environment.md) set up.
 
-## API Access
+## Supervisor API Access
 
-To develop for the frontend, we're going to need API access to the supervisor.
+To develop for the frontend, we're going to need API access to the supervisor. This API is protected by a token that we can extract using a special add-on.
 
 - Add our developer Add-on repository: <https://github.com/home-assistant/hassio-addons-development>
 - Install the Add-on "Remote API proxy"
+- Click Start
+- The token will be printed in the logs
 
-For some API commands you need explicit the Home Assistant API token, but 99% of the functionality work with `Remote API proxy`. This token change sometimes but you can read the current legal token on host system with:
+The add-on needs to keep running to allow Home Assistant Core to connect.
+
+The Remote API proxy token has slightly less privileges than Home Assistant Core has in production. To get the actual token with full privileges, you need to SSH into the host system and run:
 
 ```shell
 docker inspect homeassistant | grep HASSIO_TOKEN
 ```
 
-## Having Home Assistant connect to remote Supervisor
+Note that either token can change after a reboot or update of OS/container.
 
- The connection with the supervisor is hidden inside the host and is only accessible from applications running on the host. So to make it accessible for our Home Assistant instance we will need to route the connection to our computer running Home Assistant. We're going to do this by forwarding the API with "Remote API proxy" add-on.
+## Setting up Home Assistant Core
 
-First, make sure Home Assistant will load the Hass.io integration by adding `hassio:` to your `configuration.yaml` file. Next, we will need to tell the local Home Assistant instance how to connect to the remote Supervisor instance. We do this by setting the `HASSIO` and `HASSIO_TOKEN` environment variables when starting Home Assistant. Note that the `HASSIO` value is not the same as the one that we saw above and the `HASSIO_TOKEN` is available inside log output of "Remote API Add-on" (This changes every restart of the add-on!).
+To configure Home Assistant Core to connect to a remote supervisor, set the following environment variables when starting Home Assistant:
+
+- `HASSIO`: Set to the IP of the machine running Home Assnstaint and port 80 (the API proxy add-on)
+- `HASSIO_TOKEN`: Set this to the token that you exracted in the previous step
 
 ```shell
-HASSIO=<IP OF HASS.IO>:80 HASSIO_TOKEN=<VALUE OF HASSIO_TOKEN> hass
+HASSIO=192.168.1.100:80 HASSIO_TOKEN=abcdefghj1234 hass
 ```
 
 Voila. Your local Home Assistant installation will now connect to a remote Hass.io instance.
 
 ## Frontend development
 
-:::tip
-This requires Home Assistant 0.71 or later.
-:::
-
-We need a couple more steps to do frontend development. First, make sure you have a Home Assistant frontend development set up ([instructions](frontend_index.md)).
+To do frontend development you need to have a [Home Assistant frontend development environment](frontend_index.md) set up.
 
 Update the Hass.io component configuration in your `configuration.yaml` to point at the frontend repository:
 
 ```yaml
 # configuration.yaml
 hassio:
+  # Example path. Change it to where you have checked out the frontend repository
   development_repo: /home/paulus/dev/hass/frontend
 ```
 
@@ -55,6 +59,6 @@ cd hassio
 script/develop
 ```
 
-Now start Home Assistant as discussed in the previous section and it will now connect to the remote Hass.io but show your local frontend.
+Now start Home Assistant as discussed in the previous section and it will now connect to the remote Supervisor but load the frontend from your local development environment.
 
-Once you have `script/develop` the Supervisor panel will be rebuilt whenever you make changes to the source files.
+While `script/develop` is running, the Supervisor panel will be rebuilt whenever you make changes to the source files.
