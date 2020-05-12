@@ -77,7 +77,6 @@ module.exports = {
       "architecture_index",
       "architecture_components",
       "architecture_entities",
-      "architecture_hassio",
     ],
     Entities: [
       "entity_index",
