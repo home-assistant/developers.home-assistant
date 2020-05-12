@@ -110,7 +110,7 @@ To introduce new strings, add them to `strings.json` or to a platform strings fi
 {
   "config": {
     "abort": {
-      "already_configured": "[%key:common.config_flow.abort.already_configured%]"
+      "already_configured": "[%key:common::config_flow::abort::already_configured_device%]"
     }
   }
 }
