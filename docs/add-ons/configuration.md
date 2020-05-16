@@ -32,7 +32,7 @@ When developing your script:
 ```shell
 CONFIG_PATH=/data/options.json
 
-TARGET="$(basio::config 'target')"
+TARGET="$(bashio::config 'target')"
 ```
 
 So if your `options` contain
