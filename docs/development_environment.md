@@ -60,7 +60,7 @@ $ sudo apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavut
  Different distributions have different package installation mechanisms and sometimes packages names as well. For example CentOS would use: `sudo yum install epel-release && sudo yum install python36 python36-devel mysql-devel gcc`
 :::
 
-Additional dependencies exist if you plan to perform Frontend Development, please read the [Frontend](frontend_index.md) section to learn more.
+Additional dependencies exist if you plan to perform Frontend Development, please read the [Frontend](/docs/frontend.html) section to learn more.
 
 ### Developing on Windows
 
