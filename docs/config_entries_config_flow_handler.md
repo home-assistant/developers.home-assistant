@@ -33,6 +33,8 @@ Once you have updated your manifest and created the `config_flow.py`, you will n
 Your config flow will need to define steps of your configuration flow. The docs for [Data Entry Flow](data_entry_flow_index.md) describe the different return values of a step. Here is an example on how to define the `user` step.
 
 ```python
+import voluptuous as vol
+
 class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_user(self, info):
         if info is not None:
