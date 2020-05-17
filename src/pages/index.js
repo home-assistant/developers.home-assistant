@@ -81,6 +81,7 @@ const features = [
     description: (
       <>
         <iframe
+          title="Upcoming Events Calendar"
           src="https://calendar.google.com/calendar/embed?height=400&amp;wkst=2&amp;bgcolor=%23ffffff&amp;ctz=America%2FLos_Angeles&amp;src=cDA3bjk4Z28xMW9uYW1kMDhkMGttcTZqaHNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;color=%23039BE5&amp;title=Release%20Schedule&amp;mode=AGENDA&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;showNav=0&amp;showDate=0&amp;showTitle=0"
           style={{ borderWidth: 0, margin: "auto", display: "block" }}
           width="300"
@@ -146,6 +147,7 @@ function Home() {
               <iframe
                 width="100%"
                 height="315"
+                title="Paulus Schoutsen - Awaken your home: Python and the Internet of Things - PyCon 2016"
                 src="https://www.youtube.com/embed/Cfasc9EgbMU"
                 frameborder="0"
                 allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
