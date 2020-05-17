@@ -60,8 +60,8 @@ MQTT_USER=$(bashio::services mqtt "username")
 MQTT_PASSWORD=$(bashio::services mqtt "password")
 ```
 
-[core-api]: https://www.home-assistant.io/developers/rest_api/
-[core-websocket]: https://www.home-assistant.io/developers/websocket_api/
+[core-api]: https://developers.home-assistant.io/docs/api/rest/
+[core-websocket]: https://developers.home-assistant.io/docs/api/websocket/
 [supervisor-api]: https://github.com/home-assistant/supervisor/blob/master/API.md
 [supervisor-addon-api]: https://github.com/home-assistant/supervisor/blob/dev/API.md#restful-for-api-addons
 [supervisor-services-api]:https://github.com/home-assistant/supervisor/blob/dev/API.md#services-1
