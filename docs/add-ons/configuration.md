@@ -130,7 +130,7 @@ The config for an add-on is stored in `config.json`.
 | auto_uart | bool | no | Default False. Auto mapping all UART/Serial device from host into add-on.
 | homeassistant | string | no | Pin a minimum required Home Assistant Core version for such Add-on. Value is a version string like `0.91.2`.
 | hassio_role | str | no | Default `default`. Role-based access to Supervisor API. Available: `default`, `homeassistant`, `backup`, `manager`, `admin`.
-| hassio_api | bool | no | This add-on can access to Hass.io REST API. It set the host alias `hassio`.
+| hassio_api | bool | no | This add-on can access to Hass.io REST API. Use `http://supervisor`.
 | homeassistant_api | bool | no | This add-on can access to Hass.io Home-Assistant REST API proxy. Use `http://supervisor/core/api`.
 | docker_api | bool | no | Allow read-oly access to docker API for add-on. Work only for not protected add-ons.
 | privileged | list | no | Privilege for access to hardware/system. Available access: `NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_TIME`, `SYS_NICE`, `SYS_RESOURCE`, `SYS_PTRACE`, `SYS_MODULE`, `DAC_READ_SEARCH`.
