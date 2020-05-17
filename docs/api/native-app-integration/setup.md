@@ -28,7 +28,7 @@ First, you must ensure that the `mobile_app` component is loaded. There are two 
 - You can publish a Zeroconf/Bonjour record `_hass-mobile-app._tcp.local.` to trigger the automatic load of the `mobile_app` component. You should wait at least 60 seconds after publishing the record before continuing.
 - You can ask the user to add `mobile_app` to their configuration.yaml and restart Home Assistant. If the user already has `default_config` in their configuration, then `mobile_app` will have been already loaded.
 
-You can confirm the `mobile_app` component has been loaded by checking the `components` array of the [`/api/config` REST API call](external_api_rest.md#get-api-config). If you continue to device registration and receive a 404 status code, then it most likely hasn't been loaded yet.
+You can confirm the `mobile_app` component has been loaded by checking the `components` array of the [`/api/config` REST API call](/docs/api/rest/#get-apiconfig). If you continue to device registration and receive a 404 status code, then it most likely hasn't been loaded yet.
 
 ### Registering the device
 
@@ -65,7 +65,7 @@ Example payload to send to the registration endpoint:
 | `model`               | V        | string | The model of the device running the app.                                                                                     |
 | `os_name`             | V        | string | The name of the OS running the app.                                                                                          |
 | `os_version`          | V        | string | The OS version of the device running the app.                                                                                |
-| `supports_encryption` | V        | bool   | If the app supports encryption. See also the [encryption section](app_integration_sending_data.md#implementing-encryption).  |
+| `supports_encryption` | V        | bool   | If the app supports encryption. See also the [encryption section](/docs/api/native-app-integration/sending-data/#implementing-encryption).  |
 | `app_data`            |          | Dict   | App data can be used if the app has a supporting component that extends `mobile_app` functionality.                          |
 
 When you get a 200 response, the mobile app is registered with Home Assistant. The response is a JSON document and will contain the URLs on how to interact with the Home Assistant instance. You should permanently store this information.
@@ -83,5 +83,5 @@ When you get a 200 response, the mobile app is registered with Home Assistant. T
 | --------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `cloudhook_url` | string | The cloudhook URL provided by Home Assistant Cloud. Only will be provided if user is actively subscribed to Nabu Casa.                                                                                                 |
 | `remote_ui_url` | string | The remote UI URL provided by Home Assistant Cloud. Only will be provided if user is actively subscribed to Nabu Casa.                                                                                                 |
-| `secret`        | string | The secret to use for encrypted communication. Will only be included if encryption is supported by both the app and the Home Assistant instance. [More info](app_integration_sending_data.md#implementing-encryption). |
+| `secret`        | string | The secret to use for encrypted communication. Will only be included if encryption is supported by both the app and the Home Assistant instance. [More info](/docs/api/native-app-integration/sending-data/#implementing-encryption). |
 | `webhook_id`    | string | The webhook ID that can be used to send data back.                                                                                                                                                                     |
