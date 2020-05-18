@@ -35,7 +35,7 @@ You will initially be logged in to Home Assistant CLI for HassOS where you can p
 
 [CLI functions]: https://www.home-assistant.io/hassio/commandline/
 [Home Assistant OS]: https://github.com/home-assistant/hassos
-[Supervisor Architecture]: https://developers.home-assistant.io/docs/architecture_index/
+[Supervisor Architecture]: /architecture_index.md
 
 ## Checking the logs
 

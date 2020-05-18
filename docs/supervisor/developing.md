@@ -41,7 +41,7 @@ Voila. Your local Home Assistant installation will now connect to a remote Hass.
 
 ## Frontend development
 
-To do frontend development you need to have a [Home Assistant frontend development environment](frontend_index.md) set up.
+To do frontend development you need to have a [Home Assistant frontend development environment](/frontend/development.md) set up.
 
 Update the Hass.io component configuration in your `configuration.yaml` to point at the frontend repository:
 

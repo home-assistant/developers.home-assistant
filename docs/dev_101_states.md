@@ -21,7 +21,7 @@ To get started, create the file `<config dir>/custom_components/hello_state.py` 
 Support for showing text in the frontend.
 
 For more details about this component, please refer to the documentation at
-https://developers.home-assistant.io/docs/en/dev_101_states.html
+https://developers.home-assistant.io/docs/dev_101_states
 """
 import logging
 

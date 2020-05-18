@@ -35,7 +35,7 @@ Additional keys for the file header:
 - `ha_category`: This entry is used to group the integration on the [Integration overview](https://www.home-assistant.io/integrations/).
 - `ha_iot_class`: [IoT class](https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things) is the classifier for the device's behavior.
 - `ha_quality_scale`: [Quality scale](https://www.home-assistant.io/docs/quality_scale/) is the representation of the integration's quality.
-- `ha_config_flow`: Set to `true` if the integration has a [Data Entry Flow](https://developers.home-assistant.io/docs/en/data_entry_flow_index.html), omit otherwise.
+- `ha_config_flow`: Set to `true` if the integration has a [Data Entry Flow](/data_entry_flow_index.md), omit otherwise.
 - `ha_codeowners`: GitHub usernames or team names (starting with `@`) of people that are responsible for this integration. This should match with the codeowners as listed in the integration manifest file.
 - `ha_domain`: The domain of the integration in Home Assistant Core. This must match the name from the integration manifest file.
 

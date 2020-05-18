@@ -2,7 +2,7 @@
 title: "Multi-factor Authentication Modules"
 ---
 
-Multi-factor Authentication Modules are used in conjunction with [Authentication Provider](/docs/auth_auth_provider/) to provide a fully configurable authentication framework. Each MFA module may provide one multi-factor authentication function. User can enable multiple mfa modules, but can only select one module in login process.
+Multi-factor Authentication Modules are used in conjunction with [Authentication Provider](auth_auth_provider.md) to provide a fully configurable authentication framework. Each MFA module may provide one multi-factor authentication function. User can enable multiple mfa modules, but can only select one module in login process.
 
 ## Defining an mfa auth module
 
