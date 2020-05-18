@@ -14,7 +14,7 @@ The bare minimum content of this folder looks like this:
 
 If your integration is going to integrate one or more devices, you will need to do this by creating a platform that interacts with an entity integration. For example, if you want to represent a light device inside Home Assistant, you will create `light.py`, which will contain a light platform for the light integration.
 
-- More info on [available entity integrations](entity_index.md).
+- More info on [available entity integrations](core/entity.md).
 - More info on [creating platforms](creating_platform_index.md).
 
 ## Integrating services - `services.yaml`

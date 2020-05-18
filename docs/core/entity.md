@@ -5,6 +5,47 @@ sidebar_label: Introduction
 
 Each device is represented in Home Assistant as an entity. An entity abstracts away the internal working of Home Assistant. As an integrator you don't have to worry about how services or the state machine work. Instead, you extend an entity class and implement the necessary properties and methods for the device type that you're integrating.
 
+<img class='invertDark'
+  src='/img/en/architecture/entities_architecture.png'
+  alt='Architecture Overview of Home Assistant' />
+
+## Configuration
+
+Configuration is provided by the [configuration.yaml file](configuration_yaml_index.md) or by a [Config Entry](config_entries_index.md).
+
+## Component
+
+Examples of components: `light`, `switch`.
+
+The component is responsible for defining the Abstract Entity Class and services to control the entities.
+
+## Entity Component
+
+The Entity Component is responsible for:
+
+- Distributing the configuration to the platforms
+- Forward config entries and discoveries
+- Collect entities for service calls
+- Optionally maintain a group of all entities
+
+## Entity Platform
+
+The Entity Platform manages all entities for the platform and polls them for updates if necessary.
+
+When adding entities, the Entity Platform will query the Entity Registry to make sure that the entities to be added have the correct entity IDs.
+
+## Entity Registry
+
+The [Entity Registry](entity_registry_index.md) will track entities and allows users to store extra settings for an entity.
+
+## Platform
+
+Examples of platforms: `light.hue`, `switch.wemo`.
+
+Platform uses configuration to query the external device/service and add entities to the entity platform.
+
+## Basic implementation
+
 Below is an example switch entity that keeps track of their state in memory.
 
 ```python
@@ -63,7 +104,7 @@ Properties should always only return information from memory and not do I/O (lik
 | assumed_state           | boolean | `False` | Return `True` if the state is based on our assumption instead of reading it from the device.                                                                                                                                                                 |
 | available               | boolean | `True`  | Indicate if Home Assistant is able to read the state and control the underlying device.                                                                                                                                                                      |
 | device_class            | string  | `None`  | Extra classification of what the device is. Each domain specifies their own. Device classes can come with extra requirements for unit of measurement and supported features.                                                                                 |
-| device_state_attributes | dict    | `None`  | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version. See [below](entity_index.md#standard-attributes) for details of standard attributes. |
+| device_state_attributes | dict    | `None`  | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version. See [below](core/entity.md#standard-attributes) for details of standard attributes. |
 | entity_picture          | URL     | `None`  | Url of a picture to show for the entity.                                                                                                                                                                                                                     |
 | name                    | string  | `None`  | Name of the entity                                                                                                                                                                                                                                           |
 | should_poll             | boolean | `True`  | Should Home Assistant check with the entity for an updated state. If set to `False`, entity will need to notify Home Assistant of new updates by calling one of the [schedule update methods](#methods).                                                     |

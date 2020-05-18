@@ -73,29 +73,7 @@ module.exports = {
   Supervisor: ["supervisor", "supervisor/developing", "supervisor/debugging"],
   // Old structure, still to move/migrate
   Architecture: {
-    Architecture: [
-      "architecture_index",
-      "architecture_components",
-      "architecture_entities",
-    ],
-    Entities: [
-      "entity_index",
-      "entity_air_quality",
-      "entity_alarm_control_panel",
-      "entity_binary_sensor",
-      "entity_climate",
-      "entity_cover",
-      "entity_fan",
-      "entity_light",
-      "entity_lock",
-      "entity_media_player",
-      "entity_remote",
-      "entity_sensor",
-      "entity_switch",
-      "entity_vacuum",
-      "entity_water_heater",
-      "entity_weather",
-    ],
+    Architecture: ["architecture_index", "architecture_components"],
     Authentication: [
       "auth_index",
       "auth_permissions",
@@ -109,7 +87,7 @@ module.exports = {
     "Device Registry": ["device_registry_index"],
     "Area Registry": ["area_registry_index"],
   },
-  "Extending Home Assistant": {
+  Core: {
     "Development Workflow": [
       "development_index",
       "development_environment",
@@ -143,6 +121,24 @@ module.exports = {
       "dev_101_events",
       "dev_101_states",
       "dev_101_config",
+    ],
+    Entities: [
+      "core/entity",
+      "core/entity/air-quality",
+      "core/entity/alarm-control-panel",
+      "core/entity/binary-sensor",
+      "core/entity/climate",
+      "core/entity/cover",
+      "core/entity/fan",
+      "core/entity/light",
+      "core/entity/lock",
+      "core/entity/media-player",
+      "core/entity/remote",
+      "core/entity/sensor",
+      "core/entity/switch",
+      "core/entity/vacuum",
+      "core/entity/water-heater",
+      "core/entity/weather",
     ],
     "Device Automations": [
       "device_automation_index",

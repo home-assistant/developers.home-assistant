@@ -72,7 +72,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
 3. Do not call `update()` in constructor, use `add_entities(devices, True)` instead.
 4. Do not do any I/O inside properties. Cache values inside `update()` instead.
 5. When dealing with time, state and/or attributes should not contain relative time since something happened. Instead, it should store UTC timestamps.
-6. Leverage the [entity lifecycle callbacks](entity_index.md#lifecycle-hooks) to attach event listeners or clean up connections.
+6. Leverage the [entity lifecycle callbacks](core/entity.md#lifecycle-hooks) to attach event listeners or clean up connections.
 
 ### 5. Communication with devices/services
 
