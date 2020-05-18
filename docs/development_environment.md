@@ -92,6 +92,10 @@ $ mkdir -p ../config
 $ hass -c ../config
 ```
 
+:::tip
+You may find that you cannot open the development instance via <http://localhost:8123> when using WSL. Instead, within a WSL terminal, find the `inet` address of the `eth0` adaptor by running `ifconfig`. Then use this address to access the development instance, i.e. <http://172.20.37.6:8123>.
+:::
+
 ### Developing on macOS
 
 Install [Homebrew](https://brew.sh/), then use that to install Python 3:
