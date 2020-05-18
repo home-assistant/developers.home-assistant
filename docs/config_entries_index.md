@@ -126,7 +126,7 @@ For each platform that you forwarded the config entry to, you will need to forwa
 await self.hass.config_entries.async_forward_entry_unload(self.config_entry, "light")
 ```
 
-If you need to clean up resources used by an entity in a platform, have the entity implement the [`async_will_remove_from_hass`](entity_index.md#async_will_remove_from_hass) method.
+If you need to clean up resources used by an entity in a platform, have the entity implement the [`async_will_remove_from_hass`](core/entity.md#async_will_remove_from_hass) method.
 
 ## Removal of entries
 

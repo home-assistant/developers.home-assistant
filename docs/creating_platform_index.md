@@ -3,7 +3,7 @@ title: "Integration Platforms"
 sidebar_label: "Platforms"
 ---
 
-Home Assistant has various built-in integrations that abstract device types. There are [lights](entity_light.md), [switches](entity_switch.md), [covers](entity_cover.md), [climate devices](entity_climate.md), and [many more](entity_index.md). Your integration can hook into these integrations by creating a platform. You will need a platform for each integration that you are integrating with.
+Home Assistant has various built-in integrations that abstract device types. There are [lights](core/entity/light.md), [switches](core/entity/switch.md), [covers](core/entity/cover.md), [climate devices](core/entity/climate.md), and [many more](core/entity.md). Your integration can hook into these integrations by creating a platform. You will need a platform for each integration that you are integrating with.
 
 To create a platform, you will need to create a file with the domain name of the integration that you are building a platform for. So if you are building a light, you will add a new file `light.py` to your integration folder.
 
@@ -18,4 +18,4 @@ One Home Assistant rule is that the integration should never interface directly 
 
 Once you have your Python library ready and published to PyPI, add it to the [manifest](creating_integration_manifest.md). It will now be time to implement the Entity base class that is provided by the integration that you are creating a platform for.
 
-Find your integration at the [entity index](entity_index.md) to see what methods and properties are available to implement.
+Find your integration at the [entity index](core/entity.md) to see what methods and properties are available to implement.
