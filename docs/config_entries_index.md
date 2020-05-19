@@ -95,7 +95,7 @@ digraph G {
 
 ## Setting up an entry
 
-During startup, Home Assistant first calls the [normal component setup](https://developers.home-assistant.io/docs/en/creating_component_index.html),
+During startup, Home Assistant first calls the [normal component setup](/creating_component_index.md),
 and then call the method `async_setup_entry(hass, entry)` for each entry. If a new Config Entry is
 created at runtime, Home Assistant will also call `async_setup_entry(hass, entry)` ([example](https://github.com/home-assistant/home-assistant/blob/0.68.0/homeassistant/components/hue/__init__.py#L119)).
 
