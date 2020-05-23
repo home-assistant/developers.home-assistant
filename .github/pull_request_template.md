@@ -22,7 +22,7 @@
 - [ ] Document new or changing features which there is an existing pull request elsewhere
 - [ ] Spelling or grammatical corrections, or rewording for improved clarity
 - [ ] Changes to the backend of this documentation
-
+- [ ] Removed stale or deprecated documentation
 
 ## Additional information
 <!--
