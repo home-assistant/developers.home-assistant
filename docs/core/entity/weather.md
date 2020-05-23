@@ -33,7 +33,7 @@ Forecast data should either be daily or hourly.
 | temperature | float | **Required** | The higher temperature in °C or °F
 | condition | string | `None` | The weather condition at this point.
 | templow | float | `None` | The lower daily Temperature in °C or °F
-| precipitation | int | `None` | The percipitation in mm or inch.
+| precipitation | float | `None` | The percipitation amount.
 | precipitation_prob | int | `None` | The probability of percipitation in %.
 
 ### Recommended values for state and condition
