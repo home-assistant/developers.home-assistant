@@ -76,7 +76,7 @@ From Windows Store install Ubuntu.
 
 #### Additional steps for Ubuntu 18.04
 
-If you chose Ubuntu 18.04 from the Windows Store some additional steps are needed to install the latest ffmpeg version. When you are promted to acknowledge the displayed information you can press ENTER to proceed.
+If you chose Ubuntu 18.04 from the Windows Store some additional steps are needed to install the latest FFmpeg version.
 
 ```shell
 $ sudo add-apt-repository ppa:savoury1/ffmpeg4
