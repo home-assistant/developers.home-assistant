@@ -74,6 +74,18 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-L
 
 From Windows Store install Ubuntu.
 
+#### Additional steps for Ubuntu 18.04
+
+If you chose Ubuntu 18.04 from the Windows Store some additional steps are needed to install the latest ffmpeg version. When you are promted to acknowledge the displayed information you can press ENTER to proceed.
+
+```shell
+$ sudo add-apt-repository ppa:savoury1/ffmpeg4
+$ sudo add-apt-repository ppa:savoury1/graphics
+$ sudo add-apt-repository ppa:savoury1/multimedia
+$ sudo apt-get update
+$ sudo apt-get install ffmpeg
+```
+
 When the Linux subsystem is set up, perform install as for Linux.
 
 ```shell
