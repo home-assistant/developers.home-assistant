@@ -41,6 +41,10 @@ When a task is currently running (like `Preview` for the docs), it can be restar
 
 It is also possible to set up a more traditional development environment. See the section for your operating system.
 
+:::tip
+Python 3.7 or later is required.
+:::
+
 ### Developing on Linux
 
 Install the core dependencies.
@@ -78,7 +82,7 @@ When the Linux subsystem is set up, perform install as for Linux.
 
 ```shell
 $ sudo apt-get update
-$ sudo apt-get install python3-pip python3.7-dev python3.7-venv python-wheel-common
+$ sudo apt-get install python3-pip python3-dev python3-venv python-wheel-common
 $ sudo apt-get install autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev
 $ sudo apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev
 ```
