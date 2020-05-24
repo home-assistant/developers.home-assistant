@@ -74,7 +74,7 @@ Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-L
 
 From Windows Store install Ubuntu.
 
-#### Additional steps for Ubuntu 18.04
+#### For those already running Ubuntu 18.04 on WSL
 
 If you chose Ubuntu 18.04 from the Windows Store some additional steps are needed to install the latest FFmpeg version.
 
