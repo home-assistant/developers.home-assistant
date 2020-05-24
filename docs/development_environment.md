@@ -76,7 +76,7 @@ From Windows Store install Ubuntu.
 
 #### For those already running Ubuntu 18.04 on WSL
 
-If you chose Ubuntu 18.04 from the Windows Store some additional steps are needed to install the latest FFmpeg version.
+If you are running Ubuntu 18.04 on Windows Subsystem for Linux some additional steps are needed to install the latest FFmpeg version.
 
 ```shell
 $ sudo add-apt-repository ppa:savoury1/ffmpeg4
