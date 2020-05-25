@@ -93,7 +93,7 @@ $ hass -c ../config
 ```
 
 :::tip
-You may find that you cannot open the development instance via <http://localhost:8123> when using WSL. Instead, within a WSL terminal, find the `inet` address of the `eth0` adaptor by running `ifconfig`. Then use this address to access the development instance, i.e. <http://172.20.37.6:8123>.
+You may find that you cannot open the development instance via <http://localhost:8123> when using WSL. Instead, within a WSL terminal, find the `inet` address of the `eth0` adaptor by running `ip addr show eth0`. Then use this address, excluding the CIDR block, to access the development instance, i.e. if your `inet` is listed as `172.20.37.6/20`, use <http://172.20.37.6:8123>.
 :::
 
 ### Developing on macOS
