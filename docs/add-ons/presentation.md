@@ -49,7 +49,7 @@ apparmor.txt
 ```
 #include <tunables/global>
 
-profile dnsmasq flags=(attach_disconnected,mediate_deleted) {
+profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
   #include <abstractions/base>
 
   # S6
