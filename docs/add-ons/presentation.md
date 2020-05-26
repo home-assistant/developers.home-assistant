@@ -45,6 +45,28 @@ If you are in need of a guide on keeping a changelog, we would recommend checkin
 
 You can use own security profile for you Add-on with AppArmor. Default it is enabled and use the Docker default profile. Put `apparmor.txt` file into your Add-on folder and it will load this file as primary profile. Use the config options to set the name of that profile.
 
+apparmor.txt
+```
+#include <tunables/global>
+
+profile dnsmasq flags=(attach_disconnected,mediate_deleted) {
+  #include <abstractions/base>
+
+  # S6
+  /bin/** ix,
+  /usr/bin/** ix,
+  /usr/lib/bashio/** ix,
+  /etc/s6/** ix,
+  /run/s6/** ix,
+  /etc/services.d/** rwix,
+  /etc/cont-init.d/** rwix,
+  /etc/cont-finish.d/** rwix,
+
+  # Data access
+  /data/** rw,
+}
+```
+
 ## Ingress
 
 Ingress allow users to access the add-on web interface via the Home Assistant UI. Authentication is handled by Home Assistant, so neither the user nor the add-on developer will need to care about the security or port forwarding. Users love this feature, however it is not every time simple to implement for the add-on developer.
