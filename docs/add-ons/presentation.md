@@ -52,7 +52,7 @@ apparmor.txt
 profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
   #include <abstractions/base>
 
-  # S6
+  # S6-Overlay
   /bin/** ix,
   /usr/bin/** ix,
   /usr/lib/bashio/** ix,
