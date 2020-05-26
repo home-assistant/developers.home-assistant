@@ -39,11 +39,7 @@ When a task is currently running (like `Preview` for the docs), it can be restar
 
 ## Preparing Your environment
 
-It is also possible to set up a more traditional development environment. See the section for your operating system.
-
-:::tip
-Python 3.7 or later is required.
-:::
+It is also possible to set up a more traditional development environment. See the section for your operating system. Make sure your Python version is 3.7 or later.
 
 ### Developing on Linux
 
