@@ -1,5 +1,5 @@
 ---
-title: "Home Assistant Frontend Architecture"
+title: "Frontend Architecture"
 sidebar_label: "Architecture"
 ---
 
@@ -29,32 +29,24 @@ Folder: `src/panels/`
 
 Each page in Home Assistant is a panel. Components can register extra panels to be shown to the user. Examples of panels are "states", "map", "logbook" and "history".
 
-### More info dialog
+### Dialogs
 
-Folder: `src/dialogs/more-info`
+Folder: `src/dialogs`
 
-This is a dialog that allows users to see more information about an entity and control its state.
-
-The more info dialog can be triggered from any component in the app by firing a DOM event `hass-more-info` with as detail `{ entityId: 'light.kitchen' }`.
+Certain information and data entry is presented to users in flows. Dialogs can be triggered on any page. The most common one is the entity more info dialog, which allows users to dig into an entity state, history and setting.s
 
 ## Data Flow
 
 The frontend leverages the [Websocket API](api/websocket.md) and the [Rest API](api/rest.md) to interact with Home Assistant.
 
-The data is made available as the `hass` property which is passed down to every component. The `hass` property contains the whole application state and has methods to call APIs.
+The data is made available as the `hass` property which is passed down to every component. The `hass` property contains the core state and has methods to call APIs.
 
-We use a unidirectional data flow (like Flux, Redux). When you make a change in the backend (like turning on a light), the `hass` object will be updated at the root of the application and will be made available to every component that needs it.
+Components can subscribe to information that is not available in the core state. Subscriptions run through the websocket API which keeps the data in sync with the backend.
+
+We use a unidirectional data flow. When you make a change in the backend (like turning on a light), the `hass` object will be updated at the root of the application and will be made available to every component that needs it.
 
 ## Routing
 
 The frontend uses decentralized routing. Each component only knows enough about the routing to know how to handle the part it's responsible for. Further routing is passed down the component tree.
 
 For example, the `<home-assistant>` main component will look at the first part of the url to decide which panel should be loaded. Each panel can have its own mapping between the url and what content to show.
-
-For the routing, we use the [`<app-route>`](https://www.polymer-project.org/blog/routing) web component.
-
-## Bundling
-
-We use Webpack to bundle up the application. We have various gulp scripts to help with generating the icon set and the index.html.
-
-We're aggressively code splitting our application by leveraging the dynamic import syntax (`import('path/to/some/file.js')`). When encountering an `import()`, Webpack will split the code into different chunks and makes sure that they are loaded when needed.
