@@ -43,7 +43,7 @@ If you are in need of a guide on keeping a changelog, we would recommend checkin
 
 ## AppArmor
 
-You can use own security profile for you Add-on with AppArmor. Default it is enabled and use the Docker default profile. Put `apparmor.txt` file into your Add-on folder and it will load this file as primary profile. Use the config options to set the name of that profile.
+You can use own security profile for you Add-on with AppArmor. By default it is enabled and uses the Docker default profile. Put a `apparmor.txt` file into your Add-on folder and it will load this file as primary profile. Use the config options to set the name of that profile.
 
 apparmor.txt
 ```
