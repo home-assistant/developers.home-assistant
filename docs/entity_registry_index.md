@@ -3,7 +3,7 @@ title: Entity Registry
 sidebar_label: Introduction
 ---
 
-The entity registry is a registry where Home Assistant keeps track of entities. Any entity that is added to Home Assistant and has a unique ID will be registered in the registry.
+The entity registry is a registry where Home Assistant keeps track of entities. Any entity that is added to Home Assistant and has a unique ID (the `unique_id` attribute) will be registered in the registry.
 
 Being registered has the advantage that the same entity will always get the same entity ID. It will also prevent other entities from using that entity ID.
 
@@ -20,3 +20,11 @@ Good sources for a unique ID:
 - latitude/longitude
 
 If a device has a single serial but provides multiple entities, combine the serial with unique identifiers for the entities. For example, if a device measures both temperature and humidity, you can uniquely identify the entities using `{serial}-{sensor_type}`.
+
+```python
+# Example, inside a component
+    @property
+    def unique_id(self):
+        """Return the ID of this entity."""
+        return self._unique_idty
+```
