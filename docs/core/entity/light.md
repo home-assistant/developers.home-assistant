@@ -16,7 +16,7 @@ A light entity controls the brightness, hue and saturation color value, white va
 | effect_list | list | None | Return the list of supported effects.
 | hs_color | list | None | Return the hue and saturation color value [float, float].
 | is_on    | bool | bool  | Returns if the light entity is on or not.  
-| max_minreds | int | int | Return the warmest color_temp that this light supports.
+| max_mireds | int | int | Return the warmest color_temp that this light supports.
 | min_mireds | int | int | Return the coldest color_temp that this light supports.
 | supported_features | int | int | Flag supported features.
 | white_value | int | None | Return the white value of this light between 0..255.
