@@ -13,9 +13,9 @@ When the element would be defined we would, fire and rebuild the event so the ri
 In 0.110 we stopped doing this, we would give back the correct element, but the element constructor would not be loaded yet, so it doesn't have the `getCardSize`.
 When the constructor is loaded, the element will be upgraded and we set the config. From that moment we can call `getCardSize`.
 
-In this version we changed the logic for `getCardSize` so it will wait for this. This means some cards, like stacks, will return a promise because they have to wait for their childeren to be defined.
+In this version, we changed the logic for `getCardSize` so it will wait for this. This means some cards, like stacks, will return a promise because they have to wait for their children to be defined.
 
-If you are a custopm card develeoper, and your custom card uses `getCardSize` to get the size of other cards, you have to adjust it to handle these promises.
+If you are a custom card developer and your custom card uses `getCardSize` to get the size of other cards, you have to adjust it to handle these promises.
 
 Our function to get the card size, which you could copy, now looks like this:
 
