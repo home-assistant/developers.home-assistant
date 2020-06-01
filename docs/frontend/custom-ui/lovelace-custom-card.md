@@ -28,7 +28,7 @@ Home Assistant will set the `hass` property when the state of Home Assistant cha
 element.hass = hass;
 ```
 
-Your card can define a `getCardSize` method that returns the size of your card as a number. A height of 1 is equivalent to 50 pixels. This will help Home Assistant distribute the cards evenly over the columns. A card size of `1` will be assumed if the method is not defined.
+Your card can define a `getCardSize` method that returns the size of your card as a number or a promise that will resolve to a number. A height of 1 is equivalent to 50 pixels. This will help Home Assistant distribute the cards evenly over the columns. A card size of `1` will be assumed if the method is not defined.
 
 ```js
 if ('getCardSize' in element) {
@@ -36,6 +36,14 @@ if ('getCardSize' in element) {
 } else {
   return 1;
 }
+```
+
+Since some element can be lazy loaded, if you want to get the card size of another element, you should first check it is defined.
+
+```js
+  return customElements
+    .whenDefined(element.localName)
+    .then(() => element.getCardSize());
 ```
 
 Your card can define a `getConfigElement` method that returns a custom element for editing the user configuration. Home Assistant will display this element in the card editor in Lovelace.
