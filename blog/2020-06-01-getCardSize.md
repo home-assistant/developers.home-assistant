@@ -11,7 +11,7 @@ We used to send out an error element before the element was loaded, which would 
 When the element would be defined we would, fire and rebuild the event so the right card would be recreated.
 
 In 0.110 we stopped doing this, we would give back the correct element, but the element constructor would not be loaded yet, so it doesn't have the `getCardSize`.
-When the constructor is loaded the element will be upgraded, and we set the config. From that moment we can call `getCardSize`.
+When the constructor is loaded, the element will be upgraded and we set the config. From that moment we can call `getCardSize`.
 
 In this version we changed the logic for `getCardSize` so it will wait for this. This means some cards, like stacks, will return a promise because they have to wait for their childeren to be defined.
 
