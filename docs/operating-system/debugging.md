@@ -3,6 +3,10 @@ title: "Debugging the Home Assistant Operating System"
 sidebar_label: Debugging
 ---
 
+[//]: # (
+TODO: The instructions below are extremely unclear and it is unknown what steps to take. See recent conversations on this outlining that every step of these instructions are non-sensical, out of date, and/or do not reflect any steps or methods one would use to follow them. See: https://community.home-assistant.io/t/debugging-the-home-assistant-operating-system/197829
+)
+
 :::info
 This section is not for end users. End users should use the [SSH add-on] to SSH into Home Assistant. This is for **developers** of Home Assistant. Do not ask for support if you are using these options.
 :::
