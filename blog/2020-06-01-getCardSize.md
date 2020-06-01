@@ -8,7 +8,7 @@ title: getCardSize can now be async
 Ever since we introduced lazy loading to cards, getting the card size of a lazy loaded card was hard.
 
 We used to send out an error element before the element was loaded, which would have a `getCardSize` function. But that would be the wrong size.
-When the element would be defined we would fire and rebuild event so the right card would be recreated.
+When the element would be defined we would, fire and rebuild the event so the right card would be recreated.
 
 In 0.110 we stopped doing this, we would give back the correct element, but the element constructor would not be loaded yet, so it doesn't have the `getCardSize`.
 When the constructor is loaded the element will be upgraded, and we set the config. From that moment we can call `getCardSize`.
