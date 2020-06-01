@@ -43,7 +43,7 @@ Since some element can be lazy loaded, if you want to get the card size of anoth
 ```js
   return customElements
     .whenDefined(element.localName)
-    .then(() => element.getCardSize);
+    .then(() => element.getCardSize());
 ```
 
 Your card can define a `getConfigElement` method that returns a custom element for editing the user configuration. Home Assistant will display this element in the card editor in Lovelace.
