@@ -2,7 +2,7 @@
 author: Bram Kragten
 authorURL: https://github.com/bramkragten
 authorTwitter: bramkragten
-title: getCardSize can now be async
+title: Lovelace: getCardSize can now be async
 ---
 
 Ever since we introduced lazy loading to cards, getting the card size of a lazy loaded card was hard.
