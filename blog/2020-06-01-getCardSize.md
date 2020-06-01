@@ -5,7 +5,7 @@ authorTwitter: bramkragten
 title: Lovelace: getCardSize can now be async
 ---
 
-Ever since we introduced lazy loading to cards, getting the card size of a lazy loaded card was hard.
+Ever since we introduced lazy loading cards to Lovelace, getting the card size of a lazy loaded card was hard.
 
 We used to send out an error element before the element was loaded, which would have a `getCardSize` function. But that would be the wrong size.
 When the element would be defined we would, fire and rebuild the event so the right card would be recreated.
