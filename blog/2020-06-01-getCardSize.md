@@ -35,8 +35,8 @@ export const computeCardSize = (
 };
 ```
 
-We first have the same check as before, if the element has an `getCardSize` function we will return that value, this should be a `number` or `Promise` that resolves to a `number`.
+We first have the same check as before, if the element has a `getCardSize` function we will return that value, this should be a `number` or `Promise` that resolves to a `number`.
 
-If the function doesn't exists, we will check if the constructor of the element is registered, if it is, this means the element doesn't have a `getCardSize` and we will return `1` like we did before.
+If the function doesn't exist, we will check if the constructor of the element is registered, if it is, this means the element doesn't have a `getCardSize` and we will return `1` as we did before.
 
-If the element isn't registered yet, we will wait untill it is and then call the same function again of the now defined card to get the size.
+If the element isn't registered yet, we will wait until it is and then call the same function again of the now defined card to get the size.
