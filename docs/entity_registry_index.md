@@ -20,11 +20,3 @@ Good sources for a unique ID:
 - latitude/longitude
 
 If a device has a single serial but provides multiple entities, combine the serial with unique identifiers for the entities. For example, if a device measures both temperature and humidity, you can uniquely identify the entities using `{serial}-{sensor_type}`.
-
-```python
-# Example, inside a component
-    @property
-    def unique_id(self):
-        """Return the ID of this entity."""
-        return self._unique_idty
-```
