@@ -124,7 +124,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         return self.async_show_form(step_id="init", data_schema=vol.Schema(data_schema))
 ```
 
-If you'd like to pre-fill data in the form, you have two options. The first is to use the `deafult` parameter. This will both pre-fill the field, and act as the default value in case the user leaves the field empty.
+If you'd like to pre-fill data in the form, you have two options. The first is to use the `default` parameter. This will both pre-fill the field, and act as the default value in case the user leaves the field empty.
 
 ```python
     data_schema = {
