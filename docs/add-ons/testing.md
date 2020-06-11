@@ -2,9 +2,9 @@
 title: "Local add-on testing"
 ---
 
-The fastest and recommended way to develop add-ons is using a local Visual Studio Code dev environment. The [Official Add-ons][hassio-addons] repository includes a devcontainer setup for VS Code which will run Supervisor and Home Assistant, with all of the add-ons mapped as Local Add-ons inside, making it simple for add-on developers on Windows, Mac and Linux desktop OS-es. Just follow the instructions to download and install the [Remote Containers][remote-containers] VS Code extension, open the root folder inside VS Code, and when prompted re-open the window inside the container (or, from the Command Palette, select 'Rebuild and Reopen in Container'). For standalone add-ons, there also exists an [addon devcontainer template][hassio-addon-devcontainer] on GitHub which provides the same boilerplate devcontainer for new add-on projects.
+The fastest and recommended way to develop add-ons is using a local Visual Studio Code dev environment. The [Official Add-ons][hassio-addons] repository includes a devcontainer setup for VS Code which will run Supervisor and Home Assistant, with all of the add-ons mapped as Local Add-ons inside, making it simple for add-on developers on Windows, Mac and Linux desktop OS-es. Just follow the instructions to download and install the [Remote Containers][remote-containers] VS Code extension, open the root folder inside VS Code, and when prompted re-open the window inside the container (or, from the Command Palette, select 'Rebuild and Reopen in Container'). For standalone add-ons, there also exists an [add-on devcontainer template][hassio-addon-devcontainer] on GitHub which provides the same boilerplate devcontainer for new add-on projects.
 
-Once running, you'll need to run the task (Terminal -> Run Task) 'Start Hass.io', which will bootstrap Supervisor and Home Assistant. You'll then be able to access the normal onboarding process via the Home Assistant instance at `http://localhost:8123/`.
+Once running, you'll need to run the task (Terminal -> Run Task) 'Start Home Assistant', which will bootstrap Supervisor and Home Assistant. You'll then be able to access the normal onboarding process via the Home Assistant instance at `http://localhost:8123/`.
 
 The add-on(s) under development will be automatically found in the Local Add-ons repository.
 
@@ -23,9 +23,10 @@ Right now add-ons will work with images that are stored on Docker Hub (using `im
 
 ## Local build
 
-If you don't want to use the devcontainer environment, you can still build add-ons locally with Docker. The recommended method is to use the [official build tool][hassio-builder] to create the docker images.
+If you don't want to use the devcontainer environment, you can still build add-ons locally with Docker. The recommended method is to use the [official build tool][hassio-builder] to create the container images.
 
-Assuming that your addon is in the folder `/path/to/addon` and your docker socket is at `/var/run/docker.sock`, you can build the addon for all supported architectures by running the following:
+Assuming that your add-on is in the folder `/path/to/addon` and your Docker socket is at `/var/run/docker.sock`, you can build the addon for all supported architectures by running the following:
+
 ```
 docker run --rm -ti --name hassio-builder --privileged \
   -v /path/to/addon:/data -v \
@@ -41,7 +42,8 @@ If you don't want to use the official build tool, you can still build with stand
 - amd64: `homeassistant/amd64-base:latest`
 - i386: `homeassistant/i386-base:latest`
 
-Use `docker` from the directory containing the add-on files to build the test addon: 
+Use `docker` from the directory containing the add-on files to build the test add-on:
+
 ```
 docker build --build-arg BUILD_FROM="homeassistant/amd64-base:latest" \
   -t local/my-test-addon .
@@ -53,7 +55,8 @@ docker build --build-arg BUILD_FROM="homeassistant/amd64-base:latest" \
 
 If you don't want to use the devcontainer environment, you can still run add-ons locally with Docker.
 
-Create a new folder for data and add a test _options.json_ file. After that you can run your add-on with: 
+Create a new folder for data and add a test _options.json_ file. After that you can run your add-on with:
+
 ```
 docker run --rm -v /tmp/my_test_data:/data -p PORT_STUFF_IF_NEEDED \
   local/my-test-addon
@@ -61,4 +64,4 @@ docker run --rm -v /tmp/my_test_data:/data -p PORT_STUFF_IF_NEEDED \
 
 ## Logs
 
-All stdout and stderr are redirected to the Docker logs. The logs can be fetched from the add-on page inside the Hass.io panel in Home Assistant.
+All stdout and stderr are redirected to the Docker logs. The logs can be fetched from the add-on page inside the Supervisor panel in Home Assistant.
