@@ -8,7 +8,7 @@ To get started with developing add-ons, we first need access to where Home Assis
 
 For Samba, once you have enabled and started it, your Home Assistant instance will show up in your local network tab and share a folder called "addons". This is the folder to store your custom add-ons.
 
-If you are on macOS and the folder is not showing up automatically, go to Finder and press CMD+K then enter 'smb://hassio.local'
+If you are on macOS and the folder is not showing up automatically, go to Finder and press CMD+K then enter 'smb://homeassistant.local'
 
 ![Screenshot of Windows Explorer showing a folder on the Home Assistant server](/img/en/hass.io/tutorial/samba.png)
 
