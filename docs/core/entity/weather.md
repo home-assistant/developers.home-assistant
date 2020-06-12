@@ -34,7 +34,7 @@ Forecast data should either be daily or hourly.
 | condition | string | `None` | The weather condition at this point.
 | templow | float | `None` | The lower daily Temperature in °C or °F
 | precipitation | float | `None` | The precipitation amount in mm or inch.
-| precipitation_probability | int | `None` | The probability of percipitation in %.
+| precipitation_probability | int | `None` | The probability of precipitation in %.
 
 ### Recommended values for state and condition
 
