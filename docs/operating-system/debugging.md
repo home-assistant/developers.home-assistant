@@ -31,7 +31,7 @@ You should then be able to SSH into your Home Assistant device. On Mac/Linux, us
 ssh root@homeassistant.local -p 22222
 ```
 
-Older installations may need to use `ssh root@hassio.local -p 22222`. You can check the correct hostname to use in the System page of the Supervisor interface in Home Assistant.
+If you have an older installation or have changed your hostname, you may need to use a different hostname in the command above. You can check the correct hostname to use in the System page of the Supervisor interface in Home Assistant.
 
 You will initially be logged in to Home Assistant CLI for HassOS where you can perform normal [CLI functions]. If you need access to the host system use the 'login' command. [Home Assistant OS] is a hypervisor for Docker. See the [Supervisor Architecture] documentation for information regarding the supervisor. The supervisor offers an API to manage the host and running the Docker containers. Home Assistant itself and all installed addon's run in separate Docker containers.
 
