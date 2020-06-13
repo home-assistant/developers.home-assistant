@@ -18,7 +18,7 @@ The first step is to fork the [frontend repository][hass-frontend] and add the u
 ```shell
 git clone git@github.com:YOUR_GIT_USERNAME/frontend.git
 cd frontend
-git remote add upstream https://github.com/home-assistant/home-assistant/frontend.git
+git remote add upstream https://github.com/home-assistant/frontend.git
 ```
 
 ### Configuring Home Assistant
