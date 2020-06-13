@@ -9,8 +9,6 @@ This section is not for end users. End users should use the [SSH add-on] to SSH 
 
 [SSH add-on]: https://github.com/home-assistant/hassio-addons/tree/master/ssh
 
-You need set the dev mode on supervisor and enable debug with options. You need also install the Remote debug Add-on from Developer Repository to expose the debug port to Host.
-
 ## SSH access to the host
 
 :::info
