@@ -78,7 +78,7 @@ that still allows for discovery, as long as there aren't any instances of the in
 ```python
 if device_unique_id:
   await self.async_set_unique_id(device_unique_id)
-await async_handle_discovery_without_unique_id()
+await self._async_handle_discovery_without_unique_id()
 ```
 
 ### Unignoring
