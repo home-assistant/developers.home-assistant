@@ -2,7 +2,7 @@
 title: "Translation"
 ---
 
-Translations for Home Assistant are managed through [Lokalise](https://lokalise.co/), an online translation management tool. Our translations are split between two projects, a backend project for platform-specific translations, and a frontend project for UI translations. Click the links below to join both projects! Even if your language is completely translated, extra proofreading is a big help! Please feel free to review the existing translations, and vote for alternatives that might be more appropriate.
+Translations for Home Assistant are managed through [Lokalise](https://lokalise.co/), an online translation management tool. Our translations are split between four projects: a backend project for platform-specific translations, a frontend project for UI translations, and two for the official companion apps. Click the links below to join the projects! Even if your language is completely translated, extra proofreading is a big help! Please feel free to review the existing translations, and vote for alternatives that might be more appropriate.
 
 - [Join the frontend translation team](https://lokalise.com/signup/3420425759f6d6d241f598.13594006/all/)
 - [Join the backend translation team](https://lokalise.com/signup/130246255a974bd3b5e8a1.51616605/all/)
