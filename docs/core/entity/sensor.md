@@ -33,5 +33,5 @@ If specifying a device class, your sensor entity will need to also return the co
 | pressure | hPa,mbar | Pressure.
 | current | A | Current.
 | energy | Wh,kWh | Energy.
-| power_factor |   | Power Factor .
+| power_factor | no unit, min: -1.0, max: 1.0 | Power Factor .
 | voltage | V | Voltage.
