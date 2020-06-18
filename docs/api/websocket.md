@@ -340,6 +340,10 @@ The server will respond with a result message containing the current registered 
 
 _Introduced in Home Assistant 0.69._
 
+:::caution Depreciated
+This websocket command was depreciated in Home Assistant Core [0.107](https://www.home-assistant.io/blog/2020/03/18/release-107/) and will be removed in a future release. Until then it will result in a `WARNING` entry in the user's log.
+:::
+
 Return a b64 encoded thumbnail of a camera entity.
 
 ```json
