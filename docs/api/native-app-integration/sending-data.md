@@ -254,3 +254,34 @@ There are two errors you may receive:
 
 - `encryption_already_enabled` - Encryption is already enabled for this registration
 - `encryption_not_available` - Sodium/NaCL is unable to be installed. Cease all future attempts to enable encryption.
+
+## Stream Camera
+
+_This requires Home Assistant 0.112 or later._
+
+Retrieve path information on how to stream a Camera.
+
+```json
+{
+  "type": "stream_camera",
+  "data": {
+    "camera_entity_id": "camera.name_here"
+  }
+}
+```
+
+| Key | Type | Description
+| --- | ---- | -----------
+| `camera_entity_id` | string | The camera entity to retrieve streaming information about
+
+
+The response will include paths for streaming either via HLS or via MJPEG image previews.
+
+```json
+{
+  "hls_path": "/api/hls/…/playlist.m3u8",
+  "mjpeg_path": "/api/camera_proxy_stream/…"
+}
+```
+
+If HLS streaming is not available, the `hls_path` will be `null`. See notes above on instance URL for how to construct a full URL.
