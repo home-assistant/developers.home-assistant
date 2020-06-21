@@ -358,13 +358,13 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 ```shell
 curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   -H "Content-Type: application/json" \
-  http://localhost:8123/api/logbook/2016-12-29T00:00:00+02:00?entity=sensor.temperature
+  'http://localhost:8123/api/logbook/2016-12-29T00:00:00+02:00?end_time=2099-12-31T00%3A00%3A00%2B02%3A00&entity=sensor.temperature'
 ```
 
 ```shell
 curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   -H "Content-Type: application/json" \
-  http://localhost:8123/api/logbook/2016-12-29T00:00:00+02:00?end_time=2016-12-31T00%3A00%3A00%2B02%3A00
+  http://localhost:8123/api/logbook/2016-12-29T00:00:00+02:00?end_time=2099-12-31T00%3A00%3A00%2B02%3A00
 ```
 
 #### GET /api/states
