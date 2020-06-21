@@ -212,7 +212,10 @@ You can pass the following optional GET parameters:
 
 - `filter_entity_id=<entity_ids>` to filter on one or more entities - comma separated.
 - `end_time=<timestamp>` to choose the end of the period in URL encoded format (defaults to 1 day).
+- `minimal_response` to only return `last_changed` and `state` for states other than the first and last state (much faster).
+- `significant_changes_only` to only return signifcant state changes.
 
+Example without `significant_changes_only`
 ```json
 [
     [
@@ -240,12 +243,55 @@ You can pass the following optional GET parameters:
 ]
 ```
 
+Example with `significant_changes_only`
+```json
+[
+    [
+        {
+            "attributes": {
+                "friendly_name": "Weather Temperature",
+                "unit_of_measurement": "\u00b0C"
+            },
+            "entity_id": "sensor.weather_temperature",
+            "last_changed": "2016-02-06T22:15:00+00:00",
+            "last_updated": "2016-02-06T22:15:00+00:00",
+            "state": "-3.9"
+        },
+        {
+            "last_changed": "2016-02-06T22:20:00+00:00",
+            "state": "-2.9"
+        },
+        {
+            "last_changed": "2016-02-06T22:22:00+00:00",
+            "state": "-2.2"
+        },        
+        {
+            "attributes": {
+                "friendly_name": "Weather Temperature",
+                "unit_of_measurement": "\u00b0C"
+            },
+            "entity_id": "sensor.weather_temperature",
+            "last_changed": "2016-02-06T22:25:00+00:00",
+            "last_updated": "2016-02-06T22:25:00+00:00",
+            "state": "-1.9"
+        },
+    ]
+]
+```
+
 Sample `curl` commands:
 
 ```shell
 curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   -H "Content-Type: application/json" \
   http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00
+```
+
+
+```shell
+curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" \
+  http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00?minimal_response
 ```
 
 ```shell
@@ -258,6 +304,67 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   -H "Content-Type: application/json" \
   http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00?end_time=2016-12-31T00%3A00%3A00%2B02%3A00
+```
+
+#### GET /api/logbook/&lt;timestamp>
+
+Returns an array of logbook entries.
+
+The `<timestamp>` (`YYYY-MM-DDThh:mm:ssTZD`) is optional and defaults to 1 day before the time of the request. It determines the beginning of the period.
+
+You can pass the following optional GET parameters:
+
+- `entity=<entity_id>` to filter on one entity.
+- `end_time=<timestamp>` to choose the end of period starting from the `<timestamp>` in URL encoded format.
+
+Example
+```json
+[
+  {
+		"context_user_id": null,
+		"domain": "alarm_control_panel",
+		"entity_id": "alarm_control_panel.area_001",
+		"message": "changed to disarmed",
+		"name": "Security",
+		"when": "2020-06-20T16:44:26.127295+00:00"
+	},
+	{
+		"context_user_id": null,
+		"domain": "homekit",
+		"entity_id": "alarm_control_panel.area_001",
+		"message": "send command alarm_arm_night for Security",
+		"name": "HomeKit",
+		"when": "2020-06-21T02:59:05.759645+00:00"
+	},
+	{
+		"context_user_id": null,
+		"domain": "alarm_control_panel",
+		"entity_id": "alarm_control_panel.area_001",
+		"message": "changed to armed_night",
+		"name": "Security",
+		"when": "2020-06-21T02:59:06.015463+00:00"
+	}
+]
+```
+
+Sample `curl` commands:
+
+```shell
+curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" \
+  http://localhost:8123/api/logbook/2016-12-29T00:00:00+02:00
+```
+
+```shell
+curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" \
+  http://localhost:8123/api/logbook/2016-12-29T00:00:00+02:00?entity=sensor.temperature
+```
+
+```shell
+curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" \
+  http://localhost:8123/api/logbook/2016-12-29T00:00:00+02:00?end_time=2016-12-31T00%3A00%3A00%2B02%3A00
 ```
 
 #### GET /api/states
