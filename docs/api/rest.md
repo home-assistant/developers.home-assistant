@@ -215,7 +215,7 @@ You can pass the following optional GET parameters:
 - `minimal_response` to only return `last_changed` and `state` for states other than the first and last state (much faster).
 - `significant_changes_only` to only return signifcant state changes.
 
-Example without `significant_changes_only`
+Example without `minimal_response`
 ```json
 [
     [
@@ -243,7 +243,7 @@ Example without `significant_changes_only`
 ]
 ```
 
-Example with `significant_changes_only`
+Example with `minimal_response`
 ```json
 [
     [
