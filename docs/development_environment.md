@@ -66,8 +66,6 @@ $ brew install python3 autoconf ffmpeg
 Visit the [Home Assistant Core repository](https://github.com/home-assistant/core) and click **Fork**.
 Once forked, setup your local copy of the source using the commands:
 
-_Windows users should be sure to clone to a path that is inside the WSL (ex: ~/)._
-
 ```shell
 $ git clone https://github.com/YOUR_GIT_USERNAME/core.git
 $ cd core
