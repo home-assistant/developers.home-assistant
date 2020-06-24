@@ -29,15 +29,13 @@ The easiest way to get started with development is to use Visual Studio Code wit
 
 When you open this repository with Visual Studio code you are asked to "Reopen in Container", this will start the build of the container.
 
-_If you don't see this notification, open the command palette and select `Remote-Containers: Reopen Folder in Container`._
-
 ### Tasks
 
 The devcontainter comes with some useful tasks to help you with development, you can start these tasks by opening the command palette and select `Tasks: Run Task` then select the task you want to run.
 
 When a task is currently running (like `Preview` for the docs), it can be restarted by opening the command palette and selecting `Tasks: Restart Running Task`, then select the task you want to restart.
 
-## Preparing Your environment
+## Manual Environment
 
 It is also possible to set up a more traditional development environment. See the section for your operating system. Make sure your Python version is 3.7 or later.
 
@@ -46,80 +44,21 @@ It is also possible to set up a more traditional development environment. See th
 Install the core dependencies.
 
 ```shell
-$ sudo apt-get install python3-pip python3-dev python3-venv
+sudo apt-get install python3-pip python3-dev python3-venv autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev pkg-config libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev
 ```
-
-In order to run `script/setup` below you will need some more dependencies.
-
-```shell
-$ sudo apt-get install autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev pkg-config
-$ sudo apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev
-```
-
-:::tip
- Different distributions have different package installation mechanisms and sometimes packages names as well. For example CentOS would use: `sudo yum install epel-release && sudo yum install python36 python36-devel mysql-devel gcc`
-:::
-
-Additional dependencies exist if you plan to perform Frontend Development, please read the [Frontend](/docs/frontend.html) section to learn more.
 
 ### Developing on Windows
 
-Since Home Assistant is mainly designed and developed on Linux distributions, on Windows 10 you can setup a [Linux subsystem](https://docs.microsoft.com/windows/wsl/install-win10).
+To develop on Windows, you will need to use the Linux subsystem. Follow the [WSL installation instructions](https://docs.microsoft.com/windows/wsl/install-win10) and install Ubuntu from the Windows Store. Once you're able to access Linux, follow the Linux instructions.
 
-Open Powershell as an Administrator and run
-
-```shell
-Enable-WindowsOptionalFeature -Online -FeatureName Microsoft-Windows-Subsystem-Linux
-```
-
-From Windows Store install Ubuntu.
-
-#### For those already running Ubuntu 18.04 on WSL
-
-If you are running Ubuntu 18.04 on Windows Subsystem for Linux some additional steps are needed to install the latest FFmpeg version.
-
-```shell
-$ sudo add-apt-repository ppa:savoury1/ffmpeg4
-$ sudo add-apt-repository ppa:savoury1/graphics
-$ sudo add-apt-repository ppa:savoury1/multimedia
-$ sudo apt-get update
-$ sudo apt-get install ffmpeg
-```
-
-When the Linux subsystem is set up, perform install as for Linux.
-
-```shell
-$ sudo apt-get update
-$ sudo apt-get install python3-pip python3-dev python3-venv python-wheel-common
-$ sudo apt-get install autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev
-$ sudo apt-get install -y libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev
-```
-
-Hint: Git is included in Linux subsytem.
-
-When invoking your installation (see below), make sure to specify a folder for configuration which is accessible from Windows.
-
-```shell
-$ mkdir -p ../config
-$ hass -c ../config
-```
-
-:::tip
-You may find that you cannot open the development instance via <http://localhost:8123> when using WSL. Instead, within a WSL terminal, find the `inet` address of the `eth0` adaptor by running `ip addr show eth0`. Then use this address, excluding the CIDR block, to access the development instance, i.e. if your `inet` is listed as `172.20.37.6/20`, use <http://172.20.37.6:8123>.
-:::
+If you find that you cannot open the development instance via <http://localhost:8123> when using WSL. Instead, within a WSL terminal, find the `inet` address of the `eth0` adaptor by running `ip addr show eth0`. Then use this address, excluding the CIDR block, to access the development instance, i.e. if your `inet` is listed as `172.20.37.6/20`, use <http://172.20.37.6:8123>.
 
 ### Developing on macOS
 
-Install [Homebrew](https://brew.sh/), then use that to install Python 3:
+Install [Homebrew](https://brew.sh/), then use that to install the dependencies:
 
 ```shell
-$ brew install python3 autoconf
-```
-
-Then install ffmpeg:
-
-```shell
-$ brew install ffmpeg
+$ brew install python3 autoconf ffmpeg
 ```
 
 ## Setup Local Repository
@@ -127,7 +66,7 @@ $ brew install ffmpeg
 Visit the [Home Assistant Core repository](https://github.com/home-assistant/core) and click **Fork**.
 Once forked, setup your local copy of the source using the commands:
 
-_Windows users should be sure to clone to a path that inside the WSL (ex: ~/)._
+_Windows users should be sure to clone to a path that is inside the WSL (ex: ~/)._
 
 ```shell
 $ git clone https://github.com/YOUR_GIT_USERNAME/core.git
@@ -135,41 +74,24 @@ $ cd core
 $ git remote add upstream https://github.com/home-assistant/core.git
 ```
 
-Note that `core.git` should be replaced by the name of your fork (default being `core.git`). If unsure check your GitHub repository.
-
-## Setting Up Virtual Environment
-
-To isolate your environment from the rest of the system, set up a [`venv`](https://docs.python.org/3/library/venv.html). Within the `core` directory, create and activate your virtual environment.
-
-```shell
-$ python3.7 -m venv venv
-$ source venv/bin/activate
-```
-
 Install the requirements with a provided script named `setup`.
 
 ```shell
-$ script/setup
+script/setup
 ```
 
-Invoke your installation, adjusting the [configuration](https://www.home-assistant.io/docs/configuration/) if required.
+This will create a virtual environment and install all necessary requirements. You're now set! 
+
+Each time you start a new terminal session, you will need to activate your virutal environment:
 
 ```shell
-$ hass
+source venv/bin/activate
 ```
 
-## Logging
+After that you can run Home Assistant like this:
 
-By default logging in Home Assistant is tuned for operating in production (set to INFO by default, with some modules set to even less verbose logging levels).
-
-You can use the [logger](https://www.home-assistant.io/components/logger/) component to adjust logging to DEBUG to see even more details about what is going on:
-
-```yaml
-logger:
-  default: info
-  logs:
-    homeassistant.core: debug
-    nest.nest: debug
-    asyncio: debug
-    homeassistant.components.cloud.iot: debug
+```shell
+hass -c config
 ```
+
+The Home Assistant configuration is stored in the `config` directory in your repository.
