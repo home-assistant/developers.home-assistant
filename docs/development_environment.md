@@ -44,7 +44,7 @@ It is also possible to set up a more traditional development environment. See th
 Install the core dependencies.
 
 ```shell
-sudo apt-get install python3-pip python3-dev python3-venv autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev pkg-config libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev
+sudo apt-get install python3-pip python3-dev python3-venv autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev pkg-config libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev ffmpeg
 ```
 
 ### Developing on Windows
@@ -58,7 +58,7 @@ If you find that you cannot open the development instance via <http://localhost:
 Install [Homebrew](https://brew.sh/), then use that to install the dependencies:
 
 ```shell
-$ brew install python3 autoconf ffmpeg
+brew install python3 autoconf ffmpeg
 ```
 
 ## Setup Local Repository
