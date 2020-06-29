@@ -57,17 +57,7 @@ Example of an auth message:
 
 ## Authentication phase
 
-When a client connects to the server, the server will test if the client is authenticated. Authentication will not be necessary if no api_password is set or if the user fulfills one of the other criteria for authentication (trusted network, password in url/header).
-
-If no authentication is needed, the authentication phase will complete and the server will send an `auth_ok` message.
-
-```json
-{
-  "type": "auth_ok"
-}
-```
-
-If authentication is necessary, the server sends out `auth_required`.
+When a client connects to the server, the server sends out `auth_required`.
 
 ```json
 {
@@ -75,21 +65,12 @@ If authentication is necessary, the server sends out `auth_required`.
 }
 ```
 
-This means that the next message from the client should be an auth message. You can authorize with an access token.
+The first message from the client should be an auth message. You can authorize with an access token.
 
 ```json
 {
   "type": "auth",
   "access_token": "ABCDEFGH"
-}
-```
-
-For now, we also support authentication with an API password (legacy auth).
-
-```json
-{
-  "type": "auth",
-  "api_password": "supersecret"
 }
 ```
 
