@@ -280,7 +280,7 @@ class ContentCardEditor extends LitElement {
   }
 }
 
-customElements.define("content-card-editor", MyCardEditor);
+customElements.define("content-card-editor", ContentCardEditor);
 window.customCards = window.customCards || [];
 window.customCards.push({
   type: "content-card-example",
