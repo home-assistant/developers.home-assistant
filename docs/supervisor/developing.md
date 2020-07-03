@@ -30,20 +30,20 @@ Note that either token can change after a reboot or update of OS/container.
 
 To configure Home Assistant Core to connect to a remote supervisor, set the following environment variables when starting Home Assistant:
 
-- `HASSIO`: Set to the IP of the machine running Home Assnstaint and port 80 (the API proxy add-on)
-- `HASSIO_TOKEN`: Set this to the token that you exracted in the previous step
+- `HASSIO`: Set to the IP of the machine running Home Assistant and port 80 (the API proxy add-on)
+- `HASSIO_TOKEN`: Set this to the token that you extracted in the previous step
 
 ```shell
 HASSIO=192.168.1.100:80 HASSIO_TOKEN=abcdefghj1234 hass
 ```
 
-Voila. Your local Home Assistant installation will now connect to a remote Hass.io instance.
+Voilà. Your local Home Assistant installation will now connect to a remote Home Assistant instance.
 
 ## Frontend development
 
 To do frontend development you need to have a [Home Assistant frontend development environment](/frontend/development.md) set up.
 
-Update the Hass.io component configuration in your `configuration.yaml` to point at the frontend repository:
+Update the `hassio` component configuration in your `configuration.yaml` file to point at the frontend repository:
 
 ```yaml
 # configuration.yaml
