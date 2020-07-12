@@ -9,7 +9,7 @@ It is well known that we use Alpine for most of our Containers. It is the perfec
 
 For tests, I used the images from [Docker Python library](https://github.com/docker-library/python), and the result is published to our [base images](https://github.com/home-assistant/docker-base). I used pyperformance for labs testing and the Home Assistant internal benchmark tools for more Real-life information. The test environment is running inside a container on the same docker host.
 
-## C-library
+## C/POSIX standard library
 
 I read often: Python is slower if they use musl as default C library. This fact is not 100% correct. If both Python runtime was compiled with the same GCC and with `-O3`, the glibc variant is a bit faster in the lab benchmark, but in the real world, it makes not a difference. Alpine compile it for `-Os` and most distro with `-O2`, which gives the often written difference between the Python runtime interpreters, but with the same compiler optimizing, musl based Python runtimes have no negative side effect.
 
