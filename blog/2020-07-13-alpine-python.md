@@ -7,11 +7,11 @@ title: "Improving Python's speed with 40% when running Home Assistant"
 
 We use Alpine for most of our Containers. It is the perfect distribution for containers because it is small (BusyBox based), available for a lot of CPU architectures, and the package system is slim. Alpine uses musl as their C library instead of the more commonly used glibc.
 
-Alpine with musl are relatively young compared to their peers (15 and 9 years old) but have seen a significant pace of development. Because things move so fast, a lot of misconceptions exist about both based on things that are no longer true. The goal of this post is to address a couple of those and how we have solved them.
+Alpine with musl are relatively young compared to their peers (15 and 9 years old) but have seen a significant development pace. Because things move so fast, a lot of misconceptions exist about both based on things that are no longer true. The goal of this post is to address a couple of those and how we have solved them.
 
-This blogpost is not meant as a musl vs. glibc flamewar. Each use case is different and has their own trade offs. For example, we use glibc in our OS.
+This blogpost is not meant as a musl vs. glibc flamewar. Each use case is different and has its own trade-offs. For example, we use glibc in our OS.
 
-For the tests, I used the images from [Docker Python library](https://github.com/docker-library/python), and the result is published to our [base images](https://github.com/home-assistant/docker-base). I used pyperformance for lab testing and the Home Assistant internal benchmark tools for more real-life coparison. The test environment was running inside a container on the same Docker host.
+For the tests, I used the images from [Docker Python library](https://github.com/docker-library/python), and the result is published to our [base images](https://github.com/home-assistant/docker-base). I used pyperformance for lab testing and the Home Assistant internal benchmark tools for more real-life comparison. The test environment was running inside a container on the same Docker host.
 
 ## C/POSIX standard library
 
