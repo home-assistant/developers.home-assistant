@@ -68,7 +68,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
         """Hue light component."""
     ```
 
-2. Avoid passing in `hass` as a parameter to the entity. When the entity has been added to Home Assistant, `hass` will be set on the entity when the entity is added to Home Assistant. This means you can access `hass` as `self.hass` inside the entity.
+2. Avoid passing in `hass` as a parameter to the entity. `hass` will be set on the entity when the entity is added to Home Assistant. This means you can access `hass` as `self.hass` inside the entity.
 3. Do not call `update()` in constructor, use `add_entities(devices, True)` instead.
 4. Do not do any I/O inside properties. Cache values inside `update()` instead.
 5. When dealing with time, state and/or attributes should not contain relative time since something happened. Instead, it should store UTC timestamps.
