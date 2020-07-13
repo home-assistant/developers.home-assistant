@@ -33,7 +33,7 @@ To fix installation times of Python package, we created our own [wheel index](ht
 
 Alpine is a great base system for Container and allows us to provide the best experience to our user. A big thanks to Alpine Linux, musl, and jemalloc, which make this all possible.
 
-The table shows the results comparing the Alpine Linux's Python runtime and our optimization (GCC 9.3.0/musl/Python 3.8.3).
+The table shows the results comparing the Alpine Linux's Python runtime and our optimization (GCC 9.3.0/musl). All tests done using Python 3.8.3.
 
 
 | Benchmark               | Alpine   | Optimized                     |
