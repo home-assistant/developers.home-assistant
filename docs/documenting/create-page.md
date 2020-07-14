@@ -102,7 +102,7 @@ When you're writing code that is to be executed on the terminal, do not prefix t
 
 For the [configuration templating](https://www.home-assistant.io/docs/configuration/templating/) [Jinja](http://jinja.pocoo.org/) is used. Check the [Documentation Standards](documenting/standards.md) for further details.
 
-If you are don't escape templates then they will be rendered and appear blank on the website.
+If you don't escape templates then they will be rendered and appear blank on the website.
 
 ### HTML
 
