@@ -106,7 +106,7 @@ be done by calling the forward function on the config entry manager ([example](h
 
 ```python
 # Use `hass.async_add_job` to avoid a circular dependency between the platform and the component
-hass.async_add_job(hass.config_entries.async_forward_entry_setup(config_entry, "light"))
+hass.async_create_task(hass.config_entries.async_forward_entry_setup(config_entry, "light"))
 ```
 
 For a platform to support config entries, it will need to add a setup entry method ([example](https://github.com/home-assistant/home-assistant/blob/0.68.0/homeassistant/components/light/hue.py#L60)):
