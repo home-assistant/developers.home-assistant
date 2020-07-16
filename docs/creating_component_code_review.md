@@ -6,7 +6,7 @@ sidebar_label: Component Checklist
 A checklist of things to do when you're adding a new component.
 
 :::info
-Not all existing code follow the requirements in this checklist. This cannot be used as a reason to not follow them!
+Not all existing code follows the requirements in this checklist. This cannot be used as a reason to not follow them!
 :::
 
 ### 0. Common
