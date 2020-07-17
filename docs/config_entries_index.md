@@ -105,8 +105,12 @@ If a component includes platforms, it will need to forward the Config Entry to t
 be done by calling the forward function on the config entry manager ([example](https://github.com/home-assistant/home-assistant/blob/0.68.0/homeassistant/components/hue/bridge.py#L81)):
 
 ```python
-# Use `hass.async_add_job` to avoid a circular dependency between the platform and the component
-hass.async_create_task(hass.config_entries.async_forward_entry_setup(config_entry, "light"))
+# Use `hass.async_create_task` to avoid a circular dependency between the platform and the component
+hass.async_create_task(
+  hass.config_entries.async_forward_entry_setup(
+    config_entry, "light"
+  )
+)
 ```
 
 For a platform to support config entries, it will need to add a setup entry method ([example](https://github.com/home-assistant/home-assistant/blob/0.68.0/homeassistant/components/light/hue.py#L60)):
