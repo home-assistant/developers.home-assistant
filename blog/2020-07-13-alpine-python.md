@@ -2,7 +2,7 @@
 author: Pascal Vizeli
 authorURL: https://github.com/pvizeli
 authorTwitter: pvizeli
-title: "Improving Python's speed with 40% when running Home Assistant"
+title: "Improving Python's speed by 40% when running Home Assistant"
 ---
 
 We use Alpine for most of our Containers. It is the perfect distribution for containers because it is small (BusyBox based), available for a lot of CPU architectures, and the package system is slim. Alpine uses musl as their C library instead of the more commonly used glibc.
@@ -15,9 +15,9 @@ For the tests, I used the images from [Docker Python library](https://github.com
 
 ## C/POSIX standard library
 
-I often read: Python is slower when it uses musl as default C library. This fact is not 100% correct. If the Python runtime was compiled with the same GCC and with `-O3`, the glibc variant is a bit faster in the lab benchmark, but in the real world, the difference is insignificant. Alpine compiles it with `-Os` while most other distributions compile it with  `-O2`. This causes the often written difference between the Python runtime interpreters. But when using the same compiler optimizations, musl based Python runtimes have no negative side-effects.
+I often read: Python is slower when it uses musl as the default C library. This fact is not 100% correct. If the Python runtime was compiled with the same GCC and with `-O3`, the glibc variant is a bit faster in the lab benchmark, but in the real world, the difference is insignificant. Alpine compiles it with `-Os` while most other distributions compile it with  `-O2`. This causes the often written difference between the Python runtime interpreters. But when using the same compiler optimizations, musl based Python runtimes have no negative side-effects.
 
-But there is a game-changer, which makes the musl one more useful compared to the glibc based runtime. It is the memory allocator [jemalloc](http://jemalloc.net/), a general-purpose malloc implementation that emphasizes fragmentation avoidance and scalable concurrency support. There is an interesting effect, which I found on some blogpost about Rust. There were some developers who saw that musl is much faster when using jemalloc compared to glibc, while glibc is slower when using jemalloc. For sure, the benefit with glibc and jemalloc is not the speed as they optimize memory management, but musl get both benefits. While the difference between pure musl and glibc can be ignored, the difference between musl + jemalloc and glibc are substantial (with disabled GCC memory allocator built-in optimization). Yes, today's jemalloc is compatible with musl (there was a time which it was not).
+But there is a game-changer, which makes the musl one more useful compared to the glibc-based runtime. It is the memory allocator [jemalloc](http://jemalloc.net/), a general-purpose malloc implementation that emphasizes fragmentation avoidance and scalable concurrency support. There is an interesting effect, which I found on some blogpost about Rust. There were some developers who saw that musl is much faster when using jemalloc compared to glibc, while glibc is slower when using jemalloc. For sure, the benefit with glibc and jemalloc is not the speed as they optimize memory management, but musl get both benefits. While the difference between pure musl and glibc can be ignored, the difference between musl + jemalloc and glibc are substantial (with disabled GCC memory allocator built-in optimization). Yes, today's jemalloc is compatible with musl (there was a time which it was not).
 
 ## Compiler
 
@@ -27,7 +27,7 @@ How you compile Python is also essential. There were statements from Fedora or R
 
 Alpine indeed has no manylinux compatibility with musl. If you don't cache your builds, it needs to compile the C extensions when installing packages that require it. This process takes time, just like if you would cross-build with Qemu for different CPU architectures. You cannot get precompiled binaries from PyPi. This is not a problem for us as the provided binaries on PyPI are mostly not optimized for our target systems.
 
-To fix installation times of Python package, we created our own [wheel index](https://wheels.home-assistant.io/) and [backend](https://github.com/home-assistant/wheels) to compile all needed wheels and keep it up to date using CI agents. We have pre-build over 1k packages for each CPU architecture, and the build time of the Docker file is not so important at all.
+To fix installation times of Python package, we created our own [wheel index](https://wheels.home-assistant.io/) and [backend](https://github.com/home-assistant/wheels) to compile all needed wheels and keep it up to date using CI agents. We pre-build over 1k packages for each CPU architecture, and the build time of the Docker file is not so important at all.
 
 ## Alpine Linux
 
