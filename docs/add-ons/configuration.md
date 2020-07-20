@@ -160,7 +160,7 @@ The configuration for an add-on is stored in `config.json`.
 | panel_title | string | no | Default add-on name, but can modify with this options.
 | panel_admin | bool | no | Default `true`. Make menu entry only available with admin privileged.
 | snapshot_exclude | list | no | List of file/path with glob support they are excluded from snapshots.
-| advanced | bool | no | Default `false`. Make addon visible on simle mode or not.
+| advanced | bool | no | Default `false`. Make addon visible on simple mode or not.
 | stage | string | no | Default `stable`. Flag add-on with follow attribute: `stable`, `experimental` or `deprecated`
 | init | bool | no | Default `true`. Make it possible to disable the Docker default system init because the image have his own init system.
 
