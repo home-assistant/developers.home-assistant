@@ -16,7 +16,7 @@ module.exports = {
         alt: "Home Assistant",
         src: "img/logo-pretty.svg",
       },
-      links: [
+      items: [
         {
           label: "Home Assistant",
           position: "left",
@@ -129,6 +129,7 @@ module.exports = {
           ],
         },
         {
+          title: "Thanks",
           items: [
             {
               html: `
