@@ -163,7 +163,7 @@ Payload structure:
 Available in: Home Assistant 0.115
 Type: `tag/write`
 Direction: frontend to external app
-Expect answer: no
+Expect answer: yes
 
 Tell the external app to open the UI to write to a tag. Name is the name of the tag as entered by the user. The name is `null` if no name has been set.
 
@@ -172,4 +172,10 @@ Tell the external app to open the UI to write to a tag. Name is the name of the 
   tag: string;
   name: string | null;
 }
+```
+
+Expected response payload is an empty object for now. We might add more later:
+
+```ts
+{}
 ```
