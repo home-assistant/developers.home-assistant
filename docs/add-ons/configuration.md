@@ -121,7 +121,7 @@ The configuration for an add-on is stored in `config.json`.
 | boot | string | yes | `auto` by system and manual or only `manual`.
 | ports | dict | no | Network ports to expose from the container. Format is `"container-port/type": host-port`. If host-port is `null` then the mapping is disabled.
 | ports_description | dict | no | Network ports description mapping. Format is `"container-port/type": "description of this port"`.
-| host_network | bool | no | If `true`, the add-on run on host network.
+| host_network | bool | no | If `true`, the add-on runs on host network.
 | host_ipc | bool | no | Default `false`. Allow to share the IPC namespace with others.
 | host_dbus | bool | no | Default `false`. Map the host D-Bus service into the add-on.
 | host_pid | bool | no | Default `false`. Allow to run container on host PID namespace. Works only for not protected add-ons.
@@ -138,7 +138,7 @@ The configuration for an add-on is stored in `config.json`.
 | apparmor | bool/string | no | Enable or disable AppArmor support. If it is enable, you can also use custom profiles with the name of the profile.
 | map | list | no | List of maps for additional Home Assistant folders. Possible values: `config`, `ssl`, `addons`, `backup` or `share`. Defaults to `ro`, which you can change by adding `:rw` to the end of the name.
 | environment | dict | no | A dictionary of environment variable to run add-on.
-| audio | bool | no | Boolean. Mark this add-on to use internal an audio system. We map a working PulseAudio setup into container. If your application does not support PulseAudio, you may need to install: Alpine Linux `alsa-plugins-pulse` or Debian/Ubuntu `libasound2-plugins`.
+| audio | bool | no | Boolean. Mark this add-on to use internal audio system. We map a working PulseAudio setup into container. If your application does not support PulseAudio, you may need to install: Alpine Linux `alsa-plugins-pulse` or Debian/Ubuntu `libasound2-plugins`.
 | video | bool | no | Boolean. Mark this add-on to use the internal video system. All available devices will be mapped into the add-on.
 | gpio | bool | no | Boolean. If this is set to `true`, `/sys/class/gpio` will map into add-on for access to GPIO interface from kernel. Some libraries also need  `/dev/mem` and `SYS_RAWIO` for read/write access to this device. On systems with AppArmor enabled, you need to disable AppArmor or provide you own profile for the add-on, which is better for security.
 | devicetree | bool | no | Boolean. If this is set to True, `/device-tree` will map into add-on.
@@ -154,10 +154,10 @@ The configuration for an add-on is stored in `config.json`.
 | services | list | no | A list of services that will be provided or consumed with this add-on. Format is `service`:`function` and functions are: `provide` (this add-on can provide this service), `want` (this add-on can use this service) or `need` (this add-on need this service to work correctly).
 | auth_api | bool | no | Allow access to Home Assistant user backend.
 | ingress | bool | no | Enable the ingress feature for the add-on.
-| ingress_port | integer | no | Default `8099`. For Add-ons that run on the host network, you can use `0` and read the port later via API.
+| ingress_port | integer | no | Default `8099`. For add-ons that run on the host network, you can use `0` and read the port later via API.
 | ingress_entry | string | no | Modify the URL entry point from `/`.
 | panel_icon | string | no | Default: `mdi:puzzle`. MDI icon for the menu panel integration.
-| panel_title | string | no | Default add-on name, but can modify with this option.
+| panel_title | string | no | Default is the add-on name, but can be modified with this option.
 | panel_admin | bool | no | Default `true`. Make menu entry only available with admin privileged.
 | snapshot_exclude | list | no | List of file/path (with glob support) that are excluded from snapshots.
 | advanced | bool | no | Default `false`. Make addon visible in simple mode.
