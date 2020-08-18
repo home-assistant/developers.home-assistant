@@ -138,9 +138,10 @@ The configuration for an add-on is stored in `config.json`.
 | apparmor | bool/string | no | Enable or disable AppArmor support. If it is enable, you can also use custom profiles with the name of the profile.
 | map | list | no | List of maps for additional Home Assistant folders. Possible values: `config`, `ssl`, `addons`, `backup` or `share`. Defaults to `ro`, which you can change by adding `:rw` to the end of the name.
 | environment | dict | no | A dictionary of environment variable to run add-on.
-| audio | bool | no | Boolean. Mark this add-on to use internal audio system. We map a working PulseAudio setup into container. If your application does not support PulseAudio, you may need to install: Alpine Linux `alsa-plugins-pulse` or Debian/Ubuntu `libasound2-plugins`.
-| video | bool | no | Boolean. Mark this add-on to use the internal video system. All available devices will be mapped into the add-on.
-| gpio | bool | no | Boolean. If this is set to `true`, `/sys/class/gpio` will map into add-on for access to GPIO interface from kernel. Some libraries also need  `/dev/mem` and `SYS_RAWIO` for read/write access to this device. On systems with AppArmor enabled, you need to disable AppArmor or provide you own profile for the add-on, which is better for security.
+| audio | bool | no | Mark this add-on to use internal audio system. We map a working PulseAudio setup into container. If your application does not support PulseAudio, you may need to install: Alpine Linux `alsa-plugins-pulse` or Debian/Ubuntu `libasound2-plugins`.
+| video | bool | no | Mark this add-on to use the internal video system. All available devices will be mapped into the add-on.
+| gpio | bool | no | If this is set to `true`, `/sys/class/gpio` will map into add-on for access to GPIO interface from kernel. Some libraries also need  `/dev/mem` and `SYS_RAWIO` for read/write access to this device. On systems with AppArmor enabled, you need to disable AppArmor or provide you own profile for the add-on, which is better for security.
+| usb | bool | no | If this is set to `true`, it would map the raw USB access `/dev/bus/usb` into add-on with plug&play support.
 | devicetree | bool | no | Boolean. If this is set to True, `/device-tree` will map into add-on.
 | kernel_modules | bool | no | Map host kernel modules and config into add-on (readonly).
 | stdin | bool | no | Boolean. If enabled, you can use the STDIN with Home Assistant API.
