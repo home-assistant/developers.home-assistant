@@ -100,10 +100,12 @@ Expected response payload:
 ```ts
 {
   hasSettingsScreen: boolean;
+  canWriteTag: boolean;
 }
 ```
 
 - `hasSettingsScreen` set to true if the external app will show a configuration screen when it receives the command `config_screen/show`. If so, a new option will be added to the sidebar to trigger the configuration screen.
+- `canWriteTag` set to true if the external app is able to write tags and so can support the `tag/write` command.
 
 ### Show Config Screen `config_screen/show`
 
@@ -154,4 +156,26 @@ Payload structure:
     | "selection";
 
 }
+```
+
+### Write Tag `tag/write`
+
+Available in: Home Assistant 0.115
+Type: `tag/write`
+Direction: frontend to external app
+Expect answer: yes
+
+Tell the external app to open the UI to write to a tag. Name is the name of the tag as entered by the user. The name is `null` if no name has been set.
+
+```ts
+{
+  tag: string;
+  name: string | null;
+}
+```
+
+Expected response payload is an empty object for now. We might add more later:
+
+```ts
+{}
 ```
