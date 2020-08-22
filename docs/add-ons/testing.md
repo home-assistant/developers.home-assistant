@@ -28,7 +28,7 @@ If you don't want to use the devcontainer environment, you can still build add-o
 Assuming that your addon is in the folder `/path/to/addon` and your docker socket is at `/var/run/docker.sock`, you can build the addon for all supported architectures by running the following:
 ```
 docker run --rm -ti --name hassio-builder --privileged \
-  -v /path/to/addon:/data -v \
+  -v /path/to/addon:/data \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
   homeassistant/amd64-builder -t /data --all --test \
   -i my-test-addon-{arch} -d local
