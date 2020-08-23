@@ -24,7 +24,7 @@ This category is just a string: the translation of the integration name. This ke
 
 #### State
 
-If your integration provides entities under it's domain, you will want to translate the states. You do this by offering a `state` dictionary, that contains translations for states with different device classes. The key `_` is used for entities without a device class.
+If your integration provides entities under its domain, you will want to translate the states. You do this by offering a `state` dictionary, that contains translations for states with different device classes. The key `_` is used for entities without a device class.
 
 ```json
 {
