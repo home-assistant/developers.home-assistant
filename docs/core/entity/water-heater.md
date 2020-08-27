@@ -9,17 +9,19 @@ sidebar_label: Water Heater
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
-| Name                | Type      | Default | Description
-| ------------------- | --------- | ------- | -----------
-| min_temp            | float     | 110°F   | The minimum temperature that can be set.
-| max_temp            | float     | 140°F   | The maximum temperature that can be set.
-| current_temperature | float     | None    | The current temperature.
-| target_temperature  | float     | None    | The temperature we are trying to reach.
-| temperature_unit    | str       | None    | One of `"°C"`, `"°F"`, or `"°C or °K"`.
-| operation_mode      | string    | None    | The current operation mode.
-| operation_list      | List[str] | None    | List of possible operation modes.
-| supported_features  | List[str] | None    | List of supported features.
-| is_away_mode_on     | bool      | None    | The current status of away mode.
+| Name                  | Type        | Default   | Description
+| --------------------- | ----------- | --------- | -----------
+| `min_temp`            | `float`     | 110°F     | The minimum temperature that can be set.
+| `max_temp`            | `float`     | 140°F     | The maximum temperature that can be set.
+| `current_temperature` | `float`     | `None`    | The current temperature.
+| `target_temperature`  | `float`     | `None`    | The temperature we are trying to reach.
+| `target_temperature_high` | `float` | `None`    | Upper bound of the temperature we are trying to reach.
+| `target_temperature_low` | `float`  | `None`    | Lowergit  bound of the temperature we are trying to reach.
+| `temperature_unit`    | `str`       | System default | One of `"°C"`, `"°F"`, or `"°C or °K"`.
+| `operation_mode`      | `string`    | `None`    | The current operation mode.
+| `operation_list`      | `List[str]` | `None`    | List of possible operation modes.
+| `supported_features`  | `List[str]` | `None`    | List of supported features.
+| `is_away_mode_on`     | `bool`      | `None`    | The current status of away mode.
 
 The allowed operation modes are the states specified in the base component and implementations of the water_heater component cannot differ.
 
