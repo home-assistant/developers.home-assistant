@@ -9,18 +9,23 @@ sidebar_label: Water Heater
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
-| Name | Type | Default | Description
-| ---- | ---- | ------- | -----------
-| min_temp | float | 110°F | The minimum temperature that can be set.
-| max_temp | float | 140°F | The maximum temperature that can be set.
-| temperature | float | none | The current temperature in °C or °F.
-| operation_mode | string | none | The current operation mode.
-| operation_list | list | none | List of possible operation modes.
-| away_mode | string | none | The current status of away mode. (on, off)
+| Name                  | Type        | Default   | Description
+| --------------------- | ----------- | --------- | -----------
+| `min_temp`            | `float`     | 110°F     | The minimum temperature that can be set.
+| `max_temp`            | `float`     | 140°F     | The maximum temperature that can be set.
+| `current_temperature` | `float`     | `None`    | The current temperature.
+| `target_temperature`  | `float`     | `None`    | The temperature we are trying to reach.
+| `target_temperature_high` | `float` | `None`    | Upper bound of the temperature we are trying to reach.
+| `target_temperature_low` | `float`  | `None`    | Lower bound of the temperature we are trying to reach.
+| `temperature_unit`    | `str`       | `NotImplementedError` | One of `TEMP_CELSIUS`, `TEMP_FAHRENHEIT`, or `TEMP_KELVIN`.
+| `current_operation`   | `string`    | `None`    | The current operation mode.
+| `operation_list`      | `List[str]` | `None`    | List of possible operation modes.
+| `supported_features`  | `List[str]` | `NotImplementedError` | List of supported features.
+| `is_away_mode_on`     | `bool`      | `None`    | The current status of away mode.
 
-The allowed operation modes are specified in the base component and implementations of the water_heater component cannot differ.
+The allowed operation modes are the states specified in the base component and implementations of the water_heater component cannot differ.
 
-Properties have to follow the units defined in the `unit_system`.
+Properties have to follow the units defined in the `temperature_unit`.
 
 ## States
 
@@ -33,6 +38,14 @@ Properties have to follow the units defined in the `unit_system`.
 | `STATE_HEAT_PUMP` | Slowest to heat, but uses less energy.
 | `STATE_GAS` | Gas only mode, uses the most energy.
 | `STATE_OFF` | The water heater is off.
+
+## Supported Features
+
+| Feature                      | Description
+| ---------------------------- | -----------
+| `SUPPORT_TARGET_TEMPERATURE` | Temperature can be set
+| `SUPPORT_OPERATION_MODE`     | Operation mode can be set
+| `SUPPORT_AWAY_MODE`          | Away mode can be set
 
 ## Methods
 
