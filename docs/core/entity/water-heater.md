@@ -20,7 +20,7 @@ Properties should always only return information from memory and not do I/O (lik
 | `temperature_unit`    | `str`       | `NotImplementedError` | One of `TEMP_CELSIUS`, `TEMP_FAHRENHEIT`, or `TEMP_KELVIN`.
 | `current_operation`   | `string`    | `None`    | The current operation mode.
 | `operation_list`      | `List[str]` | `None`    | List of possible operation modes.
-| `supported_features`  | `List[str]` | `None`    | List of supported features.
+| `supported_features`  | `List[str]` | `NotImplementedError` | List of supported features.
 | `is_away_mode_on`     | `bool`      | `NotImplementedError` | The current status of away mode.
 
 The allowed operation modes are the states specified in the base component and implementations of the water_heater component cannot differ.
