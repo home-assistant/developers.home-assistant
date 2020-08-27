@@ -17,7 +17,7 @@ Properties should always only return information from memory and not do I/O (lik
 | `target_temperature`  | `float`     | `None`    | The temperature we are trying to reach.
 | `target_temperature_high` | `float` | `None`    | Upper bound of the temperature we are trying to reach.
 | `target_temperature_low` | `float`  | `None`    | Lower bound of the temperature we are trying to reach.
-| `temperature_unit`    | `str`       | System default | One of `"°C"`, `"°F"`, or `"°K"`.
+| `temperature_unit`    | `str`       | System default | One of `TEMP_CELSIUS`, `TEMP_FAHRENHEIT`, or `TEMP_KELVIN`.
 | `operation_mode`      | `string`    | `None`    | The current operation mode.
 | `operation_list`      | `List[str]` | `None`    | List of possible operation modes.
 | `supported_features`  | `List[str]` | `None`    | List of supported features.
