@@ -35,6 +35,7 @@ import logging
 
 import async_timeout
 
+from homeassistant.components.light import LightEntity
 from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
     DataUpdateCoordinator,
@@ -83,7 +84,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
     )
 
 
-class MyEntity(CoordinatorEntity):
+class MyEntity(CoordinatorEntity, LightEntity):
     """An entity using CoordinatorEntity.
 
     The CoordinatorEntity class provides:
