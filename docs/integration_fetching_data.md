@@ -28,18 +28,27 @@ This API will have a single method to fetch data for all the entities that you h
 Home Assistant provides a DataUpdateCoordinator class to help you manage this as efficiently as possible.
 
 ```python
+"""Example integration using DataUpdateCoordinator."""
+
 from datetime import timedelta
 import logging
 
 import async_timeout
 
-from homeassistant.helpers import entity
-from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
+from homeassistant.components.light import LightEntity
+from homeassistant.helpers.update_coordinator import (
+    CoordinatorEntity,
+    DataUpdateCoordinator,
+    UpdateFailed,
+)
+
 from .const import DOMAIN
 
 _LOGGER = logging.getLogger(__name__)
 
+
 async def async_setup_entry(hass, entry, async_add_entities):
+    """Config entry example."""
     # assuming API object stored here by __init__.py
     api = hass.data[DOMAIN][entry.entry_id]
 
@@ -70,41 +79,34 @@ async def async_setup_entry(hass, entry, async_add_entities):
     # Fetch initial data so we have data when entities subscribe
     await coordinator.async_refresh()
 
-    async_add_entities(MyEntity(coordinator, idx) for idx, ent
-                       in enumerate(coordinator.data))
+    async_add_entities(
+        MyEntity(coordinator, idx) for idx, ent in enumerate(coordinator.data)
+    )
 
 
-class MyEntity(entity.Entity):
+class MyEntity(CoordinatorEntity, LightEntity):
+    """An entity using CoordinatorEntity.
+
+    The CoordinatorEntity class provides:
+      should_poll
+      async_update
+      async_added_to_hass
+      available
+
+    """
 
     def __init__(self, coordinator, idx):
-        self.coordinator = coordinator
+        """Pass coordinator to CoordinatorEntity."""
+        super.__init__(coordinator)
         self.idx = idx
 
     @property
     def is_on(self):
-      """Return entity state.
+        """Return entity state.
 
-      Example to show how we fetch data from coordinator.
-      """
-      self.coordinator.data[self.idx]['state']
-
-    @property
-    def should_poll(self):
-        """No need to poll. Coordinator notifies entity of updates."""
-        return False
-
-    @property
-    def available(self):
-        """Return if entity is available."""
-        return self.coordinator.last_update_success
-
-    async def async_added_to_hass(self):
-        """When entity is added to hass."""
-        self.async_on_remove(
-            self.coordinator.async_add_listener(
-                self.async_write_ha_state
-            )
-        )
+        Example to show how we fetch data from coordinator.
+        """
+        self.coordinator.data[self.idx]["state"]
 
     async def async_turn_on(self, **kwargs):
         """Turn the light on.
@@ -115,13 +117,6 @@ class MyEntity(entity.Entity):
         # ...
 
         # Update the data
-        await self.coordinator.async_request_refresh()
-
-    async def async_update(self):
-        """Update the entity.
-
-        Only used by the generic entity update service.
-        """
         await self.coordinator.async_request_refresh()
 ```
 
