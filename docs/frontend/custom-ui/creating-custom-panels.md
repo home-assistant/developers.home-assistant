@@ -41,12 +41,6 @@ class ExamplePanel extends LitElement {
     `;
   }
 
-  _toggle(state) {
-    this.hass.callService("homeassistant", "toggle", {
-      entity_id: state.entity_id,
-    });
-  }
-
   static get styles() {
     return css`
       :host {
