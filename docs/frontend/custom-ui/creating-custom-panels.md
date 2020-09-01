@@ -8,7 +8,7 @@ Besides components registering panels, users can also register panels using the 
 
 ## Introduction
 
-Panels are defined as custom elements. You can use any framework that you want, as long as you wrap it up as a custom element. To quickly get started with a panel, create a file `<config>/www/example-panel.js` with content
+Panels are defined as custom elements. You can use any framework that you want, as long as you wrap it up as a custom element. To quickly get started with a panel, create a new file `<config>/www/example-panel.js` with this content
 
 ```js
 import "https://unpkg.com/wired-card@2.1.0/lib/wired-card.js?module";
