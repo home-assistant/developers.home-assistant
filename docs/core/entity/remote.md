@@ -21,6 +21,20 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Constant | Description 
 | -------- | -----------
-| `SUPPORT_LEARN_COMMAND` | Entity allows learning commands.
+| `SUPPORT_LEARN_COMMAND` | Entity allows learning commands from devices.
 
 ## Methods
+
+### Learn Command
+
+Only implement this method if the flag `SUPPORT_LEARN_COMMAND` is set.
+
+```python
+class MyRemote(RemoteEntity):
+
+    def learn_command(self, **kwargs):
+        """Learn a command from a device."""
+
+    async def async_learn_command(self, **kwargs):
+        """Learn a command from a device."""
+```
