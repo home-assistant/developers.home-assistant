@@ -15,5 +15,12 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
+| supported_features | int | int | Flag supported features.
+
+## Supported Features
+
+| Constant | Description 
+| -------- | -----------
+| `SUPPORT_LEARN_COMMAND` | Entity allows learning commands.
 
 ## Methods
