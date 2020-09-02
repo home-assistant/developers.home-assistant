@@ -3,10 +3,6 @@ title: Remote Entity
 sidebar_label: Remote
 ---
 
-:::info Incomplete
-This entry is incomplete. Contribution welcome.
-:::
-
 ## Properties
 
 :::tip
