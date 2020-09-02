@@ -15,7 +15,6 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| supported_features | int | int | Flag supported features.
 
 ## Supported Features
 
