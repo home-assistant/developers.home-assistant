@@ -29,10 +29,10 @@ Properties should always only return information from memory and not do I/O (lik
 ```python
 class MyRemote(RemoteEntity):
 
-    def send_command(self, **kwargs):
+    def send_command(self, command: Iterable[str], **kwargs):
         """Send commands to a device."""
 
-    async def async_send_command(self, **kwargs):
+    async def async_send_command(self, command: Iterable[str], **kwargs):
         """Send commands to a device."""
 ```
 
