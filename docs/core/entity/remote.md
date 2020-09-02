@@ -25,6 +25,18 @@ Properties should always only return information from memory and not do I/O (lik
 
 ## Methods
 
+### Send Command
+
+```python
+class MyRemote(RemoteEntity):
+
+    def send_command(self, **kwargs):
+        """Send commands to a device."""
+
+    async def async_send_command(self, **kwargs):
+        """Send commands to a device."""
+```
+
 ### Learn Command
 
 Only implement this method if the flag `SUPPORT_LEARN_COMMAND` is set.
