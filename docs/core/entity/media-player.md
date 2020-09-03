@@ -117,3 +117,4 @@ Optional. What type of media device is this. It will possibly map to google devi
 | ----- | -----------
 | tv | Device is a television type device.
 | speaker | Device is speakers or stereo type device.
+| receiver | Device is audio video receiver type device taking audio and outputting to speakers and video to some display.
