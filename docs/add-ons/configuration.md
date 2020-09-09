@@ -136,7 +136,7 @@ The configuration for an add-on is stored in `config.json`.
 | privileged | list | no | Privilege for access to hardware/system. Available access: `NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_TIME`, `SYS_NICE`, `SYS_RESOURCE`, `SYS_PTRACE`, `SYS_MODULE` or `DAC_READ_SEARCH`
 | full_access | bool | no | Give full access to hardware like the privileged mode in docker. Works only for not protected add-ons.
 | apparmor | bool/string | no | Enable or disable AppArmor support. If it is enable, you can also use custom profiles with the name of the profile.
-| map | list | no | List of maps for additional Home Assistant folders. Possible values: `config`, `ssl`, `addons`, `backup` or `share`. Defaults to `ro`, which you can change by adding `:rw` to the end of the name.
+| map | list | no | List of maps for additional Home Assistant folders. Possible values: `config`, `ssl`, `addons`, `backup`, `share` or `media`. Defaults to `ro`, which you can change by adding `:rw` to the end of the name.
 | environment | dict | no | A dictionary of environment variable to run add-on.
 | audio | bool | no | Mark this add-on to use internal audio system. We map a working PulseAudio setup into container. If your application does not support PulseAudio, you may need to install: Alpine Linux `alsa-plugins-pulse` or Debian/Ubuntu `libasound2-plugins`.
 | video | bool | no | Mark this add-on to use the internal video system. All available devices will be mapped into the add-on.
