@@ -33,6 +33,7 @@ The signature of the helper method:
 def get_url(
     hass: HomeAssistant,
     *,
+    require_current_request: bool = False,
     require_ssl: bool = False,
     require_standard_port: bool = False,
     allow_internal: bool = True,
@@ -45,6 +46,10 @@ def get_url(
 ```
 
 The different parameters of the method:
+
+- `require_current_request`
+  Require the returned URL to match the URL the user is currently using
+  in their browser. If there is no current request, an error will be raised.
 
 - `require_ssl`:
   Require the returned URL to use the `https` scheme.
