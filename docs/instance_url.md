@@ -48,7 +48,7 @@ def get_url(
 The different parameters of the method:
 
 - `require_current_request`
-  Require the current URL to use, to match the URL the user is currently using
+  Require the returned URL to match the URL the user is currently using
   in their browser. If there is no current request, an error will be raised.
 
 - `require_ssl`:
