@@ -162,7 +162,7 @@ When the translations are merged into Home Assistant, they will be automatically
 ## Migration to a new version of a Config Entry
 
 As mentioned above - each Config Entry has a version assigned to it. This is to be able to migrate Config Entry data to new formats when Config Entry schema changes. 
-Migration can be handled programatically by implementing function `async_migrate_entry`. The function should return `True` if migration is successfull.
+Migration can be handled programatically by implementing function `async_migrate_entry` in your component's `__init__.py` file. The function should return `True` if migration is successfull.
 Example code:
 ```python
 async def async_migrate_entry(hass, config_entry: ConfigEntry):
