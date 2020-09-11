@@ -108,9 +108,22 @@ It is also possible to use a public git repository to install a requirement.  Th
 
 If your integration supports discovery via [Zeroconf](https://en.wikipedia.org/wiki/Zero-configuration_networking), you can add the type to your manifest. If the user has the `zeroconf` integration loaded, it will load the `zeroconf` step of your integration's config flow when it is discovered.
 
+Zeroconf is a list so you can specify multiple types to match on.
+
 ```json
 {
   "zeroconf": ["_googlecast._tcp.local."]
+}
+```
+
+Certain zeroconf types are very generic (i.e., `_printer._tcp.local.`, `_axis-video._tcp.local.` or `_http._tcp.local`). In such cases you should include a name or MAC address filter:
+
+```json
+{
+  "zeroconf": [
+    {"type":"_axis-video._tcp.local.","macaddress":"00408C*"},
+    {"type":"_axis-video._tcp.local.","name":"Example*"},
+   ]
 }
 ```
 
