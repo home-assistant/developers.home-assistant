@@ -108,7 +108,7 @@ It is also possible to use a public git repository to install a requirement.  Th
 
 If your integration supports discovery via [Zeroconf](https://en.wikipedia.org/wiki/Zero-configuration_networking), you can add the type to your manifest. If the user has the `zeroconf` integration loaded, it will load the `zeroconf` step of your integration's config flow when it is discovered.
 
-Zeroconf is a list so y ou can specify multiple types to match on.
+Zeroconf is a list so you can specify multiple types to match on.
 
 ```json
 {
