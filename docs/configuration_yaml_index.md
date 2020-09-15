@@ -4,9 +4,12 @@ title: "Integration Configuration via YAML"
 
 `configuration.yaml` is a configuration file defined by the user. It is automatically created by Home Assistant on first launch. It defines which components to load.
 
-#### Note about YAML configurations
+---
+**Note about YAML for devices and/or services**
 
 Integrations that communicate with devices and/or services are configured via a config flow. In rare cases, we can make an exception. Existing integrations that should not have a YAML configuration, are allowed and encouraged to implement a configuration flow and remove YAML support. Changes to existing YAML configuration for these same existing integrations, will no longer be accepted. For more detail read https://github.com/home-assistant/architecture/blob/master/adr/0010-integration-configuration.md#decision
+
+---
 
 ## Pre-processing
 
