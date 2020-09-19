@@ -4,7 +4,7 @@ title: "Local add-on testing"
 
 The fastest and recommended way to develop add-ons is using a local Visual Studio Code dev environment. The [Official Add-ons][hassio-addons] repository includes a devcontainer setup for VS Code which will run Supervisor and Home Assistant, with all of the add-ons mapped as Local Add-ons inside, making it simple for add-on developers on Windows, Mac and Linux desktop OS-es. Just follow the instructions to download and install the [Remote Containers][remote-containers] VS Code extension, open the root folder inside VS Code, and when prompted re-open the window inside the container (or, from the Command Palette, select 'Rebuild and Reopen in Container'). For standalone add-ons, there also exists an [addon devcontainer template][hassio-addon-devcontainer] on GitHub which provides the same boilerplate devcontainer for new add-on projects.
 
-Once running, you'll need to run the task (Terminal -> Run Task) 'Start Hass.io', which will bootstrap Supervisor and Home Assistant. You'll then be able to access the normal onboarding process via the Home Assistant instance at `http://localhost:8123/`.
+Once running, you'll need to run the task (Terminal -> Run Task) 'Start Home Assistant', which will bootstrap Supervisor and Home Assistant. You'll then be able to access the normal onboarding process via the Home Assistant instance at `http://localhost:8123/`.
 
 The add-on(s) under development will be automatically found in the Local Add-ons repository.
 
