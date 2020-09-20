@@ -117,7 +117,7 @@ RUN apk add --no-cache python3
 WORKDIR /data
 ```
 
-Add "ports" to `config.json`. This will make TCP on port 8000 inside the container available on the host on port 8000.
+Add "ingress" options to `config.json`. Ingress allow users to access the add-on web interface via the Home Assistant UI. Authentication is handled by Home Assistant, so neither the user nor the add-on developer will need to care about the security or port forwarding. 
 
 ```json
 {
@@ -126,13 +126,14 @@ Add "ports" to `config.json`. This will make TCP on port 8000 inside the contain
   "slug": "hello_world",
   "description": "My first real add-on!",
   "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
-  "startup": "before",
+  "startup": "application",
   "boot": "auto",
+  "ingress": true,
+  "ingress_port": 8000,
+  "panel_icon": "mdi:web",
+  "panel_title": "Example",
   "options": {},
-  "schema": {},
-  "ports": {
-    "8000/tcp": 8000
-  }
+  "schema": {}
 }
 ```
 
@@ -146,7 +147,7 @@ python3 -m http.server 8000
 
 Since we updated the version number in our `config.json`, Home Assistant will show an update button when looking at the add-on details. You might have to refresh your browser or click the refresh button in the add-on store for it to show up. If you did not update the version number, you can also uninstall and install the add-on again. After installing the add-on again, make sure you start it.
 
-Now navigate to [http://homeassistant.local:8000](http://homeassistant.local:8000) to see our server in action!
+Now navigate to your HTTP server using the entry in the sidebar!
 
 ![Screenshot of the file index served by the add-on](/img/en/hass.io/tutorial/python3-http-server.png)
 
