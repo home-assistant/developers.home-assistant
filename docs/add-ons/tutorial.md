@@ -49,7 +49,7 @@ CMD [ "/run.sh" ]
   "slug": "hello_world",
   "description": "My first real add-on!",
   "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
-  "startup": "before",
+  "startup": "application",
   "boot": "auto",
   "options": {},
   "schema": {}
