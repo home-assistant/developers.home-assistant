@@ -69,7 +69,7 @@ self._abort_if_unique_id_configured()
 By setting a unique ID, users will have the option to ignore the discovery of your config entry. That way, they won't be bothered about it anymore.
 If the integration uses HomeKit, Zeroconf/mDNS or SSDP/uPnP to be discovered, supplying a unique ID is required.
 
-If a unique ID isn't available, alternatively, the `zerconf`, `homekit`, `ssdp` and `discovery` steps can be omitted, even if they are configured in
+If a unique ID isn't available, alternatively, the `zeroconf`, `homekit`, `ssdp` and `discovery` steps can be omitted, even if they are configured in
 the integration manifest. In that case, the `user` step will be called when the item is discovered.
 
 Alternatively, if an integration can't get a unique ID all the time (e.g., multiple devices, some have one, some don't), a helper is available
@@ -83,7 +83,7 @@ await self._async_handle_discovery_without_unique_id()
 
 ### Unignoring
 
-Your configuration flow can add support to re-discovered the previously ignored entry by implementing the unignore step in the config flow.
+Your configuration flow can add support to re-discover the previously ignored entry by implementing the unignore step in the config flow.
 
 ```python
 async def async_step_unignore(self, user_input):
