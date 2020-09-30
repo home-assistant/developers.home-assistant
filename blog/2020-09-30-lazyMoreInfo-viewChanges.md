@@ -22,7 +22,7 @@ interface LovelaceViewElement {
 }
 ```
 
-The cards and badges will be already created and HASS will be updated on each card so that you do not need to worry about that in your code.
+The cards and badges will be already created and Hass will be updated on each card so that you do not need to worry about updating Hass on the Cards array for every Hass update.
 
 Here is an example below: (note: this example does not have all of the properties but necessities to show the example)
 
