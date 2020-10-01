@@ -97,7 +97,7 @@ class MyEntity(CoordinatorEntity, LightEntity):
 
     def __init__(self, coordinator, idx):
         """Pass coordinator to CoordinatorEntity."""
-        super.__init__(coordinator)
+        super().__init__(coordinator)
         self.idx = idx
 
     @property
