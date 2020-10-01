@@ -87,4 +87,4 @@ It will start a server at [localhost:3000](http://localhost:3000).
 - Add new doc to `sidebars.js`
 
 Thank you!
-Keep Learning Keep Supporting
+Keep Learning Keep Supporting!
