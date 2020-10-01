@@ -32,6 +32,12 @@ class MyNewView extends LitElement {
 
   public setConfig(_config) {}
 
+  static get properties() {
+    return { 
+      cards: {type: Array, attribute: false}
+    };
+  }
+
   protected render() {
     return html`${this.cards.map((card) => html`<div>${card}</div>`)}`;
   }
