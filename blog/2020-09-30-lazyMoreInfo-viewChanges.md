@@ -47,7 +47,7 @@ class MyNewView extends LitElement {
 
 And you can define this element in the Custom Element Registry just as you would with a Custom Card:
 
-```ts
+```js
 customElements.define("my-new-view", MyNewView);
 ```
 
