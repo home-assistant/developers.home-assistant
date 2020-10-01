@@ -28,8 +28,6 @@ Here is an example below: (note: this example does not have all of the propertie
 
 ```js
 class MyNewView extends LitElement {
-  cards = [];
-
   setConfig(_config) {}
 
   static get properties() {
@@ -38,7 +36,10 @@ class MyNewView extends LitElement {
     };
   }
 
-  protected render() {
+  render() {
+    if(!this.cards) {
+      return html``;
+    }
     return html`${this.cards.map((card) => html`<div>${card}</div>`)}`;
   }
 }
