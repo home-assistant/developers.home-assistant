@@ -1,6 +1,6 @@
 module.exports = {
   title: "Home Assistant Developer Docs",
-  tagline: "All you need to start developing for Home Assistant",
+  tagline: "All you need to start developing",
   url: "https://developers.home-assistant.io",
   baseUrl: "/",
   favicon: "img/favicon.png",
