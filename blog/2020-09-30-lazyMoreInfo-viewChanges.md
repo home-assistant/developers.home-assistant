@@ -74,4 +74,4 @@ You will no longer be able to use the `hui-view` element to retrieve LitElement 
 const LitElement = Object.getPrototypeOf(customElements.get("hui-masonry-view"));
 ```
 
-But Note! This is not supported by HA. In the future this may not work to import LitElement.
+But Note! This is not supported by HA. In the future, this may not work to import LitElement.
