@@ -53,7 +53,7 @@ customElements.define("my-new-view", MyNewView);
 
 You can find an example of this in our default view: `Masonry View` Located here: [frontend/src/panels/lovelace/views/hui-masonry-view.ts](https://github.com/home-assistant/frontend/blob/master/src/panels/lovelace/views/hui-masonry-view.ts)
 
-A user who downloads and installs your new Custom View can then use it via editing their YAML configuration of their view to be:
+A user who downloads and installs your new Custom View can then use it via editing the YAML configuration of their view to be:
 
 ```yaml
 - title: Home View
