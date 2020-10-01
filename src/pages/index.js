@@ -120,13 +120,20 @@ function Home() {
     >
       <header className={classnames("hero hero--primary", styles.heroBanner)}>
         <div className="container">
-          <h1 className={styles.heroTitle}>{siteConfig.title}</h1>
-          <p className={styles.heroTagline}>{siteConfig.tagline}</p>
-          <p>
-            <a className="hero__text" href="https://www.home-assistant.io">
-              Not a developer? Go to the normal website
-            </a>
-          </p>
+          <div className="row">
+            <div className={classnames('col col--5')}>
+              <img className={styles.heroLogo} alt="Home Assistant Logo" src="/img/logo-white.svg" />
+            </div>
+            <div className={classnames('col col--5')}>
+              <h1 className={styles.heroTitle}>{siteConfig.title}</h1>
+              <p className={styles.heroTagline}>{siteConfig.tagline}</p>
+              <p>
+                <a className={styles.heroText} href="https://www.home-assistant.io">
+                  Not a developer? Go to the normal website
+                </a>
+              </p>
+            </div>
+          </div>
         </div>
       </header>
       <main>

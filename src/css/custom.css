@@ -23,10 +23,6 @@
   padding: 0 var(--ifm-pre-padding);
 }
 
-a.hero__text{
-  color: var(--ifm-heading-color);
-}
-
 .videoSection {
   padding: 20px 0;
 }
