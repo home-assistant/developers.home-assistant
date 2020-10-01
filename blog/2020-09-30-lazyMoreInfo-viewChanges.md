@@ -7,7 +7,7 @@ title: "Lovelace: Custom View Layouts"
 
 Custom Element developers can now create Custom View Layouts that users can load and use!
 
-In 0.116, we will be changing the way that we create Views in Lovelace. In the past, we had 2 views, a default view, and a panel view. When talking about adding Drag and Drop to Lovelace we decided we could do even better and start allowing custom view types.
+In 0.116, we will be changing the way that we create Views in Lovelace. In the past, we had 2 views, a default view and a panel view. When talking about adding Drag and Drop to Lovelace, we decided we could do even better and start allowing custom view types.
 
 Custom Developers will now be able to create a view that receives the following properties:
 
