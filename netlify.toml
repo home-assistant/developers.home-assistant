@@ -25,3 +25,9 @@
   to = "/docs/:splat"
   status = 301
   force = true
+
+[[redirects]]
+  from = "/docs/*.html"
+  to = "/docs/:splat"
+  status = 301
+  force = true
