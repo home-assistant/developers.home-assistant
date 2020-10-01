@@ -2,7 +2,7 @@
 author: Zack Barett
 authorURL: https://github.com/zsarnett
 authorTwitter: zsarnett
-title: "Lovelace: Lazy Loading More Info and Custom View Layouts"
+title: "Lovelace: Custom View Layouts"
 ---
 
 Custom Element developers can now create Custom View Layouts that users can load and use!
