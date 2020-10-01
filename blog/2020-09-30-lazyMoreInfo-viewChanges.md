@@ -26,14 +26,14 @@ The cards and badges will be already created and Hass will be updated on each ca
 
 Here is an example below: (note: this example does not have all of the properties but the necessities to show the example)
 
-```ts
+```js
 class MyNewView extends LitElement {
-  @property({ attribute: false }) public cards: Array<LovelaceCard | HuiErrorCard> = [];
+  public cards = [];
 
-  public setConfig(_config: LovelaceViewConfig): void {}
+  public setConfig(_config) {}
 
-  protected render(): TemplateResult {
-    return html`${this.cards.map((card) => card)}`;
+  protected render() {
+    return html`${this.cards.map((card) => html`<div>${card}</div>`)}`;
   }
 }
 ```
@@ -51,6 +51,20 @@ A user who downloads and installs your new Custom View can then use it via editi
 ```yaml
 - title: Home View
   type: custom:my-new-view
-  badges: ...
-  cards: ...
+  badges: [...]
+  cards: [...]
 ```
+
+For Custom Card developers that use something like this:
+
+```js
+const LitElement = Object.getPrototypeOf(customElements.get("hui-view"));
+```
+
+You will no longer be able to use the `hui-view` element to retrieve LitElement as it has been changed to be an `updatingElement`. Instead you can use:
+
+```js
+const LitElement = Object.getPrototypeOf(customElements.get("hui-masonry-view"));
+```
+
+But Note! This is not supported by HA. In the future this may not work to import LitElement.
