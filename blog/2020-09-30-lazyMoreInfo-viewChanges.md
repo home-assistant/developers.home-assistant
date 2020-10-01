@@ -28,9 +28,9 @@ Here is an example below: (note: this example does not have all of the propertie
 
 ```js
 class MyNewView extends LitElement {
-  public cards = [];
+  cards = [];
 
-  public setConfig(_config) {}
+  setConfig(_config) {}
 
   static get properties() {
     return { 
