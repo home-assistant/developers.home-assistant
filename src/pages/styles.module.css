@@ -12,10 +12,20 @@
 
 .heroTitle {
   font-size: 3rem;
+  color: #ffffff;
 }
 
 .heroTagline {
   font-size: 1.4rem;
+  color: #ffffff;
+}
+
+.heroLogo {
+  max-height: 16em;
+}
+
+a.heroText{
+  color: #ffffff;
 }
 
 @media screen and (max-width: 966px) {
