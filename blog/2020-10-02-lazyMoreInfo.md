@@ -25,7 +25,7 @@ helpers.importMoreInfoControl("light");
 
 We always try to make our frontend as fast as possible. Not only on your super fast desktop PC with fiber internet but also on a slow and cheap phone that only has 3G.
 
-1 of the things we try to optimize is loading our code. The less code we load the faster it is loaded, the faster we can start rendering the page. We also use less memory if we don't load everything.
+One of the things we try to optimize is loading our code. The less code we load the faster it is loaded, the faster we can start rendering the page. We also use less memory if we don't load everything.
 There is however a tradeoff, if we always want to only load the parts we need, we would have to be able to load every element separately. This would mean a lot of small network requests, which eventually is slower than loading a little more but in fewer requests, because of the overhead of a network request.
 
 So it is always a search for the right balance between chunk sizes and the number of chunks needed. The splitting of our code into chunks is done with a bundler. At the moment, we use Webpack for this.
