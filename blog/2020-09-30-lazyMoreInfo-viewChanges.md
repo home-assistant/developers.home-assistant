@@ -62,6 +62,18 @@ A user who downloads and installs your new Custom View can then use it via editi
   cards: [...]
 ```
 
+Custom Developers can add a `layout` property to each card that can store a key, position info, width, height, etc:
+
+```yaml
+- type: weather-card
+  layout:
+    key: 1234
+    width: 54px
+  entity: weather.my_weather
+```
+
+### Breaking Change
+
 For Custom Card developers that use something like this:
 
 ```js
