@@ -80,7 +80,7 @@ script/setup
 
 This will create a virtual environment and install all necessary requirements. You're now set! 
 
-Each time you start a new terminal session, you will need to activate your virutal environment:
+Each time you start a new terminal session, you will need to activate your virtual environment:
 
 ```shell
 source venv/bin/activate
