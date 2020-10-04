@@ -22,6 +22,15 @@ module.exports = {
     "api/websocket",
     {
       type: "category",
+      label: "Supervisor API",
+      items: [
+        "api/supervisor/endpoints",
+        "api/supervisor/models",
+        "api/supervisor/examples",
+      ],
+    },
+    {
+      type: "category",
       label: "Native App Integration",
       items: [
         "api/native-app-integration",
