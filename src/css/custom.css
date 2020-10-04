@@ -100,3 +100,52 @@ small {
 html[data-theme='dark'] .invertDark {
   filter: invert(1.0)
 }
+
+/* Custom summary styles for API endpoint definitions */
+summary.endpoint {
+  align-items: center;
+  background-color: var(--ifm-code-background);
+  border-radius: var(--ifm-code-border-radius);
+  color: var(--ifm-code-color);
+  cursor: pointer;
+  display: flex;
+  font-family: var(--ifm-font-family-monospace);
+  margin: 4px 0;
+  padding: var(--ifm-code-padding-vertical) var(--ifm-code-padding-horizontal);
+}
+summary.endpoint::-webkit-details-marker {
+  display: none;
+}
+summary.endpoint:before {
+  border-radius: 8px;
+  color: white;
+  display: block;
+  font-weight: bold;
+  margin-right: 12px;
+  padding: 4px;
+  text-align: center;
+  width: 75px;
+}
+summary.endpoint.post:before {
+  content: "POST";
+  background-color: var(--ifm-color-success);
+}
+summary.endpoint.get:before {
+  content: "GET";
+  background-color: var(--ifm-color-info);
+}
+summary.endpoint.delete:before {
+  content: "DELETE";
+  background-color: var(--ifm-color-danger)
+}
+summary.endpoint.protected:after {
+  content: "🔒";
+  margin: auto;
+  margin-right: 0;
+}
+summary.endpoint.unprotected:after {
+  content: "🔓";
+  margin: auto;
+  margin-right: 0;
+}
+/* Custom summary styles for API endpoint definitions */
