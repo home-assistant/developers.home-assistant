@@ -66,7 +66,7 @@ some_key:
 
 ## Renaming Pages
 
-It can happen that an integration or platform is renamed, in this case the documentation needs to be updated as well. If you rename a page, add an entry to the `_redirects` as shown below. Please consider to add details, like release number or old integration/platform name, to the page in a [note](/documenting/create-page.md/#html).
+It can happen that an integration or platform is renamed, in this case the documentation needs to be updated as well. If you rename a page, add an entry to the `_redirects` file as shown below. Please consider to add details, like release number or old integration/platform name, to the page in a [note](/documenting/create-page.md/#html).
 
 ```text
 ---
