@@ -18,6 +18,10 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1"
   },
+  "resolutions": {
+    "@docusaurus/core/**/selfsigned": "1.10.8",
+    "@docusaurus/preset-classic/**/fbjs": "2.0.0"
+  },
   "browserslist": {
     "production": [
       ">0.2%",
