@@ -1139,6 +1139,56 @@ Update the DNS plugin
 
 </details>
 
+### Docker
+
+<details>
+<summary className="endpoint get protected">/docker/registries</summary>
+
+Get all configured container registries, this returns a dict with the registry hostname as the key, and a dictionary containing the username configured for that registry.
+
+**Example response:**
+
+```json
+{
+  "registry.example.com": {
+    "username": "AwesomeUser"
+  }
+}
+```
+
+</details>
+
+<details>
+<summary className="endpoint post protected">/docker/registries</summary>
+
+Add a new container registry.
+
+**Payload:**
+
+key | type | description
+-- | -- | --
+hostname | dictionary | A dictionary containing `username` and `password` keys for the registry.
+
+**Example payload:**
+
+```json
+{
+  "registry.example.com": {
+    "username": "AwesomeUser",
+    "password": "MySuperStrongPassword!",
+  }
+}
+```
+
+</details>
+
+<details>
+<summary className="endpoint delete protected">/docker/registries/[registry]</summary>
+
+Delete a registry from the configured container registries.
+
+</details>
+
 ### Hardware
 
 <details>
@@ -2120,6 +2170,7 @@ Some of the endpoints uses placeholders indicated with `[]` in the endpoint URL.
 | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | addon       | The slug for the addon, to get the slug you can call `/addons`, to call endpoints for the add-on calling the endpoints you can use `self`as the slug. |
 | application | The name of a application, call `/audio/info` to get the correct name                                                                                 |
+| registry    | A registry hostname defined in the container registry configuration, to get the hostname you can call `/docker/registries`
 | interface   | A valid interface name, example `eth0`, to get the interface name you can call `/network/info`                                                        |
 | service     | The service name for a service on the host.                                                                                                           |
 | snapshot    | A valid snapshot slug, example `skuwe823`, to get the slug you can call `/snapshots`                                                                  |
