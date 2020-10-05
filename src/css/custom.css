@@ -105,6 +105,7 @@ html[data-theme='dark'] .invertDark {
 summary.endpoint {
   align-items: center;
   background-color: var(--ifm-code-background);
+  word-break: break-all;
   border-radius: var(--ifm-code-border-radius);
   color: var(--ifm-code-color);
   cursor: pointer;
