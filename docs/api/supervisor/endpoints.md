@@ -537,10 +537,10 @@ Mute input devices
 
 **Payload:**
 
-| key    | type    | optional | description         |
-| ------ | ------- | -------- | ------------------- |
-| index  | string  | False    | TODO: What is this? |
-| active | boolean | False    | `true` if muted     |
+| key    | type    | optional | description             |
+| ------ | ------- | -------- | ----------------------- |
+| index  | string  | False    | The index of the device |
+| active | boolean | False    | `true` if muted         |
 
 </details>
 
@@ -551,10 +551,10 @@ Mute input for a specific application
 
 **Payload:**
 
-| key    | type    | optional | description         |
-| ------ | ------- | -------- | ------------------- |
-| index  | string  | False    | TODO: What is this? |
-| active | boolean | False    | `true` if muted     |
+| key    | type    | optional | description             |
+| ------ | ------- | -------- | ----------------------- |
+| index  | string  | False    | The index of the device |
+| active | boolean | False    | `true` if muted         |
 
 </details>
 
@@ -565,10 +565,10 @@ Mute output devices
 
 **Payload:**
 
-| key    | type    | optional | description         |
-| ------ | ------- | -------- | ------------------- |
-| index  | string  | False    | TODO: What is this? |
-| active | boolean | False    | `true` if muted     |
+| key    | type    | optional | description             |
+| ------ | ------- | -------- | ----------------------- |
+| index  | string  | False    | The index of the device |
+| active | boolean | False    | `true` if muted         |
 
 </details>
 
@@ -579,10 +579,10 @@ Mute output for a specific application
 
 **Payload:**
 
-| key    | type    | optional | description         |
-| ------ | ------- | -------- | ------------------- |
-| index  | string  | False    | TODO: What is this? |
-| active | boolean | False    | `true` if muted     |
+| key    | type    | optional | description             |
+| ------ | ------- | -------- | ----------------------- |
+| index  | string  | False    | The index of the device |
+| active | boolean | False    | `true` if muted         |
 
 </details>
 
@@ -658,7 +658,7 @@ Set the input volume
 
 | key    | type   | optional | description                         |
 | ------ | ------ | -------- | ----------------------------------- |
-| index  | string | False    | TODO: What is this?                 |
+| index  | string | False    | The index of the device             |
 | volume | float  | False    | The volume (between `0.0`and `1.0`) |
 
 </details>
@@ -672,7 +672,7 @@ Set the input volume for a specific application
 
 | key    | type   | optional | description                         |
 | ------ | ------ | -------- | ----------------------------------- |
-| index  | string | False    | TODO: What is this?                 |
+| index  | string | False    | The index of the device             |
 | volume | float  | False    | The volume (between `0.0`and `1.0`) |
 
 </details>
@@ -686,7 +686,7 @@ Set the output volume
 
 | key    | type   | optional | description                         |
 | ------ | ------ | -------- | ----------------------------------- |
-| index  | string | False    | TODO: What is this?                 |
+| index  | string | False    | The index of the device             |
 | volume | float  | False    | The volume (between `0.0`and `1.0`) |
 
 </details>
@@ -700,7 +700,7 @@ Set the output volume for a specific application
 
 | key    | type   | optional | description                         |
 | ------ | ------ | -------- | ----------------------------------- |
-| index  | string | False    | TODO: What is this?                 |
+| index  | string | False    | The index of the device             |
 | volume | float  | False    | The volume (between `0.0`and `1.0`) |
 
 </details>
@@ -839,8 +839,8 @@ Returns information about the Home Assistant core
 | ssl            | boolean        | `true` if Home Assistant is using SSL                      |
 | watchdog       | boolean        | `true` if watchdog is enabled                              |
 | wait_boot      | int            | Max time to wait during boot                               |
-| audio_input    | string or null | TODO: Add description                                      |
-| audio_output   | string or null | TODO: Add description                                      |
+| audio_input    | string or null | The description of the audio input device                  |
+| audio_output   | string or null | The description of the audio output device                 |
 
 **Example response:**
 
@@ -1165,9 +1165,9 @@ Add a new container registry.
 
 **Payload:**
 
-key | type | description
--- | -- | --
-hostname | dictionary | A dictionary containing `username` and `password` keys for the registry.
+| key      | type       | description                                                              |
+| -------- | ---------- | ------------------------------------------------------------------------ |
+| hostname | dictionary | A dictionary containing `username` and `password` keys for the registry. |
 
 **Example payload:**
 
@@ -1175,7 +1175,7 @@ hostname | dictionary | A dictionary containing `username` and `password` keys f
 {
   "registry.example.com": {
     "username": "AwesomeUser",
-    "password": "MySuperStrongPassword!",
+    "password": "MySuperStrongPassword!"
   }
 }
 ```
@@ -1260,8 +1260,8 @@ Return information about the host.
 
 | key              | type           | description                               |
 | ---------------- | -------------- | ----------------------------------------- |
-| chassis          | string or null | TODO: What is this?                       |
-| cpe              | string or null | TODO: What is this?                       |
+| chassis          | string or null | The chassis type                          |
+| cpe              | string or null | The local CPE                             |
 | deployment       | string or null | The deployment stage of the OS if any     |
 | disk_total       | float          | Total space of the disk in MB             |
 | disk_used        | float          | Used space of the disk in MB              |
@@ -2038,7 +2038,7 @@ Returns information about the supervisor
 | ip_address          | string       | The internal docker IP address to the supervisor              |
 | wait_boot           | int          | Max time to wait during boot                                  |
 | debug               | bool         | Debug is active                                               |
-| debug_block         | bool         | TODO: Add description                                         |
+| debug_block         | bool         | `true` if debug block is enabled                               |
 | diagnostics         | bool or null | Sending diagnostics is enabled                                |
 | addons              | list         | A list of installed [Addon models](./models#addon)            |
 | addons_repositories | list         | A list of add-on repository URL's as strings                  |
@@ -2171,7 +2171,7 @@ Some of the endpoints uses placeholders indicated with `[]` in the endpoint URL.
 | addon       | The slug for the addon, to get the slug you can call `/addons`, to call endpoints for the add-on calling the endpoints you can use `self`as the slug. |
 | application | The name of a application, call `/audio/info` to get the correct name                                                                                 |
 | interface   | A valid interface name, example `eth0`, to get the interface name you can call `/network/info`                                                        |
-| registry    | A registry hostname defined in the container registry configuration, to get the hostname you can call `/docker/registries`|
+| registry    | A registry hostname defined in the container registry configuration, to get the hostname you can call `/docker/registries`                            |
 | service     | The service name for a service on the host.                                                                                                           |
 | snapshot    | A valid snapshot slug, example `skuwe823`, to get the slug you can call `/snapshots`                                                                  |
 | uuid        | The UUID of a discovery service, to get the UUID you can call `/discovery`                                                                            |
