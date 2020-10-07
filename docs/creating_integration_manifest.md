@@ -175,7 +175,7 @@ Mqtt discovery works by subscribing to MQTT topics specified in the manifest.jso
 {
   "mqtt": [
     "tasmota/discovery/#"
-  }
+  ]
 }
 ```
 
