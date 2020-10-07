@@ -1142,6 +1142,33 @@ Update the DNS plugin
 ### Docker
 
 <details>
+<summary className="endpoint get protected">/docker/info</summary>
+
+Returns information about the docker instance.
+
+**Returned data:**
+
+key | type | description
+-- | -- | --
+version | string | The version of the docker engine
+storage | string | The storage type
+logging | string | The logging type
+registries | dictionary | A dictionary of dictionaries containing `username` and `password` keys for registries.
+
+**Example response:**
+
+```json
+{
+  "version": "1.0.1",
+  "storage": "overlay2",
+  "logging": "journald",
+  "registries": {}
+}
+```
+
+</details>
+
+<details>
 <summary className="endpoint get protected">/docker/registries</summary>
 
 Get all configured container registries, this returns a dict with the registry hostname as the key, and a dictionary containing the username configured for that registry.
