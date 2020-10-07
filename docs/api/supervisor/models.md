@@ -157,8 +157,8 @@ These models are describing objects that are getting returned from the superviso
 | key            | type  | description                               |
 | -------------- | ----- | ----------------------------------------- |
 | cpu_percent    | float | The percentage of the CPU that is used    |
-| memory_usage   | int   | The current memory usage                  |
-| memory_limit   | int   | The max allowed memory usage              |
+| memory_usage   | int   | The current memory usage in bytes         |
+| memory_limit   | int   | The max allowed memory usage in bytes     |
 | memory_percent | float | The percentage of the memory that is used |
 | network_tx     | int   | Network transmission usage                |
 | network_rx     | int   | Network receiver usage                    |

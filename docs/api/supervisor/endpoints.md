@@ -20,8 +20,8 @@ Return overview information about add-ons and add-on repositories.
 
 | key          | type | description                                        |
 | ------------ | ---- | -------------------------------------------------- |
-| addons       | list | A list of [Addon models](./models#addon)           |
-| repositories | list | A list of [Repository models](./models#repository) |
+| addons       | list | A list of [Addon models](api/supervisor/models.md#addon)           |
+| repositories | list | A list of [Repository models](api/supervisor/models.md#repository) |
 
 **Example response:**
 
@@ -349,7 +349,7 @@ Start a add-on
 <details>
 <summary className="endpoint get protected">/addons/[addon]/stats</summary>
 
-Returns a [Stats model](./models#stats) for the add-on.
+Returns a [Stats model](api/supervisor/models.md#stats) for the add-on.
 
 **Example response:**
 
@@ -438,7 +438,7 @@ Return information about the audio plugin.
 | host           | string     | The IP address of the plugin    |
 | version        | string     | The installed observer version  |
 | version_latest | string     | The latest published version    |
-| audio          | dictionary | A [Audio model](./models#audio) |
+| audio          | dictionary | A [Audio model](api/supervisor/models.md#audio) |
 
 **Example response:**
 
@@ -617,7 +617,7 @@ Restart the audio plugin
 <details>
 <summary className="endpoint get protected">/audio/stats</summary>
 
-Returns a [Stats model](./models#stats) for the audio plugin.
+Returns a [Stats model](api/supervisor/models.md#stats) for the audio plugin.
 
 **Example response:**
 
@@ -764,7 +764,7 @@ Returns information about the CLI plugin
 <details>
 <summary className="endpoint get protected">/cli/stats</summary>
 
-Returns a [Stats model](./models#stats) for the CLI plugin.
+Returns a [Stats model](api/supervisor/models.md#stats) for the CLI plugin.
 
 **Example response:**
 
@@ -921,7 +921,7 @@ Start the Home Assistant core container
 <details>
 <summary className="endpoint get protected">/core/stats</summary>
 
-Returns a [Stats model](./models#stats) for the Home Assistant core.
+Returns a [Stats model](api/supervisor/models.md#stats) for the Home Assistant core.
 
 **Example response:**
 
@@ -978,7 +978,7 @@ Return information about enabled discoveries.
 
 | key       | type       | description                                                                     |
 | --------- | ---------- | ------------------------------------------------------------------------------- |
-| discovery | list       | A list of [Discovery models](./models#discovery)                                |
+| discovery | list       | A list of [Discovery models](api/supervisor/models.md#discovery)                                |
 | services  | dictionary | A dictionary of services that contains a list of add-ons that have that serive. |
 
 **Example response:**
@@ -1026,7 +1026,7 @@ Create a discovery service
 <details>
 <summary className="endpoint get protected">/discovery/[uuid]</summary>
 
-Get a [discovery model](./models#discovery) for a UUID.
+Get a [discovery model](api/supervisor/models.md#discovery) for a UUID.
 
 </details>
 
@@ -1107,7 +1107,7 @@ Restart the DNS plugin
 <details>
 <summary className="endpoint get protected">/dns/stats</summary>
 
-Returns a [Stats model](./models#stats) for the dns plugin.
+Returns a [Stats model](api/supervisor/models.md#stats) for the dns plugin.
 
 **Example response:**
 
@@ -1383,7 +1383,7 @@ Get information about host services.
 
 | key      | description                                                  |
 | -------- | ------------------------------------------------------------ |
-| services | A dictionary of [Host service models](./models#host-service) |
+| services | A dictionary of [Host service models](api/supervisor/models.md#host-service) |
 
 **Example response:**
 
@@ -1417,7 +1417,7 @@ Shutdown the host
 
 | key    | type       | description                                  |
 | ------ | ---------- | -------------------------------------------- |
-| panels | dictionary | dictionary of [Panel models](./models#panel) |
+| panels | dictionary | dictionary of [Panel models](api/supervisor/models.md#panel) |
 
 **Example response:**
 
@@ -1540,7 +1540,7 @@ Restart the multicast plugin.
 <details>
 <summary className="endpoint get protected">/multicast/stats</summary>
 
-Returns a [Stats model](./models#stats) for the multicast plugin.
+Returns a [Stats model](api/supervisor/models.md#stats) for the multicast plugin.
 
 **Example response:**
 
@@ -1583,7 +1583,7 @@ Get network information.
 
 | key        | description                                                            |
 | ---------- | ---------------------------------------------------------------------- |
-| interfaces | A dictionary of [Network interface models](./models#network-interface) |
+| interfaces | A dictionary of [Network interface models](api/supervisor/models.md#network-interface) |
 
 **Example response:**
 
@@ -1608,7 +1608,7 @@ Get network information.
 <details>
 <summary className="endpoint get protected">/network/[interface]/info</summary>
 
-Returns a [Network interface model](./models#network-interface) for a specific network interface.
+Returns a [Network interface model](api/supervisor/models.md#network-interface) for a specific network interface.
 
 </details>
 
@@ -1632,7 +1632,7 @@ Update the settings for a network interface.
 If you change the `address` or `gateway` you may need to reconnect to the new address
 :::
 
-When the call is complete it returns the changed [Network interface model](./models#network-interface).
+When the call is complete it returns the changed [Network interface model](api/supervisor/models.md#network-interface).
 
 **Example response:**
 
@@ -1680,7 +1680,7 @@ Returns information about the observer plugin
 <details>
 <summary className="endpoint get protected">/observer/stats</summary>
 
-Returns a [Stats model](./models#stats) for the observer plugin.
+Returns a [Stats model](api/supervisor/models.md#stats) for the observer plugin.
 
 **Example response:**
 
@@ -1770,7 +1770,7 @@ Update Home Assistant OS
 
 | key      | type       | description                                      |
 | -------- | ---------- | ------------------------------------------------ |
-| services | dictionary | dictionary of [Service models](./models#service) |
+| services | dictionary | dictionary of [Service models](api/supervisor/models.md#service) |
 
 **Example response:**
 
@@ -1901,7 +1901,7 @@ Deletes the service definitions
 <details>
 <summary className="endpoint get protected">/snapshots</summary>
 
-Return a list of [Snapshot models](./models#snapshot)
+Return a list of [Snapshot models](api/supervisor/models.md#snapshot)
 
 **Example response:**
 
@@ -2001,7 +2001,7 @@ Download the snapshot file with the given slug.
 <details>
 <summary className="endpoint get protected">/snapshots/[snapshot]/info</summary>
 
-Returns a [Snapshot details model](./models#snapshot-details) for the add-on.
+Returns a [Snapshot details model](api/supervisor/models.md#snapshot-details) for the add-on.
 
 </details>
 
@@ -2067,7 +2067,7 @@ Returns information about the supervisor
 | debug               | bool         | Debug is active                                               |
 | debug_block         | bool         | `true` if debug block is enabled                               |
 | diagnostics         | bool or null | Sending diagnostics is enabled                                |
-| addons              | list         | A list of installed [Addon models](./models#addon)            |
+| addons              | list         | A list of installed [Addon models](api/supervisor/models.md#addon)            |
 | addons_repositories | list         | A list of add-on repository URL's as strings                  |
 
 **Example response:**
@@ -2157,7 +2157,7 @@ Repair docker overlay issues, and lost images.
 <details>
 <summary className="endpoint get protected">/supervisor/stats</summary>
 
-Returns a [Stats model](./models#stats) for the supervisor.
+Returns a [Stats model](api/supervisor/models.md#stats) for the supervisor.
 
 **Example response:**
 
