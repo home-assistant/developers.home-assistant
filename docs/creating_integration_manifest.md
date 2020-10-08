@@ -169,7 +169,7 @@ When a discovery info is routed to your integration because of this entry in you
 
 If your integration supports discovery via MQTT, you can add the topics used for discovery. If the user has the `mqtt` integration loaded, it will load the `mqtt` step of your integration's config flow when it is discovered.
 
-Mqtt discovery works by subscribing to MQTT topics specified in the manifest.json.
+MQTT discovery works by subscribing to MQTT topics specified in the manifest.json.
 
 ```json
 {
