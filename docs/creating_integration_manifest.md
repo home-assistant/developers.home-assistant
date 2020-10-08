@@ -165,6 +165,20 @@ Discovery via HomeKit does not mean that you have to talk the HomeKit protocol t
 
 When a discovery info is routed to your integration because of this entry in your manifest, the discovery info is no longer routed to integrations that listen to the HomeKit zeroconf type.
 
+## MQTT
+
+If your integration supports discovery via MQTT, you can add the topics used for discovery. If the user has the `mqtt` integration loaded, it will load the `mqtt` step of your integration's config flow when it is discovered.
+
+MQTT discovery works by subscribing to MQTT topics specified in the manifest.json.
+
+```json
+{
+  "mqtt": [
+    "tasmota/discovery/#"
+  ]
+}
+```
+
 ## Integration Quality Scale
 
 The [Integration Quality Scale](https://www.home-assistant.io/docs/quality_scale/) scores an integration on the code quality and user experience. Each level of the quality scale consists of a list of requirements. If an integration matches all requirements, it's considered to have reached that level.

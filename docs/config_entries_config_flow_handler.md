@@ -49,11 +49,12 @@ There are a few step names reserved for system use:
 
 | Step name   | Description                                                                                                                                                   |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `discovery` | _DEPRECATED_ Invoked if your integration has been discovered by the discovery integration.                                                                    |
+| `homekit`   | Invoked if your integration has been discovered via HomeKit as specified [using `homekit` in the manifest](creating_integration_manifest.md#homekit).         |
+| `mqtt`      | Invoked if your integration has been discovered via MQTT as specified [using `mqtt` in the manifest](creating_integration_manifest.md#mqtt).             |
+| `ssdp`      | Invoked if your integration has been discovered via SSDP/uPnP as specified [using `ssdp` in the manifest](creating_integration_manifest.md#ssdp).             |
 | `user`      | Invoked when a user initiates a flow via the user interface.                                                                                                  |
 | `zeroconf`  | Invoked if your integration has been discovered via Zeroconf/mDNS as specified [using `zeroconf` in the manifest](creating_integration_manifest.md#zeroconf). |
-| `homekit`   | Invoked if your integration has been discovered via HomeKit as specified [using `homekit` in the manifest](creating_integration_manifest.md#homekit).         |
-| `ssdp`      | Invoked if your integration has been discovered via SSDP/uPnP as specified [using `ssdp` in the manifest](creating_integration_manifest.md#ssdp).             |
-| `discovery` | _DEPRECATED_ Invoked if your integration has been discovered by the discovery integration.                                                                    |
 
 ## Unique IDs
 
