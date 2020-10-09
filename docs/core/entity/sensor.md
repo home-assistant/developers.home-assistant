@@ -31,3 +31,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | timestamp | ISO8601 | Timestamp.
 | power | W,kW | Power.
 | pressure | hPa,mbar | Pressure.
+| current | A | Current.
+| energy | Wh,kWh | Energy.
+| power_factor | % | Power Factor.
+| voltage | V | Voltage.
