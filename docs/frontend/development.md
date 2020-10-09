@@ -33,6 +33,23 @@ frontend:
   development_repo: /path/to/hass/frontend/
 ```
 
+If you are using Visual Studio Code with devcontainers for Home Assistant, you need to mount the `frontend` directory into the container. Add the following section to `.devcontainer/devcontainer.json`:
+
+```json
+"mounts": [
+  "source=/path/to/hass/frontend,target=/workspaces/frontend,type=bind,consistency=cached"
+]
+```
+
+The Home Assistant's devcontainer needs to get rebuit via the `docker-build` [task](/development_environment.md#tasks), and the `configuration.yaml` should point to the path inside the container:
+
+```yaml
+frontend:
+  development_repo: /workspaces/frontend/
+```
+
+The change to `.devcontainer/devcontainer.json` should be excluded from any PR as it contains your local path to the `frontend` repository.
+
 ### Installing Node.js
 
 Node.js is required to build the frontend. The preferred method of installing node.js is with [nvm](https://github.com/creationix/nvm). Install nvm using the instructions in the [README](https://github.com/creationix/nvm#install-script), and install the correct node.js by running the following command:
