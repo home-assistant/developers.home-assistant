@@ -37,11 +37,18 @@ If you are using Visual Studio Code with devcontainers for Home Assistant, you n
 
 ```json
 "mounts": [
-  "source=/path/to/hass/frontend/,target=/workspaces/frontend,type=bind,consistency=cached"
+  "source=/path/to/hass/frontend,target=/workspaces/frontend,type=bind,consistency=cached"
 ]
 ```
 
-The Home Assistant's devcontainer needs to get rebuit via the `docker-build` [task](/development_environment.md#tasks).
+The Home Assistant's devcontainer needs to get rebuit via the `docker-build` [task](/development_environment.md#tasks), and the `configuration.yaml` should point to the path inside container:
+
+```yaml
+frontend:
+  development_repo: /workspaces/frontend/
+```
+
+The change to `.devcontainer/devcontainer.json` should be excluded from any PR as it contains your individual path to the `frontend` repository.
 
 ### Installing Node.js
 
