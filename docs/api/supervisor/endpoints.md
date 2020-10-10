@@ -2006,7 +2006,7 @@ Returns a [Snapshot details model](api/supervisor/models.md#snapshot-details) fo
 </details>
 
 <details>
-<summary className="endpoint post protected">/snapshots/[snapshot]/remove</summary>
+<summary className="endpoint delete protected">/snapshots/[snapshot]</summary>
 
 Removes the snapshot file with the given slug.
 
