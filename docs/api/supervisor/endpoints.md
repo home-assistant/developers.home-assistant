@@ -1591,6 +1591,7 @@ Get network information.
 {
   "interfaces": {
     "eth0": {
+      "interface": "eth0",
       "ip_address": "192.168.1.100/24",
       "gateway": "192.168.1.1",
       "id": "Wired connection 1",
@@ -2193,12 +2194,12 @@ Update the supervisor
 
 Some of the endpoints uses placeholders indicated with `[]` in the endpoint URL.
 
-| placeholder | description                                                                                                                                           |
-| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| addon       | The slug for the addon, to get the slug you can call `/addons`, to call endpoints for the add-on calling the endpoints you can use `self`as the slug. |
-| application | The name of a application, call `/audio/info` to get the correct name                                                                                 |
-| interface   | A valid interface name, example `eth0`, to get the interface name you can call `/network/info`                                                        |
-| registry    | A registry hostname defined in the container registry configuration, to get the hostname you can call `/docker/registries`                            |
-| service     | The service name for a service on the host.                                                                                                           |
-| snapshot    | A valid snapshot slug, example `skuwe823`, to get the slug you can call `/snapshots`                                                                  |
-| uuid        | The UUID of a discovery service, to get the UUID you can call `/discovery`                                                                            |
+| placeholder | description                                                                                                                                            |
+| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------|
+| addon       | The slug for the addon, to get the slug you can call `/addons`, to call endpoints for the add-on calling the endpoints you can use `self`as the slug.  |
+| application | The name of a application, call `/audio/info` to get the correct name                                                                                  |
+| interface   | A valid interface name, example `eth0`, to get the interface name you can call `/network/info`. You can use `default` for info to get the primary data |
+| registry    | A registry hostname defined in the container registry configuration, to get the hostname you can call `/docker/registries`                             |
+| service     | The service name for a service on the host.                                                                                                            |
+| snapshot    | A valid snapshot slug, example `skuwe823`, to get the slug you can call `/snapshots`                                                                   |
+| uuid        | The UUID of a discovery service, to get the UUID you can call `/discovery`                                                                             |
