@@ -24,11 +24,11 @@ Running `tox` will run unit tests against the locally available Python releases,
 
 `tox` uses virtual environments under the hood to create isolated testing environments. The `tox` virtual environments will get out-of-date when requirements change, causing test errors. Run `tox -r` to tell `tox` to recreate the virtual environments.
 
-macOS users may see an `Error creating virtualenv` when runnng `tox`. If this occurs, install the [tox-venv](https://pypi.org/project/tox-venv/) package using the command `pip install tox-venv` and try again.
+macOS users may see an `Error creating virtualenv` when running `tox`. If this occurs, install the [tox-venv](https://pypi.org/project/tox-venv/) package using the command `pip install tox-venv` and try again.
 
 ### Adding new dependencies to test environment
 
-If you are working on tests for an integeration and you need the dependencies available inside the `tox` environment, update the list inside `script/gen_requirements_all.py`. Then run the script and then run `tox -r` to recreate the virtual environments.
+If you are working on tests for an integration and you need the dependencies available inside the `tox` environment, update the list inside `script/gen_requirements_all.py`. Then run the script and then run `tox -r` to recreate the virtual environments.
 
 ### Running single tests using `tox`
 

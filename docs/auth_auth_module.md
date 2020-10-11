@@ -68,4 +68,4 @@ In this example, user will first select from `homeassistant` or `legacy_api_pass
 
 ## Validation session
 
-Not like auth provider, auth module use session to manage the validation. After auth provider validated, mfa module will create a validation session, include an experiation time and user_id from auth provider validate result. Mutli-factor auth module will not only verify the user input, but also verify the session is not expired. The validation session data is stored in your configuration directory.
+Not like auth provider, auth module use session to manage the validation. After auth provider validated, mfa module will create a validation session, include an expiration time and user_id from auth provider validate result. Multi-factor auth module will not only verify the user input, but also verify the session is not expired. The validation session data is stored in your configuration directory.

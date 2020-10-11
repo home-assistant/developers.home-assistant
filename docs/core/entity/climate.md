@@ -61,7 +61,7 @@ The HVAC action describes the _current_ action. This is different from the mode,
 | `CURRENT_HVAC_OFF`  | Device is turned off. |
 | `CURRENT_HVAC_HEAT` | Device is heating.    |
 | `CURRENT_HVAC_COOL` | Device is cooling.    |
-| `CURRENT_HVAC_DRY`  | Device is dring.      |
+| `CURRENT_HVAC_DRY`  | Device is drying.      |
 | `CURRENT_HVAC_IDLE` | Device is idle.       |
 
 ### Presets
