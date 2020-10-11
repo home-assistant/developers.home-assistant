@@ -979,7 +979,7 @@ Return information about enabled discoveries.
 | key       | type       | description                                                                     |
 | --------- | ---------- | ------------------------------------------------------------------------------- |
 | discovery | list       | A list of [Discovery models](api/supervisor/models.md#discovery)                                |
-| services  | dictionary | A dictionary of services that contains a list of add-ons that have that serive. |
+| services  | dictionary | A dictionary of services that contains a list of add-ons that have that service. |
 
 **Example response:**
 
@@ -1464,7 +1464,7 @@ Returns a dict with selected keys from other `/*/info` endpoints.
 | homeassistant    | string         | The installed version of Home Assistant                      |
 | hassos           | string or null | The version of Home Assistant OS or null                     |
 | docker           | string         | The docker version on the host                               |
-| hostname         | string         | The hostname on the hsot                                     |
+| hostname         | string         | The hostname on the host                                     |
 | operating_system | string         | The operating system on the host                             |
 | features         | list           | A list ov available features on the host                     |
 | machine          | string         | The machine type                                             |
