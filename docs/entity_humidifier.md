@@ -42,7 +42,7 @@ Supported features constants are combined using the bitwise or (`|`) operator.
 
 | Name                      | Description                                |
 | ------------------------- | ------------------------------------------ |
-| `SUPPORT_MODES`           | The device supports defferent modes.       |
+| `SUPPORT_MODES`           | The device supports different modes.       |
 
 
 ## Methods

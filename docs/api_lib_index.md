@@ -31,7 +31,7 @@ Our library will consist of two different parts:
 
 ## Trying your library inside Home Assistant
 
-You will need to run an editable version of your library if you want to try your library in Home Assistant before it is publised to PyPI.
+You will need to run an editable version of your library if you want to try your library in Home Assistant before it is published to PyPI.
 
 Do so by going to your Home Assistant development environment, activating the virtual environment and typing:
 

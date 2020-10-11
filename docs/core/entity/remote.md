@@ -14,7 +14,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 ## Supported Features
 
-| Constant | Description 
+| Constant | Description
 | -------- | -----------
 | `SUPPORT_LEARN_COMMAND` | Entity allows learning commands from devices.
 

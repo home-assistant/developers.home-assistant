@@ -23,7 +23,7 @@ A light entity controls the brightness, hue and saturation color value, white va
 
 ## Support Feature
 
-| Constant | Description 
+| Constant | Description
 |----------|-----------------------
 | `SUPPORT_BRIGHTNESS` | Controls the brightness of a light source
 | `SUPPORT_COLOR` | Controls the color a light source shows
