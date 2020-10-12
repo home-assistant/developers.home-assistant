@@ -2198,7 +2198,7 @@ Some of the endpoints uses placeholders indicated with `[]` in the endpoint URL.
 | ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------|
 | addon       | The slug for the addon, to get the slug you can call `/addons`, to call endpoints for the add-on calling the endpoints you can use `self`as the slug.  |
 | application | The name of a application, call `/audio/info` to get the correct name                                                                                  |
-| interface   | A valid interface name, example `eth0`, to get the interface name you can call `/network/info`. You can use `default` for info to get the primary data |
+| interface   | A valid interface name, example `eth0`, to get the interface name you can call `/network/info`. You can use `default` to get the primary interface |
 | registry    | A registry hostname defined in the container registry configuration, to get the hostname you can call `/docker/registries`                             |
 | service     | The service name for a service on the host.                                                                                                            |
 | snapshot    | A valid snapshot slug, example `skuwe823`, to get the slug you can call `/snapshots`                                                                   |
