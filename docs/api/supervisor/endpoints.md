@@ -1471,6 +1471,7 @@ Returns a dict with selected keys from other `/*/info` endpoints.
 | arch             | string         | The architecture on the host                                 |
 | supported_arch   | list           | A list of supported host architectures                       |
 | supported        | boolean        | `true` if the environment is supported                       |
+| unsupported      | list        | A list of flags that have marked the installation as unsupported (container, dbus, docker_configuration, docker_version, lxc, network_manager, os, privileged, systemd)|
 | channel          | string         | The active channel (stable, beta, dev)                       |
 | logging          | string         | The active log level (debug, info, warning, error, critical) |
 | timezone         | string         | The current timezone                                         |
@@ -1490,6 +1491,7 @@ Returns a dict with selected keys from other `/*/info` endpoints.
   "arch": "amd64",
   "supported_arch": ["amd64"],
   "supported": true,
+  "unsupported": [],
   "channel": "stable",
   "logging": "info",
   "timezone": "Europe/Tomorrowland"
@@ -2061,6 +2063,7 @@ Returns information about the supervisor
 | timezone            | string       | The current timezone                                          |
 | healthy             | bool         | The supervisor is in a healthy state                          |
 | supported           | bool         | The environment is supported                                  |
+| unsupported      | list        | A list of flags that have marked the installation as unsupported (container, dbus, docker_configuration, docker_version, lxc, network_manager, os, privileged, systemd)|
 | logging             | string       | The current log level (debug, info, warning, error, critical) |
 | ip_address          | string       | The internal docker IP address to the supervisor              |
 | wait_boot           | int          | Max time to wait during boot                                  |
