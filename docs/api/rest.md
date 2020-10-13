@@ -499,7 +499,7 @@ curl -X POST -H "Authorization: Bearer ABCDEFGH" \
 
 #### POST /api/events/&lt;event_type>
 
-Fires an event with event_type
+Fires an event with event_type. Please be mindful of the data structure as mentioned in the [Data Docs](https://data.home-assistant.io/docs/events/#database-table).
 
 You can pass an optional JSON object to be used as `event_data`.
 
