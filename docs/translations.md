@@ -11,10 +11,6 @@ Translations for Home Assistant are managed through [Lokalise](https://lokalise.
 
 For more information about the translation workflow, please see the [Lokalise translation workflow documents](https://docs.lokalise.com/en/collections/652216-translation-workflow).
 
-:::info
-The translation of the Home Assistant frontend is still a work in progress. More phrases will be available for translation soon.
-:::
-
 ## Translation placeholders
 
 Some translation strings will contain special placeholders that will be replaced later. Placeholders shown in square brackets `[]` are [Lokalise key references](https://docs.lokalise.com/en/articles/1400528-key-referencing). These are primarily used to link translation strings that will be duplicated. Different languages may not have the same duplicates as English, and are welcome to link duplicate translations that are not linked in English. Placeholders shown in curly brackets `{}` are [translation arguments](https://formatjs.io/docs/core-concepts/icu-syntax/) that will be replaced with a live value when Home Assistant is running. Any translation argument placeholders present in the original string must be included in the translated string. These may include special syntax for defining plurals or other replacement rules. The linked format.js guide explains the syntax for adding plural definitions and other rules.
