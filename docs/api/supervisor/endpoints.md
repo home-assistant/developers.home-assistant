@@ -2084,6 +2084,7 @@ Returns information about the supervisor
   "timezone": "TIMEZONE",
   "healthy": true,
   "supported": false,
+  "unsupported": [],
   "logging": "debug",
   "ip_address": "172.0.0.2",
   "wait_boot": 800,
