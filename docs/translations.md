@@ -1,5 +1,5 @@
 ---
-title: "Translation"
+title: "Contributing Translation"
 ---
 
 Translations for Home Assistant are managed through [Lokalise](https://lokalise.com/), an online translation management tool. Our translations are split between four projects: a backend project for platform-specific translations, a frontend project for UI translations, and two for the official companion apps. Click the links below to join the projects! Even if your language is completely translated, extra proofreading is a big help! Please feel free to review the existing translations, and vote for alternatives that might be more appropriate.
