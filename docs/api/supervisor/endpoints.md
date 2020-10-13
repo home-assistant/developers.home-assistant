@@ -1498,6 +1498,25 @@ Returns a dict with selected keys from other `/*/info` endpoints.
 
 </details>
 
+<details>
+<summary className="endpoint get protected">/resolution</summary>
+
+**Returned data:**
+
+| key      | type       | description                                      |
+| -------- | ---------- | ------------------------------------------------ |
+| unsupported | list | A list of reasons why a installation is marked as unsupported (container, dbus, docker_configuration, docker_version, lxc, network_manager, os, privileged, systemd) |
+
+**Example response:**
+
+```json
+{
+  "unsupported": ["os"]
+}
+```
+
+</details>
+
 ### Multicast
 
 <details>
