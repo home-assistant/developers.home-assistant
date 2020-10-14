@@ -63,7 +63,7 @@ Keep a new integration to the minimum functionality needed for someone to get va
 
 ### 6. Event names
 
-Prefix component event names with the domain name. For example, use `netatmo_person` instead of `person` for the `netatmo` component. Please be mindful of the data structure as mentioned in the [Data Docs](https://data.home-assistant.io/docs/events/#database-table).
+Prefix component event names with the domain name. For example, use `netatmo_person` instead of `person` for the `netatmo` component. Please be mindful of the data structure as documented on our [Data Science portal](https://data.home-assistant.io/docs/events/#database-table).
 
 ### 7. Tests
 
