@@ -1498,25 +1498,6 @@ Returns a dict with selected keys from other `/*/info` endpoints.
 
 </details>
 
-<details>
-<summary className="endpoint get protected">/resolution</summary>
-
-**Returned data:**
-
-| key      | type       | description                                      |
-| -------- | ---------- | ------------------------------------------------ |
-| unsupported | list | A list of reasons why a installation is marked as unsupported (container, dbus, docker_configuration, docker_version, lxc, network_manager, os, privileged, systemd) |
-
-**Example response:**
-
-```json
-{
-  "unsupported": ["os"]
-}
-```
-
-</details>
-
 ### Multicast
 
 <details>
@@ -1777,6 +1758,45 @@ Update Home Assistant OS
 | key     | type   | description                                                    |
 | ------- | ------ | -------------------------------------------------------------- |
 | version | string | The version you want to install, default is the latest version |
+
+</details>
+
+### Resolution
+
+<details>
+<summary className="endpoint get protected">/resolution</summary>
+
+**Returned data:**
+
+| key      | type       | description                                      |
+| -------- | ---------- | ------------------------------------------------ |
+| unsupported | list | A list of reasons why a installation is marked as unsupported (container, dbus, docker_configuration, docker_version, lxc, network_manager, os, privileged, systemd) |
+| issues | list | A list of issues |
+| suggestions | list | A list of suggested actions |
+
+**Example response:**
+
+```json
+{
+  "unsupported": ["os"],
+  "issues": ["free_space"],
+  "suggestions": ["clear_snapshots"]
+}
+```
+
+</details>
+
+<details>
+<summary className="endpoint post protected">/resolution/[suggestion]</summary>
+
+Apply a suggested action
+
+</details>
+
+<details>
+<summary className="endpoint post protected">/resolution/[suggestion]/dismiss</summary>
+
+Dismiss a suggested action
 
 </details>
 
@@ -2220,4 +2240,5 @@ Some of the endpoints uses placeholders indicated with `[]` in the endpoint URL.
 | registry    | A registry hostname defined in the container registry configuration, to get the hostname you can call `/docker/registries`                            |
 | service     | The service name for a service on the host.                                                                                                           |
 | snapshot    | A valid snapshot slug, example `skuwe823`, to get the slug you can call `/snapshots`                                                                  |
+| suggestion  | A valid suggestion, example `clear_full_snapshot`, to get the suggestion you can call `/resolution`                                         |
 | uuid        | The UUID of a discovery service, to get the UUID you can call `/discovery`                                                                            |
