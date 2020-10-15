@@ -92,6 +92,7 @@ These models are describing objects that are getting returned from the superviso
 
 | key         | type    | description                                                                  |
 | ----------- | ------- | ---------------------------------------------------------------------------- |
+| interface   | string  | The interface name i.e eth0.                                                 |
 | ip_address  | string  | The IP address and the netmask in a X.X.X.X/XX format.                       |
 | gateway     | string  | The IP address of the gateway.                                               |
 | id          | string  | The ID of the interface.                                                     |
