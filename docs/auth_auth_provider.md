@@ -33,7 +33,7 @@ Auth providers shall extend the following methods of `LoginFlow` class.
 ## async_step_init of LoginFlow
 
 :::info
-We may change this inteface in near future.
+We may change this interface in near future.
 :::
 
 `LoginFlow` extends `data_entry_flow.FlowHandler`. The first step of data entry flow is hard coded as `init`, so each flow has to implement `async_step_init` method. The pattern of `async_step_init` likes following pseudo-code:

@@ -113,7 +113,7 @@ To check a permission, you will need to have access to the user object. Once you
 
 ```python
 from homeassistant.exceptions import Unauthorized
-from homeasistant.permissions.const import POLICY_READ, POLICY_CONTROL, POLICY_EDIT
+from homeassistant.permissions.const import POLICY_READ, POLICY_CONTROL, POLICY_EDIT
 
 # Raise error if user is not an admin
 if not user.is_admin:
@@ -142,7 +142,7 @@ await hass.services.async_call(
 
 ### If a permission check fails
 
-When you detect an anauthorized action, you should raise the `homeassistant.exceptions.Unauthorized` exception. This exception will cancel the current action and notifies the user that their action is unauthorized.
+When you detect an unauthorized action, you should raise the `homeassistant.exceptions.Unauthorized` exception. This exception will cancel the current action and notifies the user that their action is unauthorized.
 
 The `Unauthorized` exception has various parameters, to identify the permission check that failed. All fields are optional.
 
@@ -258,7 +258,7 @@ user via `connection.user`. If you need to check admin access, you can use the
 built-in `@require_admin` decorator.
 
 ```python
-from homeassistant.compnents import websocket_api
+from homeassistant.components import websocket_api
 
 
 async def async_setup(hass, config):

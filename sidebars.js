@@ -74,10 +74,10 @@ module.exports = {
     },
   ],
   Internationalization: [
+    "translations",
     "internationalization",
     "internationalization/core",
     "internationalization/custom_integration",
-    "translations",
   ],
   OperatingSystem: ["operating-system", "operating-system/debugging"],
   Supervisor: ["supervisor", "supervisor/developing", "supervisor/debugging"],

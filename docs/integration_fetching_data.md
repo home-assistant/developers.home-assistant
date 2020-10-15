@@ -128,7 +128,7 @@ If you can map exactly one device endpoint to a single entity, you can fetch the
 
 If your entities need to fetch data before being written to Home Assistant for the first time, pass `True` to the `add_entities` method: `add_entities([MyEntity()], True)`.
 
-You can control the polling interval for your integration by defining a `SCAN_INTERVAL` constant in your platform. Careful with setting this too low. It will take up resources in Home Assistant, can overwelm the device hosting the API or can get you blocked from cloud APIs.
+You can control the polling interval for your integration by defining a `SCAN_INTERVAL` constant in your platform. Careful with setting this too low. It will take up resources in Home Assistant, can overwhelm the device hosting the API or can get you blocked from cloud APIs.
 
 ```python
 from datetime import timedelta

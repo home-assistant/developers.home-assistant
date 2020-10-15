@@ -45,7 +45,7 @@ These models are describing objects that are getting returned from the superviso
 
 | key          | type        | description                                  |
 | ------------ | ----------- | -------------------------------------------- |
-| name         | string      | The descriptnameion of the device            |
+| name         | string      | The name of the device                       |
 | index        | int         | TODO: What is this?                          |
 | description  | string      | The description of the device                |
 | volume       | float       | The current volume                           |

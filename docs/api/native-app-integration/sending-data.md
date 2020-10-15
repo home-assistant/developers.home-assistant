@@ -18,7 +18,7 @@ To summarize, here's how requests should be made:
 
 ## Short note on instance URLs
 
-Some users have configured Home Assistant to be available outside of their home network using a dynamic DNS service. There are some routers that don't support hairpinning / NAT loopback: a device sending data from inside the routers network, via the externally configured DNS service, to Home Asisstant, which also resides inside the local network.
+Some users have configured Home Assistant to be available outside of their home network using a dynamic DNS service. There are some routers that don't support hairpinning / NAT loopback: a device sending data from inside the routers network, via the externally configured DNS service, to Home Assistant, which also resides inside the local network.
 
 To work around this, the app should record which WiFi SSID is the users home network, and use a direct connection when connected to the home WiFi network.
 
@@ -110,7 +110,7 @@ This message will inform Home Assistant of new location information.
 | --- | ---- | -----------
 | `location_name` | string | Name of the zone the device is in.
 | `gps` | latlong | Current location as latitude and longitude.
-| `gps_accuracy` | int | GPS accurracy in meters. Must be greater than 0.
+| `gps_accuracy` | int | GPS accuracy in meters. Must be greater than 0.
 | `battery` | int | Percentage of battery the device has left. Must be greater than 0.
 | `speed` | int | Speed of the device in meters per second. Must be greater than 0.
 | `altitude` | int | Altitude of the device in meters. Must be greater than 0.

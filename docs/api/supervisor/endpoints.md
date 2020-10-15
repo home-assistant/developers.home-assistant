@@ -979,7 +979,7 @@ Return information about enabled discoveries.
 | key       | type       | description                                                                     |
 | --------- | ---------- | ------------------------------------------------------------------------------- |
 | discovery | list       | A list of [Discovery models](api/supervisor/models.md#discovery)                                |
-| services  | dictionary | A dictionary of services that contains a list of add-ons that have that serive. |
+| services  | dictionary | A dictionary of services that contains a list of add-ons that have that service. |
 
 **Example response:**
 
@@ -1464,7 +1464,7 @@ Returns a dict with selected keys from other `/*/info` endpoints.
 | homeassistant    | string         | The installed version of Home Assistant                      |
 | hassos           | string or null | The version of Home Assistant OS or null                     |
 | docker           | string         | The docker version on the host                               |
-| hostname         | string         | The hostname on the hsot                                     |
+| hostname         | string         | The hostname on the host                                     |
 | operating_system | string         | The operating system on the host                             |
 | features         | list           | A list ov available features on the host                     |
 | machine          | string         | The machine type                                             |
@@ -1759,6 +1759,45 @@ Update Home Assistant OS
 | key     | type   | description                                                    |
 | ------- | ------ | -------------------------------------------------------------- |
 | version | string | The version you want to install, default is the latest version |
+
+</details>
+
+### Resolution
+
+<details>
+<summary className="endpoint get protected">/resolution</summary>
+
+**Returned data:**
+
+| key      | type       | description                                      |
+| -------- | ---------- | ------------------------------------------------ |
+| unsupported | list | A list of reasons why a installation is marked as unsupported (container, dbus, docker_configuration, docker_version, lxc, network_manager, os, privileged, systemd) |
+| issues | list | A list of issues |
+| suggestions | list | A list of suggested actions |
+
+**Example response:**
+
+```json
+{
+  "unsupported": ["os"],
+  "issues": ["free_space"],
+  "suggestions": ["clear_snapshots"]
+}
+```
+
+</details>
+
+<details>
+<summary className="endpoint post protected">/resolution/[suggestion]</summary>
+
+Apply a suggested action
+
+</details>
+
+<details>
+<summary className="endpoint post protected">/resolution/[suggestion]/dismiss</summary>
+
+Dismiss a suggested action
 
 </details>
 
@@ -2194,12 +2233,13 @@ Update the supervisor
 
 Some of the endpoints uses placeholders indicated with `[]` in the endpoint URL.
 
-| placeholder | description                                                                                                                                            |
-| ----------- | -------------------------------------------------------------------------------------------------------------------------------------------------------|
-| addon       | The slug for the addon, to get the slug you can call `/addons`, to call endpoints for the add-on calling the endpoints you can use `self`as the slug.  |
-| application | The name of a application, call `/audio/info` to get the correct name                                                                                  |
+| placeholder | description                                                                                                                                           |
+| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
+| addon       | The slug for the addon, to get the slug you can call `/addons`, to call endpoints for the add-on calling the endpoints you can use `self`as the slug. |
+| application | The name of a application, call `/audio/info` to get the correct name                                                                                 |
 | interface   | A valid interface name, example `eth0`, to get the interface name you can call `/network/info`. You can use `default` to get the primary interface |
-| registry    | A registry hostname defined in the container registry configuration, to get the hostname you can call `/docker/registries`                             |
-| service     | The service name for a service on the host.                                                                                                            |
-| snapshot    | A valid snapshot slug, example `skuwe823`, to get the slug you can call `/snapshots`                                                                   |
-| uuid        | The UUID of a discovery service, to get the UUID you can call `/discovery`                                                                             |
+| registry    | A registry hostname defined in the container registry configuration, to get the hostname you can call `/docker/registries`                            |
+| service     | The service name for a service on the host.                                                                                                           |
+| snapshot    | A valid snapshot slug, example `skuwe823`, to get the slug you can call `/snapshots`                                                                  |
+| suggestion  | A valid suggestion, example `clear_full_snapshot`, to get the suggestion you can call `/resolution`                                         |
+| uuid        | The UUID of a discovery service, to get the UUID you can call `/discovery`                                                                            |
