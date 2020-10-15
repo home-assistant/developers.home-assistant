@@ -10,7 +10,7 @@ The event system is very flexible. There are no limitations on the event type, a
 
 ## Firing events
 
-To fire an event, you have to interact with the event bus. The event bus is available on the Home Assistant instance as `hass.bus`.
+To fire an event, you have to interact with the event bus. The event bus is available on the Home Assistant instance as `hass.bus`. Please be mindful of the data structure as documented on our [Data Science portal](https://data.home-assistant.io/docs/events/#database-table).
 
 Example component that will fire an event when loaded. Note that custom event names are prefixed with the component name.
 

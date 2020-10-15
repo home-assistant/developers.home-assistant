@@ -142,7 +142,7 @@ Call a service in Home Assistant.
 
 ## Fire an event
 
-Fire an event in Home Assistant.
+Fire an event in Home Assistant. Please be mindful of the data structure as documented on our [Data Science portal](https://data.home-assistant.io/docs/events/#database-table).
 
 ```json
 {
