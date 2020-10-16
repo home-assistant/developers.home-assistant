@@ -1772,32 +1772,53 @@ Update Home Assistant OS
 | key      | type       | description                                      |
 | -------- | ---------- | ------------------------------------------------ |
 | unsupported | list | A list of reasons why a installation is marked as unsupported (container, dbus, docker_configuration, docker_version, lxc, network_manager, os, privileged, systemd) |
-| issues | list | A list of issues |
-| suggestions | list | A list of suggested actions |
+| issues | list | A list of [Issue models](api/supervisor/models.md#issues) |
+| suggestions | list | A list of [Suggestion models](api/supervisor/models.md#suggestion) actions |
 
 **Example response:**
 
 ```json
 {
   "unsupported": ["os"],
-  "issues": ["free_space"],
-  "suggestions": ["clear_snapshots"]
+  "issues": [
+    {
+      "uuid": "A89924620F9A11EBBDC3C403FC2CA371",
+      "type": "free_space",
+      "context": "system",
+      "reference": null
+     }
+  ],
+  "suggestions": [
+    {
+      "uuid": "B9923620C9A11EBBDC3C403FC2CA371",
+      "type": "clear_snapshots",
+      "context": "system",
+      "reference": null
+    }
+  ]
 }
 ```
 
 </details>
 
 <details>
-<summary className="endpoint post protected">/resolution/[suggestion]</summary>
+<summary className="endpoint post protected">/resolution/suggestion/[uuid]</summary>
 
 Apply a suggested action
 
 </details>
 
 <details>
-<summary className="endpoint post protected">/resolution/[suggestion]/dismiss</summary>
+<summary className="endpoint delete protected">/resolution/suggestion/[uuid]</summary>
 
 Dismiss a suggested action
+
+</details>
+
+<details>
+<summary className="endpoint delete protected">/resolution/issue/[uuid]</summary>
+
+Dismiss a issue
 
 </details>
 
