@@ -1802,7 +1802,7 @@ Update Home Assistant OS
 </details>
 
 <details>
-<summary className="endpoint post protected">/resolution/suggestion/[suggestion]</summary>
+<summary className="endpoint post protected">/resolution/suggestion/[uuid]</summary>
 
 Apply a suggested action
 
