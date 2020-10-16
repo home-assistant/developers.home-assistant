@@ -1782,7 +1782,7 @@ Update Home Assistant OS
   "unsupported": ["os"],
   "issues": [
     {
-      "uuid": "id",
+      "uuid": "A89924620F9A11EBBDC3C403FC2CA371",
       "type": "free_space",
       "context": "system",
       "reference": null
@@ -1790,7 +1790,7 @@ Update Home Assistant OS
   ],
   "suggestions": [
     {
-      "uuid": "id",
+      "uuid": "B9923620C9A11EBBDC3C403FC2CA371",
       "type": "clear_snapshots",
       "context": "system",
       "reference": null
