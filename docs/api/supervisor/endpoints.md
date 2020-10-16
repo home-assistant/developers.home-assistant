@@ -1765,7 +1765,7 @@ Update Home Assistant OS
 ### Resolution
 
 <details>
-<summary className="endpoint get protected">/resolution</summary>
+<summary className="endpoint get protected">/resolution/info</summary>
 
 **Returned data:**
 
