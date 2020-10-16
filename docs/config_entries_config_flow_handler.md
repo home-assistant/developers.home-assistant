@@ -159,12 +159,14 @@ Translations for the config flow handlers are defined under the `config` key in 
 
 When the translations are merged into Home Assistant, they will be automatically uploaded to [Lokalise](https://lokalise.co/) where the translation team will help to translate them in other languages. While developing locally, you will need to run `python3 -m script.translations develop` to see changes made to `strings.json` [More info on translating Home Assistant.](translations.md)
 
-## Migration to a new version of a Config Entry
+## Config Entry Migration
 
-As mentioned above - each Config Entry has a version assigned to it. This is to be able to migrate Config Entry data to new formats when Config Entry schema changes. 
+As mentioned above - each Config Entry has a version assigned to it. This is to be able to migrate Config Entry data to new formats when Config Entry schema changes.
+
 Migration can be handled programatically by implementing function `async_migrate_entry` in your component's `__init__.py` file. The function should return `True` if migration is successfull.
-Example code:
+
 ```python
+# Example migration function
 async def async_migrate_entry(hass, config_entry: ConfigEntry):
     """Migrate old entry."""
     _LOGGER.debug("Migrating from version %s", config_entry.version)
