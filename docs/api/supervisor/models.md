@@ -165,3 +165,21 @@ These models are describing objects that are getting returned from the superviso
 | network_rx     | int   | Network receiver usage                    |
 | blk_read       | int   | File system read usage                    |
 | blk_write      | int   | File system write usage                   |
+
+## Issue
+
+| key       | type        | description                                         |
+| ----------| ----------- | --------------------------------------------------- |
+| uuid      | str         | A generated uuid as issue ID                        |
+| type      | str         | Type of the issue                                   |
+| context   | str         | In which context the issue occorse                  |
+| reference | str or null | Depend on the Context, a reference to a other Model |
+
+## Suggestion
+
+| key       | type        | description                                         |
+| ----------| ----------- | --------------------------------------------------- |
+| uuid      | str         | A generated uuid as suggestion ID                   |
+| type      | str         | Type of the suggestion                              |
+| context   | str         | In which context the suggestion occorse             |
+| reference | str or null | Depend on the Context, a reference to a other Model |
