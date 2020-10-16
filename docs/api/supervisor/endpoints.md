@@ -1816,7 +1816,7 @@ Dismiss a suggested action
 </details>
 
 <details>
-<summary className="endpoint delete protected">/resolution/issue/[issue]</summary>
+<summary className="endpoint delete protected">/resolution/issue/[uuid]</summary>
 
 Dismiss a issue
 
