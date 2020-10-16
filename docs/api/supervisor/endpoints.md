@@ -1815,6 +1815,13 @@ Dismiss a suggested action
 
 </details>
 
+<details>
+<summary className="endpoint delete protected">/resolution/issue/[issue]</summary>
+
+Dismiss a issue
+
+</details>
+
 ### Service
 
 <details>
