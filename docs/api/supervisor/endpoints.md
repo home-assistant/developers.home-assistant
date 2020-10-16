@@ -1809,7 +1809,7 @@ Apply a suggested action
 </details>
 
 <details>
-<summary className="endpoint delete protected">/resolution/suggestion/[suggestion]</summary>
+<summary className="endpoint delete protected">/resolution/suggestion/[uuid]</summary>
 
 Dismiss a suggested action
 
