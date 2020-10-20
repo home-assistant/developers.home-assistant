@@ -217,7 +217,7 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 </details>
 
 <details>
-<summary className="endpoint get protected">/api/history/period/&lt;timestamp</summary>
+<summary className="endpoint get protected">/api/history/period/&lt;timestamp&rt;</summary>
 
 Returns an array of state changes in the past. Each object contains further details for the entities.
 
@@ -324,7 +324,7 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 </details>
 
 <details>
-<summary className="endpoint get protected">/api/logbook/&lt;timestamp</summary>
+<summary className="endpoint get protected">/api/logbook/&lt;timestamp&rt;</summary>
 
 Returns an array of logbook entries.
 
@@ -419,7 +419,7 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 </details>
 
 <details>
-<summary className="endpoint get protected">/api/states/&lt;entity_id</summary>
+<summary className="endpoint get protected">/api/states/&lt;entity_id&rt;</summary>
 
 Returns a state object for specified entity_id. Returns 404 if not found.
 
@@ -471,7 +471,7 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 </details>
 
 <details>
-<summary className="endpoint get protected">/api/camera_proxy/camera.&lt;entity_id</summary>
+<summary className="endpoint get protected">/api/camera_proxy/&lt;camera entity_id&rt;</summary>
 
 Returns the data (image) from the specified camera entity_id.
 
@@ -486,7 +486,7 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 </details>
 
 <details>
-<summary className="endpoint post protected">/api/states/&lt;entity_id</summary>
+<summary className="endpoint post protected">/api/states/&lt;entity_id&rt;</summary>
 
 Updates or creates a state. You can create any state that you want, it does not have to be backed by an entity in Home Assistant.
 
@@ -533,7 +533,7 @@ curl -X POST -H "Authorization: Bearer ABCDEFGH" \
 </details>
 
 <details>
-<summary className="endpoint post protected">/api/events/&lt;event_type</summary>
+<summary className="endpoint post protected">/api/events/&lt;event_type&rt;</summary>
 
 Fires an event with event_type. Please be mindful of the data structure as documented on our [Data Science portal](https://data.home-assistant.io/docs/events/#database-table).
 
