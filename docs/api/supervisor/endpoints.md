@@ -1584,6 +1584,7 @@ Get network information.
 | key        | description                                                            |
 | ---------- | ---------------------------------------------------------------------- |
 | interfaces | A dictionary of [Network interface models](api/supervisor/models.md#network-interface) |
+| docker     | Information about the internal docker network |
 
 **Example response:**
 
@@ -1601,7 +1602,7 @@ Get network information.
       "primary": true
     }
   },
-  "system": {
+  "docker": {
     "interface": "hassio",
     "address": "172.30.32.0/23",
     "gateway": "172.30.32.1",
