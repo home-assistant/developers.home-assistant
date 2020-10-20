@@ -736,6 +736,14 @@ Set a new password for a Home Assistant Core user.
 
 </details>
 
+<details>
+<summary className="endpoint delete protected">/auth/cache</summary>
+
+Reset internal authentication cache, this is useful if you have changed the password for a user and need to clear the internal cache.
+
+</details>
+
+
 ### CLI
 
 <details>
