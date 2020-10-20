@@ -146,3 +146,51 @@ summary.endpoint.unprotected:after {
   margin-right: 0;
 }
 /* Custom summary styles for API endpoint definitions */
+
+
+/* Styles for @site/static/js/api_endpoint.jsx */
+.api-endpoint {
+  margin: 4px 0;
+}
+.api-endpoint-header {
+  align-items: center;
+  background-color: var(--ifm-code-background);
+  word-break: break-all;
+  border-radius: var(--ifm-code-border-radius);
+  cursor: pointer;
+  display: flex;
+  padding: var(--ifm-code-padding-vertical) var(--ifm-code-padding-horizontal);
+}
+.api-endpoint-content {
+  padding: 8px 8px 16px;
+}
+
+.api-endpoint-protection {
+  margin: auto;
+  margin-right: 0;
+}
+
+.api-endpoint-method {
+  border-radius: 8px;
+  color: white;
+  display: block;
+  font-weight: bold;
+  margin-right: 12px;
+  padding: 4px;
+  text-align: center;
+  min-width: 84px;
+  width: 84px;
+  text-transform: uppercase;
+}
+
+.api-endpoint-method.delete {
+  background-color: var(--ifm-color-danger)
+}
+
+.api-endpoint-method.get {
+  background-color: var(--ifm-color-info);
+}
+
+.api-endpoint-method.post {
+  background-color: var(--ifm-color-success);
+}

@@ -1,6 +1,7 @@
 ---
 title: "Endpoints"
 ---
+import ApiEndpoint from '@site/static/js/api_endpoint.jsx'
 
 For API endpoints marked with :lock: you need use an authorization header with a `Bearer` token.
 
@@ -11,9 +12,7 @@ To see more details about each endpoint, click on it to expand it.
 
 ### Addons
 
-<details>
-<summary className="endpoint get protected">/addons</summary>
-
+<ApiEndpoint path="/addons" method="get">
 Return overview information about add-ons and add-on repositories.
 
 **Payload:**
@@ -57,46 +56,29 @@ Return overview information about add-ons and add-on repositories.
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/addons/reload</summary>
-
+<ApiEndpoint path="/addons/reload" method="post">
 Reloads the information stored about add-ons.
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint get protected">/addons/[addon]/changelog</summary>
-
+<ApiEndpoint path="/addons/<addon>/changelog" method="get">
 Get the changelog for a add.on.
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint get protected">/addons/[addon]/documentation</summary>
-
+<ApiEndpoint path="/addons/<addon>/documentation" method="get">
 Get the documentation for a add.on.
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint get protected">/addons/[addon]/logs</summary>
-
+<ApiEndpoint path="/addons/<addon>/logs" method="get">
 Returns the raw container logs from docker.
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint get protected">/addons/[addon]/icon</summary>
-
+<ApiEndpoint path="/addons/<addon>/icon" method="get">
 Get the add-on icon
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint get protected">/addons/[addon]/info</summary>
-
+<ApiEndpoint path="/addons/<addon>/info" method="get">
 Get details about a add-on
 
 **Returned data:**
@@ -243,25 +225,17 @@ Get details about a add-on
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/addons/[addon]/install</summary>
-
+<ApiEndpoint path="/addons/<addon>/install" method="post">
 Install a add-on
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint get protected">/addons/[addon]/logo</summary>
-
+<ApiEndpoint path="/addons/<addon>/logo" method="get">
 Get the add-on logo
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint post protected">/addons/[addon]/options</summary>
-
+<ApiEndpoint path="/addons/<addon>/options" method="post">
 Set the protection mode on a add-on.
 
 This function is not callable by itself and you can not use `self` as the slug here.
@@ -301,32 +275,21 @@ To reset customized network/audio/options, set it `null`.
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/addons/[addon]/options/validate</summary>
-
+<ApiEndpoint path="/addons/<addon>/options/validate" method="post">
 Run a configuration validation against the current stored add-on configuration.
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint post protected">/addons/[addon]/rebuild</summary>
-
+<ApiEndpoint path="/addons/<addon>/rebuild" method="post">
 Rebuild the add-on, only supported for local build add-ons.
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint post protected">/addons/[addon]/restart</summary>
-
+<ApiEndpoint path="/addons/<addon>/restart" method="post">
 Restart a add-on
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint post protected">/addons/[addon]/security</summary>
-
+<ApiEndpoint path="/addons/<addon>/security" method="post">
 Set the protection mode on a add-on.
 
 This function is not callable by itself and you can not use `self` as the slug here.
@@ -337,17 +300,13 @@ This function is not callable by itself and you can not use `self` as the slug h
 | --------- | ------- | ------------------------------- |
 | protected | boolean | `true` if protection mode is on |
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/addons/[addon]/start</summary>
-
+<ApiEndpoint path="/addons/<addon>/start" method="post">
 Start a add-on
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint get protected">/addons/[addon]/stats</summary>
+<ApiEndpoint path="/addons/<addon>/stats" method="get">
 
 Returns a [Stats model](api/supervisor/models.md#stats) for the add-on.
 
@@ -366,43 +325,29 @@ Returns a [Stats model](api/supervisor/models.md#stats) for the add-on.
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/addons/[addon]/stdin</summary>
-
+<ApiEndpoint path="/addons/<addon>/stdin" method="post">
 Write data to add-on stdin.
 
 The payload you want to pass into the addon you give the endpoint as the body of the request.
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint post protected">/addons/[addon]/stop</summary>
-
+<ApiEndpoint path="/addons/<addon>/stop" method="post">
 Stop a add-on
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint post protected">/addons/[addon]/uninstall</summary>
-
+<ApiEndpoint path="/addons/<addon>/uninstall" method="post">
 Uninstall a add-on
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint post protected">/addons/[addon]/update</summary>
-
+<ApiEndpoint path="/addons/<addon>/update" method="post">
 Update a add-on
-
-</details>
+</ApiEndpoint>
 
 ### Audio
 
-<details>
-<summary className="endpoint post protected">/audio/default/input</summary>
-
+<ApiEndpoint path="/audio/default/input" method="post">
 Set a profile as the default input profile
 
 **Payload:**
@@ -411,11 +356,9 @@ Set a profile as the default input profile
 | ---- | ------ | -------- | ----------------------- |
 | name | string | False    | The name of the profile |
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/audio/default/output</summary>
-
+<ApiEndpoint path="/audio/default/output" method="post">
 Set a profile as the default output profile
 
 **Payload:**
@@ -424,11 +367,9 @@ Set a profile as the default output profile
 | ---- | ------ | -------- | ----------------------- |
 | name | string | False    | The name of the profile |
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/audio/info</summary>
-
+<ApiEndpoint path="/audio/info" method="get">
 Return information about the audio plugin.
 
 **Returned data:**
@@ -521,18 +462,13 @@ Return information about the audio plugin.
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/audio/logs</summary>
-
+<ApiEndpoint path="/audio/logs" method="get">
 Returns the raw container logs from docker.
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint post protected">/audio/mute/input</summary>
-
+<ApiEndpoint path="/audio/mute/input" method="post">
 Mute input devices
 
 **Payload:**
@@ -542,11 +478,9 @@ Mute input devices
 | index  | string  | False    | The index of the device |
 | active | boolean | False    | `true` if muted         |
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/audio/mute/input/[application]</summary>
-
+<ApiEndpoint path="/audio/mute/input/<application>" method="post">
 Mute input for a specific application
 
 **Payload:**
@@ -556,11 +490,9 @@ Mute input for a specific application
 | index  | string  | False    | The index of the device |
 | active | boolean | False    | `true` if muted         |
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/audio/mute/output</summary>
-
+<ApiEndpoint path="/audio/mute/output" method="post">
 Mute output devices
 
 **Payload:**
@@ -570,11 +502,9 @@ Mute output devices
 | index  | string  | False    | The index of the device |
 | active | boolean | False    | `true` if muted         |
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/audio/mute/output/[application]</summary>
-
+<ApiEndpoint path="/audio/mute/output/<application>" method="post">
 Mute output for a specific application
 
 **Payload:**
@@ -584,11 +514,9 @@ Mute output for a specific application
 | index  | string  | False    | The index of the device |
 | active | boolean | False    | `true` if muted         |
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/audio/profile</summary>
-
+<ApiEndpoint path="/audio/profile" method="post">
 Create a audio profile
 
 **Payload:**
@@ -598,24 +526,17 @@ Create a audio profile
 | card | string | False    | The name of the audio device |
 | name | string | False    | The name of the profile      |
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/audio/reload</summary>
-
+<ApiEndpoint path="/audio/reload" method="post">
 Reload audio information
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint post protected">/audio/restart</summary>
-
+<ApiEndpoint path="/audio/restart" method="post">
 Restart the audio plugin
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint get protected">/audio/stats</summary>
+<ApiEndpoint path="/audio/stats" method="get">
 
 Returns a [Stats model](api/supervisor/models.md#stats) for the audio plugin.
 
@@ -634,11 +555,9 @@ Returns a [Stats model](api/supervisor/models.md#stats) for the audio plugin.
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/audio/update</summary>
-
+<ApiEndpoint path="/audio/update" method="post">
 Update the audio plugin
 
 **Payload:**
@@ -647,11 +566,9 @@ Update the audio plugin
 | ------- | ------ | -------------------------------------------------------------- |
 | version | string | The version you want to install, default is the latest version |
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/audio/volume/input</summary>
-
+<ApiEndpoint path="/audio/volume/input" method="post">
 Set the input volume
 
 **Payload:**
@@ -661,11 +578,9 @@ Set the input volume
 | index  | string | False    | The index of the device             |
 | volume | float  | False    | The volume (between `0.0`and `1.0`) |
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/audio/volume/input/[application]</summary>
-
+<ApiEndpoint path="/audio/volume/input/<application>" method="post">
 Set the input volume for a specific application
 
 **Payload:**
@@ -675,11 +590,9 @@ Set the input volume for a specific application
 | index  | string | False    | The index of the device             |
 | volume | float  | False    | The volume (between `0.0`and `1.0`) |
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/audio/volume/output</summary>
-
+<ApiEndpoint path="/audio/volume/output" method="post">
 Set the output volume
 
 **Payload:**
@@ -689,11 +602,9 @@ Set the output volume
 | index  | string | False    | The index of the device             |
 | volume | float  | False    | The volume (between `0.0`and `1.0`) |
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/audio/volume/output/[application]</summary>
-
+<ApiEndpoint path="/audio/volume/output/<application>" method="post">
 Set the output volume for a specific application
 
 **Payload:**
@@ -703,13 +614,11 @@ Set the output volume for a specific application
 | index  | string | False    | The index of the device             |
 | volume | float  | False    | The volume (between `0.0`and `1.0`) |
 
-</details>
+</ApiEndpoint>
 
 ### Auth
 
-<details>
-<summary className="endpoint post protected">/auth</summary>
-
+<ApiEndpoint path="/auth" method="post">
 You can do authentication against Home Assistant Core.
 You can POST the data as JSON, as urlencoded (with `application/x-www-form-urlencoded` header) or by using use basic authentication.
 
@@ -720,11 +629,9 @@ You can POST the data as JSON, as urlencoded (with `application/x-www-form-urlen
 | username | string | The username for the user |
 | password | string | The password for the user |
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/auth/reset</summary>
-
+<ApiEndpoint path="/auth/reset" method="post">
 Set a new password for a Home Assistant Core user.
 
 **Payload:**
@@ -734,13 +641,11 @@ Set a new password for a Home Assistant Core user.
 | username | string | The username for the user     |
 | password | string | The new password for the user |
 
-</details>
+</ApiEndpoint>
 
 ### CLI
 
-<details>
-<summary className="endpoint get protected">/cli/info</summary>
-
+<ApiEndpoint path="/cli/info" method="get">
 Returns information about the CLI plugin
 
 **Returned data:**
@@ -759,10 +664,9 @@ Returns information about the CLI plugin
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/cli/stats</summary>
+<ApiEndpoint path="/cli/stats" method="get">
 
 Returns a [Stats model](api/supervisor/models.md#stats) for the CLI plugin.
 
@@ -781,11 +685,9 @@ Returns a [Stats model](api/supervisor/models.md#stats) for the CLI plugin.
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/cli/update</summary>
-
+<ApiEndpoint path="/cli/update" method="post">
 Update the CLI plugin
 
 **Payload:**
@@ -794,34 +696,23 @@ Update the CLI plugin
 | ------- | ------ | -------------------------------------------------------------- |
 | version | string | The version you want to install, default is the latest version |
 
-</details>
+</ApiEndpoint>
 
 ### Core
 
-<details>
-<summary className="endpoint get protected">/core/api</summary>
-
+<ApiEndpoint path="/core/api" method="get">
 Proxy GET API calls to the Home Assistant API
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint post protected">/core/api</summary>
-
+<ApiEndpoint path="/core/api" method="post">
 Proxy POST API calls to the Home Assistant API
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint post protected">/core/check</summary>
-
+<ApiEndpoint path="/core/check" method="post">
 Run a configuration check
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint get protected">/core/info</summary>
-
+<ApiEndpoint path="/core/info" method="get">
 Returns information about the Home Assistant core
 
 **Returned data:**
@@ -862,18 +753,13 @@ Returns information about the Home Assistant core
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/core/logs</summary>
-
+<ApiEndpoint path="/core/logs" method="get">
 Returns the raw container logs from docker.
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint post protected">/core/options</summary>
-
+<ApiEndpoint path="/core/options" method="post">
 Update options for Home Assistant, you need to supply at least one of the payload keys to the API call.
 You need to call `/core/restart` after updating the options.
 
@@ -895,31 +781,21 @@ Passing `image` with `null` and `version_latest` with `null` resets these option
 
 **You need to supply at least one key in the payload.**
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/core/rebuild</summary>
-
+<ApiEndpoint path="/core/rebuild" method="post">
 Rebuild the Home Assistant core container
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint post protected">/core/restart</summary>
-
+<ApiEndpoint path="/core/restart" method="post">
 Restart the Home Assistant core container
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint post protected">/core/start</summary>
-
+<ApiEndpoint path="/core/start" method="post">
 Start the Home Assistant core container
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint get protected">/core/stats</summary>
+<ApiEndpoint path="/core/stats" method="get">
 
 Returns a [Stats model](api/supervisor/models.md#stats) for the Home Assistant core.
 
@@ -938,18 +814,13 @@ Returns a [Stats model](api/supervisor/models.md#stats) for the Home Assistant c
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/core/stop</summary>
-
+<ApiEndpoint path="/core/stop" method="post">
 Stop the Home Assistant core container
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint post protected">/core/update</summary>
-
+<ApiEndpoint path="/core/update" method="post">
 Update Home Assistant core
 
 **Payload:**
@@ -958,20 +829,15 @@ Update Home Assistant core
 | ------- | ------ | -------------------------------------------------------------- |
 | version | string | The version you want to install, default is the latest version |
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/core/websocket</summary>
-
+<ApiEndpoint path="/core/websocket" method="get">
 Proxy to Home Assistant Core websocket.
-
-</details>
+</ApiEndpoint>
 
 ### Discovery
 
-<details>
-<summary className="endpoint get protected">/discovery</summary>
-
+<ApiEndpoint path="/discovery" method="get">
 Return information about enabled discoveries.
 
 **Returned data:**
@@ -999,11 +865,9 @@ Return information about enabled discoveries.
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/discovery</summary>
-
+<ApiEndpoint path="/discovery" method="post">
 Create a discovery service
 
 **Payload:**
@@ -1021,27 +885,21 @@ Create a discovery service
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/discovery/[uuid]</summary>
+<ApiEndpoint path="/discovery/<uuid>" method="get">
 
 Get a [discovery model](api/supervisor/models.md#discovery) for a UUID.
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint delete protected">/discovery/[uuid]</summary>
-
+<ApiEndpoint path="/discovery/<uuid>" method="delete">
 Delete a specific service.
-
-</details>
+</ApiEndpoint>
 
 ### DNS
 
-<details>
-<summary className="endpoint get protected">/dns/info</summary>
-
+<ApiEndpoint path="/dns/info" method="get">
 Return information about the DNS plugin.
 
 **Returned data:**
@@ -1066,18 +924,13 @@ Return information about the DNS plugin.
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/dns/logs</summary>
-
+<ApiEndpoint path="/dns/logs" method="get">
 Returns the raw container logs from docker.
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint post protected">/dns/options</summary>
-
+<ApiEndpoint path="/dns/options" method="post">
 Set DNS options
 
 **Payload:**
@@ -1088,24 +941,17 @@ Set DNS options
 
 **You need to supply at least one key in the payload.**
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/dns/reset</summary>
-
+<ApiEndpoint path="/dns/reset" method="post">
 Reset the DNS configuration.
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint post protected">/dns/restart</summary>
-
+<ApiEndpoint path="/dns/restart" method="post">
 Restart the DNS plugin
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint get protected">/dns/stats</summary>
+<ApiEndpoint path="/dns/stats" method="get">
 
 Returns a [Stats model](api/supervisor/models.md#stats) for the dns plugin.
 
@@ -1124,11 +970,9 @@ Returns a [Stats model](api/supervisor/models.md#stats) for the dns plugin.
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/dns/update</summary>
-
+<ApiEndpoint path="/dns/update" method="post">
 Update the DNS plugin
 
 **Payload:**
@@ -1137,13 +981,11 @@ Update the DNS plugin
 | ------- | ------ | -------------------------------------------------------------- |
 | version | string | The version you want to install, default is the latest version |
 
-</details>
+</ApiEndpoint>
 
 ### Docker
 
-<details>
-<summary className="endpoint get protected">/docker/info</summary>
-
+<ApiEndpoint path="/docker/info" method="get">
 Returns information about the docker instance.
 
 **Returned data:**
@@ -1166,11 +1008,9 @@ registries | dictionary | A dictionary of dictionaries containing `username` and
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/docker/registries</summary>
-
+<ApiEndpoint path="/docker/registries" method="get">
 Get all configured container registries, this returns a dict with the registry hostname as the key, and a dictionary containing the username configured for that registry.
 
 **Example response:**
@@ -1183,11 +1023,9 @@ Get all configured container registries, this returns a dict with the registry h
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/docker/registries</summary>
-
+<ApiEndpoint path="/docker/registries" method="post">
 Add a new container registry.
 
 **Payload:**
@@ -1207,20 +1045,15 @@ Add a new container registry.
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint delete protected">/docker/registries/[registry]</summary>
-
+<ApiEndpoint path="/docker/registries/<registry>" method="delete">
 Delete a registry from the configured container registries.
-
-</details>
+</ApiEndpoint>
 
 ### Hardware
 
-<details>
-<summary className="endpoint get protected">/hardware/info</summary>
-
+<ApiEndpoint path="/hardware/info" method="get">
 Get hardware information.
 
 **Example response:**
@@ -1244,11 +1077,9 @@ Get hardware information.
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/hardware/audio</summary>
-
+<ApiEndpoint path="/hardware/audio" method="get">
 Get audio devices
 
 **Example response:**
@@ -1267,20 +1098,15 @@ Get audio devices
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/hardware/trigger</summary>
-
+<ApiEndpoint path="/hardware/trigger" method="post">
 Trigger UDEV reload.
-
-</details>
+</ApiEndpoint>
 
 ### Host
 
-<details>
-<summary className="endpoint get protected">/host/info</summary>
-
+<ApiEndpoint path="/host/info" method="get">
 Return information about the host.
 
 **Returned data**
@@ -1315,18 +1141,13 @@ Return information about the host.
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/host/logs</summary>
-
+<ApiEndpoint path="/host/logs" method="get">
 Get the dmesg logs from the host.
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint post protected">/host/options</summary>
-
+<ApiEndpoint path="/host/options" method="post">
 Set host options
 
 **Payload:**
@@ -1337,46 +1158,29 @@ Set host options
 
 **You need to supply at least one key in the payload.**
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/host/reboot</summary>
-
+<ApiEndpoint path="/host/reboot" method="post">
 Reboot the host
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint post protected">/host/reload</summary>
-
+<ApiEndpoint path="/host/reload" method="post">
 Reload host information
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint post protected">/host/service/[service]/start</summary>
-
+<ApiEndpoint path="/host/service/<service>/start" method="post">
 Start a service on the host.
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint post protected">/host/service/[service]/stop</summary>
-
+<ApiEndpoint path="/host/service/<service>/stop" method="post">
 Stop a service on the host.
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint post protected">/host/service/[service]/reload</summary>
-
+<ApiEndpoint path="/host/service/<service>/reload" method="post">
 Reload a service on the host.
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint get protected">/host/services</summary>
-
+<ApiEndpoint path="/host/services" method="get">
 Get information about host services.
 
 **Returned data:**
@@ -1399,19 +1203,15 @@ Get information about host services.
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/host/shutdown</summary>
-
+<ApiEndpoint path="/host/shutdown" method="post">
 Shutdown the host
-
-</details>
+</ApiEndpoint>
 
 ### ingress
 
-<details>
-<summary className="endpoint get protected">/ingress/panels</summary>
+<ApiEndpoint path="/ingress/panels" method="get">
 
 **Returned data:**
 
@@ -1434,11 +1234,9 @@ Shutdown the host
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/ingress/session</summary>
-
+<ApiEndpoint path="/ingress/session" method="post">
 Create a new session for access to the ingress service.
 
 **Payload:**
@@ -1447,13 +1245,11 @@ Create a new session for access to the ingress service.
 | ------- | ------ | -------- | --------------------------------- |
 | session | string | False    | The token for the ingress session |
 
-</details>
+</ApiEndpoint>
 
 ### Misc
 
-<details>
-<summary className="endpoint get protected">/info</summary>
-
+<ApiEndpoint path="/info" method="get">
 Returns a dict with selected keys from other `/*/info` endpoints.
 
 **Returned data:**
@@ -1496,13 +1292,11 @@ Returns a dict with selected keys from other `/*/info` endpoints.
 }
 ```
 
-</details>
+</ApiEndpoint>
 
 ### Multicast
 
-<details>
-<summary className="endpoint get protected">/multicast/info</summary>
-
+<ApiEndpoint path="/multicast/info" method="get">
 Returns information about the multicast plugin
 
 **Returned data:**
@@ -1521,24 +1315,17 @@ Returns information about the multicast plugin
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/multicast/logs</summary>
-
+<ApiEndpoint path="/multicast/logs" method="get">
 Returns the raw container logs from docker.
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint post protected">/multicast/restart</summary>
-
+<ApiEndpoint path="/multicast/restart" method="post">
 Restart the multicast plugin.
+</ApiEndpoint>
 
-</details>
-
-<details>
-<summary className="endpoint get protected">/multicast/stats</summary>
+<ApiEndpoint path="/multicast/stats" method="get">
 
 Returns a [Stats model](api/supervisor/models.md#stats) for the multicast plugin.
 
@@ -1557,11 +1344,9 @@ Returns a [Stats model](api/supervisor/models.md#stats) for the multicast plugin
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/multicast/update</summary>
-
+<ApiEndpoint path="/multicast/update" method="post">
 Update the multicast plugin
 
 **Payload:**
@@ -1570,13 +1355,11 @@ Update the multicast plugin
 | ------- | ------ | -------------------------------------------------------------- |
 | version | string | The version you want to install, default is the latest version |
 
-</details>
+</ApiEndpoint>
 
 ### Network
 
-<details>
-<summary className="endpoint get protected">/network/info</summary>
-
+<ApiEndpoint path="/network/info" method="get">
 Get network information.
 
 **Returned data:**
@@ -1604,17 +1387,15 @@ Get network information.
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/network/[interface]/info</summary>
+<ApiEndpoint path="/network/<interface>/info" method="get">
 
 Returns a [Network interface model](api/supervisor/models.md#network-interface) for a specific network interface.
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/network/[interface]/update</summary>
+<ApiEndpoint path="/network/<interface>/update" method="post">
 
 Update the settings for a network interface.
 
@@ -1649,12 +1430,11 @@ When the call is complete it returns the changed [Network interface model](api/s
 }
 ```
 
-</details>
+</ApiEndpoint>
 
 ### Observer
 
-<details>
-<summary className="endpoint get protected">/observer/info</summary>
+<ApiEndpoint path="/observer/info" method="get">
 
 Returns information about the observer plugin
 
@@ -1676,10 +1456,9 @@ Returns information about the observer plugin
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/observer/stats</summary>
+<ApiEndpoint path="/observer/stats" method="get">
 
 Returns a [Stats model](api/supervisor/models.md#stats) for the observer plugin.
 
@@ -1698,10 +1477,9 @@ Returns a [Stats model](api/supervisor/models.md#stats) for the observer plugin.
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/observer/update</summary>
+<ApiEndpoint path="/observer/update" method="post">
 
 Update the observer plugin
 
@@ -1711,19 +1489,17 @@ Update the observer plugin
 | ------- | ------ | -------------------------------------------------------------- |
 | version | string | The version you want to install, default is the latest version |
 
-</details>
+</ApiEndpoint>
 
 ### OS
 
-<details>
-<summary className="endpoint post protected">/os/config/sync</summary>
+<ApiEndpoint path="/os/config/sync" method="post">
 
 Load host configurations from an USB stick.
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/os/info</summary>
+<ApiEndpoint path="/os/info" method="get">
 
 Returns information about the OS.
 
@@ -1747,10 +1523,9 @@ Returns information about the OS.
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/os/update</summary>
+<ApiEndpoint path="/os/update" method="post">
 
 Update Home Assistant OS
 
@@ -1760,12 +1535,11 @@ Update Home Assistant OS
 | ------- | ------ | -------------------------------------------------------------- |
 | version | string | The version you want to install, default is the latest version |
 
-</details>
+</ApiEndpoint>
 
 ### Resolution
 
-<details>
-<summary className="endpoint get protected">/resolution/info</summary>
+<ApiEndpoint path="/resolution/info" method="get">
 
 **Returned data:**
 
@@ -1799,33 +1573,29 @@ Update Home Assistant OS
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/resolution/suggestion/[uuid]</summary>
+<ApiEndpoint path="/resolution/suggestion/<uuid>" method="post">
 
 Apply a suggested action
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint delete protected">/resolution/suggestion/[uuid]</summary>
+<ApiEndpoint path="/resolution/suggestion/<uuid>" method="delete">
 
 Dismiss a suggested action
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint delete protected">/resolution/issue/[uuid]</summary>
+<ApiEndpoint path="/resolution/issue/<uuid>" method="delete">
 
 Dismiss a issue
 
-</details>
+</ApiEndpoint>
 
 ### Service
 
-<details>
-<summary className="endpoint get protected">/services</summary>
+<ApiEndpoint path="/services" method="get">
 
 **Returned data:**
 
@@ -1847,10 +1617,9 @@ Dismiss a issue
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/services/mqtt</summary>
+<ApiEndpoint path="/services/mqtt" method="get">
 
 **Returned data:**
 
@@ -1878,10 +1647,9 @@ Dismiss a issue
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/services/mqtt</summary>
+<ApiEndpoint path="/services/mqtt" method="post">
 
 Create a service definition
 
@@ -1896,17 +1664,15 @@ Create a service definition
 | password | string  | The password for the service            |
 | protocol | string  | The MQTT protocol                       |
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint delete protected">/services/mqtt</summary>
+<ApiEndpoint path="/services/mqtt" method="delete">
 
 Deletes the service definitions
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/services/mysql</summary>
+<ApiEndpoint path="/services/mysql" method="get">
 
 **Returned data:**
 
@@ -1932,10 +1698,9 @@ Deletes the service definitions
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/services/mysql</summary>
+<ApiEndpoint path="/services/mysql" method="post">
 
 Create a service definition
 
@@ -1948,19 +1713,17 @@ Create a service definition
 | username | string | The username for the service            |
 | password | string | The password for the service            |
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint delete protected">/services/mysql</summary>
+<ApiEndpoint path="/services/mysql" method="delete">
 
 Deletes the service definitions
 
-</details>
+</ApiEndpoint>
 
 ### Snapshot
 
-<details>
-<summary className="endpoint get protected">/snapshots</summary>
+<ApiEndpoint path="/snapshots" method="get">
 
 Return a list of [Snapshot models](api/supervisor/models.md#snapshot)
 
@@ -1980,10 +1743,9 @@ Return a list of [Snapshot models](api/supervisor/models.md#snapshot)
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/snapshots/new/full</summary>
+<ApiEndpoint path="/snapshots/new/full" method="post">
 
 Create a full snapshot.
 
@@ -2002,10 +1764,9 @@ Create a full snapshot.
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/snapshots/new/upload</summary>
+<ApiEndpoint path="/snapshots/new/upload" method="post">
 
 Upload a snapshot.
 
@@ -2017,10 +1778,9 @@ Upload a snapshot.
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/snapshots/new/partial</summary>
+<ApiEndpoint path="/snapshots/new/partial" method="post">
 
 Create a partial snapshot.
 
@@ -2043,38 +1803,33 @@ Create a partial snapshot.
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/snapshots/reload</summary>
+<ApiEndpoint path="/snapshots/reload" method="post">
 
 Reload snapshots from storage.
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/snapshots/[snapshot]/download</summary>
+<ApiEndpoint path="/snapshots/<snapshot>/download" method="get">
 
 Download the snapshot file with the given slug.
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/snapshots/[snapshot]/info</summary>
+<ApiEndpoint path="/snapshots/<snapshot>/info" method="get">
 
 Returns a [Snapshot details model](api/supervisor/models.md#snapshot-details) for the add-on.
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint delete protected">/snapshots/[snapshot]</summary>
+<ApiEndpoint path="/snapshots/<snapshot>" method="delete">
 
 Removes the snapshot file with the given slug.
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/snapshots/[snapshot]/restore/full</summary>
+<ApiEndpoint path="/snapshots/<snapshot>/restore/full" method="post">
 
 Does a full restore of the snapshot with the given slug.
 
@@ -2084,10 +1839,9 @@ Does a full restore of the snapshot with the given slug.
 | -------- | ------ | -------- | ------------------------------------ |
 | password | string | True     | The password for the snapshot if any |
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/snapshots/[snapshot]/restore/partial</summary>
+<ApiEndpoint path="/snapshots/<snapshot>/restore/partial" method="post">
 
 Does a partial restore of the snapshot with the given slug.
 
@@ -2102,12 +1856,11 @@ Does a partial restore of the snapshot with the given slug.
 
 **You need to supply at least one key in the payload.**
 
-</details>
+</ApiEndpoint>
 
 ### Supervisor
 
-<details>
-<summary className="endpoint get protected">/supervisor/info</summary>
+<ApiEndpoint path="/supervisor/info" method="get">
 
 Returns information about the supervisor
 
@@ -2165,17 +1918,15 @@ Returns information about the supervisor
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/supervisor/logs</summary>
+<ApiEndpoint path="/supervisor/logs" method="get">
 
 Returns the raw container logs from docker.
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/supervisor/options</summary>
+<ApiEndpoint path="/supervisor/options" method="post">
 
 Update options for the supervisor, you need to supply at least one of the payload keys to the API call.
 You need to call `/supervisor/reload` after updating the options.
@@ -2192,31 +1943,27 @@ You need to call `/supervisor/reload` after updating the options.
 | logging             | string | Set logging level                                      |
 | addons_repositories | list   | Set a list of URL's as strings for add-on repositories |
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get">/supervisor/ping</summary>
+<ApiEndpoint path="/supervisor/ping" method="get" unprotected>
 
 Ping the supervisor to check if it can return a response.
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/supervisor/reload</summary>
+<ApiEndpoint path="/supervisor/reload" method="post">
 
 Reload parts of the supervisor, this enable new options, and check for updates.
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/supervisor/repair</summary>
+<ApiEndpoint path="/supervisor/repair" method="post">
 
 Repair docker overlay issues, and lost images.
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/supervisor/stats</summary>
+<ApiEndpoint path="/supervisor/stats" method="get">
 
 Returns a [Stats model](api/supervisor/models.md#stats) for the supervisor.
 
@@ -2235,10 +1982,9 @@ Returns a [Stats model](api/supervisor/models.md#stats) for the supervisor.
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/supervisor/update</summary>
+<ApiEndpoint path="/supervisor/update" method="post">
 
 Update the supervisor
 
@@ -2248,11 +1994,11 @@ Update the supervisor
 | ------- | ------ | -------------------------------------------------------------- |
 | version | string | The version you want to install, default is the latest version |
 
-</details>
+</ApiEndpoint>
 
 ### Placeholders
 
-Some of the endpoints uses placeholders indicated with `[]` in the endpoint URL.
+Some of the endpoints uses placeholders indicated with `<...>` in the endpoint URL.
 
 | placeholder | description                                                                                                                                           |
 | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
