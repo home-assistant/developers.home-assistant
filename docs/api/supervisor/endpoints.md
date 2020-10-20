@@ -643,6 +643,14 @@ Set a new password for a Home Assistant Core user.
 
 </ApiEndpoint>
 
+<details>
+<summary className="endpoint delete protected">/auth/cache</summary>
+
+Reset internal authentication cache, this is useful if you have changed the password for a user and need to clear the internal cache.
+
+</details>
+
+
 ### CLI
 
 <ApiEndpoint path="/cli/info" method="get">
@@ -1367,6 +1375,7 @@ Get network information.
 | key        | description                                                            |
 | ---------- | ---------------------------------------------------------------------- |
 | interfaces | A dictionary of [Network interface models](api/supervisor/models.md#network-interface) |
+| docker     | Information about the internal docker network |
 
 **Example response:**
 
@@ -1383,6 +1392,12 @@ Get network information.
       "method": "static",
       "primary": true
     }
+  },
+  "docker": {
+    "interface": "hassio",
+    "address": "172.30.32.0/23",
+    "gateway": "172.30.32.1",
+    "dns": "172.30.32.3"
   }
 }
 ```
