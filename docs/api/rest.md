@@ -59,8 +59,8 @@ Successful calls will return status code 200 or 201. Other status codes that can
 ### Actions
 
 The API supports the following actions:
-
-#### GET /api/
+<details>
+<summary className="endpoint get protected">/api/</summary>
 
 Returns a message if the API is up and running.
 
@@ -77,7 +77,10 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   -H "Content-Type: application/json" http://localhost:8123/api/
 ```
 
-#### GET /api/config
+</details>
+
+<details>
+<summary className="endpoint get protected">/api/config</summary>
 
 Returns the current configuration as JSON.
 
@@ -129,7 +132,10 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   -H "Content-Type: application/json" http://localhost:8123/api/config
 ```
 
-#### GET /api/discovery_info
+</details>
+
+<details>
+<summary className="endpoint get protected">/api/discovery_info</summary>
 
 Returns basic information about the Home Assistant instance as JSON.
 
@@ -149,7 +155,10 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   -H "Content-Type: application/json" http://localhost:8123/api/discovery_info
 ```
 
-#### GET /api/events
+</details>
+
+<details>
+<summary className="endpoint get protected">/api/events</summary>
 
 Returns an array of event objects. Each event object contains event name and listener count.
 
@@ -173,7 +182,10 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   -H "Content-Type: application/json" http://localhost:8123/api/events
 ```
 
-#### GET /api/services
+</details>
+
+<details>
+<summary className="endpoint get protected">/api/services</summary>
 
 Returns an array of service objects. Each object contains the domain and which services it contains.
 
@@ -202,7 +214,10 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   -H "Content-Type: application/json" http://localhost:8123/api/services
 ```
 
-#### GET /api/history/period/&lt;timestamp>
+</details>
+
+<details>
+<summary className="endpoint get protected">/api/history/period/&lt;timestamp</summary>
 
 Returns an array of state changes in the past. Each object contains further details for the entities.
 
@@ -306,7 +321,10 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00?end_time=2016-12-31T00%3A00%3A00%2B02%3A00
 ```
 
-#### GET /api/logbook/&lt;timestamp>
+</details>
+
+<details>
+<summary className="endpoint get protected">/api/logbook/&lt;timestamp</summary>
 
 Returns an array of logbook entries.
 
@@ -367,7 +385,10 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   http://localhost:8123/api/logbook/2016-12-29T00:00:00+02:00?end_time=2099-12-31T00%3A00%3A00%2B02%3A00
 ```
 
-#### GET /api/states
+</details>
+
+<details>
+<summary className="endpoint get protected">/api/states</summary>
 
 Returns an array of state objects. Each state has the following attributes: entity_id, state, last_changed and attributes.
 
@@ -395,7 +416,10 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   -H "Content-Type: application/json" http://localhost:8123/api/states
 ```
 
-#### GET /api/states/&lt;entity_id>
+</details>
+
+<details>
+<summary className="endpoint get protected">/api/states/&lt;entity_id</summary>
 
 Returns a state object for specified entity_id. Returns 404 if not found.
 
@@ -423,7 +447,10 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   http://localhost:8123/api/states/sensor.kitchen_temperature
 ```
 
-#### GET /api/error_log
+</details>
+
+<details>
+<summary className="endpoint get protected">/api/error_log</summary>
 
 Retrieve all errors logged during the current session of Home Assistant as a plaintext response.
 
@@ -441,7 +468,10 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   http://localhost:8123/api/error_log
 ```
 
-#### GET /api/camera_proxy/camera.&lt;entity_id>
+</details>
+
+<details>
+<summary className="endpoint get protected">/api/camera_proxy/camera.&lt;entity_id</summary>
 
 Returns the data (image) from the specified camera entity_id.
 
@@ -453,7 +483,10 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   http://localhost:8123/api/camera_proxy/camera.my_sample_camera?time=1462653861261 -o image.jpg
 ```
 
-#### POST /api/states/&lt;entity_id>
+</details>
+
+<details>
+<summary className="endpoint post protected">/api/states/&lt;entity_id</summary>
 
 Updates or creates a state. You can create any state that you want, it does not have to be backed by an entity in Home Assistant.
 
@@ -497,7 +530,10 @@ curl -X POST -H "Authorization: Bearer ABCDEFGH" \
   http://localhost:8123/api/states/sensor.kitchen_temperature
 ```
 
-#### POST /api/events/&lt;event_type>
+</details>
+
+<details>
+<summary className="endpoint post protected">/api/events/&lt;event_type</summary>
 
 Fires an event with event_type. Please be mindful of the data structure as documented on our [Data Science portal](https://data.home-assistant.io/docs/events/#database-table).
 
@@ -517,7 +553,10 @@ Returns a message if successful.
 }
 ```
 
-#### POST /api/services/&lt;domain>/&lt;service>
+</details>
+
+<details>
+<summary className="endpoint post protected">/api/services/&lt;domain>/&lt;service></summary>
 
 Calls a service within a specific domain. Will return when the service has been executed or after 10 seconds, whichever comes first.
 
@@ -573,7 +612,10 @@ curl -X POST \
 The result will include any states that changed while the service was being executed, even if their change was the result of something else happening in the system.
 :::
 
-#### POST /api/template
+</details>
+
+<details>
+<summary className="endpoint post protected">/api/template</summary>
 
 Render a Home Assistant template. [See template docs for more information.](https://www.home-assistant.io/topics/templating/)
 
@@ -597,7 +639,10 @@ curl -X POST -H "Authorization: Bearer ABCDEFGH" \
   -d '{"template": "It is {{ now() }}!"}' http://localhost:8123/api/template
 ```
 
-#### POST /api/config/core/check_config
+</details>
+
+<details>
+<summary className="endpoint post protected">/api/config/core/check_config</summary>
 
 Trigger a check of `configuration.yaml`. No additional data needs to be passed in with this request. Needs config integration enabled.
 
@@ -619,7 +664,10 @@ If the check fails, the errors attribute in the object will list what caused the
 }
 ```
 
-#### POST /api/event_forwarding
+</details>
+
+<details>
+<summary className="endpoint post protected">/api/event_forwarding</summary>
 
 Set up event forwarding to another Home Assistant instance.
 
@@ -641,7 +689,10 @@ It will return a message if event forwarding was set up successfully.
 }
 ```
 
-#### DELETE /api/event_forwarding
+</details>
+
+<details>
+<summary className="endpoint delete protected">/api/event_forwarding</summary>
 
 Cancel event forwarding to another Home Assistant instance.
 
@@ -662,3 +713,5 @@ It will return a message if event forwarding was canceled successfully.
     "message": "Event forwarding cancelled."
 }
 ```
+
+</details>
