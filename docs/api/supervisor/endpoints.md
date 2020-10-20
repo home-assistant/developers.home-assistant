@@ -1600,6 +1600,12 @@ Get network information.
       "method": "static",
       "primary": true
     }
+  },
+  "system": {
+    "interface": "hassio",
+    "address": "172.30.32.0/23",
+    "gateway": "172.30.32.1",
+    "dns": "172.30.32.3"
   }
 }
 ```
