@@ -6,19 +6,21 @@ These models are describing objects that are getting returned from the superviso
 
 ## Addon
 
-| key         | type    | description                                           |
-| ----------- | ------- | ----------------------------------------------------- |
-| name        | string  | The name of the add-on                                |
-| slug        | string  | The slug for the add-on                               |
-| advanced    | boolean | `true` if it should only be visible to advanced users |
-| description | string  | The description of the add-on                         |
-| repository  | string  | The repository the add-on came from                   |
-| version     | string  | The latest published version of the add-on            |
-| installed   | string  | The installed version of the add-on                   |
-| available   | boolean | `false` if you can not install the add-on             |
-| icon        | bool    | The add-on has a icon file                            |
-| logo        | bool    | The add-on has a logo file                            |
-| state       | string  | The state of the add-on (started, stopped)            |
+| key              | type           | description                                           |
+| ---------------- | -------------- | ----------------------------------------------------- |
+| name             | string         | The name of the add-on                                |
+| slug             | string         | The slug for the add-on                               |
+| advanced         | boolean        | `true` if it should only be visible to advanced users |
+| description      | string         | The description of the add-on                         |
+| repository       | string         | The repository the add-on came from                   |
+| version          | string or null | The installed version of the add-on                   |
+| version_latest   | string         | The latest published version of the add-on            |
+| update_available | boolean        | `true` if an update is available                      |
+| installed        | string         | `true` if the the add-on is installed                 |
+| available        | boolean        | `false` if you can not install the add-on             |
+| icon             | bool           | The add-on has a icon file                            |
+| logo             | bool           | The add-on has a logo file                            |
+| state            | string         | The state of the add-on (started, stopped)            |
 
 ## Application
 
