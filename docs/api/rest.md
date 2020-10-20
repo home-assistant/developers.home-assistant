@@ -1,6 +1,7 @@
 ---
 title: "REST API"
 ---
+import ApiEndpoint from '@site/static/js/api_endpoint.jsx'
 
 Home Assistant provides a RESTful API on the same port as the web frontend. (default port is port 8123).
 
@@ -59,8 +60,8 @@ Successful calls will return status code 200 or 201. Other status codes that can
 ### Actions
 
 The API supports the following actions:
-<details>
-<summary className="endpoint get protected">/api/</summary>
+
+<ApiEndpoint path="/api" method="get">
 
 Returns a message if the API is up and running.
 
@@ -77,10 +78,9 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   -H "Content-Type: application/json" http://localhost:8123/api/
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/api/config</summary>
+<ApiEndpoint path="/api/config" method="get">
 
 Returns the current configuration as JSON.
 
@@ -132,10 +132,9 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   -H "Content-Type: application/json" http://localhost:8123/api/config
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/api/discovery_info</summary>
+<ApiEndpoint path="/api/discovery_info" method="get" unprotected>
 
 Returns basic information about the Home Assistant instance as JSON.
 
@@ -151,14 +150,13 @@ Returns basic information about the Home Assistant instance as JSON.
 Sample `curl` command:
 
 ```shell
-curl -X GET -H "Authorization: Bearer ABCDEFGH" \
-  -H "Content-Type: application/json" http://localhost:8123/api/discovery_info
+curl -X GET -H "Content-Type: application/json" \
+  http://localhost:8123/api/discovery_info
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/api/events</summary>
+<ApiEndpoint path="/api/events" method="get">
 
 Returns an array of event objects. Each event object contains event name and listener count.
 
@@ -182,10 +180,9 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   -H "Content-Type: application/json" http://localhost:8123/api/events
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/api/services</summary>
+<ApiEndpoint path="/api/services" method="get">
 
 Returns an array of service objects. Each object contains the domain and which services it contains.
 
@@ -214,10 +211,9 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   -H "Content-Type: application/json" http://localhost:8123/api/services
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/api/history/period/&lt;timestamp></summary>
+<ApiEndpoint path="/api/history/period/<timestamp>" method="get">
 
 Returns an array of state changes in the past. Each object contains further details for the entities.
 
@@ -231,6 +227,7 @@ You can pass the following optional GET parameters:
 - `significant_changes_only` to only return significant state changes.
 
 Example without `minimal_response`
+
 ```json
 [
     [
@@ -259,6 +256,7 @@ Example without `minimal_response`
 ```
 
 Example with `minimal_response`
+
 ```json
 [
     [
@@ -279,7 +277,7 @@ Example with `minimal_response`
         {
             "last_changed": "2016-02-06T22:22:00+00:00",
             "state": "-2.2"
-        },        
+        },
         {
             "attributes": {
                 "friendly_name": "Weather Temperature",
@@ -302,7 +300,6 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00
 ```
 
-
 ```shell
 curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   -H "Content-Type: application/json" \
@@ -321,10 +318,9 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00?end_time=2016-12-31T00%3A00%3A00%2B02%3A00
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/api/logbook/&lt;timestamp></summary>
+<ApiEndpoint path="/api/logbook/<timestamp>" method="get">
 
 Returns an array of logbook entries.
 
@@ -385,10 +381,9 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   http://localhost:8123/api/logbook/2016-12-29T00:00:00+02:00?end_time=2099-12-31T00%3A00%3A00%2B02%3A00
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/api/states</summary>
+<ApiEndpoint path="/api/states" method="get">
 
 Returns an array of state objects. Each state has the following attributes: entity_id, state, last_changed and attributes.
 
@@ -416,10 +411,9 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   -H "Content-Type: application/json" http://localhost:8123/api/states
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/api/states/&lt;entity_id></summary>
+<ApiEndpoint path="/api/states/<entity_id>" method="get">
 
 Returns a state object for specified entity_id. Returns 404 if not found.
 
@@ -447,10 +441,9 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   http://localhost:8123/api/states/sensor.kitchen_temperature
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/api/error_log</summary>
+<ApiEndpoint path="/api/error_log" method="get">
 
 Retrieve all errors logged during the current session of Home Assistant as a plaintext response.
 
@@ -468,10 +461,9 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   http://localhost:8123/api/error_log
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint get protected">/api/camera_proxy/&lt;camera entity_id></summary>
+<ApiEndpoint path="/api/camera_proxy/<camera entity_id>" method="get">
 
 Returns the data (image) from the specified camera entity_id.
 
@@ -483,10 +475,9 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
   http://localhost:8123/api/camera_proxy/camera.my_sample_camera?time=1462653861261 -o image.jpg
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/api/states/&lt;entity_id></summary>
+<ApiEndpoint path="/api/states/<entity_id>" method="post">
 
 Updates or creates a state. You can create any state that you want, it does not have to be backed by an entity in Home Assistant.
 
@@ -530,10 +521,9 @@ curl -X POST -H "Authorization: Bearer ABCDEFGH" \
   http://localhost:8123/api/states/sensor.kitchen_temperature
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/api/events/&lt;event_type></summary>
+<ApiEndpoint path="/api/events/<event_type>" method="post">
 
 Fires an event with event_type. Please be mindful of the data structure as documented on our [Data Science portal](https://data.home-assistant.io/docs/events/#database-table).
 
@@ -553,10 +543,9 @@ Returns a message if successful.
 }
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/api/services/&lt;domain>/&lt;service></summary>
+<ApiEndpoint path="/api/services/<domain>/<service>" method="post">
 
 Calls a service within a specific domain. Will return when the service has been executed or after 10 seconds, whichever comes first.
 
@@ -612,10 +601,9 @@ curl -X POST \
 The result will include any states that changed while the service was being executed, even if their change was the result of something else happening in the system.
 :::
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/api/template</summary>
+<ApiEndpoint path="/api/template" method="post">
 
 Render a Home Assistant template. [See template docs for more information.](https://www.home-assistant.io/topics/templating/)
 
@@ -639,10 +627,9 @@ curl -X POST -H "Authorization: Bearer ABCDEFGH" \
   -d '{"template": "It is {{ now() }}!"}' http://localhost:8123/api/template
 ```
 
-</details>
+</ApiEndpoint>
 
-<details>
-<summary className="endpoint post protected">/api/config/core/check_config</summary>
+<ApiEndpoint path="/api/config/core/check_config" method="post">
 
 Trigger a check of `configuration.yaml`. No additional data needs to be passed in with this request. Needs config integration enabled.
 
@@ -664,4 +651,4 @@ If the check fails, the errors attribute in the object will list what caused the
 }
 ```
 
-</details>
+</ApiEndpoint>
