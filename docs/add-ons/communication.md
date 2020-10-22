@@ -9,7 +9,7 @@ There are different ways for communication between add-ons inside Home Assistant
 We use an internal network that's allowed to communicate with every add-on, including to/from Home Assistant, by using its name or alias. Only add-ons that run on the host network are limited in that they can talk with all internal add-ons by their name, but all other add-ons can't address these add-ons by name. However, using an alias works for both!
 
 Names/aliases are used for communication inside Home Assistant.
-The name is generated using the following format: `{REPO}_{SLUG}`, e.g., `local_xy` or `3283fh_myaddon`. In this example, `{SLUG}` is defined in an add-on's `config.json` file. You can use this name as the DNS name also, but you need replace any `_` with `-` to have a valid hostname. If an add-on is installed locally, `{REPO}` will be `local`. If the add-on is installed from a Github repository, `{REPO}` is a hashed identifier generated from the GitHub repository's URL (ex: `https://github.com/xy/my_hassio_addons`). See [here](https://github.com/home-assistant/hassio/blob/587047f9d648b8491dc8eef17dc6777f81938bfd/hassio/addons/utils.py#L17) to understand how this identifier is generated. Note that this identifier is required in certain service calls that use the [Supervisor add-on API][supervisor-addon-api]. You can view the repository identifiers for all currently installed add-ons via a GET request to the Supervisor API `addons` endpoint.
+The name is generated using the following format: `{REPO}_{SLUG}`, e.g., `local_xy` or `3283fh_myaddon`. In this example, `{SLUG}` is defined in an add-on's `config.json` file. You can use this name as the DNS name also, but you need replace any `_` with `-` to have a valid hostname. If an add-on is installed locally, `{REPO}` will be `local`. If the add-on is installed from a Github repository, `{REPO}` is a hashed identifier generated from the GitHub repository's URL (ex: `https://github.com/xy/my_hassio_addons`). See [here](https://github.com/home-assistant/supervisor/blob/587047f9d648b8491dc8eef17dc6777f81938bfd/hassio/addons/utils.py#L17) to understand how this identifier is generated. Note that this identifier is required in certain service calls that use the [Supervisor add-on API][supervisor-addon-api]. You can view the repository identifiers for all currently installed add-ons via a GET request to the Supervisor API `addons` endpoint.
 
 Use `supervisor` for communication with the internal API.
 
@@ -60,8 +60,8 @@ MQTT_USER=$(bashio::services mqtt "username")
 MQTT_PASSWORD=$(bashio::services mqtt "password")
 ```
 
-[core-api]: /api/rest.md
-[core-websocket]: /api/websocket.md
-[supervisor-api]: https://github.com/home-assistant/supervisor/blob/master/API.md
-[supervisor-addon-api]: https://github.com/home-assistant/supervisor/blob/dev/API.md#restful-for-api-addons
-[supervisor-services-api]:https://github.com/home-assistant/supervisor/blob/dev/API.md#services-1
+[core-api]: /api/rest
+[core-websocket]: /api/websocket
+[supervisor-api]: /api/supervisor/endpoints
+[supervisor-addon-api]: /api/supervisor/endpoints#addons
+[supervisor-services-api]: /api/supervisor/endpoints#service
