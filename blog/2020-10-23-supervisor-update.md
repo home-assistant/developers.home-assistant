@@ -26,7 +26,6 @@ The permissions of the `/data/options.json` file, was change from `644` to `600`
 There are several steps you can do in your add-on to continue to use this information:
 
 - If you are using [S6-overlay] in your add-on, you can use [`/etc/fix-attrs.d`][S6-overlay-permissions] to ensure that the user you are running the add-on as, have access to the file.
-- You can get the information from the [Supervisor REST API][api_docs] with `/addons/self/options`
 - You can change your add-on to run as `root` (default)
 
 ## Releases
