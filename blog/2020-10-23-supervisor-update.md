@@ -32,7 +32,7 @@ There are several steps you can do in your add-on to continue to use this inform
 
 Until now, the Supervisor, our plugins and add-ons have been using a mix of the build number and [Semantic Versioning (SemVer)][semver] as the versioning system, we have decided to replace that for these repositories and to adopt [Calendar Versioning (CalVer)][calver] as our versioning system instead.
 
-Just like the [Home Assistant core][ha_core] and the [Home Assistant OS][haos], the Supervisor also have three different channels (stable, beta and dev). We are now leveraging automated pipelines, to build and push out new Supervisor versions to the correct channels. By moving to this structure there was no more need to a dual branch setup, so both our `dev` and `master` branches have now been replaced with a new `main` branch.
+We are migrating the Supervisor from release based development to continuous development. This fits perfectly with our exists channel based update strategy (stable, beta and dev). We are now leveraging automated pipelines, to build and push out new Supervisor versions to the correct channels. By moving to this structure there was no more need to a dual branch setup, so both our `dev` and `master` branches have now been replaced with a new `main` branch. Our plugins (DNS, Multicast, Observer, CLI) for the Supervisor will also follow this continuous development principal.
 
 With this new workflow, when a pull request is merged to the `main` branch, a new version of the Supervisor is built and made available to the dev channel. When a new release is created on GitHub a new version of the Supervisor is built and made available to the dev channel. Updates to the stable channel is not automated, when we feel a version has been tested long enough in both the dev and beta channels, we make that version available to the stable channel.
 
@@ -89,9 +89,7 @@ Your repository is mapped to `/data` in the action, so if you have your add-on f
 [cli]: https://github.com/home-assistant/cli
 [docker_api]: /docs/api/supervisor/endpoints#docker
 [github_action]: https://github.com/features/actions
-[ha_core]: https://github.com/home-assistant/core
 [hacktoberfest]: https://hacktoberfest.digitalocean.com/
-[haos]: https://github.com/home-assistant/operating-system
 [hassio-builder-action]: https://github.com/home-assistant/hassio-builder#github-action
 [hassio-builder]: https://github.com/home-assistant/hassio-builder
 [private-container-registries]: https://www.home-assistant.io/blog/2020/10/21/supervisor-249/#private-container-registries
