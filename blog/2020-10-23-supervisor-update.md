@@ -21,7 +21,7 @@ The [API documentation][api_docs] have been updated to reflect these changes.
 
 ## Add-on options
 
-The permissions of the `/data/options.json` file, from `644` to `600`. If your add-on is running as non-root and you are reading this file, it will give now you permission issues.
+The permissions of the `/data/options.json` file, was change from `644` to `600`. If your add-on is running as non-root and you are reading this file, it will give now you permission issues.
 
 There are several steps you can do in your add-on to continue to use this information:
 
