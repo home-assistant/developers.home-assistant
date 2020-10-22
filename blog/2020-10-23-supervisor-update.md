@@ -7,7 +7,7 @@ title: "Calling all add-on developers!"
 
 ## Documentation
 
-First off, our [API documentation][api_docs] has been moved to the developer documentation site, during this move it also got a style update to make it easier to navigate. Some of the endpoints are still missing some content, if you have not yet met your quota for [hacktoberfest] maybe you want to contribute some more details to our API descriptions?
+First off, our [API documentation][api_docs] has been moved to the developer documentation site, during this move it also got a style update to make it easier to navigate. Some of the endpoints are still missing some content, if you have not yet met your quota for [Hacktoberfest] maybe you want to contribute some more details to our API descriptions?
 
 ## API Changes
 
