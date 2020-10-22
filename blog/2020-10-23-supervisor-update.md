@@ -14,7 +14,7 @@ First off, our [API documentation][api_docs] has been moved to the developer doc
 - Using the `/homeassistant/*` endpoints is deprecated, and will be removed later this year. You need to use `/core/*` instead.
 - Using `http://hassio/` is deprecated, and will be removed later this year. You need to use `http://supervisor/` instead.
 - Using `HASSIO_TOKEN` is deprecated, and will be removed later this year. You need to use `SUPERVISOR_TOKEN` instead.
-- Deleting snapshots with `GET` calling `/supervisor/snapshots/<slug>/delete` is deprecated, and will be removed later this year. You need to use the `DELETE` method when calling `/supervisor/snapshots/<slug>` instead.
+- Deleting snapshots with `POST` calling `/supervisor/snapshots/<slug>/remove` is deprecated, and will be removed later this year. You need to use the `DELETE` method when calling `/supervisor/snapshots/<slug>` instead.
 - Using `X-Hassio-Key` header as authentication method is deprecated, and will be removed later this year. You need use an authorization header with a `Bearer` token instead.
 
 The [API documentation][api_docs] have been updated to reflect these changes.
