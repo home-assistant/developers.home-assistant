@@ -60,8 +60,8 @@ MQTT_USER=$(bashio::services mqtt "username")
 MQTT_PASSWORD=$(bashio::services mqtt "password")
 ```
 
-[core-api]: /api/rest
-[core-websocket]: /api/websocket
-[supervisor-api]: /api/supervisor/endpoints
-[supervisor-addon-api]: /api/supervisor/endpoints#addons
-[supervisor-services-api]: /api/supervisor/endpoints#service
+[core-api]: /api/rest.md
+[core-websocket]: /api/websocket.md
+[supervisor-api]: /api/supervisor/endpoints.md
+[supervisor-addon-api]: /api/supervisor/endpoints.md#addons
+[supervisor-services-api]: /api/supervisor/endpoints.md#service
