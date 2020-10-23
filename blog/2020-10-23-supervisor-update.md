@@ -38,14 +38,6 @@ We did this move to provide higher software quality with automatic test system. 
 
 We are using [Azure pipelines][azure_pipelines] to build and publish the Supervisor. If you are interested on how we are doing this, you can look at the [release pipeline here][release_pipeline], and the [template repository here][azure_templates].
 
-## Private Container Registries
-
-In the [Supervisor 249][private-container-registries] blog post, we mentioned the introduction of private container registries. For you as a add-on maintainer this now give you the possibility to use any container registries like GitHub's package registry for docker, or your own instance of a container registry, while developing or testing your add-on.
-
-This can also be used for private testing of your add-on by giving pull access to users.
-
-To make the Supervisor use your credentials, you can use the [API][docker_api], the [CLI][cli], or the Supervisor panel in the Home Assistant UI.
-
 ## GitHub Action
 
 You can now use our [builder][hassio-builder] as a [GitHub action][github_action]! :tada:
