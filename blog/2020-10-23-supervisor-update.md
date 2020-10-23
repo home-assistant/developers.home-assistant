@@ -40,11 +40,11 @@ We are using [Azure pipelines][azure_pipelines] to build and publish the Supervi
 
 ## GitHub Action
 
-You can now use our [builder][hassio-builder] as a [GitHub action][github_action]! :tada:
+You can now use our [builder][builder] as a [GitHub action][github_action]! :tada:
 
-This is already in use in our [hassio-addons repository][addons], you can see an example on how we implemented it [here][hassio-builder-action].
+This is already in use in our [hassio-addons repository][addons], you can see an example on how we implemented it [here][builder-action].
 
-It can be used both to ensuring that the add-on will still build with changes made to your repository, and to publish the images as a part of a release workflow. How to use the action is documented in the [hassio-builder repository][hassio-builder-action].
+It can be used both to ensuring that the add-on will still build with changes made to your repository, and to publish the images as a part of a release workflow. How to use the action is documented in the [builder repository][builder-action].
 
 Here is an example on how you can use it:
 
@@ -57,7 +57,7 @@ jobs:
     - name: Checkout the repository
       uses: actions/checkout@v2
     - name: Test build
-      uses: home-assistant/hassio-builder@master
+      uses: home-assistant/builder@master
       with:
         args: |
           --test \
@@ -82,8 +82,8 @@ Your repository is mapped to `/data` in the action, so if you have your add-on f
 [docker_api]: /docs/api/supervisor/endpoints#docker
 [github_action]: https://github.com/features/actions
 [hacktoberfest]: https://hacktoberfest.digitalocean.com/
-[hassio-builder-action]: https://github.com/home-assistant/hassio-builder#github-action
-[hassio-builder]: https://github.com/home-assistant/hassio-builder
+[builder-action]: https://github.com/home-assistant/builder#github-action
+[builder]: https://github.com/home-assistant/builder
 [private-container-registries]: https://www.home-assistant.io/blog/2020/10/21/supervisor-249/#private-container-registries
 [release_pipeline]: https://github.com/home-assistant/supervisor/blob/main/azure-pipelines-release.yml
 [S6-overlay-permissions]: https://github.com/just-containers/s6-overlay#fixing-ownership--permissions
