@@ -40,7 +40,7 @@ We are using [Azure pipelines][azure_pipelines] to build and publish the Supervi
 
 ## GitHub Action
 
-You can now use our [builder][builder] as a [GitHub action][github_action]! :tada:
+You can now use our [builder][marketplace] as a [GitHub action][github_action]! :tada:
 
 This is already in use in our [hassio-addons repository][addons], you can see an example on how we implemented it [here][builder-action].
 
@@ -76,15 +76,15 @@ Your repository is mapped to `/data` in the action, so if you have your add-on f
 [api_docs]: /docs/api/supervisor/endpoints
 [azure_pipelines]: https://docs.microsoft.com/en-us/azure/devops/pipelines/?view=azure-devops
 [azure_templates]: https://github.com/home-assistant/ci-azure
+[builder-action]: https://github.com/home-assistant/builder#github-action
 [calver]: https://calver.org/
-[semver]: https://semver.org/
 [cli]: https://github.com/home-assistant/cli
 [docker_api]: /docs/api/supervisor/endpoints#docker
 [github_action]: https://github.com/features/actions
 [hacktoberfest]: https://hacktoberfest.digitalocean.com/
-[builder-action]: https://github.com/home-assistant/builder#github-action
-[builder]: https://github.com/home-assistant/builder
+[marketplace]: https://github.com/marketplace/actions/home-assistant-builder
 [private-container-registries]: https://www.home-assistant.io/blog/2020/10/21/supervisor-249/#private-container-registries
 [release_pipeline]: https://github.com/home-assistant/supervisor/blob/main/azure-pipelines-release.yml
 [S6-overlay-permissions]: https://github.com/just-containers/s6-overlay#fixing-ownership--permissions
 [S6-overlay]: https://github.com/just-containers/s6-overlay
+[semver]: https://semver.org/
