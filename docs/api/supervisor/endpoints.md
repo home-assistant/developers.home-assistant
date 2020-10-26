@@ -34,8 +34,10 @@ Return overview information about add-ons and add-on repositories.
       "advanced": false,
       "stage": "stable",
       "repository": "core",
-      "version": "1.0.1",
-      "installed": null,
+      "version": null,
+      "version_latest": "1.0.1",
+      "update_available": false,
+      "installed": false,
       "detached": true,
       "available": true,
       "build": false,
@@ -144,6 +146,7 @@ Get details about a add-on
 | state               | string or null     | The state of the add-on (started, stopped)                                             |
 | stdin               | boolean            | `true` if the add-on accepts stdin commands                                            |
 | udev                | boolean            | `true` if udev access is granted is enabled                                            |
+| update_available    | boolean            | `true` if an update is available                                                       |
 | url                 | string or null     | URL to more information about the add-on                                               |
 | usb                 | list               | A list of attached USB devices                                                         |
 | version             | string             | The installed version of the add-on                                                    |
@@ -215,6 +218,7 @@ Get details about a add-on
   "state": "started",
   "stdin": false,
   "udev": false,
+  "update_available": false,
   "url": null,
   "usb": ["/dev/usb1"],
   "version_latest": "1.0.2",
@@ -374,12 +378,13 @@ Return information about the audio plugin.
 
 **Returned data:**
 
-| key            | type       | description                     |
-| -------------- | ---------- | ------------------------------- |
-| host           | string     | The IP address of the plugin    |
-| version        | string     | The installed observer version  |
-| version_latest | string     | The latest published version    |
-| audio          | dictionary | A [Audio model](api/supervisor/models.md#audio) |
+| key              | type       | description                      |
+| ---------------- | ---------- | -------------------------------- |
+| host             | string     | The IP address of the plugin     |
+| version          | string     | The installed observer version   |
+| version_latest   | string     | The latest published version     |
+| update_available | boolean    | `true` if an update is available |
+| audio            | dictionary | A [Audio model](api/supervisor/models.md#audio) |
 
 **Example response:**
 
@@ -388,6 +393,7 @@ Return information about the audio plugin.
   "host": "172.0.0.19",
   "version": "1",
   "latest_version": "2",
+  "update_available": true,
   "audio": {
     "card": [
       {
@@ -657,17 +663,19 @@ Returns information about the CLI plugin
 
 **Returned data:**
 
-| key            | type   | description                  |
-| -------------- | ------ | ---------------------------- |
-| version        | string | The installed CLI version    |
-| version_latest | string | The latest published version |
+| key              | type       | description                      |
+| ---------------- | ---------- | -------------------------------- |
+| version          | string     | The installed cli version        |
+| version_latest   | string     | The latest published version     |
+| update_available | boolean    | `true` if an update is available |
 
 **Example response:**
 
 ```json
 {
   "version": "1",
-  "version_latest": "2"
+  "version_latest": "2",
+  "update_available": true
 }
 ```
 
@@ -724,21 +732,22 @@ Returns information about the Home Assistant core
 
 **Returned data:**
 
-| key            | type           | description                                                |
-| -------------- | -------------- | ---------------------------------------------------------- |
-| version        | string         | The installed core version                                 |
-| version_latest | string         | The latest published version in the active channel         |
-| arch           | string         | The architecture of the host (armhf, aarch64, i386, amd64) |
-| machine        | string         | The machine type that is running the host                  |
-| ip_address     | string         | The internal docker IP address to the supervisor           |
-| image          | string         | The container image that is running the core               |
-| boot           | boolean        | `true` if it should start on boot                          |
-| port           | int            | The port Home Assistant is running on                      |
-| ssl            | boolean        | `true` if Home Assistant is using SSL                      |
-| watchdog       | boolean        | `true` if watchdog is enabled                              |
-| wait_boot      | int            | Max time to wait during boot                               |
-| audio_input    | string or null | The description of the audio input device                  |
-| audio_output   | string or null | The description of the audio output device                 |
+| key              | type           | description                                                |
+| ---------------- | -------------- | ---------------------------------------------------------- |
+| version          | string         | The installed core version                                 |
+| version_latest   | string         | The latest published version in the active channel         |
+| update_available | boolean        | `true` if an update is available                           |
+| arch             | string         | The architecture of the host (armhf, aarch64, i386, amd64) |
+| machine          | string         | The machine type that is running the host                  |
+| ip_address       | string         | The internal docker IP address to the supervisor           |
+| image            | string         | The container image that is running the core               |
+| boot             | boolean        | `true` if it should start on boot                          |
+| port             | int            | The port Home Assistant is running on                      |
+| ssl              | boolean        | `true` if Home Assistant is using SSL                      |
+| watchdog         | boolean        | `true` if watchdog is enabled                              |
+| wait_boot        | int            | Max time to wait during boot                               |
+| audio_input      | string or null | The description of the audio input device                  |
+| audio_output     | string or null | The description of the audio output device                 |
 
 **Example response:**
 
@@ -746,6 +755,7 @@ Returns information about the Home Assistant core
 {
   "version": "0.117.0",
   "version_latest": "0.117.0",
+  "update_available": true,
   "arch": "arch",
   "machine": "amd64",
   "ip_address": "172.0.0.15",
@@ -911,13 +921,14 @@ Return information about the DNS plugin.
 
 **Returned data:**
 
-| key            | type   | description                    |
-| -------------- | ------ | ------------------------------ |
-| host           | string | The IP address of the plugin   |
-| version        | string | The installed observer version |
-| version_latest | string | The latest published version   |
-| servers        | list   | A list of DNS servers          |
-| locals         | list   | A list of DNS servers          |
+| key              | type    | description                      |
+| ---------------- | ------- | -------------------------------- |
+| host             | string  | The IP address of the plugin     |
+| version          | string  | The installed observer version   |
+| version_latest   | string  | The latest published version     |
+| update_available | boolean | `true` if an update is available |
+| servers          | list    | A list of DNS servers            |
+| locals           | list    | A list of DNS servers            |
 
 **Example response:**
 
@@ -926,6 +937,7 @@ Return information about the DNS plugin.
   "host": "127.0.0.18",
   "version": "1",
   "version_latest": "2",
+  "update_available": true,
   "servers": ["dns://8.8.8.8"],
   "locals": ["dns://127.0.0.18"]
 }
@@ -1308,17 +1320,19 @@ Returns information about the multicast plugin
 
 **Returned data:**
 
-| key            | type   | description                    |
-| -------------- | ------ | ------------------------------ |
-| version        | string | The installed observer version |
-| version_latest | string | The latest published version   |
+| key              | type       | description                       |
+| ---------------- | ---------- | --------------------------------- |
+| version          | string     | The installed multicast version   |
+| version_latest   | string     | The latest published version      |
+| update_available | boolean    | `true` if an update is available  |
 
 **Example response:**
 
 ```json
 {
   "version": "1",
-  "version_latest": "2"
+  "version_latest": "2",
+  "update_available": true
 }
 ```
 
@@ -1454,11 +1468,12 @@ Returns information about the observer plugin
 
 **Returned data:**
 
-| key            | type   | description                               |
-| -------------- | ------ | ----------------------------------------- |
-| host           | string | The IP address the observer is running on |
-| version        | string | The installed observer version            |
-| version_latest | string | The latest published version              |
+| key              | type       | description                      |
+| ---------------- | ---------- | -------------------------------- |
+| host             | string     | The IP address of the plugin     |
+| version          | string     | The installed observer version   |
+| version_latest   | string     | The latest published version     |
+| update_available | boolean    | `true` if an update is available |
 
 **Example response:**
 
@@ -1466,7 +1481,8 @@ Returns information about the observer plugin
 {
   "host": "172.0.0.17",
   "version": "1",
-  "version_latest": "2"
+  "version_latest": "2",
+  "update_available": true
 }
 ```
 
@@ -1519,12 +1535,13 @@ Returns information about the OS.
 
 **Returned data:**
 
-| key            | type   | description                                                  |
-| -------------- | ------ | ------------------------------------------------------------ |
-| version        | string | The current version of the OS                                |
-| version_latest | string | The latest published version of the OS in the active channel |
-| board          | string | The name of the board                                        |
-| boot           | string | Which slot that are in use                                   |
+| key              | type    | description                                                  |
+| ---------------- | ------- | ------------------------------------------------------------ |
+| version          | string  | The current version of the OS                                |
+| version_latest   | string  | The latest published version of the OS in the active channel |
+| update_available | boolean | `true` if an update is available                             |
+| board            | string  | The name of the board                                        |
+| boot             | string  | Which slot that are in use                                   |
 
 **Example response:**
 
@@ -1884,6 +1901,7 @@ Returns information about the supervisor
 | ------------------- | ------------ | ------------------------------------------------------------- |
 | version             | string       | The installed supervisor version                              |
 | version_latest      | string       | The latest published version in the active channel            |
+| update_available    | boolean      | `true` if an update is available                              |
 | arch                | string       | The architecture of the host (armhf, aarch64, i386, amd64)    |
 | channel             | string       | The active channel (stable, beta, dev)                        |
 | timezone            | string       | The current timezone                                          |
@@ -1893,7 +1911,7 @@ Returns information about the supervisor
 | ip_address          | string       | The internal docker IP address to the supervisor              |
 | wait_boot           | int          | Max time to wait during boot                                  |
 | debug               | bool         | Debug is active                                               |
-| debug_block         | bool         | `true` if debug block is enabled                               |
+| debug_block         | bool         | `true` if debug block is enabled                              |
 | diagnostics         | bool or null | Sending diagnostics is enabled                                |
 | addons              | list         | A list of installed [Addon models](api/supervisor/models.md#addon)            |
 | addons_repositories | list         | A list of add-on repository URL's as strings                  |
@@ -1904,6 +1922,7 @@ Returns information about the supervisor
 {
   "version": "246",
   "version_latest": "version_latest",
+  "update_available": true,
   "arch": "amd64",
   "channel": "dev",
   "timezone": "TIMEZONE",
