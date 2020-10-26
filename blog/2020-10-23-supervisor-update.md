@@ -40,7 +40,7 @@ Your repository is mapped to `/data` in the action, so if you have your add-on f
 
 ## Documentation
 
-First off, our [API documentation][api_docs] has moved to the developer documentation site. During this move, it also got a style update to make it easier to navigate. Some of the endpoints are still missing some content. If you have not yet met your quota for [Hacktoberfest], maybe you want to contribute some more details to our API descriptions?
+Our [API documentation][api_docs] has moved to the developer documentation site. During this move, it also got a style update to make it easier to navigate. Some of the endpoints are still missing some content. If you have not yet met your quota for [Hacktoberfest], maybe you want to contribute some more details to our API descriptions?
 
 ## API Changes
 
@@ -69,22 +69,17 @@ We are migrating the Supervisor from release based development to continuous dev
 
 We made this move to provide higher software quality with an automatic test system. Every commit now triggers a new dev release, which gets tested by our test instances. Issues are imminently reported to sentry. This gives us the opportunity to test all changes before we create a release. When a release is created, the changes will come available in the beta channel. Once declared stable, we can promote the release to the stable channel.
 
-We are using [Azure pipelines][azure_pipelines] to build and publish the Supervisor. If you are interested in how we are doing this, you can look at the [release pipeline here][release_pipeline], and the [template repository here][azure_templates].
+We are using our [builder action][marketplace] with [GitHub actions][github_action] to build and publish the Supervisor, our plugins and base images for our Docker containers. If you are interested in how we are doing this, you can look at the [builder action for the Supervisor here][builder_action], and the [action helpers here][action_helpers].
 
-[action-example]:https://github.com/home-assistant/hassio-addons/blob/master/.github/workflows/build.yml
+[action_helpers]: https://github.com/home-assistant/actions/tree/master/helpers
 [addons]: https://github.com/home-assistant/hassio-addons
 [api_docs]: /docs/api/supervisor/endpoints
-[azure_pipelines]: https://docs.microsoft.com/en-us/azure/devops/pipelines/?view=azure-devops
-[azure_templates]: https://github.com/home-assistant/ci-azure
+[builder_action]: https://github.com/home-assistant/supervisor/blob/main/.github/workflows/builder.yml
 [builder-action]: https://github.com/home-assistant/builder#github-action
 [calver]: https://calver.org/
-[cli]: https://github.com/home-assistant/cli
-[docker_api]: /docs/api/supervisor/endpoints#docker
 [github_action]: https://github.com/features/actions
-[hacktoberfest]: https://hacktoberfest.digitalocean.com/
+[Hacktoberfest]: https://hacktoberfest.digitalocean.com/
 [marketplace]: https://github.com/marketplace/actions/home-assistant-builder
-[private-container-registries]: https://www.home-assistant.io/blog/2020/10/21/supervisor-249/#private-container-registries
-[release_pipeline]: https://github.com/home-assistant/supervisor/blob/main/azure-pipelines-release.yml
 [S6-overlay-permissions]: https://github.com/just-containers/s6-overlay#fixing-ownership--permissions
 [S6-overlay]: https://github.com/just-containers/s6-overlay
 [semver]: https://semver.org/
