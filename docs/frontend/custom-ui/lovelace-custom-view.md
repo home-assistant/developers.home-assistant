@@ -61,7 +61,9 @@ A user who downloads and installs your new Custom View can then use it via editi
   cards: [...]
 ```
 
-Custom Developers can add a `layout` property to each card that can store a key, position info, width, height, etc:
+## Views storing custom data
+
+If your view offers advanced layouting features, it might be that it wants to store custom data on a per-card basis. You can do this by adding a `layout` property to the card configuration.
 
 ```yaml
 - type: weather-card
