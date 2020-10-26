@@ -6,7 +6,7 @@ Custom Element developers can now create Custom View Layouts that users can load
 
 ## API
 
-You define your custom card as a [custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements). It's up to you to decide how to render your DOM inside your element. You can use Polymer, Angular, Preact or any other popular framework (except for React – [more info on React here](https://custom-elements-everywhere.com/#react)).
+You define your custom card as a [custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements). It's up to you to decide how to render your DOM inside your element. You can use Lit Element, Preact or any other popular framework (except for React – [more info on React here](https://custom-elements-everywhere.com/#react)).
 
 Custom Views receive the following:
 
