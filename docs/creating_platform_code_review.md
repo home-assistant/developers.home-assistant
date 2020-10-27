@@ -60,7 +60,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
 
 1. Extend the entity from the integration you're building a platform for.
 
-```python
+    ```python
     from homeassistant.components.light import Light
     
     
