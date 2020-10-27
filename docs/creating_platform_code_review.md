@@ -62,8 +62,8 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
 
     ```python
     from homeassistant.components.light import Light
-
-
+    
+    
     class HueLight(Light):
         """Hue light component."""
     ```
