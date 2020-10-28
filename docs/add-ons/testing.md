@@ -9,8 +9,7 @@ The fastest and recommended way to develop add-ons is using a local Visual Studi
 - Open the root folder inside VS Code, and when prompted re-open the window inside the container (or, from the Command Palette, select 'Rebuild and Reopen in Container'). 
 - When VS Code has opened your folder in the container (which can take some time for the first run) you'll need to run the task (Terminal -> Run Task) 'Start Home Assistant', which will bootstrap Supervisor and Home Assistant. 
 - You'll then be able to access the normal onboarding process via the Home Assistant instance at `http://localhost:8123/`.
-
-The add-on(s) under development will be automatically found in the Local Add-ons repository.
+- The add-on(s) found in your root folder will automatically be found in the Local Add-ons repository.
 
 For standalone add-ons, there also exists an [addon devcontainer template][hassio-addon-devcontainer] on GitHub which provides the same boilerplate dev container for new add-on projects.
 
