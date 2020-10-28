@@ -21,7 +21,7 @@ For standalone add-ons, there also exists an [addon devcontainer template][hassi
 
 The bootstrap script (start_supervisor.sh) currently does not support Docker on Windows using the WSL 2 based engine. The message "_Timeout while waiting for docker to come up_" will appear in the terminal.
 
-You'll need to switch back to legacy Hyper-V backend in Docker Desktop > Settings > General.
+Using Docker Desktop? You'll need to switch back to legacy Hyper-V backend in Settings > General.
 :::
 
 ## Remote development
