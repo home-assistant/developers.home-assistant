@@ -2,7 +2,7 @@
 title: "Local add-on testing"
 ---
 
-The fastest and recommended way to develop add-ons is using a local Visual Studio Code dev environment. The [Official Add-ons][hassio-addons] repository includes a devcontainer setup for VS Code which will run Supervisor and Home Assistant, with all of the add-ons mapped as Local Add-ons inside, making it simple for add-on developers on Windows, Mac and Linux desktop OS-es. 
+The fastest and recommended way to develop add-ons is using a local Visual Studio Code dev environment. The [Official Add-ons][hassio-addons] repository includes a dev container setup for VS Code which will run Supervisor and Home Assistant, with all of the add-ons mapped as Local Add-ons inside, making it simple for add-on developers on Windows, Mac and Linux desktop OS-es. 
 
 - Follow the instructions to download and install the [Remote Containers][remote-containers] VS Code extension.
 - Copy the `.devcontainer` folder from [Official Add-ons][hassio-addons] repository into the root of your add-ons folders.
@@ -12,11 +12,18 @@ The fastest and recommended way to develop add-ons is using a local Visual Studi
 
 The add-on(s) under development will be automatically found in the Local Add-ons repository.
 
-For standalone add-ons, there also exists an [addon devcontainer template][hassio-addon-devcontainer] on GitHub which provides the same boilerplate devcontainer for new add-on projects.
+For standalone add-ons, there also exists an [addon devcontainer template][hassio-addon-devcontainer] on GitHub which provides the same boilerplate dev container for new add-on projects.
 
 [hassio-addons]: https://github.com/home-assistant/hassio-addons
 [remote-containers]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
 [hassio-addon-devcontainer]: https://github.com/issacg/hassio-addon-devcontainer	
+
+:::info
+
+The bootstrap script (`start_supervisor.sh`) currently does not support Docker on Windows using the WSL 2 based engine. The message `Timeout while waiting for docker to come up` will appear in the terminal.
+
+You'll need to switch back to legacy Hyper-V backend in Docker Desktop > Settings > General.
+:::
 
 ## Remote development
 
