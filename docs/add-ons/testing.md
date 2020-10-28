@@ -16,7 +16,7 @@ For standalone add-ons, there also exists an [addon devcontainer template][hassi
 
 [hassio-addons]: https://github.com/home-assistant/hassio-addons
 [remote-containers]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
-[hassio-addon-devcontainer]: https://github.com/issacg/hassio-addo.
+[hassio-addon-devcontainer]: https://github.com/issacg/hassio-addon-devcontainer	
 
 ## Remote development
 
