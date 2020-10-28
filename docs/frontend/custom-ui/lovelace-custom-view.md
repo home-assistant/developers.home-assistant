@@ -23,7 +23,8 @@ interface LovelaceViewElement {
 
 Cards and Badges will be created and maintained by the core code and given to the custom view. The custom views are meant to load the cards and badges and display them in a customized layout.
 
-Here is an example below: (note: this example does not have all of the properties but the necessities to show the example)
+## Example
+(note: this example does not have all of the properties but the necessities to show the example)
 
 ```js
 class MyNewView extends LitElement {
