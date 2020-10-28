@@ -68,6 +68,7 @@ module.exports = {
       label: "Custom UI",
       items: [
         "frontend/custom-ui/lovelace-custom-card",
+        "frontend/custom-ui/lovelace-custom-view",
         "frontend/custom-ui/creating-custom-panels",
         "frontend/custom-ui/registering-resources",
       ],
