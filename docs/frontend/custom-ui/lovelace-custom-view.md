@@ -64,7 +64,7 @@ A user who downloads and installs your new Custom View can then use it via editi
 
 ## Store Custom Data
 
-If your view offers advanced layouting features, it might be that it wants to store custom data on a per-card basis. You can do this by adding a `layout` property to the card configuration.
+If your view requires data to persist at a card level, there is a `layout` in the card configuration that can be used to store information. Example: Key, X and Y coordinates, width and height, etc
 
 ```yaml
 - type: weather-card
