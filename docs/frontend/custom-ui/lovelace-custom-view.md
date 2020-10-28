@@ -1,5 +1,5 @@
 ---
-title: "Lovelace: Custom View Layouts"
+title: "Lovelace: Custom Views"
 ---
 
 Custom View Layouts allow developers and users to customize the way that Cards and Badges are displayed in a view by loading the layout and specifying the type on the view. You are now not limited to our built-in sorting methods.
