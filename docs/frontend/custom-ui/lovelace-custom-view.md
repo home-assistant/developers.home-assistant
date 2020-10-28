@@ -2,7 +2,7 @@
 title: "Lovelace: Custom Views"
 ---
 
-Custom Element developers can now create Custom View Layouts that users can load and use! This allows you to build your own Lovelace View that lays the cards out exactly how you want them.
+Custom View Layouts allow developers and users to customize the way that Cards and Badges are displayed in a view by loading the layout and specifying the type on the view. You are now not limited to our built-in sorting methods.
 
 ## API
 
