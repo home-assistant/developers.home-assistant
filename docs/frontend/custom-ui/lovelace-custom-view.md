@@ -61,7 +61,7 @@ A user who downloads and installs your new Custom View can then use it via editi
   cards: [...]
 ```
 
-## Store Custom Data in your View
+## Store Custom Data
 
 If your view offers advanced layouting features, it might be that it wants to store custom data on a per-card basis. You can do this by adding a `layout` property to the card configuration.
 
