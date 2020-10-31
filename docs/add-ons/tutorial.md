@@ -117,12 +117,12 @@ RUN apk add --no-cache python3
 WORKDIR /data
 ```
 
-Add "ports" to `config.json`. This will make TCP on port 8000 inside the container available on the host on port 8000.
+Add "ports" to `config.json`. This will make TCP on port 8000 inside the container available on the host on port 8000. Please note that the version must be incremented as well. This way the supervisor will know that a new version of the add-on is available. 
 
 ```json
 {
   "name": "Hello world",
-  "version": "0.2",
+  "version": "2",
   "slug": "hello_world",
   "description": "My first real add-on!",
   "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
@@ -158,10 +158,12 @@ Let's see if we can get some data into that file!
 
 To do this, we need to specify the default options and a schema for the user to change the options.
 
-Change the options and schema entries in your `config.json` with the following:
+Change the options and schema entries in your `config.json` with the following, also don't forget to increment the version as well:
 
 ```json
 {
+  …
+  "version": "3",
   …
 
   "options": {
