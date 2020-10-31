@@ -1434,7 +1434,8 @@ Update the settings for a network interface.
 | address | string | True     | The new IP address for the interface in the X.X.X.X/XX format          |
 | dns     | list   | True     | List of DNS servers to use                                             |
 | gateway | string | True     | The gateway the interface should use                                   |
-| method  | string | True     | Set if the interface should use DHCP or not, can be `dhcp` or `static` |
+| method  | string | True     | Set if the interface should use DHCP or not, can be `dhcp`, `static` or `disabled` |
+| ip_version  | string | True     | Set IP version of the interface to modify, can be `ipv4` or `ipv6` |
 
 **You need to supply at least one key in the payload.**
 
