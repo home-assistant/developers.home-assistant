@@ -1,9 +1,9 @@
 ---
-title: Analog Switch Entity
-sidebar_label: Analog Switch
+title: Number Entity
+sidebar_label: Number
 ---
 
-An analog_switch is an entity that allows the user to input an arbitrary number to an integration. Derive entity platforms from [`homeassistant.components.analog_switch.AnalogSwitchEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/analog_switch/__init__.py)
+A `number` is an entity that allows the user to input an arbitrary value to an integration. Derive entity platforms from [`homeassistant.components.number.NumberEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/number/__init__.py)
 
 ## Properties
 
@@ -11,7 +11,7 @@ An analog_switch is an entity that allows the user to input an arbitrary number 
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| state | float | **Required** | Current value of the analog switch
+| state | float | **Required** | Current value of the entity
 | min_value | float | 0 | The minimum accepted value (inclusive)
 | max_value | float | 100 | The maximum accepted value (inclusive)
 | step | float | **See below** | Defines the resolution of the values, i.e. the smallest increment or decrement
@@ -29,7 +29,7 @@ The default step value is dynamically chosen based on the range (max - min) valu
 Called when the user or automation wants to update the value.
 
 ```python
-class MyAnalogSwitch(AnalogSwitchEntity):
+class MyNumber(NumberEntity):
     # Implement one of these methods.
 
     def set_value(self, value: float) -> None:
@@ -45,7 +45,7 @@ class MyAnalogSwitch(AnalogSwitchEntity):
 Optional. If not implemented will default to setting a new value based on current `state` and `step` properties.
 
 ```python
-class MyAnalogSwitch(AnalogSwitchEntity):
+class MyNumber(NumberEntity):
     # Implement one of these methods.
 
     def increment(self) -> None:
@@ -61,7 +61,7 @@ class MyAnalogSwitch(AnalogSwitchEntity):
 Optional. If not implemented will default to setting a new value based on current `state` and `step` properties.
 
 ```python
-class MyAnalogSwitch(AnalogSwitchEntity):
+class MyNumber(NumberEntity):
     # Implement one of these methods.
 
     def decrement(self) -> None:
