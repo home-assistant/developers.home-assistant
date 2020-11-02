@@ -68,6 +68,12 @@ You can also run linting tests against all changed files, as reported by `git di
 script/lint
 ```
 
+In case you want to check the code coverage for your new component, run the following from the root of the repository:
+
+````shell
+pytest ./tests/components/<your_component>/ --cov=homeassistant.components.<your_component> --cov-report term-missing -vv
+````
+
 ### Preventing linter errors
 
 Save yourself the hassle of extra commits just to fix style errors by enabling the Flake8 git commit hook. Flake8 will check your code when you try to commit to the repository and block the commit if there are any style errors, which gives you a chance to fix them!
