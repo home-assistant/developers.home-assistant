@@ -1064,7 +1064,7 @@ Add a new container registry.
 }
 ```
 
-:::tip
+:::note
 
 To login to the default container registry (Docker Hub), use `hub.docker.com` as the registry.
 
