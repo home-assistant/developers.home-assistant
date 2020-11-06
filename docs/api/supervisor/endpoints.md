@@ -1258,7 +1258,7 @@ Shutdown the host
 <ApiEndpoint path="/ingress/session" method="post">
 Create a new session for access to the ingress service.
 
-**Payload:**
+**Returned data:**
 
 | key     | type   | optional | description                       |
 | ------- | ------ | -------- | --------------------------------- |
@@ -1268,6 +1268,13 @@ Create a new session for access to the ingress service.
 
 <ApiEndpoint path="/ingress/validate_session" method="post">
 Validate an ingress session, extending it's validity period.
+
+**Payload:**
+
+| key     | type   | optional | description                       |
+| ------- | ------ | -------- | --------------------------------- |
+| session | string | False    | The token for the ingress session |
+
 </ApiEndpoint>
 
 ### Misc
