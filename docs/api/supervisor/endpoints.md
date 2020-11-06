@@ -1064,6 +1064,12 @@ Add a new container registry.
 }
 ```
 
+:::note
+
+To login to the default container registry (Docker Hub), use `hub.docker.com` as the registry.
+
+:::
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/docker/registries/<registry>" method="delete">
