@@ -1266,6 +1266,10 @@ Create a new session for access to the ingress service.
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/ingress/validate_session" method="post">
+Validate an ingress session, extending it's validity period.
+</ApiEndpoint>
+
 ### Misc
 
 <ApiEndpoint path="/info" method="get">
