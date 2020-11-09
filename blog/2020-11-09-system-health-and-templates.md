@@ -6,7 +6,7 @@ authorTwitter: balloob
 title: System Health and Templates
 ---
 
-In Home Assistant 0.118 there will be two changes that could impact your custom component.
+In Home Assistant 0.118, there will be two changes that could impact your custom component.
 
 ## Removed deprecated `helpers.template.extract_entities`
 
@@ -26,9 +26,9 @@ async_track_template_result(
 
 ## Improved System Health
 
-Starting with Home Assistant 0.118, we're depreacting the old way of providing system health information for your integration. Instead, create a `system_health.py` file in your integration ([PR 42785](https://github.com/home-assistant/core/pull/42785)).
+Starting with Home Assistant 0.118, we're deprecating the old way of providing system health information for your integration. Instead, create a `system_health.py` file in your integration ([PR 42785](https://github.com/home-assistant/core/pull/42785)).
 
-Starting this release you can also include health checks that take longer to resolve ([PR 42831](https://github.com/home-assistant/core/pull/42831)), like checking if the service is online. The results will be passed to the frontend when they are ready.
+Starting this release, you can also include health checks that take longer to resolve ([PR 42831](https://github.com/home-assistant/core/pull/42831)), like checking if the service is online. The results will be passed to the frontend when they are ready.
 
 ```python
 """Provide info to system health."""
