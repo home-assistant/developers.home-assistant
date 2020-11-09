@@ -284,15 +284,15 @@ async def handle_result(hass, flow_id, data):
 
 ### Show Progress and Show Progress Done
 
-It is possible that we need the user to wait for a task that takes a several minutes.
+It is possible that we need the user to wait for a task that takes several minutes.
 
 _The example is about config entries, but works with other parts that use data entry flows too._
 
 The flow works as follows:
 
 1. The user starts config flow in Home Assistant.
-2. The config flow prompts the user that a task in in progress and will take some time to finish.
-3. The flow is responsible to manage the background task and continue the flow when the task is done or cancelled.
+2. The config flow prompts the user that a task in progress and will take some time to finish.
+3. The flow is responsible to manage the background task and continue the flow when the task is done or canceled.
 4. When the task or tasks are done, the flow should mark the progress to be done with the `async_show_progress_done` method.
 5. The frontend will update each time we call show progress or show progress done.
 6. The config flow will automatically advance to the next step when the progress was marked as done. The user is prompted with the next step.
