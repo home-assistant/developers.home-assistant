@@ -6,7 +6,7 @@ authorTwitter: balloob
 title: System Health and Templates
 ---
 
-In Home Assistant 0.118, there will be two changes that could impact your custom component.
+In Home Assistant 0.118, there will be two changes that could impact your custom integration.
 
 ## Removed deprecated `helpers.template.extract_entities`
 
