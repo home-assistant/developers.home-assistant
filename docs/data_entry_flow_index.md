@@ -282,6 +282,52 @@ async def handle_result(hass, flow_id, data):
         return "Invalid config flow specified"
 ```
 
+### Show Progress and Show Progress Done
+
+It is possible that we need the user to wait for a task that takes several minutes.
+
+_The example is about config entries, but works with other parts that use data entry flows too._
+
+The flow works as follows:
+
+1. The user starts config flow in Home Assistant.
+2. The config flow prompts the user that a task in progress and will take some time to finish.
+3. The flow is responsible to manage the background task and continue the flow when the task is done or canceled.
+4. When the task or tasks are done, the flow should mark the progress to be done with the `async_show_progress_done` method.
+5. The frontend will update each time we call show progress or show progress done.
+6. The config flow will automatically advance to the next step when the progress was marked as done. The user is prompted with the next step.
+
+Example configuration flow that includes two show progress tasks.
+
+```python
+from homeassistant import config_entries
+
+from .const import DOMAIN  # pylint:disable=unused-import
+
+
+class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
+    VERSION = 1
+    data = None
+    task_one_done = False
+
+    async def async_step_user(self, user_input=None):
+        if not user_input:
+            if not self.task_one_done:
+                self.task_one_done = True
+                progress_action = "task_one"
+            else:
+                progress_action = "task_two"
+            return self.async_show_progress(
+                step_id="user",
+                progress_action=progress_action,
+            )
+
+        return self.async_show_progress_done(next_step_id="finish")
+
+    async def async_step_finish(self, user_input=None):
+        return self.async_create_entry(title=self.data["title"], data=self.data)
+```
+
 ## Translations
 
 Data entry flows depend on translations for showing the text in the forms. It depends on the parent of a data entry flow manager where this is stored. For config and option flows this is in `strings.json` under `config` and `option`.
