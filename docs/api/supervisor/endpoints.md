@@ -1511,6 +1511,13 @@ Create a new VLAN *id* on this network interface.
 
 **This function only works with ethernet interfaces!**
 
+**Payload:**
+
+| key     | type   | optional | description                                                            |
+| ------- | ------ | -------- | ---------------------------------------------------------------------- |
+| ipv4    | dict   | True     | A struct with ipv4 interface settings                                  |
+| ipv6    | dict   | True     | A struct with ipv6 interface settings                                  |
+
 </ApiEndpoint>
 
 ### Observer
