@@ -18,10 +18,10 @@ The template will create a new file `device_action.py` in your integration folde
 
 This is the schema for actions. The base schema should be extended from `homeassistant.helpers.config_validation.DEVICE_ACTION_BASE_SCHEMA`.
 
-#### `async async async_get_actions(hass, device_id)`
+#### `async def async_get_actions(hass, device_id)`
 
 Return a list of actions that this device supports.
 
-#### `async async_call_action_from_config(hass, config, variables, context)`
+#### `async def async_call_action_from_config(hass, config, variables, context)`
 
 Execute the passed in action.

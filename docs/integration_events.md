@@ -18,4 +18,4 @@ If a device or service only fires events, you need to [manually register it in t
 
 Event related code should not be part of the entity logic of your integration. You want to enable the logic of converting your integration events to Home Assistant events from inside `async_setup_entry` inside `__init__.py`.
 
-Entity state should not represent events. For example, you don't want to have a binary sensor that is `on` for 30 seconds when a event happens.
+Entity state should not represent events. For example, you don't want to have a binary sensor that is `on` for 30 seconds when an event happens.

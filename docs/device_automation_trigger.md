@@ -18,10 +18,10 @@ The template will create a new file `device_trigger.py` in your integration fold
 
 This is a voluptuous schema that verifies that a specific dictionary represents a config that your integration can handle. This should extend the TRIGGER_BASE_SCHEMA from `device_automation/__init__.py`.
 
-#### `async async_get_triggers(hass, device_id)`
+#### `async def async_get_triggers(hass, device_id)`
 
 Return a list of triggers.
 
-#### `async async_attach_trigger(hass, config, action, automation_info)`
+#### `async def async_attach_trigger(hass, config, action, automation_info)`
 
 Given one of your own trigger configs, make it so the `action` is called whenever the trigger is triggered. Return value is a function that detaches the trigger.
