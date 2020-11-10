@@ -95,13 +95,49 @@ These models are describing objects that are getting returned from the superviso
 | key         | type    | description                                                                  |
 | ----------- | ------- | ---------------------------------------------------------------------------- |
 | interface   | string  | The interface name i.e eth0.                                                 |
-| ip_address  | string  | The IP address and the netmask in a X.X.X.X/XX format.                       |
-| gateway     | string  | The IP address of the gateway.                                               |
-| id          | string  | The ID of the interface.                                                     |
-| type        | string  | The interface type.                                                          |
-| nameservers | list    | A list containing the IP addresses of the configured nameservers as strings. |
-| method      | string  | The method used to set the IP can be "static" or "dhcp".                     |
+| type        | string  | The interface type: `ethernet`, `wireless` or `vlan`.                        |
+| enabled     | boolean | Return True if the interface is enabled                                      |
+| connected   | boolean | Return True if the interface is connected to network                         |
 | primary     | boolean | `true` if it's the primary network interface.                                |
+| ipv4        | struct or null  | An IP config struct with IPv4 connection details.                            |
+| ipv6        | struct or null  | An IP config struct with IPv6 connection details.                            |
+| wifi        | struct or null  | An Wifi config struct with wireless connection details.                      |
+| vlan        | struct or null  | An Vlan config struct with details about the vlan.                           |
+
+### IP config
+
+| key         | type    | description                                                                  |
+| ----------- | ------- | ---------------------------------------------------------------------------- |
+| method      | string  | The method used to set the IP can be `static`, `dhcp` or `disabled`.         |
+| address     | list    | A list with IP address and the netmask in a X.X.X.X/XX format.               |
+| gateway     | string  | The IP address of the gateway.                                               |
+| nameservers | list    | A list containing the IP addresses of the configured nameservers as strings. |
+
+### Wifi config
+
+| key         | type    | description                                                                  |
+| ----------- | ------- | ---------------------------------------------------------------------------- |
+| mode        | string  | Set the mode `infrastructure`, `mesh`, `adhoc` and `ap`                      |
+| auth        | string  | Set the auth mode: `open`, `web`, `wpa-psk`                                  |
+| ssid        | string  | Set the SSID for the Wireless                                                |
+| signal      | integer | Percentage of signal strength.                                               |
+
+### Vlan config
+
+| key     | type    | description                                                                  |
+| ------- | ------- | ---------------------------------------------------------------------------- |
+| id      | integer | The vlan ID.                                                                 |
+| parent  | string  | Parent interface which is the vlan attached.                                 |
+
+## Access-Points
+
+| key        | type    | description                                                                  |
+| ---------- | ------- | ---------------------------------------------------------------------------- |
+| mode       | string  | One of: `infrastructure`, `mesh` or `adhoc`                                  |
+| ssid       | string  | Wireless network ID.                                                         |
+| frequency  | integer | The operating frequency of this Access Point.                                |
+| signal     | integer | Percentage of signal strength.                                               |
+| mac        | string  | MAC Address of the Access Point.                                             |
 
 ## Panel
 
