@@ -117,9 +117,9 @@ The configuration for an add-on is stored in `config.json`.
 | machine | list | no | Default it support any machine type. You can select that this add-on run only on specific machines. You can use `!` before a machine type to negate it.
 | url | url | no | Homepage of the add-on. Here you can explain the add-ons and options.
 | startup | string | yes | `initialize` will start add-on on setup of Home Assistant. `system` is for things like databases and not dependent on other things. `services` will start before Home Assistant, while `application` is started afterwards. Finally `once` is for applications that don't run as a daemon.
-| webui | string | no | An URL for web interface of this add-on. Like `http://[HOST]:[PORT:2839]/dashboard`, the port needs the internal port, which will be replaced with the effective port. It is also possible to bind the protocol part to a configuration options with: `[PROTO:option_name]://[HOST]:[PORT:2839]/dashboard` and it's looked up if it is `true` and it's going to `https`.
+| webui | string | no | An URL for the web interface of this add-on. Like `http://[HOST]:[PORT:2839]/dashboard`, the port needs the internal port, which will be replaced with the effective port. It is also possible to bind the protocol part to a configuration options with: `[PROTO:option_name]://[HOST]:[PORT:2839]/dashboard` and it's looked up if it is `true` and it's going to `https`.
 | boot | string | yes | `auto` by system and manual or only `manual`.
-| ports | dict | no | Network ports to expose from the container. Format is `"container-port/type": host-port`. If host-port is `null` then the mapping is disabled.
+| ports | dict | no | Network ports to expose from the container. Format is `"container-port/type": host-port`. If the host port is `null` then the mapping is disabled.
 | ports_description | dict | no | Network ports description mapping. Format is `"container-port/type": "description of this port"`.
 | host_network | bool | no | If `true`, the add-on runs on host network.
 | host_ipc | bool | no | Default `false`. Allow to share the IPC namespace with others.
@@ -132,9 +132,9 @@ The configuration for an add-on is stored in `config.json`.
 | hassio_role | str | no | Default `default`. Role-based access to Supervisor API. Available: `default`, `homeassistant`, `backup`, `manager` or `admin`
 | hassio_api | bool | no | This add-on can access the Supervisor's REST API. Use `http://supervisor`.
 | homeassistant_api | bool | no | This add-on can access to the Home Assistant REST API proxy. Use `http://supervisor/core/api`.
-| docker_api | bool | no | Allow read-only access to docker API for add-on. Works only for not protected add-ons.
+| docker_api | bool | no | Allow read-only access to Docker API for add-on. Works only for not protected add-ons.
 | privileged | list | no | Privilege for access to hardware/system. Available access: `NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_TIME`, `SYS_NICE`, `SYS_RESOURCE`, `SYS_PTRACE`, `SYS_MODULE` or `DAC_READ_SEARCH`
-| full_access | bool | no | Give full access to hardware like the privileged mode in docker. Works only for not protected add-ons.
+| full_access | bool | no | Give full access to hardware like the privileged mode in Docker. Works only for not protected add-ons.
 | apparmor | bool/string | no | Enable or disable AppArmor support. If it is enable, you can also use custom profiles with the name of the profile.
 | map | list | no | List of maps for additional Home Assistant folders. Possible values: `config`, `ssl`, `addons`, `backup`, `share` or `media`. Defaults to `ro`, which you can change by adding `:rw` to the end of the name.
 | environment | dict | no | A dictionary of environment variable to run add-on.
