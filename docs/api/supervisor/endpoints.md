@@ -1458,7 +1458,8 @@ Update the settings for a network interface.
 | ipv6    | dict   | True     | A struct with ipv6 interface settings                                  |
 | wifi    | dict   | True     | A struct with Wireless connection settings                             |
 
-ipv4 / ipv6:
+**ipv4 / ipv6:**
+
 | key         | type   | optional | description                                                                           |
 | ----------- | ------ | -------- | ------------------------------------------------------------------------------------- |
 | method      | string | True     | Set if the interface should use DHCP or not, can be `dhcp`, `static` or `disabled` |
@@ -1466,7 +1467,8 @@ ipv4 / ipv6:
 | nameservers | list   | True     | List of DNS servers to use                                                            |
 | gateway     | string | True     | The gateway the interface should use                                                  |
 
-wifi:
+**wifi:**
+
 | key    | type   | optional | description                                                                    |
 | ------ | ------ | -------- | ------------------------------------------------------------------------------ |
 | mode   | string | True     | Set the mode `infrastructure` (default), `mesh`, `adhoc` or `ap`              |
