@@ -119,6 +119,7 @@ module.exports = {
       "creating_component_generic_discovery",
       "reproduce_state_index",
       "integration_fetching_data",
+      "integration_events",
     ],
     "Development Checklist": [
       "development_checklist",
