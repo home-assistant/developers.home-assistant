@@ -1441,6 +1441,7 @@ Get network information.
 </ApiEndpoint>
 
 <ApiEndpoint path="/network/interface/<interface>/info" method="get">
+
 Returns a [Network interface model](api/supervisor/models.md#network-interface) for a specific network interface.
 
 </ApiEndpoint>
@@ -1452,7 +1453,7 @@ Update the settings for a network interface.
 
 | key     | type   | optional | description                                                            |
 | ------- | ------ | -------- | ---------------------------------------------------------------------- |
-| enabled | bool   | True     | Enable/Disable a ethernet interface / vlan got removed with disabled   |
+| enabled | bool   | True     | Enable/Disable an ethernet interface / VLAN got removed with disabled   |
 | ipv4    | dict   | True     | A struct with ipv4 interface settings                                  |
 | ipv6    | dict   | True     | A struct with ipv6 interface settings                                  |
 | wifi    | dict   | True     | A struct with Wireless connection settings                             |
@@ -1460,7 +1461,7 @@ Update the settings for a network interface.
 ipv4 / ipv6:
 | key         | type   | optional | description                                                                           |
 | ----------- | ------ | -------- | ------------------------------------------------------------------------------------- |
-| method      | string | True     | Set if the interface should use DHCP or not, can be `dhcp` or `static` and `disabled` |
+| method      | string | True     | Set if the interface should use DHCP or not, can be `dhcp`, `static` or `disabled` |
 | address     | list   | True     | The new IP address for the interface in the X.X.X.X/XX format as list                 |
 | nameservers | list   | True     | List of DNS servers to use                                                            |
 | gateway     | string | True     | The gateway the interface should use                                                  |
@@ -1468,7 +1469,7 @@ ipv4 / ipv6:
 wifi:
 | key    | type   | optional | description                                                                    |
 | ------ | ------ | -------- | ------------------------------------------------------------------------------ |
-| mode   | string | True     | Set the mode `infrastructure` (default), `mesh`, `adhoc` and `ap`              |
+| mode   | string | True     | Set the mode `infrastructure` (default), `mesh`, `adhoc` or `ap`              |
 | auth   | string | True     | Set the auth mode: `open` (default), `web`, `wpa-psk`                          |
 | ssid   | string | True     | Set the SSID for connect into                                                  |
 | psk    | string | True     | The shared key which is used with `web` or `wpa-psk`                           |
@@ -1476,9 +1477,10 @@ wifi:
 </ApiEndpoint>
 
 <ApiEndpoint path="/network/interface/<interface>/accesspoints" method="get">
+
 Return a list of available [Access Points](api/supervisor/models.md#access-points) on this Wireless interface.
 
-**This function work only with Wireless interfaces!**
+**This function only works with Wireless interfaces!**
 
 **Returned data:**
 
@@ -1507,7 +1509,7 @@ Return a list of available [Access Points](api/supervisor/models.md#access-point
 <ApiEndpoint path="/network/interface/<interface>/vlan/<id>" method="post">
 Create a new VLAN *id* on this network interface.
 
-**This function work only with ethernet interfaces!**
+**This function only works with ethernet interfaces!**
 
 </ApiEndpoint>
 
