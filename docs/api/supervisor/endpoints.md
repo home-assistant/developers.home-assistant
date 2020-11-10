@@ -1404,25 +1404,31 @@ Get network information.
 
 | key        | description                                                            |
 | ---------- | ---------------------------------------------------------------------- |
-| interfaces | A dictionary of [Network interface models](api/supervisor/models.md#network-interface) |
+| interfaces | A list of [Network interface models](api/supervisor/models.md#network-interface) |
 | docker     | Information about the internal docker network |
 
 **Example response:**
 
 ```json
 {
-  "interfaces": {
-    "eth0": {
+  "interfaces": [
+    {
       "interface": "eth0",
-      "ip_address": "192.168.1.100/24",
-      "gateway": "192.168.1.1",
-      "id": "Wired connection 1",
-      "type": "802-3-ethernet",
-      "nameservers": ["192.168.1.1"],
-      "method": "static",
-      "primary": true
+      "type": "ethernet",
+      "primary": true,
+      "enabled": true,
+      "connected": true,
+      "ipv4": {
+        "method": "static",
+        "ip_address": "192.168.1.100/24",
+        "gateway": "192.168.1.1",
+        "nameservers": ["192.168.1.1"],
+      },
+      "ipv6": null,
+      "wifi": null,
+      "vlan": null,
     }
-  },
+  ],
   "docker": {
     "interface": "hassio",
     "address": "172.30.32.0/23",
@@ -1434,46 +1440,86 @@ Get network information.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/network/<interface>/info" method="get">
+<ApiEndpoint path="/network/interface/<interface>/info" method="get">
 
 Returns a [Network interface model](api/supervisor/models.md#network-interface) for a specific network interface.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/network/<interface>/update" method="post">
-
+<ApiEndpoint path="/network/interface/<interface>/update" method="post">
 Update the settings for a network interface.
 
 **Payload:**
 
 | key     | type   | optional | description                                                            |
 | ------- | ------ | -------- | ---------------------------------------------------------------------- |
-| address | string | True     | The new IP address for the interface in the X.X.X.X/XX format          |
-| dns     | list   | True     | List of DNS servers to use                                             |
-| gateway | string | True     | The gateway the interface should use                                   |
-| method  | string | True     | Set if the interface should use DHCP or not, can be `dhcp` or `static` |
+| enabled | bool   | True     | Enable/Disable an ethernet interface / VLAN got removed with disabled   |
+| ipv4    | dict   | True     | A struct with ipv4 interface settings                                  |
+| ipv6    | dict   | True     | A struct with ipv6 interface settings                                  |
+| wifi    | dict   | True     | A struct with Wireless connection settings                             |
 
-**You need to supply at least one key in the payload.**
+**ipv4 / ipv6:**
 
-:::warning
-If you change the `address` or `gateway` you may need to reconnect to the new address
-:::
+| key         | type   | optional | description                                                                           |
+| ----------- | ------ | -------- | ------------------------------------------------------------------------------------- |
+| method      | string | True     | Set if the interface should use DHCP or not, can be `dhcp`, `static` or `disabled` |
+| address     | list   | True     | The new IP address for the interface in the X.X.X.X/XX format as list                 |
+| nameservers | list   | True     | List of DNS servers to use                                                            |
+| gateway     | string | True     | The gateway the interface should use                                                  |
 
-When the call is complete it returns the changed [Network interface model](api/supervisor/models.md#network-interface).
+**wifi:**
+
+| key    | type   | optional | description                                                                    |
+| ------ | ------ | -------- | ------------------------------------------------------------------------------ |
+| mode   | string | True     | Set the mode `infrastructure` (default), `mesh`, `adhoc` or `ap`              |
+| auth   | string | True     | Set the auth mode: `open` (default), `web`, `wpa-psk`                          |
+| ssid   | string | True     | Set the SSID for connect into                                                  |
+| psk    | string | True     | The shared key which is used with `web` or `wpa-psk`                           |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/network/interface/<interface>/accesspoints" method="get">
+
+Return a list of available [Access Points](api/supervisor/models.md#access-points) on this Wireless interface.
+
+**This function only works with Wireless interfaces!**
+
+**Returned data:**
+
+| key          | description                                                            |
+| ------------ | ---------------------------------------------------------------------- |
+| accesspoints | A list of [Access Points](api/supervisor/models.md#access-points) |
 
 **Example response:**
 
 ```json
 {
-  "ip_address": "192.168.1.100/24",
-  "gateway": "192.168.1.1",
-  "id": "Wired connection 1",
-  "type": "802-3-ethernet",
-  "nameservers": ["192.168.1.1"],
-  "method": "static",
-  "primary": true
+  "accesspoints": [
+    {
+      "mode": "infrastructure",
+      "ssid": "MY_TestWifi",
+      "mac": "00:00:00:00",
+      "frequency": 24675,
+      "signal": 90
+    }
+  ]
 }
 ```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/network/interface/<interface>/vlan/<id>" method="post">
+
+Create a new VLAN *id* on this network interface.
+
+**This function only works with ethernet interfaces!**
+
+**Payload:**
+
+| key     | type   | optional | description                                                            |
+| ------- | ------ | -------- | ---------------------------------------------------------------------- |
+| ipv4    | dict   | True     | A struct with ipv4 interface settings                                  |
+| ipv6    | dict   | True     | A struct with ipv6 interface settings                                  |
 
 </ApiEndpoint>
 
