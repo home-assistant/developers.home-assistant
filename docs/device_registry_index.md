@@ -64,6 +64,8 @@ class HueLight(LightEntity):
         }
 ```
 
+### Manual Registration
+
 Components are also able to register devices in the case that there are no entities representing them. An example is a hub that communicates with the lights.
 
 ```python
