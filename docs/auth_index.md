@@ -48,4 +48,4 @@ There are three different types of refresh tokens:
 
 - *Normal*: These are the tokens that are generated when a user authorizes an application. The application will hold on to these tokens on behalf of the user.
 - *Long-lived Access Token*: These are refresh tokens that back a long lived access token. They are created internally and never exposed to the user.
-- *System*: These tokens are limited to be generated and used by system users like Hass.io. They are never exposed to the user.
+- *System*: These tokens are limited to be generated and used by system users like Home Assistant OS and the Supervisor. They are never exposed to the user.

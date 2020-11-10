@@ -34,7 +34,7 @@ const features = [
           <b>
             <a href="docs/misc">Misc</a>.
           </b>{" "}
-          External APIs, Internationalization, asyncio, Hass.io add-ons,
+          External APIs, Internationalization, asyncio, Home Assistant add-ons,
           updating documentation.
         </p>
       </>

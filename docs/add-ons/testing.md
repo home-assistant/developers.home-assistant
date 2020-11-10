@@ -35,9 +35,9 @@ Right now add-ons will work with images that are stored on Docker Hub (using `im
 
 ## Local build
 
-If you don't want to use the devcontainer environment, you can still build add-ons locally with Docker. The recommended method is to use the [official build tool][hassio-builder] to create the docker images.
+If you don't want to use the devcontainer environment, you can still build add-ons locally with Docker. The recommended method is to use the [official build tool][hassio-builder] to create the Docker images.
 
-Assuming that your addon is in the folder `/path/to/addon` and your docker socket is at `/var/run/docker.sock`, you can build the addon for all supported architectures by running the following:
+Assuming that your addon is in the folder `/path/to/addon` and your Docker socket is at `/var/run/docker.sock`, you can build the addon for all supported architectures by running the following:
 ```
 docker run --rm -ti --name hassio-builder --privileged \
   -v /path/to/addon:/data \
@@ -73,4 +73,4 @@ docker run --rm -v /tmp/my_test_data:/data -p PORT_STUFF_IF_NEEDED \
 
 ## Logs
 
-All stdout and stderr are redirected to the Docker logs. The logs can be fetched from the add-on page inside the Hass.io panel in Home Assistant.
+All stdout and stderr are redirected to the Docker logs. The logs can be fetched from the add-on page inside the Supervisor panel in Home Assistant.
