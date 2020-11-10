@@ -1507,6 +1507,7 @@ Return a list of available [Access Points](api/supervisor/models.md#access-point
 </ApiEndpoint>
 
 <ApiEndpoint path="/network/interface/<interface>/vlan/<id>" method="post">
+
 Create a new VLAN *id* on this network interface.
 
 **This function only works with ethernet interfaces!**
