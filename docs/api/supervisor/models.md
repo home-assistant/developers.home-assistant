@@ -108,7 +108,7 @@ These models are describing objects that are getting returned from the superviso
 
 | key         | type    | description                                                                  |
 | ----------- | ------- | ---------------------------------------------------------------------------- |
-| method      | string  | The method used to set the IP can be `static`, `dhcp` or `disabled`.         |
+| method      | string  | The method used to set the IP can be `static`, `auto` or `disabled`.         |
 | address     | list    | A list with IP address and the netmask in a X.X.X.X/XX format.               |
 | gateway     | string  | The IP address of the gateway.                                               |
 | nameservers | list    | A list containing the IP addresses of the configured nameservers as strings. |

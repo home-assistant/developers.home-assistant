@@ -1462,7 +1462,7 @@ Update the settings for a network interface.
 
 | key         | type   | optional | description                                                                           |
 | ----------- | ------ | -------- | ------------------------------------------------------------------------------------- |
-| method      | string | True     | Set if the interface should use DHCP or not, can be `dhcp`, `static` or `disabled` |
+| method      | string | True     | Set IP configuration method can be `auto` for DHCP or Router Advertisments (only IPv6), `static` or `disabled`     |
 | address     | list   | True     | The new IP address for the interface in the X.X.X.X/XX format as list                 |
 | nameservers | list   | True     | List of DNS servers to use                                                            |
 | gateway     | string | True     | The gateway the interface should use                                                  |
