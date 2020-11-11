@@ -139,7 +139,7 @@ class MyMediaPlayer(MediaPlayerEntity):
     result = await self_async_fetch_image(image_url)
     if result == (None, None):
         _LOGGER.info("Error retrieving proxied album art from %s", image_url)
-       return result
+   return result
 ```
 
 There are some helper functions defined in `media_player/__init__.py`. Use `self._async_fetch_image(url)` to retrieve an image at a given local url. Do not use `self._async_fetch_image_from_cache(url)` which should only be used to for the currently playing artwork.
