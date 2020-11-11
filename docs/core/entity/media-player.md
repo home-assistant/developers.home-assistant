@@ -144,4 +144,4 @@ class MyMediaPlayer(MediaPlayerEntity):
 
 There are some helper functions defined in `media_player/__init__.py`. Use `self._async_fetch_image(url)` to retrieve an image at a given local url. Do not use `self._async_fetch_image_from_cache(url)` which should only be used to for the currently playing artwork.
 
-In your media browser implementation, use `self.get_browse_image_url(media_content_type, media_content_id, browse_image)` to generate the thumbnail paramater for `BrowseMedia`.
+In your media browser implementation, use `self.get_browse_image_url(media_content_type, media_content_id, media_image_id=None)` to generate the thumbnail paramater for `BrowseMedia`.
