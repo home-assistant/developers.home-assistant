@@ -137,8 +137,5 @@ class MyMediaPlayer(MediaPlayerEntity):
     async def async_get_browse_image(self, media_content_type, media_content_id, media_image_id=None):
     """Serve album art. Returns (content, content_type)."""
     image_url = ...
-    result = await self._async_fetch_image(image_url)
-    if result == (None, None):
-        _LOGGER.info("Error retrieving proxied album art from %s", image_url)
-   return result
+    return await self._async_fetch_image(image_url)
 ```
