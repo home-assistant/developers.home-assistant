@@ -131,6 +131,7 @@ In `async_get_browse_image`, use `self._async_fetch_image(url)` to fetch the ima
 
 ```python
 class MyMediaPlayer(MediaPlayerEntity):
+
     # Implement the following method.
     async def async_get_browse_image(self, media_content_type, media_content_id, browse_image):
     """Serve album art. Returns (content, content_type)."""
