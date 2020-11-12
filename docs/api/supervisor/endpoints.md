@@ -1406,6 +1406,8 @@ Get network information.
 | ---------- | ---------------------------------------------------------------------- |
 | interfaces | A list of [Network interface models](api/supervisor/models.md#network-interface) |
 | docker     | Information about the internal docker network |
+| host_connectivity | The connectivity state of the host network. |
+| supervisor_internet | Boolean to indicate if the Supervisor can reach the internet. |
 
 **Example response:**
 
@@ -1434,7 +1436,9 @@ Get network information.
     "address": "172.30.32.0/23",
     "gateway": "172.30.32.1",
     "dns": "172.30.32.3"
-  }
+  },
+  "host_connectivity": 4,
+  "supervisor_internet": true
 }
 ```
 
