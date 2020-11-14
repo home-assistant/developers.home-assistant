@@ -1644,6 +1644,7 @@ Update Home Assistant OS
 | key      | type       | description                                      |
 | -------- | ---------- | ------------------------------------------------ |
 | unsupported | list | A list of reasons why a installation is marked as unsupported (container, dbus, docker_configuration, docker_version, lxc, network_manager, os, privileged, systemd) |
+| unhealthy | list | A list of reasons why a installation is marked as unhealthy (docker, supervisor, privileged, setup) |
 | issues | list | A list of [Issue models](api/supervisor/models.md#issues) |
 | suggestions | list | A list of [Suggestion models](api/supervisor/models.md#suggestion) actions |
 
@@ -1652,6 +1653,7 @@ Update Home Assistant OS
 ```json
 {
   "unsupported": ["os"],
+  "unhealthy": ["docker"],
   "issues": [
     {
       "uuid": "A89924620F9A11EBBDC3C403FC2CA371",
