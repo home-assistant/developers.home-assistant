@@ -70,6 +70,9 @@ The translation strings for the configuration flow handler are defined under the
     },
     "abort": {
       "stale_api_key": "This message will be displayed if `stale_api_key` is returned as the abort reason."
+    },
+    "progress": {
+      "slow_task": "This message will be displayed if `slow_task` is returned as `progress_action` for `async_show_progress`."
     }
   }
 }
