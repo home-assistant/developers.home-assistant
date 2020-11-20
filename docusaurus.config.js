@@ -15,6 +15,7 @@ module.exports = {
       logo: {
         alt: "Home Assistant",
         src: "img/logo-pretty.svg",
+        srcDark: "img/logo-pretty.svg",
       },
       items: [
         {
