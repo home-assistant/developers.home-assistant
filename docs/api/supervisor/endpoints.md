@@ -2059,6 +2059,12 @@ Reload parts of the supervisor, this enable new options, and check for updates.
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/supervisor/restart" method="post">
+
+Restart the supervisor, can help to get the supervisor healthy again.
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/supervisor/repair" method="post">
 
 Repair docker overlay issues, and lost images.
