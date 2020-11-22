@@ -36,6 +36,7 @@ git push origin --force-with-lease
 
 If that command fails, it means that new work was pushed to the branch from either you or another contributor since your last rebase.
 You will have to start over the git fetch and rebase process described above, or if you are really confident those changes are not needed, just overwrite them:
+
 ```shell
 # Run this from your feature branch, overwriting any changes in the remote branch
 git push origin --force
