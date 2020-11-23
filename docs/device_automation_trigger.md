@@ -103,8 +103,7 @@ The return value is a function that detaches the trigger.
 
 #### Add text and translations
 
-The Automation user interface will display a human-readable string in the device automation mapped to the event
-type.  Update `strings.json` and if you used `script.scaffold` then `translations/en.json` with the full set of supported event types:
+The Automation user interface will display a human-readable string in the device automation mapped to the event type.  Update `strings.json` with the trigger types and subtypes that you support:
 
 ```json
 {
@@ -115,3 +114,6 @@ type.  Update `strings.json` and if you used `script.scaffold` then `translation
     }
 }
 ```
+
+To test your translations during development, run `python3 -m script.translations develop`.
+
