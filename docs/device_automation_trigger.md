@@ -12,6 +12,7 @@ To add support for Device Triggers, an integration needs to have a `device_trigg
 - *Define a `TRIGGER_SCHEMA`*: A dictionary that represents a trigger, such as a device and an event type
 - *Create triggers*: Create dictionaries containing the device or entity and supported events or state changes as defined by the schema.
 - *Attach triggers*: Associate a trigger config with an event or state change, e.g. a message fired on the event bus.
+- *Add text and translations*: Give each trigger a human readable name. 
 
 Home Assistant includes a template to get started with device triggers. To get started, run inside a development environment `python3 -m script.scaffold device_trigger`.
 
@@ -77,7 +78,7 @@ async def async_get_triggers(hass, device_id):
 
 #### Attach triggers
 
-The last step is to wire everything up: Given a `TRIGGER_SCHEMA` config, make sure the `action` is called when the trigger is triggered.
+To wire it up: Given a `TRIGGER_SCHEMA` config, make sure the `action` is called when the trigger is triggered.
 
 For example, you might attach the trigger and action to [Events fired](integration_events.md) on the event bus by your integration.
 
@@ -99,3 +100,18 @@ async def async_attach_trigger(hass, config, action, automation_info):
 ```
 
 The return value is a function that detaches the trigger.
+
+#### Add text and translations
+
+The *New Automation* user interface will display a human readable string in the device automation mapped to the event
+type.  Update `strings.json` and if you used script.scaffold then `translations/en.json` with the full set of supported event types:
+
+```json
+{
+   "device_automation": {
+    "trigger_type": {
+      "water_detected": "Water detected",
+      "noise_detected": "Noise detected"
+    }
+}
+```
