@@ -5,7 +5,7 @@ sidebar_label: Triggers
 
 Device triggers are automation triggers that are tied to a specific device and an event or state change. Examples are "light turned on" or "water detected".
 
-Device triggers can be provided by the integration that provides the device (e.g. ZHA, deCONZ) or the entity integrations that the device has entities with (e.g. light, switch).  An example of the former is events not tied to an entity e.g. key press on a remote control or touch panel, while an example of the latter could be that a light has been turned on.
+Device triggers can be provided by the integration that provides the device (e.g. ZHA, deCONZ) or the entity integrations that the device has entities with (e.g. light, switch). An example of the former is events not tied to an entity e.g. key press on a remote control or touch panel, while an example of the latter could be that a light has been turned on.
 
 To add support for Device Triggers, an integration needs to have a `device_trigger.py` and:
 
@@ -103,8 +103,7 @@ The return value is a function that detaches the trigger.
 
 #### Add text and translations
 
-The *New Automation* user interface will display a human readable string in the device automation mapped to the event
-type.  Update `strings.json` and if you used script.scaffold then `translations/en.json` with the full set of supported event types:
+The user interface will display a human readable string for the trigger type. Update `strings.json` and if you used script.scaffold then `translations/en.json` with the full set of supported event types:
 
 ```json
 {
