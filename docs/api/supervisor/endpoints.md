@@ -1086,7 +1086,7 @@ Get hardware information.
 ```json
 {
     "serial": ["/dev/xy"],
-    "input": ["Input device name"],
+    "input": ["/dev/input/by-id/usb-Logitech_USB_Receiver-if02-event-kbd"],
     "disk": ["/dev/sdax"],
     "gpio": ["gpiochip0", "gpiochip100"],
     "audio": {
