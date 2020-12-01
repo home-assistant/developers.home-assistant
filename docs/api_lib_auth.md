@@ -84,7 +84,7 @@ class Auth:
         self.host = host
         self.access_token = access_token
 
-    async def request(self, method: str, path: str, **kwargs) -> requests.Response:
+    def request(self, method: str, path: str, **kwargs) -> requests.Response:
         """Make a request."""
         headers = kwargs.get("headers")
 
