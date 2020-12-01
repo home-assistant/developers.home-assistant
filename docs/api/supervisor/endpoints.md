@@ -1450,6 +1450,12 @@ Returns a [Network interface model](api/supervisor/models.md#network-interface) 
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/network/reload" method="post">
+
+Update all Network interface data.
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/network/interface/<interface>/update" method="post">
 Update the settings for a network interface.
 
