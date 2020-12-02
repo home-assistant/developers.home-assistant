@@ -15,6 +15,7 @@ A `number` is an entity that allows the user to input an arbitrary value to an i
 | min_value | float | 0 | The minimum accepted value (inclusive)
 | max_value | float | 100 | The maximum accepted value (inclusive)
 | step | float | **See below** | Defines the resolution of the values, i.e. the smallest increment or decrement
+| mode | string | "slider" | Either "box" or "slider". Defines the appearance of the entity. Choose what best suits your device.
 
 Other properties that are common to all entities such as `icon`, `unit_of_measurement`, `name` etc are also applicable.
 
