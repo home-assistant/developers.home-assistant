@@ -11,7 +11,7 @@ A `number` is an entity that allows the user to input an arbitrary value to an i
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| state | float | **Required** | Current value of the entity
+| value | float | **Required** | Current value of the entity
 | min_value | float | 0 | The minimum accepted value (inclusive)
 | max_value | float | 100 | The maximum accepted value (inclusive)
 | step | float | **See below** | Defines the resolution of the values, i.e. the smallest increment or decrement
