@@ -30,7 +30,7 @@ All add-ons are simple docker containers. Inside your add-on `config.json` you s
 
 You can use `{arch}` inside the image name to support multiple architectures with one (1) configuration file. It will be replaced with the architecture of the user when we load the image. If you use `Buildargs` you can use the `build.json` to overwrite our default args.
 
-Home Assistant assumes that the `master` branch of your add-on repository matches the latest tag on Docker Hub. When you're building a new version, it's suggested that you use another branch, ie `build` or do it with a PR on GitHub. After you push the add-on to [Docker Hub](https://hub.docker.com/), you can merge this branch to master.
+Home Assistant assumes that the default branch of your add-on repository matches the latest tag on Docker Hub. When you're building a new version, it's suggested that you use another branch, ie `build` or do it with a PR on GitHub. After you push the add-on to [Docker Hub](https://hub.docker.com/), you can merge this branch to master.
 
 ## Custom Add-ons
 
