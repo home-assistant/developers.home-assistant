@@ -73,3 +73,25 @@ If your view requires data to persist at a card level, there is a `layout` in th
     width: 54px
   entity: weather.my_weather
 ```
+
+## Edit, Delete, or Add a Card
+
+To call the core frontend dialogs to edit, delete or add a card, you can simply call these three events:
+
+```
+Event: "ll-delete-card"
+Detail: { path: [number] | [number, number] }
+
+Event: "ll-edit-card"
+Detail: { path: [number] | [number, number] }
+
+Event: "ll-add-card"
+Detail: none
+```
+
+To call an event, you can use:
+
+```js
+// Delete 4th card in the current view
+this.dispatchEvent(new Event("ll-edit-card", { detail: { path: [3] } })) // this refers to the card element
+```
