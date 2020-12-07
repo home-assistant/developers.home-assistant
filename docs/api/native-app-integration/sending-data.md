@@ -159,7 +159,7 @@ Fire an event in Home Assistant. Please be mindful of the data structure as docu
 | Key | Type | Description
 | --- | ---- | -----------
 | `event_type` | string | Type of the event to fire
-| `event_data` | string | Date of the event to fire
+| `event_data` | string | Data of the event to fire
 
 ## Render templates
 
