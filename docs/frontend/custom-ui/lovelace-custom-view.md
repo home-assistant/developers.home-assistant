@@ -93,5 +93,5 @@ To call an event, you can use:
 
 ```js
 // Delete 4th card in the current view
-this.dispatchEvent(new Event("ll-edit-card", { detail: { path: [3] } })) // this refers to the card element
+this.dispatchEvent(new CustomEvent("ll-edit-card", { detail: { path: [3] } })) // this refers to the card element
 ```
