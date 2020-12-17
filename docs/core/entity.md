@@ -104,7 +104,7 @@ Properties should always only return information from memory and not do I/O (lik
 | assumed_state           | boolean | `False` | Return `True` if the state is based on our assumption instead of reading it from the device.                                                                                                                                                                 |
 | available               | boolean | `True`  | Indicate if Home Assistant is able to read the state and control the underlying device.                                                                                                                                                                      |
 | device_class            | string  | `None`  | Extra classification of what the device is. Each domain specifies their own. Device classes can come with extra requirements for unit of measurement and supported features.                                                                                 |
-| device_state_attributes | dict    | `None`  | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version. See [below](core/entity.md#standard-attributes) for details of standard attributes. |
+| device_state_attributes | dict    | `None`  | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version. |
 | entity_picture          | URL     | `None`  | Url of a picture to show for the entity.                                                                                                                                                                                                                     |
 | name                    | string  | `None`  | Name of the entity                                                                                                                                                                                                                                           |
 | should_poll             | boolean | `True`  | Should Home Assistant check with the entity for an updated state. If set to `False`, entity will need to notify Home Assistant of new updates by calling one of the [schedule update methods](#methods).                                                     |
@@ -127,15 +127,6 @@ The following properties are used and controlled by Home Assistant, and should n
 | Name    | Type    | Default | Description                                                                                                                                                                              |
 | ------- | ------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | enabled | boolean | `True`  | Indicate if entity is enabled in the entity registry. It also returns `True` if the platform doesn't support the entity registry. Disabled entities will not be added to Home Assistant. |
-
-## Standard attributes
-
-The following `device_state_attributes` are considered standard and should follow the convention below. The constant should be imported from `homeassistant/const.py`.
-
-| Name             | Type    | Unit | Constant                | Description                                                                                                                                           |
-| ---------------- | ------- | ---- | ----------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| battery_charging | boolean | N/A  | `ATTR_BATTERY_CHARGING` | Battery charging status of the entity, shown as a boolean `true` or `false`. If charging is not supported, then this attribute should not be created. |
-| battery_level    | integer | %    | `ATTR_BATTERY_LEVEL`    | Battery level of the entity, shown as an integer percentage between 0-100.                                                                            |
 
 ## Lifecycle hooks
 
