@@ -185,3 +185,92 @@ async def async_migrate_entry(hass, config_entry: ConfigEntry):
 
     return True
 ```
+
+## Reauthentication
+
+Gracefully handling authentication errors such as invalid, expired, or revoked tokens is needed to advance on the [Integration Qualily Scale](integration_quality_scale_index.md). This example of how to add reauth to the OAuth flow created by `script.scaffold` following the pattern in [Building a Python library](api_lib_auth.md#oauth2).
+
+This example catches an authentication exception in config entry setup in `__init__.py` and instructs the user to visit the integrations page in order to reconfigure the integration.
+
+```python
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
+    """Setup up a config entry."""
+
+    # TODO: Replace with actual API setup and exception
+    auth = api.AsyncConfigEntryAuth(...)
+    try:
+        await auth.refresh_tokens()
+    except TokenExpiredError:
+        hass.async_create_task(
+            hass.config_entries.flow.async_init(
+                DOMAIN,
+                context={"source": SOURCE_REAUTH},
+                data=entry.data,
+            )
+        )
+        return False
+
+    # TODO: Proceed with component setup
+```
+
+The flow handler in `config_flow.py` also needs to have some additional steps to support reauth which include showing a confirmation, starting the reauth flow, updating the existing config entry, and reloading to invoke setup again.
+
+```python
+
+class OAuth2FlowHandler(
+    config_entry_oauth2_flow.AbstractOAuth2FlowHandler, domain=DOMAIN
+):
+    """Config flow to handle OAuth2 authentication."""
+
+    async def async_step_reauth(self, user_input=None):
+        """Perform reauth upon an API authentication error."""
+        return await self.async_step_reauth_confirm()
+
+    async def async_step_reauth_confirm(self, user_input=None):
+        """Dialog that informs the user that reauth is required."""
+        if user_input is None:
+            return self.async_show_form(
+                step_id="reauth_confirm",
+                data_schema=vol.Schema({}),
+            )
+        return await self.async_step_user()
+
+    async def async_oauth_create_entry(self, data: dict) -> dict:
+        """Create an oauth config entry or update existing entry for reauth."""
+        entries = self.hass.config_entries.async_entries(DOMAIN)
+        if entries:
+            self.hass.config_entries.async_update_entry(entries[0], data=data)
+            await self.hass.config_entries.async_reload(entries[0].entry_id)
+            return self.async_abort(reason="reauth_successful")
+        return await super().async_oauth_create_entry(data)
+```
+
+Depending on the details of the integration, there may be additional considerations such as ensuring the same account is used across reauth, or handling multiple config entries.
+
+The reauth confirmation dialog needs additional keys in `strings.json` for showing the reauth confirmation and success diaglogs:
+
+```json
+{
+  "config": {
+    "step": {
+      # ...,
+      "reauth_confirm": {
+        "title": "[%key:common::config_flow::title::reauth%]",
+        # TODO: Replace with the name of the integration
+        "description": "The Example integration needs to re-authenticate your account"
+      }
+    },
+    ...
+    "abort": {
+      ...,
+      "reauth_successful": "[%key:common::config_flow::abort::reauth_successful%]"
+    },
+    ...
+}
+```
+
+See [Translations](#translations) local development instructions.
+
+Authentication failures (such as a revoked oauth token) can be a little tricky to manually test. One suggestion is to make a copy of `config/.storage/core.config_entries` and manually change the values of `access_token`, `refresh_token`, and `expires_at` depending on the scenario you want to test. You can then walk advance through the reauth flow and confirm that the values get replaced with new valid tokens.
+
+Automated tests should verify that the reauth flow updates the existing config entry and does not create additional entries.
