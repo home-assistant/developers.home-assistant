@@ -193,6 +193,10 @@ Gracefully handling authentication errors such as invalid, expired, or revoked t
 This example catches an authentication exception in config entry setup in `__init__.py` and instructs the user to visit the integrations page in order to reconfigure the integration.
 
 ```python
+
+from google_nest_sdm.exceptions import AuthException, GoogleNestException
+from homeassistant.core import HomeAssistant
+
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     """Setup up a config entry."""
 
@@ -247,25 +251,21 @@ class OAuth2FlowHandler(
 
 Depending on the details of the integration, there may be additional considerations such as ensuring the same account is used across reauth, or handling multiple config entries.
 
-The reauth confirmation dialog needs additional keys in `strings.json` for showing the reauth confirmation and success diaglogs:
+The reauth confirmation dialog needs additional definitions in `strings.json` for the reauth confirmation and success diaglogs:
 
 ```json
 {
   "config": {
     "step": {
-      # ...,
       "reauth_confirm": {
         "title": "[%key:common::config_flow::title::reauth%]",
         # TODO: Replace with the name of the integration
         "description": "The Example integration needs to re-authenticate your account"
       }
     },
-    ...
     "abort": {
-      ...,
       "reauth_successful": "[%key:common::config_flow::abort::reauth_successful%]"
     },
-    ...
 }
 ```
 
