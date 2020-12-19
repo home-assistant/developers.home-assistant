@@ -242,7 +242,7 @@ class OAuth2FlowHandler(
 
     async def async_oauth_create_entry(self, data: dict) -> dict:
         """Create an oauth config entry or update existing entry for reauth."""
-        # TODO: This example supports only a single config entry.  Consider
+        # TODO: This example supports only a single config entry. Consider
         # any special handling needed for multiple config entries.
         existing_entry = await self.async_set_unique_id(DOMAIN)
         if existing_entry:
