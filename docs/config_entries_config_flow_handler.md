@@ -194,8 +194,9 @@ This example catches an authentication exception in config entry setup in `__ini
 
 ```python
 
-from google_nest_sdm.exceptions import AuthException, GoogleNestException
+from homeassistant.config_entries import SOURCE_REAUTH, ConfigEntry
 from homeassistant.core import HomeAssistant
+from . import api
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     """Setup up a config entry."""
@@ -241,10 +242,12 @@ class OAuth2FlowHandler(
 
     async def async_oauth_create_entry(self, data: dict) -> dict:
         """Create an oauth config entry or update existing entry for reauth."""
-        entries = self.hass.config_entries.async_entries(DOMAIN)
-        if entries:
-            self.hass.config_entries.async_update_entry(entries[0], data=data)
-            await self.hass.config_entries.async_reload(entries[0].entry_id)
+        # TODO: This example supports only a single config entry.  Consider
+        # any special handling needed for multiple config entries.
+        existing_entry = await self.async_set_unique_id(DOMAIN)
+        if existing_entry:
+            self.hass.config_entries.async_update_entry(existing_entry, data=data)
+            await self.hass.config_entries.async_reload(existing_entry.entry_id)
             return self.async_abort(reason="reauth_successful")
         return await super().async_oauth_create_entry(data)
 ```
