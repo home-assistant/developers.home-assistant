@@ -22,7 +22,7 @@ This integration is able to cope when things go wrong. It will not print any exc
 - Connection/configuration is handled via a component.
 - Set an appropriate `SCAN_INTERVAL` (if a polling integration)
 - Raise `PlatformNotReady` if unable to connect during platform setup (if appropriate)
-- Handles expiration of auth credentials. Refresh if possible or print correct error and fail setup. If based on a config entry, should trigger a new config entry flow to re-authorize.
+- Handles expiration of auth credentials. Refresh if possible or print correct error and fail setup. If based on a config entry, should trigger a new config entry flow to re-authorize.  ([docs](config_entries_config_flow_handler.md#reauthentication))
 - Handles internet unavailable. Log a warning once when unavailable, log once when reconnected.
 - Handles device/service unavailable. Log a warning once when unavailable, log once when reconnected.
 - Set `available` property to `False` if appropriate ([docs](core/entity.md#generic-properties))
