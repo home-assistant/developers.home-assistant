@@ -93,15 +93,20 @@ If the data is incorrect, the server will reply with `auth_invalid` message and 
 
 ## Command phase
 
-During this phase the client can give commands to the server. The server will respond to each command with a `result` message indicating when the command is done and if it was successful.
+During this phase the client can give commands to the server. The server will respond to each command with a `result` message indicating when the command is done and if it was successful along with the context of the command.
 
 ```json
 {
   "id": 6,
   "type": "result",
   "success": true,
-  // Can contain extra result info
-  "result": null
+  "result": {
+    "context": {
+      "id": "326ef27d19415c60c492fe330945f954",
+      "parent_id": null,
+      "user_id": "31ddb597e03147118cf8d2f8fbea5553"
+    }
+  }
 }
 ```
 
@@ -158,7 +163,12 @@ For each event that matches, the server will send a message of type `event`. The
                "white_value":200,
                "friendly_name":"Bed Light"
             },
-            "last_updated":"2016-11-26T01:37:24.265390+00:00"
+            "last_updated":"2016-11-26T01:37:24.265390+00:00",
+            "context": {
+               "id": "326ef27d19415c60c492fe330945f954",
+               "parent_id": null,
+               "user_id": "31ddb597e03147118cf8d2f8fbea5553"
+            }
          },
          "old_state":{
             "entity_id":"light.bed_light",
@@ -168,12 +178,22 @@ For each event that matches, the server will send a message of type `event`. The
                "supported_features":147,
                "friendly_name":"Bed Light"
             },
-            "last_updated":"2016-11-26T01:37:10.466994+00:00"
+            "last_updated":"2016-11-26T01:37:10.466994+00:00",
+            "context": {
+               "id": "e4af5b117137425e97658041a0538441",
+               "parent_id": null,
+               "user_id": "31ddb597e03147118cf8d2f8fbea5553"
+            }
          }
       },
       "event_type":"state_changed",
       "time_fired":"2016-11-26T01:37:24.265429+00:00",
-      "origin":"LOCAL"
+      "origin":"LOCAL",
+      "context": {
+         "id": "326ef27d19415c60c492fe330945f954",
+         "parent_id": null,
+         "user_id": "31ddb597e03147118cf8d2f8fbea5553"
+      }
    }
 }
 ```
