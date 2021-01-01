@@ -142,6 +142,7 @@ module.exports = {
       "core/entity/climate",
       "core/entity/cover",
       "core/entity/fan",
+      "core/entity/humidifier",
       "core/entity/light",
       "core/entity/lock",
       "core/entity/media-player",
