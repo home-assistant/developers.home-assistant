@@ -56,4 +56,4 @@ The sections are written in their corresponding languages, as this makes explain
 
 ### French
 
-- *Blueprint*: il a été décidé de ne pas traduire ce mot et de le considérer comme un nom propre. Cela évite les confusions avec les traductions de *map* et *template* et facilite la recherche de Blueprint à importer sur Internet.
+- *Blueprint*: il a été décidé de ne pas traduire ce mot et de le considérer comme un nom propre. Cela évite les confusions avec les traductions de *map* et *template* et facilite la recherche de Blueprint à importer sur Internet. Il faut donc toujours utiliser `Blueprint` avec une majuscule.
