@@ -145,6 +145,7 @@ module.exports = {
       "core/entity/light",
       "core/entity/lock",
       "core/entity/media-player",
+      "core/entity/number",
       "core/entity/remote",
       "core/entity/sensor",
       "core/entity/switch",
