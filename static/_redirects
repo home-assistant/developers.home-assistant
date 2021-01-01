@@ -19,10 +19,12 @@
 /docs/entity_climate /docs/core/entity/climate
 /docs/entity_cover /docs/core/entity/cover
 /docs/entity_fan /docs/core/entity/fan
+/docs/entity_humidifier /docs/core/entity/humidifier
 /docs/entity_index /docs/core/entity
 /docs/entity_light /docs/core/entity/light
 /docs/entity_lock /docs/core/entity/lock
 /docs/entity_media_player /docs/core/entity/media-player
+/docs/entity_number /docs/core/entity/number
 /docs/entity_remote /docs/core/entity/remote
 /docs/entity_sensor /docs/core/entity/sensor
 /docs/entity_switch /docs/core/entity/switch
