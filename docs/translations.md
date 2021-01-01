@@ -53,3 +53,7 @@ The sections are written in their corresponding languages, as this makes explain
 
 #### Typische Fehler
 - Achte auf den richtigen Imperativ. Der Imperativ ist die Befehlsform, z. B. "Gib mir das Wasser". Falsch wäre hier: "Gebe mir das Wasser" (siehe [Bildung des Imperativs](https://www.duden.de/sprachwissen/sprachratgeber/Bildung-des-Imperativs)).
+
+### French
+
+- *Blueprint*: il a été décidé de ne pas traduire ce mot et de le considérer comme un nom propre. Cela évite les confusions avec les traductions de *map* et *template* et facilite la recherche de Blueprint à importer sur Internet. Il faut donc toujours utiliser `Blueprint` avec une majuscule.
