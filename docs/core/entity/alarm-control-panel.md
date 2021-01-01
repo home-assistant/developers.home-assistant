@@ -24,6 +24,7 @@ Properties should always only return information from memory and not do I/O (lik
 | `disarmed` | The alarm is disarmed (`off`).
 | `armed_home` | The alarm is armed in home mode.
 | `armed_away` | The alarm is armed in away mode.
+| `armed_vacation` | The alarm is armed in vacation mode.
 | `armed_night` | The alarm is armed in night mode.
 | `armed_custom_bypass` |  The alarm is armed in bypass mode.
 | `pending` | The alarm is pending (towards `triggered`).
@@ -84,6 +85,21 @@ class MyAlarm(AlarmControlPanelEntity):
 
     def async_alarm_arm_away(self, code=None) -> None:
         """Send arm away command."""
+```
+
+### Alarm Arm Vacation
+
+Send arm vacation command.
+
+```python
+class MyAlarm(AlarmControlPanelEntity):
+    # Implement one of these methods.
+
+    def alarm_arm_vacation(self, code=None) -> None:
+        """Send arm vacation command."""
+
+    def async_alarm_arm_vacation(self, code=None) -> None:
+        """Send arm vacation command."""
 ```
 
 ### Alarm Arm Night
