@@ -76,7 +76,7 @@ To add Ingress support, follow the following steps:
 - The add-on will need to provide the web interface on port `8099`. Make sure that the add-on accepts only connections from `172.30.32.2` on that port and that the connections are treated as authenticated.
 - Update add-on configuration and set `ingress: true`. Here it is also possible to configure the Ingress port (default 8099).
 - If you need to configure the application inside your add-on with the right path and port, query the add-on info API endpoint.
-- If the application doesn't support relative paths or you can't set a base url, you can use nginx filter to replace the URL with correct path.
+- If the application doesn't support relative paths or you can't set a base url, you can use nginx filter to replace the URL with correct path. Ingress adds a request header `X-Ingress-Path` that can be used.
 
 Ingress API gateway supports the following:
 
