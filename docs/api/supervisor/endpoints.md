@@ -627,6 +627,7 @@ Set the output volume for a specific application
 <ApiEndpoint path="/auth" method="post">
 You can do authentication against Home Assistant Core.
 You can POST the data as JSON, as urlencoded (with `application/x-www-form-urlencoded` header) or by using use basic authentication.
+For using Basic authentication, you can use the `X-Supervisor-Key` for Supervisor authentication token.
 
 **Payload:**
 
