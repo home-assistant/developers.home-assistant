@@ -20,7 +20,8 @@
   },
   "resolutions": {
     "@docusaurus/core/**/selfsigned": "1.10.8",
-    "@docusaurus/preset-classic/**/fbjs": "2.0.0"
+    "@docusaurus/preset-classic/**/fbjs": "2.0.0",
+    "@docusaurus/core/wait-on": "5.2.1"
   },
   "browserslist": {
     "production": [
