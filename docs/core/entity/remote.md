@@ -16,7 +16,8 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Constant | Description
 | -------- | -----------
-| `SUPPORT_LEARN_COMMAND` | Entity allows learning commands from devices.
+| `SUPPORT_LEARN_COMMAND`  | Entity allows learning commands from devices.
+| `SUPPORT_DELETE_COMMAND` | Entity allows deleting commands from devices.
 
 ## Methods
 
@@ -44,4 +45,18 @@ class MyRemote(RemoteEntity):
 
     async def async_learn_command(self, **kwargs):
         """Learn a command from a device."""
+```
+
+### Delete Command
+
+Only implement this method if the flag `SUPPORT_DELETE_COMMAND` is set.
+
+```python
+class MyRemote(RemoteEntity):
+
+    def delete_command(self, **kwargs):
+        """Delete a command from a device."""
+
+    async def async_delete_command(self, **kwargs):
+        """Delete a command from a device."""
 ```
