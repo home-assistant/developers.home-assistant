@@ -627,7 +627,7 @@ Set the output volume for a specific application
 <ApiEndpoint path="/auth" method="get">
 You can do authentication against Home Assistant Core using Basic Authentication.
 Use the `X-Supervisor-Token` header to provide the Supervisor authentication token.
-See the corresponding POST method to provide JSON or urlencoded credentials
+See the corresponding POST method to provide JSON or urlencoded credentials.
 </ApiEndpoint>
 
 <ApiEndpoint path="/auth" method="post">
