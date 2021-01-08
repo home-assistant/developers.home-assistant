@@ -633,7 +633,7 @@ See the corresponding POST method to provide JSON or urlencoded credentials.
 <ApiEndpoint path="/auth" method="post">
 You can do authentication against Home Assistant Core.
 You can POST the data as JSON, as urlencoded (with `application/x-www-form-urlencoded` header) or by using use basic authentication.
-For using Basic authentication, you can use the `X-Supervisor-Key` for Supervisor authentication token.
+For using Basic authentication, you can use the `X-Supervisor-Token` for Supervisor authentication token.
 
 **Payload:**
 
