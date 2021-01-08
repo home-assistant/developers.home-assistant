@@ -37,6 +37,7 @@ Forecast data should either be daily or hourly.
 | templow | float | `None` | The lower daily Temperature in °C or °F
 | precipitation | float | `None` | The precipitation amount in mm or inch.
 | precipitation_probability | int | `None` | The probability of precipitation in %.
+| pressure | float | `None` | The air pressure in hPa or inHg.
 | wind_bearing | float or string | `None` | The wind bearing in azimuth angle (degrees) or 1-3 letter cardinal direction.
 | wind_speed | int | `None` | The wind speed in km/h or mi/h.
 
