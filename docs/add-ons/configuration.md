@@ -146,8 +146,8 @@ The configuration for an add-on is stored in `config.json`.
 | kernel_modules | bool | no | Map host kernel modules and config into add-on (readonly).
 | stdin | bool | no | Boolean. If enabled, you can use the STDIN with Home Assistant API.
 | legacy | bool | no | Boolean. If the Docker image has no `hass.io` labels, you can enable the legacy mode to use the config data.
-| options | dict | yes | Default options value of the add-on.
-| schema | dict | yes | Schema for options value of the add-on. It can be `false` to disable schema validation and use custom options.
+| options | dict | no | Default options value of the add-on.
+| schema | dict | no | Schema for options value of the add-on. It can be `false` to disable schema validation and use custom options.
 | image | string | no | For use with Docker Hub and other container registries.
 | timeout | integer | no | Default 10 (seconds). The timeout to wait until the Docker daemon is done or will be killed.
 | tmpfs | string | no | Mount a tmpfs filesystem in `/tmpfs`. Valid format for this option is : `size=XXXu,uid=N,rw`. Size is mandatory, valid units (`u`) are `k`, `m`, `g` and `XXX` has to be replaced by a number. `uid=N` (with `N` the uid number) and `rw` are optional.
