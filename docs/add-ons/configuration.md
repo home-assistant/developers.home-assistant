@@ -116,7 +116,7 @@ The configuration for an add-on is stored in `config.json`.
 | arch | list | yes | List of supported arch: `armhf`, `armv7`, `aarch64`, `amd64`, `i386`.
 | machine | list | no | Default it support any machine type. You can select that this add-on run only on specific machines. You can use `!` before a machine type to negate it.
 | url | url | no | Homepage of the add-on. Here you can explain the add-ons and options.
-| startup | string | yes | `initialize` will start add-on on setup of Home Assistant. `system` is for things like databases and not dependent on other things. `services` will start before Home Assistant, while `application` is started afterwards. Finally `once` is for applications that don't run as a daemon.
+| startup | string | no | Default `application`. `initialize` will start add-on on setup of Home Assistant. `system` is for things like databases and not dependent on other things. `services` will start before Home Assistant, while `application` is started afterwards. Finally `once` is for applications that don't run as a daemon.
 | webui | string | no | An URL for the web interface of this add-on. Like `http://[HOST]:[PORT:2839]/dashboard`, the port needs the internal port, which will be replaced with the effective port. It is also possible to bind the protocol part to a configuration options with: `[PROTO:option_name]://[HOST]:[PORT:2839]/dashboard` and it's looked up if it is `true` and it's going to `https`.
 | boot | string | yes | `auto` by system and manual or only `manual`.
 | ports | dict | no | Network ports to expose from the container. Format is `"container-port/type": host-port`. If the host port is `null` then the mapping is disabled.
