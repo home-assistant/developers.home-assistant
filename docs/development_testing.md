@@ -18,9 +18,13 @@ It might be required that you install additional packages depending on your dist
 - Fedora: `sudo dnf -y install systemd-devel gcc-c++`
 - Ubuntu: `sudo apt-get install libudev-dev`
 
-**Important:** Run `tox` before you create your pull request to avoid annoying fixes. 
+:::info Important
+Run `tox` before you create your pull request to avoid annoying fixes. 
+:::
 
-**Note:** Running the full `tox` test suite will take quite some time, so as the minimal requirement for pull requests, run at least the tests that are related to your code changes (see details below on how to). The full test suite will anyway be run by the CI once you created your pull request and before it can be merged.
+:::note
+Running the full `tox` test suite will take quite some time, so as the minimal requirement for pull requests, run at least the tests that are related to your code changes (see details below on how to). The full test suite will anyway be run by the CI once you created your pull request and before it can be merged.
+:::
 
 Running `tox` will run unit tests against the locally available Python releases, as well as validate the code and document style using `pycodestyle`, `pydocstyle` and  `pylint`. You can run tests on only one `tox` target -- just use `-e` to select an environment. For example, `tox -e lint` runs the linters only, and `tox -e py38` runs unit tests only on Python 3.8.
 
