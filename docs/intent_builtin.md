@@ -48,6 +48,26 @@ Close a cover.
 | --------- | ---- | -------- | -----------
 | name | string | Yes | Name of the cover entity to close.
 
+## Humidifier
+
+### HassHumidifierSetpoint
+
+Set target humidity.
+
+| Slot name | Type | Required | Description
+| --------- | ---- | -------- | -----------
+| name | string | Yes | Name of the entity to control.
+| humidity | integer, 0-100 | Yes | Target humidity to set.
+
+### HassHumidifierMode
+
+Set humidifier mode if supported by the humidifier.
+
+| Slot name | Type | Required | Description
+| --------- | ---- | -------- | -----------
+| name | string | Yes | Name of the entity to control.
+| mode | string | Yes | The mode to switch to.
+
 ## Light
 
 ### HassLightSet
