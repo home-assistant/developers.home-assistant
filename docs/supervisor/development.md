@@ -51,7 +51,6 @@ docker run --rm \
     homeassistant/amd64-builder:dev \
         --generic latest \
         --target /data \
-        --test \
         --aarch64 \
         --docker-hub awesome-user \
         --docker-user awesome-user \
