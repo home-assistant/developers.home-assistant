@@ -81,7 +81,7 @@ module.exports = {
     "internationalization/custom_integration",
   ],
   OperatingSystem: ["operating-system", "operating-system/debugging"],
-  Supervisor: ["supervisor", "supervisor/developing", "supervisor/debugging"],
+  Supervisor: ["supervisor", "supervisor/development", "supervisor/debugging"],
   // Old structure, still to move/migrate
   Architecture: {
     Architecture: ["architecture_index", "architecture_components"],
