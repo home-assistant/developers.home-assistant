@@ -179,6 +179,34 @@ MQTT discovery works by subscribing to MQTT topics specified in the manifest.jso
 }
 ```
 
+## DHCP
+
+If your integration supports discovery via dhcp, you can add the type to your manifest. If the user has the `dhcp` integration loaded, it will load the `dhcp` step of your integration's config flow when it is discovered. We support DHCP discovery by the `hostname` and [OUI](https://en.wikipedia.org/wiki/Organizationally_unique_identifier). The manifest value is a list of matcher dictionaries, your integration is discovered if all items of any of the specified matchers are found in the DHCP data. It's up to your config flow to filter out duplicates.
+
+If the integration supports `zeroconf` or `ssdp`, these should be preferred over `dhcp` as it generally offers a better
+user experience.
+
+The following example has one matcher consisting of three items, all of which must match for discovery to happen by this config.
+
+```json
+{
+  "dhcp": [
+    {
+    "hostname": "rachio-*",
+    "macaddress": "009D6B*"
+    },
+    {
+    "hostname": "rachio-*",
+    "macaddress": "F0038C*"
+    },
+    {
+    "hostname": "rachio-*",
+    "macaddress": "74C63B*"
+    }
+  ]
+}
+```
+
 ## Integration Quality Scale
 
 The [Integration Quality Scale](https://www.home-assistant.io/docs/quality_scale/) scores an integration on the code quality and user experience. Each level of the quality scale consists of a list of requirements. If an integration matches all requirements, it's considered to have reached that level.
