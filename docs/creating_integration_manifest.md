@@ -186,7 +186,14 @@ If your integration supports discovery via dhcp, you can add the type to your ma
 If the integration supports `zeroconf` or `ssdp`, these should be preferred over `dhcp` as it generally offers a better
 user experience.
 
-The following example has three matchers consisting of two items, all of which must match for discovery to happen by this config.
+The following example has three matchers consisting of two items. All of the items in any of the three matchers must match for discovery to happen by this config.
+
+For example:
+
+-  If the `hostname` was `Rachio-XYZ` and the `macaddress` was `00:9D:6B:55:12:AA`, the discovery would happen.
+-  If the `hostname` was `Rachio-XYZ` and the `macaddress` was `00:00:00:55:12:AA`, the discovery would not happen.
+-  If the `hostname` was `NotRachio-XYZ` and the `macaddress` was `00:9D:6B:55:12:AA`, the discovery would not happen.
+
 
 ```json
 {
