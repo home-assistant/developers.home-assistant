@@ -186,7 +186,7 @@ If your integration supports discovery via dhcp, you can add the type to your ma
 If the integration supports `zeroconf` or `ssdp`, these should be preferred over `dhcp` as it generally offers a better
 user experience.
 
-The following example has one matcher consisting of three items, all of which must match for discovery to happen by this config.
+The following example has three matchers consisting of two items, all of which must match for discovery to happen by this config.
 
 ```json
 {
