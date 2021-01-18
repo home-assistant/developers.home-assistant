@@ -1194,6 +1194,12 @@ Set host options
 
 <ApiEndpoint path="/host/reboot" method="post">
 Reboot the host
+
+**Payload:**
+
+| key      | type    | optional | description                                    |
+| -------- | ------- | -------- | ---------------------------------------------- |
+| no_wait  | boolean | True     | If the operation should return immeaditly. Avoids open TCP connections to wait for the result and potentially delaying shutdwon.  |
 </ApiEndpoint>
 
 <ApiEndpoint path="/host/reload" method="post">
