@@ -141,6 +141,7 @@ module.exports = {
       "core/entity/binary-sensor",
       "core/entity/climate",
       "core/entity/cover",
+      "core/entity/device-tracker",
       "core/entity/fan",
       "core/entity/humidifier",
       "core/entity/light",
