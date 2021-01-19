@@ -17,7 +17,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name          | Type    | Default      | Description                                       |
 | ------------- | ------- | ------------ | ------------------------------------------------- |
-| source_type   | string  | **Required** | The source type, eg gps or router, of the device. |
+| source_type   | string  | **Required** | The source type, eg `gps` or `router`, of the device. |
 | is_connected  | boolean | **Required** | The connection state of the device.               |
 | battery_level | integer | `None`       | The battery level of the device.                  |
 | ip_address    | string  | `None`       | The IP address of the device.                     |
@@ -36,7 +36,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name              | Type    | Default      | Description                                       |
 | ----------------- | ------- | ------------ | ------------------------------------------------- |
-| source_type       | string  | **Required** | The source type, eg gps or router, of the device. |
+| source_type       | string  | **Required** | The source type, eg `gps` or `router`, of the device. |
 | latitude          | string  | **Required** | The latitude coordinate of the device.            |
 | longitude         | string  | **Required** | The longitude coordinate of the device.           |
 | battery_level     | integer | `None`       | The battery level of the device.                  |
