@@ -16,8 +16,9 @@ Properties should always only return information from memory and not do I/O (lik
 | current_direction | str | None | Return the current direction of the fan |
 | is_on | boolean | None |Return true if the entity is on |
 | oscillating | boolean | None | Return true if the fan is oscillating |
-| speed | str | None | Return the current speed. One of the values in speed_list. |
-| speed_list | list | None| Get the list of available speeds. The allowed values are "off", "low", "medium" and "high". Use the corresponding constants SPEED_OFF, SPEED_LOW, SPEED_MEDIUM, SPEED_HIGH. |
+| speed (deprecated) | str | None | Return the current speed. One of the values in speed_list. |
+| percentage | int | None | Return the current speed percentage. Must be a value between 0 (off) and 100 |
+| speed_list (deprecated) | list | None| Get the list of available speeds. The allowed values are "off", "low", "medium" and "high". Use the corresponding constants SPEED_OFF, SPEED_LOW, SPEED_MEDIUM, SPEED_HIGH. |
 | supported_features | int | 0 | Flag supported features |
 
 ## Supported Features
@@ -25,7 +26,7 @@ Properties should always only return information from memory and not do I/O (lik
 | Constant | Description |
 |----------|--------------------------------------|
 | 'SUPPORT_DIRECTION' | The fan supports changing the direction.
-| 'SUPPORT_SET_SPEED' | The fan supports setting the speed.
+| 'SUPPORT_SET_SPEED' | The fan supports setting the speed percentage.
 | 'SUPPORT_OSCILLATE' | The fan supports oscillation.
 
 ## Methods
@@ -45,7 +46,7 @@ class FanEntity(ToggleEntity):
         """Set the direction of the fan."""
 ```
 
-### Set speed
+### Set speed percentage
 
 Only implement this method if the flag `SUPPORT_SET_SPEED` is set.
 
@@ -53,11 +54,11 @@ Only implement this method if the flag `SUPPORT_SET_SPEED` is set.
 class FanEntity(ToggleEntity):
     # Implement one of these methods.
 
-    def set_speed(self, speed: str) -> None:
-        """Set the speed of the fan."""
+    def set_percentage(self, percentage: int) -> None:
+        """Set the speed percentage of the fan."""
 
-    async def async_set_speed(self, speed: str) -> None:
-        """Set the speed of the fan."""
+    async def async_set_percentage(self, percentage: int) -> None:
+        """Set the speed percentage of the fan."""
 ```
 
 ### Turn on
@@ -66,11 +67,28 @@ class FanEntity(ToggleEntity):
 class FanEntity(ToggleEntity):
     # Implement one of these methods.
 
-    def turn_on(self, speed: Optional[str] = None, **kwargs: Any) -> None:
+    def turn_on(self, speed: Optional[str] = None percentage: Optional[int] = None, **kwargs: Any) -> None:
         """Turn on the fan."""
 
-    async def async_turn_on(self, speed: Optional[str] = None, **kwargs: Any) -> None:
+    async def async_turn_on(self, speed: Optional[str] = None, percentage: Optional[int] = None, **kwargs: Any) -> None:
         """Turn on the fan."""
+```
+*speed is depercated.
+
+For intergrations that implemented `speed` before the model changed to percentage,
+add the following code to the beginning of the function for backwards compatibility:
+
+```
+        if percentage is not None and speed is None:
+            speed = self.percentage_to_speed(percentage)
+```
+
+For intergrations that implemented `percentage` after the model deprecated `speed`,
+add the following code to the beginning of the function for backwards compatibility:
+
+```
+        if speed is not None and percentage is None:
+            percentage = self.percentage_to_speed(speed)
 ```
 
 ### Turn off
