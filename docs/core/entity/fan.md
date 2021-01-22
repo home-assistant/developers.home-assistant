@@ -25,7 +25,7 @@ The fan entity model has changed to use percentages in the range from 0 (off)-10
 of the named speeds. The new model replaces `speed` and `speed_list` with `percentage`. This change allowed us to expand the number of supported speeds to accommodate additional fan models in Home Assistant. 
 
 The properties will remain until at least the end of 2021 when they will be fully phased out to maintain backwards compatibility with
-older versions. If you convert an integration to use percentages before these properies have been fully phased out, please make use of the `@speed_compat`
+older versions. Integrations that are converted to use percentages before these properies have been fully phased out, should make use of the `@speed_compat`
 decorator for the [Turn on](#turn-on) function.
 
 | Name | Type | Default | Description
