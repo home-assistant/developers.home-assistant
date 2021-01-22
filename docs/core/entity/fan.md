@@ -21,6 +21,16 @@ Properties should always only return information from memory and not do I/O (lik
 | speed_list (deprecated) | list | None| Get the list of available speeds. The allowed values are "off", "low", "medium" and "high". Use the corresponding constants SPEED_OFF, SPEED_LOW, SPEED_MEDIUM, SPEED_HIGH. |
 | supported_features | int | 0 | Flag supported features |
 
+## Deprecated Properties
+
+The fan entity model has changed to use percentages in the range from 0 (off)-100 instead
+of the named speeds. The new model replaces `speed` and `speed_list` with `percentage`. This change allowed us to expand the number of supported speeds to accommodate additional fan models in Home Assistant. 
+
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| speed | str | None | Return the current speed. One of the values in speed_list. |
+| speed_list | list | None| Get the list of available speeds. The allowed values are "off", "low", "medium" and "high". Use the corresponding constants SPEED_OFF, SPEED_LOW, SPEED_MEDIUM, SPEED_HIGH. |
+
 ## Supported Features
 
 | Constant | Description |
