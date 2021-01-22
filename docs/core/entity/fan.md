@@ -96,8 +96,8 @@ add the `@percentage_compat` decorator for backwards compatibility:
     async def async_turn_on(self, speed: Optional[str] = None, percentage: Optional[int] = None, **kwargs: Any) -> None:
 ```
 
-For new intergrations `speed` should not be implemented and only `percentage` should be used.
-The `@speed_compat` decorator should only be added if the switch to percentages is done before `speed` has been fully phased out.
+For new intergrations, `speed` should not be implemented and only `percentage` should be used.
+The `@speed_compat` decorator should be added if the switch to percentages is done before `speed` has been fully phased out.
 
 ```python
     @speed_compat
