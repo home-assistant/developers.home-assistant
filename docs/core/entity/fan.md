@@ -87,7 +87,7 @@ class FanEntity(ToggleEntity):
 For intergrations that implemented `speed` before the model changed to percentage,
 add the following code to the beginning of the function for backwards compatibility:
 
-```
+```python
         if percentage is not None and speed is None:
             speed = self.percentage_to_speed(percentage)
 ```
@@ -95,7 +95,7 @@ add the following code to the beginning of the function for backwards compatibil
 For intergrations that implemented `percentage` after the model deprecated `speed`,
 add the following code to the beginning of the function for backwards compatibility:
 
-```
+```python
         if speed is not None and percentage is None:
             percentage = self.self.speed_to_percentage(speed)
 ```
