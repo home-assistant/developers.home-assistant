@@ -16,9 +16,7 @@ Properties should always only return information from memory and not do I/O (lik
 | current_direction | str | None | Return the current direction of the fan |
 | is_on | boolean | None |Return true if the entity is on |
 | oscillating | boolean | None | Return true if the fan is oscillating |
-| speed (deprecated) | str | None | Return the current speed. One of the values in speed_list. |
 | percentage | int | None | Return the current speed percentage. Must be a value between 0 (off) and 100 |
-| speed_list (deprecated) | list | None| Get the list of available speeds. The allowed values are "off", "low", "medium" and "high". Use the corresponding constants SPEED_OFF, SPEED_LOW, SPEED_MEDIUM, SPEED_HIGH. |
 | supported_features | int | 0 | Flag supported features |
 
 ## Deprecated Properties
@@ -83,7 +81,8 @@ class FanEntity(ToggleEntity):
     async def async_turn_on(self, speed: Optional[str] = None, percentage: Optional[int] = None, **kwargs: Any) -> None:
         """Turn on the fan."""
 ```
-*speed is depercated.
+
+:::tip `speed` is deprecated.
 
 For intergrations that implemented `speed` before the model changed to percentage,
 add the following code to the beginning of the function for backwards compatibility:
@@ -100,6 +99,7 @@ add the following code to the beginning of the function for backwards compatibil
         if speed is not None and percentage is None:
             percentage = self.percentage_to_speed(speed)
 ```
+:::
 
 ### Turn off
 
