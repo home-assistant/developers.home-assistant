@@ -24,6 +24,10 @@ Properties should always only return information from memory and not do I/O (lik
 The fan entity model has changed to use percentages in the range from 0 (off)-100 instead
 of the named speeds. The new model replaces `speed` and `speed_list` with `percentage`. This change allowed us to expand the number of supported speeds to accommodate additional fan models in Home Assistant. 
 
+The properties will remain until the end of 2021 when they will be fully phased out to maintain backwards compatibility with
+older version. If you convert an integration to use percentages before July 1st 2021, please make use of the `@speed_compat`
+decorator for the turn on function.
+
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | speed | str | None | Return the current speed. One of the values in speed_list. |
@@ -85,20 +89,23 @@ class FanEntity(ToggleEntity):
 :::tip `speed` is deprecated.
 
 For intergrations that implemented `speed` before the model changed to percentage,
-add the following code to the beginning of the function for backwards compatibility:
+add the `@percentage_compat` decorator for backwards compatibility:
 
 ```python
-        if percentage is not None and speed is None:
-            speed = self.percentage_to_speed(percentage)
+    @percentage_compat
+    async def async_turn_on(self, speed: Optional[str] = None, percentage: Optional[int] = None, **kwargs: Any) -> None:
 ```
 
 For intergrations that implemented `percentage` after the model deprecated `speed`,
-add the following code to the beginning of the function for backwards compatibility:
+add the `@speed_compat` decorator for backwards compatibility:
 
 ```python
-        if speed is not None and percentage is None:
-            percentage = self.self.speed_to_percentage(speed)
+    @speed_compat
+    async def async_turn_on(self, speed: Optional[str] = None, percentage: Optional[int] = None, **kwargs: Any) -> None:
 ```
+
+The `@speed_compat` decorator should only be added if the during the first phase of the
+deprecation period which ends July 1st 2021.
 :::
 
 ### Turn off
