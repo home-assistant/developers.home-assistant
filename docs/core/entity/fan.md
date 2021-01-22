@@ -97,7 +97,7 @@ add the following code to the beginning of the function for backwards compatibil
 
 ```
         if speed is not None and percentage is None:
-            percentage = self.percentage_to_speed(speed)
+            percentage = self.self.speed_to_percentage(speed)
 ```
 :::
 
