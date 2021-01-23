@@ -73,7 +73,7 @@ class FanEntity(ToggleEntity):
         """Set the speed percentage of the fan."""
 ```
 
-:::tip Converting a speed list
+:::tip Converting speeds
 
 Home Assistant includes a utility to convert speeds.
 
