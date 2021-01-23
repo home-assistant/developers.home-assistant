@@ -82,7 +82,7 @@ If the device has a list of named speeds:
 ```python
 from homeassistant.util.percentage import ordered_list_item_to_percentage, percentage_to_ordered_list_item
 
-ORDERED_NAMED_FAN_SPEEDS = ["one","two","three","four","five","six"]  # off is not included
+ORDERED_NAMED_FAN_SPEEDS = ["one", "two", "three", "four", "five", "six"]  # off is not included
 
 percentage = ordered_list_item_to_percentage(ORDERED_NAMED_FAN_SPEEDS, "three")
 
