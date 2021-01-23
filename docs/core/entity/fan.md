@@ -73,6 +73,35 @@ class FanEntity(ToggleEntity):
         """Set the speed percentage of the fan."""
 ```
 
+:::tip Converting a speed list
+
+Home Assistant includes a utility to convert speeds.
+
+If the device has a list of named speeds:
+
+```python
+from homeassistant.util.percentage import ordered_list_item_to_percentage, percentage_to_ordered_list_item
+
+ORDERED_NAMED_FAN_SPEEDS = ["one","two","three","four","five","six"]  # off is not included
+
+percentage = ordered_list_item_to_percentage(ORDERED_NAMED_FAN_SPEEDS, "three")
+
+named_speed = percentage_to_ordered_list_item(ORDERED_NAMED_FAN_SPEEDS, 23)
+```
+
+If the device has a numeric range of speeds:
+
+```python
+from homeassistant.util.percentage import ranged_value_to_percentage, percentage_to_ranged_value
+
+SPEED_RANGE = (1, 255)  # off is not included
+
+percentage = ranged_value_to_percentage(SPEED_RANGE, 127)
+
+value_in_range = percentage_to_ranged_value(SPEED_RANGE, 50)
+```
+:::
+
 ### Turn on
 
 ```python
