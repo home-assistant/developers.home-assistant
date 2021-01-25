@@ -26,8 +26,8 @@ Properties should always only return information from memory and not do I/O (lik
 The fan entity model has changed to use percentages in the range from 0 (off)-100 instead
 of the named speeds. The new model replaces `speed` and `speed_list` with `percentage`, `preset_mode`, and `preset_modes`. This change allowed us to expand the number of supported speeds to accommodate additional fan models in Home Assistant. 
 
-The properties will remain until at least the end of 2021 when they will be fully phased out to maintain backwards compatibility with
-older versions. Integrations that are converted to use percentages and preset modes before these properties have been fully phased out, should make use of the `@fan_compat` decorator for the [Turn on](#turn-on) function.
+The deprecated properties will remain until at least the end of 2021 when they will be fully phased out to maintain backwards compatibility with
+older versions. Integrations should update their the [Turn on](#turn-on) function to consume `percentage` or `preset_mode` instead of `speed`.
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
@@ -132,13 +132,6 @@ class FanEntity(ToggleEntity):
 ```
 
 :::tip `speed` is deprecated.
-
-During the transition period, add the `@fan_compat` decorator for backwards compatibility:
-
-```python
-    @fan_compat
-    async def async_turn_on(self, speed: Optional[str] = None, percentage: Optional[int] = None, preset_mode: Optional[str] = None, **kwargs: Any) -> None:
-```
 
 For new intergrations, `speed` should not be implemented and only `percentage` and `preset_mode` should be used.
 
