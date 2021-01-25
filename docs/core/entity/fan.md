@@ -39,7 +39,7 @@ older versions. Integrations that are converted to use percentages and preset mo
 | Constant | Description |
 |----------|--------------------------------------|
 | 'SUPPORT_DIRECTION' | The fan supports changing the direction.
-| 'SUPPORT_SET_SPEED' | The fan supports setting the speed percentage.
+| 'SUPPORT_SET_SPEED' | The fan supports setting the speed percentage and optional preset modes.
 | 'SUPPORT_OSCILLATE' | The fan supports oscillation.
 
 ## Methods
