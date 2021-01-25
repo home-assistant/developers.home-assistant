@@ -26,8 +26,7 @@ Properties should always only return information from memory and not do I/O (lik
 The fan entity model has changed to use percentages in the range from 0 (off)-100 instead
 of the named speeds. The new model replaces `speed` and `speed_list` with `percentage`, `preset_mode`, and `preset_modes`. This change allowed us to expand the number of supported speeds to accommodate additional fan models in Home Assistant. 
 
-The deprecated properties will remain until at least the end of 2021 when they will be fully phased out to maintain backwards compatibility with
-older versions. Integrations should update their the [Turn on](#turn-on) function to consume `percentage` or `preset_mode` instead of `speed`.
+To maintain backwards compatibility with integations that have not updated to the new model, the deprecated properties will remain until at least the end of 2021. Integrations must update their the [Turn on](#turn-on) function to consume `percentage` or `preset_mode` instead of `speed`.
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
