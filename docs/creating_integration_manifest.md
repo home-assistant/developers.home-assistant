@@ -3,7 +3,7 @@ title: "Integration Manifest"
 sidebar_label: "Manifest"
 ---
 
-Since 0.92.0, every integration has a manifest file to specify basic information about an integration. This file is stored as `manifest.json` in your integration directory. It is required to add such a file, except for custom components.
+Every integration has a manifest file to specify basic information about an integration. This file is stored as `manifest.json` in your integration directory. It is required to add such a file.
 
 ```json
 {
@@ -39,6 +39,12 @@ The domain is a short name consisting of characters and underscores. This domain
 ## Name
 
 The name of the integration.
+
+## Version
+
+For core integrations, this should be omitted.
+
+The version of the integration is required for custom integrations. The version needs to be a valid version recognized by [AwesomeVersion](https://github.com/ludeeus/awesomeversion) like [CalVer](https://calver.org/) or [SemVer](https://semver.org/).
 
 ## Documentation
 
