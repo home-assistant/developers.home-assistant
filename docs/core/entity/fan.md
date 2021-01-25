@@ -61,7 +61,7 @@ class FanEntity(ToggleEntity):
 
 ### Set preset mode
 
-Only implement this method if the flag `SUPPORT_SET_SPEED` is set.
+Only implement this method if the flag `SUPPORT_PRESET_MODE` is set.
 
 ```python
 class FanEntity(ToggleEntity):
