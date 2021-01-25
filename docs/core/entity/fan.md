@@ -113,7 +113,7 @@ SPEED_RANGE = (1, 255)  # off is not included
 
 percentage = ranged_value_to_percentage(SPEED_RANGE, 127)
 
-value_in_range = percentage_to_ranged_value(SPEED_RANGE, 50)
+value_in_range = round(percentage_to_ranged_value(SPEED_RANGE, 50))
 ```
 :::
 
