@@ -40,6 +40,7 @@ To maintain backwards compatibility with integations that have not updated to th
 | 'SUPPORT_DIRECTION' | The fan supports changing the direction.
 | 'SUPPORT_SET_SPEED' | The fan supports setting the speed percentage and optional preset modes.
 | 'SUPPORT_OSCILLATE' | The fan supports oscillation.
+| 'SUPPORT_PRESET_MODE' | The fan supports preset modes.
 
 ## Methods
 
