@@ -18,15 +18,16 @@ Properties should always only return information from memory and not do I/O (lik
 | oscillating | boolean | None | Return true if the fan is oscillating |
 | percentage | int | None | Return the current speed percentage. Must be a value between 0 (off) and 100 |
 | supported_features | int | 0 | Flag supported features |
+| preset_mode | str | None | Return the current preset_mode. One of the values in preset_modes. |
+| preset_modes | list | None | Get the list of available preset_modes. This is an arbitrary list of str and should not contain any speeds. |
 
 ## Deprecated Properties
 
 The fan entity model has changed to use percentages in the range from 0 (off)-100 instead
-of the named speeds. The new model replaces `speed` and `speed_list` with `percentage`. This change allowed us to expand the number of supported speeds to accommodate additional fan models in Home Assistant. 
+of the named speeds. The new model replaces `speed` and `speed_list` with `percentage`, `preset_mode`, and `preset_modes`. This change allowed us to expand the number of supported speeds to accommodate additional fan models in Home Assistant. 
 
 The properties will remain until at least the end of 2021 when they will be fully phased out to maintain backwards compatibility with
-older versions. Integrations that are converted to use percentages before these properies have been fully phased out, should make use of the `@speed_compat`
-decorator for the [Turn on](#turn-on) function.
+older versions. Integrations that are converted to use percentages and preset modes before these properties have been fully phased out, should make use of the `@fan_compat` decorator for the [Turn on](#turn-on) function.
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
@@ -56,6 +57,21 @@ class FanEntity(ToggleEntity):
 
     async def async_set_direction(self, direction: str) -> None:
         """Set the direction of the fan."""
+```
+
+### Set preset mode
+
+Only implement this method if the flag `SUPPORT_SET_SPEED` is set.
+
+```python
+class FanEntity(ToggleEntity):
+    # Implement one of these methods.
+
+    def set_preset_mode(self, preset_mode: str) -> None:
+        """Set the preset mode of the fan."""
+
+    async def async_set_preset_mode(self, preset_mode: str) -> None:
+        """Set the preset mode of the fan."""
 ```
 
 ### Set speed percentage
@@ -108,30 +124,23 @@ value_in_range = percentage_to_ranged_value(SPEED_RANGE, 50)
 class FanEntity(ToggleEntity):
     # Implement one of these methods.
 
-    def turn_on(self, speed: Optional[str] = None percentage: Optional[int] = None, **kwargs: Any) -> None:
+    def turn_on(self, speed: Optional[str] = None percentage: Optional[int] = None, preset_mode: Optional[str] = None, **kwargs: Any) -> None:
         """Turn on the fan."""
 
-    async def async_turn_on(self, speed: Optional[str] = None, percentage: Optional[int] = None, **kwargs: Any) -> None:
+    async def async_turn_on(self, speed: Optional[str] = None, percentage: Optional[int] = None, preset_mode: Optional[str] = None, **kwargs: Any) -> None:
         """Turn on the fan."""
 ```
 
 :::tip `speed` is deprecated.
 
-For intergrations that implemented `speed` before the model changed to percentage,
-add the `@percentage_compat` decorator for backwards compatibility:
+During the transition period, add the `@fan_compat` decorator for backwards compatibility:
 
 ```python
-    @percentage_compat
-    async def async_turn_on(self, speed: Optional[str] = None, percentage: Optional[int] = None, **kwargs: Any) -> None:
+    @fan_compat
+    async def async_turn_on(self, speed: Optional[str] = None, percentage: Optional[int] = None, preset_mode: Optional[str] = None,, **kwargs: Any) -> None:
 ```
 
-For new intergrations, `speed` should not be implemented and only `percentage` should be used.
-The `@speed_compat` decorator should be added if the switch to percentages is done before `speed` has been fully phased out.
-
-```python
-    @speed_compat
-    async def async_turn_on(self, speed: Optional[str] = None, percentage: Optional[int] = None, **kwargs: Any) -> None:
-```
+For new intergrations, `speed` should not be implemented and only `percentage`, `preset_mode`, and `preset_modes` should be used.
 
 :::
 
