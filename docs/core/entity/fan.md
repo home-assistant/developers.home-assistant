@@ -140,7 +140,7 @@ During the transition period, add the `@fan_compat` decorator for backwards comp
     async def async_turn_on(self, speed: Optional[str] = None, percentage: Optional[int] = None, preset_mode: Optional[str] = None, **kwargs: Any) -> None:
 ```
 
-For new intergrations, `speed` should not be implemented and only `percentage`, `preset_mode`, and `preset_modes` should be used.
+For new intergrations, `speed` should not be implemented and only `percentage` and `preset_mode` should be used.
 
 :::
 
