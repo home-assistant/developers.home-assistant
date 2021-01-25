@@ -20,7 +20,7 @@ To ensure that the documentation for Home Assistant is consistent and easy to fo
 - Configuration variables must document the requirement status (`false` or `true`).
 - Configuration variables must document the default value, if any.
 - Configuration variables must document the accepted value types (see [Configuration variables details](documenting/create-page.md#configuration)).
-  - For configuration variables that accept multiple types, separate the types with a comma (i.e. `string, int`).
+  - For configuration variables that accept multiple types, separate the types with a comma (i.e. `string, integer`).
 - Use YAML sequence syntax in the sample code if it is supported.
 - All examples should be formatted to be included in `configuration.yaml` unless explicitly stated.
   - Use capital letters and `_` to indicate that the value needs to be replaced. E.g., `api_key: YOUR_API_KEY` or `api_key: REPLACE_ME`.
