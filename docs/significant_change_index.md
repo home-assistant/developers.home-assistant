@@ -26,7 +26,7 @@ This function is passed a state that was previously considered significant and t
 When deciding on significance, make sure you take all known attributes into account. Use device classes to differentiate between entity types.
 
 Here are some examples of insignificant changes:
- - A battery that loses 0.1% charge
+ - A battery that loses 0.1 % charge
  - A temperature sensor that changes 0.1 Celsius
  - A light that changes 2 brightness
 
