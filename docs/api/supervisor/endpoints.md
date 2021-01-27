@@ -1092,6 +1092,10 @@ Get hardware information.
 
 ```json
 {
+    "devices": [
+      {
+      }
+    ],
     "serial": ["/dev/xy"],
     "input": ["Input device name"],
     "disk": ["/dev/sdax"],
@@ -1108,6 +1112,12 @@ Get hardware information.
     }
 }
 ```
+
+**Returned data:**
+
+| key      | description                                                  |
+| -------- | ------------------------------------------------------------ |
+| devices  | A list of [Device models](api/supervisor/models.md#device)   |
 
 </ApiEndpoint>
 
@@ -1132,9 +1142,6 @@ Get audio devices
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/hardware/trigger" method="post">
-Trigger UDEV reload.
-</ApiEndpoint>
 
 ### Host
 
