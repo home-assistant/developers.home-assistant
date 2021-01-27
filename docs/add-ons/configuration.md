@@ -125,7 +125,7 @@ The configuration for an add-on is stored in `config.json`.
 | host_ipc | bool | no | Default `false`. Allow to share the IPC namespace with others.
 | host_dbus | bool | no | Default `false`. Map the host D-Bus service into the add-on.
 | host_pid | bool | no | Default `false`. Allow to run container on host PID namespace. Works only for not protected add-ons.
-| devices | list | no | Device list to map into the add-on. Format is: `<path_on_host>:<path_in_container>:<cgroup_permissions>`. E.g., `/dev/ttyAMA0:/dev/ttyAMA0:rwm`
+| devices | list | no | Device list to map into the add-on. Format is: `<path_on_host>`. E.g., `/dev/ttyAMA0`
 | homeassistant | string | no | Pin a minimum required Home Assistant Core version for the add-on. Value is a version string like `0.91.2`.
 | hassio_role | str | no | Default `default`. Role-based access to Supervisor API. Available: `default`, `homeassistant`, `backup`, `manager` or `admin`
 | hassio_api | bool | no | This add-on can access the Supervisor's REST API. Use `http://supervisor`.
