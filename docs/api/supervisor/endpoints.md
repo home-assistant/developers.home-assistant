@@ -1095,21 +1095,7 @@ Get hardware information.
     "devices": [
       {
       }
-    ],
-    "serial": ["/dev/xy"],
-    "input": ["Input device name"],
-    "disk": ["/dev/sdax"],
-    "gpio": ["gpiochip0", "gpiochip100"],
-    "audio": {
-        "CARD_ID": {
-            "name": "xy",
-            "type": "microphone",
-            "devices": [
-                "chan_id": "channel ID",
-                "chan_type": "type of device"
-            ]
-        }
-    }
+    ]
 }
 ```
 
