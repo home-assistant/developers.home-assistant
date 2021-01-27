@@ -52,7 +52,7 @@ Best of the best. The integration is completely async, meaning it's super fast. 
 - Set appropriate `PARALLEL_UPDATES` constant
 - Support config entry unloading (called when config entry is removed)
 - Integration + dependency are async
-- Uses aiohttp and allows passing in websession (if making HTTP requests)
+- Uses aiohttp or httpx and allows passing in websession (if making HTTP requests)
 
 ## Internal 🏠
 
