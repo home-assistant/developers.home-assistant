@@ -126,8 +126,6 @@ The configuration for an add-on is stored in `config.json`.
 | host_dbus | bool | no | Default `false`. Map the host D-Bus service into the add-on.
 | host_pid | bool | no | Default `false`. Allow to run container on host PID namespace. Works only for not protected add-ons.
 | devices | list | no | Device list to map into the add-on. Format is: `<path_on_host>:<path_in_container>:<cgroup_permissions>`. E.g., `/dev/ttyAMA0:/dev/ttyAMA0:rwm`
-| udev | bool | no | Default `false`. Set this `true`, if your container runs an udev process of its own.
-| auto_uart | bool | no | Default `false`. Auto mapping all UART/serial device from host into add-on.
 | homeassistant | string | no | Pin a minimum required Home Assistant Core version for the add-on. Value is a version string like `0.91.2`.
 | hassio_role | str | no | Default `default`. Role-based access to Supervisor API. Available: `default`, `homeassistant`, `backup`, `manager` or `admin`
 | hassio_api | bool | no | This add-on can access the Supervisor's REST API. Use `http://supervisor`.
@@ -142,6 +140,8 @@ The configuration for an add-on is stored in `config.json`.
 | video | bool | no | Mark this add-on to use the internal video system. All available devices will be mapped into the add-on.
 | gpio | bool | no | If this is set to `true`, `/sys/class/gpio` will map into add-on for access to GPIO interface from kernel. Some libraries also need  `/dev/mem` and `SYS_RAWIO` for read/write access to this device. On systems with AppArmor enabled, you need to disable AppArmor or provide you own profile for the add-on, which is better for security.
 | usb | bool | no | If this is set to `true`, it would map the raw USB access `/dev/bus/usb` into add-on with plug&play support.
+| uart | bool | no | Default `false`. Auto mapping all UART/serial device from host into add-on.
+| udev | bool | no | Default `false`. Set this `true`, it get host udev database read-only mounted into container.
 | devicetree | bool | no | Boolean. If this is set to True, `/device-tree` will map into add-on.
 | kernel_modules | bool | no | Map host kernel modules and config into add-on (readonly).
 | stdin | bool | no | Boolean. If enabled, you can use the STDIN with Home Assistant API.
@@ -212,6 +212,7 @@ We support:
 - `port`
 - `match(REGEX)`
 - `list(val1|val2|...)`
+- `device` / `device(filter)`: Device filter can be following format: `subsystem=TYPE` i.e. `subsystem=tty` for serial devices.
 
 ## Add-on extended build
 
