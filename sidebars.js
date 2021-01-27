@@ -117,9 +117,12 @@ module.exports = {
       "dev_101_services",
       "creating_platform_index",
       "creating_component_generic_discovery",
-      "reproduce_state_index",
       "integration_fetching_data",
       "integration_events",
+    ],
+    "Building Entity Integrations": [
+      "reproduce_state_index",
+      "significant_change_index",
     ],
     "Development Checklist": [
       "development_checklist",
