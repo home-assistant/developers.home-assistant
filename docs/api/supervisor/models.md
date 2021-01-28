@@ -221,3 +221,14 @@ These models are describing objects that are getting returned from the superviso
 | type      | str         | Type of the suggestion                              |
 | context   | str         | In which context the suggestion occorse             |
 | reference | str or null | Depend on the Context, a reference to a other Model |
+
+## Device
+
+| key        | type           | description                                                           |
+| ---------- | -------------- | --------------------------------------------------------------------- |
+| name       | string         | Name of the device object                                             |
+| sysfs      | string         | Path to sysfs device object                                           |
+| dev_path   | string         | Path to devfs                                                         |
+| subsystem  | string or null | Subsystem type of the device (tty, input, sound, block, misc)         |
+| by_id      | string or null | Udev by ID link                                                       |
+| attributes | dict           | A dict with pure udev device attributes for debug and understanding   |
