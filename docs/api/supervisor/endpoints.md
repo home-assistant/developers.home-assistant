@@ -1094,6 +1094,14 @@ Get hardware information.
 {
     "devices": [
       {
+        "name": "ttyACM0",
+        "sysfs": "/sys/devices/usb/00:01",
+        "dev_path": "/dev/ttyACM0",
+        "by_id": "/dev/serial/by-id/usb-Silicon_Labs-RFUSB_9017F723B061A7C01410CFCF-if00-port1",
+        "subsystem": "tty",
+        "attributes": {
+          "MINOR": "5"
+        }
       }
     ]
 }
