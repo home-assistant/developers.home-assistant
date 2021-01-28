@@ -140,8 +140,8 @@ The configuration for an add-on is stored in `config.json`.
 | video | bool | no | Mark this add-on to use the internal video system. All available devices will be mapped into the add-on.
 | gpio | bool | no | If this is set to `true`, `/sys/class/gpio` will map into add-on for access to GPIO interface from kernel. Some libraries also need  `/dev/mem` and `SYS_RAWIO` for read/write access to this device. On systems with AppArmor enabled, you need to disable AppArmor or provide you own profile for the add-on, which is better for security.
 | usb | bool | no | If this is set to `true`, it would map the raw USB access `/dev/bus/usb` into add-on with plug&play support.
-| uart | bool | no | Default `false`. Auto mapping all UART/serial device from host into add-on.
-| udev | bool | no | Default `false`. Set this `true`, it get host udev database read-only mounted into container.
+| uart | bool | no | Default `false`. Auto mapping all UART/serial devices from the host into the add-on.
+| udev | bool | no | Default `false`. Set this `true`, gets the host udev database read-only mounted into the add-on.
 | devicetree | bool | no | Boolean. If this is set to True, `/device-tree` will map into add-on.
 | kernel_modules | bool | no | Map host kernel modules and config into add-on (readonly).
 | stdin | bool | no | Boolean. If enabled, you can use the STDIN with Home Assistant API.
