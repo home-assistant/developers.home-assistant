@@ -26,7 +26,7 @@ Properties should always only return information from memory and not do I/O (lik
 The fan entity model has changed to use percentages in the range from 0 (off) to 100 instead
 of the named speeds. The new model replaces `speed` and `speed_list` with `percentage`, `preset_mode`, and `preset_modes`. This change allowed us to expand the number of supported speeds to accommodate additional fan models in Home Assistant. 
 
-To maintain backwards compatibility with integations that have not updated to the new model, the deprecated properties will remain until at least the end of 2021. Integrations must update their the [Turn on](#turn-on) function to consume `percentage` or `preset_mode` instead of `speed`.
+To maintain backwards compatibility with integations that have not updated to the new model, the deprecated properties will remain until at least the end of 2021. Integrations must update their [Turn on](#turn-on) function to consume `percentage` or `preset_mode` instead of `speed`.
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
@@ -124,7 +124,7 @@ value_in_range = math.ceil(percentage_to_ranged_value(SPEED_RANGE, 50))
 class FanEntity(ToggleEntity):
     # Implement one of these methods.
 
-    def turn_on(self, speed: Optional[str] = None percentage: Optional[int] = None, preset_mode: Optional[str] = None, **kwargs: Any) -> None:
+    def turn_on(self, speed: Optional[str] = None, percentage: Optional[int] = None, preset_mode: Optional[str] = None, **kwargs: Any) -> None:
         """Turn on the fan."""
 
     async def async_turn_on(self, speed: Optional[str] = None, percentage: Optional[int] = None, preset_mode: Optional[str] = None, **kwargs: Any) -> None:
