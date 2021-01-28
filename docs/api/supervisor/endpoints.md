@@ -1092,22 +1092,26 @@ Get hardware information.
 
 ```json
 {
-    "serial": ["/dev/xy"],
-    "input": ["Input device name"],
-    "disk": ["/dev/sdax"],
-    "gpio": ["gpiochip0", "gpiochip100"],
-    "audio": {
-        "CARD_ID": {
-            "name": "xy",
-            "type": "microphone",
-            "devices": [
-                "chan_id": "channel ID",
-                "chan_type": "type of device"
-            ]
+    "devices": [
+      {
+        "name": "ttyACM0",
+        "sysfs": "/sys/devices/usb/00:01",
+        "dev_path": "/dev/ttyACM0",
+        "by_id": "/dev/serial/by-id/usb-Silicon_Labs-RFUSB_9017F723B061A7C01410CFCF-if00-port1",
+        "subsystem": "tty",
+        "attributes": {
+          "MINOR": "5"
         }
-    }
+      }
+    ]
 }
 ```
+
+**Returned data:**
+
+| key      | description                                                  |
+| -------- | ------------------------------------------------------------ |
+| devices  | A list of [Device models](api/supervisor/models.md#device)   |
 
 </ApiEndpoint>
 
@@ -1132,9 +1136,6 @@ Get audio devices
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/hardware/trigger" method="post">
-Trigger UDEV reload.
-</ApiEndpoint>
 
 ### Host
 
