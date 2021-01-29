@@ -44,6 +44,7 @@ Making resources available to the user is a common use case for custom integrati
 
 ```python
 from pathlib import Path
+
 should_cache = False
 files_path = Path(__file__).parent / "static"
 hass.http.register_static_path("/api/my_integration/static", str(files_path), should_cache)
