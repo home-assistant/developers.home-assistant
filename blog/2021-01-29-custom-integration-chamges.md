@@ -8,7 +8,7 @@ title: Custom integration changes
 
 Happy New Year everyone! 2021 is finally here 🎉
 
-As you probably are aware of, recently we were made aware of security issues in several popular custom integrations. You can read more about that here:
+As you probably are aware, recently we were made aware of security issues in several popular custom integrations. You can read more about that here:
 
 - https://www.home-assistant.io/blog/2021/01/14/security-bulletin/
 - https://www.home-assistant.io/blog/2021/01/22/security-disclosure/
