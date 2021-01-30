@@ -30,7 +30,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 If the device tracker `source_type` is `router` and the `ip_address`, `mac_address`, and `hostname` properties have been set, the data will
 speed up `DHCP discovery` as the system will not have to wait for
-dhcp discover packets to find existing devices.
+DHCP discover packets to find existing devices.
 
 ## TrackerEntity
 
