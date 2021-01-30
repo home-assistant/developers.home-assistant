@@ -9,6 +9,8 @@ A device tracker is a read-only entity that provides presence information. There
 
 A ScannerEntity reports the connected state of a device on the local network. If the device is connected the ScannerEntity will have state `home` and if the device is not connected the state will be `not_home`.
 
+Derive a platform entity from [`homeassistant.components.device_tracker.config_entry.ScannerEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/device_tracker/config_entry.py)
+
 ### Properties
 
 :::tip
@@ -24,9 +26,17 @@ Properties should always only return information from memory and not do I/O (lik
 | mac_address   | string  | `None`       | The MAC address of the device.                    |
 | hostname      | string  | `None`       | The hostname of the device.                       |
 
+### DHCP discovery
+
+If the device tracker `source_type` is `router` and the `ip_address`, `mac_address`, and `hostname` properties have been set, the data will
+speed up `DHCP discovery` as the system will not have to wait for
+DHCP discover packets to find existing devices.
+
 ## TrackerEntity
 
 A TrackerEntity tracks the location of a device and reports it either as a location name, a zone name or `home` or `not_home` states. A TrackerEntity normally receives GPS coordinates to determine its state.
+
+Derive a platform entity from [`homeassistant.components.device_tracker.config_entry.TrackerEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/device_tracker/config_entry.py)
 
 ### Properties
 
