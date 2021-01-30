@@ -43,7 +43,13 @@ If you are in need of a guide on keeping a changelog, we would recommend checkin
 
 ## AppArmor
 
-You can use own security profile for your add-on with AppArmor. By default it is enabled and uses the Docker default profile. Putting a `apparmor.txt` file into your add-on folder, will load that file as the primary profile instead. Use the config options to set the name of that profile.
+In the event an API call returns something you, as a developer were not expecting, access to too many resouces could be a liability for your users. As an add-on developer it is your responsibility to ensure your Add-On will not ruin your user's machine, or perform actions that you would never expect. That's where AppArmor comes in.  While your tallents in input validation, handling sensitive data, and other defensive programming tactics are not being judged here, AppArmor is your Add-On's second line of defense against malicious API calls, malformed settings, or other forms of system hijacking. 
+
+By default, AppArmor gives you a certain level of security by restricting some general actions that are deemed inappropriate for a Docker container. You can read more about Docker's AppArmor implementation on the [Docker Security page](https://docs.docker.com/engine/security/apparmor/). 
+
+As for the Home Assistant Operating System implementation, you can activate your own custom AppArmor profile by putting a `apparmor.txt` file into your add-on folder, will load that file as the primary profile instead. On top of knowing your Add-On will run in a constrained and effective manner, writing your own custom `apparmor.txt` file will earn you a whole security point after your Add-On is installed, thus improving your user's perception of your Add-On and abilities.
+
+An apparmor.txt goes in the same folder as your config.json file. Below is an example, working `apparmor.txt`. Replace `ADDON_SLUG` with the slug defined in your config. 
 
 apparmor.txt
 ```txt
@@ -51,19 +57,38 @@ apparmor.txt
 
 profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
   #include <abstractions/base>
+  
+  # Capabilities
+  capability,
+  file,
+
+  capability setgid,
+  capability setuid,
 
   # S6-Overlay
   /bin/** ix,
   /usr/bin/** ix,
   /usr/lib/bashio/** ix,
-  /etc/s6/** ix,
-  /run/s6/** ix,
+  /etc/s6/** rix,
+  /run/s6/** rix,
   /etc/services.d/** rwix,
   /etc/cont-init.d/** rwix,
   /etc/cont-finish.d/** rwix,
+  /init rix,
+  /var/run/** mrwkl,
+  /var/run/ mrwkl,
+  /dev/i2c-1 mrwkl,
 
   # Data access
   /data/** rw,
+
+
+  # suppress ptrace denials when using 'docker ps' or using 'ps' inside a container
+  ptrace (trace,read) peer=docker-default,
+ 
+  # docker daemon confinement requires explict allow rule for signal
+  signal (receive) set=(kill,term) peer=/usr/bin/docker,
+
 }
 ```
 
@@ -83,3 +108,54 @@ Ingress API gateway supports the following:
 - HTTP/1.x
 - Streaming content
 - Websockets
+
+Ingress grants your Add-On 2-whole points of security and can be implemented easily from bash as a separate, no-dependencies, background process with the default home-assistant image, as follows.  Please note, this is a basic static webserver setup and provides little benefit over the log tab. Additionally, this implementation has less security than any standard HTTP Framework, but it is intended to run within a controlled environment between the shell script and the Ingress server in Home Assistant, and is not exposed directly to the Internet or any network. 
+
+Place this line somewhere near the top of your run.sh.  This will start a `nc` listening server and run the  `/opt/server.sh` each time a user connects to your Ingress. The output from stdout will be displayed as a response from the server. 
+``` bash
+nc -lk -p 8099 -e  exec /opt/server.sh 3>/dev/null &
+```
+create a `rootfs/opt` folder within your Add-On folder.  Then create a `server.sh` file in that folder.  The server.sh will output the HTTP Headers and HTML required to display information.  You can 
+/opt/server.sh
+```bash
+#HTTP Server Headers
+echo -e 'HTTP/1.1 200 OK\r\nServer: DeskPiPro\r\nDate:$(date)\r\nContent-Type: text/html; charset=UTF8\r\nCache-Control: no-store, no cache, must-revalidate\r\n\r\n'
+#HTML Document
+echo -e \
+"<!DOCTYPE html>\n"\
+"<html>\n"\
+"<head>\n"\
+"<title>Page Title</title>\n"\
+"</head>\n"\
+"<body>\n"\
+
+# HTML body content
+echo "<p>I can haz Ingress?</p>" 
+set +e   #The /tmp/status.html file may not be here if you did not create it in your addon. So we set +e to continue execution after errors.  
+cat /tmp/status.html 2>/dev/null #throw stderr to /dev/null
+set -e #Set -e to continue running in strict mode
+
+# Close up the HTML doc
+echo -e \
+"</body>\n"\
+"</html>\n"\
+"\n"
+```
+
+# Security
+
+Add-On security should be a matter of pride.  You should strive for the highest level of security you can possibly attain with your skills and your limitations. If your Add-On has a lower security rating, then users will be less likely to trust it.  You can use the following table to adjust your Add-On Security.
+
+| Action | Affect on security points|
+|---|---|
+| Use ingress: true in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) -overrides auth_api rating | +2 | 
+| Use auth_api: true in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) | +1 |
+| Use custom [apparmor.txt](https://developers.home-assistant.io/docs/add-ons/presentation#apparmor)| +1|
+| Set apparmor:false in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) | -1 |
+| Use any of NET_ADMIN, SYS_ADMIN, SYS_RAWIO, SYS_PTRACE, SYS_MODULE, or DAC_READ_SEARCH in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config)| -1 |
+| Use hassio_role: manager in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) -overrides admin below | -1 |
+| Use host_network:true in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) | -1 |
+| Use hassio_role: admin in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) | -2 |
+| Use host_pid: true in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) | -2 |
+| Use full_access:true in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) | -2 |
+| Use docker_api: true in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) | Security set to 1 |
