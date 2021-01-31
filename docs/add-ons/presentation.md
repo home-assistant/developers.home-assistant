@@ -77,7 +77,6 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
   /init rix,
   /var/run/** mrwkl,
   /var/run/ mrwkl,
-  /dev/i2c-1 mrwkl,
 
   # Data access
   /data/** rw,
