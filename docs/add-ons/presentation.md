@@ -47,7 +47,7 @@ In the event an API call returns something you, as a developer were not expectin
 
 By default, AppArmor gives you a certain level of security by restricting some general actions that are deemed inappropriate for a Docker container. You can read more about Docker's AppArmor implementation on the [Docker Security page](https://docs.docker.com/engine/security/apparmor/). 
 
-As for the Home Assistant Operating System implementation, you can activate your own custom AppArmor profile by putting a `apparmor.txt` file into your add-on folder, will load that file as the primary profile instead. On top of knowing your Add-On will run in a constrained and effective manner, writing your own custom `apparmor.txt` file will earn you a whole security point after your Add-On is installed, thus improving your user's perception of your Add-On and abilities.
+As for the Home Assistant Operating System implementation, you can activate your own custom AppArmor profile by putting a `apparmor.txt` file into your add-on folder. Adding your own `apparmor.txt` will load that file as the primary AppArmor profile instead of the default implementation. On top of knowing your Add-On will run in a constrained and effective manner, writing your own custom `apparmor.txt` file will earn your Add-On a security point after your Add-On is installed, thus improving your user's confidence and perception of your Add-On.
 
 An apparmor.txt goes in the same folder as your config.json file. Below is an example `apparmor.txt`. Replace `ADDON_SLUG` with the slug defined in your config. 
 
