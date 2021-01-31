@@ -43,13 +43,13 @@ If you are in need of a guide on keeping a changelog, we would recommend checkin
 
 ## AppArmor
 
-In the event an API call returns something you, as a developer were not expecting, access to too many resouces could be a liability for your users. As an add-on developer it is your responsibility to ensure your Add-On will not ruin your user's machine, or perform actions that you would never expect. That's where AppArmor comes in.  While your tallents in input validation, handling sensitive data, and other defensive programming tactics are not being judged here, AppArmor is your Add-On's second line of defense against malicious API calls, malformed settings, or other forms of system hijacking. 
+In the event an API call returns something you, as a developer were not expecting, access to too many resouces could be a liability for your users. As an add-on developer it is your responsibility to ensure your Add-On will not ruin your user's machine, or perform actions that you would never expect. That's where AppArmor comes in.  While your tallents in input validation, handling sensitive data and other defensive programming tactics are not being judged here, AppArmor is your Add-On's second line of defense against malicious API calls, malformed settings or other forms of system hijacking. 
 
 By default, AppArmor gives you a certain level of security by restricting some general actions that are deemed inappropriate for a Docker container. You can read more about Docker's AppArmor implementation on the [Docker Security page](https://docs.docker.com/engine/security/apparmor/). 
 
 As for the Home Assistant Operating System implementation, you can activate your own custom AppArmor profile by putting a `apparmor.txt` file into your add-on folder, will load that file as the primary profile instead. On top of knowing your Add-On will run in a constrained and effective manner, writing your own custom `apparmor.txt` file will earn you a whole security point after your Add-On is installed, thus improving your user's perception of your Add-On and abilities.
 
-An apparmor.txt goes in the same folder as your config.json file. Below is an example, working `apparmor.txt`. Replace `ADDON_SLUG` with the slug defined in your config. 
+An apparmor.txt goes in the same folder as your config.json file. Below is an example `apparmor.txt`. Replace `ADDON_SLUG` with the slug defined in your config. 
 
 apparmor.txt
 ```txt
@@ -109,13 +109,13 @@ Ingress API gateway supports the following:
 - Streaming content
 - Websockets
 
-Ingress grants your Add-On 2-whole points of security and can be implemented easily from bash as a separate, no-dependencies, background process with the default home-assistant image, as follows.  Please note, this is a basic static webserver setup and provides little benefit over the log tab. Additionally, this implementation has less security than any standard HTTP Framework, but it is intended to run within a controlled environment between the shell script and the Ingress server in Home Assistant, and is not exposed directly to the Internet or any network. 
+Ingress grants your Add-On 2 points of security and can be implemented easily from bash as a separate, no-dependencies, background process with the default home-assistant image, as follows. Please note, this is a basic static webserver setup and provides little benefit over the log tab. Additionally, this implementation has less security than any standard HTTP Framework, but it is intended to run within a controlled environment between the shell script and the Ingress server in Home Assistant, and is not exposed directly to the Internet or any network. 
 
-Place this line somewhere near the top of your run.sh.  This will start a `nc` listening server and run the  `/opt/server.sh` each time a user connects to your Ingress. The output from stdout will be displayed as a response from the server. 
+Place this line somewhere near the top of your run.sh.  This will start a `nc` listening server and run the `/opt/server.sh` each time a user connects to your Ingress. The output from stdout will be displayed as a response from the server. 
 ``` bash
 nc -lk -p 8099 -e  exec /opt/server.sh 3>/dev/null &
 ```
-create a `rootfs/opt` folder within your Add-On folder.  Then create a `server.sh` file in that folder.  The server.sh will output the HTTP Headers and HTML required to display information.  You can 
+Create a `rootfs/opt` folder within your Add-On folder. Then create a `server.sh` file in that folder. The server.sh will output the HTTP Headers and HTML required to display information.
 /opt/server.sh
 ```bash
 #HTTP Server Headers
@@ -144,7 +144,7 @@ echo -e \
 
 # Security
 
-Add-On security should be a matter of pride.  You should strive for the highest level of security you can possibly attain with your skills and your limitations. If your Add-On has a lower security rating, then users will be less likely to trust it.  You can use the following table to adjust your Add-On Security.
+Add-On security should be a matter of pride. You should strive for the highest level of security you can possibly attain within your skills and your Add-On limitations. If your Add-On has a lower security rating, then users will be less likely to trust it. You can use the following table to adjust your Add-On Security.
 
 | Action | Affect on security points|
 |---|---|
