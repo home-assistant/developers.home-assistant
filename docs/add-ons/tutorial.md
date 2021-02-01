@@ -76,7 +76,7 @@ Now comes the fun part, time to open the Home Assistant UI and install and run y
 
 ![Screenshot of the Home Assistant Supervisor main panel](/img/en/hass.io/screenshots/main_panel_addon_store.png)
 
-- On the top right click the refresh button
+- On the top right, click the "Reload" button
 - You should now see a new card called "Local" that lists your add-on!
 
 ![Screenshot of the local repository card](/img/en/hass.io/screenshots/local_repository.png)
