@@ -90,11 +90,11 @@ Now comes the fun part, time to open the Home Assistant UI and install and run y
 
 ### I don't see my add-on?!
 
-Oops! You clicked refresh in the store and your add-on didn't show up. Or maybe you just updated an option, clicked refresh and saw your add-on disappear.
+Oops! You clicked "Reload" in the store and your add-on didn't show up. Or maybe you just updated an option, clicked refresh and saw your add-on disappear.
 
 When this happens, it means that your `config.json` is invalid. It's either invalid JSON or one of the specified options is incorrect. To see what went wrong, go to the Supervisor panel and in the supervisor card click on "View logs". This should bring you to a page with the logs of the supervisor. Scroll to the bottom and you should be able to find the validation error.
 
-Once you fixed the error, go to the add-on store and click refresh again.
+Once you fixed the error, go to the add-on store and click "Reload" again.
 
 ## Step 3: Hosting a server
 
@@ -144,7 +144,7 @@ python3 -m http.server 8000
 
 ## Step 4: Installing the update
 
-Since we updated the version number in our `config.json`, Home Assistant will show an update button when looking at the add-on details. You might have to refresh your browser or click the refresh button in the add-on store for it to show up. If you did not update the version number, you can also uninstall and install the add-on again. After installing the add-on again, make sure you start it.
+Since we updated the version number in our `config.json`, Home Assistant will show an update button when looking at the add-on details. You might have to refresh your browser or click the "Reload" button in the add-on store for it to show up. If you did not update the version number, you can also uninstall and install the add-on again. After installing the add-on again, make sure you start it.
 
 Now navigate to [http://homeassistant.local:8000](http://homeassistant.local:8000) to see our server in action!
 
@@ -183,4 +183,4 @@ Change the options and schema entries in your `config.json` with the following:
 }
 ```
 
-Refresh the add-on store and re-install your add-on. You will now see the options available in the add-on config screen. When you now go back to our Python 3 server and download `options.json`, you'll see the options you set. [Example of how options.json can be used inside `run.sh`](https://github.com/home-assistant/hassio-addons/blob/master/mosquitto/data/run.sh#L4-L5)
+Reload the add-on store and re-install your add-on. You will now see the options available in the add-on config screen. When you now go back to our Python 3 server and download `options.json`, you'll see the options you set. [Example of how options.json can be used inside `run.sh`](https://github.com/home-assistant/hassio-addons/blob/master/mosquitto/data/run.sh#L4-L5)
