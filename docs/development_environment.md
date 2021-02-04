@@ -85,7 +85,7 @@ user@DESKTOP:/mnt/c/Users/user$ mount | grep mnt
 C:\ on /mnt/c type drvfs (rw,noatime,uid=0,gid=0,case=off)
 ```
 
-This will cause the `setup` script to fail if the local repository is on a Windows drive. To recover, the WSL subsystem must be restarted. The easiest method is to simply restart the computer.
+This will cause the `setup` script to fail if the local repository is on a Windows drive. To recover, WSL must be restarted. The easiest method is to simply restart the computer.
 After restart, the mount's uid and gid will match the default user
 ```
 
