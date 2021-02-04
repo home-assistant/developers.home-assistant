@@ -2,7 +2,7 @@
 title: "Tutorial: Making your first add-on"
 ---
 
-So you've got Home Assistant going and you've been enjoying the built-in add-ons but you're missing this one application. Time to make your own add-on! In Supervisor 24 we introduced the option to have local add-ons be build on your device. This is great for developing new add-ons locally.
+So you've got Home Assistant going and you've been enjoying the built-in add-ons but you're missing this one application. Time to make your own add-on! In Supervisor 24 we introduced the option to have local add-ons be built on your device. This is great for developing new add-ons locally.
 
 To get started with developing add-ons, we first need access to where Home Assistant looks for local add-ons. For this you can use the Samba add-on or the SSH add-on.
 
