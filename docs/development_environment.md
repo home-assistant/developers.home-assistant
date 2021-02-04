@@ -58,7 +58,7 @@ user@DESKTOP:/mnt/c/Users/user$ mount | grep mnt
 C:\ on /mnt/c type drvfs (rw,noatime,uid=0,gid=0,case=off)
 ```
 
-This will cause the `setup` script to fail if the local repository is on a Windows drive. To recover, WSL must be restarted after which the Windows drived will be mounted with all files owned by the default user. This can be accomplished by simply restarting the computer, or by issuing the following command from a windows command prompt:
+This will cause the `setup` script to fail if the local repository is on a Windows drive. To recover, WSL must be restarted after which the Windows drives will be mounted with all files owned by the default user. This can be accomplished by simply restarting the computer, or by issuing the following command from a windows command prompt:
 
 ```
 wsl --shutdown
