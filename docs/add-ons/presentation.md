@@ -145,7 +145,7 @@ echo -e \
 
 Add-on security should be a matter of pride. You should strive for the highest level of security you can possibly attain within your skills and your Add-on limitations. If your Add-on has a lower security rating, then users will be less likely to trust it. You can use the following table to adjust your Add-on Security.
 
-| Action | Affect on security points| Notes |
+| Action | Rating Change | Notes |
 |---|---|---|
 | Use `ingress`: true in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) | +2 | overrides `auth_api` rating |
 | Use `auth_api`: true in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) | +1 | overridden by `ingress` |
