@@ -150,7 +150,7 @@ Add-on security should be a matter of pride. You should strive for the highest l
 |---|---|---|
 | Use `ingress: true` in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) | +2 | overrides `auth_api` rating |
 | Use `auth_api: true` in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) | +1 | overridden by `ingress` |
-| Use custom [apparmor.txt](https://developers.home-assistant.io/docs/add-ons/presentation#apparmor)| +1| |
+| Use custom [apparmor.txt](https://developers.home-assistant.io/docs/add-ons/presentation#apparmor)| +1| Rating applied after installation |
 | Set `apparmor: false` in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) | -1 | |
 | Use `privileged: NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_PTRACE`, `SYS_MODULE`, or `DAC_READ_SEARCH` in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config)| -1 | |
 | Use `hassio_role: manager` in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) | -1 | overrides `hassio_role: admin` |
