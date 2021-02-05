@@ -71,24 +71,26 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
   /bin/** ix,
   /usr/bin/** ix,
   /usr/lib/bashio/** ix,
-  /etc/s6/** rix,
-  /run/s6/** rix,
+  /etc/s6/** ix,
+  /run/s6/** ix,
   /etc/services.d/** rwix,
   /etc/cont-init.d/** rwix,
   /etc/cont-finish.d/** rwix,
-  /init rix,
-  /var/run/** mrwkl,
-  /var/run/ mrwkl,
-
-  # Data access
-  /data/** rw,
-
+  /var/run/** rw,
 
   # suppress ptrace denials when using 'docker ps' or using 'ps' inside a container
   ptrace (trace,read) peer=docker-default,
- 
+
   # docker daemon confinement requires explict allow rule for signal
   signal (receive) set=(kill,term) peer=/usr/bin/docker,
+
+  # Access to hardware devices
+  # /dev/ttyUSB0 rw,
+  
+  # Access to Options.json and other files within your addon
+  /data/** rw,
+
+  # 
 
 }
 ```
