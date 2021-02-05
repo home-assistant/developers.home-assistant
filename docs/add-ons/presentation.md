@@ -152,14 +152,14 @@ Add-on security should be a matter of pride. You should strive for the highest l
 
 | Action | Change | Notes |
 |---|---|---|
-| Use `ingress: true` in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) | +2 | overrides `auth_api` rating |
-| Use `auth_api: true` in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) | +1 | overridden by `ingress` |
-| Use custom [apparmor.txt](https://developers.home-assistant.io/docs/add-ons/presentation#apparmor)| +1| Rating applied after installation |
-| Set `apparmor: false` in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) | -1 | |
-| Use `privileged: NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_PTRACE`, `SYS_MODULE`, or `DAC_READ_SEARCH` in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config)| -1 | |
-| Use `hassio_role: manager` in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) | -1 | overrides `hassio_role: admin` |
-| Use `host_network: true` in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) | -1 | |
-| Use `hassio_role: admin` in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) | -2 | overridden by `hassio_role: manager` |
-| Use `host_pid: true` in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) | -2 | |
-| Use `full_access: true` in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) | -2 | |
-| Use `docker_api: true` in [config.json](https://developers.home-assistant.io/docs/add-ons/configuration#add-on-config) | Security set to 1 | |
+| Use `ingress: true` in [config.json](/docs/add-ons/configuration#add-on-config) | +2 | overrides `auth_api` rating |
+| Use `auth_api: true` in [config.json](/docs/add-ons/configuration#add-on-config) | +1 | overridden by `ingress` |
+| Use custom [apparmor.txt](/docs/add-ons/presentation#apparmor)| +1| Rating applied after installation |
+| Set `apparmor: false` in [config.json](/docs/add-ons/configuration#add-on-config) | -1 | |
+| Use `privileged: NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_PTRACE`, `SYS_MODULE`, or `DAC_READ_SEARCH` in [config.json](/docs/add-ons/configuration#add-on-config)| -1 | |
+| Use `hassio_role: manager` in [config.json](/docs/add-ons/configuration#add-on-config) | -1 | overrides `hassio_role: admin` |
+| Use `host_network: true` in [config.json](/docs/add-ons/configuration#add-on-config) | -1 | |
+| Use `hassio_role: admin` in [config.json](/docs/add-ons/configuration#add-on-config) | -2 | overridden by `hassio_role: manager` |
+| Use `host_pid: true` in [config.json](/docs/add-ons/configuration#add-on-config) | -2 | |
+| Use `full_access: true` in [config.json](/docs/add-ons/configuration#add-on-config) | -2 | |
+| Use `docker_api: true` in [config.json](/docs/add-ons/configuration#add-on-config) | Security set to 1 | |
