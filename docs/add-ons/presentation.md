@@ -43,7 +43,9 @@ If you are in need of a guide on keeping a changelog, we would recommend checkin
 
 ## AppArmor
 
-In the event an API call returns something you, as a developer were not expecting, access to too many resouces could be a liability for your users. As an add-on developer it is your responsibility to ensure your Add-on will not ruin your user's machine, or perform actions that you would never expect. That's where AppArmor comes in.  While your tallents in input validation, handling sensitive data and other defensive programming tactics are not being judged here, AppArmor is your Add-on's second line of defense against malicious API calls, malformed settings or other forms of system hijacking. 
+In the event, an API call returns something you, as a developer were not expecting, access to too many resources could be a liability for your users. As an add-on developer, it is your responsibility to ensure your add-on will not ruin your user's machine, or perform actions that you would never expect. That's where AppArmor comes in.
+
+While your talents in input validation, handling sensitive data and other defensive programming tactics are not being judged here, AppArmor is your add-on's second line of defense against malicious API calls, malformed settings or other forms of system hijacking.
 
 By default, AppArmor gives you a certain level of security by restricting some general actions that are deemed inappropriate for a Docker container. You can read more about Docker's AppArmor implementation on the [Docker Security page](https://docs.docker.com/engine/security/apparmor/). 
 
