@@ -146,7 +146,7 @@ echo -e \
 
 # Security
 
-Add-on security should be a matter of pride. You should strive for the highest level of security you can possibly attain within your skills and your Add-on limitations. If your Add-on has a lower security rating, then users will be less likely to trust it. You can use the following table to adjust your Add-on Security.
+Add-on security should be a matter of pride. You should strive for the highest level of security you can possibly attain. If your add-on has a lower security rating, then users will be less likely to trust it. You can use the following table to adjust your add-on security.
 
 | Action | Change | Notes |
 |---|---|---|
