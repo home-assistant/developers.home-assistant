@@ -61,11 +61,7 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
   #include <abstractions/base>
   
   # Capabilities
-  capability,
   file,
-
-  capability setgid,
-  capability setuid,
 
   # S6-Overlay
   /bin/** ix,
@@ -114,37 +110,54 @@ Ingress API gateway supports the following:
 
 Ingress grants your Add-on 2 points of security and can be implemented easily from bash as a separate, no-dependencies, background process with the default home-assistant image, as follows. Please note, this is a basic static webserver setup and provides little benefit over the log tab. Additionally, this implementation has less security than any standard HTTP Framework, but it is intended to run within a controlled environment between the shell script and the Ingress server in Home Assistant, and is not exposed directly to the Internet or any network. 
 
-Place this line somewhere near the top of your run.sh.  This will start a `nc` listening server and run the `/opt/server.sh` each time a user connects to your Ingress. The output from stdout will be displayed as a response from the server. 
-``` bash
-nc -lk -p 8099 -e  exec /opt/server.sh 3>/dev/null &
+## Basic Ingress Example with Nginx
+The following is a basic ingress implementation with an Nginx server.  This contains an example`Dockerfile`, `config.json`, and `ingress.conf` configuration.  
+
+The `ingress.conf` is configured to accept only connections from IP address `172.30.32.2` as we are only expecting connections from this IP address for Ingress purposes. Any other IP address will be rejected.  The ingress port 8099 is utilized to reduce configuration work.  If you wish to configure a different ingress port you may, but the `config.json` option `ingress_port` must be defined to match. 
+
+ingress.conf
+```nginx 
+server {
+    listen 8099;
+    allow  172.30.32.2;
+    deny   all;
+}
 ```
-Create a `rootfs/opt` folder within your Add-on folder. Then create a `server.sh` file in that folder. The server.sh will output the HTTP Headers and HTML required to display information.
 
-/opt/server.sh
-```bash
-#HTTP Server Headers
-echo -e 'HTTP/1.1 200 OK\r\nServer: DeskPiPro\r\nDate:$(date)\r\nContent-Type: text/html; charset=UTF8\r\nCache-Control: no-store, no cache, must-revalidate\r\n\r\n'
-#HTML Document
-echo -e \
-"<!DOCTYPE html>\n"\
-"<html>\n"\
-"<head>\n"\
-"<title>Page Title</title>\n"\
-"</head>\n"\
-"<body>\n"\
+Our example `Dockerfile` is configured to support only a server, and no run.sh.  The Dockerfile will push ingress.conf to the server.  You may choose to replace the `CMD [ "nginx","-g","daemon off;error_log /dev/stdout debug;" ]` with `CMD [ "run.sh" ]` for more flexibility while launching and configuring your add-on. 
 
-# HTML body content
-echo "<p>I can haz Ingress?</p>" 
-set +e   #The /tmp/status.html file may not be here if you did not create it in your addon. So we set +e to continue execution after errors.  
-cat /tmp/status.html 2>/dev/null #throw stderr to /dev/null
-set -e #Set -e to continue running in strict mode
+Dockerfile
+```Dockerfile
+ARG BUILD_FROM
+FROM $BUILD_FROM
+ENV LANG C.UTF-8
 
-# Close up the HTML doc
-echo -e \
-"</body>\n"\
-"</html>\n"\
-"\n"
+#Add nginx and create the run folder for nginx.
+RUN apk add nginx;mkdir -p /run/nginx;
+#Copy our conf into the nginx http.d folder.
+COPY ingress.conf /etc/nginx/http.d/
+#Launch nginx with debug options.
+CMD [ "nginx","-g","daemon off;error_log /dev/stdout debug;" ]
 ```
+
+Your `config.json` file _must_ include `ingress: true` and _may_ specify the `ingress_port`. 
+
+config.json
+```json
+{
+  "name": "Ingress Example",
+  "version": "0.00.0.0.000.0.000",
+  "slug": "nginx-ingress-example",
+  "description": "ingress testing",
+  "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
+  "ingress": true,
+  "ingress_port": 8099
+}
+```
+
+After the add-on is started, you should be able to view your secure Ingress server by clicking "OPEN WEB UI" within the add-on info screen. 
+
+
 
 # Security
 
