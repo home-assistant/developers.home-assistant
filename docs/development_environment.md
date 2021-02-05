@@ -51,7 +51,11 @@ sudo apt-get install python3-pip python3-dev python3-venv autoconf libssl-dev li
 
 To develop on Windows, you will need to use the Linux subsystem (WSL). Follow the [WSL installation instructions](https://docs.microsoft.com/windows/wsl/install-win10) and install Ubuntu from the Windows Store. Once you're able to access Linux, follow the Linux instructions.
 
-#### Note
+:::tip
+If you find that you cannot open the development instance via <http://localhost:8123> when using WSL, instead, within a WSL terminal, find the `inet` address of the `eth0` adaptor by running `ip addr show eth0`. Then use this address, excluding the CIDR block, to access the development instance, i.e. if your `inet` is listed as `172.20.37.6/20`, use <http://172.20.37.6:8123>.
+:::
+
+#### Freshly installed WSL distribution
 The first time a WSL distribution is started, and the default user account is created, the Windows drives will be mounted with all files owned by `root:root` instead of owned by the default user:
 ```
 user@DESKTOP:/mnt/c/Users/user$ mount | grep mnt
@@ -73,8 +77,6 @@ user@DESKTOP:/mnt/c/Users/user$ id -g
 user@DESKTOP:/mnt/c/Users/user$ mount | grep mnt
 C:\ on /mnt/c type drvfs (rw,noatime,uid=1000,gid=1000,case=off)
 ```
-
-If you find that you cannot open the development instance via <http://localhost:8123> when using WSL. Instead, within a WSL terminal, find the `inet` address of the `eth0` adaptor by running `ip addr show eth0`. Then use this address, excluding the CIDR block, to access the development instance, i.e. if your `inet` is listed as `172.20.37.6/20`, use <http://172.20.37.6:8123>.
 
 ### Developing on macOS
 
