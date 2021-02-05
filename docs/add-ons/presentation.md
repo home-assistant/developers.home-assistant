@@ -140,7 +140,7 @@ COPY ingress.conf /etc/nginx/http.d/
 CMD [ "nginx","-g","daemon off;error_log /dev/stdout debug;" ]
 ```
 
-Your `config.json` file _must_ include `ingress: true` and _may_ specify the `ingress_port`. 
+In order to enable Ingressr `config.json` file _must_ include `ingress: true` and _may_ specify the `ingress_port`, if required by your setup. 
 
 config.json
 ```json
