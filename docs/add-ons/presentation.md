@@ -51,7 +51,7 @@ By default, AppArmor gives you a certain level of security by restricting some g
 
 As for Home Assistant's implementation, you can activate your own custom AppArmor profile by putting a `apparmor.txt` file into your add-on folder. Adding your own `apparmor.txt` will load that file as the primary AppArmor profile instead of the default implementation. On top of knowing your add-on will run in a constrained and effective manner, writing your own custom `apparmor.txt` file will earn your add-on a security point after your add-on is installed, thus improving your user's confidence and perception of your add-on.
 
-An apparmor.txt goes in the same folder as your config.json file. Below is an example `apparmor.txt`. Replace `ADDON_SLUG` with the slug defined in your config. 
+An `apparmor.txt` goes in the same folder as your `config.json` file. Below is an example `apparmor.txt`. Replace `ADDON_SLUG` with the slug defined in your add-on configuration.
 
 apparmor.txt
 ```txt
