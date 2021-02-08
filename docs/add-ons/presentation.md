@@ -123,7 +123,7 @@ server {
 }
 ```
 
-Our example `Dockerfile` is configured to support only a server, and no run.sh.  The Dockerfile will push ingress.conf to the server.  You may choose to replace the `CMD [ "nginx","-g","daemon off;error_log /dev/stdout debug;" ]` with `CMD [ "run.sh" ]` for more flexibility while launching and configuring your add-on. 
+Our example `Dockerfile` is configured to support only our Nginx server, and does not support a `run.sh` like most addons.  You may replace the `CMD` with your own command to allow more configuration options while launching your addon.   This Dockerfile will `RUN` to install our Nginx dependencies, `COPY` our example ingress.conf from above to the add-on conatiner, then `CMD` start Nginx.  
 
 Dockerfile
 ```Dockerfile
@@ -139,7 +139,7 @@ COPY ingress.conf /etc/nginx/http.d/
 CMD [ "nginx","-g","daemon off;error_log /dev/stdout debug;" ]
 ```
 
-In order to enable Ingressr `config.json` file _must_ include `ingress: true` and _may_ specify the `ingress_port`, if required by your setup. 
+In order to enable Ingress, our `config.json` file _must_ include `ingress: true` and _may_ specify the `ingress_port`, along with other required information.
 
 config.json
 ```json
@@ -154,7 +154,7 @@ config.json
 }
 ```
 
-After the add-on is started, you should be able to view your secure Ingress server by clicking "OPEN WEB UI" within the add-on info screen. 
+After the add-on is started, you should be able to view your Ingress server by clicking "OPEN WEB UI" within the add-on info screen. 
 
 
 
