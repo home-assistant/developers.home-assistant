@@ -90,14 +90,17 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
 
 ## Ingress
 
-Ingress allow users to access the add-on web interface via the Home Assistant UI. Authentication is handled by Home Assistant, so neither the user nor the add-on developer will need to care about the security or port forwarding. Users love this feature, however it is not every time simple to implement for the add-on developer.
+Ingress allow users to access the add-on web interface via the Home Assistant UI. Authentication is handled by Home Assistant, so neither the user nor the add-on developer will need to care about the security or port forwarding. Users love this feature! It connects your user directly to the add-on and can provide a seamless UX within Home Assistant and grants your add-on 2 points of security.
 
-To add Ingress support, follow the following steps:
+Here are the requirements of Ingress:
+- Ingress must be enabled.  Set `ingress: true` in [config.json](/docs/add-ons/configuration#add-on-config).
+- Your server may run on port 8099.  If it does not run on 8099, you must set `ingress_port: PORT_NUMBER` in [config.json](/docs/add-ons/configuration#add-on-config) to match your configuration.
+- Only connections from `172.30.32.2` must be allowed. You should deny access to all other IP addresses within your add-on server. 
+- Users are previously authenticated via Home Assistant.  Authentication is not required. 
 
-- The add-on will need to provide the web interface on port `8099`. Make sure that the add-on accepts only connections from `172.30.32.2` on that port and that the connections are treated as authenticated.
-- Update add-on configuration and set `ingress: true`. Here it is also possible to configure the Ingress port by using the option `ingress_port: PORT_NUMBER` (default 8099).
-- If you need to configure the application inside your add-on with the right path and port, query the add-on info API endpoint.
-- If the application doesn't support relative paths or you can't set a base url, you can use nginx filter to replace the URL with correct path. Ingress adds a request header `X-Ingress-Path` that can be used.
+:::tip
+Configuration of path and port information may be queried via  [Addons info api endpoint](api/supervisor/endpoints/#addons). If the Home Assistant url is required by your addon, Ingress adds a request header `X-Ingress-Path` which may be filtered to obtain the base url. 
+:::
 
 Ingress API gateway supports the following:
 
@@ -105,7 +108,6 @@ Ingress API gateway supports the following:
 - Streaming content
 - Websockets
 
-Ingress grants your Add-on 2 points of security and can be implemented easily from bash as a separate, no-dependencies, background process with the default home-assistant image, as follows. Please note, this is a basic static webserver setup and provides little benefit over the log tab. Additionally, this implementation has less security than any standard HTTP Framework, but it is intended to run within a controlled environment between the shell script and the Ingress server in Home Assistant, and is not exposed directly to the Internet or any network. 
 
 ## Basic Ingress Example with Nginx
 The following is a basic ingress implementation with an Nginx server.  This contains an example`Dockerfile`, `config.json`, and `ingress.conf` configuration.  
