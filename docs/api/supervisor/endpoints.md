@@ -138,7 +138,7 @@ Get details about a add-on
 | protected           | boolean            | `true` if protection mode is enabled                                                   |
 | rating              | int                | The addon rating                                                                       |
 | repository          | string             | The URL to the add-on repository                                                       |
-| schema              | dictionary or null | The schema for the add-on configuration                                                |
+| schema              | dictionary | The schema for the add-on configuration                                                |
 | services_role       | list               | A list of services and the add-ons role for that service                               |
 | slug                | string             | The add-on slug                                                                        |
 | stage               | string             | The add-on stage (stable, experimental, deprecated)                                    |

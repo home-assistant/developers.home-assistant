@@ -147,7 +147,7 @@ The configuration for an add-on is stored in `config.json`.
 | stdin | bool | no | Boolean. If enabled, you can use the STDIN with Home Assistant API.
 | legacy | bool | no | Boolean. If the Docker image has no `hass.io` labels, you can enable the legacy mode to use the config data.
 | options | dict | no | Default options value of the add-on.
-| schema | dict | no | Schema for options value of the add-on. It can be `false` to disable schema validation and use custom options.
+| schema | dict | true | Schema for options value of the add-on.
 | image | string | no | For use with Docker Hub and other container registries.
 | timeout | integer | no | Default 10 (seconds). The timeout to wait until the Docker daemon is done or will be killed.
 | tmpfs | bool | no | Is this True, the containers `/tmp` is using tmpfs, an memory file system.
