@@ -85,9 +85,6 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
   
   # Access to Options.json and other files within your addon
   /data/** rw,
-
-  # 
-
 }
 ```
 
