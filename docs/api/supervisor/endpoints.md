@@ -1313,6 +1313,7 @@ Returns a dict with selected keys from other `/*/info` endpoints.
 | supported        | boolean        | `true` if the environment is supported                       |
 | channel          | string         | The active channel (stable, beta, dev)                       |
 | logging          | string         | The active log level (debug, info, warning, error, critical) |
+| state | string | The core state of the Supervisor. |
 | timezone         | string         | The current timezone                                         |
 
 **Example response:**
@@ -1332,6 +1333,7 @@ Returns a dict with selected keys from other `/*/info` endpoints.
   "supported": true,
   "channel": "stable",
   "logging": "info",
+  "state": "running",
   "timezone": "Europe/Tomorrowland"
 }
 ```
