@@ -192,7 +192,7 @@ The `schema` looks like `options` but describes how we should validate the user 
   "logins": [
     { "username": "str", "password": "str" }
   ],
-  "random": ["match(^\w*$)"],
+  "random": ["match(^\\w*$)"],
   "link": "url",
   "size": "int(5,20)",
   "count": "float",
