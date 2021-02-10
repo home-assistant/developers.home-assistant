@@ -57,14 +57,14 @@ If you find that you cannot open the development instance via <http://localhost:
 
 #### Freshly installed WSL distribution
 
-The first time a WSL distribution is started, and the default user account is created, the Windows drives will be mounted with all files owned by `root:root`, i.e. uid=0, gid=0, instead of owned by the default user:
+The first time a WSL distribution is started, and the default WSL user account is created, the Windows drives will still be mounted with all files owned by `root:root`, i.e. uid=0, gid=0, instead of owned by the default user:
 
 ```bash
 user@DESKTOP:/mnt/c/Users/user$ mount | grep mnt
 C:\ on /mnt/c type drvfs (rw,noatime,uid=0,gid=0,case=off)
 ```
 
-This will cause the `setup` script to fail with an unrelated error if the local repository is on a Windows drive. To recover, WSL must be restarted after which the Windows drives will be mounted with all files owned by the default user. This can be accomplished by simply restarting the computer, or by issuing the following command from a windows command prompt:
+This will cause the `setup` script to fail with an unrelated error if the local repository is on a Windows drive. To recover, WSL must be restarted after which the Windows drives will be mounted with all files owned by the default WSL user. This can be accomplished by simply restarting the computer, or by issuing the following command from a windows command prompt:
 
 ```bash
 wsl --shutdown
