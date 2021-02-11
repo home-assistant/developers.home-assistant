@@ -399,12 +399,10 @@ single quotes should be used inside the template.
 
 ```yaml
 # Good
-condition:
-  - "{{ 'some_value' == some_other_value }}" 
+example: "{{ 'some_value' == some_other_value }}" 
 
 # Bad
-condition:
-  - '{{ "some_value" == some_other_value }}'
+example: '{{ "some_value" == some_other_value }}'
 ```
 
 #### Template string length
