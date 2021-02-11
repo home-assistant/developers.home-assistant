@@ -54,7 +54,7 @@ three: yes
 Adding comments to blocks of YAML can really help the reader understand the
 example better.
 
-The indentation level of the comment must match the current indentation level. Preferable is written above the line the comment applies to, otherwise lines
+The indentation level of the comment must match the current indentation level. Preferably the comment is written above the line the comment applies to, otherwise lines
 may become hard to read on smaller displays.
 
 Comments should start with a capital letter and have a space between the
