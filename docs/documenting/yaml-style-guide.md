@@ -456,6 +456,7 @@ condition:
 # Bad
 condition:
   - "{{ some_value == some_other_value|some_filter }}" 
+  - "{{ some_value == (some_other_value|some_filter) }}"
 ```
 
 #### Accessing states & state attributes
