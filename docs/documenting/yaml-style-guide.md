@@ -433,8 +433,7 @@ cleaner syntax.
 
 ```yaml
 # Good
-condition:
-  - "{{ some_value == some_other_value }}" 
+condition: "{{ some_value == some_other_value }}" 
 
 # Bad
 condition:
