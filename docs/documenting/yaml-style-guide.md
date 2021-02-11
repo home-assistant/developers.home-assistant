@@ -2,9 +2,9 @@
 title: "YAML Style Guide"
 ---
 
-Additional to our general [documentation standards](/documenting/standards.md),
-also have a set of standards for documenting snippets of YAML. These standards
-described on this page, apply to our all YAML based code across the project,
+In addition to our general [documentation standards](/documenting/standards.md),
+we also have a set of standards for documenting snippets of YAML. The standards
+described on this page, apply to all our YAML based code across the project,
 with the main focus on documentation.
 
 Our YAML standards provide our end-users with a consistent look, the best
@@ -12,7 +12,7 @@ practices and a uniform approach for solving problems in YAML.
 
 ## YAML
 
-This paragraph is about basic YAML usage, and thus not Home Assistant specific.
+This section is about basic YAML usage, and thus not Home Assistant specific.
 
 ### Indentation
 
@@ -35,7 +35,7 @@ off people new to YAML. Therefore, we only allow the use of `true` and `false`
 as boolean values, in lower case.
 
 This keeps it compatible with the YAML 1.2 specifications as well, since that
-version dropped support for several unquotes truthy booleans (e.g., `y`, `n`,
+version dropped support for several unquoted truthy booleans (e.g., `y`, `n`,
 `yes`, `no`, `on`, `off` and similar).
 
   ```yaml
@@ -51,7 +51,7 @@ three: yes
 
 ### Comments
 
-Adding comments to blocks of YAML, can really help the reader understand the
+Adding comments to blocks of YAML can really help the reader understand the
 example better.
 
 The indentation level of the comment must match the current indentation level. Preferable is written above the line the comment applies to, otherwise lines
