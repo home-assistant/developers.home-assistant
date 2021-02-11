@@ -128,7 +128,7 @@ example: ["light.living_room_window", "light.living_room_corner", "light.living_
 
 ### Mappings
 
-Mappings in YAML are also known as associative arrays, has tables,
+Mappings in YAML are also known as associative arrays, hash tables,
 key/value pairs, collections or dictionaries. In the Home Assistant world,
 we refer to them as mappings in end-user documentation.
 
@@ -221,7 +221,7 @@ care of that.
 A configuration option using a default value, should not be part of the example.
 Unless, the example is specifically for educating about that option.
 
-For example, our `condition` options in automations, is optional and a empty
+For example, our `condition` options in automations, is optional and an empty
 list `[]` by default.
 
 ```yaml
@@ -242,7 +242,7 @@ list `[]` by default.
 ### Strings (continued)
 
 As written in the first chapter, strings are preferably enquoted with double
-quotes. However, the following value types are exempted from this rules,
+quotes. However, the following value types are exempted from this rule,
 as is makes our examples more readable:
 
 - Entity IDs (e.g., `binary_sensor.motion`)
@@ -280,14 +280,14 @@ action:
 
 ### Service targets
 
-If you want to fire a service call towards an entity ID (for example, to turn
+If you want to fire a service call for an entity ID (for example, to turn
 on a light), you can do so in three different ways.
 
 The entity ID can be specified as a property of the service level, part of the
-data that is sent towards service call or as an entity in a service target.
+data that is sent in the service call or as an entity in a service target.
 
 Service targets is the most modern way and allows one to target a service call
-towards an entity, device or area. Therefore, the most flexible of the options
+for an entity, device or area. Therefore, the target is the most flexible of the options
 available and is the one that should be used.
 
 ```yaml
@@ -320,7 +320,7 @@ Home Assistant has a lot of places that access both a scalar value or a list
 of scalar values. Additionally, sometimes, it even accepts a comma-separated
 string value as a list.
 
-The following applies in cases a single value or a list of scalar values
+The following applies in case a single value or a list of scalar values
 is accepted:
 
 - Putting multiple values in a single scalar value (comma separated string)
@@ -349,9 +349,9 @@ Home Assistant has properties that accept both a mapping or a list of mappings.
 Well known examples are: `condition`, `action`, `sequence`.
 
 In case a property accepts a single mapping or a list of mappings, a list of
-mapping must be used. Even when a single mapping is passed in.
+mappings must be used, even when a single mapping is passed in.
 
-This makes it easier to understand one can add more items to it and easier to
+This makes it easier to understand that one can add more items to it and also easier to
 copy and paste a single item into your own code.
 
 ```yaml
@@ -372,9 +372,9 @@ action:
 
 Home Assistant templates are powerful, but they can be really confusing or hard
 to understand for a less experienced user. Therefore, the use of templates
-should be avoided if a pure YAML version available.
+should be avoided if a pure YAML version is available.
 
-Additionally, the use of template requires additional escaping in our
+Additionally, the use of templates requires additional escaping in our
 documentation to avoid our website code to confuse it for the Liquid syntax.
 Avoiding templates in general removes the need of additional escaping.
 
@@ -412,7 +412,7 @@ condition:
 Long lines in templates should be avoided and split across multiple lines to
 make more clear what happens and keep them readable.
 
-See the chapters on string above for additional information on multi-line
+See the chapters on strings above for additional information on multi-line
 string formatting.
 
 ```yaml
@@ -479,5 +479,5 @@ two: "{{ states.climate.living_room.attributes.temperature }}"
 ```
 
 This applies to  `states()`, `is_state()`, `state_attr()` and `is_state_attr()`,
-to avoid errors and error message when the entity isn’t ready yet
+to avoid errors and error messages when the entity isn’t ready yet
 (e.g., during Home Assistant startup).
