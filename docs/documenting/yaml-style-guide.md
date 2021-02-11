@@ -30,8 +30,8 @@ example:
 
 ### Booleans
 
-We should avoid the use of truthy boolean values in YAML. They often trow
-of people new to YAML. Therefore, we only allow the use of `true` and `false`
+We should avoid the use of truthy boolean values in YAML. They often throw
+off people new to YAML. Therefore, we only allow the use of `true` and `false`
 as boolean values, in lower case.
 
 This keeps it compatible with the YAML 1.2 specifications as well, since that
