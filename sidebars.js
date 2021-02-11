@@ -45,6 +45,7 @@ module.exports = {
   Documenting: [
     "documenting",
     "documenting/standards",
+    "documenting/yaml-style-guide",
     "documenting/create-page",
   ],
   Frontend: [

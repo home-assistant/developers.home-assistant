@@ -41,8 +41,8 @@ module.exports = {
           label: "Documenting",
           position: "left",
           items: [
-            { label: "Documentation", to: "docs/documenting" },
             { label: "Standards", to: "docs/documenting/standards" },
+            { label: "YAML Style Guide", to: "docs/documenting/yaml-style-guide"},
             {
               label: "Create a new page",
               to: "docs/documenting/create-page",
