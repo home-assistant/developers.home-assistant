@@ -110,7 +110,7 @@ example:
 #### Flow style sequences
 
 The use of flow style should be avoided. While simple, short and clean,
-With longer data in it, it becomes long and harder to read quickly.
+with longer data in it, it becomes long and harder to read quickly.
 
 If used, flow style sequences have space after each comma `,` and no white
 space before opening and closing:
