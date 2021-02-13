@@ -160,7 +160,9 @@ After the add-on is started, you should be able to view your Ingress server by c
 
 # Security
 
-Add-on security should be a matter of pride. You should strive for the highest level of security you can possibly attain. If your add-on has a lower security rating, then users will be less likely to trust it. You can use the following table to adjust your add-on security.
+Add-on security should be a matter of pride. You should strive for the highest level of security you can possibly attain. If your add-on has a lower security rating, then users will be less likely to trust it.  
+
+Each addon starts with a base rating of 5, on a scale of 1 to 6. Depending on decisions made during development, you will be assigned a score based on certain actions.   There are some actions which have additional consequences.  These additional consequences appear in the Notes secton of the following table. 
 
 | Action | Change | Notes |
 |---|---|---|
@@ -169,9 +171,9 @@ Add-on security should be a matter of pride. You should strive for the highest l
 | Use custom [apparmor.txt](/docs/add-ons/presentation#apparmor)| +1| Rating applied after installation |
 | Set `apparmor: false` in [config.json](/docs/add-ons/configuration#add-on-config) | -1 | |
 | Use `privileged: NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_PTRACE`, `SYS_MODULE`, or `DAC_READ_SEARCH` in [config.json](/docs/add-ons/configuration#add-on-config)| -1 | |
-| Use `hassio_role: manager` in [config.json](/docs/add-ons/configuration#add-on-config) | -1 | overrides `hassio_role: admin` |
+| Use `hassio_role: manager` in [config.json](/docs/add-ons/configuration#add-on-config) | -1 | |
 | Use `host_network: true` in [config.json](/docs/add-ons/configuration#add-on-config) | -1 | |
-| Use `hassio_role: admin` in [config.json](/docs/add-ons/configuration#add-on-config) | -2 | overridden by `hassio_role: manager` |
+| Use `hassio_role: admin` in [config.json](/docs/add-ons/configuration#add-on-config) | -2 | |
 | Use `host_pid: true` in [config.json](/docs/add-ons/configuration#add-on-config) | -2 | |
 | Use `full_access: true` in [config.json](/docs/add-ons/configuration#add-on-config) | -2 | |
 | Use `docker_api: true` in [config.json](/docs/add-ons/configuration#add-on-config) | Security set to 1 | |
