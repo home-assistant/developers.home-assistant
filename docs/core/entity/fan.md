@@ -17,47 +17,10 @@ Properties should always only return information from memory and not do I/O (lik
 | is_on | boolean | None |Return true if the entity is on |
 | oscillating | boolean | None | Return true if the fan is oscillating |
 | percentage | int | None | Return the current speed percentage. Must be a value between 0 (off) and 100 |
-| percentage_step | float | 1 | The supported step size a speed percentage can be increased/decreased |
+| speed_count | int | 100 | The number of speeds the fan supports |
 | supported_features | int | 0 | Flag supported features |
 | preset_mode | str | None | Return the current preset_mode. One of the values in preset_modes. |
 | preset_modes | list | None | Get the list of available preset_modes. This is an arbitrary list of str and should not contain any speeds. |
-
-
-:::tip Converting speeds
-
-Home Assistant includes a utility to calculate step sizes.
-
-If the device has a list of named speeds:
-
-```python
-from homeassistant.util.percentage import ordered_list_percentage_step_size
-
-ORDERED_NAMED_FAN_SPEEDS = ["one", "two", "three", "four", "five", "six"]  # off is not included
-
-...
-
-    @property
-    def percentage_step(self) -> Optional[float]:
-        """Return the step size for percentage."""
-        return ordered_list_percentage_step_size(ORDERED_NAMED_FAN_SPEEDS)
-```
-
-If the device has a numeric range of speeds:
-
-```python
-from homeassistant.util.percentage import range_percentage_step_size
-
-SPEED_RANGE = (1, 7)  # off is not included
-
-...
-
-    @property
-    def percentage_step(self) -> Optional[float]:
-        """Return the step size for percentage."""
-        return range_percentage_step_size(SPEED_RANGE)
-```
-
-:::
 
 ## Deprecated Properties
 
@@ -141,6 +104,18 @@ ORDERED_NAMED_FAN_SPEEDS = ["one", "two", "three", "four", "five", "six"]  # off
 percentage = ordered_list_item_to_percentage(ORDERED_NAMED_FAN_SPEEDS, "three")
 
 named_speed = percentage_to_ordered_list_item(ORDERED_NAMED_FAN_SPEEDS, 23)
+
+...
+
+    @property
+    def percentage(self) -> Optional[int]:
+        """Return the current speed percentage."""
+        return ordered_list_item_to_percentage(ORDERED_NAMED_FAN_SPEEDS, current_speed)
+
+    @property
+    def speed_count(self) -> Optional[int]:
+        """Return the number of speeds the fan supports."""
+        return len(ORDERED_NAMED_FAN_SPEEDS)
 ```
 
 If the device has a numeric range of speeds:
@@ -153,6 +128,18 @@ SPEED_RANGE = (1, 255)  # off is not included
 percentage = ranged_value_to_percentage(SPEED_RANGE, 127)
 
 value_in_range = math.ceil(percentage_to_ranged_value(SPEED_RANGE, 50))
+
+...
+
+    @property
+    def percentage(self) -> Optional[int]:
+        """Return the current speed percentage."""
+        return ranged_value_to_percentage(SPEED_RANGE, current_speed)
+
+    @property
+    def speed_count(self) -> Optional[int]:
+        """Return the number of speeds the fan supports."""
+        return SPEED_RANGE[1] - SPEED_RANGE[0] + 1 
 ```
 :::
 
