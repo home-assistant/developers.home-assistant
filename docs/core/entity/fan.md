@@ -17,9 +17,47 @@ Properties should always only return information from memory and not do I/O (lik
 | is_on | boolean | None |Return true if the entity is on |
 | oscillating | boolean | None | Return true if the fan is oscillating |
 | percentage | int | None | Return the current speed percentage. Must be a value between 0 (off) and 100 |
+| percentage_step | float | 1 | The supported step size a speed percentage can be increased/decreased |
 | supported_features | int | 0 | Flag supported features |
 | preset_mode | str | None | Return the current preset_mode. One of the values in preset_modes. |
 | preset_modes | list | None | Get the list of available preset_modes. This is an arbitrary list of str and should not contain any speeds. |
+
+
+:::tip Converting speeds
+
+Home Assistant includes a utility to calculate step sizes.
+
+If the device has a list of named speeds:
+
+```python
+from homeassistant.util.percentage import ordered_list_percentage_step_size
+
+ORDERED_NAMED_FAN_SPEEDS = ["one", "two", "three", "four", "five", "six"]  # off is not included
+
+...
+
+    @property
+    def percentage_step(self) -> Optional[float]:
+        """Return the step size for percentage."""
+        return ordered_list_percentage_step_size(ORDERED_NAMED_FAN_SPEEDS)
+```
+
+If the device has a numeric range of speeds:
+
+```python
+from homeassistant.util.percentage import range_percentage_step_size
+
+SPEED_RANGE = (1, 7)  # off is not included
+
+...
+
+    @property
+    def percentage_step(self) -> Optional[float]:
+        """Return the step size for percentage."""
+        return range_percentage_step_size(SPEED_RANGE)
+```
+
+:::
 
 ## Deprecated Properties
 
