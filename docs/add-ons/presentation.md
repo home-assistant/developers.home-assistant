@@ -99,7 +99,7 @@ Here are the requirements of Ingress:
 - Users are previously authenticated via Home Assistant.  Authentication is not required. 
 
 :::tip
-Configuration of path and port information may be queried via  [Addons info api endpoint](api/supervisor/endpoints/#addons). If the Home Assistant url is required by your addon, Ingress adds a request header `X-Ingress-Path` which may be filtered to obtain the base url. 
+Configuration of path and port information may be queried via  [Addons info api endpoint](/docs/api/supervisor/endpoints/#addons). If the Home Assistant url is required by your addon, Ingress adds a request header `X-Ingress-Path` which may be filtered to obtain the base url. 
 :::
 
 Ingress API gateway supports the following:
@@ -170,10 +170,10 @@ Each addon starts with a base rating of 5, on a scale of 1 to 6. Depending on de
 | Use `auth_api: true` in [config.json](/docs/add-ons/configuration#add-on-config) | +1 | overridden by `ingress` |
 | Use custom [apparmor.txt](/docs/add-ons/presentation#apparmor)| +1| Rating applied after installation |
 | Set `apparmor: false` in [config.json](/docs/add-ons/configuration#add-on-config) | -1 | |
-| Use `privileged: NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_PTRACE`, `SYS_MODULE`, or `DAC_READ_SEARCH` in [config.json](/docs/add-ons/configuration#add-on-config)| -1 | |
+| Use `privileged: NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_PTRACE`, `SYS_MODULE`, or `DAC_READ_SEARCH` in [config.json](/docs/add-ons/configuration#add-on-config)| -1 | rating applied only once if multiple are used. |
 | Use `hassio_role: manager` in [config.json](/docs/add-ons/configuration#add-on-config) | -1 | |
 | Use `host_network: true` in [config.json](/docs/add-ons/configuration#add-on-config) | -1 | |
 | Use `hassio_role: admin` in [config.json](/docs/add-ons/configuration#add-on-config) | -2 | |
 | Use `host_pid: true` in [config.json](/docs/add-ons/configuration#add-on-config) | -2 | |
 | Use `full_access: true` in [config.json](/docs/add-ons/configuration#add-on-config) | -2 | |
-| Use `docker_api: true` in [config.json](/docs/add-ons/configuration#add-on-config) | Security set to 1 | |
+| Use `docker_api: true` in [config.json](/docs/add-ons/configuration#add-on-config) | Security set to 1 | Overrides all other adjustments |
