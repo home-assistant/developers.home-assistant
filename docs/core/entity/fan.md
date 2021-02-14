@@ -121,7 +121,7 @@ named_speed = percentage_to_ordered_list_item(ORDERED_NAMED_FAN_SPEEDS, 23)
 If the device has a numeric range of speeds:
 
 ```python
-from homeassistant.util.percentage import ranged_value_to_percentage, percentage_to_ranged_value
+from homeassistant.util.percentage import int_states_in_range, ranged_value_to_percentage, percentage_to_ranged_value
 
 SPEED_RANGE = (1, 255)  # off is not included
 
@@ -139,7 +139,7 @@ value_in_range = math.ceil(percentage_to_ranged_value(SPEED_RANGE, 50))
     @property
     def speed_count(self) -> Optional[int]:
         """Return the number of speeds the fan supports."""
-        return SPEED_RANGE[1] - SPEED_RANGE[0] + 1 
+        return int_states_in_range(SPEED_RANGE)
 ```
 :::
 
