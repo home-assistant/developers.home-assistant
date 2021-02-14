@@ -150,7 +150,7 @@ The configuration for an add-on is stored in `config.json`.
 | schema | dict | no | Schema for options value of the add-on. It can be `false` to disable schema validation and use custom options.
 | image | string | no | For use with Docker Hub and other container registries.
 | timeout | integer | no | Default 10 (seconds). The timeout to wait until the Docker daemon is done or will be killed.
-| tmpfs | bool | no | Is this True, the containers `/tmp` is using tmpfs, an memory file system.
+| tmpfs | bool | no | If this is set to `true`, the containers `/tmp` is using tmpfs, an memory file system.
 | discovery | list | no | A list of services that this add-on provides for Home Assistant. Currently supported: `mqtt`
 | services | list | no | A list of services that will be provided or consumed with this add-on. Format is `service`:`function` and functions are: `provide` (this add-on can provide this service), `want` (this add-on can use this service) or `need` (this add-on need this service to work correctly).
 | auth_api | bool | no | Allow access to Home Assistant user backend.
