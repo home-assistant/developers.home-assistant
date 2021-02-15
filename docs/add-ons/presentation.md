@@ -133,7 +133,7 @@ FROM $BUILD_FROM
 ENV LANG C.UTF-8
 
 #Add nginx and create the run folder for nginx.
-RUN apk add nginx;mkdir -p /run/nginx;
+RUN apk --no-cache  add nginx;mkdir -p /run/nginx;
 #Copy our conf into the nginx http.d folder.
 COPY ingress.conf /etc/nginx/http.d/
 #Launch nginx with debug options.
