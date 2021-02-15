@@ -154,7 +154,7 @@ config.json
 }
 ```
 
-After the add-on is started, you should be able to view your Ingress server by clicking "OPEN WEB UI" within the add-on info screen. 
+After the add-on is started, you should be able to view your Ingress server by clicking "OPEN WEB UI" within the add-on info screen.
 
 
 
