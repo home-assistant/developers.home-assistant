@@ -111,7 +111,7 @@ Ingress API gateway supports the following:
 
 ## Basic Ingress Example with Nginx
 
-The following is a basic ingress implementation with an Nginx server.  This contains an example`Dockerfile`, `config.json`, and `ingress.conf` configuration.  
+The following is a basic ingress implementation with an Nginx server. This contains an example`Dockerfile`, `config.json`, and `ingress.conf` configuration.
 
 The `ingress.conf` is configured to accept only connections from IP address `172.30.32.2` as we are only expecting connections from this IP address for Ingress purposes. Any other IP address will be rejected.  The ingress port 8099 is utilized to reduce configuration work.  If you wish to configure a different ingress port you may, but the `config.json` option `ingress_port` must be defined to match. 
 
