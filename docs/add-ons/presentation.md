@@ -124,7 +124,7 @@ server {
 }
 ```
 
-Our example `Dockerfile` is configured to support only our Nginx server, and does not support a `run.sh` like most addons.  You may replace the `CMD` with your own command to allow more configuration options while launching your addon.   This Dockerfile will `RUN` to install our Nginx dependencies, `COPY` our example ingress.conf from above to the add-on conatiner, then `CMD` start Nginx.  
+Our example `Dockerfile` is configured to support only our Nginx server and does not support a `run.sh` like most add-ons. You may replace the `CMD` with your own command to allow more configuration options while launching your add-on. This Dockerfile will `RUN` to install our Nginx dependencies, `COPY` our example `ingress.conf` from above to the add-on container, then `CMD` start Nginx.
 
 Dockerfile
 ```Dockerfile
