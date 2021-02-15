@@ -143,7 +143,7 @@ The configuration for an add-on is stored in `config.json`.
 | uart | bool | no | Default `false`. Auto mapping all UART/serial devices from the host into the add-on.
 | udev | bool | no | Default `false`. Set this `true`, gets the host udev database read-only mounted into the add-on.
 | devicetree | bool | no | Boolean. If this is set to True, `/device-tree` will map into add-on.
-| kernel_modules | bool | no | Map host kernel modules and config into add-on (readonly).
+| kernel_modules | bool | no | Map host kernel modules and config into add-on (readonly) and give you SYS_MODULE permission.
 | stdin | bool | no | Boolean. If enabled, you can use the STDIN with Home Assistant API.
 | legacy | bool | no | Boolean. If the Docker image has no `hass.io` labels, you can enable the legacy mode to use the config data.
 | options | dict | no | Default options value of the add-on.
