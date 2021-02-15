@@ -7,8 +7,9 @@ The following debug tips and tricks are for developers who are running the Home 
 
 ## Debug Supervisor
 
-Visual Studio Code config:
+Below you will find an example Visual Studio Code configuration to attach a Python debugger to the Home Assistant Supervisor. This configuration is intended as the default by Run> Start Debugging or pressing F5. You will need to change "IP" to match your Supervisor's IP within the Docker environment. This can be detected from within Docker by running the command `ip addr`.
 
+.vscode/launch.json
 ```json
 {
     "version": "0.2.0",
