@@ -99,7 +99,7 @@ Here are the requirements of Ingress:
 - Users are previously authenticated via Home Assistant. Authentication is not required. 
 
 :::tip
-Configuration of path and port information may be queried via  [Addons info api endpoint](/docs/api/supervisor/endpoints/#addons). If the Home Assistant url is required by your addon, Ingress adds a request header `X-Ingress-Path` which may be filtered to obtain the base url. 
+Configuration of path and port information may be queried via [add-ons info API endpoint](/docs/api/supervisor/endpoints/#addons). If the Home Assistant URL is required by your addon, Ingress adds a request header `X-Ingress-Path` which may be filtered to obtain the base URL. 
 :::
 
 Ingress API gateway supports the following:
