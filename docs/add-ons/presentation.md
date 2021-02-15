@@ -90,7 +90,7 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
 
 ## Ingress
 
-Ingress allow users to access the add-on web interface via the Home Assistant UI. Authentication is handled by Home Assistant, so neither the user nor the add-on developer will need to care about the security or port forwarding. Users love this feature! It connects your user directly to the add-on and can provide a seamless UX within Home Assistant and grants your add-on 2 points of security.
+Ingress allows users to access the add-on web interface via the Home Assistant UI. Authentication is handled by Home Assistant, so neither the user nor the add-on developer will need to care about the security or port forwarding. Users love this feature! It connects your user directly to the add-on, can provide a seamless UX within Home Assistant and grants your add-on 2 points of security.
 
 Here are the requirements of Ingress:
 - Ingress must be enabled. Set `ingress: true` in [`config.json`](/docs/add-ons/configuration#add-on-config).
