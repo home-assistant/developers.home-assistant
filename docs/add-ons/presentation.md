@@ -96,7 +96,7 @@ Here are the requirements of Ingress:
 - Ingress must be enabled. Set `ingress: true` in [`config.json`](/docs/add-ons/configuration#add-on-config).
 - Your server may run on port 8099. If it does not run on 8099, you must set `ingress_port: PORT_NUMBER` in [`config.json`](/docs/add-ons/configuration/#add-on-config) to match your configuration.
 - Only connections from `172.30.32.2` must be allowed. You should deny access to all other IP addresses within your add-on server. 
-- Users are previously authenticated via Home Assistant.  Authentication is not required. 
+- Users are previously authenticated via Home Assistant. Authentication is not required. 
 
 :::tip
 Configuration of path and port information may be queried via  [Addons info api endpoint](/docs/api/supervisor/endpoints/#addons). If the Home Assistant url is required by your addon, Ingress adds a request header `X-Ingress-Path` which may be filtered to obtain the base url. 
