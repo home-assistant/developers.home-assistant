@@ -42,6 +42,7 @@ sudo mkdir /sys/fs/cgroup/systemd
 sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
 code
 ```
+
 You can now open your project as usual, or use the `/mnt/c/<path-to-your-project>` format, replacing `<path-to-your-project>` with the full path to your project, after removing `C:\`.  eg. `C:\Users\example\project` becomes `/mnt/c/example/project`.
 
 ### Testing on a remote system
