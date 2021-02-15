@@ -160,7 +160,7 @@ After the add-on is started, you should be able to view your Ingress server by c
 
 Add-on security should be a matter of pride. You should strive for the highest level of security you can possibly attain. If your add-on has a lower security rating, then users will be less likely to trust it.
 
-Each addon starts with a base rating of 5, on a scale of 1 to 6. Depending on decisions made during development, you will be assigned a score based on certain actions.   There are some actions which have additional consequences.  These additional consequences appear in the Notes secton of the following table. 
+Each add-on starts with a base rating of 5, on a scale of 1 to 6. Depending on decisions made during development, you will be assigned a score based on certain actions. There are some actions that have additional consequences. These additional consequences appear in the Notes section of the following table.
 
 | Action | Change | Notes |
 |---|---|---|
