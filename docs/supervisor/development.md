@@ -35,7 +35,8 @@ From within your WSL2-enabled Ubuntu-20.04 terminal, install Docker.io package.
 sudo apt-get install docker.io
 ```
 
-Setting up a control group, and mounting the control group to a location which can be accessed via Linux.  The final command will setup and launch Visual Studio Code within Windows, with WSL2-enabled compatibility, thus enabling Supervisor development on Windows. 
+Setting up a control group, and mounting the control group to a location that can be accessed via Linux. The final command will set up and launch Visual Studio Code within Windows, with WSL2-enabled compatibility, thus enabling Supervisor development on Windows.
+
 ```bash
 sudo mkdir /sys/fs/cgroup/systemd
 sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
