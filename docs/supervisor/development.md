@@ -23,6 +23,25 @@ When the initializing is complete you can access the Home Assistant frontend on 
 
 If you need to rebuild the base of the Supervisor run the task "Build Supervisor" and then restart the "Run Supervisor" task again when that completes.
 
+#### Using Windows WSL2
+While the system is Linux and compatible with Mac, it is also possible to build and test locally on Windows using WSL2 with Ubuntu 20.04 LTS and other similar distros. This is achieved via WSL2, which makes POSIX tasks possible within Windows via system-level integration with a Linux virtual machine. 
+:::info
+You must use WSL2. WSL is not capable of running docker, and therefore is incompatibile.  If using this WSL method, you must ensure you [set up WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
+:::
+
+From within your WSL2-enabled Ubuntu-20.04 terminal, install Docker.io package. 
+```bash
+sudo apt-get install docker.io
+```
+
+Setting up a control group, and mounting the control group to a location which can be accessed via Linux.  The final command will setup and launch Visual Studio Code within Windows, with WSL2-enabled compatibility, thus enabling Supervisor development on Windows. 
+```bash
+sudo mkdir /sys/fs/cgroup/systemd
+sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
+code
+```
+You can now open your project as usual, or use the `/mnt/c/<path-to-your-project>` format, replacing `<path-to-your-project>` with the full path to your project, after removing `C:\`.  eg. `C:\Users\example\project` becomes `/mnt/c/example/project`.
+
 ### Testing on a remote system
 
 For this you first need to create an account at [Docker Hub](https://hub.docker.com/).
