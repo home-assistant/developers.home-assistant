@@ -156,8 +156,6 @@ config.json
 
 After the add-on is started, you should be able to view your Ingress server by clicking "OPEN WEB UI" within the add-on info screen.
 
-
-
 # Security
 
 Add-on security should be a matter of pride. You should strive for the highest level of security you can possibly attain. If your add-on has a lower security rating, then users will be less likely to trust it.  
