@@ -285,6 +285,10 @@ To reset customized network/audio/options, set it `null`.
 Run a configuration validation against the current stored add-on configuration.
 </ApiEndpoint>
 
+<ApiEndpoint path="/addons/<addon>/options/config" method="get">
+The Data endpoint to get his own rendered configuration.
+</ApiEndpoint>
+
 <ApiEndpoint path="/addons/<addon>/rebuild" method="post">
 Rebuild the add-on, only supported for local build add-ons.
 </ApiEndpoint>
