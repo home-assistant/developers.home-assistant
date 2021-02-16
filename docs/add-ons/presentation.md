@@ -67,13 +67,16 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
   # S6-Overlay
   /bin/** ix,
   /usr/bin/** ix,
-  /usr/lib/bashio/** ix,
   /etc/s6/** ix,
   /run/s6/** rwix,
   /etc/services.d/** rwix,
   /etc/cont-init.d/** rwix,
   /etc/cont-finish.d/** rwix,
   /run/** rwk,
+
+  # Bashio
+  /usr/lib/bashio/** ix,
+  /tmp/** rw,
 
   # Access to Options.json and other files within your addon
   /data/** rw,
