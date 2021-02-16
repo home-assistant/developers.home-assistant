@@ -62,29 +62,31 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
   
   # Capabilities
   file,
+  signal
 
   # S6-Overlay
   /bin/** ix,
   /usr/bin/** ix,
   /usr/lib/bashio/** ix,
   /etc/s6/** ix,
-  /run/s6/** ix,
+  /run/s6/** rwix,
   /etc/services.d/** rwix,
   /etc/cont-init.d/** rwix,
   /etc/cont-finish.d/** rwix,
-  /var/run/** rw,
+  /run/** rwk,
 
-  # suppress ptrace denials when using 'docker ps' or using 'ps' inside a container
-  ptrace (trace,read) peer=docker-default,
-
-  # docker daemon confinement requires explict allow rule for signal
-  signal (receive) set=(kill,term) peer=/usr/bin/docker,
-
-  # Access to hardware devices
-  # /dev/ttyUSB0 rw,
-  
   # Access to Options.json and other files within your addon
   /data/** rw,
+  
+  # Start new profile for service
+  /usr/bin/myprogram cx,
+  
+  profile usr/bin/myprogram flags=(attach_disconnected,mediate_deleted) {
+    #include <abstractions/base>
+    
+    # Receive signals from S6-Overlay
+    signal receive,
+  }
 }
 ```
 
