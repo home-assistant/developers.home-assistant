@@ -1,5 +1,5 @@
 ---
-title: "Signicant Change Support"
+title: "Significant Change Support"
 ---
 
 Home Assistant doesn't only collect data, it also exports data to various services. Not all of these services are interested in every change. To help these services filter insignificant changes, your entity integration can add significant change support.
