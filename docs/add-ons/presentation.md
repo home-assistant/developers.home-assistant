@@ -62,7 +62,7 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
   
   # Capabilities
   file,
-  signal
+  signal,
 
   # S6-Overlay
   /init rix,
