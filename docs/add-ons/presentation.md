@@ -65,9 +65,10 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
   signal
 
   # S6-Overlay
+  /init rix,
   /bin/** ix,
   /usr/bin/** ix,
-  /etc/s6/** ix,
+  /etc/s6/** rix,
   /run/s6/** rwix,
   /etc/services.d/** rwix,
   /etc/cont-init.d/** rwix,
