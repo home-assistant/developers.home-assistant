@@ -64,9 +64,9 @@ If you do not see "WSL", then close folders and re-run `code`.
 At any time, Visual Studio Code may offer to reopen in Dev Container. When offered Dev Container in the lower right corner, click it to open dev container.  If dev container is not offered before Run Supervisor, close Visual Studio Code and reopen. 
 When working in Dev Container, you will see "Dev Container: Supervisor dev" in the lower left corner of Visual Studio Code. 
 :::
-4. Press F1: Tasks: Run Task - Update Supervisor Panel 
+4. Press F1, select Tasks: Run Task, and Update Supervisor Panel 
 5. Open a new terminal within the Dev Container enabled Visual Studio Code and type `sudo update-alternatives --set iptables /usr/sbin/iptables-legacy;dockerd`
-6. F1: Tasks: Run Task - Run Supervisor
+6. Press F1, select Tasks: Run Task, and Run Supervisor
 
 If you chose to place your source outside of WSL, within Windows, be aware that you cannot open it with file chooser without sacrificing your dev container.  In order to access a windows folder, you must choose a folder from `/mnt/<drive>/path-to/project`. eg. `C:\Users\example\project` becomes `/mnt/c/Users/example/project`.
 
