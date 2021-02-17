@@ -132,7 +132,7 @@ The configuration for an add-on is stored in `config.json`.
 | homeassistant_api | bool | no | This add-on can access to the Home Assistant REST API proxy. Use `http://supervisor/core/api`.
 | docker_api | bool | no | Allow read-only access to Docker API for add-on. Works only for not protected add-ons.
 | privileged | list | no | Privilege for access to hardware/system. Available access: `NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_TIME`, `SYS_NICE`, `SYS_RESOURCE`, `SYS_PTRACE`, `SYS_MODULE` or `DAC_READ_SEARCH`
-| full_access | bool | no | Give full access to hardware like the privileged mode in Docker. Works only for not protected add-ons.
+| full_access | bool | no | Give full access to hardware like the privileged mode in Docker. Works only for not protected add-ons and not be used! If you using this, you don't need other configs like `uart` or `devices`.
 | apparmor | bool/string | no | Enable or disable AppArmor support. If it is enable, you can also use custom profiles with the name of the profile.
 | map | list | no | List of maps for additional Home Assistant folders. Possible values: `config`, `ssl`, `addons`, `backup`, `share` or `media`. Defaults to `ro`, which you can change by adding `:rw` to the end of the name.
 | environment | dict | no | A dictionary of environment variable to run add-on.
