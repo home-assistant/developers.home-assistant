@@ -25,25 +25,50 @@ If you need to rebuild the base of the Supervisor run the task "Build Supervisor
 
 #### Using Windows WSL2
 
-While the system is Linux and compatible with Mac, it is also possible to build and test locally on Windows using WSL2 with Ubuntu 20.04 LTS and other similar distros. This is achieved via WSL2, which makes POSIX tasks possible within Windows via system-level integration with a Linux virtual machine.
+While the system is Linux and compatible with Mac, it is also possible to build and test locally on Windows using WSL2 with Debian and other similar distros. This is achieved via WSL2, which makes POSIX tasks possible within Windows via system-level integration with a Linux virtual machine.
 :::info
 You must use WSL2. WSL is not capable of running docker and therefore is incompatible. If using this WSL method, you must ensure you [set up WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 :::
 
-From within your WSL2-enabled Ubuntu-20.04 terminal, install Docker.io package. 
+It is assumed at this point you have installed Visual Studio Code and Debian. From within your WSL2-enabled Debian terminal, run the following annotated bash script. 
 ```bash
-sudo apt-get install docker.io
+
+apt update; apt install curl wget git; #Update and install our dependencies
+curl -fsSL https://get.docker.com; |sudo bash  #install docker Community Edition
+curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash; #Install NVM
+source ~/.profile; nvm install node; #reload profile and install node
+sudo apt remove cmdtest yarn  #Remove problematic packages if installed. Debian's current Yarn does not work.
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -  #Add yarn repo
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list #Certify Yarn repo
+sudo apt-get update; sudo apt-get install yarn -y; #Install yarn
+sudo update-alternatives --set iptables /usr/sbin/iptables-legacy #Fix IP Tables for Docker
+cd #Switch to home directory
+git clone https://github.com/home-assistant/supervisor #Clone Supervisor to ~/supervisor
 ```
 
-Setting up a control group, and mounting the control group to a location that can be accessed via Linux. The final command will set up and launch Visual Studio Code within Windows, with WSL2-enabled compatibility, thus enabling Supervisor development on Windows.
-
+Now you're ready to run Yarn and Node.  We must set up docker communications and launch Visual Studio Code.  The following commands will need to be run after each reboot.
 ```bash
 sudo mkdir /sys/fs/cgroup/systemd
 sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
 code
 ```
+Visual Studio Code will launch.  
+1. Observe "WSL: Debian" in the lower left corner.  
+:::tip
+If you do not see "WSL", then close folders and re-run `code`.  
+:::
+2. Click on Extensions
+3. Install Docker Extension
+3. Click File->Open Folder-> type `~/supervisor`
+:::Tip
+At any time, Visual Studio Code may offer to reopen in Dev Container. When offered Dev Container in the lower right corner, click it to open dev container.  If dev container is not offered before Run Supervisor, close Visual Studio Code and reopen. 
+When working in Dev Container, you will see "Dev Container: Supervisor dev" in the lower left corner of Visual Studio Code. 
+:::
+4. Press F1: Tasks: Run Task - Update Supervisor Panel 
+5. Open a new terminal within the Dev Container enabled Visual Studio Code and type `sudo update-alternatives --set iptables /usr/sbin/iptables-legacy;dockerd`
+6. F1: Tasks: Run Task - Run Supervisor
 
-You can now open your project as usual, or use the `/mnt/c/<path-to-your-project>` format, replacing `<path-to-your-project>` with the full path to your project, after removing `C:\`.  eg. `C:\Users\example\project` becomes `/mnt/c/Users/example/project`.
+If you chose to place your source outside of WSL, within Windows, be aware that you cannot open it with file chooser without sacrificing your dev container.  In order to access a windows folder, you must choose a folder from `/mnt/<drive>/path-to/project`. eg. `C:\Users\example\project` becomes `/mnt/c/Users/example/project`.
 
 ### Testing on a remote system
 
