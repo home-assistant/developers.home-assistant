@@ -58,7 +58,7 @@ Visual Studio Code will launch.
 3. Install Docker Extension
 3. Click File->Open Folder-> type `~/supervisor`
 4. Visual Studio Code will offer to reopen in Dev Container after it has loaded Supervisor. When offered Dev Container in the lower right corner, click it to open dev container.  If you were not presented this option, verify Docker Extension is installed then close Visual Studio Code and reopen with the `code` command above. 
-:::info
+:::tip
 When working in Dev Container, you will see "Dev Container: Supervisor dev" in the lower left corner of Visual Studio Code. 
 :::
 
@@ -66,7 +66,7 @@ When working in Dev Container, you will see "Dev Container: Supervisor dev" in t
 5. Open a new terminal within the Dev Container enabled Visual Studio Code and type `sudo update-alternatives --set iptables /usr/sbin/iptables-legacy;dockerd`
 6. Press F1, select Tasks: Run Task, and Run Supervisor
 
-:::tip
+:::note
 If you chose to place your source outside of WSL, within Windows, be aware that you cannot open it with file chooser without sacrificing your dev container.  In order to access a windows folder, you must choose a folder from `/mnt/<drive>/path-to/project`. eg. `C:\Users\example\project` becomes `/mnt/c/Users/example/project`.
 :::
 
