@@ -63,9 +63,8 @@ sudo mkdir /sys/fs/cgroup/systemd
 sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
 code
 ```
-If the `code` command does not work, launch `/mnt/c/Users/USERNAME/AppData/Local/Programs//Microsoft\ VS\ Code/bin/code` and replace `USERNAME` with your Windows username.
+Visual Studio Code will launch.  If the `code` command does not launch Visual Studio Code, execut `/mnt/c/Users/USERNAME/AppData/Local/Programs//Microsoft\ VS\ Code/bin/code` and replace `USERNAME` with your Windows username.
 
-Visual Studio Code will launch.  
 1. Observe "WSL: Debian" in the lower left corner.  If you do not see "WSL", then close folders and re-run `code`. 
 2. Click on Extensions
 3. Install Docker Extension
