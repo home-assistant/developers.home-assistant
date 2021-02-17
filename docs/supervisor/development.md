@@ -27,10 +27,10 @@ If you need to rebuild the base of the Supervisor run the task "Build Supervisor
 
 While the system is Linux and compatible with Mac, it is also possible to build and test locally on Windows using WSL2 with Debian and other similar distros. This is achieved via Windows Subsystem for Linux 2 (WSL2), which makes POSIX tasks possible within Windows via system-level integration with a Linux virtual machine.
 :::tip
-You must use WSL2. WSL is not capable of running docker and therefore is incompatible. If using this  method, you must ensure you [set up WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
+You must use WSL2. WSL version 1 is not capable of running docker and therefore is incompatible. If using this method, you must ensure you have [set up WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 :::
 
-It is assumed at this point you have installed Visual Studio Code and Debian. From within your WSL2-enabled Debian terminal, run the following annotated bash script, line-by-line.  If you copy the entire script it will perform the required setup of Debian for Home Assitant development.
+It is assumed at this point you have installed Debian from the Microsoft Store and [Visual Studio Code](https://code.visualstudio.com/download). From within your WSL2-enabled Debian terminal, run the following annotated bash script, line-by-line.  If you copy the entire script it will perform the required setup of Debian for Home Assitant development.
 
 ```bash
 sudo bash << EOF
@@ -56,7 +56,7 @@ EOF
 Restart your Debian terminal to activate the new profiles and software configurations. 
 
 :::tip
-If a problem occurs with an automated script, always run it line by line to figure out where the problem lies.  In this case, skip the first line to directly execute each command.  If you need to completely start over, you can uninstall the Debian app and Visual Studio Code, then reboot your computer and try again. 
+If a problem occurs with an automated script, always run it line by line to figure out where the problem lies.  In this case, skip the first line to directly execute each command.  If you need to completely start over, you can uninstall the Debian app, then from the Windows command prompt execute `del -R %HOMEPATH%\AppData\Roaming\Code`. After removing your VSCode settings, launch VS Code, and remove all extensions.  Finally reboot your computer and try again. 
 :::
 
 Now you're ready to run Yarn and Node.  We must set up docker communications and launch Visual Studio Code.  The following commands will need to be run after each reboot to link docker to your WSL instance and launch Visual Studio Code. 
@@ -65,16 +65,20 @@ sudo mkdir /sys/fs/cgroup/systemd
 sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
 code
 ```
-Visual Studio Code will launch.  If the `code` command does not launch Visual Studio Code, execut `/mnt/c/Users/USERNAME/AppData/Local/Programs//Microsoft\ VS\ Code/bin/code` and replace `USERNAME` with your Windows username.
-
-1. Observe "WSL: Debian" in the lower left corner.  If you do not see "WSL", then close folders and Debian, then relaunch Debian and re-run `code`. 
-2. Click File->Open Folder-> type `~/supervisor`
-3. Visual Studio Code will offer to reopen in Dev Container after it has loaded Supervisor. When offered Dev Container in the lower right corner, click it to open dev container.  If you were not presented this option, verify Docker Extension is installed then close Visual Studio Code and reopen with the `code` command above. When working in Dev Container, you will see "Dev Container: Supervisor dev" in the lower left corner of Visual Studio Code. 
-4. Press F1, select Tasks: Run Task, and Update Supervisor Panel 
-5. Within the Dev Container enabled Visual Studio Code, select menu option Terminal->New Terminal, then run the command `sudo update-alternatives --set iptables /usr/sbin/iptables-legacy; dockerd` to start the docker daemon within the Dev Container. 
-6. Press F1, select Tasks: Run Task, and Run Supervisor.
-7. Open Home Assistant Observer at http://localhost:4357/ to monitor the startup process after the Supervisor container is started.
-8. Open Home Assistant at http://localhost:9123/ to begin testing of Home Assistant and the Supervisor.
+Visual Studio Code will launch.  If the `code` command does not launch Visual Studio Code, execute `/mnt/c/Users/USERNAME/AppData/Local/Programs//Microsoft\ VS\ Code/bin/code` and replace `USERNAME` with your Windows username.
+1. Click Extensions -> install "Remote - WSL", and "Remote - Containers"
+2. Close Visual Studio Code and reopen with `code` command from Debian.
+3. Observe "WSL: Debian" in the lower left corner.  If you do not see "WSL", then close folders and Debian, then relaunch Debian and re-run `code`. 
+4. Click File->Open Folder-> type `~/supervisor`
+5. Visual Studio Code will offer to reopen in Dev Container after it has loaded Supervisor. When offered Dev Container in the lower right corner, click to open dev container.  If you were not presented this option, verify extensions are installed then close Visual Studio Code and reopen with the `code` command in Debian. 
+:::note
+When working in Dev Container, you will see "Dev Container: Supervisor dev" in the lower left corner of Visual Studio Code. 
+:::
+7. Press F1, select Tasks: Run Task, and Update Supervisor Panel 
+8. Within the Dev Container enabled Visual Studio Code, select menu option Terminal->New Terminal, then run the command `sudo update-alternatives --set iptables /usr/sbin/iptables-legacy; dockerd` to start the docker daemon within the Dev Container. 
+9. Press F1, select Tasks: Run Task, and Run Supervisor.
+10. Open Home Assistant Observer at http://localhost:4357/ to monitor the startup process after the Supervisor container is started.
+11. Open Home Assistant at http://localhost:9123/ to begin testing of Home Assistant and the Supervisor.
 
 At this point, you can press F5 to begin debugging. Try setting a line break within `supervisor/utils.py` and then visit the Home Assistant add-ons page to verify proper operation.  
 
