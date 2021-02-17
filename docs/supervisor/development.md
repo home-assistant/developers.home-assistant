@@ -34,17 +34,18 @@ It is assumed at this point you have installed Visual Studio Code and Debian. Fr
 
 ```bash
 sudo bash << EOF
-apt update; apt install curl wget git gnupg; #Update and install our dependencies
+set -e #Stop on any error to make it easier to figure out what went wrong
+apt update; apt install -y curl wget git gnupg; #Update and install our dependencies
 curl https://raw.githubusercontent.com/creationix/nvm/master/install.sh | bash; #Install NVM
 source ~/.profile; nvm install node; #reload profile and install node
 sudo apt remove cmdtest yarn  #Remove problematic packages if installed. Debian current Yarn does not work.
-curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -  #Add yarn repo
-echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list #Certify Yarn repo
+curl -sS https://dl.yarnpkg.com/debian/pubkey.gpg | sudo apt-key add -  #Add yarn repo certificate
+echo "deb https://dl.yarnpkg.com/debian/ stable main" | sudo tee /etc/apt/sources.list.d/yarn.list #Add Yarn repo
 sudo apt update; sudo apt install yarn -y; #Install yarn
 curl -fsSL https://get.docker.com |sudo bash  #install docker Community Edition
 sudo update-alternatives --set iptables /usr/sbin/iptables-legacy #Fix IP Tables for Docker
-cd #Switch to home directory
-git clone https://github.com/home-assistant/supervisor ~/supervisor #Clone Supervisor to ~/supervisor
+git clone https://github.com/home-assistant/supervisor /home/$USER/supervisor #Clone Supervisor to ~/supervisor
+chown $USER:$USER /home/$USER/supervisor
 usermod -aG docker $USER
 service docker start
 sleep 5
@@ -52,12 +53,13 @@ service docker status
 EOF
 
 ```
+Restart your Debian terminal to activate the new profiles and software configurations. 
 
 :::tip
 If a problem occurs with an automated script, always run it line by line to figure out where the problem lies.  In this case, skip the first line to directly execute each command.  If you need to completely start over, you can uninstall the Debian app and Visual Studio Code, then reboot your computer and try again. 
 :::
 
-Now you're ready to run Yarn and Node.  We must set up docker communications and launch Visual Studio Code.  The following commands will need to be run after each reboot.
+Now you're ready to run Yarn and Node.  We must set up docker communications and launch Visual Studio Code.  The following commands will need to be run after each reboot to link docker to your WSL instance and launch Visual Studio Code. 
 ```bash
 sudo mkdir /sys/fs/cgroup/systemd
 sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
@@ -65,16 +67,14 @@ code
 ```
 Visual Studio Code will launch.  If the `code` command does not launch Visual Studio Code, execut `/mnt/c/Users/USERNAME/AppData/Local/Programs//Microsoft\ VS\ Code/bin/code` and replace `USERNAME` with your Windows username.
 
-1. Observe "WSL: Debian" in the lower left corner.  If you do not see "WSL", then close folders and re-run `code`. 
-2. Click on Extensions
-3. Install Docker Extension
-3. Click File->Open Folder-> type `~/supervisor`
-4. Visual Studio Code will offer to reopen in Dev Container after it has loaded Supervisor. When offered Dev Container in the lower right corner, click it to open dev container.  If you were not presented this option, verify Docker Extension is installed then close Visual Studio Code and reopen with the `code` command above. When working in Dev Container, you will see "Dev Container: Supervisor dev" in the lower left corner of Visual Studio Code. 
-5. Press F1, select Tasks: Run Task, and Update Supervisor Panel 
-6. Within the Dev Container enabled Visual Studio Code, select menu option Terminal->New Terminal, then run the command `sudo update-alternatives --set iptables /usr/sbin/iptables-legacy; dockerd` to start the docker daemon within the Dev Container. 
-7. Press F1, select Tasks: Run Task, and Run Supervisor.
-8. Open Home Assistant Observer at http://localhost:4357/ to monitor the startup process after the Supervisor container is started.
-9. Open Home Assistant at http://localhost:9123/ to begin testing of Home Assistant and the Supervisor.
+1. Observe "WSL: Debian" in the lower left corner.  If you do not see "WSL", then close folders and Debian, then relaunch Debian and re-run `code`. 
+2. Click File->Open Folder-> type `~/supervisor`
+3. Visual Studio Code will offer to reopen in Dev Container after it has loaded Supervisor. When offered Dev Container in the lower right corner, click it to open dev container.  If you were not presented this option, verify Docker Extension is installed then close Visual Studio Code and reopen with the `code` command above. When working in Dev Container, you will see "Dev Container: Supervisor dev" in the lower left corner of Visual Studio Code. 
+4. Press F1, select Tasks: Run Task, and Update Supervisor Panel 
+5. Within the Dev Container enabled Visual Studio Code, select menu option Terminal->New Terminal, then run the command `sudo update-alternatives --set iptables /usr/sbin/iptables-legacy; dockerd` to start the docker daemon within the Dev Container. 
+6. Press F1, select Tasks: Run Task, and Run Supervisor.
+7. Open Home Assistant Observer at http://localhost:4357/ to monitor the startup process after the Supervisor container is started.
+8. Open Home Assistant at http://localhost:9123/ to begin testing of Home Assistant and the Supervisor.
 
 At this point, you can press F5 to begin debugging. Try setting a line break within `supervisor/utils.py` and then visit the Home Assistant add-ons page to verify proper operation.  
 
