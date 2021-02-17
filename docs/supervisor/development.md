@@ -77,10 +77,10 @@ When working in Dev Container, you will see "Dev Container: Supervisor dev" in t
 7. Press F1, select Tasks: Run Task, and Update Supervisor Panel 
 8. Within the Dev Container enabled Visual Studio Code, select menu option Terminal->New Terminal, then run the command `sudo update-alternatives --set iptables /usr/sbin/iptables-legacy; dockerd` to start the docker daemon within the Dev Container. 
 9. Press F1, select Tasks: Run Task, and Run Supervisor.
-10. Open Home Assistant Observer at http://localhost:4357/ to monitor the startup process after the Supervisor container is started.
-11. Open Home Assistant at http://localhost:9123/ to begin testing of Home Assistant and the Supervisor.
+10. Open Home Assistant Observer at [http://localhost:4357/](http://localhost:4357/) to monitor the startup process after the Supervisor container is started.
+11. Open Home Assistant at [http://localhost:9123/](http://localhost:9123/) to begin testing of Home Assistant and the Supervisor.
 
-At this point, you can press F5 to begin debugging. Try setting a line break within `supervisor/utils.py` and then visit the Home Assistant add-ons page to verify proper operation.  
+At this point, you can press F5 to begin debugging. Try setting a line break within `supervisor/addons/utils.py` and then visit Home Assistant Supervisor Addon Store pages to verify proper operation.  
 
 :::info
 If you chose to place your source outside of WSL within Windows, be aware that you cannot open it with the File Chooser without sacrificing your dev container.  In order to access a windows folder, you must type a folder name using this format `/mnt/<drive>/path-to/project`. eg. `C:\Users\example\project` becomes `/mnt/c/Users/example/project`.
