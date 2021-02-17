@@ -72,9 +72,9 @@ Visual Studio Code will launch.  If the `code` command does not launch Visual St
 4. Visual Studio Code will offer to reopen in Dev Container after it has loaded Supervisor. When offered Dev Container in the lower right corner, click it to open dev container.  If you were not presented this option, verify Docker Extension is installed then close Visual Studio Code and reopen with the `code` command above. When working in Dev Container, you will see "Dev Container: Supervisor dev" in the lower left corner of Visual Studio Code. 
 5. Press F1, select Tasks: Run Task, and Update Supervisor Panel 
 6. Within the Dev Container enabled Visual Studio Code, select menu option Terminal->New Terminal, then run the command `sudo update-alternatives --set iptables /usr/sbin/iptables-legacy; dockerd` to start the docker daemon within the Dev Container. 
-7. Press F1, select Tasks: Run Task, and Run Supervisor
-8. Observe Home Assistant Observer at http://localhost:4357/
-9. Observe Home Assistnat at http://localhost:9123/
+7. Press F1, select Tasks: Run Task, and Run Supervisor.
+8. Open Home Assistant Observer at http://localhost:4357/ to monitor the startup process after the Supervisor container is started.
+9. Open Home Assistant at http://localhost:9123/ to begin testing of Home Assistant and the Supervisor.
 
 At this point, you can press F5 to begin debugging. Try setting a line break within `supervisor/utils.py` and then visit the Home Assistant add-ons page to verify proper operation.  
 
