@@ -53,17 +53,16 @@ sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
 code
 ```
 Visual Studio Code will launch.  
-1. Observe "WSL: Debian" in the lower left corner.  
-:::tip
-If you do not see "WSL", then close folders and re-run `code`.  
-:::
+1. Observe "WSL: Debian" in the lower left corner.  If you do not see "WSL", then close folders and re-run `code`. 
 2. Click on Extensions
 3. Install Docker Extension
 3. Click File->Open Folder-> type `~/supervisor`
-:::Tip
+
+:::tip
 At any time, Visual Studio Code may offer to reopen in Dev Container. When offered Dev Container in the lower right corner, click it to open dev container.  If dev container is not offered before Run Supervisor, close Visual Studio Code and reopen. 
 When working in Dev Container, you will see "Dev Container: Supervisor dev" in the lower left corner of Visual Studio Code. 
 :::
+
 4. Press F1, select Tasks: Run Task, and Update Supervisor Panel 
 5. Open a new terminal within the Dev Container enabled Visual Studio Code and type `sudo update-alternatives --set iptables /usr/sbin/iptables-legacy;dockerd`
 6. Press F1, select Tasks: Run Task, and Run Supervisor
