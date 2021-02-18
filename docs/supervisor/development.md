@@ -64,6 +64,7 @@ Now you're ready to run Yarn and Node.  We must set up docker communications and
 ```bash
 sudo mkdir /sys/fs/cgroup/systemd
 sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
+sudo service docker start
 code
 ```
 Visual Studio Code will launch.  If the `code` command does not launch Visual Studio Code, relaunch the Debian terminal, or reboot your computer.
