@@ -41,7 +41,7 @@ Although not currently available, we could consider offering an option to users 
 ## Defining devices
 
 :::tip
-Entity device info is only read if the entity is loaded via a [config entry](config_entries_index.md).
+Entity device info is only read if the entity is loaded via a [config entry](config_entries_index.md) and the `unique_id` property is defined.
 :::
 
 Each entity is able to define a device via the `device_info` property. This property is read when an entity is added to Home Assistant via a config entry. A device will be matched up with an existing device via supplied identifiers or connections, like serial numbers or MAC addresses. If identifiers and connections are provided, the device registry will first try to match by identifiers. Each identifier and each connection is matched individually (e.g. only one connection needs to match to be considered the same device).
