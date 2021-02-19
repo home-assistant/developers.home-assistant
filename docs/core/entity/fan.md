@@ -113,7 +113,7 @@ named_speed = percentage_to_ordered_list_item(ORDERED_NAMED_FAN_SPEEDS, 23)
         return ordered_list_item_to_percentage(ORDERED_NAMED_FAN_SPEEDS, current_speed)
 
     @property
-    def speed_count(self) -> Optional[int]:
+    def speed_count(self) -> int:
         """Return the number of speeds the fan supports."""
         return len(ORDERED_NAMED_FAN_SPEEDS)
 ```
@@ -137,7 +137,7 @@ value_in_range = math.ceil(percentage_to_ranged_value(SPEED_RANGE, 50))
         return ranged_value_to_percentage(SPEED_RANGE, current_speed)
 
     @property
-    def speed_count(self) -> Optional[int]:
+    def speed_count(self) -> int:
         """Return the number of speeds the fan supports."""
         return int_states_in_range(SPEED_RANGE)
 ```
