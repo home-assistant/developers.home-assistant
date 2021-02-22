@@ -77,6 +77,8 @@ set_speed:
       description: Speed setting
       # Whether or not field is required
       required: true
+      # Advanced options are only shown when the advanced mode is enabled for the user
+      advanced: true
       # Example value that can be passed for this field
       example: "low"
       # Selector (https://www.home-assistant.io/docs/blueprint/selectors/) to control the input UI for this field
