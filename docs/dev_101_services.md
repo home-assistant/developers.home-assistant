@@ -65,11 +65,8 @@ set_speed:
   name: Set speed
   # Description of the service
   description: Sets fan speed.
-  # If the service accepts entity IDs, target allows the user to specify entities by entity, device, or area. If `target` is specified, `entity_id` should not be defined in the `fields` map.
+  # If the service accepts entity IDs, target allows the user to specify entities by entity, device, or area. If `target` is specified, `entity_id` should not be defined in the `fields` map. By default it shows only targets matching entities from the same domain as the service, but if further customization is required, target supports the entity, device, and area selectors (https://www.home-assistant.io/docs/blueprint/selectors/). Entity selector parameters will automatically be applied to device and area, and device selector parameters will automatically be applied to area. 
   target:
-    # Target supports the entity, device, and area selectors (https://www.home-assistant.io/docs/blueprint/selectors/). Entity selector parameters will automatically be applied to device and area, and device selector parameters will automatically be applied to area. In this example, the lists will be filtered by: entities in the fan domain, devices that are linked to entities in the fan domain, and areas that have entities in the fan domain.
-    entity:
-      domain: fan
   # Different fields that your service accepts
   fields:
     # Key of the field
