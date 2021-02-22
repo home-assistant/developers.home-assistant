@@ -62,7 +62,7 @@ Services are published under the domain name of your integration, so in `service
 # Service ID
 set_speed:
   # Service name as shown in UI
-  name: Set fan speed.
+  name: Set speed
   # Description of the service
   description: Sets fan speed.
   # If the service accepts entity IDs, target allows the user to specify entities by entity, device, or area. If `target` is specified, `entity_id` should not be defined in the `fields` map.
@@ -75,7 +75,7 @@ set_speed:
     # Key of the field
     speed:
       # Field name as shown in UI
-      name: Speed setting
+      name: Speed
       # Description of the field
       description: Speed setting
       # Whether or not field is required
