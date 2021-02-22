@@ -81,6 +81,8 @@ set_speed:
       advanced: true
       # Example value that can be passed for this field
       example: "low"
+      # The default value
+      default: "high"
       # Selector (https://www.home-assistant.io/docs/blueprint/selectors/) to control the input UI for this field
       selector:
         select:
