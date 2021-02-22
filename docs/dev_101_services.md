@@ -84,7 +84,12 @@ set_speed:
       example: "low"
       # Selector (https://www.home-assistant.io/docs/blueprint/selectors/) to control the input UI for this field
       selector:
-        text:
+        select:
+          options:
+            - "off"
+            - "low"
+            - "medium"
+            - "high"
 
 ```
 
