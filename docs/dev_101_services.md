@@ -59,20 +59,33 @@ Services are published under the domain name of your integration, so in `service
 ```yaml
 # Example services.yaml entry
 
+# Service ID
 set_speed:
+  # Service name as shown in UI
+  name: Set fan speed.
   # Description of the service
   description: Sets fan speed.
+  # If the service accepts entity IDs, target allows the user to specify entities by entity, device, or area.
+  target:
+    # Target supports the entity, device, and area selectors (https://www.home-assistant.io/docs/blueprint/selectors/). Entity selector parameters will automatically be applied to device and area, and device selector parameters will automatically be applied to area. In this example, the lists will be filtered by: entities in the fan domain, devices that are linked to entities in the fan domain, and areas that have entities in the fan domain.
+    entity:
+      domain: fan
   # Different fields that your service accepts
   fields:
     # Key of the field
-    entity_id:
-      # Description of the field
-      description: Name(s) of the entities to set
-      # Example value that can be passed for this field
-      example: "fan.living_room"
     speed:
+      # Field name as shown in UI
+      name: Speed setting
+      # Description of the field
       description: Speed setting
+      # Whether or not field is required
+      required: true
+      # Example value that can be passed for this field
       example: "low"
+      # Selector (https://www.home-assistant.io/docs/blueprint/selectors/) to control the input UI for this field
+      selector:
+        text:
+
 ```
 
 ## Entity Services
