@@ -165,6 +165,7 @@ The configuration for an add-on is stored in `config.json`.
 | stage | string | no | Default `stable`. Flag add-on with follow attribute: `stable`, `experimental` or `deprecated`
 | init | bool | no | Default `true`. Disable the Docker default system init.  Use this if the image has its own init system.
 | watchdog | string | no | An URL for monitor an application this add-on. Like `http://[HOST]:[PORT:2839]/dashboard`, the port needs the internal port, which will be replaced with the effective port. It is also possible to bind the protocol part to a configuration options with: `[PROTO:option_name]://[HOST]:[PORT:2839]/dashboard` and it's looked up if it is `true` and it's going to `https`. For simple TCP port monitoring you can use `tcp://[HOST]:[PORT:80]`. It work for add-ons on host or internal network.
+| realtime | bool | no | Give add-on access to host schedule including SYS_NICE for change execution time/priority.
 
 ### Options / Schema
 
