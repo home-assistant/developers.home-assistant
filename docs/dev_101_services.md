@@ -75,7 +75,7 @@ set_speed:
     # Key of the field
     speed:
       # Field name as shown in UI
-      name: Speed setting
+      name: Speed
       # Description of the field
       description: Speed setting
       # Whether or not field is required
