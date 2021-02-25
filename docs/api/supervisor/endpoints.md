@@ -233,6 +233,9 @@ Get details about a add-on
 
 <ApiEndpoint path="/addons/<addon>/install" method="post">
 Install a add-on
+
+**Deprecated!** Use [`/store/addons/<addon>/install`](#store) instead.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/logo" method="get">
@@ -351,6 +354,9 @@ Uninstall a add-on
 
 <ApiEndpoint path="/addons/<addon>/update" method="post">
 Update a add-on
+
+**Deprecated!** Use [`/store/addons/<addon>/update`](#store) instead.
+
 </ApiEndpoint>
 
 ### Audio
