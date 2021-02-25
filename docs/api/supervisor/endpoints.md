@@ -1984,6 +1984,150 @@ Does a partial restore of the snapshot with the given slug.
 
 </ApiEndpoint>
 
+
+### Store
+
+<ApiEndpoint path="/store" method="get">
+
+Returns add-on store information.
+
+**Example response:**
+
+```json
+{ "addons":
+  [
+    {
+      "name": "Awesome add-on",
+      "slug": "7kshd7_awesome",
+      "description": "Awesome description",
+      "repository": "https://example.com/addons",
+      "version": "1.0.0",
+      "installed": "1.0.0",
+      "icon": false,
+      "logo": true,
+      "state": "started"
+    }
+  ],
+  "repositories": [
+    {
+      "slug": "awesom_repository",
+      "name": "Awesome Repository",
+      "source": "https://example.com/addons",
+      "url": "https://example.com/addons",
+      "maintainer": "Awesome Maintainer"
+    }
+  ]
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/store/addons" method="get">
+
+Returns a list of store add-ons
+
+**Example response:**
+
+```json
+[
+  {
+    "name": "Awesome add-on",
+    "slug": "7kshd7_awesome",
+    "description": "Awesome description",
+    "repository": "https://example.com/addons",
+    "version": "1.0.0",
+    "installed": "1.0.0",
+    "icon": false,
+    "logo": true,
+    "state": "started"
+  }
+]
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/store/addons/<addon>" method="get">
+
+Returns information about a store add-on
+
+**Example response:**
+
+```json
+{
+  "name": "Awesome add-on",
+  "slug": "7kshd7_awesome",
+  "description": "Awesome description",
+  "repository": "https://example.com/addons",
+  "version": "1.0.0",
+  "installed": "1.0.0",
+  "icon": false,
+  "logo": true,
+  "state": "started"
+}
+```
+
+</ApiEndpoint>
+
+
+<ApiEndpoint path="/store/addons/<addon>/install" method="post">
+
+Install an add-on from the store.
+
+</ApiEndpoint>
+
+
+<ApiEndpoint path="/store/addons/<addon>/update" method="post">
+
+Update an add-on from the store.
+
+</ApiEndpoint>
+
+
+<ApiEndpoint path="/store/reload" method="post">
+
+Reloads the information stored about add-ons.
+
+</ApiEndpoint>
+
+
+<ApiEndpoint path="/store/repositories" method="get">
+
+Returns a list of store repositories
+
+**Example response:**
+
+```json
+[
+  {
+    "slug": "awesom_repository",
+    "name": "Awesome Repository",
+    "source": "https://example.com/addons",
+    "url": "https://example.com/addons",
+    "maintainer": "Awesome Maintainer"
+  }
+]
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/store/repositories/<repository>" method="get">
+
+Returns information about a store repository
+
+**Example response:**
+
+```json
+{
+  "slug": "awesom_repository",
+  "name": "Awesome Repository",
+  "source": "https://example.com/addons",
+  "url": "https://example.com/addons",
+  "maintainer": "Awesome Maintainer"
+}
+```
+
+</ApiEndpoint>
+
 ### Supervisor
 
 <ApiEndpoint path="/supervisor/info" method="get">
