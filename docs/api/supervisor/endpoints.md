@@ -1713,6 +1713,14 @@ Dismiss a issue
 
 </ApiEndpoint>
 
+</ApiEndpoint>
+
+<ApiEndpoint path="/resolution/healthcheck" method="post">
+
+Execute a healthcheck and autofix & notifcation.
+
+</ApiEndpoint>
+
 ### Service
 
 <ApiEndpoint path="/services" method="get">
