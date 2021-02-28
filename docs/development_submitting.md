@@ -42,4 +42,4 @@ Submit your improvements, fixes, and new features to Home Assistant one at a tim
     - Type a title and complete the provided template for your pull request.
     - Click **Create pull request**.
 
-7. Check for comments and suggestions on your pull request and keep an eye on the [CI output](https://travis-ci.org/home-assistant/home-assistant/).
+7. Check for comments and suggestions on your pull request and keep an eye on the [CI output](https://github.com/home-assistant/core/actions).
