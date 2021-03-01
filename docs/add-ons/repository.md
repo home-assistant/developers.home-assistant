@@ -12,7 +12,7 @@ A user can add a repository by going to the Supervisor panel in Home Assistant, 
 
 ## Repository configuration
 
-Each repository is required to contain `repository.json` at the root in the git repository.
+Each repository is required to contain `repository.(json/yaml/yml)` at the root in the git repository.
 
 ```json
 {
@@ -20,6 +20,12 @@ Each repository is required to contain `repository.json` at the root in the git 
   "url": "http://www.example/addons",
   "maintainer": "HomeAssistant Team <info@home-assistant.io>"
 }
+```
+
+```yaml
+name: Name of repository
+url: http://www.example/addons
+maintainer: HomeAssistant Team <info@home-assistant.io>
 ```
 
 | Key | Required | Description |
