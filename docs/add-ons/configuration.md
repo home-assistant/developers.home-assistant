@@ -7,9 +7,9 @@ Each add-on is stored in a folder. The file structure looks like this:
 ```text
 addon_name/
   apparmor.txt
-  build.json
+  build.(json/yaml/yml)
   CHANGELOG.md
-  config.json
+  config.(json/yaml/yml)
   DOCS.md
   Dockerfile
   icon.png
@@ -71,7 +71,7 @@ If you don't use local build on device or our build script, make sure that the D
 LABEL io.hass.version="VERSION" io.hass.type="addon" io.hass.arch="armhf|aarch64|i386|amd64"
 ```
 
-It is possible to use own base image with `build.json` or if you do not need support for automatic multi-arch building you can also use a simple docker `FROM`.
+It is possible to use own base image with `build.(json/yaml/yml)` or if you do not need support for automatic multi-arch building you can also use a simple docker `FROM`.
 
 ### Build Args
 
@@ -80,12 +80,12 @@ We support the following build arguments by default:
 | ARG | Description |
 |-----|-------------|
 | BUILD_FROM | Hold image for dynamic builds or buildings over our systems.
-| BUILD_VERSION | Add-on version (read from `config.json`).
+| BUILD_VERSION | Add-on version (read from `config.(json/yaml/yml)`).
 | BUILD_ARCH | Hold current build arch inside.
 
 ## Add-on config
 
-The configuration for an add-on is stored in `config.json`.
+The configuration for an add-on is stored in `config.(json/yaml/yml)`.
 
 ```json
 {
@@ -101,10 +101,26 @@ The configuration for an add-on is stored in `config.json`.
     "123/tcp": 123
   },
   "map": ["config:rw", "ssl"],
-  "options": {},
-  "schema": {},
   "image": "repo/{arch}-my-custom-addon"
 }
+```
+
+```yaml
+name: xy
+version: '1.2'
+slug: folder
+description: long description
+arch:
+  - amd64
+url: website with more information about add-on (e.g., a forum thread for support)
+startup: application
+boot: auto
+ports:
+  123/tcp: 123
+map:
+  - config:rw
+  - ssl
+image: repo/{arch}-my-custom-addon
 ```
 
 | Key | Type | Required | Description |
@@ -217,7 +233,7 @@ We support:
 
 ## Add-on extended build
 
-Additional build options for an add-on is stored in `build.json`. This file will be read from our build systems.
+Additional build options for an add-on is stored in `build.(json/yaml/yml)`. This file will be read from our build systems.
 You need this only, if you not use the default images or need additional things.
 
 ```json
@@ -230,6 +246,14 @@ You need this only, if you not use the default images or need additional things.
     "my_build_arg": "xy"
   }
 }
+```
+
+```yaml
+build_from:
+  armhf: mycustom/base-image:latest
+squash: false
+args:
+  my_build_arg: xy
 ```
 
 | Key | Required | Description |
