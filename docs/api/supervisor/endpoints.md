@@ -145,6 +145,7 @@ Get details about a add-on
 | startup             | string             | The stage when the add-on is started (initialize, system, services, application, once) |
 | state               | string or null     | The state of the add-on (started, stopped)                                             |
 | stdin               | boolean            | `true` if the add-on accepts stdin commands                                            |
+| translations        | dictionary         | A dictionary containing content of translation files for the add-on |
 | udev                | boolean            | `true` if udev access is granted is enabled                                            |
 | update_available    | boolean            | `true` if an update is available                                                       |
 | url                 | string or null     | URL to more information about the add-on                                               |
@@ -217,6 +218,13 @@ Get details about a add-on
   "startup": "application",
   "state": "started",
   "stdin": false,
+  "translations": {
+    "en": {
+      "configuration": {
+        "lorem": "ipsum"
+      }
+    }
+  },
   "udev": false,
   "update_available": false,
   "url": null,
