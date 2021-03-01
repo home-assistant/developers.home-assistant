@@ -6,6 +6,8 @@ Each add-on is stored in a folder. The file structure looks like this:
 
 ```text
 addon_name/
+  translations/
+    en.(json/yaml/yml)
   apparmor.txt
   build.(json/yaml/yml)
   CHANGELOG.md
@@ -265,3 +267,18 @@ args:
 We provide a set of [base images][docker-base] which should cover a lot of needs. If you don't want use the Alpine based version or need a specific image tag, feel free to pin this requirements for you build with `build_from` option.
 
 [docker-base]: https://github.com/home-assistant/docker-base
+
+## Add-on translations
+
+Add-ons can provide translation files for configuration options that are used in the UI.
+
+Example path to translation file: `addon/translations/{language_code}.(json/yaml/yml)`
+
+For `{language_code}` use a valid language code, like `en`, for a [full list have a look here](https://github.com/home-assistant/frontend/blob/dev/src/translations/translationMetadata.json), `en.yaml` would be a valid filename.
+
+```yaml
+configuration:
+  ssl:
+    name: SSL
+    description: Enable usage of SSL on the webserver inside the add-on
+```
