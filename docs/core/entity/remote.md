@@ -11,6 +11,8 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
+| current_activity | str | None | Return the current active activity |
+| activity_list | list | None | Return the list of available activites |
 
 ## Supported Features
 
@@ -18,6 +20,7 @@ Properties should always only return information from memory and not do I/O (lik
 | -------- | -----------
 | `SUPPORT_LEARN_COMMAND`  | Entity allows learning commands from devices.
 | `SUPPORT_DELETE_COMMAND` | Entity allows deleting commands from devices.
+| `SUPPORT_ACTIVITY` | Entity supports activities.
 
 ## Methods
 
