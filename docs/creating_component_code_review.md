@@ -49,7 +49,12 @@ Not all existing code follows the requirements in this checklist. This cannot be
     status = bridge.status()
     ```
 
-    [Tutorial on publishing your own PyPI package](https://jeffknupp.com/blog/2013/08/16/open-sourcing-a-python-project-the-right-way/)
+    [Tutorial on publishing your own PyPI package](https://towardsdatascience.com/how-to-open-source-your-first-python-package-e717444e1da0)
+    
+    Other noteworthy resources for publishing python packages:  
+    [Cookiecutter Project](https://cookiecutter.readthedocs.io/)  
+    [flit](https://flit.readthedocs.io/)  
+    [Poetry](https://python-poetry.org/)  
 
 ### 5. Make your pull request as small as possible
 
