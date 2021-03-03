@@ -11,6 +11,12 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
+| current_activity | str | None | Return the current active activity |
+| activity_list | list | None | Return the list of available activites |
+
+### Activity
+
+An activity is a predefined activity or macro that puts the remote in a specific state. For example, a "Watch TV" activity may turn on multiple devices and change the channel to a specific channel.
 
 ## Supported Features
 
@@ -18,8 +24,45 @@ Properties should always only return information from memory and not do I/O (lik
 | -------- | -----------
 | `SUPPORT_LEARN_COMMAND`  | Entity allows learning commands from devices.
 | `SUPPORT_DELETE_COMMAND` | Entity allows deleting commands from devices.
+| `SUPPORT_ACTIVITY` | Entity supports activities.
 
 ## Methods
+
+### Turn On Command
+
+```python
+class MyRemote(RemoteEntity):
+
+    def turn_on(self, activity: str = None, **kwargs):
+         """Turn the remote on."""
+
+    async def async_turn_on(self, activity: str = None, **kwargs):
+         """Turn the remote on."""
+```
+
+### Turn Off Command
+
+```python
+class MyRemote(RemoteEntity):
+
+    def turn_off(self, activity: str = None, **kwargs):
+         """Turn the remote off."""
+
+    async def async_turn_off(self, activity: str = None, **kwargs):
+         """Turn the remote off."""
+```
+
+### Toggle Command
+
+```python
+class MyRemote(RemoteEntity):
+
+    def toggle(self, activity: str = None, **kwargs):
+         """Toggle the remote."""
+
+    async def async_toggle(self, activity: str = None, **kwargs):
+         """Toggle the remote."""
+```
 
 ### Send Command
 
