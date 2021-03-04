@@ -117,7 +117,10 @@ While `script/develop` is running, the Supervisor panel will be rebuilt whenever
 
 To develop for the `hassio` integration and the Supervisor panel, we're going to need API access to the supervisor. This API is protected by a token that we can extract using a special add-on. This can be done on a running system or with the [devcontainer](#local-testing).
 
-1. Add our developer Add-on repository: <https://github.com/home-assistant/hassio-addons-development>
+1. Add our developer Add-on repository:
+
+   [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fhome-assistant%2Fhassio-addons-development)
+
 2. Install the Add-on "Remote API proxy"
 3. Click Start
 4. The token will be printed in the logs
