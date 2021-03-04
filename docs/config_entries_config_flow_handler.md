@@ -85,7 +85,7 @@ await self._async_handle_discovery_without_unique_id()
 
 ### Unique ID Requirements
 
-A Unique ID is used to match a config entry to the underlying device or api. The Unique ID must be stable and should not be able ot be changed by the user. The Unique ID can be used to update the config entry data when device access details change. For example, for devices that communicate over the local network, if the IP address changes due a new DHCP assigment, the integration can use the Unique ID to update the host using the following code snippet:
+A Unique ID is used to match a config entry to the underlying device or api. The Unique ID must be stable and should not be able to be changed by the user. The Unique ID can be used to update the config entry data when device access details change. For example, for devices that communicate over the local network, if the IP address changes due a new DHCP assignment, the integration can use the Unique ID to update the host using the following code snippet:
 
 ```
     await self.async_set_unique_id(serial_number)
