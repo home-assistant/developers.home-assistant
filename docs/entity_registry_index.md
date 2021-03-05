@@ -30,7 +30,7 @@ If a device has a single unique id but provides multiple entities, combine the u
 
 - Config Entry ID
 
-#### Unacceptable sources for a unique ID:
+#### Unacceptable sources for a unique ID
 
 - IP Address
 - Device Name
