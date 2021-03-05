@@ -103,7 +103,7 @@ A Unique ID is used to match a config entry to the underlying device or api. The
 
 - Hostname: If a subset of the hostname contains one of the acceptable sources, this portion can be used
 
-#### Sometimes acceptable sources for a unique ID for cloud services:
+#### Sometimes acceptable sources for a unique ID for cloud services
 
 - Email Address: Must be normalized to lowercase
 - Username: Must be normalized to lowercase if usernames are case-insensitive.
