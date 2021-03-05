@@ -109,7 +109,7 @@ A Unique ID is used to match a config entry to the underlying device or api. The
 - Username: Must be normalized to lowercase if usernames are case-insensitive.
 - Account ID: Must not have collisions
 
-#### Unacceptable sources for a unique ID:
+#### Unacceptable sources for a unique ID
 
 - IP Address
 - Device Name
