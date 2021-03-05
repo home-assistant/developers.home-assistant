@@ -115,8 +115,6 @@ A Unique ID is used to match a config entry to the underlying device or API. The
 - Device Name
 - Hostname
 - URL
-- Email addresses
-- Usernames
 
 ### Unignoring
 
