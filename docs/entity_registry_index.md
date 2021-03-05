@@ -29,7 +29,6 @@ If a device has a single unique id but provides multiple entities, combine the u
 #### Unique ID of last resort
 
 For entities that are setup by a config entry, the `Config Entry ID` can be used as a last resort if no other Unique ID is available.
-- Config Entry ID
 
 #### Unacceptable sources for a unique ID
 
