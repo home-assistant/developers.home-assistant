@@ -9,14 +9,32 @@ Being registered has the advantage that the same entity will always get the same
 
 A user is also able to override the name of an entity in the entity registry. When set, the name of the entity registry is used in favor of the name the device might give itself.
 
+## Unique ID
+
+It is important that it is not possible for the user to change the unique ID, because the system would lose all its settings related to the unique ID.
+
+An entity is looked up in the registry based on a combination of the platform type (e.g., `light`), and the integration name (domain) (e.g. hue) and the unique ID of the entity. Entities should not include the `domain` (e.g., `your_integration`) and platform type (e.g., `light`) in their Unique ID as the system already accounts for these identifiers.
+
+If a device has a single unique id but provides multiple entities, combine the unique id with unique identifiers for the entities. For example, if a device measures both temperature and humidity, you can uniquely identify the entities using `{unique_id}-{sensor_type}`.
+
 ## Unique ID requirements
 
-An entity is looked up in the registry based on a combination of the platform type (e.g., `light`), and the integration name (domain) (e.g. hue) and the unique ID of the entity. It is therefore very important that the unique ID is unique! It is also important that it is not possible for the user to change the unique ID, because that means it will lose all its settings related to it.
-
-Good sources for a unique ID:
+### Example acceptable sources for a unique ID
 
 - Serial number of a device
-- MAC address of a device
-- latitude/longitude
+- MAC address: formatted using `homeassistant.helpers.device_registry.format_mac`; Only obtain the MAC address from the device API or a discovery handler. Tools that rely on reading the arp cache or local network access such as `getmac` will not function in all supported network environments and are not acceptable.
+- Latitude and Longitude or other unique Geo Location
+- Unique identifier that is physically printed on the device or burned into an EEPROM
 
-If a device has a single serial but provides multiple entities, combine the serial with unique identifiers for the entities. For example, if a device measures both temperature and humidity, you can uniquely identify the entities using `{serial}-{sensor_type}`.
+### Unique ID of last resort
+
+For entities that are setup by a config entry, the `Config Entry ID` can be used as a last resort if no other Unique ID is available.
+
+### Unacceptable sources for a unique ID
+
+- IP Address
+- Device Name
+- Hostname
+- URL
+- Email addresses
+- Usernames
