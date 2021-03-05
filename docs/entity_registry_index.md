@@ -26,7 +26,7 @@ If a device has a single unique id but provides multiple entities, combine the u
 - Latitude and Longitude or other unique Geo Location
 - Unique identifier that is physically printed on the device or burned into an EEPROM
 
-#### Unique ID of last resort
+### Unique ID of last resort
 
 For entities that are setup by a config entry, the `Config Entry ID` can be used as a last resort if no other Unique ID is available.
 
