@@ -34,3 +34,7 @@ For entities that are setup by a config entry, the `Config Entry ID` can be used
 
 - IP Address
 - Device Name
+- Hostname
+- URL
+- Email addresses
+- Usernames
