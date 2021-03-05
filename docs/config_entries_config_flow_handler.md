@@ -83,6 +83,37 @@ if device_unique_id:
 await self._async_handle_discovery_without_unique_id()
 ```
 
+### Unique ID Requirements
+
+A Unique ID is used to match a config entry to the underlying device or api. The Unique ID must be stable and should not be able to be changed by the user. The Unique ID can be used to update the config entry data when device access details change. For example, for devices that communicate over the local network, if the IP address changes due a new DHCP assignment, the integration can use the Unique ID to update the host using the following code snippet:
+
+```
+    await self.async_set_unique_id(serial_number)
+    self._abort_if_unique_id_configured({CONF_HOST: host, CONF_PORT: port})
+```
+
+#### Example acceptable sources for a unique ID:
+
+- Serial number of a device
+- MAC address: formatted using `homeassistant.helpers.device_registry.format_mac`; Only obtain the MAC address from the device API or a discovery handler. Tools that rely on reading the arp cache or local network access such as `getmac` will not function in all supported network environments and are not acceptable.
+- Latitude and Longitude or other unique Geo Location
+- Unique identifier that is physically printed on the device or burned into an EEPROM
+
+#### Sometimes acceptable sources for a unique ID for local devices:
+
+- Hostname: If a subset of the hostname contains one of the acceptable sources, this portion can be used
+
+#### Sometimes acceptable sources for a unique ID for cloud services:
+
+- Email Address: Must be normalized to lowercase
+- Username: Must be normalized to lowercase if usernames are case-insensitive.
+- Account ID: Must not have collisions
+
+#### Unacceptable sources for a unique ID:
+
+- IP Address
+- Device Name
+
 ### Unignoring
 
 Your configuration flow can add support to re-discover the previously ignored entry by implementing the unignore step in the config flow.
