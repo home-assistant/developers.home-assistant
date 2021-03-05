@@ -30,7 +30,7 @@ If a device has a single unique id but provides multiple entities, combine the u
 
 For entities that are setup by a config entry, the `Config Entry ID` can be used as a last resort if no other Unique ID is available.
 
-#### Unacceptable sources for a unique ID
+### Unacceptable sources for a unique ID
 
 - IP Address
 - Device Name
