@@ -3,6 +3,9 @@ title: Integration Configuration
 sidebar_label: Configuration
 ---
 
+import Acceptable from '../src/_includes/unique_ids.md'
+import Unacceptable from '../src/_includes/unique_ids.md'
+
 Integrations can be set up via the user interface by adding support for a config flow to create a config entry. Components that want to support config entries will need to define a Config Flow Handler. This handler will manage the creation of entries from user input, discovery or other sources (like Home Assistant OS).
 
 Config Flow Handlers control the data that is stored in a config entry. This means that there is no need to validate that the config is correct when Home Assistant starts up. It will also prevent breaking changes, because we will be able to migrate configuration entries to new formats if the version changes.
@@ -94,10 +97,7 @@ A Unique ID is used to match a config entry to the underlying device or api. The
 
 #### Example acceptable sources for a unique ID:
 
-- Serial number of a device
-- MAC address: formatted using `homeassistant.helpers.device_registry.format_mac`; Only obtain the MAC address from the device API or a discovery handler. Tools that rely on reading the arp cache or local network access such as `getmac` will not function in all supported network environments and are not acceptable.
-- Latitude and Longitude or other unique Geo Location
-- Unique identifier that is physically printed on the device or burned into an EEPROM
+<Acceptable />
 
 #### Sometimes acceptable sources for a unique ID for local devices:
 
@@ -111,8 +111,7 @@ A Unique ID is used to match a config entry to the underlying device or api. The
 
 #### Unacceptable sources for a unique ID:
 
-- IP Address
-- Device Name
+<Unacceptable />
 
 ### Unignoring
 

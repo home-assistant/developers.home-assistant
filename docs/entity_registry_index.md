@@ -3,6 +3,9 @@ title: Entity Registry
 sidebar_label: Introduction
 ---
 
+import Acceptable from '../src/_includes/unique_ids.md'
+import Unacceptable from '../src/_includes/unique_ids.md'
+
 The entity registry is a registry where Home Assistant keeps track of entities. Any entity that is added to Home Assistant which specifies the [`unique_id` attribute](/core/entity.md#generic-properties) will be registered in the registry.
 
 Being registered has the advantage that the same entity will always get the same entity ID. It will also prevent other entities from using that entity ID.
@@ -21,10 +24,7 @@ If a device has a single unique id but provides multiple entities, combine the u
 
 #### Example acceptable sources for a unique ID:
 
-- Serial number of a device
-- MAC address: formatted using `homeassistant.helpers.device_registry.format_mac`; Only obtain the MAC address from the device API or a discovery handler. Tools that rely on reading the arp cache or local network access such as `getmac` will not function in all supported network environments and are not acceptable.
-- Latitude and Longitude or other unique Geo Location
-- Unique identifier that is physically printed on the device or burned into an EEPROM
+<Acceptable />
 
 #### Unique ID of last resort:
 
@@ -32,6 +32,4 @@ If a device has a single unique id but provides multiple entities, combine the u
 
 #### Unacceptable sources for a unique ID:
 
-- IP Address
-- Device Name
-
+<Unacceptable />
