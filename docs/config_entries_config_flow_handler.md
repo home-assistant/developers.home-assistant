@@ -3,8 +3,8 @@ title: Integration Configuration
 sidebar_label: Configuration
 ---
 
-import AcceptableUniqueIDs from '../src/_includes/unique_ids.md'
-import UnacceptableUniqueIDs from '../src/_includes/unique_ids.md'
+import AcceptableUniqueIDs from '../src/_includes/acceptable_unique_ids.md'
+import UnacceptableUniqueIDs from '../src/_includes/unacceptable_unique_ids.md'
 
 Integrations can be set up via the user interface by adding support for a config flow to create a config entry. Components that want to support config entries will need to define a Config Flow Handler. This handler will manage the creation of entries from user input, discovery or other sources (like Home Assistant OS).
 
