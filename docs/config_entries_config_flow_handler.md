@@ -92,7 +92,7 @@ A Unique ID is used to match a config entry to the underlying device or api. The
     self._abort_if_unique_id_configured({CONF_HOST: host, CONF_PORT: port})
 ```
 
-#### Example acceptable sources for a unique ID:
+#### Example acceptable sources for a unique ID
 
 - Serial number of a device
 - MAC address: formatted using `homeassistant.helpers.device_registry.format_mac`; Only obtain the MAC address from the device API or a discovery handler. Tools that rely on reading the arp cache or local network access such as `getmac` will not function in all supported network environments and are not acceptable.
