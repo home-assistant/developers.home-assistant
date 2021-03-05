@@ -3,8 +3,8 @@ title: Entity Registry
 sidebar_label: Introduction
 ---
 
-import Acceptable from '../src/_includes/unique_ids.mdx'
-import Unacceptable from '../src/_includes/unique_ids.mdx'
+import AcceptableUniqueIDs from '../src/_includes/unique_ids.md'
+import UnacceptableUniqueIDs from '../src/_includes/unique_ids.md'
 
 The entity registry is a registry where Home Assistant keeps track of entities. Any entity that is added to Home Assistant which specifies the [`unique_id` attribute](/core/entity.md#generic-properties) will be registered in the registry.
 
@@ -24,7 +24,7 @@ If a device has a single unique id but provides multiple entities, combine the u
 
 #### Example acceptable sources for a unique ID:
 
-<Acceptable />
+<AcceptableUniqueIDs />
 
 #### Unique ID of last resort:
 
@@ -32,4 +32,4 @@ If a device has a single unique id but provides multiple entities, combine the u
 
 #### Unacceptable sources for a unique ID:
 
-<Unacceptable />
+<UnacceptableUniqueIDs />

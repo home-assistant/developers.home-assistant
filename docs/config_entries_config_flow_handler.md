@@ -3,8 +3,8 @@ title: Integration Configuration
 sidebar_label: Configuration
 ---
 
-import Acceptable from '../src/_includes/unique_ids.mdx'
-import Unacceptable from '../src/_includes/unique_ids.mdx'
+import AcceptableUniqueIDs from '../src/_includes/unique_ids.md'
+import UnacceptableUniqueIDs from '../src/_includes/unique_ids.md'
 
 Integrations can be set up via the user interface by adding support for a config flow to create a config entry. Components that want to support config entries will need to define a Config Flow Handler. This handler will manage the creation of entries from user input, discovery or other sources (like Home Assistant OS).
 
@@ -97,7 +97,7 @@ A Unique ID is used to match a config entry to the underlying device or api. The
 
 #### Example acceptable sources for a unique ID:
 
-<Acceptable />
+<AcceptableUniqueIDs />
 
 #### Sometimes acceptable sources for a unique ID for local devices:
 
@@ -111,7 +111,7 @@ A Unique ID is used to match a config entry to the underlying device or api. The
 
 #### Unacceptable sources for a unique ID:
 
-<Unacceptable />
+<UnacceptableUniqueIDs />
 
 ### Unignoring
 
