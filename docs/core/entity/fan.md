@@ -22,6 +22,12 @@ Properties should always only return information from memory and not do I/O (lik
 | preset_mode | str | None | Return the current preset_mode. One of the values in preset_modes. |
 | preset_modes | list | None | Get the list of available preset_modes. This is an arbitrary list of str and should not contain any speeds. |
 
+### Preset Modes
+
+A fan may have preset modes that automatically control the percentage speed or other functionality. Common examples include `auto`, `smart`, `whoosh`, `eco`, and `breeze`.
+
+Manually setting a speed must disable a preset mode. If it is possible to set a percentage speed manually without disabling the preset mode, create a switch or service to represent the mode.
+
 ## Deprecated Properties
 
 The fan entity model has changed to use percentages in the range from 0 (off) to 100 instead
