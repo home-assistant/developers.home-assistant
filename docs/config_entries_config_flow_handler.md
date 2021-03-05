@@ -99,7 +99,7 @@ A Unique ID is used to match a config entry to the underlying device or api. The
 - Latitude and Longitude or other unique Geo Location
 - Unique identifier that is physically printed on the device or burned into an EEPROM
 
-#### Sometimes acceptable sources for a unique ID for local devices:
+#### Sometimes acceptable sources for a unique ID for local devices
 
 - Hostname: If a subset of the hostname contains one of the acceptable sources, this portion can be used
 
