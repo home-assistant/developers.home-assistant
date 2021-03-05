@@ -11,7 +11,7 @@ A user is also able to override the name of an entity in the entity registry. Wh
 
 ## Unique ID
 
-It is important that it is not possible for the user to change the unique ID, because they system would lose all its settings related to it.
+It is important that it is not possible for the user to change the unique ID, because the system would lose all its settings related to it.
 
 An entity is looked up in the registry based on a combination of the platform type (e.g., `light`), and the integration name (domain) (e.g. hue) and the unique ID of the entity. Entities should not include the `domain` (e.g., `your_integration`) and platform type (e.g., `light`) in their Unique ID as the system already accounts for these identifiers.
 
