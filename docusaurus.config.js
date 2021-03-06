@@ -54,7 +54,7 @@ module.exports = {
           label: "API",
           position: "left",
           items: [
-            { label: "REST-API", to: "docs/api/rest" },
+            { label: "REST API", to: "docs/api/rest" },
             { label: "WebSocket API", to: "docs/api/websocket" },
             { label: "Supervisor API", to: "docs/api/supervisor/endpoints" },
             {
