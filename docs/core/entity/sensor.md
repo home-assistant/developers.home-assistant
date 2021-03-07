@@ -24,6 +24,8 @@ If specifying a device class, your sensor entity will need to also return the co
 | Type | Unit | Description
 | ---- | ---- | -----------
 | battery | % | % of battery that is left.
+| carbon_dioxide | ppm | parts per million of carbon dioxide concentration
+| carbon_monoxide | ppm | parts per million of carbon monoxide concentration
 | humidity | % | % of humidity in the air.
 | illuminance | lx/lm | Light level.
 | signal_strength | dB/dBm | Signal strength.
