@@ -148,21 +148,6 @@ function Home() {
             </div>
           </section>
         )}
-        <div className="container">
-          <div className="row">
-            <div className="col col--6 col--offset-3 padding-vert--lg">
-              <iframe
-                width="100%"
-                height="315"
-                title="Paulus Schoutsen - Awaken your home: Python and the Internet of Things - PyCon 2016"
-                src="https://www.youtube.com/embed/Cfasc9EgbMU"
-                frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              />
-            </div>
-          </div>
-        </div>
       </main>
     </Layout>
   );
