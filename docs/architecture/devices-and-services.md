@@ -15,7 +15,7 @@ An entity abstracts away the internal working of Home Assistant. As an integrato
   https://docs.google.com/drawings/d/1oysZ1VMcPPuyKhY4tequsBWcblDdLydbWxlu6bH6678/edit?usp=sharing
 -->
 
-Configuration is provided by the user via a [Config Entry](../config_entries_index.md) or in special/legacy cases via their [configuration.yaml file](../configuration_yaml_index.md).
+Configuration is provided by the user via a [Config Entry](../config_entries_index.md) or in special/legacy cases via [configuration.yaml](../configuration_yaml_index.md).
 
 The device integration (i.e. `hue`) will use this configuration to set up a connection with the device/service. It will forward the config entry (legacy uses discovery helper) to set up its entities in their respective integrations (light, switch).
 
