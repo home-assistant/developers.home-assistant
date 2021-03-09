@@ -11,6 +11,10 @@ An entity abstracts away the internal working of Home Assistant. As an integrato
   src='/img/en/architecture/integrating-devices-services.svg'
   alt='Integrating devices & services' />
 
+<!--
+  https://docs.google.com/drawings/d/1oysZ1VMcPPuyKhY4tequsBWcblDdLydbWxlu6bH6678/edit?usp=sharing
+-->
+
 Configuration is provided by the [configuration.yaml file](../configuration_yaml_index.md) or by a [Config Entry](../config_entries_index.md).
 
 The entity integration is responsible for defining the abstract entity class and services to control the entities.
@@ -29,6 +33,10 @@ The integration entity class that inherits from the entity base class is respons
   src='/img/en/architecture/entity-core-interaction.svg'
   alt='Entities interacting with core' />
 
+<!--
+  https://docs.google.com/drawings/d/12Z0t6hriYrQZ2L5Ou7BVhPDd9iGvOvFiGniX5sgqsE4/edit?usp=sharing
+-->
+
 The entity base class (defined by the entity integration)  is responsible for formatting the data and writing it to the state machine.
 
 The entity registry will write an `unavailable` state for any registered entity that is not currently backed by an entity object.
@@ -39,5 +47,9 @@ The entity registry will write an `unavailable` state for any registered entity 
   style={{maxWidth: "200px"}}
   src='/img/en/architecture/entity-data-hierarchy.svg'
   alt='Entity hierarchy' />
+
+<!--
+  https://docs.google.com/drawings/d/1TorZABszaj3m7tgTyf-EMrheYCj3HAvwXB8YmJW5NZ4/edit?usp=sharing
+-->
 
 Delete, disable or re-enable any object and all objects below will be adjusted accordingly.
