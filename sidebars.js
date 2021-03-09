@@ -93,11 +93,18 @@ module.exports = {
       "auth_auth_provider",
       "auth_auth_module",
     ],
-    "Config Entries": ["config_entries_index"],
-    "Data Entry Flow": ["data_entry_flow_index"],
-    "Entity Registry": ["entity_registry_index", "entity_registry_disabled_by"],
-    "Device Registry": ["device_registry_index"],
-    "Area Registry": ["area_registry_index"],
+    Configuration: [
+      "config_entries_index",
+      "data_entry_flow_index"
+    ],
+    "Integrating devices & services": [
+      "architecture/devices-and-services",
+      "entity_registry_index",
+      "entity_registry_disabled_by",
+      "device_registry_index",
+      "area_registry_index"
+    ]
+
   },
   Core: {
     "Development Workflow": [

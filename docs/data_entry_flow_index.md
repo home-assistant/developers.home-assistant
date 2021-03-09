@@ -1,6 +1,5 @@
 ---
 title: Data Entry Flow
-sidebar_label: Introduction
 ---
 
 Data Entry Flow is a data entry framework that is part of Home Assistant. Data entry is done via data entry flows. A flow can represent a simple login form or a multi-step setup wizard for a component. A Flow Manager manages all flows that are in progress and handles creation of new flows.
@@ -309,10 +308,10 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
     task_one = None
     task_two = None
-    
+
     async def _async_do_task(self, task):
         await task  # A task that take some time to complete.
-        
+
         # Continue the flow after show progress when the task is done.
         # To avoid a potential deadlock we create a new task that continues the flow.
         # The task must be completely done so the flow can await the task
