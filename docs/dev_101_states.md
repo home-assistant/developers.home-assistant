@@ -124,7 +124,7 @@ def extra_state_attributes(self):
 ```
 
 :::tip
-Entities also have a similar property `state_attributes`, which normally doesn't need to be defined. This property is used by base entity components to add standard sets of attributes to a state. Example: The light component uses `state_attributes` to add brightness to the state dictionary. If you are designing a new integration, you should define `extra_state_attributes` instead.
+Entities also have a similar property `state_attributes`, which should not be overridden by integrations. This property is used by base entity components to add standard sets of attributes to a state. Example: The light component uses `state_attributes` to add brightness to the state dictionary. If you are designing a new integration, you should define `extra_state_attributes` instead.
 :::
 
 To get your integration included in the Home Assistant releases, follow the steps described in the [Submit your work](development_submitting.md) section. Basically you only need to move your integration into the `homeassistant/component/` directory of your fork and create a Pull Request.
