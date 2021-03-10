@@ -11,6 +11,10 @@ When instantiating the handler, Home Assistant will make sure to load all depend
 
 ## Updating the manifest
 
+:::info
+All code in `config_flow.py` must covered by tests to be accepted in a PR. The [initial scaffolding](creating_component_index) includes examples to start writing your [tests](development_testing.md). 
+:::
+
 You need to update your integrations manifest to inform Home Assistant that your integration has a config flow. This is done by adding `config_flow: true` to your manifest ([docs](creating_integration_manifest.md#config-flow)).
 
 ## Defining your config flow
@@ -311,3 +315,7 @@ See [Translations](#translations) local development instructions.
 Authentication failures (such as a revoked oauth token) can be a little tricky to manually test. One suggestion is to make a copy of `config/.storage/core.config_entries` and manually change the values of `access_token`, `refresh_token`, and `expires_at` depending on the scenario you want to test. You can then walk advance through the reauth flow and confirm that the values get replaced with new valid tokens.
 
 Automated tests should verify that the reauth flow updates the existing config entry and does not create additional entries.
+
+## Testing your config flow
+
+Integrations with a config flow require full test coverage of all code in `config_flow.py` to be accepted into core. [Test your code](development_testing.md#testing-outside-of-tox) includes more details on how to generate a coverage report. Alternatively you can create a draft PR and wait for the [Codecov](https://codecov.io) actions.
