@@ -12,7 +12,7 @@
   },
   "dependencies": {
     "by-node-env": "^2.0.1",
-    "@docusaurus/preset-classic": "^2.0.0-alpha.70",
+    "@docusaurus/preset-classic": "^2.0.0-alpha.71",
     "@docusaurus/core": "^2.0.0-alpha.70",
     "classnames": "^2.2.6",
     "react": "^16.14.0",
