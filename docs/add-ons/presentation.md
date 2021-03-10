@@ -175,10 +175,10 @@ Each add-on starts with a base rating of 5, on a scale of 1 to 6. Depending on d
 | Use `auth_api: true` in [`config.json`](/docs/add-ons/configuration#add-on-config) | +1 | overridden by `ingress` |
 | Use custom [`apparmor.txt`](/docs/add-ons/presentation#apparmor)| +1| Rating applied after installation |
 | Set `apparmor: false` in [`config.json`](/docs/add-ons/configuration#add-on-config) | -1 | |
-| Use `privileged: NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_PTRACE`, `SYS_MODULE`, or `DAC_READ_SEARCH` in [`config.json`](/docs/add-ons/configuration#add-on-config)| -1 | Rating applied only once if multiple are used. |
+| Use `privileged: NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_PTRACE`, `SYS_MODULE`, or `DAC_READ_SEARCH`, or `kernel_modules: ` used in [`config.json`](/docs/add-ons/configuration#add-on-config)| -1 | Rating applied only once if multiple are used. |
 | Use `hassio_role: manager` in [`config.json`](/docs/add-ons/configuration#add-on-config) | -1 | |
 | Use `host_network: true` in [`config.json`](/docs/add-ons/configuration#add-on-config) | -1 | |
 | Use `hassio_role: admin` in [`config.json`](/docs/add-ons/configuration#add-on-config) | -2 | |
 | Use `host_pid: true` in [`config.json`](/docs/add-ons/configuration#add-on-config) | -2 | |
-| Use `full_access: true` in [`config.json`](/docs/add-ons/configuration#add-on-config) | -2 | |
+| Use `full_access: true` in [`config.json`](/docs/add-ons/configuration#add-on-config) | Security set to 1 | Overrides all other adjustments |
 | Use `docker_api: true` in [`config.json`](/docs/add-ons/configuration#add-on-config) | Security set to 1 | Overrides all other adjustments |
