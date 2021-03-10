@@ -12,17 +12,14 @@
   },
   "dependencies": {
     "by-node-env": "^2.0.1",
-    "@docusaurus/preset-classic": "^2.0.0-alpha.70",
+    "@docusaurus/preset-classic": "^2.0.0-alpha.71",
     "@docusaurus/core": "^2.0.0-alpha.71",
-    "classnames": "^2.2.6",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "@mdx-js/react": "^1.6.21",
+    "clsx": "^1.1.1",
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
   },
-  "resolutions": {
-    "@docusaurus/core/**/selfsigned": "1.10.8",
-    "@docusaurus/preset-classic/**/fbjs": "2.0.0",
-    "@docusaurus/core/wait-on": "5.2.1"
-  },
+  "resolutions": {},
   "browserslist": {
     "production": [
       ">0.2%",
