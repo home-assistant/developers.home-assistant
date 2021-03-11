@@ -311,3 +311,7 @@ See [Translations](#translations) local development instructions.
 Authentication failures (such as a revoked oauth token) can be a little tricky to manually test. One suggestion is to make a copy of `config/.storage/core.config_entries` and manually change the values of `access_token`, `refresh_token`, and `expires_at` depending on the scenario you want to test. You can then walk advance through the reauth flow and confirm that the values get replaced with new valid tokens.
 
 Automated tests should verify that the reauth flow updates the existing config entry and does not create additional entries.
+
+## Testing your config flow
+
+Integrations with a config flow require full test coverage of all code in `config_flow.py` to be accepted into core. [Test your code](development_testing.md#testing-outside-of-tox) includes more details on how to generate a coverage report.
