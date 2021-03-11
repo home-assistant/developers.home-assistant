@@ -11,10 +11,6 @@ When instantiating the handler, Home Assistant will make sure to load all depend
 
 ## Updating the manifest
 
-:::info
-All code in `config_flow.py` must covered by tests to be accepted in a PR. The [initial scaffolding](creating_component_index) includes examples to start writing your [tests](development_testing.md). 
-:::
-
 You need to update your integrations manifest to inform Home Assistant that your integration has a config flow. This is done by adding `config_flow: true` to your manifest ([docs](creating_integration_manifest.md#config-flow)).
 
 ## Defining your config flow
