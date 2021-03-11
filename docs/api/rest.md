@@ -61,7 +61,7 @@ Successful calls will return status code 200 or 201. Other status codes that can
 
 The API supports the following actions:
 
-<ApiEndpoint path="/api" method="get">
+<ApiEndpoint path="/api/" method="get">
 
 Returns a message if the API is up and running.
 
