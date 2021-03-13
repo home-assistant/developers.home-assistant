@@ -27,7 +27,7 @@ For more information, see [entity architecture](architecture/devices-and-service
 
 ## Represent virtual/computed data points
 
-These integrations represent entities either based on virtual data, like the [`input_boolean` integration]((https://www.home-assistant.io/integrations/input_boolean/)), a virtual switch. Or they derive their data based on other data available in Home Assistant, like the [`template` integration](https://www.home-assistant.io/integrations/template/) or [`utility_meter` integration](https://www.home-assistant.io/integrations/utility_meter/).
+These integrations represent entities either based on virtual data, like the [`input_boolean` integration](https://www.home-assistant.io/integrations/input_boolean/), a virtual switch. Or they derive their data based on other data available in Home Assistant, like the [`template` integration](https://www.home-assistant.io/integrations/template/) or [`utility_meter` integration](https://www.home-assistant.io/integrations/utility_meter/).
 
 ## Actions that can be triggered by the user or respond to events
 
