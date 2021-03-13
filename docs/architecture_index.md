@@ -3,27 +3,17 @@ title: "Architecture"
 sidebar_label: "Introduction"
 ---
 
-Before we dive into the Home Assistant architecture, let's get a clear overview of the home automation landscape as a whole. This way, we can show how the different parts of Home Assistant fit into the picture.
+Home Assistant provides a platform for home control and home automation. Home Assistant is not just an application: it's an embedded system that provides an experience like other consumer off-the-shelf products: onboarding, configuration and updating is all done via an easy to use interface.
 
-For more information about each part in this overview, [check out our blog](https://www.home-assistant.io/blog/2014/12/26/home-control-home-automation-and-the-smart-home). Here's the tl;dr version of the blog:
-
-- Home Control is responsible for collecting information and controlling devices.
-- Home Automation triggers commands based on user configurations.
-- Smart Home triggers commands based on previous behavior.
+- The [operating system](operating-system.md) provides the bare minimal Linux environment to run Supervisor and Core.
+- The [Supervisor](supervisor.md) manages the operating system.
+- The [Core](architecture/core.md) interacts with the user, the supervisor and IoT devices & services.
 
 <img class='invertDark'
-  src='/img/en/architecture/home_automation_landscape.svg'
-  alt='Home Automation landscape'
+  src='/img/en/architecture/full.svg'
+  alt='Full picture of Home Assistant'
 />
 
-The Home Assistant core is responsible for Home Control. Home Assistant contains four parts which make this possible:
+## Running parts of the stack
 
-- **Event Bus**: facilitates the firing and listening of events -- the beating heart of Home Assistant.
-- **State Machine**: keeps track of the states of things and fires a `state_changed` event when a state has been changed.
-- **Service Registry**: listens on the event bus for `call_service` events and allows other code to register services.
-- **Timer**: sends a `time_changed` event every 1 second on the event bus.
-
-<img class='invertDark'
-  alt='Overview of the Home Assistant core architecture'
-  src='/img/en/architecture/ha_architecture.svg'
-/>
+Users have different requirements what they want from a home automation platform. That's why it is possible to run only part of the Home Assistant stack. For more information, see the [installation instructions](https://www.home-assistant.io/installation/).
