@@ -1,5 +1,6 @@
 ---
 title: Core Architecture
+sidebar_label: Core
 ---
 
 The Home Assistant Core consists of four core parts. On top of this it includes a ton of helper classes to deal with common scenario's, like providing an entity or dealing with locations.
