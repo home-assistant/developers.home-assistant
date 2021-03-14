@@ -1734,7 +1734,7 @@ Execute a healthcheck and autofix & notifcation.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/resolution/check/<slug>" method="post">
+<ApiEndpoint path="/resolution/check/<slug>/option" method="post">
 
 Set options for this check.
 
@@ -1743,6 +1743,12 @@ Set options for this check.
 | key     | type   | description                                                    |
 | ------- | ------ | -------------------------------------------------------------- |
 | enabled | bool   | If the check should be enabled or disabled                     |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/resolution/check/<slug>/run" method="post">
+
+Execute a specific check right now.
 
 </ApiEndpoint>
 
