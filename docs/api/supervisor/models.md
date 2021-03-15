@@ -222,6 +222,13 @@ These models are describing objects that are getting returned from the superviso
 | context   | str         | In which context the suggestion occorse             |
 | reference | str or null | Depend on the Context, a reference to a other Model |
 
+## Check
+
+| key       | type        | description                                         |
+| ----------| ----------- | --------------------------------------------------- |
+| slug      | str         | A generated slug for the check                      |
+| enable    | bool        | The enabled state of the check                      |
+
 ## Device
 
 | key        | type           | description                                                           |

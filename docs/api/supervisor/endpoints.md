@@ -1681,6 +1681,7 @@ Update Home Assistant OS
 | unhealthy | list | A list of reasons why a installation is marked as unhealthy (docker, supervisor, privileged, setup) |
 | issues | list | A list of [Issue models](api/supervisor/models.md#issues) |
 | suggestions | list | A list of [Suggestion models](api/supervisor/models.md#suggestion) actions |
+| checks | list | A list of [Check models](api/supervisor/models.md#check) |
 
 **Example response:**
 
@@ -1702,6 +1703,12 @@ Update Home Assistant OS
       "type": "clear_snapshots",
       "context": "system",
       "reference": null
+    }
+  ],
+  "checks": [
+    {
+      "slug": "free_space",
+      "enabled": true
     }
   ]
 }
@@ -1730,6 +1737,24 @@ Dismiss a issue
 <ApiEndpoint path="/resolution/healthcheck" method="post">
 
 Execute a healthcheck and autofix & notifcation.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/resolution/check/<slug>/options" method="post">
+
+Set options for this check.
+
+**Payload:**
+
+| key     | type   | description                                                    |
+| ------- | ------ | -------------------------------------------------------------- |
+| enabled | bool   | If the check should be enabled or disabled                     |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/resolution/check/<slug>/run" method="post">
+
+Execute a specific check right now.
 
 </ApiEndpoint>
 
