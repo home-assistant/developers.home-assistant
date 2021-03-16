@@ -85,7 +85,11 @@ module.exports = {
   Supervisor: ["supervisor", "supervisor/development", "supervisor/debugging"],
   // Old structure, still to move/migrate
   Architecture: {
-    Architecture: ["architecture_index", "architecture_components"],
+    Architecture: [
+      "architecture_index",
+      "architecture/core",
+      "architecture_components",
+    ],
     Authentication: [
       "auth_index",
       "auth_permissions",
@@ -93,18 +97,14 @@ module.exports = {
       "auth_auth_provider",
       "auth_auth_module",
     ],
-    Configuration: [
-      "config_entries_index",
-      "data_entry_flow_index"
-    ],
+    Configuration: ["config_entries_index", "data_entry_flow_index"],
     "Integrating devices & services": [
       "architecture/devices-and-services",
       "entity_registry_index",
       "entity_registry_disabled_by",
       "device_registry_index",
-      "area_registry_index"
-    ]
-
+      "area_registry_index",
+    ],
   },
   Core: {
     "Development Workflow": [
@@ -138,8 +138,7 @@ module.exports = {
       "creating_platform_code_review",
       "integration_quality_scale_index",
     ],
-    "Home Assistant Core 101": [
-      "dev_101_index",
+    "Accessing the Core": [
       "dev_101_hass",
       "dev_101_events",
       "dev_101_states",

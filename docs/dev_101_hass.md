@@ -1,5 +1,6 @@
 ---
 title: "Hass object"
+sidebar_label: "Introduction"
 ---
 
 While developing Home Assistant you will see a variable that is everywhere: `hass`. This is the Home Assistant instance that will give you access to all the various parts of the system.
@@ -16,15 +17,20 @@ The Home Assistant instance contains four objects to help you interact with the 
 | `hass.bus` | This is the EventBus. It allows you to trigger and listen for events. [See available methods.](https://dev-docs.home-assistant.io/en/master/api/core.html#homeassistant.core.EventBus) |
 | `hass.services` | This is the ServiceRegistry. It allows you to register services. [See available methods.](https://dev-docs.home-assistant.io/en/master/api/core.html#homeassistant.core.ServiceRegistry) |
 
+<img class='invertDark'
+  alt='Overview of the Home Assistant core architecture'
+  src='/img/en/architecture/ha_architecture.svg'
+/>
+
 ### Where to find `hass`
 
 Depending on what you're writing, there are different ways the `hass` object is made available.
 
-**Component**  
+**Component**
 Passed into `setup(hass, config)` or `async_setup(hass, config)`.
 
-**Platform**  
+**Platform**
 Passed into `setup_platform(hass, config, add_devices, discovery_info=None)` or `async_setup_platform(hass, config, async_add_devices, discovery_info=None)`.
 
-**Entity**  
+**Entity**
 Available as `self.hass` once the entity has been added via the `add_devices` callback inside a platform.
