@@ -43,8 +43,6 @@ Supported features constants are combined using the bitwise or (`|`) operator.
 | `SUPPORT_RETURN_HOME` | Return to the dock.
 | `SUPPORT_FAN_SPEED` | The vacuum supports setting fan speed.
 | `SUPPORT_BATTERY` | The vacuum supports retrieving battery status.
-| `SUPPORT_STATUS` | The vacuum supports returning it status.
-| `SUPPORT_STATUS` | The vacuum supports returning it status.
 | `SUPPORT_SEND_COMMAND` | The vacuum supports sending a command to the vacuum.
 | `SUPPORT_LOCATE` | The vacuum supports locating.
 | `SUPPORT_CLEAN_SPOT` | The vacuum supports spot cleaning.
