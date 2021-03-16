@@ -54,6 +54,7 @@ service docker status
 EOF
 
 ```
+
 Restart your Debian terminal to activate the new profiles and software configurations. 
 
 :::tip
