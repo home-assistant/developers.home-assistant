@@ -61,7 +61,7 @@ Restart your Debian terminal to activate the new profiles and software configura
 If a problem occurs with an automated script, always run it line by line to figure out where the problem lies.  In this case, skip the first line to directly execute each command.  If you need to completely start over, you can uninstall the Debian app, then from the Windows command prompt execute `del %HOMEPATH%\AppData\Roaming\Code`. After removing your VSCode settings, launch VS Code, and remove all extensions.  Finally reboot your computer and try again. 
 :::
 
-Now you're ready to run Yarn and Node.  We must set up docker communications and launch Visual Studio Code.  The following commands will need to be run after each reboot to link docker to your WSL instance and launch Visual Studio Code. 
+Now you're ready to run Yarn and Node. We must set up Docker communications and launch Visual Studio Code. The following commands will need to be run after each reboot to link Docker to your WSL instance and launch Visual Studio Code.
 ```bash
 sudo mkdir /sys/fs/cgroup/systemd
 sudo mount -t cgroup -o none,name=systemd cgroup /sys/fs/cgroup/systemd
