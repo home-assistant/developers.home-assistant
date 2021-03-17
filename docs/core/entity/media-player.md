@@ -24,12 +24,14 @@ Properties should always only return information from memory and not do I/O (lik
 | media_image_url | string | None | URL that represents the current image.
 | media_image_remotely_accessible | boolean | False | Return `True` if property `media_image_url` is accessible outside of the home network.
 | device_class | string | `None` | Type of media player.
+| group_members | list | `None` | A dynamic list of player entities which are currently grouped together for synchronous playback. If the platform has a concept of defining a group leader, the leader should be the first element in that list.
 
 ## Supported Features
 
 | Constant | Description
 | -------- | -----------
 | `SUPPORT_CLEAR_PLAYLIST` | Entity allows clearing the active playlist.
+| `SUPPORT_GROUPING` | Entity can be grouped with other players for synchronous playback.
 | `SUPPORT_NEXT_TRACK` | Entity allows skipping to the next media track.
 | `SUPPORT_PAUSE` | Entity allows pausing the playback of media.
 | `SUPPORT_PLAY` | Entity allows playing/resuming playback of media.
@@ -143,4 +145,27 @@ class MyMediaPlayer(MediaPlayerEntity):
     """Serve album art. Returns (content, content_type)."""
     image_url = ...
     return await self._async_fetch_image(image_url)
+```
+
+### Grouping player entities together
+
+Optional. If your player has support for grouping player entities together for synchronous playback (indicated by `SUPPORT_GROUPING`) one join and one unjoin method needs to be defined.
+
+```python
+class MyMediaPlayer(MediaPlayerEntity):
+    # Implement one of these join methods:
+
+    def join_players(self, group_members):
+        """Join `group_members` as a player group with the current player."""
+
+    async def async_join_players(self, group_members):
+        """Join `group_members` as a player group with the current player."""
+
+    # Implement one of these unjoin methods:
+
+    def unjoin_player(self):
+        """Remove this player from any group."""
+
+    async def async_unjoin_player(self):
+        """Remove this player from any group."""
 ```
