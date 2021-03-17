@@ -64,6 +64,8 @@ class HueLight(LightEntity):
         }
 ```
 
+Besides device properties, `device_info` can also include `default_manufacturer`, `default_model`, `default_name`. These values will be added to the device registry if no other value is defined just yet. This can be used by integrations that know some information but not very specific. For example, a router that identifies devices based on MAC addresses.
+
 ### Manual Registration
 
 Components are also able to register devices in the case that there are no entities representing them. An example is a hub that communicates with the lights.
