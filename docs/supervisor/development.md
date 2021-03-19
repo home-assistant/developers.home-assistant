@@ -31,7 +31,7 @@ While the system is Linux and compatible with Mac, it is also possible to build 
 You must use WSL2. WSL version 1 is not capable of running Docker and therefore is incompatible. If using this method, you must ensure you have [set up WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 :::
 
-It is assumed at this point you have installed Debian from the Microsoft Store and [Visual Studio Code](https://code.visualstudio.com/download). From within your WSL2-enabled Debian terminal, run the following annotated bash script, line-by-line.  If you copy the entire script it will perform the required setup of Debian for Home Assitant development.
+It is assumed at this point you have installed Debian from the Microsoft Store and [Visual Studio Code](https://code.visualstudio.com/download). From within your WSL2-enabled Debian terminal, run the following annotated bash script, line-by-line. If you copy the entire script it will perform the required setup of Debian for Home Assitant development.
 
 ```bash
 sudo bash << EOF
