@@ -88,7 +88,7 @@ When working in Dev Container, you will see "Dev Container: Supervisor dev" in t
 At this point, you can press F5 to begin debugging. Try setting a line break within `supervisor/addons/utils.py` and then visit Home Assistant Supervisor Addon Store pages to verify proper operation.  
 
 :::info
-If you chose to place your source outside of WSL within Windows, be aware that you cannot open it with the File Chooser without sacrificing your dev container.  In order to access a windows folder, you must type a folder name using this format `/mnt/<drive>/path-to/project`. eg. `C:\Users\example\project` becomes `/mnt/c/Users/example/project`.
+If you chose to place your source outside of WSL within Windows, be aware that you cannot open it with the File Chooser without sacrificing your dev container. In order to access a windows folder, you must type a folder name using this format `/mnt/<drive>/path-to/project`. For example, `C:\Users\example\project` becomes `/mnt/c/Users/example/project`.
 :::
 
 ### Testing on a remote system
