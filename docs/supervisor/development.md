@@ -79,7 +79,7 @@ Visual Studio Code will launch.  If the `code` command does not launch Visual St
 :::note
 When working in Dev Container, you will see "Dev Container: Supervisor dev" in the lower-left corner of Visual Studio Code. 
 :::
-7. Press F1, select Tasks: Run Task, and Update Supervisor Panel 
+7. Press F1, select Tasks: Run Task, and Update Supervisor Panel.
 8. Within the Dev Container enabled Visual Studio Code, select menu option Terminal->New Terminal, then run the command `sudo update-alternatives --set iptables /usr/sbin/iptables-legacy; sudo dockerd` to start the docker daemon within the Dev Container. 
 9. Press F1, select Tasks: Run Task, and Run Supervisor.
 10. Open Home Assistant Observer at [http://localhost:4357/](http://localhost:4357/) to monitor the startup process after the Supervisor container is started.
