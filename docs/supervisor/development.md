@@ -73,7 +73,7 @@ Visual Studio Code will launch.  If the `code` command does not launch Visual St
 
 1. Click the Extensions icon on the left -> search -> type "remote" then install "Remote - WSL", and "Remote - Containers".
 2. Close Visual Studio Code and reopen with `code` command from Debian.
-3. Observe "WSL: Debian" in the lower left corner.  If you do not see "WSL", then close folders and Debian, then relaunch Debian and re-run `code`.  if this problem persists, click the green "open a remote window" button in the lower left -> Remote WSL: New Window Using Distro -> Debian.
+3. Observe "WSL: Debian" in the lower-left corner. If you do not see "WSL", then close folders and Debian, then relaunch Debian and re-run `code`. If this problem persists, click the green "open a remote window" button in the lower-left -> Remote WSL: New Window Using Distro -> Debian.
 4. Click File->Open Folder-> type `~/supervisor`
 5. Visual Studio Code will offer to reopen in Dev Container after it has loaded Supervisor. When offered Dev Container in the lower right corner, click to open dev container.  If you were not presented this option, verify extensions are installed then close Visual Studio Code and reopen with the `code` command in Debian. 
 :::note
