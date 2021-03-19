@@ -26,8 +26,9 @@ If you need to rebuild the base of the Supervisor run the task "Build Supervisor
 #### Using Windows WSL2
 
 While the system is Linux and compatible with Mac, it is also possible to build and test locally on Windows using WSL2 with Debian and other similar distros. This is achieved via Windows Subsystem for Linux 2 (WSL2), which makes POSIX tasks possible within Windows via system-level integration with a Linux virtual machine.
+
 :::tip
-You must use WSL2. WSL version 1 is not capable of running docker and therefore is incompatible. If using this method, you must ensure you have [set up WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
+You must use WSL2. WSL version 1 is not capable of running Docker and therefore is incompatible. If using this method, you must ensure you have [set up WSL2](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 :::
 
 It is assumed at this point you have installed Debian from the Microsoft Store and [Visual Studio Code](https://code.visualstudio.com/download). From within your WSL2-enabled Debian terminal, run the following annotated bash script, line-by-line.  If you copy the entire script it will perform the required setup of Debian for Home Assitant development.
