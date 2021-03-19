@@ -77,7 +77,7 @@ Visual Studio Code will launch.  If the `code` command does not launch Visual St
 4. Click File->Open Folder-> type `~/supervisor`
 5. Visual Studio Code will offer to reopen in Dev Container after it has loaded Supervisor. When offered Dev Container in the lower right corner, click to open dev container.  If you were not presented this option, verify extensions are installed then close Visual Studio Code and reopen with the `code` command in Debian. 
 :::note
-When working in Dev Container, you will see "Dev Container: Supervisor dev" in the lower left corner of Visual Studio Code. 
+When working in Dev Container, you will see "Dev Container: Supervisor dev" in the lower-left corner of Visual Studio Code. 
 :::
 7. Press F1, select Tasks: Run Task, and Update Supervisor Panel 
 8. Within the Dev Container enabled Visual Studio Code, select menu option Terminal->New Terminal, then run the command `sudo update-alternatives --set iptables /usr/sbin/iptables-legacy; sudo dockerd` to start the docker daemon within the Dev Container. 
