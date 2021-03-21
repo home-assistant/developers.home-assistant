@@ -9,7 +9,7 @@ Home Assistant provides a platform for home control and home automation. Home As
 - The [Supervisor](supervisor.md) manages the operating system.
 - The [Core](architecture/core.md) interacts with the user, the supervisor and IoT devices & services.
 
-<img class='invertDark'
+<img
   src='/img/en/architecture/full.svg'
   alt='Full picture of Home Assistant'
 />
