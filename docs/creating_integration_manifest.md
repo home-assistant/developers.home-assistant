@@ -110,9 +110,9 @@ It is also possible to use a public git repository to install a requirement.  Th
 }
 ```
 
-### Custom component requirements
+### Custom integration requirements
 
-Custom components should only include requirements that are not required by the core [requirements.txt](https://github.com/home-assistant/core/blob/dev/requirements.txt).
+Custom integration should only include requirements that are not required by the Core [requirements.txt](https://github.com/home-assistant/core/blob/dev/requirements.txt).
 
 ## Zeroconf
 
