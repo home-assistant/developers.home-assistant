@@ -110,6 +110,10 @@ It is also possible to use a public git repository to install a requirement.  Th
 }
 ```
 
+### Custom integration requirements
+
+Custom integration should only include requirements that are not required by the Core [requirements.txt](https://github.com/home-assistant/core/blob/dev/requirements.txt).
+
 ## Zeroconf
 
 If your integration supports discovery via [Zeroconf](https://en.wikipedia.org/wiki/Zero-configuration_networking), you can add the type to your manifest. If the user has the `zeroconf` integration loaded, it will load the `zeroconf` step of your integration's config flow when it is discovered.
