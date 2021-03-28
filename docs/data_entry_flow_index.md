@@ -301,7 +301,7 @@ Example configuration flow that includes two show progress tasks.
 ```python
 from homeassistant import config_entries
 
-from .const import DOMAIN  # pylint:disable=unused-import
+from .const import DOMAIN
 
 
 class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
