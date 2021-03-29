@@ -64,11 +64,11 @@ A user who downloads and installs your new Custom View can then use it via editi
 
 ## Store Custom Data
 
-If your view requires data to persist at a card level, there is a `layout` in the card configuration that can be used to store information. Example: Key, X and Y coordinates, width and height, etc. This can be useful when you need to store the location or dimensions of a card for your view.
+If your view requires data to persist at a card level, there is a `view_layout` in the card configuration that can be used to store information. Example: Key, X and Y coordinates, width and height, etc. This can be useful when you need to store the location or dimensions of a card for your view.
 
 ```yaml
 - type: weather-card
-  layout:
+  view_layout:
     key: 1234
     width: 54px
   entity: weather.my_weather
