@@ -59,9 +59,13 @@ If this integration is being submitted for inclusion in Home Assistant, it shoul
 
 Dependencies are other Home Assistant integrations that you want Home Assistant to set up successfully prior to the integration being loaded. This can be necessary in case you want to offer functionality from that other integration, like using webhooks or an MQTT connection.
 
+Built-in integrations shall only specify other built-in integrations in `dependencies`. Custom integrations may specify both built-in and custom integrations in `dependencies`.
+
 ## After dependencies
 
 This option is used to specify dependencies that might be used by the integration but aren't essential. When `after_dependencies` is present, set up of an integration will wait for the `after_dependencies` to be set up before being set up. It will also make sure that the requirements of `after_dependencies` are installed so methods from the integration can be safely imported.  For example, if the `camera` integration might use the `stream` integration in certain configurations, adding `stream` to `after_dependencies` of `camera`'s manifest, will ensure that `stream` is loaded before `camera` if it is configured.  If `stream` is not configured, `camera` will still load.
+
+Built-in integrations shall only specify other built-in integrations in `after_dependencies`. Custom integrations may specify both built-in and custom integrations in `after_dependencies`.
 
 ## Code Owners
 
