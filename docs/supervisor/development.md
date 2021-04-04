@@ -65,7 +65,7 @@ sudo service docker start
 code
 ```
 
-Visual Studio Code will launch.  If the `code` command does not launch Visual Studio Code, relaunch the Debian terminal, or reboot your computer.
+Visual Studio Code will launch. If the `code` command does not launch Visual Studio Code, relaunch the Debian terminal, or reboot your computer.
 
 1. Click the Extensions icon on the left -> search -> type "remote" then install "Remote - WSL", and "Remote - Containers".
 2. Close Visual Studio Code and reopen with `code` command from Debian.
