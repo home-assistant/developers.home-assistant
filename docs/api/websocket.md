@@ -341,7 +341,7 @@ The server will respond with a result message containing the current registered 
 
 _Introduced in Home Assistant 0.69._
 
-:::caution Depreciated
+:::caution Deprecated
 This websocket command was depreciated in Home Assistant Core [0.107](https://www.home-assistant.io/blog/2020/03/18/release-107/) and will be removed in a future release. Until then it will result in a `WARNING` entry in the user's log.
 :::
 
@@ -421,19 +421,13 @@ The server must send a pong back as quickly as possible, if the connection is st
 
 If an error occurs, the `success` key in the `result` message will be set to `false`. It will contain an `error` key containing an object with two keys: `code` and `message`.
 
-| Code | Description |
-| ----- | ------------ |
-| 1 | A non-increasing identifier has been supplied.
-| 2 | Received message is not in expected format (voluptuous validation error).
-| 3 | Requested item cannot be found
-
 ```json
 {
    "id": 12,
    "type":"result",
    "success": false,
    "error": {
-      "code": 2,
+      "code": "invalid_format",
       "message": "Message incorrectly formatted: expected str for dictionary value @ data['event_type']. Got 100"
    }
 }
