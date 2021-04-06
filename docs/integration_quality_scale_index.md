@@ -21,7 +21,7 @@ This integration is able to cope when things go wrong. It will not print any exc
 
 - Connection/configuration is handled via a component.
 - Set an appropriate `SCAN_INTERVAL` (if a polling integration)
-- Raise `PlatformNotReady` if unable to connect during platform setup (if appropriate)
+- Raise `PlatformNotReady` or `ConfigEntryNotReady` if unable to connect during platform setup (if appropriate)
 - Handles expiration of auth credentials. Refresh if possible or print correct error and fail setup. If based on a config entry, should trigger a new config entry flow to re-authorize.  ([docs](config_entries_config_flow_handler.md#reauthentication))
 - Handles internet unavailable. Log a warning once when unavailable, log once when reconnected.
 - Handles device/service unavailable. Log a warning once when unavailable, log once when reconnected.
@@ -51,7 +51,7 @@ Best of the best. The integration is completely async, meaning it's super fast. 
 
 - Set appropriate `PARALLEL_UPDATES` constant
 - Support config entry unloading (called when config entry is removed)
-- Integration + dependency are async
+- Integration + dependency are async ([docs](asyncio_working_with_async))
 - Uses aiohttp or httpx and allows passing in websession (if making HTTP requests)
 
 ## Internal 🏠
