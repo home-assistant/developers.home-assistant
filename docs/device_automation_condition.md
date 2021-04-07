@@ -41,4 +41,4 @@ def async_condition_from_config(
 
 Create a condition function from a function. The condition functions should be an async-friendly callback that evaluates the condition and returns a `bool`.
 
-Use the `config_valition` parameter to turn on or off config validation with the defined `CONDITION_SCHEMA`.
+The `config_validation` parameter will be used by the core to apply config validation conditionally with the defined `CONDITION_SCHEMA`.
