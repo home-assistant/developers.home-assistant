@@ -16,7 +16,7 @@ The template will create a new file `device_action.py` in your integration folde
 
 #### `ACTION_SCHEMA`
 
-This is the schema for actions. The base schema should be extended from `homeassistant.helpers.config_validation.DEVICE_ACTION_BASE_SCHEMA`.
+This is the schema for actions. The base schema should be extended from `homeassistant.helpers.config_validation.DEVICE_ACTION_BASE_SCHEMA`. Do not apply the schema manually. The core will apply the schema if the action schema is defined as a constant in the `device_action.py` module of the integration.
 
 #### `async def async_get_actions(hass, device_id)`
 
