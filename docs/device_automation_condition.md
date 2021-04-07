@@ -24,6 +24,7 @@ This is the schema for conditions. The base schema should be extended from `home
 async def async_get_conditions(
     hass: HomeAssistant, device_id: str
 ) -> list[dict[str, str]]:
+    """List device conditions for devices."""
 ```
 
 Return a list of conditions that this device supports.

@@ -22,7 +22,7 @@ This is the schema for actions. The base schema should be extended from `homeass
 
 ```py
 async def async_get_actions(hass: HomeAssistant, device_id: str) -> list[dict]:
-    """List device actions for NEW_NAME devices."""
+    """List device actions for devices."""
 ```
 
 Return a list of actions that this device supports.
@@ -33,6 +33,7 @@ Return a list of actions that this device supports.
 async def async_call_action_from_config(
     hass: HomeAssistant, config: dict, variables: dict, context: Context | None
 ) -> None:
+    """Execute a device action."""
 ```
 
 Execute the passed in action.
