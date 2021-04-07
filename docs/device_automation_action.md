@@ -18,10 +18,21 @@ The template will create a new file `device_action.py` in your integration folde
 
 This is the schema for actions. The base schema should be extended from `homeassistant.helpers.config_validation.DEVICE_ACTION_BASE_SCHEMA`. Do not apply the schema manually. The core will apply the schema if the action schema is defined as a constant in the `device_action.py` module of the integration.
 
-#### `async def async_get_actions(hass, device_id)`
+#### `async_get_actions`
+
+```py
+async def async_get_actions(hass: HomeAssistant, device_id: str) -> list[dict]:
+    """List device actions for NEW_NAME devices."""
+```
 
 Return a list of actions that this device supports.
 
-#### `async def async_call_action_from_config(hass, config, variables, context)`
+#### `async_call_action_from_config`
+
+```py
+async def async_call_action_from_config(
+    hass: HomeAssistant, config: dict, variables: dict, context: Context | None
+) -> None:
+```
 
 Execute the passed in action.
