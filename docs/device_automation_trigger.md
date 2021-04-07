@@ -12,7 +12,16 @@ To add support for Device Triggers, an integration needs to have a `device_trigg
 - *Define a `TRIGGER_SCHEMA`*: A dictionary that represents a trigger, such as a device and an event type
 - *Create triggers*: Create dictionaries containing the device or entity and supported events or state changes as defined by the schema.
 - *Attach triggers*: Associate a trigger config with an event or state change, e.g. a message fired on the event bus.
-- *Add text and translations*: Give each trigger a human readable name. 
+- *Add text and translations*: Give each trigger a human readable name.
+
+Do not apply the static schema manually. The core will apply the schema if the trigger schema is defined as a constant in the `device_trigger.py` module of the integration.
+
+If the trigger requires dynamic validation that the static `TRIGGER_SCHEMA` can't provide, it's possible to implement an `async_validate_trigger_config` function.
+
+```py
+async def async_validate_trigger_config(hass: HomeAssistant, config: ConfigType) -> ConfigType:
+    """Validate config."""
+```
 
 Home Assistant includes a template to get started with device triggers. To get started, run inside a development environment `python3 -m script.scaffold device_trigger`.
 
@@ -85,7 +94,6 @@ For example, you might attach the trigger and action to [Events fired](integrati
 ```python
 async def async_attach_trigger(hass, config, action, automation_info):
     """Attach a trigger."""
-    config = TRIGGER_SCHEMA(config)
     event_config = event_trigger.TRIGGER_SCHEMA({
         event_trigger.CONF_PLATFORM: "event",
         event_trigger.CONF_EVENT_TYPE: "mydomain_event",
