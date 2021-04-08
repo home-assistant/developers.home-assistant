@@ -18,10 +18,27 @@ The template will create a new file `device_condition.py` in your integration fo
 
 This is the schema for conditions. The base schema should be extended from `homeassistant.helpers.config_validation.DEVICE_CONDITION_BASE_SCHEMA`.
 
-#### `async def async_get_conditions(hass, device_id)`
+#### `async_get_conditions`
+
+```py
+async def async_get_conditions(
+    hass: HomeAssistant, device_id: str
+) -> list[dict[str, str]]:
+    """List device conditions for devices."""
+```
 
 Return a list of conditions that this device supports.
 
-#### `async def async_condition_from_config(config, config_validation)`
+#### `async_condition_from_config`
+
+```py
+@callback
+def async_condition_from_config(
+    config: ConfigType, config_validation: bool
+) -> condition.ConditionCheckerType:
+    """Create a function to test a device condition."""
+```
 
 Create a condition function from a function. The condition functions should be an async-friendly callback that evaluates the condition and returns a `bool`.
+
+The `config_validation` parameter will be used by the core to apply config validation conditionally with the defined `CONDITION_SCHEMA`.
