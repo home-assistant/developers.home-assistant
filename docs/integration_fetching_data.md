@@ -36,6 +36,7 @@ import logging
 import async_timeout
 
 from homeassistant.components.light import LightEntity
+from homeassistant.exceptions import ConfigEntryAuthFailed
 from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
     DataUpdateCoordinator,
@@ -63,6 +64,10 @@ async def async_setup_entry(hass, entry, async_add_entities):
             # handled by the data update coordinator.
             async with async_timeout.timeout(10):
                 return await api.fetch_data()
+        except ApiAuthError as err:
+            # Raising ConfigEntryAuthFailed with cancel future updates
+            # and start a config flow with SOURCE_REAUTH (async_step_reauth)
+            raise ConfigEntryAuthFailed from err
         except ApiError as err:
             raise UpdateFailed(f"Error communicating with API: {err}")
 
