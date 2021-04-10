@@ -65,7 +65,7 @@ async def async_setup_entry(hass, entry, async_add_entities):
             async with async_timeout.timeout(10):
                 return await api.fetch_data()
         except ApiAuthError as err:
-            # Raising ConfigEntryAuthFailed with cancel future updates
+            # Raising ConfigEntryAuthFailed will cancel future updates
             # and start a config flow with SOURCE_REAUTH (async_step_reauth)
             raise ConfigEntryAuthFailed from err
         except ApiError as err:
