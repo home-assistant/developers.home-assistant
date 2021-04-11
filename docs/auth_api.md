@@ -63,7 +63,7 @@ This authorization code can be exchanged for tokens by sending it to the token e
 
 ## Token
 
-The token endpoint returns tokens given valid grants. This grant is either an authorization code retrieved from the authorize endpoint or a refresh token. In thee case of refresh token, the token endpoint is also capable of revoking a token.
+The token endpoint returns tokens given valid grants. This grant is either an authorization code retrieved from the authorize endpoint or a refresh token. In the case of refresh token, the token endpoint is also capable of revoking a token.
 
 All interactions with this endpoint need to be HTTP POST requests to `http://your-instance.com/auth/token` with the request body encoded in `application/x-www-form-urlencoded`.
 
