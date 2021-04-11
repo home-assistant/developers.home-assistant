@@ -13,7 +13,6 @@ The fastest and recommended way to develop add-ons is using a local Visual Studi
 
 [hassio-addons]: https://github.com/home-assistant/hassio-addons
 [remote-containers]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
-[hassio-addon-devcontainer]: https://github.com/issacg/hassio-addon-devcontainer	
 
 :::info
 
