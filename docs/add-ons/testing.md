@@ -11,8 +11,6 @@ The fastest and recommended way to develop add-ons is using a local Visual Studi
 - You'll then be able to access the normal onboarding process via the Home Assistant instance at `http://localhost:7123/`.
 - The add-on(s) found in your root folder will automatically be found in the Local Add-ons repository.
 
-For standalone add-ons, there also exists an [addon devcontainer template][hassio-addon-devcontainer] on GitHub which provides the same boilerplate dev container for new add-on projects.
-
 [hassio-addons]: https://github.com/home-assistant/hassio-addons
 [remote-containers]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
 [hassio-addon-devcontainer]: https://github.com/issacg/hassio-addon-devcontainer	
