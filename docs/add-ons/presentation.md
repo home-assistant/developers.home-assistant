@@ -85,7 +85,7 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
   # Start new profile for service
   /usr/bin/myprogram cx,
   
-  profile usr/bin/myprogram flags=(attach_disconnected,mediate_deleted) {
+  profile /usr/bin/myprogram flags=(attach_disconnected,mediate_deleted) {
     #include <abstractions/base>
     
     # Receive signals from S6-Overlay
