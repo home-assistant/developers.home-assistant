@@ -15,7 +15,8 @@ Every integration has a manifest file to specify basic information about an inte
   "after_dependencies": ["http"],
   "codeowners": ["@balloob"],
   "requirements": ["aiohue==1.9.1"],
-  "quality_scale": "platinum"
+  "quality_scale": "platinum",
+  "iot_class": "local_polling"
 }
 ```
 
@@ -28,7 +29,8 @@ Or a minimal example that you can copy into your project:
   "documentation": "https://www.example.com",
   "dependencies": [],
   "codeowners": [],
-  "requirements": []
+  "requirements": [],
+  "iot_class": "cloud_polling"
 }
 ```
 
@@ -244,3 +246,19 @@ We highly recommend getting your integration scored.
  "quality_scale": "silver"
 }
 ```
+
+## IoT Class
+
+The [IoT Class][iot_class] describes how an integration connects with, e.g., a device or service. For more information
+about IoT Classes, read the blog about ["Classifying the Internet of Things"][iot_class].
+
+The following IoT classes are accepted in the manifest:
+
+- `assumed_state`: We are unable to get the state of the device. Best we can do is to assume the state based on our last command.
+- `cloud_polling`: The integration of this device happens via the cloud and requires an active internet connection. Polling the state means that an update might be noticed later.
+- `cloud_push`: Integration of this device happens via the cloud and requires an active internet connection. Home Assistant will be notified as soon as a new state is available.
+- `local_polling`: Offers direct communication with device. Polling the state means that an update might be noticed later.
+- `local_push`: Offers direct communication with device. Home Assistant will be notified as soon as a new state is available.
+- `calculated`: The integration does not handle communication on it's own, but provides a calculated result.
+
+[iot_class]: https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things/#classifiers
