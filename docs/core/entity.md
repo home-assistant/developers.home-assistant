@@ -12,16 +12,16 @@ For a generic introduction of entities, see [entities architecture](../architect
 Below is an example switch entity that keeps track of their state in memory.
 
 ```python
-from homeassistant.components.switch import SwitchDevice
+from homeassistant.components.switch import SwitchEntity
 
 
-class MySwitch(SwitchDevice):
+class MySwitch(SwitchEntity):
     def __init__(self):
         self._is_on = False
 
     @property
     def name(self):
-        """Name of the device."""
+        """Name of the entity."""
         return "My Switch"
 
     @property
