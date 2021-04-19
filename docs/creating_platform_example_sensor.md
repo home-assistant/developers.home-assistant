@@ -1,5 +1,5 @@
 ---
-title: ""
+title: "Moved Example Sensor"
 ---
 
 [This page has moved.](https://github.com/home-assistant/example-custom-config/tree/master/custom_components/example_sensor)
