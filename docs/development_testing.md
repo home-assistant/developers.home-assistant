@@ -38,7 +38,7 @@ If you are working on tests for an integration and you need the dependencies ava
 
 ### Running single tests using `tox`
 
-You can pass arguments via `tox` to `py.test` to be able to run single test suites or test files. Replace `py38` with the Python version that you use.
+You can pass arguments via `tox` to `pytest` to be able to run single test suites or test files. Replace `py38` with the Python version that you use.
 
 ```shell
 # Stop after the first test fails
@@ -65,7 +65,7 @@ Now that you have all test dependencies installed, you can run tests on individu
 flake8 homeassistant/core.py
 pylint homeassistant/core.py
 pydocstyle homeassistant/core.py
-py.test tests/test_core.py
+pytest tests/test_core.py
 ```
 
 You can also run linting tests against all changed files, as reported by `git diff upstream/dev... --diff-filter=d --name-only`, using the `lint` script:
