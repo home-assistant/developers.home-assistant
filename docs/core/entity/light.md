@@ -15,17 +15,17 @@ A light entity controls the brightness, hue and saturation color value, white va
 | color_temp | int | None | Return the CT color value in mireds.
 | effect | String | None | Return the current effect.
 | effect_list | list | None | Return the list of supported effects.
-| hs_color | list | None | Return the hue and saturation color value [float, float].
+| hs_color | list | None | Return the hue and saturation color value (float, float).
 | is_on    | bool | bool  | Returns if the light entity is on or not.  
 | max_mireds | int | int | Return the warmest color_temp that this light supports.
 | min_mireds | int | int | Return the coldest color_temp that this light supports.
-| rgb_color | list | None | Return the rgb color value [int, int, int].
-| rgbw_color | list | None | Return the rgbw color value [int, int, int, int].
-| rgbww_color | list | None | Return the rgbww color value [int, int, int, int, int].
+| rgb_color | list | None | Return the rgb color value (int, int, int).
+| rgbw_color | list | None | Return the rgbw color value (int, int, int, int).
+| rgbww_color | list | None | Return the rgbww color value (int, int, int, int, int).
 | supported_color_modes | list | None | Flag supported color modes.
 | supported_features | int | int | Flag supported features.
 | white_value | int | None | Return the white value of this light between 0..255. This is deprecated and will be removed in Home Assistant 2021.10.
-| xy_color | list | None | Return the xy color value [float, float].
+| xy_color | list | None | Return the xy color value (float, float).
 
 ## Color Modes
 
