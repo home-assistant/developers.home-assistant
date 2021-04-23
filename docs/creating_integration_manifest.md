@@ -16,7 +16,8 @@ Every integration has a manifest file to specify basic information about an inte
   "codeowners": ["@balloob"],
   "requirements": ["aiohue==1.9.1"],
   "quality_scale": "platinum",
-  "iot_class": "local_polling"
+  "iot_class": "local_polling",
+  "strictly_typed": true
 }
 ```
 
@@ -262,3 +263,16 @@ The following IoT classes are accepted in the manifest:
 - `calculated`: The integration does not handle communication on it's own, but provides a calculated result.
 
 [iot_class]: https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things/#classifiers
+
+## Strict type checks
+
+If your integration is fully covered with type hints, we recommend you to enable strict mypy checks.
+Mypy will check if all required type annotations are added and if all types are used correctly.
+This can catch some potential issues in the code.
+
+
+```json
+{
+ "strictly_typed": true
+}
+```
