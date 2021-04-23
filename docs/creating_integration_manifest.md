@@ -267,7 +267,7 @@ The following IoT classes are accepted in the manifest:
 ## Strict type checks
 
 If your integration is fully covered with type hints, we recommend you to enable strict mypy checks.
-Mypy will check if all required type annotations are added and if all types are used correctly.
+[Mypy](https://mypy.readthedocs.io/en/stable/) will check if all required type annotations are added and if all types are used correctly.
 This can catch some potential issues in the code.
 
 
