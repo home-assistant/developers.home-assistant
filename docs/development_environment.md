@@ -24,14 +24,10 @@ The easiest way to get started with development is to use Visual Studio Code wit
 **Getting started:**
 
 1. Fork the repository.
-2. Clone the repository to your computer*.
+2. Clone the repository to your computer. Windows users need to [place their files within WSL file system](https://code.visualstudio.com/docs/remote/containers#_open-a-wsl-2-folder-in-a-container-on-windows) to prevent performance degradation.
 3. Open the repository using Visual Studio code.
 
 When you open this repository with Visual Studio code you are asked to "Reopen in Container", this will start the build of the container.
-
-\****Optimizing performance for Windows***
-
-See more info at '[Open a WSL 2 folder in a container on Windows](https://code.visualstudio.com/docs/remote/containers#_open-a-wsl-2-folder-in-a-container-on-windows)'. Placing your files within the WSL file system will increase the performance of your devcontainer significantly.
 
 ### Tasks
 
