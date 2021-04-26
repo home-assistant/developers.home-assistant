@@ -52,7 +52,7 @@ Use the following Lovelace configuration to use this strategy:
 
 ```yaml
 strategy:
-  name: my-demo
+  name: custom:my-demo
 views: []
 ```
 
@@ -93,7 +93,7 @@ Use the following Lovelace configuration to use this strategy:
 ```yaml
 views:
 - strategy:
-    name: my-demo
+    name: custom:my-demo
 ```
 
 ## Full Example
@@ -175,6 +175,6 @@ Use the following Lovelace configuration to use this strategy:
 
 ```yaml
 strategy:
-  name: my-demo
+  name: custom:my-demo
 views: []
 ```

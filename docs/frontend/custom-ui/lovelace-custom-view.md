@@ -2,7 +2,7 @@
 title: "Lovelace: Custom View Layout"
 ---
 
-By default Home Assistant will try to show the cards in a masonry layout (like Pinterest). A Custom View Layouts allow developers to override this and define the layout mechanism (like a grid).
+By default Home Assistant will try to show the cards in a masonry layout (like Pinterest). A Custom View Layout allows developers to override this and define the layout mechanism (like a grid).
 
 ## API
 
