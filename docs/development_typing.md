@@ -4,7 +4,8 @@ title: "Adding type hints to your code"
 
 Type hints in Python are static annotations of variables and functions, to let humans more easily understand the code. See the standard library [docs](https://docs.python.org/3/library/typing.html) and this PyCascades 2018 [talk](https://youtu.be/zKre4DKAB30).
 
-Type hints are not required for all modules at the moment in Home Assistant, but we aim to have complete coverage of the core modules.
+Type hints are not required for all modules at the moment in Home Assistant, but we aim to have a complete as possible coverage.
+To improve and encourage this, all code is type checked in our continuous integration process and assumes everything is type checked, unless explicitly excluded from type checking.
 
 Adding type hints to an existing codebase can be a daunting task. To speed this up and help developers doing this, Instagram made the [`monkeytype`](https://pypi.org/project/MonkeyType/) program. It will analyze calls during runtime and try to assign the correct type hints to the code.
 
@@ -22,3 +23,9 @@ We've added a script to start a run of our test suite or a test module and tell 
 
 **Note:**
 Applying a monkeytyped stub to a module that has existing typing annotations might error and not work. This tool is most useful for totally untyped modules.
+
+### Excluding modules from type checking
+
+While we encourage the use of type hints, we currently do not require them for our integrations.
+By default, our CI assumes files do have type hints. In case the added module doesn't have this, it can be excluded by adding the module to the `.no-strict-typing` file
+that is located at the root of the Home Assistant Core project.
