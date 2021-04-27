@@ -2,66 +2,27 @@
 title: "Lovelace: Custom Cards"
 ---
 
-[Lovelace](https://www.home-assistant.io/lovelace/) is our new approach to defining your user interface for Home Assistant. We offer a lot of built-in cards, but you're not just limited to the ones that we decided to include in the Lovelace UI. You can build and use your own!
-
-## API
-
-You define your custom card as a [custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements). It's up to you to decide how to render your DOM inside your element. You can use Polymer, Angular, Preact or any other popular framework (except for React – [more info on React here](https://custom-elements-everywhere.com/#react)).
-
-```js
-const element = document.createElement('some-custom-card');
-```
-
-Home Assistant will call `setConfig(config)` when the configuration changes (rare). If you throw an exception if the configuration is invalid, Lovelace will render an error card to notify the user.
-
-```js
-try {
-  element.setConfig(config);
-} catch (err) {
-  showErrorCard(err.message, config);
-}
-```
-
-Home Assistant will set the `hass` property when the state of Home Assistant changes (frequent). Whenever the state changes, the component will have to update itself to represent the latest state.
-
-```js
-element.hass = hass;
-```
-
-Your card can define a `getCardSize` method that returns the size of your card as a number or a promise that will resolve to a number. A height of 1 is equivalent to 50 pixels. This will help Home Assistant distribute the cards evenly over the columns. A card size of `1` will be assumed if the method is not defined.
-
-```js
-if ('getCardSize' in element) {
-  return element.getCardSize();
-} else {
-  return 1;
-}
-```
-
-Since some element can be lazy loaded, if you want to get the card size of another element, you should first check it is defined.
-
-```js
-  return customElements
-    .whenDefined(element.localName)
-    .then(() => element.getCardSize());
-```
-
-Your card can define a `getConfigElement` method that returns a custom element for editing the user configuration. Home Assistant will display this element in the card editor in Lovelace.
+[Lovelace](https://www.home-assistant.io/lovelace/) is our approach to defining your user interface for Home Assistant. We offer a lot of built-in cards, but you're not just limited to the ones that we decided to include in the Lovelace UI. You can build and use your own!
 
 ## Defining your card
+
+This is a basic example to show what's possible.
 
 Create a new file in your Home Assistant config dir as `<config>/www/content-card-example.js` and put in the following contents:
 
 ```js
 class ContentCardExample extends HTMLElement {
+  // Whenever the state changes, a new `hass` object is set. Use this to
+  // update your content.
   set hass(hass) {
+    // Initialize the content if it's not there yet.
     if (!this.content) {
-      const card = document.createElement('ha-card');
-      card.header = 'Example card';
-      this.content = document.createElement('div');
-      this.content.style.padding = '0 16px 16px';
-      card.appendChild(this.content);
-      this.appendChild(card);
+      this.innerHTML = `
+        <ha-card header="Example-card">
+          <div class="card-content"></div>
+        </ha-card>
+      `;
+      this.content = this.querySelector('div');
     }
 
     const entityId = this.config.entity;
@@ -75,6 +36,8 @@ class ContentCardExample extends HTMLElement {
     `;
   }
 
+  // The user supplied configuration. Throw an exception and Lovelace will
+  // render an error card.
   setConfig(config) {
     if (!config.entity) {
       throw new Error('You need to define an entity');
@@ -96,7 +59,7 @@ customElements.define('content-card-example', ContentCardExample);
 
 In our example card we defined a card with the tag `content-card-example` (see last line), so our card type will be `custom:content-card-example`. And because you created the file in your `<config>/www` directory, it will be accessible in your browser via the url `/local/` (if you have recently added the www folder you will need to re-start Home Assistant for files to be picked up).
 
-[Add a resource to your Lovelace configuration](/docs/frontend/custom-ui/registering-resources) with URL `/local/content-card-example.js` and type `module`.
+Add a resource to your Lovelace configuration with URL `/local/content-card-example.js` and type `module` ([resource docs](/docs/frontend/custom-ui/registering-resources)).
 
 You can then use your card in your Lovelace configuration:
 
@@ -109,9 +72,29 @@ views:
     entity: input_boolean.switch_tv
 ```
 
+## API
+
+Custom cards are defined as a [custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements). It's up to you to decide how to render your DOM inside your element. You can use Polymer, Angular, Preact or any other popular framework (except for React – [more info on React here](https://custom-elements-everywhere.com/#react)).
+
+Home Assistant will call `setConfig(config)` when the configuration changes (rare). If you throw an exception if the configuration is invalid, Lovelace will render an error card to notify the user.
+
+Home Assistant will set the `hass` property when the state of Home Assistant changes (frequent). Whenever the state changes, the component will have to update itself to represent the latest state.
+
+Your card can define a `getCardSize` method that returns the size of your card as a number or a promise that will resolve to a number. A height of 1 is equivalent to 50 pixels. This will help Home Assistant distribute the cards evenly over the columns. A card size of `1` will be assumed if the method is not defined.
+
+Since some elements can be lazy loaded, if you want to get the card size of another element, you should first check it is defined.
+
+```js
+  return customElements
+    .whenDefined(element.localName)
+    .then(() => element.getCardSize());
+```
+
+Your card can define a `getConfigElement` method that returns a custom element for editing the user configuration. Home Assistant will display this element in the card editor in Lovelace.
+
 ## Advanced example
 
-Resources to load in Lovelace can be imported as a JS script, an HTML import or as a JS module import. Below is an example of a custom card using JS modules that does all the fancy things.
+Resources to load in Lovelace are imported as a JS module import. Below is an example of a custom card using JS modules that does all the fancy things.
 
 ![Screenshot of the wired card](/img/en/frontend/lovelace-ui-custom-card-screenshot.png)
 

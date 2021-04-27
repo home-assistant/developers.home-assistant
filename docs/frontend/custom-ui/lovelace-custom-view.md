@@ -1,8 +1,8 @@
 ---
-title: "Lovelace: Custom Views"
+title: "Lovelace: Custom View Layout"
 ---
 
-Custom View Layouts allow developers and users to customize the way that Cards and Badges are displayed in a view by loading the layout and specifying the type on the view. You are now not limited to our built-in sorting methods.
+By default Home Assistant will try to show the cards in a masonry layout (like Pinterest). A Custom View Layout allows developers to override this and define the layout mechanism (like a grid).
 
 ## API
 
@@ -24,6 +24,7 @@ interface LovelaceViewElement {
 Cards and Badges will be created and maintained by the core code and given to the custom view. The custom views are meant to load the cards and badges and display them in a customized layout.
 
 ## Example
+
 (note: this example does not have all of the properties but the necessities to show the example)
 
 ```js
@@ -31,7 +32,7 @@ class MyNewView extends LitElement {
   setConfig(_config) {}
 
   static get properties() {
-    return { 
+    return {
       cards: {type: Array, attribute: false}
     };
   }
@@ -51,9 +52,7 @@ And you can define this element in the Custom Element Registry just as you would
 customElements.define("my-new-view", MyNewView);
 ```
 
-You can find an example of this in our default view: `Masonry View` Located here: [frontend/src/panels/lovelace/views/hui-masonry-view.ts](https://github.com/home-assistant/frontend/blob/master/src/panels/lovelace/views/hui-masonry-view.ts)
-
-A user who downloads and installs your new Custom View can then use it via editing the YAML configuration of their view to be:
+A custom view can be used by adding the following to the definition of your Lovelace view:
 
 ```yaml
 - title: Home View
@@ -61,6 +60,8 @@ A user who downloads and installs your new Custom View can then use it via editi
   badges: [...]
   cards: [...]
 ```
+
+The Lovelace default masonry view is an example of a layout element. ([source](https://github.com/home-assistant/frontend/blob/master/src/panels/lovelace/views/hui-masonry-view.ts)).
 
 ## Store Custom Data
 
