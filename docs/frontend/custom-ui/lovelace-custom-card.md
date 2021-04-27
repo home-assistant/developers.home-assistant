@@ -74,7 +74,7 @@ views:
 
 ## API
 
-Custom card are defined as a [custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements). It's up to you to decide how to render your DOM inside your element. You can use Polymer, Angular, Preact or any other popular framework (except for React – [more info on React here](https://custom-elements-everywhere.com/#react)).
+Custom cards are defined as a [custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements). It's up to you to decide how to render your DOM inside your element. You can use Polymer, Angular, Preact or any other popular framework (except for React – [more info on React here](https://custom-elements-everywhere.com/#react)).
 
 Home Assistant will call `setConfig(config)` when the configuration changes (rare). If you throw an exception if the configuration is invalid, Lovelace will render an error card to notify the user.
 
@@ -82,7 +82,7 @@ Home Assistant will set the `hass` property when the state of Home Assistant cha
 
 Your card can define a `getCardSize` method that returns the size of your card as a number or a promise that will resolve to a number. A height of 1 is equivalent to 50 pixels. This will help Home Assistant distribute the cards evenly over the columns. A card size of `1` will be assumed if the method is not defined.
 
-Since some element can be lazy loaded, if you want to get the card size of another element, you should first check it is defined.
+Since some elements can be lazy loaded, if you want to get the card size of another element, you should first check it is defined.
 
 ```js
   return customElements
