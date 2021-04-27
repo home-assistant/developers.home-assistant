@@ -26,7 +26,7 @@ Applying a monkeytyped stub to a module that has existing typing annotations mig
 
 ### Including modules for strict type checking
 
-We encourage the use of type hints, we currently do not require them for our integrations.
+While we encourage the use of type hints, we currently do not require them for our integrations.
 By default, our CI checks statically for type hints. In case a module has been fully typed, it can be
 marked for enabling strict checks, by adding the module to the `.strict-typing` file
 that is located at the root of the Home Assistant Core project.
