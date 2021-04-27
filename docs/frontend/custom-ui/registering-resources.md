@@ -18,7 +18,6 @@ This tab is only available when the active user's profile has "advanced mode" en
 
 :::
 
-
 ![Screenshot of the Resources tab, found at the top of the Lovelace Configuration UI](/img/en/frontend/lovelace-ui-resources-tab.png)
 
 ![Screenshot of the Advanced Mode selector found on the Profile page](/img/en/frontend/lovelace-ui-profile-advanced-mode.png)
