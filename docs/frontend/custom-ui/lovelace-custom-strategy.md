@@ -10,7 +10,7 @@ It's possible for developers to create their own strategies to generate dashboar
 
 A strategy can be applied to the whole configuration or to a specific view.
 
-Strategies are defined as a custom element. Instead of rendering the custom element, Home Assistant will call static functions on the class instead.
+Strategies are defined as a custom element in a JavaScript file, and included [via Lovelace resources](./registering-resources.md). Home Assistant will call static functions on the class instead of rendering it as a custom element.
 
 ## Dashboard Strategies
 
