@@ -24,8 +24,9 @@ We've added a script to start a run of our test suite or a test module and tell 
 **Note:**
 Applying a monkeytyped stub to a module that has existing typing annotations might error and not work. This tool is most useful for totally untyped modules.
 
-### Excluding modules from type checking
+### Including modules for strict type checking
 
-While we encourage the use of type hints, we currently do not require them for our integrations.
-By default, our CI assumes files do have type hints. In case the added module doesn't have this, it can be excluded by adding the module to the `.no-strict-typing` file
+We encourage the use of type hints, we currently do not require them for our integrations.
+By default, our CI checks statically for type hints. In case a module has been fully typed, it can be
+marked for enabling strict checks, by adding the module to the `.strict-typing` file
 that is located at the root of the Home Assistant Core project.

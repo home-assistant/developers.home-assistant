@@ -73,6 +73,6 @@ _LOGGER.info("Can't connect to the webservice %s at %s", string1, string2)
 We encourage the use of fully typing your code. This helps with finding/preventing issues and bugs in our codebase,
 but also helps fellow contributors making adjustments to your code in the future as well.
 
-By default, Home Assistant will assume everything has type hints and our automated CI process will also check for this.
-Python modules can be excluded from this behavior by adding an entry to the `.no-strict-typing` file in the
-root of the Home Assistant Core project.
+By default, Home Assistant will statically check for type hints and our automated CI process.
+Python modules can be include for strict checking, if they are fully typed, by adding an entry
+to the `.strict-typing` file in the root of the Home Assistant Core project.
