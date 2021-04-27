@@ -4,7 +4,7 @@ title: "Lovelace: Custom Strategies"
 
 _Introduced in Home Assistant 2021.5._
 
-Strategies are JavaScript functions that generate Lovelace configurations. When a user has not created a Lovelace configuration yet, an auto-generated dashboard is shown. This is generated using a strategy.
+Strategies are JavaScript functions that generate Lovelace configurations. When a user has not created a Lovelace configuration yet, an auto-generated dashboard is shown. That configuration is generated using a built-in strategy.
 
 It's possible for developers to create their own strategies to generate dashboards. Strategies can use all of Home Assistant's data and the user's Lovelace configuration to create something new.
 
@@ -28,6 +28,7 @@ An info object is passed to the strategy with information:
 class StrategyDemo {
 
   static async generateDashboard(info) {
+
     return {
       title: "Generated Lovelace",
       views: [
@@ -41,6 +42,7 @@ class StrategyDemo {
         }
       ]
     };
+
   }
 
 }
@@ -52,13 +54,13 @@ Use the following Lovelace configuration to use this strategy:
 
 ```yaml
 strategy:
-  name: custom:my-demo
+  type: custom:my-demo
 views: []
 ```
 
-## View strategies
+## View Strategies
 
-A view strategy is responsible for generating the configuration of a specific Lovelace view. The strategy is only invoked when the user opens the specific view.
+A view strategy is responsible for generating the configuration of a specific Lovelace view. The strategy is invoked when the user opens the specific view.
 
 An info object is passed to the strategy with information:
 
@@ -73,6 +75,7 @@ An info object is passed to the strategy with information:
 class StrategyDemo {
 
   static async generateView(info) {
+
     return {
       "cards": [
         {
@@ -81,6 +84,7 @@ class StrategyDemo {
         }
       ]
     };
+
   }
 
 }
@@ -93,7 +97,7 @@ Use the following Lovelace configuration to use this strategy:
 ```yaml
 views:
 - strategy:
-    name: custom:my-demo
+    type: custom:my-demo
 ```
 
 ## Full Example
@@ -119,7 +123,7 @@ class StrategyDemo {
     return {
       views: areas.map((area) => ({
         strategy: {
-          name: "custom:my-demo",
+          type: "custom:my-demo",
           options: { area, devices, entities },
         },
         title: area.name,
@@ -175,6 +179,6 @@ Use the following Lovelace configuration to use this strategy:
 
 ```yaml
 strategy:
-  name: custom:my-demo
+  type: custom:my-demo
 views: []
 ```
