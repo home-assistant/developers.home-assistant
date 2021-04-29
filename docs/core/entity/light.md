@@ -75,6 +75,7 @@ class MyLightEntity(LightEntity):
 Note that there's no `color_mode` passed to the `async_turn_on` method, instead only a single color is allowed.
 
 Colors in the service call will be translated before the entity's `async_turn_on` method is called if the light doesn't support the corresponding color mode:
+
 | Color type   | Translation
 |--------------|-----------------------
 | color_temp | Not translated, will be passed as is even if not supported by the light.
@@ -82,7 +83,7 @@ Colors in the service call will be translated before the entity's `async_turn_on
 | rgb_color | Will be removed from the service call if not supported and translated to `rgbw_color`, `rgbww_color`, `hs_color` or `xy_color` if supported by the light.
 | rgbw_color | Not translated, will be passed as is even if not supported by the light.
 | rgbww_color | Not translated, will be passed as is even if not supported by the light.
-| hs_color | Will be removed from the service call if not supported and translated to `hs_color`, `rgb_color`, `rgbw_color` or `rgbww_color` if supported by the light.
+| xy_color | Will be removed from the service call if not supported and translated to `hs_color`, `rgb_color`, `rgbw_color` or `rgbww_color` if supported by the light.
 
 
 ### Turn Off Light Device
