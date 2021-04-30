@@ -226,7 +226,7 @@ Your card can also define a `getStubConfig` method that returns a default card c
 Home Assistant will call the `setConfig` method of the config element on setup.
 Home Assistant will update the `hass` property of the config element on state changes, and the `lovelace` element, which contains information about the lovelace configuration.
 
-Changes to the configuration are communicated back to lovelace by dispatching an `config-changed` event with the new configuration in it's detail.
+Changes to the configuration are communicated back to lovelace by dispatching a `config-changed` event with the new configuration in its detail.
 
 To have your card displayed in the card picker dialog in Lovelace, add an object describing it to the array `window.customCards`. Required properties of the object are `type` and `name` (see example below).
 

@@ -56,7 +56,7 @@ Screenshot of the [test results](https://dev.azure.com/home-assistant/Home%20Ass
 
 HassOS is our own embedded Linux distribution. It is tailored to run the bare minimum of what we need to run Home Assistant in a Docker container. BuildRoot powers the build and we’re targeting five different processor architectures.
 
-The Azure Pipelines agents are using the amd64 CPU architecture. It is possible to compile for different architectures using a method called cross-compiling. We gave it a shot but realized that it is significanty slower than compiling a build using the same native CPU's as that we’re targeting.
+The Azure Pipelines agents are using the amd64 CPU architecture. It is possible to compile for different architectures using a method called cross-compiling. We gave it a shot but realized that it is significantly slower than compiling a build using the same native CPU's as that we’re targeting.
 
 We use a feature on Azure Pipelines called [self-hosted agents](https://docs.microsoft.com/en-us/azure/devops/pipelines/agents/agents?view=azure-devops#install) to host build agents on our own hardware with the right architecture. Azure Pipelines manages the pipeline definition and the orchestration, but the execution runs blazing fast on our own hardware.
 
