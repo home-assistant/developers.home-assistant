@@ -18,7 +18,7 @@ These models are describing objects that are getting returned from the superviso
 | update_available | boolean        | `true` if an update is available                      |
 | installed        | string         | `true` if the the add-on is installed                 |
 | available        | boolean        | `false` if you can not install the add-on             |
-| icon             | bool           | The add-on has a icon file                            |
+| icon             | bool           | The add-on has an icon file                            |
 | logo             | bool           | The add-on has a logo file                            |
 | state            | string         | The state of the add-on (started, stopped)            |
 
@@ -101,8 +101,8 @@ These models are describing objects that are getting returned from the superviso
 | primary     | boolean | `true` if it's the primary network interface.                                |
 | ipv4        | struct or null  | An IP config struct with IPv4 connection details.                            |
 | ipv6        | struct or null  | An IP config struct with IPv6 connection details.                            |
-| wifi        | struct or null  | An Wifi config struct with wireless connection details.                      |
-| vlan        | struct or null  | An Vlan config struct with details about the vlan.                           |
+| wifi        | struct or null  | A Wifi config struct with wireless connection details.                      |
+| vlan        | struct or null  | A Vlan config struct with details about the vlan.                           |
 
 ### IP configuration
 
@@ -171,7 +171,7 @@ These models are describing objects that are getting returned from the superviso
 | key       | type    | description                                                           |
 | --------- | ------- | --------------------------------------------------------------------- |
 | slug      | string  | A generated slug for the snapshot                                     |
-| date      | string  | A ISO date string representation of the date the snapshot was created |
+| date      | string  | ISO date string representation of the date the snapshot was created |
 | name      | string  | The name given to the snapshot                                        |
 | type      | string  | The type of snapshot (full, partial)                                  |
 | protected | boolean | `true` if the snapshot is password protected                          |
@@ -183,7 +183,7 @@ These models are describing objects that are getting returned from the superviso
 | slug          | string  | A generated slug for the snapshot                                                                                          |
 | type          | string  | The type of snapshot (full, partial)                                                                                       |
 | name          | string  | The name given to the snapshot                                                                                             |
-| date          | string  | A ISO date string representation of the date the snapshot was created                                                      |
+| date          | string  | ISO date string representation of the date the snapshot was created                                                      |
 | size          | string  | The size of the snapshot in MB                                                                                             |
 | protected     | boolean | `true` if the snapshot is password protected                                                                               |
 | homeassistant | string  | The version of Home Assistant that was in use                                                                              |
@@ -211,7 +211,7 @@ These models are describing objects that are getting returned from the superviso
 | uuid      | str         | A generated uuid as issue ID                        |
 | type      | str         | Type of the issue                                   |
 | context   | str         | In which context the issue occorse                  |
-| reference | str or null | Depend on the Context, a reference to a other Model |
+| reference | str or null | Depend on the Context, a reference to another Model |
 
 ## Suggestion
 
@@ -220,7 +220,7 @@ These models are describing objects that are getting returned from the superviso
 | uuid      | str         | A generated uuid as suggestion ID                   |
 | type      | str         | Type of the suggestion                              |
 | context   | str         | In which context the suggestion occorse             |
-| reference | str or null | Depend on the Context, a reference to a other Model |
+| reference | str or null | Depend on the Context, a reference to another Model |
 
 ## Check
 

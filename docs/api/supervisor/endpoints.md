@@ -65,11 +65,11 @@ Reloads the information stored about add-ons.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/changelog" method="get">
-Get the changelog for a add.on.
+Get the changelog for an add-on.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/documentation" method="get">
-Get the documentation for a add.on.
+Get the documentation for an add-on.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/logs" method="get">
@@ -81,7 +81,7 @@ Get the add-on icon
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/info" method="get">
-Get details about a add-on
+Get details about an add-on
 
 **Returned data:**
 
@@ -240,7 +240,7 @@ Get details about a add-on
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/install" method="post">
-Install a add-on
+Install an add-on
 
 **Deprecated!** Use [`/store/addons/<addon>/install`](#store) instead.
 
@@ -251,7 +251,7 @@ Get the add-on logo
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/options" method="post">
-Set the protection mode on a add-on.
+Set the protection mode on an add-on.
 
 This function is not callable by itself and you can not use `self` as the slug here.
 
@@ -305,11 +305,11 @@ Rebuild the add-on, only supported for local build add-ons.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/restart" method="post">
-Restart a add-on
+Restart an add-on
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/security" method="post">
-Set the protection mode on a add-on.
+Set the protection mode on an add-on.
 
 This function is not callable by itself and you can not use `self` as the slug here.
 
@@ -322,7 +322,7 @@ This function is not callable by itself and you can not use `self` as the slug h
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/start" method="post">
-Start a add-on
+Start an add-on
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/stats" method="get">
@@ -353,15 +353,15 @@ The payload you want to pass into the addon you give the endpoint as the body of
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/stop" method="post">
-Stop a add-on
+Stop an add-on
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/uninstall" method="post">
-Uninstall a add-on
+Uninstall an add-on
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/update" method="post">
-Update a add-on
+Update an add-on
 
 **Deprecated!** Use [`/store/addons/<addon>/update`](#store) instead.
 
@@ -402,7 +402,7 @@ Return information about the audio plugin.
 | version          | string     | The installed observer version   |
 | version_latest   | string     | The latest published version     |
 | update_available | boolean    | `true` if an update is available |
-| audio            | dictionary | A [Audio model](api/supervisor/models.md#audio) |
+| audio            | dictionary | An [Audio model](api/supervisor/models.md#audio) |
 
 **Example response:**
 
@@ -541,7 +541,7 @@ Mute output for a specific application
 </ApiEndpoint>
 
 <ApiEndpoint path="/audio/profile" method="post">
-Create a audio profile
+Create an audio profile
 
 **Payload:**
 
@@ -1500,7 +1500,7 @@ Update the settings for a network interface.
 
 | key         | type   | optional | description                                                                           |
 | ----------- | ------ | -------- | ------------------------------------------------------------------------------------- |
-| method      | string | True     | Set IP configuration method can be `auto` for DHCP or Router Advertisments (only IPv6), `static` or `disabled`     |
+| method      | string | True     | Set IP configuration method can be `auto` for DHCP or Router Advertisements (only IPv6), `static` or `disabled`     |
 | address     | list   | True     | The new IP address for the interface in the X.X.X.X/XX format as list                 |
 | nameservers | list   | True     | List of DNS servers to use                                                            |
 | gateway     | string | True     | The gateway the interface should use                                                  |
@@ -1626,7 +1626,7 @@ Update the observer plugin
 
 <ApiEndpoint path="/os/config/sync" method="post">
 
-Load host configurations from an USB stick.
+Load host configurations from a USB stick.
 
 </ApiEndpoint>
 
@@ -1677,8 +1677,8 @@ Update Home Assistant OS
 
 | key      | type       | description                                      |
 | -------- | ---------- | ------------------------------------------------ |
-| unsupported | list | A list of reasons why a installation is marked as unsupported (container, dbus, docker_configuration, docker_version, lxc, network_manager, os, privileged, systemd) |
-| unhealthy | list | A list of reasons why a installation is marked as unhealthy (docker, supervisor, privileged, setup) |
+| unsupported | list | A list of reasons why an installation is marked as unsupported (container, dbus, docker_configuration, docker_version, lxc, network_manager, os, privileged, systemd) |
+| unhealthy | list | A list of reasons why an installation is marked as unhealthy (docker, supervisor, privileged, setup) |
 | issues | list | A list of [Issue models](api/supervisor/models.md#issues) |
 | suggestions | list | A list of [Suggestion models](api/supervisor/models.md#suggestion) actions |
 | checks | list | A list of [Check models](api/supervisor/models.md#check) |
@@ -1730,7 +1730,7 @@ Dismiss a suggested action
 
 <ApiEndpoint path="/resolution/issue/<uuid>" method="delete">
 
-Dismiss a issue
+Dismiss an issue
 
 </ApiEndpoint>
 
@@ -2326,7 +2326,7 @@ Some of the endpoints uses placeholders indicated with `<...>` in the endpoint U
 | placeholder | description                                                                                                                                           |
 | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | addon       | The slug for the addon, to get the slug you can call `/addons`, to call endpoints for the add-on calling the endpoints you can use `self`as the slug. |
-| application | The name of a application, call `/audio/info` to get the correct name                                                                                 |
+| application | The name of an application, call `/audio/info` to get the correct name                                                                                 |
 | interface   | A valid interface name, example `eth0`, to get the interface name you can call `/network/info`. You can use `default` to get the primary interface |
 | registry    | A registry hostname defined in the container registry configuration, to get the hostname you can call `/docker/registries`                            |
 | service     | The service name for a service on the host.                                                                                                           |

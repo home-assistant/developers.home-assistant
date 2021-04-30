@@ -12,7 +12,7 @@ Properties should always only return information from memory and not do I/O (lik
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | current_activity | str | None | Return the current active activity |
-| activity_list | list | None | Return the list of available activites |
+| activity_list | list | None | Return the list of available activities |
 
 ### Activity
 

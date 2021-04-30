@@ -18,7 +18,7 @@ A `number` is an entity that allows the user to input an arbitrary value to an i
 
 Other properties that are common to all entities such as `icon`, `unit_of_measurement`, `name` etc are also applicable.
 
-The default step value is dynamically chosen based on the range (max - min) values. If the difference between max_value and min_value is greater than 1.0, then the default step is 1.0. If however the range is smaller, then the step is iteratively devided by 10 until it becomes lower than the range.
+The default step value is dynamically chosen based on the range (max - min) values. If the difference between max_value and min_value is greater than 1.0, then the default step is 1.0. If however the range is smaller, then the step is iteratively divided by 10 until it becomes lower than the range.
 
 ## Methods
 
