@@ -51,7 +51,7 @@ There are a few step names reserved for system use:
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `discovery` | _DEPRECATED_ Invoked if your integration has been discovered and the matching step has not been defined.             |
 | `dhcp`      | Invoked if your integration has been discovered via DHCP as specified [using `dhcp` in the manifest](creating_integration_manifest.md#dhcp).             |
-| `hassio`    | Invoked if your integration has been discovered via HASS IO add-on.
+| `hassio`    | Invoked if your integration has been discovered via a Supervisor add-on.
 | `homekit`   | Invoked if your integration has been discovered via HomeKit as specified [using `homekit` in the manifest](creating_integration_manifest.md#homekit).         |
 | `mqtt`      | Invoked if your integration has been discovered via MQTT as specified [using `mqtt` in the manifest](creating_integration_manifest.md#mqtt).             |
 | `ssdp`      | Invoked if your integration has been discovered via SSDP/uPnP as specified [using `ssdp` in the manifest](creating_integration_manifest.md#ssdp).             |
