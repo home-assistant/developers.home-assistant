@@ -49,12 +49,13 @@ There are a few step names reserved for system use:
 
 | Step name   | Description                                                                                                                                                   |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `discovery` | _DEPRECATED_ Invoked if your integration has been discovered by the discovery integration.             |
+| `discovery` | _DEPRECATED_ Invoked if your integration has been discovered and the matching step has not been defined.             |
 | `dhcp`      | Invoked if your integration has been discovered via DHCP as specified [using `dhcp` in the manifest](creating_integration_manifest.md#dhcp).             |
+| `hassio`    | Invoked if your integration has been discovered via a Supervisor add-on.
 | `homekit`   | Invoked if your integration has been discovered via HomeKit as specified [using `homekit` in the manifest](creating_integration_manifest.md#homekit).         |
 | `mqtt`      | Invoked if your integration has been discovered via MQTT as specified [using `mqtt` in the manifest](creating_integration_manifest.md#mqtt).             |
 | `ssdp`      | Invoked if your integration has been discovered via SSDP/uPnP as specified [using `ssdp` in the manifest](creating_integration_manifest.md#ssdp).             |
-| `user`      | Invoked when a user initiates a flow via the user interface.                                                                                                  |
+| `user`      | Invoked when a user initiates a flow via the user interface or when discovered and the matching and discovery step are not defined.                                                                                                  |
 | `zeroconf`  | Invoked if your integration has been discovered via Zeroconf/mDNS as specified [using `zeroconf` in the manifest](creating_integration_manifest.md#zeroconf). |
 
 ## Unique IDs
@@ -71,7 +72,7 @@ self._abort_if_unique_id_configured()
 By setting a unique ID, users will have the option to ignore the discovery of your config entry. That way, they won't be bothered about it anymore.
 If the integration uses DHCP, HomeKit, Zeroconf/mDNS or SSDP/uPnP to be discovered, supplying a unique ID is required.
 
-If a unique ID isn't available, alternatively, the `dhcp`, `zeroconf`, `homekit`, `ssdp` and `discovery` steps can be omitted, even if they are configured in
+If a unique ID isn't available, alternatively, the `dhcp`, `zeroconf`, `hassio`, `homekit`, `ssdp` and `discovery` steps can be omitted, even if they are configured in
 the integration manifest. In that case, the `user` step will be called when the item is discovered.
 
 Alternatively, if an integration can't get a unique ID all the time (e.g., multiple devices, some have one, some don't), a helper is available
