@@ -35,11 +35,11 @@ A light entity controls the brightness, hue and saturation color value, white va
 | `COLOR_MODE_ONOFF` | The light can be turned on or off. This mode must be the only supported mode if supported by the light.
 | `COLOR_MODE_BRIGHTNESS` | The light can be dimmed. This mode must be the only supported mode if supported by the light.
 | `COLOR_MODE_COLOR_TEMP` | The light can be dimmed and its color temperature is present in the state.
-| `COLOR_MODE_HS` | The light can be dimmed and its color is present in the state as an (h, s) tuple (no brightness).
-| `COLOR_MODE_RGB` | The light can be dimmed and its color is present in the state as an (r, g, b) tuple (not normalized for brightness).
-| `COLOR_MODE_RGBW` | The light can be dimmed and its color is present in the state as an (r, g, b, w) tuple (not normalized for brightness).
-| `COLOR_MODE_RGBWW` | The light can be dimmed and its color is present in the state as an (r, g, b, cw, ww) tuple (not normalized for brightness).
-| `COLOR_MODE_XY` | The light can be dimmed and its color is present in the state as an (x, y) tuple (no brightness).
+| `COLOR_MODE_HS` | The light can be dimmed and its color can be adjusted. The light's brightness can be set using the `brightness` parameter and read through the `brightness` property. The light's color can be set using the `hs_color` parameter and read through the `hs_color` property. `hs_color` is an (h, s) tuple (no brightness).
+| `COLOR_MODE_RGB` | The light can be dimmed and its color can be adjusted. The light's brightness can be set using the `brightness` parameter and read through the `brightness` property. The light's color can be set using the `rgb_color` parameter and read through the `rgb_color` property. `rgb_color` is an (r, g, b) tuple (not normalized for brightness).
+| `COLOR_MODE_RGBW` | The light can be dimmed and its color can be adjusted. The light's brightness can be set using the `brightness` parameter and read through the `brightness` property. The light's color can be set using the `rgbw_color` parameter and read through the `rgbw_color` property. `rgbw_color` is an (r, g, b, w) tuple (not normalized for brightness).
+| `COLOR_MODE_RGBWW` | The light can be dimmed and its color can be adjusted. The light's brightness can be set using the `brightness` parameter and read through the `brightness` property. The light's color can be set using the `rgbww_color` parameter and read through the `rgbww_color` property. `rgbww_color` is an (r, g, b, cw, ww) tuple (not normalized for brightness).
+| `COLOR_MODE_XY` | The light can be dimmed and its color can be adjusted. The light's brightness can be set using the `brightness` parameter and read through the `brightness` property. The light's color can be set using the `xy_color` parameter and read through the `xy_color` property. `xy_color` is an (x, y) tuple.
 
 Note that in color modes `COLOR_MODE_RGB`, `COLOR_MODE_RGBW` and `COLOR_MODE_RGBWW` there is brightness information both in the light's `brightness` property and in the color.
 
