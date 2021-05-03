@@ -106,7 +106,7 @@ from homeassistant.helpers import config_validation as cv, entity_platform, serv
 async def async_setup_entry(hass, entry):
     """Set up the media player platform for Sonos."""
 
-    platform = entity_platform.current_platform.get()
+    platform = entity_platform.async_get_current_platform()
 
     # This will call Entity.set_sleep_timer(sleep_time=VALUE)
     platform.async_register_entity_service(
