@@ -117,9 +117,9 @@ module.exports = {
       "development_catching_up",
     ],
     "Building Integrations": [
+      "creating_component_index",
       "creating_integration_file_structure",
       "creating_integration_manifest",
-      "creating_component_index",
       "config_entries_config_flow_handler",
       "config_entries_options_flow_handler",
       "configuration_yaml_index",
