@@ -37,3 +37,4 @@ If specifying a device class, your sensor entity will need to also return the co
 | energy | Wh,kWh | Energy.
 | power_factor | % | Power Factor.
 | voltage | V | Voltage.
+| mass | kg,lb | Mass (often incorrectly called weight).
