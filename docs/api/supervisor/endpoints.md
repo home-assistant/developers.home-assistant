@@ -294,6 +294,15 @@ To reset customized network/audio/options, set it `null`.
 
 <ApiEndpoint path="/addons/<addon>/options/validate" method="post">
 Run a configuration validation against the current stored add-on configuration.
+  
+**Returned data:**
+
+| key              | type        | description                      |
+| ---------------- | ----------- | -------------------------------- |
+| message          | string      | Include the error message        |
+| valid            | boll        | If config is valid or not        |
+| pwned            | bool | None | True or false if include pwned secrets. On error it's None |
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/options/config" method="get">
