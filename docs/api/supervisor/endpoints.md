@@ -300,8 +300,8 @@ Run a configuration validation against the current stored add-on configuration.
 | key              | type        | description                      |
 | ---------------- | ----------- | -------------------------------- |
 | message          | string      | Include the error message        |
-| valid            | boll        | If config is valid or not        |
-| pwned            | bool | None | True or false if include pwned secrets. On error it's None |
+| valid            | boolean        | If config is valid or not        |
+| pwned            | boolean | None | True or false if include pwned secrets. On error it's None |
 
 </ApiEndpoint>
 
