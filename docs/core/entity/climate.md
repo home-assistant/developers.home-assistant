@@ -33,8 +33,8 @@ Properties should always only return information from memory and not do I/O (lik
 | preset_modes            | list   | `NotImplementedError()`              | The available presets. Requires `SUPPORT_PRESET_MODE`.                                                       |
 | fan_mode                | string | `NotImplementedError()`              | Returns the current fan mode. Requires `SUPPORT_FAN_MODE`.                                                   |
 | fan_modes               | list   | `NotImplementedError()`              | Returns the list of available fan modes. Requires `SUPPORT_FAN_MODE`.                                        |
-| swing_mode              | string | `NotImplementedError()`              | Returns the swing setting.                                                                                     |
-| swing_modes             | list   | `NotImplementedError()`              | Returns the list of available swing modes.                                                                   |
+| swing_mode              | string | `NotImplementedError()`              | Returns the swing setting. Requires `SUPPORT_SWING_MODE`.                                                    |
+| swing_modes             | list   | `NotImplementedError()`              | Returns the list of available swing modes. Requires `SUPPORT_SWING_MODE`.                                    |
 | is_aux_heat             | bool   | None                                 | Returns True if an auxiliary heater is on. Requires `SUPPORT_AUX_HEAT`.                                      |
 | supported_features      | int    | `NotImplementedError()`              | Bitmap of supported features. See below.                                                                     |
 
