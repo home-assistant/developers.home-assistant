@@ -101,6 +101,13 @@ If you are running inside an async context, it might sometimes be necessary to c
 result = await hass.async_add_executor_job(hub.update)
 ```
 
+Or, for a function with parameters:
+
+```python
+# do_work(config) is a sync function with one parameter
+result = await hass.async_add_executor_job(do_work, config)
+```
+
 ## Starting independent task from async
 
 If you want to spawn a task that will not block the current async context, you can choose to create it as a task on the event loop. It will then be executed in parallel.
