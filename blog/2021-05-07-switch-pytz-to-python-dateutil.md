@@ -22,6 +22,8 @@ _[(link to part of the article explaining why it's -4:56)](https://blog.ganssle.
 
 In Home Assistant 2021.6 we're going to switch to `python-dateutil`. You will need to upgrade your custom integration if it relies on the unofficial interface `my_time_zone.localize(my_dt)`. Use Python's official method `my_dt.astimezone(my_time_zone)` instead.
 
+The property `hass.config.time_zone` will also change to a string instead of a time zone object.
+
 Thanks to [@bdraco] for helping revive this effort and push this change [past the finish line](https://github.com/home-assistant/core/pull/49643). We actually found a couple of bugs during the migration! Also thanks to Paul Ganssle for maintaining `python-dateutil` and the excellent write up.
 
 [@bdraco]: https://github.com/bdraco
