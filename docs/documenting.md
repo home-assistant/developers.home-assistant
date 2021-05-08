@@ -37,7 +37,7 @@ To test your changes locally, you need to install **Ruby** and its dependencies 
 
 
 - Fork the home-assistant.io [git repository](https://github.com/home-assistant/home-assistant.io).
-- In your home-assistant.io root directory, run `$ bundle` to install the gems you need.
+- In your home-assistant.io root directory, run `bundle` to install the gems you need.
 
 Then you can work on the documentation:
 
