@@ -23,7 +23,7 @@ The easiest way to get started with development is to use Visual Studio Code wit
 
 **Getting started:**
 
-1. Fork the repository.
+1. Fork the [Home Assistant core repository](https://github.com/home-assistant/core).
 2. Clone the repository to your computer. Windows users need to [place their files within WSL file system](https://code.visualstudio.com/docs/remote/containers#_open-a-wsl-2-folder-in-a-container-on-windows) to prevent performance degradation.
 3. Open the repository using Visual Studio code.
 
