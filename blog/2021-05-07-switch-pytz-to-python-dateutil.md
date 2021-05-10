@@ -27,3 +27,7 @@ The property `hass.config.time_zone` will also change to a string instead of a t
 Thanks to [@bdraco] for helping revive this effort and push this change [past the finish line](https://github.com/home-assistant/core/pull/49643). We actually found a couple of bugs during the migration! Also thanks to Paul Ganssle for maintaining `python-dateutil` and the excellent write up.
 
 [@bdraco]: https://github.com/bdraco
+
+## Update May 10
+
+Wow, time flies! Paul, the author of `python-dateutil` and also the author of blog post that inspired us, pointed us to the fact that Python 3.9 includes upgraded timezone handling and that we should use that instead. With the help of Nick and Paul `python-dateutil` has been removed again and `zoneinfo` is used instead ([PR](https://github.com/home-assistant/core/pull/50387)).
