@@ -21,8 +21,6 @@ The instructions here is for development of the Supervisor itself.
 Start the task "Run Supervisor" in Visual Studio Code, this will start an instance of the Supervisor inside the devcontainer you can use to test your changes.
 When the initializing is complete you can access the Home Assistant frontend on `http://localhost:9123`
 
-If you need to rebuild the base of the Supervisor run the task "Build Supervisor" and then restart the "Run Supervisor" task again when that completes.
-
 ### Testing on a remote system
 
 For this you first need to create an account at [Docker Hub](https://hub.docker.com/).
