@@ -2232,8 +2232,6 @@ Returns information about the supervisor
 | version_latest      | string       | The latest published version in the active channel            |
 | update_available    | boolean      | `true` if an update is available                              |
 | arch                | string       | The architecture of the host (armhf, aarch64, i386, amd64)    |
-| content_trust       | bool         | If content-trust is enabled or disabled on the backend        |
-| force_security      | bool         | If force-security is enabled or disabled on the backend       |
 | channel             | string       | The active channel (stable, beta, dev)                        |
 | timezone            | string       | The current timezone                                          |
 | healthy             | bool         | The supervisor is in a healthy state                          |
@@ -2256,8 +2254,6 @@ Returns information about the supervisor
   "update_available": true,
   "arch": "amd64",
   "channel": "dev",
-  "content_trust": true,
-  "force_security": false,
   "timezone": "TIMEZONE",
   "healthy": true,
   "supported": false,
