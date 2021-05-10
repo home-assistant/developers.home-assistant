@@ -14,8 +14,9 @@ Properties should always only return information from memory and not do I/O (lik
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | state | string | **Required** | The value of the sensor.
-| unit_of_measurement | string | `None` | The unit of measurement that the sensor is expressed in.
 | device_class | string | `None` | Type of sensor.
+| state_class | string | `None` | Type of state.
+| unit_of_measurement | string | `None` | The unit of measurement that the sensor is expressed in.
 
 ### Available device classes
 
@@ -37,3 +38,9 @@ If specifying a device class, your sensor entity will need to also return the co
 | energy | Wh,kWh | Energy.
 | power_factor | % | Power Factor.
 | voltage | V | Voltage.
+
+### Available state classes
+
+| Type | Description
+| ---- | -----------
+| measurement | The state represents _a measurement in present time_, not a historical aggregation such as statistics or a prediction of the future.
