@@ -14,7 +14,7 @@ Home Assistant keeps track of the states of entities in a state machine. The sta
 
 This is a simple tutorial/example on how to create and set states. We will do our work in a component called "hello_state". The purpose of this component is to display a given text in the frontend.
 
-To get started, create the file `<config dir>/custom_components/hello_state.py` and copy the below example code.
+To get started, create the file `<config dir>/custom_components/hello_state/__init__.py` and copy the below example code.
 
 ```python
 """
@@ -35,6 +35,21 @@ def setup(hass, config):
     _LOGGER.info("The 'hello state' component is ready!")
 
     return True
+```
+
+You'll also need to create the file `<config dir>/custom_components/hello_state/manifest.json` and copy the below example code.
+
+```python
+{
+    "domain": "hello_state",
+    "name": "Hello State",
+    "version": "0.1",
+    "documentation": "https://www.example.com",
+    "dependencies": [],
+    "codeowners": [],
+    "requirements": [],
+    "iot_class": "cloud_polling"
+}
 ```
 
 1. In the file header we decided to add some details: A short description and the link to the documentation.
