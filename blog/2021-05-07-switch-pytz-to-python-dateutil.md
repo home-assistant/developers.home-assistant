@@ -30,4 +30,4 @@ Thanks to [@bdraco] for helping revive this effort and push this change [past th
 
 ## Update May 10
 
-Wow, time flies! Paul, the author of `python-dateutil` and also the author of blog post that inspired us, pointed us to the fact that Python 3.9 includes upgraded timezone handling and that we should use that instead. With the help of Nick and Paul `python-dateutil` has been removed again and `zoneinfo` is used instead ([PR](https://github.com/home-assistant/core/pull/50387)).
+Wow, time flies! Paul, the author of `python-dateutil` and also the author of the blog post that inspired us, pointed us to the fact that Python 3.9 includes upgraded timezone handling and that we should use that instead. With the help of Nick and Paul `python-dateutil` has been removed again and `zoneinfo` is used instead ([PR](https://github.com/home-assistant/core/pull/50387)).
