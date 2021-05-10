@@ -2180,6 +2180,44 @@ Returns information about a store repository
 
 </ApiEndpoint>
 
+### Security
+
+<ApiEndpoint path="/security/info" method="get">
+
+Returns information about the security features
+
+**Returned data:**
+
+| key                 | type         | description                                                   |
+| ------------------- | ------------ | ------------------------------------------------------------- |
+| content_trust       | bool         | If content-trust is enabled or disabled on the backend        |
+| pwned               | bool         | If pwned check is enabled or disabled on the backend          |
+| force_security      | bool         | If force-security is enabled or disabled on the backend       |
+
+**Example response:**
+
+```json
+{
+  "content_trust": true,
+  "pwned": true,
+  "force_security": false,
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/security/options" method="post">
+
+**Payload:**
+
+| key                 | type   | description                                            |
+| ------------------- | ------ | ------------------------------------------------------ |
+| content_trust       | bool   | Disable/Enable content-trust                           |
+| pwned               | bool   | Disable/Enable pwned                                   |
+| force_security      | bool   | Disable/Enable force-security                          |
+
+</ApiEndpoint>
+
 ### Supervisor
 
 <ApiEndpoint path="/supervisor/info" method="get">
@@ -2270,8 +2308,6 @@ You need to call `/supervisor/reload` after updating the options.
 | debug_block         | bool   | Enable debug block                                     |
 | logging             | string | Set logging level                                      |
 | addons_repositories | list   | Set a list of URL's as strings for add-on repositories |
-| content_trust       | bool   | Disable/Enable content-trust                           |
-| force_security      | bool   | Disable/Enable force-security                          |
 
 </ApiEndpoint>
 
