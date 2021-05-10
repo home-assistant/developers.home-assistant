@@ -15,7 +15,6 @@ Properties should always only return information from memory and not do I/O (lik
 | ---- | ---- | ------- | -----------
 | state | string | **Required** | The value of the sensor.
 | device_class | string | `None` | Type of sensor.
-| state_class | string | `None` | Type of state.
 | unit_of_measurement | string | `None` | The unit of measurement that the sensor is expressed in.
 
 ### Available device classes
