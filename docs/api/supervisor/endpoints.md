@@ -293,7 +293,20 @@ To reset customized network/audio/options, set it `null`.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/options/validate" method="post">
-Run a configuration validation against the current stored add-on configuration.
+Run a configuration validation against the current stored add-on configuration or payload.
+  
+**Payload:**
+
+Optional the raw add-on options.
+  
+**Returned data:**
+
+| key              | type        | description                      |
+| ---------------- | ----------- | -------------------------------- |
+| message          | string      | Include the error message        |
+| valid            | boolean        | If config is valid or not        |
+| pwned            | boolean | None | True or false if include pwned secrets. On error it's None |
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/options/config" method="get">
@@ -2167,6 +2180,44 @@ Returns information about a store repository
 
 </ApiEndpoint>
 
+### Security
+
+<ApiEndpoint path="/security/info" method="get">
+
+Returns information about the security features
+
+**Returned data:**
+
+| key                 | type         | description                                                   |
+| ------------------- | ------------ | ------------------------------------------------------------- |
+| content_trust       | bool         | If content-trust is enabled or disabled on the backend        |
+| pwned               | bool         | If pwned check is enabled or disabled on the backend          |
+| force_security      | bool         | If force-security is enabled or disabled on the backend       |
+
+**Example response:**
+
+```json
+{
+  "content_trust": true,
+  "pwned": true,
+  "force_security": false,
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/security/options" method="post">
+
+**Payload:**
+
+| key                 | type   | description                                            |
+| ------------------- | ------ | ------------------------------------------------------ |
+| content_trust       | bool   | Disable/Enable content-trust                           |
+| pwned               | bool   | Disable/Enable pwned                                   |
+| force_security      | bool   | Disable/Enable force-security                          |
+
+</ApiEndpoint>
+
 ### Supervisor
 
 <ApiEndpoint path="/supervisor/info" method="get">
@@ -2181,8 +2232,6 @@ Returns information about the supervisor
 | version_latest      | string       | The latest published version in the active channel            |
 | update_available    | boolean      | `true` if an update is available                              |
 | arch                | string       | The architecture of the host (armhf, aarch64, i386, amd64)    |
-| content_trust       | bool         | If content-trust is enabled or disabled on the backend        |
-| force_security      | bool         | If force-security is enabled or disabled on the backend       |
 | channel             | string       | The active channel (stable, beta, dev)                        |
 | timezone            | string       | The current timezone                                          |
 | healthy             | bool         | The supervisor is in a healthy state                          |
@@ -2205,8 +2254,6 @@ Returns information about the supervisor
   "update_available": true,
   "arch": "amd64",
   "channel": "dev",
-  "content_trust": true,
-  "force_security": false,
   "timezone": "TIMEZONE",
   "healthy": true,
   "supported": false,
@@ -2257,8 +2304,6 @@ You need to call `/supervisor/reload` after updating the options.
 | debug_block         | bool   | Enable debug block                                     |
 | logging             | string | Set logging level                                      |
 | addons_repositories | list   | Set a list of URL's as strings for add-on repositories |
-| content_trust       | bool   | Disable/Enable content-trust                           |
-| force_security      | bool   | Disable/Enable force-security                          |
 
 </ApiEndpoint>
 
