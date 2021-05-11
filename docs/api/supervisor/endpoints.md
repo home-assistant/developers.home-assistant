@@ -1914,8 +1914,13 @@ Return a list of [Snapshot models](api/supervisor/models.md#snapshot)
       "slug": "skuwe823",
       "date": "2020-09-30T20:25:34.273Z",
       "name": "Awesome snapshot",
-      "type": "full",
-      "protected": true
+      "type": "partial",
+      "protected": true,
+      "content": {
+        "homeassistant": true,
+        "addons": ["awesome_addon"],
+        "folders": ["ssl", "media"]
+      }
     }
   ]
 }

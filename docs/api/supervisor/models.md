@@ -175,6 +175,17 @@ These models are describing objects that are getting returned from the superviso
 | name      | string  | The name given to the snapshot                                        |
 | type      | string  | The type of snapshot (full, partial)                                  |
 | protected | boolean | `true` if the snapshot is password protected                          |
+| content | dictionary | A dictionary describing the content of the snapshot                        |
+
+### Snapshot -> content
+
+The `content` key of a snapshot object contains the following keys:
+
+| key       | type    | description                                                           |
+| --------- | ------- | --------------------------------------------------------------------- |
+| homeassistant      | boolean  | `true` if the snapshot contains homeassistant
+| addons      | list  | A list of add-on slugs included in the snapshot
+| folders      | list  | A list of folder names included in the snapshot
 
 ## Snapshot details
 
