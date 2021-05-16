@@ -86,9 +86,9 @@ Visit the [Home Assistant Core repository](https://github.com/home-assistant/cor
 Once forked, setup your local copy of the source using the commands:
 
 ```shell
-$ git clone https://github.com/YOUR_GIT_USERNAME/core.git
-$ cd core
-$ git remote add upstream https://github.com/home-assistant/core.git
+git clone https://github.com/YOUR_GIT_USERNAME/core.git
+cd core
+git remote add upstream https://github.com/home-assistant/core.git
 ```
 
 Install the requirements with a provided script named `setup`.
