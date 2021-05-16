@@ -99,6 +99,10 @@ script/setup
 
 This will create a virtual environment and install all necessary requirements. You're now set! 
 
+:::tip
+If this script fails to execute properly, but shows error messages instead, some dependencies may be missing that need to be installed in a distribution specific manner. Like, compilers for C and C++ are required, or the Python pip tool. Install them with the respective package manager tool and try again.
+:::
+
 Each time you start a new terminal session, you will need to activate your virtual environment:
 
 ```shell
