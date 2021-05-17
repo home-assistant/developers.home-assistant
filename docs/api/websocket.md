@@ -2,15 +2,7 @@
 title: "WebSocket API"
 ---
 
-Home Assistant contains a WebSocket API. This API can be used to stream information from a Home Assistant instance to any client that implements WebSockets. Implementations in different languages:
-
-- [JavaScript](https://github.com/home-assistant/home-assistant-js-websocket) - powers the frontend
-- [Python](https://raw.githubusercontent.com/home-assistant/home-assistant-dev-helper/master/ha-websocket-client.py) - CLI client using [`asyncws`](https://async-websockets.readthedocs.io/en/latest/)
-- [JavaScript/HTML](https://raw.githubusercontent.com/home-assistant/home-assistant-dev-helper/master/ha-websocket.html) - WebSocket connection in your browser
-
-Connect your websocket implementation to `ws://localhost:8123/api/websocket`. You will need a valid access token.
-
-If you are not using the [`frontend`](https://www.home-assistant.io/components/frontend/) in your setup then you need to add the [`websocket_api` component](https://www.home-assistant.io/components/websocket_api/) to your `configuration.yaml` file to use the WebSocket API.
+Home Assistant contains a WebSocket API. This API can be used to stream information from a Home Assistant instance to any client that implements WebSockets. We maintain a [JavaScript library](https://github.com/home-assistant/home-assistant-js-websocket) which we use in our frontend.
 
 ## Server states
 
@@ -61,7 +53,8 @@ When a client connects to the server, the server sends out `auth_required`.
 
 ```json
 {
-  "type": "auth_required"
+  "type": "auth_required",
+  "ha_version": "2021.5.3"
 }
 ```
 
@@ -78,7 +71,8 @@ If the client supplies valid authentication, the authentication phase will compl
 
 ```json
 {
-  "type": "auth_ok"
+  "type": "auth_ok",
+  "ha_version": "2021.5.3"
 }
 ```
 
