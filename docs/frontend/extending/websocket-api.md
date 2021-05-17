@@ -32,7 +32,7 @@ def ws_get_panels(
 
 #### Doing I/O or sending a delayed response
 
-If your command needs to interact with the network, a device or needs to compute information, you will need to queue a job to do the work and send the response. To do this, use `connection.send_message_outside`.
+If your command needs to interact with the network, a device or needs to compute information, you will need to queue a job to do the work and send the response. To do this, make your function async and decorate with `@websocket_api.async_response`.
 
 ```python
 from homeassistant.components import websocket_api
