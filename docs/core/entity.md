@@ -105,13 +105,8 @@ class MySwitch(SwitchEntity):
     ...
 ```
 
-The method returns a single, static, string in just a couple of lines code.
-Although, that aren't that many lines, if you have to write multiple of
-these properties that set static things like an icon, device class, unique_id;
-it can become quite a bit of repetitive code.
-
-Therefore the Entity class additionally implements entity class attributes for
-each of these properties:
+Alternatively, a shorter form is to set Entity class attributes according to the
+following pattern:
 
 ```python
 class MySwitch(SwitchEntity):
