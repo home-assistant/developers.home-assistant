@@ -89,7 +89,7 @@ The following properties are used and controlled by Home Assistant, and should n
 | ------- | ------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | enabled | boolean | `True`  | Indicate if entity is enabled in the entity registry. It also returns `True` if the platform doesn't support the entity registry. Disabled entities will not be added to Home Assistant. |
 
-## Entity class attribute
+## Entity class attributes
 
 Writing property methods for each property is just a couple of lines of code,
 for example
