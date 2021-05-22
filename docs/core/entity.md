@@ -5,8 +5,6 @@ sidebar_label: Introduction
 
 For a generic introduction of entities, see [entities architecture](../architecture/devices-and-services.md).
 
-
-
 ## Basic implementation
 
 Below is an example switch entity that keeps track of their state in memory.
@@ -90,6 +88,37 @@ The following properties are used and controlled by Home Assistant, and should n
 | Name    | Type    | Default | Description                                                                                                                                                                              |
 | ------- | ------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | enabled | boolean | `True`  | Indicate if entity is enabled in the entity registry. It also returns `True` if the platform doesn't support the entity registry. Disabled entities will not be added to Home Assistant. |
+
+## Entity class attributes
+
+Writing property methods for each property is just a couple of lines of code,
+for example
+
+```python
+class MySwitch(SwitchEntity):
+
+    @property
+    def icon(self) -> str | None:
+        """Icon of the entity."""
+        return "mdi:door"
+
+    ...
+```
+
+Alternatively, a shorter form is to set Entity class attributes according to the
+following pattern:
+
+```python
+class MySwitch(SwitchEntity):
+
+    _attr_icon = "mdi:door"
+
+    ...
+```
+
+This does exactly the same as the first example. Properties that can be set
+like this, start with `_attr_` followed by the property name. For example,
+the `device_class` property, has the `_attr_device_class` class attribute.
 
 ## Lifecycle hooks
 
