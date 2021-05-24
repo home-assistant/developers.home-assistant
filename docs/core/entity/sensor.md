@@ -15,7 +15,7 @@ Properties should always only return information from memory and not do I/O (lik
 | ---- | ---- | ------- | -----------
 | state | string | **Required** | The value of the sensor.
 | device_class | string | `None` | Type of sensor.
-| last_reset | `datetime.datetime` | `None` | The time when an accumulating sensor such as an electricity usage meter, gas meter, water meter etc. was initialized. If the time of initialization is unknown and the meter will never reset, set to UNIX epoch 0: `datetime.fromtimestamp(0)`. When changing `last_reset`, the `state` must be a valid number.
+| last_reset | `datetime.datetime` | `None` | The time when an accumulating sensor such as an electricity usage meter, gas meter, water meter etc. was initialized. If the time of initialization is unknown and the meter will never reset, set to UNIX epoch 0: `datetime.fromtimestamp(0)`. Note that the `datetime.datetime` returned by the `last_reset` property will be converted to an ISO 8601-formatted string when the entity's state attributes are updated. When changing `last_reset`, the `state` must be a valid number.
 | state_class | string | `None` | Type of state.
 | unit_of_measurement | string | `None` | The unit of measurement that the sensor is expressed in.
 
