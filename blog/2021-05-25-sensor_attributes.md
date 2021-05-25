@@ -1,7 +1,7 @@
 ---
 author: Erik Montnémery
 authorURL: https://github.com/emontnemery
-title: New sensor properties
+title: New sensor properties for long-term statistics
 ---
 
 The sensor entity model has been updated with two new properties, `state_class` and `last_reset`. The driver for both the new properties is to enable automatic generation of long-term statistics.
