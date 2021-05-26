@@ -13,7 +13,7 @@ To enable the notify platform for your application, you must set two keys in the
 | `push_token` | string | A push notification token unique to your users device. For example, this could be an APNS token or an FCM Instance ID/token.
 | `push_url` | string | The URL on your server that push notifications will be HTTP POSTed to.
 
-You should advise the user to restart Home Assistant after you set these keys in order for them to see the notify target. It will have the format `notify.mobile_app_<safed_device_name>`.
+You should advise the user to restart Home Assistant after you set these keys in order for them to see the notify target. It will have the format `notify.mobile_app_<saved_device_name>`.
 
 ## Deploying a server component
 
