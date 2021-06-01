@@ -124,8 +124,6 @@ entry.async_on_unload(
 
 ```
 
-
-
 ## Network
 
 For integrations that use a discovery method that is not built in and need to access the users network adapter configuration, the following helper API should be used.
@@ -141,7 +139,7 @@ adapters = await network.async_get_adapters(hass)
 
 ### Example `async_get_adapters` data structure
 
-```
+```python
 [
     {   
         "auto": True,
@@ -190,3 +188,4 @@ for adapter in adapters:
         local_ip = ip_info["address"]
         network_prefix = ip_info["network_prefix"]
         ip_net = ip_network(f"{local_ip}/{network_prefix}", False)
+```
