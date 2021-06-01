@@ -128,6 +128,7 @@ module.exports = {
       "creating_component_generic_discovery",
       "integration_fetching_data",
       "integration_events",
+      "network_discovery",
     ],
     "Building Entity Integrations": [
       "reproduce_state_index",
