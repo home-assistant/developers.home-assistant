@@ -175,6 +175,8 @@ adapters = await network.async_get_adapters(hass)
 from ipaddress import ip_network
 from homeassistant.components import network
 
+...
+
 adapters = await network.async_get_adapters(hass)
 
 for adapter in adapters:
