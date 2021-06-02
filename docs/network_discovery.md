@@ -60,7 +60,6 @@ from homeassistant.components import ssdp
 ...
 
 discovery_info = ssdp.async_get_discovery_info_by_udn_st(hass, udn, st)
-
 ```
 
 ### Looking up devices by `ST`
@@ -78,7 +77,6 @@ from homeassistant.components import ssdp
 discovery_infos = ssdp.async_get_discovery_info_by_st(hass, "urn:schemas-upnp-org:device:ZonePlayer:1")
 for discovery_info in discovery_infos:
   ...
-
 
 ```
 
@@ -98,7 +96,6 @@ discovery_infos = ssdp.async_get_discovery_info_by_udn(hass, udn)
 for discovery_info in discovery_infos:
   ...
 
-
 ```
 
 ### Subscribing to SSDP discoveries
@@ -111,7 +108,6 @@ The below example shows registering to get callbacks when a Sonos player is seen
 on the network.
 
 ```
-
 from homeassistant.components import ssdp
 
 ...
@@ -121,7 +117,6 @@ entry.async_on_unload(
         hass, _async_discovered_player, {"st": "urn:schemas-upnp-org:device:ZonePlayer:1"}
     )
 )
-
 ```
 
 ## Network
@@ -134,7 +129,6 @@ from homeassistant.components import network
 
 ...
 adapters = await network.async_get_adapters(hass)
-
 ```
 
 ### Example `async_get_adapters` data structure
