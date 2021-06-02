@@ -5,11 +5,11 @@ sidebar_label: "Networking and Discovery"
 
 Some integrations may need to discover devices on the network via [mDNS/Zeroconf](https://en.wikipedia.org/wiki/Zero-configuration_networking), [SSDP](https://en.wikipedia.org/wiki/Simple_Service_Discovery_Protocol), or another method once they have been enabled.  The primary use case is to find devices that do not have a known fixed IP Address or for integrations that can dynamically add and remove any number of compatible discoverable devices.
 
-Home Assistant has built-in helpers to support mDNS/Zeroconf and SSDP. If your integration makes use of another discovery method that needs to determine which network interfaces to use to broadcast traffic, the [Network](https://www.home-assistant.io/integrations/network/) integration provides a helper API to access the user's interface preferences.
+Home Assistant has built-in helpers to support mDNS/Zeroconf and SSDP. If your integration uses another discovery method that needs to determine which network interfaces to use to broadcast traffic, the [Network](https://www.home-assistant.io/integrations/network/) integration provides a helper API to access the user's interface preferences.
 
 ## mDNS/Zeroconf
 
-Home Assistant uses the [python-zeroconf](https://github.com/jstasiak/python-zeroconf) package for mDNS support. As running multiple mDNS implementations on a single host is not recommended, Home Assistant provides internal helper APIs to gain access to the running `Zeroconf` and `AsyncZeroconf` instances.
+Home Assistant uses the [python-zeroconf](https://github.com/jstasiak/python-zeroconf) package for mDNS support. As running multiple mDNS implementations on a single host is not recommended, Home Assistant provides internal helper APIs to access the running `Zeroconf` and `AsyncZeroconf` instances.
 
 Before using these helpers, be sure to add `zeroconf` to `dependencies` in your integration's [`manifest.json`](creating_integration_manifest.md)
 
@@ -83,7 +83,7 @@ for discovery_info in discovery_infos:
 
 ### Looking up devices by `UDN`
 
-If you want to see a list of the services provided by a speific `UDN`, calling
+If you want to see a list of the services provided by a specific `UDN`, calling
 `ssdp.async_get_discovery_info_by_udn` will return a list of all discovered devices that
 match the `UPNP` `UDN`.
 
