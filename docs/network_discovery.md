@@ -41,7 +41,7 @@ zc = await zeroconf.async_get_instance(hass)
 
 Home Assistant provides built-in discovery via SSDP.
 
-Before using these helpers, be sure to add `zeroconf` to `dependencies` in your integration's [`manifest.json`](creating_integration_manifest.md)
+Before using these helpers, be sure to add `ssdp` to `dependencies` in your integration's [`manifest.json`](creating_integration_manifest.md)
 
 ### Obtaining the list of discovered devices
 
