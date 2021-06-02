@@ -52,7 +52,7 @@ SSDP discoveries from the cache: `ssdp.async_get_discovery_info_by_udn_st`, `ssd
 ### Looking up a specific device
 
 The `ssdp.async_get_discovery_info_by_udn_st` API returns a single `discovery_info`
-or `None` when provided an `SSDP` `UDN` and `ST`.
+or `None` when provided an `SSDP`, `UDN` and `ST`.
 
 ```
 from homeassistant.components import ssdp
