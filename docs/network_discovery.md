@@ -126,7 +126,7 @@ entry.async_on_unload(
 
 ## Network
 
-For integrations that use a discovery method that is not built in and need to access the users network adapter configuration, the following helper API should be used.
+For integrations that use a discovery method that is not built in and need to access the user's network adapter configuration, the following helper API should be used.
 
 
 ```python
