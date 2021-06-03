@@ -18,7 +18,6 @@ Properties should always only return information from memory and not do I/O (lik
 | is_on | boolean | **Required** | If the switch is currently on or off.
 | current_power_w | float | `None` | The current power usage in W.
 | today_energy_kwh | float | `None` | Total energy usage in kWh.
-| is_standby | boolean | `None` | Indicate if the device connected to the switch is currently in standby.
 
 ## Methods
 
