@@ -119,6 +119,22 @@ entry.async_on_unload(
 )
 ```
 
+The below example shows registering to get callbacks when the `x-rincon-bootseq` header is present.
+
+```
+from homeassistant.components import ssdp
+from homeassistant.const import MATCH_ALL
+
+...
+
+entry.async_on_unload(
+    ssdp.async_register_callback(
+        hass, _async_discovered_player, {"x-rincon-bootseq": MATCH_ALL}
+    )
+)
+```
+
+
 ## Network
 
 For integrations that use a discovery method that is not built-in and need to access the user's network adapter configuration, the following helper API should be used.
