@@ -41,7 +41,7 @@ A light entity controls the brightness, hue and saturation color value, white va
 | `COLOR_MODE_RGBWW` | The light can be dimmed and its color can be adjusted. The light's brightness can be set using the `brightness` parameter and read through the `brightness` property. The light's color can be set using the `rgbww_color` parameter and read through the `rgbww_color` property. `rgbww_color` is an (r, g, b, cw, ww) tuple (not normalized for brightness).
 | `COLOR_MODE_XY` | The light can be dimmed and its color can be adjusted. The light's brightness can be set using the `brightness` parameter and read through the `brightness` property. The light's color can be set using the `xy_color` parameter and read through the `xy_color` property. `xy_color` is an (x, y) tuple.
 
-Note that in color modes `COLOR_MODE_RGB`, `COLOR_MODE_RGBW` and `COLOR_MODE_RGBWW` there is brightness information both in the light's `brightness` property and in the color.
+Note that in color modes `COLOR_MODE_RGB`, `COLOR_MODE_RGBW` and `COLOR_MODE_RGBWW` there is brightness information both in the light's `brightness` property and in the color. As an example, if the light's brightness is 128 and the light's color is (192, 64, 32), the overall brightness of the light is: 128/255 * max(192, 64, 32)/255 = 38%.
 
 If the light is in mode `COLOR_MODE_HS`, `COLOR_MODE_RGB` or `COLOR_MODE_XY`, the light's state attribute will contain the light's color expressed in `hs`, `rgb` and `xy` color format. Note that information is lost when the light is in mode `COLOR_MODE_RGB` as `hs` and `xy` don't hold brightness information.
 
