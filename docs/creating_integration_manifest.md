@@ -9,6 +9,7 @@ Every integration has a manifest file to specify basic information about an inte
 {
   "domain": "hue",
   "name": "Philips Hue",
+  "version": "1.0.0",
   "documentation": "https://www.home-assistant.io/components/hue",
   "issue_tracker": "https://github.com/balloob/hue/issues",
   "dependencies": ["mqtt"],
