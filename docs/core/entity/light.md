@@ -43,7 +43,7 @@ A light entity controls the brightness, hue and saturation color value, white va
 
 Note that in color modes `COLOR_MODE_RGB`, `COLOR_MODE_RGBW` and `COLOR_MODE_RGBWW` there is brightness information both in the light's `brightness` property and in the color.
 
-If the light is in mode `COLOR_MODE_HS`, `COLOR_MODE_RGB` or `COLOR_MODE_XY`, the light's state attribute will contain the light's color expressed in `hs`, `rgb` and `xy` color format. Note that information is lost when the light is in mode `COLOR_MODE_RGB` as `hs` and `xy` don't hold brightness information.
+If the light is in mode `COLOR_MODE_HS`, `COLOR_MODE_RGB` or `COLOR_MODE_XY`, the light's state attribute will contain the light's color expressed in `hs`, `rgb` and `xy` color format. Note that when the light is in mode `COLOR_MODE_RGB`, the `hs` and `xy` state attributes only hold the chromaticity of the `rgb` color as the `hs` and `xy` pairs do not hold brightness information.
 
 If the light is in mode `COLOR_MODE_RGBW` or `COLOR_MODE_RGBWW`, the light's state attribute will contain the light's color expressed in `hs`, `rgb` and `xy` color format. The color conversion is an approximation done by adding the white channels to the color.
 
