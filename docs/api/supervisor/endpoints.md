@@ -704,7 +704,7 @@ Return a list of [Backup models](api/supervisor/models.md#backup)
 
 ```json
 {
-  "snapshots": [
+  "backups": [
     {
       "slug": "skuwe823",
       "date": "2020-09-30T20:25:34.273Z",
