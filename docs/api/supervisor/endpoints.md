@@ -698,7 +698,7 @@ Reset internal authentication cache, this is useful if you have changed the pass
 
 <ApiEndpoint path="/backups" method="get">
 
-Return a list of [Backup models](api/supervisor/models.md#backup)
+Return a list of [Backups](api/supervisor/models.md#backup)
 
 **Example response:**
 
