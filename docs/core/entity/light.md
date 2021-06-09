@@ -39,6 +39,7 @@ A light entity controls the brightness, hue and saturation color value, white va
 | `COLOR_MODE_RGB` | The light can be dimmed and its color can be adjusted. The light's brightness can be set using the `brightness` parameter and read through the `brightness` property. The light's color can be set using the `rgb_color` parameter and read through the `rgb_color` property. `rgb_color` is an (r, g, b) tuple (not normalized for brightness).
 | `COLOR_MODE_RGBW` | The light can be dimmed and its color can be adjusted. The light's brightness can be set using the `brightness` parameter and read through the `brightness` property. The light's color can be set using the `rgbw_color` parameter and read through the `rgbw_color` property. `rgbw_color` is an (r, g, b, w) tuple (not normalized for brightness).
 | `COLOR_MODE_RGBWW` | The light can be dimmed and its color can be adjusted. The light's brightness can be set using the `brightness` parameter and read through the `brightness` property. The light's color can be set using the `rgbww_color` parameter and read through the `rgbww_color` property. `rgbww_color` is an (r, g, b, cw, ww) tuple (not normalized for brightness).
+| `COLOR_MODE_WHITE` | The light can be dimmed and its color can be adjusted. In addition, the light can be set to white mode. The light's brightness can be set using the `brightness` parameter and read through the `brightness` property. The light can be set to white mode by using the `white` parameter with the desired brightness as value. Note that there's no `white` property. If both `brighthness` and `white` are present in a service call, the `white` parameter will be updated with the value of `brightness`. If this mode is supported, the light must also support at least one of `COLOR_MODE_HS`, `COLOR_MODE_RGB`, `COLOR_MODE_RGBW`, `COLOR_MODE_RGBWW` or `COLOR_MODE_XY`.
 | `COLOR_MODE_XY` | The light can be dimmed and its color can be adjusted. The light's brightness can be set using the `brightness` parameter and read through the `brightness` property. The light's color can be set using the `xy_color` parameter and read through the `xy_color` property. `xy_color` is an (x, y) tuple.
 
 Note that in color modes `COLOR_MODE_RGB`, `COLOR_MODE_RGBW` and `COLOR_MODE_RGBWW` there is brightness information both in the light's `brightness` property and in the color. As an example, if the light's brightness is 128 and the light's color is (192, 64, 32), the overall brightness of the light is: 128/255 * max(192, 64, 32)/255 = 38%.
@@ -78,11 +79,11 @@ Colors in the service call will be translated before the entity's `async_turn_on
 
 | Color type   | Translation
 |--------------|-----------------------
-| color_temp | Not translated, will be passed as is even if not supported by the light.
+| color_temp | Will be removed from the service call if not supported and translated to `hs_color`, `rgb_color`, `rgbw_color`, `rgbww_color` or `xy_color` if supported by the light.
 | hs_color | Will be removed from the service call if not supported and translated to `rgb_color`, `rgbw_color`, `rgbww_color` or `xy_color` if supported by the light.
 | rgb_color | Will be removed from the service call if not supported and translated to `rgbw_color`, `rgbww_color`, `hs_color` or `xy_color` if supported by the light.
-| rgbw_color | Not translated, will be passed as is even if not supported by the light.
-| rgbww_color | Not translated, will be passed as is even if not supported by the light.
+| rgbw_color | Will be removed from the service call if not supported.
+| rgbww_color | Will be removed from the service call if not supported.
 | xy_color | Will be removed from the service call if not supported and translated to `hs_color`, `rgb_color`, `rgbw_color` or `rgbww_color` if supported by the light.
 
 
