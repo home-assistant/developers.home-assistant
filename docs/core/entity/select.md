@@ -1,0 +1,35 @@
+---
+title: Select Entity
+sidebar_label: Select
+---
+
+A `select` is an entity that allows the user to select an option from a list limited options provided by the integration. Derive entity platforms from [`homeassistant.components.select.SelectEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/select/__init__.py)
+
+## Properties
+
+> Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| current_option | str | None | The current select option
+| options | list | **Required** | A list of available options as strings
+
+Other properties that are common to all entities such as `icon`, `unit_of_measurement`, `name` etc are also applicable.
+
+## Methods
+
+### Select option
+
+Called when the user or automation wants to change the current selected option.
+
+```python
+class MySelect(SelectEntity):
+    # Implement one of these methods.
+
+    def select_option(self, option: str) -> None:
+        """Change the selected option."""
+
+    async def async_select_option(self, option: str) -> None:
+        """Change the selected option."""
+
+```
