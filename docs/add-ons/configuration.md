@@ -179,8 +179,8 @@ image: repo/{arch}-my-custom-addon
 | panel_title | string | no | Default is the add-on name, but can be modified with this option.
 | panel_admin | bool | no | Default `true`. Make menu entry only available with admin privileged.
 | snapshot_exclude | list | no | List of file/path (with glob support) that are excluded from snapshots.
-| snapshot_pre | string | Command to execute in the context of the add-on before the snapshot is being taken.
-| snapshot_post | string | Command to execute in the context of the add-on after the snapshot is being taken.
+| snapshot_pre | string | Command to execute in the context of the add-on before the snapshot taken.
+| snapshot_post | string | Command to execute in the context of the add-on after the snapshot taken.
 | advanced | bool | no | Default `false`. Make addon visible in simple mode.
 | stage | string | no | Default `stable`. Flag add-on with follow attribute: `stable`, `experimental` or `deprecated`
 | init | bool | no | Default `true`. Disable the Docker default system init.  Use this if the image has its own init system.
