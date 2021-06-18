@@ -3,7 +3,7 @@ title: Select Entity
 sidebar_label: Select
 ---
 
-A `select` is an entity that allows the user to select an option from a list limited options provided by the integration. Derive entity platforms from [`homeassistant.components.select.SelectEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/select/__init__.py)
+A `select` is an entity that allows the user to select an option from a list of limited options provided by the integration. Derive entity platforms from [`homeassistant.components.select.SelectEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/select/__init__.py)
 
 This entity should only be used in cases there is no better fitting option available.
 For example, a bulb can have user selectable light effects. While that could be done using this `select` entity, it should really be part of the `light` entity, which already supports light effects.
