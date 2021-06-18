@@ -161,6 +161,7 @@ module.exports = {
       "core/entity/media-player",
       "core/entity/number",
       "core/entity/remote",
+      "core/entity/select",
       "core/entity/sensor",
       "core/entity/switch",
       "core/entity/vacuum",
