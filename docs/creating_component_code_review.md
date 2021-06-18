@@ -12,7 +12,7 @@ Not all existing code follows the requirements in this checklist. This cannot be
 ### 0. Common
 
  1. Follow our [Style guidelines](development_guidelines.md)
- 2. Use existing constants from [`const.py`](https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/const.py)
+ 2. Use existing constants from [`const.py`](https://github.com/home-assistant/core/blob/dev/homeassistant/const.py)
     - Only add new constants to `const.py` if they are widely used. Otherwise keep them on components level
 
 ### 1. Requirements

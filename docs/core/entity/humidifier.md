@@ -3,7 +3,7 @@ title: Humidifier Entity
 sidebar_label: Humidifier
 ---
 
-A humidifier entity is a device whose main purpose is to control humidity, i.e. a humidifier or dehumidifier. Derive entity platforms from [`homeassistant.components.humidifier.HumidifierEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/humidifier/__init__.py)
+A humidifier entity is a device whose main purpose is to control humidity, i.e. a humidifier or dehumidifier. Derive entity platforms from [`homeassistant.components.humidifier.HumidifierEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/humidifier/__init__.py)
 
 ## Properties
 

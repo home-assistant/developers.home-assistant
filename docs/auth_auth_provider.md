@@ -14,7 +14,7 @@ We currently only support built-in auth providers. Support for custom auth provi
 
 Auth providers are defined in `homeassistant/auth/providers/<name of provider>.py`. The auth provider module will need to provide an implementation of the `AuthProvider` class and `LoginFlow` class, it is what asks user for information and validates it base on `data_entry_flow`.
 
-For an example of a fully implemented auth provider, please see [insecure_example.py](https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/auth/providers/insecure_example.py).
+For an example of a fully implemented auth provider, please see [insecure_example.py](https://github.com/home-assistant/core/blob/dev/homeassistant/auth/providers/insecure_example.py).
 
 Auth providers shall extend the following methods of `AuthProvider` class.
 

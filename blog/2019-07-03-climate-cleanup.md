@@ -32,7 +32,7 @@ A gist of the changes:
 - The `is_on` property has been removed. If a device is able to turn off, it should include the hvac mode `HVAC_MODE_OFF`.
 - Property names have been aligned, anything ending with "\_list" is now named "\_modes".
 
-If you are a maintainer of an integration that has a climate platform or maintain a custom component that has one, make sure you [follow the pull request](https://github.com/home-assistant/home-assistant/pull/23899) and test your integration during the beta to make sure that it works like expected.
+If you are a maintainer of an integration that has a climate platform or maintain a custom component that has one, make sure you [follow the pull request](https://github.com/home-assistant/core/pull/23899) and test your integration during the beta to make sure that it works like expected.
 
 <!--truncate-->
 

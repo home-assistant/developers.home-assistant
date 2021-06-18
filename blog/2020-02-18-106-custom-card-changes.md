@@ -31,4 +31,4 @@ const element = helpers.createRowElement(config);
 element.hass = this.hass;
 ```
 
-For more info see https://github.com/home-assistant/home-assistant-polymer/pull/4853
+For more info see https://github.com/home-assistant/frontend/pull/4853
