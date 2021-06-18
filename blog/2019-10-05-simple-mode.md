@@ -82,7 +82,7 @@ By focusing energy on simple mode, we are making Home Assistant easier to use fo
 
 A great recent example of a feature that was driven by simple mode, but is beneficial for everyone is device automations. With device automations it is a breeze to configure Zigbee remotes. You can just pick from a list the button that should trigger your automation. Compare this to the old way of doing it: learn that you need to listen for `zha_event` in the event dev tool, then press the button to learn the event data to match on with an event trigger.
 
-Another ongoing effort that will make it easier for everyone is our Hacktoberfest focus on making scenes a [first-class citizen](https://github.com/home-assistant/home-assistant/issues/25681).
+Another ongoing effort that will make it easier for everyone is our Hacktoberfest focus on making scenes a [first-class citizen](https://github.com/home-assistant/core/issues/25681).
 
 ## Comments
 

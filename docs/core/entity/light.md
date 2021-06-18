@@ -4,7 +4,7 @@ sidebar_label: Light
 ---
 
 
-A light entity controls the brightness, hue and saturation color value, white value, color temperature and effects of a light source. Derive platform entities from [`homeassistant.components.light.LightEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/light/__init__.py).
+A light entity controls the brightness, hue and saturation color value, white value, color temperature and effects of a light source. Derive platform entities from [`homeassistant.components.light.LightEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/light/__init__.py).
 
 ## Properties
 

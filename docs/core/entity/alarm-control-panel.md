@@ -3,7 +3,7 @@ title: Alarm Control Panel Entity
 sidebar_label: Alarm Control Panel
 ---
 
-An alarm control panel entity controls an alarm.  Derive a platform entity from [`homeassistant.components.alarm_control_panel.AlarmControlPanelEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/alarm_control_panel/__init__.py).
+An alarm control panel entity controls an alarm.  Derive a platform entity from [`homeassistant.components.alarm_control_panel.AlarmControlPanelEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/alarm_control_panel/__init__.py).
 
 ## Properties
 

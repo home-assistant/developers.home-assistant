@@ -67,7 +67,7 @@ const features = [
             </a>
           </li>
           <li>
-            <a href="https://github.com/home-assistant/home-assistant-polymer">
+            <a href="https://github.com/home-assistant/frontend">
               Home Assistant Frontend
             </a>
           </li>
