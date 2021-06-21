@@ -3,7 +3,7 @@ title: Number Entity
 sidebar_label: Number
 ---
 
-A `number` is an entity that allows the user to input an arbitrary value to an integration. Derive entity platforms from [`homeassistant.components.number.NumberEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/number/__init__.py)
+A `number` is an entity that allows the user to input an arbitrary value to an integration. Derive entity platforms from [`homeassistant.components.number.NumberEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/number/__init__.py)
 
 ## Properties
 
