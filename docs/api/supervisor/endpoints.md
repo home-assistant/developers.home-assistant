@@ -1856,7 +1856,7 @@ Update Home Assistant OS
   "suggestions": [
     {
       "uuid": "B9923620C9A11EBBDC3C403FC2CA371",
-      "type": "clear_snapshots",
+      "type": "clear_backups",
       "context": "system",
       "reference": null
     }
@@ -2380,6 +2380,6 @@ Some of the endpoints uses placeholders indicated with `<...>` in the endpoint U
 | interface   | A valid interface name, example `eth0`, to get the interface name you can call `/network/info`. You can use `default` to get the primary interface |
 | registry    | A registry hostname defined in the container registry configuration, to get the hostname you can call `/docker/registries`                            |
 | service     | The service name for a service on the host.                                                                                                           |
-| snapshot    | A valid backup slug, example `skuwe823`, to get the slug you can call `/backups`                                                                  |
-| suggestion  | A valid suggestion, example `clear_full_snapshot`, to get the suggestion you can call `/resolution`                                         |
+| backup    | A valid backup slug, example `skuwe823`, to get the slug you can call `/backups`                                                                  |
+| suggestion  | A valid suggestion, example `clear_full_backup`, to get the suggestion you can call `/resolution`                                         |
 | uuid        | The UUID of a discovery service, to get the UUID you can call `/discovery`                                                                            |

@@ -178,7 +178,6 @@ image: repo/{arch}-my-custom-addon
 | panel_icon | string | no | Default: `mdi:puzzle`. MDI icon for the menu panel integration.
 | panel_title | string | no | Default is the add-on name, but can be modified with this option.
 | panel_admin | bool | no | Default `true`. Make menu entry only available with admin privileged.
-| snapshot_exclude | list | no | (Deprecated, use `backup_exclude` instead).
 | backup_exclude | list | no | List of file/path (with glob support) that are excluded from backups.
 | backup_pre | string | no | Command to be run inside the add-on container prior to creating a backup of it.
 | backup_post | string | no | Command to be run inside the add-on container after creating a backup of it.
