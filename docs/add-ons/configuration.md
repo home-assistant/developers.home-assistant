@@ -178,9 +178,10 @@ image: repo/{arch}-my-custom-addon
 | panel_icon | string | no | Default: `mdi:puzzle`. MDI icon for the menu panel integration.
 | panel_title | string | no | Default is the add-on name, but can be modified with this option.
 | panel_admin | bool | no | Default `true`. Make menu entry only available with admin privileged.
-| backup_exclude | list | no | List of file/path (with glob support) that are excluded from backups.
+| backup | string | no | `hot` (default) or `cold`. If `cold`, the supervisor turns the add-on off before taking a backup (the `pre/post` options are ignored when `cold` is used).
 | backup_pre | string | no | Command to execute in the context of the add-on before the backup is taken.
 | backup_post | string | no | Command to execute in the context of the add-on after the backup was taken.
+| backup_exclude | list | no | List of file/path (with glob support) that are excluded from backups.
 | advanced | bool | no | Default `false`. Make addon visible in simple mode.
 | stage | string | no | Default `stable`. Flag add-on with follow attribute: `stable`, `experimental` or `deprecated`
 | init | bool | no | Default `true`. Disable the Docker default system init.  Use this if the image has its own init system.
