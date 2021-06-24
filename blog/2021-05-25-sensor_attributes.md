@@ -22,4 +22,4 @@ Note that _measurement in present time_ above does not imply that the state has 
 
 ### last_reset
 
-The time when an accumulating sensor such as an electricity usage meter, gas meter, water meter etc. was initialized. If the time of initialization is unknown and the meter will never reset, set to UNIX epoch 0: `datetime.fromtimestamp(0)`. Note that the `datetime.datetime` returned by the `last_reset` property will be converted to an ISO 8601-formatted string when the entity's state attributes are updated. When changing `last_reset`, the `state` must be a valid number.
+The time when an accumulating sensor such as an electricity usage meter, gas meter, water meter etc. was initialized. If the time of initialization is unknown and the meter will never reset, set to UNIX epoch 0: `homeassistant.util.dt.utc_from_timestamp(0)`. Note that the `datetime.datetime` returned by the `last_reset` property will be converted to an ISO 8601-formatted string when the entity's state attributes are updated. When changing `last_reset`, the `state` must be a valid number.
