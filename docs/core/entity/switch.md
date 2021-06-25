@@ -16,6 +16,13 @@ Properties should always only return information from memory and not do I/O (lik
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | is_on | boolean | **Required** | If the switch is currently on or off.
+
+## Deprecated Properties
+
+The following properties are deprecated and should not be used by new integrations it is recommended to migrate them to sensors, the deprecated properties will remain until at least the end of 2021.
+
+Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
 | current_power_w | float | `None` | The current power usage in W.
 | today_energy_kwh | float | `None` | Total energy usage in kWh.
 
