@@ -19,7 +19,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 ## Deprecated Properties
 
-The following properties are deprecated and should not be used by new integrations it is recommended to migrate them to sensors, the deprecated properties will remain until at least the end of 2021.
+The following properties are deprecated and should not be used by new integrations. Provide them as sensors instead.
 
 Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
