@@ -38,6 +38,7 @@ You will initially be logged in to Home Assistant CLI for HassOS where you can p
 [Supervisor Architecture]: /architecture_index.md
 
 ### Turning off SSH access to the host
+
 Use a USB drive formatted with FAT, ext4, or NTFS and name it CONFIG (case sensitive). Remove any existing `authorized_keys` file from the drive and leave the drive empty. When the Home Assistant OS device is rebooted with this drive inserted, any existing keys will be removed and the SSH service will be stopped.
 
 ## Checking the logs
