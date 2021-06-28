@@ -10,6 +10,13 @@ Device actions are defined as dictionaries. These dictionaries are created by yo
 Device actions can be provided by the integration that provides the device (e.g. ZHA, deCONZ) or the entity integrations that the device has entities with (e.g. light, switch).
 An example of the former could be to reboot the device, while an example of the latter could be to turn a light on.
 
+If the action requires dynamic validation that the static `ACTION_SCHEMA` can't provide, it's possible to implement an `async_validate_action_config` function.
+
+```py
+async def async_validate_action_config(hass: HomeAssistant, config: ConfigType) -> ConfigType:
+    """Validate config."""
+```
+
 Home Assistant includes a template to get started with device actions. To get started, run inside a development environment `python3 -m script.scaffold device_action`.
 
 The template will create a new file `device_action.py` in your integration folder and a matching test file. The file contains the following functions and constants:
