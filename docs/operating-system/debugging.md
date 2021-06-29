@@ -31,7 +31,7 @@ ssh root@homeassistant.local -p 22222
 
 If you have an older installation or have changed your hostname, you may need to use a different hostname in the command above. You can check the correct hostname to use in the System page of the Supervisor interface in Home Assistant.
 
-Starting in Core version core-2021.6.6 you will be logged as root in the ```/root``` folder, if you have an older instalation you will initially be able to perform normal CLI tasks. If you need access to the host system use the ```login``` command. In case your SSH connection is closed after the 'login' command, this means you are alredy logged in the host OS.
+Starting in Core version core-2021.6.6 you will be logged in as root in the ```/root``` folder, if you have an older installation you will initially be able to perform normal CLI tasks. If you need access to the host system use the ```login``` command. In case your SSH connection is closed after the 'login' command, this means you are already logged in to the host OS.
 
 [Home Assistant OS] is a hypervisor for Docker. See the [Supervisor Architecture] documentation for information regarding the Supervisor. The Supervisor offers an API to manage the host and running the Docker containers. Home Assistant itself and all installed addons run in separate Docker containers.
 
