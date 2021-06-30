@@ -34,7 +34,7 @@ curl -sSL -H "Authorization: Bearer $SUPERVISOR_TOKEN" http://supervisor/network
 ## Ping the supervisor
 
 ```bash
-curl -sSL http://<host>/supervisor/ping
+curl -sSL http://supervisor/supervisor/ping
 ```
 
 **response:**
