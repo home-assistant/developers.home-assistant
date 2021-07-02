@@ -44,21 +44,15 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
 
 ## Signal updates
 
-If the component should act on updated options, you can register an update listener to the config entry that will be called when the entry is updated.
+If the integration should act on updated options, you can register an update listener to the config entry that will be called when the entry is updated. A listener is registered by adding the following to you `async_setup_entry` function in your integrations `__init__.py`.
 
 ```python
-unsub = entry.add_update_listener(update_listener)
+entry.async_on_unload(entry.add_update_listener(update_listener))
 ```
 
-The Listener shall be an async function that takes the same input as async_setup_entry. Options can then be accessed from `entry.options`.
+Using the above means the Listener is attached when the entry is loaded and detached at unload. The Listener shall be an async function that takes the same input as async_setup_entry. Options can then be accessed from `entry.options`.
 
 ```python
 async def update_listener(hass, entry):
     """Handle options update."""
-```
-
-Don't forget to unsubscribe the update listener when your config entry is unloaded. You can do this by calling the unsubscribe function returned from adding the listener:
-
-```python
-unsub()
 ```
