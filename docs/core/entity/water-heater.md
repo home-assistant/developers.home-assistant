@@ -38,6 +38,7 @@ Properties have to follow the units defined in the `temperature_unit`.
 | `STATE_HEAT_PUMP` | Slowest to heat, but uses less energy.
 | `STATE_GAS` | Gas only mode, uses the most energy.
 | `STATE_OFF` | The water heater is off.
+| `STATE_VACATION` | Vacation mode, provides energy savings by not reheating water.
 
 ## Supported Features
 
