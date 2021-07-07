@@ -42,28 +42,14 @@ Each input parameter is gated by a supported feature flag. If the corresponding 
 - `duration`: `SUPPORT_DURATIONS`
 - `volume_level`: `SUPPORT_VOLUME_SET`
 
-Only include the parameters that your integration supports in your turn on function definition as the rest will always be `None`
-
 ```python
 class MySirenEntity(SirenEntity):
     # Implement one of these methods.
 
-    def turn_on(
-            self,
-            tone: int | str = None,
-            duration: int = None,
-            volume_level: float = None,
-            **kwargs
-        ) -> None:
+    def turn_on(self, **kwargs) -> None:
         """Turn the device on."""
 
-    async def async_turn_on(
-            self,
-            tone: int | str = None,
-            duration: int = None,
-            volume_level: float = None,
-            **kwargs
-        ) -> None:
+    async def async_turn_on(self, **kwargs) -> None:
         """Turn the device on."""
 ```
 
