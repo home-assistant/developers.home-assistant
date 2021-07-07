@@ -160,6 +160,7 @@ module.exports = {
       "core/entity/number",
       "core/entity/remote",
       "core/entity/sensor",
+      "core/entity/siren",
       "core/entity/switch",
       "core/entity/vacuum",
       "core/entity/water-heater",
