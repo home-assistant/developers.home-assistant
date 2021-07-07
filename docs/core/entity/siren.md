@@ -32,15 +32,13 @@ Supported features constants are combined using the bitwise or (`|`) operator.
 
 ### Turn on
 
-There are three optional input parameters that can be passed into the service call:
-- `tone`: `vol.Any(vol.Coerce(int), cv.string)`
-- `duration`: `cv.positive_int`
-- `volume_level`: `cv.small_float`
+There are three optional input parameters that can be passed into the service call, each gated by a supported feature flag. If the corresponding flag isn't set when a given input parameter is provided in the service call, it will be filtered out from the service call by the base platform before being passed to the integration.
 
-Each input parameter is gated by a supported feature flag. If the corresponding flag isn't set when a given input parameter is provided in the service call, it will be filtered out from the service call by the base platform before being passed to the integration. The input parameter to supported feature flag is as follows:
-- `tone`: `SUPPORT_TONES`
-- `duration`: `SUPPORT_DURATIONS`
-- `volume_level`: `SUPPORT_VOLUME_SET`
+| Parameter Name 	| Data Validation                       	| Supported Feature Flag 	|
+|----------------	|---------------------------------------	|------------------------	|
+| `tone`         	| `vol.Any(vol.Coerce(int), cv.string)` 	| `SUPPORT_TONES`        	|
+| `duration`     	| `cv.positive_int`                     	| `SUPPORT_DURATIONS`    	|
+| `volume_level` 	| `cv.small_float`                      	| `SUPPORT_VOLUME_SET`   	|
 
 ```python
 class MySirenEntity(SirenEntity):
