@@ -134,8 +134,9 @@ implementation of the property in the base class. The name of the attribute
 starts with `_attr_` followed by the property name. For example, the default
 `device_class` property returns the `_attr_device_class` class attribute.
 
-Not all entity classes support the `_attr_` attributes, please refer
-to the documentation dor the respective entity class for details.
+Not all entity classes support the `_attr_` attributes for their entity 
+specific properties, please refer to the documentation for the respective 
+entity class for details.
 
 :::tip
 If an integration needs to access its own properties it should access the property (`self.name`), not the class or instance attribute (`self._attr_name`).
