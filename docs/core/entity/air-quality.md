@@ -13,7 +13,7 @@ Integrations that still rely on the Air Quality Entity should be migrated.
 :::
 
 :::caution
-The Air Quality entity does not support attribute shorthand for [property implementation](core/entity/#entity-class-or-instance-attributes)
+The Air Quality entity does not support attribute shorthand for [property implementation](../#entity-class-or-instance-attributes)
 :::
 
 
