@@ -49,7 +49,7 @@ Properties should always only return information from memory and not do I/O (lik
 :::
 
 :::caution
-ScannerEntity does not support attribute shorthand for [property implementation](../entity.md#entity-class-or-instance-attributes)
+TrackerEntity does not support attribute shorthand for [property implementation](../entity.md#entity-class-or-instance-attributes)
 :::
 
 | Name              | Type    | Default      | Description                                       |
