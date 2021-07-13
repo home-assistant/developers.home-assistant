@@ -16,6 +16,9 @@ Properties should always only return information from memory and not do I/O (lik
 | changed_by | string | None | Describes what the last change was triggered by.
 | code_format | string | None | Regex for code format or None if no code is required.
 | is_locked | bool | None | Indication of whether the lock is currently locked. Used to determine `state`.
+| is_locking | bool | None | Indication of whether the lock is currently locking. Used to determine `state`.
+| is_unlocking | bool | None | Indication of whether the lock is currently unlocking. Used to determine `state`.
+| is_jammed | bool | None | Indication of whether the lock is currently jammed. Used to determine `state`.
 
 ### Supported Features
 
