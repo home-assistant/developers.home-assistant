@@ -87,7 +87,7 @@ We support the following build arguments by default:
 
 ## Add-on config
 
-The configuration for an add-on is stored in `config.(json/yaml/yml)`.
+The configuration for an add-on is stored in `config.(json/yaml/yml)`. Avoid the use of this filename for anything other than add-on configuration, as the Supervisor does a recursive lookup.
 
 ```json
 {
