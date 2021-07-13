@@ -6,7 +6,7 @@ authorTwitter: ludeeus
 title: Supervisor update
 ---
 
-It's been a while since we posted about changes to the Supervisor, here is some highlights from the past year and the future. This information is mainly for add-on developers, but there are is little something for everyone in here. If you have not yet seen it, we have posted a [blog on the main site][main_blog] that you should read.
+It's been a while since we posted about changes to the Supervisor, here are some highlights from the past year and the future. This information is mainly for add-on developers, but there are is little something for everyone in here. If you have not yet seen it, we have posted a [blog on the main site][main_blog] that you should read.
 
 ## Snapshot -> Backup
 
@@ -27,9 +27,9 @@ The old [`/snapshots`][supervisor_api_snapshots] endpoints are now deprecated an
 
 For consistency, we have also changed the name of the meta file inside the backup tar from `snapshot.json` to `backup.json`, so if you have a tool that use that file, you need to adjust it to look for both.
 
-## Steaming ingress
+## Streaming ingress
 
-Some add-ons needs to receive large payloads from the user, for instance with uploading. Previously, there has been a limit of 16 MB per request for add-ons running behind ingress and this is still the default. If you need to receive bigger payloads, you can enable this by setting `ingress_stream` to `True` in the add-on configuration. When you do this the request is streamed from the client to your add-on, which has no size limit and virtually no overhead.
+Some add-ons need to receive large payloads from the user, for instance with uploading. Previously, there has been a limit of 16 MB per request for add-ons running behind ingress and this is still the default. If you need to receive bigger payloads, you can enable this by setting `ingress_stream` to `True` in the add-on configuration. When you do this the request is streamed from the client to your add-on, which has no size limit and virtually no overhead.
 
 Note that not all webservers are able to handle this by default, so you might need to adjust it.
 
