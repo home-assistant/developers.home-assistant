@@ -6,24 +6,20 @@ authorTwitter: ludeeus
 title: Supervisor update
 ---
 
-It's been a while since we posted about changes to the Supervisor, here is some highlights from the past year and the future.
-
-This information is mainly for add-on developers, but there are is little something for everyone in here.
-
-If you have not yet seen it, we have posted a [blog on the main site][main_blog] that you should read.
+It's been a while since we posted about changes to the Supervisor, here is some highlights from the past year and the future. This information is mainly for add-on developers, but there are is little something for everyone in here. If you have not yet seen it, we have posted a [blog on the main site][main_blog] that you should read.
 
 ## Snapshot -> Backup
 
-First up, as mentioned in the [blog on the main site][main_blog], we have started a transition away from the name "snapshot" that has been with us since the beginning of the Supervisor. And are now moving to the more recognizable "backup".
+First up, as mentioned in the [blog on the main site][main_blog], we have started a transition away from the name "snapshot" that has been with us since the beginning of the Supervisor and are now moving to the more recognizable "backup".
 
 These changes are live now on the `dev` channel for the Supervisor, so you can start testing and adjusting your tools/add-ons to make sure they will still work when your users get this.
 
 ### API changes
 
-With this transition, a new base section in the Supervisor API has been added [`/backups`][supervisor_api_backups] that operates the same way as [`/snapshots`][supervisor_api_snapshots] with all the same endpoints as the old section has. But there are two key differences.
+With the transition from "snapshot" to "backup", a new base section in the Supervisor API has been added [`/backups`][supervisor_api_backups] that operates the same way as [`/snapshots`][supervisor_api_snapshots] with all the same endpoints as the old section has but there are two key differences:
 
 - If you access `/backups` the data returned now will be `{"backups": []}` instead of `{"snapshots": []}`
-- To delete a snapshot you now have to use the `DELETE` HTTP method with the `/backups` endpoint, previously both `POST` and `DELETE` was supported.
+- To delete a snapshot you now have to use the `DELETE` HTTP method with the `/backups` endpoint, previously both `POST` and `DELETE` were supported.
 
 The old [`/snapshots`][supervisor_api_snapshots] endpoints are now deprecated and are scheduled for removal in Q4 of this year.
 
@@ -33,9 +29,7 @@ For consistency, we have also changed the name of the meta file inside the backu
 
 ## Steaming ingress
 
-Some add-ons needs to receive large payloads from the user, for instance with uploading.
-
-Previously, there has been a limit on 16MB pr. request for add-ons running behind ingress, and this is still the default. If you need to receive bigger payloads, you can enable this by setting `ingress_stream` to `True` in the add-on configuration. When you do this the request are streamed from the client to your add-on, which have no size limit and virtually no overhead.
+Some add-ons needs to receive large payloads from the user, for instance with uploading. Previously, there has been a limit of 16 MB per request for add-ons running behind ingress and this is still the default. If you need to receive bigger payloads, you can enable this by setting `ingress_stream` to `True` in the add-on configuration. When you do this the request is streamed from the client to your add-on, which has no size limit and virtually no overhead.
 
 Note that not all webservers are able to handle this by default, so you might need to adjust it.
 
@@ -58,13 +52,11 @@ In addition to this, the following are also deprecated and are also scheduled fo
 
 ## Supervised installation
 
-Maintaining a [supervised installation][supervised_installation] is currently not the best experience. [the script][supervised_script] that most users use to install is behind what the Supervisor wants from the host. Since there are no real upgrade path for those using it users of it needs to manually adjust their installation.
+Maintaining a [supervised installation][supervised_installation] is currently not the best experience. [The script][supervised_script] that most users use to install is behind what the Supervisor wants from the host. Since there are no real upgrade paths for those using it, users of it need to manually adjust their installation.
 
 Recently we created the [OS Agent][os_agent] as mentioned in the [blog on the main site][main_blog]. This allows for better communication between the host OS and the Supervisor, and to bring in more features. All current supervised installations now have to install this manually to take advantage of it.
 
-An alternative to this route is to package and distribute it as a deb package that can be installed and upgraded with `apt` on the host.
-
-For this to be viable, we are looking for a person (or a group of persons), that want to create and maintain this type of deployment, and bring the supervised installation method up to par with our OS, and more importantly make updates needed on the host easier for the users.
+An alternative to this route is to package and distribute it as a deb package that can be installed and upgraded with `apt` on the host. For this to be viable, we are looking for a person (or a group of people) that wants to create and maintain this type of deployment, and bring the supervised installation method up to par with our OS, and more importantly make updates needed on the host easier for the users.
 
 If you have questions about these changes feel free to reach out in the `#devs_supervisor` channel on [our Discord server][discord].
 
