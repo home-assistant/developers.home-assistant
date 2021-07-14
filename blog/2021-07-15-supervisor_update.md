@@ -29,7 +29,7 @@ For consistency, we have also changed the name of the meta file inside the backu
 
 ## Streaming ingress
 
-Some add-ons need to receive large payloads from the user, for instance with uploading. Previously, there has been a limit of 16 MB per request for add-ons running behind ingress and this is still the default. If you need to receive bigger payloads, you can enable this by setting `ingress_stream` to `True` in the add-on configuration. When you do this the request is streamed from the client to your add-on, which has no size limit and virtually no overhead.
+Some add-ons need to receive large payloads from the user, for instance with uploading. Previously, there has been a limit of 16 MB per request for add-ons running behind ingress and this is still the default. If you need to receive bigger payloads, you can enable this by setting `ingress_stream` to `True` in the add-on configuration. When you do this the request is streamed from the client to your add-on, and the request has no size limit and virtually no overhead.
 
 Note that not all webservers are able to handle this by default, so you might need to adjust it.
 
