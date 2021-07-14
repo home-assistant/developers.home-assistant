@@ -56,7 +56,7 @@ Maintaining a [supervised installation][supervised_installation] is currently no
 
 Recently we created the [OS Agent][os_agent] as mentioned in the [blog on the main site][main_blog]. This allows for better communication between the host OS and the Supervisor, and to bring in more features. All current supervised installations now have to install this manually to take advantage of it.
 
-An alternative to this route is to package and distribute it as a deb package that can be installed and upgraded with `apt` on the host. For this to be viable, we are looking for a person (or a group of people) that wants to create and maintain this type of deployment, and bring the supervised installation method up to par with our OS, and more importantly make updates needed on the host easier for the users.
+An alternative to this route is to package and distribute the supervised installation as a deb package that can be installed and upgraded with `apt` on the host. For this to be viable, we are looking for a person (or a group of people) that wants to create and maintain this type of deployment, and bring the supervised installation method up to par with our OS, and more importantly make updates needed on the host easier for the users.
 
 If you have questions about these changes feel free to reach out in the `#devs_supervisor` channel on [our Discord server][discord].
 
