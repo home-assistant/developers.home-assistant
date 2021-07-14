@@ -6,7 +6,7 @@ authorTwitter: ludeeus
 title: Supervisor update
 ---
 
-It's been a while since we posted about changes to the Supervisor, here are some highlights from the past year and the future. This information is mainly for add-on developers, but there are is little something for everyone in here. If you have not yet seen it, we have posted a [blog on the main site][main_blog] that you should read.
+It's been a while since we posted about changes to the Supervisor. Here are some highlights from the past year and the future. This information is mainly for add-on developers, but there is little something for everyone in here. If you have not yet seen it, we have posted a [blog on the main site][main_blog] that you should read.
 
 ## Snapshot -> Backup
 
