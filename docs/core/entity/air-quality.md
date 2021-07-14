@@ -12,6 +12,11 @@ separate sensors for these measurements.
 Integrations that still rely on the Air Quality Entity should be migrated.
 :::
 
+:::caution
+The Air Quality entity does not support attribute shorthand for [property implementation](../entity.md#entity-class-or-instance-attributes)
+:::
+
+
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | particulate_matter_2_5 | float | **Required** | The particulate matter 2.5 (<= 2.5 μm) level.

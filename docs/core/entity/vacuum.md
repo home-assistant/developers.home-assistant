@@ -9,6 +9,10 @@ sidebar_label: Vacuum
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
+:::caution
+VacuumEntity and StateVacuumEntity do not support attribute shorthand for [property implementation](../entity.md#entity-class-or-instance-attributes)
+:::
+
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | name | string | **Required** | Name of the device.
