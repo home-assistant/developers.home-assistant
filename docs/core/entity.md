@@ -144,7 +144,7 @@ If an integration needs to access its own properties it should access the proper
 
 ### Example
 
-The below code snippet gives an example of best practices for when to implement property functions, and when to use class or isntance attributes. 
+The below code snippet gives an example of best practices for when to implement property functions, and when to use class or instance attributes. 
 
 ```py
 class SomeEntity():
