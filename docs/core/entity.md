@@ -148,13 +148,14 @@ The below code snippet gives an example of best practices for when to implement 
 
 ```py
 class SomeEntity():
-    _attr_available: bool = True  # This will be common to all instances of SomeEntity
+    _attr_device_clas = DEVICE_CLASS_TEMPERATURE  # This will be common to all instances of SomeEntity
     def __init__():
         self._attr_available = False  # This overrides the default
-        self._attr_is_on = device.get_state() # Note that this will run only at init and probably should not be here
+        self._attr_name = device.get_friendly_name()
 
         # The following should be avoided:
         if some_complex_condition and some_other_condition and something_is_none_and_only_valid_after_update and device_available:
+           ...
 
     def update()
         if self.available  # Read current state, no need to prefix with _attr_
