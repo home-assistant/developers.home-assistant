@@ -227,6 +227,11 @@ This will call a service in Home Assistant. Right now there is no return value. 
   "service": "turn_on",
   // Optional
   "service_data": {
+    "color_name": "beige",
+    "brightness": "101"
+  }
+  // Optional
+  "target": {
     "entity_id": "light.kitchen"
   }
 }

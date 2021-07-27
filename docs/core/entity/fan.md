@@ -11,6 +11,10 @@ A fan entity is a device that controls the different vectors of your fan such as
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
+:::caution
+FanEntity does not support attribute shorthand for [property implementation](../entity.md#entity-class-or-instance-attributes)
+:::
+
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | current_direction | str | None | Return the current direction of the fan |
@@ -33,7 +37,7 @@ Manually setting a speed must disable a preset mode. If it is possible to set a 
 The fan entity model has changed to use percentages in the range from 0 (off) to 100 instead
 of the named speeds. The new model replaces `speed` and `speed_list` with `percentage`, `preset_mode`, and `preset_modes`. This change allowed us to expand the number of supported speeds to accommodate additional fan models in Home Assistant. 
 
-To maintain backwards compatibility with integations that have not updated to the new model, the deprecated properties will remain until at least the end of 2021. Integrations must update their [Turn on](#turn-on) function to consume `percentage` or `preset_mode` instead of `speed`.
+To maintain backwards compatibility with integrations that have not updated to the new model, the deprecated properties will remain until at least the end of 2021. Integrations must update their [Turn on](#turn-on) function to consume `percentage` or `preset_mode` instead of `speed`.
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------

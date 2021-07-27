@@ -10,6 +10,13 @@ Device conditions are defined as dictionaries. These dictionaries are created by
 Device conditions can be provided by the integration that provides the device (e.g. ZHA, deCONZ) or the entity integrations that the device has entities with (e.g. light, humidity sensor).
 An example of the latter could be to check if a light is on or the floor is wet.
 
+If the condition requires dynamic validation that the static `CONDITION_SCHEMA` can't provide, it's possible to implement an `async_validate_condition_config` function.
+
+```py
+async def async_validate_condition_config(hass: HomeAssistant, config: ConfigType) -> ConfigType:
+    """Validate config."""
+```
+
 Home Assistant includes a template to get started with device conditions. To get started, run inside a development environment `python3 -m script.scaffold device_condition`.
 
 The template will create a new file `device_condition.py` in your integration folder and a matching test file. The file contains the following functions and constants:

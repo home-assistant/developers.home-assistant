@@ -37,7 +37,7 @@ When a task is currently running (like `Preview` for the docs), it can be restar
 
 ## Manual Environment
 
-It is also possible to set up a more traditional development environment. See the section for your operating system. Make sure your Python version is 3.7 or later.
+It is also possible to set up a more traditional development environment. See the section for your operating system. Make sure your Python version is 3.8 or later.
 
 ### Developing on Linux
 

@@ -1341,7 +1341,7 @@ Return information about the host.
   "disk_total": 32.0,
   "disk_used": 30.0,
   "disk_free": 2.0,
-  "features": ["shutdown", "reboot", "hostname", "services", "hassos"],
+  "features": ["shutdown", "reboot", "hostname", "services", "haos"],
   "hostname": "Awesome host",
   "kernel": "4.15.7",
   "operating_system": "Home Assistant OS"

@@ -175,6 +175,7 @@ image: repo/{arch}-my-custom-addon
 | ingress | bool | no | Enable the ingress feature for the add-on.
 | ingress_port | integer | no | Default `8099`. For add-ons that run on the host network, you can use `0` and read the port later via API.
 | ingress_entry | string | no | Modify the URL entry point from `/`.
+| ingress_stream | bool | no | Default `false`, when enabled POST requests to the add-on are streamed
 | panel_icon | string | no | Default: `mdi:puzzle`. MDI icon for the menu panel integration.
 | panel_title | string | no | Default is the add-on name, but can be modified with this option.
 | panel_admin | bool | no | Default `true`. Make menu entry only available with admin privileged.

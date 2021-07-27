@@ -34,10 +34,10 @@ An activity is a predefined activity or macro that puts the remote in a specific
 class MyRemote(RemoteEntity):
 
     def turn_on(self, activity: str = None, **kwargs):
-         """Turn the remote on."""
+         """Send the power on command."""
 
     async def async_turn_on(self, activity: str = None, **kwargs):
-         """Turn the remote on."""
+         """Send the power on command."""
 ```
 
 ### Turn Off Command
@@ -46,10 +46,10 @@ class MyRemote(RemoteEntity):
 class MyRemote(RemoteEntity):
 
     def turn_off(self, activity: str = None, **kwargs):
-         """Turn the remote off."""
+         """Send the power off command."""
 
     async def async_turn_off(self, activity: str = None, **kwargs):
-         """Turn the remote off."""
+         """Send the power off command."""
 ```
 
 ### Toggle Command
@@ -58,10 +58,10 @@ class MyRemote(RemoteEntity):
 class MyRemote(RemoteEntity):
 
     def toggle(self, activity: str = None, **kwargs):
-         """Toggle the remote."""
+         """Toggle a device."""
 
     async def async_toggle(self, activity: str = None, **kwargs):
-         """Toggle the remote."""
+         """Toggle a device."""
 ```
 
 ### Send Command

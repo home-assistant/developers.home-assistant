@@ -89,7 +89,9 @@ The following properties are used and controlled by Home Assistant, and should n
 | ------- | ------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | enabled | boolean | `True`  | Indicate if entity is enabled in the entity registry. It also returns `True` if the platform doesn't support the entity registry. Disabled entities will not be added to Home Assistant. |
 
-## Entity class attributes
+## Property implementation
+
+### Property function
 
 Writing property methods for each property is just a couple of lines of code,
 for example
@@ -105,8 +107,10 @@ class MySwitch(SwitchEntity):
     ...
 ```
 
-Alternatively, a shorter form is to set Entity class attributes according to the
-following pattern:
+### Entity class or instance attributes
+
+Alternatively, a shorter form is to set Entity class or instance attributes according to either of the
+following patterns:
 
 ```python
 class MySwitch(SwitchEntity):
@@ -116,9 +120,27 @@ class MySwitch(SwitchEntity):
     ...
 ```
 
-This does exactly the same as the first example. Properties that can be set
-like this, start with `_attr_` followed by the property name. For example,
-the `device_class` property, has the `_attr_device_class` class attribute.
+```python
+class MySwitch(SwitchEntity):
+
+    def __init(self, icon: str) -> None:
+        _attr_icon = icon
+
+    ...
+```
+
+This does exactly the same as the first example but relies on a default 
+implementation of the property in the base class. The name of the attribute
+starts with `_attr_` followed by the property name. For example, the default
+`device_class` property returns the `_attr_device_class` class attribute.
+
+Not all entity classes support the `_attr_` attributes for their entity 
+specific properties, please refer to the documentation for the respective 
+entity class for details.
+
+:::tip
+If an integration needs to access its own properties it should access the property (`self.name`), not the class or instance attribute (`self._attr_name`).
+:::
 
 ## Lifecycle hooks
 

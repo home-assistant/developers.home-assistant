@@ -114,7 +114,7 @@ A Unique ID is used to match a config entry to the underlying device or API. The
 
 - IP Address
 - Device Name
-- Hostname
+- Hostname if it can be changed by the user
 - URL
 
 ### Unignoring
@@ -133,7 +133,7 @@ async def async_step_unignore(self, user_input):
 
 ## Discovery steps
 
-When an integration is discovered, their respective discovery step is invoked with the discovery information. The step will have to check the following things:
+When an integration is discovered, their respective discovery step is invoked (ie `async_step_dhcp` or `async_step_zeroconf`) with the discovery information. The step will have to check the following things:
 
 - Make sure there are no other instances of this config flow in progress of setting up the discovered device. This can happen if there are multiple ways of discovering that a device is on the network.
 - Make sure that the device is not already set up.
