@@ -694,6 +694,149 @@ Reset internal authentication cache, this is useful if you have changed the pass
 </ApiEndpoint>
 
 
+### Backup
+
+<ApiEndpoint path="/backups" method="get">
+
+Return a list of [Backups](api/supervisor/models.md#backup)
+
+**Example response:**
+
+```json
+{
+  "backups": [
+    {
+      "slug": "skuwe823",
+      "date": "2020-09-30T20:25:34.273Z",
+      "name": "Awesome backup",
+      "type": "partial",
+      "protected": true,
+      "content": {
+        "homeassistant": true,
+        "addons": ["awesome_addon"],
+        "folders": ["ssl", "media"]
+      }
+    }
+  ]
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/backups/new/full" method="post">
+
+Create a full backup.
+
+**Payload:**
+
+| key      | type   | optional | description                                |
+| -------- | ------ | -------- | ------------------------------------------ |
+| name     | string | True     | The name you want to give the backup     |
+| password | string | True     | The password you want to give the backup |
+
+**Example response:**
+
+```json
+{
+  "slug": "skuwe823"
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/backups/new/upload" method="post">
+
+Upload a backup.
+
+**Example response:**
+
+```json
+{
+  "slug": "skuwe823"
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/backups/new/partial" method="post">
+
+Create a partial backup.
+
+**Payload:**
+
+| key      | type   | optional | description                                 |
+| -------- | ------ | -------- | ------------------------------------------- |
+| name     | string | True     | The name you want to give the backup      |
+| password | string | True     | The password you want to give the backup  |
+| addons   | list   | True     | A list of strings representing add-on slugs |
+| folders  | list   | True     | A list of strings representing directories  |
+
+**You need to supply at least one key in the payload.**
+
+**Example response:**
+
+```json
+{
+  "slug": "skuwe823"
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/backups/reload" method="post">
+
+Reload backup from storage.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/backups/<backup>/download" method="get">
+
+Download the backup file with the given slug.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/backups/<backup>/info" method="get">
+
+Returns a [Backup details model](api/supervisor/models.md#backup-details) for the add-on.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/backups/<backup>" method="delete">
+
+Removes the backup file with the given slug.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/backups/<backup>/restore/full" method="post">
+
+Does a full restore of the backup with the given slug.
+
+**Payload:**
+
+| key      | type   | optional | description                          |
+| -------- | ------ | -------- | ------------------------------------ |
+| password | string | True     | The password for the backup if any |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/backups/<backup>/restore/partial" method="post">
+
+Does a partial restore of the backup with the given slug.
+
+**Payload:**
+
+| key           | type    | optional | description                                    |
+| ------------- | ------- | -------- | ---------------------------------------------- |
+| homeassistant | boolean | True     | `true` if Home Assistant should be restored    |
+| addons        | list    | True     | A list of add-on slugs that should be restored |
+| folders       | list    | True     | A list of directories that should be restored  |
+| password      | string  | True     | The password for the backup if any           |
+
+**You need to supply at least one key in the payload.**
+
+</ApiEndpoint>
+
+
 ### CLI
 
 <ApiEndpoint path="/cli/info" method="get">
@@ -1713,7 +1856,7 @@ Update Home Assistant OS
   "suggestions": [
     {
       "uuid": "B9923620C9A11EBBDC3C403FC2CA371",
-      "type": "clear_snapshots",
+      "type": "clear_backups",
       "context": "system",
       "reference": null
     }
@@ -1898,149 +2041,6 @@ Create a service definition
 Deletes the service definitions
 
 </ApiEndpoint>
-
-### Snapshot
-
-<ApiEndpoint path="/snapshots" method="get">
-
-Return a list of [Snapshot models](api/supervisor/models.md#snapshot)
-
-**Example response:**
-
-```json
-{
-  "snapshots": [
-    {
-      "slug": "skuwe823",
-      "date": "2020-09-30T20:25:34.273Z",
-      "name": "Awesome snapshot",
-      "type": "partial",
-      "protected": true,
-      "content": {
-        "homeassistant": true,
-        "addons": ["awesome_addon"],
-        "folders": ["ssl", "media"]
-      }
-    }
-  ]
-}
-```
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/snapshots/new/full" method="post">
-
-Create a full snapshot.
-
-**Payload:**
-
-| key      | type   | optional | description                                |
-| -------- | ------ | -------- | ------------------------------------------ |
-| name     | string | True     | The name you want to give the snapshot     |
-| password | string | True     | The password you want to give the snapshot |
-
-**Example response:**
-
-```json
-{
-  "slug": "skuwe823"
-}
-```
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/snapshots/new/upload" method="post">
-
-Upload a snapshot.
-
-**Example response:**
-
-```json
-{
-  "slug": "skuwe823"
-}
-```
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/snapshots/new/partial" method="post">
-
-Create a partial snapshot.
-
-**Payload:**
-
-| key      | type   | optional | description                                 |
-| -------- | ------ | -------- | ------------------------------------------- |
-| name     | string | True     | The name you want to give the snapshot      |
-| password | string | True     | The password you want to give the snapshot  |
-| addons   | list   | True     | A list of strings representing add-on slugs |
-| folders  | list   | True     | A list of strings representing directories  |
-
-**You need to supply at least one key in the payload.**
-
-**Example response:**
-
-```json
-{
-  "slug": "skuwe823"
-}
-```
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/snapshots/reload" method="post">
-
-Reload snapshots from storage.
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/snapshots/<snapshot>/download" method="get">
-
-Download the snapshot file with the given slug.
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/snapshots/<snapshot>/info" method="get">
-
-Returns a [Snapshot details model](api/supervisor/models.md#snapshot-details) for the add-on.
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/snapshots/<snapshot>" method="delete">
-
-Removes the snapshot file with the given slug.
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/snapshots/<snapshot>/restore/full" method="post">
-
-Does a full restore of the snapshot with the given slug.
-
-**Payload:**
-
-| key      | type   | optional | description                          |
-| -------- | ------ | -------- | ------------------------------------ |
-| password | string | True     | The password for the snapshot if any |
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/snapshots/<snapshot>/restore/partial" method="post">
-
-Does a partial restore of the snapshot with the given slug.
-
-**Payload:**
-
-| key           | type    | optional | description                                    |
-| ------------- | ------- | -------- | ---------------------------------------------- |
-| homeassistant | boolean | True     | `true` if Home Assistant should be restored    |
-| addons        | list    | True     | A list of add-on slugs that should be restored |
-| folders       | list    | True     | A list of directories that should be restored  |
-| password      | string  | True     | The password for the snapshot if any           |
-
-**You need to supply at least one key in the payload.**
-
-</ApiEndpoint>
-
 
 ### Store
 
@@ -2380,6 +2380,6 @@ Some of the endpoints uses placeholders indicated with `<...>` in the endpoint U
 | interface   | A valid interface name, example `eth0`, to get the interface name you can call `/network/info`. You can use `default` to get the primary interface |
 | registry    | A registry hostname defined in the container registry configuration, to get the hostname you can call `/docker/registries`                            |
 | service     | The service name for a service on the host.                                                                                                           |
-| snapshot    | A valid snapshot slug, example `skuwe823`, to get the slug you can call `/snapshots`                                                                  |
-| suggestion  | A valid suggestion, example `clear_full_snapshot`, to get the suggestion you can call `/resolution`                                         |
+| backup    | A valid backup slug, example `skuwe823`, to get the slug you can call `/backups`                                                                  |
+| suggestion  | A valid suggestion, example `clear_full_backup`, to get the suggestion you can call `/resolution`                                         |
 | uuid        | The UUID of a discovery service, to get the UUID you can call `/discovery`                                                                            |
