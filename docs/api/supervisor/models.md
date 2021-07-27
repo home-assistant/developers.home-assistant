@@ -166,39 +166,39 @@ These models are describing objects that are getting returned from the superviso
 | available | boolean | `true` if the service is available  |
 | providers | list    | A list of providers for the service |
 
-## Snapshot
+## Backup
 
 | key       | type    | description                                                           |
 | --------- | ------- | --------------------------------------------------------------------- |
-| slug      | string  | A generated slug for the snapshot                                     |
-| date      | string  | ISO date string representation of the date the snapshot was created |
-| name      | string  | The name given to the snapshot                                        |
-| type      | string  | The type of snapshot (full, partial)                                  |
-| protected | boolean | `true` if the snapshot is password protected                          |
-| content | dictionary | A dictionary describing the content of the snapshot                        |
+| slug      | string  | A generated slug for the backup                                     |
+| date      | string  | ISO date string representation of the date the backup was created |
+| name      | string  | The name given to the backup                                        |
+| type      | string  | The type of backup (full, partial)                                  |
+| protected | boolean | `true` if the backup is password protected                          |
+| content | dictionary | A dictionary describing the content of the backup                        |
 
-### Snapshot -> content
+### Backup -> content
 
-The `content` key of a snapshot object contains the following keys:
+The `content` key of a backup object contains the following keys:
 
 | key       | type    | description                                                           |
 | --------- | ------- | --------------------------------------------------------------------- |
-| homeassistant      | boolean  | `true` if the snapshot contains homeassistant
-| addons      | list  | A list of add-on slugs included in the snapshot
-| folders      | list  | A list of folder names included in the snapshot
+| homeassistant      | boolean  | `true` if the backup contains homeassistant
+| addons      | list  | A list of add-on slugs included in the backup
+| folders      | list  | A list of folder names included in the backup
 
-## Snapshot details
+## Backup details
 
 | key           | type    | description                                                                                                                |
 | ------------- | ------- | -------------------------------------------------------------------------------------------------------------------------- |
-| slug          | string  | A generated slug for the snapshot                                                                                          |
-| type          | string  | The type of snapshot (full, partial)                                                                                       |
-| name          | string  | The name given to the snapshot                                                                                             |
-| date          | string  | ISO date string representation of the date the snapshot was created                                                      |
-| size          | string  | The size of the snapshot in MB                                                                                             |
-| protected     | boolean | `true` if the snapshot is password protected                                                                               |
+| slug          | string  | A generated slug for the backup                                                                                          |
+| type          | string  | The type of backup (full, partial)                                                                                       |
+| name          | string  | The name given to the backup                                                                                             |
+| date          | string  | ISO date string representation of the date the backup was created                                                      |
+| size          | string  | The size of the backup in MB                                                                                             |
+| protected     | boolean | `true` if the backup is password protected                                                                               |
 | homeassistant | string  | The version of Home Assistant that was in use                                                                              |
-| addons        | list    | A list of add-ons in the snapshot, addons are represented as a dictionary with these keys [`slug`,`name`,`version`,`size`] |
+| addons        | list    | A list of add-ons in the backup, addons are represented as a dictionary with these keys [`slug`,`name`,`version`,`size`] |
 | repositories  | list    | A list of add-on repository URL's as strings                                                                               |
 | folders       | list    | A list of strings representing directories                                                                                 |
 
