@@ -39,6 +39,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | energy | Wh,kWh | Energy.
 | power_factor | % | Power Factor.
 | voltage | V | Voltage.
+| monetary | ISO 4217 | Monetary value with a currency
 
 ### Available state classes
 
