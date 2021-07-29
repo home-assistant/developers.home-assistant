@@ -46,3 +46,19 @@ If specifying a device class, your sensor entity will need to also return the co
 | Type | Description
 | ---- | -----------
 | measurement | The state represents _a measurement in present time_, not a historical aggregation such as statistics or a prediction of the future. Examples of what should be classified `measurement` are: current temperature, accumulated energy consumption, accumulated cost. Exampled of what should not be classified as `measurement`: Forecasted temperature for tomorrow, yesterday's energy consumption or anything else that doesn't include the _current_ measurement.
+
+## Long-term Statistics
+
+Home Assistant has support for storing sensors as long-term statistics if the entity has the right properties. A requirement to opt-in for statistics is that the sensor has `state_class` set to `measurement`. That means that the current value represents the current value.
+
+### Metered entities
+
+Metered entities have a value that keeps increasing until reset, like energy consumption or production. To have Home Assistant track this entity, you need to include a [`last_reset` property](#properties).
+
+Home Assistant will track the growth over the statistics period for metered entities.
+
+### Value entities
+
+Home Assistant tracks the min, max and mean value during the statistics period.
+
+All sensors with a unit of measurement of `%` are automatically tracked. Other entities opt-in based on their `device_class`.
