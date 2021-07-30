@@ -25,19 +25,19 @@ The old [`/snapshots`][supervisor_api_snapshots] endpoints are now deprecated an
 
 ### Backup structure changes
 
-For consistency, we have also changed the name of the meta file inside the backup tar from `snapshot.json` to `backup.json`, so if you have a tool that use that file, you need to adjust it to look for both.
+For consistency, we have also changed the name of the meta file inside the backup tar from `snapshot.json` to `backup.json`. If you have a tool that uses that file you should look for both so your tool will work for existing as well as new backups.
 
 ## Streaming ingress
 
-Some add-ons need to receive large payloads from the user, for instance with uploading. Previously, there has been a limit of 16 MB per request for add-ons running behind ingress and this is still the default. If you need to receive bigger payloads, you can enable this by setting `ingress_stream` to `True` in the add-on configuration. When you do this the request is streamed from the client to your add-on, and the request has no size limit and virtually no overhead.
+Some add-ons need to receive large payloads from the user, for instance with uploading. Previously, there has been a limit of 16 MB per request for add-ons running behind ingress and this is still the default. If you need to receive larger payloads, you can enable this by setting `ingress_stream` to `True` in the add-on configuration. When you do this the request is streamed from the client to your add-on, and the request has no size limit and virtually no overhead.
 
 Note that not all webservers are able to handle this by default, so you might need to adjust it.
 
 ## Deprecated API endpoints
 
-Over the past years we have restructured parts of our API endpoints, but we have also kept old endpoints working. If you use any of the deprecated endpoints in your tools/add-ons you should adjust this. All deprecated endpoints are scheduled for removal in Q4 this year.
+Over the past years we have restructured parts of our API endpoints, but we have also kept old endpoints working. If you use any of the deprecated endpoints in your tools/add-ons you should move to use the new ones now. All deprecated endpoints are scheduled for removal in Q4 this year.
 
-Here is a list of those and their replacements:
+Here is a list of the deprecated endpoints and their replacements:
 
 Deprecated endpoints | Replaced with
 -- | --
@@ -54,7 +54,7 @@ In addition to this, the following are also deprecated and are also scheduled fo
 
 Maintaining a [supervised installation][supervised_installation] is currently not the best experience. [The script][supervised_script] that most users use to install is behind what the Supervisor wants from the host. Since there are no real upgrade paths for those using it, users of it need to manually adjust their installation.
 
-Recently we created the [OS Agent][os_agent] as mentioned in the [blog on the main site][main_blog]. This allows for better communication between the host OS and the Supervisor, and to bring in more features. All current supervised installations now have to install this manually to take advantage of it.
+Recently we created the [OS Agent][os_agent] as mentioned in the [blog on the main site][main_blog]. This allows for better communication between the host OS and the Supervisor, and to bring in more features. To take advantage of this features users of current supervised installations have to install the OS Agent manually.
 
 An alternative to this route is to package and distribute the supervised installation as a deb package that can be installed and upgraded with `apt` on the host. For this to be viable, we are looking for a person (or a group of people) that wants to create and maintain this type of deployment, and bring the supervised installation method up to par with our OS, and more importantly make updates needed on the host easier for the users.
 
