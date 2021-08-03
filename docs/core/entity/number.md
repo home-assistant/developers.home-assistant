@@ -7,7 +7,9 @@ A `number` is an entity that allows the user to input an arbitrary value to an i
 
 ## Properties
 
-> Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+:::tip
+Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+:::
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
