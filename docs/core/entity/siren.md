@@ -7,7 +7,9 @@ A siren entity is a device whose main purpose is to control siren devices like a
 
 ## Properties
 
-> Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data or build a mechanism to push state updates to the entity class instance.
+:::tip
+Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data or build a mechanism to push state updates to the entity class instance.
+:::
 
 | Name                    | Type   | Default                               | Description                                                                             |
 | ----------------------- | ------ | ------------------------------------- | --------------------------------------------------------------------------------------- |
