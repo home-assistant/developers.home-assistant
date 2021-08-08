@@ -14,6 +14,7 @@ Properties should always only return information from memory and not do I/O (lik
 | Name                    | Type   | Default                               | Description                                                                             |
 | ----------------------- | ------ | ------------------------------------- | --------------------------------------------------------------------------------------- |
 | is_on                   | bool   | `NotImplementedError()`               | Whether the device is on or off.                                                        |
+| available_tones         | list   | `NotImplementedError()`               | The list of available tones on the device to pass into the `turn_on` service. Requires `SUPPORT_TONES` feature.                  |
 
 ### Tones
 
