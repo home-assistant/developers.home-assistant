@@ -109,6 +109,9 @@ To do this, we will need to update our files as follows:
 Add to your `Dockerfile` before `RUN`:
 
 ```dockerfile
+ARG BUILD_FROM
+FROM $BUILD_FROM
+
 # Install requirements for add-on
 RUN apk add --no-cache python3
 
