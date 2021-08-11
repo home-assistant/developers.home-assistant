@@ -29,6 +29,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | carbon_dioxide | ppm | parts per million of carbon dioxide concentration
 | carbon_monoxide | ppm | parts per million of carbon monoxide concentration
 | humidity | % | % of humidity in the air.
+| gas | m³/ft³ | Volume of gas.
 | illuminance | lx/lm | Light level.
 | signal_strength | dB/dBm | Signal strength.
 | temperature | °C/°F | Temperature.
