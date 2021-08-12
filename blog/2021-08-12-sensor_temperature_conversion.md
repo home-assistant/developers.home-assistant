@@ -5,7 +5,7 @@ title: Temperature conversions moving to SensorEntity
 ---
 
 Temperature conversions are moving from the state machine to the SensorEntity base class.
-To facilitate this,the sensor entity model has been updated with two new properties, 
+To facilitate this, the sensor entity model has been updated with two new properties, 
 `native_value` and `native_unit_of_measurement`. This allows us to add additional
 unit conversions in the future instead of relying on the integrations to do it themselves.
 
