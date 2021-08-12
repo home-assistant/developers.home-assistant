@@ -27,6 +27,7 @@ If last_reset is not set, the sensor's value when it was first added used as the
 zero-point when calculating `sum` statistics.
 
 Example of `STATE_CLASS_TOTAL` without last_reset:
+
 | t    | state  | sum    |
 | ---: | -----: | -----: |
 |   0  |  1000  |     0  |
@@ -35,6 +36,7 @@ Example of `STATE_CLASS_TOTAL` without last_reset:
 |   3  |     5  |  -995  |
 
 Example of `STATE_CLASS_TOTAL` with last_reset:
+
 | t    | state  | last_reset          | sum    |
 | ---: | -----: | ------------------- | -----: |
 |   0  |  1000  | 2021-08-01T13:30:00 |     0  |
@@ -52,6 +54,7 @@ useful for gas meters, electricity meters, water meters etc. The value when the 
 reading decreases will be used as zero-point when calculating `sum` statistics.
 
 Example of `STATE_CLASS_TOTAL_INCREASING`:
+
 | t    | state  | sum  |
 | ---: | -----: | ---: |
 |   0  |  1000  |   0  |
@@ -60,6 +63,7 @@ Example of `STATE_CLASS_TOTAL_INCREASING`:
 |   3  |     5  |  15  |
 
 Example of `STATE_CLASS_TOTAL_INCREASING` where the sensor does not reset to 0:
+
 | t    | state  | sum  |
 | ---: | -----: | ---: |
 |   0  |  1000  |   0  |
