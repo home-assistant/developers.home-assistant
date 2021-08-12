@@ -23,7 +23,7 @@ There are now 3 defined state classes:
 If the sensor's state class is `STATE_CLASS_TOTAL`, the last_reset attribute can
 optionally be set to gain manual control of meter cycles; each time last_reset changes
 the corresponding value is used as the zero-point when calculating `sum` statistics.
-If last_reset is not set, the sensor's value when it was first added used as the
+If last_reset is not set, the sensor's value when it was first added is used as the
 zero-point when calculating `sum` statistics.
 
 Example of `STATE_CLASS_TOTAL` without last_reset:
@@ -48,7 +48,9 @@ Example of `STATE_CLASS_TOTAL` with last_reset:
 
 #### STATE_CLASS_TOTAL_INCREASING
 If the sensor's state class is `STATE_CLASS_TOTAL_INCREASING`, a decreasing value is
-interpreted as the start of a new meter cycle or the replacement of the meter. The
+interpreted as the start of a new meter cycle or the replacement of the meter.  It is
+important that the integration ensures that the value cannot erroneously decrease in 
+the case of calculating a value from a sensor with measurement noise present. The
 last_reset attribute will be ignored when compiling statistics. This state class is
 useful for gas meters, electricity meters, water meters etc. The value when the sensor
 reading decreases will be used as zero-point when calculating `sum` statistics.
