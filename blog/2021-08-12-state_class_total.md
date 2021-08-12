@@ -1,7 +1,7 @@
 ---
 author: Erik Montnémery
 authorURL: https://github.com/emontnemery
-title: New sensor state classes: total and total_increasing
+title: "New sensor state classes: total and total_increasing"
 ---
 
 Two new state classes, `STATE_CLASS_TOTAL` and `STATE_CLASS_TOTAL_INCREASING` have been
