@@ -4,7 +4,12 @@ authorURL: https://github.com/emontnemery
 title: Temperature conversions moving to SensorEntity
 ---
 
-Temperature conversions are moving from the state machine to the SensorEntity base class.
+Temperature unit conversions are moving from the state machine to the SensorEntity base
+class. Unit conversions will only be done if the sensor's `device_class` attribute is set
+to `DEVICE_CLASS_TEMPERATURE`. If the `device_class` is not set or is not set to
+`DEVICE_CLASS_TEMPERATURE` temperature conversion will take place during a transition
+period and a warning will be logged.
+
 To facilitate this, the sensor entity model has been updated with two new properties, 
 `native_value` and `native_unit_of_measurement`. This allows us to add additional
 unit conversions in the future instead of relying on the integrations to do it themselves.
