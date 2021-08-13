@@ -5,22 +5,24 @@ title: "New sensor state classes: total and total_increasing"
 ---
 
 Two new state classes, `STATE_CLASS_TOTAL` and `STATE_CLASS_TOTAL_INCREASING` have been
-added. In addition, it is no longer mandatory to set the `last_reset` attribute in order
-for `sum` statistics to be generated. The driver for the changes is to make it easier to
-integrate with utility meters etc.
+added. In addition, it is no longer mandatory to set the `last_reset` attribute for
+`sum` statistics to be generated. The driver for the changes is to make it easier to
+integrate with devices, like utility meters.
 
 ### State classes
 
 There are now 3 defined state classes:
+
 - `STATE_CLASS_MEASUREMENT`, the state represents a measurement in present time, for 
-   example a temperature, electric power etc.
-- `STATE_CLASS_TOTAL`, the state represents a total amount which can both increase and
+   example a temperature, electric power, etc.
+- `STATE_CLASS_TOTAL`, the state represents a total amount that can both increase and
    decrease, e.g. the value of a stock portfolio
 - `STATE_CLASS_TOTAL_INCREASING`, a monotonically increasing total, e.g. an amount of
    consumed gas, water or energy
 
-#### STATE_CLASS_TOTAL
-If the sensor's state class is `STATE_CLASS_TOTAL`, the last_reset attribute can
+#### `STATE_CLASS_TOTAL`
+
+If the sensor's state class is `STATE_CLASS_TOTAL`, the `last_reset` attribute can
 optionally be set to gain manual control of meter cycles; each time last_reset changes
 the corresponding value is used as the zero-point when calculating `sum` statistics.
 If last_reset is not set, the sensor's value when it was first added is used as the
@@ -46,9 +48,10 @@ Example of `STATE_CLASS_TOTAL` with last_reset:
 |   4  |     5  | 2021-09-01T13:30:00 |    10  |
 
 
-#### STATE_CLASS_TOTAL_INCREASING
+#### `STATE_CLASS_TOTAL_INCREASING`
+
 If the sensor's state class is `STATE_CLASS_TOTAL_INCREASING`, a decreasing value is
-interpreted as the start of a new meter cycle or the replacement of the meter.  It is
+interpreted as the start of a new meter cycle or the replacement of the meter. It is
 important that the integration ensures that the value cannot erroneously decrease in 
 the case of calculating a value from a sensor with measurement noise present. The
 last_reset attribute will be ignored when compiling statistics. This state class is
