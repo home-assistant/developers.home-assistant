@@ -14,15 +14,23 @@ integrate with devices, like utility meters.
 There are now 3 defined state classes:
 
 - `STATE_CLASS_MEASUREMENT`, the state represents a measurement in present time, for 
-   example a temperature, electric power, etc.
+   example a temperature, electric power, etc. For supported sensors, statistics of 
+   hourly min, max and average sensor readings are compiled.
 - `STATE_CLASS_TOTAL`, the state represents a total amount that can both increase and
-   decrease, e.g. the value of a stock portfolio
+   decrease, e.g. the value of a stock portfolio. When supported, the accumulated growth
+   or decline of the sensor's value since it was first added is updated hourly.
 - `STATE_CLASS_TOTAL_INCREASING`, a monotonically increasing total, e.g. an amount of
-   consumed gas, water or energy
+   consumed gas, water or energy. When supported, the accumulated growth of the sensor's
+   value since it was first added is updated hourly.
+
+#### `STATE_CLASS_MEASUREMENT`
+
+For sensors with state_class `STATE_CLASS_MEASUREMENT`, it is deprecated to set the
+`last_reset` attribute, and it will be ignored in Home Assistant 2021.10.
 
 #### `STATE_CLASS_TOTAL`
 
-If the sensor's state class is `STATE_CLASS_TOTAL`, the `last_reset` attribute can
+For sensors with state_class `STATE_CLASS_TOTAL`, the `last_reset` attribute can
 optionally be set to gain manual control of meter cycles; each time last_reset changes
 the corresponding value is used as the zero-point when calculating `sum` statistics.
 If last_reset is not set, the sensor's value when it was first added is used as the
@@ -50,7 +58,7 @@ Example of `STATE_CLASS_TOTAL` with last_reset:
 
 #### `STATE_CLASS_TOTAL_INCREASING`
 
-If the sensor's state class is `STATE_CLASS_TOTAL_INCREASING`, a decreasing value is
+For sensors with state_class `STATE_CLASS_TOTAL_INCREASING`, a decreasing value is
 interpreted as the start of a new meter cycle or the replacement of the meter. It is
 important that the integration ensures that the value cannot erroneously decrease in 
 the case of calculating a value from a sensor with measurement noise present. The
