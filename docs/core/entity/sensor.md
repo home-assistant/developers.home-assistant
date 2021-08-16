@@ -40,6 +40,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | pm25 | µg/m³ | Concentration of particulate matter less than 2.5 micrometers |
 | pm10 | µg/m³ | Concentration of particulate matter less than 10 micrometers |
 | signal_strength | dB/dBm | Signal strength.
+| sulphur_dioxide | µg/m³ | Concentration of sulphure dioxide |
 | temperature | °C/°F | Temperature.
 | timestamp | ISO8601 | Timestamp.
 | power | W,kW | Power.
