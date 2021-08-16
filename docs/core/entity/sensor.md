@@ -25,13 +25,22 @@ If specifying a device class, your sensor entity will need to also return the co
 
 | Type | Unit | Description
 | ---- | ---- | -----------
+| aqi | | Air Quality Index
 | battery | % | % of battery that is left.
 | carbon_dioxide | ppm | parts per million of carbon dioxide concentration
 | carbon_monoxide | ppm | parts per million of carbon monoxide concentration
 | humidity | % | % of humidity in the air.
 | gas | m³/ft³ | Volume of gas.
 | illuminance | lx/lm | Light level.
+| nitrogen_dioxide | µg/m³ | Concentration of Nitrogen Dioxide |
+| nitrogen_monoxide | µg/m³ | Concentration of Nitrogen Monoxide |
+| nitrous_oxide | µg/m³ | Concentration of Nitrous Oxide |
+| ozone | µg/m³ | Concentration of Ozone |
+| pm1 | µg/m³ | Concentration of particulate matter less than 1 micrometer |
+| pm25 | µg/m³ | Concentration of particulate matter less than 2.5 micrometers |
+| pm10 | µg/m³ | Concentration of particulate matter less than 10 micrometers |
 | signal_strength | dB/dBm | Signal strength.
+| sulphur_dioxide | µg/m³ | Concentration of sulphure dioxide |
 | temperature | °C/°F | Temperature.
 | timestamp | ISO8601 | Timestamp.
 | power | W,kW | Power.
