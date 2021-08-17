@@ -4,7 +4,7 @@ authorURL: https://github.com/emontnemery
 title: "New sensor state classes: total and total_increasing"
 ---
 
-A new state class, `STATE_CLASS_TOTAL_INCREASING` has been added. In addition, the
+A new state class, `total_increasing` has been added. In addition, the
 `last_reset` attribute is removed from `SensorEntity`. The driver for the changes is to
 make it easier to integrate with devices, like utility meters.
 
@@ -12,12 +12,12 @@ make it easier to integrate with devices, like utility meters.
 
 There are 2 defined state classes:
 
-- `STATE_CLASS_MEASUREMENT`, the state represents a measurement in present time, for 
+- `measurement`, the state represents a measurement in present time, for 
    example a temperature, electric power, the value of a stock portfolio, etc. For
    supported sensors, statistics of hourly min, max and average sensor readings or of
    the accumulated growth or decline of the sensor's value since it was first added is
    updated hourly.
-- `STATE_CLASS_TOTAL_INCREASING`, a monotonically increasing total, e.g. an amount of
+- `total_increasing`, a monotonically increasing total, e.g. an amount of
    consumed gas, water or energy. When supported, the accumulated growth of the sensor's
    value since it was first added is updated hourly.
 
