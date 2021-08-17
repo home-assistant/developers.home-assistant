@@ -33,7 +33,7 @@ The sensor's state when it's first added to Home Assistant is used as an initial
 zero-point. When a new meter cycle is detected the zero-point will be set to 0.
 Please refer to the tables below for how this affects the statistics.
 
-Example of `STATE_CLASS_TOTAL_INCREASING`:
+Example of `STATE_CLASS_TOTAL_INCREASING` with a new meter cycle:
 
 | t                      | state  | sum  |
 | :--------------------- | -----: | ---: |
@@ -42,7 +42,8 @@ Example of `STATE_CLASS_TOTAL_INCREASING`:
 |   2021-08-01T15:00:00  |     0  |  10  |
 |   2021-08-01T16:00:00  |     5  |  15  |
 
-Example of `STATE_CLASS_TOTAL_INCREASING` where the sensor does not reset to 0:
+Example of `STATE_CLASS_TOTAL_INCREASING` where the there initial state at the beginning
+of the new meter cycle is not 0, but 0 is used as zero-point:
 
 | t                      | state  | sum  |
 | :--------------------- | -----: | ---: |
