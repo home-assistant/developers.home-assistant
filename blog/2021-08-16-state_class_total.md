@@ -48,3 +48,5 @@ Example of `STATE_CLASS_TOTAL_INCREASING` where the sensor does not reset to 0:
 |   2021-08-01T14:00:00  |  1010  |  10  |
 |   2021-08-01T15:00:00  |     5  |  15  |
 |   2021-08-01T16:00:00  |    10  |  20  |
+
+This state class used to be represented by state class `measurement` in combination with a `last_reset` value. This approach has been deprecated and will be interpreted as a `total_increasing` state class instead with an automatic last reset.
