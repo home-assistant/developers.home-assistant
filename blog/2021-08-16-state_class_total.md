@@ -27,9 +27,11 @@ For sensors with state_class `STATE_CLASS_TOTAL_INCREASING`, a decreasing value 
 interpreted as the start of a new meter cycle or the replacement of the meter. It is
 important that the integration ensures that the value cannot erroneously decrease in 
 the case of calculating a value from a sensor with measurement noise present. This state
-class is useful for gas meters, electricity meters, water meters etc. The value when the
-sensor reading decreases will not be used as zero-point when calculating `sum` statistics,
-instead the zero-point will be set to 0.
+class is useful for gas meters, electricity meters, water meters etc.
+
+The sensor's state when it's first added to Home Assistant is used as an initial
+zero-point. When a new meter cycle is detected the zero-point will be set to 0.
+Please refer to the tables below for how this affects the statistics.
 
 Example of `STATE_CLASS_TOTAL_INCREASING`:
 
