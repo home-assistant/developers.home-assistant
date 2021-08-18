@@ -74,7 +74,7 @@ Components are also able to register devices in the case that there are no entit
 # Inside a component
 from homeassistant.helpers import device_registry as dr
 
-device_registry = await dr.async_get_registry(hass)
+device_registry = dr.async_get(hass)
 
 device_registry.async_get_or_create(
     config_entry_id=entry.entry_id,
