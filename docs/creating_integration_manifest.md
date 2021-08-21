@@ -235,7 +235,13 @@ For example:
 
 ## USB
 
-If your integration supports discovery via usb, you can add the type to your manifest. If the user has the `usb` integration loaded, it will load the `usb` step of your integration's config flow when it is discovered. We support discovery by VID (Vendor ID) and PID (Device ID). For help identifiying these values see [How To Identify A Device](https://wiki.debian.org/HowToIdentifyADevice/USB). The manifest value is a list of matcher dictionaries, your integration is discovered if all items of any of the specified matchers are found in the USB data. It's up to your config flow to filter out duplicates.
+If your integration supports discovery via usb, you can add the type to your manifest. If the user has the `usb` integration loaded, it will load the `usb` step of your integration's config flow when it is discovered. We support discovery by VID (Vendor ID) and PID (Device ID). For help identifiying these values see [How To Identify A Device](https://wiki.debian.org/HowToIdentifyADevice/USB).
+
+- On all supported systems, devices are detected at startup.
+- On Linux systems that have functional `udev` support, including Home Assistant Operating System, devices are detected as soon as they are plugged in.
+- On non-Linux systems or systems without `udev` support, devices are detected when the `usb/scan` websocket endpoint is invoked. Currently, the frontend calls this endpoint when visiting the integrations and onboarding areas.
+
+The manifest value is a list of matcher dictionaries, your integration is discovered if all items of any of the specified matchers are found in the USB data. It's up to your config flow to filter out duplicates.
 
 The following example has two matchers consisting of two items. All of the items in any of the two matchers must match for discovery to happen by this config.
 
