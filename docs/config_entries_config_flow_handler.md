@@ -55,6 +55,7 @@ There are a few step names reserved for system use:
 | `homekit`   | Invoked if your integration has been discovered via HomeKit as specified [using `homekit` in the manifest](creating_integration_manifest.md#homekit).         |
 | `mqtt`      | Invoked if your integration has been discovered via MQTT as specified [using `mqtt` in the manifest](creating_integration_manifest.md#mqtt).             |
 | `ssdp`      | Invoked if your integration has been discovered via SSDP/uPnP as specified [using `ssdp` in the manifest](creating_integration_manifest.md#ssdp).             |
+| `usb`       | Invoked if your integration has been discovered via USB as specified [using `usb` in the manifest](creating_integration_manifest.md#usb).             |
 | `user`      | Invoked when a user initiates a flow via the user interface or when discovered and the matching and discovery step are not defined.                                                                                                  |
 | `zeroconf`  | Invoked if your integration has been discovered via Zeroconf/mDNS as specified [using `zeroconf` in the manifest](creating_integration_manifest.md#zeroconf). |
 
@@ -70,9 +71,9 @@ self._abort_if_unique_id_configured()
 ```
 
 By setting a unique ID, users will have the option to ignore the discovery of your config entry. That way, they won't be bothered about it anymore.
-If the integration uses DHCP, HomeKit, Zeroconf/mDNS or SSDP/uPnP to be discovered, supplying a unique ID is required.
+If the integration uses DHCP, HomeKit, Zeroconf/mDNS, USB, or SSDP/uPnP to be discovered, supplying a unique ID is required.
 
-If a unique ID isn't available, alternatively, the `dhcp`, `zeroconf`, `hassio`, `homekit`, `ssdp` and `discovery` steps can be omitted, even if they are configured in
+If a unique ID isn't available, alternatively, the `dhcp`, `zeroconf`, `hassio`, `homekit`, `ssdp`, `usb`, and `discovery` steps can be omitted, even if they are configured in
 the integration manifest. In that case, the `user` step will be called when the item is discovered.
 
 Alternatively, if an integration can't get a unique ID all the time (e.g., multiple devices, some have one, some don't), a helper is available
