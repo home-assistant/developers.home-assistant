@@ -24,7 +24,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 ### Camera Image
 
-When the width and height as passed, scaling should be done on a best-effort basis. The UI will fall back to scaling at the display layer if scaling cannot be done by the camera.
+When the width and height are passed, scaling should be done on a best-effort basis. The UI will fall back to scaling at the display layer if scaling cannot be done by the camera.
 
 - Integrations should pass on the width and height if the underlying camera is capable of scaling the image.
 
