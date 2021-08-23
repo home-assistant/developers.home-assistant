@@ -26,7 +26,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 When the width and height are passed, scaling should be done on a best-effort basis. The UI will fall back to scaling at the display layer if scaling cannot be done by the camera.
 
-- Return the smallest image that has meets the minimum width and minimum height.
+- Return the smallest image that meets the minimum width and minimum height.
 
 - When scaling the image, aspect ratio must be preserved. If the aspect ratio is not the same as the requsted height or width, it is expected that the width and/or height of the returned image will be larger than requested.
 
