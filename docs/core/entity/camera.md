@@ -26,9 +26,11 @@ Properties should always only return information from memory and not do I/O (lik
 
 When the width and height are passed, scaling should be done on a best-effort basis. The UI will fall back to scaling at the display layer if scaling cannot be done by the camera.
 
-- Integrations should pass on the width and height if the underlying camera is capable of scaling the image.
+- Return the smallest image that has meets the minimum width and minimum height.
 
-- Integrations may choose to ignore the height parameter to preserve the aspect ratio.
+- When scaling the image, aspect ratio must be preserved. If the aspect ratio is not the same as the requsted height or width, it is expected that the width and/or height of the returned image will be larger than requested.
+
+- Pass on the width and height if the underlying camera is capable of scaling the image.
 
 - If the integration cannot scale the image and returns a jpeg image, it will automatically be scaled by the camera integration when requested.
 
