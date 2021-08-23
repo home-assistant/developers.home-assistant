@@ -28,9 +28,12 @@ If specifying a device class, your sensor entity will need to also return the co
 | battery | % | % of battery that is left.
 | carbon_dioxide | ppm | parts per million of carbon dioxide concentration
 | carbon_monoxide | ppm | parts per million of carbon monoxide concentration
-| humidity | % | % of humidity in the air.
+| current | A | Current.
+| energy | Wh,kWh | Energy.
 | gas | m³/ft³ | Volume of gas.
+| humidity | % | % of humidity in the air.
 | illuminance | lx/lm | Light level.
+| monetary | ISO 4217 | Monetary value with a currency
 | nitrogen_dioxide | µg/m³ | Concentration of Nitrogen Dioxide |
 | nitrogen_monoxide | µg/m³ | Concentration of Nitrogen Monoxide |
 | nitrous_oxide | µg/m³ | Concentration of Nitrous Oxide |
@@ -38,17 +41,15 @@ If specifying a device class, your sensor entity will need to also return the co
 | pm1 | µg/m³ | Concentration of particulate matter less than 1 micrometer |
 | pm25 | µg/m³ | Concentration of particulate matter less than 2.5 micrometers |
 | pm10 | µg/m³ | Concentration of particulate matter less than 10 micrometers |
+| power | W,kW | Power.
+| power_factor | % | Power Factor.
+| pressure | hPa,mbar | Pressure.
 | signal_strength | dB/dBm | Signal strength.
 | sulphur_dioxide | µg/m³ | Concentration of sulphure dioxide |
 | temperature | °C/°F | Temperature.
 | timestamp | ISO8601 | Timestamp.
-| power | W,kW | Power.
-| pressure | hPa,mbar | Pressure.
-| current | A | Current.
-| energy | Wh,kWh | Energy.
-| power_factor | % | Power Factor.
+| volatile_organic_compounds | µg/m³ | Concentration of volatile organic compounds.
 | voltage | V | Voltage.
-| monetary | ISO 4217 | Monetary value with a currency
 
 ### Available state classes
 
