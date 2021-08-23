@@ -48,6 +48,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | energy | Wh,kWh | Energy.
 | power_factor | % | Power Factor.
 | voltage | V | Voltage.
+| volatile_organic_compounds | µg/m³ | Concentration of volatile organic compounds.
 | monetary | ISO 4217 | Monetary value with a currency
 
 ### Available state classes
