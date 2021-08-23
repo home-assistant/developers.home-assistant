@@ -35,7 +35,7 @@ Note that not all webservers are able to handle this by default, so you might ne
 
 ## Deprecated API endpoints
 
-Over the past years we have restructured parts of our API endpoints, but we have also kept old endpoints working. If you use any of the deprecated endpoints in your tools/add-ons you should move to use the new ones now. All deprecated endpoints are scheduled for removal in Q4 this year.
+Over the past years, we have restructured parts of our API endpoints, but we have also kept old endpoints working. If you use any of the deprecated endpoints in your tools/add-ons you should move to use the new ones now. All deprecated endpoints are scheduled for removal in Q4 this year.
 
 Here is a list of the deprecated endpoints and their replacements:
 
@@ -54,7 +54,7 @@ In addition to this, the following are also deprecated and are also scheduled fo
 
 Maintaining a [supervised installation][supervised_installation] is currently not the best experience. [The script][supervised_script] that most users use to install is behind what the Supervisor wants from the host. Since there are no real upgrade paths for those using it, users of it need to manually adjust their installation.
 
-Recently we created the [OS Agent][os_agent] as mentioned in the [blog on the main site][main_blog]. This allows for better communication between the host OS and the Supervisor, and to bring in more features. To take advantage of this features users of current supervised installations have to install the OS Agent manually.
+Recently we created the [OS Agent][os_agent] as mentioned in the [blog on the main site][main_blog]. This allows for better communication between the host OS and the Supervisor, and to bring in more features. To take advantage of these features users of current supervised installations have to install the OS Agent manually.
 
 An alternative to this route is to package and distribute the supervised installation as a deb package that can be installed and upgraded with `apt` on the host. For this to be viable, we are looking for a person (or a group of people) that wants to create and maintain this type of deployment, and bring the supervised installation method up to par with our OS, and more importantly make updates needed on the host easier for the users.
 
