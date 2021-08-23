@@ -106,15 +106,26 @@ To do this, we will need to update our files as follows:
 - `config.json`: Make the port from the container available on the host
 - `run.sh`: Run the Python 3 command to start the HTTP server
 
-Add to your `Dockerfile` before `RUN`:
+Update your `Dockerfile`:
 
 ```dockerfile
+ARG BUILD_FROM
+FROM $BUILD_FROM
+
+ENV LANG C.UTF-8
+
 # Install requirements for add-on
 RUN apk add --no-cache python3
 
 # Python 3 HTTP Server serves the current working dir
 # So let's set it to our add-on persistent data directory.
 WORKDIR /data
+
+# Copy data for add-on
+COPY run.sh /
+RUN chmod a+x /run.sh
+
+CMD [ "/run.sh" ]
 ```
 
 Add "ports" to `config.json`. This will make TCP on port 8000 inside the container available on the host on port 8000.
@@ -139,6 +150,10 @@ Add "ports" to `config.json`. This will make TCP on port 8000 inside the contain
 Update `run.sh` to start the Python 3 server:
 
 ```shell
+#!/usr/bin/with-contenv bashio
+
+echo Hello world!
+
 python3 -m http.server 8000
 ```
 

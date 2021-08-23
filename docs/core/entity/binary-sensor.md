@@ -42,5 +42,6 @@ Properties should always only return information from memory and not do I/O (lik
 | safety | On means unsafe, Off means safe.
 | smoke | On means smoke detected, Off means no smoke (clear).
 | sound | On means sound detected, Off means no sound (clear).
+| update | On means update available, Off means up-to-date.
 | vibration | On means vibration detected, Off means no vibration.
 | window | On means open, Off means closed.

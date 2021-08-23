@@ -7,11 +7,14 @@ A siren entity is a device whose main purpose is to control siren devices like a
 
 ## Properties
 
-> Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data or build a mechanism to push state updates to the entity class instance.
+:::tip
+Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data or build a mechanism to push state updates to the entity class instance.
+:::
 
 | Name                    | Type   | Default                               | Description                                                                             |
 | ----------------------- | ------ | ------------------------------------- | --------------------------------------------------------------------------------------- |
-| is_on                   | bool   | `NotImplementedError()`               | Whether the device is on or off.                                                        |
+| is_on                   | bool           | `NotImplementedError()`               | Whether the device is on or off.                                                        |
+| available_tones         | list or dict   | `NotImplementedError()`               | The list or dictionary of available tones on the device to pass into the `turn_on` service. If a dictionary is provided, when a user uses the dict value of a tone, it will get converted to the corresponding dict key before being passed on to the integration platform. Requires `SUPPORT_TONES` feature.           |
 
 ### Tones
 
