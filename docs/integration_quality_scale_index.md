@@ -19,6 +19,7 @@ This integration passes the bare minimum requirements to become part of the inde
 
 This integration is able to cope when things go wrong. It will not print any exceptions nor will it fill the log with retry attempts.
 
+- Satisfying all No score level requirements.
 - Connection/configuration is handled via a component.
 - Set an appropriate `SCAN_INTERVAL` (if a polling integration)
 - Raise `PlatformNotReady` if unable to connect during platform setup (if appropriate)
@@ -32,6 +33,7 @@ This integration is able to cope when things go wrong. It will not print any exc
 
 This is a solid integration that is able to survive poor conditions and can be configured via the user interface.
 
+- Satisfying all Silver level requirements.
 - Configurable via config entries.
   - Don't allow configuring already configured device/service (example: no 2 entries for same hub)
   - Tests for the config flow
@@ -50,6 +52,7 @@ This is a solid integration that is able to survive poor conditions and can be c
 
 Best of the best. The integration is completely async, meaning it's super fast. Integrations that reach platinum level will require approval by the code owner for each PR.
 
+- Satisfying all Gold level requirements.
 - Set appropriate `PARALLEL_UPDATES` constant
 - Support config entry unloading (called when config entry is removed)
 - Integration + dependency are async ([docs](asyncio_working_with_async.md))
