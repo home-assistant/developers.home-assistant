@@ -235,7 +235,7 @@ For example:
 
 ## USB
 
-If your integration supports discovery via usb, you can add the type to your manifest. If the user has the `usb` integration loaded, it will load the `usb` step of your integration's config flow when it is discovered. We support discovery by VID (Vendor ID) and PID (Device ID). For help identifiying these values see [How To Identify A Device](https://wiki.debian.org/HowToIdentifyADevice/USB). The manifest value is a list of matcher dictionaries, your integration is discovered if all items of any of the specified matchers are found in the USB data. It's up to your config flow to filter out duplicates.
+If your integration supports discovery via usb, you can add the type to your manifest. If the user has the `usb` integration loaded, it will load the `usb` step of your integration's config flow when it is discovered. We support discovery by VID (Vendor ID), PID (Device ID), Serial Number, Manufacturer, and Description. For help identifiying these values see [How To Identify A Device](https://wiki.debian.org/HowToIdentifyADevice/USB). The manifest value is a list of matcher dictionaries, your integration is discovered if all items of any of the specified matchers are found in the USB data. It's up to your config flow to filter out duplicates.
 
 The following example has two matchers consisting of two items. All of the items in any of the two matchers must match for discovery to happen by this config.
 
@@ -244,6 +244,7 @@ For example:
 -  If the `vid` was `AAAA` and the `pid` was `AAAA`, the discovery would happen.
 -  If the `vid` was `AAAA` and the `pid` was `FFFF`, the discovery would not happen.
 -  If the `vid` was `CCCC` and the `pid` was `AAAA`, the discovery would not happen.
+-  If the `vid` was `1234`, the `pid` was `ABCD`, the `serial_number` was `12345678`, the `manufacturer` was `Midway USB`, and the `description` was `Version 12 Zigbee Stick`, the discovery would happen.
 
 ```json
 {
@@ -256,6 +257,13 @@ For example:
     "vid": "BBBB",
     "pid": "BBBB"
     },
+    {
+    "vid": "1234",
+    "pid": "ABCD",
+    "serial_number": "1234*",
+    "manufacturer": "*midway*",
+    "description": "*zigbee*"
+    },    
   ]
 }
 ```
