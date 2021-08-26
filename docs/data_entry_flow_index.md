@@ -118,7 +118,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         }
 
         if self.show_advanced_options:
-            data_schema["allow_groups"]: bool
+            data_schema["allow_groups"] = bool
 
         return self.async_show_form(step_id="init", data_schema=vol.Schema(data_schema))
 ```
