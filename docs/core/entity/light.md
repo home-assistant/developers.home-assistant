@@ -11,7 +11,7 @@ A light entity controls the brightness, hue and saturation color value, white va
 | Name | Type | Default | Description
 | ---- | ---- | ---- | ----
 | brightness | int | None | Return the brightness of this light between 0..255
-| color_mode | string | None | Return the color mode of the light. Must be present in the `supported_color_modes` property.
+| color_mode | string | None | Return the color mode of the light. The returned color mode must be present in the `supported_color_modes` property.
 | color_temp | int | None | Return the CT color value in mireds. This property will be copied to the light's state attribute when the light's color mode is set to `COLOR_MODE_COLOR_TEMP` and ignored otherwise.
 | effect | String | None | Return the current effect.
 | effect_list | list | None | Return the list of supported effects.
@@ -28,6 +28,24 @@ A light entity controls the brightness, hue and saturation color value, white va
 | xy_color | tuple | None | Return the xy color value (float, float). This property will be copied to the light's state attribute when the light's color mode is set to `COLOR_MODE_COLOR_XY` and ignored otherwise.
 
 ## Color Modes
+
+New integrations must implement both `color_mode` and `supported_color_modes`. If an integration is upgraded to support color mode, both `color_mode` and `supported_color_modes` should be implemented.
+
+If a light does not implement the `supported_color_modes`, the `LightEntity` will attempt deduce it based on deprecated flags in the `supported_features` property:
+ - Start with an empty set
+ - If `SUPPORT_COLOR_TEMP` is set, add `COLOR_MODE_COLOR_TEMP`
+ - If `SUPPORT_COLOR` is set, add `COLOR_MODE_HS`
+ - If `SUPPORT_WHITE_VALUE` is set, add `COLOR_MODE_RGBW`
+ - If `SUPPORT_BRIGHTNESS` is set and no color modes have yet been added, add `COLOR_MODE_BRIGHTNESS`
+ - If no color modes have yet been added, add `COLOR_MODE_ONOFF`
+
+If a light does not implement the `color_mode`, the `LightEntity` will attempt to deduce it based on which of the properties are set and which are `None`:
+- If `supported_color_mode` includes `COLOR_MODE_RGBW` and `white_value` and `hs_color` are both not None: `COLOR_MODE_RGBW`
+- Else if `supported_color_mode` includes `COLOR_MODE_HS` and `hs_color` is not None: `COLOR_MODE_HS`
+- Else if `supported_color_mode` includes `COLOR_MODE_COLOR_TEMP` and `color_temp` is not None: `COLOR_MODE_COLOR_TEMP`
+- Else if `supported_color_mode` includes `COLOR_MODE_BRIGHTNESS` and `brightness` is not None: `COLOR_MODE_BRIGHTNESS`
+- Else if `supported_color_mode` includes `COLOR_MODE_ONOFF`: `COLOR_MODE_ONOFF`
+- Else: COLOR_MODE_UNKNOWN
 
 | Constant | Description
 |----------|-----------------------
@@ -73,9 +91,8 @@ class MyLightEntity(LightEntity):
         """Turn device on."""
 ```
 
-Note that there's no `color_mode` passed to the `async_turn_on` method, instead only a single color is allowed.
-
-Colors in the service call will be translated before the entity's `async_turn_on` method is called if the light doesn't support the corresponding color mode:
+Note that there's no `color_mode` passed to the `async_turn_on` method, instead only a single color attribute is allowed.
+It is guaranteed that the integration will only receive a single color attribute in a `turn_on`call, which is guaranteed to be supported by the light according to the light's `supported_color_modes` property. To ensure this, colors in the service call will be translated before the entity's `async_turn_on` method is called if the light doesn't support the corresponding color mode:
 
 | Color type   | Translation
 |--------------|-----------------------
