@@ -64,7 +64,7 @@ If specifying a device class, your sensor entity will need to also return the co
 ## Long-term Statistics
 
 Home Assistant has support for storing sensors as long-term statistics if the entity has
-the right properties. To opt-in for statistics is that the sensor has
+the right properties. To opt-in for statistics, the sensor must have
 `state_class` set to one of the valid state classes: `measurement` or
 `total_increasing`.
 
