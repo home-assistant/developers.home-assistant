@@ -74,7 +74,7 @@ Home Assistant tracks the min, max and mean value during the statistics period. 
 `state_class` property must be set to `measurement`, and the `device_class` must not be
 either of `energy`, `gas`, or `monetary`
 
-### Entities not representing a total amount
+### Entities representing a total amount
 
 Entities tracking a total amount have a value that may optionally reset periodically,
 like this month's energy consumption, today's energy production or the yearly growth of
