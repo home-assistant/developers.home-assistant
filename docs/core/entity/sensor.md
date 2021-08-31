@@ -112,7 +112,7 @@ Example of state class `total_increasing` where the sensor does not reset to 0:
 
 #### State class `measurement`
 
-For sensors with state_class `measurement` a total acmount is calculated if:
+For sensors with state_class `measurement` a total amount is calculated if:
 - The sensor's device class is `DEVICE_CLASS_ENERGY`, `DEVICE_CLASS_GAS`, or `DEVICE_CLASS_MONETARY`.
 - The sensor's `last_reset` property is set to a valid datatime. If the time of initialization is unknown and the meter will never reset, set to UNIX epoch 0: `homeassistant.util.dt.utc_from_timestamp(0)`.
 
