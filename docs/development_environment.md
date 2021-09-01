@@ -12,8 +12,8 @@ The easiest way to get started with development is to use Visual Studio Code wit
 
 - [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - Docker
-  -  For Linux, macOS, or Windows 10 Pro/Enterprise/Education use the [current release version of Docker](https://docs.docker.com/install/)
-  -   Windows 10 Home requires [WSL 2](https://docs.microsoft.com/windows/wsl/install-win10#update-to-wsl-2) and the current Edge version of Docker Desktop (see instructions [here](https://docs.docker.com/docker-for-windows/wsl-tech-preview/)). This can also be used for Windows Pro/Enterprise/Education.
+  -  For Linux, macOS, or Windows (Pro/Enterprise/Education) use the [current release version of Docker](https://docs.docker.com/install/)
+  -   Windows Home requires [WSL 2](https://docs.microsoft.com/windows/wsl/install-win10#update-to-wsl-2) and the current Edge version of Docker Desktop (see instructions [here](https://docs.docker.com/docker-for-windows/wsl-tech-preview/)). This can also be used for Windows Pro/Enterprise/Education.
 - [Visual Studio code](https://code.visualstudio.com/)
 - [Remote - Containers (VSC Extension)][extension-link]
 
