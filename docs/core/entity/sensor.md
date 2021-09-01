@@ -79,7 +79,7 @@ either of `energy`, `gas`, or `monetary`
 Entities tracking a total amount have a value that may optionally reset periodically,
 like this month's energy consumption, today's energy production or the yearly growth of
 a stock portfolio. The sensor's value when the first statistics is compiled is used as
-the intial zero-point.
+the initial zero-point.
 
 #### State class `total_increasing`
 
