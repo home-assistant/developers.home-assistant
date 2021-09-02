@@ -242,7 +242,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     try:
         await auth.refresh_tokens()
     except TokenExpiredError as err:
-        raise ConfigEntryAuthFailed() from err
+        raise ConfigEntryAuthFailed(err) from err
 
     # TODO: Proceed with component setup
 ```
