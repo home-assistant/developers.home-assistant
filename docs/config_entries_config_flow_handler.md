@@ -265,7 +265,7 @@ class OAuth2FlowHandler(
     async def async_step_reauth_confirm(self, user_input=None):
         """Dialog that informs the user that reauth is required."""
         if user_input is None:
-            dreturn self.async_show_form(
+            return self.async_show_form(
                 step_id="reauth_confirm",
                 data_schema=vol.Schema({}),
                 # OPTIONAL: Add the placeholders.
