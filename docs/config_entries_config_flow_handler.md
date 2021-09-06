@@ -297,7 +297,7 @@ The reauth confirmation dialog needs additional definitions in `strings.json` fo
     "step": {
       "reauth_confirm": {
         "title": "[%key:common::config_flow::title::reauth%]",
-        # TODO: Replace with the name of the integration
+        # TODO: Replace with the name of the integration and adjust placeholders
         "description": "The Example integration needs to re-authenticate user {username}"
       }
     },
