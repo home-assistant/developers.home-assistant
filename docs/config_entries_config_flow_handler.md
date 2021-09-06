@@ -258,20 +258,14 @@ class OAuth2FlowHandler(
 
     async def async_step_reauth(self, user_input=None):
         """Perform reauth upon an API authentication error."""
-        # OPTIONAL: Cache the original input for use in description placeholders.
-        # self._original_input = user_input
         return await self.async_step_reauth_confirm()
 
     async def async_step_reauth_confirm(self, user_input=None):
         """Dialog that informs the user that reauth is required."""
         if user_input is None:
-            dreturn self.async_show_form(
+            return self.async_show_form(
                 step_id="reauth_confirm",
                 data_schema=vol.Schema({}),
-                # OPTIONAL: Add the placeholders.
-                # description_placeholders={
-                #     "username": self._original_input["username"]
-                # },
             )
         return await self.async_step_user()
 
@@ -298,7 +292,7 @@ The reauth confirmation dialog needs additional definitions in `strings.json` fo
       "reauth_confirm": {
         "title": "[%key:common::config_flow::title::reauth%]",
         # TODO: Replace with the name of the integration
-        "description": "The Example integration needs to re-authenticate user {username}"
+        "description": "The Example integration needs to re-authenticate your account"
       }
     },
     "abort": {
