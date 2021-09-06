@@ -283,7 +283,7 @@ class OAuth2FlowHandler(
 
 Depending on the details of the integration, there may be additional considerations such as ensuring the same account is used across reauth, or handling multiple config entries.
 
-The reauth confirmation dialog needs additional definitions in `strings.json` for the reauth confirmation and success diaglogs:
+The reauth confirmation dialog needs additional definitions in `strings.json` for the reauth confirmation and success dialogs:
 
 ```json
 {
