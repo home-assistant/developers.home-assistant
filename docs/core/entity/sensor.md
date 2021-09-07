@@ -31,6 +31,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | carbon_dioxide | ppm | parts per million of carbon dioxide concentration
 | carbon_monoxide | ppm | parts per million of carbon monoxide concentration
 | current | A | Current.
+| date | ISO8601 | Date.
 | energy | Wh,kWh | Energy.
 | gas | m³/ft³ | Volume of gas.
 | humidity | % | % of humidity in the air.
