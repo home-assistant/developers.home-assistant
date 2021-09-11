@@ -134,28 +134,6 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/api/discovery_info" method="get" unprotected>
-
-Returns basic information about the Home Assistant instance as JSON.
-
-```json
-{
-    "base_url": "http://192.168.0.2:8123",
-    "location_name": "Home",
-    "requires_api_password": true,
-    "version": "0.56.2"
-}
-```
-
-Sample `curl` command:
-
-```shell
-curl -X GET -H "Content-Type: application/json" \
-  http://localhost:8123/api/discovery_info
-```
-
-</ApiEndpoint>
-
 <ApiEndpoint path="/api/events" method="get">
 
 Returns an array of event objects. Each event object contains event name and listener count.
