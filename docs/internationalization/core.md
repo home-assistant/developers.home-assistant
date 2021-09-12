@@ -105,7 +105,7 @@ In order to test changes to translation files, the translation strings must be c
 python3 -m script.translations develop
 ```
 
-You will probably need to update your browser cache for the changes to take effect (e.g. ctrl-F5).
+If translations do not show, clear the browser cache (cmd + R (for MacOS), ctrl + F5 (Windows and Linux))
 
 ### Introducing new strings
 
