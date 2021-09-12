@@ -105,6 +105,8 @@ In order to test changes to translation files, the translation strings must be c
 python3 -m script.translations develop
 ```
 
+You will probably need to update your browser cache for the changes to take effect (e.g. ctrl-F5).
+
 ### Introducing new strings
 
 To introduce new strings, add them to `strings.json` or to a platform strings file. Try to use as many references to common strings as possible. Common strings live in `homeassistant/strings.json`. You can refer to those translations using references. For example:
