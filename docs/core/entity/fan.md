@@ -23,7 +23,7 @@ FanEntity does not support attribute shorthand for [property implementation](../
 | percentage | int | None | Return the current speed percentage. Must be a value between 0 (off) and 100 |
 | speed_count | int | 100 | The number of speeds the fan supports |
 | supported_features | int | 0 | Flag supported features |
-| preset_mode | str | None | Return the current preset_mode. One of the values in preset_modes. |
+| preset_mode | str | None | Return the current preset_mode. One of the values in preset_modes or `None` if no preset is active. |
 | preset_modes | list | None | Get the list of available preset_modes. This is an arbitrary list of str and should not contain any speeds. |
 
 ### Preset Modes
