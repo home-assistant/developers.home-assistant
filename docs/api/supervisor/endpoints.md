@@ -1799,6 +1799,7 @@ Returns information about the OS.
 | update_available | boolean | `true` if an update is available                             |
 | board            | string  | The name of the board                                        |
 | boot             | string  | Which slot that are in use                                   |
+| data_disk        | string  | Device which is used for holding OS data persistent          |
 
 **Example response:**
 
@@ -1806,8 +1807,10 @@ Returns information about the OS.
 {
   "version": "4.3",
   "version_latest": "5.0",
+  "update_available": true,
   "board": "ova",
-  "boot": "slot1"
+  "boot": "slot1",
+  "data_disk": "/dev/sda"
 }
 ```
 
@@ -1822,6 +1825,18 @@ Update Home Assistant OS
 | key     | type   | description                                                    |
 | ------- | ------ | -------------------------------------------------------------- |
 | version | string | The version you want to install, default is the latest version |
+
+</ApiEndpoint>
+  
+<ApiEndpoint path="/os/datadisk/move" method="post">
+
+Move datadisk to a new location, **This will also reboot the device!**
+
+**Payload:**
+
+| key     | type   | description                                                       |
+| ------- | ------ | ----------------------------------------------------------------- |
+| device  | string | Path to the new device which should be use as the target for the data migration |
 
 </ApiEndpoint>
 
