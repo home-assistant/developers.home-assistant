@@ -1830,13 +1830,13 @@ Update Home Assistant OS
   
 <ApiEndpoint path="/os/datadisk/move" method="post">
 
-Move datadisk to a new location (reboot the device!)
+Move datadisk to a new location, **This will also reboot the device!**
 
 **Payload:**
 
 | key     | type   | description                                                       |
 | ------- | ------ | ----------------------------------------------------------------- |
-| device  | string | Path to the new device which should be use for the data migration |
+| device  | string | Path to the new device which should be use as the target for the data migration |
 
 </ApiEndpoint>
 
