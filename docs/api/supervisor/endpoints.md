@@ -1320,6 +1320,7 @@ Return information about the host.
 
 | key              | type           | description                               |
 | ---------------- | -------------- | ----------------------------------------- |
+| agent_version    | string or null | Agent version running on the Host         |
 | chassis          | string or null | The chassis type                          |
 | cpe              | string or null | The local CPE                             |
 | deployment       | string or null | The deployment stage of the OS if any     |
@@ -1335,6 +1336,7 @@ Return information about the host.
 
 ```json
 {
+  "agent_version": "1.2.0",
   "chassis": "specific",
   "cpe": "xy",
   "deployment": "stable",
