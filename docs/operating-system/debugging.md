@@ -48,7 +48,7 @@ Use a USB drive formatted with FAT, ext4, or NTFS and name it CONFIG (case sensi
 journalctl -f -u hassos-supervisor.service
 
 # Supervisor logs
-docker logs hassos_supervisor
+docker logs hassio_supervisor
 
 # Home Assistant logs
 docker logs homeassistant
