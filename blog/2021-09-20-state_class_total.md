@@ -10,7 +10,7 @@ is to support cases where `total_increasing`, which was introduced in Home Assis
 2021.9, is too restrictive to cover all cases. Note that setting `last_reset` for sensors
 with state class `measurement` is still deprecated.
 
-In addition, the total accumulated increases and decreases is updated together with the
+In addition, the total accumulated increases and decreases are updated together with the
 total accumulated increase and decrease.
 
 ### State classes
@@ -19,7 +19,7 @@ There are 3 defined state classes:
 
 - `measurement`, the state represents a measurement in present time, for example a
    temperature, electric power, etc. For supported sensors, statistics of min,
-   max and average sensor readings is updated periodically.
+   max and average sensor readings are updated periodically.
 - `total`, the state represents a total amount that can both increase and
    decrease, e.g. a net energy meter. When supported, the accumulated growth
    or decline of the sensor's value since it was first added is updated periodically.
