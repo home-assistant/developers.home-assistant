@@ -23,14 +23,14 @@ FanEntity does not support attribute shorthand for [property implementation](../
 | percentage | int | None | Return the current speed percentage. Must be a value between 0 (off) and 100 |
 | speed_count | int | 100 | The number of speeds the fan supports |
 | supported_features | int | 0 | Flag supported features |
-| preset_mode | str | None | Return the current preset_mode. One of the values in preset_modes. |
+| preset_mode | str | None | Return the current preset_mode. One of the values in `preset_modes` or `None` if no preset is active. |
 | preset_modes | list | None | Get the list of available preset_modes. This is an arbitrary list of str and should not contain any speeds. |
 
 ### Preset Modes
 
-A fan may have preset modes that automatically control the percentage speed or other functionality. Common examples include `auto`, `smart`, `whoosh`, `eco`, and `breeze`.
+A fan may have preset modes that automatically control the percentage speed or other functionality. Common examples include `auto`, `smart`, `whoosh`, `eco`, and `breeze`. If no preset mode is set, the `preset_mode` property must be set to `None`.
 
-Manually setting a speed must disable a preset mode. If it is possible to set a percentage speed manually without disabling the preset mode, create a switch or service to represent the mode.
+Manually setting a speed must disable any set preset mode. If it is possible to set a percentage speed manually without disabling the preset mode, create a switch or service to represent the mode.
 
 ## Deprecated Properties
 
