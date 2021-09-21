@@ -248,5 +248,7 @@ The `content` key of a backup object contains the following keys:
 | sysfs      | string         | Path to sysfs device object                                           |
 | dev_path   | string         | Path to devfs                                                         |
 | subsystem  | string or null | Subsystem type of the device (tty, input, sound, block, misc)         |
+| parent     | string or null | Path to the parent sysfs device object                                |
 | by_id      | string or null | Udev by ID link                                                       |
 | attributes | dict           | A dict with pure udev device attributes for debug and understanding   |
+| children   | list           | A list of path to the children sysfs devices                          |

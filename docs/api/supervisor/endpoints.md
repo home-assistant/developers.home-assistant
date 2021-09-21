@@ -1273,9 +1273,13 @@ Get hardware information.
         "dev_path": "/dev/ttyACM0",
         "by_id": "/dev/serial/by-id/usb-Silicon_Labs-RFUSB_9017F723B061A7C01410CFCF-if00-port1",
         "subsystem": "tty",
+        "parent": null,
         "attributes": {
           "MINOR": "5"
-        }
+        },
+        "children": [
+          "/sys/devices/soc/platform/00ef"
+        ]
       }
     ]
 }
@@ -1827,6 +1831,29 @@ Update Home Assistant OS
 | key     | type   | description                                                    |
 | ------- | ------ | -------------------------------------------------------------- |
 | version | string | The version you want to install, default is the latest version |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/os/datadisk/list" method="get">
+
+Returns possible targets for the new data partition.
+
+**Returned data:**
+
+| key              | type    | description                                                  |
+| ---------------- | ------- | ------------------------------------------------------------ |
+| devices          | list    | List with devices paths of possible disk targets             |
+
+**Example response:**
+
+```json
+{
+  "devices": [
+    "/dev/sda",
+    "/dev/sdb"
+  ]
+}
+```
 
 </ApiEndpoint>
   
