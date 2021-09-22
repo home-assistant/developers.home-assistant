@@ -693,7 +693,6 @@ Reset internal authentication cache, this is useful if you have changed the pass
 
 </ApiEndpoint>
 
-
 ### Backup
 
 <ApiEndpoint path="/backups" method="get">
@@ -835,7 +834,6 @@ Does a partial restore of the backup with the given slug.
 **You need to supply at least one key in the payload.**
 
 </ApiEndpoint>
-
 
 ### CLI
 
@@ -1314,7 +1312,6 @@ Get audio devices
 
 </ApiEndpoint>
 
-
 ### Host
 
 <ApiEndpoint path="/host/info" method="get">
@@ -1335,6 +1332,8 @@ Return information about the host.
 | hostname         | string or null | The hostname of the host                  |
 | kernel           | string or null | The kernel version on the host            |
 | operating_system | string         | The operating system on the host          |
+| boot_timestamp | int | The timestamp for the last boot in microseconds |
+| startup_time | float | The time in seconds it took for last boot |
 
 **Example response:**
 
@@ -1350,7 +1349,9 @@ Return information about the host.
   "features": ["shutdown", "reboot", "hostname", "services", "haos"],
   "hostname": "Awesome host",
   "kernel": "4.15.7",
-  "operating_system": "Home Assistant OS"
+  "operating_system": "Home Assistant OS",
+  "boot_timestamp": 1234567788,
+  "startup_time": 12.345
 }
 ```
 
@@ -2169,13 +2170,11 @@ Returns information about a store add-on
 
 </ApiEndpoint>
 
-
 <ApiEndpoint path="/store/addons/<addon>/install" method="post">
 
 Install an add-on from the store.
 
 </ApiEndpoint>
-
 
 <ApiEndpoint path="/store/addons/<addon>/update" method="post">
 
@@ -2183,13 +2182,11 @@ Update an add-on from the store.
 
 </ApiEndpoint>
 
-
 <ApiEndpoint path="/store/reload" method="post">
 
 Reloads the information stored about add-ons.
 
 </ApiEndpoint>
-
 
 <ApiEndpoint path="/store/repositories" method="get">
 
