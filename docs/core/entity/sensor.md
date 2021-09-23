@@ -59,7 +59,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | Type | Description
 | ---- | -----------
 | measurement | The state represents _a measurement in present time_, not a historical aggregation such as statistics or a prediction of the future. Examples of what should be classified `measurement` are: current temperature, accumulated energy consumption, accumulated cost.  Examples of what should not be classified as `measurement`: Forecasted temperature for tomorrow, yesterday's energy consumption or anything else that doesn't include the _current_ measurement. For supported sensors, statistics of hourly min, max and average sensor readings or of the accumulated growth or decline of the sensor's value since it was first added is updated hourly.
-| total_increasing | Similar to `measurement`, with the restriction that the state represents a monotonically increasing total, e.g. an amount of consumed gas, water or energy. Statistics of the accumulated growth of the sensor's value since it was first added is updated hourly.
+| total_increasing | Similar to `measurement`, with the restriction that the state represents a monotonically increasing positive total, e.g. a daily amount of consumed gas, weekly water conumption or a lifetime energy use. Statistics of the accumulated growth of the sensor's value since it was first added is updated hourly.
 
 
 ## Long-term Statistics
