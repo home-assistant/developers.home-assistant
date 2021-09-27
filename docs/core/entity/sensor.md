@@ -58,8 +58,9 @@ If specifying a device class, your sensor entity will need to also return the co
 
 | Type | Description
 | ---- | -----------
-| measurement | The state represents _a measurement in present time_, not a historical aggregation such as statistics or a prediction of the future. Examples of what should be classified `measurement` are: current temperature, accumulated energy consumption, accumulated cost.  Examples of what should not be classified as `measurement`: Forecasted temperature for tomorrow, yesterday's energy consumption or anything else that doesn't include the _current_ measurement. For supported sensors, statistics of hourly min, max and average sensor readings or of the accumulated growth or decline of the sensor's value since it was first added is updated hourly.
-| total_increasing | Similar to `measurement`, with the restriction that the state represents a monotonically increasing positive total, e.g. a daily amount of consumed gas, weekly water consumption or lifetime energy consumption. Statistics of the accumulated growth of the sensor's value since it was first added is updated hourly.
+| measurement | The state represents _a measurement in present time_, not a historical aggregation such as statistics or a prediction of the future. Examples of what should be classified `measurement` are: current temperature, humidify or electric power.  Examples of what should not be classified as `measurement`: Forecasted temperature for tomorrow, yesterday's energy consumption or anything else that doesn't include the _current_ measurement. For supported sensors, statistics of hourly min, max and average sensor readings is updated every 5 minutes.
+| total | The state represents a total amount that can both increase and decrease, e.g. a net energy meter. Statistics of the accumulated growth or decline of the sensor's value since it was first added is updated every 5 minutes.
+| total_increasing | Similar to `total`, with the restriction that the state represents a monotonically increasing positive total, e.g. a daily amount of consumed gas, weekly water consumption or lifetime energy consumption. Statistics of the accumulated growth of the sensor's value since it was first added is updated every 5 minutes.
 
 
 ## Long-term Statistics
@@ -81,6 +82,54 @@ Entities tracking a total amount have a value that may optionally reset periodic
 like this month's energy consumption, today's energy production or the yearly growth of
 a stock portfolio. The sensor's value when the first statistics is compiled is used as
 the initial zero-point.
+
+#### How to choose `state_class` and `last_reset`
+It's recommended to use state class `total` without `last_reset` whenever possible, state class `total_increasing` or `total` with `last_reset` should only be used when state class `total` without `last_reset` does not work for the sensor.
+
+Examples
+- The sensor's value never resets, e.g. a lifetime total energy consumption or production: state_class `total`, `last_reset` not set or set to `None`
+- The sensor's value may reset to 0, and its value can only increase: state class `total_increasing`. Examples: energy consumption aligned with a billing cycle, e.g. monthly, an energy meter resetting to 0 every time it's disconnected
+- The sensor's value may reset to 0, and its value can both increase and decrease: state class `total`, `last_reset` updated when the value resets. Examples: net energy consumption aligned with a billing cycle, e.g. monthly.
+- The sensor's state is reset with every state update, for example a sensor updating every minute with the energy consumption during the past minute: state class `total`, `last_reset` updated every state change.
+
+#### State class `total`
+For sensors with state class `total`, the `last_reset` attribute can
+optionally be set to gain manual control of meter cycles.
+The sensor's state when it's first added to Home Assistant is used as an initial
+zero-point. When `last_reset` changes, the zero-point will be set to 0.
+If last_reset is not set, the sensor's value when it was first added is used as the
+zero-point when calculating `sum` statistics.
+
+Example of state class `total` without last_reset:
+
+| t                      | state  | sum    | sum_increase | sum_decrease |
+| :--------------------- | -----: | -----: | -----------: | -----------: |
+|   2021-08-01T13:00:00  |  1000  |     0  |           0  |           0  |
+|   2021-08-01T14:00:00  |  1010  |    10  |          10  |           0  |
+|   2021-08-01T15:00:00  |     0  | -1000  |          10  |        1010  |
+|   2021-08-01T16:00:00  |     5  |  -995  |          15  |        1010  |
+
+Example of state class `total` with last_reset:
+
+| t                      | state  | last_reset          | sum    | sum_increase | sum_decrease |
+| :--------------------- | -----: | ------------------- | -----: | -----------: | -----------: |
+|   2021-08-01T13:00:00  |  1000  | 2021-08-01T13:00:00 |     0  |           0  |           0  |
+|   2021-08-01T14:00:00  |  1010  | 2021-08-01T13:00:00 |    10  |          10  |           0  |
+|   2021-08-01T15:00:00  |  1005  | 2021-08-01T13:00:00 |     5  |          10  |           5  |
+|   2021-08-01T16:00:00  |     0  | 2021-09-01T16:00:00 |     5  |          10  |           5  |
+|   2021-08-01T17:00:00  |     5  | 2021-09-01T16:00:00 |    10  |          15  |           5  |
+
+Example of state class `total` where the there initial state at the beginning
+of the new meter cycle is not 0, but 0 is used as zero-point:
+
+| t                      | state  | last_reset          | sum    | sum_increase | sum_decrease |
+| :--------------------- | -----: | ------------------- | -----: | -----------: | -----------: |
+|   2021-08-01T13:00:00  |  1000  | 2021-08-01T13:00:00 |     0  |           0  |           0  |
+|   2021-08-01T14:00:00  |  1010  | 2021-08-01T13:00:00 |    10  |          10  |           0  |
+|   2021-08-01T15:00:00  |  1005  | 2021-08-01T13:00:00 |     5  |          10  |           5  |
+|   2021-08-01T16:00:00  |     5  | 2021-09-01T16:00:00 |    10  |          15  |           5  |
+|   2021-08-01T17:00:00  |    10  | 2021-09-01T16:00:00 |    15  |          20  |           5  |
+
 
 #### State class `total_increasing`
 
@@ -110,33 +159,3 @@ Example of state class `total_increasing` where the sensor does not reset to 0:
 |   2021-08-01T14:00:00  |  1010  |  10  |
 |   2021-08-01T15:00:00  |     5  |  15  |
 |   2021-08-01T16:00:00  |    10  |  20  |
-
-#### State class `measurement`
-
-For sensors with state_class `measurement` a total amount is calculated if:
-- The sensor's device class is `DEVICE_CLASS_ENERGY`, `DEVICE_CLASS_GAS`, or `DEVICE_CLASS_MONETARY`.
-- The sensor's `last_reset` property is set to a valid datatime. If the time of initialization is unknown and the meter will never reset, set to UNIX epoch 0: `homeassistant.util.dt.utc_from_timestamp(0)`.
-
-A change of the `last_reset` attribute is interpreted as the start of a new meter cycle
-or the replacement of the meter. The sensor's value when last_reset changes will not be
-used as zero-point when calculating `sum` statistics, instead the zero-point will be set to 0.
-
-Example of state class `measurement` with last_reset:
-
-| t                      | state  | last_reset          | sum    |
-| :--------------------- | -----: | ------------------- | -----: |
-|   2021-08-01T13:00:00  |  1000  | 2021-08-01T13:00:00 |     0  |
-|   2021-08-01T14:00:00  |  1010  | 2021-08-01T13:00:00 |    10  |
-|   2021-08-01T15:00:00  |  1005  | 2021-08-01T13:00:00 |     5  |
-|   2021-08-01T16:00:00  |     0  | 2021-09-01T16:00:00 |     5  |
-|   2021-08-01T17:00:00  |     5  | 2021-09-01T16:00:00 |    10  |
-
-Example of state class `measurement` with last_reset, where the sensor does not reset to 0:
-
-| t                      | state  | last_reset          | sum    |
-| :--------------------- | -----: | ------------------- | -----: |
-|   2021-08-01T13:00:00  |  1000  | 2021-08-01T13:00:00 |     0  |
-|   2021-08-01T14:00:00  |  1010  | 2021-08-01T13:00:00 |    10  |
-|   2021-08-01T15:00:00  |  1005  | 2021-08-01T13:00:00 |     5  |
-|   2021-08-01T16:00:00  |     5  | 2021-09-01T16:00:00 |    10  |
-|   2021-08-01T17:00:00  |    10  | 2021-09-01T16:00:00 |    15  |
