@@ -84,8 +84,7 @@ a stock portfolio. The sensor's value when the first statistics is compiled is u
 the initial zero-point.
 
 #### How to choose `state_class` and `last_reset`
-It's recommended to use state class `total` without `last_reset` whenever possible.
-Setting state class to `total_increasing` or `total` with `last_reset` should only be done if needed.
+It's recommended to use state class `total` without `last_reset` whenever possible, state class `total_increasing` or `total` with `last_reset` should only be used when state class `total` without `last_reset` does not work for the sensor.
 
 Examples
 - The sensor's value never resets, e.g. a lifetime total energy consumption or production: state_class `total`, `last_reset` not set or set to `None`
