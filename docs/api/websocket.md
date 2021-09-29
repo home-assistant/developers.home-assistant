@@ -6,12 +6,12 @@ Home Assistant contains a WebSocket API. This API can be used to stream informat
 
 ## Endpoint Address
 
-You will need a valid access token.  Typically a long lived access token is used for API reqeusts.
-Generate an access token via the user [profile page](https://www.home-assistant.io/docs/authentication/#user-accounts) in the front end, or via the [auth api](https://developers.home-assistant.io/docs/auth_api/#long-lived-access-token)
+You will need a valid access token.  Typically a long lived access token is used for API reqeusts.  
+Generate an access token via the [user profile page](https://www.home-assistant.io/docs/authentication/#user-accounts) in the front end, or via the [auth api](https://developers.home-assistant.io/docs/auth_api/#long-lived-access-token)
 
-Connect your websocket implementation to ws://localhost:[PORT NUMBER]/api/websocket. 
-If using secure sockets connect to wss://localhost:[PORT NUMBER]/api/websocket.
-The default port number is 8123.  If you change  the HTTP port in configuration.yaml, use the port defined in the config.
+The default port number is 8123.  If you change  the HTTP port in configuration.yaml, use the port defined in the config.  
+Connect your websocket implementation to ws://localhost:[PORT NUMBER]/api/websocket.  
+If using secure sockets connect to wss://localhost:[PORT NUMBER]/api/websocket.  
 
 If you are not using the frontend in your setup then you need to add the websocket_api component to your configuration.yaml file to use the WebSocket API.
 
