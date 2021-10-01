@@ -128,7 +128,7 @@ image: repo/{arch}-my-custom-addon
 | Key | Type | Required | Description |
 | --- | ---- | -------- | ----------- |
 | name | string | yes | Name of the add-on.
-| version | string | yes | Version of the add-on. If using a docker image with the `image` option, this needs to match the tag of the image you want to publish.
+| version | string | yes | Version of the add-on. If using a docker image with the `image` option, this needs to match the tag of the image that is already published.
 | slug | string | yes | Slug of the add-on. This needs to be unique in the scope of the [repository](repository.md) that the add-on is published in and URI friendly.
 | description | string | yes | Description of the add-on.
 | arch | list | yes | List of supported arch: `armhf`, `armv7`, `aarch64`, `amd64`, `i386`.
@@ -166,7 +166,7 @@ image: repo/{arch}-my-custom-addon
 | legacy | bool | no | Boolean. If the Docker image has no `hass.io` labels, you can enable the legacy mode to use the config data.
 | options | dict | no | Default options value of the add-on.
 | schema | dict | no | Schema for options value of the add-on. It can be `false` to disable schema validation and options.
-| image | string | no | For use with Docker Hub and other container registries. This should be set to the name of the image only (E.g, `homeassistant/{arch}-addon-mosquitto`). If you use this option, set the active docker tag using the `version` option.
+| image | string | no | For use with Docker Hub and other container registries. This should be set to the name of the image only (E.g, `ghcr.io/home-assistant/{arch}-addon-example`). If you use this option, set the active docker tag using the `version` option.
 | timeout | integer | no | Default 10 (seconds). The timeout to wait until the Docker daemon is done or will be killed.
 | tmpfs | bool | no | If this is set to `true`, the containers `/tmp` is using tmpfs, a memory file system.
 | discovery | list | no | A list of services that this add-on provides for Home Assistant. Currently supported: `mqtt`
