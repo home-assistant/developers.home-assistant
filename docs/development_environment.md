@@ -81,6 +81,8 @@ Install [Homebrew](https://brew.sh/), then use that to install the dependencies:
 brew install python3 autoconf ffmpeg
 ```
 
+If you encounter build issues with `cryptography` when running the `script/setup` script below, check the cryptography documentation for [installation instructions](https://cryptography.io/en/latest/installation/#building-cryptography-on-macos).
+
 ## Setup Local Repository
 
 Visit the [Home Assistant Core repository](https://github.com/home-assistant/core) and click **Fork**.
