@@ -96,12 +96,12 @@ digraph G {
 
 During startup, Home Assistant first calls the [normal component setup](/creating_component_index.md),
 and then call the method `async_setup_entry(hass, entry)` for each entry. If a new Config Entry is
-created at runtime, Home Assistant will also call `async_setup_entry(hass, entry)` ([example](https://github.com/home-assistant/core/blob/0.68.0/homeassistant/components/hue/__init__.py#L119)).
+created at runtime, Home Assistant will also call `async_setup_entry(hass, entry)` ([example](https://github.com/home-assistant/core/blob/2021.9.0/homeassistant/components/shelly/__init__.py#L73)).
 
 ### For platforms
 
 If a component includes platforms, it will need to forward the Config Entry to the platform. This can
-be done by calling the forward function on the config entry manager ([example](https://github.com/home-assistant/core/blob/0.68.0/homeassistant/components/hue/bridge.py#L81)):
+be done by calling the forward function on the config entry manager ([example](https://github.com/home-assistant/core/blob/2021.9.0/homeassistant/components/ios/__init__.py#L277)):
 
 ```python
 # Use `hass.async_create_task` to avoid a circular dependency between the platform and the component
@@ -112,16 +112,20 @@ hass.async_create_task(
 )
 ```
 
-For a platform to support config entries, it will need to add a setup entry method ([example](https://github.com/home-assistant/core/blob/0.68.0/homeassistant/components/light/hue.py#L60)):
+For a platform to support config entries, it will need to add a setup entry method ([example](https://github.com/home-assistant/core/blob/2021.9.0/homeassistant/components/shelly/cover.py#L26)):
 
 ```python
-async def async_setup_entry(hass, config_entry, async_add_devices):
+async def async_setup_entry(
+    hass: HomeAssistant,
+    config_entry: ConfigEntry,
+    async_add_entities: AddEntitiesCallback,
+) -> None:
     """Set up entry."""
 ```
 
 ## Unloading entries
 
-Components can optionally support unloading a config entry. When unloading an entry, the component needs to clean up all entities, unsubscribe any event listener and close all connections. To implement this, add `async_unload_entry(hass, entry)` to your component ([example](https://github.com/home-assistant/core/blob/0.68.0/homeassistant/components/hue/__init__.py#L136)).
+Components can optionally support unloading a config entry. When unloading an entry, the component needs to clean up all entities, unsubscribe any event listener and close all connections. To implement this, add `async_unload_entry(hass, entry)` to your component ([example](https://github.com/home-assistant/core/blob/2021.9.0/homeassistant/components/shelly/__init__.py#L359)).
 
 For each platform that you forwarded the config entry to, you will need to forward the unloading too.
 
@@ -136,6 +140,6 @@ If you need to clean up resources used by an entity in a platform, have the enti
 If a component needs to clean up code when an entry is removed, it can define a removal method:
 
 ```python
-async def async_remove_entry(hass, entry) -> None:
+async def async_remove_entry(hass: HomeAssistant, entry: ConfigEntry) -> None:
     """Handle removal of an entry."""
 ```
