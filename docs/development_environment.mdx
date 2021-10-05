@@ -2,32 +2,40 @@
 title: "Set up Development Environment"
 ---
 
+```mdx-code-block
+import {useState} from 'react';
+
+export const RepositoryOpener = () => {
+  const [value, setValue] = useState(0);
+  const repoUrl = `vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=${encodeURIComponent(value)}`;
+  return <div>
+    <input onInput={(ev) => setValue(ev.target.value)} style={{width: "80%", display: "inline-block", marginRight: 16}} />
+    <a href={repoUrl}><button style={{cursor: value == "" ? "default" : "pointer"}} disabled={value == ""}>Open</button></a>
+  </div>
+}
+```
+
 You'll need to set up a development environment if you want to develop a new feature or component for Home Assistant. Read on to learn how to set up.
 
 ## Developing with Visual Studio Code + devcontainer
 
-The easiest way to get started with development is to use Visual Studio Code with devcontainers. This approach will create a preconfigured development environment with all the tools you need. This approach is enabled for all Home Assistant repositories.
+The easiest way to get started with development is to use Visual Studio Code with devcontainers. This approach will create a preconfigured development environment with all the tools you need. This approach is enabled for all Home Assistant repositories. [Learn more about devcontainers.](https://code.visualstudio.com/docs/remote/containers)
 
 **Prerequisites**
 
-- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-- Docker
-  -  For Linux, macOS, or Windows (Pro/Enterprise/Education) use the [current release version of Docker](https://docs.docker.com/install/)
-  -   Windows Home requires [WSL 2](https://docs.microsoft.com/windows/wsl/install-win10#update-to-wsl-2) and the current Edge version of Docker Desktop (see instructions [here](https://docs.docker.com/docker-for-windows/wsl-tech-preview/)). This can also be used for Windows Pro/Enterprise/Education.
+- [Docker](https://docs.docker.com/install/)
 - [Visual Studio code](https://code.visualstudio.com/)
-- [Remote - Containers (VSC Extension)][extension-link]
-
-[More info about requirements and devcontainer in general](https://code.visualstudio.com/docs/remote/containers#_getting-started)
-
-[extension-link]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
 
 **Getting started:**
 
-1. Fork the [Home Assistant core repository](https://github.com/home-assistant/core).
-2. Clone the repository to your computer. Windows users need to [place their files within WSL file system](https://code.visualstudio.com/docs/remote/containers#_open-a-wsl-2-folder-in-a-container-on-windows) to prevent performance degradation.
-3. Open the repository using Visual Studio code.
+1. Go to [Home Assistant core repository](https://github.com/home-assistant/core) and click "fork"
+2. Once your fork is created, copy the URL of your fork and paste it below, then click "Open":
+   <RepositoryOpener />
+3. Your browser will prompt you if you want to use Visual Studio Code to open the link, click "Open Link".
+4. When Visual Studio Code asks if you want to install the Remote extension, click "Install".
+5. Your development environment will now be set up.
 
-When you open this repository with Visual Studio code you are asked to "Reopen in Container", this will start the build of the container.
+In the future, if you want to get back to your development environment: open Visual Studio Code, click on the "Remote Explorer" button in the sidebar, select "Containers" at the top of the sidebar.
 
 ### Tasks
 
@@ -36,6 +44,8 @@ The devcontainer comes with some useful tasks to help you with development, you 
 When a task is currently running (like `Preview` for the docs), it can be restarted by opening the command palette and selecting `Tasks: Restart Running Task`, then select the task you want to restart.
 
 ## Manual Environment
+
+_You only need these instructions if you do not want to use devcontainers._
 
 It is also possible to set up a more traditional development environment. See the section for your operating system. Make sure your Python version is 3.8 or later.
 
@@ -100,7 +110,7 @@ Install the requirements with a provided script named `setup`.
 script/setup
 ```
 
-This will create a virtual environment and install all necessary requirements. You're now set! 
+This will create a virtual environment and install all necessary requirements. You're now set!
 
 Each time you start a new terminal session, you will need to activate your virtual environment:
 
