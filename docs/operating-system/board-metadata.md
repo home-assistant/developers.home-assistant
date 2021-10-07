@@ -1,5 +1,5 @@
 ---
-title: "Home Assistant Operating System Metadata"
+title: "Board Metadata"
 sidebar_label: Metadata
 ---
 

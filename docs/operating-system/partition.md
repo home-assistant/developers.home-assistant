@@ -1,13 +1,13 @@
 ---
-title: "Home Assistant Operating System Partitioning"
+title: "Partitioning"
 sidebar_label: Partitions
 ---
 
 The Home Assistant Operating System (HAOS) partition layout is a bit different than what is typically used on a Linux system.
 
-## GPT - GUID Partition Table
+## Partition Table
 
-HAOS prefers GPT whenever possible. With SoCs which don't support GPT a hybrid GPT is use if possible and legacy MBR otherwise (see also [Metadata](board-metadata.md) documentation).
+HAOS prefers GPT (GUID Partition Table) whenever possible. Boot ROMs of some SoCs don't support GPT, in that case a hybrid GPT/MBR is used if possible and legacy MBR otherwise (see also [Metadata](board-metadata.md) documentation).
 
 ## Partitions
 
