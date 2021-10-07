@@ -19,13 +19,13 @@ A light entity controls the brightness, hue and saturation color value, white va
 | is_on    | bool | bool  | Returns if the light entity is on or not.  
 | max_mireds | int | int | Return the warmest color_temp that this light supports.
 | min_mireds | int | int | Return the coldest color_temp that this light supports.
-| rgb_color | tuple | None | Return the rgb color value (int, int, int). This property will be copied to the light's state attribute when the light's color mode is set to `COLOR_MODE_COLOR_RGB` and ignored otherwise.
-| rgbw_color | tuple | None | Return the rgbw color value (int, int, int, int). This property will be copied to the light's state attribute when the light's color mode is set to `COLOR_MODE_COLOR_RGBW` and ignored otherwise.
-| rgbww_color | tuple | None | Return the rgbww color value (int, int, int, int, int). This property will be copied to the light's state attribute when the light's color mode is set to `COLOR_MODE_COLOR_RGBWW` and ignored otherwise.
+| rgb_color | tuple | None | Return the rgb color value (int, int, int). This property will be copied to the light's state attribute when the light's color mode is set to `COLOR_MODE_RGB` and ignored otherwise.
+| rgbw_color | tuple | None | Return the rgbw color value (int, int, int, int). This property will be copied to the light's state attribute when the light's color mode is set to `COLOR_MODE_RGBW` and ignored otherwise.
+| rgbww_color | tuple | None | Return the rgbww color value (int, int, int, int, int). This property will be copied to the light's state attribute when the light's color mode is set to `COLOR_MODE_RGBWW` and ignored otherwise.
 | supported_color_modes | set | None | Flag supported color modes.
 | supported_features | int | int | Flag supported features.
 | white_value | int | None | Return the white value of this light between 0..255. This is deprecated and will be removed in Home Assistant 2021.10.
-| xy_color | tuple | None | Return the xy color value (float, float). This property will be copied to the light's state attribute when the light's color mode is set to `COLOR_MODE_COLOR_XY` and ignored otherwise.
+| xy_color | tuple | None | Return the xy color value (float, float). This property will be copied to the light's state attribute when the light's color mode is set to `COLOR_MODE_XY` and ignored otherwise.
 
 ## Color Modes
 
