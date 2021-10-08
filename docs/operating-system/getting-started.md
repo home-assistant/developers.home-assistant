@@ -5,7 +5,9 @@ sidebar_label: Getting Started
 
 ## Prepare Development Environment
 
-The first step to start developing Home Assistant Operating System (HAOS) is to checkout the source code. The main repository located at [github.com/home-assistant/operating-system/](https://github.com/home-assistant/operating-system/) contains Buildroot customizations via the [br2-external mechanism](https://buildroot.org/downloads/manual/manual.html#outside-br-custom) as well as helper scripts and GitHub Action CI scripts. The main repository uses the Git Submodule mechanism to point to Buildroot itself. While most customizations can be done by the br2-mechanism, some modifications are made to Buildroot itself. For that reason we also maintain a fork of Buildroot under [github.com/home-assistant/buildroot/](https://github.com/home-assistant/buildroot/). The aim is to keep the amount of patches on-top of upstream Buildroot minimal.
+### Check-out Source Code
+
+The main repository located at [github.com/home-assistant/operating-system/](https://github.com/home-assistant/operating-system/) contains Buildroot customizations via the [br2-external mechanism](https://buildroot.org/downloads/manual/manual.html#outside-br-custom) as well as helper scripts and GitHub Action CI scripts. The main repository uses the Git Submodule mechanism to point to Buildroot itself. While most customizations can be done by the br2-mechanism, some modifications are made to Buildroot itself. For that reason we also maintain a fork of Buildroot under [github.com/home-assistant/buildroot/](https://github.com/home-assistant/buildroot/). The aim is to keep the amount of patches on-top of upstream Buildroot minimal.
 
 Make sure you have `git` available and clone the main HAOS repository as follows:
 
@@ -29,7 +31,11 @@ git reset --hard
 git submodule update --init --force
 ```
 
-While Buildroot can run on most Linux distributions natively, its strongly recommended to use the provided Debian based container. This allows for a stable and known build environment with all dependencies pre-installed. Make sure you have the Docker container engine installed and a working `docker` command. 
+### Install prerequisites
+
+HAOS is using build containers to run Buildroot. Install the Docker container engine and make sure you have a working `docker` command which allows to run privileged containers. The build scripts are meant to be run as user, but some commands use privileges, hence a working `sudo` command is required as well.
+
+While Buildroot can run on most Linux distributions natively, its strongly recommended to use the Debian based build container. This allows for a stable and known build environment with all dependencies pre-installed.
 
 :::info
 The build container needs to get started with privileges since at some point during the build process a new loopback device-backed filesystem image will be mounted inside a Docker container. Hence rootless containers won't work to build HAOS.
@@ -37,9 +43,9 @@ The build container needs to get started with privileges since at some point dur
 
 ## Build Images using Build Container
 
-The script `scripts/enter.sh` makes sure the build container image gets built and starts the build environment container. Arguments to it will be directly executed in the container. The `Makefile` in the root is meant to be run inside the container.
+The script `scripts/enter.sh` builds the build container image and starts a container using that image. Arguments passed to the script get executed inside the container.
 
-HAOS uses a configuration file for each supported target. The configuration file needs to be passed to make to build for a specific target. The available configuration files can be found in `buildroot-external/configs/`. Note that the ending `_defconfig` will be appended automatically and *must not* be passed to make. E.g. to build the Raspberry Pi 4 64-bit image use the following command:
+HAOS uses a configuration file for each supported target. To build for a specific target (board), the configuration file needs to be passed to `make`. The configuration files are stored in `buildroot-external/configs/`. Note that the ending `_defconfig` will be appended automatically and *must not* be passed to `make`. E.g. to build the Raspberry Pi 4 64-bit configuration `buildroot-external/configs/rpi4_64_defconfig` use the following command:
 
 ```
 $ sudo scripts/enter.sh make rpi4_64
@@ -54,14 +60,16 @@ Successfully tagged hassos:local
 [...]
 ```
 
-Depending on the speed of your machine this process takes 0.5 to 1h. The build files (object files, intermediate binaries etc.) are stored in the folder `output/` (used to be in `buildroot/output/` for rel-6 and older branches). The final image files are stored in the `release/` directory.
+This invokes make using the `Makefile` in the root of the source repository inside the container. This makefile in turn invokes buildroot's makefile.
+
+Depending on the speed of your machine the build process takes 0.5 to 1h. The build files (object files, intermediate binaries etc.) are stored in the folder `output/` (used to be in `buildroot/output/` in rel-6 and older branches). The final image files are stored in the `release/` directory.
 
 ### Rebuild packages
 
 Once Buildroot completed a build, the second build will be much faster since only the final image gets regenerated. If you want to force buildroot to rebuild a particular package, just delete it from the `output/build/` directory:
 
 ```shell
-$ rm -rf output/build/linux-custom/
+rm -rf output/build/linux-custom/
 ```
 
 ### Build for Multiple Targets
@@ -70,7 +78,7 @@ To build for multiple targets, separate output directories must be used. The out
 
 
 ```shell
-$ sudo scripts/enter.sh make O=output_rpi4_64 rpi4_64
+sudo scripts/enter.sh make O=output_rpi4_64 rpi4_64
 ```
 
 ### Use the Build Container Interactively
@@ -114,3 +122,9 @@ $ qemu-system-x86_64 -enable-kvm -name haos -smp 2 -m 1G -drive file=release/hao
 ```
 
 This will show QEMU's SDL interface and should boot Home Assistant Operating System. Once the boot completes and the Home Assistant CLI prompt `ha > ` is shown, you can use `login` to access the root shell.
+
+## Create a pull request for review
+
+Once you are happy with your changes create a separate git branch and commit them. Try to describe *why* you think that change is important and should be applied to HAOS. E.g "update kernel" is also obvious from the changes itself. The maintainer is more interested why you think the kernel should be updated. The *why* can be fairly trivial (update kernel to make sure we keep up with latest changes), or it can have some interesting details (update kernel since this latest version fixes ethernet on board xy).
+
+Create a fork of the upstream [github.com/home-assistant/operating-system](https://github.com/home-assistant/operating-system) repository (if you haven't already) and push your branch to your forked GitHub repository. Then open a new pull request. All changes should be made against the development branch `dev`. If you like your change in the next stable release, add the `rel-x` label so it is marked for backporting.

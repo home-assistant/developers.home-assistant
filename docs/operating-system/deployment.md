@@ -3,7 +3,7 @@ title: "Deployment/Releases"
 sidebar_label: Deployment
 ---
 
-Home Assistant Operating System follows a simple and straight forward development model: Development takes place on a development branch and releases get built from a release branches, one is created per major release.
+Home Assistant Operating System releases are built from the release branch by the HAOS maintainer. There is no fixed schedule, builds are triggered as needed. Changes need to get applied to the development branch first and labeled with the `rel-x` label. The maintainer will backport those patches onto the release branch before the next release.
 
 ## Branches
 
@@ -34,3 +34,4 @@ GitHub Actions are used to build HAOS development and release builds. Two workfl
 - `.github/workflows/release.yml`: Release (and release candidate) builds, triggered when a GitHub release gets published, images stored as GitHub release asset.
 
 The development build pipeline can also be triggered from a PR: The appropriate board labels need to be set first, a build for those boards is then triggered when adding the `run-dev-build` label.
+
