@@ -3,7 +3,7 @@ title: "Deployment/Releases"
 sidebar_label: Deployment
 ---
 
-Home Assistant Operating System releases are built from the release branch by the HAOS maintainer. There is no fixed schedule, builds are triggered as needed. Changes need to get applied to the development branch first and labeled with the `rel-x` label. The maintainer will backport those patches onto the release branch before the next release.
+Home Assistant Operating System releases are built from the release branch. GitHub Actions are used to build all public releases. There is no fixed schedule, builds are triggered as needed by the HAOS maintainer. Changes need to get applied to the development branch first and labeled with the `rel-x` label. The maintainer will backport those patches onto the release branch before the next release.
 
 ## Branches
 
