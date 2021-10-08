@@ -2,13 +2,13 @@
 title: "Maintenance"
 ---
 
-This page documents a couple of points for maintaining the Home Assistant code. Most of the tasks don't need to be performed on a regular base thus the steps, used tools, or details are preserved here.
+This page documents a couple of points for maintaining the Home Assistant code. Most of the tasks don't need to be performed on a regular basis thus the steps, used tools, or details are preserved here.
 
 ## Source code
 
 ### Line separator
 
-People are using various operating systems to develop components and platforms for Home Assistant. This could lead to different line endings on file. We prefer `LN`. Especially Microsoft Windows tools tend to use `CRLF`.
+People are using various operating systems to develop components and platforms for Home Assistant. This could lead to different line endings in files. We prefer `LN`. Especially Microsoft Windows tools tend to use `CRLF`.
 
 ```shell
 $ find homeassistant -name "*.py" -exec file {} \; | grep BOM
@@ -23,11 +23,11 @@ $ dos2unix homeassistant/components/notify/kodi.py
 
 ### File permissions
 
-Most files don't need to the be executable. `0644` is fine.
+Most files don't need to be executable. `0644` is fine.
 
 ### Dependencies
 
-A lot of components and platforms depends on third-party Python modules. The dependencies which are stored in the `requirements_all.txt` files can be tracked with [`pur`](https://pypi.org/project/pur/) or [`pip-upgrader`](https://github.com/simion/pip-upgrader).
+A lot of components and platforms depend on third-party Python modules. The dependencies which are stored in the `requirements_all.txt` files can be tracked with [`pur`](https://pypi.org/project/pur/) or [`pip-upgrader`](https://github.com/simion/pip-upgrader).
 
 If you update the requirements of a component/platform by updating `manifest.json`, run the provided script to update the `requirements_*.txt` file(s).
 
@@ -40,6 +40,6 @@ Start a test run of Home Assistant. If that was successful, include all files in
 
 ## Documentation
 
-- Merge `current` into `next` on a regular base.
+- Merge `current` into `next` on a regular basis.
 - Optimize the images.
 
