@@ -13,7 +13,7 @@ Home Assistant Operating System (HAOS) is using the [Buildroot](https://buildroo
   - [Barebox](https://barebox.org/) for devices that support EFI
   - [U-Boot](https://www.denx.de/wiki/U-Boot) for devices that don't support EFI
 - **Operating System:**
-  - [Buildroot](https://buildroot.org/) LTS Linux
+  - [Buildroot](https://buildroot.org/) build system to generate Linux distributions
 - **File Systems:**
   - [SquashFS](https://www.kernel.org/doc/Documentation/filesystems/squashfs.txt) for read-only file systems (using LZ4 compression)
   - [ZRAM](https://www.kernel.org/doc/Documentation/blockdev/zram.txt) for `/tmp`, `/var` and swap (using LZ4 compression)

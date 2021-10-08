@@ -60,21 +60,25 @@ Successfully tagged hassos:local
 [...]
 ```
 
-This invokes make using the `Makefile` in the root of the source repository inside the container. This makefile in turn invokes buildroot's makefile.
+This invokes make using the `Makefile` in the root of the source repository inside the container. This makefile in turn invokes Buildroot's makefile.
 
 Depending on the speed of your machine the build process takes 0.5 to 1h. The build files (object files, intermediate binaries etc.) are stored in the folder `output/` (used to be in `buildroot/output/` in rel-6 and older branches). The final image files are stored in the `release/` directory.
 
 ### Rebuild packages
 
-Once Buildroot completed a build, the second build will be much faster since only the final image gets regenerated. If you want to force buildroot to rebuild a particular package, just delete it from the `output/build/` directory:
+Buildroot uses packages like a regular distribution. But instead of just downloading a pre-built package, Buildroot packages download the source files and compile the binaries directly. Buildroot remembers which package has been built already. This makes the second build much faster, since only the final image gets regenerated. If you want to force Buildroot to rebuild a particular package, just delete it from the `output/build/` directory:
 
 ```shell
 rm -rf output/build/linux-custom/
 ```
 
+:::tip
+You can check `output/build/packages-file-list.txt` to learn which file in the final image belongs to what package. This makes it easier to find the package you would like to change.
+:::
+
 ### Build for Multiple Targets
 
-To build for multiple targets, separate output directories must be used. The output directory can be specified with the `O=` argument. A recommended pattern is to just use an output directory named after the targets configuration file:
+To build for multiple targets in a single source directory, separate output directories must be used. The output directory can be specified with the `O=` argument. A recommended pattern is to just use an output directory named after the targets configuration file:
 
 
 ```shell
@@ -99,7 +103,7 @@ From this shell, the same build above could be started using `make O=output_rpi4
 This allows to invoke other Buildroot targets, e.g. to [graph dependencies between packages](https://buildroot.org/downloads/manual/manual.html#_graphing_the_dependencies_between_packages). To use other Buildroot targets, make sure to change to the `buildroot/` directory and execute commands from there
 
 ```bash
-builder@c6dfb4cd4036:/build$ cd buildroot.
+builder@c6dfb4cd4036:/build$ cd buildroot/
 builder@c6dfb4cd4036:/build$ make O=../output_rpi4_64 graph-depends
 Getting dependency tree...
 dot  -Tpdf \

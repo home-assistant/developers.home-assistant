@@ -34,4 +34,3 @@ GitHub Actions are used to build HAOS development and release builds. Two workfl
 - `.github/workflows/release.yml`: Release (and release candidate) builds, triggered when a GitHub release gets published, images stored as GitHub release asset.
 
 The development build pipeline can also be triggered from a PR: The appropriate board labels need to be set first, a build for those boards is then triggered when adding the `run-dev-build` label.
-
