@@ -421,6 +421,40 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/api/entity_registry/<entity_id>" method="get">
+
+Returns a json encoded representation of an entry from the entity registry for specified entity_id. Returns 404 if not found.
+
+```json
+{
+  "entity_id": "input_boolean.test",
+  "config_entry_id": null,
+  "device_id": null,
+  "area_id": null,
+  "unique_id": "test",
+  "platform": "input_boolean",
+  "name": null,
+  "icon": null,
+  "disabled_by": null,
+  "capabilities": {},
+  "supported_features": 0,
+  "device_class": null,
+  "unit_of_measurement": null,
+  "original_name": "Test",
+  "original_icon": null
+}
+```
+
+Sample `curl` command:
+
+```shell
+curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" \
+  http://localhost:8123/api/entity_registry/input_boolean.test
+```
+
+</ApiEndpoint>
+	
 <ApiEndpoint path="/api/error_log" method="get">
 
 Retrieve all errors logged during the current session of Home Assistant as a plaintext response.
