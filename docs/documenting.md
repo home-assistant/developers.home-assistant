@@ -2,7 +2,7 @@
 title: "Documentation"
 ---
 
-The user documentation is located at [https://www.home-assistant.io](https://www.home-assistant.io). This section here is the place where we provide documentation and additional details about creating or modifying content.
+The user documentation is located at [https://www.home-assistant.io](https://www.home-assistant.io). This section is the place where we provide documentation and additional details about creating or modifying content.
 
 The [home-assistant.io](https://home-assistant.io) website is built using [Jekyll](http://github.com/mojombo/jekyll) and [these dependencies](https://pages.github.com/versions/). The pages are written in [Markdown](http://daringfireball.net/projects/markdown/). To add a page, you don't need to know HTML.
 
@@ -69,7 +69,7 @@ ssh -L 4000:localhost:4000 user_on_headless_machine@ip_of_headless_machine
 
 #### Speeding up site generation
 
-Every release we post long changelogs to the website. This slows down generation of the website a bit. We've include some tools to temporarily exclude integrations and blog posts that you're not working on out of the way.
+Every release we post long changelogs to the website. This slows down generation of the website a bit. We've included some tools to temporarily exclude integrations and blog posts that you're not working on out of the way.
 
 ```shell
 bundle exec rake isolate[filename-of-blogpost-or-integration]
