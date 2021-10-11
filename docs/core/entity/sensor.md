@@ -32,8 +32,8 @@ If specifying a device class, your sensor entity will need to also return the co
 | carbon_monoxide | ppm | parts per million of carbon monoxide concentration
 | current | A | Current.
 | date | ISO8601 | Date.
-| energy | Wh,kWh | Energy.
-| gas | m³/ft³ | Volume of gas.
+| energy | Wh, kWh | Energy. Statistics will be stored in kWh.
+| gas | m³, ft³ | Volume of gas. Statistics will be stored in m³.
 | humidity | % | % of humidity in the air.
 | illuminance | lx/lm | Light level.
 | monetary | ISO 4217 | Monetary value with a currency
@@ -44,12 +44,12 @@ If specifying a device class, your sensor entity will need to also return the co
 | pm1 | µg/m³ | Concentration of particulate matter less than 1 micrometer |
 | pm25 | µg/m³ | Concentration of particulate matter less than 2.5 micrometers |
 | pm10 | µg/m³ | Concentration of particulate matter less than 10 micrometers |
-| power | W,kW | Power.
+| power | W, kW | Power. Statistics will be stored in W.
 | power_factor | % | Power Factor.
-| pressure | hPa,mbar | Pressure.
-| signal_strength | dB/dBm | Signal strength.
+| pressure | bar, hPa, inHg, mbar, Pa, psi | Pressure. Statistics will be stored in kWh.
+| signal_strength | dB, dBm | Signal strength.
 | sulphur_dioxide | µg/m³ | Concentration of sulphure dioxide |
-| temperature | °C/°F | Temperature.
+| temperature | °C, °F | Temperature. Statistics will be stored in °C.
 | timestamp | ISO8601 | Timestamp.
 | volatile_organic_compounds | µg/m³ | Concentration of volatile organic compounds.
 | voltage | V | Voltage.
@@ -67,8 +67,10 @@ If specifying a device class, your sensor entity will need to also return the co
 
 Home Assistant has support for storing sensors as long-term statistics if the entity has
 the right properties. To opt-in for statistics, the sensor must have
-`state_class` set to one of the valid state classes: `measurement` or
+`state_class` set to one of the valid state classes: `measurement`, `total` or
 `total_increasing`.
+For certain device classes, the unit of the statistics is normalized to for example make
+it possible to plot several sensors in a single graph.
 
 ### Value entities - entities not representing a total amount
 
