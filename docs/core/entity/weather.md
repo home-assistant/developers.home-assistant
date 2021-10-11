@@ -21,7 +21,6 @@ Properties should always only return information from memory and not do I/O (lik
 | wind_speed | float | `None` | The current wind speed in km/h or mi/h.
 | wind_bearing | float or string | `None` | The current wind bearing in azimuth angle (degrees) or 1-3 letter cardinal direction.
 | forecast | array | `None` | Daily or Hourly forecast data.
-| attribution | string | `None` | The branding text required by the API provider.
 
 Properties have to follow the units defined in the `unit_system`.
 
