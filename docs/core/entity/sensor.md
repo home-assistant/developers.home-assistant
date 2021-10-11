@@ -24,7 +24,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 If specifying a device class, your sensor entity will need to also return the correct unit of measurement.
 
-| Type | Unit | Description
+| Type | Supported units | Description
 | ---- | ---- | -----------
 | aqi | | Air Quality Index
 | battery | % | % of battery that is left.
@@ -46,7 +46,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | pm10 | µg/m³ | Concentration of particulate matter less than 10 micrometers |
 | power | W, kW | Power. Statistics will be stored in W.
 | power_factor | % | Power Factor.
-| pressure | bar, hPa, inHg, mbar, Pa, psi | Pressure. Statistics will be stored in kWh.
+| pressure | bar, hPa, inHg, mbar, Pa, psi | Pressure. Statistics will be stored in Pa.
 | signal_strength | dB, dBm | Signal strength.
 | sulphur_dioxide | µg/m³ | Concentration of sulphure dioxide |
 | temperature | °C, °F | Temperature. Statistics will be stored in °C.
