@@ -31,11 +31,11 @@ If specifying a device class, your sensor entity will need to also return the co
 | carbon_dioxide | ppm | parts per million of carbon dioxide concentration
 | carbon_monoxide | ppm | parts per million of carbon monoxide concentration
 | current | A | Current.
-| date | ISO8601 | Date.
+| date | | Date. Must be formatted according to ISO8601.
 | energy | Wh, kWh | Energy. Statistics will be stored in kWh.
 | gas | m³, ft³ | Volume of gas. Statistics will be stored in m³.
 | humidity | % | % of humidity in the air.
-| illuminance | lx/lm | Light level.
+| illuminance | lx, lm | Light level.
 | monetary | ISO 4217 | Monetary value with a currency
 | nitrogen_dioxide | µg/m³ | Concentration of Nitrogen Dioxide |
 | nitrogen_monoxide | µg/m³ | Concentration of Nitrogen Monoxide |
@@ -50,7 +50,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | signal_strength | dB, dBm | Signal strength.
 | sulphur_dioxide | µg/m³ | Concentration of sulphure dioxide |
 | temperature | °C, °F | Temperature. Statistics will be stored in °C.
-| timestamp | ISO8601 | Timestamp.
+| timestamp | | Timestamp. Must be formatted according to ISO8601.
 | volatile_organic_compounds | µg/m³ | Concentration of volatile organic compounds.
 | voltage | V | Voltage.
 
