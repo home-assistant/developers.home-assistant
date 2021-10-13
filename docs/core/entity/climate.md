@@ -101,6 +101,7 @@ The device fan can have different swing modes that it wants the user to know abo
 | Name               | Description                                      |
 | ------------------ | ------------------------------------------------ |
 | `SWING_OFF`        | The fan is not swinging.                         |
+| `SWING_ON`         | The fan is swinging.                             |
 | `SWING_VERTICAL`   | The fan is swinging vertical.                    |
 | `SWING_HORIZONTAL` | The fan is swinging horizontal.                  |
 | `SWING_BOTH`       | The fan is swinging both horizontal and vertical. |
