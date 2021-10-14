@@ -6,6 +6,8 @@ To ensure that the documentation for Home Assistant is consistent and easy to fo
 
 ## General Documentation
 
+Broadly speaking documentation should be written following Microsoft's house style, which is detailed [here](https://docs.microsoft.com/en-us/style-guide).
+
 - The language of the documentation should be American-English.
 - Don't put two spaces after a period.
 - Use a serial comma (also known as the Oxford comma) before the conjunction in a list of three or more items. E.g., "Through the use of additional adapters, Home Assistant allows the use of Zigbee, Z-Wave, and other protocols".
