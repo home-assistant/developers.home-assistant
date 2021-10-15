@@ -66,7 +66,7 @@ Properties should always only return information from memory and not do I/O (lik
 | attribution             | string  | `None`  | The branding text required by the API provider. |
 | available               | boolean | `True`  | Indicate if Home Assistant is able to read the state and control the underlying device. |
 | device_class            | string  | `None`  | Extra classification of what the device is. Each domain specifies their own. Device classes can come with extra requirements for unit of measurement and supported features. |
-| entity_category         | URL     | `None`  | Classification of a non-primary entity. Set to `config` for an entity which allows configuring a device, for example the background illumination of a switch. Set to `diagnostic` for an entity which exposes some diagnostics of a device, for example a sensor showing RSSI or MAC-address. |
+| entity_category         | string  | `None`  | Classification of a non-primary entity. Set to `config` for an entity which allows changing the configuration of a device, for example a switch entity making it possible to turn the background illumination of a switch on and off. Set to `diagnostic` for an entity exposes some configuration parameter or diagnostics of a device but does not allow changing it, for example a sensor showing RSSI or MAC-address. |
 | entity_picture          | URL     | `None`  | Url of a picture to show for the entity. |
 | extra_state_attributes  | dict    | `None`  | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version. |
 | name                    | string  | `None`  | Name of the entity  |
@@ -79,7 +79,7 @@ The following properties are also available on entities. However, they are for a
 
 | Name                            | Type    | Default | Description                                                                                                                                                                                                           |
 | ------------------------------- | ------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| entity_registry_enabled_default | boolean | `True`  | Indicate if the entity should be enabled or disabled when it is first added to the entity registry. |
+| entity_registry_enabled_default | boolean | `True`  | Indicate if the entity should be enabled or disabled when it is first added to the entity registry. Fast-changing diagnostic entities, e.g. a sensor exposing RSSI or battery voltage should typically be set to `False`. |
 | force_update                    | boolean | `False` | Write each update to the state machine, even if the data is the same. Example use: when you are directly reading the value from a connected sensor instead of a cache. Use with caution, will spam the state machine. |
 | icon                            | icon    | `None`  | Icon to use in the frontend. Icons start with `mdi:` plus an [identifier](https://materialdesignicons.com/). You probably don't need this since Home Assistant already provides default icons for all entities according to its `device_class`. This should be used only in the case where there either is no matching `device_class` or where the icon used for the `device_class` would be confusing or misleading. |
 
