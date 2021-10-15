@@ -27,20 +27,20 @@ If specifying a device class, your sensor entity will need to also return the co
 | Type | Supported units | Description
 | ---- | ---- | -----------
 | aqi | | Air Quality Index
-| battery | % | % of battery that is left
-| carbon_dioxide | ppm | parts per million of carbon dioxide concentration
-| carbon_monoxide | ppm | parts per million of carbon monoxide concentration
+| battery | % | Percentage of battery that is left
+| carbon_dioxide | ppm | Concentration of carbon dioxide.
+| carbon_monoxide | ppm | Concentration of carbon monoxide.
 | current | A | Current
-| date | | Date, must be formatted according to ISO8601.
+| date | | Date, must be formatted according to [ISO8601](https://en.wikipedia.org/wiki/ISO_8601).
 | energy | Wh, kWh | Energy, statistics will be stored in kWh.
 | gas | m³, ft³ | Volume of gas, statistics will be stored in m³. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
 | humidity | % | Relative humidity
 | illuminance | lx, lm | Light level
-| monetary | ISO 4217 | Monetary value with a currency
-| nitrogen_dioxide | µg/m³ | Concentration of Nitrogen Dioxide |
-| nitrogen_monoxide | µg/m³ | Concentration of Nitrogen Monoxide |
-| nitrous_oxide | µg/m³ | Concentration of Nitrous Oxide |
-| ozone | µg/m³ | Concentration of Ozone |
+| monetary | [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Unofficial_codes_for_cryptocurrencies) | Monetary value with a currency.
+| nitrogen_dioxide | µg/m³ | Concentration of nitrogen dioxide |
+| nitrogen_monoxide | µg/m³ | Concentration of nitrogen monoxide |
+| nitrous_oxide | µg/m³ | Concentration of nitrous oxide |
+| ozone | µg/m³ | Concentration of ozone |
 | pm1 | µg/m³ | Concentration of particulate matter less than 1 micrometer |
 | pm25 | µg/m³ | Concentration of particulate matter less than 2.5 micrometers |
 | pm10 | µg/m³ | Concentration of particulate matter less than 10 micrometers |
@@ -50,7 +50,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | signal_strength | dB, dBm | Signal strength
 | sulphur_dioxide | µg/m³ | Concentration of sulphure dioxide |
 | temperature | °C, °F | Temperature, statistics will be stored in °C.
-| timestamp | | Timestamp, must be formatted according to ISO8601.
+| timestamp | | Timestamp, must be formatted according to [ISO8601](https://en.wikipedia.org/wiki/ISO_8601).
 | volatile_organic_compounds | µg/m³ | Concentration of volatile organic compounds
 | voltage | V | Voltage
 
