@@ -66,7 +66,7 @@ Properties should always only return information from memory and not do I/O (lik
 | attribution             | string  | `None`  | The branding text required by the API provider. |
 | available               | boolean | `True`  | Indicate if Home Assistant is able to read the state and control the underlying device. |
 | device_class            | string  | `None`  | Extra classification of what the device is. Each domain specifies their own. Device classes can come with extra requirements for unit of measurement and supported features. |
-| entity_category         | URL     | `None`  | Classification of a non-primary entity. Set to `config` for an entity which allows configuraing a device, for example the background illumination of a switch. Set to `diagnostic` for an entity which exposes some diagnostics of a device, for example a sensor showing RSSI or MAC-address. |
+| entity_category         | URL     | `None`  | Classification of a non-primary entity. Set to `config` for an entity which allows configuring a device, for example the background illumination of a switch. Set to `diagnostic` for an entity which exposes some diagnostics of a device, for example a sensor showing RSSI or MAC-address. |
 | entity_picture          | URL     | `None`  | Url of a picture to show for the entity. |
 | extra_state_attributes  | dict    | `None`  | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version. |
 | name                    | string  | `None`  | Name of the entity  |
