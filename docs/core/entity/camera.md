@@ -20,7 +20,8 @@ Properties should always only return information from memory and not do I/O (lik
 | brand | str | None | The brand (manufacturer) of the camera.
 | model | str | None | The model of the camera.
 | frame_interval | float | 0.5 | The interval between frames of the stream.
-| frontend_stream_type | str | None | Tells the frontend which type of stream to use either `STREAM_TYPE_HLS` or `STREAM_TYPE_WEBRTC`. Used with `SUPPORT_STREAM`i.
+| frontend_stream_type | str | None | Used with `SUPPORT_STREAM` to tell the frontend which type of stream to use
+(`STREAM_TYPE_HLS` or `STREAM_TYPE_WEBRTC`)
 
 ### Supported features
 
@@ -64,7 +65,7 @@ class MyCamera(Camera):
 
 ### Stream Source
 
-The stream source should return an RTSP URL that is usable by ffmpeg and the `stream` component for rendering and recording.
+The stream source should return an RTSP URL that is usable by ffmpeg and the `stream` component for rendering and recording. Requires `SUPPORT_STREAM`.
 
 ```python
 class MyCamera(Camera):
@@ -94,8 +95,10 @@ class MyCamera(Camera):
 
 ### WebRTC Streams
 
-Cameras that natively support Web RTC streams can set `frontend_stream_type` as `STREAM_TYPE_WEB_RTC` and implement the signal path to pass an offer to the device, and return an answer back to the frontend. The stream is initiated from the
-frontend directly to the camera device. WebRTC streams do not use the `stream` component and do not support recording.
+WebRTC enabled cameras can be used with the home assistant frontend. Requires `SUPPORT_STREAM`. A camera entity may set `frontend_stream_type` to `STREAM_TYPE_WEB_RTC` and implement the signal path to pass the frontends SDP offer to the
+device, and return back the answer. The stream is initiated from the frontend which talks directly to the device.
+
+WebRTC streams do not use the `stream` component and do not support recording.
 
 ```python
 class MyCamera(Camera):
