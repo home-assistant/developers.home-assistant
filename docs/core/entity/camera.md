@@ -14,11 +14,22 @@ Properties should always only return information from memory and not do I/O (lik
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | is_recording | bool | None | Indication of whether the camera is recording. Used to determine `state`.
+| is_streaming | bool | None | Indication of whether the camera is streaming. Used to determine `state`.
 | motion_detection_enabled | bool | False | Indication of whether the camera has motion detection enabled.
 | is_on | bool | True | Indication camera is on.
 | brand | str | None | The brand (manufacturer) of the camera.
 | model | str | None | The model of the camera.
 | frame_interval | float | 0.5 | The interval between frames of the stream.
+| frontend_stream_type | str | None | Tells the frontend which type of stream to use either `STREAM_TYPE_HLS` or `STREAM_TYPE_WEBRTC`. Used with `SUPPORT_STREAM`i.
+
+### Supported features
+
+Supported features constants are combined using the bitwise or (`|`) operator.
+
+| Name                               | Bit value | Description                                                                                 |
+| ---------------------------------- | --- | ------------------------------------------------------------------------------------------- |
+| `SUPPORT_ON_OFF`       |   1 | The device supports `turn_on` and `turn_off` |
+| `SUPPORT_STREAM`       |   2 | The device supports streaming |
 
 ## Methods
 
@@ -53,7 +64,7 @@ class MyCamera(Camera):
 
 ### Stream Source
 
-The stream source should return a url that is usable by ffmpeg.
+The stream source should return an RTSP URL that is usable by ffmpeg and the `stream` component for rendering and recording.
 
 ```python
 class MyCamera(Camera):
@@ -61,6 +72,36 @@ class MyCamera(Camera):
     async def stream_source(self) -> str | None:
         """Return the source of the stream."""
 
+```
+
+The default `frontend_stream_type` is `STREAM_TYPE_HLS` which will use this stream source and the `stream` component to serve the RTSP stream with HLS.
+
+A camera entity may also use the `stream_source` to render the preview image.
+
+```python
+from haffmpeg.tools import IMAGE_JPEG
+from homeassistant.components.ffmpeg import async_get_image
+
+class MyCamera(Camera):
+
+    async def async_camera_image(
+        self, width: int | None = None, height: int | None = None
+    ) -> bytes | None:
+        """Return bytes of camera image."""
+        stream_url = await self.stream_source()
+        return await async_get_image(self.hass, stream_url, output_format=IMAGE_JPEG)
+```
+
+### WebRTC Streams
+
+Cameras that natively support Web RTC streams can set `frontend_stream_type` as `STREAM_TYPE_WEB_RTC` and implement the signal path to pass an offer to the device, and return an answer back to the frontend. The stream is initiated from the
+frontend directly to the camera device. WebRTC streams do not use the `stream` component and do not support recording.
+
+```python
+class MyCamera(Camera):
+
+    async def async_handle_web_rtc_offer(self, offer_sdp: str) -> str | None:
+        """Handle the WebRTC offer and return an answer."""
 ```
 
 ### Turn on
