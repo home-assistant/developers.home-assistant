@@ -77,7 +77,7 @@ class MyCamera(Camera):
 
 The default `frontend_stream_type` is `STREAM_TYPE_HLS` which will use this stream source and the `stream` component to serve the RTSP stream with HLS.
 
-A camera entity may also use the `stream_source` to render the preview image.
+A camera entity may also use the `stream_source` to render a still camera image with `ffmpeg`.
 
 ```python
 from haffmpeg.tools import IMAGE_JPEG
@@ -90,7 +90,7 @@ class MyCamera(Camera):
     ) -> bytes | None:
         """Return bytes of camera image."""
         stream_url = await self.stream_source()
-        return await async_get_image(self.hass, stream_url, output_format=IMAGE_JPEG)
+        return await async_get_image(self.hass, stream_url, output_format=IMAGE_JPEG, width=width, height=height)
 ```
 
 ### WebRTC Streams
