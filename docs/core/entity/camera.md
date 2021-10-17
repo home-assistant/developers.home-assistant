@@ -65,7 +65,9 @@ class MyCamera(Camera):
 
 ### Stream Source
 
-The stream source should return an RTSP URL that is usable by ffmpeg and the `stream` component for rendering and recording. Requires `SUPPORT_STREAM`.
+The stream source should return an RTSP URL that is usable by ffmpeg. Requires `SUPPORT_STREAM`.
+
+A camera entity with a stream source by default use `STREAM_TYPE_HLS` to tell the frontend to use an HLS feed with the `stream` component. This stream source is also be used with `stream` for recording.
 
 ```python
 class MyCamera(Camera):
@@ -75,9 +77,7 @@ class MyCamera(Camera):
 
 ```
 
-The default `frontend_stream_type` is `STREAM_TYPE_HLS` which will use this stream source and the `stream` component to serve the RTSP stream with HLS.
-
-A camera entity may also use the `stream_source` to render a still camera image with `ffmpeg`.
+A camera entity may also use the stream source to render a still camera image with `ffmpeg`.
 
 ```python
 from haffmpeg.tools import IMAGE_JPEG
