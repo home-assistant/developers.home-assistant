@@ -7,7 +7,7 @@ As it states in the [Style guidelines section](development_guidelines.md) all co
 - All the unit tests pass
 - All code passes the checks from the linting tools
 
-Local testing is done using [Tox](https://tox.readthedocs.io), which has been installed as part of running `script/setup` in the [virtual environment](development_environment.md). To start the tests, activate the virtual environment and simply run the command:
+Local testing is done using [Tox](https://tox.readthedocs.io), which has been installed as part of running `script/setup` in the [virtual environment](development_environment.mdx). To start the tests, activate the virtual environment and simply run the command:
 
 ```shell
 tox
@@ -19,14 +19,14 @@ It might be required that you install additional packages depending on your dist
 - Ubuntu: `sudo apt-get install libudev-dev`
 
 :::info Important
-Run `tox` before you create your pull request to avoid annoying fixes. 
+Run `tox` before you create your pull request to avoid annoying fixes.
 :::
 
 :::note
 Running the full `tox` test suite will take quite some time, so as the minimal requirement for pull requests, run at least the tests that are related to your code changes (see details below on how to). The full test suite will anyway be run by the CI once you created your pull request and before it can be merged.
 :::
 
-Running `tox` will run unit tests against the locally available Python releases, as well as validate the code and document style using `pycodestyle`, `pydocstyle` and  `pylint`. You can run tests on only one `tox` target -- just use `-e` to select an environment. For example, `tox -e lint` runs the linters only, and `tox -e py38` runs unit tests only on Python 3.8.
+Running `tox` will run unit tests against the locally available Python releases, as well as validate the code and document style using `pycodestyle`, `pydocstyle` and `pylint`. You can run tests on only one `tox` target -- just use `-e` to select an environment. For example, `tox -e lint` runs the linters only, and `tox -e py38` runs unit tests only on Python 3.8.
 
 `tox` uses virtual environments under the hood to create isolated testing environments. The `tox` virtual environments will get out-of-date when requirements change, causing test errors. Run `tox -r` to tell `tox` to recreate the virtual environments.
 
@@ -76,9 +76,9 @@ script/lint
 
 In case you want to check the code coverage for your new component, run the following from the root of the repository:
 
-````shell
+```shell
 pytest ./tests/components/<your_component>/ --cov=homeassistant.components.<your_component> --cov-report term-missing -vv
-````
+```
 
 ### Preventing linter errors
 
