@@ -42,7 +42,7 @@ The valid keys are:
 | type                | string                        | Yes      | The type of the sensor. Must be one of `binary_sensor` or `sensor`                                                                                                                                              |
 | unique_id           | string                        | Yes      | An identifier unique to this installation of your app. You'll need this later. Usually best when its a safe version of the sensor name                                                                          |
 | unit_of_measurement | string                        | No       | The unit of measurement for the sensor                                                                                                                                                                          |
-| state_class | string | No | The [state class](../../core/entity/sensor.md) of the entity (sensors only)
+| state_class | string | No | The [state class](../../core/entity/sensor.md#available-state-classes) of the entity (sensors only)
 | entity_category | string | No | The entity category of the entity
 
 Sensors will appear as soon as they are registered.
