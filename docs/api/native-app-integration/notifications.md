@@ -32,13 +32,18 @@ Your server should accept a HTTP POST payload like this:
   "registration_info": {
     "app_id": "io.home-assistant.iOS",
     "app_version": "1.0.0",
-    "os_version": "12.2"
+    "os_version": "12.2",
+    "webhook_id": "webhook_id_from_registration"
   },
   "data": {
     "key": "value"
   }
 }
 ```
+
+:::info
+`webhook_id` will only be included from core-2021.11 or later.
+:::
 
 It should respond with a 201 status code assuming the notification was queued for delivery successfully.
 
