@@ -95,7 +95,7 @@ class MyCamera(Camera):
 
 ### WebRTC Streams
 
-WebRTC enabled cameras can be used with the home assistant frontend. Requires `SUPPORT_STREAM`. A camera entity may set `frontend_stream_type` to `STREAM_TYPE_WEB_RTC` and implement the signal path to pass the frontend's SDP offer to the
+WebRTC enabled cameras can be used by facilitating a direct connection with the home assistant frontend. This usage requires `SUPPORT_STREAM` with `frontend_stream_type` set to `STREAM_TYPE_WEB_RTC`. The integration should implement `async_handle_web_rtc_offer` which passes the frontend's SDP offer to the device and returns back the answer.
 device, and return back the answer. The stream is initiated from the frontend which talks directly to the device.
 
 WebRTC streams do not use the `stream` component and do not support recording.
