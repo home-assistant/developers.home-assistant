@@ -52,7 +52,7 @@ some_key:
 - Be succinct. Minimize the number of columns and keep the amount of text as short as possible:
   - Too wide tables are difficult to browse on handheld devices
   - Less content makes tables easier to read
-- Consider using other data structures for representing the information. For example, `{% configuration_basic %}` can be used.
+- When limiting the amount of text is not possible, consider using other data structures for representing the information. For example, lists or `{% configuration_basic %}` can be used.
 
 ## YAML and Templates
 
