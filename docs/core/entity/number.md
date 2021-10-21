@@ -17,7 +17,7 @@ Properties should always only return information from memory and not do I/O (lik
 | min_value | float | 0 | The minimum accepted value (inclusive)
 | max_value | float | 100 | The maximum accepted value (inclusive)
 | step | float | **See below** | Defines the resolution of the values, i.e. the smallest increment or decrement
-| mode | string | `auto` | Defines how the number should be displayed in the UI. Recommend to use the default `auto`. Can be `box` or `slider` to force a display mode.
+| mode | string | `auto` | Defines how the number should be displayed in the UI. It's recommended to use the default `auto`. Can be `box` or `slider` to force a display mode.
 
 Other properties that are common to all entities such as `icon`, `unit_of_measurement`, `name` etc are also applicable.
 
