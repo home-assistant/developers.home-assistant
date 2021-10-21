@@ -17,10 +17,11 @@ Properties should always only return information from memory and not do I/O (lik
 | min_value | float | 0 | The minimum accepted value (inclusive)
 | max_value | float | 100 | The maximum accepted value (inclusive)
 | step | float | **See below** | Defines the resolution of the values, i.e. the smallest increment or decrement
+| mode | string | `auto` | Defines how the number should be displayed in the UI. Recommend to use the default `auto`. Can be `box` or `slider` to force a display mode.
 
 Other properties that are common to all entities such as `icon`, `unit_of_measurement`, `name` etc are also applicable.
 
-The default step value is dynamically chosen based on the range (max - min) values. If the difference between max_value and min_value is greater than 1.0, then the default step is 1.0. If however the range is smaller, then the step is iteratively divided by 10 until it becomes lower than the range.
+The default step value is dynamically chosen based on the range (max - min) values. If the difference between max_value and min_value is greater than 1.0, then the default step is 1.0. If, however, the range is smaller, then the step is iteratively divided by 10 until it becomes lower than the range.
 
 ## Methods
 
