@@ -82,7 +82,6 @@ A common way for a camera entity to render a camera still image is to pass the s
 ### WebRTC Streams
 
 WebRTC enabled cameras can be used by facilitating a direct connection with the home assistant frontend. This usage requires `SUPPORT_STREAM` with `frontend_stream_type` set to `STREAM_TYPE_WEB_RTC`. The integration should implement `async_handle_web_rtc_offer` which passes the frontend's SDP offer to the device and returns back the answer.
-device, and return back the answer. The stream is initiated from the frontend which talks directly to the device.
 
 WebRTC streams do not use the `stream` component and do not support recording.
 
