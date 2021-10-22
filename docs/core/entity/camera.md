@@ -65,7 +65,7 @@ class MyCamera(Camera):
 
 ### Stream Source
 
-The stream source should return an RTSP URL that is usable by ffmpeg. Requires `SUPPORT_STREAM`.
+The stream source should return a url that is usable by ffmpeg (e.g. an RTSP url). Requires `SUPPORT_STREAM`.
 
 A camera entity with a stream source by default use `STREAM_TYPE_HLS` to tell the frontend to use an HLS feed with the `stream` component. This stream source is also be used with `stream` for recording.
 
@@ -77,21 +77,7 @@ class MyCamera(Camera):
 
 ```
 
-A camera entity may also use the stream source to render a still camera image with `ffmpeg`.
-
-```python
-from haffmpeg.tools import IMAGE_JPEG
-from homeassistant.components.ffmpeg import async_get_image
-
-class MyCamera(Camera):
-
-    async def async_camera_image(
-        self, width: int | None = None, height: int | None = None
-    ) -> bytes | None:
-        """Return bytes of camera image."""
-        stream_url = await self.stream_source()
-        return await async_get_image(self.hass, stream_url, output_format=IMAGE_JPEG, width=width, height=height)
-```
+A common way for a camera entity to render a camera still image is to pass the stream source to `async_get_image` in the `ffmpeg` component.
 
 ### WebRTC Streams
 
