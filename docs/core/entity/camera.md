@@ -67,7 +67,7 @@ class MyCamera(Camera):
 
 The stream source should return a url that is usable by ffmpeg (e.g. an RTSP url). Requires `SUPPORT_STREAM`.
 
-A camera entity with a stream source by default use `STREAM_TYPE_HLS` to tell the frontend to use an HLS feed with the `stream` component. This stream source is also be used with `stream` for recording.
+A camera entity with a stream source by default uses `STREAM_TYPE_HLS` to tell the frontend to use an HLS feed with the `stream` component. This stream source will also be used with `stream` for recording.
 
 ```python
 class MyCamera(Camera):
@@ -81,7 +81,7 @@ A common way for a camera entity to render a camera still image is to pass the s
 
 ### WebRTC Streams
 
-WebRTC enabled cameras can be used with the home assistant frontend. Requires `SUPPORT_STREAM`. A camera entity may set `frontend_stream_type` to `STREAM_TYPE_WEB_RTC` and implement the signal path to pass the frontends SDP offer to the
+WebRTC enabled cameras can be used by facilitating a direct connection with the home assistant frontend. This usage requires `SUPPORT_STREAM` with `frontend_stream_type` set to `STREAM_TYPE_WEB_RTC`. The integration should implement `async_handle_web_rtc_offer` which passes the frontend's SDP offer to the device and returns back the answer.
 device, and return back the answer. The stream is initiated from the frontend which talks directly to the device.
 
 WebRTC streams do not use the `stream` component and do not support recording.
