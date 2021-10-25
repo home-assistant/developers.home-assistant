@@ -39,6 +39,7 @@ Properties should always only return information from memory and not do I/O (lik
 | power | On means power detected, Off means no power.
 | presence | On means home, Off means away.
 | problem | On means problem detected, Off means no problem (OK).
+| running | On means running, Off means not running.
 | safety | On means unsafe, Off means safe.
 | smoke | On means smoke detected, Off means no smoke (clear).
 | sound | On means sound detected, Off means no sound (clear).
