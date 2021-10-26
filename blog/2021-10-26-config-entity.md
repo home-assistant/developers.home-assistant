@@ -15,7 +15,7 @@ for configuration or diagnostics which is not available in Home Assistant.
 Note that the URL linked to is not proxied by Home Assistant, so this typically won't work
 when connecting to Home Assistant remotely.
 
-[![Test](/img/en/blog/2021-10-26-config-entity/configuration_url.png)](/img/en/blog/2021-10-26-config-entity/configuration_url.png)
+[![Screenshot showing visit device](/img/en/blog/2021-10-26-config-entity/configuration_url.png)](/img/en/blog/2021-10-26-config-entity/configuration_url.png)
 
 ### Entity categories 
 
@@ -32,4 +32,4 @@ Entities which have the `entity_category` set:
 - Are shown on a separate card on the device configuration page.
 - Do not show up on the automatically generated Lovelace Dashboards.
 
-[![Test](/img/en/blog/2021-10-26-config-entity/entity_categories.png)](/img/en/blog/2021-10-26-config-entity/entity_categories.png)
+[![Screenshot showing seperation of entity categories](/img/en/blog/2021-10-26-config-entity/entity_categories.png)](/img/en/blog/2021-10-26-config-entity/entity_categories.png)
