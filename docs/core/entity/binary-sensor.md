@@ -29,7 +29,7 @@ Properties should always only return information from memory and not do I/O (lik
 | gas | On means gas detected, Off means no gas (clear).
 | heat | On means hot, Off means normal.
 | light | On means light detected, Off means no light.
-| lock | On means open (unlocked), Off means closed (locked).
+| lock | On means closed (locked), Off means open (unlocked).
 | moisture | On means wet, Off means dry.
 | motion | On means motion detected, Off means no motion (clear).
 | moving | On means moving, Off means not moving (stopped).
