@@ -1322,6 +1322,7 @@ Return information about the host.
 | key              | type           | description                               |
 | ---------------- | -------------- | ----------------------------------------- |
 | agent_version    | string or null | Agent version running on the Host         |
+| apparmor_version | string or null | The AppArmor version from host            |
 | chassis          | string or null | The chassis type                          |
 | cpe              | string or null | The local CPE                             |
 | deployment       | string or null | The deployment stage of the OS if any     |
@@ -1340,6 +1341,7 @@ Return information about the host.
 ```json
 {
   "agent_version": "1.2.0",
+  "apparmor_version": "2.13.2",
   "chassis": "specific",
   "cpe": "xy",
   "deployment": "stable",
