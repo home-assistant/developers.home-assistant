@@ -15,7 +15,7 @@ For an integration to support options it needs to have an `async_get_options_flo
 @staticmethod
 @callback
 def async_get_options_flow(config_entry):
-    return OptionsFlowHandler()
+    return OptionsFlowHandler(config_entry)
 ```
 
 ## Flow handler
@@ -24,6 +24,10 @@ The Flow handler works just like the config flow handler, except that the first 
 
 ```python
 class OptionsFlowHandler(config_entries.OptionsFlow):
+    def __init__(self, config_entry):
+        """Initialize options flow."""
+        self.config_entry = config_entry
+
     async def async_step_init(self, user_input=None):
         """Manage the options."""
         if user_input is not None:
