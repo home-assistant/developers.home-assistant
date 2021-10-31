@@ -27,7 +27,7 @@ Although not currently available, we could consider offering an option to users 
 | -------------------- | ----------------------------------------------------------------------------------------------------------------------------------- |
 | area_id              | The Area which the device is placed in.  |
 | config_entries       | Config entries that are linked to this device.  |
-| configuration_url    | A URL on which the device or service can be configured. |
+| configuration_url    | A URL on which the device or service can be configured, linking to paths inside the Home Assistant UI can be done by using `homeassistant://<path>`. |
 | connections          | A set of tuples of `(connection_type, connection identifier)`. Connection types are defined in the device registry module. |
 | default_name         | Default name of this device, will be overridden if `name` is set. Useful for example for an integration showing all devices on the network. |
 | default_manufacturer | The manufacturer of the device, will be overridden if `manufacturer` is set. Useful for example for an integration showing all devices on the network. |
