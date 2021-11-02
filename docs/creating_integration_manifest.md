@@ -140,7 +140,7 @@ Certain zeroconf types are very generic (i.e., `_printer._tcp.local.`, `_axis-vi
     {"type":"_axis-video._tcp.local.","macaddress":"00408C*"},
     {"type":"_axis-video._tcp.local.","name":"example*"},
     {"type":"_airplay._tcp.local.","manufacturer":"samsung*"},
-    {"type":"_airplay._tcp.local.","manufacturer":"appletv*"},    
+    {"type":"_airplay._tcp.local.","manufacturer":"appletv*"},
    ]
 }
 ```
