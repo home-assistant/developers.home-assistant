@@ -132,7 +132,7 @@ Zeroconf is a list so you can specify multiple types to match on.
 }
 ```
 
-Certain zeroconf types are very generic (i.e., `_printer._tcp.local.`, `_axis-video._tcp.local.` or `_http._tcp.local`). In such cases you should include a Name (`name`), MAC address (`macaddress`), or Manufacturer (`manufacturer`) filter:
+Certain zeroconf types are very generic (i.e., `_printer._tcp.local.`, `_axis-video._tcp.local.` or `_http._tcp.local`). In such cases you should include a Name (`name`), MAC address (`macaddress`), Manufacturer (`manufacturer`), or Model (`model`) filter:
 
 ```json
 {
@@ -140,11 +140,12 @@ Certain zeroconf types are very generic (i.e., `_printer._tcp.local.`, `_axis-vi
     {"type":"_axis-video._tcp.local.","macaddress":"00408C*"},
     {"type":"_axis-video._tcp.local.","name":"example*"},
     {"type":"_airplay._tcp.local.","manufacturer":"samsung*"},
+    {"type":"_airplay._tcp.local.","manufacturer":"appletv*"},    
    ]
 }
 ```
 
-Note that the `name` and `manufacturer` filters should be all lowercase and the `macaddress` filter should be all uppercase.
+Note that the `name`, `manufacturer`, and `model` filters should be all lowercase and the `macaddress` filter should be all uppercase.
 
 ## SSDP
 
