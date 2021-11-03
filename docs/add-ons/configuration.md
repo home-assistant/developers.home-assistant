@@ -149,7 +149,7 @@ image: repo/{arch}-my-custom-addon
 | hassio_api | bool | no | This add-on can access the Supervisor's REST API. Use `http://supervisor`.
 | homeassistant_api | bool | no | This add-on can access to the Home Assistant REST API proxy. Use `http://supervisor/core/api`.
 | docker_api | bool | no | Allow read-only access to Docker API for add-on. Works only for not protected add-ons.
-| privileged | list | no | Privilege for access to hardware/system. Available access: `NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_TIME`, `SYS_NICE`, `SYS_RESOURCE`, `SYS_PTRACE`, `SYS_MODULE` or `DAC_READ_SEARCH`
+| privileged | list | no | Privilege for access to hardware/system. Available access: `NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_TIME`, `SYS_NICE`, `SYS_RESOURCE`, `SYS_PTRACE`, `SYS_MODULE`, `DAC_READ_SEARCH` or `IPC_LOCK`.
 | full_access | bool | no | Give full access to hardware like the privileged mode in Docker. Works only for not protected add-ons. Consider using other add-on options instead of this, like `devices`. If you enable this option, don't add `devices`, `uart`, `usb` or `gpio` this is not needed.
 | apparmor | bool/string | no | Enable or disable AppArmor support. If it is enable, you can also use custom profiles with the name of the profile.
 | map | list | no | List of maps for additional Home Assistant folders. Possible values: `config`, `ssl`, `addons`, `backup`, `share` or `media`. Defaults to `ro`, which you can change by adding `:rw` to the end of the name.
