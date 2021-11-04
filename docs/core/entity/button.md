@@ -18,7 +18,7 @@ If you want to represent something that can be turned on and off (and thus have 
 
 ## Properties
 
-As this integration is stateless, it doens't provide any specific properties for itself.
+As this integration is stateless, it doesn't provide any specific properties for itself.
 Other properties that are common to all entities such as `icon`, `name` etc are still applicable.
 
 ## Methods
