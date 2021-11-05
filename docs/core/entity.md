@@ -7,7 +7,7 @@ For a generic introduction of entities, see [entities architecture](../architect
 
 ## Basic implementation
 
-Below is an example switch entity that keeps track of their state in memory.
+Below is an example switch entity that keeps track of its state in memory.
 
 ```python
 from homeassistant.components.switch import SwitchEntity
@@ -50,7 +50,7 @@ With polling, Home Assistant will ask the entity from time to time (depending on
 
 When you subscribe to updates, your code is responsible for letting Home Assistant know that an update is available. Make sure you have the `should_poll` property return `False`.
 
-Whenever you receive new state from your subscription, you can tell Home Assistant that an update is available by calling `schedule_update_ha_state()` or async callback `async_schedule_update_ha_state()`. Pass in the boolean `True` to the method if you want Home Assistant to call your update method before writing the update to Home Assistant.
+Whenever you receive a new state from your subscription, you can tell Home Assistant that an update is available by calling `schedule_update_ha_state()` or async callback `async_schedule_update_ha_state()`. Pass in the boolean `True` to the method if you want Home Assistant to call your update method before writing the update to Home Assistant.
 
 ## Generic properties
 
