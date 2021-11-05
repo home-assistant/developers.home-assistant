@@ -1376,6 +1376,39 @@ Return information about the host.
 Get the dmesg logs from the host.
 </ApiEndpoint>
 
+<ApiEndpoint path="/host/logs/entries" method="get">
+Get systemd Journal logs from the host. Returns log entries in plain text, one
+log record per line.
+
+**HTTP Request Headers**
+| Header   | optional | description                                    |
+| -------- | -------- | ---------------------------------------------- |
+| Accept   | true     | Type of data (currently only text/plain)       |
+| Range    | true     | Range of log entries. The format is `entries=cursor[[:num_skip]:num_entries]` |
+
+
+
+:::tip
+To get the last log entries the Range request header supports negative values
+as `num_skip`. E.g. `Range: entries=:-9:10` returns the last 10 entries.
+:::
+
+**Query String**
+| key      | optional | description                                    |
+| -------- | -------- | ---------------------------------------------- |
+| boot     | true     | return logs since last boot                    |
+| follow   | True     | Continusly return new log entries              |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/host/logs/<identifier>/entries" method="get">
+
+Get systemd Journal logs from the host for entries related to a specific log
+identifier. Otherwise it provides the same functionality as
+`/host/logs/entries`.
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/host/options" method="post">
 Set host options
 
