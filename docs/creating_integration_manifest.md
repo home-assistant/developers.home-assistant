@@ -9,14 +9,15 @@ Every integration has a manifest file to specify basic information about an inte
 {
   "domain": "hue",
   "name": "Philips Hue",
-  "documentation": "https://www.home-assistant.io/components/hue",
+  "documentation": "https://www.home-assistant.io/integrations/hue",
   "issue_tracker": "https://github.com/balloob/hue/issues",
   "dependencies": ["mqtt"],
   "after_dependencies": ["http"],
   "codeowners": ["@balloob"],
   "requirements": ["aiohue==1.9.1"],
   "quality_scale": "platinum",
-  "iot_class": "local_polling"
+  "iot_class": "local_polling",
+  "config_flow": true
 }
 ```
 
@@ -30,7 +31,8 @@ Or a minimal example that you can copy into your project:
   "dependencies": [],
   "codeowners": [],
   "requirements": [],
-  "iot_class": "cloud_polling"
+  "iot_class": "cloud_polling",
+  "config_flow": true
 }
 ```
 
@@ -75,7 +77,7 @@ GitHub usernames or team names of people that are responsible for this integrati
 
 ## Config Flow
 
-Specify the `config_flow` key if your integration has a config flow to create a config entry. When specified, the file `config_flow.py` needs to exist in your integration.
+Specify the `config_flow` key to create a config entry:
 
 ```json
 {
