@@ -37,4 +37,7 @@ class MyButton(ButtonEntity):
 
     def press(self) -> None:
         """Handle the button press."""
+
+    async def async_press(self) -> None:
+        """Handle the button press."""
 ```
