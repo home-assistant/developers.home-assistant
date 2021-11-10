@@ -46,7 +46,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | pm10 | µg/m³ | Concentration of particulate matter less than 10 micrometers |
 | power | W, kW | Power, statistics will be stored in W.
 | power_factor | % | Power Factor
-| pressure | bar, hPa, inHg, kPa, mbar, Pa, psi | Pressure, statistics will be stored in Pa.
+| pressure | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Pressure, statistics will be stored in Pa.
 | signal_strength | dB, dBm | Signal strength
 | sulphur_dioxide | µg/m³ | Concentration of sulphure dioxide |
 | temperature | °C, °F | Temperature, statistics will be stored in °C.
