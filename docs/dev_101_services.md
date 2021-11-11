@@ -31,11 +31,25 @@ def setup(hass, config):
     return True
 ```
 
-Load the integration by adding the following to your `configuration.yaml`. When your component is loaded, a new service should be available to call.
+To load the integration in Home Assistant is necessary to create a `manifest.json` and to add an entry in your `configuration.yaml`. When your component is loaded, a new service should be available to call.
 
 ```yaml
 # configuration.yaml entry
 hello_service:
+```
+
+An example of `manifest.json`
+```json
+{
+    "domain": "hello_service",
+    "name": "Hello Service",
+    "documentation": "https://developers.home-assistant.io/docs/dev_101_services",
+    "dependencies": [],
+    "codeowners": [],
+    "requirements": [],
+    "iot_class": "local_polling",
+    "version": "0.1.0"
+}
 ```
 
 Open the frontend and in the sidebar, click the first icon in the developer tool section. This will open the Call Service developer tool. On the right, find your service and click on it. This will automatically fill in the correct values.
