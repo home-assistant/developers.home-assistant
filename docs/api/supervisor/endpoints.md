@@ -2279,21 +2279,18 @@ Returns information about available updates
   "available_updates": [
   {
       "panel_path": "/update-available/core",
-      "update_path": "/core/update",
       "update_type": "core",
       "version": "123",
       "version_latest": "321",
     },
     {
       "panel_path": "/update-available/os",
-      "update_path": "/os/update",
       "update_type": "os",
       "version": "123",
       "version_latest": "321",
     }
     {
       "panel_path": "/update-available/supervisor",
-      "update_path": "/supervisor/update",
       "update_type": "supervisor",
       "version": "123",
       "version_latest": "321",
@@ -2302,7 +2299,6 @@ Returns information about available updates
       "name": "Awesome addon",
       "icon": "/addons/awesome_addon/icon",
       "panel_path": "/update-available/awesome_addon",
-      "update_path": "/addons/awesome_addon/update",
       "update_type": "addon",
       "version": "123",
       "version_latest": "321",
@@ -2321,7 +2317,7 @@ icon | string | Returns the path for the icon if any (only if the `update_type` 
 version | string | Returns the current installed version
 version_latest | string | Returns the available version
 panel_path | string | Returns path where the UI can be loaded
-update_path | string | Returns path where that can be called to trigger an update
+
 
 </ApiEndpoint>
 
