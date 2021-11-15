@@ -33,6 +33,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | current | A | Current
 | date | | Date, must be formatted according to [ISO8601](https://en.wikipedia.org/wiki/ISO_8601).
 | energy | Wh, kWh, MWh | Energy, statistics will be stored in kWh.
+| frequency | Hz, kHz, MHz, GHz | Frequency
 | gas | m³, ft³ | Volume of gas, statistics will be stored in m³. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
 | humidity | % | Relative humidity
 | illuminance | lx, lm | Light level
