@@ -2288,13 +2288,13 @@ Returns information about available updates
       "update_type": "os",
       "version": "123",
       "version_latest": "321",
-    }
+    },
     {
       "panel_path": "/update-available/supervisor",
       "update_type": "supervisor",
       "version": "123",
       "version_latest": "321",
-    }
+    },
     {
       "name": "Awesome addon",
       "icon": "/addons/awesome_addon/icon",
