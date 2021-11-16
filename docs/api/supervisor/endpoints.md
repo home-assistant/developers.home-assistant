@@ -2280,19 +2280,16 @@ Returns information about available updates
   {
       "panel_path": "/update-available/core",
       "update_type": "core",
-      "version": "123",
       "version_latest": "321",
     },
     {
       "panel_path": "/update-available/os",
       "update_type": "os",
-      "version": "123",
       "version_latest": "321",
     }
     {
       "panel_path": "/update-available/supervisor",
       "update_type": "supervisor",
-      "version": "123",
       "version_latest": "321",
     }
     {
@@ -2300,7 +2297,6 @@ Returns information about available updates
       "icon": "/addons/awesome_addon/icon",
       "panel_path": "/update-available/awesome_addon",
       "update_type": "addon",
-      "version": "123",
       "version_latest": "321",
     }
   ]
@@ -2314,7 +2310,6 @@ Returns information about available updates
 update_type | string | `addon`, `os`, `core` or `supervisor`
 name | string | Returns the name (only if the `update_type` is `addon`)
 icon | string | Returns the path for the icon if any (only if the `update_type` is `addon`)
-version | string | Returns the current installed version
 version_latest | string | Returns the available version
 panel_path | string | Returns path where the UI can be loaded
 
