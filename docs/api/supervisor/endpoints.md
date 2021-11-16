@@ -2286,12 +2286,12 @@ Returns information about available updates
       "panel_path": "/update-available/os",
       "update_type": "os",
       "version_latest": "321",
-    }
+    },
     {
       "panel_path": "/update-available/supervisor",
       "update_type": "supervisor",
       "version_latest": "321",
-    }
+    },
     {
       "name": "Awesome addon",
       "icon": "/addons/awesome_addon/icon",
