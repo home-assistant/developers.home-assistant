@@ -125,8 +125,8 @@ class MySwitch(SwitchEntity):
 ```python
 class MySwitch(SwitchEntity):
 
-    def __init(self, icon: str) -> None:
-        _attr_icon = icon
+    def __init__(self, icon: str) -> None:
+        self._attr_icon = icon
 
     ...
 ```
