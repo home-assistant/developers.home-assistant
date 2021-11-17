@@ -269,6 +269,9 @@ args:
 | squash | no | Default `False`. Be careful with this option, as you can not use the image for caching stuff after that!
 | args | no | Allow to set additional Docker build arguments as a dictionary.
 | labels | no | Allow to set additional Docker labels as a dictionary.
+| codenotary | no | Allows to enable container signature with codenotary CAS.
+| codenotary.signer | no | Owner signer E-Mail address for this image.
+| codenotary.base_image | no | Verify the base container image. If you use our official images, use `notary@home-assistant.io`
 
 We provide a set of [base images][docker-base] which should cover a lot of needs. If you don't want use the Alpine based version or need a specific image tag, feel free to pin this requirements for you build with `build_from` option.
 
