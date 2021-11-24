@@ -20,8 +20,7 @@ Properties should always only return information from memory and not do I/O (lik
 | brand | str | None | The brand (manufacturer) of the camera.
 | model | str | None | The model of the camera.
 | frame_interval | float | 0.5 | The interval between frames of the stream.
-| frontend_stream_type | str | None | Used with `SUPPORT_STREAM` to tell the frontend which type of stream to use
-(`STREAM_TYPE_HLS` or `STREAM_TYPE_WEBRTC`)
+| frontend_stream_type | str | None | Used with `SUPPORT_STREAM` to tell the frontend which type of stream to use (`STREAM_TYPE_HLS` or `STREAM_TYPE_WEBRTC`)
 
 ### Supported features
 
