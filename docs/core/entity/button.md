@@ -42,7 +42,7 @@ class MyButton(ButtonEntity):
 
 ### Available device classes
 
-Optional specifies what type of entity this. It will possibly map to Google device types.
+Optionally specifies what type of entity it is. It will possibly map to Google device types.
 
 | Value | Description
 | ----- | -----------
