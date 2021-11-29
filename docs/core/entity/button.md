@@ -47,4 +47,4 @@ Optional specifies what type of entity this. It will possibly map to Google devi
 | Value | Description
 | ----- | -----------
 | restart | The button entity restarts the device.
-| updates | The button entity updates the software of the device.
+| update | The button entity updates the software of the device.
