@@ -970,8 +970,8 @@ Passing `image`, `refresh_token`, `audio_input` or `audio_output` with `null` re
 | boot           | boolean        | Start Core on boot                  |
 | image          | string or null | Name of custom image                |
 | port           | int            | The port that Home Assistant run on |
-| ssl            | boolean        | `true` if SSL is enabled            |
-| watchdog       | boolean        | `true` if watchdog is enabled       |
+| ssl            | boolean        | `true` to enable SSL                |
+| watchdog       | boolean        | `true` to enable the watchdog       |
 | wait_boot      | int            | Time to wait for Core to startup    |
 | refresh_token  | string or null | Token to authenticate with Core     |
 | audio_input    | string or null | Profile name for audio input        |
