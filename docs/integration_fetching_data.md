@@ -149,6 +149,10 @@ from datetime import timedelta
 SCAN_INTERVAL = timedelta(seconds=5)
 ```
 
+:::info
+Since 2021.6 polling can be controlled for every integration, see [here](https://www.home-assistant.io/blog/2021/06/02/release-20216/#disable-polling-updates-on-any-integration). The recommended way for users to change the interval since then is to **disable polling** for the integration and use [`homeassistant.update_entity`](https://www.home-assistant.io/integrations/homeassistant/#service-homeassistantupdate_entity) service with automations. Therefore you should **not** add `SCAN_INTERVAL` to the options of your integration, a newly submitted integration will not be accepted if it does.
+:::
+
 ## Request Parallelism
 
 :::info
