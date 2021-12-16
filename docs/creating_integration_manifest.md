@@ -144,7 +144,7 @@ Certain zeroconf types are very generic (i.e., `_printer._tcp.local.`, `_axis-vi
 }
 ```
 
-Note that all values in the `properties` filters must be lowercase, and may contain an fnmatch type wildcard.
+Note that all values in the `properties` filters must be lowercase, and may contain a fnmatch type wildcard.
 
 ## SSDP
 
