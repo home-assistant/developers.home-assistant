@@ -40,6 +40,7 @@ Although not currently available, we could consider offering an option to users 
 | model                | The model of the device. |
 | suggested_area       | The suggested name for the area where the device is located. |
 | sw_version           | The firmware version of the device.   |
+| hw_version           | The hardware version of the device.   |
 | via_device           | Identifier of a device that routes messages between this device and Home Assistant. Examples of such devices are hubs, or parent devices of a sub-device. This is used to show device topology in Home Assistant. |
 
 ## Defining devices
@@ -89,5 +90,6 @@ device_registry.async_get_or_create(
     name=config.name,
     model=config.modelid,
     sw_version=config.swversion,
+    hw_version=config.hwversion,
 )
 ```
