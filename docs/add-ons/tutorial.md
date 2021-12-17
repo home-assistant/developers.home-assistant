@@ -77,12 +77,11 @@ Make sure your editor is using UNIX-like line breaks (LF), not Dos/Windows (CRLF
 Now comes the fun part, time to open the Home Assistant UI and install and run your add-on.
 
 - Open the Home Assistant frontend
-- Go to the Supervisor panel
-- Click the add-on store tab.
+- Go to "Configuration"
+- Click on "Add-ons, backups & Supervisor"
+- Click "add-on store" in the bottom right corner.
 
-[![Open your Home Assistant instance and show the Supervisor add-on store.](https://my.home-assistant.io/badges/supervisor_addon_store.svg)](https://my.home-assistant.io/redirect/supervisor_addon_store/)
-
-![Screenshot of the Home Assistant Supervisor main panel](/img/en/hass.io/screenshots/main_panel_addon_store.png)
+[![Open your Home Assistant instance and show the Supervisor add-on store.](https://my.home-assistant.io/badges/supervisor_store.svg)](https://my.home-assistant.io/redirect/supervisor_store/)
 
 - On the top right overflow menu, click the "Reload" button
 - You should now see a new section at the top of the store called "Local add-ons" that lists your add-on!
