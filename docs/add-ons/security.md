@@ -12,11 +12,11 @@ For access to Supervisor API you need to define a role or you run in default mod
 
 | Role | Description |
 |------|-------------|
-| default | Have access to all `info` calls |
-| homeassistant | Can access all Home Assistant API endpoints |
-| backup | Can access all backup API endpoints |
-| manager | Is for Add-ons that run CLIs and need extended rights |
-| admin | Have access to every API call. That is the only one they can disable/enable the Add-on protection mode |
+| `default` | Have access to all `info` calls |
+| `homeassistant` | Can access all Home Assistant API endpoints |
+| `backup` | Can access all backup API endpoints |
+| `manager` | Is for Add-ons that run CLIs and need extended rights |
+| `admin` | Have access to every API call. That is the only one they can disable/enable the Add-on protection mode |
 
 ## Protection
 
