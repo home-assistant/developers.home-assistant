@@ -4,14 +4,14 @@ authorURL: https://github.com/emontnemery
 title: "New sensor state class: total"
 ---
 
+Note: This post was edited 2021-10-21 to remove references to total accumulated increases
+and decreases which were removed and never included in the Home Assistant 2021.10 release.
+
 A new state class, `total` has been added and the `last_reset` attribute has been
 added back to `SensorEntity` and is no longer deprecated. The driver for the change
 is to support cases where `total_increasing`, which was introduced in Home Assistant
 2021.9, is too restrictive to cover all cases. Note that setting `last_reset` for sensors
 with state class `measurement` is still deprecated.
-
-In addition, the total accumulated increases and decreases are updated together with the
-total accumulated increase and decrease.
 
 ### State classes
 
@@ -37,33 +37,33 @@ zero-point when calculating `sum` statistics.
 
 Example of state class `total` without last_reset:
 
-| t                      | state  | sum    | sum_increase | sum_decrease |
-| :--------------------- | -----: | -----: | -----------: | -----------: |
-|   2021-08-01T13:00:00  |  1000  |     0  |           0  |           0  |
-|   2021-08-01T14:00:00  |  1010  |    10  |          10  |           0  |
-|   2021-08-01T15:00:00  |     0  | -1000  |          10  |        1010  |
-|   2021-08-01T16:00:00  |     5  |  -995  |          15  |        1010  |
+| t                      | state  | sum    |
+| :--------------------- | -----: | -----: |
+|   2021-08-01T13:00:00  |  1000  |     0  |
+|   2021-08-01T14:00:00  |  1010  |    10  |
+|   2021-08-01T15:00:00  |     0  | -1000  |
+|   2021-08-01T16:00:00  |     5  |  -995  |
 
 Example of state class `total` with last_reset:
 
-| t                      | state  | last_reset          | sum    | sum_increase | sum_decrease |
-| :--------------------- | -----: | ------------------- | -----: | -----------: | -----------: |
-|   2021-08-01T13:00:00  |  1000  | 2021-08-01T13:00:00 |     0  |           0  |           0  |
-|   2021-08-01T14:00:00  |  1010  | 2021-08-01T13:00:00 |    10  |          10  |           0  |
-|   2021-08-01T15:00:00  |  1005  | 2021-08-01T13:00:00 |     5  |          10  |           5  |
-|   2021-08-01T16:00:00  |     0  | 2021-09-01T16:00:00 |     5  |          10  |           5  |
-|   2021-08-01T17:00:00  |     5  | 2021-09-01T16:00:00 |    10  |          15  |           5  |
+| t                      | state  | last_reset          | sum    |
+| :--------------------- | -----: | ------------------- | -----: |
+|   2021-08-01T13:00:00  |  1000  | 2021-08-01T13:00:00 |     0  |
+|   2021-08-01T14:00:00  |  1010  | 2021-08-01T13:00:00 |    10  |
+|   2021-08-01T15:00:00  |  1005  | 2021-08-01T13:00:00 |     5  |
+|   2021-08-01T16:00:00  |     0  | 2021-09-01T16:00:00 |     5  |
+|   2021-08-01T17:00:00  |     5  | 2021-09-01T16:00:00 |    10  |
 
 Example of state class `total` where the there initial state at the beginning
 of the new meter cycle is not 0, but 0 is used as zero-point:
 
-| t                      | state  | last_reset          | sum    | sum_increase | sum_decrease |
-| :--------------------- | -----: | ------------------- | -----: | -----------: | -----------: |
-|   2021-08-01T13:00:00  |  1000  | 2021-08-01T13:00:00 |     0  |           0  |           0  |
-|   2021-08-01T14:00:00  |  1010  | 2021-08-01T13:00:00 |    10  |          10  |           0  |
-|   2021-08-01T15:00:00  |  1005  | 2021-08-01T13:00:00 |     5  |          10  |           5  |
-|   2021-08-01T16:00:00  |     5  | 2021-09-01T16:00:00 |    10  |          15  |           5  |
-|   2021-08-01T17:00:00  |    10  | 2021-09-01T16:00:00 |    15  |          20  |           5  |
+| t                      | state  | last_reset          | sum    |
+| :--------------------- | -----: | ------------------- | -----: |
+|   2021-08-01T13:00:00  |  1000  | 2021-08-01T13:00:00 |     0  |
+|   2021-08-01T14:00:00  |  1010  | 2021-08-01T13:00:00 |    10  |
+|   2021-08-01T15:00:00  |  1005  | 2021-08-01T13:00:00 |     5  |
+|   2021-08-01T16:00:00  |     5  | 2021-09-01T16:00:00 |    10  |
+|   2021-08-01T17:00:00  |    10  | 2021-09-01T16:00:00 |    15  |
 
 
 #### State class `total_increasing`
@@ -80,19 +80,19 @@ Please refer to the tables below for how this affects the statistics.
 
 Example of state class `total_increasing` with a new meter cycle:
 
-| t                      | state  | sum  | sum_increase | sum_decrease |
-| :--------------------- | -----: | ---: | -----------: | -----------: |
-|   2021-08-01T13:00:00  |  1000  |   0  |           0  |           0  |
-|   2021-08-01T14:00:00  |  1010  |  10  |          10  |           0  |
-|   2021-08-01T15:00:00  |     0  |  10  |          10  |           0  |
-|   2021-08-01T16:00:00  |     5  |  15  |          15  |           0  |
+| t                      | state  | sum  |
+| :--------------------- | -----: | ---: |
+|   2021-08-01T13:00:00  |  1000  |   0  |
+|   2021-08-01T14:00:00  |  1010  |  10  |
+|   2021-08-01T15:00:00  |     0  |  10  |
+|   2021-08-01T16:00:00  |     5  |  15  |
 
 Example of state class `total_increasing` where the there initial state at the beginning
 of the new meter cycle is not 0, but 0 is used as zero-point:
 
-| t                      | state  | sum  | sum_increase | sum_decrease |
-| :--------------------- | -----: | ---: | -----------: | -----------: |
-|   2021-08-01T13:00:00  |  1000  |   0  |           0  |           0  |
-|   2021-08-01T14:00:00  |  1010  |  10  |          10  |           0  |
-|   2021-08-01T15:00:00  |     5  |  15  |          15  |           0  |
-|   2021-08-01T16:00:00  |    10  |  20  |          20  |           0  |
+| t                      | state  | sum  |
+| :--------------------- | -----: | ---: |
+|   2021-08-01T13:00:00  |  1000  |   0  |
+|   2021-08-01T14:00:00  |  1010  |  10  |
+|   2021-08-01T15:00:00  |     5  |  15  |
+|   2021-08-01T16:00:00  |    10  |  20  |

@@ -212,10 +212,9 @@ async def async_migrate_entry(hass, config_entry: ConfigEntry):
 
         new = {**config_entry.data}
         # TODO: modify Config Entry data
-        
-        config_entry.data = {**new}
 
         config_entry.version = 2
+        hass.config_entries.async_update_entry(config_entry, data=new)
 
     _LOGGER.info("Migration to version %s successful", config_entry.version)
 

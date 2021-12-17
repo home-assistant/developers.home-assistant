@@ -7,7 +7,7 @@ For a generic introduction of entities, see [entities architecture](../architect
 
 ## Basic implementation
 
-Below is an example switch entity that keeps track of their state in memory.
+Below is an example switch entity that keeps track of its state in memory.
 
 ```python
 from homeassistant.components.switch import SwitchEntity
@@ -50,7 +50,7 @@ With polling, Home Assistant will ask the entity from time to time (depending on
 
 When you subscribe to updates, your code is responsible for letting Home Assistant know that an update is available. Make sure you have the `should_poll` property return `False`.
 
-Whenever you receive new state from your subscription, you can tell Home Assistant that an update is available by calling `schedule_update_ha_state()` or async callback `async_schedule_update_ha_state()`. Pass in the boolean `True` to the method if you want Home Assistant to call your update method before writing the update to Home Assistant.
+Whenever you receive a new state from your subscription, you can tell Home Assistant that an update is available by calling `schedule_update_ha_state()` or async callback `async_schedule_update_ha_state()`. Pass in the boolean `True` to the method if you want Home Assistant to call your update method before writing the update to Home Assistant.
 
 ## Generic properties
 
@@ -66,7 +66,7 @@ Properties should always only return information from memory and not do I/O (lik
 | attribution             | string  | `None`  | The branding text required by the API provider. |
 | available               | boolean | `True`  | Indicate if Home Assistant is able to read the state and control the underlying device. |
 | device_class            | string  | `None`  | Extra classification of what the device is. Each domain specifies their own. Device classes can come with extra requirements for unit of measurement and supported features. |
-| entity_category         | string  | `None`  | Classification of a non-primary entity. Set to `config` for an entity which allows changing the configuration of a device, for example a switch entity making it possible to turn the background illumination of a switch on and off. Set to `diagnostic` for an entity exposing some configuration parameter or diagnostics of a device but does not allow changing it, for example a sensor showing RSSI or MAC-address. |
+| entity_category         | string  | `None`  | Classification of a non-primary entity. Set to `config` for an entity which allows changing the configuration of a device, for example a switch entity making it possible to turn the background illumination of a switch on and off. Set to `diagnostic` for an entity exposing some configuration parameter or diagnostics of a device but does not allow changing it, for example a sensor showing RSSI or MAC-address. Set to `system` for an entity which is not useful for the user to interact with. As an example the auto generated energy cost sensors are not useful on their own because they reset from 0 every time home assistant is restarted or the energy settings are changed and thus have their entity category set to `system`. |
 | entity_picture          | URL     | `None`  | Url of a picture to show for the entity. |
 | extra_state_attributes  | dict    | `None`  | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version. |
 | name                    | string  | `None`  | Name of the entity  |
@@ -125,8 +125,8 @@ class MySwitch(SwitchEntity):
 ```python
 class MySwitch(SwitchEntity):
 
-    def __init(self, icon: str) -> None:
-        _attr_icon = icon
+    def __init__(self, icon: str) -> None:
+        self._attr_icon = icon
 
     ...
 ```

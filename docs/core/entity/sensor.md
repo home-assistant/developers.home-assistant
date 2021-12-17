@@ -15,7 +15,7 @@ Properties should always only return information from memory and not do I/O (lik
 | ---- | ---- | ------- | -----------
 | device_class | string | `None` | Type of sensor.
 | last_reset | `datetime.datetime` | `None` | The time when an accumulating sensor such as an electricity usage meter, gas meter, water meter etc. was initialized. If the time of initialization is unknown, set it to `None`. Note that the `datetime.datetime` returned by the `last_reset` property will be converted to an ISO 8601-formatted string when the entity's state attributes are updated. When changing `last_reset`, the `state` must be a valid number.
-| native_value | string | **Required** | The value of the sensor in the sensor's `native_unit_of_measurement`.
+| native_value | `None`, `datetime.date`, `datetime.datetime`, float, int, string | **Required** | The value of the sensor in the sensor's `native_unit_of_measurement`. Using a `device_class` may restrict the types that can be returned by this property.
 | native_unit_of_measurement | string | `None` | The unit of measurement that the sensor's value is expressed in. If the `native_unit_of_measurement` is °C or °F, and its `device_class` is temperature, the sensor's `unit_of_measurement` will be the preferred temperature unit configured by the user and the sensor's `state` will be the `native_value` after an optional unit conversion.
 | state_class | string | `None` | Type of state.
 
@@ -31,12 +31,13 @@ If specifying a device class, your sensor entity will need to also return the co
 | carbon_dioxide | ppm | Concentration of carbon dioxide.
 | carbon_monoxide | ppm | Concentration of carbon monoxide.
 | current | A | Current
-| date | | Date, must be formatted according to [ISO8601](https://en.wikipedia.org/wiki/ISO_8601).
-| energy | Wh, kWh | Energy, statistics will be stored in kWh.
+| date | | Date. Requires `native_value` to be a Python `datetime.date` object, or `None`.
+| energy | Wh, kWh, MWh | Energy, statistics will be stored in kWh.
+| frequency | Hz, kHz, MHz, GHz | Frequency
 | gas | m³, ft³ | Volume of gas, statistics will be stored in m³. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
 | humidity | % | Relative humidity
 | illuminance | lx, lm | Light level
-| monetary | [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Unofficial_codes_for_cryptocurrencies) | Monetary value with a currency.
+| monetary | [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) | Monetary value with a currency.
 | nitrogen_dioxide | µg/m³ | Concentration of nitrogen dioxide |
 | nitrogen_monoxide | µg/m³ | Concentration of nitrogen monoxide |
 | nitrous_oxide | µg/m³ | Concentration of nitrous oxide |
@@ -46,11 +47,11 @@ If specifying a device class, your sensor entity will need to also return the co
 | pm10 | µg/m³ | Concentration of particulate matter less than 10 micrometers |
 | power | W, kW | Power, statistics will be stored in W.
 | power_factor | % | Power Factor
-| pressure | bar, hPa, inHg, mbar, Pa, psi | Pressure, statistics will be stored in Pa.
+| pressure | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Pressure, statistics will be stored in Pa.
 | signal_strength | dB, dBm | Signal strength
 | sulphur_dioxide | µg/m³ | Concentration of sulphure dioxide |
 | temperature | °C, °F | Temperature, statistics will be stored in °C.
-| timestamp | | Timestamp, must be formatted according to [ISO8601](https://en.wikipedia.org/wiki/ISO_8601).
+| timestamp | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
 | volatile_organic_compounds | µg/m³ | Concentration of volatile organic compounds
 | voltage | V | Voltage
 
