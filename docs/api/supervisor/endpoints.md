@@ -1026,7 +1026,7 @@ Update Home Assistant core
 | key     | type   | description                                                    |
 | ------- | ------ | -------------------------------------------------------------- |
 | version | string | The version you want to install, default is the latest version |
-| backup | boolean | Optionally create a partial backup of core and core configuration before updating |
+| backup | boolean | Create a partial backup of core and core configuration before updating, default is false |
 
 </ApiEndpoint>
 
@@ -2189,7 +2189,7 @@ Update an add-on from the store.
 
 | key     | type   | description                                                    |
 | ------- | ------ | -------------------------------------------------------------- |
-| backup | boolean | Optionally create a partial backup of the add-on |
+| backup | boolean | Create a partial backup of the add-on, default is false |
 
 </ApiEndpoint>
 
