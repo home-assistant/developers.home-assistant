@@ -2189,7 +2189,7 @@ Update an add-on from the store.
 
 | key     | type   | description                                                    |
 | ------- | ------ | -------------------------------------------------------------- |
-| backup | boolean | Create a partial backup of the add-on |
+| backup | boolean | Optionally create a partial backup of the add-on |
 
 </ApiEndpoint>
 
