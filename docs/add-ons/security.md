@@ -6,17 +6,17 @@ Home Assistant rates every add-on based on the wanted rights. An add-on with a r
 
 ## API Role
 
-For access to Supervisor API you need define a role or you run in default mode. This is only required for Supervisor API not Home Assistant proxy. Any of the roles already have access to the default API calls, and do not require any additional settings.
+For access to Supervisor API you need to define a role or you run in default mode. This is only required for Supervisor API not Home Assistant proxy. Any of the roles already have access to the default API calls, and do not require any additional settings.
 
 ### Available Roles
 
 | Role | Description |
 |------|-------------|
-| default | Have access to all `info` calls |
-| homeassistant | Can access all Home Assistant API endpoints |
-| backup | Can access all backup API endpoints |
-| manager | Is for Add-ons that run CLIs and need extended rights |
-| admin | Have access to every API call. That is the only one they can disable/enable the Add-on protection mode |
+| `default` | Have access to all `info` calls |
+| `homeassistant` | Can access all Home Assistant API endpoints |
+| `backup` | Can access all backup API endpoints |
+| `manager` | Is for Add-ons that run CLIs and need extended rights |
+| `admin` | Have access to every API call. That is the only one they can disable/enable the Add-on protection mode |
 
 ## Protection
 

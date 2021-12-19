@@ -21,7 +21,7 @@ Broadly speaking documentation should be written following Microsoft's house sty
 
 - The **Configuration Variables** section must use the `{% configuration %}` tag.
 - The **Configuration Variables** section is only used for YAML configuration.
-- For describing **UI Variables** the `{% configuration_base %}` section can be used.
+- For describing **UI Variables** the `{% configuration_basic %}` section can be used.
 - Configuration variables must document the requirement status (`false` or `true`).
 - Configuration variables must document the default value, if any.
 - Configuration variables must document the accepted value types (see [Configuration variables details](documenting/create-page.md#configuration)).
