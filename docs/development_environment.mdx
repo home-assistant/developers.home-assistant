@@ -93,6 +93,11 @@ brew install python3 autoconf ffmpeg
 
 If you encounter build issues with `cryptography` when running the `script/setup` script below, check the cryptography documentation for [installation instructions](https://cryptography.io/en/latest/installation/#building-cryptography-on-macos).
 
+If you're having issues building `cryptography` try running:
+```shell
+env LDFLAGS="-L$(brew --prefix openssl@1.1)/lib" CFLAGS="-I$(brew --prefix openssl@1.1)/include" script/setup
+```
+
 ## Setup Local Repository
 
 Visit the [Home Assistant Core repository](https://github.com/home-assistant/core) and click **Fork**.
