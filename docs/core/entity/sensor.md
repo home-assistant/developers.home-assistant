@@ -103,6 +103,10 @@ zero-point. When `last_reset` changes, the zero-point will be set to 0.
 If last_reset is not set, the sensor's value when it was first added is used as the
 zero-point when calculating `sum` statistics.
 
+To put it in another way: the logic when updating the statistics is to update
+the sum column with the difference between the current state and the previous state
+unless `last_reset` has been changed, in which case don't add anything.
+
 Example of state class `total` without last_reset:
 
 | t                      | state  | sum    | sum_increase | sum_decrease |
@@ -144,6 +148,10 @@ some tolerance, a decrease between state changes of < 10% will not trigger a new
 cycle. This state class is useful for gas meters, electricity meters, water meters etc.
 The value when the sensor reading decreases will not be used as zero-point when calculating
 `sum` statistics, instead the zero-point will be set to 0.
+
+To put it in another way: the logic when updating the statistics is to update
+the sum column with the difference between the current state and the previous state
+unless the difference is negative, in which case don't add anything.
 
 Example of state class `total_increasing`:
 
