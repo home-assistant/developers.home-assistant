@@ -27,7 +27,7 @@ def setup(hass, config):
 
     hass.services.register(DOMAIN, "hello", handle_hello)
 
-    # Return boolean to indicate that initialization was successfully.
+    # Return boolean to indicate that initialization was successful.
     return True
 ```
 
