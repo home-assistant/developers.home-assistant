@@ -19,7 +19,7 @@ Properties should always only return information from memory and not do I/O (lik
 | current_cover_tilt_position | int | None | The current tilt position of the cover where 0 means closed/no tilt and 100 means open/maximum tilt.  Required with `SUPPORT_SET_TILT_POSITION`
 | is_opening | bool | None | If the cover is opening or not. Used to determine `state`.
 | is_closing | bool | None | If the cover is closing or not. Used to determine `state`.
-| is_closed | bool | `NotImplementedError()` | If the cover is closed or not.  if the state is unknown, return `None`. Used to determine `state`.
+| is_closed | bool | None | If the cover is closed or not. If the state is unknown, return `None`. Used to determine `state`.
 
 ### Entity Properties (base class properties which may be overridden)
 
