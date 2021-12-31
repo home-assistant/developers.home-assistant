@@ -104,7 +104,7 @@ async def handle_offer(stream_source: str, offer_sdp: str) -> str:
     except ClientError as err:
         raise HomeAssistantError from err
 
-# Call unsub when integration unloads
+# Call unsub() when integration unloads
 unsub = camera.async_register_rtsp_to_web_rtc_provider(
     hass, DOMAIN, handle_offer
 )
