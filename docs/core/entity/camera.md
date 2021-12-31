@@ -91,6 +91,10 @@ class MyCamera(Camera):
         """Handle the WebRTC offer and return an answer."""
 ```
 
+### RTSP to WebRTC
+
+An integration may provide a WebRTC stream for any RTSP camera using `async_register_rtsp_to_web_rtc_provider`. The current best practice is for an integration to provide the actual stream manipulation with an Add-on or external service.
+
 ### Turn on
 
 ```python
