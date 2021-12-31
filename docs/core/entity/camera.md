@@ -95,6 +95,21 @@ class MyCamera(Camera):
 
 An integration may provide a WebRTC stream for any RTSP camera using `async_register_rtsp_to_web_rtc_provider`. The current best practice is for an integration to provide the actual stream manipulation with an Add-on or external service.
 
+
+```python
+async def handle_offer(stream_source: str, offer_sdp: str) -> str:
+    """Handle the signal path for a WebRTC stream and return an answer"""
+    try:
+        return await client.offer(offer_sdp, stream_source)
+    except ClientError as err:
+        raise HomeAssistantError from err
+
+# Call unsub when integration unloads
+unsub = camera.async_register_rtsp_to_web_rtc_provider(
+    hass, DOMAIN, handle_offer
+)
+```
+
 ### Turn on
 
 ```python
