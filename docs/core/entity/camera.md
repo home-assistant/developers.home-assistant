@@ -98,7 +98,7 @@ An integration may provide a WebRTC stream for any RTSP camera using `async_regi
 
 ```python
 async def handle_offer(stream_source: str, offer_sdp: str) -> str:
-    """Handle the signal path for a WebRTC stream and return an answer"""
+    """Handle the signal path for a WebRTC stream and return an answer."""
     try:
         return await client.offer(offer_sdp, stream_source)
     except ClientError as err:
