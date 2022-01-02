@@ -2,9 +2,48 @@
 title: "Push Notifications"
 ---
 
-The `mobile_app` component has a notify platform built in that allows for a generic way to send push notifications to your users without requiring installation of an external custom component.
+The `mobile_app` component has a notify platform built in that allows for a generic way to send push notifications to your users without requiring installation of an external custom component. Push notifications can either be delivered via a websocket connection or via a cloud service.
 
-## Enabling push notifications
+## Enabling websocket push notifications
+
+Your app can connect via the WebSocket API to Home Assistant to subscribe push notifications. To enable this your app needs to either subscribe to cloud push notifications or add the `push_websocket_channel: true` to the `app_data` object in your registration.
+
+To create a websocket channel create a push notification subscription:
+
+```json
+{
+  "id": 2,
+  "type": "mobile_app/push_notification_channel",
+  "webhook_id": "abcdefghkj",
+  "support_confirm": true // optional
+}
+```
+
+All push notifications will be delivered as an event over the websocket connection:
+
+```json
+{
+  "id": 2,
+  "type": "event",
+  "event": {"message": "Hello world"},
+  "hass_confirm_id": "12345" // if confirm = true
+}
+```
+
+If confirmation is enabled, you have to send a websocket command to confirm:
+
+```json
+{
+  "id": 3,
+  "type": "mobile_app/push_notification_confirm",
+  "webhook_id": "abcdefghkj",
+  "confirm_id": "12345"
+}
+```
+
+If a registration supports cloud push notifications and is connected to receive local push notifications, notifications will be delivered locally first and fallback to cloud if the application doesn't confirm the notification.
+
+## Enabling cloud push notifications
 
 To enable the notify platform for your application, you must set two keys in the `app_data` object during the initial registration or later update of an existing registration.
 
@@ -15,7 +54,7 @@ To enable the notify platform for your application, you must set two keys in the
 
 You should advise the user to restart Home Assistant after you set these keys in order for them to see the notify target. It will have the format `notify.mobile_app_<saved_device_name>`.
 
-## Deploying a server component
+### Deploying a server component
 
 The notify platform doesn't concern itself with how to notify your users. It simply forwards a notification to your external server where you should actually handle the request.
 This approach allows you to maintain full control over your push notification infrastructure.
@@ -89,7 +128,7 @@ Once the user hits their maximum amount of notifications sent in the rate limit 
 
 The notify platform does not itself implement any kind of rate limit protections. Users will be able to keep sending you notifications, so you should reject them with a 429 status code as early in your logic as possible.
 
-## Example server implementation
+### Example server implementation
 
 The below code is a Firebase Cloud Function that forwards notifications to Firebase Cloud Messaging. To deploy this, you should create a new Firestore database named `rateLimits`. Then, you can deploy the following code.
 Also, ensure that you have properly configured your project with the correct authentication keys for APNS and FCM.
