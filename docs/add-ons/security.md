@@ -33,4 +33,4 @@ As a developer, follow the following best practices to make your add-on secure:
 
 ## Use Home Assistant User backend
 
-Instead of allowing users to set new login credential in plain text config, use the Home Assistant [Auth backend](/api/supervisor/endpoints#auth). You can enable the access to API with `auth_api: true`. Now you are able to send the login credential to auth backend and validate it again Home Assistant.
+Instead of allowing users to set new login credential in plain text config, use the Home Assistant [Auth backend](/docs/api/supervisor/endpoints#auth). You can enable the access to API with `auth_api: true`. Now you are able to send the login credential to auth backend and validate it again Home Assistant.
