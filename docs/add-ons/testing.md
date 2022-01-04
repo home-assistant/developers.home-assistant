@@ -74,4 +74,4 @@ docker run \
 
 ## Logs
 
-All stdout and stderr are redirected to the Docker logs. The logs can be fetched from the add-on page inside the Supervisor panel in Home Assistant.
+All `stdout` and `stderr` outputs are redirected to the Docker logs. The logs can be fetched from the add-on page inside the Supervisor panel in Home Assistant.
