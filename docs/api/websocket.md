@@ -215,6 +215,34 @@ The server will respond with a result message to indicate that unsubscribing was
 }
 ```
 
+## Fire an event
+
+This will fire an event on the Home Assistant event bus.
+
+```json
+{
+  "id": 24,
+  "type": "fire_event",
+  "event_type": "mydomain_event",
+  // Optional
+  "event_data": {
+    "device_id": "my-device-id",
+    "type": "motion_detected"
+  }
+}
+```
+
+The server will respond with a result message to indicate that the event was fired successful.
+
+```json
+{
+  "id": 24,
+  "type": "result",
+  "success": true,
+  "result": null
+}
+```
+
 ## Calling a service
 
 This will call a service in Home Assistant. Right now there is no return value. The client can listen to `state_changed` events if it is interested in changed entities as a result of a service call.
