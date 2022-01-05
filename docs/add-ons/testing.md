@@ -62,7 +62,7 @@ docker build \
 
 If you don't want to use the devcontainer environment, you can still run add-ons locally with Docker.
 
-Create a new folder for data and add a test _options.json_ file. After that you can run your add-on with:
+Create a new folder for data and add a test `options.json` file. After that you can run your add-on with:
 
 ```shell
 docker run \
