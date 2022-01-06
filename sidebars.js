@@ -158,6 +158,7 @@ module.exports = {
       "core/entity/air-quality",
       "core/entity/alarm-control-panel",
       "core/entity/binary-sensor",
+      "core/entity/button",
       "core/entity/camera",
       "core/entity/climate",
       "core/entity/cover",

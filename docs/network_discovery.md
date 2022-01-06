@@ -59,7 +59,7 @@ from homeassistant.components import ssdp
 
 ...
 
-discovery_info = ssdp.async_get_discovery_info_by_udn_st(hass, udn, st)
+discovery_info = await ssdp.async_get_discovery_info_by_udn_st(hass, udn, st)
 ```
 
 ### Looking up devices by `ST`
@@ -74,7 +74,7 @@ from homeassistant.components import ssdp
 
 ...
 
-discovery_infos = ssdp.async_get_discovery_info_by_st(hass, "urn:schemas-upnp-org:device:ZonePlayer:1")
+discovery_infos = await ssdp.async_get_discovery_info_by_st(hass, "urn:schemas-upnp-org:device:ZonePlayer:1")
 for discovery_info in discovery_infos:
   ...
 
@@ -92,7 +92,7 @@ from homeassistant.components import ssdp
 
 ...
 
-discovery_infos = ssdp.async_get_discovery_info_by_udn(hass, udn)
+discovery_infos = await ssdp.async_get_discovery_info_by_udn(hass, udn)
 for discovery_info in discovery_infos:
   ...
 

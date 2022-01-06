@@ -33,6 +33,7 @@ Broadly speaking documentation should be written following Microsoft's house sty
   - For configuration variables that accept multiple types, separate the types with a comma (i.e. `string, integer`).
 
 #### Example Configuration Variables Block
+
 ```yaml
 {% configuration %}
 some_key:

@@ -11,10 +11,6 @@ A fan entity is a device that controls the different vectors of your fan such as
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
-:::caution
-FanEntity does not support attribute shorthand for [property implementation](../entity.md#entity-class-or-instance-attributes)
-:::
-
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | current_direction | str | None | Return the current direction of the fan |
