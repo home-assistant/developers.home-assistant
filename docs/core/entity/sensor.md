@@ -3,7 +3,7 @@ title: Sensor Entity
 sidebar_label: Sensor
 ---
 
-A sensor is a read-only entity that provides some information. Information has a value and optionally, a unit of measurement.
+A sensor is a read-only entity that provides some information. Information has a value and optionally, a unit of measurement. Derive entity platforms from [`homeassistant.components.sensor.SensorEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/sensor/__init__.py)
 
 ## Properties
 
