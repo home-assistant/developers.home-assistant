@@ -239,7 +239,13 @@ The server will respond with a result message to indicate that the event was fir
   "id": 24,
   "type": "result",
   "success": true,
-  "result": null
+  "result": {
+    "context": {
+      "id": "326ef27d19415c60c492fe330945f954",
+      "parent_id": null,
+      "user_id": "31ddb597e03147118cf8d2f8fbea5553"
+    }
+  }
 }
 ```
 
