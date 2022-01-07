@@ -4,6 +4,8 @@ title: "Sending data home"
 
 Once you have registered your app with the mobile app component, you can start interacting with Home Assistant via the provided webhook information.
 
+## Sending webhook data via Rest API
+
 The first step is to turn the returned webhook ID into a full URL: `<instance_url>/api/webhook/<webhook_id>`. This will be the only url that we will need for all our interactions. The webhook endpoint will not require authenticated requests.
 
 If you were provided a Cloudhook URL during registration, you should use that by default and only fall back to a constructed URL as described above if that request fails.
@@ -15,6 +17,38 @@ To summarize, here's how requests should be made:
 1. If you have a Cloudhook URL, use that until a request fails. When a request fails, go to step 2.
 2. If you have a remote UI URL, use that to construct a webhook URL: `<remote_ui_url>/api/webhook/<webhook_id>`. When a request fails, go to step 3.
 3. Construct a webhook URL using the instance URL provided during setup: `<instance_url>/api/webhook/<webhook_id>`.
+
+## Sending webhook data via WebSocket API
+
+Webhooks can also be delivered via the WebSocket API by sending the `webhook/handle` command:
+
+```json
+{
+  "type": "webhook/handle",
+  "id": 5,
+  "method": "GET",
+  // Below fields are optional
+  "body": "{\"hello\": \"world\"}",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "query": "a=1&b=2",
+}
+```
+
+The response will look as follows:
+
+```json
+{
+  "type": "result",
+  "id": 5,
+  "result": {
+    "body": "{\"ok\": true}",
+    "status": 200,
+    "headers": {"Content-Type": response.content_type},
+  }
+}
+```
 
 ## Short note on instance URLs
 
