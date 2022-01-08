@@ -46,7 +46,7 @@ some_key:
 
 ### UI Variables
 
-- For describing **UI Variables** the `{% configuration_base %}` section can be used.
+- For describing **UI Variables** the `{% configuration_basic %}` section can be used.
 
 ### Tables
 
