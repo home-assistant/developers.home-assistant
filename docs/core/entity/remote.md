@@ -3,6 +3,8 @@ title: Remote Entity
 sidebar_label: Remote
 ---
 
+Derive entity platforms from [`homeassistant.components.remote.RemoteEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/remote/__init__.py)
+
 ## Properties
 
 :::tip

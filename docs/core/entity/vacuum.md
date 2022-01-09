@@ -3,10 +3,16 @@ title: Vacuum Entity
 sidebar_label: Vacuum
 ---
 
+Derive entity platforms from [`homeassistant.components.vacuum.StateVacuumEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/vacuum/__init__.py)
+
 ## Properties
 
 :::tip
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+:::
+
+:::note
+`VacuumEntity` is deprecated and will be removed in future releases. Please use or migrate to the `StateVacuumEntity`
 :::
 
 :::caution
