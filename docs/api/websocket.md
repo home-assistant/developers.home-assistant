@@ -194,13 +194,13 @@ For each event that matches, the server will send a message of type `event`. The
 
 ## Subscribe to trigger
 
-To filter the results even more, you can subscribe to a trigger. With "subscribe_trigger" you can subscribe for just one trigger, this is just like a automation does it. For more info about the [trigger](https://www.home-assistant.io/docs/automation/trigger/).
+You can also subscribe to one or more triggers with `subscribe_trigger`. These are the same triggers syntax as used for [automation triggers](https://www.home-assistant.io/docs/automation/trigger/). You can define one or a list of triggers.
 
 ```json
 {
     "id": 2,
     "type": "subscribe_trigger",
-    "trigger":     {
+    "trigger": {
         "platform": "state",
         "entity_id": "binary_sensor.motion_occupancy",
         "from": "off",
@@ -220,7 +220,7 @@ As a response you get:
 }
 ```
 
-For each trigger that matches, the server will send a message of type `trigger`. The `id` in the message will point at the original `id` of the `subscribe_trigger` command.
+For each trigger that matches, the server will send a message of type `trigger`. The `id` in the message will point at the original `id` of the `subscribe_trigger` command. Note that your variables will be different based on the used trigger.
 
 ```json
 {
@@ -237,13 +237,6 @@ For each trigger that matches, the server will send a message of type `trigger`.
                     "entity_id": "binary_sensor.motion_occupancy",
                     "state": "off",
                     "attributes": {
-                        "battery": 97,
-                        "illuminance": 189,
-                        "illuminance_lux": 189,
-                        "linkquality": 52,
-                        "occupancy": true,
-                        "temperature": 33,
-                        "voltage": 2995,
                         "device_class": "motion",
                         "friendly_name": "motion occupancy"
                     },
@@ -259,13 +252,6 @@ For each trigger that matches, the server will send a message of type `trigger`.
                     "entity_id": "binary_sensor.motion_occupancy",
                     "state": "on",
                     "attributes": {
-                        "battery": 97,
-                        "illuminance": 189,
-                        "illuminance_lux": 189,
-                        "linkquality": 52,
-                        "occupancy": true,
-                        "temperature": 33,
-                        "voltage": 2995,
                         "device_class": "motion",
                         "friendly_name": "motion occupancy"
                     },
