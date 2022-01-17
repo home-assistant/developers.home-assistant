@@ -88,7 +88,7 @@ After WSL is restarted, the mount's uid and gid will match the default user.
 Install [Homebrew](https://brew.sh/), then use that to install the dependencies:
 
 ```shell
-brew install python3 autoconf ffmpeg
+brew install python3 autoconf ffmpeg rust openssl@1.1
 ```
 
 If you encounter build issues with `cryptography` when running the `script/setup` script below, check the cryptography documentation for [installation instructions](https://cryptography.io/en/latest/installation/#building-cryptography-on-macos).
@@ -108,6 +108,11 @@ Install the requirements with a provided script named `setup`.
 
 ```shell
 script/setup
+```
+
+on macOS with `brew`, use:
+```shell
+LDFLAGS="-L$(brew --prefix openssl@1.1)/lib" CFLAGS="-I$(brew --prefix openssl@1.1)/include" scripts/setup
 ```
 
 This will create a virtual environment and install all necessary requirements. You're now set!
