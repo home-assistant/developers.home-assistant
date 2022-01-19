@@ -709,6 +709,7 @@ Return a list of [Backups](api/supervisor/models.md#backup)
       "date": "2020-09-30T20:25:34.273Z",
       "name": "Awesome backup",
       "type": "partial",
+      "size": 44,
       "protected": true,
       "content": {
         "homeassistant": true,
