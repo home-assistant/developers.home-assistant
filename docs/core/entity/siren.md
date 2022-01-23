@@ -13,7 +13,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name                    | Type   | Default                               | Description                                                                             |
 | ----------------------- | ------ | ------------------------------------- | --------------------------------------------------------------------------------------- |
-| is_on                   | bool           | `NotImplementedError()`               | Whether the device is on or off.                                                        |
+| is_on                   | bool           | `None`                                | Whether the device is on or off.                                                        |
 | available_tones         | list or dict   | `NotImplementedError()`               | The list or dictionary of available tones on the device to pass into the `turn_on` service. If a dictionary is provided, when a user uses the dict value of a tone, it will get converted to the corresponding dict key before being passed on to the integration platform. Requires `SUPPORT_TONES` feature.           |
 
 ### Tones

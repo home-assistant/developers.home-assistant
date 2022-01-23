@@ -15,7 +15,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| is_on | boolean | **Required** | If the switch is currently on or off.
+| is_on | boolean | `None` | If the switch is currently on or off.
 
 ## Deprecated Properties
 

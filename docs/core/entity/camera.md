@@ -13,12 +13,12 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| is_recording | bool | None | Indication of whether the camera is recording. Used to determine `state`.
-| is_streaming | bool | None | Indication of whether the camera is streaming. Used to determine `state`.
+| is_recording | bool | `None` | Indication of whether the camera is recording. Used to determine `state`.
+| is_streaming | bool | `None` | Indication of whether the camera is streaming. Used to determine `state`.
 | motion_detection_enabled | bool | False | Indication of whether the camera has motion detection enabled.
-| is_on | bool | True | Indication camera is on.
-| brand | str | None | The brand (manufacturer) of the camera.
-| model | str | None | The model of the camera.
+| is_on | bool | `None` | Indication camera is on.
+| brand | str | `None` | The brand (manufacturer) of the camera.
+| model | str | `None` | The model of the camera.
 | frame_interval | float | 0.5 | The interval between frames of the stream.
 | frontend_stream_type | str | None | Used with `SUPPORT_STREAM` to tell the frontend which type of stream to use (`STREAM_TYPE_HLS` or `STREAM_TYPE_WEBRTC`)
 
