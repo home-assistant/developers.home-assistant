@@ -19,18 +19,20 @@ Broadly speaking documentation should be written following Microsoft's house sty
 
 ## Integration and Platform Pages
 
-- The **Configuration Variables** section must use the `{% configuration %}` tag.
-- The **Configuration Variables** section is only used for YAML configuration.
-- For describing **UI Variables** the `{% configuration_basic %}` section can be used.
-- Configuration variables must document the requirement status (`false` or `true`).
-- Configuration variables must document the default value, if any.
-- Configuration variables must document the accepted value types (see [Configuration variables details](documenting/create-page.md#configuration)).
-  - For configuration variables that accept multiple types, separate the types with a comma (i.e. `string, integer`).
 - All examples should be formatted to be included in `configuration.yaml` unless explicitly stated.
   - Use capital letters and `_` to indicate that the value needs to be replaced. E.g., `api_key: YOUR_API_KEY` or `api_key: REPLACE_ME`.
 - Integration and platform names should be a link to their respective documentation pages.
 
-Example configuration block
+### Configuration Variables
+
+- The **Configuration Variables** section is only used for YAML configuration.
+- The **Configuration Variables** section must use the `{% configuration %}` tag.
+- Configuration variables must document the requirement status (`false` or `true`).
+- Configuration variables must document the default value, if any.
+- Configuration variables must document the accepted value types (see [Configuration variables details](documenting/create-page.md#configuration)).
+  - For configuration variables that accept multiple types, separate the types with a comma (i.e. `string, integer`).
+
+#### Example Configuration Variables Block
 
 ```yaml
 {% configuration %}
@@ -41,6 +43,17 @@ some_key:
   default: Optional default value - leave out if there isn't one
 {% endconfiguration %}
 ```
+
+### UI Variables
+
+- For describing **UI Variables** the `{% configuration_basic %}` section can be used.
+
+### Tables
+
+- Be succinct. Minimize the number of columns and keep the amount of text as short as possible:
+  - Too wide tables are difficult to browse on handheld devices
+  - Less content makes tables easier to read
+- When limiting the amount of text is not possible, consider using other data structures for representing the information. For example, lists or `{% configuration_basic %}` can be used.
 
 ## YAML and Templates
 

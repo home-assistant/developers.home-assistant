@@ -192,9 +192,94 @@ For each event that matches, the server will send a message of type `event`. The
 }
 ```
 
+## Subscribe to trigger
+
+You can also subscribe to one or more triggers with `subscribe_trigger`. These are the same triggers syntax as used for [automation triggers](https://www.home-assistant.io/docs/automation/trigger/). You can define one or a list of triggers.
+
+```json
+{
+    "id": 2,
+    "type": "subscribe_trigger",
+    "trigger": {
+        "platform": "state",
+        "entity_id": "binary_sensor.motion_occupancy",
+        "from": "off",
+        "to":"on"
+    },
+}
+```
+
+As a response you get:
+
+```json
+{
+ "id": 2,
+ "type": "result",
+ "success": true,
+ "result": null
+}
+```
+
+For each trigger that matches, the server will send a message of type `trigger`. The `id` in the message will point at the original `id` of the `subscribe_trigger` command. Note that your variables will be different based on the used trigger.
+
+```json
+{
+    "id": 2,
+    "type": "event",
+    "event": {
+        "variables": {
+            "trigger": {
+                "id": "0",
+                "idx": "0",
+                "platform": "state",
+                "entity_id": "binary_sensor.motion_occupancy",
+                "from_state": {
+                    "entity_id": "binary_sensor.motion_occupancy",
+                    "state": "off",
+                    "attributes": {
+                        "device_class": "motion",
+                        "friendly_name": "motion occupancy"
+                    },
+                    "last_changed": "2022-01-09T10:30:37.585143+00:00",
+                    "last_updated": "2022-01-09T10:33:04.388104+00:00",
+                    "context": {
+                        "id": "90e30ad8e6d0c218840478d3c21dd754",
+                        "parent_id": null,
+                        "user_id": null
+                    }
+                },
+                "to_state": {
+                    "entity_id": "binary_sensor.motion_occupancy",
+                    "state": "on",
+                    "attributes": {
+                        "device_class": "motion",
+                        "friendly_name": "motion occupancy"
+                    },
+                    "last_changed": "2022-01-09T10:33:04.391956+00:00",
+                    "last_updated": "2022-01-09T10:33:04.391956+00:00",
+                    "context": {
+                        "id": "9b263f9e4e899819a0515a97f6ddfb47",
+                        "parent_id": null,
+                        "user_id": null
+                    }
+                },
+                "for": null,
+                "attribute": null,
+                "description": "state of binary_sensor.motion_occupancy"
+            }
+        },
+        "context": {
+            "id": "9b263f9e4e899819a0515a97f6ddfb47",
+            "parent_id": null,
+            "user_id": null
+        }
+    }
+}
+```
+
 ### Unsubscribing from events
 
-You can unsubscribe from previously created subscription events. Pass the id of the original subscription command as value to the subscription field.
+You can unsubscribe from previously created subscriptions. Pass the id of the original subscription command as value to the subscription field.
 
 ```json
 {
@@ -212,6 +297,40 @@ The server will respond with a result message to indicate that unsubscribing was
   "type": "result",
   "success": true,
   "result": null
+}
+```
+
+## Fire an event
+
+This will fire an event on the Home Assistant event bus.
+
+```json
+{
+  "id": 24,
+  "type": "fire_event",
+  "event_type": "mydomain_event",
+  // Optional
+  "event_data": {
+    "device_id": "my-device-id",
+    "type": "motion_detected"
+  }
+}
+```
+
+The server will respond with a result message to indicate that the event was fired successful.
+
+```json
+{
+  "id": 24,
+  "type": "result",
+  "success": true,
+  "result": {
+    "context": {
+      "id": "326ef27d19415c60c492fe330945f954",
+      "parent_id": null,
+      "user_id": "31ddb597e03147118cf8d2f8fbea5553"
+    }
+  }
 }
 ```
 
@@ -244,7 +363,13 @@ The server will indicate with a message indicating that the service is done exec
   "id": 24,
   "type": "result",
   "success": true,
-  "result": null
+  "result": {
+    "context": {
+      "id": "326ef27d19415c60c492fe330945f954",
+      "parent_id": null,
+      "user_id": "31ddb597e03147118cf8d2f8fbea5553"
+    }
+  }
 }
 ```
 

@@ -709,6 +709,7 @@ Return a list of [Backups](api/supervisor/models.md#backup)
       "date": "2020-09-30T20:25:34.273Z",
       "name": "Awesome backup",
       "type": "partial",
+      "size": 44,
       "protected": true,
       "content": {
         "homeassistant": true,
@@ -1026,6 +1027,7 @@ Update Home Assistant core
 | key     | type   | description                                                    |
 | ------- | ------ | -------------------------------------------------------------- |
 | version | string | The version you want to install, default is the latest version |
+| backup | boolean | Create a partial backup of core and core configuration before updating, default is false |
 
 </ApiEndpoint>
 
@@ -2183,6 +2185,12 @@ Install an add-on from the store.
 <ApiEndpoint path="/store/addons/<addon>/update" method="post">
 
 Update an add-on from the store.
+
+**Payload:**
+
+| key     | type   | description                                                    |
+| ------- | ------ | -------------------------------------------------------------- |
+| backup | boolean | Create a partial backup of the add-on, default is false |
 
 </ApiEndpoint>
 

@@ -16,7 +16,7 @@ Properties should always only return information from memory and not do I/O (lik
 | temperature_unit        | string | `NotImplementedError`                | The unit of temperature measurement for the system (`TEMP_CELSIUS` or `TEMP_FAHRENHEIT`).                    |
 | precision               | float  | Based on `temperature_unit`          | The precision of the temperature in the system. Defaults to tenths for TEMP_CELSIUS, whole number otherwise. |
 | current_temperature     | float  | None                                 | The current temperature.                                                                                     |
-| current_humidity        | float  | None                                 | The current humidity.                                                                                        |
+| current_humidity        | int    | None                                 | The current humidity.                                                                                        |
 | target_temperature      | float  | None                                 | The temperature currently set to be reached.                                                                 |
 | target_temperature_high | float  | None                                 | The upper bound target temperature                                                                           |
 | target_temperature_low  | float  | None                                 | The lower bound target temperature                                                                           |

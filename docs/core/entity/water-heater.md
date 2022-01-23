@@ -3,6 +3,8 @@ title: Water Heater Entity
 sidebar_label: Water Heater
 ---
 
+Derive entity platforms from [`homeassistant.components.water_heater.WaterHeaterEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/water_heater/__init__.py)
+
 ## Properties
 
 :::tip

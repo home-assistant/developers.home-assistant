@@ -3,7 +3,7 @@ title: Sensor Entity
 sidebar_label: Sensor
 ---
 
-A sensor is a read-only entity that provides some information. Information has a value and optionally, a unit of measurement.
+A sensor is a read-only entity that provides some information. Information has a value and optionally, a unit of measurement. Derive entity platforms from [`homeassistant.components.sensor.SensorEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/sensor/__init__.py)
 
 ## Properties
 
@@ -26,6 +26,7 @@ If specifying a device class, your sensor entity will need to also return the co
 
 | Type | Supported units | Description
 | ---- | ---- | -----------
+| apparent_power | VA | Apparent power |
 | aqi | | Air Quality Index
 | battery | % | Percentage of battery that is left
 | carbon_dioxide | ppm | Concentration of carbon dioxide.
@@ -48,6 +49,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | power | W, kW | Power, statistics will be stored in W.
 | power_factor | % | Power Factor
 | pressure | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Pressure, statistics will be stored in Pa.
+| reactive_power | var | Reactive power |
 | signal_strength | dB, dBm | Signal strength
 | sulphur_dioxide | µg/m³ | Concentration of sulphure dioxide |
 | temperature | °C, °F | Temperature, statistics will be stored in °C.
@@ -103,6 +105,10 @@ zero-point. When `last_reset` changes, the zero-point will be set to 0.
 If last_reset is not set, the sensor's value when it was first added is used as the
 zero-point when calculating `sum` statistics.
 
+To put it in another way: the logic when updating the statistics is to update
+the sum column with the difference between the current state and the previous state
+unless `last_reset` has been changed, in which case don't add anything.
+
 Example of state class `total` without last_reset:
 
 | t                      | state  | sum    | sum_increase | sum_decrease |
@@ -144,6 +150,10 @@ some tolerance, a decrease between state changes of < 10% will not trigger a new
 cycle. This state class is useful for gas meters, electricity meters, water meters etc.
 The value when the sensor reading decreases will not be used as zero-point when calculating
 `sum` statistics, instead the zero-point will be set to 0.
+
+To put it in another way: the logic when updating the statistics is to update
+the sum column with the difference between the current state and the previous state
+unless the difference is negative, in which case don't add anything.
 
 Example of state class `total_increasing`:
 
