@@ -5,8 +5,8 @@ title: "Local add-on testing"
 The fastest and recommended way to develop add-ons is using a local Visual Studio Code devcontainer. We maintain a [devcontainer for this purpose](https://github.com/home-assistant/devcontainer) which is used in all our add-ons repositories. This devcontainer setup for VS Code which will run Supervisor and Home Assistant, with all of the add-ons mapped as Local Add-ons inside, making it simple for add-on developers on Windows, Mac and Linux desktop OS-es.
 
 - Follow the instructions to download and install the [Remote Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) VS Code extension.
-- Copy the [`devcontainer.json` file](https://github.com/home-assistant/devcontainer/blob/main/addons/devcontainer.json) to `.devcontainer/devcontainer.json` in your repository.
-- Copy the [`tasks.json` file](https://github.com/home-assistant/devcontainer/blob/main/addons/tasks.json) to `.vscode/tasks.json` in your repository.
+- Copy the [`devcontainer.json` file](https://github.com/home-assistant/devcontainer/raw/main/addons/devcontainer.json) to `.devcontainer.json` in your repository.
+- Copy the [`tasks.json` file](https://github.com/home-assistant/devcontainer/raw/main/addons/tasks.json) to `.vscode/tasks.json` in your repository.
 - Open the root folder inside VS Code, and when prompted re-open the window inside the container (or, from the Command Palette, select 'Rebuild and Reopen in Container').
 - When VS Code has opened your folder in the container (which can take some time for the first run) you'll need to run the task (Terminal -> Run Task) 'Start Home Assistant', which will bootstrap Supervisor and Home Assistant.
 - You'll then be able to access the normal onboarding process via the Home Assistant instance at `http://localhost:7123/`.
@@ -62,7 +62,7 @@ docker build \
 
 If you don't want to use the devcontainer environment, you can still run add-ons locally with Docker.
 
-Create a new folder for data and add a test _options.json_ file. After that you can run your add-on with:
+For that you can use the following command:
 
 ```shell
 docker run \
@@ -74,4 +74,4 @@ docker run \
 
 ## Logs
 
-All stdout and stderr are redirected to the Docker logs. The logs can be fetched from the add-on page inside the Supervisor panel in Home Assistant.
+All `stdout` and `stderr` outputs are redirected to the Docker logs. The logs can be fetched from the add-on page inside the Supervisor panel in Home Assistant.
