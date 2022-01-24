@@ -49,11 +49,12 @@ While your talents in input validation, handling sensitive data and other defens
 
 By default, AppArmor gives you a certain level of security by restricting some general actions that are deemed inappropriate for a Docker container. You can read more about Docker's AppArmor implementation on the [Docker Security page](https://docs.docker.com/engine/security/apparmor/).
 
-As for Home Assistant's implementation, you can activate your own custom AppArmor profile by putting a `apparmor.txt` file into your add-on folder. Adding your own `apparmor.txt` will load that file as the primary AppArmor profile instead of the default implementation. On top of knowing your add-on will run in a constrained and effective manner, writing your own custom `apparmor.txt` file will earn your add-on a security point after your add-on is installed, thus improving your user's confidence and perception of your add-on.
+As for Home Assistant's implementation, you can activate your own custom AppArmor profile by putting an `apparmor.txt` file into your add-on folder. Adding your own `apparmor.txt` will load that file as the primary AppArmor profile instead of the default implementation. On top of knowing your add-on will run in a constrained and effective manner, writing your own custom `apparmor.txt` file will earn your add-on a security point after your add-on is installed, thus improving your user's confidence and perception of your add-on.
 
-An `apparmor.txt` goes in the same folder as your `config.json` file. Below is an example `apparmor.txt`. Replace `ADDON_SLUG` with the slug defined in your add-on configuration.
+An `apparmor.txt` goes in the same folder as your `config.yaml` file. Below is an example `apparmor.txt`. Replace `ADDON_SLUG` with the slug defined in your add-on configuration.
 
 apparmor.txt
+
 ```txt
 #include <tunables/global>
 
@@ -79,13 +80,13 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
   /usr/lib/bashio/** ix,
   /tmp/** rw,
 
-  # Access to Options.json and other files within your addon
+  # Access to options.json and other files within your addon
   /data/** rw,
   
   # Start new profile for service
   /usr/bin/myprogram cx,
   
-  profile usr/bin/myprogram flags=(attach_disconnected,mediate_deleted) {
+  profile /usr/bin/myprogram flags=(attach_disconnected,mediate_deleted) {
     #include <abstractions/base>
     
     # Receive signals from S6-Overlay
@@ -99,8 +100,8 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
 Ingress allows users to access the add-on web interface via the Home Assistant UI. Authentication is handled by Home Assistant, so neither the user nor the add-on developer will need to care about the security or port forwarding. Users love this feature! It connects your user directly to the add-on, can provide a seamless UX within Home Assistant and grants your add-on 2 points of security.
 
 Here are the requirements of Ingress:
-- Ingress must be enabled. Set `ingress: true` in [`config.json`](/docs/add-ons/configuration#add-on-config).
-- Your server may run on port 8099. If it does not run on 8099, you must set `ingress_port: PORT_NUMBER` in [`config.json`](/docs/add-ons/configuration/#add-on-config) to match your configuration.
+- Ingress must be enabled. Set `ingress: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options).
+- Your server may run on port 8099. If it does not run on 8099, you must set `ingress_port: PORT_NUMBER` in [`config.yaml`](/docs/add-ons/configuration/#add-on-config) to match your configuration.
 - Only connections from `172.30.32.2` must be allowed. You should deny access to all other IP addresses within your add-on server. 
 - Users are previously authenticated via Home Assistant. Authentication is not required. 
 
@@ -117,12 +118,13 @@ Ingress API gateway supports the following:
 
 ## Basic Ingress Example with Nginx
 
-The following is a basic ingress implementation with an Nginx server. This contains an example`Dockerfile`, `config.json`, and `ingress.conf` configuration.
+The following is a basic ingress implementation with an Nginx server. This contains an example`Dockerfile`, `config.yaml`, and `ingress.conf` configuration.
 
-The `ingress.conf` is configured to accept only connections from IP address `172.30.32.2` as we are only expecting connections from this IP address for Ingress purposes. Any other IP address will be rejected. The ingress port 8099 is utilized to reduce configuration work. If you wish to configure a different ingress port you may, but the `config.json` option `ingress_port` must be defined to match.
+The `ingress.conf` is configured to accept only connections from IP address `172.30.32.2` as we are only expecting connections from this IP address for Ingress purposes. Any other IP address will be rejected. The ingress port 8099 is utilized to reduce configuration work. If you wish to configure a different ingress port you may, but the `config.yaml` option `ingress_port` must be defined to match.
 
 ingress.conf
-```nginx 
+
+```nginx
 server {
     listen 8099;
     allow  172.30.32.2;
@@ -133,37 +135,45 @@ server {
 Our example `Dockerfile` is configured to support only our Nginx server and does not support a `run.sh` like most add-ons. You may replace the `CMD` with your own command to allow more configuration options while launching your add-on. This Dockerfile will `RUN` to install our Nginx dependencies, `COPY` our example `ingress.conf` from above to the add-on container, then `CMD` start Nginx.
 
 Dockerfile
-```Dockerfile
+
+```dockerfile
 ARG BUILD_FROM
 FROM $BUILD_FROM
-ENV LANG C.UTF-8
 
 #Add nginx and create the run folder for nginx.
-RUN apk --no-cache  add nginx;mkdir -p /run/nginx;
+RUN \
+  apk --no-cache add \
+    nginx \
+  \
+  && mkdir -p /run/nginx
+
 #Copy our conf into the nginx http.d folder.
 COPY ingress.conf /etc/nginx/http.d/
+
 #Launch nginx with debug options.
 CMD [ "nginx","-g","daemon off;error_log /dev/stdout debug;" ]
 ```
 
-In order to enable Ingress, our `config.json` file _must_ include `ingress: true` and _may_ specify the `ingress_port`, along with other required information.
+In order to enable Ingress, our `config.yaml` file _must_ include `ingress: true` and _may_ specify the `ingress_port`, along with other required information.
 
-config.json
-```json
-{
-  "name": "Ingress Example",
-  "version": "0.00.0.0.000.0.000",
-  "slug": "nginx-ingress-example",
-  "description": "ingress testing",
-  "arch": ["armhf", "armv7", "aarch64", "amd64", "i386"],
-  "ingress": true,
-  "ingress_port": 8099
-}
+config.yaml
+
+```yaml
+name: "Ingress Example"
+version: "1.0.0"
+slug: "nginx-ingress-example"
+description: "Ingress testing"
+arch:
+  - amd64
+  - armhf
+  - armv7
+  - i386
+ingress: true
 ```
 
 After the add-on is started, you should be able to view your Ingress server by clicking "OPEN WEB UI" within the add-on info screen.
 
-# Security
+## Security
 
 Add-on security should be a matter of pride. You should strive for the highest level of security you can possibly attain. If your add-on has a lower security rating, then users will be less likely to trust it.
 
@@ -171,14 +181,14 @@ Each add-on starts with a base rating of 5, on a scale of 1 to 6. Depending on d
 
 | Action | Change | Notes |
 |---|---|---|
-| Use `ingress: true` in [`config.json`](/docs/add-ons/configuration#add-on-config) | +2 | overrides `auth_api` rating |
-| Use `auth_api: true` in [`config.json`](/docs/add-ons/configuration#add-on-config) | +1 | overridden by `ingress` |
+| Use `ingress: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | +2 | overrides `auth_api` rating |
+| Use `auth_api: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | +1 | overridden by `ingress` |
 | Use custom [`apparmor.txt`](/docs/add-ons/presentation#apparmor)| +1| Rating applied after installation |
-| Set `apparmor: false` in [`config.json`](/docs/add-ons/configuration#add-on-config) | -1 | |
-| Use `privileged: NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_PTRACE`, `SYS_MODULE`, or `DAC_READ_SEARCH`, or `kernel_modules: ` used in [`config.json`](/docs/add-ons/configuration#add-on-config)| -1 | Rating applied only once if multiple are used. |
-| Use `hassio_role: manager` in [`config.json`](/docs/add-ons/configuration#add-on-config) | -1 | |
-| Use `host_network: true` in [`config.json`](/docs/add-ons/configuration#add-on-config) | -1 | |
-| Use `hassio_role: admin` in [`config.json`](/docs/add-ons/configuration#add-on-config) | -2 | |
-| Use `host_pid: true` in [`config.json`](/docs/add-ons/configuration#add-on-config) | -2 | |
-| Use `full_access: true` in [`config.json`](/docs/add-ons/configuration#add-on-config) | Security set to 1 | Overrides all other adjustments |
-| Use `docker_api: true` in [`config.json`](/docs/add-ons/configuration#add-on-config) | Security set to 1 | Overrides all other adjustments |
+| Set `apparmor: false` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -1 | |
+| Use `privileged: NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_PTRACE`, `SYS_MODULE`, or `DAC_READ_SEARCH`, or `kernel_modules: ` used in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options)| -1 | Rating applied only once if multiple are used. |
+| Use `hassio_role: manager` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -1 | |
+| Use `host_network: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -1 | |
+| Use `hassio_role: admin` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -2 | |
+| Use `host_pid: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -2 | |
+| Use `full_access: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | Security set to 1 | Overrides all other adjustments |
+| Use `docker_api: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | Security set to 1 | Overrides all other adjustments |

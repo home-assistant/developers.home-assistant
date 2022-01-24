@@ -21,7 +21,7 @@ def async_check_significant_change(
 ) -> Optional[bool]
 ```
 
-This function is passed a state that was previously considered significant and the new state. It is not just passing the last 2 known states in. The function should return a boolean if it is signficiant or not, or `None` if the function doesn't know.
+This function is passed a state that was previously considered significant and the new state. It is not just passing the last 2 known states in. The function should return a boolean if it is significant or not, or `None` if the function doesn't know.
 
 When deciding on significance, make sure you take all known attributes into account. Use device classes to differentiate between entity types.
 

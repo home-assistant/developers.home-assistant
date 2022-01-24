@@ -27,25 +27,36 @@ def setup(hass, config):
 
     hass.services.register(DOMAIN, "hello", handle_hello)
 
-    # Return boolean to indicate that initialization was successfully.
+    # Return boolean to indicate that initialization was successful.
     return True
 ```
 
-Load the integration by adding the following to your `configuration.yaml`. When your component is loaded, a new service should be available to call.
+To load the integration in Home Assistant is necessary to create a `manifest.json` and to add an entry in your `configuration.yaml`. When your component is loaded, a new service should be available to call.
 
 ```yaml
 # configuration.yaml entry
 hello_service:
 ```
 
-Open the frontend and in the sidebar, click the first icon in the developer tool section. This will open the Call Service developer tool. On the right, find your service and click on it. This will automatically fill in the correct values.
-
-Pressing "Call Service" will now call your service without any parameters. This will cause your service to create a state with the default name 'World'. If you want to specify the name, you have to specify parameters. Add the following JSON as Service Data and press "Call Service again".
+An example of `manifest.json`:
 
 ```json
 {
-  "name": "Planet"
+    "domain": "hello_service",
+    "name": "Hello Service",
+    "documentation": "https://developers.home-assistant.io/docs/dev_101_services",
+    "iot_class": "local_push",
+    "version": "0.1.0"
 }
+```
+
+Open the frontend and in the sidebar, click the first icon in the developer tool section. This will open the Call Service developer tool. On the right, find your service and click on it. This will automatically fill in the correct values.
+
+Pressing "Call Service" will now call your service without any parameters. This will cause your service to create a state with the default name 'World'. If you want to specify the name, you have to specify a parameter by providing it through Service Data. In YAML mode, add the following and press "Call Service again".
+
+```json
+service: helloworld_service.hello
+data: { "name": "Planet" }
 ```
 
 The service will now overwrite the previous state with "Planet".
@@ -75,13 +86,13 @@ set_speed:
       name: Speed
       # Description of the field
       description: Speed setting
-      # Whether or not field is required
+      # Whether or not field is required (default = false)
       required: true
-      # Advanced options are only shown when the advanced mode is enabled for the user
+      # Advanced fields are only shown when the advanced mode is enabled for the user (default = false)
       advanced: true
       # Example value that can be passed for this field
       example: "low"
-      # The default value
+      # The default field value
       default: "high"
       # Selector (https://www.home-assistant.io/docs/blueprint/selectors/) to control the input UI for this field
       selector:
@@ -106,7 +117,7 @@ from homeassistant.helpers import config_validation as cv, entity_platform, serv
 async def async_setup_entry(hass, entry):
     """Set up the media player platform for Sonos."""
 
-    platform = entity_platform.current_platform.get()
+    platform = entity_platform.async_get_current_platform()
 
     # This will call Entity.set_sleep_timer(sleep_time=VALUE)
     platform.async_register_entity_service(

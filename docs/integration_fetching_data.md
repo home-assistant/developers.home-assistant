@@ -36,6 +36,7 @@ import logging
 import async_timeout
 
 from homeassistant.components.light import LightEntity
+from homeassistant.exceptions import ConfigEntryAuthFailed
 from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
     DataUpdateCoordinator,
@@ -63,6 +64,10 @@ async def async_setup_entry(hass, entry, async_add_entities):
             # handled by the data update coordinator.
             async with async_timeout.timeout(10):
                 return await api.fetch_data()
+        except ApiAuthError as err:
+            # Raising ConfigEntryAuthFailed will cancel future updates
+            # and start a config flow with SOURCE_REAUTH (async_step_reauth)
+            raise ConfigEntryAuthFailed from err
         except ApiError as err:
             raise UpdateFailed(f"Error communicating with API: {err}")
 
@@ -76,8 +81,16 @@ async def async_setup_entry(hass, entry, async_add_entities):
         update_interval=timedelta(seconds=30),
     )
 
+    #
     # Fetch initial data so we have data when entities subscribe
-    await coordinator.async_refresh()
+    #
+    # If the refresh fails, async_config_entry_first_refresh will
+    # raise ConfigEntryNotReady and setup will try again later
+    #
+    # If you do not want to retry setup on failure, use
+    # coordinator.async_refresh() instead
+    #
+    await coordinator.async_config_entry_first_refresh()
 
     async_add_entities(
         MyEntity(coordinator, idx) for idx, ent in enumerate(coordinator.data)

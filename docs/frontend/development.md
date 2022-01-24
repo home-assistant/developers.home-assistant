@@ -23,7 +23,7 @@ git remote add upstream https://github.com/home-assistant/frontend.git
 
 ### Configuring Home Assistant
 
-You will need to have an instance of Home Assistant set up. See our guide on [setting up a development environment](/development_environment.md).
+You will need to have an instance of Home Assistant set up. See our guide on [setting up a development environment](/development_environment.mdx).
 
 Next step is to configure Home Assistant to use the development mode for the frontend. Do this by updating the frontend config in your `configuration.yaml` and set the path to the frontend repository that you cloned in the last step:
 
@@ -41,7 +41,7 @@ If you are using Visual Studio Code with devcontainers for Home Assistant, you n
 ]
 ```
 
-The Home Assistant's devcontainer needs to get rebuilt via the `docker-build` [task](/development_environment.md#tasks), and the `configuration.yaml` should point to the path inside the container:
+The Home Assistant's devcontainer needs to get rebuilt via the `docker-build` [task](/development_environment.mdx#tasks), and the `configuration.yaml` should point to the path inside the container:
 
 ```yaml
 frontend:
@@ -104,7 +104,7 @@ git remote add fork <github URL to your fork>
 
 When you've made your changes and are ready to push them change to the working directory for the frontend project and then push your changes
 
-``` bash
+```bash
 git add -A
 git commit -m "Added new feature X"
 git push -u fork HEAD

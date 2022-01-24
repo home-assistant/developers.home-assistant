@@ -68,6 +68,11 @@ One exception is for logging which uses the percentage formatting. This is to av
 _LOGGER.info("Can't connect to the webservice %s at %s", string1, string2)
 ```
 
-### Typing of functions
+### Typing
 
-Either completely type a function or do not type a function at all.
+We encourage the use of fully typing your code. This helps with finding/preventing issues and bugs in our codebase,
+but also helps fellow contributors making adjustments to your code in the future as well.
+
+By default, Home Assistant will statically check for type hints in our automated CI process.
+Python modules can be included for strict checking, if they are fully typed, by adding an entry
+to the `.strict-typing` file in the root of the Home Assistant Core project.

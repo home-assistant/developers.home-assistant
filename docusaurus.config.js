@@ -41,8 +41,9 @@ module.exports = {
           label: "Documenting",
           position: "left",
           items: [
+            { label: "Getting Started", to: "docs/documenting" },
             { label: "Standards", to: "docs/documenting/standards" },
-            { label: "YAML Style Guide", to: "docs/documenting/yaml-style-guide"},
+            { label: "YAML Style Guide", to: "docs/documenting/yaml-style-guide" },
             {
               label: "Create a new page",
               to: "docs/documenting/create-page",
@@ -146,11 +147,6 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} Home Assistant, Inc. Built with Docusaurus.`,
     },
     image: "img/default-social.png",
-    algolia: {
-      apiKey: "d0245452c36b10cec4b8b5bad04e06fc",
-      indexName: "home-assistant-dev",
-      algoliaOptions: {},
-    },
   },
   presets: [
     [
@@ -171,6 +167,17 @@ module.exports = {
             type: "all",
           },
         },
+      },
+    ],
+  ],
+  plugins: [
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      {
+        hashed: true,
+        indexDocs: true,
+        indexBlog: true,
+        highlightSearchTermsOnTargetPage: true,
       },
     ],
   ],

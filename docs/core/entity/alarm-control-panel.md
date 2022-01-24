@@ -3,7 +3,7 @@ title: Alarm Control Panel Entity
 sidebar_label: Alarm Control Panel
 ---
 
-An alarm control panel entity controls an alarm.  Derive a platform entity from [`homeassistant.components.alarm_control_panel.AlarmControlPanelEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/alarm_control_panel/__init__.py).
+An alarm control panel entity controls an alarm.  Derive a platform entity from [`homeassistant.components.alarm_control_panel.AlarmControlPanelEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/alarm_control_panel/__init__.py).
 
 ## Properties
 
@@ -25,6 +25,7 @@ Properties should always only return information from memory and not do I/O (lik
 | `armed_home` | The alarm is armed in home mode.
 | `armed_away` | The alarm is armed in away mode.
 | `armed_night` | The alarm is armed in night mode.
+| `armed_vacation` | The alarm is armed in vacation mode.
 | `armed_custom_bypass` |  The alarm is armed in bypass mode.
 | `pending` | The alarm is pending (towards `triggered`).
 | `arming` | The alarm is arming.
@@ -67,7 +68,7 @@ class MyAlarm(AlarmControlPanelEntity):
     def alarm_arm_home(self, code=None) -> None:
         """Send arm home command."""
 
-    def async_alarm_arm_home(self, code=None) -> None:
+    async def async_alarm_arm_home(self, code=None) -> None:
         """Send arm home command."""
 ```
 
@@ -82,7 +83,7 @@ class MyAlarm(AlarmControlPanelEntity):
     def alarm_arm_away(self, code=None) -> None:
         """Send arm away command."""
 
-    def async_alarm_arm_away(self, code=None) -> None:
+    async def async_alarm_arm_away(self, code=None) -> None:
         """Send arm away command."""
 ```
 
@@ -97,8 +98,23 @@ class MyAlarm(AlarmControlPanelEntity):
     def alarm_arm_night(self, code=None) -> None:
         """Send arm night command."""
 
-    def async_alarm_arm_night(self, code=None) -> None:
+    async def async_alarm_arm_night(self, code=None) -> None:
         """Send arm night command."""
+```
+
+### Alarm Arm Vacation
+
+Send arm vacation command.
+
+```python
+class MyAlarm(AlarmControlPanelEntity):
+    # Implement one of these methods.
+
+    def alarm_arm_vacation(self, code=None) -> None:
+        """Send arm vacation command."""
+
+    async def async_alarm_arm_vacation(self, code=None) -> None:
+        """Send arm vacation command."""
 ```
 
 ### Alarm Trigger
@@ -112,7 +128,7 @@ class MyAlarm(AlarmControlPanelEntity):
     def alarm_trigger(self, code=None) -> None:
         """Send alarm trigger command."""
 
-    def async_alarm_trigger(self, code=None) -> None:
+    async def async_alarm_trigger(self, code=None) -> None:
         """Send alarm trigger command."""
 ```
 
@@ -127,6 +143,6 @@ class MyAlarm(AlarmControlPanelEntity):
     def alarm_arm_custom_bypass(self, code=None) -> None:
         """Send arm custom bypass command."""
 
-    def async_alarm_arm_custom_bypass(self, code=None) -> None:
+    async def async_alarm_arm_custom_bypass(self, code=None) -> None:
         """Send arm custom bypass command."""
 ```

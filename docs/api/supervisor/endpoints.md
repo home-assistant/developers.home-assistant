@@ -65,11 +65,11 @@ Reloads the information stored about add-ons.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/changelog" method="get">
-Get the changelog for a add.on.
+Get the changelog for an add-on.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/documentation" method="get">
-Get the documentation for a add.on.
+Get the documentation for an add-on.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/logs" method="get">
@@ -81,7 +81,7 @@ Get the add-on icon
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/info" method="get">
-Get details about a add-on
+Get details about an add-on
 
 **Returned data:**
 
@@ -240,7 +240,7 @@ Get details about a add-on
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/install" method="post">
-Install a add-on
+Install an add-on
 
 **Deprecated!** Use [`/store/addons/<addon>/install`](#store) instead.
 
@@ -251,7 +251,7 @@ Get the add-on logo
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/options" method="post">
-Set the protection mode on a add-on.
+Set the protection mode on an add-on.
 
 This function is not callable by itself and you can not use `self` as the slug here.
 
@@ -293,7 +293,20 @@ To reset customized network/audio/options, set it `null`.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/options/validate" method="post">
-Run a configuration validation against the current stored add-on configuration.
+Run a configuration validation against the current stored add-on configuration or payload.
+  
+**Payload:**
+
+Optional the raw add-on options.
+  
+**Returned data:**
+
+| key              | type        | description                      |
+| ---------------- | ----------- | -------------------------------- |
+| message          | string      | Include the error message        |
+| valid            | boolean        | If config is valid or not        |
+| pwned            | boolean | None | True or false if include pwned secrets. On error it's None |
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/options/config" method="get">
@@ -305,11 +318,11 @@ Rebuild the add-on, only supported for local build add-ons.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/restart" method="post">
-Restart a add-on
+Restart an add-on
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/security" method="post">
-Set the protection mode on a add-on.
+Set the protection mode on an add-on.
 
 This function is not callable by itself and you can not use `self` as the slug here.
 
@@ -322,7 +335,7 @@ This function is not callable by itself and you can not use `self` as the slug h
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/start" method="post">
-Start a add-on
+Start an add-on
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/stats" method="get">
@@ -353,15 +366,15 @@ The payload you want to pass into the addon you give the endpoint as the body of
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/stop" method="post">
-Stop a add-on
+Stop an add-on
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/uninstall" method="post">
-Uninstall a add-on
+Uninstall an add-on
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/update" method="post">
-Update a add-on
+Update an add-on
 
 **Deprecated!** Use [`/store/addons/<addon>/update`](#store) instead.
 
@@ -402,7 +415,7 @@ Return information about the audio plugin.
 | version          | string     | The installed observer version   |
 | version_latest   | string     | The latest published version     |
 | update_available | boolean    | `true` if an update is available |
-| audio            | dictionary | A [Audio model](api/supervisor/models.md#audio) |
+| audio            | dictionary | An [Audio model](api/supervisor/models.md#audio) |
 
 **Example response:**
 
@@ -541,7 +554,7 @@ Mute output for a specific application
 </ApiEndpoint>
 
 <ApiEndpoint path="/audio/profile" method="post">
-Create a audio profile
+Create an audio profile
 
 **Payload:**
 
@@ -680,6 +693,148 @@ Reset internal authentication cache, this is useful if you have changed the pass
 
 </ApiEndpoint>
 
+### Backup
+
+<ApiEndpoint path="/backups" method="get">
+
+Return a list of [Backups](api/supervisor/models.md#backup)
+
+**Example response:**
+
+```json
+{
+  "backups": [
+    {
+      "slug": "skuwe823",
+      "date": "2020-09-30T20:25:34.273Z",
+      "name": "Awesome backup",
+      "type": "partial",
+      "size": 44,
+      "protected": true,
+      "content": {
+        "homeassistant": true,
+        "addons": ["awesome_addon"],
+        "folders": ["ssl", "media"]
+      }
+    }
+  ]
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/backups/new/full" method="post">
+
+Create a full backup.
+
+**Payload:**
+
+| key      | type   | optional | description                                |
+| -------- | ------ | -------- | ------------------------------------------ |
+| name     | string | True     | The name you want to give the backup     |
+| password | string | True     | The password you want to give the backup |
+
+**Example response:**
+
+```json
+{
+  "slug": "skuwe823"
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/backups/new/upload" method="post">
+
+Upload a backup.
+
+**Example response:**
+
+```json
+{
+  "slug": "skuwe823"
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/backups/new/partial" method="post">
+
+Create a partial backup.
+
+**Payload:**
+
+| key      | type   | optional | description                                 |
+| -------- | ------ | -------- | ------------------------------------------- |
+| name     | string | True     | The name you want to give the backup      |
+| password | string | True     | The password you want to give the backup  |
+| addons   | list   | True     | A list of strings representing add-on slugs |
+| folders  | list   | True     | A list of strings representing directories  |
+
+**You need to supply at least one key in the payload.**
+
+**Example response:**
+
+```json
+{
+  "slug": "skuwe823"
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/backups/reload" method="post">
+
+Reload backup from storage.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/backups/<backup>/download" method="get">
+
+Download the backup file with the given slug.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/backups/<backup>/info" method="get">
+
+Returns a [Backup details model](api/supervisor/models.md#backup-details) for the add-on.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/backups/<backup>" method="delete">
+
+Removes the backup file with the given slug.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/backups/<backup>/restore/full" method="post">
+
+Does a full restore of the backup with the given slug.
+
+**Payload:**
+
+| key      | type   | optional | description                          |
+| -------- | ------ | -------- | ------------------------------------ |
+| password | string | True     | The password for the backup if any |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/backups/<backup>/restore/partial" method="post">
+
+Does a partial restore of the backup with the given slug.
+
+**Payload:**
+
+| key           | type    | optional | description                                    |
+| ------------- | ------- | -------- | ---------------------------------------------- |
+| homeassistant | boolean | True     | `true` if Home Assistant should be restored    |
+| addons        | list    | True     | A list of add-on slugs that should be restored |
+| folders       | list    | True     | A list of directories that should be restored  |
+| password      | string  | True     | The password for the backup if any           |
+
+**You need to supply at least one key in the payload.**
+
+</ApiEndpoint>
 
 ### CLI
 
@@ -806,18 +961,20 @@ Update options for Home Assistant, you need to supply at least one of the payloa
 You need to call `/core/restart` after updating the options.
 
 :::tip
-Passing `image` with `null` and `version_latest` with `null` resets these options.
+Passing `image`, `refresh_token`, `audio_input` or `audio_output` with `null` resets the option.
 :::
 
 **Payload:**
 
 | key            | type           | description                         |
 | -------------- | -------------- | ----------------------------------- |
-| image          | string         | Name of custom image or null        |
-| version_latest | string or null | Optional for custom image or null   |
-| port           | string         | The port that Home Assistant run on |
-| ssl            | boolean        | `true` if SSL is enabled            |
-| watchdog       | boolean        | `true` if watchdog is enabled       |
+| boot           | boolean        | Start Core on boot                  |
+| image          | string or null | Name of custom image                |
+| port           | int            | The port that Home Assistant run on |
+| ssl            | boolean        | `true` to enable SSL                |
+| watchdog       | boolean        | `true` to enable the watchdog       |
+| wait_boot      | int            | Time to wait for Core to startup    |
+| refresh_token  | string or null | Token to authenticate with Core     |
 | audio_input    | string or null | Profile name for audio input        |
 | audio_output   | string or null | Profile name for audio output       |
 
@@ -870,6 +1027,7 @@ Update Home Assistant core
 | key     | type   | description                                                    |
 | ------- | ------ | -------------------------------------------------------------- |
 | version | string | The version you want to install, default is the latest version |
+| backup | boolean | Create a partial backup of core and core configuration before updating, default is false |
 
 </ApiEndpoint>
 
@@ -1117,9 +1275,13 @@ Get hardware information.
         "dev_path": "/dev/ttyACM0",
         "by_id": "/dev/serial/by-id/usb-Silicon_Labs-RFUSB_9017F723B061A7C01410CFCF-if00-port1",
         "subsystem": "tty",
+        "parent": null,
         "attributes": {
           "MINOR": "5"
-        }
+        },
+        "children": [
+          "/sys/devices/soc/platform/00ef"
+        ]
       }
     ]
 }
@@ -1154,7 +1316,6 @@ Get audio devices
 
 </ApiEndpoint>
 
-
 ### Host
 
 <ApiEndpoint path="/host/info" method="get">
@@ -1164,6 +1325,8 @@ Return information about the host.
 
 | key              | type           | description                               |
 | ---------------- | -------------- | ----------------------------------------- |
+| agent_version    | string or null | Agent version running on the Host         |
+| apparmor_version | string or null | The AppArmor version from host            |
 | chassis          | string or null | The chassis type                          |
 | cpe              | string or null | The local CPE                             |
 | deployment       | string or null | The deployment stage of the OS if any     |
@@ -1174,21 +1337,27 @@ Return information about the host.
 | hostname         | string or null | The hostname of the host                  |
 | kernel           | string or null | The kernel version on the host            |
 | operating_system | string         | The operating system on the host          |
+| boot_timestamp | int | The timestamp for the last boot in microseconds |
+| startup_time | float | The time in seconds it took for last boot |
 
 **Example response:**
 
 ```json
 {
+  "agent_version": "1.2.0",
+  "apparmor_version": "2.13.2",
   "chassis": "specific",
   "cpe": "xy",
   "deployment": "stable",
   "disk_total": 32.0,
   "disk_used": 30.0,
   "disk_free": 2.0,
-  "features": ["shutdown", "reboot", "hostname", "services", "hassos"],
+  "features": ["shutdown", "reboot", "hostname", "services", "haos"],
   "hostname": "Awesome host",
   "kernel": "4.15.7",
-  "operating_system": "Home Assistant OS"
+  "operating_system": "Home Assistant OS",
+  "boot_timestamp": 1234567788,
+  "startup_time": 12.345
 }
 ```
 
@@ -1309,7 +1478,59 @@ Validate an ingress session, extending it's validity period.
 
 </ApiEndpoint>
 
-### Misc
+### Root
+
+<ApiEndpoint path="/available_updates" method="get">
+
+Returns information about available updates
+
+**Example response:**
+
+```json
+{
+  "available_updates": [
+  {
+      "panel_path": "/update-available/core",
+      "update_type": "core",
+      "version_latest": "321",
+    },
+    {
+      "panel_path": "/update-available/os",
+      "update_type": "os",
+      "version_latest": "321",
+    },
+    {
+      "panel_path": "/update-available/supervisor",
+      "update_type": "supervisor",
+      "version_latest": "321",
+    },
+    {
+      "name": "Awesome addon",
+      "icon": "/addons/awesome_addon/icon",
+      "panel_path": "/update-available/awesome_addon",
+      "update_type": "addon",
+      "version_latest": "321",
+    }
+  ]
+}
+```
+
+**Returned data:**
+
+| key | type | description |
+-- | -- | --
+update_type | string | `addon`, `os`, `core` or `supervisor`
+name | string | Returns the name (only if the `update_type` is `addon`)
+icon | string | Returns the path for the icon if any (only if the `update_type` is `addon`)
+version_latest | string | Returns the available version
+panel_path | string | Returns path where the UI can be loaded
+
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/refresh_updates" method="post">
+This reloads information about add-on repositories and fetches new version files.
+</ApiEndpoint>
 
 <ApiEndpoint path="/info" method="get">
 Returns a dict with selected keys from other `/*/info` endpoints.
@@ -1500,7 +1721,7 @@ Update the settings for a network interface.
 
 | key         | type   | optional | description                                                                           |
 | ----------- | ------ | -------- | ------------------------------------------------------------------------------------- |
-| method      | string | True     | Set IP configuration method can be `auto` for DHCP or Router Advertisments (only IPv6), `static` or `disabled`     |
+| method      | string | True     | Set IP configuration method can be `auto` for DHCP or Router Advertisements (only IPv6), `static` or `disabled`     |
 | address     | list   | True     | The new IP address for the interface in the X.X.X.X/XX format as list                 |
 | nameservers | list   | True     | List of DNS servers to use                                                            |
 | gateway     | string | True     | The gateway the interface should use                                                  |
@@ -1626,7 +1847,7 @@ Update the observer plugin
 
 <ApiEndpoint path="/os/config/sync" method="post">
 
-Load host configurations from an USB stick.
+Load host configurations from a USB stick.
 
 </ApiEndpoint>
 
@@ -1643,6 +1864,7 @@ Returns information about the OS.
 | update_available | boolean | `true` if an update is available                             |
 | board            | string  | The name of the board                                        |
 | boot             | string  | Which slot that are in use                                   |
+| data_disk        | string  | Device which is used for holding OS data persistent          |
 
 **Example response:**
 
@@ -1650,8 +1872,10 @@ Returns information about the OS.
 {
   "version": "4.3",
   "version_latest": "5.0",
+  "update_available": true,
   "board": "ova",
-  "boot": "slot1"
+  "boot": "slot1",
+  "data_disk": "/dev/sda"
 }
 ```
 
@@ -1669,6 +1893,41 @@ Update Home Assistant OS
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/os/datadisk/list" method="get">
+
+Returns possible targets for the new data partition.
+
+**Returned data:**
+
+| key              | type    | description                                                  |
+| ---------------- | ------- | ------------------------------------------------------------ |
+| devices          | list    | List with devices paths of possible disk targets             |
+
+**Example response:**
+
+```json
+{
+  "devices": [
+    "/dev/sda",
+    "/dev/sdb"
+  ]
+}
+```
+
+</ApiEndpoint>
+  
+<ApiEndpoint path="/os/datadisk/move" method="post">
+
+Move datadisk to a new location, **This will also reboot the device!**
+
+**Payload:**
+
+| key     | type   | description                                                       |
+| ------- | ------ | ----------------------------------------------------------------- |
+| device  | string | Path to the new device which should be use as the target for the data migration |
+
+</ApiEndpoint>
+
 ### Resolution
 
 <ApiEndpoint path="/resolution/info" method="get">
@@ -1677,8 +1936,8 @@ Update Home Assistant OS
 
 | key      | type       | description                                      |
 | -------- | ---------- | ------------------------------------------------ |
-| unsupported | list | A list of reasons why a installation is marked as unsupported (container, dbus, docker_configuration, docker_version, lxc, network_manager, os, privileged, systemd) |
-| unhealthy | list | A list of reasons why a installation is marked as unhealthy (docker, supervisor, privileged, setup) |
+| unsupported | list | A list of reasons why an installation is marked as unsupported (container, dbus, docker_configuration, docker_version, lxc, network_manager, os, privileged, systemd) |
+| unhealthy | list | A list of reasons why an installation is marked as unhealthy (docker, supervisor, privileged, setup) |
 | issues | list | A list of [Issue models](api/supervisor/models.md#issues) |
 | suggestions | list | A list of [Suggestion models](api/supervisor/models.md#suggestion) actions |
 | checks | list | A list of [Check models](api/supervisor/models.md#check) |
@@ -1700,7 +1959,7 @@ Update Home Assistant OS
   "suggestions": [
     {
       "uuid": "B9923620C9A11EBBDC3C403FC2CA371",
-      "type": "clear_snapshots",
+      "type": "clear_backups",
       "context": "system",
       "reference": null
     }
@@ -1730,7 +1989,7 @@ Dismiss a suggested action
 
 <ApiEndpoint path="/resolution/issue/<uuid>" method="delete">
 
-Dismiss a issue
+Dismiss an issue
 
 </ApiEndpoint>
 
@@ -1886,144 +2145,6 @@ Deletes the service definitions
 
 </ApiEndpoint>
 
-### Snapshot
-
-<ApiEndpoint path="/snapshots" method="get">
-
-Return a list of [Snapshot models](api/supervisor/models.md#snapshot)
-
-**Example response:**
-
-```json
-{
-  "snapshots": [
-    {
-      "slug": "skuwe823",
-      "date": "2020-09-30T20:25:34.273Z",
-      "name": "Awesome snapshot",
-      "type": "full",
-      "protected": true
-    }
-  ]
-}
-```
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/snapshots/new/full" method="post">
-
-Create a full snapshot.
-
-**Payload:**
-
-| key      | type   | optional | description                                |
-| -------- | ------ | -------- | ------------------------------------------ |
-| name     | string | True     | The name you want to give the snapshot     |
-| password | string | True     | The password you want to give the snapshot |
-
-**Example response:**
-
-```json
-{
-  "slug": "skuwe823"
-}
-```
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/snapshots/new/upload" method="post">
-
-Upload a snapshot.
-
-**Example response:**
-
-```json
-{
-  "slug": "skuwe823"
-}
-```
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/snapshots/new/partial" method="post">
-
-Create a partial snapshot.
-
-**Payload:**
-
-| key      | type   | optional | description                                 |
-| -------- | ------ | -------- | ------------------------------------------- |
-| name     | string | True     | The name you want to give the snapshot      |
-| password | string | True     | The password you want to give the snapshot  |
-| addons   | list   | True     | A list of strings representing add-on slugs |
-| folders  | list   | True     | A list of strings representing directories  |
-
-**You need to supply at least one key in the payload.**
-
-**Example response:**
-
-```json
-{
-  "slug": "skuwe823"
-}
-```
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/snapshots/reload" method="post">
-
-Reload snapshots from storage.
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/snapshots/<snapshot>/download" method="get">
-
-Download the snapshot file with the given slug.
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/snapshots/<snapshot>/info" method="get">
-
-Returns a [Snapshot details model](api/supervisor/models.md#snapshot-details) for the add-on.
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/snapshots/<snapshot>" method="delete">
-
-Removes the snapshot file with the given slug.
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/snapshots/<snapshot>/restore/full" method="post">
-
-Does a full restore of the snapshot with the given slug.
-
-**Payload:**
-
-| key      | type   | optional | description                          |
-| -------- | ------ | -------- | ------------------------------------ |
-| password | string | True     | The password for the snapshot if any |
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/snapshots/<snapshot>/restore/partial" method="post">
-
-Does a partial restore of the snapshot with the given slug.
-
-**Payload:**
-
-| key           | type    | optional | description                                    |
-| ------------- | ------- | -------- | ---------------------------------------------- |
-| homeassistant | boolean | True     | `true` if Home Assistant should be restored    |
-| addons        | list    | True     | A list of add-on slugs that should be restored |
-| folders       | list    | True     | A list of directories that should be restored  |
-| password      | string  | True     | The password for the snapshot if any           |
-
-**You need to supply at least one key in the payload.**
-
-</ApiEndpoint>
-
-
 ### Store
 
 <ApiEndpoint path="/store" method="get">
@@ -2107,27 +2228,29 @@ Returns information about a store add-on
 
 </ApiEndpoint>
 
-
 <ApiEndpoint path="/store/addons/<addon>/install" method="post">
 
 Install an add-on from the store.
 
 </ApiEndpoint>
 
-
 <ApiEndpoint path="/store/addons/<addon>/update" method="post">
 
 Update an add-on from the store.
 
-</ApiEndpoint>
+**Payload:**
 
+| key     | type   | description                                                    |
+| ------- | ------ | -------------------------------------------------------------- |
+| backup | boolean | Create a partial backup of the add-on, default is false |
+
+</ApiEndpoint>
 
 <ApiEndpoint path="/store/reload" method="post">
 
 Reloads the information stored about add-ons.
 
 </ApiEndpoint>
-
 
 <ApiEndpoint path="/store/repositories" method="get">
 
@@ -2167,6 +2290,44 @@ Returns information about a store repository
 
 </ApiEndpoint>
 
+### Security
+
+<ApiEndpoint path="/security/info" method="get">
+
+Returns information about the security features
+
+**Returned data:**
+
+| key                 | type         | description                                                   |
+| ------------------- | ------------ | ------------------------------------------------------------- |
+| content_trust       | bool         | If content-trust is enabled or disabled on the backend        |
+| pwned               | bool         | If pwned check is enabled or disabled on the backend          |
+| force_security      | bool         | If force-security is enabled or disabled on the backend       |
+
+**Example response:**
+
+```json
+{
+  "content_trust": true,
+  "pwned": true,
+  "force_security": false,
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/security/options" method="post">
+
+**Payload:**
+
+| key                 | type   | description                                            |
+| ------------------- | ------ | ------------------------------------------------------ |
+| content_trust       | bool   | Disable/Enable content-trust                           |
+| pwned               | bool   | Disable/Enable pwned                                   |
+| force_security      | bool   | Disable/Enable force-security                          |
+
+</ApiEndpoint>
+
 ### Supervisor
 
 <ApiEndpoint path="/supervisor/info" method="get">
@@ -2181,8 +2342,6 @@ Returns information about the supervisor
 | version_latest      | string       | The latest published version in the active channel            |
 | update_available    | boolean      | `true` if an update is available                              |
 | arch                | string       | The architecture of the host (armhf, aarch64, i386, amd64)    |
-| content_trust       | bool         | If content-trust is enabled or disabled on the backend        |
-| force_security      | bool         | If force-security is enabled or disabled on the backend       |
 | channel             | string       | The active channel (stable, beta, dev)                        |
 | timezone            | string       | The current timezone                                          |
 | healthy             | bool         | The supervisor is in a healthy state                          |
@@ -2205,8 +2364,6 @@ Returns information about the supervisor
   "update_available": true,
   "arch": "amd64",
   "channel": "dev",
-  "content_trust": true,
-  "force_security": false,
   "timezone": "TIMEZONE",
   "healthy": true,
   "supported": false,
@@ -2257,8 +2414,6 @@ You need to call `/supervisor/reload` after updating the options.
 | debug_block         | bool   | Enable debug block                                     |
 | logging             | string | Set logging level                                      |
 | addons_repositories | list   | Set a list of URL's as strings for add-on repositories |
-| content_trust       | bool   | Disable/Enable content-trust                           |
-| force_security      | bool   | Disable/Enable force-security                          |
 
 </ApiEndpoint>
 
@@ -2326,10 +2481,10 @@ Some of the endpoints uses placeholders indicated with `<...>` in the endpoint U
 | placeholder | description                                                                                                                                           |
 | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | addon       | The slug for the addon, to get the slug you can call `/addons`, to call endpoints for the add-on calling the endpoints you can use `self`as the slug. |
-| application | The name of a application, call `/audio/info` to get the correct name                                                                                 |
+| application | The name of an application, call `/audio/info` to get the correct name                                                                                 |
 | interface   | A valid interface name, example `eth0`, to get the interface name you can call `/network/info`. You can use `default` to get the primary interface |
 | registry    | A registry hostname defined in the container registry configuration, to get the hostname you can call `/docker/registries`                            |
 | service     | The service name for a service on the host.                                                                                                           |
-| snapshot    | A valid snapshot slug, example `skuwe823`, to get the slug you can call `/snapshots`                                                                  |
-| suggestion  | A valid suggestion, example `clear_full_snapshot`, to get the suggestion you can call `/resolution`                                         |
+| backup    | A valid backup slug, example `skuwe823`, to get the slug you can call `/backups`                                                                  |
+| suggestion  | A valid suggestion, example `clear_full_backup`, to get the suggestion you can call `/resolution`                                         |
 | uuid        | The UUID of a discovery service, to get the UUID you can call `/discovery`                                                                            |

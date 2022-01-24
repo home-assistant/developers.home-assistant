@@ -31,11 +31,15 @@ ssh root@homeassistant.local -p 22222
 
 If you have an older installation or have changed your hostname, you may need to use a different hostname in the command above. You can check the correct hostname to use in the System page of the Supervisor interface in Home Assistant.
 
-You will initially be logged in to Home Assistant CLI for HassOS where you can perform normal [CLI functions]. If you need access to the host system use the 'login' command. [Home Assistant OS] is a hypervisor for Docker. See the [Supervisor Architecture] documentation for information regarding the supervisor. The supervisor offers an API to manage the host and running the Docker containers. Home Assistant itself and all installed addons run in separate Docker containers.
+You will be logged in as root in the ```/root``` folder. [Home Assistant OS] is a hypervisor for Docker. See the [Supervisor Architecture] documentation for information regarding the Supervisor. The Supervisor offers an API to manage the host and running the Docker containers. Home Assistant itself and all installed addons run in separate Docker containers.
 
-[CLI functions]: https://www.home-assistant.io/hassio/commandline/
-[Home Assistant OS]: https://github.com/home-assistant/hassos
+[CLI tasks]: https://www.home-assistant.io/hassio/commandline/
+[Home Assistant OS]: https://github.com/home-assistant/operating-system
 [Supervisor Architecture]: /architecture_index.md
+
+### Turning off SSH access to the host
+
+Use a USB drive formatted with FAT, ext4, or NTFS and name it CONFIG (case sensitive). Remove any existing `authorized_keys` file from the drive and leave the drive empty. When the Home Assistant OS device is rebooted with this drive inserted, any existing keys will be removed and the SSH service will be stopped.
 
 ## Checking the logs
 
@@ -44,7 +48,7 @@ You will initially be logged in to Home Assistant CLI for HassOS where you can p
 journalctl -f -u hassos-supervisor.service
 
 # Supervisor logs
-docker logs hassos_supervisor
+docker logs hassio_supervisor
 
 # Home Assistant logs
 docker logs homeassistant

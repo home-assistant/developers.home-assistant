@@ -9,7 +9,7 @@ Translations for Home Assistant are managed through [Lokalise](https://lokalise.
 - [Join the iOS translation team](https://lokalise.com/signup/834452985a05254348aee2.46389241/all/)
 - [Join the Android translation team](https://lokalise.com/public/145814835dd655bc5ab0d0.36753359/)
 
-For more information about the translation workflow, please see the [Lokalise translation workflow documents](https://docs.lokalise.com/en/collections/652216-translation-workflow).
+For more information about the translation editor and tools, please see the [Lokalise translate and collaborate documents](https://docs.lokalise.com/en/collections/2909016-translate-and-collaborate).
 
 ## Translation placeholders
 
@@ -30,7 +30,7 @@ Placeholders shown in curly brackets `{}` are [translation arguments](https://fo
 
 ## Adding a new language
 
-If your language is not listed you can request it at [GitHub](https://github.com/home-assistant/home-assistant-polymer/issues/new). Please provide both the English name and the native name for your language. For example:
+If your language is not listed you can request it at [GitHub](https://github.com/home-assistant/frontend/issues/new). Please provide both the English name and the native name for your language. For example:
 
 ```txt
 English Name: German
@@ -53,7 +53,7 @@ Most languages have multiple possible translations of a sentence. Please take a 
 The sections are written in their corresponding languages, as this makes explaining the grammar easier and only native speakers should submit translations (see [Rules](#rules)).
 
 ### German
-- Du/Sie: Dutze in den Übersetzungen, und verwende nicht das formale "Sie".
+- Du/Sie: Duze in den Übersetzungen, und verwende nicht das formale "Sie".
 
 #### Typische Fehler
 - Achte auf den richtigen Imperativ. Der Imperativ ist die Befehlsform, z. B. "Gib mir das Wasser". Falsch wäre hier: "Gebe mir das Wasser" (siehe [Bildung des Imperativs](https://www.duden.de/sprachwissen/sprachratgeber/Bildung-des-Imperativs)).

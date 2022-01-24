@@ -69,6 +69,7 @@ module.exports = {
       label: "Custom UI",
       items: [
         "frontend/custom-ui/lovelace-custom-card",
+        "frontend/custom-ui/lovelace-custom-strategy",
         "frontend/custom-ui/lovelace-custom-view",
         "frontend/custom-ui/creating-custom-panels",
         "frontend/custom-ui/registering-resources",
@@ -81,7 +82,14 @@ module.exports = {
     "internationalization/core",
     "internationalization/custom_integration",
   ],
-  OperatingSystem: ["operating-system", "operating-system/debugging"],
+  OperatingSystem: [
+    "operating-system",
+    "operating-system/getting-started",
+    "operating-system/debugging",
+    "operating-system/partition",
+    "operating-system/board-metadata",
+    "operating-system/deployment"
+  ],
   Supervisor: ["supervisor", "supervisor/development", "supervisor/debugging"],
   // Old structure, still to move/migrate
   Architecture: {
@@ -116,9 +124,9 @@ module.exports = {
       "development_catching_up",
     ],
     "Building Integrations": [
+      "creating_component_index",
       "creating_integration_file_structure",
       "creating_integration_manifest",
-      "creating_component_index",
       "config_entries_config_flow_handler",
       "config_entries_options_flow_handler",
       "configuration_yaml_index",
@@ -127,6 +135,7 @@ module.exports = {
       "creating_component_generic_discovery",
       "integration_fetching_data",
       "integration_events",
+      "network_discovery",
     ],
     "Building Entity Integrations": [
       "reproduce_state_index",
@@ -149,6 +158,8 @@ module.exports = {
       "core/entity/air-quality",
       "core/entity/alarm-control-panel",
       "core/entity/binary-sensor",
+      "core/entity/button",
+      "core/entity/camera",
       "core/entity/climate",
       "core/entity/cover",
       "core/entity/device-tracker",
@@ -159,7 +170,9 @@ module.exports = {
       "core/entity/media-player",
       "core/entity/number",
       "core/entity/remote",
+      "core/entity/select",
       "core/entity/sensor",
+      "core/entity/siren",
       "core/entity/switch",
       "core/entity/vacuum",
       "core/entity/water-heater",

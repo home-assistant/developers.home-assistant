@@ -134,28 +134,6 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/api/discovery_info" method="get" unprotected>
-
-Returns basic information about the Home Assistant instance as JSON.
-
-```json
-{
-    "base_url": "http://192.168.0.2:8123",
-    "location_name": "Home",
-    "requires_api_password": true,
-    "version": "0.56.2"
-}
-```
-
-Sample `curl` command:
-
-```shell
-curl -X GET -H "Content-Type: application/json" \
-  http://localhost:8123/api/discovery_info
-```
-
-</ApiEndpoint>
-
 <ApiEndpoint path="/api/events" method="get">
 
 Returns an array of event objects. Each event object contains event name and listener count.
@@ -585,6 +563,21 @@ curl -X POST -H "Authorization: Bearer ABCDEFGH" \
   -H "Content-Type: application/json" \
   -d '{"entity_id": "switch.christmas_lights"}' \
   http://localhost:8123/api/services/switch/turn_on
+```
+
+Sample `python` command using the [Requests](https://requests.readthedocs.io/en/master/) module:
+
+Turn the light on:
+
+```shell
+from requests import post
+
+url = "http://localhost:8123/api/services/light/turn_on"
+headers = {"Authorization": "Bearer ABCDEFGH"}
+data = {"entity_id": "light.study_light"}
+
+response = post(url, headers=headers, json=data)
+print(response.text)
 ```
 
 Send a MQTT message:

@@ -194,7 +194,7 @@ folded_example: >
   removes all the new lines placed in your YAML.
 
 # Bad
-literal_example: "This example is a example of literal block scalar style in YAML.\nIt allows you to split a string into multiple lines.\n"
+literal_example: "This example is an example of literal block scalar style in YAML.\nIt allows you to split a string into multiple lines.\n"
 folded_example_same_as: "This example is an example of a folded block scalar style in YAML. It allows you to split a string into multi lines, however, it magically removes all the new lines placed in your YAML.\n"
 ```
 

@@ -17,7 +17,7 @@ Use `supervisor` for communication with the internal API.
 
 An add-on can talk to the [Home Assistant Core API][core-api] using the internal proxy. This makes it very easy to communicate with the API without knowing the password, port or any other information about the Home Assistant instance. Using this URL: `http://supervisor/core/api` ensures that internal communication is redirected to the right place. The next step is to add `homeassistant_api: true` to the `config.json` file and read the environment variable `SUPERVISOR_TOKEN`. Use this as the Home Assistant Core [bearer token](/auth_api.md#making-authenticated-requests) when making requests.
 
-For example `curl -X GET -H "Authorization: Bearer ${SUPERVISOR_TOKEN}" -H "Content-Type: application/json" http://supervisor/core/api/discovery_info`
+For example `curl -X GET -H "Authorization: Bearer ${SUPERVISOR_TOKEN}" -H "Content-Type: application/json" http://supervisor/core/api/config`
 
 There is also a proxy for the [Home Assistant Websocket API][core-websocket] that works like the API proxy above and requires `SUPERVISOR_TOKEN` as the password. Use this URL: `http://supervisor/core/websocket`.
 

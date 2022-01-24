@@ -2,32 +2,41 @@
 title: "Set up Development Environment"
 ---
 
+```mdx-code-block
+import {useState} from 'react';
+
+export const RepositoryOpener = () => {
+  const [value, setValue] = useState(0);
+  const repoUrl = `vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=${encodeURIComponent(value)}`;
+  return <div>
+    <input onInput={(ev) => setValue(ev.target.value)} style={{width: "80%", display: "inline-block", marginRight: 16}} />
+    <a href={repoUrl}><button style={{cursor: value == "" ? "default" : "pointer"}} disabled={value == ""}>Open</button></a>
+  </div>
+}
+```
+
 You'll need to set up a development environment if you want to develop a new feature or component for Home Assistant. Read on to learn how to set up.
 
 ## Developing with Visual Studio Code + devcontainer
 
-The easiest way to get started with development is to use Visual Studio Code with devcontainers. This approach will create a preconfigured development environment with all the tools you need. This approach is enabled for all Home Assistant repositories.
+The easiest way to get started with development is to use Visual Studio Code with devcontainers. This approach will create a preconfigured development environment with all the tools you need. This approach is enabled for all Home Assistant repositories. [Learn more about devcontainers.](https://code.visualstudio.com/docs/remote/containers)
 
 **Prerequisites**
 
-- [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
-- Docker
-  -  For Linux, macOS, or Windows 10 Pro/Enterprise/Education use the [current release version of Docker](https://docs.docker.com/install/)
-  -   Windows 10 Home requires [WSL 2](https://docs.microsoft.com/windows/wsl/install-win10#update-to-wsl-2) and the current Edge version of Docker Desktop (see instructions [here](https://docs.docker.com/docker-for-windows/wsl-tech-preview/)). This can also be used for Windows Pro/Enterprise/Education.
+- [Docker](https://docs.docker.com/install/)
 - [Visual Studio code](https://code.visualstudio.com/)
-- [Remote - Containers (VSC Extension)][extension-link]
-
-[More info about requirements and devcontainer in general](https://code.visualstudio.com/docs/remote/containers#_getting-started)
-
-[extension-link]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
+- [Git](https://git-scm.com/)
 
 **Getting started:**
 
-1. Fork the repository.
-2. Clone the repository to your computer.
-3. Open the repository using Visual Studio code.
+1. Go to [Home Assistant core repository](https://github.com/home-assistant/core) and click "fork".
+2. Once your fork is created, copy the URL of your fork and paste it below, then click "Open":
+   <RepositoryOpener />
+3. Your browser will prompt you if you want to use Visual Studio Code to open the link, click "Open Link".
+4. When Visual Studio Code asks if you want to install the Remote extension, click "Install".
+5. The Dev Container image will then be built (this may take a few minutes), after this your development environment will be ready.
 
-When you open this repository with Visual Studio code you are asked to "Reopen in Container", this will start the build of the container.
+In the future, if you want to get back to your development environment: open Visual Studio Code, click on the "Remote Explorer" button in the sidebar, select "Containers" at the top of the sidebar.
 
 ### Tasks
 
@@ -37,13 +46,16 @@ When a task is currently running (like `Preview` for the docs), it can be restar
 
 ## Manual Environment
 
-It is also possible to set up a more traditional development environment. See the section for your operating system. Make sure your Python version is 3.7 or later.
+_You only need these instructions if you do not want to use devcontainers._
+
+It is also possible to set up a more traditional development environment. See the section for your operating system. Make sure your Python version is 3.9 or later.
 
 ### Developing on Linux
 
 Install the core dependencies.
 
 ```shell
+sudo apt-get update
 sudo apt-get install python3-pip python3-dev python3-venv autoconf libssl-dev libxml2-dev libxslt1-dev libjpeg-dev libffi-dev libudev-dev zlib1g-dev pkg-config libavformat-dev libavcodec-dev libavdevice-dev libavutil-dev libswscale-dev libavresample-dev libavfilter-dev ffmpeg
 ```
 
@@ -80,15 +92,17 @@ Install [Homebrew](https://brew.sh/), then use that to install the dependencies:
 brew install python3 autoconf ffmpeg
 ```
 
+If you encounter build issues with `cryptography` when running the `script/setup` script below, check the cryptography documentation for [installation instructions](https://cryptography.io/en/latest/installation/#building-cryptography-on-macos).
+
 ## Setup Local Repository
 
 Visit the [Home Assistant Core repository](https://github.com/home-assistant/core) and click **Fork**.
 Once forked, setup your local copy of the source using the commands:
 
 ```shell
-$ git clone https://github.com/YOUR_GIT_USERNAME/core.git
-$ cd core
-$ git remote add upstream https://github.com/home-assistant/core.git
+git clone https://github.com/YOUR_GIT_USERNAME/core.git
+cd core
+git remote add upstream https://github.com/home-assistant/core.git
 ```
 
 Install the requirements with a provided script named `setup`.
@@ -97,7 +111,7 @@ Install the requirements with a provided script named `setup`.
 script/setup
 ```
 
-This will create a virtual environment and install all necessary requirements. You're now set! 
+This will create a virtual environment and install all necessary requirements. You're now set!
 
 Each time you start a new terminal session, you will need to activate your virtual environment:
 

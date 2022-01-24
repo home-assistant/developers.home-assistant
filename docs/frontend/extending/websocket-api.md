@@ -8,104 +8,73 @@ As a component you might have information that you want to make available to the
 
 To register a command, you need to have a message type, a message schema and a message handler. Your component does not have to add the websocket API as a dependency. You register your command, and if the user is using the websocket API, the command will be made available.
 
-### Message Types
+### Defining your command schema
 
-Message types are made up the domain and the message type, separated by a forward slash. In the below example, we're defining `media_player/thumbnail`.
-
-```python
-# The type of the message
-WS_TYPE_MEDIA_PLAYER_THUMBNAIL = "media_player/thumbnail"
-```
-
-### Message Schema
-
-The message schema defines what type of data we expect when the message is invoked. It is defined as a voluptuous schema and has to extend the base web socket command schema.
+A command schema is made up of a message type and what type of data we expect when the command is invoked. You define both the command type and the data schema via a decorator on your command handler. Message handlers are callback functions that are run inside the event loop.
 
 ```python
-import voluptuous as vol
-
 from homeassistant.components import websocket_api
-import homeassistant.helpers.config_validation as cv
 
-
-# The schema for the message
-SCHEMA_WEBSOCKET_GET_THUMBNAIL = websocket_api.BASE_COMMAND_MESSAGE_SCHEMA.extend(
+@websocket_api.websocket_command(
     {
-        "type": WS_TYPE_MEDIA_PLAYER_THUMBNAIL,
-        # The entity that we want to retrieve the thumbnail for.
-        "entity_id": cv.entity_id,
+        vol.Required("type"): "frontend/get_panels",
+        vol.Optional("preload_panels"): bool,
     }
 )
+@callback
+def ws_get_panels(
+    hass: HomeAssistant, connection: websocket_api.ActiveConnection, msg: dict
+) -> None:
+    """Handle the websocket command."""
+    panels = ...
+    connection.send_result(msg["id"], {"panels": panels})
 ```
 
-### Defining a handler
+#### Doing I/O or sending a delayed response
 
-Message handlers are callback functions that are run inside the event loop. If you want to do I/O or have to wait for your result, create a new function and queue it up using `hass.async_add_job`. This is done so that the websocket API can get back to handling the next message as soon as possible.
-
-#### Sending a direct response
-
-If you are defining a command that is querying simple information, you might be able to fulfill the request while the handler is being called by the websocket API. To do this, use `connection.to_write.put_nowait`.
+If your command needs to interact with the network, a device or needs to compute information, you will need to queue a job to do the work and send the response. To do this, make your function async and decorate with `@websocket_api.async_response`.
 
 ```python
-@callback
-def websocket_handle_thumbnail(hass, connection, msg):
-    """Handle getting a thumbnail."""
+from homeassistant.components import websocket_api
 
-    # We know the answer without having to fetch any information,
-    # so we send it directly.
-    connection.to_write.put_nowait(
-        websocket_api.result_message(
-            msg["id"], {"thumbnail": "http://via.placeholder.com/350x150"}
-        )
-    )
-```
-
-#### Sending a delayed response
-
-If your command needs to interact with the network, a device or needs to compute information, you will need to queue a job to do the work and send the response. To do this, use `connection.send_message_outside`.
-
-```python
-@callback
-def websocket_handle_thumbnail(hass, connection, msg):
+@websocket_api.websocket_command(
+    {
+        vol.Required("type"): "camera/get_thumbnail",
+        vol.Optional("entity_id"): str,
+    }
+)
+@websocket_api.async_response
+async def ws_handle_thumbnail(
+    hass: HomeAssistant, connection: ActiveConnection, msg: dict
+) -> None:
     """Handle get media player cover command."""
     # Retrieve media player using passed in entity id.
     player = hass.data[DOMAIN].get_entity(msg["entity_id"])
 
     # If the player does not exist, send an error message.
     if player is None:
-        connection.to_write.put_nowait(
-            websocket_api.error_message(
+        connection.send_error(
                 msg["id"], "entity_not_found", "Entity not found"
             )
         )
         return
 
-    # Define a function to be enqueued.
-    async def send_image():
-        """Send image."""
-        data, content_type = await player.async_get_media_image()
+    data, content_type = await player.async_get_media_image()
 
-        # No media player thumbnail available
-        if data is None:
-            connection.send_message_outside(
-                websocket_api.error_message(
-                    msg["id"], "thumbnail_fetch_failed", "Failed to fetch thumbnail"
-                )
-            )
-            return
-
-        connection.send_message_outside(
-            websocket_api.result_message(
-                msg["id"],
-                {
-                    "content_type": content_type,
-                    "content": base64.b64encode(data).decode("utf-8"),
-                },
-            )
+    # No media player thumbnail available
+    if data is None:
+        connection.send_error(
+            msg["id"], "thumbnail_fetch_failed", "Failed to fetch thumbnail"
         )
+        return
 
-    # Player exist. Queue up a job to send the thumbnail.
-    hass.async_add_job(send_image())
+    connection.send_result(
+        msg["id"],
+        {
+            "content_type": content_type,
+            "content": base64.b64encode(data).decode("utf-8"),
+        },
+    )
 ```
 
 ### Registering with the Websocket API
@@ -115,11 +84,8 @@ With all pieces defined, it's time to register the command. This is done inside 
 ```python
 async def async_setup(hass, config):
     """Setup of your component."""
-    hass.components.websocket_api.async_register_command(
-        WS_TYPE_MEDIA_PLAYER_THUMBNAIL,
-        websocket_handle_thumbnail,
-        SCHEMA_WEBSOCKET_GET_THUMBNAIL,
-    )
+    hass.components.websocket_api.async_register_command(ws_get_panels)
+    hass.components.websocket_api.async_register_command(ws_handle_thumbnail)
 ```
 
 ## Calling the command from the frontend (JavaScript)

@@ -10,10 +10,10 @@ To enable the notify platform for your application, you must set two keys in the
 
 | Key | Type | Description
 | --- | ---- | -----------
-| `push_token` | string | A push notification token unique to your users device. For example, this could be a APNS token or a FCM Instance ID/token.
+| `push_token` | string | A push notification token unique to your users device. For example, this could be an APNS token or an FCM Instance ID/token.
 | `push_url` | string | The URL on your server that push notifications will be HTTP POSTed to.
 
-You should advise the user to restart Home Assistant after you set these keys in order for them to see the notify target. It will have the format `notify.mobile_app_<safed_device_name>`.
+You should advise the user to restart Home Assistant after you set these keys in order for them to see the notify target. It will have the format `notify.mobile_app_<saved_device_name>`.
 
 ## Deploying a server component
 
@@ -32,13 +32,18 @@ Your server should accept a HTTP POST payload like this:
   "registration_info": {
     "app_id": "io.home-assistant.iOS",
     "app_version": "1.0.0",
-    "os_version": "12.2"
+    "os_version": "12.2",
+    "webhook_id": "webhook_id_from_registration"
   },
   "data": {
     "key": "value"
   }
 }
 ```
+
+:::info
+`webhook_id` will only be included from core-2021.11 or later.
+:::
 
 It should respond with a 201 status code assuming the notification was queued for delivery successfully.
 

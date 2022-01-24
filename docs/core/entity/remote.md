@@ -3,6 +3,8 @@ title: Remote Entity
 sidebar_label: Remote
 ---
 
+Derive entity platforms from [`homeassistant.components.remote.RemoteEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/remote/__init__.py)
+
 ## Properties
 
 :::tip
@@ -12,7 +14,7 @@ Properties should always only return information from memory and not do I/O (lik
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | current_activity | str | None | Return the current active activity |
-| activity_list | list | None | Return the list of available activites |
+| activity_list | list | None | Return the list of available activities |
 
 ### Activity
 
@@ -34,10 +36,10 @@ An activity is a predefined activity or macro that puts the remote in a specific
 class MyRemote(RemoteEntity):
 
     def turn_on(self, activity: str = None, **kwargs):
-         """Turn the remote on."""
+         """Send the power on command."""
 
     async def async_turn_on(self, activity: str = None, **kwargs):
-         """Turn the remote on."""
+         """Send the power on command."""
 ```
 
 ### Turn Off Command
@@ -46,10 +48,10 @@ class MyRemote(RemoteEntity):
 class MyRemote(RemoteEntity):
 
     def turn_off(self, activity: str = None, **kwargs):
-         """Turn the remote off."""
+         """Send the power off command."""
 
     async def async_turn_off(self, activity: str = None, **kwargs):
-         """Turn the remote off."""
+         """Send the power off command."""
 ```
 
 ### Toggle Command
@@ -58,10 +60,10 @@ class MyRemote(RemoteEntity):
 class MyRemote(RemoteEntity):
 
     def toggle(self, activity: str = None, **kwargs):
-         """Toggle the remote."""
+         """Toggle a device."""
 
     async def async_toggle(self, activity: str = None, **kwargs):
-         """Toggle the remote."""
+         """Toggle a device."""
 ```
 
 ### Send Command

@@ -18,10 +18,8 @@ The instructions here is for development of the Supervisor itself.
 
 ### Local testing
 
-Start the task "Run Supervisor" in Visual Studio Code, this will start a instance of the Supervisor inside the devcontainer you can use to test your changes.
+Start the task "Run Supervisor" in Visual Studio Code, this will start an instance of the Supervisor inside the devcontainer you can use to test your changes.
 When the initializing is complete you can access the Home Assistant frontend on `http://localhost:9123`
-
-If you need to rebuild the base of the Supervisor run the task "Build Supervisor" and then restart the "Run Supervisor" task again when that completes.
 
 ### Testing on a remote system
 
@@ -59,19 +57,19 @@ docker run --rm \
 ```
 
 4. On your remote system change the channel to `dev` with `ha supervisor --channel dev` or just `supervisor --channel dev` if it's Home Assistant OS.
-5. Pull down your Supervisor image with  `docker pull awesome-user/aarch64-hassio-supervisor:latest`
+5. Pull down your Supervisor image with `docker pull awesome-user/aarch64-hassio-supervisor:latest`
 6. Tag your Supervisor image as `homeassistant/aarch64-hassio-supervisor:latest`
 
 ```bash
 docker tag awesome-user/aarch64-hassio-supervisor:latest homeassistant/aarch64-hassio-supervisor:latest
 ```
 
-7. Restart the `hassio-supervisor` service with  `systemctl restart hassos-supervisor`
+7. Restart the `hassio-supervisor` service with `systemctl restart hassos-supervisor`
 8. Check for issues with `journalctl -fu hassos-supervisor`
 
 ## Integration development
 
-The instructions here is for development of the `hassio` integration, we're going to assume that you have a [Home Assistant Core development environment](development_environment.md) set up, and that you have [Supervisor API Access](#supervisor-api-access) set up.
+The instructions here is for development of the `hassio` integration, we're going to assume that you have a [Home Assistant Core development environment](development_environment.mdx) set up, and that you have [Supervisor API Access](#supervisor-api-access) set up.
 
 To configure Home Assistant Core to connect to a remote supervisor, set the following environment variables when starting Home Assistant:
 

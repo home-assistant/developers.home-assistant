@@ -3,7 +3,7 @@ title: Climate Entity
 sidebar_label: Climate
 ---
 
-A climate entity controls temperature, humidity, or fans, such as A/C systems and humidifiers. Derive a platform entity from [`homeassistant.components.climate.ClimateEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/climate/__init__.py)
+A climate entity controls temperature, humidity, or fans, such as A/C systems and humidifiers. Derive a platform entity from [`homeassistant.components.climate.ClimateEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/climate/__init__.py)
 
 ## Properties
 
@@ -16,7 +16,7 @@ Properties should always only return information from memory and not do I/O (lik
 | temperature_unit        | string | `NotImplementedError`                | The unit of temperature measurement for the system (`TEMP_CELSIUS` or `TEMP_FAHRENHEIT`).                    |
 | precision               | float  | Based on `temperature_unit`          | The precision of the temperature in the system. Defaults to tenths for TEMP_CELSIUS, whole number otherwise. |
 | current_temperature     | float  | None                                 | The current temperature.                                                                                     |
-| current_humidity        | float  | None                                 | The current humidity.                                                                                        |
+| current_humidity        | int    | None                                 | The current humidity.                                                                                        |
 | target_temperature      | float  | None                                 | The temperature currently set to be reached.                                                                 |
 | target_temperature_high | float  | None                                 | The upper bound target temperature                                                                           |
 | target_temperature_low  | float  | None                                 | The lower bound target temperature                                                                           |
@@ -33,8 +33,8 @@ Properties should always only return information from memory and not do I/O (lik
 | preset_modes            | list   | `NotImplementedError()`              | The available presets. Requires `SUPPORT_PRESET_MODE`.                                                       |
 | fan_mode                | string | `NotImplementedError()`              | Returns the current fan mode. Requires `SUPPORT_FAN_MODE`.                                                   |
 | fan_modes               | list   | `NotImplementedError()`              | Returns the list of available fan modes. Requires `SUPPORT_FAN_MODE`.                                        |
-| swing_mode              | string | `NotImplementedError()`              | Returns the swing setting.                                                                                     |
-| swing_modes             | list   | `NotImplementedError()`              | Returns the list of available swing modes.                                                                   |
+| swing_mode              | string | `NotImplementedError()`              | Returns the swing setting. Requires `SUPPORT_SWING_MODE`.                                                    |
+| swing_modes             | list   | `NotImplementedError()`              | Returns the list of available swing modes. Requires `SUPPORT_SWING_MODE`.                                    |
 | is_aux_heat             | bool   | None                                 | Returns True if an auxiliary heater is on. Requires `SUPPORT_AUX_HEAT`.                                      |
 | supported_features      | int    | `NotImplementedError()`              | Bitmap of supported features. See below.                                                                     |
 
@@ -101,6 +101,7 @@ The device fan can have different swing modes that it wants the user to know abo
 | Name               | Description                                      |
 | ------------------ | ------------------------------------------------ |
 | `SWING_OFF`        | The fan is not swinging.                         |
+| `SWING_ON`         | The fan is swinging.                             |
 | `SWING_VERTICAL`   | The fan is swinging vertical.                    |
 | `SWING_HORIZONTAL` | The fan is swinging horizontal.                  |
 | `SWING_BOTH`       | The fan is swinging both horizontal and vertical. |

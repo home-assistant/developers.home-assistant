@@ -15,7 +15,7 @@ For an integration to support options it needs to have an `async_get_options_flo
 @staticmethod
 @callback
 def async_get_options_flow(config_entry):
-    return OptionsFlowHandler()
+    return OptionsFlowHandler(config_entry)
 ```
 
 ## Flow handler
@@ -24,6 +24,10 @@ The Flow handler works just like the config flow handler, except that the first 
 
 ```python
 class OptionsFlowHandler(config_entries.OptionsFlow):
+    def __init__(self, config_entry):
+        """Initialize options flow."""
+        self.config_entry = config_entry
+
     async def async_step_init(self, user_input=None):
         """Manage the options."""
         if user_input is not None:
@@ -44,21 +48,15 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
 
 ## Signal updates
 
-If the component should act on updated options, you can register an update listener to the config entry that will be called when the entry is updated.
+If the integration should act on updated options, you can register an update listener to the config entry that will be called when the entry is updated. A listener is registered by adding the following to the `async_setup_entry` function in your integration's `__init__.py`.
 
 ```python
-unsub = entry.add_update_listener(update_listener)
+entry.async_on_unload(entry.add_update_listener(update_listener))
 ```
 
-The Listener shall be an async function that takes the same input as async_setup_entry. Options can then be accessed from `entry.options`.
+Using the above means the Listener is attached when the entry is loaded and detached at unload. The Listener shall be an async function that takes the same input as async_setup_entry. Options can then be accessed from `entry.options`.
 
 ```python
 async def update_listener(hass, entry):
     """Handle options update."""
-```
-
-Don't forget to unsubscribe the update listener when your config entry is unloaded. You can do this by calling the unsubscribe function returned from adding the listener:
-
-```python
-unsub()
 ```

@@ -12,7 +12,7 @@ Efforts to modernize and localize the frontend are moving full speed. This blog 
 
 Custom panels allow developers to build panels that will plug into the Home Assistant user interface, with the same possibilities like our other panels like history, map etc. The Home Assistant frontend will manage authentication and the subscription for states of the backend, the panel only has to take care of displaying the data and can offer users option to control things (calling services etc).
 
-This support has been around for a while, but last week we've spend some time [polishing](https://github.com/home-assistant/home-assistant/pull/14708) our support and have three new additions:
+This support has been around for a while, but last week we've spend some time [polishing](https://github.com/home-assistant/core/pull/14708) our support and have three new additions:
 
 First new feature is that we now allow importing a panel from a JavaScript URL. This is going to be the preferred way to distribute panels moving forward. This also means that you can refer to a panel hosted externally. The user will have to approve before external panels get loaded. It's still possible for users to host it locally (and no approval is needed) by copying the panel to `<config dir>/www/your-panel.js` and use `/local/your-panel.js` as  the url.
 
@@ -24,4 +24,4 @@ Third new feature is that we now make a [starter kit](https://github.com/home-as
 
 If you're building custom UI, odds are that you're using either `<state-info>` and `<ha-relative-time>`. Although not officially supported as external facing API, we still want to give a heads up that it's going to be needed to pass the `hass` object in.
 
-This is necessary because `<ha-relative-time>` can now be localized thanks to c727 in [#1241](https://github.com/home-assistant/home-assistant-polymer/pull/1241.)
+This is necessary because `<ha-relative-time>` can now be localized thanks to c727 in [#1241](https://github.com/home-assistant/frontend/pull/1241.)
