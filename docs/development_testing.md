@@ -26,7 +26,7 @@ Run `tox` before you create your pull request to avoid annoying fixes.
 Running the full `tox` test suite will take quite some time, so as the minimal requirement for pull requests, run at least the tests that are related to your code changes (see details below on how to). The full test suite will anyway be run by the CI once you created your pull request and before it can be merged.
 :::
 
-Running `tox` will run unit tests against the locally available Python releases, as well as validate the code and document style using `pycodestyle`, `pydocstyle` and `pylint`. You can run tests on only one `tox` target -- just use `-e` to select an environment. For example, `tox -e lint` runs the linters only, and `tox -e py38` runs unit tests only on Python 3.8.
+Running `tox` will run unit tests against the locally available Python releases, as well as validate the code and document style using `pycodestyle`, `pydocstyle` and `pylint`. You can run tests on only one `tox` target -- just use `-e` to select an environment. For example, `tox -e lint` runs the linters only, and `tox -e py39` runs unit tests only on Python 3.9.
 
 `tox` uses virtual environments under the hood to create isolated testing environments. The `tox` virtual environments will get out-of-date when requirements change, causing test errors. Run `tox -r` to tell `tox` to recreate the virtual environments.
 
@@ -38,17 +38,17 @@ If you are working on tests for an integration and you need the dependencies ava
 
 ### Running single tests using `tox`
 
-You can pass arguments via `tox` to `pytest` to be able to run single test suites or test files. Replace `py38` with the Python version that you use.
+You can pass arguments via `tox` to `pytest` to be able to run single test suites or test files. Replace `py39` with the Python version that you use.
 
 ```shell
 # Stop after the first test fails
-$ tox -e py38 -- tests/test_core.py -x
+$ tox -e py39 -- tests/test_core.py -x
 # Run test with specified name
-$ tox -e py38 -- tests/test_core.py -k test_split_entity_id
+$ tox -e py39 -- tests/test_core.py -k test_split_entity_id
 # Fail a test after it runs for 2 seconds
-$ tox -e py38 -- tests/test_core.py --timeout 2
+$ tox -e py39 -- tests/test_core.py --timeout 2
 # Show the 10 slowest tests
-$ tox -e py38 -- tests/test_core.py --duration=10
+$ tox -e py39 -- tests/test_core.py --duration=10
 ```
 
 ### Testing outside of Tox

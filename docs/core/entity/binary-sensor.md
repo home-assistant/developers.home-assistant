@@ -3,7 +3,7 @@ title: Binary Sensor Entity
 sidebar_label: Binary Sensor
 ---
 
-A binary sensor is a sensor that can only have two states.
+A binary sensor is a sensor that can only have two states. Derive entity platforms from [`homeassistant.components.binary_sensor.BinarySensorEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/binary_sensor/__init__.py)
 
 ## Properties
 
@@ -13,7 +13,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| is_on| boolean | **Required** | If the binary sensor is currently on or off.
+| is_on| boolean | `None` | **Required** | If the binary sensor is currently on or off.
 | device_class | string | `None` | Type of binary sensor.
 
 ### Available device classes
@@ -22,6 +22,7 @@ Properties should always only return information from memory and not do I/O (lik
 | ----- | -----------
 | battery | On means low, Off means normal.
 | battery_charging | On means charging, Off means not charging.
+| co | On means carbon monoxide detected, Off means no carbon monoxide (clear).
 | cold | On means cold, Off means normal.
 | connectivity | On means connected, Off means disconnected.
 | door | On means open, Off means closed.

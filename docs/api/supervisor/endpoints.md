@@ -709,6 +709,7 @@ Return a list of [Backups](api/supervisor/models.md#backup)
       "date": "2020-09-30T20:25:34.273Z",
       "name": "Awesome backup",
       "type": "partial",
+      "size": 44,
       "protected": true,
       "content": {
         "homeassistant": true,
@@ -960,18 +961,20 @@ Update options for Home Assistant, you need to supply at least one of the payloa
 You need to call `/core/restart` after updating the options.
 
 :::tip
-Passing `image` with `null` and `version_latest` with `null` resets these options.
+Passing `image`, `refresh_token`, `audio_input` or `audio_output` with `null` resets the option.
 :::
 
 **Payload:**
 
 | key            | type           | description                         |
 | -------------- | -------------- | ----------------------------------- |
-| image          | string         | Name of custom image or null        |
-| version_latest | string or null | Optional for custom image or null   |
-| port           | string         | The port that Home Assistant run on |
-| ssl            | boolean        | `true` if SSL is enabled            |
-| watchdog       | boolean        | `true` if watchdog is enabled       |
+| boot           | boolean        | Start Core on boot                  |
+| image          | string or null | Name of custom image                |
+| port           | int            | The port that Home Assistant run on |
+| ssl            | boolean        | `true` to enable SSL                |
+| watchdog       | boolean        | `true` to enable the watchdog       |
+| wait_boot      | int            | Time to wait for Core to startup    |
+| refresh_token  | string or null | Token to authenticate with Core     |
 | audio_input    | string or null | Profile name for audio input        |
 | audio_output   | string or null | Profile name for audio output       |
 
@@ -1024,6 +1027,7 @@ Update Home Assistant core
 | key     | type   | description                                                    |
 | ------- | ------ | -------------------------------------------------------------- |
 | version | string | The version you want to install, default is the latest version |
+| backup | boolean | Create a partial backup of core and core configuration before updating, default is false |
 
 </ApiEndpoint>
 
@@ -1474,7 +1478,59 @@ Validate an ingress session, extending it's validity period.
 
 </ApiEndpoint>
 
-### Misc
+### Root
+
+<ApiEndpoint path="/available_updates" method="get">
+
+Returns information about available updates
+
+**Example response:**
+
+```json
+{
+  "available_updates": [
+  {
+      "panel_path": "/update-available/core",
+      "update_type": "core",
+      "version_latest": "321",
+    },
+    {
+      "panel_path": "/update-available/os",
+      "update_type": "os",
+      "version_latest": "321",
+    },
+    {
+      "panel_path": "/update-available/supervisor",
+      "update_type": "supervisor",
+      "version_latest": "321",
+    },
+    {
+      "name": "Awesome addon",
+      "icon": "/addons/awesome_addon/icon",
+      "panel_path": "/update-available/awesome_addon",
+      "update_type": "addon",
+      "version_latest": "321",
+    }
+  ]
+}
+```
+
+**Returned data:**
+
+| key | type | description |
+-- | -- | --
+update_type | string | `addon`, `os`, `core` or `supervisor`
+name | string | Returns the name (only if the `update_type` is `addon`)
+icon | string | Returns the path for the icon if any (only if the `update_type` is `addon`)
+version_latest | string | Returns the available version
+panel_path | string | Returns path where the UI can be loaded
+
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/refresh_updates" method="post">
+This reloads information about add-on repositories and fetches new version files.
+</ApiEndpoint>
 
 <ApiEndpoint path="/info" method="get">
 Returns a dict with selected keys from other `/*/info` endpoints.
@@ -2181,6 +2237,12 @@ Install an add-on from the store.
 <ApiEndpoint path="/store/addons/<addon>/update" method="post">
 
 Update an add-on from the store.
+
+**Payload:**
+
+| key     | type   | description                                                    |
+| ------- | ------ | -------------------------------------------------------------- |
+| backup | boolean | Create a partial backup of the add-on, default is false |
 
 </ApiEndpoint>
 

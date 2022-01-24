@@ -3,7 +3,7 @@ title: Sensor Entity
 sidebar_label: Sensor
 ---
 
-A sensor is a read-only entity that provides some information. Information has a value and optionally, a unit of measurement.
+A sensor is a read-only entity that provides some information. Information has a value and optionally, a unit of measurement. Derive entity platforms from [`homeassistant.components.sensor.SensorEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/sensor/__init__.py)
 
 ## Properties
 
@@ -15,7 +15,7 @@ Properties should always only return information from memory and not do I/O (lik
 | ---- | ---- | ------- | -----------
 | device_class | string | `None` | Type of sensor.
 | last_reset | `datetime.datetime` | `None` | The time when an accumulating sensor such as an electricity usage meter, gas meter, water meter etc. was initialized. If the time of initialization is unknown, set it to `None`. Note that the `datetime.datetime` returned by the `last_reset` property will be converted to an ISO 8601-formatted string when the entity's state attributes are updated. When changing `last_reset`, the `state` must be a valid number.
-| native_value | string | **Required** | The value of the sensor in the sensor's `native_unit_of_measurement`.
+| native_value | `None`, `datetime.date`, `datetime.datetime`, float, int, string | **Required** | The value of the sensor in the sensor's `native_unit_of_measurement`. Using a `device_class` may restrict the types that can be returned by this property.
 | native_unit_of_measurement | string | `None` | The unit of measurement that the sensor's value is expressed in. If the `native_unit_of_measurement` is °C or °F, and its `device_class` is temperature, the sensor's `unit_of_measurement` will be the preferred temperature unit configured by the user and the sensor's `state` will be the `native_value` after an optional unit conversion.
 | state_class | string | `None` | Type of state.
 
@@ -26,13 +26,15 @@ If specifying a device class, your sensor entity will need to also return the co
 
 | Type | Supported units | Description
 | ---- | ---- | -----------
+| apparent_power | VA | Apparent power |
 | aqi | | Air Quality Index
 | battery | % | Percentage of battery that is left
 | carbon_dioxide | ppm | Concentration of carbon dioxide.
 | carbon_monoxide | ppm | Concentration of carbon monoxide.
 | current | A | Current
-| date | | Date, must be formatted according to [ISO8601](https://en.wikipedia.org/wiki/ISO_8601).
+| date | | Date. Requires `native_value` to be a Python `datetime.date` object, or `None`.
 | energy | Wh, kWh, MWh | Energy, statistics will be stored in kWh.
+| frequency | Hz, kHz, MHz, GHz | Frequency
 | gas | m³, ft³ | Volume of gas, statistics will be stored in m³. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
 | humidity | % | Relative humidity
 | illuminance | lx, lm | Light level
@@ -46,11 +48,12 @@ If specifying a device class, your sensor entity will need to also return the co
 | pm10 | µg/m³ | Concentration of particulate matter less than 10 micrometers |
 | power | W, kW | Power, statistics will be stored in W.
 | power_factor | % | Power Factor
-| pressure | bar, hPa, inHg, kPa, mbar, Pa, psi | Pressure, statistics will be stored in Pa.
+| pressure | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Pressure, statistics will be stored in Pa.
+| reactive_power | var | Reactive power |
 | signal_strength | dB, dBm | Signal strength
 | sulphur_dioxide | µg/m³ | Concentration of sulphure dioxide |
 | temperature | °C, °F | Temperature, statistics will be stored in °C.
-| timestamp | | Timestamp, must be formatted according to [ISO8601](https://en.wikipedia.org/wiki/ISO_8601).
+| timestamp | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
 | volatile_organic_compounds | µg/m³ | Concentration of volatile organic compounds
 | voltage | V | Voltage
 
@@ -102,6 +105,10 @@ zero-point. When `last_reset` changes, the zero-point will be set to 0.
 If last_reset is not set, the sensor's value when it was first added is used as the
 zero-point when calculating `sum` statistics.
 
+To put it in another way: the logic when updating the statistics is to update
+the sum column with the difference between the current state and the previous state
+unless `last_reset` has been changed, in which case don't add anything.
+
 Example of state class `total` without last_reset:
 
 | t                      | state  | sum    | sum_increase | sum_decrease |
@@ -143,6 +150,10 @@ some tolerance, a decrease between state changes of < 10% will not trigger a new
 cycle. This state class is useful for gas meters, electricity meters, water meters etc.
 The value when the sensor reading decreases will not be used as zero-point when calculating
 `sum` statistics, instead the zero-point will be set to 0.
+
+To put it in another way: the logic when updating the statistics is to update
+the sum column with the difference between the current state and the previous state
+unless the difference is negative, in which case don't add anything.
 
 Example of state class `total_increasing`:
 

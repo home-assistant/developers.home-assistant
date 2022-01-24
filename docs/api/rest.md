@@ -565,6 +565,21 @@ curl -X POST -H "Authorization: Bearer ABCDEFGH" \
   http://localhost:8123/api/services/switch/turn_on
 ```
 
+Sample `python` command using the [Requests](https://requests.readthedocs.io/en/master/) module:
+
+Turn the light on:
+
+```shell
+from requests import post
+
+url = "http://localhost:8123/api/services/light/turn_on"
+headers = {"Authorization": "Bearer ABCDEFGH"}
+data = {"entity_id": "light.study_light"}
+
+response = post(url, headers=headers, json=data)
+print(response.text)
+```
+
 Send a MQTT message:
 
 ```shell
