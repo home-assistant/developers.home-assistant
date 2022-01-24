@@ -149,7 +149,8 @@ The below code snippet gives an example of best practices for when to implement 
 ```py
 class SomeEntity():
     _attr_device_clas = DEVICE_CLASS_TEMPERATURE  # This will be common to all instances of SomeEntity
-    def __init__():
+    def __init__(self, device):
+        self._device = device
         self._attr_available = False  # This overrides the default
         self._attr_name = device.get_friendly_name()
 
@@ -157,16 +158,16 @@ class SomeEntity():
         if some_complex_condition and some_other_condition and something_is_none_and_only_valid_after_update and device_available:
            ...
 
-    def update()
+    def update(self)
         if self.available  # Read current state, no need to prefix with _attr_
             # Update the entity
-            device_update()
+            self._device.update()
 
         if error:
             self._attr_available = False  # Set property value
             return
         # We don't need to check if device available here
-        self._attr_is_on = device.get_state()  # Update "is_on" property
+        self._attr_is_on = self._device.get_state()  # Update "is_on" property
 ```
 
 ## Lifecycle hooks
