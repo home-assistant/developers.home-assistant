@@ -36,12 +36,14 @@ This is a solid integration that is able to survive poor conditions and can be c
 - Satisfying all Silver level requirements.
 - Configurable via config entries.
   - Don't allow configuring already configured device/service (example: no 2 entries for same hub)
-  - Tests for the config flow
   - Discoverable (if available)
   - Set unique ID in config flow (if available)
   - Raise `ConfigEntryNotReady` if unable to connect during entry setup (if appropriate)
 - Entities have device info (if available) ([docs](device_registry_index.md#defining-devices))
-- Tests for fetching data from the integration and controlling it ([docs](development_testing.md))
+- Tests
+  - Full test coverage for the config flow
+  - Above average test coverage for all integration modules
+  - Tests for fetching data from the integration and controlling it ([docs](development_testing.md))
 - Has a code owner ([docs](creating_integration_manifest.md#code-owners))
 - Entities only subscribe to updates inside `async_added_to_hass` and unsubscribe inside `async_will_remove_from_hass` ([docs](core/entity.md#lifecycle-hooks))
 - Entities have correct device classes where appropriate ([docs](core/entity.md#generic-properties))
