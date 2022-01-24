@@ -38,7 +38,8 @@ To load the integration in Home Assistant is necessary to create a `manifest.jso
 hello_service:
 ```
 
-An example of `manifest.json`
+An example of `manifest.json`:
+
 ```json
 {
     "domain": "hello_service",
@@ -47,7 +48,7 @@ An example of `manifest.json`
     "dependencies": [],
     "codeowners": [],
     "requirements": [],
-    "iot_class": "local_polling",
+    "iot_class": "local_push",
     "version": "0.1.0"
 }
 ```
