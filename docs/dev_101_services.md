@@ -45,9 +45,6 @@ An example of `manifest.json`:
     "domain": "hello_service",
     "name": "Hello Service",
     "documentation": "https://developers.home-assistant.io/docs/dev_101_services",
-    "dependencies": [],
-    "codeowners": [],
-    "requirements": [],
     "iot_class": "local_push",
     "version": "0.1.0"
 }
