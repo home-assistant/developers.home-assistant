@@ -87,7 +87,7 @@ To differentiate entities and their translations, provide different device class
 ```json
 {
   "state": {
-    "moon__phase": {
+    "<domain>_moon__phase": {
       "new_moon": "New moon",
       "first_quarter": "First quarter",
       "full_moon": "Full moon",
