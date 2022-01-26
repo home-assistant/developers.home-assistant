@@ -9,7 +9,7 @@ Translations for Home Assistant are managed through [Lokalise](https://lokalise.
 - [Join the iOS translation team](https://lokalise.com/signup/834452985a05254348aee2.46389241/all/)
 - [Join the Android translation team](https://lokalise.com/public/145814835dd655bc5ab0d0.36753359/)
 
-For more information about the translation editor and tools, please see the [Lokalise translate and collaborate documents](https://docs.lokalise.com/en/collections/2909016-translate-and-collaborate).
+Translations are downloaded from Lokalise on every build, so both major and minor releases will have the latest translations available. For more information about the translation editor and tools, please see the [Lokalise translate and collaborate documents](https://docs.lokalise.com/en/collections/2909016-translate-and-collaborate).
 
 ## Translation placeholders
 
