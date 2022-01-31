@@ -33,6 +33,7 @@ The intent response is an instance of `homeassistant.helpers.intent.IntentRespon
 | ---- | ---- | ----------- |
 | `intent` | Intent | Instance of intent that triggered response. |
 | `speech` | Dictionary | Speech responses. Each key is a type. Allowed types are `plain` and `ssml`. |
+| `reprompt` | Dictionary | Reprompt responses. Each key is a type. Allowed types are `plain` and `ssml`.<br />This is used to keep the session open when a response is required from the user. In these cases, `speech` usually is a question. |
 | `card` | Dictionary | Card responses. Each key is a type. |
 
 Speech dictionary values:
@@ -40,6 +41,13 @@ Speech dictionary values:
 | Name | Type | Description |
 | ---- | ---- | ----------- |
 | `speech` | String | The text to say
+| `extra_data` | Any | Extra information related to this speech.
+
+Reprompt dictionary values:
+
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| `reprompt` | String | The text to say when user takes too long to respond
 | `extra_data` | Any | Extra information related to this speech.
 
 Card dictionary values:
