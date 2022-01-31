@@ -6,7 +6,7 @@ The `mobile_app` component has a notify platform built in that allows for a gene
 
 ## Enabling websocket push notifications
 
-Your app can connect via the WebSocket API to Home Assistant to subscribe push notifications. To enable this your app needs to either subscribe to cloud push notifications or add the `push_websocket_channel: true` to the `app_data` object in your registration.
+Your app can connect via the WebSocket API to Home Assistant to subscribe to push notifications. To enable this your app needs to either subscribe to cloud push notifications or add the `push_websocket_channel: true` to the `app_data` object in your registration.
 
 To create a websocket channel create a push notification subscription:
 
@@ -25,8 +25,10 @@ All push notifications will be delivered as an event over the websocket connecti
 {
   "id": 2,
   "type": "event",
-  "event": {"message": "Hello world"},
-  "hass_confirm_id": "12345" // if confirm = true
+  "event": {
+    "message": "Hello world",
+    "hass_confirm_id": "12345" // if confirm = true
+  },
 }
 ```
 
