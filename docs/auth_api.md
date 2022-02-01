@@ -234,7 +234,11 @@ Sometimes you want a user to make a GET request to Home Assistant to download da
 
 A signed path is a normal path on our server, like `/api/states`, but with an attached secure authentication signature. The user is able to navigate to this path and will be authorized as the access token that created the signed path. Signed paths can be created via the websocket connection and are meant to be shortlived. The default expiration is 30 seconds.
 
-To get a signed path, send the following command:
+There are two ways to get a signed path.
+
+If you are creating an integration, import `async_sign_path` from `homeassistant.components.http.auth`. The method will automatically adopt a refresh token if called from inside the context of an HTTP request or a WebSocket connection. If neither available (ie because inside an automation), it will use a special "Home Assistant Content" user.
+
+If you're working with the frontend, you can create a signed path using the following WebSocket command:
 
 ```js
 {
