@@ -175,7 +175,8 @@ These models are describing objects that are getting returned from the superviso
 | name      | string  | The name given to the backup                                        |
 | type      | string  | The type of backup (full, partial)                                  |
 | protected | boolean | `true` if the backup is password protected                          |
-| content | dictionary | A dictionary describing the content of the backup                        |
+| content | dictionary | A dictionary describing the content of the backup                  |
+| compressed | boolean | `true` if the backup is saved in a compressed archive              |
 
 ### Backup -> content
 

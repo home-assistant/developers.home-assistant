@@ -711,6 +711,7 @@ Return a list of [Backups](api/supervisor/models.md#backup)
       "type": "partial",
       "size": 44,
       "protected": true,
+      "compressed": true,
       "content": {
         "homeassistant": true,
         "addons": ["awesome_addon"],
@@ -729,10 +730,11 @@ Create a full backup.
 
 **Payload:**
 
-| key      | type   | optional | description                                |
-| -------- | ------ | -------- | ------------------------------------------ |
-| name     | string | True     | The name you want to give the backup     |
-| password | string | True     | The password you want to give the backup |
+| key        | type    | optional | description                              |
+| ---------- | ------- | -------- | -----------------------------------------|
+| name       | string  | True     | The name you want to give the backup     |
+| password   | string  | True     | The password you want to give the backup |
+| compressed | boolean | True     | `false` to create uncompressed backups   |
 
 **Example response:**
 
@@ -764,12 +766,13 @@ Create a partial backup.
 
 **Payload:**
 
-| key      | type   | optional | description                                 |
-| -------- | ------ | -------- | ------------------------------------------- |
-| name     | string | True     | The name you want to give the backup      |
-| password | string | True     | The password you want to give the backup  |
-| addons   | list   | True     | A list of strings representing add-on slugs |
-| folders  | list   | True     | A list of strings representing directories  |
+| key        | type    | optional | description                                 |
+| ---------- | ------- | -------- | ------------------------------------------- |
+| name       | string  | True     | The name you want to give the backup        |
+| password   | string  | True     | The password you want to give the backup    |
+| addons     | list    | True     | A list of strings representing add-on slugs |
+| folders    | list    | True     | A list of strings representing directories  |
+| compressed | boolean | True     | `false` to create uncompressed backups      |
 
 **You need to supply at least one key in the payload.**
 
