@@ -13,14 +13,14 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name                    | Type   | Default                               | Description                                                                               |
 | ----------------------- | ------ | ------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| target_humidity         | int    | None                                  | The target humidity the device is trying to reach.                                        |
+| target_humidity         | int    | `None`                                | The target humidity the device is trying to reach.                                        |
 | max_humidity            | int    | `DEFAULT_MAX_HUMIDITY` (value == 100) | Returns the maximum humidity.                                                             |
 | min_humidity            | int    | `DEFAULT_MIN_HUMIDITY` (value == 0)   | Returns the minimum humidity.                                                             |
 | mode                    | string | `NotImplementedError()`               | The current active preset. Requires `SUPPORT_MODES`.                                      |
 | available_modes         | list   | `NotImplementedError()`               | The available modes. Requires `SUPPORT_MODES`.                                            |
 | supported_features      | int    | (abstract method)                     | Bitmap of supported features. See below.                                                  |
-| is_on                   | bool   | `NotImplementedError()`               | Whether the device is on or off.                                                          |
-| device_class            | string | None                                  | Either DEVICE_CLASS_HUMIDIFIER or DEVICE_CLASS_DEHUMIDIFIER                               |
+| is_on                   | bool   | `None`                                | Whether the device is on or off.                                                          |
+| device_class            | string | `None`                                | Either DEVICE_CLASS_HUMIDIFIER or DEVICE_CLASS_DEHUMIDIFIER                               |
 
 ### Modes
 

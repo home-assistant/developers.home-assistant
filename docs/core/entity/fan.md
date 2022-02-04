@@ -13,14 +13,14 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| current_direction | str | None | Return the current direction of the fan |
-| is_on | boolean | None |Return true if the entity is on |
+| current_direction | str | `None` | Return the current direction of the fan |
+| is_on | boolean | `None` |Return true if the entity is on |
 | oscillating | boolean | None | Return true if the fan is oscillating |
-| percentage | int | None | Return the current speed percentage. Must be a value between 0 (off) and 100 |
+| percentage | int | `None` | Return the current speed percentage. Must be a value between 0 (off) and 100 |
 | speed_count | int | 100 | The number of speeds the fan supports |
 | supported_features | int | 0 | Flag supported features |
-| preset_mode | str | None | Return the current preset_mode. One of the values in `preset_modes` or `None` if no preset is active. |
-| preset_modes | list | None | Get the list of available preset_modes. This is an arbitrary list of str and should not contain any speeds. |
+| preset_mode | str | `None` | Return the current preset_mode. One of the values in `preset_modes` or `None` if no preset is active. |
+| preset_modes | list | `None` | Get the list of available preset_modes. This is an arbitrary list of str and should not contain any speeds. |
 
 ### Preset Modes
 
