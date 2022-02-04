@@ -711,6 +711,7 @@ Return a list of [Backups](api/supervisor/models.md#backup)
       "type": "partial",
       "size": 44,
       "protected": true,
+      "compressed": true,
       "content": {
         "homeassistant": true,
         "addons": ["awesome_addon"],
@@ -729,10 +730,11 @@ Create a full backup.
 
 **Payload:**
 
-| key      | type   | optional | description                                |
-| -------- | ------ | -------- | ------------------------------------------ |
-| name     | string | True     | The name you want to give the backup     |
-| password | string | True     | The password you want to give the backup |
+| key        | type    | optional | description                              |
+| ---------- | ------- | -------- | -----------------------------------------|
+| name       | string  | True     | The name you want to give the backup     |
+| password   | string  | True     | The password you want to give the backup |
+| compressed | boolean | True     | `false` to create uncompressed backups   |
 
 **Example response:**
 
@@ -764,12 +766,13 @@ Create a partial backup.
 
 **Payload:**
 
-| key      | type   | optional | description                                 |
-| -------- | ------ | -------- | ------------------------------------------- |
-| name     | string | True     | The name you want to give the backup      |
-| password | string | True     | The password you want to give the backup  |
-| addons   | list   | True     | A list of strings representing add-on slugs |
-| folders  | list   | True     | A list of strings representing directories  |
+| key        | type    | optional | description                                 |
+| ---------- | ------- | -------- | ------------------------------------------- |
+| name       | string  | True     | The name you want to give the backup        |
+| password   | string  | True     | The password you want to give the backup    |
+| addons     | list    | True     | A list of strings representing add-on slugs |
+| folders    | list    | True     | A list of strings representing directories  |
+| compressed | boolean | True     | `false` to create uncompressed backups      |
 
 **You need to supply at least one key in the payload.**
 
@@ -1478,7 +1481,59 @@ Validate an ingress session, extending it's validity period.
 
 </ApiEndpoint>
 
-### Misc
+### Root
+
+<ApiEndpoint path="/available_updates" method="get">
+
+Returns information about available updates
+
+**Example response:**
+
+```json
+{
+  "available_updates": [
+  {
+      "panel_path": "/update-available/core",
+      "update_type": "core",
+      "version_latest": "321",
+    },
+    {
+      "panel_path": "/update-available/os",
+      "update_type": "os",
+      "version_latest": "321",
+    },
+    {
+      "panel_path": "/update-available/supervisor",
+      "update_type": "supervisor",
+      "version_latest": "321",
+    },
+    {
+      "name": "Awesome addon",
+      "icon": "/addons/awesome_addon/icon",
+      "panel_path": "/update-available/awesome_addon",
+      "update_type": "addon",
+      "version_latest": "321",
+    }
+  ]
+}
+```
+
+**Returned data:**
+
+| key | type | description |
+-- | -- | --
+update_type | string | `addon`, `os`, `core` or `supervisor`
+name | string | Returns the name (only if the `update_type` is `addon`)
+icon | string | Returns the path for the icon if any (only if the `update_type` is `addon`)
+version_latest | string | Returns the available version
+panel_path | string | Returns path where the UI can be loaded
+
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/refresh_updates" method="post">
+This reloads information about add-on repositories and fetches new version files.
+</ApiEndpoint>
 
 <ApiEndpoint path="/info" method="get">
 Returns a dict with selected keys from other `/*/info` endpoints.
@@ -2277,54 +2332,6 @@ Returns information about the security features
 </ApiEndpoint>
 
 ### Supervisor
-
-<ApiEndpoint path="/supervisor/available_updates" method="get">
-
-Returns information about available updates
-
-**Example response:**
-
-```json
-{
-  "available_updates": [
-  {
-      "panel_path": "/update-available/core",
-      "update_type": "core",
-      "version_latest": "321",
-    },
-    {
-      "panel_path": "/update-available/os",
-      "update_type": "os",
-      "version_latest": "321",
-    },
-    {
-      "panel_path": "/update-available/supervisor",
-      "update_type": "supervisor",
-      "version_latest": "321",
-    },
-    {
-      "name": "Awesome addon",
-      "icon": "/addons/awesome_addon/icon",
-      "panel_path": "/update-available/awesome_addon",
-      "update_type": "addon",
-      "version_latest": "321",
-    }
-  ]
-}
-```
-
-**Returned data:**
-
-| key | type | description |
--- | -- | --
-update_type | string | `addon`, `os`, `core` or `supervisor`
-name | string | Returns the name (only if the `update_type` is `addon`)
-icon | string | Returns the path for the icon if any (only if the `update_type` is `addon`)
-version_latest | string | Returns the available version
-panel_path | string | Returns path where the UI can be loaded
-
-
-</ApiEndpoint>
 
 <ApiEndpoint path="/supervisor/info" method="get">
 

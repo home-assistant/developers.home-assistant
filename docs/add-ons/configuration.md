@@ -115,6 +115,8 @@ map:
 image: repo/{arch}-my-custom-addon
 ```
 
+Note:  Avoid the use of this filename for anything other than add-on configuration, as the Supervisor does a recursive lookup.
+
 ### Required configuration options
 
 | Key | Type | Description |

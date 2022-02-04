@@ -80,9 +80,9 @@ The translation strings for the configuration flow handler are defined under the
 
 ### `strings.sensor.json`
 
-Integrations can provide translations for states of its entities under other integrations like sensor. To do this, the entity will need a custom device class that starts with `<domain>__<custom name>`. You can then provide translations that will only be applied for your entity. Note that you cannot customize your translation when you use an official device class. Those are standardized.
+Integrations can provide translations for states of its entities under other integrations like sensor. To do this, the entity will need a custom device class that starts with `<domain>__<custom name>` (note double underscore). You can then provide translations that will only be applied for your entity. Note that you cannot customize your translation when you use an official device class. Those are standardized.
 
-To differentiate entities and their translations, provide different device classes. The following example `strings.sensor.json` is for a Moon sensor entity with the `moon__phase` device class:
+To differentiate entities and their translations, provide different device classes. The following example `strings.sensor.json` is for a Moon domain sensor entity with the `moon__phase` device class:
 
 ```json
 {

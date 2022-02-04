@@ -144,6 +144,34 @@ entity class for details.
 If an integration needs to access its own properties it should access the property (`self.name`), not the class or instance attribute (`self._attr_name`).
 :::
 
+### Example
+
+The below code snippet gives an example of best practices for when to implement property functions, and when to use class or instance attributes.
+
+```py
+class SomeEntity():
+    _attr_device_clas = DEVICE_CLASS_TEMPERATURE  # This will be common to all instances of SomeEntity
+    def __init__(self, device):
+        self._device = device
+        self._attr_available = False  # This overrides the default
+        self._attr_name = device.get_friendly_name()
+
+        # The following should be avoided:
+        if some_complex_condition and some_other_condition and something_is_none_and_only_valid_after_update and device_available:
+           ...
+
+    def update(self)
+        if self.available  # Read current state, no need to prefix with _attr_
+            # Update the entity
+            self._device.update()
+
+        if error:
+            self._attr_available = False  # Set property value
+            return
+        # We don't need to check if device available here
+        self._attr_is_on = self._device.get_state()  # Update "is_on" property
+```
+
 ## Lifecycle hooks
 
 Use these lifecycle hooks to execute code when certain events happen to the entity. All lifecycle hooks are async methods.
@@ -158,4 +186,4 @@ Called when an entity is about to be removed from Home Assistant. Example use: d
 
 ## Changing the entity model
 
-If you want to add a new feature to an entity or any of its subtypes (light, switch, etc), you will need to propose it first in our [architecture repo](https://github.com/home-assistant/architecture/issues). Only additions will be considered that are common features among various vendors.
+If you want to add a new feature to an entity or any of its subtypes (light, switch, etc), you will need to propose it first in our [architecture repo](https://github.com/home-assistant/architecture/discussions). Only additions will be considered that are common features among various vendors.

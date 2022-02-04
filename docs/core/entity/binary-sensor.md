@@ -13,7 +13,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| is_on| boolean | `None` | If the binary sensor is currently on or off.
+| is_on| boolean | `None` | **Required**. If the binary sensor is currently on or off.
 | device_class | string | `None` | Type of binary sensor.
 
 ### Available device classes

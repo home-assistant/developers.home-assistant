@@ -173,7 +173,7 @@ Now navigate to [http://homeassistant.local:8000](http://homeassistant.local:800
 
 ## Bonus: Working with add-on options
 
-In the screenshot you've probably seen that our server only served up 1 file: `options.json`. This file contains the user configuration for this add-on. Because we specified an empty "config" and "schema" in our `config.yaml`, the file is currently empty.
+In the screenshot you've probably seen that our server only served up 1 file: `options.json`. This file contains the user configuration for this add-on. Because we specified two empty objects for the keys "options" and "schema" in our `config.yaml`, the resulted file is currently empty.
 
 Let's see if we can get some data into that file!
 

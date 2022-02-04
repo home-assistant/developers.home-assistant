@@ -11,6 +11,8 @@ Translations for Home Assistant are managed through [Lokalise](https://lokalise.
 
 For more information about the translation editor and tools, please see the [Lokalise translate and collaborate documents](https://docs.lokalise.com/en/collections/2909016-translate-and-collaborate).
 
+Translations are downloaded from Lokalise on every build, so all major, minor, beta releases and nightly builds will have the latest translations available. 
+
 ## Translation placeholders
 
 Some translation strings will contain special placeholders that will be replaced at runtime. 
