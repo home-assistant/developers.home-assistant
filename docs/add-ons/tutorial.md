@@ -83,7 +83,7 @@ Now comes the fun part, time to open the Home Assistant UI and install and run y
 
 [![Open your Home Assistant instance and show the Supervisor add-on store.](https://my.home-assistant.io/badges/supervisor_store.svg)](https://my.home-assistant.io/redirect/supervisor_store/)
 
-- On the top right overflow menu, click the "Reload" button
+- On the top right overflow menu, click the "Check for updates" button
 - You should now see a new section at the top of the store called "Local add-ons" that lists your add-on!
 
 ![Screenshot of the local repository card](/img/en/hass.io/screenshots/local_repository.png)
@@ -97,11 +97,11 @@ Now comes the fun part, time to open the Home Assistant UI and install and run y
 
 ### I don't see my add-on?!
 
-Oops! You clicked "Reload" in the store and your add-on didn't show up. Or maybe you just updated an option, clicked refresh and saw your add-on disappear.
+Oops! You clicked "Check for updates" in the store and your add-on didn't show up. Or maybe you just updated an option, clicked refresh and saw your add-on disappear.
 
 When this happens, it means that your `config.yaml` is invalid. It's either [invalid YAML](http://www.yamllint.com/) or one of the specified options is incorrect. To see what went wrong, go to the Supervisor panel and in the supervisor card click on "View logs". This should bring you to a page with the logs of the supervisor. Scroll to the bottom and you should be able to find the validation error.
 
-Once you fixed the error, go to the add-on store and click "Reload" again.
+Once you fixed the error, go to the add-on store and click "Check for updates" again.
 
 ## Step 3: Hosting a server
 
@@ -165,7 +165,7 @@ python3 -m http.server 8000
 
 ## Step 4: Installing the update
 
-Since we updated the version number in our `config.yaml`, Home Assistant will show an update button when looking at the add-on details. You might have to refresh your browser or click the "Reload" button in the add-on store for it to show up. If you did not update the version number, you can also uninstall and install the add-on again. After installing the add-on again, make sure you start it.
+Since we updated the version number in our `config.yaml`, Home Assistant will show an update button when looking at the add-on details. You might have to refresh your browser or click the "Check for updates" button in the add-on store for it to show up. If you did not update the version number, you can also uninstall and install the add-on again. After installing the add-on again, make sure you start it.
 
 Now navigate to [http://homeassistant.local:8000](http://homeassistant.local:8000) to see our server in action!
 
