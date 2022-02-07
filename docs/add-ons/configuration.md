@@ -183,7 +183,7 @@ Note:  Avoid the use of this filename for anything other than add-on configurati
 | `backup_post` | string | | Command to execute in the context of the add-on after the backup was taken.
 | `backup_exclude` | list | | List of file/path (with glob support) that are excluded from backups.
 | `advanced` | bool | `false` | Set this to `true` to require the user to have enabled "Advanced" mode for it to show.
-| `stage` | string | `stable` | Flag add-on with follow attribute: `stable`, `experimental` or `deprecated`
+| `stage` | string | `stable` | Flag add-on with follow attribute: `stable`, `experimental` or `deprecated`. Add-ons set to `experimental` or `deprecated` will not show up in the store unless the user enables advanced mode.
 | `init` | bool | `true` | Set this to `false` to disable the Docker default system init. Use this if the image has its own init system (Like [s6-overlay](https://github.com/just-containers/s6-overlay)).
 | `watchdog` | string | | An URL for monitor an application this add-on. Like `http://[HOST]:[PORT:2839]/dashboard`, the port needs the internal port, which will be replaced with the effective port. It is also possible to bind the protocol part to a configuration options with: `[PROTO:option_name]://[HOST]:[PORT:2839]/dashboard` and it's looked up if it is `true` and it's going to `https`. For simple TCP port monitoring you can use `tcp://[HOST]:[PORT:80]`. It work for add-ons on host or internal network.
 | `realtime` | bool | `false` | Give add-on access to host schedule including `SYS_NICE` for change execution time/priority.
