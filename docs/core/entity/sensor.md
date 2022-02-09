@@ -49,6 +49,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | power | W, kW | Power, statistics will be stored in W.
 | power_factor | % | Power Factor
 | pressure | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Pressure, statistics will be stored in Pa.
+| radon | Bq/m³, pCi/L | Radon level, statistics will be stored in Bq/m³.
 | reactive_power | var | Reactive power |
 | signal_strength | dB, dBm | Signal strength
 | sulphur_dioxide | µg/m³ | Concentration of sulphure dioxide |
