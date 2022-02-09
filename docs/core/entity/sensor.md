@@ -66,6 +66,11 @@ If specifying a device class, your sensor entity will need to also return the co
 | total_increasing | Similar to `total`, with the restriction that the state represents a monotonically increasing positive total, e.g. a daily amount of consumed gas, weekly water consumption or lifetime energy consumption. Statistics of the accumulated growth of the sensor's value since it was first added is updated every 5 minutes.
 
 
+## Restoring sensor states
+
+Sensors which restore the state after restart or reload should not extend `RestoreEntity` because  that does not store the `native_value`, but instead the `state` which may have been modifed by the sensor base entity. Sensors which restore the state should extend `RestoreSensor` and call `await self.async_get_last_sensor_data` from `async_added_to_hass` to get access to the stored `native_value` and `native_unit_of_measurement`.
+
+
 ## Long-term Statistics
 
 Home Assistant has support for storing sensors as long-term statistics if the entity has
