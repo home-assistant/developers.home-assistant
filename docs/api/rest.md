@@ -645,3 +645,18 @@ If the check fails, the errors attribute in the object will list what caused the
 ```
 
 </ApiEndpoint>
+
+<ApiEndpoint path="/api/intent/handling" method="post">
+
+Handle an intent.
+
+Sample `curl` command:
+	
+```shell
+curl -X POST -H "Authorization: Bearer ${TOKEN}" \
+  -H 'Content-Type: application/json' \
+  -d '{ "name": "SetTimer", "data": { "seconds": "30" } }' \
+  http://localhost:8123/api/intent/handle
+```
+
+</ApiEndpoint>
