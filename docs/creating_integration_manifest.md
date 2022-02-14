@@ -237,7 +237,7 @@ For example:
 }
 ```
 
-Example with setting `registered_devices` to `true`
+Example with setting `registered_devices` to `true`:
 
 ```json
 {
