@@ -200,7 +200,11 @@ MQTT discovery works by subscribing to MQTT topics specified in the manifest.jso
 
 ## DHCP
 
-If your integration supports discovery via dhcp, you can add the type to your manifest. If the user has the `dhcp` integration loaded, it will load the `dhcp` step of your integration's config flow when it is discovered. We support passively listening for DHCP discovery by the `hostname` and [OUI](https://en.wikipedia.org/wiki/Organizationally_unique_identifier). The manifest value is a list of matcher dictionaries, your integration is discovered if all items of any of the specified matchers are found in the DHCP data. It's up to your config flow to filter out duplicates.
+If your integration supports discovery via dhcp, you can add the type to your manifest. If the user has the `dhcp` integration loaded, it will load the `dhcp` step of your integration's config flow when it is discovered. We support passively listening for DHCP discovery by the `hostname` and [OUI](https://en.wikipedia.org/wiki/Organizationally_unique_identifier), or matching device registry mac address when `registered_devices` is set to `true`. The manifest value is a list of matcher dictionaries, your integration is discovered if all items of any of the specified matchers are found in the DHCP data. It's up to your config flow to filter out duplicates.
+
+If an integration wants to receive discovery flows to update the IP Address of a device when it comes
+online, but a `hostname` or `oui` match would be too broad, and it has registered in the device registry with mac address using the `CONNECTION_NETWORK_MAC`,
+it should add a DHCP entry with `registered_devices` set to `true`.
 
 If the integration supports `zeroconf` or `ssdp`, these should be preferred over `dhcp` as it generally offers a better
 user experience.
@@ -228,6 +232,21 @@ For example:
     {
     "hostname": "rachio-*",
     "macaddress": "74C63B*"
+    }
+  ]
+}
+```
+
+Example with setting `registered_devices` to `true`
+
+```json
+{
+  "dhcp": [
+    {
+    "hostname": "myintegration-*",
+    },
+    {
+    "registered_devices": true,
     }
   ]
 }
