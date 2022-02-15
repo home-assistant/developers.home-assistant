@@ -18,6 +18,10 @@ For access to Supervisor API you need to define a role or you run in default mod
 | `manager` | Is for Add-ons that run CLIs and need extended rights |
 | `admin` | Have access to every API call. That is the only one they can disable/enable the Add-on protection mode |
 
+## Codenotary CAS
+
+You can sign your images and also verify our base image which you build from to provide a full chain of trust. This feature us supported by our [Builder](https://github.com/home-assistant/builder) and the [build config](/docs/add-ons/configuration#add-on-extended-build). For enable this feature on the Supervisor for your Add-on, you simple need add your email address to the Add-on configuration `codenotary`.
+
 ## Protection
 
 Default, all add-ons run in protection enabled mode. This mode prevents the add-on from getting any rights on the system. If an add-on requires more rights, you can disable this protection via the API add-on options for that add-on. But be careful, an add-on with disabled protection can destroy your system!
@@ -30,6 +34,7 @@ As a developer, follow the following best practices to make your add-on secure:
 - Create an AppArmor profile
 - Map folders read only if you don't need write access
 - If you need any API access, make sure that you do not grant permission that aren't needed
+- Signing image with [Codenotary CAS](https://cas.codenotary.com/)
 
 ## Use Home Assistant User backend
 
