@@ -97,7 +97,7 @@ device_registry.async_get_or_create(
 
 ## Removing devices
 
-Integrations can opt-in to allow the user to delete a device from the UI. To opt-in to allow removing devices, the integration should implement `async_remove_config_entry_device` in its `__init__.py`. If the device is shared between multiple config enries, only the config entry opting in to removing devices will be removed from the device.
+Integrations can opt-in to allow the user to delete a device from the UI. To opt-in to allow removing devices, the integration should implement `async_remove_config_entry_device` in its `__init__.py`. If the device is shared between multiple config entries, only the config entry opting into removing devices will be removed from the device.
 
 When the user deletes the device (or removes one of its config entries for devices with multiple config entries) the following will happen:
 - `async_remove_config_entry_device` is called, the integration should take necessary steps to prepare for device removal and return `True` if successful.
