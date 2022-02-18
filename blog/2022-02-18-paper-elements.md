@@ -6,15 +6,15 @@ title: "Paper Elements are being removed"
 
 In 2022.3, we are removing all of our `paper-dropdown-menu` and `paper-input` elements in the Frontend Repository. This means that any custom card that was previously using these elements in your cards or card editors will no longer render correctly and will require updates to your codebase.
 
-As previsously stated, Custom Cards using the elements used in the Home Assistant Frontend has never been supported
+As previously stated, Custom Cards using the elements used in the Home Assistant Frontend has never been supported
 
 ## Why did we do this?
 
-We are converting our code base from the deprecated `paper` elements to the new [Material Web Components](https://github.com/material-components/material-components-web-components) from Google. This is to keep our frontend up to date with the latest components and features.
+We are converting our codebase from the deprecated `paper` elements to the new [Material Web Components](https://github.com/material-components/material-components-web-components) from Google. This is to keep our frontend up to date with the latest components and features.
 
 ## What should custom cards do?
  
-Custom Card Creators can bundle their own components with their own unique names. This is now supported by MWC. See ESP Web Tools that use this: https://github.com/esphome/esp-web-tools/blob/main/src/components/ewt-checkbox.ts
+Custom Card Creators can bundle their components with their unique names. This is now supported by MWC. See ESP Web Tools that use this: https://github.com/esphome/esp-web-tools/blob/main/src/components/ewt-checkbox.ts
 
 This comes back to the [blog post by Bram](https://developers.home-assistant.io/blog/2020/10/02/lazyMoreInfo):
 
