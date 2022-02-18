@@ -16,8 +16,3 @@ We are converting our codebase from the deprecated `paper` elements to the new [
  
 Custom Card Creators should bundle the components they rely on. This way they can control the version that is being used. The MWC components support registering their elements with custom names so they don't conflict with the Home Assistant frontend: [example from ESP Web Tools](https://github.com/esphome/esp-web-tools/blob/main/src/components/ewt-checkbox.ts)
 
-This comes back to the [blog post by Bram](https://developers.home-assistant.io/blog/2020/10/02/lazyMoreInfo):
-
-> Is there a solution to all these problems? So custom cards can provide the same uniform user experience, without the risk of having breaking changes every release?
-
-> The best solution we see is a set of elements created by the custom card community. This set would have its own namespace that would not collide with that of the elements that Home Assistant uses. All custom cards could use these elements, without the risk of breaking changes.
