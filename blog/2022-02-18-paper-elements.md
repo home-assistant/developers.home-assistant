@@ -14,7 +14,7 @@ We are converting our code base from the deprecated `paper` elements to the new 
 
 ## What should custom cards do?
  
-You can replace your paper elements with mwc elements but there is no gaurentee that these elements will be loaded when your users load your editor or cards. As well as no guarentee that we use these elements forever.
+Custom Card Creators can bundle their own components with their own unique names. This is now supported by MWC. See ESP Web Tools that use this: https://github.com/esphome/esp-web-tools/blob/main/src/components/ewt-checkbox.ts
 
 This comes back to the [blog post by Bram](https://developers.home-assistant.io/blog/2020/10/02/lazyMoreInfo):
 
