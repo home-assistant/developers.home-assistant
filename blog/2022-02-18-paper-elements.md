@@ -8,7 +8,7 @@ In 2022.3, we are removing all of our `paper-dropdown-menu` and `paper-input` el
 
 ## Why did we do this?
 
-We are converting our code base from the depracated `paper` elements to the new [Material Web Components](https://github.com/material-components/material-components-web-components) from Google. This is to keep our frontend up to date with the latest components and features.
+We are converting our code base from the deprecated `paper` elements to the new [Material Web Components](https://github.com/material-components/material-components-web-components) from Google. This is to keep our frontend up to date with the latest components and features.
 
 ## What should custom cards do?
  
