@@ -4,9 +4,9 @@ authorURL: https://github.com/zsarnett
 title: "Paper Elements are being removed"
 ---
 
-In 2022.3, we are removing all of the `paper-dropdown-menu` and `paper-input` elements in the Frontend Repository. This means that any custom card that was previously using these elements in the card or card editor will no longer render correctly and will require updates to its codebase.
+In the Home Assistant Core 2022.3 release, we are removing all of the `paper-dropdown-menu` and `paper-input` elements in the Frontend Repository. This means that any custom card that was previously using these elements in the card or card editor will no longer render correctly and will require updates to its codebase.
 
-Custom Cards using the elements used in the Home Assistant Frontend has never been supported.
+Custom Cards using the elements used in the Home Assistant Frontend have never been supported.
 
 ## Why did we do this?
 
