@@ -82,14 +82,13 @@ pytest ./tests/components/<your_component>/ --cov=homeassistant.components.<your
 
 ### Preventing linter errors
 
-Save yourself the hassle of extra commits just to fix style errors by enabling the Flake8 git commit hook. Flake8 will check your code when you try to commit to the repository and block the commit if there are any style errors, which gives you a chance to fix them!
+Set up the development according to the [instructions](development_environment.md) and your changes will be checked by several linters when you try to commit.
+
+You can also run the linters manually:
 
 ```shell
-pip3 install flake8 flake8-docstrings
-flake8 --install-hook=git
+pre-commit run --show-diff-on-failure
 ```
-
-The `flake8-docstrings` extension will check docstrings according to [PEP257](https://www.python.org/dev/peps/pep-0257/) when running Flake8.
 
 ### Notes on PyLint and PEP8 validation
 
