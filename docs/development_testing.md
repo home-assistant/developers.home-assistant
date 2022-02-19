@@ -82,9 +82,9 @@ pytest ./tests/components/<your_component>/ --cov=homeassistant.components.<your
 
 ### Preventing linter errors
 
-Set up the development according to the [instructions](development_environment.md) and your changes will be checked by several linters when you try to commit.
+Several linters are setup to run automatically when you try to commit as part of running `script/setup` in the [virtual environment](development_environment.mdx).
 
-You can also run the linters manually:
+You can also run these linters manually:
 
 ```shell
 pre-commit run --show-diff-on-failure
