@@ -51,37 +51,9 @@ _LOGGER = logging.getLogger(__name__)
 async def async_setup_entry(hass, entry, async_add_entities):
     """Config entry example."""
     # assuming API object stored here by __init__.py
-    api = hass.data[DOMAIN][entry.entry_id]
+    my_api = hass.data[DOMAIN][entry.entry_id]
+    coordinator = MyCoordinator(hass, my_api)
 
-    async def async_update_data():
-        """Fetch data from API endpoint.
-
-        This is the place to pre-process the data to lookup tables
-        so entities can quickly look up their data.
-        """
-        try:
-            # Note: asyncio.TimeoutError and aiohttp.ClientError are already
-            # handled by the data update coordinator.
-            async with async_timeout.timeout(10):
-                return await api.fetch_data()
-        except ApiAuthError as err:
-            # Raising ConfigEntryAuthFailed will cancel future updates
-            # and start a config flow with SOURCE_REAUTH (async_step_reauth)
-            raise ConfigEntryAuthFailed from err
-        except ApiError as err:
-            raise UpdateFailed(f"Error communicating with API: {err}")
-
-    coordinator = DataUpdateCoordinator(
-        hass,
-        _LOGGER,
-        # Name of the data. For logging purposes.
-        name="sensor",
-        update_method=async_update_data,
-        # Polling interval. Will only be polled if there are subscribers.
-        update_interval=timedelta(seconds=30),
-    )
-
-    #
     # Fetch initial data so we have data when entities subscribe
     #
     # If the refresh fails, async_config_entry_first_refresh will
@@ -95,6 +67,40 @@ async def async_setup_entry(hass, entry, async_add_entities):
     async_add_entities(
         MyEntity(coordinator, idx) for idx, ent in enumerate(coordinator.data)
     )
+
+
+class MyCoordinator(DataUpdateCoordinator):
+    """My custom coordinator."""
+
+    def __init__(self, hass, my_api):
+        """Initialize my coordinator."""
+        super().__init__(
+            hass,
+            _LOGGER,
+            # Name of the data. For logging purposes.
+            name="My sensor",
+            # Polling interval. Will only be polled if there are subscribers.
+            update_interval=timedelta(seconds=30),
+        )
+        self.my_api = my_api
+
+    async def _async_update_data():
+        """Fetch data from API endpoint.
+
+        This is the place to pre-process the data to lookup tables
+        so entities can quickly look up their data.
+        """
+        try:
+            # Note: asyncio.TimeoutError and aiohttp.ClientError are already
+            # handled by the data update coordinator.
+            async with async_timeout.timeout(10):
+                return await self.my_api.fetch_data()
+        except ApiAuthError as err:
+            # Raising ConfigEntryAuthFailed will cancel future updates
+            # and start a config flow with SOURCE_REAUTH (async_step_reauth)
+            raise ConfigEntryAuthFailed from err
+        except ApiError as err:
+            raise UpdateFailed(f"Error communicating with API: {err}")
 
 
 class MyEntity(CoordinatorEntity, LightEntity):
@@ -113,13 +119,11 @@ class MyEntity(CoordinatorEntity, LightEntity):
         super().__init__(coordinator)
         self.idx = idx
 
-    @property
-    def is_on(self):
-        """Return entity state.
-
-        Example to show how we fetch data from coordinator.
-        """
-        self.coordinator.data[self.idx]["state"]
+    @callback
+    def _handle_coordinator_update(self) -> None:
+        """Handle updated data from the coordinator."""
+        self._attr_is_on = self.coordinator.data[self.idx]["state"]
+        self.async_write_ha_state()
 
     async def async_turn_on(self, **kwargs):
         """Turn the light on.
@@ -148,6 +152,12 @@ from datetime import timedelta
 
 SCAN_INTERVAL = timedelta(seconds=5)
 ```
+
+## Pushing API endpoints
+
+If you have an API endpoint that pushes data, you can still use the data update coordinator if you want. Do this by not passing polling parameters `update_method` and `update_interval` to the constructor.
+
+When new data arrives, use `coordinator.async_set_updated_data(data)` to pass the data to the entities.
 
 ## Request Parallelism
 
