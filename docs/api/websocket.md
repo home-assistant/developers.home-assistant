@@ -541,6 +541,35 @@ The server must send a pong back as quickly as possible, if the connection is st
 }
 ```
 
+## Validate config
+
+This command allows you to validate triggers, conditions and action configurations. The keys `trigger`, `condition` and `action` will be validated as if part of an automation (so a list of triggers/conditions/actions is also allowed). All fields are optional and the result will only contain keys that were passed in.
+
+```json
+{
+  "id": 19,
+  "type": "validate_config",
+  "trigger": ...,
+  "condition": ...,
+  "action": ...
+}
+```
+
+The server will respond with the validation results. Only fields will be included in the response that were also included in the command message.
+
+```json
+{
+  "id": 19,
+  "type": "result",
+  "success": true,
+  "result": {
+    "trigger": {"valid": true, "error": null},
+    "condition": {"valid": false, "error": "Invalid condition specified for data[0]"},
+    "action": {"valid": true, "error": null}
+  }
+}
+```
+
 ## Error handling
 
 If an error occurs, the `success` key in the `result` message will be set to `false`. It will contain an `error` key containing an object with two keys: `code` and `message`.
