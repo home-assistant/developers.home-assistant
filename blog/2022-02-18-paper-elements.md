@@ -16,6 +16,6 @@ We are converting our codebase from the deprecated `paper` elements to the new [
  
 You can replace your `paper` elements with `mwc` elements but there is no gaurentee that these elements will be loaded when your users load your editor or cards, like it also was not guaranteed for `paper` elements. We can also not guarentee that we will use these elements forever, and an update of these elements could include breaking changes. We can not support this use case.
 
-Or advise is to bundle your own elements, that don't collide with the elements Home Assistant uses.
+Our advise is to bundle your own elements, that don't collide with the elements Home Assistant uses.
 
 See [this old blog post](https://developers.home-assistant.io/blog/2020/10/02/lazyMoreInfo#what-about-external-elements) for more information.
