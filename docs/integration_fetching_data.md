@@ -157,7 +157,7 @@ SCAN_INTERVAL = timedelta(seconds=5)
 
 If you have an API endpoint that pushes data, you can still use the data update coordinator if you want. Do this by not passing polling parameters `update_method` and `update_interval` to the constructor.
 
-When new data arrives, use `coordinator.async_set_updated_data(data)` to pass the data to the entities.
+When new data arrives, use `coordinator.async_set_updated_data(data)` to pass the data to the entities. If this method is used on a coordinator that polls, it will reset the time until the next time it will poll for data.
 
 ## Request Parallelism
 
