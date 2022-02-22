@@ -555,7 +555,7 @@ This command allows you to validate triggers, conditions and action configuratio
 }
 ```
 
-The server will respond with the image encoded via base64.
+The server will respond with the validation results. Only fields will be included in the response that were also included in the command message.
 
 ```json
 {
