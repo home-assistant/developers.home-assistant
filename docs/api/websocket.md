@@ -551,7 +551,7 @@ This command allows you to validate triggers, conditions and action configuratio
   "type": "validate_config",
   "trigger": ...,
   "condition": ...,
-  "action": ...,
+  "action": ...
 }
 ```
 
@@ -565,7 +565,7 @@ The server will respond with the image encoded via base64.
   "result": {
     "trigger": {"valid": true, "error": null},
     "condition": {"valid": false, "error": "Invalid condition specified for data[0]"},
-    "action": {"valid": true, "error": null},
+    "action": {"valid": true, "error": null}
   }
 }
 ```
