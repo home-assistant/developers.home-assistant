@@ -26,6 +26,7 @@ Or a minimal example that you can copy into your project:
 {
   "domain": "your_domain_name",
   "name": "Your Integration",
+  "version": "0.01",
   "documentation": "https://www.example.com",
   "dependencies": [],
   "codeowners": [],
