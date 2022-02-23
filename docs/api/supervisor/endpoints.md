@@ -770,6 +770,7 @@ Create a partial backup.
 | ---------- | ------- | -------- | ------------------------------------------- |
 | name       | string  | True     | The name you want to give the backup        |
 | password   | string  | True     | The password you want to give the backup    |
+| homeassistant   | boolean    | True | Add home assistant core settings to the backup |
 | addons     | list    | True     | A list of strings representing add-on slugs |
 | folders    | list    | True     | A list of strings representing directories  |
 | compressed | boolean | True     | `false` to create uncompressed backups      |
