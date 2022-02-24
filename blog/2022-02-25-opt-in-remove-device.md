@@ -36,4 +36,6 @@ Before this feature was added, integrations were advised to automatically clean 
 
 To solve this need, some integrations had implemented an integration specific websocket command with accompanying frontend support to allow manual removal of a device. With this new feature, integrations do no longer need to add any websocket or frontend code but can easily support, just by implementing the backend callback function, manual device removal.
 
+See our [developer documentation](/docs/device_registry_index#removing-devices) for more information.
+
 Happy days!
