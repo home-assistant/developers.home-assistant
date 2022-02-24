@@ -5,11 +5,11 @@ authorTwitter: MartinHjelmare
 title: "Opt in support to manually remove device"
 ---
 
-In the Home Assistant Core 2022.3 release, [Erik Montnemery](https://github.com/emontnemery) added [general support](https://github.com/home-assistant/core/pull/66188) for integrations to opt in to show a "remove device" button on the device page in the Home Assistant GUI.
+In the Home Assistant Core 2022.3 release, [Erik Montnemery](https://github.com/emontnemery) added [support](https://github.com/home-assistant/core/pull/66188) for any integration to opt in to show a "remove device" button on the device page in the Home Assistant interface.
 
 ## Implementation
 
-Integrations that want to do this can implement a callback coroutine function `async_remove_config_entry_device` in the integration `__init__.py` module.
+To opt-in, integrations need to add the function `async_remove_config_entry_device` to their `__init__.py` module.
 
 ```py
 async def async_remove_config_entry_device(
