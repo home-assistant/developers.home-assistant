@@ -5,7 +5,7 @@ authorTwitter: MartinHjelmare
 title: "Opt in support to manually remove device"
 ---
 
-In the Home Assistant Core 2022.3 release, [Erik Montnemery](https://github.com/emontnemery) added [support](https://github.com/home-assistant/core/pull/66188) for any integration to opt in to show a "remove device" button on the device page in the Home Assistant interface.
+In the Home Assistant Core 2022.3 release, [Erik Montnemery](https://github.com/emontnemery) added [support](https://github.com/home-assistant/core/pull/66188) for any integration to opt in to show a "delete device" button on the device page in the Home Assistant interface.
 
 ## Implementation
 
@@ -18,7 +18,7 @@ async def async_remove_config_entry_device(
     """Remove a config entry from a device."""
 ```
 
-When the user clicks the remove device button for the device and confirms it, the callback will be awaited and if `True` is returned, the config entry will be removed from the device. If it was the only config entry of the device, the device and all its entities will be removed from the device and entity registries.
+When the user clicks the delete device button for the device and confirms it, the callback will be awaited and if `True` is returned, the config entry will be removed from the device. If it was the only config entry of the device, the device and all its entities will be removed from the device and entity registries.
 
 In the callback, the integration has a chance to clean up objects or perform other actions that are needed before completing the device removal.
 
