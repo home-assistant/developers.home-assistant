@@ -7,9 +7,6 @@ module.exports = {
   organizationName: "home-assistant",
   projectName: "developers.home-assistant",
   themeConfig: {
-    googleAnalytics: {
-      trackingID: "UA-57927901-3",
-    },
     navbar: {
       title: "Developers",
       logo: {
@@ -166,6 +163,9 @@ module.exports = {
           feedOptions: {
             type: "all",
           },
+        },
+        googleAnalytics: {
+          trackingID: "UA-57927901-3",
         },
       },
     ],
