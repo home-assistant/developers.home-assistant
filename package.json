@@ -12,7 +12,7 @@
     "deploy": "docusaurus deploy"
   },
   "dependencies": {
-    "@docusaurus/core": "^2.0.0-beta.15",
+    "@docusaurus/core": "^2.0.0-beta.16",
     "@docusaurus/preset-classic": "^2.0.0-beta.14",
     "@easyops-cn/docusaurus-search-local": "^0.21.4",
     "@mdx-js/react": "^1.6.21",
