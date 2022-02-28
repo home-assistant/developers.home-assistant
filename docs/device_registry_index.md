@@ -106,6 +106,6 @@ async def async_remove_config_entry_device(
     """Remove a config entry from a device."""
 ```
 
-When the user clicks the delete device button for the device and confirms it, `async_remove_config_entry_device` will be awaited and if `True` is returned, the config entry will be removed from the device. If it was the only config entry of the device, the device and all its entities will be removed from the device and entity registries.
+When the user clicks the delete device button for the device and confirms it, `async_remove_config_entry_device` will be awaited and if `True` is returned, the config entry will be removed from the device. If it was the only config entry of the device, the device will be removed from the device registry.
 
 In `async_remove_config_entry_device` the integration should take the necessary steps to prepare for device removal and return `True` if successful. The integration may optionally act on `EVENT_DEVICE_REGISTRY_UPDATED` if that's more convenient than doing the cleanup in `async_remove_config_entry_device`.
