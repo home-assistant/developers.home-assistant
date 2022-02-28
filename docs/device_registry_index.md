@@ -97,9 +97,15 @@ device_registry.async_get_or_create(
 
 ## Removing devices
 
-Integrations can opt-in to allow the user to delete a device from the UI. To opt-in to allow removing devices, the integration should implement `async_remove_config_entry_device` in its `__init__.py`. If the device is shared between multiple config entries, only the config entry opting into removing devices will be removed from the device.
+Integrations can opt in to allow the user to delete a device from the UI. To do this, integrations should implement the function `async_remove_config_entry_device` in their `__init__.py` module.
 
-When the user deletes the device (or removes one of its config entries for devices with multiple config entries) the following will happen:
-- `async_remove_config_entry_device` is called, the integration should take necessary steps to prepare for device removal and return `True` if successful.
-- If `async_remove_config_entry_device` returned True, the config entry is removed from the device and all entities included in the device belonging to the config entry are automatically removed too. If this was the only config entry, the device is automatically removed.
-- The integration may optionally act on `EVENT_DEVICE_REGISTRY_UPDATED` if that's more convenient than doing the cleanup in `async_remove_config_entry_device`.
+```py
+async def async_remove_config_entry_device(
+    hass: HomeAssistant, config_entry: ConfigEntry, device_entry: DeviceEntry
+) -> bool:
+    """Remove a config entry from a device."""
+```
+
+When the user clicks the delete device button for the device and confirms it, `async_remove_config_entry_device` will be awaited and if `True` is returned, the config entry will be removed from the device. If it was the only config entry of the device, the device will be removed from the device registry.
+
+In `async_remove_config_entry_device` the integration should take the necessary steps to prepare for device removal and return `True` if successful. The integration may optionally act on `EVENT_DEVICE_REGISTRY_UPDATED` if that's more convenient than doing the cleanup in `async_remove_config_entry_device`.
