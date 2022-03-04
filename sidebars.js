@@ -184,7 +184,7 @@ module.exports = {
       "device_automation_condition",
       "device_automation_action",
     ],
-    Misc: ["development_validation", "development_typing", "instance_url"],
+    Misc: ["development_validation", "development_typing", "instance_url", "core/update_platform"],
   },
   Misc: {
     Introduction: ["misc"],
