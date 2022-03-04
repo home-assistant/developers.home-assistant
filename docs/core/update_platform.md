@@ -45,6 +45,8 @@ async def async_perform_update(
 
 If you set `supports_backup`  to `True` in `UpdateDescription` a `backup` key will be present in `kwargs` with a `bool` that represent the choice the user made.
 
+If the update failed raise `IntegrationUpdateFailed`.
+
 ## UpdateDescription
 
 The update description provides a interface to describe the update.
