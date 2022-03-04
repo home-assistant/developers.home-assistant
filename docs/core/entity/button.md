@@ -9,6 +9,7 @@ It can be compared to a real live momentary switch, push-button, or some other f
 A switch button entity is derived from the  [`homeassistant.components.button.ButtonEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/button/__init__.py),
 and can be helpful for controlling device features like (but not limited to):
 
+- Upgrading firmware
 - Reboot/Restart a device
 - Brew a cup of coffee
 - Reset something (like a counter, filter usage)
@@ -46,4 +47,4 @@ Optionally specifies what type of entity it is. It will possibly map to Google d
 | Value | Description
 | ----- | -----------
 | restart | The button entity restarts the device.
-| update | The button entity updates the software of the device. (This device_class is deprecated and you should implement an [update platform](/docs/core/update_platform) instead)
+| update | The button entity updates the software of the device.

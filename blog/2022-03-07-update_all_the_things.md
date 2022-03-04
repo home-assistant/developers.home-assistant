@@ -12,6 +12,4 @@ the Supervisor to the Configuration panel, starting with Home Assistant Core 202
 All integrations can now provide an update platform (`update.py`) to show and
 perform updates.
 
-Previously we had the `update` device class for the [button entity](/docs/core/entity/button), this is now considered deprecated and you should move to the update platform instead.
-
 For more details on how to implement the update platform in your integration have a look at the [update platform documentation](/docs/core/update_platform)
