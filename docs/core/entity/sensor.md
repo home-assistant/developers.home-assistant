@@ -31,7 +31,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | battery | % | Percentage of battery that is left
 | carbon_dioxide | ppm | Concentration of carbon dioxide.
 | carbon_monoxide | ppm | Concentration of carbon monoxide.
-| current | A | Current
+| current | mA | Current
 | date | | Date. Requires `native_value` to be a Python `datetime.date` object, or `None`.
 | energy | Wh, kWh, MWh | Energy, statistics will be stored in kWh.
 | frequency | Hz, kHz, MHz, GHz | Frequency
@@ -55,7 +55,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | temperature | °C, °F | Temperature, statistics will be stored in °C.
 | timestamp | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
 | volatile_organic_compounds | µg/m³ | Concentration of volatile organic compounds
-| voltage | V | Voltage
+| voltage | V, mV | Voltage
 
 ### Available state classes
 
