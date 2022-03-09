@@ -26,19 +26,9 @@ Properties should always only return information from memory and not do I/O (lik
 
 A fan may have preset modes that automatically control the percentage speed or other functionality. Common examples include `auto`, `smart`, `whoosh`, `eco`, and `breeze`. If no preset mode is set, the `preset_mode` property must be set to `None`.
 
+Preset modes should not include named (manual) speed settings as these should be represented as percentages.
+
 Manually setting a speed must disable any set preset mode. If it is possible to set a percentage speed manually without disabling the preset mode, create a switch or service to represent the mode.
-
-## Deprecated Properties
-
-The fan entity model has changed to use percentages in the range from 0 (off) to 100 instead
-of the named speeds. The new model replaces `speed` and `speed_list` with `percentage`, `preset_mode`, and `preset_modes`. This change allowed us to expand the number of supported speeds to accommodate additional fan models in Home Assistant. 
-
-To maintain backwards compatibility with integrations that have not updated to the new model, the deprecated properties will remain until at least the end of 2021. Integrations must update their [Turn on](#turn-on) function to consume `percentage` or `preset_mode` instead of `speed`.
-
-| Name | Type | Default | Description
-| ---- | ---- | ------- | -----------
-| speed | str | None | Return the current speed. One of the values in speed_list. |
-| speed_list | list | None| Get the list of available speeds. The allowed values are "off", "low", "medium" and "high". Use the corresponding constants SPEED_OFF, SPEED_LOW, SPEED_MEDIUM, SPEED_HIGH. |
 
 ## Supported Features
 
