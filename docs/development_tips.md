@@ -28,7 +28,7 @@ As long as you are developing the package on the same system that is running Hom
 
 ### Test Core integration changes in your production Home Assistant environment
 
-So you made a change to a core integration and you want to test it in your production Home Assistant environment. All you have to do is copy the integration folder into `/config/custom_components`, add a version to the `manifest.json` (e.g. "version": "0.0"), and restart Home Assistant. Home Assistant will always prioritize integrations in `custom_components` over 
+So you made a change to a core integration and you want to test it in your production Home Assistant environment. All you have to do is copy the integration folder into `/config/custom_components`, add a version to the `manifest.json` (e.g. "version": "0.0"), and restart Home Assistant. Home Assistant will always prioritize integrations in `custom_components` over the core integration.
 
 ### When adding a config flow to an integration, be aware of the frontend
 
