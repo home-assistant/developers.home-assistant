@@ -42,4 +42,4 @@ If you see a way to improve the developer docs, please pay it forward and submit
 
 ### Missing information in the developer docs
 
-The Home Assistant maintainers try to keep the developer docs up to date, but we also rely on contributors like you to help us correct, improve, and expand on our existing documentation. Just like Home Assistant, this [documentation is open source](https://github.com/home-assistant/developers.home-assistant) and PRs are welcome. When in doubt, click the `Edit this page` button in the bottom left to get to the source file.
+The Home Assistant maintainers try to keep the developer docs up to date, but we also rely on contributors like you to help us correct, improve, and expand on our existing documentation. Just like Home Assistant, this [documentation is open source](https://github.com/home-assistant/developers.home-assistant) and PRs are welcome. When in doubt, click the `Edit this page` button in the bottom left to get to the source file and to edit the file directly in GitHub. No command line needed!
