@@ -10,7 +10,7 @@ This page provides some tips and tricks that may help you as a contributor to Ho
 
 It's in your best interest to keep your PRs as short and simple as possible. It may feel like extra work on your part to split a change you have in mind into smaller changes, but on the plus side:
 
-- Your code is more likely to be accepted because it will be much easier to review, and confirm it is bug free.
+- Your code is more likely to be accepted because it will be much easier to review and confirm it is bug-free.
 - Your PR reviews will generally happen faster and will be easier to iterate through
 - If you don't do this ahead of time, you may be asked to do so during a review, which is a waste of time for both you and the reviewer.
 
