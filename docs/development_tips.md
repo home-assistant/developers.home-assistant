@@ -20,7 +20,7 @@ One strategy for handling sequential PRs is to create a branch for the `next` PR
 
 ### Test package dependency changes in Home Assistant
 
-When making changes to a package that an integration is dependent on, it may be useful to test the changes in Home Assistant to verify that the changes you've made are working as you intended. Here's a useful thing to know: if a module folder that an integration is dependent on is located in `/config`, Home Assistant will use that module instead of the one from `PyPI`.
+When making changes to a package that an integration is dependent on, it may be useful to test the changes in Home Assistant to verify that the changes you've made are working as you intended. Here's a useful thing to know: if a `module` folder that an integration is dependent on is located in `/config`, Home Assistant will use that module instead of the one from `PyPI`.
 
 As long as you are developing the package on the same system that is running Home Assistant for testing, you can symlink the package module folder into `/config`, and as you make changes to the package, a Home Assistant restart will pick up the changes automatically. Symlinking instructions are OS dependent so Google how to create a symlink for your Operating System. And don't forget to remove the symlink when you are done, otherwise your Home Assistant instance will be stuck using the code that's currently in your local copy.
 
