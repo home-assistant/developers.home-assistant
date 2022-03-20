@@ -45,6 +45,6 @@ Properties should always only return information from memory and not do I/O (lik
 | smoke | On means smoke detected, Off means no smoke (clear).
 | sound | On means sound detected, Off means no sound (clear).
 | tamper | On means tampering detected, Off means no tampering (clear)
-| update | On means update available, Off means up-to-date.
+| update | On means update available, Off means up-to-date. The use of this device class should be avoided, please consider using the [`update`](/docs/core/entity/update) entity instead.
 | vibration | On means vibration detected, Off means no vibration.
 | window | On means open, Off means closed.

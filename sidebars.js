@@ -174,6 +174,7 @@ module.exports = {
       "core/entity/sensor",
       "core/entity/siren",
       "core/entity/switch",
+      "core/entity/update",
       "core/entity/vacuum",
       "core/entity/water-heater",
       "core/entity/weather",
