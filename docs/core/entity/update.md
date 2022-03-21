@@ -36,10 +36,10 @@ Other properties that are common to all entities such as `device_class`, `entity
 
 | Constant | Description |
 |----------|--------------------------------------|
-| 'SUPPORT_BACKUP' | A backup can be made automatically, before installing an update.
-| 'SUPPORT_INSTALL' | The update can be installed from Home Assistant. 
-| 'SUPPORT_PROGRESS' | This integration is able to provide progress information. If omitted, Home Assistant will try to provide a progress status; although it is better if the progress can be extracted from the device or service API.
-| 'SUPPORT_SPECIFIC_VERSION' | A specific version of an update can be installed using the `update.install` service.
+| 'UpdateEntityFeature.BACKUP' | A backup can be made automatically, before installing an update.
+| 'UpdateEntityFeature.INSTALL' | The update can be installed from Home Assistant. 
+| 'UpdateEntityFeature.PROGRESS' | This integration is able to provide progress information. If omitted, Home Assistant will try to provide a progress status; although it is better if the progress can be extracted from the device or service API.
+| 'UpdateEntityFeature.SPECIFIC_VERSION' | A specific version of an update can be installed using the `update.install` service.
 
 ## Methods
 
