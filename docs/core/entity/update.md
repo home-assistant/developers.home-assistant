@@ -83,11 +83,6 @@ class MyUpdate(UpdateEntity):
         """
 ```
 
-### Skip
-
-This method is special, as "skip" is available as a service. Unlike other
-services, the `skip` method **must not be implemented**; It is handled automatically by Home Assistant.
-
 ### Available device classes
 
 Optionally specifies what type of entity it is.
