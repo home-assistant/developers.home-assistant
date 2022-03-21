@@ -19,6 +19,9 @@ Properties should always only return information from memory and not do I/O (lik
 | native_unit_of_measurement | string | `None` | The unit of measurement that the sensor's value is expressed in. If the `native_unit_of_measurement` is °C or °F, and its `device_class` is temperature, the sensor's `unit_of_measurement` will be the preferred temperature unit configured by the user and the sensor's `state` will be the `native_value` after an optional unit conversion.
 | state_class | string | `None` | Type of state.
 
+:::tip
+Instead of adding `extra_state_attributes` for a sensor, create an additional sensor. Attributes that do not change are only saved in the database once. If `extra_state_attributes` and the sensor value both frequently change, this can quickly increase the size of the database.
+:::
 
 ### Available device classes
 
