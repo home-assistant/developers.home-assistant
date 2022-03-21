@@ -20,7 +20,7 @@ Properties should always only return information from memory and not do I/O (lik
 | state_class | string | `None` | Type of state.
 
 :::tip
-Instead of adding `extra_state_attributes` for a sensor, create an additional sensor. Attributes that do not change are only saved in the database once. If `extra_state_attributes` and the sensor value both frequently change, this can quickly increase the size of the database.
+Instead of adding `extra_state_attributes` for a sensor entity, create an additional sensor entity. Attributes that do not change are only saved in the database once. If `extra_state_attributes` and the sensor value both frequently change, this can quickly increase the size of the database.
 :::
 
 ### Available device classes
