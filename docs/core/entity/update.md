@@ -24,8 +24,8 @@ Properties should always only return information from memory and not do I/O (lik
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | current_version | str | `None` | The current version of the software installed.
-| in_progress | bool, int | `None` | Update installation progress. Can either return a boolean (True if in progress, False if not) or an integer to indicate the progress in from 0 to 100%.
-| lastest_version | str | `None` | The latest version of the software available.
+| in_progress | bool, int | `None` | Update installation progress. Can either return a boolean (True if in progress, False if not) or an integer to indicate the progress from 0 to 100%.
+| latest_version | str | `None` | The latest version of the software available.
 | release_summary | str | `None` | Summary of the release notes or changelog. This is not suitable for long changelogs but merely suitable for a short excerpt update description of max 255 characters.
 | release_url | str | `None` | URL to the full release notes of the latest version available.
 | title | str | `None` | Title of the software. This helps to differentiate between the device or entity name versus the title of the software installed.
@@ -40,8 +40,8 @@ Other properties that are common to all entities such as `device_class`, `entity
 | 'SUPPORT_INSTALL' | The update can be installed from Home Assistant.
 | 'SUPPORT_PROGRESS' | This integration is able to provide progress information
 | 'SUPPORT_SPECIFIC_VERSION' | A specific version of an update can be installed using the `update.install` service.
-althought is it better if it can be extracted from the device or service API.
-on the installation process. If omitted, Home Assistant will try to provide,
+Although it is better if the version can be extracted from the device or service API
+during the installation process. If omitted, Home Assistant will try to provide,
 
 ## Methods
 
@@ -51,7 +51,7 @@ This method can be implemented so users can install an offered update directly
 from within Home Assistant.
 
 This method requires `SUPPORT_INSTALL` to be set. Additionally, if this
-integration support installing specific version or is capable of backing up
+integration supports installing specific version or is capable of backing up
 before starting the update installation process, `SUPPORT_SPECIFIC_VERSION` and
 `SUPPORT_BACKUP` can be set respectively.
 

@@ -8,16 +8,16 @@ title: "Introducing the update entity"
 Home Assistant 2022.4 will provide a brand new entity platform:
 the `update` entity.
 
-The `update` entity can be provided by integration to indicate there is an
+The `update` entity can be provided by integrations to indicate there is an
 update available, for a device or service, towards the Home Assistant user. It
 allows you to provide additional information about the update, such as
 the latest version available, a summary of the release notes and a link to the
 full release announcement online.
 
-Additionally, the `install` method can be implemented, so user can install
+Additionally, the `install` method can be implemented, so the user can install
 the update directly from within Home Assistant.
 
-Adding the `update` platform to you integration is relatively simple to do, as
+Adding the `update` platform to your integration is relatively simple to do, as
 it is just a couple of properties and, if available for the integration,
 a single `install` method. Most other details are handled by Home Assistant 
 automatically.
