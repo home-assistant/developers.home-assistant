@@ -47,4 +47,5 @@ Optionally specifies what type of entity it is. It will possibly map to Google d
 | Value | Description
 | ----- | -----------
 | restart | The button entity restarts the device.
-| update | The button entity updates the software of the device.
+| update | The button entity updates the software of the device. The use
+of this device class should be avoided, please consider using the [`update`](/docs/core/entity/update) entity instead.
