@@ -63,6 +63,7 @@ class MyUpdate(UpdateEntity):
         self,
         version: str | None = None,
         backup: bool | None = None,
+        **kwargs: Any,
     ) -> None:
         """Install an update."""
 
@@ -70,6 +71,7 @@ class MyUpdate(UpdateEntity):
         self,
         version: str | None = None,
         backup: bool | None = None,
+        **kwargs: Any,
     ) -> None:
         """Install an update.
 
