@@ -57,19 +57,13 @@ before starting the update installation process, `SUPPORT_SPECIFIC_VERSION` and
 class MyUpdate(UpdateEntity):
     # Implement one of these methods.
 
-    async def async_install(
-        self,
-        version: str | None = None,
-        backup: bool | None = None,
-        **kwargs: Any,
+    def install(
+        self, version: str | None, backup: bool, **kwargs: Any
     ) -> None:
         """Install an update."""
 
-    def install(
-        self,
-        version: str | None = None,
-        backup: bool | None = None,
-        **kwargs: Any,
+    async def async_install(
+        self, version: str | None, backup: bool, **kwargs: Any
     ) -> None:
         """Install an update.
 
