@@ -357,6 +357,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
                 "model": "Example model",
             }
         )
+        # Example showing the other approach
         return self.async_show_menu(
             step_id="user",
             menu_options={
