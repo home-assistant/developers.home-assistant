@@ -367,7 +367,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         )
 ```
 
-```js
+```json
 {
   "config": {
     "step": {
