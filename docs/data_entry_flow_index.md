@@ -343,9 +343,48 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return self.async_create_entry(title="Some title", data={})
 ```
 
+### Show Menu
+
+This will show a navigation menu to the user to easily pick the next step. The menu labels can be hardcoded by specifying a dictionary of {`step_id`: `label`} or translated via `strings.json` when specifying a list.
+
+```python
+class ExampleConfigFlow(data_entry_flow.FlowHandler):
+    async def async_step_user(self, user_input=None):
+        return self.async_show_menu(
+            step_id="user",
+            menu_options=["discovery", "manual"],
+            description_placeholders={
+                "model": "Example model",
+            }
+        )
+        # Example showing the other approach
+        return self.async_show_menu(
+            step_id="user",
+            menu_options={
+                "option_1": "Option 1",
+                "option_2": "Option 2",
+            }
+        )
+```
+
+```json
+{
+  "config": {
+    "step": {
+      "user": {
+        "menu_options": {
+          "discovery": "Discovery",
+          "manual": "Manual ({model})",
+        }
+      }
+    }
+  }
+}
+```
+
 ## Translations
 
-Data entry flows depend on translations for showing the text in the forms. It depends on the parent of a data entry flow manager where this is stored. For config and option flows this is in `strings.json` under `config` and `option`. 
+Data entry flows depend on translations for showing the text in the forms. It depends on the parent of a data entry flow manager where this is stored. For config and option flows this is in `strings.json` under `config` and `option`.
 
 For a more detailed explanation of `strings.json` see to the [backend translation](/docs/internationalization/core) page.
 
