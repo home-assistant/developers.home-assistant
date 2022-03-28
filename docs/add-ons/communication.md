@@ -19,7 +19,7 @@ An add-on can talk to the [Home Assistant Core API][core-api] using the internal
 
 For example `curl -X GET -H "Authorization: Bearer ${SUPERVISOR_TOKEN}" -H "Content-Type: application/json" http://supervisor/core/api/config`
 
-There is also a proxy for the [Home Assistant Websocket API][core-websocket] that works like the API proxy above and requires `SUPERVISOR_TOKEN` as the password. Use this URL: `http://supervisor/core/websocket`.
+There is also a proxy for the [Home Assistant Websocket API][core-websocket] that works like the API proxy above and requires `SUPERVISOR_TOKEN` as the password. Use this URL: `ws://supervisor/core/websocket`.
 
 It is also possible to talk directly to the Home Assistant instance, which is named `homeassistant`, over the internal network. However, you'll need to know the configuration that is used by the running instance.
 
