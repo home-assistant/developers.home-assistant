@@ -37,9 +37,10 @@ Other properties that are common to all entities such as `device_class`, `entity
 | Constant | Description |
 |----------|--------------------------------------|
 | 'UpdateEntityFeature.BACKUP' | A backup can be made automatically, before installing an update.
-| 'UpdateEntityFeature.INSTALL' | The update can be installed from Home Assistant. 
+| 'UpdateEntityFeature.INSTALL' | The update can be installed from Home Assistant.
 | 'UpdateEntityFeature.PROGRESS' | This integration is able to provide progress information. If omitted, Home Assistant will try to provide a progress status; although it is better if the progress can be extracted from the device or service API.
 | 'UpdateEntityFeature.SPECIFIC_VERSION' | A specific version of an update can be installed using the `update.install` service.
+| 'UpdateEntityFeature.RELEASE_NOTES' | The entity provides methods to fetch a complete changelog.
 
 ## Methods
 
@@ -73,6 +74,27 @@ class MyUpdate(UpdateEntity):
         The backup parameter indicates a backup should be taken before
         installing the update.
         """
+```
+
+### Release notes
+
+This method can be implemented so users can can get the full release notes in the more-info dialog of the Home Assistant Frontend before they install the update.
+
+The returned string can contain markdown, and the frontend will format that correctly.
+
+This method requires `UpdateEntityFeature.RELEASE_NOTES` to be set.
+
+```python
+class MyUpdate(UpdateEntity):
+    # Implement one of these methods.
+
+    def release_notes(self): str | None -> None:
+        """Return the release notes."""
+        return "Lorem ipsum"
+
+    async def async_release_notes(self): str | None -> None:
+        """Return the release notes."""
+        return "Lorem ipsum"
 ```
 
 ### Available device classes
