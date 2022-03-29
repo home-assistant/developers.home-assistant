@@ -76,3 +76,38 @@ but also helps fellow contributors making adjustments to your code in the future
 By default, Home Assistant will statically check for type hints in our automated CI process.
 Python modules can be included for strict checking, if they are fully typed, by adding an entry
 to the `.strict-typing` file in the root of the Home Assistant Core project.
+
+### Assertions
+
+Use `assert` statements only for type annotations to help mypy, and for pytest assertions. This is because assertions can be turned off so they cannot be relied upon for runtime checks. For error handling use `if` and log then `return` or `raise` an exception as appropriate.
+
+Good, an assertion to help mypy:
+```python
+def foo(bar: Bar) -> None:
+    assert bar.baz is not None
+    frob(bar.baz)
+```
+
+Bad, an assertion to check a function result:
+```python
+def foo() -> None:
+    result = contact_server()
+    assert result == 200
+```
+
+Better, raise an exception:
+```python
+def foo() -> None:
+    result = contact_server()
+    if result != 200:
+        raise ServerContactError(result)
+```
+
+Best, log and return:
+```python
+def foo() -> None:
+    result = contact_server()
+    if result != 200:
+        _LOGGER.debug("Failed to contact server, got result %s", result)
+        return
+```
