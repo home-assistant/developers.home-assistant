@@ -8,7 +8,7 @@ This is done by adding 2 functions (`async_pre_backup` and `async_post_backup`) 
 
 ## Adding support
 
-The quickest way to add reproduce state support to a new integration is by using our built-in scaffold template. From a Home Assistant dev environment, run `python3 -m script.scaffold backup` and follow the instructions.
+The quickest way to add backup support to a new integration is by using our built-in scaffold template. From a Home Assistant dev environment, run `python3 -m script.scaffold backup` and follow the instructions.
 
 If you prefer to go the manual route, create a new file in your integration folder called `backup.py` and implement the following method:
 
