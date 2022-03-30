@@ -47,12 +47,12 @@ class MyCalendar(CalendarEntity):
 
 ## CalendarEvent
 
-A `CalendarEvent` represents individual event on a calendar.
+A `CalendarEvent` represents an individual event on a calendar.
 
 | Name        | Type             | Default      | Description                                                          |
 | ----------- | ---------------- | ------------ | -------------------------------------------------------------------- |
 | start       | datetime or date | **Required** | The start (inclusive) of the event.  Must be before `end`. Both `start` and `end` must be the same type.                                             |
 | end         | datetime or date | **Required** | The end (exclusive) of the event. Must be after `start`.                                               |
-| summary     | string           | **Required** | A title o summary of the event.                                      |
+| summary     | string           | **Required** | A title or summary of the event.                                      |
 | location    | string           | `None`       | A geographic location of the event.                                  |
 | description | string           | `None`       | A detailed description of the event.                                  |
