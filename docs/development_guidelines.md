@@ -77,37 +77,59 @@ By default, Home Assistant will statically check for type hints in our automated
 Python modules can be included for strict checking, if they are fully typed, by adding an entry
 to the `.strict-typing` file in the root of the Home Assistant Core project.
 
-### Assertions
+### Assertions and error checking
 
-Use `assert` statements only for type annotations to help mypy, and for pytest assertions. This is because assertions can be turned off so they cannot be relied upon for runtime checks. For error handling use `if` and log then `return` or `raise` an exception as appropriate.
+Use `assert` statements only for type annotations to help mypy, and for pytest assertions. This is because assertions can be turned off so they cannot be relied upon for runtime checks. To check for errors, use `if` and log then `return`, or `raise` an exception as appropriate.
 
-Good, an assertion to help mypy:
+This is a good assertion, used to help type checking:
+
 ```python
-def foo(bar: Bar) -> None:
-    assert bar.baz is not None
-    frob(bar.baz)
+class Foo:
+    optional_var: Something | None
+
+    def bar() -> None
+        if self.optional_var is None:
+            self._do_thing_without_optional_var()
+        else:
+            self._do_thing_with_optional_var()
+
+    def _do_thing_with_optional_var() -> None:
+        # This will only be called when optional_var is set, but mypy doesn't know that
+        assert self.optional_var is not None
+        # Now optional_var can be used as though it is always a Something
 ```
 
-Bad, an assertion to check a function result:
+This is a bad assertion, used to check a function result:
+
 ```python
-def foo() -> None:
-    result = contact_server()
-    assert result == 200
+def update_device_data(device):
+    data = fetch_device_data(device)
+    assert is_valid_data(data)
+    # ...
 ```
 
-Better, raise an exception:
+The correct way to handle an error depends on whether it might be expected, and if it can be handled in the current function.
+
+For an error that is not expected or can't be handled in the current function, raise an exception. For example:
+
 ```python
-def foo() -> None:
-    result = contact_server()
-    if result != 200:
-        raise ServerContactError(result)
+def update_device_data(device):
+    data = fetch_device_data(device)
+    if not is_valid_data(data):
+        raise InvalidDataError(f"Bad data unexpectedly received from {device.name}")
+    # ...
 ```
 
-Best, log and return:
+For an error that might be expected and can be handled locally, the handling function *may* log it and then return early:
+
 ```python
-def foo() -> None:
-    result = contact_server()
-    if result != 200:
-        _LOGGER.debug("Failed to contact server, got result %s", result)
+def update_device_data(device):
+    online = check_device_online(device)
+    if not online:
+        if self.available:
+            _LOGGER.debug("Device %s has gone offline", device.name)
+            self.available = False
         return
+    data = fetch_device_data(device)
+    # ...
 ```
