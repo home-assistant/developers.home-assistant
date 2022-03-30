@@ -68,6 +68,13 @@ If specifying a device class, your sensor entity will need to also return the co
 | total | The state represents a total amount that can both increase and decrease, e.g. a net energy meter. Statistics of the accumulated growth or decline of the sensor's value since it was first added is updated every 5 minutes. This state class should not be used for sensors where the absolute value is interesting instead of the accumulated growth or decline, for example remaining battery capacity or CPU load; in such cases state class `measurement` should be used instead.
 | total_increasing | Similar to `total`, with the restriction that the state represents a monotonically increasing positive total, e.g. a daily amount of consumed gas, weekly water consumption or lifetime energy consumption. Statistics of the accumulated growth of the sensor's value since it was first added is updated every 5 minutes.
 
+### Entity options
+
+Sensors can be configured by the user, this is done by storing `sensor` entity options in the sensor's entity registry entry.
+
+| Option | Description
+| ------ | -----------
+| unit_of_measurement | The sensor's unit of measurement can be overridden for sensors with device class `pressure` or `temperature`.
 
 ## Restoring sensor states
 
