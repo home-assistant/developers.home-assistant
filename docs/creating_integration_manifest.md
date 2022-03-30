@@ -48,6 +48,12 @@ For core integrations, this should be omitted.
 
 The version of the integration is required for custom integrations. The version needs to be a valid version recognized by [AwesomeVersion](https://github.com/ludeeus/awesomeversion) like [CalVer](https://calver.org/) or [SemVer](https://semver.org/).
 
+## Integration Type
+
+Define what kind of integration this is. Currently accepted values are `integration` and `helper`. Helpers are integrations that provide entities to help the user with automations like input boolean, derivative or group.
+
+Defaults to `integration` if not set.
+
 ## Documentation
 
 The website containing documentation on how to use your integration. If this integration is being submitted for inclusion in Home Assistant, it should be `https://www.home-assistant.io/integrations/<domain>`
@@ -286,7 +292,7 @@ For example:
     "serial_number": "1234*",
     "manufacturer": "*midway*",
     "description": "*zigbee*"
-    },    
+    },
   ]
 }
 ```
