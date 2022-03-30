@@ -62,6 +62,9 @@
 /docs/lovelace_custom_card /docs/frontend/custom-ui/lovelace-custom-card
 /docs/supervisor/developing /docs/supervisor/development
 /docs/dev_101_index /docs/dev_101_hass
+/docs/reproduce_state_index /docs/core/platform/reproduce_state
+/docs/significant_change_index /docs/core/platform/significant_change
+
 
 # Tidying moved pages
 /docs/creating_platform_example_sensor https://github.com/home-assistant/example-custom-config/tree/master/custom_components/example_sensor
