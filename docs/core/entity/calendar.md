@@ -4,7 +4,7 @@ sidebar_label: Calendar
 ---
 
 A calendar entity is an entity that represents a set of events with a start
-and end date and/or time, helpful for automations. A calendar entity is derived from the [`homeassistant.components.calendar.CalendarEventDevice`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/calendar/__init__.py).
+and end date and/or time, helpful for automations. A calendar entity is derived from the [`homeassistant.components.calendar.CalendarEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/calendar/__init__.py).
 
 ## Properties
 
@@ -34,7 +34,7 @@ A calendar entity can return events that occur during a particular time range. S
 - Recurring events should be flattened and returned as individual `CalendarEvent`.
 
 ```python
-class MyCalendar(CalendarEventDevice):
+class MyCalendar(CalendarEntity):
 
     async def async_get_events(
         self,
