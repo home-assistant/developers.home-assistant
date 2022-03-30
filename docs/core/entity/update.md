@@ -88,11 +88,11 @@ This method requires `UpdateEntityFeature.RELEASE_NOTES` to be set.
 class MyUpdate(UpdateEntity):
     # Implement one of these methods.
 
-    def release_notes(self): str | None -> None:
+    def release_notes(self) -> str | None:
         """Return the release notes."""
         return "Lorem ipsum"
 
-    async def async_release_notes(self): str | None -> None:
+    async def async_release_notes(self) -> str | None:
         """Return the release notes."""
         return "Lorem ipsum"
 ```
