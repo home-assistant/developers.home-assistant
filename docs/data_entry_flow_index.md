@@ -106,9 +106,11 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
 
 ### Show Form
 
-This result type will show a form to the user to fill in. You define the current step, the schema of the data (using voluptuous) and optionally a dictionary of errors.
+This result type will show a form to the user to fill in. You define the current step, the schema of the data (using voluptuous or selectors) and optionally a dictionary of errors.
 
 ```python
+from homeassistant.helpers.selector import selector
+
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
     async def async_step_user(self, user_input=None):
         # Specify items in the order they are to be displayed in the UI
@@ -118,7 +120,11 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         }
 
         if self.show_advanced_options:
-            data_schema["allow_groups"] = bool
+            data_schema["allow_groups"] = selector({
+                "select": {
+                    "options": ["all", "light", "switch"],
+                }
+            })
 
         return self.async_show_form(step_id="init", data_schema=vol.Schema(data_schema))
 ```
@@ -172,6 +178,32 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
             step_id="init", data_schema=vol.Schema(data_schema), errors=errors
         )
 ```
+
+Translations for the step title, description and fields is added to `strings.json`. Each field can also have an optional entry in `data_description` to add extra explanatory text.
+
+Do not put your brand title in the `title`. It will be automatically injected from your manifest.
+
+Your description should not link to the documentation as that is linked automatically. It should also not contain "basic" information like "Here you can set up X". It can be omitted.
+
+```json
+{
+  "config": {
+    "step": {
+      "user": {
+          "title": "Add Group",
+          "description": "Some description",
+          "data": {
+              "entities": "Entities",
+          },
+          "data_description": {
+              "entities": "The entities to add to the group",
+          },
+      }
+    }
+  }
+}
+```
+
 
 #### Multi-step flows
 
