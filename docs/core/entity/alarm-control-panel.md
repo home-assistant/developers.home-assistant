@@ -32,6 +32,17 @@ Properties should always only return information from memory and not do I/O (lik
 | `disarming` | The alarm is disarming.
 | `triggered` | The alarm is triggered.
 
+## Supported Features
+
+| Constant | Description |
+|----------|--------------------------------------|
+| `AlarmControlPanelEntityFeature.ARM_AWAY` | The alarm supports arming in away mode.
+| `AlarmControlPanelEntityFeature.ARM_CUSTOM_BYPASS` | The alarm supports arming with a bypass.
+| `AlarmControlPanelEntityFeature.ARM_HOME` | The alarm supports arming in home mode.
+| `AlarmControlPanelEntityFeature.ARM_NIGHT` | The alarm supports arming in night mode.
+| `AlarmControlPanelEntityFeature.ARM_VACATION` | The alarm supports arming in vacation mode.
+| `AlarmControlPanelEntityFeature.TRIGGER` | The alarm can be triggered remotely.
+
 ### Code Formats
 
 | Value | Description
