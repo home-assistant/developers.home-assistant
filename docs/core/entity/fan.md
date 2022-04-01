@@ -32,12 +32,15 @@ Manually setting a speed must disable any set preset mode. If it is possible to 
 
 ## Supported Features
 
-| Constant | Description |
-|----------|--------------------------------------|
-| 'SUPPORT_DIRECTION' | The fan supports changing the direction.
-| 'SUPPORT_SET_SPEED' | The fan supports setting the speed percentage and optional preset modes.
-| 'SUPPORT_OSCILLATE' | The fan supports oscillation.
-| 'SUPPORT_PRESET_MODE' | The fan supports preset modes.
+Supported features are defined by using values in the `FanEntityFeature` enum
+and are combined using the bitwise or (`|`) operator.
+
+| Value         | Description                                                              |
+| ------------- | ------------------------------------------------------------------------ |
+| `DIRECTION`   | The fan supports changing the direction.                                 |
+| `OSCILLATE`   | The fan supports oscillation.                                            |
+| `PRESET_MODE` | The fan supports preset modes.                                           |
+| `SET_SPEED`   | The fan supports setting the speed percentage and optional preset modes. |
 
 ## Methods
 
