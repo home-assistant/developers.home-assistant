@@ -52,20 +52,21 @@ Properties should always only return information from memory and not do I/O (lik
 | `STATE_CLOSING` | The cover is in the process of closing to reach a set position.
 | `STATE_CLOSED` | The cover has reach the closed position.
 
-### Supported Features
+## Supported Features
 
-Supported features constants are combined using the bitwise or (`|`) operator.
+Supported features are defined by using values in the `CoverEntityFeature` enum
+and are combined using the bitwise or (`|`) operator.
 
-| Constant | Description |
-|----------|--------------------------------------|
-| `SUPPORT_OPEN` | The cover supports being opened.
-| `SUPPORT_CLOSE` | The cover supports being closed.
-| `SUPPORT_SET_POSITION` | The cover supports moving to a specific position between opened and closed.
-| `SUPPORT_STOP` | The cover supports stopping the current action (open, close, set position)
-| `SUPPORT_OPEN_TILT` | The cover supports being tilting open.
-| `SUPPORT_CLOSE_TILT` | The cover supports being tilting closed.
-| `SUPPORT_SET_TILT_POSITION` | The cover supports moving to a specific tilt position between opened and closed.
-| `SUPPORT_STOP_TILT` | The cover supports stopping the current tilt action (open, close, set position)
+| Value               | Description                                                                      |
+| ------------------- | -------------------------------------------------------------------------------- |
+| `OPEN`              | The cover supports being opened.                                                 |
+| `CLOSE`             | The cover supports being closed.                                                 |
+| `SET_POSITION`      | The cover supports moving to a specific position between opened and closed.      |
+| `STOP`              | The cover supports stopping the current action (open, close, set position)       |
+| `OPEN_TILT`         | The cover supports being tilting open.                                           |
+| `CLOSE_TILT`        | The cover supports being tilting closed.                                         |
+| `SET_TILT_POSITION` | The cover supports moving to a specific tilt position between opened and closed. |
+| `STOP_TILT`         | The cover supports stopping the current tilt action (open, close, set position)  |
 
 ## Methods
 
