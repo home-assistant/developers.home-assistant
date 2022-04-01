@@ -38,14 +38,14 @@ A device can have different modes of operation that it might want to show to the
 | `MODE_AUTO`    | Device is controlling humidity by itself |
 | `MODE_BABY`    | Device is trying to optimize for babies  |
 
-### Supported features
+## Supported Features
 
-Supported features constants are combined using the bitwise or (`|`) operator.
+Supported features are defined by using values in the `HumidifierEntityFeature` enum
+and are combined using the bitwise or (`|`) operator.
 
-| Name                      | Description                                |
-| ------------------------- | ------------------------------------------ |
-| `SUPPORT_MODES`           | The device supports different modes.       |
-
+| Value   | Description                          |
+| ------- | ------------------------------------ |
+| `MODES` | The device supports different modes. |
 
 ## Methods
 
