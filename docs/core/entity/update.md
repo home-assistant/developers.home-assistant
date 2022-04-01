@@ -24,8 +24,8 @@ Properties should always only return information from memory and not do I/O (lik
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | auto_update | bool | `False` | The device or service that the entity represent have auto update logic, when this is set you can not skip updates.
-| current_version | str | `None` | The current version of the software installed.
 | in_progress | bool, int | `None` | Update installation progress. Can either return a boolean (True if in progress, False if not) or an integer to indicate the progress from 0 to 100%.
+| installed_version | str | `None` | The currently installed and used version of the software.
 | latest_version | str | `None` | The latest version of the software available.
 | release_summary | str | `None` | Summary of the release notes or changelog. This is not suitable for long changelogs but merely suitable for a short excerpt update description of max 255 characters.
 | release_url | str | `None` | URL to the full release notes of the latest version available.
