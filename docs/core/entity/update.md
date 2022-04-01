@@ -34,13 +34,15 @@ Other properties that are common to all entities such as `device_class`, `entity
 
 ## Supported Features
 
-| Constant | Description |
+Supported features are defined by using values in the `UpdateEntityFeature` enum.
+
+| Value | Description |
 |----------|--------------------------------------|
-| 'UpdateEntityFeature.BACKUP' | A backup can be made automatically, before installing an update.
-| 'UpdateEntityFeature.INSTALL' | The update can be installed from Home Assistant.
-| 'UpdateEntityFeature.PROGRESS' | This integration is able to provide progress information. If omitted, Home Assistant will try to provide a progress status; although it is better if the progress can be extracted from the device or service API.
-| 'UpdateEntityFeature.SPECIFIC_VERSION' | A specific version of an update can be installed using the `update.install` service.
-| 'UpdateEntityFeature.RELEASE_NOTES' | The entity provides methods to fetch a complete changelog.
+| 'BACKUP' | A backup can be made automatically, before installing an update.
+| 'INSTALL' | The update can be installed from Home Assistant.
+| 'PROGRESS' | This integration is able to provide progress information. If omitted, Home Assistant will try to provide a progress status; although it is better if the progress can be extracted from the device or service API.
+| 'SPECIFIC_VERSION' | A specific version of an update can be installed using the `update.install` service.
+| 'RELEASE_NOTES' | The entity provides methods to fetch a complete changelog.
 
 ## Methods
 
@@ -49,10 +51,10 @@ Other properties that are common to all entities such as `device_class`, `entity
 This method can be implemented so users can install an offered update directly
 from within Home Assistant.
 
-This method requires `SUPPORT_INSTALL` to be set. Additionally, if this
+This method requires `UpdateEntityFeature.INSTALL` to be set. Additionally, if this
 integration supports installing specific version or is capable of backing up
-before starting the update installation process, `SUPPORT_SPECIFIC_VERSION` and
-`SUPPORT_BACKUP` can be set respectively.
+before starting the update installation process, `UpdateEntityFeature.SPECIFIC_VERSION` and
+`UpdateEntityFeature.BACKUP` can be set respectively.
 
 ```python
 class MyUpdate(UpdateEntity):
