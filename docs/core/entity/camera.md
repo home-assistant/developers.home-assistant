@@ -22,14 +22,15 @@ Properties should always only return information from memory and not do I/O (lik
 | frame_interval | float | 0.5 | The interval between frames of the stream.
 | frontend_stream_type | str | None | Used with `SUPPORT_STREAM` to tell the frontend which type of stream to use (`STREAM_TYPE_HLS` or `STREAM_TYPE_WEBRTC`)
 
-### Supported features
+## Supported Features
 
-Supported features constants are combined using the bitwise or (`|`) operator.
+Supported features are defined by using values in the `CameraEntityFeature` enum
+and are combined using the bitwise or (`|`) operator.
 
-| Name                               | Bit value | Description                                                                                 |
-| ---------------------------------- | --- | ------------------------------------------------------------------------------------------- |
-| `SUPPORT_ON_OFF`       |   1 | The device supports `turn_on` and `turn_off` |
-| `SUPPORT_STREAM`       |   2 | The device supports streaming |
+| Value | Description |
+|----------|--------------------------------------|
+| `ON_OFF` | The device supports `turn_on` and `turn_off` |
+| `STREAM` | The device supports streaming |
 
 ## Methods
 
