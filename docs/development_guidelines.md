@@ -77,46 +77,22 @@ By default, Home Assistant will statically check for type hints in our automated
 Python modules can be included for strict checking, if they are fully typed, by adding an entry
 to the `.strict-typing` file in the root of the Home Assistant Core project.
 
-### Assertions and error checking
+### State, argument, and return value validation
 
-Use `assert` statements only for type annotations to help mypy, and for pytest assertions. This is because assertions can be turned off so they cannot be relied upon for runtime checks. To check for errors, use `if` and log then `return`, or `raise` an exception as appropriate.
+Whenever a function is passed potentially invalid arguments, or gets a potentially invalid return value from another function, those arguments or return values should be validated. Likewise, if an object's internal state (i.e. its attributes) could be invalid (for example, an attribute is `None` when it is about to be used) then it should be validated too.
 
-This is a good assertion, used to help type checking:
-
-```python
-class Foo:
-    optional_var: Something | None
-
-    def bar() -> None
-        if self.optional_var is None:
-            self._do_thing_without_optional_var()
-        else:
-            self._do_thing_with_optional_var()
-
-    def _do_thing_with_optional_var() -> None:
-        # This will only be called when optional_var is set, but mypy doesn't know that
-        assert self.optional_var is not None
-        # Now optional_var can be used as though it is always a Something
-```
-
-This is a bad assertion, used to check a function result:
-
-```python
-def update_device_data(device):
-    data = fetch_device_data(device)
-    assert is_valid_data(data)
-    # ...
-```
-
-The correct way to handle an error depends on whether it might be expected, and if it can be handled in the current function.
+The best way to validate state, arguments, and return values, is to use a conditional (`if`) statement. Depending on whether the invalid value is likely to be expected, and whether it can be handled locally, the conditional could log and then move on, or it could `raise` an exception.
 
 For an error that is not expected or can't be handled in the current function, raise an exception. For example:
 
 ```python
 def update_device_data(device):
+    # Call a function that may not return valid data
     data = fetch_device_data(device)
+    # Validate the data before using it
     if not is_valid_data(data):
         raise InvalidDataError(f"Bad data unexpectedly received from {device.name}")
+    # Now that the data is known to be valid, it can be used
     # ...
 ```
 
@@ -127,9 +103,81 @@ def update_device_data(device):
     online = check_device_online(device)
     if not online:
         if self.available:
+            # Log a message if it's going to be useful for debugging later
             _LOGGER.debug("Device %s has gone offline", device.name)
             self.available = False
         return
     data = fetch_device_data(device)
+    # data should also be checked here
+    # Once validation is complete, proceed to use the data
     # ...
+```
+
+Likewise for handling an exception:
+
+```python
+def update_device_data(device):
+    try:
+        data = fetch_device_data(device)
+    except DeviceOffline as err:
+        if self.available:
+            # Log a message if it's going to be useful for debugging later
+            _LOGGER.debug("Device %s has gone offline: %r", device.name, err)
+            self.available = False
+        return
+    # data should also be validated
+    # Once validation is complete, proceed to use the data
+    # ...
+```
+
+Also check variable's types when it is important. For example, if using a return value of a function with an `Optional` return type, check for `None`:
+
+```python
+# Type signature for called function
+def fetch_device_data(device: Device) -> DeviceData | None:
+
+# Calling function
+def update_device_data(device):
+    data = fetch_device_data(device)
+    if not data:
+        # No data available, it's not an error but there's nothing else to do in
+        # this function
+        return
+    # process data ...
+```
+
+Or when an object may have an optional attribute:
+
+```python
+class Foo:
+    optional_var: Something | None
+
+    def use_optional_var(self) -> None:
+        if not optional_var:
+            # Raise or return, depending on whether this is an unexpected state
+        # proceed to use optional_var
+```
+
+#### Assert
+
+Do not use `assert` statements for validating/checking variables. Assertions can be turned off (for example, running Python with `-O`) so they cannot be relied upon for runtime checks.
+
+Use `assert` statements only for [pytest assertions](https://docs.pytest.org/en/stable/how-to/assert.html), for debugging, or for [typing hints](https://adamj.eu/tech/2021/05/17/python-type-hints-how-to-narrow-types-with-isinstance-assert-literal/#narrowing-with-assert) when there's no other choice.
+
+Here is an example of type hinting using an `assert` because it is not possible to use an `if` and still attain 100% test coverage. In this case, `_do_thing_with_optional_var` cannot be accessed from outside of `Foo` or children classes, so the case where `_do_thing_with_optional_var` is called when `optional_var is None` cannot occur under normal circumstances and thus cannot be tested. *In almost all circumstances it is better to refactor the code so that the `assert` is not necessary.*
+
+```python
+class Foo:
+    optional_var: Something | None
+
+    def bar(self) -> None
+        if self.optional_var is None:
+            self._do_thing_without_optional_var()
+        else:
+            self._do_thing_with_optional_var()
+
+    def _do_thing_with_optional_var(self) -> None:
+        # This will only be called when optional_var is set, but mypy doesn't know that
+        assert self.optional_var is not None
+        # Now optional_var can be used as though it is always a Something
 ```
