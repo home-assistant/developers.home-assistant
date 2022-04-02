@@ -22,11 +22,14 @@ An activity is a predefined activity or macro that puts the remote in a specific
 
 ## Supported Features
 
-| Constant | Description
-| -------- | -----------
-| `SUPPORT_LEARN_COMMAND`  | Entity allows learning commands from devices.
-| `SUPPORT_DELETE_COMMAND` | Entity allows deleting commands from devices.
-| `SUPPORT_ACTIVITY` | Entity supports activities.
+Supported features are defined by using values in the `RemoteEntityFeature` enum
+and are combined using the bitwise or (`|`) operator.
+
+| Value            | Description                                   |
+| ---------------- | --------------------------------------------- |
+| `LEARN_COMMAND`  | Entity allows learning commands from devices. |
+| `DELETE_COMMAND` | Entity allows deleting commands from devices. |
+| `ACTIVITY`       | Entity supports activities.                   |
 
 ## Methods
 
