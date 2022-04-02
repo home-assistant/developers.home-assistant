@@ -20,13 +20,14 @@ Properties should always only return information from memory and not do I/O (lik
 | is_unlocking | bool | None | Indication of whether the lock is currently unlocking. Used to determine `state`.
 | is_jammed | bool | None | Indication of whether the lock is currently jammed. Used to determine `state`.
 
-### Supported Features
+## Supported Features
 
-Supported features constants are combined using the bitwise or (`|`) operator.
+Supported features are defined by using values in the `LockEntityFeature` enum
+and are combined using the bitwise or (`|`) operator.
 
-| Constant | Description |
-|----------|--------------------------------------|
-| `SUPPORT_OPEN` | This lock supports opening the door latch.
+| Value  | Description                                |
+| ------ | ------------------------------------------ |
+| `OPEN` | This lock supports opening the door latch. |
 
 ## Methods
 
