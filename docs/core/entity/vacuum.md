@@ -40,26 +40,27 @@ VacuumEntity and StateVacuumEntity do not support attribute shorthand for [prope
 | `STATE_RETURNING` | The vacuum is done cleaning and is currently returning to the dock, but not yet docked.
 | `STATE_ERROR` | The vacuum encountered an error while cleaning, the error can be specified as a property on the entity.
 
-### Supported Features
+## Supported Features
 
-Supported features constants are combined using the bitwise or (`|`) operator.
+Supported features are defined by using values in the `VacuumEntityFeature` enum
+and are combined using the bitwise or (`|`) operator.
 
-| Constant | Description |
-|----------|--------------------------------------|
-| `SUPPORT_TURN_ON` |The vacuum turns on.
-| `SUPPORT_TURN_OFF` |The vacuum turns off.
-| `SUPPORT_PAUSE` | Pause the vacuum.
-| `SUPPORT_STOP` | Stop the vacuum and return to the dock.
-| `SUPPORT_RETURN_HOME` | Return to the dock.
-| `SUPPORT_FAN_SPEED` | The vacuum supports setting fan speed.
-| `SUPPORT_BATTERY` | The vacuum supports retrieving battery status.
-| `SUPPORT_SEND_COMMAND` | The vacuum supports sending a command to the vacuum.
-| `SUPPORT_LOCATE` | The vacuum supports locating.
-| `SUPPORT_CLEAN_SPOT` | The vacuum supports spot cleaning.
-| `SUPPORT_MAP` | The vacuum supports retrieving its map.
-| `SUPPORT_STATE` | The vacuum supports returning it state.
-| `SUPPORT_STATUS` | The vacuum supports returning it status.
-| `SUPPORT_START` | The vacuum supports the start command.
+| Value          | Description                                          |
+| -------------- | ---------------------------------------------------- |
+| `TURN_ON`      | The vacuum turns on.                                 |
+| `TURN_OFF`     | The vacuum turns off.                                |
+| `PAUSE`        | Pause the vacuum.                                    |
+| `STOP`         | Stop the vacuum and return to the dock.              |
+| `RETURN_HOME`  | Return to the dock.                                  |
+| `FAN_SPEED`    | The vacuum supports setting fan speed.               |
+| `BATTERY`      | The vacuum supports retrieving battery status.       |
+| `SEND_COMMAND` | The vacuum supports sending a command to the vacuum. |
+| `LOCATE`       | The vacuum supports locating.                        |
+| `CLEAN_SPOT`   | The vacuum supports spot cleaning.                   |
+| `MAP`          | The vacuum supports retrieving its map.              |
+| `STATE`        | The vacuum supports returning it state.              |
+| `STATUS`       | The vacuum supports returning it status.             |
+| `START`        | The vacuum supports the start command.               |
 
 ## Methods
 
