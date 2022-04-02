@@ -28,7 +28,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 ## Supported Features
 
-Supported features are defined by using values in the `MediaPlayerFeature` enum
+Supported features are defined by using values in the `MediaPlayerEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.
 
 | Value               | Description                                                        |
