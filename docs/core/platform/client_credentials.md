@@ -1,22 +1,21 @@
 ---
-title: "Developer Credentials"
+title: "Client Credentials"
 ---
 
-Integrations support [Configuration via OAuth2](https://developers.home-assistant.io/docs/config_entries_config_flow_handler#configuration-via-oauth2) and the preferred approach is to use the Home Assistant Clount Account Linking service. Integrations may also allow users to provide their own developer credentials by adding a `developer_credentials.py` and implementing the right functions.
+Integrations support [Configuration via OAuth2](https://developers.home-assistant.io/docs/config_entries_config_flow_handler#configuration-via-oauth2) and the preferred approach is to use the Home Assistant Cloud Account Linking service. Integrations may also allow users to provide their own OAuth client credentials by adding a `client_credentials.py` and implementing the right functions.
 
 :::note
-Developer Credentials is under active development and integrations should still prefer using
-`LocalOAuth2Implementation`.
+Client Credentials is under active development and integrations should still prefer using `LocalOAuth2Implementation`.
 :::
 
 ## Adding support
 
-Integrations support developer credentials with a file in the integration folder called `developer_credentails.py` and implement the following:
+Integrations support client credentials with a file in the integration folder called `client_credentails.py` and implement the following:
 
 ```python
 from homeassistant.core import HomeAssistant
-from homeassistant.components.developer_credentials.AuthorizationServer
-from homeassistant.components.developer_credentials.DeveloperCredential
+from homeassistant.components.client_credentials.AuthorizationServer
+from homeassistant.components.client_credentials.ClientCredential
 
 
 async def async_get_authorization_server(
@@ -31,10 +30,10 @@ async def async_get_authorization_server(
 
 # Optional and provided only for backwards compatibility if integration used to
 # accept YAML credentials. Return YAML client ID and secret.
-async def async_get_developer_credential(
+async def async_get_client_credential(
     self, hass: HomeAssistant
-) -> DeveloperCredential:
-    """Return a developer credential from configuration.yaml."""
+) -> ClientCredential:
+    """Return a client credential from configuration.yaml."""
 ```
 
 ## AuthorizationServer
@@ -46,11 +45,11 @@ A `AuthorizationServer` represents the [OAuth2 Authorization server](https://dat
 | authorize_url | str  | **Required** | The OAuth authorize URL that the user is redirected to during the configuration flow. |
 | token_url     | str  | **Required** | The URL used for obtaining an access token.                                           |
 
-## DeveloperCredential
+## ClientCredential
 
-A `DeveloperCredential` represents the a developer credential provided by the user. This is only provided for backward compatibility by integrations that allowed users to specify developer credentials via `configuration.yaml`.
+A `ClientCredential` represents the a client credential provided by the user.
 
 | Name          | Type |                                                                           | Description |
 | ------------- | ---- | ------------------------------------------------------------------------- | ----------- |
-| client_id     | str  | **Required** | The developer credential client ID provided by the user.     |
-| client_secret | str  | **Required** | The developer credential client secret provided by the user. |
+| client_id     | str  | **Required** | The OAuth Client ID provided by the user.     |
+| client_secret | str  | **Required** | The OAuth Client Secret provided by the user. |
