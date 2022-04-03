@@ -1,21 +1,21 @@
 ---
-title: "Client Credentials"
+title: "Application Credentials"
 ---
 
-Integrations support [Configuration via OAuth2](https://developers.home-assistant.io/docs/config_entries_config_flow_handler#configuration-via-oauth2) and the preferred approach is to use the Home Assistant Cloud Account Linking service. Integrations may also allow users to provide their own OAuth client credentials by adding a `client_credentials.py` and implementing the right functions.
+Integrations support [Configuration via OAuth2](https://developers.home-assistant.io/docs/config_entries_config_flow_handler#configuration-via-oauth2) and the preferred approach is to use the Home Assistant Cloud Account Linking service. Integrations may also allow users to provide their own OAuth client credentials by adding a `application_credentials.py` and implementing the right functions.
 
 :::note
-Client Credentials is under active development and integrations should still prefer using `LocalOAuth2Implementation`.
+Application Credentials is under active development and integrations should still prefer using `LocalOAuth2Implementation`.
 :::
 
 ## Adding support
 
-Integrations support client credentials with a file in the integration folder called `client_credentails.py` and implement the following:
+Integrations support application credentials with a file in the integration folder called `application_credentials.py` and implement the following:
 
 ```python
 from homeassistant.core import HomeAssistant
-from homeassistant.components.client_credentials.AuthorizationServer
-from homeassistant.components.client_credentials.ClientCredential
+from homeassistant.components.application_credentials.AuthorizationServer
+from homeassistant.components.application_credentials.ClientCredential
 
 
 async def async_get_authorization_server(
