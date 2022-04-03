@@ -66,17 +66,16 @@ If the light is in mode `COLOR_MODE_HS`, `COLOR_MODE_RGB` or `COLOR_MODE_XY`, th
 
 If the light is in mode `COLOR_MODE_RGBW` or `COLOR_MODE_RGBWW`, the light's state attribute will contain the light's color expressed in `hs`, `rgb` and `xy` color format. The color conversion is an approximation done by adding the white channels to the color.
 
-## Support Feature
+## Supported Features
 
-| Constant | Description
-|----------|-----------------------
-| `SUPPORT_BRIGHTNESS` | Controls the brightness of a light source. This is deprecated and will be removed in Home Assistant 2021.10.
-| `SUPPORT_COLOR` | Controls the color a light source shows. This is deprecated and will be removed in Home Assistant 2021.10.
-| `SUPPORT_COLOR_TEMP` | Controls the representation a light source shows based on temperature. This is deprecated and will be removed in Home Assistant 2021.10.
-| `SUPPORT_EFFECT` | Controls the effect a light source shows
-| `SUPPORT_FLASH` | Controls the duration of a flash a light source shows
-| `SUPPORT_TRANSITION` | Controls the duration of transitions between color and effects
-| `SUPPORT_WHITE_VALUE` | Controls the white light a light source shows. This is deprecated and will be removed in Home Assistant 2021.10.
+Supported features are defined by using values in the `LightEntityFeature` enum
+and are combined using the bitwise or (`|`) operator.
+
+| Value        | Description                                                    |
+| ------------ | -------------------------------------------------------------- |
+| `EFFECT`     | Controls the effect a light source shows                       |
+| `FLASH`      | Controls the duration of a flash a light source shows          |
+| `TRANSITION` | Controls the duration of transitions between color and effects |
 
 ## Methods
 
