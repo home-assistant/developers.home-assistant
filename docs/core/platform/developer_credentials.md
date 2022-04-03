@@ -23,6 +23,10 @@ async def async_get_authorization_server(
     self, hass: HomeAssistant
 ) -> AuthorizationServer:
     """Return authorization server."""
+    return AuthorizationServer(
+        authorize_url="https://example.com/auth",
+        token_url="https://example.com/oauth2/v4/token"
+    )
 
 
 # Optional: Only implement if needed to provide a credential from configuration.yaml
