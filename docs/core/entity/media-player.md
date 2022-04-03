@@ -28,25 +28,28 @@ Properties should always only return information from memory and not do I/O (lik
 
 ## Supported Features
 
-| Constant | Description
-| -------- | -----------
-| `SUPPORT_CLEAR_PLAYLIST` | Entity allows clearing the active playlist.
-| `SUPPORT_GROUPING` | Entity can be grouped with other players for synchronous playback.
-| `SUPPORT_NEXT_TRACK` | Entity allows skipping to the next media track.
-| `SUPPORT_PAUSE` | Entity allows pausing the playback of media.
-| `SUPPORT_PLAY` | Entity allows playing/resuming playback of media.
-| `SUPPORT_PLAY_MEDIA` | Entity allows playing media sources.
-| `SUPPORT_PREVIOUS_TRACK` | Entity allows returning back to a previous media track.
-| `SUPPORT_SEEK` | Entity allows seeking position during playback of media.
-| `SUPPORT_SELECT_SOURCE` | Entity allows selecting a source/input.
-| `SUPPORT_SELECT_SOUND_MODE` | Entity allows selecting a sound mode.
-| `SUPPORT_SHUFFLE_SET` | Entity allows shuffling the active playlist.
-| `SUPPORT_STOP` | Entity allows stopping the playback of media.
-| `SUPPORT_TURN_OFF` | Entity is able to be turned off.
-| `SUPPORT_TURN_ON` | Entity is able to be turned on.
-| `SUPPORT_VOLUME_MUTE` | Entity volume can be muted.
-| `SUPPORT_VOLUME_SET` | Entity volume can be set to specific levels.
-| `SUPPORT_VOLUME_STEP` | Entity volume can be adjusted up and down.
+Supported features are defined by using values in the `MediaPlayerEntityFeature` enum
+and are combined using the bitwise or (`|`) operator.
+
+| Value               | Description                                                        |
+| ------------------- | ------------------------------------------------------------------ |
+| `CLEAR_PLAYLIST`    | Entity allows clearing the active playlist.                        |
+| `GROUPING`          | Entity can be grouped with other players for synchronous playback. |
+| `NEXT_TRACK`        | Entity allows skipping to the next media track.                    |
+| `PAUSE`             | Entity allows pausing the playback of media.                       |
+| `PLAY`              | Entity allows playing/resuming playback of media.                  |
+| `PLAY_MEDIA`        | Entity allows playing media sources.                               |
+| `PREVIOUS_TRACK`    | Entity allows returning back to a previous media track.            |
+| `SEEK`              | Entity allows seeking position during playback of media.           |
+| `SELECT_SOURCE`     | Entity allows selecting a source/input.                            |
+| `SELECT_SOUND_MODE` | Entity allows selecting a sound mode.                              |
+| `SHUFFLE_SET`       | Entity allows shuffling the active playlist.                       |
+| `STOP`              | Entity allows stopping the playback of media.                      |
+| `TURN_OFF`          | Entity is able to be turned off.                                   |
+| `TURN_ON`           | Entity is able to be turned on.                                    |
+| `VOLUME_MUTE`       | Entity volume can be muted.                                        |
+| `VOLUME_SET`        | Entity volume can be set to specific levels.                       |
+| `VOLUME_STEP`       | Entity volume can be adjusted up and down.                         |
 
 ## Methods
 
