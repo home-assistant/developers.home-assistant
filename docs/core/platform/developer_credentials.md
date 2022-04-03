@@ -25,7 +25,8 @@ async def async_get_authorization_server(
     """Return authorization server."""
 
 
-# Optional: Only implement if needed to provide a credential from configuration.yaml
+# Optional and provided only for backwards compatibility if integration used to
+# accept YAML credentials. Return YAML client ID and secret.
 async def async_get_developer_credential(
     self, hass: HomeAssistant
 ) -> DeveloperCredential:
