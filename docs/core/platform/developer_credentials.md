@@ -11,7 +11,7 @@ Developer Credentials is under active development and integrations should still 
 
 ## Adding support
 
-Integrations support developer credentials with a file in the integration folder called `developer_credetnails.py` and implement the following:
+Integrations support developer credentials with a file in the integration folder called `developer_credentails.py` and implement the following:
 
 ```python
 from homeassistant.core import HomeAssistant
