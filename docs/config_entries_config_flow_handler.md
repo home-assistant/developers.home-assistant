@@ -70,6 +70,8 @@ await self.async_set_unique_id(device_unique_id)
 self._abort_if_unique_id_configured()
 ```
 
+Should the config flow then abort, the text resource with the key `already_configured` from the `abort` part of your `strings.json` will be displayed to the user in the interface as an abort reason.
+
 By setting a unique ID, users will have the option to ignore the discovery of your config entry. That way, they won't be bothered about it anymore.
 If the integration uses DHCP, HomeKit, Zeroconf/mDNS, USB, or SSDP/uPnP to be discovered, supplying a unique ID is required.
 
