@@ -26,15 +26,9 @@ async def async_get_authorization_server(
         authorize_url="https://example.com/auth",
         token_url="https://example.com/oauth2/v4/token"
     )
-
-
-# Optional and provided only for backwards compatibility if integration used to
-# accept YAML credentials. Return YAML client ID and secret.
-async def async_get_client_credential(
-    self, hass: HomeAssistant
-) -> ClientCredential:
-    """Return a client credential from configuration.yaml."""
 ```
+
+See below for details on backwards compatibility with YAML credentials.
 
 ## AuthorizationServer
 
@@ -44,6 +38,12 @@ A `AuthorizationServer` represents the [OAuth2 Authorization server](https://dat
 | ------------- | ---- | -------------------------------------------------------------------------------------------------- | ----------- |
 | authorize_url | str  | **Required** | The OAuth authorize URL that the user is redirected to during the configuration flow. |
 | token_url     | str  | **Required** | The URL used for obtaining an access token.                                           |
+
+## Import YAML credentials
+
+Credentials may be imported by integrations that used to accept YAML credentials using the import API `async_import_client_credential` provided by the application credentials integration.
+
+The `auth_domain` is the domain for the auth implementation in in the config entry, which is typically the domain specified in  an existing `LocalOAuth2Implementation`.
 
 ## ClientCredential
 
