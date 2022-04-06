@@ -160,24 +160,4 @@ class Foo:
 
 #### Assert
 
-Do not use `assert` statements for validating/checking variables. Assertions can be turned off (for example, running Python with `-O`) so they cannot be relied upon for runtime checks.
-
-Use `assert` statements only for [pytest assertions](https://docs.pytest.org/en/stable/how-to/assert.html), for debugging, or for [typing hints](https://adamj.eu/tech/2021/05/17/python-type-hints-how-to-narrow-types-with-isinstance-assert-literal/#narrowing-with-assert) when there's no other choice.
-
-Here is an example of type hinting using an `assert` because it is not possible to use an `if` and still attain 100% test coverage. In this case, `_do_thing_with_optional_var` cannot be accessed from outside of `Foo` or children classes, so the case where `_do_thing_with_optional_var` is called when `optional_var is None` cannot occur under normal circumstances and thus cannot be tested. *In almost all circumstances it is better to refactor the code so that the `assert` is not necessary.*
-
-```python
-class Foo:
-    optional_var: Something | None
-
-    def bar(self) -> None
-        if self.optional_var is None:
-            self._do_thing_without_optional_var()
-        else:
-            self._do_thing_with_optional_var()
-
-    def _do_thing_with_optional_var(self) -> None:
-        # This will only be called when optional_var is set, but mypy doesn't know that
-        assert self.optional_var is not None
-        # Now optional_var can be used as though it is always a Something
-```
+Avoid using the `assert` statement in production code, unless it's required for typing purposes and there aren't better alternatives available.
