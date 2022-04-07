@@ -14,8 +14,7 @@ Integrations support application credentials with a file in the integration fold
 
 ```python
 from homeassistant.core import HomeAssistant
-from homeassistant.components.application_credentials.AuthorizationServer
-from homeassistant.components.application_credentials.ClientCredential
+from homeassistant.components.application_credentials import AuthorizationServer
 
 
 async def async_get_authorization_server(
