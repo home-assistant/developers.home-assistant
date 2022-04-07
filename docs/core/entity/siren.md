@@ -26,9 +26,9 @@ Supported features constants are combined using the bitwise or (`|`) operator.
 
 | Name                      | Description                                                                                                      |
 | ------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `SUPPORT_TONES`           | The device supports different tones (the tone can be passed in to `turn_on` service).                                |
-| `SUPPORT_DURATION`        | The device supports setting a duration for the tone (the duration can be passed in to `turn_on` service).            |
-| `SUPPORT_VOLUME_SET`      | The device supports setting the volume level of the device (the volume level can be passed in to `turn_on` service). |
+| `SirenEntityFeature.TONES`           | The device supports different tones (the tone can be passed in to `turn_on` service).                                |
+| `SirenEntityFeature.DURATION`        | The device supports setting a duration for the tone (the duration can be passed in to `turn_on` service).            |
+| `SirenEntityFeature.VOLUME_SET`      | The device supports setting the volume level of the device (the volume level can be passed in to `turn_on` service). |
 
 
 ## Methods
