@@ -46,7 +46,7 @@ The `auth_domain` is the domain for the auth implementation in the config entry,
 
 ## ClientCredential
 
-A `ClientCredential` represents the a client credential provided by the user.
+A `ClientCredential` represents a client credential provided by the user.
 
 | Name          | Type |                                                                           | Description |
 | ------------- | ---- | ------------------------------------------------------------------------- | ----------- |
