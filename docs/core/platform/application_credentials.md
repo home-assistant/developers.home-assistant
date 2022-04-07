@@ -32,7 +32,7 @@ See below for details on backwards compatibility with YAML credentials.
 
 ## AuthorizationServer
 
-A `AuthorizationServer` represents the [OAuth2 Authorization server](https://datatracker.ietf.org/doc/html/rfc6749) used for an integration.
+An `AuthorizationServer` represents the [OAuth2 Authorization server](https://datatracker.ietf.org/doc/html/rfc6749) used for an integration.
 
 | Name          | Type |                                                                                                    | Description |
 | ------------- | ---- | -------------------------------------------------------------------------------------------------- | ----------- |
