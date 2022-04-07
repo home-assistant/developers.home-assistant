@@ -144,6 +144,18 @@ This applies to, the following platforms:
 
   Use the new [`RemoteEntityFeature`](/docs/core/entity/remote#supported-features) enum instead.
 
+- **Siren**
+
+  Deprecated supported feature constants:
+
+  - `SUPPORT_DURATION`
+  - `SUPPORT_TONES`
+  - `SUPPORT_TURN_OFF`
+  - `SUPPORT_TURN_ON`
+  - `SUPPORT_VOLUME_SET`
+
+  Use the new [`SirenEntityFeature`](/docs/core/entity/siren#supported-features) enum instead.
+
 - **Vacuum**
 
   Deprecated supported feature constants:
