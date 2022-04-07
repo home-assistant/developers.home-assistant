@@ -38,7 +38,7 @@ async def async_get_client_credential(
 
 ## AuthorizationServer
 
-A `AuthorizationServer` represents the [OAuth2 Authorization server](https://datatracker.ietf.org/doc/html/rfc6749) used for an integration.
+An `AuthorizationServer` represents the [OAuth2 Authorization server](https://datatracker.ietf.org/doc/html/rfc6749) used for an integration.
 
 | Name          | Type |                                                                                                    | Description |
 | ------------- | ---- | -------------------------------------------------------------------------------------------------- | ----------- |
