@@ -42,7 +42,7 @@ An `AuthorizationServer` represents the [OAuth2 Authorization server](https://da
 
 Credentials may be imported by integrations that used to accept YAML credentials using the import API `async_import_client_credential` provided by the application credentials integration.
 
-The `auth_domain` is the domain for the auth implementation in in the config entry, which is typically the domain specified in  an existing `LocalOAuth2Implementation`.
+The `auth_domain` is the domain for the auth implementation in the config entry, which is typically the domain specified in  an existing `LocalOAuth2Implementation`.
 
 ## ClientCredential
 
