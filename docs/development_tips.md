@@ -8,15 +8,7 @@ This page provides some tips and tricks that may help you as a contributor to Ho
 
 ### Keep PRs simple
 
-It's in your best interest to keep your PRs as short and simple as possible. It may feel like extra work on your part to split a change you have in mind into smaller changes, but on the plus side:
-
-- Your code is more likely to be accepted because it will be much easier to review and confirm it is bug-free.
-- Your PR reviews will generally happen faster and will be easier to iterate through
-- If you don't do this ahead of time, you may be asked to do so during a review, which is a waste of time for both you and the reviewer.
-
-This often comes up when contributors are "modernizing" an integration that hasn't been touched in a while. There are a lot of features that HA has added over the years, and it may be tempting to add support for all of them in a single PR. The right approach is to break the features down into independent functional changes as best you can and to submit the PRs sequentially.
-
-One strategy for handling sequential PRs is to create a branch for the `next` PR off the `current` PR's branch which you can then start writing code against. This is especially useful if you have split up the PRs such that one is dependent on the previous one since you are working off of the code that will be in `dev` once the PR is merged. If you end up adding additional commits to the `current` PR because of changes/review feedback, you can rebase your `next` PR's branch and more easily incorporate any merge conflicts. Once your `current` PR has been merged, squash the commits from the `current` PR branch in the `next` PR branch and then rebase on `dev`.
+See the [Component Checklist](creating_component_code_review#5-make-your-pull-request-as-small-as-possible) for PR expectations.
 
 ### Test package dependency changes in Home Assistant
 
