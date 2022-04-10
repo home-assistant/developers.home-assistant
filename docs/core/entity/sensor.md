@@ -36,7 +36,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | carbon_monoxide | ppm | Concentration of carbon monoxide.
 | current | A | Current
 | date | | Date. Requires `native_value` to be a Python `datetime.date` object, or `None`.
-| energy | Wh, kWh, MWh | Energy, statistics will be stored in kWh.
+| energy | Wh, kWh, MWh | Energy, statistics will be stored in kWh. Represents _power_ over _time_. Not to be confused with `power`
 | frequency | Hz, kHz, MHz, GHz | Frequency
 | gas | m³, ft³ | Volume of gas, statistics will be stored in m³. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
 | humidity | % | Relative humidity
