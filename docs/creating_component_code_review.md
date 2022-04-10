@@ -66,9 +66,9 @@ Keep a new integration to the minimum functionality needed for someone to get va
 - Do not solve several issues in a single pull request.
 - Do not submit pull requests that depend on other work which is still unmerged.
 
-This often comes up when contributors are "modernizing" an integration that hasn't been touched in a while. There are a lot of features that HA has added over the years, and it may be tempting to add support for all of them in a single PR. The right approach is to break the features down into independent functional changes as best you can and to submit the PRs sequentially.
+It may be tempting to open a large PR when "modernizing" an integration that hasn't been touched in a while to take advantage of all the latest features available. The right approach is to break the features down into independent functional changes as best you can and to submit the PRs sequentially.
 
-One strategy for handling sequential PRs is to create a branch for the `next` PR off the `current` PR's branch which you can then start writing code against. This is especially useful if you have split up the PRs such that one is dependent on the previous one since you are working off of the code that will be in `dev` once the PR is merged. If you end up adding additional commits to the `current` PR because of changes/review feedback, you can rebase your `next` PR's branch and more easily incorporate any merge conflicts. Once your `current` PR has been merged, squash the commits from the `current` PR branch in the `next` PR branch and then rebase on `dev`.
+One strategy for handling sequential PRs is to create a branch for the `next` PR off the `current` PR's branch which you can then start writing code against. This is especially useful if you have split up the PRs such that one is dependent on the previous one since you are working off of the code that will be in `dev` once the PR is merged. If you end up adding additional commits to the `current` PR because of changes/review feedback, you can rebase your `next` PR's branch and more easily incorporate any merge conflicts. Once your `current` PR has been merged, squash the commits from the `current` PR branch in the `next` PR branch and then rebase on `dev`. Then you can submit your `next` PR branch for review and rinse and repeat as needed.
 
 ### 6. Event names
 
