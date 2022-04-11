@@ -1111,11 +1111,13 @@ Return information about the DNS plugin.
 | key              | type    | description                      |
 | ---------------- | ------- | -------------------------------- |
 | host             | string  | The IP address of the plugin     |
+| llmnr            | bool    | Can resolve LLMNR hostnames      |
+| locals           | list    | A list of DNS servers            |
+| mdns             | bool    | Can resolve MulticastDNS hostnames |
+| servers          | list    | A list of DNS servers            |
+| update_available | boolean | `true` if an update is available |
 | version          | string  | The installed observer version   |
 | version_latest   | string  | The latest published version     |
-| update_available | boolean | `true` if an update is available |
-| servers          | list    | A list of DNS servers            |
-| locals           | list    | A list of DNS servers            |
 
 **Example response:**
 
@@ -1126,7 +1128,9 @@ Return information about the DNS plugin.
   "version_latest": "2",
   "update_available": true,
   "servers": ["dns://8.8.8.8"],
-  "locals": ["dns://127.0.0.18"]
+  "locals": ["dns://127.0.0.18"],
+  "mdns": true,
+  "llmnr": false
 }
 ```
 
@@ -1331,6 +1335,9 @@ Return information about the host.
 | ---------------- | -------------- | ----------------------------------------- |
 | agent_version    | string or null | Agent version running on the Host         |
 | apparmor_version | string or null | The AppArmor version from host            |
+| boot_timestamp   | int            | The timestamp for the last boot in microseconds |
+| broadcast_llmnr  | bool or null   | Host is broadcasting its LLMNR hostname   |
+| broadcast_mdns   | bool or null   | Host is broadcasting its MulticastDNS hostname | 
 | chassis          | string or null | The chassis type                          |
 | cpe              | string or null | The local CPE                             |
 | deployment       | string or null | The deployment stage of the OS if any     |
@@ -1340,9 +1347,9 @@ Return information about the host.
 | features         | list           | A list of features available for the host |
 | hostname         | string or null | The hostname of the host                  |
 | kernel           | string or null | The kernel version on the host            |
+| llmnr_hostname   | string or null | The hostname currently exposed on the network via LLMNR for host |
 | operating_system | string         | The operating system on the host          |
-| boot_timestamp | int | The timestamp for the last boot in microseconds |
-| startup_time | float | The time in seconds it took for last boot |
+| startup_time     | float          | The time in seconds it took for last boot |
 
 **Example response:**
 
@@ -1358,10 +1365,13 @@ Return information about the host.
   "disk_free": 2.0,
   "features": ["shutdown", "reboot", "hostname", "services", "haos"],
   "hostname": "Awesome host",
+  "llmnr_hostname": "Awesome host",
   "kernel": "4.15.7",
   "operating_system": "Home Assistant OS",
   "boot_timestamp": 1234567788,
-  "startup_time": 12.345
+  "startup_time": 12.345,
+  "broadcast_llmnr": true,
+  "broadcast_mdns": false
 }
 ```
 
