@@ -28,4 +28,4 @@ Additionally, the following constants have been deprecated:
   - `COLOR_MODE_RGBWW`
   - `COLOR_MODE_WHITE`
 
-  Use the new [`ColorMode`](https://developers.home-assistant.io/docs/core/entity/light#color-modes) enum instead.
+  Use the new [`ColorMode`](/docs/core/entity/light#color-modes) enum instead.
