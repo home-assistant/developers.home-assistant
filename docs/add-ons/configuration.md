@@ -137,7 +137,7 @@ Note:  Avoid the use of this filename for anything other than add-on configurati
 | `webui` | string | | An URL for the web interface of this add-on. Like `http://[HOST]:[PORT:2839]/dashboard`, the port needs the internal port, which will be replaced with the effective port. It is also possible to bind the protocol part to a configuration options with: `[PROTO:option_name]://[HOST]:[PORT:2839]/dashboard` and it's looked up if it is `true` and it's going to `https`.
 | `boot` | string | `auto` | `auto` start at boot is controlled by the system. `manual` for only manual starting.
 | `ports` | dict | | Network ports to expose from the container. Format is `"container-port/type": host-port`. If the host port is `null` then the mapping is disabled.
-| `ports_description` | dict | | Network ports description mapping. Format is `"container-port/type": "description of this port"`.
+| `ports_description` | dict | | Network ports description mapping. Format is `"container-port/type": "description of this port"`. Alternatively use [Port description translations](#port-description-translations).
 | `host_network` | bool | `false` | If `true`, the add-on runs on host network.
 | `host_ipc` | bool | `false` | Allow to share the IPC namespace with others.
 | `host_dbus` | bool | `false` | Map the host D-Bus service into the add-on.
@@ -272,9 +272,24 @@ Example path to translation file: `addon/translations/{language_code}.yaml`
 
 For `{language_code}` use a valid language code, like `en`, for a [full list have a look here](https://github.com/home-assistant/frontend/blob/dev/src/translations/translationMetadata.json), `en.yaml` would be a valid filename.
 
+This file support 2 main keys `configuration` and `network`.
+
+### Configuration translations
+
 ```yaml
 configuration:
   ssl:
-    name: SSL
+    name: Enable SSL
     description: Enable usage of SSL on the webserver inside the add-on
 ```
+
+_The key under `configuration` (`ssl`) in this case, needs to match a key in your `schema` configuration (in [`config.yaml`](#add-on-configuration))._
+
+### Port description translations
+
+```yaml
+network:
+  80/TCP: The webserver port (Not used for Ingress)
+```
+
+_The key under `network` (`80/TCP`) in this case, needs to match a key in your `ports` configuration (in [`config.yaml`](#add-on-configuration))._
