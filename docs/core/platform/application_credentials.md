@@ -29,7 +29,7 @@ async def async_get_authorization_server(
     )
 ```
 
-## AuthorizationServer
+### AuthorizationServer
 
 An `AuthorizationServer` represents the [OAuth2 Authorization server](https://datatracker.ietf.org/doc/html/rfc6749) used for an integration.
 
