@@ -1,5 +1,5 @@
 ---
-title: "Lovelace: Custom View Layout"
+title: "Custom View Layout"
 ---
 
 By default Home Assistant will try to show the cards in a masonry layout (like Pinterest). A Custom View Layout allows developers to override this and define the layout mechanism (like a grid).
@@ -52,7 +52,7 @@ And you can define this element in the Custom Element Registry just as you would
 customElements.define("my-new-view", MyNewView);
 ```
 
-A custom view can be used by adding the following to the definition of your Lovelace view:
+A custom view can be used by adding the following to the definition of your view:
 
 ```yaml
 - title: Home View
@@ -61,7 +61,7 @@ A custom view can be used by adding the following to the definition of your Love
   cards: [...]
 ```
 
-The Lovelace default masonry view is an example of a layout element. ([source](https://github.com/home-assistant/frontend/blob/master/src/panels/lovelace/views/hui-masonry-view.ts)).
+The default masonry view is an example of a layout element. ([source](https://github.com/home-assistant/frontend/blob/master/src/panels/lovelace/views/hui-masonry-view.ts)).
 
 ## Store Custom Data
 

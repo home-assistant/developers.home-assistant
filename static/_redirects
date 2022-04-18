@@ -70,3 +70,8 @@
 /docs/creating_platform_example_sensor https://github.com/home-assistant/example-custom-config/tree/master/custom_components/example_sensor
 /docs/creating_platform_example_light https://github.com/home-assistant/example-custom-config/tree/master/custom_components/example_light
 /docs/creating_component_deps_and_reqs /docs/creating_integration_manifest
+
+# Retiring "Lovelace" terminology
+/docs/frontend/custom-ui/lovelace-custom-card /docs/frontend/custom-ui/custom-card
+/docs/frontend/custom-ui/lovelace-custom-strategy /docs/frontend/custom-ui/custom-strategy
+/docs/frontend/custom-ui/lovelace-custom-view /docs/frontend/custom-ui/custom-view

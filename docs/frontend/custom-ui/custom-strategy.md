@@ -1,26 +1,26 @@
 ---
-title: "Lovelace: Custom Strategies"
+title: "Custom Strategies"
 ---
 
 _Introduced in Home Assistant 2021.5._
 
-Strategies are JavaScript functions that generate Lovelace configurations. When a user has not created a Lovelace configuration yet, an auto-generated dashboard is shown. That configuration is generated using a built-in strategy.
+Strategies are JavaScript functions that generate dashboard configurations. When a user has not created a dashboard configuration yet, an auto-generated dashboard is shown. That configuration is generated using a built-in strategy.
 
-It's possible for developers to create their own strategies to generate dashboards. Strategies can use all of Home Assistant's data and the user's Lovelace configuration to create something new.
+It's possible for developers to create their own strategies to generate dashboards. Strategies can use all of Home Assistant's data and the user's dashboard configuration to create something new.
 
 A strategy can be applied to the whole configuration or to a specific view.
 
-Strategies are defined as a custom element in a JavaScript file, and included [via Lovelace resources](./registering-resources.md). Home Assistant will call static functions on the class instead of rendering it as a custom element.
+Strategies are defined as a custom element in a JavaScript file, and included [via dashboard resources](./registering-resources.md). Home Assistant will call static functions on the class instead of rendering it as a custom element.
 
 ## Dashboard Strategies
 
-A dashboard strategy is responsible for generating a full Lovelace configuration. This can either be from scratch, or based on an existing Lovelace configuration that is passed in.
+A dashboard strategy is responsible for generating a full dashboard configuration. This can either be from scratch, or based on an existing dashboard configuration that is passed in.
 
 An info object is passed to the strategy with information:
 
 | Key | Description
 | -- | --
-| `config` | User supplied Lovelace configuration, if any.
+| `config` | User supplied dashboard configuration, if any.
 | `hass` | The Home Assistant object.
 | `narrow` | If the current user interface is rendered in narrow mode or not.
 
@@ -30,7 +30,7 @@ class StrategyDemo {
   static async generateDashboard(info) {
 
     return {
-      title: "Generated Lovelace",
+      title: "Generated Dashboard",
       views: [
         {
           "cards": [
@@ -50,7 +50,7 @@ class StrategyDemo {
 customElements.define("ll-strategy-my-demo", StrategyDemo);
 ```
 
-Use the following Lovelace configuration to use this strategy:
+Use the following dashboard configuration to use this strategy:
 
 ```yaml
 strategy:
@@ -60,14 +60,14 @@ views: []
 
 ## View Strategies
 
-A view strategy is responsible for generating the configuration of a specific Lovelace view. The strategy is invoked when the user opens the specific view.
+A view strategy is responsible for generating the configuration of a specific dashboard view. The strategy is invoked when the user opens the specific view.
 
 An info object is passed to the strategy with information:
 
 | Key | Description
 | -- | --
 | `view` | View configuration.
-| `config` | Lovelace configuration.
+| `config` | Dashboard configuration.
 | `hass` | The Home Assistant object.
 | `narrow` | If the current user interface is rendered in narrow mode or not.
 
@@ -92,7 +92,7 @@ class StrategyDemo {
 customElements.define("ll-strategy-my-demo", StrategyDemo);
 ```
 
-Use the following Lovelace configuration to use this strategy:
+Use the following dashboard configuration to use this strategy:
 
 ```yaml
 views:
@@ -104,7 +104,7 @@ views:
 
 Strategies are structured such that a single class can provide both a dashboard and view strategy implementations.
 
-It's recommended for a dashboard strategy to leave as much work to be done to the view strategies. That way the dashboard will show up for the user as fast as possible. This can be done by having the dashboard generate a Lovelace configuration with views that rely on it's own strategy.
+It's recommended for a dashboard strategy to leave as much work to be done to the view strategies. That way the dashboard will show up for the user as fast as possible. This can be done by having the dashboard generate a configuration with views that rely on its own strategy.
 
 Below example will create a view per area, with each view showing all entities in that area in a grid.
 
@@ -175,7 +175,7 @@ class StrategyDemo {
 customElements.define("ll-strategy-my-demo", StrategyDemo);
 ```
 
-Use the following Lovelace configuration to use this strategy:
+Use the following dashboard configuration to use this strategy:
 
 ```yaml
 strategy:
