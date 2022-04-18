@@ -34,6 +34,9 @@ Properties should always only return information from memory and not do I/O (lik
 
 ## Supported Features
 
+Supported features are defined by using values in the `AlarmControlPanelEntityFeature` enum
+and are combined using the bitwise or (`|`) operator.
+
 | Constant | Description |
 |----------|--------------------------------------|
 | `AlarmControlPanelEntityFeature.ARM_AWAY` | The alarm supports arming in away mode.
@@ -45,11 +48,13 @@ Properties should always only return information from memory and not do I/O (lik
 
 ### Code Formats
 
+Supported code formats are defined by using values in the `CodeFormaat` enum
+
 | Value | Description
 | ----- | -----------
-| None | No code required.
-| Number | Code is a number (Shows ten-key pad on frontend).
-| Any | Code is a string.
+| `None` | No code required.
+| `CodeFormat.NUMBER` | Code is a number (Shows ten-key pad on frontend).
+| `CodeFormat.TEXT` | Code is a string.
 
 ## Methods
 
