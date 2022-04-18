@@ -48,7 +48,7 @@ and are combined using the bitwise or (`|`) operator.
 
 ### Code Formats
 
-Supported code formats are defined by using values in the `CodeFormaat` enum
+Supported code formats are defined by using values in the `CodeFormat` enum
 
 | Value | Description
 | ----- | -----------
