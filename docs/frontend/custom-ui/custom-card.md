@@ -219,16 +219,16 @@ views:
 
 ## Graphical card configuration
 
-Your card can define a `getConfigElement` method that returns a custom element for editing the user configuration. Home Assistant will display this element in the card editor.
+Your card can define a `getConfigElement` method that returns a custom element for editing the user configuration. Home Assistant will display this element in the card editor in the dashboard.
 
-Your card can also define a `getStubConfig` method that returns a default card configuration (without the `type:` parameter) in json form for use by the card type picker.
+Your card can also define a `getStubConfig` method that returns a default card configuration (without the `type:` parameter) in json form for use by the card type picker in the dashboard.
 
 Home Assistant will call the `setConfig` method of the config element on setup.
 Home Assistant will update the `hass` property of the config element on state changes, and the `lovelace` element, which contains information about the dashboard configuration.
 
 Changes to the configuration are communicated back to the dashboard by dispatching a `config-changed` event with the new configuration in its detail.
 
-To have your card displayed in the card picker dialog, add an object describing it to the array `window.customCards`. Required properties of the object are `type` and `name` (see example below).
+To have your card displayed in the card picker dialog in the dashboard, add an object describing it to the array `window.customCards`. Required properties of the object are `type` and `name` (see example below).
 
 ```js
 class ContentCardExample extends HTMLElement {
