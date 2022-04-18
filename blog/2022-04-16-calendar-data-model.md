@@ -1,7 +1,6 @@
 ---
 author: Allen Porter
 authorURL: https://github.com/allenporter
-authorTwitter: frenck
 title: "Calendar Data Model improvements and deprecations"
 ---
 
