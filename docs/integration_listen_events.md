@@ -6,9 +6,16 @@ Your integration may need to take action when a specific event happens inside Ho
 
 ## Available event helpers
 
-Event helpers are available in the `homeassistant.helpers.event` namespace.
+Event helpers are available in the `homeassistant.helpers.event` namespace. These functions return a callable that can be used to cancel the listner. 
 
 Sync versions of the below functions are also available without the `async_` prefix.
+
+### Example
+
+```python3
+unsub = async_track_state_change_event(hass, entity_ids, state_automation_listener)
+unsub()
+```
 
 ### Tracking entity state changes
 
@@ -99,7 +106,7 @@ The below events are commonly listened to directly.
 These events are rarely listened to directly unless the integration is part of the core. Often there is a helper available that consumes these events, and in that case, they should not be listened to directly.
 
 | Event Name                      | Description                                  | Preferred helper
-| ------------------------------- | --------------------------------------------------------------------------
+| ------------------------------- | -------------------------------------------- | ----------------------------
 | EVENT_HOMEASSISTANT_FINAL_WRITE | The last opportunity to write data to disk   | 
 | EVENT_HOMEASSISTANT_CLOSE       | Teardown                                     | 
 | EVENT_COMPONENT_LOADED          | An integration has completed loading         | `homeassistant.helpers.start.async_at_start`
