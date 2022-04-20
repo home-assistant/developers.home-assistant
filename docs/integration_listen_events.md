@@ -103,7 +103,7 @@ The below events are commonly listened to directly.
 
 ### Other events
 
-These events are rarely listened to directly unless the integration is part of the core. Often there is a helper available that consumes these events, and in that case, they should not be listened to directly.
+These events are rarely listened to directly unless the integration is part of the core. Often there is a helper available that consumes these events, and in that case, they should not be listened for directly.
 
 | Event Name                      | Description                                  | Preferred helper
 | ------------------------------- | -------------------------------------------- | ----------------------------
