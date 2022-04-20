@@ -135,6 +135,7 @@ module.exports = {
       "creating_component_generic_discovery",
       "integration_fetching_data",
       "integration_events",
+      "integration_listen_events",
       "network_discovery",
     ],
     "Development Checklist": [
