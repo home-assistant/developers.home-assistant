@@ -56,8 +56,8 @@ unsub()
 
 | Function                                  | Use case
 | ----------------------------------------- | --------------------------------------------------------------------------
-| async_track_sunrise                       | Add a listener that will fire a specified offset from sunrise daily
-| async_track_sunset                        | Add a listener that will fire a specified offset from sunset daily
+| `async_track_sunrise`                       | Add a listener that will fire a specified offset from sunrise daily
+| `async_track_sunset`                        | Add a listener that will fire a specified offset from sunset daily
 
 ## Listening to the event bus directly
 
