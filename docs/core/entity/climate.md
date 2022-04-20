@@ -26,7 +26,7 @@ Properties should always only return information from memory and not do I/O (lik
 | min_temp                | int    | `DEFAULT_MIN_TEMP` (value == 7)      | Returns the minimum temperature.                                                                             |
 | max_humidity            | int    | `DEFAULT_MAX_HUMIDITY` (value == 99) | Returns the maximum humidity. Requires `SUPPORT_TARGET_HUMIDITY`.                                            |
 | min_humidity            | int    | `DEFAULT_MIN_HUMIDITY` (value == 30) | Returns the minimum humidity. Requires `SUPPORT_TARGET_HUMIDITY`.                                            |
-| hvac_mode               | string | `NotImplementedError()`              | The current operation (e.g. heat, cool, idle). Used to determine `state`.                                    |
+| hvac_mode               | HVACMode | `NotImplementedError()`              | The current operation (e.g. heat, cool, idle). Used to determine `state`.                                    |
 | hvac_action             | string | None                                 | The current HVAC action (heating, cooling)                                                                   |
 | hvac_modes              | list   | `NotImplementedError()`              | List of available operation modes. See below.                                                                |
 | preset_mode             | string | `NotImplementedError()`              | The current active preset. Requires `SUPPORT_PRESET_MODE`.                                                   |
@@ -40,17 +40,19 @@ Properties should always only return information from memory and not do I/O (lik
 
 ### HVAC modes
 
-You are only allowed to use the built-in HVAC modes. If you want another mode, add a preset instead.
+You are only allowed to use the built-in HVAC modes, provided by the `HVACMode`
+enum. If you want another mode, add a preset instead.
 
-| Name                  | Description                                                         |
-| --------------------- | ------------------------------------------------------------------- |
-| `HVAC_MODE_OFF`       | The device is turned off.                                           |
-| `HVAC_MODE_HEAT`      | The device is set to heat to a target temperature.                  |
-| `HVAC_MODE_COOL`      | The device is set to cool to a target temperature.                  |
-| `HVAC_MODE_HEAT_COOL` | The device supports heating/cooling to a range                      |
-| `HVAC_MODE_AUTO`      | The device is set to a schedule, learned behavior, AI.              |
-| `HVAC_MODE_DRY`       | The device is set to dry/humidity mode.                             |
-| `HVAC_MODE_FAN_ONLY`  | The device only has the fan on. No heating or cooling taking place. |
+
+| Name                 | Description                                                         |
+| -------------------- | ------------------------------------------------------------------- |
+| `HVACMode.OFF`       | The device is turned off.                                           |
+| `HVACMode.HEAT`      | The device is set to heat to a target temperature.                  |
+| `HVACMode.COOL`      | The device is set to cool to a target temperature.                  |
+| `HVACMode.HEAT_COOL` | The device supports heating/cooling to a range                      |
+| `HVACMode.AUTO`      | The device is set to a schedule, learned behavior, AI.              |
+| `HVACMode.DRY`       | The device is set to dry/humidity mode.                             |
+| `HVACMode.FAN_ONLY`  | The device only has the fan on. No heating or cooling taking place. |
 
 ### HVAC Action
 
