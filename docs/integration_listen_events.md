@@ -21,12 +21,12 @@ unsub()
 
 | Function                           | Use case
 | ---------------------------------- | --------------------------------------------------------------------------
-| async_track_state_change           | Track specific state changes
-| async_track_state_change_event     | Track specific state change events indexed by entity_id
-| async_track_state_added_domain     | Track state change events when an entity is added to domains
-| async_track_state_removed_domain   | Track state change events when an entity is removed from domains
-| async_track_state_change_filtered  | Track state changes with a TrackStates filter that can be updated
-| async_track_same_state             | Track the state of entities for a period and run an action
+| `async_track_state_change`           | Track specific state changes
+| `async_track_state_change_event     | Track specific state change events indexed by entity_id
+| `async_track_state_added_domain`     | Track state change events when an entity is added to domains
+| `async_track_state_removed_domain`   | Track state change events when an entity is removed from domains
+| `async_track_state_change_filtered`  | Track state changes with a TrackStates filter that can be updated
+| `async_track_same_state`             | Track the state of entities for a period and run an action
 
 ### Tracking template changes
 
