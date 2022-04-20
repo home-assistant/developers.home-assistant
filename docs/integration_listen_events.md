@@ -39,7 +39,7 @@ unsub()
 
 | Function                                  | Use case
 | ----------------------------------------- | --------------------------------------------------------------------------
-| async_track_entity_registry_updated_event | Track specific entity registry updated events indexed by entity_id
+| `async_track_entity_registry_updated_event` | Track specific entity registry updated events indexed by entity_id
 
 ### Tracking time changes
 
