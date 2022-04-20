@@ -56,15 +56,15 @@ enum. If you want another mode, add a preset instead.
 
 ### HVAC Action
 
-The HVAC action describes the _current_ action. This is different from the mode, because if a device is set to heat, and the target temperature is already achieved, the device will not be actively heating anymore.
+The HVAC action describes the _current_ action. This is different from the mode, because if a device is set to heat, and the target temperature is already achieved, the device will not be actively heating anymore. It is only allowed to use the built-in HVAC actions, provided by the `HVACAction` enum.
 
-| Name                | Description           |
-| ------------------- | --------------------- |
-| `CURRENT_HVAC_OFF`  | Device is turned off. |
-| `CURRENT_HVAC_HEAT` | Device is heating.    |
-| `CURRENT_HVAC_COOL` | Device is cooling.    |
-| `CURRENT_HVAC_DRY`  | Device is drying.     |
-| `CURRENT_HVAC_IDLE` | Device is idle.       |
+| Name                 | Description           |
+| -------------------- | --------------------- |
+| `HVACAction.OFF`     | Device is turned off. |
+| `HVACAction.HEATING` | Device is heating.    |
+| `HVACAction.COOLING` | Device is cooling.    |
+| `HVACAction.DRYING`  | Device is drying.     |
+| `HVACAction.IDLE`    | Device is idle.       |
 
 ### Presets
 
