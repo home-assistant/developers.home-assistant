@@ -113,7 +113,7 @@ These events are rarely listened to directly unless the integration is part of t
 | EVENT_SERVICE_REGISTERED        | A new service has been registered            |
 | EVENT_SERVICE_REMOVED           | A service has been removed                   |
 | EVENT_CALL_SERVICE              | A service has been called                    |
-| EVENT_STATE_CHANGED             | The state of an entity has changed           | [Tracking entity state changes](#Tracking entity state changes)
+| EVENT_STATE_CHANGED             | The state of an entity has changed           | [Tracking entity state changes](#tracking-entity-state-changes)
 | EVENT_THEMES_UPDATED            | Themes have been updated                     |
 | EVENT_CORE_CONFIG_UPDATE        | Core configuration has been updated          |
-| EVENT_ENTITY_REGISTRY_UPDATED   | The entity registry has been updated         | [Tracking entity registry changes](#Tracking entity registry changes)
+| EVENT_ENTITY_REGISTRY_UPDATED   | The entity registry has been updated         | [Tracking entity registry changes](#tracking-entity-registry-changes)
