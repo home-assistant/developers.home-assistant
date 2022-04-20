@@ -6,7 +6,7 @@ Your integration may need to take action when a specific event happens inside Ho
 
 ## Available event helpers
 
-Event helpers are available in the `homeassistant.helpers.event` namespace. These functions return a callable that can be used to cancel the listner. 
+Event helpers are available in the `homeassistant.helpers.event` namespace. These functions return a callable that cancels the listener.
 
 Sync versions of the below functions are also available without the `async_` prefix.
 
@@ -61,7 +61,7 @@ unsub()
 
 ## Listening to the event bus directly
 
-There are two functions available to create listeners. Both functions return a callable that can be used to cancel the listner. 
+There are two functions available to create listeners. There are two functions available to create listeners. Both functions return a callable that cancels the listener. 
 
 `async_listen_once` - Will listen once for the event and never fire again
 `async_listen` - Will listen until canceled
