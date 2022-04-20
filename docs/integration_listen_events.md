@@ -19,8 +19,8 @@ unsub()
 
 ### Tracking entity state changes
 
-| Function                           | Use case
-| ---------------------------------- | --------------------------------------------------------------------------
+| Function                             | Use case
+| ------------------------------------ | --------------------------------------------------------------------------
 | `async_track_state_change`           | Track specific state changes
 | `async_track_state_change_event`     | Track specific state change events indexed by entity_id
 | `async_track_state_added_domain`     | Track state change events when an entity is added to domains
@@ -30,21 +30,21 @@ unsub()
 
 ### Tracking template changes
 
-| Function                           | Use case
-| ---------------------------------- | --------------------------------------------------------------------------
+| Function                             | Use case
+| ------------------------------------ | --------------------------------------------------------------------------
 | `async_track_template`               | Add a listener that fires when a template evaluates to 'true'
 | `async_track_template_result`        | Add a listener that fires when the result of a template changes
 
 ### Tracking entity registry changes
 
-| Function                                  | Use case
-| ----------------------------------------- | --------------------------------------------------------------------------
+| Function                                    | Use case
+| ------------------------------------------- | --------------------------------------------------------------------------
 | `async_track_entity_registry_updated_event` | Track specific entity registry updated events indexed by entity_id
 
 ### Tracking time changes
 
-| Function                                  | Use case
-| ----------------------------------------- | --------------------------------------------------------------------------
+| Function                                    | Use case
+| ------------------------------------------- | --------------------------------------------------------------------------
 | `async_track_point_in_time`                 | Add a listener that fires once after a specific point in time
 | `async_track_point_in_utc_time`             | Add a listener that fires once after a specific point in UTC time
 | `async_call_later`                          | Add a listener that is called with a delay
@@ -54,8 +54,8 @@ unsub()
 
 ### Tracking the sun
 
-| Function                                  | Use case
-| ----------------------------------------- | --------------------------------------------------------------------------
+| Function                                    | Use case
+| ------------------------------------------- | --------------------------------------------------------------------------
 | `async_track_sunrise`                       | Add a listener that will fire a specified offset from sunrise daily
 | `async_track_sunset`                        | Add a listener that will fire a specified offset from sunset daily
 
@@ -95,8 +95,8 @@ cancel()
 
 The below events are commonly listened to directly.
 
-| Event Name                      | Description
-| ------------------------------- | --------------------------------------------------------------------------
+| Event Name                        | Description
+| --------------------------------- | --------------------------------------------------------------------------
 | `EVENT_HOMEASSISTANT_START`       | Completed the setup and entered the start phase
 | `EVENT_HOMEASSISTANT_STARTED`     | Completed the start phase, and all integrations have had a chance to load; Mostly used by voice assistants and integrations that export states to external services
 | `EVENT_HOMEASSISTANT_STOP`        | Entered the stop phase
@@ -105,8 +105,8 @@ The below events are commonly listened to directly.
 
 These events are rarely listened to directly unless the integration is part of the core. Often there is a helper available that consumes these events, and in that case, they should not be listened for directly.
 
-| Event Name                      | Description                                  | Preferred helper
-| ------------------------------- | -------------------------------------------- | ----------------------------
+| Event Name                        | Description                                  | Preferred helper
+| --------------------------------- | -------------------------------------------- | ----------------------------
 | `EVENT_HOMEASSISTANT_FINAL_WRITE` | The last opportunity to write data to disk   | 
 | `EVENT_HOMEASSISTANT_CLOSE`       | Teardown                                     | 
 | `EVENT_COMPONENT_LOADED`          | An integration has completed loading         | `homeassistant.helpers.start.async_at_start`
