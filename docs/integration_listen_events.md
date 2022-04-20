@@ -45,12 +45,12 @@ unsub()
 
 | Function                                  | Use case
 | ----------------------------------------- | --------------------------------------------------------------------------
-| async_track_point_in_time                 | Add a listener that fires once after a specific point in time
-| async_track_point_in_utc_time             | Add a listener that fires once after a specific point in UTC time
-| async_call_later                          | Add a listener that is called with a delay
-| async_track_time_interval                 | Add a listener that fires repetitively at every timedelta interval
-| async_track_utc_time_change               | Add a listener that will fire if time matches a pattern
-| async_track_time_change                   | Add a listener that will fire if local time matches a pattern
+| `async_track_point_in_time`                 | Add a listener that fires once after a specific point in time
+| `async_track_point_in_utc_time`             | Add a listener that fires once after a specific point in UTC time
+| `async_call_later`                          | Add a listener that is called with a delay
+| `async_track_time_interval`                 | Add a listener that fires repetitively at every timedelta interval
+| `async_track_utc_time_change`               | Add a listener that will fire if time matches a pattern
+| `async_track_time_change`                   | Add a listener that will fire if local time matches a pattern
 
 ### Tracking the sun
 
