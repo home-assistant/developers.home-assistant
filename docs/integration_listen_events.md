@@ -61,7 +61,7 @@ unsub()
 
 ## Listening to the event bus directly
 
-There are two functions available to create listeners. There are two functions available to create listeners. Both functions return a callable that cancels the listener. 
+There are two functions available to create listeners. Both functions return a callable that cancels the listener. 
 
 `async_listen_once` - Will listen once for the event and never fire again
 `async_listen` - Will listen until canceled
