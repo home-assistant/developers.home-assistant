@@ -63,8 +63,8 @@ unsub()
 
 There are two functions available to create listeners. Both functions return a callable that cancels the listener. 
 
-`async_listen_once` - Will listen once for the event and never fire again
-`async_listen` - Will listen until canceled
+- `async_listen_once` - Listen once for the event and never fire again
+- `async_listen` - Listen until canceled
 
 Its a rare case that `async_listen` is use since `EVENT_HOMEASSISTANT_START`, `EVENT_HOMEASSISTANT_STARTED`, and `EVENT_HOMEASSISTANT_STOP` are only ever fired once per run.
 
