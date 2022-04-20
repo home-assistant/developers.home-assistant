@@ -97,9 +97,9 @@ The below events are commonly listened to directly.
 
 | Event Name                      | Description
 | ------------------------------- | --------------------------------------------------------------------------
-| EVENT_HOMEASSISTANT_START       | Completed the setup and entered the start phase
-| EVENT_HOMEASSISTANT_STARTED     | Completed the start phase, and all integrations have had a chance to load; Mostly used by voice assistants and integrations that export states to external services
-| EVENT_HOMEASSISTANT_STOP        | Entered the stop phase
+| `EVENT_HOMEASSISTANT_START`       | Completed the setup and entered the start phase
+| `EVENT_HOMEASSISTANT_STARTED`     | Completed the start phase, and all integrations have had a chance to load; Mostly used by voice assistants and integrations that export states to external services
+| `EVENT_HOMEASSISTANT_STOP`        | Entered the stop phase
 
 ### Other events
 
