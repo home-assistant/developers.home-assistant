@@ -32,8 +32,8 @@ unsub()
 
 | Function                           | Use case
 | ---------------------------------- | --------------------------------------------------------------------------
-| async_track_template               | Add a listener that fires when a a template evaluates to 'true'
-| async_track_template_result        | Add a listener that fires when the result of a template changes
+| `async_track_template`               | Add a listener that fires when a template evaluates to 'true'
+| `async_track_template_result`        | Add a listener that fires when the result of a template changes
 
 ### Tracking entity registry changes
 
