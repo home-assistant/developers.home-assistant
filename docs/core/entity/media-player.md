@@ -33,6 +33,7 @@ and are combined using the bitwise or (`|`) operator.
 
 | Value               | Description                                                        |
 | ------------------- | ------------------------------------------------------------------ |
+| `BROWSE_MEDIA`      | Entity allows browsing media.                                      |
 | `CLEAR_PLAYLIST`    | Entity allows clearing the active playlist.                        |
 | `GROUPING`          | Entity can be grouped with other players for synchronous playback. |
 | `NEXT_TRACK`        | Entity allows skipping to the next media track.                    |
@@ -40,9 +41,10 @@ and are combined using the bitwise or (`|`) operator.
 | `PLAY`              | Entity allows playing/resuming playback of media.                  |
 | `PLAY_MEDIA`        | Entity allows playing media sources.                               |
 | `PREVIOUS_TRACK`    | Entity allows returning back to a previous media track.            |
+| `REPEAT_SET`        | Entity allows setting repeat.                                      |
 | `SEEK`              | Entity allows seeking position during playback of media.           |
-| `SELECT_SOURCE`     | Entity allows selecting a source/input.                            |
 | `SELECT_SOUND_MODE` | Entity allows selecting a sound mode.                              |
+| `SELECT_SOURCE`     | Entity allows selecting a source/input.                            |
 | `SHUFFLE_SET`       | Entity allows shuffling the active playlist.                       |
 | `STOP`              | Entity allows stopping the playback of media.                      |
 | `TURN_OFF`          | Entity is able to be turned off.                                   |
@@ -52,6 +54,64 @@ and are combined using the bitwise or (`|`) operator.
 | `VOLUME_STEP`       | Entity volume can be adjusted up and down.                         |
 
 ## Methods
+
+### Browse Media
+
+If the media player supports browsing media, it should implement the following method:
+
+```python
+class MyMediaPlayer(MediaPlayerEntity):
+
+    async def async_browse_media(
+        self, media_content_type: str | None = None, media_content_id: str | None = None
+    ) -> BrowseMedia:
+        """Implement the websocket media browsing helper."""
+        return await media_source.async_browse_media(
+            self.hass,
+            media_content_id,
+            content_filter=lambda item: item.media_content_type.startswith("audio/"),
+        )
+```
+
+If the media player also allows playing media from URLs, you can also add support for browsing
+Home Assistant media sources. These sources can be provided by any integration. Examples provide
+text-to-speech and local media.
+
+```python
+from homeassistant.components import media_source
+from homeassistant.components.media_player.browse_media import (
+    async_process_play_media_url,
+)
+
+class MyMediaPlayer(MediaPlayerEntity):
+
+    async def async_browse_media(
+        self, media_content_type: str | None = None, media_content_id: str | None = None
+    ) -> BrowseMedia:
+        """Implement the websocket media browsing helper."""
+        # If your media player has no own media sources to browse, route all browse commands
+        # to the media source integration.
+        return await media_source.async_browse_media(
+            self.hass,
+            media_content_id,
+            # This allows filtering content. In this case it will only show audio sources.
+            content_filter=lambda item: item.media_content_type.startswith("audio/"),
+        )
+
+    async def async_play_media(
+        self, media_type: str, media_id: str, **kwargs: Any
+    ) -> None:
+        """Play a piece of media."""
+        if media_source.is_media_source_id(media_id):
+            media_type = MEDIA_TYPE_MUSIC
+            play_item = await media_source.async_resolve_media(self.hass, media_id)
+            # play_item returns a relative URL if it has to be resolved on the Home Assistant host
+            # This call will turn it into a full URL
+            media_id = async_process_play_media_url(self.hass, play_item.url)
+
+        # Replace this with calling your media player play media function.
+        await self._media_player.play_url(media_id)
+```
 
 ### Select sound mode
 
