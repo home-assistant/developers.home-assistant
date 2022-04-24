@@ -647,9 +647,11 @@ If the check fails, the errors attribute in the object will list what caused the
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/api/intent/handling" method="post">
+<ApiEndpoint path="/api/intent/handle" method="post">
 
 Handle an intent.
+
+You must add `intent:` to your `configuration.yaml` to enable this endpoint.
 
 Sample `curl` command:
 	
