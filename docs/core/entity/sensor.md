@@ -16,8 +16,8 @@ Properties should always only return information from memory and not do I/O (lik
 | device_class | string | `None` | Type of sensor.
 | last_reset | `datetime.datetime` | `None` | The time when an accumulating sensor such as an electricity usage meter, gas meter, water meter etc. was initialized. If the time of initialization is unknown, set it to `None`. Note that the `datetime.datetime` returned by the `last_reset` property will be converted to an ISO 8601-formatted string when the entity's state attributes are updated. When changing `last_reset`, the `state` must be a valid number.
 | native_value | `None`, `datetime.date`, `datetime.datetime`, float, int, string | **Required** | The value of the sensor in the sensor's `native_unit_of_measurement`. Using a `device_class` may restrict the types that can be returned by this property.
-| native_unit_of_measurement | string | `None` | The unit of measurement that the sensor's value is expressed in. If the `native_unit_of_measurement` is °C or °F, and its `device_class` is temperature, the sensor's `unit_of_measurement` will be the preferred temperature unit configured by the user and the sensor's `state` will be the `native_value` after an optional unit conversion.
-| state_class | string | `None` | Type of state.
+| native_unit_of_measurement | string | `None` | The unit of measurement that the sensor's value is expressed in. If the `native_unit_of_measurement` is °C or °F, and its `device_class` is temperature, the sensor's `unit_of_measurement` will be the preferred temperature unit configured by the user and the sensor's `state` will be the `native_value` after an optional unit conversion. If not `None`, the sensor is assumed to be numerical and will be displayed as a line-chart in the frontend instead of as discrete values.
+| state_class | string | `None` | Type of state. If not `None`, the sensor is assumed to be numerical and will be displayed as a line-chart in the frontend instead of as discrete values.
 
 :::tip
 Instead of adding `extra_state_attributes` for a sensor entity, create an additional sensor entity. Attributes that do not change are only saved in the database once. If `extra_state_attributes` and the sensor value both frequently change, this can quickly increase the size of the database.
@@ -90,7 +90,7 @@ the right properties. To opt-in for statistics, the sensor must have
 For certain device classes, the unit of the statistics is normalized to for example make
 it possible to plot several sensors in a single graph.
 
-### Value entities - entities not representing a total amount
+### Entities not representing a total amount
 
 Home Assistant tracks the min, max and mean value during the statistics period. The
 `state_class` property must be set to `measurement`, and the `device_class` must not be
