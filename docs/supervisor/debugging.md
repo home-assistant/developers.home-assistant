@@ -10,7 +10,7 @@ The following debug tips and tricks are for developers who are running the Home 
 Before you will be able to use the Python debugger you need to enable the debug
 option in Supervisor:
 
-```
+```shell
 ha su options --debug=true
 ha su reload
 ```
