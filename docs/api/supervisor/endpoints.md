@@ -118,6 +118,7 @@ Get details about an add-on
 | host_ipc            | boolean            | `true` if host ipc access is granted is enabled                                        |
 | host_network        | boolean            | `true` if host network access is granted is enabled                                    |
 | host_pid            | boolean            | `true` if host pid access is granted is enabled                                        |
+| host_uts            | boolean            | `true` if host UTS namespace access is enabled.                                        |
 | hostname            | string             | The host name of the add-on                                                            |
 | icon                | boolean            | `true` if icon is available                                                            |
 | ingress             | boolean            | `true` if ingress is enabled                                                           |
@@ -191,6 +192,7 @@ Get details about an add-on
   "host_ipc": false,
   "host_network": false,
   "host_pid": false,
+  "host_uts": false,
   "hostname": "awesome-addon",
   "icon": false,
   "ingress_entry": null,
