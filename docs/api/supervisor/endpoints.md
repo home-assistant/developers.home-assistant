@@ -1110,6 +1110,7 @@ Return information about the DNS plugin.
 
 | key              | type    | description                      |
 | ---------------- | ------- | -------------------------------- |
+| fallback         | bool    | Try fallback DNS on failure      |
 | host             | string  | The IP address of the plugin     |
 | llmnr            | bool    | Can resolve LLMNR hostnames      |
 | locals           | list    | A list of DNS servers            |
@@ -1130,7 +1131,8 @@ Return information about the DNS plugin.
   "servers": ["dns://8.8.8.8"],
   "locals": ["dns://127.0.0.18"],
   "mdns": true,
-  "llmnr": false
+  "llmnr": false,
+  "fallback": true
 }
 ```
 
@@ -1145,9 +1147,10 @@ Set DNS options
 
 **Payload:**
 
-| key     | type | optional | description           |
-| ------- | ---- | -------- | --------------------- |
-| servers | list | True     | A list of DNS servers |
+| key      | type | optional | description                 |
+| -------  | ---- | -------- | --------------------------- |
+| fallback | bool | True     | Enable/Disable fallback DNS |
+| servers  | list | True     | A list of DNS servers       |
 
 **You need to supply at least one key in the payload.**
 
