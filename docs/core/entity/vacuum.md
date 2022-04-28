@@ -15,10 +15,6 @@ Properties should always only return information from memory and not do I/O (lik
 `VacuumEntity` is deprecated and will be removed in future releases. Please use or migrate to the `StateVacuumEntity`
 :::
 
-:::caution
-VacuumEntity and StateVacuumEntity do not support attribute shorthand for [property implementation](../entity.md#entity-class-or-instance-attributes)
-:::
-
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | name | string | **Required** | Name of the device.
