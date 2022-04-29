@@ -128,11 +128,26 @@ Custom integration should only include requirements that are not required by the
 
 ## Supported Brands
 
+It's possible to specify other brands that work with this integration.
+
+For example, for Xiaomi Miio, it would look like like this:
+
 ```json
-"supported_brands": {
-    "marantz": "Marantz"
+{
+  "supported_brands": {
+    "roborock": "Roborock"
   }
+}
 ```
+
+The key is a domain, like we use for integrations. The value is the title.
+
+The logo for this domain should be added to our brands repository.
+
+Result:
+
+- Roborock is listed on our user documentation website under integrations with an automatically generated stub page that directs the user to the integration to use.
+- Roborock is listed in Home Assistant when clicking "add integration". When selected, we first show a "redirect text", then the user continues to the Xioami Miio config flow.
 
 ## Zeroconf
 
