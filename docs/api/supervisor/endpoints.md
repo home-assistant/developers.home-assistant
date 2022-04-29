@@ -2350,12 +2350,30 @@ Returns information about the security features
 Run a full platform integrity check.
 
 **Returned data:**
-| key                 | type   | description                                            |
-| ------------------- | ------ | ------------------------------------------------------ |
+
+| key | type | description |
+| ----| ---- | ----------- |
 | supervisor | str | `pass`, `error`, `failed`, `untested` |
 | core | str | `pass`, `error`, `failed`, `untested` |
 | plugins | dict | A list with key per plugin as `pass`, `error`, `failed`, `untested` |
 | addons | dict | A list with key per addon as `pass`, `error`, `failed`, `untested` |
+
+**Example response:**
+
+```json
+{
+  "superviso": "pass",
+  "core": "pass",
+  "plugins": {
+    "audio": "pass",
+    "cli": "pass"
+  },
+  "addons": {
+    "core_ssh": "untested",
+    "xj3493_test": "pass"
+  }
+}
+```
 
 </ApiEndpoint>
 
