@@ -2352,10 +2352,10 @@ Run a full platform integrity check.
 **Returned data:**
 | key                 | type   | description                                            |
 | ------------------- | ------ | ------------------------------------------------------ |
-| supervisor | str | `pass`, `error`, `failed` |
-| core | str | `pass`, `error`, `failed` |
-| plugins | dict | A list with key per plugin as `pass`, `error`, `failed` |
-| addons | dict | A list with key per addon as `pass`, `error`, `failed` |
+| supervisor | str | `pass`, `error`, `failed`, `untested` |
+| core | str | `pass`, `error`, `failed`, `untested` |
+| plugins | dict | A list with key per plugin as `pass`, `error`, `failed`, `untested` |
+| addons | dict | A list with key per addon as `pass`, `error`, `failed`, `untested` |
 
 </ApiEndpoint>
 
