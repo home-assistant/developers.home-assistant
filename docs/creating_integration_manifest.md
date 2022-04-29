@@ -126,6 +126,32 @@ It is also possible to use a public git repository to install a requirement.  Th
 
 Custom integration should only include requirements that are not required by the Core [requirements.txt](https://github.com/home-assistant/core/blob/dev/requirements.txt).
 
+## Supported Brands
+
+Some products are supported by integrations that are not named after the product. For example, Roborock vacuums are integrated via the Xiaomi Miio (xiaomi_miio) integration.
+
+By using the `supported_brands` manifest entry it's possible to specify other brands that work with this integration.
+
+Example:
+
+```json
+{
+  "supported_brands": {
+    "roborock": "Roborock"
+  }
+}
+```
+
+The key is a domain, like we use for integrations. The value is the title.
+Each integration domain can only exist once. So a domain is either an existing integration or referred as a "supported brand" by a single existing integration.
+
+The logo for this domain should be added to our [brands repository](https://github.com/home-assistant/brands/).
+
+Result (this is intended functionality for the near feature):
+
+- Roborock is listed on our user documentation website under integrations with an automatically generated stub page that directs the user to the integration to use.
+- Roborock is listed in Home Assistant when clicking "add integration". When selected, we first show a "redirect text", then the user continues to the Xioami Miio config flow.
+
 ## Zeroconf
 
 If your integration supports discovery via [Zeroconf](https://en.wikipedia.org/wiki/Zero-configuration_networking), you can add the type to your manifest. If the user has the `zeroconf` integration loaded, it will load the `zeroconf` step of your integration's config flow when it is discovered.
