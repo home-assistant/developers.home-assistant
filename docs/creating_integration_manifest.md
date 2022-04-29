@@ -147,7 +147,7 @@ Each integration domain can only exist once. So a domain is either an existing i
 
 The logo for this domain should be added to our [brands repository](https://github.com/home-assistant/brands/).
 
-Result:
+Result (this is intended functionality for the near feature):
 
 - Roborock is listed on our user documentation website under integrations with an automatically generated stub page that directs the user to the integration to use.
 - Roborock is listed in Home Assistant when clicking "add integration". When selected, we first show a "redirect text", then the user continues to the Xioami Miio config flow.
