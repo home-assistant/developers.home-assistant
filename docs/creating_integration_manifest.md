@@ -128,9 +128,11 @@ Custom integration should only include requirements that are not required by the
 
 ## Supported Brands
 
-It's possible to specify other brands that work with this integration.
+Some products are supported by integrations that are not named after the product. For example, Roborock vacuums are integrated via the Xiaomi Miio (xiaomi_miio) integration.
 
-For example, for Xiaomi Miio, it would look like like this:
+By using the `supported_brands` manifest entry it's possible to specify other brands that work with this integration.
+
+Example:
 
 ```json
 {
@@ -141,8 +143,9 @@ For example, for Xiaomi Miio, it would look like like this:
 ```
 
 The key is a domain, like we use for integrations. The value is the title.
+Each integration domain can only exist once. So a domain is either an existing integration or referred as a "supported brand" by a single existing integration.
 
-The logo for this domain should be added to our brands repository.
+The logo for this domain should be added to our [brands repository](https://github.com/home-assistant/brands/).
 
 Result:
 
