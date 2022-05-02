@@ -2355,8 +2355,8 @@ Run a full platform integrity check.
 | ----| ---- | ----------- |
 | supervisor | str | `pass`, `error`, `failed`, `untested` |
 | core | str | `pass`, `error`, `failed`, `untested` |
-| plugins | dict | A list with key per plugin as `pass`, `error`, `failed`, `untested` |
-| addons | dict | A list with key per addon as `pass`, `error`, `failed`, `untested` |
+| plugins | dict | A dictionary with key per plugin as `pass`, `error`, `failed`, `untested` |
+| addons | dict | A dictionary with key per addon as `pass`, `error`, `failed`, `untested` |
 
 **Example response:**
 
