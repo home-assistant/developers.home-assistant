@@ -2362,7 +2362,7 @@ Run a full platform integrity check.
 
 ```json
 {
-  "superviso": "pass",
+  "supervisor": "pass",
   "core": "pass",
   "plugins": {
     "audio": "pass",
