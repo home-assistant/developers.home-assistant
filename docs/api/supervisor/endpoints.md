@@ -2345,6 +2345,38 @@ Returns information about the security features
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/security/integrity" method="post">
+
+Run a full platform integrity check.
+
+**Returned data:**
+
+| key | type | description |
+| ----| ---- | ----------- |
+| supervisor | str | `pass`, `error`, `failed`, `untested` |
+| core | str | `pass`, `error`, `failed`, `untested` |
+| plugins | dict | A dictionary with key per plugin as `pass`, `error`, `failed`, `untested` |
+| addons | dict | A dictionary with key per addon as `pass`, `error`, `failed`, `untested` |
+
+**Example response:**
+
+```json
+{
+  "supervisor": "pass",
+  "core": "pass",
+  "plugins": {
+    "audio": "pass",
+    "cli": "pass"
+  },
+  "addons": {
+    "core_ssh": "untested",
+    "xj3493_test": "pass"
+  }
+}
+```
+
+</ApiEndpoint>
+
 ### Supervisor
 
 <ApiEndpoint path="/supervisor/info" method="get">
