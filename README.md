@@ -6,7 +6,7 @@ This is the source for the [Home Assistant Development documentation](https://de
 
 ## Updating the docs
 
-Documentation is built using [Docusaurus](https://v2.docusaurus.io/).
+Documentation is built using [Docusaurus](https://docusaurus.io/).
 
 ## Editing on GitHub
 
