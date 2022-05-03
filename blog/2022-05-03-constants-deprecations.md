@@ -2,7 +2,7 @@
 author: Franck Nijhof
 authorURL: https://twitter.com/frenck
 authorTwitter: frenck
-title: "Constant deprecations for 2022.5
+title: "Constant deprecations for 2022.5"
 ---
 
 For Home Assistant Core 2022.5, we have deprecated many constants and replaced
