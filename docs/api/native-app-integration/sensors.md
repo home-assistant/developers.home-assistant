@@ -24,7 +24,8 @@ To register a sensor, make a request to the webhook like this:
     "unique_id": "battery_state",
     "unit_of_measurement": "%",
     "state_class": "measurement",
-    "entity_category": "diagnostic"
+    "entity_category": "diagnostic",
+    "default_disabled": true
   },
   "type": "register_sensor"
 }
@@ -44,6 +45,7 @@ The valid keys are:
 | unit_of_measurement | string                        | No       | The unit of measurement for the sensor                                                                                                                                                                          |
 | state_class | string | No | The [state class](../../core/entity/sensor.md#available-state-classes) of the entity (sensors only)
 | entity_category | string | No | The entity category of the entity
+| default_disabled | boolean | No | If the entity should be disabled by default
 
 Sensors will appear as soon as they are registered.
 
@@ -79,3 +81,34 @@ Only some of the keys are allowed during updates:
 | state               | bool, float, int, string      | Yes      | The state of the sensor                                                                                                               |
 | type                | string                        | Yes      | The type of the sensor. Must be one of `binary_sensor` or `sensor`                                                                    |
 | unique_id           | string                        | Yes      | An identifier unique to this installation of your app. You'll need this later. Usually best when its a safe version of the sensor name |
+
+The response to updating a sensor is a dictionary with unique_id => update result.
+
+The key `is_disabled` will be added to successful updates if the entity is disabled inside Home Assistant. This means the app can disable sending updates to the sensor.
+
+If an update was unsuccessful, an error is returned.
+
+```json
+{
+  "battery_state": {
+    "success": true
+  },
+  "battery_level": {
+    "success": true,
+    "is_disabled": true
+  },
+  "battery_charging": {
+    "success": false,
+    "error": {
+      "code": "not_registered",
+      "message": "Entity is not registered",
+    }
+  },
+  "battery_charging_state": {
+    "success": false,
+    "error": {
+      "code": "invalid_format",
+      "message": "Unexpected value for type",
+    }
+}
+```
