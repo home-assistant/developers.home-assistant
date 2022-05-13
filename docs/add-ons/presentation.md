@@ -60,40 +60,67 @@ apparmor.txt
 
 profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
   #include <abstractions/base>
-  
+
   # Capabilities
   file,
-  signal,
+  signal (send) set=(kill,term,int,hup,cont),
 
   # S6-Overlay
-  /init rix,
+  /init ix,
   /bin/** ix,
   /usr/bin/** ix,
-  /etc/s6/** rix,
-  /run/s6/** rwix,
+  /run/{s6,s6-rc*,service}/** ix,
+  /package/** ix,
+  /command/** ix,
   /etc/services.d/** rwix,
   /etc/cont-init.d/** rwix,
   /etc/cont-finish.d/** rwix,
-  /run/** rwk,
+  /run/{,**} rwk,
+  /dev/tty rw,
 
   # Bashio
   /usr/lib/bashio/** ix,
-  /tmp/** rw,
+  /tmp/** rwk,
 
   # Access to options.json and other files within your addon
   /data/** rw,
-  
+
   # Start new profile for service
-  /usr/bin/myprogram cx,
-  
-  profile /usr/bin/myprogram flags=(attach_disconnected,mediate_deleted) {
+  /usr/bin/myprogram cx -> myprogram,
+
+  profile myprogram flags=(attach_disconnected,mediate_deleted) {
     #include <abstractions/base>
-    
+
     # Receive signals from S6-Overlay
-    signal receive,
+    signal (receive) peer=*_ADDON_SLUG,
+
+    # Access to options.json and other files within your addon
+    /data/** rw,
+
+    # Access to mapped volumes specified in config.json
+    /share/** rw,
+
+    # Access required for service functionality
+    /usr/bin/myprogram r,
+    /bin/bash rix,
+    /bin/echo ix,
+    /etc/passwd r,
+    /dev/tty rw,
   }
 }
 ```
+
+When working on this for your own add-ons, the following tips should help you get started:
+
+1. The S6 part of this is fairly standard. You may need to add things to accommodate your setup scripts but generally don't remove anything.
+2. If a service being run provides an AppArmor profile, apply that to the service. Always prefer one written by the developers.
+3. If there isn't one for a service and you want to make one then do the following:
+  a. Add minimum required access you're aware of. Things you definitely know the service needs
+  b. Add `complain` as a flag to the profile
+  c. Run the add-on and review the audit log with `journalctl _TRANSPORT="audit" -g 'apparmor="ALLOWED"`
+  d. Add access as necessary until using the add-on does not generate any audit warnings
+  e. Remove the `complain` flag so ungranted access is DENIED not ALLOWED
+4. Repeat #3 when updating the service as new access may be required
 
 ## Ingress
 
