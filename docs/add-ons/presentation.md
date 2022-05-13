@@ -86,13 +86,13 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
   /data/** rw,
 
   # Start new profile for service
-  /usr/bin/my_program cx -> my_program,
+  /usr/bin/myprogram cx -> myprogram,
 
-  profile my_program flags=(attach_disconnected,mediate_deleted) {
+  profile myprogram flags=(attach_disconnected,mediate_deleted) {
     #include <abstractions/base>
 
     # Receive signals from S6-Overlay
-    signal (receive) peer=*_example,
+    signal (receive) peer=*_ADDON_SLUG,
 
     # Access to options.json and other files within your addon
     /data/** rw,
@@ -101,12 +101,7 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
     /share/** rw,
 
     # Access required for service functionality
-    # Note: List was built by doing the following:
-    # 1. Add what is obviously needed based on what is in the script
-    # 2. Add `complain` as a flag to this profile temporarily and run the addon
-    # 3. Review the audit log with `journalctl _TRANSPORT="audit" -g 'apparmor="ALLOWED"'` and add other access as needed
-    # Remember to remove the `complain` flag when you are done
-    /usr/bin/my_program r,
+    /usr/bin/myprogram r,
     /bin/bash rix,
     /bin/echo ix,
     /etc/passwd r,
