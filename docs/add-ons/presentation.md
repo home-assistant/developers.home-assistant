@@ -60,7 +60,7 @@ apparmor.txt
 
 profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
   #include <abstractions/base>
-  
+
   # Capabilities
   file,
   signal (send) set=(kill,term,int,hup,cont),
@@ -80,28 +80,32 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
 
   # Bashio
   /usr/lib/bashio/** ix,
-  /tmp/** rw,
+  /tmp/** rwk,
 
   # Access to options.json and other files within your addon
   /data/** rw,
-  
+
   # Start new profile for service
-  /usr/bin/myprogram cx -> my_program,
-  
-  profile myprogram flags=(attach_disconnected,mediate_deleted) {
+  /usr/bin/my_program cx -> my_program,
+
+  profile my_program flags=(attach_disconnected,mediate_deleted) {
     #include <abstractions/base>
-    
+
     # Receive signals from S6-Overlay
-    signal (receive) peer=*_ADDON_SLUG,
-    
+    signal (receive) peer=*_example,
+
     # Access to options.json and other files within your addon
     /data/** rw,
 
     # Access to mapped volumes specified in config.json
-    # /share/** rw,
-    # /ssl/** r,
+    /share/** rw,
 
     # Access required for service functionality
+    # Note: List was built by doing the following:
+    # 1. Add what is obviously needed based on what is in the script
+    # 2. Add `complain` as a flag to this profile temporarily and run the addon
+    # 3. Review the audit log with `journalctl _TRANSPORT="audit" -g 'apparmor="ALLOWED"'` and add other access as needed
+    # Remember to remove the `complain` flag when you are done
     /usr/bin/my_program r,
     /bin/bash rix,
     /bin/echo ix,

@@ -22,8 +22,19 @@ If you use `finish` scripts at your service to get it down on an error, you have
 
 ## AppArmor
 
-You have to tweak your AppArmor profile to get it working with the new s6-Overlay. We updated our documentation with the default profile. Follow changes have to be made:
+You have to tweak your [AppArmor profile](/docs/add-ons/presentation#apparmor) to get it working with the new s6-Overlay. We updated our documentation with the default profile. Follow changes have to be made:
 
 ```txt
-
+# S6-Overlay
+  /init ix,
+  /bin/** ix,
+  /usr/bin/** ix,
+  /run/{s6,s6-rc*,service}/** ix,
+  /package/** ix,
+  /command/** ix,
+  /etc/services.d/** rwix,
+  /etc/cont-init.d/** rwix,
+  /etc/cont-finish.d/** rwix,
+  /run/{,**} rwk,
+  /dev/tty rw,
 ```
