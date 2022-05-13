@@ -79,3 +79,33 @@ Only some of the keys are allowed during updates:
 | state               | bool, float, int, string      | Yes      | The state of the sensor                                                                                                               |
 | type                | string                        | Yes      | The type of the sensor. Must be one of `binary_sensor` or `sensor`                                                                    |
 | unique_id           | string                        | Yes      | An identifier unique to this installation of your app. You'll need this later. Usually best when its a safe version of the sensor name |
+
+## Keeping enabled sensors in sync between Home Assistant and mobile app
+
+Users can enable and disable entities in Home Assistant. A disabled entity will not be added to Home Assistant, even if offered by the integration. This means that it won't make sense for phones to keep sending data to entities that are not enabled in Home Assistant.
+
+### When a sensor is disabled in the app
+
+When a sensor is enabled/disabled in the app, the app should send a `register_sensor` webhook for this sensor and set `disabled` to `true` or `false`.
+
+### When a sensor is disabled in Home Assistant
+
+When the mobile app sends an `update_sensor_states` webhook to update the data for an entity that is disabled, the update result will contain a `disabled` key with a value of `true`. This is an indicator that the mobile app needs to synchroize the enabled states from Home Assistant to the mobile app.
+
+### Synchronizing enabeld states from Home Assistant to the mobile app
+
+The `get_config` webhook response contains an `entities` key. This is a dictionary mapping `unique_id` to `{"disabled": boolean}`. The mobile app should adopt these enabled settings.
+
+```json5
+{
+  // ...
+  "entities": {
+    "battery_level": {
+      "disabled": false
+    },
+    "battery_charging": {
+      "disabled": true
+    },
+  }
+}
+```
