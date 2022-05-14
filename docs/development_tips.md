@@ -20,7 +20,7 @@ If made a change to a core integration and you want to test it in your productio
 
 ### When adding a config flow to an integration, be aware of the frontend
 
-The Home Assistant frontend caches aggressively, and as such, the first time you run Home Assistant with your new changes, you may not see the integration show up in the integration list. Check the logs to make sure there were no errors, and if not, perform a hard refresh of your browser window and try again, in many cases that will resolve your issue.
+The Home Assistant frontend caches aggressively, and as such, the first time you run Home Assistant with your new changes, you may not see the integration show up in the integration list. Check the logs to make sure there were no errors, and if not, perform a hard refresh of your browser window and try again; in many cases, that will resolve your issue.
 
 ### Getting additional support
 
