@@ -16,11 +16,11 @@ See the [API library docs](api_lib_index#trying-your-library-inside-home-assista
 
 ### Test Core integration changes in your production Home Assistant environment
 
-So you made a change to a core integration and you want to test it in your production Home Assistant environment. All you have to do is copy the integration folder into `/config/custom_components`, add a version to the `manifest.json` (e.g. "version": "0.0"), and restart Home Assistant. Home Assistant will always prioritize integrations in `custom_components` over the core integration.
+If made a change to a core integration and you want to test it in your production Home Assistant environment, copy the integration folder into `/config/custom_components`, add a version to the `manifest.json` (e.g. "version": "0.0"), and restart Home Assistant. Home Assistant will always prioritize integrations in `custom_components` over the core integration. Don't forget to remove it once you are done testing otherwise you will be stuck on that version.
 
 ### When adding a config flow to an integration, be aware of the frontend
 
-The Home Assistant frontend caches pretty aggressively, and as such, the first time you run Home Assistant with your new changes, you may not see the integration show up in the integration list. Check the logs to make sure there were no errors, and if not, do a hard refresh of your browser window and try again, in many cases that will resolve your issue.
+The Home Assistant frontend caches aggressively, and as such, the first time you run Home Assistant with your new changes, you may not see the integration show up in the integration list. Check the logs to make sure there were no errors, and if not, perform a hard refresh of your browser window and try again, in many cases that will resolve your issue.
 
 ### Getting additional support
 
