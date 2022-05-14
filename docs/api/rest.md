@@ -456,6 +456,73 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 
 </ApiEndpoint>
 
+
+<ApiEndpoint path="/api/calendars" method="get">
+
+Returns the list of calendar entities.
+
+```json
+[
+  {
+    "entity_id": "calendar.holidays",
+    "name": "National Holidays",
+  },
+  {
+    "entity_id": "calendar.personal",
+    "name": "Personal Calendar",
+  }
+]
+```
+
+Sample `curl` command:
+
+```shell
+curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" \
+  http://localhost:8123/api/calendars
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/api/calendars/<calendar entity_id>" method="get">
+
+Returns the list of calendar events for the specified calendar entity_id between the `start` and `end` times (exclusive).
+
+The events in the response have a `start` and `end` that contain either `dateTime` or `date` for an all day event.
+
+```json
+[
+  {
+    "summary": "Cinco de Mayo",
+    "start": {
+      "date": "2022-05-05"
+    },
+    "end": {
+      "date": "2022-05-06"
+    },
+  },
+  {
+    "summary": "Birthday Party",
+    "start": {
+      "dateTime": "2022-05-06T20:00:00-07:00"
+    },
+    "end": {
+      "dateTime": "2022-05-06T23:00:00-07:00"
+    }
+  }
+]
+```
+
+Sample `curl` command:
+
+```shell
+curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" \
+  http://localhost:8123/api/calendars/calendar.holidays?start=2022-05-01T07:00:00.000Z&end=2022-06-12T07:00:00.000Z
+```
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/api/states/<entity_id>" method="post">
 
 Updates or creates a state. You can create any state that you want, it does not have to be backed by an entity in Home Assistant.
