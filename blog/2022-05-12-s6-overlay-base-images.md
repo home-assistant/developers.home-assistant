@@ -11,7 +11,7 @@ We have updated our [example add-on](https://github.com/home-assistant/addons-ex
 
 ## Minimum
 
-Add `init: false` to your addon's config.yaml if you don't have this already. We are reviewing whether to deprecate this option entirely but for now you must add this manually or you will see the following error when you start your addon:
+Add `init: false` to your addon's `config.yaml` if you don't have this already. In V3, S6 enforces that their init is used correctly, if Docker default system init is used you will see the following error when you start your addon:
 
 ```
 s6-overlay-suexec: fatal: can only run as pid 1
