@@ -122,6 +122,7 @@ module.exports = {
       "development_guidelines",
       "development_testing",
       "development_catching_up",
+      "development_tips"
     ],
     "Building Integrations": [
       "creating_component_index",
