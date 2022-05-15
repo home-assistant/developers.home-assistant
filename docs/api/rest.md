@@ -488,7 +488,12 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 
 Returns the list of calendar events for the specified calendar entity_id between the `start` and `end` times (exclusive).
 
-The events in the response have a `start` and `end` that contain either `dateTime` or `date` for an all day event.
+The events in the response have a:
+
+* `summary` (title) of the event
+* `start` and `end` that contain either `dateTime` or `date` for an all day event.
+* optional `description` of the event
+* optional `location` of the event
 
 ```json
 [
@@ -508,7 +513,9 @@ The events in the response have a `start` and `end` that contain either `dateTim
     },
     "end": {
       "dateTime": "2022-05-06T23:00:00-07:00"
-    }
+    },
+    "description": "Don't forget to bring balloons",
+    "location": "Brian's House"
   }
 ]
 ```
