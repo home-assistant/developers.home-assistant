@@ -12,7 +12,16 @@ OAuth2 requires credentials that are shared between an application and provider.
 
 ## Adding support
 
-Integrations support application credentials with a file in the integration folder called `application_credentials.py` and implement the following:
+Integrations support application credentials by adding a dependency on the `application_credentials` component in the `manifest.json`:
+```json
+{
+  ...
+  "dependencies": ["application_credentials"],
+  ...
+}
+```
+
+Then add a file in the integration folder called `application_credentials.py`  and implement the following:
 
 ```python
 from homeassistant.core import HomeAssistant
@@ -41,6 +50,44 @@ An `AuthorizationServer` represents the [OAuth2 Authorization server](https://da
 ## Import YAML credentials
 
 Credentials may be imported by integrations that used to accept YAML credentials using the import API `async_import_client_credential` provided by the application credentials integration.
+
+Here is an example from an integration that used to accept YAML credentials:
+
+```python
+from homeassistant.components.application_credentials import (
+    ClientCredential,
+    async_import_client_credential,
+)
+
+# Example configuration.yaml schema for an integration
+CONFIG_SCHEMA = vol.Schema(
+    {
+        DOMAIN: vol.Schema(
+            {
+                vol.Required(CONF_CLIENT_ID): cv.string,
+                vol.Required(CONF_CLIENT_SECRET): cv.string,
+            }
+        )
+    },
+)
+
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
+    """Set up the component."""
+    if DOMAIN not in config:
+        return True
+
+    await async_import_client_credential(
+        hass,
+        DOMAIN,
+        ClientCredential(
+            config[DOMAIN][CONF_CLIENT_ID],
+            config[DOMAIN][CONF_CLIENT_SECRET],
+        ),
+    )
+```
+
+New integrations should not accept credentials in configuration.yaml as users
+can instead enter credentials in the Application Credentials user interface.
 
 ### ClientCredential
 
