@@ -489,7 +489,6 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 Returns the list of [calendar events](/docs/core/entity/calendar/#calendarevent) for the specified calendar entity_id between the `start` and `end` times (exclusive).
 
 The events in the response have a `start` and `end` that contain either `dateTime` or `date` for an all day event.
-	
 ```json
 [
   {
