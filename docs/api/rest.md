@@ -486,15 +486,10 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 
 <ApiEndpoint path="/api/calendars/<calendar entity_id>" method="get">
 
-Returns the list of calendar events for the specified calendar entity_id between the `start` and `end` times (exclusive).
+Returns the list of [calendar events](https://developers.home-assistant.io/docs/core/entity/calendar/#calendarevent) for the specified calendar entity_id between the `start` and `end` times (exclusive).
 
-The events in the response have a:
-
-* `summary` (title) of the event
-* `start` and `end` that contain either `dateTime` or `date` for an all day event.
-* optional `description` of the event
-* optional `location` of the event
-
+The events in the response have a `start` and `end` that contain either `dateTime` or `date` for an all day event.
+	
 ```json
 [
   {
