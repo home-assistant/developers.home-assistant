@@ -23,7 +23,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| auto_update | bool | `False` | The device or service that the entity represent have auto update logic, when this is set you can not skip updates.
+| auto_update | bool | `False` | The device or service that the entity represents has auto update logic. When this is set to `True` you can not skip updates.
 | in_progress | bool, int | `None` | Update installation progress. Can either return a boolean (True if in progress, False if not) or an integer to indicate the progress from 0 to 100%.
 | installed_version | str | `None` | The currently installed and used version of the software.
 | latest_version | str | `None` | The latest version of the software available.
