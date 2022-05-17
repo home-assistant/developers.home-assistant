@@ -119,7 +119,7 @@ Users can enable and disable entities in Home Assistant. A disabled entity will 
 
 **When a sensor is enabled/disabled in the app**, the app should send a `register_sensor` webhook for this sensor and set `disabled` to `true` or `false`.
 
-**When the mobile app sends an `update_sensor_states` webhook to update the data for an entity that is disabled**, the update result will contain a `is_disabled` key with a value of `true`. This is an indicator that the mobile app needs to synchroize the enabled states from Home Assistant to the mobile app.
+**When the mobile app sends an `update_sensor_states` webhook to update the data for an entity that is disabled**, the update result will contain an `is_disabled` key with a value of `true`. This is an indicator that the mobile app needs to synchronize the enabled states from Home Assistant to the mobile app.
 
 ```json
 {
