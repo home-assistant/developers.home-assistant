@@ -54,6 +54,4 @@ This is a problem because S6 expects to be PID 1 (it's literally in the [tagline
 
 In V2, S6 didn't actually check that it was running as PID 1. This is why it "worked" when in this mode in the past (although it required some [workarounds](https://github.com/hassio-addons/addon-glances/blob/8575d7903ef4c0a7c49e9ab32e0536bd2eb12dd6/glances/rootfs/bin/s6-nuke) to keep s6 from breaking systems when running this way). In V3 S6 checks that it is actually PID 1 and refuses to start otherwise.
 
-There's no easy solution to this, the option simply won't work in S6 V3. As a temporary fix you can switch to using the corresponding [community add-ons base image](https://github.com/hassio-addons?q=base&type=all&language=&sort=). I must stress that this is temporary though, eventually those will update too.
-
-Long-term you should not use s6 overlay in your addon as it's not designed for this use case. You can continue to use the addon base images by overriding `/init` with a no-op script and then using the normal docker init system. Or you can switch to a different base image like [alpine](https://hub.docker.com/search?q=alpine&type=image) or [debian](https://hub.docker.com/_/debian) and add what you need.
+To fix this, don't use s6 overlay in your addon as it's not designed for this use case. You can continue to use the addon base images by overriding `/init` with a no-op script and then use the normal docker init system. Or you can switch to a different base image like stock alpine or debian and add what you need.
