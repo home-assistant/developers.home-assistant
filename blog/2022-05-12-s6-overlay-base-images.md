@@ -56,4 +56,4 @@ In V2, S6 didn't actually check that it was running as PID 1. This is why it "wo
 
 There's no easy solution to this, the option simply won't work in S6 V3. As a temporary fix you can switch to using the corresponding [community add-ons base image](https://github.com/hassio-addons?q=base&type=all&language=&sort=). I must stress that this is temporary though, eventually those will update too.
 
-Long-term you should not use s6 overlay in your addon as its not designed for this. You should use stock [alpine](https://hub.docker.com/search?q=alpine&type=image), [debian](https://hub.docker.com/_/debian) or [ubuntu](https://hub.docker.com/_/ubuntu) as your base image instead and add what you need to the image to make your addon work.
+Long-term you should not use s6 overlay in your addon as it's not designed for this use case. You can continue to use the addon base images by overriding `/init` with a no-op script and then using the normal docker init system. Or you can switch to a different base image like [alpine](https://hub.docker.com/search?q=alpine&type=image) or [debian](https://hub.docker.com/_/debian) and add what you need.
