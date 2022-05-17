@@ -17,6 +17,7 @@ Every integration has a manifest file to specify basic information about an inte
   "requirements": ["aiohue==1.9.1"],
   "quality_scale": "platinum",
   "iot_class": "local_polling"
+  "loggers": ["aiohue"]
 }
 ```
 
@@ -94,6 +95,10 @@ Specify the `config_flow` key if your integration has a config flow to create a 
 Requirements are Python libraries or modules that you would normally install using `pip` for your component. Home Assistant will try to install the requirements into the `deps` subdirectory of the Home Assistant [configuration directory](https://www.home-assistant.io/docs/configuration/) if you are not using a `venv` or in something like `path/to/venv/lib/python3.6/site-packages` if you are running in a virtual environment. This will make sure that all requirements are present at startup. If steps fail, like missing packages for the compilation of a module or other install errors, the component will fail to load.
 
 Requirements is an array of strings. Each entry is a `pip` compatible string. For example, the media player Cast platform depends on the Python package PyChromecast v3.2.0: `["pychromecast==3.2.0"]`.
+
+## Loggers
+
+The `loggers` field is a list of names that the integration's requirements use for their [getLogger](https://docs.python.org/3/library/logging.html?highlight=logging#logging.getLogger) calls.
 
 ### Custom requirements during development & testing
 
