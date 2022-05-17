@@ -141,7 +141,7 @@ Note:  Avoid the use of this filename for anything other than add-on configurati
 | `host_network` | bool | `false` | If `true`, the add-on runs on host network.
 | `host_ipc` | bool | `false` | Allow to share the IPC namespace with others.
 | `host_dbus` | bool | `false` | Map the host D-Bus service into the add-on.
-| `host_pid` | bool | `false` | Allow to run container on host PID namespace. Works only for not protected add-ons. **Warning:** Does not work with S6 Overlay. If need this to be `true` you should not use the normal add-on base images. Use a stock alpine, debian or ubuntu one instead.
+| `host_pid` | bool | `false` | Allow to run container on host PID namespace. Works only for not protected add-ons. **Warning:** Does not work with S6 Overlay. If need this to be `true` and you use the normal add-on base image you disable S6 by overriding `/init`. Or use an alternate base image.
 | `devices` | list | | Device list to map into the add-on. Format is: `<path_on_host>`. E.g., `/dev/ttyAMA0`
 | `homeassistant` | string | | Pin a minimum required Home Assistant Core version for the add-on. Value is a version string like `0.91.2`.
 | `hassio_role` | str | `default` |Role-based access to Supervisor API. Available: `default`, `homeassistant`, `backup`, `manager` or `admin`
