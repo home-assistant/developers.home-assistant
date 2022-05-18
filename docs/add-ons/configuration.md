@@ -166,7 +166,7 @@ Note:  Avoid the use of this filename for anything other than add-on configurati
 | `options` | dict | | Default options value of the add-on.
 | `schema` | dict | | Schema for options value of the add-on. It can be `false` to disable schema validation and options.
 | `image` | string | | For use with Docker Hub and other container registries. This should be set to the name of the image only (E.g, `ghcr.io/home-assistant/{arch}-addon-example`). If you use this option, set the active docker tag using the `version` option.
-| `codenotary` | string | | For use with Codenotary CAS. This is the email address used to verify your image with Codenotary. This should match the email address used as the signer in [build args](#build-args)
+| `codenotary` | string | | For use with Codenotary CAS. This is the E-Mail address used to verify your image with Codenotary (E.g, `example@home-assistant.io`). This should match the E-Mail address used as the signer in the [add-on's extended build options](#add-on-extended-build)
 | `timeout` | integer | | Default 10 (seconds). The timeout to wait until the Docker daemon is done or will be killed.
 | `tmpfs` | bool | `false` | If this is set to `true`, the containers `/tmp` is using tmpfs, a memory file system.
 | `discovery` | list | | A list of services that this add-on provides for Home Assistant. Currently supported: `mqtt`
