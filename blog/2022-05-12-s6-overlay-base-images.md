@@ -43,3 +43,15 @@ You have to tweak your [AppArmor profile](/docs/add-ons/presentation#apparmor) t
   /run/{,**} rwk,
   /dev/tty rw,
 ```
+
+## `host_pid` option
+
+Addons running without protection mode enabled can set `host_pid: true` in their configuration. As described in the [documentation](https://developers.home-assistant.io/docs/add-ons/configuration#optional-configuration-options):
+
+> Allow to run container on host PID namespace. Works only for not protected add-ons.
+
+This is a problem because S6 expects to be PID 1 (it's literally in the [tagline](https://github.com/just-containers/s6-overlay#s6-overlay-)) and that's impossible when using the host PID namespace.
+
+In V2, S6 didn't actually check that it was running as PID 1. This is why it "worked" when in this mode in the past (although it required some [workarounds](https://github.com/hassio-addons/addon-glances/blob/8575d7903ef4c0a7c49e9ab32e0536bd2eb12dd6/glances/rootfs/bin/s6-nuke) to keep s6 from breaking systems when running this way). In V3 S6 checks that it is actually PID 1 and refuses to start otherwise.
+
+To fix this, don't use s6 overlay in your addon as it's not designed for this use case. You can continue to use the addon base images by overriding `/init` with a no-op script and then use the normal docker init system. Or you can switch to a different base image like stock alpine or debian and add what you need.
