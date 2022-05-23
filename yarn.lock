@@ -1885,7 +1885,7 @@
     react-router-dom "^5.2.0"
     rtlcss "^3.5.0"
 
-"@docusaurus/theme-common@2.0.0-beta.20":
+"@docusaurus/theme-common@2.0.0-beta.20", "@docusaurus/theme-common@^2.0.0-beta.20":
   version "2.0.0-beta.20"
   resolved "https://registry.yarnpkg.com/@docusaurus/theme-common/-/theme-common-2.0.0-beta.20.tgz#4ec7d77ecd2ade9dad33b8689e3cd51b07e594b0"
   integrity sha512-lmdGB3/GQM5z0GH0iHGRXUco4Wfqc6sR5eRKuW4j0sx3+UFVvtbVTTIGt0Cie4Dh6omnFxjPbNDlPDgWr/agVQ==
@@ -1922,7 +1922,7 @@
     tslib "^2.4.0"
     utility-types "^3.10.0"
 
-"@docusaurus/theme-translations@2.0.0-beta.20":
+"@docusaurus/theme-translations@2.0.0-beta.20", "@docusaurus/theme-translations@^2.0.0-beta.20":
   version "2.0.0-beta.20"
   resolved "https://registry.yarnpkg.com/@docusaurus/theme-translations/-/theme-translations-2.0.0-beta.20.tgz#dcc7efb43ff110c19736764c287f6c5128a5dbba"
   integrity sha512-O7J/4dHcg7Yr+r3ylgtqmtMEz6d5ScpUxBg8nsNTWOCRoGEXNZVmXSd5l6v72KCyxPZpllPrgjmqkL+I19qWiw==
@@ -1943,14 +1943,14 @@
     webpack "^5.72.0"
     webpack-merge "^5.8.0"
 
-"@docusaurus/utils-common@2.0.0-beta.20":
+"@docusaurus/utils-common@2.0.0-beta.20", "@docusaurus/utils-common@^2.0.0-beta.20":
   version "2.0.0-beta.20"
   resolved "https://registry.yarnpkg.com/@docusaurus/utils-common/-/utils-common-2.0.0-beta.20.tgz#adb914c331d711a3c0ef2ba3f64139acdf4cd781"
   integrity sha512-HabHh23vOQn6ygs0PjuCSF/oZaNsYTFsxB2R6EwHNyw01nWgBC3QAcGVmyIWQhlb9p8V3byKgbzVS68hZX5t9A==
   dependencies:
     tslib "^2.4.0"
 
-"@docusaurus/utils-validation@2.0.0-beta.20", "@docusaurus/utils-validation@^2.0.0-beta.4":
+"@docusaurus/utils-validation@2.0.0-beta.20", "@docusaurus/utils-validation@^2.0.0-beta.20":
   version "2.0.0-beta.20"
   resolved "https://registry.yarnpkg.com/@docusaurus/utils-validation/-/utils-validation-2.0.0-beta.20.tgz#ebf475a4388066bd450877fe920f405c53ff5ad2"
   integrity sha512-7MxMoaF4VNAt5vUwvITa6nbkw1tb4WE6hp1VlfIoLCY4D7Wk5cMf1ZFhppCP1UzmPwvFb9zw8fPuvDfB3Tb5nQ==
@@ -1961,7 +1961,7 @@
     js-yaml "^4.1.0"
     tslib "^2.4.0"
 
-"@docusaurus/utils@2.0.0-beta.20", "@docusaurus/utils@^2.0.0-beta.4":
+"@docusaurus/utils@2.0.0-beta.20", "@docusaurus/utils@^2.0.0-beta.20":
   version "2.0.0-beta.20"
   resolved "https://registry.yarnpkg.com/@docusaurus/utils/-/utils-2.0.0-beta.20.tgz#d5a9816a328b2ca5e4e1a3fbf267e3674abacd48"
   integrity sha512-eUQquakhrbnvhsmx8jRPLgoyjyzMuOhmQC99m7rotar7XOzROpgEpm7+xVaquG5Ha47WkybE3djHJhKNih7GZQ==
@@ -1990,24 +1990,27 @@
     cssesc "^3.0.0"
     immediate "^3.2.3"
 
-"@easyops-cn/docusaurus-search-local@^0.23.2":
-  version "0.23.2"
-  resolved "https://registry.yarnpkg.com/@easyops-cn/docusaurus-search-local/-/docusaurus-search-local-0.23.2.tgz#af0b6695ba79de65bd51d78c9b06b0c63214f752"
-  integrity sha512-sE4i6xhpJEwC7g1T3kTbRB/8VzDavCdIBGmoaitfVOP42RIN1IhG+8ec5Lcws+PVTpUmIAfwQVqVYYs8Dc2V8A==
+"@easyops-cn/docusaurus-search-local@^0.25.0":
+  version "0.25.0"
+  resolved "https://registry.yarnpkg.com/@easyops-cn/docusaurus-search-local/-/docusaurus-search-local-0.25.0.tgz#2e3241e1173888dc0876b0fc0ec70770476216d4"
+  integrity sha512-UO63j2HJeHyPViZKFFhRjbIFUFfW16jiBOjUl7kbOswMDj0nLIcoKfgzcKZ+/KhUDNmwnUruSf/lW+eX31mLtg==
   dependencies:
-    "@docusaurus/utils" "^2.0.0-beta.4"
-    "@docusaurus/utils-validation" "^2.0.0-beta.4"
+    "@docusaurus/theme-common" "^2.0.0-beta.20"
+    "@docusaurus/theme-translations" "^2.0.0-beta.20"
+    "@docusaurus/utils" "^2.0.0-beta.20"
+    "@docusaurus/utils-common" "^2.0.0-beta.20"
+    "@docusaurus/utils-validation" "^2.0.0-beta.20"
     "@easyops-cn/autocomplete.js" "^0.38.1"
     "@node-rs/jieba" "^1.6.0"
     cheerio "^1.0.0-rc.3"
     clsx "^1.1.1"
     debug "^4.2.0"
-    fs-extra "^9.0.1"
+    fs-extra "^10.0.0"
     klaw-sync "^6.0.0"
     lunr "^2.3.9"
     lunr-languages "^1.4.0"
     mark.js "^8.11.1"
-    tslib "^2.2.0"
+    tslib "^2.4.0"
 
 "@hapi/hoek@^9.0.0":
   version "9.1.1"
@@ -4663,7 +4666,7 @@ fresh@0.5.2:
   resolved "https://registry.yarnpkg.com/fresh/-/fresh-0.5.2.tgz#3d8cadd90d976569fa835ab1f8e4b23a105605a7"
   integrity sha1-PYyt2Q2XZWn6g1qx+OSyOhBWBac=
 
-fs-extra@^10.1.0:
+fs-extra@^10.0.0, fs-extra@^10.1.0:
   version "10.1.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-10.1.0.tgz#02873cfbc4084dde127eaa5f9905eef2325d1abf"
   integrity sha512-oRXApq54ETRj4eMiFzGnHWGy+zo5raudjuxN0b8H7s/RU2oW0Wvsx9O0ACRN/kRq9E8Vu/ReskGB5o3ji+FzHQ==
@@ -4672,7 +4675,7 @@ fs-extra@^10.1.0:
     jsonfile "^6.0.1"
     universalify "^2.0.0"
 
-fs-extra@^9.0.0, fs-extra@^9.0.1:
+fs-extra@^9.0.0:
   version "9.1.0"
   resolved "https://registry.yarnpkg.com/fs-extra/-/fs-extra-9.1.0.tgz#5954460c764a8da2094ba3554bf839e6b9a7c86d"
   integrity sha512-hcg3ZmepS30/7BSFqRvoo3DOMQu7IjqxO5nCDt+zM9XWjb33Wg7ziNT+Qvqbuc3+gWpzO02JubVyk2G4Zvo1OQ==
