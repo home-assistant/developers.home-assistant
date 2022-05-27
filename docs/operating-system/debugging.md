@@ -9,21 +9,27 @@ This section is not for end users. End users should use the [SSH add-on] to SSH 
 
 [SSH add-on]: https://github.com/home-assistant/hassio-addons/tree/master/ssh
 
-## SSH access to the host
+## SSH access
+
+Home Assistant has two different types of ssh access.
+- End user SSH on port 22. This port is used by the [SSH add-on], it provides easy but limited SSH access to the system.
+- Host access SSH on port 22222. This method provides full access to the host with all privileges.
+
+### Enable SSH host access
 
 :::info
-SSH access through the [SSH add-on] (which will give you SSH access through port 22) will not provide you with all the necessary privileges, and you will be asked for a username and password when typing the 'login' command. You need to follow the steps below, which will setup a separate SSH access through port 22222 with all necessary privileges.
+A public/private key pair is required when setting up SSH host access, see [Generating SSH Keys](#generating-ssh-keys) for help.
 :::
 
-### Home Assistant Operating System
+Format a USB drive with FAT, ext4 or NTFS and name it `CONFIG` (case-sensitive). Create a file called `authorized_keys` (no extension) in the root of the USB drive, containing your public key. The file needs to be ANSI encoded and with Unix line ends (LF).
 
-Use a USB drive formatted with FAT, ext4, or NTFS and name it CONFIG (case sensitive). Create an `authorized_keys` file (no extension) containing your public key, and place it in the root of the USB drive. File needs to be ANSI encoded (not UTF-8) and must have Unix line ends (LF), not Windows (CR LF). See [Generating SSH Keys](#generating-ssh-keys) section below if you need help generating keys. From the UI, navigate to the Supervisor system page and choose "Import from USB". You can now access your device as root over SSH on port 22222. Alternatively, the file will be imported from the USB when the Home Assistant OS device is rebooted.
+Next connect the USB drive to your Home Assistant OS device and import the public key. This can be either done via a CLI command over ssh on port 22 (using the [SSH add-on]) or via a reboot of the system (the file will be imported on reboot automatically). The CLI command when connected via SSH on port 22 is `ha os import`.
 
 :::tip
-Make sure when you are copying the public key to the root of the USB drive that you rename the file correctly to `authorized_keys` with no `.pub` file extension.
+The SSH host access remains active even after the USB drive is disconnected from the system.
 :::
 
-You should then be able to SSH into your Home Assistant device. On Mac/Linux, use:
+You should then be able to SSH into your Home Assistant device as `root` on port 22222:
 
 ```shell
 ssh root@homeassistant.local -p 22222
@@ -37,9 +43,9 @@ You will be logged in as root in the ```/root``` folder. [Home Assistant OS] is 
 [Home Assistant OS]: https://github.com/home-assistant/operating-system
 [Supervisor Architecture]: /architecture_index.md
 
-### Turning off SSH access to the host
+### Turning off SSH host access
 
-Use a USB drive formatted with FAT, ext4, or NTFS and name it CONFIG (case sensitive). Remove any existing `authorized_keys` file from the drive and leave the drive empty. When the Home Assistant OS device is rebooted with this drive inserted, any existing keys will be removed and the SSH service will be stopped.
+Use a USB drive formatted with FAT, ext4 or NTFS and name it `CONFIG` (case-sensitive). Remove any existing `authorized_keys` file from the drive and leave the drive **empty**. When the Home Assistant OS device is rebooted with this drive inserted, any existing keys will be removed and the SSH service will be stopped.
 
 ## Checking the logs
 
@@ -64,10 +70,14 @@ docker exec -it homeassistant /bin/bash
 
 ### Generating SSH Keys
 
-Windows instructions for how to generate and use private/public keys with Putty are [here][windows-keys]. Instead of the droplet instructions, add the public key as per above instructions.
+On Windows public/private keys can be generate and managed with [Putty][windows-keys]. The public key, that is mentioned in the [Enable SSH host access](#enable-ssh-host-access) section, can be found in the box below _"Public key for pasting into the authorized_keys file"_.
 
-Alternative instructions, for Mac, Windows and Linux can be found [here](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#platform-mac).
+On Linux and Mac a new key pair can be generated via:
+```shell
+ssh-keygen -t ed25519 -C "your_email@example.com"
+# ...
+Your identification has been saved in /root/.ssh/id_ed25519 (private key)
+Your public key has been saved in /root/.ssh/id_ed25519.pub (public key)
+```
 
-Follow steps 1-4 under 'Generating a new SSH key' (The other sections are not applicable to Home Assistant and can be ignored.)
-
-Step 3 in the link above, shows the path to the private key file `id_rsa` for your chosen operating system. Your public key, `id_rsa.pub`, is saved in the same folder. Next, select all text from text box "Public key for pasting into the authorized_keys file" and save it to the root of your USB drive as `authorized_keys`.
+Similar to the Windows variant the public key is inside/written to the `.pub` file.
