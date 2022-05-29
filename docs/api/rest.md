@@ -38,7 +38,7 @@ response = get(url, headers=headers)
 print(response.text)
 ```
 
-Another option is to use the [Restful Command integration](https://www.home-assistant.io/components/rest_command/) in a Home Assistant automation or script.
+Another option is to use the [Restful Command integration](https://www.home-assistant.io/integrations/rest_command/) in a Home Assistant automation or script.
 
 ```yaml
 turn_light_on:
