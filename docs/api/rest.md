@@ -667,7 +667,7 @@ The result will include any states that changed while the service was being exec
 
 <ApiEndpoint path="/api/template" method="post">
 
-Render a Home Assistant template. [See template docs for more information.](https://www.home-assistant.io/topics/templating/)
+Render a Home Assistant template. [See template docs for more information.](https://www.home-assistant.io/docs/configuration/templating)
 
 ```json
 {
