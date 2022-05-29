@@ -4,7 +4,7 @@ title: "Backend Localization"
 
 ## Translation Strings
 
-Platform translation strings are stored as JSON in the [home-assistant](https://github.com/home-assistant/home-assistant) repository. These files must be located adjacent to the component/platform they belong to. Components must have their own directory, and the file is simply named `strings.json` in that directory. For platforms, they are named `strings.<platform name>.json` in the platform directory. This file will contain the different strings that will be translatable.
+Platform translation strings are stored as JSON in the [core](https://github.com/home-assistant/core) repository. These files must be located adjacent to the component/platform they belong to. Components must have their own directory, and the file is simply named `strings.json` in that directory. For platforms, they are named `strings.<platform name>.json` in the platform directory. This file will contain the different strings that will be translatable.
 
 ### `strings.json`
 
