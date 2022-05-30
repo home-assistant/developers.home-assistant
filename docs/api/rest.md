@@ -5,7 +5,7 @@ import ApiEndpoint from '@site/static/js/api_endpoint.jsx'
 
 Home Assistant provides a RESTful API on the same port as the web frontend. (default port is port 8123).
 
-If you are not using the [`frontend`](https://www.home-assistant.io/components/frontend/) in your setup then you need to add the [`api` component](https://www.home-assistant.io/components/api/) to your `configuration.yaml` file.
+If you are not using the [`frontend`](https://www.home-assistant.io/integrations/frontend/) in your setup then you need to add the [`api` integration](https://www.home-assistant.io/integrations/api/) to your `configuration.yaml` file.
 
 - `http://IP_ADDRESS:8123/` is an interface to control Home Assistant.
 - `http://IP_ADDRESS:8123/api/` is a RESTful API.
@@ -38,7 +38,7 @@ response = get(url, headers=headers)
 print(response.text)
 ```
 
-Another option is to use the [Restful Command integration](https://www.home-assistant.io/components/rest_command/) in a Home Assistant automation or script.
+Another option is to use the [Restful Command integration](https://www.home-assistant.io/integrations/rest_command/) in a Home Assistant automation or script.
 
 ```yaml
 turn_light_on:
@@ -667,7 +667,7 @@ The result will include any states that changed while the service was being exec
 
 <ApiEndpoint path="/api/template" method="post">
 
-Render a Home Assistant template. [See template docs for more information.](https://www.home-assistant.io/topics/templating/)
+Render a Home Assistant template. [See template docs for more information.](https://www.home-assistant.io/docs/configuration/templating)
 
 ```json
 {
