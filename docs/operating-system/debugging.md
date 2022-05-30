@@ -11,7 +11,7 @@ This section is not for end users. End users should use the [SSH add-on] to SSH 
 
 ## SSH access
 
-Home Assistant has two different types of ssh access.
+Home Assistant has two different types of SSH access.
 - End user SSH on port 22, provided by the [SSH add-on]. Easy to setup and use, but the accessible scope is limited.
 - Host access SSH on port 22222. This method provides full access to the host with all privileges (e.g. access to docker).
 
@@ -67,12 +67,15 @@ docker exec -it homeassistant /bin/bash
 ```
 
 [windows-keys]: https://www.digitalocean.com/community/tutorials/how-to-use-ssh-keys-with-putty-on-digitalocean-droplets-windows-users
+[linux-keys]: https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#platform-mac
 
 ### Generating SSH Keys
 
-On Windows public/private keys can be generate and managed with [Putty][windows-keys]. The public key, that is mentioned in the [Enable SSH host access](#enable-ssh-host-access) section, can be found in the box below _"Public key for pasting into the authorized_keys file"_.
+A ssh key pair consists of a public and private key. The private key is used by a SSH client to authenticate on a server. The public key on the other hand needs be added to the `authorized_keys` file on the server where Home Assistant runs, so that the server can validate a incoming request.
 
-On Linux and Mac a new key pair can be generated via:
+On Windows new key pairs can be created and managed with [PuTTYgen](https://www.putty.org), follow [this][windows-keys] tutorial to get started. The content for the `authorized_keys` file is the content as-it in the box below _"Public key for pasting into the authorized_keys file"_.
+
+On Linux and Mac a new key pair can be generated via the follow command or [this][linux-keys] tutorial.
 ```shell
 ssh-keygen -t ed25519 -C "your_email@example.com"
 # ...
@@ -80,4 +83,4 @@ Your identification has been saved in /root/.ssh/id_ed25519 (private key)
 Your public key has been saved in /root/.ssh/id_ed25519.pub (public key)
 ```
 
-Similar to the Windows variant the public key is inside/written to the `.pub` file.
+Similar to Windows the content for the `authorized_keys` file is inside the `.pub` file, which contains the public key.
