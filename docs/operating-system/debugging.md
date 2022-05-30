@@ -25,7 +25,7 @@ Format a USB drive with FAT, ext4 or NTFS and name it `CONFIG` (case-sensitive).
 
 Next connect the USB drive to your Home Assistant OS device and import the public key. This can be either done via the CLI command `ha os import` when connected to ssh on port 22 (using the [SSH add-on]) or via a reboot of the system (the file will be imported on reboot automatically).
 
-:::tip
+:::info
 The SSH host access remains active even after the USB drive is disconnected from the system.
 :::
 
