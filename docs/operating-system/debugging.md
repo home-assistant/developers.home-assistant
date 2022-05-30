@@ -12,8 +12,8 @@ This section is not for end users. End users should use the [SSH add-on] to SSH 
 ## SSH access
 
 Home Assistant has two different types of ssh access.
-- End user SSH on port 22. This port is used by the [SSH add-on], it provides easy but limited SSH access to the system.
-- Host access SSH on port 22222. This method provides full access to the host with all privileges.
+- End user SSH on port 22, provided by the [SSH add-on]. Easy to setup and use, but the accessible scope is limited.
+- Host access SSH on port 22222. This method provides full access to the host with all privileges (e.g. access to docker).
 
 ### Enable SSH host access
 
@@ -23,13 +23,13 @@ A public/private key pair is required when setting up SSH host access, see [Gene
 
 Format a USB drive with FAT, ext4 or NTFS and name it `CONFIG` (case-sensitive). Create a file called `authorized_keys` (no extension) in the root of the USB drive, containing your public key. The file needs to be ANSI encoded and with Unix line ends (LF).
 
-Next connect the USB drive to your Home Assistant OS device and import the public key. This can be either done via a CLI command over ssh on port 22 (using the [SSH add-on]) or via a reboot of the system (the file will be imported on reboot automatically). The CLI command when connected via SSH on port 22 is `ha os import`.
+Next connect the USB drive to your Home Assistant OS device and import the public key. This can be either done via the CLI command `ha os import` when connected to ssh on port 22 (using the [SSH add-on]) or via a reboot of the system (the file will be imported on reboot automatically).
 
 :::tip
 The SSH host access remains active even after the USB drive is disconnected from the system.
 :::
 
-You should then be able to SSH into your Home Assistant device as `root` on port 22222:
+You should then be able to SSH into your Home Assistant OS device as `root` on port 22222:
 
 ```shell
 ssh root@homeassistant.local -p 22222
@@ -45,7 +45,7 @@ You will be logged in as root in the ```/root``` folder. [Home Assistant OS] is 
 
 ### Turning off SSH host access
 
-Use a USB drive formatted with FAT, ext4 or NTFS and name it `CONFIG` (case-sensitive). Remove any existing `authorized_keys` file from the drive and leave the drive **empty**. When the Home Assistant OS device is rebooted with this drive inserted, any existing keys will be removed and the SSH service will be stopped.
+Use a USB drive formatted with FAT, ext4 or NTFS and name it `CONFIG` (case-sensitive). Remove any existing `authorized_keys` file from the drive and leave the drive **empty**. When the Home Assistant OS device is rebooted with this drive inserted, any existing keys will be removed and the host SSH service on port 22222 will be stopped.
 
 ## Checking the logs
 
