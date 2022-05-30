@@ -15,6 +15,8 @@ Home Assistant has two different types of SSH access.
 - End user SSH on port 22, provided by the [SSH add-on]. Easy to setup and use, but the accessible scope is limited.
 - Host access SSH on port 22222. This method provides full access to the host with all privileges (e.g. access to docker).
 
+The section below describes how to get host SSH access with **all privileges** through port 22222.
+
 ### Enable SSH host access
 
 :::info
