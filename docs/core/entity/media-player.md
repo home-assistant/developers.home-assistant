@@ -55,6 +55,42 @@ and are combined using the bitwise or (`|`) operator.
 
 ## Methods
 
+### Play Media
+
+Tells the media player to play media. Implement it using the following:
+
+```python
+class MyMediaPlayer(MediaPlayerEntity):
+
+    def play_media(
+        self,
+        media_type: str,
+        media_id: str,
+        enqueue: MediaPlayerEnqueue | None = None,
+        announce: bool | None = None, **kwargs: Any
+    ) -> None:
+        """Play a piece of media."""
+
+    async def async_play_media(
+        self,
+        media_type: str,
+        media_id: str,
+        enqueue: MediaPlayerEnqueue | None = None,
+        announce: bool | None = None, **kwargs: Any
+    ) -> None:
+        """Play a piece of media."""
+
+```
+
+The `enqueue` attribute is a string enum `MediaPlayerEnqueue`:
+
+ - `add`: add given media item to end of the queue
+ - `next`: play the given media item next, keep queue
+ - `play`: play the given media item now, keep queue
+ - `replace`: play the given media item now, clear queue
+
+When the `announce` boolean attribute is set to `true`, the media player should try to pause the current music, announce the media to the user and then resume the music.
+
 ### Browse Media
 
 If the media player supports browsing media, it should implement the following method:
@@ -99,7 +135,11 @@ class MyMediaPlayer(MediaPlayerEntity):
         )
 
     async def async_play_media(
-        self, media_type: str, media_id: str, **kwargs: Any
+        self,
+        media_type: str,
+        media_id: str,
+        enqueue: MediaPlayerEnqueue | None = None,
+        announce: bool | None = None, **kwargs: Any
     ) -> None:
         """Play a piece of media."""
         if media_source.is_media_source_id(media_id):

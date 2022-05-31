@@ -6,13 +6,6 @@ authorTwitter: balloob
 title: "Media Player updates: enqueue changes, announce added"
 ---
 
-Starting with Home Assistant 2022.6, the media player integration has received two updates to the `media_player.play_media` service:
+Starting with Home Assistant 2022.6, the media player integration has received two updates to the `media_player.play_media` service. The `enqueue` attribute has been changed to a string in [PR #72406](https://github.com/home-assistant/core/pull/72406) and a new `announce` boolean attribute was added in [PR #72566](https://github.com/home-assistant/core/pull/72566).
 
-The `enqueue` attribute was changed in [PR #72406](https://github.com/home-assistant/core/pull/72406) from a boolean to a string enum `MediaPlayerEnqueue`:
-
- - `add`: add given media item to end of the queue
- - `next`: play the given media item next, keep queue
- - `play`: play the given media item now, keep queue
- - `replace`: play the given media item now, clear queue
-
-A new `announce` boolean attribute was added in [PR #72566](https://github.com/home-assistant/core/pull/72566). When set to `true`, the media player should try to pause the current music, announce the media to the user and then resume the music.
+See the updated [media player play_media documentation](/docs/core/entity/media-player/#play-media) for more information.
