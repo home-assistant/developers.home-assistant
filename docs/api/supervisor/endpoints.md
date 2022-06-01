@@ -2289,6 +2289,26 @@ Returns a list of store repositories
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/store/repositories" method="post">
+
+Add an addon repository to the store
+
+**Payload:**
+
+| key        | type   | description                                      |
+| ---------- | ------ | ------------------------------------------------ |
+| repository | string | URL of the addon repository to add to the store. |
+
+**Example payload:**
+
+```json
+{
+  "repository": "https://example.com/addons"
+}
+```
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/store/repositories/<repository>" method="get">
 
 Returns information about a store repository
@@ -2304,6 +2324,12 @@ Returns information about a store repository
   "maintainer": "Awesome Maintainer"
 }
 ```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/store/repositories/<repository>" method="delete">
+
+Remove an unused addon repository from the store.
 
 </ApiEndpoint>
 
