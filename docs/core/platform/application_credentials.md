@@ -124,3 +124,29 @@ A `ClientCredential` represents a client credential provided by the user.
 | ------------- | ---- | ------------------------------------------------------------------------- | ----------- |
 | client_id     | str  | **Required** | The OAuth Client ID provided by the user.     |
 | client_secret | str  | **Required** | The OAuth Client Secret provided by the user. |
+
+## Translations
+
+Translations for Application Credentials are defined under the `application_credentials` key in the component translation file `strings.json`. As an example:
+
+```json
+{
+    "application_credentials": {
+        "description": "Navigate to the [developer console]({console_url}) to create credentials then enter them below.",
+    }
+}
+```
+
+You may optionally add description placehlder keys that are added to the message by adding a new method in `application_credentials.py` like the following:
+
+```python
+from homeassistant.core import HomeAssistant
+
+async def async_get_description_placeholders(hass: HomeAssistant) -> dict[str, str]:
+    """Return description placeholders for the credentials dialog."""
+    return {
+        "console_url": "https://example.com/developer/console",
+    }
+```
+
+While developing locally, you will need to run `python3 -m script.translations develop` to see changes made to `strings.json` [More info on translating Home Assistant.](translations.md)
