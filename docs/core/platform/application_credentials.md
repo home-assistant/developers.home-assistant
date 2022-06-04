@@ -137,7 +137,7 @@ Translations for Application Credentials are defined under the `application_cred
 }
 ```
 
-You may optionally add description placehlder keys that are added to the message by adding a new method in `application_credentials.py` like the following:
+You may optionally add description placeholder keys that are added to the message by adding a new method in `application_credentials.py` like the following:
 
 ```python
 from homeassistant.core import HomeAssistant
