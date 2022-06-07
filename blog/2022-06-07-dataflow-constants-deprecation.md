@@ -4,7 +4,7 @@ authorURL: https://github.com/epenet
 title: "Deprecating Data Entry Flow constants"
 ---
 
-As of Home Assistant Core 2022.7, all `RESULT_TYPE_*` constants are deprecated:
+As of Home Assistant Core 2022.7, all `RESULT_TYPE_*` constants for data entry flow result types are deprecated:
 
   - `RESULT_TYPE_FORM`
   - `RESULT_TYPE_CREATE_ENTRY`
