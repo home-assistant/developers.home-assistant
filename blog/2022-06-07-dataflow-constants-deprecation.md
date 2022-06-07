@@ -16,4 +16,3 @@ As of Home Assistant Core 2022.7, all `RESULT_TYPE_*` constants for data entry f
   - `RESULT_TYPE_MENU`
 
   Use the new `FlowResultType` enum instead.
-  
