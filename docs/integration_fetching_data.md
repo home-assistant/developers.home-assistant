@@ -94,7 +94,7 @@ class MyCoordinator(DataUpdateCoordinator):
             # Note: asyncio.TimeoutError and aiohttp.ClientError are already
             # handled by the data update coordinator.
             async with async_timeout.timeout(10):
-                # Grab active context variables to limit data required to be fetch from API
+                # Grab active context variables to limit data required to be fetched from API
                 # Note: using context is not required if there is no need or ability to limit
                 # data retrieved from API.
                 listening_idx = set(self.async_contexts())
