@@ -1,17 +1,10 @@
 ---
 author: epenet
 authorURL: https://github.com/epenet
-title: "Deprecating Data Flow constants"
+title: "Deprecating Data Entry Flow constants"
 ---
 
-As of Home Assistant Core 2022.7, all `RESULT_TYPE_*` constants are deprecated,
-each entity platform is providing an `EntityFeature` enum to replace them.
-
-This applies to, the following platforms:
-
-- **Flow Result**
-
-  Deprecated result type constants:
+As of Home Assistant Core 2022.7, all `RESULT_TYPE_*` constants are deprecated:
 
   - `RESULT_TYPE_FORM`
   - `RESULT_TYPE_CREATE_ENTRY`
@@ -23,5 +16,4 @@ This applies to, the following platforms:
   - `RESULT_TYPE_MENU`
 
   Use the new `FlowResultType` enum instead.
-
-  Use the new [`WaterHeaterEntityFeature`](/docs/core/entity/water-heater#supported-features) enum instead.
+  
