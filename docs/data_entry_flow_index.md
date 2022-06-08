@@ -22,14 +22,14 @@ async def async_finish_flow(flow, result):
     """Finish flow."""
 ```
 
-This async callback is called when a flow is finished or aborted. i.e. `result['type'] in [RESULT_TYPE_CREATE_ENTRY, RESULT_TYPE_ABORT]`. The callback function can modify result and return it back, if the result type changed to `RESULT_TYPE_FORM`, the flow will continue running, display another form.
+This async callback is called when a flow is finished or aborted. i.e. `result['type'] in [FlowResultType.CREATE_ENTRY, FlowResultType.ABORT]`. The callback function can modify result and return it back, if the result type changed to `FlowResultType.FORM`, the flow will continue running, display another form.
 
-If the result type is `RESULT_TYPE_FORM`, the result should look like:
+If the result type is `FlowResultType.FORM`, the result should look like:
 
 ```python
 {
     # The result type of the flow
-    "type": RESULT_TYPE_FORM,
+    "type": FlowResultType.FORM,
     # the id of the flow
     "flow_id": "abcdfgh1234",
     # handler name
@@ -45,14 +45,14 @@ If the result type is `RESULT_TYPE_FORM`, the result should look like:
 }
 ```
 
-If the result type is `RESULT_TYPE_CREATE_ENTRY`, the result should look like:
+If the result type is `FlowResultType.CREATE_ENTRY`, the result should look like:
 
 ```python
 {
     # Data schema version of the entry
     "version": 2,
     # The result type of the flow
-    "type": RESULT_TYPE_CREATE_ENTRY,
+    "type": FlowResultType.CREATE_ENTRY,
     # the id of the flow
     "flow_id": "abcdfgh1234",
     # handler name
@@ -65,12 +65,12 @@ If the result type is `RESULT_TYPE_CREATE_ENTRY`, the result should look like:
 }
 ```
 
-If the result type is `RESULT_TYPE_ABORT`, the result should look like:
+If the result type is `FlowResultType.ABORT`, the result should look like:
 
 ```python
 {
     # The result type of the flow
-    "type": RESULT_TYPE_ABORT,
+    "type": FlowResultType.ABORT,
     # the id of the flow
     "flow_id": "abcdfgh1234",
     # handler name
@@ -307,7 +307,7 @@ from homeassistant import data_entry_flow
 async def handle_result(hass, flow_id, data):
     result = await hass.config_entries.async_configure(flow_id, data)
 
-    if result["type"] == data_entry_flow.RESULT_TYPE_EXTERNAL_STEP_DONE:
+    if result["type"] == data_entry_flow.FlowResultType.EXTERNAL_STEP_DONE:
         return "success!"
     else:
         return "Invalid config flow specified"
