@@ -2231,15 +2231,30 @@ Returns information about a store add-on
 
 ```json
 {
-  "name": "Awesome add-on",
-  "slug": "7kshd7_awesome",
+  "apparmor": false,
+  "arch": ["armhf", "aarch64", "i386", "amd64"],
+  "auth_api": true,
   "description": "Awesome description",
-  "repository": "https://example.com/addons",
-  "version": "1.0.0",
-  "installed": "1.0.0",
+  "detached": false,
+  "docker_api": false,
+  "full_access": true,
+  "hassio_api": false,
+  "hassio_role": "manager",
+  "homeassistant_api": true,
+  "host_network": false,
+  "host_pid": false,
   "icon": false,
+  "ingress": true,
+  "installed": "1.0.0",
   "logo": true,
-  "state": "started"
+  "long_description": "lorem ipsum",
+  "name": "Awesome add-on",
+  "rating": 5,
+  "repository": "https://example.com/addons",
+  "signed": false
+  "slug": "7kshd7_awesome",
+  "state": "started",
+  "version": "1.0.0",
 }
 ```
 
