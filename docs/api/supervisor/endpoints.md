@@ -77,7 +77,16 @@ Returns the raw container logs from docker.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/icon" method="get">
-Get the add-on icon
+
+Get the `icon.png` file of an add-on.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/addons/<addon>/dark_icon" method="get">
+
+Get the `dark_icon.png` file of an add-on.
+This will fallback to `icon.png` if `dark_icon.png` does not exist.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/info" method="get">
@@ -247,7 +256,16 @@ Install an add-on
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/logo" method="get">
-Get the add-on logo
+
+Get the `logo.png` file of an add-on.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/addons/<addon>/dark_logo" method="get">
+
+Get the `dark_logo.png` file of an add-on.
+This will fallback to `logo.png` if `dark_logo.png` does not exist.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/options" method="post">
