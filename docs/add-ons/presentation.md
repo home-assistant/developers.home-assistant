@@ -25,6 +25,7 @@ Requirements for the logo of your add-on:
 - The logo must be in the Portable Network Graphics format (`.png`).
 - The filename must be `logo.png`.
 - It is recommended to keep the logo size around 250x100px. You may choose to use a different size or aspect ratio as you seem fit for your add-on.
+- You can also add a dark mode variant of the logo with the filename `dark_logo.png`
 
 Requirements for the icon of your add-on:
 
@@ -32,6 +33,7 @@ Requirements for the icon of your add-on:
 - The filename must be `icon.png`.
 - The aspect ratio of the icon must be 1x1 (square).
 - It is recommended to use an icon size of 128x128px.
+- You can also add a dark mode variant of the icon with the filename `dark_icon.png`
 
 ## Keeping a changelog
 
