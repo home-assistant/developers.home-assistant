@@ -4,7 +4,7 @@ title: "Handling Setup Failures"
 
 Your integration may not be able to be set up for a variety of reasons. The most common cases are because the device or service is offline or the credentials are no longer valid. Your integration must retry setup so it can recover as soon as reasonably possible when the device or service is back offline without the user having to restart Home Assistant.
 
-## Handling offline or unavailable devices and services.
+## Handling offline or unavailable devices and services
 
 ### Integrations using `async_setup_entry`
 
