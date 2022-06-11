@@ -8,7 +8,7 @@ Your integration may not be able to be set up for a variety of reasons. The most
 
 ### Integrations using `async_setup_entry`
 
-Raise the `ConfigEntryNotReady` exception from `async_setup_entry` in the integrations `__init__.py`, and Home Assistant will automatically take care of retrying set up later. To avoid doubt, raising `ConfigEntryNotReady` in a platform's `async_setup_entry` is ineffective because it is too late to be caught by the config entry setup.
+Raise the `ConfigEntryNotReady` exception from `async_setup_entry` in the integration's `__init__.py`, and Home Assistant will automatically take care of retrying set up later. To avoid doubt, raising `ConfigEntryNotReady` in a platform's `async_setup_entry` is ineffective because it is too late to be caught by the config entry setup.
 
 #### Example
 
