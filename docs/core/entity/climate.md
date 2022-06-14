@@ -126,7 +126,7 @@ and are combined using the bitwise or (`|`) operator.
 
 ## Methods
 
-### Set hvac mode
+### Set HVAC mode
 
 ```python
 class MyClimateEntity(ClimateEntity):
