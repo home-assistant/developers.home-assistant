@@ -27,7 +27,7 @@ The default step value is dynamically chosen based on the range (max - min) valu
 
 ### Available device classes
 
-If specifying a device class, your sensor entity will need to also return the correct unit of measurement.
+If specifying a device class, your number entity will need to also return the correct unit of measurement.
 
 | Type | Supported units | Description
 | ---- | ---- | -----------
