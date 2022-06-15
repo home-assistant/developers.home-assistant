@@ -35,6 +35,7 @@ import logging
 
 import async_timeout
 
+from homeassistant.core import callback
 from homeassistant.components.light import LightEntity
 from homeassistant.exceptions import ConfigEntryAuthFailed
 from homeassistant.helpers.update_coordinator import (
@@ -84,7 +85,7 @@ class MyCoordinator(DataUpdateCoordinator):
         )
         self.my_api = my_api
 
-    async def _async_update_data():
+    async def _async_update_data(self):
         """Fetch data from API endpoint.
 
         This is the place to pre-process the data to lookup tables
