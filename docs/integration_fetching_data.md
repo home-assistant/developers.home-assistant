@@ -35,8 +35,8 @@ import logging
 
 import async_timeout
 
-from homeassistant.core import callback
 from homeassistant.components.light import LightEntity
+from homeassistant.core import callback
 from homeassistant.exceptions import ConfigEntryAuthFailed
 from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
