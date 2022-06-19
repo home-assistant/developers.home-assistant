@@ -96,10 +96,6 @@ Requirements are Python libraries or modules that you would normally install usi
 
 Requirements is an array of strings. Each entry is a `pip` compatible string. For example, the media player Cast platform depends on the Python package PyChromecast v3.2.0: `["pychromecast==3.2.0"]`.
 
-## Loggers
-
-The `loggers` field is a list of names that the integration's requirements use for their [getLogger](https://docs.python.org/3/library/logging.html?highlight=logging#logging.getLogger) calls.
-
 ### Custom requirements during development & testing
 
 During the development of a component, it can be useful to test against different versions of a requirement. This can be done in two steps, using `pychromecast` as an example:
@@ -129,7 +125,11 @@ It is also possible to use a public git repository to install a requirement.  Th
 
 ### Custom integration requirements
 
-Custom integration should only include requirements that are not required by the Core [requirements.txt](https://github.com/home-assistant/core/blob/dev/requirements.txt).
+Custom integrations should only include requirements that are not required by the Core [requirements.txt](https://github.com/home-assistant/core/blob/dev/requirements.txt).
+
+## Loggers
+
+The `loggers` field is a list of names that the integration's requirements use for their [getLogger](https://docs.python.org/3/library/logging.html?highlight=logging#logging.getLogger) calls.
 
 ## Supported Brands
 
