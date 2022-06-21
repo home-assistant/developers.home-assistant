@@ -37,14 +37,14 @@ Forecast data should either be daily or hourly.
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | datetime | string | **Required** | UTC Date time in RFC 3339 format.
-| temperature | float | **Required** | The higher temperature in °C or °F
+| native_temperature | float | **Required** | The higher temperature in °C or °F
 | condition | string | `None` | The weather condition at this point.
-| templow | float | `None` | The lower daily Temperature in °C or °F
-| precipitation | float | `None` | The precipitation amount in mm or in.
+| native_templow | float | `None` | The lower daily Temperature in °C or °F
+| native_precipitation | float | `None` | The precipitation amount in mm or in.
 | precipitation_probability | int | `None` | The probability of precipitation in %.
-| pressure | float | `None` | The air pressure in hPa, mbar, inHg or mmHg.
+| native_pressure | float | `None` | The air pressure in hPa, mbar, inHg or mmHg.
 | wind_bearing | float or string | `None` | The wind bearing in azimuth angle (degrees) or 1-3 letter cardinal direction.
-| wind_speed | int | `None` | The wind speed in m/s, km/h or mi/h.
+| native_wind_speed | int | `None` | The wind speed in m/s, km/h or mi/h.
 
 Forecast data needs to follow the same unit of measurement as defined for properties where applicable.
 
