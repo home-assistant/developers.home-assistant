@@ -33,6 +33,10 @@ If specifying a device class, your number entity will need to also return the co
 | ---- | ---- | -----------
 | temperature | °C, °F | Temperature.
 
+## Restoring number states
+
+Numbers which restore the state after restart or reload should not extend `RestoreEntity` because  that does not store the `native_value`, but instead the `state` which may have been modifed by the number base entity. Numbers which restore the state should extend `RestoreNumber` and call `await self.async_get_last_number_data` from `async_added_to_hass` to get access to the stored `native_min_value`,  `native_max_value`,  `native_step`,  `native_unit_of_measurement` and `native_value`.
+
 ## Methods
 
 ### Set value
