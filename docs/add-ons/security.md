@@ -34,7 +34,7 @@ As a developer, follow the following best practices to make your add-on secure:
 - Create an AppArmor profile
 - Map folders read only if you don't need write access
 - If you need any API access, make sure that you do not grant permission that aren't needed
-- Signing image with [Codenotary CAS](https://cas.codenotary.com/)
+- Sign the image with [Codenotary CAS](https://cas.codenotary.com/)
 
 ## Use Home Assistant User backend
 
