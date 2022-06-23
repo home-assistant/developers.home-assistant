@@ -13,14 +13,13 @@ To see more details about each endpoint, click on it to expand it.
 ### Addons
 
 <ApiEndpoint path="/addons" method="get">
-Return overview information about add-ons and add-on repositories.
+Return overview information about installed add-ons.
 
 **Payload:**
 
 | key          | type | description                                        |
 | ------------ | ---- | -------------------------------------------------- |
 | addons       | list | A list of [Addon models](api/supervisor/models.md#addon)           |
-| repositories | list | A list of [Repository models](api/supervisor/models.md#repository) |
 
 **Example response:**
 
@@ -44,15 +43,6 @@ Return overview information about add-ons and add-on repositories.
       "url": null,
       "icon": false,
       "logo": false
-    }
-  ],
-  "repositories": [
-    {
-      "slug": "12345678",
-      "name": "Awesome repository",
-      "source": "https://github.com/awesome/repository",
-      "url": null,
-      "maintainer": "Awesome maintainer <awesome@example.com>"
     }
   ]
 }
@@ -155,6 +145,7 @@ Get details about an add-on
 | video               | boolean            | `true` if video is enabled                                                             |
 | watchdog            | boolean            | `true` if watchdog is enabled                                                          |
 | webui               | string or null     | The URL to the web UI for the add-on                                                   |
+| signed              | boolean            | True if the image is signed and trust                                                  |
 
 **Example response:**
 
@@ -233,7 +224,8 @@ Get details about an add-on
   "version": "1.0.0",
   "video": false,
   "watchdog": true,
-  "webui": "http://[HOST]:1337/xy/zx"
+  "webui": "http://[HOST]:1337/xy/zx",
+  "signed": false
 }
 ```
 
@@ -1535,13 +1527,12 @@ Returns information about available updates
 **Returned data:**
 
 | key | type | description |
--- | -- | --
-update_type | string | `addon`, `os`, `core` or `supervisor`
-name | string | Returns the name (only if the `update_type` is `addon`)
-icon | string | Returns the path for the icon if any (only if the `update_type` is `addon`)
-version_latest | string | Returns the available version
-panel_path | string | Returns path where the UI can be loaded
-
+| -- | -- | -- |
+| update_type | string | `addon`, `os`, `core` or `supervisor` |
+| name | string | Returns the name (only if the `update_type` is `addon`) |
+| icon | string | Returns the path for the icon if any (only if the `update_type` is `addon`) |
+| version_latest | string | Returns the available version |
+| panel_path | string | Returns path where the UI can be loaded |
 
 </ApiEndpoint>
 
@@ -2442,7 +2433,6 @@ Returns information about the supervisor
 | debug               | bool         | Debug is active                                               |
 | debug_block         | bool         | `true` if debug block is enabled                              |
 | diagnostics         | bool or null | Sending diagnostics is enabled                                |
-| addons              | list         | A list of installed [Addon models](api/supervisor/models.md#addon)            |
 | addons_repositories | list         | A list of add-on repository URL's as strings                  |
 
 **Example response:**
@@ -2463,19 +2453,6 @@ Returns information about the supervisor
   "debug": false,
   "debug_block": false,
   "diagnostics": null,
-  "addons": [
-    {
-      "name": "Awesome add-on",
-      "slug": "7kshd7_awesome",
-      "description": "Awesome description",
-      "repository": "https://example.com/addons",
-      "version": "1.0.0",
-      "installed": "1.0.0",
-      "icon": false,
-      "logo": true,
-      "state": "started"
-    }
-  ],
   "addons_repositories": ["https://example.com/addons"]
 }
 ```
