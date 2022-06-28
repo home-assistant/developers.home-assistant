@@ -34,7 +34,7 @@ Properties have to follow the units mentioned on the respective unit of measurem
 
 To the user, properties will be presented according to the unit system. This is achieved by automatically converting units when creating state objects.
 
-For each weather entity the user also has the option to override the presentation units, i.e. the units used in the state objects.
+For each weather entity, the user also has the option to override the presentation units, i.e., the units used in the state objects.
 
 ### Forecast
 
