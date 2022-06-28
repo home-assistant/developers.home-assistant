@@ -28,7 +28,13 @@ Properties should always only return information from memory and not do I/O (lik
 | wind_bearing | float or string | `None` | The current wind bearing in azimuth angle (degrees) or 1-3 letter cardinal direction.
 | forecast | array | `None` | Daily or Hourly forecast data.
 
+### Unit Conversion
+
 Properties have to follow the units mentioned on the respective unit of measurement in the table.
+
+For the user, properties will be presented according to the unit system set by the user.
+
+The user also has the option to override the units for each weather entity.
 
 ### Forecast
 
