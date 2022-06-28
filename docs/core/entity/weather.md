@@ -32,9 +32,9 @@ Properties should always only return information from memory and not do I/O (lik
 
 Properties have to follow the units mentioned on the respective unit of measurement in the table.
 
-For the user, properties will be presented according to the unit system set by the user.
+To the user, properties will be presented according to the unit system. This is achieved by automatically converting units when creating state objects.
 
-The user also has the option to override the units for each weather entity.
+For each weather entity the user also has the option to override the presentation units, i.e. the units used in the state objects.
 
 ### Forecast
 
