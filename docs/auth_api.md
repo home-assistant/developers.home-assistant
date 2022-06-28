@@ -135,7 +135,7 @@ An HTTP status code of 400 will be returned if an invalid request has been issue
 ### Revoking a refresh token
 
 :::tip
-`client_id` is not need for revoke refresh token
+`client_id` is not required to revoke a refresh token
 :::
 The token endpoint is also capable of revoking a refresh token. Revoking a refresh token will immediately revoke the refresh token and all access tokens that it has ever granted. To revoke a refresh token, make the following request:
 
