@@ -22,8 +22,8 @@ Properties should always only return information from memory and not do I/O (lik
 | ozone | float | `None` | The current ozone level.
 | native_visibility | float | `None` | The current visibility in km or mi.
 | native_visibility_unit | string | `None` | The visibility unit; km or mi. Required if native_visibility is set.
-| native_wind_speed | float | `None` | The current wind speed in m/s, km/h or mi/h.
-| native_wind_speed_unit | string | `None` | The wind speed unit; m/s, km/h or mi/h. Required if native_wind_speed is set.
+| native_wind_speed | float | `None` | The current wind speed in m/s, km/h, mi/h, ft/s or kn.
+| native_wind_speed_unit | string | `None` | The wind speed unit;m/s, km/h, mi/h, ft/s or kn. Required if native_wind_speed is set.
 | native_precipitation_unit | string | `None` | The precipitation unit; mm or in.
 | wind_bearing | float or string | `None` | The current wind bearing in azimuth angle (degrees) or 1-3 letter cardinal direction.
 | forecast | array | `None` | Daily or Hourly forecast data.
@@ -50,7 +50,7 @@ Forecast data should either be daily or hourly.
 | precipitation_probability | int | `None` | The probability of precipitation in %.
 | native_pressure | float | `None` | The air pressure in hPa, mbar, inHg or mmHg.
 | wind_bearing | float or string | `None` | The wind bearing in azimuth angle (degrees) or 1-3 letter cardinal direction.
-| native_wind_speed | int | `None` | The wind speed in m/s, km/h or mi/h.
+| native_wind_speed | int | `None` | The wind speed in m/s, km/h, mi/h, ft/s or kn.
 
 Forecast data needs to follow the same unit of measurement as defined for properties where applicable.
 
