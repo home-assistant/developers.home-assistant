@@ -183,7 +183,6 @@ Note:  Avoid the use of this filename for anything other than add-on configurati
 | `backup_pre` | string | | Command to execute in the context of the add-on before the backup is taken.
 | `backup_post` | string | | Command to execute in the context of the add-on after the backup was taken.
 | `backup_exclude` | list | | List of file/path (with glob support) that are excluded from backups.
-| `codenotary` | email | | Email address of the signer of this image used by Codenotary CAS.
 | `advanced` | bool | `false` | Set this to `true` to require the user to have enabled "Advanced" mode for it to show.
 | `stage` | string | `stable` | Flag add-on with follow attribute: `stable`, `experimental` or `deprecated`. Add-ons set to `experimental` or `deprecated` will not show up in the store unless the user enables advanced mode.
 | `init` | bool | `true` | Set this to `false` to disable the Docker default system init. Use this if the image has its own init system (Like [s6-overlay](https://github.com/just-containers/s6-overlay)). *Note: Starting in V3 of S6 setting this to `false` is required or the addon won't start, see [here](https://developers.home-assistant.io/blog/2022/05/12/s6-overlay-base-images) for more information.*
