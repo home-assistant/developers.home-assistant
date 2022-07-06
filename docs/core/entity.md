@@ -149,6 +149,11 @@ entity class for details.
 If an integration needs to access its own properties it should access the property (`self.name`), not the class or instance attribute (`self._attr_name`).
 :::
 
+:::tip
+Whenever feasible, prefer the `_attr_` attributes implementation, avoiding dummy proxy getters/setters. This reduces the lines of 
+code to maintain, keeping the code-base more concise. 
+:::
+
 ### Example
 
 The below code snippet gives an example of best practices for when to implement property functions, and when to use class or instance attributes.
