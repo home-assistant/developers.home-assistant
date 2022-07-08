@@ -11,7 +11,7 @@ Home Assistant has built-in helpers to support mDNS/Zeroconf and SSDP. If your i
 
 ### Subscribing to Bluetooth discoveries
 
-Some integrations may need to know when a device is discovered right away. The Bluetooth integration provides a registration API to receive callbacks when a new device is discovered that matches specific key values. The same format for `bluetooth` in [`manifest.json`](creating_integration_manifest.md) is used for matching.
+Some integrations may need to know when a device is discovered right away. The Bluetooth integration provides a registration API to receive callbacks when a new device is discovered that matches specific key values. The same format for `bluetooth` in [`manifest.json`](creating_integration_manifest.md#bluetooth) is used for matching.
 
 The function `bluetooth.async_register_callback` is provided to enable this ability. The function returns a callback that will cancel the registration when called.
 
