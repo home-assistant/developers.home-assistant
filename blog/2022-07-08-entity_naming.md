@@ -6,16 +6,16 @@ title: "Number entity refactoring to support unit conversion"
 
 ## New recommendations for entity naming
 
-We are working on improving and standardizing our entity naming. This will allow us to in the UI show entities in the right context in the future while removing some error prone magic magic mangling of entity names from the code base.
+We are working on improving and standardizing our entity naming. This will allow us to in the UI show entities in the right context in the future while removing some error-prone magic mangling of entity names from the code base.
 
 The short story is:
 
-- Devices have their name as they have today, for example "Dishwasher"
-- Entities will have their own name (without device, area). Or, they may optionally set the name to `None` (in that case they inherit the device name)
-- Device, Area, Entity names all start with a capital letter, rest of the words are lower case (unless its a word that represents a brand/name/abbreviation of course)
-- Every entity which has been migrated to follow these rules should set the [`has_entity_name`](https://developers.home-assistant.io/docs/core/entity#entity-naming) property to `True`
+- Devices have their name as they have today, for example, "Dishwasher".
+- Entities will have their own name (without device, area). Or, they may optionally set the name to `None` (in that case they inherit the device name).
+- Device, Area, and Entity names all start with a capital letter, the rest of the words are lower case (unless its a word that represents a brand/name/abbreviation of course).
+- Every entity which has been migrated to follow these rules should set the [`has_entity_name`](https://developers.home-assistant.io/docs/core/entity#entity-naming) property to `True`.
 
-During the migration period, we use the `has_entity_name` property to create "backward compatible" friendly names. In the future we can show deprecation warnings for entities which don't set the property, and later, remove it entirelly.
+During the migration period, we use the `has_entity_name` property to create "backward compatible" friendly names. In the future, we can show deprecation warnings for entities that don't set this property, and later, remove it entirely.
 
 The frontend is going to be adjusted for this. It will be able to show the entities/devices in various ways, what suits the context the most.
 
@@ -56,6 +56,6 @@ Let’s say you have 2 Shelly switches that report power usage named Dishwasher 
 
 There is not a single source of truth for a device name because entities included the device name in their name.
 
-Because we “solved” a problem for the UI and the `entity_id` by including the device name in the entity name, we now have this solution applied to all places where we use entities, and have to work around this solution
+Because we “solved” a problem for the UI and the `entity_id` by including the device name in the entity name, we now have this solution applied to all places where we use entities and have to work around this solution.
 
-This naming scheme makes it unnecessarily difficult to migrate the UI towards hierarchical views of areas->devices->entities instead of long lists of entities because.
+This naming scheme makes it unnecessarily difficult to migrate the UI towards hierarchical views of areas->devices->entities instead of long lists of entities.
