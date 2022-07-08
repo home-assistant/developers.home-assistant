@@ -17,10 +17,15 @@ The function `bluetooth.async_register_callback` is provided to enable this abil
 
 The below example shows registering to get callbacks when a Switchbot device is nearby.
 
-```python3
+```python
 from homeassistant.components import bluetooth
 
 ...
+
+@callback
+def _async_discovered_device(service_info: BluetoothServiceInfo, change: BluetoothChange) -> None:
+    """Subscribe to bluetooth changes."""
+    _LOGGER.warning("New service_info: %s", service_info)
 
 entry.async_on_unload(
     bluetooth.async_register_callback(
@@ -31,7 +36,7 @@ entry.async_on_unload(
 
 The below example shows registering to get callbacks for HomeKit devices.
 
-```python3
+```python
 from homeassistant.components import bluetooth
 
 ...
@@ -45,7 +50,7 @@ entry.async_on_unload(
 
 The below example shows registering to get callbacks for Nespresso Prodigios.
 
-```python3
+```python
 from homeassistant.components import bluetooth
 
 ...
