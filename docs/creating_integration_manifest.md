@@ -168,8 +168,8 @@ The following example will match Nespresso Prodigio machines:
 {
   "bluetooth": [
     {
-    "local_name": "Prodigio_*",
-    },
+      "local_name": "Prodigio_*"
+    }
   ]
 }
 ```
@@ -180,8 +180,8 @@ The following example will match a service uuid used for SwitchBot devices:
 {
   "bluetooth": [
     {
-    "service_uuids": ["cba20d00-224d-11e6-9fb8-0002a5d5c51b"],
-    },
+      "service_uuids": ["cba20d00-224d-11e6-9fb8-0002a5d5c51b"]
+    }
   ]
 }
 ```
@@ -193,8 +193,8 @@ The following example will match HomeKit devices:
 {
   "bluetooth": [
     {
-    "manufacturer_id": 76,
-    "manufacturer_data_first_byte": 6
+      "manufacturer_id": 76,
+      "manufacturer_data_first_byte": 6
     }
   ]
 }
