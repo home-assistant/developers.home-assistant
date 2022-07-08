@@ -49,6 +49,7 @@ There are a few step names reserved for system use:
 
 | Step name   | Description                                                                                                                                                   |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `bluetooth`        | Invoked if your integration has been discovered via Bluetooth as specified [using `bluetooth` in the manifest](creating_integration_manifest.md#bluetooth).             |
 | `discovery` | _DEPRECATED_ Invoked if your integration has been discovered and the matching step has not been defined.             |
 | `dhcp`      | Invoked if your integration has been discovered via DHCP as specified [using `dhcp` in the manifest](creating_integration_manifest.md#dhcp).             |
 | `hassio`    | Invoked if your integration has been discovered via a Supervisor add-on.
@@ -82,9 +83,9 @@ Should the config flow then abort, the text resource with the key `already_confi
 ```
 
 By setting a unique ID, users will have the option to ignore the discovery of your config entry. That way, they won't be bothered about it anymore.
-If the integration uses DHCP, HomeKit, Zeroconf/mDNS, USB, or SSDP/uPnP to be discovered, supplying a unique ID is required.
+If the integration uses Bluetooth, DHCP, HomeKit, Zeroconf/mDNS, USB, or SSDP/uPnP to be discovered, supplying a unique ID is required.
 
-If a unique ID isn't available, alternatively, the `dhcp`, `zeroconf`, `hassio`, `homekit`, `ssdp`, `usb`, and `discovery` steps can be omitted, even if they are configured in
+If a unique ID isn't available, alternatively, the `bluetooth`, `dhcp`, `zeroconf`, `hassio`, `homekit`, `ssdp`, `usb`, and `discovery` steps can be omitted, even if they are configured in
 the integration manifest. In that case, the `user` step will be called when the item is discovered.
 
 Alternatively, if an integration can't get a unique ID all the time (e.g., multiple devices, some have one, some don't), a helper is available
