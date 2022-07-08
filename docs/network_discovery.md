@@ -44,6 +44,7 @@ entry.async_on_unload(
 ```
 
 The below example shows registering to get callbacks for Nespresso Prodigios.
+
 ```python3
 from homeassistant.components import bluetooth
 
