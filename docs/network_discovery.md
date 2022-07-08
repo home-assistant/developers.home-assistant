@@ -16,7 +16,6 @@ Some integrations may need to know when a device is discovered right away. The B
 The function `bluetooth.async_register_callback` is provided to enable this ability. The function returns a callback that will cancel the registration when called.
 
 The below example shows registering to get callbacks when a Switchbot device is nearby.
-on the network.
 
 ```python3
 from homeassistant.components import bluetooth
