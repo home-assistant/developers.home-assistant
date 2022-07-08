@@ -23,7 +23,7 @@ from homeassistant.components import bluetooth
 ...
 
 @callback
-def _async_discovered_device(service_info: BluetoothServiceInfo, change: BluetoothChange) -> None:
+def _async_discovered_device(service_info: bluetooth.BluetoothServiceInfo, change: bluetooth.BluetoothChange) -> None:
     """Subscribe to bluetooth changes."""
     _LOGGER.warning("New service_info: %s", service_info)
 
