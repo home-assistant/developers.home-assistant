@@ -157,6 +157,50 @@ Result (this is intended functionality for the near feature):
 - Roborock is listed on our user documentation website under integrations with an automatically generated stub page that directs the user to the integration to use.
 - Roborock is listed in Home Assistant when clicking "add integration". When selected, we first show a "redirect text", then the user continues to the Xioami Miio config flow.
 
+
+## Bluetooth
+
+If your integration supports discovery via bluetooth, you can add a matcher to your manifest. If the user has the `bluetooth` integration loaded, it will load the `bluetooth` step of your integration's config flow when it is discovered. We support listening for Bluetooth discovery by matching on `local_name`, `service_uuid`, `manufacturer_id`, and `manufacturer_data_first_byte`. The manifest value is a list of matcher dictionaries, your integration is discovered if all items of any of the specified matchers are found in the Bluetooth data. It's up to your config flow to filter out duplicates.
+
+The following example will match Nespresso Prodigio machines:
+
+```json
+{
+  "bluetooth": [
+    {
+      "local_name": "Prodigio_*"
+    }
+  ]
+}
+```
+
+The following example will match a service uuid used for SwitchBot devices:
+
+```json
+{
+  "bluetooth": [
+    {
+      "service_uuids": ["cba20d00-224d-11e6-9fb8-0002a5d5c51b"]
+    }
+  ]
+}
+```
+
+The following example will match HomeKit devices:
+
+
+```json
+{
+  "bluetooth": [
+    {
+      "manufacturer_id": 76,
+      "manufacturer_data_first_byte": 6
+    }
+  ]
+}
+```
+
+
 ## Zeroconf
 
 If your integration supports discovery via [Zeroconf](https://en.wikipedia.org/wiki/Zero-configuration_networking), you can add the type to your manifest. If the user has the `zeroconf` integration loaded, it will load the `zeroconf` step of your integration's config flow when it is discovered.

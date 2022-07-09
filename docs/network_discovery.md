@@ -7,6 +7,61 @@ Some integrations may need to discover devices on the network via [mDNS/Zeroconf
 
 Home Assistant has built-in helpers to support mDNS/Zeroconf and SSDP. If your integration uses another discovery method that needs to determine which network interfaces to use to broadcast traffic, the [Network](https://www.home-assistant.io/integrations/network/) integration provides a helper API to access the user's interface preferences.
 
+## Bluetooth
+
+### Subscribing to Bluetooth discoveries
+
+Some integrations may need to know when a device is discovered right away. The Bluetooth integration provides a registration API to receive callbacks when a new device is discovered that matches specific key values. The same format for `bluetooth` in [`manifest.json`](creating_integration_manifest.md#bluetooth) is used for matching.
+
+The function `bluetooth.async_register_callback` is provided to enable this ability. The function returns a callback that will cancel the registration when called.
+
+The below example shows registering to get callbacks when a Switchbot device is nearby.
+
+```python
+from homeassistant.components import bluetooth
+
+...
+
+@callback
+def _async_discovered_device(service_info: bluetooth.BluetoothServiceInfo, change: bluetooth.BluetoothChange) -> None:
+    """Subscribe to bluetooth changes."""
+    _LOGGER.warning("New service_info: %s", service_info)
+
+entry.async_on_unload(
+    bluetooth.async_register_callback(
+        hass, _async_discovered_device, {"service_uuids": {"cba20d00-224d-11e6-9fb8-0002a5d5c51b"}}
+    )
+)
+```
+
+The below example shows registering to get callbacks for HomeKit devices.
+
+```python
+from homeassistant.components import bluetooth
+
+...
+
+entry.async_on_unload(
+    bluetooth.async_register_callback(
+        hass, _async_discovered_homekit_device, {"manufacturer_id": 76, "manufacturer_data_first_byte": 6}
+    )
+)
+```
+
+The below example shows registering to get callbacks for Nespresso Prodigios.
+
+```python
+from homeassistant.components import bluetooth
+
+...
+
+entry.async_on_unload(
+    bluetooth.async_register_callback(
+        hass, _async_nespresso_found, {"local_name": "Prodigio_*")}
+    )
+)
+```
+
 ## mDNS/Zeroconf
 
 Home Assistant uses the [python-zeroconf](https://github.com/jstasiak/python-zeroconf) package for mDNS support. As running multiple mDNS implementations on a single host is not recommended, Home Assistant provides internal helper APIs to access the running `Zeroconf` and `AsyncZeroconf` instances.
