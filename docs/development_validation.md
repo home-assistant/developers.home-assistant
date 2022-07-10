@@ -8,11 +8,13 @@ We test the configuration to ensure that users have a great experience and minim
 
 Besides [voluptuous](https://pypi.python.org/pypi/voluptuous) default types, many custom types are available. For an overview, take a look at the [config_validation.py](https://github.com/home-assistant/core/blob/dev/homeassistant/helpers/config_validation.py) helper.
 
-- Types: `string`, `byte`, and `boolean`
-- Entity ID: `entity_id` and `entity_ids`
-- Numbers: `small_float` and `positive_int`
-- Time: `time`, `time_zone`
-- Misc: `template`, `slug`, `temperature_unit`, `latitude`, `longitude`, `isfile`, `sun_event`, `ensure_list`, `port`, `url`,  and `icon`
+- Date/Time: `datetime`, `date`, `positive_timedelta`, `time_period_seconds`, `time_period_str`, `time_zone`, and `time`
+- Entity ID: `entities_domain`, `entity_domain`, `entity_ids_or_uuids`, `entity_ids`, `entity_id_or_uuid`, and `entity_id`
+- Location: `latitude`, `longitude`, and `gps`
+- Numbers: `positive_float`, `positive_int`, and `small_float`
+- String: `is_regex`, `matches_regex`, `match_all`, `slugify`, `slug`, `string_with_no_html`, `url_no_path`, `url`, and `whitespace`
+- Types: `boolean`, `byte`, `enum`, and `string`
+- Misc: `custom_serializer`, `deprecated`, `dynamic_template`, `ensure_list_csv`, `ensure_list`, `expand_condition_shorthand`, `fake_uuid4_hex`, `has_at_least_one_key`, `has_at_most_one_key`, `icon`, `isdevice`, `isdir`, `isfile`, `key_dependency`, `key_value_schemas`, `path`, `port`, `removed`, `remove_falsy`, `schema_with_slug_keys`, `service`, `socket_timeout`, `sun_event`, `temperature_unit`, `template_complex`, `template`, `uuid4_hex`, and `x10_address`
 
 To validate platforms using [MQTT](https://www.home-assistant.io/components/mqtt/), `valid_subscribe_topic` and `valid_publish_topic` are available.
 
