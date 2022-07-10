@@ -1,18 +1,18 @@
 ---
 author: Erik Montnemery
 authorURL: https://github.com/emontnemery
-title: "Number entity refactoring to support unit conversion"
+title: "Adopting a new way to name entities"
 ---
 
 ## New recommendations for entity naming
 
-We are working on improving and standardizing our entity naming. This will allow us to in the UI show entities in the right context in the future while removing some error-prone magic mangling of entity names from the code base.
+We are working on improving and standardizing our entity naming. This will allow us to show, in the UI, entities in the right context in the future while removing some error-prone magic mangling of entity names from the code base.
 
 The short story is:
 
 - Devices have their name as they have today, for example, "Dishwasher".
 - Entities will have their own name (without device, area). Or, they may optionally set the name to `None` (in that case they inherit the device name).
-- Device, Area, and Entity names all start with a capital letter, the rest of the words are lower case (unless its a word that represents a brand/name/abbreviation of course).
+- Device, Area, and Entity names all start with a capital letter, the rest of the words are lower case (unless it's a word that represents a brand/name/abbreviation of course).
 - Every entity which has been migrated to follow these rules should set the [`has_entity_name`](https://developers.home-assistant.io/docs/core/entity#entity-naming) property to `True`.
 
 During the migration period, we use the `has_entity_name` property to create "backward compatible" friendly names. In the future, we can show deprecation warnings for entities that don't set this property, and later, remove it entirely.
