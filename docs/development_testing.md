@@ -77,12 +77,6 @@ script/lint
 In case you want to check the code coverage for your new component, run the following from the root of the repository:
 
 ```shell
-pytest ./tests/components/<your_component>/ --cov=homeassistant.components.<your_component> --cov-report term-missing -vv
-```
-
-Some components are asyncio-driven. If you encounter errors like `RuntimeError: Event loop is closed`, use the below example instead:
-
-```shell
 pytest ./tests/components/<your_component>/ --asyncio-mode=strict --cov=homeassistant.components.<your_component> --cov-report term-missing -vv
 ```
 
