@@ -4,8 +4,6 @@ authorURL: https://github.com/emontnemery
 title: "Adopting a new way to name entities"
 ---
 
-## New recommendations for entity naming
-
 We are working on improving and standardizing our entity naming. This will allow us to show, in the UI, entities in the right context in the future while removing some error-prone magic mangling of entity names from the code base.
 
 The short story is:
