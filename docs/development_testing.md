@@ -80,6 +80,12 @@ In case you want to check the code coverage for your new component, run the foll
 pytest ./tests/components/<your_component>/ --cov=homeassistant.components.<your_component> --cov-report term-missing -vv
 ```
 
+Some components are asyncio-driven. If you encounter errors like `RuntimeError: Event loop is closed`, use the below example instead:
+
+```shell
+pytest ./tests/components/<your_component>/ --asyncio-mode=strict --cov=homeassistant.components.<your_component> --cov-report term-missing -vv
+```
+
 ### Preventing linter errors
 
 Several linters are setup to run automatically when you try to commit as part of running `script/setup` in the [virtual environment](development_environment.mdx).
