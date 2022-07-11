@@ -79,7 +79,7 @@ entry.async_on_unload(
 
 ### Checking if a device is present
 
-To determine if a device is still present, call the `bluetooh.async_address_present` API. This call is helpful if your integration needs the device to be present to consider it available. As this call can be expensive with many devices, we recommend only calling it every five minutes.
+To determine if a device is still present, call the `bluetooth.async_address_present` API. This call is helpful if your integration needs the device to be present to consider it available. As this call can be expensive with many devices, we recommend only calling it every five minutes.
 
 ```python
 from homeassistant.components import bluetooth
