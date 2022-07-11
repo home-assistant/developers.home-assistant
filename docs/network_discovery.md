@@ -11,7 +11,7 @@ Home Assistant has built-in helpers to support mDNS/Zeroconf and SSDP. If your i
 
 ### Subscribing to Bluetooth discoveries
 
-Some integrations may need to know when a device is discovered right away. The Bluetooth integration provides a registration API to receive callbacks when a new device is discovered that matches specific key values. The same format for `bluetooth` in [`manifest.json`](creating_integration_manifest.md#bluetooth) is used for matching.
+Some integrations may need to know when a device is discovered right away. The Bluetooth integration provides a registration API to receive callbacks when a new device is discovered that matches specific key values. The same format for `bluetooth` in [`manifest.json`](creating_integration_manifest.md#bluetooth) is used for matching. In addition to the matchers used in the `manifest.json`, `address` can also be used as a matcher.
 
 The function `bluetooth.async_register_callback` is provided to enable this ability. The function returns a callback that will cancel the registration when called.
 
@@ -61,6 +61,42 @@ entry.async_on_unload(
     )
 )
 ```
+
+
+The below example shows registering to get callbacks for a device with the address `44:33:11:22:33:22`.
+
+```python
+from homeassistant.components import bluetooth
+
+...
+
+entry.async_on_unload(
+    bluetooth.async_register_callback(
+        hass, _async_specific_device_found, {"address": "44:33:11:22:33:22")}
+    )
+)
+```
+
+### Checking if a device is present
+
+To determine if a device is still present, call the `bluetooh.async_address_present` API. This call is helpful if your integration needs the device to be present to consider it available. As this call can be expensive with many devices, we recommend only calling it every five minutes.
+
+```python
+from homeassistant.components import bluetooth
+
+bluetooth.async_address_present(hass, "44:44:33:11:23:42")
+```
+
+### Fetching all discovered devices
+
+To access the list of previous discoveries, call the `bluetooth.async_discovered_service_info` API. Only devices that are still present will be in the cache.
+
+```python
+from homeassistant.components import bluetooth
+
+service_infos = bluetooth.async_discovered_service_info(hass)
+```
+
 
 ## mDNS/Zeroconf
 
