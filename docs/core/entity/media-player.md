@@ -144,7 +144,7 @@ class MyMediaPlayer(MediaPlayerEntity):
         """Play a piece of media."""
         if media_source.is_media_source_id(media_id):
             media_type = MEDIA_TYPE_MUSIC
-            play_item = await media_source.async_resolve_media(self.hass, media_id)
+            play_item = await media_source.async_resolve_media(self.hass, media_id, self.entity_id)
             # play_item returns a relative URL if it has to be resolved on the Home Assistant host
             # This call will turn it into a full URL
             media_id = async_process_play_media_url(self.hass, play_item.url)
