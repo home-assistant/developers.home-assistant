@@ -398,6 +398,6 @@ The following IoT classes are accepted in the manifest:
 - `cloud_push`: Integration of this device happens via the cloud and requires an active internet connection. Home Assistant will be notified as soon as a new state is available.
 - `local_polling`: Offers direct communication with device. Polling the state means that an update might be noticed later.
 - `local_push`: Offers direct communication with device. Home Assistant will be notified as soon as a new state is available.
-- `calculated`: The integration does not handle communication on it's own, but provides a calculated result.
+- `calculated`: The integration does not handle communication on its own, but provides a calculated result.
 
 [iot_class]: https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things/#classifiers
