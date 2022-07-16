@@ -8,8 +8,9 @@ This support is added by creating a `significant_change.py` platform file with a
 
 ```python
 from typing import Any, Optional
-from homeassistant.core import callback
+from homeassistant.core import HomeAssistant, callback
 
+# pylint: disable=unused-argument
 @callback
 def async_check_significant_change(
     hass: HomeAssistant,
@@ -17,8 +18,8 @@ def async_check_significant_change(
     old_attrs: dict,
     new_state: str,
     new_attrs: dict,
-    **kwargs: Any,
-) -> Optional[bool]
+    **kwargs: Any
+) -> Optional[bool]:
 ```
 
 This function is passed a state that was previously considered significant and the new state. It is not just passing the last 2 known states in. The function should return a boolean if it is significant or not, or `None` if the function doesn't know.
