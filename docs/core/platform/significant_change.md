@@ -10,14 +10,13 @@ This support is added by creating a `significant_change.py` platform file with a
 from typing import Any, Optional
 from homeassistant.core import HomeAssistant, callback
 
-# pylint: disable=unused-argument
 @callback
 def async_check_significant_change(
     hass: HomeAssistant,
     old_state: str,
     old_attrs: dict,
     new_state: str,
-    new_attrs: dict,
+    new_attrs: dict
     **kwargs: Any
 ) -> bool | None:
 ```
