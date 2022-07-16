@@ -16,8 +16,8 @@ def async_check_significant_change(
     old_state: str,
     old_attrs: dict,
     new_state: str,
-    new_attrs: dict
-    **kwargs: Any
+    new_attrs: dict,
+    **kwargs: Any,
 ) -> bool | None:
 ```
 
