@@ -19,7 +19,7 @@ def async_check_significant_change(
     new_state: str,
     new_attrs: dict,
     **kwargs: Any
-) -> Optional[bool]:
+) -> bool | None:
 ```
 
 This function is passed a state that was previously considered significant and the new state. It is not just passing the last 2 known states in. The function should return a boolean if it is significant or not, or `None` if the function doesn't know.
