@@ -77,6 +77,16 @@ entry.async_on_unload(
 )
 ```
 
+### Fetching the bleak `BLEDevice` from the `address`
+
+Integrations wishing to avoid the overhead of starting an additional scanner to resolve the address may call the `bluetooth.async_ble_device_from_address` API, which returns a `BLEDevice` if the `bluetooth` integration scanner has recently seen the device. Integration MUST fall back to connecting via the `address` if the `BLEDevice` is unavailable.
+
+```python
+from homeassistant.components import bluetooth
+
+ble_device = bluetooth.async_ble_device_from_address(hass, "44:44:33:11:23:42")
+```
+
 ### Checking if a device is present
 
 To determine if a device is still present, call the `bluetooth.async_address_present` API. This call is helpful if your integration needs the device to be present to consider it available. As this call can be expensive with many devices, we recommend only calling it every five minutes.
