@@ -77,6 +77,20 @@ entry.async_on_unload(
 )
 ```
 
+
+### Subscribing to unavailable callbacks
+
+To get a callback when the bluetooth stack can no longer see a device, call the `bluetooth.async_track_unavailable` API.
+
+```python
+from homeassistant.components import bluetooth
+
+def _unavailable_callback(address: str) -> None:
+   print(f"{address} is no longer seen.")
+   
+cancel = bluetooth.async_track_unavailable(hass, _unavailable_callback, "44:44:33:11:23:42")
+```
+
 ### Fetching the bleak `BLEDevice` from the `address`
 
 Integrations wishing to avoid the overhead of starting an additional scanner to resolve the address may call the `bluetooth.async_ble_device_from_address` API, which returns a `BLEDevice` if the `bluetooth` integration scanner has recently seen the device. Integration MUST fall back to connecting via the `address` if the `BLEDevice` is unavailable.
