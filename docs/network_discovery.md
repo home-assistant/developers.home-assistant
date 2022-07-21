@@ -86,7 +86,7 @@ To get a callback when the bluetooth stack can no longer see a device, call the 
 from homeassistant.components import bluetooth
 
 def _unavailable_callback(address: str) -> None:
-    _LOGGER.debug("% is no longer seen", address)
+    _LOGGER.debug("%s is no longer seen", address)
    
 cancel = bluetooth.async_track_unavailable(hass, _unavailable_callback, "44:44:33:11:23:42")
 ```
