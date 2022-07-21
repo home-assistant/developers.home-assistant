@@ -80,7 +80,7 @@ entry.async_on_unload(
 
 ### Subscribing to unavailable callbacks
 
-To get a callback when the bluetooth stack can no longer see a device, call the `bluetooth.async_track_unavailable` API.
+To get a callback when the bluetooth stack can no longer see a device, call the `bluetooth.async_track_unavailable` API. For performance reasons, it may take up to five minutes to get a callback once the device is no longer seen.
 
 ```python
 from homeassistant.components import bluetooth
