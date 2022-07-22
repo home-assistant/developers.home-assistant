@@ -77,6 +77,15 @@ entry.async_on_unload(
 )
 ```
 
+### Fetch the shared BleakScanner instance
+
+Integrations that need an instance of a `BleakScanner` should call the `bluetooth.async_get_scanner` API. This API returns a wrapper around a single `BleakScanner` that allows integrations to share without overloading the system.
+
+```python
+from homeassistant.components import bluetooth
+  
+scanner = bluetooth.async_get_scanner(hass)
+```
 
 ### Subscribing to unavailable callbacks
 
