@@ -160,7 +160,7 @@ Result (this is intended functionality for the near feature):
 
 ## Bluetooth
 
-If your integration supports discovery via bluetooth, you can add a matcher to your manifest. If the user has the `bluetooth` integration loaded, it will load the `bluetooth` step of your integration's config flow when it is discovered. We support listening for Bluetooth discovery by matching on `local_name`, `service_uuid`, `manufacturer_id`, and `manufacturer_data_start`. The `manufacturer_data_start` field expects a list of bytes encoded as integer values from 0-255. The manifest value is a list of matcher dictionaries, your integration is discovered if all items of any of the specified matchers are found in the Bluetooth data. It's up to your config flow to filter out duplicates.
+If your integration supports discovery via bluetooth, you can add a matcher to your manifest. If the user has the `bluetooth` integration loaded, it will load the `bluetooth` step of your integration's config flow when it is discovered. We support listening for Bluetooth discovery by matching on `local_name`, `service_data_uuid`, `service_uuid`, `manufacturer_id`, and `manufacturer_data_start`. The `manufacturer_data_start` field expects a list of bytes encoded as integer values from 0-255. The manifest value is a list of matcher dictionaries, your integration is discovered if all items of any of the specified matchers are found in the Bluetooth data. It's up to your config flow to filter out duplicates.
 
 The following example will match Nespresso Prodigio machines:
 
@@ -174,13 +174,25 @@ The following example will match Nespresso Prodigio machines:
 }
 ```
 
-The following example will match a service uuid used for SwitchBot devices:
+The following example will match a service uuid used for SwitchBot bot and curtain devices:
 
 ```json
 {
   "bluetooth": [
     {
-      "service_uuids": ["cba20d00-224d-11e6-9fb8-0002a5d5c51b"]
+      "service_uuid": ["cba20d00-224d-11e6-9fb8-0002a5d5c51b"]
+    }
+  ]
+}
+```
+
+The following example will match a service uuid used for SwitchBot sensor devices:
+
+```json
+{
+  "bluetooth": [
+    {
+      "service_data_uuid": ["0000fd3d-0000-1000-8000-00805f9b34fb"]
     }
   ]
 }
