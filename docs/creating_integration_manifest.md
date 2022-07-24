@@ -174,7 +174,7 @@ The following example will match Nespresso Prodigio machines:
 }
 ```
 
-The following example will match a service data uuid used for SwitchBot bot and curtain devices:
+The following example will match a service uuid used for SwitchBot bot and curtain devices:
 
 ```json
 {
@@ -186,7 +186,7 @@ The following example will match a service data uuid used for SwitchBot bot and 
 }
 ```
 
-The following example will match a service uuid used for SwitchBot sensor devices:
+The following example will match a service data uuid used for SwitchBot sensor devices:
 
 ```json
 {
