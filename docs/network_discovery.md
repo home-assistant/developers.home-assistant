@@ -11,7 +11,7 @@ Home Assistant has built-in helpers to support mDNS/Zeroconf and SSDP. If your i
 
 ### Best practices
 
-- When connecting to Bluetooth devices with `BleakClient`, always use `BLEDevice` instead of the address to avoid the client starting a scanner to find the `BLEDevice`. Call the `bluetooth.async_ble_device_from_address` API if you only have the `address`.
+- When connecting to Bluetooth devices with `BleakClient`, always use the `BLEDevice` object instead of the address to avoid the client starting a scanner to find the `BLEDevice`. Call the `bluetooth.async_ble_device_from_address` API if you only have the `address`.
 
 - Avoid reusing a `BleakClient` between connections since this will make connecting less reliable.
 
