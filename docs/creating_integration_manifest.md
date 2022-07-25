@@ -174,7 +174,7 @@ The following example will match Nespresso Prodigio machines:
 }
 ```
 
-The following example will match a service uuid used for SwitchBot bot and curtain devices:
+The following example will match service data with a 128 bit uuid used for SwitchBot bot and curtain devices:
 
 ```json
 {
@@ -186,7 +186,7 @@ The following example will match a service uuid used for SwitchBot bot and curta
 }
 ```
 
-The following example will match a service data uuid used for SwitchBot sensor devices:
+If you want to match service data with a 16 bit uuid, you will have to convert it to a 128 bit uuid first, by replacing the 3rd and 4th byte in `00000000-0000-1000-8000-00805f9b34fb` with the 16 bit uuid. For example, for Switchbot sensor devices, the 16 bit uuid is `0xfd3d`, the corresponding 128 bit uuid becomes `0000fd3d-0000-1000-8000-00805f9b34fb`. The following example will therefore match service data with a 16 bit uuid used for SwitchBot sensor devices:
 
 ```json
 {
