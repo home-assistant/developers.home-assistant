@@ -13,6 +13,8 @@ Home Assistant has built-in helpers to support mDNS/Zeroconf and SSDP. If your i
 
 - When connecting to Bluetooth devices with `BleakClient`, always use the `BLEDevice` object instead of the `address` to avoid the client starting a scanner to find the `BLEDevice`. Call the `bluetooth.async_ble_device_from_address` API if you only have the `address`.
 
+- Call the `bluetooth.async_get_scanner` API to get a `BleakScanner` instance and pass it to your library. The returned scanner avoids the overhead of running multiple scanners, which is significant. Additionally, the wrapped scanner will continue functioning if the user changes the Bluetooth adapter settings.
+
 - Avoid reusing a `BleakClient` between connections since this will make connecting less reliable.
 
 - Fetch a new `BLEDevice` from the `bluetooth.async_ble_device_from_address` API each time a connection is made. Alternatively, register a callback with `bluetooth.async_register_callback` and replace a cached `BLEDevice` each time a callback is received. The details of a `BLEDevice` object may change due to a change in the active adapter or environment.
