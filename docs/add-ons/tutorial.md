@@ -70,7 +70,7 @@ echo "Hello world!"
 ```
 
 :::note
-Make sure your editor is using UNIX-like line breaks (LF), not Dos/Windows (CRLF).
+Make sure your editor is using UNIX-like line breaks (LF), not DOS/Windows (CRLF).
 :::
 
 ## Step 2: Installing and testing your add-on
