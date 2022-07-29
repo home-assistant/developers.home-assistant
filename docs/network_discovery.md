@@ -35,13 +35,13 @@ from homeassistant.components import bluetooth
 ...
 
 @callback
-def _async_discovered_device(service_info: bluetooth.BluetoothServiceInfo, change: bluetooth.BluetoothChange) -> None:
+def _async_discovered_device(service_info: bluetooth.BluetoothServiceInfoBleak, change: bluetooth.BluetoothChange) -> None:
     """Subscribe to bluetooth changes."""
     _LOGGER.warning("New service_info: %s", service_info)
 
 entry.async_on_unload(
     bluetooth.async_register_callback(
-        hass, _async_discovered_device, {"service_uuids": {"cba20d00-224d-11e6-9fb8-0002a5d5c51b"}}
+        hass, _async_discovered_device, {"service_uuids": {"cba20d00-224d-11e6-9fb8-0002a5d5c51b"}}, bluetooth.BluetoothScanningMode.ACTIVE
     )
 )
 ```
@@ -55,7 +55,7 @@ from homeassistant.components import bluetooth
 
 entry.async_on_unload(
     bluetooth.async_register_callback(
-        hass, _async_discovered_homekit_device, {"manufacturer_id": 76, "manufacturer_data_first_byte": 6}
+        hass, _async_discovered_homekit_device, {"manufacturer_id": 76, "manufacturer_data_first_byte": 6}, bluetooth.BluetoothScanningMode.ACTIVE
     )
 )
 ```
@@ -69,7 +69,7 @@ from homeassistant.components import bluetooth
 
 entry.async_on_unload(
     bluetooth.async_register_callback(
-        hass, _async_nespresso_found, {"local_name": "Prodigio_*")}
+        hass, _async_nespresso_found, {"local_name": "Prodigio_*")}, bluetooth.BluetoothScanningMode.ACTIVE
     )
 )
 ```
@@ -84,7 +84,7 @@ from homeassistant.components import bluetooth
 
 entry.async_on_unload(
     bluetooth.async_register_callback(
-        hass, _async_specific_device_found, {"address": "44:33:11:22:33:22")}
+        hass, _async_specific_device_found, {"address": "44:33:11:22:33:22")}, bluetooth.BluetoothScanningMode.ACTIVE
     )
 )
 ```
@@ -140,6 +140,28 @@ To access the list of previous discoveries, call the `bluetooth.async_discovered
 from homeassistant.components import bluetooth
 
 service_infos = bluetooth.async_discovered_service_info(hass)
+```
+
+### Waiting for a specific advertisement
+
+To wait for a specific advertisement, call the `bluetooth.async_process_advertisements` API.
+
+```python
+from homeassistant.components import bluetooth
+
+def _process_more_advertisements(
+    service_info: BluetoothServiceInfoBleak,
+) -> bool:
+    """Wait for an advertisement with 323 in the manufacturer_data."""
+    return 323 in service_info.manufacturer_data
+
+service_info = await bluetooth.async_process_advertisements(
+    hass
+    _process_more_advertisements,
+    {"address": discovery_info.address},
+    BluetoothScanningMode.ACTIVE,
+    ADDITIONAL_DISCOVERY_TIMEOUT
+)
 ```
 
 
