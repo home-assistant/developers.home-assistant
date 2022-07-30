@@ -69,6 +69,7 @@ module.exports = {
       logo: {
         alt: "Home Assistant",
         src: "img/logo-white.svg",
+        height: "70px",
         href: "https://www.home-assistant.io",
       },
       style: "dark",
