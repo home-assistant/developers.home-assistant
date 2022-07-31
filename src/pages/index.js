@@ -9,6 +9,7 @@ import listPlugin from '@fullcalendar/list';
 import googleCalendarPlugin from '@fullcalendar/google-calendar';
 
 // XMLHttpRequest is not present when building Docusaurus since it's not browser
+// Required for FullCalendar
 global.XMLHttpRequest = require('xhr2');
 
 const recentPosts = require("../../.docusaurus/docusaurus-plugin-content-blog/default/blog-post-list-prop-default.json");
