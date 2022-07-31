@@ -4,6 +4,9 @@ import Layout from "@theme/Layout";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.css";
+import FullCalendar from '@fullcalendar/react'
+import listPlugin from '@fullcalendar/list';
+import googleCalendarPlugin from '@fullcalendar/google-calendar';
 
 const recentPosts = require("../../.docusaurus/docusaurus-plugin-content-blog/default/blog-post-list-prop-default.json");
 const features = [
@@ -95,15 +98,29 @@ const features = [
     imageUrl: "",
     description: (
       <>
-        <iframe
-          title="Upcoming Events Calendar"
-          src="https://calendar.google.com/calendar/embed?height=400&amp;wkst=2&amp;bgcolor=%23ffffff&amp;ctz=America%2FLos_Angeles&amp;src=cDA3bjk4Z28xMW9uYW1kMDhkMGttcTZqaHNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;color=%23039BE5&amp;title=Release%20Schedule&amp;mode=AGENDA&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;showNav=0&amp;showDate=0&amp;showTitle=0"
-          style={{ borderWidth: 0, margin: "auto" }}
-          width="300"
-          height="200"
-          frameBorder="0"
-          scrolling="no"
-        />
+      <FullCalendar
+        plugins={[ listPlugin, googleCalendarPlugin ]}
+        // TODO: PLEASE REPLACE ME
+        googleCalendarApiKey="AIzaSyBY2X9aH08tNRNZYHCJ5LiR7PQk79799EQ"
+        events={{ googleCalendarId: "p07n98go11onamd08d0kmq6jhs@group.calendar.google.com" }}
+        initialView="list"
+        displayEventTime={false}
+        headerToolbar={false}
+        visibleRange={{
+          start: new Date(),
+          end: new Date().setDate(new Date().getDate() + 365 * 2)
+        }}
+        eventDidMount={function(arg) {
+          console.log(arg.el.firstChild)
+        }}
+      />
+      <ul style={{marginTop: '8px'}}>
+        <li>
+          <a href="https://calendar.google.com/calendar?cid=p07n98go11onamd08d0kmq6jhs@group.calendar.google.com">
+            Add to Google Calendar
+          </a>
+        </li>
+      </ul>
       </>
     ),
   },

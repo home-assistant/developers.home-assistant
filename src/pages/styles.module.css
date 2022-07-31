@@ -60,3 +60,22 @@ a.heroText{
   height: 200px;
   width: 200px;
 }
+
+/* Styles for front page calendar */
+:root {
+  --fc-event-border-color: var(--ifm-color-primary);
+}
+
+:global(.fc-list-day-text), :global(.fc-list-day-text:hover) {
+  color: var(--ifm-font-color-base);
+}
+:global(.fc-list-event-title) {
+  font-size: 0.95em;
+}
+/* Fix for full width */
+:global(.fc .fc-list-table) {
+  display: table;
+}
+:global(.fc .fc-list-sticky .fc-list-day > * ) {
+  position: inherit !important;
+}

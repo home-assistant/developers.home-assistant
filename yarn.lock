@@ -1963,6 +1963,37 @@
     mark.js "^8.11.1"
     tslib "^2.4.0"
 
+"@fullcalendar/common@~5.11.2":
+  version "5.11.2"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/common/-/common-5.11.2.tgz#2b198a56d315b0f4d4197d730f9303a9ba8954f8"
+  integrity sha512-2YBRs4IFrZlo7UL7hEHK+QgnuQnVIfwSspCOy0Qe+DtU2hu3myPrxsW0Tt/8RaoWsRndRDw5jeJzpjcVHDSSGQ==
+  dependencies:
+    tslib "^2.1.0"
+
+"@fullcalendar/google-calendar@^5.11.2":
+  version "5.11.2"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/google-calendar/-/google-calendar-5.11.2.tgz#829a473043b01bb5980e64efb38615c0b1395dbd"
+  integrity sha512-quLZG5SEQuyo5hAc+TdB/wwAK0axjVM4Tjt2weOBtNIwA+raSEKDKdNzaeYUyLxMZGuNbk6/kBIj3BYiBS03yQ==
+  dependencies:
+    "@fullcalendar/common" "~5.11.2"
+    tslib "^2.1.0"
+
+"@fullcalendar/list@^5.11.2":
+  version "5.11.2"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/list/-/list-5.11.2.tgz#d986170d71d3cc50554655b91ca39dcb53894178"
+  integrity sha512-qzf0LwRif7gxjmoW2jxOARKscsTB//b+9IzQXtbnfGlm00f+YPYP21lUK83O7ztsmvunCWZPSZSFgk2yz72WVQ==
+  dependencies:
+    "@fullcalendar/common" "~5.11.2"
+    tslib "^2.1.0"
+
+"@fullcalendar/react@^5.11.2":
+  version "5.11.2"
+  resolved "https://registry.yarnpkg.com/@fullcalendar/react/-/react-5.11.2.tgz#019e6a0573d869c2a52f63426e13593857ee2d30"
+  integrity sha512-OnLvfV406VEQcK4QGN8xR4ro6Manp9dKE7/n9dhs19J1kKpqS1w1sIEYg1dT11njbk0Ob+TdF3cXLDFq73jUlA==
+  dependencies:
+    "@fullcalendar/common" "~5.11.2"
+    tslib "^2.1.0"
+
 "@hapi/hoek@^9.0.0":
   version "9.1.1"
   resolved "https://registry.yarnpkg.com/@hapi/hoek/-/hoek-9.1.1.tgz#9daf5745156fd84b8e9889a2dc721f0c58e894aa"
