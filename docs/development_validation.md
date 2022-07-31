@@ -6,7 +6,7 @@ The `configuration.yaml` file contains the configuration options for components 
 
 We test the configuration to ensure that users have a great experience and minimize notifications if something is wrong with a platform or component setup before Home Assistant runs.
 
-Besides [voluptuous](https://pypi.python.org/pypi/voluptuous) default types, many custom types are available. For an overview, take a look at the [config_validation.py](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/helpers/config_validation.py) helper.
+Besides [voluptuous](https://pypi.python.org/pypi/voluptuous) default types, many custom types are available. For an overview, take a look at the [config_validation.py](https://github.com/home-assistant/core/blob/dev/homeassistant/helpers/config_validation.py) helper.
 
 - Types: `string`, `byte`, and `boolean`
 - Entity ID: `entity_id` and `entity_ids`

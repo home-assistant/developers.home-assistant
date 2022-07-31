@@ -6,10 +6,12 @@ Each add-on is stored in a folder. The file structure looks like this:
 
 ```text
 addon_name/
+  translations/
+    en.yaml
   apparmor.txt
-  build.json
+  build.yaml
   CHANGELOG.md
-  config.json
+  config.yaml
   DOCS.md
   Dockerfile
   icon.png
@@ -17,6 +19,12 @@ addon_name/
   README.md
   run.sh
 ```
+
+:::note
+Translation files, `config`  and `build` all support `.json`, `.yml` and `.yaml` as the file type.
+
+To keep it simple all examples are using `.yaml`
+:::
 
 ## Add-on script
 
@@ -53,10 +61,10 @@ All add-ons are based on latest Alpine Linux image. Home Assistant will automati
 ARG BUILD_FROM
 FROM $BUILD_FROM
 
-ENV LANG C.UTF-8
-
 # Install requirements for add-on
-RUN apk add --no-cache example_alpine_package
+RUN \
+  apk add --no-cache \
+    example_alpine_package
 
 # Copy data for add-on
 COPY run.sh /
@@ -68,10 +76,13 @@ CMD [ "/run.sh" ]
 If you don't use local build on device or our build script, make sure that the Dockerfile have also a set of labels include:
 
 ```dockerfile
-LABEL io.hass.version="VERSION" io.hass.type="addon" io.hass.arch="armhf|aarch64|i386|amd64"
+LABEL \
+  io.hass.version="VERSION" \
+  io.hass.type="addon" \
+  io.hass.arch="armhf|aarch64|i386|amd64"
 ```
 
-It is possible to use own base image with `build.json` or if you do not need support for automatic multi-arch building you can also use a simple docker `FROM`.
+It is possible to use own base image with `build.yaml` or if you do not need support for automatic multi-arch building you can also use a simple docker `FROM`.
 
 ### Build Args
 
@@ -79,125 +90,138 @@ We support the following build arguments by default:
 
 | ARG | Description |
 |-----|-------------|
-| BUILD_FROM | Hold image for dynamic builds or buildings over our systems.
-| BUILD_VERSION | Add-on version (read from `config.json`).
-| BUILD_ARCH | Hold current build arch inside.
+| `BUILD_FROM` | Holds the image for dynamic builds or buildings over our systems.
+| `BUILD_VERSION` | Add-on version (read from `config.yaml`).
+| `BUILD_ARCH` | Holds the current build arch inside.
 
-## Add-on config
+## Add-on configuration
 
-The configuration for an add-on is stored in `config.json`.
+The configuration for an add-on is stored in `config.yaml`.
 
-```json
-{
-  "name": "xy",
-  "version": "1.2",
-  "slug": "folder",
-  "description": "long description",
-  "arch": ["amd64"],
-  "url": "website with more information about add-on (e.g., a forum thread for support)",
-  "startup": "application",
-  "boot": "auto",
-  "ports": {
-    "123/tcp": 123
-  },
-  "map": ["config:rw", "ssl"],
-  "options": {},
-  "schema": {},
-  "image": "repo/{arch}-my-custom-addon"
-}
+```yaml
+name: "Hello world"
+version: "1.1.0"
+slug: folder
+description: >-
+  "Long description"
+arch:
+  - amd64
+url: "website with more information about add-on (e.g., a forum thread for support)"
+ports:
+  123/tcp: 123
+map:
+  - config:rw
+  - ssl
+image: repo/{arch}-my-custom-addon
 ```
 
-| Key | Type | Required | Description |
+Note:  Avoid the use of this filename for anything other than add-on configuration, as the Supervisor does a recursive lookup.
+
+### Required configuration options
+
+| Key | Type | Description |
+| --- | ---- | ----------- |
+| `name` | string | The name of the add-on.
+| `version` | string | Version of the add-on. If you are using a docker image with the `image` option, this needs to match the tag of the image that will be used.
+| `slug` | string | Slug of the add-on. This needs to be unique in the scope of the [repository](/docs/add-ons/repository) that the add-on is published in and URI friendly.
+| `description` | string | Description of the add-on.
+| `arch` | list | A list of supported architectures: `armhf`, `armv7`, `aarch64`, `amd64`, `i386`.
+
+### Optional configuration options
+
+| Key | Type | Default | Description |
 | --- | ---- | -------- | ----------- |
-| name | string | yes | Name of the add-on.
-| version | string | yes | Version of the add-on.
-| slug | string | yes | Slug of the add-on. This needs to be unique in the scope of the [repository](repository.md) that the add-on is published in and URI friendly.
-| description | string | yes | Description of the add-on.
-| arch | list | yes | List of supported arch: `armhf`, `armv7`, `aarch64`, `amd64`, `i386`.
-| machine | list | no | Default it support any machine type. You can select that this add-on run only on specific machines. You can use `!` before a machine type to negate it.
-| url | url | no | Homepage of the add-on. Here you can explain the add-ons and options.
-| startup | string | no | Default `application`. `initialize` will start add-on on setup of Home Assistant. `system` is for things like databases and not dependent on other things. `services` will start before Home Assistant, while `application` is started afterwards. Finally `once` is for applications that don't run as a daemon.
-| webui | string | no | An URL for the web interface of this add-on. Like `http://[HOST]:[PORT:2839]/dashboard`, the port needs the internal port, which will be replaced with the effective port. It is also possible to bind the protocol part to a configuration options with: `[PROTO:option_name]://[HOST]:[PORT:2839]/dashboard` and it's looked up if it is `true` and it's going to `https`.
-| boot | string | no | Default `auto`. `auto` start at boot is controlled by the system. `manual` for only manual starting.
-| ports | dict | no | Network ports to expose from the container. Format is `"container-port/type": host-port`. If the host port is `null` then the mapping is disabled.
-| ports_description | dict | no | Network ports description mapping. Format is `"container-port/type": "description of this port"`.
-| host_network | bool | no | If `true`, the add-on runs on host network.
-| host_ipc | bool | no | Default `false`. Allow to share the IPC namespace with others.
-| host_dbus | bool | no | Default `false`. Map the host D-Bus service into the add-on.
-| host_pid | bool | no | Default `false`. Allow to run container on host PID namespace. Works only for not protected add-ons.
-| devices | list | no | Device list to map into the add-on. Format is: `<path_on_host>`. E.g., `/dev/ttyAMA0`
-| homeassistant | string | no | Pin a minimum required Home Assistant Core version for the add-on. Value is a version string like `0.91.2`.
-| hassio_role | str | no | Default `default`. Role-based access to Supervisor API. Available: `default`, `homeassistant`, `backup`, `manager` or `admin`
-| hassio_api | bool | no | This add-on can access the Supervisor's REST API. Use `http://supervisor`.
-| homeassistant_api | bool | no | This add-on can access to the Home Assistant REST API proxy. Use `http://supervisor/core/api`.
-| docker_api | bool | no | Allow read-only access to Docker API for add-on. Works only for not protected add-ons.
-| privileged | list | no | Privilege for access to hardware/system. Available access: `NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_TIME`, `SYS_NICE`, `SYS_RESOURCE`, `SYS_PTRACE`, `SYS_MODULE` or `DAC_READ_SEARCH`
-| full_access | bool | no | Give full access to hardware like the privileged mode in Docker. Works only for not protected add-ons.
-| apparmor | bool/string | no | Enable or disable AppArmor support. If it is enable, you can also use custom profiles with the name of the profile.
-| map | list | no | List of maps for additional Home Assistant folders. Possible values: `config`, `ssl`, `addons`, `backup`, `share` or `media`. Defaults to `ro`, which you can change by adding `:rw` to the end of the name.
-| environment | dict | no | A dictionary of environment variable to run add-on.
-| audio | bool | no | Mark this add-on to use internal audio system. We map a working PulseAudio setup into container. If your application does not support PulseAudio, you may need to install: Alpine Linux `alsa-plugins-pulse` or Debian/Ubuntu `libasound2-plugins`.
-| video | bool | no | Mark this add-on to use the internal video system. All available devices will be mapped into the add-on.
-| gpio | bool | no | If this is set to `true`, `/sys/class/gpio` will map into add-on for access to GPIO interface from kernel. Some libraries also need  `/dev/mem` and `SYS_RAWIO` for read/write access to this device. On systems with AppArmor enabled, you need to disable AppArmor or provide you own profile for the add-on, which is better for security.
-| usb | bool | no | If this is set to `true`, it would map the raw USB access `/dev/bus/usb` into add-on with plug&play support.
-| uart | bool | no | Default `false`. Auto mapping all UART/serial devices from the host into the add-on.
-| udev | bool | no | Default `false`. Set this `true`, gets the host udev database read-only mounted into the add-on.
-| devicetree | bool | no | Boolean. If this is set to True, `/device-tree` will map into add-on.
-| kernel_modules | bool | no | Map host kernel modules and config into add-on (readonly) and give you SYS_MODULE permission.
-| stdin | bool | no | Boolean. If enabled, you can use the STDIN with Home Assistant API.
-| legacy | bool | no | Boolean. If the Docker image has no `hass.io` labels, you can enable the legacy mode to use the config data.
-| options | dict | no | Default options value of the add-on.
-| schema | dict | no | Schema for options value of the add-on. It can be `false` to disable schema validation and use custom options.
-| image | string | no | For use with Docker Hub and other container registries.
-| timeout | integer | no | Default 10 (seconds). The timeout to wait until the Docker daemon is done or will be killed.
-| tmpfs | bool | no | If this is set to `true`, the containers `/tmp` is using tmpfs, a memory file system.
-| discovery | list | no | A list of services that this add-on provides for Home Assistant. Currently supported: `mqtt`
-| services | list | no | A list of services that will be provided or consumed with this add-on. Format is `service`:`function` and functions are: `provide` (this add-on can provide this service), `want` (this add-on can use this service) or `need` (this add-on need this service to work correctly).
-| auth_api | bool | no | Allow access to Home Assistant user backend.
-| ingress | bool | no | Enable the ingress feature for the add-on.
-| ingress_port | integer | no | Default `8099`. For add-ons that run on the host network, you can use `0` and read the port later via API.
-| ingress_entry | string | no | Modify the URL entry point from `/`.
-| panel_icon | string | no | Default: `mdi:puzzle`. MDI icon for the menu panel integration.
-| panel_title | string | no | Default is the add-on name, but can be modified with this option.
-| panel_admin | bool | no | Default `true`. Make menu entry only available with admin privileged.
-| snapshot_exclude | list | no | List of file/path (with glob support) that are excluded from snapshots.
-| advanced | bool | no | Default `false`. Make addon visible in simple mode.
-| stage | string | no | Default `stable`. Flag add-on with follow attribute: `stable`, `experimental` or `deprecated`
-| init | bool | no | Default `true`. Disable the Docker default system init.  Use this if the image has its own init system.
-| watchdog | string | no | An URL for monitor an application this add-on. Like `http://[HOST]:[PORT:2839]/dashboard`, the port needs the internal port, which will be replaced with the effective port. It is also possible to bind the protocol part to a configuration options with: `[PROTO:option_name]://[HOST]:[PORT:2839]/dashboard` and it's looked up if it is `true` and it's going to `https`. For simple TCP port monitoring you can use `tcp://[HOST]:[PORT:80]`. It work for add-ons on host or internal network.
+| `machine` | list | | Default it support any machine type. You can select that this add-on run only on specific machines. You can use `!` before a machine type to negate it. By default all machines are allowed.
+| `url` | url | | Homepage of the add-on. Here you can explain the add-ons and options.
+| `startup` | string | `application` | `initialize` will start add-on on setup of Home Assistant. `system` is for things like databases and not dependent on other things. `services` will start before Home Assistant, while `application` is started afterwards. Finally `once` is for applications that don't run as a daemon.
+| `webui` | string | | An URL for the web interface of this add-on. Like `http://[HOST]:[PORT:2839]/dashboard`, the port needs the internal port, which will be replaced with the effective port. It is also possible to bind the protocol part to a configuration options with: `[PROTO:option_name]://[HOST]:[PORT:2839]/dashboard` and it's looked up if it is `true` and it's going to `https`.
+| `boot` | string | `auto` | `auto` start at boot is controlled by the system. `manual` for only manual starting.
+| `ports` | dict | | Network ports to expose from the container. Format is `"container-port/type": host-port`. If the host port is `null` then the mapping is disabled.
+| `ports_description` | dict | | Network ports description mapping. Format is `"container-port/type": "description of this port"`. Alternatively use [Port description translations](#port-description-translations).
+| `host_network` | bool | `false` | If `true`, the add-on runs on host network.
+| `host_ipc` | bool | `false` | Allow to share the IPC namespace with others.
+| `host_dbus` | bool | `false` | Map the host D-Bus service into the add-on.
+| `host_pid` | bool | `false` | Allow to run container on host PID namespace. Works only for not protected add-ons. **Warning:** Does not work with S6 Overlay. If need this to be `true` and you use the normal add-on base image you disable S6 by overriding `/init`. Or use an alternate base image.
+| `devices` | list | | Device list to map into the add-on. Format is: `<path_on_host>`. E.g., `/dev/ttyAMA0`
+| `homeassistant` | string | | Pin a minimum required Home Assistant Core version for the add-on. Value is a version string like `0.91.2`.
+| `hassio_role` | str | `default` |Role-based access to Supervisor API. Available: `default`, `homeassistant`, `backup`, `manager` or `admin`
+| `hassio_api` | bool | `false` | This add-on can access the Supervisor's REST API. Use `http://supervisor`.
+| `homeassistant_api` | bool | `false` | This add-on can access to the Home Assistant REST API proxy. Use `http://supervisor/core/api`.
+| `docker_api` | bool | `false` | Allow read-only access to Docker API for add-on. Works only for not protected add-ons.
+| `privileged` | list | | Privilege for access to hardware/system. Available access: `NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_TIME`, `SYS_NICE`, `SYS_RESOURCE`, `SYS_PTRACE`, `SYS_MODULE` or `DAC_READ_SEARCH`
+| `full_access` | bool | `false` | Give full access to hardware like the privileged mode in Docker. Works only for not protected add-ons. Consider using other add-on options instead of this, like `devices`. If you enable this option, don't add `devices`, `uart`, `usb` or `gpio` this is not needed.
+| `apparmor` | bool/string | `false` | Enable or disable AppArmor support. If it is enable, you can also use custom profiles with the name of the profile.
+| `map` | list | | List of Home Assistant directories to bind mount into your container. Possible values: `config`, `ssl`, `addons`, `backup`, `share` or `media`. Defaults to `ro`, which you can change by adding `:rw` to the end of the name.
+| `environment` | dict | | A dictionary of environment variable to run add-on.
+| `audio` | bool | `false` | Mark this add-on to use internal audio system. We map a working PulseAudio setup into container. If your application does not support PulseAudio, you may need to install: Alpine Linux `alsa-plugins-pulse` or Debian/Ubuntu `libasound2-plugins`.
+| `video` | bool | `false` | Mark this add-on to use the internal video system. All available devices will be mapped into the add-on.
+| `gpio` | bool | `false` | If this is set to `true`, `/sys/class/gpio` will map into add-on for access to GPIO interface from kernel. Some libraries also need  `/dev/mem` and `SYS_RAWIO` for read/write access to this device. On systems with AppArmor enabled, you need to disable AppArmor or provide you own profile for the add-on, which is better for security.
+| `usb` | bool | `false` | If this is set to `true`, it would map the raw USB access `/dev/bus/usb` into add-on with plug&play support.
+| `uart` | bool | `false` | Default `false`. Auto mapping all UART/serial devices from the host into the add-on.
+| `udev` | bool | `false` | Default `false`. Set this `true`, gets the host udev database read-only mounted into the add-on.
+| `devicetree` | bool | `false` | If this is set to True, `/device-tree` will map into add-on.
+| `kernel_modules` | bool | `false` | Map host kernel modules and config into add-on (readonly) and give you SYS_MODULE permission.
+| `stdin` | bool | `false` | If enabled, you can use the STDIN with Home Assistant API.
+| `legacy` | bool | `false` | If the Docker image has no `hass.io` labels, you can enable the legacy mode to use the config data.
+| `options` | dict | | Default options value of the add-on.
+| `schema` | dict | | Schema for options value of the add-on. It can be `false` to disable schema validation and options.
+| `image` | string | | For use with Docker Hub and other container registries. This should be set to the name of the image only (E.g, `ghcr.io/home-assistant/{arch}-addon-example`). If you use this option, set the active docker tag using the `version` option.
+| `codenotary` | string | | For use with Codenotary CAS. This is the E-Mail address used to verify your image with Codenotary (E.g, `example@home-assistant.io`). This should match the E-Mail address used as the signer in the [add-on's extended build options](#add-on-extended-build)
+| `timeout` | integer | | Default 10 (seconds). The timeout to wait until the Docker daemon is done or will be killed.
+| `tmpfs` | bool | `false` | If this is set to `true`, the containers `/tmp` is using tmpfs, a memory file system.
+| `discovery` | list | | A list of services that this add-on provides for Home Assistant. Currently supported: `mqtt`
+| `services` | list | | A list of services that will be provided or consumed with this add-on. Format is `service`:`function` and functions are: `provide` (this add-on can provide this service), `want` (this add-on can use this service) or `need` (this add-on need this service to work correctly).
+| `auth_api` | bool | `false` | Allow access to Home Assistant user backend.
+| `ingress` | bool | `false` | Enable the ingress feature for the add-on.
+| `ingress_port` | integer | `8099` | For add-ons that run on the host network, you can use `0` and read the port later via API.
+| `ingress_entry` | string | `/` | Modify the URL entry point.
+| `ingress_stream` | bool | `false` | When enabled requests to the add-on are streamed
+| `panel_icon` | string | `mdi:puzzle` | [MDI icon](https://materialdesignicons.com/) for the menu panel integration.
+| `panel_title` | string | | Defaults to the add-on name, but can be modified with this option.
+| `panel_admin` | bool | `true` | Make menu entry only available with users in the admin group.
+| `backup` | string | `hot` | `hot` or `cold`. If `cold`, the supervisor turns the add-on off before taking a backup (the `pre/post` options are ignored when `cold` is used).
+| `backup_pre` | string | | Command to execute in the context of the add-on before the backup is taken.
+| `backup_post` | string | | Command to execute in the context of the add-on after the backup was taken.
+| `backup_exclude` | list | | List of file/path (with glob support) that are excluded from backups.
+| `advanced` | bool | `false` | Set this to `true` to require the user to have enabled "Advanced" mode for it to show.
+| `stage` | string | `stable` | Flag add-on with follow attribute: `stable`, `experimental` or `deprecated`. Add-ons set to `experimental` or `deprecated` will not show up in the store unless the user enables advanced mode.
+| `init` | bool | `true` | Set this to `false` to disable the Docker default system init. Use this if the image has its own init system (Like [s6-overlay](https://github.com/just-containers/s6-overlay)). *Note: Starting in V3 of S6 setting this to `false` is required or the addon won't start, see [here](https://developers.home-assistant.io/blog/2022/05/12/s6-overlay-base-images) for more information.*
+| `watchdog` | string | | An URL for monitor an application this add-on. Like `http://[HOST]:[PORT:2839]/dashboard`, the port needs the internal port, which will be replaced with the effective port. It is also possible to bind the protocol part to a configuration options with: `[PROTO:option_name]://[HOST]:[PORT:2839]/dashboard` and it's looked up if it is `true` and it's going to `https`. For simple TCP port monitoring you can use `tcp://[HOST]:[PORT:80]`. It work for add-ons on host or internal network.
+| `realtime` | bool | `false` | Give add-on access to host schedule including `SYS_NICE` for change execution time/priority.
+| `journald` | bool | `false` | If set to `true`, the host's system journal will be mapped read-only into the add-on. Most of the time the journal will be in `/var/log/journal` however on some hosts you will find it in `/run/log/journal`. Add-ons relying on this capability should check if the directory `/var/log/journal` is populated and fallback on `/run/log/journal` if not.
 
 ### Options / Schema
 
 The `options` dictionary contains all available options and their default value. Set the default value to `null` if the value is required to be given by the user before the add-on can start, and it show it inside default values. Only nested arrays and dictionaries are supported with a deep of two size. If you want make an option optional, put `?` to the end of data type, otherwise it will be a required value.
 
-```json
-{
-  "message": "custom things",
-  "logins": [
-    { "username": "beer", "password": "123456" },
-    { "username": "cheep", "password": "654321" }
-  ],
-  "random": ["haha", "hihi", "huhu", "hghg"],
-  "link": "http://example.com/",
-  "size": 15,
-  "count": 1.2
-}
+```yaml
+message: "custom things"
+logins:
+  - username: beer
+    password: "123456"
+  - username: cheep
+    password: "654321"
+random:
+  - haha
+  - hihi
+link: "http://example.com/"
+size: 15
+count: 1.2
 ```
 
 The `schema` looks like `options` but describes how we should validate the user input. For example:
 
-```json
-{
-  "message": "str",
-  "logins": [
-    { "username": "str", "password": "str" }
-  ],
-  "random": ["match(^\\w*$)"],
-  "link": "url",
-  "size": "int(5,20)",
-  "count": "float",
-  "not_need": "str?"
-}
+```yaml
+message: str
+logins:
+  - username: str
+    password: str
+random:
+  - "match(^\\w*$)"
+link: url
+size: "int(5, 20)"
+count: float
+not_need: "str?"
 ```
 
 We support:
@@ -216,19 +240,15 @@ We support:
 
 ## Add-on extended build
 
-Additional build options for an add-on is stored in `build.json`. This file will be read from our build systems.
+Additional build options for an add-on is stored in `build.yaml`. This file will be read from our build systems.
 You need this only, if you not use the default images or need additional things.
 
-```json
-{
-  "build_from": {
-    "armhf": "mycustom/base-image:latest"
-  },
-  "squash": false,
-  "args": {
-    "my_build_arg": "xy"
-  }
-}
+```yaml
+build_from:
+  armhf: mycustom/base-image:latest
+squash: false
+args:
+  my_build_arg: xy
 ```
 
 | Key | Required | Description |
@@ -236,7 +256,41 @@ You need this only, if you not use the default images or need additional things.
 | build_from | no | A dictionary with the hardware architecture as the key and the base Docker image as value.
 | squash | no | Default `False`. Be careful with this option, as you can not use the image for caching stuff after that!
 | args | no | Allow to set additional Docker build arguments as a dictionary.
+| labels | no | Allow to set additional Docker labels as a dictionary.
+| codenotary | no | Allows to enable container signature with codenotary CAS.
+| codenotary.signer | no | Owner signer E-Mail address for this image.
+| codenotary.base_image | no | Verify the base container image. If you use our official images, use `notary@home-assistant.io`
 
 We provide a set of [base images][docker-base] which should cover a lot of needs. If you don't want use the Alpine based version or need a specific image tag, feel free to pin this requirements for you build with `build_from` option.
 
 [docker-base]: https://github.com/home-assistant/docker-base
+
+## Add-on translations
+
+Add-ons can provide translation files for configuration options that are used in the UI.
+
+Example path to translation file: `addon/translations/{language_code}.yaml`
+
+For `{language_code}` use a valid language code, like `en`, for a [full list have a look here](https://github.com/home-assistant/frontend/blob/dev/src/translations/translationMetadata.json), `en.yaml` would be a valid filename.
+
+This file support 2 main keys `configuration` and `network`.
+
+### Configuration translations
+
+```yaml
+configuration:
+  ssl:
+    name: Enable SSL
+    description: Enable usage of SSL on the webserver inside the add-on
+```
+
+_The key under `configuration` (`ssl`) in this case, needs to match a key in your `schema` configuration (in [`config.yaml`](#add-on-configuration))._
+
+### Port description translations
+
+```yaml
+network:
+  80/TCP: The webserver port (Not used for Ingress)
+```
+
+_The key under `network` (`80/TCP`) in this case, needs to match a key in your `ports` configuration (in [`config.yaml`](#add-on-configuration))._

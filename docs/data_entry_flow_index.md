@@ -1,6 +1,5 @@
 ---
 title: Data Entry Flow
-sidebar_label: Introduction
 ---
 
 Data Entry Flow is a data entry framework that is part of Home Assistant. Data entry is done via data entry flows. A flow can represent a simple login form or a multi-step setup wizard for a component. A Flow Manager manages all flows that are in progress and handles creation of new flows.
@@ -23,14 +22,14 @@ async def async_finish_flow(flow, result):
     """Finish flow."""
 ```
 
-This async callback is called when a flow is finished or aborted. i.e. `result['type'] in [RESULT_TYPE_CREATE_ENTRY, RESULT_TYPE_ABORT]`. The callback function can modify result and return it back, if the result type changed to `RESULT_TYPE_FORM`, the flow will continue running, display another form.
+This async callback is called when a flow is finished or aborted. i.e. `result['type'] in [FlowResultType.CREATE_ENTRY, FlowResultType.ABORT]`. The callback function can modify result and return it back, if the result type changed to `FlowResultType.FORM`, the flow will continue running, display another form.
 
-If the result type is `RESULT_TYPE_FORM`, the result should look like:
+If the result type is `FlowResultType.FORM`, the result should look like:
 
 ```python
 {
     # The result type of the flow
-    "type": RESULT_TYPE_FORM,
+    "type": FlowResultType.FORM,
     # the id of the flow
     "flow_id": "abcdfgh1234",
     # handler name
@@ -46,14 +45,14 @@ If the result type is `RESULT_TYPE_FORM`, the result should look like:
 }
 ```
 
-If the result type is `RESULT_TYPE_CREATE_ENTRY`, the result should look like:
+If the result type is `FlowResultType.CREATE_ENTRY`, the result should look like:
 
 ```python
 {
     # Data schema version of the entry
     "version": 2,
     # The result type of the flow
-    "type": RESULT_TYPE_CREATE_ENTRY,
+    "type": FlowResultType.CREATE_ENTRY,
     # the id of the flow
     "flow_id": "abcdfgh1234",
     # handler name
@@ -66,12 +65,12 @@ If the result type is `RESULT_TYPE_CREATE_ENTRY`, the result should look like:
 }
 ```
 
-If the result type is `RESULT_TYPE_ABORT`, the result should look like:
+If the result type is `FlowResultType.ABORT`, the result should look like:
 
 ```python
 {
     # The result type of the flow
-    "type": RESULT_TYPE_ABORT,
+    "type": FlowResultType.ABORT,
     # the id of the flow
     "flow_id": "abcdfgh1234",
     # handler name
@@ -107,9 +106,11 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
 
 ### Show Form
 
-This result type will show a form to the user to fill in. You define the current step, the schema of the data (using voluptuous) and optionally a dictionary of errors.
+This result type will show a form to the user to fill in. You define the current step, the schema of the data (using voluptuous or selectors) and optionally a dictionary of errors.
 
 ```python
+from homeassistant.helpers.selector import selector
+
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
     async def async_step_user(self, user_input=None):
         # Specify items in the order they are to be displayed in the UI
@@ -119,7 +120,11 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         }
 
         if self.show_advanced_options:
-            data_schema["allow_groups"]: bool
+            data_schema["allow_groups"] = selector({
+                "select": {
+                    "options": ["all", "light", "switch"],
+                }
+            })
 
         return self.async_show_form(step_id="init", data_schema=vol.Schema(data_schema))
 ```
@@ -173,6 +178,32 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
             step_id="init", data_schema=vol.Schema(data_schema), errors=errors
         )
 ```
+
+Translations for the step title, description and fields is added to `strings.json`. Each field can also have an optional entry in `data_description` to add extra explanatory text.
+
+Do not put your brand title in the `title`. It will be automatically injected from your manifest.
+
+Your description should not link to the documentation as that is linked automatically. It should also not contain "basic" information like "Here you can set up X". It can be omitted.
+
+```json
+{
+  "config": {
+    "step": {
+      "user": {
+          "title": "Add Group",
+          "description": "Some description",
+          "data": {
+              "entities": "Entities",
+          },
+          "data_description": {
+              "entities": "The entities to add to the group",
+          },
+      }
+    }
+  }
+}
+```
+
 
 #### Multi-step flows
 
@@ -276,7 +307,7 @@ from homeassistant import data_entry_flow
 async def handle_result(hass, flow_id, data):
     result = await hass.config_entries.async_configure(flow_id, data)
 
-    if result["type"] == data_entry_flow.RESULT_TYPE_EXTERNAL_STEP_DONE:
+    if result["type"] == data_entry_flow.FlowResultType.EXTERNAL_STEP_DONE:
         return "success!"
     else:
         return "Invalid config flow specified"
@@ -302,17 +333,17 @@ Example configuration flow that includes two show progress tasks.
 ```python
 from homeassistant import config_entries
 
-from .const import DOMAIN  # pylint:disable=unused-import
+from .const import DOMAIN
 
 
 class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
     task_one = None
     task_two = None
-    
+
     async def _async_do_task(self, task):
         await task  # A task that take some time to complete.
-        
+
         # Continue the flow after show progress when the task is done.
         # To avoid a potential deadlock we create a new task that continues the flow.
         # The task must be completely done so the flow can await the task
@@ -344,9 +375,50 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return self.async_create_entry(title="Some title", data={})
 ```
 
+### Show Menu
+
+This will show a navigation menu to the user to easily pick the next step. The menu labels can be hardcoded by specifying a dictionary of {`step_id`: `label`} or translated via `strings.json` when specifying a list.
+
+```python
+class ExampleConfigFlow(data_entry_flow.FlowHandler):
+    async def async_step_user(self, user_input=None):
+        return self.async_show_menu(
+            step_id="user",
+            menu_options=["discovery", "manual"],
+            description_placeholders={
+                "model": "Example model",
+            }
+        )
+        # Example showing the other approach
+        return self.async_show_menu(
+            step_id="user",
+            menu_options={
+                "option_1": "Option 1",
+                "option_2": "Option 2",
+            }
+        )
+```
+
+```json
+{
+  "config": {
+    "step": {
+      "user": {
+        "menu_options": {
+          "discovery": "Discovery",
+          "manual": "Manual ({model})",
+        }
+      }
+    }
+  }
+}
+```
+
 ## Translations
 
 Data entry flows depend on translations for showing the text in the forms. It depends on the parent of a data entry flow manager where this is stored. For config and option flows this is in `strings.json` under `config` and `option`.
+
+For a more detailed explanation of `strings.json` see to the [backend translation](/docs/internationalization/core) page.
 
 ## Initializing a config flow from an external source
 

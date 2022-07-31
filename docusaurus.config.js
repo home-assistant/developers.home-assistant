@@ -7,9 +7,6 @@ module.exports = {
   organizationName: "home-assistant",
   projectName: "developers.home-assistant",
   themeConfig: {
-    googleAnalytics: {
-      trackingID: "UA-57927901-3",
-    },
     navbar: {
       title: "Developers",
       logo: {
@@ -41,8 +38,9 @@ module.exports = {
           label: "Documenting",
           position: "left",
           items: [
+            { label: "Getting Started", to: "docs/documenting" },
             { label: "Standards", to: "docs/documenting/standards" },
-            { label: "YAML Style Guide", to: "docs/documenting/yaml-style-guide"},
+            { label: "YAML Style Guide", to: "docs/documenting/yaml-style-guide" },
             {
               label: "Create a new page",
               to: "docs/documenting/create-page",
@@ -54,7 +52,7 @@ module.exports = {
           label: "API",
           position: "left",
           items: [
-            { label: "REST-API", to: "docs/api/rest" },
+            { label: "REST API", to: "docs/api/rest" },
             { label: "WebSocket API", to: "docs/api/websocket" },
             { label: "Supervisor API", to: "docs/api/supervisor/endpoints" },
             {
@@ -71,6 +69,7 @@ module.exports = {
       logo: {
         alt: "Home Assistant",
         src: "img/logo-white.svg",
+        height: "70px",
         href: "https://www.home-assistant.io",
       },
       style: "dark",
@@ -136,7 +135,7 @@ module.exports = {
             {
               html: `
               <a href="https://www.netlify.com" target="_blank" rel="noreferrer noopener" aria-label="Deploys by Netlify">
-                <img src="https://www.netlify.com/img/global/badges/netlify-color-accent.svg" alt="Deploys by Netlify" />
+                <img src="https://www.netlify.com/v3/img/components/netlify-color-accent.svg" alt="Deploys by Netlify" />
               </a>
               `,
             },
@@ -146,11 +145,6 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} Home Assistant, Inc. Built with Docusaurus.`,
     },
     image: "img/default-social.png",
-    algolia: {
-      apiKey: "d0245452c36b10cec4b8b5bad04e06fc",
-      indexName: "home-assistant-dev",
-      algoliaOptions: {},
-    },
   },
   presets: [
     [
@@ -171,6 +165,20 @@ module.exports = {
             type: "all",
           },
         },
+        googleAnalytics: {
+          trackingID: "UA-57927901-3",
+        },
+      },
+    ],
+  ],
+  plugins: [
+    [
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      {
+        hashed: true,
+        indexDocs: true,
+        indexBlog: true,
+        highlightSearchTermsOnTargetPage: true,
       },
     ],
   ],

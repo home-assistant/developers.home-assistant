@@ -4,6 +4,8 @@ title: "Sending data home"
 
 Once you have registered your app with the mobile app component, you can start interacting with Home Assistant via the provided webhook information.
 
+## Sending webhook data via Rest API
+
 The first step is to turn the returned webhook ID into a full URL: `<instance_url>/api/webhook/<webhook_id>`. This will be the only url that we will need for all our interactions. The webhook endpoint will not require authenticated requests.
 
 If you were provided a Cloudhook URL during registration, you should use that by default and only fall back to a constructed URL as described above if that request fails.
@@ -15,6 +17,38 @@ To summarize, here's how requests should be made:
 1. If you have a Cloudhook URL, use that until a request fails. When a request fails, go to step 2.
 2. If you have a remote UI URL, use that to construct a webhook URL: `<remote_ui_url>/api/webhook/<webhook_id>`. When a request fails, go to step 3.
 3. Construct a webhook URL using the instance URL provided during setup: `<instance_url>/api/webhook/<webhook_id>`.
+
+## Sending webhook data via WebSocket API
+
+Webhooks can also be delivered via the WebSocket API by sending the `webhook/handle` command:
+
+```json
+{
+  "type": "webhook/handle",
+  "id": 5,
+  "method": "GET",
+  // Below fields are optional
+  "body": "{\"hello\": \"world\"}",
+  "headers": {
+    "Content-Type": "application/json"
+  },
+  "query": "a=1&b=2",
+}
+```
+
+The response will look as follows:
+
+```json
+{
+  "type": "result",
+  "id": 5,
+  "result": {
+    "body": "{\"ok\": true}",
+    "status": 200,
+    "headers": {"Content-Type": response.content_type},
+  }
+}
+```
 
 ## Short note on instance URLs
 
@@ -76,7 +110,7 @@ For other languages, please see the list of [Bindings for other languages](https
 
 ### Configuration
 
-We use the [secret-key cryptography](https://download.libsodium.org/doc/secret-key_cryptography) features of Sodium to encrypt and decrypt payloads. All payloads are JSON encoded in Base64. For Base64 type, use `sodium_base64_VARIANT_ORIGINAL` (that is, "original", no padding, not URL safe).
+We use the [secret-key cryptography](https://download.libsodium.org/doc/secret-key_cryptography) features of Sodium to encrypt and decrypt payloads. All payloads are JSON encoded in Base64. For Base64 type, use `sodium_base64_VARIANT_ORIGINAL` (that is, "original", no padding, not URL safe). If the payload does not contain a `data` key when unencrypted (such as with the [get_config](https://developers.home-assistant.io/docs/api/native-app-integration/sending-data#get-config) request), an empty JSON object (`{}`) must be encrypted instead.
 
 ### Signaling encryption support
 
@@ -89,7 +123,7 @@ The Home Assistant instance must be able to install `libsodium` to enable encryp
 
 You must store this secret forever. There is no way to recover it via the Home Assistant UI and you should **not** ask users to investigate hidden storage files to re-enter the encryption key. You should create a new registration if encryption ever fails and alert the user.
 
-A registration may not initially support encryption due to a lack of Sodium/NaCL on the Home Assistant Core side. You should always strive to encrypt communications if possible. Therefore, we politely request that from time to time you attempt to enable encryption automatically or allow the user to manually enable encryption via a button in your app. That way, they can attempt to first fix whatever error is causing Sodium/NaCL to be uninstallable and then have a encrypted registration later. Home Assistant Core will log exact details if Sodium/NaCL is uninstallable.
+A registration may not initially support encryption due to a lack of Sodium/NaCL on the Home Assistant Core side. You should always strive to encrypt communications if possible. Therefore, we politely request that from time to time you attempt to enable encryption automatically or allow the user to manually enable encryption via a button in your app. That way, they can attempt to first fix whatever error is causing Sodium/NaCL to be uninstallable and then have an encrypted registration later. Home Assistant Core will log exact details if Sodium/NaCL is uninstallable.
 
 ## Update device location
 

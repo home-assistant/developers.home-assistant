@@ -4,7 +4,7 @@ title: "Backend Localization"
 
 ## Translation Strings
 
-Platform translation strings are stored as JSON in the [home-assistant](https://github.com/home-assistant/home-assistant) repository. These files must be located adjacent to the component/platform they belong to. Components must have their own directory, and the file is simply named `strings.json` in that directory. For platforms, they are named `strings.<platform name>.json` in the platform directory. This file will contain the different strings that will be translatable.
+Platform translation strings are stored as JSON in the [core](https://github.com/home-assistant/core) repository. These files must be located adjacent to the component/platform they belong to. Components must have their own directory, and the file is simply named `strings.json` in that directory. For platforms, they are named `strings.<platform name>.json` in the platform directory. This file will contain the different strings that will be translatable.
 
 ### `strings.json`
 
@@ -80,9 +80,9 @@ The translation strings for the configuration flow handler are defined under the
 
 ### `strings.sensor.json`
 
-Integrations can provide translations for states of its entities under other integrations like sensor. To do this, the entity will need a custom device class that starts with `<domain>__<custom name>`. You can then provide translations that will only be applied for your entity. Note that you cannot customize your translation when you use an official device class. Those are standardized.
+Integrations can provide translations for states of its entities under other integrations like sensor. To do this, the entity will need a custom device class that starts with `<domain>__<custom name>` (note double underscore). You can then provide translations that will only be applied for your entity. Note that you cannot customize your translation when you use an official device class. Those are standardized.
 
-To differentiate entities and their translations, provide different device classes. The following example `strings.sensor.json` is for a Moon sensor entity with the `moon__phase` device class:
+To differentiate entities and their translations, provide different device classes. The following example `strings.sensor.json` is for a Moon domain sensor entity with the `moon__phase` device class:
 
 ```json
 {
@@ -104,6 +104,8 @@ In order to test changes to translation files, the translation strings must be c
 ```shell
 python3 -m script.translations develop
 ```
+
+If translations do not show, clear the browser cache (cmd + R (for MacOS), ctrl + F5 (Windows and Linux))
 
 ### Introducing new strings
 

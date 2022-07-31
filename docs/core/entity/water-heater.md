@@ -3,6 +3,8 @@ title: Water Heater Entity
 sidebar_label: Water Heater
 ---
 
+Derive entity platforms from [`homeassistant.components.water_heater.WaterHeaterEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/water_heater/__init__.py)
+
 ## Properties
 
 :::tip
@@ -41,11 +43,14 @@ Properties have to follow the units defined in the `temperature_unit`.
 
 ## Supported Features
 
-| Feature                      | Description
-| ---------------------------- | -----------
-| `SUPPORT_TARGET_TEMPERATURE` | Temperature can be set
-| `SUPPORT_OPERATION_MODE`     | Operation mode can be set
-| `SUPPORT_AWAY_MODE`          | Away mode can be set
+Supported features are defined by using values in the `WaterHeaterEntityFeature` enum
+and are combined using the bitwise or (`|`) operator.
+
+| Value                | Description               |
+| -------------------- | ------------------------- |
+| `TARGET_TEMPERATURE` | Temperature can be set    |
+| `OPERATION_MODE`     | Operation mode can be set |
+| `AWAY_MODE`          | Away mode can be set      |
 
 ## Methods
 

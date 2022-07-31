@@ -5,9 +5,17 @@ sidebar_label: Air Quality
 
 ## Properties
 
-:::tip
-Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+:::caution Deprecated
+The Air Quality entity is deprecated and should not be used. Instead, use
+separate sensors for these measurements.
+
+Integrations that still rely on the Air Quality Entity should be migrated.
 :::
+
+:::caution
+The Air Quality entity does not support attribute shorthand for [property implementation](../entity.md#entity-class-or-instance-attributes)
+:::
+
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------

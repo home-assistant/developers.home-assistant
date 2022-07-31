@@ -6,7 +6,7 @@ sidebar_label: Media Player
 :::info Incomplete
 This entry is incomplete. Contribution welcome.
 :::
-A media player entity controls a media player.  Derive a platform entity from [`homeassistant.components.media_player.MediaPlayerEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/media_player/__init__.py).
+A media player entity controls a media player.  Derive a platform entity from [`homeassistant.components.media_player.MediaPlayerEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/media_player/__init__.py).
 
 ## Properties
 
@@ -24,29 +24,134 @@ Properties should always only return information from memory and not do I/O (lik
 | media_image_url | string | None | URL that represents the current image.
 | media_image_remotely_accessible | boolean | False | Return `True` if property `media_image_url` is accessible outside of the home network.
 | device_class | string | `None` | Type of media player.
+| group_members | list | `None` | A dynamic list of player entities which are currently grouped together for synchronous playback. If the platform has a concept of defining a group leader, the leader should be the first element in that list.
 
 ## Supported Features
 
-| Constant | Description
-| -------- | -----------
-| `SUPPORT_CLEAR_PLAYLIST` | Entity allows clearing the active playlist.
-| `SUPPORT_NEXT_TRACK` | Entity allows skipping to the next media track.
-| `SUPPORT_PAUSE` | Entity allows pausing the playback of media.
-| `SUPPORT_PLAY` | Entity allows playing/resuming playback of media.
-| `SUPPORT_PLAY_MEDIA` | Entity allows playing media sources.
-| `SUPPORT_PREVIOUS_TRACK` | Entity allows returning back to a previous media track.
-| `SUPPORT_SEEK` | Entity allows seeking position during playback of media.
-| `SUPPORT_SELECT_SOURCE` | Entity allows selecting a source/input.
-| `SUPPORT_SELECT_SOUND_MODE` | Entity allows selecting a sound mode.
-| `SUPPORT_SHUFFLE_SET` | Entity allows shuffling the active playlist.
-| `SUPPORT_STOP` | Entity allows stopping the playback of media.
-| `SUPPORT_TURN_OFF` | Entity is able to be turned off.
-| `SUPPORT_TURN_ON` | Entity is able to be turned on.
-| `SUPPORT_VOLUME_MUTE` | Entity volume can be muted.
-| `SUPPORT_VOLUME_SET` | Entity volume can be set to specific levels.
-| `SUPPORT_VOLUME_STEP` | Entity volume can be adjusted up and down.
+Supported features are defined by using values in the `MediaPlayerEntityFeature` enum
+and are combined using the bitwise or (`|`) operator.
+
+| Value               | Description                                                        |
+| ------------------- | ------------------------------------------------------------------ |
+| `BROWSE_MEDIA`      | Entity allows browsing media.                                      |
+| `CLEAR_PLAYLIST`    | Entity allows clearing the active playlist.                        |
+| `GROUPING`          | Entity can be grouped with other players for synchronous playback. |
+| `NEXT_TRACK`        | Entity allows skipping to the next media track.                    |
+| `PAUSE`             | Entity allows pausing the playback of media.                       |
+| `PLAY`              | Entity allows playing/resuming playback of media.                  |
+| `PLAY_MEDIA`        | Entity allows playing media sources.                               |
+| `PREVIOUS_TRACK`    | Entity allows returning back to a previous media track.            |
+| `REPEAT_SET`        | Entity allows setting repeat.                                      |
+| `SEEK`              | Entity allows seeking position during playback of media.           |
+| `SELECT_SOUND_MODE` | Entity allows selecting a sound mode.                              |
+| `SELECT_SOURCE`     | Entity allows selecting a source/input.                            |
+| `SHUFFLE_SET`       | Entity allows shuffling the active playlist.                       |
+| `STOP`              | Entity allows stopping the playback of media.                      |
+| `TURN_OFF`          | Entity is able to be turned off.                                   |
+| `TURN_ON`           | Entity is able to be turned on.                                    |
+| `VOLUME_MUTE`       | Entity volume can be muted.                                        |
+| `VOLUME_SET`        | Entity volume can be set to specific levels.                       |
+| `VOLUME_STEP`       | Entity volume can be adjusted up and down.                         |
 
 ## Methods
+
+### Play Media
+
+Tells the media player to play media. Implement it using the following:
+
+```python
+class MyMediaPlayer(MediaPlayerEntity):
+
+    def play_media(
+        self,
+        media_type: str,
+        media_id: str,
+        enqueue: MediaPlayerEnqueue | None = None,
+        announce: bool | None = None, **kwargs: Any
+    ) -> None:
+        """Play a piece of media."""
+
+    async def async_play_media(
+        self,
+        media_type: str,
+        media_id: str,
+        enqueue: MediaPlayerEnqueue | None = None,
+        announce: bool | None = None, **kwargs: Any
+    ) -> None:
+        """Play a piece of media."""
+
+```
+
+The `enqueue` attribute is a string enum `MediaPlayerEnqueue`:
+
+ - `add`: add given media item to end of the queue
+ - `next`: play the given media item next, keep queue
+ - `play`: play the given media item now, keep queue
+ - `replace`: play the given media item now, clear queue
+
+When the `announce` boolean attribute is set to `true`, the media player should try to pause the current music, announce the media to the user and then resume the music.
+
+### Browse Media
+
+If the media player supports browsing media, it should implement the following method:
+
+```python
+class MyMediaPlayer(MediaPlayerEntity):
+
+    async def async_browse_media(
+        self, media_content_type: str | None = None, media_content_id: str | None = None
+    ) -> BrowseMedia:
+        """Implement the websocket media browsing helper."""
+        return await media_source.async_browse_media(
+            self.hass,
+            media_content_id,
+            content_filter=lambda item: item.media_content_type.startswith("audio/"),
+        )
+```
+
+If the media player also allows playing media from URLs, you can also add support for browsing
+Home Assistant media sources. These sources can be provided by any integration. Examples provide
+text-to-speech and local media.
+
+```python
+from homeassistant.components import media_source
+from homeassistant.components.media_player.browse_media import (
+    async_process_play_media_url,
+)
+
+class MyMediaPlayer(MediaPlayerEntity):
+
+    async def async_browse_media(
+        self, media_content_type: str | None = None, media_content_id: str | None = None
+    ) -> BrowseMedia:
+        """Implement the websocket media browsing helper."""
+        # If your media player has no own media sources to browse, route all browse commands
+        # to the media source integration.
+        return await media_source.async_browse_media(
+            self.hass,
+            media_content_id,
+            # This allows filtering content. In this case it will only show audio sources.
+            content_filter=lambda item: item.media_content_type.startswith("audio/"),
+        )
+
+    async def async_play_media(
+        self,
+        media_type: str,
+        media_id: str,
+        enqueue: MediaPlayerEnqueue | None = None,
+        announce: bool | None = None, **kwargs: Any
+    ) -> None:
+        """Play a piece of media."""
+        if media_source.is_media_source_id(media_id):
+            media_type = MEDIA_TYPE_MUSIC
+            play_item = await media_source.async_resolve_media(self.hass, media_id, self.entity_id)
+            # play_item returns a relative URL if it has to be resolved on the Home Assistant host
+            # This call will turn it into a full URL
+            media_id = async_process_play_media_url(self.hass, play_item.url)
+
+        # Replace this with calling your media player play media function.
+        await self._media_player.play_url(media_id)
+```
 
 ### Select sound mode
 
@@ -143,4 +248,27 @@ class MyMediaPlayer(MediaPlayerEntity):
     """Serve album art. Returns (content, content_type)."""
     image_url = ...
     return await self._async_fetch_image(image_url)
+```
+
+### Grouping player entities together
+
+Optional. If your player has support for grouping player entities together for synchronous playback (indicated by `SUPPORT_GROUPING`) one join and one unjoin method needs to be defined.
+
+```python
+class MyMediaPlayer(MediaPlayerEntity):
+    # Implement one of these join methods:
+
+    def join_players(self, group_members):
+        """Join `group_members` as a player group with the current player."""
+
+    async def async_join_players(self, group_members):
+        """Join `group_members` as a player group with the current player."""
+
+    # Implement one of these unjoin methods:
+
+    def unjoin_player(self):
+        """Remove this player from any group."""
+
+    async def async_unjoin_player(self):
+        """Remove this player from any group."""
 ```

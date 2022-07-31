@@ -63,7 +63,7 @@ This authorization code can be exchanged for tokens by sending it to the token e
 
 ## Token
 
-The token endpoint returns tokens given valid grants. This grant is either an authorization code retrieved from the authorize endpoint or a refresh token. In thee case of refresh token, the token endpoint is also capable of revoking a token.
+The token endpoint returns tokens given valid grants. This grant is either an authorization code retrieved from the authorize endpoint or a refresh token. In the case of refresh token, the token endpoint is also capable of revoking a token.
 
 All interactions with this endpoint need to be HTTP POST requests to `http://your-instance.com/auth/token` with the request body encoded in `application/x-www-form-urlencoded`.
 
@@ -135,7 +135,7 @@ An HTTP status code of 400 will be returned if an invalid request has been issue
 ### Revoking a refresh token
 
 :::tip
-`client_id` is not need for revoke refresh token
+`client_id` is not required to revoke a refresh token
 :::
 The token endpoint is also capable of revoking a refresh token. Revoking a refresh token will immediately revoke the refresh token and all access tokens that it has ever granted. To revoke a refresh token, make the following request:
 
@@ -234,7 +234,11 @@ Sometimes you want a user to make a GET request to Home Assistant to download da
 
 A signed path is a normal path on our server, like `/api/states`, but with an attached secure authentication signature. The user is able to navigate to this path and will be authorized as the access token that created the signed path. Signed paths can be created via the websocket connection and are meant to be shortlived. The default expiration is 30 seconds.
 
-To get a signed path, send the following command:
+There are two ways to get a signed path.
+
+If you are creating an integration, import `async_sign_path` from `homeassistant.components.http.auth`. The method will automatically adopt a refresh token if called from inside the context of an HTTP request or a WebSocket connection. If neither available (ie because inside an automation), it will use a special "Home Assistant Content" user.
+
+If you're working with the frontend, you can create a signed path using the following WebSocket command:
 
 ```js
 {

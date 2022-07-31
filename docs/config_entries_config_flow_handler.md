@@ -49,12 +49,15 @@ There are a few step names reserved for system use:
 
 | Step name   | Description                                                                                                                                                   |
 | ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `discovery` | _DEPRECATED_ Invoked if your integration has been discovered by the discovery integration.             |
+| `bluetooth`        | Invoked if your integration has been discovered via Bluetooth as specified [using `bluetooth` in the manifest](creating_integration_manifest.md#bluetooth).             |
+| `discovery` | _DEPRECATED_ Invoked if your integration has been discovered and the matching step has not been defined.             |
 | `dhcp`      | Invoked if your integration has been discovered via DHCP as specified [using `dhcp` in the manifest](creating_integration_manifest.md#dhcp).             |
+| `hassio`    | Invoked if your integration has been discovered via a Supervisor add-on.
 | `homekit`   | Invoked if your integration has been discovered via HomeKit as specified [using `homekit` in the manifest](creating_integration_manifest.md#homekit).         |
 | `mqtt`      | Invoked if your integration has been discovered via MQTT as specified [using `mqtt` in the manifest](creating_integration_manifest.md#mqtt).             |
 | `ssdp`      | Invoked if your integration has been discovered via SSDP/uPnP as specified [using `ssdp` in the manifest](creating_integration_manifest.md#ssdp).             |
-| `user`      | Invoked when a user initiates a flow via the user interface.                                                                                                  |
+| `usb`       | Invoked if your integration has been discovered via USB as specified [using `usb` in the manifest](creating_integration_manifest.md#usb).             |
+| `user`      | Invoked when a user initiates a flow via the user interface or when discovered and the matching and discovery step are not defined.                                                                                                  |
 | `zeroconf`  | Invoked if your integration has been discovered via Zeroconf/mDNS as specified [using `zeroconf` in the manifest](creating_integration_manifest.md#zeroconf). |
 
 ## Unique IDs
@@ -68,10 +71,21 @@ await self.async_set_unique_id(device_unique_id)
 self._abort_if_unique_id_configured()
 ```
 
-By setting a unique ID, users will have the option to ignore the discovery of your config entry. That way, they won't be bothered about it anymore.
-If the integration uses DHCP, HomeKit, Zeroconf/mDNS or SSDP/uPnP to be discovered, supplying a unique ID is required.
+Should the config flow then abort, the text resource with the key `already_configured` from the `abort` part of your `strings.json` will be displayed to the user in the interface as an abort reason.
 
-If a unique ID isn't available, alternatively, the `dhcp`, `zeroconf`, `homekit`, `ssdp` and `discovery` steps can be omitted, even if they are configured in
+```json
+{
+  "config": {
+    "abort": {
+      "already_configured": "Device is already configured"
+    }
+}
+```
+
+By setting a unique ID, users will have the option to ignore the discovery of your config entry. That way, they won't be bothered about it anymore.
+If the integration uses Bluetooth, DHCP, HomeKit, Zeroconf/mDNS, USB, or SSDP/uPnP to be discovered, supplying a unique ID is required.
+
+If a unique ID isn't available, alternatively, the `bluetooth`, `dhcp`, `zeroconf`, `hassio`, `homekit`, `ssdp`, `usb`, and `discovery` steps can be omitted, even if they are configured in
 the integration manifest. In that case, the `user` step will be called when the item is discovered.
 
 Alternatively, if an integration can't get a unique ID all the time (e.g., multiple devices, some have one, some don't), a helper is available
@@ -82,6 +96,39 @@ if device_unique_id:
   await self.async_set_unique_id(device_unique_id)
 await self._async_handle_discovery_without_unique_id()
 ```
+
+### Unique ID Requirements
+
+A Unique ID is used to match a config entry to the underlying device or API. The Unique ID must be stable and should not be able to be changed by the user. The Unique ID can be used to update the config entry data when device access details change. For example, for devices that communicate over the local network, if the IP address changes due to a new DHCP assignment, the integration can use the Unique ID to update the host using the following code snippet:
+
+```
+    await self.async_set_unique_id(serial_number)
+    self._abort_if_unique_id_configured(updates={CONF_HOST: host, CONF_PORT: port})
+```
+
+#### Example acceptable sources for a unique ID
+
+- Serial number of a device
+- MAC address: formatted using `homeassistant.helpers.device_registry.format_mac`; Only obtain the MAC address from the device API or a discovery handler. Tools that rely on reading the arp cache or local network access such as `getmac` will not function in all supported network environments and are not acceptable.
+- Latitude and Longitude or other unique Geo Location
+- Unique identifier that is physically printed on the device or burned into an EEPROM
+
+#### Sometimes acceptable sources for a unique ID for local devices
+
+- Hostname: If a subset of the hostname contains one of the acceptable sources, this portion can be used
+
+#### Sometimes acceptable sources for a unique ID for cloud services
+
+- Email Address: Must be normalized to lowercase
+- Username: Must be normalized to lowercase if usernames are case-insensitive.
+- Account ID: Must not have collisions
+
+#### Unacceptable sources for a unique ID
+
+- IP Address
+- Device Name
+- Hostname if it can be changed by the user
+- URL
 
 ### Unignoring
 
@@ -99,7 +146,7 @@ async def async_step_unignore(self, user_input):
 
 ## Discovery steps
 
-When an integration is discovered, their respective discovery step is invoked with the discovery information. The step will have to check the following things:
+When an integration is discovered, their respective discovery step is invoked (ie `async_step_dhcp` or `async_step_zeroconf`) with the discovery information. The step will have to check the following things:
 
 - Make sure there are no other instances of this config flow in progress of setting up the discovered device. This can happen if there are multiple ways of discovering that a device is on the network.
 - Make sure that the device is not already set up.
@@ -119,7 +166,7 @@ To get started, run `python3 -m script.scaffold config_flow_discovery` and follo
 
 Home Assistant has built-in support for integrations that offer account linking using [the OAuth2 authorization framework](https://tools.ietf.org/html/rfc6749). To be able to leverage this, you will need to structure your Python API library in a way that allows Home Assistant to be responsible for refreshing tokens. See our [API library guide](api_lib_index.md) on how to do this.
 
-The built-in OAuth2 support works out of the box with locally configured client ID / secret and with the Home Assistant Cloud Account Linking service. This service allows users to link their account with a centrally managed client ID/secret. If you want your integration to be part of this service, reach out to us at [hello@home-assistant.io](mailto:hello@home-assistant.io).
+The built-in OAuth2 support works out of the box with locally configured client ID / secret using the [Application Credentials platform](/docs/core/platform/application_credentials) and with the Home Assistant Cloud Account Linking service. This service allows users to link their account with a centrally managed client ID/secret. If you want your integration to be part of this service, reach out to us at [hello@home-assistant.io](mailto:hello@home-assistant.io).
 
 To get started, run `python3 -m script.scaffold config_flow_oauth2` and follow the instructions. This will create all the boilerplate necessary to configure your integration using OAuth2.
 
@@ -165,7 +212,7 @@ When the translations are merged into Home Assistant, they will be automatically
 
 As mentioned above - each Config Entry has a version assigned to it. This is to be able to migrate Config Entry data to new formats when Config Entry schema changes.
 
-Migration can be handled programatically by implementing function `async_migrate_entry` in your component's `__init__.py` file. The function should return `True` if migration is successfull.
+Migration can be handled programatically by implementing function `async_migrate_entry` in your component's `__init__.py` file. The function should return `True` if migration is successful.
 
 ```python
 # Example migration function
@@ -177,10 +224,9 @@ async def async_migrate_entry(hass, config_entry: ConfigEntry):
 
         new = {**config_entry.data}
         # TODO: modify Config Entry data
-        
-        config_entry.data = {**new}
 
         config_entry.version = 2
+        hass.config_entries.async_update_entry(config_entry, data=new)
 
     _LOGGER.info("Migration to version %s successful", config_entry.version)
 
@@ -206,15 +252,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     auth = api.AsyncConfigEntryAuth(...)
     try:
         await auth.refresh_tokens()
-    except TokenExpiredError:
-        hass.async_create_task(
-            hass.config_entries.flow.async_init(
-                DOMAIN,
-                context={"source": SOURCE_REAUTH},
-                data=entry.data,
-            )
-        )
-        return False
+    except TokenExpiredError as err:
+        raise ConfigEntryAuthFailed(err) from err
 
     # TODO: Proceed with component setup
 ```
@@ -255,7 +294,7 @@ class OAuth2FlowHandler(
 
 Depending on the details of the integration, there may be additional considerations such as ensuring the same account is used across reauth, or handling multiple config entries.
 
-The reauth confirmation dialog needs additional definitions in `strings.json` for the reauth confirmation and success diaglogs:
+The reauth confirmation dialog needs additional definitions in `strings.json` for the reauth confirmation and success dialogs:
 
 ```json
 {
@@ -278,3 +317,7 @@ See [Translations](#translations) local development instructions.
 Authentication failures (such as a revoked oauth token) can be a little tricky to manually test. One suggestion is to make a copy of `config/.storage/core.config_entries` and manually change the values of `access_token`, `refresh_token`, and `expires_at` depending on the scenario you want to test. You can then walk advance through the reauth flow and confirm that the values get replaced with new valid tokens.
 
 Automated tests should verify that the reauth flow updates the existing config entry and does not create additional entries.
+
+## Testing your config flow
+
+Integrations with a config flow require full test coverage of all code in `config_flow.py` to be accepted into core. [Test your code](development_testing.md#testing-outside-of-tox) includes more details on how to generate a coverage report.

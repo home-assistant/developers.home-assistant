@@ -30,7 +30,7 @@ The [`manifest.json` file][manifest] now has added support for a `version` key. 
 
 This version will help users communicate with you the version they had issues with. And if you ever find a security issue with your custom integration, Home Assistant will be able to block insecure versions from being used.
 
-**The `version` key will be required in a future version of Home Assistant.**
+**The `version` key is required from Home Assistant version 2021.6**
 
 ## Hassfest updated
 

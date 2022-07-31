@@ -8,21 +8,20 @@
     "start:devcontainer": "docusaurus start --poll --host 0.0.0.0",
     "build": "docusaurus build",
     "swizzle": "docusaurus swizzle",
+    "serve": "docusaurus serve",
     "deploy": "docusaurus deploy"
   },
   "dependencies": {
+    "@docusaurus/core": "^2.0.0-rc.1",
+    "@docusaurus/preset-classic": "^2.0.0-rc.1",
+    "@easyops-cn/docusaurus-search-local": "^0.27.1",
+    "@mdx-js/react": "^1.6.21",
     "by-node-env": "^2.0.1",
-    "@docusaurus/preset-classic": "^2.0.0-alpha.70",
-    "@docusaurus/core": "^2.0.0-alpha.70",
-    "classnames": "^2.2.6",
-    "react": "^16.14.0",
-    "react-dom": "^16.14.0"
+    "clsx": "^1.2.1",
+    "react": "^18.2.0",
+    "react-dom": "^17.0.2"
   },
-  "resolutions": {
-    "@docusaurus/core/**/selfsigned": "1.10.8",
-    "@docusaurus/preset-classic/**/fbjs": "2.0.0",
-    "@docusaurus/core/wait-on": "5.2.1"
-  },
+  "resolutions": {},
   "browserslist": {
     "production": [
       ">0.2%",

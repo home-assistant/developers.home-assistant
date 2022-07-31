@@ -1,11 +1,12 @@
 import React from "react";
-import classnames from "classnames";
+import clsx from 'clsx';
 import Layout from "@theme/Layout";
 import Link from "@docusaurus/Link";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.css";
 
+const recentPosts = require("../../.docusaurus/docusaurus-plugin-content-blog/default/blog-post-list-prop-default.json");
 const features = [
   {
     title: <>Document Structure</>,
@@ -67,13 +68,28 @@ const features = [
             </a>
           </li>
           <li>
-            <a href="https://github.com/home-assistant/home-assistant-polymer">
+            <a href="https://github.com/home-assistant/frontend">
               Home Assistant Frontend
             </a>
           </li>
         </ul>
       </>
     ),
+  },
+  {
+    title: <>Recent Blog Posts</>,
+    imageUrl: "",
+    description: (
+      <>
+        <ul>
+          {recentPosts.items.slice(0, 5).map((item, index) => (
+            <li key={index}>
+              <a href={`${item.permalink}`}>{item.title}</a>{" "}
+            </li>
+          ))}
+        </ul>
+      </>
+    )
   },
   {
     title: <>Upcoming Events</>,
@@ -83,7 +99,7 @@ const features = [
         <iframe
           title="Upcoming Events Calendar"
           src="https://calendar.google.com/calendar/embed?height=400&amp;wkst=2&amp;bgcolor=%23ffffff&amp;ctz=America%2FLos_Angeles&amp;src=cDA3bjk4Z28xMW9uYW1kMDhkMGttcTZqaHNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&amp;color=%23039BE5&amp;title=Release%20Schedule&amp;mode=AGENDA&amp;showPrint=0&amp;showTabs=0&amp;showCalendars=0&amp;showTz=0&amp;showNav=0&amp;showDate=0&amp;showTitle=0"
-          style={{ borderWidth: 0, margin: "auto", display: "block" }}
+          style={{ borderWidth: 0, margin: "auto" }}
           width="300"
           height="200"
           frameBorder="0"
@@ -97,7 +113,7 @@ const features = [
 function Feature({ imageUrl, title, description }) {
   const imgUrl = useBaseUrl(imageUrl);
   return (
-    <div className={classnames("col col--4", styles.feature)}>
+    <div className={clsx("col col--3", styles.feature)}>
       {imgUrl && (
         <div className="text--center">
           <img className={styles.featureImage} src={imgUrl} alt={title} />
@@ -118,13 +134,13 @@ function Home() {
       title={`Home Assistant Developer Docs`}
       description="Get started developing for Home Assistant"
     >
-      <header className={classnames("hero hero--primary", styles.heroBanner)}>
+      <header className={clsx("hero hero--primary", styles.heroBanner)}>
         <div className="container">
           <div className="row">
-            <div className={classnames('col col--5')}>
+            <div className={clsx('col col--5')}>
               <img className={styles.heroLogo} alt="Home Assistant Logo" src="/img/logo-white.svg" />
             </div>
-            <div className={classnames('col col--5')}>
+            <div className={clsx('col col--5')}>
               <h1 className={styles.heroTitle}>{siteConfig.title}</h1>
               <p className={styles.heroTagline}>{siteConfig.tagline}</p>
               <p>
@@ -148,21 +164,6 @@ function Home() {
             </div>
           </section>
         )}
-        <div className="container">
-          <div className="row">
-            <div className="col col--6 col--offset-3 padding-vert--lg">
-              <iframe
-                width="100%"
-                height="315"
-                title="Paulus Schoutsen - Awaken your home: Python and the Internet of Things - PyCon 2016"
-                src="https://www.youtube.com/embed/Cfasc9EgbMU"
-                frameborder="0"
-                allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-                allowfullscreen
-              />
-            </div>
-          </div>
-        </div>
       </main>
     </Layout>
   );

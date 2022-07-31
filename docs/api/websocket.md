@@ -2,15 +2,7 @@
 title: "WebSocket API"
 ---
 
-Home Assistant contains a WebSocket API. This API can be used to stream information from a Home Assistant instance to any client that implements WebSockets. Implementations in different languages:
-
-- [JavaScript](https://github.com/home-assistant/home-assistant-js-websocket) - powers the frontend
-- [Python](https://raw.githubusercontent.com/home-assistant/home-assistant-dev-helper/master/ha-websocket-client.py) - CLI client using [`asyncws`](https://async-websockets.readthedocs.io/en/latest/)
-- [JavaScript/HTML](https://raw.githubusercontent.com/home-assistant/home-assistant-dev-helper/master/ha-websocket.html) - WebSocket connection in your browser
-
-Connect your websocket implementation to `ws://localhost:8123/api/websocket`. You will need a valid access token.
-
-If you are not using the [`frontend`](https://www.home-assistant.io/components/frontend/) in your setup then you need to add the [`websocket_api` component](https://www.home-assistant.io/components/websocket_api/) to your `configuration.yaml` file to use the WebSocket API.
+Home Assistant contains a WebSocket API. This API can be used to stream information from a Home Assistant instance to any client that implements WebSockets. We maintain a [JavaScript library](https://github.com/home-assistant/home-assistant-js-websocket) which we use in our frontend.
 
 ## Server states
 
@@ -61,7 +53,8 @@ When a client connects to the server, the server sends out `auth_required`.
 
 ```json
 {
-  "type": "auth_required"
+  "type": "auth_required",
+  "ha_version": "2021.5.3"
 }
 ```
 
@@ -78,7 +71,8 @@ If the client supplies valid authentication, the authentication phase will compl
 
 ```json
 {
-  "type": "auth_ok"
+  "type": "auth_ok",
+  "ha_version": "2021.5.3"
 }
 ```
 
@@ -198,9 +192,94 @@ For each event that matches, the server will send a message of type `event`. The
 }
 ```
 
+## Subscribe to trigger
+
+You can also subscribe to one or more triggers with `subscribe_trigger`. These are the same triggers syntax as used for [automation triggers](https://www.home-assistant.io/docs/automation/trigger/). You can define one or a list of triggers.
+
+```json
+{
+    "id": 2,
+    "type": "subscribe_trigger",
+    "trigger": {
+        "platform": "state",
+        "entity_id": "binary_sensor.motion_occupancy",
+        "from": "off",
+        "to":"on"
+    },
+}
+```
+
+As a response you get:
+
+```json
+{
+ "id": 2,
+ "type": "result",
+ "success": true,
+ "result": null
+}
+```
+
+For each trigger that matches, the server will send a message of type `trigger`. The `id` in the message will point at the original `id` of the `subscribe_trigger` command. Note that your variables will be different based on the used trigger.
+
+```json
+{
+    "id": 2,
+    "type": "event",
+    "event": {
+        "variables": {
+            "trigger": {
+                "id": "0",
+                "idx": "0",
+                "platform": "state",
+                "entity_id": "binary_sensor.motion_occupancy",
+                "from_state": {
+                    "entity_id": "binary_sensor.motion_occupancy",
+                    "state": "off",
+                    "attributes": {
+                        "device_class": "motion",
+                        "friendly_name": "motion occupancy"
+                    },
+                    "last_changed": "2022-01-09T10:30:37.585143+00:00",
+                    "last_updated": "2022-01-09T10:33:04.388104+00:00",
+                    "context": {
+                        "id": "90e30ad8e6d0c218840478d3c21dd754",
+                        "parent_id": null,
+                        "user_id": null
+                    }
+                },
+                "to_state": {
+                    "entity_id": "binary_sensor.motion_occupancy",
+                    "state": "on",
+                    "attributes": {
+                        "device_class": "motion",
+                        "friendly_name": "motion occupancy"
+                    },
+                    "last_changed": "2022-01-09T10:33:04.391956+00:00",
+                    "last_updated": "2022-01-09T10:33:04.391956+00:00",
+                    "context": {
+                        "id": "9b263f9e4e899819a0515a97f6ddfb47",
+                        "parent_id": null,
+                        "user_id": null
+                    }
+                },
+                "for": null,
+                "attribute": null,
+                "description": "state of binary_sensor.motion_occupancy"
+            }
+        },
+        "context": {
+            "id": "9b263f9e4e899819a0515a97f6ddfb47",
+            "parent_id": null,
+            "user_id": null
+        }
+    }
+}
+```
+
 ### Unsubscribing from events
 
-You can unsubscribe from previously created subscription events. Pass the id of the original subscription command as value to the subscription field.
+You can unsubscribe from previously created subscriptions. Pass the id of the original subscription command as value to the subscription field.
 
 ```json
 {
@@ -221,6 +300,40 @@ The server will respond with a result message to indicate that unsubscribing was
 }
 ```
 
+## Fire an event
+
+This will fire an event on the Home Assistant event bus.
+
+```json
+{
+  "id": 24,
+  "type": "fire_event",
+  "event_type": "mydomain_event",
+  // Optional
+  "event_data": {
+    "device_id": "my-device-id",
+    "type": "motion_detected"
+  }
+}
+```
+
+The server will respond with a result message to indicate that the event was fired successful.
+
+```json
+{
+  "id": 24,
+  "type": "result",
+  "success": true,
+  "result": {
+    "context": {
+      "id": "326ef27d19415c60c492fe330945f954",
+      "parent_id": null,
+      "user_id": "31ddb597e03147118cf8d2f8fbea5553"
+    }
+  }
+}
+```
+
 ## Calling a service
 
 This will call a service in Home Assistant. Right now there is no return value. The client can listen to `state_changed` events if it is interested in changed entities as a result of a service call.
@@ -233,6 +346,11 @@ This will call a service in Home Assistant. Right now there is no return value. 
   "service": "turn_on",
   // Optional
   "service_data": {
+    "color_name": "beige",
+    "brightness": "101"
+  }
+  // Optional
+  "target": {
     "entity_id": "light.kitchen"
   }
 }
@@ -245,7 +363,13 @@ The server will indicate with a message indicating that the service is done exec
   "id": 24,
   "type": "result",
   "success": true,
-  "result": null
+  "result": {
+    "context": {
+      "id": "326ef27d19415c60c492fe330945f954",
+      "parent_id": null,
+      "user_id": "31ddb597e03147118cf8d2f8fbea5553"
+    }
+  }
 }
 ```
 
@@ -341,7 +465,7 @@ The server will respond with a result message containing the current registered 
 
 _Introduced in Home Assistant 0.69._
 
-:::caution Depreciated
+:::caution Deprecated
 This websocket command was depreciated in Home Assistant Core [0.107](https://www.home-assistant.io/blog/2020/03/18/release-107/) and will be removed in a future release. Until then it will result in a `WARNING` entry in the user's log.
 :::
 
@@ -417,15 +541,38 @@ The server must send a pong back as quickly as possible, if the connection is st
 }
 ```
 
+## Validate config
+
+This command allows you to validate triggers, conditions and action configurations. The keys `trigger`, `condition` and `action` will be validated as if part of an automation (so a list of triggers/conditions/actions is also allowed). All fields are optional and the result will only contain keys that were passed in.
+
+```json
+{
+  "id": 19,
+  "type": "validate_config",
+  "trigger": ...,
+  "condition": ...,
+  "action": ...
+}
+```
+
+The server will respond with the validation results. Only fields will be included in the response that were also included in the command message.
+
+```json
+{
+  "id": 19,
+  "type": "result",
+  "success": true,
+  "result": {
+    "trigger": {"valid": true, "error": null},
+    "condition": {"valid": false, "error": "Invalid condition specified for data[0]"},
+    "action": {"valid": true, "error": null}
+  }
+}
+```
+
 ## Error handling
 
 If an error occurs, the `success` key in the `result` message will be set to `false`. It will contain an `error` key containing an object with two keys: `code` and `message`.
-
-| Code | Description |
-| ----- | ------------ |
-| 1 | A non-increasing identifier has been supplied.
-| 2 | Received message is not in expected format (voluptuous validation error).
-| 3 | Requested item cannot be found
 
 ```json
 {
@@ -433,7 +580,7 @@ If an error occurs, the `success` key in the `result` message will be set to `fa
    "type":"result",
    "success": false,
    "error": {
-      "code": 2,
+      "code": "invalid_format",
       "message": "Message incorrectly formatted: expected str for dictionary value @ data['event_type']. Got 100"
    }
 }

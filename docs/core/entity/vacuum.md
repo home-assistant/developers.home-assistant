@@ -3,10 +3,16 @@ title: Vacuum Entity
 sidebar_label: Vacuum
 ---
 
+Derive entity platforms from [`homeassistant.components.vacuum.StateVacuumEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/vacuum/__init__.py)
+
 ## Properties
 
 :::tip
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+:::
+
+:::note
+`VacuumEntity` is deprecated and will be removed in future releases. Please use or migrate to the `StateVacuumEntity`
 :::
 
 | Name | Type | Default | Description
@@ -15,8 +21,8 @@ Properties should always only return information from memory and not do I/O (lik
 | state | string | **Required** | One of the states listed in the states section.
 | battery_level | int | `none` | Current battery level.
 | battery_icon | string | function | Battery icon to show in UI.
-| cleaning_mode | string | `none` | The current cleaning mode.
-| cleaning_mode_list | list | `NotImplementedError()`| List of available fan speeds and cleaning modes.
+| fan_speed | string | `none` | The current fan speed.
+| fan_speed_list | list | `NotImplementedError()`| List of available fan speeds.
 | error | string | **Required** with `STATE_ERROR` | An error message if the vacuum is in `STATE_ERROR`.
 
 ## States
@@ -29,6 +35,28 @@ Properties should always only return information from memory and not do I/O (lik
 | `STATE_IDLE` | The vacuum is not paused, not docked and does not have any errors.
 | `STATE_RETURNING` | The vacuum is done cleaning and is currently returning to the dock, but not yet docked.
 | `STATE_ERROR` | The vacuum encountered an error while cleaning, the error can be specified as a property on the entity.
+
+## Supported Features
+
+Supported features are defined by using values in the `VacuumEntityFeature` enum
+and are combined using the bitwise or (`|`) operator.
+
+| Value          | Description                                          |
+| -------------- | ---------------------------------------------------- |
+| `TURN_ON`      | The vacuum turns on.                                 |
+| `TURN_OFF`     | The vacuum turns off.                                |
+| `PAUSE`        | Pause the vacuum.                                    |
+| `STOP`         | Stop the vacuum and return to the dock.              |
+| `RETURN_HOME`  | Return to the dock.                                  |
+| `FAN_SPEED`    | The vacuum supports setting fan speed.               |
+| `BATTERY`      | The vacuum supports retrieving battery status.       |
+| `SEND_COMMAND` | The vacuum supports sending a command to the vacuum. |
+| `LOCATE`       | The vacuum supports locating.                        |
+| `CLEAN_SPOT`   | The vacuum supports spot cleaning.                   |
+| `MAP`          | The vacuum supports retrieving its map.              |
+| `STATE`        | The vacuum supports returning it state.              |
+| `STATUS`       | The vacuum supports returning it status.             |
+| `START`        | The vacuum supports the start command.               |
 
 ## Methods
 
@@ -56,9 +84,9 @@ Perform a spot clean-up.
 
 Locate the vacuum cleaner.
 
-### `set_cleaning_mode` or `async_set_cleaning_mode`
+### `set_fan_speed` or `async_set_fan_speed`
 
-Set the cleaning mode.
+Set the fan speed.
 
 ### `send_command` or `async_send_command`
 

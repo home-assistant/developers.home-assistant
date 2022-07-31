@@ -5,7 +5,7 @@ import ApiEndpoint from '@site/static/js/api_endpoint.jsx'
 
 Home Assistant provides a RESTful API on the same port as the web frontend. (default port is port 8123).
 
-If you are not using the [`frontend`](https://www.home-assistant.io/components/frontend/) in your setup then you need to add the [`api` component](https://www.home-assistant.io/components/api/) to your `configuration.yaml` file.
+If you are not using the [`frontend`](https://www.home-assistant.io/integrations/frontend/) in your setup then you need to add the [`api` integration](https://www.home-assistant.io/integrations/api/) to your `configuration.yaml` file.
 
 - `http://IP_ADDRESS:8123/` is an interface to control Home Assistant.
 - `http://IP_ADDRESS:8123/api/` is a RESTful API.
@@ -38,7 +38,7 @@ response = get(url, headers=headers)
 print(response.text)
 ```
 
-Another option is to use the [Restful Command integration](https://www.home-assistant.io/components/rest_command/) in a Home Assistant automation or script.
+Another option is to use the [Restful Command integration](https://www.home-assistant.io/integrations/rest_command/) in a Home Assistant automation or script.
 
 ```yaml
 turn_light_on:
@@ -61,7 +61,7 @@ Successful calls will return status code 200 or 201. Other status codes that can
 
 The API supports the following actions:
 
-<ApiEndpoint path="/api" method="get">
+<ApiEndpoint path="/api/" method="get">
 
 Returns a message if the API is up and running.
 
@@ -134,28 +134,6 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/api/discovery_info" method="get" unprotected>
-
-Returns basic information about the Home Assistant instance as JSON.
-
-```json
-{
-    "base_url": "http://192.168.0.2:8123",
-    "location_name": "Home",
-    "requires_api_password": true,
-    "version": "0.56.2"
-}
-```
-
-Sample `curl` command:
-
-```shell
-curl -X GET -H "Content-Type: application/json" \
-  http://localhost:8123/api/discovery_info
-```
-
-</ApiEndpoint>
-
 <ApiEndpoint path="/api/events" method="get">
 
 Returns an array of event objects. Each event object contains event name and listener count.
@@ -224,6 +202,7 @@ You can pass the following optional GET parameters:
 - `filter_entity_id=<entity_ids>` to filter on one or more entities - comma separated.
 - `end_time=<timestamp>` to choose the end of the period in URL encoded format (defaults to 1 day).
 - `minimal_response` to only return `last_changed` and `state` for states other than the first and last state (much faster).
+- `no_attributes` to skip returning attributes from the database (much faster).
 - `significant_changes_only` to only return significant state changes.
 
 Example without `minimal_response`
@@ -477,6 +456,74 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 
 </ApiEndpoint>
 
+
+<ApiEndpoint path="/api/calendars" method="get">
+
+Returns the list of calendar entities.
+
+```json
+[
+  {
+    "entity_id": "calendar.holidays",
+    "name": "National Holidays",
+  },
+  {
+    "entity_id": "calendar.personal",
+    "name": "Personal Calendar",
+  }
+]
+```
+
+Sample `curl` command:
+
+```shell
+curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" \
+  http://localhost:8123/api/calendars
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/api/calendars/<calendar entity_id>" method="get">
+
+Returns the list of [calendar events](/docs/core/entity/calendar/#calendarevent) for the specified calendar entity_id between the `start` and `end` times (exclusive).
+
+The events in the response have a `start` and `end` that contain either `dateTime` or `date` for an all day event.
+```json
+[
+  {
+    "summary": "Cinco de Mayo",
+    "start": {
+      "date": "2022-05-05"
+    },
+    "end": {
+      "date": "2022-05-06"
+    },
+  },
+  {
+    "summary": "Birthday Party",
+    "start": {
+      "dateTime": "2022-05-06T20:00:00-07:00"
+    },
+    "end": {
+      "dateTime": "2022-05-06T23:00:00-07:00"
+    },
+    "description": "Don't forget to bring balloons",
+    "location": "Brian's House"
+  }
+]
+```
+
+Sample `curl` command:
+
+```shell
+curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+  -H "Content-Type: application/json" \
+  http://localhost:8123/api/calendars/calendar.holidays?start=2022-05-01T07:00:00.000Z&end=2022-06-12T07:00:00.000Z
+```
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/api/states/<entity_id>" method="post">
 
 Updates or creates a state. You can create any state that you want, it does not have to be backed by an entity in Home Assistant.
@@ -587,6 +634,21 @@ curl -X POST -H "Authorization: Bearer ABCDEFGH" \
   http://localhost:8123/api/services/switch/turn_on
 ```
 
+Sample `python` command using the [Requests](https://requests.readthedocs.io/en/master/) module:
+
+Turn the light on:
+
+```shell
+from requests import post
+
+url = "http://localhost:8123/api/services/light/turn_on"
+headers = {"Authorization": "Bearer ABCDEFGH"}
+data = {"entity_id": "light.study_light"}
+
+response = post(url, headers=headers, json=data)
+print(response.text)
+```
+
 Send a MQTT message:
 
 ```shell
@@ -605,7 +667,7 @@ The result will include any states that changed while the service was being exec
 
 <ApiEndpoint path="/api/template" method="post">
 
-Render a Home Assistant template. [See template docs for more information.](https://www.home-assistant.io/topics/templating/)
+Render a Home Assistant template. [See template docs for more information.](https://www.home-assistant.io/docs/configuration/templating)
 
 ```json
 {
@@ -649,6 +711,23 @@ If the check fails, the errors attribute in the object will list what caused the
     "errors": "Integration not found: frontend:",
     "result": "invalid"
 }
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/api/intent/handle" method="post">
+
+Handle an intent.
+
+You must add `intent:` to your `configuration.yaml` to enable this endpoint.
+
+Sample `curl` command:
+	
+```shell
+curl -X POST -H "Authorization: Bearer ${TOKEN}" \
+  -H 'Content-Type: application/json' \
+  -d '{ "name": "SetTimer", "data": { "seconds": "30" } }' \
+  http://localhost:8123/api/intent/handle
 ```
 
 </ApiEndpoint>

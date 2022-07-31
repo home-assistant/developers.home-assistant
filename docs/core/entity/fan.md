@@ -3,7 +3,7 @@ title: Fan Entity
 sidebar_label: Fan
 ---
 
-A fan entity is a device that controls the different vectors of your fan such as speed, direction and oscillation. Derive entity platforms from ['homeassistant.components.fan.FanDevice'](https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/components/fan/__init__.py).
+A fan entity is a device that controls the different vectors of your fan such as speed, direction and oscillation. Derive entity platforms from ['homeassistant.components.fan.FanEntity'](https://github.com/home-assistant/core/blob/dev/homeassistant/components/fan/__init__.py).
 
 ## Properties
 
@@ -13,34 +13,34 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| current_direction | str | None | Return the current direction of the fan |
-| is_on | boolean | None |Return true if the entity is on |
+| current_direction | str | `None` | Return the current direction of the fan |
+| is_on | boolean | `None` |Return true if the entity is on |
 | oscillating | boolean | None | Return true if the fan is oscillating |
-| percentage | int | None | Return the current speed percentage. Must be a value between 0 (off) and 100 |
+| percentage | int | `None` | Return the current speed percentage. Must be a value between 0 (off) and 100 |
+| speed_count | int | 100 | The number of speeds the fan supports |
 | supported_features | int | 0 | Flag supported features |
-| preset_mode | str | None | Return the current preset_mode. One of the values in preset_modes. |
-| preset_modes | list | None | Get the list of available preset_modes. This is an arbitrary list of str and should not contain any speeds. |
+| preset_mode | str | `None` | Return the current preset_mode. One of the values in `preset_modes` or `None` if no preset is active. |
+| preset_modes | list | `None` | Get the list of available preset_modes. This is an arbitrary list of str and should not contain any speeds. |
 
-## Deprecated Properties
+### Preset Modes
 
-The fan entity model has changed to use percentages in the range from 0 (off) to 100 instead
-of the named speeds. The new model replaces `speed` and `speed_list` with `percentage`, `preset_mode`, and `preset_modes`. This change allowed us to expand the number of supported speeds to accommodate additional fan models in Home Assistant. 
+A fan may have preset modes that automatically control the percentage speed or other functionality. Common examples include `auto`, `smart`, `whoosh`, `eco`, and `breeze`. If no preset mode is set, the `preset_mode` property must be set to `None`.
 
-To maintain backwards compatibility with integations that have not updated to the new model, the deprecated properties will remain until at least the end of 2021. Integrations must update their [Turn on](#turn-on) function to consume `percentage` or `preset_mode` instead of `speed`.
+Preset modes should not include named (manual) speed settings as these should be represented as percentages.
 
-| Name | Type | Default | Description
-| ---- | ---- | ------- | -----------
-| speed | str | None | Return the current speed. One of the values in speed_list. |
-| speed_list | list | None| Get the list of available speeds. The allowed values are "off", "low", "medium" and "high". Use the corresponding constants SPEED_OFF, SPEED_LOW, SPEED_MEDIUM, SPEED_HIGH. |
+Manually setting a speed must disable any set preset mode. If it is possible to set a percentage speed manually without disabling the preset mode, create a switch or service to represent the mode.
 
 ## Supported Features
 
-| Constant | Description |
-|----------|--------------------------------------|
-| 'SUPPORT_DIRECTION' | The fan supports changing the direction.
-| 'SUPPORT_SET_SPEED' | The fan supports setting the speed percentage and optional preset modes.
-| 'SUPPORT_OSCILLATE' | The fan supports oscillation.
-| 'SUPPORT_PRESET_MODE' | The fan supports preset modes.
+Supported features are defined by using values in the `FanEntityFeature` enum
+and are combined using the bitwise or (`|`) operator.
+
+| Value         | Description                                                              |
+| ------------- | ------------------------------------------------------------------------ |
+| `DIRECTION`   | The fan supports changing the direction.                                 |
+| `OSCILLATE`   | The fan supports oscillation.                                            |
+| `PRESET_MODE` | The fan supports preset modes.                                           |
+| `SET_SPEED`   | The fan supports setting the speed percentage and optional preset modes. |
 
 ## Methods
 
@@ -103,18 +103,42 @@ ORDERED_NAMED_FAN_SPEEDS = ["one", "two", "three", "four", "five", "six"]  # off
 percentage = ordered_list_item_to_percentage(ORDERED_NAMED_FAN_SPEEDS, "three")
 
 named_speed = percentage_to_ordered_list_item(ORDERED_NAMED_FAN_SPEEDS, 23)
+
+...
+
+    @property
+    def percentage(self) -> Optional[int]:
+        """Return the current speed percentage."""
+        return ordered_list_item_to_percentage(ORDERED_NAMED_FAN_SPEEDS, current_speed)
+
+    @property
+    def speed_count(self) -> int:
+        """Return the number of speeds the fan supports."""
+        return len(ORDERED_NAMED_FAN_SPEEDS)
 ```
 
 If the device has a numeric range of speeds:
 
 ```python
-from homeassistant.util.percentage import ranged_value_to_percentage, percentage_to_ranged_value
+from homeassistant.util.percentage import int_states_in_range, ranged_value_to_percentage, percentage_to_ranged_value
 
 SPEED_RANGE = (1, 255)  # off is not included
 
 percentage = ranged_value_to_percentage(SPEED_RANGE, 127)
 
 value_in_range = math.ceil(percentage_to_ranged_value(SPEED_RANGE, 50))
+
+...
+
+    @property
+    def percentage(self) -> Optional[int]:
+        """Return the current speed percentage."""
+        return ranged_value_to_percentage(SPEED_RANGE, current_speed)
+
+    @property
+    def speed_count(self) -> int:
+        """Return the number of speeds the fan supports."""
+        return int_states_in_range(SPEED_RANGE)
 ```
 :::
 

@@ -17,9 +17,13 @@ Derive a platform entity from [`homeassistant.components.device_tracker.config_e
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
+:::caution
+ScannerEntity does not support attribute shorthand for [property implementation](../entity.md#entity-class-or-instance-attributes)
+:::
+
 | Name          | Type    | Default      | Description                                       |
 | ------------- | ------- | ------------ | ------------------------------------------------- |
-| source_type   | string  | **Required** | The source type, eg `gps` or `router`, of the device. |
+| source_type   | SourceType | **Required** | The source type, eg `gps` or `router`, of the device. |
 | is_connected  | boolean | **Required** | The connection state of the device.               |
 | battery_level | integer | `None`       | The battery level of the device.                  |
 | ip_address    | string  | `None`       | The IP address of the device.                     |
@@ -44,9 +48,13 @@ Derive a platform entity from [`homeassistant.components.device_tracker.config_e
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
+:::caution
+TrackerEntity does not support attribute shorthand for [property implementation](../entity.md#entity-class-or-instance-attributes)
+:::
+
 | Name              | Type    | Default      | Description                                       |
 | ----------------- | ------- | ------------ | ------------------------------------------------- |
-| source_type       | string  | **Required** | The source type, eg `gps` or `router`, of the device. |
+| source_type       | SourceType | **Required** | The source type, eg `gps` or `router`, of the device. |
 | latitude          | string  | **Required** | The latitude coordinate of the device.            |
 | longitude         | string  | **Required** | The longitude coordinate of the device.           |
 | battery_level     | integer | `None`       | The battery level of the device.                  |

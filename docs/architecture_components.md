@@ -1,55 +1,36 @@
 ---
-title: "Components Architecture"
-sidebar_label: "Components"
+title: "Integration Architecture"
+sidebar_label: "Integrations"
 ---
 
-Home Assistant can be extended with **components**. Each component is responsible for a specific domain within Home Assistant. Components can listen for or trigger events, offer services, and maintain states. Components are written in Python and can do all the goodness that Python has to offer. Out of the box, Home Assistant offers a bunch of [built-in components](https://www.home-assistant.io/integrations/).
+Home Assistant Core can be extended with **integrations**. Each integration is responsible for a specific domain within Home Assistant. Integrations can listen for or trigger events, offer services, and maintain states. Integrations are made up of a component (the base logic) and platforms (bits that integrate with other integrations). Integrations are written in Python and can do all the goodness that Python has to offer. Out of the box, Home Assistant offers a bunch of [built-in integrations](https://www.home-assistant.io/integrations/).
 
 <img class='invertDark'
-src='/img/en/architecture/component_interaction.png'
-alt='Diagram showing interaction between components and the Home Assistant core.' />
+src='/img/en/architecture/component-interaction.svg'
+alt='Diagram showing interaction between integrations and the Home Assistant core.' />
 
-There are two types of components within Home Assistant: components that interact with an Internet of Things domain, and components that respond to events that happen within Home Assistant. Read on to learn about each type!
+Home Assistant distinguishes the following integration types:
 
-## Components that interact with an Internet-of-Things domain
+## Define an Internet of Things domain
 
-These components track devices within a specific domain and consist of a core part and platform-specific logic. These components make their information available via the State Machine and the Event Bus. The components also register services in the Service Registry to expose control of the devices.
+These integrations define a specific device category of Internet of Things devices in Home Assistant, like a light. It's up to the `light` integration to define what data is available in Home Assistant and in what format. It also provides services to control lights.
 
-For example, the built-in [`switch` component](https://www.home-assistant.io/components/switch/) is responsible for interaction with different types of switches. A platform provides support for a particular kind or brand of device. For example, a switch could use a WeMo or Orvibo platform and a light component might interact with the Hue or LIFX platform.
+For a list of defined domains, see [entities](./core/entity.md).
 
-If you want to add support for a new platform, check out the [add new platform section](creating_platform_index.md).
+To suggest a new domain, start a discussion in [the architecture repository](https://github.com/home-assistant/architecture/discussions). Make sure to show what data your proposed entity would include and how it can be controlled. Include examples from multiple brands.
 
-## Components that respond to events that happen within Home Assistant
+## Interact with external devices & services
 
-These components provide small pieces of home automation logic or involve services that do common tasks within your house.
+These integrations interact with external devices & services and make them available in Home Assistant via integrations that define IoT domains like `light`.  An example of such an integration is Philips Hue. Philips Hue lights are made available as light entities in Home Assistant.
 
-For example, the [`device_sun_light_trigger` component](https://www.home-assistant.io/components/device_sun_light_trigger/) tracks the state of devices and the sun to make sure that the lights are turned on when it gets dark and people are home. The component uses logic like this:
+For more information, see [entity architecture](architecture/devices-and-services.md).
 
-```text
-In the event that device 'Paulus Nexus 5' changes to the 'Home' state:
-  If the sun has set and the lights are not on:
-    Turn on the lights
-```
+## Represent virtual/computed data points
 
-```text
-In the event that the combined state of all tracked devices changes to 'Not Home':
-  If the lights are on:
-    Turn off the lights
-```
+These integrations represent entities either based on virtual data, like the [`input_boolean` integration](https://www.home-assistant.io/integrations/input_boolean/), a virtual switch. Or they derive their data based on other data available in Home Assistant, like the [`template` integration](https://www.home-assistant.io/integrations/template/) or [`utility_meter` integration](https://www.home-assistant.io/integrations/utility_meter/).
 
-```text
-In the event of the sun setting:
-  If the lights are off and the combined state of all tracked device equals 'Home':
-    Turn on the lights
-```
+## Actions that can be triggered by the user or respond to events
 
-## The full picture
+These integrations provide small pieces of home automation logic that do common tasks within your house. The most popular one is the [`automation` integration](https://www.home-assistant.io/integrations/automation/), allowing users to create automations through a configuration format.
 
-When we put all the different pieces of Home Assistant together, it's a close match for the initial home automation overview sketch. The smart home AI has not been implemented yet, so it's not included in this picture.
-
-<img class='invertDark'
-  src='/img/en/architecture/ha_full_architecture.png'
-  alt='Overview of the full Home Assistant architecture with a couple of loaded components and platforms'
-/>
-
-The platform logic for components uses third-party Python libraries to communicate with the devices. Through this, we can leverage some of the best libraries in the Python community.
+It can also be more specific, like the [`flux` integration](https://www.home-assistant.io/integrations/flux/), which controls lights based on the sun setting.

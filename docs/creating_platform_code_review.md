@@ -12,7 +12,7 @@ Not all existing platforms follow the requirements in this checklist. This canno
 ### 0. Common
 
 1. Follow our [Style guidelines](development_guidelines.md)
-2. Use existing constants from [`const.py`](https://github.com/home-assistant/home-assistant/blob/dev/homeassistant/const.py)
+2. Use existing constants from [`const.py`](https://github.com/home-assistant/core/blob/dev/homeassistant/const.py)
    - Only add new constants to `const.py` if they are widely used. Otherwise keep them on platform level
    - Use `CONF_MONITORED_CONDITIONS` instead of `CONF_MONITORED_VARIABLES`
 
@@ -88,4 +88,9 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     status = bridge.status()
     ```
 
-    [Tutorial on publishing your own PyPI package](https://jeffknupp.com/blog/2013/08/16/open-sourcing-a-python-project-the-right-way/)
+    [Tutorial on publishing your own PyPI package](https://towardsdatascience.com/how-to-open-source-your-first-python-package-e717444e1da0)
+
+    Other noteworthy resources for publishing python packages:  
+    [Cookiecutter Project](https://cookiecutter.readthedocs.io/)  
+    [flit](https://flit.readthedocs.io/)  
+    [Poetry](https://python-poetry.org/)  

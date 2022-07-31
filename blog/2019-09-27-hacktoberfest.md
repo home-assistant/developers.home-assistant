@@ -28,10 +28,10 @@ Scenes allow a user to define how a light should look (ie, it should be on and t
 
 Scenes are a powerful tool that is easy to understand for users. It's therefore important that we improve our scene support. We have prepared the following issues:
 
-- [Add `scene.create` service to create scenes on the fly.](https://github.com/home-assistant/home-assistant/issues/27023)
-- ~~[Add `scene.apply` service to apply a scene defined as service data.](https://github.com/home-assistant/home-assistant/issues/26813)~~
-- ~~[Add activate scene to script syntax](https://github.com/home-assistant/home-assistant/issues/27026)~~
-- [Add reproduce state support to entity integrations.](https://github.com/home-assistant/home-assistant/issues?utf8=%E2%9C%93&q=label%3AHacktoberfest+reproduce_state+is%3Aopen+) (multiple issues)
+- [Add `scene.create` service to create scenes on the fly.](https://github.com/home-assistant/core/issues/27023)
+- ~~[Add `scene.apply` service to apply a scene defined as service data.](https://github.com/home-assistant/core/issues/26813)~~
+- ~~[Add activate scene to script syntax](https://github.com/home-assistant/core/issues/27026)~~
+- [Add reproduce state support to entity integrations.](https://github.com/home-assistant/core/issues?utf8=%E2%9C%93&q=label%3AHacktoberfest+reproduce_state+is%3Aopen+) (multiple issues)
 
 <!--truncate-->
 
@@ -41,9 +41,9 @@ Device Automations are a device-oriented way for users to create automations. Wh
 
 Device automations rely on integrations to define the possible options for each device. As this is a new technology, we still are looking for help in making all our entity integrations (light, switch etc) support this. We have prepared the following issues:
 
-- [Add device trigger support to entity integrations](https://github.com/home-assistant/home-assistant/issues?utf8=%E2%9C%93&q=label%3AHacktoberfest+device_trigger+is%3Aopen+) (multiple issues)
-- [Add device condition support to entity integrations](https://github.com/home-assistant/home-assistant/issues?utf8=%E2%9C%93&q=label%3AHacktoberfest+device_condition+is%3Aopen+) (multiple issues)
-- [Add device action support to entity integrations](https://github.com/home-assistant/home-assistant/issues?utf8=%E2%9C%93&q=label%3AHacktoberfest+device_action+is%3Aopen+) (multiple issues)
+- [Add device trigger support to entity integrations](https://github.com/home-assistant/core/issues?utf8=%E2%9C%93&q=label%3AHacktoberfest+device_trigger+is%3Aopen+) (multiple issues)
+- [Add device condition support to entity integrations](https://github.com/home-assistant/core/issues?utf8=%E2%9C%93&q=label%3AHacktoberfest+device_condition+is%3Aopen+) (multiple issues)
+- [Add device action support to entity integrations](https://github.com/home-assistant/core/issues?utf8=%E2%9C%93&q=label%3AHacktoberfest+device_action+is%3Aopen+) (multiple issues)
 
 ## Home Assistant Documentation
 
@@ -57,9 +57,9 @@ Guess what is never done? Documentation.
 We also have some work to do on the Frontend of Home Assistant.
 So we have also prepared some issues to get you started:
 
-- [Make all text translatable](https://github.com/home-assistant/home-assistant-polymer/issues?utf8=%E2%9C%93&q=label%3AHacktoberfest+label%3Alocalization+is%3Aopen+) (multiple issues)
-- [Help making Home Assistant better accessible](https://github.com/home-assistant/home-assistant-polymer/issues?q=is%3Aopen+label%3AHacktoberfest+label%3Aaccessibility) (multiple issues)
-- [And a lot of other small UX issues](https://github.com/home-assistant/home-assistant-polymer/labels/Hacktoberfest?page=2&q=is%3Aopen+label%3AHacktoberfest)
+- [Make all text translatable](https://github.com/home-assistant/frontend/issues?utf8=%E2%9C%93&q=label%3AHacktoberfest+label%3Alocalization+is%3Aopen+) (multiple issues)
+- [Help making Home Assistant better accessible](https://github.com/home-assistant/frontend/issues?q=is%3Aopen+label%3AHacktoberfest+label%3Aaccessibility) (multiple issues)
+- [And a lot of other small UX issues](https://github.com/home-assistant/frontend/labels/Hacktoberfest?page=2&q=is%3Aopen+label%3AHacktoberfest)
 
 ## Bonus: Almond - Virtual Assistant
 

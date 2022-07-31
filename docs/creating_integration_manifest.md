@@ -15,7 +15,9 @@ Every integration has a manifest file to specify basic information about an inte
   "after_dependencies": ["http"],
   "codeowners": ["@balloob"],
   "requirements": ["aiohue==1.9.1"],
-  "quality_scale": "platinum"
+  "quality_scale": "platinum",
+  "iot_class": "local_polling"
+  "loggers": ["aiohue"]
 }
 ```
 
@@ -28,13 +30,14 @@ Or a minimal example that you can copy into your project:
   "documentation": "https://www.example.com",
   "dependencies": [],
   "codeowners": [],
-  "requirements": []
+  "requirements": [],
+  "iot_class": "cloud_polling"
 }
 ```
 
 ## Domain
 
-The domain is a short name consisting of characters and underscores. This domain has to be unique and cannot be changed. Example of the domain for the mobile app integration: `mobile_app`.
+The domain is a short name consisting of characters and underscores. This domain has to be unique and cannot be changed. Example of the domain for the mobile app integration: `mobile_app`. The domain key has to match the directory this file is in.
 
 ## Name
 
@@ -45,6 +48,12 @@ The name of the integration.
 For core integrations, this should be omitted.
 
 The version of the integration is required for custom integrations. The version needs to be a valid version recognized by [AwesomeVersion](https://github.com/ludeeus/awesomeversion) like [CalVer](https://calver.org/) or [SemVer](https://semver.org/).
+
+## Integration Type
+
+Define what kind of integration this is. Currently accepted values are `integration` and `helper`. Helpers are integrations that provide entities to help the user with automations like input boolean, derivative or group.
+
+Defaults to `integration` if not set.
 
 ## Documentation
 
@@ -59,9 +68,13 @@ If this integration is being submitted for inclusion in Home Assistant, it shoul
 
 Dependencies are other Home Assistant integrations that you want Home Assistant to set up successfully prior to the integration being loaded. This can be necessary in case you want to offer functionality from that other integration, like using webhooks or an MQTT connection.
 
+Built-in integrations shall only specify other built-in integrations in `dependencies`. Custom integrations may specify both built-in and custom integrations in `dependencies`.
+
 ## After dependencies
 
 This option is used to specify dependencies that might be used by the integration but aren't essential. When `after_dependencies` is present, set up of an integration will wait for the `after_dependencies` to be set up before being set up. It will also make sure that the requirements of `after_dependencies` are installed so methods from the integration can be safely imported.  For example, if the `camera` integration might use the `stream` integration in certain configurations, adding `stream` to `after_dependencies` of `camera`'s manifest, will ensure that `stream` is loaded before `camera` if it is configured.  If `stream` is not configured, `camera` will still load.
+
+Built-in integrations shall only specify other built-in integrations in `after_dependencies`. Custom integrations may specify both built-in and custom integrations in `after_dependencies`.
 
 ## Code Owners
 
@@ -110,6 +123,96 @@ It is also possible to use a public git repository to install a requirement.  Th
 }
 ```
 
+### Custom integration requirements
+
+Custom integrations should only include requirements that are not required by the Core [requirements.txt](https://github.com/home-assistant/core/blob/dev/requirements.txt).
+
+## Loggers
+
+The `loggers` field is a list of names that the integration's requirements use for their [getLogger](https://docs.python.org/3/library/logging.html?highlight=logging#logging.getLogger) calls.
+
+## Supported Brands
+
+Some products are supported by integrations that are not named after the product. For example, Roborock vacuums are integrated via the Xiaomi Miio (xiaomi_miio) integration.
+
+By using the `supported_brands` manifest entry it's possible to specify other brands that work with this integration.
+
+Example:
+
+```json
+{
+  "supported_brands": {
+    "roborock": "Roborock"
+  }
+}
+```
+
+The key is a domain, like we use for integrations. The value is the title.
+Each integration domain can only exist once. So a domain is either an existing integration or referred as a "supported brand" by a single existing integration.
+
+The logo for this domain should be added to our [brands repository](https://github.com/home-assistant/brands/).
+
+Result (this is intended functionality for the near feature):
+
+- Roborock is listed on our user documentation website under integrations with an automatically generated stub page that directs the user to the integration to use.
+- Roborock is listed in Home Assistant when clicking "add integration". When selected, we first show a "redirect text", then the user continues to the Xioami Miio config flow.
+
+
+## Bluetooth
+
+If your integration supports discovery via bluetooth, you can add a matcher to your manifest. If the user has the `bluetooth` integration loaded, it will load the `bluetooth` step of your integration's config flow when it is discovered. We support listening for Bluetooth discovery by matching on `local_name`, `service_uuid`, `service_data_uuid`, `manufacturer_id`, and `manufacturer_data_start`. The `manufacturer_data_start` field expects a list of bytes encoded as integer values from 0-255. The manifest value is a list of matcher dictionaries, your integration is discovered if all items of any of the specified matchers are found in the Bluetooth data. It's up to your config flow to filter out duplicates.
+
+The following example will match Nespresso Prodigio machines:
+
+```json
+{
+  "bluetooth": [
+    {
+      "local_name": "Prodigio_*"
+    }
+  ]
+}
+```
+
+The following example will match service data with a 128 bit uuid used for SwitchBot bot and curtain devices:
+
+```json
+{
+  "bluetooth": [
+    {
+      "service_uuid": ["cba20d00-224d-11e6-9fb8-0002a5d5c51b"]
+    }
+  ]
+}
+```
+
+If you want to match service data with a 16 bit uuid, you will have to convert it to a 128 bit uuid first, by replacing the 3rd and 4th byte in `00000000-0000-1000-8000-00805f9b34fb` with the 16 bit uuid. For example, for Switchbot sensor devices, the 16 bit uuid is `0xfd3d`, the corresponding 128 bit uuid becomes `0000fd3d-0000-1000-8000-00805f9b34fb`. The following example will therefore match service data with a 16 bit uuid used for SwitchBot sensor devices:
+
+```json
+{
+  "bluetooth": [
+    {
+      "service_data_uuid": ["0000fd3d-0000-1000-8000-00805f9b34fb"]
+    }
+  ]
+}
+```
+
+The following example will match HomeKit devices:
+
+
+```json
+{
+  "bluetooth": [
+    {
+      "manufacturer_id": 76,
+      "manufacturer_data_start": [6]
+    }
+  ]
+}
+```
+
+
 ## Zeroconf
 
 If your integration supports discovery via [Zeroconf](https://en.wikipedia.org/wiki/Zero-configuration_networking), you can add the type to your manifest. If the user has the `zeroconf` integration loaded, it will load the `zeroconf` step of your integration's config flow when it is discovered.
@@ -122,16 +225,19 @@ Zeroconf is a list so you can specify multiple types to match on.
 }
 ```
 
-Certain zeroconf types are very generic (i.e., `_printer._tcp.local.`, `_axis-video._tcp.local.` or `_http._tcp.local`). In such cases you should include a name or MAC address filter:
+Certain zeroconf types are very generic (i.e., `_printer._tcp.local.`, `_axis-video._tcp.local.` or `_http._tcp.local`). In such cases you should include a Name (`name`), or Properties (`properties`) filter:
 
 ```json
 {
   "zeroconf": [
-    {"type":"_axis-video._tcp.local.","macaddress":"00408C*"},
-    {"type":"_axis-video._tcp.local.","name":"Example*"},
+    {"type":"_axis-video._tcp.local.","properties":{"macaddress":"00408c*"}},
+    {"type":"_axis-video._tcp.local.","name":"example*"},
+    {"type":"_airplay._tcp.local.","properties":{"am":"audioaccessory*"}},
    ]
 }
 ```
+
+Note that all values in the `properties` filters must be lowercase, and may contain a fnmatch type wildcard.
 
 ## SSDP
 
@@ -187,7 +293,11 @@ MQTT discovery works by subscribing to MQTT topics specified in the manifest.jso
 
 ## DHCP
 
-If your integration supports discovery via dhcp, you can add the type to your manifest. If the user has the `dhcp` integration loaded, it will load the `dhcp` step of your integration's config flow when it is discovered. We support passively listening for DHCP discovery by the `hostname` and [OUI](https://en.wikipedia.org/wiki/Organizationally_unique_identifier). The manifest value is a list of matcher dictionaries, your integration is discovered if all items of any of the specified matchers are found in the DHCP data. It's up to your config flow to filter out duplicates.
+If your integration supports discovery via dhcp, you can add the type to your manifest. If the user has the `dhcp` integration loaded, it will load the `dhcp` step of your integration's config flow when it is discovered. We support passively listening for DHCP discovery by the `hostname` and [OUI](https://en.wikipedia.org/wiki/Organizationally_unique_identifier), or matching device registry mac address when `registered_devices` is set to `true`. The manifest value is a list of matcher dictionaries, your integration is discovered if all items of any of the specified matchers are found in the DHCP data. It's up to your config flow to filter out duplicates.
+
+If an integration wants to receive discovery flows to update the IP Address of a device when it comes
+online, but a `hostname` or `oui` match would be too broad, and it has registered in the device registry with mac address using the `CONNECTION_NETWORK_MAC`,
+it should add a DHCP entry with `registered_devices` set to `true`.
 
 If the integration supports `zeroconf` or `ssdp`, these should be preferred over `dhcp` as it generally offers a better
 user experience.
@@ -220,6 +330,60 @@ For example:
 }
 ```
 
+Example with setting `registered_devices` to `true`:
+
+```json
+{
+  "dhcp": [
+    {
+    "hostname": "myintegration-*",
+    },
+    {
+    "registered_devices": true,
+    }
+  ]
+}
+```
+
+## USB
+
+If your integration supports discovery via usb, you can add the type to your manifest. If the user has the `usb` integration loaded, it will load the `usb` step of your integration's config flow when it is discovered. We support discovery by VID (Vendor ID), PID (Device ID), Serial Number, Manufacturer, and Description by extracting these values from the USB descriptor. For help identifiying these values see [How To Identify A Device](https://wiki.debian.org/HowToIdentifyADevice/USB). The manifest value is a list of matcher dictionaries. Your integration is discovered if all items of any of the specified matchers are found in the USB data. It's up to your config flow to filter out duplicates.
+
+:::warning
+Some VID and PID combinations are used by many unrelated devices. For example VID `10C4` and PID `EA60` matches any Silicon Labs CP2102 USB-Serial bridge chip. When matching these type of devices, it is important to match on `description` or another identifer to avoid an unexpected discovery.
+:::
+
+The following example has two matchers consisting of two items. All of the items in any of the two matchers must match for discovery to happen by this config.
+
+For example:
+
+-  If the `vid` was `AAAA` and the `pid` was `AAAA`, the discovery would happen.
+-  If the `vid` was `AAAA` and the `pid` was `FFFF`, the discovery would not happen.
+-  If the `vid` was `CCCC` and the `pid` was `AAAA`, the discovery would not happen.
+-  If the `vid` was `1234`, the `pid` was `ABCD`, the `serial_number` was `12345678`, the `manufacturer` was `Midway USB`, and the `description` was `Version 12 Zigbee Stick`, the discovery would happen.
+
+```json
+{
+  "usb": [
+    {
+    "vid": "AAAA",
+    "pid": "AAAA"
+    },
+    {
+    "vid": "BBBB",
+    "pid": "BBBB"
+    },
+    {
+    "vid": "1234",
+    "pid": "ABCD",
+    "serial_number": "1234*",
+    "manufacturer": "*midway*",
+    "description": "*zigbee*"
+    },
+  ]
+}
+```
+
 ## Integration Quality Scale
 
 The [Integration Quality Scale](https://www.home-assistant.io/docs/quality_scale/) scores an integration on the code quality and user experience. Each level of the quality scale consists of a list of requirements. If an integration matches all requirements, it's considered to have reached that level.
@@ -233,3 +397,19 @@ We highly recommend getting your integration scored.
  "quality_scale": "silver"
 }
 ```
+
+## IoT Class
+
+The [IoT Class][iot_class] describes how an integration connects with, e.g., a device or service. For more information
+about IoT Classes, read the blog about ["Classifying the Internet of Things"][iot_class].
+
+The following IoT classes are accepted in the manifest:
+
+- `assumed_state`: We are unable to get the state of the device. Best we can do is to assume the state based on our last command.
+- `cloud_polling`: The integration of this device happens via the cloud and requires an active internet connection. Polling the state means that an update might be noticed later.
+- `cloud_push`: Integration of this device happens via the cloud and requires an active internet connection. Home Assistant will be notified as soon as a new state is available.
+- `local_polling`: Offers direct communication with device. Polling the state means that an update might be noticed later.
+- `local_push`: Offers direct communication with device. Home Assistant will be notified as soon as a new state is available.
+- `calculated`: The integration does not handle communication on its own, but provides a calculated result.
+
+[iot_class]: https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things/#classifiers

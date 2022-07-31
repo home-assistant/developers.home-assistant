@@ -6,17 +6,21 @@ Home Assistant rates every add-on based on the wanted rights. An add-on with a r
 
 ## API Role
 
-For access to Supervisor API you need define a role or you run in default mode. This is only required for Supervisor API not Home Assistant proxy. Any of the roles already have access to the default API calls, and do not require any additional settings.
+For access to Supervisor API you need to define a role or you run in default mode. This is only required for Supervisor API not Home Assistant proxy. Any of the roles already have access to the default API calls, and do not require any additional settings.
 
 ### Available Roles
 
 | Role | Description |
 |------|-------------|
-| default | Have access to all `info` calls |
-| homeassistant | Can access all Home Assistant API endpoints |
-| backup | Can access all snapshot API endpoints |
-| manager | Is for Add-ons that run CLIs and need extended rights |
-| admin | Have access to every API call. That is the only one they can disable/enable the Add-on protection mode |
+| `default` | Have access to all `info` calls |
+| `homeassistant` | Can access all Home Assistant API endpoints |
+| `backup` | Can access all backup API endpoints |
+| `manager` | Is for Add-ons that run CLIs and need extended rights |
+| `admin` | Have access to every API call. That is the only one they can disable/enable the Add-on protection mode |
+
+## Codenotary CAS
+
+You can sign your images and also verify our base image which you build from to provide a full chain of trust. This feature us supported by our [Builder](https://github.com/home-assistant/builder) and the [build config](/docs/add-ons/configuration#add-on-extended-build). For enable this feature on the Supervisor for your Add-on, you simple need add your email address to the Add-on configuration `codenotary`.
 
 ## Protection
 
@@ -30,9 +34,8 @@ As a developer, follow the following best practices to make your add-on secure:
 - Create an AppArmor profile
 - Map folders read only if you don't need write access
 - If you need any API access, make sure that you do not grant permission that aren't needed
+- Sign the image with [Codenotary CAS](https://cas.codenotary.com/)
 
 ## Use Home Assistant User backend
 
-Instead of allowing users to set new login credential in plain text config, use the Home Assistant [Auth backend][hassio-api-auth]. You can enable the access to API with `auth_api: true`. Now you are able to send the login credential to auth backend and validate it again Home Assistant.
-
-[supervisor-api-auth]: /api/supervisor/endpoints.md#auth
+Instead of allowing users to set new login credential in plain text config, use the Home Assistant [Auth backend](/docs/api/supervisor/endpoints#auth). You can enable the access to API with `auth_api: true`. Now you are able to send the login credential to auth backend and validate it again Home Assistant.
