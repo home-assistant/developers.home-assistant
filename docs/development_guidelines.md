@@ -43,7 +43,7 @@ Also note that `_LOGGER.info` is reserved for the core, use `_LOGGER.debug` for 
 
 ### Ordering of imports
 
-Instead of order the imports manually, use [`isort`](https://github.com/timothycrosley/isort).
+Instead of ordering the imports manually, use [`isort`](https://github.com/timothycrosley/isort).
 
 ```shell
 pip3 install isort
