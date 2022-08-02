@@ -144,7 +144,7 @@ service_infos = bluetooth.async_discovered_service_info(hass)
 
 ### Triggering rediscovery of devices
 
-When an configuration entry or device is removed from home assistant, trigger rediscovery of it's address to make sure they are available to be set-up without restarting home assistant. You can make use of the bluetooth connection property of the device registry, if your integrations manages multiple devices per configuration entry.
+When a configuration entry or device is removed from Home Assistant, trigger rediscovery of its address to make sure they are available to be set up without restarting Home Assistant. You can make use of the Bluetooth connection property of the device registry if your integration manages multiple devices per configuration entry.
 
 ```python
 
