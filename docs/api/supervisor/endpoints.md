@@ -286,11 +286,11 @@ To reset customized network/audio/options, set it `null`.
 
 <ApiEndpoint path="/addons/<addon>/options/validate" method="post">
 Run a configuration validation against the current stored add-on configuration or payload.
-  
+
 **Payload:**
 
 Optional the raw add-on options.
-  
+
 **Returned data:**
 
 | key              | type        | description                      |
@@ -1332,7 +1332,7 @@ Return information about the host.
 | apparmor_version | string or null | The AppArmor version from host            |
 | boot_timestamp   | int            | The timestamp for the last boot in microseconds |
 | broadcast_llmnr  | bool or null   | Host is broadcasting its LLMNR hostname   |
-| broadcast_mdns   | bool or null   | Host is broadcasting its MulticastDNS hostname | 
+| broadcast_mdns   | bool or null   | Host is broadcasting its MulticastDNS hostname |
 | chassis          | string or null | The chassis type                          |
 | cpe              | string or null | The local CPE                             |
 | deployment       | string or null | The deployment stage of the OS if any     |
@@ -1923,7 +1923,7 @@ Returns possible targets for the new data partition.
 ```
 
 </ApiEndpoint>
-  
+
 <ApiEndpoint path="/os/datadisk/move" method="post">
 
 Move datadisk to a new location, **This will also reboot the device!**
@@ -2222,30 +2222,38 @@ Returns information about a store add-on
 
 ```json
 {
-  "apparmor": false,
+  "advanced": false,
+  "apparmor": "default",
   "arch": ["armhf", "aarch64", "i386", "amd64"],
   "auth_api": true,
+  "available": true,
+  "build": false,
   "description": "Awesome description",
   "detached": false,
   "docker_api": false,
+  "documentation": true,
   "full_access": true,
   "hassio_api": false,
   "hassio_role": "manager",
   "homeassistant_api": true,
+  "homeassistant": "2021.2.0b0",
   "host_network": false,
   "host_pid": false,
   "icon": false,
   "ingress": true,
-  "installed": "1.0.0",
+  "installed": false,
   "logo": true,
   "long_description": "lorem ipsum",
   "name": "Awesome add-on",
   "rating": 5,
-  "repository": "https://example.com/addons",
-  "signed": false
+  "repository": "core",
+  "signed": false,
   "slug": "7kshd7_awesome",
-  "state": "started",
-  "version": "1.0.0",
+  "stage": "stable",
+  "update_available": false,
+  "url": "https://example.com/addons/tree/main/awesome_addon",
+  "version_latest": "1.0.0",
+  "version": "1.0.0"
 }
 ```
 
