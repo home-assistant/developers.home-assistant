@@ -142,6 +142,17 @@ from homeassistant.components import bluetooth
 service_infos = bluetooth.async_discovered_service_info(hass)
 ```
 
+### Triggering rediscovery of devices
+
+When an configuration entry or device is removed from home assistant, trigger rediscovery of it's address to make sure they are available to be set-up without restarting home assistant. You can make use of the bluetooth connection property of the device registry, if your integrations manages multiple devices per configuration entry.
+
+```python
+
+from homeassistant.components import bluetooth
+
+bluetooth.async_rediscover_address(hass, "44:44:33:11:23:42")
+```
+
 ### Waiting for a specific advertisement
 
 To wait for a specific advertisement, call the `bluetooth.async_process_advertisements` API.
