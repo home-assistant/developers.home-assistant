@@ -44,8 +44,8 @@ Forecast data should either be daily or hourly.
 | ---- | ---- | ------- | -----------
 | datetime | string | **Required** | UTC Date time in RFC 3339 format.
 | native_temperature | float | **Required** | The higher temperature in °C or °F
-| condition | string | `None` | The weather condition at this point.
-| native_templow | float | `None` | The lower daily Temperature in °C or °F
+| condition | string | `None` | The weather condition.
+| native_templow | float | `None` | The lower temperature in °C or °F
 | native_precipitation | float | `None` | The precipitation amount in mm or in.
 | precipitation_probability | int | `None` | The probability of precipitation in %.
 | native_pressure | float | `None` | The air pressure in hPa, mbar, inHg or mmHg.
