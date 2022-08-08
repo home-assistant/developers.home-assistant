@@ -27,7 +27,7 @@ coordinator = PassiveBluetoothProcessorCoordinator(
 )
 ```
 
-PassiveBluetoothDataProcessor still takes an update_method, but instead of a BluetoothServiceInfoBleak, it now takes receives the data returned from PassiveBluetoothProcessorCoordinator's update_method. It should still return a `PassiveBluetoothDataUpdate` as before:
+PassiveBluetoothDataProcessor still takes an update_method, but instead of a BluetoothServiceInfoBleak, it now receives the data returned from PassiveBluetoothProcessorCoordinator's update_method. It should still return a `PassiveBluetoothDataUpdate` as before:
 
 ```python
 def sensor_update_to_bluetooth_data_update(
