@@ -40,6 +40,6 @@ def sensor_update_to_bluetooth_data_update(
 processor = PassiveBluetoothDataProcessor(sensor_update_to_bluetooth_data_update)
 ```
 
-All the built-in integraions have already been converted, so take a look at them for more examples.
+All the built-in integrations have already been converted, so take a look at them for more examples.
 
 This change will help integrations that need to start parsing data before loading a platform (for example, the list of platforms to load depend on data from the advertisements) or changes where a single advertisement drives multiple platforms (you won't have to parse the broadcast twice).
