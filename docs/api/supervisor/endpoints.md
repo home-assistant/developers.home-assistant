@@ -2442,6 +2442,7 @@ Returns information about the supervisor
 | debug_block         | bool         | `true` if debug block is enabled                              |
 | diagnostics         | bool or null | Sending diagnostics is enabled                                |
 | addons_repositories | list         | A list of add-on repository URL's as strings                  |
+| auto_update         | bool         | Is auto update enabled for supervisor                         |
 
 **Example response:**
 
@@ -2461,7 +2462,8 @@ Returns information about the supervisor
   "debug": false,
   "debug_block": false,
   "diagnostics": null,
-  "addons_repositories": ["https://example.com/addons"]
+  "addons_repositories": ["https://example.com/addons"],
+  "auto_update": true
 }
 ```
 
@@ -2489,6 +2491,7 @@ You need to call `/supervisor/reload` after updating the options.
 | debug_block         | bool   | Enable debug block                                     |
 | logging             | string | Set logging level                                      |
 | addons_repositories | list   | Set a list of URL's as strings for add-on repositories |
+| auto_update         | bool   | Enable/disable auto update for supervisor              |
 
 </ApiEndpoint>
 
