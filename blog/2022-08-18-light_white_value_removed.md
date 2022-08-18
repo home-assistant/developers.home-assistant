@@ -1,11 +1,11 @@
 ---
 author: Erik Montnemery
 authorURL: https://github.com/emontnemery
-title: "LightEntity no longer support white_value"
+title: "LightEntity no longer supports white_value"
 ---
 
-`LightEntity` no longer supports `white_value`, it's replaced by [color mode]
-(/docs/core/entity/light#color-modes) `white`.
+`LightEntity` no longer supports `white_value`, it's replaced by
+[color mode](/docs/core/entity/light#color-modes) `white`.
 
 ### Background
 Light's `white_value` was deprecated in Home Assistant Core 2021.4 by 
