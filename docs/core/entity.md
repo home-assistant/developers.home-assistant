@@ -19,10 +19,11 @@ from homeassistant.components.switch import SwitchEntity
 
 class MySwitch(SwitchEntity):
     _attr_has_entity_name = True
-    _attr_name = False
 
     def __init__(self):
         self._is_on = False
+        self._attr_device_info = ...  # For automatic device registration
+        self._attr_unique_id = ...
 
     @property
     def is_on(self):
@@ -68,6 +69,7 @@ Properties should always only return information from memory and not do I/O (lik
 | attribution             | string  | `None`  | The branding text required by the API provider. |
 | available               | boolean | `True`  | Indicate if Home Assistant is able to read the state and control the underlying device. |
 | device_class            | string  | `None`  | Extra classification of what the device is. Each domain specifies their own. Device classes can come with extra requirements for unit of measurement and supported features. |
+| device_info             | dict    | `None`  | [Device registry](/docs/device_registry_index) descriptor for [automatic device registration.](/docs/device_registry_index#automatic-registration-through-an-entity)
 | entity_category         | string  | `None`  | Classification of a non-primary entity. Set to `config` for an entity which allows changing the configuration of a device, for example a switch entity making it possible to turn the background illumination of a switch on and off. Set to `diagnostic` for an entity exposing some configuration parameter or diagnostics of a device but does not allow changing it, for example a sensor showing RSSI or MAC-address. |
 | entity_picture          | URL     | `None`  | Url of a picture to show for the entity. |
 | extra_state_attributes  | dict    | `None`  | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version. |
@@ -119,6 +121,9 @@ Entity names should start with a capital letter, the rest of the words are lower
 
 *Note: The example is using class attributes to implement properties, for other ways
 to implement properties see [Property implementation.](#property-implementation)*
+*Note: The example is incomplete, the `unique_id` property must be implemented, and the entity
+must be [registered with a device.](/docs/device_registry_index#defining-devices)
+
 
 ```python
 from homeassistant.components.switch import SwitchEntity
@@ -127,12 +132,20 @@ from homeassistant.components.switch import SwitchEntity
 class MySwitch(SwitchEntity):
     _attr_has_entity_name = True
     _attr_name = None
+
+    @property
+    def name(self):
+        """Name of the entity."""
+        return "My Switch"
+
 ```
 
 #### Example of a switch entity which is either not the main feature of a device, or is not part of a device:
 
 *Note: The example is using class attributes to implement properties, for other ways*
 *to implement properties see [Property implementation.](#property-implementation)*
+*Note: If the entity is part of a device, the `unique_id` property must be implemented, and the entity
+must be [registered with a device.](/docs/device_registry_index#defining-devices)
 
 ```python
 from homeassistant.components.switch import SwitchEntity
