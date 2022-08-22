@@ -21,6 +21,12 @@ Home Assistant has built-in helpers to support mDNS/Zeroconf and SSDP. If your i
 
 - Use a connection timeout of at least ten (10) seconds as `BlueZ` must resolve services when connecting to a new or updated device for the first time. Transient connection errors are frequent when connecting, and connections are not always successful on the first attempt. The `bleak-retry-connector` PyPI package can take the guesswork out of quickly and reliably establishing a connection to a device.
 
+### Connectable and non-connectable Bluetooth controllers
+
+Home Assistant has support for remote Bluetooth controllers. Some controllers only support listening for advertisement data and do not support connecting to devices. Since many devices only need to receive advertisements, we have the concept of connectable devices and non-connectable devices. Suppose the device does not require an active connection. In that case, the `connectable` argument should be set to `False` to opt-in on receiving data from controllers that do not support making outgoing connections. When `connectable` is set to `False`, data from `connectable` and non-connectable controllers will be provided.
+
+The default value for `connectable` is `True`. If the integration has some devices that require connections and some devices that do not, the `manfiest.json` should set the flag appropriately for the device. If it is impossible to construct a matcher to differentiate between similar devices, check the `connectable` property in the config flow discovery `BluetoothServiceInfoBleak` and reject flows for devices needing outgoing connections.
+
 ### Subscribing to Bluetooth discoveries
 
 Some integrations may need to know when a device is discovered right away. The Bluetooth integration provides a registration API to receive callbacks when a new device is discovered that matches specific key values. The same format for `bluetooth` in [`manifest.json`](creating_integration_manifest.md#bluetooth) is used for matching. In addition to the matchers used in the `manifest.json`, `address` can also be used as a matcher.
@@ -41,7 +47,7 @@ def _async_discovered_device(service_info: bluetooth.BluetoothServiceInfoBleak, 
 
 entry.async_on_unload(
     bluetooth.async_register_callback(
-        hass, _async_discovered_device, {"service_uuids": {"cba20d00-224d-11e6-9fb8-0002a5d5c51b"}}, bluetooth.BluetoothScanningMode.ACTIVE
+        hass, _async_discovered_device, {"service_uuids": {"cba20d00-224d-11e6-9fb8-0002a5d5c51b"}, "connectable": False}, bluetooth.BluetoothScanningMode.ACTIVE
     )
 )
 ```
@@ -74,7 +80,6 @@ entry.async_on_unload(
 )
 ```
 
-
 The below example shows registering to get callbacks for a device with the address `44:33:11:22:33:22`.
 
 ```python
@@ -103,23 +108,27 @@ scanner = bluetooth.async_get_scanner(hass)
 
 To get a callback when the Bluetooth stack can no longer see a device, call the `bluetooth.async_track_unavailable` API. For performance reasons, it may take up to five minutes to get a callback once the device is no longer seen.
 
+If the `connectable` argument is set to `True`, if any `connectable` controller can reach the device, the device will be considered available. If only non-connectable controllers can reach the device, the device will be considered unavailable. If the argument is set to `False`, the device will be considered available if any controller can see it.
+
 ```python
 from homeassistant.components import bluetooth
 
 def _unavailable_callback(address: str) -> None:
     _LOGGER.debug("%s is no longer seen", address)
    
-cancel = bluetooth.async_track_unavailable(hass, _unavailable_callback, "44:44:33:11:23:42")
+cancel = bluetooth.async_track_unavailable(hass, _unavailable_callback, "44:44:33:11:23:42", connectable=True)
 ```
 
 ### Fetching the bleak `BLEDevice` from the `address`
 
 Integrations wishing to avoid the overhead of starting an additional scanner to resolve the address may call the `bluetooth.async_ble_device_from_address` API, which returns a `BLEDevice` if the `bluetooth` integration scanner has recently seen the device. Integration MUST fall back to connecting via the `address` if the `BLEDevice` is unavailable.
 
+Suppose the integration wants to receive data from `connectable` and non-connectable controllers. In that case, it can exchange the `BLEDevice` for a `connectable` one when it wants to make an outgoing connection as long as at least one `connectable` controller is in range.
+
 ```python
 from homeassistant.components import bluetooth
 
-ble_device = bluetooth.async_ble_device_from_address(hass, "44:44:33:11:23:42")
+ble_device = bluetooth.async_ble_device_from_address(hass, "44:44:33:11:23:42", connectable=True)
 ```
 
 ### Checking if a device is present
@@ -129,7 +138,7 @@ To determine if a device is still present, call the `bluetooth.async_address_pre
 ```python
 from homeassistant.components import bluetooth
 
-bluetooth.async_address_present(hass, "44:44:33:11:23:42")
+bluetooth.async_address_present(hass, "44:44:33:11:23:42", connectable=True)
 ```
 
 ### Fetching all discovered devices
@@ -139,7 +148,7 @@ To access the list of previous discoveries, call the `bluetooth.async_discovered
 ```python
 from homeassistant.components import bluetooth
 
-service_infos = bluetooth.async_discovered_service_info(hass)
+service_infos = bluetooth.async_discovered_service_info(hass, connectable=True)
 ```
 
 ### Triggering rediscovery of devices
@@ -169,12 +178,29 @@ def _process_more_advertisements(
 service_info = await bluetooth.async_process_advertisements(
     hass
     _process_more_advertisements,
-    {"address": discovery_info.address},
+    {"address": discovery_info.address, "connectable": False},
     BluetoothScanningMode.ACTIVE,
     ADDITIONAL_DISCOVERY_TIMEOUT
 )
 ```
 
+### Registering an external scanner
+
+To register an external scanner, call the `bluetooth.async_register_scanner` API. The scanner must inherit from `BaseHaScanner`.
+
+```python
+from homeassistant.components import bluetooth
+
+cancel = bluetooth.async_register_scanner(hass, scanner, connectable=False)
+```
+
+The scanner will need to feed advertisement data to the central Bluetooth manager in the form of `BluetoothServiceInfoBleak` objects. The callback needed to send the data to the central manager can be obtained with the `bluetooth.async_get_advertisement_callback` API.
+
+```python
+callback = bluetooth.async_get_advertisement_callback(hass)
+
+callback(BluetoothServiceInfoBleak(...))
+```
 
 ## mDNS/Zeroconf
 
