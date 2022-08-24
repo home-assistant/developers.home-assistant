@@ -396,3 +396,40 @@ for adapter in adapters:
         network_prefix = ip_info["network_prefix"]
         ip_net = ip_network(f"{local_ip}/{network_prefix}", False)
 ```
+
+## USB
+
+The USB integration discovers new USB devices at startup, when the integrations page is accessed, and when they are plugged in if the underlying system has support for `pyudev`.
+
+### Checking if a specific adapter is plugged in
+
+Call the `async_is_plugged_in` API to check if a specific adapter is on the system.
+
+```python
+from homeassistant.components import usb
+
+...
+
+if not usb.async_is_plugged_in(hass, {"serial_number": "A1234", "manufacturer": "xtech"}):
+   raise ConfigEntryNotReady("The USB device is missing")
+
+```
+
+### Knowing when to look for new compatible USB devices
+
+Call the `async_register_scan_request_callback` API to request a callback when new compatible USB devices may be available.
+
+```python
+from homeassistant.components import usb
+from homeassistant.core import callback
+
+...
+
+@callback
+def _async_check_for_usb() -> None:
+    """Check for new compatible bluetooth USB adapters."""
+
+entry.async_on_unload(
+    bluetooth.async_register_scan_request_callback(hass, _async_check_for_usb)
+)
+```
