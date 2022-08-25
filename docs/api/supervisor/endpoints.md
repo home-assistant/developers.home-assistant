@@ -1969,7 +1969,8 @@ Move datadisk to a new location, **This will also reboot the device!**
       "uuid": "B9923620C9A11EBBDC3C403FC2CA371",
       "type": "clear_backups",
       "context": "system",
-      "reference": null
+      "reference": null,
+      "auto": false
     }
   ],
   "checks": [
@@ -1992,6 +1993,34 @@ Apply a suggested action
 <ApiEndpoint path="/resolution/suggestion/<uuid>" method="delete">
 
 Dismiss a suggested action
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/resolution/issue/<uuid>/suggestions" method="get">
+
+Get suggestions that would fix an issue if applied.
+
+**Returned data:**
+
+| key         | type       | description                                                                |
+| ----------- | ---------- | -------------------------------------------------------------------------- |
+| suggestions | list       | A list of [Suggestion models](api/supervisor/models.md#suggestion) actions |
+
+**Example response:**
+
+```json
+{
+  "suggestions": [
+    {
+      "uuid": "B9923620C9A11EBBDC3C403FC2CA371",
+      "type": "clear_backups",
+      "context": "system",
+      "reference": null,
+      "auto": false
+    }
+  ]
+}
+```
 
 </ApiEndpoint>
 
