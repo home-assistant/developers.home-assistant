@@ -60,6 +60,7 @@ The state of a media player can take the following possible values.
 | Value             | Description                                                                                                         |
 |-------------------|---------------------------------------------------------------------------------------------------------------------|
 | `STATE_OFF`       | Entity is turned off and is not accepting commands until turned on.                                                 |
+| `STATE_ON`        | Entity is turned on, but no details on it's state is currently known.                                               |
 | `STATE_IDLE`      | Entity is turned on and accepting commands, but currently not playing any media. Possibly at some idle home screen. |
 | `STATE_PLAYING`   | Entity is currently playing media.                                                                                  |
 | `STATE_PAUSED`    | Entity is has a active media and is currently paused                                                                |
