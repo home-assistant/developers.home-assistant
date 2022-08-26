@@ -182,7 +182,7 @@ The following example will match service data with a 128 bit uuid used for Switc
 {
   "bluetooth": [
     {
-      "service_uuid": ["cba20d00-224d-11e6-9fb8-0002a5d5c51b"]
+      "service_uuid": "cba20d00-224d-11e6-9fb8-0002a5d5c51b"
     }
   ]
 }
@@ -194,7 +194,7 @@ If you want to match service data with a 16 bit uuid, you will have to convert i
 {
   "bluetooth": [
     {
-      "service_data_uuid": ["0000fd3d-0000-1000-8000-00805f9b34fb"]
+      "service_data_uuid": "0000fd3d-0000-1000-8000-00805f9b34fb"
     }
   ]
 }
