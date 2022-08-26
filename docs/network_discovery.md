@@ -47,7 +47,7 @@ def _async_discovered_device(service_info: bluetooth.BluetoothServiceInfoBleak, 
 
 entry.async_on_unload(
     bluetooth.async_register_callback(
-        hass, _async_discovered_device, {"service_uuids": {"cba20d00-224d-11e6-9fb8-0002a5d5c51b"}, "connectable": False}, bluetooth.BluetoothScanningMode.ACTIVE
+        hass, _async_discovered_device, {"service_uuid": "cba20d00-224d-11e6-9fb8-0002a5d5c51b", "connectable": False}, bluetooth.BluetoothScanningMode.ACTIVE
     )
 )
 ```
