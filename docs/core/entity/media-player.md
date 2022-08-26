@@ -53,6 +53,19 @@ and are combined using the bitwise or (`|`) operator.
 | `VOLUME_SET`        | Entity volume can be set to specific levels.                       |
 | `VOLUME_STEP`       | Entity volume can be adjusted up and down.                         |
 
+## States
+
+The state of a media player can take the following possible values.
+
+| Value             | Description                                                                                                         |
+|-------------------|---------------------------------------------------------------------------------------------------------------------|
+| `STATE_OFF`       | Entity is turned off and is not accepting commands until turned on.                                                 |
+| `STATE_IDLE`      | Entity is turned on and accepting commands, but currently not playing any media. Possibly at some idle home screen. |
+| `STATE_PLAYING`   | Entity is currently playing media.                                                                                  |
+| `STATE_PAUSED`    | Entity is has a active media and is currently paused                                                                |
+| `STATE_STANDBY`   | Entity is in a low power state, accepting commands but likely not displaying anything.                              |
+| `STATE_BUFFERING` | Entity is preparing to start playback of some media                                                                 |
+
 ## Methods
 
 ### Play Media
