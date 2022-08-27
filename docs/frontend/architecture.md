@@ -33,7 +33,7 @@ Each page in Home Assistant is a panel. Components can register extra panels to 
 
 Folder: `src/dialogs`
 
-Certain information and data entry is presented to users in flows. Dialogs can be triggered on any page. The most common one is the entity more info dialog, which allows users to dig into an entity state, history and setting.s
+Certain information and data entry is presented to users in flows. Dialogs can be triggered on any page. The most common one is the entity more info dialog, which allows users to dig into an entity's state, history, and settings.
 
 ## Data Flow
 
