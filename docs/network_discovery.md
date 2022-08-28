@@ -104,6 +104,17 @@ from homeassistant.components import bluetooth
 scanner = bluetooth.async_get_scanner(hass)
 ```
 
+
+### Determine if there is scanner running
+
+The Bluetooth integration may be set up but has no connectable adapters or remotes. The `bluetooth.async_scanner_count` API can be used to determine if there is a scanner running that will be able to receive advertisements or generate `BLEDevice`s that can be used to connect to the device. An integration may want to raise a more helpful error during setup if there are no scanners that will generate connectable `BLEDevice` objects.
+
+```python
+from homeassistant.components import bluetooth
+
+count = bluetooth.async_scanner_count(hass, connectable=True)
+```
+
 ### Subscribing to unavailable callbacks
 
 To get a callback when the Bluetooth stack can no longer see a device, call the `bluetooth.async_track_unavailable` API. For performance reasons, it may take up to five minutes to get a callback once the device is no longer seen.
