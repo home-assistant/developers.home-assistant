@@ -222,7 +222,7 @@ The `content` key of a backup object contains the following keys:
 | ----------| ----------- | --------------------------------------------------- |
 | uuid      | str         | A generated uuid as issue ID                        |
 | type      | str         | Type of the issue                                   |
-| context   | str         | In which context the issue occorse                  |
+| context   | str         | In which context the issue occurs                   |
 | reference | str or null | Depend on the Context, a reference to another Model |
 
 ## Suggestion
@@ -231,8 +231,9 @@ The `content` key of a backup object contains the following keys:
 | ----------| ----------- | --------------------------------------------------- |
 | uuid      | str         | A generated uuid as suggestion ID                   |
 | type      | str         | Type of the suggestion                              |
-| context   | str         | In which context the suggestion occorse             |
+| context   | str         | In which context the suggestion occurs              |
 | reference | str or null | Depend on the Context, a reference to another Model |
+| auto      | bool        | True if the suggested fix will be auto-applied      |
 
 ## Check
 
