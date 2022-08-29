@@ -1,8 +1,8 @@
 ---
-title: Issue Registry
+title: Repairs Issue Registry
 ---
 
-The issue registry is a registry where Home Assistant keeps track of issues which should be brought to the user's attention.
+The repairs issue registry is a registry where Home Assistant keeps track of repairs issues which should be brought to the user's attention.
 
 ## Issue properties
 

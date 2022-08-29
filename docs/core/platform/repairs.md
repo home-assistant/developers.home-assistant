@@ -2,7 +2,7 @@
 title: "Repairs"
 ---
 
-A fixable [issue registry issue](/docs/issue_registry_index) may optionally be repaired by a custom repairs flow.
+A fixable [repairs issue](/docs/issue_registry_index) may optionally be repaired by a custom repairs flow.
 
 This is done by adding the function (`async_create_fix_flow`) to `repairs.py`
 
