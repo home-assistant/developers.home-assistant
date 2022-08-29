@@ -139,6 +139,7 @@ module.exports = {
       "integration_events",
       "integration_listen_events",
       "network_discovery",
+      "bluetooth",
     ],
     "Development Checklist": [
       "development_checklist",
