@@ -165,6 +165,13 @@ module.exports = {
         dirName: 'core/platform',
       },
     ],
+    Registries: [
+      "area_registry_index",
+      "device_registry_index",
+      "entity_registry_index",
+      "entity_registry_disabled_by",
+      "issue_registry_index",
+    ],
     "Device Automations": [
       "device_automation_index",
       "device_automation_trigger",
