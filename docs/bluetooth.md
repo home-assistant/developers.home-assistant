@@ -99,7 +99,7 @@ scanner = bluetooth.async_get_scanner(hass)
 ```
 
 
-### Determine if there is scanner running
+### Determine if a scanner is running
 
 The Bluetooth integration may be set up but has no connectable adapters or remotes. The `bluetooth.async_scanner_count` API can be used to determine if there is a scanner running that will be able to receive advertisements or generate `BLEDevice`s that can be used to connect to the device. An integration may want to raise a more helpful error during setup if there are no scanners that will generate connectable `BLEDevice` objects.
 
@@ -126,7 +126,7 @@ cancel = bluetooth.async_track_unavailable(hass, _unavailable_callback, "44:44:3
 
 ### Fetching the bleak `BLEDevice` from the `address`
 
-Integrations wishing to avoid the overhead of starting an additional scanner to resolve the address may call the `bluetooth.async_ble_device_from_address` API, which returns a `BLEDevice` if the `bluetooth` integration scanner has recently seen the device. Integration MUST fall back to connecting via the `address` if the `BLEDevice` is unavailable.
+Integrations wishing to avoid the overhead of starting an additional scanner to resolve the address may call the `bluetooth.async_ble_device_from_address` API, which returns a `BLEDevice` if the `bluetooth` integration scanner has recently seen the device. The integration MUST fall back to connecting via the `address` if the `BLEDevice` is unavailable.
 
 Suppose the integration wants to receive data from `connectable` and non-connectable controllers. In that case, it can exchange the `BLEDevice` for a `connectable` one when it wants to make an outgoing connection as long as at least one `connectable` controller is in range.
 
