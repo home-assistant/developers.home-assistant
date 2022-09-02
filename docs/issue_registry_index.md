@@ -36,6 +36,20 @@ ir.async_create_issue(
 )
 ```
 
+## Issue life cycle
+
+### Issue persistence
+
+An issue will be kept in the issue registry until it's removed by the integration creating it or by the user [fixing](#fixing-an-issue) it.
+
+The `is_persistent` flag controls if an issue should be shown to the user after a restart of Home Assistant:
+- If the `is_persistent` flag is set on the issue, the issue will be shown again to the user after a restart.
+- If the `is_persistent` flag is not set on the issue, the issue will not be shown again to the user after a restart until it's created again by its integration.
+
+### Ignored issues
+
+It's possible for the user to "ignore" issues. An ignored issue is ignored until it's explicitly deleted - either by the integration or by the user successfully walking through its [repair flow](#fixing-an-issue) - and then created again. Ignoring an issue takes effect across restarts of Home Assistant regardless of [issue persistence](#issue-persistence).
+
 ## Deleting an issue
 
 Integrations typically don't need to delete issues, but it may be useful in some cases.
