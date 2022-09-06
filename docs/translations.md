@@ -32,7 +32,7 @@ Placeholders shown in curly brackets `{}` are [translation arguments](https://fo
 
 ## Adding a new language
 
-If your language is not listed you can request it at [GitHub](https://github.com/home-assistant/frontend/issues/new). Please provide both the English name and the native name for your language. For example:
+If your language is not listed you can request it at [GitHub](https://github.com/home-assistant/frontend/discussions/new?category=localization). Please provide both the English name and the native name for your language. For example:
 
 ```txt
 English Name: German
