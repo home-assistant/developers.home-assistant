@@ -1,7 +1,7 @@
 ---
 author: epenet
 authorURL: https://github.com/epenet
-title: "Deprecating Repeat Mode constants in media player"
+title: "Deprecating media player constants"
 ---
 
 As of Home Assistant Core 2022.10, the following media player constants are deprecated:
