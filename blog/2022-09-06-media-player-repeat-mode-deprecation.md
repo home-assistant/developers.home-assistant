@@ -57,5 +57,3 @@ As of Home Assistant Core 2022.10, the following media player constants are depr
 Use the new `MediaClass`, `MediaType` and `RepeatMode` enum instead.
 
 The use of `STATE_*` constants to reflect media player state is also deprecated. Please use the new `MediaPlayerState` enum instead.
-
-A new `MediaPlayerState` enum should also be used
