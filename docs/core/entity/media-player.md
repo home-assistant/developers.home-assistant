@@ -55,17 +55,17 @@ and are combined using the bitwise or (`|`) operator.
 
 ## States
 
-The state of a media player can take the following possible values.
+The state of a media player is defined by using values in the `MediaPlayerState` enum, and can take the following possible values.
 
-| Value             | Description                                                                                                         |
-|-------------------|---------------------------------------------------------------------------------------------------------------------|
-| `STATE_OFF`       | Entity is turned off and is not accepting commands until turned on.                                                 |
-| `STATE_ON`        | Entity is turned on, but no details on its state is currently known.                                               |
-| `STATE_IDLE`      | Entity is turned on and accepting commands, but currently not playing any media. Possibly at some idle home screen. |
-| `STATE_PLAYING`   | Entity is currently playing media.                                                                                  |
-| `STATE_PAUSED`    | Entity has an active media and is currently paused                                                                |
-| `STATE_STANDBY`   | Entity is in a low power state, accepting commands.                              |
-| `STATE_BUFFERING` | Entity is preparing to start playback of some media                                                                 |
+| Value       | Description                                                                                                         |
+|-------------|---------------------------------------------------------------------------------------------------------------------|
+| `OFF`       | Entity is turned off and is not accepting commands until turned on.                                                 |
+| `ON`        | Entity is turned on, but no details on its state is currently known.                                               |
+| `IDLE`      | Entity is turned on and accepting commands, but currently not playing any media. Possibly at some idle home screen. |
+| `PLAYING`   | Entity is currently playing media.                                                                                  |
+| `PAUSED`    | Entity has an active media and is currently paused                                                                |
+| `STANDBY`   | Entity is in a low power state, accepting commands.                              |
+| `BUFFERING` | Entity is preparing to start playback of some media                                                                 |
 
 ## Methods
 
