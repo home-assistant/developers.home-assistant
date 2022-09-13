@@ -55,8 +55,8 @@ TrackerEntity does not support attribute shorthand for [property implementation]
 | Name              | Type    | Default      | Description                                       |
 | ----------------- | ------- | ------------ | ------------------------------------------------- |
 | source_type       | SourceType | **Required** | The source type, eg `gps` or `router`, of the device. |
-| latitude          | string  | **Required** | The latitude coordinate of the device.            |
-| longitude         | string  | **Required** | The longitude coordinate of the device.           |
+| latitude          | float  | **Required** | The latitude coordinate of the device.            |
+| longitude         | float  | **Required** | The longitude coordinate of the device.           |
 | battery_level     | integer | `None`       | The battery level of the device.                  |
 | location_accuracy | integer | `None`       | The location accuracy (m) of the device.          |
 | location_name     | string  | `None`       | The location name of the device.                  |
