@@ -44,6 +44,16 @@ The devcontainer comes with some useful tasks to help you with development, you 
 
 When a task is currently running (like `Preview` for the docs), it can be restarted by opening the command palette and selecting `Tasks: Restart Running Task`, then select the task you want to restart.
 
+### Debugging in Visual Studio Code
+If you need to debug an integration or Home Assistance Core you need to ensure the following:
+1. You have the `debugpy` component enabled in `configuration.yaml`. More on this [here](https://www.home-assistant.io/integrations/debugpy/)
+2. You use the right debug configuration in Visual Studio Code defined in your `launch.json` file. Sample configurations are described in the `debugpy` integration page. To debug code residing in VS Code Dev Container you should use the `Python: Attach Local` config
+
+After making sure you met the above prerequisites - you need to start the debugger, which will try to connect to a Home Assistant running instance on the port indicated in your `launch.json` config file.
+A successfull debugging setup will be indicated by Visual Studio Code by changing the status bar at the bottom to orange with a note of the debugging configuration used (e.g. `Python: Attach Local`).
+
+If you followed the above, the breakpoints you put in Visual Studio Code should work and the debugger will stop when reaching a breakpoint. 
+
 ## Manual Environment
 
 _You only need these instructions if you do not want to use devcontainers._
