@@ -118,8 +118,8 @@ If the `connectable` argument is set to `True`, if any `connectable` controller 
 ```python
 from homeassistant.components import bluetooth
 
-def _unavailable_callback(address: str) -> None:
-    _LOGGER.debug("%s is no longer seen", address)
+def _unavailable_callback(info: bluetooth.BluetoothServiceInfoBleak) -> None:
+    _LOGGER.debug("%s is no longer seen", info.address)
    
 cancel = bluetooth.async_track_unavailable(hass, _unavailable_callback, "44:44:33:11:23:42", connectable=True)
 ```
