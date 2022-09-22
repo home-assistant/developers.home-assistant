@@ -20,7 +20,7 @@ This affects authors of custom integrations or web based services importing long
  - The type `StatisticsMetaData` has a new member `state_unit_of_measurement`, which must be set correctly in calls to `async_add_external_statistics`
 - A new mandatory field `state_unit_of_measurement` has been added to the metadata parameter in WS API `recorder/import_statistics`.
  
-This affects authors of code calling the following WS APIs:
+This also affects authors of code calling the following WS APIs:
  - `recorder/adjust_sum_statistics` - A new mandatory parameter `display_unit` has been added, which defines the unit used by the `adjustment` parameter.
  - `recorder/get_statistics_metadata` - The result now includes the `display_unit_of_measurement` for each returned metadata entry. The `display_unit_of_measurement` is the value of the `state_unit_of_measurement` database column.
  - `recorder/list_statistic_ids` - The result now includes a `display_unit_of_measurement` for each returned metadata entry. The `display_unit_of_measurement` is the value of the `state_unit_of_measurement` database column.
