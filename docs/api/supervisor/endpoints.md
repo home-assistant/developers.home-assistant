@@ -1377,35 +1377,84 @@ Get the dmesg logs from the host.
 </ApiEndpoint>
 
 <ApiEndpoint path="/host/logs/entries" method="get">
+
 Get systemd Journal logs from the host. Returns log entries in plain text, one
 log record per line.
 
 **HTTP Request Headers**
+
 | Header   | optional | description                                    |
 | -------- | -------- | ---------------------------------------------- |
 | Accept   | true     | Type of data (currently only text/plain)       |
 | Range    | true     | Range of log entries. The format is `entries=cursor[[:num_skip]:num_entries]` |
-
-
 
 :::tip
 To get the last log entries the Range request header supports negative values
 as `num_skip`. E.g. `Range: entries=:-9:10` returns the last 10 entries.
 :::
 
-**Query String**
-| key      | optional | description                                    |
-| -------- | -------- | ---------------------------------------------- |
-| boot     | true     | return logs since last boot                    |
-| follow   | True     | Continusly return new log entries              |
+</ApiEndpoint>
+
+<ApiEndpoint path="/host/logs/entries/follow" method="get">
+
+Identical to `/host/logs/entries` except it continuously returns new log entries.
 
 </ApiEndpoint>
 
 <ApiEndpoint path="/host/logs/<identifier>/entries" method="get">
 
 Get systemd Journal logs from the host for entries related to a specific log
-identifier. Otherwise it provides the same functionality as
-`/host/logs/entries`.
+identifier. Possible values for identifier include:
+
+- `supervisor` - Returns logs for supervisor
+- `audio`, `cli`, `dns`, `multicast`, `observer` - Returns logs for that plugin
+- `<addon slug>` - Return logs for that addon (even if no longer installed)
+
+All other values will be handed to the host unmodified as the `SYSLOG_IDENTIFIER`.
+
+Otherwise it provides the same functionality as `/host/logs/entries`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/host/logs/<identifier>/entries/follow" method="get">
+
+Identical to `/host/logs/<identifier>/entries` except it continuously returns
+new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/host/logs/boot/<bootid>/entries" method="get">
+
+Get systemd Journal logs from the host for entries related to a specific boot.
+Boot IDs can be found in `/host/info`. Alternatively you can provide a boot
+offset:
+
+- 0 - The current boot
+- Negative number - Count backwards from current boot (-1 is previous boot)
+- Positive number - Count forward from last known boot (1 is last known boot)
+
+Otherwise it provides the same functionality as `/host/logs/entries`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/host/logs/boot/<bootid>/entries/follow" method="get">
+
+Identical to `/host/logs/boot/<bootid>/entries` except it continuously returns
+new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/host/logs/boot/<bootid>/<identifier>/entries" method="get">
+
+Get systemd Journal logs entries for a specific log identifier and boot.
+A combination of `/host/logs/boot/<bootid>/entries` and `/host/logs/<identifier>/entries`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/host/logs/boot/<bootid>/<identifier>/entries/follow" method="get">
+
+Identical to `/host/logs/boot/<bootid>/<identifier>/entries` except it continuously
+returns new log entries.
 
 </ApiEndpoint>
 
