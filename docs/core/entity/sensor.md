@@ -36,6 +36,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | carbon_monoxide | ppm | Concentration of carbon monoxide.
 | current | A | Current
 | date | | Date. Requires `native_value` to be a Python `datetime.date` object, or `None`.
+| distance | km, m, cm, mm, mi, yd, in | Generic distance
 | duration | d, h, min, s | Time period. Should not update only due to time passing. The device or service needs to give a new data point to update.
 | energy | Wh, kWh, MWh | Energy, statistics will be stored in kWh. Represents _power_ over _time_. Not to be confused with `power`.
 | frequency | Hz, kHz, MHz, GHz | Frequency
