@@ -36,6 +36,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | carbon_monoxide | ppm | Concentration of carbon monoxide.
 | current | A | Current
 | date | | Date. Requires `native_value` to be a Python `datetime.date` object, or `None`.
+| distance | km, m, cm, mm, mi, yd, in | Generic distance
 | duration | d, h, min, s | Time period. Should not update only due to time passing. The device or service needs to give a new data point to update.
 | energy | Wh, kWh, MWh | Energy, statistics will be stored in kWh. Represents _power_ over _time_. Not to be confused with `power`.
 | frequency | Hz, kHz, MHz, GHz | Frequency
@@ -56,12 +57,14 @@ If specifying a device class, your sensor entity will need to also return the co
 | pressure | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Pressure, statistics will be stored in Pa.
 | reactive_power | var | Reactive power |
 | signal_strength | dB, dBm | Signal strength
+| speed | ft/s, in/d, in/h, km/h, kn, m/s, mph, mm/d | Generic speed
 | sulphur_dioxide | µg/m³ | Concentration of sulphure dioxide |
 | temperature | °C, °F | Temperature, statistics will be stored in °C.
 | timestamp | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
 | volatile_organic_compounds | µg/m³ | Concentration of volatile organic compounds
 | voltage | V | Voltage
-| weight | kg, g, mg, µg, oz, lb | Generic mass / weight
+| volume | L, mL, gal, fl. oz., m³, ft³ | Generic volume
+| weight | kg, g, mg, µg, oz, lb | Generic mass
 
 ### Available state classes
 
