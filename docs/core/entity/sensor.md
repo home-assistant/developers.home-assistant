@@ -64,7 +64,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | volatile_organic_compounds | µg/m³ | Concentration of volatile organic compounds
 | voltage | V | Voltage
 | volume | L, mL, gal, fl. oz., m³, ft³ | Generic volume
-| weight | kg, g, mg, µg, oz, lb | Generic mass
+| weight | kg, g, mg, µg, oz, lb | Generic mass; `weight` is used instead of `mass` to fit with every day language.
 
 ### Available state classes
 
