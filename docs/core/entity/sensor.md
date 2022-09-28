@@ -42,7 +42,6 @@ If specifying a device class, your sensor entity will need to also return the co
 | gas | m³, ft³ | Volume of gas, statistics will be stored in m³. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
 | humidity | % | Relative humidity
 | illuminance | lx, lm | Light level
-| mass | kg, g, mg, µg, oz or lb | Generic mass
 | moisture | % | Moisture
 | monetary | [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) | Monetary value with a currency.
 | nitrogen_dioxide | µg/m³ | Concentration of nitrogen dioxide |
@@ -62,6 +61,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | timestamp | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
 | volatile_organic_compounds | µg/m³ | Concentration of volatile organic compounds
 | voltage | V | Voltage
+| weight | kg, g, mg, µg, oz or lb | Generic mass / weight
 
 ### Available state classes
 
