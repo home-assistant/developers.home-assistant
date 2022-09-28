@@ -61,7 +61,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | timestamp | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
 | volatile_organic_compounds | µg/m³ | Concentration of volatile organic compounds
 | voltage | V | Voltage
-| weight | kg, g, mg, µg, oz or lb | Generic mass / weight
+| weight | kg, g, mg, µg, oz, lb | Generic mass / weight
 
 ### Available state classes
 
