@@ -57,7 +57,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | pressure | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Pressure, statistics will be stored in Pa.
 | reactive_power | var | Reactive power |
 | signal_strength | dB, dBm | Signal strength
-| speed | ft/s, in/d, in/h, km/h, kn, m/s, mph, mm/d | Generic speed
+| speed | ft/s, in/d, in/h, km/h, kn, m/s, mph, mm/d, mm/h | Generic speed
 | sulphur_dioxide | µg/m³ | Concentration of sulphure dioxide |
 | temperature | °C, °F | Temperature, statistics will be stored in °C.
 | timestamp | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
