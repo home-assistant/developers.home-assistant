@@ -267,8 +267,13 @@ class OAuth2FlowHandler(
 ):
     """Config flow to handle OAuth2 authentication."""
 
+    reauth_entry: ConfigEntry | None = None
+
     async def async_step_reauth(self, user_input=None):
         """Perform reauth upon an API authentication error."""
+        self.reauth_entry = self.hass.config_entries.async_get_entry(
+            self.context["entry_id"]
+        )
         return await self.async_step_reauth_confirm()
 
     async def async_step_reauth_confirm(self, user_input=None):
@@ -282,12 +287,9 @@ class OAuth2FlowHandler(
 
     async def async_oauth_create_entry(self, data: dict) -> dict:
         """Create an oauth config entry or update existing entry for reauth."""
-        # TODO: This example supports only a single config entry. Consider
-        # any special handling needed for multiple config entries.
-        existing_entry = await self.async_set_unique_id(DOMAIN)
-        if existing_entry:
-            self.hass.config_entries.async_update_entry(existing_entry, data=data)
-            await self.hass.config_entries.async_reload(existing_entry.entry_id)
+        if self._reauth_entry:
+            self.hass.config_entries.async_update_entry(self.reauth_entry, data=data)
+            await self.hass.config_entries.async_reload(self.reauth_entry.entry_id)
             return self.async_abort(reason="reauth_successful")
         return await super().async_oauth_create_entry(data)
 ```
