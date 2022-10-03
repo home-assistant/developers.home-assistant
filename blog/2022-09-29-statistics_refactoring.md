@@ -9,7 +9,6 @@ Long term statistics now allows showing statistics in a different unit than it's
 The changes are implemented in a series of PRs:
 - https://github.com/home-assistant/core/pull/78031
 - https://github.com/home-assistant/core/pull/78578
-- https://github.com/home-assistant/core/pull/78932
 - https://github.com/home-assistant/core/pull/79370
 
 The background is that we allow overriding the unit of several sensor device classes, and this override should also be reflected when viewing long term statistics.
