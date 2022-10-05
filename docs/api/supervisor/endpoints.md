@@ -1406,7 +1406,7 @@ Identical to `/host/logs` except it continuously returns new log entries.
 Returns a list of syslog identifiers from the systemd journal that you can use
 with `/host/logs/identifiers/<identifier>` and `/host/logs/boots/<bootid>/identifiers/<identifier>`.
 
-<ApiEndpoint>
+</ApiEndpoint>
 
 <ApiEndpoint path="/host/logs/identifiers/<identifier>" method="get">
 
