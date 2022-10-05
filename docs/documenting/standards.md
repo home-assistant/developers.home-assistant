@@ -51,7 +51,7 @@ some_key:
 ### Tables
 
 - Be succinct. Minimize the number of columns and keep the amount of text as short as possible:
-  - Too wide tables are difficult to browse on handheld devices
+  - Tables that are too wide can be difficult to browse on handheld devices
   - Less content makes tables easier to read
 - When limiting the amount of text is not possible, consider using other data structures for representing the information. For example, lists or `{% configuration_basic %}` can be used.
 
