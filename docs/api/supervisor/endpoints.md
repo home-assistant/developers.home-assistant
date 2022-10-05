@@ -63,7 +63,11 @@ Get the documentation for an add-on.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/logs" method="get">
+
 Get systemd Journal logs from the host for this addon.
+
+Works identically to `GET /host/logs`, see that API for options and output.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/logs/follow" method="get">
@@ -500,7 +504,11 @@ Return information about the audio plugin.
 </ApiEndpoint>
 
 <ApiEndpoint path="/audio/logs" method="get">
+
 Get systemd Journal logs from the host for the audio plugin.
+
+Works identically to `GET /host/logs`, see that API for options and output.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/audio/logs/follow" method="get">
@@ -961,7 +969,11 @@ Returns information about the Home Assistant core
 </ApiEndpoint>
 
 <ApiEndpoint path="/core/logs" method="get">
+
 Get systemd Journal logs from the host for Home Assistant core.
+
+Works identically to `GET /host/logs`, see that API for options and output.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/core/logs/follow" method="get">
@@ -1149,7 +1161,11 @@ Return information about the DNS plugin.
 </ApiEndpoint>
 
 <ApiEndpoint path="/dns/logs" method="get">
+
 Get systemd Journal logs from the host for the dns plugin.
+
+Works identically to `GET /host/logs`, see that API for options and output.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/dns/logs/follow" method="get">
@@ -1737,7 +1753,11 @@ Returns information about the multicast plugin
 </ApiEndpoint>
 
 <ApiEndpoint path="/multicast/logs" method="get">
+
 Get systemd Journal logs from the host for the multicast plugin.
+
+Works identically to `GET /host/logs`, see that API for options and output.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/multicast/logs/follow" method="get">
@@ -2631,6 +2651,9 @@ Returns information about the supervisor
 <ApiEndpoint path="/supervisor/logs" method="get">
 
 Get systemd Journal logs from the host for supervisor.
+
+Works identically to `GET /host/logs`, see that API for options and output.
+
 
 </ApiEndpoint>
 
