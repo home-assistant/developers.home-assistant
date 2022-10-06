@@ -69,7 +69,7 @@ If specifying a device class, your sensor entity will need to also return the co
 ### Available state classes
 
 :::caution
-Choose the state class for a sensor with care. In most cases, state class `measurement` or state class `total` without `last_reset` should be chosen, this is explained further in [How to choose `state_class` and `last_reset`](how-to-choose-state_class-and-last_reset) below.
+Choose the state class for a sensor with care. In most cases, state class `measurement` or state class `total` without `last_reset` should be chosen, this is explained further in [How to choose `state_class` and `last_reset`](#how-to-choose-state_class-and-last_reset) below.
 ::::
 
 | Type | Description
