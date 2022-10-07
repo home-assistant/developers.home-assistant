@@ -35,6 +35,7 @@ and are combined using the bitwise or (`|`) operator.
 | ------------------- | ------------------------------------------------------------------ |
 | `CREATE_EVENT`      | Entity implements the methods to allow creation of events.  |
 | `DELETE_EVENT`      | Entity implements the methods to allow deletion of events.  |
+| `MUTATION`          | Entity implements the methods to allow creation and deletion of events.  |
 
 
 ## Methods
