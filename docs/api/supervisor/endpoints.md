@@ -63,17 +63,7 @@ Get the documentation for an add-on.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/logs" method="get">
-
-Get systemd Journal logs from the host for this addon.
-
-Works identically to `GET /host/logs`, see that API for options and output.
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/addons/<addon>/logs/follow" method="get">
-
-Identical to `/addons/<addon>/logs` except it continuously returns new log entries.
-
+Returns the raw container logs from docker.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/icon" method="get">
@@ -504,17 +494,7 @@ Return information about the audio plugin.
 </ApiEndpoint>
 
 <ApiEndpoint path="/audio/logs" method="get">
-
-Get systemd Journal logs from the host for the audio plugin.
-
-Works identically to `GET /host/logs`, see that API for options and output.
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/audio/logs/follow" method="get">
-
-Identical to `/audio/logs` except it continuously returns new log entries.
-
+Returns the raw container logs from docker.
 </ApiEndpoint>
 
 <ApiEndpoint path="/audio/mute/input" method="post">
@@ -969,17 +949,7 @@ Returns information about the Home Assistant core
 </ApiEndpoint>
 
 <ApiEndpoint path="/core/logs" method="get">
-
-Get systemd Journal logs from the host for Home Assistant core.
-
-Works identically to `GET /host/logs`, see that API for options and output.
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/core/logs/follow" method="get">
-
-Identical to `/core/logs` except it continuously returns new log entries.
-
+Returns the raw container logs from docker.
 </ApiEndpoint>
 
 <ApiEndpoint path="/core/options" method="post">
@@ -1161,17 +1131,7 @@ Return information about the DNS plugin.
 </ApiEndpoint>
 
 <ApiEndpoint path="/dns/logs" method="get">
-
-Get systemd Journal logs from the host for the dns plugin.
-
-Works identically to `GET /host/logs`, see that API for options and output.
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/dns/logs/follow" method="get">
-
-Identical to `/dns/logs` except it continuously returns new log entries.
-
+Returns the raw container logs from docker.
 </ApiEndpoint>
 
 <ApiEndpoint path="/dns/options" method="post">
@@ -1753,17 +1713,7 @@ Returns information about the multicast plugin
 </ApiEndpoint>
 
 <ApiEndpoint path="/multicast/logs" method="get">
-
-Get systemd Journal logs from the host for the multicast plugin.
-
-Works identically to `GET /host/logs`, see that API for options and output.
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/multicast/logs/follow" method="get">
-
-Identical to `/multicast/logs` except it continuously returns new log entries.
-
+Returns the raw container logs from docker.
 </ApiEndpoint>
 
 <ApiEndpoint path="/multicast/restart" method="post">
@@ -2650,16 +2600,7 @@ Returns information about the supervisor
 
 <ApiEndpoint path="/supervisor/logs" method="get">
 
-Get systemd Journal logs from the host for supervisor.
-
-Works identically to `GET /host/logs`, see that API for options and output.
-
-
-</ApiEndpoint>
-
-<ApiEndpoint path="/supervisor/logs/follow" method="get">
-
-Identical to `/supervisor/logs` except it continuously returns new log entries.
+Returns the raw container logs from docker.
 
 </ApiEndpoint>
 
