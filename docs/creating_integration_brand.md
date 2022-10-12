@@ -34,7 +34,7 @@ Or a minimal example that you can copy into your project:
   "domain": "your_brand_domain",
   "name": "Your Brand",
   "integrations": [],
-  "iot_standards": [],
+  "iot_standards": []
 }
 ```
 
