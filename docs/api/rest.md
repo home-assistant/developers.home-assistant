@@ -3,7 +3,7 @@ title: "REST API"
 ---
 import ApiEndpoint from '@site/static/js/api_endpoint.jsx'
 
-Home Assistant provides a RESTful API on the same port as the web frontend. (default port is port 8123).
+Home Assistant provides a RESTful API on the same port as the web frontend (default port is port 8123).
 
 If you are not using the [`frontend`](https://www.home-assistant.io/integrations/frontend/) in your setup then you need to add the [`api` integration](https://www.home-assistant.io/integrations/api/) to your `configuration.yaml` file.
 
@@ -38,7 +38,7 @@ response = get(url, headers=headers)
 print(response.text)
 ```
 
-Another option is to use the [Restful Command integration](https://www.home-assistant.io/integrations/rest_command/) in a Home Assistant automation or script.
+Another option is to use the [RESTful Command integration](https://www.home-assistant.io/integrations/rest_command/) in a Home Assistant automation or script.
 
 ```yaml
 turn_light_on:
@@ -55,7 +55,7 @@ Successful calls will return status code 200 or 201. Other status codes that can
 - 400 (Bad Request)
 - 401 (Unauthorized)
 - 404 (Not Found)
-- 405 (Method not allowed)
+- 405 (Method Not allowed)
 
 ### Actions
 
@@ -364,7 +364,7 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 
 <ApiEndpoint path="/api/states" method="get">
 
-Returns an array of state objects. Each state has the following attributes: entity_id, state, last_changed and attributes.
+Returns an array of state objects. Each state has the following attributes: `entity_id`, `state`, `last_changed` and `attributes`.
 
 ```json
 [
@@ -394,7 +394,7 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 
 <ApiEndpoint path="/api/states/<entity_id>" method="get">
 
-Returns a state object for specified entity_id. Returns 404 if not found.
+Returns a state object for specified `entity_id`. Returns 404 if not found.
 
 ```json
 {
@@ -444,7 +444,7 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 
 <ApiEndpoint path="/api/camera_proxy/<camera entity_id>" method="get">
 
-Returns the data (image) from the specified camera entity_id.
+Returns the data (image) from the specified camera `entity_id`.
 
 Sample `curl` command:
 
@@ -486,7 +486,7 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 
 <ApiEndpoint path="/api/calendars/<calendar entity_id>" method="get">
 
-Returns the list of [calendar events](/docs/core/entity/calendar/#calendarevent) for the specified calendar entity_id between the `start` and `end` times (exclusive).
+Returns the list of [calendar events](/docs/core/entity/calendar/#calendarevent) for the specified calendar `entity_id` between the `start` and `end` times (exclusive).
 
 The events in the response have a `start` and `end` that contain either `dateTime` or `date` for an all day event.
 ```json
@@ -572,7 +572,7 @@ curl -X POST -H "Authorization: Bearer ABCDEFGH" \
 
 <ApiEndpoint path="/api/events/<event_type>" method="post">
 
-Fires an event with event_type. Please be mindful of the data structure as documented on our [Data Science portal](https://data.home-assistant.io/docs/events/#database-table).
+Fires an event with `event_type`. Please be mindful of the data structure as documented on our [Data Science portal](https://data.home-assistant.io/docs/events/#database-table).
 
 You can pass an optional JSON object to be used as `event_data`.
 
@@ -649,7 +649,7 @@ response = post(url, headers=headers, json=data)
 print(response.text)
 ```
 
-Send a MQTT message:
+Send an MQTT message:
 
 ```shell
 curl -X POST \
