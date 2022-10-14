@@ -55,7 +55,7 @@ Successful calls will return status code 200 or 201. Other status codes that can
 - 400 (Bad Request)
 - 401 (Unauthorized)
 - 404 (Not Found)
-- 405 (Method Not allowed)
+- 405 (Method Not Allowed)
 
 ### Actions
 
