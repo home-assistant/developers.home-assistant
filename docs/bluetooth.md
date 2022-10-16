@@ -136,7 +136,7 @@ from homeassistant.components import bluetooth
 ble_device = bluetooth.async_ble_device_from_address(hass, "44:44:33:11:23:42", connectable=True)
 ```
 
-### Fetching the bleak `BluetoothServiceInfoBleak` for a device
+### Fetching the latest `BluetoothServiceInfoBleak` for a device
 
 The latest advertisement and device data are available with the `bluetooth.async_last_service_info` API, which returns a `BluetoothServiceInfoBleak` from the scanner with the best RSSI of the requested connectable type.
 
