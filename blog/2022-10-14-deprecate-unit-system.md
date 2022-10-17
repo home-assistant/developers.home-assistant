@@ -7,7 +7,7 @@ title: "Deprecate Unit System constants and properties"
 As of Home Assistant Core 2022.11, the `is_metric` and `name` properties of a unit system are deprecated 
 and should not be used.
 
-Custom components referencing these properties will need to be adjusted to use instance checks instead.
+Custom integrations referencing these properties will need to be adjusted to use instance checks instead.
 
 Correct:
 ```python
