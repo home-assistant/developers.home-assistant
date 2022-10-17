@@ -716,6 +716,43 @@ Return a list of [Backups](api/supervisor/models.md#backup)
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/backups/info" method="get">
+
+Return information about backup manager.
+
+**Returned data:**
+
+| key              | type       | description                                          |
+| ---------------- | ---------- | ---------------------------------------------------- |
+| backups          | list       | A list of [Backups](api/supervisor/models.md#backup) |
+| days_until_stale | int        | Number of days until a backup is considered stale    |
+
+**Example response:**
+
+```json
+{
+  "backups": [
+    {
+      "slug": "skuwe823",
+      "date": "2020-09-30T20:25:34.273Z",
+      "name": "Awesome backup",
+      "type": "partial",
+      "size": 44,
+      "protected": true,
+      "compressed": true,
+      "content": {
+        "homeassistant": true,
+        "addons": ["awesome_addon"],
+        "folders": ["ssl", "media"]
+      }
+    }
+  ],
+  "days_until_stale": 30
+}
+```
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/backups/new/full" method="post">
 
 Create a full backup.
@@ -776,6 +813,19 @@ Create a partial backup.
   "slug": "skuwe823"
 }
 ```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/backups/options" method="post">
+Update options for backup manager, you need to supply at least one of the payload keys to the API call.
+
+**Payload:**
+
+| key              | type           | description                                           |
+| ---------------- | -------------- | ----------------------------------------------------- |
+| days_until_stale | int            | Set number of days until a backup is considered stale |
+
+**You need to supply at least one key in the payload.**
 
 </ApiEndpoint>
 
