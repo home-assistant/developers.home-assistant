@@ -126,7 +126,7 @@ cancel = bluetooth.async_track_unavailable(hass, _unavailable_callback, "44:44:3
 
 ### Fetching the bleak `BLEDevice` from the `address`
 
-Integrations should avoid the overhead of starting an additional scanner to resolve the address may call the `bluetooth.async_ble_device_from_address` API, which returns a `BLEDevice` if the `bluetooth` integration scanner has recently seen the device. The integration MUST fall back to connecting via the `address` if the `BLEDevice` is unavailable.
+Integrations should avoid the overhead of starting an additional scanner to resolve the address by calling the `bluetooth.async_ble_device_from_address` API, which returns a `BLEDevice` if any configured `bluetooth` scanner can reach the device.
 
 Suppose the integration wants to receive data from `connectable` and non-connectable controllers. In that case, it can exchange the `BLEDevice` for a `connectable` one when it wants to make an outgoing connection as long as at least one `connectable` controller is in range.
 
