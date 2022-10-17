@@ -51,9 +51,17 @@ The version of the integration is required for custom integrations. The version 
 
 ## Integration Type
 
-Define what kind of integration this is. Currently accepted values are `integration` and `helper`. Helpers are integrations that provide entities to help the user with automations like input boolean, derivative or group.
+Define what kind of integration this is. Defaults to `hub` if not set.
 
-Defaults to `integration` if not set.
+| Type |  Description
+| ---- | -----------
+| device | Provides a single device like, for example, ESPHome. |
+| entity | Provides an basic entity platform, like sensor or light. This should generally not be used. |
+| hardware | Provides an hardware integration, like Raspbery Pi or Hardkernel. This should generally not be used. |
+| helper | Provide entities to help the user with automations like input boolean, derivative or group. |
+| hub | Provides a hub integration, with multiple devices, like Philips Hue. |
+| service | Provides a service integration, like DuckDNS or AdGuard. |
+| system | Provides a system integration and is reserved, should generally not be used. |
 
 ## Documentation
 
