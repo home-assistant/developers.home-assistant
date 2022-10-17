@@ -19,7 +19,7 @@ if hass.config.units is METRIC_SYSTEM:
 ```
 
 To avoid confusion with future unit systems, the constants `CONF_UNIT_SYSTEM_IMPERIAL` 
-and `CONF_UNIT_SYSTEM_METRIC` are also deprecated and should not longer be referenced:
+and `CONF_UNIT_SYSTEM_METRIC` are also deprecated and should no longer be referenced:
   - if they were used to compare against the `name` of a unit system, 
   then this is no longer needed.
   - if they were used for another reason, then local constants should be created instead.
