@@ -126,7 +126,7 @@ cancel = bluetooth.async_track_unavailable(hass, _unavailable_callback, "44:44:3
 
 ### Fetching the bleak `BLEDevice` from the `address`
 
-Integrations wishing to avoid the overhead of starting an additional scanner to resolve the address may call the `bluetooth.async_ble_device_from_address` API, which returns a `BLEDevice` if the `bluetooth` integration scanner has recently seen the device. The integration MUST fall back to connecting via the `address` if the `BLEDevice` is unavailable.
+Integrations should avoid the overhead of starting an additional scanner to resolve the address by calling the `bluetooth.async_ble_device_from_address` API, which returns a `BLEDevice` for the nearest configured `bluetooth` adapter that can reach the device. If no adapters can reach the device, the `bluetooth.async_ble_device_from_address` API, will return `None`.
 
 Suppose the integration wants to receive data from `connectable` and non-connectable controllers. In that case, it can exchange the `BLEDevice` for a `connectable` one when it wants to make an outgoing connection as long as at least one `connectable` controller is in range.
 
@@ -136,9 +136,19 @@ from homeassistant.components import bluetooth
 ble_device = bluetooth.async_ble_device_from_address(hass, "44:44:33:11:23:42", connectable=True)
 ```
 
+### Fetching the latest `BluetoothServiceInfoBleak` for a device
+
+The latest advertisement and device data are available with the `bluetooth.async_last_service_info` API, which returns a `BluetoothServiceInfoBleak` from the scanner with the best RSSI of the requested connectable type.
+
+```python
+from homeassistant.components import bluetooth
+
+service_info = bluetooth.async_last_service_info(hass, "44:44:33:11:23:42", connectable=True)
+```
+
 ### Checking if a device is present
 
-To determine if a device is still present, call the `bluetooth.async_address_present` API. This call is helpful if your integration needs the device to be present to consider it available. As this call can be expensive with many devices, we recommend only calling it every five minutes.
+To determine if a device is still present, call the `bluetooth.async_address_present` API. This call is helpful if your integration needs the device to be present to consider it available.
 
 ```python
 from homeassistant.components import bluetooth
