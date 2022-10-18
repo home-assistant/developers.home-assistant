@@ -11,10 +11,14 @@ Custom integrations referencing these properties will need to be adjusted to use
 
 Correct:
 ```python
-if hass.config.units is IMPERIAL_SYSTEM:
+if hass.config.units is METRIC_SYSTEM:
     pass
 
-if hass.config.units is METRIC_SYSTEM:
+if hass.config.units is US_CUSTOMARY_SYSTEM:
+    pass
+
+if hass.config.units is IMPERIAL_SYSTEM:
+    # Deprecated but kept for compatibility
     pass
 ```
 
@@ -23,3 +27,5 @@ and `CONF_UNIT_SYSTEM_METRIC` are also deprecated and should no longer be refere
   - if they were used to compare against the `name` of a unit system, 
   then this is no longer needed.
   - if they were used for another reason, then local constants should be created instead.
+
+Please also note the [deprecation of IMPERIAL_SYSTEM](/blog/2022/10/18/rename-imperial-unit-system)
