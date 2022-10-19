@@ -23,4 +23,3 @@ and `CONF_UNIT_SYSTEM_METRIC` are also deprecated and should no longer be refere
   - if they were used to compare against the `name` of a unit system, 
   then this is no longer needed.
   - if they were used for another reason, then local constants should be created instead.
-
