@@ -9,6 +9,7 @@ Every integration has a manifest file to specify basic information about an inte
 {
   "domain": "hue",
   "name": "Philips Hue",
+  "integration_type": "hub",
   "documentation": "https://www.home-assistant.io/components/hue",
   "issue_tracker": "https://github.com/balloob/hue/issues",
   "dependencies": ["mqtt"],
@@ -27,6 +28,7 @@ Or a minimal example that you can copy into your project:
 {
   "domain": "your_domain_name",
   "name": "Your Integration",
+  "integration_type": "hub",
   "documentation": "https://www.example.com",
   "dependencies": [],
   "codeowners": [],
@@ -51,7 +53,10 @@ The version of the integration is required for custom integrations. The version 
 
 ## Integration Type
 
-Define what kind of integration this is. 
+Integrations are split into multiple integration types. Each integration
+must provide an `integration_type` in their manifest, that describes its main
+focus.
+
 :::warning
 When not set, we currently default to `hub`. This default is temporary during
 our transition period, every integration should set an `integration_type` and
