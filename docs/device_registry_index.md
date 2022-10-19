@@ -56,18 +56,19 @@ Each entity is able to define a device via the `device_info` property. This prop
 # Inside a platform
 class HueLight(LightEntity):
     @property
-    def device_info(self):
-        return {
-            "identifiers": {
+    def device_info(self) -> DeviceInfo:
+        """Return the device info."""
+        return DeviceInfo(
+            identifiers={
                 # Serial numbers are unique identifiers within a specific domain
                 (hue.DOMAIN, self.unique_id)
             },
-            "name": self.name,
-            "manufacturer": self.light.manufacturername,
-            "model": self.light.productname,
-            "sw_version": self.light.swversion,
-            "via_device": (hue.DOMAIN, self.api.bridgeid),
-        }
+            name=self.name,
+            manufacturer=self.light.manufacturername,
+            model=self.light.productname,
+            sw_version=self.light.swversion,
+            via_device=(hue.DOMAIN, self.api.bridgeid),
+        )
 ```
 
 Besides device properties, `device_info` can also include `default_manufacturer`, `default_model`, `default_name`. These values will be added to the device registry if no other value is defined just yet. This can be used by integrations that know some information but not very specific. For example, a router that identifies devices based on MAC addresses.
