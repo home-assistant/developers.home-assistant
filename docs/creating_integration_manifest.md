@@ -51,7 +51,12 @@ The version of the integration is required for custom integrations. The version 
 
 ## Integration Type
 
-Define what kind of integration this is. Defaults to `hub` if not set.
+Define what kind of integration this is. 
+:::warning
+When not set, we currently default to `hub`. This default is temporary during
+our transition period, every integration should set an `integration_type` and
+it thus will become mandatory in the future.
+:::
 
 | Type |  Description
 | ---- | -----------
@@ -62,6 +67,12 @@ Define what kind of integration this is. Defaults to `hub` if not set.
 | hub | Provides a hub integration, with multiple devices, like Philips Hue. |
 | service | Provides a service integration, like DuckDNS or AdGuard. |
 | system | Provides a system integration and is reserved, should generally not be used. |
+
+:::info
+Note the mention of “main focus”. An integration that integrates a service like AdGuard Home,
+could still expose devices on the network that it can control. An integration that integrates
+a hub like Hue can still expose rooms as services.
+:::
 
 ## Documentation
 
