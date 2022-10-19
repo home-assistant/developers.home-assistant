@@ -65,18 +65,19 @@ it thus will become mandatory in the future.
 
 | Type |  Description
 | ---- | -----------
-| device | Provides a single device like, for example, ESPHome. |
-| entity | Provides an basic entity platform, like sensor or light. This should generally not be used. |
-| hardware | Provides an hardware integration, like Raspbery Pi or Hardkernel. This should generally not be used. |
-| helper | Provide entities to help the user with automations like input boolean, derivative or group. |
-| hub | Provides a hub integration, with multiple devices, like Philips Hue. |
-| service | Provides a service integration, like DuckDNS or AdGuard. |
-| system | Provides a system integration and is reserved, should generally not be used. |
+| `device` | Provides a single device like, for example, ESPHome. |
+| `entity` | Provides an basic entity platform, like sensor or light. This should generally not be used. |
+| `hardware` | Provides an hardware integration, like Raspbery Pi or Hardkernel. This should generally not be used. |
+| `helper` | Provides an entity to help the user with automations like input boolean, derivative or group. |
+| `hub` | Provides a hub integration, with multiple devices or services, like Philips Hue. |
+| `service` | Provides a single service, like DuckDNS or AdGuard. |
+| `system` | Provides a system integration and is reserved, should generally not be used. |
 
 :::info
-Note the mention of “main focus”. An integration that integrates a service like AdGuard Home,
-could still expose devices on the network that it can control. An integration that integrates
-a hub like Hue can still expose rooms as services.
+The difference between a `hub` and a `service` or `device` is defined by the nature
+of the integration. A `hub` provides a gateway to multiple other devices or
+services. `service` and `device` are integrations that provide a single device
+or service per config entry.
 :::
 
 ## Documentation
