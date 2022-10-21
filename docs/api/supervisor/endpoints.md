@@ -2356,6 +2356,22 @@ Update an add-on from the store.
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/store/addons/<addon>/changelog" method="get">
+Get the changelog for an add-on.
+</ApiEndpoint>
+
+<ApiEndpoint path="/store/addons/<addon>/documentation" method="get">
+Get the documentation for an add-on.
+</ApiEndpoint>
+
+<ApiEndpoint path="/store/addons/<addon>/icon" method="get">
+Get the add-on icon
+</ApiEndpoint>
+
+<ApiEndpoint path="/store/addons/<addon>/logo" method="get">
+Get the add-on logo
+</ApiEndpoint>
+
 <ApiEndpoint path="/store/reload" method="post">
 
 Reloads the information stored about add-ons.
