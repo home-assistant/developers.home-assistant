@@ -17,6 +17,6 @@ This feature allows any code owner to triage issues that are labeled with their 
   Change the title of the issue. Limited to when there is only 1 integration labeled
 
 * `@home-assistant unassign <your domain>`<br />
-  Remove the integration label and related assignees. Domain can be left out if only 1 integration labeled.
+  Remove the integration label and related assignees.
 
 The bot will include these commands when it posts a comment to notify a code owner of a new issue or pull request ([example](#)).
