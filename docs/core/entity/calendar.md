@@ -60,13 +60,12 @@ class MyCalendar(CalendarEntity):
 
 ### Create Events
 
-A calendar entity may support creating and deleting events by specifying the `MUTATION` supported feature. Integrations that support mutation must handle rfc5545 fields and best practices such as preserving any new unknown fields that are set and recurring events.
-
+A calendar entity may support creating and deleting events by specifying the `MUTATION` supported feature. Integrations that support mutation must handle rfc5545 fields and best practices such as preserving any new unknown fields that are set and recurring events. The return value of the create call is the event `uid` which is the persistent globally unique identifier for the event.
 
 ```python
 class MyCalendar(CalendarEntity):
 
-    async def async_create_event(self, **kwargs: Any) -> dict[str, Any]:
+    async def async_create_event(self, **kwargs: Any) -> str:
         """Add a new event to calendar."""
 ```
 
