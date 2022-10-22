@@ -9,6 +9,7 @@ Every integration has a manifest file to specify basic information about an inte
 {
   "domain": "hue",
   "name": "Philips Hue",
+  "integration_type": "hub",
   "documentation": "https://www.home-assistant.io/components/hue",
   "issue_tracker": "https://github.com/balloob/hue/issues",
   "dependencies": ["mqtt"],
@@ -27,6 +28,7 @@ Or a minimal example that you can copy into your project:
 {
   "domain": "your_domain_name",
   "name": "Your Integration",
+  "integration_type": "hub",
   "documentation": "https://www.example.com",
   "dependencies": [],
   "codeowners": [],
@@ -51,9 +53,32 @@ The version of the integration is required for custom integrations. The version 
 
 ## Integration Type
 
-Define what kind of integration this is. Currently accepted values are `integration` and `helper`. Helpers are integrations that provide entities to help the user with automations like input boolean, derivative or group.
+Integrations are split into multiple integration types. Each integration
+must provide an `integration_type` in their manifest, that describes its main
+focus.
 
-Defaults to `integration` if not set.
+:::warning
+When not set, we currently default to `hub`. This default is temporary during
+our transition period, every integration should set an `integration_type` and
+it thus will become mandatory in the future.
+:::
+
+| Type |  Description
+| ---- | -----------
+| `device` | Provides a single device like, for example, ESPHome. |
+| `entity` | Provides an basic entity platform, like sensor or light. This should generally not be used. |
+| `hardware` | Provides an hardware integration, like Raspbery Pi or Hardkernel. This should generally not be used. |
+| `helper` | Provides an entity to help the user with automations like input boolean, derivative or group. |
+| `hub` | Provides a hub integration, with multiple devices or services, like Philips Hue. |
+| `service` | Provides a single service, like DuckDNS or AdGuard. |
+| `system` | Provides a system integration and is reserved, should generally not be used. |
+
+:::info
+The difference between a `hub` and a `service` or `device` is defined by the nature
+of the integration. A `hub` provides a gateway to multiple other devices or
+services. `service` and `device` are integrations that provide a single device
+or service per config entry.
+:::
 
 ## Documentation
 
