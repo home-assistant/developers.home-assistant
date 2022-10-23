@@ -72,6 +72,7 @@ it thus will become mandatory in the future.
 | `hub` | Provides a hub integration, with multiple devices or services, like Philips Hue. |
 | `service` | Provides a single service, like DuckDNS or AdGuard. |
 | `system` | Provides a system integration and is reserved, should generally not be used. |
+| `virtual` | Not an integration on its own. Instead it points towards another integration or IoT standard. See [virtual integration](#virtual-integration) section. |
 
 :::info
 The difference between a `hub` and a `service` or `device` is defined by the nature
@@ -155,33 +156,6 @@ Custom integrations should only include requirements that are not required by th
 ## Loggers
 
 The `loggers` field is a list of names that the integration's requirements use for their [getLogger](https://docs.python.org/3/library/logging.html?highlight=logging#logging.getLogger) calls.
-
-## Supported Brands
-
-Some products are supported by integrations that are not named after the product. For example, Roborock vacuums are integrated via the Xiaomi Miio (xiaomi_miio) integration.
-
-By using the `supported_brands` manifest entry it's possible to specify other brands that work with this integration.
-
-Example:
-
-```json
-{
-  "supported_brands": {
-    "roborock": "Roborock"
-  }
-}
-```
-
-The key is a domain, like we use for integrations. The value is the title.
-Each integration domain can only exist once. So a domain is either an existing integration or referred as a "supported brand" by a single existing integration.
-
-The logo for this domain should be added to our [brands repository](https://github.com/home-assistant/brands/).
-
-Result:
-
-- Roborock is listed on our user documentation website under integrations with an automatically generated stub page that directs the user to the integration to use.
-- Roborock is listed in Home Assistant when clicking "add integration". When selected, we first show a "redirect text", then the user continues to the Xioami Miio config flow.
-
 
 ## Bluetooth
 
@@ -442,3 +416,75 @@ The following IoT classes are accepted in the manifest:
 - `calculated`: The integration does not handle communication on its own, but provides a calculated result.
 
 [iot_class]: https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things/#classifiers
+
+## Virtual integration
+
+Some products are supported by integrations that are not named after the product. For example, Roborock vacuums are integrated via the Xiaomi Miio integration, and the IKEA SYMFONISK product line can be used with the Sonos integration.
+
+There are also cases where a product line only supports a standard IoT standard like Zigbee or Z-Wave. For example, the U-tec ultraloq works via Z-Wave and has no specific dedicated integration. 
+
+For end-users, it can be confusing to find how to integrate those product with Home Asssistant. To help with these above cases, Home Assistant has "Virtual integrations". These integrations are not real integrations but are used to help users find the right integration for ther device.
+
+A virtual integration is an integration that just has a single manifest file, without any additional code. There are two types of virtual integrations: An virtual integration supported by another integration and one that uses an existing IoT standard.
+
+:::info
+Virtual integrations can only be provided by Home Assistant Core and not by custom integrations.
+:::
+
+### Supported by
+
+The "Supported by" virtual integration is an integration that points to another integration to provide its implementation. For example, Roborock vacuums are integrated via the Xiaomi Miio (`xiaomi_miio`) integration.
+
+Example manifest:
+
+```json
+{
+  "domain": "roborock",
+  "name": "Roborock",
+  "integration_type": "virtual",
+  "supported_by": "xiaomi_miio",
+}
+```
+
+The `domain` and `name` are the same as with any other integration, but the `integration_type` is set to `virtual`. 
+The logo for the domain of this virtual integration must be added to our [brands repository](https://github.com/home-assistant/brands/), so in this case, a Roborock branding is used.
+
+The `supported_by` is the domain of the integration providing the implementation for this product. In the example above, the Roborock vacuum is supported by the Xiaomi Miio integration and points to its domain `xiaomi_miio`.
+
+Result:
+
+- Roborock is listed on our user documentation website under integrations with an automatically generated stub page that directs the user to the integration to use.
+- Roborock is listed in Home Assistant when clicking "add integration". When selected, we explain the user that this product is integrated using a different integration, then the user continues to the Xioami Miio config flow.
+
+### IoT standard
+
+The "IoT Standard" virtual integration is an integration that uses an existing IoT standard to provide connectivity with the device. For example, the U-tec ultraloq works via Z-Wave and has no specific dedicated integration.
+
+Example manifest:
+
+```json
+{
+  "domain": "ultraloq",
+  "name": "ultraloq",
+  "integration_type": "virtual",
+  "iot_standard": "zwave",
+}
+
+```
+
+The `domain` and `name` are the same as with any other integration, but the `integration_type` is set to `virtual`. 
+The logo for the domain of this virtual should be added to our [brands repository](https://github.com/home-assistant/brands/).
+
+The `iot_standard` is the standard this product uses for connectivity. In the example above, the U-tech ultraloq products use Z-Wave to integrate with Home Assistant.
+
+Result:
+
+- U-tech ultraloq is listed on our user documentation website under integrations with an automatically generated stub page that directs the user to the integration to use.
+- U-tech ultraloq is listed in Home Assistant when clicking "add integration". When selected, we guide the user in adding this Z-Wave device (and in case Z-Wave isn't set up yet, into setting up Z-Wave first).
+
+:::info
+Brands also [support setting IoT standards](/docs/creating_integration_brand/#iot-standards).
+
+It is preferred to set IoT standards on the brand level, and only use a virtual
+integration in case it would impose confusion for the end user.
+:::
