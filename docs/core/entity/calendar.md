@@ -61,7 +61,7 @@ class MyCalendar(CalendarEntity):
 
 ### Create Events
 
-A calendar entity may support creating events by specifying the `CREATE_EVENT` supported feature. Integrations that support mutation must handle rfc5545 fields and best practices such as preserving any new unknown fields that are set and recurring events. The return value of the create call is the event `uid` which is the persistent globally unique identifier for the event.
+A calendar entity may support creating events by specifying the `CREATE_EVENT` supported feature. Integrations that support mutation must handle rfc5545 fields and best practices such as preserving any new unknown fields that are set and recurring events.
 
 ```python
 class MyCalendar(CalendarEntity):
