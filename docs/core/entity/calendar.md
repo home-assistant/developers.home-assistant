@@ -66,7 +66,7 @@ A calendar entity may support creating events by specifying the `CREATE_EVENT` s
 ```python
 class MyCalendar(CalendarEntity):
 
-    async def async_create_event(self, **kwargs: Any) -> str:
+    async def async_create_event(self, **kwargs: Any) -> None:
         """Add a new event to calendar."""
 ```
 
