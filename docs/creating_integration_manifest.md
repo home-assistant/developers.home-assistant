@@ -423,9 +423,9 @@ Some products are supported by integrations that are not named after the product
 
 There are also cases where a product line only supports a standard IoT standard like Zigbee or Z-Wave. For example, the U-tec ultraloq works via Z-Wave and has no specific dedicated integration. 
 
-For end-users, it can be confusing to find how to integrate those product with Home Asssistant. To help with these above cases, Home Assistant has "Virtual integrations". These integrations are not real integrations but are used to help users find the right integration for ther device.
+For end-users, it can be confusing to find how to integrate those products with Home Asssistant. To help with these above cases, Home Assistant has "Virtual integrations". These integrations are not real integrations but are used to help users find the right integration for their device.
 
-A virtual integration is an integration that just has a single manifest file, without any additional code. There are two types of virtual integrations: An virtual integration supported by another integration and one that uses an existing IoT standard.
+A virtual integration is an integration that just has a single manifest file, without any additional code. There are two types of virtual integrations: A virtual integration supported by another integration and one that uses an existing IoT standard.
 
 :::info
 Virtual integrations can only be provided by Home Assistant Core and not by custom integrations.
@@ -454,7 +454,7 @@ The `supported_by` is the domain of the integration providing the implementation
 Result:
 
 - Roborock is listed on our user documentation website under integrations with an automatically generated stub page that directs the user to the integration to use.
-- Roborock is listed in Home Assistant when clicking "add integration". When selected, we explain the user that this product is integrated using a different integration, then the user continues to the Xioami Miio config flow.
+- Roborock is listed in Home Assistant when clicking "add integration". When selected, we explain to the user that this product is integrated using a different integration, then the user continues to the Xioami Miio config flow.
 
 ### IoT standard
 
@@ -473,7 +473,7 @@ Example manifest:
 ```
 
 The `domain` and `name` are the same as with any other integration, but the `integration_type` is set to `virtual`. 
-The logo for the domain of this virtual should be added to our [brands repository](https://github.com/home-assistant/brands/).
+The logo for the domain of this virtual integration should be added to our [brands repository](https://github.com/home-assistant/brands/).
 
 The `iot_standard` is the standard this product uses for connectivity. In the example above, the U-tech ultraloq products use Z-Wave to integrate with Home Assistant.
 
