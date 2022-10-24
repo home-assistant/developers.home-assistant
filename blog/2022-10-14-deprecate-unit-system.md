@@ -1,20 +1,20 @@
 ---
 author: epenet
 authorURL: https://github.com/epenet
-title: "Deprecate Unit System constants and properties"
+title: "Deprecate IMPERIAL_SYSTEM unit system and linked constants and properties"
 ---
 
-As of Home Assistant Core 2022.11, the `is_metric` and `name` properties of a unit system are deprecated 
-and should not be used.
+As of Home Assistant Core 2022.11, the `IMPERIAL_SYSTEM` is deprecated, replaced by `US_CUSTOMARY_SYSTEM`.
+The `is_metric` and `name` properties of a unit system are likewise deprecated and should not be used.
 
-Custom integrations referencing these properties will need to be adjusted to use instance checks instead.
+Custom integrations referencing this unit system or these properties will need to be adjusted to use instance checks instead.
 
 Correct:
 ```python
-if hass.config.units is IMPERIAL_SYSTEM:
+if hass.config.units is METRIC_SYSTEM:
     pass
 
-if hass.config.units is METRIC_SYSTEM:
+if hass.config.units is US_CUSTOMARY_SYSTEM:
     pass
 ```
 
