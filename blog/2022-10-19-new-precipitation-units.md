@@ -1,7 +1,7 @@
 ---
 author: epenet
 authorURL: https://github.com/epenet
-title: "Add new precipitation and precipitation intensity units"
+title: "Add new precipitation intensity units"
 ---
 
 As of Home Assistant Core 2022.11, the following constants are deprecated:
