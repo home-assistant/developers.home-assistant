@@ -421,7 +421,7 @@ The following IoT classes are accepted in the manifest:
 
 Some products are supported by integrations that are not named after the product. For example, Roborock vacuums are integrated via the Xiaomi Miio integration, and the IKEA SYMFONISK product line can be used with the Sonos integration.
 
-There are also cases where a product line only supports a standard IoT standard like Zigbee or Z-Wave. For example, the U-tec ultraloq works via Z-Wave and has no specific dedicated integration. 
+There are also cases where a product line only supports a standard IoT standards like Zigbee or Z-Wave. For example, the U-tec ultraloq works via Z-Wave and has no specific dedicated integration. 
 
 For end-users, it can be confusing to find how to integrate those products with Home Asssistant. To help with these above cases, Home Assistant has "Virtual integrations". These integrations are not real integrations but are used to help users find the right integration for their device.
 
@@ -456,9 +456,9 @@ Result:
 - Roborock is listed on our user documentation website under integrations with an automatically generated stub page that directs the user to the integration to use.
 - Roborock is listed in Home Assistant when clicking "add integration". When selected, we explain to the user that this product is integrated using a different integration, then the user continues to the Xioami Miio config flow.
 
-### IoT standard
+### IoT standards
 
-The "IoT Standard" virtual integration is an integration that uses an existing IoT standard to provide connectivity with the device. For example, the U-tec ultraloq works via Z-Wave and has no specific dedicated integration.
+The "IoT Standards" virtual integration is an integration that uses an existing IoT standard to provide connectivity with the device. For example, the U-tec ultraloq works via Z-Wave and has no specific dedicated integration.
 
 Example manifest:
 
@@ -467,7 +467,7 @@ Example manifest:
   "domain": "ultraloq",
   "name": "ultraloq",
   "integration_type": "virtual",
-  "iot_standard": "zwave",
+  "iot_standards": ["zwave"],
 }
 
 ```
@@ -475,7 +475,7 @@ Example manifest:
 The `domain` and `name` are the same as with any other integration, but the `integration_type` is set to `virtual`. 
 The logo for the domain of this virtual integration should be added to our [brands repository](https://github.com/home-assistant/brands/).
 
-The `iot_standard` is the standard this product uses for connectivity. In the example above, the U-tech ultraloq products use Z-Wave to integrate with Home Assistant.
+The `iot_standards` is the standard this product uses for connectivity. In the example above, the U-tech ultraloq products use Z-Wave to integrate with Home Assistant.
 
 Result:
 
