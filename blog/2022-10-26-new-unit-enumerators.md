@@ -7,12 +7,8 @@ title: "Introducing new unit enumerators"
 As of Home Assistant Core 2022.11, the following unit constants are deprecated and replaced 
 by a corresponding enum:
 
-  - `UnitOfEnergy` enumerator replaces `ENERGY_KILO_WATT_HOUR`, `ENERGY_MEGA_WATT_HOUR`,
-  and `ENERGY_WATT_HOUR`
-  - `UnitOfSpeed` enumerator replaces `SPEED_FEET_PER_SECOND`, `SPEED_METERS_PER_SECOND`,
-  `SPEED_KILOMETERS_PER_HOUR`, `SPEED_KNOTS`, and `SPEED_MILES_PER_HOUR`
-  - `UnitOfTemperature` enumerator replaces `TEMP_CELSIUS`, `TEMP_FARENHEIT`,
-  and `TEMP_KELVIN`
-  - `UnitOfVolumetricFlux` enumerator replaces `PRECIPITATION_MILLIMETERS_PER_HOUR`,
-  `PRECIPITATION_INCHES_PER_HOUR`, `SPEED_MILLIMETERS_PER_DAY`, `SPEED_INCHES_PER_DAY`,
-  and `SPEED_INCHES_PER_HOUR`
+  - `UnitOfEnergy` enumerator replaces `ENERGY_***` constants
+  - `UnitOfLength` enumerator replaces `LENGTH_***` constants
+  - `UnitOfPressure` enumerator replaces `PRESSURE_***` constants
+  - `UnitOfSpeed` enumerator replaces `SPEED_***` constants
+  - `UnitOfTemperature` enumerator replaces `TEMP_***` constants
