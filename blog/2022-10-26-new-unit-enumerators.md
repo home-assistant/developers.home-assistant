@@ -14,3 +14,4 @@ by a corresponding enum:
   - `UnitOfPressure` enumerator replaces `PRESSURE_***` constants
   - `UnitOfSpeed` enumerator replaces `SPEED_***` constants
   - `UnitOfTemperature` enumerator replaces `TEMP_***` constants
+  - `UnitOfVolume` enumerator replaces `VOLUME_***` constants
