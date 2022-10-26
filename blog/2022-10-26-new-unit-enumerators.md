@@ -11,6 +11,8 @@ by a corresponding enum:
   and `ENERGY_WATT_HOUR`
   - `UnitOfSpeed` enumerator replaces `SPEED_FEET_PER_SECOND`, `SPEED_METERS_PER_SECOND`,
   `SPEED_KILOMETERS_PER_HOUR`, `SPEED_KNOTS`, and `SPEED_MILES_PER_HOUR`
+  - `UnitOfTemperature` enumerator replaces `TEMP_CELSIUS`, `TEMP_FARENHEIT`,
+  and `TEMP_KELVIN`
   - `UnitOfVolumetricFlux` enumerator replaces `PRECIPITATION_MILLIMETERS_PER_HOUR`,
   `PRECIPITATION_INCHES_PER_HOUR`, `SPEED_MILLIMETERS_PER_DAY`, `SPEED_INCHES_PER_DAY`,
   and `SPEED_INCHES_PER_HOUR`
