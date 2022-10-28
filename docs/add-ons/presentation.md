@@ -2,7 +2,7 @@
 title: "Presenting your addon"
 ---
 
-If you decide to share your add-on to the public, paying attention to details is recommended. Of course, your add-on should have a proper name and description, but Home Assistant also gives you some other tools to present your add-on even more nicely.
+If you choose to make your add-on available to the public, providing clear information, graphics and security reassurances will help attract users.  The recommendations below are a guideline for presenting your add-on.
 
 ## Adding intro
 
