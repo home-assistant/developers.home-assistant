@@ -261,7 +261,7 @@ args:
 | codenotary.signer | no | Owner signer E-Mail address for this image.
 | codenotary.base_image | no | Verify the base container image. If you use our official images, use `notary@home-assistant.io`
 
-We provide a set of [base images][docker-base] which should cover a lot of needs. If you don't want to use the Alpine based version or need a specific image tag, feel free to pin this requirements for your build with the `build_from` option.
+We provide a set of [base images][docker-base] which should cover a lot of needs. If you don't want to use the Alpine based version or need a specific image tag, feel free to pin this requirement for your build with the `build_from` option.
 
 [docker-base]: https://github.com/home-assistant/docker-base
 
