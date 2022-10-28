@@ -6,7 +6,7 @@ Home Assistant rates every add-on based on the wanted rights. An add-on with a r
 
 ## API Role
 
-For access to Supervisor API you need to define a role or run in default mode. This is only required for Supervisor API and not Home Assistant proxy. Any of the roles already have access to the default API calls, and do not require any additional settings.
+For access to the Supervisor API you need to define a role or run in default mode. This is only required for the Supervisor API and not the Home Assistant proxy. All of the roles already have access to the default API calls, and do not require any additional settings.
 
 ### Available Roles
 
