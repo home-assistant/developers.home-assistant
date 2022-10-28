@@ -43,7 +43,7 @@ Add-ons can call some API commands without needing to set `hassio_api: true`:
 
 ## Services API
 
-We have an internal services API to make services public to other add-ons without the user needing to add any configuration. An add-on can get the full configuration for a service to use and to connect to it. The add-on needs to mark the usage of a service in its [configuration](configuration.md) in order to be able to access a service. All supported services, including its available options, are documented in the [API documentation][supervisor-services-api].
+We have an internal services API to make services public to other add-ons without the user needing to add any configuration. An add-on can get the full configuration for a service to use and to connect to it. The add-on needs to mark the usage of a service in the add-on [configuration](configuration.md) in order to be able to access a service. All supported services, including its available options, are documented in the [API documentation][supervisor-services-api].
 
 Supported services are:
 
