@@ -31,7 +31,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | Type | Supported units | Description
 | ---- | ---- | -----------
 | accumulated_precipitation | in, mm | Accumulated precipitation
-| apparent_power | VA | Apparent power |
+| apparent_power | VA | Apparent power
 | aqi | | Air Quality Index
 | battery | % | Percentage of battery that is left
 | carbon_dioxide | ppm | Concentration of carbon dioxide.
