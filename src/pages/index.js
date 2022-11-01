@@ -1,12 +1,10 @@
 import React from "react";
 import clsx from 'clsx';
 import Layout from "@theme/Layout";
-import Link from "@docusaurus/Link";
+import BrowserOnly from '@docusaurus/BrowserOnly';
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.css";
-
-const timeZone = () => Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC"
 
 const recentPosts = require("../../.docusaurus/docusaurus-plugin-content-blog/default/blog-post-list-prop-default.json");
 const features = [
@@ -96,21 +94,26 @@ const features = [
   {
     title: <>Upcoming Events</>,
     imageUrl: "",
-    description: (
-      <>
-        <iframe
+    description: UpcomingEvents(),
+  },
+];
+
+function UpcomingEvents() {
+  return (
+    <BrowserOnly fallback={<div>Loading...</div>}>
+      {() => <iframe
           title="Upcoming Events Calendar"
-          src={`https://calendar.google.com/calendar/embed?height=400&wkst=2&bgcolor=%23ffffff&ctz=${timeZone()}&src=cDA3bjk4Z28xMW9uYW1kMDhkMGttcTZqaHNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23039BE5&title=Release%20Schedule&mode=AGENDA&showPrint=0&showTabs=0&showCalendars=0&showTz=1&showNav=0&showDate=0&showTitle=0`}
+          src={`https://calendar.google.com/calendar/embed?height=400&wkst=2&bgcolor=%23ffffff&ctz=${Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC"}&src=cDA3bjk4Z28xMW9uYW1kMDhkMGttcTZqaHNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23039BE5&title=Release%20Schedule&mode=AGENDA&showPrint=0&showTabs=0&showCalendars=0&showTz=1&showNav=0&showDate=0&showTitle=0`}
           style={{ borderWidth: 0, margin: "auto" }}
           width="300"
           height="200"
           frameBorder="0"
           scrolling="no"
-        />
-      </>
-    ),
-  },
-];
+        />}
+    </BrowserOnly>
+
+  );
+}
 
 function Feature({ imageUrl, title, description }) {
   const imgUrl = useBaseUrl(imageUrl);
