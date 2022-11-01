@@ -100,7 +100,7 @@ const features = [
 
 function UpcomingEvents() {
   return (
-    <BrowserOnly fallback={<div>Loading...</div>}>
+    <BrowserOnly>
       {() => <iframe
           title="Upcoming Events Calendar"
           src={`https://calendar.google.com/calendar/embed?height=400&wkst=2&bgcolor=%23ffffff&ctz=${Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC"}&src=cDA3bjk4Z28xMW9uYW1kMDhkMGttcTZqaHNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23039BE5&title=Release%20Schedule&mode=AGENDA&showPrint=0&showTabs=0&showCalendars=0&showTz=1&showNav=0&showDate=0&showTitle=0`}
