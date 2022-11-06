@@ -192,7 +192,7 @@ Note:  Avoid the use of this filename for anything other than add-on configurati
 
 ### Options / Schema
 
-The `options` dictionary contains all available options and their default value. Set the default value to `null` if the value is required to be given by the user before the add-on can start, and it shows it inside default values. Nested arrays and dictionaries are supported with a maximum depth of two.  To make an option optional, put `?` at the end of the data type, otherwise it will be a required value.
+The `options` dictionary contains all available options and their default value. Set the default value to `null` if the value is required to be given by the user before the add-on can start. Nested arrays and dictionaries are supported with a maximum depth of two.  To make an option optional, put `?` at the end of the data type, otherwise it will be a required value.
 
 ```yaml
 message: "custom things"
