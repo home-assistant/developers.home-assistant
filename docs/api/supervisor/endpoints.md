@@ -2132,6 +2132,8 @@ If running on a yellow board, changes one or more of its settings.
 | heartbeat_led | boolean | Enable/disable the heartbeat LED enabled |
 | power_led     | boolean | Enable/disable the power LED enabled     |
 
+</ApiEndpoint>
+
 ### Resolution
 
 <ApiEndpoint path="/resolution/info" method="get">
