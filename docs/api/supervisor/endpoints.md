@@ -2086,6 +2086,54 @@ Move datadisk to a new location, **This will also reboot the device!**
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/os/boards/{board}" method="get">
+
+Returns information about your board if it has features or settings
+that can be modified from Home Assistant. The value for `board`
+is the value in the `board` field returned by `/os/info`.
+
+Boards with such options are documented below.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/os/boards/yellow" method="get">
+
+If running on a yellow board, returns current values for its settings.
+
+**Returned data:**
+
+| key           | type    | description                  |
+| ------------- | ------- | ---------------------------- |
+| disk_led      | boolean | Is the disk LED enabled      |
+| heartbeat_led | boolean | Is the heartbeat LED enabled |
+| power_led     | boolean | Is the power LED enabled     |
+
+**Example response:**
+
+```json
+{
+  "disk_led": true,
+  "heartbeat_led": true,
+  "power_led": false
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/os/boards/yellow" method="post">
+
+If running on a yellow board, changes one or more of its settings.
+
+**Payload:**
+
+| key           | type    | description                              |
+| ------------- | ------- | ---------------------------------------- |
+| disk_led      | boolean | Enable/disable disk LED enabled          |
+| heartbeat_led | boolean | Enable/disable the heartbeat LED enabled |
+| power_led     | boolean | Enable/disable the power LED enabled     |
+
+</ApiEndpoint>
+
 ### Resolution
 
 <ApiEndpoint path="/resolution/info" method="get">
