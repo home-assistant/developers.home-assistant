@@ -20,7 +20,7 @@ For larger changes, we suggest that you clone the website repository. This way, 
 
 The easiest way to get started with development is to use Visual Studio Code with devcontainers, in the same way as for working on Home Assistant Core development. Have a look at the [Development Environment](https://developers.home-assistant.io/docs/development_environment) page for instructions.
 
-To review the changes, open the command palette and choose ´Tasks: Run Task´ and then ´Preview´.
+To review the changes, open the command palette and choose ´Tasks: Run Task´ and then ´Run Home Assistant Core´.
 
 ### Manual Environment
 
