@@ -116,7 +116,7 @@ For a more detailed explanation of `strings.json` see the [backend tra
 
 ### Show Form
 
-This result type will show a form to the user to fill in. You define the current step, the schema of the data (using voluptuous or selectors) and optionally a dictionary of errors.
+This result type will show a form to the user to fill in. You define the current step, the schema of the data (using a mixture of voluptuous and/or [selectors](https://www.home-assistant.io/docs/blueprint/selectors/)) and optionally a dictionary of errors.
 
 ```python
 from homeassistant.helpers.selector import selector
@@ -169,6 +169,43 @@ The field labels and descriptions are given as a dictionary with keys correspond
     }
   }
 }
+```
+
+#### Enabling Browser Autofill
+
+If your integration is collecting form data which can be automatically filled by browsers or password managers, such as login credentials or contact information, then you have 2 options to enable this feature.
+
+The first option is to use Voluptuous with data keys that are recognized by the frontend. This is limited to username and password fields, and is supported primarily to quickly enable auto-fill on the many integrations that collect them without having to convert their schemas to selectors. The frontend will recognize the keys `"username"` and `"password"` and add HTML `autocomplete` attribute values of `"username"` and `"current-password"`, respectively.
+
+The second option is to use a [text selector](https://www.home-assistant.io/docs/blueprint/selectors/#text-selector). This gives full control of the input type and allows any permitted value for `autocomplete` to be specified. A hypothetical schema collecting certain fillable data might be:
+
+```python
+import voluptuous as vol
+from homeassistant.const import CONF_PASSWORD, CONF_USERNAME
+from homeassistant.helpers.selector import (
+    TextSelector,
+    TextSelectorConfig,
+    TextSelectorType,
+)
+
+STEP_USER_DATA_SCHEMA = vol.Schema(
+    {
+        vol.Required(CONF_USERNAME): TextSelector(
+            TextSelectorConfig(type=TextSelectorType.EMAIL, autocomplete="username")
+        ),
+        vol.Required(CONF_PASSWORD): TextSelector(
+            TextSelectorConfig(
+                type=TextSelectorType.PASSWORD, autocomplete="current-password"
+            )
+        ),
+        vol.Required("postal_code"): TextSelector(
+            TextSelectorConfig(type=TextSelectorType.TEXT, autocomplete="postal-code")
+        ),
+        vol.Required("mobile_number"): TextSelector(
+            TextSelectorConfig(type=TextSelectorType.TEL, autocomplete="tel")
+        ),
+    }
+)
 ```
 
 #### Defaults & Suggestions
