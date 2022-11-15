@@ -173,7 +173,7 @@ The field labels and descriptions are given as a dictionary with keys correspond
 
 #### Enabling Browser Autofill
 
-If your integration is collecting form data which can be automatically filled by browsers or password managers, such as login credentials or contact information, then you have 2 options to enable this feature.
+Suppose your integration is collecting form data which can be automatically filled by browsers or password managers, such as login credentials or contact information. You should enable autofill whenever possible for the best user experience and accessibility. There are two options to enable this.
 
 The first option is to use Voluptuous with data keys recognized by the frontend. The frontend will recognize the keys `"username"` and `"password"` and add HTML `autocomplete` attribute values of `"username"` and `"current-password"` respectively. Support for autocomplete is limited to `"username"` and `"password"` fields and is supported primarily to quickly enable auto-fill on the many integrations that collect them without converting their schemas to selectors.
 
