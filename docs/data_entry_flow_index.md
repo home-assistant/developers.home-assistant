@@ -110,7 +110,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         """Handle user step."""
 ```
 
-Data entry flows depend on translations for showing the text in the steps. It depends on the parent of a data entry flow manager where this is stored. For config and option flows this is in `strings.json` under `config` and `option`, respectively.
+Data entry flows depend on translations for showing the text in the steps. It depends on the parent of a data entry flow manager where this is stored. For config and option flows, this is in `strings.json` under `config` and `option`, respectively.
 
 For a more detailed explanation of `strings.json` see the [backend translation](/docs/internationalization/core) page.
 
