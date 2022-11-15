@@ -262,7 +262,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
 
 #### Multi-step flows
 
-If the user input passes validation, you can again return one of the possible step types. If you want to navigate the user to the next step, return the return value of that step:
+If the user input passes validation, you can return one of the possible step types again. If you want to navigate the user to the next step, return the return value of that step:
 
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
