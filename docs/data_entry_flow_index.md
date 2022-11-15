@@ -177,7 +177,7 @@ If your integration is collecting form data which can be automatically filled by
 
 The first option is to use Voluptuous with data keys recognized by the frontend. The frontend will recognize the keys `"username"` and `"password"` and add HTML `autocomplete` attribute values of `"username"` and `"current-password"` respectively. Support for autocomplete is limited to `"username"` and `"password"` fields and is supported primarily to quickly enable auto-fill on the many integrations that collect them without converting their schemas to selectors.
 
-The second option is to use a [text selector](https://www.home-assistant.io/docs/blueprint/selectors/#text-selector). This gives full control of the input type and allows any permitted value for `autocomplete` to be specified. A hypothetical schema collecting certain fillable data might be:
+The second option is to use a [text selector](https://www.home-assistant.io/docs/blueprint/selectors/#text-selector). A text selector gives full control of the input type and allows any permitted value for `autocomplete` to be specified. A hypothetical schema collecting specific fillable data might be:
 
 ```python
 import voluptuous as vol
