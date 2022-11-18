@@ -11,7 +11,11 @@ A `datetime` is an entity that allows the user to input a timestamp to an integr
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
-Properties that are common to all entities such as `icon`, `name` etc are applicable to this entity type.
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| native_value | datetime | **Required** | The value of the datetime.
+
+Other properties that are common to all entities such as `icon`, `name` etc are also applicable.
 
 ## Methods
 
