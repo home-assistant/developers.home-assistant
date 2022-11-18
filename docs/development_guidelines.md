@@ -31,7 +31,7 @@ The docstring in the file header should describe what the file is about.
 There is no need to add the platform or component name to the log messages. This will be added automatically. Like `syslog` messages there shouldn't be any period at the end. A widely used style is shown below but you are free to compose the messages as you like.
 
 ```python
-_LOGGER.error("No route to device: %s", self._resource)
+_LOGGER.error(f"No route to device: {self._resource}")
 ```
 
 ```log
