@@ -30,8 +30,7 @@ If specifying a device class, your sensor entity will need to also return the co
 
 | Type | Supported units | Description
 | ---- | ---- | -----------
-| accumulated_precipitation | in, mm | Accumulated precipitation
-| apparent_power | VA | Apparent power
+| apparent_power | VA | Apparent power |
 | aqi | | Air Quality Index
 | battery | % | Percentage of battery that is left
 | carbon_dioxide | ppm | Concentration of carbon dioxide.
@@ -56,6 +55,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | pm10 | µg/m³ | Concentration of particulate matter less than 10 micrometers |
 | power | W, kW | Power, statistics will be stored in W.
 | power_factor | % | Power Factor
+| precipitation | in, mm | Precipitation
 | precipitation_intensity | in/d, in/h, mm/d, mm/h | Precipitation intensity
 | pressure | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Pressure, statistics will be stored in Pa.
 | reactive_power | var | Reactive power |
