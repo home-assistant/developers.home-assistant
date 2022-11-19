@@ -15,7 +15,7 @@ Properties should always only return information from memory and not do I/O (lik
 | ---- | ---- | ------- | -----------
 | native_value | time | **Required** | The value of the time.
 
-Other properties that are common to all entities such as `icon`, `name` etc are also applicable.
+Other properties that are common to all entities such as `icon`, `name` etc. are also applicable.
 
 ## Methods
 
