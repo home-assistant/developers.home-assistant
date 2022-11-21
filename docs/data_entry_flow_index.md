@@ -230,6 +230,16 @@ The other alternative is to use a suggested value - this will also pre-fill the 
 
 You can also mix and match - pre-fill through `suggested_value`, and use a different value for `default` in case the field is left empty, but that could be confusing to the user so use carefully.
 
+Using suggested values also make it possible to declare a static schema, and merge suggested values from existing input. A `schema_with_suggested_values` helper makes this possible:
+
+```python
+SCHEMA = vol.Schema({
+        vol.Optional("field_name", default="default value"): str,
+    })
+...
+    data_schema = schema_with_suggested_values(SCHEMA, self.entry.options, False)
+```
+
 #### Validation
 
 After the user has filled in the form, the step method will be called again and the user input is passed in. Your step will only be called if the user input passes your data schema. When the user passes in data, you will have to do extra validation of the data. For example, you can verify that the passed in username and password are valid.
