@@ -244,7 +244,9 @@ class ExampleOptionsFlow(config_entries.OptionsFlow):
         self, user_input: dict[str, Any] | None = None
     ) -> FlowResult:
         return self.async_show_form(
-            data_schema = schema_with_suggested_values(OPTIONS_SCHEMA, self.entry.options, False)
+            data_schema = schema_with_suggested_values(
+                OPTIONS_SCHEMA, self.entry.options, self.show_advanced_options
+            )
         )
 ```
 
