@@ -233,11 +233,11 @@ You can also mix and match - pre-fill through `suggested_value`, and use a diffe
 Using suggested values also make it possible to declare a static schema, and merge suggested values from existing input. A `schema_with_suggested_values` helper makes this possible:
 
 ```python
-SCHEMA = vol.Schema({
+OPTIONS_SCHEMA = vol.Schema({
         vol.Optional("field_name", default="default value"): str,
     })
 ...
-    data_schema = schema_with_suggested_values(SCHEMA, self.entry.options, False)
+    data_schema = schema_with_suggested_values(OPTIONS_SCHEMA, self.entry.options, False)
 ```
 
 #### Validation
