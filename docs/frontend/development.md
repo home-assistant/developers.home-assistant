@@ -3,29 +3,95 @@ title: "Frontend development"
 sidebar_label: "Development"
 ---
 
+```mdx-code-block
+import {useState} from 'react';
+
+export const RepositoryOpener = () => {
+  const [value, setValue] = useState(0);
+  const repoUrl = `vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=${encodeURIComponent(value)}`;
+  return <div>
+    <input onInput={(ev) => setValue(ev.target.value)} style={{width: "80%", display: "inline-block", marginRight: 16}} />
+    <a href={repoUrl}><button style={{cursor: value == "" ? "default" : "pointer"}} disabled={value == ""}>Open</button></a>
+  </div>
+}
+```
+
 The Home Assistant frontend is built using web components. For more background about our technology choices, [see this blog post](https://developers.home-assistant.io/blog/2019/05/22/internet-of-things-and-the-modern-web.html).
 
 :::caution
 Do not use development mode in production. Home Assistant uses aggressive caching to improve the mobile experience. This is disabled during development so that you do not have to restart the server in between changes.
 :::
 
-## Setting up the environment
+## Setup with Visual Studio Code + devcontainer
 
-### Getting the code
+The easiest way to get started with development is to use Visual Studio Code with devcontainers. This approach will create a preconfigured development environment with all the tools you need. This approach is enabled for all Home Assistant repositories. [Learn more about devcontainers.](https://code.visualstudio.com/docs/remote/containers)
 
-The first step is to fork the [frontend repository][hass-frontend] and add the upstream remote. You can place the forked repository anywhere on your system.
+**Prerequisites**
 
-```shell
-git clone git@github.com:YOUR_GIT_USERNAME/frontend.git
-cd frontend
-git remote add upstream https://github.com/home-assistant/frontend.git
-```
+- [Docker](https://docs.docker.com/get-docker/)
+- [Visual Studio code](https://code.visualstudio.com/)
+- [Git](https://git-scm.com/)
 
-### Configuring Home Assistant
+**Getting started:**
 
-You will need to have an instance of Home Assistant set up. See our guide on [setting up a development environment](/development_environment.mdx).
+1. Go to [Home Assistant frontend repository][hass-frontend] and click "fork".
+2. Once your fork is created, copy the URL of your fork and paste it below, then click "Open":
+   <RepositoryOpener />
+3. Your browser will prompt you if you want to use Visual Studio Code to open the link, click "Open Link".
+4. When Visual Studio Code asks if you want to install the Remote extension, click "Install".
+5. The Dev Container image will then be built (this may take a few minutes), after this your development environment will be ready.
 
-Next step is to configure Home Assistant to use the development mode for the frontend. Do this by updating the frontend config in your `configuration.yaml` and set the path to the frontend repository that you cloned in the last step:
+   In the future, if you want to get back to your development environment: open Visual Studio Code, click on the "Remote Explorer" button in the sidebar, select "Containers" at the top of the sidebar.
+
+**Configuring Home Assistant**
+
+1. Follow the [instructions for setting up a Home Assistant devcontainer](https://developers.home-assistant.io/docs/development_environment#developing-with-visual-studio-code--devcontainer)
+2. Mount the `frontend` directory into the Core devcontainer by adding the following section to `.devcontainer/devcontainer.json` file in the `core` repository.
+
+   ```json
+   "mounts": [
+     "source=/path/to/hass/frontend,target=/workspaces/frontend,type=bind,consistency=cached"
+   ]
+   ```
+   
+   *Make sure that you exclude the change to `.devcontainer/devcontainer.json` from any PRs as it points to local `frontend` repository path.*
+3. Rebuild the Core devcontainer by running the `Dev Containers: Rebuild Container` command in Visual Studio Code to pickup the new `mounts` configuration if you used it before making the change.
+4. Update the Home Assistant configuration to point to the mounted `frontend` path.
+
+   ```yaml
+   frontend:
+     development_repo: /workspaces/frontend/
+   ```
+
+## Setup Manually
+
+**Getting Started:**
+
+1. Fork and clone the [Home Assistant frontend repository][hass-frontend].
+2. Install Node.js
+   
+   The preferred method is using [nvm](https://github.com/creationix/nvm).  Follow the [nvm installation instructions](https://github.com/creationix/nvm#install-script) and then use it to install Node.js by runnig 
+
+   ```shell
+   nvm install
+   nvm use
+   ```
+   
+   This installs the version of Node.js defined in the `.nvmrc` file and then sets it as the current active version.
+   
+   If you're running on Windows, you will need to use an alternative version of nvm like [nvm-windows](https://github.com/coreybutler/nvm-windows).  This version of nvm doesn't automatically pickup `.nvmrc` so you'll need to manually select the correct version.
+3. Install [Yarn](https://yarnpkg.com/en/), the package manager used by the frontend, using the [installation instructions](https://yarnpkg.com/en/docs/install)
+4. Install all of the development dependencies by running:
+
+   ```shell
+   script/bootstrap
+   ```
+
+**Configuring Home Assistant:**
+
+*These instructions assume that you are also [manually running Home Assistant](https://developers.home-assistant.io/docs/development_environment#manual-environment)*
+
+Update the `frontend` configuration section in your `configuration.yaml` to point to the path of the `frontend` repository you cloned
 
 ```yaml
 frontend:
@@ -33,50 +99,15 @@ frontend:
   development_repo: /path/to/hass/frontend/
 ```
 
-If you are using Visual Studio Code with devcontainers for Home Assistant, you need to mount the `frontend` directory into the container. Add the following section to `.devcontainer/devcontainer.json`:
-
-```json
-"mounts": [
-  "source=/path/to/hass/frontend,target=/workspaces/frontend,type=bind,consistency=cached"
-]
-```
-
-The Home Assistant's devcontainer needs to get rebuilt via the `docker-build` [task](/development_environment.mdx#tasks), and the `configuration.yaml` should point to the path inside the container:
-
-```yaml
-frontend:
-  development_repo: /workspaces/frontend/
-```
-
-The change to `.devcontainer/devcontainer.json` should be excluded from any PR as it contains your local path to the `frontend` repository.
-
-### Installing Node.js
-
-Node.js is required to build the frontend. The preferred method of installing node.js is with [nvm](https://github.com/creationix/nvm). Install nvm using the instructions in the [README](https://github.com/creationix/nvm#install-script), and install the correct node.js by running the following command:
-
-```shell
-nvm install
-```
-
-[Yarn](https://yarnpkg.com/en/) is used as the package manager for node modules. [Install yarn using the instructions here.](https://yarnpkg.com/en/docs/install)
-
-Next, development dependencies need to be installed to bootstrap the frontend development environment. First activate the right Node version and then download all the dependencies:
-
-```shell
-nvm use
-script/bootstrap
-```
-
 ## Development
 
-During development, you will need to run the development script to maintain a development build of the frontend that auto updates when you change any of the source files. To run this server, run:
+Whenever you make changes to files during development, you need to rebuild the development environment so that the Home Assistant instance will pickup the changes.  The `script/develop` script will monitor and auto-update the build whenever anything changes.
 
 ```shell
-nvm use
 script/develop
 ```
 
-Make sure you have cache disabled and correct settings to avoid stale content:
+Many files will be cached by your web browser so you should disable caching to avoid stale content:
 
 :::info
 Instructions are for Google Chrome
@@ -122,3 +153,4 @@ hass --skip-pip-packages home-assistant-frontend
 ```
 
 [hass-frontend]: https://github.com/home-assistant/frontend
+[hass-core]: https://github.com/home-assistant/core
