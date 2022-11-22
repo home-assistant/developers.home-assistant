@@ -13,7 +13,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| native_value | datetime | **Required** | The value of the datetime.
+| native_value | datetime | **Required** | The value of the datetime. Must include timezone info.
 
 Other properties that are common to all entities such as `icon`, `name` etc are also applicable.
 
@@ -21,7 +21,7 @@ Other properties that are common to all entities such as `icon`, `name` etc are 
 
 ### Set value
 
-Called when the user or an automation wants to update the value.
+Called when the user or an automation wants to update the value. The input datetime will always be in UTC.
 
 ```python
 class MyDateTime(DateTimeEntity):
