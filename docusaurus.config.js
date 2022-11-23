@@ -142,7 +142,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Home Assistant, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Home Assistant. Built with Docusaurus.`,
     },
     image: "img/default-social.png",
   },
