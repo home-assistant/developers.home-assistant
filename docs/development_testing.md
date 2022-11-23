@@ -7,10 +7,18 @@ As it states in the [Style guidelines section](development_guidelines.md) all co
 - All the unit tests pass
 - All code passes the checks from the linting tools
 
-Local testing is done using [Tox](https://tox.readthedocs.io), which has been installed as part of running `script/setup` in the [virtual environment](development_environment.mdx). To start the tests, activate the virtual environment and simply run the command:
+Local testing is done using [pytest](https://docs.pytest.org/) and using [pre-commit](https://pre-commit.com/) for running out linters, which has been installed as part of running `script/setup` in the [virtual environment](development_environment.mdx).
+
+To run our linters, on the full code base, run the following command:
 
 ```shell
-tox
+pre-commit run --all-files
+```
+
+To start the tests, and run the full test suite, activate the virtual environment and run the command:
+
+```shell
+pytest tests
 ```
 
 It might be required that you install additional packages depending on your distribution/operating system:
@@ -19,62 +27,45 @@ It might be required that you install additional packages depending on your dist
 - Ubuntu: `sudo apt-get install libudev-dev`
 
 :::info Important
-Run `tox` before you create your pull request to avoid annoying fixes.
+Run `pytest` & `pre-commit` before you create your pull request to avoid annoying fixes.
+`pre-commit` will will be invoked automatically by git when commiting changes.
 :::
 
 :::note
-Running the full `tox` test suite will take quite some time, so as the minimal requirement for pull requests, run at least the tests that are related to your code changes (see details below on how to). The full test suite will anyway be run by the CI once you created your pull request and before it can be merged.
+Running the full `ptyest` test suite will take quite some time, so as the minimal requirement for pull requests, run at least the tests that are related to your code changes (see details below on how to). The full test suite will anyway be run by the CI once you created your pull request and before it can be merged.
 :::
 
-Running `tox` will run unit tests against the locally available Python releases, as well as validate the code and document style using `pycodestyle`, `pydocstyle` and `pylint`. You can run tests on only one `tox` target -- just use `-e` to select an environment. For example, `tox -e lint` runs the linters only, and `tox -e py39` runs unit tests only on Python 3.9.
-
-`tox` uses virtual environments under the hood to create isolated testing environments. The `tox` virtual environments will get out-of-date when requirements change, causing test errors. Run `tox -r` to tell `tox` to recreate the virtual environments.
-
-macOS users may see an `Error creating virtualenv` when running `tox`. If this occurs, install the [tox-venv](https://pypi.org/project/tox-venv/) package using the command `pip install tox-venv` and try again.
+Running `pytest` will run unit tests against the locally available Python version. We run our tests in our CI against all our supported Python versions.
 
 ### Adding new dependencies to test environment
 
-If you are working on tests for an integration and you need the dependencies available inside the `tox` environment, update the list inside `script/gen_requirements_all.py`. Then run the script and then run `tox -r` to recreate the virtual environments.
-
-### Running single tests using `tox`
-
-You can pass arguments via `tox` to `pytest` to be able to run single test suites or test files. Replace `py39` with the Python version that you use.
-
-```shell
-# Stop after the first test fails
-$ tox -e py39 -- tests/test_core.py -x
-# Run test with specified name
-$ tox -e py39 -- tests/test_core.py -k test_split_entity_id
-# Fail a test after it runs for 2 seconds
-$ tox -e py39 -- tests/test_core.py --timeout 2
-# Show the 10 slowest tests
-$ tox -e py39 -- tests/test_core.py --duration=10
-```
-
-### Testing outside of Tox
-
-Running `tox` will invoke the full test suite. Even if you specify which tox target to run, you still run all tests inside that target. That's not very convenient to quickly iterate on your code! To be able to run the specific test suites without `tox`, you'll need to install the test dependencies into your Python environment:
+If you are working on tests for an integration and you changed the dependencies, then run the `script/gen_requirements_all.py` script to update all requirement files.
+Next you can update all dependencies in your development environment by running:
 
 ```shell
 pip3 install --use-deprecated=legacy-resolver -r requirements_test_all.txt -c homeassistant/package_constraints.txt
 ```
+### Running a limited test suite
 
-Now that you have all test dependencies installed, you can run tests on individual files:
-
-```shell
-flake8 homeassistant/core.py
-pylint homeassistant/core.py
-pydocstyle homeassistant/core.py
-pytest tests/test_core.py
-```
-
-You can also run linting tests against all changed files, as reported by `git diff upstream/dev... --diff-filter=d --name-only`, using the `lint` script:
+You can pass arguments to `pytest` to be able to run single test suites or test files.
+Here are some helpful commands:
 
 ```shell
-script/lint
+# Stop after the first test fails
+$ pytest tests/test_core.py -x
+
+# Run test with specified name
+$ pytest tests/test_core.py -k test_split_entity_id
+
+# Fail a test after it runs for 2 seconds
+$ pytest tests/test_core.py --timeout 2
+
+# Show the 10 slowest tests
+$ pytest tests/test_core.py --duration=10
 ```
 
-In case you want to check the code coverage for your new component, run the following from the root of the repository:
+If you want to test just your integration, and include a test coverage report,
+the following command is recommended:
 
 ```shell
 pytest ./tests/components/<your_component>/ --cov=homeassistant.components.<your_component> --cov-report term-missing -vv
@@ -84,10 +75,19 @@ pytest ./tests/components/<your_component>/ --cov=homeassistant.components.<your
 
 Several linters are setup to run automatically when you try to commit as part of running `script/setup` in the [virtual environment](development_environment.mdx).
 
-You can also run these linters manually:
+You can also run these linters manually :
 
 ```shell
 pre-commit run --show-diff-on-failure
+```
+
+The linters are also available directly, you can run tests on individual files:
+
+```shell
+flake8 homeassistant/core.py
+pylint homeassistant/core.py
+black homeassistant/core.py
+isort homeassistant/core.py
 ```
 
 ### Notes on PyLint and PEP8 validation
