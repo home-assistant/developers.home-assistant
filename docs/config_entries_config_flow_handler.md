@@ -322,4 +322,4 @@ Automated tests should verify that the reauth flow updates the existing config e
 
 ## Testing your config flow
 
-Integrations with a config flow require full test coverage of all code in `config_flow.py` to be accepted into core. [Test your code](development_testing.md#testing-outside-of-tox) includes more details on how to generate a coverage report.
+Integrations with a config flow require full test coverage of all code in `config_flow.py` to be accepted into core. [Test your code](development_testing.md#running-a-limited-test-suite) includes more details on how to generate a coverage report.
