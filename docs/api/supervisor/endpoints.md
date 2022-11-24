@@ -261,7 +261,7 @@ To reset customized network/audio/options, set it `null`.
 | options       | dictionary    | The add-on configuration                |
 | audio_output  | float or null | The index of the audio output device    |
 | audio_input   | float or null | The index of the audio input device     |
-| ingress_panel | string        | The path for the ingress panel          |
+| ingress_panel | boolean       | `true` if ingress_panel is enabled      |
 | watchdog      | boolean       | `true` if watchdog is enabled           |
 
 **You need to supply at least one key in the payload.**
