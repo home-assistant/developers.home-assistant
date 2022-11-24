@@ -82,7 +82,7 @@ LABEL \
   io.hass.arch="armhf|aarch64|i386|amd64"
 ```
 
-It is possible to use your own base image with `build.yaml` or if you do not need support for automatic multi-arch building you can also use a simple docker `FROM`. You can also suffix the Dockerfile with the specific architecture for special builds, i.e. `Dockerfile.amd64`.
+It is possible to use your own base image with `build.yaml` or if you do not need support for automatic multi-arch building you can also use a simple docker `FROM`. You can also suffix the Dockerfile with the specific architecture to use a specific Dockerfile for a particular architecture, i.e. `Dockerfile.amd64`.
 
 ### Build Args
 
