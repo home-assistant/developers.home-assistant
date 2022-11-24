@@ -18,6 +18,7 @@ Properties should always only return information from memory and not do I/O (lik
 | native_value | `None`, `datetime.date`, `datetime.datetime`, `decimal.Decimal`, float, int, string | **Required** | The value of the sensor in the sensor's `native_unit_of_measurement`. Using a `device_class` may restrict the types that can be returned by this property.
 | native_unit_of_measurement | string | `None` | The unit of measurement that the sensor's value is expressed in. If the `native_unit_of_measurement` is °C or °F, and its `device_class` is temperature, the sensor's `unit_of_measurement` will be the preferred temperature unit configured by the user and the sensor's `state` will be the `native_value` after an optional unit conversion. If not `None`, the sensor is assumed to be numerical and will be displayed as a line-chart in the frontend instead of as discrete values.
 | state_class | string | `None` | Type of state. If not `None`, the sensor is assumed to be numerical and will be displayed as a line-chart in the frontend instead of as discrete values.
+| suggested_unit_of_measurement | string | `None` | The unit of measurement to be used for the sensor's state. For sensors with a `unique_id`, this will be used as the initial unit of measurement, which users can then override. For sensors without a `unique_id`, this will be the unit of measurement for the sensor's state. This property is intended to be used by integrations to override automatic unit conversion rules, for example, to make a temperature sensor always display in `°C` regardless of whether the configured unit system prefers `°C` or `°F`, or to make a distance sensor always display in miles even if the configured unit system is metric.
 
 :::tip
 Instead of adding `extra_state_attributes` for a sensor entity, create an additional sensor entity. Attributes that do not change are only saved in the database once. If `extra_state_attributes` and the sensor value both frequently change, this can quickly increase the size of the database.
@@ -36,11 +37,14 @@ If specifying a device class, your sensor entity will need to also return the co
 | carbon_monoxide | ppm | Concentration of carbon monoxide.
 | current | A | Current
 | date | | Date. Requires `native_value` to be a Python `datetime.date` object, or `None`.
+| distance | km, m, cm, mm, mi, yd, in | Generic distance
+| duration | d, h, min, s | Time period. Should not update only due to time passing. The device or service needs to give a new data point to update.
 | energy | Wh, kWh, MWh | Energy, statistics will be stored in kWh. Represents _power_ over _time_. Not to be confused with `power`.
 | frequency | Hz, kHz, MHz, GHz | Frequency
 | gas | m³, ft³ | Volume of gas, statistics will be stored in m³. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
 | humidity | % | Relative humidity
 | illuminance | lx, lm | Light level
+| moisture | % | Moisture
 | monetary | [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) | Monetary value with a currency.
 | nitrogen_dioxide | µg/m³ | Concentration of nitrogen dioxide |
 | nitrogen_monoxide | µg/m³ | Concentration of nitrogen monoxide |
@@ -51,22 +55,33 @@ If specifying a device class, your sensor entity will need to also return the co
 | pm10 | µg/m³ | Concentration of particulate matter less than 10 micrometers |
 | power | W, kW | Power, statistics will be stored in W.
 | power_factor | % | Power Factor
+| precipitation | in, mm | Precipitation
+| precipitation_intensity | in/d, in/h, mm/d, mm/h | Precipitation intensity
 | pressure | cbar, bar, hPa, mmHg, inHg, kPa, mbar, Pa, psi | Pressure, statistics will be stored in Pa.
 | reactive_power | var | Reactive power |
 | signal_strength | dB, dBm | Signal strength
+| speed | ft/s, in/d, in/h, km/h, kn, m/s, mph, mm/d | Generic speed
 | sulphur_dioxide | µg/m³ | Concentration of sulphure dioxide |
 | temperature | °C, °F | Temperature, statistics will be stored in °C.
 | timestamp | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
 | volatile_organic_compounds | µg/m³ | Concentration of volatile organic compounds
 | voltage | V | Voltage
+| volume | L, mL, gal, fl. oz., m³, ft³ | Generic volume
+| water | L, gal, m³, ft³ | Water consumption
+| weight | kg, g, mg, µg, oz, lb | Generic mass; `weight` is used instead of `mass` to fit with every day language.
+| wind_speed | ft/s, km/h, kn, m/s, mph | Wind speed
 
 ### Available state classes
+
+:::caution
+Choose the state class for a sensor with care. In most cases, state class `measurement` or state class `total` without `last_reset` should be chosen, this is explained further in [How to choose `state_class` and `last_reset`](#how-to-choose-state_class-and-last_reset) below.
+::::
 
 | Type | Description
 | ---- | -----------
 | measurement | The state represents _a measurement in present time_, not a historical aggregation such as statistics or a prediction of the future. Examples of what should be classified `measurement` are: current temperature, humidify or electric power.  Examples of what should not be classified as `measurement`: Forecasted temperature for tomorrow, yesterday's energy consumption or anything else that doesn't include the _current_ measurement. For supported sensors, statistics of hourly min, max and average sensor readings is updated every 5 minutes.
 | total | The state represents a total amount that can both increase and decrease, e.g. a net energy meter. Statistics of the accumulated growth or decline of the sensor's value since it was first added is updated every 5 minutes. This state class should not be used for sensors where the absolute value is interesting instead of the accumulated growth or decline, for example remaining battery capacity or CPU load; in such cases state class `measurement` should be used instead.
-| total_increasing | Similar to `total`, with the restriction that the state represents a monotonically increasing positive total, e.g. a daily amount of consumed gas, weekly water consumption or lifetime energy consumption. Statistics of the accumulated growth of the sensor's value since it was first added is updated every 5 minutes.
+| total_increasing | Similar to `total`, with the restriction that the state represents a monotonically increasing positive total which periodically restarts counting from 0, e.g. a daily amount of consumed gas, weekly water consumption or lifetime energy consumption. Statistics of the accumulated growth of the sensor's value since it was first added is updated every 5 minutes. A decreasing value is interpreted as the start of a new meter cycle or the replacement of the meter.
 
 ### Entity options
 

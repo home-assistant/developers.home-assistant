@@ -69,6 +69,7 @@ module.exports = {
       logo: {
         alt: "Home Assistant",
         src: "img/logo-white.svg",
+        height: "70px",
         href: "https://www.home-assistant.io",
       },
       style: "dark",
@@ -141,7 +142,7 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Home Assistant, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Home Assistant. Built with Docusaurus.`,
     },
     image: "img/default-social.png",
   },

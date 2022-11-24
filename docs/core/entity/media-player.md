@@ -53,6 +53,20 @@ and are combined using the bitwise or (`|`) operator.
 | `VOLUME_SET`        | Entity volume can be set to specific levels.                       |
 | `VOLUME_STEP`       | Entity volume can be adjusted up and down.                         |
 
+## States
+
+The state of a media player is defined by using values in the `MediaPlayerState` enum, and can take the following possible values.
+
+| Value       | Description                                                                                                         |
+|-------------|---------------------------------------------------------------------------------------------------------------------|
+| `OFF`       | Entity is turned off and is not accepting commands until turned on.                                                 |
+| `ON`        | Entity is turned on, but no details on its state is currently known.                                               |
+| `IDLE`      | Entity is turned on and accepting commands, but currently not playing any media. Possibly at some idle home screen. |
+| `PLAYING`   | Entity is currently playing media.                                                                                  |
+| `PAUSED`    | Entity has an active media and is currently paused                                                                |
+| `STANDBY`   | Entity is in a low power state, accepting commands.                              |
+| `BUFFERING` | Entity is preparing to start playback of some media                                                                 |
+
 ## Methods
 
 ### Play Media
@@ -143,8 +157,8 @@ class MyMediaPlayer(MediaPlayerEntity):
     ) -> None:
         """Play a piece of media."""
         if media_source.is_media_source_id(media_id):
-            media_type = MEDIA_TYPE_MUSIC
-            play_item = await media_source.async_resolve_media(self.hass, media_id)
+            media_type = MediaType.MUSIC
+            play_item = await media_source.async_resolve_media(self.hass, media_id, self.entity_id)
             # play_item returns a relative URL if it has to be resolved on the Home Assistant host
             # This call will turn it into a full URL
             media_id = async_process_play_media_url(self.hass, play_item.url)
@@ -185,21 +199,21 @@ class MyMediaPlayer(MediaPlayerEntity):
 
 ### Mediatype
 
-Required. Returns one of the defined constants from the below list that matches the mediatype
+Required. Returns one of the values from the MediaType enum that matches the mediatype
 
 | CONST |
 |-------|
-|MEDIA_TYPE_MUSIC|
-|MEDIA_TYPE_TVSHOW|
-|MEDIA_TYPE_MOVIE|
-|MEDIA_TYPE_VIDEO|
-|MEDIA_TYPE_EPISODE|
-|MEDIA_TYPE_CHANNEL|
-|MEDIA_TYPE_PLAYLIST|
-|MEDIA_TYPE_IMAGE|
-|MEDIA_TYPE_URL|
-|MEDIA_TYPE_GAME|
-|MEDIA_TYPE_APP|
+|MediaType.MUSIC|
+|MediaType.TVSHOW|
+|MediaType.MOVIE|
+|MediaType.VIDEO|
+|MediaType.EPISODE|
+|MediaType.CHANNEL|
+|MediaType.PLAYLIST|
+|MediaType.IMAGE|
+|MediaType.URL|
+|MediaType.GAME|
+|MediaType.APP|
 
 ```python
 class MyMediaPlayer(MediaPlayerEntity):

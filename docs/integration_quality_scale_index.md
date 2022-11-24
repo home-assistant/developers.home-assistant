@@ -50,6 +50,7 @@ This is a solid integration that is able to survive poor conditions and can be c
 - Entities have correct device classes where appropriate ([docs](core/entity.md#generic-properties))
 - Supports entities being disabled and leverages `Entity.entity_registry_enabled_default` to disable less popular entities ([docs](core/entity.md#advanced-properties))
 - If the device/service API can remove entities, the integration should make sure to clean up the entity and device registry.
+- When communicating with a device or service, the integration implements the diagnostics platform which redacts sensitive information.
 
 ## Platinum 🏆
 

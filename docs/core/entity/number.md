@@ -31,7 +31,43 @@ If specifying a device class, your number entity will need to also return the co
 
 | Type | Supported units | Description
 | ---- | ---- | -----------
+| apparent_power | VA | Apparent power |
+| aqi | | Air Quality Index
+| battery | % | Percentage of battery that is left
+| carbon_dioxide | ppm | Concentration of carbon dioxide.
+| carbon_monoxide | ppm | Concentration of carbon monoxide.
+| current | A | Current
+| distance | km, m, cm, mm, mi, yd, in | Generic distance
+| energy | Wh, kWh, MWh | Energy. Represents _power_ over _time_. Not to be confused with `power`.
+| frequency | Hz, kHz, MHz, GHz | Frequency
+| gas | m³, ft³ | Volume of gas. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
+| humidity | % | Relative humidity
+| illuminance | lx, lm | Light level
+| moisture | % | Moisture
+| monetary | [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) | Monetary value with a currency.
+| nitrogen_dioxide | µg/m³ | Concentration of nitrogen dioxide |
+| nitrogen_monoxide | µg/m³ | Concentration of nitrogen monoxide |
+| nitrous_oxide | µg/m³ | Concentration of nitrous oxide |
+| ozone | µg/m³ | Concentration of ozone |
+| pm1 | µg/m³ | Concentration of particulate matter less than 1 micrometer |
+| pm25 | µg/m³ | Concentration of particulate matter less than 2.5 micrometers |
+| pm10 | µg/m³ | Concentration of particulate matter less than 10 micrometers |
+| power | W, kW | Power.
+| power_factor | % | Power Factor
+| precipitation | in, mm | Precipitation
+| precipitation_intensity | in/d, in/h, mm/d, mm/h | Precipitation intensity
+| pressure | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Pressure.
+| reactive_power | var | Reactive power |
+| signal_strength | dB, dBm | Signal strength
+| speed | ft/s, in/d, in/h, km/h, kn, m/s, mph, mm/d | Generic speed
+| sulphur_dioxide | µg/m³ | Concentration of sulphure dioxide |
 | temperature | °C, °F | Temperature.
+| volatile_organic_compounds | µg/m³ | Concentration of volatile organic compounds
+| voltage | V | Voltage
+| volume | L, mL, gal, fl. oz., m³, ft³ | Generic volume
+| water | L, gal, m³, ft³ | Water consumption
+| weight | kg, g, mg, µg, oz, lb | Generic mass; `weight` is used instead of `mass` to fit with every day language.
+| wind_speed | ft/s, km/h, kn, m/s, mph | Wind speed
 
 ## Restoring number states
 

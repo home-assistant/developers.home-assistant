@@ -82,15 +82,21 @@ If the result type is `FlowResultType.ABORT`, the result should look like:
 
 ## Flow Handler
 
-Flow handlers will handle a single flow. A flow contains one or more steps. When a flow is instantiated, the `FlowHandler.init_step` step will be called. Each step has three different possible results: "Show Form", "Abort" and "Create Entry".
+Flow handlers will handle a single flow. A flow contains one or more steps. When a flow is instantiated, the `FlowHandler.init_step` step will be called. Each step has several possible results:
+
+- [Show Form](#show-form)
+- [Create Entry](#create-entry)
+- [Abort](#abort)
+- [External Step](#external-step--external-step-done)
+- [Show Progress](#show-progress--show-progress-done)
+- [Show Menu](#show-menu)
 
 At a minimum, each flow handler will have to define a version number and a step. This doesn't have to be `init`, as `async_create_flow` can assign `init_step` dependent on the current workflow, for example in configuration, `context.source` will be used as `init_step`.
 
-The bare minimum config flow:
+For example, a bare minimum config flow would be:
 
 ```python
 from homeassistant import data_entry_flow
-
 
 @config_entries.HANDLERS.register(DOMAIN)
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
@@ -104,9 +110,13 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         """Handle user step."""
 ```
 
+Data entry flows depend on translations for showing the text in the steps. It depends on the parent of a data entry flow manager where this is stored. For config and option flows, this is in `strings.json` under `config` and `option`, respectively.
+
+For a more detailed explanation of `strings.json` see the [backend translation](/docs/internationalization/core) page.
+
 ### Show Form
 
-This result type will show a form to the user to fill in. You define the current step, the schema of the data (using voluptuous or selectors) and optionally a dictionary of errors.
+This result type will show a form to the user to fill in. You define the current step, the schema of the data (using a mixture of voluptuous and/or [selectors](https://www.home-assistant.io/docs/blueprint/selectors/)) and optionally a dictionary of errors.
 
 ```python
 from homeassistant.helpers.selector import selector
@@ -129,6 +139,77 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         return self.async_show_form(step_id="init", data_schema=vol.Schema(data_schema))
 ```
 
+#### Labels & Descriptions
+
+Translations for the form are added to `strings.json` in a key for the `step_id`. That object may contain the folowing keys:
+
+|        Key         |       Value        | Notes                                                                                                                                        |
+| :----------------: | :----------------: | :------------------------------------------------------------------------------------------------------------------------------------------- |
+|      `title`       |    Form heading    | Do not include your brand name. It will be automatically injected from your manifest.                                                        |
+|   `description`    | Form instructions  | Optional. Do not link to the documentation as that is linked automatically. Do not include "basic" information like "Here you can set up X". |
+|       `data`       |    Field labels    | Keep succinct and consistent with other integrations whenever appropriate for the best user experience.                                      |
+| `data_description` | Field descriptions | Optional explanatory text to show below the field.                                                                                           |
+
+The field labels and descriptions are given as a dictionary with keys corresponding to your schema. Here is a simple example:
+
+```json
+{
+  "config": {
+    "step": {
+      "user": {
+          "title": "Add Group",
+          "description": "Some description",
+          "data": {
+              "entities": "Entities",
+          },
+          "data_description": {
+              "entities": "The entities to add to the group",
+          },
+      }
+    }
+  }
+}
+```
+
+#### Enabling Browser Autofill
+
+Suppose your integration is collecting form data which can be automatically filled by browsers or password managers, such as login credentials or contact information. You should enable autofill whenever possible for the best user experience and accessibility. There are two options to enable this.
+
+The first option is to use Voluptuous with data keys recognized by the frontend. The frontend will recognize the keys `"username"` and `"password"` and add HTML `autocomplete` attribute values of `"username"` and `"current-password"` respectively. Support for autocomplete is limited to `"username"` and `"password"` fields and is supported primarily to quickly enable auto-fill on the many integrations that collect them without converting their schemas to selectors.
+
+The second option is to use a [text selector](https://www.home-assistant.io/docs/blueprint/selectors/#text-selector). A text selector gives full control of the input type and allows any permitted value for `autocomplete` to be specified. A hypothetical schema collecting specific fillable data might be:
+
+```python
+import voluptuous as vol
+from homeassistant.const import CONF_PASSWORD, CONF_USERNAME
+from homeassistant.helpers.selector import (
+    TextSelector,
+    TextSelectorConfig,
+    TextSelectorType,
+)
+
+STEP_USER_DATA_SCHEMA = vol.Schema(
+    {
+        vol.Required(CONF_USERNAME): TextSelector(
+            TextSelectorConfig(type=TextSelectorType.EMAIL, autocomplete="username")
+        ),
+        vol.Required(CONF_PASSWORD): TextSelector(
+            TextSelectorConfig(
+                type=TextSelectorType.PASSWORD, autocomplete="current-password"
+            )
+        ),
+        vol.Required("postal_code"): TextSelector(
+            TextSelectorConfig(type=TextSelectorType.TEXT, autocomplete="postal-code")
+        ),
+        vol.Required("mobile_number"): TextSelector(
+            TextSelectorConfig(type=TextSelectorType.TEL, autocomplete="tel")
+        ),
+    }
+)
+```
+
+#### Defaults & Suggestions
+
 If you'd like to pre-fill data in the form, you have two options. The first is to use the `default` parameter. This will both pre-fill the field, and act as the default value in case the user leaves the field empty.
 
 ```python
@@ -149,7 +230,7 @@ The other alternative is to use a suggested value - this will also pre-fill the 
 
 You can also mix and match - pre-fill through `suggested_value`, and use a different value for `default` in case the field is left empty, but that could be confusing to the user so use carefully.
 
-Title and description of the step will be provided via the translation file. Where this is defined depends on the context of the data entry flow.
+#### Validation
 
 After the user has filled in the form, the step method will be called again and the user input is passed in. Your step will only be called if the user input passes your data schema. When the user passes in data, you will have to do extra validation of the data. For example, you can verify that the passed in username and password are valid.
 
@@ -179,35 +260,9 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         )
 ```
 
-Translations for the step title, description and fields is added to `strings.json`. Each field can also have an optional entry in `data_description` to add extra explanatory text.
-
-Do not put your brand title in the `title`. It will be automatically injected from your manifest.
-
-Your description should not link to the documentation as that is linked automatically. It should also not contain "basic" information like "Here you can set up X". It can be omitted.
-
-```json
-{
-  "config": {
-    "step": {
-      "user": {
-          "title": "Add Group",
-          "description": "Some description",
-          "data": {
-              "entities": "Entities",
-          },
-          "data_description": {
-              "entities": "The entities to add to the group",
-          },
-      }
-    }
-  }
-}
-```
-
-
 #### Multi-step flows
 
-If the user input passes validation, you can again return one of the three return values. If you want to navigate the user to the next step, return the return value of that step:
+If the user input passes validation, you can return one of the possible step types again. If you want to navigate the user to the next step, return the return value of that step:
 
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
@@ -274,7 +329,6 @@ Example configuration flow that includes an external step.
 ```python
 from homeassistant import config_entries
 
-
 @config_entries.HANDLERS.register(DOMAIN)
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
     VERSION = 1
@@ -313,7 +367,7 @@ async def handle_result(hass, flow_id, data):
         return "Invalid config flow specified"
 ```
 
-### Show Progress and Show Progress Done
+### Show Progress & Show Progress Done
 
 It is possible that we need the user to wait for a task that takes several minutes.
 
@@ -332,9 +386,7 @@ Example configuration flow that includes two show progress tasks.
 
 ```python
 from homeassistant import config_entries
-
 from .const import DOMAIN
-
 
 class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
@@ -413,12 +465,6 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
   }
 }
 ```
-
-## Translations
-
-Data entry flows depend on translations for showing the text in the forms. It depends on the parent of a data entry flow manager where this is stored. For config and option flows this is in `strings.json` under `config` and `option`.
-
-For a more detailed explanation of `strings.json` see to the [backend translation](/docs/internationalization/core) page.
 
 ## Initializing a config flow from an external source
 

@@ -6,7 +6,7 @@ Based on where you are in the code, `config` can mean various things.
 
 ### On the hass object
 
-On the hass object it is an instance of the Config class. The Config class contains the users preferred units, the path to the config directory and which components are loaded. [See available methods.](https://dev-docs.home-assistant.io/en/master/api/core.html#homeassistant.core.Config)
+On the hass object it is an instance of the Config class. The Config class contains the users preferred units, the path to the config directory and which components are loaded. [See available methods.](https://dev-docs.home-assistant.io/en/dev/api/core.html#homeassistant.core.Config)
 
 ### Config passed into component setup
 
