@@ -7,4 +7,4 @@ title: "Adding more unit enumerators"
 As of Home Assistant Core 2022.12, the following unit constants are deprecated and replaced 
 by a corresponding enum:
 
-  - `UnitOfAccumulatedVolumetricFlux` enumerator replaces `PRECIPITATION_***` constants
+  - `UnitOfPrecipitationDepth` enumerator replaces `PRECIPITATION_***` constants
