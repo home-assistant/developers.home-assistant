@@ -16,4 +16,4 @@ Home Assistant provides a platform for home control and home automation. Home As
 
 ## Running parts of the stack
 
-Users have different requirements what they want from a home automation platform. That's why it is possible to run only part of the Home Assistant stack. For more information, see the [installation instructions](https://www.home-assistant.io/installation/).
+Users have different requirements for what they want from a home automation platform. That's why it is possible to run only part of the Home Assistant stack. For more information, see the [installation instructions](https://www.home-assistant.io/installation/).
