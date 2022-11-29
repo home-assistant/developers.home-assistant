@@ -230,7 +230,7 @@ The other alternative is to use a suggested value - this will also pre-fill the 
 
 You can also mix and match - pre-fill through `suggested_value`, and use a different value for `default` in case the field is left empty, but that could be confusing to the user so use carefully.
 
-Using suggested values also make it possible to declare a static schema, and merge suggested values from existing input. A `schema_with_suggested_values` helper makes this possible:
+Using suggested values also make it possible to declare a static schema, and merge suggested values from existing input. A `add_suggested_values_to_schema` helper makes this possible:
 
 ```python
 OPTIONS_SCHEMA = vol.Schema(
