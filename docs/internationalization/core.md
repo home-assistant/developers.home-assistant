@@ -13,41 +13,19 @@ The `strings.json` contains translations for different things that the integrati
 | Category            | Description                                       |
 | ------------------- | ------------------------------------------------- |
 | `title`             | Title of the integration.                         |
-| `state`             | States of the integration, keyed by device class. |
 | `config`            | Translations for the config flow.                 |
+| `device_automation` | Translations for device automations.              |
+| `issues`            | Translations for repairs issues.                  |
 | `options`           | Translations for the options flow.                |
-| `device_automation` | Translations for the device automations.          |
+| `state`             | States of the integration, keyed by device class. |
 
 #### Title
 
 This category is just a string: the translation of the integration name. This key is optional and Home Assistant will fallback to the integration name if it is omitted. Only include this if it's not a product brand.
 
-#### State
-
-If your integration provides entities under its domain, you will want to translate the states. You do this by offering a `state` dictionary, that contains translations for states with different device classes. The key `_` is used for entities without a device class.
-
-```json
-{
-  "state": {
-    "problem": {
-      "off": "OK",
-      "on": "Problem"
-    },
-    "safety": {
-      "off": "Safe",
-      "on": "Unsafe"
-    },
-    "_": {
-      "off": "[%key:common::state::off%]",
-      "on": "[%key:common::state::on%]"
-    }
-  }
-}
-```
-
 #### Config / Options
 
-The translation strings for the configuration flow handler are defined under the `config` key. An example strings file below describes the different supported keys:
+The translation strings for the configuration flow handler and the option flow handler are defined under the `config` and `options` keys respectively. An example strings file below describes the different supported keys. Although the example shows translations for a configuration flow, the translations for an option flow is exactly the same.
 
 ```json
 {
@@ -73,6 +51,85 @@ The translation strings for the configuration flow handler are defined under the
     },
     "progress": {
       "slow_task": "This message will be displayed if `slow_task` is returned as `progress_action` for `async_show_progress`."
+    }
+  }
+}
+```
+
+#### Device automations
+
+The translation strings for device automations are defined under the `device_automation` key. An example strings file below describes the different supported keys.
+
+```json
+{
+  "device_automation": {
+    // Translations for supported device actions
+    "action_type": {
+      "open": "Open {entity_name}"
+    }
+    // Translations for supported device conditions
+    "condition_type": {
+      "is_open": "{entity_name} is open"
+    }
+    // Translations for supported device triggers
+    "trigger_type": {
+      "opened": "{entity_name} opened",
+      "remote_button_short_press": "\"{subtype}\" button pressed",
+    }
+    // Translations for device trigger sub types, typically used for names of buttons
+    "trigger_subtype": {
+      "button_1": "First button"
+    }
+  }
+}
+
+```
+
+#### Issues
+
+The translation strings for repairs issues are defined under the `issues` key. An example strings file below describes the different supported keys.
+
+```json
+{
+  "issues": {
+    "cold_tea": {
+      // The title of the issue
+      "title": "The tea is cold",
+      // Translations for a fixable issue's repair flow, defined in the same way as translation for a configuration flow.
+      // Exactly one of `fix_flow` or `description. must be present.
+      "fix_flow": {
+        "abort": {
+          "not_tea_time": "Can not re-heat the tea at this time"
+        }
+      }
+    },
+    "unfixable_problem": {
+      "title": "This is not a fixable problem",
+      // Description of the issue, exactly one of `fix_flow` or `description. must be present.
+      "description": "This issue can't be fixed by a flow."
+    }
+  }
+}
+```
+
+#### State
+
+If your integration provides entities under its domain, you will want to translate the states. You do this by offering a `state` dictionary, that contains translations for states with different device classes. The key `_` is used for entities without a device class.
+
+```json
+{
+  "state": {
+    "problem": {
+      "off": "OK",
+      "on": "Problem"
+    },
+    "safety": {
+      "off": "Safe",
+      "on": "Unsafe"
+    },
+    "_": {
+      "off": "[%key:common::state::off%]",
+      "on": "[%key:common::state::on%]"
     }
   }
 }
