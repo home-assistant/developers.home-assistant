@@ -58,7 +58,7 @@ The translation strings for the configuration flow handler and the option flow h
 
 #### Device automations
 
-The translation strings for device automations are defined under the `issues` key. An example strings file below describes the different supported keys.
+The translation strings for device automations are defined under the `device_automation` key. An example strings file below describes the different supported keys.
 
 ```json
 {
