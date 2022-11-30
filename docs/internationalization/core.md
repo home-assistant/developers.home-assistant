@@ -62,22 +62,24 @@ The translation strings for device automations are defined under the `device_aut
 
 ```json
 {
-  // Translations for supported device actions
-  "action_type": {
-    "open": "Open {entity_name}"
-  }
-  // Translations for supported device conditions
-  "condition_type": {
-    "is_open": "{entity_name} is open"
-  }
-  // Translations for supported device triggers
-  "trigger_type": {
-    "opened": "{entity_name} opened",
-    "remote_button_short_press": "\"{subtype}\" button pressed",
-  }
-  // Translations for device trigger sub types, typically used for names of buttons
-  "trigger_subtype": {
-    "button_1": "First button"
+  "device_automation": {
+    // Translations for supported device actions
+    "action_type": {
+      "open": "Open {entity_name}"
+    }
+    // Translations for supported device conditions
+    "condition_type": {
+      "is_open": "{entity_name} is open"
+    }
+    // Translations for supported device triggers
+    "trigger_type": {
+      "opened": "{entity_name} opened",
+      "remote_button_short_press": "\"{subtype}\" button pressed",
+    }
+    // Translations for device trigger sub types, typically used for names of buttons
+    "trigger_subtype": {
+      "button_1": "First button"
+    }
   }
 }
 
