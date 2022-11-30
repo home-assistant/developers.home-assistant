@@ -42,5 +42,5 @@ pip3 install -e ../my_lib_folder
 Now run Home Assistant without installing dependencies from PyPI to avoid overriding your package.
 
 ```shell
-hass --skip-pip
+hass --skip-pip-packages my_lib_module_name
 ```

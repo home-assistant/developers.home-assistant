@@ -118,7 +118,7 @@ To test it out inside Home Assistant, run the following command from the main Ho
 
 ```shell
 pip3 install -e /path/to/hass/frontend/
-hass --skip-pip
+hass --skip-pip-packages home-assistant-frontend
 ```
 
 [hass-frontend]: https://github.com/home-assistant/frontend

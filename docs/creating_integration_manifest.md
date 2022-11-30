@@ -128,17 +128,17 @@ During the development of a component, it can be useful to test against differen
 
 ```shell
 pip install pychromecast==3.2.0 --target ~/.homeassistant/deps
-hass --skip-pip
+hass --skip-pip-packages pychromecast
 ```
 
-This will use the specified version, and prevent Home Assistant from trying to override it with what is specified in `requirements`.
+This will use the specified version, and prevent Home Assistant from trying to override it with what is specified in `requirements`. To prevent any package from being automatically overridden without specifying dependencies, you can launch Home Assistant with the global `--skip-pip` flag.
 
 If you need to make changes to a requirement to support your component, it's also possible to install a development version of the requirement using `pip install -e`:
 
 ```shell
 git clone https://github.com/balloob/pychromecast.git
 pip install -e ./pychromecast
-hass --skip-pip
+hass --skip-pip-packages pychromecast
 ```
 
 It is also possible to use a public git repository to install a requirement.  This can be useful, for example, to test changes to a requirement dependency before it's been published to PyPI. The following example will install the `except_connect` branch of the `pycoolmaster` library directly from GitHub unless version `0.2.2` is currently installed:
