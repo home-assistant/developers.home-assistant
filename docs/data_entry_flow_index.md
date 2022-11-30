@@ -230,6 +230,26 @@ The other alternative is to use a suggested value - this will also pre-fill the 
 
 You can also mix and match - pre-fill through `suggested_value`, and use a different value for `default` in case the field is left empty, but that could be confusing to the user so use carefully.
 
+Using suggested values also make it possible to declare a static schema, and merge suggested values from existing input. A `add_suggested_values_to_schema` helper makes this possible:
+
+```python
+OPTIONS_SCHEMA = vol.Schema(
+    {
+        vol.Optional("field_name", default="default value"): str,
+    }
+)
+
+class ExampleOptionsFlow(config_entries.OptionsFlow):
+    async def async_step_init(
+        self, user_input: dict[str, Any] | None = None
+    ) -> FlowResult:
+        return self.async_show_form(
+            data_schema = self.add_suggested_values_to_schema(
+                OPTIONS_SCHEMA, self.entry.options
+            )
+        )
+```
+
 #### Validation
 
 After the user has filled in the form, the step method will be called again and the user input is passed in. Your step will only be called if the user input passes your data schema. When the user passes in data, you will have to do extra validation of the data. For example, you can verify that the passed in username and password are valid.
