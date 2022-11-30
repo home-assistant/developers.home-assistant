@@ -110,7 +110,30 @@ The translation strings for repairs issues are defined under the `issues` key. A
 }
 ```
 
-### State of entity components
+### Entities
+
+#### State of entities
+
+Integrations can provide translations for states of its entities under other integrations like sensor if the base entity component does not provide translations, or if the translation provided by the base entity component do not match the integration's entity. To do this, provide an `entity` dictionary, that contains translations for states and set the entity's `translation_key` property to a key under a domain in the `entity` dictionary.
+
+To differentiate entities and their translations, provide different translation keys. The following example `strings.json` is for a Moon domain `sensor` entity with its `translation_key` property set to `phase`:
+
+```json
+{
+  "entity": {
+    "sensor": {
+      "phase": {
+        "new_moon": "New moon",
+        "first_quarter": "First quarter",
+        "full_moon": "Full moon",
+        "last_quarter": "Last quarter"
+      }
+    }
+  }
+}
+```
+
+#### State of entity components
 
 If your integration provides entities under its domain, you will want to translate the states. You do this by offering a `state` dictionary, that contains translations for states with different device classes. The key `_` is used for entities without a device class.
 
@@ -128,27 +151,6 @@ If your integration provides entities under its domain, you will want to transla
     "_": {
       "off": "[%key:common::state::off%]",
       "on": "[%key:common::state::on%]"
-    }
-  }
-}
-```
-
-### State of entities
-
-Integrations can provide translations for states of its entities under other integrations like sensor. To do this, provide an `entity` dictionary, that contains translations for states matching the entity's `translation_key` property.
-
-To differentiate entities and their translations, provide different translation keys. The following example `strings.json` is for a Moon domain `sensor` entity with its `translation_key` property set to `phase`:
-
-```json
-{
-  "entity": {
-    "sensor": {
-      "phase": {
-        "new_moon": "New moon",
-        "first_quarter": "First quarter",
-        "full_moon": "Full moon",
-        "last_quarter": "Last quarter"
-      }
     }
   }
 }
