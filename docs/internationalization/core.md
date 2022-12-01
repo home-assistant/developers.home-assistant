@@ -4,9 +4,7 @@ title: "Backend Localization"
 
 ## Translation Strings
 
-Platform translation strings are stored as JSON in the [core](https://github.com/home-assistant/core) repository. These files must be located adjacent to the component/platform they belong to. Components must have their own directory, and the file is simply named `strings.json` in that directory. For platforms, they are named `strings.<platform name>.json` in the platform directory. This file will contain the different strings that will be translatable.
-
-### `strings.json`
+Platform translation strings are stored as JSON in the [core](https://github.com/home-assistant/core) repository. These files must be located adjacent to the component/platform they belong to. Components must have their own directory, and the file is simply named `strings.json` in that directory. This file will contain the different strings that will be translatable.
 
 The `strings.json` contains translations for different things that the integration offers that need to be translated.
 
@@ -19,11 +17,11 @@ The `strings.json` contains translations for different things that the integrati
 | `options`           | Translations for the options flow.                |
 | `state`             | States of the integration, keyed by device class. |
 
-#### Title
+### Title
 
 This category is just a string: the translation of the integration name. This key is optional and Home Assistant will fallback to the integration name if it is omitted. Only include this if it's not a product brand.
 
-#### Config / Options
+### Config / Options
 
 The translation strings for the configuration flow handler and the option flow handler are defined under the `config` and `options` keys respectively. An example strings file below describes the different supported keys. Although the example shows translations for a configuration flow, the translations for an option flow is exactly the same.
 
@@ -56,7 +54,7 @@ The translation strings for the configuration flow handler and the option flow h
 }
 ```
 
-#### Device automations
+### Device automations
 
 The translation strings for device automations are defined under the `device_automation` key. An example strings file below describes the different supported keys.
 
@@ -85,7 +83,7 @@ The translation strings for device automations are defined under the `device_aut
 
 ```
 
-#### Issues
+### Issues
 
 The translation strings for repairs issues are defined under the `issues` key. An example strings file below describes the different supported keys.
 
@@ -112,7 +110,30 @@ The translation strings for repairs issues are defined under the `issues` key. A
 }
 ```
 
-#### State
+### Entities
+
+#### State of entities
+
+Integrations can provide translations for states of its entities under other integrations like sensor if the base entity component does not provide translations, or if the translation provided by the base entity component do not match the integration's entity. To do this, provide an `entity` dictionary, that contains translations for states and set the entity's `translation_key` property to a key under a domain in the `entity` dictionary.
+
+To differentiate entities and their translations, provide different translation keys. The following example `strings.json` is for a Moon domain `sensor` entity with its `translation_key` property set to `phase`:
+
+```json
+{
+  "entity": {
+    "sensor": {
+      "phase": {
+        "new_moon": "New moon",
+        "first_quarter": "First quarter",
+        "full_moon": "Full moon",
+        "last_quarter": "Last quarter"
+      }
+    }
+  }
+}
+```
+
+#### State of entity components
 
 If your integration provides entities under its domain, you will want to translate the states. You do this by offering a `state` dictionary, that contains translations for states with different device classes. The key `_` is used for entities without a device class.
 
@@ -135,26 +156,7 @@ If your integration provides entities under its domain, you will want to transla
 }
 ```
 
-### `strings.sensor.json`
-
-Integrations can provide translations for states of its entities under other integrations like sensor. To do this, the entity will need a custom device class that starts with `<domain>__<custom name>` (note double underscore). You can then provide translations that will only be applied for your entity. Note that you cannot customize your translation when you use an official device class. Those are standardized.
-
-To differentiate entities and their translations, provide different device classes. The following example `strings.sensor.json` is for a Moon domain sensor entity with the `moon__phase` device class:
-
-```json
-{
-  "state": {
-    "moon__phase": {
-      "new_moon": "New moon",
-      "first_quarter": "First quarter",
-      "full_moon": "Full moon",
-      "last_quarter": "Last quarter"
-    }
-  }
-}
-```
-
-### Test translations
+## Test translations
 
 In order to test changes to translation files, the translation strings must be compiled into Home Assistant’s translation directories by running the following script:
 
@@ -164,7 +166,7 @@ python3 -m script.translations develop
 
 If translations do not show, clear the browser cache (cmd + R (for MacOS), ctrl + F5 (Windows and Linux))
 
-### Introducing new strings
+## Introducing new strings
 
 To introduce new strings, add them to `strings.json` or to a platform strings file. Try to use as many references to common strings as possible. Common strings live in `homeassistant/strings.json`. You can refer to those translations using references. For example:
 
