@@ -123,10 +123,12 @@ To differentiate entities and their translations, provide different translation 
   "entity": {
     "sensor": {
       "phase": {
-        "new_moon": "New moon",
-        "first_quarter": "First quarter",
-        "full_moon": "Full moon",
-        "last_quarter": "Last quarter"
+        "state": {
+          "new_moon": "New moon",
+          "first_quarter": "First quarter",
+          "full_moon": "Full moon",
+          "last_quarter": "Last quarter"
+        }
       }
     }
   }
