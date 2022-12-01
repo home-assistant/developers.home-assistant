@@ -6,7 +6,7 @@ title: "Summary of unit system related changes"
 
 The last few months saw many changes to the supported unit systems, and how numerical sensors are influenced by them. This blog post attempts to summarize the changes.
 
-- The unit used for the state of device classes `distance`, `gas`, `precipitation`, `preciptiation_intensity`, `speed`, `volume`, `water`, `weight`, `wind_speed` are influenced by the unit system and automatically converted.
+- The unit used for the state of device classes `distance`, `gas`, `precipitation`, `precipitation_intensity`, `speed`, `volume`, `water`, `weight`, `wind_speed` are influenced by the unit system and automatically converted.
   - Integrations can override the unit system rules by setting the entity property `suggested_unit_of_measurement`.
   - To avoid breaking changes, the unit of a sensor is automatically converted according to the unit system rules *only the first time the sensor is added to Home Assistant*. This means sensors already in the user's system won't be affected by the new unit conversion rule.
   - Integrations, in most cases, no longer have to do any unit conversion as it is now automatically handled.
