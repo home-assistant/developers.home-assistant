@@ -41,7 +41,7 @@ CMD [ "/run.sh" ]
 
 ### The `config.yaml` file
 
-This is your add-on configuration, which tell the Supervisor what to do and how to present your add-on.
+This is your add-on configuration, which tells the Supervisor what to do and how to present your add-on.
 
 For an overview of all valid add-on configuration options have a look [here](/docs/add-ons/configuration#add-on-configuration)
 
