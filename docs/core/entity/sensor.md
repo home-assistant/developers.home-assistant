@@ -19,6 +19,7 @@ Properties should always only return information from memory and not do I/O (lik
 | native_unit_of_measurement | string | `None` | The unit of measurement that the sensor's value is expressed in. If the `native_unit_of_measurement` is °C or °F, and its `device_class` is temperature, the sensor's `unit_of_measurement` will be the preferred temperature unit configured by the user and the sensor's `state` will be the `native_value` after an optional unit conversion. If not `None`, the sensor is assumed to be numerical and will be displayed as a line-chart in the frontend instead of as discrete values.
 | state_class | string | `None` | Type of state. If not `None`, the sensor is assumed to be numerical and will be displayed as a line-chart in the frontend instead of as discrete values.
 | suggested_unit_of_measurement | string | `None` | The unit of measurement to be used for the sensor's state. For sensors with a `unique_id`, this will be used as the initial unit of measurement, which users can then override. For sensors without a `unique_id`, this will be the unit of measurement for the sensor's state. This property is intended to be used by integrations to override automatic unit conversion rules, for example, to make a temperature sensor always display in `°C` regardless of whether the configured unit system prefers `°C` or `°F`, or to make a distance sensor always display in miles even if the configured unit system is metric.
+| options | list | `None` | In case this sensor provides a textual state, this property can be used to provide a list of possible states. Requires the `enum` device class to be set. Cannot be combined with `state_class` or `native_unit_of_measurement`.
 
 :::tip
 Instead of adding `extra_state_attributes` for a sensor entity, create an additional sensor entity. Attributes that do not change are only saved in the database once. If `extra_state_attributes` and the sensor value both frequently change, this can quickly increase the size of the database.
@@ -40,6 +41,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | distance | km, m, cm, mm, mi, yd, in | Generic distance
 | duration | d, h, min, s | Time period. Should not update only due to time passing. The device or service needs to give a new data point to update.
 | energy | Wh, kWh, MWh | Energy, statistics will be stored in kWh. Represents _power_ over _time_. Not to be confused with `power`.
+| enum | | The sensor has a limited set of (non-numeric) states. The `options` property must be set to a list of possible states when using this device class.
 | frequency | Hz, kHz, MHz, GHz | Frequency
 | gas | m³, ft³ | Volume of gas, statistics will be stored in m³. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
 | humidity | % | Relative humidity
