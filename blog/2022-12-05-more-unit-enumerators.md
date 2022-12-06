@@ -11,5 +11,6 @@ by a corresponding enum:
   - `UnitOfElectricCurrent` enumerator replaces `ELECTRIC_CURRENT_***` constants
   - `UnitOfElectricPotential` enumerator replaces `ELECTRIC_POTENTIAL_***` constants
   - `UnitOfFrequency` enumerator replaces `FREQUENCY_***` constants
+  - `UnitOfIlluminance` enumerator replaces `LIGHT_***` constants
   - `UnitOfInformation` enumerator replaces `DATA_***` constants
   - `UnitOfTime` enumerator replaces `TIME_***` constants
