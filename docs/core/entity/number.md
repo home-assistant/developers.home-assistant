@@ -37,6 +37,7 @@ If specifying a device class, your number entity will need to also return the co
 | carbon_dioxide | ppm | Concentration of carbon dioxide.
 | carbon_monoxide | ppm | Concentration of carbon monoxide.
 | current | A | Current
+| data_rate | bit/s, kbit/s, Mbit/s, Gbit/s, B/s, kB/s, MB/s, GB/s, KiB/s, MiB/s, GiB/s | Data rate
 | distance | km, m, cm, mm, mi, yd, in | Generic distance
 | energy | Wh, kWh, MWh | Energy. Represents _power_ over _time_. Not to be confused with `power`.
 | frequency | Hz, kHz, MHz, GHz | Frequency
