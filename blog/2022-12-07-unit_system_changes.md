@@ -16,5 +16,5 @@ The last few months saw many changes to the supported unit systems, and how nume
 - The behavior of temperature sensors is mostly unchanged; the unit of a temperature sensors state will always reflect the unit system unless:
   - The user has overridden the unit via entity settings in the frontend.
   - The temperature sensor has a non-None `suggested_unit_of_measurement` property.
-- The `IMPERIAL_SYSTEM` unit system has been deprecated, and replaced with `US_CUSTOMARY_SYSTEM`. Furthermore, the `is_metric` and `name` properties of a unit system are deprecated and should not be used. More details about these changes can be found in this [blog post](blog/2022/10/14/deprecate-unit-system).
-- The unit conversion utilities have been refactored and moved, unit converters are now available as static classes in `homeassistant/util/unit_conversion`. More details about these changes can be found in this [blog post](blog/2022/09/28/deprecate-conversion-utilities).
+- The `IMPERIAL_SYSTEM` unit system has been deprecated, and replaced with `US_CUSTOMARY_SYSTEM`. Furthermore, the `is_metric` and `name` properties of a unit system are deprecated and should not be used. More details about these changes can be found in this [blog post](/blog/2022/10/14/deprecate-unit-system).
+- The unit conversion utilities have been refactored and moved, unit converters are now available as static classes in `homeassistant/util/unit_conversion`. More details about these changes can be found in this [blog post](/blog/2022/09/28/deprecate-conversion-utilities).
