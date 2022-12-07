@@ -4,7 +4,7 @@ authorURL: https://github.com/piitaya
 title: "Entity state color changes"
 ---
 
-From the Home Assistant Core 2022.12 release, we are using different colors per domain when an entity is active. The `--paper-item-icon-active-color` css variable is no longer used.
+From the Home Assistant Core 2022.12 release, we are using different colors per domain when an entity is active. The `--paper-item-icon-active-color` CSS variable is no longer used.
 
 This means that any theme that has previously overridden this css variable will use the built-in colors for active states. All theses new colors are available as css variables too.
 
