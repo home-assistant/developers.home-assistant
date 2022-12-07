@@ -14,4 +14,5 @@ by a corresponding enum:
   - `UnitOfIlluminance` enumerator replaces `LIGHT_LUX` constant
   - `UnitOfInformation` enumerator replaces `DATA_***` constants
   - `UnitOfIrradiance` enumerator replaces `IRRADIATION_WATTS_PER_SQUARE_METER` and `IRRADIATION_BTUS_PER_HOUR_SQUARE_FOOT` constants
+  - `UnitOfSoundPressure` enumerator replaces `SOUND_PRESSURE_***` constants
   - `UnitOfTime` enumerator replaces `TIME_***` constants
