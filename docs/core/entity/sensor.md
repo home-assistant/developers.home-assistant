@@ -62,7 +62,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | pressure | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Pressure, statistics will be stored in Pa.
 | reactive_power | var | Reactive power |
 | signal_strength | dB, dBm | Signal strength
-| sound_pressure | dB, dBa | Sound pressure
+| sound_pressure | dB, dBA | Sound pressure
 | speed | ft/s, in/d, in/h, km/h, kn, m/s, mph, mm/d | Generic speed
 | sulphur_dioxide | µg/m³ | Concentration of sulphure dioxide |
 | temperature | °C, °F | Temperature, statistics will be stored in °C.
