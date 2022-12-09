@@ -10,8 +10,8 @@ In [Home Assistant 2022.12](https://www.home-assistant.io/blog/2022/12/07/releas
 
 We just found a serious bug in the firmware that we need to fix. That's why we have decided to temporarily disable allowing users to opt in to multi-pan starting Home Assistant 2022.12.1.
 
-The bug is that Zigbee end-devices cannot rejoin the network through the coordinator, it kicks them and asks them to re-join, over and over. Normal EmberZNet firmware does not behave this way. It only affects end devices joined directly to the coordinator, not ones joining through an intermediate router, and only those that attempt to re-join the network.
+The bug is that Zigbee end-devices cannot rejoin the network through the coordinator: it kicks them and asks them to re-join, over and over. Normal EmberZNet firmware does not behave this way. It only affects end devices joined directly to the coordinator, not ones joining through an intermediate router, and only those that attempt to re-join the network.
 
 We're working with Silicon Labs to get this issue resolved as soon as possible. Once resolved, we will re-enable multi-pan.
 
-Enabling multi-pan installs a special firmware on your radio. To disable multi-pan, the original Zigbee firmware needs to be installed again. This is not something that can be done automatically from Home Assistant yet. We will be updating this post soon with instructions on how to disable it.
+Enabling multi-pan installs a special firmware on your radio. To disable multi-pan, the original Zigbee firmware needs to be installed again. This is not something that can be done automatically from Home Assistant yet. We will be updating this post soon with instructions on how to do this via your browser.
