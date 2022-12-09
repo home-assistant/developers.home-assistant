@@ -31,4 +31,4 @@ The following example `strings.json` is for a Moon domain `sensor` entity with i
 }
 ```
 
-For more details, see the [`translation`](docs/internationalization/core/#state-of-entities) and [`entity`](docs/core/entity#generic-properties) documentation.
+For more details, see the [`translation`](/docs/internationalization/core/#state-of-entities) and [`entity`](/docs/core/entity#generic-properties) documentation.
