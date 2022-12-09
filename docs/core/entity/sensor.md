@@ -33,6 +33,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | ---- | ---- | -----------
 | apparent_power | VA | Apparent power |
 | aqi | | Air Quality Index
+| atmospheric_pressure | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Atmospheric pressure, statistics will be stored in Pa.
 | battery | % | Percentage of battery that is left
 | carbon_dioxide | ppm | Concentration of carbon dioxide.
 | carbon_monoxide | ppm | Concentration of carbon monoxide.
