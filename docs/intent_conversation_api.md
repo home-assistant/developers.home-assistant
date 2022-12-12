@@ -20,11 +20,16 @@ A sentence may be POST-ed to `/api/conversation/process` like:
 
 The following input fields are available:
 
-| Name              | Type   | Description                                                                     |
-|-------------------|--------|---------------------------------------------------------------------------------|
-| `text`            | string | Input sentence.                                                                 |
-| `language`        | string | Optional. Language of the input sentence (defaults to configured language).     |
-| `conversation_id` | string | Optional. Unique id to track conversation across multiple inputs and responses. |
+| Name              | Type   | Description                                                                                         |
+|-------------------|--------|-----------------------------------------------------------------------------------------------------|
+| `text`            | string | Input sentence.                                                                                     |
+| `language`        | string | Optional. Language of the input sentence (defaults to configured language).                         |
+| `conversation_id` | string | Optional. Unique id to [track conversation](#conversation-id) across multiple inputs and responses. |
+
+
+## Conversation Id
+
+Conversations are tracked by a unique id generated from within Home Assistant. To continue a conversation, retrieve the `conversation_id` from the first [intent response](#intent-response) and add it to the next [input sentence](#input-sentence).
 
 
 ## Intent Response
@@ -36,14 +41,21 @@ The response from `/api/conversation/process` contains information about the eff
   "response_type": "action_done",
   "language": "en",
   "data": {
-    "target": {
-      "type": "area",
-      "name": "Living Room"
-    }
+    "targets": [
+      {
+        "type": "area",
+        "name": "Living Room"
+        "id": "living_room"
+      },
+      {
+        "type": "domain",
+        "name": "light"
+      }
+    ]
   },
   "speech": {
     "plain": {
-      "speech": "Turn Living Room lights on"
+      "speech": "Turned Living Room lights on"
     }
   }
 }
@@ -51,25 +63,34 @@ The response from `/api/conversation/process` contains information about the eff
 
 The following properties are available in the response:
 
-| Name            | Type       | Description                                                                               |
-|-----------------|------------|-------------------------------------------------------------------------------------------|
-| `response_type` | string     | One of `action_done`, `query_answer`, or `error` (see [response types](#response-types)). |
-| `data`          | dictionary | Relevant data for each [response type](#response_types).                                  |
-| `language`      | string     | Optional. The language of the intent and response.                                        |
-| `speech`        | dictionary | Optional. Response text to speak to the user (see [speech](#speech)).                     |
+| Name              | Type       | Description                                                                                         |
+|-------------------|------------|-----------------------------------------------------------------------------------------------------|
+| `response_type`   | string     | One of `action_done`, `query_answer`, or `error` (see [response types](#response-types)).           |
+| `data`            | dictionary | Relevant data for each [response type](#response_types).                                            |
+| `language`        | string     | Optional. The language of the intent and response.                                                  |
+| `speech`          | dictionary | Optional. Response text to speak to the user (see [speech](#speech)).                               |
+| `conversation_id` | string     | Optional. Unique id to [track conversation](#conversation-id) across multiple inputs and responses. |
 
 
 ## Response Types
 
 ### Action Done
 
-The intent produced an action in Home Assistant, such as turning on a light. The `data` property of the response contains a `target` dictionary:
+The intent produced an action in Home Assistant, such as turning on a light. The `data` property of the response contains a `targets` list, where each target looks like:
 
-| Name   | Type   | Description                                        |
-|--------|--------|----------------------------------------------------|
-| `type` | string | Target type. One of `area`, `device`, or `entity`. |
-| `name` | string | Name of the affected area/device/entity.           |
-| `id`   | string | Optional. Id of the target.                        |
+| Name   | Type   | Description                                                                            |
+|--------|--------|----------------------------------------------------------------------------------------|
+| `type` | string | Target type. One of `area`, `domain`, `device_class`, `device`, `entity`, or `custom`. |
+| `name` | string | Name of the affected target.                                                           |
+| `id`   | string | Optional. Id of the target.                                                            |
+
+Targets must be ordered from general to specific:
+
+* `area`
+* `domain`
+* `device_class`
+* `device`
+* `entity`
 
 
 ### Query Answer
