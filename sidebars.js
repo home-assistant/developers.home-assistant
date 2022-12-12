@@ -190,6 +190,7 @@ module.exports = {
       "intent_handling",
       "intent_conversation",
       "intent_builtin",
+      "intent_conversation_api",
     ],
     "Building a Python library": [
       "api_lib_index",
