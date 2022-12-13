@@ -63,12 +63,12 @@ The JSON response from `/api/conversation/process` contains information about th
 
 The following properties are available in the `"response"` object:
 
-| Name            | Type       | Description                                                                               |
-|-----------------|------------|-------------------------------------------------------------------------------------------|
-| `response_type` | string     | One of `action_done`, `query_answer`, or `error` (see [response types](#response-types)). |
-| `data`          | dictionary | Relevant data for each [response type](#response_types).                                  |
-| `language`      | string     | The language of the intent and response.                                                  |
-| `speech`        | dictionary | Optional. Response text to speak to the user (see [speech](#speech)).                     |
+| Name            | Type       | Description                                                                                                      |
+|-----------------|------------|------------------------------------------------------------------------------------------------------------------|
+| `response_type` | string     | One of `action_done`, `partial_action_done`, `query_answer`, or `error` (see [response types](#response-types)). |
+| `data`          | dictionary | Relevant data for each [response type](#response_types).                                                         |
+| `language`      | string     | The language of the intent and response.                                                                         |
+| `speech`        | dictionary | Optional. Response text to speak to the user (see [speech](#speech)).                                            |
 
 
 The [conversation id](#conversation-id) is returned alongside the intent response.
@@ -80,11 +80,11 @@ The [conversation id](#conversation-id) is returned alongside the intent respons
 
 The intent produced an action in Home Assistant, such as turning on a light. The `data` property of the response contains a `targets` list, where each target looks like:
 
-| Name   | Type   | Description                                                                            |
-|--------|--------|----------------------------------------------------------------------------------------|
-| `type` | string | Target type. One of `area`, `domain`, `device_class`, `device`, `entity`, or `custom`. |
-| `name` | string | Name of the affected target.                                                           |
-| `id`   | string | Optional. Id of the target.                                                            |
+| Name       | Type    | Description                                                                            |
+|------------|---------|----------------------------------------------------------------------------------------|
+| `type`     | string  | Target type. One of `area`, `domain`, `device_class`, `device`, `entity`, or `custom`. |
+| `name`     | string  | Name of the affected target.                                                           |
+| `id`       | string  | Optional. Id of the target.                                                            |
 
 An intent can have multiple targets which are applied on top of each other. The targets must be ordered from general to specific:
 
@@ -101,12 +101,44 @@ An intent can have multiple targets which are applied on top of each other. The 
 
 Most intents end up with 0, 1 or 2 targets. 3 targets currenly only happens when device classes are involved. Examples of target combinations:
 
+ * "Turn off all lights"
+     * 1 target: `domain:light`
  * "Turn on the kitchen lights"
      * 2 targets: `area:kitchen`, `domain:light`
- * "Turn off all lights"
-     * 2 targets: `domain:light`, `entity:all`
  * "Open the kitchen blinds"
      * 3 targets: `area:kitchen`, `domain:cover`, `device_class:blind`
+
+
+### Partial Action Done
+
+The intent produced an action in Home Assistant, but it could only be partially completed. For example: turning on the lights in an area, but one or more lights did not respond.
+
+The `data` property of the response contains a `targets` list like in [`action_done`](#action-done). Two additional target lists are included, containing the devices or entities that succeeded or failed:
+
+```json
+{
+  "response": {
+    "response_type": "partial_action_done",
+    "targets": [ 
+      (area or domain)
+    ],
+    "success": [
+      (entities/devices that succeeded)
+    ],
+    "failed": [
+      (entities/devices that failed)
+    ],
+  }
+}
+```
+
+Each target has the following properties:
+
+| Name       | Type    | Description                                                                            |
+|------------|---------|----------------------------------------------------------------------------------------|
+| `type`     | string  | Target type. One of `area`, `domain`, `device_class`, `device`, `entity`, or `custom`. |
+| `name`     | string  | Name of the affected target.                                                           |
+| `id`       | string  | Optional. Id of the target.                                                            |
 
 
 ### Query Answer
