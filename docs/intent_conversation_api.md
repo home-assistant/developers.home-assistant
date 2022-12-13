@@ -99,6 +99,15 @@ An intent can have multiple targets which are applied on top of each other. The 
 * `entity`
   * A [Home Assistant entity](https://developers.home-assistant.io/docs/architecture/devices-and-services)
 
+Most intents end up with 0, 1 or 2 targets. 3 targets currenly only happens when device classes are involved. Examples of target combinations:
+
+ * "Turn on the kitchen lights"
+     * 2 targets: `area:kitchen`, `domain:light`
+ * "Turn off all lights"
+     * 2 targets: `domain:light`, `entity:all`
+ * "Open the kitchen blinds"
+     * 3 targets: `area:kitchen`, `domain:cover`, `device_class:blind`
+
 
 ### Query Answer
 
