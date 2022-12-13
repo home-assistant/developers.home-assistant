@@ -198,7 +198,7 @@ If the speech is [SSML](https://www.w3.org/TR/speech-synthesis11/), it will inst
 
 ## Conversation Id
 
-Conversations are tracked by a unique id generated from within Home Assistant. To continue a conversation, retrieve the `conversation_id` from the HTTP API response (alongside the [intent response](#intent-response)) and add it to the next [input sentence](#input-sentence):
+Conversations can be tracked by a unique id generated from within Home Assistant if supported by the answering conversation agent. To continue a conversation, retrieve the `conversation_id` from the HTTP API response (alongside the [intent response](#intent-response)) and add it to the next [input sentence](#input-sentence):
 
 Initial input sentence:
 
