@@ -18,16 +18,17 @@ Any component can handle intents. This makes it very easy for developers to inte
 
 Intents are implemented using the `homeassistant.helpers.intent.Intent` class. It contains the following properties:
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| `hass` | Home Assistant | The Home Assistant instance that fired the intent.
-| `platform` | string | The platform that fired the intent
-| `intent_type` | string | The type (name) of the intent
-| `slots` | dictionary | Contains the slot values keyed by slot name.
-| `text_input` | string | Optional. The raw text input that initiated the intent.
+| Name          | Type           | Description                                                                 |
+|---------------|----------------|-----------------------------------------------------------------------------|
+| `hass`        | Home Assistant | The Home Assistant instance that fired the intent.                          |
+| `platform`    | string         | The platform that fired the intent                                          |
+| `intent_type` | string         | The type (name) of the intent                                               |
+| `slots`       | dictionary     | Contains the slot values keyed by slot name.                                |
+| `text_input`  | string         | Optional. The raw text input that initiated the intent.                     |
+| `language`    | string         | Optional. The language of the text input (defaults to configured language). |
 
 Description of the slots dictionary values.
 
-| Name | Type | Description |
-| ---- | ---- | ----------- |
-| Value | anything | Value of the slot.
+| Name  | Type     | Description        |
+|-------|----------|--------------------|
+| Value | anything | Value of the slot. |
