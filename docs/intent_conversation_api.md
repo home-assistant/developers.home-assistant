@@ -100,15 +100,17 @@ Two additional target lists are included, containing the devices or entities tha
 {
   "response": {
     "response_type": "action_done",
-    "targets": [ 
-      (area or domain)
-    ],
-    "success": [
-      (entities/devices that succeeded)
-    ],
-    "failed": [
-      (entities/devices that failed)
-    ],
+    "data": {
+      "targets": [
+        (area or domain)
+      ],
+      "success": [
+        (entities/devices that succeeded)
+      ],
+      "failed": [
+        (entities/devices that failed)
+      ]
+    }
   }
 }
 ```
@@ -151,6 +153,23 @@ The response is an answer to a question, such as "what is the temperature?". See
       "plain": {
         "speech": "It is 65 degrees"
       }
+    },
+    "data": {
+      "targets": [
+        {
+          "type": "domain",
+          "name": "climate",
+          "id": "climate"
+        }
+      ],
+      "success": [
+        {
+          "type": "entity",
+          "name": "Ecobee",
+          "id": "climate.ecobee"
+        }
+      ],
+      "failed": [],
     }
   },
   "conversation_id": "<generated-id-from-ha>",
