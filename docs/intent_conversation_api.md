@@ -41,15 +41,23 @@ The JSON response from `/api/conversation/process` contains information about th
       "targets": [
         {
           "type": "area",
-          "name": "Living Room"
+          "name": "Living Room",
           "id": "living_room"
         },
         {
           "type": "domain",
-          "name": "light"
+          "name": "light",
           "id": "light"
         }
-      ]
+      ],
+      "success": [
+        {
+          "type": "entity",
+          "name": "My Light",
+          "id": "light.my_light"
+        }
+      ],
+      "failed": [],
     },
     "speech": {
       "plain": {
@@ -86,39 +94,12 @@ The intent produced an action in Home Assistant, such as turning on a light. The
 | `name`     | string  | Name of the affected target.                                                           |
 | `id`       | string  | Optional. Id of the target.                                                            |
 
-An intent can have multiple targets which are applied on top of each other. The targets must be ordered from general to specific:
-
-* `area`
-  * A [registered area](https://developers.home-assistant.io/docs/area_registry_index/)
-* `domain`
-  * Home Assistant integration domain, such as "light"
-* `device_class`
-  * Device class for a domain, such as "garage_door" for the "cover" domain
-* `device`
-  * A [registered device](https://developers.home-assistant.io/docs/device_registry_index)
-* `entity`
-  * A [Home Assistant entity](https://developers.home-assistant.io/docs/architecture/devices-and-services)
-
-Most intents end up with 0, 1 or 2 targets. 3 targets currenly only happens when device classes are involved. Examples of target combinations:
-
- * "Turn off all lights"
-     * 1 target: `domain:light`
- * "Turn on the kitchen lights"
-     * 2 targets: `area:kitchen`, `domain:light`
- * "Open the kitchen blinds"
-     * 3 targets: `area:kitchen`, `domain:cover`, `device_class:blind`
-
-
-### Partial Action Done
-
-The intent produced an action in Home Assistant, but it could only be partially completed. For example: turning on the lights in an area, but one or more lights did not respond.
-
-The `data` property of the response contains a `targets` list like in [`action_done`](#action-done). Two additional target lists are included, containing the devices or entities that succeeded or failed:
+Two additional target lists are included, containing the devices or entities that were a `success` or `failed`:
 
 ```json
 {
   "response": {
-    "response_type": "partial_action_done",
+    "response_type": "action_done",
     "targets": [ 
       (area or domain)
     ],
@@ -132,13 +113,29 @@ The `data` property of the response contains a `targets` list like in [`action_d
 }
 ```
 
-Each target has the following properties:
+An intent can have multiple targets which are applied on top of each other. The targets must be ordered from general to specific:
 
-| Name       | Type    | Description                                                                            |
-|------------|---------|----------------------------------------------------------------------------------------|
-| `type`     | string  | Target type. One of `area`, `domain`, `device_class`, `device`, `entity`, or `custom`. |
-| `name`     | string  | Name of the affected target.                                                           |
-| `id`       | string  | Optional. Id of the target.                                                            |
+* `area`
+  * A [registered area](https://developers.home-assistant.io/docs/area_registry_index/)
+* `domain`
+  * Home Assistant integration domain, such as "light"
+* `device_class`
+  * Device class for a domain, such as "garage_door" for the "cover" domain
+* `device`
+  * A [registered device](https://developers.home-assistant.io/docs/device_registry_index)
+* `entity`
+  * A [Home Assistant entity](https://developers.home-assistant.io/docs/architecture/devices-and-services)
+* `custom`
+  * A custom target
+
+Most intents end up with 0, 1 or 2 targets. 3 targets currenly only happens when device classes are involved. Examples of target combinations:
+
+ * "Turn off all lights"
+     * 1 target: `domain:light`
+ * "Turn on the kitchen lights"
+     * 2 targets: `area:kitchen`, `domain:light`
+ * "Open the kitchen blinds"
+     * 3 targets: `area:kitchen`, `domain:cover`, `device_class:blind`
 
 
 ### Query Answer
