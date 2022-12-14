@@ -73,7 +73,7 @@ The following properties are available in the `"response"` object:
 
 | Name            | Type       | Description                                                                                                      |
 |-----------------|------------|------------------------------------------------------------------------------------------------------------------|
-| `response_type` | string     | One of `action_done`, `partial_action_done`, `query_answer`, or `error` (see [response types](#response-types)). |
+| `response_type` | string     | One of `action_done`, `query_answer`, or `error` (see [response types](#response-types)). |
 | `data`          | dictionary | Relevant data for each [response type](#response_types).                                                         |
 | `language`      | string     | The language of the intent and response.                                                                         |
 | `speech`        | dictionary | Optional. Response text to speak to the user (see [speech](#speech)).                                            |
