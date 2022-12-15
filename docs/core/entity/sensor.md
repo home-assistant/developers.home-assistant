@@ -46,7 +46,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | energy | Wh, kWh, MWh | Energy, statistics will be stored in kWh. Represents _power_ over _time_. Not to be confused with `power`.
 | enum | | The sensor has a limited set of (non-numeric) states. The `options` property must be set to a list of possible states when using this device class.
 | frequency | Hz, kHz, MHz, GHz | Frequency
-| gas | m³, ft³ | Volume of gas, statistics will be stored in m³. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
+| gas | m³, ft³, CCF | Volume of gas, statistics will be stored in m³. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
 | humidity | % | Relative humidity
 | illuminance | lx, lm | Light level
 | irradiance | W/m², BTU/(h⋅ft²) | Irradiance
@@ -73,8 +73,8 @@ If specifying a device class, your sensor entity will need to also return the co
 | timestamp | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
 | volatile_organic_compounds | µg/m³ | Concentration of volatile organic compounds
 | voltage | V | Voltage
-| volume | L, mL, gal, fl. oz., m³, ft³ | Generic volume
-| water | L, gal, m³, ft³ | Water consumption
+| volume | L, mL, gal, fl. oz., m³, ft³, CCF | Generic volume
+| water | L, gal, m³, ft³, CCF | Water consumption
 | weight | kg, g, mg, µg, oz, lb, st | Generic mass; `weight` is used instead of `mass` to fit with every day language.
 | wind_speed | ft/s, km/h, kn, m/s, mph | Wind speed
 
