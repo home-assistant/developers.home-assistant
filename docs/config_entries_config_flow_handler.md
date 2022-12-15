@@ -79,6 +79,7 @@ Should the config flow then abort, the text resource with the key `already_confi
     "abort": {
       "already_configured": "Device is already configured"
     }
+  }
 }
 ```
 
