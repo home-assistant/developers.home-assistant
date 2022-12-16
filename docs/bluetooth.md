@@ -166,6 +166,16 @@ from homeassistant.components import bluetooth
 service_infos = bluetooth.async_discovered_service_info(hass, connectable=True)
 ```
 
+### Fetching all discovered devices and advertisment data by each bluetooth adapter
+
+To access the list of previous discoveries and advertisment data received by each adapter independently, call the `bluetooth.async_get_discovered_devices_and_advertisement_data_by_address` API. The same device and advertisment data may appear multiple times, once per bluetooth adapter that reached it.
+
+```python
+from homeassistant.components import bluetooth
+
+discovered_devices_and_advertisement_data = bluetooth.async_get_discovered_devices_and_advertisement_data_by_address(hass, "44:44:33:11:23:42", connectable=True)
+```
+
 ### Triggering rediscovery of devices
 
 When a configuration entry or device is removed from Home Assistant, trigger rediscovery of its address to make sure they are available to be set up without restarting Home Assistant. You can make use of the Bluetooth connection property of the device registry if your integration manages multiple devices per configuration entry.
