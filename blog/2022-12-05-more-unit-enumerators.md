@@ -16,3 +16,4 @@ by a corresponding enum:
   - `UnitOfIrradiance` enumerator replaces `IRRADIATION_***` constants
   - `UnitOfSoundPressure` enumerator replaces `SOUND_PRESSURE_***` constants
   - `UnitOfTime` enumerator replaces `TIME_***` constants
+  - `UnitOfVolumeFlowRate` enumerator replaces `VOLUME_FLOW_RATE_***` constants
