@@ -160,8 +160,8 @@ If your integration provides entities under its domain, you will want to transla
 
 #### Entity attribute state of entities
 
-:::warning
-Translating entity attribute states is currently only supported for `climate` entities.
+:::info
+Translation of entity attribute states also requires frontend support, which is currently only available for `climate` entities.
 :::
 
 Integrations can provide translations for states of its entities' entity attribues under other integrations like sensor if the base entity component does not provide translations, or if the translation provided by the base entity component do not match the integration's entity. To do this, provide an `entity` dictionary, that contains translations for entity attribute states and set the entity's `translation_key` property to a key under a domain in the `entity` dictionary.
@@ -199,10 +199,10 @@ To differentiate entities and their translations, provide different translation 
 }
 ```
 
-#### Entity attribute state of entity components
+#### Entity attribute name and state of entity components
 
-:::warning
-Translating entity attribute states is currently only supported for `climate` entities.
+:::info
+Translation of entity attribute names and states also requires frontend support, which is currently only available for `climate` entities.
 :::
 
 If your integration provides entities under its domain, you will want to translate the name of entity attributes and alsow entity attribute states. You do this by offering a `state_attributes` dictionary, that contains translations for entity attributes with different device classes. The key `_` is used for entities without a device class.
