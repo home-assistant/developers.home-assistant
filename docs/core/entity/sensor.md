@@ -41,7 +41,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | data_rate | bit/s, kbit/s, Mbit/s, Gbit/s, B/s, kB/s, MB/s, GB/s, KiB/s, MiB/s, GiB/s | Data rate
 | data_size | bit, kbit, Mbit, Gbit, B, kB, MB, GB, TB, PB, EB, ZB, YB, KiB, MiB, GiB, TiB, PiB, EiB, ZiB, YiB | Data size
 | date | | Date. Requires `native_value` to be a Python `datetime.date` object, or `None`.
-| distance | km, m, cm, mm, mi, yd, in | Generic distance
+| distance | km, m, cm, mm, µm, mi, yd, in | Generic distance
 | duration | d, h, min, s | Time period. Should not update only due to time passing. The device or service needs to give a new data point to update.
 | energy | Wh, kWh, MWh | Energy, statistics will be stored in kWh. Represents _power_ over _time_. Not to be confused with `power`.
 | enum | | The sensor has a limited set of (non-numeric) states. The `options` property must be set to a list of possible states when using this device class.
