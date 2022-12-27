@@ -48,7 +48,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | frequency | Hz, kHz, MHz, GHz | Frequency
 | gas | m³, ft³, CCF | Volume of gas, statistics will be stored in m³. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
 | humidity | % | Relative humidity
-| illuminance | lx, lm | Light level
+| illuminance | lx | Light level
 | irradiance | W/m², BTU/(h⋅ft²) | Irradiance
 | moisture | % | Moisture
 | monetary | [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) | Monetary value with a currency.
