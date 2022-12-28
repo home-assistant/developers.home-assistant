@@ -654,7 +654,7 @@ Send an MQTT message:
 ```shell
 curl -X POST \
   -H "Content-Type: application/json" \
-  -H "x-ha-access:YOUR_PASSWORD" \
+  -H "Authorization: Bearer ABCDEFGH" \
   -d '{"payload": "OFF", "topic": "home/fridge", "retain": "True"}' \
   http://localhost:8123/api/services/mqtt/publish
 ```
