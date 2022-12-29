@@ -95,9 +95,9 @@ class MyCalendar(CalendarEntity):
 
 ### Update Events
 
-A calendar entity may support deleting events by specifying the `UPDATE_EVENT` supported feature. Integrations that support mutation must support rfc5545 recurring events.
+A calendar entity may support updating events by specifying the `UPDATE_EVENT` supported feature. Integrations that support mutation must support rfc5545 recurring events.
 
-There are three ways that recurring events may be deleted:
+There are three ways that recurring events may be updated:
 - Specifying only the `uid` will update the entire series
 - Specifying the `uid` and `recurrence_id` will update the specific event instance in the series
 - Specifying `uid`, `recurrence_id`, and a `recurrence_range` value may update a range of events starting at `recurrence_id`. Currently rfc5545 allows the [range](https://www.rfc-editor.org/rfc/rfc5545#section-3.2.13) value of `THISANDFUTURE`.
@@ -112,7 +112,7 @@ class MyCalendar(CalendarEntity):
         recurrence_id: str | None = None,
         recurrence_range: str | None = None,
     ) -> None:
-        """Delete an event on the calendar."""
+        """Update an event on the calendar."""
 ```
 
 
