@@ -72,7 +72,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | temperature | °C, °F | Temperature, statistics will be stored in °C.
 | timestamp | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
 | volatile_organic_compounds | µg/m³ | Concentration of volatile organic compounds
-| voltage | V | Voltage
+| voltage | V, mV | Voltage
 | volume | L, mL, gal, fl. oz., m³, ft³, CCF | Generic volume
 | water | L, gal, m³, ft³, CCF | Water consumption
 | weight | kg, g, mg, µg, oz, lb, st | Generic mass; `weight` is used instead of `mass` to fit with every day language.
