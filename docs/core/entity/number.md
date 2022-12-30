@@ -68,7 +68,7 @@ If specifying a device class, your number entity will need to also return the co
 | sulphur_dioxide | µg/m³ | Concentration of sulphure dioxide |
 | temperature | °C, °F | Temperature.
 | volatile_organic_compounds | µg/m³ | Concentration of volatile organic compounds
-| voltage | V | Voltage
+| voltage | V, mV | Voltage
 | volume | L, mL, gal, fl. oz., m³, ft³, CCF | Generic volume
 | water | L, gal, m³, ft³, CCF | Water consumption
 | weight | kg, g, mg, µg, oz, lb, st | Generic mass; `weight` is used instead of `mass` to fit with every day language.
