@@ -32,7 +32,7 @@ Run `pytest` & `pre-commit` before you create your pull request to avoid annoyin
 :::
 
 :::note
-Running the full `ptyest` test suite will take quite some time, so as the minimal requirement for pull requests, run at least the tests that are related to your code changes (see details below on how to). The full test suite will anyway be run by the CI once you created your pull request and before it can be merged.
+Running the full `pytest` test suite will take quite some time, so as the minimal requirement for pull requests, run at least the tests that are related to your code changes (see details below on how to). The full test suite will anyway be run by the CI once you created your pull request and before it can be merged.
 :::
 
 Running `pytest` will run unit tests against the locally available Python version. We run our tests in our CI against all our supported Python versions.
