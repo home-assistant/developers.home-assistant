@@ -48,6 +48,9 @@ A calendar entity can return events that occur during a particular time range. S
 - The `end_date` is the upper bound and applied to the event's `start` (exclusive).
 - Recurring events should be flattened and returned as individual `CalendarEvent`.
 
+The start and end datetime will always have a timezone, which the implementation should be use for
+determing the order of events e.g. the start of an all day event for comparison with other events.
+
 ```python
 class MyCalendar(CalendarEntity):
 
@@ -122,8 +125,8 @@ A `CalendarEvent` represents an individual event on a calendar.
 
 | Name        | Type             | Default      | Description                                                                                                                                     |
 | ----------- | ---------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| start       | datetime or date | **Required** | The start (inclusive) of the event. Must be before `end`. Both `start` and `end` must be the same type. As a datetime, must be in UTC timezone. |
-| end         | datetime or date | **Required** | The end (exclusive) of the event. Must be after `start`. As a datetime, must be in UTC timezone.                                                |
+| start       | datetime or date | **Required** | The start (inclusive) of the event. Must be before `end`. Both `start` and `end` must be the same type. As a datetime, may have a timezone or be floating (which is interpreted as local timezone) |
+| end         | datetime or date | **Required** | The end (exclusive) of the event. Must be after `start`.                                                                                        |
 | summary     | string           | **Required** | A title or summary of the event.                                                                                                                |
 | location    | string           | `None`       | A geographic location of the event.                                                                                                             |
 | description | string           | `None`       | A detailed description of the event.                                                                                                            |
