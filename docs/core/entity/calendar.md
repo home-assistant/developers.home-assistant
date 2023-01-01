@@ -48,8 +48,8 @@ A calendar entity can return events that occur during a particular time range. S
 - The `end_date` is the upper bound and applied to the event's `start` (exclusive).
 - Recurring events should be flattened and returned as individual `CalendarEvent`.
 
-The start and end datetime will always have a timezone, which the implementation should be use for
-determing the order of events e.g. the start of an all day event for comparison with other events.
+The start and end datetime will always have a timezone. The implementation should use the timezone
+in the start datetime to determine the ordering of events and start time of an all day event.
 
 ```python
 class MyCalendar(CalendarEntity):
