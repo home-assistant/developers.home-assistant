@@ -29,54 +29,54 @@ Instead of adding `extra_state_attributes` for a sensor entity, create an additi
 
 If specifying a device class, your sensor entity will need to also return the correct unit of measurement.
 
-| Type | Supported units | Description
+| Constant | Supported units | Description
 | ---- | ---- | -----------
-| apparent_power | VA | Apparent power |
-| aqi | | Air Quality Index
-| atmospheric_pressure | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Atmospheric pressure, statistics will be stored in Pa.
-| battery | % | Percentage of battery that is left
-| carbon_dioxide | ppm | Concentration of carbon dioxide.
-| carbon_monoxide | ppm | Concentration of carbon monoxide.
-| current | A, mA | Current
-| data_rate | bit/s, kbit/s, Mbit/s, Gbit/s, B/s, kB/s, MB/s, GB/s, KiB/s, MiB/s, GiB/s | Data rate
-| data_size | bit, kbit, Mbit, Gbit, B, kB, MB, GB, TB, PB, EB, ZB, YB, KiB, MiB, GiB, TiB, PiB, EiB, ZiB, YiB | Data size
-| date | | Date. Requires `native_value` to be a Python `datetime.date` object, or `None`.
-| distance | km, m, cm, mm, mi, yd, in | Generic distance
-| duration | d, h, min, s | Time period. Should not update only due to time passing. The device or service needs to give a new data point to update.
-| energy | Wh, kWh, MWh | Energy, statistics will be stored in kWh. Represents _power_ over _time_. Not to be confused with `power`.
-| enum | | The sensor has a limited set of (non-numeric) states. The `options` property must be set to a list of possible states when using this device class.
-| frequency | Hz, kHz, MHz, GHz | Frequency
-| gas | m³, ft³, CCF | Volume of gas, statistics will be stored in m³. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
-| humidity | % | Relative humidity
-| illuminance | lx | Light level
-| irradiance | W/m², BTU/(h⋅ft²) | Irradiance
-| moisture | % | Moisture
-| monetary | [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) | Monetary value with a currency.
-| nitrogen_dioxide | µg/m³ | Concentration of nitrogen dioxide |
-| nitrogen_monoxide | µg/m³ | Concentration of nitrogen monoxide |
-| nitrous_oxide | µg/m³ | Concentration of nitrous oxide |
-| ozone | µg/m³ | Concentration of ozone |
-| pm1 | µg/m³ | Concentration of particulate matter less than 1 micrometer |
-| pm25 | µg/m³ | Concentration of particulate matter less than 2.5 micrometers |
-| pm10 | µg/m³ | Concentration of particulate matter less than 10 micrometers |
-| power | W, kW | Power, statistics will be stored in W.
-| power_factor | % | Power Factor
-| precipitation | cm, in, mm | Accumulated precipitation
-| precipitation_intensity | in/d, in/h, mm/d, mm/h | Precipitation intensity
-| pressure | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Pressure, statistics will be stored in Pa.
-| reactive_power | var | Reactive power |
-| signal_strength | dB, dBm | Signal strength
-| sound_pressure | dB, dBA | Sound pressure
-| speed | ft/s, in/d, in/h, km/h, kn, m/s, mph, mm/d | Generic speed
-| sulphur_dioxide | µg/m³ | Concentration of sulphure dioxide |
-| temperature | °C, °F | Temperature, statistics will be stored in °C.
-| timestamp | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
-| volatile_organic_compounds | µg/m³ | Concentration of volatile organic compounds
-| voltage | V, mV | Voltage
-| volume | L, mL, gal, fl. oz., m³, ft³, CCF | Generic volume
-| water | L, gal, m³, ft³, CCF | Water consumption
-| weight | kg, g, mg, µg, oz, lb, st | Generic mass; `weight` is used instead of `mass` to fit with every day language.
-| wind_speed | ft/s, km/h, kn, m/s, mph | Wind speed
+| `SensorDeviceClass.APPARENT_POWER` | VA | Apparent power |
+| `SensorDeviceClass.AQI` | | Air Quality Index
+| `SensorDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Atmospheric pressure, statistics will be stored in Pa.
+| `SensorDeviceClass.BATTERY` | % | Percentage of battery that is left
+| `SensorDeviceClass.CARBON_DIOXIDE` | ppm | Concentration of carbon dioxide.
+| `SensorDeviceClass.CARBON_MONOXIDE` | ppm | Concentration of carbon monoxide.
+| `SensorDeviceClass.CURRENT` | A, mA | Current
+| `SensorDeviceClass.DATA_RATE` | bit/s, kbit/s, Mbit/s, Gbit/s, B/s, kB/s, MB/s, GB/s, KiB/s, MiB/s, GiB/s | Data rate
+| `SensorDeviceClass.DATA_SIZE` | bit, kbit, Mbit, Gbit, B, kB, MB, GB, TB, PB, EB, ZB, YB, KiB, MiB, GiB, TiB, PiB, EiB, ZiB, YiB | Data size
+| `SensorDeviceClass.DATE` | | Date. Requires `native_value` to be a Python `datetime.date` object, or `None`.
+| `SensorDeviceClass.DISTANCE` | km, m, cm, mm, mi, yd, in | Generic distance
+| `SensorDeviceClass.DURATION` | d, h, min, s | Time period. Should not update only due to time passing. The device or service needs to give a new data point to update.
+| `SensorDeviceClass.ENERGY` | Wh, kWh, MWh | Energy, statistics will be stored in kWh. Represents _power_ over _time_. Not to be confused with `power`.
+| `SensorDeviceClass.ENUM` | | The sensor has a limited set of (non-numeric) states. The `options` property must be set to a list of possible states when using this device class.
+| `SensorDeviceClass.FREQUENCY` | Hz, kHz, MHz, GHz | Frequency
+| `SensorDeviceClass.GAS` | m³, ft³, CCF | Volume of gas, statistics will be stored in m³. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
+| `SensorDeviceClass.HUMIDITY` | % | Relative humidity
+| `SensorDeviceClass.ILLUMINANCE` | lx | Light level
+| `SensorDeviceClass.IRRADIANCE` | W/m², BTU/(h⋅ft²) | Irradiance
+| `SensorDeviceClass.MOISTURE` | % | Moisture
+| `SensorDeviceClass.MONETARY` | [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) | Monetary value with a currency.
+| `SensorDeviceClass.NITROGEN_DIOXIDE` | µg/m³ | Concentration of nitrogen dioxide |
+| `SensorDeviceClass.NITROGEN_MONOXIDE` | µg/m³ | Concentration of nitrogen monoxide |
+| `SensorDeviceClass.NITROUS_OXIDE` | µg/m³ | Concentration of nitrous oxide |
+| `SensorDeviceClass.OZONE` | µg/m³ | Concentration of ozone |
+| `SensorDeviceClass.PM1` | µg/m³ | Concentration of particulate matter less than 1 micrometer |
+| `SensorDeviceClass.PM25` | µg/m³ | Concentration of particulate matter less than 2.5 micrometers |
+| `SensorDeviceClass.PM10` | µg/m³ | Concentration of particulate matter less than 10 micrometers |
+| `SensorDeviceClass.POWER` | W, kW | Power, statistics will be stored in W.
+| `SensorDeviceClass.POWER_FACTOR` | % | Power Factor
+| `SensorDeviceClass.PRECIPITATION` | cm, in, mm | Accumulated precipitation
+| `SensorDeviceClass.PRECIPITATION_INTENSITY` | in/d, in/h, mm/d, mm/h | Precipitation intensity
+| `SensorDeviceClass.PRESSURE` | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Pressure, statistics will be stored in Pa.
+| `SensorDeviceClass.REACTIVE_POWER` | var | Reactive power |
+| `SensorDeviceClass.SIGNAL_STRENGTH` | dB, dBm | Signal strength
+| `SensorDeviceClass.SOUND_PRESSURE` | dB, dBA | Sound pressure
+| `SensorDeviceClass.SPEED` | ft/s, in/d, in/h, km/h, kn, m/s, mph, mm/d | Generic speed
+| `SensorDeviceClass.SULPHUR_DIOXIDE` | µg/m³ | Concentration of sulphure dioxide |
+| `SensorDeviceClass.TEMPERATURE` | °C, °F | Temperature, statistics will be stored in °C.
+| `SensorDeviceClass.TIMESTAMP` | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
+| `SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³ | Concentration of volatile organic compounds
+| `SensorDeviceClass.VOLTAGE` | V, mV | Voltage
+| `SensorDeviceClass.VOLUME` | L, mL, gal, fl. oz., m³, ft³, CCF | Generic volume
+| `SensorDeviceClass.WATER` | L, gal, m³, ft³, CCF | Water consumption
+| `SensorDeviceClass.WEIGHT` | kg, g, mg, µg, oz, lb, st | Generic mass; `weight` is used instead of `mass` to fit with every day language.
+| `SensorDeviceClass.WIND_SPEED` | ft/s, km/h, kn, m/s, mph | Wind speed
 
 ### Available state classes
 

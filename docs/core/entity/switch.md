@@ -77,7 +77,7 @@ class MySwitch(SwitchEntity):
 
 Optional. What type of device this. It will possibly map to google device types.
 
-| Value | Description
+| Constant | Description
 | ----- | -----------
-| outlet | Device is an outlet for power.
-| switch | Device is switch for some type of entity.
+| `SwitchDeviceClass.OUTLET` | Device is an outlet for power.
+| `SwitchDeviceClass.SWITCH` | Device is switch for some type of entity.

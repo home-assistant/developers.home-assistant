@@ -20,7 +20,7 @@ Properties should always only return information from memory and not do I/O (lik
 | available_modes         | list   | `NotImplementedError()`               | The available modes. Requires `SUPPORT_MODES`.                                            |
 | supported_features      | int    | (abstract method)                     | Bitmap of supported features. See below.                                                  |
 | is_on                   | bool   | `None`                                | Whether the device is on or off.                                                          |
-| device_class            | string | `None`                                | Either DEVICE_CLASS_HUMIDIFIER or DEVICE_CLASS_DEHUMIDIFIER                               |
+| device_class            | string | `None`                                | Either `HumidifierDeviceClass.HUMIDIFIER` or `HumidiferDeviceClass,DEHUMIDIFIER`                               |
 
 ### Modes
 
