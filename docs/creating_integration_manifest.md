@@ -17,7 +17,7 @@ Every integration has a manifest file to specify basic information about an inte
   "codeowners": ["@balloob"],
   "requirements": ["aiohue==1.9.1"],
   "quality_scale": "platinum",
-  "iot_class": "local_polling"
+  "iot_class": "local_polling",
   "loggers": ["aiohue"]
 }
 ```
