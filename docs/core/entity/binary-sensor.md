@@ -18,7 +18,11 @@ Properties should always only return information from memory and not do I/O (lik
 
 ### Available device classes
 
-| Value | Description
+:::tip
+When specifying a device class, you should use the `BinarySensorDeviceClass` enum. For example when specifying the type `battery` from below you should use `BinarySensorDeviceClass.BATTERY`.
+:::
+
+| Type | Description
 | ----- | -----------
 | battery | On means low, Off means normal.
 | battery_charging | On means charging, Off means not charging.

@@ -29,6 +29,10 @@ Instead of adding `extra_state_attributes` for a sensor entity, create an additi
 
 If specifying a device class, your sensor entity will need to also return the correct unit of measurement.
 
+:::tip
+When specifying a device class, you should use the `SensorDeviceClass` enum. For example when specifying the type `energy` from below you should use `SensorDeviceClass.ENERGY`.
+:::
+
 | Type | Supported units | Description
 | ---- | ---- | -----------
 | apparent_power | VA | Apparent power |
