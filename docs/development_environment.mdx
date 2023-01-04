@@ -50,11 +50,64 @@ If the Dev Container was set up correctly - it supports debugging by default, ou
 
 It is also possible to debug a remote Home Assistance instance (e.g., productive instance) by following the procedure described [here](https://www.home-assistant.io/integrations/debugpy/).
 
+## Setup Local Repository
+
+Visit the [Home Assistant Core repository](https://github.com/home-assistant/core) and click **Fork**.
+Once forked, setup your local copy of the source using the commands:
+
+```shell
+git clone https://github.com/YOUR_GIT_USERNAME/core.git
+cd core
+git remote add upstream https://github.com/home-assistant/core.git
+```
+
 ## Manual Environment
 
 _You only need these instructions if you do not want to use devcontainers._
 
 It is also possible to set up a more traditional development environment. See the section for your operating system. Make sure your Python version is 3.9 or later.
+
+The previous section on cloning the repository is required for all listed methods below.
+
+### Developing using Docker
+
+To setup a development environment within Docker, the supplied `Dockerfile.dev` can be used.
+
+First, a local environment needs to be built, which installs all dependencies.
+
+```shell
+docker build \
+       --file 'Dockerfile.dev' \
+       --pull \
+       --rm \
+       --tag 'home-assistant.dev' \
+       './'
+```
+
+After the container has been built, it can be used as in the next chapter.
+
+```shell
+docker run \
+       --env "HOME=/workspaces/core" \
+       --interactive \
+       --tty \
+       --user "$(id -u):$(id -g)" \
+       --volume "$(pwd):/workspaces/core" \
+       'home-assistant.dev' \
+       '/bin/bash'
+```
+
+> __Note:__ The local git repository is/needs to be volume mounted for
+> development into the container, meaning any change to the files made in the
+> container, are also outside of the container, and vice versa.
+
+```shell
+cd '/workspaces/core'
+```
+
+> __Note:__ Containers are ephemeral by design, and so all extra utilities
+> or files added outside of the volume mount will be gone upon exiting the
+> container.
 
 ### Developing on Linux
 
@@ -100,16 +153,7 @@ brew install python3 autoconf ffmpeg
 
 If you encounter build issues with `cryptography` when running the `script/setup` script below, check the cryptography documentation for [installation instructions](https://cryptography.io/en/latest/installation/#building-cryptography-on-macos).
 
-## Setup Local Repository
-
-Visit the [Home Assistant Core repository](https://github.com/home-assistant/core) and click **Fork**.
-Once forked, setup your local copy of the source using the commands:
-
-```shell
-git clone https://github.com/YOUR_GIT_USERNAME/core.git
-cd core
-git remote add upstream https://github.com/home-assistant/core.git
-```
+## Manual development environment setup
 
 Install the requirements with a provided script named `setup`.
 
