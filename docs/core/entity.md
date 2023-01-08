@@ -219,7 +219,7 @@ The below code snippet gives an example of best practices for when to implement 
 
 ```py
 class SomeEntity():
-    _attr_device_clas = DEVICE_CLASS_TEMPERATURE  # This will be common to all instances of SomeEntity
+    _attr_device_clas = SensorDeviceClass.TEMPERATURE  # This will be common to all instances of SomeEntity
     def __init__(self, device):
         self._device = device
         self._attr_available = False  # This overrides the default
