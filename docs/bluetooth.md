@@ -173,7 +173,10 @@ To access the list of previous discoveries and advertisment data received by eac
 ```python
 from homeassistant.components import bluetooth
 
-discovered_devices_and_advertisement_data = bluetooth.async_get_discovered_devices_and_advertisement_data_by_address(hass, "44:44:33:11:23:42", connectable=True)
+device = bluetooth.async_scanner_devices_by_address(hass, "44:44:33:11:23:42", connectable=True)
+# device.ble_device is a bleak `BLEDevice`
+# device.advertisement is a bleak `AdvertisementData`
+# device.scanner is the scanner that found the device
 ```
 
 ### Triggering rediscovery of devices
