@@ -30,7 +30,9 @@ Properties should always only return information from memory and not do I/O (lik
 | native_wind_speed_unit | string | `None` | The wind speed unit;m/s, km/h, mi/h, ft/s or kn. Required if native_wind_speed is set.
 | native_precipitation_unit | string | `None` | The precipitation unit; mm or in.
 | wind_bearing | float or string | `None` | The current wind bearing in azimuth angle (degrees) or 1-3 letter cardinal direction.
-| forecast | array | `None` | Daily or Hourly forecast data.
+| forecast_daily | array | `None` | Daily forecast data.
+| forecast_hourly | array | `None` | Hourly forecast data.
+| forecast_twice_daily | array | `None` | Twice daily forecast data.
 
 ### Unit Conversion
 
@@ -42,7 +44,7 @@ For each weather entity, the user also has the option to override the presentati
 
 ### Forecast
 
-Forecast data should either be daily or hourly.
+Forecast data can be daily, hourly or twice_daily in it's respective array. An integration can set and use any/all of them.
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
@@ -60,6 +62,7 @@ Forecast data should either be daily or hourly.
 | wind_bearing | float or string | `None` | The wind bearing in azimuth angle (degrees) or 1-3 letter cardinal direction.
 | native_wind_gust_speed | int | `None` | The wind gust speed in m/s, km/h, mi/h, ft/s or kn.
 | native_wind_speed | int | `None` | The wind speed in m/s, km/h, mi/h, ft/s or kn.
+| is_daytime | bool | `None` | For `forecast_twice_daily` required to use for day/night
 
 Forecast data needs to follow the same unit of measurement as defined for properties where applicable.
 
