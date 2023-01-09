@@ -2,7 +2,24 @@
 title: "Firing intents"
 ---
 
-When you fire an intent, you will get a response back or an error will be raised. It is up to the component to return the result to the user.
+If your code matches user's speech or text to intents, you can let the intent be handled by Home Assistant. This can be done from inside your own integration, or via the generic Intent handle API.
+
+When you fire an intent, you will get a response back or an error will be raised. It is up to your code to return the result to the user.
+
+## HTTP API
+
+When the intent integration is loaded, an HTTP API endpoint is available at `/api/intent/handle`. You can POST JSON data to it containing an intent name and it's data:
+
+```json
+{
+  "name": "HassTurnOn",
+  "data": {
+    "name": "Kitchen Light"
+  }
+}
+```
+
+## Home Assistant integration
 
 Example code to handle an intent in Home Assistant.
 
