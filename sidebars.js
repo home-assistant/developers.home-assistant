@@ -88,6 +88,11 @@ module.exports = {
     },
     {
       type: "category",
+      label: "APIs",
+      items: ["api/websocket", "api/rest"],
+    },
+    {
+      type: "category",
       label: "Development Workflow",
       items: [
         "development_index",
@@ -163,11 +168,6 @@ module.exports = {
         "area_registry_index",
       ],
     },
-    "core/platform/application_credentials",
-    "core/platform/backup",
-    "core/platform/repairs",
-    "core/platform/reproduce_state",
-    "core/platform/significant_change",
     {
       type: "category",
       label: "Authentication",
@@ -204,11 +204,6 @@ module.exports = {
     },
     {
       type: "category",
-      label: "APIs",
-      items: ["api/websocket", "api/rest"],
-    },
-    {
-      type: "category",
       label: "Native App Integration",
       items: [
         "api/native-app-integration",
@@ -219,7 +214,11 @@ module.exports = {
         "api/native-app-integration/webview",
       ],
     },
-
+    "core/platform/application_credentials",
+    "core/platform/backup",
+    "core/platform/repairs",
+    "core/platform/reproduce_state",
+    "core/platform/significant_change",
     {
       type: "category",
       label: "Misc",
