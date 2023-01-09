@@ -180,10 +180,6 @@ module.exports = {
       "device_automation_condition",
       "device_automation_action",
     ],
-    Misc: ["development_validation", "development_typing", "instance_url"],
-  },
-  Misc: {
-    Introduction: ["misc"],
     Intents: [
       "intent_index",
       "intent_firing",
@@ -191,6 +187,10 @@ module.exports = {
       "intent_builtin",
       "intent_conversation_api",
     ],
+    Misc: ["development_validation", "development_typing", "instance_url"],
+  },
+  Misc: {
+    Introduction: ["misc"],
     "Building a Python library": [
       "api_lib_index",
       "api_lib_auth",
