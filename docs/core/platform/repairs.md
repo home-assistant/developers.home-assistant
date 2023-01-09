@@ -2,13 +2,41 @@
 title: "Repairs"
 ---
 
-A fixable [repairs issue](/docs/issue_registry_index) may optionally be repaired by a custom repairs flow.
+Home Assistant keeps track of issues which should be brought to the user's attention. These issues can be created by integrations or by Home Assistant itself. Issues can either be fixable via a RepairsFlow or by linking to a website with information on how the user can solve it themselves.
 
-This is done by adding the function (`async_create_fix_flow`) to `repairs.py`
+## Creating an issue
 
-## Adding support
+```python
+from homeassistant.helpers import issue_registry as ir
 
-Create a new file in your integration folder called `repairs.py` and add code according to the pattern below.
+ir.async_create_issue(
+    hass,
+    DOMAIN,
+    "manual_migration",
+    breaks_in_ha_version="2022.9.0",
+    is_fixable=False,
+    severity=IssueSeverity.ERROR,
+    translation_key="manual_migration",
+)
+```
+
+| Attribute |  Type    | Default | Description |
+| --------- | -------- | ------- | ----------- |
+| domain | string | | Domain raising the issue
+| issue_id | string | | An identifier for the issue, must be unique within `domain`
+| breaks_in_ha_version | string | `None` | The version in which the issue is breaking
+| data | dict | `None` | Arbitrary data, not shown to the user
+| is_fixable | boolean | | True if the issue can be automatically fixed
+| is_persistent | boolean | | True if the issue should persists across restarts of Home Assistant
+| issue_domain | string | `None` | Set by integrations creating issues on behalf of other integrations
+| learn_more_url | string | `None` | URL where the user can find more details about an issue
+| severity | IssueSeverity |  | Severity of the issue
+| translation_key | str |  | Translation key with a brief explanation of the issue
+| translation_placeholders | dict | `None` | Placeholders which will be injected in the translation
+
+## Offering a repair
+
+Create a new platform file in your integration folder called `repairs.py` and add code according to the pattern below.
 
 
 ```python
@@ -50,3 +78,32 @@ async def async_create_fix_flow(
     if issue_id == "issue_1":
         return Issue1RepairFlow()
 ```
+
+
+## Issue life cycle
+
+### Issue persistence
+
+An issue will be kept in the issue registry until it's removed by the integration that created it or by the user [fixing](#fixing-an-issue) it.
+
+The `is_persistent` flag controls if an issue should be shown to the user after a restart of Home Assistant:
+- If the `is_persistent` flag is set on the issue, the issue will be shown again to the user after a restart. Use this for issues that can only be detected when they occur (update failed, unknown service in automation).
+- If the `is_persistent` flag is not set on the issue, the issue will not be shown again to the user after a restart until it's created again by its integration. Use this for issues that can be checked for, like low disk space.
+
+### Ignored issues
+
+It's possible for the user to "ignore" issues. An ignored issue is ignored until it's explicitly deleted - either by the integration or by the user successfully walking through its [repair flow](#fixing-an-issue) - and then created again. Ignoring an issue takes effect across restarts of Home Assistant regardless of [issue persistence](#issue-persistence).
+
+## Deleting an issue
+
+Integrations typically don't need to delete issues, but it may be useful in some cases.
+
+```python
+from homeassistant.helpers import issue_registry as ir
+
+ir.async_delete_issue(hass, DOMAIN, "manual_migration")
+```
+
+## Fixing an issue
+
+If an issue has the `is_fixable` issue set to `True`, the user will be allowed to fix the issue. An issue which is succesfully fixed will be removed from the issue registry.

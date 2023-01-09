@@ -168,7 +168,6 @@ module.exports = {
     "core/platform/repairs",
     "core/platform/reproduce_state",
     "core/platform/significant_change",
-    "issue_registry_index",
     {
       type: "category",
       label: "Authentication",
