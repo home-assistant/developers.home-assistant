@@ -13,7 +13,7 @@ intent_type = "TurnLightOn"
 slots = {"entity": {"value": "Kitchen"}}
 
 try:
-    intent_response = yield from intent.async_handle(
+    intent_response = await intent.async_handle(
         hass, "example_component", intent_type, slots
     )
 

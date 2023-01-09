@@ -13,8 +13,7 @@ from homeassistant.helpers import intent
 DATA_KEY = "example_key"
 
 
-@asyncio.coroutine
-def async_setup(hass, config):
+async def async_setup(hass, config):
     hass.data[DATA_KEY] = 0
     intent.async_register(hass, CountInvocationIntent())
 
@@ -30,8 +29,7 @@ class CountInvocationIntent(intent.IntentHandler):
     #     'item': cv.string
     # }
 
-    @asyncio.coroutine
-    def async_handle(self, intent_obj):
+    async def async_handle(self, intent_obj):
         """Handle the intent."""
         intent_obj.hass.data[DATA_KEY] += 1
 
