@@ -32,7 +32,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | Constant | Supported units | Description
 | ---- | ---- | -----------
 | `SensorDeviceClass.APPARENT_POWER` | VA | Apparent power |
-| `SensorDeviceClass.AQI` | | Air Quality Index
+| `SensorDeviceClass.AQI` | None | Air Quality Index
 | `SensorDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Atmospheric pressure, statistics will be stored in Pa.
 | `SensorDeviceClass.BATTERY` | % | Percentage of battery that is left
 | `SensorDeviceClass.CARBON_DIOXIDE` | ppm | Concentration of carbon dioxide.
@@ -60,7 +60,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.PM25` | µg/m³ | Concentration of particulate matter less than 2.5 micrometers |
 | `SensorDeviceClass.PM10` | µg/m³ | Concentration of particulate matter less than 10 micrometers |
 | `SensorDeviceClass.POWER` | W, kW | Power, statistics will be stored in W.
-| `SensorDeviceClass.POWER_FACTOR` | % | Power Factor
+| `SensorDeviceClass.POWER_FACTOR` | %, None | Power Factor
 | `SensorDeviceClass.PRECIPITATION` | cm, in, mm | Accumulated precipitation
 | `SensorDeviceClass.PRECIPITATION_INTENSITY` | in/d, in/h, mm/d, mm/h | Precipitation intensity
 | `SensorDeviceClass.PRESSURE` | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Pressure, statistics will be stored in Pa.

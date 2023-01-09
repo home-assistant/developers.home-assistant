@@ -32,7 +32,7 @@ If specifying a device class, your number entity will need to also return the co
 | Constant | Supported units | Description
 | ---- | ---- | -----------
 | `NumberDeviceClass.APPARANT_POWER` | VA | Apparent power |
-| `NumberDeviceClass.AQI` | | Air Quality Index
+| `NumberDeviceClass.AQI` | None | Air Quality Index
 | `NumberDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Atmospheric pressure, statistics will be stored in Pa.
 | `NumberDeviceClass.BATTERY` | % | Percentage of battery that is left
 | `NumberDeviceClass.CARBON_DIOXIDE` | ppm | Concentration of carbon dioxide.
@@ -57,7 +57,7 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.PM25` | µg/m³ | Concentration of particulate matter less than 2.5 micrometers |
 | `NumberDeviceClass.PM10` | µg/m³ | Concentration of particulate matter less than 10 micrometers |
 | `NumberDeviceClass.POWER` | W, kW | Power.
-| `NumberDeviceClass.POWER_FACTOR` | % | Power Factor
+| `NumberDeviceClass.POWER_FACTOR` | %, None | Power Factor
 | `NumberDeviceClass.PRECIPITATION` | cm, in, mm | Precipitation
 | `NumberDeviceClass.PRECIPITATION_INTENSITY` | in/d, in/h, mm/d, mm/h | Precipitation intensity
 | `NumberDeviceClass.PRESSURE` | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Pressure.
