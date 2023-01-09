@@ -42,11 +42,7 @@ module.exports = {
       ],
     },
   ],
-  Architecture: [
-    "architecture_index",
-    "architecture/core",
-    "architecture_components",
-  ],
+  Overview: ["architecture_index"],
   Documenting: [
     "documenting",
     "documenting/standards",
@@ -97,6 +93,11 @@ module.exports = {
   ],
   Supervisor: ["supervisor", "supervisor/development", "supervisor/debugging"],
   Core: [
+    {
+      type: "category",
+      label: "Architecture",
+      items: ["architecture/core", "architecture_components"],
+    },
     {
       type: "category",
       label: "Development Workflow",

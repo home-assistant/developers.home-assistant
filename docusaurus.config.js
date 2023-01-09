@@ -20,7 +20,7 @@ module.exports = {
           position: "left",
           items: [
             {
-              label: "Architecture",
+              label: "Overview",
               to: "docs/architecture_index",
             },
             {
