@@ -166,9 +166,9 @@ from homeassistant.components import bluetooth
 service_infos = bluetooth.async_discovered_service_info(hass, connectable=True)
 ```
 
-### Fetching all discovered devices and advertisment data by each bluetooth adapter
+### Fetching all discovered devices and advertisement data by each Bluetooth adapter
 
-To access the list of previous discoveries and advertisment data received by each adapter independently, call the `bluetooth.async_scanner_devices_by_address` API. The call returns a list of `BluetoothScannerDevice` objects. The same device and advertisment data may appear multiple times, once per bluetooth adapter that reached it.
+To access the list of previous discoveries and advertisement data received by each adapter independently, call the `bluetooth.async_scanner_devices_by_address` API. The call returns a list of `BluetoothScannerDevice` objects. The same device and advertisement data may appear multiple times, once per Bluetooth adapter that reached it.
 
 ```python
 from homeassistant.components import bluetooth
