@@ -31,7 +31,6 @@ module.exports = {
             { to: "docs/supervisor", label: "Supervisor" },
             { to: "docs/add-ons", label: "Add-ons" },
             { to: "docs/operating-system", label: "Operating System" },
-            { to: "docs/internationalization", label: "Internationalization" },
           ],
         },
         {
@@ -40,7 +39,10 @@ module.exports = {
           items: [
             { label: "Getting Started", to: "docs/documenting" },
             { label: "Standards", to: "docs/documenting/standards" },
-            { label: "YAML Style Guide", to: "docs/documenting/yaml-style-guide" },
+            {
+              label: "YAML Style Guide",
+              to: "docs/documenting/yaml-style-guide",
+            },
             {
               label: "Create a new page",
               to: "docs/documenting/create-page",
