@@ -81,6 +81,7 @@ module.exports = {
     },
   ],
   Core: [
+    "development_index",
     {
       type: "category",
       label: "Architecture",
@@ -95,7 +96,6 @@ module.exports = {
       type: "category",
       label: "Development Workflow",
       items: [
-        "development_index",
         "development_environment",
         "development_submitting",
         "development_guidelines",

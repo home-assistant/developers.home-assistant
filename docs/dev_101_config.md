@@ -2,7 +2,7 @@
 title: "Config"
 ---
 
-On the hass object it is an instance of the Config class. The Config class contains the users preferred units, the path to the config directory and which components are loaded.
+On [the hass object](./dev_101_hass.md) there is an instance of the Config class. The Config class contains the users preferred units, the path to the config directory and which components are loaded.
 
 | Name | Type | Description |
 | ---- | ---- | ----------- |
