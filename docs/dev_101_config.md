@@ -1,28 +1,32 @@
 ---
-title: "Using Config"
+title: "Config"
 ---
 
-Based on where you are in the code, `config` can mean various things.
+On [the hass object](./dev_101_hass.md) there is an instance of the Config class. The Config class contains the users preferred units, the path to the config directory and which components are loaded.
 
-### On the hass object
+| Name | Type | Description |
+| ---- | ---- | ----------- |
+| latitude | float | Latitude of the instance location |
+| longitude | float | Longitude of the instance location |
+| elevation | int | Elevation of the instance |
+| location_name | str | Name of the instance |
+| time_zone | str | Timezone |
+| units | UnitSystem | Unit system |
+| internal_url | str | URL the instance can be reached on internally |
+| external_url | str | URL the instance can be reached on externally |
+| currency | str | Preferred currency |
+| country | str | Country the instance is in |
+| language | str | Preferred language |
+| config_source | ConfigSource | If the configuration was set via the UI or stored in YAML |
+| skip_pip | bool | If True, pip install is skipped for requirements on startup |
+| skip_pip_packages | list[str] | List of packages to skip when installing requirements on startup |
+| components | set[str] | List of loaded components |
+| api | ApiConfig | API (HTTP) server configuration |
+| config_dir | str | Directory that holds the configuration |
+| allowlist_external_dirs | set[str] | List of allowed external dirs to access |
+| allowlist_external_urls | set[str] | List of allowed external URLs that integrations may use |
+| media_dirs | dict[str, str] | Dictionary of Media folders that integrations may use |
+| safe_mode | bool | If Home Assistant is running in safe mode |
+| legacy_templates | bool | Use legacy template behavior |
 
-On the hass object it is an instance of the Config class. The Config class contains the users preferred units, the path to the config directory and which components are loaded. [See available methods.](https://dev-docs.home-assistant.io/en/dev/api/core.html#homeassistant.core.Config)
-
-### Config passed into component setup
-
-The `config` parameter passed to a component setup is a dictionary containing all of the user supplied configuration. The keys of the dictionary are the component names and the value is another dictionary with the component configuration.
-
-The object will have already been validated using your `CONFIG_SCHEMA` or `PLATFORM_SCHEMA` if available. If you have defined a `PLATFORM_SCHEMA`, all references to your component (ie `light 2:` etc) will have been changed to be accessible as a list under `config[DOMAIN]`.
-
-If your configuration file contains the following lines:
-
-```yaml
-example:
-  host: paulusschoutsen.nl
-```
-
-Then in the setup method of your component you will be able to refer to `config['example']['host']` to get the value `paulusschoutsen.nl`.
-
-### Passed into platform setup
-
-The `config` parameter passed to a platform setup function is only the config for that specific platform.
+It also provides some helper methods. [See available methods.](https://dev-docs.home-assistant.io/en/dev/api/core.html#homeassistant.core.Config)

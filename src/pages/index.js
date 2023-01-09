@@ -1,7 +1,7 @@
 import React from "react";
-import clsx from 'clsx';
+import clsx from "clsx";
 import Layout from "@theme/Layout";
-import BrowserOnly from '@docusaurus/BrowserOnly';
+import BrowserOnly from "@docusaurus/BrowserOnly";
 import useDocusaurusContext from "@docusaurus/useDocusaurusContext";
 import useBaseUrl from "@docusaurus/useBaseUrl";
 import styles from "./styles.module.css";
@@ -15,28 +15,21 @@ const features = [
       <>
         <p>
           <b>
-            <a href="docs/architecture_index">Architecture</a>.
+            <a href="docs/architecture_index">Overview</a>.
           </b>{" "}
           Explains various layers that make up Home Assistant.
+        </p>
+        <p>
+          <b>
+            <a href="docs/development_index">Core</a>.
+          </b>{" "}
+          Explains how to build new integrations for Home Assistant.
         </p>
         <p>
           <b>
             <a href="docs/frontend">Frontend</a>.
           </b>{" "}
           Explains how to develop the user interface of Home Assistant.
-        </p>
-        <p>
-          <b>
-            <a href="docs/development_index">Backend</a>.
-          </b>{" "}
-          Explains how to build new integrations for Home Assistant.
-        </p>
-        <p>
-          <b>
-            <a href="docs/misc">Misc</a>.
-          </b>{" "}
-          External APIs, Internationalization, asyncio, Home Assistant add-ons,
-          updating documentation.
         </p>
       </>
     ),
@@ -54,10 +47,7 @@ const features = [
             <a href="docs/internationalization">Translate Home Assistant</a>
           </li>
           <li>
-            <a href="docs/frontend">Improve the frontend</a>
-          </li>
-          <li>
-            <a href="docs/api/rest">Extract data from the Home Assistant API</a>
+            <a href="docs/api/websocket">Home Assistant API</a>
           </li>
         </ul>
         <h3>Source Code</h3>
@@ -89,7 +79,7 @@ const features = [
           ))}
         </ul>
       </>
-    )
+    ),
   },
   {
     title: <>Upcoming Events</>,
@@ -101,17 +91,20 @@ const features = [
 function UpcomingEvents() {
   return (
     <BrowserOnly>
-      {() => <iframe
+      {() => (
+        <iframe
           title="Upcoming Events Calendar"
-          src={`https://calendar.google.com/calendar/embed?height=400&wkst=2&bgcolor=%23ffffff&ctz=${Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC"}&src=cDA3bjk4Z28xMW9uYW1kMDhkMGttcTZqaHNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23039BE5&title=Release%20Schedule&mode=AGENDA&showPrint=0&showTabs=0&showCalendars=0&showTz=1&showNav=0&showDate=0&showTitle=0`}
+          src={`https://calendar.google.com/calendar/embed?height=400&wkst=2&bgcolor=%23ffffff&ctz=${
+            Intl.DateTimeFormat().resolvedOptions().timeZone || "UTC"
+          }&src=cDA3bjk4Z28xMW9uYW1kMDhkMGttcTZqaHNAZ3JvdXAuY2FsZW5kYXIuZ29vZ2xlLmNvbQ&color=%23039BE5&title=Release%20Schedule&mode=AGENDA&showPrint=0&showTabs=0&showCalendars=0&showTz=1&showNav=0&showDate=0&showTitle=0`}
           style={{ borderWidth: 0, margin: "auto" }}
           width="300"
           height="200"
           frameBorder="0"
           scrolling="no"
-        />}
+        />
+      )}
     </BrowserOnly>
-
   );
 }
 
@@ -142,14 +135,21 @@ function Home() {
       <header className={clsx("hero hero--primary", styles.heroBanner)}>
         <div className="container">
           <div className="row">
-            <div className={clsx('col col--5')}>
-              <img className={styles.heroLogo} alt="Home Assistant Logo" src="/img/logo-white.svg" />
+            <div className={clsx("col col--5")}>
+              <img
+                className={styles.heroLogo}
+                alt="Home Assistant Logo"
+                src="/img/logo-white.svg"
+              />
             </div>
-            <div className={clsx('col col--5')}>
+            <div className={clsx("col col--5")}>
               <h1 className={styles.heroTitle}>{siteConfig.title}</h1>
               <p className={styles.heroTagline}>{siteConfig.tagline}</p>
               <p>
-                <a className={styles.heroText} href="https://www.home-assistant.io">
+                <a
+                  className={styles.heroText}
+                  href="https://www.home-assistant.io"
+                >
                   Not a developer? Go to the normal website
                 </a>
               </p>

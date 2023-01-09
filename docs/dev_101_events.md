@@ -1,5 +1,5 @@
 ---
-title: "Using Events"
+title: "Events"
 ---
 
 The core of Home Assistant is driven by events. That means that if you want to respond to something happening, you'll have to respond to events. Most of the times you won't interact directly with the event system but use one of the [event listener helpers][helpers].

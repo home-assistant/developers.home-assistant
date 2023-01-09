@@ -20,7 +20,7 @@ module.exports = {
           position: "left",
           items: [
             {
-              label: "Architecture",
+              label: "Overview",
               to: "docs/architecture_index",
             },
             {
@@ -31,7 +31,6 @@ module.exports = {
             { to: "docs/supervisor", label: "Supervisor" },
             { to: "docs/add-ons", label: "Add-ons" },
             { to: "docs/operating-system", label: "Operating System" },
-            { to: "docs/internationalization", label: "Internationalization" },
           ],
         },
         {
@@ -40,7 +39,10 @@ module.exports = {
           items: [
             { label: "Getting Started", to: "docs/documenting" },
             { label: "Standards", to: "docs/documenting/standards" },
-            { label: "YAML Style Guide", to: "docs/documenting/yaml-style-guide" },
+            {
+              label: "YAML Style Guide",
+              to: "docs/documenting/yaml-style-guide",
+            },
             {
               label: "Create a new page",
               to: "docs/documenting/create-page",
@@ -48,19 +50,6 @@ module.exports = {
           ],
         },
         { label: "Translations", to: "docs/translations", position: "left" },
-        {
-          label: "API",
-          position: "left",
-          items: [
-            { label: "REST API", to: "docs/api/rest" },
-            { label: "WebSocket API", to: "docs/api/websocket" },
-            { label: "Supervisor API", to: "docs/api/supervisor/endpoints" },
-            {
-              label: "Native App Integration",
-              to: "docs/api/native-app-integration",
-            },
-          ],
-        },
         { to: "docs/misc", label: "Misc", position: "left" },
         { to: "blog", label: "Blog", position: "left" },
       ],

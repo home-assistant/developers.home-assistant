@@ -1,6 +1,5 @@
 ---
-title: "Architecture"
-sidebar_label: "Introduction"
+title: "Architecture Overview"
 ---
 
 Home Assistant provides a platform for home control and home automation. Home Assistant is not just an application: it's an embedded system that provides an experience like other consumer off-the-shelf products: onboarding, configuration and updating is all done via an easy to use interface.
