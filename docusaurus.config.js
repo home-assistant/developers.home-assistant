@@ -50,19 +50,6 @@ module.exports = {
           ],
         },
         { label: "Translations", to: "docs/translations", position: "left" },
-        {
-          label: "API",
-          position: "left",
-          items: [
-            { label: "REST API", to: "docs/api/rest" },
-            { label: "WebSocket API", to: "docs/api/websocket" },
-            { label: "Supervisor API", to: "docs/api/supervisor/endpoints" },
-            {
-              label: "Native App Integration",
-              to: "docs/api/native-app-integration",
-            },
-          ],
-        },
         { to: "docs/misc", label: "Misc", position: "left" },
         { to: "blog", label: "Blog", position: "left" },
       ],

@@ -17,31 +17,6 @@ module.exports = {
     "add-ons/repository",
     "add-ons/security",
   ],
-  API: [
-    "api/rest",
-    "api/websocket",
-    {
-      type: "category",
-      label: "Supervisor API",
-      items: [
-        "api/supervisor/endpoints",
-        "api/supervisor/models",
-        "api/supervisor/examples",
-      ],
-    },
-    {
-      type: "category",
-      label: "Native App Integration",
-      items: [
-        "api/native-app-integration",
-        "api/native-app-integration/setup",
-        "api/native-app-integration/sending-data",
-        "api/native-app-integration/sensors",
-        "api/native-app-integration/notifications",
-        "api/native-app-integration/webview",
-      ],
-    },
-  ],
   Overview: ["architecture_index"],
   Documenting: [
     "documenting",
@@ -91,7 +66,20 @@ module.exports = {
     "operating-system/board-metadata",
     "operating-system/deployment",
   ],
-  Supervisor: ["supervisor", "supervisor/development", "supervisor/debugging"],
+  Supervisor: [
+    "supervisor",
+    "supervisor/development",
+    "supervisor/debugging",
+    {
+      type: "category",
+      label: "Supervisor API",
+      items: [
+        "api/supervisor/endpoints",
+        "api/supervisor/models",
+        "api/supervisor/examples",
+      ],
+    },
+  ],
   Core: [
     {
       type: "category",
@@ -193,7 +181,7 @@ module.exports = {
     },
     {
       type: "category",
-      label: "Integrating devices & services",
+      label: "Areas, Devices and Entities",
       items: [
         "architecture/devices-and-services",
         "entity_registry_index",
@@ -225,10 +213,29 @@ module.exports = {
     },
     {
       type: "category",
+      label: "APIs",
+      items: ["api/websocket", "api/rest"],
+    },
+    {
+      type: "category",
+      label: "Native App Integration",
+      items: [
+        "api/native-app-integration",
+        "api/native-app-integration/setup",
+        "api/native-app-integration/sending-data",
+        "api/native-app-integration/sensors",
+        "api/native-app-integration/notifications",
+        "api/native-app-integration/webview",
+      ],
+    },
+
+    {
+      type: "category",
       label: "Misc",
       items: ["development_validation", "development_typing", "instance_url"],
     },
   ],
+
   Misc: [
     "misc",
     {

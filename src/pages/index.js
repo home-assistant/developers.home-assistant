@@ -47,10 +47,7 @@ const features = [
             <a href="docs/internationalization">Translate Home Assistant</a>
           </li>
           <li>
-            <a href="docs/frontend">Improve the frontend</a>
-          </li>
-          <li>
-            <a href="docs/api/rest">Extract data from the Home Assistant API</a>
+            <a href="docs/api/websocket">Home Assistant API</a>
           </li>
         </ul>
         <h3>Source Code</h3>
