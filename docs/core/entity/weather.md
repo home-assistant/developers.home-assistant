@@ -44,7 +44,7 @@ For each weather entity, the user also has the option to override the presentati
 
 ### Forecast
 
-Forecast data can be daily, hourly or twice_daily in it's respective array. An integration can set and use any/all of them.
+Forecast data can be daily, hourly or twice_daily in its respective array. An integration can set and use any/all of them.
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
@@ -62,7 +62,7 @@ Forecast data can be daily, hourly or twice_daily in it's respective array. An i
 | wind_bearing | float or string | `None` | The wind bearing in azimuth angle (degrees) or 1-3 letter cardinal direction.
 | native_wind_gust_speed | int | `None` | The wind gust speed in m/s, km/h, mi/h, ft/s or kn.
 | native_wind_speed | int | `None` | The wind speed in m/s, km/h, mi/h, ft/s or kn.
-| is_daytime | bool | `None` | For `forecast_twice_daily` required to use for day/night
+| is_daytime | bool | `None` | For `forecast_twice_daily` required to use for day/night.
 
 Forecast data needs to follow the same unit of measurement as defined for properties where applicable.
 
