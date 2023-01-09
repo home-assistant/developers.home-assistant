@@ -2,7 +2,7 @@
 title: "Firing intents"
 ---
 
-If your code matches user's speech or text to intents, you can let the intent be handled by Home Assistant. This can be done from inside your own integration, or via the generic Intent handle API.
+If your code matches the user's speech or text to intents, you can let the intent be handled by Home Assistant. This can be done from inside your own integration, or via the generic Intent handle API.
 
 When you fire an intent, you will get a response back or an error will be raised. It is up to your code to return the result to the user.
 
