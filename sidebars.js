@@ -89,11 +89,6 @@ module.exports = {
     },
     {
       type: "category",
-      label: "APIs",
-      items: ["api/websocket", "api/rest"],
-    },
-    {
-      type: "category",
       label: "Development Workflow",
       items: [
         "development_environment",
@@ -219,6 +214,11 @@ module.exports = {
     "core/platform/repairs",
     "core/platform/reproduce_state",
     "core/platform/significant_change",
+    {
+      type: "category",
+      label: "External APIs",
+      items: ["api/websocket", "api/rest"],
+    },
     {
       type: "category",
       label: "Misc",
