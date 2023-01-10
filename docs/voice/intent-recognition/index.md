@@ -13,5 +13,5 @@ A sentence template is a sentence that contains slots, placeholders for data, an
 
 This example sentence template matches both `turn on kitchen lights` and `switch on the kitchen lights`. In both cases it will extract extra data `area` set to `kitchen`.
 
-In Home Assistant we are collecting our sentence templates [on GitHub](https://github.com/home-assistant/intents). The repository aims to contain for each language and each [supported intent in Home Assistant](../intents/supported-intents), the possible sentences a user might say.
+In Home Assistant we are collecting our sentence templates [on GitHub](https://github.com/home-assistant/intents). The repository aims to contain for each language and each [supported intent in Home Assistant](../../intent_builtin), the possible sentences a user might say.
 
