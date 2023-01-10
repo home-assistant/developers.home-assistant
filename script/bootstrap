@@ -3,3 +3,14 @@ set -e
 cd "$(dirname "$0")/.."
 
 yarn
+
+# test if intents directory exists
+
+if [ ! -d "intents" ]; then
+  git clone --depth 1 https://github.com/home-assistant/intents.git
+fi
+
+cd intents
+git pull
+cd ..
+

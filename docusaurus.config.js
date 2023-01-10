@@ -31,25 +31,10 @@ module.exports = {
             { to: "docs/supervisor", label: "Supervisor" },
             { to: "docs/add-ons", label: "Add-ons" },
             { to: "docs/operating-system", label: "Operating System" },
+            { to: "docs/voice/overview", label: "Voice" },
+            { to: "docs/translations", label: "Translations" },
           ],
         },
-        {
-          label: "Documenting",
-          position: "left",
-          items: [
-            { label: "Getting Started", to: "docs/documenting" },
-            { label: "Standards", to: "docs/documenting/standards" },
-            {
-              label: "YAML Style Guide",
-              to: "docs/documenting/yaml-style-guide",
-            },
-            {
-              label: "Create a new page",
-              to: "docs/documenting/create-page",
-            },
-          ],
-        },
-        { label: "Translations", to: "docs/translations", position: "left" },
         { to: "docs/misc", label: "Misc", position: "left" },
         { to: "blog", label: "Blog", position: "left" },
       ],
@@ -134,6 +119,9 @@ module.exports = {
       copyright: `Copyright © ${new Date().getFullYear()} Home Assistant. Built with Docusaurus.`,
     },
     image: "img/default-social.png",
+    mermaid: {
+      theme: { light: "neutral", dark: "forest" },
+    },
   },
   presets: [
     [
@@ -171,4 +159,8 @@ module.exports = {
       },
     ],
   ],
+  markdown: {
+    mermaid: true,
+  },
+  themes: ["@docusaurus/theme-mermaid"],
 };

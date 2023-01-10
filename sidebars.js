@@ -18,12 +18,6 @@ module.exports = {
     "add-ons/security",
   ],
   Overview: ["architecture_index"],
-  Documenting: [
-    "documenting",
-    "documenting/standards",
-    "documenting/yaml-style-guide",
-    "documenting/create-page",
-  ],
   Frontend: [
     "frontend",
     "frontend/architecture",
@@ -105,7 +99,6 @@ module.exports = {
       items: [
         "creating_component_index",
         "creating_integration_file_structure",
-        "creating_integration_brand",
         "creating_integration_manifest",
         "config_entries_config_flow_handler",
         "config_entries_options_flow_handler",
@@ -209,6 +202,7 @@ module.exports = {
         "api/native-app-integration/webview",
       ],
     },
+    "creating_integration_brand",
     "core/platform/application_credentials",
     "core/platform/backup",
     "core/platform/repairs",
@@ -225,9 +219,40 @@ module.exports = {
       items: ["development_validation", "development_typing", "instance_url"],
     },
   ],
+  Voice: [
+    "voice/overview",
+    "voice/intents/index",
+
+    {
+      type: "category",
+      label: "Intent Recognition",
+      items: [
+        "voice/intent-recognition/index",
+        "voice/intent-recognition/template-sentence-syntax",
+        "voice/intent-recognition/test-syntax",
+        "voice/intent-recognition/supported-languages",
+        "voice/intent-recognition/contributing",
+      ],
+    },
+
+    "voice/language-leaders",
+  ],
 
   Misc: [
     "misc",
+
+    // Documenting as a category
+    {
+      type: "category",
+      label: "Documenting",
+      items: [
+        "documenting",
+        "documenting/standards",
+        "documenting/yaml-style-guide",
+        "documenting/create-page",
+      ],
+    },
+
     {
       type: "category",
       label: "Building a Python library",
