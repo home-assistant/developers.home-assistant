@@ -187,7 +187,6 @@ module.exports = {
         "intent_firing",
         "intent_handling",
         "intent_builtin",
-        "voice/intents/supported-intents",
         "intent_conversation_api",
       ],
     },
