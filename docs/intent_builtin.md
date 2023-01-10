@@ -2,7 +2,7 @@
 title: "Built-in intents"
 ---
 
-import intents from '!!yaml-loader!../../intents/intents.yaml';
+import intents from '!!yaml-loader!../intents/intents.yaml';
 
 The following intents are supported by Home Assistant:
 
