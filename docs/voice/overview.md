@@ -3,12 +3,6 @@ title: "Voice in Home Assistant"
 sidebar_label: Overview
 ---
 
-:::info
-
-Voice in Home Assistant is a work in progress. Not all parts described on this page have been implemented.
-
-:::
-
 Building a voice assistant is a complex task. It requires a lot of different technologies to work together. This page will give you an overview of the different parts inside Home Assistant and how they will work together.
 
 
@@ -32,8 +26,8 @@ graph TD;
     VA -->|10. Response Audio| U
 ```
 
- - The **Voice Assistant** integration is responsible for turning the user's speech into text, get it processed, and turn the response into speech.
- - The **conversation** integration is responsible for processing user's text. It does this by matching it to an intent.
+ - The **Voice Assistant** integration is responsible for turning the user's speech into text, get it processed, and turn the response into speech. _This integration has not been created yet._
+ - The **Conversation** integration is responsible for processing user's text. It does this by matching it to an intent.
  - The **Intent** integration is responsible for executing the intent and returning a response.
 - The **Text-to-Speech** integration is responsible for turning text into speech.
 - The **Speech-to-Text** integration is responsible for turning speech into text.

@@ -7,6 +7,8 @@ import intents from '!!yaml-loader!../../../intents/intents.yaml';
 
 If you don't see your language below, [help us translate!](./contributing)
 
+For a full progress report per language, [click here.](https://home-assistant.github.io/intents/)
+
 <>
   <table>
     <thead>
