@@ -33,7 +33,7 @@ graph TD;
 ```
 
  - The **Voice Assistant** integration is responsible for turning the user's speech into text, get it processed, and turn the response into speech.
- - The conversation integration is responsible for processing user's text. It does this by matching it to an intent.
+ - The **conversation** integration is responsible for processing user's text. It does this by matching it to an intent.
  - The **Intent** integration is responsible for executing the intent and returning a response.
 - The **Text-to-Speech** integration is responsible for turning text into speech.
 - The **Speech-to-Text** integration is responsible for turning speech into text.
