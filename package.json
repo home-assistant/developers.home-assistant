@@ -32,5 +32,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@docusaurus/theme-mermaid": "^2.2.0",
+    "yaml-loader": "^0.8.0"
   }
 }

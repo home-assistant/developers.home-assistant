@@ -1,6 +1,5 @@
 ---
-title: "Grouping integrations by brand"
-sidebar_label: "Grouping integrations by brand"
+title: "Brands"
 ---
 
 A commercial brand may have several integrations which provide support for different offerings under that brand. Also, a brand may offer devices which comply with an IoT standard, for example Zigbee or Z-Wave.
