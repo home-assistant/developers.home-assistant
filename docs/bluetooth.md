@@ -5,6 +5,8 @@ sidebar_label: "Bluetooth"
 
 ### Best practices for integration authors
 
+- Integrations that need to use a Bluetooth adapter should add `bluetooth_adapters` in [`dependencies`](creating_integration_manifest.md#dependencies) in their [`manifest.json`](creating_integration_manifest.md). The [`manifest.json`](creating_integration_manifest.md) entry ensures that all supported remote adapters are connected before the integration tries to use them.
+
 - When connecting to Bluetooth devices with `BleakClient`, always use the `BLEDevice` object instead of the `address` to avoid the client starting a scanner to find the `BLEDevice`. Call the `bluetooth.async_ble_device_from_address` API if you only have the `address`.
 
 - Call the `bluetooth.async_get_scanner` API to get a `BleakScanner` instance and pass it to your library. The returned scanner avoids the overhead of running multiple scanners, which is significant. Additionally, the wrapped scanner will continue functioning if the user changes the Bluetooth adapter settings.
@@ -213,6 +215,8 @@ service_info = await bluetooth.async_process_advertisements(
 ```
 
 ### Registering an external scanner
+
+Integrations that provide a Bluetooth adapter should add `bluetooth` in [`dependencies`](creating_integration_manifest.md#dependencies) in their [`manifest.json`](creating_integration_manifest.md) and be added as an [`after_dependencies`](creating_integration_manifest.md#after-dependencies) to the `bluetooth_adapters` integration.
 
 To register an external scanner, call the `bluetooth.async_register_scanner` API. The scanner must inherit from `BaseHaScanner`.
 
