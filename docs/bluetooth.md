@@ -216,7 +216,7 @@ service_info = await bluetooth.async_process_advertisements(
 
 ### Registering an external scanner
 
-Integrations that provide a Bluetooth adapter should add `bluetooth` in [`dependencies`](creating_integration_manifest#dependencies) in their [`manifest.json`](creating_integration_manifest) and be added as an [`after_dependencies`](creating_integration_manifest#after-dependencies) to the `bluetooth_adapters` integration.
+Integrations that provide a Bluetooth adapter should add `bluetooth` in [`dependencies`](creating_integration_manifest#dependencies) in their [`manifest.json`](creating_integration_manifest) and be added to [`after_dependencies`](creating_integration_manifest#after-dependencies) to the `bluetooth_adapters` integration.
 
 To register an external scanner, call the `bluetooth.async_register_scanner` API. The scanner must inherit from `BaseHaScanner`.
 
