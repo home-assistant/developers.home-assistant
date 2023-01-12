@@ -5,7 +5,7 @@ sidebar_label: "Bluetooth"
 
 ### Best practices for integration authors
 
-- Integrations that need to use a Bluetooth adapter should add `bluetooth_adapters` in [`dependencies`](creating_integration_manifest.#dependencies) in their [`manifest.json`](creating_integration_manifest). The [`manifest.json`](creating_integration_manifest) entry ensures that all supported remote adapters are connected before the integration tries to use them.
+- Integrations that need to use a Bluetooth adapter should add `bluetooth_adapters` in [`dependencies`](creating_integration_manifest#dependencies) in their [`manifest.json`](creating_integration_manifest). The [`manifest.json`](creating_integration_manifest) entry ensures that all supported remote adapters are connected before the integration tries to use them.
 
 - When connecting to Bluetooth devices with `BleakClient`, always use the `BLEDevice` object instead of the `address` to avoid the client starting a scanner to find the `BLEDevice`. Call the `bluetooth.async_ble_device_from_address` API if you only have the `address`.
 
