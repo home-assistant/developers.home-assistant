@@ -23,6 +23,9 @@ from .const import DOMAIN
 
 class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     """Example config flow."""
+    # The schema version of the entries that it creates
+    # Home Assistant will call your migrate method if the version changes
+    VERSION = 1
 ```
 
 Once you have updated your manifest and created the `config_flow.py`, you will need to run `python3 -m script.hassfest` (one time only) for Home Assistant to activate the config entry for your integration.
