@@ -5,7 +5,7 @@ sidebar_label: "Bluetooth"
 
 ### Best practices for integration authors
 
-- Integrations that need to use a Bluetooth adapter should add `bluetooth_adapters` in [`dependencies`](creating_integration_manifest.md#dependencies) in their [`manifest.json`](creating_integration_manifest.md). The [`manifest.json`](creating_integration_manifest.md) entry ensures that all supported remote adapters are connected before the integration tries to use them.
+- Integrations that need to use a Bluetooth adapter should add `bluetooth_adapters` in [`dependencies`](creating_integration_manifest.#dependencies) in their [`manifest.json`](creating_integration_manifest). The [`manifest.json`](creating_integration_manifest) entry ensures that all supported remote adapters are connected before the integration tries to use them.
 
 - When connecting to Bluetooth devices with `BleakClient`, always use the `BLEDevice` object instead of the `address` to avoid the client starting a scanner to find the `BLEDevice`. Call the `bluetooth.async_ble_device_from_address` API if you only have the `address`.
 
@@ -25,7 +25,7 @@ The default value for `connectable` is `True`. If the integration has some devic
 
 ### Subscribing to Bluetooth discoveries
 
-Some integrations may need to know when a device is discovered right away. The Bluetooth integration provides a registration API to receive callbacks when a new device is discovered that matches specific key values. The same format for `bluetooth` in [`manifest.json`](creating_integration_manifest.md#bluetooth) is used for matching. In addition to the matchers used in the `manifest.json`, `address` can also be used as a matcher.
+Some integrations may need to know when a device is discovered right away. The Bluetooth integration provides a registration API to receive callbacks when a new device is discovered that matches specific key values. The same format for `bluetooth` in [`manifest.json`](creating_integration_manifest#bluetooth) is used for matching. In addition to the matchers used in the `manifest.json`, `address` can also be used as a matcher.
 
 The function `bluetooth.async_register_callback` is provided to enable this ability. The function returns a callback that will cancel the registration when called.
 
@@ -216,7 +216,7 @@ service_info = await bluetooth.async_process_advertisements(
 
 ### Registering an external scanner
 
-Integrations that provide a Bluetooth adapter should add `bluetooth` in [`dependencies`](creating_integration_manifest.md#dependencies) in their [`manifest.json`](creating_integration_manifest.md) and be added as an [`after_dependencies`](creating_integration_manifest.md#after-dependencies) to the `bluetooth_adapters` integration.
+Integrations that provide a Bluetooth adapter should add `bluetooth` in [`dependencies`](creating_integration_manifest#dependencies) in their [`manifest.json`](creating_integration_manifest) and be added as an [`after_dependencies`](creating_integration_manifest#after-dependencies) to the `bluetooth_adapters` integration.
 
 To register an external scanner, call the `bluetooth.async_register_scanner` API. The scanner must inherit from `BaseHaScanner`.
 
