@@ -62,7 +62,7 @@ If specifying a device class, your number entity will need to also return the co
 | speed | ft/s, in/d, in/h, km/h, kn, m/s, mph, mm/d | Generic speed
 | sulphur_dioxide | µg/m³ | Concentration of sulphure dioxide |
 | temperature | °C, °F | Temperature.
-| volatile_organic_compounds | µg/m³ | Concentration of volatile organic compounds
+| volatile_organic_compounds | µg/m³, ppb | Concentration of volatile organic compounds
 | voltage | V | Voltage
 | volume | L, mL, gal, fl. oz., m³, ft³ | Generic volume
 | water | L, gal, m³, ft³ | Water consumption

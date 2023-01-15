@@ -64,7 +64,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | sulphur_dioxide | µg/m³ | Concentration of sulphure dioxide |
 | temperature | °C, °F | Temperature, statistics will be stored in °C.
 | timestamp | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
-| volatile_organic_compounds | µg/m³ | Concentration of volatile organic compounds
+| volatile_organic_compounds | µg/m³, ppb | Concentration of volatile organic compounds
 | voltage | V | Voltage
 | volume | L, mL, gal, fl. oz., m³, ft³ | Generic volume
 | water | L, gal, m³, ft³ | Water consumption
