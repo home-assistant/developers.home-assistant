@@ -2,7 +2,7 @@
 title: "Template Sentence Syntax"
 ---
 
-Template sentences are defined in YAML files using the format of [Hassil, our template matcher](https://github.com/home-assistant/hassil). Our template sentences are stored [on GitHub](https://github.com/home-assistant/intents/tree/main/sentences) and are organized by having for each language a directory of files:
+Template sentences are defined in YAML files using the format of [Hassil, our template matcher](https://github.com/home-assistant/hassil). Our template sentences are stored [on GitHub](https://github.com/home-assistant/intents/tree/main/sentences) and are organized by having for each language a directory of files in `sentences/<language>/`:
 
  - `_common.yaml` - Lists, expansion rules and skip words to be used across all template sentences.
  - `<domain>_<intent>.yaml` - Template sentences for a [single intent](../../intent_builtin) and domain.
