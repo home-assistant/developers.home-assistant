@@ -15,6 +15,7 @@ The `strings.json` contains translations for different things that the integrati
 | `device_automation` | Translations for device automations.              |
 | `issues`            | Translations for repairs issues.                  |
 | `options`           | Translations for the options flow.                |
+| `selectors`         | Selectors of the integration.                     |
 | `state`             | States of the integration, keyed by device class. |
 
 ### Title
@@ -52,6 +53,42 @@ The translation strings for the configuration flow handler and the option flow h
     }
   }
 }
+```
+
+### Selectors
+
+The translation for selectors are defined under the `selector` key. It supports option label translations for the selector `select`. The integration should set the `translation_key` on the selector select configuration. This allows translations on select selectors used in config and options flows. An example strings file below describes the different supported keys.
+
+```json
+{
+  "config": {
+    "flow_title": "Discovered Device ({host})",
+    "step": {
+      "init": {
+        "title": "The user visible title of the `init` step.",
+        "description": "Markdown that is shown with the step.",
+        "data": {
+          // Config flow selector select with options that support translations
+          "set_ca_cert": "Broker certificate validation"
+        }
+      }
+    }
+  },
+  // Translations for selector select to be used in option and config flows
+  "selector": {
+    // The key is linked to the `translation_key` that needs to be set
+    // together with `translation_domain` using the SelectSelectorConfig class
+    "set_ca_cert": {      
+      // The translations for the selector select option labels
+      "options": {
+        "off": "Off",
+        "auto": "Auto",
+        "custom": "Custom"
+      }
+    }
+  }
+}
+
 ```
 
 ### Device automations
