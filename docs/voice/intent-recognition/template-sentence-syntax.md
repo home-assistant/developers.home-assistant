@@ -86,6 +86,18 @@ lists:
       to: 100
 ```
 
+Specific numbers can also be matched by a list, like returning 100 from the keyword maximum. To use this list to set the brightness in a sentence, use the following syntax: `{brightness_level:brightness}`. This will get the value from the list but put it in the slot for brightness. 
+
+```yaml
+lists:
+  brightness_level:
+    values:
+      - in: (max | maximum | highest)
+        out: 100
+      - in: ( minimum | lowest)
+        out: 1
+```
+
 ### Expansion Rules
 
 A lot of template sentences can be written in a similar way. To avoid having to repeat the same matching structure multiple times, we can define expansion rules. For example, a user might add "the" in front of the area name, or they might not. We can define an expansion rule to match both cases.
