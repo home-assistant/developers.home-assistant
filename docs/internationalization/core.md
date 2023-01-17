@@ -77,8 +77,8 @@ The translation for selectors are defined under the `selector` key. It supports 
   // Translations for selector select to be used in option and config flows
   "selector": {
     // The key is linked to the `translation_key` that needs to be set
-    // together with `translation_domain` using the SelectSelectorConfig class
-    "set_ca_cert": {      
+    // using the SelectSelectorConfig class
+    "set_ca_cert": {
       // The translations for the selector select option labels
       "options": {
         "off": "Off",
