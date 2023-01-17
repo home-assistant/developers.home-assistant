@@ -57,7 +57,7 @@ The translation strings for the configuration flow handler and the option flow h
 
 ### Selectors
 
-The translation for selectors are defined under the `selector` key. It supports option label translations for the selector `select`. The integration should set the `translation_domain` and `translation_key` on the selector select configuration. This allows translations on select selectors used in config and options flows. An example strings file below describes the different supported keys.
+The translation for selectors are defined under the `selector` key. It supports option label translations for the selector `select`. The integration should set the `translation_key` on the selector select configuration. This allows translations on select selectors used in config and options flows. An example strings file below describes the different supported keys.
 
 ```json
 {
