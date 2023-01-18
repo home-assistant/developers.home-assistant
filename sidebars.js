@@ -112,6 +112,7 @@ module.exports = {
         "integration_listen_events",
         "network_discovery",
         "bluetooth",
+        "bluetooth_fetching_data",
       ],
     },
     {
