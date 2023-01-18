@@ -4,24 +4,28 @@ title: "Fetching Bluetooth Data"
 
 ## Choosing a method to fetch data
 
-If the devices primary method of update is advertising state changes and is primarily a sensor and requires no active connection or an active connection for only some sensors:
+If the device's primary method of update is advertising state changes and is primarily a sensor, and requires no active connection or an active connection for only some sensors:
 
-- Active connections: [`ActiveBluetoothProcessorCoordinator](#activebluetoothprocessorcoordinator)
+- Active connections: [`ActiveBluetoothProcessorCoordinator`](#activebluetoothprocessorcoordinator)
 - Passive only: [`PassiveBluetoothProcessorCoordinator`](#passivebluetoothprocessorcoordinator)
 
-If the devices primary method of update is advertising state changes and it’s primary function is not a sensor:
+If the device's primary method of update is advertising state changes and its primary function is not a sensor:
 
 - Active connections: [`ActiveBluetoothCoordinator`](#activebluetoothcoordinator)
 - Passive only: [`PassiveBluetoothCoordinator`](#passivebluetoothcoordinator)
 
-If your device only communicates with an active connection:
+If your device only communicates with an active Bluetooth connection and does not use Bluetooth advertisements:
 
 [`DataUpdateCoordinator`](integration_fetching_data)
 
 ## BluetoothProcessorCoordinator
 
 The `ActiveBluetoothProcessorCoordinator` and `PassiveBluetoothProcessorCoordinator` processor coordinators
-require the data coming from the library to be formatted into a `PassiveBluetoothDataUpdate` as shown below:
+significantly reduce the code needed for creating integrations that are primary function as sensor, binary sensors,
+or fire events. By formatting the data fed into the processor coordinators into a `PassiveBluetoothDataUpdate`, the
+frameworks can care of creating the entities on demand and allow for minimal `sensor` and `binary_sensor` platforms.
+
+These frameworks require the data coming from the library to be formatted into a `PassiveBluetoothDataUpdate` as shown below:
 
 ```python
 @dataclasses.dataclass(frozen=True)
@@ -157,7 +161,8 @@ class ExampleBluetoothSensorEntity(PassiveBluetoothProcessorEntity, SensorEntity
 
 An `ActiveBluetoothProcessorCoordinator` functions nearly the same as a `PassiveBluetoothProcessorCoordinator`
 but will also make an active connection to poll for data based on `needs_poll_method` and a `poll_method`
-function which are called when the device's Bluetooth advertisement changes.
+function which are called when the device's Bluetooth advertisement changes. The `sensor.py` implementation
+is the same as the `PassiveBluetoothProcessorCoordinator`.
 
 Example `async_setup_entry` for an integration `__init__.py` using an `ActiveBluetoothProcessorCoordinator`:
 
@@ -391,4 +396,3 @@ class ExampleActiveBluetoothDataUpdateCoordinator(
         # Your device should process incoming advertisement data
 
 ```
-
