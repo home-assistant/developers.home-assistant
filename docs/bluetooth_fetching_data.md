@@ -247,7 +247,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 The `ActiveBluetoothCoordinator` and `PassiveBluetoothCoordinator` coordinators function similar
 to `DataUpdateCoordinators` except they are driven by incoming advertisement data instead of polling.
 
-## PassiveBluetoothCoordinator
+### PassiveBluetoothCoordinator
 
 Below is an example of a `PassiveBluetoothDataUpdateCoordinator`. Incoming
 data is received via `_async_handle_bluetooth_event` and processed by the integration's
@@ -306,7 +306,7 @@ class ExamplePassiveBluetoothDataUpdateCoordinator(
 
 ```
 
-## ActiveBluetoothCoordinator
+### ActiveBluetoothCoordinator
 
 Below is an example of an `ActiveBluetoothDataUpdateCoordinator`. Incoming
 data is received via `_async_handle_bluetooth_event` and processed by the integration's
