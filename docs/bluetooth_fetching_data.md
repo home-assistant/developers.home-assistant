@@ -115,7 +115,7 @@ from .const import DOMAIN
 
 
 def sensor_update_to_bluetooth_data_update(parsed_data):
-    """Convert a sensor update to a bluetooth data update."""
+    """Convert a sensor update to a Bluetooth data update."""
     # This function must convert the parsed_data
     # from your library's update_method to a `PassiveBluetoothDataUpdate`
     # See the structure above
