@@ -214,7 +214,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         ):
             connectable_device = device
         else:
-            # We have no bluetooth controller that is in range of
+            # We have no Bluetooth controller that is in range of
             # the device to poll it
             raise RuntimeError(
                 f"No connectable device found for {service_info.device.address}"
