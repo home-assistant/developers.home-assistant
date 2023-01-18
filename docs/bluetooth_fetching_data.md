@@ -21,9 +21,9 @@ If your device only communicates with an active Bluetooth connection and does no
 ## BluetoothProcessorCoordinator
 
 The `ActiveBluetoothProcessorCoordinator` and `PassiveBluetoothProcessorCoordinator` processor coordinators
-significantly reduce the code needed for creating integrations that are primary function as sensor, binary sensors,
-or fire events. By formatting the data fed into the processor coordinators into a `PassiveBluetoothDataUpdate`, the
-frameworks can care of creating the entities on demand and allow for minimal `sensor` and `binary_sensor` platforms.
+significantly reduce the code needed for creating integrations that primary function as sensor, binary sensors,
+or fire events. By formatting the data fed into the processor coordinators into a `PassiveBluetoothDataUpdate` object, the
+frameworks can care of creating the entities on demand and allow for minimal `sensor` and `binary_sensor` platform implementations.
 
 These frameworks require the data coming from the library to be formatted into a `PassiveBluetoothDataUpdate` as shown below:
 
@@ -247,7 +247,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 ## BluetoothCoordinator
 
 The `ActiveBluetoothCoordinator` and `PassiveBluetoothCoordinator` coordinators function similar
-to `DataUpdateCoordinators` except they are driven by incoming advertisement data
+to `DataUpdateCoordinators` except they are driven by incoming advertisement data instead of polling.
 
 ## PassiveBluetoothCoordinator
 
@@ -314,7 +314,7 @@ Below is an example of an `ActiveBluetoothDataUpdateCoordinator`. Incoming
 data is received via `_async_handle_bluetooth_event` and processed by the integration's
 library.
 
-The `_needs_poll` function is called each time there is an advertisement change to
+The `_needs_poll` function is called each time there is the Bluetooth advertisement changes to
 determine if an active connection to the device is needed to fetch additional data.
 
 If the `_needs_poll` function returns `True`, `_async_update` will be called.
