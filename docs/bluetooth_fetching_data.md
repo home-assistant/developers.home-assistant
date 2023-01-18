@@ -147,7 +147,7 @@ async def async_setup_entry(
 
 
 class ExampleBluetoothSensorEntity(PassiveBluetoothProcessorEntity, SensorEntity):
-    """Representation of an example ble sensor."""
+    """Representation of an example BLE sensor."""
 
     @property
     def native_value(self) -> float | int | str | None:
