@@ -21,7 +21,7 @@ If your device only communicates with an active Bluetooth connection and does no
 ## BluetoothProcessorCoordinator
 
 The `ActiveBluetoothProcessorCoordinator` and `PassiveBluetoothProcessorCoordinator` significantly reduce the code needed for creating integrations that primary function as sensor, binary sensors, or fire events. By formatting the data fed into the processor coordinators into a `PassiveBluetoothDataUpdate` object, the
-frameworks can care of creating the entities on demand and allow for minimal `sensor` and `binary_sensor` platform implementations.
+frameworks can take care of creating the entities on demand and allow for minimal `sensor` and `binary_sensor` platform implementations.
 
 These frameworks require the data coming from the library to be formatted into a `PassiveBluetoothDataUpdate` as shown below:
 
