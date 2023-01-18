@@ -11,7 +11,7 @@ If the device's primary method to notify of updates is Bluetooth advertisements 
 
 If the device's primary method to notify of update is Bluetooth advertisements and its primary function is not a sensor, binary sensor, or firing events:
 
-- If active connection are needed: [`ActiveBluetoothCoordinator`](#activebluetoothcoordinator)
+- If active connections are needed: [`ActiveBluetoothCoordinator`](#activebluetoothcoordinator)
 - If all entities are updated via Bluetooth advertisements: [`PassiveBluetoothCoordinator`](#passivebluetoothcoordinator)
 
 If your device only communicates with an active Bluetooth connection and does not use Bluetooth advertisements:
