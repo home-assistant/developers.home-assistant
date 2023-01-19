@@ -187,8 +187,12 @@ module.exports = {
         "intent_firing",
         "intent_handling",
         "intent_builtin",
-        "intent_conversation_api",
       ],
+    },
+    {
+      type: "category",
+      label: "Conversation",
+      items: ["intent_conversation_api", "core/conversation/custom_agent"],
     },
     {
       type: "category",
@@ -205,7 +209,6 @@ module.exports = {
     "creating_integration_brand",
     "core/platform/application_credentials",
     "core/platform/backup",
-    "core/conversation/custom_agent",
     "core/platform/repairs",
     "core/platform/reproduce_state",
     "core/platform/significant_change",
