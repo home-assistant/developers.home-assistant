@@ -319,3 +319,22 @@ The response will include paths for streaming either via HLS or via MJPEG image 
 ```
 
 If HLS streaming is not available, the `hls_path` will be `null`. See notes above on instance URL for how to construct a full URL.
+
+## Process Conversation
+
+_This requires Home Assistant 2023.2.0 or later._
+
+Process a sentence with the conversation integration.
+
+```json
+{
+  "type": "process_conversation",
+  "data": {
+    "text": "Turn on the lights",
+    "language": "en",
+    "conversation_id": "ABCD",
+  }
+}
+```
+
+For available keys and response, see the [conversation API documentation](../../intent_conversation_api).
