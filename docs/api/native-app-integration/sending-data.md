@@ -328,7 +328,7 @@ Process a sentence with the conversation integration.
 
 ```json
 {
-  "type": "process_conversation",
+  "type": "conversation_process",
   "data": {
     "text": "Turn on the lights",
     "language": "en",
