@@ -310,14 +310,9 @@ class ExamplePassiveBluetoothDataUpdateCoordinator(
 
 ### ActiveBluetoothCoordinator
 
-Below is an example of an `ActiveBluetoothDataUpdateCoordinator`. Incoming
-data is received via `_async_handle_bluetooth_event` and processed by the integration's
-library.
+Below is an example of an `ActiveBluetoothDataUpdateCoordinator`. Incoming data is received via `_async_handle_bluetooth_event` and processed by the integration's library.
 
-The `_needs_poll` function is called each time there is the Bluetooth advertisement changes to
-determine if an active connection to the device is needed to fetch additional data.
-
-If the `_needs_poll` function returns `True`, `_async_update` will be called.
+The method passed to `needs_poll_method` is called each time the Bluetooth advertisement changes to determine if the method passed to `poll_method` should be called to make an active connection to the device to obtain additional data.
 
 ```python
 import logging
