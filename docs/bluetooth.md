@@ -1,6 +1,6 @@
 ---
 title: "Bluetooth"
-sidebar_label: "Bluetooth"
+sidebar_label: "Best practices"
 ---
 
 ### Best practices for integration authors
@@ -96,7 +96,7 @@ Integrations that need an instance of a `BleakScanner` should call the `bluetoot
 
 ```python
 from homeassistant.components import bluetooth
-  
+
 scanner = bluetooth.async_get_scanner(hass)
 ```
 
@@ -122,7 +122,7 @@ from homeassistant.components import bluetooth
 
 def _unavailable_callback(info: bluetooth.BluetoothServiceInfoBleak) -> None:
     _LOGGER.debug("%s is no longer seen", info.address)
-   
+
 cancel = bluetooth.async_track_unavailable(hass, _unavailable_callback, "44:44:33:11:23:42", connectable=True)
 ```
 

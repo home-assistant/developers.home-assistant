@@ -111,7 +111,11 @@ module.exports = {
         "integration_events",
         "integration_listen_events",
         "network_discovery",
-        "bluetooth",
+        {
+          type: "category",
+          label: "Bluetooth",
+          items: ["bluetooth", "core/bluetooth/bluetooth_fetching_data"],
+        },
       ],
     },
     {
