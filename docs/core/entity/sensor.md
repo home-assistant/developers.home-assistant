@@ -43,7 +43,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.DATE` | | Date. Requires `native_value` to be a Python `datetime.date` object, or `None`.
 | `SensorDeviceClass.DISTANCE` | km, m, cm, mm, mi, yd, in | Generic distance
 | `SensorDeviceClass.DURATION` | d, h, min, s | Time period. Should not update only due to time passing. The device or service needs to give a new data point to update.
-| `SensorDeviceClass.ENERGY` | Wh, kWh, MWh | Energy, statistics will be stored in kWh. Represents _power_ over _time_. Not to be confused with `power`.
+| `SensorDeviceClass.ENERGY` | Wh, kWh, MWh, MJ, GJ | Energy, statistics will be stored in kWh. Represents _power_ over _time_. Not to be confused with `power`.
 | `SensorDeviceClass.ENUM` | | The sensor has a limited set of (non-numeric) states. The `options` property must be set to a list of possible states when using this device class.
 | `SensorDeviceClass.FREQUENCY` | Hz, kHz, MHz, GHz | Frequency
 | `SensorDeviceClass.GAS` | m³, ft³, CCF | Volume of gas, statistics will be stored in m³. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
