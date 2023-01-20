@@ -4,7 +4,7 @@ title: "Bluetooth APIs"
 
 ### Subscribing to Bluetooth discoveries
 
-Some integrations may need to know when a device is discovered right away. The Bluetooth integration provides a registration API to receive callbacks when a new device is discovered that matches specific key values. The same format for `bluetooth` in [`manifest.json`](../creating_integration_manifest#bluetooth) is used for matching. In addition to the matchers used in the `manifest.json`, `address` can also be used as a matcher.
+Some integrations may need to know when a device is discovered right away. The Bluetooth integration provides a registration API to receive callbacks when a new device is discovered that matches specific key values. The same format for `bluetooth` in [`manifest.json`](../../creating_integration_manifest#bluetooth) is used for matching. In addition to the matchers used in the `manifest.json`, `address` can also be used as a matcher.
 
 The function `bluetooth.async_register_callback` is provided to enable this ability. The function returns a callback that will cancel the registration when called.
 
@@ -195,7 +195,7 @@ service_info = await bluetooth.async_process_advertisements(
 
 ### Registering an external scanner
 
-Integrations that provide a Bluetooth adapter should add `bluetooth` in [`dependencies`](../creating_integration_manifest#dependencies) in their [`manifest.json`](../creating_integration_manifest) and be added to [`after_dependencies`](../creating_integration_manifest#after-dependencies) to the `bluetooth_adapters` integration.
+Integrations that provide a Bluetooth adapter should add `bluetooth` in [`dependencies`](../../creating_integration_manifest#dependencies) in their [`manifest.json`](../../creating_integration_manifest) and be added to [`after_dependencies`](../../creating_integration_manifest#after-dependencies) to the `bluetooth_adapters` integration.
 
 To register an external scanner, call the `bluetooth.async_register_scanner` API. The scanner must inherit from `BaseHaScanner`.
 
