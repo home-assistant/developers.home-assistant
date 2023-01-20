@@ -114,7 +114,7 @@ module.exports = {
         {
           type: "category",
           label: "Bluetooth",
-          items: ["bluetooth", "core/bluetooth/bluetooth_fetching_data"],
+          items: ["bluetooth", "core/bluetooth/bluetooth_fetching_data", "core/bluetooth/api"],
         },
       ],
     },
