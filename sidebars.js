@@ -244,6 +244,7 @@ module.exports = {
     },
 
     "voice/language-leaders",
+    "voice/contributing-your-voice",
   ],
 
   Misc: [
