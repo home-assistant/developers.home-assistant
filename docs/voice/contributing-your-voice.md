@@ -7,7 +7,7 @@ You can help us and the rest of the  open voice community develop **Speech-to-Te
 
 ## Speech to Text
 
-When you speak to a computer, it **transcribes** the audio from your voice into text. There are many ways to do this, but they all rely on datasets of people speaking lists of sentences.
+When you speak to a computer, it **transcribes** the audio from your voice into text. There are many ways to do this, but they all rely on recordings of people speaking.
 
 For speech to text, it is important to have:
 
