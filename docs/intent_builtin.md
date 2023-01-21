@@ -1,5 +1,6 @@
 ---
 title: "Built-in intents"
+toc_max_heading_level: 2
 ---
 
 import intents from '!!yaml-loader!../intents/intents.yaml';
@@ -36,6 +37,27 @@ The following intents are supported by Home Assistant:
 ## Deprecated intents
 
 These are old intents that are not supported by template matching sentences and are planned to be removed or replaced.
+
+
+### HassOpenCover
+
+_Use `HassTurnOn` instead._
+
+Open a cover.
+
+| Slot name | Type | Required | Description
+| --------- | ---- | -------- | -----------
+| name | string | Yes | Name of the cover entity to open.
+
+### HassCloseCover
+
+_Use `HassTurnOff` instead._
+
+Close a cover.
+
+| Slot name | Type | Required | Description
+| --------- | ---- | -------- | -----------
+| name | string | Yes | Name of the cover entity to close.
 
 ### HassToggle
 
