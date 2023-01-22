@@ -41,7 +41,7 @@ These are old intents that are not supported by template matching sentences and 
 
 ### HassOpenCover
 
-_Use `HassTurnOn` instead._
+_Deprecated; use `HassTurnOn` instead._
 
 Open a cover.
 
@@ -51,7 +51,7 @@ Open a cover.
 
 ### HassCloseCover
 
-_Use `HassTurnOff` instead._
+_Deprecated; use `HassTurnOff` instead._
 
 Close a cover.
 
