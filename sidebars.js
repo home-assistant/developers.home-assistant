@@ -238,7 +238,6 @@ module.exports = {
         "voice/intent-recognition/index",
         "voice/intent-recognition/template-sentence-syntax",
         "voice/intent-recognition/test-syntax",
-        "voice/intent-recognition/custom-sentences",
         "voice/intent-recognition/supported-languages",
         "voice/intent-recognition/contributing",
       ],
