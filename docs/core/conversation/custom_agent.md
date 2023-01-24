@@ -42,12 +42,12 @@ class MyConversationAgent(agent.AbstractConversationAgent):
         conversation_id: str | None = None,
         # Language of the user input. If None, default to hass.config.language
         language: str | None = None,
-    ) -> agent.ConversationResult | None:
+    ) -> agent.ConversationResult:
         """Process a sentence."""
         response = intent.IntentResponse(language=language)
         response.async_set_speech("Test response")
         return agent.ConversationResult(
             conversation_id=None,
-            response=
+            response=response
         )
 ```
