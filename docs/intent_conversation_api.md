@@ -285,3 +285,20 @@ POST with the next input sentence:
 }
 ```
 
+
+## Pre-loading Sentences 
+
+Sentences for a language can be pre-loaded using the WebSocket API:
+
+```json
+{
+  "type": "conversation/prepare",
+  "language": "en"
+}
+```
+
+The following input fields are available:
+
+| Name       | Type   | Description                                                                    |
+|------------|--------|--------------------------------------------------------------------------------|
+| `language` | string | Optional. Language of the sentences to load (defaults to configured language). |
