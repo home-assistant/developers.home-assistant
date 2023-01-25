@@ -4,7 +4,7 @@ authorURL: https://github.com/emontnemery
 title: "Sensor entity can now do rounding of numerical values"
 ---
 
-`SensorEntity` can now do rounding of a numerical `native_value` to the state, this is implemented as a part of [core PR #86074](https://github.com/home-assistant/core/pull/86074). The rounding is opt-in by integrations setting the `native_precision` property. It is recommended that this property is set by integrations because it ensures the number of decimals is reasonable also after unit conversion.
+`SensorEntity` can now do rounding of a numerical `native_value` when it's converted to the sensor state. This is implemented as a part of [core PR #86074](https://github.com/home-assistant/core/pull/86074). The rounding is opt-in by integrations setting the `native_precision` property. It is recommended that this property is set by integrations because it ensures the number of decimals is reasonable also after unit conversion.
 
 A summary of the changes, copied from the PR description:
 
