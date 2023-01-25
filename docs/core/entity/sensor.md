@@ -70,7 +70,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.SOUND_PRESSURE` | dB, dBA | Sound pressure
 | `SensorDeviceClass.SPEED` | ft/s, in/d, in/h, km/h, kn, m/s, mph, mm/d | Generic speed
 | `SensorDeviceClass.SULPHUR_DIOXIDE` | µg/m³ | Concentration of sulphure dioxide |
-| `SensorDeviceClass.TEMPERATURE` | °C, °F | Temperature, statistics will be stored in °C.
+| `SensorDeviceClass.TEMPERATURE` | °C, °F, K | Temperature, statistics will be stored in °C.
 | `SensorDeviceClass.TIMESTAMP` | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
 | `SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³ | Concentration of volatile organic compounds
 | `SensorDeviceClass.VOLTAGE` | V, mV | Voltage

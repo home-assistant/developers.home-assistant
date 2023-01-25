@@ -66,7 +66,7 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.SOUND_PRESSURE` | dB, dBA | Sound pressure
 | `NumberDeviceClass.SPEED` | ft/s, in/d, in/h, km/h, kn, m/s, mph, mm/d | Generic speed
 | `NumberDeviceClass.SULPHUR_DIOXIDE` | µg/m³ | Concentration of sulphure dioxide |
-| `NumberDeviceClass.TEMPERATURE` | °C, °F | Temperature.
+| `NumberDeviceClass.TEMPERATURE` | °C, °F, K | Temperature.
 | `NumberDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³ | Concentration of volatile organic compounds
 | `NumberDeviceClass.VOLTAGE` | V, mV | Voltage
 | `NumberDeviceClass.VOLUME` | L, mL, gal, fl. oz., m³, ft³, CCF | Generic volume
