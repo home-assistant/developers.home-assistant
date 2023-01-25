@@ -8,7 +8,14 @@ The integration provides a default conversation agent that uses our own [intent 
 
 ## Creating a custom conversation agent
 
-It is possible for integrations to provide a custom conversation agent.
+It is possible for integrations to provide a custom conversation agent. The `async_process` method takes a `ConversationInput` object that contains the following data:
+
+| Name | Type | Description
+| ---- | ---- | -----------
+| `text` | `str` | User input
+| `context` | `Context` | HA context to attach to actions in HA
+| `conversation_id` | `Optional[str]` | Can be used to track a multi-turn conversation. Return None if not supported
+| `language` | `str` | Language of the text. If user did not provide one, it's set to the HA configured language.
 
 ```python
 from homeassistant.helpers import intent
@@ -23,7 +30,7 @@ async def async_setup(hass, config):
 class MyConversationAgent(agent.AbstractConversationAgent):
 
     @property
-    def attribution(self):
+    def attribution(self) -> agent.Attribution:
         """Return the attribution."""
         return {
             "name": "My Conversation Agent",
@@ -31,20 +38,9 @@ class MyConversationAgent(agent.AbstractConversationAgent):
         }
 
     @abstractmethod
-    async def async_process(
-        self,
-        # User input
-        text: str,
-        # The HA context to attach to actions in HA
-        context: Context,
-        # Identifier. Can be used to track a multi-turn conversation.
-        # Return None if not supported.
-        conversation_id: str | None = None,
-        # Language of the user input. If None, default to hass.config.language
-        language: str | None = None,
-    ) -> agent.ConversationResult:
+    async def async_process(self, user_input: agent.ConversationInput) -> agent.ConversationResult:
         """Process a sentence."""
-        response = intent.IntentResponse(language=language)
+        response = intent.IntentResponse(language=user_input.language)
         response.async_set_speech("Test response")
         return agent.ConversationResult(
             conversation_id=None,
