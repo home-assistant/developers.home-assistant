@@ -40,7 +40,7 @@ class MyConversationAgent(agent.AbstractConversationAgent):
     @abstractmethod
     async def async_process(self, user_input: agent.ConversationInput) -> agent.ConversationResult:
         """Process a sentence."""
-        response = intent.IntentResponse(language=language)
+        response = intent.IntentResponse(language=user_input.language)
         response.async_set_speech("Test response")
         return agent.ConversationResult(
             conversation_id=None,

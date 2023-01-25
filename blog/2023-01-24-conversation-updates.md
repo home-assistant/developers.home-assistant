@@ -12,4 +12,4 @@ The Home Assistant 2023.2 release contains [PR 86592](https://github.com/home-as
 - `AbstractConversationAgent` API has changed:
   - All onboarding logic removed
   - `async_process` now takes new `ConversationInput` parameter with the same arguments. Language is now always set.
-  - `async_process` should now always reutrn a `ConversationResult`. It's no longer allowed to return `None` or expect error handling to be done for you.
+  - `async_process` should now always return a `ConversationResult`. It's no longer allowed to return `None` or expect error handling to be done for you.
