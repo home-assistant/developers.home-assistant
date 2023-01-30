@@ -568,6 +568,19 @@ curl -X POST -H "Authorization: Bearer ABCDEFGH" \
   http://localhost:8123/api/states/sensor.kitchen_temperature
 ```
 
+Sample `python` command using the [Requests](https://requests.readthedocs.io/en/master/) module:
+
+```shell
+from requests import post
+
+url = "http://localhost:8123/api/states/sensor.kitchen_temperature"
+headers = {"Authorization": "Bearer ABCDEFGH", "content-type": "application/json"}
+data = {"state": "25", "attributes": {"unit_of_measurement": "°C"}}
+
+response = post(url, headers=headers, json=data)
+print(response.text)
+```
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/api/events/<event_type>" method="post">
