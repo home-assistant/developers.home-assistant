@@ -6,7 +6,7 @@ authorTwitter: balloob
 title: "Multi-pan temporarily disabled"
 ---
 
-**Update:** multi-pan has been fixed and users can once again opt-in to the experimental version starting Home Assistant 2022.2.
+**Update:** multi-pan has been fixed and users can once again opt-in to the experimental version starting Home Assistant 2023.2.
 
 In [Home Assistant 2022.12](https://www.home-assistant.io/blog/2022/12/07/release-202212/) we soft-launched our experimental multi-pan feature: allowing to run both Zigbee and Thread using the single radio found in both Home Assistant Yellow and Home Assistant SkyConnect. Users had to find it in the hardware menu, confirm the experimental note and opt-in.
 
