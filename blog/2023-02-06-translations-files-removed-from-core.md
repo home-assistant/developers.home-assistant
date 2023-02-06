@@ -39,13 +39,3 @@ python3 -m script.translations develop --all
 
 This script is automatically run when a dev environment is set, and each
 time you run running Home Assistant in your VSCode (as a pre-launch task).
-
-If there is a specific reason to have the actual translations in other languages
-at hand for local development, you can run the following command:
-
-```bash
-python3 -m script.translations download
-```
-
-This will download all translations from Lokalise. This does require you to
-set the `LOKALISE_TOKEN` environment variable to a valid Lokalise API token.
