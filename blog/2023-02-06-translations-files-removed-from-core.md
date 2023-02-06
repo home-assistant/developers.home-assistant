@@ -37,5 +37,5 @@ translations for all integrations at once.
 python3 -m script.translations develop --all
 ```
 
-This script is automatically run when a dev environment is set, and each
+This script is automatically run when a dev environment is set up, and each
 time you run running Home Assistant in your VSCode (as a pre-launch task).
