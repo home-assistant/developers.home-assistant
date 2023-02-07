@@ -6,19 +6,12 @@ authorTwitter: frenck
 title: Introducing drafting of PRs in our review process
 ---
 
-:::info
-We are currently testing this feature, which is only active on our Core
-repository. Please let us know in the 
-[#devs channel in our Discord chat](https://www.home-assistant.io/join-chat)
-if you have any feedback.
-:::
-
 Home Assistant gets lots of contributions, which is absolutely amazing! But
 when having lots of PRs, it becomes harder to keep track of the state of those.
 
-To help with this, we are introducing a new process to our review process that automatically
-drafts PRs when they require more work before they can be reviewed again (or
-merged).
+To help with this, we are introducing a new process to our review process that
+automatically drafts PRs when they require more work before they can be reviewed
+again (or merged).
 
 We have adjusted our bot to automatically draft PRs if a review has requested
 changes to be made. Once the changes have been made, the author of the PR can
@@ -29,6 +22,11 @@ review again.
 
 Before you click the "Ready for review" button, make sure you have addressed
 all requested changes, and all our CI jobs and checks are passing successfully.
+
+We are currently still testing these features and workflow, which is only active
+on our Core repository. Please let us know in the 
+[#devs channel in our Discord chat](https://www.home-assistant.io/join-chat)
+if you have any feedback.
 
 ## What is a draft PR?
 
