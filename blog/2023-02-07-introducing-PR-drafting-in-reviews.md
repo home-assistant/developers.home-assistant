@@ -14,7 +14,7 @@ if you have any feedback.
 :::
 
 Home Assistant gets lots of contributions, which is absolutely amazing! But
-when having lots of PRs, is becomes harder to keep track of the state of those.
+when having lots of PRs, it becomes harder to keep track of the state of those.
 
 To help with this, we are introducing a new process to our review process that
 drafts PRs when they require more work before they can be reviewed again (or
