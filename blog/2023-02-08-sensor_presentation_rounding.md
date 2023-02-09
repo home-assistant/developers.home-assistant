@@ -17,4 +17,4 @@ The number of displayed decimal digits is influenced by unit conversion:
 The number of displayed decimal digits is not influenced by unit conversion if the user has set the display precision themselves.
 
 Note:
-A similar concept where the sensor's state was rounded, detailed in [an earlier blog post](blog/2023/01/25/sensor_rounding), has been reverted.
+A similar concept where the sensor's state was rounded, detailed in [an earlier blog post](/blog/2023/01/25/sensor_rounding), has been reverted.
