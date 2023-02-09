@@ -3,6 +3,11 @@ title: Remote Entity
 sidebar_label: Remote
 ---
 
+The remote entity can represent two different types of devices:
+
+1. A physical device that sends commands.
+2. A virtual device in Home Assistant that sends commands to another physical device, eg a television.
+
 Derive entity platforms from [`homeassistant.components.remote.RemoteEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/remote/__init__.py)
 
 ## Properties
