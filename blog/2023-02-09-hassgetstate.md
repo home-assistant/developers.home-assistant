@@ -43,4 +43,4 @@ lists:
 With these sentences, you can now ask Assist things like "what is the outside temperature?", "is the front door locked?", or "is the floor in the basement wet?"
 This relies on having entity names (or aliases) set up just right, of course. For example, a sensor named "outside temperature" and a binary moisture sensor named "floor" in the "basement" area.
 
-As we add translations, more types of questions will be possible such as "which lights are in the living?" and "are any doors unlocked?"
+As we add translations, more types of questions will be possible such as "which lights are in the living room?" and "are any doors unlocked?"
