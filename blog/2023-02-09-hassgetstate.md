@@ -6,7 +6,7 @@ authorTwitter: rhasspy
 title: The HassGetState intent
 ---
 
-We've added a new [built-in intent](https://developers.home-assistant.io/docs/intent_builtin/): `HassGetState`
+We've added a new [built-in intent](/docs/intent_builtin/): `HassGetState`
 
 This intent will enable users to ask questions to [Assist](https://www.home-assistant.io/docs/assist) once we've added translations to the [intents repository](https://github.com/home-assistant/intents/).
 You can try it out now by adding [custom sentences](https://www.home-assistant.io/docs/assist/custom_sentences):
