@@ -12,7 +12,7 @@ If you are not using the [`frontend`](https://www.home-assistant.io/integrations
 
 The API accepts and returns only JSON encoded objects.
 
-All API calls have to be accompanied by the header `Authorization: Bearer ABCDEFGH`, where `ABCDEFGH` is replaced by your token. You can obtain a token ("Long-Lived Access Token") by logging into the frontend using a web browser, and going to [your profile](https://www.home-assistant.io/docs/authentication/#your-account-profile) `http://IP_ADDRESS:8123/profile`.
+All API calls have to be accompanied by the header `Authorization: Bearer ABCDEFGH`, where `ABCDEFGH` is replaced by your token. You can obtain a token ("Long-Lived Access Token") by logging into the frontend using a web browser, and going to [your profile](https://www.home-assistant.io/docs/authentication/#your-account-profile) `http://IP_ADDRESS:8123/profile`. Be shure to copy the whole key, not only a part of it like with CTRL+A in Chrome.
 
 There are multiple ways to consume the Home Assistant Rest API. One is with `curl`:
 
