@@ -9,16 +9,16 @@ Every integration has a manifest file to specify basic information about an inte
 {
   "domain": "hue",
   "name": "Philips Hue",
-  "integration_type": "hub",
-  "documentation": "https://www.home-assistant.io/components/hue",
-  "issue_tracker": "https://github.com/balloob/hue/issues",
-  "dependencies": ["mqtt"],
   "after_dependencies": ["http"],
   "codeowners": ["@balloob"],
-  "requirements": ["aiohue==1.9.1"],
-  "quality_scale": "platinum",
+  "dependencies": ["mqtt"],
+  "documentation": "https://www.home-assistant.io/components/hue",
+  "integration_type": "hub",
   "iot_class": "local_polling",
-  "loggers": ["aiohue"]
+  "issue_tracker": "https://github.com/balloob/hue/issues",
+  "loggers": ["aiohue"],
+  "requirements": ["aiohue==1.9.1"],
+  "quality_scale": "platinum"
 }
 ```
 
@@ -28,12 +28,12 @@ Or a minimal example that you can copy into your project:
 {
   "domain": "your_domain_name",
   "name": "Your Integration",
-  "integration_type": "hub",
-  "documentation": "https://www.example.com",
-  "dependencies": [],
   "codeowners": [],
+  "dependencies": [],
+  "documentation": "https://www.example.com",
+  "integration_type": "hub",
+  "iot_class": "cloud_polling",
   "requirements": [],
-  "iot_class": "cloud_polling"
 }
 ```
 
