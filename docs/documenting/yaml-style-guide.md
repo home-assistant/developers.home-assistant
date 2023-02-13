@@ -202,7 +202,7 @@ In the examples above the no chomping operators are used (`|`, `>`). This is
 preferred, unless the example requires a different handling of the ending new
 line. In those cases the use of the strip operator (`|-`, `>-`: no trailing new
 line, any additional new lines are removed from the end) or keep operator
-(`|+`, `|-`: trailing new line, and keep all additional new lines from the end)
+(`|+`, `>+`: trailing new line, and keep all additional new lines from the end)
 is allowed.
 
 ### Additional string guidance

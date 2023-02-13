@@ -8,19 +8,22 @@ For a generic introduction of entities, see [entities architecture](../architect
 ## Basic implementation
 
 Below is an example switch entity that keeps track of its state in memory.
+In addition, the switch in the example represents the main feature of a device,
+meaning the entity has the same name as its device.
+
+Please refer to [Entity naming](#entity-naming) for how to give an entity its own name.
 
 ```python
 from homeassistant.components.switch import SwitchEntity
 
 
 class MySwitch(SwitchEntity):
+    _attr_has_entity_name = True
+
     def __init__(self):
         self._is_on = False
-
-    @property
-    def name(self):
-        """Name of the entity."""
-        return "My Switch"
+        self._attr_device_info = ...  # For automatic device registration
+        self._attr_unique_id = ...
 
     @property
     def is_on(self):
@@ -66,11 +69,14 @@ Properties should always only return information from memory and not do I/O (lik
 | attribution             | string  | `None`  | The branding text required by the API provider. |
 | available               | boolean | `True`  | Indicate if Home Assistant is able to read the state and control the underlying device. |
 | device_class            | string  | `None`  | Extra classification of what the device is. Each domain specifies their own. Device classes can come with extra requirements for unit of measurement and supported features. |
-| entity_category         | string  | `None`  | Classification of a non-primary entity. Set to `config` for an entity which allows changing the configuration of a device, for example a switch entity making it possible to turn the background illumination of a switch on and off. Set to `diagnostic` for an entity exposing some configuration parameter or diagnostics of a device but does not allow changing it, for example a sensor showing RSSI or MAC-address. Set to `system` for an entity which is not useful for the user to interact with. As an example the auto generated energy cost sensors are not useful on their own because they reset from 0 every time home assistant is restarted or the energy settings are changed and thus have their entity category set to `system`. |
+| device_info             | dict    | `None`  | [Device registry](/docs/device_registry_index) descriptor for [automatic device registration.](/docs/device_registry_index#automatic-registration-through-an-entity)
+| entity_category         | string  | `None`  | Classification of a non-primary entity. Set to `config` for an entity which allows changing the configuration of a device, for example a switch entity making it possible to turn the background illumination of a switch on and off. Set to `diagnostic` for an entity exposing some configuration parameter or diagnostics of a device but does not allow changing it, for example a sensor showing RSSI or MAC-address. |
 | entity_picture          | URL     | `None`  | Url of a picture to show for the entity. |
 | extra_state_attributes  | dict    | `None`  | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version. |
+| has_entity_name         | boolean |         | Return `True` if the entity's `name` property represents the entity itself (required for new integrations). This is explained in more detail below.
 | name                    | string  | `None`  | Name of the entity  |
 | should_poll             | boolean | `True`  | Should Home Assistant check with the entity for an updated state. If set to `False`, entity will need to notify Home Assistant of new updates by calling one of the [schedule update methods](integration_fetching_data.md#push-vs-poll). |
+| translation_key         | string  | `None`  | A key for looking up translations of the entity's state in [`entity` section of the integration's `strings.json`](/docs/internationalization/core#state-of-entities).
 | unique_id               | string  | `None`  | A unique identifier for this entity. Needs to be unique within a platform (ie `light.hue`). Should not be configurable by the user or be changeable. [Learn more.](entity_registry_index.md#unique-id-requirements) |
 
 :::warning
@@ -95,6 +101,64 @@ The following properties are used and controlled by Home Assistant, and should n
 | Name    | Type    | Default | Description                                                                                                                                                                              |
 | ------- | ------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | enabled | boolean | `True`  | Indicate if entity is enabled in the entity registry. It also returns `True` if the platform doesn't support the entity registry. Disabled entities will not be added to Home Assistant. |
+
+## Entity naming
+
+### `has_entity_name` True (Mandatory for new integrations)
+
+The entity's name property only identifies the data point represented by the entity, and should not include the name of the device or the type of the entity. So for a sensor that represents the power usage of its device, this would be “Power usage”.
+
+If the entity represents a single main feature of a device the entity should typically have its name property return `None`.
+The "main feature" of a device would for example be the `LightEntity` of a smart light bulb.
+
+The `friendly_name` state attribute is generated by combining then entity name with the device name as follows:
+- The entity is not a member of a device: `friendly_name = entity.name`
+- The entity is a member of a device and `entity.name` is not `None`: `friendly_name = f"{device.name} {entity.name}"`
+- The entity is a member of a device and `entity.name` is `None`: `friendly_name = f"{device.name}"`
+
+Entity names should start with a capital letter, the rest of the words are lower case (unless it's a proper noun or a capitalized abbreviation of course).
+
+#### Example of a switch entity which is the main feature of a device
+
+*Note: The example is using class attributes to implement properties, for other ways
+to implement properties see [Property implementation.](#property-implementation)*
+*Note: The example is incomplete, the `unique_id` property must be implemented, and the entity
+must be [registered with a device.](/docs/device_registry_index#defining-devices)
+
+
+```python
+from homeassistant.components.switch import SwitchEntity
+
+
+class MySwitch(SwitchEntity):
+    _attr_has_entity_name = True
+    _attr_name = None
+
+```
+
+#### Example of a switch entity which is either not the main feature of a device, or is not part of a device:
+
+*Note: The example is using class attributes to implement properties, for other ways*
+*to implement properties see [Property implementation.](#property-implementation)*
+*Note: If the entity is part of a device, the `unique_id` property must be implemented, and the entity
+must be [registered with a device.](/docs/device_registry_index#defining-devices)
+
+```python
+from homeassistant.components.switch import SwitchEntity
+
+
+class MySwitch(SwitchEntity):
+    _attr_has_entity_name = True
+
+    @property
+    def name(self):
+        """Name of the entity."""
+        return "My Switch"
+```
+
+### `has_entity_name` not implemented or False (Deprecated)
+
+The entity's name property may be a combination of the device name and the data point represented by the entity.
 
 ## Property implementation
 
@@ -155,7 +219,7 @@ The below code snippet gives an example of best practices for when to implement 
 
 ```py
 class SomeEntity():
-    _attr_device_clas = DEVICE_CLASS_TEMPERATURE  # This will be common to all instances of SomeEntity
+    _attr_device_clas = SensorDeviceClass.TEMPERATURE  # This will be common to all instances of SomeEntity
     def __init__(self, device):
         self._device = device
         self._attr_available = False  # This overrides the default

@@ -41,7 +41,7 @@ CMD [ "/run.sh" ]
 
 ### The `config.yaml` file
 
-This is your add-on configuration, which tell the Supervisor what to do and how to present your add-on.
+This is your add-on configuration, which tells the Supervisor what to do and how to present your add-on.
 
 For an overview of all valid add-on configuration options have a look [here](/docs/add-ons/configuration#add-on-configuration)
 
@@ -50,6 +50,7 @@ name: "Hello world"
 description: "My first real add-on!"
 version: "1.0.0"
 slug: "hello_world"
+init: false
 arch:
   - aarch64
   - amd64
@@ -69,7 +70,7 @@ echo "Hello world!"
 ```
 
 :::note
-Make sure your editor is using UNIX-like line breaks (LF), not Dos/Windows (CRLF).
+Make sure your editor is using UNIX-like line breaks (LF), not DOS/Windows (CRLF).
 :::
 
 ## Step 2: Installing and testing your add-on
@@ -142,6 +143,7 @@ name: "Hello world"
 description: "My first real add-on!"
 version: "1.1.0"
 slug: "hello_world"
+init: false
 arch:
   - aarch64
   - amd64
@@ -173,7 +175,7 @@ Now navigate to [http://homeassistant.local:8000](http://homeassistant.local:800
 
 ## Bonus: Working with add-on options
 
-In the screenshot you've probably seen that our server only served up 1 file: `options.json`. This file contains the user configuration for this add-on. Because we specified two empty objects for the keys "options" and "schema" in our `config.yaml`, the resulted file is currently empty.
+In the screenshot you've probably seen that our server only served up 1 file: `options.json`. This file contains the user configuration for this add-on. Because we specified two empty objects for the keys "options" and "schema" in our `config.yaml`, the resulting file is currently empty.
 
 Let's see if we can get some data into that file!
 

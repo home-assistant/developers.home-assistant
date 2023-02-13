@@ -9,14 +9,16 @@ Every integration has a manifest file to specify basic information about an inte
 {
   "domain": "hue",
   "name": "Philips Hue",
-  "documentation": "https://www.home-assistant.io/components/hue",
-  "issue_tracker": "https://github.com/balloob/hue/issues",
-  "dependencies": ["mqtt"],
   "after_dependencies": ["http"],
   "codeowners": ["@balloob"],
+  "dependencies": ["mqtt"],
+  "documentation": "https://www.home-assistant.io/components/hue",
+  "integration_type": "hub",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/balloob/hue/issues",
+  "loggers": ["aiohue"],
   "requirements": ["aiohue==1.9.1"],
-  "quality_scale": "platinum",
-  "iot_class": "local_polling"
+  "quality_scale": "platinum"
 }
 ```
 
@@ -26,11 +28,12 @@ Or a minimal example that you can copy into your project:
 {
   "domain": "your_domain_name",
   "name": "Your Integration",
-  "documentation": "https://www.example.com",
-  "dependencies": [],
   "codeowners": [],
+  "dependencies": [],
+  "documentation": "https://www.example.com",
+  "integration_type": "hub",
+  "iot_class": "cloud_polling",
   "requirements": [],
-  "iot_class": "cloud_polling"
 }
 ```
 
@@ -50,9 +53,33 @@ The version of the integration is required for custom integrations. The version 
 
 ## Integration Type
 
-Define what kind of integration this is. Currently accepted values are `integration` and `helper`. Helpers are integrations that provide entities to help the user with automations like input boolean, derivative or group.
+Integrations are split into multiple integration types. Each integration
+must provide an `integration_type` in their manifest, that describes its main
+focus.
 
-Defaults to `integration` if not set.
+:::warning
+When not set, we currently default to `hub`. This default is temporary during
+our transition period, every integration should set an `integration_type` and
+it thus will become mandatory in the future.
+:::
+
+| Type |  Description
+| ---- | -----------
+| `device` | Provides a single device like, for example, ESPHome. |
+| `entity` | Provides an basic entity platform, like sensor or light. This should generally not be used. |
+| `hardware` | Provides an hardware integration, like Raspbery Pi or Hardkernel. This should generally not be used. |
+| `helper` | Provides an entity to help the user with automations like input boolean, derivative or group. |
+| `hub` | Provides a hub integration, with multiple devices or services, like Philips Hue. |
+| `service` | Provides a single service, like DuckDNS or AdGuard. |
+| `system` | Provides a system integration and is reserved, should generally not be used. |
+| `virtual` | Not an integration on its own. Instead it points towards another integration or IoT standard. See [virtual integration](#virtual-integration) section. |
+
+:::info
+The difference between a `hub` and a `service` or `device` is defined by the nature
+of the integration. A `hub` provides a gateway to multiple other devices or
+services. `service` and `device` are integrations that provide a single device
+or service per config entry.
+:::
 
 ## Documentation
 
@@ -101,17 +128,17 @@ During the development of a component, it can be useful to test against differen
 
 ```shell
 pip install pychromecast==3.2.0 --target ~/.homeassistant/deps
-hass --skip-pip
+hass --skip-pip-packages pychromecast
 ```
 
-This will use the specified version, and prevent Home Assistant from trying to override it with what is specified in `requirements`.
+This will use the specified version, and prevent Home Assistant from trying to override it with what is specified in `requirements`. To prevent any package from being automatically overridden without specifying dependencies, you can launch Home Assistant with the global `--skip-pip` flag.
 
 If you need to make changes to a requirement to support your component, it's also possible to install a development version of the requirement using `pip install -e`:
 
 ```shell
 git clone https://github.com/balloob/pychromecast.git
 pip install -e ./pychromecast
-hass --skip-pip
+hass --skip-pip-packages pychromecast
 ```
 
 It is also possible to use a public git repository to install a requirement.  This can be useful, for example, to test changes to a requirement dependency before it's been published to PyPI. The following example will install the `except_connect` branch of the `pycoolmaster` library directly from GitHub unless version `0.2.2` is currently installed:
@@ -124,7 +151,70 @@ It is also possible to use a public git repository to install a requirement.  Th
 
 ### Custom integration requirements
 
-Custom integration should only include requirements that are not required by the Core [requirements.txt](https://github.com/home-assistant/core/blob/dev/requirements.txt).
+Custom integrations should only include requirements that are not required by the Core [requirements.txt](https://github.com/home-assistant/core/blob/dev/requirements.txt).
+
+## Loggers
+
+The `loggers` field is a list of names that the integration's requirements use for their [getLogger](https://docs.python.org/3/library/logging.html?highlight=logging#logging.getLogger) calls.
+
+## Bluetooth
+
+If your integration supports discovery via bluetooth, you can add a matcher to your manifest. If the user has the `bluetooth` integration loaded, it will load the `bluetooth` step of your integration's config flow when it is discovered. We support listening for Bluetooth discovery by matching on `connectable` `local_name`, `service_uuid`, `service_data_uuid`, `manufacturer_id`, and `manufacturer_data_start`. The `manufacturer_data_start` field expects a list of bytes encoded as integer values from 0-255. The manifest value is a list of matcher dictionaries. Your integration is discovered if all items of any of the specified matchers are found in the Bluetooth data. It's up to your config flow to filter out duplicates.
+
+Matches for `local_name` must be at least three (3) characters long and may not contain any patterns in the first three (3) characters.
+
+If the device only needs advertisement data, setting `connectable` to `false` will opt-in to receive discovery from Bluetooth controllers that do not have support for making connections such as remote ESPHome devices.
+
+The following example will match Nespresso Prodigio machines:
+
+```json
+{
+  "bluetooth": [
+    {
+      "local_name": "Prodigio_*"
+    }
+  ]
+}
+```
+
+The following example will match service data with a 128 bit uuid used for SwitchBot bot and curtain devices:
+
+```json
+{
+  "bluetooth": [
+    {
+      "service_uuid": "cba20d00-224d-11e6-9fb8-0002a5d5c51b"
+    }
+  ]
+}
+```
+
+If you want to match service data with a 16 bit uuid, you will have to convert it to a 128 bit uuid first, by replacing the 3rd and 4th byte in `00000000-0000-1000-8000-00805f9b34fb` with the 16 bit uuid. For example, for Switchbot sensor devices, the 16 bit uuid is `0xfd3d`, the corresponding 128 bit uuid becomes `0000fd3d-0000-1000-8000-00805f9b34fb`. The following example will therefore match service data with a 16 bit uuid used for SwitchBot sensor devices:
+
+```json
+{
+  "bluetooth": [
+    {
+      "service_data_uuid": "0000fd3d-0000-1000-8000-00805f9b34fb"
+    }
+  ]
+}
+```
+
+The following example will match HomeKit devices:
+
+
+```json
+{
+  "bluetooth": [
+    {
+      "manufacturer_id": 76,
+      "manufacturer_data_start": [6]
+    }
+  ]
+}
+```
+
 
 ## Zeroconf
 
@@ -323,6 +413,78 @@ The following IoT classes are accepted in the manifest:
 - `cloud_push`: Integration of this device happens via the cloud and requires an active internet connection. Home Assistant will be notified as soon as a new state is available.
 - `local_polling`: Offers direct communication with device. Polling the state means that an update might be noticed later.
 - `local_push`: Offers direct communication with device. Home Assistant will be notified as soon as a new state is available.
-- `calculated`: The integration does not handle communication on it's own, but provides a calculated result.
+- `calculated`: The integration does not handle communication on its own, but provides a calculated result.
 
 [iot_class]: https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things/#classifiers
+
+## Virtual integration
+
+Some products are supported by integrations that are not named after the product. For example, Roborock vacuums are integrated via the Xiaomi Miio integration, and the IKEA SYMFONISK product line can be used with the Sonos integration.
+
+There are also cases where a product line only supports a standard IoT standards like Zigbee or Z-Wave. For example, the U-tec ultraloq works via Z-Wave and has no specific dedicated integration. 
+
+For end-users, it can be confusing to find how to integrate those products with Home Asssistant. To help with these above cases, Home Assistant has "Virtual integrations". These integrations are not real integrations but are used to help users find the right integration for their device.
+
+A virtual integration is an integration that just has a single manifest file, without any additional code. There are two types of virtual integrations: A virtual integration supported by another integration and one that uses an existing IoT standard.
+
+:::info
+Virtual integrations can only be provided by Home Assistant Core and not by custom integrations.
+:::
+
+### Supported by
+
+The "Supported by" virtual integration is an integration that points to another integration to provide its implementation. For example, Roborock vacuums are integrated via the Xiaomi Miio (`xiaomi_miio`) integration.
+
+Example manifest:
+
+```json
+{
+  "domain": "roborock",
+  "name": "Roborock",
+  "integration_type": "virtual",
+  "supported_by": "xiaomi_miio",
+}
+```
+
+The `domain` and `name` are the same as with any other integration, but the `integration_type` is set to `virtual`. 
+The logo for the domain of this virtual integration must be added to our [brands repository](https://github.com/home-assistant/brands/), so in this case, a Roborock branding is used.
+
+The `supported_by` is the domain of the integration providing the implementation for this product. In the example above, the Roborock vacuum is supported by the Xiaomi Miio integration and points to its domain `xiaomi_miio`.
+
+Result:
+
+- Roborock is listed on our user documentation website under integrations with an automatically generated stub page that directs the user to the integration to use.
+- Roborock is listed in Home Assistant when clicking "add integration". When selected, we explain to the user that this product is integrated using a different integration, then the user continues to the Xioami Miio config flow.
+
+### IoT standards
+
+The "IoT Standards" virtual integration is an integration that uses an existing IoT standard to provide connectivity with the device. For example, the U-tec ultraloq works via Z-Wave and has no specific dedicated integration.
+
+Example manifest:
+
+```json
+{
+  "domain": "ultraloq",
+  "name": "ultraloq",
+  "integration_type": "virtual",
+  "iot_standards": ["zwave"],
+}
+
+```
+
+The `domain` and `name` are the same as with any other integration, but the `integration_type` is set to `virtual`. 
+The logo for the domain of this virtual integration should be added to our [brands repository](https://github.com/home-assistant/brands/).
+
+The `iot_standards` is the standard this product uses for connectivity. In the example above, the U-tech ultraloq products use Z-Wave to integrate with Home Assistant.
+
+Result:
+
+- U-tech ultraloq is listed on our user documentation website under integrations with an automatically generated stub page that directs the user to the integration to use.
+- U-tech ultraloq is listed in Home Assistant when clicking "add integration". When selected, we guide the user in adding this Z-Wave device (and in case Z-Wave isn't set up yet, into setting up Z-Wave first).
+
+:::info
+Brands also [support setting IoT standards](/docs/creating_integration_brand/#iot-standards).
+
+It is preferred to set IoT standards on the brand level, and only use a virtual
+integration in case it would impose confusion for the end user.
+:::

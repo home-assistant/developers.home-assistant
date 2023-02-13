@@ -13,14 +13,13 @@ To see more details about each endpoint, click on it to expand it.
 ### Addons
 
 <ApiEndpoint path="/addons" method="get">
-Return overview information about add-ons and add-on repositories.
+Return overview information about installed add-ons.
 
 **Payload:**
 
 | key          | type | description                                        |
 | ------------ | ---- | -------------------------------------------------- |
 | addons       | list | A list of [Addon models](api/supervisor/models.md#addon)           |
-| repositories | list | A list of [Repository models](api/supervisor/models.md#repository) |
 
 **Example response:**
 
@@ -44,15 +43,6 @@ Return overview information about add-ons and add-on repositories.
       "url": null,
       "icon": false,
       "logo": false
-    }
-  ],
-  "repositories": [
-    {
-      "slug": "12345678",
-      "name": "Awesome repository",
-      "source": "https://github.com/awesome/repository",
-      "url": null,
-      "maintainer": "Awesome maintainer <awesome@example.com>"
     }
   ]
 }
@@ -156,6 +146,7 @@ Get details about an add-on
 | video               | boolean            | `true` if video is enabled                                                             |
 | watchdog            | boolean            | `true` if watchdog is enabled                                                          |
 | webui               | string or null     | The URL to the web UI for the add-on                                                   |
+| signed              | boolean            | True if the image is signed and trust                                                  |
 
 **Example response:**
 
@@ -235,7 +226,8 @@ Get details about an add-on
   "version": "1.0.0",
   "video": false,
   "watchdog": true,
-  "webui": "http://[HOST]:1337/xy/zx"
+  "webui": "http://[HOST]:1337/xy/zx",
+  "signed": false
 }
 ```
 
@@ -271,7 +263,7 @@ To reset customized network/audio/options, set it `null`.
 | options       | dictionary    | The add-on configuration                |
 | audio_output  | float or null | The index of the audio output device    |
 | audio_input   | float or null | The index of the audio input device     |
-| ingress_panel | string        | The path for the ingress panel          |
+| ingress_panel | boolean       | `true` if ingress_panel is enabled      |
 | watchdog      | boolean       | `true` if watchdog is enabled           |
 
 **You need to supply at least one key in the payload.**
@@ -296,11 +288,11 @@ To reset customized network/audio/options, set it `null`.
 
 <ApiEndpoint path="/addons/<addon>/options/validate" method="post">
 Run a configuration validation against the current stored add-on configuration or payload.
-  
+
 **Payload:**
 
 Optional the raw add-on options.
-  
+
 **Returned data:**
 
 | key              | type        | description                      |
@@ -726,6 +718,43 @@ Return a list of [Backups](api/supervisor/models.md#backup)
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/backups/info" method="get">
+
+Return information about backup manager.
+
+**Returned data:**
+
+| key              | type       | description                                          |
+| ---------------- | ---------- | ---------------------------------------------------- |
+| backups          | list       | A list of [Backups](api/supervisor/models.md#backup) |
+| days_until_stale | int        | Number of days until a backup is considered stale    |
+
+**Example response:**
+
+```json
+{
+  "backups": [
+    {
+      "slug": "skuwe823",
+      "date": "2020-09-30T20:25:34.273Z",
+      "name": "Awesome backup",
+      "type": "partial",
+      "size": 44,
+      "protected": true,
+      "compressed": true,
+      "content": {
+        "homeassistant": true,
+        "addons": ["awesome_addon"],
+        "folders": ["ssl", "media"]
+      }
+    }
+  ],
+  "days_until_stale": 30
+}
+```
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/backups/new/full" method="post">
 
 Create a full backup.
@@ -786,6 +815,19 @@ Create a partial backup.
   "slug": "skuwe823"
 }
 ```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/backups/options" method="post">
+Update options for backup manager, you need to supply at least one of the payload keys to the API call.
+
+**Payload:**
+
+| key              | type           | description                                           |
+| ---------------- | -------------- | ----------------------------------------------------- |
+| days_until_stale | int            | Set number of days until a backup is considered stale |
+
+**You need to supply at least one key in the payload.**
 
 </ApiEndpoint>
 
@@ -1112,6 +1154,7 @@ Return information about the DNS plugin.
 
 | key              | type    | description                      |
 | ---------------- | ------- | -------------------------------- |
+| fallback         | bool    | Try fallback DNS on failure      |
 | host             | string  | The IP address of the plugin     |
 | llmnr            | bool    | Can resolve LLMNR hostnames      |
 | locals           | list    | A list of DNS servers            |
@@ -1132,7 +1175,8 @@ Return information about the DNS plugin.
   "servers": ["dns://8.8.8.8"],
   "locals": ["dns://127.0.0.18"],
   "mdns": true,
-  "llmnr": false
+  "llmnr": false,
+  "fallback": true
 }
 ```
 
@@ -1147,9 +1191,10 @@ Set DNS options
 
 **Payload:**
 
-| key     | type | optional | description           |
-| ------- | ---- | -------- | --------------------- |
-| servers | list | True     | A list of DNS servers |
+| key      | type | optional | description                 |
+| -------  | ---- | -------- | --------------------------- |
+| fallback | bool | True     | Enable/Disable fallback DNS |
+| servers  | list | True     | A list of DNS servers       |
 
 **You need to supply at least one key in the payload.**
 
@@ -1339,7 +1384,7 @@ Return information about the host.
 | apparmor_version | string or null | The AppArmor version from host            |
 | boot_timestamp   | int            | The timestamp for the last boot in microseconds |
 | broadcast_llmnr  | bool or null   | Host is broadcasting its LLMNR hostname   |
-| broadcast_mdns   | bool or null   | Host is broadcasting its MulticastDNS hostname | 
+| broadcast_mdns   | bool or null   | Host is broadcasting its MulticastDNS hostname |
 | chassis          | string or null | The chassis type                          |
 | cpe              | string or null | The local CPE                             |
 | deployment       | string or null | The deployment stage of the OS if any     |
@@ -1380,7 +1425,107 @@ Return information about the host.
 </ApiEndpoint>
 
 <ApiEndpoint path="/host/logs" method="get">
-Get the dmesg logs from the host.
+
+Get systemd Journal logs from the host. Returns log entries in plain text, one
+log record per line.
+
+**HTTP Request Headers**
+
+| Header   | optional | description                                    |
+| -------- | -------- | ---------------------------------------------- |
+| Accept   | true     | Type of data (currently only text/plain)       |
+| Range    | true     | Range of log entries. The format is `entries=cursor[[:num_skip]:num_entries]` |
+
+:::tip
+To get the last log entries the Range request header supports negative values
+as `num_skip`. E.g. `Range: entries=:-9:` returns the last 10 entries. Or
+`Range: entries=:-200:100` to see 100 entries starting from the one 200 ago.
+:::
+
+API returns the last 100 lines by default. Provide a value for `Range` to see
+logs further in the past.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/host/logs/follow" method="get">
+
+Identical to `/host/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/host/logs/identifiers">
+
+Returns a list of syslog identifiers from the systemd journal that you can use
+with `/host/logs/identifiers/<identifier>` and `/host/logs/boots/<bootid>/identifiers/<identifier>`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/host/logs/identifiers/<identifier>" method="get">
+
+Get systemd Journal logs from the host for entries related to a specific log
+identifier. Some examples of useful identifiers here include
+
+- `audit` - If developing an apparmor profile shows you permission issues
+- `NetworkManager` - Shows NetworkManager logs when having network issues
+- `bluetoothd` - Shows bluetoothd logs when having bluetooth issues
+
+A call to `GET /host/logs/identifiers` will show the complete list of possible
+values for `identifier`.
+
+Otherwise it provides the same functionality as `/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/host/logs/identifiers/<identifier>/follow" method="get">
+
+Identical to `/host/logs/identifiers/<identifier>` except it continuously returns
+new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/host/logs/boots">
+
+Returns a dictionary of boot IDs for this system that you can use with
+`/host/logs/boots/<bootid>` and `/host/logs/boots/<bootid>/identifiers/<identifier>`.
+
+The key for each item in the dictionary is the boot offset. 0 is the current boot,
+a negative number denotes how many boots ago that boot was.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/host/logs/boots/<bootid>" method="get">
+
+Get systemd Journal logs from the host for entries related to a specific boot.
+Call `GET /host/info/boots` to see the boot IDs. Alternatively you can provide a
+boot offset:
+
+- 0 - The current boot
+- Negative number - Count backwards from current boot (-1 is previous boot)
+- Positive number - Count forward from last known boot (1 is last known boot)
+
+Otherwise it provides the same functionality as `/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/host/logs/boots/<bootid>/follow" method="get">
+
+Identical to `/host/logs/boots/<bootid>` except it continuously returns
+new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/host/logs/boots/<bootid>/identifiers/<identifier>" method="get">
+
+Get systemd Journal logs entries for a specific log identifier and boot.
+A combination of `/host/logs/boots/<bootid>` and `/host/logs/identifiers/<identifier>`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/host/logs/boot/<bootid>/<identifier>/entries/follow" method="get">
+
+Identical to `/host/logs/boots/<bootid>/identifiers/<identifier>` except it continuously
+returns new log entries.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/host/options" method="post">
@@ -1534,13 +1679,12 @@ Returns information about available updates
 **Returned data:**
 
 | key | type | description |
--- | -- | --
-update_type | string | `addon`, `os`, `core` or `supervisor`
-name | string | Returns the name (only if the `update_type` is `addon`)
-icon | string | Returns the path for the icon if any (only if the `update_type` is `addon`)
-version_latest | string | Returns the available version
-panel_path | string | Returns path where the UI can be loaded
-
+| -- | -- | -- |
+| update_type | string | `addon`, `os`, `core` or `supervisor` |
+| name | string | Returns the name (only if the `update_type` is `addon`) |
+| icon | string | Returns the path for the icon if any (only if the `update_type` is `addon`) |
+| version_latest | string | Returns the available version |
+| panel_path | string | Returns path where the UI can be loaded |
 
 </ApiEndpoint>
 
@@ -1931,7 +2075,7 @@ Returns possible targets for the new data partition.
 ```
 
 </ApiEndpoint>
-  
+
 <ApiEndpoint path="/os/datadisk/move" method="post">
 
 Move datadisk to a new location, **This will also reboot the device!**
@@ -1941,6 +2085,54 @@ Move datadisk to a new location, **This will also reboot the device!**
 | key     | type   | description                                                       |
 | ------- | ------ | ----------------------------------------------------------------- |
 | device  | string | Path to the new device which should be use as the target for the data migration |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/os/boards/{board}" method="get">
+
+Returns information about your board if it has features or settings
+that can be modified from Home Assistant. The value for `board`
+is the value in the `board` field returned by `/os/info`.
+
+Boards with such options are documented below.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/os/boards/yellow" method="get">
+
+If running on a yellow board, returns current values for its settings.
+
+**Returned data:**
+
+| key           | type    | description                  |
+| ------------- | ------- | ---------------------------- |
+| disk_led      | boolean | Is the disk LED enabled      |
+| heartbeat_led | boolean | Is the heartbeat LED enabled |
+| power_led     | boolean | Is the power LED enabled     |
+
+**Example response:**
+
+```json
+{
+  "disk_led": true,
+  "heartbeat_led": true,
+  "power_led": false
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/os/boards/yellow" method="post">
+
+If running on a yellow board, changes one or more of its settings.
+
+**Payload:**
+
+| key           | type    | description                              |
+| ------------- | ------- | ---------------------------------------- |
+| disk_led      | boolean | Enable/disable disk LED enabled          |
+| heartbeat_led | boolean | Enable/disable the heartbeat LED enabled |
+| power_led     | boolean | Enable/disable the power LED enabled     |
 
 </ApiEndpoint>
 
@@ -1977,7 +2169,8 @@ Move datadisk to a new location, **This will also reboot the device!**
       "uuid": "B9923620C9A11EBBDC3C403FC2CA371",
       "type": "clear_backups",
       "context": "system",
-      "reference": null
+      "reference": null,
+      "auto": false
     }
   ],
   "checks": [
@@ -2000,6 +2193,34 @@ Apply a suggested action
 <ApiEndpoint path="/resolution/suggestion/<uuid>" method="delete">
 
 Dismiss a suggested action
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/resolution/issue/<uuid>/suggestions" method="get">
+
+Get suggestions that would fix an issue if applied.
+
+**Returned data:**
+
+| key         | type       | description                                                                |
+| ----------- | ---------- | -------------------------------------------------------------------------- |
+| suggestions | list       | A list of [Suggestion models](api/supervisor/models.md#suggestion) actions |
+
+**Example response:**
+
+```json
+{
+  "suggestions": [
+    {
+      "uuid": "B9923620C9A11EBBDC3C403FC2CA371",
+      "type": "clear_backups",
+      "context": "system",
+      "reference": null,
+      "auto": false
+    }
+  ]
+}
+```
 
 </ApiEndpoint>
 
@@ -2230,15 +2451,38 @@ Returns information about a store add-on
 
 ```json
 {
-  "name": "Awesome add-on",
-  "slug": "7kshd7_awesome",
+  "advanced": false,
+  "apparmor": "default",
+  "arch": ["armhf", "aarch64", "i386", "amd64"],
+  "auth_api": true,
+  "available": true,
+  "build": false,
   "description": "Awesome description",
-  "repository": "https://example.com/addons",
-  "version": "1.0.0",
-  "installed": "1.0.0",
+  "detached": false,
+  "docker_api": false,
+  "documentation": true,
+  "full_access": true,
+  "hassio_api": false,
+  "hassio_role": "manager",
+  "homeassistant_api": true,
+  "homeassistant": "2021.2.0b0",
+  "host_network": false,
+  "host_pid": false,
   "icon": false,
+  "ingress": true,
+  "installed": false,
   "logo": true,
-  "state": "started"
+  "long_description": "lorem ipsum",
+  "name": "Awesome add-on",
+  "rating": 5,
+  "repository": "core",
+  "signed": false,
+  "slug": "7kshd7_awesome",
+  "stage": "stable",
+  "update_available": false,
+  "url": "https://example.com/addons/tree/main/awesome_addon",
+  "version_latest": "1.0.0",
+  "version": "1.0.0"
 }
 ```
 
@@ -2260,6 +2504,22 @@ Update an add-on from the store.
 | ------- | ------ | -------------------------------------------------------------- |
 | backup | boolean | Create a partial backup of the add-on, default is false |
 
+</ApiEndpoint>
+
+<ApiEndpoint path="/store/addons/<addon>/changelog" method="get">
+Get the changelog for an add-on.
+</ApiEndpoint>
+
+<ApiEndpoint path="/store/addons/<addon>/documentation" method="get">
+Get the documentation for an add-on.
+</ApiEndpoint>
+
+<ApiEndpoint path="/store/addons/<addon>/icon" method="get">
+Get the add-on icon
+</ApiEndpoint>
+
+<ApiEndpoint path="/store/addons/<addon>/logo" method="get">
+Get the add-on logo
 </ApiEndpoint>
 
 <ApiEndpoint path="/store/reload" method="post">
@@ -2288,6 +2548,26 @@ Returns a list of store repositories
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/store/repositories" method="post">
+
+Add an addon repository to the store
+
+**Payload:**
+
+| key        | type   | description                                      |
+| ---------- | ------ | ------------------------------------------------ |
+| repository | string | URL of the addon repository to add to the store. |
+
+**Example payload:**
+
+```json
+{
+  "repository": "https://example.com/addons"
+}
+```
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/store/repositories/<repository>" method="get">
 
 Returns information about a store repository
@@ -2303,6 +2583,12 @@ Returns information about a store repository
   "maintainer": "Awesome Maintainer"
 }
 ```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/store/repositories/<repository>" method="delete">
+
+Remove an unused addon repository from the store.
 
 </ApiEndpoint>
 
@@ -2344,6 +2630,38 @@ Returns information about the security features
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/security/integrity" method="post">
+
+Run a full platform integrity check.
+
+**Returned data:**
+
+| key | type | description |
+| ----| ---- | ----------- |
+| supervisor | str | `pass`, `error`, `failed`, `untested` |
+| core | str | `pass`, `error`, `failed`, `untested` |
+| plugins | dict | A dictionary with key per plugin as `pass`, `error`, `failed`, `untested` |
+| addons | dict | A dictionary with key per addon as `pass`, `error`, `failed`, `untested` |
+
+**Example response:**
+
+```json
+{
+  "supervisor": "pass",
+  "core": "pass",
+  "plugins": {
+    "audio": "pass",
+    "cli": "pass"
+  },
+  "addons": {
+    "core_ssh": "untested",
+    "xj3493_test": "pass"
+  }
+}
+```
+
+</ApiEndpoint>
+
 ### Supervisor
 
 <ApiEndpoint path="/supervisor/info" method="get">
@@ -2368,8 +2686,8 @@ Returns information about the supervisor
 | debug               | bool         | Debug is active                                               |
 | debug_block         | bool         | `true` if debug block is enabled                              |
 | diagnostics         | bool or null | Sending diagnostics is enabled                                |
-| addons              | list         | A list of installed [Addon models](api/supervisor/models.md#addon)            |
 | addons_repositories | list         | A list of add-on repository URL's as strings                  |
+| auto_update         | bool         | Is auto update enabled for supervisor                         |
 
 **Example response:**
 
@@ -2389,20 +2707,8 @@ Returns information about the supervisor
   "debug": false,
   "debug_block": false,
   "diagnostics": null,
-  "addons": [
-    {
-      "name": "Awesome add-on",
-      "slug": "7kshd7_awesome",
-      "description": "Awesome description",
-      "repository": "https://example.com/addons",
-      "version": "1.0.0",
-      "installed": "1.0.0",
-      "icon": false,
-      "logo": true,
-      "state": "started"
-    }
-  ],
-  "addons_repositories": ["https://example.com/addons"]
+  "addons_repositories": ["https://example.com/addons"],
+  "auto_update": true
 }
 ```
 
@@ -2430,6 +2736,7 @@ You need to call `/supervisor/reload` after updating the options.
 | debug_block         | bool   | Enable debug block                                     |
 | logging             | string | Set logging level                                      |
 | addons_repositories | list   | Set a list of URL's as strings for add-on repositories |
+| auto_update         | bool   | Enable/disable auto update for supervisor              |
 
 </ApiEndpoint>
 

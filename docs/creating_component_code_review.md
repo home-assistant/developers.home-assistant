@@ -66,6 +66,10 @@ Keep a new integration to the minimum functionality needed for someone to get va
 - Do not solve several issues in a single pull request.
 - Do not submit pull requests that depend on other work which is still unmerged.
 
+It may be tempting to open a large PR when "modernizing" an integration that hasn't been touched in a while to take advantage of all the latest features available. The right approach is to break the features down into independent functional changes as best you can and to submit the PRs sequentially.
+
+One strategy for handling sequential PRs is to create a branch for the `next` PR off the `current` PR's branch, which you can then start writing code against. This strategy is advantageous if you have split up the PRs such that one is dependent on the previous one since you are working off of the code that will be in `dev` once the PR is merged. If you add additional commits to the `current` PR because of changes/review feedback, you can rebase your `next` PR's branch and more easily incorporate any merge conflicts. Once your `current` PR has been merged, squash the commits from the `current` PR branch in the `next` PR branch and then rebase on `dev`. Then you can submit your `next` PR branch for review and rinse and repeat as needed.
+
 ### 6. Event names
 
 Prefix component event names with the domain name. For example, use `netatmo_person` instead of `person` for the `netatmo` component. Please be mindful of the data structure as documented on our [Data Science portal](https://data.home-assistant.io/docs/events/#database-table).

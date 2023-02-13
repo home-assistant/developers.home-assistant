@@ -11,11 +11,11 @@ The Home Assistant instance contains four objects to help you interact with the 
 
 | Object | Description |
 | ------ | ----------- |
-| `hass` | This is the instance of Home Assistant. Allows starting, stopping and enqueuing new jobs. [See available methods.](https://dev-docs.home-assistant.io/en/master/api/core.html#homeassistant.core.HomeAssistant)
-| `hass.config` | This is the core configuration of Home Assistant exposing location, temperature preferences and config directory path. [See available methods.](https://dev-docs.home-assistant.io/en/master/api/core.html#homeassistant.core.Config)
-| `hass.states` | This is the StateMachine. It allows you to set states and track when they are changed. [See available methods.](https://dev-docs.home-assistant.io/en/master/api/core.html#homeassistant.core.StateMachine) |
-| `hass.bus` | This is the EventBus. It allows you to trigger and listen for events. [See available methods.](https://dev-docs.home-assistant.io/en/master/api/core.html#homeassistant.core.EventBus) |
-| `hass.services` | This is the ServiceRegistry. It allows you to register services. [See available methods.](https://dev-docs.home-assistant.io/en/master/api/core.html#homeassistant.core.ServiceRegistry) |
+| `hass` | This is the instance of Home Assistant. Allows starting, stopping and enqueuing new jobs. [See available methods.](https://dev-docs.home-assistant.io/en/dev/api/core.html#homeassistant.core.HomeAssistant)
+| `hass.config` | This is the core configuration of Home Assistant exposing location, temperature preferences and config directory path. [See available methods.](https://dev-docs.home-assistant.io/en/dev/api/core.html#homeassistant.core.Config)
+| `hass.states` | This is the StateMachine. It allows you to set states and track when they are changed. [See available methods.](https://dev-docs.home-assistant.io/en/dev/api/core.html#homeassistant.core.StateMachine) |
+| `hass.bus` | This is the EventBus. It allows you to trigger and listen for events. [See available methods.](https://dev-docs.home-assistant.io/en/dev/api/core.html#homeassistant.core.EventBus) |
+| `hass.services` | This is the ServiceRegistry. It allows you to register services. [See available methods.](https://dev-docs.home-assistant.io/en/dev/api/core.html#homeassistant.core.ServiceRegistry) |
 
 <img class='invertDark'
   alt='Overview of the Home Assistant core architecture'

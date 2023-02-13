@@ -36,6 +36,7 @@ import logging
 import async_timeout
 
 from homeassistant.components.light import LightEntity
+from homeassistant.core import callback
 from homeassistant.exceptions import ConfigEntryAuthFailed
 from homeassistant.helpers.update_coordinator import (
     CoordinatorEntity,
@@ -84,7 +85,7 @@ class MyCoordinator(DataUpdateCoordinator):
         )
         self.my_api = my_api
 
-    async def _async_update_data():
+    async def _async_update_data(self):
         """Fetch data from API endpoint.
 
         This is the place to pre-process the data to lookup tables
@@ -94,7 +95,11 @@ class MyCoordinator(DataUpdateCoordinator):
             # Note: asyncio.TimeoutError and aiohttp.ClientError are already
             # handled by the data update coordinator.
             async with async_timeout.timeout(10):
-                return await self.my_api.fetch_data()
+                # Grab active context variables to limit data required to be fetched from API
+                # Note: using context is not required if there is no need or ability to limit
+                # data retrieved from API.
+                listening_idx = set(self.async_contexts())
+                return await self.my_api.fetch_data(listening_idx)
         except ApiAuthError as err:
             # Raising ConfigEntryAuthFailed will cancel future updates
             # and start a config flow with SOURCE_REAUTH (async_step_reauth)
@@ -116,7 +121,7 @@ class MyEntity(CoordinatorEntity, LightEntity):
 
     def __init__(self, coordinator, idx):
         """Pass coordinator to CoordinatorEntity."""
-        super().__init__(coordinator)
+        super().__init__(coordinator, context=idx)
         self.idx = idx
 
     @callback

@@ -2,11 +2,11 @@
 title: "Presenting your addon"
 ---
 
-If you decide to share your add-on to the public, paying attention to details is recommended. Of course, your add-on should have a proper name and description, but Home Assistant also gives you some other tools to present your add-on even nicer.
+If you choose to make your add-on available to the public, providing clear information, graphics and security reassurances will help attract users.  The recommendations below are a guideline for presenting your add-on.
 
 ## Adding intro
 
-This shows in add-on store and give the user a short instruction what the addon can.
+This shows in the add-on store and gives the user a short description of what the add-on can do.
 
 This file containing the intro is usually referred to as the "README", which is generally published as the `README.md` file.
 
@@ -18,13 +18,13 @@ This file containing the documentation is usually referred to as the "DOCS", whi
 
 ## Add-on icon & logo
 
-A picture is worth a thousand words. Therefore, your add-on can be improved by adding a proper image icon and logo. Those images are used when showing your add-on in the Home Assistant Supervisor panel and which will significantly improve the visual representation of your add-on.
+A picture is worth a thousand words. Therefore, your add-on can be improved by adding a proper image icon and logo. These images are used when showing your add-on in the Home Assistant Supervisor panel and will significantly improve the visual representation of your add-on.
 
 Requirements for the logo of your add-on:
 
 - The logo must be in the Portable Network Graphics format (`.png`).
 - The filename must be `logo.png`.
-- It is recommended to keep the logo size around 250x100px. You may choose to use a different size or aspect ratio as you seem fit for your add-on.
+- It is recommended to keep the logo size around 250x100px. You may choose to use a different size or aspect ratio as you see fit for your add-on.
 
 Requirements for the icon of your add-on:
 
@@ -35,15 +35,15 @@ Requirements for the icon of your add-on:
 
 ## Keeping a changelog
 
-It is likely you are going to release newer versions of your add-on in the future. In case that happens, the users of your add-on would see an upgrade notice and probably want to know what changes were made in the latest version.
+It is likely you are going to release newer versions of your add-on in the future. In case that happens, the users of your add-on will see an upgrade notice and probably want to know what changes were made in the latest version.
 
 A changelog is a file which contains a curated, chronologically ordered list of notable changes for each version of your add-on and is generally published as the `CHANGELOG.md` file.
 
-If you are in need of a guide on keeping a changelog, we would recommend checking the [keep a changelog](http://keepachangelog.com) website. They have developed a standard that is used by many open source projects around the world.
+For guidance on keeping a changelog, we recommend the [keep a changelog](http://keepachangelog.com) website. They have developed a standard used by many open source projects around the world.
 
 ## AppArmor
 
-In the event, an API call returns something you, as a developer were not expecting, access to too many resources could be a liability for your users. As an add-on developer, it is your responsibility to ensure your add-on will not ruin your user's machine, or perform actions that you would never expect. That's where AppArmor comes in.
+In the event that an API call returns something you, as a developer were not expecting, access to too many resources could be a liability for your users. As an add-on developer, it is your responsibility to ensure your add-on will not ruin your user's machine, or perform actions that you would never expect. That's where AppArmor comes in.
 
 While your talents in input validation, handling sensitive data and other defensive programming tactics are not being judged here, AppArmor is your add-on's second line of defense against malicious API calls, malformed settings or other forms of system hijacking.
 
@@ -60,40 +60,67 @@ apparmor.txt
 
 profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
   #include <abstractions/base>
-  
+
   # Capabilities
   file,
-  signal,
+  signal (send) set=(kill,term,int,hup,cont),
 
   # S6-Overlay
-  /init rix,
+  /init ix,
   /bin/** ix,
   /usr/bin/** ix,
-  /etc/s6/** rix,
-  /run/s6/** rwix,
+  /run/{s6,s6-rc*,service}/** ix,
+  /package/** ix,
+  /command/** ix,
   /etc/services.d/** rwix,
   /etc/cont-init.d/** rwix,
   /etc/cont-finish.d/** rwix,
-  /run/** rwk,
+  /run/{,**} rwk,
+  /dev/tty rw,
 
   # Bashio
   /usr/lib/bashio/** ix,
-  /tmp/** rw,
+  /tmp/** rwk,
 
   # Access to options.json and other files within your addon
   /data/** rw,
-  
+
   # Start new profile for service
-  /usr/bin/myprogram cx,
-  
-  profile /usr/bin/myprogram flags=(attach_disconnected,mediate_deleted) {
+  /usr/bin/myprogram cx -> myprogram,
+
+  profile myprogram flags=(attach_disconnected,mediate_deleted) {
     #include <abstractions/base>
-    
+
     # Receive signals from S6-Overlay
-    signal receive,
+    signal (receive) peer=*_ADDON_SLUG,
+
+    # Access to options.json and other files within your addon
+    /data/** rw,
+
+    # Access to mapped volumes specified in config.json
+    /share/** rw,
+
+    # Access required for service functionality
+    /usr/bin/myprogram r,
+    /bin/bash rix,
+    /bin/echo ix,
+    /etc/passwd r,
+    /dev/tty rw,
   }
 }
 ```
+
+When working on this for your own add-ons, the following tips should help you get started:
+
+1. The S6 part of this is fairly standard. You may need to add things to accommodate your setup scripts but generally don't remove anything.
+2. If a service being run provides an AppArmor profile, apply that to the service. Always prefer one written by the developers.
+3. If there isn't one for a service and you want to make one then do the following:
+  a. Add minimum required access you're aware of. Things you definitely know the service needs
+  b. Add `complain` as a flag to the profile
+  c. Run the add-on and review the audit log with `journalctl _TRANSPORT="audit" -g 'apparmor="ALLOWED"`
+  d. Add access as necessary until using the add-on does not generate any audit warnings
+  e. Remove the `complain` flag so ungranted access is DENIED not ALLOWED
+4. Repeat #3 when updating the service as new access may be required
 
 ## Ingress
 
@@ -183,6 +210,7 @@ Each add-on starts with a base rating of 5, on a scale of 1 to 6. Depending on d
 |---|---|---|
 | Use `ingress: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | +2 | overrides `auth_api` rating |
 | Use `auth_api: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | +1 | overridden by `ingress` |
+| Add-on is signed with [CodeNotary](https://cas.codenotary.com/)| +1||
 | Use custom [`apparmor.txt`](/docs/add-ons/presentation#apparmor)| +1| Rating applied after installation |
 | Set `apparmor: false` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -1 | |
 | Use `privileged: NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_PTRACE`, `SYS_MODULE`, or `DAC_READ_SEARCH`, or `kernel_modules: ` used in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options)| -1 | Rating applied only once if multiple are used. |

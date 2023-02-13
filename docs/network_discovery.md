@@ -7,9 +7,10 @@ Some integrations may need to discover devices on the network via [mDNS/Zeroconf
 
 Home Assistant has built-in helpers to support mDNS/Zeroconf and SSDP. If your integration uses another discovery method that needs to determine which network interfaces to use to broadcast traffic, the [Network](https://www.home-assistant.io/integrations/network/) integration provides a helper API to access the user's interface preferences.
 
+
 ## mDNS/Zeroconf
 
-Home Assistant uses the [python-zeroconf](https://github.com/jstasiak/python-zeroconf) package for mDNS support. As running multiple mDNS implementations on a single host is not recommended, Home Assistant provides internal helper APIs to access the running `Zeroconf` and `AsyncZeroconf` instances.
+Home Assistant uses the [python-zeroconf](https://github.com/python-zeroconf/python-zeroconf) package for mDNS support. As running multiple mDNS implementations on a single host is not recommended, Home Assistant provides internal helper APIs to access the running `Zeroconf` and `AsyncZeroconf` instances.
 
 Before using these helpers, be sure to add `zeroconf` to `dependencies` in your integration's [`manifest.json`](creating_integration_manifest.md)
 
@@ -200,4 +201,41 @@ for adapter in adapters:
         local_ip = ip_info["address"]
         network_prefix = ip_info["network_prefix"]
         ip_net = ip_network(f"{local_ip}/{network_prefix}", False)
+```
+
+## USB
+
+The USB integration discovers new USB devices at startup, when the integrations page is accessed, and when they are plugged in if the underlying system has support for `pyudev`.
+
+### Checking if a specific adapter is plugged in
+
+Call the `async_is_plugged_in` API to check if a specific adapter is on the system.
+
+```python
+from homeassistant.components import usb
+
+...
+
+if not usb.async_is_plugged_in(hass, {"serial_number": "A1234", "manufacturer": "xtech"}):
+   raise ConfigEntryNotReady("The USB device is missing")
+
+```
+
+### Knowing when to look for new compatible USB devices
+
+Call the `async_register_scan_request_callback` API to request a callback when new compatible USB devices may be available.
+
+```python
+from homeassistant.components import usb
+from homeassistant.core import callback
+
+...
+
+@callback
+def _async_check_for_usb() -> None:
+    """Check for new compatible bluetooth USB adapters."""
+
+entry.async_on_unload(
+    bluetooth.async_register_scan_request_callback(hass, _async_check_for_usb)
+)
 ```

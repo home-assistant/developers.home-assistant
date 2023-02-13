@@ -92,7 +92,7 @@ To wire it up: Given a `TRIGGER_SCHEMA` config, make sure the `action` is called
 For example, you might attach the trigger and action to [Events fired](integration_events.md) on the event bus by your integration.
 
 ```python
-async def async_attach_trigger(hass, config, action, automation_info):
+async def async_attach_trigger(hass, config, action, trigger_info):
     """Attach a trigger."""
     event_config = event_trigger.TRIGGER_SCHEMA({
         event_trigger.CONF_PLATFORM: "event",
@@ -103,7 +103,7 @@ async def async_attach_trigger(hass, config, action, automation_info):
         },
     }
     return await event_trigger.async_attach_trigger(
-        hass, event_config, action, automation_info, platform_type="device"
+        hass, event_config, action, trigger_info, platform_type="device"
     )
 ```
 

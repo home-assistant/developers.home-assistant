@@ -8,6 +8,6 @@ Unlike localized strings merged in the `home-assistant` repository, custom compo
 
 These files follow the same formatting as [backend translation string files](internationalization/core.md), but a copy will exist for each translated language.
 
-The language codes follow the [BCP47](https://tools.ietf.org/html/bcp47) format. The [frontend translation files](https://github.com/home-assistant/frontend/tree/master/translations) can also be referred to if you are unsure of the correct language code to use.
+The language codes follow the [BCP47](https://tools.ietf.org/html/bcp47) format. The [frontend translation files](https://github.com/home-assistant/frontend/tree/master/src/translations) can also be referred to if you are unsure of the correct language code to use.
 
 To make sure that your translation files are correct, test with our integration validator Hassfest. [Set up instructions here.](https://developers.home-assistant.io/blog/2020/04/16/hassfest)

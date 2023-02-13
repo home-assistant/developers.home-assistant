@@ -1,38 +1,47 @@
 ---
 title: "Built-in intents"
+toc_max_heading_level: 2
 ---
 
-Home Assistant comes with a couple of built-in intents. These intents aim to offer similar functionality as exposed via the services. All built-in intents are prefixed with "Hass" to avoid collision with user defined intents.
+import intents from '!!yaml-loader!../intents/intents.yaml';
 
-## Core
+The following intents are supported by Home Assistant:
 
-### HassTurnOff
+<>
+{
+  Object.entries(intents)
+  .filter(([intent, info]) => !intent.startsWith("HassClimate"))
+  .map(
+    ([intent, info]) =>
+      <>
+        <h3>{intent}</h3>
+        <p>{info.description}</p>
+        <b>Slots</b>
+        {info.slots && (
+          <ul>
+            {Object.entries(info.slots).map(([slot, slotInfo]) => (
+              <li>
+                <b>{slot}</b> - {slotInfo.description}
+              </li>
+            ))}
+          </ul>
+        )}
+        <p><small>
+          <a href={`https://www.home-assistant.io/integrations/${info.domain}`}>Provided by the <code>{info.domain}</code> integration.</a>
+        </small></p>
+      </>
+  )
+}
+</>
 
-Turn an entity off.
+## Deprecated intents
 
-| Slot name | Type | Required | Description
-| --------- | ---- | -------- | -----------
-| name | string | Yes | Name of the entity to turn off.
+These are old intents that are not supported by template matching sentences and are planned to be removed or replaced.
 
-### HassTurnOn
-
-Turn an entity on.
-
-| Slot name | Type | Required | Description
-| --------- | ---- | -------- | -----------
-| name | string | Yes | Name of the entity to turn on.
-
-### HassToggle
-
-Toggle the state of an entity.
-
-| Slot name | Type | Required | Description
-| --------- | ---- | -------- | -----------
-| name | string | Yes | Name of the entity to toggle.
-
-## Cover
 
 ### HassOpenCover
+
+_Deprecated; use `HassTurnOn` instead._
 
 Open a cover.
 
@@ -42,13 +51,21 @@ Open a cover.
 
 ### HassCloseCover
 
+_Deprecated; use `HassTurnOff` instead._
+
 Close a cover.
 
 | Slot name | Type | Required | Description
 | --------- | ---- | -------- | -----------
 | name | string | Yes | Name of the cover entity to close.
 
-## Humidifier
+### HassToggle
+
+Toggle the state of an entity.
+
+| Slot name | Type | Required | Description
+| --------- | ---- | -------- | -----------
+| name | string | Yes | Name of the entity to toggle.
 
 ### HassHumidifierSetpoint
 
@@ -68,20 +85,6 @@ Set humidifier mode if supported by the humidifier.
 | name | string | Yes | Name of the entity to control.
 | mode | string | Yes | The mode to switch to.
 
-## Light
-
-### HassLightSet
-
-Set the state of a light.
-
-| Slot name | Type | Required | Description
-| --------- | ---- | -------- | -----------
-| name | string | Yes | Name of the entity to toggle.
-| color | string, name of valid color | No | Color to change the light to.
-| brightness | integer, 0-100 | No | Brightness to change the light to.
-
-## Shopping List
-
 ### HassShoppingListAddItem
 
 Add an item to the shopping list.
@@ -95,3 +98,7 @@ Add an item to the shopping list.
 List the last 5 items on the shopping list.
 
 _This intent has no slots._
+
+
+
+[This page is automatically generated based on the Intents repository.](https://github.com/home-assistant/intents/blob/main/intents.yaml)

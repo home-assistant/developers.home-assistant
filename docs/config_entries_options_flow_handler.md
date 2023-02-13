@@ -1,6 +1,5 @@
 ---
-title: Integration Configuration Options
-sidebar_label: Configuration Options
+title: Options Flow
 ---
 
 An integration that is configured via a config entry can expose options to the user to allow tweaking behavior of the integration, like which devices or locations should be integrated.
@@ -14,7 +13,10 @@ For an integration to support options it needs to have an `async_get_options_flo
 ```python
 @staticmethod
 @callback
-def async_get_options_flow(config_entry):
+def async_get_options_flow(
+    config_entry: config_entries.ConfigEntry,
+) -> config_entries.OptionsFlow:
+    """Create the options flow."""
     return OptionsFlowHandler(config_entry)
 ```
 
@@ -24,11 +26,13 @@ The Flow handler works just like the config flow handler, except that the first 
 
 ```python
 class OptionsFlowHandler(config_entries.OptionsFlow):
-    def __init__(self, config_entry):
+    def __init__(self, config_entry: config_entries.ConfigEntry) -> None:
         """Initialize options flow."""
         self.config_entry = config_entry
 
-    async def async_step_init(self, user_input=None):
+    async def async_step_init(
+        self, user_input: dict[str, Any] | None = None
+    ) -> FlowResult:
         """Manage the options."""
         if user_input is not None:
             return self.async_create_entry(title="", data=user_input)

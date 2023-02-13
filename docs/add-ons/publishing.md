@@ -6,7 +6,7 @@ There are two different ways of publishing add-ons. One is to publish pre-built 
 
 #### Pre-built containers
 
-With pre-built containers, the developer is responsible for building the images for each architecture on their machine and push the results out to a container registry. This has a lot of advantages for the user. As a user it will only have to download the final container and be up and running once the download finishes. This makes the installation process fast and almost no chance of failure. This is the preferred method.
+With pre-built containers, the developer is responsible for building the images for each architecture on their machine and pushing the results out to a container registry. This has a lot of advantages for the user who will only have to download the final container and be up and running once the download finishes. This makes the installation process fast and has almost no chance of failure so it is the preferred method.
 
 We have automated the process of building and publishing add-ons. See below for the instructions.
 
@@ -32,7 +32,7 @@ Home Assistant assumes that the default branch of your add-on repository matches
 
 ## Custom Add-ons
 
-You need a Docker Hub account to make your own add-ons. You can build your container images with the Docker `build` command or use our [builder] that make it simple. Pull our [Builder Docker engine][builder] and run one of the following commands.
+You need a Docker Hub account to make your own add-ons. You can build your container images with the Docker `build` command or use our [builder] to simplify the process. Pull our [Builder Docker engine][builder] and run one of the following commands.
 
 For a git repository:
 

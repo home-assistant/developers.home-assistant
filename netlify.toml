@@ -12,7 +12,7 @@
   publish = "build"
 
   # Default build command.
-  command = "yarn build"
+  command = "script/bootstrap && yarn build"
 
 [[redirects]]
   from = "/docs/en/next/*"

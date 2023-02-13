@@ -2,7 +2,7 @@
 title: "External Authentication"
 ---
 
-By default, the frontend will take care of its own authentication tokens. If none found, it will redirect the user to the login page and it will take care that the token is up to date.
+By default, the frontend will take care of its own authentication tokens. If none are found, it will redirect the user to the login page and it will take care of updating the token.
 
 If you want to embed the Home Assistant frontend in an external app, you will want to store the authentication inside the app but make it available to the frontend. To support this, Home Assistant exposes an external authentication API.
 
