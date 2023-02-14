@@ -12,6 +12,25 @@ Responses should be concise and to the point. They should not contain unnecessar
 - If a command is targeting an area, don't repeat the name of the area or it's entities in the response.
 - If a command is asking for a list of entities, list all if 4 or less. Otherwise list first 3 and say "+ 2 more".
 
+Example code on how to generate "+ 2 more" style sentence when needed.
+
+```jinja2
+{% if query.matched %}
+  {% set match = query.matched | map(attribute="name") | sort | list %}
+  {% if match | length > 4 %}
+    Yes, {{ match[:3] | join(", ") }} and {{ (match | length - 3) }} more
+  {%- else -%}
+    Yes,
+    {% for name in match -%}
+      {% if not loop.first and not loop.last %}, {% elif loop.last and not loop.first %} and {% endif -%}
+      {{ name }}
+    {%- endfor -%}
+  {% endif %}
+{% else %}
+  No
+{% endif %}
+```
+
 ## Use the correct tense
 
 Responses should be in the present tense. For example, "The light is on" instead of "The light was on".
