@@ -12,7 +12,8 @@ Responses should be concise and to the point. They should not contain unnecessar
 - If a command is targeting an area, don't repeat the name of the area or it's entities in the response.
 - If a command is asking for a list of entities, list all if 4 or less. Otherwise list first 3 and say "+ 2 more".
 
-Example code on how to generate "+ 2 more" style sentence when needed.
+Readability is important, so use below code to generate "+ 2 more" style sentence when needed. Do not create your
+own variant.
 
 ```jinja2
 {% if query.matched %}
