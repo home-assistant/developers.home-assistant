@@ -107,7 +107,7 @@ import {
   LitElement,
   html,
   css,
-} from "https://unpkg.com/lit-element@2.6.1/lit-element.js?module";
+} from "https://unpkg.com/lit-element@2.0.1/lit-element.js?module";
 
 function loadCSS(url) {
   const link = document.createElement("link");
@@ -283,7 +283,7 @@ import {
   LitElement,
   html,
   css,
-} from "https://unpkg.com/lit-element@2.6.1/lit-element.js?module";
+} from "https://unpkg.com/lit-element@2.0.1/lit-element.js?module";
 
 const supportsButtonPressTileFeature = (stateObj) => {
   const domain = stateObj.entity_id.split(".")[0];
