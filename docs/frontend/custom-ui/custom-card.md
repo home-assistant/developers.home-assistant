@@ -107,7 +107,7 @@ import {
   LitElement,
   html,
   css,
-} from "https://unpkg.com/lit-element@2.0.1/lit-element.js?module";
+} from "https://unpkg.com/lit-element@2.6.1/lit-element.js?module";
 
 function loadCSS(url) {
   const link = document.createElement("link");
@@ -279,10 +279,14 @@ Below is an example of a custom tile feature for [button entity](/docs/core/enti
 ![Screenshot of the custom tile feature example](/img/en/frontend/dashboard-custom-tile-feature-screenshot.png)
 
 ```js
-import { css, html, LitElement } from "lit";
+import {
+  LitElement,
+  html,
+  css,
+} from "https://unpkg.com/lit-element@2.6.1/lit-element.js?module";
 
 const supportsButtonPressTileFeature = (stateObj) => {
-  const domain = stateObj.entity_id.slice(0, stateObj.entity_id.indexOf("."));
+  const domain = stateObj.entity_id.split(".")[0];
   return domain === "button";
 };
 
