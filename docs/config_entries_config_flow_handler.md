@@ -63,7 +63,7 @@ There are a few step names reserved for system use:
 | `user`      | Invoked when a user initiates a flow via the user interface or when discovered and the matching and discovery step are not defined.                                                                                                  |
 | `reconfigure`      | Invoked when a user initiates a flow to reconfigure an existing config entry via the user interface.                                                                                                  |
 | `zeroconf`  | Invoked if your integration has been discovered via Zeroconf/mDNS as specified [using `zeroconf` in the manifest](creating_integration_manifest.md#zeroconf). |
-| `reauth`    | Invoked if your integration indicates it [requires reauthentication, e.g., due to expired credentials](integration_setup_failures#handling-expired-credentials).  |
+| `reauth`    | Invoked if your integration indicates it [requires reauthentication, e.g., due to expired credentials](#reauthentication). |
 | `import`    | Invoked if [YAML configuration is found](configuration_yaml_index), this can be used to migrate old YAML configuration. |
 
 ## Unique IDs
@@ -277,6 +277,7 @@ class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 ## Reauthentication
 
 Gracefully handling authentication errors such as invalid, expired, or revoked tokens is needed to advance on the [Integration Quality Scale](integration_quality_scale_index.md). This example of how to add reauth to the OAuth flow created by `script.scaffold` following the pattern in [Building a Python library](api_lib_auth.md#oauth2).
+If you are looking for how to trigger the reauthentication flow, see [handling expired credentials](integration_setup_failures#handling-expired-credentials).
 
 This example catches an authentication exception in config entry setup in `__init__.py` and instructs the user to visit the integrations page in order to reconfigure the integration.
 
