@@ -59,8 +59,10 @@ There are a few step names reserved for system use:
 | `mqtt`      | Invoked if your integration has been discovered via MQTT as specified [using `mqtt` in the manifest](creating_integration_manifest.md#mqtt).             |
 | `ssdp`      | Invoked if your integration has been discovered via SSDP/uPnP as specified [using `ssdp` in the manifest](creating_integration_manifest.md#ssdp).             |
 | `usb`       | Invoked if your integration has been discovered via USB as specified [using `usb` in the manifest](creating_integration_manifest.md#usb).             |
-| `user`      | Invoked when a user initiates a flow via the user interface or when discovered and the matching and discovery step are not defined.                                                                                                  |
+| `user`      | Invoked when a user initiates a flow via the user interface or when discovered and the matching and discovery step are not defined.                           |
 | `zeroconf`  | Invoked if your integration has been discovered via Zeroconf/mDNS as specified [using `zeroconf` in the manifest](creating_integration_manifest.md#zeroconf). |
+| `reauth`    | Invoked if your integration indicates it [requires reauthentication, e.g., due to expired credentials](integration_setup_failures#handling-expired-credentials).  |
+| `import`    | Invoked if [YAML configuration is found](configuration_yaml_index), this can be used to migrate old YAML configuration. |
 
 ## Unique IDs
 
