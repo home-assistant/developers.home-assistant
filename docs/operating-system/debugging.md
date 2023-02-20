@@ -28,7 +28,7 @@ Using a USB drive formatted with FAT32 or ext4 and named CONFIG (case sensitive)
 The `ha os import` command may respond `Command completed successfully` even if the import from USB did not occur. This has been seen in the case that the USB drive didn't mount successfully and the import command proceeded to import from the boot drive. If access fails even after an apparently successful import then execute command `ha host logs` and look for `Starting HassOS Configuration Manager...` and subsequent output to determine whether the USB mount succeeded and whether the import came from USB.
 :::
 
-To SSH into your Home Assistant device. On Mac/Linux, use:
+To SSH into your Home Assistant device, on Linux/Mac use:
 
 ```shell
 ssh root@homeassistant.local -p 22222
