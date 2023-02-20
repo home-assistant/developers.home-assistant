@@ -17,13 +17,18 @@ SSH access through the [SSH add-on] (which will give you SSH access through port
 
 ### Home Assistant Operating System
 
-Use a USB drive formatted with FAT, ext4, or NTFS and name it CONFIG (case sensitive). Create an `authorized_keys` file (no extension) containing your public key, and place it in the root of the USB drive. File needs to be ANSI encoded (not UTF-8) and must have Unix line ends (LF), not Windows (CR LF). See [Generating SSH Keys](#generating-ssh-keys) section below if you need help generating keys. Use the CLI (eg. SSH to the [SSH add-on] on port 22) and import the `authorized_keys` file with the `ha os import` command. You can now access your device as root over SSH on port 22222. Alternatively, the file will be imported from the USB when the Home Assistant OS device is rebooted.
+Using a USB drive formatted with FAT32 or ext4 and named CONFIG (case sensitive), follow the following steps:
+
+1. Create an ANSI-encoded (not UTF-8) file named `authorized_keys` (no extension) containing your public key. Ensure that the file has Unix line endings (LF) and not Windows line endings (CR LF). See section [Generating SSH Keys](#generating-ssh-keys) below for instructions on generating keys.
+1. Place the `authorized_keys` file in the root of the USB drive.
+1. Use the CLI (e.g., SSH to the [SSH add-on] on port 22) to import the `authorized_keys` file by issuing command `ha os import`. Alternatively, the file will be imported from the USB when the Home Assistant OS device is rebooted.
+1. SSH root access to your host should now be available on port 22222.
 
 :::tip
-Make sure when you are copying the public key to the root of the USB drive that you rename the file correctly to `authorized_keys` with no `.pub` file extension.
+The `ha os import` command may respond `Command completed successfully` even if the import from USB did not occur. This has been seen in the case that the USB drive didn't mount successfully and the import command proceeded to import from the boot drive. If access fails even after an apparently successful import then execute command `ha host logs` and look for `Starting HassOS Configuration Manager...` and subsequent output to determine whether the USB mount succeeded and whether the import came from USB.
 :::
 
-You should then be able to SSH into your Home Assistant device. On Mac/Linux, use:
+To SSH into your Home Assistant device. On Mac/Linux, use:
 
 ```shell
 ssh root@homeassistant.local -p 22222
@@ -39,7 +44,7 @@ You will be logged in as root in the ```/root``` folder. [Home Assistant OS] is 
 
 ### Turning off SSH access to the host
 
-Use a USB drive formatted with FAT, ext4, or NTFS and name it CONFIG (case sensitive). Remove any existing `authorized_keys` file from the drive and leave the drive empty. When the Home Assistant OS device is rebooted with this drive inserted, any existing keys will be removed and the SSH service will be stopped.
+Use a USB drive formatted with FAT32 or ext4 and name it CONFIG (case sensitive). Remove any existing `authorized_keys` file from the drive and leave the drive empty. When the Home Assistant OS device is rebooted with this drive inserted, any existing keys will be removed and the SSH service will be stopped.
 
 ## Checking the logs
 
