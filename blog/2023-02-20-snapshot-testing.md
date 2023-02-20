@@ -3,7 +3,7 @@ author: Franck Nijhof
 authorURL: https://twitter.com/frenck
 authorImageURL: /img/profile/frenck.png
 authorTwitter: frenck
-title: Adding support for snapshot testing
+title: Added support for snapshot testing
 ---
 
 Home Assistant [now supports snapshot testing](https://github.com/home-assistant/core/pull/88323)
