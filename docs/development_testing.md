@@ -168,6 +168,6 @@ it is not a replacement for functional tests.
 
 As an example, when testing if an entity would go unavailable when the device
 returns an error, it is better to assert the specific change you expected: 
-Assert the state of the entity became `unavailable`. This function test is a
+Assert the state of the entity became `unavailable`. This functional test is a
 better approach than asserting the full state of such an entity using a
 snapshot, as it assumes it worked as expected (when taking the snapshot).
