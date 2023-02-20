@@ -384,13 +384,3 @@ To have it displayed in the tile card editor, you must add an object describing 
 Required properties of the object are `type` and `name`. It is recommended to define the `supported` option with a function so the editor can only propose the feature if it is compatible with the selected entity in the tile card. Set `configurable` to `true` if your entity has additional configuration (e.g. `label` option in the example above) so the editor.
 
 Also, the static functions `getConfigElement` and `getStubConfig` work the same as with normal custom maps.
-
-## Advanced Resources
-
-Community Maintained Boilerplate Card - Advanced Template (Typescript, Rollup, Linting, etc.)
-
-- [Boilerplate Card](https://github.com/custom-cards/boilerplate-card)
-
-Developer Documentation for [HACS](https://hacs.xyz/) (Home Assistant Community Store).
-
-- [HACS Plugin Docs](https://hacs.xyz/docs/publish/plugin)
