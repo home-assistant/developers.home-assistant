@@ -7,7 +7,7 @@ title: Deprecated callback signatures for MQTT subscribe removed
 Home Assistant's MQTT integration [no longer supports](https://github.com/home-assistant/core/pull/88543)
 deprecated callback signatures for MQTT subscribe.
 
-Integrations that still used a deprecated callback signature for the callback function on MQTT subscribe will break. An exception will be raised if a not supported callback type is detected.
+Custome integrations that still used the deprecated callback signature for the callback function on MQTT subscribe will break unless updated. An exception will be raised if a not supported callback type is detected.
 
 Examples of deprecated callback functions that will no longer work:
 
