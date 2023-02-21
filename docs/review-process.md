@@ -67,7 +67,7 @@ the end-user getting your improvement faster.
 
 5. **Create a (feature) branch.**
    When you create a PR, it is based on a branch (usually the main branch).
-   It is best practice to create a new branch for each PR you create. This
+   You must create a new feature branch for each PR you create. This
    makes it easier to keep your main branch up to date with the upstream
    branch, and it makes it easier to delete the branch after the PR
    has been merged.
