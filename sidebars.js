@@ -254,7 +254,7 @@ module.exports = {
 
   Misc: [
     "misc",
-
+    "review-process",
     // Documenting as a category
     {
       type: "category",
