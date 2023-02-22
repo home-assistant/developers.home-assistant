@@ -99,7 +99,7 @@ or ask for clarification. If you don't understand something, ask!
 
 If there have been changes requested to your PR, our bot will automatically
 mark your PR as a draft. This means that the PR is not ready to be merged
-or further reviewed as of yet.
+or further reviewed for the moment.
 
 Draft PRs tell other reviewers that look at the list of all PRs that this
 PR is currently in progress and doesn't require their attention yet.
@@ -146,11 +146,11 @@ requested the changes that the PR is ready to go!
 
 4. **Revisit, tweak, and tune to perfection.**
    Sometimes, looking back at your own code a little later teaches you new
-   things and help you spot imperfections or issues yourself. While waiting for
+   things and help you spot imperfections or issues yourself. While waiting for review
    it is always the perfect time to ensure your PR is as good as it can be.
 
 5. **Help out reviewing the queue.**
-   The best way to help speeding up the review process is by helping out
+   The best way to help speed up the review process is by helping out
    with the review process! Any review work you pick up contributes to
    speeding up the review process for everyone. Besides, someone else
    might notice your reviews and return the favor.
@@ -175,7 +175,7 @@ requested the changes that the PR is ready to go!
   this, but we recommend limiting it to 5. If you have more than 5 open
   PRs, we may ask you to close some of them until some others have been merged.
 
-- Don't open a PR if you are not going to work on it. If you are cannot
+- Don't open a PR if you are not going to work on it. If you cannot
   continue working on a PR after you have opened it, let us know and close it.
   There is no shame in closing a PR; however, if it is because you are stuck,
   don't hesitate to ask for help in our
@@ -229,7 +229,7 @@ each time you go through the process.
 
 4. **The bot is saying my PR is going stale, what does that mean?**
    The bot will automatically mark a PR as stale after some time of inactivity.
-   It will close if it remains inactive. This can either mean the PR is
+   The bot will close the PR if it remains inactive. This can either mean the PR is
    awaiting a change from you or a review from our project. Please make sure
    the first one isn't the case, in case you are awaiting a review,
    just comment that. By responding to the bot, it will know things are not
