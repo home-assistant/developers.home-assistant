@@ -27,7 +27,7 @@ Example of a correct callback signature:
 
 ```python
 @callback
-def async_correct_callback(msg: msg: ReceiveMessage) -> None:
+def async_correct_callback(msg: ReceiveMessage) -> None:
     """Callback example 1."""
     ...
 ```
