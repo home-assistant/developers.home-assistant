@@ -243,6 +243,51 @@ each time you go through the process.
    reviewer will then double-check that, and make sure it is included in
    the next patch release by tagging the PR with the next patch milestone.
 
+## Repository specific information
+
+Some of our respositories have specific requirements or guidelines that are
+applied on top of this general guide.
+
+### Home Assistant Core
+
+The [Home Assistant Core](https://github.com/home-assistant/core) repository
+has quite a few requirements and guidelines to ensure the quality of the code.
+The following pages in our developer documentation might be helpful when
+creating contributions to our Core repository:
+
+- [Development checklist](/docs/development_checklist)
+- [Development checklist for integrations](/docs/creating_component_code_review)
+- [Submitting your work](/docs/development_submitting)
+- [Style guidelines](/docs/development_guidelines)
+- [Testing your code](/docs/development_testing)
+- [Catching up with reality](/docs/development_catching_up)
+- [Tips and Tricks](/docs/development_tips)
+
+### Home Assistant Documentation
+
+The [documentation](https://github.com/home-assistant/home-assistant.io) has
+additional guidelines to take into account when contributing. We mainly
+follow the Microsoft Writing Style Guide and have some additional guidelines
+for styling YAML configuration.
+
+- [Documentation standards](/docs/documenting/standards)
+- [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/welcome/)
+- [YAML Style Guide](/docs/documenting/yaml-style-guide)
+
+### Home Assistant Frontend
+
+The [Home Assistant Frontend](https://github.com/home-assistant/frontend) has 
+guidance on developing and contributing to the frontend on the
+[Frontend development page](/docs/frontend/development#creating-pull-requests).
+
+### Home Assistant Intents
+
+Building a voice assistant is a complex task. It requires a lot of different
+technologies to work together, so there are some guidelines to look at:
+
+- [Contributing template sentences](/docs/voice/intent-recognition/contributing)
+- [Response Style Guide](/docs/voice/intent-recognition/style-guide)
+
 ## Help?! I have more questions!
 
 The developer documentation has a lot of information, even more information
