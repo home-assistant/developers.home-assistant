@@ -205,7 +205,7 @@ You can also subscribe to one or more triggers with `subscribe_trigger`. These a
         "entity_id": "binary_sensor.motion_occupancy",
         "from": "off",
         "to":"on"
-    },
+    }
 }
 ```
 

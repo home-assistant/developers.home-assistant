@@ -111,7 +111,15 @@ module.exports = {
         "integration_events",
         "integration_listen_events",
         "network_discovery",
-        "bluetooth",
+        {
+          type: "category",
+          label: "Bluetooth",
+          items: [
+            "bluetooth",
+            "core/bluetooth/bluetooth_fetching_data",
+            "core/bluetooth/api",
+          ],
+        },
       ],
     },
     {
@@ -187,8 +195,12 @@ module.exports = {
         "intent_firing",
         "intent_handling",
         "intent_builtin",
-        "intent_conversation_api",
       ],
+    },
+    {
+      type: "category",
+      label: "Conversation",
+      items: ["intent_conversation_api", "core/conversation/custom_agent"],
     },
     {
       type: "category",
@@ -232,15 +244,17 @@ module.exports = {
         "voice/intent-recognition/test-syntax",
         "voice/intent-recognition/supported-languages",
         "voice/intent-recognition/contributing",
+        "voice/intent-recognition/style-guide",
       ],
     },
 
     "voice/language-leaders",
+    "voice/contributing-your-voice",
   ],
 
   Misc: [
     "misc",
-
+    "review-process",
     // Documenting as a category
     {
       type: "category",

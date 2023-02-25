@@ -54,7 +54,7 @@ It is also possible to debug a remote Home Assistance instance (e.g., productive
 
 _You only need these instructions if you do not want to use devcontainers._
 
-It is also possible to set up a more traditional development environment. See the section for your operating system. Make sure your Python version is 3.9 or later.
+It is also possible to set up a more traditional development environment. See the section for your operating system. Make sure your Python version is 3.10.
 
 ### Developing on Linux
 
@@ -95,7 +95,7 @@ After WSL is restarted, the mount's uid and gid will match the default user.
 Install [Homebrew](https://brew.sh/), then use that to install the dependencies:
 
 ```shell
-brew install python3 autoconf ffmpeg
+brew install python3 autoconf ffmpeg cmake
 ```
 
 If you encounter build issues with `cryptography` when running the `script/setup` script below, check the cryptography documentation for [installation instructions](https://cryptography.io/en/latest/installation/#building-cryptography-on-macos).

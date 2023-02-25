@@ -5,7 +5,7 @@ sidebar_label: "Test Syntax"
 
 To ensure that the template sentences work as expected, we have an extensive test suite. This test suite is based on YAML files that contain a list of input sentences and the expected matched intent and slots.
 
-The tests are stored [on GitHub](https://github.com/home-assistant/intents/tree/main/tests) and are organized by having for each language a directory of files:
+The tests are stored [on GitHub](https://github.com/home-assistant/intents/tree/main/tests) and are organized by having for each language a directory of files `tests/<language>/`:
 
  - `_fixtures.yaml` - Fake entities and areas that can be referenced during testing
  - `<domain>_<intent>.yaml` - Sentences for a [single intent](../../intent_builtin) and domain. These files should only test sentences that are defined in the [match sentences file](./template-sentence-syntax) with the same name.

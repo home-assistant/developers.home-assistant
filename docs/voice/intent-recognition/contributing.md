@@ -3,7 +3,12 @@ title: "Contributing template sentences"
 sidebar_label: "Contributing sentences"
 ---
 
-Template sentences need to be contributed to our [Intents repository on GitHub](https://github.com/home-assistant/intents). The sentences will be reviewed by [the language leaders](../language-leaders.md) and merged if they are correct. You can either contribute new sentences or improve existing ones. See [the format page](template-sentence-syntax) on how the repostory is structured.
+Template sentences need to be contributed to our [Intents repository on GitHub](https://github.com/home-assistant/intents). The sentences will be reviewed by [the language leaders](../language-leaders) and merged if they are correct. You can either contribute new sentences or improve existing ones.
+
+The Intent repository is structured as follows:
+
+- `sentences/<language>/` - Template sentences for each language - [learn more](template-sentence-syntax)
+- `tests/<language>/` - Tests for each language - [learn more](test-syntax)
 
 We prefer a lot of small contributions over a few large ones. Contributions that contain a lot of changes are hard to review. That's why we want each contribution limited to a single language and single domain.
 

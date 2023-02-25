@@ -218,5 +218,6 @@ Each add-on starts with a base rating of 5, on a scale of 1 to 6. Depending on d
 | Use `host_network: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -1 | |
 | Use `hassio_role: admin` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -2 | |
 | Use `host_pid: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -2 | |
+| Use `host_uts: true` and `privileged: SYS_ADMIN` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -1 | |
 | Use `full_access: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | Security set to 1 | Overrides all other adjustments |
 | Use `docker_api: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | Security set to 1 | Overrides all other adjustments |
