@@ -114,7 +114,11 @@ module.exports = {
         {
           type: "category",
           label: "Bluetooth",
-          items: ["bluetooth", "core/bluetooth/bluetooth_fetching_data", "core/bluetooth/api"],
+          items: [
+            "bluetooth",
+            "core/bluetooth/bluetooth_fetching_data",
+            "core/bluetooth/api",
+          ],
         },
       ],
     },
@@ -240,6 +244,7 @@ module.exports = {
         "voice/intent-recognition/test-syntax",
         "voice/intent-recognition/supported-languages",
         "voice/intent-recognition/contributing",
+        "voice/intent-recognition/style-guide",
       ],
     },
 
@@ -249,7 +254,7 @@ module.exports = {
 
   Misc: [
     "misc",
-
+    "review-process",
     // Documenting as a category
     {
       type: "category",

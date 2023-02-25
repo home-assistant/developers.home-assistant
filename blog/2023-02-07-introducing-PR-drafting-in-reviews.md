@@ -23,11 +23,6 @@ review again.
 Before you click the "Ready for review" button, make sure you have addressed
 all requested changes, and all our CI jobs and checks are passing successfully.
 
-We are currently still testing these features and workflow, which is only active
-on our Core repository. Please let us know in the 
-[#devs channel in our Discord chat](https://www.home-assistant.io/join-chat)
-if you have any feedback.
-
 ## What is a draft PR?
 
 A draft PR is a PR that is not ready for review yet. It is a way to let others
@@ -70,3 +65,5 @@ right now.
 
 More background information can be found in this
 [Google Document](https://docs.google.com/document/d/11_x2YUmAD07JN7JMM4YIIAWVGTJsOB0UptN8hlmWFWg/edit?usp=sharing).
+
+Or, [read all about our review process on this page](/docs/review-process).
