@@ -44,7 +44,8 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.DATE` | | Date. Requires `native_value` to be a Python `datetime.date` object, or `None`.
 | `SensorDeviceClass.DISTANCE` | km, m, cm, mm, mi, yd, in | Generic distance
 | `SensorDeviceClass.DURATION` | d, h, min, s | Time period. Should not update only due to time passing. The device or service needs to give a new data point to update.
-| `SensorDeviceClass.ENERGY` | Wh, kWh, MWh, MJ, GJ | Energy, statistics will be stored in kWh. Represents _power_ over _time_. Not to be confused with `power`.
+| `SensorDeviceClass.ENERGY` | Wh, kWh, MWh, MJ, GJ | Energy, this device class should used for sensors representing energy consumption, for example an electricity meter. Statistics will be stored in kWh. Represents _power_ over _time_. Not to be confused with `power`.
+| `SensorDeviceClass.ENERGY_STORAGE` | Wh, kWh, MWh, MJ, GJ | Stored energy, this device class should be used for sensors representing stored energy, for example the amount of electric energy currently stored in a battery or the capacity of a battery. Statistics will be stored in kWh. Represents _power_ over _time_. Not to be confused with `power`.
 | `SensorDeviceClass.ENUM` | | The sensor has a limited set of (non-numeric) states. The `options` property must be set to a list of possible states when using this device class.
 | `SensorDeviceClass.FREQUENCY` | Hz, kHz, MHz, GHz | Frequency
 | `SensorDeviceClass.GAS` | m³, ft³, CCF | Volume of gas, statistics will be stored in m³. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
@@ -74,7 +75,8 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.TIMESTAMP` | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
 | `SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³ | Concentration of volatile organic compounds
 | `SensorDeviceClass.VOLTAGE` | V, mV | Voltage
-| `SensorDeviceClass.VOLUME` | L, mL, gal, fl. oz., m³, ft³, CCF | Generic volume
+| `SensorDeviceClass.VOLUME` | L, mL, gal, fl. oz., m³, ft³, CCF | Generic volume, this device class should be used for sensors representing a consumption, for example the amount of fuel consumed by a vehicle.
+| `SensorDeviceClass.VOLUME_STORAGE` | L, mL, gal, fl. oz., m³, ft³, CCF | Generic stored volume, this device class should be used for sensors representing a stored volume, for example the amount of fuel in a fuel tank.
 | `SensorDeviceClass.WATER` | L, gal, m³, ft³, CCF | Water consumption
 | `SensorDeviceClass.WEIGHT` | kg, g, mg, µg, oz, lb, st | Generic mass; `weight` is used instead of `mass` to fit with every day language.
 | `SensorDeviceClass.WIND_SPEED` | ft/s, km/h, kn, m/s, mph | Wind speed
