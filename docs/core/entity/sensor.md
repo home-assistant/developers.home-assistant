@@ -34,7 +34,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | ---- | ---- | -----------
 | `SensorDeviceClass.APPARENT_POWER` | VA | Apparent power |
 | `SensorDeviceClass.AQI` | None | Air Quality Index
-| `SensorDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Atmospheric pressure, statistics will be stored in Pa.
+| `SensorDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Atmospheric pressure.
 | `SensorDeviceClass.BATTERY` | % | Percentage of battery that is left
 | `SensorDeviceClass.CARBON_DIOXIDE` | ppm | Concentration of carbon dioxide.
 | `SensorDeviceClass.CARBON_MONOXIDE` | ppm | Concentration of carbon monoxide.
@@ -44,11 +44,11 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.DATE` | | Date. Requires `native_value` to be a Python `datetime.date` object, or `None`.
 | `SensorDeviceClass.DISTANCE` | km, m, cm, mm, mi, yd, in | Generic distance
 | `SensorDeviceClass.DURATION` | d, h, min, s | Time period. Should not update only due to time passing. The device or service needs to give a new data point to update.
-| `SensorDeviceClass.ENERGY` | Wh, kWh, MWh, MJ, GJ | Energy, this device class should used for sensors representing energy consumption, for example an electricity meter. Statistics will be stored in kWh. Represents _power_ over _time_. Not to be confused with `power`.
-| `SensorDeviceClass.ENERGY_STORAGE` | Wh, kWh, MWh, MJ, GJ | Stored energy, this device class should be used for sensors representing stored energy, for example the amount of electric energy currently stored in a battery or the capacity of a battery. Statistics will be stored in kWh. Represents _power_ over _time_. Not to be confused with `power`.
+| `SensorDeviceClass.ENERGY` | Wh, kWh, MWh, MJ, GJ | Energy, this device class should used for sensors representing energy consumption, for example an electricity meter. Represents _power_ over _time_. Not to be confused with `power`.
+| `SensorDeviceClass.ENERGY_STORAGE` | Wh, kWh, MWh, MJ, GJ | Stored energy, this device class should be used for sensors representing stored energy, for example the amount of electric energy currently stored in a battery or the capacity of a battery. Represents _power_ over _time_. Not to be confused with `power`.
 | `SensorDeviceClass.ENUM` | | The sensor has a limited set of (non-numeric) states. The `options` property must be set to a list of possible states when using this device class.
 | `SensorDeviceClass.FREQUENCY` | Hz, kHz, MHz, GHz | Frequency
-| `SensorDeviceClass.GAS` | m³, ft³, CCF | Volume of gas, statistics will be stored in m³. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
+| `SensorDeviceClass.GAS` | m³, ft³, CCF | Volume of gas. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
 | `SensorDeviceClass.HUMIDITY` | % | Relative humidity
 | `SensorDeviceClass.ILLUMINANCE` | lx | Light level
 | `SensorDeviceClass.IRRADIANCE` | W/m², BTU/(h⋅ft²) | Irradiance
@@ -61,17 +61,17 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.PM1` | µg/m³ | Concentration of particulate matter less than 1 micrometer |
 | `SensorDeviceClass.PM25` | µg/m³ | Concentration of particulate matter less than 2.5 micrometers |
 | `SensorDeviceClass.PM10` | µg/m³ | Concentration of particulate matter less than 10 micrometers |
-| `SensorDeviceClass.POWER` | W, kW | Power, statistics will be stored in W.
+| `SensorDeviceClass.POWER` | W, kW | Power.
 | `SensorDeviceClass.POWER_FACTOR` | %, None | Power Factor
 | `SensorDeviceClass.PRECIPITATION` | cm, in, mm | Accumulated precipitation
 | `SensorDeviceClass.PRECIPITATION_INTENSITY` | in/d, in/h, mm/d, mm/h | Precipitation intensity
-| `SensorDeviceClass.PRESSURE` | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Pressure, statistics will be stored in Pa.
+| `SensorDeviceClass.PRESSURE` | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Pressure.
 | `SensorDeviceClass.REACTIVE_POWER` | var | Reactive power |
 | `SensorDeviceClass.SIGNAL_STRENGTH` | dB, dBm | Signal strength
 | `SensorDeviceClass.SOUND_PRESSURE` | dB, dBA | Sound pressure
 | `SensorDeviceClass.SPEED` | ft/s, in/d, in/h, km/h, kn, m/s, mph, mm/d | Generic speed
 | `SensorDeviceClass.SULPHUR_DIOXIDE` | µg/m³ | Concentration of sulphure dioxide |
-| `SensorDeviceClass.TEMPERATURE` | °C, °F, K | Temperature, statistics will be stored in °C.
+| `SensorDeviceClass.TEMPERATURE` | °C, °F, K | Temperature.
 | `SensorDeviceClass.TIMESTAMP` | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
 | `SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³ | Concentration of volatile organic compounds
 | `SensorDeviceClass.VOLTAGE` | V, mV | Voltage
