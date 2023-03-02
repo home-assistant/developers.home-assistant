@@ -11,7 +11,7 @@ The device registry is a registry where Home Assistant keeps track of devices. A
 
 ## What is a device?
 
-A device in Home Assistant represents either a physical device that has its own control unit, or a service. The control unit itself does not have to be smart, but it should be in control of what happens. For example, an Ecobee thermostat with 4 room sensors equals 5 devices in Home Assistant, one for the thermostat including all sensors inside it, and one for each sensor. Each device exists in a specific geographical area, and may have more than one input or output within that area.
+A device in Home Assistant represents either a physical device that has its own control unit, or a service. The control unit itself does not have to be smart, but it should be in control of what happens. For example, an Ecobee thermostat with 4 room sensors equals 5 devices in Home Assistant, one for the thermostat including all sensors inside it, and one for each room sensor. Each device exists in a specific geographical area, and may have more than one input or output within that area.
 
 If you connect a sensor to another device to read some of its data, it should still be represented as two different devices. The reason for this is that the sensor could be moved to read the data of another device.
 
