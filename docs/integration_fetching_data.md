@@ -148,7 +148,7 @@ Some APIs will offer an endpoint per device. It sometimes won't be possible to m
 
 If you can map exactly one device endpoint to a single entity, you can fetch the data for this entity inside the `update()`/`async_update()` methods. Make sure polling is set to `True` and Home Assistant will call this method regularly.
 
-If your entities need to fetch data before being written to Home Assistant for the first time, pass `True` to the `add_entities` method: `add_entities([MyEntity()], True)`.
+If your entities need to fetch data before being written to Home Assistant for the first time, pass `update_before_add=True` to the `add_entities` method: `add_entities([MyEntity()], update_before_add=True)`.
 
 You can control the polling interval for your integration by defining a `SCAN_INTERVAL` constant in your platform. Careful with setting this too low. It will take up resources in Home Assistant, can overwhelm the device hosting the API or can get you blocked from cloud APIs. The minimum allowed value is 5 seconds.
 
