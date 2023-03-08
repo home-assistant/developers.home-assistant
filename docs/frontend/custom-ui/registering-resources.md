@@ -10,7 +10,9 @@ Once restarted, you can put files in this directory. Each file will be accessibl
 
 The next step is to register these resources with the Home Assistant interface. This is done by navigating to the Resources page by following below link:
 
-[![Open your Home Assistant instance and show your resources.](https://my.home-assistant.io/badges/lovelace_resources.svg)](https://my.home-assistant.io/redirect/lovelace_dashboards/) (Note: Once redirected, click the three dots menu in the top-right.)
+[![Open your Home Assistant instance and show your resources.](https://my.home-assistant.io/badges/lovelace_resources.svg)](https://my.home-assistant.io/redirect/lovelace_dashboards/)
+
+Once redirected, click the three dots menu in the top-right, Click **ADD RESOURCE** at the bottom right then enter the **URL** `/local/battery-state-card.js` and ensure **JavaScript Module** is selected before clicking **CREATE**.
 
 :::note
 
