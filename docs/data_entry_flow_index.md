@@ -119,7 +119,7 @@ For a more detailed explanation of `strings.json` see the [backend tra
 This result type will show a form to the user to fill in. You define the current step, the schema of the data (using a mixture of voluptuous and/or [selectors](https://www.home-assistant.io/docs/blueprint/selectors/)) and optionally a dictionary of errors.
 
 ```python
-from homeassistant.helpers.selector import selector
+from homeassistant.helpers import selector
 
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
     async def async_step_user(self, user_input=None):
