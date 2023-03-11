@@ -62,6 +62,48 @@ inside that YAML.
 
 [YAML Style Guide](documenting/yaml-style-guide.md)
 
+## Glossary & Terminology Tooltips
+
+The documentation should be written in a way that is understandable for
+everyone. To help with that, we have a [glossary of terms](https://www.home-assistant.io/docs/glossary/)
+that are used across Home Assistant, including our documentation.
+
+If you use a term that is not in the glossary, feel free to add; or improve
+the definition of an existing term.
+
+Additionally, we have a terminology tooltip available, that can be added to
+works everywhere in the documentation. This tooltip will show a definition
+of the term when the user hovers over it and provides a link for more
+information. This provides instant context to terminology a user might not
+be familiar with.
+
+The syntax for adding terminology tooltips is:
+
+```liquid
+{% term <term> [<text>] %}
+```
+
+The term referenced must, of course, be listed in our glossary, which is the
+source for the tooltips.
+
+For example, if you write a text about automations, you could add a tooltip
+like this:
+
+```liquid
+This is an example text about {% term automations %}, which is used
+to demonstrate the use of tooltips, in this case, for the term
+"automations" earlier in this sentence.
+```
+
+The `<text>` is optional and can be useful if you want to add a terminology
+tooltip to a piece of text that differs from the term itself. In the following
+example the automation term tooltip is added to the "automate everything" text:
+
+```liquid
+Awesome, because this allowed me to {% automation "automate everything" %}
+in my home! I love it!
+```
+
 ## Renaming Pages
 
 It can happen that an integration or platform is renamed, in this case the documentation needs to be updated as well. If you rename a page, add an entry to the `_redirects` file as shown below. Please consider to add details, like release number or old integration/platform name, to the page in a [note](/documenting/create-page.md/#html).
