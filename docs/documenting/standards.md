@@ -64,14 +64,14 @@ inside that YAML.
 
 ## Glossary & Terminology Tooltips
 
-The documentation should be written in a way that it is understandable for
+The documentation should be written in a way that is understandable for
 everyone. To help with that, we have a [glossary of terms](https://www.home-assistant.io/docs/glossary/)
-that are used in the across Home Assistant, including our documentation.
+that are used across Home Assistant, including our documentation.
 
 If you use a term that is not in the glossary, feel free to add; or improve
-the definition of an existing terms.
+the definition of an existing term.
 
-Additionally, we have a terminology tooltip available, that can added to
+Additionally, we have a terminology tooltip available, that can be added to
 works everywhere in the documentation. This tooltip will show a definition
 of the term when the user hovers over it and provides a link for more
 information. This provides instant context to terminology a user might not
@@ -86,7 +86,7 @@ The syntax for adding terminology tooltips is:
 The term referenced must, of course, be listed in our glossary, which is the
 source for the tooltips.
 
-For example, if you write text about automations, you could add a tooltip
+For example, if you write a text about automations, you could add a tooltip
 like this:
 
 ```liquid
