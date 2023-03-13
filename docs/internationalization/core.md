@@ -150,8 +150,8 @@ The translation strings for repairs issues are defined under the `issues` key. A
 ### Entities
 
 #### Name of entities
-Integrations can provide translations for names of its entities. To do this, provide an `entity` dictionary, that contains translations of the names and set the entity's `translation_key` property to a key under a domain in the `entity` dictionary.
-If the entity's `translation_key` property is not `None` and the `entity` dictionary provides a translated name, `EntityDescription.name` will be ignored.
+Integrations can provide translations for names of its entities. To do this, provide an `entity` object, that contains translations of the names and set the entity's `translation_key` property to a key under a domain in the `entity` object.
+If the entity's `translation_key` property is not `None` and the `entity` object provides a translated name, `EntityDescription.name` will be ignored.
 
 The following example `strings.json` is for a `sensor` entity with its `translation_key` property set to `thermostat_mode`:
 ```json
