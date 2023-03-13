@@ -71,11 +71,10 @@ that are used across Home Assistant, including our documentation.
 If you use a term that is not in the glossary, feel free to add; or improve
 the definition of an existing term.
 
-Additionally, we have a terminology tooltip available, that can be added to
+Additionally, we have a terminology tooltip available, that can be added and
 works everywhere in the documentation. This tooltip will show a definition
-of the term when the user hovers over it and provides a link for more
-information. This provides instant context to terminology a user might not
-be familiar with.
+of the term when the user hovers over it with a link for more information.
+It provides instant context to terminology an user might not be familiar with.
 
 The syntax for adding terminology tooltips is:
 
@@ -100,7 +99,7 @@ tooltip to a piece of text that differs from the term itself. In the following
 example the automation term tooltip is added to the "automate everything" text:
 
 ```liquid
-Awesome, because this allowed me to {% automation "automate everything" %}
+Awesome, because this allowed me to {% term automation "automate everything" %}
 in my home! I love it!
 ```
 
