@@ -189,29 +189,6 @@ To differentiate entities and their translations, provide different translation 
 }
 ```
 
-#### State of entity components
-
-If your integration provides entities under its domain, you will want to translate the states. You do this by offering a `state` object, that contains translations for states with different device classes. The key `_` is used for entities without a device class.
-
-```json
-{
-  "state": {
-    "problem": {
-      "off": "OK",
-      "on": "Problem"
-    },
-    "safety": {
-      "off": "Safe",
-      "on": "Unsafe"
-    },
-    "_": {
-      "off": "[%key:common::state::off%]",
-      "on": "[%key:common::state::on%]"
-    }
-  }
-}
-```
-
 #### Entity state attributes
 
 :::info
@@ -252,6 +229,34 @@ To differentiate entities and their translations, provide different translation 
   }
 }
 ```
+#### State of entity components
+
+If your integration provides entities under its domain, you will want to translate the states. You do this by offering a `states` object under the `entity_component` dictionary, that contains translations for states with different device classes. The key `_` is used for entities without a device class.
+
+```json
+{
+  "entity_component" {
+    "problem": {
+      "state": {
+        "off": "OK",
+        "on": "Problem"
+      }
+    },
+    "safety": {
+      "state": {
+        "off": "Safe",
+        "on": "Unsafe"
+      }
+    },
+    "_": {
+      "state": {
+        "off": "[%key:common::state::off%]",
+        "on": "[%key:common::state::on%]"
+      }
+    }
+  }
+}
+```
 
 #### Entity attribute name and state of entity components
 
@@ -259,28 +264,30 @@ To differentiate entities and their translations, provide different translation 
 Translation of entity attribute names and states also requires frontend support, which is currently only available for `climate` entities.
 :::
 
-If your integration provides entities under its domain, you will want to translate the name of entity attributes and also entity state attributes. You do this by offering a `state_attributes` object, that contains translations for entity attributes with different device classes. The key `_` is used for entities without a device class.
+If your integration provides entities under its domain, you will want to translate the name of entity attributes and also entity state attributes. You do this by offering a `state_attributes` object in the `entity_component` dictionary, that contains translations for entity attributes with different device classes. The key `_` is used for entities without a device class.
 
 ```json
 {
-  "state_attributes": {
+  "entity_component": {
     "_": {
-      "aux_heat": { "name": "Aux heat" },
-      "current_humidity": { "name": "Current humidity" },
-      "current_temperature": { "name": "Current temperature" },
-      "fan_mode": {
-        "name": "Fan mode",
-        "state": {
-          "off": "[%key:common::state::off%]",
-          "on": "[%key:common::state::on%]",
-          "auto": "Auto",
-          "low": "Low",
-          "medium": "Medium",
-          "high": "High",
-          "top": "Top",
-          "middle": "Middle",
-          "focus": "Focus",
-          "diffuse": "Diffuse"
+      "state_attributes": {
+        "aux_heat": { "name": "Aux heat" },
+        "current_humidity": { "name": "Current humidity" },
+        "current_temperature": { "name": "Current temperature" },
+        "fan_mode": {
+          "name": "Fan mode",
+          "state": {
+            "off": "[%key:common::state::off%]",
+            "on": "[%key:common::state::on%]",
+            "auto": "Auto",
+            "low": "Low",
+            "medium": "Medium",
+            "high": "High",
+            "top": "Top",
+            "middle": "Middle",
+            "focus": "Focus",
+            "diffuse": "Diffuse"
+          }
         }
       }
     }
