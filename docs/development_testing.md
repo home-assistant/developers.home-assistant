@@ -135,6 +135,10 @@ This is a snapshot test that asserts the output of an entity state:
 
 ```python
 # tests/components/example/test_sensor.py
+from homeassistant.core import HomeAssistant
+from syrupy.assertion import SnapshotAssertion
+
+
 async def test_sensor(
     hass: HomeAssistant,
     snapshot: SnapshotAssertion,
