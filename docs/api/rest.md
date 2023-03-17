@@ -208,6 +208,8 @@ You can pass the following optional GET parameters:
 - `minimal_response` to only return `last_changed` and `state` for states other than the first and last state (much faster).
 - `no_attributes` to skip returning attributes from the database (much faster).
 - `significant_changes_only` to only return significant state changes.
+	
+Note: They must be placed in this order.
 
 Example without `minimal_response`
 
@@ -317,6 +319,8 @@ You can pass the following optional GET parameters:
 
 - `entity=<entity_id>` to filter on one entity.
 - `end_time=<timestamp>` to choose the end of period starting from the `<timestamp>` in URL encoded format.
+
+Note: They must be placed in this order.
 
 Example
 ```json
