@@ -209,8 +209,6 @@ You can pass the following optional GET parameters:
 - `no_attributes` to skip returning attributes from the database (much faster).
 - `significant_changes_only` to only return significant state changes.
 	
-Note: They must be placed in this order.
-
 Example without `minimal_response`
 
 ```json
@@ -307,6 +305,13 @@ curl \
   "http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00?end_time=2016-12-31T00%3A00%3A00%2B02%3A00"
 ```
 
+```shell
+curl \
+  -H "Authorization: Bearer TOKEN" \
+  -H "Content-Type: application/json" \
+  "http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00?filter_entity_id=sensor.temperature&end_time=2016-12-31T00%3A00%3A00%2B02%3A00&minimal_response"
+```
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/api/logbook/<timestamp>" method="get">
@@ -319,8 +324,6 @@ You can pass the following optional GET parameters:
 
 - `entity=<entity_id>` to filter on one entity.
 - `end_time=<timestamp>` to choose the end of period starting from the `<timestamp>` in URL encoded format.
-
-Note: They must be placed in this order.
 
 Example
 ```json
