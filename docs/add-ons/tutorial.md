@@ -50,7 +50,7 @@ name: "Hello world"
 description: "My first real add-on!"
 version: "1.0.0"
 slug: "hello_world"
-init: false
+init: true
 arch:
   - aarch64
   - amd64
