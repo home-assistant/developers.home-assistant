@@ -248,6 +248,7 @@ module.exports = {
       ],
     },
 
+    "voice/pipelines/index",
     "voice/language-leaders",
     "voice/contributing-your-voice",
   ],
