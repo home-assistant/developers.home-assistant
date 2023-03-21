@@ -22,7 +22,7 @@ The following input fields are available:
 | Name              | Type   | Description                                                                            |
 |-------------------|--------|----------------------------------------------------------------------------------------|
 | `intent_input`    | string | Required. Input text to process.                                                       |
-| `language`        | string | Optional. Langauge of pipeline to run (default: configured language).                  |
+| `language`        | string | Optional. Language of pipeline to run (default: configured language).                  |
 | `pipeline`        | string | Optional. Name of a pipeline to run (default: use language).                           |
 | `conversation_id` | string | Optional. [Unique id for conversation](/docs/intent_conversation_api#conversation-id). |
 | `timeout`         | number | Optional. Number of seconds before pipeline times out (default: 30).                   |
@@ -34,7 +34,7 @@ The following events can be emitted:
 
 | Name            | Description                 | Emitted    | Attributes                                                                                              |
 |-----------------|-----------------------------|------------|---------------------------------------------------------------------------------------------------------|
-| `run-start`     | Start of pipeline run       | always     | `pipeline` - Name of pipeline<br />`language` - Language used for pipeline<br />                        |
+| `run-start`     | Start of pipeline run       | always     | `pipeline` - Id of pipeline<br />`language` - Language used for pipeline<br />                        |
 | `run-finish`    | End of pipeline run         | always     |                                                                                                         |
 | `intent-start`  | Start of intent recognition | always     | `engine` - [Agent](/docs/intent_conversation_api) engine used<br />`intent_input` - Input text to agent |
 | `intent-finish` | End of intent recognition   | always     | `intent_output` - [conversation response](/docs/intent_conversation_api#conversation-response)          |
