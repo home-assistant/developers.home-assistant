@@ -19,13 +19,13 @@ Pipelines are run via a WebSocket API:
 
 The following input fields are available:
 
-| Name              | Type   | Description                                                                            |
-|-------------------|--------|----------------------------------------------------------------------------------------|
-| `intent_input`    | string | Required. Input text to process.                                                       |
-| `language`        | string | Optional. Language of pipeline to run (default: configured language).                  |
-| `pipeline`        | string | Optional. Name of a pipeline to run (default: use language).                           |
-| `conversation_id` | string | Optional. [Unique id for conversation](/docs/intent_conversation_api#conversation-id). |
-| `timeout`         | number | Optional. Number of seconds before pipeline times out (default: 30).                   |
+| Name              | Type   | Description                                                                                     |
+|-------------------|--------|-------------------------------------------------------------------------------------------------|
+| `intent_input`    | string | Required. Input text to process.                                                                |
+| `language`        | string | Optional. Language of pipeline to run (default: use first one that matches specified language). |
+| `pipeline`        | string | Optional. Id of a pipeline to run (default: use language).                                      |
+| `conversation_id` | string | Optional. [Unique id for conversation](/docs/intent_conversation_api#conversation-id).          |
+| `timeout`         | number | Optional. Number of seconds before pipeline times out (default: 30).                            |
 
 ## Events
 
