@@ -239,6 +239,10 @@ We support:
 - `list(val1|val2|...)`
 - `device` / `device(filter)`: Device filter can be in the following format: `subsystem=TYPE` i.e. `subsystem=tty` for serial devices.
 
+Note:
+
+Options with a `-` are not supported and will be interpreted as a mathematical operation instead of as a string. For example, instead of `message-default: value` use `message_default: value`.
+
 ## Add-on extended build
 
 Additional build options for an add-on are stored in `build.yaml`. This file will be read from our build systems.
