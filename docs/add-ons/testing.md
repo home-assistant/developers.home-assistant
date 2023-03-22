@@ -56,7 +56,7 @@ docker build \
   .
 ```
 
-[hassio-builder]: https://github.com/home-assistant/hassio-builder
+[hassio-builder]: https://github.com/home-assistant/builder
 
 ## Local run
 
