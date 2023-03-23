@@ -78,8 +78,8 @@ Make sure your editor is using UNIX-like line breaks (LF), not DOS/Windows (CRLF
 Now comes the fun part, time to open the Home Assistant UI and install and run your add-on.
 
 - Open the Home Assistant frontend
-- Go to "Configuration"
-- Click on "Add-ons, backups & Supervisor"
+- Go to "Settings"
+- Click on "Add-ons"
 - Click "add-on store" in the bottom right corner.
 
 [![Open your Home Assistant instance and show the Supervisor add-on store.](https://my.home-assistant.io/badges/supervisor_store.svg)](https://my.home-assistant.io/redirect/supervisor_store/)

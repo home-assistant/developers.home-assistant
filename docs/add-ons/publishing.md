@@ -65,4 +65,4 @@ docker run \
 If you are developing on macOS and using Docker for Mac, you may encounter an error message similar to the following: `error creating aufs mount to /var/lib/docker/aufs/mnt/<SOME_ID>-init: invalid argument`. A proposed workaround is to add the following to the Advanced Daemon JSON configuration via Docker > Preferences > Daemon > Advanced: `"storage-driver" : "aufs"` or map the docker socket into container.
 :::
 
-[builder]: https://github.com/home-assistant/hassio-builder
+[builder]: https://github.com/home-assistant/builder
