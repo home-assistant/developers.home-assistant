@@ -254,3 +254,15 @@ The `content` key of a backup object contains the following keys:
 | by_id      | string or null | Udev by ID link                                                       |
 | attributes | dict           | A dict with pure udev device attributes for debug and understanding   |
 | children   | list           | A list of path to the children sysfs devices                          |
+
+## Disk
+
+| key        | type           | description                                                            |
+| ---------- | -------------- | ---------------------------------------------------------------------- |
+| name       | string         | Name of the disk device                                                |
+| vendor     | string         | Vendor of the disk device                                              |
+| model      | string         | Model of the disk device                                               |
+| serial     | string         | Serial number of the disk device                                       |
+| size       | int            | Size of disk in bytes                                                  |
+| id         | string         | Unique ID for the disk device (either UDisks2 drive ID or device path) |
+| dev_path   | string         | Device path for the disk device                                        |

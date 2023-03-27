@@ -2035,7 +2035,7 @@ Returns information about the OS.
   "update_available": true,
   "board": "ova",
   "boot": "slot1",
-  "data_disk": "/dev/sda"
+  "data_disk": "BJTD4R-0x123456789"
 }
 ```
 
@@ -2059,17 +2059,38 @@ Returns possible targets for the new data partition.
 
 **Returned data:**
 
-| key              | type    | description                                                  |
-| ---------------- | ------- | ------------------------------------------------------------ |
-| devices          | list    | List with devices paths of possible disk targets             |
+| key              | type    | description                                                                         |
+| ---------------- | ------- | ----------------------------------------------------------------------------------- |
+| devices          | list    | List of IDs of possible data disk targets                                           |
+| disks            | list    | List of [disks](api/supervisor/models.md#disk) which are possible data disk targets |
 
 **Example response:**
 
 ```json
 {
   "devices": [
-    "/dev/sda",
-    "/dev/sdb"
+    "Generic-Flash-Disk-123ABC456",
+    "SSK-SSK-Storage-ABC123DEF"
+  ],
+  "disks": [
+    {
+      "name": "Generic Flash Disk (123ABC456)",
+      "vendor": "Generic",
+      "model": "Flash Disk",
+      "serial": "123ABC456",
+      "size": 8054112256,
+      "id": "Generic-Flash-Disk-123ABC456",
+      "dev_path": "/dev/sda"
+    },
+    {
+      "name": "SSK SSK Storage (ABC123DEF)",
+      "vendor": "SSK",
+      "model": "SSK Storage",
+      "serial": "ABC123DEF",
+      "size": 250059350016,
+      "id": "SSK-SSK-Storage-ABC123DEF",
+      "dev_path": "/dev/sdb"
+    }
   ]
 }
 ```
@@ -2084,7 +2105,7 @@ Move datadisk to a new location, **This will also reboot the device!**
 
 | key     | type   | description                                                       |
 | ------- | ------ | ----------------------------------------------------------------- |
-| device  | string | Path to the new device which should be use as the target for the data migration |
+| device  | string | ID of the disk device which should be used as the target for the data migration |
 
 </ApiEndpoint>
 
