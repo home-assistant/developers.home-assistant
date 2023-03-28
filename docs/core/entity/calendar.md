@@ -21,10 +21,22 @@ Properties should always only return information from memory and not do I/O (lik
 
 ### States
 
+A `CalendarEntity` state is similar to a binary sensor, reflecting whether or not there
+is an active event:
+
 | Constant    | Description                                 |
 | ----------- | ------------------------------------------- |
 | `STATE_ON`  | The calendar has an active event.           |
 | `STATE_OFF` | The calendar does not have an active event. |
+
+
+A calendar entity has an `event` property that returns either the current
+or next upcoming `CalendarEvent` which is used to determine the state. A calendar
+entity implementation is responsible for determining the next upcoming event,
+including correctly ordering events and interpreting all day events in the Home 
+Assistant timezone. An entity should call `homeassistant.util.dt.now` to get the
+current time which has a `tzinfo` value set to the HomeAssistant timezone or examine
+`homeassistant.components.util.dt.DEFAULT_TIMEZONE`
 
 ## Supported Features
 
@@ -37,18 +49,27 @@ and are combined using the bitwise or (`|`) operator.
 | `DELETE_EVENT`      | Entity implements the methods to allow deletion of events.  |
 | `UPDATE_EVENT`      | Entity implements the methods to allow update of events.  |
 
-
 ## Methods
 
 ### Get Events
 
 A calendar entity can return events that occur during a particular time range. Some notes for implementors:
 
-- The `start_date` is the lower bound and applied to the event's `end` (exclusive).
-- The `end_date` is the upper bound and applied to the event's `start` (exclusive).
+- The `start_date` is the lower bound and applied to the event's `end` (exclusive). This has a `tzinfo` of the local Home Assistant timezone.
+- The `end_date` is the upper bound and applied to the event's `start` (exclusive). This has the same `tzinfo` as `start_date`.
 - Recurring events should be flattened and returned as individual `CalendarEvent`.
 
+An calendar entity is responsible for returning the events in order including correctly
+ordering all day events. An all day event should be ordered to start at midnight in
+the Home Assistant timezone (e.g. from the start/end time argument `tzinfo`, 
+or using `homeassistant.util.dt.start_of_local_day`). Note that all day events should still
+set a `datetime.date` in the `CalendarEvent` and not a date with a time.
+
 ```python
+import datetime
+from homeassistant.core import HomeAssistant
+from homeassistant.components.calendar import CalendarEntity
+
 class MyCalendar(CalendarEntity):
 
     async def async_get_events(
@@ -65,6 +86,8 @@ class MyCalendar(CalendarEntity):
 A calendar entity may support creating events by specifying the `CREATE_EVENT` supported feature. Integrations that support mutation must handle rfc5545 fields and best practices such as preserving any new unknown fields that are set and recurring events.
 
 ```python
+from homeassistant.components.calendar import CalendarEntity
+
 class MyCalendar(CalendarEntity):
 
     async def async_create_event(self, **kwargs: Any) -> None:
@@ -82,6 +105,9 @@ There are three ways that recurring events may be deleted:
 - Specifying `uid`, `recurrence_id`, and a `recurrence_range` value may delete a range of events starting at `recurrence_id`. Currently rfc5545 allows the [range](https://www.rfc-editor.org/rfc/rfc5545#section-3.2.13) value of `THISANDFUTURE`.
 
 ```python
+from homeassistant.components.calendar import CalendarEntity
+
+
 class MyCalendar(CalendarEntity):
 
     async def async_delete_event(
@@ -103,6 +129,9 @@ There are three ways that recurring events may be updated:
 - Specifying `uid`, `recurrence_id`, and a `recurrence_range` value may update a range of events starting at `recurrence_id`. Currently rfc5545 allows the [range](https://www.rfc-editor.org/rfc/rfc5545#section-3.2.13) value of `THISANDFUTURE`.
 
 ```python
+from homeassistant.components.calendar import CalendarEntity
+
+
 class MyCalendar(CalendarEntity):
 
     async def async_update_event(
