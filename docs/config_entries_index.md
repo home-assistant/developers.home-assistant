@@ -139,3 +139,12 @@ If a component needs to clean up code when an entry is removed, it can define a 
 async def async_remove_entry(hass, entry) -> None:
     """Handle removal of an entry."""
 ```
+
+## Migrating config entries to a new version
+
+If the config entry version is changed, `async_migrate_entry` must be implemented to support the migration of old entries. This is documented in detail in the [config flow documentation](/config_entries_config_flow_handler.md#config-entry-migration)
+
+```python
+async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> bool:
+    """Migrate old entry."""
+```
