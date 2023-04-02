@@ -14,4 +14,4 @@ In particular, there are now more documented expectations and enforcement of inv
 - Events returned by `async_get_events` are expected to be returned in order.
 - All Day events returned by `async_get_events` must be evaluated in the Home Assistant local timezone. That is, an all day event should be ordered as if it starts at midnight in the local time.
 
-The [Calendar Entity developer documentation](docs/core/entity/calendar) has been updated with additional detail.
+The [Calendar Entity developer documentation](/docs/core/entity/calendar) has been updated with additional detail.
