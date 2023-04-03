@@ -86,6 +86,14 @@ set_speed:
   # parameters will automatically be applied to device and area, and device selector
   # parameters will automatically be applied to area. 
   target:
+    entity:
+      domain: fan
+      # If not all entities from the service's domain support a service, entities
+      # can be further filtered by the `supported_features` state attribute. An
+      # entity will only be possible to select if it supports at least one of the
+      # listed supported features.
+      supported_features:
+        - fan.FanEntityFeature.SET_SPEED
   # Different fields that your service accepts
   fields:
     # Key of the field
@@ -112,7 +120,43 @@ set_speed:
             - "low"
             - "medium"
             - "high"
+```
 
+### Filtering service fields
+
+In some cases, entities from a service's domain may not support all service fields. By
+providing a `filter` for the field description, the field will only be shown if at least
+on selected entity supports the field.
+
+The filter supports filtering on `supported_features` as well as on state attribute values
+in general.
+
+This is a partial example of a field which is only shown if at least one selected entity
+has the needed `supported_features`:
+
+```yaml
+  fields:
+    temperature:
+      name: Temperature
+      description: New target temperature for HVAC.
+      filter:
+        supported_features:
+          - climate.ClimateEntityFeature.TARGET_TEMPERATURE
+```
+
+This is a partial example of a field which is only shown if at least one selected entity's
+`supported_color_modes` attribute includes either `light.ColorMode.COLOR_TEMP` or
+`light.ColorMode.HS`:
+
+```yaml
+    color_temp:
+      name: Color temperature
+      description: Color temperature for the light in mireds.
+      filter:
+        attribute:
+          supported_color_modes:
+            - light.ColorMode.COLOR_TEMP
+            - light.ColorMode.HS
 ```
 
 ## Entity Services
