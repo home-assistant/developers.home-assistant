@@ -126,7 +126,10 @@ set_speed:
 
 In some cases, entities from a service's domain may not support all service fields. By
 providing a `filter` for the field description, the field will only be shown if at least
-on selected entity supports the field.
+one selected entity supports the field according to the configured filter.
+
+If multiple filters are specified, the field will be shown if at least one selected entity
+passes at least one filter.
 
 The filter supports filtering on `supported_features` as well as on state attribute values
 in general.
