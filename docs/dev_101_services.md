@@ -117,13 +117,16 @@ set_speed:
 
 In some cases, entities from a service's domain may not support all service fields. By
 providing a `filter` for the field description, the field will only be shown if at least
-on selected entity supports the field.
+one selected entity supports the field.
 
-The filter supports filtering on `supported_features` as well as on state attribute values
+A filter supports filtering on `supported_features` as well as on state attribute values
 in general.
 
+If multiple filters are given, at least one entity must pass all the filters.
+
 This is a partial example of a field which is only shown if at least one selected entity
-has the needed `supported_features`:
+supports either `climate.ClimateEntityFeature.TARGET_TEMPERATURE` or
+`climate.ClimateEntityFeature.TARGET_TEMPERATURE_RANGE`:
 
 ```yaml
   fields:
@@ -133,6 +136,7 @@ has the needed `supported_features`:
       filter:
         supported_features:
           - climate.ClimateEntityFeature.TARGET_TEMPERATURE
+          - climate.ClimateEntityFeature.TARGET_TEMPERATURE_RANGE
 ```
 
 This is a partial example of a field which is only shown if at least one selected entity's
