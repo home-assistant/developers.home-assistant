@@ -128,7 +128,7 @@ In some cases, entities from a service's domain may not support all service fiel
 providing a `filter` for the field description, the field will only be shown if at least
 one selected entity supports the field according to the configured filter.
 
-A filter must specify either `supported_features` or `attribute`, cmobining both is not
+A filter must specify either `supported_features` or `attribute`, combing both is not
 supported.
 
 A `supported_features` filter is specified by of a list of supported features. The field
