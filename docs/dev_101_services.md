@@ -77,7 +77,14 @@ set_speed:
   name: Set speed
   # Description of the service
   description: Sets fan speed.
-  # If the service accepts entity IDs, target allows the user to specify entities by entity, device, or area. If `target` is specified, `entity_id` should not be defined in the `fields` map. By default it shows only targets matching entities from the same domain as the service, but if further customization is required, target supports the entity, device, and area selectors (https://www.home-assistant.io/docs/blueprint/selectors/). Entity selector parameters will automatically be applied to device and area, and device selector parameters will automatically be applied to area. 
+  # If the service accepts entity IDs, target allows the user to specify entities by
+  # entity, device, or area. If `target` is specified, `entity_id` should not be
+  # defined in the `fields` map. By default it shows only targets matching entities
+  # from the same domain as the service, but if further customization is required,
+  # target supports the entity, device, and area selectors
+  # (https://www.home-assistant.io/docs/blueprint/selectors/). Entity selector
+  # parameters will automatically be applied to device and area, and device selector
+  # parameters will automatically be applied to area. 
   target:
   # Different fields that your service accepts
   fields:
@@ -89,13 +96,15 @@ set_speed:
       description: Speed setting
       # Whether or not field is required (default = false)
       required: true
-      # Advanced fields are only shown when the advanced mode is enabled for the user (default = false)
+      # Advanced fields are only shown when the advanced mode is enabled for the user
+      # (default = false)
       advanced: true
       # Example value that can be passed for this field
       example: "low"
       # The default field value
       default: "high"
-      # Selector (https://www.home-assistant.io/docs/blueprint/selectors/) to control the input UI for this field
+      # Selector (https://www.home-assistant.io/docs/blueprint/selectors/) to control
+      # the input UI for this field
       selector:
         select:
           options:
