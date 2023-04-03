@@ -128,14 +128,19 @@ In some cases, entities from a service's domain may not support all service fiel
 providing a `filter` for the field description, the field will only be shown if at least
 one selected entity supports the field according to the configured filter.
 
-If multiple filters are specified, the field will be shown if at least one selected entity
-passes at least one filter.
+A filter must specify either `supported_features` or `attribute`, combing both is not
+supported.
 
-The filter supports filtering on `supported_features` as well as on state attribute values
-in general.
+A `supported_features` filter is specified by of a list of supported features. The field
+will be shown if at least one selected entity supports at least one of the listed features.
+
+An `attribute` filter combines an attribute with a list of values. The field will be
+shown if at least one selected entity's attribute is set to one of the listed attribute states.
+If the attribute state is a list, the field will be shown if at least one item in a selected
+entity's attribute state is set to one of the listed attribute states.
 
 This is a partial example of a field which is only shown if at least one selected entity
-has the needed `supported_features`:
+supports `ClimateEntityFeature.TARGET_TEMPERATURE`:
 
 ```yaml
   fields:
