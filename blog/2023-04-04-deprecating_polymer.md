@@ -5,13 +5,13 @@ authorTwitter: bramkragten
 title: Deprecating Polymer
 ---
 
-The Home Assistant frontend used to use the [Polymer Library](https://polymer-library.polymer-project.org/3.0/docs/about_30) for her web components. Polymer is since been deprecated and superseded by [Lit](https://lit.dev).
+The Home Assistant frontend used to use the [Polymer Library](https://polymer-library.polymer-project.org/3.0/docs/about_30) for her web components. Polymer has since been deprecated and superseded by [Lit](https://lit.dev).
 
 In the last couple of years, we migrated most of the frontend to Lit, and we only have a few places and dependencies that still use Polymer.
 
 This is good news, as Lit is way faster and lighter than Polymer.
 
-In Home Assistant 2023.4, we finally removed the latest piece of Polymer from the entry point of Home Assistant, meaning it is not needed when the app starts, but only when a component needs it.
+In Home Assistant 2023.4, we finally removed the last piece of Polymer from the entry point of Home Assistant, meaning it is not loaded when the app starts, but only when a component needs it.
 
 For custom cards and panels, we have supplied Polymer on the window object, so it was easier to access and use. But nowadays it is hardly used anymore, and since Home Assistant no longer uses it, it is mainly a big chunk of unused code that is slowing down the loading of Home Assistant.
 
