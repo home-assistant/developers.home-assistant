@@ -6,7 +6,7 @@ To ensure that the documentation for Home Assistant is consistent and easy to fo
 
 ## General Documentation
 
-Broadly speaking documentation should be written following Microsoft's house style, which is detailed [here](https://docs.microsoft.com/en-us/style-guide).
+Broadly speaking documentation should be written following Microsoft's house style, which is detailed [here](https://learn.microsoft.com/style-guide/welcome/).
 
 - The language of the documentation should be American-English.
 - Don't put two spaces after a period.
