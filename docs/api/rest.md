@@ -23,7 +23,7 @@ curl \
   http://IP_ADDRESS:8123/ENDPOINT
 ```
 
-Another option is to use Python and the [Requests](https://requests.readthedocs.io/en/master/) module.
+Another option is to use Python and the [Requests](https://requests.readthedocs.io/en/latest/) module.
 
 ```python
 from requests import get
