@@ -2,7 +2,7 @@
 title: "Sensors"
 ---
 
-The `mobile_app` component supports exposing custom sensors that can be managed entirely via your app.
+The `mobile_app` integration supports exposing custom sensors that can be managed entirely via your app.
 
 ## Registering a sensor
 
