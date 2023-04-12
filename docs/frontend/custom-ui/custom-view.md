@@ -6,7 +6,7 @@ By default Home Assistant will try to show the cards in a masonry layout (like P
 
 ## API
 
-You define your custom view as a [custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements). It's up to you to decide how to render your DOM inside your element. You can use Lit Element, Preact, or any other popular framework (except for React – [more info on React here](https://custom-elements-everywhere.com/#react)).
+You define your custom view as a [custom element](https://developer.mozilla.org/docs/Web/Web_Components/Using_custom_elements). It's up to you to decide how to render your DOM inside your element. You can use Lit Element, Preact, or any other popular framework (except for React – [more info on React here](https://custom-elements-everywhere.com/#react)).
 
 Custom Views receive the following:
 
