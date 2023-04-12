@@ -6,7 +6,7 @@ title: "Submit your work"
 Always base your Pull Requests off of the current **`dev`** branch, not `master`.
 :::
 
-Submit your improvements, fixes, and new features to Home Assistant one at a time, using GitHub [Pull Requests](https://help.github.com/articles/using-pull-requests). Here are the steps:
+Submit your improvements, fixes, and new features to Home Assistant one at a time, using GitHub [Pull Requests](https://docs.github.com/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/about-pull-requests). Here are the steps:
 
 1. From your fork's dev branch, create a new branch to hold your changes:
 
@@ -33,7 +33,7 @@ Submit your improvements, fixes, and new features to Home Assistant one at a tim
 
     `git push origin HEAD`
 
-6. Follow [these steps](https://help.github.com/articles/creating-a-pull-request/) to create your pull request.
+6. Follow [these steps](https://docs.github.com/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request) to create your pull request.
 
     - On GitHub, navigate to the [main page of the Home Assistant repository](https://github.com/home-assistant/core).
     - In the "Branch" menu, choose the branch that contains your commits (from your fork).

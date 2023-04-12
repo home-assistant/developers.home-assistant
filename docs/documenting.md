@@ -4,7 +4,7 @@ title: "Documentation"
 
 The user documentation is located at [https://www.home-assistant.io](https://www.home-assistant.io). This section is the place where we provide documentation and additional details about creating or modifying content.
 
-The [home-assistant.io](https://home-assistant.io) website is built using [Jekyll](http://github.com/mojombo/jekyll) and [these dependencies](https://pages.github.com/versions/). The pages are written in [Markdown](http://daringfireball.net/projects/markdown/). To add a page, you don't need to know HTML.
+The [home-assistant.io](https://home-assistant.io) website is built using [Jekyll](https://github.com/jekyll/jekyll) and [these dependencies](https://pages.github.com/versions/). The pages are written in [Markdown](https://daringfireball.net/projects/markdown/). To add a page, you don't need to know HTML.
 
 ## Small changes
 
