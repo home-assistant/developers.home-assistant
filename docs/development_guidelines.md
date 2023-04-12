@@ -2,21 +2,21 @@
 title: "Style guidelines"
 ---
 
-Home Assistant enforces quite strict [PEP8 style](https://www.python.org/dev/peps/pep-0008/) and [PEP 257 (Docstring Conventions)](https://www.python.org/dev/peps/pep-0257/) compliance on all code submitted.
+Home Assistant enforces quite strict [PEP8 style](https://peps.python.org/pep-0008/) and [PEP 257 (Docstring Conventions)](https://peps.python.org/pep-0257/) compliance on all code submitted.
 
 We use [Black](https://github.com/psf/black) for uncompromised code formatting. Every pull request is automatically checked as part of the linting process and we never merge submissions that diverge.
 
 Summary of the most relevant points:
 
 - Comments should be full sentences and end with a period.
-- [Imports](https://www.python.org/dev/peps/pep-0008/#imports) should be ordered.
+- [Imports](https://peps.python.org/pep-0008/#imports) should be ordered.
 - Constants and the content of lists and dictionaries should be in alphabetical order.
 
 It is advisable to adjust IDE or editor settings to match those requirements.
 
 ## Our recommendations
 
-For some cases [PEPs](https://www.python.org/dev/peps/) don't make a statement. This section covers our recommendations about the code style. Those points were collected from the existing code and based on what contributors and developers were using the most. This is basically a majority decision, thus you may not agree with it. But we would like to encourage you follow those recommendations to keep the code consistent.
+For some cases [PEPs](https://peps.python.org/) don't make a statement. This section covers our recommendations about the code style. Those points were collected from the existing code and based on what contributors and developers were using the most. This is basically a majority decision, thus you may not agree with it. But we would like to encourage you follow those recommendations to keep the code consistent.
 
 ### File headers
 
@@ -43,7 +43,7 @@ Also note that `_LOGGER.info` is reserved for the core, use `_LOGGER.debug` for 
 
 ### Ordering of imports
 
-Instead of ordering the imports manually, use [`isort`](https://github.com/timothycrosley/isort).
+Instead of ordering the imports manually, use [`isort`](https://github.com/PyCQA/isort).
 
 ```shell
 pip3 install isort
