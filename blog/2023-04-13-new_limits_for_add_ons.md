@@ -12,7 +12,7 @@ If you are an add-on developer and experience out-of-memory issues on Home
 Assistant OS 10, you can apply the old limit by using `ulimit -n 1048576` before
 starting your service.
 
-Background: During Home Assistant OS release candidate phase, this turned out to
+Background: During Home Assistant OS release candidate phase, the higher limit turned out to
 be problematic for several add-ons (Node-RED, Network UPS Tools, and the EMQX
 MQTT broker, see [Home Assistant OS issue #2438](https://github.com/home-assistant/operating-system/issues/2438)).
 In all cases, the problems manifested as an out-of-memory error,
