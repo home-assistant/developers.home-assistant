@@ -10,7 +10,7 @@ A light entity controls the brightness, hue and saturation color value, white va
 
 | Name | Type | Default | Description
 | ---- | ---- | ---- | ----
-| brightness | int | None | Return the brightness of this light between 0..255
+| brightness | int | None | Return the brightness of this light between 1..255
 | color_mode | string | None | Return the color mode of the light. The returned color mode must be present in the `supported_color_modes` property.
 | color_temp | int | None | Return the CT color value in mireds. This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.COLOR_TEMP` and ignored otherwise.
 | effect | String | None | Return the current effect.
