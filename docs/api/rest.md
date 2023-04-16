@@ -207,7 +207,7 @@ You can pass the following optional GET parameters:
 - `end_time=<timestamp>` to choose the end of the period in URL encoded format (defaults to 1 day).
 - `minimal_response` to only return `last_changed` and `state` for states other than the first and last state (much faster).
 - `no_attributes` to skip returning attributes from the database (much faster).
-- `significant_changes_only` to only return significant state changes.
+- `significant_changes_only=0` to return all state changes (defaults to only returning significant states changes).
 
 Example without `minimal_response`
 
