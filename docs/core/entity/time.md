@@ -27,10 +27,10 @@ Called when the user or an automation wants to update the value.
 class MyTime(TimeEntity):
     # Implement one of these methods.
 
-    def set_value(self, time_value: time) -> None:
+    def set_value(self, value: time) -> None:
         """Update the current value."""
 
-    async def async_set_value(self, time_value: time) -> None:
+    async def async_set_value(self, value: time) -> None:
         """Update the current value."""
 
 ```
