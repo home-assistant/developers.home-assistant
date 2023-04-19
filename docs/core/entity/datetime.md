@@ -27,10 +27,10 @@ Called when the user or an automation wants to update the value. The input datet
 class MyDateTime(DateTimeEntity):
     # Implement one of these methods.
 
-    def set_value(self, dt_value: datetime) -> None:
+    def set_value(self, value: datetime) -> None:
         """Update the current value."""
 
-    async def async_set_value(self, dt_value: datetime) -> None:
+    async def async_set_value(self, value: datetime) -> None:
         """Update the current value."""
 
 ```
