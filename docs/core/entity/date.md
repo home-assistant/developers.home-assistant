@@ -30,7 +30,7 @@ class MyDate(DateEntity):
     def set_value(self, value: date) -> None:
         """Update the current value."""
 
-    async def async_set_value(self, date_value: date) -> None:
+    async def async_set_value(self, value: date) -> None:
         """Update the current value."""
 
 ```
