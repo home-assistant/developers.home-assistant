@@ -8,9 +8,9 @@ Unlike localized strings merged in the `home-assistant` repository, custom compo
 
 Custom components must have their own directory, and the file is simply named `strings.json` in that directory. This file will contain the different strings that will be translatable for different things that the custom components offers that need to be translated.
 
-The translated files must be located in the `translations` directory, adjacent to the component source. They are named `<language_code>.json` in the `translations` directory, e.g., for the German translation `de.json`.
-
 These files follow the same formatting as [backend translation string files](internationalization/core.md), but a copy will exist for each translated language.
+
+The translated files must be located in the `translations` directory, adjacent to the component source. They are named `<language_code>.json` in the `translations` directory, e.g., for the German translation `de.json`.
 
 The language codes follow the [BCP47](https://tools.ietf.org/html/bcp47) format. The [frontend translation files](https://github.com/home-assistant/frontend/tree/master/src/translations) can also be referred to if you are unsure of the correct language code to use.
 
