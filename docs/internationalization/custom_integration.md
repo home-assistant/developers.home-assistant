@@ -4,7 +4,11 @@ title: "Custom Component Localization"
 
 ## Translation Strings
 
-Unlike localized strings merged in the `home-assistant` repository, custom components cannot take advantage of Lokalise for user-submitted translations. However, custom component authors can still include translations with their components. These will be read from the `translations` directory, adjacent to the component source. They are named `<platform name>.<language_code>.json`, e.g., for the German translation of a sensor `sensor.de.json`, unless the translation is for the custom component only, in which case the file is named `<language_code>.json` in the `translations` directory.
+Unlike localized strings merged in the `home-assistant` repository, custom components cannot take advantage of Lokalise for user-submitted translations. However, custom component authors can still include translations with their components.
+
+Custom components must have their own directory, and the file is simply named `strings.json` in that directory. This file will contain the different strings that will be translatable for different things that the custom components offers that need to be translated.
+
+The translated files must be located in the `translations` directory, adjacent to the component source. They are named `<language_code>.json` in the `translations` directory, e.g., for the German translation `de.json`.
 
 These files follow the same formatting as [backend translation string files](internationalization/core.md), but a copy will exist for each translated language.
 
