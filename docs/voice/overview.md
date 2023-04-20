@@ -10,7 +10,7 @@ Building a voice assistant is a complex task. It requires a lot of different tec
 graph TD;
     U((User))
     STT[Speech-to-Text]
-    VA[Voice Assistant]
+    VA[Assist Pipeline]
     C[Conversation]
     I[Intent]
     TTS[Text-to-Speech]
@@ -26,7 +26,7 @@ graph TD;
     VA -->|10. Response Audio| U
 ```
 
- - The **Voice Assistant** integration is responsible for turning the user's speech into text, get it processed, and turn the response into speech. _This integration has not been created yet._
+ - The **Assist Pipeline** integration is responsible for turning the user's speech into text, get it processed, and turn the response into speech.
  - The **Conversation** integration is responsible for processing user's text. The built-in conversation agent does this by matching it to an intent. Integrations can provide [custom conversation agents](../core/conversation/custom_agent).
  - The **Intent** integration is responsible for executing the intent and returning a response.
 - The **Text-to-Speech** integration is responsible for turning text into speech.
