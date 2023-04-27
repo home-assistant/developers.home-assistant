@@ -39,7 +39,7 @@ The following events can be emitted:
 
 | Name            | Description                 | Emitted    | Attributes                                                                                              |
 |-----------------|-----------------------------|------------|---------------------------------------------------------------------------------------------------------|
-| `run-start`     | Start of pipeline run       | always     | `pipeline` - Name of pipeline<br />`pipeline_id` - ID of the pipeline<br />`language` - Language used for pipeline<br />`runner_data` - Extra WebSocket data: <li>`stt_binary_handler_id` is the prefix to send speech data over.</li><li>`timeout` is the max run time for the whole pipeline.</li>                         |
+| `run-start`     | Start of pipeline run       | always     | `pipeline` - ID of the pipeline<br />`language` - Language used for pipeline<br />`runner_data` - Extra WebSocket data: <li>`stt_binary_handler_id` is the prefix to send speech data over.</li><li>`timeout` is the max run time for the whole pipeline.</li>                         |
 | `run-finish`    | End of pipeline run         | always     |                                                                                                         |
 | `stt-start`     | Start of speech to text     | audio only | `engine`: STT engine used<br />`metadata`: incoming audio metadata
 | `stt-finish`    | End of speech to text       | audio only | `stt_output` - Object with `text`, the detected text.
