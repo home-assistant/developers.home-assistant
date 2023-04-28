@@ -12,8 +12,7 @@ Pipelines are run via a WebSocket API:
 
 ```json
 {
-  "type": "assist_assistant/run",
-  "language": "en-US",
+  "type": "assist_pipeline/run",
   "start_stage": "stt",
   "end_stage": "tts",
   "input": {
@@ -29,6 +28,7 @@ The following input fields are available:
 | `start_stage` | enum   | Required. The first stage to run. One of `stt`, `intent`, `tts`. |
 | `end_stage`   | enum   | Required. The last stage to run. One of `stt`, `intent`, `tts`. |
 | `input`       | dict   | Depends on `start_stage`. For STT, the dictionary should contain a key `sample_rate` with an integer value. For intent and TTS, the key `text` should contain the input text.
+| `pipeline` | string | Optional. ID of the pipeline (use `assist_pipeline/pipeline/list` to get names). |
 | `conversation_id` | string | Optional. [Unique id for conversation](/docs/intent_conversation_api#conversation-id).      |
 | `timeout`         | number | Optional. Number of seconds before pipeline times out (default: 30).                        |
 
@@ -39,7 +39,7 @@ The following events can be emitted:
 
 | Name            | Description                 | Emitted    | Attributes                                                                                              |
 |-----------------|-----------------------------|------------|---------------------------------------------------------------------------------------------------------|
-| `run-start`     | Start of pipeline run       | always     | `pipeline` - ID of the pipeline<br />`language` - Language used for pipeline<br />`runner_data` - Extra WebSocket data: <li>`stt_binary_handler_id` is the prefix to send speech data over.</li><li>`timeout` is the max run time for the whole pipeline.</li>                         |
+| `run-start`     | Start of pipeline run       | always     | `pipeline` - ID of the pipeline<br />`language` - Language used for pipeline<br />`runner_data` - Extra WebSocket data: <ul><li>`stt_binary_handler_id` is the prefix to send speech data over.</li><li>`timeout` is the max run time for the whole pipeline.</li></ul>                         |
 | `run-finish`    | End of pipeline run         | always     |                                                                                                         |
 | `stt-start`     | Start of speech to text     | audio only | `engine`: STT engine used<br />`metadata`: incoming audio metadata
 | `stt-finish`    | End of speech to text       | audio only | `stt_output` - Object with `text`, the detected text.
