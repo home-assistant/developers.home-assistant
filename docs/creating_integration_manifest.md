@@ -33,7 +33,7 @@ Or a minimal example that you can copy into your project:
   "documentation": "https://www.example.com",
   "integration_type": "hub",
   "iot_class": "cloud_polling",
-  "requirements": [],
+  "requirements": []
 }
 ```
 
