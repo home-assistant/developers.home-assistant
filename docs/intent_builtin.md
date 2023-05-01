@@ -5,7 +5,15 @@ toc_max_heading_level: 2
 
 import intents from '!!yaml-loader!../intents/intents.yaml';
 
-The following intents are supported by Home Assistant:
+The following intents are **supported**:
+
+  * HassTurnOn, HassTurnOff, HassGetState, HassLightSet
+
+The following intents are **deprecated**:
+
+ * HassOpenCover, HassCloseCover, HassToggle, HassHumidifierSetpoint, HassHumidifierMode, HassShoppingListAddItem, HassShoppingListLastItems
+
+## Supported intents
 
 <>
 {
