@@ -1739,6 +1739,94 @@ Returns a dict with selected keys from other `/*/info` endpoints.
 
 </ApiEndpoint>
 
+### Mounts
+
+<ApiEndpoint path="/mounts" method="get">
+Returns information about mounts configured in Supervisor
+
+**Returned data:**
+
+| key              | type       | description                                        |
+| ---------------- | ---------- | -------------------------------------------------- |
+| mounts           | list       | A list of [Mounts](api/supervisor/models.md#mount) |
+
+**Example response:**
+
+```json
+{
+  "mounts": [
+    {
+      "name": "my_share",
+      "usage": "media",
+      "type": "cifs",
+      "server": "server.local",
+      "share": "media",
+      "state": "active"
+    }
+  ]
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/mounts" method="post">
+Add a new mount in Supervisor and mount it
+
+**Payload:**
+
+Accepts a [Mount](api/supervisor/models.md#mount)
+
+Value in `name` must be unique and can only consist of letters, numbers and underscores.
+
+**Example payload:**
+
+```json
+{
+  "name": "my_share",
+  "usage": "media",
+  "type": "cifs",
+  "server": "server.local",
+  "share": "media",
+  "username": "admin",
+  "password": "password"
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/mounts/<name>" method="put">
+Update an existing mount in Supervisor and remount it
+
+**Payload:**
+
+Accepts a [Mount](api/supervisor/models.md#mount).
+
+The `name` field should be omitted. If included the value must match the existing
+name, it cannot be changed. Delete and re-add the mount to change the name.
+
+**Example payload:**
+
+```json
+{
+  "usage": "media",
+  "type": "nfs",
+  "server": "server.local",
+  "path": "/media/camera"
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/mounts/<name>" method="delete">
+Unmount and delete an existing mount from Supervisor.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/mounts/<name>/reload" method="post">
+Unmount and remount an existing mount in Supervisor using the same configuration.
+
+</ApiEndpoint>
+
 ### Multicast
 
 <ApiEndpoint path="/multicast/info" method="get">
