@@ -13,14 +13,22 @@ The following intents are **deprecated**:
 
  * HassOpenCover, HassCloseCover, HassToggle, HassHumidifierSetpoint, HassHumidifierMode, HassShoppingListAddItem, HassShoppingListLastItems
 
-For *HassTurnOn* and *HassTurnOff*, The *slots* are optional. Possible slot combinations are:
+**Slots**
+
+For *HassTurnOn* and *HassTurnOff*, the *slots* are optional. 
+
+Possible slot combinations are:
+
+
     | Slot combination        | Example                          |
+    | ----------------------- | ---------------------------------|
     | name only               | table light                      |
     | area only               | kitchen                          |
     | area and name           | living room reading light        |
     | area and domain         | kitchen lights                   |
     | area and device class   | bathroom humidity                |
     | device class and domain | carbon dioxide sensors           |
+
 
 ## Supported intents
 
