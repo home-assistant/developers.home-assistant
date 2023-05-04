@@ -92,7 +92,7 @@ If this integration is being submitted for inclusion in Home Assistant, it shoul
 
 ## Dependencies
 
-Dependencies are other Home Assistant integrations that you want Home Assistant to set up successfully prior to the integration being loaded. This can be necessary in case you want to offer functionality from that other integration, like using webhooks or a MQTT connection. Adding an integration to dependencies will ensure the depending integration is loaded before setup, but it does not guarantee all configuration entries have been set up. See the [MQTT section](#mqtt) for more details on handling this for MQTT.
+Dependencies are other Home Assistant integrations you want Home Assistant to set up successfully before the integration is loaded. Adding an integration to dependencies will ensure the depending integration is loaded before setup, but it does not guarantee all dependency configuration entries have been set up. Adding dependencies can be necessary if you want to offer functionality from that other integration, like webhooks or an MQTT connection. See the [MQTT section](#mqtt) for more details on handling this for MQTT.
 
 Built-in integrations shall only specify other built-in integrations in `dependencies`. Custom integrations may specify both built-in and custom integrations in `dependencies`.
 
