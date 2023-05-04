@@ -92,7 +92,7 @@ If this integration is being submitted for inclusion in Home Assistant, it shoul
 
 ## Dependencies
 
-Dependencies are other Home Assistant integrations that you want Home Assistant to set up successfully prior to the integration being loaded. This can be necessary in case you want to offer functionality from that other integration, like using webhooks or an MQTT connection.
+Dependencies are other Home Assistant integrations that you want Home Assistant to set up successfully prior to the integration being loaded. This can be necessary in case you want to offer functionality from that other integration, like using webhooks or a MQTT connection. Adding an integration to dependencies will ensure the depending integration is loaded before setup, but it does not guarantee all configuration entries have been set up. The MQTT integration for example does not implement `async_setup` and the config entry is set up via `async_setup_entry`. This also applies for integrations that depend on MQTT and that have implemented a platform setup only via `async_setup_platform`. Depending integrations should wait using `await mqtt.async_wait_for_mqtt_client(hass)` for the MQTT client to become available. The `async_wait_for_mqtt_client` method will block and return `True` till the MQTT client is available. If a dependency is optional but not critical, then adding an after dependency might be a better alternative.
 
 Built-in integrations shall only specify other built-in integrations in `dependencies`. Custom integrations may specify both built-in and custom integrations in `dependencies`.
 
