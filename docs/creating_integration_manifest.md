@@ -295,7 +295,8 @@ MQTT discovery works by subscribing to MQTT topics specified in the manifest.jso
 ```
 
 If your integration requires `mqtt`, make sure it is added to the [dependencies](#dependencies).
-The MQTT integration for example does not implement `async_setup` and the config entry is set up via `async_setup_entry`. This also applies for integrations that depend on MQTT and that have implemented a platform setup only via `async_setup_platform`. Depending integrations should wait using `await mqtt.async_wait_for_mqtt_client(hass)` for the MQTT client to become available before they can subscribe. The `async_wait_for_mqtt_client` method will block and return `True` till the MQTT client is available. If a dependency is optional but not critical, then adding an [after dependency](#after-dependencies) might be a better alternative.
+
+Integrations depending on MQTT should wait using `await mqtt.async_wait_for_mqtt_client(hass)` for the MQTT client to become available before they can subscribe. The `async_wait_for_mqtt_client` method will block and return `True` till the MQTT client is available.
 
 ## DHCP
 
