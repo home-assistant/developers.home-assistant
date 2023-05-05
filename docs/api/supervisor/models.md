@@ -254,3 +254,33 @@ The `content` key of a backup object contains the following keys:
 | by_id      | string or null | Udev by ID link                                                       |
 | attributes | dict           | A dict with pure udev device attributes for debug and understanding   |
 | children   | list           | A list of path to the children sysfs devices                          |
+
+## Disk
+
+| key        | type           | description                                                            |
+| ---------- | -------------- | ---------------------------------------------------------------------- |
+| name       | string         | Name of the disk device                                                |
+| vendor     | string         | Vendor of the disk device                                              |
+| model      | string         | Model of the disk device                                               |
+| serial     | string         | Serial number of the disk device                                       |
+| size       | int            | Size of disk in bytes                                                  |
+| id         | string         | Unique ID for the disk device (either UDisks2 drive ID or device path) |
+| dev_path   | string         | Device path for the disk device                                        |
+
+## Mount
+
+| key        | type           | description                                                            | request/response |
+| ---------- | -------------- | ---------------------------------------------------------------------- | ---------------- |
+| name       | string         | Name of the mount                                                      | both             |
+| type       | string         | Type of the mount (cifs or nfs)                                        | both             |
+| usage      | string         | Usage of the mount (backup or media)                                   | both             |
+| server     | string         | IP address or hostname of the network share server                     | both             |
+| port       | int            | Port to use (if not using the standard one for the mount type)         | both             |
+| path       | string         | (nfs mounts only) Path to mount from the network share                 | both             |
+| share      | string         | (cifs mounts only) Share to mount from the network share               | both             |
+| username   | string         | (cifs mounts only) Username to use for authentication                  | request only     |
+| password   | string         | (cifs mounts only) Password to use for authentication                  | request only     |
+| state      | string         | Current state of the mount (active, failed, etc.)                      | response only    |
+
+Request only fields may be included in requests but will never be in responses.
+Response only fields will be in responses but cannot be included in requests.

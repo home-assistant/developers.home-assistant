@@ -235,7 +235,7 @@ each time you go through the process.
    just comment that. By responding to the bot, it will know things are not
    stale and will back off. In the mean time, it might be a good idea to rebase
    your PR on the latest development branches to ensure you are fully
-   catched up with recent changes.
+   caught up with recent changes.
 
 5. **I have a PR that should go into a hotfix/patch release, how do I do that?**
    Just create the PR as normal, and make it very clear in the PR description

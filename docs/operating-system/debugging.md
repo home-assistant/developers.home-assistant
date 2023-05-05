@@ -7,7 +7,7 @@ sidebar_label: Debugging
 This section is not for end users. End users should use the [SSH add-on] to SSH into Home Assistant. This is for **developers** of Home Assistant. Do not ask for support if you are using these options.
 :::
 
-[SSH add-on]: https://github.com/home-assistant/hassio-addons/tree/master/ssh
+[SSH add-on]: https://github.com/home-assistant/addons/tree/master/ssh
 
 ## SSH access to the host
 
@@ -33,7 +33,7 @@ If you have an older installation or have changed your hostname, you may need to
 
 You will be logged in as root in the ```/root``` folder. [Home Assistant OS] is a hypervisor for Docker. See the [Supervisor Architecture] documentation for information regarding the Supervisor. The Supervisor offers an API to manage the host and running the Docker containers. Home Assistant itself and all installed addons run in separate Docker containers.
 
-[CLI tasks]: https://www.home-assistant.io/hassio/commandline/
+[CLI tasks]: https://www.home-assistant.io/common-tasks/os#home-assistant-via-the-command-line
 [Home Assistant OS]: https://github.com/home-assistant/operating-system
 [Supervisor Architecture]: /architecture_index.md
 
@@ -60,13 +60,13 @@ docker logs homeassistant
 docker exec -it homeassistant /bin/bash
 ```
 
-[windows-keys]: https://www.digitalocean.com/community/tutorials/how-to-use-ssh-keys-with-putty-on-digitalocean-droplets-windows-users
+[windows-keys]: https://docs.digitalocean.com/products/droplets/how-to/add-ssh-keys/create-with-putty/
 
 ### Generating SSH Keys
 
 Windows instructions for how to generate and use private/public keys with Putty are [here][windows-keys]. Instead of the droplet instructions, add the public key as per above instructions.
 
-Alternative instructions, for Mac, Windows and Linux can be found [here](https://help.github.com/articles/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent/#platform-mac).
+Alternative instructions, for Mac, Windows and Linux can be found [here](https://docs.github.com/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#platform-mac).
 
 Follow steps 1-4 under 'Generating a new SSH key' (The other sections are not applicable to Home Assistant and can be ignored.)
 

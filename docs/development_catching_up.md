@@ -42,4 +42,4 @@ You will have to start over the git fetch and rebase process described above, or
 git push origin --force
 ```
 
-Other workflows are covered in detail in the [Github documentation](https://help.github.com/articles/fork-a-repo/).
+Other workflows are covered in detail in the [Github documentation](https://docs.github.com/get-started/quickstart/fork-a-repo).

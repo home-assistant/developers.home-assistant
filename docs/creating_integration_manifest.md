@@ -33,7 +33,7 @@ Or a minimal example that you can copy into your project:
   "documentation": "https://www.example.com",
   "integration_type": "hub",
   "iot_class": "cloud_polling",
-  "requirements": [],
+  "requirements": []
 }
 ```
 
@@ -92,7 +92,7 @@ If this integration is being submitted for inclusion in Home Assistant, it shoul
 
 ## Dependencies
 
-Dependencies are other Home Assistant integrations that you want Home Assistant to set up successfully prior to the integration being loaded. This can be necessary in case you want to offer functionality from that other integration, like using webhooks or an MQTT connection.
+Dependencies are other Home Assistant integrations you want Home Assistant to set up successfully before the integration is loaded. Adding an integration to dependencies will ensure the depending integration is loaded before setup, but it does not guarantee all dependency configuration entries have been set up. Adding dependencies can be necessary if you want to offer functionality from that other integration, like webhooks or an MQTT connection. Adding an [after dependency](#after-dependencies) might be a better alternative if a dependency is optional but not critical. See the [MQTT section](#mqtt) for more details on handling this for MQTT.
 
 Built-in integrations shall only specify other built-in integrations in `dependencies`. Custom integrations may specify both built-in and custom integrations in `dependencies`.
 
@@ -293,6 +293,10 @@ MQTT discovery works by subscribing to MQTT topics specified in the manifest.jso
   ]
 }
 ```
+
+If your integration requires `mqtt`, make sure it is added to the [dependencies](#dependencies).
+
+Integrations depending on MQTT should wait using `await mqtt.async_wait_for_mqtt_client(hass)` for the MQTT client to become available before they can subscribe. The `async_wait_for_mqtt_client` method will block and return `True` till the MQTT client is available.
 
 ## DHCP
 

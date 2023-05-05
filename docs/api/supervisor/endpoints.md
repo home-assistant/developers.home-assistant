@@ -1739,6 +1739,94 @@ Returns a dict with selected keys from other `/*/info` endpoints.
 
 </ApiEndpoint>
 
+### Mounts
+
+<ApiEndpoint path="/mounts" method="get">
+Returns information about mounts configured in Supervisor
+
+**Returned data:**
+
+| key              | type       | description                                        |
+| ---------------- | ---------- | -------------------------------------------------- |
+| mounts           | list       | A list of [Mounts](api/supervisor/models.md#mount) |
+
+**Example response:**
+
+```json
+{
+  "mounts": [
+    {
+      "name": "my_share",
+      "usage": "media",
+      "type": "cifs",
+      "server": "server.local",
+      "share": "media",
+      "state": "active"
+    }
+  ]
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/mounts" method="post">
+Add a new mount in Supervisor and mount it
+
+**Payload:**
+
+Accepts a [Mount](api/supervisor/models.md#mount)
+
+Value in `name` must be unique and can only consist of letters, numbers and underscores.
+
+**Example payload:**
+
+```json
+{
+  "name": "my_share",
+  "usage": "media",
+  "type": "cifs",
+  "server": "server.local",
+  "share": "media",
+  "username": "admin",
+  "password": "password"
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/mounts/<name>" method="put">
+Update an existing mount in Supervisor and remount it
+
+**Payload:**
+
+Accepts a [Mount](api/supervisor/models.md#mount).
+
+The `name` field should be omitted. If included the value must match the existing
+name, it cannot be changed. Delete and re-add the mount to change the name.
+
+**Example payload:**
+
+```json
+{
+  "usage": "media",
+  "type": "nfs",
+  "server": "server.local",
+  "path": "/media/camera"
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/mounts/<name>" method="delete">
+Unmount and delete an existing mount from Supervisor.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/mounts/<name>/reload" method="post">
+Unmount and remount an existing mount in Supervisor using the same configuration.
+
+</ApiEndpoint>
+
 ### Multicast
 
 <ApiEndpoint path="/multicast/info" method="get">
@@ -2035,7 +2123,7 @@ Returns information about the OS.
   "update_available": true,
   "board": "ova",
   "boot": "slot1",
-  "data_disk": "/dev/sda"
+  "data_disk": "BJTD4R-0x123456789"
 }
 ```
 
@@ -2059,17 +2147,38 @@ Returns possible targets for the new data partition.
 
 **Returned data:**
 
-| key              | type    | description                                                  |
-| ---------------- | ------- | ------------------------------------------------------------ |
-| devices          | list    | List with devices paths of possible disk targets             |
+| key              | type    | description                                                                         |
+| ---------------- | ------- | ----------------------------------------------------------------------------------- |
+| devices          | list    | List of IDs of possible data disk targets                                           |
+| disks            | list    | List of [disks](api/supervisor/models.md#disk) which are possible data disk targets |
 
 **Example response:**
 
 ```json
 {
   "devices": [
-    "/dev/sda",
-    "/dev/sdb"
+    "Generic-Flash-Disk-123ABC456",
+    "SSK-SSK-Storage-ABC123DEF"
+  ],
+  "disks": [
+    {
+      "name": "Generic Flash Disk (123ABC456)",
+      "vendor": "Generic",
+      "model": "Flash Disk",
+      "serial": "123ABC456",
+      "size": 8054112256,
+      "id": "Generic-Flash-Disk-123ABC456",
+      "dev_path": "/dev/sda"
+    },
+    {
+      "name": "SSK SSK Storage (ABC123DEF)",
+      "vendor": "SSK",
+      "model": "SSK Storage",
+      "serial": "ABC123DEF",
+      "size": 250059350016,
+      "id": "SSK-SSK-Storage-ABC123DEF",
+      "dev_path": "/dev/sdb"
+    }
   ]
 }
 ```
@@ -2084,7 +2193,7 @@ Move datadisk to a new location, **This will also reboot the device!**
 
 | key     | type   | description                                                       |
 | ------- | ------ | ----------------------------------------------------------------- |
-| device  | string | Path to the new device which should be use as the target for the data migration |
+| device  | string | ID of the disk device which should be used as the target for the data migration |
 
 </ApiEndpoint>
 

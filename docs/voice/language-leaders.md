@@ -18,6 +18,6 @@ If you want to apply to be a language leader, join us in `#devs_voice` on Discor
 
 ## Losing language leader status
 
-A language leader is a gatekeeper for a language. If they are inactive, language contributions for that language are not processed.
+A language leader is a gatekeeper for a language and its quality. If they are inactive, contributions for that language are not processed. If they accept low-quality contributions, it will not generate the correct matching sentences that it needs to process.
 
-If the inactivity of the language leader becomes a bottle neck, the language leader will be removed. If they want to regain their status, they can apply again.
+If the inactivity of the language leader becomes a bottle neck, or if the quality is not up to par, the language leader will be removed. If they want to regain their status, they can apply again.

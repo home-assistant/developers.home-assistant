@@ -236,6 +236,26 @@ async def async_migrate_entry(hass, config_entry: ConfigEntry):
     return True
 ```
 
+If only the config entry version is changed, but no other properties, `async_update_entry` should not be called:
+```python
+# Example migration function which does not modify config entry properties, e.g. data or options
+async def async_migrate_entry(hass, config_entry: ConfigEntry):
+    """Migrate old entry."""
+    _LOGGER.debug("Migrating from version %s", config_entry.version)
+
+    if config_entry.version == 1:
+
+        # TODO: Do some changes which is not stored in the config entry itself
+
+        # There's no need to call async_update_entry, the config entry will automatically be
+        # saved when async_migrate_entry returns True
+        config_entry.version = 2
+
+    _LOGGER.info("Migration to version %s successful", config_entry.version)
+
+    return True
+```
+
 ## Reauthentication
 
 Gracefully handling authentication errors such as invalid, expired, or revoked tokens is needed to advance on the [Integration Qualily Scale](integration_quality_scale_index.md). This example of how to add reauth to the OAuth flow created by `script.scaffold` following the pattern in [Building a Python library](api_lib_auth.md#oauth2).

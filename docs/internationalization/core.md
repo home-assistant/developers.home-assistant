@@ -153,6 +153,8 @@ The translation strings for repairs issues are defined under the `issues` key. A
 Integrations can provide translations for names of its entities. To do this, provide an `entity` object, that contains translations of the names and set the entity's `translation_key` property to a key under a domain in the `entity` object.
 If the entity's `translation_key` property is not `None` and the `entity` object provides a translated name, `EntityDescription.name` will be ignored.
 
+Entity components, like `sensor`, already have existing translations available that can be reused by referencing those. This includes common translations for entity names based on a device class. For example, it already has translations available for a "Temperature" sensor that can be referenced. Referencing existing translations is preferred, as it prevents translating the same thing multiple times.
+
 The following example `strings.json` is for a `sensor` entity with its `translation_key` property set to `thermostat_mode`:
 ```json
 {
@@ -160,6 +162,20 @@ The following example `strings.json` is for a `sensor` entity with its `translat
     "sensor": {
       "thermostat_mode": {
         "name": "Thermostat mode"
+      }
+    }
+  }
+}
+```
+
+The following example `strings.json` is for a `sensor` entity with its `translation_key` property set to `temperature_sensor` where a shared translation provided by the `sensor` integration is used:
+
+```json
+{
+  "entity": {
+    "sensor": {
+      "temperature_sensor": {
+        "name": "[%key:component::sensor::entity_component::temperature::name%]"
       }
     }
   }
@@ -213,10 +229,6 @@ If your integration provides entities under its domain, you will want to transla
 ```
 
 #### Entity state attributes
-
-:::info
-Translation of entity state attributes also requires frontend support, which is currently only available for `climate` entities.
-:::
 
 Integrations can provide translations for its entities' state attributes under other integrations like sensor if the base entity component does not provide translations, or if the translation provided by the base entity component do not match the integration's entity. To do this, provide an `entity` object, that contains translations for entity state attributes and set the entity's `translation_key` property to a key under a domain in the `entity` object.
 

@@ -77,8 +77,23 @@ set_speed:
   name: Set speed
   # Description of the service
   description: Sets fan speed.
-  # If the service accepts entity IDs, target allows the user to specify entities by entity, device, or area. If `target` is specified, `entity_id` should not be defined in the `fields` map. By default it shows only targets matching entities from the same domain as the service, but if further customization is required, target supports the entity, device, and area selectors (https://www.home-assistant.io/docs/blueprint/selectors/). Entity selector parameters will automatically be applied to device and area, and device selector parameters will automatically be applied to area. 
+  # If the service accepts entity IDs, target allows the user to specify entities by
+  # entity, device, or area. If `target` is specified, `entity_id` should not be
+  # defined in the `fields` map. By default it shows only targets matching entities
+  # from the same domain as the service, but if further customization is required,
+  # target supports the entity, device, and area selectors
+  # (https://www.home-assistant.io/docs/blueprint/selectors/). Entity selector
+  # parameters will automatically be applied to device and area, and device selector
+  # parameters will automatically be applied to area. 
   target:
+    entity:
+      domain: fan
+      # If not all entities from the service's domain support a service, entities
+      # can be further filtered by the `supported_features` state attribute. An
+      # entity will only be possible to select if it supports at least one of the
+      # listed supported features.
+      supported_features:
+        - fan.FanEntityFeature.SET_SPEED
   # Different fields that your service accepts
   fields:
     # Key of the field
@@ -89,13 +104,15 @@ set_speed:
       description: Speed setting
       # Whether or not field is required (default = false)
       required: true
-      # Advanced fields are only shown when the advanced mode is enabled for the user (default = false)
+      # Advanced fields are only shown when the advanced mode is enabled for the user
+      # (default = false)
       advanced: true
       # Example value that can be passed for this field
       example: "low"
       # The default field value
       default: "high"
-      # Selector (https://www.home-assistant.io/docs/blueprint/selectors/) to control the input UI for this field
+      # Selector (https://www.home-assistant.io/docs/blueprint/selectors/) to control
+      # the input UI for this field
       selector:
         select:
           options:
@@ -103,7 +120,51 @@ set_speed:
             - "low"
             - "medium"
             - "high"
+```
 
+### Filtering service fields
+
+In some cases, entities from a service's domain may not support all service fields. By
+providing a `filter` for the field description, the field will only be shown if at least
+one selected entity supports the field according to the configured filter.
+
+A filter must specify either `supported_features` or `attribute`, combing both is not
+supported.
+
+A `supported_features` filter is specified by of a list of supported features. The field
+will be shown if at least one selected entity supports at least one of the listed features.
+
+An `attribute` filter combines an attribute with a list of values. The field will be
+shown if at least one selected entity's attribute is set to one of the listed attribute states.
+If the attribute state is a list, the field will be shown if at least one item in a selected
+entity's attribute state is set to one of the listed attribute states.
+
+This is a partial example of a field which is only shown if at least one selected entity
+supports `ClimateEntityFeature.TARGET_TEMPERATURE`:
+
+```yaml
+  fields:
+    temperature:
+      name: Temperature
+      description: New target temperature for HVAC.
+      filter:
+        supported_features:
+          - climate.ClimateEntityFeature.TARGET_TEMPERATURE
+```
+
+This is a partial example of a field which is only shown if at least one selected entity's
+`supported_color_modes` attribute includes either `light.ColorMode.COLOR_TEMP` or
+`light.ColorMode.HS`:
+
+```yaml
+    color_temp:
+      name: Color temperature
+      description: Color temperature for the light in mireds.
+      filter:
+        attribute:
+          supported_color_modes:
+            - light.ColorMode.COLOR_TEMP
+            - light.ColorMode.HS
 ```
 
 ## Entity Services
