@@ -201,9 +201,12 @@ Returns an array of state changes in the past. Each object contains further deta
 
 The `<timestamp>` (`YYYY-MM-DDThh:mm:ssTZD`) is optional and defaults to 1 day before the time of the request. It determines the beginning of the period.
 
+The following paramters are required:	
+	
+- `filter_entity_id=<entity_ids>` to filter on one or more entities - comma separated.
+	
 You can pass the following optional GET parameters:
 
-- `filter_entity_id=<entity_ids>` to filter on one or more entities - comma separated.
 - `end_time=<timestamp>` to choose the end of the period in URL encoded format (defaults to 1 day).
 - `minimal_response` to only return `last_changed` and `state` for states other than the first and last state (much faster).
 - `no_attributes` to skip returning attributes from the database (much faster).
