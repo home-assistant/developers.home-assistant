@@ -62,11 +62,12 @@ from homeassistant.const import (
     CONF_PLATFORM,
     CONF_TYPE,
 )
+from homeassistant.helpers import device_registry as dr
 
 async def async_get_triggers(hass, device_id):
     """Return a list of triggers."""
-
-    device_registry = hass.helpers.device_registry.async_get()
+    
+    device_registry = dr.async_get(hass)
     device = device_registry.async_get(device_id)
 
     triggers = []
