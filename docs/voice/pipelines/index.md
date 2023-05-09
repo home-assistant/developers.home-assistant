@@ -2,7 +2,7 @@
 title: "Assist Pipelines"
 ---
 
-The [Assist pipeline](https://next.home-assistant.io/integrations/assit_pipeline) integration runs the common steps of a voice assistant:
+The [Assist pipeline](https://www.home-assistant.io/integrations/assist_pipeline) integration runs the common steps of a voice assistant:
 
 1. Speech to text
 2. Intent recognition
