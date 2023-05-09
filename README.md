@@ -6,7 +6,7 @@ This is the source for the [Home Assistant Development documentation](https://de
 
 ## Updating the docs
 
-Documentation is built using [Docusaurus](https://v2.docusaurus.io/).
+Documentation is built using [Docusaurus](https://docusaurus.io/).
 
 ## Editing on GitHub
 
@@ -24,12 +24,12 @@ The easiest way to get started with development is to use Visual Studio Code wit
 
 - [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 - Docker
-  - For Linux, macOS, or Windows 10 Pro/Enterprise/Education use the [current release version of Docker](https://docs.docker.com/install/)
-  - Windows 10 Home requires [WSL 2](https://docs.microsoft.com/windows/wsl/wsl2-install) and the current Edge version of Docker Desktop (see instructions [here](https://docs.docker.com/docker-for-windows/wsl-tech-preview/)). This can also be used for Windows Pro/Enterprise/Education.
+  - For Linux, macOS, or Windows 10 Pro/Enterprise/Education use the [current release version of Docker](https://docs.docker.com/get-docker/)
+  - Windows 10 Home requires [WSL 2](https://learn.microsoft.com/windows/wsl/install) and the current Edge version of Docker Desktop (see instructions [here](https://docs.docker.com/desktop/windows/wsl/)). This can also be used for Windows Pro/Enterprise/Education.
 - [Visual Studio code](https://code.visualstudio.com/)
 - [Remote - Containers (VSC Extension)][extension-link]
 
-[More info about requirements and devcontainer in general](https://code.visualstudio.com/docs/remote/containers#_getting-started)
+[More info about requirements and devcontainer in general](https://code.visualstudio.com/docs/devcontainers/containers#_getting-started)
 
 [extension-link]: https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers
 

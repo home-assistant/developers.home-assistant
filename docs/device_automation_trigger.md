@@ -62,11 +62,12 @@ from homeassistant.const import (
     CONF_PLATFORM,
     CONF_TYPE,
 )
+from homeassistant.helpers import device_registry as dr
 
 async def async_get_triggers(hass, device_id):
     """Return a list of triggers."""
 
-    device_registry = await hass.helpers.device_registry.async_get_registry()
+    device_registry = dr.async_get(hass)
     device = device_registry.async_get(device_id)
 
     triggers = []
@@ -94,14 +95,16 @@ For example, you might attach the trigger and action to [Events fired](integrati
 ```python
 async def async_attach_trigger(hass, config, action, trigger_info):
     """Attach a trigger."""
-    event_config = event_trigger.TRIGGER_SCHEMA({
-        event_trigger.CONF_PLATFORM: "event",
-        event_trigger.CONF_EVENT_TYPE: "mydomain_event",
-        event_trigger.CONF_EVENT_DATA: {
-            CONF_DEVICE_ID: config[CONF_DEVICE_ID],
-            CONF_TYPE: config[CONF_TYPE],
-        },
-    }
+    event_config = event_trigger.TRIGGER_SCHEMA(
+        {
+            event_trigger.CONF_PLATFORM: "event",
+            event_trigger.CONF_EVENT_TYPE: "mydomain_event",
+            event_trigger.CONF_EVENT_DATA: {
+                CONF_DEVICE_ID: config[CONF_DEVICE_ID],
+                CONF_TYPE: config[CONF_TYPE],
+            },
+        }
+    )
     return await event_trigger.async_attach_trigger(
         hass, event_config, action, trigger_info, platform_type="device"
     )

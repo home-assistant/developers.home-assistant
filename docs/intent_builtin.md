@@ -5,7 +5,32 @@ toc_max_heading_level: 2
 
 import intents from '!!yaml-loader!../intents/intents.yaml';
 
-The following intents are supported by Home Assistant:
+The following intents are **supported**:
+
+  * HassTurnOn, HassTurnOff, HassGetState, HassLightSet
+
+The following intents are **deprecated**:
+
+ * HassOpenCover, HassCloseCover, HassToggle, HassHumidifierSetpoint, HassHumidifierMode, HassShoppingListAddItem, HassShoppingListLastItems
+
+**Slots**
+
+For *HassTurnOn* and *HassTurnOff*, the *slots* are optional. 
+
+Possible slot combinations are:
+
+
+    | Slot combination        | Example                          |
+    | ----------------------- | ---------------------------------|
+    | name only               | table light                      |
+    | area only               | kitchen                          |
+    | area and name           | living room reading light        |
+    | area and domain         | kitchen lights                   |
+    | area and device class   | bathroom humidity                |
+    | device class and domain | carbon dioxide sensors           |
+
+
+## Supported intents
 
 <>
 {
