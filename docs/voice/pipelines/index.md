@@ -43,7 +43,7 @@ The following events can be emitted:
 | `run-end`       | End of pipeline run         | always     |                                                                                                         |
 | `stt-start`     | Start of speech to text     | audio only | `engine`: STT engine used<br />`metadata`: incoming audio metadata
 | `stt-end`       | End of speech to text       | audio only | `stt_output` - Object with `text`, the detected text.
-| `intent-start`  | Start of intent recognition | always     | `engine` - [Agent](/docs/intent_conversation_api) engine used<br />`language`: Processing language. <br/ > `intent_input` - Input text to agent |
+| `intent-start`  | Start of intent recognition | always     | `engine` - [Agent](/docs/intent_conversation_api) engine used<br />`language`: Processing language. <br /> `intent_input` - Input text to agent |
 | `intent-end`    | End of intent recognition   | always     | `intent_output` - [conversation response](/docs/intent_conversation_api#conversation-response)          |
 | `tts-start`     | Start of text to speech     | audio only | `engine` - TTS engine used<br />`language`: Output language.<br />`voice`: Output voice. <br />`tts_input`: Text to speak. |
 | `tts-end`       | End of text to speech       | audio only | `media_id` - Media Source ID of the generated audio<br />`url` - URL to the generated audio<br />`mime_type` - MIME type of the generated audio<br /> |
