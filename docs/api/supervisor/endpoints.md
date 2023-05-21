@@ -761,11 +761,12 @@ Create a full backup.
 
 **Payload:**
 
-| key        | type    | optional | description                              |
-| ---------- | ------- | -------- | -----------------------------------------|
-| name       | string  | True     | The name you want to give the backup     |
-| password   | string  | True     | The password you want to give the backup |
-| compressed | boolean | True     | `false` to create uncompressed backups   |
+| key        | type           | optional | description                                    |
+| ---------- | -------------- | -------- | ---------------------------------------------- |
+| name       | string         | True     | The name you want to give the backup           |
+| password   | string         | True     | The password you want to give the backup       |
+| compressed | boolean        | True     | `false` to create uncompressed backups         |
+| location   | string or null | True     | Name of a backup mount or `null` for /backup   |
 
 **Example response:**
 
@@ -797,14 +798,15 @@ Create a partial backup.
 
 **Payload:**
 
-| key        | type    | optional | description                                 |
-| ---------- | ------- | -------- | ------------------------------------------- |
-| name       | string  | True     | The name you want to give the backup        |
-| password   | string  | True     | The password you want to give the backup    |
-| homeassistant   | boolean    | True | Add home assistant core settings to the backup |
-| addons     | list    | True     | A list of strings representing add-on slugs |
-| folders    | list    | True     | A list of strings representing directories  |
-| compressed | boolean | True     | `false` to create uncompressed backups      |
+| key           | type           | optional | description                                    |
+| ------------- | -------------- | -------- | ---------------------------------------------- |
+| name          | string         | True     | The name you want to give the backup           |
+| password      | string         | True     | The password you want to give the backup       |
+| homeassistant | boolean        | True     | Add home assistant core settings to the backup |
+| addons        | list           | True     | A list of strings representing add-on slugs    |
+| folders       | list           | True     | A list of strings representing directories     |
+| compressed    | boolean        | True     | `false` to create uncompressed backups         |
+| location      | string or null | True     | Name of a backup mount or `null` for /backup   |
 
 **You need to supply at least one key in the payload.**
 
@@ -1768,6 +1770,20 @@ Returns information about mounts configured in Supervisor
 ```
 
 </ApiEndpoint>
+
+<ApiEndpoint path="/mounts/options" method="post">
+Set mount manager options
+
+**Payload:**
+
+| key                  | type           | optional | description                                  |
+| -------------------- | -------------- | -------- | -------------------------------------------- |
+| default_backup_mount | string or null | True     | Name of a backup mount or `null` for /backup |
+
+**You need to supply at least one key in the payload.**
+
+</ApiEndpoint>
+
 
 <ApiEndpoint path="/mounts" method="post">
 Add a new mount in Supervisor and mount it
