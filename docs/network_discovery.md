@@ -197,7 +197,7 @@ from homeassistant.components import network
 adapters = await network.async_get_adapters(hass)
 
 for adapter in adapters:
-    for ip_info in adapater["ipv4"]:
+    for ip_info in adapter["ipv4"]:
         local_ip = ip_info["address"]
         network_prefix = ip_info["network_prefix"]
         ip_net = ip_network(f"{local_ip}/{network_prefix}", False)
