@@ -84,7 +84,7 @@ Your local Home Assistant installation will now connect to a remote Home Assista
 
 ## Frontend development
 
-The instructions here is for development of the Supervisor panel, we're going to assume that you have a [Home Assistant frontend development environment](/frontend/development.md) set up with the devcontainer, and that you have [Supervisor API Access](#supervisor-api-access) set up.
+These instructions are for development of the Supervisor panel. They assume that you have a [Home Assistant frontend development environment](/frontend/development.mdx) set up with the devcontainer, and that you have [Supervisor API Access](#supervisor-api-access) set up.
 
 1. Run the "Develop Supervisor panel" task
 2. Run the task "Run HA Core for Supervisor in devcontainer"
