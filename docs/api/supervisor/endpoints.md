@@ -705,6 +705,7 @@ Return a list of [Backups](api/supervisor/models.md#backup)
       "type": "partial",
       "size": 44,
       "protected": true,
+      "location": "MountedBackups",
       "compressed": true,
       "content": {
         "homeassistant": true,
@@ -742,6 +743,7 @@ Return information about backup manager.
       "size": 44,
       "protected": true,
       "compressed": true,
+      "location": null,
       "content": {
         "homeassistant": true,
         "addons": ["awesome_addon"],

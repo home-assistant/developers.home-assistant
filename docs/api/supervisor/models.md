@@ -190,18 +190,19 @@ The `content` key of a backup object contains the following keys:
 
 ## Backup details
 
-| key           | type    | description                                                                                                                |
-| ------------- | ------- | -------------------------------------------------------------------------------------------------------------------------- |
-| slug          | string  | A generated slug for the backup                                                                                          |
-| type          | string  | The type of backup (full, partial)                                                                                       |
-| name          | string  | The name given to the backup                                                                                             |
-| date          | string  | ISO date string representation of the date the backup was created                                                      |
-| size          | string  | The size of the backup in MB                                                                                             |
-| protected     | boolean | `true` if the backup is password protected                                                                               |
-| homeassistant | string  | The version of Home Assistant that was in use                                                                              |
-| addons        | list    | A list of add-ons in the backup, addons are represented as a dictionary with these keys [`slug`,`name`,`version`,`size`] |
-| repositories  | list    | A list of add-on repository URL's as strings                                                                               |
-| folders       | list    | A list of strings representing directories                                                                                 |
+| key           | type           | description                                                                                                              |
+| ------------- | -------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| slug          | string         | A generated slug for the backup                                                                                          |
+| type          | string         | The type of backup (full, partial)                                                                                       |
+| name          | string         | The name given to the backup                                                                                             |
+| date          | string         | ISO date string representation of the date the backup was created                                                        |
+| size          | string         | The size of the backup in MB                                                                                             |
+| protected     | boolean        | `true` if the backup is password protected                                                                               |
+| location      | string or null | The name of the backup mount it's stored on or `null` if it's local.                                                     |
+| homeassistant | string         | The version of Home Assistant that was in use                                                                            |
+| addons        | list           | A list of add-ons in the backup, addons are represented as a dictionary with these keys [`slug`,`name`,`version`,`size`] |
+| repositories  | list           | A list of add-on repository URL's as strings                                                                             |
+| folders       | list           | A list of strings representing directories                                                                               |
 
 ## Stats
 
