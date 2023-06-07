@@ -447,6 +447,23 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return self.async_create_entry(title="Some title", data={})
 ```
 
+Note: If the user closes the flow, the `async_remove` callback will be called. Make sure to implement this method in your FlowHandler to clean up any resources or tasks associated with the flow.
+
+```python
+class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
+    ...
+
+    @callback
+    async def async_remove(self):
+        # Clean up resources or tasks associated with the flow
+        if self.task_one:
+            self.task_one.cancel()
+            
+        if self.task_two:
+            self.task_two.cancel()
+        ...
+```
+
 ### Show Menu
 
 This will show a navigation menu to the user to easily pick the next step. The menu labels can be hardcoded by specifying a dictionary of {`step_id`: `label`} or translated via `strings.json` when specifying a list.
