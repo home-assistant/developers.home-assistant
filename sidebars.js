@@ -21,7 +21,8 @@ module.exports = {
   Frontend: [
     "frontend",
     "frontend/architecture",
-    "frontend/development",
+    "frontend/design",
+    "frontend/development",    
     "frontend/data",
     "frontend/external-authentication",
     "frontend/external-bus",
