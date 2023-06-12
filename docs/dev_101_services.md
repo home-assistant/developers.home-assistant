@@ -201,11 +201,12 @@ async def custom_set_sleep_timer(entity, service_call):
 ## Response Data
 
 Services may optionally return data for powering more advanced automations. The
-use of return values for services is meant for cases where the data 
+use of return values for services is meant for cases where the data
 is not a fit for the Home Assistant state e.g. a response stream of repeated objects, or API would be better queried on demand or filtered
 such as a search.
 
 Example code:
+
 ```python
 import datetime
 import voluptuous as vol
@@ -247,39 +248,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     )
 ```
 
-The return data schema must be validated using a voluptuous schema and also described in `services.yaml`. This is to ensure there is a clear definition of the structure of the data that is easy to understand.
-
-```yaml
-# Example services.yaml entry
-
-# Service ID
-search_items:
-  name: Search catalog items
-  description: Search through items in the catalog and return the results
-  target:
-  # Fields supported in the request
-  # Different fields that your service accepts
-  fields:
-    start:
-      name: Start time
-      description: The start date and time to search for.
-      example: "2022-03-22 20:00:00"
-      selector:
-        datetime:
-    end:
-      name: End time
-      description: The end date and time to search for.
-      example: "2022-03-22 22:00:00"
-      selector:
-        datetime:
-  response_fields:
-    items:
-      name: Result items
-      description: A list of search result items
-```
-
 There are some additional implementation standards:
 
+- The return data schema must be validated using a voluptuous schema.
 - All return data should be serializable in json. This is so that it can interoperate with other parts of the system such as the frontend.
 - Return data should not be used for data that already can already fit into the state or entity model.
-- Errors must be raised as exceptions such as `HomeAssistantError`. Return data is not allowed to contain error codes
+- Errors must be raised as exceptions such as `HomeAssistantError`. Return data is not allowed to contain error codes to avoid error handling mistakes.
