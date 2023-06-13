@@ -16,7 +16,7 @@ If the device's primary method to notify of updates is Bluetooth advertisements 
 
 If your device only communicates with an active Bluetooth connection and does not use Bluetooth advertisements:
 
-- [`DataUpdateCoordinator`](../../integration_fetching_data)
+- [`DataUpdateCoordinator`](/docs/integration_fetching_data)
 
 ## BluetoothProcessorCoordinator
 
