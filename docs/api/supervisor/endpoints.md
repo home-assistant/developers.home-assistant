@@ -1748,14 +1748,16 @@ Returns information about mounts configured in Supervisor
 
 **Returned data:**
 
-| key              | type       | description                                        |
-| ---------------- | ---------- | -------------------------------------------------- |
-| mounts           | list       | A list of [Mounts](api/supervisor/models.md#mount) |
+| key                  | type           | description                                        |
+| -------------------- | -------------- | -------------------------------------------------- |
+| mounts               | list           | A list of [Mounts](api/supervisor/models.md#mount) |
+| default_backup_mount | string or null | Name of a backup mount or `null` for /backup       |
 
 **Example response:**
 
 ```json
 {
+  "default_backup_mount": "my_share",
   "mounts": [
     {
       "name": "my_share",
