@@ -84,10 +84,8 @@ pre-commit run --show-diff-on-failure
 The linters are also available directly, you can run tests on individual files:
 
 ```shell
-flake8 homeassistant/core.py
 pylint homeassistant/core.py
 black homeassistant/core.py
-isort homeassistant/core.py
 ```
 
 ### Notes on PyLint and PEP8 validation
