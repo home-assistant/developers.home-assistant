@@ -200,10 +200,8 @@ async def custom_set_sleep_timer(entity, service_call):
 
 ## Response Data
 
-Services may optionally return data for powering more advanced automations. The
-use of return values for services is meant for cases where the data
-is not a fit for the Home Assistant state e.g. a response stream of repeated objects, or API would be better queried on demand or filtered
-such as a search.
+Services may optionally respond to a service call with data for powering more advanced automations. The use of response data for services is meant for
+cases not a fit for the Home Assistant state e.g. a response stream of repeated objects, or API would be better queried on demand or filtered such as a search.
 
 Example code:
 
@@ -220,37 +218,33 @@ SEARCH_ITEMS_SCHEMA = vol.Schema({
     vol.Required("start"): datetime.datetime,
     vol.Required("end"): datetime.datetime,
 })
-SEARCH_ITEMS_RESPONSE_SCHEMA: Final = vol.Schema({
-    vol.Required("items"): vol.All(
-      cv.ensure_list,
-      [
-        vol.Schema({
-          vol.Required("summary"): cv.string,
-          vol.Required("description"): cv.string,
-        })
-      ]
-    )
-})
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up the platform."""
 
-    async def search_items(call: ServiceCall) -> dict[str, Any]:
-      return await my_client.search(call.data["start"], call.data["end"])
+    async def search_items(call: ServiceCall) -> JsonObjectType:
+      """Search in the date range and return the matching items."""
+      items = await my_client.search(call.data["start"], call.data["end"])
+      return {
+        "items": [
+          {
+            "summary": item["summary"],
+            "description": item["description"],
+          } for item in items
+        ],
+      }
 
     hass.services.async_register(
       DOMAIN,
       SEARCH_ITEMS_SERVICE_NAME,
       search_items,
       schema=SEARCH_ITEMS_SCHEMA,
-      response_schema=SEARCH_ITEMS_RESPONSE_SCHEMA,
     )
 ```
 
 There are some additional implementation standards:
 
-- The return data schema must be validated using a voluptuous schema.
-- All return data should be serializable in json. This is so that it can interoperate with other parts of the system such as the frontend.
-- Return data should not be used for data that already can already fit into the state or entity model.
-- Errors must be raised as exceptions such as `HomeAssistantError`. Return data is not allowed to contain error codes to avoid error handling mistakes.
+- All response data should be serializable in json. This is so that it can interoperate with other parts of the system such as the frontend.
+- Response data should not be used for when there is a simpler alternative allowed by the state or entity model.
+- Errors must be raised as exceptions such as `HomeAssistantError`. The response data is not allowed to contain error codes or statuses to error handling mistakes.
