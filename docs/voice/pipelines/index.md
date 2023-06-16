@@ -49,3 +49,14 @@ The following events can be emitted:
 | `tts-end`       | End of text to speech       | audio only | `media_id` - Media Source ID of the generated audio<br />`url` - URL to the generated audio<br />`mime_type` - MIME type of the generated audio<br /> |
 | `error`         | Error in pipeline           | On error     | `code` - Error code<br />`message` - Error message |
 
+## Sending speech data
+
+After starting a pipeline with `stt` as the first stage of the run and receiving a `stt-start` event, speech data can be sent over the WebSocket connection as binary data. Audio should be sent as soon as it is available, with each chunk prefixed with a byte for the `stt_binary_handler_id`.
+
+For example, if `stt_binary_handler_id` is `1` and the audio chunk is `a1b2c3`, the message would be (in hex):
+
+```
+01a1b2c3
+```
+
+To indicate the end of sending speech data, send a binary message containing a single byte with the `stt_binary_handler_id`.
