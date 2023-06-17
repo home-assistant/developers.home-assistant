@@ -224,23 +224,23 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up the platform."""
 
     async def search_items(call: ServiceCall) -> JsonObjectType:
-      """Search in the date range and return the matching items."""
-      items = await my_client.search(call.data["start"], call.data["end"])
-      return {
-        "items": [
-          {
-            "summary": item["summary"],
-            "description": item["description"],
-          } for item in items
-        ],
-      }
+        """Search in the date range and return the matching items."""
+        items = await my_client.search(call.data["start"], call.data["end"])
+        return {
+            "items": [
+                {
+                    "summary": item["summary"],
+                    "description": item["description"],
+                } for item in items
+            ],
+        }
 
-    hass.services.async_register(
-      DOMAIN,
-      SEARCH_ITEMS_SERVICE_NAME,
-      search_items,
-      schema=SEARCH_ITEMS_SCHEMA,
-    )
+      hass.services.async_register(
+          DOMAIN,
+          SEARCH_ITEMS_SERVICE_NAME,
+          search_items,
+          schema=SEARCH_ITEMS_SCHEMA,
+      )
 ```
 
 There are some additional implementation standards:
