@@ -86,7 +86,7 @@ Detail: { path: [number] | [number, number] }
 Event: "ll-edit-card"
 Detail: { path: [number] | [number, number] }
 
-Event: "ll-add-card"
+Event: "ll-create-card"
 Detail: none
 ```
 
