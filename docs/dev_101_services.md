@@ -225,6 +225,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     async def search_items(call: ServiceCall) -> JsonObjectType:
         """Search in the date range and return the matching items."""
+        if not call.return_response:
+            raise ValueError("Request did not ask for response data")
         items = await my_client.search(call.data["start"], call.data["end"])
         return {
             "items": [
@@ -240,11 +242,16 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
           SEARCH_ITEMS_SERVICE_NAME,
           search_items,
           schema=SEARCH_ITEMS_SCHEMA,
+          supports_response=True,
       )
 ```
 
 There are some additional implementation standards:
 
+- You must set `supports_response` when registering a service
+- You may conditionally check the `ServiceCall` property `return_response` to
+decide whether or not response data should be returned (e.g. if it is large or
+expensive to fetch)
 - All response data should be serializable in json. This is so that it can interoperate with other parts of the system such as the frontend.
 - Response data should not be used for when there is a simpler alternative allowed by the state or entity model.
 - Errors must be raised as exceptions such as `HomeAssistantError`. The response data is not allowed to contain error codes or statuses to error handling mistakes.
