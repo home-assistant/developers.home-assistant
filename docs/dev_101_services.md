@@ -209,7 +209,7 @@ Example code:
 import datetime
 import voluptuous as vol
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.core import HomeAssistant, ServiceCall
+from homeassistant.core import HomeAssistant, ServiceCall, ServiceResponse
 from homeassistant.helpers import config_validation as cv, entity_platform, service
 
 
@@ -223,7 +223,7 @@ SEARCH_ITEMS_SCHEMA = vol.Schema({
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up the platform."""
 
-    async def search_items(call: ServiceCall) -> JsonObjectType:
+    async def search_items(call: ServiceCall) -> ServiceResponse:
         """Search in the date range and return the matching items."""
         if not call.return_response:
             raise ValueError("Request did not ask for response data")
@@ -248,10 +248,11 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 There are some additional implementation standards:
 
-- You must set `supports_response` when registering a service
+- You must set `supports_response` when registering a service so that the core
+knows which services support response data.
+- All response data should be serializable in json `JsonObjectType`. This is so that it can interoperate with other parts of the system such as the frontend.
 - You may conditionally check the `ServiceCall` property `return_response` to
 decide whether or not response data should be returned (e.g. if it is large or
-expensive to fetch)
-- All response data should be serializable in json. This is so that it can interoperate with other parts of the system such as the frontend.
-- Response data should not be used for when there is a simpler alternative allowed by the state or entity model.
+expensive to fetch). When not set, the service may return `None`
 - Errors must be raised as exceptions such as `HomeAssistantError`. The response data is not allowed to contain error codes or statuses to error handling mistakes.
+- Response data should not be used for when there is a simpler alternative allowed by the state or entity model.
