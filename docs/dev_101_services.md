@@ -254,5 +254,5 @@ knows which services support response data.
 - You may conditionally check the `ServiceCall` property `return_response` to
 decide whether or not response data should be returned (e.g. if it is large or
 expensive to fetch). When not set, the service may return `None`.
-- Errors must be raised as exceptions such as `HomeAssistantError`. The response data is not allowed to contain error codes or statuses to error handling mistakes.
+- Errors must be raised as exceptions such as `HomeAssistantError` and the response data is not allowed to contain error codes or statuses which are used for error handling. We want to keep error handling simple to avoid error handling mistakes.
 - Response data should not be used if there is a simpler alternative provided by the state or entity model.
