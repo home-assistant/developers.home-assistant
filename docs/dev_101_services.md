@@ -200,8 +200,12 @@ async def custom_set_sleep_timer(entity, service_call):
 
 ## Response Data
 
-Services may optionally respond to a service call with data for powering more advanced automations. The use of response data for services is meant for
-cases that do not fit the Home Assistant state. For example, a response stream of repeated objects, or API would be better queried on demand or filtered such as a search.
+Services may respond to a service call with data for powering more advanced automations. There are some additional implementation requirements:
+
+- Response data must be a `dict` and serializable in JSON [`homeassistant.util.json.JsonObjectType`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/util/json.py) in order to interoperate with other parts of the system, such as the frontend.
+- Errors must be raised as exceptions just like any other service call as we do
+not want end users to need complex error handling in scripts and automations.
+The response data should not contain error codes used for error handling.
 
 Example code:
 
@@ -209,8 +213,9 @@ Example code:
 import datetime
 import voluptuous as vol
 from homeassistant.config_entries import ConfigEntry
-from homeassistant.core import HomeAssistant, ServiceCall, ServiceResponse
+from homeassistant.core import HomeAssistant, ServiceCall, ServiceResponse, SupportsResponse
 from homeassistant.helpers import config_validation as cv, entity_platform, service
+from homeassistant.util.json import JsonObjectType
 
 
 SEARCH_ITEMS_SERVICE_NAME = "search_items"
@@ -225,8 +230,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     async def search_items(call: ServiceCall) -> ServiceResponse:
         """Search in the date range and return the matching items."""
-        if not call.return_response:
-            raise ValueError("Request did not ask for response data")
         items = await my_client.search(call.data["start"], call.data["end"])
         return {
             "items": [
@@ -242,17 +245,17 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
           SEARCH_ITEMS_SERVICE_NAME,
           search_items,
           schema=SEARCH_ITEMS_SCHEMA,
-          supports_response=True,
+          SupportsResponse.ONLY,
       )
 ```
 
-There are some additional implementation standards:
+The use of response data is meant for cases that do not fit the Home Assistant state. For example, a response stream of objects. Conversely, response data should not be used for cases that are a fit for entity state. For example, a temperature value should just be a sensor.
 
-- You must set `supports_response` when registering a service so that the core
-knows which services support response data.
-- All response data should be serializable in JSON `JsonObjectType`. This is so that it can interoperate with other parts of the system, such as the frontend.
-- You may conditionally check the `ServiceCall` property `return_response` to
-decide whether or not response data should be returned (e.g. if it is large or
-expensive to fetch). When not set, the service may return `None`.
-- Errors must be raised as exceptions, such as `HomeAssistantError`. The response data is not allowed to contain error codes or statuses which are used for error handling. We want to keep error handling simple to avoid error handling mistakes.
-- Response data should not be used if there is a simpler alternative provided by the state or entity model.
+### Supporting Response Data
+
+Service calls are registered with a `SupportsResponse` value to indicate response data is supported.
+
+| Value      | Description                                  |
+| ---------- | -------------------------------------------- |
+| `OPTIONAL` | The service performs and action and can optionally return response data. The service should conditionally check the `ServiceCall` property `return_response` to decide whether or not response data should be returned, or `None`. |
+| `ONLY` | The service is read only and always returns response data. |
