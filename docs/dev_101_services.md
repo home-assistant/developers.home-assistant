@@ -255,4 +255,4 @@ knows which services support response data.
 decide whether or not response data should be returned (e.g. if it is large or
 expensive to fetch). When not set, the service may return `None`.
 - Errors must be raised as exceptions such as `HomeAssistantError`. The response data is not allowed to contain error codes or statuses to error handling mistakes.
-- Response data should not be used for when there is a simpler alternative allowed by the state or entity model.
+- Response data should not be used if there is a simpler alternative provided by the state or entity model.
