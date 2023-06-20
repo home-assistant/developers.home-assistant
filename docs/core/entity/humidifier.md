@@ -14,6 +14,7 @@ Properties should always only return information from memory and not do I/O (lik
 | Name                    | Type   | Default                               | Description                                                                               |
 | ----------------------- | ------ | ------------------------------------------------- | ----------------------------------------------------------------------------------------- |
 | target_humidity         | int    | `None`                                | The target humidity the device is trying to reach.                                        |
+| current_humidity        | int    | `None`                                | The current humidity measured by the device.                                              |
 | max_humidity            | int    | `DEFAULT_MAX_HUMIDITY` (value == 100) | Returns the maximum humidity.                                                             |
 | min_humidity            | int    | `DEFAULT_MIN_HUMIDITY` (value == 0)   | Returns the minimum humidity.                                                             |
 | mode                    | string | `NotImplementedError()`               | The current active preset. Requires `SUPPORT_MODES`.                                      |
