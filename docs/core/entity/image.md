@@ -15,7 +15,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name                     | Type  | Default | Description                                                                                                                        |
 | ------------------------ | ----- | ------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| image_last_updated             | datatime  | `None`  | Timestamp of when the image was last updated. Used to determine `state`.                                                          |
+| image_last_updated             | datetime  | `None`  | Timestamp of when the image was last updated. Used to determine `state`.                                                          |
 
 ## Methods
 
