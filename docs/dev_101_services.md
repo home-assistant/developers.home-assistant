@@ -201,7 +201,7 @@ async def custom_set_sleep_timer(entity, service_call):
 ## Response Data
 
 Services may optionally respond to a service call with data for powering more advanced automations. The use of response data for services is meant for
-cases not a fit for the Home Assistant state e.g. a response stream of repeated objects, or API would be better queried on demand or filtered such as a search.
+cases that do not fit the Home Assistant state. For example, a response stream of repeated objects, or API would be better queried on demand or filtered such as a search.
 
 Example code:
 
