@@ -250,7 +250,7 @@ There are some additional implementation standards:
 
 - You must set `supports_response` when registering a service so that the core
 knows which services support response data.
-- All response data should be serializable in json `JsonObjectType`. This is so that it can interoperate with other parts of the system such as the frontend.
+- All response data should be serializable in JSON `JsonObjectType`. This is so that it can interoperate with other parts of the system, such as the frontend.
 - You may conditionally check the `ServiceCall` property `return_response` to
 decide whether or not response data should be returned (e.g. if it is large or
 expensive to fetch). When not set, the service may return `None`.
