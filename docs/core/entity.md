@@ -104,6 +104,10 @@ The following properties are used and controlled by Home Assistant, and should n
 
 ## Entity naming
 
+:::tip
+Don't set an entity's name to a hard coded English string, instead, the name should be [translated](/docs/internationalization/core#name-of-entities).
+:::
+
 ### `has_entity_name` True (Mandatory for new integrations)
 
 The entity's name property only identifies the data point represented by the entity, and should not include the name of the device or the type of the entity. So for a sensor that represents the power usage of its device, this would be “Power usage”.
