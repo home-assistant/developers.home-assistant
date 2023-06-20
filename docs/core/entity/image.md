@@ -7,6 +7,7 @@ An image entity can display a static image. Derive a platform entity from [`home
 
 The image entity is a greatly simplified version of the [`camera`](/docs/core/entity/camera) entity, and only supports serving a static image.
 
+To make frontend refetch the image, bump the `image_last_updated` property.
 ## Properties
 
 :::tip
