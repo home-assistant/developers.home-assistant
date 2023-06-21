@@ -257,5 +257,5 @@ Service calls are registered with a `SupportsResponse` value to indicate respons
 
 | Value      | Description                                  |
 | ---------- | -------------------------------------------- |
-| `OPTIONAL` | The service performs and action and can optionally return response data. The service should conditionally check the `ServiceCall` property `return_response` to decide whether or not response data should be returned, or `None`. |
+| `OPTIONAL` | The service performs an action and can optionally return response data. The service should conditionally check the `ServiceCall` property `return_response` to decide whether or not response data should be returned, or `None`. |
 | `ONLY` | The service is read only and always returns response data. |
