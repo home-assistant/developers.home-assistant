@@ -53,6 +53,7 @@ Forecast data should either be daily or hourly.
 | native_dew_point | float | `None` | The dew point temperature in °C or °F
 | native_precipitation | float | `None` | The precipitation amount in mm or in.
 | precipitation_probability | int | `None` | The probability of precipitation in %.
+| humidity | float | `None` | The humidity in %.
 | cloud_coverage | int | `None` | The cloud coverage in %.
 | native_pressure | float | `None` | The air pressure in hPa, mbar, inHg or mmHg.
 | wind_bearing | float or string | `None` | The wind bearing in azimuth angle (degrees) or 1-3 letter cardinal direction.
