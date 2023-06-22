@@ -16,7 +16,7 @@ Properties should always only return information from memory and not do I/O (lik
 | condition | string | **Required** | The current weather condition.
 | native_temperature | float | **Required** | The current temperature in °C or °F.
 | native_temperature_unit | string | **Required** | The temperature unit; °C or °F.
-| native_dewpoint | float | `None` | The dewpoint temperature in °C or °F.
+| native_dew_point | float | `None` | The dew point temperature in °C or °F.
 | native_pressure | float | `None` | The current air pressure in hPa, mbar, inHg or mmHg.
 | native_pressure_unit | string | `None` | The air pressure unit; hPa, mbar, inHg or mmHg. Required if native_pressure is set.
 | humidity | float | `None` | The current humidity in %.
@@ -47,7 +47,7 @@ Forecast data should either be daily or hourly.
 | native_temperature | float | **Required** | The higher temperature in °C or °F
 | condition | string | `None` | The weather condition at this point.
 | native_templow | float | `None` | The lower daily Temperature in °C or °F
-| native_dewpoint | float | `None` | The dewpoint temperature in °C or °F
+| native_dew_point | float | `None` | The dew point temperature in °C or °F
 | native_precipitation | float | `None` | The precipitation amount in mm or in.
 | precipitation_probability | int | `None` | The probability of precipitation in %.
 | native_pressure | float | `None` | The air pressure in hPa, mbar, inHg or mmHg.
