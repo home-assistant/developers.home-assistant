@@ -20,7 +20,7 @@ Properties should always only return information from memory and not do I/O (lik
 | native_dew_point | float | `None` | The dew point temperature in °C or °F.
 | native_pressure | float | `None` | The current air pressure in hPa, mbar, inHg or mmHg.
 | native_pressure_unit | string | `None` | The air pressure unit; hPa, mbar, inHg or mmHg. Required if native_pressure is set.
-| humidity | int | `None` | The current humidity in %.
+| humidity | float | `None` | The current humidity in %.
 | ozone | float | `None` | The current ozone level.
 | native_visibility | float | `None` | The current visibility in km or mi.
 | native_visibility_unit | string | `None` | The visibility unit; km or mi. Required if native_visibility is set.
@@ -52,7 +52,7 @@ Forecast data should either be daily or hourly.
 | native_dew_point | float | `None` | The dew point temperature in °C or °F
 | native_precipitation | float | `None` | The precipitation amount in mm or in.
 | precipitation_probability | int | `None` | The probability of precipitation in %.
-| humidity | int | `None` | The humidity in %.
+| humidity | float | `None` | The humidity in %.
 | native_pressure | float | `None` | The air pressure in hPa, mbar, inHg or mmHg.
 | wind_bearing | float or string | `None` | The wind bearing in azimuth angle (degrees) or 1-3 letter cardinal direction.
 | native_wind_speed | int | `None` | The wind speed in m/s, km/h, mi/h, ft/s or kn.
