@@ -84,6 +84,7 @@ pre-commit run --show-diff-on-failure
 The linters are also available directly, you can run tests on individual files:
 
 ```shell
+ruff homeassistant/core.py
 pylint homeassistant/core.py
 black homeassistant/core.py
 ```
