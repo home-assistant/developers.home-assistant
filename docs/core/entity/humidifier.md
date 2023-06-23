@@ -21,7 +21,8 @@ Properties should always only return information from memory and not do I/O (lik
 | available_modes         | list   | `NotImplementedError()`               | The available modes. Requires `SUPPORT_MODES`.                                            |
 | supported_features      | int    | (abstract method)                     | Bitmap of supported features. See below.                                                  |
 | is_on                   | bool   | `None`                                | Whether the device is on or off.                                                          |
-| device_class            | string | `None`                                | Either `HumidifierDeviceClass.HUMIDIFIER` or `HumidiferDeviceClass,DEHUMIDIFIER`                               |
+| device_class            | string | `None`                                | Either `HumidifierDeviceClass.HUMIDIFIER` or `HumidiferDeviceClass.DEHUMIDIFIER`          |
+| action                  | HumidifierAction | `None`                      | Returns the current status of the device.                                                 |
 
 ### Modes
 
@@ -47,6 +48,19 @@ and are combined using the bitwise or (`|`) operator.
 | Value   | Description                          |
 | ------- | ------------------------------------ |
 | `MODES` | The device supports different modes. |
+
+## Action
+
+The `action` property may return the current operating state of the device, whether it is humidifying or idle. This is an informational property. Please note that when the device is off, the `action` attribute, if present, will automatically be replaced with "off". Also please note that setting `action` to `off` does not replace the `is_on` property.
+
+Current values for `HumidifierAction`:
+
+| Name          | Description                                |
+| ------------- | ------------------------------------------ |
+| `HUMIDIFYING` | The device is currently humidifying.       |
+| `DRYING`      | The device is currently dehumidifying.     |
+| `IDLE`        | The device is on but not active right now. |
+| `OFF`         | The device is switched off.                |
 
 ## Methods
 
