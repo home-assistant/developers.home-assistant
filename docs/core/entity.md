@@ -104,6 +104,8 @@ The following properties are used and controlled by Home Assistant, and should n
 
 ## Entity naming
 
+Avoid setting an entity's name to a hard coded English string, instead, the name should be [translated](/docs/internationalization/core#name-of-entities). Examples of when the name should not be translated are proper nouns, model names, and name provided by a 3rd-party library.
+
 ### `has_entity_name` True (Mandatory for new integrations)
 
 The entity's name property only identifies the data point represented by the entity, and should not include the name of the device or the type of the entity. So for a sensor that represents the power usage of its device, this would be “Power usage”.
@@ -151,9 +153,24 @@ class MySwitch(SwitchEntity):
     _attr_has_entity_name = True
 
     @property
+    def translation_key(self):
+        """Return the translation key to translate the entity's name and states."""
+        return my_switch
+```
+
+#### Example of an untranslated switch entity which is either not the main feature of a device, or is not part of a device:
+
+```python
+from homeassistant.components.switch import SwitchEntity
+
+
+class MySwitch(SwitchEntity):
+    _attr_has_entity_name = True
+
+    @property
     def name(self):
         """Name of the entity."""
-        return "My Switch"
+        return "Model X"
 ```
 
 ### `has_entity_name` not implemented or False (Deprecated)
