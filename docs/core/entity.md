@@ -104,7 +104,7 @@ The following properties are used and controlled by Home Assistant, and should n
 
 ## Entity naming
 
-Don't set an entity's name to a hard coded English string, instead, the name should be [translated](/docs/internationalization/core#name-of-entities).
+Avoid setting an entity's name to a hard coded English string, instead, the name should be [translated](/docs/internationalization/core#name-of-entities). Examples of when the name should not be translated are proper nouns, model names, and name provided by a 3rd-party library.
 
 ### `has_entity_name` True (Mandatory for new integrations)
 
