@@ -5,9 +5,10 @@ sidebar_label: Image
 
 An image entity can display a static image. Derive a platform entity from [`homeassistant.components.image.ImageEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/image/__init__.py).
 
-The image entity is a greatly simplified version of the [`camera`](/docs/core/entity/camera) entity, and only supports serving a static image.
+The image entity is a simplified version of the [`camera`](/docs/core/entity/camera) entity, and supports serving a static image or an image URL that can be fetched.
 
 To make frontend refetch the image, bump the `image_last_updated` property.
+
 ## Properties
 
 :::tip
@@ -34,3 +35,18 @@ class MyImage(ImageEntity):
     async def async_image(self) -> bytes | None:
         """Return bytes of image."""
 ```
+
+Return the URL of an image to be fetched.
+
+```python
+class MyImage(ImageEntity):
+    # Implement one of these methods.
+
+    def image_url(self) -> str | None:
+        """Return URL of image."""
+
+    async def async_image_url(self) -> str | None:
+        """Return URL of image."""
+```
+
+By default `image_url` or `async_image_url` return `None`, and `async_image` or `image` will be called expecting to return the bytes of the image.
