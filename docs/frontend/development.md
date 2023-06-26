@@ -117,7 +117,7 @@ If you're making changes to the way the frontend is packaged, it might be necess
 To test it out inside Home Assistant, run the following command from the main Home Assistant repository:
 
 ```shell
-pip3 install -e /path/to/hass/frontend/
+pip3 install -e /path/to/hass/frontend/ --config-settings editable_mode=compat
 hass --skip-pip-packages home-assistant-frontend
 ```
 
