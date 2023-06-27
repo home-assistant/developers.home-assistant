@@ -15,7 +15,7 @@ ir.async_create_issue(
     "manual_migration",
     breaks_in_ha_version="2022.9.0",
     is_fixable=False,
-    severity=IssueSeverity.ERROR,
+    severity=ir.IssueSeverity.ERROR,
     translation_key="manual_migration",
 )
 ```
