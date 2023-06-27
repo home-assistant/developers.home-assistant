@@ -455,7 +455,7 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     @callback
     def async_remove(self):
-        # Clean up resources or tasks associated with the flow
+        """Clean up resources or tasks associated with the flow."""
         if self.task_one:
             self.task_one.cancel()
             
