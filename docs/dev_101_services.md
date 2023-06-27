@@ -197,3 +197,65 @@ If you need more control over the service call, you can also pass an async funct
 async def custom_set_sleep_timer(entity, service_call):
     await entity.set_sleep_timer(service_call.data['sleep_time'])
 ```
+
+## Response Data
+
+Services may respond to a service call with data for powering more advanced automations. There are some additional implementation requirements:
+
+- Response data must be a `dict` and serializable in JSON [`homeassistant.util.json.JsonObjectType`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/util/json.py) in order to interoperate with other parts of the system, such as the frontend.
+- Errors must be raised as exceptions just like any other service call as we do
+not want end users to need complex error handling in scripts and automations.
+The response data should not contain error codes used for error handling.
+
+Example code:
+
+```python
+import datetime
+import voluptuous as vol
+from homeassistant.config_entries import ConfigEntry
+from homeassistant.core import HomeAssistant, ServiceCall, ServiceResponse, SupportsResponse
+from homeassistant.helpers import config_validation as cv, entity_platform, service
+from homeassistant.util.json import JsonObjectType
+
+
+SEARCH_ITEMS_SERVICE_NAME = "search_items"
+SEARCH_ITEMS_SCHEMA = vol.Schema({
+    vol.Required("start"): datetime.datetime,
+    vol.Required("end"): datetime.datetime,
+})
+
+
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Set up the platform."""
+
+    async def search_items(call: ServiceCall) -> ServiceResponse:
+        """Search in the date range and return the matching items."""
+        items = await my_client.search(call.data["start"], call.data["end"])
+        return {
+            "items": [
+                {
+                    "summary": item["summary"],
+                    "description": item["description"],
+                } for item in items
+            ],
+        }
+
+      hass.services.async_register(
+          DOMAIN,
+          SEARCH_ITEMS_SERVICE_NAME,
+          search_items,
+          schema=SEARCH_ITEMS_SCHEMA,
+          SupportsResponse.ONLY,
+      )
+```
+
+The use of response data is meant for cases that do not fit the Home Assistant state. For example, a response stream of objects. Conversely, response data should not be used for cases that are a fit for entity state. For example, a temperature value should just be a sensor.
+
+### Supporting Response Data
+
+Service calls are registered with a `SupportsResponse` value to indicate response data is supported.
+
+| Value      | Description                                  |
+| ---------- | -------------------------------------------- |
+| `OPTIONAL` | The service performs an action and can optionally return response data. The service should conditionally check the `ServiceCall` property `return_response` to decide whether or not response data should be returned, or `None`. |
+| `ONLY` | The service doesn't perform any actions and always returns response data. |
