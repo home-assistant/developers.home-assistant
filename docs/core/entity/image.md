@@ -9,8 +9,6 @@ The image entity is a simplified version of the [`camera`](/docs/core/entity/cam
 
 An implementation can provide either a URL from where an image will automatically be fetched or image data as `bytes`. When providing a URL, the fetched image will be cached in `self._cached_image`, set `self._cached_image` to `None` to invalidate the cache.
 
-To make frontend refetch the image, bump the `image_last_updated` property.
-
 ## Properties
 
 :::tip
@@ -20,14 +18,20 @@ Properties should always only return information from memory and not do I/O (lik
 | Name                     | Type        | Default      | Description                                                                                                                        |
 | ------------------------ | ---------   | ------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
 | content_type             | str         | `image/jpeg` | The content-type of the image, set automatically if the image entity provides a URL.                                               |
-| image_last_updated       | datetime    | `None`       | Timestamp of when the image was last updated. Used to determine `state`.                                                           |
+| image_last_updated       | datetime    | `None`       | Timestamp of when the image was last updated. Used to determine `state`. Frontend will refetch the image when this changes.        |
 | image_url                | str or None | `UNDEFINED`  | Optional URL from where the image should be fetched.                                                                               |
 
 ## Methods
 
 ### Image
 
-Implement if your entity returns bytes of the image instead of providing a URL.
+Implement `async_image` or `image` if your entity returns bytes of the image instead of providing a URL.
+
+Note that:
+- The image entity's `async_image` or `image` method is only called when frontend fetches the image.
+- Frontend will only refetch the image when the image entity's state changes.
+
+This means it's incorrect to bump the `image_last_updated` property inside `async def async_image`. It should instead be done as part of a state update to signal that an updated image is available.
 
 ```python
 class MyImage(ImageEntity):
