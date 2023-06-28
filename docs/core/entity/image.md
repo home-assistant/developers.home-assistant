@@ -31,7 +31,7 @@ Note that:
 - The image entity's `async_image` or `image` method is only called when frontend fetches the image.
 - Frontend will only refetch the image when the image entity's state changes.
 
-This means it's not correct to bump the `image_last_updated` property inside `async def async_image`, it should instead be done as part of state update to signal that an updated image is available.
+This means it's incorrect to bump the `image_last_updated` property inside `async def async_image`. It should instead be done as part of a state update to signal that an updated image is available.
 
 ```python
 class MyImage(ImageEntity):
