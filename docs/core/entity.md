@@ -106,7 +106,7 @@ The following properties are used and controlled by Home Assistant, and should n
 
 Avoid setting an entity's name to a hard coded English string, instead, the name should be [translated](/docs/internationalization/core#name-of-entities). Examples of when the name should not be translated are proper nouns, model names, and name provided by a 3rd-party library.
 
-Some entities are automatically named after their device class, this includes [`binary_sensor`](docs/core/entity/binary-sensor), [`button`](docs/core/entity/button), [`number`](docs/core/entity/number) and [`sensor`](docs/core/entity/sensor) entities and in many cases don't need to be named.
+Some entities are automatically named after their device class, this includes [`binary_sensor`](/docs/core/entity/binary-sensor), [`button`](/docs/core/entity/button), [`number`](/docs/core/entity/number) and [`sensor`](/docs/core/entity/sensor) entities and in many cases don't need to be named.
 For example, an unnamed sensor which has its device class set to `temperature` will be named "Temperature".
 
 ### `has_entity_name` True (Mandatory for new integrations)
