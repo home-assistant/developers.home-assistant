@@ -51,7 +51,7 @@ and are combined using the bitwise or (`|`) operator.
 
 ## Action
 
-The `action` property may return the current operating state of the device, whether it is humidifying or idle. This is an informational property. Please note that when the device is off, the `action` attribute, if present, will automatically be replaced with "off". Also please note that setting `action` to `off` does not replace the `is_on` property.
+The `action` property may return the current operating state of the device, whether it is humidifying or idle. This is an informational property. Please note that when the device is off, the `action` attribute, if present, will automatically be replaced with "off". Also, please note that setting `action` to `off` does not replace the `is_on` property.
 
 Current values for `HumidifierAction`:
 
