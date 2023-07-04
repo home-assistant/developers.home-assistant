@@ -40,6 +40,8 @@ Properties should always only return information from memory and not do I/O (lik
 
 Supported features are defined by using values in the `VacuumEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.
+Note that all vacuum entity platforms derived from `homeassistant.components.vacuum.StateVacuumEntity`
+must set the `VacuumEntityFeature.STATE` flag.
 
 | Value          | Description                                          |
 | -------------- | ---------------------------------------------------- |
@@ -48,15 +50,12 @@ and are combined using the bitwise or (`|`) operator.
 | `FAN_SPEED`    | The vacuum supports setting fan speed.               |
 | `LOCATE`       | The vacuum supports locating.                        |
 | `MAP`          | The vacuum supports retrieving its map.              |
-| `PAUSE`        | Pause the vacuum.                                    |
-| `RETURN_HOME`  | Return to the dock.                                  |
+| `PAUSE`        | The vacuum supports the pause command.               |
+| `RETURN_HOME`  | The vacuum supports the return to the dock command.  |
 | `SEND_COMMAND` | The vacuum supports sending a command to the vacuum. |
 | `START`        | The vacuum supports the start command.               |
-| `STATE`        | The vacuum supports returning it state.              |
-| `STATUS`       | The vacuum supports returning it status.             |
-| `STOP`         | Stop the vacuum and return to the dock.              |
-| `TURN_OFF`     | The vacuum turns off.                                |
-| `TURN_ON`      | The vacuum turns on.                                 |
+| `STATE`        | The vacuum supports returning its state.             |
+| `STOP`         | The vacuum supports the stop command.                |
 
 ## Methods
 
@@ -67,6 +66,10 @@ Perform a spot clean-up.
 ### `locate` or `async_locate`
 
 Locate the vacuum cleaner.
+
+### `pause` or `async_pause`
+
+Pause the cleaning task.
 
 ### `return_to_base` or `async_return_to_base`
 
@@ -80,14 +83,10 @@ Send a command to a vacuum cleaner.
 
 Set the fan speed.
 
+### `start` or `async_start`
+
+Start or resume the cleaning task.
+
 ### `stop` or `async_stop`
 
 Stop the vacuum cleaner, do not return to base.
-
-### `turn_on` or `async_turn_on`
-
-Turn the vacuum on and start cleaning.
-
-### `turn_off` or `async_turn_off`
-
-Turn the vacuum off stopping the cleaning and returning home.
