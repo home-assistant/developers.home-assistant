@@ -37,6 +37,7 @@ and are combined using the bitwise or (`|`) operator.
 | `CLEAR_PLAYLIST`    | Entity allows clearing the active playlist.                        |
 | `GROUPING`          | Entity can be grouped with other players for synchronous playback. |
 | `MEDIA_ANNOUNCE`    | Entity supports the `play_media` service's announce parameter.     |
+| `MEDIA_ENQUEUE`     | Entity supports the `play_media` service's enqueue parameter.      |
 | `NEXT_TRACK`        | Entity allows skipping to the next media track.                    |
 | `PAUSE`             | Entity allows pausing the playback of media.                       |
 | `PLAY`              | Entity allows playing/resuming playback of media.                  |
