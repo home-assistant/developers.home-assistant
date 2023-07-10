@@ -94,6 +94,11 @@ set_speed:
       # listed supported features.
       supported_features:
         - fan.FanEntityFeature.SET_SPEED
+        # If a service requires more than one supported feature, the item should
+        # be given as a list of required supported features. For example, if the
+        # service requires both SET_SPEED and OSCILLATE it would be expressed like this
+        - - fan.FanEntityFeature.SET_SPEED
+          - fan.FanEntityFeature.OSCILLATE
   # Different fields that your service accepts
   fields:
     # Key of the field
