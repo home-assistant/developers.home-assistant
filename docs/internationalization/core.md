@@ -101,7 +101,7 @@ and the `name` and `description` of each service's `fields`.
 
 ```json
 {
-  "selector" {
+  "selector": {
     "fan_speed": {
       "options": {
         "high": "High",
