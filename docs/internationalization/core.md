@@ -16,6 +16,7 @@ The `strings.json` contains translations for different things that the integrati
 | `issues`            | Translations for repairs issues.                  |
 | `options`           | Translations for the options flow.                |
 | `selectors`         | Selectors of the integration.                     |
+| `services`          | Services of the integration.                      |
 | `state`             | States of the integration, keyed by device class. |
 
 ### Title
@@ -90,6 +91,44 @@ The translation for selectors are defined under the `selector` key. It supports 
 }
 
 ```
+
+### Services
+
+The translations of service strings are defined under the `services` key.
+
+It supports translating the `name` and `description` of each service,
+and the `name` and `description` of each service's `fields`.
+
+```json
+{
+  "selector": {
+    "fan_speed": {
+      "options": {
+        "high": "High",
+        "low": "Low",
+        "medium": "Medium",
+        "off": "Off",
+      }
+    }
+  },
+  "services": {
+    "set_speed": {
+      "name": "Set speed",
+      "description": "Sets fan speed.",
+      "fields": {
+        "speed": {
+          "name": "Speed",
+          "description": "The speed to set."
+        }
+      }
+    }
+  }
+}
+```
+
+:::note
+Services may use selectors in their `fields`. The translation of those selectors can be provided using the `translation_key` property on the selector definition in the services.yaml file. See the [Selectors](#selectors) section and the [Service description](/docs/dev_101_services.md#service-descriptions) page for more information.
+:::
 
 ### Device automations
 

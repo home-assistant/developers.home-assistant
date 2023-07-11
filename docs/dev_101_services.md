@@ -73,10 +73,6 @@ Services are published under the domain name of your integration, so in `service
 
 # Service ID
 set_speed:
-  # Service name as shown in UI
-  name: Set speed
-  # Description of the service
-  description: Sets fan speed.
   # If the service accepts entity IDs, target allows the user to specify entities by
   # entity, device, or area. If `target` is specified, `entity_id` should not be
   # defined in the `fields` map. By default it shows only targets matching entities
@@ -103,10 +99,6 @@ set_speed:
   fields:
     # Key of the field
     speed:
-      # Field name as shown in UI
-      name: Speed
-      # Description of the field
-      description: Speed setting
       # Whether or not field is required (default = false)
       required: true
       # Advanced fields are only shown when the advanced mode is enabled for the user
@@ -120,12 +112,17 @@ set_speed:
       # the input UI for this field
       selector:
         select:
+          translation_key: "fan_speed"
           options:
             - "off"
             - "low"
             - "medium"
             - "high"
 ```
+
+:::info
+The name and description of the services are set in our [translations](/docs/internationalization/core#services) and not in the service description. Each service and service field must have a matching translation defined.
+:::
 
 ### Filtering service fields
 
@@ -260,7 +257,7 @@ The use of response data is meant for cases that do not fit the Home Assistant s
 
 Service calls are registered with a `SupportsResponse` value to indicate response data is supported.
 
-| Value      | Description                                  |
-| ---------- | -------------------------------------------- |
+| Value      | Description                                                                                                                                                                                                                       |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `OPTIONAL` | The service performs an action and can optionally return response data. The service should conditionally check the `ServiceCall` property `return_response` to decide whether or not response data should be returned, or `None`. |
-| `ONLY` | The service doesn't perform any actions and always returns response data. |
+| `ONLY`     | The service doesn't perform any actions and always returns response data.                                                                                                                                                         |
