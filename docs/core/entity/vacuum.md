@@ -19,7 +19,6 @@ Properties should always only return information from memory and not do I/O (lik
 | ---- | ---- | ------- | -----------
 | battery_icon | string | function | Battery icon to show in UI.
 | battery_level | int | `none` | Current battery level.
-| error | string | **Required** with `STATE_ERROR` | An error message if the vacuum is in `STATE_ERROR`.
 | fan_speed | string | `none` | The current fan speed.
 | fan_speed_list | list | `NotImplementedError()`| List of available fan speeds.
 | name | string | **Required** | Name of the entity.
@@ -34,7 +33,7 @@ Properties should always only return information from memory and not do I/O (lik
 | `STATE_IDLE` | The vacuum is not paused, not docked and does not have any errors.
 | `STATE_PAUSED` | The vacuum was cleaning but was paused without returning to the dock.
 | `STATE_RETURNING` | The vacuum is done cleaning and is currently returning to the dock, but not yet docked.
-| `STATE_ERROR` | The vacuum encountered an error while cleaning, the error can be specified as a property on the entity.
+| `STATE_ERROR` | The vacuum encountered an error while cleaning.
 
 ## Supported Features
 
