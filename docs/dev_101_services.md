@@ -121,7 +121,7 @@ set_speed:
 ```
 
 :::info
-The name and description of the services are set in our [translations](/docs/internationalization/core.md#services) and not in the service description. Each service and service field, must have a matching translation defined.
+The name and description of the services are set in our [translations](/docs/internationalization/core.md#services) and not in the service description. Each service and service field must have a matching translation defined.
 :::
 
 ### Filtering service fields

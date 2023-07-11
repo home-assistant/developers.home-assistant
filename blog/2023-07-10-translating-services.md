@@ -6,7 +6,7 @@ authorTwitter: frenck
 title: Translating services
 ---
 
-We now support translating services in Home Assistant. Previously the names & descriptions of services and their service fields have been hardcoded into the `services.yaml` files of each integration.
+We now support translating services in Home Assistant. Previously, the names & descriptions of services and their service fields have been hardcoded into the `services.yaml` files of each integration.
 
 We have now added support for translating these names & descriptions using our translation system. This means that the names & descriptions of services and their service fields can now be translated into any language.
 

@@ -94,7 +94,7 @@ The translation for selectors are defined under the `selector` key. It supports 
 
 ### Services
 
-The translation for services are defined under the `services` key.
+The translations of service strings are defined under the `services` key.
 
 It supports translating the `name` and `description` of each service,
 and the `name` and `description` of each service's `fields`.
