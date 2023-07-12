@@ -10,4 +10,4 @@ The Vacuum entity has seen some recent changes:
 - The `battery_icon` + `battery_level` state attributes have been deprecated. Integrations can instead report battery status by adding a `sensor` with device class `battery` to the same device as the `vacuum` entity, see architecture discussion [938](https://github.com/home-assistant/architecture/discussions/938) for details.
 - The `map` state attribute has been deprecated. Integrations can instead provide a map image by adding an `image` entity to the same device as the `vacuum` entity, see architecture discussion [939](https://github.com/home-assistant/architecture/discussions/939) for details.
 
-For more details, refer to the (`vacuum` documentation)[/docs/core/entity/vacuum].
+For more details, refer to the [`vacuum` documentation](/docs/core/entity/vacuum).
