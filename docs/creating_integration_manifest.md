@@ -163,7 +163,7 @@ If your integration supports discovery via bluetooth, you can add a matcher to y
 
 Matches for `local_name` must be at least three (3) characters long and may not contain any patterns in the first three (3) characters.
 
-If the device only needs advertisement data, setting `connectable` to `false` will opt-in to receive discovery from Bluetooth controllers that do not have support for making connections such as remote ESPHome devices.
+If the device only needs advertisement data, setting `connectable` to `false` will opt-in to receive discovery from Bluetooth controllers that do not have support for making connections.
 
 The following example will match Nespresso Prodigio machines:
 
