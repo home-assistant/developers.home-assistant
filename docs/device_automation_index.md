@@ -11,7 +11,7 @@ Device automations are not exposing extra functionality but are a way for users 
 
 ### Secondary device automations
 
-Some devices may expose a lot of device automation. To not overwhelm the user, a device automation can be marked as secondary. A trigger which is marked as secondary will still be shown to the user, but may be shown after other device automations or may require the user to select a "show more" option or similar.
+Some devices may expose a lot of device automation. To not overwhelm the user, a device automation can be marked as secondary. A device automation which is marked as secondary will still be shown to the user, but may be shown after other device automations or may require the user to select a "show more" option or similar.
 
 If the device automation references an entity via an `entity_id` key, the secondary flag will automatically be set to `True` if the referenced entity is hidden or if the referenced entity's entity category is not `None`. The example below shows how to mark a device automation as secondary.
 
