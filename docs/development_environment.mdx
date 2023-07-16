@@ -35,6 +35,11 @@ The easiest way to get started with development is to use Visual Studio Code wit
 3. Your browser will prompt you if you want to use Visual Studio Code to open the link, click "Open Link".
 4. When Visual Studio Code asks if you want to install the Remote extension, click "Install".
 5. The Dev Container image will then be built (this may take a few minutes), after this your development environment will be ready.
+6. You can verify that your dev container is set up properly by the following:
+    * Open the command pallette in Visual Studio Code - `Shift`+`Command`+`P`(Mac) / `Ctrl`+`Shift`+`P` (Windows/Linux)
+    * Select `Tasks: Run Task` -> `Run Home Assistant Core`
+    * A terminal should open and begin outputting activity. Check for any errors and wait for output to stop/slow down
+    * Navigate a web browser to https://localhost:8123 and you should see the Home Assistant setup screen
 
 In the future, if you want to get back to your development environment: open Visual Studio Code, click on the "Remote Explorer" button in the sidebar, select "Containers" at the top of the sidebar.
 
