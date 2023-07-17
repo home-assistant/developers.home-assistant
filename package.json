@@ -17,7 +17,7 @@
     "@docusaurus/theme-mermaid": "^2.4.1",
     "@easyops-cn/docusaurus-search-local": "^0.35.0",
     "by-node-env": "^2.0.1",
-    "clsx": "^1.2.1",
+    "clsx": "^2.0.0",
     "react-dom": "^17.0.2",
     "react": "^18.2.0",
     "yaml-loader": "^0.8.0"
