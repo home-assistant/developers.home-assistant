@@ -66,8 +66,8 @@ it thus will become mandatory in the future.
 | Type |  Description
 | ---- | -----------
 | `device` | Provides a single device like, for example, ESPHome. |
-| `entity` | Provides an basic entity platform, like sensor or light. This should generally not be used. |
-| `hardware` | Provides an hardware integration, like Raspbery Pi or Hardkernel. This should generally not be used. |
+| `entity` | Provides a basic entity platform, like sensor or light. This should generally not be used. |
+| `hardware` | Provides a hardware integration, like Raspbery Pi or Hardkernel. This should generally not be used. |
 | `helper` | Provides an entity to help the user with automations like input boolean, derivative or group. |
 | `hub` | Provides a hub integration, with multiple devices or services, like Philips Hue. |
 | `service` | Provides a single service, like DuckDNS or AdGuard. |
