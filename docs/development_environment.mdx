@@ -125,6 +125,11 @@ Each time you start a new terminal session, you will need to activate your virtu
 source venv/bin/activate
 ```
 
+Some components require that the translations are generated properly. In some cases this is the only way to pass the automated tests. For example for the script component, run the following:
+```shell
+python3 -m script.translations develop --all
+```
+
 After that you can run Home Assistant like this:
 
 ```shell

@@ -15,6 +15,12 @@ To run our linters, on the full code base, run the following command:
 pre-commit run --all-files
 ```
 
+Some tests require that translations where generated. For example for the script component run for the script component
+
+```shell
+python3 -m script.translations develop --all
+```
+
 To start the tests, and run the full test suite, activate the virtual environment and run the command:
 
 ```shell
