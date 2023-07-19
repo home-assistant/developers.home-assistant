@@ -1,0 +1,11 @@
+---
+author: G Johansson
+authorURL: https://github.com/gjohansson-ST
+title: "Weather entity forecast types"
+---
+
+`WeatherEntity` now supports different forecast types in the same entity instead of creating different entities, as example, a daily forecast and an hourly forecast.
+
+Integrations providing `weather` entities should be updated to remove the deprecated `forecast` state attribute and instead use one of several of the new async methods `async_forecast_daily`, `async_forecast_hourly` and `async_forecast_twice_daily`.
+
+The "Weather Forecast Card" has been updated to provide the user with an option to select the preferred forecast to show, if the integration are using the new methods.
