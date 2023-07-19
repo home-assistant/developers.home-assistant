@@ -30,9 +30,6 @@ Properties should always only return information from memory and not do I/O (lik
 | native_wind_speed_unit | string | `None` | The wind speed unit;m/s, km/h, mi/h, ft/s or kn. Required if native_wind_speed is set.
 | native_precipitation_unit | string | `None` | The precipitation unit; mm or in.
 | wind_bearing | float or string | `None` | The current wind bearing in azimuth angle (degrees) or 1-3 letter cardinal direction.
-| forecast_daily | array | `None` | Daily forecast data.
-| forecast_hourly | array | `None` | Hourly forecast data.
-| forecast_twice_daily | array | `None` | Twice daily forecast data.
 
 ### Unit Conversion
 
@@ -42,9 +39,11 @@ To the user, properties will be presented according to the unit system. This is 
 
 For each weather entity, the user also has the option to override the presentation units, i.e., the units used in the state objects.
 
-### Forecast
+### Forecast data
 
-Forecast data can be daily, hourly or twice_daily in its respective array. An integration can set and use any/all of them.
+Forecast data can be daily, hourly or twice_daily. An integration can provide any or all of them.
+
+The integration should implement one or several of the async methods `async_forecast_daily`, `async_forecast_hourly` and `async_forecast_twice_daily` to fetch the forecast data.
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
@@ -62,7 +61,7 @@ Forecast data can be daily, hourly or twice_daily in its respective array. An in
 | wind_bearing | float or string | `None` | The wind bearing in azimuth angle (degrees) or 1-3 letter cardinal direction.
 | native_wind_gust_speed | int | `None` | The wind gust speed in m/s, km/h, mi/h, ft/s or kn.
 | native_wind_speed | int | `None` | The wind speed in m/s, km/h, mi/h, ft/s or kn.
-| is_daytime | bool | `None` | For `forecast_twice_daily` required to use for day/night.
+| is_daytime | bool | `None` | For `async_forecast_twice_daily` required to use for day/night.
 
 Forecast data needs to follow the same unit of measurement as defined for properties where applicable.
 
