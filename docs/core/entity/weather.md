@@ -40,33 +40,6 @@ To the user, properties will be presented according to the unit system. This is 
 
 For each weather entity, the user also has the option to override the presentation units, i.e., the units used in the state objects.
 
-### Forecast data
-
-Forecast data can be daily, hourly or twice_daily. An integration can provide any or all of them.
-
-The integration should implement one or several of the async methods `async_forecast_daily`, `async_forecast_hourly` and `async_forecast_twice_daily` to fetch the forecast data.
-
-| Name | Type | Default | Description
-| ---- | ---- | ------- | -----------
-| datetime | string | **Required** | UTC Date time in RFC 3339 format.
-| native_temperature | float | **Required** | The higher temperature in °C or °F
-| native_apparent_temperature | float | `None` | The apparent (feels-like) temperature in °C or °F
-| condition | string | `None` | The weather condition at this point.
-| native_templow | float | `None` | The lower daily Temperature in °C or °F
-| native_dew_point | float | `None` | The dew point temperature in °C or °F
-| native_precipitation | float | `None` | The precipitation amount in mm or in.
-| precipitation_probability | int | `None` | The probability of precipitation in %.
-| humidity | float | `None` | The humidity in %.
-| cloud_coverage | int | `None` | The cloud coverage in %.
-| uv_index | float | `None` | The UV index.
-| native_pressure | float | `None` | The air pressure in hPa, mbar, inHg or mmHg.
-| wind_bearing | float or string | `None` | The wind bearing in azimuth angle (degrees) or 1-3 letter cardinal direction.
-| native_wind_gust_speed | int | `None` | The wind gust speed in m/s, km/h, mi/h, ft/s or kn.
-| native_wind_speed | int | `None` | The wind speed in m/s, km/h, mi/h, ft/s or kn.
-| is_daytime | bool | `None` | For `async_forecast_twice_daily` required to use for day/night.
-
-Forecast data needs to follow the same unit of measurement as defined for properties where applicable.
-
 ### Recommended values for state and condition
 
 These weather conditions are included in our translation files and also show the corresponding icon.
@@ -90,3 +63,74 @@ These weather conditions are included in our translation files and also show the
 | windy-variant | Wind and clouds
 
 This means that the `weather` platforms don't need to support languages.
+
+## Forecast data
+
+Forecast data can be daily, hourly or twice_daily. An integration can provide any or all of them.
+
+The integration should implement one or several of the async methods `async_forecast_daily`, `async_forecast_hourly` and `async_forecast_twice_daily` to fetch the forecast data.
+
+Setting the correct [supported feature](#supported-features) is required to use these methods.
+
+| Name | Type | Default | Description
+| ---- | ---- | ------- | -----------
+| datetime | string | **Required** | UTC Date time in RFC 3339 format.
+| native_temperature | float | **Required** | The higher temperature in °C or °F
+| native_apparent_temperature | float | `None` | The apparent (feels-like) temperature in °C or °F
+| condition | string | `None` | The weather condition at this point.
+| native_templow | float | `None` | The lower daily Temperature in °C or °F
+| native_dew_point | float | `None` | The dew point temperature in °C or °F
+| native_precipitation | float | `None` | The precipitation amount in mm or in.
+| precipitation_probability | int | `None` | The probability of precipitation in %.
+| humidity | float | `None` | The humidity in %.
+| cloud_coverage | int | `None` | The cloud coverage in %.
+| uv_index | float | `None` | The UV index.
+| native_pressure | float | `None` | The air pressure in hPa, mbar, inHg or mmHg.
+| wind_bearing | float or string | `None` | The wind bearing in azimuth angle (degrees) or 1-3 letter cardinal direction.
+| native_wind_gust_speed | int | `None` | The wind gust speed in m/s, km/h, mi/h, ft/s or kn.
+| native_wind_speed | int | `None` | The wind speed in m/s, km/h, mi/h, ft/s or kn.
+| is_daytime | bool | `None` | For `async_forecast_twice_daily` required to use for day/night.
+
+Forecast data needs to follow the same unit of measurement as defined for properties where applicable.
+
+## Supported Features
+
+Supported features are defined by using values in the `WeatherEntityFeature` enum
+and are combined using the bitwise or (`|`) operator.
+Usage of the supported features are required for `async_update_forecast()` to push updated forecast to all listeners used by frontend.
+
+| Value                      | Description                                                                                 |
+| -------------------------- | ------------------------------------------------------------------------------------------- |
+| `FORECAST_DAILY`           | The device supports a daily forecast.                                                       |
+| `FORECAST_HOURLY`          | The device supports an hourly forecast.                                                     |
+| `FORECAST_TWICE_DAILY`     | The device supports a twice-daily forecast.                                                 |
+
+## Methods
+
+### Get forecast(s)
+
+This method is used to fetch a daily forecast from the api.
+
+```python
+class MyWeatherEntity(WeatherEntity):
+    """Represent a Weather entity."""
+
+    async def async_forecast_daily(self) -> list[Forecast] | None:
+        """Return the daily forecast in native units.
+        
+        Only implement this method if `FORECAST_DAILY` is set
+        """
+
+    async def async_forecast_twice_daily(self) -> list[Forecast] | None:
+        """Return the twice daily forecast in native units.
+        
+        Only implement this method if `FORECAST_TWICE_DAILY` is set
+        """
+
+    async def async_forecast_hourly(self) -> list[Forecast] | None:
+        """Return the hourly forecast in native units.
+        
+        Only implement this method if `FORECAST_HOURLY` is set
+        """
+
+```
