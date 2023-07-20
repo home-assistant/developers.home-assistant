@@ -109,7 +109,7 @@ Usage of the supported features are required for `async_update_forecast()` to pu
 
 ### Get forecast(s)
 
-This method is used to fetch a daily forecast from the api.
+These method are used to fetch forecasts from the api.
 
 ```python
 class MyWeatherEntity(WeatherEntity):
