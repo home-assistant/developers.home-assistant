@@ -3,7 +3,7 @@ title: Scene Entity
 sidebar_label: Scene
 --- 
 
-A scene entity is an entity that can restore a wanted state for a group of entities. A scene entity can activate the scene towards a group of devices but remains stateless from the Home Assistant perspective.
+A scene entity is an entity that [can reproduce a wanted state](/docs/core/platform/reproduce_state/) for a group of entities. A scene entity can activate the scene towards a group of devices but remains stateless from the Home Assistant perspective.
 
 A scene entity is derived from [`homeassistant.components.scene.Scene`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/scene/__init__.py).
 
