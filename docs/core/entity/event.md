@@ -9,7 +9,7 @@ The event entity is stateless, meaning you don't have to maintain a state. Inste
 
 The main state of the entity is the timestamp of when the last event was emitted, additionally the type of the event and optionally extra state data that was provided with the event are also kept track of.
 
-A event entity is derived from the  [`homeassistant.components.event.EventEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/event/__init__.py).
+An event entity is derived from the  [`homeassistant.components.event.EventEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/event/__init__.py).
 
 ## Properties
 
