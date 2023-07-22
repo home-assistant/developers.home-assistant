@@ -247,7 +247,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
           SEARCH_ITEMS_SERVICE_NAME,
           search_items,
           schema=SEARCH_ITEMS_SCHEMA,
-          SupportsResponse.ONLY,
+          supports_response=SupportsResponse.ONLY,
       )
 ```
 
