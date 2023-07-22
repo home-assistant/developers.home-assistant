@@ -23,7 +23,7 @@ Properties should always only return information from memory and not do I/O (lik
 | humidity | float | `None` | The current humidity in %.
 | ozone | float | `None` | The current ozone level.
 | cloud_coverage | int | `None` | The current cloud coverage in %.
-| uv_index | float | `None` | The current UV index.
+| uv_index | float | `None` | The current [UV index](https://en.wikipedia.org/wiki/Ultraviolet_index).
 | native_visibility | float | `None` | The current visibility in km or mi.
 | native_visibility_unit | string | `None` | The visibility unit; km or mi. Required if native_visibility is set.
 | native_wind_gust_speed | float | `None` | The current wind gust speed in m/s, km/h, mi/h, ft/s or kn.
