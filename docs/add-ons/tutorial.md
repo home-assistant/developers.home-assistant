@@ -150,7 +150,7 @@ arch:
   - armhf
   - armv7
   - i386
-startup: before
+startup: services
 ports:
   8000/tcp: 8000
 ```
