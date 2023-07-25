@@ -425,15 +425,20 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
         )
 
     async def async_step_user(self, user_input=None):
-        if not self.task_one or not self.task_two:
-            if not self.task_one:
-                task = asyncio.sleep(10)
-                self.task_one = self.hass.async_create_task(self._async_do_task(task))
-                progress_action = "task_one"
-            else:
-                task = asyncio.sleep(10)
-                self.task_two = self.hass.async_create_task(self._async_do_task(task))
-                progress_action = "task_two"
+        if not self.task_one:
+            task = asyncio.sleep(10)
+            self.task_one = self.hass.async_create_task(self._async_do_task(task))
+            progress_action = "task_one"
+        elif not self.task_one.done():
+            progress_action = "task_one"
+        elif not self.task_two:
+            task = asyncio.sleep(10)
+            self.task_two = self.hass.async_create_task(self._async_do_task(task))
+            progress_action = "task_two"
+        elif not self.task_two.done():
+            progress_action = "task_two"
+
+        if not self.task_two or not self.task_two.done():
             return self.async_show_progress(
                 step_id="user",
                 progress_action=progress_action,
