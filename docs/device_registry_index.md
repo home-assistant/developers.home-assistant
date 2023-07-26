@@ -111,3 +111,17 @@ async def async_remove_config_entry_device(
 When the user clicks the delete device button for the device and confirms it, `async_remove_config_entry_device` will be awaited and if `True` is returned, the config entry will be removed from the device. If it was the only config entry of the device, the device will be removed from the device registry.
 
 In `async_remove_config_entry_device` the integration should take the necessary steps to prepare for device removal and return `True` if successful. The integration may optionally act on `EVENT_DEVICE_REGISTRY_UPDATED` if that's more convenient than doing the cleanup in `async_remove_config_entry_device`.
+
+## Categorizing to Device Info
+
+Device info is categorized into Link, Primary amd Secondary by finding the first device info type which has all the keys of the device info.
+
+| Category             | Keys                 |
+| -------------------- | ---------------------|
+| Link                 | `connections` and `identifiers`                     |
+| Primary              |  `configuration_url`, `connections`, `entry_type`, `hw_version`, `identifiers`, `manufacturer`, `model`, `name`, `suggested_area`, `sw_version` and `via_device`|
+| Secondary            | `connections`, `default_manufacturer`, `default_model`, `default_name` and `via_device`|
+
+This categorization is used in sorting the configuration entries to define the main integration to be used by the frontend.
+
+Mandatorily, the device info must match one of the categories.
