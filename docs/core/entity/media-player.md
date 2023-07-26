@@ -1,12 +1,12 @@
 ---
-title: Media Player Entity
-sidebar_label: Media Player
+title: Media Device Entity
+sidebar_label: Media Device
 ---
 
 :::info Incomplete
 This entry is incomplete. Contribution welcome.
 :::
-A media player entity controls a media player.  Derive a platform entity from [`homeassistant.components.media_player.MediaPlayerEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/media_player/__init__.py).
+A media device entity controls a media device, such as a player, recorder, preamp, signal processor, amplifier, TV, projector, sound matrix.  Derive a platform entity from [`homeassistant.components.media_player.MediaPlayerEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/media_player/__init__.py).
 
 ## Properties
 
@@ -17,43 +17,60 @@ Properties should always only return information from memory and not do I/O (lik
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | supported_features | int | int | Flag supported features.
-| sound_mode | string | None | The current sound mode of the media player
+| sound_mode | string | None | The current sound processing mode or filter preset of the media device
 | sound_mode_list | list | None | Dynamic list of available sound modes (set by platform, empty means sound mode not supported)
-| source | string | None | The currently selected input source for the media player.
-| source_list | list | None | The list of possible input sources for the media player. (This list should contain human readable names, suitable for frontend display)
+| source | string | None | The currently selected input source for the media device.
+| source_list | list | None | The list of possible input sources for the media device. (This list should contain human readable names, suitable for frontend display)
 | media_image_url | string | None | URL that represents the current image.
 | media_image_remotely_accessible | boolean | False | Return `True` if property `media_image_url` is accessible outside of the home network.
-| device_class | string | `None` | Type of media player.
+| device_class | string | `None` | Type of media device.
 | group_members | list | `None` | A dynamic list of player entities which are currently grouped together for synchronous playback. If the platform has a concept of defining a group leader, the leader should be the first element in that list.
+| output_list | list | None | The list of possible independent outputs for the media device e.g. a whole-house amp or matrix. (This list should contain human readable names, suitable for frontend display)
+| display_mode | string | None | The current display mode or preset of the visual media device
+| display_mode_list | list | None | Dynamic list of available display modes (set by platform, empty means sound mode not supported)
+
+
 
 ## Supported Features
 
 Supported features are defined by using values in the `MediaPlayerEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.
 
-| Value               | Description                                                        |
-| ------------------- | ------------------------------------------------------------------ |
-| `BROWSE_MEDIA`      | Entity allows browsing media.                                      |
-| `CLEAR_PLAYLIST`    | Entity allows clearing the active playlist.                        |
-| `GROUPING`          | Entity can be grouped with other players for synchronous playback. |
-| `MEDIA_ANNOUNCE`    | Entity supports the `play_media` service's announce parameter.     |
-| `MEDIA_ENQUEUE`     | Entity supports the `play_media` service's enqueue parameter.      |
-| `NEXT_TRACK`        | Entity allows skipping to the next media track.                    |
-| `PAUSE`             | Entity allows pausing the playback of media.                       |
-| `PLAY`              | Entity allows playing/resuming playback of media.                  |
-| `PLAY_MEDIA`        | Entity allows playing media sources.                               |
-| `PREVIOUS_TRACK`    | Entity allows returning back to a previous media track.            |
-| `REPEAT_SET`        | Entity allows setting repeat.                                      |
-| `SEEK`              | Entity allows seeking position during playback of media.           |
-| `SELECT_SOUND_MODE` | Entity allows selecting a sound mode.                              |
-| `SELECT_SOURCE`     | Entity allows selecting a source/input.                            |
-| `SHUFFLE_SET`       | Entity allows shuffling the active playlist.                       |
-| `STOP`              | Entity allows stopping the playback of media.                      |
-| `TURN_OFF`          | Entity is able to be turned off.                                   |
-| `TURN_ON`           | Entity is able to be turned on.                                    |
-| `VOLUME_MUTE`       | Entity volume can be muted.                                        |
-| `VOLUME_SET`        | Entity volume can be set to specific levels.                       |
-| `VOLUME_STEP`       | Entity volume can be adjusted up and down.                         |
+| Value                | Description                                                                                                 |
+| -------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `BROWSE_MEDIA`       | Entity allows browsing media.                                                                               |
+| `CLEAR_PLAYLIST`     | Entity allows clearing the active playlist.                                                                 |
+| `GROUPING`           | Entity can be grouped with other players for synchronous playback.                                          |
+| `MEDIA_ANNOUNCE`     | Entity supports the `play_media` service's announce parameter.                                              |
+| `MEDIA_ENQUEUE`      | Entity supports the `play_media` service's enqueue parameter.                                               |
+| `NEXT_TRACK`         | Entity allows skipping to the next media track.                                                             |
+| `PAUSE`              | Entity allows pausing the playback of media.                                                                |
+| `PLAY`               | Entity allows playing/resuming playback of media.                                                           |
+| `PLAY_MEDIA`         | Entity allows playing media sources.                                                                        |
+| `PREVIOUS_TRACK`     | Entity allows returning back to a previous media track.                                                     |
+| `REPEAT_SET`         | Entity allows setting repeat.                                                                               |
+| `SEEK`               | Entity allows seeking position during playback of media.                                                    |
+| `SELECT_SOUND_MODE`  | Entity allows selecting a sound processing mode or filter preset.                                           |
+| `SELECT_SOURCE`      | Entity allows selecting a source/input.                                                                     |
+| `SHUFFLE_SET`        | Entity allows shuffling the active playlist.                                                                |
+| `STOP`               | Entity allows stopping the playback of media.                                                               |
+| `TURN_OFF`           | Entity is able to be turned off.                                                                            |
+| `TURN_ON`            | Entity is able to be turned on.                                                                             |
+| `VOLUME_MUTE`        | Entity volume can be muted.                                                                                 |
+| `VOLUME_SET`         | Entity volume can be set to specific levels.                                                                |
+| `VOLUME_STEP`        | Entity volume can be adjusted up and down.                                                                  |
+| `DISPLAY_MEDIA`      | Entity supports visual display of the media e.g. by a TV or a projector or even a laser disco projector.    |
+| `SELECT_DISPLAY_MODE` | Entity allows selecting a sound processing mode or filter preset.                                           |
+| `RECORD_MEDIA`       | Entity allows media recording.                                                                              |
+| `RECORD`             | Entity allows starting/resuming recording of media.                                                         |
+| `NAME_MEDIA`         | Entity supports naming the media being recorded, e.g. a file name.                                          |
+| `MEDIA_FORMAT_SET`   | Entity supports selecting the destination media/file format e.g. when recording or transcoding / upscaling. |
+| `SOURCE_MEDIA`       | Entity provides source media distinct from the playback intent: preamp, tuner, camera, NAS.                 |
+| `ROUTE_MEDIA`        | Entity provides routing sources to destinations e.g. in a multi-room receiver, or a sound or video matrix . |
+| `ROUTE_SET`          | Entity allows connecting a specific media source to a destination output e.g. in a whole-house amp.         |
+| `ROUTE_VOLUME_MUTE`  | Route volume can be muted.                                                                                  |
+| `ROUTE_VOLUME_SET`   | Route volume can be set to specific levels.                                                                 |
+| `ROUTE_VOLUME_STEP`  | Route volume can be adjusted up and down.                                                                   |
 
 ## States
 
@@ -62,12 +79,16 @@ The state of a media player is defined by using values in the `MediaPlayerState`
 | Value       | Description                                                                                                         |
 |-------------|---------------------------------------------------------------------------------------------------------------------|
 | `OFF`       | Entity is turned off and is not accepting commands until turned on.                                                 |
-| `ON`        | Entity is turned on, but no details on its state is currently known.                                               |
+| `ON`        | Entity is turned on, but no details on its state is currently known.                                                |
 | `IDLE`      | Entity is turned on and accepting commands, but currently not playing any media. Possibly at some idle home screen. |
 | `PLAYING`   | Entity is currently playing media.                                                                                  |
-| `PAUSED`    | Entity has an active media and is currently paused                                                                |
-| `STANDBY`   | Entity is in a low power state, accepting commands.                              |
-| `BUFFERING` | Entity is preparing to start playback of some media                                                                 |
+| `PAUSED`    | Entity has an active media and is currently paused                                                                  |
+| `STANDBY`   | Entity is in a low power state, accepting commands.                                                                 |
+| `BUFFERING` | Entity is preparing to start playback of some media.                                                                |
+| `ACTIVE`    | Entity (preamp, tuner, camera, NAS, signal processor, projector, matrix, amp, etc.) is tramsmitting / transcoding media. |
+| `RECORDING` | Entity is currently recording media.                                                                                |
+| `ERROR`     | Entity is experiencing a malfunction (out of space, lost signal, overheat, etc.)                                    |
+
 
 ## Methods
 
@@ -216,6 +237,9 @@ Required. Returns one of the values from the MediaType enum that matches the med
 |MediaType.URL|
 |MediaType.GAME|
 |MediaType.APP|
+|MediaType.LIVEAUDIO|
+|MediaType.LIVEVIDEO|
+
 
 ```python
 class MyMediaPlayer(MediaPlayerEntity):
@@ -236,9 +260,12 @@ Optional. What type of media device is this. It will possibly map to google devi
 
 | Value | Description
 | ----- | -----------
-| tv | Device is a television type device.
+| display | Device is a television or projector type device.
 | speaker | Device is speakers or stereo type device.
 | receiver | Device is audio video receiver type device taking audio and outputting to speakers and video to some display.
+| matrix | Device is a multi-input, multi-independent-output type device, such as a multi-room receiver, a whole-house audio amp, a sound matrix, a video matrix.
+| live_source | Device is a mic or instrument preamp, an AM or FM or OTA TV tuner, a capture card, or any other source of a live signal.
+| recorder | Device is a recorder.
 
 ### Proxy album art for media browser
 
