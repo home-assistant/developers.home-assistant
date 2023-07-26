@@ -64,13 +64,26 @@ These weather conditions are included in our translation files and also show the
 
 This means that the `weather` platforms don't need to support languages.
 
-## Forecast data
+## Supported Features
+
+Supported features are defined by using values in the `WeatherEntityFeature` enum
+and are combined using the bitwise or (`|`) operator.
+
+| Value                      | Description                                                                                 |
+| -------------------------- | ------------------------------------------------------------------------------------------- |
+| `FORECAST_DAILY`           | The device supports a daily forecast.                                                       |
+| `FORECAST_HOURLY`          | The device supports an hourly forecast.                                                     |
+| `FORECAST_TWICE_DAILY`     | The device supports a twice-daily forecast.                                                 |
+
+## Weather forecasts
+
+A weather platform can optionally provide weather forecasts. Support for weather forecasts is indicated by setting the correct [supported feature](#supported-features). Weather forecasts are not part of the entity's state, they're instead made available by a separate API. Consumers, e.g. frontend, can subscribe to weather forecast updates.
+
+### Forecast data
 
 Forecast data can be daily, hourly or twice_daily. An integration can provide any or all of them.
 
-The integration should implement one or several of the async methods `async_forecast_daily`, `async_forecast_hourly` and `async_forecast_twice_daily` to fetch the forecast data.
-
-Setting the correct [supported feature](#supported-features) is required to use these methods.
+The integration should implement one or several of the async methods `async_forecast_daily`, `async_forecast_hourly` and `async_forecast_twice_daily` documented below to fetch the forecast data.
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
@@ -93,23 +106,9 @@ Setting the correct [supported feature](#supported-features) is required to use 
 
 Forecast data needs to follow the same unit of measurement as defined for properties where applicable.
 
-## Supported Features
+### Methods to get weather forecast(s)
 
-Supported features are defined by using values in the `WeatherEntityFeature` enum
-and are combined using the bitwise or (`|`) operator.
-Usage of the supported features are required for `async_update_forecast()` to push updated forecast to all listeners used by frontend.
-
-| Value                      | Description                                                                                 |
-| -------------------------- | ------------------------------------------------------------------------------------------- |
-| `FORECAST_DAILY`           | The device supports a daily forecast.                                                       |
-| `FORECAST_HOURLY`          | The device supports an hourly forecast.                                                     |
-| `FORECAST_TWICE_DAILY`     | The device supports a twice-daily forecast.                                                 |
-
-## Methods
-
-### Get forecast(s)
-
-These method are used to fetch forecasts from the api.
+These method are called to fetch forecasts from the api.
 
 ```python
 class MyWeatherEntity(WeatherEntity):
@@ -132,5 +131,10 @@ class MyWeatherEntity(WeatherEntity):
         
         Only implement this method if `FORECAST_HOURLY` is set
         """
-
 ```
+
+### Updating weather forecast(s)
+
+It is strongly recommended that fetched weather forecasts are cached by the weather entity to avoid unnecessary API accesses.
+
+When an updated weather forecast is available, the weather forecast cache should be invalidated and the method `WeatherEntity.async_update_listeners` should be awaited to trigger a push of the updated weather forecast to any active subscriber. If there are active listeners, `WeatherEntity.async_update_listeners` will call the corresponding `async_forecast_xxx` methods. If there are no active listeners, `WeatherEntity.async_update_listeners` will not call any ot the `async_forecast_xxx` methods.
