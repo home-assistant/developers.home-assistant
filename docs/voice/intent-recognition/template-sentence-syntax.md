@@ -131,6 +131,26 @@ lists:
         out: 1
 ```
 
+#### Wildcards
+
+Wildcard lists can match any text, for example:
+
+```yaml
+language: en
+intents:
+  PlayAlbum:
+    data:
+      - sentences:
+          - play {album} by {artist}
+lists:
+  artist:
+    wildcard: true
+  album:
+    wildcard: true
+```
+
+will match sentences such as "play the white album by the beatles". The `PlayAlbum` intent will have an `album` slot with "the white album " (note the trailing whitespace) and an `artist` slot with "the beatles".
+
 ### Expansion Rules
 
 A lot of template sentences can be written in a similar way. To avoid having to repeat the same matching structure multiple times, we can define expansion rules. For example, a user might add "the" in front of the area name, or they might not. We can define an expansion rule to match both cases.
@@ -145,6 +165,45 @@ expansion_rules:
   brightness: "{brightness} [percent]"
   turn: "(turn | switch)"
 ```
+
+#### Local Expansion Rules
+
+Expansion rules can also be defined locally next to a list of sentences, and will only be available within those templates. This allows you to write similar templates for different situations. For example:
+
+```yaml
+language: en
+intents:
+  GetLocked:
+    data:
+      - sentences:
+          - is the door <state>
+        requires_context:
+          domain: binary_sensor
+        expansion_rules:
+          state: "{binary_state}"
+
+      - sentences:
+          - is the door <state>
+        requires_context:
+          domain: lock
+        expansion_rules:
+          state: "{lock_state}"
+
+lists:
+  binary_state:
+    values:
+      - in: "locked"
+        out: "off"
+      - in: "unlocked"
+        out: "on"
+  lock_state:
+    values:
+      - "locked"
+      - "unlocked"
+
+```
+
+The same template `is the door <state>` is used for both binary sensors and regular locks, but the local `state` expansion rules refer to different lists.
 
 ### Skip Words
 
