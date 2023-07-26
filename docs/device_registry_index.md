@@ -114,13 +114,13 @@ In `async_remove_config_entry_device` the integration should take the necessary 
 
 ## Categorizing to Device Info
 
-Device info is categorized into Link, Primary amd Secondary by finding the first device info type which has all the keys of the device info.
+Device info is categorized into Link, Primary and Secondary by finding the first device info type which has all the keys of the device info.
 
 | Category             | Keys                 |
 | -------------------- | ---------------------|
-| Link                 | `connections` and `identifiers`                     |
-| Primary              |  `configuration_url`, `connections`, `entry_type`, `hw_version`, `identifiers`, `manufacturer`, `model`, `name`, `suggested_area`, `sw_version` and `via_device`|
-| Secondary            | `connections`, `default_manufacturer`, `default_model`, `default_name` and `via_device`|
+| Link                 | `connections` and `identifiers` |
+| Primary              | `configuration_url`, `connections`, `entry_type`, `hw_version`, `identifiers`, `manufacturer`, `model`, `name`, `suggested_area`, `sw_version`, and `via_device`|
+| Secondary            | `connections`, `default_manufacturer`, `default_model`, `default_name`, and `via_device`|
 
 This categorization is used in sorting the configuration entries to define the main integration to be used by the frontend.
 
