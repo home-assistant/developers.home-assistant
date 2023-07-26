@@ -17,6 +17,7 @@ export const RepositoryOpener = () => {
 
 You'll need to set up a development environment if you want to develop a new feature or component for Home Assistant. Read on to learn how to set up.
 
+
 ## Developing with Visual Studio Code + devcontainer
 
 The easiest way to get started with development is to use Visual Studio Code with devcontainers. This approach will create a preconfigured development environment with all the tools you need. This approach is enabled for all Home Assistant repositories. [Learn more about devcontainers.](https://code.visualstudio.com/docs/devcontainers/containers)
@@ -143,3 +144,38 @@ hass -c config
 If you encounter a crash (`SIGKILL`) while running this command on *macOS*, it's probably about lack of Bluetooth permission. You can fix it by adding this permission for your Terminal app (System Preferences -> Security & Privacy -> Bluetooth).
 
 The Home Assistant configuration is stored in the `config` directory in your repository.
+
+
+## Developing with GitHub Codespaces
+
+Using GitHub Codespaces you can start with development in an online environment. This approach does not allow for interaction with local hardware. The online environment is completely seperate from your local network.
+
+**Prerequisites**
+- [Git Account](https://github.com/join)
+- A web-browser
+
+**Getting started:**
+
+1. Go to [Home Assistant core repository](https://github.com/home-assistant/core) and click "fork".
+2. Once your fork is created, click the button "<> Code" and select the tab "Codespaces" 
+3. Click "+" button to "Create a codespace on dev"
+4. A new browser tab will be opened showing that the codespace is being setup (this may take a few minutes), after this your codespace will be ready.
+5. A very basic configuration.yaml is created in the folder `/config`. We need to make a modification in this file.
+    * Open the file `/config/configuration.yaml`
+    * Append the following snippet to this file and save the modified file:
+      ```
+      http:
+         use_x_forwarded_for: true
+         trusted_proxies:
+            - 127.0.0.1
+      ```
+5. You can verify that your environment is set up properly by the following:
+    * Open the command palette in Visual Studio Code - `Shift`+`Command`+`P`(Mac) / `Ctrl`+`Shift`+`P` (Windows/Linux).
+    * Select `Tasks: Run Task` -> `Run Home Assistant Core`
+    * A terminal should open and begin outputting activity. Check for errors and wait for the output to stop/slow down.
+    * A notification will be displayed giving the option to "Open in browser" or "Make public". Choose to "Open in browser".
+    * You should see the Home Assistant setup screen. Continue the setup.
+    * After clicking the "Finish" button, a browser error will probably be displayed. Modify the browser-url by removing `?auth_callback=....` and retry. 
+    * The login screen of your online environment will now be displayed,
+
+
