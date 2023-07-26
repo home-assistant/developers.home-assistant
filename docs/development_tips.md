@@ -22,6 +22,10 @@ If you made a change to a core integration and you want to test it in your produ
 
 The Home Assistant frontend caches aggressively, and as such, the first time you run Home Assistant with your new changes, you may not see the integration show up in the integration list. Check the logs to make sure there were no errors, and if not, perform a hard refresh of your browser window and try again; in many cases, that will resolve your issue.
 
+### Running pytests from within VSCode
+
+If you installed the required Python dependencies, you can run PyTests from within VSCode after some configuration. Via the VSCode side-menu you select "Testing" (icon: Labratory Flask) and select that the tests are in the folder "tests". After a while a treeview should appear with tests which can be executed via the "Run Test" button (icon: Play) next to the test names. 
+
 ### Getting additional support
 
 `#devs` and `#devs_core` on the Home Assistant [Discord](https://www.home-assistant.io/join-chat/) server are great places to ask questions. Pro tip: Before you post your question, push the code you are working on into a branch and push that branch somewhere public and paste a link to it along with your question so that the person who is helping you can see your code. Please do NOT paste code blobs into the channel as it's hard to read and hides other questions/discussions.
