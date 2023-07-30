@@ -2,12 +2,14 @@
 title: "Testing your code"
 ---
 
-As it states in the [Style guidelines section](development_guidelines.md) all code is checked to verify the following:
+As stated in the [Style guidelines section](development_guidelines.md) all code is checked to verify the following:
 
 - All the unit tests pass
 - All code passes the checks from the linting tools
 
 Local testing is done using [pytest](https://docs.pytest.org/) and using [pre-commit](https://pre-commit.com/) for running out linters, which has been installed as part of running `script/setup` in the [virtual environment](development_environment.mdx).
+
+Python tests requirements need to be installed before tests can be run. If using the VScode devcontainer, this can be achievied by using the corresponding task. See https://developers.home-assistant.io/docs/development_environment#tasks for guidance about running tasks.
 
 To run our linters, on the full code base, run the following command:
 
