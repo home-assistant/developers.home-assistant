@@ -9,7 +9,7 @@ As stated in the [Style guidelines section](development_guidelines.md) all code 
 
 Local testing is done using [pytest](https://docs.pytest.org/) and using [pre-commit](https://pre-commit.com/) for running out linters, which has been installed as part of running `script/setup` in the [virtual environment](development_environment.mdx).
 
-Python tests requirements need to be installed before tests can be run. If using the VScode devcontainer, this can be achieved by using the corresponding task. Check the [devcontainer documentation](https://developers.home-assistant.io/docs/development_environment#tasks) for guidance about running tasks.
+Python test requirements need to be installed before tests can be run. If using the VScode devcontainer, this can be achieved by using the corresponding task. Check the [devcontainer documentation](https://developers.home-assistant.io/docs/development_environment#tasks) for guidance about running tasks.
 
 To run our linters, on the full code base, run the following command:
 
