@@ -102,7 +102,7 @@ The integration should implement one or several of the async methods `async_fore
 | wind_bearing | float or string | `None` | The wind bearing in azimuth angle (degrees) or 1-3 letter cardinal direction.
 | native_wind_gust_speed | int | `None` | The wind gust speed in m/s, km/h, mi/h, ft/s or kn.
 | native_wind_speed | int | `None` | The wind speed in m/s, km/h, mi/h, ft/s or kn.
-| is_daytime | bool | `None` | For `async_forecast_twice_daily` required to use for day/night.
+| is_daytime | bool | `None` | This is mandatory in forecast data returned by `async_forecast_twice_daily` to indicate day or night.
 
 Forecast data needs to follow the same unit of measurement as defined for properties where applicable.
 
