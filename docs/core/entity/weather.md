@@ -13,23 +13,23 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
+| cloud_coverage | int | `None` | The current cloud coverage in %.
 | condition | string | **Required** | The current weather condition.
-| native_temperature | float | **Required** | The current temperature in °C or °F.
+| humidity | float | `None` | The current humidity in %.
 | native_apparent_temperature | float | `None` | The current apparent (feels-like) temperature in °C or °F.
-| native_temperature_unit | string | **Required** | The temperature unit; °C or °F.
 | native_dew_point | float | `None` | The dew point temperature in °C or °F.
+| native_precipitation_unit | string | `None` | The precipitation unit; mm or in.
 | native_pressure | float | `None` | The current air pressure in hPa, mbar, inHg or mmHg.
 | native_pressure_unit | string | `None` | The air pressure unit; hPa, mbar, inHg or mmHg. Required if native_pressure is set.
-| humidity | float | `None` | The current humidity in %.
-| ozone | float | `None` | The current ozone level.
-| cloud_coverage | int | `None` | The current cloud coverage in %.
-| uv_index | float | `None` | The current [UV index](https://en.wikipedia.org/wiki/Ultraviolet_index).
+| native_temperature | float | **Required** | The current temperature in °C or °F.
+| native_temperature_unit | string | **Required** | The temperature unit; °C or °F.
 | native_visibility | float | `None` | The current visibility in km or mi.
 | native_visibility_unit | string | `None` | The visibility unit; km or mi. Required if native_visibility is set.
 | native_wind_gust_speed | float | `None` | The current wind gust speed in m/s, km/h, mi/h, ft/s or kn.
 | native_wind_speed | float | `None` | The current wind speed in m/s, km/h, mi/h, ft/s or kn.
 | native_wind_speed_unit | string | `None` | The wind speed unit;m/s, km/h, mi/h, ft/s or kn. Required if native_wind_speed is set.
-| native_precipitation_unit | string | `None` | The precipitation unit; mm or in.
+| ozone | float | `None` | The current ozone level.
+| uv_index | float | `None` | The current [UV index](https://en.wikipedia.org/wiki/Ultraviolet_index).
 | wind_bearing | float or string | `None` | The current wind bearing in azimuth angle (degrees) or 1-3 letter cardinal direction.
 
 ### Unit Conversion
@@ -88,21 +88,21 @@ The integration should implement one or several of the async methods `async_fore
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | datetime | string | **Required** | UTC Date time in RFC 3339 format.
-| native_temperature | float | **Required** | The higher temperature in °C or °F
-| native_apparent_temperature | float | `None` | The apparent (feels-like) temperature in °C or °F
+| is_daytime | bool | `None` | This is mandatory in forecast data returned by `async_forecast_twice_daily` to indicate day or night.
+| cloud_coverage | int | `None` | The cloud coverage in %.
 | condition | string | `None` | The weather condition at this point.
-| native_templow | float | `None` | The lower daily Temperature in °C or °F
+| humidity | float | `None` | The humidity in %.
+| native_apparent_temperature | float | `None` | The apparent (feels-like) temperature in °C or °F
 | native_dew_point | float | `None` | The dew point temperature in °C or °F
 | native_precipitation | float | `None` | The precipitation amount in mm or in.
-| precipitation_probability | int | `None` | The probability of precipitation in %.
-| humidity | float | `None` | The humidity in %.
-| cloud_coverage | int | `None` | The cloud coverage in %.
-| uv_index | float | `None` | The UV index.
 | native_pressure | float | `None` | The air pressure in hPa, mbar, inHg or mmHg.
-| wind_bearing | float or string | `None` | The wind bearing in azimuth angle (degrees) or 1-3 letter cardinal direction.
+| native_temperature | float | **Required** | The higher temperature in °C or °F
+| native_templow | float | `None` | The lower daily Temperature in °C or °F
 | native_wind_gust_speed | int | `None` | The wind gust speed in m/s, km/h, mi/h, ft/s or kn.
 | native_wind_speed | int | `None` | The wind speed in m/s, km/h, mi/h, ft/s or kn.
-| is_daytime | bool | `None` | This is mandatory in forecast data returned by `async_forecast_twice_daily` to indicate day or night.
+| precipitation_probability | int | `None` | The probability of precipitation in %.
+| uv_index | float | `None` | The UV index.
+| wind_bearing | float or string | `None` | The wind bearing in azimuth angle (degrees) or 1-3 letter cardinal direction.
 
 Forecast data needs to follow the same unit of measurement as defined for properties where applicable.
 
