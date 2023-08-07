@@ -117,19 +117,19 @@ class MyWeatherEntity(WeatherEntity):
     async def async_forecast_daily(self) -> list[Forecast] | None:
         """Return the daily forecast in native units.
         
-        Only implement this method if `FORECAST_DAILY` is set
+        Only implement this method if `WeatherEntityFeature.FORECAST_DAILY` is set
         """
 
     async def async_forecast_twice_daily(self) -> list[Forecast] | None:
         """Return the twice daily forecast in native units.
         
-        Only implement this method if `FORECAST_TWICE_DAILY` is set
+        Only implement this method if `WeatherEntityFeature.FORECAST_TWICE_DAILY` is set
         """
 
     async def async_forecast_hourly(self) -> list[Forecast] | None:
         """Return the hourly forecast in native units.
         
-        Only implement this method if `FORECAST_HOURLY` is set
+        Only implement this method if `WeatherEntityFeature.FORECAST_HOURLY` is set
         """
 ```
 
