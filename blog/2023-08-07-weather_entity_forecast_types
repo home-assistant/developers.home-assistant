@@ -6,6 +6,6 @@ title: "Weather entity forecast types"
 
 `WeatherEntity` now allows a single weather entity to support different forecast types meaning it's no longer necessary to create multiple entities for the same location, as an example, an entity providing daily forecast and another entity providing hourly forecast.
 
-Integrations providing `weather` entities should be updated to remove the deprecated `forecast` state attribute and instead use one of several of the new async methods `async_forecast_daily`, `async_forecast_hourly` and `async_forecast_twice_daily`.
+Integrations providing `weather` entities should be updated to remove the deprecated `forecast` state attribute and instead use one of several of the new async methods `async_forecast_daily`, `async_forecast_hourly` and `async_forecast_twice_daily`. See [`weather` documentation](https://www.home-assistant.io/integrations/weather/#service-weatherget_forecast) for details on how to use the new services.
 
 The "Weather Forecast Card" has been updated to provide the user with an option to select the preferred forecast to show, if the integration are using the new methods.
