@@ -57,7 +57,7 @@ This is a solid integration that is able to survive poor conditions and can be c
 Best of the best. The integration is completely async, meaning it's super fast. Integrations that reach platinum level will require approval by the code owner for each PR.
 
 - Satisfying all Gold level requirements.
-- Set appropriate `PARALLEL_UPDATES` constant
+- Set appropriate `PARALLEL_UPDATES` constant ([docs](integration_fetching_data.md#request-parallelism))
 - Support config entry unloading (called when config entry is removed)
 - Integration + dependency are async ([docs](asyncio_working_with_async.md))
 - Uses aiohttp or httpx and allows passing in websession (if making HTTP requests)
