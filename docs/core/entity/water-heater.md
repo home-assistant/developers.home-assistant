@@ -74,6 +74,6 @@ Set the water heater back to the previous operation mode. Turn off away mode.
 
 Turns the water heater on.
 
-### `turn_off` or `async_off`
+### `turn_off` or `async_turn_off`
 
 Turns the water heater off.
