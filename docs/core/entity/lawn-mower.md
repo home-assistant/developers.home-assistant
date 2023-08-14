@@ -25,8 +25,6 @@ Properties should always only return information from memory and not do I/O (lik
 | `MOWING` | The lawn mower is currently mowing.
 | `DOCKING` | The lawn mower is done mowing and is currently returning to the dock.
 | `PAUSED` | The lawn mower was mowing but was paused without returning to the dock.
-| `DOCKED_SCHEDULE_DISABLED` | The lawn mower is currently docked and the schedule is disabled.
-| `DOCKED_SCHEDULE_ENABLED` | The lawn mower is currently docked and the schedule is enabled.
 | `ERROR` | The lawn mower encountered an error while mowing and needs assistance.
 
 ## Supported Features
@@ -40,9 +38,7 @@ must set the `LawnMowerEntityFeature.STATE` flag.
 | -------------- | ---------------------------------------------------- |
 | `START_MOWING`      | The lawn mower supports the mowing command.       |
 | `PAUSE`   | The lawn mower supports pausing the current task.                   |
-| `DOCK`    | The lawn mower supports the return to dock command.               |
-| `ENABLE_SCHEDULE`       | The lawn mower supports enabling the schedule.                        |
-| `DISABLE_SCHEDULE`          | The lawn mower supports disabling the schedule.              |
+| `DOCK`    | The lawn mower supports the return to dock command.
 
 ## Methods
 
@@ -57,11 +53,3 @@ Stop the lawn mower, return to dock.
 ### `pause` or `async_pause`
 
 Pause the lawn mower during current operation.
-
-### `enable_schedule` or `async_enable_schedule`
-
-Enable the lawn mower mowing schedule.
-
-### `disable_schedule` or `async_disable_schedule`
-
-Disable the lawn mower mowing schedule.
