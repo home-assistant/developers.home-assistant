@@ -30,8 +30,6 @@ Properties should always only return information from memory and not do I/O (lik
 
 Supported features are defined by using values in the `LawnMowerEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.
-Note that all lawn mower entity platforms derived from `homeassistant.components.lawn_mower.LawnMowerEntity`
-must set the `LawnMowerEntityFeature.STATE` flag.
 
 | Value          | Description                                          |
 | -------------- | ---------------------------------------------------- |
