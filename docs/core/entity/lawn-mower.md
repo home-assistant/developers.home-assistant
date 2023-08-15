@@ -23,9 +23,9 @@ Properties should always only return information from memory and not do I/O (lik
 | State | Description
 | ----- | -----------
 | `MOWING` | The lawn mower is currently mowing.
-| `DOCKING` | The lawn mower is done mowing and is currently returning to the dock.
-| `PAUSED` | The lawn mower was mowing but was paused without returning to the dock.
-| `ERROR` | The lawn mower encountered an error while mowing and needs assistance.
+| `DOCKED` | The lawn mower is done mowing and is currently docked.
+| `PAUSED` | The lawn mower was active and is now paused.
+| `ERROR` | The lawn mower encountered an error while active and needs assistance.
 
 ## Supported Features
 
