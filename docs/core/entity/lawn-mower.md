@@ -14,7 +14,6 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| name | string | **Required** | Name of the entity.
 | state | string | **Required** | One of the states listed in the states section.
 | supported_features | int | (abstract method) | Bitmap of supported features. See below.
 
