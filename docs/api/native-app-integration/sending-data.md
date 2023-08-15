@@ -52,7 +52,7 @@ The response will look as follows:
 
 ## Short note on instance URLs
 
-Some users have configured Home Assistant to be available outside of their home network using a dynamic DNS service. There are some routers that don't support hairpinning / NAT loopback: a device sending data from inside the routers network, via the externally configured DNS service, to Home Assistant, which also resides inside the local network.
+Some users have configured Home Assistant to be available outside their home network using a dynamic DNS service. There are some routers that don't support hairpinning / NAT loopback: a device sending data from inside the routers network, via the externally configured DNS service, to Home Assistant, which also resides inside the local network.
 
 To work around this, the app should record which WiFi SSID is the users home network, and use a direct connection when connected to the home WiFi network.
 

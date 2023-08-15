@@ -40,7 +40,7 @@ When the width and height are passed, scaling should be done on a best-effort ba
 
 - Return the smallest image that meets the minimum width and minimum height.
 
-- When scaling the image, aspect ratio must be preserved. If the aspect ratio is not the same as the requsted height or width, it is expected that the width and/or height of the returned image will be larger than requested.
+- When scaling the image, aspect ratio must be preserved. If the aspect ratio is not the same as the requested height or width, it is expected that the width and/or height of the returned image will be larger than requested.
 
 - Pass on the width and height if the underlying camera is capable of scaling the image.
 
@@ -65,7 +65,7 @@ class MyCamera(Camera):
 
 ### Stream Source
 
-The stream source should return a url that is usable by ffmpeg (e.g. an RTSP url). Requires `CameraEntityFeature.STREAM`.
+The stream source should return a url that is usable by ffmpeg (such as an RTSP url). Requires `CameraEntityFeature.STREAM`.
 
 A camera entity with a stream source by default uses `StreamType.HLS` to tell the frontend to use an HLS feed with the `stream` component. This stream source will also be used with `stream` for recording.
 
@@ -81,7 +81,7 @@ A common way for a camera entity to render a camera still image is to pass the s
 
 ### WebRTC Streams
 
-WebRTC enabled cameras can be used by facilitating a direct connection with the home assistant frontend. This usage requires `CameraEntityFeature.STREAM` with `frontend_stream_type` set to `StreamType.WEB_RTC`. The integration should implement `async_handle_web_rtc_offer` which passes the frontend's SDP offer to the device and returns back the answer.
+WebRTC enabled cameras can be used by facilitating a direct connection with the home assistant frontend. This usage requires `CameraEntityFeature.STREAM` with `frontend_stream_type` set to `StreamType.WEB_RTC`. The integration should implement `async_handle_web_rtc_offer` which passes the frontends SDP offer to the device and returns back the answer.
 
 WebRTC streams do not use the `stream` component and do not support recording.
 

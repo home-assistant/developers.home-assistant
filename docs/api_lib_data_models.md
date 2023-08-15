@@ -5,11 +5,11 @@ sidebar_label: Modelling Data
 
 Now that we have authentication going, we can start making authenticated requests and fetch data!
 
-When modelling the data, it is important that we expose the data from the API in the same structure as that the API offers it. Some API designs might not make a lot of sense or contain typos. It is important that we still represent them in our objects. This makes it easy for developers using your library to follow the API documentation and know how it will work in your library.
+When modeling the data, it is important that we expose the data from the API in the same structure as that the API offers it. Some API designs might not make a lot of sense or contain typos. It is important that we still represent them in our objects. This makes it easy for developers using your library to follow the API documentation and know how it will work in your library.
 
 API libraries should try to do as little as possible. So it is okay to represent data structures as classes, but you should not transform data from one value into another. For example, you should not implement conversion between Celsius and Fahrenheit temperatures. This involves making decisions on precisions of results and should therefore be left to the developer using the library.
 
-For this example we're going to model an async library for a Rest API named ExampleHub that has two endpoints:
+For this example, we're going to model an async library for a Rest API named ExampleHub that has two endpoints:
 
 - get `/light/<id>`: query the information of a single light.
 

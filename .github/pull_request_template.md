@@ -29,9 +29,9 @@
   Details are important, and help maintainers processing your PR.
   Please be sure to fill out additional details, if applicable.
   
-  For documentation relating to existing code please link to the relevant file on the appropriate master or dev branch (i.e.: https://github.com/home-assistant/core/blob/7c784b69638f3e2b3c91294b31a62e1058ba9709/homeassistant/components/random/sensor.py#L48-L57)
+  For documentation relating to existing code, please link to the relevant file on the appropriate master or dev branch (such as https://github.com/home-assistant/core/blob/7c784b69638f3e2b3c91294b31a62e1058ba9709/homeassistant/components/random/sensor.py#L48-L57)
 
-  For documentation relating to new or changing code, please link to the corresponding pull request (i.e. home-assistant/core#2). This lets us easily check the status of your proposal.
+  For documentation relating to new or changing code, please link to the corresponding pull request (such as home-assistant/core#2). This lets us easily check the status of your proposal.
 -->
 
 - This PR fixes or closes issue: fixes #

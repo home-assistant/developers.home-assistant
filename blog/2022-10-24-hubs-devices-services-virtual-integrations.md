@@ -51,7 +51,7 @@ like Zigbee or Z-Wave. For example, the U-tec ultraloq works via Z-Wave and
 has no specific dedicated integration.
 
 For end-users, it can be confusing to find how to integrate those products
-with Home Asssistant. To help with these above cases, we introduce:
+with Home Assistant. To help with these above cases, we introduce:
 [Virtual integrations](/docs/creating_integration_manifest#virtual-integration).
 
 Virtual integrations are not real integrations but are used to help users

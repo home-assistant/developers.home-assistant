@@ -125,7 +125,7 @@ Get details about an add-on
 | network             | dictionary or null | The network configuration for the add-on                                               |
 | network_description | dictionary or null | The description for the network configuration                                          |
 | options             | dictionary         | The add-on configuration                                                               |
-| privileged          | list               | A list of hardwars/system attributes the add-onn has access to                         |
+| privileged          | list               | A list of hardware/system attributes the add-onn has access to                         |
 | protected           | boolean            | `true` if protection mode is enabled                                                   |
 | rating              | int                | The addon rating                                                                       |
 | repository          | string             | The URL to the add-on repository                                                       |
@@ -1442,7 +1442,7 @@ log record per line.
 
 :::tip
 To get the last log entries the Range request header supports negative values
-as `num_skip`. E.g. `Range: entries=:-9:` returns the last 10 entries. Or
+as `num_skip`. Using `Range: entries=:-9:` returns the last 10 entries. Or
 `Range: entries=:-200:100` to see 100 entries starting from the one 200 ago.
 :::
 
@@ -1633,7 +1633,7 @@ Create a new session for access to the ingress service.
 </ApiEndpoint>
 
 <ApiEndpoint path="/ingress/validate_session" method="post">
-Validate an ingress session, extending it's validity period.
+Validate an ingress session, extending its validity period.
 
 **Payload:**
 
@@ -2361,7 +2361,7 @@ Dismiss an issue
 
 <ApiEndpoint path="/resolution/healthcheck" method="post">
 
-Execute a healthcheck and autofix & notifcation.
+Execute a healthcheck and autofix & notification.
 
 </ApiEndpoint>
 
@@ -2864,7 +2864,7 @@ You need to call `/supervisor/reload` after updating the options.
 | debug               | bool   | Enable debug                                           |
 | debug_block         | bool   | Enable debug block                                     |
 | logging             | string | Set logging level                                      |
-| addons_repositories | list   | Set a list of URL's as strings for add-on repositories |
+| addons_repositories | list   | Set a list of URLs as strings for add-on repositories |
 | auto_update         | bool   | Enable/disable auto update for supervisor              |
 
 </ApiEndpoint>
@@ -2928,7 +2928,7 @@ Update the supervisor
 
 ### Placeholders
 
-Some of the endpoints uses placeholders indicated with `<...>` in the endpoint URL.
+Some endpoints use placeholders indicated with `<...>` in the endpoint URL.
 
 | placeholder | description                                                                                                                                           |
 | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |

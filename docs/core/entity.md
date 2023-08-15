@@ -87,11 +87,11 @@ Entities that generate a significant amount of state changes can quickly increas
 
 The following properties are also available on entities. However, they are for advanced use only and should be used with caution.
 
-| Name                            | Type    | Default | Description                                                                                                                                                                                                           |
-| ------------------------------- | ------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| entity_registry_enabled_default | boolean | `True`  | Indicate if the entity should be enabled or disabled when first added to the entity registry. This includes fast-changing diagnostic entities or, assumingly less commonly used entities. For example, a sensor exposing RSSI or battery voltage should typically be set to `False`; to prevent unneeded (recorded) state changes or UI clutter by these entities. |
-| entity_registry_visible_default | boolean | `True`  | Indicate if the entity should be hidden or visible when first added to the entity registry. |
-| force_update                    | boolean | `False` | Write each update to the state machine, even if the data is the same. Example use: when you are directly reading the value from a connected sensor instead of a cache. Use with caution, will spam the state machine. |
+| Name                            | Type    | Default | Description                                                                                                                                                                                                                                                                                                                                                                                                           |
+|---------------------------------|---------|---------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| entity_registry_enabled_default | boolean | `True`  | Indicate if the entity should be enabled or disabled when first added to the entity registry. This includes fast-changing diagnostic entities or, assumingly less commonly used entities. For example, a sensor exposing RSSI or battery voltage should typically be set to `False`; to prevent unneeded (recorded) state changes or UI clutter by these entities.                                                    |
+| entity_registry_visible_default | boolean | `True`  | Indicate if the entity should be hidden or visible when first added to the entity registry.                                                                                                                                                                                                                                                                                                                           |
+| force_update                    | boolean | `False` | Write each update to the state machine, even if the data is the same. Example use: when you are directly reading the value from a connected sensor instead of a cache. Use with caution, will spam the state machine.                                                                                                                                                                                                 |
 | icon                            | icon    | `None`  | Icon to use in the frontend. Icons start with `mdi:` plus an [identifier](https://materialdesignicons.com/). You probably don't need this since Home Assistant already provides default icons for all entities according to its `device_class`. This should be used only in the case where there either is no matching `device_class` or where the icon used for the `device_class` would be confusing or misleading. |
 
 ## System properties
@@ -99,7 +99,7 @@ The following properties are also available on entities. However, they are for a
 The following properties are used and controlled by Home Assistant, and should not be overridden by integrations.
 
 | Name    | Type    | Default | Description                                                                                                                                                                              |
-| ------- | ------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+|---------|---------|---------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | enabled | boolean | `True`  | Indicate if entity is enabled in the entity registry. It also returns `True` if the platform doesn't support the entity registry. Disabled entities will not be added to Home Assistant. |
 
 ## Entity naming
@@ -184,7 +184,7 @@ The entity's name property may be a combination of the device name and the data 
 
 ### Property function
 
-Writing property methods for each property is just a couple of lines of code,
+Writing property methods for each property is just a couple of code lines,
 for example
 
 ```python
@@ -269,10 +269,10 @@ Use these lifecycle hooks to execute code when certain events happen to the enti
 
 Called when an entity has their entity_id and hass object assigned, before it is written to the state machine for the first time. Example uses: restore the state, subscribe to updates or set callback/dispatch function/listener.
 
-### `async_will_remove_from_hass()`
+### async_will_remove_from_hass()
 
 Called when an entity is about to be removed from Home Assistant. Example use: disconnect from the server or unsubscribe from updates.
 
 ## Changing the entity model
 
-If you want to add a new feature to an entity or any of its subtypes (light, switch, etc), you will need to propose it first in our [architecture repo](https://github.com/home-assistant/architecture/discussions). Only additions will be considered that are common features among various vendors.
+If you want to add a new feature to an entity or any of its subtypes (light, switch, etc.), you will need to propose it first in our [architecture repo](https://github.com/home-assistant/architecture/discussions). Only additions will be considered that are common features among various vendors.

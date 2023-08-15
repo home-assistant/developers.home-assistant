@@ -8,7 +8,7 @@ title: "Constant deprecations for 2022.5"
 For Home Assistant Core 2022.5, we have deprecated many constants and replaced
 them with enums.
 
-All `SUPPORT_*` constants have been deprecated, and are summerised
+All `SUPPORT_*` constants have been deprecated, and are summarised
 in a [previously published blog article](/blog/2022/04/02/support-constants-deprecation).
 
 Additionally, the following constants have been deprecated:

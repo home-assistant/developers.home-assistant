@@ -23,7 +23,7 @@ If your integration is going to register services, it will need to provide a des
 
 ## Where Home Assistant looks for integrations
 
-Home Assistant will look for an integration when it sees the domain referenced in the config file (i.e. `mobile_app:`) or if it is a dependency of another integration. Home Assistant will look at the following locations:
+Home Assistant will look for an integration when it sees the domain referenced in the config file (such as `mobile_app:`) or if it is a dependency of another integration. Home Assistant will look at the following locations:
 
 - `<config directory>/custom_components/<domain>`
 - `homeassistant/components/<domain>` (built-in integrations)

@@ -2,7 +2,7 @@
 title: "Local add-on testing"
 ---
 
-The fastest and recommended way to develop add-ons is using a local Visual Studio Code devcontainer. We maintain a [devcontainer for this purpose](https://github.com/home-assistant/devcontainer) which is used in all our add-on repositories. This devcontainer setup for VS Code runs Supervisor and Home Assistant, with all of the add-ons mapped as local add-ons inside, making it simple for add-on developers on Windows, Mac and Linux desktop OS-es.
+The fastest and recommended way to develop add-ons is using a local Visual Studio Code devcontainer. We maintain a [devcontainer for this purpose](https://github.com/home-assistant/devcontainer) which is used in all our add-on repositories. This devcontainer setup for VS Code runs Supervisor and Home Assistant, with all the add-ons mapped as local add-ons inside, making it simple for add-on developers on Windows, Mac and Linux desktop OS-es.
 
 - Follow the instructions to download and install the [Remote Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) VS Code extension.
 - Copy the [`devcontainer.json`](https://github.com/home-assistant/devcontainer/raw/main/addons/devcontainer.json) file to `.devcontainer/devcontainer.json` in your repository.
@@ -40,7 +40,7 @@ docker run \
   -d local
 ```
 
-If you don't want to use the official build tool, you can still build with standalone Docker. If you use `FROM $BUILD_FROM` you'll need to set a base image with build args. Normally you can use following base images:
+If you don't want to use the official build tool, you can still build with standalone Docker. If you use `FROM $BUILD_FROM` you'll need to set a base image with build args. Normally you can use the following base images:
 
 - armhf: `homeassistant/armhf-base:latest`
 - aarch64: `homeassistant/aarch64-base:latest`

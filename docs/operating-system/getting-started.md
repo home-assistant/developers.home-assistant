@@ -45,7 +45,9 @@ The build container needs to get started with privileges since at some point dur
 
 The script `scripts/enter.sh` builds the build container image and starts a container using that image. Arguments passed to the script get executed inside the container.
 
-HAOS uses a configuration file for each supported target. To build for a specific target (board), the configuration file needs to be passed to `make`. The configuration files are stored in `buildroot-external/configs/`. Note that the ending `_defconfig` will be appended automatically and *must not* be passed to `make`. E.g. to build the Raspberry Pi 4 64-bit configuration `buildroot-external/configs/rpi4_64_defconfig` use the following command:
+HAOS uses a configuration file for each supported target. To build for a specific target (board), the configuration file needs to be passed to `make`. The configuration files are stored in `buildroot-external/configs/`. Note that the ending `_defconfig` will be appended automatically and *must not* be passed to `make`.
+
+To build the Raspberry Pi 4 64-bit configuration (`buildroot-external/configs/rpi4_64_defconfig`) use the following command:
 
 ```
 $ sudo scripts/enter.sh make rpi4_64
@@ -100,7 +102,7 @@ builder@c6dfb4cd4036:/build$
 
 From this shell, the same build above could be started using `make O=output_rpi4_64 rpi4_64`.
 
-This allows to invoke other Buildroot targets, e.g. to [graph dependencies between packages](https://buildroot.org/downloads/manual/manual.html#_graphing_the_dependencies_between_packages). To use other Buildroot targets, make sure to change to the `buildroot/` directory and execute commands from there
+This allows the script to invoke other Buildroot targets, for example if you wanted to [graph dependencies between packages](https://buildroot.org/downloads/manual/manual.html#_graphing_the_dependencies_between_packages). To use other Buildroot targets, make sure to change to the `buildroot/` directory and execute commands from there
 
 ```bash
 builder@c6dfb4cd4036:/build$ cd buildroot/
@@ -129,6 +131,6 @@ This will show QEMU's SDL interface and should boot Home Assistant Operating Sys
 
 ## Create a pull request for review
 
-Once you are happy with your changes create a separate git branch and commit them. Try to describe *why* you think that change is important and should be applied to HAOS. E.g "update kernel" is also obvious from the changes itself. The maintainer is more interested why you think the kernel should be updated. The *why* can be fairly trivial (update kernel to make sure we keep up with latest changes), or it can have some interesting details (update kernel since this latest version fixes ethernet on board xy).
+Once you are happy with your changes create a separate git branch and commit them. Try to describe *why* you think that change is important and should be applied to HAOS. A reason like "update kernel" is also obvious from the changes itself. The maintainer is more interested why you think the kernel should be updated. The *why* can be fairly trivial (update kernel to make sure we keep up with latest changes), or it can have some interesting details (update kernel since this latest version fixes ethernet on board xy).
 
 Create a fork of the upstream [github.com/home-assistant/operating-system](https://github.com/home-assistant/operating-system) repository (if you haven't already) and push your branch to your forked GitHub repository. Then open a new pull request. All changes should be made against the development branch `dev`. If you like your change in the next stable release, add the `rel-x` label so it is marked for backporting.

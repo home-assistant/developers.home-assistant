@@ -6,7 +6,7 @@ In some cases, an integration requires to know the URL of the users' Home
 Assistant instance that matches the requirements needed for the use cases at
 hand. For example, cause a device needs to communicate back data to Home
 Assistant, or for an external service or device to fetch data from Home
-Assistant (e.g., a generated image or sound file).
+Assistant (like a generated image or sound file).
 
 Getting an instance URL can be rather complex, considering a user can have a
 bunch of different URLs available:
@@ -14,10 +14,10 @@ bunch of different URLs available:
 - A user-configured internal home network URL.
 - An automatically detected internal home network URL.
 - A user-configured, public accessible, external URL that works from the internet.
-- An URL provided by Home Assistant Cloud by Nabu Casa, in case the user has a subscription.
+- A URL provided by Home Assistant Cloud by Nabu Casa, in case the user has a subscription.
 
 Extra complexity is added by the fact that URLs can be served on non-standard ports
-(e.g., not 80 or 443) and with or without SSL (`http://` vs `https://`).
+(such not HTTP 80 or HTTPS 443) and with or without SSL (`http://` vs `https://`).
 
 Luckily, Home Assistant provides a helper method to ease that a bit.
 

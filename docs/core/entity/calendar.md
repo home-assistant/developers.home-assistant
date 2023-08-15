@@ -21,8 +21,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 ### States
 
-A `CalendarEntity` state is similar to a binary sensor, reflecting whether or not there
-is an active event:
+A `CalendarEntity` state is similar to a binary sensor, reflecting whether there is an active event:
 
 | Constant    | Description                                 |
 | ----------- | ------------------------------------------- |
@@ -59,9 +58,9 @@ A calendar entity can return events that occur during a particular time range. S
 - The `end_date` is the upper bound and applied to the event's `start` (exclusive). This has the same `tzinfo` as `start_date`.
 - Recurring events should be flattened and returned as individual `CalendarEvent`.
 
-An calendar entity is responsible for returning the events in order including correctly
+A calendar entity is responsible for returning the events in order including correctly
 ordering all day events. An all day event should be ordered to start at midnight in
-the Home Assistant timezone (e.g. from the start/end time argument `tzinfo`, 
+the Home Assistant timezone (using input from the start/end time argument `tzinfo`, 
 or using `homeassistant.util.dt.start_of_local_day`). Note that all day events should still
 set a `datetime.date` in the `CalendarEvent` and not a date with a time.
 
@@ -102,7 +101,7 @@ There are three ways that recurring events may be deleted:
 
 - Specifying only the `uid` will delete the entire series
 - Specifying the `uid` and `recurrence_id` will delete the specific event instance in the series
-- Specifying `uid`, `recurrence_id`, and a `recurrence_range` value may delete a range of events starting at `recurrence_id`. Currently rfc5545 allows the [range](https://www.rfc-editor.org/rfc/rfc5545#section-3.2.13) value of `THISANDFUTURE`.
+- Specifying `uid`, `recurrence_id`, and a `recurrence_range` value may delete a range of events starting at `recurrence_id`. Currently, rfc5545 allows the [range](https://www.rfc-editor.org/rfc/rfc5545#section-3.2.13) value of `THISANDFUTURE`.
 
 ```python
 from homeassistant.components.calendar import CalendarEntity
@@ -149,13 +148,13 @@ class MyCalendar(CalendarEntity):
 
 A `CalendarEvent` represents an individual event on a calendar.
 
-| Name        | Type             | Default      | Description                                                                                                                                     |
-| ----------- | ---------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| start       | datetime or date | **Required** | The start (inclusive) of the event. Must be before `end`. Both `start` and `end` must be the same type. As a datetime, must have a timezone.    |
-| end         | datetime or date | **Required** | The end (exclusive) of the event. Must be after `start`. As a datetime, must have a timezone that is the same as start.                         |
-| summary     | string           | **Required** | A title or summary of the event.                                                                                                                |
-| location    | string           | `None`       | A geographic location of the event.                                                                                                             |
-| description | string           | `None`       | A detailed description of the event.                                                                                                            |
-| uid | string | `None` | A unique identifier for the event (required for mutations) |
-| recurrence_id | string | `None` | An optional identifier for a specific instance of a recurring event (required for mutations of recurring events) |
-| rrule |  string | `None` | A recurrence rule string e.g. `FREQ=DAILY` |
+| Name        | Type             | Default      | Description                                                                                                                                  |
+| ----------- | ---------------- | ------------ |----------------------------------------------------------------------------------------------------------------------------------------------|
+| start       | datetime or date | **Required** | The start (inclusive) of the event. Must be before `end`. Both `start` and `end` must be the same type. As a datetime, must have a timezone. |
+| end         | datetime or date | **Required** | The end (exclusive) of the event. Must be after `start`. As a datetime, must have a timezone that is the same as start.                      |
+| summary     | string           | **Required** | A title or summary of the event.                                                                                                             |
+| location    | string           | `None`       | A geographic location of the event.                                                                                                          |
+| description | string           | `None`       | A detailed description of the event.                                                                                                         |
+| uid | string | `None` | A unique identifier for the event (required for mutations)                                                                                   |
+| recurrence_id | string | `None` | An optional identifier for a specific instance of a recurring event (required for mutations of recurring events)                             |
+| rrule | string | `None` | A recurrence rule string. For daily use `FREQ=DAILY`                                                                                         |

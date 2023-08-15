@@ -14,12 +14,12 @@ and can be helpful for controlling device features like (but not limited to):
 - Brew a cup of coffee
 - Reset something (like a counter, filter usage)
 
-If you want to represent something that can be turned on and off (and thus have an actual state), you should use a `switch` entity instead. If you want to integrate a real, physical, stateless button device in Home Assistant, you can do so by firing custom events. The entity button entity isn't suitable for these cases.
+If you want to represent something that can be turned on and off (and thus have an actual state), you should use a `switch` entity instead. If you want to integrate a real, physical, stateless button device in Home Assistant, you can do so by firing custom events. The "entity button" entity isn't suitable for these cases.
 
 ## Properties
 
 As this integration is stateless, it doesn't provide any specific properties for itself.
-Other properties that are common to all entities such as `device_class`, `icon`, `name` etc are still applicable.
+Other properties that are common to all entities such as `device_class`, `icon`, `name` etc. are still applicable.
 
 ## Methods
 

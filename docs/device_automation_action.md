@@ -7,7 +7,7 @@ Device actions allow a user to have a device do something. Examples are to turn 
 
 Device actions are defined as dictionaries. These dictionaries are created by your integration and are passed to your integration to create a function that performs the action.
 
-Device actions can be provided by the integration that provides the device (e.g. ZHA, deCONZ) or the entity integrations that the device has entities with (e.g. light, switch).
+Device actions can be provided by the integration that provides the device (for example ZHA or deCONZ) or the entity integrations that the device has entities with (such as `light` or `switch`).
 An example of the former could be to reboot the device, while an example of the latter could be to turn a light on.
 
 If the action requires dynamic validation that the static `ACTION_SCHEMA` can't provide, it's possible to implement an `async_validate_action_config` function.

@@ -21,9 +21,9 @@ There are 3 defined state classes:
    temperature, electric power, etc. For supported sensors, statistics of min,
    max and average sensor readings are updated periodically.
 - `total`, the state represents a total amount that can both increase and
-   decrease, e.g. a net energy meter. When supported, the accumulated growth
+   decrease, for example a net energy meter. When supported, the accumulated growth
    or decline of the sensor's value since it was first added is updated periodically.
-- `total_increasing`, a monotonically increasing total, e.g. an amount of
+- `total_increasing`, a monotonically increasing total, for example an amount of
    consumed gas, water or energy. When supported, the accumulated growth of the sensor's
    value since it was first added is updated periodically.
 

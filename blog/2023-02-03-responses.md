@@ -34,4 +34,4 @@ Response templates are in the [Jinja2 format](https://www.home-assistant.io/docs
 
 The second change comes from [hassil](https://github.com/home-assistant/hassil), the parser for our [intent template syntax](/docs/voice/intent-recognition/template-sentence-syntax/). In addition to an 8-10x speed-up in parsing, whitespace inside templates is taken literally.
 
-Previously, a template like `light(s | ing)` would match both "lights" and "lighting". Now, "light s" and "light ing" would be matched instead due to the extra space around `|`. The correct template would be `light(s|ing)`
+Previously, a template like `light(s | ing)` would match both "lights" and "lighting." Now, "light s" and "light ing" would be matched instead due to the extra space around `|`. The correct template would be `light(s|ing)`

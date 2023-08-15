@@ -51,7 +51,7 @@ Although not currently available, we could consider offering an option to users 
 Entity device info is only read if the entity is loaded via a [config entry](config_entries_index.md) and the `unique_id` property is defined.
 :::
 
-Each entity is able to define a device via the `device_info` property. This property is read when an entity is added to Home Assistant via a config entry. A device will be matched up with an existing device via supplied identifiers or connections, like serial numbers or MAC addresses. If identifiers and connections are provided, the device registry will first try to match by identifiers. Each identifier and each connection is matched individually (e.g. only one connection needs to match to be considered the same device).
+Each entity is able to define a device via the `device_info` property. This property is read when an entity is added to Home Assistant via a config entry. A device will be matched up with an existing device via supplied identifiers or connections, like serial numbers or MAC addresses. If identifiers and connections are provided, the device registry will first try to match by identifiers. Each identifier and each connection is matched individually; only one connection needs to match to be considered the same device.
 
 ```python
 # Inside a platform
@@ -116,12 +116,12 @@ In `async_remove_config_entry_device` the integration should take the necessary 
 
 Device info is categorized into Link, Primary and Secondary by finding the first device info type which has all the keys of the device info.
 
-| Category             | Keys                 |
-| -------------------- | ---------------------|
-| Link                 | `connections` and `identifiers` |
-| Primary              | `configuration_url`, `connections`, `entry_type`, `hw_version`, `identifiers`, `manufacturer`, `model`, `name`, `suggested_area`, `sw_version`, and `via_device`|
-| Secondary            | `connections`, `default_manufacturer`, `default_model`, `default_name`, and `via_device`|
+| Category  | Keys                                                                                                                                                             |
+|-----------|------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Link      | `connections` and `identifiers`                                                                                                                                  |
+| Primary   | `configuration_url`, `connections`, `entry_type`, `hw_version`, `identifiers`, `manufacturer`, `model`, `name`, `suggested_area`, `sw_version`, and `via_device` |
+| Secondary | `connections`, `default_manufacturer`, `default_model`, `default_name`, and `via_device`                                                                         |
 
 This categorization is used in sorting the configuration entries to define the main integration to be used by the frontend.
 
-Mandatorily, the device info must match one of the categories.
+The device info must match one of the categories.

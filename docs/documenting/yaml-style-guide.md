@@ -35,7 +35,7 @@ off people new to YAML. Therefore, we only allow the use of `true` and `false`
 as boolean values, in lower case.
 
 This keeps it compatible with the YAML 1.2 specifications as well, since that
-version dropped support for several unquoted truthy booleans (e.g., `y`, `n`,
+version dropped support for several unquoted truthy booleans (such as `y`, `n`,
 `yes`, `no`, `on`, `off` and similar).
 
   ```yaml
@@ -245,15 +245,15 @@ As written in the first chapter, strings are preferably enquoted with double
 quotes. However, the following value types are exempted from this rule,
 as is makes our examples more readable:
 
-- Entity IDs (e.g., `binary_sensor.motion`)
-- Entity attributes (e.g., `temperature`)
+- Entity IDs (`binary_sensor.motion`)
+- Entity attributes (`temperature`)
 - Device IDs
 - Area IDs
-- Platform types (e.g., `light`, `switch`)
-- Condition types (e.g., `numeric_state`, `state`)
-- Trigger platforms (e.g., `state`, `time`)
-- Service names (e.g., `light.turn_on`)
-- Device classes (e.g., `problem`, `motion`)
+- Platform types (`light`, `switch`)
+- Condition types (`numeric_state`, `state`)
+- Trigger platforms (`state`, `time`)
+- Service names (`light.turn_on`)
+- Device classes (`problem`, `motion`)
 - Event names
 - Values that accept a limited set of possible, hardcoded values.
   For example, `mode` in automations.
@@ -460,7 +460,7 @@ condition:
 
 #### Accessing states & state attributes
 
-We do not allow the use of the states object directly if a helper method is
+We do not allow the use of the `states` object directly if a helper method is
 available.
 
 For example; don't use `states.sensor.temperature.state`, instead use
@@ -478,4 +478,4 @@ two: "{{ states.climate.living_room.attributes.temperature }}"
 
 This applies to  `states()`, `is_state()`, `state_attr()` and `is_state_attr()`,
 to avoid errors and error messages when the entity isn’t ready yet
-(e.g., during Home Assistant startup).
+(like during Home Assistant startup).

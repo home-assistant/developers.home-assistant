@@ -53,7 +53,7 @@ When using devcontainers and starting a preview via `yarn start`, `script/setup`
 
 #### Setting Up Your Own Environment
 
-Running the documentation locally requires [NodeJS](https://nodejs.org/en/) and [Yarn](https://yarnpkg.com/) to be installed. Inside a cloned fork of this repository, run:
+Running the documentation locally requires [Node.js](https://nodejs.org/en/) and [Yarn](https://yarnpkg.com/) to be installed. Inside a cloned fork of this repository, run:
 
 ```bash
 $ script/setup

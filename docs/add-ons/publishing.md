@@ -6,7 +6,7 @@ There are two different ways of publishing add-ons. One is to publish pre-built 
 
 #### Pre-built containers
 
-With pre-built containers, the developer is responsible for building the images for each architecture on their machine and pushing the results out to a container registry. This has a lot of advantages for the user who will only have to download the final container and be up and running once the download finishes. This makes the installation process fast and has almost no chance of failure so it is the preferred method.
+With pre-built containers, the developer is responsible for building the images for each architecture on their machine and pushing the results out to a container registry. This has a lot of advantages for the user who will only have to download the final container and be up and running once the download finishes. This makes the installation process fast and has almost no chance of failure, so it is the preferred method.
 
 We have automated the process of building and publishing add-ons. See below for the instructions.
 

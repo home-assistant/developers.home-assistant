@@ -26,7 +26,7 @@ Submit your improvements, fixes, and new features to Home Assistant one at a tim
      - Write a meaningful commit message and not only something like `Update` or `Fix`.
      - Use a capital letter to start with your commit message and do not finish with a full-stop (period).
      - Don't prefix your commit message with `[bla.bla]` or `platform:`.
-     - Write your commit message using the imperative voice, e.g. `Add some feature` not `Adds some feature`.
+     - Write your commit message using the imperative voice; use `Add some feature` not `Adds some feature`.
      
 
 5. Push your committed changes back to your fork on GitHub:

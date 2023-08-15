@@ -42,8 +42,8 @@ Besides that, the elements we use internally are not supposed to be used by exte
 
 We use external custom elements in our frontend, like the [Material Web Components](https://github.com/material-components/material-components-web-components) from Google. While we would love you to use the same elements to provide a uniform experience, we can not advise this.
 
-Just like our own elements the external elements are part of our code splitted chunks, and they will probably be lazy-loaded. That means they will not be available at all times but could be loaded later.
-This means that if a custom card would load and define an `mwc` element because it was not available at the time it needed it, and we try to do it later when it is lazy-loaded, the Home Assistant frontend will run into an error.
+Just like our own elements, the external elements are part of our code split chunks, and they will probably be lazy-loaded. That means they will not be available at all times but could be loaded later.
+This means that if a custom card loads and defined an `mwc` element because it was not available at the time it needed it, and we try to do it later when it is lazy-loaded, the Home Assistant frontend will run into an error.
 
 Unfortunately, there is no technical solution for this at the moment. There are some solutions, like [scoped elements](https://open-wc.org/docs/development/scoped-elements/) from open-wc, but they will not work in most cases as the imported element will either self-register or it defines sub-elements, that can not be scoped.
 There is a discussion about a proposal for [Scoped Custom Element Definitions](https://github.com/w3c/webcomponents/issues/716) that could potentially fix this problem, but it may take a long time before this would be available in all our supported browsers, if the proposal is accepted at all.

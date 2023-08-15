@@ -17,7 +17,7 @@ There are 2 defined state classes:
    supported sensors, statistics of hourly min, max and average sensor readings or of
    the accumulated growth or decline of the sensor's value since it was first added is
    updated hourly.
-- `total_increasing`, a monotonically increasing total, e.g. an amount of
+- `total_increasing`, a monotonically increasing total, for example an amount of
    consumed gas, water or energy. When supported, the accumulated growth of the sensor's
    value since it was first added is updated hourly.
 

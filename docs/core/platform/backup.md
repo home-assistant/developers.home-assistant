@@ -2,7 +2,7 @@
 title: "Backup"
 ---
 
-When Home Assistant is creating a backup, there might be a need to pause certain operations in the integration, or dumping data so it can properly be restored.
+When Home Assistant is creating a backup, there might be a need to pause certain operations in the integration, or dumping data, so it can properly be restored.
 
 This is done by adding 2 functions (`async_pre_backup` and `async_post_backup`) to `backup.py`
 

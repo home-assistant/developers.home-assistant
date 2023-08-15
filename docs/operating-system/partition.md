@@ -3,7 +3,7 @@ title: "Partitioning"
 sidebar_label: Partitions
 ---
 
-The Home Assistant Operating System (HAOS) partition layout is a bit different than what is typically used on a Linux system.
+The Home Assistant Operating System (HAOS) partition layout is a bit different from what is typically used on a Linux system.
 
 ## Partition Table
 
@@ -44,11 +44,11 @@ The boot partition is typically a FAT partition and contains system specific con
 
 Next two versions of the Linux kernel and the main operating systems are stored (Kernel A/B and System A/B, a total of 4 partitions). This allows the system to fall back to the previous release in case booting on the new release fails (A/B update method). The system partitions are only written to during an update and are read-only under regular operation.
 
-The overlay partition is used to store certain operating system level settings (e.g. networking settings). The file system label `hassos-overlay` is used to find and mount this partition.
+The overlay partition is used to store certain operating system level settings (such as networking settings). The file system label `hassos-overlay` is used to find and mount this partition.
 
 ### Data partition
 
-The data partition is the main partition containing all containers (Supervisor/Core/Plug-Ins and Add-Ons) as well as user data. It has by far the most I/O operations and hence benefits most if mounted on a fast storage (e.g. via the data disk feature). It is mounted to `/mnt/data`, and some subdirectories are bind mounted to other places (like `/var/lib/docker`). The file system label `hassos-data` is used to find and mount this partition.
+The data partition is the main partition containing all containers (Supervisor/Core/Plug-Ins and Add-Ons) as well as user data. It has by far the most I/O operations and hence benefits most if mounted on a fast storage (via the data disk feature) device. It is mounted to `/mnt/data`, and some subdirectories are bind mounted to other places (like `/var/lib/docker`). The file system label `hassos-data` is used to find and mount this partition.
 
 On a fresh installation, the data partition contains the latest version (at build time) of the Supervisor and its Plug-Ins. There is no Home Assistant Core pre-installed, instead a smaller landing page. The Supervisor downloads the latest version of Home Assistant Core on first boot. This makes sure that users start with the latest version of Home Assistant Core after starting the HAOS the first time.
 

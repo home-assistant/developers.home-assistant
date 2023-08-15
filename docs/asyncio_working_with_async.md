@@ -2,7 +2,7 @@
 title: "Working with Async"
 ---
 
-Although we have a backwards compatible API, using the async core directly will be a lot faster. Most core components have already been rewritten to leverage the async core. This includes the EntityComponent helper (foundation of light, switch, etc), scripts, groups and automation.
+Although we have a backwards compatible API, using the async core directly will be a lot faster. Most core components have already been rewritten to leverage the async core. This includes the EntityComponent helper (foundation of light, switch, etc.), scripts, groups and automation.
 
 ## Interacting with the core
 

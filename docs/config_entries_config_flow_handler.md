@@ -91,7 +91,7 @@ If the integration uses Bluetooth, DHCP, HomeKit, Zeroconf/mDNS, USB, or SSDP/uP
 If a unique ID isn't available, alternatively, the `bluetooth`, `dhcp`, `zeroconf`, `hassio`, `homekit`, `ssdp`, `usb`, and `discovery` steps can be omitted, even if they are configured in
 the integration manifest. In that case, the `user` step will be called when the item is discovered.
 
-Alternatively, if an integration can't get a unique ID all the time (e.g., multiple devices, some have one, some don't), a helper is available
+Alternatively, if an integration can't get a unique ID all the time (for example, with multiple devices, some have devices have one, some don't), a helper is available
 that still allows for discovery, as long as there aren't any instances of the integrations configured yet.
 
 ```python
@@ -238,7 +238,7 @@ async def async_migrate_entry(hass, config_entry: ConfigEntry):
 
 If only the config entry version is changed, but no other properties, `async_update_entry` should not be called:
 ```python
-# Example migration function which does not modify config entry properties, e.g. data or options
+# Example migration function which does not modify config entry properties, like data or options
 async def async_migrate_entry(hass, config_entry: ConfigEntry):
     """Migrate old entry."""
     _LOGGER.debug("Migrating from version %s", config_entry.version)

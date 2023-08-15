@@ -381,6 +381,6 @@ window.customTileFeatures.push({
 The only difference with custom cards is the graphical configuration option.
 To have it displayed in the tile card editor, you must add an object describing it to the array `window.customTileFeatures`.
 
-Required properties of the object are `type` and `name`. It is recommended to define the `supported` option with a function so the editor can only propose the feature if it is compatible with the selected entity in the tile card. Set `configurable` to `true` if your entity has additional configuration (e.g. `label` option in the example above) so the editor.
+Required properties of the object are `type` and `name`. It is recommended to define the `supported` option with a function so the editor can only propose the feature if it is compatible with the selected entity in the tile card. Set `configurable` to `true` if your entity has additional configuration (like the `label` option in the example above) so the editor.
 
 Also, the static functions `getConfigElement` and `getStubConfig` work the same as with normal custom maps.

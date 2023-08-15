@@ -245,7 +245,7 @@ each time you go through the process.
 
 ## Repository specific information
 
-Some of our respositories have specific requirements or guidelines that are
+Some of our repositories have specific requirements or guidelines that are
 applied on top of this general guide.
 
 ### Home Assistant Core
@@ -294,7 +294,7 @@ The developer documentation has a lot of information, even more information
 on contributing and pull requests, so be sure to use the search function
 on the top right of the page to find what you are looking for.
 
-However, it might be you are still stuck or you have a question that is
+However, it might be you are still stuck, or you have a question that is
 not answered in the documentation. In that case, feel free to ask in the
 [#devs channel in our Discord chat](https://www.home-assistant.io/join-chat).
 

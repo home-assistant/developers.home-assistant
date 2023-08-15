@@ -228,7 +228,7 @@ Zeroconf is a list so you can specify multiple types to match on.
 }
 ```
 
-Certain zeroconf types are very generic (i.e., `_printer._tcp.local.`, `_axis-video._tcp.local.` or `_http._tcp.local`). In such cases you should include a Name (`name`), or Properties (`properties`) filter:
+Certain zeroconf types are very generic (like `_printer._tcp.local.`, `_axis-video._tcp.local.` or `_http._tcp.local`). In such cases you should include a Name (`name`), or Properties (`properties`) filter:
 
 ```json
 {
@@ -309,7 +309,7 @@ it should add a DHCP entry with `registered_devices` set to `true`.
 If the integration supports `zeroconf` or `ssdp`, these should be preferred over `dhcp` as it generally offers a better
 user experience.
 
-The following example has three matchers consisting of two items. All of the items in any of the three matchers must match for discovery to happen by this config.
+The following example has three matchers consisting of two items. All the items in any of the three matchers must match for discovery to happen by this config.
 
 For example:
 
@@ -360,7 +360,7 @@ If your integration supports discovery via usb, you can add the type to your man
 Some VID and PID combinations are used by many unrelated devices. For example VID `10C4` and PID `EA60` matches any Silicon Labs CP2102 USB-Serial bridge chip. When matching these type of devices, it is important to match on `description` or another identifer to avoid an unexpected discovery.
 :::
 
-The following example has two matchers consisting of two items. All of the items in any of the two matchers must match for discovery to happen by this config.
+The following example has two matchers consisting of two items. All the items in any of the two matchers must match for discovery to happen by this config.
 
 For example:
 
@@ -407,7 +407,7 @@ We highly recommend getting your integration scored.
 
 ## IoT Class
 
-The [IoT Class][iot_class] describes how an integration connects with, e.g., a device or service. For more information
+The [IoT Class][iot_class] describes how an integration connects with a device or service. For more information
 about IoT Classes, read the blog about ["Classifying the Internet of Things"][iot_class].
 
 The following IoT classes are accepted in the manifest:

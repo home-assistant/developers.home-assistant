@@ -30,7 +30,7 @@ know that you are working on something, but it is not ready for review and
 merging yet.
 
 Draft PRs are recognizable by the "Draft" label in the top right of the PR
-and show up with a grey merge icon eveywhere in the GitHub UI.
+and show up with a grey merge icon everywhere in the GitHub UI.
 
 ![This is what a PR in draft looks like](/img/en/blog/2023-02-07-introducing-PR-drafting-in-reviews/pr-in-draft.png)
 

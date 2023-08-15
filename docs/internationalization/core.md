@@ -21,7 +21,7 @@ The `strings.json` contains translations for different things that the integrati
 
 ### Title
 
-This category is just a string: the translation of the integration name. This key is optional and Home Assistant will fallback to the integration name if it is omitted. Only include this if it's not a product brand.
+This category is just a string: the translation of the integration name. This key is optional and Home Assistant will fall back to the integration name if it is omitted. Only include this if it's not a product brand.
 
 ### Config / Options
 
@@ -354,7 +354,7 @@ In order to test changes to translation files, the translation strings must be c
 python3 -m script.translations develop
 ```
 
-If translations do not show, clear the browser cache (cmd + R (for MacOS), ctrl + F5 (Windows and Linux))
+If translations do not show, clear the browser cache (cmd + R (for macOS), ctrl + F5 (Windows and Linux))
 
 ## Introducing new strings
 

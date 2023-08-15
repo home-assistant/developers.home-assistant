@@ -5,7 +5,7 @@ sidebar_label: "Data"
 
 The frontend passes a single `hass` object around. This object contains the latest state and allows you to send commands back to the server.
 
-Whenever a state changes, a new version of the objects that changed are created. So you can easily see if something has changed by doing a strict equality check:
+Whenever a state changes, a new version of the objects that are changed are created. So you can easily see if something has changed by doing a strict equality check:
 
 ```js
 const changed = newVal !== oldVal;
@@ -85,7 +85,7 @@ An object containing the states of all entities in Home Assistant. The key is th
 
 ### `hass.user`
 
-The logged in user.
+The logged-in user.
 
 ```json
 {

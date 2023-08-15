@@ -2,7 +2,7 @@
 title: "Extending the WebSocket API"
 ---
 
-As a component you might have information that you want to make available to the frontend. For example, the media player will want to make album covers available for the frontend to show. Our frontend is communicating with the backend over the websocket API, which can be extended with custom commands.
+As a component, you might have information that you want to make available to the frontend. For example, the media player will want to make album covers available for the frontend to show. Our frontend is communicating with the backend over the websocket API, which can be extended with custom commands.
 
 ## Registering a command (Python)
 

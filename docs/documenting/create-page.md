@@ -31,7 +31,7 @@ Content... Written in markdown.
 Additional keys for the file header:
 
 - `title`: This title should match with the name of the integration as written in the integration manifest file.
-- `ha_release`: The release when the integration was included, e.g., "0.38". If the current release is 0.37, make `ha_release` 0.38. If it's 0.30 or 0.40 please quote it with `' '`.
+- `ha_release`: The version number of the release when the integration was included (such as `0.38`). If the current release is `0.37`, make `ha_release` `0.38`. If it's `0.30` or `0.40` please quote it with `' '` (`'0.30'`).
 - `ha_category`: This entry is used to group the integration on the [Integration overview](https://www.home-assistant.io/integrations/).
 - `ha_iot_class`: [IoT class](https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things) is the classifier for the device's behavior.
 - `ha_quality_scale`: [Quality scale](https://www.home-assistant.io/docs/quality_scale/) is the representation of the integration's quality.

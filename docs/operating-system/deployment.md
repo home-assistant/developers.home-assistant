@@ -16,7 +16,7 @@ The format of version is *MAJOR.BUILD*. Every time a new release is released the
 
 The build system by default automatically adds a *dev{DATE}* suffix to mark development builds.
 
-Before a new major release, release candidates can be built on the development branch. A release candidate suffix is used to mark them, e.g. *MAJOR.0.rc1*.
+Before a new major release, release candidates can be built on the development branch. A release candidate suffix (like `.rc.1`) is used to mark these; for example, files will be named *MAJOR.0.rc1*.
 
 ## Deployment types
 

@@ -12,7 +12,7 @@ Round for presentation is done by the frontend, as well as by new template funct
 The number of displayed decimal digits is influenced by unit conversion:
   - Converting from a smaller to a larger unit increases the display precision
   - Converting from a larger to a smaller unit decreases the display precision if the integration has set `suggested_display_precision`
-  - Minimum precision when converting from a larger to a smaller unit is 0, i.e. there's no rounding to tens, hundreds etc.
+  - Minimum precision when converting from a larger to a smaller unit is 0, for example there's no rounding to tens, hundreds etc.
 
 The number of displayed decimal digits is not influenced by unit conversion if the user has set the display precision themselves.
 

@@ -21,7 +21,7 @@ Properties should always only return information from memory and not do I/O (lik
 | ----------- | --------------- | ------------ | ---------------------------------------------------- |
 | event_types | list of strings | **Required** | A list of possible event types this entity can fire. |
 
-Other properties that are common to all entities such as `device_class`, `icon`, `name` etc are also applicable.
+Other properties that are common to all entities such as `device_class`, `icon`, `name` etc. are also applicable.
 
 ## Firing events
 

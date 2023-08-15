@@ -10,17 +10,17 @@ Broadly speaking documentation should be written following Microsoft's house sty
 
 - The language of the documentation should be American-English.
 - Don't put two spaces after a period.
-- Use a serial comma (also known as the Oxford comma) before the conjunction in a list of three or more items. E.g., "Through the use of additional adapters, Home Assistant allows the use of Zigbee, Z-Wave, and other protocols".
+- Use a serial comma (also known as the Oxford comma) before the conjunction in a list of three or more items. For example, "Through the use of additional adapters, Home Assistant allows the use of Zigbee, Z-Wave, and other protocols".
 - There is no limit for the line length. You are allowed to write in a flowing text style. This will make it easier to use the GitHub online editor in the future.
 - Be objective and not gender favoring, polarizing, race related or religion inconsiderate. Contributions which do not follow this may be in breach of our [Code of Conduct](https://github.com/home-assistant/core/blob/master/CODE_OF_CONDUCT.md).
-- The case of brand names, services, protocols, integrations and platforms must match its respective counterpart. E.g., "Z-Wave" **not** "Zwave", "Z-wave", "Z Wave" or "ZWave". Also, "Input Select" **not** "input select" or "Input select".
+- The case of brand names, services, protocols, integrations and platforms must match its respective counterpart. For example, "Z-Wave" **not** "Zwave", "Z-wave", "Z Wave" or "ZWave". Also, "Input Select" **not** "input select" or "Input select".
 - Do not use ALL CAPITALS for emphasis - use _italics_ instead.
-- All examples containing Jinja2 templates should be wrapped **outside** of the code markdown with the `{% raw %}` tag.
+- All examples containing Jinja2 templates should be wrapped **outside** the code markdown with the `{% raw %}` tag.
 
 ## Integration and Platform Pages
 
 - All examples should be formatted to be included in `configuration.yaml` unless explicitly stated.
-  - Use capital letters and `_` to indicate that the value needs to be replaced. E.g., `api_key: YOUR_API_KEY` or `api_key: REPLACE_ME`.
+  - Use capital letters and `_` to indicate that the value needs to be replaced. For example, `api_key: YOUR_API_KEY` or `api_key: REPLACE_ME`.
 - Integration and platform names should be a link to their respective documentation pages.
 
 ### Configuration Variables
@@ -30,7 +30,7 @@ Broadly speaking documentation should be written following Microsoft's house sty
 - Configuration variables must document the requirement status (`false` or `true`).
 - Configuration variables must document the default value, if any.
 - Configuration variables must document the accepted value types (see [Configuration variables details](documenting/create-page.md#configuration)).
-  - For configuration variables that accept multiple types, separate the types with a comma (i.e. `string, integer`).
+  - For configuration variables that accept multiple types, separate the types with a comma (for example `string, integer`).
 
 #### Example Configuration Variables Block
 
@@ -74,7 +74,7 @@ the definition of an existing term.
 Additionally, we have a terminology tooltip available, that can be added and
 works everywhere in the documentation. This tooltip will show a definition
 of the term when the user hovers over it with a link for more information.
-It provides instant context to terminology an user might not be familiar with.
+It provides instant context to terminology tha a user might not be familiar with.
 
 The syntax for adding terminology tooltips is:
 

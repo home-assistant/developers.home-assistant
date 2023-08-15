@@ -2,7 +2,7 @@
 title: "Adding more info dialogs"
 ---
 
-Whenever the user taps or clicks on one of the cards, a more info dialog will show. The header of this dialog will be the state card, followed by the history of this entity for the last 24 hours. Below this the more info component is rendered for that entity. The more info component can show more information or allow more ways of control.
+Whenever the user taps or clicks on one of the cards, a more info dialog will show. The header of this dialog will be the state card, followed by the history of this entity for the last 24 hours. Below this, the more info component is rendered for that entity. The more info component can show more information or allow more ways of control.
 
 <img
   src='/img/en/frontend/frontend-more-info-light.png'

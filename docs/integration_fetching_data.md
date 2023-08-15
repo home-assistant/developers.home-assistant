@@ -142,7 +142,7 @@ class MyEntity(CoordinatorEntity, LightEntity):
         await self.coordinator.async_request_refresh()
 ```
 
-### Separate polling for each individual entity
+### Separate polling for each entity
 
 Some APIs will offer an endpoint per device. It sometimes won't be possible to map a device from your API to a single entity. If you create multiple entities from a single API device endpoint, please see the previous section.
 

@@ -17,15 +17,15 @@ An entity abstracts away the internal working of Home Assistant. As an integrato
 
 Configuration is provided by the user via a [Config Entry](../config_entries_index.md) or in special/legacy cases via [configuration.yaml](../configuration_yaml_index.md).
 
-The device integration (i.e. `hue`) will use this configuration to set up a connection with the device/service. It will forward the config entry (legacy uses discovery helper) to set up its entities in their respective integrations (light, switch). The device integration can also register their own services for things that are not made standardized. These services are published under the integration's domain, ie `hue.activate_scene`.
+The device integration (like `hue`) will use this configuration to set up a connection with the device/service. It will forward the config entry (legacy uses discovery helper) to set up its entities in their respective integrations (light, switch). The device integration can also register their own services for things that are not made standardized. These services are published under the integration's domain, ie `hue.activate_scene`.
 
-The entity integration (i.e. `light`) is responsible for defining the abstract entity class and services to control the entities.
+The entity integration (like `light`) is responsible for defining the abstract entity class and services to control the entities.
 
 The Entity Component helper is responsible for distributing the configuration to the platforms, forward discovery and collect entities for service calls.
 
 The Entity Platform helper manages all entities for the platform and polls them for updates if necessary. When adding entities, the Entity Platform is responsible for registering the entity with the device and entity registries.
 
-Integration Platform (i.e. `hue.light`) uses configuration to query the external device/service and create entities to be added. It is also possible for integration platforms to register entity services. These services will work on all entities of the device integration for the entity integration (i.e. all Hue light entities). These services are published under the device integration domain.
+Integration Platform (like `hue.light`) uses configuration to query the external device/service and create entities to be added. It is also possible for integration platforms to register entity services. These services will work on all entities of the device integration for the entity integration (for example, all Hue light entities). These services are published under the device integration domain.
 
 ## Entity interaction with Home Assistant Core
 

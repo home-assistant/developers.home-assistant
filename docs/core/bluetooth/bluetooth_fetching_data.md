@@ -4,12 +4,12 @@ title: "Fetching Bluetooth Data"
 
 ## Choosing a method to fetch data
 
-If the device's primary method to notify of updates is Bluetooth advertisements and its primary function is a sensor, binary sensor, or firing events:
+If the device's primary method to notify of updates is Bluetooth advertisements, and its primary function is a sensor, binary sensor, or firing events:
 
 - If all sensors are updated via Bluetooth advertisements: [`PassiveBluetoothProcessorCoordinator`](#passivebluetoothprocessorcoordinator)
 - If active connection are needed for some sensors: [`ActiveBluetoothProcessorCoordinator`](#activebluetoothprocessorcoordinator)
 
-If the device's primary method to notify of updates is Bluetooth advertisements and its primary function is **not** a sensor, binary sensor, or firing events:
+If the device's primary method to notify of updates is Bluetooth advertisements, and its primary function is **not** a sensor, binary sensor, or firing events:
 
 - If all entities are updated via Bluetooth advertisements: [`PassiveBluetoothCoordinator`](#passivebluetoothcoordinator)
 - If active connections are needed: [`ActiveBluetoothCoordinator`](#activebluetoothcoordinator)

@@ -125,7 +125,7 @@ To develop for the `hassio` integration and the Supervisor panel, we're going to
 
 The add-on needs to keep running to allow Home Assistant Core to connect.
 
-The Remote API proxy token has slightly less privileges than Home Assistant Core has in production. To get the actual token with full privileges, you need to SSH into the host system and run:
+The Remote API proxy token has slightly fewer privileges than Home Assistant Core has in production. To get the actual token with full privileges, you need to SSH into the host system and run:
 
 ```shell
 docker inspect homeassistant | grep SUPERVISOR_TOKEN

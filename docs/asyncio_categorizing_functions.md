@@ -8,7 +8,7 @@ Home Assistant uses the convention that all functions that must be run from with
 
 ## The coroutine function
 
-Coroutines are special functions based on Python’s generators syntax which allows them to suspend execution while waiting on a result.
+Coroutines are special functions based on Python’s generator syntax which allows them to suspend execution while waiting on a result.
 
 Invoking a coroutine function will return a Generator object back, but will not actually begin execution. This object will execute the task when it is either awaited (from within another coroutine) or it is scheduled on the event loop.
 
@@ -37,7 +37,6 @@ A common use case for a callback in Home Assistant is as a listener for an event
 ```python
 from homeassistant.core import callback
 
-
 @callback
 def async_trigger_service_handler(service_call):
     """Handle automation trigger service calls."""
@@ -52,13 +51,23 @@ To execute the task we have to schedule it for execution on the event loop. This
 
 ### Why even have callbacks?
 
-You might wonder, if a coroutine can do everything a callback can do, why even have a callback. The reason is performance and better state consistency of the core API objects.
+You might wonder if a coroutine can do everything a callback can do, why even have a callback?
 
-When coroutine A waits for coroutine B, it will suspend itself and schedule a new task to run B. This means that the event loop is now running A, B and then A again. If B is a callback, A will never have to suspend itself and thus the event loop is just running A. The consistency implication is that other events queued to run on the event loop continue to wait until callbacks complete, but will be interleaved when yielding to another coroutine.
+The reason is performance and better state consistency of the core API objects.
+
+When coroutine A waits for coroutine B, it will suspend itself and schedule a new task to run B. This means that the event loop is now running A, B and then A again. If B is a callback, A will never have to suspend itself, and thus the event loop is just running A. The consistency implication is that other events queued to run on the event loop continue to wait until callbacks complete, but will be interleaved when yielding to another coroutine.
 
 ## Event loop and thread safe
 
-These are functions that are safe to run both in a thread and inside the event loop. These functions are usually performing a computation or transform data in memory. Anything that does I/O does not fall under this category. Many standard library functions fall in this category. For example generating the sum of a set of numbers using sum or merging two dictionaries.
+These are functions that are safe to run both in a thread and inside the event loop.
+
+These functions are usually performing a computation or transform data in memory.
+
+Anything that does any I/O does not fall under this category.
+
+Many standard library functions fall in this category.
+
+For example, generating the sum of a number set using `sum` or merging two dictionaries.
 
 There is no special annotation to mark functions as part of this category and care should be taken when using these functions from inside the event loop. When in doubt, look at their implementation.
 

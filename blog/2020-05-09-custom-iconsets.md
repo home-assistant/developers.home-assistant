@@ -36,4 +36,4 @@ window.customIconsets = window.customIconsets || {};
 window.customIconsets["custom"] = getIcon;
 ```
 
-Home Assistant will call the fuction `getIcon("icon")` when the icon `custom:icon` is set.
+Home Assistant will call the function `getIcon("icon")` when the icon `custom:icon` is set.

@@ -11,7 +11,7 @@ add-ons or containers.
 It can be used for:
 
 - Providing an indicator if an update is available for a device or service.
-- An install method to allow installing an update or a specific version
+- An installation method to allow installing an update or a specific version
   of the software.
 - Allow for offering backups before installing a new update.
 
@@ -53,7 +53,7 @@ This method can be implemented so users can install an offered update directly
 from within Home Assistant.
 
 This method requires `UpdateEntityFeature.INSTALL` to be set. Additionally, if this
-integration supports installing specific version or is capable of backing up
+integration supports installing a specific version or is capable of backing up
 before starting the update installation process, `UpdateEntityFeature.SPECIFIC_VERSION` and
 `UpdateEntityFeature.BACKUP` can be set respectively.
 
@@ -81,7 +81,7 @@ class MyUpdate(UpdateEntity):
 
 ### Release notes
 
-This method can be implemented so users can can get the full release notes in the more-info dialog of the Home Assistant Frontend before they install the update.
+This method can be implemented so users can get the full release notes in the more-info dialog of the Home Assistant Frontend before they install the update.
 
 The returned string can contain markdown, and the frontend will format that correctly.
 

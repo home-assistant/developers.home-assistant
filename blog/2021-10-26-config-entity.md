@@ -27,9 +27,9 @@ or diagnostics of a device but does not allow changing it, for example, a sensor
 RSSI or MAC address with allowed values.
 
 Entities which have the `entity_category` set:
-- Are not included in a service call targetting a whole device or area.
+- Are not included in a service call targeting a whole device or area.
 - Are, by default, not exposed to Google Assistant or Alexa.
 - Are shown on a separate card on the device configuration page.
 - Do not show up on the automatically generated Lovelace Dashboards.
 
-[![Screenshot showing seperation of entity categories](/img/en/blog/2021-10-26-config-entity/entity_categories.png)](/img/en/blog/2021-10-26-config-entity/entity_categories.png)
+[![Screenshot showing separation of entity categories](/img/en/blog/2021-10-26-config-entity/entity_categories.png)](/img/en/blog/2021-10-26-config-entity/entity_categories.png)

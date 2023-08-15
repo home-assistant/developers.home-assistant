@@ -106,4 +106,4 @@ ir.async_delete_issue(hass, DOMAIN, "manual_migration")
 
 ## Fixing an issue
 
-If an issue has the `is_fixable` issue set to `True`, the user will be allowed to fix the issue. An issue which is succesfully fixed will be removed from the issue registry.
+If an issue has the `is_fixable` issue set to `True`, the user will be allowed to fix the issue. An issue which is successfully fixed will be removed from the issue registry.

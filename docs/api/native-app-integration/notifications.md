@@ -6,9 +6,9 @@ The `mobile_app` integration has a notify platform built in that allows for a ge
 
 ## Enabling websocket push notifications
 
-Your app can connect via the WebSocket API to Home Assistant to subscribe to push notifications. To enable this your app needs to either subscribe to cloud push notifications or add the `push_websocket_channel: true` to the `app_data` object in your registration.
+Your app can connect via the WebSocket API to Home Assistant to subscribe to push notifications. To enable this, your app needs to either subscribe to cloud push notifications or add the `push_websocket_channel: true` to the `app_data` object in your registration.
 
-To create a websocket channel create a push notification subscription:
+To create a websocket channel, create a push notification subscription:
 
 ```json
 {
@@ -63,7 +63,7 @@ This approach allows you to maintain full control over your push notification in
 
 See the next section of this document for an example server implementation of a push notification forwarder that uses Firebase Cloud Functions and Firebase Cloud Messaging.
 
-Your server should accept a HTTP POST payload like this:
+Your server should accept an HTTP POST payload like this:
 
 ```json
 {
@@ -90,19 +90,19 @@ It should respond with a 201 status code assuming the notification was queued fo
 
 ### Errors
 
-If an error occurs you should return a description of what went wrong with a status code _other than_ 201 or 429. An error response must be a JSON object and can contain one of the following keys:
+If an error occurs, you should return a description of what went wrong with a status code _other than_ 201 or 429. An error response must be a JSON object and can contain one of the following keys:
 
-| Key | Type | Description
-| --- | ---- | -----------
-| `errorMessage` | string | If provided, it will be appended to a preset error message. For example, if `errorMessage` is "Could not communicate with Apple" it will be output in the log like "Internal server error, please try again later: Could not communicate with Apple"
-| `message` | string | If provided, it will be output directly to the logs at the warning log level.
+| Key            | Type   | Description                                                                                                                                                                                                                                          |
+|----------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `errorMessage` | string | If provided, it will be appended to a preset error message. For example, if `errorMessage` is "Could not communicate with Apple" it will be output in the log like "Internal server error, please try again later: Could not communicate with Apple" |
+| `message`      | string | If provided, it will be output directly to the logs at the warning log level.                                                                                                                                                                        |
 
 No matter what key you use, you should try to be as descriptive as possible about what went wrong and, if possible, how the user can fix it.
 
 ### Rate limits
 
 The notify platform also supports exposing rate limits to users. Home Assistant suggests you implement a conservative rate limit to keep your costs low and also so that users don't overload themselves with too many notifications.
-For reference, Home Assistant Companion has a maximum sendable notifications per 24 hours of 150 notifications. The rate limit resets for all users at midnight, UTC. You of course are free to use whatever configuration for your own rate limiting.
+For reference, Home Assistant Companion can send a maximum of 150 notifications per 24 hours. The rate limit resets for all users at midnight, UTC. You of course are free to use whatever configuration for your own rate limiting.
 
 If you choose to implement rate limiting, your successful server response should look like the following:
 
@@ -117,16 +117,16 @@ If you choose to implement rate limiting, your successful server response should
 }
 ```
 
-| Key | Type | Description
-| --- | ---- | -----------
-| `successful` | integer | The number of successful push notifications the user has sent during the rate limit period.
-| `errors` | integer | The number of failed push notifications the user has sent during the rate limit period.
-| `maximum` | integer | The maximum number of push notifications the user can send during the users rate limit period.
-| `resetsAt` | ISO8601 timestamp | The timestamp that the users rate limit period expires at. Must be provided in the UTC timezone.
+| Key          | Type              | Description                                                                                      |
+|--------------|-------------------|--------------------------------------------------------------------------------------------------|
+| `successful` | integer           | The number of successful push notifications the user has sent during the rate limit period.      |
+| `errors`     | integer           | The number of failed push notifications the user has sent during the rate limit period.          |
+| `maximum`    | integer           | The maximum number of push notifications the user can send during the users rate limit period.   |
+| `resetsAt`   | ISO8601 timestamp | The timestamp that the users rate limit period expires at. Must be provided in the UTC timezone. |
 
 The rate limits will be output to the log at the warning log level after every notification is successfully sent. Home Assistant will also output the exact time remaining until the rate limit period resets.
 
-Once the user hits their maximum amount of notifications sent in the rate limit period, you should start responding with a 429 status code until the rate limit period expires. The response object can optionally contain a key, `message` which will be output to the Home Assistant log instead of the standard error message.
+Once the user hits their maximum number of notifications sent in the rate limit period, you should start responding with a 429 status code until the rate limit period expires. The response object can optionally contain a key, `message` which will be output to the Home Assistant log instead of the standard error message.
 
 The notify platform does not itself implement any kind of rate limit protections. Users will be able to keep sending you notifications, so you should reject them with a 429 status code as early in your logic as possible.
 

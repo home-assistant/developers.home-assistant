@@ -92,17 +92,17 @@ These models are describing objects that are getting returned from the superviso
 
 ## Network interface
 
-| key         | type    | description                                                                  |
-| ----------- | ------- | ---------------------------------------------------------------------------- |
-| interface   | string  | The interface name i.e eth0.                                                 |
-| type        | string  | The interface type: `ethernet`, `wireless` or `vlan`.                        |
-| enabled     | boolean | Return True if the interface is enabled.                                     |
-| connected   | boolean | Return True if the interface is connected to the network.                    |
-| primary     | boolean | `true` if it's the primary network interface.                                |
-| ipv4        | struct or null  | An IP config struct with IPv4 connection details.                            |
-| ipv6        | struct or null  | An IP config struct with IPv6 connection details.                            |
-| wifi        | struct or null  | A Wifi config struct with wireless connection details.                      |
-| vlan        | struct or null  | A Vlan config struct with details about the vlan.                           |
+| key         | type    | description                                              |
+| ----------- | ------- |----------------------------------------------------------|
+| interface   | string  | The interface name; such as `eth0`.                        |
+| type        | string  | The interface type: `ethernet`, `wireless` or `vlan`.    |
+| enabled     | boolean | Return True if the interface is enabled.                 |
+| connected   | boolean | Return True if the interface is connected to the network. |
+| primary     | boolean | `true` if it's the primary network interface.            |
+| ipv4        | struct or null  | An IP config struct with IPv4 connection details.        |
+| ipv6        | struct or null  | An IP config struct with IPv6 connection details.        |
+| wifi        | struct or null  | A Wifi config struct with wireless connection details.   |
+| vlan        | struct or null  | A Vlan config struct with details about the vlan.        |
 
 ### IP configuration
 
@@ -201,7 +201,7 @@ The `content` key of a backup object contains the following keys:
 | location      | string or null | The name of the backup mount it's stored on.  `null` if it's stored locally.                                                     |
 | homeassistant | string         | The version of Home Assistant that was in use                                                                            |
 | addons        | list           | A list of add-ons in the backup. Add-ons are represented as a dictionary with these keys [`slug`,`name`,`version`,`size`] |
-| repositories  | list           | A list of add-on repository URL's as strings                                                                             |
+| repositories  | list           | A list of add-on repository URLs as strings                                                                             |
 | folders       | list           | A list of strings representing directories                                                                               |
 
 ## Stats

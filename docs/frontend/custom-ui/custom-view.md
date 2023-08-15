@@ -25,7 +25,7 @@ Cards and Badges will be created and maintained by the core code and given to th
 
 ## Example
 
-(note: this example does not have all of the properties but the necessities to show the example)
+(note: this example does not have all the properties, but includes the necessities to show the example)
 
 ```js
 class MyNewView extends LitElement {

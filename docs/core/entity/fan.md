@@ -157,7 +157,7 @@ class FanEntity(ToggleEntity):
 
 :::tip `speed` is deprecated.
 
-For new intergrations, `speed` should not be implemented and only `percentage` and `preset_mode` should be used.
+For new integrations, `speed` should not be implemented and only `percentage` and `preset_mode` should be used.
 
 :::
 

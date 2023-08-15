@@ -3,9 +3,9 @@ title: Switch Entity
 sidebar_label: Switch
 ---
 
-A switch entity turns on or off something, for example a relay. Derive a platform entity from [`homeassistant.components.switch.SwitchEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/switch/__init__.py).
-To represent something which can be turned on or off but can't be controlled, for example a wall switch which transmits its state but can't be turned on or off from Home Assistant, a Binary Sensor is a better choice.
-To represent something which doesn't have a state, for example a door bell push button, a custom event or a Device Trigger is a better choice.
+A switch entity turns on or off something, for example, a relay. Derive a platform entity from [`homeassistant.components.switch.SwitchEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/switch/__init__.py).
+To represent something that can be turned on or off but can't be controlled, for example a wall switch which transmits its state but can't be turned on or off from Home Assistant, a Binary Sensor is a better choice.
+To represent something that doesn't have a state, for example, a door bell push button, a custom event or a Device Trigger is a better choice.
 
 ## Properties
 
@@ -13,18 +13,18 @@ To represent something which doesn't have a state, for example a door bell push 
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
-| Name | Type | Default | Description
-| ---- | ---- | ------- | -----------
-| is_on | boolean | `None` | If the switch is currently on or off.
+| Name  | Type    | Default | Description                           |
+|-------|---------|---------|---------------------------------------|
+| is_on | boolean | `None`  | If the switch is currently on or off. |
 
 ## Deprecated Properties
 
 The following properties are deprecated and should not be used by new integrations. Provide them as sensors instead.
 
-Name | Type | Default | Description
-| ---- | ---- | ------- | -----------
-| current_power_w | float | `None` | The current power usage in W.
-| today_energy_kwh | float | `None` | Total energy usage in kWh.
+| Name             | Type  | Default | Description                   |
+|------------------|-------|---------|-------------------------------|
+| current_power_w  | float | `None`  | The current power usage in W. |
+| today_energy_kwh | float | `None`  | Total energy usage in kWh.    |
 
 ## Methods
 
@@ -75,9 +75,9 @@ class MySwitch(SwitchEntity):
 
 ### Available device classes
 
-Optional. What type of device this. It will possibly map to google device types.
+Optional. What type of device this. It will possibly map to Google device types.
 
-| Constant | Description
-| ----- | -----------
-| `SwitchDeviceClass.OUTLET` | Device is an outlet for power.
-| `SwitchDeviceClass.SWITCH` | Device is switch for some type of entity.
+| Constant                   | Description                               |
+|----------------------------|-------------------------------------------|
+| `SwitchDeviceClass.OUTLET` | Device is an outlet for power.            |
+| `SwitchDeviceClass.SWITCH` | Device is switch for some type of entity. |

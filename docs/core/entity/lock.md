@@ -3,7 +3,9 @@ title: Lock Entity
 sidebar_label: Lock
 ---
 
-A lock entity is able to be locked and unlocked. Locking and unlocking can optionally be secured with a user code. Some locks also allow for opening of latches, this may also be secured with a user code. Derive a platform entity from [`homeassistant.components.lock.LockEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/lock/__init__.py).
+A lock entity can be locked and unlocked.
+
+Locking and unlocking can optionally be secured with a user code. Some locks also allow for opening of latches, this may also be secured with a user code. Derive a platform entity from [`homeassistant.components.lock.LockEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/lock/__init__.py).
 
 ## Properties
 
@@ -11,14 +13,14 @@ A lock entity is able to be locked and unlocked. Locking and unlocking can optio
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
-| Name | Type | Default | Description
-| ---- | ---- | ------- | -----------
-| changed_by | string | None | Describes what the last change was triggered by.
-| code_format | string | None | Regex for code format or None if no code is required.
-| is_locked | bool | None | Indication of whether the lock is currently locked. Used to determine `state`.
-| is_locking | bool | None | Indication of whether the lock is currently locking. Used to determine `state`.
-| is_unlocking | bool | None | Indication of whether the lock is currently unlocking. Used to determine `state`.
-| is_jammed | bool | None | Indication of whether the lock is currently jammed. Used to determine `state`.
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| changed_by | string | None | Describes what the last change was triggered by. |
+| code_format | string | None | Regex for code format or None if no code is required. |
+| is_locked | bool | None | Indication of whether the lock is currently locked. Used to determine `state`. |
+| is_locking | bool | None | Indication of whether the lock is currently locking. Used to determine `state`. |
+| is_unlocking | bool | None | Indication of whether the lock is currently unlocking. Used to determine `state`. |
+| is_jammed | bool | None | Indication of whether the lock is currently jammed. Used to determine `state`. |
 
 ## Supported Features
 

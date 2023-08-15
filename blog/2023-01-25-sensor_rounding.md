@@ -16,9 +16,9 @@ A summary of the changes, copied from the PR description:
 - The state precision is influenced by unit conversion
   - Converting from a smaller to a larger unit increases the display precision
   - Converting from a larger to a smaller unit decreases the display precision if the integration has set `native_precision`
-  - Minimum precision when converting from a larger to a smaller unit is 0, i.e. there's no rounding to tens, hundreds etc.
+  - Minimum precision when converting from a larger to a smaller unit is 0. For example there's no rounding to tens, hundreds etc.
 - User can override the display precision from the frontend
-  - There's no minimum precision, i.e. rounding to tens, hundreds, etc. is possible by setting a negative precision
+  - There's no minimum precision, for example rounding to tens, hundreds, etc. is possible by setting a negative precision
 - Integrations are encouraged to drop rounding for display and instead set property `native_precision`
 - Trailing zeroes are added to the sensor state's string representation to match the precision if:
   - The precision is set by user

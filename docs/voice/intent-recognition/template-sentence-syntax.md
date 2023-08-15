@@ -149,7 +149,7 @@ lists:
     wildcard: true
 ```
 
-will match sentences such as "play the white album by the beatles". The `PlayAlbum` intent will have an `album` slot with "the white album " (note the trailing whitespace) and an `artist` slot with "the beatles".
+will match sentences such as "play the white album by the beatles". The `PlayAlbum` intent will have an `album` slot with `"the white album "` (note the trailing space) and an `artist` slot with "the beatles".
 
 ### Expansion Rules
 

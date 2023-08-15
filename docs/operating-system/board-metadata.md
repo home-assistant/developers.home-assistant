@@ -27,7 +27,7 @@ Maximum size of the boot loader environment (in hex). Required for rauc.
 - hybrid
 - mbr
 
-HAOS is trying to use GPT whenever possible. To use GPT the second logical block (LBA) needs to be available. On some boards this block is reserved/required by the boot firmware. If that is the case the class MBR approach needs to be used.
+HAOS is trying to use GPT whenever possible. To use GPT, the second logical block (LBA) needs to be available. On some boards this block is reserved/required by the boot firmware. If that is the case the class MBR approach needs to be used.
 
 Hybrid uses both partition tables in case GPT can be used, but lower level firmware still requires MBR.
 

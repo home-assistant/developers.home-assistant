@@ -22,7 +22,7 @@ async def async_finish_flow(flow, result):
     """Finish flow."""
 ```
 
-This async callback is called when a flow is finished or aborted. i.e. `result['type'] in [FlowResultType.CREATE_ENTRY, FlowResultType.ABORT]`. The callback function can modify result and return it back, if the result type changed to `FlowResultType.FORM`, the flow will continue running, display another form.
+This async callback is called when a flow is finished or aborted. For example `result['type'] in [FlowResultType.CREATE_ENTRY, FlowResultType.ABORT]`. The callback function can modify result and return it back, if the result type changed to `FlowResultType.FORM`, the flow will continue running, display another form.
 
 If the result type is `FlowResultType.FORM`, the result should look like:
 
@@ -397,7 +397,7 @@ The flow works as follows:
 
 1. The user starts the config flow in Home Assistant.
 2. The config flow prompts the user that a task is in progress and will take some time to finish by calling `async_show_progress`. The flow should pass a task specific string as `progress_action` parameter to represent the translated text string for the prompt.
-3. The flow is responsible for managing the background task and continuing the flow when the task is done or canceled. Continue the flow by calling the `FlowManager.async_configure` method, e.g. via `hass.config_entries.flow.async_configure`. Create a new task that does this to avoid a deadlock.
+3. The flow is responsible for managing the background task and continuing the flow when the task is done or canceled. Continue the flow by calling the `FlowManager.async_configure` method, such as via `hass.config_entries.flow.async_configure`. Create a new task that does this to avoid a deadlock.
 4. When the task or tasks are done, the flow should mark the progress to be done with the `async_show_progress_done` method.
 5. The frontend will update each time we call show progress or show progress done.
 6. The config flow will automatically advance to the next step when the progress was marked as done. The user is prompted with the next step.

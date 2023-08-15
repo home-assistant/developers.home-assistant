@@ -80,12 +80,12 @@ The JSON response from `/api/conversation/process` contains information about th
 
 The following properties are available in the `"response"` object:
 
-| Name            | Type       | Description                                                                                                      |
-|-----------------|------------|------------------------------------------------------------------------------------------------------------------|
+| Name            | Type       | Description                                                                               |
+|-----------------|------------|-------------------------------------------------------------------------------------------|
 | `response_type` | string     | One of `action_done`, `query_answer`, or `error` (see [response types](#response-types)). |
-| `data`          | dictionary | Relevant data for each [response type](#response_types).                                                         |
-| `language`      | string     | The language of the intent and response.                                                                         |
-| `speech`        | dictionary | Optional. Response text to speak to the user (see [speech](#speech)).                                            |
+| `data`          | dictionary | Relevant data for each [response type](#response-types).                                  |
+| `language`      | string     | The language of the intent and response.                                                  |
+| `speech`        | dictionary | Optional. Response text to speak to the user (see [speech](#speech)).                     |
 
 
 The [conversation id](#conversation-id) is returned alongside the intent response.
@@ -139,7 +139,7 @@ An intent can have multiple targets which are applied on top of each other. The 
 * `custom`
   * A custom target
 
-Most intents end up with 0, 1 or 2 targets. 3 targets currenly only happens when device classes are involved. Examples of target combinations:
+Most intents end up with 0, 1 or 2 targets. 3 targets currently only happens when device classes are involved. Examples of target combinations:
 
  * "Turn off all lights"
      * 1 target: `domain:light`

@@ -30,7 +30,7 @@ def setup(hass, config):
 
 ## Listening to events
 
-Most of the times you'll not be firing events but instead listen to events. For example, the state change of an entity is broadcasted as an event.
+Most of the times you'll not be firing events but instead listen to events. For example, the state change of an entity is broadcast as an event.
 
 ```python
 DOMAIN = "example_component"
