@@ -14,12 +14,12 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| state | string | **Required** | One of the states listed in the states section.
+| activity | LawnMowerActivity | **Required** | One of the activities in the LawnMowerActivity enum.
 | supported_features | int | (abstract method) | Bitmap of supported features. See below.
 
-## States
+## Activities
 
-| State | Description
+| Activity | Description
 | ----- | -----------
 | `MOWING` | The lawn mower is currently mowing.
 | `DOCKED` | The lawn mower is done mowing and is currently docked.
