@@ -374,7 +374,7 @@ The server will indicate with a message indicating that the service is done exec
 }
 ```
 
-If the service supports providing return data, it will automatically be included in the `result`.
+The `result` of the call will always include a `response` to account for services that support responses. When a service that doesn't support responses is called, the value of `response` will be `null`.
 
 ## Fetching states
 
