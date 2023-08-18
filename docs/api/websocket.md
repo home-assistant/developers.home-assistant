@@ -368,10 +368,13 @@ The server will indicate with a message indicating that the service is done exec
       "id": "326ef27d19415c60c492fe330945f954",
       "parent_id": null,
       "user_id": "31ddb597e03147118cf8d2f8fbea5553"
-    }
+    },
+    "response": null
   }
 }
 ```
+
+If the service supports providing return data, it will automatically be included in the `result`.
 
 ## Fetching states
 
