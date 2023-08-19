@@ -79,7 +79,7 @@ the end-user getting your improvement faster.
    Be sure to add a motivation (or use case) to your PR, so the reviewer can
    understand why you are making this change (or why you make certain decisions).
 
-7. **Comply with Architecture Decision Records.**
+7. **Comply with Architecture Decisions.**
    All architectural decisions are recorded in the [ADR folder](https://github.com/home-assistant/architecture/tree/master/adr).
    Ensure these rules and guidelines are followed before creating the PR
    to avoid later adjustments based on your PR not following these rules.
