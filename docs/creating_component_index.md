@@ -48,7 +48,7 @@ In addition a manifest file is required with below keys as the bare minimum. Cre
 }
 ```
 
-After creating the file structure, restart Home Assistant to make the new integration available, add `hello_state:` to your `configuration.yaml` file to enable it, and restart Home Assistant again to load it.
+After creating the file structure, restart Home Assistant to make your new integration available.  Next, add `hello_state:` to your `configuration.yaml` file to enable it, and restart Home Assistant again to load it.  You should see a message in the log indicating that the integration was loaded and a new entity called `hello_state.world`.
 
 ## What the scaffold offers
 
