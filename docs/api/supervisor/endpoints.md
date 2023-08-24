@@ -1622,9 +1622,9 @@ Create a new session for access to the ingress service.
 
 **Payload:**
 
-| key      | type   | optional | description                                            |
-| -------- | ------ | -------- | ------------------------------------------------------ |
-| username | string | True     | The name of the user authenticated for the new session |
+| key      | type   | optional | description                                          |
+| -------- | ------ | -------- | ---------------------------------------------------- |
+| user_id  | string | True     | The ID of the user authenticated for the new session |
 
 **Returned data:**
 
