@@ -26,7 +26,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 ### Process audio stream
 
-The process audio stream method is used send audio to an STT service and get text back.
+The process audio stream method is used to send audio to an STT service and get text back.
 
 ```python
 class MySpeechToTextEntity(SpeechToTextEntity):
