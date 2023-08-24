@@ -190,7 +190,6 @@ Note:  Avoid the use of this filename for anything other than add-on configurati
 | `watchdog` | string | | A URL for monitoring the add-on health. Like `http://[HOST]:[PORT:2839]/dashboard`, the port needs the internal port, which will be replaced with the effective port. It is also possible to bind the protocol part to a configuration option with: `[PROTO:option_name]://[HOST]:[PORT:2839]/dashboard` and it's looked up if it is `true` and it's going to `https`. For simple TCP port monitoring you can use `tcp://[HOST]:[PORT:80]`. It works for add-ons on the host or internal network.
 | `realtime` | bool | `false` | Give add-on access to host schedule including `SYS_NICE` for change execution time/priority.
 | `journald` | bool | `false` | If set to `true`, the host's system journal will be mapped read-only into the add-on. Most of the time the journal will be in `/var/log/journal` however on some hosts you will find it in `/run/log/journal`. Add-ons relying on this capability should check if the directory `/var/log/journal` is populated and fallback on `/run/log/journal` if not.
-| `remote_user` | bool | `false` | If set to `true`, the addon requests knowledge of the authenticated user. This will add an toggle button in the user addon configuration. Only if the user activated sending the remote user, the addon will actually be sent the X-Remote-User header filled with the authenticated username.
 
 ### Options / Schema
 
