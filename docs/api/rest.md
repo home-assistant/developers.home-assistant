@@ -380,6 +380,10 @@ curl \
 
 Returns an array of state objects. Each state has the following attributes: `entity_id`, `state`, `last_changed` and `attributes`.
 
+You can pass the following optional GET parameters:
+
+- `filter_entity_id=<entity_ids>` to get only the defined entity states - comma separated.
+	
 ```json
 [
     {
@@ -403,6 +407,12 @@ Sample `curl` command:
 curl \
   -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" http://localhost:8123/api/states
+```
+
+```shell
+curl \
+  -H "Authorization: Bearer TOKEN" \
+  -H "Content-Type: application/json" http://localhost:8123/api/states?filter_entity_id=sun.sun,light.bedroom
 ```
 
 </ApiEndpoint>
