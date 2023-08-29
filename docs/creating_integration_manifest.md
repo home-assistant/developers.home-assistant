@@ -421,6 +421,10 @@ The following IoT classes are accepted in the manifest:
 
 [iot_class]: https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things/#classifiers
 
+## State attributes excluded from history recording
+
+The `recorder_excluded_attributes` is a list of state attributes which will be excluded from history recording. This list should include state attributes which do not change, or for other reasons are not suitable for the state history. Examples include the `entity_picture` attribute of `image` entities which will not be valid after some time and the `preset_modes` attribute of `fan` entities which is not likely to change. The `recorder_excluded_attributes` list will be queried both for an entity's domain, e.g. `light`, and for the integration providing the light, e.g. `hue`. This means that an integration which creates entities form other domains generally does not need to define `recorder_excluded_attributes` unless it adds additional state attributes which should not be recorded.
+
 ## Virtual integration
 
 Some products are supported by integrations that are not named after the product. For example, Roborock vacuums are integrated via the Xiaomi Miio integration, and the IKEA SYMFONISK product line can be used with the Sonos integration.
