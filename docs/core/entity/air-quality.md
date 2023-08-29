@@ -23,12 +23,12 @@ The Air Quality entity does not support attribute shorthand for [property implem
 | particulate_matter_10 | <code>str &#124; int &#124; float &#124; None</code> | `None` | The particulate matter 10 (<= 10 μm) level.
 | particulate_matter_0_1 | <code>str &#124; int &#124; float &#124; None</code> | `None` | The particulate matter 0.1 (<= 0.1 μm) level.
 | air_quality_index | <code>str &#124; int &#124; float &#124; None</code> | `None` | The Air Quality Index (AQI).
-| ozone | <code>str &#124; int &#124; float &#124; None</code> | `None` | The O3 (ozone) level.
+| ozone | <code>str &#124; int &#124; float &#124; None</code> | `None` | The O~3~ (ozone) level.
 | carbon_monoxide | <code>str &#124; int &#124; float &#124; None</code> | `None` | The CO (carbon monoxide) level.
-| carbon_dioxide | <code>str &#124; int &#124; float &#124; None</code> | `None` | The CO2 (carbon dioxide) level.
-| sulphur_dioxide | <code>str &#124; int &#124; float &#124; None</code> | `None` | The SO2 (sulphur dioxide) level.
-| nitrogen_oxide | <code>str &#124; int &#124; float &#124; None</code> | `None` | The N2O (nitrogen oxide) level.
+| carbon_dioxide | <code>str &#124; int &#124; float &#124; None</code> | `None` | The CO~2~ (carbon dioxide) level.
+| sulphur_dioxide | <code>str &#124; int &#124; float &#124; None</code> | `None` | The SO~2~ (sulphur dioxide) level.
+| nitrogen_oxide | <code>str &#124; int &#124; float &#124; None</code> | `None` | The NO~x~ (nitrogen oxide) level.
 | nitrogen_monoxide | <code>str &#124; int &#124; float &#124; None</code> | `None` | The NO (nitrogen monoxide) level.
-| nitrogen_dioxide | <code>str &#124; int &#124; float &#124; None</code> | `None` | The NO2 (nitrogen dioxide) level.
+| nitrogen_dioxide | <code>str &#124; int &#124; float &#124; None</code> | `None` | The NO~2~ (nitrogen dioxide) level.
 
 Properties have to follow the units defined in the `unit_system`.
