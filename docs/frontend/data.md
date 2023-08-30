@@ -184,5 +184,5 @@ hass.formatEntityAttributeValue(hass.states["climate.thermostat"], "current_temp
 Format the attribute name of an entity. You need to pass the entity state object and the attribute name.
 
 ```js
-hass.formatEntityAttributeName(hass.states["climate.thermostat", "current_temperature"], ); // "Current temperature"
+hass.formatEntityAttributeName(hass.states["climate.thermostat"], "current_temperature"); // "Current temperature"
 ```
