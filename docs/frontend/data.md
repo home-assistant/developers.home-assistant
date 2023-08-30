@@ -3,7 +3,7 @@ title: "Frontend data"
 sidebar_label: "Data"
 ---
 
-The frontend passes a single `hass` object around. This object contains the latest state, allows you to send commands back to the server and provide helper for formatting entity state.
+The frontend passes a single `hass` object around. This object contains the latest state, allows you to send commands back to the server and provides a helper for formatting entity state.
 
 Whenever a state changes, a new version of the objects that changed are created. So you can easily see if something has changed by doing a strict equality check:
 
@@ -149,7 +149,7 @@ We're moving away from API calls and are migrating everything to `hass.callWS(me
 
 ## Entity state formatting
 
-These method allows you to format the state and attributes of an entity. The value will be localized using user profile settings (language, number format, date format, timezone) and unit of measurement.
+These methods allows you to format the state and attributes of an entity. The value will be localized using user profile settings (language, number format, date format, timezone) and unit of measurement.
 
 ### `hass.formatEntityState(stateObj, state)`
 
@@ -173,7 +173,7 @@ Format the attribute value of an entity. You need to pass the entity state objec
 hass.formatEntityAttributeValue(hass.states["climate.thermostat"], "current_temperature"); // "20.5 °C"
 ```
 
-You can force the state value using the second optional parameter.
+You can force the state value using the third optional parameter.
 
 ```js
 hass.formatEntityAttributeValue(hass.states["climate.thermostat"], "current_temperature", 18); // "18 °C"
