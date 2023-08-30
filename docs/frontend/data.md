@@ -149,7 +149,7 @@ We're moving away from API calls and are migrating everything to `hass.callWS(me
 
 ## Entity state formatting
 
-These methods allows you to format the state and attributes of an entity. The value will be localized using user profile settings (language, number format, date format, timezone) and unit of measurement.
+These methods allow you to format the state and attributes of an entity. The value will be localized using user profile settings (language, number format, date format, timezone) and unit of measurement.
 
 ### `hass.formatEntityState(stateObj, state)`
 
