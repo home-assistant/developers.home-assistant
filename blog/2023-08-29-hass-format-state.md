@@ -5,7 +5,7 @@ authorTwitter: piitaya
 title: Entity state formatting
 ---
 
-In the Home Assistant Core 2023.9 release, we introduced 3 new methods to the `hass` object to allow entity state formatting with localization support  for custom cards:
+In the Home Assistant Core 2023.9 release, we introduced 3 new methods to the `hass` object to allow entity state formatting with localization support for custom cards:
 
 - `hass.formatEntityState`
 - `hass.formatEntityAttributeValue`
