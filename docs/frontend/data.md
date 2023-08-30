@@ -3,7 +3,7 @@ title: "Frontend data"
 sidebar_label: "Data"
 ---
 
-The frontend passes a single `hass` object around. This object contains the latest state, allows you to send commands back to the server and provides helpers for formatting entity state.
+The frontend passes a single `hass` object around. This object contains the latest state, allows you to send commands back to the server and provides helpers to format entity state.
 
 Whenever a state changes, a new version of the objects that changed are created. So you can easily see if something has changed by doing a strict equality check:
 
