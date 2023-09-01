@@ -285,3 +285,15 @@ The `content` key of a backup object contains the following keys:
 
 Request only fields may be included in requests but will never be in responses.
 Response only fields will be in responses but cannot be included in requests.
+
+## Job
+
+| key        | type    | description                                                   |
+| ---------- | ------- | ------------------------------------------------------------- |
+| name       | string  | Name of the job                                               |
+| reference  | string  | A unique ID for instance the job is acting on (if applicable) |
+| uuid       | string  | Unique ID of the job                                          |
+| progress   | int     | Progress of the job (if accurate progress is obtainable)      |
+| stage      | string  | A name for the stage the job is in (if applicable)            |
+| done       | boolean | Is the job complete                                           |
+| child_jobs | list    | A list of child [jobs](#job) started by this one              |

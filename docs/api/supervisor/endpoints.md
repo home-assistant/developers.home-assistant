@@ -1594,7 +1594,7 @@ Get information about host services.
 Shutdown the host
 </ApiEndpoint>
 
-### ingress
+### Ingress
 
 <ApiEndpoint path="/ingress/panels" method="get">
 
@@ -1646,6 +1646,53 @@ Validate an ingress session, extending it's validity period.
 | key     | type   | optional | description                       |
 | ------- | ------ | -------- | --------------------------------- |
 | session | string | False    | The token for the ingress session |
+
+</ApiEndpoint>
+
+### Jobs
+
+<ApiEndpoint path="/jobs/info" method="get">
+Returns info on ignored job conditions and currently running jobs
+
+**Returned data:**
+
+| key               | type       | description                                                    |
+| ----------------- | ---------- | -------------------------------------------------------------- |
+| ignore_conditions | list       | List of job conditions being ignored                           |
+| jobs              | list       | List of currently running [Jobs](api/supervisor/models.md#job) |
+
+**Example response:**
+
+```json
+{
+  "ignore_conditions": [],
+  "jobs": [{
+    "name": "backup_manager_full_backup",
+    "reference": "a01bc3",
+    "uuid": "123456789",
+    "progress": 0,
+    "stage": "addons",
+    "done": false,
+    "child_jobs": []
+  }]
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/jobs/options" method="post">
+Set options for job manager
+
+**Payload:**
+
+| key               | type       | description                                               |
+| ----------------- | ---------- | --------------------------------------------------------- |
+| ignore_conditions | list       | List of job conditions to ignore (replaces existing list) |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/jobs/reset" method="post">
+Reset job manager to defaults (stops ignoring any ignored job conditions)
 
 </ApiEndpoint>
 
