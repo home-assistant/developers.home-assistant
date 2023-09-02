@@ -8,4 +8,10 @@ The signature of `HomeAssistant.__init__` has been changed from no arguments to 
 
 The change was introduced in [core PR#98442](https://github.com/home-assistant/core/pull/98442)
 
-An example of how to maintain backwards compatibility can be found in [this HACS PR](https://github.com/hacs/integration/pull/3233/files#diff-065c5ee13b4f5b63ecbf9db332e84b7cee7c5fcaa5d3daff7d3d076ade925009).
+If backwards compatibility is important, this is a way to achieve it:
+```
+    try:
+        hass = HomeAssistant()  # pylint: disable=no-value-for-parameter
+    except TypeError:
+        hass = HomeAssistant(config_dir)  # pylint: disable=too-many-function-args
+```
