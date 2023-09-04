@@ -9,7 +9,8 @@ The signature of `HomeAssistant.__init__` has been changed from no arguments to 
 The change was introduced in [core PR#98442](https://github.com/home-assistant/core/pull/98442)
 
 If backwards compatibility is important, this is a way to achieve it:
-```
+
+```python
     try:
         hass = HomeAssistant()  # pylint: disable=no-value-for-parameter
     except TypeError:
