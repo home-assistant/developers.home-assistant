@@ -34,7 +34,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | ---- | ---- | -----------
 | `SensorDeviceClass.APPARENT_POWER` | VA | Apparent power |
 | `SensorDeviceClass.AQI` | None | Air Quality Index
-| `SensorDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Atmospheric pressure.
+| `SensorDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, mmHG, inHg, kPa, mbar, Pa, psi | Atmospheric pressure.
 | `SensorDeviceClass.BATTERY` | % | Percentage of battery that is left
 | `SensorDeviceClass.CO2` | ppm | Concentration of carbon dioxide.
 | `SensorDeviceClass.CO` | ppm | Concentration of carbon monoxide.
