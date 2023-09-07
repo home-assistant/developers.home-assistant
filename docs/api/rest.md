@@ -201,7 +201,7 @@ Returns an array of state changes in the past. Each object contains further deta
 
 The `<timestamp>` (`YYYY-MM-DDThh:mm:ssTZD`) is optional and defaults to 1 day before the time of the request. It determines the beginning of the period.
 
-The following parameters are required:
+The following parameters are **required**:
 	
 - `filter_entity_id=<entity_ids>` to filter on one or more entities - comma separated.
 	
