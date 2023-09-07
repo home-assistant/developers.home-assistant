@@ -1624,6 +1624,12 @@ Shutdown the host
 <ApiEndpoint path="/ingress/session" method="post">
 Create a new session for access to the ingress service.
 
+**Payload:**
+
+| key      | type   | optional | description                                          |
+| -------- | ------ | -------- | ---------------------------------------------------- |
+| user_id  | string | True     | The ID of the user authenticated for the new session |
+
 **Returned data:**
 
 | key     | type   | optional | description                       |

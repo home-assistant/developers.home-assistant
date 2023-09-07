@@ -34,6 +34,16 @@ ir.async_create_issue(
 | translation_key | str |  | Translation key with a brief explanation of the issue
 | translation_placeholders | dict | `None` | Placeholders which will be injected in the translation
 
+### Severity of an issue
+
+To better understand which severity level to choose, see the list below.
+
+| IssueSeverity | Description                                                        |
+|---------------|--------------------------------------------------------------------|
+| CRITICAL      | Considered reserved, only used for true panic                      |
+| ERROR         | Something is currently broken and needs immediate attention        |
+| WARNING       | Something breaks in the future (e.g., API shutdown) and needs attention |
+
 ## Offering a repair
 
 Create a new platform file in your integration folder called `repairs.py` and add code according to the pattern below.

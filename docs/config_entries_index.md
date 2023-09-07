@@ -15,6 +15,8 @@ Config Entries are configuration data that are persistently stored by Home Assis
 | migration error | The config entry had to be migrated to a newer version, but the migration failed.
 | failed unload | The config entry was attempted to be unloaded, but this was either not supported or it raised an exception.
 
+More information about surfacing errors and requesting a retry are in [Handling Setup Failures](integration_setup_failures.md/#integrations-using-async_setup_entry).
+
 <svg class='invertDark' width="508pt" height="188pt" viewBox="0.00 0.00 508.00 188.00" xmlns="http://www.w3.org/2000/svg">
 <g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 184)">
 <title>G</title>

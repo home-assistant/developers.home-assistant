@@ -39,3 +39,13 @@ As a developer, follow the following best practices to make your add-on secure:
 ## Use Home Assistant User backend
 
 Instead of allowing users to set new login credentials in plain text config, use the Home Assistant [Auth backend](/docs/api/supervisor/endpoints#auth). You can enable the access to the API with `auth_api: true`. Now you are able to send the login credentials to the auth backend and validate them in Home Assistant.
+
+## Authenticating a user when using ingress
+
+When the addon is accessed via the supervisor's ingress, the authorized user can be identified by its session token. The supervisor then adds some headers identifying the user to every request:
+
+| Header name                | Description                                 |
+| -------------------------- | ------------------------------------------- |
+| X-Remote-User-Id           | ID of the authenticated Home Assistant user |
+| X-Remote-User-Name         | The username of the authenticated user      |
+| X-Remote-User-Display-Name | The display name of the authenticated user  |

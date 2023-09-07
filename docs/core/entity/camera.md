@@ -21,6 +21,7 @@ Properties should always only return information from memory and not do I/O (lik
 | model                    | str   | `None`  | The model of the camera.                                                                                                           |
 | frame_interval           | float | 0.5     | The interval between frames of the stream.                                                                                         |
 | frontend_stream_type     | str   | None    | Used with `CameraEntityFeature.STREAM` to tell the frontend which type of stream to use (`StreamType.HLS` or `StreamType.WEB_RTC`) |
+| use_stream_for_stills    | bool  | False   | Determines whether or not to use the `Stream` integration to generate still images                                                 |
 
 ## Supported Features
 
