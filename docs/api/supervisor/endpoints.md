@@ -841,6 +841,32 @@ Reload backup from storage.
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/backups/freeze" method="post">
+
+Put Supervisor in a freeze state and prepare Home Assistant and addons for an external backup.
+
+:::note
+
+This does not take a backup. It prepares Home Assistant and addons for one but the expectation
+is that the user is using an external tool to make the backup. Such as the snapshot feature in
+KVM or Proxmox. The caller should call `/backups/thaw` when done.
+
+:::
+
+**Payload:**
+
+| key     | type  | optional | description                                                                   |
+| ------- | ----- | -------- | ----------------------------------------------------------------------------- |
+| timeout | int   | True     | Seconds before freeze times out and thaw begins automatically (default: 600). |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/backups/thaw" method="post">
+
+End a freeze initiated by `/backups/freeze` and resume normal behavior in Home Assistant and addons.
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/backups/<backup>/download" method="get">
 
 Download the backup file with the given slug.
