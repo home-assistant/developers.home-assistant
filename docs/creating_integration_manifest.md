@@ -3,7 +3,7 @@ title: "Integration Manifest"
 sidebar_label: "Manifest"
 ---
 
-Every integration has a manifest file to specify basic information about an integration. This file is stored as `manifest.json` in your integration directory. It is required to add such a file.
+Every integration has a manifest file to specify its basic information. This file is stored as `manifest.json` in your integration directory. It is required to add such a file.
 
 ```json
 {
