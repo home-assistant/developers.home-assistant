@@ -24,7 +24,7 @@ If your integration is going to register services, it will need to provide a des
 ## Data update coordinator - `coordinator.py`
 
 There are multiple ways for your integration to receive data, including push or poll. Commonly integrations will fetch data with a single coordinated poll across all entities, which requires the use of a `DataUpdateCoordinator`.
-If you want to use one, you'll have to create it in `coordinator.py`. [More information about `DataUpdateCoordinator`](integration_fetching_data.md/#coordinated-single-api-poll-for-data-for-all-entities).
+If you want to use one, and you choose to create a subcass of it, it is recommended to create it in `coordinator.py`. [More information about `DataUpdateCoordinator`](integration_fetching_data.md/#coordinated-single-api-poll-for-data-for-all-entities).
 
 ## Where Home Assistant looks for integrations
 
