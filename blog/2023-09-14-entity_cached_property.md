@@ -8,4 +8,4 @@ The `Entity` base class now caches `device_class` and `attribution` using the py
 
 If your custom integration defines `device_class` or `attribution` using a `@property`, it should switch to using `@cached_property` instead unless these values can change at run time. Integrations should avoid changing `device_class` at run time since anything that consumes the state may be unable to handle the `device_class` unexpectedly changing.
 
-The `@cached_property` decorator should be imported from `homeassistant.backports.functools` since the built-in `@cached_property` contains undocumented locking functionality that is not desirable and has been removed in cpython 3.12 and later. For more information, see [cached_property](https://docs.python.org/3.12/library/functools.html#functools.cached_property)
+The `@cached_property` decorator should be imported from `homeassistant.backports.functools` since the built-in `@cached_property` contains undocumented locking functionality that is not desirable and has been removed in cpython 3.12. For more information, see [cached_property](https://docs.python.org/3.12/library/functools.html#functools.cached_property)
