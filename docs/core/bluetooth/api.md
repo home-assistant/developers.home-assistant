@@ -185,7 +185,7 @@ def _process_more_advertisements(
     return 323 in service_info.manufacturer_data
 
 service_info = await bluetooth.async_process_advertisements(
-    hass
+    hass,
     _process_more_advertisements,
     {"address": discovery_info.address, "connectable": False},
     BluetoothScanningMode.ACTIVE,
