@@ -19,7 +19,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name        | Type            | Default      | Description                                          |
 | ----------- | --------------- | ------------ | ---------------------------------------------------- |
-| event_types | list of strings | **Required** | A list of possible event types this entity can fire. |
+| event_types | `list[str]`     | **Required** | A list of possible event types this entity can fire. |
 
 Other properties that are common to all entities such as `device_class`, `icon`, `name` etc are also applicable.
 
