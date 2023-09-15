@@ -12,19 +12,18 @@ Properties should always only return information from memory and not do I/O (lik
 :::
 
 
-| Name | Type | Default | Description
-| ---- | ---- | ------- | -----------
-| activity | LawnMowerActivity | **Required** | One of the activities in the LawnMowerActivity enum.
-| supported_features | int | (abstract method) | Bitmap of supported features. See below.
+| Name     | Type                                       | Default | Description
+| -------- | ------------------------------------------ | ------- | -----------------
+| activity | <code>LawnMowerActivity &#124; None</code> | `None`  | Current activity.
 
 ## Activities
 
 | Activity | Description
-| ----- | -----------
+| -------- | -----------
 | `MOWING` | The lawn mower is currently mowing.
 | `DOCKED` | The lawn mower is done mowing and is currently docked.
 | `PAUSED` | The lawn mower was active and is now paused.
-| `ERROR` | The lawn mower encountered an error while active and needs assistance.
+| `ERROR`  | The lawn mower encountered an error while active and needs assistance.
 
 ## Supported Features
 
@@ -33,9 +32,9 @@ and are combined using the bitwise or (`|`) operator.
 
 | Value          | Description                                          |
 | -------------- | ---------------------------------------------------- |
-| `START_MOWING`      | The lawn mower supports the mowing command.       |
-| `PAUSE`   | The lawn mower supports pausing the current task.                   |
-| `DOCK`    | The lawn mower supports the return to dock command.
+| `START_MOWING` | The lawn mower supports the start mowing command.    |
+| `PAUSE`        | The lawn mower supports pausing the current task.    |
+| `DOCK`         | The lawn mower supports the return to dock command.  |
 
 ## Methods
 
