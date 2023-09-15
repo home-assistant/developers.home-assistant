@@ -11,18 +11,25 @@ A humidifier entity is a device whose main purpose is to control humidity, i.e. 
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
-| Name                    | Type   | Default                               | Description                                                                               |
-| ----------------------- | ------ | ------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| target_humidity         | int    | `None`                                | The target humidity the device is trying to reach.                                        |
-| current_humidity        | int    | `None`                                | The current humidity measured by the device.                                              |
-| max_humidity            | int    | `DEFAULT_MAX_HUMIDITY` (value == 100) | Returns the maximum humidity.                                                             |
-| min_humidity            | int    | `DEFAULT_MIN_HUMIDITY` (value == 0)   | Returns the minimum humidity.                                                             |
-| mode                    | string | `NotImplementedError()`               | The current active preset. Requires `SUPPORT_MODES`.                                      |
-| available_modes         | list   | `NotImplementedError()`               | The available modes. Requires `SUPPORT_MODES`.                                            |
-| supported_features      | int    | (abstract method)                     | Bitmap of supported features. See below.                                                  |
-| is_on                   | bool   | `None`                                | Whether the device is on or off.                                                          |
-| device_class            | string | `None`                                | Either `HumidifierDeviceClass.HUMIDIFIER` or `HumidiferDeviceClass.DEHUMIDIFIER`          |
-| action                  | HumidifierAction | `None`                      | Returns the current status of the device.                                                 |
+| Name                    | Type                                           | Default                               | Description                                        |
+| ----------------------- | ---------------------------------------------- | ------------------------------------- | -------------------------------------------------- |
+| action                  | <code>HumidifierAction &#124; None</code>      | `None`                                | Returns the current status of the device.          |
+| available_modes         | <code>list[str] &#124; None</code>             | **Required by MODES**                 | The available modes. Requires `SUPPORT_MODES`.     |
+| current_humidity        | <code>int &#124; None</code>                   | `None`                                | The current humidity measured by the device.       |
+| device_class            | <code>HumidifierDeviceClass &#124; None</code> | `None`                                | Type of hygrostat                                  |
+| is_on                   | <code>bool &#124; None</code>                  | `None`                                | Whether the device is on or off.                   |
+| max_humidity            | `int`                                          | `DEFAULT_MAX_HUMIDITY` (value == 100) | The maximum humidity.                              |
+| min_humidity            | `int`                                          | `DEFAULT_MIN_HUMIDITY` (value == 0)   | The minimum humidity.                              |
+| mode                    | <code>str &#124; None</code>                   | **Required**                          | The current active mode. Requires `SUPPORT_MODES`. |
+| target_humidity         | <code>int &#124; None</code>                   | `None`                                | The target humidity the device is trying to reach. |
+
+### Available device classes
+
+| Constant                            | Description
+| ----------------------------------- | ------------------------------------------
+| `HumidiferDeviceClass.DEHUMIDIFIER` | A dehumidifier
+| `HumidifierDeviceClass.HUMIDIFIER`  | A humidifier
+
 
 ### Modes
 
