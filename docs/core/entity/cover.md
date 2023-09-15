@@ -11,22 +11,13 @@ A cover entity controls an opening or cover, such as a garage door or a window s
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
-### Platform Properties (to be implemented by deriving platform classes)
-
 | Name | Type | Default | Description
-| ---- | ---- | ------- | -----------
-| current_cover_position | int | None | The current position of cover where 0 means closed and 100 is fully open.  Required with `SUPPORT_SET_POSITION`.
-| current_cover_tilt_position | int | None | The current tilt position of the cover where 0 means closed/no tilt and 100 means open/maximum tilt.  Required with `SUPPORT_SET_TILT_POSITION`
-| is_opening | bool | None | If the cover is opening or not. Used to determine `state`.
-| is_closing | bool | None | If the cover is closing or not. Used to determine `state`.
-| is_closed | bool | `NotImplementedError()` | If the cover is closed or not.  if the state is unknown, return `None`. Used to determine `state`.
-
-### Entity Properties (base class properties which may be overridden)
-
-| Name | Type | Default | Description
-| ---- | ---- | ------- | -----------
-| device_class | string | None | Describes the type/class of the cover. Must be `None` or one of the valid values from the table below.
-| supported_features | int (bitwise) | Value determined from `current_cover_position` and `current_cover_tilt_position` | Describes the supported features. See the related table below for details.
+| ----------------------- | ---- | ------- | -----------
+| current_cover_position | <code>int &#124; None</code> | `None` | The current position of cover where 0 means closed and 100 is fully open.
+| current_cover_tilt_position | <code>int &#124; None</code> | `None` | The current tilt position of the cover where 0 means closed/no tilt and 100 means open/maximum tilt.
+| is_closed | <code>bool &#124; None</code> | **Required** | If the cover is closed or not. Used to determine `state`.
+| is_closing | <code>bool &#124; None</code> | `None` | If the cover is closing or not. Used to determine `state`.
+| is_opening | <code>bool &#124; None</code> | `None` | If the cover is opening or not. Used to determine `state`.
 
 ### Device Classes
 
