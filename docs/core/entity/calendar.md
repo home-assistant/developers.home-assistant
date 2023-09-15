@@ -16,8 +16,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name  | Type          | Default               | Description                                             |
 | ----- | ------------- | --------------------- | ------------------------------------------------------- |
-| event | CalendarEvent | `NotImplementedError` | The current or next upcoming `CalendarEvent` or `None`. |
-| supported_features | int | int | Flag supported features. |
+| event | <code>CalendarEvent &#124; None</code> | **Required** | The current or next upcoming `CalendarEvent` or `None`. |
 
 ### States
 
