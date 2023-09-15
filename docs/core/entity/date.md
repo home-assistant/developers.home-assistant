@@ -13,7 +13,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| native_value | date | **Required** | The value of the date.
+| native_value | <code>date &#124; None</code> | **Required** | The value of the date.
 
 Other properties that are common to all entities such as `icon`, `name` etc are also applicable.
 
