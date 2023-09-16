@@ -6,6 +6,15 @@ sidebar_label: To-do List
 A todo entity is an entity that represents a To-do list. A To-do list contains
 To-do items which are ordered and have a status (complete or in progress). A to-do list entity is derived from the [`homeassistant.components.todo.TodoListEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/todo/__init__.py).
 
+## Properties
+
+:::tip
+Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+:::
+
+| Name  | Type          | Default               | Description                                             |
+| ----- | ------------- | --------------------- | ------------------------------------------------------- |
+| todo_items | <code>list[TodoItem] | None</code> | **Required** | The ordered contents of the To-do list. |
 
 ### States
 
