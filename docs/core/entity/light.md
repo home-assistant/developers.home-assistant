@@ -16,7 +16,7 @@ A light entity controls the brightness, hue and saturation color value, white va
 | effect                | <code>str &#124; None</code>                            | `None` | The current effect.
 | effect_list           | <code>list[str] &#124; None</code>                      | `None` | The list of supported effects.
 | hs_color              | <code>tuple[float, float] &#124; None</code>            | `None` | The hue and saturation color value (float, float). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.HS` and ignored otherwise.
-| is_on                 | <code>bool &#124; None</code>                           | `None` | Iif the light entity is on or not.
+| is_on                 | <code>bool &#124; None</code>                           | `None` | If the light entity is on or not.
 | max_color_temp_kelvin | <code>int &#124; None</code>                            | `None` | The coldest color_temp_kelvin that this light supports.
 | min_color_temp_kelvin | <code>int &#124; None</code>                            | `None` | The warmest color_temp_kelvin that this light supports.
 | rgb_color             | <code>tuple[int, int, int] &#124; None</code>           | `None` | The rgb color value (int, int, int). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.RGB` and ignored otherwise.
