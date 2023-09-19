@@ -2,6 +2,7 @@
 #
 
 # Documentation restructuring redirects
+/docs/analytics_index /docs/core/platform/analytics
 /docs/app_integration_index /docs/api/native-app-integration
 /docs/app_integration_notifications /docs/api/native-app-integration/notifications
 /docs/app_integration_sending_data /docs/api/native-app-integration/sending-data
