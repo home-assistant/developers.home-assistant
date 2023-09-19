@@ -14,7 +14,7 @@ Properties should always only return information from memory and not do I/O (lik
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | is_on| <code>bool &#124; None</code> | `None` | **Required**. If the binary sensor is currently on or off.
-| device_class | <code>str &#124; None</code> | `None` | Type of binary sensor.
+| device_class | <code>BinarySensorDeviceClass &#124; None</code> | `None` | Type of binary sensor.
 
 ### Available device classes
 
