@@ -18,7 +18,7 @@ Properties should always only return information from memory and not do I/O (lik
 | Name               | Type                              | Default      | Description                                                                                              |
 | -------------------| --------------------------------- | ------------ | -------------------------------------------------------------------------------------------------------- |
 | content_type       | str                               | `image/jpeg` | The content-type of the image, set automatically if the image entity provides a URL.                     |
-| image_last_updated | <code>datetime &#124; None</code> | `None`       | Timestamp of when the image was last updated. Used to determine `state`. Frontend will refetch the image when this changes. |
+| image_last_updated | <code>datetime.datetime &#124; None</code> | `None`       | Timestamp of when the image was last updated. Used to determine `state`. Frontend will refetch the image when this changes. |
 | image_url          | <code>str &#124; None</code>      | `UNDEFINED`  | Optional URL from where the image should be fetched.                                                     |
 
 ## Methods
