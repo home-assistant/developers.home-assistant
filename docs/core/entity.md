@@ -277,7 +277,7 @@ Called when an entity is about to be removed from Home Assistant. Example use: d
 
 State attributes which are not suitable for state history recording should be excluded from state history recording by including them in either of `_component_unstored_attributes` or `_platform_unstored_attributes`.
 - `_component_unstored_attributes: frozenset[str]` may be set in a base component class, e.g. in `light.LightEntity`
-- `_platform_unstored_attributes: frozenset[str]` may be set an integration's platform e.g. in an entity class defined in platform `hue.light`. 
+- `_platform_unstored_attributes: frozenset[str]` may be set in an integration's platform e.g. in an entity class defined in platform `hue.light`. 
 
 Examples of platform state attributes which are exluded from recording include the `entity_picture` attribute of `image` entities which will not be valid after some time, the `preset_modes` attribute of `fan` entities which is not likely to change.
 Examples of integration specific state attributes which are excluded from recording include `description` and `location` state attributes in platform `trafikverket.camera` which do not change.
