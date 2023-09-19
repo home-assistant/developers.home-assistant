@@ -15,11 +15,11 @@ An implementation can provide either a URL from where an image will automaticall
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
-| Name                     | Type        | Default      | Description                                                                                                                        |
-| ------------------------ | ---------   | ------------ | ---------------------------------------------------------------------------------------------------------------------------------- |
-| content_type             | str         | `image/jpeg` | The content-type of the image, set automatically if the image entity provides a URL.                                               |
-| image_last_updated       | datetime    | `None`       | Timestamp of when the image was last updated. Used to determine `state`. Frontend will refetch the image when this changes.        |
-| image_url                | str or None | `UNDEFINED`  | Optional URL from where the image should be fetched.                                                                               |
+| Name               | Type                              | Default      | Description                                                                                              |
+| -------------------| --------------------------------- | ------------ | -------------------------------------------------------------------------------------------------------- |
+| content_type       | str                               | `image/jpeg` | The content-type of the image, set automatically if the image entity provides a URL.                     |
+| image_last_updated | <code>datetime.datetime &#124; None</code> | `None`       | Timestamp of when the image was last updated. Used to determine `state`. Frontend will refetch the image when this changes. |
+| image_url          | <code>str &#124; None</code>      | `UNDEFINED`  | Optional URL from where the image should be fetched.                                                     |
 
 ## Methods
 
