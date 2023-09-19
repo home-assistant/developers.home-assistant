@@ -15,8 +15,8 @@ Properties should always only return information from memory and not do I/O (lik
 | ---- | ---- | ------- | -----------
 | current_direction  | <code>str &#124; None</code>       | `None` | The current direction of the fan.                                                                       |
 | is_on              | <code>bool &#124; None</code>      | `None` | True if the fan is on.                                                                                  |
-| oscillating        | <code>str &#124; None</code>       | `None` | True if the fan is oscillating.                                                                         |
-| percentage         | <code>str &#124; None</code>       | `0`    | The current speed percentage. Must be a value between 0 (off) and 100.                                  |
+| oscillating        | <code>bool &#124; None</code>       | `None` | True if the fan is oscillating.                                                                         |
+| percentage         | <code>int &#124; None</code>       | `0`    | The current speed percentage. Must be a value between 0 (off) and 100.                                  |
 | preset_mode        | <code>str &#124; None</code>       | `None` | The current preset_mode. One of the values in `preset_modes` or `None` if no preset is active.          |
 | preset_modes       | <code>list[str] &#124; None</code> | `None` | The list of supported preset_modes. This is an arbitrary list of str and should not contain any speeds. |
 | speed_count        | `int`                              | 100    | The number of speeds the fan supports.                                                                  |
