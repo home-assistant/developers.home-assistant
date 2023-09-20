@@ -135,14 +135,7 @@ function Home() {
       <header className={clsx("hero hero--primary", styles.heroBanner)}>
         <div className="container">
           <div className="row">
-            <div className={clsx("col col--5")}>
-              <img
-                className={styles.heroLogo}
-                alt="Home Assistant Logo"
-                src="/img/logo-white.svg"
-              />
-            </div>
-            <div className={clsx("col col--5")}>
+            <div className={clsx("col col--10")}>
               <h1 className={styles.heroTitle}>{siteConfig.title}</h1>
               <p className={styles.heroTagline}>{siteConfig.tagline}</p>
               <p>
