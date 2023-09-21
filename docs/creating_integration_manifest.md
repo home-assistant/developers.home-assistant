@@ -423,7 +423,7 @@ The following IoT classes are accepted in the manifest:
 
 ## Virtual integration
 
-Some products are supported by integrations that are not named after the product. For example, Roborock vacuums are integrated via the Xiaomi Miio integration, and the IKEA SYMFONISK product line can be used with the Sonos integration.
+Some products are supported by integrations that are not named after the product. For example, Yale Home locks are integrated via the August integration, and the IKEA SYMFONISK product line can be used with the Sonos integration.
 
 There are also cases where a product line only supports a standard IoT standards like Zigbee or Z-Wave. For example, the U-tec ultraloq works via Z-Wave and has no specific dedicated integration. 
 
@@ -437,28 +437,28 @@ Virtual integrations can only be provided by Home Assistant Core and not by cust
 
 ### Supported by
 
-The "Supported by" virtual integration is an integration that points to another integration to provide its implementation. For example, Roborock vacuums are integrated via the Xiaomi Miio (`xiaomi_miio`) integration.
+The "Supported by" virtual integration is an integration that points to another integration to provide its implementation. For example, Yale Home locks are integrated via the August (`august`) integration.
 
 Example manifest:
 
 ```json
 {
-  "domain": "roborock",
-  "name": "Roborock",
+  "domain": "yale_home",
+  "name": "Yale Home",
   "integration_type": "virtual",
-  "supported_by": "xiaomi_miio",
+  "supported_by": "august"
 }
 ```
 
 The `domain` and `name` are the same as with any other integration, but the `integration_type` is set to `virtual`. 
-The logo for the domain of this virtual integration must be added to our [brands repository](https://github.com/home-assistant/brands/), so in this case, a Roborock branding is used.
+The logo for the domain of this virtual integration must be added to our [brands repository](https://github.com/home-assistant/brands/), so in this case, a Yale Home branding is used.
 
-The `supported_by` is the domain of the integration providing the implementation for this product. In the example above, the Roborock vacuum is supported by the Xiaomi Miio integration and points to its domain `xiaomi_miio`.
+The `supported_by` is the domain of the integration providing the implementation for this product. In the example above, the Yale Home lock is supported by the August integration and points to its domain `august`.
 
 Result:
 
-- Roborock is listed on our user documentation website under integrations with an automatically generated stub page that directs the user to the integration to use.
-- Roborock is listed in Home Assistant when clicking "add integration". When selected, we explain to the user that this product is integrated using a different integration, then the user continues to the Xioami Miio config flow.
+- Yale Home is listed on our user documentation website under integrations with an automatically generated stub page that directs the user to the integration to use.
+- Yale Home is listed in Home Assistant when clicking "add integration". When selected, we explain to the user that this product is integrated using a different integration, then the user continues to the Xioami Miio config flow.
 
 ### IoT standards
 
