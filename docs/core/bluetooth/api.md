@@ -117,7 +117,7 @@ from homeassistant.components import bluetooth
 learned_interval = bluetooth.async_get_learned_advertising_interval(hass, "44:44:33:11:23:42")
 ```
 
-If the interval is not yet known this will return `None`. In that case unavailability tracking will try the fallback interval for that address. This is an interval that has been set manually by an integration:
+If the advertising interval is not yet known, this will return `None`. In that case, unavailability tracking will try the fallback interval for that address. The below example returns the interval that has been set manually by an integration:
 
 ```python
 from homeassistant.components import bluetooth
