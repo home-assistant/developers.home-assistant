@@ -105,6 +105,37 @@ def _unavailable_callback(info: bluetooth.BluetoothServiceInfoBleak) -> None:
 cancel = bluetooth.async_track_unavailable(hass, _unavailable_callback, "44:44:33:11:23:42", connectable=True)
 ```
 
+### Finding out the unavailability timeout
+
+For connectable devices there is no unavailability timeout - a device must be connectable by at least one `connectable` controller or it is unavailable.
+
+For non-connectable devices unavailability is based on the time since their last known broadcast. This timeout is learned automatically based on the devices normal broadcasting pattern. You can find out what this is with the `bluetooth.async_get_learned_advertising_interval` API.
+
+```python
+from homeassistant.components import bluetooth
+
+learned_interval = bluetooth.async_get_learned_advertising_interval(hass, "44:44:33:11:23:42")
+```
+
+If the interval is not yet known this will return `None`. In that case unavailability tracking will try the fallback interval for that address. This is an interval that has been set manually by an integration:
+
+```python
+from homeassistant.components import bluetooth
+
+bluetooth.async_set_fallback_availability_interval(hass, "44:44:33:11:23:42", 64.0)
+
+fallback_interval = bluetooth.async_get_fallback_availability_interval(hass, "44:44:33:11:23:42")
+```
+
+If there is no learned interval or fallback interval for the device, a hardcoded safe default interval is used:
+
+```python
+from homeassistant.components import bluetooth
+
+default_fallback_interval = bluetooth.FALLBACK_MAXIMUM_STALE_ADVERTISEMENT_SECONDS
+```
+
+
 ### Fetching the bleak `BLEDevice` from the `address`
 
 Integrations should avoid the overhead of starting an additional scanner to resolve the address by calling the `bluetooth.async_ble_device_from_address` API, which returns a `BLEDevice` for the nearest configured `bluetooth` adapter that can reach the device. If no adapters can reach the device, the `bluetooth.async_ble_device_from_address` API, will return `None`.
