@@ -107,9 +107,7 @@ cancel = bluetooth.async_track_unavailable(hass, _unavailable_callback, "44:44:3
 
 ### Finding out the availability timeout
 
-There is no availability timeout for connectable devices - a device must be connectable by at least one `connectable` controller or unavailable.
-
-For non-connectable devices, availability is based on the time since the device's last known broadcast. This timeout is learned automatically based on the device's regular broadcasting pattern. You can find out this with the `bluetooth.async_get_learned_advertising_interval` API.
+Availability is based on the time since the device's last known broadcast. This timeout is learned automatically based on the device's regular broadcasting pattern. You can find out this with the `bluetooth.async_get_learned_advertising_interval` API.
 
 ```python
 from homeassistant.components import bluetooth
