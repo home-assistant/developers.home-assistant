@@ -105,7 +105,7 @@ def _unavailable_callback(info: bluetooth.BluetoothServiceInfoBleak) -> None:
 cancel = bluetooth.async_track_unavailable(hass, _unavailable_callback, "44:44:33:11:23:42", connectable=True)
 ```
 
-### Finding out the unavailability timeout
+### Finding out the availability timeout
 
 For connectable devices there is no unavailability timeout - a device must be connectable by at least one `connectable` controller or it is unavailable.
 
