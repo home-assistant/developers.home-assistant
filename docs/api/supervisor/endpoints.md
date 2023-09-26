@@ -2303,11 +2303,11 @@ If running on a green board, returns current values for its settings.
 
 **Returned data:**
 
-| key           | type    | description                  |
-| ------------- | ------- | ---------------------------- |
-| activity_led  | boolean | Is the activity LED enabled  |
-| power_led     | boolean | Is the power LED enabled     |
-| user_led      | boolean | Is the user LED enabled      |
+| key               | type    | description                             |
+| ----------------- | ------- | --------------------------------------- |
+| activity_led      | boolean | Is the green activity LED enabled       |
+| power_led         | boolean | Is the white power LED enabled          |
+| system_health_led | boolean | Is the yellow system health LED enabled |
 
 **Example response:**
 
@@ -2315,7 +2315,7 @@ If running on a green board, returns current values for its settings.
 {
   "activity_led": true,
   "power_led": true,
-  "user_led": false
+  "system_health_led": false
 }
 ```
 
@@ -2327,11 +2327,11 @@ If running on a green board, changes one or more of its settings.
 
 **Payload:**
 
-| key           | type    | description                      |
-| ------------- | ------- | -------------------------------- |
-| activity_led  | boolean | Enable/disable the activity LED  |
-| power_led     | boolean | Enable/disable the heartbeat LED |
-| user_led      | boolean | Enable/disable the power LED     |
+| key               | type    | description                                 |
+| ----------------- | ------- | ------------------------------------------- |
+| activity_led      | boolean | Enable/disable the green activity LED       |
+| power_led         | boolean | Enable/disable the white power LED          |
+| system_health_led | boolean | Enable/disable the yellow system health LED |
 
 </ApiEndpoint>
 
