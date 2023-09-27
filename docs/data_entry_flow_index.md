@@ -319,7 +319,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         )
 ```
 
-Note: A user can change their password, which technically makes it mutable data, but for changing authentication credentials, you use [reauthentication](/config_entries_config_flow_handler), which can mutate the config entry data.
+Note: A user can change their password, which technically makes it mutable data, but for changing authentication credentials, you use [reauthentication](/docs/config_entries_config_flow_handler#reauthentication), which can mutate the config entry data.
 
 ### Abort
 
