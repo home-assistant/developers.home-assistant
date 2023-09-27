@@ -302,7 +302,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
 
 ### Create Entry
 
-When the result is "Create Entry", an entry will be created and passed to the parent of the flow manager. A success message is shown to the user and the flow is finished. You create an entry by passing a title and data. The title can be used in the UI to indicate to the user which entry it is. Data can be any data type, as long as it is JSON serializable.
+When the result is "Create Entry", an entry will be created and passed to the parent of the flow manager. A success message is shown to the user and the flow is finished. You create an entry by passing a title, data and optionally options. The title can be used in the UI to indicate to the user which entry it is. Data and options can be any data type, as long as they are JSON serializable. Options are used for mutable data, for example a radius. Whilst Data is used for immutable data that isn't going to change in an entry, for example location data.
 
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
@@ -310,10 +310,16 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         return self.async_create_entry(
             title="Title of the entry",
             data={
-                "something_special": user_input["username"]
+                "username": user_input["username"],
+                "password": user_input["password"]
+            },
+            options={
+                "mobile_number": user_input["mobile_number"]
             },
         )
 ```
+
+Note: A user can change their password, which technically makes it mutable data, but for changing authentication credentials, you use [reauthentication](/docs/config_entries_config_flow_handler#reauthentication), which can mutate the config entry data.
 
 ### Abort
 
