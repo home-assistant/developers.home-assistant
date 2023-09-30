@@ -763,12 +763,13 @@ Create a full backup.
 
 **Payload:**
 
-| key        | type           | optional | description                                    |
-| ---------- | -------------- | -------- | ---------------------------------------------- |
-| name       | string         | True     | The name you want to give the backup           |
-| password   | string         | True     | The password you want to give the backup       |
-| compressed | boolean        | True     | `false` to create uncompressed backups         |
-| location   | string or null | True     | Name of a backup mount or `null` for /backup   |
+| key                            | type           | optional | description                                          |
+| ------------------------------ | -------------- | -------- | ---------------------------------------------------- |
+| name                           | string         | True     | The name you want to give the backup                 |
+| password                       | string         | True     | The password you want to give the backup             |
+| compressed                     | boolean        | True     | `false` to create uncompressed backups               |
+| location                       | string or null | True     | Name of a backup mount or `null` for /backup         |
+| homeassistant_exclude_database | boolean        | True     | Exclude the Home Assistant database file from backup |
 
 **Example response:**
 
@@ -800,15 +801,16 @@ Create a partial backup.
 
 **Payload:**
 
-| key           | type           | optional | description                                    |
-| ------------- | -------------- | -------- | ---------------------------------------------- |
-| name          | string         | True     | The name you want to give the backup           |
-| password      | string         | True     | The password you want to give the backup       |
-| homeassistant | boolean        | True     | Add home assistant core settings to the backup |
-| addons        | list           | True     | A list of strings representing add-on slugs    |
-| folders       | list           | True     | A list of strings representing directories     |
-| compressed    | boolean        | True     | `false` to create uncompressed backups         |
-| location      | string or null | True     | Name of a backup mount or `null` for /backup   |
+| key                            | type           | optional | description                                          |
+| ------------------------------ | -------------- | -------- | ---------------------------------------------------- |
+| name                           | string         | True     | The name you want to give the backup                 |
+| password                       | string         | True     | The password you want to give the backup             |
+| homeassistant                  | boolean        | True     | Add home assistant core settings to the backup       |
+| addons                         | list           | True     | A list of strings representing add-on slugs          |
+| folders                        | list           | True     | A list of strings representing directories           |
+| compressed                     | boolean        | True     | `false` to create uncompressed backups               |
+| location                       | string or null | True     | Name of a backup mount or `null` for /backup         |
+| homeassistant_exclude_database | boolean        | True     | Exclude the Home Assistant database file from backup |
 
 **You need to supply at least one key in the payload.**
 
@@ -990,22 +992,24 @@ Returns information about the Home Assistant core
 
 **Returned data:**
 
-| key              | type           | description                                                |
-| ---------------- | -------------- | ---------------------------------------------------------- |
-| version          | string         | The installed core version                                 |
-| version_latest   | string         | The latest published version in the active channel         |
-| update_available | boolean        | `true` if an update is available                           |
-| arch             | string         | The architecture of the host (armhf, aarch64, i386, amd64) |
-| machine          | string         | The machine type that is running the host                  |
-| ip_address       | string         | The internal docker IP address to the supervisor           |
-| image            | string         | The container image that is running the core               |
-| boot             | boolean        | `true` if it should start on boot                          |
-| port             | int            | The port Home Assistant is running on                      |
-| ssl              | boolean        | `true` if Home Assistant is using SSL                      |
-| watchdog         | boolean        | `true` if watchdog is enabled                              |
-| wait_boot        | int            | Max time to wait during boot                               |
-| audio_input      | string or null | The description of the audio input device                  |
-| audio_output     | string or null | The description of the audio output device                 |
+| key                      | type           | description                                                |
+| ------------------------ | -------------- | ---------------------------------------------------------- |
+| version                  | string         | The installed core version                                 |
+| version_latest           | string         | The latest published version in the active channel         |
+| update_available         | boolean        | `true` if an update is available                           |
+| arch                     | string         | The architecture of the host (armhf, aarch64, i386, amd64) |
+| machine                  | string         | The machine type that is running the host                  |
+| ip_address               | string         | The internal docker IP address to the supervisor           |
+| image                    | string         | The container image that is running the core               |
+| boot                     | boolean        | `true` if it should start on boot                          |
+| port                     | int            | The port Home Assistant is running on                      |
+| ssl                      | boolean        | `true` if Home Assistant is using SSL                      |
+| watchdog                 | boolean        | `true` if watchdog is enabled                              |
+| wait_boot                | int            | Max time to wait during boot                               |
+| audio_input              | string or null | The description of the audio input device                  |
+| audio_output             | string or null | The description of the audio output device                 |
+| backups_exclude_database | boolean        | Backups exclude Home Assistant database file by default    |
+
 
 **Example response:**
 
@@ -1044,17 +1048,18 @@ Passing `image`, `refresh_token`, `audio_input` or `audio_output` with `null` re
 
 **Payload:**
 
-| key            | type           | description                         |
-| -------------- | -------------- | ----------------------------------- |
-| boot           | boolean        | Start Core on boot                  |
-| image          | string or null | Name of custom image                |
-| port           | int            | The port that Home Assistant run on |
-| ssl            | boolean        | `true` to enable SSL                |
-| watchdog       | boolean        | `true` to enable the watchdog       |
-| wait_boot      | int            | Time to wait for Core to startup    |
-| refresh_token  | string or null | Token to authenticate with Core     |
-| audio_input    | string or null | Profile name for audio input        |
-| audio_output   | string or null | Profile name for audio output       |
+| key                      | type           | description                                                 |
+| ------------------------ | -------------- | ----------------------------------------------------------- |
+| boot                     | boolean        | Start Core on boot                                          |
+| image                    | string or null | Name of custom image                                        |
+| port                     | int            | The port that Home Assistant run on                         |
+| ssl                      | boolean        | `true` to enable SSL                                        |
+| watchdog                 | boolean        | `true` to enable the watchdog                               |
+| wait_boot                | int            | Time to wait for Core to startup                            |
+| refresh_token            | string or null | Token to authenticate with Core                             |
+| audio_input              | string or null | Profile name for audio input                                |
+| audio_output             | string or null | Profile name for audio output                               |
+| backups_exclude_database | boolean        | `true` to exclude Home Assistant database file from backups |
 
 **You need to supply at least one key in the payload.**
 
