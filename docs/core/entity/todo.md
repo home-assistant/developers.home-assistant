@@ -14,7 +14,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name  | Type          | Default               | Description                                             |
 | ----- | ------------- | --------------------- | ------------------------------------------------------- |
-| todo_items | <code>list[TodoItem] | None</code> | **Required** | The ordered contents of the To-do list. |
+| todo_items | <code>list[TodoItem]</code> or <code>None</code> | **Required** | The ordered contents of the To-do list. |
 
 ### States
 
