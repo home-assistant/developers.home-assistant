@@ -6,7 +6,7 @@ authorTwitter: frenck
 title: Home Assistant is participating in Hacktoberfest 2023!
 ---
 
-📢 Exciting News for Hacktoberfest 2023 participants! We participating! 🎉
+📢 Exciting news for Hacktoberfest 2023 participants! We participating! 🎉
 
 It is not just our [10th anniversary](https://www.home-assistant.io/blog/2023/09/17/10-years-home-assistant/), but also the 10th year of Hacktoberfest! Congratulations! 🎂
 
