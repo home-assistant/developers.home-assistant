@@ -18,7 +18,7 @@ Just like all other years, Home Assistant participates in Hacktoberfest. All of 
 
 If you are not a developer, new to git, GitHub or open source in general, documentation can be a great way to get started. A relatively easy way to contribute, is by reviewing the documentation of integrations you use or are familiar with, checking if everything is still up to date and is free of spelling/grammar mistakes.
 
-Every single documentation page on our website has a “Edit this page on GitHub”, on the top right corner. Using that link, you can change the text on that page and provide a suggestion for improvement.
+Every single documentation page on our website has a “Edit” button, at the buttom of the page. Using that button, you can change the text on that page and provide a suggestion for improvement.
 
 On our Community forum, there is a good, step-by-step, guide on how this works: [Editing the Documentation and Creating a Pull Request on GitHub](https://community.home-assistant.io/t/editing-the-documentation-and-creating-a-pull-request-on-github/9573).
 
