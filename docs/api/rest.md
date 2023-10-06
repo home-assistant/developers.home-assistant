@@ -201,7 +201,7 @@ Returns an array of state changes in the past. Each object contains further deta
 
 The `<timestamp>` (`YYYY-MM-DDThh:mm:ssTZD`) is optional and defaults to 1 day before the time of the request. It determines the beginning of the period.
 
-The following parameters are required:
+The following parameters are **required**:
 	
 - `filter_entity_id=<entity_ids>` to filter on one or more entities - comma separated.
 	
@@ -281,31 +281,28 @@ Example with `minimal_response`
 Sample `curl` commands:
 
 ```shell
+# History of the entity 'sensor.temperature' of the past day (default)
 curl \
   -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" \
-  http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00
+  "http://localhost:8123/api/history/period?filter_entity_id=sensor.temperature"
 ```
 
 ```shell
+# Minimal history of the entity 'sensor.temperature' and 'sensor.kitchen_temperature' of the past day where the beginning date is set manually to 2023-09-04
 curl \
   -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" \
-  "http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00?minimal_response"
+  "http://localhost:8123/api/history/period/2023-09-04T00:00:00+02:00?filter_entity_id=sensor.temperature,sensor.kitchen_temperature&minimal_response"
 ```
 
 ```shell
+# History of the entity 'sensor.temperature' during the period from 2021-09-04 to 2023-09-04
+# Using URL encoded timestamps
 curl \
   -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" \
-  "http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00?filter_entity_id=sensor.temperature"
-```
-
-```shell
-curl \
-  -H "Authorization: Bearer TOKEN" \
-  -H "Content-Type: application/json" \
-  "http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00?end_time=2016-12-31T00%3A00%3A00%2B02%3A00"
+  "http://localhost:8123/api/history/period/2021-09-04T00%3A00%3A00%2B02%3A00?end_time=2023-09-04T00%3A00%3A00%2B02%3A00&filter_entity_id=sensor.temperature"
 ```
 
 </ApiEndpoint>
