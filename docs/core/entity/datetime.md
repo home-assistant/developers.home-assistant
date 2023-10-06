@@ -13,7 +13,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| native_value | <code>datetime &#124; None</code> | **Required** | The value of the datetime. Must include timezone info.
+| native_value | <code>datetime.datetime &#124; None</code> | **Required** | The value of the datetime. Must include timezone info.
 
 Other properties that are common to all entities such as `icon`, `name` etc are also applicable.
 
