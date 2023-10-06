@@ -2289,11 +2289,49 @@ If running on a yellow board, changes one or more of its settings.
 
 **Payload:**
 
-| key           | type    | description                              |
-| ------------- | ------- | ---------------------------------------- |
-| disk_led      | boolean | Enable/disable disk LED enabled          |
-| heartbeat_led | boolean | Enable/disable the heartbeat LED enabled |
-| power_led     | boolean | Enable/disable the power LED enabled     |
+| key           | type    | description                      |
+| ------------- | ------- | ---------------------------------|
+| disk_led      | boolean | Enable/disable the disk LED      |
+| heartbeat_led | boolean | Enable/disable the heartbeat LED |
+| power_led     | boolean | Enable/disable the power LED     |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/os/boards/green" method="get">
+
+If running on a green board, returns current values for its settings.
+
+**Returned data:**
+
+| key               | type    | description                             |
+| ----------------- | ------- | --------------------------------------- |
+| activity_led      | boolean | Is the green activity LED enabled       |
+| power_led         | boolean | Is the white power LED enabled          |
+| system_health_led | boolean | Is the yellow system health LED enabled |
+
+**Example response:**
+
+```json
+{
+  "activity_led": true,
+  "power_led": true,
+  "system_health_led": false
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/os/boards/green" method="post">
+
+If running on a green board, changes one or more of its settings.
+
+**Payload:**
+
+| key               | type    | description                                 |
+| ----------------- | ------- | ------------------------------------------- |
+| activity_led      | boolean | Enable/disable the green activity LED       |
+| power_led         | boolean | Enable/disable the white power LED          |
+| system_health_led | boolean | Enable/disable the yellow system health LED |
 
 </ApiEndpoint>
 
