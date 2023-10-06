@@ -4,10 +4,6 @@ title: "WebSocket API"
 
 Home Assistant hosts a WebSocket API at `/api/websocket`. This API can be used to stream information from a Home Assistant instance to any client that implements WebSockets. We maintain a [JavaScript library](https://github.com/home-assistant/home-assistant-js-websocket) which we use in our frontend.
 
-The WebSocket API uses the same port as the web frontend. (default port is port 8123).
-- `http://IP_ADDRESS:8123/` is an interface to control Home Assistant.
-- `ws://IP_ADDRESS:8123/api/websocket` is the WebSocket endpoint
-
 ## Server states
 
 1. Client connects.
