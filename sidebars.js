@@ -272,7 +272,12 @@ module.exports = {
     {
       type: "category",
       label: "Building a Python library",
-      items: ["api_lib_index", "api_lib_auth", "api_lib_data_models"],
+      items: [
+        "api_lib_index",
+        "api_lib_auth",
+        "api_lib_data_models",
+        "api_lib_testing",
+      ],
     },
     {
       type: "category",
