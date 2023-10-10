@@ -26,9 +26,9 @@ The following input fields are available:
 
 | Name              | Type   | Description                                                                                                                                                                                                                                                                                    |
 |-------------------|--------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| `start_stage`     | enum   | Required. The first stage to run. One of `wake` `stt`, `intent`, `tts`.                                                                                                                                                                                                                        |
+| `start_stage`     | enum   | Required. The first stage to run. One of `wake_word`, `stt`, `intent`, `tts`.                                                                                                                                                                                                                        |
 | `end_stage`       | enum   | Required. The last stage to run. One of `stt`, `intent`, `tts`.                                                                                                                                                                                                                                |
-| `input`           | dict   | Depends on `start_stage`: <ul><li>`wake` only:<ul><li>`timeout` - seconds before wake word detection times out (int, default: 3)</li><li>`noise_suppression_level` - amount of noise suppression (int, 0 = disabled, 4 = max)</li><li>`auto_gain_dbfs` - automatic gain (int, 0 = disabled, 31 = max)</li><li>`volume_multiplier` - fixed volume amplification (float, 1.0 = no change, 2.0 = twice as loud)</li></ul></li><li>`wake` and `stt`:<ul><li>`sample_rate` - sample rate of incoming audio (int, hertz)</li></ul></li><li>`intent` and `tts`:<ul><li>`text` - input text (string)</li></ul></li></ul> |
+| `input`           | dict   | Depends on `start_stage`: <ul><li>`wake_word` only:<ul><li>`timeout` - seconds before wake word detection times out (int, default: 3)</li><li>`noise_suppression_level` - amount of noise suppression (int, 0 = disabled, 4 = max)</li><li>`auto_gain_dbfs` - automatic gain (int, 0 = disabled, 31 = max)</li><li>`volume_multiplier` - fixed volume amplification (float, 1.0 = no change, 2.0 = twice as loud)</li></ul></li><li>`wake_word` and `stt`:<ul><li>`sample_rate` - sample rate of incoming audio (int, hertz)</li></ul></li><li>`intent` and `tts`:<ul><li>`text` - input text (string)</li></ul></li></ul> |
 | `pipeline`        | string | Optional. ID of the pipeline (use `assist_pipeline/pipeline/list` to get names).                                                                                                                                                                                                               |
 | `conversation_id` | string | Optional. [Unique id for conversation](/docs/intent_conversation_api#conversation-id).                                                                                                                                                                                                         |
 | `timeout`         | number | Optional. Number of seconds before pipeline times out (default: 300).                                                                                                                                                                                                                           |
@@ -90,14 +90,14 @@ To indicate the end of sending speech data, send a binary message containing a s
 
 ## Wake word detection
 
-When `start_stage` is set to `wake`, the pipeline will not run until a wake word has been detected. Clients should avoid unnecessary audio streaming by using a local voice activity detector (VAD) to only start streaming when human speech is detected.
+When `start_stage` is set to `wake_word`, the pipeline will not run until a wake word has been detected. Clients should avoid unnecessary audio streaming by using a local voice activity detector (VAD) to only start streaming when human speech is detected.
 
-For `wake`, the `input` object should contain a `timeout` float value. This is the number of seconds of silence before the pipeline will time out during wake word detection (error code `wake-word-timeout`).
+For `wake_word`, the `input` object should contain a `timeout` float value. This is the number of seconds of silence before the pipeline will time out during wake word detection (error code `wake-word-timeout`).
 If enough speech is detected by Home Assistant's internal VAD, the timeout will be continually reset.
 
 ### Audio Enhancements
 
-The following settings are available as part of the `input` object when `start_stage` is set to `wake`:
+The following settings are available as part of the `input` object when `start_stage` is set to `wake_word`:
 
 * `noise_suppression_level` - level of noise suppression (0 = disabled, 4 = max)
 * `auto_gain_dbfs` - automatic gain control (0 = disabled, 31 = max)
