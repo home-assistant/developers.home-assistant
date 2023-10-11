@@ -10,4 +10,4 @@ The change introduce in [core PR#101762](https://github.com/home-assistant/core/
 
 ### Potential future follow-up
 
-Make it possible to enable logging stack trace for HomeAssistantError also on stable builds
+Make it possible to enable logging stack trace for HomeAssistantError also on stable builds.
