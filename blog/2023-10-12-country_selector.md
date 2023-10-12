@@ -20,5 +20,4 @@ DATA_SCHEMA = vol.Schema(
         ),
     }
 )
-
 ```
