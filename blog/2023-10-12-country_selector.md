@@ -11,7 +11,7 @@ Using this in [config flows](/docs/data_entry_flow_index#show-form) will allow f
 Example:
 
 ```python
-DATA_SCHEMA = vol.Schema(
+vol.Schema(
     {
         vol.Optional(CONF_COUNTRY): CountrySelector(
             CountrySelectorConfig(
