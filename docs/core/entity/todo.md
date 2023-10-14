@@ -65,8 +65,7 @@ class MyTodoListEntity(TodoListEntity):
 
 ### Delete To-do items
 
-A To-do list entity may support deleting To-do items by specifying the `DELETE_TODO_ITEM` supported feature. Integrations must support deleting
-multiple items.
+A To-do list entity may support deleting To-do items by specifying the `DELETE_TODO_ITEM` supported feature. Integrations must support deleting multiple items.
 
 ```python
 from homeassistant.components.todo import TodoListEntity
@@ -79,7 +78,8 @@ class MyTodoListEntity(TodoListEntity):
 
 ### Update To-do items
 
-A To-do list entity may support updating To-do items by specifying the `UPDATE_TODO_ITEM` supported feature. 
+A To-do list entity may support updating To-do items by specifying the `UPDATE_TODO_ITEM` supported feature. This method performs a partial update so only present fields of the `TodoItem`
+should be changed.
 
 ```python
 from homeassistant.components.todo import TodoListEntity
@@ -92,14 +92,15 @@ class MyTodoListEntity(TodoListEntity):
 
 ### Move To-do items
 
-A To-do list entity may support re-ordering To-do items in the list by specifying the `MOVE_TODO_ITEM` supported feature. 
+A To-do list entity may support re-ordering To-do items in the list by specifying the `MOVE_TODO_ITEM` supported feature. The To-do item with the specified `uid` should be moved after the To-do
+item specified by `previous_uid` or to the front of the list if `None`.
 
 ```python
 from homeassistant.components.todo import TodoListEntity
 
 class MyTodoListEntity(TodoListEntity):
 
-    async def async_move_todo_item(self, uid: str, previous: str | None) -> None:
+    async def async_move_todo_item(self, uid: str, previous_uid: str | None) -> None:
         """Move an item in the To-do list."""
 ```
 
@@ -109,6 +110,6 @@ A `TodoItem` represents an individual item on a To-do list.
 
 | Name        | Type             | Default      | Description                                                                                                                                     |
 | ----------- | ---------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| summary     | string           | **Required** | A title or summary of the To-do item.
 | uid | string | `None` | A unique identifier for the to-do item (required for mutations)
-| status | `TodoItemStatus` | `NEEDS_ACTION` | Defines the overall status for the To-do item, either `NEEDS_ACTION` or `COMPLETE`
+| summary     | string           | `None` | A title or summary of the To-do item.
+| status | `TodoItemStatus` | `None` | Defines the overall status for the To-do item, either `NEEDS_ACTION` or `COMPLETE`
