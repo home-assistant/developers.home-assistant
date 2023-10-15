@@ -286,7 +286,7 @@ If your integration provides entities under its domain, you will want to transla
 
 ```json
 {
-  "entity_component" {
+  "entity_component": {
     "problem": {
       "state": {
         "off": "OK",
