@@ -59,6 +59,24 @@ If the Dev Container was set up correctly - it supports debugging by default, ou
 
 It is also possible to debug a remote Home Assistance instance (e.g., production instance) by following the procedure described [here](https://www.home-assistant.io/integrations/debugpy/).
 
+### Use devcontainer from WSL
+
+With WSL, you won't run into as many path issues because of the '/' and '\' differences between Linux and Windows. 
+This is handy when working on frontend code and using `script/develop`, since it's using stuff that works best on Linux.
+
+**Prerequisites**
+
+- [Docker](https://docs.docker.com/get-docker/)
+- [Visual Studio code](https://code.visualstudio.com/)
+- WSL + A WSL Distribution of your choice (Note: The instructions will be based on Ubuntu). Refer to the "Developing on Windows" section below for further instructions and tips.
+
+1. Enable integration with your WSL distro, This can be done in Docker Desktop under Settings > Resources > WSL integration.
+2. Step 1. of "Getting started".
+3. Open the terminal of your WSL distro, and clone your fork with `git clone <url from your fork>`.
+4. Use the command `code core/` to open Visual Studio Code. In the bottom left corner you will see `WSL: <name of the distribution you are using>`.
+5. In Visual Studio Code press the f1 key and select `Dev Containers: Reopen in Container`. Visual Studio Code will reopen and in the bottom left corner you will see `Dev Container: Home Assistant Dev`.
+6. Step 6. of "Getting started".
+
 ## Manual Environment
 
 _You only need these instructions if you do not want to use devcontainers._
