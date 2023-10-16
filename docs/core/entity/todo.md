@@ -92,15 +92,15 @@ class MyTodoListEntity(TodoListEntity):
 
 ### Move To-do items
 
-A To-do list entity may support re-ordering To-do items in the list by specifying the `MOVE_TODO_ITEM` supported feature. The To-do item with the specified `uid` should be moved after the To-do
-item specified by `previous_uid` or to the front of the list if `None`.
+A To-do list entity may support re-ordering To-do items in the list by specifying the `MOVE_TODO_ITEM` supported feature. The To-do item with the specified `uid` should be moved to the position
+in the list specified by `pos` (`0` is the first position in the To-do list).
 
 ```python
 from homeassistant.components.todo import TodoListEntity
 
 class MyTodoListEntity(TodoListEntity):
 
-    async def async_move_todo_item(self, uid: str, previous_uid: str | None) -> None:
+    async def async_move_todo_item(self, uid: str, pos: int) -> None:
         """Move an item in the To-do list."""
 ```
 
