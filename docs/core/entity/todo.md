@@ -72,7 +72,7 @@ from homeassistant.components.todo import TodoListEntity
 
 class MyTodoListEntity(TodoListEntity):
 
-    async def async_delete_todo_items(self, uids: set[str]) -> None:
+    async def async_delete_todo_items(self, uids: list[str]) -> None:
         """Add an item to the To-do list."""
 ```
 
