@@ -9,12 +9,12 @@ To-do items which are ordered and have a status (complete or in progress). A to-
 ## Properties
 
 :::tip
-Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+Properties should only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
 | Name  | Type          | Default               | Description                                             |
 | ----- | ------------- | --------------------- | ------------------------------------------------------- |
-| todo_items | <code>list[TodoItem]</code> or <code>None</code> | **Required** | The ordered contents of the To-do list. |
+| todo_items | <code>list[TodoItem] &#124; None</code> | `None` | **Required.** The ordered contents of the To-do list. |
 
 ### States
 
@@ -34,25 +34,12 @@ and are combined using the bitwise or (`|`) operator.
 
 ## Methods
 
-### Get To-do items
-
-A To-do list entity can return To-do items, which are ordered by their position
-on the to-do list.
-
-```python
-import datetime
-from homeassistant.core import HomeAssistant
-from homeassistant.components.todo import TodoListEntity
-
-class MyTodoListEntity(TodoListEntity):
-
-    async def async_get_todo_items(self) -> list[TodoItem]:
-        """Get items in the To-do list."""
-```
 
 ### Create To-do items
 
-A To-do list entity may support creating To-do items by specifying the `CREATE_TODO_ITEM` supported feature.
+A To-do list entity may support creating To-do items by specifying the `CREATE_TODO_ITEM`
+supported feature. The `TodoItem` field `uid` will not be present since it is a
+unique identifier determined by the integration when the item is created.
 
 ```python
 from homeassistant.components.todo import TodoListEntity
@@ -65,7 +52,8 @@ class MyTodoListEntity(TodoListEntity):
 
 ### Delete To-do items
 
-A To-do list entity may support deleting To-do items by specifying the `DELETE_TODO_ITEM` supported feature. Integrations must support deleting multiple items.
+A To-do list entity may support deleting To-do items by specifying the `DELETE_TODO_ITEM`
+supported feature. Integrations must support deleting multiple items.
 
 ```python
 from homeassistant.components.todo import TodoListEntity
@@ -78,8 +66,10 @@ class MyTodoListEntity(TodoListEntity):
 
 ### Update To-do items
 
-A To-do list entity may support updating To-do items by specifying the `UPDATE_TODO_ITEM` supported feature. This method performs a partial update so only present fields of the `TodoItem`
-should be changed.
+A To-do list entity may support updating To-do items by specifying the `UPDATE_TODO_ITEM`
+supported feature. The `TodoItem` field `uid` is always present and indicates
+which item should be updated, and all other fields are optional. Integrations
+must support partial update.
 
 ```python
 from homeassistant.components.todo import TodoListEntity
@@ -92,8 +82,10 @@ class MyTodoListEntity(TodoListEntity):
 
 ### Move To-do items
 
-A To-do list entity may support re-ordering To-do items in the list by specifying the `MOVE_TODO_ITEM` supported feature. The To-do item with the specified `uid` should be moved to the position
-in the list specified by `pos` (`0` is the first position in the To-do list).
+A To-do list entity may support re-ordering To-do items in the list by specifying
+the `MOVE_TODO_ITEM` supported feature. The To-do item with the specified `uid`
+should be moved to the position in the list specified by `pos` (`0` is the first
+position in the To-do list).
 
 ```python
 from homeassistant.components.todo import TodoListEntity
@@ -106,10 +98,12 @@ class MyTodoListEntity(TodoListEntity):
 
 ## TodoItem
 
-A `TodoItem` represents an individual item on a To-do list.
+A `TodoItem` represents an individual item on a To-do list. The methods
+above describe any differences about which fields are optional on create or
+update.
 
 | Name        | Type             | Default      | Description                                                                                                                                     |
 | ----------- | ---------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| uid | string | `None` | A unique identifier for the to-do item (required for mutations)
-| summary     | string           | `None` | A title or summary of the To-do item.
-| status | `TodoItemStatus` | `None` | Defines the overall status for the To-do item, either `NEEDS_ACTION` or `COMPLETE`
+| uid | <code>string &#124; None</code> | `None` | **Required.** A unique identifier for the to-do item. This field is required for mutations.
+| summary     | <code>string &#124; None</code>  | `None` |  **Required.** A title or summary of the To-do item.
+| status | <code>TodoItemStatus &#124; None</code> | `None` |  **Required.** Defines the overall status for the To-do item, either `NEEDS_ACTION` or `COMPLETE`
