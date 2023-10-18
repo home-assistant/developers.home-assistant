@@ -20,31 +20,31 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Constant | Description
 | ----- | -----------
-| `BinarySensorDeviceClass.BATTERY` | On means low, Off means normal.
-| `BinarySensorDeviceClass.BATTERY_CHARGING` | On means charging, Off means not charging.
-| `BinarySensorDeviceClass.CO` | On means carbon monoxide detected, Off means no carbon monoxide (clear).
-| `BinarySensorDeviceClass.COLD` | On means cold, Off means normal.
-| `BinarySensorDeviceClass.CONNECTIVITY` | On means connected, Off means disconnected.
-| `BinarySensorDeviceClass.DOOR` | On means open, Off means closed.
-| `BinarySensorDeviceClass.GARAGE_DOOR` | On means open, Off means closed.
-| `BinarySensorDeviceClass.GAS` | On means gas detected, Off means no gas (clear).
-| `BinarySensorDeviceClass.HEAT` | On means hot, Off means normal.
-| `BinarySensorDeviceClass.LIGHT` | On means light detected, Off means no light.
-| `BinarySensorDeviceClass.LOCK` | On means open (unlocked), Off means closed (locked).
-| `BinarySensorDeviceClass.MOISTURE` | On means wet, Off means dry.
-| `BinarySensorDeviceClass.MOTION` | On means motion detected, Off means no motion (clear).
-| `BinarySensorDeviceClass.MOVING` | On means moving, Off means not moving (stopped).
-| `BinarySensorDeviceClass.OCCUPANCY` | On means occupied, Off means not occupied (clear).
-| `BinarySensorDeviceClass.OPENING` | On means open, Off means closed.
-| `BinarySensorDeviceClass.PLUG` | On means plugged in, Off means unplugged.
-| `BinarySensorDeviceClass.POWER` | On means power detected, Off means no power.
-| `BinarySensorDeviceClass.PRESENCE` | On means home, Off means away.
-| `BinarySensorDeviceClass.PROBLEM` | On means problem detected, Off means no problem (OK).
-| `BinarySensorDeviceClass.RUNNING` | On means running, Off means not running.
-| `BinarySensorDeviceClass.SAFETY` | On means unsafe, Off means safe.
-| `BinarySensorDeviceClass.SMOKE` | On means smoke detected, Off means no smoke (clear).
-| `BinarySensorDeviceClass.SOUND` | On means sound detected, Off means no sound (clear).
-| `BinarySensorDeviceClass.TAMPER` | On means tampering detected, Off means no tampering (clear)
-| `BinarySensorDeviceClass.UPDATE` | On means update available, Off means up-to-date. The use of this device class should be avoided, please consider using the [`update`](/docs/core/entity/update) entity instead.
-| `BinarySensorDeviceClass.VIBRATION` | On means vibration detected, Off means no vibration.
-| `BinarySensorDeviceClass.WINDOW` | On means open, Off means closed.
+| `BinarySensorDeviceClass.BATTERY` | on means low, off means normal.
+| `BinarySensorDeviceClass.BATTERY_CHARGING` | on means charging, off means not charging.
+| `BinarySensorDeviceClass.CO` | on means carbon monoxide detected, off means no carbon monoxide (clear).
+| `BinarySensorDeviceClass.COLD` | on means cold, off means normal.
+| `BinarySensorDeviceClass.CONNECTIVITY` | on means connected, off means disconnected.
+| `BinarySensorDeviceClass.DOOR` | on means open, off means closed.
+| `BinarySensorDeviceClass.GARAGE_DOOR` | on means open, off means closed.
+| `BinarySensorDeviceClass.GAS` | on means gas detected, off means no gas (clear).
+| `BinarySensorDeviceClass.HEAT` | on means hot, off means normal.
+| `BinarySensorDeviceClass.LIGHT` | on means light detected, off means no light.
+| `BinarySensorDeviceClass.LOCK` | on means open (unlocked), off means closed (locked).
+| `BinarySensorDeviceClass.MOISTURE` | on means wet, off means dry.
+| `BinarySensorDeviceClass.MOTION` | on means motion detected, off means no motion (clear).
+| `BinarySensorDeviceClass.MOVING` | on means moving, off means not moving (stopped).
+| `BinarySensorDeviceClass.OCCUPANCY` | on means occupied, off means not occupied (clear).
+| `BinarySensorDeviceClass.OPENING` | on means open, off means closed.
+| `BinarySensorDeviceClass.PLUG` | on means plugged in, off means unplugged.
+| `BinarySensorDeviceClass.POWER` | on means power detected, off means no power.
+| `BinarySensorDeviceClass.PRESENCE` | on means home, off means away.
+| `BinarySensorDeviceClass.PROBLEM` | on means problem detected, off means no problem (OK).
+| `BinarySensorDeviceClass.RUNNING` | on means running, off means not running.
+| `BinarySensorDeviceClass.SAFETY` | on means unsafe, off means safe.
+| `BinarySensorDeviceClass.SMOKE` | on means smoke detected, off means no smoke (clear).
+| `BinarySensorDeviceClass.SOUND` | on means sound detected, off means no sound (clear).
+| `BinarySensorDeviceClass.TAMPER` | on means tampering detected, off means no tampering (clear)
+| `BinarySensorDeviceClass.UPDATE` | on means update available, off means up-to-date. The use of this device class should be avoided, please consider using the [`update`](/docs/core/entity/update) entity instead.
+| `BinarySensorDeviceClass.VIBRATION` | on means vibration detected, off means no vibration.
+| `BinarySensorDeviceClass.WINDOW` | on means open, off means closed.
