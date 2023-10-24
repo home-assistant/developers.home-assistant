@@ -115,7 +115,9 @@ map:
 image: repo/{arch}-my-custom-addon
 ```
 
-Note:  Avoid the use of this filename for anything other than add-on configuration, as the Supervisor does a recursive lookup.
+:::note
+Avoid using `config.yaml` as filename in your add-on for anything other than the add-on configuration. The Supervisor does a recursively search for `config.yaml` in the add-on repository.
+::
 
 ### Required configuration options
 
