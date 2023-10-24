@@ -5,7 +5,7 @@ title: "Integration Quality Scale"
 The Integration Quality Scale scores each integration based on the code quality and user experience. Each level of the quality scale consists of a list of requirements. If an integration matches all requirements, it's considered to have reached that level.
 
 :::info
-Suggestions for changes can be done by creating an issue in the [architecture repo](https://github.com/home-assistant/architecture/issues/).
+Suggestions for changes can be done by creating an issue in the [architecture repo](https://github.com/home-assistant/architecture/discussions).
 :::
 
 ## No score
