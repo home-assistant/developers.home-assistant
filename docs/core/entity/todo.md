@@ -38,8 +38,7 @@ and are combined using the bitwise or (`|`) operator.
 ### Create To-do items
 
 A To-do list entity may support creating To-do items by specifying the `CREATE_TODO_ITEM`
-supported feature. The `TodoItem` field `uid` will not be present since it is a
-unique identifier determined by the integration when the item is created.
+supported feature.
 
 ```python
 from homeassistant.components.todo import TodoListEntity
@@ -104,6 +103,6 @@ update.
 
 | Name        | Type             | Default      | Description                                                                                                                                     |
 | ----------- | ---------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| uid | <code>string &#124; None</code> | `None` | **Required.** A unique identifier for the to-do item. This field is required for mutations.
-| summary     | <code>string &#124; None</code>  | `None` |  **Required.** A title or summary of the To-do item.
-| status | <code>TodoItemStatus &#124; None</code> | `None` |  **Required.** Defines the overall status for the To-do item, either `NEEDS_ACTION` or `COMPLETE`
+| uid | <code>string &#124; None</code> | `None` | A unique identifier for the to-do item. This field is required for updates and the entity state.
+| summary     | <code>string &#124; None</code>  | `None` | A title or summary of the To-do item. This field is required for the entity state.
+| status | <code>TodoItemStatus &#124; None</code> | `None` | Defines the overall status for the To-do item, either `NEEDS_ACTION` or `COMPLETE`. This field is required for the entity state.
