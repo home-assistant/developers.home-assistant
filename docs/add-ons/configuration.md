@@ -117,7 +117,7 @@ image: repo/{arch}-my-custom-addon
 
 :::note
 Avoid using `config.yaml` as filename in your add-on for anything other than the add-on configuration. The Supervisor does a recursively search for `config.yaml` in the add-on repository.
-::
+:::
 
 ### Required configuration options
 
@@ -212,11 +212,11 @@ size: 15
 count: 1.2
 ```
 
-::note
+:::note
 If you remove a configuration option from an add-on already deployed to users, it is recommended to delete the option to avoid a warning like `Option '<options_key>' does not exist in the schema for <Add-on Name> (<add-on slug>)`.
 
 To remove an option the Supervisor addons API can be used. Using bashio this boils down to `bashio::addon.option '<options_key>'` (without additional argument to delete this option key). Typically this should be called inside an if block checking if the option is still set using `bashio::config.exists '<options_key>'`.
-::
+:::
 
 
 The `schema` looks like `options` but describes how we should validate the user input. For example:
