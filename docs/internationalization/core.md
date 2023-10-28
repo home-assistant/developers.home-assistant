@@ -13,6 +13,7 @@ The `strings.json` contains translations for different things that the integrati
 | `title`             | Title of the integration.                         |
 | `config`            | Translations for the config flow.                 |
 | `device_automation` | Translations for device automations.              |
+| `exceptions`        | Translations for for error messages.              |
 | `issues`            | Translations for repairs issues.                  |
 | `options`           | Translations for the options flow.                |
 | `selectors`         | Selectors of the integration.                     |
@@ -158,6 +159,43 @@ The translation strings for device automations are defined under the `device_aut
 }
 
 ```
+
+### Exceptions
+
+Localization is supported for `HomeAssistantError`, `ConditionError`, `DependencyError`, `IntegrationError`,`InvalidEntityFormatError`, `MaxLengthExceeded`, `NoEntitySpecifiedError`, 
+`ServiceValidationError`, `TemplateError` and `Unauthorize`.
+The translation strings for exceptions are defined under the `exception` key. An example strings file below describes the different supported keys.
+
+```json
+{
+  "exceptions": {
+    // Translations for known exceptions
+    "invalid_index": {
+      "message": "Invalid index selected, expected [0,1,2]. Got {index}"
+    }
+  }
+}
+
+```
+
+Example of raising exception with localization during a service call:
+
+```python
+async def async_select_index(hass: HomeAssistant, index: int) -> None:
+    """Setup the config entry for my device."""
+    try:
+        check_index(index)
+    except ValueError as ex:
+        raise ServiceValidationError(
+            message,
+            translation_domain=DOMAIN,
+            translation_key="invalid_index",
+            translation_placeholders={
+                "index": index,
+            },
+        ) from ex
+```
+
 
 ### Issues
 

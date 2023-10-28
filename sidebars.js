@@ -108,6 +108,7 @@ module.exports = {
         "creating_platform_index",
         "creating_component_generic_discovery",
         "integration_fetching_data",
+        "integration_handling_exceptions",
         "integration_setup_failures",
         "integration_events",
         "integration_listen_events",
