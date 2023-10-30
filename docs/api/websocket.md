@@ -525,3 +525,41 @@ If an error occurs, the `success` key in the `result` message will be set to `fa
    }
 }
 ```
+
+When calling a web service and in case an exception occurs, error `code` key can be one of the following:
+
+- `id_reuse`: The request ID was reused.
+- `invalid_format`: An `vol.Invalid` was raised.
+- `not_found`: The requested service was not found.
+- `not_supported`: The requested action is not supported.
+- `unknown_command`: An unknown command was used.
+- `unknown_error`: An unknown error occurred.
+- `unauthorized`: The request was not authorized.
+- `timeout`: The request was timed out.
+- `template_error`: A template error occurred.
+
+When an integration raises an exception, `code` will be one of the following:
+
+- `service_validation_error`: A `ServiceValidationError` exception was raised. A stack trace is printed to the logs at debug level only.
+- `home_assistant_error`: A `HomeAssistantError` or subclass exception was raised. A full stack trace is printed to the logs.
+
+In these cases translations are supported. When a `translation_key` is set by the caller of the exception this, the keys `translation_domain` and `translation_placeholders` will be added to the error response.
+
+```json
+{
+   "id": 24,
+   "type":"result",
+   "success": false,
+   "error": {
+      "code": "service_validation_error",
+      "message": "Option 'custom' is not a supported mode.",
+      "translation_key": "unsupported_mode",
+      "translation_domain": "kitchen_sink",
+      "translation_placeholders": {
+        "mode": "custom"
+      }
+   }
+}
+```
+
+[Read more](/docs/integration_handling_exceptions) about handling exceptions or and the [localization of exceptions](/docs/internationalization/core/#exceptions).
