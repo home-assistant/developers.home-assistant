@@ -526,24 +526,11 @@ If an error occurs, the `success` key in the `result` message will be set to `fa
 }
 ```
 
-When calling a web service and in case an exception occurs, error `code` key can be one of the following:
+### Error handling during service calls and translations
 
-- `id_reuse`: The request ID was reused.
-- `invalid_format`: An `vol.Invalid` was raised.
-- `not_found`: The requested service was not found.
-- `not_supported`: The requested action is not supported.
-- `unknown_command`: An unknown command was used.
-- `unknown_error`: An unknown error occurred.
-- `unauthorized`: The request was not authorized.
-- `timeout`: The request was timed out.
-- `template_error`: A template error occurred.
+When a `ServiceValidationError` (`service_validation_error`) exception was raised during a websocket service call. A stack trace is printed to the logs at debug level only. Raising `HomeAssistantError` (`home_assistant_error`) or subclass exception will still print a full stack trace to the logs.
 
-When an integration raises an exception, `code` will be one of the following:
-
-- `service_validation_error`: A `ServiceValidationError` exception was raised. A stack trace is printed to the logs at debug level only.
-- `home_assistant_error`: A `HomeAssistantError` or subclass exception was raised. A full stack trace is printed to the logs.
-
-In these cases translations are supported. When a `translation_key` is set by the caller of the exception this, the keys `translation_domain` and `translation_placeholders` will be added to the error response.
+During a websocket service calls translations are supported for `HomeAssistantError` and its subclasses. When a `translation_key` is set by the caller of the exception this, the keys `translation_domain` and `translation_placeholders` will be added to the error response.
 
 ```json
 {
@@ -562,4 +549,4 @@ In these cases translations are supported. When a `translation_key` is set by th
 }
 ```
 
-[Read more](/docs/integration_handling_exceptions) about handling exceptions or and the [localization of exceptions](/docs/internationalization/core/#exceptions).
+[Read more](/docs/core/platform/handling_exceptions) about handling exceptions or and the [localization of exceptions](/docs/internationalization/core/#exceptions).
