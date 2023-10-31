@@ -335,6 +335,8 @@ class ExampleSensorEntity(SensorEntity):
                 LOGGER.warning("Update failed for %s", self.entity_id)
             self._attr_available = False  # Set property value
             return
+
+        self._attr_available = True
         # We don't need to check if device available here
         self._attr_native_value = self.entity_description.value_fn(
             self._device
