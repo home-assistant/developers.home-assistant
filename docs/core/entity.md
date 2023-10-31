@@ -313,6 +313,7 @@ async def async_setup_entry(
 class ExampleSensorEntity(SensorEntity):
     """Represent an Example sensor."""
 
+    entity_description: ExampleSensorEntityDescription
     _attr_entity_category = (
         EntityCategory.DIAGNOSTIC
     )  # This will be common to all instances of ExampleSensorEntity
