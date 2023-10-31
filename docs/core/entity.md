@@ -237,6 +237,8 @@ If an integration needs to access its own properties it should access the proper
 
 The third way of setting entity properties is to use an entity description. To do this set an attribute named `entity_description` on the `Entity` instance with an `EntityDescription` instance. The entity description is a dataclass with attributes corresponding to most of the available `Entity` properties. Each entity integration that supports an entity platform, eg the `switch` integration, will define their own `EntityDescription` subclass that should be used by implementing platforms that want to use entity descriptions.
 
+By default the `EntityDescription` instance has one required attribute named `key`. This is a string which is meant to be unique for all the entity descriptions of an implementing platform. A common use case for this attribute is to include it in the `unique_id` of the described entity.
+
 The main benefit of using entity descriptions is that it defines the different entity types of a platform in a declarative manner, making the code much easier to read when there are many different entity types.
 
 ### Example
@@ -325,6 +327,7 @@ class ExampleSensorEntity(SensorEntity):
         self._device = device
         self.entity_description = entity_description
         self._attr_available = False  # This overrides the default
+        self._attr_unique_id = f"{device.serial}_{entity_description.key}"
 
     def update(self) -> None:
         """Update entity state."""
