@@ -237,7 +237,7 @@ If an integration needs to access its own properties it should access the proper
 
 The third way of setting entity properties is to use an entity description. To do this set an attribute named `entity_description` on the `Entity` instance with an `EntityDescription` instance. The entity description is a dataclass with attributes corresponding to most of the available `Entity` properties. Each entity integration that supports an entity platform, eg the `switch` integration, will define their own `EntityDescription` subclass that should be used by implementing platforms that want to use entity descriptions.
 
-The main benefit of using entity descriptions is that it allows to define the different entity types of a platform in a declarative manner, making the code much easier to read when there are many different entity types.
+The main benefit of using entity descriptions is that it defines the different entity types of a platform in a declarative manner, making the code much easier to read when there are many different entity types.
 
 ### Example
 
