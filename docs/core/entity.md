@@ -249,7 +249,7 @@ from __future__ import annotations
 from collections.abc import Callable
 from dataclasses import dataclass
 
-from example import ExampleException, ExampleDevice
+from example import ExampleDevice, ExampleException
 
 from homeassistant.components.sensor import (
     SensorDeviceClass,
