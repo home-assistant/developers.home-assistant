@@ -83,7 +83,7 @@ class MyTodoListEntity(TodoListEntity):
 
 A To-do list entity may support re-ordering To-do items in the list by specifying
 the `MOVE_TODO_ITEM` supported feature. The To-do item with the specified `uid`
-should be moved to the position in the list after the specified by `previous_uid` (`None` is the first
+should be moved to the position in the list after the one specified by `previous_uid` (`None` means move to the first
 position in the To-do list).
 
 ```python
