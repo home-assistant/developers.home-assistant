@@ -33,7 +33,7 @@ Note that:
   - Fetch the image once when a page with an image entity is loaded
   - Refetch the image when the image entity's state changed by the image entity changing `image_last_updated`
 
-This means it's incorrect to bump the `image_last_updated` property inside `async def async_image`. Instead, the image entity should, when an updated image is available or periodically if the image should be refetched after some time, update the `imae_last_updated` timestamp. This can for example happen as part of an entity coordinator update.
+This means it's incorrect to bump the `image_last_updated` property inside `async def async_image`. Instead, the image entity should, when an updated image is available or periodically if the image should be refetched after some time, update the `image_last_updated` timestamp. This can for example happen as part of an entity coordinator update.
 
 ```python
 class MyImage(ImageEntity):
