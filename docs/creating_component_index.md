@@ -37,8 +37,18 @@ async def async_setup(hass, config):
     # Return boolean to indicate that initialization was successful.
     return True
 ```
+Create a file `<config_dir>/custom_components/hello_state/__init__.py` with one of the two codeblocks.
+In addition a manifest file is required with below keys as the bare minimum. Create `<config_dir>/custom_components/hello_state/manifest.json`.
 
-To load this, add `hello_state:` to your `configuration.yaml` file and create a file `<config_dir>/custom_components/hello_state/__init__.py` with one of the two codeblocks above to test it locally.
+```json
+{
+  "domain": "hello_state",
+  "name": "Hello, state!",
+  "version": "0.1.0"
+}
+```
+
+To load this, add `hello_state:` to your `configuration.yaml` file. 
 
 ## What the scaffold offers
 

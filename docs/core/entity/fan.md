@@ -13,14 +13,13 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| current_direction | str | `None` | Return the current direction of the fan |
-| is_on | boolean | `None` |Return true if the entity is on |
-| oscillating | boolean | None | Return true if the fan is oscillating |
-| percentage | int | `None` | Return the current speed percentage. Must be a value between 0 (off) and 100 |
-| speed_count | int | 100 | The number of speeds the fan supports |
-| supported_features | int | 0 | Flag supported features |
-| preset_mode | str | `None` | Return the current preset_mode. One of the values in `preset_modes` or `None` if no preset is active. |
-| preset_modes | list | `None` | Get the list of available preset_modes. This is an arbitrary list of str and should not contain any speeds. |
+| current_direction  | <code>str &#124; None</code>       | `None` | The current direction of the fan.                                                                       |
+| is_on              | <code>bool &#124; None</code>      | `None` | True if the fan is on.                                                                                  |
+| oscillating        | <code>bool &#124; None</code>       | `None` | True if the fan is oscillating.                                                                         |
+| percentage         | <code>int &#124; None</code>       | `0`    | The current speed percentage. Must be a value between 0 (off) and 100.                                  |
+| preset_mode        | <code>str &#124; None</code>       | `None` | The current preset_mode. One of the values in `preset_modes` or `None` if no preset is active.          |
+| preset_modes       | <code>list[str] &#124; None</code> | `None` | The list of supported preset_modes. This is an arbitrary list of str and should not contain any speeds. |
+| speed_count        | `int`                              | 100    | The number of speeds the fan supports.                                                                  |
 
 ### Preset Modes
 

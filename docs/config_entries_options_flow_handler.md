@@ -1,6 +1,5 @@
 ---
-title: Integration Configuration Options
-sidebar_label: Configuration Options
+title: Options Flow
 ---
 
 An integration that is configured via a config entry can expose options to the user to allow tweaking behavior of the integration, like which devices or locations should be integrated.

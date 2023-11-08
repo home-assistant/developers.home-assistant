@@ -6,11 +6,11 @@ When a user first opens the app, they will need to connect to their local instan
 
 ## Authenticating the user
 
-The local instance can be discovered if Home Assistant has the [zeroconf component] configured by searching for `_home-assistant._tcp.local.`. If not configured, the user will need to be asked for the local address of their instance.
+The local instance can be discovered if Home Assistant has the [zeroconf integration] configured by searching for `_home-assistant._tcp.local.`. If not configured, the user will need to be asked for the local address of their instance.
 
 When the address of the instance is known, the app will ask the user to authenticate via [OAuth2 with Home Assistant]. Home Assistant uses IndieAuth, which means that to be able to redirect to a url that triggers your app, you need to take some extra steps. Make sure to read the last paragraph of the "Clients" section thoroughly.
 
-[zeroconf component]: https://www.home-assistant.io/components/zeroconf
+[zeroconf integration]: https://www.home-assistant.io/integrations/zeroconf
 [OAuth2 with Home Assistant]: auth_api.md
 
 ## Registering the device
@@ -19,13 +19,13 @@ _This requires Home Assistant 0.90 or later._
 
 Home Assistant has a `mobile_app` component that allows applications to register themselves and interact with the instance. This is a generic component to handle most common mobile application tasks. This component is extendable with custom interactions if your app needs more types of interactions than are offered by this component.
 
-Once you have tokens to authenticate as a user, it's time to register the app with the mobile app component in Home Assistant.
+Once you have tokens to authenticate as a user, it's time to register the app with the mobile app integration in Home Assistant.
 
 ### Getting Ready
 
-First, you must ensure that the `mobile_app` component is loaded. There are two ways to do this:
+First, you must ensure that the `mobile_app` integration is loaded. There are two ways to do this:
 
-- You can publish a Zeroconf/Bonjour record `_hass-mobile-app._tcp.local.` to trigger the automatic load of the `mobile_app` component. You should wait at least 60 seconds after publishing the record before continuing.
+- You can publish a Zeroconf/Bonjour record `_hass-mobile-app._tcp.local.` to trigger the automatic load of the `mobile_app` integration. You should wait at least 60 seconds after publishing the record before continuing.
 - You can ask the user to add `mobile_app` to their configuration.yaml and restart Home Assistant. If the user already has `default_config` in their configuration, then `mobile_app` will have been already loaded.
 
 You can confirm the `mobile_app` component has been loaded by checking the `components` array of the [`/api/config` REST API call](/api/rest.md#get-apiconfig). If you continue to device registration and receive a 404 status code, then it most likely hasn't been loaded yet.

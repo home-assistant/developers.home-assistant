@@ -95,7 +95,11 @@ class MyCoordinator(DataUpdateCoordinator):
             # Note: asyncio.TimeoutError and aiohttp.ClientError are already
             # handled by the data update coordinator.
             async with async_timeout.timeout(10):
-                return await self.my_api.fetch_data()
+                # Grab active context variables to limit data required to be fetched from API
+                # Note: using context is not required if there is no need or ability to limit
+                # data retrieved from API.
+                listening_idx = set(self.async_contexts())
+                return await self.my_api.fetch_data(listening_idx)
         except ApiAuthError as err:
             # Raising ConfigEntryAuthFailed will cancel future updates
             # and start a config flow with SOURCE_REAUTH (async_step_reauth)
@@ -117,7 +121,7 @@ class MyEntity(CoordinatorEntity, LightEntity):
 
     def __init__(self, coordinator, idx):
         """Pass coordinator to CoordinatorEntity."""
-        super().__init__(coordinator)
+        super().__init__(coordinator, context=idx)
         self.idx = idx
 
     @callback
@@ -144,9 +148,9 @@ Some APIs will offer an endpoint per device. It sometimes won't be possible to m
 
 If you can map exactly one device endpoint to a single entity, you can fetch the data for this entity inside the `update()`/`async_update()` methods. Make sure polling is set to `True` and Home Assistant will call this method regularly.
 
-If your entities need to fetch data before being written to Home Assistant for the first time, pass `True` to the `add_entities` method: `add_entities([MyEntity()], True)`.
+If your entities need to fetch data before being written to Home Assistant for the first time, pass `update_before_add=True` to the `add_entities` method: `add_entities([MyEntity()], update_before_add=True)`.
 
-You can control the polling interval for your integration by defining a `SCAN_INTERVAL` constant in your platform. Careful with setting this too low. It will take up resources in Home Assistant, can overwhelm the device hosting the API or can get you blocked from cloud APIs.
+You can control the polling interval for your integration by defining a `SCAN_INTERVAL` constant in your platform. Careful with setting this too low. It will take up resources in Home Assistant, can overwhelm the device hosting the API or can get you blocked from cloud APIs. The minimum allowed value is 5 seconds.
 
 ```python
 from datetime import timedelta

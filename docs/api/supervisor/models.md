@@ -190,18 +190,20 @@ The `content` key of a backup object contains the following keys:
 
 ## Backup details
 
-| key           | type    | description                                                                                                                |
-| ------------- | ------- | -------------------------------------------------------------------------------------------------------------------------- |
-| slug          | string  | A generated slug for the backup                                                                                          |
-| type          | string  | The type of backup (full, partial)                                                                                       |
-| name          | string  | The name given to the backup                                                                                             |
-| date          | string  | ISO date string representation of the date the backup was created                                                      |
-| size          | string  | The size of the backup in MB                                                                                             |
-| protected     | boolean | `true` if the backup is password protected                                                                               |
-| homeassistant | string  | The version of Home Assistant that was in use                                                                              |
-| addons        | list    | A list of add-ons in the backup, addons are represented as a dictionary with these keys [`slug`,`name`,`version`,`size`] |
-| repositories  | list    | A list of add-on repository URL's as strings                                                                               |
-| folders       | list    | A list of strings representing directories                                                                                 |
+| key                            | type           | description                                                                                                               |
+| ------------------------------ | -------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| slug                           | string         | A generated slug for the backup                                                                                           |
+| type                           | string         | The type of backup (full, partial)                                                                                        |
+| name                           | string         | The name given to the backup                                                                                              |
+| date                           | string         | ISO date string representation of the date the backup was created                                                         |
+| size                           | string         | The size of the backup in MB                                                                                              |
+| protected                      | boolean        | `true` if the backup is password protected                                                                                |
+| location                       | string or null | The name of the backup mount it's stored on.  `null` if it's stored locally.                                              |
+| homeassistant                  | string         | The version of Home Assistant that was in use                                                                             |
+| addons                         | list           | A list of add-ons in the backup. Add-ons are represented as a dictionary with these keys [`slug`,`name`,`version`,`size`] |
+| repositories                   | list           | A list of add-on repository URL's as strings                                                                              |
+| folders                        | list           | A list of strings representing directories                                                                                |
+| homeassistant_exclude_database | boolean        | `true` if the Home Assistant database file was excluded from this backup                                                  |
 
 ## Stats
 
@@ -254,3 +256,45 @@ The `content` key of a backup object contains the following keys:
 | by_id      | string or null | Udev by ID link                                                       |
 | attributes | dict           | A dict with pure udev device attributes for debug and understanding   |
 | children   | list           | A list of path to the children sysfs devices                          |
+
+## Disk
+
+| key        | type           | description                                                            |
+| ---------- | -------------- | ---------------------------------------------------------------------- |
+| name       | string         | Name of the disk device                                                |
+| vendor     | string         | Vendor of the disk device                                              |
+| model      | string         | Model of the disk device                                               |
+| serial     | string         | Serial number of the disk device                                       |
+| size       | int            | Size of disk in bytes                                                  |
+| id         | string         | Unique ID for the disk device (either UDisks2 drive ID or device path) |
+| dev_path   | string         | Device path for the disk device                                        |
+
+## Mount
+
+| key        | type           | description                                                            | request/response |
+| ---------- | -------------- | ---------------------------------------------------------------------- | ---------------- |
+| name       | string         | Name of the mount                                                      | both             |
+| type       | string         | Type of the mount (cifs or nfs)                                        | both             |
+| usage      | string         | Usage of the mount (backup, media, or share)                            | both             |
+| server     | string         | IP address or hostname of the network share server                     | both             |
+| port       | int            | Port to use (if not using the standard one for the mount type)         | both             |
+| path       | string         | (nfs mounts only) Path to mount from the network share                 | both             |
+| share      | string         | (cifs mounts only) Share to mount from the network share               | both             |
+| username   | string         | (cifs mounts only) Username to use for authentication                  | request only     |
+| password   | string         | (cifs mounts only) Password to use for authentication                  | request only     |
+| state      | string         | Current state of the mount (active, failed, etc.)                      | response only    |
+
+Request only fields may be included in requests but will never be in responses.
+Response only fields will be in responses but cannot be included in requests.
+
+## Job
+
+| key        | type    | description                                                   |
+| ---------- | ------- | ------------------------------------------------------------- |
+| name       | string  | Name of the job                                               |
+| reference  | string  | A unique ID for instance the job is acting on (if applicable) |
+| uuid       | string  | Unique ID of the job                                          |
+| progress   | int     | Progress of the job (if accurate progress is obtainable)      |
+| stage      | string  | A name for the stage the job is in (if applicable)            |
+| done       | boolean | Is the job complete                                           |
+| child_jobs | list    | A list of child [jobs](#job) started by this one              |

@@ -11,16 +11,17 @@ A camera entity can display images, and optionally a video stream. Derive a plat
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
-| Name                     | Type  | Default | Description                                                                                                             |
-| ------------------------ | ----- | ------- | ----------------------------------------------------------------------------------------------------------------------- |
-| is_recording             | bool  | `None`  | Indication of whether the camera is recording. Used to determine `state`.                                               |
-| is_streaming             | bool  | `None`  | Indication of whether the camera is streaming. Used to determine `state`.                                               |
-| motion_detection_enabled | bool  | False   | Indication of whether the camera has motion detection enabled.                                                          |
-| is_on                    | bool  | `None`  | Indication camera is on.                                                                                                |
-| brand                    | str   | `None`  | The brand (manufacturer) of the camera.                                                                                 |
-| model                    | str   | `None`  | The model of the camera.                                                                                                |
-| frame_interval           | float | 0.5     | The interval between frames of the stream.                                                                              |
-| frontend_stream_type     | str   | None    | Used with `CameraEntityFeature.STREAM` to tell the frontend which type of stream to use (`StreamType.HLS` or `StreamType.WEB_RTC`)  |
+| Name                     | Type                                | Default | Description                                                                                         |
+| ------------------------ | ------------------------------------| ------- | --------------------------------------------------------------------------------------------------- |
+| brand                    | <code>str &#124; None</code>        | `None`  | The brand (manufacturer) of the camera.                                                             |
+| frame_interval           | `float`                             | 0.5     | The interval between frames of the stream.                                                          |
+| frontend_stream_type     | <code>StreamType &#124; None</code> | `None`  | Used with `CameraEntityFeature.STREAM` to tell the frontend which type of stream to use (`StreamType.HLS` or `StreamType.WEB_RTC`) |
+| is_on                    | `bool`                              | `True`  | Indication of whether the camera is on.                                                             |
+| is_recording             | `bool`                              | `False` | Indication of whether the camera is recording. Used to determine `state`.                           |
+| is_streaming             | `bool`                              | `False` | Indication of whether the camera is streaming. Used to determine `state`.                           |
+| model                    | <code>str &#124; None</code>        | `None`  | The model of the camera.                                                                            |
+| motion_detection_enabled | `bool`                              | `False` | Indication of whether the camera has motion detection enabled.                                      |
+| use_stream_for_stills    | `bool`                              | `False` | Determines whether or not to use the `Stream` integration to generate still images                  |
 
 ## Supported Features
 

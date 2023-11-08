@@ -10,14 +10,12 @@ Once restarted, you can put files in this directory. Each file will be accessibl
 
 The next step is to register these resources with the Home Assistant interface. This is done by navigating to the Resources page by following below link:
 
-[![Open your Home Assistant instance and show your resources.](https://my.home-assistant.io/badges/lovelace_resources.svg)](https://my.home-assistant.io/redirect/lovelace_resources/)
+[![Open your Home Assistant instance and show your resources.](https://my.home-assistant.io/badges/lovelace_resources.svg)](https://my.home-assistant.io/redirect/lovelace_dashboards/) (Note: Once redirected, click the three dots menu in the top-right.)
 
 :::note
 
-This tab is only available when the active user's profile has "advanced mode" enabled.
+This area is only available when the active user's profile has "advanced mode" enabled.
 
 :::
-
-![Screenshot of the Resources tab, found at the top of the Dashboards configuration UI](/img/en/frontend/dashboards-resources-tab.png)
 
 ![Screenshot of the Advanced Mode selector found on the Profile page](/img/en/frontend/frontend-profile-advanced-mode.png)

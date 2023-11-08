@@ -13,14 +13,16 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| state | string | **Required** | One of the states listed in the **states** section.
-| code_format | string | `None` | One of the states listed in the **code formats** section.
-| changed_by | string | `None` | Last change triggered by.
+| state | <code>str &#124; None</code> | **Required** | One of the states listed in the **states**.
+| code_arm_required | bool | `True` | Whether the code is required for arm actions.
+| code_format | <code>CodeFormat &#124; None</code> | `None` | One of the states listed in the **code formats** section.
+| changed_by | <code>str &#124; None</code> | `None` | Last change triggered by.
 
 ### States
 
 | Value | Description
 | ----- | -----------
+| `None` | Unknown state.
 | `disarmed` | The alarm is disarmed (`off`).
 | `armed_home` | The alarm is armed in home mode.
 | `armed_away` | The alarm is armed in away mode.

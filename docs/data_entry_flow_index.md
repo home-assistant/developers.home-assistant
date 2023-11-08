@@ -4,7 +4,7 @@ title: Data Entry Flow
 
 Data Entry Flow is a data entry framework that is part of Home Assistant. Data entry is done via data entry flows. A flow can represent a simple login form or a multi-step setup wizard for a component. A Flow Manager manages all flows that are in progress and handles creation of new flows.
 
-Data Entry Flow is used in Home Assistant to create config entries.
+Data Entry Flow is used in Home Assistant to login, create config entries, handle options flow, repair issues.
 
 ## Flow Manager
 
@@ -230,6 +230,26 @@ The other alternative is to use a suggested value - this will also pre-fill the 
 
 You can also mix and match - pre-fill through `suggested_value`, and use a different value for `default` in case the field is left empty, but that could be confusing to the user so use carefully.
 
+Using suggested values also make it possible to declare a static schema, and merge suggested values from existing input. A `add_suggested_values_to_schema` helper makes this possible:
+
+```python
+OPTIONS_SCHEMA = vol.Schema(
+    {
+        vol.Optional("field_name", default="default value"): str,
+    }
+)
+
+class ExampleOptionsFlow(config_entries.OptionsFlow):
+    async def async_step_init(
+        self, user_input: dict[str, Any] | None = None
+    ) -> FlowResult:
+        return self.async_show_form(
+            data_schema = self.add_suggested_values_to_schema(
+                OPTIONS_SCHEMA, self.entry.options
+            )
+        )
+```
+
 #### Validation
 
 After the user has filled in the form, the step method will be called again and the user input is passed in. Your step will only be called if the user input passes your data schema. When the user passes in data, you will have to do extra validation of the data. For example, you can verify that the passed in username and password are valid.
@@ -282,7 +302,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
 
 ### Create Entry
 
-When the result is "Create Entry", an entry will be created and passed to the parent of the flow manager. A success message is shown to the user and the flow is finished. You create an entry by passing a title and data. The title can be used in the UI to indicate to the user which entry it is. Data can be any data type, as long as it is JSON serializable.
+When the result is "Create Entry", an entry will be created and passed to the parent of the flow manager. A success message is shown to the user and the flow is finished. You create an entry by passing a title, data and optionally options. The title can be used in the UI to indicate to the user which entry it is. Data and options can be any data type, as long as they are JSON serializable. Options are used for mutable data, for example a radius. Whilst Data is used for immutable data that isn't going to change in an entry, for example location data.
 
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
@@ -290,10 +310,16 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         return self.async_create_entry(
             title="Title of the entry",
             data={
-                "something_special": user_input["username"]
+                "username": user_input["username"],
+                "password": user_input["password"]
+            },
+            options={
+                "mobile_number": user_input["mobile_number"]
             },
         )
 ```
+
+Note: A user can change their password, which technically makes it mutable data, but for changing authentication credentials, you use [reauthentication](/docs/config_entries_config_flow_handler#reauthentication), which can mutate the config entry data.
 
 ### Abort
 
@@ -425,6 +451,23 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if not user_input:
             return self.async_show_form(step_id="finish")
         return self.async_create_entry(title="Some title", data={})
+```
+
+Note: If the user closes the flow, the `async_remove` callback will be called. Make sure to implement this method in your FlowHandler to clean up any resources or tasks associated with the flow.
+
+```python
+class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
+    ...
+
+    @callback
+    def async_remove(self):
+        """Clean up resources or tasks associated with the flow."""
+        if self.task_one:
+            self.task_one.cancel()
+            
+        if self.task_two:
+            self.task_two.cancel()
+        ...
 ```
 
 ### Show Menu

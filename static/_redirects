@@ -10,6 +10,7 @@
 /docs/app_integration_webview /docs/api/native-app-integration/webview
 /docs/architecture_entities /docs/core/entity
 /docs/architecture_hassio /docs/supervisor
+/docs/dev_101_index /docs/dev_101_hass
 /docs/documentation_create_page /docs/documenting/create-page
 /docs/documentation_index /docs/documenting
 /docs/documentation_standards /docs/documenting/standards
@@ -59,11 +60,11 @@
 /docs/internationalization_index /docs/internationalization
 /docs/internationalization_translation /docs/translations
 /docs/internationalization_translation.html /docs/translations
+/docs/issue_registry_index /docs/platform/repairs
 /docs/lovelace_custom_card /docs/frontend/custom-ui/lovelace-custom-card
-/docs/supervisor/developing /docs/supervisor/development
-/docs/dev_101_index /docs/dev_101_hass
 /docs/reproduce_state_index /docs/core/platform/reproduce_state
 /docs/significant_change_index /docs/core/platform/significant_change
+/docs/supervisor/developing /docs/supervisor/development
 
 
 # Tidying moved pages

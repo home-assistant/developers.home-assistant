@@ -6,7 +6,7 @@ To ensure that the documentation for Home Assistant is consistent and easy to fo
 
 ## General Documentation
 
-Broadly speaking documentation should be written following Microsoft's house style, which is detailed [here](https://docs.microsoft.com/en-us/style-guide).
+Broadly speaking documentation should be written following Microsoft's house style, which is detailed [here](https://learn.microsoft.com/style-guide/welcome/).
 
 - The language of the documentation should be American-English.
 - Don't put two spaces after a period.
@@ -61,6 +61,47 @@ We have a separate styling guide for YAML and the use of Jinja2 templates
 inside that YAML.
 
 [YAML Style Guide](documenting/yaml-style-guide.md)
+
+## Glossary & Terminology Tooltips
+
+The documentation should be written in a way that is understandable for
+everyone. To help with that, we have a [glossary of terms](https://www.home-assistant.io/docs/glossary/)
+that are used across Home Assistant, including our documentation.
+
+If you use a term that is not in the glossary, feel free to add; or improve
+the definition of an existing term.
+
+Additionally, we have a terminology tooltip available, that can be added and
+works everywhere in the documentation. This tooltip will show a definition
+of the term when the user hovers over it with a link for more information.
+It provides instant context to terminology an user might not be familiar with.
+
+The syntax for adding terminology tooltips is:
+
+```liquid
+{% term <term> [<text>] %}
+```
+
+The term referenced must, of course, be listed in our glossary, which is the
+source for the tooltips.
+
+For example, if you write a text about automations, you could add a tooltip
+like this:
+
+```liquid
+This is an example text about {% term automations %}, which is used
+to demonstrate the use of tooltips, in this case, for the term
+"automations" earlier in this sentence.
+```
+
+The `<text>` is optional and can be useful if you want to add a terminology
+tooltip to a piece of text that differs from the term itself. In the following
+example the automation term tooltip is added to the "automate everything" text:
+
+```liquid
+Awesome, because this allowed me to {% term automation "automate everything" %}
+in my home! I love it!
+```
 
 ## Renaming Pages
 

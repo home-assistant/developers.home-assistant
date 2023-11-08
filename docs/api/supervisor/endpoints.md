@@ -108,6 +108,7 @@ Get details about an add-on
 | host_ipc            | boolean            | `true` if host ipc access is granted is enabled                                        |
 | host_network        | boolean            | `true` if host network access is granted is enabled                                    |
 | host_pid            | boolean            | `true` if host pid access is granted is enabled                                        |
+| host_uts            | boolean            | `true` if host UTS namespace access is enabled.                                        |
 | hostname            | string             | The host name of the add-on                                                            |
 | icon                | boolean            | `true` if icon is available                                                            |
 | ingress             | boolean            | `true` if ingress is enabled                                                           |
@@ -182,6 +183,7 @@ Get details about an add-on
   "host_ipc": false,
   "host_network": false,
   "host_pid": false,
+  "host_uts": false,
   "hostname": "awesome-addon",
   "icon": false,
   "ingress_entry": null,
@@ -261,7 +263,7 @@ To reset customized network/audio/options, set it `null`.
 | options       | dictionary    | The add-on configuration                |
 | audio_output  | float or null | The index of the audio output device    |
 | audio_input   | float or null | The index of the audio input device     |
-| ingress_panel | string        | The path for the ingress panel          |
+| ingress_panel | boolean       | `true` if ingress_panel is enabled      |
 | watchdog      | boolean       | `true` if watchdog is enabled           |
 
 **You need to supply at least one key in the payload.**
@@ -703,6 +705,7 @@ Return a list of [Backups](api/supervisor/models.md#backup)
       "type": "partial",
       "size": 44,
       "protected": true,
+      "location": "MountedBackups",
       "compressed": true,
       "content": {
         "homeassistant": true,
@@ -740,6 +743,7 @@ Return information about backup manager.
       "size": 44,
       "protected": true,
       "compressed": true,
+      "location": null,
       "content": {
         "homeassistant": true,
         "addons": ["awesome_addon"],
@@ -759,11 +763,13 @@ Create a full backup.
 
 **Payload:**
 
-| key        | type    | optional | description                              |
-| ---------- | ------- | -------- | -----------------------------------------|
-| name       | string  | True     | The name you want to give the backup     |
-| password   | string  | True     | The password you want to give the backup |
-| compressed | boolean | True     | `false` to create uncompressed backups   |
+| key                            | type           | optional | description                                          |
+| ------------------------------ | -------------- | -------- | ---------------------------------------------------- |
+| name                           | string         | True     | The name you want to give the backup                 |
+| password                       | string         | True     | The password you want to give the backup             |
+| compressed                     | boolean        | True     | `false` to create uncompressed backups               |
+| location                       | string or null | True     | Name of a backup mount or `null` for /backup         |
+| homeassistant_exclude_database | boolean        | True     | Exclude the Home Assistant database file from backup |
 
 **Example response:**
 
@@ -795,14 +801,16 @@ Create a partial backup.
 
 **Payload:**
 
-| key        | type    | optional | description                                 |
-| ---------- | ------- | -------- | ------------------------------------------- |
-| name       | string  | True     | The name you want to give the backup        |
-| password   | string  | True     | The password you want to give the backup    |
-| homeassistant   | boolean    | True | Add home assistant core settings to the backup |
-| addons     | list    | True     | A list of strings representing add-on slugs |
-| folders    | list    | True     | A list of strings representing directories  |
-| compressed | boolean | True     | `false` to create uncompressed backups      |
+| key                            | type           | optional | description                                          |
+| ------------------------------ | -------------- | -------- | ---------------------------------------------------- |
+| name                           | string         | True     | The name you want to give the backup                 |
+| password                       | string         | True     | The password you want to give the backup             |
+| homeassistant                  | boolean        | True     | Add home assistant core settings to the backup       |
+| addons                         | list           | True     | A list of strings representing add-on slugs          |
+| folders                        | list           | True     | A list of strings representing directories           |
+| compressed                     | boolean        | True     | `false` to create uncompressed backups               |
+| location                       | string or null | True     | Name of a backup mount or `null` for /backup         |
+| homeassistant_exclude_database | boolean        | True     | Exclude the Home Assistant database file from backup |
 
 **You need to supply at least one key in the payload.**
 
@@ -832,6 +840,32 @@ Update options for backup manager, you need to supply at least one of the payloa
 <ApiEndpoint path="/backups/reload" method="post">
 
 Reload backup from storage.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/backups/freeze" method="post">
+
+Put Supervisor in a freeze state and prepare Home Assistant and addons for an external backup.
+
+:::note
+
+This does not take a backup. It prepares Home Assistant and addons for one but the expectation
+is that the user is using an external tool to make the backup. Such as the snapshot feature in
+KVM or Proxmox. The caller should call `/backups/thaw` when done.
+
+:::
+
+**Payload:**
+
+| key     | type  | optional | description                                                                   |
+| ------- | ----- | -------- | ----------------------------------------------------------------------------- |
+| timeout | int   | True     | Seconds before freeze times out and thaw begins automatically (default: 600). |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/backups/thaw" method="post">
+
+End a freeze initiated by `/backups/freeze` and resume normal behavior in Home Assistant and addons.
 
 </ApiEndpoint>
 
@@ -958,22 +992,24 @@ Returns information about the Home Assistant core
 
 **Returned data:**
 
-| key              | type           | description                                                |
-| ---------------- | -------------- | ---------------------------------------------------------- |
-| version          | string         | The installed core version                                 |
-| version_latest   | string         | The latest published version in the active channel         |
-| update_available | boolean        | `true` if an update is available                           |
-| arch             | string         | The architecture of the host (armhf, aarch64, i386, amd64) |
-| machine          | string         | The machine type that is running the host                  |
-| ip_address       | string         | The internal docker IP address to the supervisor           |
-| image            | string         | The container image that is running the core               |
-| boot             | boolean        | `true` if it should start on boot                          |
-| port             | int            | The port Home Assistant is running on                      |
-| ssl              | boolean        | `true` if Home Assistant is using SSL                      |
-| watchdog         | boolean        | `true` if watchdog is enabled                              |
-| wait_boot        | int            | Max time to wait during boot                               |
-| audio_input      | string or null | The description of the audio input device                  |
-| audio_output     | string or null | The description of the audio output device                 |
+| key                      | type           | description                                                |
+| ------------------------ | -------------- | ---------------------------------------------------------- |
+| version                  | string         | The installed core version                                 |
+| version_latest           | string         | The latest published version in the active channel         |
+| update_available         | boolean        | `true` if an update is available                           |
+| arch                     | string         | The architecture of the host (armhf, aarch64, i386, amd64) |
+| machine                  | string         | The machine type that is running the host                  |
+| ip_address               | string         | The internal docker IP address to the supervisor           |
+| image                    | string         | The container image that is running the core               |
+| boot                     | boolean        | `true` if it should start on boot                          |
+| port                     | int            | The port Home Assistant is running on                      |
+| ssl                      | boolean        | `true` if Home Assistant is using SSL                      |
+| watchdog                 | boolean        | `true` if watchdog is enabled                              |
+| wait_boot                | int            | Max time to wait during boot                               |
+| audio_input              | string or null | The description of the audio input device                  |
+| audio_output             | string or null | The description of the audio output device                 |
+| backups_exclude_database | boolean        | Backups exclude Home Assistant database file by default    |
+
 
 **Example response:**
 
@@ -1012,17 +1048,18 @@ Passing `image`, `refresh_token`, `audio_input` or `audio_output` with `null` re
 
 **Payload:**
 
-| key            | type           | description                         |
-| -------------- | -------------- | ----------------------------------- |
-| boot           | boolean        | Start Core on boot                  |
-| image          | string or null | Name of custom image                |
-| port           | int            | The port that Home Assistant run on |
-| ssl            | boolean        | `true` to enable SSL                |
-| watchdog       | boolean        | `true` to enable the watchdog       |
-| wait_boot      | int            | Time to wait for Core to startup    |
-| refresh_token  | string or null | Token to authenticate with Core     |
-| audio_input    | string or null | Profile name for audio input        |
-| audio_output   | string or null | Profile name for audio output       |
+| key                      | type           | description                                                 |
+| ------------------------ | -------------- | ----------------------------------------------------------- |
+| boot                     | boolean        | Start Core on boot                                          |
+| image                    | string or null | Name of custom image                                        |
+| port                     | int            | The port that Home Assistant run on                         |
+| ssl                      | boolean        | `true` to enable SSL                                        |
+| watchdog                 | boolean        | `true` to enable the watchdog                               |
+| wait_boot                | int            | Time to wait for Core to startup                            |
+| refresh_token            | string or null | Token to authenticate with Core                             |
+| audio_input              | string or null | Profile name for audio input                                |
+| audio_output             | string or null | Profile name for audio output                               |
+| backups_exclude_database | boolean        | `true` to exclude Home Assistant database file from backups |
 
 **You need to supply at least one key in the payload.**
 
@@ -1588,7 +1625,7 @@ Get information about host services.
 Shutdown the host
 </ApiEndpoint>
 
-### ingress
+### Ingress
 
 <ApiEndpoint path="/ingress/panels" method="get">
 
@@ -1618,6 +1655,12 @@ Shutdown the host
 <ApiEndpoint path="/ingress/session" method="post">
 Create a new session for access to the ingress service.
 
+**Payload:**
+
+| key      | type   | optional | description                                          |
+| -------- | ------ | -------- | ---------------------------------------------------- |
+| user_id  | string | True     | The ID of the user authenticated for the new session |
+
 **Returned data:**
 
 | key     | type   | optional | description                       |
@@ -1634,6 +1677,53 @@ Validate an ingress session, extending it's validity period.
 | key     | type   | optional | description                       |
 | ------- | ------ | -------- | --------------------------------- |
 | session | string | False    | The token for the ingress session |
+
+</ApiEndpoint>
+
+### Jobs
+
+<ApiEndpoint path="/jobs/info" method="get">
+Returns info on ignored job conditions and currently running jobs
+
+**Returned data:**
+
+| key               | type       | description                                                    |
+| ----------------- | ---------- | -------------------------------------------------------------- |
+| ignore_conditions | list       | List of job conditions being ignored                           |
+| jobs              | list       | List of currently running [Jobs](api/supervisor/models.md#job) |
+
+**Example response:**
+
+```json
+{
+  "ignore_conditions": [],
+  "jobs": [{
+    "name": "backup_manager_full_backup",
+    "reference": "a01bc3",
+    "uuid": "123456789",
+    "progress": 0,
+    "stage": "addons",
+    "done": false,
+    "child_jobs": []
+  }]
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/jobs/options" method="post">
+Set options for job manager
+
+**Payload:**
+
+| key               | type       | description                                               |
+| ----------------- | ---------- | --------------------------------------------------------- |
+| ignore_conditions | list       | List of job conditions to ignore (replaces existing list) |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/jobs/reset" method="post">
+Reset job manager to defaults (stops ignoring any ignored job conditions)
 
 </ApiEndpoint>
 
@@ -1734,6 +1824,110 @@ Returns a dict with selected keys from other `/*/info` endpoints.
   "timezone": "Europe/Tomorrowland"
 }
 ```
+
+</ApiEndpoint>
+
+### Mounts
+
+<ApiEndpoint path="/mounts" method="get">
+Returns information about mounts configured in Supervisor
+
+**Returned data:**
+
+| key                  | type           | description                                        |
+| -------------------- | -------------- | -------------------------------------------------- |
+| mounts               | list           | A list of [Mounts](api/supervisor/models.md#mount) |
+| default_backup_mount | string or null | Name of a backup mount or `null` for /backup       |
+
+**Example response:**
+
+```json
+{
+  "default_backup_mount": "my_share",
+  "mounts": [
+    {
+      "name": "my_share",
+      "usage": "media",
+      "type": "cifs",
+      "server": "server.local",
+      "share": "media",
+      "state": "active"
+    }
+  ]
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/mounts/options" method="post">
+Set mount manager options
+
+**Payload:**
+
+| key                  | type           | optional | description                                  |
+| -------------------- | -------------- | -------- | -------------------------------------------- |
+| default_backup_mount | string or null | True     | Name of a backup mount or `null` for /backup |
+
+**You need to supply at least one key in the payload.**
+
+</ApiEndpoint>
+
+
+<ApiEndpoint path="/mounts" method="post">
+Add a new mount in Supervisor and mount it
+
+**Payload:**
+
+Accepts a [Mount](api/supervisor/models.md#mount)
+
+Value in `name` must be unique and can only consist of letters, numbers and underscores.
+
+**Example payload:**
+
+```json
+{
+  "name": "my_share",
+  "usage": "media",
+  "type": "cifs",
+  "server": "server.local",
+  "share": "media",
+  "username": "admin",
+  "password": "password"
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/mounts/<name>" method="put">
+Update an existing mount in Supervisor and remount it
+
+**Payload:**
+
+Accepts a [Mount](api/supervisor/models.md#mount).
+
+The `name` field should be omitted. If included the value must match the existing
+name, it cannot be changed. Delete and re-add the mount to change the name.
+
+**Example payload:**
+
+```json
+{
+  "usage": "media",
+  "type": "nfs",
+  "server": "server.local",
+  "path": "/media/camera"
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/mounts/<name>" method="delete">
+Unmount and delete an existing mount from Supervisor.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/mounts/<name>/reload" method="post">
+Unmount and remount an existing mount in Supervisor using the same configuration.
 
 </ApiEndpoint>
 
@@ -2033,7 +2227,7 @@ Returns information about the OS.
   "update_available": true,
   "board": "ova",
   "boot": "slot1",
-  "data_disk": "/dev/sda"
+  "data_disk": "BJTD4R-0x123456789"
 }
 ```
 
@@ -2057,17 +2251,38 @@ Returns possible targets for the new data partition.
 
 **Returned data:**
 
-| key              | type    | description                                                  |
-| ---------------- | ------- | ------------------------------------------------------------ |
-| devices          | list    | List with devices paths of possible disk targets             |
+| key              | type    | description                                                                         |
+| ---------------- | ------- | ----------------------------------------------------------------------------------- |
+| devices          | list    | List of IDs of possible data disk targets                                           |
+| disks            | list    | List of [disks](api/supervisor/models.md#disk) which are possible data disk targets |
 
 **Example response:**
 
 ```json
 {
   "devices": [
-    "/dev/sda",
-    "/dev/sdb"
+    "Generic-Flash-Disk-123ABC456",
+    "SSK-SSK-Storage-ABC123DEF"
+  ],
+  "disks": [
+    {
+      "name": "Generic Flash Disk (123ABC456)",
+      "vendor": "Generic",
+      "model": "Flash Disk",
+      "serial": "123ABC456",
+      "size": 8054112256,
+      "id": "Generic-Flash-Disk-123ABC456",
+      "dev_path": "/dev/sda"
+    },
+    {
+      "name": "SSK SSK Storage (ABC123DEF)",
+      "vendor": "SSK",
+      "model": "SSK Storage",
+      "serial": "ABC123DEF",
+      "size": 250059350016,
+      "id": "SSK-SSK-Storage-ABC123DEF",
+      "dev_path": "/dev/sdb"
+    }
   ]
 }
 ```
@@ -2082,7 +2297,7 @@ Move datadisk to a new location, **This will also reboot the device!**
 
 | key     | type   | description                                                       |
 | ------- | ------ | ----------------------------------------------------------------- |
-| device  | string | Path to the new device which should be use as the target for the data migration |
+| device  | string | ID of the disk device which should be used as the target for the data migration |
 
 </ApiEndpoint>
 
@@ -2126,11 +2341,49 @@ If running on a yellow board, changes one or more of its settings.
 
 **Payload:**
 
-| key           | type    | description                              |
-| ------------- | ------- | ---------------------------------------- |
-| disk_led      | boolean | Enable/disable disk LED enabled          |
-| heartbeat_led | boolean | Enable/disable the heartbeat LED enabled |
-| power_led     | boolean | Enable/disable the power LED enabled     |
+| key           | type    | description                      |
+| ------------- | ------- | ---------------------------------|
+| disk_led      | boolean | Enable/disable the disk LED      |
+| heartbeat_led | boolean | Enable/disable the heartbeat LED |
+| power_led     | boolean | Enable/disable the power LED     |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/os/boards/green" method="get">
+
+If running on a green board, returns current values for its settings.
+
+**Returned data:**
+
+| key               | type    | description                             |
+| ----------------- | ------- | --------------------------------------- |
+| activity_led      | boolean | Is the green activity LED enabled       |
+| power_led         | boolean | Is the white power LED enabled          |
+| system_health_led | boolean | Is the yellow system health LED enabled |
+
+**Example response:**
+
+```json
+{
+  "activity_led": true,
+  "power_led": true,
+  "system_health_led": false
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/os/boards/green" method="post">
+
+If running on a green board, changes one or more of its settings.
+
+**Payload:**
+
+| key               | type    | description                                 |
+| ----------------- | ------- | ------------------------------------------- |
+| activity_led      | boolean | Enable/disable the green activity LED       |
+| power_led         | boolean | Enable/disable the white power LED          |
+| system_health_led | boolean | Enable/disable the yellow system health LED |
 
 </ApiEndpoint>
 

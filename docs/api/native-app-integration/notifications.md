@@ -2,7 +2,7 @@
 title: "Push Notifications"
 ---
 
-The `mobile_app` component has a notify platform built in that allows for a generic way to send push notifications to your users without requiring installation of an external custom component. Push notifications can either be delivered via a websocket connection or via a cloud service.
+The `mobile_app` integration has a notify platform built in that allows for a generic way to send push notifications to your users without requiring installation of an external custom component. Push notifications can either be delivered via a websocket connection or via a cloud service.
 
 ## Enabling websocket push notifications
 

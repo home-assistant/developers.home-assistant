@@ -10,7 +10,7 @@ Home Assistant has built-in helpers to support mDNS/Zeroconf and SSDP. If your i
 
 ## mDNS/Zeroconf
 
-Home Assistant uses the [python-zeroconf](https://github.com/jstasiak/python-zeroconf) package for mDNS support. As running multiple mDNS implementations on a single host is not recommended, Home Assistant provides internal helper APIs to access the running `Zeroconf` and `AsyncZeroconf` instances.
+Home Assistant uses the [python-zeroconf](https://github.com/python-zeroconf/python-zeroconf) package for mDNS support. As running multiple mDNS implementations on a single host is not recommended, Home Assistant provides internal helper APIs to access the running `Zeroconf` and `AsyncZeroconf` instances.
 
 Before using these helpers, be sure to add `zeroconf` to `dependencies` in your integration's [`manifest.json`](creating_integration_manifest.md)
 
@@ -197,7 +197,7 @@ from homeassistant.components import network
 adapters = await network.async_get_adapters(hass)
 
 for adapter in adapters:
-    for ip_info in adapater["ipv4"]:
+    for ip_info in adapter["ipv4"]:
         local_ip = ip_info["address"]
         network_prefix = ip_info["network_prefix"]
         ip_net = ip_network(f"{local_ip}/{network_prefix}", False)

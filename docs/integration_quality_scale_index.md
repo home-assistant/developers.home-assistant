@@ -5,7 +5,7 @@ title: "Integration Quality Scale"
 The Integration Quality Scale scores each integration based on the code quality and user experience. Each level of the quality scale consists of a list of requirements. If an integration matches all requirements, it's considered to have reached that level.
 
 :::info
-Suggestions for changes can be done by creating an issue in the [architecture repo](https://github.com/home-assistant/architecture/issues/).
+Suggestions for changes can be done by creating an issue in the [architecture repo](https://github.com/home-assistant/architecture/discussions).
 :::
 
 ## No score
@@ -57,7 +57,7 @@ This is a solid integration that is able to survive poor conditions and can be c
 Best of the best. The integration is completely async, meaning it's super fast. Integrations that reach platinum level will require approval by the code owner for each PR.
 
 - Satisfying all Gold level requirements.
-- Set appropriate `PARALLEL_UPDATES` constant
+- Set appropriate `PARALLEL_UPDATES` constant ([docs](integration_fetching_data.md#request-parallelism))
 - Support config entry unloading (called when config entry is removed)
 - Integration + dependency are async ([docs](asyncio_working_with_async.md))
 - Uses aiohttp or httpx and allows passing in websession (if making HTTP requests)

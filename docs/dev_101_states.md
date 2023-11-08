@@ -1,5 +1,5 @@
 ---
-title: "Using States"
+title: "States"
 ---
 
 Home Assistant keeps track of the states of entities in a state machine. The state machine has very few requirements:

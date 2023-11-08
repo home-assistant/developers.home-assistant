@@ -11,37 +11,28 @@ A cover entity controls an opening or cover, such as a garage door or a window s
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
-### Platform Properties (to be implemented by deriving platform classes)
-
 | Name | Type | Default | Description
-| ---- | ---- | ------- | -----------
-| current_cover_position | int | None | The current position of cover where 0 means closed and 100 is fully open.  Required with `SUPPORT_SET_POSITION`.
-| current_cover_tilt_position | int | None | The current tilt position of the cover where 0 means closed/no tilt and 100 means open/maximum tilt.  Required with `SUPPORT_SET_TILT_POSITION`
-| is_opening | bool | None | If the cover is opening or not. Used to determine `state`.
-| is_closing | bool | None | If the cover is closing or not. Used to determine `state`.
-| is_closed | bool | `NotImplementedError()` | If the cover is closed or not.  if the state is unknown, return `None`. Used to determine `state`.
-
-### Entity Properties (base class properties which may be overridden)
-
-| Name | Type | Default | Description
-| ---- | ---- | ------- | -----------
-| device_class | string | None | Describes the type/class of the cover. Must be `None` or one of the valid values from the table below.
-| supported_features | int (bitwise) | Value determined from `current_cover_position` and `current_cover_tilt_position` | Describes the supported features. See the related table below for details.
+| ----------------------- | ---- | ------- | -----------
+| current_cover_position | <code>int &#124; None</code> | `None` | The current position of cover where 0 means closed and 100 is fully open.
+| current_cover_tilt_position | <code>int &#124; None</code> | `None` | The current tilt position of the cover where 0 means closed/no tilt and 100 means open/maximum tilt.
+| is_closed | <code>bool &#124; None</code> | **Required** | If the cover is closed or not. Used to determine `state`.
+| is_closing | <code>bool &#124; None</code> | `None` | If the cover is closing or not. Used to determine `state`.
+| is_opening | <code>bool &#124; None</code> | `None` | If the cover is opening or not. Used to determine `state`.
 
 ### Device Classes
 
 | Constant | Description
 |----------|-----------------------|
-| `DEVICE_CLASS_AWNING` | Control of an awning, such as an exterior retractible window, door, or patio cover.
-| `DEVICE_CLASS_BLIND` | Control of blinds, which are linked slats that expand or collapse to cover an opening or may be tilted to partially cover an opening, such as window blinds.
-| `DEVICE_CLASS_CURTAIN` | Control of curtains or drapes, which is often fabric hung above a window or door that can be drawn open.
-| `DEVICE_CLASS_DAMPER` | Control of a mechanical damper that reduces air flow, sound, or light.
-| `DEVICE_CLASS_DOOR` | Control of a door that provides access to an area which is typically part of a structure.
-| `DEVICE_CLASS_GARAGE` | Control of a garage door that provides access to a garage.
-| `DEVICE_CLASS_GATE` | Control of a gate that provides access to a driveway or other area. Gates are found outside of a structure and are typically part of a fence.
-| `DEVICE_CLASS_SHADE` | Control of shades, which are a continuous plane of material or connected cells that expanded or collapsed over an opening, such as window shades.
-| `DEVICE_CLASS_SHUTTER` | Control of shutters, which are linked slats that swing out/in to cover an opening or may be tilted to partially cover an opening, such as indoor or exterior window shutters.
-| `DEVICE_CLASS_WINDOW` | Control of a physical window that opens and closes or may tilt.
+| `CoverDeviceClass.AWNING` | Control of an awning, such as an exterior retractible window, door, or patio cover.
+| `CoverDeviceClass.BLIND` | Control of blinds, which are linked slats that expand or collapse to cover an opening or may be tilted to partially cover an opening, such as window blinds.
+| `CoverDeviceClass.CURTAIN` | Control of curtains or drapes, which is often fabric hung above a window or door that can be drawn open.
+| `CoverDeviceClass.DAMPER` | Control of a mechanical damper that reduces air flow, sound, or light.
+| `CoverDeviceClass.DOOR` | Control of a door that provides access to an area which is typically part of a structure.
+| `CoverDeviceClass.GARAGE` | Control of a garage door that provides access to a garage.
+| `CoverDeviceClass.GATE` | Control of a gate that provides access to a driveway or other area. Gates are found outside of a structure and are typically part of a fence.
+| `CoverDeviceClass.SHADE` | Control of shades, which are a continuous plane of material or connected cells that expanded or collapsed over an opening, such as window shades.
+| `CoverDeviceClass.SHUTTER` | Control of shutters, which are linked slats that swing out/in to cover an opening or may be tilted to partially cover an opening, such as indoor or exterior window shutters.
+| `CoverDeviceClass.WINDOW` | Control of a physical window that opens and closes or may tilt.
 
 ### States
 

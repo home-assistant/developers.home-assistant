@@ -21,14 +21,14 @@ Properties should always only return information from memory and not do I/O (lik
 ScannerEntity does not support attribute shorthand for [property implementation](../entity.md#entity-class-or-instance-attributes)
 :::
 
-| Name          | Type    | Default      | Description                                       |
-| ------------- | ------- | ------------ | ------------------------------------------------- |
-| source_type   | SourceType | **Required** | The source type, eg `gps` or `router`, of the device. |
-| is_connected  | boolean | **Required** | The connection state of the device.               |
-| battery_level | integer | `None`       | The battery level of the device.                  |
-| ip_address    | string  | `None`       | The IP address of the device.                     |
-| mac_address   | string  | `None`       | The MAC address of the device.                    |
-| hostname      | string  | `None`       | The hostname of the device.                       |
+| Name          | Type                         | Default      | Description                                           |
+| ------------- | ---------------------------- | ------------ | ----------------------------------------------------- |
+| battery_level | <code>int &#124; None</code> | `None`       | The battery level of the device.                      |
+| hostname      | <code>str &#124; None</code> | `None`       | The hostname of the device.                           |
+| ip_address    | <code>str &#124; None</code> | `None`       | The IP address of the device.                         |
+| is_connected  | `bool`                       | **Required** | The connection state of the device.                   |
+| mac_address   | <code>str &#124; None</code> | `None`       | The MAC address of the device.                        |
+| source_type   | `SourceType`                 | **Required** | The source type, eg `gps` or `router`, of the device. |
 
 ### DHCP discovery
 
@@ -52,11 +52,11 @@ Properties should always only return information from memory and not do I/O (lik
 TrackerEntity does not support attribute shorthand for [property implementation](../entity.md#entity-class-or-instance-attributes)
 :::
 
-| Name              | Type    | Default      | Description                                       |
-| ----------------- | ------- | ------------ | ------------------------------------------------- |
-| source_type       | SourceType | **Required** | The source type, eg `gps` or `router`, of the device. |
-| latitude          | float  | **Required** | The latitude coordinate of the device.            |
-| longitude         | float  | **Required** | The longitude coordinate of the device.           |
-| battery_level     | integer | `None`       | The battery level of the device.                  |
-| location_accuracy | integer | `None`       | The location accuracy (m) of the device.          |
-| location_name     | string  | `None`       | The location name of the device.                  |
+| Name              | Type                           | Default      | Description                                           |
+| ----------------- | ------------------------------ | ------------ | ----------------------------------------------------- |
+| battery_level     | <code>int &#124; None</code>   | `None`       | The battery level of the device.                      |
+| latitude          | <code>float &#124; None</code> | **Required** | The latitude coordinate of the device.                |
+| location_accuracy | `int`                          | `0`          | The location accuracy (m) of the device.              |
+| location_name     | <code>str &#124; None</code>   | `None`       | The location name of the device.                      |
+| longitude         | <code>float &#124; None</code> | **Required** | The longitude coordinate of the device.               |
+| source_type       | SourceType                     | **Required** | The source type, eg `gps` or `router`, of the device. |

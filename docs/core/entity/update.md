@@ -104,6 +104,6 @@ class MyUpdate(UpdateEntity):
 
 Optionally specifies what type of entity it is.
 
-| Value | Description
+| Constant | Description
 | ----- | -----------
-| firmware | The update is a firmware update for a device.
+| `UpdateDeviceClass.FIRMWARE` | The update is a firmware update for a device.

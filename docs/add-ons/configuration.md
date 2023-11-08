@@ -21,7 +21,7 @@ addon_name/
 ```
 
 :::note
-Translation files, `config`  and `build` all support `.json`, `.yml` and `.yaml` as the file type.
+Translation files, `config` and `build` all support `.json`, `.yml` and `.yaml` as the file type.
 
 To keep it simple all examples use `.yaml`
 :::
@@ -82,7 +82,7 @@ LABEL \
   io.hass.arch="armhf|aarch64|i386|amd64"
 ```
 
-It is possible to use your own base image with `build.yaml` or if you do not need support for automatic multi-arch building you can also use a simple docker `FROM`.
+It is possible to use your own base image with `build.yaml` or if you do not need support for automatic multi-arch building you can also use a simple docker `FROM`. You can also suffix the Dockerfile with the specific architecture to use a specific Dockerfile for a particular architecture, i.e. `Dockerfile.amd64`.
 
 ### Build Args
 
@@ -115,7 +115,9 @@ map:
 image: repo/{arch}-my-custom-addon
 ```
 
-Note:  Avoid the use of this filename for anything other than add-on configuration, as the Supervisor does a recursive lookup.
+:::note
+Avoid using `config.yaml` as filename in your add-on for anything other than the add-on configuration. The Supervisor does a recursively search for `config.yaml` in the add-on repository.
+:::
 
 ### Required configuration options
 
@@ -142,20 +144,21 @@ Note:  Avoid the use of this filename for anything other than add-on configurati
 | `host_ipc` | bool | `false` | Allow the IPC namespace to be shared with others.
 | `host_dbus` | bool | `false` | Map the host D-Bus service into the add-on.
 | `host_pid` | bool | `false` | Allow the container to run on the host PID namespace. Works only for not protected add-ons. **Warning:** Does not work with S6 Overlay. If need this to be `true` and you use the normal add-on base image you disable S6 by overriding `/init`. Or use an alternate base image.
+| `host_uts` | bool | `false` | Use the hosts UTS namespace.
 | `devices` | list | | Device list to map into the add-on. Format is: `<path_on_host>`. E.g., `/dev/ttyAMA0`
 | `homeassistant` | string | | Pin a minimum required Home Assistant Core version for the add-on. Value is a version string like `2022.10.5`.
 | `hassio_role` | str | `default` |Role-based access to Supervisor API. Available: `default`, `homeassistant`, `backup`, `manager` or `admin`
 | `hassio_api` | bool | `false` | This add-on can access the Supervisor's REST API. Use `http://supervisor`.
 | `homeassistant_api` | bool | `false` | This add-on can access the Home Assistant REST API proxy. Use `http://supervisor/core/api`.
 | `docker_api` | bool | `false` | Allow read-only access to the Docker API for the add-on. Works only for not protected add-ons.
-| `privileged` | list | | Privilege for access to hardware/system. Available access: `NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_TIME`, `SYS_NICE`, `SYS_RESOURCE`, `SYS_PTRACE`, `SYS_MODULE` or `DAC_READ_SEARCH`
+| `privileged` | list | | Privilege for access to hardware/system. Available access: `BPF`, `DAC_READ_SEARCH`, `IPC_LOCK`, `NET_ADMIN`, `NET_RAW`, `PERFMON`, `SYS_ADMIN`, `SYS_MODULE`, `SYS_NICE`, `SYS_PTRACE`, `SYS_RAWIO`, `SYS_RESOURCE` or `SYS_TIME`.
 | `full_access` | bool | `false` | Give full access to hardware like the privileged mode in Docker. Works only for not protected add-ons. Consider using other add-on options instead of this, like `devices`. If you enable this option, don't add `devices`, `uart`, `usb` or `gpio` as this is not needed.
 | `apparmor` | bool/string | `false` | Enable or disable AppArmor support. If it is enabled, you can also use custom profiles with the name of the profile.
-| `map` | list | | List of Home Assistant directories to bind mount into your container. Possible values: `config`, `ssl`, `addons`, `backup`, `share` or `media`. Defaults to `ro`, which you can change by adding `:rw` to the end of the name.
+| `map` | list | | List of Home Assistant directories to bind mount into your container. Possible values: `homeassistant_config`, `addon_config`, `ssl`, `addons`, `backup`, `share`, `media`, and `all_addon_configs`. Defaults to `ro`, which you can change by adding `:rw` to the end of the name.
 | `environment` | dict | | A dictionary of environment variables to run the add-on with.
 | `audio` | bool | `false` | Mark this add-on to use the internal audio system. We map a working PulseAudio setup into the container. If your application does not support PulseAudio, you may need to install: Alpine Linux `alsa-plugins-pulse` or Debian/Ubuntu `libasound2-plugins`.
 | `video` | bool | `false` | Mark this add-on to use the internal video system. All available devices will be mapped into the add-on.
-| `gpio` | bool | `false` | If this is set to `true`, `/sys/class/gpio` will map into the add-on for access to the GPIO interface from the kernel. Some libraries also need  `/dev/mem` and `SYS_RAWIO` for read/write access to this device. On systems with AppArmor enabled, you need to disable AppArmor or provide you own profile for the add-on, which is better for security.
+| `gpio` | bool | `false` | If this is set to `true`, `/sys/class/gpio` will map into the add-on for access to the GPIO interface from the kernel. Some libraries also need  `/dev/mem` and `SYS_RAWIO` for read/write access to this device. On systems with AppArmor enabled, you need to disable AppArmor or provide your own profile for the add-on, which is better for security.
 | `usb` | bool | `false` | If this is set to `true`, it would map the raw USB access `/dev/bus/usb` into the add-on with plug&play support.
 | `uart` | bool | `false` | Default `false`. Auto mapping all UART/serial devices from the host into the add-on.
 | `udev` | bool | `false` | Default `false`. Setting this to `true` gets the host udev database read-only mounted into the add-on.
@@ -169,7 +172,7 @@ Note:  Avoid the use of this filename for anything other than add-on configurati
 | `codenotary` | string | | For use with Codenotary CAS. This is the E-Mail address used to verify your image with Codenotary (E.g, `example@home-assistant.io`). This should match the E-Mail address used as the signer in the [add-on's extended build options](#add-on-extended-build)
 | `timeout` | integer | 10 | Default 10 (seconds). The timeout to wait until the Docker daemon is done or will be killed.
 | `tmpfs` | bool | `false` | If this is set to `true`, the containers `/tmp` uses tmpfs, a memory file system.
-| `discovery` | list | | A list of services that this add-on provides for Home Assistant. Currently supported: `mqtt`
+| `discovery` | list | | A list of services that this add-on provides for Home Assistant. Currently supported: `mqtt`, `matter` and `otbr`
 | `services` | list | | A list of services that will be provided or consumed with this add-on. Format is `service`:`function` and functions are: `provide` (this add-on can provide this service), `want` (this add-on can use this service) or `need` (this add-on needs this service to work correctly).
 | `auth_api` | bool | `false` | Allow access to Home Assistant user backend.
 | `ingress` | bool | `false` | Enable the ingress feature for the add-on.
@@ -208,6 +211,13 @@ link: "http://example.com/"
 size: 15
 count: 1.2
 ```
+
+:::note
+If you remove a configuration option from an add-on already deployed to users, it is recommended to delete the option to avoid a warning like `Option '<options_key>' does not exist in the schema for <Add-on Name> (<add-on slug>)`.
+
+To remove an option the Supervisor addons API can be used. Using bashio this boils down to `bashio::addon.option '<options_key>'` (without additional argument to delete this option key). Typically this should be called inside an if block checking if the option is still set using `bashio::config.exists '<options_key>'`.
+:::
+
 
 The `schema` looks like `options` but describes how we should validate the user input. For example:
 
@@ -294,3 +304,21 @@ network:
 ```
 
 _The key under `network` (`80/TCP`) in this case, needs to match a key in your `ports` configuration (in [`config.yaml`](#add-on-configuration))._
+
+## Add-on advanced options
+
+Sometimes add-on developers may want to allow users to configure to provide their own files which are then provided directly to an internal service as part of its configuration. Some examples include:
+
+1. Internal service wants a list of configured items and the schema of each item is complex but the service provides no UI for doing so, easier to point users to their documentation and ask for a file in that schema.
+2. Internal service requires a binary file or some file configured externally as part of its config.
+3. Internal service supports live reloading on config change and you want to support that for some or all of its configuration by asking users for a file in its schema to live reload from.
+
+In cases like these you should add `addon_config` to `map` in your addon's configuration file. And then you should direct your users to put this file in the folder `/addon_configs/<your addon's slug>`. This folder will be mounted at `/config` inside your addon's docker container at runtime. You should either provide an option in your addon's schema that collects a relative path to the file(s) starting from this folder or rely on a fixed filename and include that in your documentation.
+
+Another use case of `addon_config` could be if your addon wants to provide file-based output or give users access to internal files for debugging. Some examples include:
+
+1. Internal service logs to a file and you wish to allow users access to that log file
+2. Internal service uses a database and you wish to allow users access to that database for debugging
+3. Internal service generates files which are intended to be used in its own config and you wish to allow users to access them as well
+
+In cases like these you should add `addon_config:rw` to `map` so your addon can write to this folder as well as read from it. And then you should write these files out to `/config` during your addon's runtime so users can see and access them.

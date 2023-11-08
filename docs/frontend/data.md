@@ -3,7 +3,7 @@ title: "Frontend data"
 sidebar_label: "Data"
 ---
 
-The frontend passes a single `hass` object around. This object contains the latest state and allows you to send commands back to the server.
+The frontend passes a single `hass` object around. This object contains the latest state, allows you to send commands back to the server and provides helpers to format entity state.
 
 Whenever a state changes, a new version of the objects that changed are created. So you can easily see if something has changed by doing a strict equality check:
 
@@ -146,3 +146,43 @@ hass.callApi('delete', 'notify.html5', { subscription: 'abcdefgh' });
 :::info
 We're moving away from API calls and are migrating everything to `hass.callWS(message)` calls.
 :::
+
+## Entity state formatting
+
+These methods allow you to format the state and attributes of an entity. The value will be localized using user profile settings (language, number format, date format, timezone) and unit of measurement.
+
+### `hass.formatEntityState(stateObj, state)`
+
+Format the state of an entity. You need to pass the entity state object.
+
+```js
+hass.formatEntityState(hass.states["light.my_light"]); // "On"
+```
+
+You can force the state value using the second optional parameter.
+
+```js
+hass.formatEntityState(hass.states["light.my_light"], 'off'); // "Off"
+```
+
+### `hass.formatEntityAttributeValue(stateObj, attribute, value)`
+
+Format the attribute value of an entity. You need to pass the entity state object and the attribute name.
+
+```js
+hass.formatEntityAttributeValue(hass.states["climate.thermostat"], "current_temperature"); // "20.5 °C"
+```
+
+You can force the state value using the third optional parameter.
+
+```js
+hass.formatEntityAttributeValue(hass.states["climate.thermostat"], "current_temperature", 18); // "18 °C"
+```
+
+### `hass.formatEntityAttributeName(stateObj, attribute)`
+
+Format the attribute name of an entity. You need to pass the entity state object and the attribute name.
+
+```js
+hass.formatEntityAttributeName(hass.states["climate.thermostat"], "current_temperature"); // "Current temperature"
+```

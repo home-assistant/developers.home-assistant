@@ -21,6 +21,11 @@ If your integration is going to integrate one or more devices, you will need to 
 
 If your integration is going to register services, it will need to provide a description of the available services. The description is stored in `services.yaml`. [More information about `services.yaml`.](dev_101_services.md)
 
+## Data update coordinator - `coordinator.py`
+
+There are multiple ways for your integration to receive data, including push or poll. Commonly integrations will fetch data with a single coordinated poll across all entities, which requires the use of a `DataUpdateCoordinator`.
+If you want to use one, and you choose to create a subclass of it, it is recommended to define the coordinator class in `coordinator.py`. [More information about `DataUpdateCoordinator`](integration_fetching_data.md/#coordinated-single-api-poll-for-data-for-all-entities).
+
 ## Where Home Assistant looks for integrations
 
 Home Assistant will look for an integration when it sees the domain referenced in the config file (i.e. `mobile_app:`) or if it is a dependency of another integration. Home Assistant will look at the following locations:

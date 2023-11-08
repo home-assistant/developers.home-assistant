@@ -2,7 +2,7 @@
 title: "WebSocket API"
 ---
 
-Home Assistant contains a WebSocket API. This API can be used to stream information from a Home Assistant instance to any client that implements WebSockets. We maintain a [JavaScript library](https://github.com/home-assistant/home-assistant-js-websocket) which we use in our frontend.
+Home Assistant hosts a WebSocket API at `/api/websocket`. This API can be used to stream information from a Home Assistant instance to any client that implements WebSockets. We maintain a [JavaScript library](https://github.com/home-assistant/home-assistant-js-websocket) which we use in our frontend.
 
 ## Server states
 
@@ -205,7 +205,7 @@ You can also subscribe to one or more triggers with `subscribe_trigger`. These a
         "entity_id": "binary_sensor.motion_occupancy",
         "from": "off",
         "to":"on"
-    },
+    }
 }
 ```
 
@@ -458,66 +458,6 @@ The server will respond with a result message containing the current registered 
   "type": "result",
   "success": true,
   "result": [ ... ]
-}
-```
-
-## Fetching camera thumbnails
-
-_Introduced in Home Assistant 0.69._
-
-:::caution Deprecated
-This websocket command was depreciated in Home Assistant Core [0.107](https://www.home-assistant.io/blog/2020/03/18/release-107/) and will be removed in a future release. Until then it will result in a `WARNING` entry in the user's log.
-:::
-
-Return a b64 encoded thumbnail of a camera entity.
-
-```json
-{
-  "id": 19,
-  "type": "camera_thumbnail",
-  "entity_id": "camera.driveway"
-}
-```
-
-The server will respond with a result message containing the thumbnail.
-
-```json
-{
-  "id": 19,
-  "type": "result",
-  "success": true,
-  "result": {
-    "content_type": "image/jpeg",
-    "content": "<base64 encoded image>"
-  }
-}
-```
-
-## Fetching media player thumbnails
-
-_Introduced in Home Assistant 0.69._
-
-Fetch a base64 encoded thumbnail picture for a media player.
-
-```json
-{
-  "id": 19,
-  "type": "media_player_thumbnail",
-  "entity_id": "media_player.living_room"
-}
-```
-
-The server will respond with the image encoded via base64.
-
-```json
-{
-  "id": 19,
-  "type": "result",
-  "success": true,
-  "result": {
-    "content_type": "image/jpeg",
-    "content": "<base64 encoded image>"
-  }
 }
 ```
 

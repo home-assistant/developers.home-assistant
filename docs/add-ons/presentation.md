@@ -117,7 +117,7 @@ When working on this for your own add-ons, the following tips should help you ge
 3. If there isn't one for a service and you want to make one then do the following:
   a. Add minimum required access you're aware of. Things you definitely know the service needs
   b. Add `complain` as a flag to the profile
-  c. Run the add-on and review the audit log with `journalctl _TRANSPORT="audit" -g 'apparmor="ALLOWED"`
+  c. Run the add-on and review the audit log with `journalctl _TRANSPORT="audit" -g 'apparmor="ALLOWED"'`
   d. Add access as necessary until using the add-on does not generate any audit warnings
   e. Remove the `complain` flag so ungranted access is DENIED not ALLOWED
 4. Repeat #3 when updating the service as new access may be required
@@ -218,5 +218,6 @@ Each add-on starts with a base rating of 5, on a scale of 1 to 6. Depending on d
 | Use `host_network: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -1 | |
 | Use `hassio_role: admin` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -2 | |
 | Use `host_pid: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -2 | |
+| Use `host_uts: true` and `privileged: SYS_ADMIN` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -1 | |
 | Use `full_access: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | Security set to 1 | Overrides all other adjustments |
 | Use `docker_api: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | Security set to 1 | Overrides all other adjustments |

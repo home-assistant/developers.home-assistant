@@ -10,22 +10,20 @@ A light entity controls the brightness, hue and saturation color value, white va
 
 | Name | Type | Default | Description
 | ---- | ---- | ---- | ----
-| brightness | int | None | Return the brightness of this light between 0..255
-| color_mode | string | None | Return the color mode of the light. The returned color mode must be present in the `supported_color_modes` property.
-| color_temp | int | None | Return the CT color value in mireds. This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.COLOR_TEMP` and ignored otherwise.
-| effect | String | None | Return the current effect.
-| effect_list | list | None | Return the list of supported effects.
-| hs_color | tuple | None | Return the hue and saturation color value (float, float). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.HS` and ignored otherwise.
-| is_on    | bool | `None`  | Returns if the light entity is on or not.  
-| max_mireds | int | int | Return the warmest color_temp that this light supports.
-| min_mireds | int | int | Return the coldest color_temp that this light supports.
-| rgb_color | tuple | None | Return the rgb color value (int, int, int). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.RGB` and ignored otherwise.
-| rgbw_color | tuple | None | Return the rgbw color value (int, int, int, int). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.RGBW` and ignored otherwise.
-| rgbww_color | tuple | None | Return the rgbww color value (int, int, int, int, int). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.RGBWW` and ignored otherwise.
-| supported_color_modes | set | None | Flag supported color modes.
-| supported_features | int | int | Flag supported features.
-| white_value | int | None | Return the white value of this light between 0..255. This is deprecated and will be removed in Home Assistant 2021.10.
-| xy_color | tuple | None | Return the xy color value (float, float). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.XY` and ignored otherwise.
+| brightness            | <code>int &#124; None</code>                            | `None` | The brightness of this light between 1..255
+| color_mode            | <code>ColorMode &#124; None</code>                      | `None` | The color mode of the light. The returned color mode must be present in the `supported_color_modes` property.
+| color_temp_kelvin     | <code>int &#124; None</code>                            | `None` | The CT color value in K. This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.COLOR_TEMP` and ignored otherwise.
+| effect                | <code>str &#124; None</code>                            | `None` | The current effect.
+| effect_list           | <code>list[str] &#124; None</code>                      | `None` | The list of supported effects.
+| hs_color              | <code>tuple[float, float] &#124; None</code>            | `None` | The hue and saturation color value (float, float). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.HS` and ignored otherwise.
+| is_on                 | <code>bool &#124; None</code>                           | `None` | If the light entity is on or not.
+| max_color_temp_kelvin | <code>int &#124; None</code>                            | `None` | The coldest color_temp_kelvin that this light supports.
+| min_color_temp_kelvin | <code>int &#124; None</code>                            | `None` | The warmest color_temp_kelvin that this light supports.
+| rgb_color             | <code>tuple[int, int, int] &#124; None</code>           | `None` | The rgb color value (int, int, int). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.RGB` and ignored otherwise.
+| rgbw_color            | <code>tuple[int, int, int, int] &#124; None</code>      | `None` | The rgbw color value (int, int, int, int). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.RGBW` and ignored otherwise.
+| rgbww_color           | <code>tuple[int, int, int, int, int] &#124; None</code> | `None` | The rgbww color value (int, int, int, int, int). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.RGBWW` and ignored otherwise.
+| supported_color_modes | <code>set[ColorMode} &#124; None</code>                 | `None` | Flag supported color modes.
+| xy_color              | <code>tuple[float, float] &#124; None</code>            | `None` | The xy color value (float, float). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.XY` and ignored otherwise.
 
 ## Color Modes
 

@@ -22,12 +22,12 @@ class ContentCardExample extends HTMLElement {
           <div class="card-content"></div>
         </ha-card>
       `;
-      this.content = this.querySelector('div');
+      this.content = this.querySelector("div");
     }
 
     const entityId = this.config.entity;
     const state = hass.states[entityId];
-    const stateStr = state ? state.state : 'unavailable';
+    const stateStr = state ? state.state : "unavailable";
 
     this.content.innerHTML = `
       The state of ${entityId} is ${stateStr}!
@@ -40,7 +40,7 @@ class ContentCardExample extends HTMLElement {
   // will render an error card.
   setConfig(config) {
     if (!config.entity) {
-      throw new Error('You need to define an entity');
+      throw new Error("You need to define an entity");
     }
     this.config = config;
   }
@@ -52,7 +52,7 @@ class ContentCardExample extends HTMLElement {
   }
 }
 
-customElements.define('content-card-example', ContentCardExample);
+customElements.define("content-card-example", ContentCardExample);
 ```
 
 ## Referencing your new card
@@ -66,10 +66,10 @@ You can then use your card in your dashboard configuration:
 ```yaml
 # Example dashboard configuration
 views:
-- name: Example
-  cards:
-  - type: "custom:content-card-example"
-    entity: input_boolean.switch_tv
+  - name: Example
+    cards:
+      - type: "custom:content-card-example"
+        entity: input_boolean.switch_tv
 ```
 
 ## API
@@ -78,16 +78,16 @@ Custom cards are defined as a [custom element](https://developer.mozilla.org/en-
 
 Home Assistant will call `setConfig(config)` when the configuration changes (rare). If you throw an exception if the configuration is invalid, Home Assistant will render an error card to notify the user.
 
-Home Assistant will set the `hass` property when the state of Home Assistant changes (frequent). Whenever the state changes, the component will have to update itself to represent the latest state.
+Home Assistant will set [the `hass` property](/docs/frontend/data/) when the state of Home Assistant changes (frequent). Whenever the state changes, the component will have to update itself to represent the latest state.
 
 Your card can define a `getCardSize` method that returns the size of your card as a number or a promise that will resolve to a number. A height of 1 is equivalent to 50 pixels. This will help Home Assistant distribute the cards evenly over the columns. A card size of `1` will be assumed if the method is not defined.
 
 Since some elements can be lazy loaded, if you want to get the card size of another element, you should first check it is defined.
 
 ```js
-  return customElements
-    .whenDefined(element.localName)
-    .then(() => element.getCardSize());
+return customElements
+  .whenDefined(element.localName)
+  .then(() => element.getCardSize());
 ```
 
 Your card can define a `getConfigElement` method that returns a custom element for editing the user configuration. Home Assistant will display this element in the card editor in the dashboard.
@@ -106,7 +106,7 @@ import "https://unpkg.com/wired-toggle@0.8.0/wired-toggle.js?module";
 import {
   LitElement,
   html,
-  css
+  css,
 } from "https://unpkg.com/lit-element@2.0.1/lit-element.js?module";
 
 function loadCSS(url) {
@@ -123,14 +123,14 @@ class WiredToggleCard extends LitElement {
   static get properties() {
     return {
       hass: {},
-      config: {}
+      config: {},
     };
   }
 
   render() {
     return html`
       <wired-card elevation="2">
-        ${this.config.entities.map(ent => {
+        ${this.config.entities.map((ent) => {
           const stateObj = this.hass.states[ent];
           return stateObj
             ? html`
@@ -138,13 +138,11 @@ class WiredToggleCard extends LitElement {
                   ${stateObj.attributes.friendly_name}
                   <wired-toggle
                     .checked="${stateObj.state === "on"}"
-                    @change="${ev => this._toggle(stateObj)}"
+                    @change="${(ev) => this._toggle(stateObj)}"
                   ></wired-toggle>
                 </div>
               `
-            : html`
-                <div class="not-found">Entity ${ent} not found.</div>
-              `;
+            : html` <div class="not-found">Entity ${ent} not found.</div> `;
         })}
       </wired-card>
     `;
@@ -165,7 +163,7 @@ class WiredToggleCard extends LitElement {
 
   _toggle(state) {
     this.hass.callService("homeassistant", "toggle", {
-      entity_id: state.entity_id
+      entity_id: state.entity_id,
     });
   }
 
@@ -208,13 +206,13 @@ And for your configuration:
 ```yaml
 # Example dashboard configuration
 views:
-- name: Example
-  cards:
-  - type: "custom:wired-toggle-card"
-    entities:
-      - input_boolean.switch_ac_kitchen
-      - input_boolean.switch_ac_livingroom
-      - input_boolean.switch_tv
+  - name: Example
+    cards:
+      - type: "custom:wired-toggle-card"
+        entities:
+          - input_boolean.switch_ac_kitchen
+          - input_boolean.switch_ac_livingroom
+          - input_boolean.switch_tv
 ```
 
 ## Graphical card configuration
@@ -248,7 +246,6 @@ customElements.define('content-card-example', ContentCardExample);
 
 ```js
 class ContentCardEditor extends LitElement {
-
   setConfig(config) {
     this._config = config;
   }
@@ -256,9 +253,9 @@ class ContentCardEditor extends LitElement {
   configChanged(newConfig) {
     const event = new Event("config-changed", {
       bubbles: true,
-      composed: true
+      composed: true,
     });
-    event.detail = {config: newConfig};
+    event.detail = { config: newConfig };
     this.dispatchEvent(event);
   }
 }
@@ -269,16 +266,121 @@ window.customCards.push({
   type: "content-card-example",
   name: "Content Card",
   preview: false, // Optional - defaults to false
-  description: "A custom card made by me!" // Optional
+  description: "A custom card made by me!", // Optional
 });
 ```
 
-## Advanced Resources
+## Tile features
 
-Community Maintained Boilerplate Card - Advanced Template (Typescript, Rollup, Linting, etc.)
+The tile card has support for "features" to add quick actions to control the entity. We offer some built-in features, but you can build and use your own using similar way than defining custom cards.
 
-- [Boilerplate Card](https://github.com/custom-cards/boilerplate-card)
+Below is an example of a custom tile feature for [button entity](/docs/core/entity/button/).
 
-Developer Documentation for [HACS](https://hacs.xyz/) (Home Assistant Community Store).
+![Screenshot of the custom tile feature example](/img/en/frontend/dashboard-custom-tile-feature-screenshot.png)
 
-- [HACS Plugin Docs](https://hacs.xyz/docs/publish/plugin)
+```js
+import {
+  LitElement,
+  html,
+  css,
+} from "https://unpkg.com/lit-element@2.0.1/lit-element.js?module";
+
+const supportsButtonPressTileFeature = (stateObj) => {
+  const domain = stateObj.entity_id.split(".")[0];
+  return domain === "button";
+};
+
+class ButtonPressTileFeature extends LitElement {
+  static get properties() {
+    return {
+      hass: undefined,
+      config: undefined,
+      stateObj: undefined,
+    };
+  }
+
+  static getStubConfig() {
+    return {
+      type: "custom:button-press-tile-feature",
+      label: "Press",
+    };
+  }
+
+  setConfig(config) {
+    if (!config) {
+      throw new Error("Invalid configuration");
+    }
+    this.config = config;
+  }
+
+  _press(ev) {
+    ev.stopPropagation();
+    this.hass.callService("button", "press", {
+      entity_id: this.stateObj.entity_id,
+    });
+  }
+
+  render() {
+    if (
+      !this.config ||
+      !this.hass ||
+      !this.stateObj ||
+      !supportsButtonPressTileFeature(this.stateObj)
+    ) {
+      return null;
+    }
+
+    return html`
+      <div class="container">
+        <button class="button" @click=${this._press}>
+          ${this.config.label || "Press"}
+        </button>
+      </div>
+    `;
+  }
+
+  static get styles() {
+    return css`
+      .container {
+        display: flex;
+        flex-direction: row;
+        padding: 0 12px 12px 12px;
+        width: auto;
+      }
+      .button {
+        display: block;
+        width: 100%;
+        height: 40px;
+        border-radius: 6px;
+        border: none;
+        background-color: #eeeeee;
+        cursor: pointer;
+        transition: background-color 180ms ease-in-out;
+      }
+      .button:hover {
+        background-color: #dddddd;
+      }
+      .button:focus {
+        background-color: #cdcdcd;
+      }
+    `;
+  }
+}
+
+customElements.define("button-press-tile-feature", ButtonPressTileFeature);
+
+window.customTileFeatures = window.customTileFeatures || [];
+window.customTileFeatures.push({
+  type: "button-press-tile-feature",
+  name: "Button press",
+  supported: supportsButtonPressTileFeature, // Optional
+  configurable: true, // Optional - defaults to false
+});
+```
+
+The only difference with custom cards is the graphical configuration option.
+To have it displayed in the tile card editor, you must add an object describing it to the array `window.customTileFeatures`.
+
+Required properties of the object are `type` and `name`. It is recommended to define the `supported` option with a function so the editor can only propose the feature if it is compatible with the selected entity in the tile card. Set `configurable` to `true` if your entity has additional configuration (e.g. `label` option in the example above) so the editor.
+
+Also, the static functions `getConfigElement` and `getStubConfig` work the same as with normal custom maps.

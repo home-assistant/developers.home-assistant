@@ -73,37 +73,100 @@ Services are published under the domain name of your integration, so in `service
 
 # Service ID
 set_speed:
-  # Service name as shown in UI
-  name: Set speed
-  # Description of the service
-  description: Sets fan speed.
-  # If the service accepts entity IDs, target allows the user to specify entities by entity, device, or area. If `target` is specified, `entity_id` should not be defined in the `fields` map. By default it shows only targets matching entities from the same domain as the service, but if further customization is required, target supports the entity, device, and area selectors (https://www.home-assistant.io/docs/blueprint/selectors/). Entity selector parameters will automatically be applied to device and area, and device selector parameters will automatically be applied to area. 
+  # If the service accepts entity IDs, target allows the user to specify entities by
+  # entity, device, or area. If `target` is specified, `entity_id` should not be
+  # defined in the `fields` map. By default it shows only targets matching entities
+  # from the same domain as the service, but if further customization is required,
+  # target supports the entity, device, and area selectors
+  # (https://www.home-assistant.io/docs/blueprint/selectors/). Entity selector
+  # parameters will automatically be applied to device and area, and device selector
+  # parameters will automatically be applied to area. 
   target:
+    entity:
+      domain: fan
+      # If not all entities from the service's domain support a service, entities
+      # can be further filtered by the `supported_features` state attribute. An
+      # entity will only be possible to select if it supports at least one of the
+      # listed supported features.
+      supported_features:
+        - fan.FanEntityFeature.SET_SPEED
+        # If a service requires more than one supported feature, the item should
+        # be given as a list of required supported features. For example, if the
+        # service requires both SET_SPEED and OSCILLATE it would be expressed like this
+        - - fan.FanEntityFeature.SET_SPEED
+          - fan.FanEntityFeature.OSCILLATE
   # Different fields that your service accepts
   fields:
     # Key of the field
     speed:
-      # Field name as shown in UI
-      name: Speed
-      # Description of the field
-      description: Speed setting
       # Whether or not field is required (default = false)
       required: true
-      # Advanced fields are only shown when the advanced mode is enabled for the user (default = false)
+      # Advanced fields are only shown when the advanced mode is enabled for the user
+      # (default = false)
       advanced: true
       # Example value that can be passed for this field
       example: "low"
       # The default field value
       default: "high"
-      # Selector (https://www.home-assistant.io/docs/blueprint/selectors/) to control the input UI for this field
+      # Selector (https://www.home-assistant.io/docs/blueprint/selectors/) to control
+      # the input UI for this field
       selector:
         select:
+          translation_key: "fan_speed"
           options:
             - "off"
             - "low"
             - "medium"
             - "high"
+```
 
+:::info
+The name and description of the services are set in our [translations](/docs/internationalization/core#services) and not in the service description. Each service and service field must have a matching translation defined.
+:::
+
+### Filtering service fields
+
+In some cases, entities from a service's domain may not support all service fields. By
+providing a `filter` for the field description, the field will only be shown if at least
+one selected entity supports the field according to the configured filter.
+
+A filter must specify either `supported_features` or `attribute`, combing both is not
+supported.
+
+A `supported_features` filter is specified by of a list of supported features. The field
+will be shown if at least one selected entity supports at least one of the listed features.
+
+An `attribute` filter combines an attribute with a list of values. The field will be
+shown if at least one selected entity's attribute is set to one of the listed attribute states.
+If the attribute state is a list, the field will be shown if at least one item in a selected
+entity's attribute state is set to one of the listed attribute states.
+
+This is a partial example of a field which is only shown if at least one selected entity
+supports `ClimateEntityFeature.TARGET_TEMPERATURE`:
+
+```yaml
+  fields:
+    temperature:
+      name: Temperature
+      description: New target temperature for HVAC.
+      filter:
+        supported_features:
+          - climate.ClimateEntityFeature.TARGET_TEMPERATURE
+```
+
+This is a partial example of a field which is only shown if at least one selected entity's
+`supported_color_modes` attribute includes either `light.ColorMode.COLOR_TEMP` or
+`light.ColorMode.HS`:
+
+```yaml
+    color_temp:
+      name: Color temperature
+      description: Color temperature for the light in mireds.
+      filter:
+        attribute:
+          supported_color_modes:
+            - light.ColorMode.COLOR_TEMP
+            - light.ColorMode.HS
 ```
 
 ## Entity Services
@@ -136,3 +199,65 @@ If you need more control over the service call, you can also pass an async funct
 async def custom_set_sleep_timer(entity, service_call):
     await entity.set_sleep_timer(service_call.data['sleep_time'])
 ```
+
+## Response Data
+
+Services may respond to a service call with data for powering more advanced automations. There are some additional implementation requirements:
+
+- Response data must be a `dict` and serializable in JSON [`homeassistant.util.json.JsonObjectType`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/util/json.py) in order to interoperate with other parts of the system, such as the frontend.
+- Errors must be raised as exceptions just like any other service call as we do
+not want end users to need complex error handling in scripts and automations.
+The response data should not contain error codes used for error handling.
+
+Example code:
+
+```python
+import datetime
+import voluptuous as vol
+from homeassistant.config_entries import ConfigEntry
+from homeassistant.core import HomeAssistant, ServiceCall, ServiceResponse, SupportsResponse
+from homeassistant.helpers import config_validation as cv, entity_platform, service
+from homeassistant.util.json import JsonObjectType
+
+
+SEARCH_ITEMS_SERVICE_NAME = "search_items"
+SEARCH_ITEMS_SCHEMA = vol.Schema({
+    vol.Required("start"): datetime.datetime,
+    vol.Required("end"): datetime.datetime,
+})
+
+
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Set up the platform."""
+
+    async def search_items(call: ServiceCall) -> ServiceResponse:
+        """Search in the date range and return the matching items."""
+        items = await my_client.search(call.data["start"], call.data["end"])
+        return {
+            "items": [
+                {
+                    "summary": item["summary"],
+                    "description": item["description"],
+                } for item in items
+            ],
+        }
+
+      hass.services.async_register(
+          DOMAIN,
+          SEARCH_ITEMS_SERVICE_NAME,
+          search_items,
+          schema=SEARCH_ITEMS_SCHEMA,
+          supports_response=SupportsResponse.ONLY,
+      )
+```
+
+The use of response data is meant for cases that do not fit the Home Assistant state. For example, a response stream of objects. Conversely, response data should not be used for cases that are a fit for entity state. For example, a temperature value should just be a sensor.
+
+### Supporting Response Data
+
+Service calls are registered with a `SupportsResponse` value to indicate response data is supported.
+
+| Value      | Description                                                                                                                                                                                                                       |
+| ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `OPTIONAL` | The service performs an action and can optionally return response data. The service should conditionally check the `ServiceCall` property `return_response` to decide whether or not response data should be returned, or `None`. |
+| `ONLY`     | The service doesn't perform any actions and always returns response data.                                                                                                                                                         |

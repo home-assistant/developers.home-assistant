@@ -3,22 +3,22 @@ title: "Integration Manifest"
 sidebar_label: "Manifest"
 ---
 
-Every integration has a manifest file to specify basic information about an integration. This file is stored as `manifest.json` in your integration directory. It is required to add such a file.
+Every integration has a manifest file to specify its basic information. This file is stored as `manifest.json` in your integration directory. It is required to add such a file.
 
 ```json
 {
   "domain": "hue",
   "name": "Philips Hue",
-  "integration_type": "hub",
-  "documentation": "https://www.home-assistant.io/components/hue",
-  "issue_tracker": "https://github.com/balloob/hue/issues",
-  "dependencies": ["mqtt"],
   "after_dependencies": ["http"],
   "codeowners": ["@balloob"],
+  "dependencies": ["mqtt"],
+  "documentation": "https://www.home-assistant.io/components/hue",
+  "integration_type": "hub",
+  "iot_class": "local_polling",
+  "issue_tracker": "https://github.com/balloob/hue/issues",
+  "loggers": ["aiohue"],
   "requirements": ["aiohue==1.9.1"],
-  "quality_scale": "platinum",
-  "iot_class": "local_polling"
-  "loggers": ["aiohue"]
+  "quality_scale": "platinum"
 }
 ```
 
@@ -28,12 +28,12 @@ Or a minimal example that you can copy into your project:
 {
   "domain": "your_domain_name",
   "name": "Your Integration",
-  "integration_type": "hub",
-  "documentation": "https://www.example.com",
-  "dependencies": [],
   "codeowners": [],
-  "requirements": [],
-  "iot_class": "cloud_polling"
+  "dependencies": [],
+  "documentation": "https://www.example.com",
+  "integration_type": "hub",
+  "iot_class": "cloud_polling",
+  "requirements": []
 }
 ```
 
@@ -66,8 +66,8 @@ it thus will become mandatory in the future.
 | Type |  Description
 | ---- | -----------
 | `device` | Provides a single device like, for example, ESPHome. |
-| `entity` | Provides an basic entity platform, like sensor or light. This should generally not be used. |
-| `hardware` | Provides an hardware integration, like Raspbery Pi or Hardkernel. This should generally not be used. |
+| `entity` | Provides a basic entity platform, like sensor or light. This should generally not be used. |
+| `hardware` | Provides a hardware integration, like Raspbery Pi or Hardkernel. This should generally not be used. |
 | `helper` | Provides an entity to help the user with automations like input boolean, derivative or group. |
 | `hub` | Provides a hub integration, with multiple devices or services, like Philips Hue. |
 | `service` | Provides a single service, like DuckDNS or AdGuard. |
@@ -92,7 +92,7 @@ If this integration is being submitted for inclusion in Home Assistant, it shoul
 
 ## Dependencies
 
-Dependencies are other Home Assistant integrations that you want Home Assistant to set up successfully prior to the integration being loaded. This can be necessary in case you want to offer functionality from that other integration, like using webhooks or an MQTT connection.
+Dependencies are other Home Assistant integrations you want Home Assistant to set up successfully before the integration is loaded. Adding an integration to dependencies will ensure the depending integration is loaded before setup, but it does not guarantee all dependency configuration entries have been set up. Adding dependencies can be necessary if you want to offer functionality from that other integration, like webhooks or an MQTT connection. Adding an [after dependency](#after-dependencies) might be a better alternative if a dependency is optional but not critical. See the [MQTT section](#mqtt) for more details on handling this for MQTT.
 
 Built-in integrations shall only specify other built-in integrations in `dependencies`. Custom integrations may specify both built-in and custom integrations in `dependencies`.
 
@@ -128,17 +128,17 @@ During the development of a component, it can be useful to test against differen
 
 ```shell
 pip install pychromecast==3.2.0 --target ~/.homeassistant/deps
-hass --skip-pip
+hass --skip-pip-packages pychromecast
 ```
 
-This will use the specified version, and prevent Home Assistant from trying to override it with what is specified in `requirements`.
+This will use the specified version, and prevent Home Assistant from trying to override it with what is specified in `requirements`. To prevent any package from being automatically overridden without specifying dependencies, you can launch Home Assistant with the global `--skip-pip` flag.
 
 If you need to make changes to a requirement to support your component, it's also possible to install a development version of the requirement using `pip install -e`:
 
 ```shell
 git clone https://github.com/balloob/pychromecast.git
 pip install -e ./pychromecast
-hass --skip-pip
+hass --skip-pip-packages pychromecast
 ```
 
 It is also possible to use a public git repository to install a requirement.  This can be useful, for example, to test changes to a requirement dependency before it's been published to PyPI. The following example will install the `except_connect` branch of the `pycoolmaster` library directly from GitHub unless version `0.2.2` is currently installed:
@@ -163,7 +163,7 @@ If your integration supports discovery via bluetooth, you can add a matcher to y
 
 Matches for `local_name` must be at least three (3) characters long and may not contain any patterns in the first three (3) characters.
 
-If the device only needs advertisement data, setting `connectable` to `false` will opt-in to receive discovery from Bluetooth controllers that do not have support for making connections such as remote ESPHome devices.
+If the device only needs advertisement data, setting `connectable` to `false` will opt-in to receive discovery from Bluetooth controllers that do not have support for making connections.
 
 The following example will match Nespresso Prodigio machines:
 
@@ -294,6 +294,10 @@ MQTT discovery works by subscribing to MQTT topics specified in the manifest.jso
 }
 ```
 
+If your integration requires `mqtt`, make sure it is added to the [dependencies](#dependencies).
+
+Integrations depending on MQTT should wait using `await mqtt.async_wait_for_mqtt_client(hass)` for the MQTT client to become available before they can subscribe. The `async_wait_for_mqtt_client` method will block and return `True` till the MQTT client is available.
+
 ## DHCP
 
 If your integration supports discovery via dhcp, you can add the type to your manifest. If the user has the `dhcp` integration loaded, it will load the `dhcp` step of your integration's config flow when it is discovered. We support passively listening for DHCP discovery by the `hostname` and [OUI](https://en.wikipedia.org/wiki/Organizationally_unique_identifier), or matching device registry mac address when `registered_devices` is set to `true`. The manifest value is a list of matcher dictionaries, your integration is discovered if all items of any of the specified matchers are found in the DHCP data. It's up to your config flow to filter out duplicates.
@@ -419,7 +423,7 @@ The following IoT classes are accepted in the manifest:
 
 ## Virtual integration
 
-Some products are supported by integrations that are not named after the product. For example, Roborock vacuums are integrated via the Xiaomi Miio integration, and the IKEA SYMFONISK product line can be used with the Sonos integration.
+Some products are supported by integrations that are not named after the product. For example, Yale Home locks are integrated via the August integration, and the IKEA SYMFONISK product line can be used with the Sonos integration.
 
 There are also cases where a product line only supports a standard IoT standards like Zigbee or Z-Wave. For example, the U-tec ultraloq works via Z-Wave and has no specific dedicated integration. 
 
@@ -433,28 +437,28 @@ Virtual integrations can only be provided by Home Assistant Core and not by cust
 
 ### Supported by
 
-The "Supported by" virtual integration is an integration that points to another integration to provide its implementation. For example, Roborock vacuums are integrated via the Xiaomi Miio (`xiaomi_miio`) integration.
+The "Supported by" virtual integration is an integration that points to another integration to provide its implementation. For example, Yale Home locks are integrated via the August (`august`) integration.
 
 Example manifest:
 
 ```json
 {
-  "domain": "roborock",
-  "name": "Roborock",
+  "domain": "yale_home",
+  "name": "Yale Home",
   "integration_type": "virtual",
-  "supported_by": "xiaomi_miio",
+  "supported_by": "august"
 }
 ```
 
 The `domain` and `name` are the same as with any other integration, but the `integration_type` is set to `virtual`. 
-The logo for the domain of this virtual integration must be added to our [brands repository](https://github.com/home-assistant/brands/), so in this case, a Roborock branding is used.
+The logo for the domain of this virtual integration must be added to our [brands repository](https://github.com/home-assistant/brands/), so in this case, a Yale Home branding is used.
 
-The `supported_by` is the domain of the integration providing the implementation for this product. In the example above, the Roborock vacuum is supported by the Xiaomi Miio integration and points to its domain `xiaomi_miio`.
+The `supported_by` is the domain of the integration providing the implementation for this product. In the example above, the Yale Home lock is supported by the August integration and points to its domain `august`.
 
 Result:
 
-- Roborock is listed on our user documentation website under integrations with an automatically generated stub page that directs the user to the integration to use.
-- Roborock is listed in Home Assistant when clicking "add integration". When selected, we explain to the user that this product is integrated using a different integration, then the user continues to the Xioami Miio config flow.
+- Yale Home is listed on our user documentation website under integrations with an automatically generated stub page that directs the user to the integration to use.
+- Yale Home is listed in Home Assistant when clicking "add integration". When selected, we explain to the user that this product is integrated using a different integration, then the user continues to the Xioami Miio config flow.
 
 ### IoT standards
 

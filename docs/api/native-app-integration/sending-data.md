@@ -106,11 +106,11 @@ Here are the libraries we suggest using, although you should feel free to use wh
 
 - Swift/Objective-C: [swift-sodium](https://github.com/jedisct1/swift-sodium) (official library maintained by Sodium developers).
 
-For other languages, please see the list of [Bindings for other languages](https://download.libsodium.org/doc/bindings_for_other_languages). If more than one choice is available, we recommend using the choice most recently updated as well as most peer reviewed (a easy way to check this is seeing how many GitHub stars a project has).
+For other languages, please see the list of [Bindings for other languages](https://doc.libsodium.org/bindings_for_other_languages). If more than one choice is available, we recommend using the choice most recently updated as well as most peer reviewed (a easy way to check this is seeing how many GitHub stars a project has).
 
 ### Configuration
 
-We use the [secret-key cryptography](https://download.libsodium.org/doc/secret-key_cryptography) features of Sodium to encrypt and decrypt payloads. All payloads are JSON encoded in Base64. For Base64 type, use `sodium_base64_VARIANT_ORIGINAL` (that is, "original", no padding, not URL safe). If the payload does not contain a `data` key when unencrypted (such as with the [get_config](https://developers.home-assistant.io/docs/api/native-app-integration/sending-data#get-config) request), an empty JSON object (`{}`) must be encrypted instead.
+We use the [secret-key cryptography](https://doc.libsodium.org/secret-key_cryptography) features of Sodium to encrypt and decrypt payloads. All payloads are JSON encoded in Base64. For Base64 type, use `sodium_base64_VARIANT_ORIGINAL` (that is, "original", no padding, not URL safe). If the payload does not contain a `data` key when unencrypted (such as with the [get_config](https://developers.home-assistant.io/docs/api/native-app-integration/sending-data#get-config) request), an empty JSON object (`{}`) must be encrypted instead.
 
 ### Signaling encryption support
 
@@ -319,3 +319,22 @@ The response will include paths for streaming either via HLS or via MJPEG image 
 ```
 
 If HLS streaming is not available, the `hls_path` will be `null`. See notes above on instance URL for how to construct a full URL.
+
+## Process Conversation
+
+_This requires Home Assistant 2023.2.0 or later._
+
+Process a sentence with the conversation integration.
+
+```json
+{
+  "type": "conversation_process",
+  "data": {
+    "text": "Turn on the lights",
+    "language": "en",
+    "conversation_id": "ABCD",
+  }
+}
+```
+
+For available keys and response, see the [conversation API documentation](../../intent_conversation_api).

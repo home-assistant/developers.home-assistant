@@ -70,12 +70,13 @@ Properties should always only return information from memory and not do I/O (lik
 | available               | boolean | `True`  | Indicate if Home Assistant is able to read the state and control the underlying device. |
 | device_class            | string  | `None`  | Extra classification of what the device is. Each domain specifies their own. Device classes can come with extra requirements for unit of measurement and supported features. |
 | device_info             | dict    | `None`  | [Device registry](/docs/device_registry_index) descriptor for [automatic device registration.](/docs/device_registry_index#automatic-registration-through-an-entity)
-| entity_category         | string  | `None`  | Classification of a non-primary entity. Set to `config` for an entity which allows changing the configuration of a device, for example a switch entity making it possible to turn the background illumination of a switch on and off. Set to `diagnostic` for an entity exposing some configuration parameter or diagnostics of a device but does not allow changing it, for example a sensor showing RSSI or MAC-address. |
+| entity_category         | string  | `None`  | Classification of a non-primary entity. Set to `EntityCategory.CONFIG` for an entity which allows changing the configuration of a device, for example a switch entity making it possible to turn the background illumination of a switch on and off. Set to `EntityCategory.DIAGNOSTIC` for an entity exposing some configuration parameter or diagnostics of a device but does not allow changing it, for example a sensor showing RSSI or MAC-address. |
 | entity_picture          | URL     | `None`  | Url of a picture to show for the entity. |
 | extra_state_attributes  | dict    | `None`  | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version. |
 | has_entity_name         | boolean |         | Return `True` if the entity's `name` property represents the entity itself (required for new integrations). This is explained in more detail below.
-| name                    | string  | `None`  | Name of the entity  |
+| name                    | string  | `None`  | Name of the entity. Avoid hard coding a natural language name, use a [translated name](/docs/internationalization/core/#name-of-entities) instead.  |
 | should_poll             | boolean | `True`  | Should Home Assistant check with the entity for an updated state. If set to `False`, entity will need to notify Home Assistant of new updates by calling one of the [schedule update methods](integration_fetching_data.md#push-vs-poll). |
+| translation_key         | string  | `None`  | A key for looking up translations of the entity's state in [`entity` section of the integration's `strings.json`](/docs/internationalization/core#state-of-entities).
 | unique_id               | string  | `None`  | A unique identifier for this entity. Needs to be unique within a platform (ie `light.hue`). Should not be configurable by the user or be changeable. [Learn more.](entity_registry_index.md#unique-id-requirements) |
 
 :::warning
@@ -102,6 +103,11 @@ The following properties are used and controlled by Home Assistant, and should n
 | enabled | boolean | `True`  | Indicate if entity is enabled in the entity registry. It also returns `True` if the platform doesn't support the entity registry. Disabled entities will not be added to Home Assistant. |
 
 ## Entity naming
+
+Avoid setting an entity's name to a hard coded English string, instead, the name should be [translated](/docs/internationalization/core#name-of-entities). Examples of when the name should not be translated are proper nouns, model names, and name provided by a 3rd-party library.
+
+Some entities are automatically named after their device class, this includes [`binary_sensor`](/docs/core/entity/binary-sensor), [`button`](/docs/core/entity/button), [`number`](/docs/core/entity/number) and [`sensor`](/docs/core/entity/sensor) entities and in many cases don't need to be named.
+For example, an unnamed sensor which has its device class set to `temperature` will be named "Temperature".
 
 ### `has_entity_name` True (Mandatory for new integrations)
 
@@ -150,9 +156,24 @@ class MySwitch(SwitchEntity):
     _attr_has_entity_name = True
 
     @property
+    def translation_key(self):
+        """Return the translation key to translate the entity's name and states."""
+        return my_switch
+```
+
+#### Example of an untranslated switch entity which is either not the main feature of a device, or is not part of a device:
+
+```python
+from homeassistant.components.switch import SwitchEntity
+
+
+class MySwitch(SwitchEntity):
+    _attr_has_entity_name = True
+
+    @property
     def name(self):
         """Name of the entity."""
-        return "My Switch"
+        return "Model X"
 ```
 
 ### `has_entity_name` not implemented or False (Deprecated)
@@ -199,45 +220,130 @@ class MySwitch(SwitchEntity):
     ...
 ```
 
-This does exactly the same as the first example but relies on a default 
+This does exactly the same as the first example but relies on a default
 implementation of the property in the base class. The name of the attribute
 starts with `_attr_` followed by the property name. For example, the default
 `device_class` property returns the `_attr_device_class` class attribute.
 
-Not all entity classes support the `_attr_` attributes for their entity 
-specific properties, please refer to the documentation for the respective 
+Not all entity classes support the `_attr_` attributes for their entity
+specific properties, please refer to the documentation for the respective
 entity class for details.
 
 :::tip
 If an integration needs to access its own properties it should access the property (`self.name`), not the class or instance attribute (`self._attr_name`).
 :::
 
+### Entity description
+
+The third way of setting entity properties is to use an entity description. To do this set an attribute named `entity_description` on the `Entity` instance with an `EntityDescription` instance. The entity description is a dataclass with attributes corresponding to most of the available `Entity` properties. Each entity integration that supports an entity platform, eg the `switch` integration, will define their own `EntityDescription` subclass that should be used by implementing platforms that want to use entity descriptions.
+
+By default the `EntityDescription` instance has one required attribute named `key`. This is a string which is meant to be unique for all the entity descriptions of an implementing platform. A common use case for this attribute is to include it in the `unique_id` of the described entity.
+
+The main benefit of using entity descriptions is that it defines the different entity types of a platform in a declarative manner, making the code much easier to read when there are many different entity types.
+
 ### Example
 
-The below code snippet gives an example of best practices for when to implement property functions, and when to use class or instance attributes.
+The below code snippet gives an example of best practices for when to implement property functions, when to use class or instance attributes and when to use entity descriptions.
 
 ```py
-class SomeEntity():
-    _attr_device_clas = DEVICE_CLASS_TEMPERATURE  # This will be common to all instances of SomeEntity
-    def __init__(self, device):
+from __future__ import annotations
+
+from collections.abc import Callable
+from dataclasses import dataclass
+
+from example import ExampleDevice, ExampleException
+
+from homeassistant.components.sensor import (
+    SensorDeviceClass,
+    SensorEntity,
+    SensorEntityDescription,
+    SensorStateClass,
+)
+from homeassistant.config_entries import ConfigEntry
+from homeassistant.const import (
+    EntityCategory,
+    UnitOfElectricCurrent,
+)
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.entity_platform import AddEntitiesCallback
+from homeassistant.helpers.typing import StateType
+
+from .const import DOMAIN, LOGGER
+
+@dataclass
+class ExampleSensorEntityDescriptionMixin:
+    """Mixin for required keys."""
+
+    value_fn: Callable[[ExampleDevice], StateType]
+
+
+@dataclass
+class ExampleSensorEntityDescription(
+    SensorEntityDescription, ExampleSensorEntityDescriptionMixin
+):
+    """Describes Example sensor entity."""
+
+    exists_fn: Callable[[ExampleDevice], bool] = lambda _: True
+
+
+SENSORS: tuple[ExampleSensorEntityDescription, ...] = (
+    ExampleSensorEntityDescription(
+        key="estimated_current",
+        native_unit_of_measurement=UnitOfElectricCurrent.MILLIAMPERE,
+        device_class=SensorDeviceClass.CURRENT,
+        state_class=SensorStateClass.MEASUREMENT,
+        value_fn=lambda device: device.power,
+        exists_fn=lambda device: bool(device.max_power),
+    ),
+)
+
+
+async def async_setup_entry(
+    hass: HomeAssistant,
+    entry: ConfigEntry,
+    async_add_entities: AddEntitiesCallback,
+) -> None:
+    """Set up Example sensor based on a config entry."""
+    device: ExampleDevice = hass.data[DOMAIN][entry.entry_id]
+    async_add_entities(
+        ExampleSensorEntity(device, description)
+        for description in SENSORS
+        if description.exists_fn(device)
+    )
+
+
+class ExampleSensorEntity(SensorEntity):
+    """Represent an Example sensor."""
+
+    entity_description: ExampleSensorEntityDescription
+    _attr_entity_category = (
+        EntityCategory.DIAGNOSTIC
+    )  # This will be common to all instances of ExampleSensorEntity
+
+    def __init__(
+        self, device: ExampleDevice, entity_description: ExampleSensorEntityDescription
+    ) -> None:
+        """Set up the instance."""
         self._device = device
+        self.entity_description = entity_description
         self._attr_available = False  # This overrides the default
-        self._attr_name = device.get_friendly_name()
+        self._attr_unique_id = f"{device.serial}_{entity_description.key}"
 
-        # The following should be avoided:
-        if some_complex_condition and some_other_condition and something_is_none_and_only_valid_after_update and device_available:
-           ...
-
-    def update(self)
-        if self.available  # Read current state, no need to prefix with _attr_
-            # Update the entity
+    def update(self) -> None:
+        """Update entity state."""
+        try:
             self._device.update()
-
-        if error:
+        except ExampleException:
+            if self.available:  # Read current state, no need to prefix with _attr_
+                LOGGER.warning("Update failed for %s", self.entity_id)
             self._attr_available = False  # Set property value
             return
+
+        self._attr_available = True
         # We don't need to check if device available here
-        self._attr_is_on = self._device.get_state()  # Update "is_on" property
+        self._attr_native_value = self.entity_description.value_fn(
+            self._device
+        )  # Update "native_value" property
 ```
 
 ## Lifecycle hooks
@@ -251,6 +357,19 @@ Called when an entity has their entity_id and hass object assigned, before it is
 ### `async_will_remove_from_hass()`
 
 Called when an entity is about to be removed from Home Assistant. Example use: disconnect from the server or unsubscribe from updates.
+
+## Excluding state attributes from recorder history
+
+State attributes which are not suitable for state history recording should be excluded from state history recording by including them in either of `_entity_component_unrecorded_attributes` or `_unrecorded_attributes`.
+- `_entity_component_unrecorded_attributes: frozenset[str]` may be set in a base component class, e.g. in `light.LightEntity`
+- `_unrecorded_attributes: frozenset[str]` may be set in an integration's platform e.g. in an entity class defined in platform `hue.light`.
+
+Examples of platform state attributes which are exluded from recording include the `entity_picture` attribute of `image` entities which will not be valid after some time, the `preset_modes` attribute of `fan` entities which is not likely to change.
+Examples of integration specific state attributes which are excluded from recording include `description` and `location` state attributes in platform `trafikverket.camera` which do not change.
+
+:::tip
+The `_entity_component_unrecorded_attributes` and `_unrecorded_attributes` must be declared as class attributes; instance attributes will be ignored.
+:::
 
 ## Changing the entity model
 

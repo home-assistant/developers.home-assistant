@@ -28,11 +28,11 @@ It might be required that you install additional packages depending on your dist
 
 :::info Important
 Run `pytest` & `pre-commit` before you create your pull request to avoid annoying fixes.
-`pre-commit` will will be invoked automatically by git when commiting changes.
+`pre-commit` will be invoked automatically by git when commiting changes.
 :::
 
 :::note
-Running the full `ptyest` test suite will take quite some time, so as the minimal requirement for pull requests, run at least the tests that are related to your code changes (see details below on how to). The full test suite will anyway be run by the CI once you created your pull request and before it can be merged.
+Running the full `pytest` test suite will take quite some time, so as the minimal requirement for pull requests, run at least the tests that are related to your code changes (see details below on how to). The full test suite will anyway be run by the CI once you created your pull request and before it can be merged.
 :::
 
 Running `pytest` will run unit tests against the locally available Python version. We run our tests in our CI against all our supported Python versions.
@@ -43,7 +43,7 @@ If you are working on tests for an integration and you changed the dependencies,
 Next you can update all dependencies in your development environment by running:
 
 ```shell
-pip3 install --use-deprecated=legacy-resolver -r requirements_test_all.txt -c homeassistant/package_constraints.txt
+pip3 install -r requirements_test_all.txt
 ```
 ### Running a limited test suite
 
@@ -84,10 +84,9 @@ pre-commit run --show-diff-on-failure
 The linters are also available directly, you can run tests on individual files:
 
 ```shell
-flake8 homeassistant/core.py
+ruff homeassistant/core.py
 pylint homeassistant/core.py
 black homeassistant/core.py
-isort homeassistant/core.py
 ```
 
 ### Notes on PyLint and PEP8 validation
@@ -105,3 +104,73 @@ If you can't avoid a PyLint warning, add a comment to disable the PyLint check f
   - Modify a `ConfigEntry` via the config entries interface [`hass.config_entries`](https://github.com/home-assistant/core/blob/4cce724473233d4fb32c08bd251940b1ce2ba570/homeassistant/config_entries.py#L570).
   - Assert the state of a config entry via the [`ConfigEntry.state`](https://github.com/home-assistant/core/blob/4cce724473233d4fb32c08bd251940b1ce2ba570/homeassistant/config_entries.py#L169) attribute.
   - Mock a config entry via the `MockConfigEntry` class in [`tests/common.py`](https://github.com/home-assistant/core/blob/4cce724473233d4fb32c08bd251940b1ce2ba570/tests/common.py#L658)
+
+### Snapshot testing
+
+Home Assistant supports a testing concept called snapshot testing (also known
+as approval tests), which are tests that assert values against a stored
+reference value (the snapshot).
+
+Snapshot tests are different from regular (functional) tests and do not replace
+functional tests, but they can be very useful for testing larger test outputs.
+Within Home Assistant they could, for example, be used to:
+
+- Ensure the output of an entity state is and remains as expected.
+- Ensure an area, config, device, entity, or issue entry in the registry is and
+  remains as expected.
+- Ensure the output of a diagnostic dump is and remains as expected.
+- Ensure a FlowResult is and remains as expected.
+
+And many more cases that have large output, like JSON, YAML, or XML results.
+
+The big difference between snapshot tests and regular tests is that the results
+are captured by running the tests in a special mode that creates the snapshots.
+Any sequential runs of the tests will then compare the results against the
+snapshot. If the results are different, the test will fail.
+
+Snapshot testing in Home Assistant is built on top of [Syrupy](https://github.com/tophat/syrupy),
+their documentation can thus be applied when writing Home Assistant tests.
+This is a snapshot test that asserts the output of an entity state:
+
+```python
+# tests/components/example/test_sensor.py
+from homeassistant.core import HomeAssistant
+from syrupy.assertion import SnapshotAssertion
+
+
+async def test_sensor(
+    hass: HomeAssistant,
+    snapshot: SnapshotAssertion,
+) -> None:
+    """Test the sensor state."""
+    state = hass.states.get("sensor.whatever")
+    assert state == snapshot
+```
+
+When this test is run for the first time, it will fail, as no snapshot exists.
+To create (or update) a snapshot, run the test with
+the `--snapshot-update` flag:
+
+```shell
+pytest tests/components/example/test_sensor.py --snapshot-update
+```
+
+This will create a snapshot file in the `tests/components/example/snapshots`.
+The snapshot file is named after the test file, in this case `test_sensor.ambr`,
+and is human-readable. The snapshot files must be committed to the repository.
+
+When the test is run again (without the update flag), it will compare the
+results against the stored snapshot and everything should pass.
+
+When the test results change, the test will fail and the snapshot needs to be
+updated again.
+
+Use snapshot testing with care! As it is very easy to create a snapshot,
+it can be tempting to assert everything against a snapshot. However, remember,
+it is not a replacement for functional tests.
+
+As an example, when testing if an entity would go unavailable when the device
+returns an error, it is better to assert the specific change you expected: 
+Assert the state of the entity became `unavailable`. This functional test is a
+better approach than asserting the full state of such an entity using a
+snapshot, as it assumes it worked as expected (when taking the snapshot).
