@@ -368,10 +368,13 @@ The server will indicate with a message indicating that the service is done exec
       "id": "326ef27d19415c60c492fe330945f954",
       "parent_id": null,
       "user_id": "31ddb597e03147118cf8d2f8fbea5553"
-    }
+    },
+    "response": null
   }
 }
 ```
+
+The `result` of the call will always include a `response` to account for services that support responses. When a service that doesn't support responses is called, the value of `response` will be `null`.
 
 ## Fetching states
 
