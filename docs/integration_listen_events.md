@@ -99,7 +99,7 @@ The below events are commonly listened to directly.
 | ---------------------------------- | --------------------------------------------------------------------------
 | `EVENT_HOMEASSISTANT_START`        | Completed the setup and entered the start phase
 | `EVENT_HOMEASSISTANT_STARTED`      | Completed the start phase, and all integrations have had a chance to load; Mostly used by voice assistants and integrations that export states to external services
-| `EVENT_HOMEASSISTANT_STOP_PENDING` | A shutdown has been initiated, but nothing is unloaded in this phase; Used to run the `shutdown` trigger in the `homeassistant` integration, before stopping the core
+| `EVENT_HOMEASSISTANT_STOPPING`     | A shutdown has been initiated, but nothing is unloaded in this phase; Used to run the `shutdown` trigger in the `homeassistant` integration, before stopping the core
 | `EVENT_HOMEASSISTANT_STOP`         | Entered the stop phase
 
 ### Other events
