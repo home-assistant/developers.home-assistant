@@ -47,6 +47,6 @@ Some add-ons need access to all these add-on-specific config folders. For exampl
 3. Studio Code Server
 
 Essentially, these add-ons provide alternative means of editing the configuration
-files of Home Assistant and its add-ons. Add-ons like these should add `addon_configs:rw`
+files of Home Assistant and its add-ons. Add-ons like these should add `all_addon_configs:rw`
 to the list of folders in the map field. This will map the entire addon configs
 folder within the container at `/addon_configs`.
