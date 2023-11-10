@@ -22,7 +22,6 @@ An info object is passed to the strategy with information:
 | -- | --
 | `config` | User supplied dashboard configuration, if any.
 | `hass` | The Home Assistant object.
-| `narrow` | If the current user interface is rendered in narrow mode or not.
 
 ```ts
 class StrategyDemo {
@@ -69,7 +68,6 @@ An info object is passed to the strategy with information:
 | `view` | View configuration.
 | `config` | Dashboard configuration.
 | `hass` | The Home Assistant object.
-| `narrow` | If the current user interface is rendered in narrow mode or not.
 
 ```ts
 class StrategyDemo {
