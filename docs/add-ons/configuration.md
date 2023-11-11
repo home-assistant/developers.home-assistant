@@ -313,7 +313,7 @@ Sometimes add-on developers may want to allow users to configure to provide thei
 2. Internal service requires a binary file or some file configured externally as part of its config.
 3. Internal service supports live reloading on config change and you want to support that for some or all of its configuration by asking users for a file in its schema to live reload from.
 
-In cases like these you should add `addon_config` to `map` in your addon's configuration file. And then you should direct your users to put this file in the folder `/addon_configs/<your addon's slug>`. This folder will be mounted at `/config` inside your addon's docker container at runtime. You should either provide an option in your addon's schema that collects a relative path to the file(s) starting from this folder or rely on a fixed filename and include that in your documentation.
+In cases like these you should add `addon_config` to `map` in your addon's configuration file. And then you should direct your users to put this file in the folder `/addon_configs/<your addon's slug>`. This folder will be mounted at `/addon_config` inside your addon's docker container at runtime. You should either provide an option in your addon's schema that collects a relative path to the file(s) starting from this folder or rely on a fixed filename and include that in your documentation.
 
 Another use case of `addon_config` could be if your addon wants to provide file-based output or give users access to internal files for debugging. Some examples include:
 
@@ -322,3 +322,5 @@ Another use case of `addon_config` could be if your addon wants to provide file-
 3. Internal service generates files which are intended to be used in its own config and you wish to allow users to access them as well
 
 In cases like these you should add `addon_config:rw` to `map` so your addon can write to this folder as well as read from it. And then you should write these files out to `/config` during your addon's runtime so users can see and access them.
+
+Add-on configurations will not be deleted when an add-on gets uninstalled.

@@ -1,8 +1,11 @@
 ---
-author: Mike Degatano
+author: Mike Degatano, Stefan Agner
 authorURL: https://github.com/mdegat01
 title: "Public Addon Config"
 ---
+
+**Update:** The implementation has been updated on short notice due to concerns
+about user impact! See the update section at the end about details.
 
 Add-ons can now have a public folder for config or data files, which users can see
 and modify, but it is still backed up with the add-on.
@@ -18,7 +21,7 @@ The problem with this is twofold:
 
 There is now a better solution for add-on developers. Add-ons can include `addon_config`
 in the list of folders to map. Then, the supervisor will create a folder for that add-on
-at `/addon_configs/<your addon slug>` and map that to `/config` within the add-on
+at `/addon_configs/<your addon slug>` and map that to `/addon_config` within the add-on
 container. If your addon needs to be able to create and modify files in this folder
 in addition to collecting files from users, use `addon_config:rw` instead.
 
@@ -26,17 +29,16 @@ To read more about this feature and some of the use cases, see [Add-on advanced 
 
 ## Backwards compatibility with `/config`
 
-You may notice that the new public config folder is mapped to `/config`. Which is
-previously where Home Assistant's config folder was mapped if you added `config`
-to the `map` field.
+Initially, we intended to rename `/config` to `/homeasssistant`. However, due to
+concerns about user impact (users need to be aware of that change, potentially
+update scripts etc, and it would also be counter intuitive since inside the Core
+container the configuration is still mapped at `/config`).
 
-This option is intended to replace the need for add-ons to map Home Assistant's
-config into their container. As such, an add-on cannot include both `config` and
-`addon_config` in the `map` field.
-
-Going forward, if you do need to make Home Assistant's config available to your
-add-on, you should list `homeassistant_config` as a folder in the `map` field. Then
-Home Assistant's config folder will be mapped to `/homeassistant` within the container.
+So at this point the Home Assistant's config folder will be mapped to `/config`
+inside the add-on container no matter if you are using the old `config` mapping
+or the new `homeassistant_config` mapping. The `homeassistant_config` is
+encouraged going forward since it makes it more obvious that this config folder
+is not meant for the add-on to store configurations.
 
 ## New `addon_configs` folder
 
@@ -50,3 +52,17 @@ Essentially, these add-ons provide alternative means of editing the configuratio
 files of Home Assistant and its add-ons. Add-ons like these should add `all_addon_configs:rw`
 to the list of folders in the map field. This will map the entire addon configs
 folder within the container at `/addon_configs`.
+
+## Update November 11 2023
+
+Supervisor 2023.11.0 has a bug where the `addon_config` isn't working at
+startup. Please wait until a fixed version has completely rolled out (see
+[Supervsior issue #4689](https://github.com/home-assistant/supervisor/issues/4689).
+
+Due to concerns of confusion for users what /config exactly represents this
+change has been amended to always expose the add-on config to `/addon_config`
+instead (see [Supervisor change #4697](https://github.com/home-assistant/supervisor/pull/4697).
+
+This change will be rolled out with Supervisor 2023.11.2 (at the time of writing
+available on the beta channel).
+
