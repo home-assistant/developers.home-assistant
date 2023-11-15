@@ -13,7 +13,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ----------------------- | ---- | ------- | -----------
-| current_valve_position | <code>int &#124; None</code> | `None` | The current position of valve where 0 means closed and 100 is fully open.
+| current_valve_position | <code>int &#124; None</code> | `None` | The current position of the valve where 0 means closed and 100 is fully open.
 | is_closed | <code>bool &#124; None</code> | **Required** | If the valve is closed or not. Used to determine `state`.
 | is_closing | <code>bool &#124; None</code> | `None` | If the valve is closing or not. Used to determine `state`.
 | is_opening | <code>bool &#124; None</code> | `None` | If the valve is opening or not. Used to determine `state`.
