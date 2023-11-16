@@ -163,7 +163,7 @@ The translation strings for device automations are defined under the `device_aut
 ### Exceptions
 
 Localization is supported for `HomeAssistantError` and its subclasses.
-The translation strings for exceptions are defined under the `exception` key. An example strings file below describes the different supported keys.
+The translation strings for exceptions are defined under the `exception` key in a `strings.json` file. The example below describes the different supported keys.
 
 ```json
 {
