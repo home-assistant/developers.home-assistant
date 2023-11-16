@@ -13,7 +13,7 @@ The `strings.json` contains translations for different things that the integrati
 | `title`             | Title of the integration.                         |
 | `config`            | Translations for the config flow.                 |
 | `device_automation` | Translations for device automations.              |
-| `exceptions`        | Translations for for error messages.              |
+| `exceptions`        | Translations for error messages.              |
 | `issues`            | Translations for repairs issues.                  |
 | `options`           | Translations for the options flow.                |
 | `selectors`         | Selectors of the integration.                     |
