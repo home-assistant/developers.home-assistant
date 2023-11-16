@@ -8,4 +8,4 @@ Raise `ServiceValidationError` for validation errors that occur during service c
 
 ## Localizing Exceptions
 
-Home Assistant [supports localization](/docs/internationalization/core/#exceptions) for `HomeAssistantError` and it's subclasses like `ServiceValidationError`.
+Home Assistant [supports localization](/docs/internationalization/core/#exceptions) for `HomeAssistantError` and its subclasses like `ServiceValidationError`.
