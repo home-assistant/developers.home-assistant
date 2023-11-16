@@ -528,7 +528,7 @@ If an error occurs, the `success` key in the `result` message will be set to `fa
 
 ### Error handling during service calls and translations
 
-The JSON below shows an example of an error response. If `HomeAssistantError` error (or a sub class of `HomeAssistantError`) is handled, translation information, if set, will be added to the response. 
+The JSON below shows an example of an error response. If `HomeAssistantError` error (or a subclass of `HomeAssistantError`) is handled, translation information, if set, will be added to the response. 
 
 When handling `ServiceValidationError` (`service_validation_error`) a stack trace is printed to the logs at debug level only.
 
