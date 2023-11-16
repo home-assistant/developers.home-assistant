@@ -177,7 +177,7 @@ The translation strings for exceptions are defined under the `exception` key in 
 
 ```
 
-Example of raising exception with localization during a service call:
+Example of raising an exception with localization during a service call:
 
 ```python
 async def async_select_index(hass: HomeAssistant, index: int) -> None:
