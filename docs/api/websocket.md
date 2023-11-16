@@ -528,9 +528,9 @@ If an error occurs, the `success` key in the `result` message will be set to `fa
 
 ### Error handling during service calls and translations
 
-When a `ServiceValidationError` (`service_validation_error`) exception was raised during a websocket service call. A stack trace is printed to the logs at debug level only. Raising `HomeAssistantError` (`home_assistant_error`) or subclass exception will still print a full stack trace to the logs.
+The JSON below shows an example of an error response. If `HomeAssistantError` error (or a sub class of `HomeAssistantError`) is handled, translation information, if set, will be added to the response. 
 
-During a websocket service calls translations are supported for `HomeAssistantError` and its subclasses. When a `translation_key` is set by the caller of the exception this, the keys `translation_domain` and `translation_placeholders` will be added to the error response.
+When handling `ServiceValidationError` (`service_validation_error`) a stack trace is printed to the logs at debug level only.
 
 ```json
 {
