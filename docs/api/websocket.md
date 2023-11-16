@@ -549,4 +549,4 @@ When handling `ServiceValidationError` (`service_validation_error`) a stack trac
 }
 ```
 
-[Read more](/docs/core/platform/handling_exceptions) about handling exceptions or and the [localization of exceptions](/docs/internationalization/core/#exceptions).
+[Read more](/docs/core/platform/raising_exceptions) about raising exceptions or and the [localization of exceptions](/docs/internationalization/core/#exceptions).
