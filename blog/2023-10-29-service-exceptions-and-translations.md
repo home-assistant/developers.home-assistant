@@ -13,7 +13,7 @@ To be able to suppress the stack trace in these cases, we introduce `ServiceVali
 
 ## Translation support for Exceptions
 
-The `HomeAssistantError` exception and its sub classes, including `ServiceValidationError`, now accept a translation key to allow localization. [Read more](/docs/internationalization/core/#exceptions). The translation key will be used in cases where the frontend receives information about the exception.
+The `HomeAssistantError` exception and its subclasses, including `ServiceValidationError`, now accept a translation key to allow localization. [Read more](/docs/internationalization/core/#exceptions). The translation key will be used in cases where the frontend receives information about the exception.
 
 ### Background
 
