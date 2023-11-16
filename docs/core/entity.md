@@ -270,20 +270,13 @@ from homeassistant.helpers.typing import StateType
 
 from .const import DOMAIN, LOGGER
 
-@dataclass
-class ExampleSensorEntityDescriptionMixin:
-    """Mixin for required keys."""
 
-    value_fn: Callable[[ExampleDevice], StateType]
-
-
-@dataclass
-class ExampleSensorEntityDescription(
-    SensorEntityDescription, ExampleSensorEntityDescriptionMixin
-):
+@dataclass(kw_only=True)
+class ExampleSensorEntityDescription(SensorEntityDescription):
     """Describes Example sensor entity."""
 
     exists_fn: Callable[[ExampleDevice], bool] = lambda _: True
+    value_fn: Callable[[ExampleDevice], StateType]
 
 
 SENSORS: tuple[ExampleSensorEntityDescription, ...] = (
