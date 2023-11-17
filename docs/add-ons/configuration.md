@@ -57,6 +57,8 @@ then there will be a variable `TARGET` containing `beer` in the environment of y
 
 All add-ons are based on the latest Alpine Linux image. Home Assistant will automatically substitute the right base image based on the machine architecture. Add `tzdata` if you need to run in a different timezone. `tzdata` Is is already added to our base images.
 
+Images can be found [here](https://github.com/home-assistant/docker-base/blob/master/README.md). To test your add-on, you can build with these locally, e.g. on a 64-bit desktop `docker build --build-arg BUILD_FROM=ghcr.io/home-assistant/amd64-base`
+
 ```dockerfile
 ARG BUILD_FROM
 FROM $BUILD_FROM
@@ -160,14 +162,14 @@ Avoid using `config.yaml` as filename in your add-on for anything other than the
 | `video` | bool | `false` | Mark this add-on to use the internal video system. All available devices will be mapped into the add-on.
 | `gpio` | bool | `false` | If this is set to `true`, `/sys/class/gpio` will map into the add-on for access to the GPIO interface from the kernel. Some libraries also need  `/dev/mem` and `SYS_RAWIO` for read/write access to this device. On systems with AppArmor enabled, you need to disable AppArmor or provide your own profile for the add-on, which is better for security.
 | `usb` | bool | `false` | If this is set to `true`, it would map the raw USB access `/dev/bus/usb` into the add-on with plug&play support.
-| `uart` | bool | `false` | Default `false`. Auto mapping all UART/serial devices from the host into the add-on.
-| `udev` | bool | `false` | Default `false`. Setting this to `true` gets the host udev database read-only mounted into the add-on.
+| `uart` | bool | `false` | Default `false`. Auto mapping all UART/serial devices from the host into the add-on. This is alternative to listing `devices`.
+| `udev` | bool | `false` | Default `false`. Setting this to `true` gets the host udev database read-only mounted into the add-on. This is an alternative to listing these in `devices`.
 | `devicetree` | bool | `false` | If this is set to `true`, `/device-tree` will map into the add-on.
 | `kernel_modules` | bool | `false` | Map host kernel modules and config into the add-on (readonly) and give you `SYS_MODULE` permission.
 | `stdin` | bool | `false` | If enabled, you can use the STDIN with Home Assistant API.
 | `legacy` | bool | `false` | If the Docker image has no `hass.io` labels, you can enable the legacy mode to use the config data.
 | `options` | dict | | Default options value of the add-on.
-| `schema` | dict | | Schema for options value of the add-on. It can be `false` to disable schema validation and options.
+| `schema` | dict | | Schema for options value of the add-on. It can be `false` to disable schema validation and options. Setting a `schema` aids the Configuration tab on the front end.
 | `image` | string | | For use with Docker Hub and other container registries. This should be set to the name of the image only (E.g, `ghcr.io/home-assistant/{arch}-addon-example`). If you use this option, set the active docker tag using the `version` option.
 | `codenotary` | string | | For use with Codenotary CAS. This is the E-Mail address used to verify your image with Codenotary (E.g, `example@home-assistant.io`). This should match the E-Mail address used as the signer in the [add-on's extended build options](#add-on-extended-build)
 | `timeout` | integer | 10 | Default 10 (seconds). The timeout to wait until the Docker daemon is done or will be killed.
@@ -175,7 +177,7 @@ Avoid using `config.yaml` as filename in your add-on for anything other than the
 | `discovery` | list | | A list of services that this add-on provides for Home Assistant. Currently supported: `mqtt`, `matter` and `otbr`
 | `services` | list | | A list of services that will be provided or consumed with this add-on. Format is `service`:`function` and functions are: `provide` (this add-on can provide this service), `want` (this add-on can use this service) or `need` (this add-on needs this service to work correctly).
 | `auth_api` | bool | `false` | Allow access to Home Assistant user backend.
-| `ingress` | bool | `false` | Enable the ingress feature for the add-on.
+| `ingress` | bool | `false` | Enable the ingress feature for the add-on. This enables the "Open Web UI" button
 | `ingress_port` | integer | `8099` | For add-ons that run on the host network, you can use `0` and read the port later via the API.
 | `ingress_entry` | string | `/` | Modify the URL entry point.
 | `ingress_stream` | bool | `false` | When enabled, requests to the add-on are streamed
@@ -195,7 +197,7 @@ Avoid using `config.yaml` as filename in your add-on for anything other than the
 
 ### Options / Schema
 
-The `options` dictionary contains all available options and their default value. Set the default value to `null` if the value is required to be given by the user before the add-on can start. Nested arrays and dictionaries are supported with a maximum depth of two.  To make an option optional, put `?` at the end of the data type, otherwise it will be a required value.
+The `options` dictionary contains all available options and their default value. Set the default value to `null` if the value is required to be given by the user before the add-on can start. Nested arrays and dictionaries are supported with a maximum depth of two.  To make an option optional, put `?` at the end of the data type in the `schema`, otherwise it will be a required value.
 
 ```yaml
 message: "custom things"
@@ -307,7 +309,7 @@ _The key under `network` (`80/TCP`) in this case, needs to match a key in your `
 
 ## Add-on advanced options
 
-Sometimes add-on developers may want to allow users to configure to provide their own files which are then provided directly to an internal service as part of its configuration. Some examples include:
+Sometimes add-on developers may want to allow users to configure to provide their own files instead of using the Configuration tab which are then provided directly to an internal service as part of its configuration. Some examples include:
 
 1. Internal service wants a list of configured items and the schema of each item is complex but the service provides no UI for doing so, easier to point users to their documentation and ask for a file in that schema.
 2. Internal service requires a binary file or some file configured externally as part of its config.
