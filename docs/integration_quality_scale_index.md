@@ -26,7 +26,7 @@ This integration is able to cope when things go wrong. It will not print any exc
 - Handles expiration of auth credentials. Refresh if possible or print correct error and fail setup. If based on a config entry, should trigger a new config entry flow to re-authorize.  ([docs](config_entries_config_flow_handler.md#reauthentication))
 - Handles internet unavailable. Log a warning once when unavailable, log once when reconnected.
 - Handles device/service unavailable. Log a warning once when unavailable, log once when reconnected.
-- Operations like service calls and entity methods (e.g. *Set HVAC Mode*) have proper exception handling. Raise `ValueError` on invalid user input and raise `HomeAssistantError` for other failures such as a problem communicating with a device.
+- Operations like service calls and entity methods (e.g. *Set HVAC Mode*) have proper exception handling. Raise `ServiceValidationError` on invalid user input and raise `HomeAssistantError` for other failures such as a problem communicating with a device. [Read more](/docs/core/platform/raising_exceptions) about raising exceptions.
 - Set `available` property to `False` if appropriate ([docs](core/entity.md#generic-properties))
 - Entities have unique ID (if available) ([docs](entity_registry_index.md#unique-id-requirements))
 
