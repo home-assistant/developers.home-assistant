@@ -13,7 +13,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ----------------------- | ---- | ------- | -----------
-| current_valve_position | <code>int &#124; None</code> | `None` | The current position of the valve where 0 means closed and 100 is fully open.
+| current_valve_position | <code>int &#124; None</code> | `None` | The current position of the valve where 0 means closed and 100 is fully open. If no `is_closed` property is defined, its value will be calculated from this attribute. A valve will be closed if its position is 0.
 | is_closed | <code>bool &#124; None</code> | **Required** | If the valve is closed or not. Used to determine `state`.
 | is_closing | <code>bool &#124; None</code> | `None` | If the valve is closing or not. Used to determine `state`.
 | is_opening | <code>bool &#124; None</code> | `None` | If the valve is opening or not. Used to determine `state`.
@@ -57,10 +57,10 @@ Only implement this method if the flag `SUPPORT_OPEN` is set.
 class MyValve(ValveEntity):
     # Implement one of these methods.
 
-    def open_valve(self):
+    def open_valve(self) -> None:
         """Open the valve."""
 
-    async def async_open_valve(self):
+    async def async_open_valve(self) -> None:
         """Open the valve."""
 ```
 
@@ -72,10 +72,10 @@ Only implement this method if the flag `SUPPORT_CLOSE` is set.
 class MyValve(ValveEntity):
     # Implement one of these methods.
 
-    def close_valve(self):
+    def close_valve(self) -> None:
         """Close valve."""
 
-    async def async_close_valve(self):
+    async def async_close_valve(self) -> None:
         """Close valve."""
 ```
 
@@ -102,9 +102,9 @@ Only implement this method if the flag `SUPPORT_STOP` is set.
 class MyValve(ValveEntity):
     # Implement one of these methods.
 
-    def stop_valve(self):
+    def stop_valve(self) -> None:
         """Stop the valve."""
 
-    async def async_stop_valve(self):
+    async def async_stop_valve(self) -> None:
         """Stop the valve."""
 ```
