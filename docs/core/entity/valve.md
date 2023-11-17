@@ -87,10 +87,10 @@ Only implement this method if the flag `SUPPORT_SET_POSITION` is set.
 class MyValve(ValveEntity):
     # Implement one of these methods.
 
-    def set_valve_position(self):
+    def set_valve_position(self, position: int) -> None:
         """Move the valve to a specific position."""
 
-    async def async_set_valve_position(self):
+    async def async_set_valve_position(self, position: int) -> None:
         """Move the valve to a specific position."""
 ```
 
