@@ -528,3 +528,28 @@ If an error occurs, the `success` key in the `result` message will be set to `fa
    }
 }
 ```
+
+### Error handling during service calls and translations
+
+The JSON below shows an example of an error response. If `HomeAssistantError` error (or a subclass of `HomeAssistantError`) is handled, translation information, if set, will be added to the response. 
+
+When handling `ServiceValidationError` (`service_validation_error`) a stack trace is printed to the logs at debug level only.
+
+```json
+{
+   "id": 24,
+   "type":"result",
+   "success": false,
+   "error": {
+      "code": "service_validation_error",
+      "message": "Option 'custom' is not a supported mode.",
+      "translation_key": "unsupported_mode",
+      "translation_domain": "kitchen_sink",
+      "translation_placeholders": {
+        "mode": "custom"
+      }
+   }
+}
+```
+
+[Read more](/docs/core/platform/raising_exceptions) about raising exceptions or and the [localization of exceptions](/docs/internationalization/core/#exceptions).
