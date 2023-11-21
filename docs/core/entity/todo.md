@@ -114,4 +114,4 @@ update.
 | summary | <code>string &#124; None</code>  | `None` | A title or summary of the To-do item. This field is required for the entity state.
 | status | <code>TodoItemStatus &#124; None</code> | `None` | Defines the overall status for the To-do item, either `NEEDS_ACTION` or `COMPLETE`. This field is required for the entity state.
 | due | <code>datetime.date &#124; datetime.datetime &#124; None</code> | `None` | The date and time that a to-do is expected to be completed. The types supported depend on `TodoListEntityFeature.DUE_DATE` or `TodoListEntityFeature.DUE_DATETIME` or both being set. As a datetime, must have a timezone.
-| description | <code>string &#124; None</code>  | `None` | A more complete description of than that provided by the summary. Only supported when `TodoListEntityFeature.DESCRIPTION` is set.
+| description | <code>string &#124; None</code>  | `None` | A more complete description of the to-do item than that provided by the summary. Only supported when `TodoListEntityFeature.DESCRIPTION` is set.
