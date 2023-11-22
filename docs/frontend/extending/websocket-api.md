@@ -55,7 +55,6 @@ async def ws_handle_thumbnail(
     if player is None:
         connection.send_error(
                 msg["id"], "entity_not_found", "Entity not found"
-            )
         )
         return
 
