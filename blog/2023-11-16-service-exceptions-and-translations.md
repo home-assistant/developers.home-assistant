@@ -2,7 +2,7 @@
 author: Jan Bouwhuis
 authorURL: https://github.com/jbouwh
 authorImageURL: https://avatars.githubusercontent.com/u/7188918?s=96&v=4
-title: Exception handling during and translation support
+title: Exception handling during service calls and translation support
 ---
 
 ## Exception handling during service calls
