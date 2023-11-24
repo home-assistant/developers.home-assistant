@@ -267,6 +267,7 @@ window.customCards.push({
   name: "Content Card",
   preview: false, // Optional - defaults to false
   description: "A custom card made by me!", // Optional
+  documentationURL: "https://developers.home-assistant.io/docs/frontend/custom-ui/custom-card/", // Adds a help link in the frontend card editor
 });
 ```
 
