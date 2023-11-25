@@ -184,15 +184,15 @@ async def async_select_index(hass: HomeAssistant, index: int) -> None:
     """Setup the config entry for my device."""
     try:
         check_index(index)
-    except ValueError as ex:
+    except ValueError as exc:
         raise ServiceValidationError(
-            message,
+            str(exc),
             translation_domain=DOMAIN,
             translation_key="invalid_index",
             translation_placeholders={
                 "index": index,
             },
-        ) from ex
+        ) from exc
 ```
 
 
