@@ -32,7 +32,7 @@ async def async_integration_yaml_config(
 
 ## Translation support for Exceptions on config validation
 
-A new `ConfigValidationError` exception class is introduced. It will be raised  in case an error occurs during config error handling and `raise_on_failure` is set to `True`. It can be re-raised to a `ServiceValidationError` in case this error is raised during the execution of a service call and a stack trace is not warranted. Translation keys are added to allow localization or the error messages.
+A new `ConfigValidationError` exception class is introduced. It will be raised in case an error occurs during config error handling and `raise_on_failure` is set to `True`. It can be re-raised to a `ServiceValidationError` in case this error is raised during the execution of a service call and a stack trace is not warranted. Translation keys are added to allow localization of the error messages.
 
 ### Background
 
