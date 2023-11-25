@@ -21,9 +21,9 @@ async def async_process_component_and_handle_errors(
 ...
 ```
 
-```python
 During a reload integrations can use the  `helpers.reload.async_integration_yaml_config`. This helper now also has the ability to raise in case of a failure.
 
+```python
 async def async_integration_yaml_config(
     hass: HomeAssistant, integration_name: str, *, raise_on_failure: bool = False
 ) -> ConfigType | None:
