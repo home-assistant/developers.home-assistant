@@ -43,13 +43,13 @@ For guidance on keeping a changelog, we recommend the [keep a changelog](http://
 
 ## Offering stable and canary version
 
-You should consider to offer a stable and a "next" or "canary" branch. These can be provided using different branches. When adding the addon in Home Assistant the user can select the wanted branch from a given repository by appending its name following a hashtag.
+You may consider to offer a stable and a "next" or "canary" branch. These can be provided using different branches. When adding the add-on in Home Assistant, the user can select the wanted branch from a given repository by appending its name following a hashtag.
 
 ```text
 https://github.com/home-assistant/hassio-addons-example#next
 ```
 
-You should add this information to your documentation. Also you should consider to have different [names for the repositories](/docs/add-ons/repository#repository-configuration) in every branch, e.g. "Super-Addon (Stable)" and "Super-Addon (Beta)".
+You should add this information to your documentation. Also, you should consider having different [names for the repositories](/docs/add-ons/repository#repository-configuration) in every branch, for example, "Super add-on (stable)" and "Super add-on (beta)".
 
 ## AppArmor
 
