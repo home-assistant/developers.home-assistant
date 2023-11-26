@@ -7,7 +7,7 @@ title: Config processing and error handling
 
 ## Changes in component config processing and error handling
 
-The way component YAML configuration is processed has been changed. Now, it is possible to raise if an error occurs. Some custom integrations might break if they are using `config.async_process_component_and_handle_errors`.
+The way component YAML configuration is processed has been changed. Now, it is possible to raise if an error occurs. Some custom integrations might break if they are using `config.async_process_component_config`.
 Instead, they can use `config.async_process_component_and_handle_errors` now. This new method supports raising when an error occurs during config processing.
 From now on, failures will no longer be notified as a persistent message, so integrations need to implement error handling to notify users in case of a failure. Notifications are still added during setup in case of a config issue.
 
