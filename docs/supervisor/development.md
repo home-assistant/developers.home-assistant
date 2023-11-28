@@ -118,7 +118,7 @@ To develop for the `hassio` integration and the Supervisor panel, we're going to
 [![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fhome-assistant%2Faddons-development)
 [![Open your Home Assistant instance and show the dashboard of a Supervisor add-on.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=ae6e943c_remote_api)
 
-1. Add our developer Add-on repository: <https://github.com/home-assistant/addons-development>
+1. Add our developer Add-on repository: [https://github.com/home-assistant/addons-development](https://github.com/home-assistant/addons-development)
 2. Install the Add-on "Remote API proxy"
 3. Click Start
 4. The token will be printed in the logs
