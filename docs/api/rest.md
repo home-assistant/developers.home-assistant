@@ -202,9 +202,9 @@ Returns an array of state changes in the past. Each object contains further deta
 The `<timestamp>` (`YYYY-MM-DDThh:mm:ssTZD`) is optional and defaults to 1 day before the time of the request. It determines the beginning of the period.
 
 The following parameters are **required**:
-	
+
 - `filter_entity_id=<entity_ids>` to filter on one or more entities - comma separated.
-	
+
 You can pass the following optional GET parameters:
 
 - `end_time=<timestamp>` to choose the end of the period in URL encoded format (defaults to 1 day).
@@ -626,7 +626,7 @@ Returns a message if successful.
 
 <ApiEndpoint path="/api/services/<domain>/<service>" method="post">
 
-Calls a service within a specific domain. Will return when the service has been executed or after 10 seconds, whichever comes first.
+Calls a service within a specific domain. Will return when the service has been executed.
 
 You can pass an optional JSON object to be used as `service_data`.
 
@@ -756,7 +756,7 @@ Handle an intent.
 You must add `intent:` to your `configuration.yaml` to enable this endpoint.
 
 Sample `curl` command:
-	
+
 ```shell
 curl \
   -H "Authorization: Bearer TOKEN" \
