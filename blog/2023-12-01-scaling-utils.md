@@ -116,4 +116,4 @@ def scale_to_ranged_value(
 
 ## Utils `int_states_in_range` and `states_in_range` are moved
 
-These utils now are under `homeassistant.util.scaling`. If these are used in your custom integration, make sure you update the import to the new module.
+These utils are now under `homeassistant.util.scaling`. If these are used in your custom integration, make sure you update the import to the new module.
