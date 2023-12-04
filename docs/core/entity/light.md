@@ -108,7 +108,7 @@ It is guaranteed that the integration will only receive a single color attribute
 
 Home Assistant includes a utility to scale brightness.
 
-If the light supports brightness, sometime the brightness value needs scaling:
+If the light supports brightness, sometimes the brightness value needs scaling:
 
 ```python
 from homeassistant.util.color import value_to_brightness
