@@ -104,6 +104,44 @@ It is guaranteed that the integration will only receive a single color attribute
 | rgbww_color | Will be removed from the service call if not supported.
 | xy_color | Will be removed from the service call if not supported and translated to `hs_color`, `rgb_color`, `rgbw_color` or `rgbww_color` if supported by the light.
 
+:::tip Scaling brightness
+
+Home Assistant includes a utility to scale brightness.
+
+If the light supports brightness, sometimes the brightness value needs scaling:
+
+```python
+from homeassistant.util.color import value_to_brightness
+
+BRIGHTNESS_SCALE = (1, 1023)
+
+...
+
+    @property
+    def brightness(self) -> Optional[int]:
+        """Return the current brightness."""
+        return value_to_brightness(BRIGHTNESS_SCALE, self._device.brightness)
+
+```
+
+To scale the brightness to the device range:
+
+```python
+from homeassistant.util.color import value_to_brightness
+
+BRIGHTNESS_SCALE = (1, 1023)
+
+...
+
+class MyLightEntity(LightEntity):
+    async def async_turn_on(self, **kwargs) -> None:
+        """Turn device on."""
+
+        ...
+
+        value_in_range = math.ceil(percentage_to_ranged_value(BRIGHTNESS_SCALE, kwargs[ATTR_BRIGHTNESS]))
+
+:::
 
 ### Turn Off Light Device
 
