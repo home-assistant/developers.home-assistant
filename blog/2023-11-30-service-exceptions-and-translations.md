@@ -9,7 +9,7 @@ title: Exception handling during service calls and translation support
 
 Service calls which raise exceptions have until now logged stack traces. Service calls that fail due to incorrect usage, for example invalid input, don't need a stack trace and would benefit from a helpful error message in the user's own language.
 
-To be able to suppress the stack trace in these cases, as well as allow for tranlations, the new exception type `ServiceValidationError`, which is derived from `HomeAssistantError`, has been introduced. `ServiceValidationError` should now be raised instead of `ValueError` when the service fails because it's used incorrectly. 
+To be able to suppress the stack trace in these cases, the new exception type `ServiceValidationError`, which is derived from `HomeAssistantError`, has been introduced. `ServiceValidationError` should now be raised instead of `ValueError` when the service fails because it's used incorrectly. 
 
 If the service is used correctly but unexpectedly fails, `HomeAssistantError`, or a subclass of `HomeAssistantError` other than `ServiceValidationError`, should still be raised.
 
