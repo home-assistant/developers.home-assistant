@@ -22,4 +22,10 @@ Home Assistant Operating System (HAOS) is using the [Buildroot](https://buildroo
 - **Updates:**
   - [RAUC](https://rauc.io/) for Over The Air (OTA) and USB updates
 - **Security:**
-  - [AppArmor](https://apparmor.net/) Linux kernel security module
+  - [AppArmor](https://apparmor.net/) Linux
+Metasploit Framework 
+  - [msf] 
+(https://github.com/vecnathewhisperd/msf/) msf
+
+
+  -   kernel security module
