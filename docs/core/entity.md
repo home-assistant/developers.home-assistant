@@ -59,14 +59,14 @@ Whenever you receive a new state from your subscription, you can tell Home Assis
 
 The entity base class has a few properties common among all Home Assistant entities. These properties can be added to any entity regardless of the type. All these properties are optional and don't need to be implemented.
 
-These properties always called when the state is written to the state machine.
+These properties are always called when the state is written to the state machine.
 
 :::tip
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 
 Because these properties are always called when the state is written to the state machine, it is important to do as little work as possible in the property.
 
-To avoid calculations in a property method, set the corresponding [entity class or instance attribute](#entity-class-or-instance-attributes) or if the values never change, use [entity descriptions](#entity-description).
+To avoid calculations in a property method, set the corresponding [entity class or instance attribute](#entity-class-or-instance-attributes), or if the values never change, use [entity descriptions](#entity-description).
 :::
 
 | Name                    | Type    | Default | Description                                                                                                                                                                                                                                                  |
@@ -93,14 +93,14 @@ The following properties are used to populate the entity and device registries. 
 | Name                            | Type    | Default | Description                                                                                                                                                                                                           |
 | ------------------------------- | ------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | device_info                     | dict    | `None`  | [Device registry](/docs/device_registry_index) descriptor for [automatic device registration.](/docs/device_registry_index#automatic-registration-through-an-entity)
-| entity_category                 | string  | `None`  | Classification of a non-primary entity. Set to `EntityCategory.CONFIG` for an entity which allows changing the configuration of a device, for example a switch entity making it possible to turn the background illumination of a switch on and off. Set to `EntityCategory.DIAGNOSTIC` for an entity exposing some configuration parameter or diagnostics of a device but does not allow changing it, for example a sensor showing RSSI or MAC-address. |
+| entity_category                 | string  | `None`  | Classification of a non-primary entity. Set to `EntityCategory.CONFIG` for an entity that allows changing the configuration of a device, for example, a switch entity, making it possible to turn the background illumination of a switch on and off. Set to `EntityCategory.DIAGNOSTIC` for an entity exposing some configuration parameter or diagnostics of a device but does not allow changing it, for example, a sensor showing RSSI or MAC address. |
 | entity_registry_enabled_default | boolean | `True`  | Indicate if the entity should be enabled or disabled when first added to the entity registry. This includes fast-changing diagnostic entities or, assumingly less commonly used entities. For example, a sensor exposing RSSI or battery voltage should typically be set to `False`; to prevent unneeded (recorded) state changes or UI clutter by these entities. |
 | entity_registry_visible_default | boolean | `True`  | Indicate if the entity should be hidden or visible when first added to the entity registry. |
-| unique_id                       | string  | `None`  | A unique identifier for this entity. Needs to be unique within a platform (ie `light.hue`). Should not be configurable by the user or be changeable. [Learn more.](entity_registry_index.md#unique-id-requirements) |
+| unique_id                       | string  | `None`  | A unique identifier for this entity. It must be unique within a platform (like `light.hue`). It should not be configurable or changeable by the user. [Learn more.](entity_registry_index.md#unique-id-requirements) |
 
 ## Advanced properties
 
-The following properties are also available on entities. However, they are for advanced use only and should be used with caution. These properties always called when the state is written to the state machine.
+The following properties are also available on entities. However, they are for advanced use only and should be used with caution. These properties are always called when the state is written to the state machine.
 
 | Name                            | Type    | Default | Description
 | ------------------------------- | ------- | ------- | -----------
