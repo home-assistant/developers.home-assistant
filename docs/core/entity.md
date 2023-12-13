@@ -80,6 +80,8 @@ To avoid calculations in a property method, set the corresponding [entity class 
 | has_entity_name         | `bool`                        | `False` | Return `True` if the entity's `name` property represents the entity itself (required for new integrations). This is explained in more detail below.
 | name                    | <code>str &#124; None</code>  | `None`  | Name of the entity. Avoid hard coding a natural language name, use a [translated name](/docs/internationalization/core/#name-of-entities) instead.  |
 | should_poll             | `bool`                        | `True`  | Should Home Assistant check with the entity for an updated state. If set to `False`, entity will need to notify Home Assistant of new updates by calling one of the [schedule update methods](integration_fetching_data.md#push-vs-poll). |
+| state                   | <code>str &#124; int &#124; float &#124; None</code> | `None` | The state of the entity. In most cases this is implemented by the domain base entity and should not be implemented by integrations.
+| supported_features      | <code>int &#124; None</code>  | `None`  | Flag features supported by the entity. Domains specify their own.
 | translation_key         | <code>str &#124; None</code>  | `None`  | A key for looking up translations of the entity's state in [`entity` section of the integration's `strings.json`](/docs/internationalization/core#state-of-entities).
 
 :::warning
@@ -104,8 +106,11 @@ The following properties are also available on entities. However, they are for a
 
 | Name                            | Type                         | Default | Description
 | ------------------------------- | ---------------------------- | ------- | -----------
+| capability_attributes           | <code>dict &#124; None</code> | `None` | State attributes which are stored in the entity registry, this is implemented by the domain base entity and should not be implemented by integrations.
 | force_update                    | `bool`                       | `False` | Write each update to the state machine, even if the data is the same. Example use: when you are directly reading the value from a connected sensor instead of a cache. Use with caution, will spam the state machine. |
 | icon                            | <code>str &#124; None</code> | `None`  | Icon to use in the frontend. Icons start with `mdi:` plus an [identifier](https://materialdesignicons.com/). You probably don't need this since Home Assistant already provides default icons for all entities according to its `device_class`. This should be used only in the case where there either is no matching `device_class` or where the icon used for the `device_class` would be confusing or misleading. |
+| state_attributes                | <code>dict &#124; None</code> | `None` | State attributes, this is implemented by the domain base entity and should not be implemented by integrations.
+| unit_of_measurement             | <code>str &#124; None</code> | The unit of measurement that the entity's state is expressed in. In most cases, for example for the `number` and `sensor` domains, this is implemented by the domain base entity and should not be implemented by integrations.
 
 ## System properties
 
