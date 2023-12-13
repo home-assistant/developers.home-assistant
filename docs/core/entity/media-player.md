@@ -47,6 +47,7 @@ Properties should always only return information from memory and not do I/O (lik
 | source_list                     | <code>list[str] &#124; None</code>              | `None`  | The list of possible input sources for the media player. (This list should contain human readable names, suitable for frontend display).
 | state                           | <code>MediaPlayerState &#124; None</code>       | `None`  | State of the media player.
 | volume_level                    | <code>float &#124; None</code>                  | `None`  | Volume level of the media player in the range (0..1).
+| volume_step                     | <code>float &#124; None</code>                  | 0.1     | Volume step to use for the `volume_up` and `volume_down` services.
 
 ## Supported Features
 
