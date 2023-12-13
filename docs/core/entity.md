@@ -66,7 +66,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 Because these properties are always called when the state is written to the state machine, it is important to do as little work as possible in the property.
 
-To avoid calculations in a property method, set the corresponding [entity class or instance attribute](#entity-class-or-instance-attributes) or if the values never change, use [entity descriptions](entity-#description).
+To avoid calculations in a property method, set the corresponding [entity class or instance attribute](#entity-class-or-instance-attributes) or if the values never change, use [entity descriptions](#entity-description).
 :::
 
 | Name                    | Type    | Default | Description                                                                                                                                                                                                                                                  |
