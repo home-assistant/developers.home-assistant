@@ -26,6 +26,7 @@ class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     # The schema version of the entries that it creates
     # Home Assistant will call your migrate method if the version changes
     VERSION = 1
+    MINOR_VERSION = 1
 ```
 
 Once you have updated your manifest and created the `config_flow.py`, you will need to run `python3 -m script.hassfest` (one time only) for Home Assistant to activate the config entry for your integration.
@@ -217,18 +218,30 @@ As mentioned above - each Config Entry has a version assigned to it. This is to 
 
 Migration can be handled programatically by implementing function `async_migrate_entry` in your component's `__init__.py` file. The function should return `True` if migration is successful.
 
+The version is made of a major and minor version. If minor versions differ but major versions are the same, integration setup will be allowed to continue even if the integration does not implement `async_migrate_entry`. This means a minor version bump is backwards compatible unlike a major version bump which causes the integration to fail setup if the user downgrades Home Assistant Core without restoring their configuration from backup.
+
 ```python
 # Example migration function
 async def async_migrate_entry(hass, config_entry: ConfigEntry):
     """Migrate old entry."""
     _LOGGER.debug("Migrating from version %s", config_entry.version)
 
+    if config_entry.version > 1:
+      # This means the user has downgraded from a future version
+      return False
+
     if config_entry.version == 1:
 
         new = {**config_entry.data}
-        # TODO: modify Config Entry data
+        config_entry.minor_version < 2:
+            # TODO: modify Config Entry data with changes in version 1.2
+            pass
+        config_entry.minor_version < 3:
+            # TODO: modify Config Entry data with changes in version 1.3
+            pass
 
-        config_entry.version = 2
+        config_entry.version = 1
+        config_entry.minor_version = 3
         hass.config_entries.async_update_entry(config_entry, data=new)
 
     _LOGGER.debug("Migration to version %s successful", config_entry.version)
