@@ -106,10 +106,10 @@ The following properties are also available on entities. However, they are for a
 
 | Name                            | Type                         | Default | Description
 | ------------------------------- | ---------------------------- | ------- | -----------
-| capability_attributes           | <code>dict &#124; None</code> | `None` | State attributes which are stored in the entity registry, this is implemented by the domain base entity and should not be implemented by integrations.
+| capability_attributes           | <code>dict &#124; None</code> | `None` | State attributes which are stored in the entity registry. This property is implemented by the domain base entity and should not be implemented by integrations.
 | force_update                    | `bool`                       | `False` | Write each update to the state machine, even if the data is the same. Example use: when you are directly reading the value from a connected sensor instead of a cache. Use with caution, will spam the state machine. |
 | icon                            | <code>str &#124; None</code> | `None`  | Icon to use in the frontend. Icons start with `mdi:` plus an [identifier](https://materialdesignicons.com/). You probably don't need this since Home Assistant already provides default icons for all entities according to its `device_class`. This should be used only in the case where there either is no matching `device_class` or where the icon used for the `device_class` would be confusing or misleading. |
-| state_attributes                | <code>dict &#124; None</code> | `None` | State attributes, this is implemented by the domain base entity and should not be implemented by integrations.
+| state_attributes                | <code>dict &#124; None</code> | `None` | State attributes of a base domain. This property is implemented by the domain base entity and should not be implemented by integrations.
 | unit_of_measurement             | <code>str &#124; None</code> | The unit of measurement that the entity's state is expressed in. In most cases, for example for the `number` and `sensor` domains, this is implemented by the domain base entity and should not be implemented by integrations.
 
 ## System properties
