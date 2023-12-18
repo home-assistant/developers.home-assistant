@@ -218,7 +218,7 @@ As mentioned above - each Config Entry has a version assigned to it. This is to 
 
 Migration can be handled programatically by implementing function `async_migrate_entry` in your component's `__init__.py` file. The function should return `True` if migration is successful.
 
-The version is made of a major and minor version. If minor versions differ but major versions are same, integration setup will be allowed to continue even if the integration does not implement `async_migrate_entry`. This means a minor version bump is backwards compatible unlike a major version bump which causes the integration to fail setup if the user downgrades HA Core without restoring their configuration from backup.
+The version is made of a major and minor version. If minor versions differ but major versions are the same, integration setup will be allowed to continue even if the integration does not implement `async_migrate_entry`. This means a minor version bump is backwards compatible unlike a major version bump which causes the integration to fail setup if the user downgrades Home Assistant Core without restoring their configuration from backup.
 
 ```python
 # Example migration function
