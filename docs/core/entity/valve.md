@@ -3,7 +3,7 @@ title: Valve Entity
 sidebar_label: Valve
 ---
 
-A valve entity controls valve devices such as a the water or gas valves in your home. Derive a platform entity from [`homeassistant.components.valve.ValveEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/valve/__init__.py).
+A valve entity controls valve devices such as the water or gas valves in your home. Derive a platform entity from [`homeassistant.components.valve.ValveEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/valve/__init__.py).
 
 ## Properties
 
