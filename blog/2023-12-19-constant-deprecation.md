@@ -19,4 +19,4 @@ Most constants should not be used anymore, as we created several blog posts in t
 - [Add  more unit enumerators](2022-11-28-more-unit-enumerators.md)
 - [Add  more unit enumerators](2022-12-05-more-unit-enumerators.md)
 
-More details can be found in [core PR #105736](https://github.com/home-assistant/core/pull/105736) or by checking the usage of the function `check_if_deprecated_constant` in the deprecation helper.
+More details can be found in [core PR #105736](https://github.com/home-assistant/core/pull/105736) or by checking the usage of the function [`check_if_deprecated_constant`](https://github.com/home-assistant/core/blob/dev/homeassistant/helpers/deprecation.py#L240) in the deprecation helper.
