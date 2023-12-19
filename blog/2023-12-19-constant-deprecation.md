@@ -6,9 +6,9 @@ title: "Deprecated constants create a log entry"
 
 In recent years many constants have been replaced by Enums or other values by adding a code comment pointing to the successor.
 Using deprecated constants will now create a warning log entry containing the used integration, the replacement, and the version where the constant will be removed from core.
-We use a one-year deprecation period to ensure all custom integration authors have time to adjust.
+There will be a one-year deprecation period to ensure all custom integration authors have time to adjust.
 
-Most constants should not be used anymore, as we created several blog posts in the past about their deprecation. Some are listed below:
+Most constants should already have been replaced, as we created several blog posts in the past about their deprecation. Some are listed below:
 - [Deprecating all SUPPORT_* constants](2022-04-02-support-constants-deprecation.md)
 - [Constant deprecations for 2022.5](2022-05-03-constants-deprecations.md)
 - [AutomationActionType deprecation for 2022.9](2022-08-15-automation-action-type-deprecation.md)
