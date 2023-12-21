@@ -15,7 +15,7 @@ If the service is used correctly but still fails, `HomeAssistantError`, or a sub
 
 When a service raises `ServiceValidationError`, the error message will show in the UI, and in the logs, but the stack trace is logged at debug level. For other exceptions that are raised from a service call (including  `HomeAssistantError`) nothing changes and a full stack trace is still printed at exception severity.
 
-Integrations should be updated and raise `ServiceValidationError` instead of `ValueError` when the the service fails due to incorrect usage, and `HomeAssistantError` when it fails for other expected errore, for example a network error. [Read more](/docs/core/platform/raising_exceptions).
+Integrations should be updated and raise `ServiceValidationError` instead of `ValueError` when the the service fails due to incorrect usage, and `HomeAssistantError` when it fails for other expected errors, for example a network error. [Read more](/docs/core/platform/raising_exceptions).
 
 ## Translation support for Exceptions
 
