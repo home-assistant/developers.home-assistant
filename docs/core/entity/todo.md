@@ -70,8 +70,8 @@ class MyTodoListEntity(TodoListEntity):
 
 A To-do list entity may support updating To-do items by specifying the `UPDATE_TODO_ITEM`
 supported feature. The `TodoItem` field `uid` is always present and indicates
-which item should be updated, and all other fields are optional. Integrations
-must support partial update.
+which item should be updated. The item passed to update is a copy of the original
+item with fields updated or cleared.
 
 ```python
 from homeassistant.components.todo import TodoListEntity
