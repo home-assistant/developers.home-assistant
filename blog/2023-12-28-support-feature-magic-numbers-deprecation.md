@@ -7,6 +7,8 @@ title: "Deprecating all magic numbers for supported features"
 As of Home Assistant Core 2024.1, all usage of magic numbers for supported features is deprecated,
 and each entity platform has provided an `EntityFeature` enum to replace them.
 
+There will be a one-year deprecation period, and the magic numbers will stop working in 2025.1 to ensure all custom integration authors have time to adjust.
+
 This applies to, the following platforms:
 
 - **Alarm Control Panel**
