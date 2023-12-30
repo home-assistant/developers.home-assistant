@@ -110,8 +110,9 @@ url: "website with more information about the add-on (e.g., a forum thread for s
 ports:
   123/tcp: 123
 map:
-  - config:rw
-  - ssl
+  - type: share
+    read_only: False
+  - type: ssl
   - type: config
     read_only: False
     path: /custom/config/path
@@ -157,7 +158,7 @@ Avoid using `config.yaml` as filename in your add-on for anything other than the
 | `privileged` | list | | Privilege for access to hardware/system. Available access: `BPF`, `DAC_READ_SEARCH`, `IPC_LOCK`, `NET_ADMIN`, `NET_RAW`, `PERFMON`, `SYS_ADMIN`, `SYS_MODULE`, `SYS_NICE`, `SYS_PTRACE`, `SYS_RAWIO`, `SYS_RESOURCE` or `SYS_TIME`.
 | `full_access` | bool | `false` | Give full access to hardware like the privileged mode in Docker. Works only for not protected add-ons. Consider using other add-on options instead of this, like `devices`. If you enable this option, don't add `devices`, `uart`, `usb` or `gpio` as this is not needed.
 | `apparmor` | bool/string | `false` | Enable or disable AppArmor support. If it is enabled, you can also use custom profiles with the name of the profile.
-| `map` | list | | List of Home Assistant directories to bind mount into your container. Possible values: `homeassistant_config`, `addon_config`, `ssl`, `addons`, `backup`, `share`, `media`, `all_addon_configs`, and `data`. Defaults to `ro`, which you can change by adding `:rw` to the end of the name. Note the `data` directory always maps as `:rw`. In addition, entries can also be a dictionary with `type`, `read_only` and `path` values. `type` must be one of the possible values listed above (without `:ro` and `:rw` suffix), `read_only` is a boolean (`True`/`False`) and `path` must be a valid path to be mapped inside of the addon container.
+| `map` | list | | List of Home Assistant directory types to bind mount into your container. Possible values: `homeassistant_config`, `addon_config`, `ssl`, `addons`, `backup`, `share`, `media`, `all_addon_configs`, and `data`. Defaults to readonly, which you can change by adding the property `read_only = false`. Note the `data` directory always maps as writable. In addition, a `path` property can also be set to configure the path that is mapped inside the container. The path must not be empty, must be unique from any other path defined for the addon, and must not be the root path.
 | `environment` | dict | | A dictionary of environment variables to run the add-on with.
 | `audio` | bool | `false` | Mark this add-on to use the internal audio system. We map a working PulseAudio setup into the container. If your application does not support PulseAudio, you may need to install: Alpine Linux `alsa-plugins-pulse` or Debian/Ubuntu `libasound2-plugins`.
 | `video` | bool | `false` | Mark this add-on to use the internal video system. All available devices will be mapped into the add-on.
