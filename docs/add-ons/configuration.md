@@ -113,7 +113,7 @@ map:
   - type: share
     read_only: False
   - type: ssl
-  - type: config
+  - type: homeassistant_config
     read_only: False
     path: /custom/config/path
 image: repo/{arch}-my-custom-addon
