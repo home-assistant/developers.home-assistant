@@ -37,7 +37,8 @@ This strategy allows us to not waste any of our workers time on running a full t
 Below is a screenshot of our CI pipeline for Home Assistant. Because all work is distributed over multiple workers, the total runtime is the longest task in the first column, plus the longest task in the second column.
 
 <center>
-![Screenshot of the Home Assistant CI pipeline.](/img/en/blog/2019-07-building-all-the-things/test-stages.png)</center>
+![Screenshot of the Home Assistant CI pipeline.](/img/en/blog/2019-07-building-all-the-things/test-stages.png)
+</center>
 
 To improve the time of our CI on Azure, we’re using a preview version of [pipeline artifact caching](https://marketplace.visualstudio.com/items?itemName=1ESLighthouseEng.PipelineArtifactCaching). This allows us to build the dependencies once, store it as a package close to the test runners and re-use it across jobs and pipeline runs.
 

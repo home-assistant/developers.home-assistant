@@ -14,7 +14,7 @@ Home Assistant Operating System releases are built from the release branch. GitH
 
 The format of version is *MAJOR.BUILD*. Every time a new release is released the BUILD number gets incremented (stored in `buildroot-external/meta`). The MAJOR number is inherited from the development branch, and gets bumped right after the release branch has been created.
 
-The build system by default automatically adds a *dev{DATE}* suffix to mark development builds.
+The build system by default automatically adds a *dev\{DATE\}* suffix to mark development builds.
 
 Before a new major release, release candidates can be built on the development branch. A release candidate suffix is used to mark them, e.g. *MAJOR.0.rc1*.
 
