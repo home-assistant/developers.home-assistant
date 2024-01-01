@@ -15,4 +15,4 @@ We have been very conservative with versioning config entry data because it brea
 By introducing minor versions similar to that already offered by the storage helper, this pattern is no longer recommended.
 A bump of the minor version should be done instead whenever the newly added, or otherwise changed, data does not break older versions.
 
-More details can be found in the [documentation on config entry migration](docs/config_entries_config_flow_handler#config-entry-migration) and in [core PR #105749](https://github.com/home-assistant/core/pull/105479).
+More details can be found in the [documentation on config entry migration](/docs/config_entries_config_flow_handler#config-entry-migration) and in [core PR #105749](https://github.com/home-assistant/core/pull/105479).
