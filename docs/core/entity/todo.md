@@ -31,6 +31,9 @@ and are combined using the bitwise or (`|`) operator.
 | `DELETE_TODO_ITEM`      | Entity implements the methods to allow deletion of to-do items.  |
 | `UPDATE_TODO_ITEM`      | Entity implements the methods to allow update of to-do items.  |
 | `MOVE_TODO_ITEM`        | Entity implements the methods to re-order to-do items.  |
+| `DUE_DATE`              | Entity implements to-do item `due` field as a `datetime.date`. |
+| `DUE_DATETIME`          | Entity implements to-do item `due` field as a `datetime.datetime`. |
+| `DESCRIPTION`           | Entity implements to-do item `description` field.  |
 
 ## Methods
 
@@ -67,8 +70,8 @@ class MyTodoListEntity(TodoListEntity):
 
 A To-do list entity may support updating To-do items by specifying the `UPDATE_TODO_ITEM`
 supported feature. The `TodoItem` field `uid` is always present and indicates
-which item should be updated, and all other fields are optional. Integrations
-must support partial update.
+which item should be updated. The item passed to update is a copy of the original
+item with fields updated or cleared.
 
 ```python
 from homeassistant.components.todo import TodoListEntity
@@ -108,5 +111,7 @@ update.
 | Name        | Type             | Default      | Description                                                                                                                                     |
 | ----------- | ---------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | uid | <code>string &#124; None</code> | `None` | A unique identifier for the to-do item. This field is required for updates and the entity state.
-| summary     | <code>string &#124; None</code>  | `None` | A title or summary of the To-do item. This field is required for the entity state.
-| status | <code>TodoItemStatus &#124; None</code> | `None` | Defines the overall status for the To-do item, either `NEEDS_ACTION` or `COMPLETE`. This field is required for the entity state.
+| summary | <code>string &#124; None</code>  | `None` | A title or summary of the to-do item. This field is required for the entity state.
+| status | <code>TodoItemStatus &#124; None</code> | `None` | Defines the overall status for the to-do item, either `NEEDS_ACTION` or `COMPLETE`. This field is required for the entity state.
+| due | <code>datetime.date &#124; datetime.datetime &#124; None</code> | `None` | The date and time that a to-do is expected to be completed. The types supported depend on `TodoListEntityFeature.DUE_DATE` or `TodoListEntityFeature.DUE_DATETIME` or both being set. As a datetime, must have a timezone.
+| description | <code>string &#124; None</code>  | `None` | A more complete description of the to-do item than that provided by the summary. Only supported when `TodoListEntityFeature.DESCRIPTION` is set.

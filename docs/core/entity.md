@@ -57,51 +57,75 @@ Whenever you receive a new state from your subscription, you can tell Home Assis
 
 ## Generic properties
 
-The entity base class has a few properties that are common among all entities in Home Assistant. These can be added to any entity regardless of the type. All these properties are optional and don't need to be implemented.
+The entity base class has a few properties common among all Home Assistant entities. These properties can be added to any entity regardless of the type. All these properties are optional and don't need to be implemented.
+
+These properties are always called when the state is written to the state machine.
 
 :::tip
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+
+Because these properties are always called when the state is written to the state machine, it is important to do as little work as possible in the property.
+
+To avoid calculations in a property method, set the corresponding [entity class or instance attribute](#entity-class-or-instance-attributes), or if the values never change, use [entity descriptions](#entity-description).
 :::
 
-| Name                     | Type    | Default | Description                                                                                                                                                                                                                                                  |
-| ------------------------ | ------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| assumed_state            | boolean | `False` | Return `True` if the state is based on our assumption instead of reading it from the device. |
-| attribution              | string  | `None`  | The branding text required by the API provider. |
-| available                | boolean | `True`  | Indicate if Home Assistant is able to read the state and control the underlying device. |
-| device_class             | string  | `None`  | Extra classification of what the device is. Each domain specifies their own. Device classes can come with extra requirements for unit of measurement and supported features. |
-| device_info              | dict    | `None`  | [Device registry](/docs/device_registry_index) descriptor for [automatic device registration.](/docs/device_registry_index#automatic-registration-through-an-entity)
-| entity_category          | string  | `None`  | Classification of a non-primary entity. Set to `EntityCategory.CONFIG` for an entity which allows changing the configuration of a device, for example a switch entity making it possible to turn the background illumination of a switch on and off. Set to `EntityCategory.DIAGNOSTIC` for an entity exposing some configuration parameter or diagnostics of a device but does not allow changing it, for example a sensor showing RSSI or MAC-address. |
-| entity_picture           | URL     | `None`  | Url of a picture to show for the entity. |
-| extra_state_attributes   | dict    | `None`  | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version. |
-| has_entity_name          | boolean |         | Return `True` if the entity's `name` property represents the entity itself (required for new integrations). This is explained in more detail below.
-| name                     | string  | `None`  | Name of the entity. Avoid hard coding a natural language name, use a [translated name](/docs/internationalization/core/#name-of-entities) instead.  |
-| should_poll              | boolean | `True`  | Should Home Assistant check with the entity for an updated state. If set to `False`, entity will need to notify Home Assistant of new updates by calling one of the [schedule update methods](integration_fetching_data.md#push-vs-poll). |
-| translation_key          | string  | `None`  | A key for looking up translations of the entity's state in [`entity` section of the integration's `strings.json`](/docs/internationalization/core#state-of-entities). |
-| translation_placeholders | dict    | `None`  | Placeholder definitions for [translated entity name](/docs/internationalization/core/#name-of-entities). |
-| unique_id                | string  | `None`  | A unique identifier for this entity. Needs to be unique within a platform (ie `light.hue`). Should not be configurable by the user or be changeable. [Learn more.](entity_registry_index.md#unique-id-requirements) |
+| Name                     | Type                          | Default | Description
+| ------------------------ | ------------------------------| ------- | -----------
+| assumed_state            | `bool`                        | `False` | Return `True` if the state is based on our assumption instead of reading it from the device.
+| attribution              | <code>str &#124; None</code>  | `None`  | The branding text required by the API provider.
+| available                | `bool`                        | `True`  | Indicate if Home Assistant is able to read the state and control the underlying device.
+| device_class             | <code>str &#124; None</code>  | `None`  | Extra classification of what the device is. Each domain specifies their own. Device classes can come with extra requirements for unit of measurement and supported features.
+| entity_picture           | <code>str &#124; None</code>  | `None`  | Url of a picture to show for the entity.
+| extra_state_attributes   | <code>dict &#124; None</code> | `None`  | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version.
+| has_entity_name          | `bool`                        | `False` | Return `True` if the entity's `name` property represents the entity itself (required for new integrations). This is explained in more detail below.
+| name                     | <code>str &#124; None</code>  | `None`  | Name of the entity. Avoid hard coding a natural language name, use a [translated name](/docs/internationalization/core/#name-of-entities) instead.
+| should_poll              | `bool`                        | `True`  | Should Home Assistant check with the entity for an updated state. If set to `False`, entity will need to notify Home Assistant of new updates by calling one of the [schedule update methods](integration_fetching_data.md#push-vs-poll).
+| state                    | <code>str &#124; int &#124; float &#124; None</code> | `None` | The state of the entity. In most cases this is implemented by the domain base entity and should not be implemented by integrations.
+| supported_features       | <code>int &#124; None</code>  | `None`  | Flag features supported by the entity. Domains specify their own.
+| translation_key          | <code>str &#124; None</code>  | `None`  | A key for looking up translations of the entity's state in [`entity` section of the integration's `strings.json`](/docs/internationalization/core#state-of-entities).
+| translation_placeholders | `dict`                        | `None`  | Placeholder definitions for [translated entity name](/docs/internationalization/core/#name-of-entities).
+
+:::warning
+It's allowed to change `device_class`, `supported_features` or any property included in a domain's `capability_attributes`. However, since these entity properties often are not expected to change at all and some entity consumers may not be able to update them at a free rate, we recommend only changing them when absolutely required and at a modest interval.
+
+As an example, such changes will cause voice assistant integrations to resynchronize with the supporting cloud service.
+:::
 
 :::warning
 Entities that generate a significant amount of state changes can quickly increase the size of the database when the `extra_state_attributes` also change frequently. Minimize the number of `extra_state_attributes` for these entities by removing non-critical attributes or creating additional `sensor` entities.
 :::
 
+## Registry properties
+
+The following properties are used to populate the entity and device registries. They are read each time the entity is added to Home Assistant. These properties only have an effect if `unique_id` is not None.
+
+| Name                            | Type                                    | Default | Description
+| ------------------------------- | --------------------------------------- | ------- | -----------
+| device_info                     | <code>dict &#124; None</code>           | `None`  | [Device registry](/docs/device_registry_index) descriptor for [automatic device registration.](/docs/device_registry_index#automatic-registration-through-an-entity)
+| entity_category                 | <code>EntityCategory &#124; None</code> | `None`  | Classification of a non-primary entity. Set to `EntityCategory.CONFIG` for an entity that allows changing the configuration of a device, for example, a switch entity, making it possible to turn the background illumination of a switch on and off. Set to `EntityCategory.DIAGNOSTIC` for an entity exposing some configuration parameter or diagnostics of a device but does not allow changing it, for example, a sensor showing RSSI or MAC address. |
+| entity_registry_enabled_default | `bool` | `True`                         | Indicate if the entity should be enabled or disabled when first added to the entity registry. This includes fast-changing diagnostic entities or, assumingly less commonly used entities. For example, a sensor exposing RSSI or battery voltage should typically be set to `False`; to prevent unneeded (recorded) state changes or UI clutter by these entities. |
+| entity_registry_visible_default | `bool` | `True`                         | Indicate if the entity should be hidden or visible when first added to the entity registry. |
+| unique_id                       | <code>str &#124; None</code>            | `None`  | A unique identifier for this entity. It must be unique within a platform (like `light.hue`). It should not be configurable or changeable by the user. [Learn more.](entity_registry_index.md#unique-id-requirements) |
+
 ## Advanced properties
 
-The following properties are also available on entities. However, they are for advanced use only and should be used with caution.
+The following properties are also available on entities. However, they are for advanced use only and should be used with caution. These properties are always called when the state is written to the state machine.
 
-| Name                            | Type    | Default | Description                                                                                                                                                                                                           |
-| ------------------------------- | ------- | ------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| entity_registry_enabled_default | boolean | `True`  | Indicate if the entity should be enabled or disabled when first added to the entity registry. This includes fast-changing diagnostic entities or, assumingly less commonly used entities. For example, a sensor exposing RSSI or battery voltage should typically be set to `False`; to prevent unneeded (recorded) state changes or UI clutter by these entities. |
-| entity_registry_visible_default | boolean | `True`  | Indicate if the entity should be hidden or visible when first added to the entity registry. |
-| force_update                    | boolean | `False` | Write each update to the state machine, even if the data is the same. Example use: when you are directly reading the value from a connected sensor instead of a cache. Use with caution, will spam the state machine. |
-| icon                            | icon    | `None`  | Icon to use in the frontend. Icons start with `mdi:` plus an [identifier](https://materialdesignicons.com/). You probably don't need this since Home Assistant already provides default icons for all entities according to its `device_class`. This should be used only in the case where there either is no matching `device_class` or where the icon used for the `device_class` would be confusing or misleading. |
+| Name                            | Type                         | Default | Description
+| ------------------------------- | ---------------------------- | ------- | -----------
+| capability_attributes           | <code>dict &#124; None</code> | `None` | State attributes which are stored in the entity registry. This property is implemented by the domain base entity and should not be implemented by integrations.
+| force_update                    | `bool`                       | `False` | Write each update to the state machine, even if the data is the same. Example use: when you are directly reading the value from a connected sensor instead of a cache. Use with caution, will spam the state machine. |
+| icon                            | <code>str &#124; None</code> | `None`  | Icon to use in the frontend. Icons start with `mdi:` plus an [identifier](https://materialdesignicons.com/). You probably don't need this since Home Assistant already provides default icons for all entities according to its `device_class`. This should be used only in the case where there either is no matching `device_class` or where the icon used for the `device_class` would be confusing or misleading. |
+| state_attributes                | <code>dict &#124; None</code> | `None` | State attributes of a base domain. This property is implemented by the domain base entity and should not be implemented by integrations.
+| unit_of_measurement             | <code>str &#124; None</code> | The unit of measurement that the entity's state is expressed in. In most cases, for example for the `number` and `sensor` domains, this is implemented by the domain base entity and should not be implemented by integrations.
 
 ## System properties
 
 The following properties are used and controlled by Home Assistant, and should not be overridden by integrations.
 
-| Name    | Type    | Default | Description                                                                                                                                                                              |
-| ------- | ------- | ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| enabled | boolean | `True`  | Indicate if entity is enabled in the entity registry. It also returns `True` if the platform doesn't support the entity registry. Disabled entities will not be added to Home Assistant. |
+| Name    | Type    | Default | Description
+| ------- | ------- | ------- | -----------
+| enabled | `bool`  | `True`  | Indicate if entity is enabled in the entity registry. It also returns `True` if the platform doesn't support the entity registry. Disabled entities will not be added to Home Assistant. |
 
 ## Entity naming
 

@@ -2,9 +2,13 @@
 title: "Raising Exceptions"
 ---
 
-Operations like service calls and entity methods (e.g. *Set HVAC Mode*) should raise exceptions properly. Raise `ServiceValidationError` on an invalid user input and raise `HomeAssistantError` for other failures such as a problem communicating with a device. Note that the exception stack trace will be logged.
+## Raising Exceptions in service handlers
 
-Raise `ServiceValidationError` for validation errors that occur during service calls where printing a full stack trace to the logs is not warranted. This exception class will only log exception stack traces at debug level.
+Operations like service calls and entity methods (e.g. *Set HVAC Mode*) should raise exceptions properly.
+
+Integrations should raise `ServiceValidationError` (instead of `ValueError`) in case when the user did something wrong. In this case a stack trace will only be printed at debug level.
+
+For other failures such as a problem communicating with a device, `HomeAssistantError` should be raised. Note that the exception stack trace will be printed to the log in this case.
 
 ## Localizing Exceptions
 
