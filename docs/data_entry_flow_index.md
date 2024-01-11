@@ -402,47 +402,48 @@ _The example is about config entries, but works with other parts that use data e
 The flow works as follows:
 
 1. The user starts the config flow in Home Assistant.
-2. The config flow prompts the user that a task is in progress and will take some time to finish by calling `async_show_progress`. The flow should pass a task specific string as `progress_action` parameter to represent the translated text string for the prompt.
-3. The flow is responsible for managing the background task and continuing the flow when the task is done or canceled. Continue the flow by calling the `FlowManager.async_configure` method, e.g. via `hass.config_entries.flow.async_configure`. Create a new task that does this to avoid a deadlock.
-4. When the task or tasks are done, the flow should mark the progress to be done with the `async_show_progress_done` method.
+2. The config flow creates an `asyncio.Task` to execut the long running task.
+3. The config flow informs the user that a task is in progress and will take some time to finish by calling `async_show_progress`, passing the `asyncio.Task` object to it. The flow should pass a task specific string as `progress_action` parameter to represent the translated text string for the prompt.
+4. The config flow will be automatically called once the task is finished, but may also be called before the task has finished, for example if frontend reloads.
+  * If the task is not yet finished, the flow should not create another task, but instead call `async_show_progress` again.
+  * If the task is finished, the flow must call the `async_show_progress_done`, indicating the next step
 5. The frontend will update each time we call show progress or show progress done.
 6. The config flow will automatically advance to the next step when the progress was marked as done. The user is prompted with the next step.
 
 Example configuration flow that includes two show progress tasks.
 
 ```python
+import asyncio
+
 from homeassistant import config_entries
 from .const import DOMAIN
 
 class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
-    task_one = None
-    task_two = None
-
-    async def _async_do_task(self, task):
-        await task  # A task that take some time to complete.
-
-        # Continue the flow after show progress when the task is done.
-        # To avoid a potential deadlock we create a new task that continues the flow.
-        # The task must be completely done so the flow can await the task
-        # if needed and get the task result.
-        self.hass.async_create_task(
-            self.hass.config_entries.flow.async_configure(flow_id=self.flow_id)
-        )
+    task_one: asyncio.Task | None = None
+    task_two: asyncio.Task | None = None
 
     async def async_step_user(self, user_input=None):
-        if not self.task_one or not self.task_two:
-            if not self.task_one:
-                task = asyncio.sleep(10)
-                self.task_one = self.hass.async_create_task(self._async_do_task(task))
-                progress_action = "task_one"
-            else:
-                task = asyncio.sleep(10)
-                self.task_two = self.hass.async_create_task(self._async_do_task(task))
+        uncompleted_task: asyncio.Task[None] | None = None
+
+        if not self.task_one:
+            coro = asyncio.sleep(10)
+            self.task_one = self.hass.async_create_task(coro)
+        if not self.task_one.done():
+            progress_action = "task_one"
+            uncompleted_task = self.task_one
+        if not uncompleted_task:
+            if not self.task_two:
+                coro = asyncio.sleep(10)
+                self.task_two = self.hass.async_create_task(coro)
+            if not self.task_two.done():
                 progress_action = "task_two"
+                uncompleted_task = self.task_two
+        if uncompleted_task:
             return self.async_show_progress(
                 step_id="user",
                 progress_action=progress_action,
+                progress_task=uncompleted_task,
             )
 
         return self.async_show_progress_done(next_step_id="finish")
@@ -451,23 +452,6 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if not user_input:
             return self.async_show_form(step_id="finish")
         return self.async_create_entry(title="Some title", data={})
-```
-
-Note: If the user closes the flow, the `async_remove` callback will be called. Make sure to implement this method in your FlowHandler to clean up any resources or tasks associated with the flow.
-
-```python
-class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    ...
-
-    @callback
-    def async_remove(self):
-        """Clean up resources or tasks associated with the flow."""
-        if self.task_one:
-            self.task_one.cancel()
-            
-        if self.task_two:
-            self.task_two.cancel()
-        ...
 ```
 
 ### Show Menu
