@@ -2,7 +2,7 @@
 author: J. Benecke
 authorURL: https://github.com/jpbede
 authorImageURL: https://avatars.githubusercontent.com/u/3989428?s=96&v=4
-title: "Deprecate invalid use of sensor units of measurements and state classes"
+title: "Deprecate invalid use of sensor units of measurement and state classes"
 ---
 
 Since Home Assistant Core 2022.12, a warning is issued in the logs if a sensor entity that has a device class 
