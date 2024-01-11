@@ -402,7 +402,7 @@ _The example is about config entries, but works with other parts that use data e
 The flow works as follows:
 
 1. The user starts the config flow in Home Assistant.
-2. The config flow creates an `asyncio.Task` to execut the long running task.
+2. The config flow creates an `asyncio.Task` to execute the long running task.
 3. The config flow informs the user that a task is in progress and will take some time to finish by calling `async_show_progress`, passing the `asyncio.Task` object to it. The flow should pass a task specific string as `progress_action` parameter to represent the translated text string for the prompt.
 4. The config flow will be automatically called once the task is finished, but may also be called before the task has finished, for example if frontend reloads.
   * If the task is not yet finished, the flow should not create another task, but instead call `async_show_progress` again.
