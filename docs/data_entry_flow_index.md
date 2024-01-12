@@ -395,7 +395,7 @@ async def handle_result(hass, flow_id, data):
 
 ### Show Progress & Show Progress Done
 
-It is possible that we need the user to wait for a task that takes several minutes.
+If a data entry flow step needs a considerable amount of time to finish, we should inform the user about this.
 
 _The example is about config entries, but works with other parts that use data entry flows too._
 
@@ -410,7 +410,7 @@ The flow works as follows:
 5. The frontend will update each time we call show progress or show progress done.
 6. The config flow will automatically advance to the next step when the progress was marked as done. The user is prompted with the next step.
 
-Example configuration flow that includes two show progress tasks.
+Example configuration flow that includes two show sequential progress tasks.
 
 ```python
 import asyncio
@@ -441,7 +441,6 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
                 uncompleted_task = self.task_two
         if uncompleted_task:
             return self.async_show_progress(
-                step_id="user",
                 progress_action=progress_action,
                 progress_task=uncompleted_task,
             )
