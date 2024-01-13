@@ -57,6 +57,28 @@ When a task is currently running (like `Preview` for the docs), it can be restar
 
 If the Dev Container was set up correctly - it supports debugging by default, out-of-the-box. It provides the necessary debug configurations, so hitting F5 should launch Home Assistant. Any breakpoints put in the code should be triggered, and the debugger should stop. 
 
+:::note
+If debugging of tests fails with the built-in `pytest` adapter with:
+
+```text
+vscode_pytest.VSCodePytestError: Error attempting to connect to extension communication socket[vscode-pytest]: A test tried to use socket.socket.
+```
+
+- Open `vscode` with Visual Studio Code and open the Home Assistant Dev Container.
+- Open the command palette with: `Ctrl` + `Shift` + `P`
+- Type `settings` command then select `>Preferences: Open Remote Settings (JSON) (Dev Container: Home Assistant Dev)`.
+- Add `"python.experiments.optOutFrom": ["pythonTestAdapter"]` to the `settings.json` file.
+- Restart the Dev Container to ensure the changes are effective.
+
+```json
+{
+  ...,
+  "python.experiments.optOutFrom": ["pythonTestAdapter"]
+}
+```
+
+:::
+
 It is also possible to debug a remote Home Assistance instance (e.g., production instance) by following the procedure described [here](https://www.home-assistant.io/integrations/debugpy/).
 
 ## Manual Environment
