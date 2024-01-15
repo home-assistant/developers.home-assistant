@@ -153,7 +153,7 @@ will match sentences such as "play the white album by the beatles". The `PlayAlb
 
 #### Local lists
 
-Sometimes you don't need a slot list that would be available for all intents and sentences, so you can define one locally, making it usable only in the context of the intent data (i.e. collection of sentences) where it was defined. For example:
+Sometimes you don't need a slot list available for all intents and sentences, so you can define one locally, making it usable only in the context of the intent data (like a collection of sentences) where it was defined. For example:
 
 ```yaml
 language: en
