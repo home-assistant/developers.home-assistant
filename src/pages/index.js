@@ -53,8 +53,8 @@ const features = [
         <h3>Source Code</h3>
         <ul>
           <li>
-            <a href="https://github.com/home-assistant/home-assistant">
-              Home Assistant
+            <a href="https://github.com/home-assistant/core">
+              Home Assistant Core
             </a>
           </li>
           <li>
