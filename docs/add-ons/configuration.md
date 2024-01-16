@@ -229,7 +229,7 @@ logins:
 random:
   - "match(^\\w*$)"
 link: url
-size: "int(5, 20)"
+size: "int(5,20)"
 count: float
 not_need: "str?"
 ```
