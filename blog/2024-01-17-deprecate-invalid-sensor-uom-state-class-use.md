@@ -1,5 +1,5 @@
 ---
-author: J. Benecke
+author: Jan-Philipp Benecke
 authorURL: https://github.com/jpbede
 authorImageURL: https://avatars.githubusercontent.com/u/3989428?s=96&v=4
 title: "Deprecate invalid use of sensor unit of measurement and state class"
