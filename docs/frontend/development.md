@@ -48,7 +48,9 @@ frontend:
   development_repo: /workspaces/frontend/
 ```
 
-The change to `.devcontainer/devcontainer.json` should be excluded from any PR as it contains your local path to the `frontend` repository.
+:::caution
+The change to `.devcontainer/devcontainer.json` should be excluded from any PR as it contains your local path to the `frontend` repository. Since the the settings in `.devcontainer/devcontainer.json` are only processed during the container rebuild, you can safely roll back the change after the rebuild has completed.
+:::
 
 ### Installing Node.js
 
