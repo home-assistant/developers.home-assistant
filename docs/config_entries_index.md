@@ -117,7 +117,7 @@ hass.async_create_task(
 For a platform to support config entries, it will need to add a setup entry method ([example](https://github.com/home-assistant/core/blob/0.68.0/homeassistant/components/light/hue.py#L60)):
 
 ```python
-async def async_setup_entry(hass, config_entry, async_add_devices):
+async def async_setup_entry(hass, config_entry, async_add_entities):
     """Set up entry."""
 ```
 

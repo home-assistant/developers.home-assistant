@@ -30,7 +30,7 @@ Depending on what you're writing, there are different ways the `hass` object is 
 Passed into `setup(hass, config)` or `async_setup(hass, config)`.
 
 **Platform**
-Passed into `setup_platform(hass, config, add_devices, discovery_info=None)` or `async_setup_platform(hass, config, async_add_devices, discovery_info=None)`.
+Passed into `setup_platform(hass, config, add_entities, discovery_info=None)` or `async_setup_platform(hass, config, async_add_entities, discovery_info=None)`.
 
 **Entity**
-Available as `self.hass` once the entity has been added via the `add_devices` callback inside a platform.
+Available as `self.hass` once the entity has been added via the `add_entities` callback inside a platform.
