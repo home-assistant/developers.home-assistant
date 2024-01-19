@@ -83,7 +83,7 @@ To avoid calculations in a property method, set the corresponding [entity class 
 | state                    | <code>str &#124; int &#124; float &#124; None</code> | `None` | The state of the entity. In most cases this is implemented by the domain base entity and should not be implemented by integrations.
 | supported_features       | <code>int &#124; None</code>  | `None`  | Flag features supported by the entity. Domains specify their own.
 | translation_key          | <code>str &#124; None</code>  | `None`  | A key for looking up translations of the entity's state in [`entity` section of the integration's `strings.json`](/docs/internationalization/core#state-of-entities).
-| translation_placeholders | `dict`                        | `None`  | Placeholder definitions for [translated entity name](/docs/internationalization/core/#name-of-entities).
+| translation_placeholders | <code>dict &#124; None</code> | `None`  | Placeholder definitions for [translated entity name](/docs/internationalization/core/#name-of-entities).
 
 :::warning
 It's allowed to change `device_class`, `supported_features` or any property included in a domain's `capability_attributes`. However, since these entity properties often are not expected to change at all and some entity consumers may not be able to update them at a free rate, we recommend only changing them when absolutely required and at a modest interval.
