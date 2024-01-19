@@ -378,10 +378,9 @@ Called when an entity is about to be removed from Home Assistant. Example use: d
 
 ## Icons
 
-Every entity in Home Assistant has an icon, which is used as a visual indicator to identify the entity more easily in the frontend.
-Home Assistant uses the [Material Design Icons](https://materialdesignicons.com/) icon set.
+Every entity in Home Assistant has an icon, which is used as a visual indicator to identify the entity more easily in the frontend. Home Assistant uses the [Material Design Icons](https://materialdesignicons.com/) icon set.
 
-In most cases, Home Assistant will pick an icon automatically based on the entity's domain, `device_class` and `state`. It is preferred to use the default icon if possible, to provide a consistent experience and to avoid confusion for the user. However, it is possible to override provide a custom icon for an entity.
+In most cases, Home Assistant will pick an icon automatically based on the entity's domain, `device_class`, and `state`. It is preferred to use the default icon if possible, to provide a consistent experience and to avoid confusion for the user. However, it is possible to override provide a custom icon for an entity.
 
 Regardless of the provided icon, it is always possible for the user to customize the icon to their liking in the frontend.
 
@@ -389,9 +388,9 @@ There are two ways to provide a custom icon for an entity, either by providing i
 
 ### Icon translations
 
-This is the preferred, and most modern way to provide a custom icons for an entity. Icon translations work similar [our regular translations](/docs/internationalization/core#state-of-entities), but instead of translating the state of an entity, it translates states of an entity to icons.
+TThis is the preferred and most modern way to provide a custom icon for an entity. Icon translations work similarly [our regular translations](/docs/internationalization/core#state-of-entities), but instead of translating the state of an entity, they translate the states of an entity to icons.
 
-The icon translation to use, is defined by the `translation_key` property of an entity. This property is used to look up the translation in the `entity` section of the integration's `icons.json` file.
+The `translation_key` property of an entity defines the icon translation to use. This property is used to look up the translation in the `entity` section of the integration's `icons.json` file.
 
 To differentiate entities and their translations, provide different translation keys. The following example `icons` for a Moon domain `sensor` entity with its `translation_key` property set to phase:
 
@@ -415,7 +414,7 @@ To differentiate entities and their translations, provide different translation 
 
 Notice that icons start with `mdi:` plus an [identifier](https://materialdesignicons.com/). The `default` icon is used when the entity's state is not in the `state` section. The `state` section is optional, and if not provided, the `default` icon will be used for all states.
 
-Icons for entity state attribute can also be provided. The following example `icons` for a thermostate providing `climate` entity with its `translation_key` property set to `ubercool`. This entity has a `preset_mode` state attribute, which can be set to `vacation` or `night`. The frontend will use these in, for example, the climate card.
+Icons for entity state attributes can also be provided. The following example icons for a thermostat providing a `climate` entity with its `translation_key` property set to `ubercool`. This entity has a `preset_mode` state attribute, which can be set to `vacation` or `night`. The frontend will use these in, for example, the climate card.
 
 ```json
 {
@@ -439,7 +438,7 @@ Icons for entity state attribute can also be provided. The following example `ic
 
 ### Icon property
 
-Another way to provide a icon for an entity is by setting the `icon` property of an entity which returns a string referencing the `mdi` icon. As this property is a method, it is possible to return different icons based on custom logic. For example, it could be possible to return different icons based on something that is not part of the entity's state.
+Another way to provide an icon for an entity is by setting the `icon` property of an entity, which returns a string referencing the `mdi` icon. As this property is a method, it is possible to return different icons based on custom logic. For example, it could be possible to return different icons based on something that is not part of the entity's state.
 
 ```python
 class MySwitch(SwitchEntity):
@@ -454,7 +453,7 @@ class MySwitch(SwitchEntity):
     ...
 ```
 
-It is not possible to provide icons for state attributes using the `icon` property. Please note, that using the `icon` property is discouraged, using the above mentioned icon translations is preferred.
+It is not possible to provide icons for state attributes using the `icon` property. Please note that using the `icon` property is discouraged; using the above-mentioned icon translations is preferred.
 
 ## Excluding state attributes from recorder history
 
