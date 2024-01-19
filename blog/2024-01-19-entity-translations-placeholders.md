@@ -5,7 +5,7 @@ authorImageURL: https://avatars.githubusercontent.com/u/7083755?v=4
 title: "Introducing entity translation placeholders"
 ---
 
-It's now possible to provide static values to be used in an entity translation via the use of placeholders.
+It's now possible to provide static values to be used in an entity translation using placeholders.
 You can pass placeholders via the `translation_placeholders` property of an entity.
 
 An example sensor:
