@@ -38,7 +38,7 @@ The `strings.json` file would look like:
 
 The resulting entity would be called `Example device Temperature channel 2`.
 
-In the case when a translation placeholder was expected but not provided by the entity a warning is logged once.
-When this happens on a system that is not on a stable version (dev, nightly or beta) an error will be raised to be able to catch errors quickly.
+A warning is logged once when a translation placeholder is expected but not provided by the entity.
+When this happens on a system that is not on a stable version (dev, nightly, or beta), an error will be raised to be able to catch the mistakes quickly.
 
-Please don't forget to be kind towards your translators, as they need to be able to understand what kind of name or value will be passed in from the placeholder name ❤️.
+Please don't forget to be kind towards your translators, as they need to understand what kind of name or value will be passed in from the placeholder name ❤️.
