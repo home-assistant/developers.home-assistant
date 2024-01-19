@@ -69,20 +69,21 @@ Because these properties are always called when the state is written to the stat
 To avoid calculations in a property method, set the corresponding [entity class or instance attribute](#entity-class-or-instance-attributes), or if the values never change, use [entity descriptions](#entity-description).
 :::
 
-| Name                    | Type                          | Default | Description
-| ----------------------- | ------------------------------| ------- | -----------
-| assumed_state           | `bool`                        | `False` | Return `True` if the state is based on our assumption instead of reading it from the device. |
-| attribution             | <code>str &#124; None</code>  | `None`  | The branding text required by the API provider. |
-| available               | `bool`                        | `True`  | Indicate if Home Assistant is able to read the state and control the underlying device. |
-| device_class            | <code>str &#124; None</code>  | `None`  | Extra classification of what the device is. Each domain specifies their own. Device classes can come with extra requirements for unit of measurement and supported features. |
-| entity_picture          | <code>str &#124; None</code>  | `None`  | Url of a picture to show for the entity. |
-| extra_state_attributes  | <code>dict &#124; None</code> | `None`  | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version. |
-| has_entity_name         | `bool`                        | `False` | Return `True` if the entity's `name` property represents the entity itself (required for new integrations). This is explained in more detail below.
-| name                    | <code>str &#124; None</code>  | `None`  | Name of the entity. Avoid hard coding a natural language name, use a [translated name](/docs/internationalization/core/#name-of-entities) instead.  |
-| should_poll             | `bool`                        | `True`  | Should Home Assistant check with the entity for an updated state. If set to `False`, entity will need to notify Home Assistant of new updates by calling one of the [schedule update methods](integration_fetching_data.md#push-vs-poll). |
-| state                   | <code>str &#124; int &#124; float &#124; None</code> | `None` | The state of the entity. In most cases this is implemented by the domain base entity and should not be implemented by integrations.
-| supported_features      | <code>int &#124; None</code>  | `None`  | Flag features supported by the entity. Domains specify their own.
-| translation_key         | <code>str &#124; None</code>  | `None`  | A key for looking up translations of the entity's state in [`entity` section of the integration's `strings.json`](/docs/internationalization/core#state-of-entities).
+| Name                     | Type                          | Default | Description
+| ------------------------ | ------------------------------| ------- | -----------
+| assumed_state            | `bool`                        | `False` | Return `True` if the state is based on our assumption instead of reading it from the device.
+| attribution              | <code>str &#124; None</code>  | `None`  | The branding text required by the API provider.
+| available                | `bool`                        | `True`  | Indicate if Home Assistant is able to read the state and control the underlying device.
+| device_class             | <code>str &#124; None</code>  | `None`  | Extra classification of what the device is. Each domain specifies their own. Device classes can come with extra requirements for unit of measurement and supported features.
+| entity_picture           | <code>str &#124; None</code>  | `None`  | Url of a picture to show for the entity.
+| extra_state_attributes   | <code>dict &#124; None</code> | `None`  | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version.
+| has_entity_name          | `bool`                        | `False` | Return `True` if the entity's `name` property represents the entity itself (required for new integrations). This is explained in more detail below.
+| name                     | <code>str &#124; None</code>  | `None`  | Name of the entity. Avoid hard coding a natural language name, use a [translated name](/docs/internationalization/core/#name-of-entities) instead.
+| should_poll              | `bool`                        | `True`  | Should Home Assistant check with the entity for an updated state. If set to `False`, entity will need to notify Home Assistant of new updates by calling one of the [schedule update methods](integration_fetching_data.md#push-vs-poll).
+| state                    | <code>str &#124; int &#124; float &#124; None</code> | `None` | The state of the entity. In most cases this is implemented by the domain base entity and should not be implemented by integrations.
+| supported_features       | <code>int &#124; None</code>  | `None`  | Flag features supported by the entity. Domains specify their own.
+| translation_key          | <code>str &#124; None</code>  | `None`  | A key for looking up translations of the entity's state in [`entity` section of the integration's `strings.json`](/docs/internationalization/core#state-of-entities).
+| translation_placeholders | <code>dict &#124; None</code> | `None`  | Placeholder definitions for [translated entity name](/docs/internationalization/core/#name-of-entities).
 
 :::warning
 It's allowed to change `device_class`, `supported_features` or any property included in a domain's `capability_attributes`. However, since these entity properties often are not expected to change at all and some entity consumers may not be able to update them at a free rate, we recommend only changing them when absolutely required and at a modest interval.
