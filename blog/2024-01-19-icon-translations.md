@@ -38,7 +38,7 @@ Icon translations also support translating entity attribute states.
 
 This change is backward-compatible. The existing `icon` property of entities will continue to work as it did before. However, we recommend the use of the icon translation over the `icon` property.
 
-Additionally, services provided by integration now also support icons and can be provided in the same icon translations file. These icons are used in the Home Assistant UI when displaying the service in places like the automation and script editors. The following example shows how to provide icons for the `light.turn_on` and `light.turn_off` services:
+Additionally, services provided by integrations now also support icons and can be provided in the same icon translations file. These icons are used in the Home Assistant UI when displaying the service in places like the automation and script editors. The following example shows how to provide icons for the `light.turn_on` and `light.turn_off` services:
 
 ```json
 {
