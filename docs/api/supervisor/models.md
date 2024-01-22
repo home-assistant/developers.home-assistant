@@ -275,7 +275,7 @@ The `content` key of a backup object contains the following keys:
 | ---------- | -------------- | ---------------------------------------------------------------------- | ---------------- |
 | name       | string         | Name of the mount                                                      | both             |
 | type       | string         | Type of the mount (cifs or nfs)                                        | both             |
-| usage      | string         | Usage of the mount (backup, media, or share)                            | both             |
+| usage      | string         | Usage of the mount (backup, media, or share)                           | both             |
 | server     | string         | IP address or hostname of the network share server                     | both             |
 | port       | int            | Port to use (if not using the standard one for the mount type)         | both             |
 | path       | string         | (nfs mounts only) Path to mount from the network share                 | both             |
@@ -298,3 +298,11 @@ Response only fields will be in responses but cannot be included in requests.
 | stage      | string  | A name for the stage the job is in (if applicable)            |
 | done       | boolean | Is the job complete                                           |
 | child_jobs | list    | A list of child [jobs](#job) started by this one              |
+| errors     | list    | A list of [errors](#job-error) that occurred during execution |
+
+## Job Error
+
+| key        | type    | description                                    |
+| ---------- | ------- | ---------------------------------------------- |
+| type       | string  | Type of error that occurred                    |
+| message    | string  | Human-readable description of what went wrong  |

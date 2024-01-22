@@ -770,6 +770,7 @@ Create a full backup.
 | compressed                     | boolean        | True     | `false` to create uncompressed backups               |
 | location                       | string or null | True     | Name of a backup mount or `null` for /backup         |
 | homeassistant_exclude_database | boolean        | True     | Exclude the Home Assistant database file from backup |
+| background                     | boolean        | True     | Return `job_id` immediately, do not wait for backup to complete. Clients must check job for status and slug. |
 
 **Example response:**
 
@@ -789,9 +790,17 @@ Upload a backup.
 
 ```json
 {
-  "slug": "skuwe823"
+  "slug": "skuwe823",
+  "job_id": "abc123"
 }
 ```
+
+:::note
+
+Error responses from this API may also include a `job_id` if the message alone cannot accurately describe what happened.
+Callers should direct users to review the job or supervisor logs to get an understanding of what occurred.
+
+:::
 
 </ApiEndpoint>
 
@@ -811,6 +820,7 @@ Create a partial backup.
 | compressed                     | boolean        | True     | `false` to create uncompressed backups               |
 | location                       | string or null | True     | Name of a backup mount or `null` for /backup         |
 | homeassistant_exclude_database | boolean        | True     | Exclude the Home Assistant database file from backup |
+| background                     | boolean        | True     | Return `job_id` immediately, do not wait for backup to complete. Clients must check job for status and slug. |
 
 **You need to supply at least one key in the payload.**
 
@@ -818,9 +828,17 @@ Create a partial backup.
 
 ```json
 {
-  "slug": "skuwe823"
+  "slug": "skuwe823",
+  "job_id": "abc123"
 }
 ```
+
+:::note
+
+Error responses from this API may also include a `job_id` if the message alone cannot accurately describe what happened.
+Callers should direct users to review the job or supervisor logs to get an understanding of what occurred.
+
+:::
 
 </ApiEndpoint>
 
@@ -893,9 +911,25 @@ Does a full restore of the backup with the given slug.
 
 **Payload:**
 
-| key      | type   | optional | description                          |
-| -------- | ------ | -------- | ------------------------------------ |
-| password | string | True     | The password for the backup if any |
+| key        | type    | optional | description                          |
+| ---------- | ------- | -------- | ------------------------------------ |
+| password   | string  | True     | The password for the backup if any   |
+| background | boolean | True     | Return `job_id` immediately, do not wait for restore to complete. Clients must check job for status. |
+
+**Example response:**
+
+```json
+{
+  "job_id": "abc123"
+}
+```
+
+:::note
+
+Error responses from this API may also include a `job_id` if the message alone cannot accurately describe what happened.
+Callers should direct users to review the job or supervisor logs to get an understanding of what occurred.
+
+:::
 
 </ApiEndpoint>
 
@@ -910,9 +944,25 @@ Does a partial restore of the backup with the given slug.
 | homeassistant | boolean | True     | `true` if Home Assistant should be restored    |
 | addons        | list    | True     | A list of add-on slugs that should be restored |
 | folders       | list    | True     | A list of directories that should be restored  |
-| password      | string  | True     | The password for the backup if any           |
+| password      | string  | True     | The password for the backup if any             |
+| background    | boolean | True     | Return `job_id` immediately, do not wait for restore to complete. Clients must check job for status. |
 
 **You need to supply at least one key in the payload.**
+
+**Example response:**
+
+```json
+{
+  "job_id": "abc123"
+}
+```
+
+:::note
+
+Error responses from this API may also include a `job_id` if the message alone cannot accurately describe what happened.
+Callers should direct users to review the job or supervisor logs to get an understanding of what occurred.
+
+:::
 
 </ApiEndpoint>
 
