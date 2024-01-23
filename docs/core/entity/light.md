@@ -11,9 +11,9 @@ A light entity controls the brightness, hue and saturation color value, white va
 | Name | Type | Default | Description
 | ---- | ---- | ---- | ----
 | brightness            | <code>int &#124; None</code>                            | `None` | The brightness of this light between 1..255
-| color_mode            | <code>ColorMode &#124; None</code>                      | `None` | The color mode of the light. The returned color mode must be present in the `supported_color_modes` property.
+| color_mode            | <code>ColorMode &#124; None</code>                      | `None` | The color mode of the light. The returned color mode must be present in the `supported_color_modes` property unless the light is rendering an effect.
 | color_temp_kelvin     | <code>int &#124; None</code>                            | `None` | The CT color value in K. This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.COLOR_TEMP` and ignored otherwise.
-| effect                | <code>str &#124; None</code>                            | `None` | The current effect.
+| effect                | <code>str &#124; None</code>                            | `None` | The current effect. Should be `EFFECT_OFF` if the light supports effects and no effect is currently rendered.
 | effect_list           | <code>list[str] &#124; None</code>                      | `None` | The list of supported effects.
 | hs_color              | <code>tuple[float, float] &#124; None</code>            | `None` | The hue and saturation color value (float, float). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.HS` and ignored otherwise.
 | is_on                 | <code>bool &#124; None</code>                           | `None` | If the light entity is on or not.
@@ -67,6 +67,17 @@ Note that in color modes `ColorMode.RGB`, `ColorMode.RGBW` and `ColorMode.RGBWW`
 If the light is in mode `ColorMode.HS`, `ColorMode.RGB` or `ColorMode.XY`, the light's state attribute will contain the light's color expressed in `hs`, `rgb` and `xy` color format. Note that when the light is in mode `ColorMode.RGB`, the `hs` and `xy` state attributes only hold the chromaticity of the `rgb` color as the `hs` and `xy` pairs do not hold brightness information.
 
 If the light is in mode `ColorMode.RGBW` or `ColorMode.RGBWW`, the light's state attribute will contain the light's color expressed in `hs`, `rgb` and `xy` color format. The color conversion is an approximation done by adding the white channels to the color.
+
+### Color Mode when rendering effects
+
+When rendering an effect, the `color_mode` should be set according to the adjustments supported by the
+effect. If the effect does not support any adjustments, the `color_mode` should be set to `ColorMode.ONOFF`.
+If the effect allows adjusting the brightness, the `color_mode` should be set to `ColorMode.BRIGHTNESS`.
+
+When rendering an effect, it's allowed to set the `color_mode` to a more restrictive mode than the color modes
+indicated by the `supported_color_mode` property:
+ - A light which supports colors is allowed to set color_mode to `ColorMode.ONOFF` or `ColorMode.BRIGHTNESS` when controlled by an effect
+ - A light which supports brightness is allowed to set color_mode to `ColorMode.ONOFF` when controlled by an effect
 
 ## Supported Features
 
