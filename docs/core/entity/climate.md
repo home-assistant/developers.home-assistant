@@ -142,6 +142,48 @@ class MyClimateEntity(ClimateEntity):
         """Set new target hvac mode."""
 ```
 
+### Turn on
+
+```python
+class MyClimateEntity(ClimateEntity):
+    # Implement one of these methods if the device supports it.
+    # Make sure that hvac_mode is properly adjusted as well.
+
+    def turn_on(self):
+        """Turn the entity on."""
+
+    async def async_turn_on(self):
+        """Turn the entity on."""
+```
+
+### Turn off
+
+```python
+class MyClimateEntity(ClimateEntity):
+    # Implement one of these methods if the device supports it.
+    # Make sure that hvac_mode is set to Off.
+
+    def turn_off(self):
+        """Turn the entity off."""
+
+    async def async_turn_off(self):
+        """Turn the entity off."""
+```
+
+### Toggle
+
+```python
+class MyClimateEntity(ClimateEntity):
+    # Implement one of these methods if the device supports it.
+    # Make sure that hvac_mode is properly adjusted as well.
+
+    def toggle(self):
+        """Toggle the entity."""
+
+    async def async_toggle(self):
+        """Toggle the entity."""
+```
+
 ### Set preset mode
 
 ```python
