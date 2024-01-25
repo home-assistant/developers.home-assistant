@@ -38,7 +38,7 @@ DHCP discover packets to find existing devices.
 
 ## TrackerEntity
 
-A TrackerEntity tracks the location of a device and reports it either as a location name, a zone name or `home` or `not_home` states. A TrackerEntity normally receives GPS coordinates to determine its state.
+A TrackerEntity tracks the location of a device and reports it either as a location name, a zone name or `home` or `not_home` states. A TrackerEntity normally receives GPS coordinates to determine its state. Either `location_name` or `latitude` and `longitude` should be set to report state.
 
 Derive a platform entity from [`homeassistant.components.device_tracker.config_entry.TrackerEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/device_tracker/config_entry.py)
 
@@ -55,8 +55,8 @@ TrackerEntity does not support attribute shorthand for [property implementation]
 | Name              | Type                           | Default      | Description                                           |
 | ----------------- | ------------------------------ | ------------ | ----------------------------------------------------- |
 | battery_level     | <code>int &#124; None</code>   | `None`       | The battery level of the device.                      |
-| latitude          | <code>float &#124; None</code> | **Required** | The latitude coordinate of the device.                |
+| latitude          | <code>float &#124; None</code> | `None`       | The latitude coordinate of the device.                |
 | location_accuracy | `int`                          | `0`          | The location accuracy (m) of the device.              |
 | location_name     | <code>str &#124; None</code>   | `None`       | The location name of the device.                      |
-| longitude         | <code>float &#124; None</code> | **Required** | The longitude coordinate of the device.               |
+| longitude         | <code>float &#124; None</code> | `None`       | The longitude coordinate of the device.               |
 | source_type       | SourceType                     | **Required** | The source type, eg `gps` or `router`, of the device. |
