@@ -22,7 +22,7 @@ A light entity controls the brightness, hue and saturation color value, white va
 | rgb_color             | <code>tuple[int, int, int] &#124; None</code>           | `None` | The rgb color value (int, int, int). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.RGB` and ignored otherwise.
 | rgbw_color            | <code>tuple[int, int, int, int] &#124; None</code>      | `None` | The rgbw color value (int, int, int, int). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.RGBW` and ignored otherwise.
 | rgbww_color           | <code>tuple[int, int, int, int, int] &#124; None</code> | `None` | The rgbww color value (int, int, int, int, int). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.RGBWW` and ignored otherwise.
-| supported_color_modes | <code>set[ColorMode} &#124; None</code>                 | `None` | Flag supported color modes.
+| supported_color_modes | <code>set[ColorMode] &#124; None</code>                 | `None` | Flag supported color modes.
 | xy_color              | <code>tuple[float, float] &#124; None</code>            | `None` | The xy color value (float, float). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.XY` and ignored otherwise.
 
 ## Color Modes
@@ -42,11 +42,11 @@ If a light does not implement the `supported_color_modes`, the `LightEntity` wil
 
 If a light does not implement the `color_mode`, the `LightEntity` will attempt to deduce it based on which of the properties are set and which are `None`:
 
-- If `supported_color_mode` includes `ColorMode.RGBW` and `white_value` and `hs_color` are both not None: `ColorMode.RGBW`
-- Else if `supported_color_mode` includes `ColorMode.HS` and `hs_color` is not None: `ColorMode.HS`
-- Else if `supported_color_mode` includes `ColorMode.COLOR_TEMP` and `color_temp` is not None: `ColorMode.COLOR_TEMP`
-- Else if `supported_color_mode` includes `ColorMode.BRIGHTNESS` and `brightness` is not None: `ColorMode.BRIGHTNESS`
-- Else if `supported_color_mode` includes `ColorMode.ONOFF`: `ColorMode.ONOFF`
+- If `supported_color_modes` includes `ColorMode.RGBW` and `white_value` and `hs_color` are both not None: `ColorMode.RGBW`
+- Else if `supported_color_modes` includes `ColorMode.HS` and `hs_color` is not None: `ColorMode.HS`
+- Else if `supported_color_modes` includes `ColorMode.COLOR_TEMP` and `color_temp` is not None: `ColorMode.COLOR_TEMP`
+- Else if `supported_color_modes` includes `ColorMode.BRIGHTNESS` and `brightness` is not None: `ColorMode.BRIGHTNESS`
+- Else if `supported_color_modes` includes `ColorMode.ONOFF`: `ColorMode.ONOFF`
 - Else: ColorMode.UNKNOWN
 
 | Value | Description
