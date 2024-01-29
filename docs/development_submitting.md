@@ -43,3 +43,7 @@ Submit your improvements, fixes, and new features to Home Assistant one at a tim
     - Click **Create pull request**.
 
 7. Check for comments and suggestions on your pull request and keep an eye on the [CI output](https://github.com/home-assistant/core/actions).
+
+:::info
+If this is your first time submitting a pull request, the CI won't run until a maintainer approves running it. Just wait, a maintainer will eventually come by and approve it.
+:::

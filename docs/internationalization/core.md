@@ -231,6 +231,8 @@ If the entity's `translation_key` property is not `None` and the `entity` object
 
 Entity components, like `sensor`, already have existing translations available that can be reused by referencing those. This includes common translations for entity names based on a device class. For example, it already has translations available for a "Temperature" sensor that can be referenced. Referencing existing translations is preferred, as it prevents translating the same thing multiple times.
 
+It is also supported to use placeholders within the translation. If a placeholder is defined within the translation string, the entity's `translation_placeholders` property has to be set accordingly.
+
 The following example `strings.json` is for a `sensor` entity with its `translation_key` property set to `thermostat_mode`:
 ```json
 {
@@ -252,6 +254,20 @@ The following example `strings.json` is for a `sensor` entity with its `translat
     "sensor": {
       "temperature_sensor": {
         "name": "[%key:component::sensor::entity_component::temperature::name%]"
+      }
+    }
+  }
+}
+```
+
+The following example `strings.json` is for a `sensor` entity with its `translation_key` property set to `distance` and a placeholder `tracked_device`:
+
+```json
+{
+  "entity": {
+    "sensor": {
+      "distance": {
+        "name": "Distance of {tracked_device}"
       }
     }
   }
