@@ -73,6 +73,7 @@ A device can have different presets that it might want to show to the user. Comm
 
 | Name       | Description                                            |
 | ---------- | ------------------------------------------------------ |
+| `NONE`     | No preset is active                                    |
 | `ECO`      | Device is running an energy-saving mode                |
 | `AWAY`     | Device is in away mode                                 |
 | `BOOST`    | Device turn all valve full up                          |
