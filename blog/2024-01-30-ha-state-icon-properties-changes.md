@@ -4,11 +4,11 @@ authorURL: https://github.com/piitaya
 title: "Properties changes for ha-state-icon"
 ---
 
-In Home Assistant 2024.2, integration have a new way to provide icons. To support this new feature, `ha-state-icon` component properties have changed.
+In Home Assistant 2024.2, integrations have a new way to provide icons. To support this new feature, `ha-state-icon` component properties have changed.
 
 [Read more about icon translations in our documentation](/docs/core/entity#icons).
 
-If you are a custom card developer and you use this component, you have to adjust the properties passed the component to avoid wrong icons displayed in your custom card.
+If you are a custom card developer using this component, you must adjust the properties passed to the component to avoid displaying the wrong icons in your custom card.
 
 ### Before 2024.2
 
