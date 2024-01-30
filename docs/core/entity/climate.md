@@ -123,6 +123,8 @@ and are combined using the bitwise or (`|`) operator.
 | `PRESET_MODE`              | The device supports presets.                                                                |
 | `SWING_MODE`               | The device supports swing modes.                                                            |
 | `AUX_HEAT`                 | The device supports auxiliary heaters.                                                      |
+| `TURN_ON`                 | The device supports turn on.                                                      |
+| `TURN_OFF`                 | The device supports turn off.                                                      |
 
 ## Methods
 
