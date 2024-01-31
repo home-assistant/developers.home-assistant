@@ -13,13 +13,13 @@ If you are a custom card developer using this component, you must adjust the pro
 ### Before 2024.2
 
 ```html
-<ha-state-icon .state="${stateObj}"></ha-state-icon>
+<ha-state-icon .state=${stateObj}></ha-state-icon>
 ```
 
 ### After 2024.2
 
 ```html
-<ha-state-icon .hass="${hass}" .stateObj="${stateObj}"></ha-state-icon>
+<ha-state-icon .hass=${hass} .stateObj=${stateObj}></ha-state-icon>
 ```
 
 ### Backward compatibility
@@ -28,8 +28,8 @@ If you want to support both old and new version on Home Assistant, you can pass 
 
 ```html
 <ha-state-icon
-  .hass="${hass}"
-  .stateObj="${stateObj}"
-  .state="${stateObj}"
+  .hass=${hass}
+  .stateObj=${stateObj}
+  .state=${stateObj}
 ></ha-state-icon>
 ```
