@@ -12,3 +12,5 @@ Integrations implementing `turn_off` service call needs to set the `TURN_OFF` fe
 There will be a 10 month deprecation period (2025.1) where `ClimateEntity` will set these on behalf of the integrations implementing the respective methods and from 2025.1 it will make integrations unable to use the respective methods if entity features has not been set accordingly.
 
 Implementing the methods without setting the respective feature flag will create a warning log entry guiding the user to create an issue for the integration.
+
+If your integration's climate entity class has defined any of the `turn_on`, `async_turn_on`, `turn_off`, `async_turn_off` methods but you don't want the `climate` platform to automatically add the corresponding feature flag, set attribute `_enable_turn_on_off_backwards_compatibility` in your `ClimateEntity` subclass instance to `False`.
