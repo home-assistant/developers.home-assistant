@@ -42,7 +42,7 @@ Additionally, services provided by integrations now also support icons and can b
 
 ```json
 {
-  "service": {
+  "services": {
     "turn_on": "mdi:lightbulb-on",
     "turn_off": "mdi:lightbulb-off"
   }
