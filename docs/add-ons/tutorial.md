@@ -100,7 +100,7 @@ Now comes the fun part, time to open the Home Assistant UI and install and run y
 
 Oops! You clicked "Check for updates" in the store and your add-on didn't show up. Or maybe you just updated an option, clicked refresh and saw your add-on disappear.
 
-When this happens, it means that your `config.yaml` is invalid. It's either [invalid YAML](http://www.yamllint.com/) or one of the specified options is incorrect. To see what went wrong, go to the Supervisor panel and in the supervisor card click on "View logs". This should bring you to a page with the logs of the supervisor. Scroll to the bottom and you should be able to find the validation error.
+When this happens, try refreshing your browser's cache first by pressing `Ctrl + F5`. If that didn't help, it means that your `config.yaml` is invalid. It's either [invalid YAML](http://www.yamllint.com/) or one of the specified options is incorrect. To see what went wrong, go to the Supervisor panel and in the supervisor card click on "View logs". This should bring you to a page with the logs of the supervisor. Scroll to the bottom and you should be able to find the validation error.
 
 Once you fixed the error, go to the add-on store and click "Check for updates" again.
 
