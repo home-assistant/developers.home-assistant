@@ -8,7 +8,7 @@ title: "Changes to light color mode when lights display an effect"
 
 The primary reason for introducing light color modes was that a light's state should not be ambiguous. As an example, a light which supports color and white with adjustable color temperature must be in either color mode `hs` (for example) or `color_temp`.
 
-However, effects complicate this because when the same light is rendering an effect, none of the `hs_color`, `color_temp` or `brightness` state attributes may be meaningful.
+However, effects complicate this because when the same light is rendering an effect, none of the `hs_color`, `color_temp`, or `brightness` state attributes may be meaningful.
 
 ## Changes
 
