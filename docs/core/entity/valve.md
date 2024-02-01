@@ -17,7 +17,7 @@ Properties should always only return information from memory and not do I/O (lik
 | is_closed | <code>bool &#124; None</code> | `None` | If the valve is closed or not. Used to determine `state` for valves that don't report position.
 | is_closing | <code>bool &#124; None</code> | `None` | If the valve is closing or not. Used to determine `state`.
 | is_opening | <code>bool &#124; None</code> | `None` | If the valve is opening or not. Used to determine `state`.
-| reports_position | <code>bool &#124; None</code> | `False` | If the valve knows its position or not.
+| reports_position | <code>bool &#124; None</code> | **Required** | If the valve knows its position or not.
 
 ### Device Classes
 
