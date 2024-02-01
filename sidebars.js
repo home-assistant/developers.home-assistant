@@ -60,6 +60,7 @@ module.exports = {
     "operating-system/partition",
     "operating-system/board-metadata",
     "operating-system/deployment",
+    "operating-system/update-system",
   ],
   Supervisor: [
     "supervisor",
