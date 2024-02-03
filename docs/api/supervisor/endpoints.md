@@ -1851,7 +1851,8 @@ Returns information about mounts configured in Supervisor
       "type": "cifs",
       "server": "server.local",
       "share": "media",
-      "state": "active"
+      "state": "active",
+      "read_only": false
     }
   ]
 }
@@ -1892,7 +1893,8 @@ Value in `name` must be unique and can only consist of letters, numbers and unde
   "server": "server.local",
   "share": "media",
   "username": "admin",
-  "password": "password"
+  "password": "password",
+  "read_only": false
 }
 ```
 
@@ -1915,7 +1917,8 @@ name, it cannot be changed. Delete and re-add the mount to change the name.
   "usage": "media",
   "type": "nfs",
   "server": "server.local",
-  "path": "/media/camera"
+  "path": "/media/camera",
+  "read_only": true
 }
 ```
 
