@@ -82,7 +82,7 @@ To avoid calculations in a property method, set the corresponding [entity class 
 | should_poll              | `bool`                        | `True`  | Should Home Assistant check with the entity for an updated state. If set to `False`, entity will need to notify Home Assistant of new updates by calling one of the [schedule update methods](integration_fetching_data.md#push-vs-poll).
 | state                    | <code>str &#124; int &#124; float &#124; None</code> | `None` | The state of the entity. In most cases this is implemented by the domain base entity and should not be implemented by integrations.
 | supported_features       | <code>int &#124; None</code>  | `None`  | Flag features supported by the entity. Domains specify their own.
-| translation_key         | <code>str &#124; None</code>  | `None`  | A key for looking up translations of the entity's state in [`entity` section of the integration's `strings.json`](/docs/internationalization/core#state-of-entities) and for translating the state into an matching [icon](#icons). |
+| translation_key         | <code>str &#124; None</code>  | `None`  | A key for looking up translations of the entity's state in [`entity` section of the integration's `strings.json`](/docs/internationalization/core#state-of-entities) and for translating the state into a matching [icon](#icons). |
 | translation_placeholders | <code>dict &#124; None</code> | `None`  | Placeholder definitions for [translated entity name](/docs/internationalization/core/#name-of-entities).
 
 :::warning
@@ -115,7 +115,7 @@ The following properties are also available on entities. However, they are for a
 | ------------------------------- | ---------------------------- | ------- | -----------
 | capability_attributes           | <code>dict &#124; None</code> | `None` | State attributes which are stored in the entity registry. This property is implemented by the domain base entity and should not be implemented by integrations.
 | force_update                    | `bool`                       | `False` | Write each update to the state machine, even if the data is the same. Example use: when you are directly reading the value from a connected sensor instead of a cache. Use with caution, will spam the state machine. |
-| icon                            | <code>str &#124; None</code> | `None`  | Icon to use in the frontend. Using this property is no recommended. [More information about using icons](#icons). |
+| icon                            | <code>str &#124; None</code> | `None`  | Icon to use in the frontend. Using this property is not recommended. [More information about using icons](#icons). |
 | state_attributes                | <code>dict &#124; None</code> | `None` | State attributes of a base domain. This property is implemented by the domain base entity and should not be implemented by integrations.
 | unit_of_measurement             | <code>str &#124; None</code> | The unit of measurement that the entity's state is expressed in. In most cases, for example for the `number` and `sensor` domains, this is implemented by the domain base entity and should not be implemented by integrations.
 
@@ -380,7 +380,7 @@ Called when an entity is about to be removed from Home Assistant. Example use: d
 
 Every entity in Home Assistant has an icon, which is used as a visual indicator to identify the entity more easily in the frontend. Home Assistant uses the [Material Design Icons](https://materialdesignicons.com/) icon set.
 
-In most cases, Home Assistant will pick an icon automatically based on the entity's domain, `device_class`, and `state`. It is preferred to use the default icon if possible, to provide a consistent experience and to avoid confusion for the user. However, it is possible to override provide a custom icon for an entity.
+In most cases, Home Assistant will pick an icon automatically based on the entity's domain, `device_class`, and `state`. It is preferred to use the default icon if possible, to provide a consistent experience and to avoid confusion for the user. However, it is possible to override the default and provide a custom icon for an entity.
 
 Regardless of the provided icon, it is always possible for the user to customize the icon to their liking in the frontend.
 
@@ -388,11 +388,11 @@ There are two ways to provide a custom icon for an entity, either by providing i
 
 ### Icon translations
 
-This is the preferred and most modern way to provide a custom icon for an entity. Icon translations work similarly [our regular translations](/docs/internationalization/core#state-of-entities), but instead of translating the state of an entity, they translate the states of an entity to icons.
+This is the preferred and most modern way to provide a custom icon for an entity. Icon translations work similarly to [our regular translations](/docs/internationalization/core#state-of-entities), but instead of translating the state of an entity, they translate the states of an entity to icons.
 
 The `translation_key` property of an entity defines the icon translation to use. This property is used to look up the translation in the `entity` section of the integration's `icons.json` file.
 
-To differentiate entities and their translations, provide different translation keys. The following example `icons` for a Moon domain `sensor` entity with its `translation_key` property set to phase:
+To differentiate entities and their translations, provide different translation keys. The following example shows `icons.json` for a Moon domain `sensor` entity with its `translation_key` property set to phase:
 
 ```json
 {
