@@ -116,6 +116,16 @@ Specify the `config_flow` key if your integration has a config flow to create a 
 }
 ```
 
+### Single instance only
+
+Specify the `single_instance_only` key if your integration supports only one config entry. When specified, the frontend will not allow the user to add more than one config entry for this integration.
+
+```json
+{
+  "single_instance_only": true
+}
+```
+
 ## Requirements
 
 Requirements are Python libraries or modules that you would normally install using `pip` for your component. Home Assistant will try to install the requirements into the `deps` subdirectory of the Home Assistant [configuration directory](https://www.home-assistant.io/docs/configuration/) if you are not using a `venv` or in something like `path/to/venv/lib/python3.6/site-packages` if you are running in a virtual environment. This will make sure that all requirements are present at startup. If steps fail, like missing packages for the compilation of a module or other install errors, the component will fail to load.
