@@ -65,7 +65,7 @@ There are a few step names reserved for system use:
 
 ## Unique IDs
 
-A config flow can attach a unique ID to a config flow to avoid the same device being set up twice. When a unique ID is set, it will immediately abort if another flow is in progress for this unique ID. You can also quickly abort if there is already an existing config entry for this ID. Config entries will get the unique ID of the flow that creates them.
+A config flow can attach a unique ID, which must be a string, to a config flow to avoid the same device being set up twice. When a unique ID is set, it will immediately abort if another flow is in progress for this unique ID. You can also quickly abort if there is already an existing config entry for this ID. Config entries will get the unique ID of the flow that creates them.
 
 Call inside a config flow step:
 
@@ -103,7 +103,9 @@ await self._async_handle_discovery_without_unique_id()
 
 ### Unique ID Requirements
 
-A Unique ID is used to match a config entry to the underlying device or API. The Unique ID must be stable and should not be able to be changed by the user. The Unique ID can be used to update the config entry data when device access details change. For example, for devices that communicate over the local network, if the IP address changes due to a new DHCP assignment, the integration can use the Unique ID to update the host using the following code snippet:
+A unique ID is used to match a config entry to the underlying device or API. The unique ID must be stable, should not be able to be changed by the user and must be a string.
+
+The Unique ID can be used to update the config entry data when device access details change. For example, for devices that communicate over the local network, if the IP address changes due to a new DHCP assignment, the integration can use the Unique ID to update the host using the following code snippet:
 
 ```
     await self.async_set_unique_id(serial_number)
@@ -114,7 +116,7 @@ A Unique ID is used to match a config entry to the underlying device or API. The
 
 - Serial number of a device
 - MAC address: formatted using `homeassistant.helpers.device_registry.format_mac`; Only obtain the MAC address from the device API or a discovery handler. Tools that rely on reading the arp cache or local network access such as `getmac` will not function in all supported network environments and are not acceptable.
-- Latitude and Longitude or other unique Geo Location
+- A string representing the latitude and longitude or other unique geo location
 - Unique identifier that is physically printed on the device or burned into an EEPROM
 
 #### Sometimes acceptable sources for a unique ID for local devices
