@@ -242,7 +242,7 @@ async def async_migrate_entry(hass, config_entry: ConfigEntry):
 
         hass.config_entries.async_update_entry(config_entry, data=new, minor_version=3, version=1)
 
-    _LOGGER.debug("Migration to version %s successful", config_entry.version)
+    _LOGGER.debug("Migration to version %s.%s successful", config_entry.version, config_entry.minor_version)
 
     return True
 ```
