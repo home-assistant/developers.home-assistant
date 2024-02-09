@@ -240,29 +240,7 @@ async def async_migrate_entry(hass, config_entry: ConfigEntry):
             # TODO: modify Config Entry data with changes in version 1.3
             pass
 
-        config_entry.version = 1
-        config_entry.minor_version = 3
-        hass.config_entries.async_update_entry(config_entry, data=new)
-
-    _LOGGER.debug("Migration to version %s successful", config_entry.version)
-
-    return True
-```
-
-If only the config entry version is changed, but no other properties, `async_update_entry` should not be called:
-```python
-# Example migration function which does not modify config entry properties, e.g. data or options
-async def async_migrate_entry(hass, config_entry: ConfigEntry):
-    """Migrate old entry."""
-    _LOGGER.debug("Migrating from version %s", config_entry.version)
-
-    if config_entry.version == 1:
-
-        # TODO: Do some changes which is not stored in the config entry itself
-
-        # There's no need to call async_update_entry, the config entry will automatically be
-        # saved when async_migrate_entry returns True
-        config_entry.version = 2
+        hass.config_entries.async_update_entry(config_entry, data=new, minor_version=3, version=1)
 
     _LOGGER.debug("Migration to version %s successful", config_entry.version)
 
