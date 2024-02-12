@@ -116,13 +116,13 @@ Specify the `config_flow` key if your integration has a config flow to create a 
 }
 ```
 
-### Single instance only
+### Single config entry only
 
-Specify the `single_instance_only` key if your integration supports only one config entry. When specified, the frontend will not allow the user to add more than one config entry for this integration.
+Specify the `single_config_entry` key if your integration supports only one config entry. When specified, the frontend will not allow the user to add more than one config entry for this integration.
 
 ```json
 {
-  "single_instance_only": true
+  "single_config_entry": true
 }
 ```
 
