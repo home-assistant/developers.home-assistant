@@ -4,7 +4,9 @@ authorURL: https://github.com/bdraco
 title: Altering config entries
 ---
 
-In Home Assistant 2024.3, modifications to a `ConfigEntry` should use `hass.config_entries.async_update_entry`. Directly setting attributes on the `ConfigEntry` object is deprecated and will fail in version 2024.10 and later. There is no deprecation period for directly setting `unique_id` or `entry_id` on the `ConfigEntry` as doing so will corrupt the internal state.
+Starting from Home Assistant 2024.3, modifications to a `ConfigEntry` should use `hass.config_entries.async_update_entry`.
+Directly setting attributes on the `ConfigEntry` object is deprecated and will start to fail in version 2024.10 and later.
+There is no deprecation period for directly setting `unique_id` or `entry_id` on the `ConfigEntry` as doing so will corrupt the internal state, and doing so will start to fail immediately.
 
 The following attributes must now be set via `hass.config_entries.async_update_entry`:
 
