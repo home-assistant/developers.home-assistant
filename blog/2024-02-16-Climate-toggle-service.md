@@ -7,7 +7,8 @@ title: "New Climate entity toggle method"
 As of Home Assistant Core 2024.3 we have added a new `toggle` method to `ClimateEntity` and users can now call `climate.toggle` in their service calls.
 
 Integrations that support `turn_on` and `turn_off` implicitly also support the `toggle` method.
-[Read more toggle method in our documentation](/docs/core/entity/climate#toggle)
+
+[Read more about the toggle method in our documentation](/docs/core/entity/climate#toggle)
 
 Example (default implementation):
 
