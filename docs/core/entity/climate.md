@@ -179,7 +179,10 @@ class MyClimateEntity(ClimateEntity):
 class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
     # The `toggle` method should set `hvac_mode` to the right `HVACMode` by
-    # optimistically setting it from the service handler or with the next state update
+    # optimistically setting it from the service handler or with the next state update.
+
+    # It's not mandatory to implement the `toggle` method as the base implementation
+    # will call `turn_on`/`turn_off` according to the current HVAC mode.
 
     def toggle(self):
         """Toggle the entity."""
