@@ -12,7 +12,7 @@ Example (default implementation):
 
 ```python
 async def async_toggle(self) -> None:
-        """Toggle the entity."""
+    """Toggle the entity."""
     if self.hvac_mode == HVACMode.OFF:
         await self.async_turn_on()
     else:
