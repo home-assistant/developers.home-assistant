@@ -69,20 +69,21 @@ Because these properties are always called when the state is written to the stat
 To avoid calculations in a property method, set the corresponding [entity class or instance attribute](#entity-class-or-instance-attributes), or if the values never change, use [entity descriptions](#entity-description).
 :::
 
-| Name                    | Type                          | Default | Description
-| ----------------------- | ------------------------------| ------- | -----------
-| assumed_state           | `bool`                        | `False` | Return `True` if the state is based on our assumption instead of reading it from the device. |
-| attribution             | <code>str &#124; None</code>  | `None`  | The branding text required by the API provider. |
-| available               | `bool`                        | `True`  | Indicate if Home Assistant is able to read the state and control the underlying device. |
-| device_class            | <code>str &#124; None</code>  | `None`  | Extra classification of what the device is. Each domain specifies their own. Device classes can come with extra requirements for unit of measurement and supported features. |
-| entity_picture          | <code>str &#124; None</code>  | `None`  | Url of a picture to show for the entity. |
-| extra_state_attributes  | <code>dict &#124; None</code> | `None`  | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version. |
-| has_entity_name         | `bool`                        | `False` | Return `True` if the entity's `name` property represents the entity itself (required for new integrations). This is explained in more detail below.
-| name                    | <code>str &#124; None</code>  | `None`  | Name of the entity. Avoid hard coding a natural language name, use a [translated name](/docs/internationalization/core/#name-of-entities) instead.  |
-| should_poll             | `bool`                        | `True`  | Should Home Assistant check with the entity for an updated state. If set to `False`, entity will need to notify Home Assistant of new updates by calling one of the [schedule update methods](integration_fetching_data.md#push-vs-poll). |
-| state                   | <code>str &#124; int &#124; float &#124; None</code> | `None` | The state of the entity. In most cases this is implemented by the domain base entity and should not be implemented by integrations.
-| supported_features      | <code>int &#124; None</code>  | `None`  | Flag features supported by the entity. Domains specify their own.
-| translation_key         | <code>str &#124; None</code>  | `None`  | A key for looking up translations of the entity's state in [`entity` section of the integration's `strings.json`](/docs/internationalization/core#state-of-entities).
+| Name                     | Type                          | Default | Description
+| ------------------------ | ------------------------------| ------- | -----------
+| assumed_state            | `bool`                        | `False` | Return `True` if the state is based on our assumption instead of reading it from the device.
+| attribution              | <code>str &#124; None</code>  | `None`  | The branding text required by the API provider.
+| available                | `bool`                        | `True`  | Indicate if Home Assistant is able to read the state and control the underlying device.
+| device_class             | <code>str &#124; None</code>  | `None`  | Extra classification of what the device is. Each domain specifies their own. Device classes can come with extra requirements for unit of measurement and supported features.
+| entity_picture           | <code>str &#124; None</code>  | `None`  | Url of a picture to show for the entity.
+| extra_state_attributes   | <code>dict &#124; None</code> | `None`  | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version.
+| has_entity_name          | `bool`                        | `False` | Return `True` if the entity's `name` property represents the entity itself (required for new integrations). This is explained in more detail below.
+| name                     | <code>str &#124; None</code>  | `None`  | Name of the entity. Avoid hard coding a natural language name, use a [translated name](/docs/internationalization/core/#name-of-entities) instead.
+| should_poll              | `bool`                        | `True`  | Should Home Assistant check with the entity for an updated state. If set to `False`, entity will need to notify Home Assistant of new updates by calling one of the [schedule update methods](integration_fetching_data.md#push-vs-poll).
+| state                    | <code>str &#124; int &#124; float &#124; None</code> | `None` | The state of the entity. In most cases this is implemented by the domain base entity and should not be implemented by integrations.
+| supported_features       | <code>int &#124; None</code>  | `None`  | Flag features supported by the entity. Domains specify their own.
+| translation_key         | <code>str &#124; None</code>  | `None`  | A key for looking up translations of the entity's state in [`entity` section of the integration's `strings.json`](/docs/internationalization/core#state-of-entities) and for translating the state into a matching [icon](#icons). |
+| translation_placeholders | <code>dict &#124; None</code> | `None`  | Placeholder definitions for [translated entity name](/docs/internationalization/core/#name-of-entities).
 
 :::warning
 It's allowed to change `device_class`, `supported_features` or any property included in a domain's `capability_attributes`. However, since these entity properties often are not expected to change at all and some entity consumers may not be able to update them at a free rate, we recommend only changing them when absolutely required and at a modest interval.
@@ -114,7 +115,7 @@ The following properties are also available on entities. However, they are for a
 | ------------------------------- | ---------------------------- | ------- | -----------
 | capability_attributes           | <code>dict &#124; None</code> | `None` | State attributes which are stored in the entity registry. This property is implemented by the domain base entity and should not be implemented by integrations.
 | force_update                    | `bool`                       | `False` | Write each update to the state machine, even if the data is the same. Example use: when you are directly reading the value from a connected sensor instead of a cache. Use with caution, will spam the state machine. |
-| icon                            | <code>str &#124; None</code> | `None`  | Icon to use in the frontend. Icons start with `mdi:` plus an [identifier](https://materialdesignicons.com/). You probably don't need this since Home Assistant already provides default icons for all entities according to its `device_class`. This should be used only in the case where there either is no matching `device_class` or where the icon used for the `device_class` would be confusing or misleading. |
+| icon                            | <code>str &#124; None</code> | `None`  | Icon to use in the frontend. Using this property is not recommended. [More information about using icons](#icons). |
 | state_attributes                | <code>dict &#124; None</code> | `None` | State attributes of a base domain. This property is implemented by the domain base entity and should not be implemented by integrations.
 | unit_of_measurement             | <code>str &#124; None</code> | The unit of measurement that the entity's state is expressed in. In most cases, for example for the `number` and `sensor` domains, this is implemented by the domain base entity and should not be implemented by integrations.
 
@@ -374,6 +375,85 @@ Called when an entity has their entity_id and hass object assigned, before it is
 ### `async_will_remove_from_hass()`
 
 Called when an entity is about to be removed from Home Assistant. Example use: disconnect from the server or unsubscribe from updates.
+
+## Icons
+
+Every entity in Home Assistant has an icon, which is used as a visual indicator to identify the entity more easily in the frontend. Home Assistant uses the [Material Design Icons](https://materialdesignicons.com/) icon set.
+
+In most cases, Home Assistant will pick an icon automatically based on the entity's domain, `device_class`, and `state`. It is preferred to use the default icon if possible, to provide a consistent experience and to avoid confusion for the user. However, it is possible to override the default and provide a custom icon for an entity.
+
+Regardless of the provided icon, it is always possible for the user to customize the icon to their liking in the frontend.
+
+There are two ways to provide a custom icon for an entity, either by providing icon translations or by providing an icon identifier.
+
+### Icon translations
+
+This is the preferred and most modern way to provide a custom icon for an entity. Icon translations work similarly to [our regular translations](/docs/internationalization/core#state-of-entities), but instead of translating the state of an entity, they translate the states of an entity to icons.
+
+The `translation_key` property of an entity defines the icon translation to use. This property is used to look up the translation in the `entity` section of the integration's `icons.json` file.
+
+To differentiate entities and their translations, provide different translation keys. The following example shows `icons.json` for a Moon domain `sensor` entity with its `translation_key` property set to phase:
+
+```json
+{
+  "entity": {
+    "sensor": {
+      "phase": {
+        "default": "mdi:moon",
+        "state": {
+          "new_moon": "mdi:moon-new",
+          "first_quarter": "mdi:moon-first-quarter",
+          "full_moon": "mdi:moon-full",
+          "last_quarter": "mdi:moon-last-quarter"
+        }
+      }
+    }
+  }
+}
+```
+
+Notice that icons start with `mdi:` plus an [identifier](https://materialdesignicons.com/). The `default` icon is used when the entity's state is not in the `state` section. The `state` section is optional, and if not provided, the `default` icon will be used for all states.
+
+Icons for entity state attributes can also be provided. The following example provides icons for a `climate` entity with its `translation_key` property set to `ubercool`. This entity has a `preset_mode` state attribute, which can be set to `vacation` or `night`. The frontend will use these in, for example, the climate card.
+
+```json
+{
+  "entity": {
+    "climate": {
+      "ubercool": {
+        "state_attributes": {
+          "preset_mode": {
+            "default": "mdi:confused",
+            "state": {
+              "vacation": "mdi:umbrella-beach",
+              "night": "mdi:weather-night"
+            }
+          }
+        }
+      }
+    }
+  }
+}
+```
+
+### Icon property
+
+Another way to provide an icon for an entity is by setting the `icon` property of an entity, which returns a string referencing the `mdi` icon. As this property is a method, it is possible to return different icons based on custom logic. For example, it could be possible to return different icons based on something that is not part of the entity's state.
+
+```python
+class MySwitch(SwitchEntity):
+
+    @property
+    def icon(self) -> str | None:
+        """Icon of the entity, based on time."""
+        if now().hour < 12:
+            return "mdi:weather-night"
+        return "mdi:weather-sunny"
+
+    ...
+```
+
+It is not possible to provide icons for state attributes using the `icon` property. Please note that using the `icon` property is discouraged; using the above-mentioned icon translations is preferred.
 
 ## Excluding state attributes from recorder history
 

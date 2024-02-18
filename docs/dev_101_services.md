@@ -169,6 +169,24 @@ This is a partial example of a field which is only shown if at least one selecte
             - light.ColorMode.HS
 ```
 
+## Icons
+
+Services can also have icons. These icons are used in the Home Assistant UI when displaying the service in places like the automation and script editors.
+
+The icon to use for each service can be defined in the `icons.json` translation file in the integration folder, under the `services` key. The key should be the service name, and the value should be the icon to use.
+
+The following example, shows how to provide icons for the `turn_on` and `turn_off` services of an integration:
+
+```json
+{
+  "services": {
+    "turn_on": "mdi:lightbulb-on",
+    "turn_off": "mdi:lightbulb-off"
+  }
+}
+```
+
+
 ## Entity Services
 
 Sometimes you want to provide extra services to control your entities. For example, the Sonos integration provides services to group and ungroup devices. Entity services are special because there are many different ways a user can specify entities. It can use areas, a group or a list of entities.

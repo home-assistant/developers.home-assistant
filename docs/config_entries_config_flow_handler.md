@@ -65,7 +65,7 @@ There are a few step names reserved for system use:
 
 ## Unique IDs
 
-A config flow can attach a unique ID to a config flow to avoid the same device being set up twice. When a unique ID is set, it will immediately abort if another flow is in progress for this unique ID. You can also quickly abort if there is already an existing config entry for this ID. Config entries will get the unique ID of the flow that creates them.
+A config flow can attach a unique ID, which must be a string, to a config flow to avoid the same device being set up twice. When a unique ID is set, it will immediately abort if another flow is in progress for this unique ID. You can also quickly abort if there is already an existing config entry for this ID. Config entries will get the unique ID of the flow that creates them.
 
 Call inside a config flow step:
 
@@ -103,7 +103,9 @@ await self._async_handle_discovery_without_unique_id()
 
 ### Unique ID Requirements
 
-A Unique ID is used to match a config entry to the underlying device or API. The Unique ID must be stable and should not be able to be changed by the user. The Unique ID can be used to update the config entry data when device access details change. For example, for devices that communicate over the local network, if the IP address changes due to a new DHCP assignment, the integration can use the Unique ID to update the host using the following code snippet:
+A unique ID is used to match a config entry to the underlying device or API. The unique ID must be stable, should not be able to be changed by the user and must be a string.
+
+The Unique ID can be used to update the config entry data when device access details change. For example, for devices that communicate over the local network, if the IP address changes due to a new DHCP assignment, the integration can use the Unique ID to update the host using the following code snippet:
 
 ```
     await self.async_set_unique_id(serial_number)
@@ -114,7 +116,7 @@ A Unique ID is used to match a config entry to the underlying device or API. The
 
 - Serial number of a device
 - MAC address: formatted using `homeassistant.helpers.device_registry.format_mac`; Only obtain the MAC address from the device API or a discovery handler. Tools that rely on reading the arp cache or local network access such as `getmac` will not function in all supported network environments and are not acceptable.
-- Latitude and Longitude or other unique Geo Location
+- A string representing the latitude and longitude or other unique geo location
 - Unique identifier that is physically printed on the device or burned into an EEPROM
 
 #### Sometimes acceptable sources for a unique ID for local devices
@@ -240,31 +242,9 @@ async def async_migrate_entry(hass, config_entry: ConfigEntry):
             # TODO: modify Config Entry data with changes in version 1.3
             pass
 
-        config_entry.version = 1
-        config_entry.minor_version = 3
-        hass.config_entries.async_update_entry(config_entry, data=new)
+        hass.config_entries.async_update_entry(config_entry, data=new, minor_version=3, version=1)
 
-    _LOGGER.debug("Migration to version %s successful", config_entry.version)
-
-    return True
-```
-
-If only the config entry version is changed, but no other properties, `async_update_entry` should not be called:
-```python
-# Example migration function which does not modify config entry properties, e.g. data or options
-async def async_migrate_entry(hass, config_entry: ConfigEntry):
-    """Migrate old entry."""
-    _LOGGER.debug("Migrating from version %s", config_entry.version)
-
-    if config_entry.version == 1:
-
-        # TODO: Do some changes which is not stored in the config entry itself
-
-        # There's no need to call async_update_entry, the config entry will automatically be
-        # saved when async_migrate_entry returns True
-        config_entry.version = 2
-
-    _LOGGER.debug("Migration to version %s successful", config_entry.version)
+    _LOGGER.debug("Migration to version %s.%s successful", config_entry.version, config_entry.minor_version)
 
     return True
 ```

@@ -73,6 +73,7 @@ A device can have different presets that it might want to show to the user. Comm
 
 | Name       | Description                                            |
 | ---------- | ------------------------------------------------------ |
+| `NONE`     | No preset is active                                    |
 | `ECO`      | Device is running an energy-saving mode                |
 | `AWAY`     | Device is in away mode                                 |
 | `BOOST`    | Device turn all valve full up                          |
@@ -123,6 +124,8 @@ and are combined using the bitwise or (`|`) operator.
 | `PRESET_MODE`              | The device supports presets.                                                                |
 | `SWING_MODE`               | The device supports swing modes.                                                            |
 | `AUX_HEAT`                 | The device supports auxiliary heaters.                                                      |
+| `TURN_ON`                 | The device supports turn on.                                                      |
+| `TURN_OFF`                 | The device supports turn off.                                                      |
 
 ## Methods
 

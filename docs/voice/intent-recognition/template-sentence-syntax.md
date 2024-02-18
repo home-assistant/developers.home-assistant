@@ -151,6 +151,22 @@ lists:
 
 will match sentences such as "play the white album by the beatles". The `PlayAlbum` intent will have an `album` slot with "the white album " (note the trailing whitespace) and an `artist` slot with "the beatles".
 
+#### Local lists
+
+Sometimes you don't need a slot list available for all intents and sentences, so you can define one locally, making it usable only in the context of the intent data (like a collection of sentences) where it was defined. For example:
+
+```yaml
+language: en
+intents:
+  AddListItem:
+    data:
+      - sentences:
+          - add {item} to [my] shopping list
+        lists:
+          item:
+            wildcard: true
+```
+
 ### Expansion Rules
 
 A lot of template sentences can be written in a similar way. To avoid having to repeat the same matching structure multiple times, we can define expansion rules. For example, a user might add "the" in front of the area name, or they might not. We can define an expansion rule to match both cases.
