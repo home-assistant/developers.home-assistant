@@ -52,11 +52,11 @@ Properties should always only return information from memory and not do I/O (lik
 TrackerEntity does not support attribute shorthand for [property implementation](../entity.md#entity-class-or-instance-attributes)
 :::
 
-| Name              | Type                           | Default      | Description                                           |
-| ----------------- | ------------------------------ | ------------ | ----------------------------------------------------- |
-| battery_level     | <code>int &#124; None</code>   | `None`       | The battery level of the device.                      |
-| latitude          | <code>float &#124; None</code> | `None`       | The latitude coordinate of the device.                |
-| location_accuracy | `int`                          | `0`          | The location accuracy (m) of the device.              |
-| location_name     | <code>str &#124; None</code>   | `None`       | The location name of the device.                      |
-| longitude         | <code>float &#124; None</code> | `None`       | The longitude coordinate of the device.               |
-| source_type       | SourceType                     | **Required** | The source type, eg `gps` or `router`, of the device. |
+| Name              | Type                           | Default      | Description                                                                              |
+| ----------------- | ------------------------------ | ------------ | ---------------------------------------------------------------------------------------- |
+| battery_level     | <code>int &#124; None</code>   | `None`       | The battery level of the device.                                                         |
+| latitude          | <code>float &#124; None</code> | `None`       | The latitude coordinate of the device.                                                   |
+| location_accuracy | `int`                          | `0`          | The location accuracy (m) of the device.                                                 |
+| location_name     | <code>str &#124; None</code>   | `None`       | The location name of the device.                                                         |
+| longitude         | <code>float &#124; None</code> | `None`       | The longitude coordinate of the device.                                                  |
+| source_type       | SourceType                     | **Required** | The source type of a device. eg `gps`, `router`, `wifi`, `bluetooth`, or `bluetooth_le`. |
