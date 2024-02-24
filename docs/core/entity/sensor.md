@@ -121,7 +121,7 @@ it possible to plot several sensors in a single graph.
 
 Home Assistant tracks the min, max and mean value during the statistics period. The
 `state_class` property must be set to `measurement`, and the `device_class` must not be
-either of `energy`, `gas`, or `monetary`
+either of `energy`, or `gas`.
 
 ### Entities representing a total amount
 
