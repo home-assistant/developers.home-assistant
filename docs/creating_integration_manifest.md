@@ -18,7 +18,8 @@ Every integration has a manifest file to specify its basic information. This fil
   "issue_tracker": "https://github.com/balloob/hue/issues",
   "loggers": ["aiohue"],
   "requirements": ["aiohue==1.9.1"],
-  "quality_scale": "platinum"
+  "quality_scale": "platinum",
+  "import_executor": false
 }
 ```
 
@@ -33,7 +34,8 @@ Or a minimal example that you can copy into your project:
   "documentation": "https://www.example.com",
   "integration_type": "hub",
   "iot_class": "cloud_polling",
-  "requirements": []
+  "requirements": [],
+  "import_executor": false
 }
 ```
 
@@ -156,6 +158,10 @@ Custom integrations should only include requirements that are not required by th
 ## Loggers
 
 The `loggers` field is a list of names that the integration's requirements use for their [getLogger](https://docs.python.org/3/library/logging.html?highlight=logging#logging.getLogger) calls.
+
+## Importing in the executor
+
+The `import_executor` flag is a boolean to determine if the code for the integration loads in the executor. Debug logging is available by enabling the `homeassistant.loader` and `homeassistant.setup` loggers to help integration code owners determine import times. Consider enabling this flag if warnings are observed when using [asyncio debug mode](https://docs.python.org/3/library/asyncio-dev.html#asyncio-debug-mode) or import times take more than a few hundred milliseconds.
 
 ## Bluetooth
 
