@@ -161,7 +161,7 @@ The `loggers` field is a list of names that the integration's requirements use f
 
 ## Importing in the executor
 
-The `import_executor` flag is a boolean to determine if the code for the integration loads in the executor. Debug logging is available by enabling the `homeassistant.loader` and `homeassistant.setup` loggers to help integration code owners determine import times. Consider enabling this flag if warnings are observed when using [asyncio debug mode](https://docs.python.org/3/library/asyncio-dev.html#asyncio-debug-mode) or import times take more than a few hundred milliseconds.
+The `import_executor` flag is a boolean to determine if the code for the integration loads in the executor. Debug logging is available by enabling the `homeassistant.loader` logger to help integration code owners determine import times. Consider enabling this flag if warnings are observed when using [asyncio debug mode](https://docs.python.org/3/library/asyncio-dev.html#asyncio-debug-mode) or import times take more than a few hundred milliseconds.
 
 ## Bluetooth
 
