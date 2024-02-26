@@ -442,7 +442,6 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if uncompleted_task:
             return self.async_show_progress(
                 progress_action=progress_action,
-                progress_task=uncompleted_task,
             )
 
         return self.async_show_progress_done(next_step_id="finish")
