@@ -10,7 +10,7 @@ and thus also the use of `hass.components`.
 With the release of Home Assistant 2024.3, we are starting to adjust and remove usage in Home Assistant Core.
 Authors of custom integrations will need to adjust their code to avoid breakage.
 
-Starting from Home Assistant 2024.9, the `@bind_hass` decorator and 
+Starting from Home Assistant 2024.6, the `@bind_hass` decorator and 
 `hass.components` will be removed and will no longer work.
 
 ## Use of `@bind_hass` decorator
