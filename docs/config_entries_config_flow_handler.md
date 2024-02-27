@@ -303,12 +303,14 @@ class OAuth2FlowHandler(
 
     async def async_oauth_create_entry(self, data: dict) -> dict:
         """Create an oauth config entry or update existing entry for reauth."""
-        if self._reauth_entry:
-            self.hass.config_entries.async_update_entry(self.reauth_entry, data=data)
-            await self.hass.config_entries.async_reload(self.reauth_entry.entry_id)
-            return self.async_abort(reason="reauth_successful")
+        if self.reauth_entry:
+            return self.async_update_reload_and_abort(
+                self.reauth_entry,
+                data=data,
+            )
         return await super().async_oauth_create_entry(data)
 ```
+By default, the `async_update_reload_and_abort` helper method aborts the flow with `reauth_successful` after update and reload.
 
 Depending on the details of the integration, there may be additional considerations such as ensuring the same account is used across reauth, or handling multiple config entries.
 
