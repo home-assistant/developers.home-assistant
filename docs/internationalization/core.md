@@ -13,12 +13,13 @@ The `strings.json` contains translations for different things that the integrati
 | `title`             | Title of the integration.                         |
 | `config`            | Translations for the config flow.                 |
 | `device_automation` | Translations for device automations.              |
-| `exceptions`        | Translations for error messages.              |
+| `entity`            | Translations for entities.                        |
+| `entity_component`  | Translations for entity components.               |
+| `exceptions`        | Translations for error messages.                  |
 | `issues`            | Translations for repairs issues.                  |
 | `options`           | Translations for the options flow.                |
 | `selectors`         | Selectors of the integration.                     |
 | `services`          | Services of the integration.                      |
-| `state`             | States of the integration, keyed by device class. |
 
 ### Title
 
