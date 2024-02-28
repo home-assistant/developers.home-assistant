@@ -59,7 +59,9 @@ async def async_setup(hass: HomeAssistant, config):
 
 ## Use of `hass.components` 
 
-Integrations that use `hass.components` should be updated to import the functions and classes directly from the integration package and pass the `hass` object as first parameter:
+Integrations that use `hass.components` should be updated to import the functions and classes directly
+from the integration package and pass the `hass` object as first parameter.
+Remember to include the imported components under `dependencies` in your `manifest.json`.
 
 ### New example
 
