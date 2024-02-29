@@ -2367,7 +2367,7 @@ Wipe the datadisk and all user data, **This will also reboot the device!** This 
 
 This API will wipe all config for addons and Home Assistant and any locally
 stored data in config, backups, media, etc. The machine will reboot during this.
-	
+
 After the reboot completes the latest stable version of Home Assistant and Supervisor
 will be downloaded. Once the process is complete you will see onboarding, like
 during initial setup.
