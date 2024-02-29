@@ -228,7 +228,7 @@ The translation strings for repairs issues are defined under the `issues` key. A
 ### Devices
 
 #### Name of devices
-Integrations can provide translations for names of its devices. To do this, provide an `device` object, that contains translations of the names and set the device's `translation_key` to a key under a domain in the `device` object.
+Integrations can provide translations for names of its devices. To do this, provide a `device` object, that contains translations of the names and set the device's `translation_key` to a key under a domain in the `device` object.
 If the device's `translation_key` is not `None` and the `device` object provides a translated name, the `name` will be ignored.
 
 It is also supported to use placeholders within the translation. If a placeholder is defined within the translation string, the device's `translation_placeholders` has to be set accordingly.
