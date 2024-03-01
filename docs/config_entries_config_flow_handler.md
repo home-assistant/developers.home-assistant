@@ -254,6 +254,8 @@ async def async_migrate_entry(hass, config_entry: ConfigEntry):
 
 A config entry can allow reconfiguration by adding a `reconfigure` step. This provides a way for integrations to allow users to change config entry data without the need to implement an `OptionsFlow` for changing setup data which are not meant to be optional.
 
+This is not meant to handle authentication issues or reconfiguration of such. For that we have the [`reauth`](#reauthentication) step which should be implemented.
+
 ```python
 import voluptuous as vol
 
@@ -275,6 +277,8 @@ class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 Gracefully handling authentication errors such as invalid, expired, or revoked tokens is needed to advance on the [Integration Qualily Scale](integration_quality_scale_index.md). This example of how to add reauth to the OAuth flow created by `script.scaffold` following the pattern in [Building a Python library](api_lib_auth.md#oauth2).
 
 This example catches an authentication exception in config entry setup in `__init__.py` and instructs the user to visit the integrations page in order to reconfigure the integration.
+
+To change config entry data which is not optional (`OptionsFlow`) but is also not to handle authentication we have the [`reconfigure`](#reauthentication) step which can be implemented and should not be handled in a `reauth` step.
 
 ```python
 

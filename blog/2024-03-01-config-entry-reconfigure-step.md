@@ -8,9 +8,19 @@ As of Home Assistant Core 2024.4 integrations can add a `reconfigure` step in th
 
 This is not to replace optional configuration (`OptionsFlow`) but instead to allow the user to change setup configuration after a config entry has been created.
 
+Some integrations implements a reconfiguration option by updating an existing config entry if a matching config entry is being created by the user. This is no longer needed by implementing the `reconfigure` step and as such those should be changed to abort the flow.
+
+### Reconfiguration vs. Reauthentication
+
+The `reconfigure` step does not replace a `reauth` step and they have different purpose.
+Reauthentication should be started automatically by the integration in the case a login / token / etc. is invalidated so the user has an option to adjust those settings.
+Reconfiguration is started by the user from the config entry options menu and should be implemented to update config entry data which are not optional for the integration to work but is also not used for authentication purposes.
+
+### Example
+
 Examples could be to change latitude and longitude of a `WeatherEntity` if you have a moving home, Change of communication port of a local device etc.
 
-To implement the `reconfigure` step include it in your config flow:
+To implement the `reconfigure` step include it in your config flow as:
 
 ```python
 import voluptuous as vol
