@@ -365,6 +365,13 @@ Stop an add-on
 
 <ApiEndpoint path="/addons/<addon>/uninstall" method="post">
 Uninstall an add-on
+
+**Payload:**
+
+| key           | type    | optional | description                            |
+| ------------- | ------- | -------- | -------------------------------------- |
+| remove_config | boolean | True     | Delete addon's config folder (if used) |
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/update" method="post">
