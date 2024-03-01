@@ -278,6 +278,7 @@ The `content` key of a backup object contains the following keys:
 | usage      | string         | Usage of the mount (backup, media, or share)                           | both             |
 | server     | string         | IP address or hostname of the network share server                     | both             |
 | port       | int            | Port to use (if not using the standard one for the mount type)         | both             |
+| read_only  | bool           | Mount is read-only (not available for backup mounts)                   | both             |
 | path       | string         | (nfs mounts only) Path to mount from the network share                 | both             |
 | share      | string         | (cifs mounts only) Share to mount from the network share               | both             |
 | username   | string         | (cifs mounts only) Username to use for authentication                  | request only     |
