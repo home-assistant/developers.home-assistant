@@ -4,17 +4,17 @@ authorURL: https://github.com/gjohansson-ST
 title: "Config Entries can now provide a reconfigure step"
 ---
 
-As of Home Assistant Core 2024.4 integrations can add a `reconfigure` step in their config entries to allow a user to reconfigure necessary config entry data.
+As of Home Assistant Core 2024.4 config entries can now be reconfigured by adding a `reconfigure` step in their config flows.s
 
 This is not to replace optional configuration (`OptionsFlow`) but instead to allow the user to change setup configuration after a config entry has been created.
 
 ### Integrations updating existing config entries
 
-Some integrations implements a reconfiguration option by updating an existing config entry if a matching config entry is being created by the user. This is no longer needed by implementing the `reconfigure` step.
+Some integrations implements a reconfiguration option by updating an existing config entry if a matching config entry is being created by the user. This is no longer allowed, integrations should be migrated to implement the `reconfigure` step.
 
 ### Reconfiguration vs. Reauthentication
 
-The `reconfigure` step does not replace a `reauth` step and they have different purpose.
+The `reconfigure` step does not replace a `reauth` step and they have different purposes.
 
 Reauthentication should be started automatically by the integration in the case a login / token / etc. is invalidated so the user has an option to adjust those settings.
 
