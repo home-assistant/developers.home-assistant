@@ -61,6 +61,7 @@ There are a few step names reserved for system use:
 | `ssdp`      | Invoked if your integration has been discovered via SSDP/uPnP as specified [using `ssdp` in the manifest](creating_integration_manifest.md#ssdp).             |
 | `usb`       | Invoked if your integration has been discovered via USB as specified [using `usb` in the manifest](creating_integration_manifest.md#usb).             |
 | `user`      | Invoked when a user initiates a flow via the user interface or when discovered and the matching and discovery step are not defined.                                                                                                  |
+| `reconfigure`      | Invoked when a user initiates a flow to reconfigure an existing config entry via the user interface.                                                                                                  |
 | `zeroconf`  | Invoked if your integration has been discovered via Zeroconf/mDNS as specified [using `zeroconf` in the manifest](creating_integration_manifest.md#zeroconf). |
 
 ## Unique IDs
@@ -247,6 +248,26 @@ async def async_migrate_entry(hass, config_entry: ConfigEntry):
     _LOGGER.debug("Migration to version %s.%s successful", config_entry.version, config_entry.minor_version)
 
     return True
+```
+
+## Reconfigure
+
+A config entry can allow reconfiguration by adding a `reconfigure` step. This provides a way for integrations to allow users to change config entry data without the need to implement an `OptionsFlow` for changing setup data which are not meant to be optional.
+
+```python
+import voluptuous as vol
+
+class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
+    """Config flow for Example integration."""
+
+    async def async_step_reconfigure(self, user_input):
+        if user_input is not None:
+            pass  # TODO: process user input
+
+        return self.async_show_form(
+            step_id="reconfigure",
+            data_schema=vol.Schema({vol.Required("input_parameter"): str}),
+        )
 ```
 
 ## Reauthentication
