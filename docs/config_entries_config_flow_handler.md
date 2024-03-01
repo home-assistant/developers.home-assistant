@@ -278,7 +278,7 @@ Gracefully handling authentication errors such as invalid, expired, or revoked t
 
 This example catches an authentication exception in config entry setup in `__init__.py` and instructs the user to visit the integrations page in order to reconfigure the integration.
 
-To change config entry data which is not optional (`OptionsFlow`) but is also not to handle authentication we have the [`reconfigure`](#reauthentication) step which can be implemented and should not be handled in a `reauth` step.
+To allow the user to change config entry data which is not optional (`OptionsFlow`) and not directly related to authentication, for example a changed host name, integrations should implement the [`reconfigure`](#reconfigure) step.
 
 ```python
 
