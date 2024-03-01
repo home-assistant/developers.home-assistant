@@ -2373,8 +2373,10 @@ After the reboot completes the latest stable version of Home Assistant and Super
 will be downloaded. Once the process is complete the user will see onboarding, like
 during initial setup.
 
-This wipe also include network settings. So after the reboot the user may need to
+This wipe also includes network settings. So after the reboot the user may need to
 reconfigure those in order to access Home Assistant again.
+
+The operating system version as well as its boot configuration will be preserved.
 
 </ApiEndpoint>
 
