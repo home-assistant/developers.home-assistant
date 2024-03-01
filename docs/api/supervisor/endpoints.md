@@ -2361,6 +2361,25 @@ Move datadisk to a new location, **This will also reboot the device!**
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/os/datadisk/wipe" method="post">
+
+Wipe the datadisk including all user data and settings, **This will also reboot the device!** This API requires an admin token
+
+This API will wipe all config/settings for addons, Home Assistant and the Operating
+System and any locally stored data in config, backups, media, etc. The machine will
+reboot during this.
+
+After the reboot completes the latest stable version of Home Assistant and Supervisor
+will be downloaded. Once the process is complete the user will see onboarding, like
+during initial setup.
+
+This wipe also includes network settings. So after the reboot the user may need to
+reconfigure those in order to access Home Assistant again.
+
+The operating system version as well as its boot configuration will be preserved.
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/os/boards/{board}" method="get">
 
 Returns information about your board if it has features or settings
