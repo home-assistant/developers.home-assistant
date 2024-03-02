@@ -57,5 +57,5 @@ def setup(hass, config):
 
 Home Assistant comes with a lot of bundled helpers to listen to specific types of event. There are helpers to track a point in time, to track a time interval, a state change or the sun set. [See available methods.][helpers]
 
-[helpers]: https://developers.home-assistant.io/docs/integration_listen_events?_highlight=helper#available-event-helpers
+[helpers]: https://developers.home-assistant.io/docs/integration_listen_events#available-event-helpers
 [object]: https://www.home-assistant.io/docs/configuration/events/
