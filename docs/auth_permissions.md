@@ -262,7 +262,7 @@ from homeassistant.components import websocket_api
 
 
 async def async_setup(hass, config):
-    hass.components.websocket_api.async_register_command(websocket_create)
+    websocket_api.async_register_command(hass, websocket_create)
     return True
 
 
