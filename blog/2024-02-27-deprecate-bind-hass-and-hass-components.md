@@ -9,7 +9,7 @@ As of Home Assistant 2024.3, we deprecate the use of the `@bind_hass` decorator
 and thus also the use of `hass.components`.
 Using `hass.components` will issue a warning in the logs.
 Authors of custom integrations are encouraged to update their code 
-by now to prevent any issues with Home Assistant 2024.9.
+to prevent any issues before Home Assistant 2024.9.
 
 Starting from Home Assistant 2024.9, the `@bind_hass` decorator and 
 `hass.components` will be removed and will no longer work.
