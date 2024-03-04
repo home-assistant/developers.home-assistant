@@ -252,9 +252,9 @@ async def async_migrate_entry(hass, config_entry: ConfigEntry):
 
 ## Reconfigure
 
-A config entry can allow reconfiguration by adding a `reconfigure` step. This provides a way for integrations to allow users to change config entry data without the need to implement an `OptionsFlow` for changing setup data which are not meant to be optional.
+A config entry can allow reconfiguration by adding a `reconfigure` step. This provides a way for integrations to allow users to change config entry data without the need to implement an `OptionsFlow` for changing setup data which is not meant to be optional.
 
-This is not meant to handle authentication issues or reconfiguration of such. For that we have the [`reauth`](#reauthentication) step which should be implemented.
+This is not meant to handle authentication issues or reconfiguration of such. For that we have the [`reauth`](#reauthentication) step which should be implemented to automatically start in such case there is an issue with authentication.
 
 ```python
 import voluptuous as vol
@@ -262,7 +262,7 @@ import voluptuous as vol
 class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     """Config flow for Example integration."""
 
-    async def async_step_reconfigure(self, user_input):
+    async def async_step_reconfigure(self, user_input: dict[str, Any] | None = None):
         if user_input is not None:
             pass  # TODO: process user input
 
