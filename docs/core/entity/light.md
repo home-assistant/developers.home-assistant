@@ -145,7 +145,7 @@ BRIGHTNESS_SCALE = (1, 1023)
 To scale the brightness to the device range:
 
 ```python
-from homeassistant.util.color import percentage_to_ranged_value
+from homeassistant.util.percentage import percentage_to_ranged_value
 BRIGHTNESS_SCALE = (1, 1023)
 
 ...
