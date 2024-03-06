@@ -50,6 +50,12 @@ class ContentCardExample extends HTMLElement {
   getCardSize() {
     return 3;
   }
+
+  // Size of your card on the grid. Home Assistant uses this to organize
+  // cards on the section grid.
+  getGridSize() {
+    return [2, 3];
+  }
 }
 
 customElements.define("content-card-example", ContentCardExample);
@@ -89,6 +95,10 @@ return customElements
   .whenDefined(element.localName)
   .then(() => element.getCardSize());
 ```
+
+Your card can define a `getGridSize` method to support [section view](https://home-assistant.io/dashboards/sections/), This method must returns the space your card on the grid section as a array containing the number of columns and rows.
+The section grid is composed of 4 columns and as many row as needed. If the method returns `[2, 3]`, your card will take 2 columns and 3 rows on the grid. If this method is not defined, your card will be full width and the height of your card will be set to `auto`.
+It's recommended that the size doesn't rely on state or other dynamic state attributes to avoid any layout change when the state change. Try to rely only on some fixed state attributes (e.g. `supported features`) and the card configuration to have a predictable size.
 
 Your card can define a `getConfigElement` method that returns a custom element for editing the user configuration. Home Assistant will display this element in the card editor in the dashboard.
 
@@ -267,7 +277,8 @@ window.customCards.push({
   name: "Content Card",
   preview: false, // Optional - defaults to false
   description: "A custom card made by me!", // Optional
-  documentationURL: "https://developers.home-assistant.io/docs/frontend/custom-ui/custom-card/", // Adds a help link in the frontend card editor
+  documentationURL:
+    "https://developers.home-assistant.io/docs/frontend/custom-ui/custom-card/", // Adds a help link in the frontend card editor
 });
 ```
 
