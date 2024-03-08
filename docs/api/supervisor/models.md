@@ -307,3 +307,11 @@ Response only fields will be in responses but cannot be included in requests.
 | ---------- | ------- | ---------------------------------------------- |
 | type       | string  | Type of error that occurred                    |
 | message    | string  | Human-readable description of what went wrong  |
+
+## Boot Slot
+
+| key        | type    | description                                     |
+| ---------- | ------- | ----------------------------------------------- |
+| state      | string  | Active or inactive (active slot is in use)      |
+| status     | string  | Status of the last boot from slot (good or bad) |
+| version    | string  | Version of OS installed                         |

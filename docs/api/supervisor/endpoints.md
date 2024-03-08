@@ -2269,14 +2269,15 @@ Returns information about the OS.
 
 **Returned data:**
 
-| key              | type    | description                                                  |
-| ---------------- | ------- | ------------------------------------------------------------ |
-| version          | string  | The current version of the OS                                |
-| version_latest   | string  | The latest published version of the OS in the active channel |
-| update_available | boolean | `true` if an update is available                             |
-| board            | string  | The name of the board                                        |
-| boot             | string  | Which slot that are in use                                   |
-| data_disk        | string  | Device which is used for holding OS data persistent          |
+| key              | type    | description                                                                  |
+| ---------------- | ------- | ---------------------------------------------------------------------------- |
+| version          | string  | The current version of the OS                                                |
+| version_latest   | string  | The latest published version of the OS in the active channel                 |
+| update_available | boolean | `true` if an update is available                                             |
+| board            | string  | The name of the board                                                        |
+| boot             | string  | Which slot that are in use                                                   |
+| data_disk        | string  | Device which is used for holding OS data persistent                          |
+| boot_slots       | dict    | Dictionary of [boot slots](api/supervisor/models.md#boot-slot) keyed by name |
 
 **Example response:**
 
@@ -2287,7 +2288,19 @@ Returns information about the OS.
   "update_available": true,
   "board": "ova",
   "boot": "slot1",
-  "data_disk": "BJTD4R-0x123456789"
+  "data_disk": "BJTD4R-0x123456789",
+  "boot_slots": {
+    "A": {
+      "state": "inactive",
+      "status": "good",
+      "version": "10.1"
+    },
+    "B": {
+      "state": "active",
+      "status": "good",
+      "version": "10.2"
+    }
+  }
 }
 ```
 
@@ -2302,6 +2315,18 @@ Update Home Assistant OS
 | key     | type   | description                                                    |
 | ------- | ------ | -------------------------------------------------------------- |
 | version | string | The version you want to install, default is the latest version |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/os/boot-slot" method="post">
+
+Change the active boot slot, **This will also reboot the device!** 
+
+**Payload:**
+
+| key       | type   | description                                                             |
+| --------- | ------ | ----------------------------------------------------------------------- |
+| boot_name | string | Name of the boot slot. See options in `boot_slots` from `/os/info` API. |
 
 </ApiEndpoint>
 
