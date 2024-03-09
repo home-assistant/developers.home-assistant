@@ -86,7 +86,6 @@ The linters are also available directly, you can run tests on individual files:
 ```shell
 ruff homeassistant/core.py
 pylint homeassistant/core.py
-black homeassistant/core.py
 ```
 
 ### Notes on PyLint and PEP8 validation

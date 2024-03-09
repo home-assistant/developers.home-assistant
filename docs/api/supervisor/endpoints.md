@@ -365,6 +365,13 @@ Stop an add-on
 
 <ApiEndpoint path="/addons/<addon>/uninstall" method="post">
 Uninstall an add-on
+
+**Payload:**
+
+| key           | type    | optional | description                            |
+| ------------- | ------- | -------- | -------------------------------------- |
+| remove_config | boolean | True     | Delete addon's config folder (if used) |
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/update" method="post">
@@ -770,6 +777,7 @@ Create a full backup.
 | compressed                     | boolean        | True     | `false` to create uncompressed backups               |
 | location                       | string or null | True     | Name of a backup mount or `null` for /backup         |
 | homeassistant_exclude_database | boolean        | True     | Exclude the Home Assistant database file from backup |
+| background                     | boolean        | True     | Return `job_id` immediately, do not wait for backup to complete. Clients must check job for status and slug. |
 
 **Example response:**
 
@@ -789,9 +797,17 @@ Upload a backup.
 
 ```json
 {
-  "slug": "skuwe823"
+  "slug": "skuwe823",
+  "job_id": "abc123"
 }
 ```
+
+:::note
+
+Error responses from this API may also include a `job_id` if the message alone cannot accurately describe what happened.
+Callers should direct users to review the job or supervisor logs to get an understanding of what occurred.
+
+:::
 
 </ApiEndpoint>
 
@@ -811,6 +827,7 @@ Create a partial backup.
 | compressed                     | boolean        | True     | `false` to create uncompressed backups               |
 | location                       | string or null | True     | Name of a backup mount or `null` for /backup         |
 | homeassistant_exclude_database | boolean        | True     | Exclude the Home Assistant database file from backup |
+| background                     | boolean        | True     | Return `job_id` immediately, do not wait for backup to complete. Clients must check job for status and slug. |
 
 **You need to supply at least one key in the payload.**
 
@@ -818,9 +835,17 @@ Create a partial backup.
 
 ```json
 {
-  "slug": "skuwe823"
+  "slug": "skuwe823",
+  "job_id": "abc123"
 }
 ```
+
+:::note
+
+Error responses from this API may also include a `job_id` if the message alone cannot accurately describe what happened.
+Callers should direct users to review the job or supervisor logs to get an understanding of what occurred.
+
+:::
 
 </ApiEndpoint>
 
@@ -893,9 +918,25 @@ Does a full restore of the backup with the given slug.
 
 **Payload:**
 
-| key      | type   | optional | description                          |
-| -------- | ------ | -------- | ------------------------------------ |
-| password | string | True     | The password for the backup if any |
+| key        | type    | optional | description                          |
+| ---------- | ------- | -------- | ------------------------------------ |
+| password   | string  | True     | The password for the backup if any   |
+| background | boolean | True     | Return `job_id` immediately, do not wait for restore to complete. Clients must check job for status. |
+
+**Example response:**
+
+```json
+{
+  "job_id": "abc123"
+}
+```
+
+:::note
+
+Error responses from this API may also include a `job_id` if the message alone cannot accurately describe what happened.
+Callers should direct users to review the job or supervisor logs to get an understanding of what occurred.
+
+:::
 
 </ApiEndpoint>
 
@@ -910,9 +951,25 @@ Does a partial restore of the backup with the given slug.
 | homeassistant | boolean | True     | `true` if Home Assistant should be restored    |
 | addons        | list    | True     | A list of add-on slugs that should be restored |
 | folders       | list    | True     | A list of directories that should be restored  |
-| password      | string  | True     | The password for the backup if any           |
+| password      | string  | True     | The password for the backup if any             |
+| background    | boolean | True     | Return `job_id` immediately, do not wait for restore to complete. Clients must check job for status. |
 
 **You need to supply at least one key in the payload.**
+
+**Example response:**
+
+```json
+{
+  "job_id": "abc123"
+}
+```
+
+:::note
+
+Error responses from this API may also include a `job_id` if the message alone cannot accurately describe what happened.
+Callers should direct users to review the job or supervisor logs to get an understanding of what occurred.
+
+:::
 
 </ApiEndpoint>
 
@@ -1851,7 +1908,8 @@ Returns information about mounts configured in Supervisor
       "type": "cifs",
       "server": "server.local",
       "share": "media",
-      "state": "active"
+      "state": "active",
+      "read_only": false
     }
   ]
 }
@@ -1892,7 +1950,8 @@ Value in `name` must be unique and can only consist of letters, numbers and unde
   "server": "server.local",
   "share": "media",
   "username": "admin",
-  "password": "password"
+  "password": "password",
+  "read_only": false
 }
 ```
 
@@ -1915,7 +1974,8 @@ name, it cannot be changed. Delete and re-add the mount to change the name.
   "usage": "media",
   "type": "nfs",
   "server": "server.local",
-  "path": "/media/camera"
+  "path": "/media/camera",
+  "read_only": true
 }
 ```
 
@@ -2298,6 +2358,25 @@ Move datadisk to a new location, **This will also reboot the device!**
 | key     | type   | description                                                       |
 | ------- | ------ | ----------------------------------------------------------------- |
 | device  | string | ID of the disk device which should be used as the target for the data migration |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/os/datadisk/wipe" method="post">
+
+Wipe the datadisk including all user data and settings, **This will also reboot the device!** This API requires an admin token
+
+This API will wipe all config/settings for addons, Home Assistant and the Operating
+System and any locally stored data in config, backups, media, etc. The machine will
+reboot during this.
+
+After the reboot completes the latest stable version of Home Assistant and Supervisor
+will be downloaded. Once the process is complete the user will see onboarding, like
+during initial setup.
+
+This wipe also includes network settings. So after the reboot the user may need to
+reconfigure those in order to access Home Assistant again.
+
+The operating system version as well as its boot configuration will be preserved.
 
 </ApiEndpoint>
 

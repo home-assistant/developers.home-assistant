@@ -5,7 +5,7 @@ sidebar_label: "Building a Bluetooth Integration"
 
 ### Best practices for integration authors
 
-- Integrations that need to use a Bluetooth adapter should add `bluetooth_adapters` in [`dependencies`](creating_integration_manifest#dependencies) in their [`manifest.json`](creating_integration_manifest). The [`manifest.json`](creating_integration_manifest) entry ensures that all supported remote adapters are connected before the integration tries to use them.
+- Integrations that need to use a Bluetooth adapter should add `bluetooth_adapters` in [`dependencies`](creating_integration_manifest.md#dependencies) in their [`manifest.json`](creating_integration_manifest.md). The [`manifest.json`](creating_integration_manifest.md) entry ensures that all supported remote adapters are connected before the integration tries to use them.
 
 - Call the `bluetooth.async_get_scanner` API to get a `BleakScanner` instance and pass it to your library. The returned scanner avoids the overhead of running multiple scanners, which is significant. Additionally, the wrapped scanner will continue functioning if the user changes the Bluetooth adapter settings.
 

@@ -73,6 +73,7 @@ A device can have different presets that it might want to show to the user. Comm
 
 | Name       | Description                                            |
 | ---------- | ------------------------------------------------------ |
+| `NONE`     | No preset is active                                    |
 | `ECO`      | Device is running an energy-saving mode                |
 | `AWAY`     | Device is in away mode                                 |
 | `BOOST`    | Device turn all valve full up                          |
@@ -123,6 +124,8 @@ and are combined using the bitwise or (`|`) operator.
 | `PRESET_MODE`              | The device supports presets.                                                                |
 | `SWING_MODE`               | The device supports swing modes.                                                            |
 | `AUX_HEAT`                 | The device supports auxiliary heaters.                                                      |
+| `TURN_ON`                 | The device supports turn on.                                                      |
+| `TURN_OFF`                 | The device supports turn off.                                                      |
 
 ## Methods
 
@@ -137,6 +140,54 @@ class MyClimateEntity(ClimateEntity):
 
     async def async_set_hvac_mode(self, hvac_mode):
         """Set new target hvac mode."""
+```
+
+### Turn on
+
+```python
+class MyClimateEntity(ClimateEntity):
+    # Implement one of these methods.
+    # The `turn_on` method should set `hvac_mode` to any other than
+    # `HVACMode.OFF` by optimistically setting it from the service handler
+    # or with the next state update
+
+    def turn_on(self):
+        """Turn the entity on."""
+
+    async def async_turn_on(self):
+        """Turn the entity on."""
+```
+
+### Turn off
+
+```python
+class MyClimateEntity(ClimateEntity):
+    # Implement one of these methods.
+    # The `turn_off` method should set `hvac_mode` to `HVACMode.OFF` by
+    # optimistically setting it from the service handler or with the next state update
+
+    def turn_off(self):
+        """Turn the entity off."""
+
+    async def async_turn_off(self):
+        """Turn the entity off."""
+```
+
+### Toggle
+
+```python
+class MyClimateEntity(ClimateEntity):
+    # It's not mandatory to implement the `toggle` method as the base implementation
+    # will call `turn_on`/`turn_off` according to the current HVAC mode.
+
+    # If implemented, the `toggle` method should set `hvac_mode` to the right `HVACMode` by
+    # optimistically setting it from the service handler or with the next state update.
+
+    def toggle(self):
+        """Toggle the entity."""
+
+    async def async_toggle(self):
+        """Toggle the entity."""
 ```
 
 ### Set preset mode
