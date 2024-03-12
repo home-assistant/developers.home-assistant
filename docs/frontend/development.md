@@ -41,7 +41,7 @@ If you are using Visual Studio Code with devcontainers for Home Assistant, you n
 ]
 ```
 
-The Home Assistant's devcontainer needs to get rebuilt via the `docker-build` [task](/development_environment.mdx#tasks), and the `configuration.yaml` should point to the path inside the container:
+The Home Assistant's devcontainer needs to get rebuilt via the `Dev Containers: Rebuild Container` with: Shift+Command+P(Mac) / Ctrl+Shift+P (Windows/Linux). The `configuration.yaml` should point to the path inside the container:
 
 ```yaml
 frontend:
