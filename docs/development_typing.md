@@ -30,3 +30,8 @@ While we encourage the use of type hints, we currently do not require them for o
 By default, our CI checks statically for type hints. In case a module has been fully typed, it can be
 marked for enabling strict checks, by adding the module to the `.strict-typing` file
 that is located at the root of the Home Assistant Core project.
+### Type hint stubs
+
+There is an **unofficial** set of type-stubs for Home Assistant core modules in the package [homeassistant-stubs](https://pypi.org/project/homeassistant-stubs/) which can be particularly useful for developing custom components or anything that imports Home Assistant modules.
+
+There is also a similar stubs package [voluptuous-stubs](https://pypi.org/project/voluptuous-stubs/) for shema definitions.
