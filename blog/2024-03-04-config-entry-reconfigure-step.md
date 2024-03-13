@@ -10,7 +10,7 @@ This is not to replace optional configuration (`OptionsFlow`) but instead to all
 
 ### Integrations updating existing config entries
 
-Some integrations implements a reconfiguration option by updating an existing config entry if a matching config entry is being created by the user. This is no longer allowed, integrations should be migrated to implement the `reconfigure` step.
+Some integrations implement a reconfiguration option by updating an existing config entry if a matching config entry is being created by the user. This is no longer allowed, and integrations should be migrated to implement the `reconfigure` step.
 
 ### Reconfiguration vs. Reauthentication
 
