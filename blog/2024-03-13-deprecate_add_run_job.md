@@ -9,10 +9,10 @@ title: "Deprecating `async_run_job` and `async_add_job`"
 Instead, it's more efficient to use one of the other job methods, as the method of calling the job does not ever have to be worked out:
 
 If the callable is a coroutine function running from a config entry:
-`entry.async_add_background_task`, `entry.async_add_task`
+`entry.async_create_background_task`, `entry.async_create_task`
 
 If the callable is a coroutine function running from another place:
-`hass.async_add_background_task`, `hass.async_add_task`
+`hass.async_create_background_task`, `hass.async_create_task`
 
 If the callable should run in the executor:
 `hass.async_add_executor_job`
