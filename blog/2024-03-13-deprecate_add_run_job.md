@@ -15,4 +15,4 @@ If the callable is a coroutine function running from another place:
 `hass.async_add_background_task`, `hass.async_add_task`
 
 If the callable should run in the executor:
-`hass.async_create_executor_job`
+`hass.async_add_executor_job`
