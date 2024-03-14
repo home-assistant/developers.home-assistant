@@ -188,7 +188,6 @@ async def async_select_index(hass: HomeAssistant, index: int) -> None:
         check_index(index)
     except ValueError as exc:
         raise ServiceValidationError(
-            str(exc),
             translation_domain=DOMAIN,
             translation_key="invalid_index",
             translation_placeholders={
@@ -196,7 +195,6 @@ async def async_select_index(hass: HomeAssistant, index: int) -> None:
             },
         ) from exc
 ```
-
 
 ### Issues
 
