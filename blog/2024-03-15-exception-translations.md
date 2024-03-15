@@ -24,6 +24,20 @@ async def async_select_index(hass: HomeAssistant, index: int) -> None:
             translation_key="invalid_index",
             translation_placeholders={
                 "index": index,
+                "expected": expected,
             },
         ) from exc
+```
+
+The error message is placed in `strings.json`
+
+```json
+{
+    ...
+    "exceptions": {
+        "invalid_index": {
+            "message": "An invalid index is selected, expected: {expected}, got: {index}"
+        }
+    }
+}
 ```
