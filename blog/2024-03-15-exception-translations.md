@@ -29,7 +29,7 @@ async def async_select_index(hass: HomeAssistant, index: int) -> None:
         ) from exc
 ```
 
-The error message is placed in `strings.json`
+The error message is placed in `strings.json`:
 
 ```json
 {
