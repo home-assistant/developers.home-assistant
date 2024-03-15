@@ -9,7 +9,7 @@ title: Raising exceptions with translations
 
 Translation support applies to `HomeAssistantError` and subclasses like `ServiceValidationError`. When a `translation_domain` and `translation_key` is set and the error message is added in `strings.json`, it is no longer needed to add the error message string for the local logging. Home Assistant will automatically fetch the English error message from the translation cache.
 
-When raising `HomeAssistantError` or as subclass with translation support we should remove log message from the argument list to enable it to be fetched from the translation cache.
+When raising `HomeAssistantError` or a subclass with translation support we should remove the log message from the argument list to enable it to be fetched from the translation cache.
 
 For example:
 
