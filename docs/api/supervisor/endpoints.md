@@ -2324,9 +2324,9 @@ Change the active boot slot, **This will also reboot the device!**
 
 **Payload:**
 
-| key       | type   | description                                                             |
-| --------- | ------ | ----------------------------------------------------------------------- |
-| boot_name | string | Name of the boot slot. See options in `boot_slots` from `/os/info` API. |
+| key       | type   | description                                                              |
+| --------- | ------ | ------------------------------------------------------------------------ |
+| boot_slot | string | Boot slot to change to. See options in `boot_slots` from `/os/info` API. |
 
 </ApiEndpoint>
 
