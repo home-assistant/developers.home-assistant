@@ -122,7 +122,7 @@ class StrategyDashboardDemo {
 
 class StrategyViewDemo {
   static async generate(config, hass) {
-    const { area, devices, entities } = config.strategy;
+    const { area, devices, entities } = config;
 
     const areaDevices = new Set();
 
