@@ -6,11 +6,11 @@ title: "New state timestamp State.last_reported"
 
 The `State` object is now always updated and an event is always fired when an integration sets the state of an entity, regardless of any change to the state or a state attribute. This is implemented by adding a new timestamp, `State.last_reported` and a new event `state_reported`.
 
-The `state_reported` state is fired in large volume, and must be used with care to avoid deterimental effects on system load:
- - Event listeners which subscribe to all events are not called when `state_reported` is fired
- - It's not allowed to listen to `state_reported` events for all entities
- - When listening to `state_reported`, an `event_filter` must be used to screen out events for other entities
- - When listening to `state_reported`, the `run_immediately` flag must be set
+The `state_reported` event is fired in large volume, and must be used with care to avoid detrimental effects on system load:
+ - Event listeners which subscribe to all events are not called when `state_reported` is fired.
+ - It's not allowed to listen to `state_reported` events for all entities.
+ - When listening to `state_reported`, an `event_filter` must be used to screen out events for other entities.
+ - When listening to `state_reported`, the `run_immediately` flag must be set.
  
 ### Background
 
