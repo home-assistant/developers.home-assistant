@@ -324,5 +324,5 @@ Response only fields will be in responses but cannot be included in requests.
 | name       | string  | Name of the user                                              |
 | is_owner   | boolean | Is the user the owner                                         |
 | is_active  | boolean | Is the user active                                            |
-| local_only | boolean | Can the user login outside the LAN                            |
+| local_only | boolean | Can the user login from the network (e.g. via http)           |
 | group_ids  | list    | Role(s) the user has (admin, etc)                             |
