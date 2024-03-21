@@ -8,10 +8,6 @@ As of Home Assistant Core 2024.4 config entries can now be reconfigured by addin
 
 This is not to replace optional configuration (`OptionsFlow`) but instead to allow the user to change setup configuration after a config entry has been created.
 
-### Integrations updating existing config entries
-
-Some integrations implement a reconfiguration option by updating an existing config entry if a matching config entry is being created by the user. This is no longer allowed, and integrations should be migrated to implement the `reconfigure` step.
-
 ### Reconfiguration vs. Reauthentication
 
 The `reconfigure` step does not replace a `reauth` step and they have different purposes.
