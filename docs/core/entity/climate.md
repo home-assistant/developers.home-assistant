@@ -20,7 +20,6 @@ Properties should always only return information from memory and not do I/O (lik
 | hvac_action             | <code>HVACAction &#124; None</code> | `None`                               | The current HVAC action (heating, cooling)                                 |
 | hvac_mode               | <code>HVACMode &#124; None</code>   | **Required**                         | The current operation (e.g. heat, cool, idle). Used to determine `state`.  |
 | hvac_modes              | <code>list[HVACMode]</code>         | **Required**                         | List of available operation modes. See below.                              |
-| is_aux_heat             | <code>int &#124; None</code>        | **Required by SUPPORT_AUX_HEAT**     | True if an auxiliary heater is on.                                         |
 | max_humidity            | `int`                               | `DEFAULT_MAX_HUMIDITY` (value == 99) | The maximum humidity.                                                      |
 | max_temp                | `float`                             | `DEFAULT_MAX_TEMP` (value == 35 °C)  | The maximum temperature in `temperature_unit`.                             |
 | min_humidity            | `int`                               | `DEFAULT_MIN_HUMIDITY` (value == 30) | The minimum humidity.                                                      |
@@ -123,7 +122,6 @@ and are combined using the bitwise or (`|`) operator.
 | `FAN_MODE`                 | The device supports fan modes.                                                              |
 | `PRESET_MODE`              | The device supports presets.                                                                |
 | `SWING_MODE`               | The device supports swing modes.                                                            |
-| `AUX_HEAT`                 | The device supports auxiliary heaters.                                                      |
 | `TURN_ON`                 | The device supports turn on.                                                      |
 | `TURN_OFF`                 | The device supports turn off.                                                      |
 
@@ -253,25 +251,4 @@ class MyClimateEntity(ClimateEntity):
 
     async def async_set_temperature(self, **kwargs):
         """Set new target temperature."""
-```
-
-### Control auxiliary heater
-
-```python
-class MyClimateEntity(ClimateEntity):
-    # Implement one of these methods.
-
-    def turn_aux_heat_on(self):
-        """Turn auxiliary heater on."""
-
-    async def async_turn_aux_heat_on(self):
-        """Turn auxiliary heater on."""
-
-    # Implement one of these methods.
-
-    def turn_aux_heat_off(self):
-        """Turn auxiliary heater off."""
-
-    async def async_turn_aux_heat_off(self):
-        """Turn auxiliary heater off."""
 ```
