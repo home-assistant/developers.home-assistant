@@ -1478,6 +1478,7 @@ Return information about the host.
 | broadcast_llmnr  | bool or null   | Host is broadcasting its LLMNR hostname   |
 | broadcast_mdns   | bool or null   | Host is broadcasting its MulticastDNS hostname |
 | chassis          | string or null | The chassis type                          |
+| virtualization   | string or null | Virtualization hypervisor in use (if any) |
 | cpe              | string or null | The local CPE                             |
 | deployment       | string or null | The deployment stage of the OS if any     |
 | disk_total       | float          | Total space of the disk in MB             |
