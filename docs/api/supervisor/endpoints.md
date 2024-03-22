@@ -1430,6 +1430,31 @@ Get hardware information.
           "/sys/devices/soc/platform/00ef"
         ]
       }
+    ],
+    "drives": [
+      {
+        "vendor": "Generic",
+        "model": "Flash Disk",
+        "revision": "8.07",
+        "serial": "AABBCCDD",
+        "id": "Generic-Flash-Disk-AABBCCDD",
+        "size": 8054112256,
+        "time_detected": "2023-02-15T21:44:22.504878+00:00",
+        "connection_bus": "usb",
+        "seat": "seat0",
+        "removable": true,
+        "ejectable": true,
+        "filesystems": [
+          {
+            "device": "/dev/sda1",
+            "id": "by-uuid-1122-1ABA",
+            "size": 67108864,
+            "name": "",
+            "system": false,
+            "mount_points": []
+          }
+        ]
+      }
     ]
 }
 ```
@@ -1439,6 +1464,7 @@ Get hardware information.
 | key      | description                                                  |
 | -------- | ------------------------------------------------------------ |
 | devices  | A list of [Device models](api/supervisor/models.md#device)   |
+| drives   | A list of [Drive models](api/supervisor/models.md#drive)
 
 </ApiEndpoint>
 

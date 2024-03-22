@@ -315,3 +315,30 @@ Response only fields will be in responses but cannot be included in requests.
 | state      | string  | Active or inactive (active slot is in use)      |
 | status     | string  | Status of the last boot from slot (good or bad) |
 | version    | string  | Version of OS installed                         |
+
+## Drive
+
+| key            | type     | description                                                 |
+| -------------- | -------- | ----------------------------------------------------------- |
+| vendor         | string   | Drive vendor                                                |
+| model          | string   | Drive model                                                 |
+| serial         | string   | Drive serial number                                         |
+| id             | string   | Unique and persistent id for drive                          |
+| size           | int      | Size of the drive in bytes                                  |
+| time_detected  | datetime | Time drive was detected by system                           |
+| connection_bus | string   | Physical connection bus of the drive (USB, etc.)            |
+| seat           | string   | Identifier of seat drive is plugged into                    |
+| removable      | boolean  | Is the drive removable by the user?                         |
+| ejectable      | boolean  | Is the drive ejectable by the system?                       |
+| filesystems    | list     | A list of [filesystem partitions](#filesystem) on the drive |
+
+## Filesystem
+
+| key          | type    | description                                               |
+| ------------ | ------- | --------------------------------------------------------- |
+| device       | string  | Special device file for the filesystem (e.g. `/dev/sda1`) |
+| id           | string  | Unique and persistent id for filesystem                   |
+| size         | int     | Size of the filesystem in bytes                           |
+| name         | string  | Name of the filesystem (if known)                         |
+| system       | boolean | `true` if filesystem considered a system/internal device  |
+| mount_points | list    | List of paths where the filesystem is mounted.            |
