@@ -254,7 +254,7 @@ async def async_migrate_entry(hass, config_entry: ConfigEntry):
 
 A config entry can allow reconfiguration by adding a `reconfigure` step. This provides a way for integrations to allow users to change config entry data without the need to implement an `OptionsFlow` for changing setup data which is not meant to be optional.
 
-This is not meant to handle authentication issues or reconfiguration of such. For that we have the [`reauth`](#reauthentication) step which should be implemented to automatically start in such case there is an issue with authentication.
+This is not meant to handle authentication issues or reconfiguration of such. For that we have the [`reauth`](#reauthentication) step, which should be implemented to automatically start in such case there is an issue with authentication.
 
 ```python
 import voluptuous as vol
