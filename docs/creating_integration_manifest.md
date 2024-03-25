@@ -155,9 +155,10 @@ It is also possible to use a public git repository to install a requirement.  Th
 
 ```json
 {
-  "requirements": ["git+https://github.com/issacg/pycoolmaster.git@except_connect#pycoolmaster==0.2.2"]
+  "requirements": ["pycoolmaster @ git+https://github.com/issacg/pycoolmaster.git@except_connect#pycoolmaster==0.2.2"]
 }
 ```
+You can omit the version, if you want to have the version at the tip of the given branch.
 
 ### Custom integration requirements
 
