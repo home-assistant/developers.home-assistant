@@ -61,7 +61,7 @@ arch:
 
 ### The `run.sh` file
 
-This is the script that will run when your add-on starts.
+This is the script that will run when your add-on starts. It runs in `bashio` which is a Home Assistant shell that adds a few features. Build from the base Home Assistant images to run your containers locally.
 
 ```shell
 #!/usr/bin/with-contenv bashio
