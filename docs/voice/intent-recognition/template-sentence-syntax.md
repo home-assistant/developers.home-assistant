@@ -78,6 +78,10 @@ See all [translated responses](https://github.com/home-assistant/intents/tree/ma
   * `<rule_name>`
   * The body of the rule is substituted for `<rule_name>`
   * In YAML, `rule_name` should be under `expansion_rules`. If the `rule_name` wraps a slot name, it should match the slot name. Otherwise it should be in the native language.
+* [Permutations](https://en.wikipedia.org/wiki/Permutation) of 2 or more items
+  * `(patience;you must have)`
+  * Permutation items are always padded with spaces to prevent new word formations
+  * Limit the number of items to 2-4, as the number of permutations for `n` items increases very quickly with `n`, this number being `n! == 1 * 2 * ... * n`
 
 ## The common file
 
