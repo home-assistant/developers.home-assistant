@@ -218,6 +218,7 @@ module.exports = {
       ],
     },
     "creating_integration_brand",
+    "core/platform/analytics",
     "core/platform/application_credentials",
     "core/platform/backup",
     "core/platform/raising_exceptions",
