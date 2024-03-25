@@ -27,6 +27,8 @@ This API will have a single method to fetch data for all the entities that you h
 
 Home Assistant provides a DataUpdateCoordinator class to help you manage this as efficiently as possible.
 
+When using the DataUpdateCoordinator, the data being polled is often expected to stay mostly the same. For example, if you are polling a light that is only turned on once a week, that data may be the same nearly all the time. The default behavior is always calling back listeners when the data is updated, even if it does not change. If the data returned from the API can be compared for changes with the Python `__eq__` method, set `always_update=False` when creating the DataUpdateCoordinator to avoid unnecessary callbacks and writes to the state machine.
+
 ```python
 """Example integration using DataUpdateCoordinator."""
 
@@ -82,6 +84,10 @@ class MyCoordinator(DataUpdateCoordinator):
             name="My sensor",
             # Polling interval. Will only be polled if there are subscribers.
             update_interval=timedelta(seconds=30),
+            # Set always_update to `False` if the data returned from the
+            # api can be compared via `__eq__` to avoid duplicate updates
+            # being dispatched to listeners
+            always_update=True
         )
         self.my_api = my_api
 
