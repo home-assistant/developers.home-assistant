@@ -151,11 +151,20 @@ pip install -e ./pychromecast
 hass --skip-pip-packages pychromecast
 ```
 
-It is also possible to use a public git repository to install a requirement.  This can be useful, for example, to test changes to a requirement dependency before it's been published to PyPI. The following example will install the `except_connect` branch of the `pycoolmaster` library directly from GitHub unless version `0.2.2` is currently installed:
+It is also possible to use a public git repository to install a requirement.  This can be useful, for example, to test changes to a requirement dependency before it's been published to PyPI. Syntax:
 
 ```json
 {
-  "requirements": ["git+https://github.com/issacg/pycoolmaster.git@except_connect#pycoolmaster==0.2.2"]
+  "requirements": ["<project> @ git+https://github.com/<user>/<project>.git@<git ref>"]
+}
+```
+`<git ref>` can be any git reference: branch, tag, commit hash, ... . See [PIP documentation about git support](https://pip.pypa.io/en/stable/topics/vcs-support/#git).
+
+The following example will install the `except_connect` branch of the `pycoolmaster` library directly from GitHub:
+
+```json
+{
+  "requirements": ["pycoolmaster @ git+https://github.com/issacg/pycoolmaster.git@except_connect"]
 }
 ```
 
