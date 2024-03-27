@@ -15,13 +15,13 @@ Properties should always only return information from memory and not do I/O (lik
 | ----------------------- | ---------------------------------------------- | ------------------------------------- | -------------------------------------------------- |
 | action                  | <code>HumidifierAction &#124; None</code>      | `None`                                | Returns the current status of the device.          |
 | available_modes         | <code>list[str] &#124; None</code>             | **Required by MODES**                 | The available modes. Requires `SUPPORT_MODES`.     |
-| current_humidity        | <code>int &#124; None</code>                   | `None`                                | The current humidity measured by the device.       |
+| current_humidity        | <code>float &#124; None</code>                   | `None`                                | The current humidity measured by the device.       |
 | device_class            | <code>HumidifierDeviceClass &#124; None</code> | `None`                                | Type of hygrostat                                  |
 | is_on                   | <code>bool &#124; None</code>                  | `None`                                | Whether the device is on or off.                   |
-| max_humidity            | `int`                                          | `DEFAULT_MAX_HUMIDITY` (value == 100) | The maximum humidity.                              |
-| min_humidity            | `int`                                          | `DEFAULT_MIN_HUMIDITY` (value == 0)   | The minimum humidity.                              |
+| max_humidity            | `float`                                          | `DEFAULT_MAX_HUMIDITY` (value == 100) | The maximum humidity.                              |
+| min_humidity            | `float`                                          | `DEFAULT_MIN_HUMIDITY` (value == 0)   | The minimum humidity.                              |
 | mode                    | <code>str &#124; None</code>                   | **Required**                          | The current active mode. Requires `SUPPORT_MODES`. |
-| target_humidity         | <code>int &#124; None</code>                   | `None`                                | The target humidity the device is trying to reach. |
+| target_humidity         | <code>float &#124; None</code>                   | `None`                                | The target humidity the device is trying to reach. |
 
 ### Available device classes
 
