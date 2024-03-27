@@ -63,7 +63,35 @@ Get the documentation for an add-on.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/logs" method="get">
-Returns the raw container logs from docker.
+
+Get logs for an add-on via the Systemd journal backend.
+
+The endpoint accepts the same headers and provides the same functionality as
+`/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/addons/<addon>/logs/follow" method="get">
+
+Identical to `/addons/<addon>/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/addons/<addon>/logs/boots/<bootid>" method="get">
+
+Get logs for an add-on related to a specific boot.
+
+The `bootid` parameter is interpreted in the same way as in
+`/host/logs/boots/<bootid>` and the endpoint otherwise provides the same
+functionality as `/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/addons/<addon>/logs/boots/<bootid>/follow" method="get">
+
+Identical to `/addons/<addon>/logs/boots/<bootid>` except it continuously returns
+new log entries.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/icon" method="get">
@@ -503,7 +531,35 @@ Return information about the audio plugin.
 </ApiEndpoint>
 
 <ApiEndpoint path="/audio/logs" method="get">
-Returns the raw container logs from docker.
+
+Get logs for the audio plugin container via the Systemd journal backend.
+
+The endpoint accepts the same headers and provides the same functionality as
+`/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/audio/logs/follow" method="get">
+
+Identical to `/audio/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/audio/logs/boots/<bootid>" method="get">
+
+Get logs for the audio plugin container related to a specific boot.
+
+The `bootid` parameter is interpreted in the same way as in
+`/host/logs/boots/<bootid>` and the endpoint otherwise provides the same
+functionality as `/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/audio/logs/boots/<bootid>/follow" method="get">
+
+Identical to `/audio/logs/boots/<bootid>` except it continuously returns
+new log entries.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/audio/mute/input" method="post">
@@ -1092,7 +1148,35 @@ Returns information about the Home Assistant core
 </ApiEndpoint>
 
 <ApiEndpoint path="/core/logs" method="get">
-Returns the raw container logs from docker.
+
+Get logs for the Home Assistant Core container via the Systemd journal backend.
+
+The endpoint accepts the same headers and provides the same functionality as
+`/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/core/logs/follow" method="get">
+
+Identical to `/core/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/core/logs/boots/<bootid>" method="get">
+
+Get logs for the Home Assistant Core container related to a specific boot.
+
+The `bootid` parameter is interpreted in the same way as in
+`/host/logs/boots/<bootid>` and the endpoint otherwise provides the same
+functionality as `/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/core/logs/boots/<bootid>/follow" method="get">
+
+Identical to `/core/logs/boots/<bootid>` except it continuously returns
+new log entries.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/core/options" method="post">
@@ -1275,7 +1359,35 @@ Return information about the DNS plugin.
 </ApiEndpoint>
 
 <ApiEndpoint path="/dns/logs" method="get">
-Returns the raw container logs from docker.
+
+Get logs for the DNS plugin container via the Systemd journal backend.
+
+The endpoint accepts the same headers and provides the same functionality as
+`/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/dns/logs/follow" method="get">
+
+Identical to `/dns/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/dns/logs/boots/<bootid>" method="get">
+
+Get logs for the DNS plugin container related to a specific boot.
+
+The `bootid` parameter is interpreted in the same way as in
+`/host/logs/boots/<bootid>` and the endpoint otherwise provides the same
+functionality as `/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/dns/logs/boots/<bootid>/follow" method="get">
+
+Identical to `/dns/logs/boots/<bootid>` except it continuously returns
+new log entries.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/dns/options" method="post">
@@ -2044,7 +2156,35 @@ Returns information about the multicast plugin
 </ApiEndpoint>
 
 <ApiEndpoint path="/multicast/logs" method="get">
-Returns the raw container logs from docker.
+
+Get logs for the multicast plugin via the Systemd journal backend.
+
+The endpoint accepts the same headers and provides the same functionality as
+`/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/multicast/logs/follow" method="get">
+
+Identical to `/multicast/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/multicast/logs/boots/<bootid>" method="get">
+
+Get logs for the multicast plugin related to a specific boot.
+
+The `bootid` parameter is interpreted in the same way as in
+`/host/logs/boots/<bootid>` and the endpoint otherwise provides the same
+functionality as `/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/multicast/logs/boots/<bootid>/follow" method="get">
+
+Identical to `/multicast/logs/boots/<bootid>` except it continuously returns
+new log entries.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/multicast/restart" method="post">
@@ -3098,7 +3238,35 @@ Returns information about the supervisor
 
 <ApiEndpoint path="/supervisor/logs" method="get">
 
-Returns the raw container logs from docker.
+Get logs for the Supervisor container via the Systemd journal backend. If the
+Systemd journal gateway fails to provide the logs, raw Docker container logs are
+returned as the fallback.
+
+The endpoint accepts the same headers and provides the same functionality as
+`/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/supervisor/logs/follow" method="get">
+
+Identical to `/supervisor/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/supervisor/logs/boots/<bootid>" method="get">
+
+Get logs for the Supervisor container related to a specific boot.
+
+The `bootid` parameter is interpreted in the same way as in
+`/host/logs/boots/<bootid>` and the endpoint otherwise provides the same
+functionality as `/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/supervisor/logs/boots/<bootid>/follow" method="get">
+
+Identical to `/supervisor/logs/boots/<bootid>` except it continuously returns
+new log entries.
 
 </ApiEndpoint>
 
