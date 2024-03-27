@@ -17,7 +17,30 @@ SSH access through the [SSH add-on] (which will give you SSH access through port
 
 ### Home Assistant Operating System
 
-Use a USB drive formatted with FAT, ext4, or NTFS and name it CONFIG (case sensitive). Create an `authorized_keys` file (no extension) containing your public key, and place it in the root of the USB drive. File needs to be ANSI encoded (not UTF-8) and must have Unix line ends (LF), not Windows (CR LF). See [Generating SSH Keys](#generating-ssh-keys) section below if you need help generating keys. Use the CLI (eg. SSH to the [SSH add-on] on port 22) and import the `authorized_keys` file with the `ha os import` command. You can now access your device as root over SSH on port 22222. Alternatively, the file will be imported from the USB when the Home Assistant OS device is rebooted.
+ - Obtain a USB drive formatted with FAT, ext4, or NTFS and name it CONFIG (case sensitive).
+ - Create an `authorized_keys` file (no extension) containing your public key, and place it in the root of the USB drive.
+   -  The `authorized_keys` file needs to be ANSI encoded (not UTF-8) and must have Unix line ends (LF), not Windows (CR LF).
+ - Generate an RSA public key
+   - In Windows environments;
+     - Install [PuTTY](https://www.putty.org/)
+     - Open CMD and run ```puttygen```
+     - Click ```generate```
+     - Move your mouse around the blank area
+       - Do not input a passphrase
+     - Click ```Save public key```
+     - Save the file to your prepared USB as `authorized_keys`
+     - Open the `authorized_keys` file in [Notepad++](https://notepad-plus-plus.org/)
+       - Windows Notepad has trouble converting text to ANSI, even when you tell it to.
+     - Open the prepared `authorized_keys` file in Notepad and paste the contents of the clipboard
+     - Go to `Encoding` > `Convert to ANSI`
+     - Save the `authorized_keys` file
+     - *More general instructions are available at [DigitalOcean](https://docs.digitalocean.com/products/droplets/how-to/add-ssh-keys/create-with-putty/)*
+   - In Mac or Linux environments
+     - *See the documentation at [GitHub](https://docs.github.com/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#platform-mac)
+- Remove the USB from the machine you generated the key on, and place it in the Home Assistant OS machine.
+- Use the CLI (eg. SSH to the [SSH add-on] on port 22) and import the `authorized_keys` file with the `ha os import` command.
+
+You can now access your device as root over SSH on port 22222. Alternatively, the file will be imported from the USB when the Home Assistant OS device is rebooted.
 
 :::tip
 Make sure when you are copying the public key to the root of the USB drive that you rename the file correctly to `authorized_keys` with no `.pub` file extension.
