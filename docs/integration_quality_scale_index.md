@@ -13,7 +13,11 @@ Suggestions for changes can be done by creating an issue in the [architecture re
 This integration passes the bare minimum requirements to become part of the index.
 
 - Satisfy all requirements for [creating components](creating_component_code_review.md) and [creating platforms](creating_platform_code_review.md).
-- Configurable via `configuration.yaml`
+- Configurable via config entries (if applicable, see [ADR-0010](https://github.com/home-assistant/architecture/blob/master/adr/0010-integration-configuration.md), else via `configuration.yaml`)
+  - Don't allow configuring already configured device/service (example: no 2 entries for same hub)
+  - Discoverable (if available)
+  - Set unique ID in config flow (if available)
+  - Raise [`ConfigEntryNotReady`](integration_setup_failures.md/#integrations-using-async_setup_entry) if unable to connect during entry setup (if appropriate)
 
 ## Silver 🥈
 
@@ -35,11 +39,6 @@ This integration is able to cope when things go wrong. It will not print any exc
 This is a solid integration that is able to survive poor conditions and can be configured via the user interface.
 
 - Satisfying all Silver level requirements.
-- Configurable via config entries.
-  - Don't allow configuring already configured device/service (example: no 2 entries for same hub)
-  - Discoverable (if available)
-  - Set unique ID in config flow (if available)
-  - Raise [`ConfigEntryNotReady`](integration_setup_failures.md/#integrations-using-async_setup_entry) if unable to connect during entry setup (if appropriate)
 - Entities have device info (if available) ([docs](device_registry_index.md#defining-devices))
 - Tests
   - Full test coverage for the config flow
