@@ -85,6 +85,20 @@ If the data is incorrect, the server will reply with `auth_invalid` message and 
 }
 ```
 
+## Feature enablement phase
+
+Clients that supports features that needs enabling should as their first message (with `"id": 1`) send a message in the form:
+
+```
+{
+  "id": 1,
+  "type": "supported_features",
+  "features": { coalesce_messages: 1 }
+}
+```
+
+As of now the only feature supported is 'coalesce_messages' which result in messages being sendt coalesced in bulk instead of individually. 
+
 ## Command phase
 
 During this phase the client can give commands to the server. The server will respond to each command with a `result` message indicating when the command is done and if it was successful along with the context of the command.
