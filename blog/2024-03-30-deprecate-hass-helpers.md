@@ -2,7 +2,7 @@
 author: Jan-Philipp Benecke
 authorURL: https://github.com/jpbede
 authorImageURL: https://avatars.githubusercontent.com/u/3989428?s=96&v=4
-title: "Deprecate use hass.helpers"
+title: "Deprecate hass.helpers usage"
 ---
 
 As of Home Assistant 2024.4, we deprecate the use of `hass.helpers`.
