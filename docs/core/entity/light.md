@@ -59,7 +59,7 @@ If a light does not implement the `color_mode`, the `LightEntity` will attempt t
 | `ColorMode.RGB` | The light can be dimmed and its color can be adjusted. The light's brightness can be set using the `brightness` parameter and read through the `brightness` property. The light's color can be set using the `rgb_color` parameter and read through the `rgb_color` property. `rgb_color` is an (r, g, b) tuple (not normalized for brightness).
 | `ColorMode.RGBW` | The light can be dimmed and its color can be adjusted. The light's brightness can be set using the `brightness` parameter and read through the `brightness` property. The light's color can be set using the `rgbw_color` parameter and read through the `rgbw_color` property. `rgbw_color` is an (r, g, b, w) tuple (not normalized for brightness).
 | `ColorMode.RGBWW` | The light can be dimmed and its color can be adjusted. The light's brightness can be set using the `brightness` parameter and read through the `brightness` property. The light's color can be set using the `rgbww_color` parameter and read through the `rgbww_color` property. `rgbww_color` is an (r, g, b, cw, ww) tuple (not normalized for brightness).
-| `ColorMode.WHITE` | The light can be dimmed and its color can be adjusted. In addition, the light can be set to white mode. The light's brightness can be set using the `brightness` parameter and read through the `brightness` property. The light can be set to white mode by using the `white` parameter with the desired brightness as value. Note that there's no `white` property. If both `brighthness` and `white` are present in a service call, the `white` parameter will be updated with the value of `brightness`. If this mode is supported, the light must also support at least one of `ColorMode.HS`, `ColorMode.RGB`, `ColorMode.RGBW`, `ColorMode.RGBWW` or `ColorMode.XY`.
+| `ColorMode.WHITE` | The light can be dimmed and its color can be adjusted. In addition, the light can be set to white mode. The light's brightness can be set using the `brightness` parameter and read through the `brightness` property. The light can be set to white mode by using the `white` parameter with the desired brightness as value. Note that there's no `white` property. If both `brighthness` and `white` are present in a service call, the `white` parameter will be updated with the value of `brightness`. If this mode is supported, the light *must* also support at least one of `ColorMode.HS`, `ColorMode.RGB`, `ColorMode.RGBW`, `ColorMode.RGBWW` or `ColorMode.XY` and *must not* support `ColorMode.COLOR_TEMP`.
 | `ColorMode.XY` | The light can be dimmed and its color can be adjusted. The light's brightness can be set using the `brightness` parameter and read through the `brightness` property. The light's color can be set using the `xy_color` parameter and read through the `xy_color` property. `xy_color` is an (x, y) tuple.
 
 Note that in color modes `ColorMode.RGB`, `ColorMode.RGBW` and `ColorMode.RGBWW` there is brightness information both in the light's `brightness` property and in the color. As an example, if the light's brightness is 128 and the light's color is (192, 64, 32), the overall brightness of the light is: 128/255 * max(192, 64, 32)/255 = 38%.
@@ -67,6 +67,13 @@ Note that in color modes `ColorMode.RGB`, `ColorMode.RGBW` and `ColorMode.RGBWW`
 If the light is in mode `ColorMode.HS`, `ColorMode.RGB` or `ColorMode.XY`, the light's state attribute will contain the light's color expressed in `hs`, `rgb` and `xy` color format. Note that when the light is in mode `ColorMode.RGB`, the `hs` and `xy` state attributes only hold the chromaticity of the `rgb` color as the `hs` and `xy` pairs do not hold brightness information.
 
 If the light is in mode `ColorMode.RGBW` or `ColorMode.RGBWW`, the light's state attribute will contain the light's color expressed in `hs`, `rgb` and `xy` color format. The color conversion is an approximation done by adding the white channels to the color.
+
+### White color modes
+
+There are two white color modes, `ColorMode.COLOR_TEMP` and `ColorMode.WHITE`. The difference between the two modes is that `ColorMode.WHITE` does not allow adjusting the color temperature whereas `ColorMode.COLOR_TEMP` does allow adjusting the color temperature.
+
+A lamp with adjustable color temperature is typically implemented by at least two banks of LEDs, with different color temperature, typically one bank of warm-white LEDs and one bank of cold-white LEDs.
+A light with non-adjustable color temperature typically only has a single bank of white LEDs.
 
 ### Color Mode when rendering effects
 
@@ -138,7 +145,7 @@ BRIGHTNESS_SCALE = (1, 1023)
 To scale the brightness to the device range:
 
 ```python
-from homeassistant.util.color import percentage_to_ranged_value
+from homeassistant.util.percentage import percentage_to_ranged_value
 BRIGHTNESS_SCALE = (1, 1023)
 
 ...

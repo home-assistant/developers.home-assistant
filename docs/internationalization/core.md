@@ -12,13 +12,15 @@ The `strings.json` contains translations for different things that the integrati
 | ------------------- | ------------------------------------------------- |
 | `title`             | Title of the integration.                         |
 | `config`            | Translations for the config flow.                 |
+| `device`            | Translations for devices.                         |
 | `device_automation` | Translations for device automations.              |
-| `exceptions`        | Translations for error messages.              |
+| `entity`            | Translations for entities.                        |
+| `entity_component`  | Translations for entity components.               |
+| `exceptions`        | Translations for error messages.                  |
 | `issues`            | Translations for repairs issues.                  |
 | `options`           | Translations for the options flow.                |
 | `selectors`         | Selectors of the integration.                     |
 | `services`          | Services of the integration.                      |
-| `state`             | States of the integration, keyed by device class. |
 
 ### Title
 
@@ -186,7 +188,6 @@ async def async_select_index(hass: HomeAssistant, index: int) -> None:
         check_index(index)
     except ValueError as exc:
         raise ServiceValidationError(
-            str(exc),
             translation_domain=DOMAIN,
             translation_key="invalid_index",
             translation_placeholders={
@@ -194,7 +195,6 @@ async def async_select_index(hass: HomeAssistant, index: int) -> None:
             },
         ) from exc
 ```
-
 
 ### Issues
 
@@ -218,6 +218,37 @@ The translation strings for repairs issues are defined under the `issues` key. A
       "title": "This is not a fixable problem",
       // Description of the issue, exactly one of `fix_flow` or `description. must be present.
       "description": "This issue can't be fixed by a flow."
+    }
+  }
+}
+```
+
+### Devices
+
+#### Name of devices
+Integrations can provide translations for names of its devices. To do this, provide a `device` object, that contains translations of the names and set the device's `translation_key` to a key under a domain in the `device` object.
+If the device's `translation_key` is not `None`, the `name` which is either set in an entity's `device_info` property or passed to `DeviceRegistry.async_get_or_create`, will be ignored. If the `device` object does not provide a translated name for the specified `translation_key`, the `translation_key` will be used as device name.
+
+It is also supported to use placeholders within the translation. If a placeholder is defined within the translation string, the device's `translation_placeholders` has to be set accordingly.
+
+The following example `strings.json` is for a device with its `translation_key` set to `power_strip`:
+```json
+{
+  "device": {
+    "power_strip": {
+      "name": "Power strip"
+    }
+  }
+}
+```
+
+The following example `strings.json` is for a device with its `translation_key` property set to `n_ch_power_strip` and a placeholder `number_of_sockets`:
+
+```json
+{
+  "device": {
+    "n_ch_power_strip": {
+      "name": "Power strip with {number_of_sockets} sockets"
     }
   }
 }

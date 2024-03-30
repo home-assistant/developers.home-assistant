@@ -13,24 +13,23 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name                    | Type                                | Default                              | Description                                                                |
 | ----------------------- | ----------------------------------- | ------------------------------------ | -------------------------------------------------------------------------- |
-| current_humidity        | <code>int &#124; None</code>        | `None`                               | The current humidity.                                                      |
+| current_humidity        | <code>float &#124; None</code>        | `None`                               | The current humidity.                                                      |
 | current_temperature     | <code>float &#124; None</code>      | `None`                               | The current temperature.                                                   |
 | fan_mode                | <code>str &#124; None</code>        | **Required by SUPPORT_FAN_MODE**     | The current fan mode.                                                      |
 | fan_modes               | <code>list[str] &#124; None</code>  | **Required by SUPPORT_FAN_MODE**     | The list of available fan modes.                                           |
 | hvac_action             | <code>HVACAction &#124; None</code> | `None`                               | The current HVAC action (heating, cooling)                                 |
 | hvac_mode               | <code>HVACMode &#124; None</code>   | **Required**                         | The current operation (e.g. heat, cool, idle). Used to determine `state`.  |
 | hvac_modes              | <code>list[HVACMode]</code>         | **Required**                         | List of available operation modes. See below.                              |
-| is_aux_heat             | <code>int &#124; None</code>        | **Required by SUPPORT_AUX_HEAT**     | True if an auxiliary heater is on.                                         |
-| max_humidity            | `int`                               | `DEFAULT_MAX_HUMIDITY` (value == 99) | The maximum humidity.                                                      |
+| max_humidity            | `float`                               | `DEFAULT_MAX_HUMIDITY` (value == 99) | The maximum humidity.                                                      |
 | max_temp                | `float`                             | `DEFAULT_MAX_TEMP` (value == 35 °C)  | The maximum temperature in `temperature_unit`.                             |
-| min_humidity            | `int`                               | `DEFAULT_MIN_HUMIDITY` (value == 30) | The minimum humidity.                                                      |
+| min_humidity            | `float`                               | `DEFAULT_MIN_HUMIDITY` (value == 30) | The minimum humidity.                                                      |
 | min_temp                | `float`                             | `DEFAULT_MIN_TEMP` (value == 7 °C)   | The minimum temperature in `temperature_unit`.                             |
 | precision               | `float`                             | According to `temperature_unit`      | The precision of the temperature in the system. Defaults to tenths for TEMP_CELSIUS, whole number otherwise. |
 | preset_mode             | <code>str &#124; None</code>        | **Required by SUPPORT_PRESET_MODE**  | The current active preset.                                                 |
 | preset_modes            | <code>list[str] &#124; None</code>  | **Required by SUPPORT_PRESET_MODE**  | The available presets.                                                     |
 | swing_mode              | <code>str &#124; None</code>        | **Required by SUPPORT_SWING_MODE**   | The swing setting.                                                         |
 | swing_modes             | <code>list[str] &#124; None</code>  | **Required by SUPPORT_SWING_MODE**   | Returns the list of available swing modes.                                 |
-| target_humidity         | <code>int &#124; None</code>        | `None`                               | The target humidity the device is trying to reach.                         |
+| target_humidity         | <code>float &#124; None</code>        | `None`                               | The target humidity the device is trying to reach.                         |
 | target_temperature      | <code>float &#124; None</code>      | `None`                               | The temperature currently set to be reached.                               |
 | target_temperature_high | <code>float &#124; None</code>      | **Required by TARGET_TEMPERATURE_RANGE** | The upper bound target temperature                                     |
 | target_temperature_low  | <code>float &#124; None</code>      | **Required by TARGET_TEMPERATURE_RANGE** | The lower bound target temperature                                     |
@@ -123,7 +122,6 @@ and are combined using the bitwise or (`|`) operator.
 | `FAN_MODE`                 | The device supports fan modes.                                                              |
 | `PRESET_MODE`              | The device supports presets.                                                                |
 | `SWING_MODE`               | The device supports swing modes.                                                            |
-| `AUX_HEAT`                 | The device supports auxiliary heaters.                                                      |
 | `TURN_ON`                 | The device supports turn on.                                                      |
 | `TURN_OFF`                 | The device supports turn off.                                                      |
 
@@ -253,25 +251,4 @@ class MyClimateEntity(ClimateEntity):
 
     async def async_set_temperature(self, **kwargs):
         """Set new target temperature."""
-```
-
-### Control auxiliary heater
-
-```python
-class MyClimateEntity(ClimateEntity):
-    # Implement one of these methods.
-
-    def turn_aux_heat_on(self):
-        """Turn auxiliary heater on."""
-
-    async def async_turn_aux_heat_on(self):
-        """Turn auxiliary heater on."""
-
-    # Implement one of these methods.
-
-    def turn_aux_heat_off(self):
-        """Turn auxiliary heater off."""
-
-    async def async_turn_aux_heat_off(self):
-        """Turn auxiliary heater off."""
 ```

@@ -61,6 +61,7 @@ There are a few step names reserved for system use:
 | `ssdp`      | Invoked if your integration has been discovered via SSDP/uPnP as specified [using `ssdp` in the manifest](creating_integration_manifest.md#ssdp).             |
 | `usb`       | Invoked if your integration has been discovered via USB as specified [using `usb` in the manifest](creating_integration_manifest.md#usb).             |
 | `user`      | Invoked when a user initiates a flow via the user interface or when discovered and the matching and discovery step are not defined.                                                                                                  |
+| `reconfigure`      | Invoked when a user initiates a flow to reconfigure an existing config entry via the user interface.                                                                                                  |
 | `zeroconf`  | Invoked if your integration has been discovered via Zeroconf/mDNS as specified [using `zeroconf` in the manifest](creating_integration_manifest.md#zeroconf). |
 
 ## Unique IDs
@@ -249,11 +250,35 @@ async def async_migrate_entry(hass, config_entry: ConfigEntry):
     return True
 ```
 
+## Reconfigure
+
+A config entry can allow reconfiguration by adding a `reconfigure` step. This provides a way for integrations to allow users to change config entry data without the need to implement an `OptionsFlow` for changing setup data which is not meant to be optional.
+
+This is not meant to handle authentication issues or reconfiguration of such. For that we have the [`reauth`](#reauthentication) step, which should be implemented to automatically start in such case there is an issue with authentication.
+
+```python
+import voluptuous as vol
+
+class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
+    """Config flow for Example integration."""
+
+    async def async_step_reconfigure(self, user_input: dict[str, Any] | None = None):
+        if user_input is not None:
+            pass  # TODO: process user input
+
+        return self.async_show_form(
+            step_id="reconfigure",
+            data_schema=vol.Schema({vol.Required("input_parameter"): str}),
+        )
+```
+
 ## Reauthentication
 
 Gracefully handling authentication errors such as invalid, expired, or revoked tokens is needed to advance on the [Integration Qualily Scale](integration_quality_scale_index.md). This example of how to add reauth to the OAuth flow created by `script.scaffold` following the pattern in [Building a Python library](api_lib_auth.md#oauth2).
 
 This example catches an authentication exception in config entry setup in `__init__.py` and instructs the user to visit the integrations page in order to reconfigure the integration.
+
+To allow the user to change config entry data which is not optional (`OptionsFlow`) and not directly related to authentication, for example a changed host name, integrations should implement the [`reconfigure`](#reconfigure) step.
 
 ```python
 
