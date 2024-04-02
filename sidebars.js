@@ -203,7 +203,7 @@ module.exports = {
     {
       type: "category",
       label: "Conversation",
-      items: ["intent_conversation_api", "core/conversation/custom_agent"],
+      items: ["intent_conversation_api"],
     },
     {
       type: "category",
