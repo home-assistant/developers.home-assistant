@@ -31,4 +31,4 @@ By replacing `pip` with `uv`, we improve our sustainability by using fewer resou
 
 
 **A big thank you to Astral for developing this amazing tool.**
-Please check out their [website](https://astral.sh/) and products as they offer, for example, a "lighting" fast linter/formatter for Python too.
+Please check out their [website](https://astral.sh/) and products as they offer, for example, a "lightning" fast linter/formatter for Python too.
