@@ -27,8 +27,8 @@ In total, we save around 215 hours per month.
 With this massive improvement, we can now ship hotfixes even faster, as the pipeline to ship a new version now takes around 20 minutes instead of 2.5 hours.
 
 The 215 monthly saved execution hours can be used by other jobs and make the CI experience for all developers and our community better.
-By replacing `pip` with `uv,`, we improve our sustainability by using less resources to build our images.
+By replacing `pip` with `uv`, we improve our sustainability by using fewer resources to build our images.
 
 
 **A big thank you to Astral for developing this amazing tool.**
-Please check out their [website](https://astral.sh/) and products as they offer for example a "lighting" fast linter/formatter for Python too.
+Please check out their [website](https://astral.sh/) and products as they offer, for example, a "lighting" fast linter/formatter for Python too.
