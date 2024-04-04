@@ -41,7 +41,7 @@ docker run \
   --rm \
   --privileged \
   -v ~/.docker:/root/.docker \
-  homeassistant/amd64-builder \
+  ghcr.io/home-assistant/amd64-builder \
   --all \
   -t addon-folder \
   -r https://github.com/xy/addons \
@@ -56,7 +56,7 @@ docker run \
   --privileged \
   -v ~/.docker:/root/.docker \
   -v /my_addon:/data \
-  homeassistant/amd64-builder \
+  ghcr.io/home-assistant/amd64-builder \
   --all \
   -t /data
 ```

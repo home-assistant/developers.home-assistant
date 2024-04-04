@@ -46,7 +46,7 @@ docker run --rm \
     --privileged \
     -v /run/docker.sock:/run/docker.sock \
     -v "$(pwd):/data" \
-    homeassistant/amd64-builder:dev \
+    ghcr.io/home-assistant/amd64-builder:dev \
         --generic latest \
         --target /data \
         --aarch64 \
