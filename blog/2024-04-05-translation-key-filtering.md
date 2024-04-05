@@ -10,7 +10,7 @@ In Home Assistant Core 2024.4.2, we are changing the way translation keys are do
 Previously the script would download every translated string.
 With this change, we only download the strings that are verified.
 
-A verified string is a translated string, and it becomes unverified when the original string changes.
+All translations are verified when saved, but a translation becomes unverified if the source string is changed
 So whenever someone changes something in the original string, the translated string becomes unverified and needs to be reviewed again.
 This is very beneficial for the translation keys that make use of translation key placeholders, since they can now never have a mismatch between the original and translated string.
 
