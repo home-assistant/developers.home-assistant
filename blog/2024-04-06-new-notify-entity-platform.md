@@ -7,7 +7,7 @@ title: New notify entity platform
 
 ### New notify entity platform
 
-The notify platform is now available as an [entity platform](https://developers.home-assistant.io/docs/core/entity/notify/). The MVP for the new `notify` platform [implements](https://github.com/home-assistant/core/pull/110950) them method and service `send_message` that accepts `message` as a required attribute. No entity features nor device classes are implemented yet.
+The notify platform is now available as an [entity platform](https://developers.home-assistant.io/docs/core/entity/notify/). The MVP for the new `notify` platform [implements](https://github.com/home-assistant/core/pull/110950) the method and service `send_message`. It accepts `message` as a required attribute.
 Unlike the legacy `notify.notify` service we have no targets as argument, as it is an entity we can target multiple `notify` entities when calling `send_message`.
 
 The [architecture discussion](https://github.com/home-assistant/architecture/discussions/1041) is ongoing, and is about the device classes to implement and the implementation of recipient support in the form of [contacts via a contact registry](https://github.com/home-assistant/architecture/discussions/1041#discussioncomment-8947842).
@@ -27,6 +27,6 @@ The integrations identified for migration are:
 - demo
 - command_line
 
-As soon we have `title` and/or `recipient` support we can migrate more integrations to use the new platform. Any help is very appreciated!
+As soon as we have `title` and/or `recipient` support we can migrate more integrations to use the new platform.
 
-As integrations are migrated users will need to use other services, so the migration changes will be breaking changes.
+When integrations are migrated, users will need to use the service(s), so the migration changes will cause automations to break.
