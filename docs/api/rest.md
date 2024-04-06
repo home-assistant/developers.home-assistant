@@ -636,7 +636,7 @@ You can pass an optional JSON object to be used as `service_data`.
 }
 ```
 
-Returns a list of states that have changed while the service was being executed.
+By default, a call will returns a list of states that have changed while the service was being executed.
 
 ```json
 [
@@ -654,6 +654,24 @@ Returns a list of states that have changed while the service was being executed.
     }
 ]
 ```
+
+:::tip
+The result will include any states that changed while the service was being executed, even if their change was the result of something else happening in the system.
+:::
+
+If the service you're calling supports returning response data, you can retrieve that instead of the list of state changes by either adding `?return_response` to the URL, or by adding `"return_response": true` to the JSON body.
+
+```json
+{
+    "return_response": true
+}
+```
+
+:::note
+Some services return no data, others optionally return response data, and some always return response data.
+
+If you don't use `return_response` when calling a service that must return data, the API will return an error. Similarly, you will receive an error if you use `return_response` when calling a service that doesn't return any data.
+:::
 
 Sample `curl` commands:
 
@@ -692,9 +710,15 @@ curl \
   http://localhost:8123/api/services/mqtt/publish
 ```
 
-:::tip
-The result will include any states that changed while the service was being executed, even if their change was the result of something else happening in the system.
-:::
+Retrieve daily weather forecast information:
+
+```shell
+curl \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer TOKEN" \
+  -d '{"entity_id": "weather.forecast_home", "type": "daily"}' \
+  http://localhost:8123/api/services/weather/get_forecasts?return_response
+```
 
 </ApiEndpoint>
 
