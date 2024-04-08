@@ -275,9 +275,10 @@ The `content` key of a backup object contains the following keys:
 | ---------- | -------------- | ---------------------------------------------------------------------- | ---------------- |
 | name       | string         | Name of the mount                                                      | both             |
 | type       | string         | Type of the mount (cifs or nfs)                                        | both             |
-| usage      | string         | Usage of the mount (backup, media, or share)                            | both             |
+| usage      | string         | Usage of the mount (backup, media, or share)                           | both             |
 | server     | string         | IP address or hostname of the network share server                     | both             |
 | port       | int            | Port to use (if not using the standard one for the mount type)         | both             |
+| read_only  | bool           | Mount is read-only (not available for backup mounts)                   | both             |
 | path       | string         | (nfs mounts only) Path to mount from the network share                 | both             |
 | share      | string         | (cifs mounts only) Share to mount from the network share               | both             |
 | username   | string         | (cifs mounts only) Username to use for authentication                  | request only     |
@@ -298,3 +299,46 @@ Response only fields will be in responses but cannot be included in requests.
 | stage      | string  | A name for the stage the job is in (if applicable)            |
 | done       | boolean | Is the job complete                                           |
 | child_jobs | list    | A list of child [jobs](#job) started by this one              |
+| errors     | list    | A list of [errors](#job-error) that occurred during execution |
+
+## Job Error
+
+| key        | type    | description                                    |
+| ---------- | ------- | ---------------------------------------------- |
+| type       | string  | Type of error that occurred                    |
+| message    | string  | Human-readable description of what went wrong  |
+
+## Boot Slot
+
+| key        | type    | description                                     |
+| ---------- | ------- | ----------------------------------------------- |
+| state      | string  | Active or inactive (active slot is in use)      |
+| status     | string  | Status of the last boot from slot (good or bad) |
+| version    | string  | Version of OS installed                         |
+
+## Drive
+
+| key            | type     | description                                                 |
+| -------------- | -------- | ----------------------------------------------------------- |
+| vendor         | string   | Drive vendor                                                |
+| model          | string   | Drive model                                                 |
+| serial         | string   | Drive serial number                                         |
+| id             | string   | Unique and persistent id for drive                          |
+| size           | int      | Size of the drive in bytes                                  |
+| time_detected  | datetime | Time drive was detected by system                           |
+| connection_bus | string   | Physical connection bus of the drive (USB, etc.)            |
+| seat           | string   | Identifier of seat drive is plugged into                    |
+| removable      | boolean  | Is the drive removable by the user?                         |
+| ejectable      | boolean  | Is the drive ejectable by the system?                       |
+| filesystems    | list     | A list of [filesystem partitions](#filesystem) on the drive |
+
+## Filesystem
+
+| key          | type    | description                                               |
+| ------------ | ------- | --------------------------------------------------------- |
+| device       | string  | Special device file for the filesystem (e.g. `/dev/sda1`) |
+| id           | string  | Unique and persistent id for filesystem                   |
+| size         | int     | Size of the filesystem in bytes                           |
+| name         | string  | Name of the filesystem (if known)                         |
+| system       | boolean | `true` if filesystem considered a system/internal device  |
+| mount_points | list    | List of paths where the filesystem is mounted.            |

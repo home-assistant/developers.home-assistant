@@ -150,3 +150,7 @@ If the config entry version is changed, `async_migrate_entry` must be implemente
 async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> bool:
     """Migrate old entry."""
 ```
+
+## Modifying a config entry
+
+A `ConfigEntry` object, including the data and options, must never be mutated directly by integrations, instead integrations must call `async_update_entry`, the use of which is illustrated in the [config flow documentation](/config_entries_config_flow_handler.md#config-entry-migration).

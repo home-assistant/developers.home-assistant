@@ -27,10 +27,10 @@ graph TD;
 ```
 
  - The **Assist Pipeline** integration is responsible for turning the user's speech into text, get it processed, and turn the response into speech.
- - The **Conversation** integration is responsible for processing user's text. The built-in conversation agent does this by matching it to an intent. Integrations can provide [custom conversation agents](../core/conversation/custom_agent).
+ - The **Conversation** integration is responsible for processing user's text. The built-in conversation agent does this by matching it to an intent. Integrations can provide [custom conversation agents](../core/entity/conversation).
  - The **Intent** integration is responsible for executing the intent and returning a response.
-- The **Text-to-Speech** integration is responsible for turning text into speech.
-- The **Speech-to-Text** integration is responsible for turning speech into text.
+- The **Text-to-Speech** integration is responsible for turning text into speech. Integrations can provide [custom text-to-speech agents](../core/entity/tts).
+- The **Speech-to-Text** integration is responsible for turning speech into text. Integrations can provide [custom speech-to-text agents](../core/entity/stt).
 
 ## Capturing the user's speech
 

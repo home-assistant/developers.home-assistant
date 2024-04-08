@@ -16,18 +16,16 @@ Strategies are defined as a custom element in a JavaScript file, and included [v
 
 A dashboard strategy is responsible for generating a full dashboard configuration. This can either be from scratch, or based on an existing dashboard configuration that is passed in.
 
-An info object is passed to the strategy with information:
+Two parameters are passed to the strategy:
 
 | Key | Description
 | -- | --
-| `config` | User supplied dashboard configuration, if any.
+| `config` | Dashboard strategy configuration.
 | `hass` | The Home Assistant object.
 
 ```ts
 class StrategyDemo {
-
-  static async generateDashboard(info) {
-
+  static async generate(config, hass) {
     return {
       title: "Generated Dashboard",
       views: [
@@ -41,9 +39,7 @@ class StrategyDemo {
         }
       ]
     };
-
   }
-
 }
 
 customElements.define("ll-strategy-my-demo", StrategyDemo);
@@ -54,26 +50,22 @@ Use the following dashboard configuration to use this strategy:
 ```yaml
 strategy:
   type: custom:my-demo
-views: []
 ```
 
 ## View Strategies
 
 A view strategy is responsible for generating the configuration of a specific dashboard view. The strategy is invoked when the user opens the specific view.
 
-An info object is passed to the strategy with information:
+Two parameters are passed to the strategy:
 
 | Key | Description
 | -- | --
-| `view` | View configuration.
-| `config` | Dashboard configuration.
+| `config` | View strategy configuration.
 | `hass` | The Home Assistant object.
 
 ```ts
 class StrategyDemo {
-
-  static async generateView(info) {
-
+  static async generate(config, hass) {
     return {
       "cards": [
         {
@@ -82,9 +74,7 @@ class StrategyDemo {
         }
       ]
     };
-
   }
-
 }
 
 customElements.define("ll-strategy-my-demo", StrategyDemo);
@@ -100,21 +90,18 @@ views:
 
 ## Full Example
 
-Strategies are structured such that a single class can provide both a dashboard and view strategy implementations.
-
 It's recommended for a dashboard strategy to leave as much work to be done to the view strategies. That way the dashboard will show up for the user as fast as possible. This can be done by having the dashboard generate a configuration with views that rely on its own strategy.
 
 Below example will create a view per area, with each view showing all entities in that area in a grid.
 
 ```ts
-class StrategyDemo {
-
-  static async generateDashboard(info) {
+class StrategyDashboardDemo {
+  static async generate(config, hass) {
     // Query all data we need. We will make it available to views by storing it in strategy options.
     const [areas, devices, entities] = await Promise.all([
-      info.hass.callWS({ type: "config/area_registry/list" }),
-      info.hass.callWS({ type: "config/device_registry/list" }),
-      info.hass.callWS({ type: "config/entity_registry/list" }),
+      hass.callWS({ type: "config/area_registry/list" }),
+      hass.callWS({ type: "config/device_registry/list" }),
+      hass.callWS({ type: "config/entity_registry/list" }),
     ]);
 
     // Each view is based on a strategy so we delay rendering until it's opened
@@ -122,16 +109,20 @@ class StrategyDemo {
       views: areas.map((area) => ({
         strategy: {
           type: "custom:my-demo",
-          options: { area, devices, entities },
+          area, 
+          devices, 
+          entities,
         },
         title: area.name,
         path: area.area_id,
       })),
     };
   }
+}
 
-  static async generateView(info) {
-    const { area, devices, entities } = info.view.strategy.options;
+class StrategyViewDemo {
+  static async generate(config, hass) {
+    const { area, devices, entities } = config;
 
     const areaDevices = new Set();
 
@@ -170,7 +161,8 @@ class StrategyDemo {
   }
 }
 
-customElements.define("ll-strategy-my-demo", StrategyDemo);
+customElements.define("ll-strategy-dashboard-my-demo", StrategyDashboardDemo);
+customElements.define("ll-strategy-view-my-demo", StrategyViewDemo);
 ```
 
 Use the following dashboard configuration to use this strategy:
@@ -178,5 +170,4 @@ Use the following dashboard configuration to use this strategy:
 ```yaml
 strategy:
   type: custom:my-demo
-views: []
 ```

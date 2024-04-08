@@ -19,7 +19,7 @@ Integrations should be updated and raise `ServiceValidationError` instead of `Va
 
 ## Translation support for Exceptions
 
-The `HomeAssistantError` exception and its subclasses, including `ServiceValidationError`, now accept a translation key to allow localization. [Read more](/docs/internationalization/core/#exceptions). The translation key will be used in cases where the frontend receives information about the exception.
+The `HomeAssistantError` exception and its subclasses, including `ServiceValidationError`, now accept a translation key to allow localization. [Read more](/docs/internationalization/core/#exceptions). The translation key will be used in cases where the frontend receives information about the exception. The English error message from the translation cache will also be used to log a message to the console if no custom error message is passed to the exception as argument.
 
 ### Background
 

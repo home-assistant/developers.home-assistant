@@ -78,6 +78,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS_PARTS` | ppm, ppb | Ratio of volatile organic compounds
 | `SensorDeviceClass.VOLTAGE` | V, mV | Voltage
 | `SensorDeviceClass.VOLUME` | L, mL, gal, fl. oz., m³, ft³, CCF | Generic volume, this device class should be used for sensors representing a consumption, for example the amount of fuel consumed by a vehicle.
+| `SensorDeviceClass.VOLUME_FLOW_RATE` | m³/h, ft³/min, L/min, gal/min | Volume flow rate, this device class should be used for sensors representing a flow of some volume, for example the amount of water consumed momentarily.
 | `SensorDeviceClass.VOLUME_STORAGE` | L, mL, gal, fl. oz., m³, ft³, CCF | Generic stored volume, this device class should be used for sensors representing a stored volume, for example the amount of fuel in a fuel tank.
 | `SensorDeviceClass.WATER` | L, gal, m³, ft³, CCF | Water consumption
 | `SensorDeviceClass.WEIGHT` | kg, g, mg, µg, oz, lb, st | Generic mass; `weight` is used instead of `mass` to fit with every day language.
@@ -105,8 +106,7 @@ Sensors can be configured by the user, this is done by storing `sensor` entity o
 
 ## Restoring sensor states
 
-Sensors which restore the state after restart or reload should not extend `RestoreEntity` because  that does not store the `native_value`, but instead the `state` which may have been modifed by the sensor base entity. Sensors which restore the state should extend `RestoreSensor` and call `await self.async_get_last_sensor_data` from `async_added_to_hass` to get access to the stored `native_value` and `native_unit_of_measurement`.
-
+Sensors which restore the state after restart or reload should not extend `RestoreEntity` because  that does not store the `native_value`, but instead the `state` which may have been modified by the sensor base entity. Sensors which restore the state should extend `RestoreSensor` and call `await self.async_get_last_sensor_data` from `async_added_to_hass` to get access to the stored `native_value` and `native_unit_of_measurement`.
 
 ## Long-term Statistics
 
@@ -126,20 +126,22 @@ either of `energy`, `gas`, or `monetary`
 ### Entities representing a total amount
 
 Entities tracking a total amount have a value that may optionally reset periodically,
-like this month's energy consumption, today's energy production or the yearly growth of
-a stock portfolio. The sensor's value when the first statistics is compiled is used as
-the initial zero-point.
+like this month's energy consumption, today's energy production, the weight of pellets used to heat the house over the last week or the yearly growth of
+a stock portfolio. The sensor's value when the first statistics is compiled is used as the initial zero-point.
 
 #### How to choose `state_class` and `last_reset`
+
 It's recommended to use state class `total` without `last_reset` whenever possible, state class `total_increasing` or `total` with `last_reset` should only be used when state class `total` without `last_reset` does not work for the sensor.
 
-Examples
+Examples:
+
 - The sensor's value never resets, e.g. a lifetime total energy consumption or production: state_class `total`, `last_reset` not set or set to `None`
 - The sensor's value may reset to 0, and its value can only increase: state class `total_increasing`. Examples: energy consumption aligned with a billing cycle, e.g. monthly, an energy meter resetting to 0 every time it's disconnected
 - The sensor's value may reset to 0, and its value can both increase and decrease: state class `total`, `last_reset` updated when the value resets. Examples: net energy consumption aligned with a billing cycle, e.g. monthly.
 - The sensor's state is reset with every state update, for example a sensor updating every minute with the energy consumption during the past minute: state class `total`, `last_reset` updated every state change.
 
 #### State class `total`
+
 For sensors with state class `total`, the `last_reset` attribute can
 optionally be set to gain manual control of meter cycles.
 The sensor's state when it's first added to Home Assistant is used as an initial
@@ -180,7 +182,6 @@ of the new meter cycle is not 0, but 0 is used as zero-point:
 |   2021-08-01T15:00:00  |  1005  | 2021-08-01T13:00:00 |     5  |          10  |           5  |
 |   2021-08-01T16:00:00  |     5  | 2021-09-01T16:00:00 |    10  |          15  |           5  |
 |   2021-08-01T17:00:00  |    10  | 2021-09-01T16:00:00 |    15  |          20  |           5  |
-
 
 #### State class `total_increasing`
 

@@ -365,6 +365,13 @@ Stop an add-on
 
 <ApiEndpoint path="/addons/<addon>/uninstall" method="post">
 Uninstall an add-on
+
+**Payload:**
+
+| key           | type    | optional | description                            |
+| ------------- | ------- | -------- | -------------------------------------- |
+| remove_config | boolean | True     | Delete addon's config folder (if used) |
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/update" method="post">
@@ -770,6 +777,7 @@ Create a full backup.
 | compressed                     | boolean        | True     | `false` to create uncompressed backups               |
 | location                       | string or null | True     | Name of a backup mount or `null` for /backup         |
 | homeassistant_exclude_database | boolean        | True     | Exclude the Home Assistant database file from backup |
+| background                     | boolean        | True     | Return `job_id` immediately, do not wait for backup to complete. Clients must check job for status and slug. |
 
 **Example response:**
 
@@ -789,9 +797,17 @@ Upload a backup.
 
 ```json
 {
-  "slug": "skuwe823"
+  "slug": "skuwe823",
+  "job_id": "abc123"
 }
 ```
+
+:::note
+
+Error responses from this API may also include a `job_id` if the message alone cannot accurately describe what happened.
+Callers should direct users to review the job or supervisor logs to get an understanding of what occurred.
+
+:::
 
 </ApiEndpoint>
 
@@ -811,6 +827,7 @@ Create a partial backup.
 | compressed                     | boolean        | True     | `false` to create uncompressed backups               |
 | location                       | string or null | True     | Name of a backup mount or `null` for /backup         |
 | homeassistant_exclude_database | boolean        | True     | Exclude the Home Assistant database file from backup |
+| background                     | boolean        | True     | Return `job_id` immediately, do not wait for backup to complete. Clients must check job for status and slug. |
 
 **You need to supply at least one key in the payload.**
 
@@ -818,9 +835,17 @@ Create a partial backup.
 
 ```json
 {
-  "slug": "skuwe823"
+  "slug": "skuwe823",
+  "job_id": "abc123"
 }
 ```
+
+:::note
+
+Error responses from this API may also include a `job_id` if the message alone cannot accurately describe what happened.
+Callers should direct users to review the job or supervisor logs to get an understanding of what occurred.
+
+:::
 
 </ApiEndpoint>
 
@@ -893,9 +918,25 @@ Does a full restore of the backup with the given slug.
 
 **Payload:**
 
-| key      | type   | optional | description                          |
-| -------- | ------ | -------- | ------------------------------------ |
-| password | string | True     | The password for the backup if any |
+| key        | type    | optional | description                          |
+| ---------- | ------- | -------- | ------------------------------------ |
+| password   | string  | True     | The password for the backup if any   |
+| background | boolean | True     | Return `job_id` immediately, do not wait for restore to complete. Clients must check job for status. |
+
+**Example response:**
+
+```json
+{
+  "job_id": "abc123"
+}
+```
+
+:::note
+
+Error responses from this API may also include a `job_id` if the message alone cannot accurately describe what happened.
+Callers should direct users to review the job or supervisor logs to get an understanding of what occurred.
+
+:::
 
 </ApiEndpoint>
 
@@ -910,9 +951,25 @@ Does a partial restore of the backup with the given slug.
 | homeassistant | boolean | True     | `true` if Home Assistant should be restored    |
 | addons        | list    | True     | A list of add-on slugs that should be restored |
 | folders       | list    | True     | A list of directories that should be restored  |
-| password      | string  | True     | The password for the backup if any           |
+| password      | string  | True     | The password for the backup if any             |
+| background    | boolean | True     | Return `job_id` immediately, do not wait for restore to complete. Clients must check job for status. |
 
 **You need to supply at least one key in the payload.**
+
+**Example response:**
+
+```json
+{
+  "job_id": "abc123"
+}
+```
+
+:::note
+
+Error responses from this API may also include a `job_id` if the message alone cannot accurately describe what happened.
+Callers should direct users to review the job or supervisor logs to get an understanding of what occurred.
+
+:::
 
 </ApiEndpoint>
 
@@ -1373,6 +1430,31 @@ Get hardware information.
           "/sys/devices/soc/platform/00ef"
         ]
       }
+    ],
+    "drives": [
+      {
+        "vendor": "Generic",
+        "model": "Flash Disk",
+        "revision": "8.07",
+        "serial": "AABBCCDD",
+        "id": "Generic-Flash-Disk-AABBCCDD",
+        "size": 8054112256,
+        "time_detected": "2023-02-15T21:44:22.504878+00:00",
+        "connection_bus": "usb",
+        "seat": "seat0",
+        "removable": true,
+        "ejectable": true,
+        "filesystems": [
+          {
+            "device": "/dev/sda1",
+            "id": "by-uuid-1122-1ABA",
+            "size": 67108864,
+            "name": "",
+            "system": false,
+            "mount_points": []
+          }
+        ]
+      }
     ]
 }
 ```
@@ -1382,6 +1464,7 @@ Get hardware information.
 | key      | description                                                  |
 | -------- | ------------------------------------------------------------ |
 | devices  | A list of [Device models](api/supervisor/models.md#device)   |
+| drives   | A list of [Drive models](api/supervisor/models.md#drive)
 
 </ApiEndpoint>
 
@@ -1421,6 +1504,7 @@ Return information about the host.
 | broadcast_llmnr  | bool or null   | Host is broadcasting its LLMNR hostname   |
 | broadcast_mdns   | bool or null   | Host is broadcasting its MulticastDNS hostname |
 | chassis          | string or null | The chassis type                          |
+| virtualization   | string or null | Virtualization hypervisor in use (if any) |
 | cpe              | string or null | The local CPE                             |
 | deployment       | string or null | The deployment stage of the OS if any     |
 | disk_total       | float          | Total space of the disk in MB             |
@@ -1851,7 +1935,8 @@ Returns information about mounts configured in Supervisor
       "type": "cifs",
       "server": "server.local",
       "share": "media",
-      "state": "active"
+      "state": "active",
+      "read_only": false
     }
   ]
 }
@@ -1892,7 +1977,8 @@ Value in `name` must be unique and can only consist of letters, numbers and unde
   "server": "server.local",
   "share": "media",
   "username": "admin",
-  "password": "password"
+  "password": "password",
+  "read_only": false
 }
 ```
 
@@ -1915,7 +2001,8 @@ name, it cannot be changed. Delete and re-add the mount to change the name.
   "usage": "media",
   "type": "nfs",
   "server": "server.local",
-  "path": "/media/camera"
+  "path": "/media/camera",
+  "read_only": true
 }
 ```
 
@@ -2209,14 +2296,15 @@ Returns information about the OS.
 
 **Returned data:**
 
-| key              | type    | description                                                  |
-| ---------------- | ------- | ------------------------------------------------------------ |
-| version          | string  | The current version of the OS                                |
-| version_latest   | string  | The latest published version of the OS in the active channel |
-| update_available | boolean | `true` if an update is available                             |
-| board            | string  | The name of the board                                        |
-| boot             | string  | Which slot that are in use                                   |
-| data_disk        | string  | Device which is used for holding OS data persistent          |
+| key              | type    | description                                                                  |
+| ---------------- | ------- | ---------------------------------------------------------------------------- |
+| version          | string  | The current version of the OS                                                |
+| version_latest   | string  | The latest published version of the OS in the active channel                 |
+| update_available | boolean | `true` if an update is available                                             |
+| board            | string  | The name of the board                                                        |
+| boot             | string  | Which slot that are in use                                                   |
+| data_disk        | string  | Device which is used for holding OS data persistent                          |
+| boot_slots       | dict    | Dictionary of [boot slots](api/supervisor/models.md#boot-slot) keyed by name |
 
 **Example response:**
 
@@ -2227,7 +2315,19 @@ Returns information about the OS.
   "update_available": true,
   "board": "ova",
   "boot": "slot1",
-  "data_disk": "BJTD4R-0x123456789"
+  "data_disk": "BJTD4R-0x123456789",
+  "boot_slots": {
+    "A": {
+      "state": "inactive",
+      "status": "good",
+      "version": "10.1"
+    },
+    "B": {
+      "state": "active",
+      "status": "good",
+      "version": "10.2"
+    }
+  }
 }
 ```
 
@@ -2242,6 +2342,18 @@ Update Home Assistant OS
 | key     | type   | description                                                    |
 | ------- | ------ | -------------------------------------------------------------- |
 | version | string | The version you want to install, default is the latest version |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/os/boot-slot" method="post">
+
+Change the active boot slot, **This will also reboot the device!** 
+
+**Payload:**
+
+| key       | type   | description                                                              |
+| --------- | ------ | ------------------------------------------------------------------------ |
+| boot_slot | string | Boot slot to change to. See options in `boot_slots` from `/os/info` API. |
 
 </ApiEndpoint>
 
@@ -2298,6 +2410,25 @@ Move datadisk to a new location, **This will also reboot the device!**
 | key     | type   | description                                                       |
 | ------- | ------ | ----------------------------------------------------------------- |
 | device  | string | ID of the disk device which should be used as the target for the data migration |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/os/datadisk/wipe" method="post">
+
+Wipe the datadisk including all user data and settings, **This will also reboot the device!** This API requires an admin token
+
+This API will wipe all config/settings for addons, Home Assistant and the Operating
+System and any locally stored data in config, backups, media, etc. The machine will
+reboot during this.
+
+After the reboot completes the latest stable version of Home Assistant and Supervisor
+will be downloaded. Once the process is complete the user will see onboarding, like
+during initial setup.
+
+This wipe also includes network settings. So after the reboot the user may need to
+reconfigure those in order to access Home Assistant again.
+
+The operating system version as well as its boot configuration will be preserved.
 
 </ApiEndpoint>
 

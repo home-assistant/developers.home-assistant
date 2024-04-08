@@ -173,13 +173,13 @@ This is a partial example of a field which is only shown if at least one selecte
 
 Services can also have icons. These icons are used in the Home Assistant UI when displaying the service in places like the automation and script editors.
 
-The icon to use for each service can be defined in the `icons.json` translation file in the integration folder, under the `service` key. The key should be the service name, and the value should be the icon to use.
+The icon to use for each service can be defined in the `icons.json` translation file in the integration folder, under the `services` key. The key should be the service name, and the value should be the icon to use.
 
 The following example, shows how to provide icons for the `turn_on` and `turn_off` services of an integration:
 
 ```json
 {
-  "service": {
+  "services": {
     "turn_on": "mdi:lightbulb-on",
     "turn_off": "mdi:lightbulb-off"
   }
