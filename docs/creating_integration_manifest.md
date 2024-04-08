@@ -98,7 +98,7 @@ Built-in integrations shall only specify other built-in integrations in `depende
 
 ## After dependencies
 
-This option is used to specify dependencies that might be used by the integration but aren't essential. When `after_dependencies` is present, set up of an integration will wait for the `after_dependencies` to be set up before being set up. It will also make sure that the requirements of `after_dependencies` are installed so methods from the integration can be safely imported.  For example, if the `camera` integration might use the `stream` integration in certain configurations, adding `stream` to `after_dependencies` of `camera`'s manifest, will ensure that `stream` is loaded before `camera` if it is configured.  If `stream` is not configured, `camera` will still load.
+This option is used to specify dependencies that might be used by the integration but aren't essential. When `after_dependencies` is present, set up of an integration will wait for the integrations listed in `after_dependencies`, which are configured either via YAML or a config entry, to be set up first before the integration is set up. It will also make sure that the requirements of `after_dependencies` are installed so methods from the integration can be safely imported, regardless of whether the integrations listed in `after_dependencies` are configured or not. For example, if the `camera` integration might use the `stream` integration in certain configurations, adding `stream` to `after_dependencies` of `camera`'s manifest, will ensure that `stream` is loaded before `camera` if it is configured and that any dependencies of `stream` are installed and can be imported by `camera`. If `stream` is not configured, `camera` will still load.
 
 Built-in integrations shall only specify other built-in integrations in `after_dependencies`. Custom integrations may specify both built-in and custom integrations in `after_dependencies`.
 
@@ -113,6 +113,16 @@ Specify the `config_flow` key if your integration has a config flow to create a 
 ```json
 {
   "config_flow": true
+}
+```
+
+### Single config entry only
+
+Specify the `single_config_entry` key if your integration supports only one config entry. When specified, it will not allow the user to add more than one config entry for this integration.
+
+```json
+{
+  "single_config_entry": true
 }
 ```
 
@@ -161,7 +171,7 @@ The `loggers` field is a list of names that the integration's requirements use f
 
 If your integration supports discovery via bluetooth, you can add a matcher to your manifest. If the user has the `bluetooth` integration loaded, it will load the `bluetooth` step of your integration's config flow when it is discovered. We support listening for Bluetooth discovery by matching on `connectable` `local_name`, `service_uuid`, `service_data_uuid`, `manufacturer_id`, and `manufacturer_data_start`. The `manufacturer_data_start` field expects a list of bytes encoded as integer values from 0-255. The manifest value is a list of matcher dictionaries. Your integration is discovered if all items of any of the specified matchers are found in the Bluetooth data. It's up to your config flow to filter out duplicates.
 
-Matches for `local_name` must be at least three (3) characters long and may not contain any patterns in the first three (3) characters.
+Matches for `local_name` may not contain any patterns in the first three (3) characters.
 
 If the device only needs advertisement data, setting `connectable` to `false` will opt-in to receive discovery from Bluetooth controllers that do not have support for making connections.
 

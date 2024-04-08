@@ -6,7 +6,7 @@ The entity registry is a registry where Home Assistant keeps track of entities. 
 
 Being registered has the advantage that the same entity will always get the same entity ID. It will also prevent other entities from using that entity ID.
 
-A user is also able to override the name of an entity in the entity registry. When set, the name of the entity registry is used in favor of the name the device might give itself.
+A user is also able to override the name of an entity in the entity registry. When set, the name in the entity registry is used in favor of the name the device might give itself.
 
 ## Unique ID
 

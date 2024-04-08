@@ -17,10 +17,10 @@
     "@docusaurus/theme-mermaid": "^2.4.3",
     "@easyops-cn/docusaurus-search-local": "^0.36.0",
     "by-node-env": "^2.0.1",
-    "clsx": "^2.0.0",
+    "clsx": "^2.1.0",
     "react-dom": "^17.0.2",
     "react": "^18.2.0",
-    "yaml-loader": "^0.8.0"
+    "yaml-loader": "^0.8.1"
   },
   "resolutions": {},
   "browserslist": {

@@ -117,7 +117,7 @@ hass.async_create_task(
 For a platform to support config entries, it will need to add a setup entry method ([example](https://github.com/home-assistant/core/blob/0.68.0/homeassistant/components/light/hue.py#L60)):
 
 ```python
-async def async_setup_entry(hass, config_entry, async_add_devices):
+async def async_setup_entry(hass, config_entry, async_add_entities):
     """Set up entry."""
 ```
 
@@ -150,3 +150,7 @@ If the config entry version is changed, `async_migrate_entry` must be implemente
 async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> bool:
     """Migrate old entry."""
 ```
+
+## Modifying a config entry
+
+A `ConfigEntry` object, including the data and options, must never be mutated directly by integrations, instead integrations must call `async_update_entry`, the use of which is illustrated in the [config flow documentation](/config_entries_config_flow_handler.md#config-entry-migration).

@@ -14,17 +14,40 @@ A media player entity controls a media player.  Derive a platform entity from [`
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
-| Name | Type | Default | Description
-| ---- | ---- | ------- | -----------
-| supported_features | int | int | Flag supported features.
-| sound_mode | string | None | The current sound mode of the media player
-| sound_mode_list | list | None | Dynamic list of available sound modes (set by platform, empty means sound mode not supported)
-| source | string | None | The currently selected input source for the media player.
-| source_list | list | None | The list of possible input sources for the media player. (This list should contain human readable names, suitable for frontend display)
-| media_image_url | string | None | URL that represents the current image.
-| media_image_remotely_accessible | boolean | False | Return `True` if property `media_image_url` is accessible outside of the home network.
-| device_class | string | `None` | Type of media player.
-| group_members | list | `None` | A dynamic list of player entities which are currently grouped together for synchronous playback. If the platform has a concept of defining a group leader, the leader should be the first element in that list.
+| Name                            | Type                                            | Default | Description
+| ------------------------------- | ----------------------------------------------- | ------- | -----------
+| app_id                          | <code>str &#124; None</code>                    | `None`  | ID of the current running app.
+| app_name                        | <code>str &#124; None</code>                    | `None`  | Name of the current running app.
+| device_class                    | <code>MediaPlayerDeviceClass &#124; None</code> | `None`  | Type of media player.
+| group_members                   | <code>list[str] &#124; None</code>              | `None`  | A dynamic list of player entities which are currently grouped together for synchronous playback. If the platform has a concept of defining a group leader, the leader should be the first element in that list.
+| is_volume_muted                 | <code>bool &#124; None</code>                   | `None`  | `True` if if volume is currently muted.
+| media_album_artist              | <code>str &#124; None</code>                    | `None`  | Album artist of current playing media, music track only.
+| media_album_name                | <code>str &#124; None</code>                    | `None`  | Album name of current playing media, music track only.
+| media_artist                    | <code>str &#124; None</code>                    | `None`  | Artist of current playing media, music track only.
+| media_channel                   | <code>str &#124; None</code>                    | `None`  | Channel currently playing.
+| media_content_id                | <code>str &#124; None</code>                    | `None`  | Content ID of current playing media.
+| media_content_type              | <code>MediaType &#124; str &#124; None</code>   | `None`  | Content type of current playing media.
+| media_duration                  | <code>int &#124; None</code>                    | `None`  | Duration of current playing media in seconds.
+| media_episode                   | <code>str &#124; None</code>                    | `None`  | Episode of current playing media, TV show only.
+| media_image_hash                | <code>str &#124; None</code>                    | `None`  | Hash of media image, defaults to SHA256 of `media_image_url` if `media_image_url` is not `None`.
+| media_image_remotely_accessible | <code>bool &#124; None</code>                   | `False` | `True` if property `media_image_url` is accessible outside of the home network.
+| media_image_url                 | <code>str &#124; None</code>                    | `None`  | Image URL of current playing media.
+| media_playlist                  | <code>str &#124; None</code>                    | `None`  | Title of Playlist currently playing.
+| media_position                  | <code>int &#124; None</code>                    | `None`  | Position of current playing media in seconds.
+| media_position_updated_at       | <code>datetime &#124; None</code>               | `None`  | Timestamp of when `_attr_media_position` was last updated. The timestamp should be set by calling `homeassistant.util.dt.utcnow()`.
+| media_season                    | <code>str &#124; None</code>                    | `None`  | Season of current playing media, TV show only.
+| media_series_title              | <code>str &#124; None</code>                    | `None`  | Title of series of current playing media, TV show only.
+| media_title                     | <code>str &#124; None</code>                    | `None`  | Title of current playing media.
+| media_track                     | <code>int &#124; None</code>                    | `None`  | Track number of current playing media, music track only.
+| repeat                          | <code>RepeatMode &#124; str &#124; None</code>  | `None`  | Current repeat mode.
+| shuffle                         | <code>bool &#124; None</code>                   | `None`  | `True` if shuffle is enabled.
+| sound_mode                      | <code>str &#124; None</code>                    | `None`  | The current sound mode of the media player.
+| sound_mode_list                 | <code>list[str] &#124; None</code>              | `None`  | Dynamic list of available sound modes.
+| source                          | <code>str &#124; None</code>                    | `None`  | The currently selected input source for the media player.
+| source_list                     | <code>list[str] &#124; None</code>              | `None`  | The list of possible input sources for the media player. (This list should contain human readable names, suitable for frontend display).
+| state                           | <code>MediaPlayerState &#124; None</code>       | `None`  | State of the media player.
+| volume_level                    | <code>float &#124; None</code>                  | `None`  | Volume level of the media player in the range (0..1).
+| volume_step                     | <code>float &#124; None</code>                  | 0.1     | Volume step to use for the `volume_up` and `volume_down` services.
 
 ## Supported Features
 
