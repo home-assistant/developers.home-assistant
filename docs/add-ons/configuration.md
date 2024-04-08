@@ -177,7 +177,7 @@ Avoid using `config.yaml` as filename in your add-on for anything other than the
 | `discovery` | list | | A list of services that this add-on provides for Home Assistant. Currently supported: `mqtt`, `matter` and `otbr`
 | `services` | list | | A list of services that will be provided or consumed with this add-on. Format is `service`:`function` and functions are: `provide` (this add-on can provide this service), `want` (this add-on can use this service) or `need` (this add-on needs this service to work correctly).
 | `auth_api` | bool | `false` | Allow access to Home Assistant user backend.
-| `ingress` | bool | `false` | Enable the ingress feature for the add-on. This enables the "Open Web UI" button
+| `ingress` | bool | `false` | Enable the ingress feature for the add-on. This enables the "Open Web UI" button.
 | `ingress_port` | integer | `8099` | For add-ons that run on the host network, you can use `0` and read the port later via the API.
 | `ingress_entry` | string | `/` | Modify the URL entry point.
 | `ingress_stream` | bool | `false` | When enabled, requests to the add-on are streamed
