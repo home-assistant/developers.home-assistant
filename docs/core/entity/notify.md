@@ -15,7 +15,7 @@ and can be helpful to send notification messages as (but not limited to):
 
 Unlike a `text` entity the `notify` entity has no state that can be set. Instead it represents the date and time of the last message sent.
 
-If you want to represent something has a text value that can be changed (and thus have an actual state), you should use a `text` entity instead.
+If you want to represent something that has a text value that can be changed (and thus has an actual state), you should use a `text` entity instead.
 
 ## Properties
 
@@ -26,8 +26,7 @@ Other properties that are common to all entities such as `icon` and `name` etc a
 
 ### Send message
 
-The send message method can be used to send a message a device or service.
-It is called by Home Assistant when it is called from an automation.
+The send message method is used to send a message to a device or service.
 
 ```python
 class MyNotifier(NotifyEntity):
