@@ -12,21 +12,21 @@ Unlike the legacy `notify.notify` service we have no targets as argument, as it 
 
 The [architecture discussion](https://github.com/home-assistant/architecture/discussions/1041) is ongoing, and is about the device classes to implement and the implementation of recipient support in the form of [contacts via a contact registry](https://github.com/home-assistant/architecture/discussions/1041#discussioncomment-8947842).
 
-Existing integrations that implement the legacy `notify` services will be migrated in phases. The first step is to migrate the integrations than only use `message` as an attribute to notify.
+Existing integrations that implement the legacy `notify` services will be migrated in phases. The first step is to migrate the integrations than only use `message` as a parameter to notify.
 
 The integrations identified for migration are:
 
-- mastodon
-- knx
-- free_mobile
-- flock
 - circuit
-- ecobee
 - clickatell
 - clicksend
-- demo
 - command_line
+- demo
+- ecobee
+- flock
+- free_mobile
+- knx
+- mastodon
 
 As soon as we have `title` and/or `recipient` support we can migrate more integrations to use the new platform.
 
-When integrations are migrated, users will need to use the service(s), so the migration changes will cause automations to break.
+When integrations are migrated, users will need to use the new `notify.send_message` service, so the migration changes will cause automations to break after the deprecation period is over.
