@@ -4,7 +4,7 @@ authorURL: https://github.com/gjohansson-ST
 title: "LockEntity supports open/opening state"
 ---
 
-As of Home Assistant Core 2024.4 we have added a `open` and `opening` state to `LockEntity`
+As of Home Assistant Core 2024.5 we have added a `open` and `opening` state to `LockEntity`
 
 This is useful if you have locks which can differentiate between `unlocked` (not locked but latched) state and `open` (unlocked and latch withdrawn) state.
 
