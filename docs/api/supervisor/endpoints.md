@@ -1128,6 +1128,13 @@ Rebuild the Home Assistant core container
 
 <ApiEndpoint path="/core/restart" method="post">
 Restart the Home Assistant core container
+
+**Payload:**
+
+| key       | type       | optional | description                      |
+| --------- | ---------- | -------- | -------------------------------- |
+| safe_mode | boolean    | True     | Restart Core into safe mode      |
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/core/start" method="post">
