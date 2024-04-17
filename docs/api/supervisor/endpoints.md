@@ -87,7 +87,7 @@ Get details about an add-on
 | auto_uart           | boolean            | `true` if auto_uart access is granted is enabled                                       |
 | auto_update         | boolean            | `true` if auto update is enabled                                                       |
 | available           | boolean            | `true` if the add-on is available                                                      |
-| boot                | string             | "boot" or "manual"                                                                     |
+| boot                | string             | "auto" or "manual"                                                                     |
 | build               | boolean            | `true` if local add-on                                                                 |
 | changelog           | boolean            | `true` if changelog is available                                                       |
 | description         | string             | The add-on description                                                                 |
