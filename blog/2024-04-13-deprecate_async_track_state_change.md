@@ -6,7 +6,7 @@ title: "Replacing `async_track_state_change` with `async_track_state_change_even
 
 `async_track_state_change` is deprecated and will be removed in Home Assistant 2025.5. `async_track_state_change_event` should be used instead.
 
-`async_track_state_change` always creates a top-level listener for `EVENT_STATE_CHANGED`, which would have to reject all state changes that did not match the desired entities. This design presented a performance problem when there were many integrations using `async_track_state_change`. `async_track_state_change` has been phased out in `core` since the introduction of `async_track_state_change`, with the last instance being removed in 2024.5.
+`async_track_state_change` always creates a top-level listener for `EVENT_STATE_CHANGED`, which would have to reject all state changes that did not match the desired entities. This design presented a performance problem when there were many integrations using `async_track_state_change`. `async_track_state_change` has been phased out in `core` since the introduction of `async_track_state_change_event`, with the last instance being removed in 2024.5.
 
 Example with `async_track_state_change`:
 
