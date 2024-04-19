@@ -67,10 +67,8 @@ docker exec -it homeassistant /bin/bash
 
 ### Generating SSH Keys
 
-Windows instructions for how to generate and use private/public keys with Putty are found [here][windows-keys]. Instead of the droplet instructions, add the public key as per above instructions.
+Windows instructions on how to generate and use private/public keys with Putty are found [here][windows-keys]. Instead of the droplet instructions, add the public key as per above instructions.
 
-Alternative instructions for Mac, Windows and Linux can be found [here](https://docs.github.com/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent#platform-mac).
+Alternative instructions for Mac, Windows and Linux can be found [here](https://docs.github.com/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent). Follow the steps under *Generating a new SSH key* (the other sections are not applicable to Home Assistant and can be ignored).
 
-Follow steps 1–4 under *Generating a new SSH key* (the other sections are not applicable to Home Assistant and can be ignored).
-
-Step 3 in the link above shows the path to the private key file `id_rsa` for your chosen operating system. Your public key, `id_rsa.pub`, is saved in the same folder. Next, select all text from text box "Public key for pasting into the authorized_keys file" and save it to the root of your USB drive as `authorized_keys`.
+Make sure to copy the ***public*** key of the SSH key pair you just created. By default, the public key file is named `id_ed25519.pub` (in case of the Ed25519 elliptic curve algorithm) or `id_rsa.pub` (in case of the older RSA algorithm), i.e. it should have a `.pub` filename suffix. It is saved to the same folder as the private key (which is named `id_ed25519` or `id_rsa` by default).
