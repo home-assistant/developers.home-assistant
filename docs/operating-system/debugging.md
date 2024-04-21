@@ -12,7 +12,7 @@ This section is not for end users. End users should use the [SSH add-on] to SSH 
 ## Enabling SSH access to the host
 
 :::info
-SSH access through the [SSH add-on] on port 22 only grants limited privileges, and you will be asked for a username and password when typing the 'login' command. Follow the steps below to enable a separate SSH access on port 22222 that gives you direct access to the Home Assistant OS (the "host") with full privileges.
+SSH access through the [SSH add-on] (on port 22 by default) only grants limited privileges, and you will be asked for a username and password when typing the 'login' command. Follow the steps below to enable a separate SSH access on port 22222 that works independently of the add-on and gives you direct access to the Home Assistant OS (the "host") with full privileges.
 :::
 
 1. Use a USB drive with a partition named `CONFIG` (case sensitive) formatted as FAT, ext4, or NTFS. Create an `authorized_keys` text file (without a file extension) containing your public key(s), one per line, and place it in the root of the USB drive's `CONFIG` partition. The file must use POSIX-standard newline control characters (LF), not Windows ones (CR LF), and needs to be ASCII character encoded (i.e. mustn't contain any special characters in the comments).
