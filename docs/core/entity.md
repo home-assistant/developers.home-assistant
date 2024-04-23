@@ -388,7 +388,7 @@ There are two ways to provide a custom icon for an entity, either by providing i
 
 ### Icon translations
 
-This is the preferred and most modern way to provide a custom icon for an entity. Icon translations work similarly to [our regular translations](/docs/internationalization/core#state-of-entities), but instead of translating the state of an entity, they translate the states of an entity to icons.
+This is the preferred way to provide a custom icon for an entity. Icon translations work similarly to [our regular translations](/docs/internationalization/core#state-of-entities), but instead of translating the state of an entity, they translate the states of an entity to icons.
 
 The `translation_key` property of an entity defines the icon translation to use. This property is used to look up the translation in the `entity` section of the integration's `icons.json` file.
 
@@ -414,7 +414,7 @@ To differentiate entities and their translations, provide different translation 
 
 Notice that icons start with `mdi:` plus an [identifier](https://materialdesignicons.com/). The `default` icon is used when the entity's state is not in the `state` section. The `state` section is optional, and if not provided, the `default` icon will be used for all states.
 
-Icons for entity state attributes can also be provided. The following example provides icons for a `climate` entity with its `translation_key` property set to `ubercool`. This entity has a `preset_mode` state attribute, which can be set to `vacation` or `night`. The frontend will use these in, for example, the climate card.
+Icons for entity state attributes can also be provided in cases where the frontend shows icons for the state attributes. Examples include climate presets and fan modes. It's not possible to provide icons for other state attributes. The following example provides icons for a `climate` entity with its `translation_key` property set to `ubercool`. This entity has a `preset_mode` state attribute, which can be set to `vacation` or `night`. The frontend will use these in, for example, the climate card.
 
 ```json
 {
@@ -438,7 +438,7 @@ Icons for entity state attributes can also be provided. The following example pr
 
 ### Icon property
 
-Another way to provide an icon for an entity is by setting the `icon` property of an entity, which returns a string referencing the `mdi` icon. As this property is a method, it is possible to return different icons based on custom logic. For example, it could be possible to return different icons based on something that is not part of the entity's state.
+Another way to provide an icon for an entity is by setting the `icon` property of an entity, which returns a string referencing the `mdi` icon. As this property is a method, it is possible to return different icons based on custom logic unlike with icon translations. For example, it's possible to calculate the icon based on the state as in the example below, or return different icons based on something that is not part of the entity's state.
 
 ```python
 class MySwitch(SwitchEntity):
