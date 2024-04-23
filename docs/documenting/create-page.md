@@ -20,6 +20,11 @@ ha_config_flow: true
 ha_codeowners:
   - '@balloob'
 ha_domain: awesome
+related:
+- docs: /voice_control/s3_box_voice_assistant/
+  title: Creating a ESP32-S3-BOX-3 voice assistant
+- url: https://esphome.io/projects/index.html
+  title: ESPHome projects website    
 ---
 
 Content... Written in markdown.
@@ -38,6 +43,7 @@ Additional keys for the file header:
 - `ha_config_flow`: Set to `true` if the integration has a [Data Entry Flow](/data_entry_flow_index.md), omit otherwise.
 - `ha_codeowners`: GitHub usernames or team names (starting with `@`) of people that are responsible for this integration. This should match with the codeowners as listed in the integration manifest file.
 - `ha_domain`: The domain of the integration in Home Assistant Core. This must match the name from the integration manifest file.
+- `related`: Optional. Adds a section with links to related topics to the end of the page. Use `docs` used for local links and `url` for external links.
 
 There are [pre-defined variables](https://jekyllrb.com/docs/variables/) available but usually, it's not necessary to use them when writing documentation.
 
