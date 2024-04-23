@@ -21,10 +21,10 @@ ha_codeowners:
   - '@balloob'
 ha_domain: awesome
 related:
-- docs: /voice_control/s3_box_voice_assistant/
-  title: Creating a ESP32-S3-BOX-3 voice assistant
-- url: https://esphome.io/projects/index.html
-  title: ESPHome projects website    
+  - docs: /voice_control/s3_box_voice_assistant/
+    title: Creating a ESP32-S3-BOX-3 voice assistant
+  - url: https://esphome.io/projects/index.html
+    title: ESPHome projects website
 ---
 
 Content... Written in markdown.
