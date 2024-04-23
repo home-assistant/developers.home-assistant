@@ -180,6 +180,7 @@ module.exports = {
     },
     "config_entries_index",
     "data_entry_flow_index",
+    "files_of_component",
     {
       type: "category",
       label: "Device Automations",
