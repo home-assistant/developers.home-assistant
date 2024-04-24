@@ -9,7 +9,7 @@ title: Always reload after a successful re-auth flow
 
 To update and reload the entry after a successful reauthentication flow, the helper `async_update_reload_and_abort` can be used. The default behavior of the helper has been changed. By default the entry will always reload if the helper is called. If an entry needs reauthentication, it is not always needed to update the entry if an account was temporary disabled or an API-key was temporary disallowed.
 
-For cases where reloading is not wanted in case the entry is not changed, the `always_reload=False` parameter can be passed to the helper.
+For cases where reloading is not wanted in case the entry is not changed, the `reload_even_if_entry_is_unchanged=False` parameter can be passed to the helper.
 
 More about this helper can be found here [here](/docs/config_entries_config_flow_handler/#reauthentication).
 
@@ -46,7 +46,7 @@ class OAuth2FlowHandler(
             return self.async_update_reload_and_abort(
                 self.reauth_entry,
                 data=data,
-                always_reload=False,
+                reload_even_if_entry_is_unchanged=False,
             )
         return await super().async_oauth_create_entry(data)
 ```
