@@ -335,7 +335,8 @@ class OAuth2FlowHandler(
             )
         return await super().async_oauth_create_entry(data)
 ```
-By default, the `async_update_reload_and_abort` helper method aborts the flow with `reauth_successful` after update and reload.
+
+By default, the `async_update_reload_and_abort` helper method aborts the flow with `reauth_successful` after update and reload. By default, the entry will always be reloaded. If the config entry only should be reloaded in case the config entry was updated, specify `reload_even_if_entry_is_unchanged=False`.
 
 Depending on the details of the integration, there may be additional considerations such as ensuring the same account is used across reauth, or handling multiple config entries.
 
