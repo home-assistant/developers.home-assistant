@@ -17,7 +17,7 @@ SSH access through the [SSH add-on] (which will give you SSH access through port
 
 ### Home Assistant Operating System
 
-Use a USB drive formatted with FAT, ext4, or NTFS and name it CONFIG (case sensitive). Create an `authorized_keys` file (no extension) containing your public key, and place it in the root of the USB drive. File needs to be ANSI encoded (not UTF-8) and must have Unix line ends (LF), not Windows (CR LF). See [Generating SSH Keys](#generating-ssh-keys) section below if you need help generating keys. Use the CLI (eg. SSH to the [SSH add-on] on port 22) and import the `authorized_keys` file with the `ha os import` command. You can now access your device as root over SSH on port 22222. Alternatively, the file will be imported from the USB when the Home Assistant OS device is rebooted.
+Use a USB drive formatted with FAT, ext4, or NTFS (Some users reported that NTFS might not work) and name it CONFIG (case sensitive). Create an `authorized_keys` file (no extension) containing your public key, and place it in the root of the USB drive. File needs to be ANSI encoded (not UTF-8) and must have Unix line ends (LF), not Windows (CR LF). See [Generating SSH Keys](#generating-ssh-keys) section below if you need help generating keys. Use the CLI (eg. SSH to the [SSH add-on] on port 22) and import the `authorized_keys` file with the `ha os import` command. You can now access your device as root over SSH on port 22222. Alternatively, the file will be imported from the USB when the Home Assistant OS device is rebooted.
 
 :::tip
 Make sure when you are copying the public key to the root of the USB drive that you rename the file correctly to `authorized_keys` with no `.pub` file extension.
