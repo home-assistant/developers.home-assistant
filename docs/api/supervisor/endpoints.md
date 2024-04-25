@@ -1557,9 +1557,9 @@ log record per line.
 
 **HTTP Request Headers**
 
-| Header   | optional | description                                    |
-| -------- | -------- | ---------------------------------------------- |
-| Accept   | true     | Type of data (currently only text/plain)       |
+| Header   | optional | description                                                                   |
+| -------- | -------- |-------------------------------------------------------------------------------|
+| Accept   | true     | Type of data (text/plain or text/x-log)                                       |
 | Range    | true     | Range of log entries. The format is `entries=cursor[[:num_skip]:num_entries]` |
 
 :::tip
@@ -1570,6 +1570,11 @@ as `num_skip`. E.g. `Range: entries=:-9:` returns the last 10 entries. Or
 
 API returns the last 100 lines by default. Provide a value for `Range` to see
 logs further in the past.
+
+The `Accept` header can be set to `text/x-log` to get logs annotated with
+extra information, such as the timestamp and Systemd unit name. If no
+identifier is specified (i.e. for the host logs containing logs for multiple
+identifiers/units), this option is ignored - these logs are always annotated.
 
 </ApiEndpoint>
 
