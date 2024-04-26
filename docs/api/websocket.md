@@ -353,6 +353,8 @@ This will call a service in Home Assistant. Right now there is no return value. 
   "target": {
     "entity_id": "light.kitchen"
   }
+  // Must be included for services that return response data
+  "return_response": true
 }
 ```
 
