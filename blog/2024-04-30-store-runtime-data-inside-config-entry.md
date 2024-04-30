@@ -4,13 +4,13 @@ authorURL: https://github.com/cdce8p
 title: "Store runtime data inside the config entry"
 ---
 
-Often integration need to setup and keep track of custom data like coordinators, api connections or code objects. Previously those would all be stored inside `hass.data` which made keeping track of it difficult.
+Integrations often need to set up and track custom data, such as coordinators, API connections, or code objects. Previously, those were all stored inside `hass.data`, which made tracking them difficult.
 
-With recent changes, it's now possible to use `entry.runtime_data` for that. The config entry is already available when setting up platforms and gets cleaned up automatically. No more deleting the key from `hass.data` after unload.
+With recent changes, it's now possible to use `entry.runtime_data` for that. The config entry is already available when setting up platforms and gets cleaned up automatically. No more deleting the key from `hass.data` after unloading.
 
-It also better supports type checking. `ConfigEntry` is generic now, so it's possible to pass the data type along. Use a typed data structure like `dataclass` for that. To simplify the annotation, it's recommended to define a type alias for it.
+It also better supports type-checking. `ConfigEntry` is generic now, so passing the data type along is possible. Use a typed data structure like `dataclass` for that. To simplify the annotation, it's recommended to define a type alias for it.
 
-An example could look like this
+An example could look like this:
 ```py
 # <integration>/__init__.py
 
