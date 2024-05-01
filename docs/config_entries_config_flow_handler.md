@@ -274,7 +274,7 @@ class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
 ## Reauthentication
 
-Gracefully handling authentication errors such as invalid, expired, or revoked tokens is needed to advance on the [Integration Qualily Scale](integration_quality_scale_index.md). This example of how to add reauth to the OAuth flow created by `script.scaffold` following the pattern in [Building a Python library](api_lib_auth.md#oauth2).
+Gracefully handling authentication errors such as invalid, expired, or revoked tokens is needed to advance on the [Integration Quality Scale](integration_quality_scale_index.md). This example of how to add reauth to the OAuth flow created by `script.scaffold` following the pattern in [Building a Python library](api_lib_auth.md#oauth2).
 
 This example catches an authentication exception in config entry setup in `__init__.py` and instructs the user to visit the integrations page in order to reconfigure the integration.
 
