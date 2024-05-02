@@ -7,7 +7,7 @@ title: Second phase of notify entity platform implementation
 
 ### Title option for send_message service notify entity platform
 
-Recently we added the notify [entity platform](https://developers.home-assistant.io/docs/core/entity/notify/). The new `notify` platform method implements and service `send_message` now also accepts an optional `title` as argument. This allows some new integrations that can be migrated now to use the new entity platform:
+Recently we added the notify [entity platform](https://developers.home-assistant.io/docs/core/entity/notify/). The new `notify` platform method implements service `send_message`. This service now also accepts an optional `title` as an argument. This allows some new integrations that can be migrated now to use the new entity platform:
 
 - cisco_webex_teams
 - file
