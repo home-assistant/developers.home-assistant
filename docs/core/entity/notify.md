@@ -32,9 +32,9 @@ The send message method is used to send a message to a device or service.
 class MyNotifier(NotifyEntity):
     # Implement one of these methods.
 
-    def send_message(self, message: str) -> None:
+    def send_message(self, message: str, title: str | None = None) -> None:
         """Send a message."""
 
-    async def async_send_message(self, message: str) -> None:
+    async def async_send_message(self, message: str, title: str | None = None) -> None:
         """Send a message."""
 ```
