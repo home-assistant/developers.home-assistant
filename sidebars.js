@@ -202,6 +202,11 @@ module.exports = {
     },
     {
       type: "category",
+      label: "LLM Tools",
+      items: ["llm_tools"],
+    },
+    {
+      type: "category",
       label: "Conversation",
       items: ["intent_conversation_api"],
     },
