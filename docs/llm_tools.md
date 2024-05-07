@@ -16,25 +16,31 @@ Create and register your own intent handler. Intents are automatically registere
 Define a child class of `homeassistant.helpers.llm.Tool` and register an object of that class. This it the most flexible method. Example:
 
 ```python
+from typing import Any
+
 import voluptuous as vol
+
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import llm
 
-class MyTool(llm.Tool):
-  """LLM multiplication helper tool."""
-  name = "multiply"
-  description = "Return a product of two integers"
-  parameters = vol.Schema(
-    {
-      vol.Required("a", description="multiplicand"): vol.Coerce(int),
-      vol.Required("b", description="multiplier"): vol.Coerce(int),
-    }
-  )
 
-  async def async_call(self, hass: HomeAssistant, tool_input: llm.ToolInput) -> Any:
-    """Call the function."""
-    args = tool_input.tool_args
-    return {"result": args["a"] * args["b"]}
+class MyTool(llm.Tool):
+    """LLM multiplication helper tool."""
+
+    name = "multiply"
+    description = "Return a product of two integers"
+    parameters = vol.Schema(
+        {
+            vol.Required("a", description="multiplicand"): vol.Coerce(int),
+            vol.Required("b", description="multiplier"): vol.Coerce(int),
+        }
+    )
+
+    async def async_call(self, hass: HomeAssistant, tool_input: llm.ToolInput) -> Any:
+        """Call the function."""
+        args = tool_input.tool_args
+        return {"result": args["a"] * args["b"]}
+
 
 my_tool = MyTool()
 llm.async_register_tool(hass, my_tool)
@@ -59,9 +65,9 @@ Example:
 ```python
 class MyTool(llm.Tool):
     ...
-    async def async_call(self, hass: HomeAssistant, tool_input: ToolInput) -> Any:
-      """Call the tool."""
-      return {"result": "success"}
+    async def async_call(self, hass: HomeAssistant, tool_input: llm.ToolInput) -> Any:
+        """Call the tool."""
+        return {"result": "success"}
 ```
 
 The `ToolInput` has following attributes:
@@ -103,21 +109,30 @@ async_remove_tool(hass, "multiply")
 The following tool returns a currency exponent. Note the use of the `currency_validator` in `parameters` and `custom_serializer`.
 
 ```python
+from typing import Any
+
 from iso4217 import Currency
 import voluptuous as vol
+
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import llm
+
 
 def currency_validator(currency_code: str) -> Currency:
     """Validate currency code."""
     return Currency(currency_code)
 
+
 class MyTool(llm.Tool):
+    """LLM Tool to get currency exponent."""
+
     name = "currency_exponent"
     description = "Return the currency exponent for a ISO 4217 currency code"
     parameters = vol.Schema(
         {
-            vol.Required("currency", description="ISO 4217 alphabetic code"): currency_validator,
+            vol.Required(
+                "currency", description="ISO 4217 alphabetic code"
+            ): currency_validator,
         }
     )
 
@@ -130,6 +145,7 @@ class MyTool(llm.Tool):
         if schema is currency_validator:
             return {"type": "string"}
         return super().custom_serializer(schema)
+
 
 llm.async_register_tool(hass, MyTool())
 ```
@@ -145,11 +161,13 @@ Example with `llm.FunctionTool` class:
 ```python
 from homeassistant.helpers import llm
 
-def multiply(a: int, b: int) -> int:
+
+def multiply(a: int, b: int) -> dict[str, int]:
     "Return a product of two integers."
     return {"result": a * b}
 
-my_tool = FunctionTool(multiply)
+
+my_tool = llm.FunctionTool(multiply)
 llm.async_register_tool(hass, my_tool)
 ```
 
@@ -157,10 +175,11 @@ Example with the `@llm_tool` decorator:
 ```python
 from homeassistant.helpers.llm import llm_tool
 
+
 @llm_tool(hass)
-def multiply(a: int, b: int) -> Any:
+def multiply(a: int, b: int) -> int:
     "Return a product of two integers."
-    return {"result": a * b}
+    return a * b
 ```
 
 The function name is used as the tool name, the docstring is used as the tool description, and the argument annotations are used to construct the parameters schema.
@@ -170,6 +189,7 @@ If a parameter name is "hass" or any of the `ToolInput` attributes (see above), 
 Example:
 ```python
 from homeassistant.helpers.llm import llm_tool
+
 
 @llm_tool(hass)
 def test_tool(platform: str, test_arg: str) -> str:
