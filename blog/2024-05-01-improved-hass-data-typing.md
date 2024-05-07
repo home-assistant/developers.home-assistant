@@ -10,7 +10,7 @@ In the past, one of the challenges with `hass.data` was to correctly assign type
 data: MyData = hass.data[SOME_KEY]
 ```
 
-This had several disadvantages. Not only was it necessary to annotate ever assignment, type checkers basically pretended that the annotation would always be correct. Especially during refactoring, it could easily happen that one instance was missed and, while type-checking still succeeded, the actual code would be broken.
+This had several disadvantages. Not only was it necessary to annotate every assignment, but type checkers also basically pretended that the annotation would always be correct. Especially during refactoring, it could easily happen that one instance was missed, and while type-checking still succeeded, the actual code would be broken.
 
 To fix that, it's now possible to use two new key types `HassKey` and `HassEntryKey`. With a little bit of magic, type checkers are now able to infer the type and make sure it's correct. Even when storing data.
 
