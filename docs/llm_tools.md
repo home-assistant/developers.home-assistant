@@ -7,11 +7,11 @@ LLM tools extend the functionality of OpenAI Conversation, Google Generative AI,
 
 There are 3 options to define your own tool.
 
-# Option 1. Intent
+## Option 1. Intent
 
 Create and register your own intent handler. Intents are automatically registered as LLM tools. This method allows to use the same code for other integrations that support intents.
 
-# Option 2. Tool class
+## Option 2. Tool class
 
 Define a child class of `homeassistant.helpers.llm.Tool` and register an object of that class. This it the most flexible method. Example:
 
@@ -52,7 +52,7 @@ The `llm.Tool` class has the following user-defined attributes:
 
 The `llm.Tool` class has the following user-defined methods:
 
-### `async_call`
+#### `async_call`
 Perform the actual operation of the tool when called by the LLM. This must be an async method and return json-serializable result. Its arguments are `hass` and an instance of `llm.ToolInput`.
 
 Example:
@@ -79,13 +79,13 @@ The `ToolInput` has following attributes:
 | `device_id`       | string  | The device ID that user uses for the conversation, if available                                         |
 | `assistant`       | string  | The assistant name used to control exposed entities. Currently only `conversation` is supported.        |
 
-### `custom_serializer`
+#### `custom_serializer`
 The Tools are usually represented to the LLM with OpenAPI schema, which is based on JSON schema.
 It is auto generated from `vol.Schema` of tool parameters, but sometimes it requires a custom conversion, for example, if the vol.Schema has custom validators.
 
 This method allows a user to define or tweak the conversion. See example below.
 
-## Unregistration
+### Unregistration
 When your integration no longer wants to provide the tool, you need to unregister it with `llm.async_remove_tool`.
 
 Example:
@@ -98,7 +98,7 @@ You can also use the tool name:
 async_remove_tool(hass, "multiply")
 ```
 
-## Full example:
+### Full example
 
 The following tool returns a currency exponent. Note the use of the `currency_validator` in `parameters` and `custom_serializer`.
 
@@ -134,7 +134,7 @@ class MyTool(llm.Tool):
 llm.async_register_tool(hass, MyTool())
 ```
 
-# Option 3. Tool function
+## Option 3. Tool function
 
 Define a function and register it as an LLM tool. This is the easiest method.
 
