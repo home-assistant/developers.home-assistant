@@ -2,7 +2,7 @@
 author: Robert Resch
 authorURL: https://github.com/edenhaus
 authorImageURL: https://avatars.githubusercontent.com/u/26537646?s=96&v=4
-title: "How we managed to speed up our CI to save >168 days of execution time per month"
+title: "How we managed to speed up our CI to save 168+ days of execution time per month"
 ---
 
 We got a taste for speed after [UV gave us back 215 compute hours a month](2024-04-03-build-images-with-uv.md). 
