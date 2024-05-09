@@ -33,6 +33,8 @@ flowchart LR
     RN -->|One| D2N[Run tests]
     RN -->|Two| E2N[Run tests]
     RN -->|Three| F2N[Run tests]
+```
+
 A short analysis of the 6647 CI workflows in March 2024 revealed the following stats:
 - 2406 were canceled before termination
     - 1771 should be full runs
