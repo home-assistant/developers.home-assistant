@@ -17,22 +17,23 @@ Now we have a separate job to discover all tests and split them into 10 groups. 
 flowchart LR
     A[Full run] --> R{Distribute work}
 
-    R -->|One| D[Discover what tests to run]
-    R -->|Two| E[Discover what tests to run]
-    R -->|Three| F[Discover what tests to run]
+    R -->|One| D[Discover tests to run]
+    R -->|Two| E[Discover tests to run]
+    R -->|Three| F[Discover tests to run]
 
     D --> D2[Run tests]
     E --> E2[Run tests]
     F --> F2[Run tests]
 
 
-    AN[Full run] --> RW[Discover what tests to run]
+    AN[Full run] --> RW[Discover tests to run]
 
     RW --> RN{Distribute work}
 
     RN -->|One| D2N[Run tests]
     RN -->|Two| E2N[Run tests]
     RN -->|Three| F2N[Run tests]
+
 ```
 
 A short analysis of the 6647 CI workflows in March 2024 revealed the following stats:
