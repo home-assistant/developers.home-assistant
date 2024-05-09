@@ -16,12 +16,12 @@ Now we have a separate job to discover all tests and split them into 10 groups. 
 
 A short analysis of the 6647 CI workflows in March 2024 revealed the following stats:
 - 2406 were canceled before termination
-  - 1771 should be full runs
+    - 1771 should be full runs
 - 1085 failed
-  - 732 where failed full runs
+    - 732 where failed full runs
 - 3007 terminated successfully
-  - 1629 partial runs (only tests for a given integration where executed)
-  - 1378 full runs
+    - 1629 partial runs (only tests for a given integration where executed)
+    - 1378 full runs
 
 Considering the 1378 successful full runs, we would have saved around **4042 hours ~ 168 days** of execution time in March 2024 with [#114381](https://github.com/home-assistant/core/pull/114381). Even more, if I had also analyzed the failed/canceled ones.
 
