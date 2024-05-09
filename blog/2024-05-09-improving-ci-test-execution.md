@@ -9,7 +9,7 @@ We got a taste for speed after [UV gave us back 215 compute hours a month](2024-
 Our CI workflow gets triggered on each commit, and due to the high volume of contributions, it was triggered 6647 times in March 2024.
 The full runs, where the whole test suite is being executed, take a long time.
 
-It turned out that the plugin, we used to split the tests into 10 groups, was inefficient. Each pytest job needed to discover all tests, even when the job intended to only executed a subset of them.
+It turned out that the plugin, we used to split the tests into 10 groups, was inefficient. Each pytest job needed to discover all tests, even when the job intended to only execute a subset of them.
 
 Now we have a seperate job to discover all tests and split them into 10 groups. The 10 pytest jobs only need to discover and execute a subset of all tests, which leads to reduced execution of 3 hours on each full run.
 
