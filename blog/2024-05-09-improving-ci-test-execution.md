@@ -13,7 +13,26 @@ It turned out that the plugin, we used to split the tests into 10 groups, was in
 
 Now we have a separate job to discover all tests and split them into 10 groups. The 10 pytest jobs only need to execute a subset of all tests. Not doing full-discovery in each test runner saves us 3 hours on each full run!
 
+```mermaid
+flowchart LR
+    A[Full run] --> R{Distribute work}
 
+    R -->|One| D[Discover what tests to run]
+    R -->|Two| E[Discover what tests to run]
+    R -->|Three| F[Discover what tests to run]
+
+    D --> D2[Run tests]
+    E --> E2[Run tests]
+    F --> F2[Run tests]
+
+
+    AN[Full run] --> RW[Discover what tests to run]
+
+    RW --> RN{Distribute work}
+
+    RN -->|One| D2N[Run tests]
+    RN -->|Two| E2N[Run tests]
+    RN -->|Three| F2N[Run tests]
 A short analysis of the 6647 CI workflows in March 2024 revealed the following stats:
 - 2406 were canceled before termination
     - 1771 should be full runs
