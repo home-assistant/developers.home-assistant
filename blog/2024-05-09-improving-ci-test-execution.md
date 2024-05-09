@@ -21,7 +21,7 @@ A short analysis of the 6647 CI workflows in March 2024 revealed the following s
   - 1629 partial runs (only tests for a given integration where executed)
   - 1378 full runs
 
-Considering the 1378 successful full runs, we would have saved around **4042 hours ~ 168 days** of execution time in March 2024 with https://github.com/home-assistant/core/pull/114381. Even more, if I had also analyzed the failed/canceled ones.
+Considering the 1378 successful full runs, we would have saved around **4042 hours ~ 168 days** of execution time in March 2024 with [#114381](https://github.com/home-assistant/core/pull/114381). Even more, if I had also analyzed the failed/canceled ones.
 
 The more than 168 monthly saved execution days can be used by other jobs and make the CI experience for all developers and our community better.
 We improved our sustainability by using fewer resources to run our test suite.
