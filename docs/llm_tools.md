@@ -85,12 +85,6 @@ The `ToolInput` has following attributes:
 | `device_id`       | string  | The device ID that user uses for the conversation, if available                                         |
 | `assistant`       | string  | The assistant name used to control exposed entities. Currently only `conversation` is supported.        |
 
-#### `custom_serializer`
-The Tools are usually represented to the LLM with OpenAPI schema, which is based on JSON schema.
-It is auto generated from `vol.Schema` of tool parameters, but sometimes it requires a custom conversion, for example, if the vol.Schema has custom validators.
-
-This method allows a user to define or tweak the conversion. See example below.
-
 ### Unregistration
 When your integration no longer wants to provide the tool, you need to unregister it with `llm.async_remove_tool`.
 
@@ -106,7 +100,7 @@ async_remove_tool(hass, "multiply")
 
 ### Full example
 
-The following tool returns a currency exponent. Note the use of the `currency_validator` in `parameters` and `custom_serializer`.
+The following tool returns a currency exponent.
 
 ```python
 from typing import Any
@@ -139,12 +133,6 @@ class MyTool(llm.Tool):
     async def async_call(self, hass: HomeAssistant, tool_input: llm.ToolInput) -> Any:
         """Call the function."""
         return {"exponent": tool_input.tool_args["currency"].exponent}
-
-    def custom_serializer(self, schema: Any) -> Any:
-        """Serialize additional types in OpenAPI-compatible format."""
-        if schema is currency_validator:
-            return {"type": "string"}
-        return super().custom_serializer(schema)
 
 
 llm.async_register_tool(hass, MyTool())
