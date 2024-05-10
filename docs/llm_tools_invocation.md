@@ -27,12 +27,20 @@ from homeassistant.helpers import llm
 
 ## Step 2. Format the tool schema
 
-You need to pass the list of available tools to the LLM. Refer to the LLM API for the correct format to do that. You would probably need the tool specification in OpenAPI-compatible format. To get that, use `Tool.specification` property. Simplest example:
+You need to pass the list of available tools to the LLM. Refer to the LLM API for the correct format to do that. You would probably need the tool specification in OpenAPI-compatible format. To get that, you can use `voluptuous_openapi.convert` function (don't forget to mention the dependency in your `manifest.json` file). Simplest example:
 
 ```python
+from voluptuous_openapi import convert
 from homeassistant.helpers import llm
 ...
-        tools = [tool.specification for tool in llm.async_get_tools(self.hass)]
+        tools = [
+            {
+                "name": tool.name,
+                "description": tool.description,
+                "parameters": convert(tool.parameters),
+            }
+            for tool in llm.async_get_tools(self.hass)
+        ]
 ```
 
 You may need some additional processing.
