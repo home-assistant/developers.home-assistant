@@ -70,7 +70,7 @@ from homeassistant.helpers import llm
                             user_prompt=user_input.text,
                             language=user_input.language,
                             agent_id=self.entity_id,
-                            conversation_id=conversation_id,
+                            conversation_id=user_input.conversation_id,
                             device_id=user_input.device_id,
                             assistant=conversation.DOMAIN,
                         )

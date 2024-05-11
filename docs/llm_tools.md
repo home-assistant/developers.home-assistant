@@ -5,15 +5,11 @@ sidebar_label: "LLM Tools"
 
 LLM tools extend the functionality of LLM integrations such as OpenAI Conversation, Google Generative AI, and others. You can define your own LLM tool that these integrations can use.
 
-There are 3 options to define your own tool.
+All [Intents](/docs/intent_index) are automatically registered as LLM tools. This page describes the APIs for registering additional tools.
 
-## Option 1. Intent
+## Tool
 
-Create and register your own intent handler. Intents are automatically registered as LLM tools. This method allows to use the same code for other integrations that support intents.
-
-## Option 2. Tool class
-
-Define a child class of `homeassistant.helpers.llm.Tool` and register an object of that class. This it the most flexible method. Example:
+The most flexible method to define a tool is by registering a child class of `homeassistant.helpers.llm.Tool`. Example:
 
 ```python
 from typing import Any
