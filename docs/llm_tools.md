@@ -3,7 +3,7 @@ title: "LLM Tools"
 sidebar_label: "LLM Tools"
 ---
 
-LLM tools extend the functionality of OpenAI Conversation, Google Generative AI, and possibly other future LLM integrations. You can define your own LLM tool that these integrations can use.
+LLM tools extend the functionality of LLM integrations such as OpenAI Conversation, Google Generative AI, and others. You can define your own LLM tool that these integrations can use.
 
 There are 3 options to define your own tool.
 
