@@ -23,7 +23,7 @@ The `llm.Tool` class has the following methods:
 #### `async_call`
 Perform the actual operation of the tool when called by the LLM. This must be an async method. Its arguments are `hass` and an instance of `llm.ToolInput`.
 
-Response data must be a dict and serializable in JSON [homeassistant.util.json.JsonObjectType](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/util/json.py).
+Response data must be a dict and serializable in JSON [`homeassistant.util.json.JsonObjectType`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/util/json.py).
 
 Errors must be raised as `HomeAssistantError` exceptions (or its subclasses). The response data should not contain error codes used for error handling.
 
@@ -37,9 +37,6 @@ The `ToolInput` has following attributes:
 | `context`         | Context | The `homeassistant.core.Context` of the conversation                                                    |
 | `user_prompt`     | string  | The raw text input that initiated the tool call                                                         |
 | `language`        | string  | The language of the conversation agent, or "*" for any language                                         |
-| `agent_id`        | string  | The ID of the conversation agent                                                                        |
-| `conversation_id` | string  | The ID of the conversation                                                                              |
-| `device_id`       | string  | The device ID that user uses for the conversation, if available                                         |
 | `assistant`       | string  | The assistant name used to control exposed entities. Currently only `conversation` is supported.        |
 
 ## Getting available tools
@@ -102,9 +99,6 @@ class MyConversationEntity(
                 context=user_input.context,
                 user_prompt=user_input.text,
                 language=user_input.language,
-                agent_id=self.entity_id,
-                conversation_id=user_input.conversation_id,
-                device_id=user_input.device_id,
                 assistant=conversation.DOMAIN,
             )
             try:
