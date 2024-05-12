@@ -2,33 +2,53 @@
 title: "LLM Tools Invocation"
 ---
 
-If you are developing an LLM integration and want to add support of LLM Tools invocation, then here are the steps to do that.
+LLM tools extend the functionality of LLM integrations such as OpenAI Conversation, Google Generative AI, and others.
 
-## Step 0. Register the `intent` component.
+All [Intents](/docs/intent_index) are automatically registered as LLM tools.
 
-The intents are also automatically registered as LLM tools. However in order to do so, the `intent` component must be loaded. It does not happen automatically, so it is recommended to make sure it is loaded before using the tools for the first time.
+This documentation is for LLM integrations developers.
 
-```python
-from homeassistant import setup
-...
-        if "intent" not in self.hass.config.components:
-            await setup.async_setup_component(self.hass, "intent", {})
-```
+## Tool
 
-## Step 1. Get available tools
+The `llm.Tool` class has the following attributes:
 
-You can get the currently registered tools with `homeassistant.helpers.llm.async_get_tools(hass)`:
+| Name                | Type       | Description                                                                                                    |
+|---------------------|------------|----------------------------------------------------------------------------------------------------------------|
+| `name`              | string     | The name of the tool. Required.                                                                                |
+| `description`       | string     | Description of the tool to help the LLM understand when and how it should be called. Optional but recommended. |
+| `parameters`        | vol.Schema | The voluptuous schema of the parameters. Defaults to vol.Schema({})                                            |
 
-```python
-from homeassistant.helpers import llm
-...
-        tools = list(llm.async_get_tools(self.hass))
-```
+The `llm.Tool` class has the following methods:
 
-## Step 2. Format the tool schema
+#### `async_call`
+Perform the actual operation of the tool when called by the LLM. This must be an async method. Its arguments are `hass` and an instance of `llm.ToolInput`.
 
-You need to pass the list of available tools to the LLM. Refer to the LLM API for the correct format to do that. You would probably need the tool specification in OpenAPI-compatible format. To get that, you can use `voluptuous_openapi.convert` function (don't forget to mention the dependency in your `manifest.json` file). Simplest example:
+Response data must be a dict and serializable in JSON [homeassistant.util.json.JsonObjectType](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/util/json.py).
 
+Errors must be raised as `HomeAssistantError` exceptions (or its subclasses). The response data should not contain error codes used for error handling.
+
+The `ToolInput` has following attributes:
+
+| Name              | Type    | Description                                                                                             |
+|-------------------|---------|---------------------------------------------------------------------------------------------------------|
+| `tool_name`       | string  | The name of the tool being called                                                                       |
+| `tool_args`       | dict    | The arguments provided by the LLM. The arguments are converted and validated using `parameters` schema. |
+| `platform`        | string  | The DOMAIN of the conversation agent using the tool                                                     |
+| `context`         | Context | The `homeassistant.core.Context` of the conversation                                                    |
+| `user_prompt`     | string  | The raw text input that initiated the tool call                                                         |
+| `language`        | string  | The language of the conversation agent, or "*" for any language                                         |
+| `agent_id`        | string  | The ID of the conversation agent                                                                        |
+| `conversation_id` | string  | The ID of the conversation                                                                              |
+| `device_id`       | string  | The device ID that user uses for the conversation, if available                                         |
+| `assistant`       | string  | The assistant name used to control exposed entities. Currently only `conversation` is supported.        |
+
+## Getting available tools
+
+You can get the currently registered tools with `homeassistant.helpers.llm.async_get_tools(hass)`.
+
+If need the tool specification in OpenAPI-compatible format, you can use `voluptuous_openapi.convert` function (don't forget to mention the dependency in your `manifest.json` file).
+
+Example:
 ```python
 from voluptuous_openapi import convert
 from homeassistant.helpers import llm
@@ -43,11 +63,9 @@ from homeassistant.helpers import llm
         ]
 ```
 
-You may need some additional processing.
+Refer to the LLM API specification for the correct format.
 
-Pass the list to your LLM according to the API specification.
-
-## Step 3. Call the tool
+## Calling the tool
 
 When the LLM response indicates it wants to call a tool, you need to prepare the `llm.ToolInput` object, then execute the `llm.async_call_tool` function.
 
@@ -55,36 +73,48 @@ Example:
 
 ```python
 from homeassistant.helpers import llm
-...
-                    LOGGER.info(
-                        "Tool call: %s(%s)",
-                        tool_call.function.name,
-                        tool_call.function.arguments,
-                    )
-                    try:
-                        tool_input = llm.ToolInput(
-                            tool_name=tool_call.function.name,
-                            tool_args=json.loads(tool_call.function.arguments),
-                            platform=DOMAIN,
-                            context=user_input.context,
-                            user_prompt=user_input.text,
-                            language=user_input.language,
-                            agent_id=self.entity_id,
-                            conversation_id=user_input.conversation_id,
-                            device_id=user_input.device_id,
-                            assistant=conversation.DOMAIN,
-                        )
-                        function_response = await llm.async_call_tool(
-                            self.hass, tool_input
-                        )
-                    except Exception as e:  # pylint: disable=broad-exception-caught
-                        function_response = {"error": type(e).__name__}
-                        if str(e):
-                            function_response["error_text"] = str(e)
 
-                    LOGGER.info("Tool response: %s", function_response)
+class MyConversationEntity(
+    conversation.ConversationEntity, conversation.AbstractConversationAgent
+):
+    """Represent a conversation entity."""
+
+    async def async_process(
+        self, user_input: conversation.ConversationInput
+    ) -> conversation.ConversationResult:
+        """Process a sentence."""
+
+    while True:
+        response = ... # Get response from your LLM
+        if not response.tool_calls:
+            break
+
+        for tool_call in response.tool_calls:
+            LOGGER.info(
+                "Tool call: %s(%s)",
+                tool_call.function.name,
+                tool_call.function.arguments,
+            )
+            tool_input = llm.ToolInput(
+                tool_name=tool_call.function.name,
+                tool_args=json.loads(tool_call.function.arguments),
+                platform=DOMAIN,
+                context=user_input.context,
+                user_prompt=user_input.text,
+                language=user_input.language,
+                agent_id=self.entity_id,
+                conversation_id=user_input.conversation_id,
+                device_id=user_input.device_id,
+                assistant=conversation.DOMAIN,
+            )
+            try:
+                tool_response = await llm.async_call_tool(
+                    self.hass, tool_input
+                )
+            except (HomeAssistantError, vol.Invalid) as e:
+                tool_response = {"error": type(e).__name__}
+                if str(e):
+                    tool_response["error_text"] = str(e)
+
+            LOGGER.info("Tool response: %s", tool_response)
 ```
-
-## Step 4. Provide the response
-
-Add the tool results to the LLM inputs as per the API specification and continue to the next iteration.
