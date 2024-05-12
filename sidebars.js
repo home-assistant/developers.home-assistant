@@ -203,10 +203,7 @@ module.exports = {
     {
       type: "category",
       label: "LLM Tools",
-      items: [
-        "llm_tools",
-        "llm_tools_invocation",
-      ],
+      items: ["llm_tools_invocation"],
     },
     {
       type: "category",
