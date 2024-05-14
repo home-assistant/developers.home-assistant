@@ -9,7 +9,9 @@ Home Assistant has some conventions for handling async and non-async code in the
 - Deciding how to run a function from a helper depends on whether it is decorated with `@callback` to indicate it will not block and is safe to run in the event loop; for more details, see [Working with Async](asyncio_working_with_async).
 - Most APIs have a sync and async version when calling a function from a thread. The async APIs are prefixed with `async_`. For example, when firing an event from a thread other than the event loop, use `hass.bus.fire` instead of `hass.bus.async_fire`.
 
+:::tip
 Be sure to enable [`asyncio` debug mode](https://docs.python.org/3/library/asyncio-dev.html#debug-mode) and [Home Assistant's built-in debug mode](https://www.home-assistant.io/integrations/homeassistant/#debug) during development as many thread safety errors can be detected automatically.
+:::
 
 ## Solving thread safety errors
 
