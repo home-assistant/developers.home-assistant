@@ -162,4 +162,4 @@ The label registry must be modified in the event loop thread. There is no sync A
 
 #### label_registry.async_update
 
-The label registry must be modified in the event loop thread. There is no sync API for the label registry. Use `hass.add_job` to schedule a function in the event loop that calls `label_registry.async_updat`.
+The label registry must be modified in the event loop thread. There is no sync API for the label registry. Use `hass.add_job` to schedule a function in the event loop that calls `label_registry.async_update`.
