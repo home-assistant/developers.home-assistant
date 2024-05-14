@@ -75,3 +75,7 @@ Updating config entry must be done in the event loop thread. There is no sync AP
 #### async_dispatcher_send
 
 When calling the dispatcher from a thread other than the event loop thread, instead use `dispatcher_send`.
+
+#### async_render_to_info
+
+Templates must be rendered in the event loop thread. There is no sync API to render templates. Use `hass.add_job` to schedule a function in the event loop that calls `async_render_to_info`.
