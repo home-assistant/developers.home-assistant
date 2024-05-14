@@ -103,3 +103,23 @@ The category registry must be modified in the event loop thread. There is no syn
 #### category_registry.async_update
 
 The category registry must be modified in the event loop thread. There is no sync API for the category registry. Use `hass.add_job` to schedule a function in the event loop that calls `category_registry.async_update`.
+
+#### device_registry.async_update_device
+
+The device registry must be modified in the event loop thread. There is no sync API for the device registry. Use `hass.add_job` to schedule a function in the event loop that calls `device_registry.async_update_device`.
+
+#### device_registry.async_remove_device
+
+The device registry must be modified in the event loop thread. There is no sync API for the device registry. Use `hass.add_job` to schedule a function in the event loop that calls `device_registry.async_remove_device`.
+
+#### entity_registry.async_get_or_create
+
+The entity registry must be modified in the event loop thread. There is no sync API for the entity registry. Use `hass.add_job` to schedule a function in the event loop that calls `entity_registry.async_get_or_create`.
+
+#### entity_registry.async_remove
+
+The entity registry must be modified in the event loop thread. There is no sync API for the entity registry. Use `hass.add_job` to schedule a function in the event loop that calls `entity_registry.async_remove`.
+
+#### entity_registry.async_update_entity
+
+The entity registry must be modified in the event loop thread. There is no sync API for the entity registry. Use `hass.add_job` to schedule a function in the event loop that calls `entity_registry.async_update_entity`.
