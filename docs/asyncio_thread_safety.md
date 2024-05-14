@@ -79,3 +79,15 @@ When calling the dispatcher from a thread other than the event loop thread, inst
 #### async_render_to_info
 
 Templates must be rendered in the event loop thread. There is no sync API to render templates. Use `hass.add_job` to schedule a function in the event loop that calls `async_render_to_info`.
+
+#### area_registry.async_create
+
+The area registry must be modified in the event loop thread. There is no sync API for the area registry. Use `hass.add_job` to schedule a function in the event loop that calls `area_registry.async_create`.
+
+#### area_registry.async_delete
+
+The area registry must be modified in the event loop thread. There is no sync API for the area registry. Use `hass.add_job` to schedule a function in the event loop that calls `area_registry.async_delete`.
+
+#### area_registry.async_update
+
+The area registry must be modified in the event loop thread. There is no sync API for the area registry. Use `hass.add_job` to schedule a function in the event loop that calls `area_registry.async_update`.
