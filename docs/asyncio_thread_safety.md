@@ -17,7 +17,7 @@ Be sure to enable [`asyncio` debug mode](https://docs.python.org/3/library/async
 
 You may have reached this page because Home Assistant detected and reported a thread safety error. Beginning in version 2024.5.0, Home Assistant can detect, report, and block some non-thread-safe operations to prevent system instability. Before Home Assistant could detect these errors, they may have led to unexpected restarts or undefined behaviors, as they can corrupt the internal asyncio state. Below are some tips on how to correct non-threaded operations.
 
-### Ensuring code is run in the correct thread
+## Ensuring code is run in the correct thread
 
 ### Built-in helpers that take a callback
 
