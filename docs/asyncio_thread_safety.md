@@ -48,6 +48,8 @@ In the below example, everything will run in the event loop thread, and when `as
 
 ### Specific API calls
 
+You may find you need to call one of the async API calls from a thread other than the event loop thread. In most cases, `hass.add_job` can safely call an async API from another thread. Some helpers have specific sync APIs to use when calling from another thread. Below is a list of the most commonly called async APIs and the method to call them from another thread.
+
 #### hass.async_create_task
 
 When creating a task from a thread other than the event loop thread, instead use `hass.create_task`
