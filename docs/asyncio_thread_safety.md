@@ -29,4 +29,4 @@ When registering a services from a thread other than the event loop thread, inst
 
 ### hass.services.async_remove
 
-When registering a services from a thread other than the event loop thread, instead use `hass.services.remove`
+When removing a services from a thread other than the event loop thread, instead use `hass.services.remove`
