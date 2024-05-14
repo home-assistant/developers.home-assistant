@@ -71,3 +71,7 @@ When writing the state of an entity from a thread other than the event loop thre
 #### hass.config_entries.async_update_entry
 
 Updating config entry must be done in the event loop thread. There is no sync API to update config entries. If it is not a mistake that the calling function is running in another thread, use `hass.add_job` to schedule a function in the event loop that calls `hass.config_entries.async_update_entry`.
+
+#### async_dispatcher_send
+
+When calling the dispatcher from a thread other than the event loop thread, instead use `dispatcher_send`.
