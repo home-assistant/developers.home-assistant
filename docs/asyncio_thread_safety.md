@@ -91,3 +91,15 @@ The area registry must be modified in the event loop thread. There is no sync AP
 #### area_registry.async_update
 
 The area registry must be modified in the event loop thread. There is no sync API for the area registry. Use `hass.add_job` to schedule a function in the event loop that calls `area_registry.async_update`.
+
+#### category_registry.async_create
+
+The category registry must be modified in the event loop thread. There is no sync API for the category registry. Use `hass.add_job` to schedule a function in the event loop that calls `category_registry.async_create`.
+
+#### category_registry.async_delete
+
+The category registry must be modified in the event loop thread. There is no sync API for the category registry. Use `hass.add_job` to schedule a function in the event loop that calls `category_registry.async_delete`.
+
+#### category_registry.async_update
+
+The category registry must be modified in the event loop thread. There is no sync API for the category registry. Use `hass.add_job` to schedule a function in the event loop that calls `category_registry.async_update`.
