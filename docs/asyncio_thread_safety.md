@@ -67,3 +67,7 @@ When removing a services from a thread other than the event loop thread, instead
 #### async_write_ha_state
 
 When writing the state of an entity from a thread other than the event loop thread, instead use `self.schedule_update_ha_state`
+
+#### hass.config_entries.async_update_entry
+
+Updating config entry must be done in the event loop thread. There is no sync API to update config entries. If it is not a mistake that the calling function is running in another thread, use `hass.add_job` to schedule a function in the event loop that calls `hass.config_entries.async_update_entry`.
