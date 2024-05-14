@@ -22,7 +22,7 @@ You may have reached this page because Home Assistant detected and reported a th
 When using Home Assistant's built-in helpers such as `event.async_track_state_change_event` or `event.track_state_change_event`, it's important to call the correct API based on which thread the code runs in. If the code runs in a thread other than the event loop, use the non-`async` version.
 
 In the below example, everything will run in the event loop thread, and when `async_track_state_change_event` fires,
-`async_update_event_state_callback` will also be run in the event loop thread because it is decorated with `@callback`. If the `@callback` decorator is missing, `async_update_event_state_callback` would be run in the executor, which would make a non-thread-safe call to `async_write_ha_state.`
+`async_update_event_state_callback` will also be run in the event loop thread because it is decorated with `@callback`. If the `@callback` decorator is missing, `async_update_event_state_callback` would be run in the executor, which would make a non-thread-safe call to `async_write_ha_state`.
 
 ```python
 
@@ -63,3 +63,7 @@ When registering a services from a thread other than the event loop thread, inst
 #### hass.services.async_remove
 
 When removing a services from a thread other than the event loop thread, instead use `hass.services.remove`
+
+#### async_write_ha_state
+
+When writing the state of an entity from a thread other than the event loop thread, instead use `self.schedule_update_ha_state`
