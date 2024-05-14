@@ -136,6 +136,18 @@ The floor registry must be modified in the event loop thread. There is no sync A
 
 The floor registry must be modified in the event loop thread. There is no sync API for the floor registry. Use `hass.add_job` to schedule a function in the event loop that calls `floor_registry.async_update`.
 
+#### issue_registry.async_get_or_create
+
+The issue registry must be modified in the event loop thread. Call `issue_registry.create_issue` instead.
+
+#### issue_registry.async_delete
+
+The issue registry must be modified in the event loop thread. Call `issue_registry.delete_issue` instead.
+
+#### issue_registry.async_ignore
+
+The issue registry must be modified in the event loop thread. There is no sync API to ignore an issue in the issue registry. Use `hass.add_job` to schedule a function in the event loop that calls `issue_registry.async_ignore_issue`.
+
 #### label_registry.async_create
 
 The label registry must be modified in the event loop thread. There is no sync API for the label registry. Use `hass.add_job` to schedule a function in the event loop that calls `label_registry.async_create`.
