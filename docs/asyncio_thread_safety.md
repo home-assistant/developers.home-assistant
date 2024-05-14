@@ -123,3 +123,15 @@ The entity registry must be modified in the event loop thread. There is no sync 
 #### entity_registry.async_update_entity
 
 The entity registry must be modified in the event loop thread. There is no sync API for the entity registry. Use `hass.add_job` to schedule a function in the event loop that calls `entity_registry.async_update_entity`.
+
+#### floor_registry.async_create
+
+The floor registry must be modified in the event loop thread. There is no sync API for the floor registry. Use `hass.add_job` to schedule a function in the event loop that calls `floor_registry.async_create`.
+
+#### floor_registry.async_delete
+
+The floor registry must be modified in the event loop thread. There is no sync API for the floor registry. Use `hass.add_job` to schedule a function in the event loop that calls `floor_registry.async_delete`.
+
+#### floor_registry.async_update
+
+The floor registry must be modified in the event loop thread. There is no sync API for the floor registry. Use `hass.add_job` to schedule a function in the event loop that calls `floor_registry.async_update`.
