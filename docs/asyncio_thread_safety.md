@@ -14,4 +14,16 @@ You may have reached this page because Home Assistant detected and reported a th
 
 ### hass.async_create_task
 
-`hass.async_create_task` should only be called from the event loop thread. When creating a task from another thread, instead use `hass.create_task`
+When creating a task from a thread other than the event loop thread, instead use `hass.create_task`
+
+### hass.bus.async_fire
+
+When firing an event from a thread other than the event loop thread, instead use `hass.bus.fire`
+
+### hass.services.async_register
+
+When registering a services from a thread other than the event loop thread, instead use `hass.services.register`
+
+### hass.services.async_remove
+
+When registering a services from a thread other than the event loop thread, instead use `hass.services.remove`
