@@ -28,7 +28,7 @@ It is also possible to set up a more traditional development environment.
 
 To test your changes locally, you need to install **Ruby** and its dependencies (gems):
 
-- [Install Ruby](https://www.ruby-lang.org/en/documentation/installation/) if you don't have it already. Ruby version 2.5.0 or higher is required. Ruby version 3 is not supported yet.
+- [Install Ruby](https://www.ruby-lang.org/en/documentation/installation/) if you don't have it already. Ruby version 3.1 is required.
 - Install `bundler`, a dependency manager for Ruby: `gem install bundler` (You might have to run this command as `sudo`).
 
 - Shortcut for Fedora:
@@ -46,7 +46,7 @@ To test your changes locally, you need to install **Ruby** and its dependencies 
 - Shortcut for Mac (if the bundled Ruby doesn't work):
 
     ```shell
-    brew install ruby@2.7 && export PATH="/usr/local/opt/ruby@2.7/bin:$PATH"
+    brew install ruby@3.1 && export PATH="/usr/local/opt/ruby@3.1/bin:$PATH"
     ```
 
 
