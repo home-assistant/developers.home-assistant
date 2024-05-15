@@ -69,6 +69,7 @@ When the LLM response indicates it wants to call a tool, you need to prepare the
 Example:
 
 ```python
+from homeassistant.components import conversation
 from homeassistant.helpers import llm
 
 class MyConversationEntity(
@@ -81,34 +82,34 @@ class MyConversationEntity(
     ) -> conversation.ConversationResult:
         """Process a sentence."""
 
-    while True:
-        response = ... # Get response from your LLM
-        if not response.tool_calls:
-            break
+        while True:
+            response = ... # Get response from your LLM. Include available tools and the results of previous tool calls
+            if not response.tool_calls:
+                break
 
-        for tool_call in response.tool_calls:
-            LOGGER.info(
-                "Tool call: %s(%s)",
-                tool_call.function.name,
-                tool_call.function.arguments,
-            )
-            tool_input = llm.ToolInput(
-                tool_name=tool_call.function.name,
-                tool_args=json.loads(tool_call.function.arguments),
-                platform=DOMAIN,
-                context=user_input.context,
-                user_prompt=user_input.text,
-                language=user_input.language,
-                assistant=conversation.DOMAIN,
-            )
-            try:
-                tool_response = await llm.async_call_tool(
-                    self.hass, tool_input
+            for tool_call in response.tool_calls:
+                LOGGER.info(
+                    "Tool call: %s(%s)",
+                    tool_call.function.name,
+                    tool_call.function.arguments,
                 )
-            except (HomeAssistantError, vol.Invalid) as e:
-                tool_response = {"error": type(e).__name__}
-                if str(e):
-                    tool_response["error_text"] = str(e)
+                tool_input = llm.ToolInput(
+                    tool_name=tool_call.function.name,
+                    tool_args=json.loads(tool_call.function.arguments),
+                    platform=DOMAIN,
+                    context=user_input.context,
+                    user_prompt=user_input.text,
+                    language=user_input.language,
+                    assistant=conversation.DOMAIN,
+                )
+                try:
+                    tool_response = await llm.async_call_tool(
+                        self.hass, tool_input
+                    )
+                except (HomeAssistantError, vol.Invalid) as e:
+                    tool_response = {"error": type(e).__name__}
+                    if str(e):
+                        tool_response["error_text"] = str(e)
 
-            LOGGER.info("Tool response: %s", tool_response)
+                LOGGER.info("Tool response: %s", tool_response)
 ```
