@@ -6,7 +6,7 @@ sidebar_label: "Introduction"
 One of the foundational rules of Home Assistant is that we do not include any protocol specific code. Instead, this code should be put into a standalone Python library and published to PyPI. This guide will describe how to get started with this!
 
 ## Basic library requirements
-- The library must have source distribution packages available, it's not allowd to rely on packages which only have binary distribution packages.
+- The library must have source distribution packages available, it's not allowed to rely on packages which only have binary distribution packages.
 - Issue trackers must be enabled for external Python libraries that has communication with external devices or services.
 - If the library is mainly used for Home Assistant and you are a code owner of the integration it is encouraged to use an issue template picker with links to [Home Assistant Core Issues](https://github.com/home-assistant/core/issues). For example: [zwave-js-server-python - New Issue](https://github.com/home-assistant-libs/zwave-js-server-python/issues/new/choose)
 

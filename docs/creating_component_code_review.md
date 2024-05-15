@@ -15,12 +15,12 @@ Not all existing code follows the requirements in this checklist. This cannot be
  2. Use existing constants from [`const.py`](https://github.com/home-assistant/core/blob/dev/homeassistant/const.py)
     - Only add new constants to `const.py` if they are widely used. Otherwise keep them on components level
 
-### 1. Requirements
+### 1. External requirements
 
  1. Requirements have been added to [`manifest.json`](creating_integration_manifest.md). The `REQUIREMENTS` constant is deprecated.
  2. Requirement version should be pinned: `"requirements": ['phue==0.8.1']`
  3. We no longer want requirements hosted on GitHub. Please upload to PyPi.
- 4. The library must meet the [requirements](api_lib_index.md#basic-library-requirements).
+ 4. Each requirement meets the [library requirements](api_lib_index.md#basic-library-requirements).
 
 ### 2. Configuration
 
