@@ -21,6 +21,7 @@ Not all existing platforms follow the requirements in this checklist. This canno
 1. Requirements have been added to [`manifest.json`](creating_integration_manifest.md). The `REQUIREMENTS` constant is deprecated.
 2. Requirement version should be pinned: `"requirements": ['phue==0.8.1']`
 3. We no longer want requirements hosted on GitHub. Please upload to PyPi.
+4. The library must meet the [requirements](api_lib_index.md#basic-library-requirements).
 
 ### 2. Configuration
 
