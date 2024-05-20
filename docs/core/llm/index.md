@@ -7,7 +7,7 @@ Home Assistant can interact with large language models (LLMs). By exposing a Hom
 
 ## Built-in Assist API
 
-Home Assistant has a built-in API which exposes the Assist API to LLMs. The Assist API allows LLMs to interact with Home Assistant via [intents](../../voice/intents/index). The Assist API can be extended by registering intents.
+Home Assistant has a built-in API which exposes the Assist API to LLMs. The Assist API allows LLMs to interact with Home Assistant via [intents](../../intent_builtin). The Assist API can be extended by registering intents.
 
 The Assist API is equivalent to the capabilities and exposed entities that are also accessible to the built-in conversation agent. No administrative tasks can be performed.
 
@@ -117,20 +117,52 @@ class MyConversationEntity(conversation.ConversationEntity):
                     response=intent_response, conversation_id=user_input.conversation_id
                 )
 
-            # Format tools to the format the LLM expects
             prompt += "\n" + llm_api.prompt_template
             tools = [
-                _format_tool(tool)  # TODO implement _format_tool
+                _format_tool(tool)  # TODO format the tools as your LLM expects
                 for tool in llm_api.async_get_tools()
             ]
 
         # Interact with LLM and pass tools
-        ...
+        for _iteration in range(10):
+            response = ... # Get response from your LLM. Include available tools and the results of previous tool calls
+
+            if not response.tool_call:
+                break
+
+            LOGGER.debug(
+                "Tool call: %s(%s)",
+                response.tool_call.function.name,
+                response.tool_call.function.arguments,
+            )
+            tool_input = llm.ToolInput(
+                tool_name=response.tool_call.function.name,
+                tool_args=json.loads(response.tool_call.function.arguments),
+                platform=DOMAIN,
+                context=user_input.context,
+                user_prompt=user_input.text,
+                language=user_input.language,
+                assistant=conversation.DOMAIN,
+            )
+            try:
+                tool_response = await llm_api.async_call_tool(
+                    self.hass, tool_input
+                )
+            except (HomeAssistantError, vol.Invalid) as e:
+                tool_response = {"error": type(e).__name__}
+                if str(e):
+                    tool_response["error_text"] = str(e)
+
+            LOGGER.debug("Tool response: %s", tool_response)
 ```
 
 ## Creating your own API
 
 To create your own API, you need to create a class that inherits from `API` and implement the `async_get_tools` method. The `async_get_tools` method should return a list of `Tool` objects that represent the functionality that you want to expose to the LLM.
+
+### Tools
+
+The `llm.Tool` class represents a tool that can be called by the LLM.
 
 ```python
 from homeassistant.core import HomeAssistant
@@ -160,6 +192,46 @@ class TimeTool(llm.Tool):
             tzinfo = dt_util.DEFAULT_TIME_ZONE
 
         return dt_util.now(tzinfo).isoformat()
+```
+
+The `llm.Tool` class has the following attributes:
+
+| Name                | Type       | Description                                                                                                    |
+|---------------------|------------|----------------------------------------------------------------------------------------------------------------|
+| `name`              | string     | The name of the tool. Required.                                                                                |
+| `description`       | string     | Description of the tool to help the LLM understand when and how it should be called. Optional but recommended. |
+| `parameters`        | vol.Schema | The voluptuous schema of the parameters. Defaults to vol.Schema({})                                            |
+
+The `llm.Tool` class has the following methods:
+
+#### `async_call`
+Perform the actual operation of the tool when called by the LLM. This must be an async method. Its arguments are `hass` and an instance of `llm.ToolInput`.
+
+Response data must be a dict and serializable in JSON [`homeassistant.util.json.JsonObjectType`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/util/json.py).
+
+Errors must be raised as `HomeAssistantError` exceptions (or its subclasses). The response data should not contain error codes used for error handling.
+
+The `ToolInput` has following attributes:
+
+| Name              | Type    | Description                                                                                             |
+|-------------------|---------|---------------------------------------------------------------------------------------------------------|
+| `tool_name`       | string  | The name of the tool being called                                                                       |
+| `tool_args`       | dict    | The arguments provided by the LLM. The arguments are converted and validated using `parameters` schema. |
+| `platform`        | string  | The DOMAIN of the conversation agent using the tool                                                     |
+| `context`         | Context | The `homeassistant.core.Context` of the conversation                                                    |
+| `user_prompt`     | string  | The raw text input that initiated the tool call                                                         |
+| `language`        | string  | The language of the conversation agent, or "*" for any language                                         |
+| `assistant`       | string  | The assistant name used to control exposed entities. Currently only `conversation` is supported.        |
+
+### API
+
+The API object represents a collection of tools that will be made available to the LLM.
+
+```python
+from homeassistant.core import HomeAssistant
+from homeassistant.helper import llm
+from homeassistant.util import dt as dt_util
+from homeassistant.util.json import JsonObjectType
 
 
 class MyAPI(API):
@@ -181,3 +253,12 @@ class MyAPI(API):
             TimeTool(),
         ]
 ```
+
+The `llm.API` class has the following attributes:
+
+| Name              | Type    | Description                                                                                             |
+|-------------------|---------|---------------------------------------------------------------------------------------------------------|
+| `id`              | string  | A unique identifier for the API. Required.                                                              |
+| `name`            | string  | The name of the API. Required.                                                                          |
+| `prompt_template` | string  | A template to render the prompt to describe the tools to the LLM.             |
+
