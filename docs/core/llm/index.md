@@ -1,0 +1,183 @@
+---
+title: "Home Assistant API for Large Language Models"
+sidebar_label: "LLM API"
+---
+
+Home Assistant can interact with large language models (LLMs). By exposing a Home Assistant API to an LLM, the LLM can fetch data or control Home Assistant to better assist the user. Home Assistant comes with a built-in LLM API but custom integrations can register their own to provide more advanced functionality.
+
+## Built-in Assist API
+
+Home Assistant has a built-in API which exposes the Assist API to LLMs. The Assist API allows LLMs to interact with Home Assistant via [intents](../../voice/intents/index). The Assist API can be extended by registering intents.
+
+The Assist API is equivalent to the capabilities and exposed entities that are also accessible to the built-in conversation agent. No administrative tasks can be performed.
+
+## Supporting LLM APIs
+
+The LLM API needs to be integrated in two places in your integration. Users need to be able to configure which API should be used, and the tools offered by the API should be passed to the LLM when interacting with it.
+
+### Options Flow
+
+The chosen API should be stored in the config entry options. It should hold a string reference to the API id. If no API is selected, the key is to be omitted.
+
+In your options flow, you should offer a selector to the user to pick which API should be used.
+
+```python
+from types import MappingProxyType
+
+from homeassistant.const import CONF_LLM_HASS_API
+from homeassistant.core import HomeAssistant, callback
+from homeassistant.helpers import llm
+from homeassistant.helpers.selector import (
+    SelectOptionDict,
+    SelectSelector,
+    SelectSelectorConfig,
+)
+
+
+@callback
+def async_get_options_schema(
+    hass: HomeAssistant,
+    options: MappingProxyType[str, Any],
+) -> vol.Schema:
+    """Return the options schema."""
+    apis: list[SelectOptionDict] = [
+        SelectOptionDict(
+            label="No control",
+            value="none",
+        )
+    ]
+    apis.extend(
+        SelectOptionDict(
+            label=api.name,
+            value=api.id,
+        )
+        for api in llm.async_get_apis(hass)
+    )
+
+    return vol.Schema(
+        {
+            vol.Optional(
+                CONF_LLM_HASS_API,
+                description={"suggested_value": options.get(CONF_LLM_HASS_API)},
+                default="none",
+            ): SelectSelector(SelectSelectorConfig(options=apis)),
+        }
+    )
+```
+
+When processing the options, make sure to remove the key if the user selected `none` before storing the options.
+
+```python
+if user_input[CONF_LLM_HASS_API] == "none":
+    user_input.pop(CONF_LLM_HASS_API)
+return self.async_create_entry(title="", data=user_input)
+```
+
+### Fetching tools
+
+When interacting with the LLM, you should fetch the tools from the selected API and pass them to the LLM together with the extra prompt provided by the API.
+
+```python
+from homeassistant.const import CONF_LLM_HASS_API
+from homeassistant.core import HomeAssistant, callback
+from homeassistant.components import conversation
+from homeassistant.helpers import intent, llm
+
+
+class MyConversationEntity(conversation.ConversationEntity):
+
+    def __init__(self, entry: ConfigEntry) -> None:
+        """Initialize the agent."""
+        self.entry = entry
+
+    ...
+
+    async def async_process(
+        self, user_input: conversation.ConversationInput
+    ) -> conversation.ConversationResult:
+        """Process the user input."""
+        prompt: str = ...
+
+        intent_response = intent.IntentResponse(language=user_input.language)
+        llm_api: llm.API | None = None
+        tools: list[dict[str, Any]] | None = None
+
+        if self.entry.options.get(CONF_LLM_HASS_API):
+            try:
+                llm_api = llm.async_get_api(
+                    self.hass, self.entry.options[CONF_LLM_HASS_API]
+                )
+            except HomeAssistantError as err:
+                LOGGER.error("Error getting LLM API: %s", err)
+                intent_response.async_set_error(
+                    intent.IntentResponseErrorCode.UNKNOWN,
+                    f"Error preparing LLM API: {err}",
+                )
+                return conversation.ConversationResult(
+                    response=intent_response, conversation_id=user_input.conversation_id
+                )
+
+            # Format tools to the format the LLM expects
+            prompt += "\n" + llm_api.prompt_template
+            tools = [
+                _format_tool(tool)  # TODO implement _format_tool
+                for tool in llm_api.async_get_tools()
+            ]
+
+        # Interact with LLM and pass tools
+        ...
+```
+
+## Creating your own API
+
+To create your own API, you need to create a class that inherits from `API` and implement the `async_get_tools` method. The `async_get_tools` method should return a list of `Tool` objects that represent the functionality that you want to expose to the LLM.
+
+```python
+from homeassistant.core import HomeAssistant
+from homeassistant.helper import llm
+from homeassistant.util import dt as dt_util
+from homeassistant.util.json import JsonObjectType
+
+
+class TimeTool(llm.Tool):
+    """Tool to get the current time."""
+
+    name = "GetTime"
+    description: "Returns the current time."
+
+    # Optional. A voluptuous schema of the input parameters.
+    parameters = vol.Schema({
+      vol.Optional('timezone'): str,
+    })
+
+    async def async_call(
+        self, hass: HomeAssistant, tool_input: llm.ToolInput
+    ) -> JsonObjectType:
+        """Call the tool."""
+        if "timezone" in tool_input.tool_args:
+            tzinfo = dt_util.get_time_zone(tool_input.tool_args["timezone"])
+        else:
+            tzinfo = dt_util.DEFAULT_TIME_ZONE
+
+        return dt_util.now(tzinfo).isoformat()
+
+
+class MyAPI(API):
+    """My own API for LLMs."""
+
+    def __init__(self, hass: HomeAssistant) -> None:
+        """Init the class."""
+        super().__init__(
+            hass=hass,
+            id="my_unique_key",
+            name="My own API",
+            prompt_template="Call the tools to fetch data from the system.",
+        )
+
+    @callback
+    def async_get_tools(self) -> list[Tool]:
+        """Return a list of LLM tools."""
+        return [
+            TimeTool(),
+        ]
+```

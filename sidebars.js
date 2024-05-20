@@ -205,6 +205,7 @@ module.exports = {
       label: "Conversation",
       items: ["intent_conversation_api"],
     },
+    "core/llm/index",
     {
       type: "category",
       label: "Native App Integration",
