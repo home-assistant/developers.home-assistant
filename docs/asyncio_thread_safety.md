@@ -62,11 +62,11 @@ When firing an event from a thread other than the event loop thread, instead use
 
 #### hass.services.async_register
 
-When registering a services from a thread other than the event loop thread, instead use `hass.services.register`
+When registering a service from a thread other than the event loop thread, instead use `hass.services.register`
 
 #### hass.services.async_remove
 
-When removing a services from a thread other than the event loop thread, instead use `hass.services.remove`
+When removing a service from a thread other than the event loop thread, instead use `hass.services.remove`
 
 #### async_write_ha_state
 
