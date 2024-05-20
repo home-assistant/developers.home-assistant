@@ -12,4 +12,4 @@ Constructing `ZoneInfo` objects may do blocking I/O to load the zone info from d
 
 Examining `dt_util.DEFAULT_TIME_ZONE` directly is deprecated and `dt_util.get_default_time_zone()` should be used instead.
 
-If your integration needs to construct `ZoneInfo` objects in the event loop, it is recommended to use the (`aiozoneinfo` library)[https://pypi.org/project/aiozoneinfo/].
+If your integration needs to construct `ZoneInfo` objects in the event loop, it is recommended to use the [`aiozoneinfo` library](https://pypi.org/project/aiozoneinfo/).
