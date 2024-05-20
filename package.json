@@ -14,7 +14,7 @@
   "dependencies": {
     "@docusaurus/core": "^2.2.0",
     "@docusaurus/preset-classic": "^2.4.3",
-    "@docusaurus/theme-mermaid": "^2.4.3",
+    "@docusaurus/theme-mermaid": "^3.3.2",
     "@easyops-cn/docusaurus-search-local": "^0.36.0",
     "by-node-env": "^2.0.1",
     "clsx": "^2.1.1",
