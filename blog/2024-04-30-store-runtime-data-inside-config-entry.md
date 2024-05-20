@@ -15,7 +15,7 @@ An example could look like this:
 # <integration>/__init__.py
 
 # The type alias needs to be suffixed with 'ConfigEntry'
-MyConfigEntry = ConfigEntry["MyData"]
+type MyConfigEntry = ConfigEntry[MyData]
 
 @dataclass
 class MyData:
