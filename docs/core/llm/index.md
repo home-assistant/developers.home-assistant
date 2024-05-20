@@ -7,7 +7,7 @@ Home Assistant can interact with large language models (LLMs). By exposing a Hom
 
 ## Built-in Assist API
 
-Home Assistant has a built-in API which exposes the Assist API to LLMs. The Assist API allows LLMs to interact with Home Assistant via [intents](../../intent_builtin). The Assist API can be extended by registering intents.
+Home Assistant has a built-in API which exposes the Assist API to LLMs. This API allows LLMs to interact with Home Assistant via [intents](../../intent_builtin), and can be extended by registering intents.
 
 The Assist API is equivalent to the capabilities and exposed entities that are also accessible to the built-in conversation agent. No administrative tasks can be performed.
 
@@ -17,7 +17,7 @@ The LLM API needs to be integrated in two places in your integration. Users need
 
 ### Options Flow
 
-The chosen API should be stored in the config entry options. It should hold a string reference to the API id. If no API is selected, the key is to be omitted.
+The chosen API should be stored in the config entry options. It should hold a string reference to the API id. If no API is selected, the key must be omitted.
 
 In your options flow, you should offer a selector to the user to pick which API should be used.
 
