@@ -143,6 +143,7 @@ class MyConversationEntity(conversation.ConversationEntity):
                 user_prompt=user_input.text,
                 language=user_input.language,
                 assistant=conversation.DOMAIN,
+                device_id=user_input.device_id,
             )
             try:
                 tool_response = await llm_api.async_call_tool(
@@ -222,6 +223,7 @@ The `ToolInput` has following attributes:
 | `user_prompt`     | string  | The raw text input that initiated the tool call                                                         |
 | `language`        | string  | The language of the conversation agent, or "*" for any language                                         |
 | `assistant`       | string  | The assistant name used to control exposed entities. Currently only `conversation` is supported.        |
+| `device_id`       | string  | The device_id of the device the user used to initiate the conversation.                                 |
 
 ### API
 
