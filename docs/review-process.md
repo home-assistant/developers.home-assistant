@@ -31,7 +31,7 @@ or even just a "I tested this using ... and it works" is very much appreciated.
 Besides, looking at code of others is a great way to learn more about
 Home Assistant.
 
-## Before creating your code PR
+## Before creating your core PR
 
 **Comply with Architectural Decisions.**
 
