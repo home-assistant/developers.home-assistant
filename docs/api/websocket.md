@@ -466,7 +466,7 @@ The server will respond with a result message containing the current registered 
 }
 ```
 
-## Pings and Pongs
+## Pings and pongs
 
 The API supports receiving a ping from the client and returning a pong. This serves as a heartbeat to ensure the connection is still alive:
 

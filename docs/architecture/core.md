@@ -1,5 +1,5 @@
 ---
-title: Core Architecture
+title: Core architecture
 sidebar_label: Core
 ---
 
