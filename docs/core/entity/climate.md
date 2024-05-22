@@ -1,5 +1,5 @@
 ---
-title: Climate Entity
+title: Climate entity
 sidebar_label: Climate
 ---
 
@@ -52,7 +52,7 @@ enum. If you want another mode, add a preset instead.
 | `HVACMode.DRY`       | The device is set to dry/humidity mode.                             |
 | `HVACMode.FAN_ONLY`  | The device only has the fan on. No heating or cooling taking place. |
 
-### HVAC Action
+### HVAC action
 
 The HVAC action describes the _current_ action. This is different from the mode, because if a device is set to heat, and the target temperature is already achieved, the device will not be actively heating anymore. It is only allowed to use the built-in HVAC actions, provided by the `HVACAction` enum.
 
@@ -109,7 +109,7 @@ The device fan can have different swing modes that it wants the user to know abo
 | `SWING_HORIZONTAL` | The fan is swinging horizontal.                   |
 | `SWING_BOTH`       | The fan is swinging both horizontal and vertical. |
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `ClimateEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.

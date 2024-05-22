@@ -1,5 +1,5 @@
 ---
-title: Fan Entity
+title: Fan entity
 sidebar_label: Fan
 ---
 
@@ -21,7 +21,7 @@ Properties should always only return information from memory and not do I/O (lik
 | preset_modes       | <code>list[str] &#124; None</code> | `None` | The list of supported preset_modes. This is an arbitrary list of str and should not contain any speeds. |
 | speed_count        | `int`                              | 100    | The number of speeds the fan supports.                                                                  |
 
-### Preset Modes
+### Preset modes
 
 A fan may have preset modes that automatically control the percentage speed or other functionality. Common examples include `auto`, `smart`, `whoosh`, `eco`, and `breeze`. If no preset mode is set, the `preset_mode` property must be set to `None`.
 
@@ -29,7 +29,7 @@ Preset modes should not include named (manual) speed settings as these should be
 
 Manually setting a speed must disable any set preset mode. If it is possible to set a percentage speed manually without disabling the preset mode, create a switch or service to represent the mode.
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `FanEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.

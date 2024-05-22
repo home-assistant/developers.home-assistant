@@ -1,5 +1,5 @@
 ---
-title: Calendar Entity
+title: Calendar entity
 sidebar_label: Calendar
 ---
 
@@ -37,7 +37,7 @@ Assistant timezone. An entity should call `homeassistant.util.dt.now` to get the
 current time which has a `tzinfo` value set to the HomeAssistant timezone or examine
 `homeassistant.components.util.dt.DEFAULT_TIMEZONE`
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `CalendarEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.
@@ -50,7 +50,7 @@ and are combined using the bitwise or (`|`) operator.
 
 ## Methods
 
-### Get Events
+### Get events
 
 A calendar entity can return events that occur during a particular time range. Some notes for implementors:
 
@@ -80,7 +80,7 @@ class MyCalendar(CalendarEntity):
         """Return calendar events within a datetime range."""
 ```
 
-### Create Events
+### Create events
 
 A calendar entity may support creating events by specifying the `CREATE_EVENT` supported feature. Integrations that support mutation must handle rfc5545 fields and best practices such as preserving any new unknown fields that are set and recurring events.
 
@@ -93,7 +93,7 @@ class MyCalendar(CalendarEntity):
         """Add a new event to calendar."""
 ```
 
-### Delete Events
+### Delete events
 
 A calendar entity may support deleting events by specifying the `DELETE_EVENT` supported feature. Integrations that support mutation must support rfc5545 recurring events.
 
@@ -118,7 +118,7 @@ class MyCalendar(CalendarEntity):
         """Delete an event on the calendar."""
 ```
 
-### Update Events
+### Update events
 
 A calendar entity may support updating events by specifying the `UPDATE_EVENT` supported feature. Integrations that support mutation must support rfc5545 recurring events.
 

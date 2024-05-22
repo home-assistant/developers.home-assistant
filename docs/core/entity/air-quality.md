@@ -1,6 +1,6 @@
 ---
-title: Air Quality Entity
-sidebar_label: Air Quality
+title: Air quality entity
+sidebar_label: Air quality
 ---
 
 ## Properties

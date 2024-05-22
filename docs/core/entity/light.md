@@ -1,5 +1,5 @@
 ---
-title: Light Entity
+title: Light entity
 sidebar_label: Light
 ---
 
@@ -25,7 +25,7 @@ A light entity controls the brightness, hue and saturation color value, white va
 | supported_color_modes | <code>set[ColorMode] &#124; None</code>                 | `None` | Flag supported color modes.
 | xy_color              | <code>tuple[float, float] &#124; None</code>            | `None` | The xy color value (float, float). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.XY` and ignored otherwise.
 
-## Color Modes
+## Color modes
 
 New integrations must implement both `color_mode` and `supported_color_modes`. If an integration is upgraded to support color mode, both `color_mode` and `supported_color_modes` should be implemented.
 
@@ -75,7 +75,7 @@ There are two white color modes, `ColorMode.COLOR_TEMP` and `ColorMode.WHITE`. T
 A lamp with adjustable color temperature is typically implemented by at least two banks of LEDs, with different color temperature, typically one bank of warm-white LEDs and one bank of cold-white LEDs.
 A light with non-adjustable color temperature typically only has a single bank of white LEDs.
 
-### Color Mode when rendering effects
+### Color mode when rendering effects
 
 When rendering an effect, the `color_mode` should be set according to the adjustments supported by the
 effect. If the effect does not support any adjustments, the `color_mode` should be set to `ColorMode.ONOFF`.
@@ -86,7 +86,7 @@ indicated by the `supported_color_mode` property:
  - A light which supports colors is allowed to set color_mode to `ColorMode.ONOFF` or `ColorMode.BRIGHTNESS` when controlled by an effect
  - A light which supports brightness is allowed to set color_mode to `ColorMode.ONOFF` when controlled by an effect
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `LightEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.
@@ -99,7 +99,7 @@ and are combined using the bitwise or (`|`) operator.
 
 ## Methods
 
-### Turn on Light Device
+### Turn on light device
 
 ```python
 class MyLightEntity(LightEntity):
