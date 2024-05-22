@@ -29,7 +29,7 @@ related:
 
 Content... Written in markdown.
 
-### Title Header
+### Title header
 ...
 ```
 
@@ -97,7 +97,7 @@ required: any string here #=> Any string here
 
 - **`type:`**: The type of the variable. Allowed entries: `action`, `boolean`, `string`, `integer`, `float`, `time`, `template`, `device_class`, `icon`, `map`/`list` (for a list of entries), `date`, `datetime`, `selector`, and `any`. For multiple possibilities use `[string, integer]`. If you use `map`/`list` then should define `keys:` (see the [`template` sensor](https://www.home-assistant.io/integrations/sensor.template/) for an example). If you use `boolean`, then `default:` must be defined. 
 
-### Embedding Code
+### Embedding code
 
 You can use the [default markdown syntax](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#code) to generate syntax highlighted code. For inline code wrap your code in back-ticks.
 
@@ -144,6 +144,6 @@ Other images, displayed on the pages, are stored in various directories accordin
 | blog        | source/images/blog        |
 | screenshots | source/images/integration |
 
-### Linking From The Sidebar
+### Linking from the sidebar
 
 If you are adding a new page that requires linking from the sidebar, you need to edit the `docs_navigation.html` file in `source/_includes/asides/docs_navigation.html`.
