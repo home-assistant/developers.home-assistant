@@ -1,7 +1,7 @@
 ---
 author: G Johansson
 authorURL: https://github.com/gjohansson-ST
-title: Alarm Control Panel Entity default code and validation
+title: Alarm Control Panel Entity code validation
 ---
 
 The `AlarmControlPanelEntity` is now enforcing validation of code so for integrations that are creating such entities and are setting `code_arm_required` to `True` (default behavior). The validation will fail unless the user is actually providing a code.
