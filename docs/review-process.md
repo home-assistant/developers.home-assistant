@@ -38,7 +38,7 @@ Home Assistant.
 All architectural decisions around the Home Assistant project are recorded in
 the [ADR folder](https://github.com/home-assistant/architecture/tree/master/adr).
 Ensure these rules and guidelines are followed before creating your PR
-to avoid later adjustments based on your code PR not following these rules.
+to avoid later adjustments based on your core PR not following these rules.
 If needed a new [discussion](https://github.com/home-assistant/architecture/discussions) can take place to make the necessary decision prior to submitting a PR for review.
 
 ## Creating the perfect PR
