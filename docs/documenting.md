@@ -22,7 +22,7 @@ The easiest way to get started with development is to use Visual Studio Code wit
 
 To review the changes, open the command palette and choose ´Tasks: Run Task´ and then ´Preview´.
 
-### Manual Environment
+### Manual environment
 
 It is also possible to set up a more traditional development environment.
 

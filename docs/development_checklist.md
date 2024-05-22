@@ -1,5 +1,5 @@
 ---
-title: "Development Checklist"
+title: "Development checklist"
 sidebar_label: Introduction
 ---
 

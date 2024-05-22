@@ -1,5 +1,5 @@
 ---
-title: Config Flow
+title: Config flow
 ---
 
 Integrations can be set up via the user interface by adding support for a config flow to create a config entry. Components that want to support config entries will need to define a Config Flow Handler. This handler will manage the creation of entries from user input, discovery or other sources (like Home Assistant OS).
@@ -102,7 +102,7 @@ if device_unique_id:
 await self._async_handle_discovery_without_unique_id()
 ```
 
-### Unique ID Requirements
+### Unique ID requirements
 
 A unique ID is used to match a config entry to the underlying device or API. The unique ID must be stable, should not be able to be changed by the user and must be a string.
 
@@ -215,7 +215,7 @@ Translations for the config flow handlers are defined under the `config` key in 
 
 When the translations are merged into Home Assistant, they will be automatically uploaded to [Lokalise](https://lokalise.co/) where the translation team will help to translate them in other languages. While developing locally, you will need to run `python3 -m script.translations develop` to see changes made to `strings.json` [More info on translating Home Assistant.](translations.md)
 
-## Config Entry Migration
+## Config entry migration
 
 As mentioned above - each Config Entry has a version assigned to it. This is to be able to migrate Config Entry data to new formats when Config Entry schema changes.
 

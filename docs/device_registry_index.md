@@ -1,5 +1,5 @@
 ---
-title: Device Registry
+title: Device registry
 ---
 
 The device registry is a registry where Home Assistant keeps track of devices. A device is represented in Home Assistant via one or more entities. For example, a battery-powered temperature and humidity sensor might expose entities for temperature, humidity and battery level.
@@ -75,7 +75,7 @@ class HueLight(LightEntity):
 
 Besides device properties, `device_info` can also include `default_manufacturer`, `default_model`, `default_name`. These values will be added to the device registry if no other value is defined just yet. This can be used by integrations that know some information but not very specific. For example, a router that identifies devices based on MAC addresses.
 
-### Manual Registration
+### Manual registration
 
 Components are also able to register devices in the case that there are no entities representing them. An example is a hub that communicates with the lights.
 
@@ -113,7 +113,7 @@ When the user clicks the delete device button for the device and confirms it, `a
 
 In `async_remove_config_entry_device` the integration should take the necessary steps to prepare for device removal and return `True` if successful. The integration may optionally act on `EVENT_DEVICE_REGISTRY_UPDATED` if that's more convenient than doing the cleanup in `async_remove_config_entry_device`.
 
-## Categorizing to Device Info
+## Categorizing to device info
 
 Device info is categorized into Link, Primary and Secondary by finding the first device info type which has all the keys of the device info.
 

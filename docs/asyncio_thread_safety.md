@@ -1,5 +1,5 @@
 ---
-title: "Thread Safety with asyncio"
+title: "Thread safety with asyncio"
 ---
 
 Developing with asyncio requires careful attention to thread safety, as nearly all asyncio objects are not thread-safe. If you are just getting started with asyncio, review Python's documentation on [Developing with asyncio](https://docs.python.org/3/library/asyncio-dev.html) for tips to avoid pitfalls. 

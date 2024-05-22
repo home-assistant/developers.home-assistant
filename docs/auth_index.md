@@ -32,7 +32,7 @@ The user that is created during onboarding will be marked as "owner". The owner 
 
 Users are a member of one or more groups. Group membership is how a user is granted permissions.
 
-## Permission Policy
+## Permission policy
 
 This is the permission policy that describes to which resources a group has access. For more information about permissions and policies, see [Permissions](auth_permissions.md).
 
