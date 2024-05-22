@@ -1,8 +1,8 @@
 ---
-title: "Backend Localization"
+title: "Backend localization"
 ---
 
-## Translation Strings
+## Translation strings
 
 Platform translation strings are stored as JSON in the [core](https://github.com/home-assistant/core) repository. These files must be located adjacent to the component/platform they belong to. Components must have their own directory, and the file is simply named `strings.json` in that directory. This file will contain the different strings that will be translatable.
 
@@ -26,7 +26,7 @@ The `strings.json` contains translations for different things that the integrati
 
 This category is just a string: the translation of the integration name. This key is optional and Home Assistant will fallback to the integration name if it is omitted. Only include this if it's not a product brand.
 
-### Config / Options
+### Config / options
 
 The translation strings for the configuration flow handler and the option flow handler are defined under the `config` and `options` keys respectively. An example strings file below describes the different supported keys. Although the example shows translations for a configuration flow, the translations for an option flow is exactly the same.
 

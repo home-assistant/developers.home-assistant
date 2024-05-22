@@ -1,25 +1,24 @@
 ---
-title: "Contributing Your Voice"
+title: "Contributing your voice"
 ---
 
-You can help us and the rest of the  open voice community develop **Speech-to-Text** and **Text-to-Speech** models for your language.
+You can help us and the rest of the  open voice community develop **speech-to-text** and **text-to-speech** models for your language.
 
-
-## Speech to Text
+## Speech-to-text
 
 When you speak to a computer, it **transcribes** the audio from your voice into text. There are many ways to do this, but they all rely on recordings of people speaking.
 
-For speech to text, it is important to have:
+For speech-to-text, it is important to have:
 
 * Many different speakers and accents
 * A variety of recording devices and quality levels
     * Typically 16Khz audio with 16-bit samples
 * Multiple recording environments, including different rooms and noise levels
 
-We recommend that users contribute to [Mozilla's Common Voice](https://commonvoice.mozilla.org) project for speech to text. This free and open dataset crowd sources spoken sentences from people around the world. Contributors may also help by validating existing recordings.
+We recommend that users contribute to [Mozilla's Common Voice](https://commonvoice.mozilla.org) project for speech-to-text. This free and open dataset crowd sources spoken sentences from people around the world. Contributors may also help by validating existing recordings.
 
 
-## Text to Speech
+## Text-to-speech
 
 When a computer speaks to you, it **synthesizes** audio from text. This has different requirements than a speech to text dataset:
 

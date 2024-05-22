@@ -1,5 +1,5 @@
 ---
-title: "Supervisor Development"
+title: "Supervisor development"
 sidebar_label: "Development"
 ---
 
@@ -111,7 +111,7 @@ script/develop
 
 While `script/develop` is running, the Supervisor panel will be rebuilt whenever you make changes to the source files.
 
-## Supervisor API Access
+## Supervisor API access
 
 To develop for the `hassio` integration and the Supervisor panel, we're going to need API access to the supervisor. This API is protected by a token that we can extract using a special add-on. This can be done on a running system or with the [devcontainer](#local-testing).
 
