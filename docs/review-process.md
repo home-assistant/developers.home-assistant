@@ -31,14 +31,14 @@ or even just a "I tested this using ... and it works" is very much appreciated.
 Besides, looking at code of others is a great way to learn more about
 Home Assistant.
 
-## Before creating your PR
+## Before creating your code PR
 
 **Comply with Architectural Decisions.**
 
 All architectural decisions around the Home Assistant project are recorded in
 the [ADR folder](https://github.com/home-assistant/architecture/tree/master/adr).
 Ensure these rules and guidelines are followed before creating your PR
-to avoid later adjustments based on your PR not following these rules.
+to avoid later adjustments based on your code PR not following these rules.
 If needed a new [discussion](https://github.com/home-assistant/architecture/discussions) can take place to make the necessary decision prior to submitting a PR for review.
 
 ## Creating the perfect PR
