@@ -1,5 +1,5 @@
 ---
-title: Entity Registry
+title: Entity registry
 ---
 
 The entity registry is a registry where Home Assistant keeps track of entities. Any entity that is added to Home Assistant which specifies the [`unique_id` attribute](/core/entity.md#generic-properties) will be registered in the registry.
