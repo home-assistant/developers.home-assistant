@@ -15,7 +15,7 @@ The Assist API is equivalent to the capabilities and exposed entities that are a
 
 The LLM API needs to be integrated in two places in your integration. Users need to be able to configure which API should be used, and the tools offered by the API should be passed to the LLM when interacting with it.
 
-### Options Flow
+### Options flow
 
 The chosen API should be stored in the config entry options. It should hold a string reference to the API id. If no API is selected, the key must be omitted.
 

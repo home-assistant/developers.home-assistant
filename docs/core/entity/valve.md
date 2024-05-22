@@ -1,5 +1,5 @@
 ---
-title: Valve Entity
+title: Valve entity
 sidebar_label: Valve
 ---
 
@@ -19,7 +19,7 @@ Properties should always only return information from memory and not do I/O (lik
 | is_opening | <code>bool &#124; None</code> | `None` | If the valve is opening or not. Used to determine `state`.
 | reports_position | <code>bool</code> | **Required** | If the valve knows its position or not.
 
-### Device Classes
+### Device classes
 
 | Constant | Description
 |----------|-----------------------|
@@ -36,7 +36,7 @@ Properties should always only return information from memory and not do I/O (lik
 | `STATE_CLOSING` | The valve is in the process of closing to reach a set position.
 | `STATE_CLOSED` | The valve has reach the closed position.
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `ValveEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.

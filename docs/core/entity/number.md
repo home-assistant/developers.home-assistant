@@ -1,5 +1,5 @@
 ---
-title: Number Entity
+title: Number entity
 sidebar_label: Number
 ---
 

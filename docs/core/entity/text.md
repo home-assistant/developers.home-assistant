@@ -1,5 +1,5 @@
 ---
-title: Text Entity
+title: Text entity
 sidebar_label: Text
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: Notify Entity
+title: Notify entity
 sidebar_label: Notify
 ---
 
