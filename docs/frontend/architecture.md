@@ -1,5 +1,5 @@
 ---
-title: "Frontend Architecture"
+title: "Frontend architecture"
 sidebar_label: "Architecture"
 ---
 
@@ -35,7 +35,7 @@ Folder: `src/dialogs`
 
 Certain information and data entry is presented to users in flows. Dialogs can be triggered on any page. The most common one is the entity more info dialog, which allows users to dig into an entity's state, history, and settings.
 
-## Data Flow
+## Data flow
 
 The frontend leverages the [Websocket API](api/websocket.md) and the [Rest API](api/rest.md) to interact with Home Assistant.
 
