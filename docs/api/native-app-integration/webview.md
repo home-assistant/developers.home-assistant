@@ -1,5 +1,5 @@
 ---
-title: "Authenticated webview"
+title: "Authenticated Webview"
 ---
 
 Your application already asked the user to authenticate. This means that your app should not ask the user to authenticate again when they open the Home Assistant UI.
