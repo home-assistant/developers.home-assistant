@@ -1,12 +1,12 @@
 ---
-title: Data Entry Flow
+title: Data entry flow
 ---
 
 Data Entry Flow is a data entry framework that is part of Home Assistant. Data entry is done via data entry flows. A flow can represent a simple login form or a multi-step setup wizard for a component. A Flow Manager manages all flows that are in progress and handles creation of new flows.
 
 Data Entry Flow is used in Home Assistant to login, create config entries, handle options flow, repair issues.
 
-## Flow Manager
+## Flow manager
 
 This is the class that manages the flows that are in progress. When instantiating one, you pass in two async callbacks:
 
@@ -80,7 +80,7 @@ If the result type is `FlowResultType.ABORT`, the result should look like:
 }
 ```
 
-## Flow Handler
+## Flow handler
 
 Flow handlers will handle a single flow. A flow contains one or more steps. When a flow is instantiated, the `FlowHandler.init_step` step will be called. Each step has several possible results:
 
@@ -114,7 +114,7 @@ Data entry flows depend on translations for showing the text in the steps. It de
 
 For a more detailed explanation of `strings.json` see the [backend translation](/docs/internationalization/core) page.
 
-### Show Form
+### Show form
 
 This result type will show a form to the user to fill in. You define the current step, the schema of the data (using a mixture of voluptuous and/or [selectors](https://www.home-assistant.io/docs/blueprint/selectors/)) and optionally a dictionary of errors.
 
@@ -139,7 +139,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         return self.async_show_form(step_id="init", data_schema=vol.Schema(data_schema))
 ```
 
-#### Labels & Descriptions
+#### Labels & descriptions
 
 Translations for the form are added to `strings.json` in a key for the `step_id`. That object may contain the folowing keys:
 
@@ -171,7 +171,7 @@ The field labels and descriptions are given as a dictionary with keys correspond
 }
 ```
 
-#### Enabling Browser Autofill
+#### Enabling browser autofill
 
 Suppose your integration is collecting form data which can be automatically filled by browsers or password managers, such as login credentials or contact information. You should enable autofill whenever possible for the best user experience and accessibility. There are two options to enable this.
 
@@ -208,7 +208,7 @@ STEP_USER_DATA_SCHEMA = vol.Schema(
 )
 ```
 
-#### Defaults & Suggestions
+#### Defaults & suggestions
 
 If you'd like to pre-fill data in the form, you have two options. The first is to use the `default` parameter. This will both pre-fill the field, and act as the default value in case the user leaves the field empty.
 
@@ -300,7 +300,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         ...
 ```
 
-### Create Entry
+### Create entry
 
 When the result is "Create Entry", an entry will be created and passed to the parent of the flow manager. A success message is shown to the user and the flow is finished. You create an entry by passing a title, data and optionally options. The title can be used in the UI to indicate to the user which entry it is. Data and options can be any data type, as long as they are JSON serializable. Options are used for mutable data, for example a radius. Whilst Data is used for immutable data that isn't going to change in an entry, for example location data.
 
@@ -331,7 +331,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         return self.async_abort(reason="not_supported")
 ```
 
-### External Step & External Step Done
+### External step & external step done
 
 It is possible that a user needs to finish a config flow by doing actions on an external website. For example, setting up an integration by being redirected to an external webpage. This is commonly used by integrations that use OAuth2 to authorize a user.
 
@@ -393,7 +393,7 @@ async def handle_result(hass, flow_id, data):
         return "Invalid config flow specified"
 ```
 
-### Show Progress & Show Progress Done
+### Show progress & show progress done
 
 If a data entry flow step needs a considerable amount of time to finish, we should inform the user about this.
 
@@ -453,7 +453,7 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return self.async_create_entry(title="Some title", data={})
 ```
 
-### Show Menu
+### Show menu
 
 This will show a navigation menu to the user to easily pick the next step. The menu labels can be hardcoded by specifying a dictionary of {`step_id`: `label`} or translated via `strings.json` when specifying a list.
 

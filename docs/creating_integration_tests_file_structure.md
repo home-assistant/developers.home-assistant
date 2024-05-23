@@ -1,6 +1,6 @@
 ---
-title: "Integration Tests File Structure"
-sidebar_label: "Tests File Structure"
+title: "Integration tests file structure"
+sidebar_label: "Tests file structure"
 ---
 
 Tests for each integration are stored inside a directory named after the integration domain. For example, tests for the mobile app integration should be stored in `tests/components/mobile_app`.

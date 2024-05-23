@@ -1,5 +1,5 @@
 ---
-title: "Device Conditions"
+title: "Device conditions"
 sidebar_label: Conditions
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Integration Manifest"
+title: "Integration manifest"
 sidebar_label: "Manifest"
 ---
 
@@ -51,7 +51,7 @@ For core integrations, this should be omitted.
 
 The version of the integration is required for custom integrations. The version needs to be a valid version recognized by [AwesomeVersion](https://github.com/ludeeus/awesomeversion) like [CalVer](https://calver.org/) or [SemVer](https://semver.org/).
 
-## Integration Type
+## Integration type
 
 Integrations are split into multiple integration types. Each integration
 must provide an `integration_type` in their manifest, that describes its main
@@ -85,7 +85,7 @@ or service per config entry.
 
 The website containing documentation on how to use your integration. If this integration is being submitted for inclusion in Home Assistant, it should be `https://www.home-assistant.io/integrations/<domain>`
 
-## Issue Tracker
+## Issue tracker
 
 The issue tracker of your integration, where users reports issues if they run into one.
 If this integration is being submitted for inclusion in Home Assistant, it should be omitted. For built-in integrations, Home Assistant will automatically generate the correct link.
@@ -102,11 +102,11 @@ This option is used to specify dependencies that might be used by the integratio
 
 Built-in integrations shall only specify other built-in integrations in `after_dependencies`. Custom integrations may specify both built-in and custom integrations in `after_dependencies`.
 
-## Code Owners
+## Code owners
 
 GitHub usernames or team names of people that are responsible for this integration. You should add at least your GitHub username here, as well as anyone who helped you to write code that is being included.
 
-## Config Flow
+## Config flow
 
 Specify the `config_flow` key if your integration has a config flow to create a config entry. When specified, the file `config_flow.py` needs to exist in your integration.
 
@@ -401,7 +401,7 @@ For example:
 }
 ```
 
-## Integration Quality Scale
+## Integration quality scale
 
 The [Integration Quality Scale](https://www.home-assistant.io/docs/quality_scale/) scores an integration on the code quality and user experience. Each level of the quality scale consists of a list of requirements. If an integration matches all requirements, it's considered to have reached that level.
 
@@ -415,9 +415,9 @@ We highly recommend getting your integration scored.
 }
 ```
 
-## IoT Class
+## IoT class
 
-The [IoT Class][iot_class] describes how an integration connects with, e.g., a device or service. For more information
+The [IoT class][iot_class] describes how an integration connects with, e.g., a device or service. For more information
 about IoT Classes, read the blog about ["Classifying the Internet of Things"][iot_class].
 
 The following IoT classes are accepted in the manifest:

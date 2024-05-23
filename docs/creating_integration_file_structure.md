@@ -1,6 +1,6 @@
 ---
-title: "Integration File Structure"
-sidebar_label: "File Structure"
+title: "Integration file structure"
+sidebar_label: "File structure"
 ---
 
 Each integration is stored inside a directory named after the integration domain. The domain is a short name consisting of characters and underscores. This domain has to be unique and cannot be changed. Example of the domain for the mobile app integration: `mobile_app`. So all files for this integration are in the folder `mobile_app/`.
