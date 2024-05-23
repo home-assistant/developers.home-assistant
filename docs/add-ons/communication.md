@@ -1,5 +1,5 @@
 ---
-title: "Add-On Communication"
+title: "Add-on communication"
 ---
 
 There are different ways of communicating between add-ons inside Home Assistant.

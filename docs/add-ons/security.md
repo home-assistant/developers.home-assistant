@@ -4,11 +4,11 @@ title: "Add-on security"
 
 Home Assistant rates every add-on based on the wanted rights. An add-on with a rating of 6 is very secure. If an add-on has a rating of 1, you shouldn't run this add-on unless you are 100% sure that you can trust the source.
 
-## API Role
+## API role
 
 For access to the Supervisor API you need to define a role or run in default mode. This is only required for the Supervisor API and not the Home Assistant proxy. All of the roles already have access to the default API calls, and do not require any additional settings.
 
-### Available Roles
+### Available roles
 
 | Role | Description |
 |------|-------------|
@@ -36,7 +36,7 @@ As a developer, follow the following best practices to make your add-on secure:
 - If you need any API access, make sure that you do not grant permission that aren't needed
 - Sign the image with [Codenotary CAS](https://cas.codenotary.com/)
 
-## Use Home Assistant User backend
+## Use Home Assistant user backend
 
 Instead of allowing users to set new login credentials in plain text config, use the Home Assistant [Auth backend](/docs/api/supervisor/endpoints#auth). You can enable the access to the API with `auth_api: true`. Now you are able to send the login credentials to the auth backend and validate them in Home Assistant.
 
