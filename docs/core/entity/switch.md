@@ -1,5 +1,5 @@
 ---
-title: Switch Entity
+title: Switch entity
 sidebar_label: Switch
 ---
 
@@ -17,7 +17,7 @@ Properties should always only return information from memory and not do I/O (lik
 | ---- | ---- | ------- | -----------
 | is_on | boolean | `None` | If the switch is currently on or off.
 
-## Deprecated Properties
+## Deprecated properties
 
 The following properties are deprecated and should not be used by new integrations. Provide them as sensors instead.
 
@@ -28,7 +28,7 @@ Name | Type | Default | Description
 
 ## Methods
 
-### Turn On
+### Turn on
 
 Turn the switch on.
 
@@ -43,7 +43,7 @@ class MySwitch(SwitchEntity):
         """Turn the entity on."""
 ```
 
-### Turn Off
+### Turn off
 
 Turn the switch off.
 

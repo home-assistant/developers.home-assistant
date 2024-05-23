@@ -1,5 +1,5 @@
 ---
-title: Time Entity
+title: Time entity
 sidebar_label: Time
 ---
 

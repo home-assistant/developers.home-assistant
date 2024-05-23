@@ -1,5 +1,5 @@
 ---
-title: Scene Entity
+title: Scene entity
 sidebar_label: Scene
 --- 
 

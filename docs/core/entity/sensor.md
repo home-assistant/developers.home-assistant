@@ -1,5 +1,5 @@
 ---
-title: Sensor Entity
+title: Sensor entity
 sidebar_label: Sensor
 ---
 
