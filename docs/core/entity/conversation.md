@@ -1,5 +1,5 @@
 ---
-title: Conversation Entity
+title: Conversation entity
 sidebar_label: Conversation
 ---
 

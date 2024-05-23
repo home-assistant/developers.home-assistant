@@ -1,6 +1,6 @@
 ---
-title: Media Player Entity
-sidebar_label: Media Player
+title: Media player entity
+sidebar_label: Media player
 ---
 
 :::info Incomplete
@@ -49,7 +49,7 @@ Properties should always only return information from memory and not do I/O (lik
 | volume_level                    | <code>float &#124; None</code>                  | `None`  | Volume level of the media player in the range (0..1).
 | volume_step                     | <code>float &#124; None</code>                  | 0.1     | Volume step to use for the `volume_up` and `volume_down` services.
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `MediaPlayerEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.
@@ -94,7 +94,7 @@ The state of a media player is defined by using values in the `MediaPlayerState`
 
 ## Methods
 
-### Play Media
+### Play media
 
 Tells the media player to play media. Implement it using the following:
 
@@ -130,7 +130,7 @@ The `enqueue` attribute is a string enum `MediaPlayerEnqueue`:
 
 When the `announce` boolean attribute is set to `true`, the media player should try to pause the current music, announce the media to the user and then resume the music.
 
-### Browse Media
+### Browse media
 
 If the media player supports browsing media, it should implement the following method:
 
