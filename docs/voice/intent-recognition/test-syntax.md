@@ -1,6 +1,6 @@
 ---
-title: "Intent Matching Test Syntax"
-sidebar_label: "Test Syntax"
+title: "Intent matching test syntax"
+sidebar_label: "Test syntax"
 ---
 
 To ensure that the template sentences work as expected, we have an extensive test suite. This test suite is based on YAML files that contain a list of input sentences and the expected matched intent and slots.

@@ -1,5 +1,5 @@
 ---
-title: "Board Metadata"
+title: "Board metadata"
 sidebar_label: Metadata
 ---
 

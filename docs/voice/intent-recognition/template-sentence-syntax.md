@@ -1,5 +1,5 @@
 ---
-title: "Template Sentence Syntax"
+title: "Template sentence syntax"
 ---
 
 Template sentences are defined in YAML files using the format of [Hassil, our template matcher](https://github.com/home-assistant/hassil). Our template sentences are stored [on GitHub](https://github.com/home-assistant/intents/tree/main/sentences) and are organized by having for each language a directory of files in `sentences/<language>/`:
@@ -59,7 +59,7 @@ Response templates uses [Jinja2 syntax](https://jinja.palletsprojects.com/en/lat
 
 See all [translated responses](https://github.com/home-assistant/intents/tree/main/responses) for more examples.
 
-## Sentence Templates Syntax
+## Sentence templates syntax
 
 * Alternative word, phrases, or parts of a word
   * `(red | green | blue)`
@@ -167,7 +167,7 @@ intents:
             wildcard: true
 ```
 
-### Expansion Rules
+### Expansion rules
 
 A lot of template sentences can be written in a similar way. To avoid having to repeat the same matching structure multiple times, we can define expansion rules. For example, a user might add "the" in front of the area name, or they might not. We can define an expansion rule to match both cases.
 
@@ -182,7 +182,7 @@ expansion_rules:
   turn: "(turn | switch)"
 ```
 
-#### Local Expansion Rules
+#### Local expansion rules
 
 Expansion rules can also be defined locally next to a list of sentences, and will only be available within those templates. This allows you to write similar templates for different situations. For example:
 
@@ -221,7 +221,7 @@ lists:
 
 The same template `is the door <state>` is used for both binary sensors and regular locks, but the local `state` expansion rules refer to different lists.
 
-### Skip Words
+### Skip words
 
 Skip words are words that the intent recognizer will skip during recognition. This is useful for words that are not part of the intent, but are commonly used in sentences. For example, a user might use the word "please" in a sentence, but it is not part of the intent.
 
@@ -231,7 +231,7 @@ skip_words:
   - "can you"
 ```
 
-### Requires/Excludes Context
+### Requires/excludes context
 
 Hassil returns the first intent match it can find, so additional **context** may be required if the same sentence could produce multiple matches. 
 

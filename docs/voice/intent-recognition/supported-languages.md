@@ -1,5 +1,5 @@
 ---
-title: "Supported Languages"
+title: "Supported languages"
 ---
 
 import languages from '!!yaml-loader!../../../intents/languages.yaml';
