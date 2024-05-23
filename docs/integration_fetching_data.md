@@ -1,10 +1,10 @@
 ---
-title: "Fetching Data"
+title: "Fetching data"
 ---
 
 Your integration will need to fetch data from an API to be able to provide this to Home Assistant. This API can be available over the web (local or cloud), sockets, serial ports exposed via USB sticks, etc.
 
-## Push vs Poll
+## Push vs poll
 
 APIs come in many different shapes and forms but at its core they fall in two categories: push and poll.
 
@@ -164,7 +164,7 @@ If you have an API endpoint that pushes data, you can still use the data update 
 
 When new data arrives, use `coordinator.async_set_updated_data(data)` to pass the data to the entities. If this method is used on a coordinator that polls, it will reset the time until the next time it will poll for data.
 
-## Request Parallelism
+## Request parallelism
 
 :::info
 This is an advanced topic.

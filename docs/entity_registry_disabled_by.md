@@ -1,5 +1,5 @@
 ---
-title: Entity Registry and disabling entities
+title: Entity registry and disabling entities
 sidebar_label: Disabling entities
 ---
 
@@ -7,7 +7,7 @@ The entity registry tracks all entities with unique IDs. For each entity, the re
 
 When `disabled_by` is set and not `None`, the entity will not be added to Home Assistant when the integration passes it to `async_add_entities`.
 
-## Integration Architecture
+## Integration architecture
 
 Integrations will need to make sure that they work correctly when their entities get disabled. If your integration is keeping references to the created entity objects, it should register those references only inside the entity's lifecycle method `async_added_to_hass`. This lifecycle method is only called if the entity is actually added to Home Assistant (and so it's not disabled).
 

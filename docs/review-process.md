@@ -33,7 +33,7 @@ Home Assistant.
 
 ## Before creating your PR
 
-**Comply with Architectural Decisions.**
+**Comply with architectural decisions.**
 
 All architectural decisions around the Home Assistant project are recorded in
 the [ADR folder](https://github.com/home-assistant/architecture/tree/master/adr).
