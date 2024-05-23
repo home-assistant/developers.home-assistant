@@ -26,7 +26,7 @@ The `strings.json` contains translations for different things that the integrati
 
 This category is just a string: the translation of the integration name. This key is optional and Home Assistant will fallback to the integration name if it is omitted. Only include this if it's not a product brand.
 
-### Config / options
+### Config / Options
 
 The translation strings for the configuration flow handler and the option flow handler are defined under the `config` and `options` keys respectively. An example strings file below describes the different supported keys. Although the example shows translations for a configuration flow, the translations for an option flow is exactly the same.
 
