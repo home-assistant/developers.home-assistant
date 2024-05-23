@@ -1,8 +1,8 @@
 ---
-title: "Custom View Layout"
+title: "Custom view layout"
 ---
 
-By default Home Assistant will try to show the cards in a masonry layout (like Pinterest). A Custom View Layout allows developers to override this and define the layout mechanism (like a grid).
+By default Home Assistant will try to show the cards in a masonry layout (like Pinterest). A custom view layout allows developers to override this and define the layout mechanism (like a grid).
 
 ## API
 
@@ -63,7 +63,7 @@ A custom view can be used by adding the following to the definition of your view
 
 The default masonry view is an example of a layout element. ([source](https://github.com/home-assistant/frontend/blob/master/src/panels/lovelace/views/hui-masonry-view.ts)).
 
-## Store Custom Data
+## Store custom data
 
 If your view requires data to persist at a card level, there is a `view_layout` in the card configuration that can be used to store information. Example: Key, X and Y coordinates, width and height, etc. This can be useful when you need to store the location or dimensions of a card for your view.
 
@@ -75,7 +75,7 @@ If your view requires data to persist at a card level, there is a `view_layout` 
   entity: weather.my_weather
 ```
 
-## Edit, Delete, or Add a Card
+## Edit, delete, or add a card
 
 To call the core frontend dialogs to edit, delete or add a card, you can simply call these three events:
 
