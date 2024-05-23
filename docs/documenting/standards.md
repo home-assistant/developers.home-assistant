@@ -6,15 +6,21 @@ To ensure that the documentation for Home Assistant is consistent and easy to fo
 
 ## General Documentation
 
-Broadly speaking documentation should be written following Microsoft's house style, which is detailed [here](https://learn.microsoft.com/style-guide/welcome/).
+Broadly speaking, documentation should be written following the Microsoft Style Guide](https://learn.microsoft.com/style-guide/welcome/).
+
+A few of the most common cases picked up in reviews are listed below:
 
 - The language of the documentation should be American-English.
 - Don't put two spaces after a period.
-- Use a serial comma (also known as the Oxford comma) before the conjunction in a list of three or more items. E.g., "Through the use of additional adapters, Home Assistant allows the use of Zigbee, Z-Wave, and other protocols".
+- Use a serial comma (also known as the Oxford comma) before the conjunction in a list of three or more items. For example, "Through the use of additional adapters, Home Assistant allows the use of Zigbee, Z-Wave, and other protocols".
 - There is no limit for the line length. You are allowed to write in a flowing text style. This will make it easier to use the GitHub online editor in the future.
 - Be objective and not gender favoring, polarizing, race related or religion inconsiderate. Contributions which do not follow this may be in breach of our [Code of Conduct](https://github.com/home-assistant/core/blob/master/CODE_OF_CONDUCT.md).
-- The case of brand names, services, protocols, integrations and platforms must match its respective counterpart. E.g., "Z-Wave" **not** "Zwave", "Z-wave", "Z Wave" or "ZWave". Also, "Input Select" **not** "input select" or "Input select".
+- The case of brand names, services, protocols, integrations and platforms must match its respective counterpart. For example, "Z-Wave" **not** "Zwave", "Z-wave", "Z Wave" or "ZWave". Also, "Input Select" **not** "input select" or "Input select".
 - Do not use ALL CAPITALS for emphasis - use _italics_ instead.
+- Use [sentence-style capitalization](https://learn.microsoft.com/en-us/style-guide/capitalization), also in headings.
+- Use **bold** to markup UI strings, for example:
+  - Under **Settings**, select the three dots menu. Then, select **Restart Home Assistant** > **Quick reload**.
+- Don't use "e.g.". Instead, use _for example_, _such as_, or _like_.
 - All examples containing Jinja2 templates should be wrapped **outside** of the code markdown with the `{% raw %}` tag.
 
 ## Integration and Platform Pages
