@@ -96,8 +96,6 @@ class MyConversationEntity(conversation.ConversationEntity):
         self, user_input: conversation.ConversationInput
     ) -> conversation.ConversationResult:
         """Process the user input."""
-        prompt: str = ...
-
         intent_response = intent.IntentResponse(language=user_input.language)
         llm_api: llm.API | None = None
         tools: list[dict[str, Any]] | None = None
@@ -116,12 +114,29 @@ class MyConversationEntity(conversation.ConversationEntity):
                 return conversation.ConversationResult(
                     response=intent_response, conversation_id=user_input.conversation_id
                 )
-
-            prompt += "\n" + llm_api.prompt_template
             tools = [
                 _format_tool(tool)  # TODO format the tools as your LLM expects
                 for tool in llm_api.async_get_tools()
             ]
+
+        if llm_api:
+            empty_tool_input = llm.ToolInput(
+                tool_name="",
+                tool_args={},
+                platform=DOMAIN,
+                context=user_input.context,
+                user_prompt=user_input.text,
+                language=user_input.language,
+                assistant=conversation.DOMAIN,
+                device_id=user_input.device_id,
+            )
+
+            api_prompt = llm_api.async_get_api_prompt()
+
+        else:
+            api_prompt = llm.async_render_no_api_prompt(self.hass)
+
+        prompt = "\n".join(user_prompt, api_prompt)
 
         # Interact with LLM and pass tools
         for _iteration in range(10):
