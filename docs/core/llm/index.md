@@ -3,7 +3,7 @@ title: "Home Assistant API for Large Language Models"
 sidebar_label: "LLM API"
 ---
 
-Home Assistant can interact with large language models (LLMs). By exposing a Home Assistant API to an LLM, the LLM can fetch data or control Home Assistant to better assist the user. Home Assistant comes with a built-in LLM API but custom integrations can register their own to provide more advanced functionality.
+Home Assistant can interact with large language models (LLMs). By exposing a Home Assistant API to an LLM, the LLM can fetch data or control Home Assistant to better assist the user. Home Assistant comes with a built-in LLM API, but custom integrations can register their own to provide more advanced functionality.
 
 ## Built-in Assist API
 
@@ -17,7 +17,7 @@ The LLM API needs to be integrated in two places in your integration. Users need
 
 ### Options flow
 
-The chosen API should be stored in the config entry options. It should hold a string reference to the API id. If no API is selected, the key must be omitted.
+The chosen API should be stored in the config entry options. It should hold a string reference to the API ID. If no API is selected, the key must be omitted.
 
 In your options flow, you should offer a selector to the user to pick which API should be used.
 
@@ -136,7 +136,7 @@ class MyConversationEntity(conversation.ConversationEntity):
         else:
             api_prompt = llm.async_render_no_api_prompt(self.hass)
 
-        prompt = "\n".join(user_prompt, api_prompt)
+        prompt = "\n".join((user_prompt, api_prompt))
 
         # Interact with LLM and pass tools
         for _iteration in range(10):
@@ -221,6 +221,7 @@ The `llm.Tool` class has the following attributes:
 The `llm.Tool` class has the following methods:
 
 #### `async_call`
+
 Perform the actual operation of the tool when called by the LLM. This must be an async method. Its arguments are `hass` and an instance of `llm.ToolInput`.
 
 Response data must be a dict and serializable in JSON [`homeassistant.util.json.JsonObjectType`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/util/json.py).
@@ -237,7 +238,7 @@ The `ToolInput` has following attributes:
 | `context`         | Context | The `homeassistant.core.Context` of the conversation                                                    |
 | `user_prompt`     | string  | The raw text input that initiated the tool call                                                         |
 | `language`        | string  | The language of the conversation agent, or "*" for any language                                         |
-| `assistant`       | string  | The assistant name used to control exposed entities. Currently only `conversation` is supported.        |
+| `assistant`       | string  | The assistant name used to control exposed entities. Currently, only `conversation` is supported.        |
 | `device_id`       | string  | The device_id of the device the user used to initiate the conversation.                                 |
 
 ### API
@@ -278,4 +279,3 @@ The `llm.API` class has the following attributes:
 | `id`              | string  | A unique identifier for the API. Required.                                                              |
 | `name`            | string  | The name of the API. Required.                                                                          |
 | `prompt_template` | string  | A template to render the prompt to describe the tools to the LLM.             |
-
