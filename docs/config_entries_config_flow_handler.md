@@ -4,7 +4,7 @@ title: Config flow
 
 Integrations can be set up via the user interface by adding support for a config flow to create a config entry. Components that want to support config entries will need to define a Config Flow Handler. This handler will manage the creation of entries from user input, discovery or other sources (like Home Assistant OS).
 
-Config Flow Handlers control the data that is stored in a config entry. This means that there is no need to validate that the config is correct when Home Assistant starts up. It will also prevent breaking changes, because we will be able to migrate configuration entries to new formats if the version changes.
+Config Flow Handlers control the data that is stored in a config entry. This means that there is no need to validate that the config is correct when Home Assistant starts up. It will also prevent breaking changes because we will be able to migrate configuration entries to new formats if the version changes.
 
 When instantiating the handler, Home Assistant will make sure to load all dependencies and install the requirements of the component.
 
@@ -14,7 +14,7 @@ You need to update your integrations manifest to inform Home Assistant that your
 
 ## Defining your config flow
 
-Config entries uses the [data flow entry framework](data_entry_flow_index.md) to define their config flows. The config flow needs to be defined in the file `config_flow.py` in your integration folder, extend `homeassistant.config_entries.ConfigFlow` and pass a `domain` key as part of inheriting `ConfigFlow`.
+Config entries use the [data flow entry framework](data_entry_flow_index.md) to define their config flows. The config flow needs to be defined in the file `config_flow.py` in your integration folder, extend `homeassistant.config_entries.ConfigFlow` and pass a `domain` key as part of inheriting `ConfigFlow`.
 
 ```python
 from homeassistant import config_entries
@@ -227,7 +227,7 @@ The version is made of a major and minor version. If minor versions differ but m
 # Example migration function
 async def async_migrate_entry(hass, config_entry: ConfigEntry):
     """Migrate old entry."""
-    _LOGGER.debug("Migrating from version %s", config_entry.version)
+    _LOGGER.debug("Migrating configuration from version %s.%s", config_entry.version, config_entry.minor_version)
 
     if config_entry.version > 1:
       # This means the user has downgraded from a future version
@@ -235,17 +235,17 @@ async def async_migrate_entry(hass, config_entry: ConfigEntry):
 
     if config_entry.version == 1:
 
-        new = {**config_entry.data}
-        config_entry.minor_version < 2:
+        new_data = {**config_entry.data}
+        if config_entry.minor_version < 2:
             # TODO: modify Config Entry data with changes in version 1.2
             pass
-        config_entry.minor_version < 3:
+        if config_entry.minor_version < 3:
             # TODO: modify Config Entry data with changes in version 1.3
             pass
 
-        hass.config_entries.async_update_entry(config_entry, data=new, minor_version=3, version=1)
+        hass.config_entries.async_update_entry(config_entry, data=new_data, minor_version=3, version=1)
 
-    _LOGGER.debug("Migration to version %s.%s successful", config_entry.version, config_entry.minor_version)
+    _LOGGER.debug("Migration to configuration version %s.%s successful", config_entry.version, config_entry.minor_version)
 
     return True
 ```
