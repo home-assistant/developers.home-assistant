@@ -102,8 +102,17 @@ class MyConversationEntity(conversation.ConversationEntity):
 
         if self.entry.options.get(CONF_LLM_HASS_API):
             try:
-                llm_api = llm.async_get_api(
-                    self.hass, self.entry.options[CONF_LLM_HASS_API]
+                llm_api = await llm.async_get_api(
+                    self.hass,
+                    self.entry.options[CONF_LLM_HASS_API],
+                    llm.ToolContext(
+                        platform=DOMAIN,
+                        context=user_input.context,
+                        user_prompt=user_input.text,
+                        language=user_input.language,
+                        assistant=conversation.DOMAIN,
+                        device_id=user_input.device_id,
+                    ),
                 )
             except HomeAssistantError as err:
                 LOGGER.error("Error getting LLM API: %s", err)
@@ -116,22 +125,11 @@ class MyConversationEntity(conversation.ConversationEntity):
                 )
             tools = [
                 _format_tool(tool)  # TODO format the tools as your LLM expects
-                for tool in llm_api.async_get_tools()
+                for tool in llm_api.tools
             ]
 
         if llm_api:
-            empty_tool_input = llm.ToolInput(
-                tool_name="",
-                tool_args={},
-                platform=DOMAIN,
-                context=user_input.context,
-                user_prompt=user_input.text,
-                language=user_input.language,
-                assistant=conversation.DOMAIN,
-                device_id=user_input.device_id,
-            )
-
-            api_prompt = llm_api.async_get_api_prompt()
+            api_prompt = llm_api.api_prompt
 
         else:
             api_prompt = llm.async_render_no_api_prompt(self.hass)
@@ -139,8 +137,9 @@ class MyConversationEntity(conversation.ConversationEntity):
         prompt = "\n".join((user_prompt, api_prompt))
 
         # Interact with LLM and pass tools
+        request = user_input.text
         for _iteration in range(10):
-            response = ... # Get response from your LLM. Include available tools and the results of previous tool calls
+            response = ... # Send request to LLM and get response, include tools
 
             if not response.tool_call:
                 break
@@ -153,23 +152,16 @@ class MyConversationEntity(conversation.ConversationEntity):
             tool_input = llm.ToolInput(
                 tool_name=response.tool_call.function.name,
                 tool_args=json.loads(response.tool_call.function.arguments),
-                platform=DOMAIN,
-                context=user_input.context,
-                user_prompt=user_input.text,
-                language=user_input.language,
-                assistant=conversation.DOMAIN,
-                device_id=user_input.device_id,
             )
             try:
-                tool_response = await llm_api.async_call_tool(
-                    self.hass, tool_input
-                )
+                tool_response = await llm_api.async_call_tool(tool_input)
             except (HomeAssistantError, vol.Invalid) as e:
                 tool_response = {"error": type(e).__name__}
                 if str(e):
                     tool_response["error_text"] = str(e)
 
             LOGGER.debug("Tool response: %s", tool_response)
+            response = tool_response
 ```
 
 ## Creating your own API
@@ -199,7 +191,7 @@ class TimeTool(llm.Tool):
     })
 
     async def async_call(
-        self, hass: HomeAssistant, tool_input: llm.ToolInput
+        self, hass: HomeAssistant, tool_input: ToolInput, tool_context: ToolContext
     ) -> JsonObjectType:
         """Call the tool."""
         if "timezone" in tool_input.tool_args:
@@ -243,7 +235,7 @@ The `ToolInput` has following attributes:
 
 ### API
 
-The API object represents a collection of tools that will be made available to the LLM.
+The API object allows creating API instances. An API Instance represents a collection of tools that will be made available to the LLM.
 
 ```python
 from homeassistant.core import HomeAssistant
@@ -261,15 +253,16 @@ class MyAPI(API):
             hass=hass,
             id="my_unique_key",
             name="My own API",
-            prompt_template="Call the tools to fetch data from the system.",
         )
 
-    @callback
-    def async_get_tools(self) -> list[Tool]:
-        """Return a list of LLM tools."""
-        return [
-            TimeTool(),
-        ]
+    async def async_get_api_instance(self, tool_context: ToolContext) -> APIInstance:
+        """Return the instance of the API."""
+        return APIInstance(
+            api=self,
+            api_prompt="Call the tools to fetch data from Home Assistant.",
+            tool_context=tool_context,
+            tools=[TimeTool()],
+        )
 ```
 
 The `llm.API` class has the following attributes:
@@ -278,4 +271,12 @@ The `llm.API` class has the following attributes:
 |-------------------|---------|---------------------------------------------------------------------------------------------------------|
 | `id`              | string  | A unique identifier for the API. Required.                                                              |
 | `name`            | string  | The name of the API. Required.                                                                          |
-| `prompt_template` | string  | A template to render the prompt to describe the tools to the LLM.             |
+
+The `llm.APIInstance` class has the following attributes:
+
+| Name              | Type    | Description                                                                                             |
+|-------------------|---------|---------------------------------------------------------------------------------------------------------|
+| `api`             | API     | The API object. Required.                                                                               |
+| `api_prompt`      | string  | Instructions for LLM on how to use the LLM tools. Required.                                      |
+| `tool_context`    | ToolContext | The context of the tool call. Required.                                                                 |
+| `tools`           | list[Tool] | The tools that are available in this API. Required.                                                     |
