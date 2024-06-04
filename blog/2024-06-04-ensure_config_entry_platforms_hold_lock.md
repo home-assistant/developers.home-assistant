@@ -13,3 +13,4 @@ await `hass.config_entries.async_forward_entry_setups` as it can load multiple p
 - If platforms must be loaded late (after the config entry is set up), use `hass.config_entries.async_late_forward_entry_setup` instead.
 
 Please note that the shorter deprecation period for not using `async_late_forward_entry_setups` since not holding the lock may require restarting Home Assistant to get an integration back into a functional state after it has been unloaded while platform setup was in progress.
+
