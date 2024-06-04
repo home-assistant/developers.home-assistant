@@ -264,7 +264,7 @@ class MyAPI(API):
         return APIInstance(
             api=self,
             api_prompt="Call the tools to fetch data from Home Assistant.",
-            tool_context=tool_context,
+            llm_context=llm_context,
             tools=[TimeTool()],
         )
 ```
@@ -282,5 +282,5 @@ The `llm.APIInstance` class has the following attributes:
 |-------------------|---------|---------------------------------------------------------------------------------------------------------|
 | `api`             | API     | The API object. Required.                                                                               |
 | `api_prompt`      | string  | Instructions for LLM on how to use the LLM tools. Required.                                      |
-| `tool_context`    | LLMContext | The context of the tool call. Required.                                                                 |
+| `llm_context`    | LLMContext | The context of the tool call. Required.                                                                 |
 | `tools`           | list[Tool] | The tools that are available in this API. Required.                                                     |
