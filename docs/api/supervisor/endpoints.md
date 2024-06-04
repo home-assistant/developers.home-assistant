@@ -1208,6 +1208,13 @@ Passing `image`, `refresh_token`, `audio_input` or `audio_output` with `null` re
 
 <ApiEndpoint path="/core/rebuild" method="post">
 Rebuild the Home Assistant core container
+
+**Payload:**
+
+| key       | type       | optional | description                      |
+| --------- | ---------- | -------- | -------------------------------- |
+| safe_mode | boolean    | True     | Rebuild Core into safe mode      |
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/core/restart" method="post">
