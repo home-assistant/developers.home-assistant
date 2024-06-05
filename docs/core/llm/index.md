@@ -166,7 +166,7 @@ class MyConversationEntity(conversation.ConversationEntity):
 
 ## Best practices
 
-If your conversation entity allows the user to maintain conversation history using the `conversation_id`, make sure to re-generate the prompt for each interaction and override it in the history that is passesd for the follow-up command. This allows the user to always be able to query the latest state of the home.
+If your conversation entity allows the user to maintain conversation history using the `conversation_id`, make sure to re-generate the prompt for each interaction and override it in the history that is passed for the follow-up command. This allows the user to always be able to query the latest state of the home.
 
 ## Creating your own API
 
