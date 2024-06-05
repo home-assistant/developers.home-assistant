@@ -105,7 +105,7 @@ class MyConversationEntity(conversation.ConversationEntity):
                 llm_api = await llm.async_get_api(
                     self.hass,
                     self.entry.options[CONF_LLM_HASS_API],
-                    llm.ToolContext(
+                    llm.LLMContext(
                         platform=DOMAIN,
                         context=user_input.context,
                         user_prompt=user_input.text,
@@ -164,6 +164,10 @@ class MyConversationEntity(conversation.ConversationEntity):
             response = tool_response
 ```
 
+## Best practices
+
+If your conversation entity allows the user to maintain conversation history using the `conversation_id`, make sure to re-generate the prompt for each interaction and override it in the history that is passed for the follow-up command. This allows the user to always be able to query the latest state of the home.
+
 ## Creating your own API
 
 To create your own API, you need to create a class that inherits from `API` and implement the `async_get_tools` method. The `async_get_tools` method should return a list of `Tool` objects that represent the functionality that you want to expose to the LLM.
@@ -191,7 +195,7 @@ class TimeTool(llm.Tool):
     })
 
     async def async_call(
-        self, hass: HomeAssistant, tool_input: ToolInput, tool_context: ToolContext
+        self, hass: HomeAssistant, tool_input: ToolInput, llm_context: LLMContext
     ) -> JsonObjectType:
         """Call the tool."""
         if "timezone" in tool_input.tool_args:
@@ -255,12 +259,12 @@ class MyAPI(API):
             name="My own API",
         )
 
-    async def async_get_api_instance(self, tool_context: ToolContext) -> APIInstance:
+    async def async_get_api_instance(self, llm_context: LLMContext) -> APIInstance:
         """Return the instance of the API."""
         return APIInstance(
             api=self,
             api_prompt="Call the tools to fetch data from Home Assistant.",
-            tool_context=tool_context,
+            llm_context=llm_context,
             tools=[TimeTool()],
         )
 ```
@@ -278,5 +282,5 @@ The `llm.APIInstance` class has the following attributes:
 |-------------------|---------|---------------------------------------------------------------------------------------------------------|
 | `api`             | API     | The API object. Required.                                                                               |
 | `api_prompt`      | string  | Instructions for LLM on how to use the LLM tools. Required.                                      |
-| `tool_context`    | ToolContext | The context of the tool call. Required.                                                                 |
+| `llm_context`    | LLMContext | The context of the tool call. Required.                                                                 |
 | `tools`           | list[Tool] | The tools that are available in this API. Required.                                                     |
