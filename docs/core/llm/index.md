@@ -267,6 +267,11 @@ class MyAPI(API):
             llm_context=llm_context,
             tools=[TimeTool()],
         )
+
+
+async def async_setup_api(hass: HomeAssistant) -> None:
+    """Register the API with Home Assistant."""
+    llm.async_register_api(hass, MyAPI())
 ```
 
 The `llm.API` class has the following attributes:
