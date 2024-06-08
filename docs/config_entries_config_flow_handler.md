@@ -64,7 +64,7 @@ There are a few step names reserved for system use:
 | `reconfigure`      | Invoked when a user initiates a flow to reconfigure an existing config entry via the user interface.                                                                                                  |
 | `zeroconf`  | Invoked if your integration has been discovered via Zeroconf/mDNS as specified [using `zeroconf` in the manifest](creating_integration_manifest.md#zeroconf). |
 | `reauth`    | Invoked if your integration indicates it [requires reauthentication, e.g., due to expired credentials](#reauthentication). |
-| `import`    | Invoked if [YAML configuration is found](configuration_yaml_index), this can be used to migrate old YAML configuration. |
+| `import`    | Reserved for migrating from YAML configuration to config entries. |
 
 ## Unique IDs
 
