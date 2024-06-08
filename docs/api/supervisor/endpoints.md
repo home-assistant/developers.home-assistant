@@ -750,6 +750,18 @@ Reset internal authentication cache, this is useful if you have changed the pass
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/auth/list" method="get">
+
+List all users in Home Assistant to help with credentials recovery. Requires an admin level authentication token.
+
+**Payload:**
+
+| key      | type   | description                                                        |
+| -------- | ------ | ------------------------------------------------------------------ |
+| users    | list   | List of the Home Assistant [users](api/supervisor/models.md#user). |
+
+</ApiEndpoint>
+
 ### Backup
 
 <ApiEndpoint path="/backups" method="get">

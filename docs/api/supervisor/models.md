@@ -316,6 +316,17 @@ Response only fields will be in responses but cannot be included in requests.
 | status     | string  | Status of the last boot from slot (good or bad) |
 | version    | string  | Version of OS installed                         |
 
+## User
+
+| key        | type    | description                                                   |
+| ---------- | ------- | ------------------------------------------------------------- |
+| username   | string  | Username used to login                                        |
+| name       | string  | Name of the user                                              |
+| is_owner   | boolean | Is the user the owner                                         |
+| is_active  | boolean | Is the user active                                            |
+| local_only | boolean | Can the user login from the network (e.g. via http)           |
+| group_ids  | list    | Role(s) the user has (admin, etc)                             |
+
 ## Drive
 
 | key            | type     | description                                                 |
