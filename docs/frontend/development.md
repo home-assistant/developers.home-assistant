@@ -67,6 +67,7 @@ Next, development dependencies need to be installed to bootstrap the frontend de
 ```shell
 nvm use
 script/bootstrap
+script/setup_translations
 ```
 
 ## Development

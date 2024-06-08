@@ -1,6 +1,6 @@
 ---
-title: Device Tracker Entity
-sidebar_label: Device Tracker
+title: Device tracker entity
+sidebar_label: Device tracker
 ---
 
 A device tracker is a read-only entity that provides presence information. There are two types of device tracker entities, a ScannerEntity and a TrackerEntity.

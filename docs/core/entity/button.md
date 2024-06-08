@@ -1,5 +1,5 @@
 ---
-title: Button Entity
+title: Button entity
 sidebar_label: Button
 ---
 

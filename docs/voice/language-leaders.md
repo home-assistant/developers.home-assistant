@@ -1,5 +1,5 @@
 ---
-title: "Language Leaders"
+title: "Language leaders"
 ---
 
 Home Assistant is a global project. We want to make sure that everyone can use Home Assistant in their native language. For that reason, we have language leaders for each language to lead the maintenance.

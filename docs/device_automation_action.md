@@ -1,5 +1,5 @@
 ---
-title: "Device Actions"
+title: "Device actions"
 sidebar_label: Actions
 ---
 

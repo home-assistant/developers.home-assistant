@@ -1,8 +1,8 @@
 ---
-title: "Raising Exceptions"
+title: "Raising exceptions"
 ---
 
-## Raising Exceptions in service handlers
+## Raising exceptions in service handlers
 
 Operations like service calls and entity methods (e.g. *Set HVAC Mode*) should raise exceptions properly.
 
@@ -10,6 +10,6 @@ Integrations should raise `ServiceValidationError` (instead of `ValueError`) in 
 
 For other failures such as a problem communicating with a device, `HomeAssistantError` should be raised. Note that the exception stack trace will be printed to the log in this case.
 
-## Localizing Exceptions
+## Localizing exceptions
 
 Home Assistant [supports localization](/docs/internationalization/core/#exceptions) for `HomeAssistantError` and its subclasses like `ServiceValidationError`.

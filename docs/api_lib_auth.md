@@ -1,5 +1,5 @@
 ---
-title: "Python Library: Authentication"
+title: "Python library: authentication"
 sidebar_label: Authentication
 ---
 

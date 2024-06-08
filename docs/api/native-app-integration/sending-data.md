@@ -289,7 +289,7 @@ There are two errors you may receive:
 - `encryption_already_enabled` - Encryption is already enabled for this registration
 - `encryption_not_available` - Sodium/NaCL is unable to be installed. Cease all future attempts to enable encryption.
 
-## Stream Camera
+## Stream camera
 
 _This requires Home Assistant 0.112 or later._
 
@@ -320,7 +320,7 @@ The response will include paths for streaming either via HLS or via MJPEG image 
 
 If HLS streaming is not available, the `hls_path` will be `null`. See notes above on instance URL for how to construct a full URL.
 
-## Process Conversation
+## Process conversation
 
 _This requires Home Assistant 2023.2.0 or later._
 

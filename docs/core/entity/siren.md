@@ -1,5 +1,5 @@
 ---
-title: Siren Entity
+title: Siren entity
 sidebar_label: Siren
 ---
 

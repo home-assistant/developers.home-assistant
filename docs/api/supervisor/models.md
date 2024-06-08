@@ -82,7 +82,7 @@ These models are describing objects that are getting returned from the superviso
 | uuid    | string | The UUID of the discovery |
 | config  | dict   | The configuration         |
 
-## Host Service
+## Host service
 
 | key         | type   | description             |
 | ----------- | ------ | ----------------------- |
@@ -129,7 +129,7 @@ These models are describing objects that are getting returned from the superviso
 | id      | integer | The VLAN ID.                                                                 |
 | parent  | string  | Parent interface which is the vlan attached.                                 |
 
-## Access-Points
+## Access-points
 
 | key        | type    | description                                                                  |
 | ---------- | ------- | ---------------------------------------------------------------------------- |
@@ -301,14 +301,14 @@ Response only fields will be in responses but cannot be included in requests.
 | child_jobs | list    | A list of child [jobs](#job) started by this one              |
 | errors     | list    | A list of [errors](#job-error) that occurred during execution |
 
-## Job Error
+## Job error
 
 | key        | type    | description                                    |
 | ---------- | ------- | ---------------------------------------------- |
 | type       | string  | Type of error that occurred                    |
 | message    | string  | Human-readable description of what went wrong  |
 
-## Boot Slot
+## Boot slot
 
 | key        | type    | description                                     |
 | ---------- | ------- | ----------------------------------------------- |
@@ -326,3 +326,30 @@ Response only fields will be in responses but cannot be included in requests.
 | is_active  | boolean | Is the user active                                            |
 | local_only | boolean | Can the user login from the network (e.g. via http)           |
 | group_ids  | list    | Role(s) the user has (admin, etc)                             |
+
+## Drive
+
+| key            | type     | description                                                 |
+| -------------- | -------- | ----------------------------------------------------------- |
+| vendor         | string   | Drive vendor                                                |
+| model          | string   | Drive model                                                 |
+| serial         | string   | Drive serial number                                         |
+| id             | string   | Unique and persistent id for drive                          |
+| size           | int      | Size of the drive in bytes                                  |
+| time_detected  | datetime | Time drive was detected by system                           |
+| connection_bus | string   | Physical connection bus of the drive (USB, etc.)            |
+| seat           | string   | Identifier of seat drive is plugged into                    |
+| removable      | boolean  | Is the drive removable by the user?                         |
+| ejectable      | boolean  | Is the drive ejectable by the system?                       |
+| filesystems    | list     | A list of [filesystem partitions](#filesystem) on the drive |
+
+## Filesystem
+
+| key          | type    | description                                               |
+| ------------ | ------- | --------------------------------------------------------- |
+| device       | string  | Special device file for the filesystem (e.g. `/dev/sda1`) |
+| id           | string  | Unique and persistent id for filesystem                   |
+| size         | int     | Size of the filesystem in bytes                           |
+| name         | string  | Name of the filesystem (if known)                         |
+| system       | boolean | `true` if filesystem considered a system/internal device  |
+| mount_points | list    | List of paths where the filesystem is mounted.            |

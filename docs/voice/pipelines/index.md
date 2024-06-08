@@ -1,5 +1,5 @@
 ---
-title: "Assist Pipelines"
+title: "Assist pipelines"
 ---
 
 The [Assist pipeline](https://www.home-assistant.io/integrations/assist_pipeline) integration runs the common steps of a voice assistant:
@@ -95,7 +95,7 @@ When `start_stage` is set to `wake_word`, the pipeline will not run until a wake
 For `wake_word`, the `input` object should contain a `timeout` float value. This is the number of seconds of silence before the pipeline will time out during wake word detection (error code `wake-word-timeout`).
 If enough speech is detected by Home Assistant's internal VAD, the timeout will be continually reset.
 
-### Audio Enhancements
+### Audio enhancements
 
 The following settings are available as part of the `input` object when `start_stage` is set to `wake_word`:
 

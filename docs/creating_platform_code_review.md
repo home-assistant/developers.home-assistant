@@ -1,6 +1,6 @@
 ---
 title: "Checklist for creating a platform"
-sidebar_label: Platform Checklist
+sidebar_label: Platform checklist
 ---
 
 A checklist of things to do when you're adding a new platform.
@@ -50,7 +50,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
 )
 ```
 
-### 3. Setup Platform
+### 3. Setup platform
 
 1. Verify that the passed in configuration (user/pass/host etc.) works.
 2. Group your calls to `add_entities if possible.

@@ -1,5 +1,5 @@
 ---
-title: Weather Entity
+title: Weather entity
 sidebar_label: Weather
 ---
 
@@ -32,7 +32,7 @@ Properties should always only return information from memory and not do I/O (lik
 | uv_index | float | `None` | The current [UV index](https://en.wikipedia.org/wiki/Ultraviolet_index).
 | wind_bearing | float or string | `None` | The current wind bearing in azimuth angle (degrees) or 1-3 letter cardinal direction.
 
-### Unit Conversion
+### Unit conversion
 
 Properties have to follow the units mentioned on the respective unit of measurement in the table.
 
@@ -64,7 +64,7 @@ These weather conditions are included in our translation files and also show the
 
 This means that the `weather` platforms don't need to support languages.
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `WeatherEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.

@@ -1,5 +1,5 @@
 ---
-title: "Integration Architecture"
+title: "Integration architecture"
 sidebar_label: "Integrations"
 ---
 

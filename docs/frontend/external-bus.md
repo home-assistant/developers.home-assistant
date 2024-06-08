@@ -1,5 +1,5 @@
 ---
-title: "External Bus"
+title: "External bus"
 ---
 
 The frontend is able to set up a message bus with an external app that is embedding the Home Assistant frontend. This system is a generalization of the [external authentication](frontend/external-authentication.md), making it easier to add more commands in the future without extensive plumbing on either the app or frontend side.
@@ -32,7 +32,7 @@ window.externalBus(message: string)
 
 The message describes an action or a piece of information that the sender wants the receiver to do or know about. If it's an action, the sender will expect a response with the result of that action. A response to a command can either be successful or failed.
 
-### Action and Info Message format
+### Action and info message format
 
 The format of a message that contains or provides information is the same. It contains an identifier, a type and an optional payload (depending on the type).
 
@@ -57,7 +57,7 @@ An example message:
 }
 ```
 
-### Result Message Format
+### Result message format
 
 If the message was an action, the sender will expect a response with the result. The response is either success or failure.
 
@@ -86,7 +86,7 @@ interface ErrorResult {
 
 ## Supported messages
 
-### Get External Config
+### Get external config
 
 Available in: Home Assistant 0.92
 Type: `config/get`
@@ -107,7 +107,7 @@ Expected response payload:
 - `hasSettingsScreen` set to true if the external app will show a configuration screen when it receives the command `config_screen/show`. If so, a new option will be added to the sidebar to trigger the configuration screen.
 - `canWriteTag` set to true if the external app is able to write tags and so can support the `tag/write` command.
 
-### Show Config Screen `config_screen/show`
+### Show config screen `config_screen/show`
 
 Available in: Home Assistant 0.92
 Type: `config_screen/show`
@@ -116,7 +116,7 @@ Expect answer: no
 
 Show the configuration screen of the external app.
 
-### Connection Status update `connection-status`
+### Connection status update `connection-status`
 
 Available in: Home Assistant 0.92
 Type: `connection-status`
@@ -133,7 +133,7 @@ Payload structure:
 }
 ```
 
-### Trigger Haptic `haptic`
+### Trigger haptic `haptic`
 
 Available in: Home Assistant 0.92
 Type: `haptic`
@@ -158,7 +158,7 @@ Payload structure:
 }
 ```
 
-### Write Tag `tag/write`
+### Write tag `tag/write`
 
 Available in: Home Assistant 0.115
 Type: `tag/write`

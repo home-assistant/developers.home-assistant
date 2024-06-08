@@ -1,11 +1,11 @@
 ---
-title: "Getting Started with Home Assistant Operating System Development"
-sidebar_label: Getting Started
+title: "Getting started with Home Assistant Operating System development"
+sidebar_label: Getting started
 ---
 
-## Prepare Development Environment
+## Prepare development environment
 
-### Check-out Source Code
+### Check-out source code
 
 The main repository located at [github.com/home-assistant/operating-system/](https://github.com/home-assistant/operating-system/) contains Buildroot customizations via the [br2-external mechanism](https://buildroot.org/downloads/manual/manual.html#outside-br-custom) as well as helper scripts and GitHub Action CI scripts. The main repository uses the Git Submodule mechanism to point to Buildroot itself. While most customizations can be done by the br2-mechanism, some modifications are made to Buildroot itself. For that reason we also maintain a fork of Buildroot under [github.com/home-assistant/buildroot/](https://github.com/home-assistant/buildroot/). The aim is to keep the amount of patches on-top of upstream Buildroot minimal.
 
@@ -41,7 +41,7 @@ While Buildroot can run on most Linux distributions natively, its strongly recom
 The build container needs to get started with privileges since at some point during the build process a new loopback device-backed filesystem image will be mounted inside a Docker container. Hence rootless containers won't work to build HAOS.
 :::
 
-## Build Images using Build Container
+## Build images using build container
 
 The script `scripts/enter.sh` builds the build container image and starts a container using that image. Arguments passed to the script get executed inside the container.
 
@@ -76,7 +76,7 @@ rm -rf output/build/linux-custom/
 You can check `output/build/packages-file-list.txt` to learn which file in the final image belongs to what package. This makes it easier to find the package you would like to change.
 :::
 
-### Build for Multiple Targets
+### Build for multiple targets
 
 To build for multiple targets in a single source directory, separate output directories must be used. The output directory can be specified with the `O=` argument. A recommended pattern is to just use an output directory named after the targets configuration file:
 
@@ -85,7 +85,7 @@ To build for multiple targets in a single source directory, separate output dire
 sudo scripts/enter.sh make O=output_rpi4_64 rpi4_64
 ```
 
-### Use the Build Container Interactively
+### Use the build container interactively
 
 If no argument to `scripts/enter.sh` is passed, a shell will be presented.
 
@@ -112,7 +112,7 @@ dot  -Tpdf \
 builder@c6dfb4cd4036:/build$
 ```
 
-## Use Qemu to Test Images
+## Use Qemu to test images
 
 The target OVA (Open Virtual Appliance) contains images for various virtual machines. One of the image format is QCOW2, the native image format for QEMU. It can be used to test a new HAOS build using QEMU.
 

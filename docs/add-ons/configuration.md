@@ -1,5 +1,5 @@
 ---
-title: "Add-On Configuration"
+title: "Add-on configuration"
 ---
 
 Each add-on is stored in a folder. The file structure looks like this:
@@ -84,7 +84,7 @@ LABEL \
 
 It is possible to use your own base image with `build.yaml` or if you do not need support for automatic multi-arch building you can also use a simple docker `FROM`. You can also suffix the Dockerfile with the specific architecture to use a specific Dockerfile for a particular architecture, i.e. `Dockerfile.amd64`.
 
-### Build Args
+### Build args
 
 We support the following build arguments by default:
 

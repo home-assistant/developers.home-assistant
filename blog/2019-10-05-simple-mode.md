@@ -26,7 +26,8 @@ In simple mode, we will structure the configuration to how the user thinks about
 - Outputs: scenes, scripts, automations
 
 <center>
-![Configuration concepts. Inputs are users, integrations, zones, persons, devices. Outputs are scenes, scripts and automations.](/img/en/blog/2019-10-simple-mode/config-concepts.png)</center>
+![Configuration concepts. Inputs are users, integrations, zones, persons, devices. Outputs are scenes, scripts and automations.](/img/en/blog/2019-10-simple-mode/config-concepts.png)
+</center>
 
 <!-- https://docs.google.com/drawings/d/1021ATCQ_Q3eBQQ1Ei5Bq7rSBfn6YtLh9113HimpsYWs/edit?usp=sharing -->
 

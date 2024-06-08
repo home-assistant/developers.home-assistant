@@ -1,5 +1,5 @@
 ---
-title: "Integration Configuration via YAML"
+title: "Integration configuration via YAML"
 ---
 
 `configuration.yaml` is a configuration file defined by the user. It is automatically created by Home Assistant on first launch. It defines which components to load.

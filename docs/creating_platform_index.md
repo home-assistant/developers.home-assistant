@@ -1,5 +1,5 @@
 ---
-title: "Integration Platforms"
+title: "Integration platforms"
 sidebar_label: "Platforms"
 ---
 

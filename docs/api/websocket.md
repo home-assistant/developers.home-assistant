@@ -353,6 +353,8 @@ This will call a service in Home Assistant. Right now there is no return value. 
   "target": {
     "entity_id": "light.kitchen"
   }
+  // Must be included for services that return response data
+  "return_response": true
 }
 ```
 
@@ -464,7 +466,7 @@ The server will respond with a result message containing the current registered 
 }
 ```
 
-## Pings and Pongs
+## Pings and pongs
 
 The API supports receiving a ping from the client and returning a pong. This serves as a heartbeat to ensure the connection is still alive:
 

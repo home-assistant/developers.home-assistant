@@ -1,10 +1,10 @@
 ---
-title: Config Flow
+title: Config flow
 ---
 
 Integrations can be set up via the user interface by adding support for a config flow to create a config entry. Components that want to support config entries will need to define a Config Flow Handler. This handler will manage the creation of entries from user input, discovery or other sources (like Home Assistant OS).
 
-Config Flow Handlers control the data that is stored in a config entry. This means that there is no need to validate that the config is correct when Home Assistant starts up. It will also prevent breaking changes, because we will be able to migrate configuration entries to new formats if the version changes.
+Config Flow Handlers control the data that is stored in a config entry. This means that there is no need to validate that the config is correct when Home Assistant starts up. It will also prevent breaking changes because we will be able to migrate configuration entries to new formats if the version changes.
 
 When instantiating the handler, Home Assistant will make sure to load all dependencies and install the requirements of the component.
 
@@ -14,7 +14,7 @@ You need to update your integrations manifest to inform Home Assistant that your
 
 ## Defining your config flow
 
-Config entries uses the [data flow entry framework](data_entry_flow_index.md) to define their config flows. The config flow needs to be defined in the file `config_flow.py` in your integration folder, extend `homeassistant.config_entries.ConfigFlow` and pass a `domain` key as part of inheriting `ConfigFlow`.
+Config entries use the [data flow entry framework](data_entry_flow_index.md) to define their config flows. The config flow needs to be defined in the file `config_flow.py` in your integration folder, extend `homeassistant.config_entries.ConfigFlow` and pass a `domain` key as part of inheriting `ConfigFlow`.
 
 ```python
 from homeassistant import config_entries
@@ -61,6 +61,7 @@ There are a few step names reserved for system use:
 | `ssdp`      | Invoked if your integration has been discovered via SSDP/uPnP as specified [using `ssdp` in the manifest](creating_integration_manifest.md#ssdp).             |
 | `usb`       | Invoked if your integration has been discovered via USB as specified [using `usb` in the manifest](creating_integration_manifest.md#usb).             |
 | `user`      | Invoked when a user initiates a flow via the user interface or when discovered and the matching and discovery step are not defined.                                                                                                  |
+| `reconfigure`      | Invoked when a user initiates a flow to reconfigure an existing config entry via the user interface.                                                                                                  |
 | `zeroconf`  | Invoked if your integration has been discovered via Zeroconf/mDNS as specified [using `zeroconf` in the manifest](creating_integration_manifest.md#zeroconf). |
 
 ## Unique IDs
@@ -101,7 +102,7 @@ if device_unique_id:
 await self._async_handle_discovery_without_unique_id()
 ```
 
-### Unique ID Requirements
+### Unique ID requirements
 
 A unique ID is used to match a config entry to the underlying device or API. The unique ID must be stable, should not be able to be changed by the user and must be a string.
 
@@ -214,7 +215,7 @@ Translations for the config flow handlers are defined under the `config` key in 
 
 When the translations are merged into Home Assistant, they will be automatically uploaded to [Lokalise](https://lokalise.co/) where the translation team will help to translate them in other languages. While developing locally, you will need to run `python3 -m script.translations develop` to see changes made to `strings.json` [More info on translating Home Assistant.](translations.md)
 
-## Config Entry Migration
+## Config entry migration
 
 As mentioned above - each Config Entry has a version assigned to it. This is to be able to migrate Config Entry data to new formats when Config Entry schema changes.
 
@@ -226,7 +227,7 @@ The version is made of a major and minor version. If minor versions differ but m
 # Example migration function
 async def async_migrate_entry(hass, config_entry: ConfigEntry):
     """Migrate old entry."""
-    _LOGGER.debug("Migrating from version %s", config_entry.version)
+    _LOGGER.debug("Migrating configuration from version %s.%s", config_entry.version, config_entry.minor_version)
 
     if config_entry.version > 1:
       # This means the user has downgraded from a future version
@@ -234,26 +235,50 @@ async def async_migrate_entry(hass, config_entry: ConfigEntry):
 
     if config_entry.version == 1:
 
-        new = {**config_entry.data}
-        config_entry.minor_version < 2:
+        new_data = {**config_entry.data}
+        if config_entry.minor_version < 2:
             # TODO: modify Config Entry data with changes in version 1.2
             pass
-        config_entry.minor_version < 3:
+        if config_entry.minor_version < 3:
             # TODO: modify Config Entry data with changes in version 1.3
             pass
 
-        hass.config_entries.async_update_entry(config_entry, data=new, minor_version=3, version=1)
+        hass.config_entries.async_update_entry(config_entry, data=new_data, minor_version=3, version=1)
 
-    _LOGGER.debug("Migration to version %s.%s successful", config_entry.version, config_entry.minor_version)
+    _LOGGER.debug("Migration to configuration version %s.%s successful", config_entry.version, config_entry.minor_version)
 
     return True
 ```
 
+## Reconfigure
+
+A config entry can allow reconfiguration by adding a `reconfigure` step. This provides a way for integrations to allow users to change config entry data without the need to implement an `OptionsFlow` for changing setup data which is not meant to be optional.
+
+This is not meant to handle authentication issues or reconfiguration of such. For that we have the [`reauth`](#reauthentication) step, which should be implemented to automatically start in such case there is an issue with authentication.
+
+```python
+import voluptuous as vol
+
+class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
+    """Config flow for Example integration."""
+
+    async def async_step_reconfigure(self, user_input: dict[str, Any] | None = None):
+        if user_input is not None:
+            pass  # TODO: process user input
+
+        return self.async_show_form(
+            step_id="reconfigure",
+            data_schema=vol.Schema({vol.Required("input_parameter"): str}),
+        )
+```
+
 ## Reauthentication
 
-Gracefully handling authentication errors such as invalid, expired, or revoked tokens is needed to advance on the [Integration Qualily Scale](integration_quality_scale_index.md). This example of how to add reauth to the OAuth flow created by `script.scaffold` following the pattern in [Building a Python library](api_lib_auth.md#oauth2).
+Gracefully handling authentication errors such as invalid, expired, or revoked tokens is needed to advance on the [Integration Quality Scale](integration_quality_scale_index.md). This example of how to add reauth to the OAuth flow created by `script.scaffold` following the pattern in [Building a Python library](api_lib_auth.md#oauth2).
 
 This example catches an authentication exception in config entry setup in `__init__.py` and instructs the user to visit the integrations page in order to reconfigure the integration.
+
+To allow the user to change config entry data which is not optional (`OptionsFlow`) and not directly related to authentication, for example a changed host name, integrations should implement the [`reconfigure`](#reconfigure) step.
 
 ```python
 
@@ -310,7 +335,8 @@ class OAuth2FlowHandler(
             )
         return await super().async_oauth_create_entry(data)
 ```
-By default, the `async_update_reload_and_abort` helper method aborts the flow with `reauth_successful` after update and reload.
+
+By default, the `async_update_reload_and_abort` helper method aborts the flow with `reauth_successful` after update and reload. By default, the entry will always be reloaded. If the config entry only should be reloaded in case the config entry was updated, specify `reload_even_if_entry_is_unchanged=False`.
 
 Depending on the details of the integration, there may be additional considerations such as ensuring the same account is used across reauth, or handling multiple config entries.
 

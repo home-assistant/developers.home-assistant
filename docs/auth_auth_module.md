@@ -1,5 +1,5 @@
 ---
-title: "Multi-factor Authentication Modules"
+title: "Multi-factor authentication modules"
 ---
 
 Multi-factor Authentication Modules are used in conjunction with [Authentication Provider](auth_auth_provider.md) to provide a fully configurable authentication framework. Each MFA module may provide one multi-factor authentication function. User can enable multiple mfa modules, but can only select one module in login process.
@@ -26,7 +26,7 @@ Multi-factor Auth modules shall extend the following methods of `MultiFactorAuth
 | `async def async_validate(self, user_id, user_input)` | Yes | Given a user_id and user input, return validation result.
 | `async def async_initialize_login_mfa_step(self, user_id)` | No | Will be called once before display the mfa step of login flow. This is not initialization for the MFA module but the mfa step in login flow.
 
-## Setup Flow
+## Setup flow
 
 Before user can use a multi-factor auth module, it has to be enabled or set up. All available modules will be listed in user profile page, user can enable the module he/she wants to use. A setup data entry flow will guide user finish the necessary steps.
 

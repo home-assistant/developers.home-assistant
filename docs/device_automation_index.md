@@ -1,5 +1,5 @@
 ---
-title: "Device Automations"
+title: "Device automations"
 sidebar_label: Introduction
 ---
 

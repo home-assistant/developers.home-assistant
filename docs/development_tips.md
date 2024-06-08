@@ -1,10 +1,10 @@
 ---
-title: "Tips and Tricks"
+title: "Tips and tricks"
 ---
 
 This page provides some tips and tricks that may help you as a contributor to Home Assistant. The list here is by no means exhaustive, and if you pick up any additional undocumented tips and tricks, please open a PR to add them here.
 
-## Tips and Tricks
+## Tips and tricks
 
 ### Keep PRs simple
 

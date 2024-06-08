@@ -101,6 +101,7 @@ module.exports = {
       items: [
         "creating_component_index",
         "creating_integration_file_structure",
+        "creating_integration_tests_file_structure",
         "creating_integration_manifest",
         "config_entries_config_flow_handler",
         "config_entries_options_flow_handler",
@@ -202,8 +203,9 @@ module.exports = {
     {
       type: "category",
       label: "Conversation",
-      items: ["intent_conversation_api", "core/conversation/custom_agent"],
+      items: ["intent_conversation_api"],
     },
+    "core/llm/index",
     {
       type: "category",
       label: "Native App Integration",
@@ -284,6 +286,7 @@ module.exports = {
         "asyncio_101",
         "asyncio_categorizing_functions",
         "asyncio_working_with_async",
+        "asyncio_thread_safety",
       ],
     },
   ],
