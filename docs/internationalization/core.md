@@ -40,15 +40,15 @@ Strings which are used more than once should be not be duplicated, instead refer
     "error": {
       "invalid_api_key": "This message will be displayed if `invalid_api_key` is returned as a flow error.",
       // Reference to the common section
-      "stale_api_key": "%key:component::new_integration::common::error_stale_api_key"
+      "stale_api_key": "[%key:component::new_integration::common::error_stale_api_key%]"
     },
   }
   "options": {
     "error": {
       // Reference to another section in the same file
-      "invalid_api_key": "%key:component::new_integration::config::error::invalid_api_key",
+      "invalid_api_key": "[%key:component::new_integration::config::error::invalid_api_key%]",
       // Reference to the common section in the same file
-      "stale_api_key": "%key:component::new_integration::common::error_stale_api_key"
+      "stale_api_key": "[%key:component::new_integration::common::error_stale_api_key%]"
     },
   }
 }
