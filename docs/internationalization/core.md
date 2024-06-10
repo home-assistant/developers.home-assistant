@@ -11,6 +11,7 @@ The `strings.json` contains translations for different things that the integrati
 | Category            | Description                                       |
 | ------------------- | ------------------------------------------------- |
 | `title`             | Title of the integration.                         |
+| `common`            | Shared strings.                                   |
 | `config`            | Translations for the config flow.                 |
 | `device`            | Translations for devices.                         |
 | `device_automation` | Translations for device automations.              |
@@ -25,6 +26,33 @@ The `strings.json` contains translations for different things that the integrati
 ### Title
 
 This category is just a string: the translation of the integration name. This key is optional and Home Assistant will fallback to the integration name if it is omitted. Only include this if it's not a product brand.
+
+### Shared strings
+
+Strings which are used more than once should be not be duplicated, instead references should be used to refer to the single definition. The reference can be any valid translation key. Optionally, shared strings can be placed in a `common` section.
+
+```json
+{
+  "common": {
+    "error_stale_api_key": "This message will be displayed if `stale_api_key` is returned as the abort reason."
+  },
+  "config": {
+    "error": {
+      "invalid_api_key": "This message will be displayed if `invalid_api_key` is returned as a flow error.",
+      // Reference to the common section
+      "stale_api_key": "[%key:component::new_integration::common::error_stale_api_key%]"
+    },
+  }
+  "options": {
+    "error": {
+      // Reference to another section in the same file
+      "invalid_api_key": "[%key:component::new_integration::config::error::invalid_api_key%]",
+      // Reference to the common section in the same file
+      "stale_api_key": "[%key:component::new_integration::common::error_stale_api_key%]"
+    },
+  }
+}
+```
 
 ### Config / Options
 
