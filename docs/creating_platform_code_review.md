@@ -25,7 +25,7 @@ Not all existing platforms follow the requirements in this checklist. This canno
 ### 2. Configuration
 
 1. If the platform can be set up directly, add a voluptuous schema for [configuration validation](development_validation.md)
-2. Voluptuous schema extends schema from component  
+2. Voluptuous schema extends schema from component
    (e.g., `hue.light.PLATFORM_SCHEMA` extends `light.PLATFORM_SCHEMA`)
 3. Default parameters specified in voluptuous schema, not in `setup_platform(...)`
 4. Your `PLATFORM_SCHEMA` should use as many generic config keys as possible from `homeassistant.const`
@@ -62,8 +62,8 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
 
     ```python
     from homeassistant.components.light import Light
-    
-    
+
+
     class HueLight(Light):
         """Hue light component."""
     ```
@@ -90,7 +90,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
 
     [Tutorial on publishing your own PyPI package](https://towardsdatascience.com/how-to-open-source-your-first-python-package-e717444e1da0)
 
-    Other noteworthy resources for publishing python packages:  
-    [Cookiecutter Project](https://cookiecutter.readthedocs.io/)  
-    [flit](https://flit.readthedocs.io/)  
-    [Poetry](https://python-poetry.org/)  
+    Other noteworthy resources for publishing python packages:
+    [Cookiecutter Project](https://cookiecutter.readthedocs.io/)
+    [flit](https://flit.readthedocs.io/)
+    [Poetry](https://python-poetry.org/)

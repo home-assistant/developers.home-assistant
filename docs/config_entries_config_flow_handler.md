@@ -155,6 +155,8 @@ async def async_step_unignore(self, user_input):
 
 ## Discovery steps
 
+Integrations can define in their manifest that they support discovery via [Bluetooth](creating_integration_manifest.md#bluetooth), [DHCP](creating_integration_manifest.md#dhcp), [HomeKit](creating_integration_manifest.md#homekit), [Zeroconf/mDNS](creating_integration_manifest.md#zeroconf), [USB](creating_integration_manifest.md#usb), [MQTT](creating_integration_manifest.md#mqtt), or [SSDP/uPnP](creating_integration_manifest.md#ssdp).
+
 When an integration is discovered, their respective discovery step is invoked (ie `async_step_dhcp` or `async_step_zeroconf`) with the discovery information. The step will have to check the following things:
 
 - Make sure there are no other instances of this config flow in progress of setting up the discovered device. This can happen if there are multiple ways of discovering that a device is on the network.

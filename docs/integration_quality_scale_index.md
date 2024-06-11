@@ -17,51 +17,53 @@ This integration passes the bare minimum requirements to become part of the inde
 
 ## Silver 🥈
 
-This integration is able to cope when things go wrong. It will not print any exceptions nor will it fill the log with retry attempts.
+This integration can be set up via the user interface and is able to cope when things go wrong. It will not print any exceptions nor will it fill the log with retry attempts.
 
 - Satisfying all No score level requirements.
-- Connection/configuration is handled via a component.
-- Set an appropriate `SCAN_INTERVAL` (if a polling integration)
-- Raise [`PlatformNotReady`](integration_setup_failures.md#integrations-using-async_setup_platform) if unable to connect during platform setup (if appropriate)
-- Handles expiration of auth credentials. Refresh if possible or print correct error and fail setup. If based on a config entry, should trigger a new config entry flow to re-authorize.  ([docs](config_entries_config_flow_handler.md#reauthentication))
-- Handles internet unavailable. Log a warning once when unavailable, log once when reconnected.
-- Handles device/service unavailable. Log a warning once when unavailable, log once when reconnected.
-- Operations like service calls and entity methods (e.g. *Set HVAC Mode*) have proper exception handling. Raise `ServiceValidationError` on invalid user input and raise `HomeAssistantError` for other failures such as a problem communicating with a device. [Read more](/docs/core/platform/raising_exceptions) about raising exceptions.
-- Set `available` property to `False` if appropriate ([docs](core/entity.md#generic-properties))
-- Entities have unique ID (if available) ([docs](entity_registry_index.md#unique-id-requirements))
+- Configuration:
+  - Configuration is done using config entries and data is stored in `config_entry.runtime_data`.
+  - Raise [`ConfigEntryNotReady`](integration_setup_failures.md) if unable to connect during platform setup (if appropriate)
+- Devices and entities:
+  - Set an appropriate `SCAN_INTERVAL` (if a polling integration)
+  - Handles internet unavailable. Log a warning once when unavailable, log once when reconnected.
+  - Handles device/service unavailable. Log a warning once when unavailable, log once when reconnected.
+  - Set `available` property to `False` if appropriate ([docs](core/entity.md#generic-properties))
+  - Entities have unique ID (if available) ([docs](entity_registry_index.md#unique-id-requirements))
+- Services:
+  - Operations like service calls and entity methods (e.g. *Set HVAC Mode*) have proper exception handling. Raise `ServiceValidationError` on invalid user input and raise `HomeAssistantError` for other failures such as a problem communicating with a device. [Read more](/docs/core/platform/raising_exceptions) about raising exceptions.
+- Tests:
+  - Full test coverage for the config flow
 
 ## Gold 🥇
 
-This is a solid integration that is able to survive poor conditions and can be configured via the user interface.
+This is a solid integration that offers the best possible user experience that Home Assistant has to offer.
 
 - Satisfying all Silver level requirements.
-- Configurable via config entries.
-  - Don't allow configuring already configured device/service (example: no 2 entries for same hub)
-  - Discoverable (if available)
-  - Set unique ID in config flow (if available)
-  - Raise [`ConfigEntryNotReady`](integration_setup_failures.md#integrations-using-async_setup_entry) if unable to connect during entry setup (if appropriate)
-- Entities have device info (if available) ([docs](device_registry_index.md#defining-devices))
+- Configuration:
+  - Don't allow configuring already configured device/service (example: no 2 entries for same hub). If possible, set a unique ID on the config flow.
+  - [Discoverable](config_entries_config_flow_handler.md#discovery-steps) (if available)
+  - Support config entry [unloading](config_entries_index.md#unloading-entries) and [removal](config_entries_index.md#removal-of-entries)
+  - Handles expiration of auth credentials. Refresh if possible or print correct error and fail setup. If based on a config entry, should trigger a new config entry flow to re-authorize.  ([docs](integration_setup_failures.md))
+- Devices and entities:
+  - Entities have [device info](device_registry_index.md#defining-devices) and uses [`has_entity_name = True`](./core/entity.md#has_entity_name-true-mandatory-for-new-integrations)
+  - Entities have correct device classes where appropriate ([docs](core/entity.md#generic-properties))
+  - Supports entities being disabled and leverages `Entity.entity_registry_enabled_default` to disable less popular entities ([docs](core/entity.md#advanced-properties))
+  - If the device/service API can remove entities, the integration should make sure to clean up the entity and device registry.
+  - Entities only subscribe to updates inside `async_added_to_hass` and unsubscribe via `self.async_on_remove` or inside `async_will_remove_from_hass` ([docs](core/entity.md#lifecycle-hooks))
+  - Set appropriate `PARALLEL_UPDATES` constant ([docs](integration_fetching_data.md#request-parallelism))
 - Tests
-  - Full test coverage for the config flow
   - Above average test coverage for all integration modules
   - Tests for fetching data from the integration and controlling it ([docs](development_testing.md))
 - Has a code owner ([docs](creating_integration_manifest.md#code-owners))
-- Entities only subscribe to updates inside `async_added_to_hass` and unsubscribe inside `async_will_remove_from_hass` ([docs](core/entity.md#lifecycle-hooks))
-- Entities have correct device classes where appropriate ([docs](core/entity.md#generic-properties))
-- Supports entities being disabled and leverages `Entity.entity_registry_enabled_default` to disable less popular entities ([docs](core/entity.md#advanced-properties))
-- If the device/service API can remove entities, the integration should make sure to clean up the entity and device registry.
-- When communicating with a device or service, the integration implements the diagnostics platform which redacts sensitive information.
+- Implement the diagnostics platform with sensitive information redacted (if appropriate)
 
 ## Platinum 🏆
 
-Best of the best. The integration is completely async, meaning it's super fast. Integrations that reach platinum level will require approval by the code owner for each PR.
+Best of the best. The integration implements all the best Home Assistant performance best practices. Integrations that reach platinum level will require approval by the code owner for each PR.
 
 - Satisfying all Gold level requirements.
-- Set appropriate `PARALLEL_UPDATES` constant ([docs](integration_fetching_data.md#request-parallelism))
-- Support config entry unloading (called when config entry is removed)
 - Integration + dependency are async ([docs](asyncio_working_with_async.md))
 - Uses aiohttp or httpx and allows passing in websession (if making HTTP requests)
-- [Handles expired credentials](integration_setup_failures.md#handling-expired-credentials) (if appropriate)
 
 ## Internal 🏠
 
