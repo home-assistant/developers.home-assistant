@@ -55,7 +55,7 @@ Open the frontend and in the sidebar, click the first icon in the developer tool
 Pressing "Call Service" will now call your service without any parameters. This will cause your service to create a state with the default name 'World'. If you want to specify the name, you have to specify a parameter by providing it through Service Data. In YAML mode, add the following and press "Call Service again".
 
 ```yaml
-service: helloworld_service.hello
+service: hello_service.hello
 data:
   name: Planet
 ```
