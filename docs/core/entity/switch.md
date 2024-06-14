@@ -4,7 +4,7 @@ sidebar_label: Switch
 ---
 
 A switch entity turns on or off something, for example a relay. Derive a platform entity from [`homeassistant.components.switch.SwitchEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/switch/__init__.py).
-To represent something which can be turned on or off but can't be controlled, for example a wall switch which transmits its state but can't be turned on or off from Home Assistant, a Binary Sensor is a better choice.
+To represent something which has an on or off state but can't be controlled, for example a wall switch which transmits its state but can't be turned on or off from Home Assistant, a Binary Sensor is a better choice.
 To represent something which doesn't have a state, for example a door bell push button, a custom event or a Device Trigger is a better choice.
 
 ## Properties
