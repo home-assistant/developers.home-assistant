@@ -40,7 +40,7 @@ If you are using the `hassfest` GitHub action, you will now start to see warning
 
 ## Serving files
 
-Making resources available to the user is a common use case for custom integrations, whether that is images, panels, or enhancements the user can use in Lovelace. The only way one should serve static files from a path is to use `hass.http.async_register_static_path`. Use this method and avoid using your own, as this can lead to serious bugs or security issues.
+Making resources available to the user is a common use case for custom integrations, whether that is images, panels, or enhancements the user can use in Lovelace. The only way one should serve static files from a path is to use `hass.http.async_register_static_paths`. Use this method and avoid using your own, as this can lead to serious bugs or security issues.
 
 ```python
 from pathlib import Path
