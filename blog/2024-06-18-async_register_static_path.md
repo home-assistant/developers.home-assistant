@@ -1,7 +1,7 @@
 ---
 author: J. Nick Koston
 authorURL: https://github.com/bdraco
-title: Making http path registration async safe with `async_register_static_path`
+title: Making http path registration async safe with `async_register_static_paths`
 ---
 
 `hass.http.register_static_path` is deprecated because it does blocking I/O in the event loop, instead call `await hass.http.async_register_static_paths([StaticPathConfig(url_path, path, cache_headers)])`
