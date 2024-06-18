@@ -40,14 +40,20 @@ If you are using the `hassfest` GitHub action, you will now start to see warning
 
 ## Serving files
 
-Making resources available to the user is a common use case for custom integrations, whether that is images, panels, or enhancements the user can use in Lovelace. The only way one should serve static files from a path is to use `hass.http.register_static_path`. Use this method and avoid using your own, as this can lead to serious bugs or security issues.
+Making resources available to the user is a common use case for custom integrations, whether that is images, panels, or enhancements the user can use in Lovelace. The only way one should serve static files from a path is to use `hass.http.async_register_static_path`. Use this method and avoid using your own, as this can lead to serious bugs or security issues.
 
 ```python
 from pathlib import Path
+from homeassisant.components.http import StaticPathConfig
 
 should_cache = False
 files_path = Path(__file__).parent / "static"
-hass.http.register_static_path("/api/my_integration/static", str(files_path), should_cache)
+files2_path = Path(__file__).parent / "static2"
+
+await hass.http.async_register_static_path(
+    [StaticPathConfig("/api/my_integration/static", str(files_path), should_cache)],
+    [StaticPathConfig("/api/my_integration/static2", str(files2_path), should_cache)]
+)
 ```
 
 That's it for this update about custom integrations. Keep doing awesome stuff! Until next time 👋
