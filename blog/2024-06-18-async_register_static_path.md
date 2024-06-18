@@ -8,7 +8,7 @@ title: Making http path registration async safe with `async_register_static_path
 
 The arguments to `async_register_static_path` are the same as `register_static_path` except they are wrapped in the `StaticPathConfig` `dataclass` and an `Iterable` of them is accepted to allow registering multiple paths at once to avoid multiple executor jobs.
 
-For example, if your integration called
+For example, if your integration called `hass.http.register_static_path("/integrations/photos", "/config/photos", True)`, it should now call `await hass.http.async_register_static_path([StaticPathConfig("/integrations/photos", "/config/photos", True)])`
 `hass.http.register_static_path("/integrations/photos","/config/photos",True)`, it should now call `await hass.http.async_register_static_path([StaticPathConfig("/integrations/photos","/config/photos",True)])`
 
 The `StaticPathConfig` `dataclass` should be imported from `homeassistant.components.http`
