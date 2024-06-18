@@ -19,7 +19,7 @@ The `StaticPathConfig` `dataclass` should be imported from `homeassistant.compon
 
 ```python
 from pathlib import Path
-from homeassisant.components.http import StaticPathConfig
+from homeassistant.components.http import StaticPathConfig
 
 should_cache = False
 files_path = Path(__file__).parent / "static"
