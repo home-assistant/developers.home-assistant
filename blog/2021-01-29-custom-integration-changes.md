@@ -50,10 +50,10 @@ should_cache = False
 files_path = Path(__file__).parent / "static"
 files2_path = Path(__file__).parent / "static2"
 
-await hass.http.async_register_static_paths(
-    [StaticPathConfig("/api/my_integration/static", str(files_path), should_cache)],
-    [StaticPathConfig("/api/my_integration/static2", str(files2_path), should_cache)]
-)
+await hass.http.async_register_static_paths([
+    StaticPathConfig("/api/my_integration/static", str(files_path), should_cache),
+    StaticPathConfig("/api/my_integration/static2", str(files2_path), should_cache)
+])
 ```
 
 That's it for this update about custom integrations. Keep doing awesome stuff! Until next time 👋
