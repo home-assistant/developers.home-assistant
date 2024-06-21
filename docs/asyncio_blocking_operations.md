@@ -1,0 +1,95 @@
+---
+title: "Blocking operations with asyncio"
+---
+
+When writing asyncio code, it's essential to ensure that all blocking operations are done in a separate thread. If blocking operations happen in the event loop, nothing else can run until the operation is complete. For this reason, no blocking operations happen in the event loop, as the entire system will stall for the duration of the blocking operation.
+
+:::tip
+Be sure to enable [`asyncio` debug mode](https://docs.python.org/3/library/asyncio-dev.html#debug-mode) and [Home Assistant's built-in debug mode](https://www.home-assistant.io/integrations/homeassistant/#debug) during development as many blocking I/O errors can be detected automatically.
+:::
+
+## Solving blocking I/O in the event loop
+
+You may have reached this page because Home Assistant detected and reported a blocking call in the event loop.
+
+## Running blocking calls are run in the executor
+
+In Home Assistant this is usually accomplished by calling `await hass.async_add_executor_job`. In library code, `await loop.run_in_executor(None, ...)` is usually used. Review Python's documentation on [Running Blocking Code](https://docs.python.org/3/library/asyncio-dev.html#running-blocking-code) for tips to avoid pitfalls. Some specific calls may need different approaches.
+
+```python
+from functools import partial
+
+def blocking_code(some_arg: str):
+    ...
+
+def blocking_code_with_kwargs(kwarg: bool = False):
+    ...
+
+# When calling a blocking function inside Home Assistant
+result = await hass.async_add_executor_job(blocking_code, "something")
+
+result = await hass.async_add_executor_job(partial(blocking_code_with_kwargs, kwarg=True))
+
+# When calling a blocking function in your library code
+loop = asyncio.get_running_loop()
+
+result = await loop.run_in_executor(None, blocking_code, "something")
+
+result = await loop.run_in_executor(None, partial(blocking_code_with_kwargs, kwarg=True))
+```
+
+### Specific function calls
+
+Depending on the type of blocking call that was detected, the solution may be more nuanced.
+
+#### open
+
+`open` does blocking disk I/O and should be run in the executor with the standard methods above.
+
+<div class='note warning'>
+When an `open` call running in the event loop is fixed, all the blocking reads and writes must also be fixed to happen in the executor. Home Assistant can only detect the `open` call and cannot detect the blocking reads and writes, which means if the blocking read and write calls are not fixed at the same time as the `open` call, they will likely torment users of the integration for a long time as they will be very hard to discover.
+</div>
+
+#### import_module
+
+When importing a module, the import machinery has to read the module from disk which does blocking I/O. This is also a CPU intensive process so its very important that they calls run in the executor.
+
+Importing code in [cpython is not thread-safe](https://github.com/python/cpython/issues/83065). If the module will only ever be imported in a single place, the standard executor calls can be used. If the module may be imported in multiple places at the same time, instead use the `homeassistant.helpers.importlib.import_module` helper which is thread-safe.
+
+Example:
+
+```python
+platform = await async_import_module(hass, f"homeassistant.components.homeassistant.triggers.{platform_name}")
+```
+
+#### sleep
+
+A blocking sleep should be replaced with `await asyncio.sleep` instead. The most common reported blocking `sleep` in the event loop is `pyserial-asyncio` which can be replaced with [`pyserial-asyncio-fast`](https://github.com/home-assistant-libs/pyserial-asyncio-fast) which does not have this issue.
+
+#### putrequest
+
+urllib does blocking I/O and should be run in the executor with the standard methods above. Consider converting the integration to use `aiohttp` or `httpx` instead.
+
+#### glob
+
+`glob.glob` does blocking disk I/O and should be run in the executor with the standard methods above.
+
+#### iglob
+
+`glob.iglob` does blocking disk I/O and should be run in the executor with the standard methods above.
+
+#### walk
+
+`os.walk` does blocking disk I/O and should be run in the executor with the standard methods above.
+
+#### listdir
+
+`os.listdir` does blocking disk I/O and should be run in the executor with the standard methods above.
+
+#### scandir
+
+`os.scandir` does blocking disk I/O and should be run in the executor with the standard methods above.
+
+#### stat
+
+`os.stat` does blocking disk I/O and should be run in the executor with the standard methods above.
