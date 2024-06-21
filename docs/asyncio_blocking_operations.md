@@ -10,7 +10,7 @@ Be sure to enable [`asyncio` debug mode](https://docs.python.org/3/library/async
 
 ## Solving blocking I/O in the event loop
 
-You may have reached this page because Home Assistant detected and reported a blocking call in the event loop.
+You may have reached this page because Home Assistant detected and reported a blocking call in the event loop. Beginning in version 2024.7.0, Home Assistant can detect more blocking operations in the event loop to prevent system instability. Before Home Assistant could detect these errors, they may have led to an unresponsive system or undefined behavior. Below are some tips on correcting blocking operations in the event loop.
 
 ## Running blocking calls are run in the executor
 
