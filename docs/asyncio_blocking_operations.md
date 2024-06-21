@@ -52,7 +52,7 @@ When an `open` call running in the event loop is fixed, all the blocking reads a
 
 #### import_module
 
-When importing a module, the import machinery has to read the module from disk which does blocking I/O. This is also a CPU intensive process so its very important that they calls run in the executor.
+When importing a module, the import machinery has to read the module from disk which does blocking I/O. Importing modules is both CPU-intensive and involves blocking I/O, so it is crucial to ensure these operations are executed in the executor.
 
 Importing code in [cpython is not thread-safe](https://github.com/python/cpython/issues/83065). If the module will only ever be imported in a single place, the standard executor calls can be used. If the module may be imported in multiple places at the same time, instead use the `homeassistant.helpers.importlib.import_module` helper which is thread-safe.
 
