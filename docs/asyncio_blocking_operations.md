@@ -46,9 +46,9 @@ Depending on the type of blocking call that was detected, the solution may be mo
 
 `open` does blocking disk I/O and should be run in the executor with the standard methods above.
 
-<div class='note warning'>
+:::warning
 When an `open` call running in the event loop is fixed, all the blocking reads and writes must also be fixed to happen in the executor. Home Assistant can only detect the `open` call and cannot detect the blocking reads and writes, which means if the blocking read and write calls are not fixed at the same time as the `open` call, they will likely torment users of the integration for a long time as they will be very hard to discover.
-</div>
+:::
 
 #### import_module
 
