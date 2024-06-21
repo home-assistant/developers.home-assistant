@@ -97,7 +97,7 @@ Clients that supports features that needs enabling should as their first message
 }
 ```
 
-As of now the only feature supported is 'coalesce_messages' which result in messages being sendt coalesced in bulk instead of individually. 
+As of now the only feature supported is 'coalesce_messages' which result in messages being sent coalesced in bulk instead of individually. 
 
 ## Command phase
 
