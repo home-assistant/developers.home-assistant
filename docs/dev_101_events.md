@@ -1,5 +1,5 @@
 ---
-title: "Using Events"
+title: "Events"
 ---
 
 The core of Home Assistant is driven by events. That means that if you want to respond to something happening, you'll have to respond to events. Most of the times you won't interact directly with the event system but use one of the [event listener helpers][helpers].
@@ -57,5 +57,5 @@ def setup(hass, config):
 
 Home Assistant comes with a lot of bundled helpers to listen to specific types of event. There are helpers to track a point in time, to track a time interval, a state change or the sun set. [See available methods.][helpers]
 
-[helpers]: https://dev-docs.home-assistant.io/en/master/api/helpers.html#module-homeassistant.helpers.event
+[helpers]: https://developers.home-assistant.io/docs/integration_listen_events#available-event-helpers
 [object]: https://www.home-assistant.io/docs/configuration/events/

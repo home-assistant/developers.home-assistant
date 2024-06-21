@@ -1,5 +1,5 @@
 ---
-title: Update Entity
+title: Update entity
 sidebar_label: Update
 ---
 
@@ -33,7 +33,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 Other properties that are common to all entities such as `device_class`, `entity_category`, `icon`, `name` etc are still applicable.
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `UpdateEntityFeature` enum.
 
@@ -104,6 +104,6 @@ class MyUpdate(UpdateEntity):
 
 Optionally specifies what type of entity it is.
 
-| Value | Description
+| Constant | Description
 | ----- | -----------
-| firmware | The update is a firmware update for a device.
+| `UpdateDeviceClass.FIRMWARE` | The update is a firmware update for a device.

@@ -3,7 +3,7 @@ title: "REST API"
 ---
 import ApiEndpoint from '@site/static/js/api_endpoint.jsx'
 
-Home Assistant provides a RESTful API on the same port as the web frontend. (default port is port 8123).
+Home Assistant provides a RESTful API on the same port as the web frontend (default port is port 8123).
 
 If you are not using the [`frontend`](https://www.home-assistant.io/integrations/frontend/) in your setup then you need to add the [`api` integration](https://www.home-assistant.io/integrations/api/) to your `configuration.yaml` file.
 
@@ -12,25 +12,25 @@ If you are not using the [`frontend`](https://www.home-assistant.io/integrations
 
 The API accepts and returns only JSON encoded objects.
 
-All API calls have to be accompanied by the header `Authorization: Bearer ABCDEFGH`, where `ABCDEFGH` is replaced by your token. You can obtain a token ("Long-Lived Access Token") by logging into the frontend using a web browser, and going to [your profile](https://www.home-assistant.io/docs/authentication/#your-account-profile) `http://IP_ADDRESS:8123/profile`.
+All API calls have to be accompanied by the header `Authorization: Bearer TOKEN`, where `TOKEN` is replaced by your unique access token. You obtain a token ("Long-Lived Access Token") by logging into the frontend using a web browser, and going to [your profile](https://www.home-assistant.io/docs/authentication/#your-account-profile) `http://IP_ADDRESS:8123/profile`. Be careful to copy the whole key.
 
 There are multiple ways to consume the Home Assistant Rest API. One is with `curl`:
 
 ```shell
-curl -X GET \
-  -H "Authorization: Bearer ABCDEFGH" \
+curl \
+  -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" \
   http://IP_ADDRESS:8123/ENDPOINT
 ```
 
-Another option is to use Python and the [Requests](https://requests.readthedocs.io/en/master/) module.
+Another option is to use Python and the [Requests](https://requests.readthedocs.io/en/latest/) module.
 
 ```python
 from requests import get
 
 url = "http://localhost:8123/ENDPOINT"
 headers = {
-    "Authorization": "Bearer ABCDEFGH",
+    "Authorization": "Bearer TOKEN",
     "content-type": "application/json",
 }
 
@@ -38,14 +38,14 @@ response = get(url, headers=headers)
 print(response.text)
 ```
 
-Another option is to use the [Restful Command integration](https://www.home-assistant.io/integrations/rest_command/) in a Home Assistant automation or script.
+Another option is to use the [RESTful Command integration](https://www.home-assistant.io/integrations/rest_command/) in a Home Assistant automation or script.
 
 ```yaml
 turn_light_on:
   url: http://localhost:8123/api/states/light.study_light
   method: POST
   headers:
-    authorization: 'Bearer ABCDEFGH'
+    authorization: 'Bearer TOKEN'
     content-type: 'application/json'
   payload: '{"state":"on"}'
 ```
@@ -55,7 +55,7 @@ Successful calls will return status code 200 or 201. Other status codes that can
 - 400 (Bad Request)
 - 401 (Unauthorized)
 - 404 (Not Found)
-- 405 (Method not allowed)
+- 405 (Method Not Allowed)
 
 ### Actions
 
@@ -74,7 +74,8 @@ Returns a message if the API is up and running.
 Sample `curl` command:
 
 ```shell
-curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+curl \
+  -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" http://localhost:8123/api/
 ```
 
@@ -128,7 +129,8 @@ Returns the current configuration as JSON.
 Sample `curl` command:
 
 ```shell
-curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+curl \
+  -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" http://localhost:8123/api/config
 ```
 
@@ -154,7 +156,8 @@ Returns an array of event objects. Each event object contains event name and lis
 Sample `curl` command:
 
 ```shell
-curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+curl \
+  -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" http://localhost:8123/api/events
 ```
 
@@ -185,7 +188,8 @@ Returns an array of service objects. Each object contains the domain and which s
 Sample `curl` command:
 
 ```shell
-curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+curl \
+  -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" http://localhost:8123/api/services
 ```
 
@@ -197,9 +201,12 @@ Returns an array of state changes in the past. Each object contains further deta
 
 The `<timestamp>` (`YYYY-MM-DDThh:mm:ssTZD`) is optional and defaults to 1 day before the time of the request. It determines the beginning of the period.
 
-You can pass the following optional GET parameters:
+The following parameters are **required**:
 
 - `filter_entity_id=<entity_ids>` to filter on one or more entities - comma separated.
+
+You can pass the following optional GET parameters:
+
 - `end_time=<timestamp>` to choose the end of the period in URL encoded format (defaults to 1 day).
 - `minimal_response` to only return `last_changed` and `state` for states other than the first and last state (much faster).
 - `no_attributes` to skip returning attributes from the database (much faster).
@@ -274,27 +281,28 @@ Example with `minimal_response`
 Sample `curl` commands:
 
 ```shell
-curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+# History of the entity 'sensor.temperature' of the past day (default)
+curl \
+  -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" \
-  http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00
+  "http://localhost:8123/api/history/period?filter_entity_id=sensor.temperature"
 ```
 
 ```shell
-curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+# Minimal history of the entity 'sensor.temperature' and 'sensor.kitchen_temperature' of the past day where the beginning date is set manually to 2023-09-04
+curl \
+  -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" \
-  http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00?minimal_response
+  "http://localhost:8123/api/history/period/2023-09-04T00:00:00+02:00?filter_entity_id=sensor.temperature,sensor.kitchen_temperature&minimal_response"
 ```
 
 ```shell
-curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+# History of the entity 'sensor.temperature' during the period from 2021-09-04 to 2023-09-04
+# Using URL encoded timestamps
+curl \
+  -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" \
-  http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00?filter_entity_id=sensor.temperature
-```
-
-```shell
-curl -X GET -H "Authorization: Bearer ABCDEFGH" \
-  -H "Content-Type: application/json" \
-  http://localhost:8123/api/history/period/2016-12-29T00:00:00+02:00?end_time=2016-12-31T00%3A00%3A00%2B02%3A00
+  "http://localhost:8123/api/history/period/2021-09-04T00%3A00%3A00%2B02%3A00?end_time=2023-09-04T00%3A00%3A00%2B02%3A00&filter_entity_id=sensor.temperature"
 ```
 
 </ApiEndpoint>
@@ -343,28 +351,31 @@ Example
 Sample `curl` commands:
 
 ```shell
-curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+curl \
+  -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" \
   http://localhost:8123/api/logbook/2016-12-29T00:00:00+02:00
 ```
 
 ```shell
-curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+curl \
+  -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" \
-  'http://localhost:8123/api/logbook/2016-12-29T00:00:00+02:00?end_time=2099-12-31T00%3A00%3A00%2B02%3A00&entity=sensor.temperature'
+  "http://localhost:8123/api/logbook/2016-12-29T00:00:00+02:00?end_time=2099-12-31T00%3A00%3A00%2B02%3A00&entity=sensor.temperature"
 ```
 
 ```shell
-curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+curl \
+  -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" \
-  http://localhost:8123/api/logbook/2016-12-29T00:00:00+02:00?end_time=2099-12-31T00%3A00%3A00%2B02%3A00
+  "http://localhost:8123/api/logbook/2016-12-29T00:00:00+02:00?end_time=2099-12-31T00%3A00%3A00%2B02%3A00"
 ```
 
 </ApiEndpoint>
 
 <ApiEndpoint path="/api/states" method="get">
 
-Returns an array of state objects. Each state has the following attributes: entity_id, state, last_changed and attributes.
+Returns an array of state objects. Each state has the following attributes: `entity_id`, `state`, `last_changed` and `attributes`.
 
 ```json
 [
@@ -386,7 +397,8 @@ Returns an array of state objects. Each state has the following attributes: enti
 Sample `curl` command:
 
 ```shell
-curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+curl \
+  -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" http://localhost:8123/api/states
 ```
 
@@ -394,7 +406,7 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 
 <ApiEndpoint path="/api/states/<entity_id>" method="get">
 
-Returns a state object for specified entity_id. Returns 404 if not found.
+Returns a state object for specified `entity_id`. Returns 404 if not found.
 
 ```json
 {
@@ -415,7 +427,8 @@ Returns a state object for specified entity_id. Returns 404 if not found.
 Sample `curl` command:
 
 ```shell
-curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+curl \
+  -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" \
   http://localhost:8123/api/states/sensor.kitchen_temperature
 ```
@@ -435,7 +448,8 @@ Retrieve all errors logged during the current session of Home Assistant as a pla
 Sample `curl` command:
 
 ```shell
-curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+curl \
+  -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" \
   http://localhost:8123/api/error_log
 ```
@@ -444,14 +458,16 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 
 <ApiEndpoint path="/api/camera_proxy/<camera entity_id>" method="get">
 
-Returns the data (image) from the specified camera entity_id.
+Returns the data (image) from the specified camera `entity_id`.
 
 Sample `curl` command:
 
 ```shell
-curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+curl \
+  -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" \
-  http://localhost:8123/api/camera_proxy/camera.my_sample_camera?time=1462653861261 -o image.jpg
+  -o image.jpg \
+  "http://localhost:8123/api/camera_proxy/camera.my_sample_camera?time=1462653861261"
 ```
 
 </ApiEndpoint>
@@ -477,7 +493,8 @@ Returns the list of calendar entities.
 Sample `curl` command:
 
 ```shell
-curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+curl \
+  -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" \
   http://localhost:8123/api/calendars
 ```
@@ -486,7 +503,7 @@ curl -X GET -H "Authorization: Bearer ABCDEFGH" \
 
 <ApiEndpoint path="/api/calendars/<calendar entity_id>" method="get">
 
-Returns the list of [calendar events](/docs/core/entity/calendar/#calendarevent) for the specified calendar entity_id between the `start` and `end` times (exclusive).
+Returns the list of [calendar events](/docs/core/entity/calendar/#calendarevent) for the specified calendar `entity_id` between the `start` and `end` times (exclusive).
 
 The events in the response have a `start` and `end` that contain either `dateTime` or `date` for an all day event.
 ```json
@@ -517,9 +534,10 @@ The events in the response have a `start` and `end` that contain either `dateTim
 Sample `curl` command:
 
 ```shell
-curl -X GET -H "Authorization: Bearer ABCDEFGH" \
+curl \
+  -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" \
-  http://localhost:8123/api/calendars/calendar.holidays?start=2022-05-01T07:00:00.000Z&end=2022-06-12T07:00:00.000Z
+  "http://localhost:8123/api/calendars/calendar.holidays?start=2022-05-01T07:00:00.000Z&end=2022-06-12T07:00:00.000Z"
 ```
 
 </ApiEndpoint>
@@ -562,17 +580,31 @@ The return code is 200 if the entity existed, 201 if the state of a new entity w
 Sample `curl` command:
 
 ```shell
-curl -X POST -H "Authorization: Bearer ABCDEFGH" \
+curl \
+  -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"state": "25", "attributes": {"unit_of_measurement": "°C"}}' \
   http://localhost:8123/api/states/sensor.kitchen_temperature
+```
+
+Sample `python` command using the [Requests](https://requests.readthedocs.io/en/master/) module:
+
+```shell
+from requests import post
+
+url = "http://localhost:8123/api/states/sensor.kitchen_temperature"
+headers = {"Authorization": "Bearer TOKEN", "content-type": "application/json"}
+data = {"state": "25", "attributes": {"unit_of_measurement": "°C"}}
+
+response = post(url, headers=headers, json=data)
+print(response.text)
 ```
 
 </ApiEndpoint>
 
 <ApiEndpoint path="/api/events/<event_type>" method="post">
 
-Fires an event with event_type. Please be mindful of the data structure as documented on our [Data Science portal](https://data.home-assistant.io/docs/events/#database-table).
+Fires an event with `event_type`. Please be mindful of the data structure as documented on our [Data Science portal](https://data.home-assistant.io/docs/events/#database-table).
 
 You can pass an optional JSON object to be used as `event_data`.
 
@@ -594,7 +626,7 @@ Returns a message if successful.
 
 <ApiEndpoint path="/api/services/<domain>/<service>" method="post">
 
-Calls a service within a specific domain. Will return when the service has been executed or after 10 seconds, whichever comes first.
+Calls a service within a specific domain. Will return when the service has been executed.
 
 You can pass an optional JSON object to be used as `service_data`.
 
@@ -628,7 +660,8 @@ Sample `curl` commands:
 Turn the light on:
 
 ```shell
-curl -X POST -H "Authorization: Bearer ABCDEFGH" \
+curl \
+  -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"entity_id": "switch.christmas_lights"}' \
   http://localhost:8123/api/services/switch/turn_on
@@ -642,19 +675,19 @@ Turn the light on:
 from requests import post
 
 url = "http://localhost:8123/api/services/light/turn_on"
-headers = {"Authorization": "Bearer ABCDEFGH"}
+headers = {"Authorization": "Bearer TOKEN"}
 data = {"entity_id": "light.study_light"}
 
 response = post(url, headers=headers, json=data)
 print(response.text)
 ```
 
-Send a MQTT message:
+Send an MQTT message:
 
 ```shell
-curl -X POST \
+curl \
   -H "Content-Type: application/json" \
-  -H "x-ha-access:YOUR_PASSWORD" \
+  -H "Authorization: Bearer TOKEN" \
   -d '{"payload": "OFF", "topic": "home/fridge", "retain": "True"}' \
   http://localhost:8123/api/services/mqtt/publish
 ```
@@ -684,7 +717,8 @@ Paulus is at work!
 Sample `curl` command:
 
 ```shell
-curl -X POST -H "Authorization: Bearer ABCDEFGH" \
+curl \
+  -H "Authorization: Bearer TOKEN" \
   -H "Content-Type: application/json" \
   -d '{"template": "It is {{ now() }}!"}' http://localhost:8123/api/template
 ```
@@ -722,9 +756,10 @@ Handle an intent.
 You must add `intent:` to your `configuration.yaml` to enable this endpoint.
 
 Sample `curl` command:
-	
+
 ```shell
-curl -X POST -H "Authorization: Bearer ${TOKEN}" \
+curl \
+  -H "Authorization: Bearer TOKEN" \
   -H 'Content-Type: application/json' \
   -d '{ "name": "SetTimer", "data": { "seconds": "30" } }' \
   http://localhost:8123/api/intent/handle

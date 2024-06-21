@@ -11,8 +11,8 @@ module.exports = {
       title: "Developers",
       logo: {
         alt: "Home Assistant",
-        src: "img/logo-pretty.svg",
-        srcDark: "img/logo-pretty.svg",
+        src: "img/logo.svg",
+        srcDark: "img/logo.svg",
       },
       items: [
         {
@@ -20,7 +20,7 @@ module.exports = {
           position: "left",
           items: [
             {
-              label: "Architecture",
+              label: "Overview",
               to: "docs/architecture_index",
             },
             {
@@ -31,34 +31,8 @@ module.exports = {
             { to: "docs/supervisor", label: "Supervisor" },
             { to: "docs/add-ons", label: "Add-ons" },
             { to: "docs/operating-system", label: "Operating System" },
-            { to: "docs/internationalization", label: "Internationalization" },
-          ],
-        },
-        {
-          label: "Documenting",
-          position: "left",
-          items: [
-            { label: "Getting Started", to: "docs/documenting" },
-            { label: "Standards", to: "docs/documenting/standards" },
-            { label: "YAML Style Guide", to: "docs/documenting/yaml-style-guide" },
-            {
-              label: "Create a new page",
-              to: "docs/documenting/create-page",
-            },
-          ],
-        },
-        { label: "Translations", to: "docs/translations", position: "left" },
-        {
-          label: "API",
-          position: "left",
-          items: [
-            { label: "REST API", to: "docs/api/rest" },
-            { label: "WebSocket API", to: "docs/api/websocket" },
-            { label: "Supervisor API", to: "docs/api/supervisor/endpoints" },
-            {
-              label: "Native App Integration",
-              to: "docs/api/native-app-integration",
-            },
+            { to: "docs/voice/overview", label: "Voice" },
+            { to: "docs/translations", label: "Translations" },
           ],
         },
         { to: "docs/misc", label: "Misc", position: "left" },
@@ -69,7 +43,7 @@ module.exports = {
       logo: {
         alt: "Home Assistant",
         src: "img/logo-white.svg",
-        height: "70px",
+        height: "30px",
         href: "https://www.home-assistant.io",
       },
       style: "dark",
@@ -142,9 +116,12 @@ module.exports = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Home Assistant, Inc. Built with Docusaurus.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Home Assistant. Built with Docusaurus.`,
     },
     image: "img/default-social.png",
+    mermaid: {
+      theme: { light: "neutral", dark: "forest" },
+    },
   },
   presets: [
     [
@@ -182,4 +159,8 @@ module.exports = {
       },
     ],
   ],
+  markdown: {
+    mermaid: true,
+  },
+  themes: ["@docusaurus/theme-mermaid"],
 };

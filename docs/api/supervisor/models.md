@@ -82,7 +82,7 @@ These models are describing objects that are getting returned from the superviso
 | uuid    | string | The UUID of the discovery |
 | config  | dict   | The configuration         |
 
-## Host Service
+## Host service
 
 | key         | type   | description             |
 | ----------- | ------ | ----------------------- |
@@ -129,7 +129,7 @@ These models are describing objects that are getting returned from the superviso
 | id      | integer | The VLAN ID.                                                                 |
 | parent  | string  | Parent interface which is the vlan attached.                                 |
 
-## Access-Points
+## Access-points
 
 | key        | type    | description                                                                  |
 | ---------- | ------- | ---------------------------------------------------------------------------- |
@@ -190,18 +190,20 @@ The `content` key of a backup object contains the following keys:
 
 ## Backup details
 
-| key           | type    | description                                                                                                                |
-| ------------- | ------- | -------------------------------------------------------------------------------------------------------------------------- |
-| slug          | string  | A generated slug for the backup                                                                                          |
-| type          | string  | The type of backup (full, partial)                                                                                       |
-| name          | string  | The name given to the backup                                                                                             |
-| date          | string  | ISO date string representation of the date the backup was created                                                      |
-| size          | string  | The size of the backup in MB                                                                                             |
-| protected     | boolean | `true` if the backup is password protected                                                                               |
-| homeassistant | string  | The version of Home Assistant that was in use                                                                              |
-| addons        | list    | A list of add-ons in the backup, addons are represented as a dictionary with these keys [`slug`,`name`,`version`,`size`] |
-| repositories  | list    | A list of add-on repository URL's as strings                                                                               |
-| folders       | list    | A list of strings representing directories                                                                                 |
+| key                            | type           | description                                                                                                               |
+| ------------------------------ | -------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| slug                           | string         | A generated slug for the backup                                                                                           |
+| type                           | string         | The type of backup (full, partial)                                                                                        |
+| name                           | string         | The name given to the backup                                                                                              |
+| date                           | string         | ISO date string representation of the date the backup was created                                                         |
+| size                           | string         | The size of the backup in MB                                                                                              |
+| protected                      | boolean        | `true` if the backup is password protected                                                                                |
+| location                       | string or null | The name of the backup mount it's stored on.  `null` if it's stored locally.                                              |
+| homeassistant                  | string         | The version of Home Assistant that was in use                                                                             |
+| addons                         | list           | A list of add-ons in the backup. Add-ons are represented as a dictionary with these keys [`slug`,`name`,`version`,`size`] |
+| repositories                   | list           | A list of add-on repository URL's as strings                                                                              |
+| folders                        | list           | A list of strings representing directories                                                                                |
+| homeassistant_exclude_database | boolean        | `true` if the Home Assistant database file was excluded from this backup                                                  |
 
 ## Stats
 
@@ -222,7 +224,7 @@ The `content` key of a backup object contains the following keys:
 | ----------| ----------- | --------------------------------------------------- |
 | uuid      | str         | A generated uuid as issue ID                        |
 | type      | str         | Type of the issue                                   |
-| context   | str         | In which context the issue occorse                  |
+| context   | str         | In which context the issue occurs                   |
 | reference | str or null | Depend on the Context, a reference to another Model |
 
 ## Suggestion
@@ -231,8 +233,9 @@ The `content` key of a backup object contains the following keys:
 | ----------| ----------- | --------------------------------------------------- |
 | uuid      | str         | A generated uuid as suggestion ID                   |
 | type      | str         | Type of the suggestion                              |
-| context   | str         | In which context the suggestion occorse             |
+| context   | str         | In which context the suggestion occurs              |
 | reference | str or null | Depend on the Context, a reference to another Model |
+| auto      | bool        | True if the suggested fix will be auto-applied      |
 
 ## Check
 
@@ -253,3 +256,100 @@ The `content` key of a backup object contains the following keys:
 | by_id      | string or null | Udev by ID link                                                       |
 | attributes | dict           | A dict with pure udev device attributes for debug and understanding   |
 | children   | list           | A list of path to the children sysfs devices                          |
+
+## Disk
+
+| key        | type           | description                                                            |
+| ---------- | -------------- | ---------------------------------------------------------------------- |
+| name       | string         | Name of the disk device                                                |
+| vendor     | string         | Vendor of the disk device                                              |
+| model      | string         | Model of the disk device                                               |
+| serial     | string         | Serial number of the disk device                                       |
+| size       | int            | Size of disk in bytes                                                  |
+| id         | string         | Unique ID for the disk device (either UDisks2 drive ID or device path) |
+| dev_path   | string         | Device path for the disk device                                        |
+
+## Mount
+
+| key        | type           | description                                                            | request/response |
+| ---------- | -------------- | ---------------------------------------------------------------------- | ---------------- |
+| name       | string         | Name of the mount                                                      | both             |
+| type       | string         | Type of the mount (cifs or nfs)                                        | both             |
+| usage      | string         | Usage of the mount (backup, media, or share)                           | both             |
+| server     | string         | IP address or hostname of the network share server                     | both             |
+| port       | int            | Port to use (if not using the standard one for the mount type)         | both             |
+| read_only  | bool           | Mount is read-only (not available for backup mounts)                   | both             |
+| path       | string         | (nfs mounts only) Path to mount from the network share                 | both             |
+| share      | string         | (cifs mounts only) Share to mount from the network share               | both             |
+| username   | string         | (cifs mounts only) Username to use for authentication                  | request only     |
+| password   | string         | (cifs mounts only) Password to use for authentication                  | request only     |
+| state      | string         | Current state of the mount (active, failed, etc.)                      | response only    |
+
+Request only fields may be included in requests but will never be in responses.
+Response only fields will be in responses but cannot be included in requests.
+
+## Job
+
+| key        | type    | description                                                   |
+| ---------- | ------- | ------------------------------------------------------------- |
+| name       | string  | Name of the job                                               |
+| reference  | string  | A unique ID for instance the job is acting on (if applicable) |
+| uuid       | string  | Unique ID of the job                                          |
+| progress   | int     | Progress of the job (if accurate progress is obtainable)      |
+| stage      | string  | A name for the stage the job is in (if applicable)            |
+| done       | boolean | Is the job complete                                           |
+| child_jobs | list    | A list of child [jobs](#job) started by this one              |
+| errors     | list    | A list of [errors](#job-error) that occurred during execution |
+
+## Job error
+
+| key        | type    | description                                    |
+| ---------- | ------- | ---------------------------------------------- |
+| type       | string  | Type of error that occurred                    |
+| message    | string  | Human-readable description of what went wrong  |
+
+## Boot slot
+
+| key        | type    | description                                     |
+| ---------- | ------- | ----------------------------------------------- |
+| state      | string  | Active or inactive (active slot is in use)      |
+| status     | string  | Status of the last boot from slot (good or bad) |
+| version    | string  | Version of OS installed                         |
+
+## User
+
+| key        | type    | description                                                   |
+| ---------- | ------- | ------------------------------------------------------------- |
+| username   | string  | Username used to login                                        |
+| name       | string  | Name of the user                                              |
+| is_owner   | boolean | Is the user the owner                                         |
+| is_active  | boolean | Is the user active                                            |
+| local_only | boolean | Can the user login from the network (e.g. via http)           |
+| group_ids  | list    | Role(s) the user has (admin, etc)                             |
+
+## Drive
+
+| key            | type     | description                                                 |
+| -------------- | -------- | ----------------------------------------------------------- |
+| vendor         | string   | Drive vendor                                                |
+| model          | string   | Drive model                                                 |
+| serial         | string   | Drive serial number                                         |
+| id             | string   | Unique and persistent id for drive                          |
+| size           | int      | Size of the drive in bytes                                  |
+| time_detected  | datetime | Time drive was detected by system                           |
+| connection_bus | string   | Physical connection bus of the drive (USB, etc.)            |
+| seat           | string   | Identifier of seat drive is plugged into                    |
+| removable      | boolean  | Is the drive removable by the user?                         |
+| ejectable      | boolean  | Is the drive ejectable by the system?                       |
+| filesystems    | list     | A list of [filesystem partitions](#filesystem) on the drive |
+
+## Filesystem
+
+| key          | type    | description                                               |
+| ------------ | ------- | --------------------------------------------------------- |
+| device       | string  | Special device file for the filesystem (e.g. `/dev/sda1`) |
+| id           | string  | Unique and persistent id for filesystem                   |
+| size         | int     | Size of the filesystem in bytes                           |
+| name         | string  | Name of the filesystem (if known)                         |
+| system       | boolean | `true` if filesystem considered a system/internal device  |
+| mount_points | list    | List of paths where the filesystem is mounted.            |

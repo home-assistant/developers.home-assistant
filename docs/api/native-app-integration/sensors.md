@@ -2,7 +2,7 @@
 title: "Sensors"
 ---
 
-The `mobile_app` component supports exposing custom sensors that can be managed entirely via your app.
+The `mobile_app` integration supports exposing custom sensors that can be managed entirely via your app.
 
 ## Registering a sensor
 
@@ -36,7 +36,7 @@ The valid keys are:
 | Key                 | Type                          | Required | Description                                                                                                                                                                                                     |
 |---------------------|-------------------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | attributes          | object                        | No       | Attributes to attach to the sensor                                                                                                                                                                              |
-| device_class        | string                        | No       | One of the valid device classes. [Binary Sensor Classes](https://www.home-assistant.io/components/binary_sensor/#device-class), [Sensor Classes](https://www.home-assistant.io/components/sensor/#device-class) |
+| device_class        | string                        | No       | One of the valid device classes. [Binary Sensor Classes](https://www.home-assistant.io/integrations/binary_sensor/#device-class), [Sensor Classes](https://www.home-assistant.io/integrations/sensor/#device-class) |
 | icon                | Material Design Icon (string) | No       | Must be prefixed `mdi:`. If not provided, default value is `mdi:cellphone`                                                                                                                                      |
 | name                | string                        | Yes      | The name of the sensor                                                                                                                                                                                          |
 | state               | bool, float, int, string      | Yes      | The state of the sensor                                                                                                                                                                                         |

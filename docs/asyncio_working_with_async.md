@@ -109,5 +109,5 @@ If you want to spawn a task that will not block the current async context, you c
 hass.async_create_task(async_say_hello(hass, target))
 ```
 
-[dev-docs]: https://dev-docs.home-assistant.io/en/master/api/core.html
+[dev-docs]: https://dev-docs.home-assistant.io/en/dev/api/core.html
 [dev-docs-async]: https://dev-docs.home-assistant.io/en/dev/api/util.html#module-homeassistant.util.async

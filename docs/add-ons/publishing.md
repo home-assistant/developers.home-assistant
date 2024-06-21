@@ -6,7 +6,7 @@ There are two different ways of publishing add-ons. One is to publish pre-built 
 
 #### Pre-built containers
 
-With pre-built containers, the developer is responsible for building the images for each architecture on their machine and push the results out to a container registry. This has a lot of advantages for the user. As a user it will only have to download the final container and be up and running once the download finishes. This makes the installation process fast and almost no chance of failure. This is the preferred method.
+With pre-built containers, the developer is responsible for building the images for each architecture on their machine and pushing the results out to a container registry. This has a lot of advantages for the user who will only have to download the final container and be up and running once the download finishes. This makes the installation process fast and has almost no chance of failure so it is the preferred method.
 
 We have automated the process of building and publishing add-ons. See below for the instructions.
 
@@ -30,9 +30,9 @@ You can use `{arch}` inside the image name to support multiple architectures wit
 
 Home Assistant assumes that the default branch of your add-on repository matches the latest tag on the container registry. When you're building a new version, it's suggested that you use another branch, ie `build` or do it with a PR on GitHub. After you push the add-on to a container registry, you can merge this branch to master.
 
-## Custom Add-ons
+## Custom add-ons
 
-You need a Docker Hub account to make your own add-ons. You can build your container images with the Docker `build` command or use our [builder] that make it simple. Pull our [Builder Docker engine][builder] and run one of the following commands.
+You need a Docker Hub account to make your own add-ons. You can build your container images with the Docker `build` command or use our [builder] to simplify the process. Pull our [Builder Docker engine][builder] and run one of the following commands.
 
 For a git repository:
 
@@ -41,7 +41,7 @@ docker run \
   --rm \
   --privileged \
   -v ~/.docker:/root/.docker \
-  homeassistant/amd64-builder \
+  ghcr.io/home-assistant/amd64-builder \
   --all \
   -t addon-folder \
   -r https://github.com/xy/addons \
@@ -56,7 +56,7 @@ docker run \
   --privileged \
   -v ~/.docker:/root/.docker \
   -v /my_addon:/data \
-  homeassistant/amd64-builder \
+  ghcr.io/home-assistant/amd64-builder \
   --all \
   -t /data
 ```
@@ -65,4 +65,4 @@ docker run \
 If you are developing on macOS and using Docker for Mac, you may encounter an error message similar to the following: `error creating aufs mount to /var/lib/docker/aufs/mnt/<SOME_ID>-init: invalid argument`. A proposed workaround is to add the following to the Advanced Daemon JSON configuration via Docker > Preferences > Daemon > Advanced: `"storage-driver" : "aufs"` or map the docker socket into container.
 :::
 
-[builder]: https://github.com/home-assistant/hassio-builder
+[builder]: https://github.com/home-assistant/builder

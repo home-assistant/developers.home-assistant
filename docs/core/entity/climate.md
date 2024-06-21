@@ -1,5 +1,5 @@
 ---
-title: Climate Entity
+title: Climate entity
 sidebar_label: Climate
 ---
 
@@ -11,32 +11,30 @@ A climate entity controls temperature, humidity, or fans, such as A/C systems an
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
-| Name                    | Type   | Default                              | Description                                                                                                  |
-| ----------------------- | ------ | ------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| temperature_unit        | string | `NotImplementedError`                | The unit of temperature measurement for the system (`TEMP_CELSIUS` or `TEMP_FAHRENHEIT`).                    |
-| precision               | float  | Based on `temperature_unit`          | The precision of the temperature in the system. Defaults to tenths for TEMP_CELSIUS, whole number otherwise. |
-| current_temperature     | float  | None                                 | The current temperature.                                                                                     |
-| current_humidity        | int    | None                                 | The current humidity.                                                                                        |
-| target_temperature      | float  | None                                 | The temperature currently set to be reached.                                                                 |
-| target_temperature_high | float  | None                                 | The upper bound target temperature                                                                           |
-| target_temperature_low  | float  | None                                 | The lower bound target temperature                                                                           |
-| target_temperature_step | float  | None                                 | The supported step size a target temperature can be increased/decreased                                      |
-| target_humidity         | float  | None                                 | The target humidity the device is trying to reach. Requires `SUPPORT_TARGET_HUMIDITY`.                       |
-| max_temp                | float  | `DEFAULT_MAX_TEMP` (value == 35)     | Returns the maximum temperature.                                                                             |
-| min_temp                | float  | `DEFAULT_MIN_TEMP` (value == 7)      | Returns the minimum temperature.                                                                             |
-| max_humidity            | int    | `DEFAULT_MAX_HUMIDITY` (value == 99) | Returns the maximum humidity. Requires `SUPPORT_TARGET_HUMIDITY`.                                            |
-| min_humidity            | int    | `DEFAULT_MIN_HUMIDITY` (value == 30) | Returns the minimum humidity. Requires `SUPPORT_TARGET_HUMIDITY`.                                            |
-| hvac_mode               | HVACMode | `NotImplementedError()`              | The current operation (e.g. heat, cool, idle). Used to determine `state`.                                    |
-| hvac_action             | string | None                                 | The current HVAC action (heating, cooling)                                                                   |
-| hvac_modes              | list   | `NotImplementedError()`              | List of available operation modes. See below.                                                                |
-| preset_mode             | string | `NotImplementedError()`              | The current active preset. Requires `SUPPORT_PRESET_MODE`.                                                   |
-| preset_modes            | list   | `NotImplementedError()`              | The available presets. Requires `SUPPORT_PRESET_MODE`.                                                       |
-| fan_mode                | string | `NotImplementedError()`              | Returns the current fan mode. Requires `SUPPORT_FAN_MODE`.                                                   |
-| fan_modes               | list   | `NotImplementedError()`              | Returns the list of available fan modes. Requires `SUPPORT_FAN_MODE`.                                        |
-| swing_mode              | string | `NotImplementedError()`              | Returns the swing setting. Requires `SUPPORT_SWING_MODE`.                                                    |
-| swing_modes             | list   | `NotImplementedError()`              | Returns the list of available swing modes. Requires `SUPPORT_SWING_MODE`.                                    |
-| is_aux_heat             | bool   | None                                 | Returns True if an auxiliary heater is on. Requires `SUPPORT_AUX_HEAT`.                                      |
-| supported_features      | int    | `NotImplementedError()`              | Bitmap of supported features. See below.                                                                     |
+| Name                    | Type                                | Default                              | Description                                                                |
+| ----------------------- | ----------------------------------- | ------------------------------------ | -------------------------------------------------------------------------- |
+| current_humidity        | <code>float &#124; None</code>        | `None`                               | The current humidity.                                                      |
+| current_temperature     | <code>float &#124; None</code>      | `None`                               | The current temperature.                                                   |
+| fan_mode                | <code>str &#124; None</code>        | **Required by SUPPORT_FAN_MODE**     | The current fan mode.                                                      |
+| fan_modes               | <code>list[str] &#124; None</code>  | **Required by SUPPORT_FAN_MODE**     | The list of available fan modes.                                           |
+| hvac_action             | <code>HVACAction &#124; None</code> | `None`                               | The current HVAC action (heating, cooling)                                 |
+| hvac_mode               | <code>HVACMode &#124; None</code>   | **Required**                         | The current operation (e.g. heat, cool, idle). Used to determine `state`.  |
+| hvac_modes              | <code>list[HVACMode]</code>         | **Required**                         | List of available operation modes. See below.                              |
+| max_humidity            | `float`                               | `DEFAULT_MAX_HUMIDITY` (value == 99) | The maximum humidity.                                                      |
+| max_temp                | `float`                             | `DEFAULT_MAX_TEMP` (value == 35 °C)  | The maximum temperature in `temperature_unit`.                             |
+| min_humidity            | `float`                               | `DEFAULT_MIN_HUMIDITY` (value == 30) | The minimum humidity.                                                      |
+| min_temp                | `float`                             | `DEFAULT_MIN_TEMP` (value == 7 °C)   | The minimum temperature in `temperature_unit`.                             |
+| precision               | `float`                             | According to `temperature_unit`      | The precision of the temperature in the system. Defaults to tenths for TEMP_CELSIUS, whole number otherwise. |
+| preset_mode             | <code>str &#124; None</code>        | **Required by SUPPORT_PRESET_MODE**  | The current active preset.                                                 |
+| preset_modes            | <code>list[str] &#124; None</code>  | **Required by SUPPORT_PRESET_MODE**  | The available presets.                                                     |
+| swing_mode              | <code>str &#124; None</code>        | **Required by SUPPORT_SWING_MODE**   | The swing setting.                                                         |
+| swing_modes             | <code>list[str] &#124; None</code>  | **Required by SUPPORT_SWING_MODE**   | Returns the list of available swing modes.                                 |
+| target_humidity         | <code>float &#124; None</code>        | `None`                               | The target humidity the device is trying to reach.                         |
+| target_temperature      | <code>float &#124; None</code>      | `None`                               | The temperature currently set to be reached.                               |
+| target_temperature_high | <code>float &#124; None</code>      | **Required by TARGET_TEMPERATURE_RANGE** | The upper bound target temperature                                     |
+| target_temperature_low  | <code>float &#124; None</code>      | **Required by TARGET_TEMPERATURE_RANGE** | The lower bound target temperature                                     |
+| target_temperature_step | <code>float &#124; None</code>      | `None`                               | The supported step size a target temperature can be increased or decreased |
+| temperature_unit        | <code>str</code>                    | **Required**                         | The unit of temperature measurement for the system (`TEMP_CELSIUS` or `TEMP_FAHRENHEIT`).                    |
 
 ### HVAC modes
 
@@ -54,18 +52,19 @@ enum. If you want another mode, add a preset instead.
 | `HVACMode.DRY`       | The device is set to dry/humidity mode.                             |
 | `HVACMode.FAN_ONLY`  | The device only has the fan on. No heating or cooling taking place. |
 
-### HVAC Action
+### HVAC action
 
 The HVAC action describes the _current_ action. This is different from the mode, because if a device is set to heat, and the target temperature is already achieved, the device will not be actively heating anymore. It is only allowed to use the built-in HVAC actions, provided by the `HVACAction` enum.
 
-| Name                 | Description           |
-| -------------------- | --------------------- |
-| `HVACAction.OFF`     | Device is turned off. |
-| `HVACAction.HEATING` | Device is heating.    |
-| `HVACAction.COOLING` | Device is cooling.    |
-| `HVACAction.DRYING`  | Device is drying.     |
-| `HVACAction.FAN`     | Device has fan on.    |
-| `HVACAction.IDLE`    | Device is idle.       |
+| Name                    | Description           |
+| ----------------------- | --------------------- |
+| `HVACAction.OFF`        | Device is turned off. |
+| `HVACAction.PREHEATING` | Device is preheating. |
+| `HVACAction.HEATING`    | Device is heating.    |
+| `HVACAction.COOLING`    | Device is cooling.    |
+| `HVACAction.DRYING`     | Device is drying.     |
+| `HVACAction.FAN`        | Device has fan on.    |
+| `HVACAction.IDLE`       | Device is idle.       |
 
 ### Presets
 
@@ -73,6 +72,7 @@ A device can have different presets that it might want to show to the user. Comm
 
 | Name       | Description                                            |
 | ---------- | ------------------------------------------------------ |
+| `NONE`     | No preset is active                                    |
 | `ECO`      | Device is running an energy-saving mode                |
 | `AWAY`     | Device is in away mode                                 |
 | `BOOST`    | Device turn all valve full up                          |
@@ -109,7 +109,7 @@ The device fan can have different swing modes that it wants the user to know abo
 | `SWING_HORIZONTAL` | The fan is swinging horizontal.                   |
 | `SWING_BOTH`       | The fan is swinging both horizontal and vertical. |
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `ClimateEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.
@@ -122,7 +122,8 @@ and are combined using the bitwise or (`|`) operator.
 | `FAN_MODE`                 | The device supports fan modes.                                                              |
 | `PRESET_MODE`              | The device supports presets.                                                                |
 | `SWING_MODE`               | The device supports swing modes.                                                            |
-| `AUX_HEAT`                 | The device supports auxiliary heaters.                                                      |
+| `TURN_ON`                 | The device supports turn on.                                                      |
+| `TURN_OFF`                 | The device supports turn off.                                                      |
 
 ## Methods
 
@@ -137,6 +138,54 @@ class MyClimateEntity(ClimateEntity):
 
     async def async_set_hvac_mode(self, hvac_mode):
         """Set new target hvac mode."""
+```
+
+### Turn on
+
+```python
+class MyClimateEntity(ClimateEntity):
+    # Implement one of these methods.
+    # The `turn_on` method should set `hvac_mode` to any other than
+    # `HVACMode.OFF` by optimistically setting it from the service handler
+    # or with the next state update
+
+    def turn_on(self):
+        """Turn the entity on."""
+
+    async def async_turn_on(self):
+        """Turn the entity on."""
+```
+
+### Turn off
+
+```python
+class MyClimateEntity(ClimateEntity):
+    # Implement one of these methods.
+    # The `turn_off` method should set `hvac_mode` to `HVACMode.OFF` by
+    # optimistically setting it from the service handler or with the next state update
+
+    def turn_off(self):
+        """Turn the entity off."""
+
+    async def async_turn_off(self):
+        """Turn the entity off."""
+```
+
+### Toggle
+
+```python
+class MyClimateEntity(ClimateEntity):
+    # It's not mandatory to implement the `toggle` method as the base implementation
+    # will call `turn_on`/`turn_off` according to the current HVAC mode.
+
+    # If implemented, the `toggle` method should set `hvac_mode` to the right `HVACMode` by
+    # optimistically setting it from the service handler or with the next state update.
+
+    def toggle(self):
+        """Toggle the entity."""
+
+    async def async_toggle(self):
+        """Toggle the entity."""
 ```
 
 ### Set preset mode
@@ -202,25 +251,4 @@ class MyClimateEntity(ClimateEntity):
 
     async def async_set_temperature(self, **kwargs):
         """Set new target temperature."""
-```
-
-### Control auxiliary heater
-
-```python
-class MyClimateEntity(ClimateEntity):
-    # Implement one of these methods.
-
-    def turn_aux_heat_on(self):
-        """Turn auxiliary heater on."""
-
-    async def async_turn_aux_heat_on(self):
-        """Turn auxiliary heater on."""
-
-    # Implement one of these methods.
-
-    def turn_aux_heat_off(self):
-        """Turn auxiliary heater off."""
-
-    async def async_turn_aux_heat_off(self):
-        """Turn auxiliary heater off."""
 ```

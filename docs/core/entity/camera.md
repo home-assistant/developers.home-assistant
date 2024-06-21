@@ -1,5 +1,5 @@
 ---
-title: Camera Entity
+title: Camera entity
 sidebar_label: Camera
 ---
 
@@ -11,18 +11,19 @@ A camera entity can display images, and optionally a video stream. Derive a plat
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
-| Name                     | Type  | Default | Description                                                                                                             |
-| ------------------------ | ----- | ------- | ----------------------------------------------------------------------------------------------------------------------- |
-| is_recording             | bool  | `None`  | Indication of whether the camera is recording. Used to determine `state`.                                               |
-| is_streaming             | bool  | `None`  | Indication of whether the camera is streaming. Used to determine `state`.                                               |
-| motion_detection_enabled | bool  | False   | Indication of whether the camera has motion detection enabled.                                                          |
-| is_on                    | bool  | `None`  | Indication camera is on.                                                                                                |
-| brand                    | str   | `None`  | The brand (manufacturer) of the camera.                                                                                 |
-| model                    | str   | `None`  | The model of the camera.                                                                                                |
-| frame_interval           | float | 0.5     | The interval between frames of the stream.                                                                              |
-| frontend_stream_type     | str   | None    | Used with `CameraEntityFeature.STREAM` to tell the frontend which type of stream to use (`StreamType.HLS` or `StreamType.WEB_RTC`)  |
+| Name                     | Type                                | Default | Description                                                                                         |
+| ------------------------ | ------------------------------------| ------- | --------------------------------------------------------------------------------------------------- |
+| brand                    | <code>str &#124; None</code>        | `None`  | The brand (manufacturer) of the camera.                                                             |
+| frame_interval           | `float`                             | 0.5     | The interval between frames of the stream.                                                          |
+| frontend_stream_type     | <code>StreamType &#124; None</code> | `None`  | Used with `CameraEntityFeature.STREAM` to tell the frontend which type of stream to use (`StreamType.HLS` or `StreamType.WEB_RTC`) |
+| is_on                    | `bool`                              | `True`  | Indication of whether the camera is on.                                                             |
+| is_recording             | `bool`                              | `False` | Indication of whether the camera is recording. Used to determine `state`.                           |
+| is_streaming             | `bool`                              | `False` | Indication of whether the camera is streaming. Used to determine `state`.                           |
+| model                    | <code>str &#124; None</code>        | `None`  | The model of the camera.                                                                            |
+| motion_detection_enabled | `bool`                              | `False` | Indication of whether the camera has motion detection enabled.                                      |
+| use_stream_for_stills    | `bool`                              | `False` | Determines whether or not to use the `Stream` integration to generate still images                  |
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `CameraEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.
@@ -34,7 +35,7 @@ and are combined using the bitwise or (`|`) operator.
 
 ## Methods
 
-### Camera Image
+### Camera image
 
 When the width and height are passed, scaling should be done on a best-effort basis. The UI will fall back to scaling at the display layer if scaling cannot be done by the camera.
 
@@ -63,7 +64,7 @@ class MyCamera(Camera):
 
 ```
 
-### Stream Source
+### Stream source
 
 The stream source should return a url that is usable by ffmpeg (e.g. an RTSP url). Requires `CameraEntityFeature.STREAM`.
 
@@ -79,7 +80,7 @@ class MyCamera(Camera):
 
 A common way for a camera entity to render a camera still image is to pass the stream source to `async_get_image` in the `ffmpeg` component.
 
-### WebRTC Streams
+### WebRTC streams
 
 WebRTC enabled cameras can be used by facilitating a direct connection with the home assistant frontend. This usage requires `CameraEntityFeature.STREAM` with `frontend_stream_type` set to `StreamType.WEB_RTC`. The integration should implement `async_handle_web_rtc_offer` which passes the frontend's SDP offer to the device and returns back the answer.
 

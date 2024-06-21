@@ -1,5 +1,5 @@
 ---
-title: "Integration Architecture"
+title: "Integration architecture"
 sidebar_label: "Integrations"
 ---
 
@@ -22,6 +22,8 @@ To suggest a new domain, start a discussion in [the architecture repository](htt
 ## Interact with external devices & services
 
 These integrations interact with external devices & services and make them available in Home Assistant via integrations that define IoT domains like `light`.  An example of such an integration is Philips Hue. Philips Hue lights are made available as light entities in Home Assistant.
+
+Integrations which interact with external devices & services are generally not allowed to consume the state of entities from other integrations, with the exception of entities from other integrations which have a location, e.g. the state of zone and device_tracker entities.
 
 For more information, see [entity architecture](architecture/devices-and-services.md).
 

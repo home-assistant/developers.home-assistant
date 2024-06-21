@@ -1,5 +1,5 @@
 ---
-title: Humidifier Entity
+title: Humidifier entity
 sidebar_label: Humidifier
 ---
 
@@ -11,16 +11,25 @@ A humidifier entity is a device whose main purpose is to control humidity, i.e. 
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
-| Name                    | Type   | Default                               | Description                                                                               |
-| ----------------------- | ------ | ------------------------------------------------- | ----------------------------------------------------------------------------------------- |
-| target_humidity         | int    | `None`                                | The target humidity the device is trying to reach.                                        |
-| max_humidity            | int    | `DEFAULT_MAX_HUMIDITY` (value == 100) | Returns the maximum humidity.                                                             |
-| min_humidity            | int    | `DEFAULT_MIN_HUMIDITY` (value == 0)   | Returns the minimum humidity.                                                             |
-| mode                    | string | `NotImplementedError()`               | The current active preset. Requires `SUPPORT_MODES`.                                      |
-| available_modes         | list   | `NotImplementedError()`               | The available modes. Requires `SUPPORT_MODES`.                                            |
-| supported_features      | int    | (abstract method)                     | Bitmap of supported features. See below.                                                  |
-| is_on                   | bool   | `None`                                | Whether the device is on or off.                                                          |
-| device_class            | string | `None`                                | Either DEVICE_CLASS_HUMIDIFIER or DEVICE_CLASS_DEHUMIDIFIER                               |
+| Name                    | Type                                           | Default                               | Description                                        |
+| ----------------------- | ---------------------------------------------- | ------------------------------------- | -------------------------------------------------- |
+| action                  | <code>HumidifierAction &#124; None</code>      | `None`                                | Returns the current status of the device.          |
+| available_modes         | <code>list[str] &#124; None</code>             | **Required by MODES**                 | The available modes. Requires `SUPPORT_MODES`.     |
+| current_humidity        | <code>float &#124; None</code>                   | `None`                                | The current humidity measured by the device.       |
+| device_class            | <code>HumidifierDeviceClass &#124; None</code> | `None`                                | Type of hygrostat                                  |
+| is_on                   | <code>bool &#124; None</code>                  | `None`                                | Whether the device is on or off.                   |
+| max_humidity            | `float`                                          | `DEFAULT_MAX_HUMIDITY` (value == 100) | The maximum humidity.                              |
+| min_humidity            | `float`                                          | `DEFAULT_MIN_HUMIDITY` (value == 0)   | The minimum humidity.                              |
+| mode                    | <code>str &#124; None</code>                   | **Required**                          | The current active mode. Requires `SUPPORT_MODES`. |
+| target_humidity         | <code>float &#124; None</code>                   | `None`                                | The target humidity the device is trying to reach. |
+
+### Available device classes
+
+| Constant                            | Description
+| ----------------------------------- | ------------------------------------------
+| `HumidiferDeviceClass.DEHUMIDIFIER` | A dehumidifier
+| `HumidifierDeviceClass.HUMIDIFIER`  | A humidifier
+
 
 ### Modes
 
@@ -38,7 +47,7 @@ A device can have different modes of operation that it might want to show to the
 | `MODE_AUTO`    | Device is controlling humidity by itself |
 | `MODE_BABY`    | Device is trying to optimize for babies  |
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `HumidifierEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.
@@ -46,6 +55,19 @@ and are combined using the bitwise or (`|`) operator.
 | Value   | Description                          |
 | ------- | ------------------------------------ |
 | `MODES` | The device supports different modes. |
+
+## Action
+
+The `action` property may return the current operating state of the device, whether it is humidifying or idle. This is an informational property. Please note that when the device is off, the `action` attribute, if present, will automatically be replaced with "off". Also, please note that setting `action` to `off` does not replace the `is_on` property.
+
+Current values for `HumidifierAction`:
+
+| Name          | Description                                |
+| ------------- | ------------------------------------------ |
+| `HUMIDIFYING` | The device is currently humidifying.       |
+| `DRYING`      | The device is currently dehumidifying.     |
+| `IDLE`        | The device is on but not active right now. |
+| `OFF`         | The device is switched off.                |
 
 ## Methods
 

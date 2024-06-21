@@ -1,12 +1,12 @@
 ---
-title: Data Entry Flow
+title: Data entry flow
 ---
 
 Data Entry Flow is a data entry framework that is part of Home Assistant. Data entry is done via data entry flows. A flow can represent a simple login form or a multi-step setup wizard for a component. A Flow Manager manages all flows that are in progress and handles creation of new flows.
 
-Data Entry Flow is used in Home Assistant to create config entries.
+Data Entry Flow is used in Home Assistant to login, create config entries, handle options flow, repair issues.
 
-## Flow Manager
+## Flow manager
 
 This is the class that manages the flows that are in progress. When instantiating one, you pass in two async callbacks:
 
@@ -80,17 +80,23 @@ If the result type is `FlowResultType.ABORT`, the result should look like:
 }
 ```
 
-## Flow Handler
+## Flow handler
 
-Flow handlers will handle a single flow. A flow contains one or more steps. When a flow is instantiated, the `FlowHandler.init_step` step will be called. Each step has three different possible results: "Show Form", "Abort" and "Create Entry".
+Flow handlers will handle a single flow. A flow contains one or more steps. When a flow is instantiated, the `FlowHandler.init_step` step will be called. Each step has several possible results:
+
+- [Show Form](#show-form)
+- [Create Entry](#create-entry)
+- [Abort](#abort)
+- [External Step](#external-step--external-step-done)
+- [Show Progress](#show-progress--show-progress-done)
+- [Show Menu](#show-menu)
 
 At a minimum, each flow handler will have to define a version number and a step. This doesn't have to be `init`, as `async_create_flow` can assign `init_step` dependent on the current workflow, for example in configuration, `context.source` will be used as `init_step`.
 
-The bare minimum config flow:
+For example, a bare minimum config flow would be:
 
 ```python
 from homeassistant import data_entry_flow
-
 
 @config_entries.HANDLERS.register(DOMAIN)
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
@@ -104,9 +110,13 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         """Handle user step."""
 ```
 
-### Show Form
+Data entry flows depend on translations for showing the text in the steps. It depends on the parent of a data entry flow manager where this is stored. For config and option flows, this is in `strings.json` under `config` and `option`, respectively.
 
-This result type will show a form to the user to fill in. You define the current step, the schema of the data (using voluptuous or selectors) and optionally a dictionary of errors.
+For a more detailed explanation of `strings.json` see the [backend translation](/docs/internationalization/core) page.
+
+### Show form
+
+This result type will show a form to the user to fill in. You define the current step, the schema of the data (using a mixture of voluptuous and/or [selectors](https://www.home-assistant.io/docs/blueprint/selectors/)) and optionally a dictionary of errors.
 
 ```python
 from homeassistant.helpers.selector import selector
@@ -129,6 +139,77 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         return self.async_show_form(step_id="init", data_schema=vol.Schema(data_schema))
 ```
 
+#### Labels & descriptions
+
+Translations for the form are added to `strings.json` in a key for the `step_id`. That object may contain the folowing keys:
+
+|        Key         |       Value        | Notes                                                                                                                                        |
+| :----------------: | :----------------: | :------------------------------------------------------------------------------------------------------------------------------------------- |
+|      `title`       |    Form heading    | Do not include your brand name. It will be automatically injected from your manifest.                                                        |
+|   `description`    | Form instructions  | Optional. Do not link to the documentation as that is linked automatically. Do not include "basic" information like "Here you can set up X". |
+|       `data`       |    Field labels    | Keep succinct and consistent with other integrations whenever appropriate for the best user experience.                                      |
+| `data_description` | Field descriptions | Optional explanatory text to show below the field.                                                                                           |
+
+The field labels and descriptions are given as a dictionary with keys corresponding to your schema. Here is a simple example:
+
+```json
+{
+  "config": {
+    "step": {
+      "user": {
+          "title": "Add Group",
+          "description": "Some description",
+          "data": {
+              "entities": "Entities",
+          },
+          "data_description": {
+              "entities": "The entities to add to the group",
+          },
+      }
+    }
+  }
+}
+```
+
+#### Enabling browser autofill
+
+Suppose your integration is collecting form data which can be automatically filled by browsers or password managers, such as login credentials or contact information. You should enable autofill whenever possible for the best user experience and accessibility. There are two options to enable this.
+
+The first option is to use Voluptuous with data keys recognized by the frontend. The frontend will recognize the keys `"username"` and `"password"` and add HTML `autocomplete` attribute values of `"username"` and `"current-password"` respectively. Support for autocomplete is limited to `"username"` and `"password"` fields and is supported primarily to quickly enable auto-fill on the many integrations that collect them without converting their schemas to selectors.
+
+The second option is to use a [text selector](https://www.home-assistant.io/docs/blueprint/selectors/#text-selector). A text selector gives full control of the input type and allows any permitted value for `autocomplete` to be specified. A hypothetical schema collecting specific fillable data might be:
+
+```python
+import voluptuous as vol
+from homeassistant.const import CONF_PASSWORD, CONF_USERNAME
+from homeassistant.helpers.selector import (
+    TextSelector,
+    TextSelectorConfig,
+    TextSelectorType,
+)
+
+STEP_USER_DATA_SCHEMA = vol.Schema(
+    {
+        vol.Required(CONF_USERNAME): TextSelector(
+            TextSelectorConfig(type=TextSelectorType.EMAIL, autocomplete="username")
+        ),
+        vol.Required(CONF_PASSWORD): TextSelector(
+            TextSelectorConfig(
+                type=TextSelectorType.PASSWORD, autocomplete="current-password"
+            )
+        ),
+        vol.Required("postal_code"): TextSelector(
+            TextSelectorConfig(type=TextSelectorType.TEXT, autocomplete="postal-code")
+        ),
+        vol.Required("mobile_number"): TextSelector(
+            TextSelectorConfig(type=TextSelectorType.TEL, autocomplete="tel")
+        ),
+    }
+)
+```
+
+#### Defaults & suggestions
+
 If you'd like to pre-fill data in the form, you have two options. The first is to use the `default` parameter. This will both pre-fill the field, and act as the default value in case the user leaves the field empty.
 
 ```python
@@ -149,7 +230,27 @@ The other alternative is to use a suggested value - this will also pre-fill the 
 
 You can also mix and match - pre-fill through `suggested_value`, and use a different value for `default` in case the field is left empty, but that could be confusing to the user so use carefully.
 
-Title and description of the step will be provided via the translation file. Where this is defined depends on the context of the data entry flow.
+Using suggested values also make it possible to declare a static schema, and merge suggested values from existing input. A `add_suggested_values_to_schema` helper makes this possible:
+
+```python
+OPTIONS_SCHEMA = vol.Schema(
+    {
+        vol.Optional("field_name", default="default value"): str,
+    }
+)
+
+class ExampleOptionsFlow(config_entries.OptionsFlow):
+    async def async_step_init(
+        self, user_input: dict[str, Any] | None = None
+    ) -> FlowResult:
+        return self.async_show_form(
+            data_schema = self.add_suggested_values_to_schema(
+                OPTIONS_SCHEMA, self.entry.options
+            )
+        )
+```
+
+#### Validation
 
 After the user has filled in the form, the step method will be called again and the user input is passed in. Your step will only be called if the user input passes your data schema. When the user passes in data, you will have to do extra validation of the data. For example, you can verify that the passed in username and password are valid.
 
@@ -179,35 +280,9 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         )
 ```
 
-Translations for the step title, description and fields is added to `strings.json`. Each field can also have an optional entry in `data_description` to add extra explanatory text.
-
-Do not put your brand title in the `title`. It will be automatically injected from your manifest.
-
-Your description should not link to the documentation as that is linked automatically. It should also not contain "basic" information like "Here you can set up X". It can be omitted.
-
-```json
-{
-  "config": {
-    "step": {
-      "user": {
-          "title": "Add Group",
-          "description": "Some description",
-          "data": {
-              "entities": "Entities",
-          },
-          "data_description": {
-              "entities": "The entities to add to the group",
-          },
-      }
-    }
-  }
-}
-```
-
-
 #### Multi-step flows
 
-If the user input passes validation, you can again return one of the three return values. If you want to navigate the user to the next step, return the return value of that step:
+If the user input passes validation, you can return one of the possible step types again. If you want to navigate the user to the next step, return the return value of that step:
 
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
@@ -225,9 +300,9 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         ...
 ```
 
-### Create Entry
+### Create entry
 
-When the result is "Create Entry", an entry will be created and passed to the parent of the flow manager. A success message is shown to the user and the flow is finished. You create an entry by passing a title and data. The title can be used in the UI to indicate to the user which entry it is. Data can be any data type, as long as it is JSON serializable.
+When the result is "Create Entry", an entry will be created and passed to the parent of the flow manager. A success message is shown to the user and the flow is finished. You create an entry by passing a title, data and optionally options. The title can be used in the UI to indicate to the user which entry it is. Data and options can be any data type, as long as they are JSON serializable. Options are used for mutable data, for example a radius. Whilst Data is used for immutable data that isn't going to change in an entry, for example location data.
 
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
@@ -235,10 +310,16 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         return self.async_create_entry(
             title="Title of the entry",
             data={
-                "something_special": user_input["username"]
+                "username": user_input["username"],
+                "password": user_input["password"]
+            },
+            options={
+                "mobile_number": user_input["mobile_number"]
             },
         )
 ```
+
+Note: A user can change their password, which technically makes it mutable data, but for changing authentication credentials, you use [reauthentication](/docs/config_entries_config_flow_handler#reauthentication), which can mutate the config entry data.
 
 ### Abort
 
@@ -250,7 +331,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         return self.async_abort(reason="not_supported")
 ```
 
-### External Step & External Step Done
+### External step & external step done
 
 It is possible that a user needs to finish a config flow by doing actions on an external website. For example, setting up an integration by being redirected to an external webpage. This is commonly used by integrations that use OAuth2 to authorize a user.
 
@@ -273,7 +354,6 @@ Example configuration flow that includes an external step.
 
 ```python
 from homeassistant import config_entries
-
 
 @config_entries.HANDLERS.register(DOMAIN)
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
@@ -313,58 +393,56 @@ async def handle_result(hass, flow_id, data):
         return "Invalid config flow specified"
 ```
 
-### Show Progress and Show Progress Done
+### Show progress & show progress done
 
-It is possible that we need the user to wait for a task that takes several minutes.
+If a data entry flow step needs a considerable amount of time to finish, we should inform the user about this.
 
 _The example is about config entries, but works with other parts that use data entry flows too._
 
 The flow works as follows:
 
 1. The user starts the config flow in Home Assistant.
-2. The config flow prompts the user that a task is in progress and will take some time to finish by calling `async_show_progress`. The flow should pass a task specific string as `progress_action` parameter to represent the translated text string for the prompt.
-3. The flow is responsible for managing the background task and continuing the flow when the task is done or canceled. Continue the flow by calling the `FlowManager.async_configure` method, e.g. via `hass.config_entries.flow.async_configure`. Create a new task that does this to avoid a deadlock.
-4. When the task or tasks are done, the flow should mark the progress to be done with the `async_show_progress_done` method.
+2. The config flow creates an `asyncio.Task` to execute the long running task.
+3. The config flow informs the user that a task is in progress and will take some time to finish by calling `async_show_progress`, passing the `asyncio.Task` object to it. The flow should pass a task specific string as `progress_action` parameter to represent the translated text string for the prompt.
+4. The config flow will be automatically called once the task is finished, but may also be called before the task has finished, for example if frontend reloads.
+  * If the task is not yet finished, the flow should not create another task, but instead call `async_show_progress` again.
+  * If the task is finished, the flow must call the `async_show_progress_done`, indicating the next step
 5. The frontend will update each time we call show progress or show progress done.
 6. The config flow will automatically advance to the next step when the progress was marked as done. The user is prompted with the next step.
 
-Example configuration flow that includes two show progress tasks.
+Example configuration flow that includes two show sequential progress tasks.
 
 ```python
+import asyncio
+
 from homeassistant import config_entries
-
 from .const import DOMAIN
-
 
 class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
-    task_one = None
-    task_two = None
-
-    async def _async_do_task(self, task):
-        await task  # A task that take some time to complete.
-
-        # Continue the flow after show progress when the task is done.
-        # To avoid a potential deadlock we create a new task that continues the flow.
-        # The task must be completely done so the flow can await the task
-        # if needed and get the task result.
-        self.hass.async_create_task(
-            self.hass.config_entries.flow.async_configure(flow_id=self.flow_id)
-        )
+    task_one: asyncio.Task | None = None
+    task_two: asyncio.Task | None = None
 
     async def async_step_user(self, user_input=None):
-        if not self.task_one or not self.task_two:
-            if not self.task_one:
-                task = asyncio.sleep(10)
-                self.task_one = self.hass.async_create_task(self._async_do_task(task))
-                progress_action = "task_one"
-            else:
-                task = asyncio.sleep(10)
-                self.task_two = self.hass.async_create_task(self._async_do_task(task))
+        uncompleted_task: asyncio.Task[None] | None = None
+
+        if not self.task_one:
+            coro = asyncio.sleep(10)
+            self.task_one = self.hass.async_create_task(coro)
+        if not self.task_one.done():
+            progress_action = "task_one"
+            uncompleted_task = self.task_one
+        if not uncompleted_task:
+            if not self.task_two:
+                coro = asyncio.sleep(10)
+                self.task_two = self.hass.async_create_task(coro)
+            if not self.task_two.done():
                 progress_action = "task_two"
+                uncompleted_task = self.task_two
+        if uncompleted_task:
             return self.async_show_progress(
-                step_id="user",
                 progress_action=progress_action,
+                progress_task=uncompleted_task,
             )
 
         return self.async_show_progress_done(next_step_id="finish")
@@ -375,9 +453,9 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return self.async_create_entry(title="Some title", data={})
 ```
 
-### Show Menu
+### Show menu
 
-This will show a navigation menu to the user to easily pick the next step. The menu labels can be hardcoded by specifying a dictionary of {`step_id`: `label`} or translated via `strings.json` when specifying a list.
+This will show a navigation menu to the user to easily pick the next step. The menu labels can be hardcoded by specifying a dictionary of `{step_id: label}` or translated via `strings.json` when specifying a list.
 
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
@@ -413,12 +491,6 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
   }
 }
 ```
-
-## Translations
-
-Data entry flows depend on translations for showing the text in the forms. It depends on the parent of a data entry flow manager where this is stored. For config and option flows this is in `strings.json` under `config` and `option`.
-
-For a more detailed explanation of `strings.json` see to the [backend translation](/docs/internationalization/core) page.
 
 ## Initializing a config flow from an external source
 

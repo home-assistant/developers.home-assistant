@@ -2,15 +2,25 @@
 title: "Testing your code"
 ---
 
-As it states in the [Style guidelines section](development_guidelines.md) all code is checked to verify the following:
+As stated in the [Style guidelines section](development_guidelines.md) all code is checked to verify the following:
 
 - All the unit tests pass
 - All code passes the checks from the linting tools
 
-Local testing is done using [Tox](https://tox.readthedocs.io), which has been installed as part of running `script/setup` in the [virtual environment](development_environment.mdx). To start the tests, activate the virtual environment and simply run the command:
+Local testing is done using [pytest](https://docs.pytest.org/) and using [pre-commit](https://pre-commit.com/) for running out linters, which has been installed as part of running `script/setup` in the [virtual environment](development_environment.mdx).
+
+Python test requirements need to be installed before tests can be run. This can be achieved by using the VScode devcontainer and the corresponding task. Check the [devcontainer documentation](/docs/development_environment#tasks) for guidance about running tasks.
+
+To run our linters, on the full code base, run the following command:
 
 ```shell
-tox
+pre-commit run --all-files
+```
+
+To start the tests, and run the full test suite, activate the virtual environment and run the command:
+
+```shell
+pytest tests
 ```
 
 It might be required that you install additional packages depending on your distribution/operating system:
@@ -19,75 +29,65 @@ It might be required that you install additional packages depending on your dist
 - Ubuntu: `sudo apt-get install libudev-dev`
 
 :::info Important
-Run `tox` before you create your pull request to avoid annoying fixes.
+Run `pytest` & `pre-commit` before you create your pull request to avoid annoying fixes.
+`pre-commit` will be invoked automatically by git when commiting changes.
 :::
 
 :::note
-Running the full `tox` test suite will take quite some time, so as the minimal requirement for pull requests, run at least the tests that are related to your code changes (see details below on how to). The full test suite will anyway be run by the CI once you created your pull request and before it can be merged.
+Running the full `pytest` test suite will take quite some time, so as the minimal requirement for pull requests, run at least the tests that are related to your code changes (see details below on how to). The full test suite will anyway be run by the CI once you created your pull request and before it can be merged.
 :::
 
-Running `tox` will run unit tests against the locally available Python releases, as well as validate the code and document style using `pycodestyle`, `pydocstyle` and `pylint`. You can run tests on only one `tox` target -- just use `-e` to select an environment. For example, `tox -e lint` runs the linters only, and `tox -e py39` runs unit tests only on Python 3.9.
-
-`tox` uses virtual environments under the hood to create isolated testing environments. The `tox` virtual environments will get out-of-date when requirements change, causing test errors. Run `tox -r` to tell `tox` to recreate the virtual environments.
-
-macOS users may see an `Error creating virtualenv` when running `tox`. If this occurs, install the [tox-venv](https://pypi.org/project/tox-venv/) package using the command `pip install tox-venv` and try again.
+Running `pytest` will run unit tests against the locally available Python version. We run our tests in our CI against all our supported Python versions.
 
 ### Adding new dependencies to test environment
 
-If you are working on tests for an integration and you need the dependencies available inside the `tox` environment, update the list inside `script/gen_requirements_all.py`. Then run the script and then run `tox -r` to recreate the virtual environments.
+If you are working on tests for an integration and you changed the dependencies, then run the `script/gen_requirements_all.py` script to update all requirement files.
+Next you can update all dependencies in your development environment by running:
 
-### Running single tests using `tox`
+```shell
+pip3 install -r requirements_test_all.txt
+```
+### Running a limited test suite
 
-You can pass arguments via `tox` to `pytest` to be able to run single test suites or test files. Replace `py39` with the Python version that you use.
+You can pass arguments to `pytest` to be able to run single test suites or test files.
+Here are some helpful commands:
 
 ```shell
 # Stop after the first test fails
-$ tox -e py39 -- tests/test_core.py -x
+$ pytest tests/test_core.py -x
+
 # Run test with specified name
-$ tox -e py39 -- tests/test_core.py -k test_split_entity_id
+$ pytest tests/test_core.py -k test_split_entity_id
+
 # Fail a test after it runs for 2 seconds
-$ tox -e py39 -- tests/test_core.py --timeout 2
+$ pytest tests/test_core.py --timeout 2
+
 # Show the 10 slowest tests
-$ tox -e py39 -- tests/test_core.py --duration=10
+$ pytest tests/test_core.py --duration=10
 ```
 
-### Testing outside of Tox
-
-Running `tox` will invoke the full test suite. Even if you specify which tox target to run, you still run all tests inside that target. That's not very convenient to quickly iterate on your code! To be able to run the specific test suites without `tox`, you'll need to install the test dependencies into your Python environment:
-
-```shell
-pip3 install --use-deprecated=legacy-resolver -r requirements_test_all.txt -c homeassistant/package_constraints.txt
-```
-
-Now that you have all test dependencies installed, you can run tests on individual files:
+If you want to test just your integration, and include a test coverage report,
+the following command is recommended:
 
 ```shell
-flake8 homeassistant/core.py
-pylint homeassistant/core.py
-pydocstyle homeassistant/core.py
-pytest tests/test_core.py
-```
-
-You can also run linting tests against all changed files, as reported by `git diff upstream/dev... --diff-filter=d --name-only`, using the `lint` script:
-
-```shell
-script/lint
-```
-
-In case you want to check the code coverage for your new component, run the following from the root of the repository:
-
-```shell
-pytest ./tests/components/<your_component>/ --asyncio-mode=strict --cov=homeassistant.components.<your_component> --cov-report term-missing -vv
+pytest ./tests/components/<your_component>/ --cov=homeassistant.components.<your_component> --cov-report term-missing -vv
 ```
 
 ### Preventing linter errors
 
 Several linters are setup to run automatically when you try to commit as part of running `script/setup` in the [virtual environment](development_environment.mdx).
 
-You can also run these linters manually:
+You can also run these linters manually :
 
 ```shell
 pre-commit run --show-diff-on-failure
+```
+
+The linters are also available directly, you can run tests on individual files:
+
+```shell
+ruff homeassistant/core.py
+pylint homeassistant/core.py
 ```
 
 ### Notes on PyLint and PEP8 validation
@@ -105,3 +105,73 @@ If you can't avoid a PyLint warning, add a comment to disable the PyLint check f
   - Modify a `ConfigEntry` via the config entries interface [`hass.config_entries`](https://github.com/home-assistant/core/blob/4cce724473233d4fb32c08bd251940b1ce2ba570/homeassistant/config_entries.py#L570).
   - Assert the state of a config entry via the [`ConfigEntry.state`](https://github.com/home-assistant/core/blob/4cce724473233d4fb32c08bd251940b1ce2ba570/homeassistant/config_entries.py#L169) attribute.
   - Mock a config entry via the `MockConfigEntry` class in [`tests/common.py`](https://github.com/home-assistant/core/blob/4cce724473233d4fb32c08bd251940b1ce2ba570/tests/common.py#L658)
+
+### Snapshot testing
+
+Home Assistant supports a testing concept called snapshot testing (also known
+as approval tests), which are tests that assert values against a stored
+reference value (the snapshot).
+
+Snapshot tests are different from regular (functional) tests and do not replace
+functional tests, but they can be very useful for testing larger test outputs.
+Within Home Assistant they could, for example, be used to:
+
+- Ensure the output of an entity state is and remains as expected.
+- Ensure an area, config, device, entity, or issue entry in the registry is and
+  remains as expected.
+- Ensure the output of a diagnostic dump is and remains as expected.
+- Ensure a FlowResult is and remains as expected.
+
+And many more cases that have large output, like JSON, YAML, or XML results.
+
+The big difference between snapshot tests and regular tests is that the results
+are captured by running the tests in a special mode that creates the snapshots.
+Any sequential runs of the tests will then compare the results against the
+snapshot. If the results are different, the test will fail.
+
+Snapshot testing in Home Assistant is built on top of [Syrupy](https://github.com/tophat/syrupy),
+their documentation can thus be applied when writing Home Assistant tests.
+This is a snapshot test that asserts the output of an entity state:
+
+```python
+# tests/components/example/test_sensor.py
+from homeassistant.core import HomeAssistant
+from syrupy.assertion import SnapshotAssertion
+
+
+async def test_sensor(
+    hass: HomeAssistant,
+    snapshot: SnapshotAssertion,
+) -> None:
+    """Test the sensor state."""
+    state = hass.states.get("sensor.whatever")
+    assert state == snapshot
+```
+
+When this test is run for the first time, it will fail, as no snapshot exists.
+To create (or update) a snapshot, run the test with
+the `--snapshot-update` flag:
+
+```shell
+pytest tests/components/example/test_sensor.py --snapshot-update
+```
+
+This will create a snapshot file in the `tests/components/example/snapshots`.
+The snapshot file is named after the test file, in this case `test_sensor.ambr`,
+and is human-readable. The snapshot files must be committed to the repository.
+
+When the test is run again (without the update flag), it will compare the
+results against the stored snapshot and everything should pass.
+
+When the test results change, the test will fail and the snapshot needs to be
+updated again.
+
+Use snapshot testing with care! As it is very easy to create a snapshot,
+it can be tempting to assert everything against a snapshot. However, remember,
+it is not a replacement for functional tests.
+
+As an example, when testing if an entity would go unavailable when the device
+returns an error, it is better to assert the specific change you expected: 
+Assert the state of the entity became `unavailable`. This functional test is a
+better approach than asserting the full state of such an entity using a
+snapshot, as it assumes it worked as expected (when taking the snapshot).

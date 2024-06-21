@@ -4,6 +4,9 @@
 # Production
 /build
 
+# Intents repo
+/intents
+
 # Generated files
 .docusaurus
 .cache-loader

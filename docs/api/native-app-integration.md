@@ -1,5 +1,5 @@
 ---
-title: "Native App Integration"
+title: "Native app integration"
 sidebar_label: "Introduction"
 ---
 

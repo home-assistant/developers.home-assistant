@@ -2,11 +2,11 @@
 title: "Local add-on testing"
 ---
 
-The fastest and recommended way to develop add-ons is using a local Visual Studio Code devcontainer. We maintain a [devcontainer for this purpose](https://github.com/home-assistant/devcontainer) which is used in all our add-ons repositories. This devcontainer setup for VS Code which will run Supervisor and Home Assistant, with all of the add-ons mapped as Local Add-ons inside, making it simple for add-on developers on Windows, Mac and Linux desktop OS-es.
+The fastest and recommended way to develop add-ons is using a local Visual Studio Code devcontainer. We maintain a [devcontainer for this purpose](https://github.com/home-assistant/devcontainer) which is used in all our add-on repositories. This devcontainer setup for VS Code runs Supervisor and Home Assistant, with all of the add-ons mapped as local add-ons inside, making it simple for add-on developers on Windows, Mac and Linux desktop OS-es.
 
 - Follow the instructions to download and install the [Remote Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) VS Code extension.
-- Copy the [`devcontainer.json` file](https://github.com/home-assistant/devcontainer/raw/main/addons/devcontainer.json) to `.devcontainer.json` in your repository.
-- Copy the [`tasks.json` file](https://github.com/home-assistant/devcontainer/raw/main/addons/tasks.json) to `.vscode/tasks.json` in your repository.
+- Copy the [`devcontainer.json`](https://github.com/home-assistant/devcontainer/raw/main/addons/devcontainer.json) file to `.devcontainer/devcontainer.json` in your repository.
+- Copy the [`tasks.json`](https://github.com/home-assistant/devcontainer/raw/main/addons/tasks.json) file to `.vscode/tasks.json` in your repository.
 - Open the root folder inside VS Code, and when prompted re-open the window inside the container (or, from the Command Palette, select 'Rebuild and Reopen in Container').
 - When VS Code has opened your folder in the container (which can take some time for the first run) you'll need to run the task (Terminal -> Run Task) 'Start Home Assistant', which will bootstrap Supervisor and Home Assistant.
 - You'll then be able to access the normal onboarding process via the Home Assistant instance at `http://localhost:7123/`.
@@ -32,7 +32,7 @@ docker run \
   --privileged \
   -v /path/to/addon:/data \
   -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  homeassistant/amd64-builder \
+  ghcr.io/home-assistant/amd64-builder \
   -t /data \
   --all \
   --test \
@@ -40,7 +40,7 @@ docker run \
   -d local
 ```
 
-If you don't want to use the official build tool, you can still build with standalone Docker. If you use `FROM $BUILD_FROM` you'll need to set a base image with build args. Normally you can use follow base images:
+If you don't want to use the official build tool, you can still build with standalone Docker. If you use `FROM $BUILD_FROM` you'll need to set a base image with build args. Normally you can use following base images:
 
 - armhf: `homeassistant/armhf-base:latest`
 - aarch64: `homeassistant/aarch64-base:latest`
@@ -56,7 +56,7 @@ docker build \
   .
 ```
 
-[hassio-builder]: https://github.com/home-assistant/hassio-builder
+[hassio-builder]: https://github.com/home-assistant/builder
 
 ## Local run
 

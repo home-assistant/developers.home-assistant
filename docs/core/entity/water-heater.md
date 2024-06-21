@@ -1,6 +1,6 @@
 ---
-title: Water Heater Entity
-sidebar_label: Water Heater
+title: Water heater entity
+sidebar_label: Water heater
 ---
 
 Derive entity platforms from [`homeassistant.components.water_heater.WaterHeaterEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/water_heater/__init__.py)
@@ -41,7 +41,7 @@ Properties have to follow the units defined in the `temperature_unit`.
 | `STATE_GAS` | Gas only mode, uses the most energy.
 | `STATE_OFF` | The water heater is off.
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `WaterHeaterEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.
@@ -69,3 +69,11 @@ Set the water heater to away mode.
 ### `turn_away_mode_off` or `async_turn_away_mode_off`
 
 Set the water heater back to the previous operation mode. Turn off away mode.
+
+### `turn_on` or `async_turn_on`
+
+Turns the water heater on.
+
+### `turn_off` or `async_turn_off`
+
+Turns the water heater off.

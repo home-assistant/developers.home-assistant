@@ -41,30 +41,33 @@ If you are using Visual Studio Code with devcontainers for Home Assistant, you n
 ]
 ```
 
-The Home Assistant's devcontainer needs to get rebuilt via the `docker-build` [task](/development_environment.mdx#tasks), and the `configuration.yaml` should point to the path inside the container:
+The Home Assistant's devcontainer needs to get rebuilt via the `Dev Containers: Rebuild Container` with: Shift+Command+P(Mac) / Ctrl+Shift+P (Windows/Linux). The `configuration.yaml` should point to the path inside the container:
 
 ```yaml
 frontend:
   development_repo: /workspaces/frontend/
 ```
 
-The change to `.devcontainer/devcontainer.json` should be excluded from any PR as it contains your local path to the `frontend` repository.
+:::caution
+The change to `.devcontainer/devcontainer.json` should be excluded from any PR as it contains your local path to the `frontend` repository. Since the the settings in `.devcontainer/devcontainer.json` are only processed during the container rebuild, you can safely roll back the change after the rebuild has completed.
+:::
 
 ### Installing Node.js
 
-Node.js is required to build the frontend. The preferred method of installing node.js is with [nvm](https://github.com/creationix/nvm). Install nvm using the instructions in the [README](https://github.com/creationix/nvm#install-script), and install the correct node.js by running the following command:
+Node.js is required to build the frontend. The preferred method of installing node.js is with [nvm](https://github.com/nvm-sh/nvm). Install nvm using the instructions in the [README](https://github.com/nvm-sh/nvm#install--update-script), and install the correct node.js by running the following command:
 
 ```shell
 nvm install
 ```
 
-[Yarn](https://yarnpkg.com/en/) is used as the package manager for node modules. [Install yarn using the instructions here.](https://yarnpkg.com/en/docs/install)
+[Yarn](https://yarnpkg.com/en/) is used as the package manager for node modules. [Install yarn using the instructions here.](https://yarnpkg.com/getting-started/install)
 
 Next, development dependencies need to be installed to bootstrap the frontend development environment. First activate the right Node version and then download all the dependencies:
 
 ```shell
 nvm use
 script/bootstrap
+script/setup_translations
 ```
 
 ## Development
@@ -117,8 +120,8 @@ If you're making changes to the way the frontend is packaged, it might be necess
 To test it out inside Home Assistant, run the following command from the main Home Assistant repository:
 
 ```shell
-pip3 install -e /path/to/hass/frontend/
-hass --skip-pip
+pip3 install -e /path/to/hass/frontend/ --config-settings editable_mode=compat
+hass --skip-pip-packages home-assistant-frontend
 ```
 
 [hass-frontend]: https://github.com/home-assistant/frontend

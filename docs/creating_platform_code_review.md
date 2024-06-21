@@ -1,6 +1,6 @@
 ---
 title: "Checklist for creating a platform"
-sidebar_label: Platform Checklist
+sidebar_label: Platform checklist
 ---
 
 A checklist of things to do when you're adding a new platform.
@@ -50,10 +50,10 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
 )
 ```
 
-### 3. Setup Platform
+### 3. Setup platform
 
 1. Verify that the passed in configuration (user/pass/host etc.) works.
-2. Group your calls to `add_devices` if possible.
+2. Group your calls to `add_entities if possible.
 3. If the platform adds extra services, the format should be `<domain of your integration>.<service name>`. So if your integration's domain is "awesome_sauce" and you are making a light platform, you would register services under the `awesome_sauce` domain. Make sure that your services [verify permissions](auth_permissions.md#checking-permissions).
 
 ### 4. Entity
@@ -69,7 +69,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
     ```
 
 2. Avoid passing in `hass` as a parameter to the entity. `hass` will be set on the entity when the entity is added to Home Assistant. This means you can access `hass` as `self.hass` inside the entity.
-3. Do not call `update()` in constructor, use `add_entities(devices, True)` instead.
+3. Do not call `update()` in constructor, use `add_entities(devices, update_before_add=True)` instead.
 4. Do not do any I/O inside properties. Cache values inside `update()` instead.
 5. When dealing with time, state and/or attributes should not contain relative time since something happened. Instead, it should store UTC timestamps.
 6. Leverage the [entity lifecycle callbacks](core/entity.md#lifecycle-hooks) to attach event listeners or clean up connections.

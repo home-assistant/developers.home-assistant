@@ -1,5 +1,5 @@
 ---
-title: "Catching up with Reality"
+title: "Catching up with reality"
 ---
 
 If it's taking a while to develop your feature, and you want to catch up with what's in the current Home Assistant `dev` branch, you can use `git rebase`. This will pull the latest Home Assistant changes locally, rewind your commits, bring in the latest changes from Home Assistant, and replay all of your commits on top.
@@ -42,4 +42,4 @@ You will have to start over the git fetch and rebase process described above, or
 git push origin --force
 ```
 
-Other workflows are covered in detail in the [Github documentation](https://help.github.com/articles/fork-a-repo/).
+Other workflows are covered in detail in the [Github documentation](https://docs.github.com/get-started/quickstart/fork-a-repo).

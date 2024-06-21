@@ -1,5 +1,5 @@
 ---
-title: "Supervisor Development"
+title: "Supervisor development"
 sidebar_label: "Development"
 ---
 
@@ -113,7 +113,7 @@ docker run --rm \
     --privileged \
     -v /run/docker.sock:/run/docker.sock \
     -v "$(pwd):/data" \
-    homeassistant/amd64-builder:dev \
+    ghcr.io/home-assistant/amd64-builder:dev \
         --generic latest \
         --target /data \
         --aarch64 \
@@ -178,14 +178,14 @@ script/develop
 
 While `script/develop` is running, the Supervisor panel will be rebuilt whenever you make changes to the source files.
 
-## Supervisor API Access
+## Supervisor API access
 
 To develop for the `hassio` integration and the Supervisor panel, we're going to need API access to the supervisor. This API is protected by a token that we can extract using a special add-on. This can be done on a running system or with the [devcontainer](#local-testing).
 
-[![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fhome-assistant%2Fhassio-addons-development)
+[![Open your Home Assistant instance and show the add add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fhome-assistant%2Faddons-development)
 [![Open your Home Assistant instance and show the dashboard of a Supervisor add-on.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=ae6e943c_remote_api)
 
-1. Add our developer Add-on repository: <https://github.com/home-assistant/hassio-addons-development>
+1. Add our developer Add-on repository: [https://github.com/home-assistant/addons-development](https://github.com/home-assistant/addons-development)
 2. Install the Add-on "Remote API proxy"
 3. Click Start
 4. The token will be printed in the logs

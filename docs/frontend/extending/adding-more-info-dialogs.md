@@ -13,4 +13,4 @@ The instructions to add a more info dialog are very similar to adding a new card
 
  1. Add `'camera'` to the array `DOMAINS_WITH_MORE_INFO` in the file [/common/const.ts](https://github.com/home-assistant/frontend/blob/dev/src/common/const.ts).
  2. Create the files `more-info-camera.js` in the folder [/dialogs/more-info/controls](https://github.com/home-assistant/frontend/tree/dev/src/dialogs/more-info/controls).
- 3. Add `import './more-info-camera.js';` to [/dialogs/more-info/controls/more-info-content.js](https://github.com/home-assistant/frontend/blob/dev/src/dialogs/more-info/controls/more-info-content.js)
+ 3. Add `import './more-info-camera.js';` to [/dialogs/more-info/more-info-content.ts](https://github.com/home-assistant/frontend/blob/dev/src/dialogs/more-info/more-info-content.ts)
