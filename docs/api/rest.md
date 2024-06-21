@@ -659,11 +659,44 @@ By default, a call will returns a list of states that have changed while the ser
 The result will include any states that changed while the service was being executed, even if their change was the result of something else happening in the system.
 :::
 
-If the service you're calling supports returning response data, you can retrieve that instead of the list of state changes by either adding `?return_response` to the URL, or by adding `"return_response": true` to the JSON body.
+If the service you're calling supports returning response data, you can retrieve it by adding `?return_response` to the URL. Your response will then contain both the list of changed entities and the service response data.
 
 ```json
 {
-    "return_response": true
+    "changed_states": [
+        {
+            "attributes": {},
+            "entity_id": "sun.sun",
+            "last_changed": "2024-04-22T20:45:54.418320-04:00",
+            "state": "below_horizon"
+        },
+        {
+            "attributes": {},
+            "entity_id": "process.Dropbox",
+            "last_changed": "2024-04-22T20:45:54.418320-04:00",
+            "state": "on"
+        }
+    ],
+    "service_response": {
+        "weather.new_york_forecast": {
+            "forecast": [
+                {
+                    "condition": "clear-night",
+                    "datetime": "2024-04-22T20:45:55.173725-04:00",
+                    "precipitation_probability": 0,
+                    "temperature": null,
+                    "templow": 6.0
+                },
+                {
+                    "condition": "rainy",
+                    "datetime": "2024-04-23T20:45:55.173756-04:00",
+                    "precipitation_probability": 60,
+                    "temperature": 16.0,
+                    "templow": 4.0
+                }
+            ]
+        }
+    }
 }
 ```
 
