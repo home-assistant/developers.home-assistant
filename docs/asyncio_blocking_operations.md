@@ -3,6 +3,7 @@ title: "Blocking operations with asyncio"
 ---
 
 When writing asyncio code, it's essential to ensure that all blocking operations are done in a separate thread. If blocking operations happen in the event loop, nothing else can run until the operation is complete. For this reason, no blocking operations happen in the event loop, as the entire system will stall for the duration of the blocking operation.
+Detailed examples of operations that might block, such as network I/O or heavy computation, are discussed below.
 
 :::tip
 Be sure to enable [`asyncio` debug mode](https://docs.python.org/3/library/asyncio-dev.html#debug-mode) and [Home Assistant's built-in debug mode](https://www.home-assistant.io/integrations/homeassistant/#debug) during development as many blocking I/O errors can be detected automatically.
