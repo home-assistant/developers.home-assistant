@@ -636,7 +636,7 @@ You can pass an optional JSON object to be used as `service_data`.
 }
 ```
 
-By default, a call will returns a list of states that have changed while the service was being executed.
+By default, a call will return a list of states that have changed while the service was being executed.
 
 ```json
 [
