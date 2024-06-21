@@ -165,9 +165,9 @@ Get details about an add-on
 | startup             | string             | The stage when the add-on is started (initialize, system, services, application, once) |
 | state               | string or null     | The state of the add-on (started, stopped)                                             |
 | stdin               | boolean            | `true` if the add-on accepts stdin commands                                            |
-| system_managed      | boolean            | `true` if Home Assistant is managing the add-on                                        |
-| system_managed_config_entry | string     | ID of the config entry managing the add-on within Home Assistant                       |
-| translations        | dictionary         | A dictionary containing content of translation files for the add-on |
+| system_managed      | boolean            | Indicates whether the add-on is managed by Home Assistant                              |
+| system_managed_config_entry | string     | Provides the configuration entry ID if the add-on is managed by Home Assistant         |
+| translations        | dictionary         | A dictionary containing content of translation files for the add-on                    |
 | udev                | boolean            | `true` if udev access is granted is enabled                                            |
 | update_available    | boolean            | `true` if an update is available                                                       |
 | url                 | string or null     | URL to more information about the add-on                                               |
