@@ -130,7 +130,7 @@ and are combined using the bitwise or (`|`) operator.
 ### Set HVAC mode
 
 ```python
-class MyClimateEntity(ClimateEntity):
+class ClassClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
     def set_hvac_mode(self, hvac_mode):
@@ -143,7 +143,7 @@ class MyClimateEntity(ClimateEntity):
 ### Turn on
 
 ```python
-class MyClimateEntity(ClimateEntity):
+class ClassClimateEntity(ClimateEntity):
     # Implement one of these methods.
     # The `turn_on` method should set `hvac_mode` to any other than
     # `HVACMode.OFF` by optimistically setting it from the service handler
@@ -159,7 +159,7 @@ class MyClimateEntity(ClimateEntity):
 ### Turn off
 
 ```python
-class MyClimateEntity(ClimateEntity):
+class ClassClimateEntity(ClimateEntity):
     # Implement one of these methods.
     # The `turn_off` method should set `hvac_mode` to `HVACMode.OFF` by
     # optimistically setting it from the service handler or with the next state update
@@ -174,7 +174,7 @@ class MyClimateEntity(ClimateEntity):
 ### Toggle
 
 ```python
-class MyClimateEntity(ClimateEntity):
+class ClassClimateEntity(ClimateEntity):
     # It's not mandatory to implement the `toggle` method as the base implementation
     # will call `turn_on`/`turn_off` according to the current HVAC mode.
 
@@ -191,7 +191,7 @@ class MyClimateEntity(ClimateEntity):
 ### Set preset mode
 
 ```python
-class MyClimateEntity(ClimateEntity):
+class ClassClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
     def set_preset_mode(self, preset_mode):
@@ -204,7 +204,7 @@ class MyClimateEntity(ClimateEntity):
 ### Set fan mode
 
 ```python
-class MyClimateEntity(ClimateEntity):
+class ClassClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
     def set_fan_mode(self, fan_mode):
@@ -217,7 +217,7 @@ class MyClimateEntity(ClimateEntity):
 ### Set humidity
 
 ```python
-class MyClimateEntity(ClimateEntity):
+class ClassClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
     def set_humidity(self, humidity):
@@ -230,7 +230,7 @@ class MyClimateEntity(ClimateEntity):
 ### Set swing mode
 
 ```python
-class MyClimateEntity(ClimateEntity):
+class ClassClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
     def set_swing_mode(self, swing_mode):
@@ -243,7 +243,7 @@ class MyClimateEntity(ClimateEntity):
 ### Set temperature
 
 ```python
-class MyClimateEntity(ClimateEntity):
+class ClassClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
     def set_temperature(self, **kwargs):
