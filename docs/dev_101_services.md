@@ -1,6 +1,6 @@
 ---
-title: "Integration Services"
-sidebar_label: "Custom Services"
+title: "Integration services"
+sidebar_label: "Custom services"
 ---
 
 Home Assistant provides ready-made services for a lot of things, but it doesn't always cover everything. Instead of trying to change Home Assistant, it is preferred to add it as a service under your own integration first. Once we see a pattern in these services, we can talk about generalizing them.
@@ -55,7 +55,7 @@ Open the frontend and in the sidebar, click the first icon in the developer tool
 Pressing "Call Service" will now call your service without any parameters. This will cause your service to create a state with the default name 'World'. If you want to specify the name, you have to specify a parameter by providing it through Service Data. In YAML mode, add the following and press "Call Service again".
 
 ```yaml
-service: helloworld_service.hello
+service: hello_service.hello
 data:
   name: Planet
 ```
@@ -169,7 +169,25 @@ This is a partial example of a field which is only shown if at least one selecte
             - light.ColorMode.HS
 ```
 
-## Entity Services
+## Icons
+
+Services can also have icons. These icons are used in the Home Assistant UI when displaying the service in places like the automation and script editors.
+
+The icon to use for each service can be defined in the `icons.json` translation file in the integration folder, under the `services` key. The key should be the service name, and the value should be the icon to use.
+
+The following example, shows how to provide icons for the `turn_on` and `turn_off` services of an integration:
+
+```json
+{
+  "services": {
+    "turn_on": "mdi:lightbulb-on",
+    "turn_off": "mdi:lightbulb-off"
+  }
+}
+```
+
+
+## Entity services
 
 Sometimes you want to provide extra services to control your entities. For example, the Sonos integration provides services to group and ungroup devices. Entity services are special because there are many different ways a user can specify entities. It can use areas, a group or a list of entities.
 
@@ -200,7 +218,7 @@ async def custom_set_sleep_timer(entity, service_call):
     await entity.set_sleep_timer(service_call.data['sleep_time'])
 ```
 
-## Response Data
+## Response data
 
 Services may respond to a service call with data for powering more advanced automations. There are some additional implementation requirements:
 
@@ -253,7 +271,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 The use of response data is meant for cases that do not fit the Home Assistant state. For example, a response stream of objects. Conversely, response data should not be used for cases that are a fit for entity state. For example, a temperature value should just be a sensor.
 
-### Supporting Response Data
+### Supporting response data
 
 Service calls are registered with a `SupportsResponse` value to indicate response data is supported.
 

@@ -1,5 +1,5 @@
 ---
-title: Lock Entity
+title: Lock entity
 sidebar_label: Lock
 ---
 
@@ -19,8 +19,10 @@ Properties should always only return information from memory and not do I/O (lik
 | is_locking | bool | None | Indication of whether the lock is currently locking. Used to determine `state`.
 | is_unlocking | bool | None | Indication of whether the lock is currently unlocking. Used to determine `state`.
 | is_jammed | bool | None | Indication of whether the lock is currently jammed. Used to determine `state`.
+| is_opening | bool | None | Indication of whether the lock is currently opening. Used to determine `state`.
+| is_open | bool | None | Indication of whether the lock is currently open. Used to determine `state`.
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `LockEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.

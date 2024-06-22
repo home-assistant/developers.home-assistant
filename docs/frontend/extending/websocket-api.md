@@ -55,7 +55,6 @@ async def ws_handle_thumbnail(
     if player is None:
         connection.send_error(
                 msg["id"], "entity_not_found", "Entity not found"
-            )
         )
         return
 
@@ -82,10 +81,12 @@ async def ws_handle_thumbnail(
 With all pieces defined, it's time to register the command. This is done inside your setup method.
 
 ```python
+from homeassistant.components import websocket_api
+
 async def async_setup(hass, config):
     """Setup of your component."""
-    hass.components.websocket_api.async_register_command(ws_get_panels)
-    hass.components.websocket_api.async_register_command(ws_handle_thumbnail)
+    websocket_api.async_register_command(hass, ws_get_panels)
+    websocket_api.async_register_command(hass, ws_handle_thumbnail)
 ```
 
 ## Calling the command from the frontend (JavaScript)

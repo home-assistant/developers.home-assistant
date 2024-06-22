@@ -1,5 +1,5 @@
 ---
-title: "Add-On Configuration"
+title: "Add-on configuration"
 ---
 
 Each add-on is stored in a folder. The file structure looks like this:
@@ -84,7 +84,7 @@ LABEL \
 
 It is possible to use your own base image with `build.yaml` or if you do not need support for automatic multi-arch building you can also use a simple docker `FROM`. You can also suffix the Dockerfile with the specific architecture to use a specific Dockerfile for a particular architecture, i.e. `Dockerfile.amd64`.
 
-### Build Args
+### Build args
 
 We support the following build arguments by default:
 
@@ -192,6 +192,7 @@ Avoid using `config.yaml` as filename in your add-on for anything other than the
 | `watchdog` | string | | A URL for monitoring the add-on health. Like `http://[HOST]:[PORT:2839]/dashboard`, the port needs the internal port, which will be replaced with the effective port. It is also possible to bind the protocol part to a configuration option with: `[PROTO:option_name]://[HOST]:[PORT:2839]/dashboard` and it's looked up if it is `true` and it's going to `https`. For simple TCP port monitoring you can use `tcp://[HOST]:[PORT:80]`. It works for add-ons on the host or internal network.
 | `realtime` | bool | `false` | Give add-on access to host schedule including `SYS_NICE` for change execution time/priority.
 | `journald` | bool | `false` | If set to `true`, the host's system journal will be mapped read-only into the add-on. Most of the time the journal will be in `/var/log/journal` however on some hosts you will find it in `/run/log/journal`. Add-ons relying on this capability should check if the directory `/var/log/journal` is populated and fallback on `/run/log/journal` if not.
+| `breaking_versions` | list | | List of breaking versions of the addon. A manual update will always be required if the update is to a breaking version or would cross a breaking version, even if users have auto-update enabled for the addon.
 
 ### Options / Schema
 
@@ -229,7 +230,7 @@ logins:
 random:
   - "match(^\\w*$)"
 link: url
-size: "int(5, 20)"
+size: "int(5,20)"
 count: float
 not_need: "str?"
 ```

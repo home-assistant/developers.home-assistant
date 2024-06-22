@@ -1,5 +1,5 @@
 ---
-title: "Device Triggers"
+title: "Device triggers"
 sidebar_label: Triggers
 ---
 

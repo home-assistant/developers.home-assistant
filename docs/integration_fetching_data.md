@@ -1,10 +1,10 @@
 ---
-title: "Fetching Data"
+title: "Fetching data"
 ---
 
 Your integration will need to fetch data from an API to be able to provide this to Home Assistant. This API can be available over the web (local or cloud), sockets, serial ports exposed via USB sticks, etc.
 
-## Push vs Poll
+## Push vs poll
 
 APIs come in many different shapes and forms but at its core they fall in two categories: push and poll.
 
@@ -26,6 +26,8 @@ We're going to explain a few different API types here and the best way to integr
 This API will have a single method to fetch data for all the entities that you have in Home Assistant. In this case we will want to have a single periodical poll on this endpoint, and then let entities know as soon as new data is available for them.
 
 Home Assistant provides a DataUpdateCoordinator class to help you manage this as efficiently as possible.
+
+When using the DataUpdateCoordinator, the data being polled is often expected to stay mostly the same. For example, if you are polling a light that is only turned on once a week, that data may be the same nearly all the time. The default behavior is always calling back listeners when the data is updated, even if it does not change. If the data returned from the API can be compared for changes with the Python `__eq__` method, set `always_update=False` when creating the DataUpdateCoordinator to avoid unnecessary callbacks and writes to the state machine.
 
 ```python
 """Example integration using DataUpdateCoordinator."""
@@ -82,6 +84,10 @@ class MyCoordinator(DataUpdateCoordinator):
             name="My sensor",
             # Polling interval. Will only be polled if there are subscribers.
             update_interval=timedelta(seconds=30),
+            # Set always_update to `False` if the data returned from the
+            # api can be compared via `__eq__` to avoid duplicate updates
+            # being dispatched to listeners
+            always_update=True
         )
         self.my_api = my_api
 
@@ -164,7 +170,7 @@ If you have an API endpoint that pushes data, you can still use the data update 
 
 When new data arrives, use `coordinator.async_set_updated_data(data)` to pass the data to the entities. If this method is used on a coordinator that polls, it will reset the time until the next time it will poll for data.
 
-## Request Parallelism
+## Request parallelism
 
 :::info
 This is an advanced topic.

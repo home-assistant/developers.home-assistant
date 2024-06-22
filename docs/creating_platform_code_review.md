@@ -1,6 +1,6 @@
 ---
 title: "Checklist for creating a platform"
-sidebar_label: Platform Checklist
+sidebar_label: Platform checklist
 ---
 
 A checklist of things to do when you're adding a new platform.
@@ -50,10 +50,10 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
 )
 ```
 
-### 3. Setup Platform
+### 3. Setup platform
 
 1. Verify that the passed in configuration (user/pass/host etc.) works.
-2. Group your calls to `add_devices` if possible.
+2. Group your calls to `add_entities if possible.
 3. If the platform adds extra services, the format should be `<domain of your integration>.<service name>`. So if your integration's domain is "awesome_sauce" and you are making a light platform, you would register services under the `awesome_sauce` domain. Make sure that your services [verify permissions](auth_permissions.md#checking-permissions).
 
 ### 4. Entity

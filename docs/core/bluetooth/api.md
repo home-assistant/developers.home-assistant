@@ -228,10 +228,12 @@ Integrations that provide a Bluetooth adapter should add `bluetooth` in [`depend
 
 To register an external scanner, call the `bluetooth.async_register_scanner` API. The scanner must inherit from `BaseHaScanner`.
 
+If the scanner needs connection slot management to avoid overloading the adapter, pass the number of connection slots as an integer value via the `connection_slots` argument.
+
 ```python
 from homeassistant.components import bluetooth
 
-cancel = bluetooth.async_register_scanner(hass, scanner, connectable=False)
+cancel = bluetooth.async_register_scanner(hass, scanner, connection_slots=slots)
 ```
 
 The scanner will need to feed advertisement data to the central Bluetooth manager in the form of `BluetoothServiceInfoBleak` objects. The callback needed to send the data to the central manager can be obtained with the `bluetooth.async_get_advertisement_callback` API.

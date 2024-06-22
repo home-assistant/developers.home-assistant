@@ -1,5 +1,5 @@
 ---
-title: "Authentication Providers"
+title: "Authentication providers"
 ---
 
 Authentication providers confirm the identity of users. The user proofs their identity by going through the login flow for an auth provider. The auth provider defines the login flow and can ask the user all information this needs. This will commonly be username and password but could also include a 2FA token or other challenges.

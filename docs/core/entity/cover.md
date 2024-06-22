@@ -1,5 +1,5 @@
 ---
-title: Cover Entity
+title: Cover entity
 sidebar_label: Cover
 ---
 
@@ -19,7 +19,7 @@ Properties should always only return information from memory and not do I/O (lik
 | is_closing | <code>bool &#124; None</code> | `None` | If the cover is closing or not. Used to determine `state`.
 | is_opening | <code>bool &#124; None</code> | `None` | If the cover is opening or not. Used to determine `state`.
 
-### Device Classes
+### Device classes
 
 | Constant | Description
 |----------|-----------------------|
@@ -43,7 +43,7 @@ Properties should always only return information from memory and not do I/O (lik
 | `STATE_CLOSING` | The cover is in the process of closing to reach a set position.
 | `STATE_CLOSED` | The cover has reach the closed position.
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `CoverEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.

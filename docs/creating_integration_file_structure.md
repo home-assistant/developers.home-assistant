@@ -1,6 +1,6 @@
 ---
-title: "Integration File Structure"
-sidebar_label: "File Structure"
+title: "Integration file structure"
+sidebar_label: "File structure"
 ---
 
 Each integration is stored inside a directory named after the integration domain. The domain is a short name consisting of characters and underscores. This domain has to be unique and cannot be changed. Example of the domain for the mobile app integration: `mobile_app`. So all files for this integration are in the folder `mobile_app/`.
@@ -24,7 +24,7 @@ If your integration is going to register services, it will need to provide a des
 ## Data update coordinator - `coordinator.py`
 
 There are multiple ways for your integration to receive data, including push or poll. Commonly integrations will fetch data with a single coordinated poll across all entities, which requires the use of a `DataUpdateCoordinator`.
-If you want to use one, and you choose to create a subclass of it, it is recommended to define the coordinator class in `coordinator.py`. [More information about `DataUpdateCoordinator`](integration_fetching_data.md/#coordinated-single-api-poll-for-data-for-all-entities).
+If you want to use one, and you choose to create a subclass of it, it is recommended to define the coordinator class in `coordinator.py`. [More information about `DataUpdateCoordinator`](integration_fetching_data.md#coordinated-single-api-poll-for-data-for-all-entities).
 
 ## Where Home Assistant looks for integrations
 

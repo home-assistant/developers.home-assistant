@@ -1,8 +1,8 @@
 ---
-title: "Backend Localization"
+title: "Backend localization"
 ---
 
-## Translation Strings
+## Translation strings
 
 Platform translation strings are stored as JSON in the [core](https://github.com/home-assistant/core) repository. These files must be located adjacent to the component/platform they belong to. Components must have their own directory, and the file is simply named `strings.json` in that directory. This file will contain the different strings that will be translatable.
 
@@ -11,17 +11,48 @@ The `strings.json` contains translations for different things that the integrati
 | Category            | Description                                       |
 | ------------------- | ------------------------------------------------- |
 | `title`             | Title of the integration.                         |
+| `common`            | Shared strings.                                   |
 | `config`            | Translations for the config flow.                 |
+| `device`            | Translations for devices.                         |
 | `device_automation` | Translations for device automations.              |
+| `entity`            | Translations for entities.                        |
+| `entity_component`  | Translations for entity components.               |
+| `exceptions`        | Translations for error messages.                  |
 | `issues`            | Translations for repairs issues.                  |
 | `options`           | Translations for the options flow.                |
 | `selectors`         | Selectors of the integration.                     |
 | `services`          | Services of the integration.                      |
-| `state`             | States of the integration, keyed by device class. |
 
 ### Title
 
 This category is just a string: the translation of the integration name. This key is optional and Home Assistant will fallback to the integration name if it is omitted. Only include this if it's not a product brand.
+
+### Shared strings
+
+Strings which are used more than once should be not be duplicated, instead references should be used to refer to the single definition. The reference can be any valid translation key. Optionally, shared strings can be placed in a `common` section.
+
+```json
+{
+  "common": {
+    "error_stale_api_key": "This message will be displayed if `stale_api_key` is returned as the abort reason."
+  },
+  "config": {
+    "error": {
+      "invalid_api_key": "This message will be displayed if `invalid_api_key` is returned as a flow error.",
+      // Reference to the common section
+      "stale_api_key": "[%key:component::new_integration::common::error_stale_api_key%]"
+    },
+  }
+  "options": {
+    "error": {
+      // Reference to another section in the same file
+      "invalid_api_key": "[%key:component::new_integration::config::error::invalid_api_key%]",
+      // Reference to the common section in the same file
+      "stale_api_key": "[%key:component::new_integration::common::error_stale_api_key%]"
+    },
+  }
+}
+```
 
 ### Config / Options
 
@@ -159,6 +190,40 @@ The translation strings for device automations are defined under the `device_aut
 
 ```
 
+### Exceptions
+
+Localization is supported for `HomeAssistantError` and its subclasses.
+The translation strings for exceptions are defined under the `exception` key in a `strings.json` file. The example below describes the different supported keys.
+
+```json
+{
+  "exceptions": {
+    // Translations for known exceptions
+    "invalid_index": {
+      "message": "Invalid index selected, expected [0,1,2]. Got {index}"
+    }
+  }
+}
+
+```
+
+Example of raising an exception with localization during a service call:
+
+```python
+async def async_select_index(hass: HomeAssistant, index: int) -> None:
+    """Setup the config entry for my device."""
+    try:
+        check_index(index)
+    except ValueError as exc:
+        raise ServiceValidationError(
+            translation_domain=DOMAIN,
+            translation_key="invalid_index",
+            translation_placeholders={
+                "index": index,
+            },
+        ) from exc
+```
+
 ### Issues
 
 The translation strings for repairs issues are defined under the `issues` key. An example strings file below describes the different supported keys.
@@ -186,6 +251,37 @@ The translation strings for repairs issues are defined under the `issues` key. A
 }
 ```
 
+### Devices
+
+#### Name of devices
+Integrations can provide translations for names of its devices. To do this, provide a `device` object, that contains translations of the names and set the device's `translation_key` to a key under a domain in the `device` object.
+If the device's `translation_key` is not `None`, the `name` which is either set in an entity's `device_info` property or passed to `DeviceRegistry.async_get_or_create`, will be ignored. If the `device` object does not provide a translated name for the specified `translation_key`, the `translation_key` will be used as device name.
+
+It is also supported to use placeholders within the translation. If a placeholder is defined within the translation string, the device's `translation_placeholders` has to be set accordingly.
+
+The following example `strings.json` is for a device with its `translation_key` set to `power_strip`:
+```json
+{
+  "device": {
+    "power_strip": {
+      "name": "Power strip"
+    }
+  }
+}
+```
+
+The following example `strings.json` is for a device with its `translation_key` property set to `n_ch_power_strip` and a placeholder `number_of_sockets`:
+
+```json
+{
+  "device": {
+    "n_ch_power_strip": {
+      "name": "Power strip with {number_of_sockets} sockets"
+    }
+  }
+}
+```
+
 ### Entities
 
 #### Name of entities
@@ -193,6 +289,8 @@ Integrations can provide translations for names of its entities. To do this, pro
 If the entity's `translation_key` property is not `None` and the `entity` object provides a translated name, `EntityDescription.name` will be ignored.
 
 Entity components, like `sensor`, already have existing translations available that can be reused by referencing those. This includes common translations for entity names based on a device class. For example, it already has translations available for a "Temperature" sensor that can be referenced. Referencing existing translations is preferred, as it prevents translating the same thing multiple times.
+
+It is also supported to use placeholders within the translation. If a placeholder is defined within the translation string, the entity's `translation_placeholders` property has to be set accordingly.
 
 The following example `strings.json` is for a `sensor` entity with its `translation_key` property set to `thermostat_mode`:
 ```json
@@ -215,6 +313,20 @@ The following example `strings.json` is for a `sensor` entity with its `translat
     "sensor": {
       "temperature_sensor": {
         "name": "[%key:component::sensor::entity_component::temperature::name%]"
+      }
+    }
+  }
+}
+```
+
+The following example `strings.json` is for a `sensor` entity with its `translation_key` property set to `distance` and a placeholder `tracked_device`:
+
+```json
+{
+  "entity": {
+    "sensor": {
+      "distance": {
+        "name": "Distance of {tracked_device}"
       }
     }
   }

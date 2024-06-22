@@ -1,11 +1,11 @@
 ---
-title: Speech To Text Entity
-sidebar_label: Speech To Text
+title: Speech-to-text entity
+sidebar_label: Speech-to-text
 ---
 
-A speech to text (STT) entity allows other integrations or applications to stream speech data to the STT API and get text back.
+A speech-to-text (STT) entity allows other integrations or applications to stream speech data to the STT API and get text back.
 
-A speech to text entity is derived from the  [`homeassistant.components.stt.SpeechToTextEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/stt/__init__.py).
+A speech-to-text entity is derived from the  [`homeassistant.components.stt.SpeechToTextEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/stt/__init__.py).
 
 ## Properties
 

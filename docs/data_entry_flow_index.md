@@ -1,12 +1,12 @@
 ---
-title: Data Entry Flow
+title: Data entry flow
 ---
 
 Data Entry Flow is a data entry framework that is part of Home Assistant. Data entry is done via data entry flows. A flow can represent a simple login form or a multi-step setup wizard for a component. A Flow Manager manages all flows that are in progress and handles creation of new flows.
 
 Data Entry Flow is used in Home Assistant to login, create config entries, handle options flow, repair issues.
 
-## Flow Manager
+## Flow manager
 
 This is the class that manages the flows that are in progress. When instantiating one, you pass in two async callbacks:
 
@@ -80,7 +80,7 @@ If the result type is `FlowResultType.ABORT`, the result should look like:
 }
 ```
 
-## Flow Handler
+## Flow handler
 
 Flow handlers will handle a single flow. A flow contains one or more steps. When a flow is instantiated, the `FlowHandler.init_step` step will be called. Each step has several possible results:
 
@@ -114,7 +114,7 @@ Data entry flows depend on translations for showing the text in the steps. It de
 
 For a more detailed explanation of `strings.json` see the [backend translation](/docs/internationalization/core) page.
 
-### Show Form
+### Show form
 
 This result type will show a form to the user to fill in. You define the current step, the schema of the data (using a mixture of voluptuous and/or [selectors](https://www.home-assistant.io/docs/blueprint/selectors/)) and optionally a dictionary of errors.
 
@@ -139,7 +139,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         return self.async_show_form(step_id="init", data_schema=vol.Schema(data_schema))
 ```
 
-#### Labels & Descriptions
+#### Labels & descriptions
 
 Translations for the form are added to `strings.json` in a key for the `step_id`. That object may contain the folowing keys:
 
@@ -171,7 +171,7 @@ The field labels and descriptions are given as a dictionary with keys correspond
 }
 ```
 
-#### Enabling Browser Autofill
+#### Enabling browser autofill
 
 Suppose your integration is collecting form data which can be automatically filled by browsers or password managers, such as login credentials or contact information. You should enable autofill whenever possible for the best user experience and accessibility. There are two options to enable this.
 
@@ -208,7 +208,7 @@ STEP_USER_DATA_SCHEMA = vol.Schema(
 )
 ```
 
-#### Defaults & Suggestions
+#### Defaults & suggestions
 
 If you'd like to pre-fill data in the form, you have two options. The first is to use the `default` parameter. This will both pre-fill the field, and act as the default value in case the user leaves the field empty.
 
@@ -300,7 +300,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         ...
 ```
 
-### Create Entry
+### Create entry
 
 When the result is "Create Entry", an entry will be created and passed to the parent of the flow manager. A success message is shown to the user and the flow is finished. You create an entry by passing a title, data and optionally options. The title can be used in the UI to indicate to the user which entry it is. Data and options can be any data type, as long as they are JSON serializable. Options are used for mutable data, for example a radius. Whilst Data is used for immutable data that isn't going to change in an entry, for example location data.
 
@@ -331,7 +331,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         return self.async_abort(reason="not_supported")
 ```
 
-### External Step & External Step Done
+### External step & external step done
 
 It is possible that a user needs to finish a config flow by doing actions on an external website. For example, setting up an integration by being redirected to an external webpage. This is commonly used by integrations that use OAuth2 to authorize a user.
 
@@ -393,56 +393,56 @@ async def handle_result(hass, flow_id, data):
         return "Invalid config flow specified"
 ```
 
-### Show Progress & Show Progress Done
+### Show progress & show progress done
 
-It is possible that we need the user to wait for a task that takes several minutes.
+If a data entry flow step needs a considerable amount of time to finish, we should inform the user about this.
 
 _The example is about config entries, but works with other parts that use data entry flows too._
 
 The flow works as follows:
 
 1. The user starts the config flow in Home Assistant.
-2. The config flow prompts the user that a task is in progress and will take some time to finish by calling `async_show_progress`. The flow should pass a task specific string as `progress_action` parameter to represent the translated text string for the prompt.
-3. The flow is responsible for managing the background task and continuing the flow when the task is done or canceled. Continue the flow by calling the `FlowManager.async_configure` method, e.g. via `hass.config_entries.flow.async_configure`. Create a new task that does this to avoid a deadlock.
-4. When the task or tasks are done, the flow should mark the progress to be done with the `async_show_progress_done` method.
+2. The config flow creates an `asyncio.Task` to execute the long running task.
+3. The config flow informs the user that a task is in progress and will take some time to finish by calling `async_show_progress`, passing the `asyncio.Task` object to it. The flow should pass a task specific string as `progress_action` parameter to represent the translated text string for the prompt.
+4. The config flow will be automatically called once the task is finished, but may also be called before the task has finished, for example if frontend reloads.
+  * If the task is not yet finished, the flow should not create another task, but instead call `async_show_progress` again.
+  * If the task is finished, the flow must call the `async_show_progress_done`, indicating the next step
 5. The frontend will update each time we call show progress or show progress done.
 6. The config flow will automatically advance to the next step when the progress was marked as done. The user is prompted with the next step.
 
-Example configuration flow that includes two show progress tasks.
+Example configuration flow that includes two show sequential progress tasks.
 
 ```python
+import asyncio
+
 from homeassistant import config_entries
 from .const import DOMAIN
 
 class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
     VERSION = 1
-    task_one = None
-    task_two = None
-
-    async def _async_do_task(self, task):
-        await task  # A task that take some time to complete.
-
-        # Continue the flow after show progress when the task is done.
-        # To avoid a potential deadlock we create a new task that continues the flow.
-        # The task must be completely done so the flow can await the task
-        # if needed and get the task result.
-        self.hass.async_create_task(
-            self.hass.config_entries.flow.async_configure(flow_id=self.flow_id)
-        )
+    task_one: asyncio.Task | None = None
+    task_two: asyncio.Task | None = None
 
     async def async_step_user(self, user_input=None):
-        if not self.task_one or not self.task_two:
-            if not self.task_one:
-                task = asyncio.sleep(10)
-                self.task_one = self.hass.async_create_task(self._async_do_task(task))
-                progress_action = "task_one"
-            else:
-                task = asyncio.sleep(10)
-                self.task_two = self.hass.async_create_task(self._async_do_task(task))
+        uncompleted_task: asyncio.Task[None] | None = None
+
+        if not self.task_one:
+            coro = asyncio.sleep(10)
+            self.task_one = self.hass.async_create_task(coro)
+        if not self.task_one.done():
+            progress_action = "task_one"
+            uncompleted_task = self.task_one
+        if not uncompleted_task:
+            if not self.task_two:
+                coro = asyncio.sleep(10)
+                self.task_two = self.hass.async_create_task(coro)
+            if not self.task_two.done():
                 progress_action = "task_two"
+                uncompleted_task = self.task_two
+        if uncompleted_task:
             return self.async_show_progress(
-                step_id="user",
                 progress_action=progress_action,
+                progress_task=uncompleted_task,
             )
 
         return self.async_show_progress_done(next_step_id="finish")
@@ -453,26 +453,9 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return self.async_create_entry(title="Some title", data={})
 ```
 
-Note: If the user closes the flow, the `async_remove` callback will be called. Make sure to implement this method in your FlowHandler to clean up any resources or tasks associated with the flow.
+### Show menu
 
-```python
-class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    ...
-
-    @callback
-    def async_remove(self):
-        """Clean up resources or tasks associated with the flow."""
-        if self.task_one:
-            self.task_one.cancel()
-            
-        if self.task_two:
-            self.task_two.cancel()
-        ...
-```
-
-### Show Menu
-
-This will show a navigation menu to the user to easily pick the next step. The menu labels can be hardcoded by specifying a dictionary of {`step_id`: `label`} or translated via `strings.json` when specifying a list.
+This will show a navigation menu to the user to easily pick the next step. The menu labels can be hardcoded by specifying a dictionary of `{step_id: label}` or translated via `strings.json` when specifying a list.
 
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):

@@ -20,11 +20,16 @@ ha_config_flow: true
 ha_codeowners:
   - '@balloob'
 ha_domain: awesome
+related:
+  - docs: /voice_control/s3_box_voice_assistant/
+    title: Creating a ESP32-S3-BOX-3 voice assistant
+  - url: https://esphome.io/projects/index.html
+    title: ESPHome projects website
 ---
 
 Content... Written in markdown.
 
-### Title Header
+### Title header
 ...
 ```
 
@@ -38,6 +43,7 @@ Additional keys for the file header:
 - `ha_config_flow`: Set to `true` if the integration has a [Data Entry Flow](/data_entry_flow_index.md), omit otherwise.
 - `ha_codeowners`: GitHub usernames or team names (starting with `@`) of people that are responsible for this integration. This should match with the codeowners as listed in the integration manifest file.
 - `ha_domain`: The domain of the integration in Home Assistant Core. This must match the name from the integration manifest file.
+- `related`: Optional. Adds a section with links to related topics to the end of the page. Use `docs` for local links and `url` for external links. When using `docs`, the `title` key is optional. If not set, the title of the page you point to will be used.
 
 There are [pre-defined variables](https://jekyllrb.com/docs/variables/) available but usually, it's not necessary to use them when writing documentation.
 
@@ -91,7 +97,7 @@ required: any string here #=> Any string here
 
 - **`type:`**: The type of the variable. Allowed entries: `action`, `boolean`, `string`, `integer`, `float`, `time`, `template`, `device_class`, `icon`, `map`/`list` (for a list of entries), `date`, `datetime`, `selector`, and `any`. For multiple possibilities use `[string, integer]`. If you use `map`/`list` then should define `keys:` (see the [`template` sensor](https://www.home-assistant.io/integrations/sensor.template/) for an example). If you use `boolean`, then `default:` must be defined. 
 
-### Embedding Code
+### Embedding code
 
 You can use the [default markdown syntax](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#code) to generate syntax highlighted code. For inline code wrap your code in back-ticks.
 
@@ -133,11 +139,11 @@ To add a logo and icon for your integration, open up a pull request at: the [Hom
 
 Other images, displayed on the pages, are stored in various directories according to their purpose:
 
-| Type        | Location                       |
-| :---------- | :----------------------------- |
-| blog        | source/images/blog             |
-| screenshots | source/images/integration      |
+| Type        | Location                  |
+| :---------- | :------------------------ |
+| blog        | source/images/blog        |
+| screenshots | source/images/integration |
 
-### Linking From The Sidebar
+### Linking from the sidebar
 
 If you are adding a new page that requires linking from the sidebar, you need to edit the `docs_navigation.html` file in `source/_includes/asides/docs_navigation.html`.

@@ -1,5 +1,5 @@
 ---
-title: "Categorizing Functions"
+title: "Categorizing functions"
 ---
 
 A piece of work within Home Assistant is represented by a function that will be invoked. It will either run inside our event loop or inside our thread pool, depending on if it is async safe.

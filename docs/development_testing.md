@@ -2,12 +2,14 @@
 title: "Testing your code"
 ---
 
-As it states in the [Style guidelines section](development_guidelines.md) all code is checked to verify the following:
+As stated in the [Style guidelines section](development_guidelines.md) all code is checked to verify the following:
 
 - All the unit tests pass
 - All code passes the checks from the linting tools
 
 Local testing is done using [pytest](https://docs.pytest.org/) and using [pre-commit](https://pre-commit.com/) for running out linters, which has been installed as part of running `script/setup` in the [virtual environment](development_environment.mdx).
+
+Python test requirements need to be installed before tests can be run. This can be achieved by using the VScode devcontainer and the corresponding task. Check the [devcontainer documentation](/docs/development_environment#tasks) for guidance about running tasks.
 
 To run our linters, on the full code base, run the following command:
 
@@ -86,7 +88,6 @@ The linters are also available directly, you can run tests on individual files:
 ```shell
 ruff homeassistant/core.py
 pylint homeassistant/core.py
-black homeassistant/core.py
 ```
 
 ### Notes on PyLint and PEP8 validation

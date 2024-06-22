@@ -7,11 +7,22 @@ import intents from '!!yaml-loader!../intents/intents.yaml';
 
 The following intents are **supported**:
 
-  * HassTurnOn, HassTurnOff, HassGetState, HassLightSet
+<ul>
+<li>
+<>
+{
+  Object.entries(intents)
+  .filter(([intent, info]) => info["supported"])
+  .map(([intent, info]) => intent)
+  .join(", ")
+}
+</>
+</li>
+</ul>
 
 The following intents are **deprecated**:
 
- * HassOpenCover, HassCloseCover, HassToggle, HassHumidifierSetpoint, HassHumidifierMode, HassShoppingListAddItem, HassShoppingListLastItems
+ * HassOpenCover, HassCloseCover, HassToggle, HassHumidifierSetpoint, HassHumidifierMode, HassShoppingListLastItems
 
 **Slots**
 
@@ -20,14 +31,14 @@ For *HassTurnOn* and *HassTurnOff*, the *slots* are optional.
 Possible slot combinations are:
 
 
-    | Slot combination        | Example                          |
-    | ----------------------- | ---------------------------------|
-    | name only               | table light                      |
-    | area only               | kitchen                          |
-    | area and name           | living room reading light        |
-    | area and domain         | kitchen lights                   |
-    | area and device class   | bathroom humidity                |
-    | device class and domain | carbon dioxide sensors           |
+| Slot combination        | Example                          |
+| ----------------------- | ---------------------------------|
+| name only               | table light                      |
+| area only               | kitchen                          |
+| area and name           | living room reading light        |
+| area and domain         | kitchen lights                   |
+| area and device class   | bathroom humidity                |
+| device class and domain | carbon dioxide sensors           |
 
 
 ## Supported intents
@@ -35,18 +46,18 @@ Possible slot combinations are:
 <>
 {
   Object.entries(intents)
-  .filter(([intent, info]) => !intent.startsWith("HassClimate"))
+  .filter(([intent, info]) => info["supported"])
   .map(
     ([intent, info]) =>
       <>
         <h3>{intent}</h3>
         <p>{info.description}</p>
-        <b>Slots</b>
-        {info.slots && (
+        {info.slots &&
+          (<b>Slots</b>) && (
           <ul>
             {Object.entries(info.slots).map(([slot, slotInfo]) => (
               <li>
-                <b>{slot}</b> - {slotInfo.description}
+                <b>{slot}</b> - {slotInfo.description + (slotInfo.required ? " (required)" : "")}
               </li>
             ))}
           </ul>
@@ -109,14 +120,6 @@ Set humidifier mode if supported by the humidifier.
 | --------- | ---- | -------- | -----------
 | name | string | Yes | Name of the entity to control.
 | mode | string | Yes | The mode to switch to.
-
-### HassShoppingListAddItem
-
-Add an item to the shopping list.
-
-| Slot name | Type | Required | Description
-| --------- | ---- | -------- | -----------
-| item | string | Yes | Name of item to add to the list.
 
 ### HassShoppingListLastItems
 

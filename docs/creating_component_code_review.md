@@ -1,6 +1,6 @@
 ---
 title: "Checklist for creating a component"
-sidebar_label: Component Checklist
+sidebar_label: Component checklist
 ---
 
 A checklist of things to do when you're adding a new component.

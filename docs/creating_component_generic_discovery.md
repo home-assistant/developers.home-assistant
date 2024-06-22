@@ -1,5 +1,5 @@
 ---
-title: "Integration with Multiple Platforms"
+title: "Integration with multiple platforms"
 sidebar_label: Multiple platforms
 ---
 

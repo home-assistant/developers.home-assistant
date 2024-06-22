@@ -1,5 +1,5 @@
 ---
-title: "Integration Manifest"
+title: "Integration manifest"
 sidebar_label: "Manifest"
 ---
 
@@ -51,7 +51,7 @@ For core integrations, this should be omitted.
 
 The version of the integration is required for custom integrations. The version needs to be a valid version recognized by [AwesomeVersion](https://github.com/ludeeus/awesomeversion) like [CalVer](https://calver.org/) or [SemVer](https://semver.org/).
 
-## Integration Type
+## Integration type
 
 Integrations are split into multiple integration types. Each integration
 must provide an `integration_type` in their manifest, that describes its main
@@ -85,7 +85,7 @@ or service per config entry.
 
 The website containing documentation on how to use your integration. If this integration is being submitted for inclusion in Home Assistant, it should be `https://www.home-assistant.io/integrations/<domain>`
 
-## Issue Tracker
+## Issue tracker
 
 The issue tracker of your integration, where users reports issues if they run into one.
 If this integration is being submitted for inclusion in Home Assistant, it should be omitted. For built-in integrations, Home Assistant will automatically generate the correct link.
@@ -98,21 +98,31 @@ Built-in integrations shall only specify other built-in integrations in `depende
 
 ## After dependencies
 
-This option is used to specify dependencies that might be used by the integration but aren't essential. When `after_dependencies` is present, set up of an integration will wait for the `after_dependencies` to be set up before being set up. It will also make sure that the requirements of `after_dependencies` are installed so methods from the integration can be safely imported.  For example, if the `camera` integration might use the `stream` integration in certain configurations, adding `stream` to `after_dependencies` of `camera`'s manifest, will ensure that `stream` is loaded before `camera` if it is configured.  If `stream` is not configured, `camera` will still load.
+This option is used to specify dependencies that might be used by the integration but aren't essential. When `after_dependencies` is present, set up of an integration will wait for the integrations listed in `after_dependencies`, which are configured either via YAML or a config entry, to be set up first before the integration is set up. It will also make sure that the requirements of `after_dependencies` are installed so methods from the integration can be safely imported, regardless of whether the integrations listed in `after_dependencies` are configured or not. For example, if the `camera` integration might use the `stream` integration in certain configurations, adding `stream` to `after_dependencies` of `camera`'s manifest, will ensure that `stream` is loaded before `camera` if it is configured and that any dependencies of `stream` are installed and can be imported by `camera`. If `stream` is not configured, `camera` will still load.
 
 Built-in integrations shall only specify other built-in integrations in `after_dependencies`. Custom integrations may specify both built-in and custom integrations in `after_dependencies`.
 
-## Code Owners
+## Code owners
 
 GitHub usernames or team names of people that are responsible for this integration. You should add at least your GitHub username here, as well as anyone who helped you to write code that is being included.
 
-## Config Flow
+## Config flow
 
 Specify the `config_flow` key if your integration has a config flow to create a config entry. When specified, the file `config_flow.py` needs to exist in your integration.
 
 ```json
 {
   "config_flow": true
+}
+```
+
+### Single config entry only
+
+Specify the `single_config_entry` key if your integration supports only one config entry. When specified, it will not allow the user to add more than one config entry for this integration.
+
+```json
+{
+  "single_config_entry": true
 }
 ```
 
@@ -141,11 +151,20 @@ pip install -e ./pychromecast
 hass --skip-pip-packages pychromecast
 ```
 
-It is also possible to use a public git repository to install a requirement.  This can be useful, for example, to test changes to a requirement dependency before it's been published to PyPI. The following example will install the `except_connect` branch of the `pycoolmaster` library directly from GitHub unless version `0.2.2` is currently installed:
+It is also possible to use a public git repository to install a requirement.  This can be useful, for example, to test changes to a requirement dependency before it's been published to PyPI. Syntax:
 
 ```json
 {
-  "requirements": ["git+https://github.com/issacg/pycoolmaster.git@except_connect#pycoolmaster==0.2.2"]
+  "requirements": ["<project> @ git+https://github.com/<user>/<project>.git@<git ref>"]
+}
+```
+`<git ref>` can be any git reference: branch, tag, commit hash, ... . See [PIP documentation about git support](https://pip.pypa.io/en/stable/topics/vcs-support/#git).
+
+The following example will install the `except_connect` branch of the `pycoolmaster` library directly from GitHub:
+
+```json
+{
+  "requirements": ["pycoolmaster @ git+https://github.com/issacg/pycoolmaster.git@except_connect"]
 }
 ```
 
@@ -161,7 +180,7 @@ The `loggers` field is a list of names that the integration's requirements use f
 
 If your integration supports discovery via bluetooth, you can add a matcher to your manifest. If the user has the `bluetooth` integration loaded, it will load the `bluetooth` step of your integration's config flow when it is discovered. We support listening for Bluetooth discovery by matching on `connectable` `local_name`, `service_uuid`, `service_data_uuid`, `manufacturer_id`, and `manufacturer_data_start`. The `manufacturer_data_start` field expects a list of bytes encoded as integer values from 0-255. The manifest value is a list of matcher dictionaries. Your integration is discovered if all items of any of the specified matchers are found in the Bluetooth data. It's up to your config flow to filter out duplicates.
 
-Matches for `local_name` must be at least three (3) characters long and may not contain any patterns in the first three (3) characters.
+Matches for `local_name` may not contain any patterns in the first three (3) characters.
 
 If the device only needs advertisement data, setting `connectable` to `false` will opt-in to receive discovery from Bluetooth controllers that do not have support for making connections.
 
@@ -391,7 +410,7 @@ For example:
 }
 ```
 
-## Integration Quality Scale
+## Integration quality scale
 
 The [Integration Quality Scale](https://www.home-assistant.io/docs/quality_scale/) scores an integration on the code quality and user experience. Each level of the quality scale consists of a list of requirements. If an integration matches all requirements, it's considered to have reached that level.
 
@@ -405,9 +424,9 @@ We highly recommend getting your integration scored.
 }
 ```
 
-## IoT Class
+## IoT class
 
-The [IoT Class][iot_class] describes how an integration connects with, e.g., a device or service. For more information
+The [IoT class][iot_class] describes how an integration connects with, e.g., a device or service. For more information
 about IoT Classes, read the blog about ["Classifying the Internet of Things"][iot_class].
 
 The following IoT classes are accepted in the manifest:

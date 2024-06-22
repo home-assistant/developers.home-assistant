@@ -21,7 +21,7 @@ Home Assistant has a `mobile_app` component that allows applications to register
 
 Once you have tokens to authenticate as a user, it's time to register the app with the mobile app integration in Home Assistant.
 
-### Getting Ready
+### Getting ready
 
 First, you must ensure that the `mobile_app` integration is loaded. There are two ways to do this:
 

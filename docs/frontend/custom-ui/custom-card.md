@@ -1,5 +1,5 @@
 ---
-title: "Custom Cards"
+title: "Custom cards"
 ---
 
 [Dashboards](https://www.home-assistant.io/dashboards/) are our approach to defining your user interface for Home Assistant. We offer a lot of built-in cards, but you're not just limited to the ones that we decided to include in Home Assistant. You can build and use your own!
@@ -267,6 +267,7 @@ window.customCards.push({
   name: "Content Card",
   preview: false, // Optional - defaults to false
   description: "A custom card made by me!", // Optional
+  documentationURL: "https://developers.home-assistant.io/docs/frontend/custom-ui/custom-card/", // Adds a help link in the frontend card editor
 });
 ```
 

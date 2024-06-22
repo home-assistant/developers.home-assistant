@@ -8,7 +8,7 @@ The [home-assistant.io](https://home-assistant.io) website is built using [Jekyl
 
 ## Small changes
 
-You can use the "**Edit this page on GitHub**" link to edit pages without creating a fork. Keep in mind that you can't upload images while working this way. You work on your change and propose it via a Pull Request (PR).
+You can use the "**Edit this page on GitHub**" link to edit pages, which will automatically create a fork and allow you to edit quickly. Keep in mind that you can't upload images while working this way. You work on your change and propose it via a Pull Request (PR).
 
 Once you've created a Pull Request (PR), you can see a preview of the proposed changes by clicking *Details* against Netlify checker in the checkers section of the PR as soon as deployment is complete.
 
@@ -22,13 +22,13 @@ The easiest way to get started with development is to use Visual Studio Code wit
 
 To review the changes, open the command palette and choose ´Tasks: Run Task´ and then ´Preview´.
 
-### Manual Environment
+### Manual environment
 
 It is also possible to set up a more traditional development environment.
 
 To test your changes locally, you need to install **Ruby** and its dependencies (gems):
 
-- [Install Ruby](https://www.ruby-lang.org/en/documentation/installation/) if you don't have it already. Ruby version 2.5.0 or higher is required. Ruby version 3 is not supported yet.
+- [Install Ruby](https://www.ruby-lang.org/en/documentation/installation/) if you don't have it already. Ruby version 3.1 is required.
 - Install `bundler`, a dependency manager for Ruby: `gem install bundler` (You might have to run this command as `sudo`).
 
 - Shortcut for Fedora:
@@ -46,7 +46,7 @@ To test your changes locally, you need to install **Ruby** and its dependencies 
 - Shortcut for Mac (if the bundled Ruby doesn't work):
 
     ```shell
-    brew install ruby@2.7 && export PATH="/usr/local/opt/ruby@2.7/bin:$PATH"
+    brew install ruby@3.1 && export PATH="/usr/local/opt/ruby@3.1/bin:$PATH"
     ```
 
 

@@ -353,6 +353,8 @@ This will call a service in Home Assistant. Right now there is no return value. 
   "target": {
     "entity_id": "light.kitchen"
   }
+  // Must be included for services that return response data
+  "return_response": true
 }
 ```
 
@@ -368,10 +370,13 @@ The server will indicate with a message indicating that the service is done exec
       "id": "326ef27d19415c60c492fe330945f954",
       "parent_id": null,
       "user_id": "31ddb597e03147118cf8d2f8fbea5553"
-    }
+    },
+    "response": null
   }
 }
 ```
+
+The `result` of the call will always include a `response` to account for services that support responses. When a service that doesn't support responses is called, the value of `response` will be `null`.
 
 ## Fetching states
 
@@ -461,7 +466,7 @@ The server will respond with a result message containing the current registered 
 }
 ```
 
-## Pings and Pongs
+## Pings and pongs
 
 The API supports receiving a ping from the client and returning a pong. This serves as a heartbeat to ensure the connection is still alive:
 
@@ -525,3 +530,28 @@ If an error occurs, the `success` key in the `result` message will be set to `fa
    }
 }
 ```
+
+### Error handling during service calls and translations
+
+The JSON below shows an example of an error response. If `HomeAssistantError` error (or a subclass of `HomeAssistantError`) is handled, translation information, if set, will be added to the response. 
+
+When handling `ServiceValidationError` (`service_validation_error`) a stack trace is printed to the logs at debug level only.
+
+```json
+{
+   "id": 24,
+   "type":"result",
+   "success": false,
+   "error": {
+      "code": "service_validation_error",
+      "message": "Option 'custom' is not a supported mode.",
+      "translation_key": "unsupported_mode",
+      "translation_domain": "kitchen_sink",
+      "translation_placeholders": {
+        "mode": "custom"
+      }
+   }
+}
+```
+
+[Read more](/docs/core/platform/raising_exceptions) about raising exceptions or and the [localization of exceptions](/docs/internationalization/core/#exceptions).

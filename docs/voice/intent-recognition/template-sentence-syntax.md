@@ -1,5 +1,5 @@
 ---
-title: "Template Sentence Syntax"
+title: "Template sentence syntax"
 ---
 
 Template sentences are defined in YAML files using the format of [Hassil, our template matcher](https://github.com/home-assistant/hassil). Our template sentences are stored [on GitHub](https://github.com/home-assistant/intents/tree/main/sentences) and are organized by having for each language a directory of files in `sentences/<language>/`:
@@ -59,7 +59,7 @@ Response templates uses [Jinja2 syntax](https://jinja.palletsprojects.com/en/lat
 
 See all [translated responses](https://github.com/home-assistant/intents/tree/main/responses) for more examples.
 
-## Sentence Templates Syntax
+## Sentence templates syntax
 
 * Alternative word, phrases, or parts of a word
   * `(red | green | blue)`
@@ -78,6 +78,10 @@ See all [translated responses](https://github.com/home-assistant/intents/tree/ma
   * `<rule_name>`
   * The body of the rule is substituted for `<rule_name>`
   * In YAML, `rule_name` should be under `expansion_rules`. If the `rule_name` wraps a slot name, it should match the slot name. Otherwise it should be in the native language.
+* [Permutations](https://en.wikipedia.org/wiki/Permutation) of 2 or more items
+  * `(patience;you must have)`
+  * Permutation items are always padded with spaces to prevent new word formations
+  * Limit the number of items to 2-4, as the number of permutations for `n` items increases very quickly with `n`, this number being `n! == 1 * 2 * ... * n`
 
 ## The common file
 
@@ -151,7 +155,23 @@ lists:
 
 will match sentences such as "play the white album by the beatles". The `PlayAlbum` intent will have an `album` slot with "the white album " (note the trailing whitespace) and an `artist` slot with "the beatles".
 
-### Expansion Rules
+#### Local lists
+
+Sometimes you don't need a slot list available for all intents and sentences, so you can define one locally, making it usable only in the context of the intent data (like a collection of sentences) where it was defined. For example:
+
+```yaml
+language: en
+intents:
+  AddListItem:
+    data:
+      - sentences:
+          - add {item} to [my] shopping list
+        lists:
+          item:
+            wildcard: true
+```
+
+### Expansion rules
 
 A lot of template sentences can be written in a similar way. To avoid having to repeat the same matching structure multiple times, we can define expansion rules. For example, a user might add "the" in front of the area name, or they might not. We can define an expansion rule to match both cases.
 
@@ -166,7 +186,7 @@ expansion_rules:
   turn: "(turn | switch)"
 ```
 
-#### Local Expansion Rules
+#### Local expansion rules
 
 Expansion rules can also be defined locally next to a list of sentences, and will only be available within those templates. This allows you to write similar templates for different situations. For example:
 
@@ -205,7 +225,7 @@ lists:
 
 The same template `is the door <state>` is used for both binary sensors and regular locks, but the local `state` expansion rules refer to different lists.
 
-### Skip Words
+### Skip words
 
 Skip words are words that the intent recognizer will skip during recognition. This is useful for words that are not part of the intent, but are commonly used in sentences. For example, a user might use the word "please" in a sentence, but it is not part of the intent.
 
@@ -215,7 +235,7 @@ skip_words:
   - "can you"
 ```
 
-### Requires/Excludes Context
+### Requires/excludes context
 
 Hassil returns the first intent match it can find, so additional **context** may be required if the same sentence could produce multiple matches. 
 

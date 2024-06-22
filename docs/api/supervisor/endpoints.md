@@ -10,7 +10,7 @@ The token is available for add-ons and Home Assistant using the
 
 To see more details about each endpoint, click on it to expand it.
 
-### Addons
+### Add-ons
 
 <ApiEndpoint path="/addons" method="get">
 Return overview information about installed add-ons.
@@ -63,7 +63,35 @@ Get the documentation for an add-on.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/logs" method="get">
-Returns the raw container logs from docker.
+
+Get logs for an add-on via the Systemd journal backend.
+
+The endpoint accepts the same headers and provides the same functionality as
+`/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/addons/<addon>/logs/follow" method="get">
+
+Identical to `/addons/<addon>/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/addons/<addon>/logs/boots/<bootid>" method="get">
+
+Get logs for an add-on related to a specific boot.
+
+The `bootid` parameter is interpreted in the same way as in
+`/host/logs/boots/<bootid>` and the endpoint otherwise provides the same
+functionality as `/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/addons/<addon>/logs/boots/<bootid>/follow" method="get">
+
+Identical to `/addons/<addon>/logs/boots/<bootid>` except it continuously returns
+new log entries.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/icon" method="get">
@@ -87,7 +115,7 @@ Get details about an add-on
 | auto_uart           | boolean            | `true` if auto_uart access is granted is enabled                                       |
 | auto_update         | boolean            | `true` if auto update is enabled                                                       |
 | available           | boolean            | `true` if the add-on is available                                                      |
-| boot                | string             | "boot" or "manual"                                                                     |
+| boot                | string             | "auto" or "manual"                                                                     |
 | build               | boolean            | `true` if local add-on                                                                 |
 | changelog           | boolean            | `true` if changelog is available                                                       |
 | description         | string             | The add-on description                                                                 |
@@ -365,6 +393,13 @@ Stop an add-on
 
 <ApiEndpoint path="/addons/<addon>/uninstall" method="post">
 Uninstall an add-on
+
+**Payload:**
+
+| key           | type    | optional | description                            |
+| ------------- | ------- | -------- | -------------------------------------- |
+| remove_config | boolean | True     | Delete addon's config folder (if used) |
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/update" method="post">
@@ -496,7 +531,35 @@ Return information about the audio plugin.
 </ApiEndpoint>
 
 <ApiEndpoint path="/audio/logs" method="get">
-Returns the raw container logs from docker.
+
+Get logs for the audio plugin container via the Systemd journal backend.
+
+The endpoint accepts the same headers and provides the same functionality as
+`/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/audio/logs/follow" method="get">
+
+Identical to `/audio/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/audio/logs/boots/<bootid>" method="get">
+
+Get logs for the audio plugin container related to a specific boot.
+
+The `bootid` parameter is interpreted in the same way as in
+`/host/logs/boots/<bootid>` and the endpoint otherwise provides the same
+functionality as `/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/audio/logs/boots/<bootid>/follow" method="get">
+
+Identical to `/audio/logs/boots/<bootid>` except it continuously returns
+new log entries.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/audio/mute/input" method="post">
@@ -687,6 +750,18 @@ Reset internal authentication cache, this is useful if you have changed the pass
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/auth/list" method="get">
+
+List all users in Home Assistant to help with credentials recovery. Requires an admin level authentication token.
+
+**Payload:**
+
+| key      | type   | description                                                        |
+| -------- | ------ | ------------------------------------------------------------------ |
+| users    | list   | List of the Home Assistant [users](api/supervisor/models.md#user). |
+
+</ApiEndpoint>
+
 ### Backup
 
 <ApiEndpoint path="/backups" method="get">
@@ -770,6 +845,7 @@ Create a full backup.
 | compressed                     | boolean        | True     | `false` to create uncompressed backups               |
 | location                       | string or null | True     | Name of a backup mount or `null` for /backup         |
 | homeassistant_exclude_database | boolean        | True     | Exclude the Home Assistant database file from backup |
+| background                     | boolean        | True     | Return `job_id` immediately, do not wait for backup to complete. Clients must check job for status and slug. |
 
 **Example response:**
 
@@ -789,9 +865,17 @@ Upload a backup.
 
 ```json
 {
-  "slug": "skuwe823"
+  "slug": "skuwe823",
+  "job_id": "abc123"
 }
 ```
+
+:::note
+
+Error responses from this API may also include a `job_id` if the message alone cannot accurately describe what happened.
+Callers should direct users to review the job or supervisor logs to get an understanding of what occurred.
+
+:::
 
 </ApiEndpoint>
 
@@ -811,6 +895,7 @@ Create a partial backup.
 | compressed                     | boolean        | True     | `false` to create uncompressed backups               |
 | location                       | string or null | True     | Name of a backup mount or `null` for /backup         |
 | homeassistant_exclude_database | boolean        | True     | Exclude the Home Assistant database file from backup |
+| background                     | boolean        | True     | Return `job_id` immediately, do not wait for backup to complete. Clients must check job for status and slug. |
 
 **You need to supply at least one key in the payload.**
 
@@ -818,9 +903,17 @@ Create a partial backup.
 
 ```json
 {
-  "slug": "skuwe823"
+  "slug": "skuwe823",
+  "job_id": "abc123"
 }
 ```
+
+:::note
+
+Error responses from this API may also include a `job_id` if the message alone cannot accurately describe what happened.
+Callers should direct users to review the job or supervisor logs to get an understanding of what occurred.
+
+:::
 
 </ApiEndpoint>
 
@@ -893,9 +986,25 @@ Does a full restore of the backup with the given slug.
 
 **Payload:**
 
-| key      | type   | optional | description                          |
-| -------- | ------ | -------- | ------------------------------------ |
-| password | string | True     | The password for the backup if any |
+| key        | type    | optional | description                          |
+| ---------- | ------- | -------- | ------------------------------------ |
+| password   | string  | True     | The password for the backup if any   |
+| background | boolean | True     | Return `job_id` immediately, do not wait for restore to complete. Clients must check job for status. |
+
+**Example response:**
+
+```json
+{
+  "job_id": "abc123"
+}
+```
+
+:::note
+
+Error responses from this API may also include a `job_id` if the message alone cannot accurately describe what happened.
+Callers should direct users to review the job or supervisor logs to get an understanding of what occurred.
+
+:::
 
 </ApiEndpoint>
 
@@ -910,9 +1019,25 @@ Does a partial restore of the backup with the given slug.
 | homeassistant | boolean | True     | `true` if Home Assistant should be restored    |
 | addons        | list    | True     | A list of add-on slugs that should be restored |
 | folders       | list    | True     | A list of directories that should be restored  |
-| password      | string  | True     | The password for the backup if any           |
+| password      | string  | True     | The password for the backup if any             |
+| background    | boolean | True     | Return `job_id` immediately, do not wait for restore to complete. Clients must check job for status. |
 
 **You need to supply at least one key in the payload.**
+
+**Example response:**
+
+```json
+{
+  "job_id": "abc123"
+}
+```
+
+:::note
+
+Error responses from this API may also include a `job_id` if the message alone cannot accurately describe what happened.
+Callers should direct users to review the job or supervisor logs to get an understanding of what occurred.
+
+:::
 
 </ApiEndpoint>
 
@@ -1035,7 +1160,35 @@ Returns information about the Home Assistant core
 </ApiEndpoint>
 
 <ApiEndpoint path="/core/logs" method="get">
-Returns the raw container logs from docker.
+
+Get logs for the Home Assistant Core container via the Systemd journal backend.
+
+The endpoint accepts the same headers and provides the same functionality as
+`/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/core/logs/follow" method="get">
+
+Identical to `/core/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/core/logs/boots/<bootid>" method="get">
+
+Get logs for the Home Assistant Core container related to a specific boot.
+
+The `bootid` parameter is interpreted in the same way as in
+`/host/logs/boots/<bootid>` and the endpoint otherwise provides the same
+functionality as `/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/core/logs/boots/<bootid>/follow" method="get">
+
+Identical to `/core/logs/boots/<bootid>` except it continuously returns
+new log entries.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/core/options" method="post">
@@ -1067,10 +1220,24 @@ Passing `image`, `refresh_token`, `audio_input` or `audio_output` with `null` re
 
 <ApiEndpoint path="/core/rebuild" method="post">
 Rebuild the Home Assistant core container
+
+**Payload:**
+
+| key       | type       | optional | description                      |
+| --------- | ---------- | -------- | -------------------------------- |
+| safe_mode | boolean    | True     | Rebuild Core into safe mode      |
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/core/restart" method="post">
 Restart the Home Assistant core container
+
+**Payload:**
+
+| key       | type       | optional | description                      |
+| --------- | ---------- | -------- | -------------------------------- |
+| safe_mode | boolean    | True     | Restart Core into safe mode      |
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/core/start" method="post">
@@ -1218,7 +1385,35 @@ Return information about the DNS plugin.
 </ApiEndpoint>
 
 <ApiEndpoint path="/dns/logs" method="get">
-Returns the raw container logs from docker.
+
+Get logs for the DNS plugin container via the Systemd journal backend.
+
+The endpoint accepts the same headers and provides the same functionality as
+`/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/dns/logs/follow" method="get">
+
+Identical to `/dns/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/dns/logs/boots/<bootid>" method="get">
+
+Get logs for the DNS plugin container related to a specific boot.
+
+The `bootid` parameter is interpreted in the same way as in
+`/host/logs/boots/<bootid>` and the endpoint otherwise provides the same
+functionality as `/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/dns/logs/boots/<bootid>/follow" method="get">
+
+Identical to `/dns/logs/boots/<bootid>` except it continuously returns
+new log entries.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/dns/options" method="post">
@@ -1373,6 +1568,31 @@ Get hardware information.
           "/sys/devices/soc/platform/00ef"
         ]
       }
+    ],
+    "drives": [
+      {
+        "vendor": "Generic",
+        "model": "Flash Disk",
+        "revision": "8.07",
+        "serial": "AABBCCDD",
+        "id": "Generic-Flash-Disk-AABBCCDD",
+        "size": 8054112256,
+        "time_detected": "2023-02-15T21:44:22.504878+00:00",
+        "connection_bus": "usb",
+        "seat": "seat0",
+        "removable": true,
+        "ejectable": true,
+        "filesystems": [
+          {
+            "device": "/dev/sda1",
+            "id": "by-uuid-1122-1ABA",
+            "size": 67108864,
+            "name": "",
+            "system": false,
+            "mount_points": []
+          }
+        ]
+      }
     ]
 }
 ```
@@ -1382,6 +1602,7 @@ Get hardware information.
 | key      | description                                                  |
 | -------- | ------------------------------------------------------------ |
 | devices  | A list of [Device models](api/supervisor/models.md#device)   |
+| drives   | A list of [Drive models](api/supervisor/models.md#drive)
 
 </ApiEndpoint>
 
@@ -1421,6 +1642,7 @@ Return information about the host.
 | broadcast_llmnr  | bool or null   | Host is broadcasting its LLMNR hostname   |
 | broadcast_mdns   | bool or null   | Host is broadcasting its MulticastDNS hostname |
 | chassis          | string or null | The chassis type                          |
+| virtualization   | string or null | Virtualization hypervisor in use (if any) |
 | cpe              | string or null | The local CPE                             |
 | deployment       | string or null | The deployment stage of the OS if any     |
 | disk_total       | float          | Total space of the disk in MB             |
@@ -1466,9 +1688,9 @@ log record per line.
 
 **HTTP Request Headers**
 
-| Header   | optional | description                                    |
-| -------- | -------- | ---------------------------------------------- |
-| Accept   | true     | Type of data (currently only text/plain)       |
+| Header   | optional | description                                                                   |
+| -------- | -------- |-------------------------------------------------------------------------------|
+| Accept   | true     | Type of data (text/plain or text/x-log)                                       |
 | Range    | true     | Range of log entries. The format is `entries=cursor[[:num_skip]:num_entries]` |
 
 :::tip
@@ -1479,6 +1701,11 @@ as `num_skip`. E.g. `Range: entries=:-9:` returns the last 10 entries. Or
 
 API returns the last 100 lines by default. Provide a value for `Range` to see
 logs further in the past.
+
+The `Accept` header can be set to `text/x-log` to get logs annotated with
+extra information, such as the timestamp and Systemd unit name. If no
+identifier is specified (i.e. for the host logs containing logs for multiple
+identifiers/units), this option is ignored - these logs are always annotated.
 
 </ApiEndpoint>
 
@@ -1851,7 +2078,8 @@ Returns information about mounts configured in Supervisor
       "type": "cifs",
       "server": "server.local",
       "share": "media",
-      "state": "active"
+      "state": "active",
+      "read_only": false
     }
   ]
 }
@@ -1892,7 +2120,8 @@ Value in `name` must be unique and can only consist of letters, numbers and unde
   "server": "server.local",
   "share": "media",
   "username": "admin",
-  "password": "password"
+  "password": "password",
+  "read_only": false
 }
 ```
 
@@ -1915,7 +2144,8 @@ name, it cannot be changed. Delete and re-add the mount to change the name.
   "usage": "media",
   "type": "nfs",
   "server": "server.local",
-  "path": "/media/camera"
+  "path": "/media/camera",
+  "read_only": true
 }
 ```
 
@@ -1957,7 +2187,35 @@ Returns information about the multicast plugin
 </ApiEndpoint>
 
 <ApiEndpoint path="/multicast/logs" method="get">
-Returns the raw container logs from docker.
+
+Get logs for the multicast plugin via the Systemd journal backend.
+
+The endpoint accepts the same headers and provides the same functionality as
+`/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/multicast/logs/follow" method="get">
+
+Identical to `/multicast/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/multicast/logs/boots/<bootid>" method="get">
+
+Get logs for the multicast plugin related to a specific boot.
+
+The `bootid` parameter is interpreted in the same way as in
+`/host/logs/boots/<bootid>` and the endpoint otherwise provides the same
+functionality as `/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/multicast/logs/boots/<bootid>/follow" method="get">
+
+Identical to `/multicast/logs/boots/<bootid>` except it continuously returns
+new log entries.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/multicast/restart" method="post">
@@ -2209,14 +2467,15 @@ Returns information about the OS.
 
 **Returned data:**
 
-| key              | type    | description                                                  |
-| ---------------- | ------- | ------------------------------------------------------------ |
-| version          | string  | The current version of the OS                                |
-| version_latest   | string  | The latest published version of the OS in the active channel |
-| update_available | boolean | `true` if an update is available                             |
-| board            | string  | The name of the board                                        |
-| boot             | string  | Which slot that are in use                                   |
-| data_disk        | string  | Device which is used for holding OS data persistent          |
+| key              | type    | description                                                                  |
+| ---------------- | ------- | ---------------------------------------------------------------------------- |
+| version          | string  | The current version of the OS                                                |
+| version_latest   | string  | The latest published version of the OS in the active channel                 |
+| update_available | boolean | `true` if an update is available                                             |
+| board            | string  | The name of the board                                                        |
+| boot             | string  | Which slot that are in use                                                   |
+| data_disk        | string  | Device which is used for holding OS data persistent                          |
+| boot_slots       | dict    | Dictionary of [boot slots](api/supervisor/models.md#boot-slot) keyed by name |
 
 **Example response:**
 
@@ -2227,7 +2486,19 @@ Returns information about the OS.
   "update_available": true,
   "board": "ova",
   "boot": "slot1",
-  "data_disk": "BJTD4R-0x123456789"
+  "data_disk": "BJTD4R-0x123456789",
+  "boot_slots": {
+    "A": {
+      "state": "inactive",
+      "status": "good",
+      "version": "10.1"
+    },
+    "B": {
+      "state": "active",
+      "status": "good",
+      "version": "10.2"
+    }
+  }
 }
 ```
 
@@ -2242,6 +2513,18 @@ Update Home Assistant OS
 | key     | type   | description                                                    |
 | ------- | ------ | -------------------------------------------------------------- |
 | version | string | The version you want to install, default is the latest version |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/os/boot-slot" method="post">
+
+Change the active boot slot, **This will also reboot the device!** 
+
+**Payload:**
+
+| key       | type   | description                                                              |
+| --------- | ------ | ------------------------------------------------------------------------ |
+| boot_slot | string | Boot slot to change to. See options in `boot_slots` from `/os/info` API. |
 
 </ApiEndpoint>
 
@@ -2298,6 +2581,25 @@ Move datadisk to a new location, **This will also reboot the device!**
 | key     | type   | description                                                       |
 | ------- | ------ | ----------------------------------------------------------------- |
 | device  | string | ID of the disk device which should be used as the target for the data migration |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/os/datadisk/wipe" method="post">
+
+Wipe the datadisk including all user data and settings, **This will also reboot the device!** This API requires an admin token
+
+This API will wipe all config/settings for addons, Home Assistant and the Operating
+System and any locally stored data in config, backups, media, etc. The machine will
+reboot during this.
+
+After the reboot completes the latest stable version of Home Assistant and Supervisor
+will be downloaded. Once the process is complete the user will see onboarding, like
+during initial setup.
+
+This wipe also includes network settings. So after the reboot the user may need to
+reconfigure those in order to access Home Assistant again.
+
+The operating system version as well as its boot configuration will be preserved.
 
 </ApiEndpoint>
 
@@ -2967,7 +3269,35 @@ Returns information about the supervisor
 
 <ApiEndpoint path="/supervisor/logs" method="get">
 
-Returns the raw container logs from docker.
+Get logs for the Supervisor container via the Systemd journal backend. If the
+Systemd journal gateway fails to provide the logs, raw Docker container logs are
+returned as the fallback.
+
+The endpoint accepts the same headers and provides the same functionality as
+`/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/supervisor/logs/follow" method="get">
+
+Identical to `/supervisor/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/supervisor/logs/boots/<bootid>" method="get">
+
+Get logs for the Supervisor container related to a specific boot.
+
+The `bootid` parameter is interpreted in the same way as in
+`/host/logs/boots/<bootid>` and the endpoint otherwise provides the same
+functionality as `/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/supervisor/logs/boots/<bootid>/follow" method="get">
+
+Identical to `/supervisor/logs/boots/<bootid>` except it continuously returns
+new log entries.
 
 </ApiEndpoint>
 

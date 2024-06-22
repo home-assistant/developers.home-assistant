@@ -1,5 +1,5 @@
 ---
-title: "Fetching Bluetooth Data"
+title: "Fetching Bluetooth data"
 ---
 
 ## Choosing a method to fetch data

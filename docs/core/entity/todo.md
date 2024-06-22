@@ -1,6 +1,6 @@
 ---
-title: To-do List Entity
-sidebar_label: To-do List
+title: To-do list entity
+sidebar_label: To-do list
 ---
 
 A To-do list entity is an entity that represents a To-do list. A To-do list contains
@@ -20,7 +20,7 @@ Properties should only return information from memory and not do I/O (like netwo
 
 A `TodoListEntity` state is the count of incomplete items in the To-do list.
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `TodoListEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.
@@ -31,13 +31,15 @@ and are combined using the bitwise or (`|`) operator.
 | `DELETE_TODO_ITEM`      | Entity implements the methods to allow deletion of to-do items.  |
 | `UPDATE_TODO_ITEM`      | Entity implements the methods to allow update of to-do items.  |
 | `MOVE_TODO_ITEM`        | Entity implements the methods to re-order to-do items.  |
+| `DUE_DATE`              | Entity implements to-do item `due` field as a `datetime.date`. |
+| `DUE_DATETIME`          | Entity implements to-do item `due` field as a `datetime.datetime`. |
+| `DESCRIPTION`           | Entity implements to-do item `description` field.  |
 
 ## Methods
 
+### Create to-do items
 
-### Create To-do items
-
-A To-do list entity may support creating To-do items by specifying the `CREATE_TODO_ITEM`
+A to-do list entity may support creating to-do items by specifying the `CREATE_TODO_ITEM`
 supported feature.
 
 ```python
@@ -49,9 +51,9 @@ class MyTodoListEntity(TodoListEntity):
         """Add an item to the To-do list."""
 ```
 
-### Delete To-do items
+### Delete to-do items
 
-A To-do list entity may support deleting To-do items by specifying the `DELETE_TODO_ITEM`
+A To-do list entity may support deleting to-do items by specifying the `DELETE_TODO_ITEM`
 supported feature. Integrations must support deleting multiple items.
 
 ```python
@@ -60,15 +62,15 @@ from homeassistant.components.todo import TodoListEntity
 class MyTodoListEntity(TodoListEntity):
 
     async def async_delete_todo_items(self, uids: list[str]) -> None:
-        """Add an item to the To-do list."""
+        """Delete an item from the to-do list."""
 ```
 
-### Update To-do items
+### Update to-do items
 
-A To-do list entity may support updating To-do items by specifying the `UPDATE_TODO_ITEM`
+A to-do list entity may support updating to-do items by specifying the `UPDATE_TODO_ITEM`
 supported feature. The `TodoItem` field `uid` is always present and indicates
-which item should be updated, and all other fields are optional. Integrations
-must support partial update.
+which item should be updated. The item passed to update is a copy of the original
+item with fields updated or cleared.
 
 ```python
 from homeassistant.components.todo import TodoListEntity
@@ -79,19 +81,23 @@ class MyTodoListEntity(TodoListEntity):
         """Add an item to the To-do list."""
 ```
 
-### Move To-do items
+### Move to-do items
 
-A To-do list entity may support re-ordering To-do items in the list by specifying
-the `MOVE_TODO_ITEM` supported feature. The To-do item with the specified `uid`
-should be moved to the position in the list specified by `pos` (`0` is the first
-position in the To-do list).
+A to-do list entity may support re-ordering to-do items in the list by specifying
+the `MOVE_TODO_ITEM` supported feature. The to-do item with the specified `uid`
+should be moved to the position in the list after the one specified by `previous_uid` (`None` means move to the first
+position in the to-do list).
 
 ```python
 from homeassistant.components.todo import TodoListEntity
 
 class MyTodoListEntity(TodoListEntity):
 
-    async def async_move_todo_item(self, uid: str, pos: int) -> None:
+    async def async_move_todo_item(
+        self,
+        uid: str,
+        previous_uid: str | None = None
+    ) -> None:
         """Move an item in the To-do list."""
 ```
 
@@ -104,5 +110,7 @@ update.
 | Name        | Type             | Default      | Description                                                                                                                                     |
 | ----------- | ---------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | uid | <code>string &#124; None</code> | `None` | A unique identifier for the to-do item. This field is required for updates and the entity state.
-| summary     | <code>string &#124; None</code>  | `None` | A title or summary of the To-do item. This field is required for the entity state.
-| status | <code>TodoItemStatus &#124; None</code> | `None` | Defines the overall status for the To-do item, either `NEEDS_ACTION` or `COMPLETE`. This field is required for the entity state.
+| summary | <code>string &#124; None</code>  | `None` | A title or summary of the to-do item. This field is required for the entity state.
+| status | <code>TodoItemStatus &#124; None</code> | `None` | Defines the overall status for the to-do item, either `NEEDS_ACTION` or `COMPLETE`. This field is required for the entity state.
+| due | <code>datetime.date &#124; datetime.datetime &#124; None</code> | `None` | The date and time that a to-do is expected to be completed. The types supported depend on `TodoListEntityFeature.DUE_DATE` or `TodoListEntityFeature.DUE_DATETIME` or both being set. As a datetime, must have a timezone.
+| description | <code>string &#124; None</code>  | `None` | A more complete description of the to-do item than that provided by the summary. Only supported when `TodoListEntityFeature.DESCRIPTION` is set.

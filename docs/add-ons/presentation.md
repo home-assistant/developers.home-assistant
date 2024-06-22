@@ -41,6 +41,16 @@ A changelog is a file which contains a curated, chronologically ordered list of 
 
 For guidance on keeping a changelog, we recommend the [keep a changelog](http://keepachangelog.com) website. They have developed a standard used by many open source projects around the world.
 
+## Offering stable and canary version
+
+You may consider to offer a stable and a "next" or "canary" branch. These can be provided using different branches. When adding the add-on in Home Assistant, the user can select the wanted branch from a given repository by appending its name following a hashtag.
+
+```text
+https://github.com/home-assistant/hassio-addons-example#next
+```
+
+You should add this information to your documentation. Also, you should consider having different [names for the repositories](/docs/add-ons/repository#repository-configuration) in every branch, for example, "Super add-on (stable)" and "Super add-on (beta)".
+
 ## AppArmor
 
 In the event that an API call returns something you, as a developer were not expecting, access to too many resources could be a liability for your users. As an add-on developer, it is your responsibility to ensure your add-on will not ruin your user's machine, or perform actions that you would never expect. That's where AppArmor comes in.
@@ -142,8 +152,7 @@ Ingress API gateway supports the following:
 - Streaming content
 - Websockets
 
-
-## Basic Ingress Example with Nginx
+## Basic ingress example with Nginx
 
 The following is a basic ingress implementation with an Nginx server. This contains an example`Dockerfile`, `config.yaml`, and `ingress.conf` configuration.
 
