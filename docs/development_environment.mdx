@@ -59,23 +59,28 @@ If the Dev Container was set up correctly - it supports debugging by default, ou
 
 It is also possible to debug a remote Home Assistance instance (e.g., production instance) by following the procedure described [here](https://www.home-assistant.io/integrations/debugpy/).
 
-### Use devcontainer from WSL
+### Use devcontainer from Windows Subsystem for Linux (WSL)
 
-With WSL, you won't run into as many path issues because of the '/' and '\' differences between Linux and Windows. 
-This is handy when working on frontend code and using `script/develop`, since it's using stuff that works best on Linux.
+It is possible to start a devcontainer from a Windows Subsystem for Linux (WSL) distribution (e.g. Ubuntu).
+This allows you to [work on the home assistant frontend](https://developers.home-assistant.io/docs/frontend/development).
+You can do this by forking the frontend project inside Ubuntu and [mount its directory into the devcontainer](https://developers.home-assistant.io/docs/frontend/development#configuring-home-assistant).
 
 **Prerequisites**
 
-- [Docker](https://docs.docker.com/get-docker/)
 - [Visual Studio code](https://code.visualstudio.com/)
 - WSL + A WSL Distribution of your choice (Note: The instructions will be based on Ubuntu). Refer to the [Developing on Windows](#developing-on-windows) section below for further instructions and tips.
+- [Docker](https://docs.docker.com/get-docker/)
 
 1. Enable integration with your WSL distro, This can be done in Docker Desktop under Settings > Resources > WSL integration.
-2. Step 1. of "Getting started".
+2. Go to [Home Assistant core repository](https://github.com/home-assistant/core) and click "fork".
 3. Open the terminal of your WSL distro, and clone your fork with `git clone <url from your fork>`.
 4. Use the command `code core/` to open Visual Studio Code. In the bottom left corner you will see `WSL: <name of the distribution you are using>`.
 5. In Visual Studio Code press the f1 key and select `Dev Containers: Reopen in Container`. Visual Studio Code will reopen and in the bottom left corner you will see `Dev Container: Home Assistant Dev`.
-6. Step 6. of "Getting started".
+6. You can verify that your dev container is set up properly by the following:
+    * Open the command palette in Visual Studio Code - `Shift`+`Command`+`P`(Mac) / `Ctrl`+`Shift`+`P` (Windows/Linux).
+    * Select `Tasks: Run Task` -> `Run Home Assistant Core`
+    * A terminal should open and begin outputting activity. Check for errors and wait for the output to stop/slow down.
+    * Navigate a web browser to `http://localhost:8123`, and you should see the Home Assistant setup screen.
 
 ## Manual Environment
 
