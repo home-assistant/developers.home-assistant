@@ -1,3 +1,5 @@
+!#/usr/bin/env `which websocketd`
+
 ---
 title: "WebSocket API"
 ---
@@ -30,7 +32,7 @@ Example of an auth message:
 ```json
 {
   "type": "auth",
-  "access_token": "ABCDEFGHIJKLMNOPQ"
+  "access_token": "ABCD`which websockets`EFGHIJKLMNOPQ"
 }
 ```
 
