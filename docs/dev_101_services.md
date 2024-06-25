@@ -118,6 +118,19 @@ set_speed:
             - "low"
             - "medium"
             - "high"
+    # Fields can be grouped in collapsible sections, this is useful to initially hide
+    # advanced fields. Note that the collapsible section only affect presentation to the
+    # user, service data will not be nested.
+    advanced_fields:
+      # Whether or not the section is initially collapsed (default = true)
+      collapsed: true
+      # Input fields in this section
+      fields:
+        speed_pct:
+          selector:
+            number:
+              min: 0
+              max: 100
 ```
 
 :::info
