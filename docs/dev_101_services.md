@@ -122,7 +122,7 @@ set_speed:
     # advanced fields. Note that the collapsible section only affect presentation to the
     # user, service data will not be nested.
     advanced_fields:
-      # Whether or not the section is initially collapsed (default = true)
+      # Whether or not the section is initially collapsed (default = false)
       collapsed: true
       # Input fields in this section
       fields:
