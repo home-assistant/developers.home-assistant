@@ -103,10 +103,19 @@ device_registry.async_get_or_create(
 Integrations can opt in to allow the user to delete a device from the UI. To do this, integrations should implement the function `async_remove_config_entry_device` in their `__init__.py` module.
 
 ```py
+from homeassistant.helpers import device_registry as dr
+
 async def async_remove_config_entry_device(
     hass: HomeAssistant, config_entry: ConfigEntry, device_entry: DeviceEntry
 ) -> bool:
     """Remove a config entry from a device."""
+
+    # do what ever you need to do before
+
+    device_reg = dr.async_get(self.hass)
+    device_reg.async_update_device(
+        device_entry.id, remove_config_entry_id=config_entry.entry_id
+    )
 ```
 
 When the user clicks the delete device button for the device and confirms it, `async_remove_config_entry_device` will be awaited and if `True` is returned, the config entry will be removed from the device. If it was the only config entry of the device, the device will be removed from the device registry.
