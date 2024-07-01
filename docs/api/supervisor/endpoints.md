@@ -42,7 +42,8 @@ Return overview information about installed add-ons.
       "build": false,
       "url": null,
       "icon": false,
-      "logo": false
+      "logo": false,
+      "system_managed": false
     }
   ]
 }
@@ -164,7 +165,9 @@ Get details about an add-on
 | startup             | string             | The stage when the add-on is started (initialize, system, services, application, once) |
 | state               | string or null     | The state of the add-on (started, stopped)                                             |
 | stdin               | boolean            | `true` if the add-on accepts stdin commands                                            |
-| translations        | dictionary         | A dictionary containing content of translation files for the add-on |
+| system_managed      | boolean            | Indicates whether the add-on is managed by Home Assistant                              |
+| system_managed_config_entry | string     | Provides the configuration entry ID if the add-on is managed by Home Assistant         |
+| translations        | dictionary         | A dictionary containing content of translation files for the add-on                    |
 | udev                | boolean            | `true` if udev access is granted is enabled                                            |
 | update_available    | boolean            | `true` if an update is available                                                       |
 | url                 | string or null     | URL to more information about the add-on                                               |
@@ -239,6 +242,8 @@ Get details about an add-on
   "startup": "application",
   "state": "started",
   "stdin": false,
+  "system_managed": true,
+  "system_managed_config_entry": "abc123",
   "translations": {
     "en": {
       "configuration": {
@@ -283,16 +288,18 @@ To reset customized network/audio/options, set it `null`.
 
 **Payload:**
 
-| key           | type          | description                             |
-| ------------- | ------------- | --------------------------------------- |
-| boot          | string        | (auto, manual)                          |
-| auto_update   | boolean       | `true` if the add-on should auto update |
-| network       | dictionary    | A map of network configuration.         |
-| options       | dictionary    | The add-on configuration                |
-| audio_output  | float or null | The index of the audio output device    |
-| audio_input   | float or null | The index of the audio input device     |
-| ingress_panel | boolean       | `true` if ingress_panel is enabled      |
-| watchdog      | boolean       | `true` if watchdog is enabled           |
+| key                         | type          | description                             |
+| --------------------------- | ------------- | --------------------------------------- |
+| boot                        | string        | (auto, manual)                          |
+| auto_update                 | boolean       | `true` if the add-on should auto update |
+| network                     | dictionary    | A map of network configuration.         |
+| options                     | dictionary    | The add-on configuration                |
+| audio_output                | float or null | The index of the audio output device    |
+| audio_input                 | float or null | The index of the audio input device     |
+| ingress_panel               | boolean       | `true` if ingress_panel is enabled      |
+| watchdog                    | boolean       | `true` if watchdog is enabled           |
+| system_managed              | boolean       | `true` if managed by Home Assistant     |
+| system_managed_config_entry | boolean       | ID of config entry managing addon       |
 
 **You need to supply at least one key in the payload.**
 
