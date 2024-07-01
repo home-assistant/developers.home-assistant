@@ -21,6 +21,7 @@ This area is only available when the active user's profile has "advanced mode" e
 ![Screenshot of the Advanced Mode selector found on the Profile page](/img/en/frontend/frontend-profile-advanced-mode.png)
 
 Alternatively, you can also register the resource by adding it to the `resources` section of `lovelace` in the configuration:
+
 ```yaml
 resources:
   - url: /local/<name of the resource>.js
