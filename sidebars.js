@@ -235,6 +235,11 @@ module.exports = {
       label: "Misc",
       items: ["development_validation", "development_typing", "instance_url"],
     },
+    {
+      type: "category",
+      label: "Cookbook",
+      items: ["core/cookbook/state_management"]
+    }
   ],
   Voice: [
     "voice/overview",
