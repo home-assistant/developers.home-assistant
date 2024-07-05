@@ -100,7 +100,7 @@ that still allows for discovery, as long as there aren't any instances of the in
 
 ```python
 if device_unique_id:
-  await self.async_set_unique_id(device_unique_id)
+    await self.async_set_unique_id(device_unique_id)
 await self._async_handle_discovery_without_unique_id()
 ```
 
@@ -232,8 +232,8 @@ async def async_migrate_entry(hass, config_entry: ConfigEntry):
     _LOGGER.debug("Migrating configuration from version %s.%s", config_entry.version, config_entry.minor_version)
 
     if config_entry.version > 1:
-      # This means the user has downgraded from a future version
-      return False
+        # This means the user has downgraded from a future version
+        return False
 
     if config_entry.version == 1:
 
