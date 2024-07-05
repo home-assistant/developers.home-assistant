@@ -13,7 +13,7 @@ First, install [Visual Studio code](https://code.visualstudio.com/), next follow
 
 - Install [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install) and enable [systemd support](https://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl/).
 - Install the [Docker engine](https://docs.docker.com/engine/install/) based on your selected WSL2 Linux distribution.
-- Fork and clone the desired code repository.
+- Fork and clone the desired code repository within the WSL2.
 - [Start the devcontainer](#fork-the-repository-and-start-the-devcontainer)
 
 :::
@@ -67,7 +67,7 @@ Since the Docker engine is installed as systemd service, we need to ensure syste
 
 ### Follow "Setup on Linux"
 
-From this point on, you can follow the [Setup on Linux](#setup-on-linux) instructions below. When choosing the correct steps to install the docker engine, use the installed WSL2 distribution (_the default is Ubuntu_).
+From this point on, you can follow the [Setup on Linux](#setup-on-linux) instructions below, note that all steps must be performed within the WSL2 shell. When choosing the correct steps to install the docker engine, use the installed WSL2 distribution (_the default is Ubuntu_).
 
 ## Setup on Linux
 
