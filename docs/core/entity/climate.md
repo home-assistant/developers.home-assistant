@@ -65,7 +65,7 @@ The HVAC action describes the _current_ action. This is different from the mode,
 | `HVACAction.DRYING`     | Device is drying.     |
 | `HVACAction.FAN`        | Device has fan on.    |
 | `HVACAction.IDLE`       | Device is idle.       |
-| `HVACAction.DEFROSTING` | Device is defrosting  |
+| `HVACAction.DEFROSTING` | Device is defrosting. |
 
 ### Presets
 
