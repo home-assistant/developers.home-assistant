@@ -40,10 +40,10 @@ Enable SPL (secondary program loader) handling. Some U-Boot targets generate a s
 
 `BOOTLOADER`:
 
+- grub
 - uboot
-- barebox
 
-HAOS uses mainly [U-Boot](https://www.denx.de/wiki/U-Boot). For UEFI systems [barebox](https://barebox.org/) is used.
+HAOS uses mainly [U-Boot](https://www.denx.de/wiki/U-Boot). For UEFI systems [GRUB](https://www.gnu.org/software/grub/) is used.
 
 `DISK_SIZE`:
 
