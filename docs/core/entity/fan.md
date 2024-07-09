@@ -40,8 +40,8 @@ and are combined using the bitwise or (`|`) operator.
 | `OSCILLATE`   | The fan supports oscillation.                                            |
 | `PRESET_MODE` | The fan supports preset modes.                                           |
 | `SET_SPEED`   | The fan supports setting the speed percentage and optional preset modes. |
-| `TURN_OFF`    | The fan supports turning off.              |
-| `TURN_ON`     | The fan supports turning on.               |
+| `TURN_OFF`    | The fan supports turning off.                                                                                |
+| `TURN_ON`     | The fan supports turning on.                                                                                 |
 
 ## Methods
 
@@ -183,7 +183,7 @@ class FanEntity(ToggleEntity):
 ### Toggle
 
 Optional. If not implemented will default to checking what method to call using the is_on property.
-Only implement this method if the flag `FanEntityFeature.TURN_ON` and `FanEntityFeature.TURN_OFF` is set.
+Only implement this method if the flags `FanEntityFeature.TURN_ON` and `FanEntityFeature.TURN_OFF` are set.
 
 ```python
 class FanEntity(ToggleEntity):
