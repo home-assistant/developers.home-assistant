@@ -23,7 +23,7 @@ During the command phase, the client attaches a unique identifier to each messag
 
 ## Message format
 
-Each API message is a JSON serialized object containing a `type` key. After the authentication phase messages also must contain an `id`, an integer that contains the number of interactions.
+Each API message is a JSON serialized object containing a `type` key. After the authentication phase messages also must contain an `id`, an integer that the caller can use to correlate messages to responses.
 
 Example of an auth message:
 
