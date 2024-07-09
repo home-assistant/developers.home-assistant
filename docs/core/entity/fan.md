@@ -167,7 +167,7 @@ For new intergrations, `speed` should not be implemented and only `percentage` a
 
 ### Turn off
 
-Only implement this method if the flag `FanEntityFeature.TURN_ON` is set.
+Only implement this method if the flag `FanEntityFeature.TURN_OFF` is set.
 
 ```python
 class FanEntity(ToggleEntity):
