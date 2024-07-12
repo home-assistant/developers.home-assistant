@@ -37,7 +37,7 @@ If you are using Visual Studio Code with devcontainers for Home Assistant, you n
 
 ```json
 "mounts": [
-  "source=/path/to/hass/frontend,target=/workspaces/frontend,type=bind,consistency=cached"
+  "source=/workspaces/frontend,target=path/to/hass/frontend,type=bind,consistency=cached"
 ]
 ```
 
