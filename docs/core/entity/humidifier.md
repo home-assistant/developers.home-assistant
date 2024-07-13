@@ -27,7 +27,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Constant                            | Description
 | ----------------------------------- | ------------------------------------------
-| `HumidiferDeviceClass.DEHUMIDIFIER` | A dehumidifier
+| `HumidifierDeviceClass.DEHUMIDIFIER` | A dehumidifier
 | `HumidifierDeviceClass.HUMIDIFIER`  | A humidifier
 
 
