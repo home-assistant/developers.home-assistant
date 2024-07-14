@@ -43,9 +43,9 @@ When defining a policy, any dictionary value at any place can be replaced with `
 
 ## Entities
 
-Entity permissions can be set on a per entity and per domain basis using the subcategories `entity_ids`, `device_ids`, `area_ids` and `domains`. You can either grant all access by setting the value to `True`, or you can specify each entity individually using the "read", "control", "edit" permissions.
+Entity permissions can be set on a per entity and per domain basis using the subcategories `entity_ids`, `device_ids`, `area_ids`, `label_ids` and `domains`. You can either grant all access by setting the value to `True`, or you can specify each entity individually using the "read", "control", "edit" permissions.
 
-The system will return the first matching result, based on the order: `entity_ids`, `device_ids`, `area_ids`, `domains`, `all`.
+The system will return the first matching result, based on the order: `entity_ids`, `device_ids`, `area_ids`, `label_ids`, `domains`, `all`.
 
 ```json
 {
