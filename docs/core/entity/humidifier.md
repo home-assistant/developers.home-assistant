@@ -25,10 +25,10 @@ Properties should always only return information from memory and not do I/O (lik
 
 ### Available device classes
 
-| Constant                            | Description
-| ----------------------------------- | ------------------------------------------
-| `HumidifierDeviceClass.DEHUMIDIFIER` | A dehumidifier
-| `HumidifierDeviceClass.HUMIDIFIER`  | A humidifier
+| Constant                             | Description                                |
+| ------------------------------------ | ------------------------------------------ |
+| `HumidifierDeviceClass.DEHUMIDIFIER` | A dehumidifier                             |
+| `HumidifierDeviceClass.HUMIDIFIER`   | A humidifier                               |
 
 
 ### Modes
