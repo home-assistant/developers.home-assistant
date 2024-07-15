@@ -16,7 +16,7 @@
     "@docusaurus/preset-classic": "^3.4.0",
     "@docusaurus/theme-mermaid": "^3.4.0",
     "@mdx-js/react": "^3.0.1",
-    "@easyops-cn/docusaurus-search-local": "^0.44.2",
+    "@easyops-cn/docusaurus-search-local": "^0.44.3",
     "by-node-env": "^2.0.1",
     "clsx": "^2.1.1",
     "react-dom": "18.3.1",
