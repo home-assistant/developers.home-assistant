@@ -42,7 +42,7 @@ Supported features are defined by using values in the `UpdateEntityFeature` enum
 | 'BACKUP' | A backup can be made automatically, before installing an update.
 | 'INSTALL' | The update can be installed from Home Assistant.
 | 'PROGRESS' | This integration is able to provide progress information. If omitted, Home Assistant will try to provide a progress status; although it is better if the progress can be extracted from the device or service API.
-| 'SPECIFIC_VERSION' | A specific version of an update can be installed using the `update.install` service.
+| 'SPECIFIC_VERSION' | A specific version of an update can be installed using the `update.install` service action.
 | 'RELEASE_NOTES' | The entity provides methods to fetch a complete changelog.
 
 ## Methods

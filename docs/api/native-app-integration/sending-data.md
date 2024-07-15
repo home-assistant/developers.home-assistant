@@ -151,9 +151,9 @@ This message will inform Home Assistant of new location information.
 | `course` | int | The direction in which the device is traveling, measured in degrees and relative to due north. Must be greater than 0.
 | `vertical_accuracy` | int | The accuracy of the altitude value, measured in meters. Must be greater than 0.
 
-## Call a service
+## Call a service action
 
-Call a service in Home Assistant.
+Call a service action in Home Assistant.
 
 ```json
 {
@@ -170,9 +170,9 @@ Call a service in Home Assistant.
 
 | Key | Type | Description
 | --- | ---- | -----------
-| `domain` | string | The domain of the service
-| `service` | string | The service name
-| `service_data` | dict | The data to send to the service
+| `domain` | string | The domain of the service action
+| `service` | string | The service action name
+| `service_data` | dict | The data to send to the service action
 
 ## Fire an event
 

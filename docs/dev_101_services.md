@@ -1,13 +1,13 @@
 ---
-title: "Integration services"
-sidebar_label: "Custom services"
+title: "Integration service actions"
+sidebar_label: "Custom actions"
 ---
 
-Home Assistant provides ready-made services for a lot of things, but it doesn't always cover everything. Instead of trying to change Home Assistant, it is preferred to add it as a service under your own integration first. Once we see a pattern in these services, we can talk about generalizing them.
+Home Assistant provides ready-made actions for a lot of things, but it doesn't always cover everything. Instead of trying to change Home Assistant, it is preferred to add it as a service action under your own integration first. Once we see a pattern in these service actions, we can talk about generalizing them.
 
-This is a simple "hello world" example to show the basics of registering a service. To use this example, create the file `<config dir>/custom_components/hello_service/__init__.py` and copy the below example code.
+This is a simple "hello world" example to show the basics of registering a service action. To use this example, create the file `<config dir>/custom_components/hello_service/__init__.py` and copy the below example code.
 
-Services can be called from automations and from the service "Developer tools" in the frontend.
+Actions can be called from automations and from the actions "Developer tools" in the frontend.
 
 ```python
 DOMAIN = "hello_service"
@@ -20,7 +20,7 @@ def setup(hass, config):
     """Set up is called when Home Assistant is loading our component."""
 
     def handle_hello(call):
-        """Handle the service call."""
+        """Handle the service action call."""
         name = call.data.get(ATTR_NAME, DEFAULT_NAME)
 
         hass.states.set("hello_service.hello", name)
@@ -35,67 +35,68 @@ To load the integration in Home Assistant is necessary to create a `manifest.jso
 
 ```yaml
 # configuration.yaml entry
-hello_service:
+hello_action:
 ```
 
 An example of `manifest.json`:
 
 ```json
 {
-    "domain": "hello_service",
-    "name": "Hello Service",
+    "domain": "hello_action",
+    "name": "Hello Action",
     "documentation": "https://developers.home-assistant.io/docs/dev_101_services",
     "iot_class": "local_push",
     "version": "0.1.0"
 }
 ```
 
-Open the frontend and in the sidebar, click the first icon in the developer tool section. This will open the Call Service developer tool. On the right, find your service and click on it. This will automatically fill in the correct values.
+Open the frontend and in the sidebar, click the first icon in the developer tool section. This will open the Actions developer tool. On the right, find your action and click on it. This will automatically fill in the correct values.
 
-Pressing "Call Service" will now call your service without any parameters. This will cause your service to create a state with the default name 'World'. If you want to specify the name, you have to specify a parameter by providing it through Service Data. In YAML mode, add the following and press "Call Service again".
+Pressing "Perform action" will now call your service action without any parameters. This will cause your service action to create a state with the default name 'World'. If you want to specify the name, you have to specify a parameter by providing it through service action Data. In YAML mode, add the following and press "Perform Service" again.
 
 ```yaml
-service: hello_service.hello
+service: hello_action.hello
 data:
   name: Planet
 ```
 
-The service will now overwrite the previous state with "Planet".
+The service action will now overwrite the previous state with "Planet".
 
-## Service descriptions
+## Service action descriptions
 
-Adding services is only useful if users know about them. In Home Assistant we use a `services.yaml` as part of your integration to describe the services.
+Adding actions is only useful if users know about them. In Home Assistant we use a `services.yaml` as part of your integration to describe the service actions.
 
-Services are published under the domain name of your integration, so in `services.yaml` we only use the service name as the base key.
+Actions are published under the domain name of your integration, so in `services.yaml` we only use the service action name as the base key.
 
 ```yaml
 # Example services.yaml entry
 
 # Service ID
 set_speed:
-  # If the service accepts entity IDs, target allows the user to specify entities by
-  # entity, device, or area. If `target` is specified, `entity_id` should not be
-  # defined in the `fields` map. By default it shows only targets matching entities
-  # from the same domain as the service, but if further customization is required,
-  # target supports the entity, device, and area selectors
-  # (https://www.home-assistant.io/docs/blueprint/selectors/). Entity selector
-  # parameters will automatically be applied to device and area, and device selector
-  # parameters will automatically be applied to area. 
+  # If the service action accepts entity IDs, target allows the user to specify
+  # entities by entity, device, or area. If `target` is specified, `entity_id`
+  # should not be  defined in the `fields` map. By default it shows only targets
+  # matching entities from the same domain as the action, but if further
+  # customization is required, target supports the entity, device, and area
+  # selectors (https://www.home-assistant.io/docs/blueprint/selectors/).
+  # Entity selector parameters will automatically be applied to device and area,
+  # and device selector parameters will automatically be applied to area.
   target:
     entity:
       domain: fan
-      # If not all entities from the service's domain support a service, entities
+      # If not all entities from the action's domain support a action, entities
       # can be further filtered by the `supported_features` state attribute. An
       # entity will only be possible to select if it supports at least one of the
       # listed supported features.
       supported_features:
         - fan.FanEntityFeature.SET_SPEED
-        # If a service requires more than one supported feature, the item should
-        # be given as a list of required supported features. For example, if the
-        # service requires both SET_SPEED and OSCILLATE it would be expressed like this
+        # If a service action requires more than one supported feature, the item
+        # should be given as a list of required supported features. For example,
+        # if the service action requires both SET_SPEED and OSCILLATE it would
+        # be expressed like this
         - - fan.FanEntityFeature.SET_SPEED
           - fan.FanEntityFeature.OSCILLATE
-  # Different fields that your service accepts
+  # Different fields that your service action accepts
   fields:
     # Key of the field
     speed:
@@ -120,7 +121,7 @@ set_speed:
             - "high"
     # Fields can be grouped in collapsible sections, this is useful to initially hide
     # advanced fields. Note that the collapsible section only affect presentation to the
-    # user, service data will not be nested.
+    # user, service action data will not be nested.
     advanced_fields:
       # Whether or not the section is initially collapsed (default = false)
       collapsed: true
@@ -134,14 +135,14 @@ set_speed:
 ```
 
 :::info
-The name and description of the services are set in our [translations](/docs/internationalization/core#services) and not in the service description. Each service and service field must have a matching translation defined.
+The name and description of the service actions are set in our [translations](/docs/internationalization/core#services) and not in the service action description. Each service action and service action field must have a matching translation defined.
 :::
 
-### Filtering service fields
+### Filtering service action fields
 
-In some cases, entities from a service's domain may not support all service fields. By
-providing a `filter` for the field description, the field will only be shown if at least
-one selected entity supports the field according to the configured filter.
+In some cases, entities from a action's domain may not support all service action fields.
+By providing a `filter` for the field description, the field will only be shown if at
+least one selected entity supports the field according to the configured filter.
 
 A filter must specify either `supported_features` or `attribute`, combing both is not
 supported.
@@ -184,11 +185,11 @@ This is a partial example of a field which is only shown if at least one selecte
 
 ## Icons
 
-Services can also have icons. These icons are used in the Home Assistant UI when displaying the service in places like the automation and script editors.
+Actions can also have icons. These icons are used in the Home Assistant UI when displaying the service action in places like the automation and script editors.
 
-The icon to use for each service can be defined in the `icons.json` translation file in the integration folder, under the `services` key. The key should be the service name, and the value should be the icon to use.
+The icon to use for each service action can be defined in the `icons.json` translation file in the integration folder, under the `services` key. The key should be the service action name, and the value should be the icon to use.
 
-The following example, shows how to provide icons for the `turn_on` and `turn_off` services of an integration:
+The following example, shows how to provide icons for the `turn_on` and `turn_off` service actions of an integration:
 
 ```json
 {
@@ -200,11 +201,11 @@ The following example, shows how to provide icons for the `turn_on` and `turn_of
 ```
 
 
-## Entity services
+## Entity service actions
 
-Sometimes you want to provide extra services to control your entities. For example, the Sonos integration provides services to group and ungroup devices. Entity services are special because there are many different ways a user can specify entities. It can use areas, a group or a list of entities.
+Sometimes you want to provide extra actions to control your entities. For example, the Sonos integration provides action to group and ungroup devices. Entity service actions are special because there are many different ways a user can specify entities. It can use areas, a group or a list of entities.
 
-You need to register entity services in your platforms, like `<your-domain>/media_player.py`. These services will be made available under your domain and not the media player domain. Example code:
+You need to register entity service actions in your platforms, like `<your-domain>/media_player.py`. These service actions will be made available under your domain and not the media player domain. Example code:
 
 ```python
 from homeassistant.helpers import config_validation as cv, entity_platform, service
@@ -224,7 +225,7 @@ async def async_setup_entry(hass, entry):
     )
 ```
 
-If you need more control over the service call, you can also pass an async function that instead of `"set_sleep_timer"`:
+If you need more control over the service action call, you can also pass an async function that instead of `"set_sleep_timer"`:
 
 ```python
 async def custom_set_sleep_timer(entity, service_call):
@@ -233,11 +234,11 @@ async def custom_set_sleep_timer(entity, service_call):
 
 ## Response data
 
-Services may respond to a service call with data for powering more advanced automations. There are some additional implementation requirements:
+Actions may respond to an action call with data for powering more advanced automations. There are some additional implementation requirements:
 
 - Response data must be a `dict` and serializable in JSON [`homeassistant.util.json.JsonObjectType`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/util/json.py) in order to interoperate with other parts of the system, such as the frontend.
-- Errors must be raised as exceptions just like any other service call as we do
-not want end users to need complex error handling in scripts and automations.
+- Errors must be raised as exceptions just like any other service action call as
+we do not want end users to need complex error handling in scripts and automations.
 The response data should not contain error codes used for error handling.
 
 Example code:
@@ -286,9 +287,9 @@ The use of response data is meant for cases that do not fit the Home Assistant s
 
 ### Supporting response data
 
-Service calls are registered with a `SupportsResponse` value to indicate response data is supported.
+Action calls are registered with a `SupportsResponse` value to indicate response data is supported.
 
 | Value      | Description                                                                                                                                                                                                                       |
 | ---------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `OPTIONAL` | The service performs an action and can optionally return response data. The service should conditionally check the `ServiceCall` property `return_response` to decide whether or not response data should be returned, or `None`. |
-| `ONLY`     | The service doesn't perform any actions and always returns response data.                                                                                                                                                         |
+| `OPTIONAL` | Performs an action and can optionally return response data. The service action should conditionally check the `ServiceCall` property `return_response` to decide whether or not response data should be returned, or `None`. |
+| `ONLY`     | Doesn't perform any actions and always returns response data.                                                                                                                                                         |
