@@ -5,7 +5,7 @@ sidebar_label: "Introduction"
 
 Integrations can represent devices & services in Home Assistant. The data points are represented as entities. Entities are standardized by other integrations like `light`, `switch`, etc. Standardized entities come with actions for control, but an integration can also provide their own service actions in case something is not standardized.
 
-An entity abstracts away the internal working of Home Assistant. As an integrator you don't have to worry about how service actions or the state machine work. Instead, you extend an entity class and implement the necessary properties and methods for the device type that you're integrating.
+An entity abstracts away the internal workings of Home Assistant. As an integrator, you don't have to worry about how service actions or the state machine work. Instead, you extend an entity class and implement the necessary properties and methods for the device type that you're integrating.
 
 <img className='invertDark'
   src='/img/en/architecture/integrating-devices-services.svg'

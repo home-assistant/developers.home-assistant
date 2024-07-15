@@ -8,7 +8,7 @@ title: Services are now actions
 
 The term "Services" has been a source of confusion for many users, as it is not immediately clear what it refers to; it could be a web or STT service, but in the context of Home Assistant, it means something entirely different (service calls).
 
-In Home Assistant 2024.8, "Services" (as in service calls) will be renamed to "Actions". This change is part of our ongoing effort to make Home Assistant more user-friendly and easier to understand for new users. The term fits in with the UI changes we have been implementing over the past months (call services no longer exist in our automations and script editors). Effectively, one is performing actions in ones automations.
+In Home Assistant 2024.8, "Services" (as in service calls) will be renamed to "Actions". This change is part of our ongoing effort to make Home Assistant more user-friendly and easier for new users to understand. The term fits in with the UI changes we have been implementing over the past months (call services no longer exist in our automations and script editors). Effectively, one is performing actions in one's automations.
 
 This change will be reflected in the Home Assistant UI, documentation, and other places where the term "Services" is used. For example, the "Services" tab in the Developer Tools will be renamed to "Actions".
 
