@@ -21,7 +21,7 @@ The `strings.json` contains translations for different things that the integrati
 | `issues`            | Translations for repairs issues.                  |
 | `options`           | Translations for the options flow.                |
 | `selectors`         | Selectors of the integration.                     |
-| `services`          | Services of the integration.                      |
+| `services`          | Service actions of the integration.               |
 
 ### Title
 
@@ -123,12 +123,12 @@ The translation for selectors are defined under the `selector` key. It supports 
 
 ```
 
-### Services
+### Service Actions
 
-The translations of service strings are defined under the `services` key.
+The translations of service actions strings are defined under the `services` key.
 
-It supports translating the `name` and `description` of each service,
-and the `name` and `description` of each service's `fields`.
+It supports translating the `name` and `description` of each action,
+and the `name` and `description` of each action's `fields`.
 
 ```json
 {
@@ -158,7 +158,7 @@ and the `name` and `description` of each service's `fields`.
 ```
 
 :::note
-Services may use selectors in their `fields`. The translation of those selectors can be provided using the `translation_key` property on the selector definition in the services.yaml file. See the [Selectors](#selectors) section and the [Service description](/docs/dev_101_services.md#service-descriptions) page for more information.
+Service actions may use selectors in their `fields`. The translation of those selectors can be provided using the `translation_key` property on the selector definition in the services.yaml file. See the [Selectors](#selectors) section and the [Service action description](/docs/dev_101_services.md#service-action-descriptions) page for more information.
 :::
 
 ### Device automations
@@ -207,7 +207,7 @@ The translation strings for exceptions are defined under the `exception` key in 
 
 ```
 
-Example of raising an exception with localization during a service call:
+Example of raising an exception with localization during a service action call:
 
 ```python
 async def async_select_index(hass: HomeAssistant, index: int) -> None:

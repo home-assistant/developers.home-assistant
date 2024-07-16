@@ -252,7 +252,7 @@ as is makes our examples more readable:
 - Platform types (e.g., `light`, `switch`)
 - Condition types (e.g., `numeric_state`, `state`)
 - Trigger platforms (e.g., `state`, `time`)
-- Service names (e.g., `light.turn_on`)
+- Service action names (e.g., `light.turn_on`)
 - Device classes (e.g., `problem`, `motion`)
 - Event names
 - Values that accept a limited set of possible, hardcoded values.

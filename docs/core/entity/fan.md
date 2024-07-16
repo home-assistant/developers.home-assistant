@@ -27,7 +27,7 @@ A fan may have preset modes that automatically control the percentage speed or o
 
 Preset modes should not include named (manual) speed settings as these should be represented as percentages.
 
-Manually setting a speed must disable any set preset mode. If it is possible to set a percentage speed manually without disabling the preset mode, create a switch or service to represent the mode.
+Manually setting a speed must disable any set preset mode. If it is possible to set a percentage speed manually without disabling the preset mode, create a switch or service action to represent the mode.
 
 ## Supported features
 
