@@ -278,17 +278,18 @@ action:
       message: Hi there!
 ```
 
-### Service targets
+### Service action targets
 
-If you want to fire a service call for an entity ID (for example, to turn
+If you want to fire a service action call for an entity ID (for example, to turn
 on a light), you can do so in three different ways.
 
-The entity ID can be specified as a property of the service level, part of the
-data that is sent in the service call or as an entity in a service target.
+The entity ID can be specified as a property of the action level, part of the
+data that is sent in the service action call or as an entity in a service
+action target.
 
-Service targets is the most modern way and allows one to target a service call
-for an entity, device or area. Therefore, the target is the most flexible of the options
-available and is the one that should be used.
+Service action targets is the most modern way and allows one to target a
+service action call for an entity, device or area. Therefore, the target is the
+most flexible of the options available and is the one that should be used.
 
 ```yaml
 # Good

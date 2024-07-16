@@ -61,7 +61,7 @@ Not all existing code follows the requirements in this checklist. This cannot be
 Keep a new integration to the minimum functionality needed for someone to get value out of the integration. This allows reviewers to sign off on smaller chunks of code one at a time, and lets us get your new integration/features in sooner. **Pull requests containing large code dumps will not be a priority for review and may be closed.**
 
 - Limit to a single platform
-- Do not add features not needed to directly support the single platform (such as custom services)
+- Do not add features not needed to directly support the single platform (such as custom service actions)
 - Do not mix clean-ups and new features in a single pull request.
 - Do not solve several issues in a single pull request.
 - Do not submit pull requests that depend on other work which is still unmerged.
