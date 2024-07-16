@@ -176,9 +176,9 @@ When new data arrives, use `coordinator.async_set_updated_data(data)` to pass th
 This is an advanced topic.
 :::
 
-Home Assistant has built-in logic to make sure that integrations do not hammer APIs and consume all available resources in Home Assistant. This logic is built around limiting the number of parallel requests. This logic is automatically used during service calls and entity updates.
+Home Assistant has built-in logic to make sure that integrations do not hammer APIs and consume all available resources in Home Assistant. This logic is built around limiting the number of parallel requests. This logic is automatically used during service action calls and entity updates.
 
-Home Assistant controls the number of parallel updates (calls to `update()`) by maintaining a [semaphore](https://docs.python.org/3/library/asyncio-sync.html#asyncio.Semaphore) per integration. For example, if the semaphore allows 1 parallel connection, updates and service calls will wait if one is in progress. If the value is 0, the integration is itself responsible for limiting the number of parallel requests if necessary.
+Home Assistant controls the number of parallel updates (calls to `update()`) by maintaining a [semaphore](https://docs.python.org/3/library/asyncio-sync.html#asyncio.Semaphore) per integration. For example, if the semaphore allows 1 parallel connection, updates and service action calls will wait if one is in progress. If the value is 0, the integration is itself responsible for limiting the number of parallel requests if necessary.
 
 The default value for parallel requests for a platform is decided based on the first entity that is added to Home Assistant. It's 0 if the entity defines the `async_update` method, else it's 1. (this is a legacy decision)
 

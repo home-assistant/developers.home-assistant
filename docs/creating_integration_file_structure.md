@@ -17,9 +17,9 @@ If your integration is going to integrate one or more devices, you will need to 
 - More info on [available entity integrations](core/entity.md).
 - More info on [creating platforms](creating_platform_index.md).
 
-## Integrating services - `services.yaml`
+## Integrating service actions - `services.yaml`
 
-If your integration is going to register services, it will need to provide a description of the available services. The description is stored in `services.yaml`. [More information about `services.yaml`.](dev_101_services.md)
+If your integration is going to register service actions, it will need to provide a description of the available actions. The description is stored in `services.yaml`. [More information about `services.yaml`.](dev_101_services.md)
 
 ## Data update coordinator - `coordinator.py`
 

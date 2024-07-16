@@ -128,7 +128,7 @@ if not user.permissions.check_entity(entity_id, POLICY_CONTROL):
 
 ### The context object
 
-All service action calls, fired events and states in Home Assistant have a context object. This object allows us to attribute changes to events and actions. These context objects also contain a user id, which is used for checking the permissions.
+All service actions, fired events and states in Home Assistant have a context object. This object allows us to attribute changes to events and actions. These context objects also contain a user id, which is used for checking the permissions.
 
 It's crucial for permission checking that actions taken on behalf of the user are done with a context containing the user ID. If you are in a service action handler, you should re-use the incoming context `call.context`. If you are inside a WebSocket API or Rest API endpoint, you should create a context with the correct user:
 
@@ -174,7 +174,7 @@ from homeassistant.auth.permissions.const import POLICY_CONTROL
 
 
 async def handle_entity_service(call):
-    """Handle a service call."""
+    """Handle a service action call."""
     entity_ids = call.data["entity_id"]
 
     for entity_id in entity_ids:
@@ -206,12 +206,12 @@ async def async_setup(hass, config):
 #### Checking admin permission
 
 Starting Home Assistant 0.90, there is a special decorator to help protect
-services that require admin access.
+service actions that require admin access.
 
 ```python
 # New in Home Assistant 0.90
 async def handle_admin_service(call):
-    """Handle a service call."""
+    """Handle a service action call."""
     # Do admin action
 
 
