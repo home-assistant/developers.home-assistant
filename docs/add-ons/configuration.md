@@ -200,7 +200,9 @@ Avoid using `config.yaml` as filename in your add-on for anything other than the
 
 ### Options / Schema
 
-The `options` dictionary contains all available options and their default value. Set the default value to `null` if the value is required to be given by the user before the add-on can start. Nested arrays and dictionaries are supported with a maximum depth of two.  To make an option optional, put `?` at the end of the data type, otherwise it will be a required value.
+The `options` dictionary contains all available options and their default value. Set the default value to `null` or define the data type in the `schema` dictionary to make an option mandatory. This way the option needs to be given by the user before the add-on can start. Nested arrays and dictionaries are supported with a maximum depth of two.
+
+To make an option truly optional (without default value), the `schema` dictionary needs to be used. Put a `?` at the end of the data type and *do not* define any default value in the `options` dictionary. If any default value is given, the option becomes a required value.
 
 ```yaml
 message: "custom things"
