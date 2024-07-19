@@ -7,7 +7,7 @@ title: Setting up `DataUpdateCoordinators` with `_async_setup`
 Until now, there was no clearly defined place where you would initialize your `DataUpdateCoordinator`,
 or where you could load data, that only needs to be loaded once.
 
-We are introducing an `_async_setup` method for coordinators that changes that. 
+In Home Assistant 2024.8 we are introducing an `_async_setup` method for coordinators that changes that. 
 `_async_setup` can be overwritten in your coordinator, and will be automatically
 called during `coordinator.async_config_entry_first_refresh()`.
 It offers the same error handling as `_async_update_data` and will handle `ConfigEntryError`
