@@ -40,12 +40,14 @@ and are combined using the bitwise or (`|`) operator.
 | `OSCILLATE`   | The fan supports oscillation.                                            |
 | `PRESET_MODE` | The fan supports preset modes.                                           |
 | `SET_SPEED`   | The fan supports setting the speed percentage and optional preset modes. |
+| `TURN_OFF`    | The fan supports turning off.                                                                                |
+| `TURN_ON`     | The fan supports turning on.                                                                                 |
 
 ## Methods
 
 ### Set direction
 
-Only implement this method if the flag `SUPPORT_DIRECTION` is set.
+Only implement this method if the flag `FanEntityFeature.DIRECTION` is set.
 
 ```python
 class FanEntity(ToggleEntity):
@@ -60,7 +62,7 @@ class FanEntity(ToggleEntity):
 
 ### Set preset mode
 
-Only implement this method if the flag `SUPPORT_PRESET_MODE` is set.
+Only implement this method if the flag `FanEntityFeature.PRESET_MODE` is set.
 
 ```python
 class FanEntity(ToggleEntity):
@@ -75,7 +77,7 @@ class FanEntity(ToggleEntity):
 
 ### Set speed percentage
 
-Only implement this method if the flag `SUPPORT_SET_SPEED` is set.
+Only implement this method if the flag `FanEntityFeature.SET_SPEED` is set.
 
 ```python
 class FanEntity(ToggleEntity):
@@ -144,6 +146,8 @@ value_in_range = math.ceil(percentage_to_ranged_value(SPEED_RANGE, 50))
 
 ### Turn on
 
+Only implement this method if the flag `FanEntityFeature.TURN_ON` is set.
+
 ```python
 class FanEntity(ToggleEntity):
     # Implement one of these methods.
@@ -163,6 +167,8 @@ For new intergrations, `speed` should not be implemented and only `percentage` a
 
 ### Turn off
 
+Only implement this method if the flag `FanEntityFeature.TURN_OFF` is set.
+
 ```python
 class FanEntity(ToggleEntity):
     # Implement one of these methods.
@@ -177,6 +183,7 @@ class FanEntity(ToggleEntity):
 ### Toggle
 
 Optional. If not implemented will default to checking what method to call using the is_on property.
+Only implement this method if the flags `FanEntityFeature.TURN_ON` and `FanEntityFeature.TURN_OFF` are set.
 
 ```python
 class FanEntity(ToggleEntity):
@@ -191,7 +198,7 @@ class FanEntity(ToggleEntity):
 
 ### Oscillate
 
-Only implement this method if the flag `SUPPORT_OSCILLATE` is set.
+Only implement this method if the flag `FanEntityFeature.OSCILLATE` is set.
 
 ```python
 class FanEntity(ToggleEntity):
