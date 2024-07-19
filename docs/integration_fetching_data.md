@@ -90,6 +90,7 @@ class MyCoordinator(DataUpdateCoordinator):
             always_update=True
         )
         self.my_api = my_api
+        self._initial_data: MyData | None = None
 
     async def _async_setup(self):
         """Set up the coordinator
@@ -100,7 +101,7 @@ class MyCoordinator(DataUpdateCoordinator):
         This method will be called automatically during
         coordinator.async_config_entry_first_refresh.
         """
-        self.data = await self.my_api.load_initial_data()
+        self._initial_data = await self.my_api.load_initial_data()
 
     async def _async_update_data(self):
         """Fetch data from API endpoint.
