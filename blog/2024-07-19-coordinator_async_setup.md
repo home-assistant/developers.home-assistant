@@ -1,7 +1,7 @@
 ---
 author: Josef Zweck
 authorURL: https://github.com/zweckj
-title: `DataUpdateCoordinator` now supports `_async_setup`
+title: Set your `DataUpdateCoordinator` up with `_async_setup`
 ---
 
 In Home Assistant 2024.8, we are introducing the `_async_setup` method for the data update coordinator. 
