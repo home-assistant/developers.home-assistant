@@ -4,11 +4,11 @@ authorURL: https://github.com/zweckj
 title: Initialize a `DataUpdateCoordinator` with `_async_setup`
 ---
 
-In Home Assistant 2024.8, we are introducing an _async_setup method for coordinators that 
-allows you to run async code to prepare your DataUpdateCoordinator, 
+In Home Assistant 2024.8, we are introducing the `_async_setup` method for coordinators. 
+This method allows you to run asynchronous code to prepare your `DataUpdateCoordinator`
 or to load data that only needs to be loaded once.
 
-`_async_setup` can be overwritten in your coordinator and will be automatically
+You can override `_async_setup` in your coordinator, and it will be automatically
 called during `coordinator.async_config_entry_first_refresh()`.
 It offers the same error handling as `_async_update_data` and will handle `ConfigEntryError`
 and `ConfigEntryAuthFailed` accordingly.
@@ -16,6 +16,9 @@ and `ConfigEntryAuthFailed` accordingly.
 ## Example
 
 ```python
+# Example of a custom DataUpdateCoordinator with the `_async_setup` method
+# This example demonstrates how to initialize data that only needs to be loaded once.
+
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
 class MyUpdateCoordinator(DataUpdateCoordinator[MyDataType]):
@@ -40,8 +43,20 @@ class MyUpdateCoordinator(DataUpdateCoordinator[MyDataType]):
         return await self.my_api.update(self.prereq_data)
 ```
 
-This also allows you to change code that loaded the initial data in 
-the `_async_update_data` by checking an initialization variable, like
+and call it during platform setup
+
+```python
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    coordinator = MyUpdateCoordinator(hass)
+
+    # This will first call _async_setup() now
+    # and if that succeeded, _async_update_data()
+    await coordinator.async_config_entry_first_refresh()
+```
+## Avoiding checks for initialization status
+
+This change allows you to refactor code that loaded the initial data in 
+the `_async_update_data` method by checking an initialization variable, like
 
 ```python
 async def _async_update_data(self) -> ...:
