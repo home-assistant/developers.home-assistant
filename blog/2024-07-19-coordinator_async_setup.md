@@ -24,13 +24,14 @@ from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 class MyUpdateCoordinator(DataUpdateCoordinator[MyDataType]):
     """Class to handle fetching data from the API centrally."""
 
+    prereq_data: SomeData
+
     def __init__(
         self,
         hass: HomeAssistant,
     ) -> None:
         """Initialize coordinator."""
         super().__init__(hass, _LOGGER, name=DOMAIN, update_interval=SCAN_INTERVAL)
-        self.prereq_data: SomeData | None = None
         self.my_api = MyApi()
 
 
