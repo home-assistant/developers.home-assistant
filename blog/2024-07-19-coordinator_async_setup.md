@@ -4,7 +4,7 @@ authorURL: https://github.com/zweckj
 title: Initialize a `DataUpdateCoordinator` with `_async_setup`
 ---
 
-In Home Assistant 2024.8, we are introducing the `_async_setup` method for coordinators. 
+In Home Assistant 2024.8, we are introducing the `_async_setup` method for the data update coordinator. 
 This method allows you to run asynchronous code to prepare your `DataUpdateCoordinator` instance
 or to load data that only needs to be loaded once.
 
