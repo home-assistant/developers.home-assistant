@@ -38,7 +38,7 @@ class MyUpdateCoordinator(DataUpdateCoordinator[MyDataType]):
         """Do initialization logic."""
         self.prereq_data = await self.my_api.get_initial_data()
 
-    async def _async_update(self) -> MyDataType:
+    async def _async_update_data(self) -> MyDataType:
         """Do the usual update"""
         return await self.my_api.update(self.prereq_data)
 ```
