@@ -17,7 +17,8 @@ and `ConfigEntryAuthFailed` accordingly.
 
 ```python
 # Example of a custom DataUpdateCoordinator with the `_async_setup` method
-# This example demonstrates how to initialize data that only needs to be loaded once.
+# This example demonstrates how to initialize data that only needs to be loaded once
+# by overwriting _async_setup
 
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
@@ -74,5 +75,44 @@ async def _async_setup(self) -> None:
 
 async def _async_update_data(self) -> ...:
     return self.client.fetch_data()
+```
+
+## Custom setup method
+
+Similar to how you can pass in a custom update method to the `update_method` parameter
+in the data update coordinator's constructor, you can also pass your own setup method to
+the `setup_method` parameter. This method will then also be called during
+`coordinator.async_config_entry_first_refresh()` and receive the same error handling as
+`_async_setup`.
+
+```python
+# Example of a custom DataUpdateCoordinator with a custom setup method
+# This example demonstrates how to pass your own setup method to the constructor
+
+from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
+
+class MyUpdateCoordinator(DataUpdateCoordinator[MyDataType]):
+    """Class to handle fetching data from the API centrally."""
+
+    prereq_data: SomeData
+
+    def __init__(
+        self,
+        hass: HomeAssistant,
+    ) -> None:
+        """Initialize coordinator."""
+        super().__init__(
+            hass,
+            _LOGGER,
+            name=DOMAIN,
+            update_interval=SCAN_INTERVAL,
+            setup_method=self._my_setup_method
+            )
+        self.my_api = MyApi()
+
+
+    async def _my_setup_method(self) -> None:
+        """Do initialization logic."""
+        self.prereq_data = await self.my_api.get_initial_data()
 ```
 
