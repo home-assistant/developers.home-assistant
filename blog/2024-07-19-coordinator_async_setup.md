@@ -45,16 +45,6 @@ class MyUpdateCoordinator(DataUpdateCoordinator[MyDataType]):
         return await self.my_api.update(self.prereq_data)
 ```
 
-and call it during platform setup
-
-```python
-async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    coordinator = MyUpdateCoordinator(hass)
-
-    # This will first call _async_setup() now
-    # and if that succeeded, _async_update_data()
-    await coordinator.async_config_entry_first_refresh()
-```
 ## Avoiding checks for initialization status
 
 This change allows you to refactor code that loaded the initial data in 
@@ -75,11 +65,5 @@ async def _async_setup(self) -> None:
 
 async def _async_update_data(self) -> ...:
     return self.client.fetch_data()
-```
-
-
-    async def _my_setup_method(self) -> None:
-        """Do initialization logic."""
-        self.prereq_data = await self.my_api.get_initial_data()
 ```
 
