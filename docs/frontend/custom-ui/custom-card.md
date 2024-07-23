@@ -1,5 +1,5 @@
 ---
-title: "Custom cards"
+title: "Custom card"
 ---
 
 [Dashboards](https://www.home-assistant.io/dashboards/) are our approach to defining your user interface for Home Assistant. We offer a lot of built-in cards, but you're not just limited to the ones that we decided to include in Home Assistant. You can build and use your own!
@@ -76,11 +76,15 @@ views:
 
 Custom cards are defined as a [custom element](https://developer.mozilla.org/en-US/docs/Web/Web_Components/Using_custom_elements). It's up to you to decide how to render your DOM inside your element. You can use Polymer, Angular, Preact or any other popular framework (except for React – [more info on React here](https://custom-elements-everywhere.com/#react)).
 
+### Configuration
+
 Home Assistant will call `setConfig(config)` when the configuration changes (rare). If you throw an exception if the configuration is invalid, Home Assistant will render an error card to notify the user.
 
 Home Assistant will set [the `hass` property](/docs/frontend/data/) when the state of Home Assistant changes (frequent). Whenever the state changes, the component will have to update itself to represent the latest state.
 
-Your card can define a `getCardSize` method that returns the size of your card as a number or a promise that will resolve to a number. A height of 1 is equivalent to 50 pixels. This will help Home Assistant distribute the cards evenly over the columns. A card size of `1` will be assumed if the method is not defined.
+### Sizing in masonry view
+
+Your card can define a `getCardSize` method that returns the size of your card as a number or a promise that will resolve to a number. A height of 1 is equivalent to 50 pixels. This will help Home Assistant distribute the cards evenly over the columns in the [masonry view](https://www.home-assistant.io/dashboards/masonry/). A card size of `1` will be assumed if the method is not defined.
 
 Since some elements can be lazy loaded, if you want to get the card size of another element, you should first check it is defined.
 
@@ -89,6 +93,42 @@ return customElements
   .whenDefined(element.localName)
   .then(() => element.getCardSize());
 ```
+
+### Sizing in sections view
+
+You card can define a `getLayoutOptions` method that returns the min, max and default number of cells your card will take in the grid if your card is used if the [sections view](https://www.home-assistant.io/dashboards/masonry/)
+If you not define this method, the card will take 4 columns (full width) and will ignore the rows of the grid.
+
+A cell of the grid id defined with the following dimension:
+
+- width: between `80px` and `120px` depending of the screen size
+- height: `56px`
+- gap between cells: `8px`
+
+The different layout options are:
+
+- `grid_rows`: Default number of rows the card takes
+- `grid_min_rows`: Minimal number of rows the card takes
+- `grid_max_rows`: Maximal number of rows the card takes
+- `grid_columns`: Default number of columns the card takes
+- `grid_min_columns`: Minimal number of columns the card takes
+- `grid_max_columns`: Maximal number of columns the card takes
+
+Example of implementation:
+
+```js
+public getLayoutOptions() {
+  return {
+    grid_rows: 2,
+    grid_columns: 2,
+    grid_min_rows: 2,
+  };
+}
+```
+
+In this example, the card will take 2 x 2 cells by default. The height of the card can not be smaller than 2 rows. According to the cell dimension, the card will have a height of `120px` (`2` * `56px` + `8px`).
+
+### UI Editor
 
 Your card can define a `getConfigElement` method that returns a custom element for editing the user configuration. Home Assistant will display this element in the card editor in the dashboard.
 
@@ -267,121 +307,7 @@ window.customCards.push({
   name: "Content Card",
   preview: false, // Optional - defaults to false
   description: "A custom card made by me!", // Optional
-  documentationURL: "https://developers.home-assistant.io/docs/frontend/custom-ui/custom-card/", // Adds a help link in the frontend card editor
+  documentationURL:
+    "https://developers.home-assistant.io/docs/frontend/custom-ui/custom-card", // Adds a help link in the frontend card editor
 });
 ```
-
-## Tile features
-
-The tile card has support for "features" to add quick actions to control the entity. We offer some built-in features, but you can build and use your own using similar way than defining custom cards.
-
-Below is an example of a custom tile feature for [button entity](/docs/core/entity/button/).
-
-![Screenshot of the custom tile feature example](/img/en/frontend/dashboard-custom-tile-feature-screenshot.png)
-
-```js
-import {
-  LitElement,
-  html,
-  css,
-} from "https://unpkg.com/lit-element@2.0.1/lit-element.js?module";
-
-const supportsButtonPressTileFeature = (stateObj) => {
-  const domain = stateObj.entity_id.split(".")[0];
-  return domain === "button";
-};
-
-class ButtonPressTileFeature extends LitElement {
-  static get properties() {
-    return {
-      hass: undefined,
-      config: undefined,
-      stateObj: undefined,
-    };
-  }
-
-  static getStubConfig() {
-    return {
-      type: "custom:button-press-tile-feature",
-      label: "Press",
-    };
-  }
-
-  setConfig(config) {
-    if (!config) {
-      throw new Error("Invalid configuration");
-    }
-    this.config = config;
-  }
-
-  _press(ev) {
-    ev.stopPropagation();
-    this.hass.callService("button", "press", {
-      entity_id: this.stateObj.entity_id,
-    });
-  }
-
-  render() {
-    if (
-      !this.config ||
-      !this.hass ||
-      !this.stateObj ||
-      !supportsButtonPressTileFeature(this.stateObj)
-    ) {
-      return null;
-    }
-
-    return html`
-      <div class="container">
-        <button class="button" @click=${this._press}>
-          ${this.config.label || "Press"}
-        </button>
-      </div>
-    `;
-  }
-
-  static get styles() {
-    return css`
-      .container {
-        display: flex;
-        flex-direction: row;
-        padding: 0 12px 12px 12px;
-        width: auto;
-      }
-      .button {
-        display: block;
-        width: 100%;
-        height: 40px;
-        border-radius: 6px;
-        border: none;
-        background-color: #eeeeee;
-        cursor: pointer;
-        transition: background-color 180ms ease-in-out;
-      }
-      .button:hover {
-        background-color: #dddddd;
-      }
-      .button:focus {
-        background-color: #cdcdcd;
-      }
-    `;
-  }
-}
-
-customElements.define("button-press-tile-feature", ButtonPressTileFeature);
-
-window.customTileFeatures = window.customTileFeatures || [];
-window.customTileFeatures.push({
-  type: "button-press-tile-feature",
-  name: "Button press",
-  supported: supportsButtonPressTileFeature, // Optional
-  configurable: true, // Optional - defaults to false
-});
-```
-
-The only difference with custom cards is the graphical configuration option.
-To have it displayed in the tile card editor, you must add an object describing it to the array `window.customTileFeatures`.
-
-Required properties of the object are `type` and `name`. It is recommended to define the `supported` option with a function so the editor can only propose the feature if it is compatible with the selected entity in the tile card. Set `configurable` to `true` if your entity has additional configuration (e.g. `label` option in the example above) so the editor.
-
-Also, the static functions `getConfigElement` and `getStubConfig` work the same as with normal custom maps.
