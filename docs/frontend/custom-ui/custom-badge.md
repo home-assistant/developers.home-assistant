@@ -2,7 +2,7 @@
 title: "Custom badge"
 ---
 
-[Badges](https://www.home-assistant.io/dashboards/badges/) are small widgets that sit at the top a view, above all cards. We offer a built-in badge, the [entity badge](https://next.home-assistant.io/dashboards/badges/#entity-badge), but you're not just limited that one. You can build and use your own!
+[Badges](https://www.home-assistant.io/dashboards/badges/) are small widgets that sit at the top of a view, above all cards. We offer a built-in badge, the [entity badge](https://next.home-assistant.io/dashboards/badges/#entity-badge), but you're not just limited that one. You can build and use your own!
 
 ## Defining your badge
 
