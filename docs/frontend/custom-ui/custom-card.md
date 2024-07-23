@@ -111,7 +111,7 @@ If you don't define this method, the card will take 4 columns (full width) and w
 
 A cell of the grid id defined with the following dimension:
 
-- width: between `80px` and `120px` depending of the screen size
+- width: between `80px` and `120px` depending on the screen size
 - height: `56px`
 - gap between cells: `8px`
 
