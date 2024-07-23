@@ -48,7 +48,7 @@ customElements.define("text-badge", TextBadge);
 
 ## Referencing your new badge
 
-In our example badge we defined a badge with the tag `text-badge` (see last line), so our badge type will be `custom:text-badge`. And because you created the file in your `<config>/www` directory, it will be accessible in your browser via the url `/local/` (if you have recently added the www folder you will need to re-start Home Assistant for files to be picked up).
+In our example badge, we defined a badge with the tag `text-badge` (see last line), so our badge type will be `custom:text-badge`. And because you created the file in your `<config>/www` directory, it will be accessible in your browser via the url `/local/` (if you have recently added the www folder you will need to re-start Home Assistant for files to be picked up).
 
 Add a resource to your dashboard configuration with URL `/local/text-badge.js` and type `module` ([resource docs](/docs/frontend/custom-ui/registering-resources)).
 
