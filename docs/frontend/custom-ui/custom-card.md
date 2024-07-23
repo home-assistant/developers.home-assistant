@@ -138,10 +138,6 @@ public getLayoutOptions() {
 
 In this example, the card will take 2 x 2 cells by default. The height of the card can not be smaller than 2 rows. According to the cell dimension, the card will have a height of `120px` (`2` * `56px` + `8px`).
 
-### UI Editor
-
-Your card can define a `getConfigElement` method that returns a custom element for editing the user configuration. Home Assistant will display this element in the card editor in the dashboard.
-
 ## Advanced example
 
 Resources to load in dashboards are imported as a JS module import. Below is an example of a custom card using JS modules that does all the fancy things.

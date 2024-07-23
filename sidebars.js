@@ -41,6 +41,7 @@ module.exports = {
       items: [
         "frontend/custom-ui/custom-card",
         "frontend/custom-ui/custom-card-feature",
+        "frontend/custom-ui/custom-badge",
         "frontend/custom-ui/custom-strategy",
         "frontend/custom-ui/custom-view",
         "frontend/custom-ui/creating-custom-panels",
