@@ -46,9 +46,19 @@ class ContentCardExample extends HTMLElement {
   }
 
   // The height of your card. Home Assistant uses this to automatically
-  // distribute all cards over the available columns.
+  // distribute all cards over the available columns in masonry view
   getCardSize() {
     return 3;
+  }
+
+  // The rules for your card for sizing your card if the grid in section view
+  getLayoutOptions() {
+    return {
+      grid_rows: 3,
+      grid_columns: 2,
+      grid_min_rows: 3,
+      grid_max_rows: 3,
+    };
   }
 }
 
