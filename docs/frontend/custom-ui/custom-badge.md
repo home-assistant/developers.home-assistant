@@ -8,7 +8,7 @@ title: "Custom badge"
 
 Defining a badge is done in a very similar way to defining a [custom card](/docs/frontend/custom-ui/custom-card).
 
-Let's create a basic badge that display a custom text at the top of the screen.
+Let's create a basic badge that displays custom text at the top of the screen.
 Create a new file in your Home Assistant config dir as `<config>/www/text-badge.js` and put in the following contents:
 
 ```js
