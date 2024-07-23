@@ -136,7 +136,7 @@ public getLayoutOptions() {
 }
 ```
 
-In this example, the card will take 2 x 2 cells by default. The height of the card can not be smaller than 2 rows. According to the cell dimension, the card will have a height of `120px` (`2` * `56px` + `8px`).
+In this example, the card will take 2 x 2 cells by default. The height of the card cannot be smaller than 2 rows. According to the cell dimension, the card will have a height of `120px` (`2` * `56px` + `8px`).
 
 ## Advanced example
 
