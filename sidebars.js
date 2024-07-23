@@ -40,6 +40,7 @@ module.exports = {
       label: "Custom UI",
       items: [
         "frontend/custom-ui/custom-card",
+        "frontend/custom-ui/custom-card-feature",
         "frontend/custom-ui/custom-strategy",
         "frontend/custom-ui/custom-view",
         "frontend/custom-ui/creating-custom-panels",
@@ -287,7 +288,7 @@ module.exports = {
         "asyncio_categorizing_functions",
         "asyncio_working_with_async",
         "asyncio_thread_safety",
-        "asyncio_blocking_operations"
+        "asyncio_blocking_operations",
       ],
     },
   ],
