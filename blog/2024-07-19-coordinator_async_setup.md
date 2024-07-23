@@ -67,3 +67,6 @@ async def _async_update_data(self) -> ...:
     return self.client.fetch_data()
 ```
 
+# More information
+
+Read more about this in the [documentation](https://developers.home-assistant.io/docs/integration_fetching_data/)
