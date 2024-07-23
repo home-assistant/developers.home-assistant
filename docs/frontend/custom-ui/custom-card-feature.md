@@ -102,7 +102,7 @@ window.customCardFeatures.push({
 });
 ```
 
-If you want your feature to better integrate with the default design of home assistant, you can use this CSS variables :
+If you want your feature to better integrate with the default design of home assistant, you can use these CSS variables:
 
 - `--feature-height`: Recommended height (42px).
 - `--feature-border-radius`: Recommended border radius (12px). It be can useful to set button or slider border radius.
