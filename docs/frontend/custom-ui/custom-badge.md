@@ -12,7 +12,6 @@ Let's create a basic badge that displays custom text at the top of the screen.
 Create a new file in your Home Assistant config dir as `<config>/www/text-badge.js` and put in the following contents:
 
 ```js
-import { LitElement } from "lit";
 
 class TextBadge extends HTMLElement {
   // Whenever the state changes, a new `hass` object is set. Use this to
@@ -85,7 +84,7 @@ Changes to the configuration are communicated back to the dashboard by dispatchi
 To have your badge displayed in the badge picker dialog in the dashboard, add an object describing it to the array `window.customBadges`. Required properties of the object are `type` and `name` (see example below).
 
 ```js
-import { LitElement } from "lit";
+import "./text-badge-editor.js";
 
 class TextBadge extends HTMLElement {
   
@@ -104,7 +103,7 @@ customElements.define("text-badge", TextBadge);
 ```
 
 ```js
-class TextBadgeEditor extends LitElement {
+class TextBadgeEditor extends HTMLElement {
   setConfig(config) {
     this._config = config;
   }
