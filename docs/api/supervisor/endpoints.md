@@ -1226,6 +1226,7 @@ Rebuild the Home Assistant core container
 | key       | type       | optional | description                      |
 | --------- | ---------- | -------- | -------------------------------- |
 | safe_mode | boolean    | True     | Rebuild Core into safe mode      |
+| force     | boolean    | True     | Force rebuild during a Home Assistant offline db migration |
 
 </ApiEndpoint>
 
@@ -1237,6 +1238,7 @@ Restart the Home Assistant core container
 | key       | type       | optional | description                      |
 | --------- | ---------- | -------- | -------------------------------- |
 | safe_mode | boolean    | True     | Restart Core into safe mode      |
+| force     | boolean    | True     | Force restart during a Home Assistant offline db migration |
 
 </ApiEndpoint>
 
@@ -1267,6 +1269,13 @@ Returns a [Stats model](api/supervisor/models.md#stats) for the Home Assistant c
 
 <ApiEndpoint path="/core/stop" method="post">
 Stop the Home Assistant core container
+
+**Payload:**
+
+| key       | type       | optional | description                      |
+| --------- | ---------- | -------- | -------------------------------- |
+| force     | boolean    | True     | Force stop during a Home Assistant offline db migration |
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/core/update" method="post">
@@ -1805,6 +1814,14 @@ Set host options
 
 <ApiEndpoint path="/host/reboot" method="post">
 Reboot the host
+
+**Payload:**
+
+| key       | type       | optional | description                                               |
+| --------- | ---------- | -------- | --------------------------------------------------------- |
+| force     | boolean    | True     | Force reboot during a Home Assistant offline db migration |
+
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/host/reload" method="post">
@@ -1850,6 +1867,13 @@ Get information about host services.
 
 <ApiEndpoint path="/host/shutdown" method="post">
 Shutdown the host
+
+**Payload:**
+
+| key       | type       | optional | description                                                 |
+| --------- | ---------- | -------- | ----------------------------------------------------------- |
+| force     | boolean    | True     | Force shutdown during a Home Assistant offline db migration |
+
 </ApiEndpoint>
 
 ### Ingress
