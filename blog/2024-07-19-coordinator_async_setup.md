@@ -16,14 +16,8 @@ and `ConfigEntryAuthFailed` accordingly.
 ## Example
 
 ```python
-# Example of a custom DataUpdateCoordinator with the `_async_setup` method
-# This example demonstrates how to initialize data that only needs to be loaded once
-# by overwriting _async_setup
-
-from homeassistant.helpers.update_coordinator import DataUpdateCoordinator
 
 class MyUpdateCoordinator(DataUpdateCoordinator[MyDataType]):
-    """Class to handle fetching data from the API centrally."""
 
     prereq_data: SomeData
 
