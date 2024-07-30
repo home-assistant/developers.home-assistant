@@ -286,16 +286,16 @@ To reset customized network/audio/options, set it `null`.
 
 **Payload:**
 
-| key                         | type          | description                             |
-| --------------------------- | ------------- | --------------------------------------- |
-| boot                        | string        | (auto, manual)                          |
-| auto_update                 | boolean       | `true` if the add-on should auto update |
-| network                     | dictionary    | A map of network configuration.         |
-| options                     | dictionary    | The add-on configuration                |
-| audio_output                | float or null | The index of the audio output device    |
-| audio_input                 | float or null | The index of the audio input device     |
-| ingress_panel               | boolean       | `true` if ingress_panel is enabled      |
-| watchdog                    | boolean       | `true` if watchdog is enabled           |
+| key           | type          | description                             |
+| ------------- | ------------- | --------------------------------------- |
+| boot          | string        | (auto, manual)                          |
+| auto_update   | boolean       | `true` if the add-on should auto update |
+| network       | dictionary    | A map of network configuration.         |
+| options       | dictionary    | The add-on configuration                |
+| audio_output  | float or null | The index of the audio output device    |
+| audio_input   | float or null | The index of the audio input device     |
+| ingress_panel | boolean       | `true` if ingress_panel is enabled      |
+| watchdog      | boolean       | `true` if watchdog is enabled           |
 
 **You need to supply at least one key in the payload.**
 
