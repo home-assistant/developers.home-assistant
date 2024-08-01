@@ -703,7 +703,7 @@ If the service you're calling supports returning response data, you can retrieve
 :::note
 Some services return no data, others optionally return response data, and some always return response data.
 
-If you don't use `return_response` when calling a service that must return data, the API will return an error. Similarly, you will receive an error if you use `return_response` when calling a service that doesn't return any data.
+If you don't use `return_response` when calling a service that must return data, the API will return a 400. Similarly, you will receive a 400 if you use `return_response` when calling a service that doesn't return any data.
 :::
 
 Sample `curl` commands:
