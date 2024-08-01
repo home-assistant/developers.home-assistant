@@ -1,5 +1,5 @@
 ---
-title: Climate Entity
+title: Climate entity
 sidebar_label: Climate
 ---
 
@@ -52,7 +52,7 @@ enum. If you want another mode, add a preset instead.
 | `HVACMode.DRY`       | The device is set to dry/humidity mode.                             |
 | `HVACMode.FAN_ONLY`  | The device only has the fan on. No heating or cooling taking place. |
 
-### HVAC Action
+### HVAC action
 
 The HVAC action describes the _current_ action. This is different from the mode, because if a device is set to heat, and the target temperature is already achieved, the device will not be actively heating anymore. It is only allowed to use the built-in HVAC actions, provided by the `HVACAction` enum.
 
@@ -65,6 +65,7 @@ The HVAC action describes the _current_ action. This is different from the mode,
 | `HVACAction.DRYING`     | Device is drying.     |
 | `HVACAction.FAN`        | Device has fan on.    |
 | `HVACAction.IDLE`       | Device is idle.       |
+| `HVACAction.DEFROSTING` | Device is defrosting. |
 
 ### Presets
 
@@ -109,7 +110,7 @@ The device fan can have different swing modes that it wants the user to know abo
 | `SWING_HORIZONTAL` | The fan is swinging horizontal.                   |
 | `SWING_BOTH`       | The fan is swinging both horizontal and vertical. |
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `ClimateEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.
@@ -146,8 +147,8 @@ class MyClimateEntity(ClimateEntity):
 class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
     # The `turn_on` method should set `hvac_mode` to any other than
-    # `HVACMode.OFF` by optimistically setting it from the service handler
-    # or with the next state update
+    # `HVACMode.OFF` by optimistically setting it from the service action
+    # handler or with the next state update
 
     def turn_on(self):
         """Turn the entity on."""
@@ -162,7 +163,8 @@ class MyClimateEntity(ClimateEntity):
 class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
     # The `turn_off` method should set `hvac_mode` to `HVACMode.OFF` by
-    # optimistically setting it from the service handler or with the next state update
+    # optimistically setting it from the service action handler or with the
+    # next state update
 
     def turn_off(self):
         """Turn the entity off."""
@@ -179,7 +181,8 @@ class MyClimateEntity(ClimateEntity):
     # will call `turn_on`/`turn_off` according to the current HVAC mode.
 
     # If implemented, the `toggle` method should set `hvac_mode` to the right `HVACMode` by
-    # optimistically setting it from the service handler or with the next state update.
+    # optimistically setting it from the service action handler
+    # or with the next state update.
 
     def toggle(self):
         """Toggle the entity."""

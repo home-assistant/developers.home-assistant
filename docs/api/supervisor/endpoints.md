@@ -10,7 +10,7 @@ The token is available for add-ons and Home Assistant using the
 
 To see more details about each endpoint, click on it to expand it.
 
-### Addons
+### Add-ons
 
 <ApiEndpoint path="/addons" method="get">
 Return overview information about installed add-ons.
@@ -63,7 +63,35 @@ Get the documentation for an add-on.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/logs" method="get">
-Returns the raw container logs from docker.
+
+Get logs for an add-on via the Systemd journal backend.
+
+The endpoint accepts the same headers and provides the same functionality as
+`/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/addons/<addon>/logs/follow" method="get">
+
+Identical to `/addons/<addon>/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/addons/<addon>/logs/boots/<bootid>" method="get">
+
+Get logs for an add-on related to a specific boot.
+
+The `bootid` parameter is interpreted in the same way as in
+`/host/logs/boots/<bootid>` and the endpoint otherwise provides the same
+functionality as `/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/addons/<addon>/logs/boots/<bootid>/follow" method="get">
+
+Identical to `/addons/<addon>/logs/boots/<bootid>` except it continuously returns
+new log entries.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/icon" method="get">
@@ -87,7 +115,7 @@ Get details about an add-on
 | auto_uart           | boolean            | `true` if auto_uart access is granted is enabled                                       |
 | auto_update         | boolean            | `true` if auto update is enabled                                                       |
 | available           | boolean            | `true` if the add-on is available                                                      |
-| boot                | string             | "boot" or "manual"                                                                     |
+| boot                | string             | "auto" or "manual"                                                                     |
 | build               | boolean            | `true` if local add-on                                                                 |
 | changelog           | boolean            | `true` if changelog is available                                                       |
 | description         | string             | The add-on description                                                                 |
@@ -503,7 +531,35 @@ Return information about the audio plugin.
 </ApiEndpoint>
 
 <ApiEndpoint path="/audio/logs" method="get">
-Returns the raw container logs from docker.
+
+Get logs for the audio plugin container via the Systemd journal backend.
+
+The endpoint accepts the same headers and provides the same functionality as
+`/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/audio/logs/follow" method="get">
+
+Identical to `/audio/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/audio/logs/boots/<bootid>" method="get">
+
+Get logs for the audio plugin container related to a specific boot.
+
+The `bootid` parameter is interpreted in the same way as in
+`/host/logs/boots/<bootid>` and the endpoint otherwise provides the same
+functionality as `/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/audio/logs/boots/<bootid>/follow" method="get">
+
+Identical to `/audio/logs/boots/<bootid>` except it continuously returns
+new log entries.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/audio/mute/input" method="post">
@@ -691,6 +747,18 @@ Set a new password for a Home Assistant Core user.
 <ApiEndpoint path="/auth/cache" method="delete">
 
 Reset internal authentication cache, this is useful if you have changed the password for a user and need to clear the internal cache.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/auth/list" method="get">
+
+List all users in Home Assistant to help with credentials recovery. Requires an admin level authentication token.
+
+**Payload:**
+
+| key      | type   | description                                                        |
+| -------- | ------ | ------------------------------------------------------------------ |
+| users    | list   | List of the Home Assistant [users](api/supervisor/models.md#user). |
 
 </ApiEndpoint>
 
@@ -1092,7 +1160,35 @@ Returns information about the Home Assistant core
 </ApiEndpoint>
 
 <ApiEndpoint path="/core/logs" method="get">
-Returns the raw container logs from docker.
+
+Get logs for the Home Assistant Core container via the Systemd journal backend.
+
+The endpoint accepts the same headers and provides the same functionality as
+`/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/core/logs/follow" method="get">
+
+Identical to `/core/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/core/logs/boots/<bootid>" method="get">
+
+Get logs for the Home Assistant Core container related to a specific boot.
+
+The `bootid` parameter is interpreted in the same way as in
+`/host/logs/boots/<bootid>` and the endpoint otherwise provides the same
+functionality as `/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/core/logs/boots/<bootid>/follow" method="get">
+
+Identical to `/core/logs/boots/<bootid>` except it continuously returns
+new log entries.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/core/options" method="post">
@@ -1124,10 +1220,24 @@ Passing `image`, `refresh_token`, `audio_input` or `audio_output` with `null` re
 
 <ApiEndpoint path="/core/rebuild" method="post">
 Rebuild the Home Assistant core container
+
+**Payload:**
+
+| key       | type       | optional | description                      |
+| --------- | ---------- | -------- | -------------------------------- |
+| safe_mode | boolean    | True     | Rebuild Core into safe mode      |
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/core/restart" method="post">
 Restart the Home Assistant core container
+
+**Payload:**
+
+| key       | type       | optional | description                      |
+| --------- | ---------- | -------- | -------------------------------- |
+| safe_mode | boolean    | True     | Restart Core into safe mode      |
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/core/start" method="post">
@@ -1275,7 +1385,35 @@ Return information about the DNS plugin.
 </ApiEndpoint>
 
 <ApiEndpoint path="/dns/logs" method="get">
-Returns the raw container logs from docker.
+
+Get logs for the DNS plugin container via the Systemd journal backend.
+
+The endpoint accepts the same headers and provides the same functionality as
+`/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/dns/logs/follow" method="get">
+
+Identical to `/dns/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/dns/logs/boots/<bootid>" method="get">
+
+Get logs for the DNS plugin container related to a specific boot.
+
+The `bootid` parameter is interpreted in the same way as in
+`/host/logs/boots/<bootid>` and the endpoint otherwise provides the same
+functionality as `/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/dns/logs/boots/<bootid>/follow" method="get">
+
+Identical to `/dns/logs/boots/<bootid>` except it continuously returns
+new log entries.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/dns/options" method="post">
@@ -1550,9 +1688,9 @@ log record per line.
 
 **HTTP Request Headers**
 
-| Header   | optional | description                                    |
-| -------- | -------- | ---------------------------------------------- |
-| Accept   | true     | Type of data (currently only text/plain)       |
+| Header   | optional | description                                                                   |
+| -------- | -------- |-------------------------------------------------------------------------------|
+| Accept   | true     | Type of data (text/plain or text/x-log)                                       |
 | Range    | true     | Range of log entries. The format is `entries=cursor[[:num_skip]:num_entries]` |
 
 :::tip
@@ -1563,6 +1701,11 @@ as `num_skip`. E.g. `Range: entries=:-9:` returns the last 10 entries. Or
 
 API returns the last 100 lines by default. Provide a value for `Range` to see
 logs further in the past.
+
+The `Accept` header can be set to `text/x-log` to get logs annotated with
+extra information, such as the timestamp and Systemd unit name. If no
+identifier is specified (i.e. for the host logs containing logs for multiple
+identifiers/units), this option is ignored - these logs are always annotated.
 
 </ApiEndpoint>
 
@@ -2044,7 +2187,35 @@ Returns information about the multicast plugin
 </ApiEndpoint>
 
 <ApiEndpoint path="/multicast/logs" method="get">
-Returns the raw container logs from docker.
+
+Get logs for the multicast plugin via the Systemd journal backend.
+
+The endpoint accepts the same headers and provides the same functionality as
+`/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/multicast/logs/follow" method="get">
+
+Identical to `/multicast/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/multicast/logs/boots/<bootid>" method="get">
+
+Get logs for the multicast plugin related to a specific boot.
+
+The `bootid` parameter is interpreted in the same way as in
+`/host/logs/boots/<bootid>` and the endpoint otherwise provides the same
+functionality as `/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/multicast/logs/boots/<bootid>/follow" method="get">
+
+Identical to `/multicast/logs/boots/<bootid>` except it continuously returns
+new log entries.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/multicast/restart" method="post">
@@ -3098,7 +3269,35 @@ Returns information about the supervisor
 
 <ApiEndpoint path="/supervisor/logs" method="get">
 
-Returns the raw container logs from docker.
+Get logs for the Supervisor container via the Systemd journal backend. If the
+Systemd journal gateway fails to provide the logs, raw Docker container logs are
+returned as the fallback.
+
+The endpoint accepts the same headers and provides the same functionality as
+`/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/supervisor/logs/follow" method="get">
+
+Identical to `/supervisor/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/supervisor/logs/boots/<bootid>" method="get">
+
+Get logs for the Supervisor container related to a specific boot.
+
+The `bootid` parameter is interpreted in the same way as in
+`/host/logs/boots/<bootid>` and the endpoint otherwise provides the same
+functionality as `/host/logs`.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/supervisor/logs/boots/<bootid>/follow" method="get">
+
+Identical to `/supervisor/logs/boots/<bootid>` except it continuously returns
+new log entries.
 
 </ApiEndpoint>
 

@@ -10,7 +10,7 @@ Home Assistant Operating System (HAOS) is using the [Buildroot](https://buildroo
 ### Components
 
 - **Bootloader:**
-  - [Barebox](https://barebox.org/) for devices that support EFI
+  - [GRUB](https://www.gnu.org/software/grub/) for devices that support UEFI
   - [U-Boot](https://www.denx.de/wiki/U-Boot) for devices that don't support EFI
 - **Operating System:**
   - [Buildroot](https://buildroot.org/) build system to generate Linux distributions

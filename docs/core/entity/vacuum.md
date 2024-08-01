@@ -1,5 +1,5 @@
 ---
-title: Vacuum Entity
+title: Vacuum entity
 sidebar_label: Vacuum
 ---
 
@@ -35,7 +35,7 @@ Properties should always only return information from memory and not do I/O (lik
 | `STATE_RETURNING` | The vacuum is done cleaning and is currently returning to the dock, but not yet docked.
 | `STATE_ERROR` | The vacuum encountered an error while cleaning.
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `VacuumEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.

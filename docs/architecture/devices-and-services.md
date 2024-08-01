@@ -3,9 +3,9 @@ title: "Entities: integrating devices & services"
 sidebar_label: "Introduction"
 ---
 
-Integrations can represent devices & services in Home Assistant. The data points are represented as entities. Entities are standardized by other integrations like `light`, `switch`, etc. Standardized entities come with services for control, but an integration can also provide their own services in case something is not standardized.
+Integrations can represent devices & services in Home Assistant. The data points are represented as entities. Entities are standardized by other integrations like `light`, `switch`, etc. Standardized entities come with actions for control, but an integration can also provide their own service actions in case something is not standardized.
 
-An entity abstracts away the internal working of Home Assistant. As an integrator you don't have to worry about how services or the state machine work. Instead, you extend an entity class and implement the necessary properties and methods for the device type that you're integrating.
+An entity abstracts away the internal workings of Home Assistant. As an integrator, you don't have to worry about how service actions or the state machine work. Instead, you extend an entity class and implement the necessary properties and methods for the device type that you're integrating.
 
 <img className='invertDark'
   src='/img/en/architecture/integrating-devices-services.svg'
@@ -17,7 +17,7 @@ An entity abstracts away the internal working of Home Assistant. As an integrato
 
 Configuration is provided by the user via a [Config Entry](../config_entries_index.md) or in special/legacy cases via [configuration.yaml](../configuration_yaml_index.md).
 
-The device integration (i.e. `hue`) will use this configuration to set up a connection with the device/service. It will forward the config entry (legacy uses discovery helper) to set up its entities in their respective integrations (light, switch). The device integration can also register their own services for things that are not made standardized. These services are published under the integration's domain, ie `hue.activate_scene`.
+The device integration (i.e. `hue`) will use this configuration to set up a connection with the device/service. It will forward the config entry (legacy uses discovery helper) to set up its entities in their respective integrations (light, switch). The device integration can also register their own service actions for things that are not made standardized. These actions are published under the integration's domain, ie `hue.activate_scene`.
 
 The entity integration (i.e. `light`) is responsible for defining the abstract entity class and services to control the entities.
 

@@ -1,5 +1,5 @@
 ---
-title: "Add-On Configuration"
+title: "Add-on configuration"
 ---
 
 Each add-on is stored in a folder. The file structure looks like this:
@@ -84,7 +84,7 @@ LABEL \
 
 It is possible to use your own base image with `build.yaml` or if you do not need support for automatic multi-arch building you can also use a simple docker `FROM`. You can also suffix the Dockerfile with the specific architecture to use a specific Dockerfile for a particular architecture, i.e. `Dockerfile.amd64`.
 
-### Build Args
+### Build args
 
 We support the following build arguments by default:
 
@@ -110,8 +110,12 @@ url: "website with more information about the add-on (e.g., a forum thread for s
 ports:
   123/tcp: 123
 map:
-  - config:rw
-  - ssl
+  - type: share
+    read_only: False
+  - type: ssl
+  - type: homeassistant_config
+    read_only: False
+    path: /custom/config/path
 image: repo/{arch}-my-custom-addon
 ```
 
@@ -154,7 +158,7 @@ Avoid using `config.yaml` as filename in your add-on for anything other than the
 | `privileged` | list | | Privilege for access to hardware/system. Available access: `BPF`, `DAC_READ_SEARCH`, `IPC_LOCK`, `NET_ADMIN`, `NET_RAW`, `PERFMON`, `SYS_ADMIN`, `SYS_MODULE`, `SYS_NICE`, `SYS_PTRACE`, `SYS_RAWIO`, `SYS_RESOURCE` or `SYS_TIME`.
 | `full_access` | bool | `false` | Give full access to hardware like the privileged mode in Docker. Works only for not protected add-ons. Consider using other add-on options instead of this, like `devices`. If you enable this option, don't add `devices`, `uart`, `usb` or `gpio` as this is not needed.
 | `apparmor` | bool/string | `false` | Enable or disable AppArmor support. If it is enabled, you can also use custom profiles with the name of the profile.
-| `map` | list | | List of Home Assistant directories to bind mount into your container. Possible values: `homeassistant_config`, `addon_config`, `ssl`, `addons`, `backup`, `share`, `media`, and `all_addon_configs`. Defaults to `ro`, which you can change by adding `:rw` to the end of the name.
+| `map` | list | | List of Home Assistant directory types to bind mount into your container. Possible values: `homeassistant_config`, `addon_config`, `ssl`, `addons`, `backup`, `share`, `media`, `all_addon_configs`, and `data`. Defaults to read-only, which you can change by adding the property `read_only: false`. By default, all paths map to `/<type-name>` inside the addon container, but an optional `path` property can also be supplied to configure the path (Example: `path: /custom/config/path`). If used, the path must not be empty, unique from any other path defined for the addon, and not the root path. Note that the `data` directory is always mapped and writable, but the `path` property can be set using the same conventions.
 | `environment` | dict | | A dictionary of environment variables to run the add-on with.
 | `audio` | bool | `false` | Mark this add-on to use the internal audio system. We map a working PulseAudio setup into the container. If your application does not support PulseAudio, you may need to install: Alpine Linux `alsa-plugins-pulse` or Debian/Ubuntu `libasound2-plugins`.
 | `video` | bool | `false` | Mark this add-on to use the internal video system. All available devices will be mapped into the add-on.
@@ -196,7 +200,9 @@ Avoid using `config.yaml` as filename in your add-on for anything other than the
 
 ### Options / Schema
 
-The `options` dictionary contains all available options and their default value. Set the default value to `null` if the value is required to be given by the user before the add-on can start. Nested arrays and dictionaries are supported with a maximum depth of two.  To make an option optional, put `?` at the end of the data type, otherwise it will be a required value.
+The `options` dictionary contains all available options and their default value. Set the default value to `null` or define the data type in the `schema` dictionary to make an option mandatory. This way the option needs to be given by the user before the add-on can start. Nested arrays and dictionaries are supported with a maximum depth of two.
+
+To make an option truly optional (without default value), the `schema` dictionary needs to be used. Put a `?` at the end of the data type and *do not* define any default value in the `options` dictionary. If any default value is given, the option becomes a required value.
 
 ```yaml
 message: "custom things"

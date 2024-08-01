@@ -40,6 +40,8 @@ module.exports = {
       label: "Custom UI",
       items: [
         "frontend/custom-ui/custom-card",
+        "frontend/custom-ui/custom-card-feature",
+        "frontend/custom-ui/custom-badge",
         "frontend/custom-ui/custom-strategy",
         "frontend/custom-ui/custom-view",
         "frontend/custom-ui/creating-custom-panels",
@@ -205,6 +207,7 @@ module.exports = {
       label: "Conversation",
       items: ["intent_conversation_api"],
     },
+    "core/llm/index",
     {
       type: "category",
       label: "Native App Integration",
@@ -285,6 +288,8 @@ module.exports = {
         "asyncio_101",
         "asyncio_categorizing_functions",
         "asyncio_working_with_async",
+        "asyncio_thread_safety",
+        "asyncio_blocking_operations",
       ],
     },
   ],

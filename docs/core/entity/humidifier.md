@@ -1,5 +1,5 @@
 ---
-title: Humidifier Entity
+title: Humidifier entity
 sidebar_label: Humidifier
 ---
 
@@ -25,10 +25,10 @@ Properties should always only return information from memory and not do I/O (lik
 
 ### Available device classes
 
-| Constant                            | Description
-| ----------------------------------- | ------------------------------------------
-| `HumidiferDeviceClass.DEHUMIDIFIER` | A dehumidifier
-| `HumidifierDeviceClass.HUMIDIFIER`  | A humidifier
+| Constant                             | Description                                |
+| ------------------------------------ | ------------------------------------------ |
+| `HumidifierDeviceClass.DEHUMIDIFIER` | A dehumidifier                             |
+| `HumidifierDeviceClass.HUMIDIFIER`   | A humidifier                               |
 
 
 ### Modes
@@ -47,7 +47,7 @@ A device can have different modes of operation that it might want to show to the
 | `MODE_AUTO`    | Device is controlling humidity by itself |
 | `MODE_BABY`    | Device is trying to optimize for babies  |
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `HumidifierEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.

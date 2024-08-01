@@ -1,6 +1,6 @@
 ---
-title: "Python Library: Modelling Data"
-sidebar_label: Modelling Data
+title: "Python library: modelling data"
+sidebar_label: Modelling data
 ---
 
 Now that we have authentication going, we can start making authenticated requests and fetch data!

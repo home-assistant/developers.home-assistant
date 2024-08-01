@@ -1,6 +1,6 @@
 ---
-title: Air Quality Entity
-sidebar_label: Air Quality
+title: Air quality entity
+sidebar_label: Air quality
 ---
 
 ## Properties
@@ -19,9 +19,9 @@ The Air Quality entity does not support attribute shorthand for [property implem
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| particulate_matter_2_5 | <code>str &#124; int &#124; float &#124; None</code> | **Required** | The particulate matter 2.5 (<= 2.5 μm) level.
-| particulate_matter_10 | <code>str &#124; int &#124; float &#124; None</code> | `None` | The particulate matter 10 (<= 10 μm) level.
-| particulate_matter_0_1 | <code>str &#124; int &#124; float &#124; None</code> | `None` | The particulate matter 0.1 (<= 0.1 μm) level.
+| particulate_matter_2_5 | <code>str &#124; int &#124; float &#124; None</code> | **Required** | The particulate matter 2.5 (\<= 2.5 μm) level.
+| particulate_matter_10 | <code>str &#124; int &#124; float &#124; None</code> | `None` | The particulate matter 10 (\<= 10 μm) level.
+| particulate_matter_0_1 | <code>str &#124; int &#124; float &#124; None</code> | `None` | The particulate matter 0.1 (\<= 0.1 μm) level.
 | air_quality_index | <code>str &#124; int &#124; float &#124; None</code> | `None` | The Air Quality Index (AQI).
 | ozone | <code>str &#124; int &#124; float &#124; None</code> | `None` | The O3 (ozone) level.
 | carbon_monoxide | <code>str &#124; int &#124; float &#124; None</code> | `None` | The CO (carbon monoxide) level.

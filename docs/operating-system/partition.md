@@ -5,7 +5,7 @@ sidebar_label: Partitions
 
 The Home Assistant Operating System (HAOS) partition layout is a bit different than what is typically used on a Linux system.
 
-## Partition Table
+## Partition table
 
 HAOS prefers GPT (GUID Partition Table) whenever possible. Boot ROMs of some SoCs don't support GPT, in that case a hybrid GPT/MBR is used if possible and legacy MBR otherwise (see also [Metadata](board-metadata.md) documentation).
 
@@ -40,7 +40,7 @@ HAOS prefers GPT (GUID Partition Table) whenever possible. Boot ROMs of some SoC
 
 ### System partitions
 
-The boot partition is typically a FAT partition and contains system specific content to enable booting. On x86-64 systems this is the EFI system partition containing Barebox.
+The boot partition is typically a FAT partition and contains system-specific content to enable booting. On UEFI systems this is the EFI system partition containing GRUB binaries, configuration and its environment file.
 
 Next two versions of the Linux kernel and the main operating systems are stored (Kernel A/B and System A/B, a total of 4 partitions). This allows the system to fall back to the previous release in case booting on the new release fails (A/B update method). The system partitions are only written to during an update and are read-only under regular operation.
 

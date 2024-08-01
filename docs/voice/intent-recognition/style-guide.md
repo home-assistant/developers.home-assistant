@@ -38,5 +38,5 @@ Responses should be in the present tense. For example, "The light is on" instead
 
 ## Use the correct voice
 
-Responses should be in the active voice. For example, "The light is on" instead of "The light is being turned on".
+Responses should be in the active voice. For example, "The light is on" instead of "The light is being turned on". Exception here is for the `cover` domain, as the actions take considerable time to complete.
 

@@ -1,5 +1,5 @@
 ---
-title: Fan Entity
+title: Fan entity
 sidebar_label: Fan
 ---
 
@@ -21,15 +21,15 @@ Properties should always only return information from memory and not do I/O (lik
 | preset_modes       | <code>list[str] &#124; None</code> | `None` | The list of supported preset_modes. This is an arbitrary list of str and should not contain any speeds. |
 | speed_count        | `int`                              | 100    | The number of speeds the fan supports.                                                                  |
 
-### Preset Modes
+### Preset modes
 
 A fan may have preset modes that automatically control the percentage speed or other functionality. Common examples include `auto`, `smart`, `whoosh`, `eco`, and `breeze`. If no preset mode is set, the `preset_mode` property must be set to `None`.
 
 Preset modes should not include named (manual) speed settings as these should be represented as percentages.
 
-Manually setting a speed must disable any set preset mode. If it is possible to set a percentage speed manually without disabling the preset mode, create a switch or service to represent the mode.
+Manually setting a speed must disable any set preset mode. If it is possible to set a percentage speed manually without disabling the preset mode, create a switch or service action to represent the mode.
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `FanEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.
@@ -40,12 +40,14 @@ and are combined using the bitwise or (`|`) operator.
 | `OSCILLATE`   | The fan supports oscillation.                                            |
 | `PRESET_MODE` | The fan supports preset modes.                                           |
 | `SET_SPEED`   | The fan supports setting the speed percentage and optional preset modes. |
+| `TURN_OFF`    | The fan supports turning off.                                                                                |
+| `TURN_ON`     | The fan supports turning on.                                                                                 |
 
 ## Methods
 
 ### Set direction
 
-Only implement this method if the flag `SUPPORT_DIRECTION` is set.
+Only implement this method if the flag `FanEntityFeature.DIRECTION` is set.
 
 ```python
 class FanEntity(ToggleEntity):
@@ -60,7 +62,7 @@ class FanEntity(ToggleEntity):
 
 ### Set preset mode
 
-Only implement this method if the flag `SUPPORT_PRESET_MODE` is set.
+Only implement this method if the flag `FanEntityFeature.PRESET_MODE` is set.
 
 ```python
 class FanEntity(ToggleEntity):
@@ -75,7 +77,7 @@ class FanEntity(ToggleEntity):
 
 ### Set speed percentage
 
-Only implement this method if the flag `SUPPORT_SET_SPEED` is set.
+Only implement this method if the flag `FanEntityFeature.SET_SPEED` is set.
 
 ```python
 class FanEntity(ToggleEntity):
@@ -144,6 +146,8 @@ value_in_range = math.ceil(percentage_to_ranged_value(SPEED_RANGE, 50))
 
 ### Turn on
 
+Only implement this method if the flag `FanEntityFeature.TURN_ON` is set.
+
 ```python
 class FanEntity(ToggleEntity):
     # Implement one of these methods.
@@ -163,6 +167,8 @@ For new intergrations, `speed` should not be implemented and only `percentage` a
 
 ### Turn off
 
+Only implement this method if the flag `FanEntityFeature.TURN_OFF` is set.
+
 ```python
 class FanEntity(ToggleEntity):
     # Implement one of these methods.
@@ -177,6 +183,7 @@ class FanEntity(ToggleEntity):
 ### Toggle
 
 Optional. If not implemented will default to checking what method to call using the is_on property.
+Only implement this method if the flags `FanEntityFeature.TURN_ON` and `FanEntityFeature.TURN_OFF` are set.
 
 ```python
 class FanEntity(ToggleEntity):
@@ -191,7 +198,7 @@ class FanEntity(ToggleEntity):
 
 ### Oscillate
 
-Only implement this method if the flag `SUPPORT_OSCILLATE` is set.
+Only implement this method if the flag `FanEntityFeature.OSCILLATE` is set.
 
 ```python
 class FanEntity(ToggleEntity):

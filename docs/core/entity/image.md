@@ -1,5 +1,5 @@
 ---
-title: Image Entity
+title: Image entity
 sidebar_label: Image
 ---
 

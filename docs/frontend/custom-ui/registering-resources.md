@@ -1,5 +1,5 @@
 ---
-title: "Registering Resources"
+title: "Registering resources"
 ---
 
 If you want to extend the Home Assistant interface with custom cards, strategies or views you need to load external resources.

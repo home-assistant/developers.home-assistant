@@ -1,5 +1,5 @@
 ---
-title: "External Authentication"
+title: "External authentication"
 ---
 
 By default, the frontend will take care of its own authentication tokens. If none are found, it will redirect the user to the login page and it will take care of updating the token.
@@ -8,7 +8,7 @@ If you want to embed the Home Assistant frontend in an external app, you will wa
 
 To activate this API, load the frontend with `?external_auth=1` appended to the URL. If this is passed in, Home Assistant will expect either `window.externalApp` (for Android) or `window.webkit.messageHandlers` (for iOS) to be defined containing the methods described below.
 
-## Get Access Token
+## Get access token
 
 _This API has been introduced in Home Assistant 0.78._
 
@@ -43,7 +43,7 @@ window.externalAuthSetToken(false);
 
 The frontend will call this method when the page first loads and whenever it needs a valid token but the previous received token has expired.
 
-## Revoke Token
+## Revoke token
 
 _This API has been introduced in Home Assistant 0.78._
 

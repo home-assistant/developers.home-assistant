@@ -23,6 +23,8 @@ class CountInvocationIntent(intent.IntentHandler):
     # Type of intent to handle
     intent_type = "CountInvocationIntent"
 
+    description = "Count how often it has been called"
+
     # Optional. A validation schema for slots
     # slot_schema = {
     #     'item': cv.string

@@ -1,6 +1,6 @@
 ---
-title: Alarm Control Panel Entity
-sidebar_label: Alarm Control Panel
+title: Alarm control panel entity
+sidebar_label: Alarm control panel
 ---
 
 An alarm control panel entity controls an alarm.  Derive a platform entity from [`homeassistant.components.alarm_control_panel.AlarmControlPanelEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/alarm_control_panel/__init__.py).
@@ -34,7 +34,7 @@ Properties should always only return information from memory and not do I/O (lik
 | `disarming` | The alarm is disarming.
 | `triggered` | The alarm is triggered.
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `AlarmControlPanelEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.
@@ -48,7 +48,7 @@ and are combined using the bitwise or (`|`) operator.
 | `AlarmControlPanelEntityFeature.ARM_VACATION` | The alarm supports arming in vacation mode.
 | `AlarmControlPanelEntityFeature.TRIGGER` | The alarm can be triggered remotely.
 
-### Code Formats
+### Code formats
 
 Supported code formats are defined by using values in the `CodeFormat` enum.
 
@@ -75,7 +75,7 @@ class MyAlarm(AlarmControlPanelEntity):
         """Send disarm command."""
 ```
 
-### Alarm Arm Home
+### Alarm arm home
 
 Send arm home command.
 
@@ -90,7 +90,7 @@ class MyAlarm(AlarmControlPanelEntity):
         """Send arm home command."""
 ```
 
-### Alarm Arm Away
+### Alarm arm away
 
 Send arm away command.
 
@@ -105,7 +105,7 @@ class MyAlarm(AlarmControlPanelEntity):
         """Send arm away command."""
 ```
 
-### Alarm Arm Night
+### Alarm arm night
 
 Send arm night command.
 
@@ -120,7 +120,7 @@ class MyAlarm(AlarmControlPanelEntity):
         """Send arm night command."""
 ```
 
-### Alarm Arm Vacation
+### Alarm arm vacation
 
 Send arm vacation command.
 
@@ -135,7 +135,7 @@ class MyAlarm(AlarmControlPanelEntity):
         """Send arm vacation command."""
 ```
 
-### Alarm Trigger
+### Alarm trigger
 
 Send alarm trigger command.
 
@@ -150,7 +150,7 @@ class MyAlarm(AlarmControlPanelEntity):
         """Send alarm trigger command."""
 ```
 
-### Alarm Custom Bypass
+### Alarm custom bypass
 
 Send arm custom bypass command.
 

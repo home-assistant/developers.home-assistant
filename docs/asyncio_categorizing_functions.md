@@ -1,5 +1,5 @@
 ---
-title: "Categorizing Functions"
+title: "Categorizing functions"
 ---
 
 A piece of work within Home Assistant is represented by a function that will be invoked. It will either run inside our event loop or inside our thread pool, depending on if it is async safe.
@@ -32,7 +32,7 @@ This is a normal function that is considered safe to be run from within the even
 
 To declare a function as a callback, import the callback annotation from the core package and annotate your function.
 
-A common use case for a callback in Home Assistant is as a listener for an event or a service call. It can process the incoming information and then schedule the right calls to be made. Example from the automation component.
+A common use case for a callback in Home Assistant is as a listener for an event or a service action call. It can process the incoming information and then schedule the right calls to be made. Example from the automation engine.
 
 ```python
 from homeassistant.core import callback
@@ -40,7 +40,7 @@ from homeassistant.core import callback
 
 @callback
 def async_trigger_service_handler(service_call):
-    """Handle automation trigger service calls."""
+    """Handle automation trigger service action call."""
     vars = service_call.data.get(ATTR_VARIABLES)
     for entity in component.async_extract_from_service(service_call):
         hass.loop.create_task(entity.async_trigger(vars, True))

@@ -1,6 +1,6 @@
 ---
-title: Wake Word Detection Entity
-sidebar_label: Wake Word Detection
+title: Wake word detection entity
+sidebar_label: Wake word detection
 ---
 
 A wake word detection entity allows other integrations or applications to detect wake words (also called hotwords) in an audio stream.

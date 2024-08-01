@@ -1,6 +1,6 @@
 ---
-title: Lawn Mower Entity
-sidebar_label: Lawn Mower
+title: Lawn mower entity
+sidebar_label: Lawn mower
 ---
 
 Derive entity platforms from [`homeassistant.components.lawn_mower.LawnMowerEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/lawn_mower/__init__.py)
@@ -25,7 +25,7 @@ Properties should always only return information from memory and not do I/O (lik
 | `PAUSED` | The lawn mower was active and is now paused.
 | `ERROR`  | The lawn mower encountered an error while active and needs assistance.
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `LawnMowerEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.

@@ -1,10 +1,10 @@
 ---
-title: "Tips and Tricks"
+title: "Tips and tricks"
 ---
 
 This page provides some tips and tricks that may help you as a contributor to Home Assistant. The list here is by no means exhaustive, and if you pick up any additional undocumented tips and tricks, please open a PR to add them here.
 
-## Tips and Tricks
+## Tips and tricks
 
 ### Keep PRs simple
 
@@ -24,7 +24,7 @@ The Home Assistant frontend caches aggressively, and as such, the first time you
 
 ### Getting additional support
 
-`#devs` and `#devs_core` on the Home Assistant [Discord](https://www.home-assistant.io/join-chat/) server are great places to ask questions. Pro tip: Before you post your question, push the code you are working on into a branch and push that branch somewhere public and paste a link to it along with your question so that the person who is helping you can see your code. Please do NOT paste code blobs into the channel as it's hard to read and hides other questions/discussions.
+`#developers` on the Home Assistant [Discord](https://www.home-assistant.io/join-chat/) server are great places to ask questions. Pro tip: Before you post your question, push the code you are working on into a branch and push that branch somewhere public and paste a link to it along with your question so that the person who is helping you can see your code. Please do NOT paste code blobs into the channel as it's hard to read and hides other questions/discussions.
 
 If you see a way to improve the developer docs, please pay it forward and submit a PR to update them. See the next tip for more details.
 

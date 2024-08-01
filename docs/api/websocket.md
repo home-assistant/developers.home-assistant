@@ -23,7 +23,7 @@ During the command phase, the client attaches a unique identifier to each messag
 
 ## Message format
 
-Each API message is a JSON serialized object containing a `type` key. After the authentication phase messages also must contain an `id`, an integer that contains the number of interactions.
+Each API message is a JSON serialized object containing a `type` key. After the authentication phase messages also must contain an `id`, an integer that the caller can use to correlate messages to responses.
 
 Example of an auth message:
 
@@ -334,9 +334,9 @@ The server will respond with a result message to indicate that the event was fir
 }
 ```
 
-## Calling a service
+## Calling a service action
 
-This will call a service in Home Assistant. Right now there is no return value. The client can listen to `state_changed` events if it is interested in changed entities as a result of a service call.
+This will call a service action in Home Assistant. Right now there is no return value. The client can listen to `state_changed` events if it is interested in changed entities as a result of a call.
 
 ```json
 {
@@ -353,10 +353,12 @@ This will call a service in Home Assistant. Right now there is no return value. 
   "target": {
     "entity_id": "light.kitchen"
   }
+  // Must be included for service actions that return response data
+  "return_response": true
 }
 ```
 
-The server will indicate with a message indicating that the service is done executing.
+The server will indicate with a message indicating that the action is done executing.
 
 ```json
 {
@@ -374,7 +376,7 @@ The server will indicate with a message indicating that the service is done exec
 }
 ```
 
-The `result` of the call will always include a `response` to account for services that support responses. When a service that doesn't support responses is called, the value of `response` will be `null`.
+The `result` of the call will always include a `response` to account for service actions that support responses. When a action that doesn't support responses is called, the value of `response` will be `null`.
 
 ## Fetching states
 
@@ -420,9 +422,9 @@ The server will respond with a result message containing the config.
 }
 ```
 
-## Fetching services
+## Fetching service actions
 
-This will get a dump of the current services in Home Assistant.
+This will get a dump of the current service actions in Home Assistant.
 
 ```json
 {
@@ -431,7 +433,7 @@ This will get a dump of the current services in Home Assistant.
 }
 ```
 
-The server will respond with a result message containing the services.
+The server will respond with a result message containing the service actions.
 
 ```json
 {
@@ -464,7 +466,7 @@ The server will respond with a result message containing the current registered 
 }
 ```
 
-## Pings and Pongs
+## Pings and pongs
 
 The API supports receiving a ping from the client and returning a pong. This serves as a heartbeat to ensure the connection is still alive:
 
@@ -529,7 +531,7 @@ If an error occurs, the `success` key in the `result` message will be set to `fa
 }
 ```
 
-### Error handling during service calls and translations
+### Error handling during service action calls and translations
 
 The JSON below shows an example of an error response. If `HomeAssistantError` error (or a subclass of `HomeAssistantError`) is handled, translation information, if set, will be added to the response. 
 

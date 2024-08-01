@@ -1,5 +1,5 @@
 ---
-title: Scene Entity
+title: Scene entity
 sidebar_label: Scene
 --- 
 
@@ -34,7 +34,7 @@ class MySwitch(Scene):
 ```
 
 The activate method can be used to activate the scene towards a device or service.
-It is called by Home Assistant when the user presses the scene `activate` button or when the `scene.turn_on` service is called to activate the scene.
+It is called by Home Assistant when the user presses the scene `activate` button or when the `scene.turn_on` action is called to activate the scene.
 
 ### Available device classes
 

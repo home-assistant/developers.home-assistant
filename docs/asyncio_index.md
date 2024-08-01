@@ -1,5 +1,5 @@
 ---
-title: "Asynchronous Programming"
+title: "Asynchronous programming"
 sidebar_label: Introduction
 ---
 

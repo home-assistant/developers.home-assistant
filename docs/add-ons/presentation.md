@@ -152,8 +152,7 @@ Ingress API gateway supports the following:
 - Streaming content
 - Websockets
 
-
-## Basic Ingress Example with Nginx
+## Basic ingress example with Nginx
 
 The following is a basic ingress implementation with an Nginx server. This contains an example`Dockerfile`, `config.yaml`, and `ingress.conf` configuration.
 

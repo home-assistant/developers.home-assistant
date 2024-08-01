@@ -82,7 +82,7 @@ These models are describing objects that are getting returned from the superviso
 | uuid    | string | The UUID of the discovery |
 | config  | dict   | The configuration         |
 
-## Host Service
+## Host service
 
 | key         | type   | description             |
 | ----------- | ------ | ----------------------- |
@@ -129,7 +129,7 @@ These models are describing objects that are getting returned from the superviso
 | id      | integer | The VLAN ID.                                                                 |
 | parent  | string  | Parent interface which is the vlan attached.                                 |
 
-## Access-Points
+## Access-points
 
 | key        | type    | description                                                                  |
 | ---------- | ------- | ---------------------------------------------------------------------------- |
@@ -301,20 +301,31 @@ Response only fields will be in responses but cannot be included in requests.
 | child_jobs | list    | A list of child [jobs](#job) started by this one              |
 | errors     | list    | A list of [errors](#job-error) that occurred during execution |
 
-## Job Error
+## Job error
 
 | key        | type    | description                                    |
 | ---------- | ------- | ---------------------------------------------- |
 | type       | string  | Type of error that occurred                    |
 | message    | string  | Human-readable description of what went wrong  |
 
-## Boot Slot
+## Boot slot
 
 | key        | type    | description                                     |
 | ---------- | ------- | ----------------------------------------------- |
 | state      | string  | Active or inactive (active slot is in use)      |
 | status     | string  | Status of the last boot from slot (good or bad) |
 | version    | string  | Version of OS installed                         |
+
+## User
+
+| key        | type    | description                                                   |
+| ---------- | ------- | ------------------------------------------------------------- |
+| username   | string  | Username used to login                                        |
+| name       | string  | Name of the user                                              |
+| is_owner   | boolean | Is the user the owner                                         |
+| is_active  | boolean | Is the user active                                            |
+| local_only | boolean | Can the user login from the network (e.g. via http)           |
+| group_ids  | list    | Role(s) the user has (admin, etc)                             |
 
 ## Drive
 

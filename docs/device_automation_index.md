@@ -1,5 +1,5 @@
 ---
-title: "Device Automations"
+title: "Device automations"
 sidebar_label: Introduction
 ---
 
@@ -7,7 +7,7 @@ Device Automations provide users with a device-centric layer on top of the core 
 
 Integrations can hook into this system by exposing functions to generate the pre-defined triggers, conditions, actions and having functions that can listen for the triggers, check the condition and execute the action.
 
-Device automations are not exposing extra functionality but are a way for users to not have to learn new concepts. Device automations are using events, state and service helpers under the hood.
+Device automations are not exposing extra functionality but are a way for users to not have to learn new concepts. Device automations are using events, state and service action helpers under the hood.
 
 ### Secondary device automations
 

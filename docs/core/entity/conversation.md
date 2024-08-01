@@ -1,5 +1,5 @@
 ---
-title: Conversation Entity
+title: Conversation entity
 sidebar_label: Conversation
 ---
 
@@ -16,6 +16,15 @@ Properties should always only return information from memory and not do I/O (lik
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | supported_languages | `list[str]` \| `Literal["*"]` | **Required** | The supported languages of the service. Return `"*"` if you support all.
+
+## Supported features
+
+Supported features are defined by using values in the `ConversationEntityFeature` enum
+and are combined using the bitwise or (`|`) operator.
+
+| Value                      | Description
+| -------------------------- | -------------------------------------------------------------------------------------------
+| `CONTROL`       | The entity is able to control Home Assistant.
 
 ## Methods
 

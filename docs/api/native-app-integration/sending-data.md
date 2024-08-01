@@ -151,9 +151,9 @@ This message will inform Home Assistant of new location information.
 | `course` | int | The direction in which the device is traveling, measured in degrees and relative to due north. Must be greater than 0.
 | `vertical_accuracy` | int | The accuracy of the altitude value, measured in meters. Must be greater than 0.
 
-## Call a service
+## Call a service action
 
-Call a service in Home Assistant.
+Call a service action in Home Assistant.
 
 ```json
 {
@@ -170,9 +170,9 @@ Call a service in Home Assistant.
 
 | Key | Type | Description
 | --- | ---- | -----------
-| `domain` | string | The domain of the service
-| `service` | string | The service name
-| `service_data` | dict | The data to send to the service
+| `domain` | string | The domain of the service action
+| `service` | string | The service action name
+| `service_data` | dict | The data to send to the service action
 
 ## Fire an event
 
@@ -289,7 +289,7 @@ There are two errors you may receive:
 - `encryption_already_enabled` - Encryption is already enabled for this registration
 - `encryption_not_available` - Sodium/NaCL is unable to be installed. Cease all future attempts to enable encryption.
 
-## Stream Camera
+## Stream camera
 
 _This requires Home Assistant 0.112 or later._
 
@@ -320,7 +320,7 @@ The response will include paths for streaming either via HLS or via MJPEG image 
 
 If HLS streaming is not available, the `hls_path` will be `null`. See notes above on instance URL for how to construct a full URL.
 
-## Process Conversation
+## Process conversation
 
 _This requires Home Assistant 2023.2.0 or later._
 

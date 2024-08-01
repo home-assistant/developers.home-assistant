@@ -54,7 +54,7 @@ http://your-instance.com/auth/authorize?
 The user will navigate to this link and be presented with instructions to log in and authorize your application. Once authorized, the user will be redirected back to the passed in redirect uri with the authorization code and state as part of the query parameters. Example:
 
 ```txt
-https://hass-auth-demo.glitch.me/auth_callback
+https://hass-auth-demo.glitch.me/auth_callback?
     code=12345&
     state=http%3A%2F%2Fhassio.local%3A8123
 ```

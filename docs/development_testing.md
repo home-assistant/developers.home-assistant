@@ -2,12 +2,14 @@
 title: "Testing your code"
 ---
 
-As it states in the [Style guidelines section](development_guidelines.md) all code is checked to verify the following:
+As stated in the [Style guidelines section](development_guidelines.md) all code is checked to verify the following:
 
 - All the unit tests pass
 - All code passes the checks from the linting tools
 
 Local testing is done using [pytest](https://docs.pytest.org/) and using [pre-commit](https://pre-commit.com/) for running out linters, which has been installed as part of running `script/setup` in the [virtual environment](development_environment.mdx).
+
+Python test requirements need to be installed before tests can be run. This can be achieved by using the VScode devcontainer and the corresponding task. Check the [devcontainer documentation](/docs/development_environment#tasks) for guidance about running tasks.
 
 To run our linters, on the full code base, run the following command:
 
@@ -97,7 +99,7 @@ If you can't avoid a PyLint warning, add a comment to disable the PyLint check f
 - Make sure to not interact with any integration details in tests of integrations. Following this pattern will make the tests more robust for changes in the integration.
   - Set up the integration with the core interface either [`async_setup_component`](https://github.com/home-assistant/core/blob/4cce724473233d4fb32c08bd251940b1ce2ba570/homeassistant/setup.py#L44-L46) or [`hass.config_entries.async_setup`](https://github.com/home-assistant/core/blob/4cce724473233d4fb32c08bd251940b1ce2ba570/homeassistant/config_entries.py#L693) if the integration supports config entries.
   - Assert the entity state via the core state machine [`hass.states`](https://github.com/home-assistant/core/blob/4cce724473233d4fb32c08bd251940b1ce2ba570/homeassistant/core.py#L887).
-  - Call services via the core service registry [`hass.services`](https://github.com/home-assistant/core/blob/4cce724473233d4fb32c08bd251940b1ce2ba570/homeassistant/core.py#L1133).
+  - Perform service action calls via the core service registry [`hass.services`](https://github.com/home-assistant/core/blob/4cce724473233d4fb32c08bd251940b1ce2ba570/homeassistant/core.py#L1133).
   - Assert `DeviceEntry` state via the [device registry](https://github.com/home-assistant/core/blob/4cce724473233d4fb32c08bd251940b1ce2ba570/homeassistant/helpers/device_registry.py#L101).
   - Assert entity registry `RegistryEntry` state via the [entity registry](https://github.com/home-assistant/core/blob/4cce724473233d4fb32c08bd251940b1ce2ba570/homeassistant/helpers/entity_registry.py#L120).
   - Modify a `ConfigEntry` via the config entries interface [`hass.config_entries`](https://github.com/home-assistant/core/blob/4cce724473233d4fb32c08bd251940b1ce2ba570/homeassistant/config_entries.py#L570).
