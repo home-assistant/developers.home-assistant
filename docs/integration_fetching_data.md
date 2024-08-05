@@ -90,6 +90,18 @@ class MyCoordinator(DataUpdateCoordinator):
             always_update=True
         )
         self.my_api = my_api
+        self._device: MyDevice | None = None
+
+    async def _async_setup(self):
+        """Set up the coordinator
+
+        This is the place to set up your coordinator,
+        or to load data, that only needs to be loaded once.
+
+        This method will be called automatically during
+        coordinator.async_config_entry_first_refresh.
+        """
+        self._device = await self.my_api.get_device()
 
     async def _async_update_data(self):
         """Fetch data from API endpoint.
