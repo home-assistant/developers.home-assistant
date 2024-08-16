@@ -95,7 +95,7 @@ urllib does blocking I/O and should be run in the executor with the standard met
 
 `os.stat` does blocking disk I/O and should be run in the executor with the standard methods above.
 
-# write_bytes
+#### write_bytes
 
 `write_bytes` does blocking disk I/O and should be run in the executor with the standard methods above.
 
