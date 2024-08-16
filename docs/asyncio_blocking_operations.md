@@ -107,7 +107,7 @@ urllib does blocking I/O and should be run in the executor with the standard met
 
 `read_bytes` does blocking disk I/O and should be run in the executor with the standard methods above.
 
-# read_text
+#### read_text
 
 `read_text` does blocking disk I/O and should be run in the executor with the standard methods above.
 
