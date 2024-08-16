@@ -99,7 +99,7 @@ urllib does blocking I/O and should be run in the executor with the standard met
 
 `write_bytes` does blocking disk I/O and should be run in the executor with the standard methods above.
 
-# write_text
+#### write_text
 
 `write_text` does blocking disk I/O and should be run in the executor with the standard methods above.
 
