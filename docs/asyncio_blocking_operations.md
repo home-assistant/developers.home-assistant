@@ -95,6 +95,22 @@ urllib does blocking I/O and should be run in the executor with the standard met
 
 `os.stat` does blocking disk I/O and should be run in the executor with the standard methods above.
 
+#### write_bytes
+
+`write_bytes` does blocking disk I/O and should be run in the executor with the standard methods above.
+
+#### write_text
+
+`write_text` does blocking disk I/O and should be run in the executor with the standard methods above.
+
+#### read_bytes
+
+`read_bytes` does blocking disk I/O and should be run in the executor with the standard methods above.
+
+#### read_text
+
+`read_text` does blocking disk I/O and should be run in the executor with the standard methods above.
+
 #### load_default_certs
 
 `SSLContext.load_default_certs` does blocking disk I/O to load the certificates from disk. 
@@ -108,3 +124,7 @@ The following helpers ensure that the blocking I/O will happen in the executor:
 #### load_verify_locations
 
 See [load_default_certs](#load_default_certs)
+
+#### load_cert_chain
+
+See [load_default_certs](#load_cert_chain)
