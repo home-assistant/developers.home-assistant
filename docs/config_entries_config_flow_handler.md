@@ -83,7 +83,7 @@ Should the config flow then abort, the text resource with the key `already_confi
 {
   "config": {
     "abort": {
-      "already_configured": "Device is already configured"
+      "already_configured": "[%key:common::config_flow::abort::already_configured_device%]"
     }
   }
 }
