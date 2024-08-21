@@ -5,7 +5,7 @@ title: "New returning type in LawnMowerActivity"
 ---
 
 As of Home Assistant Core 2024.9, integrations using the lawn_mower platform can indicate that their mower 
-is returning by using the new `LawnMowerActivity.RETURNING` state.
+is returning to the dock by using the new `LawnMowerActivity.RETURNING` state.
 
 ## Example
 
