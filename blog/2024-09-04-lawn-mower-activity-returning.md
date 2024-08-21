@@ -15,7 +15,7 @@ As of Home Assistant Core 2024.9, integrations implementing `LawnMowerEntity` ca
         self.async_write_ha_state()
 ```
 
-or returning `LawnMowerActivity.RETURNING` in the activity function property of your lawn_mower entity.
+or by returning `LawnMowerActivity.RETURNING` in the activity property of your `lawn_mower` entity.
 
 ```python
     @property
