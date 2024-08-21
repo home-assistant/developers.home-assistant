@@ -26,3 +26,7 @@ or by returning `LawnMowerActivity.RETURNING` in the activity property of your `
             return LawnMowerActivity.RETURNING
         ...
 ```
+
+## More information
+
+More details can be found in the [documentation](https://developers.home-assistant.io/docs/core/entity/lawn-mower#activities)
