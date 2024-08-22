@@ -7,7 +7,7 @@ One of the foundational rules of Home Assistant is that we do not include any pr
 
 ## Basic library requirements
 
-- The library must have source distribution packages available<> it's not allowed to rely on packages that only have binary distribution packages.
+- The library must have source distribution packages available, it's not allowed to rely on packages that only have binary distribution packages.
 - Issue trackers must be enabled for external Python libraries that communicate with external devices or services.
 - If the library is mainly used for Home Assistant and you are a code owner of the integration, it is encouraged to use an issue template picker with links to [Home Assistant Core Issues](https://github.com/home-assistant/core/issues). For example: [zwave-js-server-python - New Issue](https://github.com/home-assistant-libs/zwave-js-server-python/issues/new/choose)
 - The library and possible subdependencies of the library must be licensed using an [OSI-approved license](https://opensource.org/license). This should be reflected in the metadata of the library.
