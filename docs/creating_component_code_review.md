@@ -18,8 +18,7 @@ Not all existing code follows the requirements in this checklist. This cannot be
 ### 1. External requirements
 
  1. Requirements have been added to [`manifest.json`](creating_integration_manifest.md). The `REQUIREMENTS` constant is deprecated.
- 2. Requirement version should be pinned: `"requirements": ['phue==0.8.1']`
- 3. We no longer want requirements hosted on GitHub. Please upload to PyPi.
+ 2. Requirement version must be pinned: `"requirements": ['phue==0.8.1']`
  4. Each requirement meets the [library requirements](api_lib_index.md#basic-library-requirements).
 
 ### 2. Configuration
