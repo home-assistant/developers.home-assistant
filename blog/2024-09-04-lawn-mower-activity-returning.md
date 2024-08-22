@@ -6,6 +6,8 @@ title: "New returning type in LawnMowerActivity"
 
 As of Home Assistant Core 2024.9, integrations implementing `LawnMowerEntity` can indicate that their mower is returning to the dock by using the new `LawnMowerActivity.RETURNING` state.
 
+More details can be found in the [documentation](/docs/core/entity/lawn-mower#activities)
+
 ## Example
 
 ```python
@@ -26,7 +28,3 @@ or by returning `LawnMowerActivity.RETURNING` in the activity property of your `
             return LawnMowerActivity.RETURNING
         ...
 ```
-
-## More information
-
-More details can be found in the [documentation](https://developers.home-assistant.io/docs/core/entity/lawn-mower#activities)
