@@ -5,12 +5,12 @@ sidebar_label: "Custom actions"
 
 Home Assistant provides ready-made actions for a lot of things, but it doesn't always cover everything. Instead of trying to change Home Assistant, it is preferred to add it as a service action under your own integration first. Once we see a pattern in these service actions, we can talk about generalizing them.
 
-This is a simple "hello world" example to show the basics of registering a service action. To use this example, create the file `<config dir>/custom_components/hello_service/__init__.py` and copy the below example code.
+This is a simple "hello world" example to show the basics of registering a service action. To use this example, create the file `<config dir>/custom_components/hello_action/__init__.py` and copy the below example code.
 
 Actions can be called from automations and from the actions "Developer tools" in the frontend.
 
 ```python
-DOMAIN = "hello_service"
+DOMAIN = "hello_action"
 
 ATTR_NAME = "name"
 DEFAULT_NAME = "World"
@@ -23,7 +23,7 @@ def setup(hass, config):
         """Handle the service action call."""
         name = call.data.get(ATTR_NAME, DEFAULT_NAME)
 
-        hass.states.set("hello_service.hello", name)
+        hass.states.set("hello_action.hello", name)
 
     hass.services.register(DOMAIN, "hello", handle_hello)
 
