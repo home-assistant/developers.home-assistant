@@ -1,7 +1,7 @@
 ---
 author: Michael Arthur
 authorURL: https://github.com/mikey0000
-title: "New returning type in LawnMowerActivity"
+title: New returning type in LawnMowerActivity
 ---
 
 As of Home Assistant Core 2024.9, integrations implementing `LawnMowerEntity` can indicate that their mower is returning to the dock by using the new `LawnMowerActivity.RETURNING` state.
