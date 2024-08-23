@@ -120,8 +120,8 @@ set_speed:
             - "medium"
             - "high"
     # Fields can be grouped in collapsible sections, this is useful to initially hide
-    # advanced fields. Note that the collapsible section only affect presentation to the
-    # user, service action data will not be nested.
+    # advanced fields and to group related fields. Note that the collapsible section
+    # only affect presentation to the user, service action data will not be nested.
     advanced_fields:
       # Whether or not the section is initially collapsed (default = false)
       collapsed: true
