@@ -116,7 +116,7 @@ Get details about an add-on
 | auto_update         | boolean            | `true` if auto update is enabled                                                       |
 | available           | boolean            | `true` if the add-on is available                                                      |
 | boot                | string             | "auto" or "manual"                                                                     |
-| boot_config         | string             | Default boot mode of addon or "manual_forced" if boot mode cannot be auto              |
+| boot_config         | string             | Default boot mode of addon or "manual_only" if boot mode cannot be auto                |
 | build               | boolean            | `true` if local add-on                                                                 |
 | changelog           | boolean            | `true` if changelog is available                                                       |
 | description         | string             | The add-on description                                                                 |
