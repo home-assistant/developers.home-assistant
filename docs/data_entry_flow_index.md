@@ -153,9 +153,12 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
 
 #### Grouping of input fields
 
-As shown in the example above, input fields can be visually grouped in sections. Grouping input fields by sections influence
-both how the inputs are displayed to the user and how user input is structured. In the example above, user input will be
-structured like this:
+As shown in the example above, input fields can be visually grouped in sections. 
+
+Each section has a [translatable name and description](#labels--descriptions), and it's also possible to specify an icon.
+
+Grouping input fields by sections influence both how the inputs are displayed to the user and how user input is structured.
+In the example above, user input will be structured like this:
 
 ```python
 {
@@ -169,6 +172,22 @@ structured like this:
 ```
 
 Only a single level of sections is allowed; it's not possible to have sections inside a section.
+
+To specify an icon for a section, update `icons.json` according to this example:
+
+```json
+{
+  "config": {
+    "step": {
+      "user": {
+        "sections": {
+          "ssl_options": "mdi:lock"
+        }
+      }
+    }
+  }
+}
+```
 
 #### Labels & descriptions
 
