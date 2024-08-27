@@ -1,0 +1,33 @@
+---
+author: Erik Montnemery
+authorURL: https://github.com/emontnemery
+title: "Changes to the icon translations schema"
+---
+
+The icon translations schema has been adjusted to allow assigning icons for sections in services.
+Icons for services can now be provided both according to the original schema, which only allows specifying a single icon for the service, and according to a more explicit schema which allows specifying icons for sections.
+
+This allows specifying service icons like this:
+```json
+  "services": {
+    "test_service_1": {
+      "service": "mdi:flask",
+      "sections": {
+        "section_1": "mdi:test-tube"
+      }
+    }
+  }
+```
+
+The old format is still supported:
+```json
+  "services": {
+    "randomize_device_tracker_data": "mdi:dice-multiple"
+  }
+```
+
+More details can be found in core [PR #124656](https://github.com/home-assistant/core/pull/124656)
+
+### Impact on custom cards
+
+Icons data sent to frontend will always be according to the new format, custom cards displaying service icons need to be adjusted.
