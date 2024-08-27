@@ -30,4 +30,4 @@ More details can be found in core [PR #124656](https://github.com/home-assistant
 
 ### Impact on custom cards
 
-Icons data sent to frontend will always be according to the new format, custom cards displaying service icons need to be adjusted.
+Icons data sent to the frontend will always be according to the new format, custom cards displaying service icons need to be adjusted.
