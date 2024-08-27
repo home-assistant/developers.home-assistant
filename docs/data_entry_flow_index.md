@@ -157,7 +157,7 @@ As shown in the example above, input fields can be visually grouped in sections.
 
 Each section has a [translatable name and description](#labels--descriptions), and it's also possible to specify an icon.
 
-Grouping input fields by sections influence both how the inputs are displayed to the user and how user input is structured.
+Grouping input fields by sections influences both how the inputs are displayed to the user and how user input is structured.
 In the example above, user input will be structured like this:
 
 ```python
