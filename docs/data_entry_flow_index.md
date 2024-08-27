@@ -162,6 +162,8 @@ Translations for the form are added to `strings.json` in a key for the `step_id`
 |       `data`       |    Field labels    | Keep succinct and consistent with other integrations whenever appropriate for the best user experience.                                      |
 | `data_description` | Field descriptions | Optional explanatory text to show below the field.                                                                                           |
 
+More details about translating data entry flows can be found in the [core translations documentation](/docs/internationalization/core).
+
 The field labels and descriptions are given as a dictionary with keys corresponding to your schema. Here is a simple example:
 
 ```json
