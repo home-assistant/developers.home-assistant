@@ -151,16 +151,36 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         return self.async_show_form(step_id="init", data_schema=vol.Schema(data_schema))
 ```
 
+#### Grouping of input fields
+
+As shown in the example above, input fields can be visually grouped in sections. Grouping input fields by sections influence
+both how the inputs are displayed to the user and how user input is structured. In the example above, user input will be
+structured like this:
+
+```python
+{
+    "username": "user",
+    "password": "hunter2",
+    "ssl_options": {
+        "ssl": True,
+        "verify_ssl": False,
+    },
+}
+```
+
+Only a single level of sections is allowed; it's not possible to have sections inside a section.
+
 #### Labels & descriptions
 
 Translations for the form are added to `strings.json` in a key for the `step_id`. That object may contain the folowing keys:
 
-|        Key         |       Value        | Notes                                                                                                                                        |
-| :----------------: | :----------------: | :------------------------------------------------------------------------------------------------------------------------------------------- |
-|      `title`       |    Form heading    | Do not include your brand name. It will be automatically injected from your manifest.                                                        |
-|   `description`    | Form instructions  | Optional. Do not link to the documentation as that is linked automatically. Do not include "basic" information like "Here you can set up X". |
-|       `data`       |    Field labels    | Keep succinct and consistent with other integrations whenever appropriate for the best user experience.                                      |
-| `data_description` | Field descriptions | Optional explanatory text to show below the field.                                                                                           |
+|        Key         |       Value         | Notes                                                                                                                                        |
+| :----------------: | :-----------------: | :------------------------------------------------------------------------------------------------------------------------------------------- |
+|      `title`       |    Form heading     | Do not include your brand name. It will be automatically injected from your manifest.                                                        |
+|   `description`    | Form instructions   | Optional. Do not link to the documentation as that is linked automatically. Do not include "basic" information like "Here you can set up X". |
+|       `data`       |    Field labels     | Keep succinct and consistent with other integrations whenever appropriate for the best user experience.                                      |
+| `data_description` | Field descriptions  | Optional explanatory text to show below the field.                                                                                           |
+|     `section`      | Section translation | Translations for sections, each section may have `name` and `description` of the section and `data` and `data_description` for its fields.   |
 
 More details about translating data entry flows can be found in the [core translations documentation](/docs/internationalization/core).
 
@@ -174,11 +194,23 @@ The field labels and descriptions are given as a dictionary with keys correspond
           "title": "Add Group",
           "description": "Some description",
           "data": {
-              "entities": "Entities",
+              "entities": "Entities"
           },
           "data_description": {
-              "entities": "The entities to add to the group",
+              "entities": "The entities to add to the group"
           },
+          "sections": {
+              "additional_options": {
+                  "name": "Additional options",
+                  "description": "A description of the section",
+                  "data": {
+                      "advanced_group_option": "Advanced group option"
+                  },
+                  "data_description": {
+                      "advanced_group_option": "A very complicated option which does abc"
+                  },
+              }
+          }
       }
     }
   }
