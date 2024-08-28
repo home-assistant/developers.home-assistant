@@ -26,7 +26,7 @@ The old format is still supported:
   }
 ```
 
-More details can be found in core [PR #124656](https://github.com/home-assistant/core/pull/124656)
+See [core PR #124656](https://github.com/home-assistant/core/pull/124656) for implementation details.
 
 ### Impact on custom cards
 
