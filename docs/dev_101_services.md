@@ -138,6 +138,12 @@ set_speed:
 The name and description of the service actions are set in our [translations](/docs/internationalization/core#services) and not in the service action description. Each service action and service action field must have a matching translation defined.
 :::
 
+### Grouping of service action fields
+
+As shown in the example above, input fields can be visually grouped in sections. Grouping input fields by sections influence
+only how the inputs are displayed to the user and not how service action data is structured. In the example above, service
+action data would be `{"speed_pct": 50}`, not `{"advanced_fields": {"speed_pct": 50}}`.
+
 ### Filtering service action fields
 
 In some cases, entities from a action's domain may not support all service action fields.
