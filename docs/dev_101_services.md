@@ -197,7 +197,7 @@ The following example, shows how to provide icons for the `turn_on` and `turn_of
 {
   "services": {
     "turn_on": {"service": "mdi:lightbulb-on"},
-    "turn_off": {"service": "mdi:lightbulb-off}"
+    "turn_off": {"service": "mdi:lightbulb-off"}
   }
 }
 ```
