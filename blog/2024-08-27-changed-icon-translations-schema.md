@@ -5,7 +5,7 @@ title: "Changes to the icon translations schema"
 ---
 
 The icon translations schema has been adjusted to allow assigning icons for [sections in services](/docs/dev_101_services/#service-action-descriptions).
-Icons for services can now be provided both according to the original schema, which only allows specifying a single icon for the service, and according to a more explicit schema which allows specifying icons for sections.
+Icons for services should now be provided according to a more explicit schema which allows specifying icons for sections.
 
 This allows specifying service icons like this:
 ```json
@@ -19,7 +19,7 @@ This allows specifying service icons like this:
   }
 ```
 
-The old format is still supported, for services which don't make use of input sections:
+The old format is supported during a deprecation period of one year, to give time for custom integrations to migrate to the new schema:
 ```json
   "services": {
     "test_service_1": "mdi:flask"
