@@ -202,7 +202,7 @@ The following example shows how to provide icons for the `turn_on` and `turn_off
 
 In addition, icons can optionally be specified for collapsible sections.
 
-The following example shows how to provide an icons for the `advanced_options` section:
+The following example shows how to provide an icon for the `advanced_options` section:
 
 ```json
 {
