@@ -189,9 +189,7 @@ Actions can also have icons. These icons are used in the Home Assistant UI when 
 
 The icon to use for each service action can be defined in the `icons.json` translation file in the integration folder, under the `services` key. The key should be the service action name, and the value should be the icon to use.
 
-In addition, icons can optionally be specified for collapsible sections.
-
-The following example, shows how to provide icons for the `turn_on` and `turn_off` service actions of an integration:
+The following example shows how to provide icons for the `turn_on` and `turn_off` service actions of an integration:
 
 ```json
 {
@@ -202,7 +200,9 @@ The following example, shows how to provide icons for the `turn_on` and `turn_of
 }
 ```
 
-The following example, shows how to provide icons for a service with sections:
+In addition, icons can optionally be specified for collapsible sections.
+
+The following example shows how to provide an icons for the `advanced_options` section:
 
 ```json
 {
