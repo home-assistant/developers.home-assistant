@@ -141,7 +141,7 @@ The name and description of the service actions are set in our [translations](/d
 ### Grouping of service action fields
 
 As shown in the example above, input fields can be visually grouped in sections. Grouping input fields by sections influence
-only how the inputs are displayed to the user and not how service action data is structured. In the example above, service
+only how the inputs are displayed to the user, and not how service action data is structured. In the example above, service
 action data would be `{"speed_pct": 50}`, not `{"advanced_fields": {"speed_pct": 50}}`.
 
 ### Filtering service action fields
