@@ -5,7 +5,7 @@ title: "Changes to the icon translations schema"
 ---
 
 The icon translations schema has been adjusted to allow assigning icons for [sections in services](/docs/dev_101_services/#service-action-descriptions).
-Icons for services should now be provided according to a more explicit schema which allows specifying icons for sections.
+Icons for services should now be provided according to a more explicit schema, which allows specifying icons for sections.
 
 This allows specifying service icons like this:
 ```json
