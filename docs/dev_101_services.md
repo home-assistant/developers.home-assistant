@@ -68,6 +68,8 @@ Adding actions is only useful if users know about them. In Home Assistant we use
 
 Actions are published under the domain name of your integration, so in `services.yaml` we only use the service action name as the base key.
 
+### Service action description example
+
 ```yaml
 # Example services.yaml entry
 
@@ -138,6 +140,16 @@ set_speed:
 The name and description of the service actions are set in our [translations](/docs/internationalization/core#services) and not in the service action description. Each service action and service action field must have a matching translation defined.
 :::
 
+### Grouping of service action fields
+
+Input fields can be visually grouped in sections. Grouping input fields by sections influences
+only how the inputs are displayed to the user, and not how service action data is structured.
+
+In the [service action description example](#service-action-description-example), the `speed_pct`
+input field is inside an initially collapsed section `advanced_fields`.
+The service action data for the service in the example is `{"speed_pct": 50}`, not
+`{"advanced_fields": {"speed_pct": 50}}`.
+
 ### Filtering service action fields
 
 In some cases, entities from a action's domain may not support all service action fields.
@@ -189,13 +201,30 @@ Actions can also have icons. These icons are used in the Home Assistant UI when 
 
 The icon to use for each service action can be defined in the `icons.json` translation file in the integration folder, under the `services` key. The key should be the service action name, and the value should be the icon to use.
 
-The following example, shows how to provide icons for the `turn_on` and `turn_off` service actions of an integration:
+The following example shows how to provide icons for the `turn_on` and `turn_off` service actions of an integration:
 
 ```json
 {
   "services": {
-    "turn_on": "mdi:lightbulb-on",
-    "turn_off": "mdi:lightbulb-off"
+    "turn_on": {"service": "mdi:lightbulb-on"},
+    "turn_off": {"service": "mdi:lightbulb-off"}
+  }
+}
+```
+
+In addition, icons can optionally be specified for collapsible sections.
+
+The following example shows how to provide an icon for the `advanced_options` section:
+
+```json
+{
+  "services": {
+    "start_brewing": {
+      "service": "mdi:flask",
+      "sections": {
+        "advanced_options": "mdi:test-tube"
+      }
+    }
   }
 }
 ```
