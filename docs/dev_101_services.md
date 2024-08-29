@@ -68,6 +68,8 @@ Adding actions is only useful if users know about them. In Home Assistant we use
 
 Actions are published under the domain name of your integration, so in `services.yaml` we only use the service action name as the base key.
 
+### Service action description example
+
 ```yaml
 # Example services.yaml entry
 
@@ -137,6 +139,16 @@ set_speed:
 :::info
 The name and description of the service actions are set in our [translations](/docs/internationalization/core#services) and not in the service action description. Each service action and service action field must have a matching translation defined.
 :::
+
+### Grouping of service action fields
+
+Input fields can be visually grouped in sections. Grouping input fields by sections influences
+only how the inputs are displayed to the user, and not how service action data is structured.
+
+In the [service action description example](#service-action-description-example), the `speed_pct`
+input field is inside an initially collapsed section `advanced_fields`.
+The service action data for the service in the example is `{"speed_pct": 50}`, not
+`{"advanced_fields": {"speed_pct": 50}}`.
 
 ### Filtering service action fields
 
