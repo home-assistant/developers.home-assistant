@@ -189,13 +189,30 @@ Actions can also have icons. These icons are used in the Home Assistant UI when 
 
 The icon to use for each service action can be defined in the `icons.json` translation file in the integration folder, under the `services` key. The key should be the service action name, and the value should be the icon to use.
 
-The following example, shows how to provide icons for the `turn_on` and `turn_off` service actions of an integration:
+The following example shows how to provide icons for the `turn_on` and `turn_off` service actions of an integration:
 
 ```json
 {
   "services": {
-    "turn_on": "mdi:lightbulb-on",
-    "turn_off": "mdi:lightbulb-off"
+    "turn_on": {"service": "mdi:lightbulb-on"},
+    "turn_off": {"service": "mdi:lightbulb-off"}
+  }
+}
+```
+
+In addition, icons can optionally be specified for collapsible sections.
+
+The following example shows how to provide an icon for the `advanced_options` section:
+
+```json
+{
+  "services": {
+    "start_brewing": {
+      "service": "mdi:flask",
+      "sections": {
+        "advanced_options": "mdi:test-tube"
+      }
+    }
   }
 }
 ```
