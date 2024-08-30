@@ -58,7 +58,7 @@ o [kernel.1] (/dev/disk/by-partlabel/hassos-kernel1, raw, inactive)
 
 After an update, RAUC instructs the bootloader to boot into the other slot (e.g. with U-Boot by writing U-Boot environment variables). If the boot succeeds, the slot is marked good and the system will continue to boot into this boot slot. Typically, three attempts are made with each boot slot before reverting to the other boot slot, but the exact logic is dependent on the bootloader integration.
 
-The boot slot can be changed using the `ha os boot-slot` command. On systems using the GRUB bootloader, the boot menu can be also used. In that case, the selected boot slot will be used for future boots, until it’s changed again manually or by an OS update.
+The boot slot can be changed using the `ha os boot-slot` command. On systems using the GRUB bootloader, the boot menu can also be used. In that case, the selected boot slot will be used for future boots, until it’s changed again manually or by an OS update.
 
 ## Security
 
