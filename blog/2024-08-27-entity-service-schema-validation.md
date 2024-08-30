@@ -12,4 +12,4 @@ It's no longer possible to register an entity action  with a custom schema which
 It's still possible to register an entity action with no schema, or with a dict representing the additional action call parameters.
 The reason for the change is that if `cv.make_entity_service_schema` is not used, the service will not automatically support all possible ways of targeting entities.
 
-More details can be found in core [PR #124102](https://github.com/home-assistant/core/pull/124102)
+More details can be found in the [developer documentation](/docs/dev_101_services/#icons) and in core [PR #124102](https://github.com/home-assistant/core/pull/124102)
