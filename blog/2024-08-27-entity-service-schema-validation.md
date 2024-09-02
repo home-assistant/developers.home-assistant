@@ -4,10 +4,12 @@ authorURL: https://github.com/emontnemery
 title: "Validation of entity action schemas"
 ---
 
-It's no longer possible to register an entity action  with a custom schema which does not meet at least one of these criteria:
+A warning will now be logged when registering an entity action  with a custom schema which does not meet at least one of these criteria:
 - A validator returned by `cv.make_entity_service_schema`
 - A validator returned by `cv.make_entity_service_schema`, wrapped in a `vol.Schema`
 - A validator returned by `cv.make_entity_service_schema`, wrapped in a `vol.All`
+
+In Home Assistant Core 2025.10, it will no longer be possible to register an entity action with a custom schema not meeting this requirement.
 
 It's still possible to register an entity action with no schema, or with a dict representing the additional action call parameters.
 The reason for the change is that if `cv.make_entity_service_schema` is not used, the service will not automatically support all possible ways of targeting entities.
