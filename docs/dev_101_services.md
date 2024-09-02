@@ -234,7 +234,7 @@ The following example shows how to provide an icon for the `advanced_options` se
 
 Sometimes you want to provide extra actions to control your entities. For example, the Sonos integration provides action to group and ungroup devices. Entity service actions are special because there are many different ways a user can specify entities. It can use areas, a group or a list of entities.
 
-You need to register entity service actions in your platforms, like `<your-domain>/media_player.py`. These service actions will be made available under your domain and not the media player domain. A schema can be passed to `async_register_entity_service` if the entity service action has fields. The schema must be either of:
+You need to register entity service actions in your platforms, like `<your-domain>/media_player.py`. These service actions will be made available under your domain and not under the platform domain (e.g. media player domain). A schema can be passed to `async_register_entity_service` if the entity service action has fields. The schema must be either of:
 
 - A dictionary which will automatically be passed to `cv._make_entity_service_schema`
 - A validator returned by `cv._make_entity_service_schema`
