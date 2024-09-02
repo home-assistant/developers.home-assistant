@@ -71,7 +71,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.REACTIVE_POWER` | var | Reactive power |
 | `SensorDeviceClass.SIGNAL_STRENGTH` | dB, dBm | Signal strength
 | `SensorDeviceClass.SOUND_PRESSURE` | dB, dBA | Sound pressure
-| `SensorDeviceClass.SPEED` | ft/s, in/d, in/h, km/h, kn, m/s, mph, mm/d | Generic speed
+| `SensorDeviceClass.SPEED` | ft/s, in/d, in/h, km/h, kn, m/s, mph, mm/d, mm/s | Generic speed
 | `SensorDeviceClass.SULPHUR_DIOXIDE` | µg/m³ | Concentration of sulphure dioxide |
 | `SensorDeviceClass.TEMPERATURE` | °C, °F, K | Temperature.
 | `SensorDeviceClass.TIMESTAMP` | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.

@@ -67,7 +67,7 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.REACTIVE_POWER` | var | Reactive power |
 | `NumberDeviceClass.SIGNAL_STRENGTH` | dB, dBm | Signal strength
 | `NumberDeviceClass.SOUND_PRESSURE` | dB, dBA | Sound pressure
-| `NumberDeviceClass.SPEED` | ft/s, in/d, in/h, km/h, kn, m/s, mph, mm/d | Generic speed
+| `NumberDeviceClass.SPEED` | ft/s, in/d, in/h, km/h, kn, m/s, mph, mm/d, mm/s | Generic speed
 | `NumberDeviceClass.SULPHUR_DIOXIDE` | µg/m³ | Concentration of sulphure dioxide |
 | `NumberDeviceClass.TEMPERATURE` | °C, °F, K | Temperature.
 | `NumberDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³ | Concentration of volatile organic compounds
