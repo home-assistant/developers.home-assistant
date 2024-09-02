@@ -254,7 +254,7 @@ async def async_setup_entry(hass, entry):
     )
 ```
 
-If you need more control over the service action call, you can also pass an async function that instead of `"set_sleep_timer"`:
+If you need more control over the service action call, you can also pass an async function that will be called instead of `"set_sleep_timer"`:
 
 ```python
 async def custom_set_sleep_timer(entity, service_call):
