@@ -245,6 +245,10 @@ class MyClimateEntity(ClimateEntity):
 
 ### Set temperature
 
+:::note
+`ClimateEntity` has built-in validation that the target low temperature is lower than equal to target high temperature so integrations does not need to validate it in their own implementation.
+:::
+
 ```python
 class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
