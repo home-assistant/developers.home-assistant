@@ -14,4 +14,4 @@ In Home Assistant Core 2025.10, it will no longer be possible to register an ent
 It's still possible to register an entity action with no schema, or with a dict representing the additional action call parameters.
 The reason for the change is that if `cv.make_entity_service_schema` is not used, the service will not automatically support all possible ways of targeting entities.
 
-More details can be found in the [developer documentation](/docs/dev_101_services/#entity-service-actions) and in core [PR #124102](https://github.com/home-assistant/core/pull/124102)
+More details can be found in the [developer documentation](/docs/dev_101_services/#entity-service-actions) and in core PRs [#124102](https://github.com/home-assistant/core/pull/124102) and [#125057](https://github.com/home-assistant/core/pull/125057).
