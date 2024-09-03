@@ -6,7 +6,7 @@ To ensure that the documentation for Home Assistant is consistent and easy to fo
 
 ## General documentation
 
-Broadly speaking, documentation should be written following the Microsoft Style Guide](https://learn.microsoft.com/style-guide/welcome/).
+Broadly speaking, documentation should be written following the [Microsoft Style Guide](https://learn.microsoft.com/style-guide/welcome/).
 
 A few of the most common cases picked up in reviews are listed below:
 
