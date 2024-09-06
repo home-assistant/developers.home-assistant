@@ -256,7 +256,6 @@ module.exports = {
     },
 
     "voice/pipelines/index",
-    "voice/satellites/index",
     "voice/language-leaders",
     "voice/contributing-your-voice",
   ],

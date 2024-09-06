@@ -2,7 +2,7 @@
 title: "Assist satellites"
 ---
 
-The [Assist satellite](https://www.home-assistant.io/integrations/assist_satellite) integration represents a remote satellite that uses [pipelines](/docs/voice/pipelines). Integrations must implement the [base entity](#base-entity) for the `assist_satellite` platform. These satellites can then be controlled remotely via [actions](https://next.home-assistant.io/integrations/assist_satellite#actions) and a [WebSocket API](#websocket-api).
+An Assist Satellite entity represents the Assist pipeline-powered voice assistant capabilities of a device. Devices with such entities can allow users to control Home Assistant using their voice.
 
 ## Base entity
 
@@ -42,12 +42,12 @@ The `async_announce` method will receive a resolved `media_id` and the `message`
 
 ### Intercepting wake words
 
-The next wake word detection from the satellite may be intercepted:
+The integration offers a websocket API  to intercept wake word detections and announce them to the user. This is used by the voice wizard to help the user onboard and get familiar with the wake word.
 
 ```json
 {
   "type": "assist_satellite/intercept_wake_word",
-  "entity_id": ENTITY_ID
+  "entity_id": "assist_satellite.living_room"
 }
 ```
 
