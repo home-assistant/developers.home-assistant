@@ -76,6 +76,12 @@ If the client supplies valid authentication, the authentication phase will compl
 }
 ```
 
+The server will also send a `websocket_connected`
+[event](https://developers.home-assistant.io/docs/dev_101_events) when a client
+successfully authenticates, containing the `username`, `user_agent` (if set), `remote_ip`
+address, and a `connection_uuid` which uniquely identifies this websocket
+connection.
+
 If the data is incorrect, the server will reply with `auth_invalid` message and disconnect the session.
 
 ```json
@@ -103,6 +109,11 @@ During this phase the client can give commands to the server. The server will re
   }
 }
 ```
+
+When the client disconnects, a `websocket_disconnected` 
+[event](https://developers.home-assistant.io/docs/dev_101_events) is fired,
+containing the same `username`, `user_agent`, `remote_ip`, and `connection_uuid`
+as were in the corresponding `websocket_connected` event.
 
 ## Subscribe to events
 
@@ -483,6 +494,28 @@ The server must send a pong back as quickly as possible, if the connection is st
 {
     "id": 19,
     "type": "pong"
+}
+```
+
+## Connection Information
+
+A client connected via websocket can retrieve the `connection_uuid` of its
+connection by sending a `connect_info` message.
+
+```json
+{
+  "id": 16,
+  "type": "connection_info"
+}
+```
+
+The server will respond with a message containing the connection's uuid:
+
+```json
+{
+  "id": 16,
+  "type": connection_info",
+  "connection_uuid": "a409db0e-3a69-4ae5-888a-b01d0e920b63"
 }
 ```
 
