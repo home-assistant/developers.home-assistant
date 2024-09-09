@@ -49,7 +49,7 @@ Supported features are defined by using values in the `UpdateEntityFeature` enum
 
 ### Compare versions
 
-This method should be implemented to override the default version comparison logic:
+This method should be implemented when needed to override the default version comparison logic:
 
 ```python
 def version_is_newer(self, latest_version: str, installed_version: str) -> bool:
