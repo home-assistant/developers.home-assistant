@@ -47,6 +47,11 @@ Supported features are defined by using values in the `UpdateEntityFeature` enum
 
 ## Methods
 
+### Version_is_newer
+
+This method can be implemented to overwrite default comparison logic.
+First choice should always be based on <https://github.com/ludeeus/awesomeversion?tab=readme-ov-file#awesomeversion-class> and all its strategies.
+
 ### Install
 
 This method can be implemented so users can install an offered update directly
