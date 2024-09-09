@@ -47,7 +47,7 @@ Supported features are defined by using values in the `UpdateEntityFeature` enum
 
 ## Methods
 
-### version_is_newer
+### Compare versions
 
 This method should be implemented to override the default version comparison logic:
 
