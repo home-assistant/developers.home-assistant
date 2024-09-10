@@ -128,7 +128,11 @@ The translation for selectors are defined under the `selector` key. It supports 
 The translations of service actions strings are defined under the `services` key.
 
 It supports translating the `name` and `description` of each action,
-and the `name` and `description` of each action's `fields`.
+`name` and `description` of each action's `fields`, and the `name` of
+each collapsible section of fields.
+
+Note that also the translations for `name` and `description` of fields which
+are displayed in a collapsible section should be under the `fields` key.
 
 ```json
 {
@@ -150,6 +154,11 @@ and the `name` and `description` of each action's `fields`.
         "speed": {
           "name": "Speed",
           "description": "The speed to set."
+        }
+      },
+      "sections": {
+        "advanced_fields": {
+          "name": "Advanced options"
         }
       }
     }

@@ -94,3 +94,37 @@ urllib does blocking I/O and should be run in the executor with the standard met
 #### stat
 
 `os.stat` does blocking disk I/O and should be run in the executor with the standard methods above.
+
+#### write_bytes
+
+`pathlib.Path.write_bytes` does blocking disk I/O and should be run in the executor with the standard methods above.
+
+#### write_text
+
+`pathlib.Path.write_text` does blocking disk I/O and should be run in the executor with the standard methods above.
+
+#### read_bytes
+
+`pathlib.Path.read_bytes` does blocking disk I/O and should be run in the executor with the standard methods above.
+
+#### read_text
+
+`pathlib.Path.read_text` does blocking disk I/O and should be run in the executor with the standard methods above.
+
+#### load_default_certs
+
+`SSLContext.load_default_certs` does blocking disk I/O to load the certificates from disk. 
+
+The following helpers ensure that the blocking I/O will happen in the executor:
+
+- `aiohttp`: `homeassistant.helpers.aiohttp_client.async_get_clientsession` to create the `aiohttp.ClientSession`.
+- `httpx`: `homeassistant.helpers.httpx_client.get_async_client` to create the `httpx.AsyncClient`.
+- Generic SSL: `homeassistant.util.ssl`
+
+#### load_verify_locations
+
+See [SSLContext.load_default_certs](#load_default_certs)
+
+#### load_cert_chain
+
+See [SSLContext.load_default_certs](#load_default_certs)

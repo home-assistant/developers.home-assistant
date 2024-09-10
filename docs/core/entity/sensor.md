@@ -38,6 +38,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.BATTERY` | % | Percentage of battery that is left
 | `SensorDeviceClass.CO2` | ppm | Concentration of carbon dioxide.
 | `SensorDeviceClass.CO` | ppm | Concentration of carbon monoxide.
+| `SensorDeviceClass.CONDUCTIVITY` | S/cm, mS/cm, µS/cm | Conductivity
 | `SensorDeviceClass.CURRENT` | A, mA | Current
 | `SensorDeviceClass.DATA_RATE` | bit/s, kbit/s, Mbit/s, Gbit/s, B/s, kB/s, MB/s, GB/s, KiB/s, MiB/s, GiB/s | Data rate
 | `SensorDeviceClass.DATA_SIZE` | bit, kbit, Mbit, Gbit, B, kB, MB, GB, TB, PB, EB, ZB, YB, KiB, MiB, GiB, TiB, PiB, EiB, ZiB, YiB | Data size
