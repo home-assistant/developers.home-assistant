@@ -16,9 +16,9 @@ Properties should always only return information from memory and not do I/O (lik
 | -------- | ------------------------------------------ | ------- | -----------------
 | activity | <code>LawnMowerActivity &#124; None</code> | `None`  | Current activity.
 
-## Activities
+## States
 
-| Activity | Description
+| State | Description
 | -------- | -----------
 | `MOWING` | The lawn mower is currently mowing.
 | `DOCKED` | The lawn mower is done mowing and is currently docked.
