@@ -13,7 +13,10 @@ and can be helpful to send notification messages as (but not limited to):
 - a direct message or chat
 - a screen message on a device's LCD display
 
-Unlike a `text` entity the `notify` entity has no state that can be set. Instead it represents the date and time of the last message sent.
+## States
+
+The state of a notify entity is a timestamp, representing the date and time of the last message sent.
+Unlike a `text` entity, the `notify` entity has no state that can be set.
 
 If you want to represent something that has a text value that can be changed (and thus has an actual state), you should use a `text` entity instead.
 
