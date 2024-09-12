@@ -6,6 +6,10 @@ updates:
     interval: weekly
     time: "06:00"
   open-pull-requests-limit: 10
+  groups:
+    docusaurus:
+      patterns:
+      - "@docusaurus/*"
 - package-ecosystem: "github-actions"
   directory: "/"
   schedule:
