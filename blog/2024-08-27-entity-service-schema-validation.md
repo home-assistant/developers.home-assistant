@@ -9,7 +9,7 @@ Registering entity service actions allows integration authors to pass in:
 - A dictionary, which will be converted to a voluptuous schema by passing it to `cv.make_entity_service_schema`
 - A custom voluptuous schema
 
-For the third case, a warning will now be logged when registering an entity action  with a custom schema which does not meet at least one of these criteria:
+For the third case, a warning will now be logged when registering an entity action with a custom schema which does not meet at least one of these criteria:
 - A validator returned by `cv.make_entity_service_schema`
 - A validator returned by `cv.make_entity_service_schema`, wrapped in a `vol.Schema`
 - A validator returned by `cv.make_entity_service_schema`, wrapped in a `vol.All`
