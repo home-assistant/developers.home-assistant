@@ -5,11 +5,13 @@ sidebar_label: Event
 
 Events are signals that are emitted when something happens, for example, when a user presses a physical button like a doorbell or when a button on a remote control is pressed. The event entity captures these events in the physical world and makes them available in Home Assistant as an entity.
 
+An event entity is derived from the  [`homeassistant.components.event.EventEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/event/__init__.py).
+
+## States
+
 The event entity is stateless, meaning you don't have to maintain a state. Instead, you can trigger an event when something in the physical world happens. Home Assistant will keep track of the last event that was emitted and will show that as the current state of the entity.
 
 The main state of the entity is the timestamp of when the last event was emitted, additionally the type of the event and optionally extra state data that was provided with the event are also kept track of.
-
-An event entity is derived from the  [`homeassistant.components.event.EventEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/event/__init__.py).
 
 ## Properties
 
