@@ -60,3 +60,64 @@ Once a wake word is detected, a response is returned like:
   "wake_word_phrase": "okay nabu"
 }
 ```
+
+### Getting the satellite configuration
+
+The current configuration for the satellite, including available and active wake words, can get retrieved with:
+
+```json
+{
+  "type": "assist_satellite/get_configuration",
+  "entity_id": ENTITY_ID
+}
+```
+
+A response will be returned like this:
+
+```json
+{
+  "active_wake_words": [
+    "1234"
+  ],
+  "available_wake_words": [
+    {
+      "id": "1234",
+      "trained_languages": [
+        "en"
+      ],
+      "wake_word": "okay nabu"
+    },
+    {
+      "id": "5678",
+      "trained_languages": [
+        "en"
+      ],
+      "wake_word": "hey jarvis"
+    }
+  ],
+  "max_active_wake_words": 1,
+  "pipeline_entity_id": "select.pipeline_entity",
+  "vad_entity_id": "select.vad_entity"
+}
+```
+
+The `active_wake_words` list contains the ids of wake words from `available_wake_words`.
+
+The `pipeline_entity_id` contains the id of the select entity which controls the pipeline that the device will run.
+The `vad_entity_id` contains the id of the select entity with the voice activity detector (VAD) sensitivity level.
+
+
+### Setting the active wake words
+
+Set the active wake words using:
+
+```json
+{
+  "type": "assist_satellite/set_wake_words",
+  "entity_id": ENTITY_ID,
+  "wake_word_ids": ["1234", "5678"]
+}
+```
+
+The `wake_word_ids` must contain ids from the `available_wake_words` list from the `assist_satellite/get_configuration` command.
+The size of `wake_word_ids` should also not exceed `max_active_wake_words`.
