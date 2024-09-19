@@ -4,7 +4,7 @@ authorURL: https://github.com/chemelli74
 title: "Version compare for Update platform can now be overwritten"
 ---
 
-With the merge of [core PR #124797](https://github.com/home-assistant/core/pull/124797), which landed in Home Assistant Core 2024.10, there is a new method in the update platform: "".
+With the merge of [core PR #124797](https://github.com/home-assistant/core/pull/124797), which landed in Home Assistant Core 2024.10, there is a new method in the update platform: `version_is_newer()`.
 
 Before this change, he compare logic between firmware installed version, new available version and beta version was hardcoded.
 
