@@ -4,7 +4,7 @@ authorURL: https://github.com/emontnemery
 title: "Template.hass is no longer automatically set when rendering templates"
 ---
 
-With the merge of [core PR #89242](https://github.com/home-assistant/core/pull/124656), which landed in Home Assistant Core 2023.4, `Template.hass` will be set on `Template` objects created during schema validation.
+With the merge of [core PR #89242](https://github.com/home-assistant/core/pull/89242), which landed in Home Assistant Core 2023.4, `Template.hass` will be set on `Template` objects created during schema validation.
 
 Before this change, it was necessary to check and set `Template.hass` before rendering templates, and this happened in numerous places throughout the codebase.
 Such code has been removed from Home Assistant Core, which impacts custom integration authors:
