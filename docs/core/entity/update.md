@@ -49,20 +49,21 @@ Supported features are defined by using values in the `UpdateEntityFeature` enum
 
 ### Compare versions
 
-This method should be implemented when needed to override the default version comparison logic:
+This method should be implemented when needed to override the default version comparison logic.
+Here an example:
 
 ```python
 def version_is_newer(self, latest_version: str, installed_version: str) -> bool:
-        """Return True if available version is newer then installed version."""
-        return AwesomeVersion(
-            latest_version,
-            find_first_match=True,
-            ensure_strategy=[AwesomeVersionStrategy.SEMVER],
-        ) > AwesomeVersion(
-            installed_version,
-            find_first_match=True,
-            ensure_strategy=[AwesomeVersionStrategy.SEMVER],
-        )
+    """Return True if latest_version is newer than installed_version."""
+    return AwesomeVersion(
+        latest_version,
+        find_first_match=True,
+        ensure_strategy=[AwesomeVersionStrategy.SEMVER],
+    ) > AwesomeVersion(
+        installed_version,
+        find_first_match=True,
+        ensure_strategy=[AwesomeVersionStrategy.SEMVER],
+    )
 ```
 
 It allows developers to specify custom logic for determining if one version is newer than another. First attempt should be based on the strategies provided by the [AwesomeVersion library](https://github.com/ludeeus/awesomeversion?tab=readme-ov-file#awesomeversion-class).
