@@ -6,7 +6,7 @@ title: "Version compare for Update platform can now be overwritten"
 
 With the merge of [core PR #124797](https://github.com/home-assistant/core/pull/124797), which will land in Home Assistant Core 2024.10, there is a new method in the update platform: `version_is_newer()`.
 
-Before this change, he compare logic between firmware installed version, new available version and beta version was hardcoded.
+Before this change, the compare logic between firmware installed version, new available version and beta version was hardcoded.
 
 Now the new method allows developers to customize this comparison writing their own method.
 Here an example (implemented for Shelly gen1 devices):
