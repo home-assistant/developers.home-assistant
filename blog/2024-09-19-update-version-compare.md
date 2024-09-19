@@ -9,7 +9,7 @@ With the merge of [core PR #124797](https://github.com/home-assistant/core/pull/
 Before this change, the compare logic between firmware installed version, new available version and beta version was hardcoded.
 
 Now the new method allows developers to customize this comparison writing their own method.
-Here an example (implemented for Shelly gen1 devices):
+Here's an example (implemented for Shelly gen1 devices):
 
 ```python
 def version_is_newer(self, latest_version: str, installed_version: str) -> bool:
