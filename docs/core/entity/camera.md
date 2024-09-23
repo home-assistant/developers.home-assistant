@@ -23,6 +23,17 @@ Properties should always only return information from memory and not do I/O (lik
 | motion_detection_enabled | `bool`                              | `False` | Indication of whether the camera has motion detection enabled.                                      |
 | use_stream_for_stills    | `bool`                              | `False` | Determines whether or not to use the `Stream` integration to generate still images                  |
 
+### States
+
+The state is defined by setting it's properties. The resulting state is using the `LockState` enum to return one of the below members.
+
+| Value       | Description                                                        |
+|-------------|--------------------------------------------------------------------|
+| `RECORDING`    | The camera is currently recording.                                 |
+| `STREAMING`   | The camera is currently streaming.                                 |
+| `IDLE` | The camera is currently idle.                                      |
+
+
 ## Supported features
 
 Supported features are defined by using values in the `CameraEntityFeature` enum
