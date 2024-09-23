@@ -30,12 +30,12 @@ Properties should always only return information from memory and not do I/O (lik
 
 The state is defined by setting it's properties. The resulting state is using the `ValveState` enum to return one of the below members.
 
-| Value     | Description
-|-----------|-----------------------------------------------------------------|
-| `OPENING` | The valve is in the process of opening to reach a set position. |
-| `OPEN`    | The valve has reached the open position.                        |
-| `CLOSING` | The valve is in the process of closing to reach a set position. |
-| `CLOSED`  | The valve has reach the closed position.                        |
+| Value    | Description                                                        |
+|----------|--------------------------------------------------------------------|
+| `OPENING`| The valve is in the process of opening to reach a set position.    |
+| `OPEN`   | The valve has reached the open position.                           |
+| `CLOSING`| The valve is in the process of closing to reach a set position.    |
+| `CLOSED` | The valve has reached the closed position.                         |
 
 ## Supported features
 
