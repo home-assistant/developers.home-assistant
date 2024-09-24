@@ -27,11 +27,11 @@ Properties should always only return information from memory and not do I/O (lik
 
 The state is defined by setting the properties above. The resulting state uses the `CameraState` enum to return one of the below members.
 
-| Value      | Description                             |
-|------------|-----------------------------------------|
-| `RECORDING`| The camera is currently recording.      |
-| `STREAMING`| The camera is currently streaming.      |
-| `IDLE`     | The camera is currently idle.           |
+| Value       | Description                             |
+|-------------|-----------------------------------------|
+| `RECORDING` | The camera is currently recording.      |
+| `STREAMING` | The camera is currently streaming.      |
+| `IDLE`      | The camera is currently idle.           |
 
 
 ## Supported features
