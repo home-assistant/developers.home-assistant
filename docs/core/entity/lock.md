@@ -22,6 +22,20 @@ Properties should always only return information from memory and not do I/O (lik
 | is_opening | bool | None | Indication of whether the lock is currently opening. Used to determine `state`.
 | is_open | bool | None | Indication of whether the lock is currently open. Used to determine `state`.
 
+### States
+
+The state is defined by setting the above properties. The resulting state is using the `LockState` enum to return one of the below members.
+
+| Value       | Description                                                        |
+|-------------|--------------------------------------------------------------------|
+| `LOCKED`    | The lock is locked.                                                |
+| `LOCKING`   | The lock is locking.                                               |
+| `UNLOCKING` | The lock is unlocking.                                             |
+| `UNLOCKED`  | The lock is unlocked.                                             |
+| `JAMMED`    | The lock is currently jammed.                                      |
+| `OPENING`   | The lock is opening.                                               |
+| `OPEN`      | The lock is open.                                                  |
+
 ## Supported features
 
 Supported features are defined by using values in the `LockEntityFeature` enum
