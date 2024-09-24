@@ -25,7 +25,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 ### States
 
-The state is defined by setting its properties. The resulting state uses the `CameraState` enum to return one of the below members.
+The state is defined by setting the properties above. The resulting state uses the `CameraState` enum to return one of the below members.
 
 | Value      | Description                             |
 |------------|-----------------------------------------|
