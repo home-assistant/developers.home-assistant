@@ -128,7 +128,7 @@ The translation for selectors are defined under the `selector` key. It supports 
 The translations of service actions strings are defined under the `services` key.
 
 It supports translating the `name` and `description` of each action,
-`name` and `description` of each action's `fields`, and the `name` of
+`name` and `description` of each action's `fields`, and the `name` and `description` of
 each collapsible section of fields.
 
 Note that also the translations for `name` and `description` of fields which
