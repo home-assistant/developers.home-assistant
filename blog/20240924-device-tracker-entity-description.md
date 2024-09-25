@@ -6,7 +6,7 @@ title: "Enforce SourceType and add shorthand attributes and EntityDescription to
 
 The `source_type` property of device_tracker entities is now always expected to be a `SourceType` enum value. Standard strings are no longer valid.
 
-`TrackerEntity` and `ScannerEntity` now have a dedicated `ScannerEntityDescription` adnd `TrackerEntityDescription`, which need to be used as base class when associating an `EntityDescription` to the `Entity`.
+`TrackerEntity` and `ScannerEntity` now have a dedicated `ScannerEntityDescription` and `TrackerEntityDescription`, which need to be used as base class when associating an `EntityDescription` to the `Entity`.
 
 The `source_type` for these entities now also defaults to `SourceType.GPS` and `SourceType.ROUTER`, and it may be possible to drop the overriding property.
 
