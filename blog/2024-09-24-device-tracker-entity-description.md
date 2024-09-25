@@ -21,3 +21,5 @@ The following shorthand attributes have also been added:
 - `ScannerEntity._attr_ip_address`
 - `ScannerEntity._attr_mac_address`
 - `ScannerEntity._attr_source_type` (defaults to `SourceType.ROUTER`)
+
+More details can be found in the [device-tracker documentation](/docs/core/entity/device-tracker).
