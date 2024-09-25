@@ -17,10 +17,6 @@ Derive a platform entity from [`homeassistant.components.device_tracker.config_e
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
-:::caution
-ScannerEntity does not support attribute shorthand for [property implementation](../entity.md#entity-class-or-instance-attributes)
-:::
-
 | Name          | Type                         | Default      | Description                                           |
 | ------------- | ---------------------------- | ------------ | ----------------------------------------------------- |
 | battery_level | <code>int &#124; None</code> | `None`       | The battery level of the device.                      |
@@ -46,10 +42,6 @@ Derive a platform entity from [`homeassistant.components.device_tracker.config_e
 
 :::tip
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
-:::
-
-:::caution
-TrackerEntity does not support attribute shorthand for [property implementation](../entity.md#entity-class-or-instance-attributes)
 :::
 
 | Name              | Type                           | Default      | Description                                           |
