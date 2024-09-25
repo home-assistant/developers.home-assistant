@@ -139,20 +139,6 @@ The Unique ID can be used to update the config entry data when device access det
 - Hostname if it can be changed by the user
 - URL
 
-### Unignoring
-
-Your configuration flow can add support to re-discover the previously ignored entry by implementing the unignore step in the config flow.
-
-```python
-async def async_step_unignore(self, user_input):
-    unique_id = user_input["unique_id"]
-    await self.async_set_unique_id(unique_id)
-
-    # TODO: Discover devices and find the one that matches the unique ID.
-
-    return self.async_show_form(…)
-```
-
 ## Discovery steps
 
 When an integration is discovered, their respective discovery step is invoked (ie `async_step_dhcp` or `async_step_zeroconf`) with the discovery information. The step will have to check the following things:
