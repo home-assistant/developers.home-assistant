@@ -73,7 +73,11 @@ A config flow can attach a unique ID, which must be a string, to a config flow t
 Call inside a config flow step:
 
 ```python
+# Assign a unique ID to the flow, abort the flow if another flow with the
+same unique ID is in progress
 await self.async_set_unique_id(device_unique_id)
+# Abort the flow if the integration already has a config entry with the
+same unique ID as this flow
 self._abort_if_unique_id_configured()
 ```
 
