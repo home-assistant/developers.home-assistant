@@ -79,6 +79,8 @@ the integration manifest. In that case, the `user` step will be called when the 
 Alternatively, if an integration can't get a unique ID all the time (e.g., multiple devices, some have one, some don't), a helper is available
 that still allows for discovery, as long as there aren't any instances of the integrations configured yet.
 
+Here's an example of how to handle discovery where a unique ID is not always available:
+
 ```python
 if device_unique_id:
     await self.async_set_unique_id(device_unique_id)
@@ -93,8 +95,8 @@ When a unique ID is set, the flow will immediately abort if another flow is in p
 Call inside a config flow step:
 
 ```python
-# Assign a unique ID to the flow, this automatically
-# aborts the flow if another flow with the same unique ID is in progress
+# Assign a unique ID to the flow and abort the flow
+# if another flow with the same unique ID is in progress
 await self.async_set_unique_id(device_unique_id)
 
 # Abort the flow if a config entry with the same unique ID exists
