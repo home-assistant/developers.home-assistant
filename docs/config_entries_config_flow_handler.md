@@ -92,7 +92,7 @@ If a unique ID isn't available, alternatively, the `bluetooth`, `dhcp`, `zerocon
 the integration manifest. In that case, the `user` step will be called when the item is discovered.
 
 Alternatively, if an integration can't get a unique ID all the time (e.g., multiple devices, some have one, some don't), a helper is available
-that still allows for discovery, as long as there aren't any instances of the integrations configured yet.
+that still allows for discovery, as long as there aren't any instances of the integration configured yet.
 
 Here's an example of how to handle discovery where a unique ID is not always available:
 
