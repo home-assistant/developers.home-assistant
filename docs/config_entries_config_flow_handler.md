@@ -68,12 +68,38 @@ There are a few step names reserved for system use:
 
 ## Unique IDs
 
-A config flow can attach a unique ID, which must be a string, to a config flow to avoid the same device being set up twice. When a unique ID is set, it will immediately abort if another flow is in progress for this unique ID. You can also quickly abort if there is already an existing config entry for this ID. Config entries will get the unique ID of the flow that creates them.
+A config flow can attach a unique ID, which must be a string, to a config flow to avoid the same device being set up twice.
+
+By setting a unique ID, users will have the option to ignore the discovery of your config entry. That way, they won't be bothered about it anymore.
+If the integration uses Bluetooth, DHCP, HomeKit, Zeroconf/mDNS, USB, or SSDP/uPnP to be discovered, supplying a unique ID is required.
+
+If a unique ID isn't available, alternatively, the `bluetooth`, `dhcp`, `zeroconf`, `hassio`, `homekit`, `ssdp`, `usb`, and `discovery` steps can be omitted, even if they are configured in
+the integration manifest. In that case, the `user` step will be called when the item is discovered.
+
+Alternatively, if an integration can't get a unique ID all the time (e.g., multiple devices, some have one, some don't), a helper is available
+that still allows for discovery, as long as there aren't any instances of the integrations configured yet.
+
+Here's an example of how to handle discovery where a unique ID is not always available:
+
+```python
+if device_unique_id:
+    await self.async_set_unique_id(device_unique_id)
+else:
+    await self._async_handle_discovery_without_unique_id()
+```
+
+### Managing Unique IDs in Config Flows
+
+When a unique ID is set, the flow will immediately abort if another flow is in progress for this unique ID. You can also quickly abort if there is already an existing config entry for this ID. Config entries will get the unique ID of the flow that creates them.
 
 Call inside a config flow step:
 
 ```python
+# Assign a unique ID to the flow and abort the flow
+# if another flow with the same unique ID is in progress
 await self.async_set_unique_id(device_unique_id)
+
+# Abort the flow if a config entry with the same unique ID exists
 self._abort_if_unique_id_configured()
 ```
 
@@ -87,21 +113,6 @@ Should the config flow then abort, the text resource with the key `already_confi
     }
   }
 }
-```
-
-By setting a unique ID, users will have the option to ignore the discovery of your config entry. That way, they won't be bothered about it anymore.
-If the integration uses Bluetooth, DHCP, HomeKit, Zeroconf/mDNS, USB, or SSDP/uPnP to be discovered, supplying a unique ID is required.
-
-If a unique ID isn't available, alternatively, the `bluetooth`, `dhcp`, `zeroconf`, `hassio`, `homekit`, `ssdp`, `usb`, and `discovery` steps can be omitted, even if they are configured in
-the integration manifest. In that case, the `user` step will be called when the item is discovered.
-
-Alternatively, if an integration can't get a unique ID all the time (e.g., multiple devices, some have one, some don't), a helper is available
-that still allows for discovery, as long as there aren't any instances of the integrations configured yet.
-
-```python
-if device_unique_id:
-    await self.async_set_unique_id(device_unique_id)
-await self._async_handle_discovery_without_unique_id()
 ```
 
 ### Unique ID requirements
