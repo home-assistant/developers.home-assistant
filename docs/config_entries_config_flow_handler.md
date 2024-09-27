@@ -85,7 +85,7 @@ Here's an example of how to handle discovery where a unique ID is not always ava
 if device_unique_id:
     await self.async_set_unique_id(device_unique_id)
 else:
-  await self._async_handle_discovery_without_unique_id()
+    await self._async_handle_discovery_without_unique_id()
 ```
 
 ### Managing Unique IDs in Config Flows
