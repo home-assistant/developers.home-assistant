@@ -3,6 +3,9 @@ title: "Frontend development"
 sidebar_label: "Development"
 ---
 
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
 The Home Assistant frontend is built using web components. For more background about our technology choices, [see this blog post](https://developers.home-assistant.io/blog/2019/05/22/internet-of-things-and-the-modern-web.html).
 
 :::caution
@@ -53,19 +56,30 @@ The change to `.devcontainer/devcontainer.json` should be excluded from any PR a
 :::
 
 ### Installing Node.js
+<Tabs groupId="operating-systems">
+  <TabItem value="nvm" label="NVM">
+    Node.js is required to build the frontend. The preferred method of installing node.js is with [nvm](https://github.com/nvm-sh/nvm). Install nvm using the instructions in the [README](https://github.com/nvm-sh/nvm#install--update-script), and install the correct node.js by running the following command inside the home-assistant/frontend repository:
 
-Node.js is required to build the frontend. The preferred method of installing node.js is with [nvm](https://github.com/nvm-sh/nvm). Install nvm using the instructions in the [README](https://github.com/nvm-sh/nvm#install--update-script), and install the correct node.js by running the following command:
+    ```shell
+    nvm install
+    ```
 
-```shell
-nvm install
-```
+    [Yarn](https://yarnpkg.com/en/) is used as the package manager for node modules. [Install yarn using the instructions here.](https://yarnpkg.com/getting-started/install)
+  </TabItem>
+  <TabItem value="mise" label="Mise">
+    Node.js are required to build the frontend and [Yarn](https://yarnpkg.com/en/) is used as the package manager for node modules.
+    
+    You can install both with [mise](https://mise.jdx.dev/). Install mise using the [getting started](https://mise.jdx.dev/getting-started.html) instructions, and install the correct node.js and yarn version by running the following command inside the home-assistant/frontend repository:
 
-[Yarn](https://yarnpkg.com/en/) is used as the package manager for node modules. [Install yarn using the instructions here.](https://yarnpkg.com/getting-started/install)
+    ```shell
+    mise install
+    ```  
+  </TabItem>
+</Tabs>
 
 Next, development dependencies need to be installed to bootstrap the frontend development environment. First activate the right Node version and then download all the dependencies:
 
 ```shell
-nvm use
 script/bootstrap
 script/setup_translations
 ```
