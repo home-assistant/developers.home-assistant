@@ -1,48 +1,77 @@
 ---
-title: "Assist satellites"
+title: "Assist satellite entity"
+sidebar_label: Assist satellite
 ---
 
 An Assist Satellite entity represents the Assist pipeline-powered voice assistant capabilities of a device. Devices with such entities can allow users to control Home Assistant using their voice.
 
-## Base entity
+An Assist satellite entity is derived from the [`homeassistant.components.assist_satellite.AssistSatelliteEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/assist_satellite/__init__.py).
 
-The `AssistSatelliteEntity` base class must be inherited when implementing the `assist_satellite` platform. For example:
+## Properties
 
-```python
-from homeassistant.components.assist_satellite import AssistSatelliteEntity
-from homeassistant.components.assist_pipeline import PipelineEvent
+| Name                 | Type                   | Default           | Description                                                           |
+|----------------------|------------------------|-------------------|-----------------------------------------------------------------------|
+| `pipeline_entity_id` | <code>str; None</code> | <code>None</code> | Id of the `select` entity with the [pipeline id](/docs/voice/pipelines/) or `None`. |
+| `vad_sensitivity_entity_id` | <code>str; None</code> | <code>None</code> | Id of the `select` entity with the [voice activity detection sensitivity](https://github.com/home-assistant/core/blob/dev/homeassistant/components/assist_pipeline/vad.py) or `None`. |
+| `tts_options` | <code>dict; None</code> | <code>None</code> | Options passed to the [text-to-speech system](https://www.home-assistant.io/integrations/tts/) when responding. |
 
-class MyAssistSatelliteEntity(AssistSatelliteEntity):
-    def on_pipeline_event(self, event: PipelineEvent) -> None:
-        """Handle events from async_accept_pipeline_from_satellite."""
-        ...
-```
 
-You must call the `tts_response_finished()` method on your entity when a text-to-speech response has finished playing out of the speaker (this is not the same as the `TTS_END` pipeline event). This will ensure that the entity's state is `responding` only while the response is being spoken.
+## States
 
-If your satellite supports announcements, add it to your supported features and override `async_announce`:
+The state of an `AssistSatelliteEntity` follows its currently running [pipeline](/docs/voice/pipelines/). The `AssistSatelliteState` enum stores the possible states.
 
-```python
-from homeassistant.components.assist_satellite import AssistSatelliteEntity, AssistSatelliteEntityFeature
+:::tip
+You must call the `tts_response_finished` method on your entity when a text-to-speech response **has finished playing** to return to the `IDLE` state.
+:::
 
-class MyAssistSatelliteEntity(AssistSatelliteEntity):
-    _attr_supported_features = AssistSatelliteEntityFeature.ANNOUNCE
+| Constant     | Description                                                              |
+|--------------|--------------------------------------------------------------------------|
+| `IDLE`       | Device is waiting for user input, such as a wake word or a button press. |
+| `LISTENING`  | Device is streaming audio with the voice command to Home Assistant.      |
+| `PROCESSING` | Home Assistant is processing the voice command.                          |
+| `RESPONDING` | Device is speaking the response.                                         |
 
-    async def async_announce(self, message: str, media_id: str) -> None:
-        """Announce media on the satellite.
+## Supported features
 
-        Should block until the announcement is done playing.
-        """
-        ...
-```
+Supported features are defined by using values in the `AssistSatelliteEntityFeature` enum
+and are combined using the bitwise or (`|`) operator.
 
-The `async_announce` method will receive a resolved `media_id` and the `message` text (if provided). This method must block asynchronously until the announcement has finished playing on the satellite.
+| Value      | Description                                       |
+|------------|---------------------------------------------------|
+| `ANNOUNCE` | Device supports remotely triggered announcements. Override the `async_announce` to play back the provided `media_id` from `AssistSatelliteAnnouncement`. This method should only return once the announcement has finished playing on the device. |
+
+## Methods
+
+### Running a pipeline and handling events
+
+Satellite entities should only run [Assist pipelines](/docs/voice/pipelines/) using the `async_accept_pipeline_from_satellite` method. [Events from the pipeline](/docs/voice/pipelines/#events) are handled by implementing the `on_pipeline_event` method.
+
+The satellite entity's [state](#states) is automatically updated when a pipeline is run, with the exception of `RESPONDING` to `IDLE`. The `tts_response_finished` method must be called by the developer when the satellite has finished speaking the response on the device.
+
+### Get configuration
+
+The `async_get_configuration` method must return a (cached) `AssistSatelliteConfiguration`. If the entity must communicate with the device to retrieve the configuration, this should be during initialization.
+
+A [websocket command](#getting-the-satellite-configuration) is available for getting an entity's configuration.
+
+### Set configuration
+
+The `async_set_configuration` method updates the device's configuration, and must only return once the device's and Home Assistant's `AssistSatelliteConfiguration` are synchronized.
+
+A [websocket command](#setting-the-active-wake-words) is available for setting the active wake words.
+
+### Announcements
+
+If the device has the `ANNOUNCE` [supported feature](#supported-features), then the `async_announce` method should be overridden to announce the provided `media_id` within `AssistSatelliteAnnouncement`.
+The `async_announce` method should only return when the announcement is finished playing on the device.
+
+An [announce action](https://home-assistant.io/integrations/assist_satellite#action-assist_satelliteannounce) is available for automating announcements.
 
 ## WebSocket API
 
 ### Intercepting wake words
 
-The integration offers a websocket API  to intercept wake word detections and announce them to the user. This is used by the voice wizard to help the user onboard and get familiar with the wake word.
+The integration offers a websocket API to intercept wake word detections and announce them to the user. This is used by the voice wizard to help the user onboard and get familiar with the wake word.
 
 ```json
 {
