@@ -14,7 +14,7 @@ def version_is_newer(self, latest_version: str, installed_version: str) -> bool:
     return AwesomeVersion(latest_version) > installed_version
 ```
 
-Now the new method allows developers to customize this comparison writing their own method.
+Now the new method allows developers to customize this comparison, writing their own method.
 Here's an example (implemented for Shelly gen1 devices):
 
 ```python
