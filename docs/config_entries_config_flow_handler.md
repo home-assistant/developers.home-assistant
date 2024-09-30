@@ -35,12 +35,12 @@ Once you have updated your manifest and created the `config_flow.py`, you will n
 
 The title of a config flow can be influenced by integrations, and is determined in this priority order:
 
-1. If `title_placeholders` is set to a non empty dictionary in the config flow, it will be used to dynamically calculate the config flow's title. Reauth and reconfigure flows automatically set `title_placeholders` to `{"name": config_entry_title}`.
-  1. If the integration provides a localized `flow_title`, that will be used, with any translation placeholders substituted from the `title_placeholders`
-  2. If the integration does not provide a `flow_title` but the `title_placeholders` includes a `name`, the `name` will be used as the flow's title
-2. Set the flow title to the the integration's localized `title`, if it exists
-3. Set the flow title to the the integration manifest's `name`, if it exists
-4. Set the flow title to the the integration's domain
+1. If `title_placeholders` is set to a non-empty dictionary in the config flow, it will be used to dynamically calculate the config flow's title. Reauth and reconfigure flows automatically set `title_placeholders` to `{"name": config_entry_title}`.
+   1. If the integration provides a localized `flow_title`, that will be used, with any translation placeholders substituted from the `title_placeholders`
+   2. If the integration does not provide a `flow_title` but the `title_placeholders` includes a `name`, the `name` will be used as the flow's title
+2. Set the flow title to the integration's localized `title`, if it exists
+3. Set the flow title to the integration manifest's `name`, if it exists
+4. Set the flow title to the integration's domain
 
 Note that this priority order means that:
 - A localized `flow_title` is ignored if the `title_placeholders` dictionary is missing or empty, even if the localized `flow_title` does not have any placeholders
