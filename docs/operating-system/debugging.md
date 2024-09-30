@@ -15,7 +15,7 @@ This section is not for end users. End users should use the [SSH add-on] to SSH 
 SSH access through the [SSH add-on] (on port 22 by default) only grants limited privileges, and you will be asked for a username and password when typing the 'login' command. Follow the steps below to enable a separate SSH access on port 22222 that works independently of the add-on and gives you direct access to the Home Assistant OS (the "host") with full privileges.
 :::
 
-1. Use a USB drive with a partition named `CONFIG` (case sensitive) formatted as FAT, ext4, or NTFS. Create an `authorized_keys` text file (without a file extension) containing your public key(s), one per line, and place it in the root of the USB drive's `CONFIG` partition. The file must use POSIX-standard newline control characters (LF), not Windows ones (CR LF), and needs to be ASCII character encoded (i.e. mustn't contain any special characters in the comments).
+1. Use a USB drive with a filesystem (sometime called partition) named `CONFIG` (case sensitive) formatted as FAT, ext4, or NTFS. Create an `authorized_keys` text file (without a file extension) containing your public key(s), one per line, and place it in the root of the USB drive's `CONFIG` filesystem. The file must use POSIX-standard newline control characters (LF), not Windows ones (CR LF), and needs to be ASCII character encoded (i.e. mustn't contain any special characters in the comments).
 
    See [Generating SSH Keys](#generating-ssh-keys) section below if you need help generating keys.
 
@@ -40,7 +40,7 @@ You will be logged in as root with the `/root` folder set as the working directo
 
 ## Disabling SSH access to the host
 
-1. Use a USB drive with a partition named `CONFIG` (case sensitive) formatted as FAT, ext4, or NTFS. Remove any existing `authorized_keys` file from the root of that partition.
+1. Use a USB drive with a filesystem named `CONFIG` (case sensitive) formatted as FAT, ext4, or NTFS. Remove any existing `authorized_keys` file from the root of that filesystem.
 
 1. When the Home Assistant OS device is rebooted with this drive inserted, any existing SSH public keys will be removed and SSH access on port 22222 will be disabled.
 
