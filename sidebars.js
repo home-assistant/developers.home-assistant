@@ -17,7 +17,10 @@ module.exports = {
     "add-ons/repository",
     "add-ons/security",
   ],
-  Overview: ["architecture_index"],
+  Overview: [
+    "architecture_index",
+    "setup_devcontainer_environment"
+  ],
   Frontend: [
     "frontend",
     "frontend/architecture",
