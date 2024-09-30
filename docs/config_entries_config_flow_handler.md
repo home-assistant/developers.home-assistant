@@ -178,7 +178,7 @@ To get started, run `python3 -m script.scaffold config_flow_oauth2` and follow t
 
 ## Translations
 
-Translations for the config flow handlers are defined under the `config` key in the component translation file `strings.json`. Example of the Hue component:
+[Translations for the config flow](/docs/internationalization/core#config--options) handlers are defined under the `config` key in the component translation file `strings.json`. Example of the Hue component:
 
 ```json
 {
