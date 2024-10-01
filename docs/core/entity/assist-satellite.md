@@ -38,7 +38,7 @@ and are combined using the bitwise or (`|`) operator.
 
 | Value      | Description                                       |
 |------------|---------------------------------------------------|
-| `ANNOUNCE` | Device supports remotely triggered announcements. Override the `async_announce` to play back the provided `media_id` from `AssistSatelliteAnnouncement`. This method should only return once the announcement has finished playing on the device. |
+| `ANNOUNCE` | Device supports remotely triggered announcements. Implement the `async_announce` method to play back the provided `media_id` from `AssistSatelliteAnnouncement`. This method should only return once the announcement has finished playing on the device. |
 
 ## Methods
 
@@ -62,7 +62,7 @@ A [websocket command](#setting-the-active-wake-words) is available for setting t
 
 ### Announcements
 
-If the device has the `ANNOUNCE` [supported feature](#supported-features), then the `async_announce` method should be overridden to announce the provided `media_id` within `AssistSatelliteAnnouncement`.
+If the device has the `ANNOUNCE` [supported feature](#supported-features), then the `async_announce` method should be implemented to announce the provided `media_id` within `AssistSatelliteAnnouncement`.
 The `async_announce` method should only return when the announcement is finished playing on the device.
 
 An [announce action](https://home-assistant.io/integrations/assist_satellite#action-assist_satelliteannounce) is available for automating announcements.
