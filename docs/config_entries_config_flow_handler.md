@@ -325,14 +325,18 @@ class OAuth2FlowHandler(
 
     reauth_entry: ConfigEntry | None = None
 
-    async def async_step_reauth(self, user_input=None):
+    async def async_step_reauth(
+        self, entry_data: Mapping[str, Any]
+    ) -> ConfigFlowResult:
         """Perform reauth upon an API authentication error."""
         self.reauth_entry = self.hass.config_entries.async_get_entry(
             self.context["entry_id"]
         )
         return await self.async_step_reauth_confirm()
 
-    async def async_step_reauth_confirm(self, user_input=None):
+    async def async_step_reauth_confirm(
+        self, user_input: dict[str, str] | None = None
+    ) -> ConfigFlowResult:
         """Dialog that informs the user that reauth is required."""
         if user_input is None:
             return self.async_show_form(
