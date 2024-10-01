@@ -293,6 +293,10 @@ class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         )
 ```
 
+Please note that checking whether you are in a reconfigure flow can be done using `if self.source == SOURCE_RECONFIGURE`.
+It is also possible to access the corresponding config entry using `self._get_reconfigure_entry()`.
+
+
 ## Reauthentication
 
 Gracefully handling authentication errors such as invalid, expired, or revoked tokens is needed to advance on the [Integration Quality Scale](integration_quality_scale_index.md). This example of how to add reauth to the OAuth flow created by `script.scaffold` following the pattern in [Building a Python library](api_lib_auth.md#oauth2).
@@ -389,6 +393,9 @@ See [Translations](#translations) local development instructions.
 Authentication failures (such as a revoked oauth token) can be a little tricky to manually test. One suggestion is to make a copy of `config/.storage/core.config_entries` and manually change the values of `access_token`, `refresh_token`, and `expires_at` depending on the scenario you want to test. You can then walk advance through the reauth flow and confirm that the values get replaced with new valid tokens.
 
 Automated tests should verify that the reauth flow updates the existing config entry and does not create additional entries.
+
+Please note that checking whether you are in a reauthentication flow can be done using `if self.source == SOURCE_REAUTH`.
+It is also possible to access the corresponding config entry using `self._get_reauth_entry()`.
 
 ## Testing your config flow
 
