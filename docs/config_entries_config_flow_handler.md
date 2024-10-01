@@ -282,7 +282,7 @@ class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return await async_step_reconfigure_confirm()
 
     async def async_step_reconfigure_confirm(
-        self, user_input: dict[str, str] | None = None
+        self, user_input: dict[str, Any] | None = None
     ) -> ConfigFlowResult:
         if user_input is not None:
             pass  # TODO: process user input
