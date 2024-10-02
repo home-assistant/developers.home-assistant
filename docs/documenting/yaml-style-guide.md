@@ -227,14 +227,14 @@ list `[]` by default.
 ```yaml
 # Good
 - alias: "Test"
-    trigger:
-      -  platform: state
+    triggers:
+      -  trigger: state
          entity_id: binary_sensor.motion
 
 # Bad
 - alias: "Test"
-    trigger:
-      -  platform: state
+    triggers:
+      -  trigger: state
          entity_id: binary_sensor.motion
     condition: []
 ```
@@ -251,8 +251,8 @@ as is makes our examples more readable:
 - Area IDs
 - Platform types (e.g., `light`, `switch`)
 - Condition types (e.g., `numeric_state`, `state`)
-- Trigger platforms (e.g., `state`, `time`)
-- Service action names (e.g., `light.turn_on`)
+- Trigger types (e.g., `state`, `time`)
+- Action names (e.g., `light.turn_on`)
 - Device classes (e.g., `problem`, `motion`)
 - Event names
 - Values that accept a limited set of possible, hardcoded values.
@@ -260,11 +260,11 @@ as is makes our examples more readable:
 
 ```yaml
 # Good
-action:
-  - service: notify.frenck
+actions:
+  - action: notify.frenck
     data:
       message: "Hi there!"
-  - service: light.turn_on
+  - action: light.turn_on
     target:
       entity_id: light.office_desk
       area_id: living_room
@@ -272,8 +272,8 @@ action:
       transition: 10
 
 # Bad
-action:
-  - service: "notify.frenck"
+actions:
+  - action: "notify.frenck"
     data:
       message: Hi there!
 ```
@@ -293,24 +293,24 @@ most flexible of the options available and is the one that should be used.
 
 ```yaml
 # Good
-action:
-  - service: light.turn_on
+actions:
+  - action: light.turn_on
     target:
       entity_id: light.living_room
-  - service: light.turn_on
+  - action: light.turn_on
     target:
       area_id: light.living_room
-  - service: light.turn_on
+  - action: light.turn_on
     target:
       area_id: living_room
       entity_id: light.office_desk
       device_id: 21349287492398472398
 
 # Bad
-action:
-  - service: light.turn_on
+actions:
+  - action: light.turn_on
     entity_id: light.living_room
-  - service: light.turn_on
+  - action: light.turn_on
      data:
        entity_id: light.living_room
 ```
@@ -357,14 +357,14 @@ copy and paste a single item into your own code.
 
 ```yaml
 # Good
-action:
-  - service: light.turn_on
+actions:
+  - action: light.turn_on
     target:
       entity_id: light.living_room
 
 # Bad
-action:
-  service: light.turn_on
+actions:
+  action: light.turn_on
   target:
     entity_id: light.living_room
 ```
@@ -381,14 +381,14 @@ Avoiding templates in general removes the need of additional escaping.
 
 ```yaml
 # Good
-condition:
+conditions:
   - condition: numeric_state
     entity_id: sun.sun
     attribute: elevation
     below: 4
 
 # Bad
-condition:
+conditions:
   - condition: template
     value_template: "{{ state_attr('sun.sun', 'elevation') < 4 }}"
 ```
@@ -434,10 +434,10 @@ cleaner syntax.
 
 ```yaml
 # Good
-condition: "{{ some_value == some_other_value }}" 
+conditions: "{{ some_value == some_other_value }}" 
 
 # Bad
-condition:
+conditions:
   - condition: template
     value_template: "{{ some_value == some_other_value }}"
 ```
@@ -449,12 +449,12 @@ readability unclear, the use of additional parentheses is recommended.
 
 ```yaml
 # Good
-condition:
+conditions:
   - "{{ some_value | float }}" 
   - "{{ some_value == (some_other_value | some_filter) }}" 
 
 # Bad
-condition:
+conditions:
   - "{{ some_value == some_other_value|some_filter }}" 
   - "{{ some_value == (some_other_value|some_filter) }}"
 ```
