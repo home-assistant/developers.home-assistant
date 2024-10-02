@@ -276,14 +276,7 @@ import voluptuous as vol
 class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     """Config flow for Example integration."""
 
-    async def async_step_reconfigure(
-        self, entry_data: Mapping[str, Any]
-    ) -> ConfigFlowResult:
-        return await async_step_reconfigure_confirm()
-
-    async def async_step_reconfigure_confirm(
-        self, user_input: dict[str, Any] | None = None
-    ) -> ConfigFlowResult:
+    async def async_step_reconfigure(self, user_input: dict[str, Any] | None = None):
         if user_input is not None:
             pass  # TODO: process user input
 
