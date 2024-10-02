@@ -334,15 +334,10 @@ class OAuth2FlowHandler(
 ):
     """Config flow to handle OAuth2 authentication."""
 
-    reauth_entry: ConfigEntry | None = None
-
     async def async_step_reauth(
         self, entry_data: Mapping[str, Any]
     ) -> ConfigFlowResult:
         """Perform reauth upon an API authentication error."""
-        self.reauth_entry = self.hass.config_entries.async_get_entry(
-            self.context["entry_id"]
-        )
         return await self.async_step_reauth_confirm()
 
     async def async_step_reauth_confirm(
@@ -358,9 +353,9 @@ class OAuth2FlowHandler(
 
     async def async_oauth_create_entry(self, data: dict) -> dict:
         """Create an oauth config entry or update existing entry for reauth."""
-        if self.reauth_entry:
+        if self.source == SOURCE_REAUTH:
             return self.async_update_reload_and_abort(
-                self.reauth_entry,
+                self._get_reauth_entry(),
                 data=data,
             )
         return await super().async_oauth_create_entry(data)
