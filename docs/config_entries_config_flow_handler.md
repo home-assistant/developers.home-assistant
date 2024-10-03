@@ -92,7 +92,7 @@ If a unique ID isn't available, alternatively, the `bluetooth`, `dhcp`, `zerocon
 the integration manifest. In that case, the `user` step will be called when the item is discovered.
 
 Alternatively, if an integration can't get a unique ID all the time (e.g., multiple devices, some have one, some don't), a helper is available
-that still allows for discovery, as long as there aren't any instances of the integrations configured yet.
+that still allows for discovery, as long as there aren't any instances of the integration configured yet.
 
 Here's an example of how to handle discovery where a unique ID is not always available:
 
@@ -170,6 +170,11 @@ The Unique ID can be used to update the config entry data when device access det
 When an integration is discovered, their respective discovery step is invoked (ie `async_step_dhcp` or `async_step_zeroconf`) with the discovery information. The step will have to check the following things:
 
 - Make sure there are no other instances of this config flow in progress of setting up the discovered device. This can happen if there are multiple ways of discovering that a device is on the network.
+  - In most cases, it's enough to set the unique ID on the flow and check if there's already a config entry with the same unique ID as explained in the section about [managing unique IDs in config flows](#managing-unique-ids-in-config-flows)
+  - In some cases, a unique ID can't be determined, or the unique ID is ambiguous because different discovery sources may have different ways to calculate it. In such cases:
+    1. Implement the method `def is_matching(self, other_flow: Self) -> bool` on the flow.
+    2. Call `hass.config_entries.flow.async_has_matching_flow(self)`.
+    3. Your flow's `is_matching` method will then be called once for each other ongoing flow.
 - Make sure that the device is not already set up.
 - Invoking a discovery step should never result in a finished flow and a config entry. Always confirm with the user.
 
