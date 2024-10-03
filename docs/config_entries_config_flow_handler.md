@@ -291,6 +291,10 @@ class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         )
 ```
 
+Please note that checking whether you are in a reconfigure flow can be done using `if self.source == SOURCE_RECONFIGURE`.
+It is also possible to access the corresponding config entry using `self._get_reconfigure_entry()`.
+
+
 ## Reauthentication
 
 Gracefully handling authentication errors such as invalid, expired, or revoked tokens is needed to advance on the [Integration Quality Scale](integration_quality_scale_index.md). This example of how to add reauth to the OAuth flow created by `script.scaffold` following the pattern in [Building a Python library](api_lib_auth.md#oauth2).
@@ -328,15 +332,10 @@ class OAuth2FlowHandler(
 ):
     """Config flow to handle OAuth2 authentication."""
 
-    reauth_entry: ConfigEntry | None = None
-
     async def async_step_reauth(
         self, entry_data: Mapping[str, Any]
     ) -> ConfigFlowResult:
         """Perform reauth upon an API authentication error."""
-        self.reauth_entry = self.hass.config_entries.async_get_entry(
-            self.context["entry_id"]
-        )
         return await self.async_step_reauth_confirm()
 
     async def async_step_reauth_confirm(
@@ -352,9 +351,9 @@ class OAuth2FlowHandler(
 
     async def async_oauth_create_entry(self, data: dict) -> dict:
         """Create an oauth config entry or update existing entry for reauth."""
-        if self.reauth_entry:
+        if self.source == SOURCE_REAUTH:
             return self.async_update_reload_and_abort(
-                self.reauth_entry,
+                self._get_reauth_entry(),
                 data=data,
             )
         return await super().async_oauth_create_entry(data)
@@ -387,6 +386,9 @@ See [Translations](#translations) local development instructions.
 Authentication failures (such as a revoked oauth token) can be a little tricky to manually test. One suggestion is to make a copy of `config/.storage/core.config_entries` and manually change the values of `access_token`, `refresh_token`, and `expires_at` depending on the scenario you want to test. You can then walk advance through the reauth flow and confirm that the values get replaced with new valid tokens.
 
 Automated tests should verify that the reauth flow updates the existing config entry and does not create additional entries.
+
+Please note that checking whether you are in a reauthentication flow can be done using `if self.source == SOURCE_REAUTH`.
+It is also possible to access the corresponding config entry using `self._get_reauth_entry()`.
 
 ## Testing your config flow
 
