@@ -302,6 +302,7 @@ Automated tests should verify that the reconfigure flow updates the existing con
 Checking whether you are in a reconfigure flow can be done using `if self.source == SOURCE_RECONFIGURE`.
 It is also possible to access the corresponding config entry using `self._get_reconfigure_entry()`.
 
+
 ## Reauthentication
 
 Gracefully handling authentication errors such as invalid, expired, or revoked tokens is needed to advance on the [Integration Quality Scale](integration_quality_scale_index.md). This example of how to add reauth to the OAuth flow created by `script.scaffold` following the pattern in [Building a Python library](api_lib_auth.md#oauth2).
