@@ -83,6 +83,14 @@ sudo dnf update
 sudo dnf install python3-pip python3-devel python3-virtualenv autoconf openssl-devel libxml2-devel libxslt-devel libjpeg-turbo-devel libffi-devel systemd-devel zlib-devel pkgconf-pkg-config libavformat-free-devel libavcodec-free-devel libavdevice-free-devel libavutil-free-devel libswscale-free-devel ffmpeg-free-devel libavfilter-free-devel ffmpeg-free gcc gcc-c++ cmake
 ```
 
+### Developing on Arch / Manjaro
+
+Install the core dependencies.
+
+```shell
+sudo pacman -Sy base-devel python python-pip python-virtualenv autoconf libxml2 libxslt libjpeg-turbo libffi systemd zlib pkgconf ffmpeg gcc cmake
+```
+
 ### Developing on Windows
 
 To develop on Windows, you will need to use the Linux subsystem (WSL). Follow the [WSL installation instructions](https://learn.microsoft.com/windows/wsl/install) and install Ubuntu from the Windows Store. Once you're able to access Linux, follow the Linux instructions.
