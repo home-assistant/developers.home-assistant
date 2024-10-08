@@ -12,4 +12,4 @@ There is a one-year deprecation period, and the constants will stop working from
 
 As the `state` property is not meant to be overwritten, in most cases this change will only affect other Entity properties or tests rather than the `state` property.
 
-More details can be found in the [cover documentation](/docs/core/entity/cover).
+More details can be found in the [cover documentation](/docs/core/entity/cover#states).
