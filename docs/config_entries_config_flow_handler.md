@@ -291,8 +291,9 @@ class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         )
 ```
 
-Please note that checking whether you are in a reconfigure flow can be done using `if self.source == SOURCE_RECONFIGURE`.
+Checking whether you are in a reconfigure flow can be done using `if self.source == SOURCE_RECONFIGURE`.
 It is also possible to access the corresponding config entry using `self._get_reconfigure_entry()`.
+Ensuring that the `unique_id` is unchanged should be done using `await self.async_set_unique_id` followed by `self._abort_if_unique_id_mismatch()`.
 
 
 ## Reauthentication
@@ -387,8 +388,10 @@ Authentication failures (such as a revoked oauth token) can be a little tricky t
 
 Automated tests should verify that the reauth flow updates the existing config entry and does not create additional entries.
 
-Please note that checking whether you are in a reauthentication flow can be done using `if self.source == SOURCE_REAUTH`.
+Checking whether you are in a reauth flow can be done using `if self.source == SOURCE_REAUTH`.
 It is also possible to access the corresponding config entry using `self._get_reauth_entry()`.
+Ensuring that the `unique_id` is unchanged should be done using `await self.async_set_unique_id` followed by `self._abort_if_unique_id_mismatch()`.
+
 
 ## Testing your config flow
 
