@@ -293,7 +293,7 @@ class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
 Checking whether you are in a reconfigure flow can be done using `if self.source == SOURCE_RECONFIGURE`.
 It is also possible to access the corresponding config entry using `self._get_reconfigure_entry()`.
-Ensuring that the `unique_id` is unchanged can be done using `await self.async_set_unique_id` followed by `self._abort_if_unique_id_mismatch()`.
+Ensuring that the `unique_id` is unchanged should be done using `await self.async_set_unique_id` followed by `self._abort_if_unique_id_mismatch()`.
 
 
 ## Reauthentication
