@@ -390,7 +390,7 @@ Automated tests should verify that the reauth flow updates the existing config e
 
 Checking whether you are in a reauth flow can be done using `if self.source == SOURCE_REAUTH`.
 It is also possible to access the corresponding config entry using `self._get_reauth_entry()`.
-Ensuring that the `unique_id` is unchanged can be done using `await self.async_set_unique_id` followed by `self._abort_if_unique_id_mismatch()`.
+Ensuring that the `unique_id` is unchanged should be done using `await self.async_set_unique_id` followed by `self._abort_if_unique_id_mismatch()`.
 
 
 ## Testing your config flow
