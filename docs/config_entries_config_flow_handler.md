@@ -283,13 +283,21 @@ class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     async def async_step_reconfigure(self, user_input: dict[str, Any] | None = None):
         if user_input is not None:
-            pass  # TODO: process user input
+            # TODO: process user input
+            return self.async_update_reload_and_abort(
+                self._get_reauth_entry(),
+                data=data,
+            )
 
         return self.async_show_form(
             step_id="reconfigure",
             data_schema=vol.Schema({vol.Required("input_parameter"): str}),
         )
 ```
+
+On success, reconfiguration flows are expected to update the current entry and abort; they should not create a new entry.
+This is usually done with the `return self.async_update_reload_and_abort` helper.
+Automated tests should verify that the reconfigure flow updates the existing config entry and does not create additional entries.
 
 Checking whether you are in a reconfigure flow can be done using `if self.source == SOURCE_RECONFIGURE`.
 It is also possible to access the corresponding config entry using `self._get_reconfigure_entry()`.
@@ -386,6 +394,8 @@ See [Translations](#translations) local development instructions.
 
 Authentication failures (such as a revoked oauth token) can be a little tricky to manually test. One suggestion is to make a copy of `config/.storage/core.config_entries` and manually change the values of `access_token`, `refresh_token`, and `expires_at` depending on the scenario you want to test. You can then walk advance through the reauth flow and confirm that the values get replaced with new valid tokens.
 
+On success, reauth flows are expected to update the current entry and abort; they should not create a new entry.
+This is usually done with the `return self.async_update_reload_and_abort` helper.
 Automated tests should verify that the reauth flow updates the existing config entry and does not create additional entries.
 
 Checking whether you are in a reauth flow can be done using `if self.source == SOURCE_REAUTH`.
