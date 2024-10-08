@@ -4,7 +4,7 @@ title: "Style guidelines"
 
 Home Assistant enforces quite strict [PEP8 style](https://peps.python.org/pep-0008/) and [PEP 257 (Docstring Conventions)](https://peps.python.org/pep-0257/) compliance on all code submitted.
 
-We use [Black](https://github.com/psf/black) for uncompromised code formatting. Every pull request is automatically checked as part of the linting process and we never merge submissions that diverge.
+We use [Ruff](https://docs.astral.sh/ruff/) for code formatting. Every pull request is automatically checked as part of the linting process and we never merge submissions that diverge.
 
 Summary of the most relevant points:
 
@@ -40,15 +40,6 @@ _LOGGER.error("No route to device: %s", self._resource)
 
 Do not print out API keys, tokens, usernames or passwords (even if they are wrong).
 Also note that `_LOGGER.info` is reserved for the core, use `_LOGGER.debug` for anything else.
-
-### Ordering of imports
-
-Instead of ordering the imports manually, use [`isort`](https://github.com/PyCQA/isort).
-
-```shell
-pip3 install isort
-isort homeassistant/components/sensor/fixer.py
-```
 
 ### Use new style string formatting
 

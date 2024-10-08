@@ -301,6 +301,7 @@ Automated tests should verify that the reconfigure flow updates the existing con
 
 Checking whether you are in a reconfigure flow can be done using `if self.source == SOURCE_RECONFIGURE`.
 It is also possible to access the corresponding config entry using `self._get_reconfigure_entry()`.
+Ensuring that the `unique_id` is unchanged should be done using `await self.async_set_unique_id` followed by `self._abort_if_unique_id_mismatch()`.
 
 
 ## Reauthentication
@@ -399,6 +400,8 @@ Automated tests should verify that the reauth flow updates the existing config e
 
 Checking whether you are in a reauthentication flow can be done using `if self.source == SOURCE_REAUTH`.
 It is also possible to access the corresponding config entry using `self._get_reauth_entry()`.
+Ensuring that the `unique_id` is unchanged should be done using `await self.async_set_unique_id` followed by `self._abort_if_unique_id_mismatch()`.
+
 
 ## Testing your config flow
 
