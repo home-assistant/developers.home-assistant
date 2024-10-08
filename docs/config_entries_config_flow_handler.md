@@ -398,7 +398,7 @@ On success, reauth flows are expected to update the current entry and abort; the
 This is usually done with the `return self.async_update_reload_and_abort` helper.
 Automated tests should verify that the reauth flow updates the existing config entry and does not create additional entries.
 
-Checking whether you are in a reauthentication flow can be done using `if self.source == SOURCE_REAUTH`.
+Checking whether you are in a reauth flow can be done using `if self.source == SOURCE_REAUTH`.
 It is also possible to access the corresponding config entry using `self._get_reauth_entry()`.
 Ensuring that the `unique_id` is unchanged should be done using `await self.async_set_unique_id` followed by `self._abort_if_unique_id_mismatch()`.
 
