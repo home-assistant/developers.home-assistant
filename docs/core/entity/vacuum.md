@@ -22,18 +22,20 @@ Properties should always only return information from memory and not do I/O (lik
 | fan_speed | string | `none` | The current fan speed.
 | fan_speed_list | list | `NotImplementedError()`| List of available fan speeds.
 | name | string | **Required** | Name of the entity.
-| state | string | **Required** | One of the states listed in the states section.
+| vacuum_state | VacuumEntityState | **Required** | Return one of the states listed in the states section.
 
 ## States
 
-| State | Description
+Setting the state should return an enum from VacuumEntityState in the `vacuum_state` property.
+
+| Value | Description
 | ----- | -----------
-| `STATE_CLEANING` | The vacuum is currently cleaning.
-| `STATE_DOCKED` | The vacuum is currently docked, it is assumed that docked can also mean charging.
-| `STATE_IDLE` | The vacuum is not paused, not docked and does not have any errors.
-| `STATE_PAUSED` | The vacuum was cleaning but was paused without returning to the dock.
-| `STATE_RETURNING` | The vacuum is done cleaning and is currently returning to the dock, but not yet docked.
-| `STATE_ERROR` | The vacuum encountered an error while cleaning.
+| `CLEANING` | The vacuum is currently cleaning.
+| `DOCKED` | The vacuum is currently docked, it is assumed that docked can also mean charging.
+| `IDLE` | The vacuum is not paused, not docked and does not have any errors.
+| `PAUSED` | The vacuum was cleaning but was paused without returning to the dock.
+| `RETURNING` | The vacuum is done cleaning and is currently returning to the dock, but not yet docked.
+| `ERROR` | The vacuum encountered an error while cleaning.
 
 ## Supported features
 
