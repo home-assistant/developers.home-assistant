@@ -174,7 +174,7 @@ Example of state class `SensorStateClass.TOTAL` with last_reset:
 |   2021-08-01T16:00:00  |     0  | 2021-09-01T16:00:00 |     5  |          10  |           5  |
 |   2021-08-01T17:00:00  |     5  | 2021-09-01T16:00:00 |    10  |          15  |           5  |
 
-Example of state class `SensorStateClass.TOTAL` where the there initial state at the beginning
+Example of state class `SensorStateClass.TOTAL` where the initial state at the beginning
 of the new meter cycle is not 0, but 0 is used as zero-point:
 
 | t                      | state  | last_reset          | sum    | sum_increase | sum_decrease |
