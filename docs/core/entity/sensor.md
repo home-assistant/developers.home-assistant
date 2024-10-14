@@ -32,7 +32,7 @@ If specifying a device class, your sensor entity will need to also return the co
 
 | Constant | Supported units | Description
 | ---- | ---- | -----------
-| `SensorDeviceClass.APPARENT_POWER` | VA | Apparent power |
+| `SensorDeviceClass.APPARENT_POWER` | VA | Apparent power
 | `SensorDeviceClass.AQI` | None | Air Quality Index
 | `SensorDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, mmHG, inHg, kPa, mbar, Pa, psi | Atmospheric pressure.
 | `SensorDeviceClass.BATTERY` | % | Percentage of battery that is left
@@ -55,24 +55,24 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.IRRADIANCE` | W/m², BTU/(h⋅ft²) | Irradiance
 | `SensorDeviceClass.MOISTURE` | % | Moisture
 | `SensorDeviceClass.MONETARY` | [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) | Monetary value with a currency.
-| `SensorDeviceClass.NITROGEN_DIOXIDE` | µg/m³ | Concentration of nitrogen dioxide |
-| `SensorDeviceClass.NITROGEN_MONOXIDE` | µg/m³ | Concentration of nitrogen monoxide |
-| `SensorDeviceClass.NITROUS_OXIDE` | µg/m³ | Concentration of nitrous oxide |
-| `SensorDeviceClass.OZONE` | µg/m³ | Concentration of ozone |
-| `SensorDeviceClass.PH` | None | Potential hydrogen (pH) of a aqueous solution |
-| `SensorDeviceClass.PM1` | µg/m³ | Concentration of particulate matter less than 1 micrometer |
-| `SensorDeviceClass.PM25` | µg/m³ | Concentration of particulate matter less than 2.5 micrometers |
-| `SensorDeviceClass.PM10` | µg/m³ | Concentration of particulate matter less than 10 micrometers |
+| `SensorDeviceClass.NITROGEN_DIOXIDE` | µg/m³ | Concentration of nitrogen dioxide
+| `SensorDeviceClass.NITROGEN_MONOXIDE` | µg/m³ | Concentration of nitrogen monoxide
+| `SensorDeviceClass.NITROUS_OXIDE` | µg/m³ | Concentration of nitrous oxide
+| `SensorDeviceClass.OZONE` | µg/m³ | Concentration of ozone
+| `SensorDeviceClass.PH` | None | Potential hydrogen (pH) of a aqueous solution
+| `SensorDeviceClass.PM1` | µg/m³ | Concentration of particulate matter less than 1 micrometer
+| `SensorDeviceClass.PM25` | µg/m³ | Concentration of particulate matter less than 2.5 micrometers
+| `SensorDeviceClass.PM10` | µg/m³ | Concentration of particulate matter less than 10 micrometers
 | `SensorDeviceClass.POWER` | W, kW | Power.
 | `SensorDeviceClass.POWER_FACTOR` | %, None | Power Factor
 | `SensorDeviceClass.PRECIPITATION` | cm, in, mm | Accumulated precipitation
 | `SensorDeviceClass.PRECIPITATION_INTENSITY` | in/d, in/h, mm/d, mm/h | Precipitation intensity
 | `SensorDeviceClass.PRESSURE` | cbar, bar, hPa, mmHg, inHg, kPa, mbar, Pa, psi | Pressure.
-| `SensorDeviceClass.REACTIVE_POWER` | var | Reactive power |
+| `SensorDeviceClass.REACTIVE_POWER` | var | Reactive power
 | `SensorDeviceClass.SIGNAL_STRENGTH` | dB, dBm | Signal strength
 | `SensorDeviceClass.SOUND_PRESSURE` | dB, dBA | Sound pressure
 | `SensorDeviceClass.SPEED` | ft/s, in/d, in/h, in/s, km/h, kn, m/s, mph, mm/d, mm/s | Generic speed
-| `SensorDeviceClass.SULPHUR_DIOXIDE` | µg/m³ | Concentration of sulphure dioxide |
+| `SensorDeviceClass.SULPHUR_DIOXIDE` | µg/m³ | Concentration of sulphure dioxide
 | `SensorDeviceClass.TEMPERATURE` | °C, °F, K | Temperature.
 | `SensorDeviceClass.TIMESTAMP` | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
 | `SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³ | Concentration of volatile organic compounds
@@ -157,33 +157,33 @@ unless `last_reset` has been changed, in which case don't add anything.
 
 Example of state class `SensorStateClass.TOTAL` without last_reset:
 
-| t                      | state  | sum    | sum_increase | sum_decrease |
-| :--------------------- | -----: | -----: | -----------: | -----------: |
-|   2021-08-01T13:00:00  |  1000  |     0  |           0  |           0  |
-|   2021-08-01T14:00:00  |  1010  |    10  |          10  |           0  |
-|   2021-08-01T15:00:00  |     0  | -1000  |          10  |        1010  |
-|   2021-08-01T16:00:00  |     5  |  -995  |          15  |        1010  |
+| t                      | state  | sum    | sum_increase | sum_decrease
+| :--------------------- | -----: | -----: | -----------: | -----------:
+|   2021-08-01T13:00:00  |  1000  |     0  |           0  |           0
+|   2021-08-01T14:00:00  |  1010  |    10  |          10  |           0
+|   2021-08-01T15:00:00  |     0  | -1000  |          10  |        1010
+|   2021-08-01T16:00:00  |     5  |  -995  |          15  |        1010
 
 Example of state class `SensorStateClass.TOTAL` with last_reset:
 
-| t                      | state  | last_reset          | sum    | sum_increase | sum_decrease |
-| :--------------------- | -----: | ------------------- | -----: | -----------: | -----------: |
-|   2021-08-01T13:00:00  |  1000  | 2021-08-01T13:00:00 |     0  |           0  |           0  |
-|   2021-08-01T14:00:00  |  1010  | 2021-08-01T13:00:00 |    10  |          10  |           0  |
-|   2021-08-01T15:00:00  |  1005  | 2021-08-01T13:00:00 |     5  |          10  |           5  |
-|   2021-08-01T16:00:00  |     0  | 2021-09-01T16:00:00 |     5  |          10  |           5  |
-|   2021-08-01T17:00:00  |     5  | 2021-09-01T16:00:00 |    10  |          15  |           5  |
+| t                      | state  | last_reset          | sum    | sum_increase | sum_decrease
+| :--------------------- | -----: | ------------------- | -----: | -----------: | -----------:
+|   2021-08-01T13:00:00  |  1000  | 2021-08-01T13:00:00 |     0  |           0  |           0
+|   2021-08-01T14:00:00  |  1010  | 2021-08-01T13:00:00 |    10  |          10  |           0
+|   2021-08-01T15:00:00  |  1005  | 2021-08-01T13:00:00 |     5  |          10  |           5
+|   2021-08-01T16:00:00  |     0  | 2021-09-01T16:00:00 |     5  |          10  |           5
+|   2021-08-01T17:00:00  |     5  | 2021-09-01T16:00:00 |    10  |          15  |           5
 
 Example of state class `SensorStateClass.TOTAL` where the initial state at the beginning
 of the new meter cycle is not 0, but 0 is used as zero-point:
 
-| t                      | state  | last_reset          | sum    | sum_increase | sum_decrease |
-| :--------------------- | -----: | ------------------- | -----: | -----------: | -----------: |
-|   2021-08-01T13:00:00  |  1000  | 2021-08-01T13:00:00 |     0  |           0  |           0  |
-|   2021-08-01T14:00:00  |  1010  | 2021-08-01T13:00:00 |    10  |          10  |           0  |
-|   2021-08-01T15:00:00  |  1005  | 2021-08-01T13:00:00 |     5  |          10  |           5  |
-|   2021-08-01T16:00:00  |     5  | 2021-09-01T16:00:00 |    10  |          15  |           5  |
-|   2021-08-01T17:00:00  |    10  | 2021-09-01T16:00:00 |    15  |          20  |           5  |
+| t                      | state  | last_reset          | sum    | sum_increase | sum_decrease
+| :--------------------- | -----: | ------------------- | -----: | -----------: | -----------:
+|   2021-08-01T13:00:00  |  1000  | 2021-08-01T13:00:00 |     0  |           0  |           0
+|   2021-08-01T14:00:00  |  1010  | 2021-08-01T13:00:00 |    10  |          10  |           0
+|   2021-08-01T15:00:00  |  1005  | 2021-08-01T13:00:00 |     5  |          10  |           5
+|   2021-08-01T16:00:00  |     5  | 2021-09-01T16:00:00 |    10  |          15  |           5
+|   2021-08-01T17:00:00  |    10  | 2021-09-01T16:00:00 |    15  |          20  |           5
 
 #### State class `SensorStateClass.TOTAL_INCREASING`
 
@@ -202,18 +202,18 @@ unless the difference is negative, in which case don't add anything.
 
 Example of state class `SensorStateClass.TOTAL_INCREASING`:
 
-| t                      | state  | sum  |
-| :--------------------- | -----: | ---: |
-|   2021-08-01T13:00:00  |  1000  |   0  |
-|   2021-08-01T14:00:00  |  1010  |  10  |
-|   2021-08-01T15:00:00  |     0  |  10  |
-|   2021-08-01T16:00:00  |     5  |  15  |
+| t                      | state  | sum
+| :--------------------- | -----: | ---:
+|   2021-08-01T13:00:00  |  1000  |   0
+|   2021-08-01T14:00:00  |  1010  |  10
+|   2021-08-01T15:00:00  |     0  |  10
+|   2021-08-01T16:00:00  |     5  |  15
 
 Example of state class `SensorStateClass.TOTAL_INCREASING` where the sensor does not reset to 0:
 
-| t                      | state  | sum  |
-| :--------------------- | -----: | ---: |
-|   2021-08-01T13:00:00  |  1000  |   0  |
-|   2021-08-01T14:00:00  |  1010  |  10  |
-|   2021-08-01T15:00:00  |     5  |  15  |
-|   2021-08-01T16:00:00  |    10  |  20  |
+| t                      | state  | sum
+| :--------------------- | -----: | ---:
+|   2021-08-01T13:00:00  |  1000  |   0
+|   2021-08-01T14:00:00  |  1010  |  10
+|   2021-08-01T15:00:00  |     5  |  15
+|   2021-08-01T16:00:00  |    10  |  20
