@@ -134,9 +134,9 @@ module.exports = {
         "development_checklist",
         "creating_component_code_review",
         "creating_platform_code_review",
-        "integration_quality_scale_index",
       ],
     },
+    "core/integration-quality-scale/index",
     {
       type: "category",
       label: "The `hass` object",
