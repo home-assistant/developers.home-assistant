@@ -51,7 +51,7 @@ class ContentCardExample extends HTMLElement {
     return 3;
   }
 
-  // The rules for your card for sizing your card if the grid in section view
+  // The rules for sizing your card in the grid in sections view
   getLayoutOptions() {
     return {
       grid_rows: 3,
@@ -106,7 +106,7 @@ return customElements
 
 ### Sizing in sections view
 
-You card can define a `getLayoutOptions` method that returns the min, max and default number of cells your card will take in the grid if your card is used if the [sections view](https://www.home-assistant.io/dashboards/sections/)
+You can define a `getLayoutOptions` method that returns the min, max and default number of cells your card will take in the grid if your card is used in the [sections view](https://www.home-assistant.io/dashboards/sections/).
 If you don't define this method, the card will take 4 columns (full width) and will ignore the rows of the grid.
 
 A cell of the grid is defined with the following dimension:
