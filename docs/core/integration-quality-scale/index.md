@@ -103,7 +103,7 @@ One exception to this is integrations that have devices that are part of the Wor
 The rules for each tier are defined down below and come with its own page with examples and more information.
 
 ### 🥉 Bronze
-- IQS001 - Integration needs to be able to be set up via the UI
+- [IQS001](rules/iqs001) - Integration needs to be able to be set up via the UI
 - [IQS002](rules/iqs002) - Test a connection in the config flow
 - IQS003 - Don't allow the same device or service to be able to be set up twice
 - [IQS004](rules/iqs004) - Full test coverage for the config flow
