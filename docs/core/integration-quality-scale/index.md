@@ -107,7 +107,7 @@ The rules for each tier are defined down below and come with its own page with e
 - [IQS002](rules/iqs002) - Test a connection in the config flow
 - IQS003 - Don't allow the same device or service to be able to be set up twice
 - [IQS004](rules/iqs004) - Full test coverage for the config flow
-- IQS006 - Use ConfigEntry.runtime_data to store runtime data
+- [IQS006](rules/iqs006) - Use ConfigEntry.runtime_data to store runtime data
 - IQS007 - Check during integration setup if we are able to set it up correctly
 - IQS008 - If it's a polling integration, set an appropriate polling interval
 - IQS011 - Entities have a unique ID
