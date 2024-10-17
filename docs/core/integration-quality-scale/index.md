@@ -124,7 +124,7 @@ The rules for each tier are defined down below and come with its own page with e
 
 
 ### 🥈 Silver
-- IQS005 - Support config entry unloading
+- [IQS005](rules/iqs005) - Support config entry unloading
 - IQS009 - If internet/device/service unavailable, log a warning once unavailable and once when back connected
 - IQS010 - Mark entity unavailable if appropriate
 - IQS017 - Services raise errors when encountering failures
