@@ -104,23 +104,10 @@ class MyCamera(Camera):
         """Handle the WebRTC offer and return an answer."""
 ```
 
-### RTSP to WebRTC
+### WebRTC Providers
 
-An integration may provide a WebRTC stream for any RTSP camera using `async_register_rtsp_to_web_rtc_provider`. The current best practice is for an integration to provide the actual stream manipulation with an Add-on or external service.
-
-```python
-async def handle_offer(stream_source: str, offer_sdp: str) -> str:
-    """Handle the signal path for a WebRTC stream and return an answer."""
-    try:
-        return await client.offer(offer_sdp, stream_source)
-    except ClientError as err:
-        raise HomeAssistantError from err
-
-# Call unsub() when integration unloads
-unsub = camera.async_register_rtsp_to_web_rtc_provider(
-    hass, DOMAIN, handle_offer
-)
-```
+An integration may provide a WebRTC stream from an existing camera's stream source using the libraries in `homeassistant.components.camera.webrtc`. An
+integration may implement `CameraWebRTCProvider` and register it with `async_register_webrtc_provider`. The current best practice is for an integration to provide the actual stream manipulation with an Add-on or external service. The addition of the `go2rtc` integration in Home Assistant Core makes usage of these APIs rarely needed.
 
 ### Turn on
 
