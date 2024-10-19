@@ -93,15 +93,29 @@ A common way for a camera entity to render a camera still image is to pass the s
 
 ### WebRTC streams
 
-WebRTC enabled cameras can be used by facilitating a direct connection with the home assistant frontend. This usage requires `CameraEntityFeature.STREAM` with `frontend_stream_type` set to `StreamType.WEB_RTC`. The integration should implement `async_handle_web_rtc_offer` which passes the frontend's SDP offer to the device and returns back the answer.
+WebRTC enabled cameras can be used by facilitating a direct connection with the home assistant frontend. This usage requires `CameraEntityFeature.STREAM` with `frontend_stream_type` set to `StreamType.WEB_RTC`.
+
+The integration should implement the follwing methods:
+- `async_handle_webrtc_offer`: To initialize a WebRTC stream. The function should return `True` if the offer was successfully sent to the Camera. Any messages/errors coming in async should be forwared to the frontend with the `send_message` callback.
+- `async_on_webrtc_candidate`: The frontend will call it with any candidate coming in after the offer is sent.
+- `close_webrtc_session`: The frontend will call it when the stream is closed. Can be used to clean up things.
 
 WebRTC streams do not use the `stream` component and do not support recording.
 
 ```python
 class MyCamera(Camera):
 
-    async def async_handle_web_rtc_offer(self, offer_sdp: str) -> str | None:
-        """Handle the WebRTC offer and return an answer."""
+    async def async_handle_webrtc_offer(
+        self, offer_sdp: str, session_id: str, send_message: WebRTCSendMessage
+    ) -> None:
+        """Handle the WebRTC offer in async. Messages and result are sent via send_message callback."""
+
+    async def async_on_webrtc_candidate(self, session_id: str, candidate: str) -> None:
+        """Handle a WebRTC candidate."""
+
+    @callback
+    def close_webrtc_session(self, session_id: str) -> None:
+        """Close a WebRTC session."""
 ```
 
 ### RTSP to WebRTC
