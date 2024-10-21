@@ -100,7 +100,7 @@ A device's fan can have different states. There are a couple of built-in fan mod
 
 ### Swing modes
 
-The device fan can have different swing modes that it wants the user to know about/control.
+The device fan can have different swing modes that it wants the user to know about/control. There are a couple of built-in presets that will offer translations, but you're also allowed to add custom presets.
 
 | Name               | Description                                       |
 | ------------------ | ------------------------------------------------- |
