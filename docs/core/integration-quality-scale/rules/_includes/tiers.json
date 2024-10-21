@@ -1,8 +1,21 @@
 {
   "bronze": [
-    "IQS002"
+    "IQS001",
+    "IQS002",
+    "IQS004",
+    "IQS006",
+    "IQS007",
+    "IQS008",
+    "IQS011",
+    "IQS012"
   ],
-  "silver": [],
-  "gold": [],
+  "silver": [
+    "IQS005",
+    "IQS010",
+    "IQS020"
+  ],
+  "gold": [
+    "IQS016"
+  ],
   "platinum": []
 }
