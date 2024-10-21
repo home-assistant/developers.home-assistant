@@ -7,9 +7,9 @@ title: "New helpers and best practises for reauth and reconfigure flows"
 New helper methods have been added to the ConfigFlow to facilitate management of reauth and reconfigure flows:
 - `self._get_reauth_entry()` and `self._get_reconfigure_entry()` give access at any time to the corresponding config entry
   - these should be used over `self.hass.config_entries.async_get_entry(self.context["entry_id"])`
-  - these should be requested when needed (local variable, once per step) and not cached as class attributes
+  - the config entry should be requested when needed (local variable, once per step) and not cached as class attributes
   - if the steps are shared with discovery or user flows, `self.source` should be checked against `SOURCE_REAUTH` and `SOURCE_RECONFIGURE` before accessing the entry
-- `self._abort_if_unique_id_mismatch` allows you to abort if the `unique_id` does not match the `unique_id` of the entry
+- `self._abort_if_unique_id_mismatch` allows you to abort if the `unique_id` does not match the `unique_id` of the config entry to reauthenticate or reconfigure
   - this should be used after a call to `self.async_set_unique_id`
   - if the steps are shared with discovery or user flows, `self.source` should be checked against `SOURCE_REAUTH` and `SOURCE_RECONFIGURE`
   - other sources should continue to use `self._abort_if_unique_id_configured`
