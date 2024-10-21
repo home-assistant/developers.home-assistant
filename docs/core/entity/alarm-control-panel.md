@@ -13,14 +13,14 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| alarm_state | <code>AlarmControlPanelEntityState &#124; None</code> | **Required** | One of the alarm values listed in the **states**.
+| alarm_state | <code>AlarmControlPanelState &#124; None</code> | **Required** | One of the alarm values listed in the **states**.
 | code_arm_required | bool | `True` | Whether the code is required for arm actions.
 | code_format | <code>CodeFormat &#124; None</code> | `None` | One of the states listed in the **code formats** section.
 | changed_by | <code>str &#124; None</code> | `None` | Last change triggered by.
 
 ### States
 
-Setting the state should return an enum from AlarmControlPanelEntityState in the `alarm_state` property.
+Setting the state should return an enum from `AlarmControlPanelState` in the `alarm_state` property.
 
 | Value | Description
 | ----- | -----------

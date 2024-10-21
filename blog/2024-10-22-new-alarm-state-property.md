@@ -6,9 +6,9 @@ authorTwitter: GJohansson
 title: "New alarm control panel state property"
 ---
 
-As of Home Assistant Core 2024.11, the constants used to return state in `AlarmControlPanelEntity` are deprecated and replaced by the `AlarmControlPanelEntityState` enum.
+As of Home Assistant Core 2024.11, the constants used to return state in `AlarmControlPanelEntity` are deprecated and replaced by the `AlarmControlPanelState` enum.
 
-Also with this change, integrations should set the `alarm_state` property instead of directly setting the `state` property.
+Also with this change, integrations should set the `alarm_state` property instead of directly setting the `state` property directly.
 
 There is a one-year deprecation period, and the constants will stop working from 2025.11 to ensure all custom integration authors have time to adjust.
 
@@ -16,7 +16,7 @@ There is a one-year deprecation period, and the constants will stop working from
 
 ```python
 
-from homeassistant.components.alarm_control_panel import AlarmControlPanelEntity, AlarmControlPanelEntityState
+from homeassistant.components.alarm_control_panel import AlarmControlPanelEntity, AlarmControlPanelState
 
 class MyAlarm(AlarmControlPanelEntity):
     """My alarm."""
@@ -25,8 +25,8 @@ class MyAlarm(AlarmControlPanelEntity):
     def alarm_state(self) -> AlarmControlPanelEntityState | None:
         """Return the state of the alarm."""
         if self.device.is_on():
-            return AlarmControlPanelEntityState.ARMED_AWAY
-        return AlarmControlPanelEntityState.DISARMED
+            return AlarmControlPanelState.ARMED_AWAY
+        return AlarmControlPanelState.DISARMED
 
 ```
 
