@@ -22,7 +22,7 @@ class MyAlarm(AlarmControlPanelEntity):
     """My alarm."""
 
     @property
-    def alarm_state(self) -> AlarmControlPanelEntityState | None:
+    def alarm_state(self) -> AlarmControlPanelState | None:
         """Return the state of the alarm."""
         if self.device.is_on():
             return AlarmControlPanelState.ARMED_AWAY
