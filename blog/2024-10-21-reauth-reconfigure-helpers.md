@@ -4,7 +4,7 @@ authorURL: https://github.com/epenet
 title: "New helpers and best practises for reauth and reconfigure flows"
 ---
 
-New helper methods have been added to the ConfigFlow, to facilitate management of reauth and reconfigure flows:
+New helper methods have been added to the ConfigFlow to facilitate management of reauth and reconfigure flows:
 - `self._get_reauth_entry()` and `self._get_reconfigure_entry()` give access at any time to the corresponding config entry
   - these should be used over `self.hass.config_entries.async_get_entry(self.context["entry_id"])`
   - these should be requested when needed (local variable, once per step) and not cached as class attributes
