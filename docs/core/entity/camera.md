@@ -96,7 +96,7 @@ A common way for a camera entity to render a camera still image is to pass the s
 WebRTC enabled cameras can be used by facilitating a direct connection with the home assistant frontend. This usage requires `CameraEntityFeature.STREAM` with `frontend_stream_type` set to `StreamType.WEB_RTC`.
 
 The integration should implement the follwing methods:
-- `async_handle_webrtc_offer`: To initialize a WebRTC stream. The function should return `True` if the offer was successfully sent to the Camera. Any messages/errors coming in async should be forwared to the frontend with the `send_message` callback.
+- `async_handle_async_webrtc_offer`: To initialize a WebRTC stream. Any messages/errors coming in async should be forwared to the frontend with the `send_message` callback.
 - `async_on_webrtc_candidate`: The frontend will call it with any candidate coming in after the offer is sent.
 - `close_webrtc_session`: The frontend will call it when the stream is closed. Can be used to clean up things.
 
@@ -105,10 +105,18 @@ WebRTC streams do not use the `stream` component and do not support recording.
 ```python
 class MyCamera(Camera):
 
-    async def async_handle_webrtc_offer(
+    async def async_handle_async_webrtc_offer(
         self, offer_sdp: str, session_id: str, send_message: WebRTCSendMessage
     ) -> None:
-        """Handle the WebRTC offer in async. Messages and result are sent via send_message callback."""
+        """Handle the async WebRTC offer.
+
+        Async means that it could take some time to process the offer and responses/message
+        will be sent with the send_message callback.
+        This method is used by cameras with CameraEntityFeature.STREAM and StreamType.WEB_RTC.
+        An integration overriding this method must also implement async_on_webrtc_candidate.
+
+        Integrations can override with a native WebRTC implementation.
+        """
 
     async def async_on_webrtc_candidate(self, session_id: str, candidate: str) -> None:
         """Handle a WebRTC candidate."""
