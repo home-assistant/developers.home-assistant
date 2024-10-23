@@ -29,6 +29,8 @@ Properties should always only return information from memory and not do I/O (lik
 | preset_modes            | <code>list[str] &#124; None</code>  | **Required by SUPPORT_PRESET_MODE**  | The available presets.                                                     |
 | swing_mode              | <code>str &#124; None</code>        | **Required by SUPPORT_SWING_MODE**   | The swing setting.                                                         |
 | swing_modes             | <code>list[str] &#124; None</code>  | **Required by SUPPORT_SWING_MODE**   | Returns the list of available swing modes.                                 |
+| swing_horizontal_mode | <code>str &#124; None</code>        | **Required by SUPPORT_SWING_HORIZONTAL_MODE**   | The horizontal swing setting.                                     |
+| swing_horizontal_modes | <code>list[str] &#124; None</code>  | **Required by SUPPORT_SWING_HORIZONTAL_MODE**  | Returns the list of available horizontal swing modes.                                 |
 | target_humidity         | <code>float &#124; None</code>        | `None`                               | The target humidity the device is trying to reach.                         |
 | target_temperature      | <code>float &#124; None</code>      | `None`                               | The temperature currently set to be reached.                               |
 | target_temperature_high | <code>float &#124; None</code>      | **Required by TARGET_TEMPERATURE_RANGE** | The upper bound target temperature                                     |
@@ -102,6 +104,12 @@ A device's fan can have different states. There are a couple of built-in fan mod
 
 The device fan can have different swing modes that it wants the user to know about/control.
 
+:::note
+
+In the case integrations don't have independent control of vertical and horizontal swing, then all possible options should be listed in `swing_modes`, otherwise `swing_modes` provide vertical support and `swing_horizontal_modes` should provide all horizontal options.
+
+:::
+
 | Name               | Description                                       |
 | ------------------ | ------------------------------------------------- |
 | `SWING_OFF`        | The fan is not swinging.                          |
@@ -109,6 +117,21 @@ The device fan can have different swing modes that it wants the user to know abo
 | `SWING_VERTICAL`   | The fan is swinging vertical.                     |
 | `SWING_HORIZONTAL` | The fan is swinging horizontal.                   |
 | `SWING_BOTH`       | The fan is swinging both horizontal and vertical. |
+
+### Swing horizontal modes
+
+The device fan can have different horizontal swing modes that it wants the user to know about/control.
+
+:::note
+
+This should only be implemented if the integration has independent control of vertical and horizontal swing. In such case the `swing_modes` property will provide vertical support and `swing_horizontal_modes` will provide horizontal support.
+
+:::
+
+| Name               | Description                                       |
+| ------------------ | ------------------------------------------------- |
+| `SWING_OFF`        | The fan is not swinging.                          |
+| `SWING_ON`         | The fan is swinging.                              |
 
 ## Supported features
 
@@ -123,6 +146,7 @@ and are combined using the bitwise or (`|`) operator.
 | `FAN_MODE`                 | The device supports fan modes.                                                              |
 | `PRESET_MODE`              | The device supports presets.                                                                |
 | `SWING_MODE`               | The device supports swing modes.                                                            |
+| `SWING_HORIZONTAL_MODE`    | The device supports horizontal swing modes.                                                            |
 | `TURN_ON`                 | The device supports turn on.                                                      |
 | `TURN_OFF`                 | The device supports turn off.                                                      |
 
@@ -241,6 +265,19 @@ class MyClimateEntity(ClimateEntity):
 
     async def async_set_swing_mode(self, swing_mode):
         """Set new target swing operation."""
+```
+
+### Set horizontal swing mode
+
+```python
+class MyClimateEntity(ClimateEntity):
+    # Implement one of these methods.
+
+    def set_swing_horizontal_mode(self, swing_mode):
+        """Set new target horizontal swing operation."""
+
+    async def async_set_swing_horizontal_mode(self, swing_mode):
+        """Set new target horizontal swing operation."""
 ```
 
 ### Set temperature
