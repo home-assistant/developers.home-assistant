@@ -31,7 +31,7 @@ Properties should always only return information from memory and not do I/O (lik
 | release_summary | str | `None` | Summary of the release notes or changelog. This is not suitable for long changelogs but merely suitable for a short excerpt update description of max 255 characters.
 | release_url | str | `None` | URL to the full release notes of the latest version available.
 | title | str | `None` | Title of the software. This helps to differentiate between the device or entity name versus the title of the software installed.
-| update_percentage | int | `None` | Update installation progress. Can either return a number to indicate the progress from 0 to 100% or None.
+| update_percentage | int, float | `None` | Update installation progress. Can either return a number to indicate the progress from 0 to 100% or None.
 
 Other properties that are common to all entities such as `device_class`, `entity_category`, `icon`, `name` etc are still applicable.
 
