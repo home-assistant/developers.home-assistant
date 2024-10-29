@@ -36,6 +36,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.AQI` | None | Air Quality Index
 | `SensorDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, mmHG, inHg, kPa, mbar, Pa, psi | Atmospheric pressure.
 | `SensorDeviceClass.BATTERY` | % | Percentage of battery that is left
+| `SensorDeviceClass.BLOOD_SUGAR_LEVEL` | mg/dL, mmol/L | Blood sugar level
 | `SensorDeviceClass.CO2` | ppm | Concentration of carbon dioxide.
 | `SensorDeviceClass.CO` | ppm | Concentration of carbon monoxide.
 | `SensorDeviceClass.CONDUCTIVITY` | S/cm, mS/cm, µS/cm | Conductivity
