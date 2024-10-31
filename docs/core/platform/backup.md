@@ -46,7 +46,7 @@ class LoremIpsumBackupSyncAgent(BackupSyncAgent):
 
 ### Sync agent methods
 
-The base class `BackupSyncAgent` has several methods that can needs to be implemented.
+The base class `BackupSyncAgent` has several methods that needs to be implemented.
 
 Method | Description
 :--- | :---
