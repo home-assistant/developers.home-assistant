@@ -30,4 +30,4 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 
 ### Backwards compatibility
 
-Until Home Assistant Core 2025.11, it's possible to import from `homeassistant.core`, doing so will og a warning asking users to open an issue on the custom integration's bug tracker.
+Until Home Assistant Core 2025.11, it's possible to import from `homeassistant.core`, doing so will log a warning asking users to open an issue on the custom integration's bug tracker.
