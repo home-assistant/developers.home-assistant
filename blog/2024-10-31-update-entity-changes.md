@@ -15,4 +15,12 @@ The `update` entity has been adjusted:
 
 Until Home Assistant Core 2025.12, a numerical value in the `in_progress` property will be automatically copied to the `update_percentage` state attribute.
 
+### Documentation and core implementation
+
 See the [update entity developer documentation](https://developers.home-assistant.io/docs/core/entity/update) for details.
+
+PRs:
+- PR adding the [`update_percentage` state attribute](https://github.com/home-assistant/core/pull/128877)
+- PR adding the [`update_percentage` property](https://github.com/home-assistant/core/pull/128908)
+- PR adding the [`display_precision` state attribute and property](https://github.com/home-assistant/core/pull/128930)
+- An example of [updating an integration's update entity](https://github.com/home-assistant/core/pull/129380)
