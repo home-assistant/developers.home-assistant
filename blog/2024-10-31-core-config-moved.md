@@ -9,8 +9,7 @@ title: "The core config class has been moved"
 The definition of the core config class, an instance of which is available as `hass.config` has been moved from `homeassistant/core.py` to `homeassistant/core_config.py`. Custom integrations which currently import `Config` from `homeassistant.core` need to be updated to instead import from `homeassistant.core_config`.
 
 :::info
-Many custom integration have incorrect type annotations where the `config` object passed to the integration's `async_setup` is specified as a `Config` instance:
-
+Many custom integrations have incorrect type annotations where the `config` object passed to the integration's `async_setup` is specified as a `Config` instance:
 ```py
 from homeassistant.core import Config
 
