@@ -25,6 +25,11 @@ def async_get_options_flow(
 The Flow handler works just like the config flow handler, except that the first step in the flow will always be `async_step_init`.
 
 ```python
+OPTIONS_SCHEMA=vol.Schema(
+    {
+        vol.Required("show_things"): bool,
+    }
+)
 class OptionsFlowHandler(config_entries.OptionsFlow):
     async def async_step_init(
         self, user_input: dict[str, Any] | None = None
@@ -35,13 +40,8 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
 
         return self.async_show_form(
             step_id="init",
-            data_schema=vol.Schema(
-                {
-                    vol.Required(
-                        "show_things",
-                        default=self.config_entry.options.get("show_things"),
-                    ): bool
-                }
+            data_schema=self.add_suggested_values_to_schema(
+                OPTIONS_SCHEMA, self.config_entry.options
             ),
         )
 ```
