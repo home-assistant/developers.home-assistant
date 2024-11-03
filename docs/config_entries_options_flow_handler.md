@@ -79,6 +79,12 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
                 OPTIONS_2_SCHEMA, self.options
             ),
         )
+
+    async def async_step_save_options(self)
+        self, user_input: dict[str, Any] | None = None
+    ) -> FlowResult:
+        """Update config entry options."""
+        return self.async_create_entry(title="", data=self.options)
 ```
 
 ## Signal updates
