@@ -10,3 +10,5 @@ New helper properties have been added to the `OptionsFlow` to facilitate access 
 - `self.options` gives you access to a mutable copy of the config entry options
 
 With the addition of these properties to the base `OptionsFlow`, inheriting `OptionsFlowWithConfigEntry` is also deprecated.
+
+More details can be found in the [options flow](/docs/config_entries_options_flow_handler) documentation.
