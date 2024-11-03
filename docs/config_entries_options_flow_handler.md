@@ -59,7 +59,7 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
             return self._show_options_menu()
 
         return self.async_show_form(
-            step_id="init",
+            step_id="options_1",
             data_schema=self.add_suggested_values_to_schema(
                 OPTIONS_1_SCHEMA, self.options
             ),
@@ -74,7 +74,7 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
             return self._show_options_menu()
 
         return self.async_show_form(
-            step_id="init",
+            step_id="options_2",
             data_schema=self.add_suggested_values_to_schema(
                 OPTIONS_2_SCHEMA, self.options
             ),
