@@ -6,11 +6,33 @@ title: "Reauth and reconfigure flows need to be linked to a config entry"
 
 Starting a reauth or a reconfigure flow without a link to the config entry has been deprecated, and will start failing in 2025.12.
 
-Custom integrations should be updated to raise a `ConfigEntryAuthFailed` exception during the initialisation phase, or trigger the reauth flow manually using the `entry.async_start_reauth(hass)` helper.
+Custom integrations should be updated to trigger the reauth flow using the `entry.async_start_reauth(hass)` helper.
+```python
+    async def async_press(self) -> None:
+        """Handle the button press."""
+        try:
+            await self.device.press_button()
+        except DevicePasswordProtected as ex:
+            self.entry.async_start_reauth(self.hass)
+    )
+```
 
-Reconfigure flows are not expected to be triggered from code.
+Old incorrect code:
+```python
+    async def async_press(self) -> None:
+        """Handle the button press."""
+        try:
+            await self.device.press_button()
+        except DevicePasswordProtected as ex:
+            # old incorrect code:
+            # self.hass.async_create_task(
+            #     hass.config_entries.flow.async_init(DOMAIN, context={"source": SOURCE_REAUTH}
+            # )
+    )
+```
 
-Sample during initialisation:
+Custom integrations can also raise `ConfigEntryAuthFailed` exception during the initialisation phase, or within coordinators update method.
+
 ```python
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up integration from a config entry."""
@@ -21,19 +43,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         raise ConfigEntryAuthFailed()
 ```
 
-Sample outside initialisation:
-```python
-    async def async_press(self) -> None:
-        """Handle the button press."""
-        try:
-            await self.device.press_button()
-        except DevicePasswordProtected as ex:
-            self.entry.async_start_reauth(self.hass)
-            # old incorrect code:
-            # self.hass.async_create_task(
-            #     hass.config_entries.flow.async_init(DOMAIN, context={"source": SOURCE_REAUTH}
-            # )
-    )
-```
+Reconfigure flows are not expected to be triggered from code.
 
 More details can be found in the [reconfigure](/docs/config_entries_config_flow_handler#reconfigure) and [reauthentication](/docs/config_entries_config_flow_handler#reauthentication) documentation.
