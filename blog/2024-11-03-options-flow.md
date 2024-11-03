@@ -1,7 +1,7 @@
 ---
 author: epenet
 authorURL: https://github.com/epenet
-title: "New properties for options flows, and deprecated OptionsFlowWithConfigEntry"
+title: "New options flows properties, and deprecated OptionsFlowWithConfigEntry"
 ---
 
 New helper properties have been added to the `OptionsFlow` to facilitate access to the config entry:
