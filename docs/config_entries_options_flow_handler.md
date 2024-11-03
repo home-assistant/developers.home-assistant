@@ -14,8 +14,8 @@ For an integration to support options it needs to have an `async_get_options_flo
 @staticmethod
 @callback
 def async_get_options_flow(
-    config_entry: config_entries.ConfigEntry,
-) -> config_entries.OptionsFlow:
+    config_entry: ConfigEntry,
+) -> OptionsFlowHandler:
     """Create the options flow."""
     return OptionsFlowHandler()
 ```
