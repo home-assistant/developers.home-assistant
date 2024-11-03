@@ -29,6 +29,11 @@ Sample outside initialisation:
             await self.device.press_button()
         except DevicePasswordProtected as ex:
             self.entry.async_start_reauth(self.hass)
- ```
+            # old incorrect code:
+            # self.hass.async_create_task(
+            #     hass.config_entries.flow.async_init(DOMAIN, context={"source": SOURCE_REAUTH}
+            # )
+    )
+```
 
 More details can be found in the [reconfigure](/docs/config_entries_config_flow_handler#reconfigure) and [reauthentication](/docs/config_entries_config_flow_handler#reauthentication) documentation.
