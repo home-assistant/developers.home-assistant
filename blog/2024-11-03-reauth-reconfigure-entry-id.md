@@ -14,7 +14,6 @@ Custom integrations should be updated to trigger the reauth flow using the `entr
             await self.device.press_button()
         except DevicePasswordProtected as ex:
             self.entry.async_start_reauth(self.hass)
-    )
 ```
 
 Old incorrect code:
