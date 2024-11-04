@@ -42,6 +42,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         raise ConfigEntryAuthFailed()
 ```
 
-Reconfigure flows are not expected to be triggered from code.
+Starting a reconfigure flow is only done by the frontend and custom integrations should not need to change anything for these flows.
 
 More details can be found in the [reconfigure](/docs/config_entries_config_flow_handler#reconfigure) and [reauthentication](/docs/config_entries_config_flow_handler#reauthentication) documentation.
