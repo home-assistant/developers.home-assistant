@@ -119,7 +119,7 @@ class MyCamera(Camera):
         Integrations can override with a native WebRTC implementation.
         """
 
-    async def async_on_webrtc_candidate(self, session_id: str, candidate: str) -> None:
+    async def async_on_webrtc_candidate(self, session_id: str, candidate: RTCIceCandidate) -> None:
         """Handle a WebRTC candidate."""
 
     @callback
