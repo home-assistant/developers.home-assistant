@@ -24,13 +24,13 @@ Old incorrect code:
             await self.device.press_button()
         except DevicePasswordProtected as ex:
             # old incorrect code:
-            # self.hass.async_create_task(
-            #     hass.config_entries.flow.async_init(DOMAIN, context={"source": SOURCE_REAUTH}
-            # )
+            self.hass.async_create_task(
+                hass.config_entries.flow.async_init(DOMAIN, context={"source": SOURCE_REAUTH}
+            )
     )
 ```
 
-Custom integrations can also raise `ConfigEntryAuthFailed` exception during the initialisation phase, or within coordinators update method.
+Custom integrations can also raise a `ConfigEntryAuthFailed` exception during the initialization phase, or within the update method of a data update coordinator.
 
 ```python
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
