@@ -52,12 +52,12 @@ class ContentCardExample extends HTMLElement {
   }
 
   // The rules for sizing your card in the grid in sections view
-  getLayoutOptions() {
+  getGridOptions() {
     return {
-      grid_rows: 3,
-      grid_columns: 2,
-      grid_min_rows: 3,
-      grid_max_rows: 3,
+      rows: 3,
+      columns: 6,
+      min_rows: 3,
+      max_rows: 3,
     };
   }
 }
@@ -106,37 +106,39 @@ return customElements
 
 ### Sizing in sections view
 
-You can define a `getLayoutOptions` method that returns the min, max and default number of cells your card will take in the grid if your card is used in the [sections view](https://www.home-assistant.io/dashboards/sections/).
-If you don't define this method, the card will take 4 columns (full width) and will ignore the rows of the grid.
+You can define a `getGridOptions` method that returns the min, max and default number of cells your card will take in the grid if your card is used in the [sections view](https://www.home-assistant.io/dashboards/sections/). Each section is divided in 12 columns.
+If you don't define this method, the card will take 12 columns and will ignore the rows of the grid.
 
 A cell of the grid is defined with the following dimension:
 
-- width: between `80px` and `120px` depending on the screen size
+- width: width of the section divided by 12 (approximately `30px`)
 - height: `56px`
 - gap between cells: `8px`
 
-The different layout options are:
+The different grid options are:
 
-- `grid_rows`: Default number of rows the card takes
-- `grid_min_rows`: Minimal number of rows the card takes
-- `grid_max_rows`: Maximal number of rows the card takes
-- `grid_columns`: Default number of columns the card takes
-- `grid_min_columns`: Minimal number of columns the card takes
-- `grid_max_columns`: Maximal number of columns the card takes
+- `rows`: Default number of rows the card takes
+- `min_rows`: Minimal number of rows the card takes
+- `max_rows`: Maximal number of rows the card takes
+- `columns`: Default number of columns the card takes (set it to `full` to enforce your card to be full width)
+- `min_columns`: Minimal number of columns the card takes
+- `max_columns`: Maximal number of columns the card takes
+
+For the number of columns, it's `highly` recommended to use multiple of 3 for the default value (`3`, `6`, `9` or `12`) so your card will have better looking on the dashboard by default.
 
 Example of implementation:
 
 ```js
-public getLayoutOptions() {
+public getGridOptions() {
   return {
-    grid_rows: 2,
-    grid_columns: 2,
-    grid_min_rows: 2,
+    rows: 2,
+    columns: 6,
+    min_rows: 2,
   };
 }
 ```
 
-In this example, the card will take 2 x 2 cells by default. The height of the card cannot be smaller than 2 rows. According to the cell dimension, the card will have a height of `120px` (`2` * `56px` + `8px`).
+In this example, the card will take 6 x 2 cells by default. The height of the card cannot be smaller than 2 rows. According to the cell dimension, the card will have a height of `120px` (`2` * `56px` + `8px`).
 
 ## Advanced example
 
