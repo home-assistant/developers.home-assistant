@@ -46,47 +46,6 @@ class OptionsFlowHandler(config_entries.OptionsFlow):
         )
 ```
 
-Config entry options should only be updated using `self.async_create_entry`. In complex flows, it may be necessary to work on a copy of mutable copy of the config entry options, which is available via the `self.options` property.
-
-```python
-class OptionsFlowHandler(config_entries.OptionsFlow):
-    async def async_step_options_1(
-        self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
-        """Manage the options."""
-        if user_input is not None:
-            self.options.update(user_input)
-            return self._show_options_menu()
-
-        return self.async_show_form(
-            step_id="options_1",
-            data_schema=self.add_suggested_values_to_schema(
-                OPTIONS_1_SCHEMA, self.options
-            ),
-        )
-
-    async def async_step_options_2(
-        self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
-        """Manage the options."""
-        if user_input is not None:
-            self.options.update(user_input)
-            return self._show_options_menu()
-
-        return self.async_show_form(
-            step_id="options_2",
-            data_schema=self.add_suggested_values_to_schema(
-                OPTIONS_2_SCHEMA, self.options
-            ),
-        )
-
-    async def async_step_save_options(
-        self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
-        """Update config entry options."""
-        return self.async_create_entry(title="", data=self.options)
-```
-
 ## Signal updates
 
 If the integration should act on updated options, you can register an update listener to the config entry that will be called when the entry is updated. A listener is registered by adding the following to the `async_setup_entry` function in your integration's `__init__.py`.
