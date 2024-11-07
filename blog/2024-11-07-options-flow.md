@@ -47,7 +47,7 @@ class OptionsFlowHandler(OptionsFlow):
         self._conf_app_id: str | None = None
 ```
 
-The main purpose of the `OptionsFlowWithConfigEntry` class was to provide `self.config_entry` property, and it is recommended to avoid using it in new code.
+Furthermore, the main purpose of the `OptionsFlowWithConfigEntry` class was to provide `self.config_entry` property, and it is recommended to avoid using it in new code.
 
 Custom components that wish to drop references to `OptionsFlowWithConfigEntry` may need further code adjustments if there are references to `self.options`:
 - if you are only reading the options values, then it is recommended that you adjust the reads to `self.config_entry.options` (see https://github.com/home-assistant/core/pull/129895)
