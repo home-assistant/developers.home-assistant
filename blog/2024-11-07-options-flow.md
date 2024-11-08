@@ -50,10 +50,10 @@ class OptionsFlowHandler(OptionsFlow):
 ```
 
 ### Special handling of OptionsFlowWithConfigEntry
-The main purpose of the `OptionsFlowWithConfigEntry` class was to provide `self.config_entry` property, which is now deprecated.
-There are currently no plans to remove this compatibility, but it is kept for backward compatibility only and it should be avoided in new code.
+The main purpose of the `OptionsFlowWithConfigEntry` class was to provide `self.config_entry` property, which is now already provided by the parent class.
+There are currently no plans to remove the `OptionsFlowWithConfigEntry` class, but it is kept for backward compatibility only and it should be avoided in new code.
 
-Custom components that wish to drop references to `OptionsFlowWithConfigEntry` will need to consider how they are referrencing `self.options`:
+Custom integrations that wish to drop references to `OptionsFlowWithConfigEntry` will need to consider how they are referencing `self.options`:
 - if `self.options` is not referenced, then the migration to `OptionsFlow` is straightforward (see [PR #129651](https://github.com/home-assistant/core/pull/129651))
 - if you are only reading the options values, then it is recommended that you adjust the reads to `self.config_entry.options` (see [PR #129895](https://github.com/home-assistant/core/pull/129895))
 - if you are updating/mutating the options values inside a single step, then it may be necessary to first copy the options (`options = deepcopy(dict(self.config_entry.options))` (see [PR #129928](https://github.com/home-assistant/core/pull/129928))
