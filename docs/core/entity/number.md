@@ -59,7 +59,7 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.PM1` | µg/m³ | Concentration of particulate matter less than 1 micrometer |
 | `NumberDeviceClass.PM25` | µg/m³ | Concentration of particulate matter less than 2.5 micrometers |
 | `NumberDeviceClass.PM10` | µg/m³ | Concentration of particulate matter less than 10 micrometers |
-| `SensorDeviceClass.POWER` | W, kW, MW, GW, TW | Power.
+| `NumberDeviceClass.POWER` | W, kW, MW, GW, TW | Power.
 | `NumberDeviceClass.POWER_FACTOR` | %, None | Power Factor
 | `NumberDeviceClass.PRECIPITATION` | cm, in, mm | Precipitation
 | `NumberDeviceClass.PRECIPITATION_INTENSITY` | in/d, in/h, mm/d, mm/h | Precipitation intensity
