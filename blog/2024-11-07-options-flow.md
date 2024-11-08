@@ -4,8 +4,8 @@ authorURL: https://github.com/epenet
 title: "New options flows properties"
 ---
 
-New helper properties have been added to the `OptionsFlow` to facilitate access to the config entry:
-- `self._config_entry_id` provides the ID of the config entry
+New helper properties have been added to the `OptionsFlow`:
+- `self._config_entry_id` provides the config entry ID
 - `self.config_entry` returns the config entry
 
 With the addition of these properties to the base `OptionsFlow`, setting `self.config_entry` property is deprecated and will fail from 2025.12.
