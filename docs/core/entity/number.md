@@ -55,7 +55,7 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.NITROGEN_MONOXIDE` | µg/m³ | Concentration of nitrogen monoxide |
 | `NumberDeviceClass.NITROUS_OXIDE` | µg/m³ | Concentration of nitrous oxide |
 | `NumberDeviceClass.OZONE` | µg/m³ | Concentration of ozone |
-| `SensorDeviceClass.PH` | None | Potential hydrogen (pH) of a aqueous solution |
+| `NumberDeviceClass.PH` | None | Potential hydrogen (pH) of a aqueous solution |
 | `NumberDeviceClass.PM1` | µg/m³ | Concentration of particulate matter less than 1 micrometer |
 | `NumberDeviceClass.PM25` | µg/m³ | Concentration of particulate matter less than 2.5 micrometers |
 | `NumberDeviceClass.PM10` | µg/m³ | Concentration of particulate matter less than 10 micrometers |
