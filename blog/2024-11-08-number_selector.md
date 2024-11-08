@@ -1,14 +1,14 @@
 ---
 author: epenet
 authorURL: https://github.com/epenet
-title: "Return an integer in number selector"
+title: "Number selector adds integer return value support"
 ---
 
-The [Number selector](https://www.home-assistant.io/docs/blueprint/selectors/#number-selector) has been expanded and now also includes an `as_int` parameter.
+The [Number selector](https://www.home-assistant.io/docs/blueprint/selectors/#number-selector) now includes an `as_int` parameter.
 
-Using this in [config flows](/docs/data_entry_flow_index#show-form) will remove the need to add an extra validation to the schema.
+Set this parameter in [config flows](/docs/data_entry_flow_index#show-form) to eliminate the extra schema validation step.
 
-Example:
+New implementation:
 
 ```python
 vol.Schema(
@@ -22,7 +22,7 @@ vol.Schema(
 )
 ```
 
-Old code:
+Previous implementation (with explicit integer conversion):
 
 ```python
 vol.Schema(
