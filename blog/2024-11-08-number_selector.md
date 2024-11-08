@@ -8,7 +8,7 @@ The [Number selector](https://www.home-assistant.io/docs/blueprint/selectors/#nu
 
 Set this parameter in [config flows](/docs/data_entry_flow_index#show-form) to eliminate the extra schema validation step.
 
-New implementation:
+New implementation (using `as_int` parameter):
 
 ```python
 vol.Schema(
