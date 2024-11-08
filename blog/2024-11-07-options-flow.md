@@ -9,9 +9,6 @@ New helper properties have been added to the `OptionsFlow`:
 - `self._config_entry_id` provides the config entry ID
 - `self.config_entry` returns the config entry
 
-:::info
-With the addition of these properties to the base `OptionsFlow`, setting `self.config_entry` property is deprecated and will fail from 2025.12.
-
 New code:
 ```python
 @staticmethod
@@ -48,9 +45,11 @@ class OptionsFlowHandler(OptionsFlow):
         self.config_entry = config_entry
         self._conf_app_id: str | None = None
 ```
-:::
 
 ### Backwards compatibility
+Until Home Assistant Core 2025.12, it is possible to set `self.config_entry` manually, but doing so will log a warning asking users to open an issue on the custom integration's bug tracker.
+
+### Special notes about OptionsFlowWithConfigEntry
 Furthermore, the main purpose of the `OptionsFlowWithConfigEntry` class was to provide `self.config_entry` property, and it is now deprecated.
 There are currently no plans to remove this compatibility, but it is kept for backward compatibility only and it should be avoided in new code.
 
