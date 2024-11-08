@@ -1,13 +1,15 @@
 ---
 author: epenet
 authorURL: https://github.com/epenet
-title: "New options flows properties"
+title: "New options flow properties"
 ---
 
+### Summary of changes
 New helper properties have been added to the `OptionsFlow`:
 - `self._config_entry_id` provides the config entry ID
 - `self.config_entry` returns the config entry
 
+:::info
 With the addition of these properties to the base `OptionsFlow`, setting `self.config_entry` property is deprecated and will fail from 2025.12.
 
 New code:
@@ -46,10 +48,14 @@ class OptionsFlowHandler(OptionsFlow):
         self.config_entry = config_entry
         self._conf_app_id: str | None = None
 ```
+:::
 
-Furthermore, the main purpose of the `OptionsFlowWithConfigEntry` class was to provide `self.config_entry` property, and it is recommended to avoid using it in new code.
+### Backwards compatibility
+Furthermore, the main purpose of the `OptionsFlowWithConfigEntry` class was to provide `self.config_entry` property, and it is now deprecated.
+There are currently no plans to remove this compatibility, but it is kept for backward compatibility only and it should be avoided in new code.
 
-Custom components that wish to drop references to `OptionsFlowWithConfigEntry` may need further code adjustments if there are references to `self.options`:
+Custom components that wish to drop references to `OptionsFlowWithConfigEntry` will need to consider how they are referrencing `self.options`:
+- if `self.options` is not referenced, then the migration to `OptionsFlow` is straightforward (see [PR #129651](https://github.com/home-assistant/core/pull/129651))
 - if you are only reading the options values, then it is recommended that you adjust the reads to `self.config_entry.options` (see [PR #129895](https://github.com/home-assistant/core/pull/129895))
 - if you are updating/mutating the options values inside a single step, then it may be necessary to first copy the options (`options = deepcopy(dict(self.config_entry.options))` (see [PR #129928](https://github.com/home-assistant/core/pull/129928))
 - if you are updating/mutating the options values through multiple step, then it may be necessary to copy the options inside the class initialisation (`self.options = deepcopy(dict(config_entry.options))` (see [PR #129890]( https://github.com/home-assistant/core/pull/129890))
