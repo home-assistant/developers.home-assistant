@@ -128,7 +128,7 @@ Providing state attributes comes with the following rules:
 
 - If an attribute is expected, it should be in the dictionary. Attributes should not "come and go".
 - If an attribute is expected, but it's not providing a value right now, its value should be `None` and remain in the dictionary.
-- If an attributes is not expected, it should not be in the dictionary. As example, only some attributes might provide additional context to the state when the entity runs with a certain configuration.
+- If an attribute is not expected, it should not be in the dictionary. An attribute is expected if supported by the entity, for example as indicated by `supported_features`.
 
 ## System properties
 
