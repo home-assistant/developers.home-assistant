@@ -121,13 +121,13 @@ The following properties are also available on entities. However, they are for a
 
 ## State attributes
 
-Entities can provide additional state attributes besides the built-in ones, to provide further details to it's state.
+Entities can provide additional state attributes besides the built-in ones, to provide further details to its state.
 This should be done by providing a dictionary with keys and values to the `extra_state_attributes` property.
 
-Providing additional state attributes comes with some rules:
+Providing state attributes comes with the following rules:
 
 - If an attribute is expected, it should be in the dictionary. Attributes should not "come and go".
-- If an attribute is expected, but it's not providing a value right now, its value should be `None` and remain in the dictionary
+- If an attribute is expected, but it's not providing a value right now, its value should be `None` and remain in the dictionary.
 - If an attributes is not expected, it should not be in the dictionary. As example, only some attributes might provide additional context to the state when the entity runs with a certain configuration.
 
 ## System properties
