@@ -44,6 +44,11 @@ As this approach uses containers, you may face challenges exposing hardware like
     * Select `Tasks: Run Task` -> `Run Home Assistant Core`
     * A terminal should open and begin outputting activity. Check for errors and wait for the output to stop/slow down.
     * Navigate a web browser to `http://localhost:8123`, and you should see the Home Assistant setup screen.
+7. In order to get the right localization and therefore local time in the devcontainer you need to set or adapt the right timezone in the devcontainer.json under .devcontainer folder.
+   Add  e.g. "TZ": "Europe/Berlin" to "containerEnv" section so that it looks like this (don't delete existing keys) and rebuild the container:
+   "containerEnv": {
+      "TZ": "Europe/Berlin"
+    },
 
 In the future, if you want to get back to your development environment: open Visual Studio Code, click on the "Remote Explorer" button in the sidebar, select "Containers" at the top of the sidebar.
 
