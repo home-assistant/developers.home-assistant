@@ -50,7 +50,7 @@ class OptionsFlowHandler(OptionsFlow):
 ```
 
 ### Special handling of OptionsFlowWithConfigEntry
-The main purpose of the `OptionsFlowWithConfigEntry` class was to provide `self.config_entry` property, which is now already provided by the parent class.
+The main purpose of the `OptionsFlowWithConfigEntry` class was to provide the `self.config_entry` property, which is now already provided by the parent class.
 There are currently no plans to remove the `OptionsFlowWithConfigEntry` class, but it is kept for backward compatibility only and it should be avoided in new code.
 
 Custom integrations that wish to drop references to `OptionsFlowWithConfigEntry` will need to consider how they are referencing `self.options`:
