@@ -1,18 +1,29 @@
 import React from 'react';
-import {useDocById, useDocsVersion} from '@docusaurus/plugin-content-docs/client';
-
-const tiers = require("./tiers.json")
+import {useDocsVersion} from '@docusaurus/plugin-content-docs/client';
 
 export default function RuleOverview({tier}) {
+    const docs = useDocsVersion().docs;
+    const ruleTiers = {
+        "bronze": [],
+        "silver": [],
+        "gold": [],
+        "platinum": [],
+    }
+    for (const [key, value] of Object.entries(docs)) {
+        if (key.startsWith("core/integration-quality-scale/rules/")) {
+            const [tier, rule] = key.split("/").slice(-2);
+            ruleTiers[tier].push({
+                rule,
+                title: value.title.split(": ")[1],
+            })
+        }
+    }
     return (
         <ul>
-            {tiers[tier].map((rule) => {
-                const lowerCaseRule = rule.toLowerCase();
-                const relatedRule = useDocsVersion().docs[`core/integration-quality-scale/rules/${lowerCaseRule}`];
-                const [ruleId, ruleText] = relatedRule.title.split(": ");
+            {ruleTiers[tier].map((rule) => {
                 return (
-                    <li key={rule}>
-                        <a href={`rules/${lowerCaseRule}`}>{ruleId}</a> - {ruleText}
+                    <li key={rule.rule}>
+                        <a href={`rules/${tier}/${rule.rule}`}>{rule.rule.toUpperCase()}</a> - {rule.title}
                     </li>
                 );
             })}
