@@ -93,7 +93,7 @@ the end-user getting your improvement faster.
    compatilibity code adjustments or small related bug fixes should be included in the
    PR. If you have new features that depend on the updated dependency, these can be
    added in a follow-up. This will also make CI iterations run a lot faster when reviewing
-   the new features, as it restricts the tests to a single integration.
+   the new features or larger bug fixes, as it restricts the tests to a single integration.
    Please also ensure that the PR description contains at least one (or multiple) of the
    following:
    - A link to the release notes of this package version, and all versions in between.
