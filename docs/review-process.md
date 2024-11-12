@@ -94,8 +94,7 @@ the end-user getting your improvement faster.
    PR. If you have new features that depend on the updated dependency, these can be
    added in a follow-up. This will also make CI iterations run a lot faster when reviewing
    the new features or larger bug fixes, as it restricts the tests to a single integration.
-   Please also ensure that the PR description contains at least one (or multiple) of the
-   following:
+   Ensure that the PR description contains at least one (or multiple) of the following:
    - A link to the release notes of this package version, and all versions in between.
    - A link to the changelog of this package.
    - A link to a Git(Hub) diff/compare view from the current version to the bumped version.
