@@ -92,15 +92,16 @@ the end-user getting your improvement faster.
    When you need to bump a dependency, try to do so in a standalone PR. Only
    compatilibity code adjustments or small related bug fixes should be included in the
    PR. If you have new features that depend on the updated dependency, these can be
-   added in a follow-up. Please also ensure that the PR description contains at least one
-   (or multiple) of the following:
+   added in a follow-up. This will also make CI iterations run a lot faster when reviewing
+   the new features, as it restricts the tests to a single integration.
+   Please also ensure that the PR description contains at least one (or multiple) of the
+   following:
    - A link to the release notes of this package version, and all versions in between.
    - A link to the changelog of this package.
    - A link to a Git(Hub) diff/compare view from the current version to the bumped version.
    This allows us to review upstream changes, which is needed to decide if this change is
    working as intended and/or if we can include it in, for example, a patch release of
-   Home Assistant. It will also make CI iterations run a lot faster when reviewing the new
-   features, as it restricts the tests to a single integration.
+   Home Assistant.
 
 ## Receiving review comments
 
