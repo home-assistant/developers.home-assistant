@@ -12,31 +12,23 @@ Set this parameter in [config flows](/docs/data_entry_flow_index#show-form) to e
 New implementation (using an integer step):
 
 ```python
-vol.Schema(
-    {
-        vol.Optional(CONF_ADDRESS): NumberSelector(
-            NumberSelectorConfig(
-                min=1, max=255, mode=NumberSelectorMode.BOX, step=1
-            )
-        ),
-    }
+vol.Optional(CONF_ADDRESS): NumberSelector(
+    NumberSelectorConfig(
+        min=1, max=255, mode=NumberSelectorMode.BOX, step=1
+    )
 )
 ```
 
 Previous implementation (with explicit integer conversion):
 
 ```python
-vol.Schema(
-    {
-        vol.Optional(CONF_ADDRESS): vol.All(
-            NumberSelector(
-                NumberSelectorConfig(
-                    min=1, max=255, mode=NumberSelectorMode.BOX
-                )
-            ),
-            vol.Coerce(int),
-        ),
-    }
+vol.Optional(CONF_ADDRESS): vol.All(
+    NumberSelector(
+        NumberSelectorConfig(
+            min=1, max=255, mode=NumberSelectorMode.BOX
+        )
+    ),
+    vol.Coerce(int),
 )
 ```
 
