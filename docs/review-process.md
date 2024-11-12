@@ -100,7 +100,7 @@ the end-user getting your improvement faster.
    This allows us to review upstream changes, which is needed to decide if this change is
    working as intended and/or if we can include it in, for example, a patch release of
    Home Assistant. It will also make CI iterations run a lot faster when reviewing the new
-   features, as it should be restrict the tests to a single integration.
+   features, as it restricts the tests to a single integration.
 
 ## Receiving review comments
 
