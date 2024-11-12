@@ -83,8 +83,7 @@ the end-user getting your improvement faster.
    has been merged.
 
 6. **Follow the PR template and add a clear title & an extensive description.**
-   When you open up a PR, you will be provided with a PR template. Use the template
-   and fill out as many fields as possible. Take your time to write a good,
+   When you open up a PR, you will be provided with a PR template. Use the template and fill out as many fields as possible. Take your time to write a good,
    clear, and concise title, and add an extensive description of your change.
    Be sure to add a motivation (or use case) to your PR, so the reviewer can
    understand why you are making this change (or why you make certain decisions).
