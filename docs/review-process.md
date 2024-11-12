@@ -99,7 +99,8 @@ the end-user getting your improvement faster.
    - A link to a Git(Hub) diff/compare view from the current version to the bumped version.
    This allows us to review upstream changes, which is needed to decide if this change is
    working as intended and/or if we can include it in, for example, a patch release of
-   Home Assistant.
+   Home Assistant. It will also make CI iterations run a lot faster when reviewing the new
+   features, as it should be restrict the tests to a single integration.
 
 ## Receiving review comments
 
