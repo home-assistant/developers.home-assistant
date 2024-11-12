@@ -90,7 +90,7 @@ the end-user getting your improvement faster.
    
 7. **Update dependency in a standalone PR.**
    When you need to bump a dependency, try to do so in a standalone PR. Only
-   compatilibity code adjustments or related bug fixes should be included in the
+   compatilibity code adjustments or small related bug fixes should be included in the
    PR. If you have new features that depend on the updated dependency, these can be
    added in a follow-up. Please also ensure that the PR description contains at least one
    (or multiple) of the following:
