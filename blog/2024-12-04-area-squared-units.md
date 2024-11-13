@@ -7,7 +7,7 @@ title: "Area squared unit enumerators"
 As of Home Assistant Core 2024.12, the following unit constant is deprecated and replaced 
 by a corresponding enum:
 
-  - `UnitOfArea` enumerator replaces `AREA_SQUARE_METERS` constant
+- `UnitOfArea` enumerator replaces `AREA_SQUARE_METERS` constant
 
 Area units can also be converted between us customary and metric units using `AreaConverter`
 
