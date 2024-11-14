@@ -472,8 +472,6 @@ If your integration provides entities under its domain, you will want to transla
 Integrations can provide translations for native units of measurement of its entities. To do this, provide an `entity` object, that contains translations for the units and set the entity's `translation_key` property to a key under a domain in the `entity` object.
 If the entity's `translation_key` property is not `None` and the `entity` object provides a translated name, `SensorEntityDescription.native_unit_of_measurement` and `NumberEntityDescription.native_unit_of_measurement` will be ignored.
 
-Entity components, like `sensor`, already have existing translations available that can be reused by referencing those. For example, it already has translations available for a "steps" unit that can be referenced. Referencing existing translations is preferred, as it prevents translating the same thing multiple times.
-
 The following example `strings.json` is for a `sensor` entity with its `translation_key` property set to `goal`:
 ```json
 {
@@ -486,21 +484,6 @@ The following example `strings.json` is for a `sensor` entity with its `translat
   }
 }
 ```
-
-The following example `strings.json` is for a `sensor` entity with its `translation_key` property set to `goal` where a shared translation provided by the `sensor` integration is used:
-
-```json
-{
-  "entity": {
-    "sensor": {
-      "goal": {
-        "native_unit_of_measurement": "[%key:component::sensor::entity_component::steps::native_unit_of_measurement%]"
-      }
-    }
-  }
-}
-```
-
 
 ## Test translations
 
