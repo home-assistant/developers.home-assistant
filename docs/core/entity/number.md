@@ -31,7 +31,7 @@ If specifying a device class, your number entity will need to also return the co
 
 | Constant | Supported units | Description
 | ---- | ---- | -----------
-| `NumberDeviceClass.APPARANT_POWER` | VA | Apparent power |
+| `NumberDeviceClass.APPARENT_POWER` | VA | Apparent power |
 | `NumberDeviceClass.AQI` | None | Air Quality Index
 | `NumberDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Atmospheric pressure, statistics will be stored in Pa.
 | `NumberDeviceClass.BATTERY` | % | Percentage of battery that is left
