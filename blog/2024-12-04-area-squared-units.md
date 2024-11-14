@@ -1,7 +1,7 @@
 ---
 author: mikey0000
 authorURL: https://github.com/mikey0000
-title: "Area squared unit enumerators"
+title: "New area device class"
 ---
 
 As of Home Assistant Core 2024.12, the following unit constant is deprecated and replaced by a corresponding enum:
