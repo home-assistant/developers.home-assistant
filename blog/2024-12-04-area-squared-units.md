@@ -13,6 +13,4 @@ As of Home Assistant Core 2024.12, the following unit constant is deprecated and
 
 - `UnitOfArea` enumerator replaces `AREA_SQUARE_METERS` constant
 
-Area units can also be converted between us customary and metric units using `AreaConverter`
-
 More details can be found in the [Number documentation](/docs/core/entity/number#available-device-classes) and [Sensor documentation](/docs/core/entity/sensor#available-device-classes)
