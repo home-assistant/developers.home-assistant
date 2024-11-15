@@ -9,8 +9,7 @@ A new `AREA` device class is now available for number and sensor entities, toget
 A corresponding `UnitOfArea` unit enumerator, and `AreaConverter` converter class have been added to support the new device class.
 
 ### Backward compatibility
-As of Home Assistant Core 2024.12, the following unit constant is deprecated and replaced by a corresponding enum:
-
-- `UnitOfArea` enumerator replaces `AREA_SQUARE_METERS` constant
+The `AREA_SQUARE_METERS` constant has been deprecated and will be removed in Home Assistant `2025.12`.
+Custom integrations should be adjusted to use `UnitOfArea.SQUARE_METERS`.
 
 More details can be found in the [Number documentation](/docs/core/entity/number#available-device-classes) and [Sensor documentation](/docs/core/entity/sensor#available-device-classes)
