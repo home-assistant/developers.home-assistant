@@ -119,7 +119,7 @@ For a more detailed explanation of `strings.json` see the [backend tra
 This result type will show a form to the user to fill in. You define the current step, the schema of the data (using a mixture of voluptuous and/or [selectors](https://www.home-assistant.io/docs/blueprint/selectors/)) and optionally a dictionary of errors.
 
 ```python
-from homeassistant.data_entry_flow import section
+from homeassistant import data_entry_flow
 from homeassistant.helpers.selector import selector
 
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
@@ -129,7 +129,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
             vol.Required("username"): str,
             vol.Required("password"): str,
             # Items can be grouped by collapsible sections
-            "ssl_options": section(
+            vol.Required("ssl_options"): data_entry_flow.section(
                 vol.Schema(
                     {
                         vol.Required("ssl", default=True): bool,
