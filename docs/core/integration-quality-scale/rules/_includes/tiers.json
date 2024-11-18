@@ -7,15 +7,56 @@
     "IQS007",
     "IQS008",
     "IQS011",
-    "IQS012"
+    "IQS012",
+    "IQS022",
+    "IQS034",
+    "IQS035",
+    "IQS036",
+    "IQS040",
+    "IQS042",
+    "IQS043",
+    "IQS048",
+    "IQS053"
   ],
   "silver": [
     "IQS005",
+    "IQS009",
     "IQS010",
-    "IQS020"
+    "IQS017",
+    "IQS020",
+    "IQS023",
+    "IQS024",
+    "IQS025",
+    "IQS037",
+    "IQS044",
+    "IQS045"
   ],
   "gold": [
-    "IQS016"
+    "IQS013",
+    "IQS014",
+    "IQS015",
+    "IQS016",
+    "IQS018",
+    "IQS019",
+    "IQS021",
+    "IQS026",
+    "IQS030",
+    "IQS031",
+    "IQS032",
+    "IQS033",
+    "IQS038",
+    "IQS039",
+    "IQS041",
+    "IQS046",
+    "IQS047",
+    "IQS049",
+    "IQS050",
+    "IQS051",
+    "IQS052"
   ],
-  "platinum": []
+  "platinum": [
+    "IQS027",
+    "IQS028",
+    "IQS029"
+  ]
 }

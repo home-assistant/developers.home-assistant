@@ -1,14 +1,15 @@
 import React from 'react';
-import {useDocById, useDocsVersion} from '@docusaurus/plugin-content-docs/client';
+import {useDocsVersion} from '@docusaurus/plugin-content-docs/client';
 
 const tiers = require("./tiers.json")
 
 export default function RuleOverview({tier}) {
+    const docs = useDocsVersion().docs;
     return (
         <ul>
             {tiers[tier].map((rule) => {
                 const lowerCaseRule = rule.toLowerCase();
-                const relatedRule = useDocsVersion().docs[`core/integration-quality-scale/rules/${lowerCaseRule}`];
+                const relatedRule = docs[`core/integration-quality-scale/rules/${lowerCaseRule}`];
                 const [ruleId, ruleText] = relatedRule.title.split(": ");
                 return (
                     <li key={rule}>
