@@ -1,6 +1,7 @@
 ---
 title: "Integration quality scale"
 ---
+import RuleOverview from './rules/_includes/rule_overview.jsx'
 
 The integration quality scale is a framework for Home Assistant to grade integrations based on user experience, features, code quality and developer experience.
 To grade this, the project has come up with a set of tiers, which all have their own meaning.
@@ -103,68 +104,19 @@ One exception to this is integrations that have devices that are part of the Wor
 The rules for each tier are defined down below and come with its own page with examples and more information.
 
 ### 🥉 Bronze
-- [IQS001](rules/iqs001) - Integration needs to be able to be set up via the UI
-- [IQS002](rules/iqs002) - Test a connection in the config flow
-- [IQS003](rules/iqs003) - Don't allow the same device or service to be able to be set up twice
-- [IQS004](rules/iqs004) - Full test coverage for the config flow
-- [IQS006](rules/iqs006) - Use ConfigEntry.runtime_data to store runtime data
-- IQS007 - Check during integration setup if we are able to set it up correctly
-- IQS008 - If it's a polling integration, set an appropriate polling interval
-- IQS011 - Entities have a unique ID
-- IQS012 - Entities use has_entity_name = True
-- IQS022 - Entities event setup
-- IQS034 - Dependency transparency
-- IQS035 - Services are added in async_setup
-- IQS036 - Place common patterns in common modules
-- IQS040 - The documentation includes a high-level description of the brand, product, or service it integrates with; if available, with links to the brand, product, or service website.
-- IQS042 - The documentation provides step-by-step installation instructions for the integration, including, if needed, prerequisites.
-- IQS043 - The documentation provides removal instructions.
-- IQS048 - The documentation described the provided actions that can be used.
-- IQS053 - Has branding assets available for the integration
+<RuleOverview tier="bronze" />
 
 
 ### 🥈 Silver
-- [IQS005](rules/iqs005) - Support config entry unloading
-- IQS009 - If internet/device/service unavailable, log a warning once unavailable and once when back connected
-- IQS010 - Mark entity unavailable if appropriate
-- IQS017 - Services raise errors when encountering failures
-- IQS020 - Reauthentication
-- IQS023 - Set Parallel updates
-- IQS024 - Above average test coverage for all integration module
-- IQS025 - Has a code owner
-- IQS037 - Keep the config flow understandable and validate where needed
-- IQS044 - The documentation describes all integration installation parameters.
-- IQS045 - The documentation describes all integration configuration options.
+<RuleOverview tier="silver" />
 
 
 ### 🥇 Gold
-- IQS013 - Entities have translated names
-- IQS014 - Entities use device classes where possible
-- IQS015 - Entities use DeviceInfo correctly
-- IQS016 - Entities are assigned an appropriate EntityCategory
-- IQS018 - Integration disables less popular (or noisy) entities
-- IQS019 - Is discoverable when possible
-- IQS021 - Clean up stale devices
-- IQS026 - Implements diagnostics
-- IQS030 - Errors are translatable
-- IQS031 - Icon translations
-- IQS032 - Reconfigure flow
-- IQS033 - Dynamic devices
-- IQS038 - Make effective use of the config entry data and options
-- IQS039 - issues and repairs are used effectively
-- IQS041 - The documentation describes use cases to inspire the end-user in using this integration.
-- IQS046 - The documentation provides a list of known supported / unsupported devices.
-- IQS047 - The documentation describes the supported functionality, including entities, and platforms
-- IQS049 - The documentation describes how data is updated and, if applicable, the polling interval used or how it is determined.
-- IQS050 - The documentation describes known limitations of the integrations (not to be confused with bugs).
-- IQS051 - The documentation provides troubleshooting information.
-- IQS052 - The documentation provides examples the user can use. For example (snippets of) configuration, automations, blueprints, scripts, or dashboards.
+<RuleOverview tier="gold" />
 
 
 ### 🏆 Platinum
-- IQS027 - Dependency is async
-- IQS028 - If making HTTP requests, support passing in websession
-- IQS029 - Strict typing
+<RuleOverview tier="platinum" />
 
 
 ## Special tiers
