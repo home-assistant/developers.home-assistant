@@ -5,7 +5,6 @@ const tiers = require("./tiers.json")
 
 export default function RuleOverview({tier}) {
     const docs = useDocsVersion().docs;
-    console.log(docs)
     return (
         <ul>
             {tiers[tier].map((rule) => {
