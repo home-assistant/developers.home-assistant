@@ -9,7 +9,6 @@ export default function RuleOverview({tier}) {
         <ul>
             {tiers[tier].map((rule) => {
                 const lowerCaseRule = rule.toLowerCase();
-                console.log(lowerCaseRule)
                 const relatedRule = docs[`core/integration-quality-scale/rules/${lowerCaseRule}`];
                 const [ruleId, ruleText] = relatedRule.title.split(": ");
                 return (
