@@ -284,9 +284,11 @@ class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_reconfigure(self, user_input: dict[str, Any] | None = None):
         if user_input is not None:
             # TODO: process user input
+            self.async_set_unique_id(user_id)
+            self._abort_if_unique_id_mismatch()
             return self.async_update_reload_and_abort(
-                self._get_reauth_entry(),
-                data=data,
+                self._get_reconfigure_entry(),
+                data_updates=data,
             )
 
         return self.async_show_form(
@@ -307,7 +309,7 @@ Ensuring that the `unique_id` is unchanged should be done using `await self.asyn
 ## Reauthentication
 
 Gracefully handling authentication errors such as invalid, expired, or revoked tokens is needed to advance on the [Integration Quality Scale](core/integration-quality-scale). This example of how to add reauth to the OAuth flow created by `script.scaffold` following the pattern in [Building a Python library](api_lib_auth.md#oauth2).
-If you are looking for how to trigger the reauthentication flow, see [handling expired credentials](integration_setup_failures#handling-expired-credentials).
+If you are looking for how to trigger the reauthentication flow, see [handling expired credentials](integration_setup_failures.md#handling-expired-credentials).
 
 This example catches an authentication exception in config entry setup in `__init__.py` and instructs the user to visit the integrations page in order to reconfigure the integration.
 
@@ -360,11 +362,14 @@ class OAuth2FlowHandler(
 
     async def async_oauth_create_entry(self, data: dict) -> dict:
         """Create an oauth config entry or update existing entry for reauth."""
+        self.async_set_unique_id(user_id)
         if self.source == SOURCE_REAUTH:
+            self._abort_if_unique_id_mismatch()
             return self.async_update_reload_and_abort(
                 self._get_reauth_entry(),
-                data=data,
+                data_updates=data,
             )
+        self._abort_if_unique_id_configured()
         return await super().async_oauth_create_entry(data)
 ```
 

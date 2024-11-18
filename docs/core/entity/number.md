@@ -31,10 +31,11 @@ If specifying a device class, your number entity will need to also return the co
 
 | Constant | Supported units | Description
 | ---- | ---- | -----------
-| `NumberDeviceClass.APPARANT_POWER` | VA | Apparent power |
+| `NumberDeviceClass.APPARENT_POWER` | VA | Apparent power |
 | `NumberDeviceClass.AQI` | None | Air Quality Index
 | `NumberDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Atmospheric pressure, statistics will be stored in Pa.
 | `NumberDeviceClass.BATTERY` | % | Percentage of battery that is left
+| `NumberDeviceClass.BLOOD_GLUCOSE_CONCENTRATION` | mg/dL, mmol/L | Blood glucose concentration```
 | `NumberDeviceClass.CARBON_DIOXIDE` | ppm | Concentration of carbon dioxide.
 | `NumberDeviceClass.CARBON_MONOXIDE` | ppm | Concentration of carbon monoxide.
 | `NumberDeviceClass.CONDUCTIVITY` | S/cm, mS/cm, µS/cm | Conductivity
@@ -42,8 +43,8 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.DATA_RATE` | bit/s, kbit/s, Mbit/s, Gbit/s, B/s, kB/s, MB/s, GB/s, KiB/s, MiB/s, GiB/s | Data rate
 | `NumberDeviceClass.DATA_SIZE` | bit, kbit, Mbit, Gbit, B, kB, MB, GB, TB, PB, EB, ZB, YB, KiB, MiB, GiB, TiB, PiB, EiB, ZiB, YiB | Data size
 | `NumberDeviceClass.DISTANCE` | km, m, cm, mm, mi, yd, in | Generic distance
-| `NumberDeviceClass.ENERGY` | Wh, kWh, MWh, MJ, GJ | Energy, this device class should used to represent energy consumption, for example an electricity meter. Represents _power_ over _time_. Not to be confused with `power`.
-| `NumberDeviceClass.ENERGY_STORAGE` | Wh, kWh, MWh, MJ, GJ | Stored energy, this device class should be used to represent stored energy, for example the amount of electric energy currently stored in a battery or the capacity of a battery. Represents _power_ over _time_. Not to be confused with `power`.
+| `NumberDeviceClass.ENERGY` | Wh, kWh, MWh, GWh, TWh, MJ, GJ | Energy, this device class should used to represent energy consumption, for example an electricity meter. Represents _power_ over _time_. Not to be confused with `power`.
+| `NumberDeviceClass.ENERGY_STORAGE` | Wh, kWh, MWh, GWh, TWh, MJ, GJ | Stored energy, this device class should be used to represent stored energy, for example the amount of electric energy currently stored in a battery or the capacity of a battery. Represents _power_ over _time_. Not to be confused with `power`.
 | `NumberDeviceClass.FREQUENCY` | Hz, kHz, MHz, GHz | Frequency
 | `NumberDeviceClass.GAS` | m³, ft³, CCF | Volume of gas. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
 | `NumberDeviceClass.HUMIDITY` | % | Relative humidity
@@ -55,11 +56,11 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.NITROGEN_MONOXIDE` | µg/m³ | Concentration of nitrogen monoxide |
 | `NumberDeviceClass.NITROUS_OXIDE` | µg/m³ | Concentration of nitrous oxide |
 | `NumberDeviceClass.OZONE` | µg/m³ | Concentration of ozone |
-| `SensorDeviceClass.PH` | None | Potential hydrogen (pH) of a aqueous solution |
+| `NumberDeviceClass.PH` | None | Potential hydrogen (pH) of a aqueous solution |
 | `NumberDeviceClass.PM1` | µg/m³ | Concentration of particulate matter less than 1 micrometer |
 | `NumberDeviceClass.PM25` | µg/m³ | Concentration of particulate matter less than 2.5 micrometers |
 | `NumberDeviceClass.PM10` | µg/m³ | Concentration of particulate matter less than 10 micrometers |
-| `NumberDeviceClass.POWER` | W, kW | Power.
+| `NumberDeviceClass.POWER` | W, kW, MW, GW, TW | Power.
 | `NumberDeviceClass.POWER_FACTOR` | %, None | Power Factor
 | `NumberDeviceClass.PRECIPITATION` | cm, in, mm | Precipitation
 | `NumberDeviceClass.PRECIPITATION_INTENSITY` | in/d, in/h, mm/d, mm/h | Precipitation intensity
