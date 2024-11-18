@@ -103,11 +103,11 @@ One exception to this is integrations that have devices that are part of the Wor
 The rules for each tier are defined down below and come with its own page with examples and more information.
 
 ### 🥉 Bronze
-- IQS001 - Integration needs to be able to be set up via the UI
+- [IQS001](rules/iqs001) - Integration needs to be able to be set up via the UI
 - [IQS002](rules/iqs002) - Test a connection in the config flow
-- IQS003 - Don't allow the same device or service to be able to be set up twice
+- [IQS003](rules/iqs003) - Don't allow the same device or service to be able to be set up twice
 - [IQS004](rules/iqs004) - Full test coverage for the config flow
-- IQS006 - Use ConfigEntry.runtime_data to store runtime data
+- [IQS006](rules/iqs006) - Use ConfigEntry.runtime_data to store runtime data
 - IQS007 - Check during integration setup if we are able to set it up correctly
 - IQS008 - If it's a polling integration, set an appropriate polling interval
 - IQS011 - Entities have a unique ID
@@ -124,7 +124,7 @@ The rules for each tier are defined down below and come with its own page with e
 
 
 ### 🥈 Silver
-- IQS005 - Support config entry unloading
+- [IQS005](rules/iqs005) - Support config entry unloading
 - IQS009 - If internet/device/service unavailable, log a warning once unavailable and once when back connected
 - IQS010 - Mark entity unavailable if appropriate
 - IQS017 - Services raise errors when encountering failures
