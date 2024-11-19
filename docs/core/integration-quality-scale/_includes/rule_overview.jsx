@@ -8,7 +8,11 @@ export default function RuleOverview({tier}) {
     return (
         <ul>
             {tiers[tier].map((rule) => {
-                const lowerCaseRule = rule.toLowerCase();
+                let id = rule;
+                if (typeof rule === "object") {
+                    id = rule.id;
+                }
+                const lowerCaseRule = id.toLowerCase();
                 const relatedRule = docs[`core/integration-quality-scale/rules/${lowerCaseRule}`];
                 const [ruleId, ruleText] = relatedRule.title.split(": ");
                 return (

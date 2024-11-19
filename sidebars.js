@@ -6,7 +6,12 @@
  */
 
 const iqs_rules_by_tier = require('./docs/core/integration-quality-scale/_includes/tiers.json');
-const iqs_rules = Object.values(iqs_rules_by_tier).flat().sort();
+const iqs_rules = Object.values(iqs_rules_by_tier).flat().map((rule) => {
+    if (typeof rule === "string") {
+        return rule;
+    }
+    return rule.id;
+}).sort();
 
 
 
