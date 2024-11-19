@@ -22,12 +22,12 @@ export default function Checklist() {
                         {tiers[tier].map((rule) => {
                             if (typeof rule === "string") {
                                 const {id, text} = getRuleWithDocs(rule);
-                                return `- [ ] ${id} - ${text}\n`;
+                                return `- [ ] **${id} - ${text}**\n`;
                             }
                             const {id, text} = getRuleWithDocs(rule.id);
                             return [
-                                `- [ ] ${id} - ${text}\n`,
-                                ...rule.subchecks.map(subcheck => `    - [ ] ${subcheck}\n`)
+                                `- [ ] **${id} - ${text}**\n`,
+                                ...rule.subchecks.map(subcheck => `    - [ ] **${subcheck}**\n`)
                             ].join('');
                         }).join('')}
                         {`\n`}
