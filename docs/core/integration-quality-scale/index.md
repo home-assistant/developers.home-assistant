@@ -1,7 +1,7 @@
 ---
 title: "Integration quality scale"
 ---
-import RuleOverview from './rules/_includes/rule_overview.jsx'
+import RuleOverview from './_includes/rule_overview.jsx'
 
 The integration quality scale is a framework for Home Assistant to grade integrations based on user experience, features, code quality and developer experience.
 To grade this, the project has come up with a set of tiers, which all have their own meaning.
@@ -81,6 +81,7 @@ Characteristics:
 ## Adjusting the tier of an integration
 When an integration reaches the minimum requirements for a certain tier, a contributor can open a pull request to adjust the scale for the integration.
 This request needs to be accompanied by the full checklist for each rule of scale (including all rules of lower tiers), demonstrating that it has met those requirements.
+The checklist can be found [here](checklist).
 
 Once the Home Assistant core team reviews and approves it, the integration will display the new tier as of the next major release of Home Assistant.
 

@@ -5,7 +5,7 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const iqs_rules_by_tier = require('./docs/core/integration-quality-scale/rules/_includes/tiers.json');
+const iqs_rules_by_tier = require('./docs/core/integration-quality-scale/_includes/tiers.json');
 const iqs_rules = Object.values(iqs_rules_by_tier).flat().sort();
 
 
@@ -145,11 +145,13 @@ module.exports = {
       type: "category",
       label: "Integration Quality Scale",
       link: {type: 'doc', id: 'core/integration-quality-scale/index'},
-      items: iqs_rules.map(rule => ({
+      items: [
+        {type: 'doc', id: 'core/integration-quality-scale/checklist'},
+          ...iqs_rules.map(rule => ({
           type: 'doc',
           id: `core/integration-quality-scale/rules/${rule.toLowerCase()}`
         })
-      )
+      )]
     },
     {
       type: "category",
