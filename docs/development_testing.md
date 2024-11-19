@@ -45,7 +45,7 @@ If you are working on tests for an integration and you changed the dependencies,
 Next you can update all dependencies in your development environment by running:
 
 ```shell
-pip3 install -r requirements_test_all.txt
+uv pip install -r requirements_test_all.txt
 ```
 ### Running a limited test suite
 
