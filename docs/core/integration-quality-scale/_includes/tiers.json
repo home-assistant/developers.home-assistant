@@ -1,6 +1,12 @@
 {
   "bronze": [
-    "IQS001",
+    {
+      "id": "IQS001",
+      "subchecks": [
+        "Uses `data_description` to give context to fields",
+        "Uses `ConfigEntry.data` and `ConfigEntry.options` correctly"
+      ]
+    },
     "IQS002",
     "IQS003",
     "IQS004",
