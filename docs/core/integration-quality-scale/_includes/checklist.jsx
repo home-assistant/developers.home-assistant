@@ -4,8 +4,7 @@ import CodeBlock from '@theme/CodeBlock';
 
 const tiers = require("./tiers.json")
 
-function getRule(ruleId) {
-    const docs = useDocsVersion().docs;
+function getRule(ruleId, docs) {
     const rule = docs[`core/integration-quality-scale/rules/${ruleId.toLowerCase()}`];
     const [id, text] = rule.title.split(": ");
     return {id, text};
@@ -13,40 +12,26 @@ function getRule(ruleId) {
 
 export default function Checklist() {
     const docs = useDocsVersion().docs;
+    const getRuleWithDocs = (ruleId) => getRule(ruleId, docs);
     return (
         <CodeBlock language="markdown">
             {Object.keys(tiers).map((tier) => {
                 return (
-                    <div>
-                        <p>## {tier.charAt(0).toUpperCase() + tier.slice(1)}</p>
-                        {
-                            tiers[tier].map((rule) => {
+                    <div key={tier}>
+                            {`## ${tier.charAt(0).toUpperCase() + tier.slice(1)}\n`}
+                            {tiers[tier].map((rule) => {
                                 if (typeof rule === "string") {
-                                    const {id, text} = getRule(rule);
-                                    return (
-                                        <p key={rule}>
-                                            - [ ] {id} - {text}
-                                        </p>
-                                    );
-                                }
-                                const {id, text} = getRule(rule.id);
-                                return (
-                                    <p key={rule.id}>
-                                        - [ ] {id} - {text}
-                                        {
-                                            rule.subchecks.map((subcheck) => {
-                                                return (
-                                                    <p key={subcheck}>
-                                                        &nbsp;&nbsp;&nbsp;&nbsp;- [ ] {subcheck}
-                                                    </p>
-                                                );
-                                        })
-                                        }
-                                    </p>
-                                );
-                            })
-                        }
-                    </div>
+                                        const {id, text} = getRuleWithDocs(rule);
+                                        return `- [ ] ${id} - ${text}\n`;
+                                    }
+                                const {id, text} = getRuleWithDocs(rule.id);
+                                return [
+                                        `- [ ] ${id} - ${text}\n`,
+                                        ...rule.subchecks.map(subcheck => `    - [ ] ${subcheck}\n`)
+                                    ].join('');
+                           }).join('')}
+                        {`\n`}
+                        </div>
                 )
             })}
         </CodeBlock>
