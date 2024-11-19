@@ -18,7 +18,7 @@ export default function Checklist() {
             {Object.keys(tiers).map((tier) => {
                 return (
                     <div>
-                        <p>{tier.charAt(0).toUpperCase() + tier.slice(1)}</p>
+                        <p>## {tier.charAt(0).toUpperCase() + tier.slice(1)}</p>
                         {
                             tiers[tier].map((rule) => {
                                 if (typeof rule === "string") {
