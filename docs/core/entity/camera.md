@@ -15,7 +15,6 @@ Properties should always only return information from memory and not do I/O (lik
 | ------------------------ | ------------------------------------| ------- | --------------------------------------------------------------------------------------------------- |
 | brand                    | <code>str &#124; None</code>        | `None`  | The brand (manufacturer) of the camera.                                                             |
 | frame_interval           | `float`                             | 0.5     | The interval between frames of the stream.                                                          |
-| frontend_stream_type     | <code>StreamType &#124; None</code> | `None`  | Used with `CameraEntityFeature.STREAM` to tell the frontend which type of stream to use (`StreamType.HLS` or `StreamType.WEB_RTC`) |
 | is_on                    | `bool`                              | `True`  | Indication of whether the camera is on.                                                             |
 | is_recording             | `bool`                              | `False` | Indication of whether the camera is recording. Used to determine `state`.                           |
 | is_streaming             | `bool`                              | `False` | Indication of whether the camera is streaming. Used to determine `state`.                           |
@@ -93,15 +92,14 @@ A common way for a camera entity to render a camera still image is to pass the s
 
 ### WebRTC streams
 
-WebRTC enabled cameras can be used by facilitating a direct connection with the home assistant frontend. This usage requires `CameraEntityFeature.STREAM` with `frontend_stream_type` set to `StreamType.WEB_RTC`.
-
-The integration must implement the two following methods to support native WebRTC:
+WebRTC enabled cameras can be used by facilitating a direct connection with the home assistant frontend. This usage requires `CameraEntityFeature.STREAM` and the integration must implement the two following methods to support native WebRTC:
 - `async_handle_async_webrtc_offer`: To initialize a WebRTC stream. Any messages/errors coming in async should be forwared to the frontend with the `send_message` callback.
 - `async_on_webrtc_candidate`: The frontend will call it with any candidate coming in after the offer is sent.
 The following method can optionally be implemented:
 - `close_webrtc_session` (Optional): The frontend will call it when the stream is closed. Can be used to clean up things.
 
 WebRTC streams do not use the `stream` component and do not support recording.
+By implementing the WebRTC methods, the frontend assumes that the camera supports only WebRTC and therefore will not fallbac to HLS.
 
 ```python
 class MyCamera(Camera):
