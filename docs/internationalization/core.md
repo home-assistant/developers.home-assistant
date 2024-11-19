@@ -478,7 +478,7 @@ The following example `strings.json` is for a `sensor` entity with its `translat
   "entity": {
     "sensor": {
       "goal": {
-        "native_unit_of_measurement": "Steps"
+        "native_unit_of_measurement": "steps"
       }
     }
   }
