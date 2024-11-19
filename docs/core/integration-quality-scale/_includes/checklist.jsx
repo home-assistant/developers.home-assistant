@@ -18,20 +18,20 @@ export default function Checklist() {
             {Object.keys(tiers).map((tier) => {
                 return (
                     <div key={tier}>
-                            {`## ${tier.charAt(0).toUpperCase() + tier.slice(1)}\n`}
-                            {tiers[tier].map((rule) => {
-                                if (typeof rule === "string") {
-                                        const {id, text} = getRuleWithDocs(rule);
-                                        return `- [ ] ${id} - ${text}\n`;
-                                    }
-                                const {id, text} = getRuleWithDocs(rule.id);
-                                return [
-                                        `- [ ] ${id} - ${text}\n`,
-                                        ...rule.subchecks.map(subcheck => `    - [ ] ${subcheck}\n`)
-                                    ].join('');
-                           }).join('')}
+                        {`## ${tier.charAt(0).toUpperCase() + tier.slice(1)}\n`}
+                        {tiers[tier].map((rule) => {
+                            if (typeof rule === "string") {
+                                const {id, text} = getRuleWithDocs(rule);
+                                return `- [ ] ${id} - ${text}\n`;
+                            }
+                            const {id, text} = getRuleWithDocs(rule.id);
+                            return [
+                                `- [ ] ${id} - ${text}\n`,
+                                ...rule.subchecks.map(subcheck => `    - [ ] ${subcheck}\n`)
+                            ].join('');
+                        }).join('')}
                         {`\n`}
-                        </div>
+                    </div>
                 )
             })}
         </CodeBlock>
