@@ -1,7 +1,7 @@
 ---
 title: "Support config entry unloading (IQS005)"
 related_rules:
-  - IQS022
+  - entity_event_setup
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 
