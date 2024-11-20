@@ -1,5 +1,5 @@
 ---
-title: "Don't allow the same device or service to be able to be set up twice (IQS003)"
+title: "Don't allow the same device or service to be able to be set up twice"
 related_rules:
   - config-flow
   - test-before-configure

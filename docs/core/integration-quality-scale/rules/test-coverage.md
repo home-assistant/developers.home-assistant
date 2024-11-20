@@ -1,5 +1,5 @@
 ---
-title: "Above 95% test coverage for all integration modules (IQS024)"
+title: "Above 95% test coverage for all integration modules"
 related_rules:
   - config-flow-test-coverage
 ---

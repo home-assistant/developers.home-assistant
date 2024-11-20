@@ -1,5 +1,5 @@
 ---
-title: "Dependency is async (IQS027)"
+title: "Dependency is async"
 related_rules:
   - inject-websession
 ---

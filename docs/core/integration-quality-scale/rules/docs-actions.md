@@ -1,5 +1,5 @@
 ---
-title: "The documentation describes the provided service actions that can be used (IQS047)"
+title: "The documentation describes the provided service actions that can be used"
 ---
 
 ## Reasoning

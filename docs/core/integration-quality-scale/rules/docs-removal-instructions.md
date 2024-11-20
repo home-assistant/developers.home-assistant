@@ -1,5 +1,5 @@
 ---
-title: "The documentation provides removal instructions (IQS042)"
+title: "The documentation provides removal instructions"
 ---
 
 ## Reasoning

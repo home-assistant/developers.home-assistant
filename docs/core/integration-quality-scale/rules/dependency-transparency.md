@@ -1,5 +1,5 @@
 ---
-title: "Dependency transparency (IQS034)"
+title: "Dependency transparency"
 related_rules:
   - async-dependency
 ---

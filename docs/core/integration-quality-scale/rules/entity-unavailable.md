@@ -1,5 +1,5 @@
 ---
-title: "Mark entity unavailable if appropriate (IQS010)"
+title: "Mark entity unavailable if appropriate"
 related_rules:
   - log-when-unavailable
 ---

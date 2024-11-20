@@ -1,5 +1,5 @@
 ---
-title: "Place common patterns in common modules (IQS036)"
+title: "Place common patterns in common modules"
 ---
 
 ## Reasoning

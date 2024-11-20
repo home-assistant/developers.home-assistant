@@ -1,5 +1,5 @@
 ---
-title: "Integration uses discovery info to update network information (IQS037)"
+title: "Integration uses discovery info to update network information"
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

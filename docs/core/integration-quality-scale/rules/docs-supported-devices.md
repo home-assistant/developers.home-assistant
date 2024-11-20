@@ -1,5 +1,5 @@
 ---
-title: "The integration documents known supported / unsupported devices (IQS045)"
+title: "The integration documents known supported / unsupported devices"
 ---
 
 ## Reasoning

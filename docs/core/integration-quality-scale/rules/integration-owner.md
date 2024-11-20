@@ -1,5 +1,5 @@
 ---
-title: "Has an integration owner (IQS025)"
+title: "Has an integration owner"
 ---
 
 ## Reasoning

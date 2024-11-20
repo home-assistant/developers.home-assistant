@@ -1,5 +1,5 @@
 ---
-title: "The documentation describes all integration configuration options (IQS044)"
+title: "The documentation describes all integration configuration options"
 ---
 
 ## Reasoning

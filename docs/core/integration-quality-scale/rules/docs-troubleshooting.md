@@ -1,5 +1,5 @@
 ---
-title: "The documentation provides troubleshooting information (IQS050)"
+title: "The documentation provides troubleshooting information"
 ---
 
 ## Reasoning

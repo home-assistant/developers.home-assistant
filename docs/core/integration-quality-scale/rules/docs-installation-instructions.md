@@ -1,5 +1,5 @@
 ---
-title: "The documentation provides step-by-step installation instructions for the integration, including, if needed, prerequisites (IQS041)"
+title: "The documentation provides step-by-step installation instructions for the integration, including, if needed, prerequisites"
 ---
 
 ## Reasoning

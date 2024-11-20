@@ -1,5 +1,5 @@
 ---
-title: "Reauthentication flow (IQS020)"
+title: "Reauthentication flow"
 related_rules:
   - config-flow
   - test-before-configure

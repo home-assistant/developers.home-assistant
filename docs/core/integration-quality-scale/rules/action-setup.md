@@ -1,5 +1,5 @@
 ---
-title: "Service actions are registered in async_setup (IQS035)"
+title: "Service actions are registered in async_setup"
 related_rules:
   - action-exceptions
 ---

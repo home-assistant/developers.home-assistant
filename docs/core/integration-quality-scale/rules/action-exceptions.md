@@ -1,5 +1,5 @@
 ---
-title: "Service actions raise exceptions when encountering failures (IQS017)"
+title: "Service actions raise exceptions when encountering failures"
 related_rules:
   - exception-translations
   - action-setup

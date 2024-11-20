@@ -1,5 +1,5 @@
 ---
-title: "Set Parallel updates (IQS023)"
+title: "Set Parallel updates"
 ---
 
 ## Reasoning

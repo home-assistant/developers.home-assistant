@@ -1,5 +1,5 @@
 ---
-title: "Integration disables less popular (or noisy) entities (IQS018)"
+title: "Integration disables less popular (or noisy) entities"
 related_rules:
   - appropriate-polling
 ---

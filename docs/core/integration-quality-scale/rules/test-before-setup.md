@@ -1,5 +1,5 @@
 ---
-title: "Check during integration initialization if we are able to set it up correctly (IQS007)"
+title: "Check during integration initialization if we are able to set it up correctly"
 related_rules:
   - runtime-data
 ---

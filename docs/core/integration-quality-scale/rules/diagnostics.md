@@ -1,5 +1,5 @@
 ---
-title: "Implements diagnostics (IQS026)"
+title: "Implements diagnostics"
 ---
 
 ## Reasoning

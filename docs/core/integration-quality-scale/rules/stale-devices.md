@@ -1,5 +1,5 @@
 ---
-title: "Clean up stale devices (IQS021)"
+title: "Clean up stale devices"
 related_rules:
   - dynamic-devices
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Integration needs to be able to be set up via the UI (IQS001)"
+title: "Integration needs to be able to be set up via the UI"
 related_rules:
   - test-before-configure
   - unique-config-entry

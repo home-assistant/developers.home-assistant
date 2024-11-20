@@ -1,5 +1,5 @@
 ---
-title: "The documentation describes known limitations of the integration (not to be confused with bugs) (IQS049)"
+title: "The documentation describes known limitations of the integration (not to be confused with bugs)"
 ---
 
 ## Reasoning

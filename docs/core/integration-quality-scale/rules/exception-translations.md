@@ -1,5 +1,5 @@
 ---
-title: "Exception messages are translatable (IQS030)"
+title: "Exception messages are translatable"
 related_rules:
   - entity-translations
   - action-exceptions

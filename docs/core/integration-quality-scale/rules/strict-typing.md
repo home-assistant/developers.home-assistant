@@ -1,5 +1,5 @@
 ---
-title: "Strict typing (IQS029)"
+title: "Strict typing"
 ---
 
 ## Reasoning

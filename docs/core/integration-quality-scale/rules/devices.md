@@ -1,5 +1,5 @@
 ---
-title: "The integration creates devices (IQS015)"
+title: "The integration creates devices"
 related_rules:
   - has-entity-name
 ---

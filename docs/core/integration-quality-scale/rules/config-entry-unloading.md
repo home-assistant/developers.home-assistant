@@ -1,5 +1,5 @@
 ---
-title: "Support config entry unloading (IQS005)"
+title: "Support config entry unloading"
 related_rules:
   - entity-event-setup
 ---

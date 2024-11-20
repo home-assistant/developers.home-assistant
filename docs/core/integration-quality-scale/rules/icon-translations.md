@@ -1,5 +1,5 @@
 ---
-title: "Icon translations (IQS031)"
+title: "Icon translations"
 related_rules:
   - entity-translations
   - entity-device-class

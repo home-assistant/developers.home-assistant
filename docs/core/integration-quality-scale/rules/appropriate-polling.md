@@ -1,5 +1,5 @@
 ---
-title: "If it's a polling integration, set an appropriate polling interval (IQS008)"
+title: "If it's a polling integration, set an appropriate polling interval"
 related_rules:
   - parallel-updates
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Use ConfigEntry.runtime_data to store runtime data (IQS006)"
+title: "Use ConfigEntry.runtime_data to store runtime data"
 related_rules:
   - test-before-setup
 ---

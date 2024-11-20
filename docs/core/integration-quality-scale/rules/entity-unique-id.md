@@ -1,5 +1,5 @@
 ---
-title: "Entities have a unique ID (IQS011)"
+title: "Entities have a unique ID"
 related_rules:
   - unique-config-entry
 ---

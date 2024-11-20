@@ -1,5 +1,5 @@
 ---
-title: "Entities are assigned an appropriate EntityCategory (IQS016)"
+title: "Entities are assigned an appropriate EntityCategory"
 ---
 
 ## Reasoning

@@ -1,5 +1,5 @@
 ---
-title: "Integrations should have a reconfigure flow (IQS032)"
+title: "Integrations should have a reconfigure flow"
 related_rules:
   - config-flow
   - test-before-configure

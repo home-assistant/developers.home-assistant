@@ -1,5 +1,5 @@
 ---
-title: "The documentation describes how data is updated (IQS048)"
+title: "The documentation describes how data is updated"
 ---
 
 ## Reasoning

@@ -1,5 +1,5 @@
 ---
-title: "Entities have translated names (IQS013)"
+title: "Entities have translated names"
 related_rules:
   - has-entity-name
   - entity-device-class

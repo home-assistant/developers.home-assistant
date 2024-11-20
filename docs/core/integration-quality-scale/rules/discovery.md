@@ -1,5 +1,5 @@
 ---
-title: "Can be discovered (IQS019)"
+title: "Can be discovered"
 related_rules:
   - config-flow
   - test-before-configure

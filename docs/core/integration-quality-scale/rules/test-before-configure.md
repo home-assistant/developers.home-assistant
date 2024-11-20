@@ -1,5 +1,5 @@
 ---
-title: "Test a connection in the config flow (IQS002)"
+title: "Test a connection in the config flow"
 related_rules:
   - config-flow
   - unique-config-entry

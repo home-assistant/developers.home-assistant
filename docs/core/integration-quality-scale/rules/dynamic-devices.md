@@ -1,5 +1,5 @@
 ---
-title: "Devices added after integration setup (IQS033)"
+title: "Devices added after integration setup"
 related_rules:
   - stale-devices
 ---

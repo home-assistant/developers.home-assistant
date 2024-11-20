@@ -1,5 +1,5 @@
 ---
-title: "Entities event setup (IQS022)"
+title: "Entities event setup"
 ---
 
 ## Reasoning

@@ -1,5 +1,5 @@
 ---
-title: "The documentation includes a high-level description of the integration brand, product, or service (IQS039)"
+title: "The documentation includes a high-level description of the integration brand, product, or service"
 ---
 
 ## Reasoning

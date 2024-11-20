@@ -1,5 +1,5 @@
 ---
-title: "The documentation provides automation examples the user can use. (IQS051)"
+title: "The documentation provides automation examples the user can use."
 ---
 
 ## Reasoning

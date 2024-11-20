@@ -1,5 +1,5 @@
 ---
-title: "The documentation describes use cases to illustrate how this integration can be used (IQS040)"
+title: "The documentation describes use cases to illustrate how this integration can be used"
 ---
 
 ## Reasoning

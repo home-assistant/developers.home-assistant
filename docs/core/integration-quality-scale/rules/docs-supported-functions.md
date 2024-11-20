@@ -1,5 +1,5 @@
 ---
-title: "The documentation describes the supported functionality, including entities, and platforms (IQS046)"
+title: "The documentation describes the supported functionality, including entities, and platforms"
 ---
 
 ## Reasoning
