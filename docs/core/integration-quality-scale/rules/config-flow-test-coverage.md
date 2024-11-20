@@ -1,12 +1,12 @@
 ---
 title: "Full test coverage for the config flow (IQS004)"
 related_rules:
-  - config_flow
-  - test_before_configure
-  - unique_config_entry
+  - config-flow
+  - test-before-configure
+  - unique-config-entry
   - discovery
-  - reauthentication_flow
-  - reconfiguration_flow
+  - reauthentication-flow
+  - reconfiguration-flow
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

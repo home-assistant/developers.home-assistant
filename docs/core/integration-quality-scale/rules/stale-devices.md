@@ -1,7 +1,7 @@
 ---
 title: "Clean up stale devices (IQS021)"
 related_rules:
-  - dynamic_devices
+  - dynamic-devices
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

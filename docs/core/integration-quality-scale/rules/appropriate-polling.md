@@ -1,7 +1,7 @@
 ---
 title: "If it's a polling integration, set an appropriate polling interval (IQS008)"
 related_rules:
-  - parallel_updates
+  - parallel-updates
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

@@ -1,8 +1,8 @@
 ---
 title: "Icon translations (IQS031)"
 related_rules:
-  - entity_translations
-  - entity_device_class
+  - entity-translations
+  - entity-device-class
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

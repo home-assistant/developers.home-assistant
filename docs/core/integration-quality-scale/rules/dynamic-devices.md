@@ -1,7 +1,7 @@
 ---
 title: "Devices added after integration setup (IQS033)"
 related_rules:
-  - stale_devices
+  - stale-devices
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

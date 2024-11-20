@@ -1,12 +1,12 @@
 ---
 title: "Test a connection in the config flow (IQS002)"
 related_rules:
-  - config_flow
-  - unique_config_entry
-  - config_flow_test_coverage
+  - config-flow
+  - unique-config-entry
+  - config-flow-test-coverage
   - discovery
-  - reauthentication_flow
-  - reconfiguration_flow
+  - reauthentication-flow
+  - reconfiguration-flow
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

@@ -1,8 +1,8 @@
 ---
 title: "Service actions raise exceptions when encountering failures (IQS017)"
 related_rules:
-  - exception_translations
-  - action_setup
+  - exception-translations
+  - action-setup
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

@@ -1,7 +1,7 @@
 ---
 title: "Use ConfigEntry.runtime_data to store runtime data (IQS006)"
 related_rules:
-  - test_before_setup
+  - test-before-setup
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

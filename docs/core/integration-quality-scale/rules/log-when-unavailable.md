@@ -1,7 +1,7 @@
 ---
 title: "If internet/device/service is unavailable, log once when unavailable and once when back connected (IQS009)"
 related_rules:
-  - entity_unavailable
+  - entity-unavailable
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

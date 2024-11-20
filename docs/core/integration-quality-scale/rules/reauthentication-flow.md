@@ -1,11 +1,11 @@
 ---
 title: "Reauthentication flow (IQS020)"
 related_rules:
-  - config_flow
-  - test_before_configure
-  - config_flow_test_coverage
-  - test_before_setup
-  - reconfiguration_flow
+  - config-flow
+  - test-before-configure
+  - config-flow-test-coverage
+  - test-before-setup
+  - reconfiguration-flow
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

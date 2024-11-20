@@ -1,7 +1,7 @@
 ---
 title: "Dependency is async (IQS027)"
 related_rules:
-  - inject_websession
+  - inject-websession
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

@@ -1,12 +1,12 @@
 ---
 title: "Don't allow the same device or service to be able to be set up twice (IQS003)"
 related_rules:
-  - config_flow
-  - test_before_configure
-  - config_flow_test_coverage
+  - config-flow
+  - test-before-configure
+  - config-flow-test-coverage
   - discovery
-  - reauthentication_flow
-  - reconfiguration_flow
+  - reauthentication-flow
+  - reconfiguration-flow
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

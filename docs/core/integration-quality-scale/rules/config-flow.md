@@ -1,12 +1,12 @@
 ---
 title: "Integration needs to be able to be set up via the UI (IQS001)"
 related_rules:
-  - test_before_configure
-  - unique_config_entry
-  - config_flow_test_coverage
+  - test-before-configure
+  - unique-config-entry
+  - config-flow-test-coverage
   - discovery
-  - reauthentication_flow
-  - reconfiguration_flow
+  - reauthentication-flow
+  - reconfiguration-flow
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

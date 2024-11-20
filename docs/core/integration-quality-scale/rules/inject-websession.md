@@ -1,7 +1,7 @@
 ---
 title: "The integration dependency supports passing in a websession (IQS028)"
 related_rules:
-  - async_dependency
+  - async-dependency
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

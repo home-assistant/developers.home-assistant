@@ -1,7 +1,7 @@
 ---
 title: "Service actions are registered in async_setup (IQS035)"
 related_rules:
-  - action_exceptions
+  - action-exceptions
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

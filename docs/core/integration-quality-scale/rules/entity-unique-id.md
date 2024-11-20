@@ -1,7 +1,7 @@
 ---
 title: "Entities have a unique ID (IQS011)"
 related_rules:
-  - unique_config_entry
+  - unique-config-entry
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

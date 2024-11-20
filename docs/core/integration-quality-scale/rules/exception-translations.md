@@ -1,8 +1,8 @@
 ---
 title: "Exception messages are translatable (IQS030)"
 related_rules:
-  - entity_translations
-  - action_exceptions
+  - entity-translations
+  - action-exceptions
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

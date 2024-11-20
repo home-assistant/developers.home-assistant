@@ -1,7 +1,7 @@
 ---
 title: "Mark entity unavailable if appropriate (IQS010)"
 related_rules:
-  - log_when_unavailable
+  - log-when-unavailable
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

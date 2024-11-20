@@ -1,7 +1,7 @@
 ---
 title: "Check during integration initialization if we are able to set it up correctly (IQS007)"
 related_rules:
-  - runtime_data
+  - runtime-data
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

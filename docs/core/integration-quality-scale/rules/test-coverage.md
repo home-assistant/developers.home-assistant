@@ -1,7 +1,7 @@
 ---
 title: "Above 95% test coverage for all integration modules (IQS024)"
 related_rules:
-  - config_flow_test_coverage
+  - config-flow-test-coverage
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

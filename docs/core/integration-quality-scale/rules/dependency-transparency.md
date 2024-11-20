@@ -1,7 +1,7 @@
 ---
 title: "Dependency transparency (IQS034)"
 related_rules:
-  - async_dependency
+  - async-dependency
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

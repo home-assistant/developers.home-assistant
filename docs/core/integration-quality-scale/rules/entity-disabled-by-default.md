@@ -1,7 +1,7 @@
 ---
 title: "Integration disables less popular (or noisy) entities (IQS018)"
 related_rules:
-  - appropriate_polling
+  - appropriate-polling
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

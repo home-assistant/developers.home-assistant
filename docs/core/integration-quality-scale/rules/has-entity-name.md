@@ -1,8 +1,8 @@
 ---
 title: "Entities use has_entity_name = True (IQS012)"
 related_rules:
-  - entity_translations
-  - entity_device_class
+  - entity-translations
+  - entity-device-class
   - devices
 ---
 import RelatedRules from './_includes/related_rules.jsx'

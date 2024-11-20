@@ -1,9 +1,9 @@
 ---
 title: "Entities use device classes where possible (IQS014)"
 related_rules:
-  - has_entity_name
-  - entity_translations
-  - icon_translations
+  - has-entity-name
+  - entity-translations
+  - icon-translations
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

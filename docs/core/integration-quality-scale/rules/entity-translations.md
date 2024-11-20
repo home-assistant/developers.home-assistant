@@ -1,10 +1,10 @@
 ---
 title: "Entities have translated names (IQS013)"
 related_rules:
-  - has_entity_name
-  - entity_device_class
-  - icon_translations
-  - exception_translations
+  - has-entity-name
+  - entity-device-class
+  - icon-translations
+  - exception-translations
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 
