@@ -1,5 +1,6 @@
 import React from 'react';
 import {useDocsVersion} from '@docusaurus/plugin-content-docs/client';
+import Link from '@docusaurus/Link';
 
 const tiers = require("./tiers.json")
 
@@ -15,7 +16,7 @@ export default function RuleOverview({tier}) {
                 const relatedRule = docs[`core/integration-quality-scale/rules/${id}`];
                 return (
                     <li key={id}>
-                        <a href={`rules/${id}`}>{id}</a> - {relatedRule.title}
+                        <Link to={`rules/${id}`}>{id}</Link> - {relatedRule.title}
                     </li>
                 );
             })}
