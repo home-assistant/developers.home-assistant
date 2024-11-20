@@ -18,6 +18,7 @@ To give an overview of the changes:
 - To show that the project has a commitment on keeping the scale up to date, we have created an architecture decision record (ADR) that describes the goal and the process of keeping the scale up to date.
 - The developer documentation now has a brand new section dedicated to the Integration Quality Scale. It includes the rules, the reasoning for every rule and it provides examples that can be used to give an idea of how to implement it. There is also a checklist generated that can be used for changing scales.
 - Documentation now also plays a role in the quality of the integrations, since the user experience of an integration goes beyond code.
+- To track the progress of integration, we have added a `quality_scale.yaml` file to the integration folder. This will contain a list of all the rules it is adhering to and notes down possible exemptions and the reason behind the exemption.
 
 So, with this in place; you might wonder what the next steps are.
 Because this is a major rework of the scale, we have decided to drop the scale of the current integrations.
