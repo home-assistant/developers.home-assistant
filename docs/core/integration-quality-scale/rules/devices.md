@@ -1,7 +1,7 @@
 ---
 title: "The integration creates devices (IQS015)"
 related_rules:
-  - has_entity_name
+  - has-entity-name
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

@@ -1,10 +1,10 @@
 ---
 title: "Can be discovered (IQS019)"
 related_rules:
-  - config_flow
-  - test_before_configure
-  - unique_config_entry
-  - config_flow_test_coverage
+  - config-flow
+  - test-before-configure
+  - unique-config-entry
+  - config-flow-test-coverage
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 
