@@ -107,7 +107,7 @@ The world of IoT and all technologies used by Home Assistant are changing at a f
 
 This also means that new insights and newly developed and adopted best practices will occur over time, resulting in new additions and improvements to the individual integration quality scale rules.
 
-If a tier is adjusted, all integrations in that tier need to be re-evaluated and adjusted accordingly. One exception to this is integrations that have devices that are part of the Works with Home Assistant program. Those integrations will be flagged as grandfathered into their existing tier.
+If a tier is adjusted, all integrations in that tier need to be re-evaluated and adjusted accordingly.
 
 :::info
 One exception to this is integrations that have devices that are part of the Works with Home Assistant program. Those integrations will be flagged as grandfathered into their existing tier.
