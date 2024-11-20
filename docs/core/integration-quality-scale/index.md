@@ -76,6 +76,19 @@ The platinum tier has the following characteristics:
 - Implements efficient data handling, reducing network and CPU usage.
 
 
+### Keeping track of the implemented rules
+Integrations that are working towards a higher tier or have a tier, must add a `quality_scale.yaml` file to their integration.
+The purpose of this file is to keep track of the progress of the rules that have been implemented and to keep track of exempted rules and the reason for the exemption.
+An example of this file looks like this:
+
+```yaml
+rules:
+  config_flow: done
+  docs_high_level_description:
+    status: exempt
+    comment: This integration does not connect to any device or service.
+```
+
 ### Adjusting the tier of an integration
 Home Assistant encourages our contributors to get their integrations to the highest possible tier, to provide an excellent coding experience for our contributors and the best experience for our users.
 
