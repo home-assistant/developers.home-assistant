@@ -8,11 +8,10 @@ export default function RelatedRules({relatedRules}) {
     return (
         <ul>
             {relatedRules.map((rule) => {
-                const relatedRule = docs[`core/integration-quality-scale/rules/${rule}`];
-                const [ruleText, ruleId] = relatedRule.title.split(" (");
+                const relatedRule = docs[`core/integration-quality-scale/rules/${rule}`].title;
                 return (
                     <li key={rule}>
-                        <Link to={rule}>{rule}</Link>: {ruleText} ({ruleId.slice(0, -1)})
+                        <Link to={rule}>{rule}</Link>: {relatedRule}
                     </li>
                 );
             })}
