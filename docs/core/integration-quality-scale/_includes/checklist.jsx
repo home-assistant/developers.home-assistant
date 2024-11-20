@@ -6,7 +6,7 @@ const tiers = require("./tiers.json")
 
 function getRule(ruleId, docs) {
     const rule = docs[`core/integration-quality-scale/rules/${ruleId.toLowerCase()}`];
-    const [id, text] = rule.title.split(": ");
+    const [id, text] = rule.title.split(" (");
     return {id, text};
 }
 
@@ -21,13 +21,13 @@ export default function Checklist() {
                         {`## ${tier.charAt(0).toUpperCase() + tier.slice(1)}\n`}
                         {tiers[tier].map((rule) => {
                             if (typeof rule === "string") {
-                                const {id, text} = getRuleWithDocs(rule);
-                                return `- [ ] **${id} - ${text}**\n`;
+                                const text = docs[`core/integration-quality-scale/rules/${rule}`].title;
+                                return `- [ ] \`${rule}\` - ${text}\n`;
                             }
-                            const {id, text} = getRuleWithDocs(rule.id);
+                            const text = docs[`core/integration-quality-scale/rules/${rule.id}`].title;
                             return [
-                                `- [ ] **${id} - ${text}**\n`,
-                                ...rule.subchecks.map(subcheck => `    - [ ] **${subcheck}**\n`)
+                                `- [ ] \`${rule.id}\` - ${text}\n`,
+                                ...rule.subchecks.map(subcheck => `    - [ ] ${subcheck}\n`)
                             ].join('');
                         }).join('')}
                         {`\n`}

@@ -12,12 +12,10 @@ export default function RuleOverview({tier}) {
                 if (typeof rule === "object") {
                     id = rule.id;
                 }
-                const lowerCaseRule = id.toLowerCase();
-                const relatedRule = docs[`core/integration-quality-scale/rules/${lowerCaseRule}`];
-                const [ruleId, ruleText] = relatedRule.title.split(": ");
+                const relatedRule = docs[`core/integration-quality-scale/rules/${id}`];
                 return (
-                    <li key={rule}>
-                        <a href={`rules/${lowerCaseRule}`}>{ruleId}</a> - {ruleText}
+                    <li key={id}>
+                        <a href={`rules/${id}`}>{id}</a> - {relatedRule.title}
                     </li>
                 );
             })}

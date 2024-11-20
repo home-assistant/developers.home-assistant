@@ -7,12 +7,11 @@ export default function RelatedRules({relatedRules}) {
     return (
         <ul>
             {relatedRules.map((rule) => {
-                const lowerCaseRule = rule.toLowerCase();
-                const relatedRule = docs[`core/integration-quality-scale/rules/${lowerCaseRule}`];
-                const [ruleId, ruleText] = relatedRule.title.split(": ");
+                const relatedRule = docs[`core/integration-quality-scale/rules/${rule}`];
+                const [ruleText, ruleId] = relatedRule.title.split(" (");
                 return (
                     <li key={rule}>
-                        <a href={lowerCaseRule}>{ruleId}</a>: {ruleText}
+                        <a href={`./${rule}`}>{rule}</a>: {ruleText} ({ruleId.slice(0, -1)})
                     </li>
                 );
             })}

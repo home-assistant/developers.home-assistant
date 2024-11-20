@@ -11,7 +11,7 @@ const iqs_rules = Object.values(iqs_rules_by_tier).flat().map((rule) => {
         return rule;
     }
     return rule.id;
-}).sort();
+});
 
 
 
@@ -152,11 +152,12 @@ module.exports = {
       link: {type: 'doc', id: 'core/integration-quality-scale/index'},
       items: [
         {type: 'doc', id: 'core/integration-quality-scale/checklist'},
-          ...iqs_rules.map(rule => ({
-          type: 'doc',
-          id: `core/integration-quality-scale/rules/${rule.toLowerCase()}`
-        })
-      )]
+        {type: 'category', label: 'Rules', items: iqs_rules.map(rule => ({
+                type: 'doc',
+                id: `core/integration-quality-scale/rules/${rule.toLowerCase()}`
+              })
+          )}
+          ]
     },
     {
       type: "category",
