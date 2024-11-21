@@ -2,6 +2,7 @@
 title: "Service actions are registered in async_setup"
 related_rules:
   - action-exceptions
+  - common-modules
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 
@@ -23,24 +24,33 @@ In this example, the service call requires a configuration entry id as parameter
 This is used to first fetch the configuration entry, and then check if it is loaded.
 If the configuration entry does not exist or the configuration entry that we found is not loaded, we raise a relevant error which is shown to the user.
 
-`__init__py`:
+`__init__.py`:
 ```python {13-19} showLineNumbers
+from .services import register_services
+
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     """Set up my integration."""
+    register_services(hass)
+    ...
+```
 
-    async def async_get_schedule(call: ServiceCall) -> ServiceResponse:
-        """Get the schedule for a specific range."""
-        if not (entry := hass.config_entries.async_get_entry(call.data[ATTR_CONFIG_ENTRY_ID])):
-            raise ServiceValidationError("Entry not found")
-        if entry.state is not ConfigEntryState.LOADED:
-            raise ServiceValidationError("Entry not loaded")
-        client = cast(MyConfigEntry, entry).runtime_data
-        ...
+`services.py`:
+```python {13-19} showLineNumbers
+async def _async_get_schedule(call: ServiceCall) -> ServiceResponse:
+    """Get the schedule for a specific range."""
+    if not (entry := hass.config_entries.async_get_entry(call.data[ATTR_CONFIG_ENTRY_ID])):
+        raise ServiceValidationError("Entry not found")
+    if entry.state is not ConfigEntryState.LOADED:
+        raise ServiceValidationError("Entry not loaded")
+    client = cast(MyConfigEntry, entry).runtime_data
+    ...
 
+def register_services(hass: HomeAssistant) -> bool:
+    """Register the services."""
     hass.services.async_register(
         DOMAIN,
-        SERVICE_GET_SCHEDULE,
-        async_get_schedule,
+        "get_shedule",
+        _async_get_schedule,
         schema=SERVICE_GET_SCHEDULE_SCHEMA,
         supports_response=SupportsResponse.ONLY,
     )
