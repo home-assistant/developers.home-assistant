@@ -10,7 +10,12 @@ The documentation should provide clear instructions on how to remove the device 
 ## Example implementation
 
 ```markdown showLineNumbers
-To remove the integration, go to {% my integrations title="**Settings** > **Devices & services**" %} and select the integration card. Then, select the three dots {% icon "mdi:dots-vertical" %} menu and select **Delete**.
+## Remove integration
+
+This integration can be removed by following these steps:
+
+{% include integrations/remove_device_service.md %}
+
 After deleting the integration, go to the app of the manufacturer and remove the Home Assistant integration from there as well.
 ```
 
