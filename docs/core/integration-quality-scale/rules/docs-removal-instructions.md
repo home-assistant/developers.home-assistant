@@ -14,7 +14,7 @@ The documentation should provide clear instructions on how to remove the device 
 
 This integration can be removed by following these steps:
 
-{% include common-tasks/remove_device_service.md %}
+{% include integrations/remove_device_service.md %}
 
 After deleting the integration, go to the app of the manufacturer and remove the Home Assistant integration from there as well.
 ```
