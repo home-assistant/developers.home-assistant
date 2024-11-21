@@ -5,6 +5,7 @@ title: "New checks for config flow unique ID"
 ---
 
 ### Summary of changes
+
 When a config flow creates an entry with a colliding unique ID, the old entry is currently automatically removed and replaced with the new config entry.
 This can lead to unexpected behavior, and will now log a warning.
 
