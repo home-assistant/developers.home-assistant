@@ -7,10 +7,9 @@ title: "New checks for config flow unique ID"
 ### Summary of changes
 
 When a config flow creates an entry with a colliding unique ID, the old entry is currently automatically removed and replaced with the new config entry.
-This can lead to unexpected behavior, and will now log a warning.
+This can lead to unexpected behavior, and integrations should be adjusted to instead abort the flow.
 
-The integration should carefully consider whether this was intentional or accidental:
-- if it was accidental, the integration should probably be updated to use `self._abort_if_unique_id_configured`
-- it it was intentional, the integration should probably be migrated to use a reconfigure flow and use `self.async_update_reload_and_abort`
+In case of manual flows, integrations should implement options, reauth, reconfigure to allow the user to change settings.
+In case of non user visible flows, the integration should optionally update the existing entry before aborting.
 
 More details can be found in the [config flow](/docs/config_entries_config_flow_handler#unique-id-requirements) documentation.
