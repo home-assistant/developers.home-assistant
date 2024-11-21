@@ -17,6 +17,12 @@ To run our linters, on the full code base, run the following command:
 pre-commit run --all-files
 ```
 
+If you want to run the full test suite, you need to install all dependencies. Activate the virtual environment and run the command:
+
+```shell
+uv pip install -r requirements_test_all.txt
+```
+
 To start the tests, and run the full test suite, activate the virtual environment and run the command:
 
 ```shell
