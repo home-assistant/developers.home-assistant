@@ -17,7 +17,7 @@ To run our linters, on the full code base, run the following command:
 pre-commit run --all-files
 ```
 
-To run the full test suite, more dependencies are required than what is setup in the devcontainer by default. To install all dependencies, activate the virtual environment and run the command:
+To run the full test suite, more dependencies are required than what is set up in the devcontainer by default. To install all dependencies, activate the virtual environment and run the command:
 
 ```shell
 uv pip install -r requirements_test_all.txt
