@@ -21,7 +21,7 @@ When the problem is caused by an error in the service action itself (for example
 In this example, we show a function that is registered as a service action in Home Assistant.
 If the input is incorrect (when the end date is before the start date), a `ServiceValidationError` is raised, and if we can't reach the service, we raise a `HomeAssistantError`.
 
-```python {6,10} showLineNumbers
+```python {8,12} showLineNumbers
 from homeassistant.exceptions import HomeAssistantError, ServiceValidationError
 
 async def async_set_schedule(call: ServiceCall) -> ServiceResponse:
