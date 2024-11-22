@@ -202,7 +202,14 @@ module.exports = {
         "auth_auth_module",
       ],
     },
-    "config_entries_index",
+    {
+      type: "category",
+      label: "Config entries",
+      link: {type: 'doc', id: 'config_entries_index'},
+      items: [
+        {type: 'doc', id: 'config_entries_diagnostics'},
+      ]
+    },
     "data_entry_flow_index",
     {
       type: "category",
