@@ -22,6 +22,8 @@ In this example, we show a function that is registered as a service action in Ho
 If the input is incorrect (when the end date is before the start date), a `ServiceValidationError` is raised, and if we can't reach the service, we raise a `HomeAssistantError`.
 
 ```python {6,10} showLineNumbers
+from homeassistant.exceptions import HomeAssistantError, ServiceValidationError
+
 async def async_set_schedule(call: ServiceCall) -> ServiceResponse:
     """Set the schedule for a day."""
     start_date = call.data[ATTR_START_DATE]
