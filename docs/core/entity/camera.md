@@ -111,7 +111,7 @@ class MyCamera(Camera):
 
         Async means that it could take some time to process the offer and responses/message
         will be sent with the send_message callback.
-        This method is used by cameras with CameraEntityFeature.STREAM and StreamType.WEB_RTC.
+        This method is used by cameras with CameraEntityFeature.STREAM
         An integration overriding this method must also implement async_on_webrtc_candidate.
 
         Integrations can override with a native WebRTC implementation.
