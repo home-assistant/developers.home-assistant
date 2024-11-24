@@ -346,7 +346,7 @@ For example:
     "macaddress": "009D6B*"
     },
     {
-    "hostname": "[d|p]achio-*",
+    "hostname": "[dp]achio-*",
     "macaddress": "009D6B*"
     }
   ]
