@@ -348,7 +348,6 @@ For example:
     {
     "hostname": "[d|p]achio-*",
     "macaddress": "009D6B*"
-    ""
     }
   ]
 }
