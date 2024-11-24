@@ -189,6 +189,75 @@ To specify an icon for a section, update `icons.json` according to this example:
 }
 ```
 
+#### Use of repeating sections
+
+Developers can also set `multiple` in sections to allow the user to add/remove sections as needed to provide additional configuration.
+The output of the sections are then a list with dictionaries containing all the users configured sections.
+
+The use of `multiple` in sections also requires to set `default`.
+The use of `default` in sections has priority over defaults for the fields.
+
+|        Key         |        Type        |       Description                                 |
+| :----------------: | :----------------: | :-----------------------------------------: |
+|      `multiple`    |        `bool`      |    Allow user to add/remove sections                                    |
+|      `default`     |     `list[dict]`   |    Provide default values for the section                                     |
+
+```python
+from homeassistant.data_entry_flow import section
+from homeassistant.helpers.selector import selector
+
+class ExampleConfigFlow(data_entry_flow.FlowHandler):
+    async def async_step_user(self, user_input=None):
+        # Specify items in the order they are to be displayed in the UI
+        data_schema = {
+            vol.Required("username"): str,
+            vol.Required("password"): str,
+            # Items can be grouped by collapsible sections
+            "options": section(
+                vol.Schema(
+                    {
+                        vol.Required("stage_1", default=5): int,
+                        vol.Required("stage_2", default=10): int,
+                    }
+                ),
+                # Whether or not the section is initially collapsed (default = False),
+                # user can provide multiple sections (default = None) and 
+                # default values for the section in case of multiple (default = None)
+                {
+                    "collapsed": False,
+                    "multiple": True,
+                    "default": [],
+                },
+            )
+        }
+
+        return self.async_show_form(
+            step_id="init",
+            data_schema=vol.Schema(data_schema)
+        )
+```
+
+The resulting output from the section is a list with dictionaries containing the values provided by the user.
+
+##### Example output from sections using multiple
+
+```json
+{
+    "username": "some_username",
+    "password": "some_password",
+    "options": [
+        {
+            "stage_1":7,
+            "stage_2":15
+        },
+        {
+            "stage_1":24,
+            "stage_2":4
+        }
+    ]
+}
+```
+
 #### Labels & descriptions
 
 Translations for the form are added to `strings.json` in a key for the `step_id`. That object may contain the folowing keys:
