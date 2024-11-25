@@ -4,6 +4,8 @@ title: Config entry diagnostics
 
 Config entries can provide diagnostics to help the user gather data about an integration and do troubleshooting. Diagnostics can be provided for the config entry but also individually for each device entry.
 
+Users can download config entry diagnostics from the config entry options menu and device diagnostics from the device menu.
+
 :::warning
 It is very important to ensure that no sensitive data (passwords, tokens, or location data) is exposed. To help with this, you can use the `async_redact_data` utility function to redact sensitive data from the diagnostics output.
 :::
@@ -27,7 +29,7 @@ async def async_get_config_entry_diagnostics(
     }
 
 async def async_get_device_diagnostics(
-    hass: HomeAssistant, config_entry: ConfigEntry, device: DeviceEntry
+    hass: HomeAssistant, entry: MyConfigEntry, device: DeviceEntry
 ) -> dict[str, Any]:
     """Return diagnostics for a device."""
     appliance = _get_appliance_by_device_id(hass, device.id)

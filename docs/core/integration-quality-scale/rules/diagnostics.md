@@ -9,8 +9,6 @@ Diagnostics are an easy way for the user to gather data about the integration an
 We consider it a good practice to have the diagnostics implemented.
 Something to keep in mind is that the diagnostics should not expose any sensitive information, such as passwords, tokens, or coordinates.
 
-See the [Config entry diagnostics](config_entries_diagnostics.md) documentation for more information.
-
 ## Example implementation
 
 In the following example we provide diagnostics which includes data from various sources, such as the configuration and the current state of the integration.
@@ -34,6 +32,10 @@ async def async_get_config_entry_diagnostics(
         "data": entry.runtime_data.data,
     }
 ```
+
+## Additional resources
+
+To learn more information about diagnostics, checkout the [diagnostics documentation](config_entries_diagnostics.md).
 
 ## Exceptions
 
