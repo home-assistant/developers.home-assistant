@@ -15,4 +15,4 @@ Today we would like to announce that with the upcoming Home Assistant release `2
 
 - The method `async_register_rtsp_to_web_rtc_provider` has been deprecated. Please use `async_register_webrtc_provider`, which offers more flexibility and supports the async WebRTC signaling approach ([#131462](https://github.com/home-assistant/core/pull/131462)).
 
-More information about the replacements can be found in the [camera entiy documentation](/docs/core/entity/camera.md).
+More information about the replacements can be found in the [camera entity documentation](/docs/core/entity/camera.md).
