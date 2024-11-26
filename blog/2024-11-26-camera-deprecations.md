@@ -14,3 +14,5 @@ Today we would like to announce that with the upcoming Home Assistant release `2
 - The method `async_handle_web_rtc_offer` will be removed. Please use `async_handle_async_webrtc_offer` and the async WebRTC signaling approach ([#131285](https://github.com/home-assistant/core/pull/131285)).
 
 - The method `async_register_rtsp_to_web_rtc_provider` has been deprecated. Please use `async_register_webrtc_provider`, which offers more flexibility and supports the async WebRTC signaling approach ([#131462](https://github.com/home-assistant/core/pull/131462)).
+
+More information about the replacements can be found in the [camera entiy documentation](/docs/core/entity/camera.md).
