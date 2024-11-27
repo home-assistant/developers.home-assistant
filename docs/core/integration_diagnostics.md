@@ -5,7 +5,7 @@ sidebar_label: "Diagnostics"
 
 Integrations can provide diagnostics to help the user gather data to aid in troubleshooting. Diagnostics can be provided for config entries but also individually for each device entry.
 
-Users can download config entry diagnostics from the config entry options menu, on the integration page. For device diagnostics, users can download them from the device menu.
+Users can download config entry diagnostics from the config entry options menu, on the integration page. For device diagnostics, users can download them from the device info section (or from its menu, depending on the integration). Note that if an integration does not implement device diagnostics, the device page will provide config entry diagnostics.
 
 :::warning
 It is critical to ensure that no sensitive data is exposed. This includes but is not limited to:
