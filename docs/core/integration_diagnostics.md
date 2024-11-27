@@ -8,7 +8,14 @@ Integrations can provide diagnostics to help the user gather data to aid in trou
 Users can download config entry diagnostics from the config entry options menu, on the integration page. For device diagnostics, users can download them from the device menu.
 
 :::warning
-It is very important to ensure that no sensitive data (passwords, tokens, or location data) is exposed. To help with this, you can use the `async_redact_data` utility function to redact sensitive data from the diagnostics output.
+It is critical to ensure that no sensitive data is exposed. This includes but is not limited to:
+- Passwords and API keys
+- Authentication tokens
+- Location data
+- Personal information
+- Device identifiers
+
+To help with this, you can use the `async_redact_data` utility function from `homeassistant.helpers.redact` to safely remove sensitive data from the diagnostics output.
 :::
 
 The following is an example on how to implement both config entry and device entry diagnostics:
