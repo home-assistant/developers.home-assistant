@@ -1,16 +1,17 @@
 ---
-title: Config entry diagnostics
+title: Integration diagnostics
+sidebar_label: "Diagnostics"
 ---
 
-Config entries can provide diagnostics to help the user gather data about an integration and do troubleshooting. Diagnostics can be provided for the config entry but also individually for each device entry.
+Integrations can provide diagnostics to help the user gather data to aid in troubleshooting. Diagnostics can be provided for config entries but also individually for each device entry.
 
-Users can download config entry diagnostics from the config entry options menu and device diagnostics from the device menu.
+Users can download config entry diagnostics from the config entry options menu, on the integration page. For device diagnostics, users can download them from the device menu.
 
 :::warning
 It is very important to ensure that no sensitive data (passwords, tokens, or location data) is exposed. To help with this, you can use the `async_redact_data` utility function to redact sensitive data from the diagnostics output.
 :::
 
-The following is an example showing both config entry and device entry diagnostics:
+The following is an example on how to implement both config entry and device entry diagnostics:
 
 ```python
 TO_REDACT = [

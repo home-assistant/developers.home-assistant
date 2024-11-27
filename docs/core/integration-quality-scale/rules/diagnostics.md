@@ -35,7 +35,7 @@ async def async_get_config_entry_diagnostics(
 
 ## Additional resources
 
-To learn more information about diagnostics, checkout the [diagnostics documentation](config_entries_diagnostics.md).
+To learn more information about diagnostics, check out the [diagnostics documentation](../../../core/integration_diagnostics).
 
 ## Exceptions
 
