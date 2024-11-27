@@ -15,7 +15,7 @@ It is critical to ensure that no sensitive data is exposed. This includes but is
 - Personal information
 - Device identifiers
 
-To help with this, you can use the `async_redact_data` utility function from `homeassistant.helpers.redact` to safely remove sensitive data from the diagnostics output.
+Home Assistant provides the `async_redact_data` utility function which you can use to safely remove sensitive data from the diagnostics output.
 :::
 
 The following is an example on how to implement both config entry and device entry diagnostics:
