@@ -44,7 +44,7 @@ class MyClimateEntity(ClimateEntity):
         return self._attr_swing_modes
 
     @property
-    def swing_mode(self) -> str | None:
+    def swing_horizontal_mode(self) -> str | None:
         """Return the swing setting.
 
         Requires ClimateEntityFeature.SWING_HORIZONTAL_MODE.
@@ -52,7 +52,7 @@ class MyClimateEntity(ClimateEntity):
         return self._attr_swing_horizontal_mode
 
     @property
-    def swing_modes(self) -> list[str] | None:
+    def swing_horizontal_modes(self) -> list[str] | None:
         """Return the list of available swing modes.
 
         Requires ClimateEntityFeature.SWING_HORIZONTAL_MODE.
