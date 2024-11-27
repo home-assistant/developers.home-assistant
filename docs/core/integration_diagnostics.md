@@ -13,7 +13,6 @@ It is critical to ensure that no sensitive data is exposed. This includes but is
 - Authentication tokens
 - Location data
 - Personal information
-- Device identifiers
 
 Home Assistant provides the `async_redact_data` utility function which you can use to safely remove sensitive data from the diagnostics output.
 :::
