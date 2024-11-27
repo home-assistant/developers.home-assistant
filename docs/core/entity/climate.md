@@ -106,7 +106,7 @@ The device fan can have different swing modes that it wants the user to know abo
 
 :::note
 
-In the case integrations don't have independent control of vertical and horizontal swing, then all possible options should be listed in `swing_modes`, otherwise `swing_modes` provide vertical support and `swing_horizontal_modes` should provide all horizontal options.
+In the case integrations don't have independent control of vertical and horizontal swing, then all possible options should be listed in `swing_modes`, otherwise `swing_modes` provides vertical support and `swing_horizontal_modes` should provide horizontal support.
 
 :::
 

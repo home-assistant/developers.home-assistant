@@ -6,9 +6,9 @@ authorTwitter: GJohansson
 title: "Climate entity now supports independent horizontal swing"
 ---
 
-As of Home Assistant Core 2024.10, we have implemented an independent property and method for controling horizontal swing in `ClimateEntity`.
+As of Home Assistant Core 2024.12, we have implemented an independent property and method for controlling horizontal swing in `ClimateEntity`.
 
-Integrations that supports completely independent control and state for vertical and horizontal swing can now use the previous `swing_mode` for vertical support only and use the new `swing_horizontal_mode` for providing the horizontal vane state.
+Integrations that support completely independent control and state for vertical and horizontal swing can now use the previous `swing_mode` for vertical support only and use the new `swing_horizontal_mode` for providing the horizontal vane state.
 
 Integrations that don't have independent control should still keep using the current `swing_mode` for both vertical and horizontal support.
 
@@ -68,3 +68,6 @@ class MyClimateEntity(ClimateEntity):
         await self.api.set_swing_horizontal_mode(swing_horizontal_mode)
 
 ```
+
+More details can be found in the [climate documentation](/docs/core/entity/climate#swing-modes).
+
