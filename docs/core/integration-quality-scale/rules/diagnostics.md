@@ -33,6 +33,10 @@ async def async_get_config_entry_diagnostics(
     }
 ```
 
+## Additional resources
+
+To learn more information about diagnostics, check out the [diagnostics documentation](/docs/core/integration_diagnostics).
+
 ## Exceptions
 
 There are no exceptions to this rule.
