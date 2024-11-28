@@ -1,11 +1,11 @@
 ---
-title: "The documentation lists known supported / unsupported devices"
+title: "The documentation describes known supported / unsupported devices"
 ---
 
 ## Reasoning
 
 A lot of Home Assistant users buy devices based on if Home Assistant supports them.
-To make it easier for users to find out if a device is supported, the documentation should list the known supported or unsupported devices.
+To make it easier for users to find out if a device is supported, the documentation should describe the known supported or unsupported devices.
 This will decrease the amount of bad experiences where the user finds out their device is not supported when they try to set it up.
 
 ## Example implementation
