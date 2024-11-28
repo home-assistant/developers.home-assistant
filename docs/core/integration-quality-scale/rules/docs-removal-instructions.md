@@ -10,9 +10,9 @@ The documentation should provide clear instructions on how to remove the device 
 ## Example implementation
 
 ```markdown showLineNumbers
-## Remove integration
+## Removing the integration
 
-This integration can be removed by following these steps:
+This integration follows standard integration removal. No extra steps are required.
 
 {% include integrations/remove_device_service.md %}
 
