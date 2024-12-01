@@ -10,8 +10,21 @@ This should help the user to gather all the necessary information before startin
 
 ## Example implementation
 
+In case an integration is used via a config flow:
+
 ```markdown showLineNumbers
 {% configuration_basic %}
+Host:
+    description: "The IP address of your bridge. You can find it in your router or in the Integration app under **Bridge Settings** > **Local API**."
+Local access token:
+    description: "The local access token for your bridge. You can find it in the Integration app under **Bridge Settings** > **Local API**."
+{% endconfiguration_basic %}
+```
+
+In case an integration is set up via YAML in the `configuration.yaml`:
+
+```markdown showLineNumbers
+{% configuration %}
 Host:
     description: "The IP address of your bridge. You can find it in your router or in the Integration app under **Bridge Settings** -> **Local API**."
     required: false
@@ -20,7 +33,7 @@ Local access token:
     description: "The local access token for your bridge. You can find it in the Integration app under **Bridge Settings** -> **Local API**."
     required: false
     type: string
-{% endconfiguration_basic %}
+{% endconfiguration %}
 ```
 
 ## Exceptions
