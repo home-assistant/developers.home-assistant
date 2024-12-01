@@ -15,13 +15,12 @@ Because of the added typing, we can use tooling to avoid typing mistakes.
 
 ## Example implementation
 
-The type of a `ConfigEntry` can be extended with the type of the data put in `runtime_data`.
+The type of a `ConfigEntry` should be extended with the type of the data put in `runtime_data`.
 In the following example, we extend the `ConfigEntry` type with `MyClient`, which means that the `runtime_data` attribute will be of type `MyClient`.
 
 `__init__.py`:
 ```python {1,4,9} showLineNumbers
 type MyIntegrationConfigEntry = ConfigEntry[MyClient]
-
 
 async def async_setup_entry(hass: HomeAssistant, entry: MyIntegrationConfigEntry) -> bool:
     """Set up my integration from a config entry."""
