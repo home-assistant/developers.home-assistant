@@ -29,6 +29,19 @@ class MySensor(SensorEntity):
         ...
 ```
 
+`sensor.py`
+```python {1,2} showLineNumbers
+# Coordinator is used to centralize the data updates
+PARALLEL_UPDATES = 0
+
+class MySensor(CoordinatorEntity, SensorEntity):
+    """Representation of a sensor."""
+
+    def __init__(self, device: Device) -> None:
+        """Initialize the sensor."""
+        ...
+```
+
 :::info
 When using a coordinator, you are already centralizing the data updates.
 This means that usually only the action calls will be relevant to consider for setting the number of parallel updates.
@@ -36,7 +49,7 @@ This means that usually only the action calls will be relevant to consider for s
 
 ## Additional resources
 
-For more information about request parallelism, check the [documentation](../../../integration_fetching_data#request-parallelism) for it.
+For more information about request parallelism, check the [documentation](../../../../integration_fetching_data#request-parallelism) for it.
 
 ## Exceptions
 
