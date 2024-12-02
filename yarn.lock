@@ -1812,10 +1812,10 @@
     cssesc "^3.0.0"
     immediate "^3.2.3"
 
-"@easyops-cn/docusaurus-search-local@^0.45.0":
-  version "0.45.0"
-  resolved "https://registry.yarnpkg.com/@easyops-cn/docusaurus-search-local/-/docusaurus-search-local-0.45.0.tgz#7101d59c9359b50b1add306d2504a09bd7176adb"
-  integrity sha512-ccJjeYmBHrv2v8Y9eQnH79S0PEKcogACKkEatEKPcad7usQj/14jA9POUUUYW/yougLSXghwe+uIncbuUBuBFg==
+"@easyops-cn/docusaurus-search-local@^0.46.1":
+  version "0.46.1"
+  resolved "https://registry.yarnpkg.com/@easyops-cn/docusaurus-search-local/-/docusaurus-search-local-0.46.1.tgz#7fac1a14417de680b5af7088814192a153d7334d"
+  integrity sha512-kgenn5+pctVlJg8s1FOAm9KuZLRZvkBTMMGJvTTcvNTmnFIHVVYzYfA2Eg+yVefzsC8/cSZGKKJ0kLf8I+mQyw==
   dependencies:
     "@docusaurus/plugin-content-docs" "^2 || ^3"
     "@docusaurus/theme-translations" "^2 || ^3"
@@ -1826,6 +1826,7 @@
     "@node-rs/jieba" "^1.6.0"
     cheerio "^1.0.0"
     clsx "^1.1.1"
+    comlink "^4.4.2"
     debug "^4.2.0"
     fs-extra "^10.0.0"
     klaw-sync "^6.0.0"
@@ -3495,6 +3496,11 @@ combine-promises@^1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/combine-promises/-/combine-promises-1.1.0.tgz#72db90743c0ca7aab7d0d8d2052fd7b0f674de71"
   integrity sha512-ZI9jvcLDxqwaXEixOhArm3r7ReIivsXkpbyEWyeOhzz1QS0iSgBPnWvEqvIQtYyamGCYA88gFhmUrs9hrrQ0pg==
+
+comlink@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/comlink/-/comlink-4.4.2.tgz#cbbcd82742fbebc06489c28a183eedc5c60a2bca"
+  integrity sha512-OxGdvBmJuNKSCMO4NTl1L47VRp6xn2wG4F/2hYzB6tiCb709otOxtEYCSvK80PtjODfXXZu8ds+Nw5kVCjqd2g==
 
 comma-separated-tokens@^2.0.0:
   version "2.0.3"
