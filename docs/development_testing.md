@@ -17,8 +17,6 @@ To run our linters, on the full code base, run the following command:
 pre-commit run --all-files
 ```
 
-Or, in Visual Studio Code, launch the `Pre-commit` task.
-
 To run the full test suite, more dependencies are required than what is set up in the devcontainer by default. To install all dependencies, activate the virtual environment and run the command:
 
 ```shell
