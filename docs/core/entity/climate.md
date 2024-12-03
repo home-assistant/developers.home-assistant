@@ -28,7 +28,7 @@ Properties should always only return information from memory and not do I/O (lik
 | preset_mode             | <code>str &#124; None</code>        | **Required by SUPPORT_PRESET_MODE**  | The current active preset.                                                 |
 | preset_modes            | <code>list[str] &#124; None</code>  | **Required by SUPPORT_PRESET_MODE**  | The available presets.                                                     |
 | swing_mode              | <code>str &#124; None</code>        | **Required by SUPPORT_SWING_MODE**   | The swing setting.                                                         |
-| swing_modes             | <code>list[str] &#124; None</code>  | **Required by SUPPORT_SWING_MODE**   | Returns the list of available swing modes, only vertial modes in the case horizontal swing is implemented. |
+| swing_modes             | <code>list[str] &#124; None</code>  | **Required by SUPPORT_SWING_MODE**   | Returns the list of available swing modes, only vertical modes in the case horizontal swing is implemented. |
 | swing_horizontal_mode | <code>str &#124; None</code>        | **Required by SUPPORT_SWING_HORIZONTAL_MODE**   | The horizontal swing setting.                                     |
 | swing_horizontal_modes | <code>list[str] &#124; None</code>  | **Required by SUPPORT_SWING_HORIZONTAL_MODE**  | Returns the list of available horizontal swing modes.                                 |
 | target_humidity         | <code>float &#124; None</code>        | `None`                               | The target humidity the device is trying to reach.                         |
