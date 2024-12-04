@@ -23,6 +23,7 @@ In the following example, we extend the `ConfigEntry` type with `MyClient`, whic
 ```python {1,4,9} showLineNumbers
 type MyIntegrationConfigEntry = ConfigEntry[MyClient]
 
+
 async def async_setup_entry(hass: HomeAssistant, entry: MyIntegrationConfigEntry) -> bool:
     """Set up my integration from a config entry."""
 
