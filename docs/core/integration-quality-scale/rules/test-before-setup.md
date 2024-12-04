@@ -42,6 +42,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: MyIntegrationConfigEntry
     return True
 ```
 
+:::info
+Please note that this may also be implemented implicitly when using a data update coordinator via `await coordinator.async_config_entry_first_refresh()`
+:::
+
 ## Additional resources
 
 More information about config entries and their lifecycle can be found in the [config entry documentation](../../../config_entries_index).
