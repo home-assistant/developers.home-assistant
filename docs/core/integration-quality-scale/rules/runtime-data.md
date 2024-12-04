@@ -1,6 +1,7 @@
 ---
 title: "Use ConfigEntry.runtime_data to store runtime data"
 related_rules:
+  - strict-typing
   - test-before-setup
 ---
 import RelatedRules from './_includes/related_rules.jsx'
@@ -15,7 +16,7 @@ Because of the added typing, we can use tooling to avoid typing mistakes.
 
 ## Example implementation
 
-The type of a `ConfigEntry` should be extended with the type of the data put in `runtime_data`.
+The type of a `ConfigEntry` can be extended with the type of the data put in `runtime_data`.
 In the following example, we extend the `ConfigEntry` type with `MyClient`, which means that the `runtime_data` attribute will be of type `MyClient`.
 
 `__init__.py`:
