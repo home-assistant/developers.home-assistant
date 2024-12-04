@@ -2,7 +2,7 @@
 title: "Strict typing"
 related_rules:
   - runtime-data
- ---
+---
 import RelatedRules from './_includes/related_rules.jsx'
 
 ## Reasoning
