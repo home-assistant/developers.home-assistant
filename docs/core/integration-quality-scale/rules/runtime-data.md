@@ -36,6 +36,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: MyIntegrationConfigEntry
     return True
 ```
 
+:::warning
+If the integration implements `strict-typing`, the type of a `ConfigEntry` <ins>must</ins> be extended with the type of the data put in `runtime_data`.
+:::
+
 ## Additional resources
 
 More information about configuration entries and their lifecycle can be found in the [config entry documentation](../../../config_entries_index).
