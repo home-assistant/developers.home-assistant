@@ -19,7 +19,7 @@ This file tells mypy that your library is fully typed, after which it can read t
 In the Home Assistant codebase, you can add your integration to the [`.strict-typing`](https://github.com/home-assistant/core/blob/dev/.strict-typing) file, which will enable strict type checks for your integration.
 
 :::warning
-If the integration implements `runtime-data`, the type of a `ConfigEntry` <ins>must</ins> be extended with the type of the data put in `runtime_data`.
+If the integration implements `runtime-data`, the use of a custom typed `MyIntegrationConfigEntry` is required and must be used thoughout.
 :::
 
 ## Additional resources
