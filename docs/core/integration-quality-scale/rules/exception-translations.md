@@ -44,8 +44,12 @@ async def async_set_schedule(call: ServiceCall) -> ServiceResponse:
 ```json
 {
     "exceptions": {
-        "end_date_before_start_date": "The end date cannot be before the start date.",
-        "cannot_connect_to_schedule": "Cannot connect to the schedule."
+        "end_date_before_start_date": {
+            "message": "The end date cannot be before the start date."
+        },
+        "cannot_connect_to_schedule": {
+            "message": "Cannot connect to the schedule."
+        }
     }
 }
 ```
