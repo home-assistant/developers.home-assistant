@@ -89,7 +89,7 @@ class MyConfigFlow(ConfigFlow, domain=DOMAIN):
 
 ## Additional resources
 
-For more information on the reconfiguration flow, see the [reconfigure flow documentation](../../../config_entries_config_flow_handler#reconfigure).
+For more information on the reconfiguration flow, see the [reconfigure flow documentation](/docs/config_entries_config_flow_handler#reconfigure).
 
 ## Exceptions
 

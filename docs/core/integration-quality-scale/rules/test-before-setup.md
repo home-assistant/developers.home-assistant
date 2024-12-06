@@ -44,7 +44,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: MyIntegrationConfigEntry
 
 ## Additional resources
 
-More information about config entries and their lifecycle can be found in the [config entry documentation](../../../config_entries_index).
+More information about config entries and their lifecycle can be found in the [config entry documentation](/docs/config_entries_index).
 
 ## Exceptions
 

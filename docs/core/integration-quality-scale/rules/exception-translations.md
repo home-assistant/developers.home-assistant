@@ -56,7 +56,7 @@ async def async_set_schedule(call: ServiceCall) -> ServiceResponse:
 
 ## Additional resources
 
-For more info on raising exceptions, check the [documentation](../../platform/raising_exceptions).
+For more info on raising exceptions, check the [documentation](/docs/core/platform/raising_exceptions).
 
 ## Exceptions
 

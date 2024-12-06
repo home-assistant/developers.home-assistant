@@ -34,7 +34,7 @@ class MySensor(SensorEntity):
 
 ## Additional resources
 
-More information about the requirements for a unique identifier can be found in the [documentation](../../../entity_registry_index#unique-id-requirements).
+More information about the requirements for a unique identifier can be found in the [documentation](/docs/entity_registry_index#unique-id-requirements).
 
 ## Exceptions
 

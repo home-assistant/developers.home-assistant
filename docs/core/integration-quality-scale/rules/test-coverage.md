@@ -15,7 +15,7 @@ It also allows new developers to understand the codebase and make changes withou
 
 ## Additional resources
 
-For more information about testing and how to calculate test coverage, see the [Testing your code](../../../development_testing) page.
+For more information about testing and how to calculate test coverage, see the [Testing your code](/docs/development_testing) page.
 
 ## Exceptions
 

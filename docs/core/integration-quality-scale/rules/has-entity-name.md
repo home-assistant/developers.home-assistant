@@ -56,8 +56,8 @@ class MyLock(LockEntity):
 
 ## Additional resources
 
-More information about entity naming can be found in the [entity](../../entity#has_entity_name-true-mandatory-for-new-integrations) documentation.
-More information about devices can be found in the [device](../../../device_registry_index) documentation.
+More information about entity naming can be found in the [entity](/docs/core/entity#has_entity_name-true-mandatory-for-new-integrations) documentation.
+More information about devices can be found in the [device](/docs/device_registry_index) documentation.
 
 ## Exceptions
 

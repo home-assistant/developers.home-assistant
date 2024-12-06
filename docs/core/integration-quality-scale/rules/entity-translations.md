@@ -54,8 +54,8 @@ If the entity's platform is either `binary_sensor`, `number`, `sensor`, or `upda
 
 ## Additional resources
 
-More information about the translation process can be found in the [translation](../../../internationalization/core) documentation, it also contains information about the [entity translations](../../../internationalization/core#name-of-entities).
-More information about entity naming can be found in the [entity](../../entity#has_entity_name-true-mandatory-for-new-integrations) documentation.
+More information about the translation process can be found in the [translation](/docs/internationalization/core) documentation, it also contains information about the [entity translations](/docs/internationalization/core#name-of-entities).
+More information about entity naming can be found in the [entity](/docs/core/entity#has_entity_name-true-mandatory-for-new-integrations) documentation.
 
 ## Exceptions
 

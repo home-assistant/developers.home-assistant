@@ -41,7 +41,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: MyConfigEntry) -> None:
 
 ## Additional resources
 
-For more information about repair issues and repair flows, see the [repairs](../../platform/repairs) documentation.
+For more information about repair issues and repair flows, see the [repairs](/docs/core/platform/repairs) documentation.
 
 ## Exceptions
 

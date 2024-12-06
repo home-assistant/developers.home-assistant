@@ -56,7 +56,7 @@ class MySensor(SensorEntity):
 
 ## Additional resources
 
-More information about polling can be found in the [documentation](../../../integration_fetching_data).
+More information about polling can be found in the [documentation](/docs/integration_fetching_data).
 
 ## Exceptions
 

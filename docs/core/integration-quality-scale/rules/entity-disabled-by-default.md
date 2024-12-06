@@ -43,7 +43,7 @@ class MySignalStrengthSensor(SensorEntity):
 
 ## Additional resources
 
-To learn more about the entity registry properties, checkout the [documentation](../../entity#registry-properties) about it.
+To learn more about the entity registry properties, checkout the [documentation](/docs/core/entity#registry-properties) about it.
 
 ## Exceptions
 

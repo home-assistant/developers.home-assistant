@@ -77,7 +77,7 @@ class MySensor(SensorEntity):
 
 ## Additional resources
 
-For more information about managing integration state, see the [documentation](../../../integration_fetching_data).
+For more information about managing integration state, see the [documentation](/docs/integration_fetching_data).
 
 ## Exceptions
 
