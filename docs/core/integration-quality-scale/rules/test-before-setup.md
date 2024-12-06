@@ -43,7 +43,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: MyIntegrationConfigEntry
 ```
 
 :::info
-Please note that this may also be implemented implicitly when using a data update coordinator via `await coordinator.async_config_entry_first_refresh()`
+Please note that this may also be implemented implicitly when using a data update coordinator via `await coordinator.async_config_entry_first_refresh()`.
 :::
 
 ## Additional resources
