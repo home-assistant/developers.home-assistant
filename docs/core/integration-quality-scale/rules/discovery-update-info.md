@@ -58,8 +58,8 @@ This will create discovery flows for those devices.
 
 ## Additional resources
 
-To learn more information about config flows, checkout the [config flow documentation](../../../config_entries_config_flow_handler).
-To learn more about network protocols and discovery, checkout the [Networking and discovery documentation](../../../network_discovery).
+To learn more information about config flows, checkout the [config flow documentation](/docs/config_entries_config_flow_handler).
+To learn more about network protocols and discovery, checkout the [Networking and discovery documentation](/docs/network_discovery).
 
 ## Exceptions
 

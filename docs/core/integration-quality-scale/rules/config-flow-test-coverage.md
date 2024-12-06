@@ -60,8 +60,8 @@ async def test_full_flow(
 
 ## Additional resources
 
-More information about config flows can be found in the [config flow documentation](../../../config_entries_config_flow_handler).
-More information about testing integrations can be found in the [testing documentation](../../../development_testing).
+More information about config flows can be found in the [config flow documentation](/docs/config_entries_config_flow_handler).
+More information about testing integrations can be found in the [testing documentation](/docs/development_testing).
 
 ## Exceptions
 

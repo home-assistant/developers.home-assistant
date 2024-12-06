@@ -48,7 +48,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 
 ## Additional resources
 
-For more information on how to set up service actions, see the [service documentation](../../../dev_101_services).
+For more information on how to set up service actions, see the [service documentation](/docs/dev_101_services).
 
 ## Exceptions
 

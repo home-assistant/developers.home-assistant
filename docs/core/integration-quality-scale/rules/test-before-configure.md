@@ -64,7 +64,7 @@ class MyConfigFlow(ConfigFlow, domain=DOMAIN):
 
 ## Additional resources
 
-More information about config flows can be found in the [config flow documentation](../../../config_entries_config_flow_handler).
+More information about config flows can be found in the [config flow documentation](/docs/config_entries_config_flow_handler).
 
 ## Exceptions
 

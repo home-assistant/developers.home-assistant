@@ -48,7 +48,7 @@ Please note that this may also be implemented implicitly when using a data updat
 
 ## Additional resources
 
-More information about config entries and their lifecycle can be found in the [config entry documentation](../../../config_entries_index).
+More information about config entries and their lifecycle can be found in the [config entry documentation](/docs/config_entries_index).
 
 ## Exceptions
 

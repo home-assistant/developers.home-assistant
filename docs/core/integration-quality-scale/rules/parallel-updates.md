@@ -36,7 +36,7 @@ This means that usually only the action calls will be relevant to consider for s
 
 ## Additional resources
 
-For more information about request parallelism, check the [documentation](../../../integration_fetching_data#request-parallelism) for it.
+For more information about request parallelism, check the [documentation](/docs/integration_fetching_data#request-parallelism) for it.
 
 ## Exceptions
 

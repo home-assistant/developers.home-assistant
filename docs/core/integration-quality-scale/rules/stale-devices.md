@@ -79,7 +79,7 @@ async def async_remove_config_entry_device(
 
 ## Additional resources
 
-For more info on devices, checkout the [device registry documentation](../../../device_registry_index).
+For more info on devices, checkout the [device registry documentation](/docs/device_registry_index).
 
 ## Exceptions
 

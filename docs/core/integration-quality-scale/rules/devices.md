@@ -45,7 +45,7 @@ If the device represents a service, be sure to add `entry_type=DeviceEntryType.S
 
 ## Additional resources
 
-More information about devices can be found in the [device](../../../device_registry_index) documentation.
+More information about devices can be found in the [device](/docs/device_registry_index) documentation.
 
 ## Exceptions
 

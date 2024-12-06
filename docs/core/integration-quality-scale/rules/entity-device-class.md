@@ -42,8 +42,8 @@ class MyTemperatureSensor(SensorEntity):
 
 ## Additional resources
 
-A list of available device classes can be found in the entity pages under the [entity](../../entity) page.
-More information about entity naming can be found in the [entity](../../entity#has_entity_name-true-mandatory-for-new-integrations) documentation.
+A list of available device classes can be found in the entity pages under the [entity](/docs/core/entity) page.
+More information about entity naming can be found in the [entity](/docs/core/entity#has_entity_name-true-mandatory-for-new-integrations) documentation.
 
 ## Exceptions
 

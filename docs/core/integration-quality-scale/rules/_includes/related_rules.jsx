@@ -8,10 +8,11 @@ export default function RelatedRules({relatedRules}) {
     return (
         <ul>
             {relatedRules.map((rule) => {
+                const absoluteRulePath = `/docs/core/integration-quality-scale/rules/${rule}`;
                 const relatedRule = docs[`core/integration-quality-scale/rules/${rule}`].title;
                 return (
                     <li key={rule}>
-                        <Link to={rule}>{rule}</Link>: {relatedRule}
+                        <Link to={absoluteRulePath}>{rule}</Link>: {relatedRule}
                     </li>
                 );
             })}

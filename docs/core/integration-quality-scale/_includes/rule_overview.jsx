@@ -13,10 +13,11 @@ export default function RuleOverview({tier}) {
                 if (typeof rule === "object") {
                     id = rule.id;
                 }
+                const absoluteRulePath = `/docs/core/integration-quality-scale/rules/${id}`;
                 const relatedRule = docs[`core/integration-quality-scale/rules/${id}`];
                 return (
                     <li key={id}>
-                        <Link to={`rules/${id}`}>{id}</Link> - {relatedRule.title}
+                        <Link to={absoluteRulePath}>{id}</Link> - {relatedRule.title}
                     </li>
                 );
             })}
