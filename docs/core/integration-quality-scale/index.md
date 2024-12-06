@@ -94,7 +94,7 @@ Home Assistant encourages our contributors to get their integrations to the high
 
 When an integration reaches the minimum requirements for a certain tier, a contributor can open a pull request to adjust the scale for the integration.
 This request needs to be accompanied by the full checklist for each rule of scale (including all rules of lower tiers), demonstrating that it has met those requirements.
-The checklist can be found [here](checklist).
+The checklist can be found [here](/docs/core/integration-quality-scale/checklist).
 
 Once the Home Assistant core team reviews and approves it, the integration will display the new tier as of the next major release of Home Assistant.
 
