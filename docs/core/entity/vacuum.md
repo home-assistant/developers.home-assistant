@@ -22,11 +22,11 @@ Properties should always only return information from memory and not do I/O (lik
 | fan_speed | string | `none` | The current fan speed.
 | fan_speed_list | list | `NotImplementedError()`| List of available fan speeds.
 | name | string | **Required** | Name of the entity.
-| vacuum_state | VacuumEntityState | **Required** | Return one of the states listed in the states section.
+| activity | VacuumActivity | **Required** | Return one of the states listed in the states section.
 
 ## States
 
-Setting the state should return an enum from VacuumEntityState in the `vacuum_state` property.
+Setting the state should return an enum from VacuumActivity in the `activity` property.
 
 | Value | Description
 | ----- | -----------
