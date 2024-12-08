@@ -25,6 +25,15 @@ A light entity controls the brightness, hue and saturation color value, white va
 | supported_color_modes | <code>set[ColorMode] &#124; None</code>                 | `None` | Flag supported color modes.
 | xy_color              | <code>tuple[float, float] &#124; None</code>            | `None` | The xy color value (float, float). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.XY` and ignored otherwise.
 
+### States
+
+The state is defined by setting the above `is_on` method. The resulting state is using the `LightState` enum to return one of the below members.
+
+| Value   | Description                                   |
+|---------|-----------------------------------------------|
+| `ON`    | The light is on.                              |
+| `OFF`   | The light is off.                             |
+
 ## Color modes
 
 New integrations must implement both `color_mode` and `supported_color_modes`. If an integration is upgraded to support color mode, both `color_mode` and `supported_color_modes` should be implemented.
