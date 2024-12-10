@@ -1,6 +1,7 @@
 ---
 title: "Use ConfigEntry.runtime_data to store runtime data"
 related_rules:
+  - strict-typing
   - test-before-setup
 ---
 import RelatedRules from './_includes/related_rules.jsx'
@@ -34,6 +35,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: MyIntegrationConfigEntry
 
     return True
 ```
+
+:::info
+If the integration implements `strict-typing`, the use of a custom typed `MyIntegrationConfigEntry` is required and must be used throughout.
+:::
 
 ## Additional resources
 
