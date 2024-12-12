@@ -46,8 +46,8 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.DATE` | | Date. Requires `native_value` to be a Python `datetime.date` object, or `None`.
 | `SensorDeviceClass.DISTANCE` | km, m, cm, mm, mi, nmi, yd, in | Generic distance
 | `SensorDeviceClass.DURATION` | d, h, min, s, ms | Time period. Should not update only due to time passing. The device or service needs to give a new data point to update.
-| `SensorDeviceClass.ENERGY` | J, kJ, MJ, GJ, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal | Energy, this device class should be used for sensors representing energy consumption, for example an electricity meter. Represents _power_ over _time_. Not to be confused with `power`.
-| `SensorDeviceClass.ENERGY_STORAGE` | J, kJ, MJ, GJ, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal | Stored energy, this device class should be used for sensors representing stored energy, for example the amount of electric energy currently stored in a battery or the capacity of a battery. Represents _power_ over _time_. Not to be confused with `power`.
+| `SensorDeviceClass.ENERGY` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal | Energy, this device class should be used for sensors representing energy consumption, for example an electricity meter. Represents _power_ over _time_. Not to be confused with `power`.
+| `SensorDeviceClass.ENERGY_STORAGE` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal | Stored energy, this device class should be used for sensors representing stored energy, for example the amount of electric energy currently stored in a battery or the capacity of a battery. Represents _power_ over _time_. Not to be confused with `power`.
 | `SensorDeviceClass.ENUM` | | The sensor has a limited set of (non-numeric) states. The `options` property must be set to a list of possible states when using this device class.
 | `SensorDeviceClass.FREQUENCY` | Hz, kHz, MHz, GHz | Frequency
 | `SensorDeviceClass.GAS` | m³, ft³, CCF | Volume of gas. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
