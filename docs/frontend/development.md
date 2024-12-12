@@ -25,7 +25,7 @@ git remote add upstream https://github.com/home-assistant/frontend.git
 
 You will need to have an instance of Home Assistant set up. See our guide on [setting up a development environment](/development_environment.mdx).
 
-There are two ways to test the frontend. You either configure Home Assistant to use another frontend. Or you configure the frontend to connect to an existing Home Assistant instance. The first option is how it will work in production. The second allows running a development frontend against an existing Home Assistant without modifying it. However the downside is that not everything can be tested this way. For example, the login page will always be the one built-in into your Home Assistant.
+There are two ways to test the frontend. You either configure Home Assistant to use another frontend. Or you configure the frontend to connect to an existing Home Assistant instance. The first option is how it will work in production. The second allows running a development frontend against an existing Home Assistant with minimal interference. The downside is that not everything can be tested this way. For example, the login page will always be the one built-in into your Home Assistant.
 
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
@@ -63,7 +63,15 @@ The change to `.devcontainer/devcontainer.json` should be excluded from any PR a
 
 <TabItem value="frontend outside Home Assistant">
 
-If you setup your frontend development environment so that you can run the `script/develop` script as described in section [Development](#development). You can use the following command as a replacement to develop and run the frontend on http://localhost:8124 and it will connect to the Home Assistant running on http://localhost:8123. Note that if you are running this command from a devcontainer, the url should be accessed from the container host.
+If you want to connect your development frontend to an existing home assistant instance without replacing the UI completely, you will need to add the url under which your development frontend is hosted in `configuration.yaml` of the home assistant it will be connecting to.
+
+```yaml
+http:
+  cors_allowed_origins:
+    - http://localhost:8124
+```
+
+After you've setup your frontend development environment so that you can run the `script/develop` script as described in section [Development](#development). You can use the following command as a replacement to develop and run the frontend on http://localhost:8124 and it will connect to the Home Assistant running on http://localhost:8123. Note that if you are running this command from a devcontainer, the url should be accessed from the container host.
 
 ```shell
 script/develop_and_serve
