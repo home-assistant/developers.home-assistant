@@ -77,6 +77,7 @@ class MyLight(LightEntity):
 #### Service call
 
 ```python
+from homeassistant.components.light import ATTR_COLOR_TEMP_KELVIN
 from homeassistant.util import color as color_util
 
 class MyLight(LightEntity):
