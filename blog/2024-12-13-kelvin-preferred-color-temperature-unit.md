@@ -12,8 +12,67 @@ It is now time to add deprecation warnings for the deprecated attributes, consta
 * Deprecate state and capability attributes `ATTR_COLOR_TEMP`, `ATTR_MIN_MIREDS` and `ATTR_MAX_MIREDS`
 * Deprecate constants `ATTR_KELVIN` and `ATTR_COLOR_TEMP` from the `light.turn_on` service call
 * Deprecate properties `LightEntity.color_temp`, `LightEntity.min_mireds` and `LightEntity.max_mireds`
+* Deprecate corresponding attributes `LightEntity._attr_color_temp`, `LightEntity._attr_min_mired` and `LightEntity._attr_max_mired`
 
 ### Examples
+
+#### Minimum and Maximum color temperature
+
+Custom minimum/maximum color temperature
+
+```python
+class MyLight(LightEntity):
+    """Representation of a light."""
+
+    # Old
+    # _attr_min_mireds = 200 # 5000K
+    # _attr_max_mireds = 400 # 2500K
+
+    # New
+    _attr_min_color_temp_kelvin = 2500 # 400 mireds
+    _attr_max_color_temp_kelvin = 5000 # 200 mireds
+```
+
+Default minimum/maximum color temperature
+
+```python
+from homeassistant.components.light import DEFAULT_MAX_KELVIN, DEFAULT_MIN_KELVIN
+
+class MyLight(LightEntity):
+    """Representation of a light."""
+
+    # Old did not need to have _attr_min_mireds / _attr_max_mireds set
+    # New needs to set the default explicitly
+    _attr_min_color_temp_kelvin = DEFAULT_MIN_KELVIN
+    _attr_max_color_temp_kelvin = DEFAULT_MAX_KELVIN
+```
+
+Dynamic minimum/maximum color temperature
+
+```python
+from homeassistant.util import color as color_util
+
+class MyLight(LightEntity):
+    """Representation of a light."""
+
+    # Old
+    # def min_mireds(self) -> int:
+    #     """Return the coldest color_temp that this light supports."""
+    #     return device.coldest_temperature
+    #
+    # def max_mireds(self) -> int:
+    #     """Return the warmest color_temp that this light supports."""
+    #     return device.warmest_temperature
+
+    # New
+    def min_color_temp_kelvin(self) -> int:
+        """Return the warmest color_temp that this light supports."""
+        return color_util.color_temperature_mired_to_kelvin(device.warmest_temperature)
+
+    def max_color_temp_kelvin(self) -> int:
+        """Return the coldest color_temp that this light supports."""
+        return color_util.color_temperature_mired_to_kelvin(device.coldest_temperature)
+```
 
 #### Service call
 
