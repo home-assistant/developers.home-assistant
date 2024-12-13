@@ -10,4 +10,4 @@ This should have no effect because:
 - no core integrations are using this entity description
 - no custom integrations published on HACS are using this entity description
 
-More details can be found in the [Water heater documentation](/docs/core/entity/water-heater).
+See details in the core PR: [#132888](https://github.com/home-assistant/core/pull/132888).
