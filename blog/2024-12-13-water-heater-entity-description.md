@@ -2,7 +2,7 @@
 author: L Boué
 authorURL: https://github.com/lboue
 authorTwitter: lboue
-title: "Fix typo in WaterHeaterEntityDescription name"
+title: "Changed name of WaterHeaterEntityDescription"
 ---
 
 A naming error was found in the water heater code componant. So we renamed `WaterHeaterEntityEntityDescription` to `WaterHeaterEntityDescription`.
