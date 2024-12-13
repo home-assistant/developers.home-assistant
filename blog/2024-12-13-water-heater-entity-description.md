@@ -6,8 +6,6 @@ title: "Fix typo in WaterHeaterEntityDescription name"
 ---
 
 A naming error was found in the water heater code componant. So we renamed `WaterHeaterEntityEntityDescription` to `WaterHeaterEntityDescription`.
-This should have no effect because:
-- no core integrations are using this entity description
-- no custom integrations published on HACS are using this entity description
+As there were no Core integrations and no custom integrations published on HACS using the entity description, we did not add a deprecation period. The changed entity description will be released in the 2025.1 release.
 
 See details in the core PR: [#132888](https://github.com/home-assistant/core/pull/132888).
