@@ -25,15 +25,23 @@ git remote add upstream https://github.com/home-assistant/frontend.git
 
 You will need to have an instance of Home Assistant set up. See our guide on [setting up a development environment](/development_environment.mdx).
 
-Next step is to configure Home Assistant to use the development mode for the frontend. Do this by updating the frontend config in your `configuration.yaml` and set the path to the frontend repository that you cloned in the last step:
+#### Developing with a manual environment
+
+If you set up the development environment for Home Assistant Core manually, fill in the frontend repository path in `configuration.yaml`:
 
 ```yaml
 frontend:
   # Example absolute path: /home/paulus/dev/hass/frontend
-  development_repo: /path/to/hass/frontend/
+  development_repo: /path/to/hass/frontend
 ```
 
-If you are using Visual Studio Code with devcontainers for Home Assistant, you need to mount the `frontend` directory into the container. Add the following section to `.devcontainer/devcontainer.json`:
+:::tip
+The `configuration.yaml` file can be found in the `config` directory at the root of the Home Assistant Core repository.
+:::
+
+#### Developing with Visual Studio Code + devcontainer
+
+If you are using Visual Studio Code with devcontainers for Home Assistant Core, you need to mount the frontend repository into the devcontainer. Add the following section to `.devcontainer/devcontainer.json` in the Home Asisstant Core repository:
 
 ```json
 "mounts": [
@@ -41,18 +49,29 @@ If you are using Visual Studio Code with devcontainers for Home Assistant, you n
 ]
 ```
 
-The Home Assistant's devcontainer needs to get rebuilt via the `Dev Containers: Rebuild Container` with: Shift+Command+P(Mac) / Ctrl+Shift+P (Windows/Linux). The `configuration.yaml` should point to the path inside the container:
+Rebuild the devcontainer with Shift+Command+P(Mac) / Ctrl+Shift+P (Windows/Linux), then selecting the `Dev Containers: Rebuild Container` command.
+
+Edit `config/configuration.yaml` at the root of the Home Assistant Core repository to add this entry:
 
 ```yaml
 frontend:
-  development_repo: /workspaces/frontend/
+  development_repo: /workspaces/frontend
 ```
+
+:::note
+This is the mounted path inside the devcontainer, see the `target=` parameter above.
+:::
+
+Run Home Assistant Core from VS Code:
+1. Press Shift+Command+P(Mac) / Ctrl+Shift+P (Windows/Linux)
+2. Select `Tasks: Run Task`
+3. Select `Run Home Assistant Core`
 
 :::caution
 The change to `.devcontainer/devcontainer.json` should be excluded from any PR as it contains your local path to the `frontend` repository. Since the the settings in `.devcontainer/devcontainer.json` are only processed during the container rebuild, you can safely roll back the change after the rebuild has completed.
 :::
 
-### Installing Node.js
+### Installing Node.js (manual environment only)
 
 Node.js is required to build the frontend. The preferred method of installing node.js is with [nvm](https://github.com/nvm-sh/nvm). Install nvm using the instructions in the [README](https://github.com/nvm-sh/nvm#install--update-script), and install the correct node.js by running the following command:
 
@@ -62,7 +81,9 @@ nvm install
 
 [Yarn](https://yarnpkg.com/en/) is used as the package manager for node modules. [Install yarn using the instructions here.](https://yarnpkg.com/getting-started/install)
 
-Next, development dependencies need to be installed to bootstrap the frontend development environment. First activate the right Node version and then download all the dependencies:
+### Install development dependencies and fetch latest translations
+
+Bootstrap the frontend development environment by installing development dependencies and downloading the latest translations.
 
 ```shell
 nvm use
@@ -70,7 +91,13 @@ script/bootstrap
 script/setup_translations
 ```
 
+:::note
+This needs to be done manually, even if you are using devcontainers. Also, you will be asked to enter a code and authorize the script to fetch the latest translations.
+:::
+
 ## Development
+
+### Run development server
 
 During development, you will need to run the development script to maintain a development build of the frontend that auto updates when you change any of the source files. To run this server, run:
 
@@ -79,7 +106,9 @@ nvm use
 script/develop
 ```
 
-Make sure you have cache disabled and correct settings to avoid stale content:
+### Browser settings
+
+Open Google Chrome's Developer tools, and make sure you have cache disabled and correct settings to avoid stale content:
 
 :::info
 Instructions are for Google Chrome
