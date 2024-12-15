@@ -45,7 +45,7 @@ frontend:
 ```
 
 :::note
-This is the mounted path inside the devcontainer, see the `target=` parameter above.
+This is the mounted path inside the devcontainer, see the `target` parameter above. If the `source` path is incorrect, the web frontend won't work.
 :::
 
 Run Home Assistant Core from VS Code:
@@ -68,7 +68,7 @@ frontend:
 ```
 
 :::tip
-The `configuration.yaml` file can be found in the `config` directory at the root of the Home Assistant Core repository.
+The `configuration.yaml` file can be found in the `config` directory at the root of the Home Assistant Core repository. If the path is incorrect or otherwise inaccessible, the web frontend won't work.
 :::
 
 ### Installing Node.js (manual environment only)
@@ -99,12 +99,14 @@ This needs to be done manually, even if you are using devcontainers. Also, you w
 
 ### Run development server
 
-During development, you will need to run the development script to maintain a development build of the frontend that auto-updates when you change any of the source files. To run this server, run:
+Run this script to build the frontend and run a development server:
 
 ```shell
 nvm use
 script/develop
 ```
+
+When the script has completed building the frontend, and Home Assistant Core has been set up correctly, the frontend will be accessible at `http://localhost:8123`. The server will automatically rebuild the frontend when you make changes to the source files.
 
 ### Browser settings
 
