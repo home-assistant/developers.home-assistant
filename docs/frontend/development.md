@@ -35,7 +35,7 @@ If you are using Visual Studio Code with devcontainers for Home Assistant Core, 
 ]
 ```
 
-Rebuild the devcontainer with Shift+Command+P(Mac) / Ctrl+Shift+P (Windows/Linux), then selecting the `Dev Containers: Rebuild Container` command.
+Rebuild the devcontainer by pressing Shift+Command+P (Mac) / Ctrl+Shift+P (Windows/Linux), then selecting the **Dev Containers: Rebuild Container** command.
 
 Edit `config/configuration.yaml` at the root of the Home Assistant Core repository to add this entry:
 
@@ -49,9 +49,9 @@ This is the mounted path inside the devcontainer, see the `target=` parameter ab
 :::
 
 Run Home Assistant Core from VS Code:
-1. Press Shift+Command+P(Mac) / Ctrl+Shift+P (Windows/Linux)
-2. Select `Tasks: Run Task`
-3. Select `Run Home Assistant Core`
+1. Press Shift+Command+P (Mac) / Ctrl+Shift+P (Windows/Linux)
+2. Select **Tasks: Run Task**
+3. Select **Run Home Assistant Core**
 
 :::caution
 The change to `.devcontainer/devcontainer.json` should be excluded from any PR as it contains your local path to the `frontend` repository. Since the settings in `.devcontainer/devcontainer.json` are only processed during the container rebuild, you can safely roll back the change after the rebuild has completed.
@@ -114,13 +114,13 @@ Open Google Chrome's Developer tools, and make sure you have cache disabled and 
 Instructions are for Google Chrome
 :::
 
-1. Disable cache by ticking the box in `Network` > `Disable cache`
+1. Disable cache by ticking the box in **Network** > **Disable cache**
 
 <p class='img'>
   <img src='/img/en/development/disable-cache.png' />
 </p>
 
-2. Enable Bypass for network in `Application` > `Service Workers` > `Bypass for network`
+2. Enable Bypass for network in **Application** > **Service Workers** > **Bypass for network**
 
 <p class='img'>
   <img src='/img/en/development/bypass-for-network.png' />
