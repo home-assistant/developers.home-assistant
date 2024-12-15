@@ -35,7 +35,7 @@ If you are using Visual Studio Code with devcontainers for Home Assistant Core, 
 ]
 ```
 
-Rebuild the devcontainer by pressing Shift+Command+P (Mac) / Ctrl+Shift+P (Windows/Linux), then selecting the **Dev Containers: Rebuild Container** command.
+Rebuild the devcontainer by pressing Shift+Command+P (Mac) / Ctrl+Shift+P (Windows/Linux) to open the Command Palette, then selecting the **Dev Containers: Rebuild Container** command.
 
 Edit `config/configuration.yaml` at the root of the Home Assistant Core repository to add this entry:
 
@@ -49,7 +49,9 @@ This is the mounted path inside the devcontainer, see the `target` parameter abo
 :::
 
 Run Home Assistant Core from VS Code:
-1. Press Shift+Command+P (Mac) / Ctrl+Shift+P (Windows/Linux)
+1. Open the Command Palette:
+   - Mac: `Shift+Command+P`
+   - Windows/Linux: `Ctrl+Shift+P`
 2. Select **Tasks: Run Task**
 3. Select **Run Home Assistant Core**
 
