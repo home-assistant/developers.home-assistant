@@ -6,11 +6,11 @@ title: "Set up development environment"
 import {useState} from 'react';
 
 export const RepositoryOpener = () => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState("");
   const repoUrl = `vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=${encodeURIComponent(value)}`;
   return <div>
     <input onInput={(ev) => setValue(ev.target.value)} style={{width: "80%", display: "inline-block", marginRight: 16}} />
-    <a href={repoUrl}><button style={{cursor: value == "" ? "default" : "pointer"}} disabled={value == ""}>Open</button></a>
+    <a href={repoUrl}><button style={{cursor: value === "" ? "default" : "pointer"}} disabled={value === ""}>Open</button></a>
   </div>
 }
 ```
