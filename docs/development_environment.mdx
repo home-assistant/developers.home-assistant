@@ -6,11 +6,11 @@ title: "Set up development environment"
 import {useState} from 'react';
 
 export const RepositoryOpener = () => {
-  const [value, setValue] = useState(0);
+  const [value, setValue] = useState("");
   const repoUrl = `vscode://ms-vscode-remote.remote-containers/cloneInVolume?url=${encodeURIComponent(value)}`;
   return <div>
     <input onInput={(ev) => setValue(ev.target.value)} style={{width: "80%", display: "inline-block", marginRight: 16}} />
-    <a href={repoUrl}><button style={{cursor: value == "" ? "default" : "pointer"}} disabled={value == ""}>Open</button></a>
+    <a href={repoUrl}><button style={{cursor: value === "" ? "default" : "pointer"}} disabled={value === ""}>Open</button></a>
   </div>
 }
 ```
@@ -33,29 +33,31 @@ As this approach uses containers, you may face challenges exposing hardware like
 
 **Getting started:**
 
-1. Go to [Home Assistant core repository](https://github.com/home-assistant/core) and click "fork".
-2. Once your fork is created, copy the URL of your fork and paste it below, then click "Open":
+1. Go to [Home Assistant core repository](https://github.com/home-assistant/core) and click **Fork**.
+2. Copy your fork's URL and paste it below, then click **Open**:
    <RepositoryOpener />
-3. Your browser will prompt you if you want to use Visual Studio Code to open the link, click "Open Link".
-4. When Visual Studio Code asks if you want to install the Remote extension, click "Install".
-5. The Dev Container image will then be built (this may take a few minutes), after this your development environment will be ready.
+3. Your browser will prompt you if you want to use Visual Studio Code to open the link, click **Open Link**.
+4. When Visual Studio Code asks if you want to install the Remote - SSH extension, click **Install**.
+5. The dev container image will then be built (this may take a few minutes), after this your development environment will be ready.
 6. You can verify that your dev container is set up properly by the following:
-    * Open the command palette in Visual Studio Code - `Shift`+`Command`+`P`(Mac) / `Ctrl`+`Shift`+`P` (Windows/Linux).
-    * Select `Tasks: Run Task` -> `Run Home Assistant Core`
-    * A terminal should open and begin outputting activity. Check for errors and wait for the output to stop/slow down.
-    * Navigate a web browser to `http://localhost:8123`, and you should see the Home Assistant setup screen.
+    1. Open the Command Palette in Visual Studio Code:
+        * Mac: `Shift`+`Command`+`P`
+        * Windows/Linux: `Ctrl`+`Shift`+`P`
+    2. Select **Tasks: Run Task** -> **Run Home Assistant Core**
+    3. A terminal should open and begin outputting activity. Check for errors and wait for the output to stop/slow down.
+    4. Navigate a web browser to `http://localhost:8123`, and you should see the Home Assistant setup screen.
 
-In the future, if you want to get back to your development environment: open Visual Studio Code, click on the "Remote Explorer" button in the sidebar, select "Containers" at the top of the sidebar.
+In the future, if you want to get back to your development environment: open Visual Studio Code, click on the **Remote Explorer** button in the sidebar, select **Containers** at the top of the sidebar.
 
 ### Tasks
 
-The devcontainer comes with some useful tasks to help you with development, you can start these tasks by opening the command palette with `Shift`+`Command`+`P`(Mac) / `Ctrl`+`Shift`+`P` (Windows/Linux) and select `Tasks: Run Task` then select the task you want to run.
+The dev container comes with some useful tasks to help you with development. You can run these tasks by opening the Command Palette with `Shift`+`Command`+`P`(Mac) / `Ctrl`+`Shift`+`P` (Windows/Linux) and selecting **Tasks: Run Task**, then finally selecting the task you want to run.
 
-When a task is currently running (like `Preview` for the docs), it can be restarted by opening the command palette and selecting `Tasks: Restart Running Task`, then select the task you want to restart.
+When a task is currently running (like `Preview` for the docs), it can be restarted by opening the Command Palette and selecting **Tasks: Restart Running Task**, then select the task you want to restart.
 
 ### Debugging with Visual Studio Code
 
-If the Dev Container was set up correctly - it supports debugging by default, out-of-the-box. It provides the necessary debug configurations, so hitting F5 should launch Home Assistant. Any breakpoints put in the code should be triggered, and the debugger should stop. 
+If the dev container was set up correctly - it supports debugging by default, out-of-the-box. It provides the necessary debug configurations, so hitting F5 should launch Home Assistant. Any breakpoints put in the code should be triggered, and the debugger should stop. 
 
 It is also possible to debug a remote Home Assistance instance (e.g., production instance) by following the procedure described [here](https://www.home-assistant.io/integrations/debugpy/).
 
@@ -63,7 +65,7 @@ It is also possible to debug a remote Home Assistance instance (e.g., production
 
 _You only need these instructions if you do not want to use devcontainers._
 
-It is also possible to set up a more traditional development environment. See the section for your operating system. Make sure your Python version is 3.12.
+It is also possible to set up a more traditional development environment. See the section below for your operating system. Make sure your Python version is 3.12.
 
 ### Developing on Ubuntu / Debian
 
@@ -117,8 +119,8 @@ Visit the [Home Assistant Core repository](https://github.com/home-assistant/cor
 Once forked, setup your local copy of the source using the commands:
 
 ```shell
-git clone https://github.com/YOUR_GIT_USERNAME/short_name_of_your_fork
-cd core
+git clone https://github.com/YOUR_GIT_USERNAME/name_of_your_fork
+cd name_of_your_fork
 git remote add upstream https://github.com/home-assistant/core.git
 ```
 
@@ -128,7 +130,7 @@ Install the requirements with a provided script named `setup`.
 script/setup
 ```
 
-This will create a virtual environment and install all necessary requirements. You're now set!
+This will create a virtual environment and install all the necessary requirements. You're now set!
 
 Each time you start a new terminal session, you will need to activate your virtual environment:
 
@@ -142,6 +144,6 @@ After that you can run Home Assistant like this:
 hass -c config
 ```
 
-If you encounter a crash (`SIGKILL`) while running this command on *macOS*, it's probably about lack of Bluetooth permission. You can fix it by adding this permission for your Terminal app (System Preferences -> Security & Privacy -> Bluetooth).
+If you encounter a crash (`SIGKILL`) while running this command on *macOS*, it's probably caused by the lack of Bluetooth permissions. You can fix it by adding this permission for your Terminal app (**System Preferences** -> **Security & Privacy** -> **Bluetooth**).
 
-The Home Assistant configuration is stored in the `config` directory in your repository.
+The Home Assistant configuration is stored in the `config` directory at the root of your repository.
