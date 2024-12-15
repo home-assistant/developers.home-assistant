@@ -63,7 +63,7 @@ If you set up the development environment for Home Assistant Core manually, fill
 
 ```yaml
 frontend:
-  # Example absolute path: /home/paulus/dev/hass/frontend
+  # Example path: /home/paulus/dev/hass/frontend
   development_repo: /path/to/hass/frontend
 ```
 
