@@ -27,7 +27,7 @@ You will need to have an instance of Home Assistant set up. See our guide on [se
 
 #### Developing with Visual Studio Code + devcontainer
 
-If you are using Visual Studio Code with devcontainers for Home Assistant Core, you need to mount the frontend repository into the devcontainer. Add the following section to `.devcontainer/devcontainer.json` in the Home Assistant Core repository:
+If you are using Visual Studio Code with dev containers for Home Assistant Core, you need to mount the frontend repository into the dev container. Add the following section to `.devcontainer/devcontainer.json` in the Home Assistant Core repository:
 
 ```json
 "mounts": [
@@ -35,7 +35,7 @@ If you are using Visual Studio Code with devcontainers for Home Assistant Core, 
 ]
 ```
 
-Rebuild the devcontainer by pressing Shift+Command+P (Mac) / Ctrl+Shift+P (Windows/Linux) to open the Command Palette, then selecting the **Dev Containers: Rebuild Container** command.
+Rebuild the dev container by pressing Shift+Command+P (Mac) / Ctrl+Shift+P (Windows/Linux) to open the Command Palette, then selecting the **Dev Containers: Rebuild Container** command.
 
 Edit `config/configuration.yaml` at the root of the Home Assistant Core repository to add this entry:
 
@@ -45,7 +45,7 @@ frontend:
 ```
 
 :::note
-This is the mounted path inside the devcontainer, see the `target` parameter above. If the `source` path is incorrect, the web frontend won't work.
+This is the mounted path inside the dev container, see the `target` parameter above. If the `source` path is incorrect, the web frontend won't work.
 :::
 
 Run Home Assistant Core from VS Code:
@@ -94,7 +94,7 @@ script/setup_translations
 ```
 
 :::note
-This needs to be done manually, even if you are using devcontainers. Also, you will be asked to enter a code and authorize the script to fetch the latest translations.
+This needs to be done manually, even if you are using dev containers. Also, you will be asked to enter a code and authorize the script to fetch the latest translations.
 :::
 
 ## Development
