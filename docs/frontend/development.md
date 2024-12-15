@@ -25,20 +25,6 @@ git remote add upstream https://github.com/home-assistant/frontend.git
 
 You will need to have an instance of Home Assistant set up. See our guide on [setting up a development environment](/development_environment.mdx).
 
-#### Developing with a manual environment
-
-If you set up the development environment for Home Assistant Core manually, fill in the frontend repository path in `configuration.yaml`:
-
-```yaml
-frontend:
-  # Example absolute path: /home/paulus/dev/hass/frontend
-  development_repo: /path/to/hass/frontend
-```
-
-:::tip
-The `configuration.yaml` file can be found in the `config` directory at the root of the Home Assistant Core repository.
-:::
-
 #### Developing with Visual Studio Code + devcontainer
 
 If you are using Visual Studio Code with devcontainers for Home Assistant Core, you need to mount the frontend repository into the devcontainer. Add the following section to `.devcontainer/devcontainer.json` in the Home Assistant Core repository:
@@ -69,6 +55,20 @@ Run Home Assistant Core from VS Code:
 
 :::caution
 The change to `.devcontainer/devcontainer.json` should be excluded from any PR as it contains your local path to the `frontend` repository. Since the settings in `.devcontainer/devcontainer.json` are only processed during the container rebuild, you can safely roll back the change after the rebuild has completed.
+:::
+
+#### Developing with a manual environment
+
+If you set up the development environment for Home Assistant Core manually, fill in the frontend repository path in `configuration.yaml`:
+
+```yaml
+frontend:
+  # Example absolute path: /home/paulus/dev/hass/frontend
+  development_repo: /path/to/hass/frontend
+```
+
+:::tip
+The `configuration.yaml` file can be found in the `config` directory at the root of the Home Assistant Core repository.
 :::
 
 ### Installing Node.js (manual environment only)
