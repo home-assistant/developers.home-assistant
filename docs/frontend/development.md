@@ -41,7 +41,7 @@ The `configuration.yaml` file can be found in the `config` directory at the root
 
 #### Developing with Visual Studio Code + devcontainer
 
-If you are using Visual Studio Code with devcontainers for Home Assistant Core, you need to mount the frontend repository into the devcontainer. Add the following section to `.devcontainer/devcontainer.json` in the Home Asisstant Core repository:
+If you are using Visual Studio Code with devcontainers for Home Assistant Core, you need to mount the frontend repository into the devcontainer. Add the following section to `.devcontainer/devcontainer.json` in the Home Assistant Core repository:
 
 ```json
 "mounts": [
@@ -68,7 +68,7 @@ Run Home Assistant Core from VS Code:
 3. Select `Run Home Assistant Core`
 
 :::caution
-The change to `.devcontainer/devcontainer.json` should be excluded from any PR as it contains your local path to the `frontend` repository. Since the the settings in `.devcontainer/devcontainer.json` are only processed during the container rebuild, you can safely roll back the change after the rebuild has completed.
+The change to `.devcontainer/devcontainer.json` should be excluded from any PR as it contains your local path to the `frontend` repository. Since the settings in `.devcontainer/devcontainer.json` are only processed during the container rebuild, you can safely roll back the change after the rebuild has completed.
 :::
 
 ### Installing Node.js (manual environment only)
@@ -99,7 +99,7 @@ This needs to be done manually, even if you are using devcontainers. Also, you w
 
 ### Run development server
 
-During development, you will need to run the development script to maintain a development build of the frontend that auto updates when you change any of the source files. To run this server, run:
+During development, you will need to run the development script to maintain a development build of the frontend that auto-updates when you change any of the source files. To run this server, run:
 
 ```shell
 nvm use
