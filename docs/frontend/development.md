@@ -25,7 +25,7 @@ git remote add upstream https://github.com/home-assistant/frontend.git
 
 You will need to have an instance of Home Assistant set up. See our guide on [setting up a development environment](/development_environment.mdx).
 
-#### Developing with Visual Studio Code + devcontainer
+#### Developing with Visual Studio Code + dev container
 
 If you are using Visual Studio Code with dev containers for Home Assistant Core, you need to mount the frontend repository into the dev container. Add the following section to `.devcontainer/devcontainer.json` in the Home Assistant Core repository:
 
