@@ -22,7 +22,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         raise ConfigEntryNotReady(f"Timeout while connecting to {device.ipaddr}") from ex
 ```
 
-If you are using a [DataUpdateCoordinator](integration_fetching_data#coordinated-single-api-poll-for-data-for-all-entities), calling `await coordinator.async_config_entry_first_refresh()` will also trigger this exception automaticlly if the first refresh failed.
+If you are using a [DataUpdateCoordinator](integration_fetching_data#coordinated-single-api-poll-for-data-for-all-entities), calling `await coordinator.async_config_entry_first_refresh()` will also trigger this exception automatically if the first refresh failed.
 
 If your integration supports discovery, Home Assistant will automatically retry as soon as your device or service gets discovered.
 
