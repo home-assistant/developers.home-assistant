@@ -8,7 +8,7 @@ title: "Use Kelvin as the preferred color temperature unit"
 
 In October 2022, Home Assistant migrated the preferred color temperature unit from mired to kelvin.
 
-It is now time to add deprecation warnings for the deprecated attributes, constants and properties:
+It is now time to add deprecation warnings for the corresponding attributes, constants and properties:
 * Deprecate state and capability attributes `ATTR_COLOR_TEMP`, `ATTR_MIN_MIREDS` and `ATTR_MAX_MIREDS`
 * Deprecate constants `ATTR_KELVIN` and `ATTR_COLOR_TEMP` from the `light.turn_on` service call
 * Deprecate properties `LightEntity.color_temp`, `LightEntity.min_mireds` and `LightEntity.max_mireds`
@@ -16,9 +16,7 @@ It is now time to add deprecation warnings for the deprecated attributes, consta
 
 ### Examples
 
-#### Minimum and Maximum color temperature
-
-Custom minimum/maximum color temperature
+#### Custom minimum/maximum color temperature
 
 ```python
 class MyLight(LightEntity):
@@ -33,7 +31,7 @@ class MyLight(LightEntity):
     _attr_max_color_temp_kelvin = 5000 # 200 mireds
 ```
 
-Default minimum/maximum color temperature
+#### Default minimum/maximum color temperature
 
 ```python
 from homeassistant.components.light import DEFAULT_MAX_KELVIN, DEFAULT_MIN_KELVIN
@@ -47,7 +45,7 @@ class MyLight(LightEntity):
     _attr_max_color_temp_kelvin = DEFAULT_MAX_KELVIN
 ```
 
-Dynamic minimum/maximum color temperature
+#### Dynamic minimum/maximum color temperature
 
 ```python
 from homeassistant.util import color as color_util
