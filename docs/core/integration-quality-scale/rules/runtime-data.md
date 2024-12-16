@@ -46,7 +46,8 @@ More information about configuration entries and their lifecycle can be found in
 
 ## Exceptions
 
-There are no exceptions to this rule.
+Runtime data was previously stored in the `hass.data` untyped dictionary, and checks have been added to ensure this is no longer the case.
+If an integration still needs to access `hass.data` directly, the rule should be marked as `exempt` rather than `done` with a corresponding comment.
 
 ## Related rules
 
