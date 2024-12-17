@@ -319,7 +319,7 @@ Integrations depending on MQTT should wait using `await mqtt.async_wait_for_mqtt
 
 ## DHCP
 
-If your integration supports discovery via dhcp, you can add the type to your manifest. If the user has the `dhcp` integration loaded, it will load the `dhcp` step of your integration's config flow when it is discovered. We support passively listening for DHCP discovery by the `hostname` and [OUI](https://en.wikipedia.org/wiki/Organizationally_unique_identifier), or matching device registry mac address when `registered_devices` is set to `true`. The manifest value is a list of matcher dictionaries, your integration is discovered if all items of any of the specified matchers are found in the DHCP data. It's up to your config flow to filter out duplicates.
+If your integration supports discovery via DHCP, you can add the type to your manifest. If the user has the `dhcp` integration loaded, it will load the `dhcp` step of your integration's config flow when it is discovered. We support passively listening for DHCP discovery by the `hostname` and [OUI](https://en.wikipedia.org/wiki/Organizationally_unique_identifier), or matching device registry mac address when `registered_devices` is set to `true`. The manifest value is a list of matcher dictionaries, your integration is discovered if all items of any of the specified matchers are found in the DHCP data. [Unix filename pattern matching](https://docs.python.org/3/library/fnmatch.html) is used for matching. It's up to your config flow to filter out duplicates.
 
 If an integration wants to receive discovery flows to update the IP Address of a device when it comes
 online, but a `hostname` or `oui` match would be too broad, and it has registered in the device registry with mac address using the `CONNECTION_NETWORK_MAC`,
@@ -328,13 +328,14 @@ it should add a DHCP entry with `registered_devices` set to `true`.
 If the integration supports `zeroconf` or `ssdp`, these should be preferred over `dhcp` as it generally offers a better
 user experience.
 
-The following example has three matchers consisting of two items. All of the items in any of the three matchers must match for discovery to happen by this config.
+The following example has two matchers consisting of two items. All of the items in any of the matchers must match for discovery to happen by this config.
 
 For example:
 
--  If the `hostname` was `Rachio-XYZ` and the `macaddress` was `00:9D:6B:55:12:AA`, the discovery would happen.
--  If the `hostname` was `Rachio-XYZ` and the `macaddress` was `00:00:00:55:12:AA`, the discovery would not happen.
--  If the `hostname` was `NotRachio-XYZ` and the `macaddress` was `00:9D:6B:55:12:AA`, the discovery would not happen.
+-  If the `hostname` was `Rachio-XYZ` and the `macaddress` was `00:9D:6B:55:12:AA`, the discovery would happen (1st matcher).
+-  If the `hostname` was `Dachio-XYZ` or `Pachio-XYZ`, and the `macaddress` was `00:9D:6B:55:12:AA`, the discovery would happen (3rd matcher).
+-  If the `hostname` was `Rachio-XYZ` and the `macaddress` was `00:00:00:55:12:AA`, the discovery would not happen (no matching MAC).
+-  If the `hostname` was `NotRachio-XYZ` and the `macaddress` was `00:9D:6B:55:12:AA`, the discovery would not happen (no matching hostname).
 
 
 ```json
@@ -345,12 +346,8 @@ For example:
     "macaddress": "009D6B*"
     },
     {
-    "hostname": "rachio-*",
-    "macaddress": "F0038C*"
-    },
-    {
-    "hostname": "rachio-*",
-    "macaddress": "74C63B*"
+    "hostname": "[dp]achio-*",
+    "macaddress": "009D6B*"
     }
   ]
 }
