@@ -3,7 +3,7 @@
     {
       "id": "config-flow",
       "subchecks": [
-        "Uses `data-description` to give context to fields",
+        "Uses `data_description` to give context to fields",
         "Uses `ConfigEntry.data` and `ConfigEntry.options` correctly"
       ]
     },
