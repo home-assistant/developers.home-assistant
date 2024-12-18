@@ -5,6 +5,8 @@ authorTwitter: lboue
 title: "Changed name of WaterHeaterEntityDescription"
 ---
 
+Update 2024-12-18: This change has been reverted, and the old name of `WaterHeaterEntityEntityDescription` has been retained.
+
 A naming error of the entity description was found in the Water Heater integration, and we have now renamed `WaterHeaterEntityEntityDescription` to `WaterHeaterEntityDescription`.
 As there were no Core integrations and no custom integrations published on HACS using the entity description, we did not add a deprecation period. The changed entity description will be released in the 2025.1 release.
 
