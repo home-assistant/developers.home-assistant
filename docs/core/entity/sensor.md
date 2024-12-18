@@ -64,7 +64,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.PM1` | µg/m³ | Concentration of particulate matter less than 1 micrometer
 | `SensorDeviceClass.PM25` | µg/m³ | Concentration of particulate matter less than 2.5 micrometers
 | `SensorDeviceClass.PM10` | µg/m³ | Concentration of particulate matter less than 10 micrometers
-| `SensorDeviceClass.POWER` | W, kW, MW, GW, TW | Power.
+| `SensorDeviceClass.POWER` | mW, W, kW, MW, GW, TW | Power.
 | `SensorDeviceClass.POWER_FACTOR` | %, None | Power Factor
 | `SensorDeviceClass.PRECIPITATION` | cm, in, mm | Accumulated precipitation
 | `SensorDeviceClass.PRECIPITATION_INTENSITY` | in/d, in/h, mm/d, mm/h | Precipitation intensity
