@@ -18,7 +18,7 @@ Any discovery flow must also ensure that a config entry is uniquely identifiable
 
 To prevent this, we need to ensure that the user can only set up a device or service once.
 Trying to set up a device or service that is already set up should be prevented by the integration.
-This should be handled by the reconfiguration flow, in where we can be more consistent with what gets updated.
+If an update to the configuration is required, it should be handled by the reconfiguration flow instead, as it allows us to be more consistent with what gets updated.
 
 ## Example implementation
 
