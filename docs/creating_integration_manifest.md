@@ -414,7 +414,7 @@ For example:
 
 The [Integration Quality Scale](https://www.home-assistant.io/docs/quality_scale/) scores an integration on the code quality and user experience. Each level of the quality scale consists of a list of requirements. If an integration matches all requirements, it's considered to have reached that level.
 
-New integrations are required to fulfill at least the bronze tier, but we highly recommend aiming for higher tiers. Be sure to look at the [Integration Quality Scale](https://www.home-assistant.io/docs/quality_scale/) list of requirements. It helps to improve the code and user experience tremendously.
+New integrations are required to fulfill at least the bronze tier so be sure to look at the [Integration Quality Scale](https://www.home-assistant.io/docs/quality_scale/) list of requirements. It helps to improve the code and user experience tremendously.
 
 ```json
 {
