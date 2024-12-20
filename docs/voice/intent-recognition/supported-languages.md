@@ -5,7 +5,7 @@ title: "Supported languages"
 import languages from '!!yaml-loader!../../../intents/languages.yaml';
 import intents from '!!yaml-loader!../../../intents/intents.yaml';
 
-If you don't see your language below, [help us translate!](contributing)
+If you don't see your language below, [help us translate!](/docs/voice/intent-recognition/contributing)
 
 For a full progress report per language, [click here.](https://home-assistant.github.io/intents/)
 
