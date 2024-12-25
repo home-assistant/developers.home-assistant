@@ -45,7 +45,7 @@ class MyEntity(CoordinatorEntity[MyCoordinator]):
     def __init__(self, coordinator: MyCoordinator) -> None:
         """Initialize the entity."""
         super().__init__(coordinator)
-        self._attr_device_infp = ...
+        self._attr_device_info = ...
 ```
 
 ## Exceptions
