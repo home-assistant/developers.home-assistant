@@ -19,7 +19,7 @@ Properties should always only return information from memory and not do I/O (lik
 | native_min_value | float | 0 | The minimum accepted value in the number's `native_unit_of_measurement` (inclusive)
 | native_step | float | **See below** | Defines the resolution of the values, i.e. the smallest increment or decrement in the number's | native_unit_of_measurement | string | `None` | The unit of measurement that the number's value is expressed in. If the `native_unit_of_measurement` is °C or °F, and its `device_class` is temperature, the number's `unit_of_measurement` will be the preferred temperature unit configured by the user and the number's `state` will be the `native_value` after an optional unit conversion.
 | native_value | float | **Required** | The value of the number in the number's `native_unit_of_measurement`.
-| native_unit_of_measurement | string | None | The unit of measurement that the sensor's value is expressed in. If the `native_unit_of_measurement` is °C or °F, and its `device_class` is temperature, the sensor's `unit_of_measurement` will be the preferred temperature unit configured by the user and the sensor's `state` will be the `native_value` after an optional unit conversion.
+| native_unit_of_measurement | string | None | The unit of measurement that the sensor's value is expressed in. If the `native_unit_of_measurement` is °C or °F, and its `device_class` is temperature, the sensor's `unit_of_measurement` will be the preferred temperature unit configured by the user and the sensor's `state` will be the `native_value` after an optional unit conversion. If a [unit translation is provided](/docs/internationalization/core#unit-of-measurement-of-entities), `native_unit_of_measurement` should not be defined.
 
 Other properties that are common to all entities such as `icon`, `name` etc are also applicable.
 
@@ -31,7 +31,7 @@ If specifying a device class, your number entity will need to also return the co
 
 | Constant | Supported units | Description
 | ---- | ---- | -----------
-| `NumberDeviceClass.APPARANT_POWER` | VA | Apparent power |
+| `NumberDeviceClass.APPARENT_POWER` | VA | Apparent power |
 | `NumberDeviceClass.AQI` | None | Air Quality Index
 | `NumberDeviceClass.AREA` | m², cm², km², mm², in², ft², yd², mi², ac, ha | Area                                                                                                                                                                                                                                  |
 | `NumberDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, inHg, kPa, mbar, Pa, psi | Atmospheric pressure, statistics will be stored in Pa.
@@ -44,8 +44,8 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.DATA_RATE` | bit/s, kbit/s, Mbit/s, Gbit/s, B/s, kB/s, MB/s, GB/s, KiB/s, MiB/s, GiB/s | Data rate
 | `NumberDeviceClass.DATA_SIZE` | bit, kbit, Mbit, Gbit, B, kB, MB, GB, TB, PB, EB, ZB, YB, KiB, MiB, GiB, TiB, PiB, EiB, ZiB, YiB | Data size
 | `NumberDeviceClass.DISTANCE` | km, m, cm, mm, mi, yd, in | Generic distance
-| `NumberDeviceClass.ENERGY` | Wh, kWh, MWh, GWh, TWh, MJ, GJ | Energy, this device class should used to represent energy consumption, for example an electricity meter. Represents _power_ over _time_. Not to be confused with `power`.
-| `NumberDeviceClass.ENERGY_STORAGE` | Wh, kWh, MWh, GWh, TWh, MJ, GJ | Stored energy, this device class should be used to represent stored energy, for example the amount of electric energy currently stored in a battery or the capacity of a battery. Represents _power_ over _time_. Not to be confused with `power`.
+| `NumberDeviceClass.ENERGY` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal | Energy, this device class should used to represent energy consumption, for example an electricity meter. Represents _power_ over _time_. Not to be confused with `power`.
+| `NumberDeviceClass.ENERGY_STORAGE` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal | Stored energy, this device class should be used to represent stored energy, for example the amount of electric energy currently stored in a battery or the capacity of a battery. Represents _power_ over _time_. Not to be confused with `power`.
 | `NumberDeviceClass.FREQUENCY` | Hz, kHz, MHz, GHz | Frequency
 | `NumberDeviceClass.GAS` | m³, ft³, CCF | Volume of gas. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
 | `NumberDeviceClass.HUMIDITY` | % | Relative humidity
@@ -61,7 +61,7 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.PM1` | µg/m³ | Concentration of particulate matter less than 1 micrometer |
 | `NumberDeviceClass.PM25` | µg/m³ | Concentration of particulate matter less than 2.5 micrometers |
 | `NumberDeviceClass.PM10` | µg/m³ | Concentration of particulate matter less than 10 micrometers |
-| `NumberDeviceClass.POWER` | W, kW, MW, GW, TW | Power.
+| `NumberDeviceClass.POWER` | mW, W, kW, MW, GW, TW | Power.
 | `NumberDeviceClass.POWER_FACTOR` | %, None | Power Factor
 | `NumberDeviceClass.PRECIPITATION` | cm, in, mm | Precipitation
 | `NumberDeviceClass.PRECIPITATION_INTENSITY` | in/d, in/h, mm/d, mm/h | Precipitation intensity
@@ -73,9 +73,9 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.SULPHUR_DIOXIDE` | µg/m³ | Concentration of sulphure dioxide |
 | `NumberDeviceClass.TEMPERATURE` | °C, °F, K | Temperature.
 | `NumberDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³ | Concentration of volatile organic compounds
-| `NumberDeviceClass.VOLTAGE` | V, mV | Voltage
+| `NumberDeviceClass.VOLTAGE` | V, mV, µV | Voltage
 | `NumberDeviceClass.VOLUME` | L, mL, gal, fl. oz., m³, ft³, CCF | Generic volume, this device class should be used to represent a consumption, for example the amount of fuel consumed by a vehicle.
-| `NumberDeviceClass.VOLUME_FLOW_RATE` | m³/h, ft³/min, L/min, gal/min | Volume flow rate, this device class should be used for sensors representing a flow of some volume, for example the amount of water consumed momentarily.
+| `NumberDeviceClass.VOLUME_FLOW_RATE` | m³/h, ft³/min, L/min, gal/min, mL/s | Volume flow rate, this device class should be used for sensors representing a flow of some volume, for example the amount of water consumed momentarily.
 | `NumberDeviceClass.VOLUME_STORAGE` | L, mL, gal, fl. oz., m³, ft³, CCF | Generic stored volume, this device class should be used to represent a stored volume, for example the amount of fuel in a fuel tank.
 | `NumberDeviceClass.WATER` | L, gal, m³, ft³, CCF | Water consumption
 | `NumberDeviceClass.WEIGHT` | kg, g, mg, µg, oz, lb, st | Generic mass; `weight` is used instead of `mass` to fit with every day language.

@@ -1,0 +1,68 @@
+{
+  "bronze": [
+    {
+      "id": "config-flow",
+      "subchecks": [
+        "Uses `data_description` to give context to fields",
+        "Uses `ConfigEntry.data` and `ConfigEntry.options` correctly"
+      ]
+    },
+    "test-before-configure",
+    "unique-config-entry",
+    "config-flow-test-coverage",
+    "runtime-data",
+    "test-before-setup",
+    "appropriate-polling",
+    "entity-unique-id",
+    "has-entity-name",
+    "entity-event-setup",
+    "dependency-transparency",
+    "action-setup",
+    "common-modules",
+    "docs-high-level-description",
+    "docs-installation-instructions",
+    "docs-removal-instructions",
+    "docs-actions",
+    "brands"
+  ],
+  "silver": [
+    "config-entry-unloading",
+    "log-when-unavailable",
+    "entity-unavailable",
+    "action-exceptions",
+    "reauthentication-flow",
+    "parallel-updates",
+    "test-coverage",
+    "integration-owner",
+    "docs-installation-parameters",
+    "docs-configuration-parameters"
+  ],
+  "gold": [
+    "entity-translations",
+    "entity-device-class",
+    "devices",
+    "entity-category",
+    "entity-disabled-by-default",
+    "discovery",
+    "stale-devices",
+    "diagnostics",
+    "exception-translations",
+    "icon-translations",
+    "reconfiguration-flow",
+    "dynamic-devices",
+    "discovery-update-info",
+    "repair-issues",
+    "docs-use-cases",
+    "docs-supported-devices",
+    "docs-supported-functions",
+    "docs-data-update",
+    "docs-known-limitations",
+    "docs-troubleshooting",
+    "docs-examples"
+  ],
+  "platinum": [
+    "async-dependency",
+    "inject-websession",
+    "strict-typing"
+  ]
+}
