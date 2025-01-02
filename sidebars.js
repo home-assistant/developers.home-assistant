@@ -313,6 +313,7 @@ module.exports = {
         "asyncio_working_with_async",
         "asyncio_thread_safety",
         "asyncio_blocking_operations",
+        "asyncio_imports",
       ],
     },
   ],
