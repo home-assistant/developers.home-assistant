@@ -71,6 +71,12 @@ The translation strings for the configuration flow handler and the option flow h
         "description": "Markdown that is shown with the step.",
         "data": {
           "api_key": "The label for the `api_key` input field"
+        },
+        // Only needed if the form has sections
+        "sections": {
+          "auth_options": {
+            "name": "The label for the `auth_options` section"
+          }
         }
       }
     },
