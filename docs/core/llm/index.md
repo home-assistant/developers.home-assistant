@@ -271,7 +271,8 @@ class MyAPI(API):
 
 async def async_setup_api(hass: HomeAssistant) -> None:
     """Register the API with Home Assistant."""
-    llm.async_register_api(hass, MyAPI())
+    # You can later call unsub() to unregister the API if appropriate
+    unsub = llm.async_register_api(hass, MyAPI())
 ```
 
 The `llm.API` class has the following attributes:
