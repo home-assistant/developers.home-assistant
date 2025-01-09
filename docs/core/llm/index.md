@@ -242,6 +242,7 @@ The `ToolInput` has following attributes:
 The API object allows creating API instances. An API Instance represents a collection of tools that will be made available to the LLM.
 
 ```python
+from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helper import llm
 from homeassistant.util import dt as dt_util
@@ -250,14 +251,6 @@ from homeassistant.util.json import JsonObjectType
 
 class MyAPI(API):
     """My own API for LLMs."""
-
-    def __init__(self, hass: HomeAssistant) -> None:
-        """Init the class."""
-        super().__init__(
-            hass=hass,
-            id="my_unique_key",
-            name="My own API",
-        )
 
     async def async_get_api_instance(self, llm_context: LLMContext) -> APIInstance:
         """Return the instance of the API."""
@@ -269,10 +262,15 @@ class MyAPI(API):
         )
 
 
-async def async_setup_api(hass: HomeAssistant) -> None:
+async def async_setup_api(hass: HomeAssistant, entry: ConfigEntry) -> None:
     """Register the API with Home Assistant."""
-    # You can later call unsub() to unregister the API if appropriate
-    unsub = llm.async_register_api(hass, MyAPI())
+    # If the API is associated with a Config Entry, the LLM API must be
+    # unregistered when the config entry is unloaded.
+    unreg = llm.async_register_api(
+        hass,
+        MyAPI(hass, f"my_unique_key-{entry.entry_id}", entry.title)
+    )
+    entry.async_on_unload(unreg)
 ```
 
 The `llm.API` class has the following attributes:
