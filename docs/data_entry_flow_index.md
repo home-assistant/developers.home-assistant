@@ -129,7 +129,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
             vol.Required("username"): str,
             vol.Required("password"): str,
             # Items can be grouped by collapsible sections
-            "ssl_options": section(
+            vol.Required("ssl_options"): section(
                 vol.Schema(
                     {
                         vol.Required("ssl", default=True): bool,
@@ -142,7 +142,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         }
 
         if self.show_advanced_options:
-            data_schema["allow_groups"] = selector({
+            data_schema[vol.Optional("allow_groups")] = selector({
                 "select": {
                     "options": ["all", "light", "switch"],
                 }
