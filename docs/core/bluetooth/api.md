@@ -243,3 +243,13 @@ callback = bluetooth.async_get_advertisement_callback(hass)
 
 callback(BluetoothServiceInfoBleak(...))
 ```
+
+### Removing an external scanner
+
+To permanently remove an external scanner, call the `bluetooth.async_remove_scanner` API with the `source` (MAC address) of the scanner. This will remove any advertisement history associated with the scanner.
+
+```python
+from homeassistant.components import bluetooth
+
+bluetooth.async_remove_scanner(hass, source)
+```
