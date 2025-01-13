@@ -155,7 +155,7 @@ It is also possible to use a public git repository to install a requirement.  Th
 
 ```json
 {
-  "requirements": ["git+https://github.com/<user>/<project>.git@<git ref>"]
+  "requirements": ["<library>@git+https://github.com/<user>/<project>.git@<git ref>"]
 }
 ```
 `<git ref>` can be any git reference: branch, tag, commit hash, ... . See [PIP documentation about git support](https://pip.pypa.io/en/stable/topics/vcs-support/#git).
@@ -164,7 +164,7 @@ The following example will install the `except_connect` branch of the `pycoolmas
 
 ```json
 {
-  "requirements": ["git+https://github.com/issacg/pycoolmaster.git@except_connect"]
+  "requirements": ["pycoolmaster@git+https://github.com/issacg/pycoolmaster.git@except_connect"]
 }
 ```
 
