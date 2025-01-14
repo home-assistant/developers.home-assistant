@@ -6,7 +6,7 @@ export default class ApiEndpoint extends React.Component {
   render() {
     return (
       <details className="api-endpoint">
-        <summary onClick={this.toggleInfo} className="api-endpoint-header">
+        <summary className="api-endpoint-header">
           <div className={`api-endpoint-method ${this.props.method}`}>
             {this.props.method}
           </div>
