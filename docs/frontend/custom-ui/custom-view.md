@@ -28,6 +28,8 @@ Cards and Badges will be created and maintained by the core code and given to th
 (note: this example does not have all of the properties but the necessities to show the example)
 
 ```js
+import { LitElement, html } from "https://unpkg.com/@polymer/lit-element@^0.6.1/lit-element.js?module";
+
 class MyNewView extends LitElement {
   setConfig(_config) {}
 
