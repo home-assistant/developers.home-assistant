@@ -6,13 +6,19 @@ title: "Relocate dhcp/ssdp/usb/zeroconf ServiceInfo models"
 
 ### Summary of changes
 
-In order to reduce current reliance on optional integrations for names that are in essence used as helpers, the following ServiceInfo models have been relocated:
+To reduce current reliance on optional integrations for names that are in essence used as helpers, the following ServiceInfo models have been relocated:
 - `DhcpServiceInfo` from `homeassistant.components.dhcp` to `homeassistant.helpers.service_info.dhcp`
 - `SsdpServiceInfo` from `homeassistant.components.ssdp` to `homeassistant.helpers.service_info.ssdp`
 - `UsbServiceInfo` from `homeassistant.components.usb` to `homeassistant.helpers.service_info.usb`
 - `ZeroconfServiceInfo` from `homeassistant.components.zeroconf` to `homeassistant.helpers.service_info.zeroconf`
 
-Importing these from the old location will fail from 2026.2.
+
+To update your integration:
+1. Replace the import statements as shown in the examples below
+2. Test your integration with the new imports
+
+The old import locations are deprecated and will be removed in Home Assistant 2026.2.
+
 
 ### Examples
 
