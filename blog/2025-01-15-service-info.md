@@ -38,11 +38,11 @@ from homeassistant.helpers.service_info.zeroconf import ZeroconfServiceInfo
 class MyConfigFlow(ConfigFlow, domain=DOMAIN):
     """Handle a config flow."""
 
-    async def async_step_usb(self, discovery_info: DhcpServiceInfo) -> ConfigFlowResult:
+    async def async_step_dhcp(self, discovery_info: DhcpServiceInfo) -> ConfigFlowResult:
         """Handle dhcp discovery."""
         ...
 
-    async def async_step_usb(self, discovery_info: SsdpServiceInfo) -> ConfigFlowResult:
+    async def async_step_ssdp(self, discovery_info: SsdpServiceInfo) -> ConfigFlowResult:
         """Handle ssdp discovery."""
         ...
 
