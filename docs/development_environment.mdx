@@ -49,6 +49,18 @@ As this approach uses containers, you may face challenges exposing hardware like
 
 In the future, if you want to get back to your development environment: open Visual Studio Code, click on the **Remote Explorer** button in the sidebar, select **Containers** at the top of the sidebar.
 
+**Troubleshooting**
+
+- If your container fails to build due to outdated dependencies or a previously built devcontainer, it might be using a stale fork of your repository. Follow these steps:
+    - Ensure your GitHub fork is up-to-date with the main Home Assistant core repository.
+    - Clean local Docker build files by running `docker buildx prune` in the terminal.
+    - If the build still fails:
+        - Select "Open configuration in recovery devcontainer."
+        - Open a terminal (if not already open).
+        - Run `git pull upstream dev` and ensure it applies the current version.
+        - Open the command palette in Visual Studio Code - `Shift`+`Command`+`P` (Mac) / `Ctrl`+`Shift`+`P` (Windows/Linux).
+        - Select "Dev Containers: Rebuild Container."
+
 ### Tasks
 
 The dev container comes with some useful tasks to help you with development. You can run these tasks by opening the Command Palette with `Shift`+`Command`+`P`(Mac) / `Ctrl`+`Shift`+`P` (Windows/Linux) and selecting **Tasks: Run Task**, then finally selecting the task you want to run.
