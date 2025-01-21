@@ -51,7 +51,16 @@ Screenshot showing the styling of a glossary term tooltip:
     alt='Screenshot showing the styling of a glossary term tooltip'
   />
 
-For example: `{% term integration %}`, `{% term entity %}`, {% term "configuration.yaml" %}, and `{% term "Home Assistant Operating System" %}`. You can find the full list of glossary terms on the [Glossary](https://www.home-assistant.io/docs/glossary/) page. To learn more about glossary terms, refer to the [developer documentation on glossary](/docs/documenting/standards#glossary--terminology-tooltips).
+For example:
+
+```markdown
+{% term integration %}
+{% term entity %}
+{% term "configuration.yaml" %}
+{% term "Home Assistant Operating System" %}
+```
+
+You can find the full list of glossary terms on the [Glossary](https://www.home-assistant.io/docs/glossary/) page. To learn more about glossary terms, refer to the [developer documentation on glossary](/docs/documenting/standards#glossary--terminology-tooltips).
 
 ### Acronyms and abbreviations
 
