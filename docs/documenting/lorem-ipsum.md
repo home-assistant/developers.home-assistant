@@ -247,8 +247,7 @@ The examples are taken from the [Integration Quality Scale](https://developers.h
 
 ### Example text below
 
-
-
+```markdown
 The **my integration** {% term integration %} is used to integrate with the devices of [MyCompany](https://www.mycompany.com). MyCompany creates various smart home appliances and devices and are known for their MyProduct.
 Use case: When you combine it with their other device you can do x.
 
@@ -432,3 +431,4 @@ This integration follows standard integration removal.
 {% include integrations/remove_device_service.md %}
 
 After deleting the integration, go to the app of the manufacturer and remove the Home Assistant integration from there as well.
+```
