@@ -4,7 +4,7 @@ title: Lorem ipsum - documentation structure and example text
 
 This page shows examples of the available documentation features (such as inline icons, text box, links to related topics, and glossary entries). It also shows the documentation structure.
 
-Much of this content you have already encountered in the developer documentation, under [Documentation standard](/docs/documenting/standards) or in the documentation rules of the [Integration Quality Scale](/docs/core/integration-quality-scale/rules/). This page here is meant to be used as a hands-on copy-paste-then-edit type of template.
+Much of this content you have already encountered in the developer documentation, under [Documentation standard](/docs/documenting/standards) or in the documentation rules of the [Integration Quality Scale](/docs/core/integration-quality-scale/). This page here is meant to be used as a hands-on copy-paste-then-edit type of template.
 
 ## Inline text elements
 
