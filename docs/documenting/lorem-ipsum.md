@@ -293,8 +293,7 @@ The following devices are not supported by the integration:
 
 ## Configuration
 
-In case your integration is used via a config flow, you can use the `
-{% configuration_basic %}`. For details, refer to the [documentation standard on configuration variables](/docs/documenting/standards#configuration-variables)
+In case your integration is used via a config flow, you can use the `configuration_basic`. For details, refer to the [documentation standard on configuration variables](/docs/documenting/standards#configuration-variables)
 
 ```markdown
 {% configuration_basic %}
@@ -312,7 +311,7 @@ Screenshot showing the configuration variable description if the integration sup
     alt='Screenshot showing the configuration variable description if the integration support config flow via UI'
   />
 
-In case an integration is set up via YAML in the {% term "`configuration.yaml`" %}:
+In case an integration is set up via YAML in the configuration.yaml:
 
 Screenshot showing the configuration variable description if the integration  is set up via YAM:
 
