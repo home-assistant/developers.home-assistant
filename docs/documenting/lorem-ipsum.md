@@ -51,7 +51,7 @@ Screenshot showing the styling of a glossary term tooltip:
     alt='Screenshot showing the styling of a glossary term tooltip'
   />
 
-For example: `{% term integration %}`, `{% term entity %}`, and `{% term "Home Assistant Operating System" %}`. You can find the full list of glossary terms on the [Glossary](https://www.home-assistant.io/docs/glossary/) page. To learn more about glossary terms, refer to the [developer documentation on glossary](/docs/documenting/standards#glossary--terminology-tooltips).
+For example: `{% term integration %}`, `{% term entity %}`, {% term "configuration.yaml" %}, and `{% term "Home Assistant Operating System" %}`. You can find the full list of glossary terms on the [Glossary](https://www.home-assistant.io/docs/glossary/) page. To learn more about glossary terms, refer to the [developer documentation on glossary](/docs/documenting/standards#glossary--terminology-tooltips).
 
 ### Acronyms and abbreviations
 
@@ -247,10 +247,16 @@ The examples are taken from the [Integration Quality Scale](/docs/core/integrati
 
 ### Example text below
 
+## Introduction
+
 ```markdown
 The **my integration** {% term integration %} is used to integrate with the devices of [MyCompany](https://www.mycompany.com). MyCompany creates various smart home appliances and devices and are known for their MyProduct.
 Use case: When you combine it with their other device you can do x.
+```
 
+## Supported devices
+
+```markdown
 ## Supported devices
 
 The following devices have been reported to work with the integration. Home Assistant may support devices that are no longer available on the market. Just because a device is listed here does not mean you can still buy it.
@@ -258,14 +264,22 @@ The following devices have been reported to work with the integration. Home Assi
 - Device 1
 - Device 2
 - Every appliance that runs MyOS
+```
 
+## Unsupported devices
+
+```markdown
 ## Unsupported devices
 
 The following devices are not supported by the integration:
 
 - Device 3
 - Appliances built before 2010
+```
 
+## Prerequisites
+
+```markdown
 ## Prerequisites
 
 1. Open the app store and install the **MyProduct** app.
@@ -275,18 +289,39 @@ The following devices are not supported by the integration:
 5. Select **Expose API**.
 
 {% include integrations/config_flow.md %}
+```
 
-In case your integration is used via a config flow:
+## Configuration
 
+In case your integration is used via a config flow, you can use the `
+{% configuration_basic %}`. For details, refer to the [documentation standard on configuration variables](/docs/documenting/standards#configuration-variables)
+
+```markdown
 {% configuration_basic %}
 Host:
     description: "The IP address of your bridge. You can find it in your router or in the Integration app under **Bridge Settings** > **Local API**."
 Local access token:
     description: "The local access token for your bridge. You can find it in the Integration app under **Bridge Settings** > **Local API**."
 {% endconfiguration_basic %}
+```
+
+Screenshot showing the configuration variable description if the integration support config flow via UI:
+
+<img class='invertDark'
+    src='/img/en/documentation/configuration_variables_ui.png'
+    alt='Screenshot showing the configuration variable description if the integration support config flow via UI'
+  />
 
 In case an integration is set up via YAML in the {% term "`configuration.yaml`" %}:
 
+Screenshot showing the configuration variable description if the integration  is set up via YAM:
+
+<img class='invertDark'
+    src='/img/en/documentation/configuration_variables_yaml.png'
+    alt='Screenshot showing the configuration variable description if the integration is set up via YAML'
+  />
+
+```markdown
 {% configuration %}
 Host:
     description: "The IP address of your bridge. You can find it in your router or in the Integration app under **Bridge Settings** > **Local API**."
@@ -297,7 +332,11 @@ Local access token:
     required: false
     type: string
 {% endconfiguration %}
+```
 
+## Configuration options
+
+```markdown
 ## Configuration options
 
 The integration provides the following configuration options:
@@ -308,7 +347,11 @@ Country code:
 Timeframe:
   description: Minutes to look ahead for precipitation forecast sensors (minimum 5, maximum 120).
 {% endconfiguration_basic %}
+```
 
+## Supported functionality
+
+```markdown
 ## Supported functionality
 
 ### Entities
@@ -355,7 +398,11 @@ The XY integration provides the following entities.
 - **Gateway firmware**
   - **Description**: Firmware status of the gateway.
   - **Available for machines**: all
+```
 
+## Actions
+
+```markdown
 ## Actions
 
 The integration provides the following actions.
@@ -367,7 +414,11 @@ The `my_integration.get_schedule` service is used to fetch a schedule from the i
 | Data attribute    | Optional | Description                                          |
 | ----------------- | -------- | ---------------------------------------------------- |
 | `config_entry_id` | No       | The ID of the config entry to get the schedule from. |
+```
 
+## Examples
+
+```markdown
 ## Examples
 
 ### Turning off the LEDs during the night
@@ -376,17 +427,29 @@ The status LEDs on the device can be quite bright.
 To tackle this, you can use this blueprint to easily automate the LEDs turning off when the sun goes down.
 
 link to blueprint.
+```
 
+## Data updates
+
+```markdown
 ## Data updates
 
 The **My** integration fetches data from the device every 5 minutes by default.
 Newer devices (the ones running MyOS) have the possibility to push data.
 In this case, pushing data is enabled when the integration is started. If enabling data push fails, the integration uses data {% term polling %}.
+```
 
 ## Known limitations
 
-The integration does not provide the ability to reboot, which can instead be done via the manufacturer's app.
+```markdown
+## Known limitations
 
+The integration does not provide the ability to reboot, which can instead be done via the manufacturer's app.
+```
+
+## Troubleshooting
+
+```markdown
 ## Troubleshooting
 
 ### Can’t set up the device
@@ -419,11 +482,19 @@ If they are not, check the device's power and network connection.
 ### The device goes unavailable after a day
 
 Make sure you turned off the device's power-saving mode.
+```
 
 ## Community notes
 
-Note that some users have reported issues creating Home Assistant containers on ARM QNAP systems (for example, TS-233) with Container Station 3. A possible workaround is the "Docker compose" approach based on a YAML file (see section "Docker compose").
+```markdown
+## Community notes
 
+Note that some users have reported issues creating Home Assistant containers on ARM QNAP systems (for example, TS-233) with Container Station 3. A possible workaround is the "Docker compose" approach based on a YAML file (see section "Docker compose").
+```
+
+## Removing the integration
+
+```markdown
 ## Removing the integration
 
 This integration follows standard integration removal.
