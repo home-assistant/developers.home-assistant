@@ -254,7 +254,7 @@ The examples are taken from the [Integration Quality Scale](/docs/core/integrati
 - [Community notes](#community-notes)
 - [Removing the integration](#removing-the-integration)
 
-# Example text below
+## Example text below
 
 ## Introduction
 
