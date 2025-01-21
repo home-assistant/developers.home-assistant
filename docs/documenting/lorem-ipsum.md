@@ -158,6 +158,25 @@ You can use "important" to highlight a section that you feel is very important.
 {% endimportant %}
 ```
 
+## Reusable text
+
+For some topics, there are predefined text elements that you can reuse.
+
+### Configuration
+
+Screenshot showing the predefined configuration text block:
+
+<img class='invertDark'
+    src='/img/en/documentation/config_flow.png'
+    alt='Screenshot showing predefined configuration text block'
+  />
+
+To use this element, add the following line:
+
+```markdown
+{% include integrations/config_flow.md %}
+```
+
 ## Images
 
 You can use an image to illustrate a step:
