@@ -84,7 +84,7 @@ or <abbr title="USB-On-The-Go">USB-OTG</abbr>.
 
 ### Inline icons
 
-To refer to an icon in the UI, you can use icons from the [Iconify library](https://icon-sets.iconify.design/mdi/). 
+To refer to an icon in the UI, you can use icons from the [Iconify library](https://icon-sets.iconify.design/mdi/).
 
 Screenshot showing some inline icons:
 
@@ -211,7 +211,7 @@ Screenshot of tile cards with features.
 
 ## Videos
 
-Use the following syntax to reference a video from Youtube, starting at a predefined time:
+Use the following syntax to reference a video from Youtube. Use `videoStartAt` to have it start playback at a specific time in the video:
 
 ```html
 <lite-youtube videoid="ZgoaoTpIhm8" videoStartAt="3907" videotitle="Introducing the Home Assistant Voice Preview Edition - Voice: Chapter 8"></lite-youtube>
