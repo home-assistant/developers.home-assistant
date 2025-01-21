@@ -242,17 +242,17 @@ The examples are taken from the [Integration Quality Scale](/docs/core/integrati
 - Introduction
   - Use case
 - [Supported/unsupported devices](#supported-devices)
-[Prerequisites](#prerequisites)
-[Configuration](#configuration)
-[Configuration options](#configuration-options)
-[Supported functionality](#supported-functionality)
-[Actions](#actions)
-[Examples](#examples)
-[Data updates](#data-updates)
-[Known limitations](#known-limitations)
-[Troubleshooting](#troubleshooting)
-[Community notes](#community-notes)
-[Removing the integration](#removing-the-integration)
+- [Prerequisites](#prerequisites)
+- [Configuration](#configuration)
+- [Configuration options](#configuration-options)
+- [Supported functionality](#supported-functionality)
+- [Actions](#actions)
+- [Examples](#examples)
+- [Data updates](#data-updates)
+- [Known limitations](#known-limitations)
+- [Troubleshooting](#troubleshooting)
+- [Community notes](#community-notes)
+- [Removing the integration](#removing-the-integration)
 
 ### Example text below
 
