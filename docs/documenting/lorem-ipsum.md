@@ -51,7 +51,7 @@ Screenshot showing the styling of a glossary term tooltip:
     alt='Screenshot showing the styling of a glossary term tooltip'
   />
 
-For example: `{% term integration %}`, `{% term entity %}`, and `{% term "Home Assistant Operating System" %}`. You can find the full list of glossary terms on the [Glossary](/docs/glossary/) page. To learn more about glossary terms, refer to the [developer documentation](https://developers.home-assistant.io/docs/documenting/standards#glossary--terminology-tooltips).
+For example: `{% term integration %}`, `{% term entity %}`, and `{% term "Home Assistant Operating System" %}`. You can find the full list of glossary terms on the [Glossary](https://www.home-assistant.io/docs/glossary/) page. To learn more about glossary terms, refer to the [developer documentation on glossary](/docs/documenting/standards#glossary--terminology-tooltips).
 
 ### Acronyms and abbreviations
 
@@ -226,7 +226,7 @@ Use the following syntax to reference a video from Youtube. Use `videoStartAt` t
 
 This section outlines the document structure and provides some example text. The example text includes some reusable text blocks (includes) such as `include integrations/config_flow.md` and styling elements such as `configuration_basic`.
 
-The examples are taken from the [Integration Quality Scale](/docs/core/integration-quality-scale/rules/).
+The examples are taken from the [Integration Quality Scale](/docs/core/integration-quality-scale/).
 
 ### Basic structure
 
