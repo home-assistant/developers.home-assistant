@@ -222,11 +222,11 @@ Use the following syntax to reference a video from Youtube, starting at a predef
     alt='Screencast showing a refernce to Youtube to start at a specific time'
   />
 
-## Document structure with dummy content
+## Document structure with example text
 
-This section shows outlines the document structure and provides some example text. The example text includes some reusable text blocks (includes) such as `include integrations/config_flow.md` and styling elements such as `configuration_basic`.
+This section outlines the document structure and provides some example text. The example text includes some reusable text blocks (includes) such as `include integrations/config_flow.md` and styling elements such as `configuration_basic`.
 
-The examples are taken from the [Integration Quality Scale](https://developers.home-assistant.io/docs/core/integration-quality-scale/rules/).
+The examples are taken from the [Integration Quality Scale](/docs/core/integration-quality-scale/rules/).
 
 ### Basic structure
 
@@ -253,7 +253,7 @@ Use case: When you combine it with their other device you can do x.
 
 ## Supported devices
 
-The following devices are known to be supported by the integration:
+The following devices have been reported to work with the integration. Home Assistant may support devices that are no longer available on the market. Just because a device is listed here does not mean you can still buy it.
 
 - Device 1
 - Device 2
