@@ -53,7 +53,7 @@ class MySensor(SensorEntity):
 
 ## Additional resources
 
-For more information about icon translations, check the [entity](../../entity#icon-translations) documentation.
+For more information about icon translations, check the [entity](/docs/core/entity#icon-translations) documentation.
 
 ## Exceptions
 

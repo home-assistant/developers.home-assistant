@@ -14,7 +14,7 @@ This results not only in a more efficient system but the code is also more neat.
 
 ## Additional resources
 
-More information on how to create a library can be found in the [documentation](../../../api_lib_index).
+More information on how to create a library can be found in the [documentation](/docs/api_lib_index).
 
 ## Exceptions
 

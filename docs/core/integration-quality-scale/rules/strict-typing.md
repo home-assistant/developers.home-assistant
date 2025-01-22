@@ -1,6 +1,9 @@
 ---
 title: "Strict typing"
+related_rules:
+  - runtime-data
 ---
+import RelatedRules from './_includes/related_rules.jsx'
 
 ## Reasoning
 
@@ -15,6 +18,10 @@ This file tells mypy that your library is fully typed, after which it can read t
 
 In the Home Assistant codebase, you can add your integration to the [`.strict-typing`](https://github.com/home-assistant/core/blob/dev/.strict-typing) file, which will enable strict type checks for your integration.
 
+:::warning
+If the integration implements `runtime-data`, the use of a custom typed `MyIntegrationConfigEntry` is required and must be used throughout.
+:::
+
 ## Additional resources
 
 To read more about the `py.typed` file, see [PEP-561](https://peps.python.org/pep-0561/).
@@ -22,3 +29,7 @@ To read more about the `py.typed` file, see [PEP-561](https://peps.python.org/pe
 ## Exceptions
 
 There are no exceptions to this rule.
+
+## Related rules
+
+<RelatedRules relatedRules={frontMatter.related_rules}></RelatedRules>

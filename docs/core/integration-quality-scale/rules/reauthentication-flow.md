@@ -93,7 +93,7 @@ class MyConfigFlow(ConfigFlow, domain=DOMAIN):
 
 ## Additional resources
 
-For more info about handling expired credentials, check the [documentation](../../../integration_setup_failures#handling-expired-credentials).
+For more info about handling expired credentials, check the [documentation](/docs/integration_setup_failures#handling-expired-credentials).
 
 ## Exceptions
 

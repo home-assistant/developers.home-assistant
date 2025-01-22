@@ -71,6 +71,12 @@ The translation strings for the configuration flow handler and the option flow h
         "description": "Markdown that is shown with the step.",
         "data": {
           "api_key": "The label for the `api_key` input field"
+        },
+        // Only needed if the form has sections
+        "sections": {
+          "auth_options": {
+            "name": "The label for the `auth_options` section"
+          }
         }
       }
     },
@@ -470,7 +476,7 @@ If your integration provides entities under its domain, you will want to transla
 #### Unit of measurement of entities
 
 Integrations can provide translations for units of measurement of its entities. To do this, provide an `entity` object, that contains translations for the units and set the entity's `translation_key` property to a key under a domain in the `entity` object.
-If the entity's `translation_key` property is not `None` and the `entity` object provides a translated unit, `SensorEntityDescription.native_unit_of_measurement` and `NumberEntityDescription.native_unit_of_measurement` will be ignored.
+If the entity's `translation_key` property is not `None` and the `entity` object provides a translated unit of measurement, `SensorEntityDescription.native_unit_of_measurement` or `NumberEntityDescription.native_unit_of_measurement` should not be defined.
 
 The following example `strings.json` is for a `sensor` entity with its `translation_key` property set to `goal`:
 ```json

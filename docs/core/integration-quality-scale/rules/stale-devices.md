@@ -46,13 +46,13 @@ class MyCoordinator(DataUpdateCoordinator[dict[str, MyDevice]]):
         if (stale_devices := self.previous_devices - current_devices):
             device_registry = dr.async_get(self.hass)
             for device_id in stale_devices:
-                device = device_registry.async_get(identifiers={(DOMAIN, device_id)})
+                device = device_registry.async_get_device(identifiers={(DOMAIN, device_id)})
                 if device:
                     device_registry.async_update_device(
                         device_id=device.id,
                         remove_config_entry_id=self.config_entry.entry_id,
                     )
-            self.previous_devices = current_devices
+        self.previous_devices = current_devices
         return data
 ```
 
@@ -79,7 +79,7 @@ async def async_remove_config_entry_device(
 
 ## Additional resources
 
-For more info on devices, checkout the [device registry documentation](../../../device_registry_index).
+For more info on devices, checkout the [device registry documentation](/docs/device_registry_index).
 
 ## Exceptions
 

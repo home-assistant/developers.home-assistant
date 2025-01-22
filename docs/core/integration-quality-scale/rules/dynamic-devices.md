@@ -7,7 +7,7 @@ import RelatedRules from './_includes/related_rules.jsx'
 
 ## Reasoning
 
-Like explained in IQS021, devices should be removed automatically when we can be sure that the device is not connected anymore.
+Like explained in the rule [stale-devices](/docs/core/integration-quality-scale/rules/stale-devices), devices should be removed automatically when we can be sure that the device is not connected anymore.
 This rule explains the other side, once a new device is connected, we should automatically create the relevant entities for the device.
 
 This makes the user experience better, since the user only adds the device to the integration, and it will automatically show up in Home Assistant.
