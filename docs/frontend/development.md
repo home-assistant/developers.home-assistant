@@ -23,16 +23,19 @@ git remote add upstream https://github.com/home-assistant/frontend.git
 
 ### Configuring Home Assistant
 
-You will need to have an instance of Home Assistant set up. See our guide on [setting up a development environment](/development_environment.mdx).
+You will need to have an instance of Home Assistant set up. For a development instance see our guide on [setting up a development environment](/development_environment.mdx).
 
-There are two ways to test the frontend. You either configure Home Assistant to use another frontend. Or you configure the frontend to connect to an existing Home Assistant instance. The first option is how it will work in production. The second allows running a development frontend against an existing Home Assistant with minimal interference. The downside is that not everything can be tested this way. For example, the login page will always be the one built-in into your Home Assistant.
+There are two ways to test the frontend. You either run a development instance Home Assistant Core, or you configure the frontend to connect to an existing Home Assistant instance. The first option is how it will work in production. The second allows running a development frontend against an existing Home Assistant with minimal interference. The downside is that not everything can be tested this way. For example, the login page will always be the one built-in into your Home Assistant.
 
 import Tabs from '@theme/Tabs'
 import TabItem from '@theme/TabItem'
 
 <Tabs>
 
-<TabItem value="Frontend inside Home Assistant">
+<TabItem value="With a dev instance of HA Core">
+
+#### Developing with Visual Studio Code + dev container
+
 To configure Home Assistant to use the development mode for the frontend, update the frontend config in your `configuration.yaml` and set the path to the frontend repository that you cloned in the last step:
 
 If you are using Visual Studio Code with dev containers for Home Assistant Core, you need to mount the frontend repository into the dev container. Add the following section to `.devcontainer/devcontainer.json` in the Home Assistant Core repository:
@@ -82,9 +85,9 @@ The `configuration.yaml` file can be found in the `config` directory at the root
 :::
 </TabItem>
 
-<TabItem value="Frontend outside Home Assistant">
+<TabItem value="With a production instance of HA Core">
 
-If you want to connect your development frontend to an existing home assistant instance without replacing the UI completely, you will need to add the url under which your development frontend is hosted in `configuration.yaml` of the home assistant it will be connecting to.
+If you want to connect your development frontend to an existing home assistant instance without replacing the UI completely, you will need to add the url under which your development frontend is hosted in `configuration.yaml` of the home assistant it will be connecting to. Like this:
 
 ```yaml
 http:
@@ -92,7 +95,7 @@ http:
     - http://localhost:8124
 ```
 
-After you've setup your frontend development environment so that you can run the `script/develop` script as described in section [Development](#development). You can use the following command as a replacement to develop and run the frontend on http://localhost:8124 and it will connect to the Home Assistant running on http://localhost:8123. Note that if you are running this command from a devcontainer, the url should be accessed from the container host.
+After you've setup your frontend development environment so that you can run the `script/develop` script as described in section [Development](#development). You can use the following command as a replacement to develop and run the frontend on http://localhost:8124 and it will connect to the Home Assistant running on http://localhost:8123. Note that if you are running this command from a devcontainer, the url should be accessible from the container host.
 
 ```shell
 script/develop_and_serve
@@ -101,7 +104,7 @@ script/develop_and_serve
 You can change the Home Assistant url the frontend connects to by passing the -c option. This will also work for existing production core instances. It does not need to be a development version hosted locally. However, if you change the value for this option you will need to logout from your development frontend before it actually switches to the new value. For example:
 
 ```shell
-script/develop_and_serve -c https://myhost.duckdns.org:8123
+script/develop_and_serve -c https://homeassitant.local:8123
 ```
 
 You can change the port the frontend is served on by passing the -p option. Note that if you are running from a devcontainer, you will need to setup
@@ -151,6 +154,17 @@ script/develop
 ```
 
 When the script has completed building the frontend, and Home Assistant Core has been set up correctly, the frontend will be accessible at `http://localhost:8123`. The server will automatically rebuild the frontend when you make changes to the source files.
+
+### Run development frontend over existing HA instance
+
+Run this command to start the development server:
+
+```shell
+nvm use
+script/develop_and_serve -c https://homeassitant.local:8123
+```
+
+You may need to replace "https://homeassitant.local:8123" with your local Home Assistant url.
 
 ### Browser settings
 
