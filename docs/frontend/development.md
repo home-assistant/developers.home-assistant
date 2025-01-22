@@ -32,7 +32,7 @@ import TabItem from '@theme/TabItem'
 
 <Tabs>
 
-<TabItem value="frontend inside Home Assistant">
+<TabItem value="Frontend inside Home Assistant">
 To configure Home Assistant to use the development mode for the frontend, update the frontend config in your `configuration.yaml` and set the path to the frontend repository that you cloned in the last step:
 
 If you are using Visual Studio Code with dev containers for Home Assistant Core, you need to mount the frontend repository into the dev container. Add the following section to `.devcontainer/devcontainer.json` in the Home Assistant Core repository:
@@ -82,7 +82,7 @@ The `configuration.yaml` file can be found in the `config` directory at the root
 :::
 </TabItem>
 
-<TabItem value="frontend outside Home Assistant">
+<TabItem value="Frontend outside Home Assistant">
 
 If you want to connect your development frontend to an existing home assistant instance without replacing the UI completely, you will need to add the url under which your development frontend is hosted in `configuration.yaml` of the home assistant it will be connecting to.
 
