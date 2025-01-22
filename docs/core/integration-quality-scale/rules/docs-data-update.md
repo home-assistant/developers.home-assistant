@@ -22,3 +22,5 @@ At the start of the integration we try to enable that, and if it fails we fall b
 ```
 
 ## Exceptions
+
+There are no exceptions to this rule.

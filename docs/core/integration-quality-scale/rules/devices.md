@@ -35,7 +35,7 @@ class MySensor(SensorEntity):
             manufacturer="My Company",
             model="My Sensor",
             model_id="ABC-123",
-            via_device={(DOMAIN, device.hub_id)},
+            via_device=(DOMAIN, device.hub_id),
         )
 ```
 

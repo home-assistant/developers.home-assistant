@@ -52,7 +52,7 @@ class MyCoordinator(DataUpdateCoordinator[dict[str, MyDevice]]):
                         device_id=device.id,
                         remove_config_entry_id=self.config_entry.entry_id,
                     )
-            self.previous_devices = current_devices
+        self.previous_devices = current_devices
         return data
 ```
 
