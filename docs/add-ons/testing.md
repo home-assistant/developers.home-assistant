@@ -42,16 +42,16 @@ docker run \
 
 If you don't want to use the official build tool, you can still build with standalone Docker. If you use `FROM $BUILD_FROM` you'll need to set a base image with build args. Normally you can use following base images:
 
-- armhf: `homeassistant/armhf-base:latest`
-- aarch64: `homeassistant/aarch64-base:latest`
-- amd64: `homeassistant/amd64-base:latest`
-- i386: `homeassistant/i386-base:latest`
+- armhf: `ghcr.io/home-assistant/armhf-base:latest`
+- aarch64: `ghcr.io/home-assistant/aarch64-base:latest`
+- amd64: `ghcr.io/home-assistant/amd64-base:latest`
+- i386: `ghcr.io/home-assistant/i386-base:latest`
 
 Use `docker` from the directory containing the add-on files to build the test addon:
 
 ```shell
 docker build \
-  --build-arg BUILD_FROM="homeassistant/amd64-base:latest" \
+  --build-arg BUILD_FROM="ghcr.io/home-assistant/amd64-base:latest" \
   -t local/my-test-addon \
   .
 ```
