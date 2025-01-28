@@ -73,7 +73,8 @@ class ExampleBackupAgent(BackupAgent):
     """Backup agent interface."""
 
     domain = DOMAIN
-    name = "example"
+    name = "Example Backup-Agent"
+    unique_id = "example_stable_id"
 
     async def async_download_backup(
         self,
