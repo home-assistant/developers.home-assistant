@@ -233,10 +233,10 @@ list `[]` by default.
 
 # Bad
 - alias: "Test"
-    triggers:
-      -  trigger: state
-         entity_id: binary_sensor.motion
-    condition: []
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.motion
+  condition: []
 ```
 
 ### Strings (continued)
@@ -311,8 +311,8 @@ actions:
   - action: light.turn_on
     entity_id: light.living_room
   - action: light.turn_on
-     data:
-       entity_id: light.living_room
+    data:
+      entity_id: light.living_room
 ```
 
 ### Properties that accept a scalar or a list of scalars
