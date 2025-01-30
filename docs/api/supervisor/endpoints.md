@@ -932,7 +932,7 @@ Create a partial backup.
 | name                           | string         | True     | The name you want to give the backup                 |
 | password                       | string         | True     | The password you want to give the backup             |
 | homeassistant                  | boolean        | Content  | Add home assistant core settings to the backup       |
-| addons                         | list or `ALL`  | Content  | A list of strings representing add-on slugs. Provide the string `ALL` instead of a list to include all currently installed add-ons |
+| addons                         | list or `ALL`  | Content  | A list of strings representing add-on slugs. Provide the string `ALL` instead of a list to automatically include all add-ons that are currently installed in the system |
 | folders                        | list           | Content  | A list of strings representing directories           |
 | compressed                     | boolean        | True     | `false` to create uncompressed backups               |
 | location                       | list or string | True     | Name of a backup mount or `.local` for /backup. Use a list to the make backup in multiple places |
