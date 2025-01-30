@@ -227,9 +227,9 @@ list `[]` by default.
 ```yaml
 # Good
 - alias: "Test"
-    triggers:
-      -  trigger: state
-         entity_id: binary_sensor.motion
+  triggers:
+    - trigger: state
+      entity_id: binary_sensor.motion
 
 # Bad
 - alias: "Test"
