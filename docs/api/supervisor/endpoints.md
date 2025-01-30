@@ -785,6 +785,12 @@ Return a list of [Backups](api/supervisor/models.md#backup)
       "protected": true,
       "location": "MountedBackups",
       "locations": ["MountedBackups"],
+      "location_attributes": {
+        "MountedBackups": {
+          "protected": true,
+          "size_bytes": 44070259
+        }
+      },
       "compressed": true,
       "content": {
         "homeassistant": true,
@@ -825,6 +831,12 @@ Return information about backup manager.
       "compressed": true,
       "location": null,
       "locations": [null],
+      "location_attributes": {
+        ".local": {
+          "protected": true,
+          "size_bytes": 44070259
+        }
+      },
       "content": {
         "homeassistant": true,
         "addons": ["awesome_addon"],
@@ -849,10 +861,11 @@ Create a full backup.
 | name                           | string         | True     | The name you want to give the backup                 |
 | password                       | string         | True     | The password you want to give the backup             |
 | compressed                     | boolean        | True     | `false` to create uncompressed backups               |
-| location                       | list, string or null | True     | Name of a backup mount or `null` for /backup. Use a list of backup mounts or `null` to make backup in multiple places |
+| location                       | list or string | True     | Name of a backup mount or `.local` for `/backup`. Use a list to make the backup in multiple places |
 | homeassistant_exclude_database | boolean        | True     | Exclude the Home Assistant database file from backup |
 | background                     | boolean        | True     | Return `job_id` immediately, do not wait for backup to complete. Clients must check job for status and slug. |
 | extra                          | dictionary     | True     | Extra metadata to store with the backup for client-specific use cases |
+| filename                       | string         | True     | The name for the backup file created                 |
 
 **Example response:**
 
@@ -880,13 +893,15 @@ Upload a backup.
 
 | key       | multiple | description                                                                                                                        |
 | --------- | -------- | ---------------------------------------------------------------------------------------------------------------------------------- |
-| location  | Yes      | The name of the backup mount to upload to. Use empty string for `/backup`. Provide multiple locations to upload to multiple places |
+| location  | Yes      | The name of the backup mount to upload to. Use `.local` for `/backup`. Provide multiple locations to upload to multiple places |
+| filename  | No       | The name for the backup file created                                                                                               |
 
 *Examples*
 
-- `?location=` - Upload to `/backup`
+- `?location=.local` - Upload to `/backup`
 - `?location=MountedBackups` - Upload to backup mount named `MountedBackup`
-- `?location=&location=MountedBackups` - Upload to both of the above places
+- `?location=.local&location=MountedBackups` - Upload to both of the above places
+- `?filename=my_backup.tar` - Create backup file in default backup location with name `my_backup.tar`
 
 **Example response:**
 
@@ -920,10 +935,11 @@ Create a partial backup.
 | addons                         | list or `ALL`  | Content  | A list of strings representing add-on slugs. Provide the string `ALL` instead of a list to include all currently installed add-ons |
 | folders                        | list           | Content  | A list of strings representing directories           |
 | compressed                     | boolean        | True     | `false` to create uncompressed backups               |
-| location                       | list, string or null | True     | Name of a backup mount or `null` for /backup. Use a list of backup mounts or `null` to make backup in multiple places |
+| location                       | list or string | True     | Name of a backup mount or `.local` for /backup. Use a list to the make backup in multiple places |
 | homeassistant_exclude_database | boolean        | True     | Exclude the Home Assistant database file from backup |
 | background                     | boolean        | True     | Return `job_id` immediately, do not wait for backup to complete. Clients must check job for status and slug. |
 | extra                          | dictionary     | True     | Extra metadata to store with the backup for client-specific use cases |
+| filename                       | string         | True     | The name for the backup file created                 |
 
 **You need to supply at least one key of the ones marked "Content" in the optional column in the payload.**
 
@@ -996,13 +1012,13 @@ Download the backup file with the given slug.
 
 **Query**
 
-| key       | multiple | description                                                                                                                                                                                              |
-| --------- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| location  | No       | Specify which location to download the backup from of the ones it exists in. Use empty string for `/backup` (equivalent to `null` in the `locations` field of [Backup](api/supervisor/models.md#backup)) |
+| key       | multiple | description                                                                                             |
+| --------- | -------- | ------------------------------------------------------------------------------------------------------- |
+| location  | No       | Specify which location to download the backup from of the ones it exists in. Use `.local` for `/backup` |
 
 *Examples*
 
-- `?location=` - Download from `/backup`
+- `?location=.local` - Download from `/backup`
 - `?location=MountedBackups` - Download from backup mount named `MountedBackup`
 
 </ApiEndpoint>
@@ -1019,9 +1035,9 @@ Removes the backup file with the given slug.
 
 **Payload:**
 
-| key      | type | optional | description                                                                                                                                                    |
-| -------- | ---- | -------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| location | list | True     | Specify which locations to remove the backup from instead of removing it from all locations. See `locations` field of [Backup](api/supervisor/models.md#backup)|
+| key      | type | optional | description                                                                                                                                                              |
+| -------- | ---- | -------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| location | list | True     | Specify which locations to remove the backup from instead of removing it from all locations. See `location_attributes` field from `/backups/<backup>/info` for locations |
 
 </ApiEndpoint>
 
@@ -1031,11 +1047,11 @@ Does a full restore of the backup with the given slug.
 
 **Payload:**
 
-| key        | type           | optional | description                          |
-| ---------- | -------------- | -------- | ------------------------------------ |
-| password   | string         | True     | The password for the backup if any   |
-| background | boolean        | True     | Return `job_id` immediately, do not wait for restore to complete. Clients must check job for status. |
-| location   | string or null | True     | Specify which location to restore the backup from of the ones it exists in. See `locations` field of [Backup](api/supervisor/models.md#backup) |
+| key        | type    | optional | description                          |
+| ---------- | ------- | -------- | ------------------------------------ |
+| password   | string  | True     | The password for the backup if any   |
+| background | boolean | True     | Return `job_id` immediately, do not wait for restore to complete. Clients must check job for status. |
+| location   | string  | True     | Specify which location to restore the backup from of the ones it exists in. See `location_attributes` field from `/backups/<backup>/info` for locations |
 
 **Example response:**
 
@@ -1060,14 +1076,14 @@ Does a partial restore of the backup with the given slug.
 
 **Payload:**
 
-| key           | type           | optional | description                                    |
-| ------------- | -------------- | -------- | ---------------------------------------------- |
-| homeassistant | boolean        | Content  | `true` if Home Assistant should be restored    |
-| addons        | list           | Content  | A list of add-on slugs that should be restored |
-| folders       | list           | Content  | A list of directories that should be restored  |
-| password      | string         | True     | The password for the backup if any             |
-| background    | boolean        | True     | Return `job_id` immediately, do not wait for restore to complete. Clients must check job for status. |
-| location      | string or null | True     | Specify which location to restore the backup from of the ones it exists in. See `locations` field of [Backup](api/supervisor/models.md#backup) |
+| key           | type    | optional | description                                    |
+| ------------- | ------- | -------- | ---------------------------------------------- |
+| homeassistant | boolean | Content  | `true` if Home Assistant should be restored    |
+| addons        | list    | Content  | A list of add-on slugs that should be restored |
+| folders       | list    | Content  | A list of directories that should be restored  |
+| password      | string  | True     | The password for the backup if any             |
+| background    | boolean | True     | Return `job_id` immediately, do not wait for restore to complete. Clients must check job for status. |
+| location      | string  | True     | Specify which location to restore the backup from of the ones it exists in. See `location_attributes` field from `/backups/<backup>/info` for locations |
 
 **You need to supply at least one key of the ones marked "Content" in the optional column in the payload.**
 
