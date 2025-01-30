@@ -55,6 +55,7 @@
 /docs/hassio_addon_tutorial /docs/add-ons/tutorial
 /docs/hassio_debugging /docs/supervisor/debugging
 /docs/hassio_hass /docs/supervisor/developing
+/docs/integration_quality_scale_index /docs/core/integration-quality-scale
 /docs/internationalization_backend_localization /docs/internationalization/core
 /docs/internationalization_custom_component_localization /docs/internationalization/custom_integration
 /docs/internationalization_index /docs/internationalization

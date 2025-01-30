@@ -12,7 +12,7 @@ Example with `async_track_state_change`:
 
 ```python
 from homeassistant.core import State, callback
-from homeassistant.helper.event import async_track_state_change
+from homeassistant.helpers.event import async_track_state_change
 
 @callback
 def _async_on_change(entity_id: str, old_state: State | None, new_state: State | None) -> None:
@@ -26,7 +26,7 @@ Example replacement with `async_track_state_change_event`:
 
 ```python
 from homeassistant.core import Event, EventStateChangedData, callback
-from homeassistant.helper.event import async_track_state_change_event
+from homeassistant.helpers.event import async_track_state_change_event
 
 @callback
 def _async_on_change(event: Event[EventStateChangedData]) -> None:

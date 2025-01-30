@@ -5,6 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+const iqs_rules_by_tier = require('./docs/core/integration-quality-scale/_includes/tiers.json');
+const iqs_rules = Object.values(iqs_rules_by_tier).flat().map((rule) => {
+    if (typeof rule === "string") {
+        return rule;
+    }
+    return rule.id;
+});
+
+
+
 module.exports = {
   Addons: [
     "add-ons",
@@ -107,6 +117,7 @@ module.exports = {
         "creating_integration_manifest",
         "config_entries_config_flow_handler",
         "config_entries_options_flow_handler",
+        "core/integration_diagnostics",
         "configuration_yaml_index",
         "dev_101_services",
         "creating_platform_index",
@@ -134,8 +145,20 @@ module.exports = {
         "development_checklist",
         "creating_component_code_review",
         "creating_platform_code_review",
-        "integration_quality_scale_index",
       ],
+    },
+    {
+      type: "category",
+      label: "Integration Quality Scale",
+      link: {type: 'doc', id: 'core/integration-quality-scale/index'},
+      items: [
+        {type: 'doc', id: 'core/integration-quality-scale/checklist'},
+        {type: 'category', label: 'Rules', items: iqs_rules.map(rule => ({
+                type: 'doc',
+                id: `core/integration-quality-scale/rules/${rule.toLowerCase()}`
+              })
+          )}
+          ]
     },
     {
       type: "category",

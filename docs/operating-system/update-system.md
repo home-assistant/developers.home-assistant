@@ -21,8 +21,12 @@ For development or testing, RAUC update bundles can be installed with the `rauc 
 # cd /mnt/data/
 # curl -L -O https://github.com/home-assistant/operating-system/releases/download/11.5.rc3/haos_rpi5-64-11.5.rc3.raucb
 # rauc install haos_rpi5-64-11.5.rc3.raucb
-# reboot
+# systemctl reboot
 ```
+
+:::note
+On Raspberry Pi 5 which uses the `tryboot` mechanism, be sure to use `systemctl reboot`, as plain `reboot` wouldn't trigger booting from the other slot. Alternatively, explicit `reboot '0 tryboot'` is required.
+:::
 
 After the reboot the system should run with the newly installed HAOS version.
 
