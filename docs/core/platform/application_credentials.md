@@ -132,7 +132,7 @@ Translations for Application Credentials are defined under the `application_cred
 ```json
 {
     "application_credentials": {
-        "description": "Navigate to the [developer console]({console_url}) to create credentials then enter them below.",
+        "description": "Navigate to the [developer console]({console_url}) to create credentials. Add `{redirect_url}` under *Authorized redirect URI*. Then enter the credentials below.",
     }
 }
 ```
@@ -141,11 +141,13 @@ You may optionally add description placeholder keys that are added to the messag
 
 ```python
 from homeassistant.core import HomeAssistant
+from homeassistant.helpers import config_entry_oauth2_flow
 
 async def async_get_description_placeholders(hass: HomeAssistant) -> dict[str, str]:
     """Return description placeholders for the credentials dialog."""
     return {
         "console_url": "https://example.com/developer/console",
+        "redirect_url": config_entry_oauth2_flow.async_get_redirect_uri(hass),
     }
 ```
 
