@@ -19,4 +19,4 @@ More details can be found in the [Number documentation](/docs/core/entity/number
 
 ### Inverse Units
 
-Implementing `EnergyDistanceConverter` has also resulted in support for inverse units in `BaseUnitConverter`. This simplifies adding new units tha are inverses of one another, e.g., kWh/100km and km/kWh.
+Implementing `EnergyDistanceConverter` has also resulted in support for inverse units in `BaseUnitConverter`. This simplifies adding new units that are inverses of one another, e.g., kWh/100km and km/kWh.
