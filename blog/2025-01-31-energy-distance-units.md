@@ -6,7 +6,8 @@ title: "Energy by distance units"
 
 ### Summary of changes
 
-A new `ENERGY_DISTANCE` device class for representing energy consumption by distance, for example the amount of electric energy consumed by an electric car, is now available for number and sensor entities, together with automatic unit conversion based on the unit system. A corresponding `UnitOfEnergyDistance` unit enumerator, and `EnergyDistanceConverter` converter class have been added to support the new device class.
+A new `ENERGY_DISTANCE` device class for representing energy per distance is now available for number and sensor entities, together with automatic unit conversion based on the unit system. 
+This new device class can be used, for example, on entities that show the amount of electric energy consumed by an electric car. A corresponding `UnitOfEnergyDistance` unit enumerator, and `EnergyDistanceConverter` converter class have been added to support the new device class.
 
 The following units are available:
 
