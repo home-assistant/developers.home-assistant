@@ -44,7 +44,7 @@ The system_health component provides the `async_check_can_reach_url` helper as a
 :::
 
 
-Translate each key on the info dictionary using the `system_health` section on `strings.json` file, to provide good descriptions:
+Translate each key in the info dictionary using the `system_health` section in the `strings.json` file, to provide good descriptions:
 
 ```json
   "system_health": {
