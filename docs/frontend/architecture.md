@@ -1,5 +1,5 @@
 ---
-title: "Frontend Architecture"
+title: "Frontend architecture"
 sidebar_label: "Architecture"
 ---
 
@@ -11,7 +11,7 @@ The Home Assistant frontend can be broken up in 4 parts:
 
 ### Bootstrap
 
-File: `src/entrypoints/core.js`
+File: `src/entrypoints/core.ts`
 
 This is a very tiny script which is the first thing that is loaded on the page. It is responsible for checking for authentication credentials and setting up the websocket connection with the backend.
 
@@ -19,7 +19,7 @@ The script allows us to start downloading the data while also downloading the re
 
 ### App shell
 
-File: `src/entrypoints/app.js`
+File: `src/entrypoints/app.ts`
 
 This is everything that is required to render the sidebar and handle the routing.
 
@@ -35,7 +35,7 @@ Folder: `src/dialogs`
 
 Certain information and data entry is presented to users in flows. Dialogs can be triggered on any page. The most common one is the entity more info dialog, which allows users to dig into an entity's state, history, and settings.
 
-## Data Flow
+## Data flow
 
 The frontend leverages the [Websocket API](api/websocket.md) and the [Rest API](api/rest.md) to interact with Home Assistant.
 

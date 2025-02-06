@@ -1,9 +1,9 @@
 ---
-title: "Integration Architecture"
+title: "Integration architecture"
 sidebar_label: "Integrations"
 ---
 
-Home Assistant Core can be extended with **integrations**. Each integration is responsible for a specific domain within Home Assistant. Integrations can listen for or trigger events, offer services, and maintain states. Integrations are made up of a component (the base logic) and platforms (bits that integrate with other integrations). Integrations are written in Python and can do all the goodness that Python has to offer. Out of the box, Home Assistant offers a bunch of [built-in integrations](https://www.home-assistant.io/integrations/).
+Home Assistant Core can be extended with **integrations**. Each integration is responsible for a specific domain within Home Assistant. Integrations can listen for or trigger events, offer actions, and maintain states. Integrations are made up of a component (the base logic) and platforms (bits that integrate with other integrations). Integrations are written in Python and can do all the goodness that Python has to offer. Out of the box, Home Assistant offers a bunch of [built-in integrations](https://www.home-assistant.io/integrations/).
 
 <img class='invertDark'
 src='/img/en/architecture/component-interaction.svg'
@@ -13,7 +13,7 @@ Home Assistant distinguishes the following integration types:
 
 ## Define an Internet of Things domain
 
-These integrations define a specific device category of Internet of Things devices in Home Assistant, like a light. It's up to the `light` integration to define what data is available in Home Assistant and in what format. It also provides services to control lights.
+These integrations define a specific device category of Internet of Things devices in Home Assistant, like a light. It's up to the `light` integration to define what data is available in Home Assistant and in what format. It also provides actions to control lights.
 
 For a list of defined domains, see [entities](./core/entity.md).
 

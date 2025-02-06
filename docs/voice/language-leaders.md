@@ -1,5 +1,5 @@
 ---
-title: "Language Leaders"
+title: "Language leaders"
 ---
 
 Home Assistant is a global project. We want to make sure that everyone can use Home Assistant in their native language. For that reason, we have language leaders for each language to lead the maintenance.
@@ -14,7 +14,7 @@ Anyone can apply to become a language leader if they meet the following requirem
 - Make 2+ pull requests to the intents repository
 - Be involved with reviewing pull requests for the language
 
-If you want to apply to be a language leader, join us in `#devs_voice` on Discord or [open a discussion topic](https://github.com/home-assistant/intents/discussions).
+If you want to apply to be a language leader, join us in `#developers` on Discord or [open a discussion topic](https://github.com/home-assistant/intents/discussions).
 
 ## Losing language leader status
 

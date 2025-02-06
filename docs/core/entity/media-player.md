@@ -1,6 +1,6 @@
 ---
-title: Media Player Entity
-sidebar_label: Media Player
+title: Media player entity
+sidebar_label: Media player
 ---
 
 :::info Incomplete
@@ -47,9 +47,9 @@ Properties should always only return information from memory and not do I/O (lik
 | source_list                     | <code>list[str] &#124; None</code>              | `None`  | The list of possible input sources for the media player. (This list should contain human readable names, suitable for frontend display).
 | state                           | <code>MediaPlayerState &#124; None</code>       | `None`  | State of the media player.
 | volume_level                    | <code>float &#124; None</code>                  | `None`  | Volume level of the media player in the range (0..1).
-| volume_step                     | <code>float &#124; None</code>                  | 0.1     | Volume step to use for the `volume_up` and `volume_down` services.
+| volume_step                     | <code>float &#124; None</code>                  | 0.1     | Volume step to use for the `volume_up` and `volume_down` service actions.
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `MediaPlayerEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.
@@ -59,8 +59,8 @@ and are combined using the bitwise or (`|`) operator.
 | `BROWSE_MEDIA`      | Entity allows browsing media.                                      |
 | `CLEAR_PLAYLIST`    | Entity allows clearing the active playlist.                        |
 | `GROUPING`          | Entity can be grouped with other players for synchronous playback. |
-| `MEDIA_ANNOUNCE`    | Entity supports the `play_media` service's announce parameter.     |
-| `MEDIA_ENQUEUE`     | Entity supports the `play_media` service's enqueue parameter.      |
+| `MEDIA_ANNOUNCE`    | Entity supports the `play_media` action's announce parameter.      |
+| `MEDIA_ENQUEUE`     | Entity supports the `play_media` action's enqueue parameter.       |
 | `NEXT_TRACK`        | Entity allows skipping to the next media track.                    |
 | `PAUSE`             | Entity allows pausing the playback of media.                       |
 | `PLAY`              | Entity allows playing/resuming playback of media.                  |
@@ -94,7 +94,7 @@ The state of a media player is defined by using values in the `MediaPlayerState`
 
 ## Methods
 
-### Play Media
+### Play media
 
 Tells the media player to play media. Implement it using the following:
 
@@ -130,7 +130,7 @@ The `enqueue` attribute is a string enum `MediaPlayerEnqueue`:
 
 When the `announce` boolean attribute is set to `true`, the media player should try to pause the current music, announce the media to the user and then resume the music.
 
-### Browse Media
+### Browse media
 
 If the media player supports browsing media, it should implement the following method:
 
@@ -250,7 +250,7 @@ class MyMediaPlayer(MediaPlayerEntity):
 ```
 
 :::info
-Using the integration name as the `media_content_type` is also acceptable within the `play_media` service if the integration provides handling which does not map to the defined constants.
+Using the integration name as the `media_content_type` is also acceptable within the `play_media` service action if the integration provides handling which does not map to the defined constants.
 :::
 
 ### Available device classes

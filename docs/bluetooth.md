@@ -1,6 +1,6 @@
 ---
 title: "Bluetooth"
-sidebar_label: "Building a Bluetooth Integration"
+sidebar_label: "Building a Bluetooth integration"
 ---
 
 ### Best practices for integration authors

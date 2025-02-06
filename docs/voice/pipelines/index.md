@@ -1,5 +1,5 @@
 ---
-title: "Assist Pipelines"
+title: "Assist pipelines"
 ---
 
 The [Assist pipeline](https://www.home-assistant.io/integrations/assist_pipeline) integration runs the common steps of a voice assistant:
@@ -31,6 +31,7 @@ The following input fields are available:
 | `input`           | dict   | Depends on `start_stage`: <ul><li>`wake_word` only:<ul><li>`timeout` - seconds before wake word detection times out (int, default: 3)</li><li>`noise_suppression_level` - amount of noise suppression (int, 0 = disabled, 4 = max)</li><li>`auto_gain_dbfs` - automatic gain (int, 0 = disabled, 31 = max)</li><li>`volume_multiplier` - fixed volume amplification (float, 1.0 = no change, 2.0 = twice as loud)</li></ul></li><li>`wake_word` and `stt`:<ul><li>`sample_rate` - sample rate of incoming audio (int, hertz)</li></ul></li><li>`intent` and `tts`:<ul><li>`text` - input text (string)</li></ul></li></ul> |
 | `pipeline`        | string | Optional. ID of the pipeline (use `assist_pipeline/pipeline/list` to get names).                                                                                                                                                                                                               |
 | `conversation_id` | string | Optional. [Unique id for conversation](/docs/intent_conversation_api#conversation-id).                                                                                                                                                                                                         |
+| `device_id`         | string | Optional. Device ID from Home Assistant's device registry of the device that is starting the pipeline.                                                                                                                                                                                                                           |
 | `timeout`         | number | Optional. Number of seconds before pipeline times out (default: 300).                                                                                                                                                                                                                           |
 
 ## Events
@@ -95,7 +96,7 @@ When `start_stage` is set to `wake_word`, the pipeline will not run until a wake
 For `wake_word`, the `input` object should contain a `timeout` float value. This is the number of seconds of silence before the pipeline will time out during wake word detection (error code `wake-word-timeout`).
 If enough speech is detected by Home Assistant's internal VAD, the timeout will be continually reset.
 
-### Audio Enhancements
+### Audio enhancements
 
 The following settings are available as part of the `input` object when `start_stage` is set to `wake_word`:
 

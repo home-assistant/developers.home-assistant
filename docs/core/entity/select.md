@@ -1,5 +1,5 @@
 ---
-title: Select Entity
+title: Select entity
 sidebar_label: Select
 ---
 

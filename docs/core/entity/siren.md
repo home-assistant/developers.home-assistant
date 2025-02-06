@@ -1,5 +1,5 @@
 ---
-title: Siren Entity
+title: Siren entity
 sidebar_label: Siren
 ---
 
@@ -14,7 +14,7 @@ Properties should always only return information from memory and not do I/O (lik
 | Name                    | Type   | Default                               | Description                                                                             |
 | ----------------------- | ------ | ------------------------------------- | --------------------------------------------------------------------------------------- |
 | is_on                   | bool           | `None`                                | Whether the device is on or off.                                                        |
-| available_tones         | list or dict   | `NotImplementedError()`               | The list or dictionary of available tones on the device to pass into the `turn_on` service. If a dictionary is provided, when a user uses the dict value of a tone, it will get converted to the corresponding dict key before being passed on to the integration platform. Requires `SUPPORT_TONES` feature.           |
+| available_tones         | list or dict   | `NotImplementedError()`               | The list or dictionary of available tones on the device to pass into the `turn_on` service action. If a dictionary is provided, when a user uses the dict value of a tone, it will get converted to the corresponding dict key before being passed on to the integration platform. Requires `SUPPORT_TONES` feature.           |
 
 ### Tones
 
@@ -26,16 +26,16 @@ Supported features constants are combined using the bitwise or (`|`) operator.
 
 | Name                      | Description                                                                                                      |
 | ------------------------- | ---------------------------------------------------------------------------------------------------------------- |
-| `SirenEntityFeature.TONES`           | The device supports different tones (the tone can be passed in to `turn_on` service).                                |
-| `SirenEntityFeature.DURATION`        | The device supports setting a duration for the tone (the duration can be passed in to `turn_on` service).            |
-| `SirenEntityFeature.VOLUME_SET`      | The device supports setting the volume level of the device (the volume level can be passed in to `turn_on` service). |
+| `SirenEntityFeature.TONES`           | The device supports different tones (the tone can be passed in to `turn_on` service action).                                |
+| `SirenEntityFeature.DURATION`        | The device supports setting a duration for the tone (the duration can be passed in to `turn_on` service action).            |
+| `SirenEntityFeature.VOLUME_SET`      | The device supports setting the volume level of the device (the volume level can be passed in to `turn_on` service action). |
 
 
 ## Methods
 
 ### Turn on
 
-There are three optional input parameters that can be passed into the service call, each gated by a supported feature flag. If the corresponding flag isn't set when a given input parameter is provided in the service call, it will be filtered out from the service call by the base platform before being passed to the integration.
+There are three optional input parameters that can be passed into the service action call, each gated by a supported feature flag. If the corresponding flag isn't set when a given input parameter is provided in the service action call, it will be filtered out from the call by the base platform before being passed to the integration.
 
 | Parameter Name 	| Data Validation                       	| Supported Feature Flag 	|
 |----------------	|---------------------------------------	|------------------------	|

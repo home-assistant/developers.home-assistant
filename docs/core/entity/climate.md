@@ -1,5 +1,5 @@
 ---
-title: Climate Entity
+title: Climate entity
 sidebar_label: Climate
 ---
 
@@ -28,7 +28,9 @@ Properties should always only return information from memory and not do I/O (lik
 | preset_mode             | <code>str &#124; None</code>        | **Required by SUPPORT_PRESET_MODE**  | The current active preset.                                                 |
 | preset_modes            | <code>list[str] &#124; None</code>  | **Required by SUPPORT_PRESET_MODE**  | The available presets.                                                     |
 | swing_mode              | <code>str &#124; None</code>        | **Required by SUPPORT_SWING_MODE**   | The swing setting.                                                         |
-| swing_modes             | <code>list[str] &#124; None</code>  | **Required by SUPPORT_SWING_MODE**   | Returns the list of available swing modes.                                 |
+| swing_modes             | <code>list[str] &#124; None</code>  | **Required by SUPPORT_SWING_MODE**   | Returns the list of available swing modes, only vertical modes in the case horizontal swing is implemented. |
+| swing_horizontal_mode | <code>str &#124; None</code>        | **Required by SUPPORT_SWING_HORIZONTAL_MODE**   | The horizontal swing setting.                                     |
+| swing_horizontal_modes | <code>list[str] &#124; None</code>  | **Required by SUPPORT_SWING_HORIZONTAL_MODE**  | Returns the list of available horizontal swing modes.                                 |
 | target_humidity         | <code>float &#124; None</code>        | `None`                               | The target humidity the device is trying to reach.                         |
 | target_temperature      | <code>float &#124; None</code>      | `None`                               | The temperature currently set to be reached.                               |
 | target_temperature_high | <code>float &#124; None</code>      | **Required by TARGET_TEMPERATURE_RANGE** | The upper bound target temperature                                     |
@@ -52,7 +54,7 @@ enum. If you want another mode, add a preset instead.
 | `HVACMode.DRY`       | The device is set to dry/humidity mode.                             |
 | `HVACMode.FAN_ONLY`  | The device only has the fan on. No heating or cooling taking place. |
 
-### HVAC Action
+### HVAC action
 
 The HVAC action describes the _current_ action. This is different from the mode, because if a device is set to heat, and the target temperature is already achieved, the device will not be actively heating anymore. It is only allowed to use the built-in HVAC actions, provided by the `HVACAction` enum.
 
@@ -65,6 +67,7 @@ The HVAC action describes the _current_ action. This is different from the mode,
 | `HVACAction.DRYING`     | Device is drying.     |
 | `HVACAction.FAN`        | Device has fan on.    |
 | `HVACAction.IDLE`       | Device is idle.       |
+| `HVACAction.DEFROSTING` | Device is defrosting. |
 
 ### Presets
 
@@ -101,6 +104,12 @@ A device's fan can have different states. There are a couple of built-in fan mod
 
 The device fan can have different swing modes that it wants the user to know about/control.
 
+:::note
+
+For integrations that don't have independent control of vertical and horizontal swing, all possible options should be listed in `swing_modes`, otherwise `swing_modes` provides vertical support and `swing_horizontal_modes` should provide horizontal support.
+
+:::
+
 | Name               | Description                                       |
 | ------------------ | ------------------------------------------------- |
 | `SWING_OFF`        | The fan is not swinging.                          |
@@ -109,7 +118,22 @@ The device fan can have different swing modes that it wants the user to know abo
 | `SWING_HORIZONTAL` | The fan is swinging horizontal.                   |
 | `SWING_BOTH`       | The fan is swinging both horizontal and vertical. |
 
-## Supported Features
+### Swing horizontal modes
+
+The device fan can have different horizontal swing modes that it wants the user to know about/control.
+
+:::note
+
+This should only be implemented if the integration has independent control of vertical and horizontal swing. In such case the `swing_modes` property will provide vertical support and `swing_horizontal_modes` will provide horizontal support.
+
+:::
+
+| Name               | Description                                       |
+| ------------------ | ------------------------------------------------- |
+| `SWING_OFF`        | The fan is not swinging.                          |
+| `SWING_ON`         | The fan is swinging.                              |
+
+## Supported features
 
 Supported features are defined by using values in the `ClimateEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.
@@ -122,6 +146,7 @@ and are combined using the bitwise or (`|`) operator.
 | `FAN_MODE`                 | The device supports fan modes.                                                              |
 | `PRESET_MODE`              | The device supports presets.                                                                |
 | `SWING_MODE`               | The device supports swing modes.                                                            |
+| `SWING_HORIZONTAL_MODE`    | The device supports horizontal swing modes.                                                            |
 | `TURN_ON`                 | The device supports turn on.                                                      |
 | `TURN_OFF`                 | The device supports turn off.                                                      |
 
@@ -146,8 +171,8 @@ class MyClimateEntity(ClimateEntity):
 class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
     # The `turn_on` method should set `hvac_mode` to any other than
-    # `HVACMode.OFF` by optimistically setting it from the service handler
-    # or with the next state update
+    # `HVACMode.OFF` by optimistically setting it from the service action
+    # handler or with the next state update
 
     def turn_on(self):
         """Turn the entity on."""
@@ -162,7 +187,8 @@ class MyClimateEntity(ClimateEntity):
 class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
     # The `turn_off` method should set `hvac_mode` to `HVACMode.OFF` by
-    # optimistically setting it from the service handler or with the next state update
+    # optimistically setting it from the service action handler or with the
+    # next state update
 
     def turn_off(self):
         """Turn the entity off."""
@@ -179,7 +205,8 @@ class MyClimateEntity(ClimateEntity):
     # will call `turn_on`/`turn_off` according to the current HVAC mode.
 
     # If implemented, the `toggle` method should set `hvac_mode` to the right `HVACMode` by
-    # optimistically setting it from the service handler or with the next state update.
+    # optimistically setting it from the service action handler
+    # or with the next state update.
 
     def toggle(self):
         """Toggle the entity."""
@@ -240,7 +267,24 @@ class MyClimateEntity(ClimateEntity):
         """Set new target swing operation."""
 ```
 
+### Set horizontal swing mode
+
+```python
+class MyClimateEntity(ClimateEntity):
+    # Implement one of these methods.
+
+    def set_swing_horizontal_mode(self, swing_mode):
+        """Set new target horizontal swing operation."""
+
+    async def async_set_swing_horizontal_mode(self, swing_mode):
+        """Set new target horizontal swing operation."""
+```
+
 ### Set temperature
+
+:::note
+`ClimateEntity` has built-in validation to ensure that the `target_temperature_low` argument is lower than or equal to the `target_temperature_high` argument. Therefore, integrations do not need to validate this in their own implementation.
+:::
 
 ```python
 class MyClimateEntity(ClimateEntity):

@@ -1,8 +1,8 @@
 ---
-title: "Custom Integration Localization"
+title: "Custom integration localization"
 ---
 
-## Translation Strings
+## Translation strings
 
 Unlike localized strings merged in the `home-assistant` repository, custom integrations cannot take advantage of Lokalise for user-submitted translations. However, custom integration authors can still include translations with their integrations. These will be read from the `translations` directory, adjacent to the integration source. They are named `<language_code>.json` in the `translations` directory, e.g., for the German translation `de.json`.
 

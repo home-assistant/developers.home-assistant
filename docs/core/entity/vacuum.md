@@ -1,5 +1,5 @@
 ---
-title: Vacuum Entity
+title: Vacuum entity
 sidebar_label: Vacuum
 ---
 
@@ -22,20 +22,22 @@ Properties should always only return information from memory and not do I/O (lik
 | fan_speed | string | `none` | The current fan speed.
 | fan_speed_list | list | `NotImplementedError()`| List of available fan speeds.
 | name | string | **Required** | Name of the entity.
-| state | string | **Required** | One of the states listed in the states section.
+| activity | VacuumActivity | **Required** | Return one of the states listed in the states section.
 
 ## States
 
-| State | Description
-| ----- | -----------
-| `STATE_CLEANING` | The vacuum is currently cleaning.
-| `STATE_DOCKED` | The vacuum is currently docked, it is assumed that docked can also mean charging.
-| `STATE_IDLE` | The vacuum is not paused, not docked and does not have any errors.
-| `STATE_PAUSED` | The vacuum was cleaning but was paused without returning to the dock.
-| `STATE_RETURNING` | The vacuum is done cleaning and is currently returning to the dock, but not yet docked.
-| `STATE_ERROR` | The vacuum encountered an error while cleaning.
+Setting the state should return an enum from VacuumActivity in the `activity` property.
 
-## Supported Features
+| Value | Description
+| ----- | -----------
+| `CLEANING` | The vacuum is currently cleaning.
+| `DOCKED` | The vacuum is currently docked, it is assumed that docked can also mean charging.
+| `IDLE` | The vacuum is not paused, not docked and does not have any errors.
+| `PAUSED` | The vacuum was cleaning but was paused without returning to the dock.
+| `RETURNING` | The vacuum is done cleaning and is currently returning to the dock, but not yet docked.
+| `ERROR` | The vacuum encountered an error while cleaning.
+
+## Supported features
 
 Supported features are defined by using values in the `VacuumEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.

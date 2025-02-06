@@ -1,5 +1,5 @@
 ---
-title: Button Entity
+title: Button entity
 sidebar_label: Button
 ---
 
@@ -27,7 +27,7 @@ Other properties that are common to all entities such as `device_class`, `icon`,
 
 The press method can be used to trigger an action towards a device or service.
 It is called by Home Assistant when the user presses the button or the
-service to press the button has been called.
+action to press the button has been called.
 
 ```python
 class MyButton(ButtonEntity):

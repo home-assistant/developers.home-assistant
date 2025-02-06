@@ -1,8 +1,8 @@
 ---
-title: "Backend Localization"
+title: "Backend localization"
 ---
 
-## Translation Strings
+## Translation strings
 
 Platform translation strings are stored as JSON in the [core](https://github.com/home-assistant/core) repository. These files must be located adjacent to the component/platform they belong to. Components must have their own directory, and the file is simply named `strings.json` in that directory. This file will contain the different strings that will be translatable.
 
@@ -11,6 +11,7 @@ The `strings.json` contains translations for different things that the integrati
 | Category            | Description                                       |
 | ------------------- | ------------------------------------------------- |
 | `title`             | Title of the integration.                         |
+| `common`            | Shared strings.                                   |
 | `config`            | Translations for the config flow.                 |
 | `device`            | Translations for devices.                         |
 | `device_automation` | Translations for device automations.              |
@@ -20,11 +21,38 @@ The `strings.json` contains translations for different things that the integrati
 | `issues`            | Translations for repairs issues.                  |
 | `options`           | Translations for the options flow.                |
 | `selectors`         | Selectors of the integration.                     |
-| `services`          | Services of the integration.                      |
+| `services`          | Service actions of the integration.               |
 
 ### Title
 
 This category is just a string: the translation of the integration name. This key is optional and Home Assistant will fallback to the integration name if it is omitted. Only include this if it's not a product brand.
+
+### Shared strings
+
+Strings which are used more than once should be not be duplicated, instead references should be used to refer to the single definition. The reference can be any valid translation key. Optionally, shared strings can be placed in a `common` section.
+
+```json
+{
+  "common": {
+    "error_stale_api_key": "This message will be displayed if `stale_api_key` is returned as the abort reason."
+  },
+  "config": {
+    "error": {
+      "invalid_api_key": "This message will be displayed if `invalid_api_key` is returned as a flow error.",
+      // Reference to the common section
+      "stale_api_key": "[%key:component::new_integration::common::error_stale_api_key%]"
+    },
+  }
+  "options": {
+    "error": {
+      // Reference to another section in the same file
+      "invalid_api_key": "[%key:component::new_integration::config::error::invalid_api_key%]",
+      // Reference to the common section in the same file
+      "stale_api_key": "[%key:component::new_integration::common::error_stale_api_key%]"
+    },
+  }
+}
+```
 
 ### Config / Options
 
@@ -43,6 +71,12 @@ The translation strings for the configuration flow handler and the option flow h
         "description": "Markdown that is shown with the step.",
         "data": {
           "api_key": "The label for the `api_key` input field"
+        },
+        // Only needed if the form has sections
+        "sections": {
+          "auth_options": {
+            "name": "The label for the `auth_options` section"
+          }
         }
       }
     },
@@ -95,12 +129,16 @@ The translation for selectors are defined under the `selector` key. It supports 
 
 ```
 
-### Services
+### Service Actions
 
-The translations of service strings are defined under the `services` key.
+The translations of service actions strings are defined under the `services` key.
 
-It supports translating the `name` and `description` of each service,
-and the `name` and `description` of each service's `fields`.
+It supports translating the `name` and `description` of each action,
+`name` and `description` of each action's `fields`, and the `name` and `description` of
+each collapsible section of fields.
+
+Note that also the translations for `name` and `description` of fields which
+are displayed in a collapsible section should be under the `fields` key.
 
 ```json
 {
@@ -123,6 +161,11 @@ and the `name` and `description` of each service's `fields`.
           "name": "Speed",
           "description": "The speed to set."
         }
+      },
+      "sections": {
+        "advanced_fields": {
+          "name": "Advanced options"
+        }
       }
     }
   }
@@ -130,7 +173,7 @@ and the `name` and `description` of each service's `fields`.
 ```
 
 :::note
-Services may use selectors in their `fields`. The translation of those selectors can be provided using the `translation_key` property on the selector definition in the services.yaml file. See the [Selectors](#selectors) section and the [Service description](/docs/dev_101_services.md#service-descriptions) page for more information.
+Service actions may use selectors in their `fields`. The translation of those selectors can be provided using the `translation_key` property on the selector definition in the services.yaml file. See the [Selectors](#selectors) section and the [Service action description](/docs/dev_101_services.md#service-action-descriptions) page for more information.
 :::
 
 ### Device automations
@@ -179,7 +222,7 @@ The translation strings for exceptions are defined under the `exception` key in 
 
 ```
 
-Example of raising an exception with localization during a service call:
+Example of raising an exception with localization during a service action call:
 
 ```python
 async def async_select_index(hass: HomeAssistant, index: int) -> None:
@@ -424,6 +467,24 @@ If your integration provides entities under its domain, you will want to transla
             "diffuse": "Diffuse"
           }
         }
+      }
+    }
+  }
+}
+```
+
+#### Unit of measurement of entities
+
+Integrations can provide translations for units of measurement of its entities. To do this, provide an `entity` object, that contains translations for the units and set the entity's `translation_key` property to a key under a domain in the `entity` object.
+If the entity's `translation_key` property is not `None` and the `entity` object provides a translated unit of measurement, `SensorEntityDescription.native_unit_of_measurement` or `NumberEntityDescription.native_unit_of_measurement` should not be defined.
+
+The following example `strings.json` is for a `sensor` entity with its `translation_key` property set to `goal`:
+```json
+{
+  "entity": {
+    "sensor": {
+      "goal": {
+        "unit_of_measurement": "steps"
       }
     }
   }

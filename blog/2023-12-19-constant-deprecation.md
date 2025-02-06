@@ -1,6 +1,7 @@
 ---
 author: Robert Resch
 authorURL: https://github.com/edenhaus
+authorImageURL: https://avatars.githubusercontent.com/u/26537646?s=96&v=4
 title: "Deprecated constants create a log entry"
 ---
 

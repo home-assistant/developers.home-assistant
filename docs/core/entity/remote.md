@@ -1,5 +1,5 @@
 ---
-title: Remote Entity
+title: Remote entity
 sidebar_label: Remote
 ---
 
@@ -25,7 +25,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 An activity is a predefined activity or macro that puts the remote in a specific state. For example, a "Watch TV" activity may turn on multiple devices and change the channel to a specific channel.
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `RemoteEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.
@@ -38,7 +38,7 @@ and are combined using the bitwise or (`|`) operator.
 
 ## Methods
 
-### Turn On Command
+### Turn on command
 
 ```python
 class MyRemote(RemoteEntity):
@@ -50,7 +50,7 @@ class MyRemote(RemoteEntity):
          """Send the power on command."""
 ```
 
-### Turn Off Command
+### Turn off command
 
 ```python
 class MyRemote(RemoteEntity):
@@ -62,7 +62,7 @@ class MyRemote(RemoteEntity):
          """Send the power off command."""
 ```
 
-### Toggle Command
+### Toggle command
 
 ```python
 class MyRemote(RemoteEntity):
@@ -74,7 +74,7 @@ class MyRemote(RemoteEntity):
          """Toggle a device."""
 ```
 
-### Send Command
+### Send command
 
 ```python
 class MyRemote(RemoteEntity):
@@ -86,7 +86,7 @@ class MyRemote(RemoteEntity):
         """Send commands to a device."""
 ```
 
-### Learn Command
+### Learn command
 
 Only implement this method if the flag `SUPPORT_LEARN_COMMAND` is set.
 
@@ -100,7 +100,7 @@ class MyRemote(RemoteEntity):
         """Learn a command from a device."""
 ```
 
-### Delete Command
+### Delete command
 
 Only implement this method if the flag `SUPPORT_DELETE_COMMAND` is set.
 

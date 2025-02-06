@@ -1,5 +1,5 @@
 ---
-title: "Handling Setup Failures"
+title: "Handling setup failures"
 ---
 
 Your integration may not be able to be set up for a variety of reasons. The most common cases are because the device or service is offline or the credentials are no longer valid. Your integration must retry setup so it can recover as soon as reasonably possible when the device or service is back online without the user having to restart Home Assistant.
@@ -22,14 +22,13 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         raise ConfigEntryNotReady(f"Timeout while connecting to {device.ipaddr}") from ex
 ```
 
-If you are using a [DataUpdateCoordinator](integration_fetching_data#coordinated-single-api-poll-for-data-for-all-entities), calling `await coordinator.async_config_entry_first_refresh()` will also trigger this exception automaticlly if the first refresh failed.
+If you are using a [DataUpdateCoordinator](integration_fetching_data#coordinated-single-api-poll-for-data-for-all-entities), calling `await coordinator.async_config_entry_first_refresh()` will also trigger this exception automatically if the first refresh failed.
 
 If your integration supports discovery, Home Assistant will automatically retry as soon as your device or service gets discovered.
 
 #### Handling logging of a retry
 
-Pass the error message to `ConfigEntryNotReady` as the first argument. Home Assistant will log the retry once with a log level of
-`warning`, and subsequent retries are logged at `debug` level. The error message will also be propagated to the UI and shown on the integrations page. Suppose you do not set a message when raising `ConfigEntryNotReady`; in that case, Home Assistant will try to extract the reason from the exception that is the cause of `ConfigEntryNotReady` if it was propagated from another exception.
+Pass the error message to `ConfigEntryNotReady` as the first argument. Home Assistant will log at `debug` level. The error message will also be propagated to the UI and shown on the integrations page. Suppose you do not set a message when raising `ConfigEntryNotReady`; in that case, Home Assistant will try to extract the reason from the exception that is the cause of `ConfigEntryNotReady` if it was propagated from another exception.
 
 The integration should not log any non-debug messages about the retry, and should instead rely on the logic built-in to `ConfigEntryNotReady` to avoid spamming the logs.
 

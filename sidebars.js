@@ -5,6 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+const iqs_rules_by_tier = require('./docs/core/integration-quality-scale/_includes/tiers.json');
+const iqs_rules = Object.values(iqs_rules_by_tier).flat().map((rule) => {
+    if (typeof rule === "string") {
+        return rule;
+    }
+    return rule.id;
+});
+
+
+
 module.exports = {
   Addons: [
     "add-ons",
@@ -40,6 +50,8 @@ module.exports = {
       label: "Custom UI",
       items: [
         "frontend/custom-ui/custom-card",
+        "frontend/custom-ui/custom-card-feature",
+        "frontend/custom-ui/custom-badge",
         "frontend/custom-ui/custom-strategy",
         "frontend/custom-ui/custom-view",
         "frontend/custom-ui/creating-custom-panels",
@@ -105,6 +117,8 @@ module.exports = {
         "creating_integration_manifest",
         "config_entries_config_flow_handler",
         "config_entries_options_flow_handler",
+        "core/integration_diagnostics",
+        "core/integration_system_health",
         "configuration_yaml_index",
         "dev_101_services",
         "creating_platform_index",
@@ -132,8 +146,20 @@ module.exports = {
         "development_checklist",
         "creating_component_code_review",
         "creating_platform_code_review",
-        "integration_quality_scale_index",
       ],
+    },
+    {
+      type: "category",
+      label: "Integration Quality Scale",
+      link: {type: 'doc', id: 'core/integration-quality-scale/index'},
+      items: [
+        {type: 'doc', id: 'core/integration-quality-scale/checklist'},
+        {type: 'category', label: 'Rules', items: iqs_rules.map(rule => ({
+                type: 'doc',
+                id: `core/integration-quality-scale/rules/${rule.toLowerCase()}`
+              })
+          )}
+          ]
     },
     {
       type: "category",
@@ -203,8 +229,9 @@ module.exports = {
     {
       type: "category",
       label: "Conversation",
-      items: ["intent_conversation_api", "core/conversation/custom_agent"],
+      items: ["intent_conversation_api"],
     },
+    "core/llm/index",
     {
       type: "category",
       label: "Native App Integration",
@@ -285,6 +312,8 @@ module.exports = {
         "asyncio_101",
         "asyncio_categorizing_functions",
         "asyncio_working_with_async",
+        "asyncio_thread_safety",
+        "asyncio_blocking_operations",
       ],
     },
   ],

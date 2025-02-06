@@ -1,6 +1,6 @@
 ---
-title: To-do List Entity
-sidebar_label: To-do List
+title: To-do list entity
+sidebar_label: To-do list
 ---
 
 A To-do list entity is an entity that represents a To-do list. A To-do list contains
@@ -20,7 +20,7 @@ Properties should only return information from memory and not do I/O (like netwo
 
 A `TodoListEntity` state is the count of incomplete items in the To-do list.
 
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `TodoListEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.
@@ -37,10 +37,9 @@ and are combined using the bitwise or (`|`) operator.
 
 ## Methods
 
+### Create to-do items
 
-### Create To-do items
-
-A To-do list entity may support creating To-do items by specifying the `CREATE_TODO_ITEM`
+A to-do list entity may support creating to-do items by specifying the `CREATE_TODO_ITEM`
 supported feature.
 
 ```python
@@ -52,9 +51,9 @@ class MyTodoListEntity(TodoListEntity):
         """Add an item to the To-do list."""
 ```
 
-### Delete To-do items
+### Delete to-do items
 
-A To-do list entity may support deleting To-do items by specifying the `DELETE_TODO_ITEM`
+A To-do list entity may support deleting to-do items by specifying the `DELETE_TODO_ITEM`
 supported feature. Integrations must support deleting multiple items.
 
 ```python
@@ -66,9 +65,9 @@ class MyTodoListEntity(TodoListEntity):
         """Delete an item from the to-do list."""
 ```
 
-### Update To-do items
+### Update to-do items
 
-A To-do list entity may support updating To-do items by specifying the `UPDATE_TODO_ITEM`
+A to-do list entity may support updating to-do items by specifying the `UPDATE_TODO_ITEM`
 supported feature. The `TodoItem` field `uid` is always present and indicates
 which item should be updated. The item passed to update is a copy of the original
 item with fields updated or cleared.
@@ -82,12 +81,12 @@ class MyTodoListEntity(TodoListEntity):
         """Add an item to the To-do list."""
 ```
 
-### Move To-do items
+### Move to-do items
 
-A To-do list entity may support re-ordering To-do items in the list by specifying
-the `MOVE_TODO_ITEM` supported feature. The To-do item with the specified `uid`
+A to-do list entity may support re-ordering to-do items in the list by specifying
+the `MOVE_TODO_ITEM` supported feature. The to-do item with the specified `uid`
 should be moved to the position in the list after the one specified by `previous_uid` (`None` means move to the first
-position in the To-do list).
+position in the to-do list).
 
 ```python
 from homeassistant.components.todo import TodoListEntity

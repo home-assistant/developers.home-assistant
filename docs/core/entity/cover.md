@@ -1,5 +1,5 @@
 ---
-title: Cover Entity
+title: Cover entity
 sidebar_label: Cover
 ---
 
@@ -19,7 +19,18 @@ Properties should always only return information from memory and not do I/O (lik
 | is_closing | <code>bool &#124; None</code> | `None` | If the cover is closing or not. Used to determine `state`.
 | is_opening | <code>bool &#124; None</code> | `None` | If the cover is opening or not. Used to determine `state`.
 
-### Device Classes
+### States
+
+The state is defined by setting the above properties. The resulting state is using the `CoverState` enum to return one of the below members.
+
+| Value       | Description                                                        |
+|-------------|--------------------------------------------------------------------|
+| `CLOSED`    | The cover is closed.                                                |
+| `CLOSING`   | The cover is closing.                                               |
+| `OPENING`   | The cover is opening.                                               |
+| `OPEN`      | The cover is open.                                                  |
+
+### Device classes
 
 | Constant | Description
 |----------|-----------------------|
@@ -34,16 +45,7 @@ Properties should always only return information from memory and not do I/O (lik
 | `CoverDeviceClass.SHUTTER` | Control of shutters, which are linked slats that swing out/in to cover an opening or may be tilted to partially cover an opening, such as indoor or exterior window shutters.
 | `CoverDeviceClass.WINDOW` | Control of a physical window that opens and closes or may tilt.
 
-### States
-
-| Constant | Description
-|----------|------------------------|
-| `STATE_OPENING` | The cover is in the process of opening to reach a set position.
-| `STATE_OPEN` | The cover has reached the open position.
-| `STATE_CLOSING` | The cover is in the process of closing to reach a set position.
-| `STATE_CLOSED` | The cover has reach the closed position.
-
-## Supported Features
+## Supported features
 
 Supported features are defined by using values in the `CoverEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.

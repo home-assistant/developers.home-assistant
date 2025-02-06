@@ -1,12 +1,12 @@
 ---
-title: Data Entry Flow
+title: Data entry flow
 ---
 
 Data Entry Flow is a data entry framework that is part of Home Assistant. Data entry is done via data entry flows. A flow can represent a simple login form or a multi-step setup wizard for a component. A Flow Manager manages all flows that are in progress and handles creation of new flows.
 
 Data Entry Flow is used in Home Assistant to login, create config entries, handle options flow, repair issues.
 
-## Flow Manager
+## Flow manager
 
 This is the class that manages the flows that are in progress. When instantiating one, you pass in two async callbacks:
 
@@ -80,7 +80,7 @@ If the result type is `FlowResultType.ABORT`, the result should look like:
 }
 ```
 
-## Flow Handler
+## Flow handler
 
 Flow handlers will handle a single flow. A flow contains one or more steps. When a flow is instantiated, the `FlowHandler.init_step` step will be called. Each step has several possible results:
 
@@ -114,11 +114,12 @@ Data entry flows depend on translations for showing the text in the steps. It de
 
 For a more detailed explanation of `strings.json` see the [backend translation](/docs/internationalization/core) page.
 
-### Show Form
+### Show form
 
 This result type will show a form to the user to fill in. You define the current step, the schema of the data (using a mixture of voluptuous and/or [selectors](https://www.home-assistant.io/docs/blueprint/selectors/)) and optionally a dictionary of errors.
 
 ```python
+from homeassistant.data_entry_flow import section
 from homeassistant.helpers.selector import selector
 
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
@@ -127,10 +128,21 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         data_schema = {
             vol.Required("username"): str,
             vol.Required("password"): str,
+            # Items can be grouped by collapsible sections
+            vol.Required("ssl_options"): section(
+                vol.Schema(
+                    {
+                        vol.Required("ssl", default=True): bool,
+                        vol.Required("verify_ssl", default=True): bool,
+                    }
+                ),
+                # Whether or not the section is initially collapsed (default = False)
+                {"collapsed": False},
+            )
         }
 
         if self.show_advanced_options:
-            data_schema["allow_groups"] = selector({
+            data_schema[vol.Optional("allow_groups")] = selector({
                 "select": {
                     "options": ["all", "light", "switch"],
                 }
@@ -139,16 +151,57 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         return self.async_show_form(step_id="init", data_schema=vol.Schema(data_schema))
 ```
 
-#### Labels & Descriptions
+#### Grouping of input fields
+
+As shown in the example above, input fields can be visually grouped in sections. 
+
+Each section has a [translatable name and description](#labels--descriptions), and it's also possible to specify an icon.
+
+Grouping input fields by sections influences both how the inputs are displayed to the user and how user input is structured.
+In the example above, user input will be structured like this:
+
+```python
+{
+    "username": "user",
+    "password": "hunter2",
+    "ssl_options": {
+        "ssl": True,
+        "verify_ssl": False,
+    },
+}
+```
+
+Only a single level of sections is allowed; it's not possible to have sections inside a section.
+
+To specify an icon for a section, update `icons.json` according to this example:
+
+```json
+{
+  "config": {
+    "step": {
+      "user": {
+        "sections": {
+          "ssl_options": "mdi:lock"
+        }
+      }
+    }
+  }
+}
+```
+
+#### Labels & descriptions
 
 Translations for the form are added to `strings.json` in a key for the `step_id`. That object may contain the folowing keys:
 
-|        Key         |       Value        | Notes                                                                                                                                        |
-| :----------------: | :----------------: | :------------------------------------------------------------------------------------------------------------------------------------------- |
-|      `title`       |    Form heading    | Do not include your brand name. It will be automatically injected from your manifest.                                                        |
-|   `description`    | Form instructions  | Optional. Do not link to the documentation as that is linked automatically. Do not include "basic" information like "Here you can set up X". |
-|       `data`       |    Field labels    | Keep succinct and consistent with other integrations whenever appropriate for the best user experience.                                      |
-| `data_description` | Field descriptions | Optional explanatory text to show below the field.                                                                                           |
+|        Key         |       Value         | Notes                                                                                                                                        |
+| :----------------: | :-----------------: | :------------------------------------------------------------------------------------------------------------------------------------------- |
+|      `title`       |    Form heading     | Do not include your brand name. It will be automatically injected from your manifest.                                                        |
+|   `description`    | Form instructions   | Optional. Do not link to the documentation as that is linked automatically. Do not include "basic" information like "Here you can set up X". |
+|       `data`       |    Field labels     | Keep succinct and consistent with other integrations whenever appropriate for the best user experience.                                      |
+| `data_description` | Field descriptions  | Optional explanatory text to show below the field.                                                                                           |
+|     `section`      | Section translation | Translations for sections, each section may have `name` and `description` of the section and `data` and `data_description` for its fields.   |
+
+More details about translating data entry flows can be found in the [core translations documentation](/docs/internationalization/core).
 
 The field labels and descriptions are given as a dictionary with keys corresponding to your schema. Here is a simple example:
 
@@ -160,18 +213,30 @@ The field labels and descriptions are given as a dictionary with keys correspond
           "title": "Add Group",
           "description": "Some description",
           "data": {
-              "entities": "Entities",
+              "entities": "Entities"
           },
           "data_description": {
-              "entities": "The entities to add to the group",
+              "entities": "The entities to add to the group"
           },
+          "sections": {
+              "additional_options": {
+                  "name": "Additional options",
+                  "description": "A description of the section",
+                  "data": {
+                      "advanced_group_option": "Advanced group option"
+                  },
+                  "data_description": {
+                      "advanced_group_option": "A very complicated option which does abc"
+                  },
+              }
+          }
       }
     }
   }
 }
 ```
 
-#### Enabling Browser Autofill
+#### Enabling browser autofill
 
 Suppose your integration is collecting form data which can be automatically filled by browsers or password managers, such as login credentials or contact information. You should enable autofill whenever possible for the best user experience and accessibility. There are two options to enable this.
 
@@ -208,7 +273,7 @@ STEP_USER_DATA_SCHEMA = vol.Schema(
 )
 ```
 
-#### Defaults & Suggestions
+#### Defaults & suggestions
 
 If you'd like to pre-fill data in the form, you have two options. The first is to use the `default` parameter. This will both pre-fill the field, and act as the default value in case the user leaves the field empty.
 
@@ -300,7 +365,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         ...
 ```
 
-### Create Entry
+### Create entry
 
 When the result is "Create Entry", an entry will be created and passed to the parent of the flow manager. A success message is shown to the user and the flow is finished. You create an entry by passing a title, data and optionally options. The title can be used in the UI to indicate to the user which entry it is. Data and options can be any data type, as long as they are JSON serializable. Options are used for mutable data, for example a radius. Whilst Data is used for immutable data that isn't going to change in an entry, for example location data.
 
@@ -331,7 +396,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         return self.async_abort(reason="not_supported")
 ```
 
-### External Step & External Step Done
+### External step & external step done
 
 It is possible that a user needs to finish a config flow by doing actions on an external website. For example, setting up an integration by being redirected to an external webpage. This is commonly used by integrations that use OAuth2 to authorize a user.
 
@@ -393,7 +458,7 @@ async def handle_result(hass, flow_id, data):
         return "Invalid config flow specified"
 ```
 
-### Show Progress & Show Progress Done
+### Show progress & show progress done
 
 If a data entry flow step needs a considerable amount of time to finish, we should inform the user about this.
 
@@ -453,9 +518,9 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return self.async_create_entry(title="Some title", data={})
 ```
 
-### Show Menu
+### Show menu
 
-This will show a navigation menu to the user to easily pick the next step. The menu labels can be hardcoded by specifying a dictionary of {`step_id`: `label`} or translated via `strings.json` when specifying a list.
+This will show a navigation menu to the user to easily pick the next step. The menu labels can be hardcoded by specifying a dictionary of `{step_id: label}` or translated via `strings.json` when specifying a list.
 
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):

@@ -2,12 +2,14 @@
 title: "Testing your code"
 ---
 
-As it states in the [Style guidelines section](development_guidelines.md) all code is checked to verify the following:
+As stated in the [Style guidelines section](development_guidelines.md) all code is checked to verify the following:
 
 - All the unit tests pass
 - All code passes the checks from the linting tools
 
 Local testing is done using [pytest](https://docs.pytest.org/) and using [pre-commit](https://pre-commit.com/) for running out linters, which has been installed as part of running `script/setup` in the [virtual environment](development_environment.mdx).
+
+Python test requirements need to be installed before tests can be run. This can be achieved by using the VScode devcontainer and the corresponding task. Check the [devcontainer documentation](/docs/development_environment#tasks) for guidance about running tasks.
 
 To run our linters, on the full code base, run the following command:
 
@@ -15,11 +17,21 @@ To run our linters, on the full code base, run the following command:
 pre-commit run --all-files
 ```
 
+To run the full test suite, more dependencies are required than what is set up in the devcontainer by default. To install all dependencies, activate the virtual environment and run the command:
+
+```shell
+uv pip install -r requirements_test_all.txt
+```
+
+Or, in Visual Studio Code, launch the **Install all Test Requirements** task.
+
 To start the tests, and run the full test suite, activate the virtual environment and run the command:
 
 ```shell
 pytest tests
 ```
+
+Or, in Visual Studio Code, launch the **Pytest** task.
 
 It might be required that you install additional packages depending on your distribution/operating system:
 
@@ -43,8 +55,11 @@ If you are working on tests for an integration and you changed the dependencies,
 Next you can update all dependencies in your development environment by running:
 
 ```shell
-pip3 install -r requirements_test_all.txt
+uv pip install -r requirements_test_all.txt
 ```
+
+Or, in Visual Studio Code, launch the **Install all Test Requirements** task.
+
 ### Running a limited test suite
 
 You can pass arguments to `pytest` to be able to run single test suites or test files.
@@ -71,6 +86,8 @@ the following command is recommended:
 pytest ./tests/components/<your_component>/ --cov=homeassistant.components.<your_component> --cov-report term-missing -vv
 ```
 
+Or, in Visual Studio Code, launch the **Code Coverage** task.
+
 ### Preventing linter errors
 
 Several linters are setup to run automatically when you try to commit as part of running `script/setup` in the [virtual environment](development_environment.mdx).
@@ -81,10 +98,12 @@ You can also run these linters manually :
 pre-commit run --show-diff-on-failure
 ```
 
+Or, in Visual Studio Code, launch the **Pre-commit** task.
+
 The linters are also available directly, you can run tests on individual files:
 
 ```shell
-ruff homeassistant/core.py
+ruff check homeassistant/core.py
 pylint homeassistant/core.py
 ```
 
@@ -97,7 +116,7 @@ If you can't avoid a PyLint warning, add a comment to disable the PyLint check f
 - Make sure to not interact with any integration details in tests of integrations. Following this pattern will make the tests more robust for changes in the integration.
   - Set up the integration with the core interface either [`async_setup_component`](https://github.com/home-assistant/core/blob/4cce724473233d4fb32c08bd251940b1ce2ba570/homeassistant/setup.py#L44-L46) or [`hass.config_entries.async_setup`](https://github.com/home-assistant/core/blob/4cce724473233d4fb32c08bd251940b1ce2ba570/homeassistant/config_entries.py#L693) if the integration supports config entries.
   - Assert the entity state via the core state machine [`hass.states`](https://github.com/home-assistant/core/blob/4cce724473233d4fb32c08bd251940b1ce2ba570/homeassistant/core.py#L887).
-  - Call services via the core service registry [`hass.services`](https://github.com/home-assistant/core/blob/4cce724473233d4fb32c08bd251940b1ce2ba570/homeassistant/core.py#L1133).
+  - Perform service action calls via the core service registry [`hass.services`](https://github.com/home-assistant/core/blob/4cce724473233d4fb32c08bd251940b1ce2ba570/homeassistant/core.py#L1133).
   - Assert `DeviceEntry` state via the [device registry](https://github.com/home-assistant/core/blob/4cce724473233d4fb32c08bd251940b1ce2ba570/homeassistant/helpers/device_registry.py#L101).
   - Assert entity registry `RegistryEntry` state via the [entity registry](https://github.com/home-assistant/core/blob/4cce724473233d4fb32c08bd251940b1ce2ba570/homeassistant/helpers/entity_registry.py#L120).
   - Modify a `ConfigEntry` via the config entries interface [`hass.config_entries`](https://github.com/home-assistant/core/blob/4cce724473233d4fb32c08bd251940b1ce2ba570/homeassistant/config_entries.py#L570).
@@ -153,6 +172,8 @@ the `--snapshot-update` flag:
 ```shell
 pytest tests/components/example/test_sensor.py --snapshot-update
 ```
+
+Or, in Visual Studio Code, launch the **Update syrupy snapshots** task.
 
 This will create a snapshot file in the `tests/components/example/snapshots`.
 The snapshot file is named after the test file, in this case `test_sensor.ambr`,

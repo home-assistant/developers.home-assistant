@@ -1,5 +1,5 @@
 ---
-title: "Python Library: Authentication"
+title: "Python library: authentication"
 sidebar_label: Authentication
 ---
 
@@ -34,13 +34,8 @@ class Auth:
 
     async def request(self, method: str, path: str, **kwargs) -> ClientResponse:
         """Make a request."""
-        headers = kwargs.get("headers")
-
-        if headers is None:
-            headers = {}
-        else:
+        if headers := kwargs.pop("headers", {}):
             headers = dict(headers)
-
         headers["authorization"] = self.access_token
 
         return await self.websession.request(
@@ -86,13 +81,8 @@ class Auth:
 
     def request(self, method: str, path: str, **kwargs) -> requests.Response:
         """Make a request."""
-        headers = kwargs.get("headers")
-
-        if headers is None:
-            headers = {}
-        else:
+        if headers := kwargs.pop("headers", {}):
             headers = dict(headers)
-
         headers["authorization"] = self.access_token
 
         return requests.request(
@@ -142,11 +132,7 @@ class AbstractAuth(ABC):
 
     async def request(self, method, url, **kwargs) -> ClientResponse:
         """Make a request."""
-        headers = kwargs.get("headers")
-
-        if headers is None:
-            headers = {}
-        else:
+        if headers := kwargs.pop("headers", {}):
             headers = dict(headers)
 
         access_token = await self.async_get_access_token()

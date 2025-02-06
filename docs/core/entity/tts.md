@@ -1,6 +1,6 @@
 ---
-title: Text To Speech Entity
-sidebar_label: Text To Speech
+title: Text-to-speech entity
+sidebar_label: Text-to-speech
 ---
 
 A text-to-speech (TTS) entity enables Home Assistant to speak to you.

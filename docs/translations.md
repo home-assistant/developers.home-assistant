@@ -1,5 +1,5 @@
 ---
-title: "Contributing Translation"
+title: "Contributing translation"
 ---
 
 Translations for Home Assistant are managed through [Lokalise](https://lokalise.com/), an online translation management tool. Our translations are split between four projects: a backend project for platform-specific translations, a frontend project for UI translations, and two for the official companion apps. Click the links below to join the projects! Even if your language is completely translated, extra proofreading is a big help! Please feel free to review the existing translations, and vote for alternatives that might be more appropriate.
@@ -51,13 +51,16 @@ Region specific translations (`en-US`, `fr-CA`) will only be included if transla
 Note: Sometimes you have to change the tag in Lokalise (Language -> Language settings -> custom ISO code).
 
 ## Language specific guidelines
+
 Most languages have multiple possible translations of a sentence. Please take a look at the guidelines for your language here, where you can also find some typical mistakes to prevent.
 The sections are written in their corresponding languages, as this makes explaining the grammar easier and only native speakers should submit translations (see [Rules](#rules)).
 
 ### German
+
 - Du/Sie: Duze in den Übersetzungen, und verwende nicht das formale "Sie".
 
 #### Typische Fehler
+
 - Achte auf den richtigen Imperativ. Der Imperativ ist die Befehlsform, z. B. "Gib mir das Wasser". Falsch wäre hier: "Gebe mir das Wasser" (siehe [Bildung des Imperativs](https://www.duden.de/sprachwissen/sprachratgeber/Bildung-des-Imperativs)).
 
 ### French

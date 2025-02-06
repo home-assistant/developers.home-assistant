@@ -1,0 +1,68 @@
+{
+  "bronze": [
+    "action-setup",
+    "appropriate-polling",
+    "brands",
+    "common-modules",
+    "config-flow-test-coverage",
+    {
+      "id": "config-flow",
+      "subchecks": [
+        "Uses `data_description` to give context to fields",
+        "Uses `ConfigEntry.data` and `ConfigEntry.options` correctly"
+      ]
+    },
+    "dependency-transparency",
+    "docs-actions",
+    "docs-high-level-description",
+    "docs-installation-instructions",
+    "docs-removal-instructions",
+    "entity-event-setup",
+    "entity-unique-id",
+    "has-entity-name",
+    "runtime-data",
+    "test-before-configure",
+    "test-before-setup",
+    "unique-config-entry"
+  ],
+  "silver": [
+    "action-exceptions",
+    "config-entry-unloading",
+    "docs-configuration-parameters",
+    "docs-installation-parameters",
+    "entity-unavailable",
+    "integration-owner",
+    "log-when-unavailable",
+    "parallel-updates",
+    "reauthentication-flow",
+    "test-coverage"
+  ],
+  "gold": [
+    "devices",
+    "diagnostics",
+    "discovery-update-info",
+    "discovery",
+    "docs-data-update",
+    "docs-examples",
+    "docs-known-limitations",
+    "docs-supported-devices",
+    "docs-supported-functions",
+    "docs-troubleshooting",
+    "docs-use-cases",
+    "dynamic-devices",
+    "entity-category",
+    "entity-device-class",
+    "entity-disabled-by-default",
+    "entity-translations",
+    "exception-translations",
+    "icon-translations",
+    "reconfiguration-flow",
+    "repair-issues",
+    "stale-devices"
+  ],
+  "platinum": [
+    "async-dependency",
+    "inject-websession",
+    "strict-typing"
+  ]
+}

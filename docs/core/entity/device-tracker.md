@@ -1,6 +1,6 @@
 ---
-title: Device Tracker Entity
-sidebar_label: Device Tracker
+title: Device tracker entity
+sidebar_label: Device tracker
 ---
 
 A device tracker is a read-only entity that provides presence information. There are two types of device tracker entities, a ScannerEntity and a TrackerEntity.
@@ -17,18 +17,14 @@ Derive a platform entity from [`homeassistant.components.device_tracker.config_e
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
-:::caution
-ScannerEntity does not support attribute shorthand for [property implementation](../entity.md#entity-class-or-instance-attributes)
-:::
-
-| Name          | Type                         | Default      | Description                                           |
-| ------------- | ---------------------------- | ------------ | ----------------------------------------------------- |
-| battery_level | <code>int &#124; None</code> | `None`       | The battery level of the device.                      |
-| hostname      | <code>str &#124; None</code> | `None`       | The hostname of the device.                           |
-| ip_address    | <code>str &#124; None</code> | `None`       | The IP address of the device.                         |
-| is_connected  | `bool`                       | **Required** | The connection state of the device.                   |
-| mac_address   | <code>str &#124; None</code> | `None`       | The MAC address of the device.                        |
-| source_type   | `SourceType`                 | **Required** | The source type, eg `gps` or `router`, of the device. |
+| Name          | Type                         | Default             | Description                         |
+| ------------- | ---------------------------- | ------------------- | ----------------------------------- |
+| battery_level | <code>int &#124; None</code> | `None`              | The battery level of the device.    |
+| hostname      | <code>str &#124; None</code> | `None`              | The hostname of the device.         |
+| ip_address    | <code>str &#124; None</code> | `None`              | The IP address of the device.       |
+| is_connected  | `bool`                       | **Required**        | The connection state of the device. |
+| mac_address   | <code>str &#124; None</code> | `None`              | The MAC address of the device.      |
+| source_type   | `SourceType`                 | `SourceType.ROUTER` | The source type of the device.      |
 
 ### DHCP discovery
 
@@ -48,15 +44,11 @@ Derive a platform entity from [`homeassistant.components.device_tracker.config_e
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
-:::caution
-TrackerEntity does not support attribute shorthand for [property implementation](../entity.md#entity-class-or-instance-attributes)
-:::
-
-| Name              | Type                           | Default      | Description                                           |
-| ----------------- | ------------------------------ | ------------ | ----------------------------------------------------- |
-| battery_level     | <code>int &#124; None</code>   | `None`       | The battery level of the device.                      |
-| latitude          | <code>float &#124; None</code> | `None`       | The latitude coordinate of the device.                |
-| location_accuracy | `int`                          | `0`          | The location accuracy (m) of the device.              |
-| location_name     | <code>str &#124; None</code>   | `None`       | The location name of the device.                      |
-| longitude         | <code>float &#124; None</code> | `None`       | The longitude coordinate of the device.               |
-| source_type       | SourceType                     | **Required** | The source type, eg `gps` or `router`, of the device. |
+| Name              | Type                           | Default          | Description                              |
+| ----------------- | ------------------------------ | ---------------- | ---------------------------------------- |
+| battery_level     | <code>int &#124; None</code>   | `None`           | The battery level of the device.         |
+| latitude          | <code>float &#124; None</code> | `None`           | The latitude coordinate of the device.   |
+| location_accuracy | `int`                          | `0`              | The location accuracy (m) of the device. |
+| location_name     | <code>str &#124; None</code>   | `None`           | The location name of the device.         |
+| longitude         | <code>float &#124; None</code> | `None`           | The longitude coordinate of the device.  |
+| source_type       | SourceType                     | `SourceType.GPS` | The source type of the device.           |

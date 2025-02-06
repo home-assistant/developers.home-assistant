@@ -1,10 +1,10 @@
 ---
-title: Config Flow
+title: Config flow
 ---
 
 Integrations can be set up via the user interface by adding support for a config flow to create a config entry. Components that want to support config entries will need to define a Config Flow Handler. This handler will manage the creation of entries from user input, discovery or other sources (like Home Assistant OS).
 
-Config Flow Handlers control the data that is stored in a config entry. This means that there is no need to validate that the config is correct when Home Assistant starts up. It will also prevent breaking changes, because we will be able to migrate configuration entries to new formats if the version changes.
+Config Flow Handlers control the data that is stored in a config entry. This means that there is no need to validate that the config is correct when Home Assistant starts up. It will also prevent breaking changes because we will be able to migrate configuration entries to new formats if the version changes.
 
 When instantiating the handler, Home Assistant will make sure to load all dependencies and install the requirements of the component.
 
@@ -14,7 +14,7 @@ You need to update your integrations manifest to inform Home Assistant that your
 
 ## Defining your config flow
 
-Config entries uses the [data flow entry framework](data_entry_flow_index.md) to define their config flows. The config flow needs to be defined in the file `config_flow.py` in your integration folder, extend `homeassistant.config_entries.ConfigFlow` and pass a `domain` key as part of inheriting `ConfigFlow`.
+Config entries use the [data flow entry framework](data_entry_flow_index.md) to define their config flows. The config flow needs to be defined in the file `config_flow.py` in your integration folder, extend `homeassistant.config_entries.ConfigFlow` and pass a `domain` key as part of inheriting `ConfigFlow`.
 
 ```python
 from homeassistant import config_entries
@@ -30,6 +30,21 @@ class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 ```
 
 Once you have updated your manifest and created the `config_flow.py`, you will need to run `python3 -m script.hassfest` (one time only) for Home Assistant to activate the config entry for your integration.
+
+## Config flow title
+
+The title of a config flow can be influenced by integrations, and is determined in this priority order:
+
+1. If `title_placeholders` is set to a non-empty dictionary in the config flow, it will be used to dynamically calculate the config flow's title. Reauth and reconfigure flows automatically set `title_placeholders` to `{"name": config_entry_title}`.
+   1. If the integration provides a localized `flow_title`, that will be used, with any translation placeholders substituted from the `title_placeholders`.
+   2. If the integration does not provide a `flow_title` but the `title_placeholders` includes a `name`, the `name` will be used as the flow's title.
+2. Set the flow title to the integration's localized `title`, if it exists.
+3. Set the flow title to the integration manifest's `name`, if it exists.
+4. Set the flow title to the integration's domain.
+
+Note that this priority order means that:
+- A localized `flow_title` is ignored if the `title_placeholders` dictionary is missing or empty, even if the localized `flow_title` does not have any placeholders
+- If `title_placeholders` is not empty, but there's no localized `flow_title` and the `title_placeholders` does not include a `name`, it is ignored.
 
 ## Defining steps
 
@@ -63,15 +78,43 @@ There are a few step names reserved for system use:
 | `user`      | Invoked when a user initiates a flow via the user interface or when discovered and the matching and discovery step are not defined.                                                                                                  |
 | `reconfigure`      | Invoked when a user initiates a flow to reconfigure an existing config entry via the user interface.                                                                                                  |
 | `zeroconf`  | Invoked if your integration has been discovered via Zeroconf/mDNS as specified [using `zeroconf` in the manifest](creating_integration_manifest.md#zeroconf). |
+| `reauth`    | Invoked if your integration indicates it [requires reauthentication, e.g., due to expired credentials](#reauthentication). |
+| `import`    | Reserved for migrating from YAML configuration to config entries. |
 
 ## Unique IDs
 
-A config flow can attach a unique ID, which must be a string, to a config flow to avoid the same device being set up twice. When a unique ID is set, it will immediately abort if another flow is in progress for this unique ID. You can also quickly abort if there is already an existing config entry for this ID. Config entries will get the unique ID of the flow that creates them.
+A config flow can attach a unique ID, which must be a string, to a config flow to avoid the same device being set up twice.
+
+By setting a unique ID, users will have the option to ignore the discovery of your config entry. That way, they won't be bothered about it anymore.
+If the integration uses Bluetooth, DHCP, HomeKit, Zeroconf/mDNS, USB, or SSDP/uPnP to be discovered, supplying a unique ID is required.
+
+If a unique ID isn't available, alternatively, the `bluetooth`, `dhcp`, `zeroconf`, `hassio`, `homekit`, `ssdp`, `usb`, and `discovery` steps can be omitted, even if they are configured in
+the integration manifest. In that case, the `user` step will be called when the item is discovered.
+
+Alternatively, if an integration can't get a unique ID all the time (e.g., multiple devices, some have one, some don't), a helper is available
+that still allows for discovery, as long as there aren't any instances of the integration configured yet.
+
+Here's an example of how to handle discovery where a unique ID is not always available:
+
+```python
+if device_unique_id:
+    await self.async_set_unique_id(device_unique_id)
+else:
+    await self._async_handle_discovery_without_unique_id()
+```
+
+### Managing Unique IDs in Config Flows
+
+When a unique ID is set, the flow will immediately abort if another flow is in progress for this unique ID. You can also quickly abort if there is already an existing config entry for this ID. Config entries will get the unique ID of the flow that creates them.
 
 Call inside a config flow step:
 
 ```python
+# Assign a unique ID to the flow and abort the flow
+# if another flow with the same unique ID is in progress
 await self.async_set_unique_id(device_unique_id)
+
+# Abort the flow if a config entry with the same unique ID exists
 self._abort_if_unique_id_configured()
 ```
 
@@ -87,22 +130,7 @@ Should the config flow then abort, the text resource with the key `already_confi
 }
 ```
 
-By setting a unique ID, users will have the option to ignore the discovery of your config entry. That way, they won't be bothered about it anymore.
-If the integration uses Bluetooth, DHCP, HomeKit, Zeroconf/mDNS, USB, or SSDP/uPnP to be discovered, supplying a unique ID is required.
-
-If a unique ID isn't available, alternatively, the `bluetooth`, `dhcp`, `zeroconf`, `hassio`, `homekit`, `ssdp`, `usb`, and `discovery` steps can be omitted, even if they are configured in
-the integration manifest. In that case, the `user` step will be called when the item is discovered.
-
-Alternatively, if an integration can't get a unique ID all the time (e.g., multiple devices, some have one, some don't), a helper is available
-that still allows for discovery, as long as there aren't any instances of the integrations configured yet.
-
-```python
-if device_unique_id:
-  await self.async_set_unique_id(device_unique_id)
-await self._async_handle_discovery_without_unique_id()
-```
-
-### Unique ID Requirements
+### Unique ID requirements
 
 A unique ID is used to match a config entry to the underlying device or API. The unique ID must be stable, should not be able to be changed by the user and must be a string.
 
@@ -137,25 +165,16 @@ The Unique ID can be used to update the config entry data when device access det
 - Hostname if it can be changed by the user
 - URL
 
-### Unignoring
-
-Your configuration flow can add support to re-discover the previously ignored entry by implementing the unignore step in the config flow.
-
-```python
-async def async_step_unignore(self, user_input):
-    unique_id = user_input["unique_id"]
-    await self.async_set_unique_id(unique_id)
-
-    # TODO: Discover devices and find the one that matches the unique ID.
-
-    return self.async_show_form(…)
-```
-
 ## Discovery steps
 
 When an integration is discovered, their respective discovery step is invoked (ie `async_step_dhcp` or `async_step_zeroconf`) with the discovery information. The step will have to check the following things:
 
 - Make sure there are no other instances of this config flow in progress of setting up the discovered device. This can happen if there are multiple ways of discovering that a device is on the network.
+  - In most cases, it's enough to set the unique ID on the flow and check if there's already a config entry with the same unique ID as explained in the section about [managing unique IDs in config flows](#managing-unique-ids-in-config-flows)
+  - In some cases, a unique ID can't be determined, or the unique ID is ambiguous because different discovery sources may have different ways to calculate it. In such cases:
+    1. Implement the method `def is_matching(self, other_flow: Self) -> bool` on the flow.
+    2. Call `hass.config_entries.flow.async_has_matching_flow(self)`.
+    3. Your flow's `is_matching` method will then be called once for each other ongoing flow.
 - Make sure that the device is not already set up.
 - Invoking a discovery step should never result in a finished flow and a config entry. Always confirm with the user.
 
@@ -179,7 +198,7 @@ To get started, run `python3 -m script.scaffold config_flow_oauth2` and follow t
 
 ## Translations
 
-Translations for the config flow handlers are defined under the `config` key in the component translation file `strings.json`. Example of the Hue component:
+[Translations for the config flow](/docs/internationalization/core#config--options) handlers are defined under the `config` key in the component translation file `strings.json`. Example of the Hue component:
 
 ```json
 {
@@ -215,7 +234,7 @@ Translations for the config flow handlers are defined under the `config` key in 
 
 When the translations are merged into Home Assistant, they will be automatically uploaded to [Lokalise](https://lokalise.co/) where the translation team will help to translate them in other languages. While developing locally, you will need to run `python3 -m script.translations develop` to see changes made to `strings.json` [More info on translating Home Assistant.](translations.md)
 
-## Config Entry Migration
+## Config entry migration
 
 As mentioned above - each Config Entry has a version assigned to it. This is to be able to migrate Config Entry data to new formats when Config Entry schema changes.
 
@@ -227,25 +246,25 @@ The version is made of a major and minor version. If minor versions differ but m
 # Example migration function
 async def async_migrate_entry(hass, config_entry: ConfigEntry):
     """Migrate old entry."""
-    _LOGGER.debug("Migrating from version %s", config_entry.version)
+    _LOGGER.debug("Migrating configuration from version %s.%s", config_entry.version, config_entry.minor_version)
 
     if config_entry.version > 1:
-      # This means the user has downgraded from a future version
-      return False
+        # This means the user has downgraded from a future version
+        return False
 
     if config_entry.version == 1:
 
-        new = {**config_entry.data}
-        config_entry.minor_version < 2:
+        new_data = {**config_entry.data}
+        if config_entry.minor_version < 2:
             # TODO: modify Config Entry data with changes in version 1.2
             pass
-        config_entry.minor_version < 3:
+        if config_entry.minor_version < 3:
             # TODO: modify Config Entry data with changes in version 1.3
             pass
 
-        hass.config_entries.async_update_entry(config_entry, data=new, minor_version=3, version=1)
+        hass.config_entries.async_update_entry(config_entry, data=new_data, minor_version=3, version=1)
 
-    _LOGGER.debug("Migration to version %s.%s successful", config_entry.version, config_entry.minor_version)
+    _LOGGER.debug("Migration to configuration version %s.%s successful", config_entry.version, config_entry.minor_version)
 
     return True
 ```
@@ -264,7 +283,13 @@ class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
     async def async_step_reconfigure(self, user_input: dict[str, Any] | None = None):
         if user_input is not None:
-            pass  # TODO: process user input
+            # TODO: process user input
+            self.async_set_unique_id(user_id)
+            self._abort_if_unique_id_mismatch()
+            return self.async_update_reload_and_abort(
+                self._get_reconfigure_entry(),
+                data_updates=data,
+            )
 
         return self.async_show_form(
             step_id="reconfigure",
@@ -272,9 +297,19 @@ class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
         )
 ```
 
+On success, reconfiguration flows are expected to update the current entry and abort; they should not create a new entry.
+This is usually done with the `return self.async_update_reload_and_abort` helper.
+Automated tests should verify that the reconfigure flow updates the existing config entry and does not create additional entries.
+
+Checking whether you are in a reconfigure flow can be done using `if self.source == SOURCE_RECONFIGURE`.
+It is also possible to access the corresponding config entry using `self._get_reconfigure_entry()`.
+Ensuring that the `unique_id` is unchanged should be done using `await self.async_set_unique_id` followed by `self._abort_if_unique_id_mismatch()`.
+
+
 ## Reauthentication
 
-Gracefully handling authentication errors such as invalid, expired, or revoked tokens is needed to advance on the [Integration Qualily Scale](integration_quality_scale_index.md). This example of how to add reauth to the OAuth flow created by `script.scaffold` following the pattern in [Building a Python library](api_lib_auth.md#oauth2).
+Gracefully handling authentication errors such as invalid, expired, or revoked tokens is needed to advance on the [Integration Quality Scale](core/integration-quality-scale). This example of how to add reauth to the OAuth flow created by `script.scaffold` following the pattern in [Building a Python library](api_lib_auth.md#oauth2).
+If you are looking for how to trigger the reauthentication flow, see [handling expired credentials](integration_setup_failures.md#handling-expired-credentials).
 
 This example catches an authentication exception in config entry setup in `__init__.py` and instructs the user to visit the integrations page in order to reconfigure the integration.
 
@@ -308,16 +343,15 @@ class OAuth2FlowHandler(
 ):
     """Config flow to handle OAuth2 authentication."""
 
-    reauth_entry: ConfigEntry | None = None
-
-    async def async_step_reauth(self, user_input=None):
+    async def async_step_reauth(
+        self, entry_data: Mapping[str, Any]
+    ) -> ConfigFlowResult:
         """Perform reauth upon an API authentication error."""
-        self.reauth_entry = self.hass.config_entries.async_get_entry(
-            self.context["entry_id"]
-        )
         return await self.async_step_reauth_confirm()
 
-    async def async_step_reauth_confirm(self, user_input=None):
+    async def async_step_reauth_confirm(
+        self, user_input: dict[str, Any] | None = None
+    ) -> ConfigFlowResult:
         """Dialog that informs the user that reauth is required."""
         if user_input is None:
             return self.async_show_form(
@@ -328,14 +362,18 @@ class OAuth2FlowHandler(
 
     async def async_oauth_create_entry(self, data: dict) -> dict:
         """Create an oauth config entry or update existing entry for reauth."""
-        if self.reauth_entry:
+        self.async_set_unique_id(user_id)
+        if self.source == SOURCE_REAUTH:
+            self._abort_if_unique_id_mismatch()
             return self.async_update_reload_and_abort(
-                self.reauth_entry,
-                data=data,
+                self._get_reauth_entry(),
+                data_updates=data,
             )
+        self._abort_if_unique_id_configured()
         return await super().async_oauth_create_entry(data)
 ```
-By default, the `async_update_reload_and_abort` helper method aborts the flow with `reauth_successful` after update and reload.
+
+By default, the `async_update_reload_and_abort` helper method aborts the flow with `reauth_successful` after update and reload. By default, the entry will always be reloaded. If the config entry only should be reloaded in case the config entry was updated, specify `reload_even_if_entry_is_unchanged=False`.
 
 Depending on the details of the integration, there may be additional considerations such as ensuring the same account is used across reauth, or handling multiple config entries.
 
@@ -361,7 +399,14 @@ See [Translations](#translations) local development instructions.
 
 Authentication failures (such as a revoked oauth token) can be a little tricky to manually test. One suggestion is to make a copy of `config/.storage/core.config_entries` and manually change the values of `access_token`, `refresh_token`, and `expires_at` depending on the scenario you want to test. You can then walk advance through the reauth flow and confirm that the values get replaced with new valid tokens.
 
+On success, reauth flows are expected to update the current entry and abort; they should not create a new entry.
+This is usually done with the `return self.async_update_reload_and_abort` helper.
 Automated tests should verify that the reauth flow updates the existing config entry and does not create additional entries.
+
+Checking whether you are in a reauth flow can be done using `if self.source == SOURCE_REAUTH`.
+It is also possible to access the corresponding config entry using `self._get_reauth_entry()`.
+Ensuring that the `unique_id` is unchanged should be done using `await self.async_set_unique_id` followed by `self._abort_if_unique_id_mismatch()`.
+
 
 ## Testing your config flow
 
