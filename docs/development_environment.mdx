@@ -65,7 +65,15 @@ It is also possible to debug a remote Home Assistance instance (e.g., production
 
 _You only need these instructions if you do not want to use devcontainers._
 
-It is also possible to set up a more traditional development environment. See the section below for your operating system. Make sure your Python version is 3.12.
+It is also possible to set up a more traditional development environment. See the section below for your operating system. Make sure your Python version is 3.13.
+
+:::note
+If you proceed without the correct Python version installed, you will end up with a virtual environment that is incompatible with Home Assistant. To reset and try again after installing the correct version, clear `venv` and recreate it with the correct Python version:
+```
+python3.13 -m venv --clear venv
+python3.13 -m venv venv
+```
+:::
 
 ### Developing on Ubuntu / Debian
 
@@ -129,14 +137,6 @@ Install the requirements with a provided script named `setup`.
 ```shell
 script/setup
 ```
-
-:::note
-If the setup script gives you an error message that has to do with your python version not matching, you may need to clear the virtual environment and recreate it with the correct version. For example, if the version of homeassistant wants python 3.13, make sure you have it installed then run:
-```
-python3.13 -m venv --clear venv
-python3.13 -m venv venv
-```
-:::
 
 This will create a virtual environment and install all the necessary requirements. You're now set!
 
