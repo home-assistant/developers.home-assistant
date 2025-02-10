@@ -501,7 +501,7 @@ curl \
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/api/calendars/<calendar entity_id>" method="get">
+<ApiEndpoint path="/api/calendars/<calendar entity_id>?start=<timestamp>&end=<timestamp>" method="get">
 
 Returns the list of [calendar events](/docs/core/entity/calendar/#calendarevent) for the specified calendar `entity_id` between the `start` and `end` times (exclusive).
 
