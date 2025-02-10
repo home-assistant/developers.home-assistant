@@ -51,11 +51,11 @@ from .const import DOMAIN
 _LOGGER = logging.getLogger(__name__)
 
 
-async def async_setup_entry(hass, entry, async_add_entities):
+async def async_setup_entry(hass, config_entry, async_add_entities):
     """Config entry example."""
     # assuming API object stored here by __init__.py
-    my_api = hass.data[DOMAIN][entry.entry_id]
-    coordinator = MyCoordinator(hass, my_api)
+    my_api = hass.data[DOMAIN][config_entry.entry_id]
+    coordinator = MyCoordinator(hass, config_entry, my_api)
 
     # Fetch initial data so we have data when entities subscribe
     #
@@ -75,13 +75,14 @@ async def async_setup_entry(hass, entry, async_add_entities):
 class MyCoordinator(DataUpdateCoordinator):
     """My custom coordinator."""
 
-    def __init__(self, hass, my_api):
+    def __init__(self, hass, config_entry, my_api):
         """Initialize my coordinator."""
         super().__init__(
             hass,
             _LOGGER,
             # Name of the data. For logging purposes.
             name="My sensor",
+            config_entry=config_entry,
             # Polling interval. Will only be polled if there are subscribers.
             update_interval=timedelta(seconds=30),
             # Set always_update to `False` if the data returned from the
