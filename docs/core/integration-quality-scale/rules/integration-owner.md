@@ -22,7 +22,7 @@ During reviews, we see the integration owner as the expert on the integration, a
 
 Integration owners are set in the `manifest.json`.
 
-```json {3} showLineNumbers
+```json {4} showLineNumbers
 {
   "domain": "my_integration",
   "name": "My Integration",

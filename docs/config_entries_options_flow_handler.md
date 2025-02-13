@@ -22,7 +22,7 @@ def async_get_options_flow(
 
 ## Flow handler
 
-The Flow handler works just like the config flow handler, except that the first step in the flow will always be `async_step_init`. The current config entry details is available through the `self.config_entry` property.
+The Flow handler works just like the config flow handler, except that the first step in the flow will always be `async_step_init`. The current config entry details are available through the `self.config_entry` property.
 
 ```python
 OPTIONS_SCHEMA=vol.Schema(

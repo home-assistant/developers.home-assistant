@@ -28,8 +28,7 @@ If your integration supports discovery, Home Assistant will automatically retry 
 
 #### Handling logging of a retry
 
-Pass the error message to `ConfigEntryNotReady` as the first argument. Home Assistant will log the retry once with a log level of
-`warning`, and subsequent retries are logged at `debug` level. The error message will also be propagated to the UI and shown on the integrations page. Suppose you do not set a message when raising `ConfigEntryNotReady`; in that case, Home Assistant will try to extract the reason from the exception that is the cause of `ConfigEntryNotReady` if it was propagated from another exception.
+Pass the error message to `ConfigEntryNotReady` as the first argument. Home Assistant will log at `debug` level. The error message will also be propagated to the UI and shown on the integrations page. Suppose you do not set a message when raising `ConfigEntryNotReady`; in that case, Home Assistant will try to extract the reason from the exception that is the cause of `ConfigEntryNotReady` if it was propagated from another exception.
 
 The integration should not log any non-debug messages about the retry, and should instead rely on the logic built-in to `ConfigEntryNotReady` to avoid spamming the logs.
 

@@ -39,6 +39,7 @@ and are combined using the bitwise or (`|`) operator.
 | Value      | Description                                       |
 |------------|---------------------------------------------------|
 | `ANNOUNCE` | Device supports remotely triggered announcements. Implement the `async_announce` method to play back the provided `media_id` from `AssistSatelliteAnnouncement`. This method should only return once the announcement has finished playing on the device. |
+| `START_CONVERSATION` | Device supports remotely triggered conversations, which plays an announcement and then listens for one or more voices commands. Implement the `async_start_conversation` method to play back the provided `media_id` from `AssistSatelliteAnnouncement` and then listen for voice commands. This method should only return once the announcement has finished playing. |
 
 ## Methods
 
@@ -66,6 +67,17 @@ If the device has the `ANNOUNCE` [supported feature](#supported-features), then 
 The `async_announce` method should only return when the announcement is finished playing on the device.
 
 An [announce action](https://home-assistant.io/integrations/assist_satellite#action-assist_satelliteannounce) is available for automating announcements.
+
+### Start Conversation
+
+If the device has the `START_CONVERSATION` [supported feature](#supported-features), then the `async_start_conversation` method should be implemented to:
+
+1. Announce the provided `media_id` within `AssistSatelliteAnnouncement`, then
+2. Listen for one or more follow-up voice commands
+
+The `async_start_conversation` method should only return when the announcement is finished playing on the device. The conversation will continue between the user and the satellite.
+
+A [start conversation action](https://home-assistant.io/integrations/assist_satellite#action-assist_satellitestart_conversation) is available for automating conversations.
 
 ## WebSocket API
 
