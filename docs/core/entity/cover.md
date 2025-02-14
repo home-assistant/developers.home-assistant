@@ -5,6 +5,11 @@ sidebar_label: Cover
 
 A cover entity controls an opening or cover, such as a garage door or a window shade. Derive a platform entity from [`homeassistant.components.cover.CoverEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/cover/__init__.py).
 
+:::note
+The cover entity should only be used for devices that control an opening or cover.
+For other types of devices entities such as [Number](/docs/core/entity/number) should be used instead, even if that has not been the case in the past.
+:::
+
 ## Properties
 
 :::tip
