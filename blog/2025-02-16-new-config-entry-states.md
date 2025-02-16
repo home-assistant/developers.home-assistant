@@ -67,6 +67,6 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         ...
 ```
 
-The [config entry documentation](docs/config_entries_index) is updated.
+The [config entry documentation](/docs/config_entries_index) is updated.
 
 The [home assistant core PR #138522](https://github.com/home-assistant/core/pull/138522) gives more background.
