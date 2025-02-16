@@ -2,11 +2,11 @@
 title: Config flow
 ---
 
-Integrations can be set up via the user interface by adding support for a config flow to create a config entry. Components that want to support config entries will need to define a Config Flow Handler. This handler will manage the creation of entries from user input, discovery or other sources (like Home Assistant OS).
+Integrations can be set up via the user interface by adding support for a config flow to create a config entry. Integrations that want to support config entries will need to define a Config Flow Handler. This handler will manage the creation of entries from user input, discovery or other sources (like Home Assistant OS).
 
 Config Flow Handlers control the data that is stored in a config entry. This means that there is no need to validate that the config is correct when Home Assistant starts up. It will also prevent breaking changes because we will be able to migrate configuration entries to new formats if the version changes.
 
-When instantiating the handler, Home Assistant will make sure to load all dependencies and install the requirements of the component.
+When instantiating the handler, Home Assistant will make sure to load all dependencies and install the requirements of the integration.
 
 ## Updating the manifest
 
@@ -198,7 +198,7 @@ To get started, run `python3 -m script.scaffold config_flow_oauth2` and follow t
 
 ## Translations
 
-[Translations for the config flow](/docs/internationalization/core#config--options--subentry-flows) handlers are defined under the `config` key in the component translation file `strings.json`. Example of the Hue integration:
+[Translations for the config flow](/docs/internationalization/core#config--options--subentry-flows) handlers are defined under the `config` key in the integration translation file `strings.json`. Example of the Hue integration:
 
 ```json
 {
@@ -238,7 +238,7 @@ When the translations are merged into Home Assistant, they will be automatically
 
 As mentioned above - each Config Entry has a version assigned to it. This is to be able to migrate Config Entry data to new formats when Config Entry schema changes.
 
-Migration can be handled programatically by implementing function `async_migrate_entry` in your component's `__init__.py` file. The function should return `True` if migration is successful.
+Migration can be handled programatically by implementing function `async_migrate_entry` in your integration's `__init__.py` file. The function should return `True` if migration is successful.
 
 The version is made of a major and minor version. If minor versions differ but major versions are the same, integration setup will be allowed to continue even if the integration does not implement `async_migrate_entry`. This means a minor version bump is backwards compatible unlike a major version bump which causes the integration to fail setup if the user downgrades Home Assistant Core without restoring their configuration from backup.
 
@@ -331,7 +331,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
     except TokenExpiredError as err:
         raise ConfigEntryAuthFailed(err) from err
 
-    # TODO: Proceed with component setup
+    # TODO: Proceed with integration setup
 ```
 
 The flow handler in `config_flow.py` also needs to have some additional steps to support reauth which include showing a confirmation, starting the reauth flow, updating the existing config entry, and reloading to invoke setup again.
@@ -444,7 +444,7 @@ Subentries can set a unique ID. The rules are similar to [unique IDs](#unique-id
 
 ### Subentry translations
 
-[Translations for subentry flow](/docs/internationalization/core#config--options--subentry-flows) handlers are defined under the `config_subentries` key in the component translation file `strings.json`, for example:
+[Translations for subentry flow](/docs/internationalization/core#config--options--subentry-flows) handlers are defined under the `config_subentries` key in the integration translation file `strings.json`, for example:
 
 ```json
 {
