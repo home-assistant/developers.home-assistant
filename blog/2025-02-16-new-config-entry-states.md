@@ -17,7 +17,7 @@ Config entry state transitions when unloading and removing entries has been modi
   async def async_unload_entry(hass: HomeAssistant, entry: MyConfigEntry) -> bool:
     """Unload a config entry."""
     # async_unload_platforms returns False if at least one platform did not unload
-    if (unload_ok := await hass.config_entries.async_unload_platforms(entry, PLATFORMS))
+    if (unload_ok := await hass.config_entries.async_unload_platforms(entry, PLATFORMS)):
         entry.runtime_data.listener()
     # Finish cleanup not related to platforms
     return unload_ok
@@ -36,7 +36,7 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     loaded_entries = [
         entry
         for entry in hass.config_entries.async_entries(DOMAIN)
-        if entry.state == ConfigEntryState.LOADED
+        if entry.state is ConfigEntryState.LOADED
     ]
     if len(loaded_entries) == 1:
         # The last config entry is being unloaded, release shared resources, unregister services etc.
