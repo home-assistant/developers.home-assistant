@@ -12,10 +12,10 @@ Config Entries are configuration data that are persistently stored by Home Assis
 | setup in progress | An intermediate state while attempting to load the config entry. |
 | loaded | The config entry has been loaded. |
 | setup error | An error occurred when trying to set up the config entry. |
-| setup retry | A dependency of the config entry was not ready yet. Home Assistant will automatically retry loading this config entry in the future. Time between attempts will automatically increase.
-| migration error | The config entry had to be migrated to a newer version, but the migration failed.
+| setup retry | A dependency of the config entry was not ready yet. Home Assistant will automatically retry loading this config entry in the future. Time between attempts will automatically increase. |
+| migration error | The config entry had to be migrated to a newer version, but the migration failed. |
 | unload in progress | An intermediate state while attempting to unload the config entry. |
-| failed unload | The config entry was attempted to be unloaded, but this was either not supported or it raised an exception.
+| failed unload | The config entry was attempted to be unloaded, but this was either not supported or it raised an exception. |
 
 More information about surfacing errors and requesting a retry are in [Handling Setup Failures](integration_setup_failures.md#integrations-using-async_setup_entry).
 
@@ -23,7 +23,7 @@ More information about surfacing errors and requesting a retry are in [Handling 
 ## Setting up an entry
 
 During startup, Home Assistant first calls the [normal integration setup](/creating_component_index.md),
-and then call the method `async_setup_entry(hass, entry)` for each entry. If a new Config Entry is
+and then calls the method `async_setup_entry(hass, entry)` for each entry. If a new Config Entry is
 created at runtime, Home Assistant will also call `async_setup_entry(hass, entry)` ([example](https://github.com/home-assistant/core/blob/f18ddb628c3574bc82e21563d9ba901bd75bc8b5/homeassistant/components/hassio/__init__.py#L522)).
 
 ### For platforms
