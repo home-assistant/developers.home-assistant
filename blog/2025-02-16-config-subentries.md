@@ -8,4 +8,4 @@ Config entries now have a new data type called “config subentry”. [Config su
 
 This makes it easier for integration authors to allow users to add, modify and remove pieces of configuration which share some common resource, for example a cloud account or an MQTT broker.
 
-The [arcitecture discussion](https://github.com/home-assistant/architecture/discussions/1070) gives more background.
+The [architecture discussion](https://github.com/home-assistant/architecture/discussions/1070) gives more background.
