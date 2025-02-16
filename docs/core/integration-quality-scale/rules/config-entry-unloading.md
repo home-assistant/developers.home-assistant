@@ -31,10 +31,10 @@ async def async_unload_entry(hass: HomeAssistant, entry: MyConfigEntry) -> bool:
 Integrations can use `entry.async_on_unload` to register callbacks which will be called when the config entry is unloaded or if it fails to set up.
 This can be useful to clean up resources without having to keep track of the removal methods yourself.
 The registered callbacks will be called if :
- - `async_setup_entry` raises either of `ConfigEntryError`, `ConfigEntryAuthFailed` or `ConfigEntryNotReady`
- - `async_unload_entry` suceeds, i.e. it returns True and does not raise.
+ - `async_setup_entry` raises either `ConfigEntryError`, `ConfigEntryAuthFailed`, or `ConfigEntryNotReady`
+ - `async_unload_entry` succeeds, i.e., it returns True and does not raise.
 
- Note that integrations always need to implement `async_unload_entry` to support config entry unloading, just calling `entry.async_on_unload` is not enough.
+Note that integrations always need to implement `async_unload_entry` to support config entry unloading, just calling `entry.async_on_unload` is not enough.
 :::
 
 ## Additional resources
