@@ -12,7 +12,7 @@ This rule ensures that all configuration options are documented so that users ca
 The following example is for an integration with multiple configuration options, using the `configuration_basic` tag.
 
 ```markdown showLineNumbers
-{% include integrations/options_flow.md %}
+{% include integrations/option_flow.md %}
 
 {% configuration_basic %}
 Country code:
