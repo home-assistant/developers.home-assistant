@@ -51,7 +51,7 @@ For each platform that you forwarded the config entry to, you will need to forwa
 ```python
 async def async_unload_entry(hass: HomeAssistant, entry: MyConfigEntry) -> bool:
     """Unload a config entry."""
-    if (unload_ok := await hass.config_entries.async_unload_platforms(entry, PLATFORMS))
+    if (unload_ok := await hass.config_entries.async_unload_platforms(entry, PLATFORMS)):
         entry.runtime_data.listener()
     return unload_ok
 ```
