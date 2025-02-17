@@ -12,7 +12,8 @@ Config entry state transitions when unloading and removing entries has been modi
     - Improve debugging of issues related to reload and unload of config entries
 
 - The config entry state is set to `ConfigEntryState.FAILED_UNLOAD` when the integration's `async_unload_entry` returns False<br>
-  Rationale: If `async_unload_entry`, we can't assume the integration is still loaded, most likely it has partially unloaded itself, especially considering this is the pattern we recommend:
+  Rationale:
+    - If `async_unload_entry` returns `False`, we can't assume the integration is still loaded, most likely it has partially unloaded itself, especially considering this is the pattern we recommend:
   ```py
   async def async_unload_entry(hass: HomeAssistant, entry: MyConfigEntry) -> bool:
     """Unload a config entry."""
@@ -67,6 +68,4 @@ async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         ...
 ```
 
-The [config entry documentation](/docs/config_entries_index) is updated.
-
-The [home assistant core PR #138522](https://github.com/home-assistant/core/pull/138522) gives more background.
+Check the [config entry documentation](/docs/config_entries_index), and the [home assistant core PR #138522](https://github.com/home-assistant/core/pull/138522) for additional background.
