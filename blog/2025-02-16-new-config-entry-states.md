@@ -6,12 +6,12 @@ title: "Changed config entry state transitions"
 
 Config entry state transitions when unloading and removing entries has been modified:
 
-- A new state `ConfigEntryState.UNLOAD_IN_PROGRESS` is added, which is set before the integration's `async_unload_entry` is called
+- A new state `ConfigEntryState.UNLOAD_IN_PROGRESS` is added, which is set before calling the integration's `async_unload_entry`<br>
   Rationale:
     - Make it easier to write cleanup code which should run after the last config entry has been unloaded
     - Improve debugging of issues related to reload and unload of config entries
 
-- The config entry state is set to `ConfigEntryState.FAILED_UNLOAD` when the integration's `async_unload_entry` returns False
+- The config entry state is set to `ConfigEntryState.FAILED_UNLOAD` when the integration's `async_unload_entry` returns False<br>
   Rationale: If `async_unload_entry`, we can't assume the integration is still loaded, most likely it has partially unloaded itself, especially considering this is the pattern we recommend:
   ```py
   async def async_unload_entry(hass: HomeAssistant, entry: MyConfigEntry) -> bool:
@@ -23,7 +23,7 @@ Config entry state transitions when unloading and removing entries has been modi
     return unload_ok
     ```
 
-- The config entry is removed from `hass.config_entries` before calling the integration's `async_remove_entry` is called
+- The config entry is removed from `hass.config_entries` before calling the integration's `async_remove_entry` is called<br>
   Rationale:
     - Make it easier to write cleanup code which should run after the last config entry has been removed
 
