@@ -104,7 +104,7 @@ script/develop_and_serve
 You can change the Home Assistant url the frontend connects to by passing the -c option. This will also work for existing production core instances. It does not need to be a development version hosted locally. However, if you change the value for this option you will need to logout from your development frontend before it actually switches to the new value. For example:
 
 ```shell
-script/develop_and_serve -c https://homeassitant.local:8123
+script/develop_and_serve -c https://homeassistant.local:8123
 ```
 
 You can change the port the frontend is served on by passing the -p option. Note that if you are running from a devcontainer, you will need to setup
@@ -161,10 +161,10 @@ Run this command to start the development server:
 
 ```shell
 nvm use
-script/develop_and_serve -c https://homeassitant.local:8123
+script/develop_and_serve -c https://homeassistant.local:8123
 ```
 
-You may need to replace "https://homeassitant.local:8123" with your local Home Assistant url.
+You may need to replace "https://homeassistant.local:8123" with your local Home Assistant url.
 
 ### Browser settings
 
