@@ -49,14 +49,14 @@ The listener stored in `async_register_backup_agents_listener` should be called 
 async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Unload config entry."""
     # Notify backup listeners
-    hass.async_create_task(_notify_backup_listeners(hass), eager_start=False)
+    _notify_backup_listeners(hass)
 
     return await hass.config_entries.async_unload_platforms(
         entry, PLATFORMS
     )
 
 
-async def _notify_backup_listeners(hass: HomeAssistant) -> None:
+def _notify_backup_listeners(hass: HomeAssistant) -> None:
     for listener in hass.data.get(DATA_BACKUP_AGENT_LISTENERS, []):
         listener()
 ```
