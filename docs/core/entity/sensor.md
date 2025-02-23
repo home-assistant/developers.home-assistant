@@ -77,6 +77,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.SPEED` | ft/s, in/d, in/h, in/s, km/h, kn, m/s, mph, mm/d, mm/s | Generic speed
 | `SensorDeviceClass.SULPHUR_DIOXIDE` | µg/m³ | Concentration of sulphure dioxide
 | `SensorDeviceClass.TEMPERATURE` | °C, °F, K | Temperature.
+| `SensorDeviceClass.TEMPERATURE_DELTA` | °C, °F, K | Temperature difference.
 | `SensorDeviceClass.TIMESTAMP` | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
 | `SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³ | Concentration of volatile organic compounds
 | `SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS_PARTS` | ppm, ppb | Ratio of volatile organic compounds
