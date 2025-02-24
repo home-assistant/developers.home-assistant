@@ -20,7 +20,7 @@ So we subscribe to the event in `async_added_to_hass` and unsubscribe in `async_
 class MySensor(SensorEntity):
     """Representation of a sensor."""
     
-    unsubscribe: Callable[[], None] = None
+    unsubscribe: Callable[[], None] | None = None
 
     def __init__(self, client: MyClient) -> None:
         """Initialize the sensor."""
