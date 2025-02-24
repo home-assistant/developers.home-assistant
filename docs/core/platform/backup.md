@@ -43,22 +43,20 @@ def async_register_backup_agents_listener(
     return remove_listener
 ```
 
-The listener stored in `async_register_backup_agents_listener` should be called every time there is the need to reload backup agents, to remove stale agents and add new ones, such as when the integration is reloaded. For example:
+The listener stored in `async_register_backup_agents_listener` should be called every time there is the need to reload backup agents, to remove stale agents and add new ones. This can be done by registering the listeners during `async_setup_entry`:
 
 ```python
-async def async_unload_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Unload config entry."""
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Set up config entry."""
+    # do things to set up your config entry
+
     # Notify backup listeners
-    hass.async_create_task(_notify_backup_listeners(hass), eager_start=False)
+    def notify_backup_listeners() -> None:
+        for listener in hass.data.get(DATA_BACKUP_AGENT_LISTENERS, []):
+            listener()
+    entry.async_on_unload(entry.async_on_state_change(notify_backup_listeners))
 
-    return await hass.config_entries.async_unload_platforms(
-        entry, PLATFORMS
-    )
-
-
-async def _notify_backup_listeners(hass: HomeAssistant) -> None:
-    for listener in hass.data.get(DATA_BACKUP_AGENT_LISTENERS, []):
-        listener()
+    return True
 ```
 
 A backup agent should implement the abstract interface of the `BackupAgent` base class as shown in this example:
