@@ -45,9 +45,9 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.DATA_SIZE` | bit, kbit, Mbit, Gbit, B, kB, MB, GB, TB, PB, EB, ZB, YB, KiB, MiB, GiB, TiB, PiB, EiB, ZiB, YiB | Data size
 | `NumberDeviceClass.DISTANCE` | km, m, cm, mm, mi, nmi, yd, in | Generic distance
 | `NumberDeviceClass.DURATION` | d, h, min, s, ms | Time period. Should not update only due to time passing. The device or service needs to give a new data point to update.
-| `NumberDeviceClass.ENERGY` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal | Energy, this device class should be used for sensors representing energy consumption, for example an electricity meter. Represents _power_ over _time_. Not to be confused with `power`.
+| `NumberDeviceClass.ENERGY` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal | Energy, this device class should be used to represent energy consumption, for example an electricity meter. Represents _power_ over _time_. Not to be confused with `power`.
 | `NumberDeviceClass.ENERGY_DISTANCE` | kWh/100km, mi/kWh, km/kWh | Energy per distance, this device class should be used to represent energy consumption by distance, for example the amount of electric energy consumed by an electric car.
-| `NumberDeviceClass.ENERGY_STORAGE` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal | Stored energy, this device class should be used for sensors representing stored energy, for example the amount of electric energy currently stored in a battery or the capacity of a battery. Represents _power_ over _time_. Not to be confused with `power`.
+| `NumberDeviceClass.ENERGY_STORAGE` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal | Stored energy, this device class should be used to represent stored energy, for example the amount of electric energy currently stored in a battery or the capacity of a battery. Represents _power_ over _time_. Not to be confused with `power`.
 | `NumberDeviceClass.FREQUENCY` | Hz, kHz, MHz, GHz | Frequency
 | `NumberDeviceClass.GAS` | m³, ft³, CCF | Volume of gas. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
 | `NumberDeviceClass.HUMIDITY` | % | Relative humidity
@@ -77,9 +77,9 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³ | Concentration of volatile organic compounds
 | `NumberDeviceClass.VOLATILE_ORGANIC_COMPOUNDS_PARTS` | ppm, ppb | Ratio of volatile organic compounds
 | `NumberDeviceClass.VOLTAGE` | V, mV, µV, kV, MV | Voltage
-| `NumberDeviceClass.VOLUME` | L, mL, gal, fl. oz., m³, ft³, CCF | Generic volume, this device class should be used for sensors representing a consumption, for example the amount of fuel consumed by a vehicle.
-| `NumberDeviceClass.VOLUME_FLOW_RATE` | m³/h, ft³/min, L/min, gal/min, mL/s | Volume flow rate, this device class should be used for sensors representing a flow of some volume, for example the amount of water consumed momentarily.
-| `NumberDeviceClass.VOLUME_STORAGE` | L, mL, gal, fl. oz., m³, ft³, CCF | Generic stored volume, this device class should be used for sensors representing a stored volume, for example the amount of fuel in a fuel tank.
+| `NumberDeviceClass.VOLUME` | L, mL, gal, fl. oz., m³, ft³, CCF | Generic volume, this device class should be used to represent a consumption, for example the amount of fuel consumed by a vehicle.
+| `NumberDeviceClass.VOLUME_FLOW_RATE` | m³/h, ft³/min, L/min, gal/min, mL/s | Volume flow rate, this device class should be used to represent a flow of some volume, for example the amount of water consumed momentarily.
+| `NumberDeviceClass.VOLUME_STORAGE` | L, mL, gal, fl. oz., m³, ft³, CCF | Generic stored volume, this device class should be used to represent a stored volume, for example the amount of fuel in a fuel tank.
 | `NumberDeviceClass.WATER` | L, gal, m³, ft³, CCF | Water consumption
 | `NumberDeviceClass.WEIGHT` | kg, g, mg, µg, oz, lb, st | Generic mass; `weight` is used instead of `mass` to fit with every day language.
 | `NumberDeviceClass.WIND_DIRECTION` | ° | Wind direction
