@@ -252,7 +252,7 @@ Local access token:
 
 ## Images
 
-In general, use the markdown syntax to add images. For example, when adding an image to illustrate a step:
+In general, use the Markdown syntax to add images. For example, when adding an image to illustrate a step:
 
 <img class='invertDark'
     src='/img/en/documentation/image_in_step.png'
