@@ -16,7 +16,7 @@ This section shows elements you can use within your text.
 
 ### My links
 
-To indicate a location in the UI, you can use a [My link](https://www.home-assistant.io/docs/tools/quick-bar/#my-links). Selecting a My link opens that page in their own installation.
+To indicate a location in the UI, you can use a [My link](https://www.home-assistant.io/docs/tools/quick-bar/#my-links). Selecting a My link opens that page in their own Home Assistant installation.
 
 For example: `"Go to {% my integrations title="**Settings** > **Devices & services**" %} and select your integration."`
 
