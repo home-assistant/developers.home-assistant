@@ -74,6 +74,31 @@ async def async_get_auth_implementation(
     )
 ```
 
+### Authorization flow with PKCE Support
+
+If you want to support [PKCE](https://www.rfc-editor.org/rfc/rfc7636#section-4.1) you can return the `LocalOAuth2ImplementationWithPkce` in `application_credentials.py` as follows:
+
+```python
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers import config_entry_oauth2_flow
+from homeassistant.components.application_credentials import AuthImplementation, ClientCredential
+
+
+async def async_get_auth_implementation(
+    hass: HomeAssistant, auth_domain: str, credential: ClientCredential
+) -> config_entry_oauth2_flow.AbstractOAuth2Implementation:
+    """Return auth implementation for a custom auth implementation."""
+    return LocalOAuth2ImplementationWithPkce(
+        hass,
+        auth_domain,
+        credential.client_id,
+        authorize_url="https://example.com/auth",
+        token_url="https://example.com/oauth2/v4/token",
+        client_secret=credential.client_secret, # optional `""` is default
+        code_verifier_length=128 # optional
+    )
+```
+
 ## Import YAML credentials
 
 Credentials may be imported by integrations that used to accept YAML credentials using the import API `async_import_client_credential` provided by the application credentials integration.
