@@ -80,13 +80,13 @@ If you want to support [PKCE](https://www.rfc-editor.org/rfc/rfc7636#section-4.1
 
 ```python
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers import config_entry_oauth2_flow
+from homeassistant.helpers.config_entry_oauth2_flow import AbstractOAuth2Implementation, LocalOAuth2ImplementationWithPkce
 from homeassistant.components.application_credentials import AuthImplementation, ClientCredential
 
 
 async def async_get_auth_implementation(
     hass: HomeAssistant, auth_domain: str, credential: ClientCredential
-) -> config_entry_oauth2_flow.AbstractOAuth2Implementation:
+) -> AbstractOAuth2Implementation:
     """Return auth implementation for a custom auth implementation."""
     return LocalOAuth2ImplementationWithPkce(
         hass,
