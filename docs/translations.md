@@ -26,7 +26,7 @@ Placeholders shown in curly brackets `{}` are [translation arguments](https://fo
 1. Only native speakers should submit translations.
 2. Stick to [Material Design guidelines](https://material.io/design/communication/writing.html).
 3. Don't translate or change proper nouns like `Home Assistant`, `Supervisor` or `Hue`.
-4. For a region specific translation, keys that will be the same as the base translation should be filled with `[VOID]`. These will be replaced during our translation build process.
+4. For a region specific translation, keys that will be the same as the base translation should clone the source string. You can do this with Ctrl+Insert or selecting 'Insert Source' in the interface. This helps keep track of what has, or has not been reviewed whilst also simplifying the workflow. 
 5. Translations under the `state_badge` keys will be used for the notification badge display. These translations should be short enough to fit in the badge label without overflowing. This can be tested in the Home Assistant UI either by editing the label text with your browsers development tools, or by using the States tab of developer tools in the Home Assistant UI. In the UI, enter a new entity ID (`device_tracker.test`), and enter the text you want to test in state.
 6. If text will be duplicated across different translation keys, make use of the Lokalise key reference feature where possible. The base translation provides examples of this underneath the `states` translations. Please see the [Lokalise key referencing](https://docs.lokalise.com/articles/1400528-key-referencing) documentation for more details.
 
