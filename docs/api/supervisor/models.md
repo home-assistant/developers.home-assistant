@@ -21,6 +21,7 @@ These models are describing objects that are getting returned from the superviso
 | icon             | bool           | The add-on has an icon file                            |
 | logo             | bool           | The add-on has a logo file                            |
 | state            | string         | The state of the add-on (started, stopped)            |
+| system_managed   | bool           | Indicates whether the add-on is managed by Home Assistant |
 
 ## Application
 
