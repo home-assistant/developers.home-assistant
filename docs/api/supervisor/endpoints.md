@@ -42,7 +42,8 @@ Return overview information about installed add-ons.
       "build": false,
       "url": null,
       "icon": false,
-      "logo": false
+      "logo": false,
+      "system_managed": false
     }
   ]
 }
@@ -165,7 +166,9 @@ Get details about an add-on
 | startup             | string             | The stage when the add-on is started (initialize, system, services, application, once) |
 | state               | string or null     | The state of the add-on (started, stopped)                                             |
 | stdin               | boolean            | `true` if the add-on accepts stdin commands                                            |
-| translations        | dictionary         | A dictionary containing content of translation files for the add-on |
+| system_managed      | boolean            | Indicates whether the add-on is managed by Home Assistant                              |
+| system_managed_config_entry | string     | Provides the configuration entry ID if the add-on is managed by Home Assistant         |
+| translations        | dictionary         | A dictionary containing content of translation files for the add-on                    |
 | udev                | boolean            | `true` if udev access is granted is enabled                                            |
 | update_available    | boolean            | `true` if an update is available                                                       |
 | url                 | string or null     | URL to more information about the add-on                                               |
@@ -241,6 +244,8 @@ Get details about an add-on
   "startup": "application",
   "state": "started",
   "stdin": false,
+  "system_managed": true,
+  "system_managed_config_entry": "abc123",
   "translations": {
     "en": {
       "configuration": {
@@ -275,9 +280,7 @@ Get the add-on logo
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/options" method="post">
-Set the protection mode on an add-on.
-
-This function is not callable by itself and you can not use `self` as the slug here.
+Set the options for an add-on.
 
 :::tip
 To reset customized network/audio/options, set it `null`.
@@ -311,6 +314,31 @@ To reset customized network/audio/options, set it `null`.
     "awesome": true
   },
   "watchdog": true
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/addons/<addon>/sys_options" method="post">
+Change options specific to system managed addons.
+
+This endpoint is only callable by Home Assistant and not by any other client.
+
+**Payload**
+
+| key                         | type          | description                             |
+| --------------------------- | ------------- | --------------------------------------- |
+| system_managed              | boolean       | `true` if managed by Home Assistant     |
+| system_managed_config_entry | boolean       | ID of config entry managing addon       |
+
+**You need to supply at least one key in the payload.**
+
+**Example payload:**
+
+```json
+{
+  "system_managed": true,
+  "system_managed_config_entry": "abc123"
 }
 ```
 
