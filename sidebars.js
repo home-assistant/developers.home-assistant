@@ -118,6 +118,7 @@ module.exports = {
         "config_entries_config_flow_handler",
         "config_entries_options_flow_handler",
         "core/integration_diagnostics",
+        "core/integration_system_health",
         "configuration_yaml_index",
         "dev_101_services",
         "creating_platform_index",
@@ -295,6 +296,7 @@ module.exports = {
         "documenting/standards",
         "documenting/yaml-style-guide",
         "documenting/create-page",
+        "documenting/integration-docs-examples",
       ],
     },
 

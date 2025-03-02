@@ -42,9 +42,11 @@ class MySensor(SensorEntity):
 {
   "entity": {
     "sensor": {
-      "tree_pollen": "mdi:tree",
-      "state": {
-        "high": "mdi:tree-outline"
+      "tree_pollen": {
+        "default": "mdi:tree",
+        "state": {
+          "high": "mdi:tree-outline"
+        }
       }
     }
   }

@@ -298,6 +298,7 @@ Response only fields will be in responses but cannot be included in requests.
 | progress   | int     | Progress of the job (if accurate progress is obtainable)      |
 | stage      | string  | A name for the stage the job is in (if applicable)            |
 | done       | boolean | Is the job complete                                           |
+| created    | string  | Date and time when job was created in ISO format              |
 | child_jobs | list    | A list of child [jobs](#job) started by this one              |
 | errors     | list    | A list of [errors](#job-error) that occurred during execution |
 

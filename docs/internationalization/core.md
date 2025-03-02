@@ -54,9 +54,9 @@ Strings which are used more than once should be not be duplicated, instead refer
 }
 ```
 
-### Config / Options
+### Config / Options / Subentry flows
 
-The translation strings for the configuration flow handler and the option flow handler are defined under the `config` and `options` keys respectively. An example strings file below describes the different supported keys. Although the example shows translations for a configuration flow, the translations for an option flow is exactly the same.
+The translation strings for the configuration flow handler, the option flow handler and config subentry handlers are defined under the `config`, `options` and `config_subentries` keys respectively. An example strings file below describes the different supported keys. Although the example shows translations for a configuration flow, the translations for an option flow is exactly the same.
 
 ```json
 {
