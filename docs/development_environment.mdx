@@ -108,13 +108,11 @@ If you find that you cannot open the development instance via [http://localhost:
 :::
 
 :::tip
-The default networking mode in WSL is NAT. This has some drawbacks like Home Assistant not being able to discover devices on the network and make it hard to access Home Assistant from the LAN. As an alternative the networking mode can be set to "Mirrrored" which will make WSL use the same network interfaces as on the host machine (they even have the same IP) and has benefits like Multicast support which enables device discovery with mDNS.
+The default networking mode in WSL is NAT. This has some drawbacks like Home Assistant not being able to discover devices on the network and make it hard to access Home Assistant from the LAN. Alternatively, the networking mode can be set to "Mirrrored", which will make WSL use the same network interfaces as on the host machine (they even have the same IP) and has benefits like Multicast support which enables device discovery with mDNS.
 
-Check out the [Mirrored mode networking documentation](https://learn.microsoft.com/en-us/windows/wsl/networking#mirrored-mode-networking) for details on how to enable it.
+Check out the [WSL Mirrored mode networking documentation](https://learn.microsoft.com/en-us/windows/wsl/networking#mirrored-mode-networking) for details on how to enable it.
 :::
 
-
-https://learn.microsoft.com/en-us/windows/wsl/networking#mirrored-mode-networking
 
 ### Developing on macOS
 
