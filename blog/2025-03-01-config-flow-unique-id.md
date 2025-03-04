@@ -6,7 +6,7 @@ title: "New checks for config flow unique ID"
 
 ### Summary of changes
 
-Creating a config entry with a unique ID already present in the registry is deprecated.
+Creating a config entry with a unique ID already present in the registry is deprecated, and will now log a warning.
 
 ### Details
 
