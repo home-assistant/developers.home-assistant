@@ -81,6 +81,8 @@ class ExampleBackupAgent(BackupAgent):
     ) -> AsyncIterator[bytes]:
         """Download a backup file.
 
+        Raises BackupNotFound if the backup does not exist.
+
         :param backup_id: The ID of the backup that was returned in async_list_backups.
         :return: An async iterator that yields bytes.
         """
@@ -105,6 +107,8 @@ class ExampleBackupAgent(BackupAgent):
     ) -> None:
         """Delete a backup file.
 
+        Raises BackupNotFound if the backup does not exist.
+
         :param backup_id: The ID of the backup that was returned in async_list_backups.
         """
 
@@ -115,11 +119,14 @@ class ExampleBackupAgent(BackupAgent):
         self,
         backup_id: str,
         **kwargs: Any,
-    ) -> AgentBackup | None:
-        """Return a backup."""
+    ) -> AgentBackup:
+        """Return a backup.
+
+        Raises BackupNotFound if the backup does not exist.
+        """
 ```
 
-Backup agents should raise a `BackupAgentError` exception on error. Other exceptions are not expected to leave the backup agent.
+Backup agents should raise a `BackupAgentError` (or a subclass of `BackupAgentError`) exception on error. Other exceptions are not expected to leave the backup agent.
 
 ## Pre- and post-operations
 
