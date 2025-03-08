@@ -33,16 +33,30 @@ and are combined using the bitwise or (`|`) operator.
 This method is used to process an incoming chat message.
 
 ```python
+from homeassistant.components.conversation import ChatLog, ConversationEntity
+
 class MyConversationEntity(ConversationEntity):
     """Represent a conversation entity."""
 
-    async def async_process(self, user_input: ConversationInput) -> ConversationResult:
-        """Process a sentence."""
+    async def _async_handle_message(
+        self,
+        user_input: ConversationInput,
+        chat_log: ChatLog,
+    ) -> ConversationResult:
+        """Call the API."""
+        # Add the response to the chat log.
+        chat_log.async_add_assistant_content_without_tools(
+            AssistantContent(
+                agent_id=user_input.agent_id,
+                content="Test response",
+            )
+        )
         response = intent.IntentResponse(language=user_input.language)
         response.async_set_speech("Test response")
         return agent.ConversationResult(
             conversation_id=None,
-            response=response
+            response=response,
+            continue_conversation=False,
         )
 ```
 
@@ -54,6 +68,9 @@ A `ConversationInput` object contains the following data:
 | `context` | `Context` | HA context to attach to actions in HA
 | `conversation_id` | `Optional[str]` | Can be used to track a multi-turn conversation. Return None if not supported
 | `language` | `str` | Language of the text. If user did not provide one, it's set to the HA configured language.
+| `continue_conversation` | `bool` | If the agent expects the user to respond. If not set, it's assumed to be False.
+
+_We used to promote `async_process` as the method. This was changed to `_async_handle_message` to automatically include the chat log. The change is backwards compatible._
 
 ### Prepare
 
