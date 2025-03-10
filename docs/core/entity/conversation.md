@@ -28,9 +28,9 @@ and are combined using the bitwise or (`|`) operator.
 
 ## Methods
 
-### Process
+### Handle Message
 
-This method is used to process an incoming chat message.
+This method is used to handle an incoming chat message.
 
 ```python
 from homeassistant.components.conversation import ChatLog, ConversationEntity
