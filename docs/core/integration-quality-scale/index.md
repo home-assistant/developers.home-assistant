@@ -74,7 +74,7 @@ The platinum tier has the following characteristics:
 - All source code follows all coding and Home Assistant integration standards and best practices and is fully typed with type annotations and clear code comments for better code clarity and maintenance.
 - A fully asynchronous integration code base ensures efficient operation.
 - Implements efficient data handling, reducing network and CPU usage.
-- Code owner approval is required on Pull Requests before merging.
+- Code owner approval is required on pull requests before merging.
 
 
 ### Keeping track of the implemented rules
