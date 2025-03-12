@@ -117,12 +117,12 @@ A cell of the grid is defined with the following dimension:
 
 The different grid options are:
 
-- `rows`: Default number of rows the card takes
-- `min_rows`: Minimal number of rows the card takes
-- `max_rows`: Maximal number of rows the card takes
-- `columns`: Default number of columns the card takes (set it to `full` to enforce your card to be full width)
-- `min_columns`: Minimal number of columns the card takes
-- `max_columns`: Maximal number of columns the card takes
+- `rows`: Default number of rows the card takes. Do not define this value if you want your card to ignore the rows of the grid (not defined by default)
+- `min_rows`: Minimal number of rows the card takes (`1` by default)
+- `max_rows`: Maximal number of rows the card takes (not defined by default)
+- `columns`: Default number of columns the card takes. Set it to `full` to enforce your card to be full width, (`12` by default)
+- `min_columns`: Minimal number of columns the card takes (`1` by default)
+- `max_columns`: Maximal number of columns the card takes (not defined by default)
 
 For the number of columns, it's `highly` recommended to use multiple of 3 for the default value (`3`, `6`, `9` or `12`) so your card will have better looking on the dashboard by default.
 
