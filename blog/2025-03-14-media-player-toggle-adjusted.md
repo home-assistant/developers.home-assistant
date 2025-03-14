@@ -6,7 +6,7 @@ title: "Changed implementation of media player toggle"
 
 The implementation of the toggle action service has been adjusted in the media player base class,
 the media player will be turned on if it is in states `off` or `standby`, otherwise it will be
-turned on.
+turned off.
 
 Before this change, the media player would also be turned on if it was in state `idle`.
 
