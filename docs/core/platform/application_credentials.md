@@ -76,7 +76,7 @@ async def async_get_auth_implementation(
 
 ### Authorization flow with PKCE Support
 
-If you want to support [PKCE](https://www.rfc-editor.org/rfc/rfc7636#section-4.1) you can return the `LocalOAuth2ImplementationWithPkce` in `application_credentials.py` as follows:
+If you want to support [PKCE](https://www.rfc-editor.org/rfc/rfc7636) you can return the `LocalOAuth2ImplementationWithPkce` in `application_credentials.py` as follows:
 
 ```python
 from homeassistant.core import HomeAssistant
