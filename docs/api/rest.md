@@ -636,7 +636,7 @@ You can pass an optional JSON object to be used as `service_data`.
 }
 ```
 
-By default, a call will return a list of states that have changed while the service was being executed.
+Returns a list of states that have changed while the service was being executed, and optionally response data, if supported by the service.
 
 ```json
 [
@@ -672,7 +672,7 @@ If the service you're calling supports returning response data, you can retrieve
         },
         {
             "attributes": {},
-            "entity_id": "process.Dropbox",
+            "entity_id": "binary_sensor.dropbox",
             "last_changed": "2024-04-22T20:45:54.418320-04:00",
             "state": "on"
         }
