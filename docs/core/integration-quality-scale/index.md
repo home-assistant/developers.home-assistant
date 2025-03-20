@@ -113,24 +113,6 @@ If a tier is adjusted, all integrations in that tier need to be re-evaluated and
 One exception to this is integrations that have devices that are part of the Works with Home Assistant program. Those integrations will be flagged as grandfathered into their existing tier.
 :::
 
-## Integration quality scale rules
-The rules for each tier are defined down below and come with its own page with examples and more information.
-
-### 🥉 Bronze
-<RuleOverview tier="bronze" />
-
-
-### 🥈 Silver
-<RuleOverview tier="silver" />
-
-
-### 🥇 Gold
-<RuleOverview tier="gold" />
-
-
-### 🏆 Platinum
-<RuleOverview tier="platinum" />
-
 
 ## Special tiers
 There are also 4 special tiers that are used to integration that don't have a place on the scaled tier list.
