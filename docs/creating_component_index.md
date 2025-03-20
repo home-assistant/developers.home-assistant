@@ -10,9 +10,15 @@ python3 -m script.scaffold integration
 
 This will set you up with everything that you need to build an integration that is able to be set up via the user interface. More extensive examples of integrations are available from [our example repository](https://github.com/home-assistant/example-custom-config/tree/master/custom_components/).
 
+Note: this example repository shows custom integrations that live in the `<config_dir>/custom_components` directory. These MUST have a `version` key in their manifest file. Core integrations live in the `homeassistant/components` directory, and do not need a `version` key. The architecture is the same in both cases.
+
 ## The minimum
 
 The scaffold integration contains a bit more than just the bare minimum. The minimum is that you define a `DOMAIN` constant that contains the domain of the integration. The second part is that it needs to define a setup method that returns a boolean if the set up was successful.
+
+Create a file `homeassistant/components/hello_state/__init__.py` with one of the two following codeblocks, depending on what you need:
+
+- Sync component:
 
 ```python
 DOMAIN = "hello_state"
@@ -25,7 +31,7 @@ def setup(hass, config):
     return True
 ```
 
-And if you prefer an async component:
+- And if you prefer an async component:
 
 ```python
 DOMAIN = "hello_state"
@@ -37,14 +43,13 @@ async def async_setup(hass, config):
     # Return boolean to indicate that initialization was successful.
     return True
 ```
-Create a file `<config_dir>/custom_components/hello_state/__init__.py` with one of the two codeblocks.
-In addition a manifest file is required with below keys as the bare minimum. Create `<config_dir>/custom_components/hello_state/manifest.json`.
+
+In addition a manifest file is required with below keys as the bare minimum. Create `homeassistant/components/hello_state/manifest.json`.
 
 ```json
 {
   "domain": "hello_state",
-  "name": "Hello, state!",
-  "version": "0.1.0"
+  "name": "Hello, state!"
 }
 ```
 
