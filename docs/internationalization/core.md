@@ -63,6 +63,13 @@ The translation strings for the configuration flow handler, the option flow hand
   "config": {
     // Optional. Title to show in list. Only will be rendered if placeholders required
     "flow_title": "Discovered Device ({host})",
+    // Optional, only needed if the default translations in frontend are misleading
+    "entry_type": "Label explaining what an entry represents",
+    // Optional, only needed if the default translations in frontend are misleading
+    "initiate_flow": {
+        "reconfigure": "Menu or button label for starting a reconfigure flow",
+        "user": "Menu or button label for starting a user flow"
+    },
     "step": {
       "init": {
         // Optional. Will show the integration name if omitted
