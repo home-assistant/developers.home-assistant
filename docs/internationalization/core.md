@@ -60,7 +60,7 @@ The translation strings for the configuration flow handler, the option flow hand
 
 Note that `config_subentries` is a map of maps, where the keys are the subentry types supported by the integration.
 
-The example strings file below describes the different supported keys. Although the example shows translations for a configuration flow, the translations for an option flow is exactly the same.
+The example strings file below describes the different supported keys. Although the example shows translations for a configuration flow, the options and subentry flow translations follow the same format.
 
 ```json
 {
