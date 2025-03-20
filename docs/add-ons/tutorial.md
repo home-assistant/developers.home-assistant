@@ -18,7 +18,7 @@ Once you have located your add-on directory, it's time to get started!
 
 ## Step 1: The basics
 
-- Create a new directory called `hello_world`
+- Create a new directory called `hello_world` (inside the `addons/local` directory)
 - Inside that directory create three files:
   - `Dockerfile`
   - `config.yaml`
