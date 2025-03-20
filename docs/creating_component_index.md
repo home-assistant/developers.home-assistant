@@ -16,7 +16,7 @@ This example repository shows custom integrations that live in the `<config_dir>
 
 ## The minimum
 
-The scaffold integration contains a bit more than just the bare minimum. The minimum is that you define a `DOMAIN` constant that contains the domain of the integration. The second part is that it needs to define a setup method that returns a boolean if the set up was successful.
+The scaffold integration contains a bit more than just the bare minimum. The minimum is that you define a `DOMAIN` constant that contains the domain of the integration. The second part is that it needs to define a setup method that returns a boolean if the set-up was successful.
 
 Create a file `homeassistant/components/hello_state/__init__.py` with one of the two following codeblocks, depending on what you need:
 
@@ -46,7 +46,7 @@ async def async_setup(hass, config):
     return True
 ```
 
-In addition a manifest file is required with below keys as the bare minimum. Create `homeassistant/components/hello_state/manifest.json`.
+In addition, a manifest file is required with the following keys as the bare minimum. Create `homeassistant/components/hello_state/manifest.json`.
 
 ```json
 {
