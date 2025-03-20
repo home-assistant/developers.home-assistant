@@ -2582,6 +2582,40 @@ Change the active boot slot, **This will also reboot the device!**
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/os/config/swap" method="get">
+
+Get current HAOS swap configuration. Unavailable on Supervised.
+
+**Returned data:**
+
+| key        | type   | description                      |
+|------------|--------|----------------------------------|
+| swap_size  | string | Current swap size.               |
+| swappiness | int    | Current kernel swappiness value. |
+
+**Example response:**
+
+```json
+{
+  "swap_size": "2G",
+  "swappiness": 1
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/os/config/swap" method="post">
+
+Set HAOS swap configuration. Unavailable on Supervised.
+
+**Payload:**
+
+| key        | type   | description                                                                                |
+|------------|--------|--------------------------------------------------------------------------------------------|
+| swap_size  | string | New swap siz as number with optional units (K/M/G). Anything lower than 40K disables swap. |
+| swappiness | int    | New swappiness value (0-100).                                                              |
+</ApiEndpoint>
+
 <ApiEndpoint path="/os/datadisk/list" method="get">
 
 Returns possible targets for the new data partition.
