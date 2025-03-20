@@ -19,14 +19,14 @@ Some translation strings will contain special placeholders that will be replaced
 
 Placeholders defined in square brackets `[]` (shown in green in Lokalise) are [Lokalise key references](https://docs.lokalise.com/en/articles/1400528-key-referencing). These are primarily used to link translation strings that will be duplicated, rather then redefining the same translation over and over again. Where sensible, the translation should make use of those (the square brackets placeholder value can be easily taken over by clicking on the "Source Alt+0" button in the Lokalise edit mode). Different languages may not have the same duplicates as English, and are welcome to link duplicate translations that are not linked in English. 
 
-Placeholders shown in curly brackets `{}` are [translation arguments](https://formatjs.io/docs/core-concepts/icu-syntax/) that will be replaced with a live value when Home Assistant is running. Any translation argument placeholders present in the original string must be included in the translated string and must not be translated! These placeholders may include special syntax for defining plurals or other replacement rules. The above linked format.js guide explains the syntax for adding plural definitions and other rules.
+Placeholders shown in curly brackets `{}` are [translation arguments](https://formatjs.github.io/docs/core-concepts/icu-syntax/) that will be replaced with a live value when Home Assistant is running. Any translation argument placeholders present in the original string must be included in the translated string and must not be translated! These placeholders may include special syntax for defining plurals or other replacement rules. The above linked format.js guide explains the syntax for adding plural definitions and other rules.
 
 ## Rules
 
 1. Only native speakers should submit translations.
 2. Stick to [Material Design guidelines](https://material.io/design/communication/writing.html).
 3. Don't translate or change proper nouns like `Home Assistant`, `Supervisor` or `Hue`.
-4. For a region specific translation, keys that will be the same as the base translation should be filled with `[VOID]`. These will be replaced during our translation build process.
+4. For a region-specific translation, keys that will be the same as the base translation should clone the source string. You can do this with **Ctrl+Insert** or selecting **Insert Source** in the interface. This helps keep track of what has, or has not been reviewed whilst also simplifying the workflow. 
 5. Translations under the `state_badge` keys will be used for the notification badge display. These translations should be short enough to fit in the badge label without overflowing. This can be tested in the Home Assistant UI either by editing the label text with your browsers development tools, or by using the States tab of developer tools in the Home Assistant UI. In the UI, enter a new entity ID (`device_tracker.test`), and enter the text you want to test in state.
 6. If text will be duplicated across different translation keys, make use of the Lokalise key reference feature where possible. The base translation provides examples of this underneath the `states` translations. Please see the [Lokalise key referencing](https://docs.lokalise.com/articles/1400528-key-referencing) documentation for more details.
 

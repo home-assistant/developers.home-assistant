@@ -2,128 +2,48 @@
 title: Config entries
 ---
 
-Config Entries are configuration data that are persistently stored by Home Assistant. A config entry is created by a user via the UI. The UI flow is powered by a [config flow handler](config_entries_config_flow_handler.md) as defined by the component. Config entries can also have an extra [options flow handler](config_entries_options_flow_handler.md), also defined by the component.
+Config entries are configuration data that are persistently stored by Home Assistant. A config entry is created by a user via the UI. The UI flow is powered by a [config flow handler](config_entries_config_flow_handler.md) as defined by the integration.
+
+Once created, config entries can be removed by the user. Optionally, config entries can be changed by the user via a [reconfigure step](config_entries_config_flow_handler.md#reconfigure) or [options flow handler](config_entries_options_flow_handler.md), also defined by the integration.
+
+### Config subentries
+
+Config entries can logically separate the stored configuration data into subentries, which can be added by the user via the UI to an existing config entry. An example of this is an integration providing weather forecasts, where the config entry stores authentication details and each location for which weather forecasts should be provided is stored as a subentry.
+
+Similar to config entries, subentries can optionally support a reconfigure step.
 
 ## Lifecycle
 
 | State | Description |
 | ----- | ----------- |
 | not loaded | The config entry has not been loaded. This is the initial state when a config entry is created or when Home Assistant is restarted. |
+| setup in progress | An intermediate state while attempting to load the config entry. |
 | loaded | The config entry has been loaded. |
 | setup error | An error occurred when trying to set up the config entry. |
-| setup retry | A dependency of the config entry was not ready yet. Home Assistant will automatically retry loading this config entry in the future. Time between attempts will automatically increase.
-| migration error | The config entry had to be migrated to a newer version, but the migration failed.
-| failed unload | The config entry was attempted to be unloaded, but this was either not supported or it raised an exception.
+| setup retry | A dependency of the config entry was not ready yet. Home Assistant will automatically retry loading this config entry in the future. Time between attempts will automatically increase. |
+| migration error | The config entry had to be migrated to a newer version, but the migration failed. |
+| unload in progress | An intermediate state while attempting to unload the config entry. |
+| failed unload | The config entry was attempted to be unloaded, but this was either not supported or it raised an exception. |
 
 More information about surfacing errors and requesting a retry are in [Handling Setup Failures](integration_setup_failures.md#integrations-using-async_setup_entry).
 
-<svg class='invertDark' width="508pt" height="188pt" viewBox="0.00 0.00 508.00 188.00" xmlns="http://www.w3.org/2000/svg">
-<g id="graph1" class="graph" transform="scale(1 1) rotate(0) translate(4 184)">
-<title>G</title>
-<polygon fill="none" stroke="none" points="-4,5 -4,-184 505,-184 505,5 -4,5"></polygon>
-<g id="node1" class="node">
-<title>not loaded</title>
-<ellipse fill="none" stroke="black" cx="168" cy="-162" rx="51.3007" ry="18"></ellipse>
-<text text-anchor="middle" x="168" y="-157.8" font-family="Times,serif" font-size="14.00">not loaded</text>
-</g>
-<g id="node3" class="node">
-<title>loaded</title>
-<ellipse fill="none" stroke="black" cx="61" cy="-90" rx="36.1722" ry="18"></ellipse>
-<text text-anchor="middle" x="61" y="-85.8" font-family="Times,serif" font-size="14.00">loaded</text>
-</g>
-<g id="edge2" class="edge">
-<title>not loaded-&gt;loaded</title>
-<path fill="none" stroke="black" d="M140.518,-146.666C123.947,-136.676 103.104,-123.187 86.8392,-111.989"></path>
-<polygon fill="black" stroke="black" points="88.532,-108.902 78.3309,-106.041 84.5212,-114.639 88.532,-108.902"></polygon>
-</g>
-<g id="node5" class="node">
-<title>setup error</title>
-<ellipse fill="none" stroke="black" cx="168" cy="-90" rx="52.3895" ry="18"></ellipse>
-<text text-anchor="middle" x="168" y="-85.8" font-family="Times,serif" font-size="14.00">setup error</text>
-</g>
-<g id="edge4" class="edge">
-<title>not loaded-&gt;setup error</title>
-<path fill="none" stroke="black" d="M162.122,-144.055C161.304,-136.346 161.061,-127.027 161.395,-118.364"></path>
-<polygon fill="black" stroke="black" points="164.894,-118.491 162.087,-108.275 157.911,-118.012 164.894,-118.491"></polygon>
-</g>
-<g id="node7" class="node">
-<title>setup retry</title>
-<ellipse fill="none" stroke="black" cx="291" cy="-90" rx="52.0932" ry="18"></ellipse>
-<text text-anchor="middle" x="291" y="-85.8" font-family="Times,serif" font-size="14.00">setup retry</text>
-</g>
-<g id="edge6" class="edge">
-<title>not loaded-&gt;setup retry</title>
-<path fill="none" stroke="black" d="M189.578,-145.465C206.94,-134.869 231.584,-120.783 252.292,-109.59"></path>
-<polygon fill="black" stroke="black" points="254.022,-112.634 261.19,-104.832 250.722,-106.461 254.022,-112.634"></polygon>
-</g>
-<g id="node9" class="node">
-<title>migration error</title>
-<ellipse fill="none" stroke="black" cx="431" cy="-90" rx="69.1427" ry="18"></ellipse>
-<text text-anchor="middle" x="431" y="-85.8" font-family="Times,serif" font-size="14.00">migration error</text>
-</g>
-<g id="edge8" class="edge">
-<title>not loaded-&gt;migration error</title>
-<path fill="none" stroke="black" d="M207.659,-150.445C252.053,-138.628 324.343,-119.388 374.607,-106.01"></path>
-<polygon fill="black" stroke="black" points="375.588,-109.37 384.351,-103.416 373.787,-102.606 375.588,-109.37"></polygon>
-</g>
-<g id="edge10" class="edge">
-<title>loaded-&gt;not loaded</title>
-<path fill="none" stroke="black" d="M85.5216,-103.56C102.143,-113.462 123.939,-127.508 141.027,-139.231"></path>
-<polygon fill="black" stroke="black" points="139.274,-142.276 149.481,-145.116 143.273,-136.53 139.274,-142.276"></polygon>
-</g>
-<g id="node12" class="node">
-<title>failed unload</title>
-<ellipse fill="none" stroke="black" cx="61" cy="-18" rx="61.5781" ry="18"></ellipse>
-<text text-anchor="middle" x="61" y="-13.8" font-family="Times,serif" font-size="14.00">failed unload</text>
-</g>
-<g id="edge12" class="edge">
-<title>loaded-&gt;failed unload</title>
-<path fill="none" stroke="black" d="M61,-71.6966C61,-63.9827 61,-54.7125 61,-46.1124"></path>
-<polygon fill="black" stroke="black" points="64.5001,-46.1043 61,-36.1043 57.5001,-46.1044 64.5001,-46.1043"></polygon>
-</g>
-<g id="edge16" class="edge">
-<title>setup error-&gt;not loaded</title>
-<path fill="none" stroke="black" d="M173.913,-108.275C174.715,-116.03 174.94,-125.362 174.591,-134.005"></path>
-<polygon fill="black" stroke="black" points="171.094,-133.832 173.878,-144.055 178.077,-134.327 171.094,-133.832"></polygon>
-</g>
-<g id="edge14" class="edge">
-<title>setup retry-&gt;not loaded</title>
-<path fill="none" stroke="black" d="M269.469,-106.507C252.104,-117.106 227.436,-131.206 206.71,-142.408"></path>
-<polygon fill="black" stroke="black" points="204.973,-139.368 197.805,-147.17 208.273,-145.541 204.973,-139.368"></polygon>
-</g>
-</g>
-</svg>
-
-<!--
-Graphviz:
-digraph G {
-  "not loaded" -> "loaded"
-  "not loaded" -> "setup error"
-  "not loaded" -> "setup retry"
-  "not loaded" -> "migration error"
-  "loaded" -> "not loaded"
-  "loaded" -> "failed unload"
-  "setup retry" -> "not loaded"
-  "setup error" -> "not loaded"
-}
--->
 
 ## Setting up an entry
 
-During startup, Home Assistant first calls the [normal component setup](/creating_component_index.md),
-and then call the method `async_setup_entry(hass, entry)` for each entry. If a new Config Entry is
+During startup, Home Assistant first calls the [normal integration setup](/creating_component_index.md),
+and then calls the method `async_setup_entry(hass, entry)` for each entry. If a new Config Entry is
 created at runtime, Home Assistant will also call `async_setup_entry(hass, entry)` ([example](https://github.com/home-assistant/core/blob/f18ddb628c3574bc82e21563d9ba901bd75bc8b5/homeassistant/components/hassio/__init__.py#L522)).
 
 ### For platforms
 
-If a component includes platforms, it will need to forward the Config Entry to the platform. This can
+If an integration includes platforms, it will need to forward the Config Entry set up to the platform. This can
 be done by calling the forward function on the config entry manager ([example](https://github.com/home-assistant/core/blob/f18ddb628c3574bc82e21563d9ba901bd75bc8b5/homeassistant/components/hassio/__init__.py#L529)):
 
 ```python
 await hass.config_entries.async_forward_entry_setups(config_entry, ["light", "sensor", "switch"])
 ```
 
-For a platform to support config entries, it will need to add a setup entry method ([example](https://github.com/home-assistant/core/blob/f18ddb628c3574bc82e21563d9ba901bd75bc8b5/homeassistant/components/hassio/__init__.py#L522)):
+For a platform to support config entries, it will need to add a setup entry function ([example](https://github.com/home-assistant/core/blob/f18ddb628c3574bc82e21563d9ba901bd75bc8b5/homeassistant/components/hassio/__init__.py#L522)):
 
 ```python
 async def async_setup_entry(hass, config_entry, async_add_entities):
@@ -132,19 +52,20 @@ async def async_setup_entry(hass, config_entry, async_add_entities):
 
 ## Unloading entries
 
-Components can optionally support unloading a config entry. When unloading an entry, the component needs to clean up all entities, unsubscribe any event listener and close all connections. To implement this, add `async_unload_entry(hass, entry)` to your component ([example](https://github.com/home-assistant/core/blob/f18ddb628c3574bc82e21563d9ba901bd75bc8b5/homeassistant/components/hassio/__init__.py#L534)).
+Integrations can optionally support unloading a config entry. When unloading an entry, the integration needs to clean up all entities, unsubscribe any event listener and close all connections. To implement this, add `async_unload_entry(hass, entry)` to your integration ([example](https://github.com/home-assistant/core/blob/f18ddb628c3574bc82e21563d9ba901bd75bc8b5/homeassistant/components/hassio/__init__.py#L534)). The state of the config entry is set to `ConfigEntryState.UNLOAD_IN_PROGRESS` before `async_unload_entry` is called.
 
 For each platform that you forwarded the config entry to, you will need to forward the unloading too.
 
 ```python
-await self.hass.config_entries.async_forward_entry_unload(self.config_entry, "light")
+async def async_unload_entry(hass: HomeAssistant, entry: MyConfigEntry) -> bool:
+    """Unload a config entry."""
 ```
 
 If you need to clean up resources used by an entity in a platform, have the entity implement the [`async_will_remove_from_hass`](core/entity.md#async_will_remove_from_hass) method.
 
 ## Removal of entries
 
-If a component needs to clean up code when an entry is removed, it can define a removal method:
+If an integration needs to clean up code when an entry is removed, it can define a removal function `async_remove_entry`. The config entry is deleted from `hass.config_entries` before `async_remove_entry` is called.
 
 ```python
 async def async_remove_entry(hass, entry) -> None:
@@ -163,3 +84,7 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) ->
 ## Modifying a config entry
 
 A `ConfigEntry` object, including the data and options, must never be mutated directly by integrations, instead integrations must call `async_update_entry`, the use of which is illustrated in the [config flow documentation](/config_entries_config_flow_handler.md#config-entry-migration).
+
+## Subscribing to config entry state changes
+
+If you want to be notified about a `ConfigEntry` changing its `state` (e.g. from `ConfigEntryState.LOADED` to `ConfigEntryState.UNLOAD_IN_PROGRESS`), you can add a listener which will be notified to `async_on_state_change`. This helper also returns a callback you can call to remove the listener again. Subscribing to changes until the entry is unloaded would therefore be `entry.async_on_unload(entry.async_on_state_change(notify_me))`.

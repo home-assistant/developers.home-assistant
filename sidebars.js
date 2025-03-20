@@ -296,6 +296,7 @@ module.exports = {
         "documenting/standards",
         "documenting/yaml-style-guide",
         "documenting/create-page",
+        "documenting/integration-docs-examples",
       ],
     },
 
