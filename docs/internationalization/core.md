@@ -56,7 +56,11 @@ Strings which are used more than once should be not be duplicated, instead refer
 
 ### Config / Options / Subentry flows
 
-The translation strings for the configuration flow handler, the option flow handler and config subentry handlers are defined under the `config`, `options` and `config_subentries` keys respectively. An example strings file below describes the different supported keys. Although the example shows translations for a configuration flow, the translations for an option flow is exactly the same.
+The translation strings for the configuration flow handler, the option flow handler and config subentry handlers are defined under the `config`, `options` and `config_subentries` keys respectively.
+
+Note that `config_subentries` is a map of maps, where the keys are the subentry types supported by the integration.
+
+The example strings file below describes the different supported keys. Although the example shows translations for a configuration flow, the translations for an option flow is exactly the same.
 
 ```json
 {
@@ -95,6 +99,17 @@ The translation strings for the configuration flow handler, the option flow hand
     },
     "progress": {
       "slow_task": "This message will be displayed if `slow_task` is returned as `progress_action` for `async_show_progress`."
+    }
+  },
+  "options": {
+    // Same format as for config flow
+  },
+  "config_subentries": {
+    "subentry_type_1": {
+      // Same format as for config flow
+    },
+    "subentry_type_2": {
+      // Same format as for config flow
     }
   }
 }
