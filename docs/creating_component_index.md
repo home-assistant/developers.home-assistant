@@ -11,7 +11,7 @@ python3 -m script.scaffold integration
 This will set you up with everything that you need to build an integration that is able to be set up via the user interface. More extensive examples of integrations are available from [our example repository](https://github.com/home-assistant/example-custom-config/tree/master/custom_components/).
 
 :::tip
-This example repository shows custom integrations that live in the `<config_dir>/custom_components` directory. These MUST have a [`version` key](/docs/creating_integration_manifest/#version) in their manifest file. Core integrations live in the `homeassistant/components` directory, and do not need a `version` key. The architecture is the same in both cases.
+This example repository shows custom integrations that live in the `<config_dir>/custom_components` directory. These MUST have a `version` key in their [manifest file](/docs/creating_integration_manifest/#version). Core integrations live in the `homeassistant/components` directory, and do not need a `version` key. The architecture is the same in both cases.
 :::
 
 ## The minimum
