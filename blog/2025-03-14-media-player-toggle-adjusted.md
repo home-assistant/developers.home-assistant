@@ -1,7 +1,7 @@
 ---
 author: Erik Montnemery
 authorURL: https://github.com/emontnemery
-title: "Changed implementation of media player toggle"
+title: "Media player toggle action changed"
 ---
 
 The implementation of the toggle action service has been adjusted in the media player base class.
