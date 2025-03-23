@@ -13,11 +13,11 @@ This decreases the amount of support requests and improves the user experience.
 ```markdown showLineNumbers
 ## Troubleshooting
 
-### Can’t setup the device
+### Can’t set up the device
 
 #### Symptom: “This device can’t be reached”
 
-When trying to setup the integration, the form shows the message “This device can’t be reached”.
+When trying to set up the integration, the form shows the message “This device can’t be reached”.
 
 ##### Description
 
