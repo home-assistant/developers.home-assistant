@@ -1,7 +1,7 @@
 ---
 author: Shay Levy
 authorURL: https://github.com/thecode
-title: "Changes to UnitSystem class"
+title: "UnitSystem dataclass is now frozen"
 ---
 
 `UnitSystem` class is changed to a frozen data class, all classes derived from it are now frozen.
@@ -11,7 +11,7 @@ The following unit systems that derived from the `UnitSystem` class are now froz
 - `METRIC_SYSTEM`
 - `US_CUSTOMARY_SYSTEM`
 
-The reason for this change is that Unit systems are constants that should not be modified. An integration that modify these constants can break unit conversions and create undesired output for other components of Home Assistant.
+The reason for this change is that Unit systems are constants that should not be modified. An integration that modifies these constants can break unit conversions and create undesired output for other components of Home Assistant.
 
 With a frozen data class an attempt to modify the UnitSystem constant will fail:
 
@@ -19,4 +19,4 @@ With a frozen data class an attempt to modify the UnitSystem constant will fail:
 dataclasses.FrozenInstanceError: cannot assign to field 'temperature_unit'
 ```
 
-The change is introduced in the [home assistant core PR #140954](https://github.com/home-assistant/core/pull/140954).
+This change was introduced in the [home assistant core PR #140954](https://github.com/home-assistant/core/pull/140954).
