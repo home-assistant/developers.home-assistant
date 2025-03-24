@@ -83,6 +83,9 @@ The example strings file below describes the different supported keys. Although 
         "data": {
           "api_key": "The label for the `api_key` input field"
         },
+        "data_description": {
+          "api_key": "Help text for the `api_key` input field ({api_key_help})"
+        }
         // Only needed if the form has sections
         "sections": {
           "auth_options": {
@@ -110,6 +113,115 @@ The example strings file below describes the different supported keys. Although 
     },
     "subentry_type_2": {
       // Same format as for config flow
+    }
+  }
+}
+```
+
+#### Translation placeholders
+
+It is also supported to use placeholders within the translation. If a placeholder is defined within a translation string, the form's `description_placeholders` must be set accordingly. Here is an example for the `api_key_help` placeholder above:
+
+```python
+async def async_step_user(self, user_input=None):
+    """Handle the initial step."""
+    errors: dict[str, str] = {}
+    if user_input:
+        return self.async_create_entry(
+            title="MyIntegration",
+            data=user_input,
+        )
+
+    return self.async_show_form(
+        step_id="user",
+        data_schema=vol.Schema({vol.Required("api_key"): str}),
+        description_placeholders={
+            "api_key_help": self._api_key_help
+        }
+        errors=errors,
+    )
+```
+
+#### Dynamic fields translation
+
+When using dynamically generated fields or sections in the form `data_schema`, it supports the use of a `translation_field_mappings` dictionary to map each dynamic field key to its corresponding translation key `translation_key` and its specific translation placeholders `description_placeholders` if needed.
+
+These specific placeholders are used only within these specific field translation strings and for this dynamic field key, allowing different values to be used for each dynamic field. They are merged with the `description_placeholders` form placeholders and take precedence in case of conflict.
+
+Here is an example with a dynamic number of sections:
+
+```python
+async def async_step_example(self, user_input=None):
+    """Example step."""
+    errors: dict[str, str] = {}
+    if user_input:
+        return self.async_create_entry(
+            title="MyIntegration",
+            data=user_input,
+        )
+    
+    fake_dynamic_items = [
+        {
+            "id": "1",
+            "name": "Garage"
+        },
+        {
+            "id": "2",
+            "name": "Kitchen"
+        }
+    ]
+    data_schema: VolDictType = {
+        vol.Required("static_field"): str,
+    }
+    translation_field_mappings: dict[str, TranslationFieldMapping] = {}
+    for item in fake_dynamic_items:
+        translation_field_mappings[item.id] = {
+            "translation_key": "room",
+            "description_placeholders": {
+                "room_name": item.name,
+                "room_id": item.id,
+            },
+        }
+        data_schema[vol.Required(item.id)] = section(
+            vol.Schema(
+                {
+                    vol.Required("entry"): str,
+                    vol.Required("exit"): str,
+                },
+            ),
+            {"collapsed": False},
+        )
+
+    return self.async_show_form(
+        step_id="example",
+        data_schema=vol.Schema(data_schema),
+        translation_field_mappings=translation_field_mappings,
+        errors=errors,
+    )
+```
+
+Which can be used with the following `strings.json` (shortened for brevity):
+
+```json
+{
+  "config": {
+    "step": {
+      "example": {
+        "title": "Example title",
+        "data": {
+          "static_field": "Static field",
+        },
+        "sections": {
+          "room": {
+            "name": "Room {room_name}",
+            "description": "With id {room_id}",
+            "data": {
+              "entry": "Entry",
+              "exit": "Exit"
+            }
+          }
+        }
+      }
     }
   }
 }

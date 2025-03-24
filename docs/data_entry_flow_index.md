@@ -42,6 +42,8 @@ If the result type is `FlowResultType.FORM`, the result should look like:
     "errors": errors,
     # a detail information about the step
     "description_placeholders": description_placeholders,
+    # the translation mappings for dynamic form fields
+    "translation_field_mappings": translation_field_mappings, 
 }
 ```
 
