@@ -29,11 +29,11 @@ class MySensor(SensorEntity):
         ...
 ```
 
-:::info
+### When using a coordinator
+
 When using a coordinator, you are already centralizing the data updates.
 This means you can set `PARALLEL_UPDATES = 0` for read-only platforms (`binary_sensor`, `sensor`, `device_tracker`, `event`)
 and only the action calls will be relevant to consider for setting an appropriate number of parallel updates.
-:::
 
 `sensor.py`
 ```python {1,2} showLineNumbers
