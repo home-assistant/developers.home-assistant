@@ -4,7 +4,7 @@ authorURL: https://github.com/thecode
 title: "UnitSystem dataclass is now frozen"
 ---
 
-`UnitSystem` class is changed to a frozen data class, and all intances derived from it are now frozen.
+`UnitSystem` class is changed to a frozen data class, and all instances derived from it are now frozen.
 
 The following unit systems that derived from the `UnitSystem` class are now frozen:
 
