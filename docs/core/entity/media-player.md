@@ -205,7 +205,7 @@ class MyMediaPlayer(MediaPlayerEntity):
         query: SearchMediaQuery,
     ) -> SearchMedia:
         """Search the media player."""
-        # search for the reqested media on your library client.
+        # search for the requested media on your library client.
         result = await my_client.search(query=query.search_query)
         return SearchMedia(result=result)
 ```

@@ -1,8 +1,8 @@
 ---
-author: Josef Zwedck
+author: Josef Zweck
 authorURL: https://github.com/zweckj
 authorImageURL: https://avatars.githubusercontent.com/u/24647999?v=4
-title: "Sarching in media players"
+title: "Searching in media players"
 ---
 
 Media players can now allow users to search through the media, by adding `MediaEntityFeature.SEARCH_MEDIA` and implementing `async_search_media`.
