@@ -107,6 +107,13 @@ When working in WSL make sure to keep all code/repos in the WSL environment to a
 If you find that you cannot open the development instance via [http://localhost:8123](http://localhost:8123) when using WSL, instead, within a WSL terminal, find the `inet` address of the `eth0` adaptor by running `ip addr show eth0`. Then use this address, excluding the CIDR block, to access the development instance, i.e. if your `inet` is listed as `172.20.37.6/20`, use [http://172.20.37.6:8123](http://172.20.37.6:8123).
 :::
 
+:::tip
+The default networking mode in WSL is NAT. This has some drawbacks like Home Assistant not being able to discover devices on the network and make it hard to access Home Assistant from the LAN. Alternatively, the networking mode can be set to "Mirrrored", which will make WSL use the same network interfaces as on the host machine (they even have the same IP) and has benefits like Multicast support which enables device discovery with mDNS.
+
+Check out the [WSL Mirrored mode networking documentation](https://learn.microsoft.com/en-us/windows/wsl/networking#mirrored-mode-networking) for details on how to enable it.
+:::
+
+
 ### Developing on macOS
 
 Install [Homebrew](https://brew.sh/), then use that to install the dependencies:
