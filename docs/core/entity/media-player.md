@@ -67,6 +67,7 @@ and are combined using the bitwise or (`|`) operator.
 | `PLAY_MEDIA`        | Entity allows playing media sources.                               |
 | `PREVIOUS_TRACK`    | Entity allows returning back to a previous media track.            |
 | `REPEAT_SET`        | Entity allows setting repeat.                                      |
+| `SEARCH_MEDIA`      | Entity allows searching for media.                                 |
 | `SEEK`              | Entity allows seeking position during playback of media.           |
 | `SELECT_SOUND_MODE` | Entity allows selecting a sound mode.                              |
 | `SELECT_SOURCE`     | Entity allows selecting a source/input.                            |
@@ -191,6 +192,25 @@ class MyMediaPlayer(MediaPlayerEntity):
         # Replace this with calling your media player play media function.
         await self._media_player.play_url(media_id)
 ```
+
+### Search media
+
+If the media player supports searching media, it should implement the following method:
+
+```python
+class MyMediaPlayer(MediaPlayerEntity):
+
+    async def async_search_media(
+        self,
+        query: SearchMediaQuery,
+    ) -> SearchMedia:
+        """Search the media player."""
+        # search for the reqested media on your library client.
+        result = await my_client.search(query=query.search_query)
+        return SearchMedia(result=result)
+```
+
+A user can also further filter the search results by only requesting a list of `MediaClass`.
 
 ### Select sound mode
 
