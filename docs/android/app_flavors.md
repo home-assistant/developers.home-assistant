@@ -28,7 +28,7 @@ This flavor is the primary focus of development and is distributed via the Googl
 The `minimal` flavor is designed for users who prefer or require an app without **Google Play Services**. It is available on F-droid and has the following limitations:
 
 - ❌ No location tracking sensor
-- ❌ No push notifications
+- ❌ No push notifications (except if using [local notification](https://companion.home-assistant.io/docs/notifications/notification-local#requirements) over the WebSocket)
 - ❌ No communication with Wear OS devices
 - ❌ No crash reporting
 
