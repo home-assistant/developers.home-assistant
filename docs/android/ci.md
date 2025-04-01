@@ -87,7 +87,7 @@ The `release.yml` workflow is triggered manually to promote the latest beta buil
 The [F-Droid](https://f-droid.org) store builds the applications themselves when we push a GitHub release. This process uses [metadata](https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/io.homeassistant.companion.android.minimal.yml).
 
 :::warning
-We do not guarantee when the applications will be available on F-Droid after a release. You can find the app [here](https://f-droid.org/fr/packages/io.homeassistant.companion.android.minimal/).
+We do not guarantee when the applications will be available on F-Droid after a release. You can find the app [here](https://f-droid.org/packages/io.homeassistant.companion.android.minimal/).
 :::
 
 ## Summary of Workflows
