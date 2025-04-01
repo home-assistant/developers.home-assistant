@@ -33,8 +33,13 @@ Always try to fix issues rather than ignoring them. If ignoring is necessary, fo
 
 1. Use the `@Suppress` annotation for specific constructs:
    ```kotlin
-   @Suppress("ktlint:standard:no-wildcard-imports")
-   import foo.*
+   @Suppress("trailing-comma-on-call-site")
+    fun myCallSiteExample() {
+        myFunction(
+            "value1",
+            "value2", // This trailing comma would normally cause a warning
+        )
+    }
    ```
 
 2. For project-wide suppression, update the `.editorconfig` file as per [this guide](https://pinterest.github.io/ktlint/0.49.1/faq/#how-do-i-globally-disable-a-rule-without-editorconfig). Open a dedicated PR with an explanation for disabling the rule.

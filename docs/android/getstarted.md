@@ -18,7 +18,9 @@ To get started, install the latest stable version of [Android Studio](https://de
 1. Open the [Home Assistant Android repository](https://github.com/home-assistant/android).
 2. Click **Fork** to create your own copy of the repository.
 
-> 💡 **Tip:** If you encounter any issues, refer to the [GitHub documentation on forking a repository](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo).
+:::tip
+If you encounter any issues, refer to the [GitHub documentation on forking a repository](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo).
+:::
 
 ### Clone your forked repository
 
@@ -41,9 +43,11 @@ Before making any changes, create a new branch with a meaningful name that refle
 git checkout -b feature/add-new-feature
 ```
 
-> 💡 **Tip:** If you're new to Git, check out the [Git Branching Guide](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging). You can also create branches directly in Android Studio.
+:::tip
+If you're new to Git, check out the [Git Branching Guide](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging). You can also create branches directly in Android Studio.
+:::
 
-## Build your first app
+## Build the Home Assistant applications
 
 Once you have the repository cloned locally, you can build the app using Android Studio or the terminal.
 
@@ -73,24 +77,7 @@ gradlew.bat assembleDebug
 
 ## Firebase setup
 
-Firebase is used for notifications and distributing builds. If you don't need these features, you can use a mocked Firebase configuration.
-
-### Setting up a real Firebase project
-
-1. Create a Firebase project at the [Firebase Console](https://console.firebase.google.com).
-2. Add four Android apps to the project with the following package names:
-   - `io.homeassistant.companion.android`
-   - `io.homeassistant.companion.android.debug`
-   - `io.homeassistant.companion.android.minimal`
-   - `io.homeassistant.companion.android.minimal.debug`
-3. Download the `google-services.json` file and place it in the following folders:
-   - `/app`
-   - `/automotive`
-   - `/wear`
-
-   > **Note:** The `google-services.json` file must contain client IDs for all the package names listed above. Without this, FCM push notifications will not work (only WebSocket notifications will).
-
-4. (Optional) Follow our [Push Notification Guide](tips/push_notification) for additional setup instructions.
+Firebase is used for notifications and distributing builds. If you don't need these features, you should use a mocked Firebase configuration.
 
 ### Setting up a mock Firebase project
 
@@ -102,10 +89,14 @@ If you don't need real Firebase functionality, you can use the mock configuratio
    - `/automotive`
    - `/wear`
 
+### Setting up a real Firebase project
+
+Follow our [Push notification guide](tips/push_notification) for additional setup instructions.
+
 ## What's next?
 
-Now that you've built the app, explore the rest of the documentation to deepen your understanding of the project. A good starting point is the [Architecture Guide](architecture), which explains the general structure of the codebase.
+Now that you've built the app, explore the rest of the documentation to deepen your understanding of the project. A good starting point is the [Architecture guide](architecture), which explains the general structure of the codebase.
 
 ## Need help?
 
-If you get stuck, don't hesitate to ask for help! Join our [Discord](https://discord.gg/c5DvZ4e) channel and head to **#Android** for assistance.
+If you get stuck, don't hesitate to ask for help! Join our [Discord](https://discord.gg/c5DvZ4e) channel and head to **[#Android](https://discord.com/channels/330944238910963714/1346948551892009101)** for assistance.

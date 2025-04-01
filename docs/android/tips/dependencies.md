@@ -34,6 +34,10 @@ To update the lockfiles, run the following command from the project root:
 
 This command resolves all dependencies and updates the gradle.lockfile in each module.
 
+:::info
+If the version catalog is updated but the lockfiles are not updated, the CI pipeline will fail.
+:::
+
 ## Best practices for managing dependencies
 
 - **Review updates carefully:** Always review dependency updates to ensure they don't introduce breaking changes.

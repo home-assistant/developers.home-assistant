@@ -24,7 +24,7 @@ We use [KTLint](https://pinterest.github.io/ktlint) to enforce Kotlin code style
 
 - We override some KTLint rules when necessary. To enable or disable a rule:
   1. Submit a **dedicated PR** with a proper explanation of the change.
-  2. If the change affects a large portion of the codebase, create **two commits**:
+  2. If the change affects the codebase, create **two commits**:
      - One for updating the rule.
      - Another for applying the changes.
 

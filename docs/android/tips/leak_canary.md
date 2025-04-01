@@ -14,6 +14,7 @@ You can disable LeakCanary manually by passing the `-PnoLeakCanary` flag in the 
 ```bash
 ./gradlew app:assembleFullDebug -PnoLeakCanary
 ```
+
 This flag ensures that LeakCanary is excluded from the build.
 
 ### Disabling LeakCanary via properties file
@@ -39,4 +40,4 @@ It can be done with
 - **Enable only in debug builds:** LeakCanary should only be included in debug builds to avoid impacting performance in production builds.
 - **Regularly monitor memory leaks:** Use LeakCanary during development to identify and fix memory leaks early.
 - **Document known leaks:** If a memory leak is caused by a third-party library and cannot be fixed immediately, document it for future reference.
-- **Speak about it:** If a leak is reported don't hesitate to get in touch with other contributors on Discord about it.
+- **Speak about it:** If a leak is reported don't hesitate to get in touch with other contributors on [Discord](https://discord.com/channels/330944238910963714/1346948551892009101) about it.

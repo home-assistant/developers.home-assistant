@@ -3,8 +3,6 @@ title: "Android continuous integration and delivery"
 sidebar_label: "Continuous integration and delivery"
 ---
 
-🚧🚧🚧 Under construction 🚧🚧🚧
-
 ## Android Continuous Integration and Delivery
 
 This document outlines the Continuous Integration (CI) and Continuous Delivery (CD) processes for the Android project. We use **GitHub Actions** as our CI/CD platform, with multiple workflows configured to ensure code quality, automate builds, and streamline deployments.
@@ -67,7 +65,7 @@ This workflow can also be manually triggered with the `beta` flag to promote a b
 
 ### Weekly builds
 
-Every Sunday at 4:00 AM, the `weekly.yml` workflow is triggered automatically. Its goals are:
+Every Sunday at 4:00 AM UTC, the `weekly.yml` workflow is triggered automatically. Its goals are:
 
 - 🛠 Create a weekly GitHub pre-release.
 - 🚀 Invoke the `onPush.yml` workflow with the `beta` flag set to `true`.
@@ -85,6 +83,8 @@ The `release.yml` workflow is triggered manually to promote the latest beta buil
 #### Release on F-Droid
 
 The [F-Droid](https://f-droid.org) store builds the applications themselves when we push a GitHub release. This process uses [metadata](https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/io.homeassistant.companion.android.minimal.yml).
+
+They use the `version_code.txt` file, which is created on every release from the `main` branch, for the app's versioning.
 
 :::warning
 We do not guarantee when the applications will be available on F-Droid after a release. You can find the app [here](https://f-droid.org/packages/io.homeassistant.companion.android.minimal/).

@@ -18,7 +18,7 @@ When creating a PR, GitHub pre-fills the description with a checklist. Ensure yo
 - ✅ **User documentation**: If user documentation needs updates, open a PR on [GitHub](https://github.com/home-assistant/companion.home-assistant).
 - ✅ **Developer documentation**: If this documentation needs updates, open a PR on [GitHub](https://github.com/home-assistant/developers.home-assistant/).
 - ✅ **Builds**: Verify that everything builds properly (app, automotive, wear) locally.
-- ✅ **Best practices**: Follow the [best practices](bestpractices).
+- ✅ **Best practices**: Follow the [best practices](best_practices).
 - ✅ **Code style**: Adhere to the [code style](codestyle).
 - ✅ **Linting**: Ensure no lint issues are introduced ([linter](linter)).
 
@@ -37,7 +37,7 @@ Running CI workflows consumes significant resources. If your work is incomplete,
 
 Everyone can comment on your PR since it's public. We encourage contributions through reviews. Reviewing can be quicker than coding, and even a 10-minute review can be valuable.
 
-If you're not confident in **coding**, you can still help by:  
+If you're not confident in **reviewing**, you can still help by:  
 
 - Testing the feature by installing the APK (it's available on the Checks tab of the PR).  
 - Providing feedback on UI/UX.  

@@ -350,7 +350,7 @@ module.exports = {
         "android/tips/sarif_reports",
       ],
     },
-    "android/bestpractices",
+    "android/best_practices",
     "android/ci",
     "android/codestyle",
     "android/linter",

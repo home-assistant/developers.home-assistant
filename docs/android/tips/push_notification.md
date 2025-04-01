@@ -1,18 +1,44 @@
 ---
-title: "Android push notification"
-sidebar_label: "Push notification"
+title: "Android push notifications"
+sidebar_label: "Push notifications"
 ---
 
-## Push notifications
+## Push notifications setup
 
-If you want to work on push notifications or use a development build with push notifications, please go to the server-side code [here](https://github.com/home-assistant/mobile-apps-fcm-push) and deploy it to your Firebase project. Once you have your androidV1 URL to the deployed service, set it in to your `${GRADLE_USER_HOME}/gradle.properties` file, e.g.:
+If you want to work on push notifications or use a development build with push notifications, follow these steps:
 
-```properties
-homeAssistantAndroidPushUrl=https://mydomain.cloudfunctions.net/androidV1
-```
+1. **Create a Firebase project**  
+   Go to the [Firebase Console](https://console.firebase.google.com) and create a new Firebase project.
 
-You can also define the rate limit function URL, e.g.:
+2. **Add Android apps to the Firebase project**  
+   Add the following package names as Android apps in your Firebase project:
+   - `io.homeassistant.companion.android`
+   - `io.homeassistant.companion.android.debug`
+   - `io.homeassistant.companion.android.minimal`
+   - `io.homeassistant.companion.android.minimal.debug`
 
-```properties
-homeAssistantAndroidRateLimitUrl=https://mydomain.cloudfunctions.net/checkRateLimits
-```
+3. **Deploy the push notification service**  
+   Visit the [mobile-apps-fcm-push repository](https://github.com/home-assistant/mobile-apps-fcm-push) and deploy the service to your Firebase project.
+
+4. **Set the push notification URL**  
+   Once you have the `androidV1` URL for the deployed service, add it to your `${GRADLE_USER_HOME}/gradle.properties` file. For example:
+
+   ```properties
+   homeAssistantAndroidPushUrl=https://mydomain.cloudfunctions.net/androidV1
+   ```
+
+   Optionally, you can also define the rate limit function URL:
+
+   ```properties
+   homeAssistantAndroidRateLimitUrl=https://mydomain.cloudfunctions.net/checkRateLimits
+   ```
+
+5. **Download and place the `google-services.json` File**  
+   Download the `google-services.json` file from your Firebase project and place it in the following folders:
+   - `/app`
+   - `/automotive`
+   - `/wear`
+
+:::note
+The `google-services.json` file must include client IDs for all the package names listed above. Without this, FCM push notifications will not work (only WebSocket notifications will function).
+:::

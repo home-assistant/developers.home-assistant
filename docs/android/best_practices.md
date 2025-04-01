@@ -91,13 +91,6 @@ For more details on race conditions, see [Race Condition](https://en.wikipedia.o
 
 ## Code organization
 
-### Keep your PRs small
-
-- **Why?** Smaller PRs are easier to review, reduce delays, and minimize frustration.
-- **How?** Break down large changes into smaller, logical chunks.
-
-For more details, see [submit](submit).
-
 ### Keep your classes small
 
 - Large classes often have too many responsibilities, making them harder to review, test, and maintain.
@@ -113,8 +106,14 @@ For more details, see [submit](submit).
 Naming is hard, but smaller functions make it easier to choose meaningful names.
 :::
 
+## Keep your PRs small
+
+- **Why?** Smaller PRs are easier to review, reduce delays, and minimize frustration.
+- **How?** Break down large changes into smaller, logical chunks.
+
+For more details, see [submit](submit).
+
 ## Additional notes
 
 - **Testing**: Write [unit tests](testing/unit_testing) for critical functionality to ensure reliability.
 - **Code reviews**: Always review code for adherence to these best practices.
-- **Refactoring**: Regularly refactor code to improve readability, maintainability, and performance.
