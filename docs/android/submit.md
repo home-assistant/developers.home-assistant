@@ -39,7 +39,7 @@ Everyone can comment on your PR since it's public. We encourage contributions th
 
 If you're not confident in **coding**, you can still help by:  
 
-- Testing the feature by installing the APK (it's available on the Checks tab of the PT).  
+- Testing the feature by installing the APK (it's available on the Checks tab of the PR).  
 - Providing feedback on UI/UX.  
 - Reporting crashes or bugs.
 
