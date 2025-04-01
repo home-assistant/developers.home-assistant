@@ -344,7 +344,7 @@ module.exports = {
         "android/tips/compose_101",
         "android/tips/dependencies",
         "android/tips/leak_canary",
-        "android/tips/lolipop_emulator",
+        "android/tips/lollipop_emulator",
         "android/tips/new_sensor",
         "android/tips/push_notification",
         "android/tips/sarif_reports",

@@ -41,4 +41,4 @@ Android emulators are notoriously unreliable. Occasionally, a platform may fail 
 
 ## Testing on Android 5 (API 21)
 
-If your tests require the WebView, you may need to follow these [tips for the Lollipop emulator](../tips/lolipop_emulator.md).
+If your tests require the WebView, you may need to follow these [tips for the Lollipop emulator](../tips/lollipop_emulator.md).

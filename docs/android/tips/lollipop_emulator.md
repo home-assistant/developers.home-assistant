@@ -1,6 +1,6 @@
 ---
-title: "Test on lolipop emulator"
-sidebar_label: "Lolipop emulator"
+title: "Test on lollipop emulator"
+sidebar_label: "Lollipop emulator"
 ---
 
 ## Overview
