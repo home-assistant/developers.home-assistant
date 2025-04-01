@@ -56,13 +56,24 @@ Strings which are used more than once should be not be duplicated, instead refer
 
 ### Config / Options / Subentry flows
 
-The translation strings for the configuration flow handler, the option flow handler and config subentry handlers are defined under the `config`, `options` and `config_subentries` keys respectively. An example strings file below describes the different supported keys. Although the example shows translations for a configuration flow, the translations for an option flow is exactly the same.
+The translation strings for the configuration flow handler, the option flow handler and config subentry handlers are defined under the `config`, `options` and `config_subentries` keys respectively.
+
+Note that `config_subentries` is a map of maps, where the keys are the subentry types supported by the integration.
+
+The example strings file below describes the different supported keys. Although the example shows translations for a configuration flow, the options and subentry flow translations follow the same format.
 
 ```json
 {
   "config": {
     // Optional. Title to show in list. Only will be rendered if placeholders required
     "flow_title": "Discovered Device ({host})",
+    // Optional, only needed if the default translations in frontend are misleading
+    "entry_type": "Label explaining what an entry represents",
+    // Optional, only needed if the default translations in frontend are misleading
+    "initiate_flow": {
+        "reconfigure": "Menu or button label for starting a reconfigure flow",
+        "user": "Menu or button label for starting a user flow"
+    },
     "step": {
       "init": {
         // Optional. Will show the integration name if omitted
@@ -88,6 +99,17 @@ The translation strings for the configuration flow handler, the option flow hand
     },
     "progress": {
       "slow_task": "This message will be displayed if `slow_task` is returned as `progress_action` for `async_show_progress`."
+    }
+  },
+  "options": {
+    // Same format as for config flow
+  },
+  "config_subentries": {
+    "subentry_type_1": {
+      // Same format as for config flow
+    },
+    "subentry_type_2": {
+      // Same format as for config flow
     }
   }
 }

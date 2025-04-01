@@ -47,7 +47,7 @@ class MyConfigFlow(ConfigFlow, domain=DOMAIN):
                     data_updates=user_input,
                 )
         return self.async_show_form(
-            step_id="user",
+            step_id="reconfigure",
             data_schema=vol.Schema(
                 {
                     vol.Required(CONF_HOST): TextSelector(),

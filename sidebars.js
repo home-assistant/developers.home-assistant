@@ -154,12 +154,15 @@ module.exports = {
       link: {type: 'doc', id: 'core/integration-quality-scale/index'},
       items: [
         {type: 'doc', id: 'core/integration-quality-scale/checklist'},
-        {type: 'category', label: 'Rules', items: iqs_rules.map(rule => ({
-                type: 'doc',
-                id: `core/integration-quality-scale/rules/${rule.toLowerCase()}`
-              })
-          )}
-          ]
+        {
+          type: 'category',
+          label: 'Rules',
+          link: {type: 'doc', id: 'core/integration-quality-scale/rules'},
+          items: iqs_rules.map(rule => ({
+            type: 'doc',
+            id: `core/integration-quality-scale/rules/${rule.toLowerCase()}`
+          }))}
+      ]
     },
     {
       type: "category",

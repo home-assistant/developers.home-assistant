@@ -9,4 +9,4 @@ The `BackupAgent` API has been adjusted such that the following methods should n
 - `BackupAgent.async_download_backup`
 - `BackupAgent.async_get_backup`
 
-Check the backup agent documentation](/docs/core/platform/backup#backup-agents), and the [home assistant core PR #139754](https://github.com/home-assistant/core/pull/139754) for additional background.
+Check the [backup agent documentation](/docs/core/platform/backup#backup-agents), and the [home assistant core PR #139754](https://github.com/home-assistant/core/pull/139754) for additional background.

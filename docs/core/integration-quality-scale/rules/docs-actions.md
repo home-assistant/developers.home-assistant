@@ -18,9 +18,9 @@ The integration provides the following actions.
 
 The `my_integration.get_schedule` service is used to fetch a schedule from the integration.
 
-| Data attribute         | Optional | Description                                          |
-|------------------------|----------|------------------------------------------------------|
-| `config_entry_id`      | No       | The ID of the config entry to get the schedule from. |
+- **Data attribute**: `config_entry_id`
+    - **Description**: The ID of the config entry to get the schedule from.
+    - **Optional**: No
 ```
 
 ## Exceptions

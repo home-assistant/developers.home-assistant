@@ -35,9 +35,44 @@ class MyTextToSpeechEntity(TextToSpeechEntity):
         """Return a list of supported voices for a language."""
 ```
 
-### Get TTS audio
+### Generating TTS audio
 
-The get tts audio method is used to generate an audio file from a text message using a TTS service.
+An entity can choose to implement three different ways of generating TTS audio. Only one method can be implemented at a time.
+
+The stream TTS audio method allows text to be streamed into the TTS service and audio to be streamed back.
+
+```python
+class MyTextToSpeechEntity(TextToSpeechEntity):
+    """Represent a Text To Speech entity."""
+
+    async def async_stream_tts_audio(
+        self, request: TTSAudioRequest
+    ) -> TTSAudioResponse:
+        """Generate speech from an incoming message."""
+```
+
+The definition of the `TTSAudioRequest` and `TTSAudioResponse` objects are as follows:
+
+```python
+@dataclass
+class TTSAudioRequest:
+    """Request to get TTS audio."""
+
+    language: str
+    options: dict[str, Any]
+    message_gen: AsyncGenerator[str]
+
+
+@dataclass
+class TTSAudioResponse:
+    """Response containing TTS audio stream."""
+
+    extension: str
+    data_gen: AsyncGenerator[bytes]
+```
+
+If the Text-to-Speech service requires the entire message to be sent at once, the get tts audio method can be used. It can be implemented as either synchronous or asynchronous.
+
 
 ```python
 class MyTextToSpeechEntity(TextToSpeechEntity):
