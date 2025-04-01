@@ -18,4 +18,4 @@ This guide explains how to set up and test your application on an Android Lollip
 
 ## Look for the latest APK of the WebView
 
-Unfortunately the WebView installed on the emulator is outdated and makes the app unusable. You need to find the newest APK of the WebView and follow the steps from this [Stackoverflow post](https://stackoverflow.com/a/79514205/3289338).
+@Unfortunately, the WebView installed on the emulator is outdated and makes the app unusable. You need to find the newest APK of the WebView and follow the steps from this [Stackoverflow post](https://stackoverflow.com/a/79514205/3289338).

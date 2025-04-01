@@ -23,8 +23,6 @@ Screenshot testing has proven useful when using beta versions of libraries, such
 
 ## Compose Screenshot Testing
 
-🚧🚧🚧 Under Construction 🚧🚧🚧
-
 We use the [Compose Preview Screenshot Testing](https://developer.android.com/studio/preview/compose-screenshot-testing) framework to assert that the UI does not change unexpectedly.
 
 ### Advantages of Compose Screenshot Testing
@@ -46,13 +44,9 @@ Our [CI pipeline](../ci) verifies the test reports for any errors. If discrepanc
 
 ## Avoiding Duplication in Compose Previews
 
-🚧🚧🚧 Under Construction 🚧🚧🚧
-
 To avoid duplicating Compose previews in your tests, ensure that you reuse existing composables and preview annotations wherever possible. This reduces redundancy and ensures consistency between previews and tests.
 
 ## Configuring Annotations for Tests
-
-🚧🚧🚧 Under Construction 🚧🚧🚧
 
 When writing screenshot tests, use appropriate configuration annotations to define the device size, theme, and other parameters. This ensures that the tests accurately reflect the intended UI.
 

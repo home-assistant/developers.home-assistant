@@ -24,18 +24,18 @@ When creating a PR, GitHub pre-fills the description with a checklist. Ensure yo
 
 ### Opening a Draft PR
 
-If your PR isn't ready for official review but you'd like feedback, open it in **draft mode**. This will still trigger the CI on every commit and is especially useful when working on CI-related changes.
+If your PR isn't ready for official review, but you'd like feedback, open it in **draft mode**. This will still trigger the CI on every commit and is especially useful when working on CI-related changes.
 
 :::warning
 **Avoid unnecessary CI runs**  
-Running CI workflows consumes significant resources. If your work is incomplete, postpone opening the PR (even in draft mode) unless necessary. Let's be mindful of resource usage and our planet. 🌍 But it doesn't prevent you from pushing regularly to avoid loosing your work.
+Running CI workflows consumes significant resources. If your work is incomplete, postpone opening the PR (even in draft mode) unless necessary. Let's be mindful of resource usage and our planet. 🌍 But it doesn't prevent you from pushing regularly to avoid losing your work.
 :::
 
 ### Review Process
 
 #### Who Can Review?
 
-Everyone can comment on your PR since it's public. We encourage contributions through reviews. Reviewing can be quicker than coding, and even a 10-minute review can be valuable.  
+Everyone can comment on your PR since it's public. We encourage contributions through reviews. Reviewing can be quicker than coding, and even a 10-minute review can be valuable.
 
 If you're not confident in **coding**, you can still help by:  
 

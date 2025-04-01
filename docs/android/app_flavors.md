@@ -32,7 +32,7 @@ The `minimal` flavor is designed for users who prefer or require an app without 
 - ❌ No communication with Wear OS devices
 - ❌ No crash reporting
 
-Despite these limitations, the `minimal` flavor allows us to offer the app to a broader audience, including users of devices without Google Play Services. If viable open-source alternatives to Google Play Services features are found, they may be considered for inclusion in the `minimal` flavor to remove this limitations.
+Despite these limitations, the `minimal` flavor allows us to offer the app to a broader audience, including users of devices without Google Play Services. If viable open-source alternatives to Google Play Services features are found, they may be considered for inclusion in the `minimal` flavor to remove these limitations.
 
 ## Crash Reporting
 
