@@ -3,24 +3,24 @@ title: "Android Code Style"
 sidebar_label: "Code Style"
 ---
 
-## Why Enforcing Code Style
+## Why enforcing code style
 
 We aim to maintain a **consistent and standard codebase**. By enforcing code style:
 
 - We reduce unnecessary comments on PRs, allowing reviewers to focus on the logic rather than formatting.
 - We ensure the code is easier to read and maintain.
 
-## Language Guidelines
+## Language guidelines
 
 - All code must be written in **English**.
 - Avoid typos and grammatical mistakes. While mistakes are acceptable (as many contributors are non-native speakers), reviewers are encouraged to suggest corrections.
 - Use tools like LLMs or spell checkers to assist in correcting mistakes.
 
-## KTLint Formatter
+## KTLint formatter
 
 We use [KTLint](https://pinterest.github.io/ktlint) to enforce Kotlin code style. It is integrated into our Gradle modules and configured via the `.editorconfig` file.
 
-### Custom Rules
+### Custom rules
 
 - We override some KTLint rules when necessary. To enable or disable a rule:
   1. Submit a **dedicated PR** with a proper explanation of the change.
@@ -36,7 +36,7 @@ You can use KTLint through Gradle to automatically reformat your code:
 ./gradlew :build-logic:convention:ktlintFormat ktlintFormat
 ```
 
-### CI Integration
+### CI integration
 
 If a KTLint error is detected, the CI will fail, and GitHub will report it as a comment in the PR using the generated [SARIF](tips/sarif_reports.md) report.
 
@@ -55,7 +55,7 @@ yamllint --strict --format github .
 - **Note:** Yamllint does not reformat your code; it only reports errors that need to be fixed.
 - Use your IDE's code formatter or fix issues manually.
 
-### CI Integration
+### CI integration
 
 If the YAML format is invalid, the CI will block the PR.
 

@@ -11,9 +11,9 @@ Only the `:app` and `:automotive` modules are affected by these flavors.
 
 The Android app is built with two flavors: `full` and `minimal`. These flavors allow us to cater to different user preferences. This document explains the differences between the flavors, their features, and the rationale behind their implementation.
 
-## App Flavors
+## App flavors
 
-### Full Flavor
+### Full flavor
 
 The `full` flavor uses the **Google Play Services**, enabling features such as:
 
@@ -23,7 +23,7 @@ The `full` flavor uses the **Google Play Services**, enabling features such as:
 
 This flavor is the primary focus of development and is distributed via the Google Play Store.
 
-### Minimal Flavor
+### Minimal flavor
 
 The `minimal` flavor is designed for users who prefer or require an app without **Google Play Services**. It is available on F-droid and has the following limitations:
 
@@ -34,14 +34,14 @@ The `minimal` flavor is designed for users who prefer or require an app without 
 
 Despite these limitations, the `minimal` flavor allows us to offer the app to a broader audience, including users of devices without Google Play Services. If viable open-source alternatives to Google Play Services features are found, they may be considered for inclusion in the `minimal` flavor to remove these limitations.
 
-## Crash Reporting
+## Crash reporting
 
 We use [Sentry](https://sentry.io) for crash reporting, but it is only enabled for the `full` flavor. This means:
 
 - Crashes in the `minimal` flavor are **not tracked**.
 - Developers relying on crash reports for debugging should focus on the `full` flavor.
 
-## Development Focus
+## Development focus
 
 While the `minimal` flavor is maintained to support a wider user base, the primary focus of development is on the `full` flavor. This is because the `full` flavor provides a richer feature set and aligns with the majority of user needs.
 

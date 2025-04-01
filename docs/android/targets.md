@@ -3,11 +3,11 @@ title: "Android Targets"
 sidebar_label: "Targets"
 ---
 
-## Android Targets
+## Android targets
 
 This document outlines the various Android targets supported by the Home Assistant application. Each target has its own specific requirements and considerations.
 
-## 📱 Application (Main Target)
+## 📱 Application (main target)
 
 The main target is based on the Gradle `:app` module. It supports a **minimum API level of 21**. This is the primary application used by most users.
 

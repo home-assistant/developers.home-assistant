@@ -7,7 +7,7 @@ sidebar_label: "Lollipop emulator"
 
 This guide explains how to set up and test your application on an Android Lollipop emulator. It includes steps to create an AVD (Android Virtual Device) and update the outdated WebView to ensure compatibility with your app.
 
-## Steps to Create an AVD
+## Steps to create an AVD
 
 1. Open **Android Studio**.
 2. Navigate to **Tools > Device Manager**.

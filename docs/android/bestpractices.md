@@ -3,9 +3,7 @@ title: "Android Best Practices"
 sidebar_label: "Best Practices"
 ---
 
-🚧🚧🚧 Under Construction 🚧🚧🚧
-
-## General Principles
+## General principles
 
 In general, we should follow standard development principles such as:
 
@@ -36,11 +34,11 @@ Logging is essential but should be used judiciously. As Jake Wharton says in his
 - Use structured and meaningful log messages.
 - Leverage tools like Timber to manage logging effectively.
 
-## Time and Duration
+## Time and duration
 
 When working with time, date, or duration, avoid using primitive types. Instead, use strong types to prevent unit mix-ups.
 
-### ❌ Don't Do This
+### ❌ Don't do this
 
 ```kotlin
 const val THRESHOLD = 600000
@@ -54,7 +52,7 @@ fun main() {
 }
 ```
 
-### ✅ Do This
+### ✅ Do this
 
 ```kotlin
 val THRESHOLD = Instant.ofEpochSecond(60)
@@ -79,11 +77,11 @@ If you must use primitive types, ensure the variable name includes the unit (e.g
 
 Concurrency is powerful but requires careful handling to avoid issues like memory leaks and race conditions.
 
-### Coroutine Scope
+### Coroutine scope
 
 - Tie your coroutines to an Android lifecycle (e.g., `viewModelScope` or `lifecycleScope`) to prevent memory leaks.
 
-### Concurrent Access
+### Concurrent access
 
 - Ensure that any references accessed outside of a coroutine are thread-safe.
 - If a reference is not safe, either make it safe or don't use it.
@@ -91,21 +89,21 @@ Concurrency is powerful but requires careful handling to avoid issues like memor
 
 For more details on race conditions, see [Race Condition](https://en.wikipedia.org/wiki/Race_condition#In_software).
 
-## Code Organization
+## Code organization
 
-### Keep Your PRs Small
+### Keep your PRs small
 
 - **Why?** Smaller PRs are easier to review, reduce delays, and minimize frustration.
 - **How?** Break down large changes into smaller, logical chunks.
 
 For more details, see [submit](submit).
 
-### Keep Your Classes Small
+### Keep your classes small
 
 - Large classes often have too many responsibilities, making them harder to review, test, and maintain.
 - Aim for small classes with proper separation of concerns and abstraction.
 
-### Keep Your Functions Small and Meaningful
+### Keep your functions small and meaningful
 
 - Functions should be small and focused on a single responsibility.
 - A function's name should clearly describe what it does. If it’s hard to name, the function likely does too much.
@@ -115,8 +113,8 @@ For more details, see [submit](submit).
 Naming is hard, but smaller functions make it easier to choose meaningful names.
 :::
 
-## Additional Notes
+## Additional notes
 
 - **Testing**: Write [unit tests](testing/unit_testing) for critical functionality to ensure reliability.
-- **Code Reviews**: Always review code for adherence to these best practices.
+- **Code reviews**: Always review code for adherence to these best practices.
 - **Refactoring**: Regularly refactor code to improve readability, maintainability, and performance.

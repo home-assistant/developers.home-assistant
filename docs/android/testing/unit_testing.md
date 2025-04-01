@@ -5,7 +5,7 @@ sidebar_label: "Unit Tests"
 
 🚧🚧🚧 Under Construction 🚧🚧🚧
 
-## Why Do We Perform Unit Testing?
+## Why do we perform unit testing?
 
 Unit testing helps you build your features with confidence and ensures that your code behaves as expected. It should be a tool to assist development, not a burden. [Test-Driven Development (TDD)](https://en.wikipedia.org/wiki/Test-driven_development) is a well-known methodology where tests are written before or alongside the actual code. This approach allows you to quickly validate your code without waiting for the entire application to run.
 
@@ -19,7 +19,7 @@ Unit tests focus on testing **your code**. Avoid testing the behavior of externa
 There are exceptions to this rule. Sometimes, we add tests to ensure that the behavior of a library doesn't change over time. In such cases, explicitly document the reason for the test.
 :::
 
-## Testing the Public Interface
+## Testing the public interface
 
 Focus on testing the **public API** of your classes rather than every single function. Writing tests for all functions, especially small ones, can lead to an overwhelming number of tests that are difficult to maintain. By concentrating on the public interface, you ensure that your tests remain relevant and resilient to internal changes.
 
@@ -29,7 +29,7 @@ When you need to access private parts of a class for testing, consider using the
 Avoid using `VisibleForTesting` unless absolutely necessary. It’s better to design your code in a way that doesn’t require exposing private members.
 :::
 
-## Test Frameworks and Mocking
+## Test frameworks and mocking
 
 The project is configured to use [JUnit 5](https://junit.org/junit5/), which should be your primary testing framework.
 
@@ -41,7 +41,7 @@ When writing unit tests, you often need to isolate the code under test by mockin
 
 For cases where your code interacts with Android APIs that cannot be mocked or faked properly, the project includes [Robolectric](https://robolectric.org/). Robolectric allows you to run Android-specific tests in a JVM environment, avoiding the need for an emulator.
 
-### When to Use Robolectric
+### When to use Robolectric
 
 - Use Robolectric when testing Android APIs that are difficult to mock or fake.
 - Prefer Robolectric over instrumentation tests whenever possible, as instrumentation tests require more resources and are more complex to set up.
@@ -51,16 +51,16 @@ For cases where your code interacts with Android APIs that cannot be mocked or f
 - Robolectric does not work with JUnit 5 (follow the [issue](https://github.com/robolectric/robolectric/issues/3477)). To address this, the project includes a dependency on JUnit 4 for tests that require Robolectric.
 - Ensure that the code you are testing does not depend on the state of the Android API, as this can lead to unreliable tests. If that is the case consider writing an [instrumented test](integration_testing).
 
-## Best Practices for Unit Testing
+## Best practices for unit testing
 
-- **Write Tests Alongside Code**: Writing tests as you develop ensures that your code is testable and reduces the risk of bugs.
-- **Focus on Behavior**: Test the behavior of your code, not its implementation details.
-- **Keep Tests Small and Focused**: Each test should validate a single behavior or scenario.
-- **Use Descriptive Test Names**: Test names should clearly describe the scenario being tested and the expected outcome.
-- **Mock External Dependencies**: Use mocks or fakes to isolate the code under test.
-- **Avoid Over-Testing**: Don’t write tests for trivial methods or internal implementation details unless they are critical to the functionality.
+- **Write tests alongside code**: Writing tests as you develop ensures that your code is testable and reduces the risk of bugs.
+- **Focus on behavior**: Test the behavior of your code, not its implementation details.
+- **Keep tests small and focused**: Each test should validate a single behavior or scenario.
+- **Use descriptive test names**: Test names should clearly describe the scenario being tested and the expected outcome.
+- **Mock external dependencies**: Use mocks or fakes to isolate the code under test.
+- **Avoid over-testing**: Don’t write tests for trivial methods or internal implementation details unless they are critical to the functionality.
 
-## Example: Writing a Unit Test
+## Example: writing a unit test
 
 Here’s an example of a well-structured unit test using JUnit 5 and MockK:
 

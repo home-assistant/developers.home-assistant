@@ -9,30 +9,30 @@ The Android project for Home Assistant started in 2019. Since then, the Android 
 
 Home Assistant has been a leader in [PWA](https://en.wikipedia.org/wiki/Progressive_web_app) development, and this philosophy is reflected in the native application. The app's centerpiece is a [WebView](https://developer.android.com/reference/android/webkit/WebView), which integrates with Home Assistant's frontend. Over time, native capabilities have been added, such as background sensor data collection.
 
-## Core Principles
+## Core principles
 
-### Kotlin First
+### Kotlin first
 
 The entire codebase is written in [Kotlin](https://kotlinlang.org), ensuring modern, concise, and type-safe development.
 
-### Android Version Support
+### Android version support
 
 - **Target SDK**: We aim to keep up with the latest Android SDK releases and test new versions as they are released.
 - **Min SDK**: To ensure broad compatibility, the app supports Android [Lollipop](https://en.wikipedia.org/wiki/Android_Lollipop) (API 21).
 
-## Application Architecture
+## Application architecture
 
 We follow Google's recommended [Android architecture](https://developer.android.com/topic/architecture) and draw inspiration from the [NowInAndroid repository](https://github.com/android/nowinandroid).
 
-### Build Logic
+### Build logic
 
 The project uses multiple Gradle modules. Shared logic is centralized in a separate Gradle project named `build-logic`, included in the main project via `includeBuild`.
 
-### Common Gradle Module
+### Common Gradle module
 
 To share code across different applications, we use a common Gradle module named `:common`.
 
-## UI Development
+## UI development
 
 ### Native UI
 
@@ -46,9 +46,9 @@ Some legacy XML layouts, `databinding`, and `viewbinding` still exist in the app
 
 The app uses multiple themes to support both legacy XML and Compose-based UI. All new components should use `HomeAssistantAppTheme`, which is based on [Material Design](https://developer.android.com/develop/ui/compose/components).
 
-## Key Features
+## Key features
 
-### Dependency Injection (DI)
+### Dependency injection (DI)
 
 We use [Hilt](https://developer.android.com/training/dependency-injection/hilt-android) extensively for dependency injection, ensuring modular and testable code.
 
@@ -68,16 +68,16 @@ The app maintains a direct connection to Home Assistant Core's WebSocket using [
 
 Communication with Home Assistant's REST API is handled using [Retrofit](https://square.github.io/retrofit/), enabling seamless interaction with the backend.
 
-### Local Storage
+### Local storage
 
 - **Room**: User data is stored locally using [Room](https://developer.android.com/training/data-storage/room), which provides a robust database solution.
 - **SharedPreferences**: For app-specific settings, we use [SharedPreferences](https://developer.android.com/reference/android/content/SharedPreferences) with an abstraction layer named `LocalStorage`.
 
-### Deep Linking
+### Deep linking
 
 The app supports deep linking using `homeassistant://` URLs to navigate to specific parts of the app. For more details, refer to the [user documentation](https://companion.home-assistant.io/docs/integrations/url-handler/).
 
-## Platform-Specific Features
+## Platform-specific features
 
 ### Automotive
 
@@ -86,13 +86,3 @@ The automotive application reuses the sources of the `:app` module, simplifying 
 ### Wear OS
 
 The Wear OS app communicates with the mobile app via the [Messaging API](https://developer.android.com/training/wearables/data/messages). It only works with the `full` flavor, as it requires Google Play Services.
-
-## Under Construction 🚧
-
-### Sensors
-
-Documentation for sensors is currently under construction. Stay tuned for updates.
-
-### Notifications
-
-Documentation for notifications is currently under construction. Stay tuned for updates.

@@ -24,7 +24,7 @@ We follow the same versioning convention as the core project, using [CalVer] (Ca
 
 ## Workflows
 
-### On Pull Request
+### On pull request
 
 When a pull request (PR) is opened or updated, the `pr.yml` workflow is triggered. Its goals are:
 
@@ -43,11 +43,11 @@ If any step fails:
 Only one workflow runs at a time for a given PR. If multiple commits are pushed in quick succession, the CI cancels ongoing builds and processes only the latest commit.
 :::
 
-#### Debug Builds
+#### Debug builds
 
 To build the application in debug on CI, we use a mock Google services file located at `/.github/mock-google-services.json`.
 
-### On Push to `main`
+### On push to `main`
 
 When a commit is pushed to the `main` branch, the `onPush.yml` workflow is triggered. Its goals are:
 
@@ -65,7 +65,7 @@ We use [Fastlane](https://fastlane.tools/) to simplify deployment to different s
 This workflow can also be manually triggered with the `beta` flag to promote a build to the beta track on the stores.
 :::
 
-### Weekly Builds
+### Weekly builds
 
 Every Sunday at 4:00 AM, the `weekly.yml` workflow is triggered automatically. Its goals are:
 
@@ -74,7 +74,7 @@ Every Sunday at 4:00 AM, the `weekly.yml` workflow is triggered automatically. I
 
 This ensures that a new version of the applications is pushed to the beta track on the Play Store every week.
 
-### Monthly Version Tags
+### Monthly version tags
 
 On the first day of every month, the `monthly.yml` workflow runs to create an initial version tag in the format `YYYY.MM.0`. This aligns with our [CalVer] versioning strategy.
 
@@ -90,7 +90,7 @@ The [F-Droid](https://f-droid.org) store builds the applications themselves when
 We do not guarantee when the applications will be available on F-Droid after a release. You can find the app [here](https://f-droid.org/packages/io.homeassistant.companion.android.minimal/).
 :::
 
-## Summary of Workflows
+## Summary of workflows
 
 | Workflow         | Trigger                     | Goals                                                                 |
 |-------------------|-----------------------------|----------------------------------------------------------------------|
@@ -102,7 +102,7 @@ We do not guarantee when the applications will be available on F-Droid after a r
 
 ---
 
-## Notes and Best Practices
+## Notes and best practices
 
 - 🛠 Extract common code into reusable actions under `.github/actions` to avoid duplication.
 - 🕒 Be mindful of workflow triggers to avoid unnecessary resource usage.

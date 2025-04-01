@@ -3,24 +3,24 @@ title: "Android Get Started"
 sidebar_label: "Get Started"
 ---
 
-## Getting Started with Home Assistant Android Development
+## Getting started with Home Assistant Android development
 
 Welcome to the Home Assistant Android development guide! This document will help you set up your environment, fork the repository, and build your first app.
 
-## Setting Up Your Development Environment
+## Setting up your development environment
 
 To get started, install the latest stable version of [Android Studio](https://developer.android.com/studio). This is the only tool you need to build the applications.
 
-## Fork, Clone, and Create a Branch
+## Fork, clone, and create a branch
 
-### Fork the Repository
+### Fork the repository
 
 1. Open the [Home Assistant Android repository](https://github.com/home-assistant/android).
 2. Click **Fork** to create your own copy of the repository.
 
 > 💡 **Tip:** If you encounter any issues, refer to the [GitHub documentation on forking a repository](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo).
 
-### Clone Your Forked Repository
+### Clone your forked repository
 
 Once you've forked the repository, clone it to your local machine using the following command:
 
@@ -33,7 +33,7 @@ Alternatively, you can use Android Studio:
 1. Go to `File -> New -> Project from Version Control...`.
 2. Enter your repository URL and clone it.
 
-### Create a Branch
+### Create a branch
 
 Before making any changes, create a new branch with a meaningful name that reflects the work you are doing. For example:
 
@@ -43,7 +43,7 @@ git checkout -b feature/add-new-feature
 
 > 💡 **Tip:** If you're new to Git, check out the [Git Branching Guide](https://git-scm.com/book/en/v2/Git-Branching-Basic-Branching-and-Merging). You can also create branches directly in Android Studio.
 
-## Build Your First App
+## Build your first app
 
 Once you have the repository cloned locally, you can build the app using Android Studio or the terminal.
 
@@ -53,13 +53,13 @@ Once you have the repository cloned locally, you can build the app using Android
 2. Sync the Gradle files.
 3. Click the green **Play** button in the top bar. Android Studio will automatically create an emulator and run the app for you.
 
-### From the Terminal
+### From the terminal
 
 :::info
 You will need the `JAVA_HOME` environment variable set to a JDK. We are currently using the JDK 21.
 :::
 
-#### On macOS/Linux
+#### On MacOS/Linux
 
 ```bash
 ./gradlew assembleDebug
@@ -71,11 +71,11 @@ You will need the `JAVA_HOME` environment variable set to a JDK. We are currentl
 gradlew.bat assembleDebug
 ```
 
-## Firebase Setup
+## Firebase setup
 
 Firebase is used for notifications and distributing builds. If you don't need these features, you can use a mocked Firebase configuration.
 
-### Setting Up a Real Firebase Project
+### Setting up a real Firebase project
 
 1. Create a Firebase project at the [Firebase Console](https://console.firebase.google.com).
 2. Add four Android apps to the project with the following package names:
@@ -92,7 +92,7 @@ Firebase is used for notifications and distributing builds. If you don't need th
 
 4. (Optional) Follow our [Push Notification Guide](tips/push_notification) for additional setup instructions.
 
-### Setting Up a Mock Firebase Project
+### Setting up a mock Firebase project
 
 If you don't need real Firebase functionality, you can use the mock configuration:
 
@@ -102,10 +102,10 @@ If you don't need real Firebase functionality, you can use the mock configuratio
    - `/automotive`
    - `/wear`
 
-## What's Next?
+## What's next?
 
 Now that you've built the app, explore the rest of the documentation to deepen your understanding of the project. A good starting point is the [Architecture Guide](architecture), which explains the general structure of the codebase.
 
-## Need Help?
+## Need help?
 
 If you get stuck, don't hesitate to ask for help! Join our [Discord](https://discord.gg/c5DvZ4e) channel and head to **#Android** for assistance.
