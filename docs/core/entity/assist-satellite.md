@@ -63,7 +63,7 @@ A [websocket command](#setting-the-active-wake-words) is available for setting t
 
 ### Announcements
 
-If the device has the `ANNOUNCE` [supported feature](#supported-features), then the `async_announce` method should be implemented to announce the provided `media_id` within `AssistSatelliteAnnouncement`.
+If the device has the `ANNOUNCE` [supported feature](#supported-features), then the `async_announce` method should be implemented to announce the provided `media_id` within `AssistSatelliteAnnouncement`. If `preannouncement_media_id` is provided, it should be played before the `media_id`.
 The `async_announce` method should only return when the announcement is finished playing on the device.
 
 An [announce action](https://home-assistant.io/integrations/assist_satellite#action-assist_satelliteannounce) is available for automating announcements.
@@ -72,8 +72,9 @@ An [announce action](https://home-assistant.io/integrations/assist_satellite#act
 
 If the device has the `START_CONVERSATION` [supported feature](#supported-features), then the `async_start_conversation` method should be implemented to:
 
-1. Announce the provided `media_id` within `AssistSatelliteAnnouncement`, then
-2. Listen for one or more follow-up voice commands
+1. Announce `preannouncement_media_id` within `AssistSatelliteAnnouncement`, if provided
+2. Announce the provided `media_id` within `AssistSatelliteAnnouncement`, then
+3. Listen for one or more follow-up voice commands
 
 The `async_start_conversation` method should only return when the announcement is finished playing on the device. The conversation will continue between the user and the satellite.
 
