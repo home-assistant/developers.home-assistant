@@ -1,5 +1,5 @@
 ---
-title: "Android Dependencies"
+title: "Android dependencies"
 sidebar_label: "Dependencies"
 ---
 

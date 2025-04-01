@@ -1,6 +1,6 @@
 ---
-title: "Android Continuous Integration and Delivery"
-sidebar_label: "Continuous Integration"
+title: "Android continuous integration and delivery"
+sidebar_label: "Continuous integration and delivery"
 ---
 
 🚧🚧🚧 Under construction 🚧🚧🚧

@@ -1,6 +1,6 @@
 ---
-title: "Android Screenshot Testing"
-sidebar_label: "Screenshot Testing"
+title: "Android screenshot testing"
+sidebar_label: "Screenshot testing"
 ---
 
 🚧🚧🚧 Under Construction 🚧🚧🚧

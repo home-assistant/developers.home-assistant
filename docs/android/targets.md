@@ -1,5 +1,5 @@
 ---
-title: "Android Targets"
+title: "Android targets"
 sidebar_label: "Targets"
 ---
 

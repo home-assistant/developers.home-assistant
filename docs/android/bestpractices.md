@@ -1,5 +1,5 @@
 ---
-title: "Android Best Practices"
+title: "Android best practices"
 sidebar_label: "Best Practices"
 ---
 

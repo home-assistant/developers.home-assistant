@@ -1,5 +1,5 @@
 ---
-title: "Android Flavors"
+title: "Android flavors"
 sidebar_label: "Flavors"
 ---
 

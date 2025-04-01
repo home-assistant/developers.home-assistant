@@ -1,6 +1,6 @@
 ---
-title: "Android Integration Testing"
-sidebar_label: "Integration Testing"
+title: "Android integration testing"
+sidebar_label: "Integration testing"
 ---
 
 🚧🚧🚧 Under Construction 🚧🚧🚧

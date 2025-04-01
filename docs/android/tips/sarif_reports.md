@@ -1,6 +1,6 @@
 ---
-title: "SARIF Reports"
-sidebar_label: "SARIF Reports"
+title: "SARIF reports"
+sidebar_label: "SARIF reports"
 ---
 
 ## Overview

@@ -1,5 +1,5 @@
 ---
-title: "Android Testing"
+title: "Android testing"
 sidebar_label: "Introduction"
 ---
 

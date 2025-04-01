@@ -1,5 +1,5 @@
 ---
-title: "Android Architecture"
+title: "Android architecture"
 sidebar_label: "Architecture"
 ---
 

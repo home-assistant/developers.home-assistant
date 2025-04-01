@@ -1,6 +1,6 @@
 ---
-title: "Android Release Process"
-sidebar_label: "Release Process"
+title: "Android release process"
+sidebar_label: "Release process"
 ---
 
 ## Android release process

@@ -1,5 +1,5 @@
 ---
-title: "Android Linter"
+title: "Android linter"
 sidebar_label: "Linter"
 ---
 

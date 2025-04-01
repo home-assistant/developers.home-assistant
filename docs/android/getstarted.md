@@ -1,6 +1,6 @@
 ---
-title: "Android Get Started"
-sidebar_label: "Get Started"
+title: "Android get started"
+sidebar_label: "Get started"
 ---
 
 ## Getting started with Home Assistant Android development

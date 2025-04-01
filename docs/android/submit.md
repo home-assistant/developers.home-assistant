@@ -1,6 +1,6 @@
 ---
-title: "Android Submit Contribution"
-sidebar_label: "Submit Contribution"
+title: "Android submit contribution"
+sidebar_label: "Submit contribution"
 ---
 
 ## Submit your first contribution

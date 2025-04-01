@@ -1,6 +1,6 @@
 ---
-title: "Android Code Style"
-sidebar_label: "Code Style"
+title: "Android code style"
+sidebar_label: "Code style"
 ---
 
 ## Why enforcing code style
