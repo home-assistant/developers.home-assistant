@@ -96,9 +96,9 @@ We do not guarantee when the applications will be available on F-Droid after a r
 |-------------------|-----------------------------|----------------------------------------------------------------------|
 | `pr.yml`         | On PR open or update        | Lint, build, test, and persist APKs.                                |
 | `onPush.yml`     | On push to `main`         | Build, deploy, and publish to Firebase and Play Store.              |
-| `weekly.yml`     | Every Sunday at 4:00 AM     | Create pre-release and push beta builds to Play Store.              |
+| `weekly.yml`     | Every Sunday at 4:00 AM     | Create pre-release and push the beta build to Play Store.              |
 | `monthly.yml`    | First day of the month      | Create initial version tag (`YYYY.MM.0`).                           |
-| `release.yml`    | Manual trigger              | Promote beta builds to production.                                  |
+| `release.yml`    | Manual trigger              | Promote the beta build to production.                                  |
 
 ---
 
