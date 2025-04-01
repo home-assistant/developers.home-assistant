@@ -47,9 +47,9 @@ Only one workflow runs at a time for a given PR. If multiple commits are pushed 
 
 To build the application in debug on CI, we use a mock Google services file located at `/.github/mock-google-services.json`.
 
-### On Push to `master`
+### On Push to `main`
 
-When a commit is pushed to the `master` branch, the `onPush.yml` workflow is triggered. Its goals are:
+When a commit is pushed to the `main` branch, the `onPush.yml` workflow is triggered. Its goals are:
 
 - 🌐 Download translations from [Lokalise](../translations).
 - 📝 Generate release notes.
@@ -95,7 +95,7 @@ We do not guarantee when the applications will be available on F-Droid after a r
 | Workflow         | Trigger                     | Goals                                                                 |
 |-------------------|-----------------------------|----------------------------------------------------------------------|
 | `pr.yml`         | On PR open or update        | Lint, build, test, and persist APKs.                                |
-| `onPush.yml`     | On push to `master`         | Build, deploy, and publish to Firebase and Play Store.              |
+| `onPush.yml`     | On push to `main`         | Build, deploy, and publish to Firebase and Play Store.              |
 | `weekly.yml`     | Every Sunday at 4:00 AM     | Create pre-release and push beta builds to Play Store.              |
 | `monthly.yml`    | First day of the month      | Create initial version tag (`YYYY.MM.0`).                           |
 | `release.yml`    | Manual trigger              | Promote beta builds to production.                                  |

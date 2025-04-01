@@ -61,7 +61,7 @@ If you've addressed feedback and pushed changes to your PR, you can request a re
 
 ### Merging Your PR
 
-- Keep your PR up to date with the `master` branch.  
+- Keep your PR up to date with the `main` branch.  
 - Once everything is green and approved by a maintainer, they will merge your PR. You don't need to take any further action.
 
 ### Automatic Issue and PR Closure

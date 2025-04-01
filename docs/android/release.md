@@ -19,7 +19,7 @@ This document outlines the steps to take an Android application from development
 - The CI system automatically:
   - Builds the application.
   - Runs linters and tests to ensure code quality.
-- If the PR is approved and merged into the `master` branch:
+- If the PR is approved and merged into the `main` branch:
   - The CI builds the **release application**.
   - The release build is pushed to the **internal tester group** on both the Google Play Store and Firebase.
 
@@ -30,7 +30,7 @@ This document outlines the steps to take an Android application from development
 
 ### Weekly Beta Releases
 
-- Every week, the latest version of the `master` branch is pushed to the **open beta** channel.
+- Every week, the latest version of the `main` branch is pushed to the **open beta** channel.
 - Open beta users help test the application in real-world scenarios and report issues.
 
 ### Production Release
