@@ -25,15 +25,15 @@ A `TodoListEntity` state is the count of incomplete items in the To-do list.
 Supported features are defined by using values in the `TodoListEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.
 
-| Value               | Description                                                        |
-| ------------------- | ------------------------------------------------------------------ |
-| `CREATE_TODO_ITEM`      | Entity implements the methods to allow creation of to-do items.  |
-| `DELETE_TODO_ITEM`      | Entity implements the methods to allow deletion of to-do items.  |
-| `UPDATE_TODO_ITEM`      | Entity implements the methods to allow update of to-do items.  |
-| `MOVE_TODO_ITEM`        | Entity implements the methods to re-order to-do items.  |
-| `DUE_DATE`              | Entity implements to-do item `due` field as a `datetime.date`. |
-| `DUE_DATETIME`          | Entity implements to-do item `due` field as a `datetime.datetime`. |
-| `DESCRIPTION`           | Entity implements to-do item `description` field.  |
+| Value                      | Description                                                        |
+| -------------------------- | ------------------------------------------------------------------ |
+| `CREATE_TODO_ITEM`         | Entity implements the methods to allow creation of to-do items.  |
+| `DELETE_TODO_ITEM`         | Entity implements the methods to allow deletion of to-do items.  |
+| `UPDATE_TODO_ITEM`         | Entity implements the methods to allow update of to-do items.  |
+| `MOVE_TODO_ITEM`           | Entity implements the methods to re-order to-do items.  |
+| `SET_DUE_DATE_ON_ITEM`     | Entity implements setting the `due` field of an item to a `datetime.date` when creating or updating a to-do item. |
+| `SET_DUE_DATETIME_ON_ITEM` | Entity implements setting the `due` field of an item to a `datetime.datetime` when creating or updating a to-do item. |
+| `SET_DESCRIPTION_ON_ITEM`  | Entity implements setting the `description` field of an item when creating or updating a to-do item.  |
 
 ## Methods
 
@@ -112,5 +112,5 @@ update.
 | uid | <code>string &#124; None</code> | `None` | A unique identifier for the to-do item. This field is required for updates and the entity state.
 | summary | <code>string &#124; None</code>  | `None` | A title or summary of the to-do item. This field is required for the entity state.
 | status | <code>TodoItemStatus &#124; None</code> | `None` | Defines the overall status for the to-do item, either `NEEDS_ACTION` or `COMPLETE`. This field is required for the entity state.
-| due | <code>datetime.date &#124; datetime.datetime &#124; None</code> | `None` | The date and time that a to-do is expected to be completed. The types supported depend on `TodoListEntityFeature.DUE_DATE` or `TodoListEntityFeature.DUE_DATETIME` or both being set. As a datetime, must have a timezone.
-| description | <code>string &#124; None</code>  | `None` | A more complete description of the to-do item than that provided by the summary. Only supported when `TodoListEntityFeature.DESCRIPTION` is set.
+| due | <code>datetime.date &#124; datetime.datetime &#124; None</code> | `None` | The date and time that a to-do is expected to be completed. As a datetime, must have a timezone.
+| description | <code>string &#124; None</code>  | `None` | A more complete description of the to-do item than that provided by the summary.
