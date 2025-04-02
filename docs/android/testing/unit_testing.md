@@ -1,6 +1,6 @@
 ---
 title: "Android unit testing"
-sidebar_label: "Unit Tests"
+sidebar_label: "Unit tests"
 ---
 
 🚧🚧🚧 Under Construction 🚧🚧🚧
