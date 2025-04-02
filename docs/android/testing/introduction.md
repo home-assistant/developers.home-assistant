@@ -13,7 +13,7 @@ By identifying issues before they reach production, we save our users from frust
 
 - **Early issue detection**: Catch bugs before they reach production.
 - **Improved code quality**: Tests encourage better design and maintainability.
-- **Time savings**: Debugging production issues is far more time-consuming than fixing issues during development.
+- **Time savings**: Debugging production issues is far more time-consuming than resolving issues during development.
 - **User satisfaction**: Fewer bugs in production lead to a better user experience.
 
 ## How to write effective tests

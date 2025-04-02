@@ -34,7 +34,7 @@ We use a custom Compose theme, `io.homeassistant.companion.android.util.compose.
 - **Use state hoisting**: Follow the [state hoisting pattern](https://developer.android.com/jetpack/compose/state#state-hoisting) to manage state effectively. This ensures that your composables remain stateless and reusable.
 - **Test with previews**: Use `@Preview` annotations to test your composables in isolation. Add parameters to simulate different states and configurations.
 - **Follow accessibility guidelines**: Ensure your UI is accessible by providing meaningful content descriptions and testing with accessibility tools.
-- **Use style**: Use style for component like text.
+- **Use style**: Apply appropriate styling to text components.
 
 ## Example: creating a new screen
 

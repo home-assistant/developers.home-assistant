@@ -35,4 +35,4 @@ If you disable LeakCanary, you need to update the lockfile; otherwise, Gradle wi
 
 - **Regularly monitor memory leaks:** Use LeakCanary during development to identify and fix memory leaks early.
 - **Document known leaks:** If a memory leak is caused by a third-party library and cannot be fixed immediately, document it for future reference.
-- **Speak about it:** If a leak is reported by Leak Canary don't hesitate to open a Github Issue.
++**Report leaks:** If a leak is reported by LeakCanary, open a GitHub issue.

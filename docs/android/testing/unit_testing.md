@@ -49,7 +49,7 @@ For cases where your code interacts with Android APIs that cannot be mocked or f
 ### Caveats
 
 - Robolectric does not work with JUnit 5 (follow the [issue](https://github.com/robolectric/robolectric/issues/3477)). To address this, the project includes a dependency on JUnit 4 for tests that require Robolectric.
-- Ensure that the code you are testing does not depend on the state of the Android API, as this can lead to unreliable tests. If that is the case consider writing an [instrumented test](integration_testing).
+- Ensure that the code you are testing does not depend on the state of the Android API, as this can lead to unreliable tests. If that is the case, consider writing an [instrumented test](integration_testing).
 
 ## Best practices for unit testing
 

@@ -7,7 +7,7 @@ sidebar_label: "Screenshot testing"
 
 Screenshot testing is used to verify that the current UI matches the reference UI stored in the repository. By doing this, we can ensure that any changes impacting the UI are intentional and validated. The scope of these tests is limited to the UI.
 
-We should test on a variety of device shapes and sizes, ranging from small screens (e.g., Wear OS devices) to very large screens (e.g., 55" TVs).
+We should test on various device shapes and sizes, ranging from small screens (e.g., Wear OS devices) to large screens (e.g., 55" TVs).
 
 ### Benefits of screenshot testing
 

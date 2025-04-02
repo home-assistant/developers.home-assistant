@@ -24,7 +24,7 @@ When creating a PR, GitHub pre-fills the description with a checklist. Ensure yo
 
 ### Opening a draft PR
 
-If your PR isn't ready for an official review but you'd like feedback, you can open it in **draft mode**. This is especially useful when working on CI-related changes or incomplete features.
+If your PR isn't ready for an official review, but you'd like feedback, you can open it in **draft mode**. This is especially useful when working on CI-related changes or incomplete features.
 
 #### CI trigger
 
@@ -49,7 +49,7 @@ If you're not confident in **reviewing**, you can still help by:
 
 #### Getting approval from a maintainer
 
-Once your PR meets the checklist requirements, wait for a maintainer to review it. Remember, maintainers are volunteers contributing in their free time. Be respectful, patient, and kind.  
+Once your PR meets the checklist requirements, wait for a maintainer to review it. Remember, maintainers are volunteers contributing in their spare time. Be respectful, patient, and kind.  
 
 Feedback from maintainers will come as:  
 

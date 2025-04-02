@@ -63,7 +63,7 @@ Once you have the repository cloned locally, you can build the app using Android
 You will need the `JAVA_HOME` environment variable set to a JDK. We are currently using the JDK 21.
 :::
 
-#### On MacOS/Linux
+#### On macOS/Linux
 
 ```bash
 ./gradlew assembleDebug
