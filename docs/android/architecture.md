@@ -7,7 +7,7 @@ sidebar_label: "Architecture"
 
 The Android project for Home Assistant started in 2019. Since then, the Android ecosystem has evolved significantly, and many contributors have shaped the project. As a result, you may encounter legacy code that does not adhere to current best practices. This documentation serves as the source of truth for the app's architecture and development practices.
 
-Home Assistant has been a leader in [PWA](https://en.wikipedia.org/wiki/Progressive_web_app) development, and this philosophy is reflected in the native application. The app's centerpiece is a [WebView](https://developer.android.com/reference/android/webkit/WebView), which integrates with Home Assistant's frontend. Over time, native capabilities have been added, such as background sensor data collection.
+Home Assistant has been a frontrunner in [PWA](https://en.wikipedia.org/wiki/Progressive_web_app) development, and this philosophy is reflected in the native application. The app's centerpiece is a [WebView](https://developer.android.com/reference/android/webkit/WebView), which integrates with Home Assistant's frontend. Over time, native capabilities have been added, such as background sensor data collection.
 
 ## Core principles
 
