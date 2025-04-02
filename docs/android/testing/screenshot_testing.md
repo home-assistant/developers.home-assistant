@@ -3,8 +3,6 @@ title: "Android screenshot testing"
 sidebar_label: "Screenshot testing"
 ---
 
-🚧🚧🚧 Under Construction 🚧🚧🚧
-
 ## Why do we perform screenshot testing?
 
 Screenshot testing is used to verify that the current UI matches the reference UI stored in the repository. By doing this, we can ensure that any changes impacting the UI are intentional and validated. The scope of these tests is limited to the UI.

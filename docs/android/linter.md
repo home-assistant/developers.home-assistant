@@ -42,7 +42,15 @@ Always try to fix issues rather than ignoring them. If ignoring is necessary, fo
     }
    ```
 
-2. For project-wide suppression, update the `.editorconfig` file as per [this guide](https://pinterest.github.io/ktlint/0.49.1/faq/#how-do-i-globally-disable-a-rule-without-editorconfig). Open a dedicated PR with an explanation for disabling the rule.
+2. For project-wide suppression, update the `.editorconfig` file as per [this guide](https://pinterest.github.io/ktlint/0.49.1/faq/#how-do-i-globally-disable-a-rule-without-editorconfig). Open a dedicated PR with an explanation for disabling the rule:
+    ```editorconfig
+    ...
+    # Allow trailing commas but do not enfoce it to follow Kotlin convention
+    ktlint_standard_trailing-comma-on-call-site = disabled
+    ij_kotlin_allow_trailing_comma_on_call_site = true
+    ktlint_standard_trailing-comma-on-declaration-site = disabled
+    ij_kotlin_allow_trailing_comma = true
+    ```
 
 #### Running KTLint locally
 

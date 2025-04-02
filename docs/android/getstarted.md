@@ -79,6 +79,10 @@ gradlew.bat assembleDebug
 
 Firebase is used for notifications and distributing builds. If you don't need these features, you should use a mocked Firebase configuration.
 
+:::info
+You can still send notifications through the WebSocket without using Firebase.
+:::
+
 ### Setting up a mock Firebase project
 
 If you don't need real Firebase functionality, you can use the mock configuration:
@@ -91,7 +95,7 @@ If you don't need real Firebase functionality, you can use the mock configuratio
 
 ### Setting up a real Firebase project
 
-Follow our [Push notification guide](tips/push_notification) for additional setup instructions.
+Follow our [Push notification guide](tips/fcm_push_notification) for additional setup instructions.
 
 ## What's next?
 

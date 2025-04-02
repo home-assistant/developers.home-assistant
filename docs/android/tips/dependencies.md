@@ -13,7 +13,7 @@ We use the [version catalog](https://docs.gradle.org/current/userguide/version_c
 - **Consistency**: Ensures that all modules use the same versions of shared dependencies.
 - **Simplified updates**: Makes it easier to update dependencies across the entire project.
 
-## Managing pependencies and lockfiles
+## Managing dependencies and lockfiles
 
 This project utilizes Gradle's [dependency locking](https://docs.gradle.org/current/userguide/dependency_locking.html) feature to ensure consistent and reproducible builds by tracking the precise versions of all libraries used.
 
@@ -37,12 +37,6 @@ This command resolves all dependencies and updates the gradle.lockfile in each m
 :::info
 If the version catalog is updated but the lockfiles are not updated, the CI pipeline will fail.
 :::
-
-## Best practices for managing dependencies
-
-- **Review updates carefully:** Always review dependency updates to ensure they don't introduce breaking changes.
-- **Test thoroughly:** After updating dependencies, run all tests to verify that the changes don't break existing functionality.
-- **Keep dependencies up-to-date:** Regularly update dependencies to benefit from bug fixes, performance improvements, and new features.
 
 ## Automated dependency updates with Renovate
 

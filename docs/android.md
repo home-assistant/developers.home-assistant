@@ -35,6 +35,6 @@ We welcome contributions of all kinds! Here are some ways you can get involved:
 ## 🔗 Ready to Get Started?
 
 1. **[Check out our Get Started Guide](android/getstarted)** for step-by-step instructions.
-2. **[Join our Discord Community](https://discord.gg/c5DvZ4e)** and head to the **#Android** channel to connect with other contributors.
+2. **[Join our Discord Community](https://discord.gg/c5DvZ4e)** and head to the **[#Android](https://discord.com/channels/330944238910963714/1346948551892009101)**  channel to connect with other contributors.
 
 Together, we can create something extraordinary. Let's build the future of smart homes, one contribution at a time! 🌟

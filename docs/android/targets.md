@@ -19,16 +19,6 @@ The Automotive target is also based on the `:app` module but includes specific m
 
 The application can be installed on Android TV, although the navigation experience is currently suboptimal. To provide a better experience, a dedicated Gradle module and improved navigation support are needed.
 
-### Current Status
-
-- **Not officially supported**.
-- The classic application can be installed but requires enhancements for a better user experience.
-
 ## ⌚ Wear OS
 
 The Wear OS target brings Home Assistant functionality to wearable devices. It supports a **minimum API level of 26**. It is a **dedicated application** however it requires the mobile application for onboarding and connecting to a server.
-
-### Key Notes
-
-- Designed specifically for Wear OS devices.
-- Onboarding must be completed via the mobile application.

@@ -5,17 +5,8 @@ sidebar_label: "Lollipop emulator"
 
 ## Overview
 
-This guide explains how to set up and test your application on an Android Lollipop emulator. It includes steps to create an AVD (Android Virtual Device) and update the outdated WebView to ensure compatibility with your app.
+To test the app on an AVD (Android Virtual Device) running Lollipop (Android API 21), you need to update the outdated WebView to ensure compatibility. Without this update, the WebView will crash.
 
-## Steps to create an AVD
+## Updating the WebView
 
-1. Open **Android Studio**.
-2. Navigate to **Tools > Device Manager**.
-3. Click on **Create Device**.
-4. Select a device model (e.g., Pixel 2) and click **Next**.
-5. Choose the **Lollipop (API 21)** system image and download it if necessary.
-6. Complete the setup and click **Finish**.
-
-## Look for the latest APK of the WebView
-
-@Unfortunately, the WebView installed on the emulator is outdated and makes the app unusable. You need to find the newest APK of the WebView and follow the steps from this [Stackoverflow post](https://stackoverflow.com/a/79514205/3289338).
+To update the WebView, download the latest WebView APK and follow the instructions provided in this [StackOverflow post](https://stackoverflow.com/a/79514205/3289338).

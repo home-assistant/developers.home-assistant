@@ -5,7 +5,7 @@ sidebar_label: "Submit contribution"
 
 ## Submit your first contribution
 
-Congratulations on completing your first version! Now it's time to get feedback and prepare your work for real users. Follow the [GitHub Documentation](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork) to create a pull request (PR) from your fork.
+First of all, thank you for your contribution! Now it's time to get feedback and prepare your work for real users. Follow the [GitHub Documentation](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork) to create a pull request (PR) from your fork.
 
 ### Checklist for Submitting a PR
 
@@ -24,7 +24,11 @@ When creating a PR, GitHub pre-fills the description with a checklist. Ensure yo
 
 ### Opening a draft PR
 
-If your PR isn't ready for official review, but you'd like feedback, open it in **draft mode**. This will still trigger the CI on every commit and is especially useful when working on CI-related changes.
+If your PR isn't ready for an official review but you'd like feedback, you can open it in **draft mode**. This is especially useful when working on CI-related changes or incomplete features.
+
+#### CI trigger
+
+If you're a new contributor, each CI run must be approved by a maintainer.
 
 :::warning
 **Avoid unnecessary CI runs**  
@@ -39,7 +43,7 @@ Everyone can comment on your PR since it's public. We encourage contributions th
 
 If you're not confident in **reviewing**, you can still help by:  
 
-- Testing the feature by installing the APK (it's available on the Checks tab of the PR).  
+- Testing the feature by installing the APK (available in the Checks tab of the PR; you must be logged in to your GitHub account to access it).
 - Providing feedback on UI/UX.  
 - Reporting crashes or bugs.
 

@@ -14,7 +14,7 @@ We aim to maintain a **consistent and standard codebase**. By enforcing code sty
 
 - All code must be written in **English**.
 - Avoid typos and grammatical mistakes. While mistakes are acceptable (as many contributors are non-native speakers), reviewers are encouraged to suggest corrections.
-- Use tools like LLMs or spell checkers to assist in correcting mistakes.
+- Use spell checkers to assist in correcting mistakes.
 
 ## KTLint formatter
 
@@ -22,11 +22,16 @@ We use [KTLint](https://pinterest.github.io/ktlint) to enforce Kotlin code style
 
 ### Custom rules
 
-- We override some KTLint rules when necessary. To enable or disable a rule:
+We override some KTLint rules when necessary. To enable or disable a rule:
+
   1. Submit a **dedicated PR** with a proper explanation of the change.
   2. If the change affects the codebase, create **two commits**:
      - One for updating the rule.
      - Another for applying the changes.
+
+:::note
+Add a comment within the `.editorconfig` file above the overridden rule explaining why it was changed. If more explanation is needed, you can link to a GitHub issue.
+:::
 
 ### Running KTLint
 
@@ -59,9 +64,9 @@ yamllint --strict --format github .
 
 If the YAML format is invalid, the CI will block the PR.
 
-## TODOs Are Tracked in GitHub
+## Avoid using TODOs
 
-When working on a PR, you may want to add a `TODO` for later. To properly track TODOs, associate them with a GitHub issue.
+TODOs in code tend to be forgotten over time. When someone read them later, they are often outdated or irrelevant. We recommend avoiding TODOs in your code. However, if during a review you and the reviewer agree that something needs to be addressed later, you should create a `TODO`. To properly track TODOs, always associate them with a GitHub issue.
 
 ### Example
 

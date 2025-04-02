@@ -346,7 +346,7 @@ module.exports = {
         "android/tips/leak_canary",
         "android/tips/lollipop_emulator",
         "android/tips/new_sensor",
-        "android/tips/push_notification",
+        "android/tips/fcm_push_notification",
         "android/tips/sarif_reports",
       ],
     },

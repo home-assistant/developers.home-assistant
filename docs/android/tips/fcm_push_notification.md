@@ -1,11 +1,15 @@
 ---
-title: "Android push notifications"
-sidebar_label: "Push notifications"
+title: "Android FCM push notifications"
+sidebar_label: "FCM push notifications"
 ---
 
-## Push notifications setup
+## FCM push notifications setup
 
-If you want to work on push notifications or use a development build with push notifications, follow these steps:
+:::note
+Setting up Firebase Cloud Messaging (FCM) can be complex. Unless you specifically need it, consider using notifications through the WebSocket instead.
+:::
+
+If you want your own FCM setup for push notifications, follow these steps:
 
 1. **Create a Firebase project**  
    Go to the [Firebase Console](https://console.firebase.google.com) and create a new Firebase project.

@@ -3,19 +3,20 @@ title: "Android integration testing"
 sidebar_label: "Integration testing"
 ---
 
-🚧🚧🚧 Under Construction 🚧🚧🚧
-
 ## Why perform integration testing?
 
 [Unit tests](unit_testing) are great and should be your primary choice when writing tests. However, integration testing ensures that the behavior of the application in a real Android environment is validated. Integration tests run on a real Android OS through an emulator, using the same JVM that will be used by end users.
 
 ### Testing on a real JVM
 
-Some libraries we use have specific requirements, such as a minimum Java version above 8. Since our application targets Android API 21, which uses Java 8, these libraries cannot always be used. 
+During development, you might only test on the latest Android OS version or your locally installed JVM, most likely JDK 21. However, keep in mind the following:
 
-During development, you might only test on the latest Android OS version, which uses a Java version above 8. If no one catches this during the review process, users on Android API 21 may encounter crashes.
+- Android API 21 only partially supports [Java 8 language features](https://developer.android.com/studio/write/java8-support).
+- Android uses a dedicated [runtime](https://source.android.com/docs/core/runtime) that is different from the one used in your development environment (which is typically used to execute unit tests).
 
-A concrete example is the [Jackson library](https://github.com/FasterXML/jackson). Starting from version 2.14, it requires a minimum Android version of 26. Unfortunately, such errors only arise at runtime, so the only way to catch them is through instrumentation tests. You can see the concrete example on this [PR](https://github.com/home-assistant/android/pull/5108).
+#### Concrete Example
+
+Consider the [Jackson library](https://github.com/FasterXML/jackson). Starting from version 2.14, it requires a minimum Android version of 26. Unfortunately, this error only arises at runtime, meaning the only way to catch it is through instrumentation tests or a crash reported by a user. You can see a concrete example of this issue in this [PR](https://github.com/home-assistant/android/pull/5108).
 
 ### UI or no UI?
 
@@ -23,7 +24,7 @@ Integration tests do not always involve displaying a UI. They are also used to t
 
 ### Testing with the corresponding Home Assistant Core version
 
-We aim to run integration tests against the corresponding version of Home Assistant Core. This ensures that the current code works seamlessly with the core version in a straightforward manner.
+We aim to run integration tests against the latest version of Home Assistant Core. This ensures that the current code works seamlessly with the core version in a straightforward manner.
 
 ### Testing without Home Assistant Core
 
