@@ -48,8 +48,20 @@ To streamline dependency management, we've integrated [Renovate](https://docs.re
 - **Lockfile updates:** Renovate ensures that lockfiles are updated alongside the dependencies.
 - **Custom configuration:** Renovate is configured to respect the project's versioning policies and update strategies.
 
+:::note
+Renovate is configured to wait 3 days after a new release of a library is published before opening a pull request. This delay allows early adopters to identify and report any obvious issues.
+:::
+
 ### Benefits of using Renovate
 
 - **Saves time:** Automates the tedious process of checking for and updating dependencies.
 - **Reduces risk:** Ensures that updates are applied consistently and tested through the CI pipeline.
 - **Improves security:** Keeps dependencies up-to-date, reducing the risk of vulnerabilities.
+
+## Using non-stable versions
+
+While we aim to stay up to date with the libraries we use, we prioritize stability. Therefore, we avoid using `alpha`, `beta`, `rc`, or other non-stable versions.
+
+:::note
+In very specific cases, we have agreed on a PR to use an `alpha` version to access new features. However, this comes with the cost of addressing issues after each update, as the API is not stable. A notable example is the `wear-compose-material` library.
+:::
