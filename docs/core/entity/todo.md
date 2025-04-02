@@ -33,7 +33,7 @@ and are combined using the bitwise or (`|`) operator.
 | `MOVE_TODO_ITEM`           | Entity implements the methods to re-order to-do items.  |
 | `SET_DUE_DATE_ON_ITEM`     | Entity implements setting the `due` field of an item to a `datetime.date` when creating or updating a to-do item. |
 | `SET_DUE_DATETIME_ON_ITEM` | Entity implements setting the `due` field of an item to a `datetime.datetime` when creating or updating a to-do item. |
-| `SET_DESCRIPTION_ON_ITEM`  | Entity implements setting the `description` field of an item when creating or updating a to-do item..  |
+| `SET_DESCRIPTION_ON_ITEM`  | Entity implements setting the `description` field of an item when creating or updating a to-do item.  |
 
 ## Methods
 
