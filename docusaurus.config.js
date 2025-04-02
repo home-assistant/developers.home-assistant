@@ -33,6 +33,7 @@ module.exports = {
             { to: "docs/operating-system", label: "Operating System" },
             { to: "docs/voice/overview", label: "Voice" },
             { to: "docs/translations", label: "Translations" },
+            { to: "docs/android", label: "Android" },
           ],
         },
         { to: "docs/misc", label: "Misc", position: "left" },
