@@ -19,7 +19,7 @@ Country code:
   description: You can specify the country code (NL or BE) of the country to display on the camera.
 Timeframe:
   description: Minutes to look ahead for precipitation forecast sensors (minimum 5, maximum 120).
-{% end configuration_basic %}
+{% endconfiguration_basic %}
 
 ```
 
