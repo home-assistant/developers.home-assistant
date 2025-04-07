@@ -99,7 +99,7 @@ class MyConversationEntity(conversation.ConversationEntity):
         if chat_log.llm_api:
             tools = [
                 _format_tool(tool)  # TODO format the tools as your LLM expects
-                for tool in llm_api.tools
+                for tool in chat_log.llm_api.tools
             ]
 
         messages = [
