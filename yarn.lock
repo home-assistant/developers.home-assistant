@@ -1982,18 +1982,10 @@
     tslib "^2.6.0"
     utility-types "^3.10.0"
 
-"@docusaurus/theme-translations@3.7.0":
+"@docusaurus/theme-translations@3.7.0", "@docusaurus/theme-translations@^2 || ^3":
   version "3.7.0"
   resolved "https://registry.yarnpkg.com/@docusaurus/theme-translations/-/theme-translations-3.7.0.tgz#0891aedc7c7040afcb3a1b34051d3a69096d0d25"
   integrity sha512-Ewq3bEraWDmienM6eaNK7fx+/lHMtGDHQyd1O+4+3EsDxxUmrzPkV7Ct3nBWTuE0MsoZr3yNwQVKjllzCMuU3g==
-  dependencies:
-    fs-extra "^11.1.1"
-    tslib "^2.6.0"
-
-"@docusaurus/theme-translations@^2 || ^3":
-  version "3.5.2"
-  resolved "https://registry.yarnpkg.com/@docusaurus/theme-translations/-/theme-translations-3.5.2.tgz#38f9ebf2a5d860397022206a05fef66c08863c89"
-  integrity sha512-GPZLcu4aT1EmqSTmbdpVrDENGR2yObFEX8ssEFYTCiAIVc0EihNSdOIBTazUvgNqwvnoU1A8vIs1xyzc3LITTw==
   dependencies:
     fs-extra "^11.1.1"
     tslib "^2.6.0"
@@ -2069,10 +2061,10 @@
     cssesc "^3.0.0"
     immediate "^3.2.3"
 
-"@easyops-cn/docusaurus-search-local@^0.49.1":
-  version "0.49.1"
-  resolved "https://registry.yarnpkg.com/@easyops-cn/docusaurus-search-local/-/docusaurus-search-local-0.49.1.tgz#c558cf21f42e7ae180b402ecf3807c07e1954f3e"
-  integrity sha512-UXt4G/5lLwxmd2NmX5CL5BRtPAIG09UHIowu4Q8cvrzcBE3O0sWAAq/NmF0SMyP8EmxHWWOyPJi8F2cx/rjSVg==
+"@easyops-cn/docusaurus-search-local@^0.49.2":
+  version "0.49.2"
+  resolved "https://registry.yarnpkg.com/@easyops-cn/docusaurus-search-local/-/docusaurus-search-local-0.49.2.tgz#20c2b0ab3f58222b7e88335121b467c0e85259a2"
+  integrity sha512-ytXxbtpJ2gVECWrsdc6Wx7bPanueLQ95lLdR9n/tHKEPBm5d1v/vAsx487iUGVXYwzeEO8W/BQJ66Fcdvpq6xg==
   dependencies:
     "@docusaurus/plugin-content-docs" "^2 || ^3"
     "@docusaurus/theme-translations" "^2 || ^3"
@@ -4743,14 +4735,7 @@ debug@2.6.9, debug@^2.6.0:
   dependencies:
     ms "2.0.0"
 
-debug@4, debug@^4.0.0, debug@^4.1.0, debug@^4.1.1, debug@^4.2.0, debug@^4.3.1:
-  version "4.3.5"
-  resolved "https://registry.yarnpkg.com/debug/-/debug-4.3.5.tgz#e83444eceb9fedd4a1da56d671ae2446a01a6e1e"
-  integrity sha512-pt0bNEmneDIvdL1Xsd9oDQ/wrQRkXDT4AUWlNZNPKvW5x/jyO9VFXkJUP07vQ2upmw5PlaITaPKc31jK13V+jg==
-  dependencies:
-    ms "2.1.2"
-
-debug@^4.4.0:
+debug@4, debug@^4.0.0, debug@^4.1.0, debug@^4.1.1, debug@^4.2.0, debug@^4.3.1, debug@^4.4.0:
   version "4.4.0"
   resolved "https://registry.yarnpkg.com/debug/-/debug-4.4.0.tgz#2b3f2aea2ffeb776477460267377dc8710faba8a"
   integrity sha512-6WTZ/IxCY/T6BALoZHaE4ctp9xm+Z5kY/pzYaCHRFeyVhojxlrm+46y68HA6hr0TcwEssoxNiDEUJQjfPZ/RYA==
@@ -7660,11 +7645,6 @@ ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
   integrity sha512-Tpp60P6IUJDTuOq/5Z8cdskzJujfwqfOTkrwIwj7IRISpnkJnT6SyJ4PCPnGMoFjC9ddhal5KVIYtAt97ix05A==
-
-ms@2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
-  integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
 
 ms@2.1.3, ms@^2.1.3:
   version "2.1.3"
