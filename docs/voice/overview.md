@@ -17,7 +17,7 @@ graph TD;
     U -->|1\. Speech + Metadata| VA;
     VA -->|2\. Speech| STT
     STT -->|3\. Sentence| VA
-    VA -->|4\. Sentence +\n Metadata| C
+    VA -->|4\. Sentence + Metadata| C
     C -->|5\. Intent| I
     I -->|6\. Intent Response| C;
     C -->|7\. Intent Response| VA;
