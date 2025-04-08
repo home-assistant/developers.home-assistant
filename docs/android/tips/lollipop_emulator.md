@@ -5,7 +5,7 @@ sidebar_label: "Lollipop emulator"
 
 ## Overview
 
-To test the app on an AVD (Android Virtual Device) running Lollipop (Android API 21), you need to update the outdated WebView to ensure compatibility. Without this update, the WebView will crash.
+To test the app on an Android emulator running Lollipop (Android API 21), you need to update the outdated WebView to ensure compatibility. Without this update, the WebView will crash.
 
 ## Updating the WebView
 

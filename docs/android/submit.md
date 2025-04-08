@@ -7,20 +7,20 @@ sidebar_label: "Submit contribution"
 
 First of all, thank you for your contribution! Now it's time to get feedback and prepare your work for real users. Follow the [GitHub Documentation](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/proposing-changes-to-your-work-with-pull-requests/creating-a-pull-request-from-a-fork) to create a pull request (PR) from your fork.
 
-### Checklist for Submitting a PR
+### Checklist for submitting a PR
 
 When creating a PR, GitHub pre-fills the description with a checklist. Ensure you follow all the steps. Here's an extended checklist to help you:
 
-- ✅ **PR description**: Provide a clear and complete description of your changes.
-- ✅ **Tests**: Add all necessary tests following our [testing guidelines](testing/introduction).
-- ✅ **Documentation**: Ensure your code is properly documented.
-- ✅ **UI changes**: Include screenshots if the UI is modified.
-- ✅ **User documentation**: If user documentation needs updates, open a PR on [GitHub](https://github.com/home-assistant/companion.home-assistant).
-- ✅ **Developer documentation**: If this documentation needs updates, open a PR on [GitHub](https://github.com/home-assistant/developers.home-assistant/).
-- ✅ **Builds**: Verify that everything builds properly (app, automotive, wear) locally.
-- ✅ **Best practices**: Follow the [best practices](best_practices).
-- ✅ **Code style**: Adhere to the [code style](codestyle).
-- ✅ **Linting**: Ensure no lint issues are introduced ([linter](linter)).
+- **PR description**: Provide a clear and complete description of your changes.
+- **Tests**: Add all necessary tests following our [testing guidelines](testing/introduction).
+- **Documentation**: Ensure your code is properly documented.
+- **UI changes**: Include screenshots if the UI is modified.
+- **User documentation**: If user documentation needs updates, open a PR on [GitHub](https://github.com/home-assistant/companion.home-assistant).
+- **Developer documentation**: If this documentation needs updates, open a PR on [GitHub](https://github.com/home-assistant/developers.home-assistant/).
+- **Builds**: Verify that everything builds properly (app, automotive, wear) locally.
+- **Best practices**: Follow the [best practices](best_practices).
+- **Code style**: Adhere to the [code style](codestyle).
+- **Linting**: Ensure no lint issues are introduced ([linter](linter)).
 
 ### Opening a draft PR
 
@@ -55,7 +55,6 @@ Feedback from maintainers will come as:
 
 - **Comments**: Suggestions or required changes in the code.  
 - **Questions**: Questions about how things are working.
-- **Suggestions**: Improvements or alternative approaches.
 
 ### After receiving feedback
 

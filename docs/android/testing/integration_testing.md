@@ -14,7 +14,7 @@ During development, you might only test on the latest Android OS version or your
 - Android API 21 only partially supports [Java 8 language features](https://developer.android.com/studio/write/java8-support).
 - Android uses a dedicated [runtime](https://source.android.com/docs/core/runtime) that is different from the one used in your development environment (which is typically used to execute unit tests).
 
-#### Concrete Example
+#### Concrete example
 
 Consider the [Jackson library](https://github.com/FasterXML/jackson). Starting from version 2.14, it requires a minimum Android version of 26. Unfortunately, this error only arises at runtime, meaning the only way to catch it is through instrumentation tests or a crash reported by a user. You can see a concrete example of this issue in this [PR](https://github.com/home-assistant/android/pull/5108).
 
@@ -23,6 +23,10 @@ Consider the [Jackson library](https://github.com/FasterXML/jackson). Starting f
 Integration tests do not always involve displaying a UI. They are also used to test [foreground services](https://developer.android.com/develop/background-work/services/fgs), where no UI is displayed. In these cases, we only verify the data and the interaction with the system.
 
 ### Testing with the corresponding Home Assistant Core version
+
+:::note
+These tests are currently under development
+:::
 
 We aim to run integration tests against the latest version of Home Assistant Core. This ensures that the current code works seamlessly with the core version in a straightforward manner.
 

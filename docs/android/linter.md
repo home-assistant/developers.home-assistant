@@ -79,7 +79,7 @@ The Android linter is enabled for all variants to ensure comprehensive checks. I
 Follow these steps to ignore an issue:
 
 1. Use the `@Suppress` annotation for specific constructs.
-2. Add the issue to the `lint-baseline.xml` file.
+2. Add the issue to the `lint-baseline.xml` file. (See [how to](#updating-the-baseline))
 3. Disable the issue in the lint settings directly.
 
 If you disable an issue, open a dedicated PR with an explanation.

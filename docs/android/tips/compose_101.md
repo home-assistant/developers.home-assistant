@@ -24,7 +24,7 @@ We use a custom Compose theme, `io.homeassistant.companion.android.util.compose.
 
 ### Key points
 
-- **Material design 2**: The theme adheres to Material Design 2 principles, ensuring a cohesive look and feel.
+- **Material Design 2**: The theme adheres to Material Design 2 principles, ensuring a cohesive look and feel.
 - **Custom components**: If you need to create custom components, ensure they align with the existing theme and design system.
 - **Dark mode support**: The theme supports both light and dark modes. Test your screen in both modes to ensure proper styling.
 

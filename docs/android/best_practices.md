@@ -7,18 +7,18 @@ sidebar_label: "Best Practices"
 
 In general, we should follow standard development principles such as:
 
-- **SOLID**: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion.
+- **SOLID**: Single Responsibility, Open/Closed, Liskov Substitution, Interface Segregation, Dependency Inversion. Learn more with [Kotlin SOLID Principles Examples](https://medium.com/huawei-developers/kotlin-solid-principles-tutorial-examples-192bf8c049dd)
 - **KISS**: Keep It Simple, Stupid.
-- **Separation of Concerns**: Ensure each component has a single responsibility.
-- **Community Guidelines**: Follow the practices showcased in the [NowInAndroid](https://github.com/android/nowinandroid) repository.
+- **DRY**: Don't Repeat Yourself
+- **Community guidelines**: Follow the practices showcased in the [NowInAndroid](https://github.com/android/nowinandroid) repository.
 
 ## Documentation
 
 Documentation in the code should bring value and evolve with the codebase. Keep the following in mind:
 
-- **Stay Up-to-Date**: Documentation must be updated as the code changes.
-- **Balance Comments**: Avoid over-commenting, but don’t forget to comment where necessary.
-- **Future-Proof**: Ask yourself, *"Will I understand what I did in 6 months?"*
+- **Stay up-to-date**: Documentation must be updated as the code changes.
+- **Balance comments**: Avoid over-commenting, but don’t forget to comment where necessary.
+- **Future-proof**: Ask yourself, *"Will I understand what I did in 6 months?"*
 
 :::info
 Documentation should help, not hinder.
@@ -79,7 +79,7 @@ Concurrency is powerful but requires careful handling to avoid issues like memor
 
 ### Coroutine scope
 
-- Tie your coroutines to an Android lifecycle (e.g., `viewModelScope` or `lifecycleScope`) to prevent memory leaks.
+Tie your coroutines to an Android lifecycle (e.g., `viewModelScope` or `lifecycleScope`) to prevent memory leaks.
 
 ### Concurrent access
 

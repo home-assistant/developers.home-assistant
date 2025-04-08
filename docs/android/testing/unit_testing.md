@@ -3,8 +3,6 @@ title: "Android unit testing"
 sidebar_label: "Unit tests"
 ---
 
-🚧🚧🚧 Under Construction 🚧🚧🚧
-
 ## Why do we perform unit testing?
 
 Unit testing helps you build your features with confidence and ensures that your code behaves as expected. It should be a tool to assist development, not a burden. [Test-Driven Development (TDD)](https://en.wikipedia.org/wiki/Test-driven_development) is a well-known methodology where tests are written before or alongside the actual code. This approach allows you to quickly validate your code without waiting for the entire application to run.

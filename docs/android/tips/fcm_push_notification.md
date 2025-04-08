@@ -6,7 +6,7 @@ sidebar_label: "FCM push notifications"
 ## FCM push notifications setup
 
 :::note
-Setting up Firebase Cloud Messaging (FCM) can be complex. Unless you specifically need it, consider using notifications through the WebSocket instead.
+Setting up Firebase Cloud Messaging (FCM) can be complex. Unless you specifically need it, consider using notifications through the WebSocket instead for development.
 :::
 
 If you want your own FCM setup for push notifications, follow these steps:

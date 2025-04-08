@@ -44,9 +44,9 @@ To streamline dependency management, we've integrated [Renovate](https://docs.re
 
 ### How Renovate works
 
-- **Automated updates:** Renovate scans the project for outdated dependencies and creates pull requests to update them.
-- **Lockfile updates:** Renovate ensures that lockfiles are updated alongside the dependencies.
-- **Custom configuration:** Renovate is configured to respect the project's versioning policies and update strategies.
+- **Automated updates**: Renovate scans the project for outdated dependencies and creates pull requests to update them.
+- **Lockfile updates**: Renovate ensures that lockfiles are updated alongside the dependencies.
+- **Custom configuration**: Renovate is configured to respect the project's versioning policies and update strategies.
 
 :::note
 Renovate is configured to wait 3 days after a new release of a library is published before opening a pull request. This delay allows early adopters to identify and report any obvious issues.
@@ -54,9 +54,9 @@ Renovate is configured to wait 3 days after a new release of a library is publis
 
 ### Benefits of using Renovate
 
-- **Saves time:** Automates the tedious process of checking for and updating dependencies.
-- **Reduces risk:** Ensures that updates are applied consistently and tested through the CI pipeline.
-- **Improves security:** Keeps dependencies up-to-date, reducing the risk of vulnerabilities.
+- **Saves time**: Automates the tedious process of checking for and updating dependencies.
+- **Reduces risk**: Ensures that updates are applied consistently and tested through the CI pipeline.
+- **Improves security**: Keeps dependencies up-to-date, reducing the risk of vulnerabilities.
 
 ## Using non-stable versions
 

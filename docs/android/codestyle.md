@@ -57,8 +57,9 @@ Run the following command at the root of the repository to check YAML formatting
 yamllint --strict --format github .
 ```
 
-- **Note:** Yamllint does not reformat your code; it only reports errors that need to be fixed.
-- Use your IDE's code formatter or fix issues manually.
+:::note
+Yamllint does not reformat your code; it only reports errors that need to be fixed. Use your IDE's code formatter or fix issues manually.
+:::
 
 ### CI integration
 

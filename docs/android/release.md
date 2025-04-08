@@ -44,9 +44,3 @@ This document outlines the steps to take an Android application from development
   - It may take more than a week in some cases.
   - Since releases are weekly, the previous beta release might still be under validation when a new beta is submitted. If this happens the previous beta is removed and not validated by Google.
 - This delay does not block the release process but requires careful planning to ensure timely updates.
-
-## Key Notes
-
-- **Testing Coverage**: Internal testers focus on critical functionality, but open beta users provide broader coverage.
-- **Release Cadence**: Weekly releases ensure a steady flow of updates, but Google validation delays can overlap releases.
-- **CI/CD Automation**: Automating builds and tests ensures consistency and reduces manual effort.
