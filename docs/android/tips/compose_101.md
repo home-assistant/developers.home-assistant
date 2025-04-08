@@ -3,8 +3,6 @@ title: "Jetpack Compose 101"
 sidebar_label: "Jetpack Compose 101"
 ---
 
-🚧🚧🚧 Under Construction 🚧🚧🚧
-
 ## How to create a new screen in the existing app and iterate quickly
 
 To create a new screen in the app and iterate quickly, follow these steps:

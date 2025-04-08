@@ -35,7 +35,7 @@ const features = [
           <b>
             <a href="docs/android">Android</a>.
           </b>{" "}
-          Explains how to contribute to the Android companion apps.
+          Explains how to contribute to the Android companion app.
         </p>
       </>
     ),

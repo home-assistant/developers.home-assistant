@@ -323,7 +323,7 @@ module.exports = {
   ],
   Android: [
     "android",
-    "android/getstarted",
+    "android/get_started",
     "android/architecture",
     "android/targets",
     "android/app_flavors",

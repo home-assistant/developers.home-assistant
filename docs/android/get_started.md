@@ -103,4 +103,4 @@ Now that you've built the app, explore the rest of the documentation to deepen y
 
 ## Need help?
 
-If you get stuck, don't hesitate to ask for help! Join our [Discord](https://discord.gg/c5DvZ4e) channel and head to **[#Android](https://discord.com/channels/330944238910963714/1346948551892009101)** for assistance.
+If you get stuck, don't hesitate to ask for help! **[Join our discord community](https://discord.gg/c5DvZ4e)**, make sure you select the developer role and head to the **[Android](https://discord.com/channels/330944238910963714/1346948551892009101)** project thread to connect with other contributors for assistance.
