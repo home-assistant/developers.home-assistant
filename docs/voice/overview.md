@@ -14,16 +14,16 @@ graph TD;
     C[Conversation]
     I[Intent]
     TTS[Text-to-Speech]
-    U -->|1. Speech + Metadata| VA;
-    VA -->|2. Speech| STT
-    STT -->|3. Sentence| VA
-    VA -->|4. Sentence +\n Metadata| C
-    C -->|5. Intent| I
-    I -->|6. Intent Response| C;
-    C -->|7. Intent Response| VA;
-    VA -->|8. Intent Response| TTS
-    TTS -->|9. Response Audio| VA
-    VA -->|10. Response Audio| U
+    U -->|1\. Speech + Metadata| VA;
+    VA -->|2\. Speech| STT
+    STT -->|3\. Sentence| VA
+    VA -->|4\. Sentence + Metadata| C
+    C -->|5\. Intent| I
+    I -->|6\. Intent Response| C;
+    C -->|7\. Intent Response| VA;
+    VA -->|8\. Intent Response| TTS
+    TTS -->|9\. Response Audio| VA
+    VA -->|10\. Response Audio| U
 ```
 
  - The **Assist Pipeline** integration is responsible for turning the user's speech into text, get it processed, and turn the response into speech.
