@@ -24,6 +24,14 @@
 - [ ] Changes to the backend of this documentation
 - [ ] Removed stale or deprecated documentation
 
+## Checklist
+<!--
+  Ensure your pull request meets the following requirements. This helps speed up the review process.
+-->
+
+- [ ] I have read and followed the [documentation guidelines](https://developers.home-assistant.io/docs/documenting).
+- [ ] I have verified that my changes render correctly in the documentation.
+
 ## Additional information
 <!--
   Details are important, and help maintainers processing your PR.
