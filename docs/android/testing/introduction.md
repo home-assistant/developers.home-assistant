@@ -20,7 +20,7 @@ By identifying issues before they reach production, we save our users from frust
 
 To ensure clarity and maintainability, test functions should always (when possible) be written as descriptive sentences. Ideally, they should follow the [GIVEN-WHEN-THEN](https://en.wikipedia.org/wiki/Given-When-Then) structure. This approach makes tests easier to understand at a glance, even for complex scenarios.
 
-Example of a well-named test
+Example of a well-named test:
 
 ```kotlin
 @Test

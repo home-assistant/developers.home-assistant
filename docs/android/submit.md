@@ -35,7 +35,7 @@ If you're a new contributor, each CI run must be approved by a maintainer.
 Running CI workflows consumes significant resources. If your work is incomplete, postpone opening the PR (even in draft mode) unless necessary. Let's be mindful of resource usage and our planet. 🌍 But it doesn't prevent you from pushing regularly to avoid losing your work.
 :::
 
-### Review Process
+### Review process
 
 #### Who can review?
 
