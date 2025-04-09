@@ -347,6 +347,7 @@ module.exports = {
         "android/tips/lollipop_emulator",
         "android/tips/fcm_push_notification",
         "android/tips/sarif_reports",
+        "android/tips/release",
       ],
     },
     "android/best_practices",

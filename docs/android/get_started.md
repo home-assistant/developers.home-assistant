@@ -75,6 +75,10 @@ You will need the `JAVA_HOME` environment variable set to a JDK. We are currentl
 gradlew.bat assembleDebug
 ```
 
+:::info
+If you need to create a release build, follow the [release build instructions](/docs/android/tips/release).
+:::
+
 ## Firebase setup
 
 Firebase is used for notifications. If you don't need these features, you should use a mocked Firebase configuration.
