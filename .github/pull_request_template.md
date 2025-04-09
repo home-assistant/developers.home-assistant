@@ -29,7 +29,7 @@
   Ensure your pull request meets the following requirements. This helps speed up the review process.
 -->
 
-- [ ] I have read and followed the [documentation guidelines](https://developers.home-assistant.io/docs/documenting).
+- [ ] I have read and followed the [documentation guidelines](https://developers.home-assistant.io/docs/documenting/standards).
 - [ ] I have verified that my changes render correctly in the documentation.
 
 ## Additional information
