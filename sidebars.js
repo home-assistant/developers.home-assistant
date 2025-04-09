@@ -321,4 +321,40 @@ module.exports = {
       ],
     },
   ],
+  Android: [
+    "android",
+    "android/get_started",
+    "android/architecture",
+    "android/targets",
+    "android/app_flavors",
+    {
+      type: "category",
+      label: "Testing",
+      items: [
+        "android/testing/introduction",
+        "android/testing/unit_testing",
+        "android/testing/screenshot_testing",
+        "android/testing/integration_testing",
+      ],
+    },
+    {
+      type: "category",
+      label: "Tips",
+      items: [
+        "android/tips/compose_101",
+        "android/tips/dependencies",
+        "android/tips/leak_canary",
+        "android/tips/lollipop_emulator",
+        "android/tips/fcm_push_notification",
+        "android/tips/sarif_reports",
+      ],
+    },
+    "android/best_practices",
+    "android/ci",
+    "android/codestyle",
+    "android/linter",
+    "android/submit",
+    "android/release",
+    "translations",
+  ]
 };
