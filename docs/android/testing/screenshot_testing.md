@@ -25,7 +25,7 @@ We use the [Compose Preview Screenshot Testing](https://developer.android.com/st
 
 ### Advantages of compose screenshot testing
 
-- **No emulator required**: These tests do not require an emulator, making them less resource-intensive and significantly faster than [integration tests](/docs/android/integration_testing).
+- **No emulator required**: These tests do not require an emulator, making them less resource-intensive and significantly faster than [integration tests](/docs/android/testing/integration_testing).
 - **Fast feedback**: Developers can quickly verify UI changes without waiting for emulator boot times.
 
 ### Reference screenshots

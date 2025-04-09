@@ -5,7 +5,7 @@ sidebar_label: "Integration testing"
 
 ## Why perform integration testing?
 
-[Unit tests](/docs/android/unit_testing) are great and should be your primary choice when writing tests. However, integration testing ensures that the behavior of the application in a real Android environment is validated. Integration tests run on a real Android OS through an emulator, using the same JVM that will be used by end users.
+[Unit tests](/docs/android/testing/unit_testing) are great and should be your primary choice when writing tests. However, integration testing ensures that the behavior of the application in a real Android environment is validated. Integration tests run on a real Android OS through an emulator, using the same JVM that will be used by end users.
 
 ### Testing on a real JVM
 
