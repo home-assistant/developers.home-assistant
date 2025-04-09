@@ -1,5 +1,5 @@
 ---
-title: "Reauthentication flow"
+title: "Reauthentication needs to be available via the UI"
 related_rules:
   - config-flow
   - test-before-configure

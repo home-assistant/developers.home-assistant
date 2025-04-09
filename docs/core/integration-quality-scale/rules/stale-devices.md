@@ -1,5 +1,5 @@
 ---
-title: "Clean up stale devices"
+title: "Stale devices are removed"
 related_rules:
   - dynamic-devices
 ---

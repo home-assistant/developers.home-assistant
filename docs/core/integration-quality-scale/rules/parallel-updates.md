@@ -1,5 +1,5 @@
 ---
-title: "Set Parallel updates"
+title: "Number of parallel updates is specified"
 ---
 
 ## Reasoning
