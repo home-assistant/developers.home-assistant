@@ -23,6 +23,10 @@ This document outlines the steps to take an Android application from development
   - The CI builds the **release application**.
   - The release build is pushed to the **internal tester group** on both the Google Play Store and Firebase.
 
+:::note
+You can download pre-built APKs for every commit on the `main` branch from the [GitHub Actions page](https://github.com/home-assistant/android/actions/workflows/onPush.yml).
+:::
+
 ### Internal testing
 
 - Internal testers validate the release build to ensure functionality.
@@ -33,9 +37,17 @@ This document outlines the steps to take an Android application from development
 - Every week, the latest version of the `main` branch is pushed to the **open beta** channel.
 - Open beta users help test the application in real-world scenarios and report issues.
 
+:::note
+You can join the beta program directly through the [Google Play Store](https://play.google.com/apps/testing/io.homeassistant.companion.android).
+:::
+
 ### Production release
 
-- If the beta version is stable and approved by maintainers, it is promoted to **production**, making it available to all users.
+If the beta version is stable and approved by maintainers, it is promoted to **production**, making it available to all users.
+
+:::note
+You can find the app on the [Google Play Store](https://play.google.com/store/apps/details?id=io.homeassistant.companion.android).
+:::
 
 ## Google Play Store validation
 
