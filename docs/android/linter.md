@@ -15,7 +15,7 @@ Having no complaints from a linter doesn't mean everything is perfect. A review 
 
 Using a linter ensures:
 
-- **Consistency**: Enforces a standard code style, similar to our [codestyle](codestyle).
+- **Consistency**: Enforces a standard code style, similar to our [codestyle](/docs/android/codestyle).
 - **Focus**: Allows reviewers to focus on logic rather than formatting or trivial issues.
 - **Prevention**: Helps avoid crashes and bugs by catching common mistakes, such as using APIs not supported by the target Android API level.
 
@@ -25,7 +25,7 @@ For example, failing to check the Android API version before using an unsupporte
 
 ### KTLint
 
-We use [KTLint](https://pinterest.github.io/ktlint) as our Kotlin linter, integrated via [Gradle plugin](https://github.com/JLLeitschuh/ktlint-gradle). The configuration is located in the main `build.gradle.kts` file. We mostly use the default configuration but enable [SARIF](tips/sarif_reports) reports for GitHub Actions to annotate issues in pull requests.
+We use [KTLint](https://pinterest.github.io/ktlint) as our Kotlin linter, integrated via [Gradle plugin](https://github.com/JLLeitschuh/ktlint-gradle). The configuration is located in the main `build.gradle.kts` file. We mostly use the default configuration but enable [SARIF](/docs/android/tips/sarif_reports) reports for GitHub Actions to annotate issues in pull requests.
 
 #### Ignoring an issue
 

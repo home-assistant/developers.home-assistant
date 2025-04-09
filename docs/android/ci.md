@@ -26,7 +26,7 @@ We follow the same versioning convention as the core project, using [CalVer] (Ca
 
 When a pull request (PR) is opened or updated, the `pr.yml` workflow is triggered. Its goals are:
 
-- 🧹 Validate code compliance with our [linters](linter).
+- 🧹 Validate code compliance with our [linters](/docs/android/linter).
 - 🔨 Ensure the code builds successfully.
 - ✅ Run all tests to verify correctness.
 - 📦 Persist generated APKs in the GitHub Actions tab for review.
@@ -49,7 +49,7 @@ To build the application in debug on CI, we use a mock Google services file loca
 
 When a commit is pushed to the `main` branch, the `onPush.yml` workflow is triggered. Its goals are:
 
-- 🌐 Download translations from [Lokalise](../translations).
+- 🌐 Download translations from [Lokalise](/docs/translations).
 - 📝 Generate release notes.
 - 🔧 Build release variants of all applications.
 - 📤 Deploy applications to Firebase.

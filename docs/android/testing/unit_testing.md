@@ -21,7 +21,7 @@ There are exceptions to this rule. Sometimes, we add tests to ensure that the be
 
 Focus on testing the **public API** of your classes rather than every single function. Writing tests for all functions, especially small ones, can lead to an overwhelming number of tests that are difficult to maintain. By concentrating on the public interface, you ensure that your tests remain relevant and resilient to internal changes.
 
-When you need to access private parts of a class for testing, consider using the [VisibleForTesting](https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting) annotation. This annotation allows you to expose private methods or properties for testing purposes only. The [linter](../linter) ensures that this exposure is limited to the test scope.
+When you need to access private parts of a class for testing, consider using the [VisibleForTesting](https://developer.android.com/reference/kotlin/androidx/annotation/VisibleForTesting) annotation. This annotation allows you to expose private methods or properties for testing purposes only. The [linter](/docs/android/linter) ensures that this exposure is limited to the test scope.
 
 :::note
 Avoid using `VisibleForTesting` unless absolutely necessary. It’s better to design your code in a way that doesn’t require exposing private members.
@@ -47,7 +47,7 @@ For cases where your code interacts with Android APIs that cannot be mocked or f
 ### Caveats
 
 - Robolectric does not work with JUnit 5 (follow the [issue](https://github.com/robolectric/robolectric/issues/3477)). To address this, the project includes a dependency on JUnit 4 for tests that require Robolectric.
-- Ensure that the code you are testing does not depend on the state of the Android API, as this can lead to unreliable tests. If that is the case, consider writing an [instrumented test](integration_testing).
+- Ensure that the code you are testing does not depend on the state of the Android API, as this can lead to unreliable tests. If that is the case, consider writing an [instrumented test](/docs/android/testing/integration_testing).
 
 ## Best practices for unit testing
 

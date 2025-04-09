@@ -43,7 +43,7 @@ You can use KTLint through Gradle to automatically reformat your code:
 
 ### CI integration
 
-If a KTLint error is detected, the CI will fail, and GitHub will report it as a comment in the PR using the generated [SARIF](tips/sarif_reports.md) report.
+If a KTLint error is detected, the CI will fail, and GitHub will report it as a comment in the PR using the generated [SARIF](/docs/android/tips/sarif_reports.md) report.
 
 ## Yamllint
 
