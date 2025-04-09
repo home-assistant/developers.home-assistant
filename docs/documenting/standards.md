@@ -15,7 +15,7 @@ A few of the most common cases picked up in reviews are listed below:
 - Use a serial comma (also known as the Oxford comma) before the conjunction in a list of three or more items. For example, "Through the use of additional adapters, Home Assistant allows the use of Zigbee, Z-Wave, and other protocols".
 - There is no limit for the line length. You are allowed to write in a flowing text style. This will make it easier to use the GitHub online editor in the future.
 - Be objective and not gender favoring, polarizing, race related or religion inconsiderate. Contributions which do not follow this may be in breach of our [Code of Conduct](https://github.com/home-assistant/core/blob/master/CODE_OF_CONDUCT.md).
-- The case of brand names, services, protocols, integrations and platforms must match its respective counterpart. For example, "Z-Wave" _not_ "Zwave", "Z-wave", "Z Wave" or "ZWave". Also, "Input Select" _not_ "input select" or "Input select".
+- The case of brand names, services, protocols, integrations, and platforms must match their respective counterparts. For example, "Z-Wave" _not_ "Zwave", "Z-wave", "Z Wave", or "ZWave". Also, "Input Select" _not_ "input select" or "Input select".
 - Do not use ALL CAPITALS for emphasis - use _italics_ instead.
 - Use [sentence-style capitalization](https://learn.microsoft.com/en-us/style-guide/capitalization), also in headings.
 - Use **bold** to markup UI strings, for example:
@@ -26,7 +26,7 @@ A few of the most common cases picked up in reviews are listed below:
 ## Integration and platform pages
 
 - All examples should be formatted to be included in `configuration.yaml` unless explicitly stated.
-  - Use capital letters and `_` to indicate that the value needs to be replaced. E.g., `api_key: YOUR_API_KEY` or `api_key: REPLACE_ME`.
+  - Use capital letters and `_` to indicate that the value needs to be replaced. For example, `api_key: YOUR_API_KEY` or `api_key: REPLACE_ME`.
 - Integration and platform names should be a link to their respective documentation pages.
 
 ### Configuration variables
@@ -35,7 +35,7 @@ A few of the most common cases picked up in reviews are listed below:
 - The **Configuration Variables** section must use the `{% configuration %}` tag.
 - Configuration variables must document the requirement status (`false` or `true`).
 - Configuration variables must document the default value, if any.
-- Configuration variables must document the accepted value types (see [Configuration variables details](documenting/create-page.md#configuration)).
+- Configuration variables must document the accepted value types (see [configuration variables details](documenting/create-page.md#configuration)).
   - For configuration variables that accept multiple types, separate the types with a comma (i.e. `string, integer`).
 
 #### Example configuration variables block
@@ -56,9 +56,9 @@ some_key:
 
 ### Tables
 
-- Be succinct. Minimize the number of columns and keep the amount of text as short as possible:
-  - Tables that are too wide can be difficult to browse on handheld devices
-  - Less content makes tables easier to read
+- Avoid the use of tables. Use lists instead. If you cannot avoid a table, minimize the number of columns and keep the amount of text as short as possible:
+  - Tables that are too wide can be difficult to browse on handheld devices.
+  - Less content makes tables easier to read.
 - When limiting the amount of text is not possible, consider using other data structures for representing the information. For example, lists or `{% configuration_basic %}` can be used.
 
 ## YAML and templates
