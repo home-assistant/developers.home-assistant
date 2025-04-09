@@ -5,7 +5,7 @@ sidebar_label: "Integration testing"
 
 ## Why perform integration testing?
 
-[Unit tests](unit_testing) are great and should be your primary choice when writing tests. However, integration testing ensures that the behavior of the application in a real Android environment is validated. Integration tests run on a real Android OS through an emulator, using the same JVM that will be used by end users.
+[Unit tests](/docs/android/unit_testing) are great and should be your primary choice when writing tests. However, integration testing ensures that the behavior of the application in a real Android environment is validated. Integration tests run on a real Android OS through an emulator, using the same JVM that will be used by end users.
 
 ### Testing on a real JVM
 
@@ -42,4 +42,4 @@ Android emulators are notoriously unreliable. Occasionally, a platform may fail 
 
 ## Testing on Android 5 (API 21)
 
-If your tests require the WebView, you may need to follow these [tips for the Lollipop emulator](../tips/lollipop_emulator.md).
+If your tests require the WebView, you may need to follow these [tips for the Lollipop emulator](/docs/android/tips/lollipop_emulator.md).

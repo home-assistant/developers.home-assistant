@@ -8,7 +8,7 @@ sidebar_label: "Jetpack Compose 101"
 To create a new screen in the app and iterate quickly, follow these steps:
 
 1. **Extract the Compose UI screen**:  
-   Create a dedicated Kotlin file for your Compose UI screen. Use the `@Preview` annotation to enable preview capabilities within the IDE. This also makes the screen compatible with [screenshot testing](../testing/screenshot_testing).
+   Create a dedicated Kotlin file for your Compose UI screen. Use the `@Preview` annotation to enable preview capabilities within the IDE. This also makes the screen compatible with [screenshot testing](/docs/android/testing/screenshot_testing).
 
 2. **Leverage hot reload**:  
    After the first build of the app, navigate to your screen. Jetpack Compose provides hot reload capabilities out of the box, allowing you to see changes in real-time. However, note that there are some limitations, such as not being able to reload changes to certain structural elements.

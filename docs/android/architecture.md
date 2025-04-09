@@ -85,4 +85,4 @@ The automotive application reuses the sources of the `:app` module, simplifying 
 
 ### Wear OS
 
-The Wear OS app communicates with the mobile app to retrieve credentials for the Home Assistant server and other configurations using the [Messaging API](https://developer.android.com/training/wearables/data/messages). It only works with the `full` flavor, as it requires Google Play Services. Once the initial setup is complete, all further communication is handled directly with Home Assistant through the WebSocket and the [webhook](../api/native-app-integration/sending-data) that is created for the app.
+The Wear OS app communicates with the mobile app to retrieve credentials for the Home Assistant server and other configurations using the [Messaging API](https://developer.android.com/training/wearables/data/messages). It only works with the `full` flavor, as it requires Google Play Services. Once the initial setup is complete, all further communication is handled directly with Home Assistant through the WebSocket and the [webhook](/docs/api/native-app-integration/sending-data) that is created for the app.
