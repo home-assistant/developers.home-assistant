@@ -28,7 +28,7 @@ noLeakCanary=true
 ::::warning
 If you disable LeakCanary, you need to update the lockfile; otherwise, Gradle will complain about an issue with the dependencies.
 
-[How to update lockfiles](dependencies#updating-dependencies-and-lockfiles).
+[How to update lockfiles](/docs/android/tips/dependencies#updating-dependencies-and-lockfiles).
 ::::
 
 ## Best practices for using LeakCanary
