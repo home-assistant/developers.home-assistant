@@ -71,7 +71,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.PRECIPITATION` | cm, in, mm | Accumulated precipitation
 | `SensorDeviceClass.PRECIPITATION_INTENSITY` | in/d, in/h, mm/d, mm/h | Precipitation intensity
 | `SensorDeviceClass.PRESSURE` | cbar, bar, hPa, mmHg, inHg, kPa, mbar, Pa, psi | Pressure.
-| `SensorDeviceClass.REACTIVE_POWER` | var | Reactive power
+| `SensorDeviceClass.REACTIVE_POWER` | var, kvar | Reactive power
 | `SensorDeviceClass.SIGNAL_STRENGTH` | dB, dBm | Signal strength
 | `SensorDeviceClass.SOUND_PRESSURE` | dB, dBA | Sound pressure
 | `SensorDeviceClass.SPEED` | ft/s, in/d, in/h, in/s, km/h, kn, m/s, mph, mm/d, mm/s | Generic speed
