@@ -12,15 +12,15 @@ First of all, thank you for your contribution! Now it's time to get feedback and
 When creating a PR, GitHub pre-fills the description with a checklist. Ensure you follow all the steps. Here's an extended checklist to help you:
 
 - **PR description**: Provide a clear and complete description of your changes.
-- **Tests**: Add all necessary tests following our [testing guidelines](testing/introduction).
+- **Tests**: Add all necessary tests following our [testing guidelines](/docs/android/testing/introduction).
 - **Documentation**: Ensure your code is properly documented.
 - **UI changes**: Include screenshots if the UI is modified.
 - **User documentation**: If user documentation needs updates, open a PR on [GitHub](https://github.com/home-assistant/companion.home-assistant).
 - **Developer documentation**: If this documentation needs updates, open a PR on [GitHub](https://github.com/home-assistant/developers.home-assistant/).
 - **Builds**: Verify that everything builds properly (app, automotive, wear) locally.
-- **Best practices**: Follow the [best practices](best_practices).
-- **Code style**: Adhere to the [code style](codestyle).
-- **Linting**: Ensure no lint issues are introduced ([linter](linter)).
+- **Best practices**: Follow the [best practices](/docs/android/best_practices).
+- **Code style**: Adhere to the [code style](/docs/android/codestyle).
+- **Linting**: Ensure no lint issues are introduced ([linter](/docs/android/linter)).
 
 ### Opening a draft PR
 

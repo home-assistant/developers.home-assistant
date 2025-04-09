@@ -99,11 +99,11 @@ If you don't need real Firebase functionality, you can use the mock configuratio
 
 ### Setting up a real Firebase project
 
-Follow our [Push notification guide](tips/fcm_push_notification) for additional setup instructions.
+Follow our [Push notification guide](/docs/android/tips/fcm_push_notification) for additional setup instructions.
 
 ## What's next?
 
-Now that you've built the app, explore the rest of the documentation to deepen your understanding of the project. A good starting point is the [Architecture guide](architecture), which explains the general structure of the codebase.
+Now that you've built the app, explore the rest of the documentation to deepen your understanding of the project. A good starting point is the [Architecture guide](/docs/android/architecture), which explains the general structure of the codebase.
 
 ## Need help?
 

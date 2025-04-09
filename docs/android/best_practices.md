@@ -111,9 +111,9 @@ Naming is hard, but smaller functions make it easier to choose meaningful names.
 - **Why?** Smaller PRs are easier to review, reduce delays, and minimize frustration.
 - **How?** Break down large changes into smaller, logical chunks.
 
-For more details, see [submit](submit).
+For more details, see [submit](/docs/android/submit).
 
 ## Additional notes
 
-- **Testing**: Write [unit tests](testing/unit_testing) for critical functionality to ensure reliability.
+- **Testing**: Write [unit tests](/docs/android/testing/unit_testing) for critical functionality to ensure reliability.
 - **Code reviews**: Always review code for adherence to these best practices.

@@ -356,6 +356,5 @@ module.exports = {
     "android/linter",
     "android/submit",
     "android/release",
-    "translations",
   ]
 };
