@@ -7,7 +7,7 @@ sidebar_label: "Build for release"
 Ensure the keystore is securely stored and not included in version control. It also applies for the credentials.
 :::
 
-## Building for publishing
+## Building for release
 
 To build the app for publishing, you need to sign it. Follow these steps:
 
