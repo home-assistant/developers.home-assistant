@@ -348,6 +348,7 @@ module.exports = {
         "android/tips/fcm_push_notification",
         "android/tips/sarif_reports",
         "android/tips/release",
+        "android/tips/dev_playground",
       ],
     },
     "android/best_practices",
