@@ -13,11 +13,11 @@ The Assist API is equivalent to the capabilities and exposed entities that are a
 
 ## Supporting LLM APIs
 
-The LLM API needs to be integrated in two places in your integration. Users need to be able to configure which API should be used, and the tools offered by the API should be passed to the LLM when interacting with it.
+The LLM API needs to be integrated in two places in your integration. Users need to be able to configure which APIs should be used, and the tools offered by the APIs should be passed to the LLM when interacting with it.
 
 ### Options flow
 
-The chosen API should be stored in the config entry options. It should hold a string reference to the API ID. If no API is selected, the key must be omitted.
+The chosen API should be stored in the config entry options. It should hold a string or list of selected API IDs, if any. If no API is selected, the key must be omitted.
 
 In your options flow, you should offer a selector to the user to pick which API should be used.
 
@@ -42,40 +42,26 @@ def async_get_options_schema(
     """Return the options schema."""
     apis: list[SelectOptionDict] = [
         SelectOptionDict(
-            label="No control",
-            value="none",
-        )
-    ]
-    apis.extend(
-        SelectOptionDict(
             label=api.name,
             value=api.id,
         )
         for api in llm.async_get_apis(hass)
-    )
+    ]
 
     return vol.Schema(
         {
             vol.Optional(
                 CONF_LLM_HASS_API,
                 description={"suggested_value": options.get(CONF_LLM_HASS_API)},
-                default="none",
-            ): SelectSelector(SelectSelectorConfig(options=apis)),
+            ): SelectSelector(SelectSelectorConfig(options=apis, multiple=True)),
         }
     )
 ```
 
-When processing the options, make sure to remove the key if the user selected `none` before storing the options.
-
-```python
-if user_input[CONF_LLM_HASS_API] == "none":
-    user_input.pop(CONF_LLM_HASS_API)
-return self.async_create_entry(title="", data=user_input)
-```
 
 ### Fetching tools
 
-When interacting with the LLM, you should fetch the tools from the selected API and pass them to the LLM together with the extra prompt provided by the API.
+When interacting with the LLM, the provided `ChatLog` will make any selected tools available from the selected API and the conversation entity should pass them to the LLM together with the extra prompt provided by the API.
 
 ```python
 from homeassistant.const import CONF_LLM_HASS_API
@@ -92,81 +78,62 @@ class MyConversationEntity(conversation.ConversationEntity):
 
     ...
 
-    async def async_process(
-        self, user_input: conversation.ConversationInput
+    async def _async_handle_message(
+        self,
+        user_input: conversation.ConversationInput,
+        chat_log: conversation.ChatLog,
     ) -> conversation.ConversationResult:
-        """Process the user input."""
-        intent_response = intent.IntentResponse(language=user_input.language)
-        llm_api: llm.API | None = None
-        tools: list[dict[str, Any]] | None = None
+        """Call the API."""
 
-        if self.entry.options.get(CONF_LLM_HASS_API):
-            try:
-                llm_api = await llm.async_get_api(
-                    self.hass,
-                    self.entry.options[CONF_LLM_HASS_API],
-                    llm.LLMContext(
-                        platform=DOMAIN,
-                        context=user_input.context,
-                        user_prompt=user_input.text,
-                        language=user_input.language,
-                        assistant=conversation.DOMAIN,
-                        device_id=user_input.device_id,
-                    ),
-                )
-            except HomeAssistantError as err:
-                LOGGER.error("Error getting LLM API: %s", err)
-                intent_response.async_set_error(
-                    intent.IntentResponseErrorCode.UNKNOWN,
-                    f"Error preparing LLM API: {err}",
-                )
-                return conversation.ConversationResult(
-                    response=intent_response, conversation_id=user_input.conversation_id
-                )
+        try:
+            await chat_log.async_update_llm_data(
+                DOMAIN,
+                user_input,
+                self.entry.options.get(CONF_LLM_HASS_API),
+                self.entry.options.get(CONF_PROMPT),
+            )
+        except conversation.ConverseError as err:
+            return err.as_conversation_result()
+
+        tools: list[dict[str, Any]] | None = None
+        if chat_log.llm_api:
             tools = [
                 _format_tool(tool)  # TODO format the tools as your LLM expects
-                for tool in llm_api.tools
+                for tool in chat_log.llm_api.tools
             ]
 
-        if llm_api:
-            api_prompt = llm_api.api_prompt
-
-        else:
-            api_prompt = llm.async_render_no_api_prompt(self.hass)
-
-        prompt = "\n".join((user_prompt, api_prompt))
+        messages = [
+            m
+            for content in chat_log.content
+            for m in _convert_content(content)  # TODO format messages
+        ]
 
         # Interact with LLM and pass tools
         request = user_input.text
         for _iteration in range(10):
-            response = ... # Send request to LLM and get response, include tools
+            response = ... # Send request to LLM and get streaming response
 
-            if not response.tool_call:
+            messages.extend(
+                [
+                    _convert_content(content)  # TODO format messages
+                    async for content in chat_log.async_add_delta_content_stream(
+                        user_input.agent_id, _transform_stream(response)  # TODO call tools and stream responses
+                    )
+                ]
+            )
+
+            if not chat_log.unresponded_tool_results:
                 break
 
-            LOGGER.debug(
-                "Tool call: %s(%s)",
-                response.tool_call.function.name,
-                response.tool_call.function.arguments,
-            )
-            tool_input = llm.ToolInput(
-                tool_name=response.tool_call.function.name,
-                tool_args=json.loads(response.tool_call.function.arguments),
-            )
-            try:
-                tool_response = await llm_api.async_call_tool(tool_input)
-            except (HomeAssistantError, vol.Invalid) as e:
-                tool_response = {"error": type(e).__name__}
-                if str(e):
-                    tool_response["error_text"] = str(e)
-
-            LOGGER.debug("Tool response: %s", tool_response)
-            response = tool_response
+        # Send the final response to the user
+        intent_response = intent.IntentResponse(language=user_input.language)
+        intent_response.async_set_speech(chat_log.content[-1].content or "")
+        return conversation.ConversationResult(
+            response=intent_response,
+            conversation_id=chat_log.conversation_id,
+            continue_conversation=chat_log.continue_conversation,
+        )
 ```
-
-## Best practices
-
-If your conversation entity allows the user to maintain conversation history using the `conversation_id`, make sure to re-generate the prompt for each interaction and override it in the history that is passed for the follow-up command. This allows the user to always be able to query the latest state of the home.
 
 ## Creating your own API
 
