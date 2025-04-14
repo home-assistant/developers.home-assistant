@@ -43,7 +43,7 @@ If you are unsure if a module is already loaded, you can check if the module is 
 
 ## Avoiding imports that are only used for type-checking
 
-IIf an imported module is only used for type checking, it is recommended to guard it with an `if TYPE_CHECKING:` block to avoid it being imported at runtime.
+If an imported module is only used for type checking, it is recommended to guard it with an `if TYPE_CHECKING:` block to avoid it being imported at runtime.
 
 ```python
 from typing import TYPE_CHECKING
@@ -55,3 +55,7 @@ def some_function() -> SomeClass:
     # Function implementation
     pass
 ```
+
+## Avoid importing code that is rarely used
+
+Importing modules can be both CPU and I/O intensive, so it’s important to avoid importing code that will rarely be used. While importing code outside the module level does add some runtime overhead, this approach is often more efficient when the code is only needed occasionally. By deferring imports, you ensure that resources are only used when necessary, reducing unnecessary processing and improving overall performance.
