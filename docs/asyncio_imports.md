@@ -19,7 +19,9 @@ If your imports are not happening at module level, you must carefully consider e
 
 If you can be sure that the modules have already been imported, using a bare [`import`](https://docs.python.org/3/reference/simple_stmts.html#import) statement is safe since Python will not load the modules again.
 
-If the module will only ever be imported in a single place, the standard executor calls can be used:
+If the integration will always use the module, a module level import in `__init__.py` to ensure the module is loaded is usually the best solution.
+
+If the module is only used conditionally, and will only ever be imported in a single place, the standard executor calls can be used:
 
 - For imports inside of Home Assistant `hass.async_add_executor_job(_function_that_does_late_import)`
 - For imports outside of Home Assistant: [`loop.run_in_executor(None, _function_that_does_late_import)`](https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.loop.run_in_executor)
@@ -38,3 +40,18 @@ platform = await async_import_module(hass, f"homeassistant.components.homeassist
 ## Determining if a module is already loaded
 
 If you are unsure if a module is already loaded, you can check if the module is already in [`sys.modules`](https://docs.python.org/3/library/sys.html#sys.modules). You should know that the module will appear in `sys.modules` as soon as it begins loading, and [cpython imports are not thread-safe](https://github.com/python/cpython/issues/83065). For this reason, it's important to consider race conditions when code may be imported from multiple paths.
+
+## Avoiding imports that are only used for type-checking
+
+IIf an imported module is only used for type checking, it is recommended to guard it with an `if TYPE_CHECKING:` block to avoid it being imported at runtime.
+
+```python
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    from some_module import SomeClass  # Only imported for type checking
+
+def some_function() -> SomeClass:
+    # Function implementation
+    pass
+```
