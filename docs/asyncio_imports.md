@@ -9,7 +9,9 @@ Determining when it is safe to import code when using asyncio can be tricky beca
 
 ## Module level imports
 
-If your imports are at the **module level** (also known as **top-level imports**), Home Assistant will import your code either **before the event loop starts** or **in the import executor** when your integration is loaded. In this case, you generally **don’t need to worry** about whether your imports are safe.
+If your imports are at the **module level** (also called **top-level imports**) and all the necessary modules are imported in `__init__.py`, Home Assistant will load your integration either **before the event loop starts** or in a background thread using the **import executor**.
+
+In this scenario, your imports are generally handled safely, so you **don’t need to worry** about whether they’re event-loop safe.
 
 ## Imports outside of module level
 
