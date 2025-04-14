@@ -500,6 +500,7 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
             uncompleted_task = self.task_one
         if not uncompleted_task:
             if not self.task_two:
+                self.async_update_progress(0.5) # tell frontend we are 50% done
                 coro = asyncio.sleep(10)
                 self.task_two = self.hass.async_create_task(coro)
             if not self.task_two.done():
