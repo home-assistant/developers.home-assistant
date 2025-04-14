@@ -474,6 +474,7 @@ The flow works as follows:
   * If the task is finished, the flow must call the `async_show_progress_done`, indicating the next step
 5. The frontend will update each time we call show progress or show progress done.
 6. The config flow will automatically advance to the next step when the progress was marked as done. The user is prompted with the next step.
+7. The task can optionally call `async_update_progress(progress)` where progress is a float between 0 and 1, indicating how much of the task is done.
 
 Example configuration flow that includes two show sequential progress tasks.
 
@@ -499,6 +500,7 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
             uncompleted_task = self.task_one
         if not uncompleted_task:
             if not self.task_two:
+                self.async_update_progress(0.5) # tell frontend we are 50% done
                 coro = asyncio.sleep(10)
                 self.task_two = self.hass.async_create_task(coro)
             if not self.task_two.done():
