@@ -87,6 +87,20 @@ the end-user getting your improvement faster.
    clear, and concise title, and add an extensive description of your change.
    Be sure to add a motivation (or use case) to your PR, so the reviewer can
    understand why you are making this change (or why you make certain decisions).
+   
+7. **Update dependency in a standalone PR.**
+   When you need to bump a dependency, try to do so in a standalone PR. Only
+   compatibility code adjustments or small related bug fixes should be included in the
+   PR. If you have new features that depend on the updated dependency, these can be
+   added in a follow-up. This will also make CI iterations run a lot faster when reviewing
+   the new features or larger bug fixes, as it restricts the tests to a single integration.
+   Ensure that the PR description contains at least one (or multiple) of the following:
+   - A link to the release notes of this package version, and all versions in between.
+   - A link to the changelog of this package.
+   - A link to a Git(Hub) diff/compare view from the current version to the bumped version.
+   This allows us to review upstream changes, which is needed to decide if this change is
+   working as intended and/or if we can include it in, for example, a patch release of
+   Home Assistant.
 
 ## Receiving review comments
 

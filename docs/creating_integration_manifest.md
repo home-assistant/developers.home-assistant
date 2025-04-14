@@ -155,7 +155,7 @@ It is also possible to use a public git repository to install a requirement.  Th
 
 ```json
 {
-  "requirements": ["<project> @ git+https://github.com/<user>/<project>.git@<git ref>"]
+  "requirements": ["<library>@git+https://github.com/<user>/<project>.git@<git ref>"]
 }
 ```
 `<git ref>` can be any git reference: branch, tag, commit hash, ... . See [PIP documentation about git support](https://pip.pypa.io/en/stable/topics/vcs-support/#git).
@@ -164,7 +164,7 @@ The following example will install the `except_connect` branch of the `pycoolmas
 
 ```json
 {
-  "requirements": ["pycoolmaster @ git+https://github.com/issacg/pycoolmaster.git@except_connect"]
+  "requirements": ["pycoolmaster@git+https://github.com/issacg/pycoolmaster.git@except_connect"]
 }
 ```
 
@@ -319,7 +319,7 @@ Integrations depending on MQTT should wait using `await mqtt.async_wait_for_mqtt
 
 ## DHCP
 
-If your integration supports discovery via dhcp, you can add the type to your manifest. If the user has the `dhcp` integration loaded, it will load the `dhcp` step of your integration's config flow when it is discovered. We support passively listening for DHCP discovery by the `hostname` and [OUI](https://en.wikipedia.org/wiki/Organizationally_unique_identifier), or matching device registry mac address when `registered_devices` is set to `true`. The manifest value is a list of matcher dictionaries, your integration is discovered if all items of any of the specified matchers are found in the DHCP data. It's up to your config flow to filter out duplicates.
+If your integration supports discovery via DHCP, you can add the type to your manifest. If the user has the `dhcp` integration loaded, it will load the `dhcp` step of your integration's config flow when it is discovered. We support passively listening for DHCP discovery by the `hostname` and [OUI](https://en.wikipedia.org/wiki/Organizationally_unique_identifier), or matching device registry mac address when `registered_devices` is set to `true`. The manifest value is a list of matcher dictionaries, your integration is discovered if all items of any of the specified matchers are found in the DHCP data. [Unix filename pattern matching](https://docs.python.org/3/library/fnmatch.html) is used for matching. It's up to your config flow to filter out duplicates.
 
 If an integration wants to receive discovery flows to update the IP Address of a device when it comes
 online, but a `hostname` or `oui` match would be too broad, and it has registered in the device registry with mac address using the `CONNECTION_NETWORK_MAC`,
@@ -328,13 +328,14 @@ it should add a DHCP entry with `registered_devices` set to `true`.
 If the integration supports `zeroconf` or `ssdp`, these should be preferred over `dhcp` as it generally offers a better
 user experience.
 
-The following example has three matchers consisting of two items. All of the items in any of the three matchers must match for discovery to happen by this config.
+The following example has two matchers consisting of two items. All of the items in any of the matchers must match for discovery to happen by this config.
 
 For example:
 
--  If the `hostname` was `Rachio-XYZ` and the `macaddress` was `00:9D:6B:55:12:AA`, the discovery would happen.
--  If the `hostname` was `Rachio-XYZ` and the `macaddress` was `00:00:00:55:12:AA`, the discovery would not happen.
--  If the `hostname` was `NotRachio-XYZ` and the `macaddress` was `00:9D:6B:55:12:AA`, the discovery would not happen.
+-  If the `hostname` was `Rachio-XYZ` and the `macaddress` was `00:9D:6B:55:12:AA`, the discovery would happen (1st matcher).
+-  If the `hostname` was `Dachio-XYZ` or `Pachio-XYZ`, and the `macaddress` was `00:9D:6B:55:12:AA`, the discovery would happen (3rd matcher).
+-  If the `hostname` was `Rachio-XYZ` and the `macaddress` was `00:00:00:55:12:AA`, the discovery would not happen (no matching MAC).
+-  If the `hostname` was `NotRachio-XYZ` and the `macaddress` was `00:9D:6B:55:12:AA`, the discovery would not happen (no matching hostname).
 
 
 ```json
@@ -345,12 +346,8 @@ For example:
     "macaddress": "009D6B*"
     },
     {
-    "hostname": "rachio-*",
-    "macaddress": "F0038C*"
-    },
-    {
-    "hostname": "rachio-*",
-    "macaddress": "74C63B*"
+    "hostname": "[dp]achio-*",
+    "macaddress": "009D6B*"
     }
   ]
 }
@@ -412,11 +409,9 @@ For example:
 
 ## Integration quality scale
 
-The [Integration Quality Scale](https://www.home-assistant.io/docs/quality_scale/) scores an integration on the code quality and user experience. Each level of the quality scale consists of a list of requirements. If an integration matches all requirements, it's considered to have reached that level.
+The [Integration Quality Scale](/docs/core/integration-quality-scale) scores an integration on the code quality and user experience. Each level of the quality scale consists of a list of requirements. If an integration matches all requirements, it's considered to have reached that level.
 
-When your integration has no score, then don't add it to the manifest of your integration. However, be sure to look at the [Integration Quality Scale](https://www.home-assistant.io/docs/quality_scale/) list of requirements. It helps to improve the code and user experience tremendously.
-
-We highly recommend getting your integration scored.
+New integrations are required to fulfill at least the bronze tier so be sure to look at the [Integration Quality Scale](/docs/core/integration-quality-scale) list of requirements. It helps to improve the code and user experience tremendously.
 
 ```json
 {

@@ -17,11 +17,21 @@ To run our linters, on the full code base, run the following command:
 pre-commit run --all-files
 ```
 
+To run the full test suite, more dependencies are required than what is set up in the devcontainer by default. To install all dependencies, activate the virtual environment and run the command:
+
+```shell
+uv pip install -r requirements_test_all.txt
+```
+
+Or, in Visual Studio Code, launch the **Install all Test Requirements** task.
+
 To start the tests, and run the full test suite, activate the virtual environment and run the command:
 
 ```shell
 pytest tests
 ```
+
+Or, in Visual Studio Code, launch the **Pytest** task.
 
 It might be required that you install additional packages depending on your distribution/operating system:
 
@@ -45,8 +55,11 @@ If you are working on tests for an integration and you changed the dependencies,
 Next you can update all dependencies in your development environment by running:
 
 ```shell
-pip3 install -r requirements_test_all.txt
+uv pip install -r requirements_test_all.txt
 ```
+
+Or, in Visual Studio Code, launch the **Install all Test Requirements** task.
+
 ### Running a limited test suite
 
 You can pass arguments to `pytest` to be able to run single test suites or test files.
@@ -73,6 +86,8 @@ the following command is recommended:
 pytest ./tests/components/<your_component>/ --cov=homeassistant.components.<your_component> --cov-report term-missing -vv
 ```
 
+Or, in Visual Studio Code, launch the **Code Coverage** task.
+
 ### Preventing linter errors
 
 Several linters are setup to run automatically when you try to commit as part of running `script/setup` in the [virtual environment](development_environment.mdx).
@@ -82,6 +97,8 @@ You can also run these linters manually :
 ```shell
 pre-commit run --show-diff-on-failure
 ```
+
+Or, in Visual Studio Code, launch the **Pre-commit** task.
 
 The linters are also available directly, you can run tests on individual files:
 
@@ -155,6 +172,8 @@ the `--snapshot-update` flag:
 ```shell
 pytest tests/components/example/test_sensor.py --snapshot-update
 ```
+
+Or, in Visual Studio Code, launch the **Update syrupy snapshots** task.
 
 This will create a snapshot file in the `tests/components/example/snapshots`.
 The snapshot file is named after the test file, in this case `test_sensor.ambr`,

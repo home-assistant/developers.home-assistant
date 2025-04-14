@@ -31,6 +31,12 @@ const features = [
           </b>{" "}
           Explains how to develop the user interface of Home Assistant.
         </p>
+        <p>
+          <b>
+            <a href="docs/android">Android</a>.
+          </b>{" "}
+          Explains how to contribute to the Android companion app.
+        </p>
       </>
     ),
   },
@@ -60,6 +66,11 @@ const features = [
           <li>
             <a href="https://github.com/home-assistant/frontend">
               Home Assistant Frontend
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/home-assistant/android">
+              Home Assistant Android
             </a>
           </li>
         </ul>

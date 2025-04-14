@@ -155,9 +155,9 @@ Avoid using `config.yaml` as filename in your add-on for anything other than the
 | `hassio_api` | bool | `false` | This add-on can access the Supervisor's REST API. Use `http://supervisor`.
 | `homeassistant_api` | bool | `false` | This add-on can access the Home Assistant REST API proxy. Use `http://supervisor/core/api`.
 | `docker_api` | bool | `false` | Allow read-only access to the Docker API for the add-on. Works only for not protected add-ons.
-| `privileged` | list | | Privilege for access to hardware/system. Available access: `BPF`, `DAC_READ_SEARCH`, `IPC_LOCK`, `NET_ADMIN`, `NET_RAW`, `PERFMON`, `SYS_ADMIN`, `SYS_MODULE`, `SYS_NICE`, `SYS_PTRACE`, `SYS_RAWIO`, `SYS_RESOURCE` or `SYS_TIME`.
+| `privileged` | list | | Privilege for access to hardware/system. Available access: `BPF`, `CHECKPOINT_RESTORE`, `DAC_READ_SEARCH`, `IPC_LOCK`, `NET_ADMIN`, `NET_RAW`, `PERFMON`, `SYS_ADMIN`, `SYS_MODULE`, `SYS_NICE`, `SYS_PTRACE`, `SYS_RAWIO`, `SYS_RESOURCE` or `SYS_TIME`.
 | `full_access` | bool | `false` | Give full access to hardware like the privileged mode in Docker. Works only for not protected add-ons. Consider using other add-on options instead of this, like `devices`. If you enable this option, don't add `devices`, `uart`, `usb` or `gpio` as this is not needed.
-| `apparmor` | bool/string | `false` | Enable or disable AppArmor support. If it is enabled, you can also use custom profiles with the name of the profile.
+| `apparmor` | bool/string | `true` | Enable or disable AppArmor support. If it is enabled, you can also use custom profiles with the name of the profile.
 | `map` | list | | List of Home Assistant directory types to bind mount into your container. Possible values: `homeassistant_config`, `addon_config`, `ssl`, `addons`, `backup`, `share`, `media`, `all_addon_configs`, and `data`. Defaults to read-only, which you can change by adding the property `read_only: false`. By default, all paths map to `/<type-name>` inside the addon container, but an optional `path` property can also be supplied to configure the path (Example: `path: /custom/config/path`). If used, the path must not be empty, unique from any other path defined for the addon, and not the root path. Note that the `data` directory is always mapped and writable, but the `path` property can be set using the same conventions.
 | `environment` | dict | | A dictionary of environment variables to run the add-on with.
 | `audio` | bool | `false` | Mark this add-on to use the internal audio system. We map a working PulseAudio setup into the container. If your application does not support PulseAudio, you may need to install: Alpine Linux `alsa-plugins-pulse` or Debian/Ubuntu `libasound2-plugins`.
@@ -176,7 +176,7 @@ Avoid using `config.yaml` as filename in your add-on for anything other than the
 | `codenotary` | string | | For use with Codenotary CAS. This is the E-Mail address used to verify your image with Codenotary (E.g, `example@home-assistant.io`). This should match the E-Mail address used as the signer in the [add-on's extended build options](#add-on-extended-build)
 | `timeout` | integer | 10 | Default 10 (seconds). The timeout to wait until the Docker daemon is done or will be killed.
 | `tmpfs` | bool | `false` | If this is set to `true`, the containers `/tmp` uses tmpfs, a memory file system.
-| `discovery` | list | | A list of services that this add-on provides for Home Assistant. Currently supported: `mqtt`, `matter` and `otbr`
+| `discovery` | list | | A list of services that this add-on provides for Home Assistant.
 | `services` | list | | A list of services that will be provided or consumed with this add-on. Format is `service`:`function` and functions are: `provide` (this add-on can provide this service), `want` (this add-on can use this service) or `need` (this add-on needs this service to work correctly).
 | `auth_api` | bool | `false` | Allow access to Home Assistant user backend.
 | `ingress` | bool | `false` | Enable the ingress feature for the add-on.
@@ -320,7 +320,8 @@ Sometimes add-on developers may want to allow users to configure to provide thei
 2. Internal service requires a binary file or some file configured externally as part of its config.
 3. Internal service supports live reloading on config change and you want to support that for some or all of its configuration by asking users for a file in its schema to live reload from.
 
-In cases like these you should add `addon_config` to `map` in your addon's configuration file. And then you should direct your users to put this file in the folder `/addon_configs/<your addon's slug>`. This folder will be mounted at `/config` inside your addon's docker container at runtime. You should either provide an option in your addon's schema that collects a relative path to the file(s) starting from this folder or rely on a fixed filename and include that in your documentation.
+In cases like these you should add `addon_config` to `map` in your addon's configuration file. And then you should direct your users to put this file in the folder `/addon_configs/{REPO}_<your addon's slug>`. If an add-on is installed locally, `{REPO}` will be `local`. If the add-on is installed from a Github repository, `{REPO}` is a hashed identifier generated from the GitHub repository's URL (ex: `https://github.com/xy/my_hassio_addons`).
+This folder will be mounted at `/config` inside your addon's docker container at runtime. You should either provide an option in your addon's schema that collects a relative path to the file(s) starting from this folder or rely on a fixed filename and include that in your documentation.
 
 Another use case of `addon_config` could be if your addon wants to provide file-based output or give users access to internal files for debugging. Some examples include:
 

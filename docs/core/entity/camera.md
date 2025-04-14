@@ -15,7 +15,6 @@ Properties should always only return information from memory and not do I/O (lik
 | ------------------------ | ------------------------------------| ------- | --------------------------------------------------------------------------------------------------- |
 | brand                    | <code>str &#124; None</code>        | `None`  | The brand (manufacturer) of the camera.                                                             |
 | frame_interval           | `float`                             | 0.5     | The interval between frames of the stream.                                                          |
-| frontend_stream_type     | <code>StreamType &#124; None</code> | `None`  | Used with `CameraEntityFeature.STREAM` to tell the frontend which type of stream to use (`StreamType.HLS` or `StreamType.WEB_RTC`) |
 | is_on                    | `bool`                              | `True`  | Indication of whether the camera is on.                                                             |
 | is_recording             | `bool`                              | `False` | Indication of whether the camera is recording. Used to determine `state`.                           |
 | is_streaming             | `bool`                              | `False` | Indication of whether the camera is streaming. Used to determine `state`.                           |
@@ -93,34 +92,43 @@ A common way for a camera entity to render a camera still image is to pass the s
 
 ### WebRTC streams
 
-WebRTC enabled cameras can be used by facilitating a direct connection with the home assistant frontend. This usage requires `CameraEntityFeature.STREAM` with `frontend_stream_type` set to `StreamType.WEB_RTC`. The integration should implement `async_handle_web_rtc_offer` which passes the frontend's SDP offer to the device and returns back the answer.
+WebRTC enabled cameras can be used by facilitating a direct connection with the home assistant frontend. This usage requires `CameraEntityFeature.STREAM` and the integration must implement the two following methods to support native WebRTC:
+- `async_handle_async_webrtc_offer`: To initialize a WebRTC stream. Any messages/errors coming in async should be forwared to the frontend with the `send_message` callback.
+- `async_on_webrtc_candidate`: The frontend will call it with any candidate coming in after the offer is sent.
+The following method can optionally be implemented:
+- `close_webrtc_session` (Optional): The frontend will call it when the stream is closed. Can be used to clean up things.
 
 WebRTC streams do not use the `stream` component and do not support recording.
+By implementing the WebRTC methods, the frontend assumes that the camera supports only WebRTC and therefore will not fallbac to HLS.
 
 ```python
 class MyCamera(Camera):
 
-    async def async_handle_web_rtc_offer(self, offer_sdp: str) -> str | None:
-        """Handle the WebRTC offer and return an answer."""
+    async def async_handle_async_webrtc_offer(
+        self, offer_sdp: str, session_id: str, send_message: WebRTCSendMessage
+    ) -> None:
+        """Handle the async WebRTC offer.
+
+        Async means that it could take some time to process the offer and responses/message
+        will be sent with the send_message callback.
+        This method is used by cameras with CameraEntityFeature.STREAM
+        An integration overriding this method must also implement async_on_webrtc_candidate.
+
+        Integrations can override with a native WebRTC implementation.
+        """
+
+    async def async_on_webrtc_candidate(self, session_id: str, candidate: RTCIceCandidate) -> None:
+        """Handle a WebRTC candidate."""
+
+    @callback
+    def close_webrtc_session(self, session_id: str) -> None:
+        """Close a WebRTC session."""
 ```
 
-### RTSP to WebRTC
+### WebRTC Providers
 
-An integration may provide a WebRTC stream for any RTSP camera using `async_register_rtsp_to_web_rtc_provider`. The current best practice is for an integration to provide the actual stream manipulation with an Add-on or external service.
-
-```python
-async def handle_offer(stream_source: str, offer_sdp: str) -> str:
-    """Handle the signal path for a WebRTC stream and return an answer."""
-    try:
-        return await client.offer(offer_sdp, stream_source)
-    except ClientError as err:
-        raise HomeAssistantError from err
-
-# Call unsub() when integration unloads
-unsub = camera.async_register_rtsp_to_web_rtc_provider(
-    hass, DOMAIN, handle_offer
-)
-```
+An integration may provide a WebRTC stream from an existing camera's stream source using the libraries in `homeassistant.components.camera.webrtc`. An
+integration may implement `CameraWebRTCProvider` and register it with `async_register_webrtc_provider`.
 
 ### Turn on
 

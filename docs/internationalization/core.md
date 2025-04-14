@@ -54,15 +54,26 @@ Strings which are used more than once should be not be duplicated, instead refer
 }
 ```
 
-### Config / Options
+### Config / Options / Subentry flows
 
-The translation strings for the configuration flow handler and the option flow handler are defined under the `config` and `options` keys respectively. An example strings file below describes the different supported keys. Although the example shows translations for a configuration flow, the translations for an option flow is exactly the same.
+The translation strings for the configuration flow handler, the option flow handler and config subentry handlers are defined under the `config`, `options` and `config_subentries` keys respectively.
+
+Note that `config_subentries` is a map of maps, where the keys are the subentry types supported by the integration.
+
+The example strings file below describes the different supported keys. Although the example shows translations for a configuration flow, the options and subentry flow translations follow the same format.
 
 ```json
 {
   "config": {
     // Optional. Title to show in list. Only will be rendered if placeholders required
     "flow_title": "Discovered Device ({host})",
+    // Optional, only needed if the default translations in frontend are misleading
+    "entry_type": "Label explaining what an entry represents",
+    // Optional, only needed if the default translations in frontend are misleading
+    "initiate_flow": {
+        "reconfigure": "Menu or button label for starting a reconfigure flow",
+        "user": "Menu or button label for starting a user flow"
+    },
     "step": {
       "init": {
         // Optional. Will show the integration name if omitted
@@ -71,6 +82,12 @@ The translation strings for the configuration flow handler and the option flow h
         "description": "Markdown that is shown with the step.",
         "data": {
           "api_key": "The label for the `api_key` input field"
+        },
+        // Only needed if the form has sections
+        "sections": {
+          "auth_options": {
+            "name": "The label for the `auth_options` section"
+          }
         }
       }
     },
@@ -82,6 +99,17 @@ The translation strings for the configuration flow handler and the option flow h
     },
     "progress": {
       "slow_task": "This message will be displayed if `slow_task` is returned as `progress_action` for `async_show_progress`."
+    }
+  },
+  "options": {
+    // Same format as for config flow
+  },
+  "config_subentries": {
+    "subentry_type_1": {
+      // Same format as for config flow
+    },
+    "subentry_type_2": {
+      // Same format as for config flow
     }
   }
 }
@@ -461,6 +489,24 @@ If your integration provides entities under its domain, you will want to transla
             "diffuse": "Diffuse"
           }
         }
+      }
+    }
+  }
+}
+```
+
+#### Unit of measurement of entities
+
+Integrations can provide translations for units of measurement of its entities. To do this, provide an `entity` object, that contains translations for the units and set the entity's `translation_key` property to a key under a domain in the `entity` object.
+If the entity's `translation_key` property is not `None` and the `entity` object provides a translated unit of measurement, `SensorEntityDescription.native_unit_of_measurement` or `NumberEntityDescription.native_unit_of_measurement` should not be defined.
+
+The following example `strings.json` is for a `sensor` entity with its `translation_key` property set to `goal`:
+```json
+{
+  "entity": {
+    "sensor": {
+      "goal": {
+        "unit_of_measurement": "steps"
       }
     }
   }

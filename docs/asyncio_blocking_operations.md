@@ -120,3 +120,7 @@ See [SSLContext.load_default_certs](#load_default_certs)
 #### load_cert_chain
 
 See [SSLContext.load_default_certs](#load_default_certs)
+
+#### set_default_verify_paths
+
+See [SSLContext.load_default_certs](#load_default_certs)

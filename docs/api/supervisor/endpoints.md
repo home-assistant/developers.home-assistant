@@ -42,7 +42,8 @@ Return overview information about installed add-ons.
       "build": false,
       "url": null,
       "icon": false,
-      "logo": false
+      "logo": false,
+      "system_managed": false
     }
   ]
 }
@@ -165,7 +166,9 @@ Get details about an add-on
 | startup             | string             | The stage when the add-on is started (initialize, system, services, application, once) |
 | state               | string or null     | The state of the add-on (started, stopped)                                             |
 | stdin               | boolean            | `true` if the add-on accepts stdin commands                                            |
-| translations        | dictionary         | A dictionary containing content of translation files for the add-on |
+| system_managed      | boolean            | Indicates whether the add-on is managed by Home Assistant                              |
+| system_managed_config_entry | string     | Provides the configuration entry ID if the add-on is managed by Home Assistant         |
+| translations        | dictionary         | A dictionary containing content of translation files for the add-on                    |
 | udev                | boolean            | `true` if udev access is granted is enabled                                            |
 | update_available    | boolean            | `true` if an update is available                                                       |
 | url                 | string or null     | URL to more information about the add-on                                               |
@@ -241,6 +244,8 @@ Get details about an add-on
   "startup": "application",
   "state": "started",
   "stdin": false,
+  "system_managed": true,
+  "system_managed_config_entry": "abc123",
   "translations": {
     "en": {
       "configuration": {
@@ -275,9 +280,7 @@ Get the add-on logo
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/options" method="post">
-Set the protection mode on an add-on.
-
-This function is not callable by itself and you can not use `self` as the slug here.
+Set the options for an add-on.
 
 :::tip
 To reset customized network/audio/options, set it `null`.
@@ -311,6 +314,31 @@ To reset customized network/audio/options, set it `null`.
     "awesome": true
   },
   "watchdog": true
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/addons/<addon>/sys_options" method="post">
+Change options specific to system managed addons.
+
+This endpoint is only callable by Home Assistant and not by any other client.
+
+**Payload**
+
+| key                         | type          | description                             |
+| --------------------------- | ------------- | --------------------------------------- |
+| system_managed              | boolean       | `true` if managed by Home Assistant     |
+| system_managed_config_entry | boolean       | ID of config entry managing addon       |
+
+**You need to supply at least one key in the payload.**
+
+**Example payload:**
+
+```json
+{
+  "system_managed": true,
+  "system_managed_config_entry": "abc123"
 }
 ```
 
@@ -1228,6 +1256,7 @@ Rebuild the Home Assistant core container
 | key       | type       | optional | description                      |
 | --------- | ---------- | -------- | -------------------------------- |
 | safe_mode | boolean    | True     | Rebuild Core into safe mode      |
+| force     | boolean    | True     | Force rebuild during a Home Assistant offline db migration |
 
 </ApiEndpoint>
 
@@ -1239,6 +1268,7 @@ Restart the Home Assistant core container
 | key       | type       | optional | description                      |
 | --------- | ---------- | -------- | -------------------------------- |
 | safe_mode | boolean    | True     | Restart Core into safe mode      |
+| force     | boolean    | True     | Force restart during a Home Assistant offline db migration |
 
 </ApiEndpoint>
 
@@ -1269,6 +1299,13 @@ Returns a [Stats model](api/supervisor/models.md#stats) for the Home Assistant c
 
 <ApiEndpoint path="/core/stop" method="post">
 Stop the Home Assistant core container
+
+**Payload:**
+
+| key       | type       | optional | description                      |
+| --------- | ---------- | -------- | -------------------------------- |
+| force     | boolean    | True     | Force stop during a Home Assistant offline db migration |
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/core/update" method="post">
@@ -1807,6 +1844,14 @@ Set host options
 
 <ApiEndpoint path="/host/reboot" method="post">
 Reboot the host
+
+**Payload:**
+
+| key       | type       | optional | description                                               |
+| --------- | ---------- | -------- | --------------------------------------------------------- |
+| force     | boolean    | True     | Force reboot during a Home Assistant offline db migration |
+
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/host/reload" method="post">
@@ -1852,6 +1897,13 @@ Get information about host services.
 
 <ApiEndpoint path="/host/shutdown" method="post">
 Shutdown the host
+
+**Payload:**
+
+| key       | type       | optional | description                                                 |
+| --------- | ---------- | -------- | ----------------------------------------------------------- |
+| force     | boolean    | True     | Force shutdown during a Home Assistant offline db migration |
+
 </ApiEndpoint>
 
 ### Ingress
@@ -2528,6 +2580,40 @@ Change the active boot slot, **This will also reboot the device!**
 | --------- | ------ | ------------------------------------------------------------------------ |
 | boot_slot | string | Boot slot to change to. See options in `boot_slots` from `/os/info` API. |
 
+</ApiEndpoint>
+
+<ApiEndpoint path="/os/config/swap" method="get">
+
+Get current HAOS swap configuration. Unavailable on Supervised.
+
+**Returned data:**
+
+| key        | type   | description                      |
+|------------|--------|----------------------------------|
+| swap_size  | string | Current swap size.               |
+| swappiness | int    | Current kernel swappiness value. |
+
+**Example response:**
+
+```json
+{
+  "swap_size": "2G",
+  "swappiness": 1
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/os/config/swap" method="post">
+
+Set HAOS swap configuration. Unavailable on Supervised.
+
+**Payload:**
+
+| key        | type   | description                                                                                |
+|------------|--------|--------------------------------------------------------------------------------------------|
+| swap_size  | string | New swap siz as number with optional units (K/M/G). Anything lower than 40K disables swap. |
+| swappiness | int    | New swappiness value (0-100).                                                              |
 </ApiEndpoint>
 
 <ApiEndpoint path="/os/datadisk/list" method="get">

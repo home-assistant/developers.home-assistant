@@ -21,6 +21,7 @@ These models are describing objects that are getting returned from the superviso
 | icon             | bool           | The add-on has an icon file                            |
 | logo             | bool           | The add-on has a logo file                            |
 | state            | string         | The state of the add-on (started, stopped)            |
+| system_managed   | bool           | Indicates whether the add-on is managed by Home Assistant |
 
 ## Application
 
@@ -298,6 +299,7 @@ Response only fields will be in responses but cannot be included in requests.
 | progress   | int     | Progress of the job (if accurate progress is obtainable)      |
 | stage      | string  | A name for the stage the job is in (if applicable)            |
 | done       | boolean | Is the job complete                                           |
+| created    | string  | Date and time when job was created in ISO format              |
 | child_jobs | list    | A list of child [jobs](#job) started by this one              |
 | errors     | list    | A list of [errors](#job-error) that occurred during execution |
 
