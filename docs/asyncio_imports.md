@@ -7,13 +7,13 @@ Determining when it is safe to import code when using asyncio can be tricky beca
 - Importing code can do blocking I/O to load the files from the disk
 - Importing code in [cpython is not thread-safe](https://github.com/python/cpython/issues/83065)
 
-## Top-level imports
+## Module level imports
 
-Suppose your imports happen at the top-level (nearly all code at indentation level 0). Home Assistant will import your code before the event loop starts or import it in the import executor when your integration is loaded. In this case, you likely do not need to consider whether your imports are safe.
+If your imports are at the **module level** (also known as **top-level imports**), Home Assistant will import your code either **before the event loop starts** or **in the import executor** when your integration is loaded. In this case, you generally **don’t need to worry** about whether your imports are safe.
 
-## Imports outside of top-level
+## Imports outside of module level
 
-If your imports are not happening at top-level, you must carefully consider each import, as the import machinery has to read the module from disk which does blocking I/O. If possible, it's usually best to change to a top-level import, as it avoids much complexity and the risk of mistakes. Importing modules is both CPU-intensive and involves blocking I/O, so it is crucial to ensure these operations are executed in the executor.
+If your imports are not happening at module level, you must carefully consider each import, as the import machinery has to read the module from disk which does blocking I/O. If possible, it's usually best to change to a module level import, as it avoids much complexity and the risk of mistakes. Importing modules is both CPU-intensive and involves blocking I/O, so it is crucial to ensure these operations are executed in the executor.
 
 If you can be sure that the modules have already been imported, using a bare [`import`](https://docs.python.org/3/reference/simple_stmts.html#import) statement is safe since Python will not load the modules again.
 
