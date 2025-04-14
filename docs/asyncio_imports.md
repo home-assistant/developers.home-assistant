@@ -19,7 +19,7 @@ If your imports are not happening at module level, you must carefully consider e
 
 If you can be sure that the modules have already been imported, using a bare [`import`](https://docs.python.org/3/reference/simple_stmts.html#import) statement is safe since Python will not load the modules again.
 
-If the integration will always use the module, a module level import in `__init__.py` to ensure the module is loaded is usually the best solution.
+If the integration will always use the module, it's usually best to include a module-level import in `__init__.py` to ensure the module is loaded. However, if this creates a circular import, one of the solutions below will need to be used instead.
 
 If the module is only used conditionally, and will only ever be imported in a single place, the standard executor calls can be used:
 
