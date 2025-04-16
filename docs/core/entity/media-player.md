@@ -210,7 +210,14 @@ class MyMediaPlayer(MediaPlayerEntity):
         return SearchMedia(result=result)
 ```
 
-A user can also further filter the search results by only requesting a list of `MediaClass`.
+The SearchMediaQuery is a dataclass with the following properties:
+
+| Attribute             | Type                                  | Default     | Description                        |
+|-----------------------|---------------------------------------|-------------|------------------------------------|
+| `search_query`        | `str`                                 | *required*  | The search string or query.        |
+| `media_content_type`  | `MediaType \| str \| None`            | `None`      | The content type to search inside. |
+| `media_content_id`    | `str \| None`                         | `None`      | The content ID to search inside.   |
+| `media_filter_classes`| `list[MediaClass] \| None`            | `None`      | List of media classes to filter.   |
 
 ### Select sound mode
 
