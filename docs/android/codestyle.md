@@ -108,7 +108,7 @@ if (value == SUPER_IMPORTANT_THRESHOLD) {
 
 ### Organizing constants
 
-General rule is if the constant is exposed outside of the file it needs to be properly be identifiable when imported either by its name or by its parents name.
+As a general rule, if a constant is exposed outside the file, it needs to be easily identifiable when imported, either by its own name or by its parent’s name.
 
 #### Within a dedicated file
 
