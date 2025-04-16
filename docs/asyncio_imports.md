@@ -27,8 +27,7 @@ If the module is only used conditionally, and will only ever be imported in a si
 - For imports outside of Home Assistant: [`loop.run_in_executor(None, _function_that_does_late_import)`](https://docs.python.org/3/library/asyncio-eventloop.html#asyncio.loop.run_in_executor)
 If the same module may be imported concurrently in different parts of the application, use the thread-safe `homeassistant.helpers.importlib.import_module` helper.
 
-If its possible the module may be imported from multiple different paths, use `async_import_module`:
-
+If it's possible the module may be imported from multiple different paths, use `async_import_module`:
 Example:
 
 ```python
