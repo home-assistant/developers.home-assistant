@@ -167,8 +167,6 @@ const val DEFAULT_USER_ID = "guest"
 
 #### Using companion objects
 
-Use companion object only when constants or utility functions need to be exposed externally. This provides a clear namespace and avoids naming collisions.
-
 When to use companion objects:
 
 - **Namespacing for external use**: When constants or utility functions must be accessed externally (e.g., public or internal).
