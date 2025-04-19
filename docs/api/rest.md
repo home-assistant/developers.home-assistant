@@ -823,3 +823,19 @@ curl \
 ```
 
 </ApiEndpoint>
+
+<ApiEndpoint path="/api/states/<entity_id>" method="delete">
+
+Deletes an entity with the specified `entity_id`.
+
+Sample `curl` command:
+
+```shell
+curl \
+  -X DELETE \
+  -H "Authorization: Bearer TOKEN" \
+  -H "Content-Type: application/json" \
+  http://localhost:8123/api/states/sensor.kitchen_temperature
+```
+
+</ApiEndpoint>
