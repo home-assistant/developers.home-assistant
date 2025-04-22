@@ -93,7 +93,7 @@ if (value == 42) {
 }
 ```
 
-In this example, it’s unclear why the value 42 is being used. At the very least, you should add a comment explaining its purpose. Even better for future evolutions, it should be defined as a constant.
+In this example, it’s unclear why the value 42 is being used. At the very least, you should add a comment explaining its purpose. Defining it as a constant is even better because it provides a clear, descriptive name, making the code easier to read, understand, and maintain. Additionally, defining the value in one place facilitates reuse across the codebase, such as in tests or within functions, classes, or other modules. This approach simplifies future changes, as updating the constant in one location automatically propagates the change wherever it is used. It also allows you to easily find where the constant is used with the IDE, avoiding irrelevant search results like searching for "42" across the entire codebase.
 
 #### ✅ Do this
 
