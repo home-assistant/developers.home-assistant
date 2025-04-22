@@ -43,7 +43,7 @@ You can join the beta program directly through the [Google Play Store](https://p
 
 ### Production release
 
-If the beta version is stable and approved by maintainers, it is promoted to **production**, making it available to all users.
+If the beta version is stable and approved by maintainers, it is promoted to **production**, making it available to all users. The companion docs may need to be updated to remove any beta labels once approved.
 
 :::note
 You can find the app on the [Google Play Store](https://play.google.com/store/apps/details?id=io.homeassistant.companion.android).
