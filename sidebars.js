@@ -297,6 +297,7 @@ module.exports = {
       items: [
         "documenting",
         "documenting/standards",
+        "documenting/general-style-guide",
         "documenting/yaml-style-guide",
         "documenting/create-page",
         "documenting/integration-docs-examples",

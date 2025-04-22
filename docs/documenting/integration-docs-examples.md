@@ -7,8 +7,9 @@ This page shows examples of the available documentation features (such as inline
 Use this template together with the following documentation:
 
 - The integration documentation template in the home-assistant.io repository under [/_integrations/_integration_docs_template.markdown](https://github.com/home-assistant/home-assistant.io/tree/current/source/_integrations/_integration_docs_template.markdown).
-- [Documentation standard](https://developers.home-assistant.io/docs/documenting/standards).
-- The documentation rules of the [Integration Quality Scale](https://developers.home-assistant.io/docs/core/integration-quality-scale/).
+- [Documentation standard](/docs/documenting/standards).
+- [General style guide](/docs/documenting/general-style-guide).
+- The documentation rules of the [Integration Quality Scale](/docs/core/integration-quality-scale/).
 
 ## Inline text elements
 
