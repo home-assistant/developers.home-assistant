@@ -44,6 +44,7 @@ The JSON response from `/api/conversation/process` contains information about th
 
 ```json
 {
+  "continue_conversation": true,
   "response": {
     "response_type": "action_done",
     "language": "en",
@@ -90,6 +91,8 @@ The following properties are available in the `"response"` object:
 
 
 The [conversation id](#conversation-id) is returned alongside the conversation response.
+
+If `continue_conversation` is set to true, the conversation agent expects a follow-up from the user.
 
 
 ## Response types
@@ -287,7 +290,7 @@ POST with the next input sentence:
 ```
 
 
-## Pre-loading sentences 
+## Pre-loading sentences
 
 Sentences for a language can be pre-loaded using the WebSocket API:
 
