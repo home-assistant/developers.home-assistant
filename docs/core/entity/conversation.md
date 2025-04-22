@@ -72,6 +72,12 @@ A `ConversationInput` object contains the following data:
 
 _We used to promote `async_process` as the method to process messages. This was changed to `_async_handle_message` to automatically include the chat log. The change is backwards compatible._
 
+#### Chat log
+
+The chat log object allows the conversation entity to read the conversation history and to add messages and tool calls to it.
+
+See [the Python interface](https://github.com/home-assistant/core/blob/dev/homeassistant/components/conversation/chat_log.py) for the full typed API.
+
 ### Prepare
 
 As soon as Home Assistant knows a request is coming in, we will let the conversation entity prepare for it. This can be used to load a language model or other resources. This function is optional to implement.
