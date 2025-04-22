@@ -39,13 +39,6 @@ some_key:
 
 - For describing **UI Variables** the `{% configuration_basic %}` section can be used.
 
-### Tables
-
-- Avoid the use of tables. Use lists instead. If you cannot avoid a table, minimize the number of columns and keep the amount of text as short as possible:
-  - Tables that are too wide can be difficult to browse on handheld devices.
-  - Less content makes tables easier to read.
-- When limiting the amount of text is not possible, consider using other data structures for representing the information. For example, lists or `{% configuration_basic %}` can be used.
-
 ## YAML and templates
 
 We have a separate styling guide for YAML and the use of Jinja2 templates
