@@ -108,43 +108,25 @@ if (value == SUPER_IMPORTANT_THRESHOLD) {
 
 ### Organizing constants
 
-As a general rule, if a constant is exposed outside the file, it needs to be easily identifiable when imported, either by its own name or by its parent’s name.
+Constants should be organized to ensure clarity, maintainability, and consistency. Follow these guidelines to determine where and how to define constants:
 
-#### Within a dedicated file
+1. If a constant is exposed outside the file, it should be easily identifiable when imported, either by its own name or by its parent’s name.
+2. Most constants should be defined in the same file as the class they are associated with (outside of `companion object` if possible).
+3. If there are too many constants in a file, move them to a dedicated file grouped under an `object` to provide namespacing.
 
-If you need to group related constants together, create an `object` to namespace them. Place the constants in a file suffixed with `*Constants.kt`. This approach improves organization and avoids cluttering unrelated files.
-
-**Example:**
-
-```kotlin
-// filepath: NetworkConstants.kt
-package package io.homeassistant.companion.android.network
-
-object NetworkConstants {
-    val TIMEOUT = 30.seconds
-    const val BASE_URL = "https://api.example.com"
-}
-```
-
-OR
-
-```kotlin
-// filepath: NetworkConstants.kt
-package package io.homeassistant.companion.android.network
-
-val NETWORK_TIMEOUT = 30.seconds
-const val BASE_URL = "https://api.example.com"
-```
+:::note
+This guideline has been introduced recently to standardize the usage of constants across the codebase. As a result, you may encounter instances that break this guideline. Feel free to correct these issues as you come across them to help improve code quality.
+:::
 
 #### Alongside a class
 
-For constants that are tightly coupled to a specific class, you can define them within the same file. Avoid using companion object unless absolutely necessary. Instead, place private constants outside the class definition at the top level. This reduces boilerplate and keeps the class focused.
+For constants that are tightly coupled to a specific class, define them in the same file as the class. Avoid using `companion object` unless absolutely necessary. Instead, place private constants at the top of the file, outside the class definition. This approach reduces boilerplate and keeps the class focused.
 
 **Example:**
 
 ```kotlin
 // filepath: UserRepository.kt
-package package io.homeassistant.companion.android.user
+package io.homeassistant.companion.android.user
 
 private const val DEFAULT_USER_ID = "guest"
 
@@ -156,7 +138,7 @@ class UserRepository {
 ```
 
 :::note
-If you need the constant in test to avoid leaking it to the rest of the production code you can use the `VisibleForTesting` annotation.
+If you need the constant in tests to avoid exposing it to the rest of the production code, use the `VisibleForTesting` annotation.
 
 ```kotlin
 @VisibleForTesting
@@ -176,7 +158,7 @@ When to use companion objects:
 
 ```kotlin
 // filepath: ApiClient.kt
-package package io.homeassistant.companion.android.network
+package io.homeassistant.companion.android.network
 
 class RestApiClient {
     companion object {
@@ -188,5 +170,23 @@ class WSClient {
     companion object {
         val DEFAULT_TIMEOUT = 10.seconds
     }
+}
+```
+
+#### Within a dedicated file using an object
+
+If there are too many constants in a file, or if the constants are shared across multiple classes or modules, move them to a dedicated file. Use an object to group related constants and provide namespacing. The file should be suffixed with `*Constants.kt`.
+
+```kotlin
+// filepath: NetworkConstants.kt
+package io.homeassistant.companion.android.network
+
+object NetworkConstants {
+    val TIMEOUT = 30.seconds
+    const val BASE_URL = "https://api.example.com"
+}
+
+object WSConstants {
+    val KEEP_ALIVE_INTERVAL = 5.seconds
 }
 ```
