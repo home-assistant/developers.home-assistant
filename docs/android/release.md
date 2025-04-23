@@ -30,13 +30,13 @@ You can download pre-built APKs for every commit on the `main` branch from the [
 ### Internal testing
 
 - Internal testers validate the release build to ensure functionality.
-- Every approved and merged PR is pushed to the internal beta channel on Play Store for immediate feedback. This is the only way to do real world testing for Android Auto/Automotive as the debug builds will not show up in an actual vehicle.
+- Every approved and merged PR is pushed to the internal beta channel on Google Play Store for immediate feedback. This is the only way to do real‑world testing for Android Auto/Automotive, as the debug builds will not show up in an actual vehicle.
 - Due to the app's complexity, not all features can be tested exhaustively during this phase.
 
 ### Weekly beta releases
 
-- Every week at 9pm PST on Saturday, the latest version of the `main` branch is pushed to the **open beta** channel.
-- On Friday or Saturday prior to the beta cut off above, update the beta change log highlighting new features and breaking changes (if applicable)
+- Every Saturday at 9pm PST, the latest `main` build is pushed to the **open beta** channel.
+- Before that cutoff (Friday or Saturday), update the beta changelog to highlight new features and breaking changes.
 - Open beta users help test the application in real-world scenarios and report issues.
 
 :::note
@@ -48,9 +48,9 @@ You can join the beta program directly through the [Google Play Store](https://p
 If the beta version is stable and approved by maintainers, it is promoted to **production**, making it available to all users. The following steps need to be checked for each release:
 
 - Update the change log to include all latest changes and the version number to the latest beta
-- Uncheck the pre-release checkbox in Github for the latest beta
+- Uncheck the pre-release checkbox in GitHub for the latest beta
 - Prepare companion docs PR removing all beta labels for the release, PR should be merged once Google approves the release
-- Notify Community Manager and Android discord channel about the upcoming release and highlights for social media
+- Notify Community Manager and Android Discord channel about the upcoming release and highlights for social media
 
 :::note
 You can find the app on the [Google Play Store](https://play.google.com/store/apps/details?id=io.homeassistant.companion.android).
