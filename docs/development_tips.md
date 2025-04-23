@@ -21,6 +21,7 @@ To test a core integration change in your production Home Assistant environment:
 2. Add a **version** field to `manifest.json` (for example, `"version": "0.0.0"`).
 3. If the integration uses localized strings, copy `strings.json` into `translations/en.json` under the integration folder as described in [Custom integration localization](internationalization/custom_integration).
 4. Restart Home Assistant.
+
 Home Assistant will always prioritize integrations in `custom_components` over the core integration. Don't forget to remove it once you are done testing; otherwise, you will be stuck on that version.
 
 ### When adding a config flow to an integration, be aware of the frontend
