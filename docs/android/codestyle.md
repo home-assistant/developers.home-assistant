@@ -74,3 +74,119 @@ TODOs in code tend to be forgotten over time. When someone read them later, they
 ```bash
 // TODO Missing feature (linked issue #404)
 ```
+
+## Constants
+
+### Naming conventions
+
+We follow the [Kotlin property naming guidelines](https://kotlinlang.org/docs/coding-conventions.html#property-names).
+
+### Avoid magic numbers and strings
+
+Magic numbers or strings in code can make it difficult to understand the purpose of a value, leading to poor maintainability. Always replace magic numbers or strings with named constants.
+
+#### ❌ Don't do this
+
+```kotlin
+if (value == 42) {
+  // Do something
+}
+```
+
+In this example, it’s unclear why the value 42 is being used. At the very least, you should add a comment explaining its purpose. Defining it as a constant is even better because it provides a clear, descriptive name, making the code easier to read, understand, and maintain. Additionally, defining the value in one place facilitates reuse across the codebase, such as in tests or within functions, classes, or other modules. This approach simplifies future changes, as updating the constant in one location automatically propagates the change wherever it is used. It also allows you to easily find where the constant is used with the IDE, avoiding irrelevant search results like searching for "42" across the entire codebase.
+
+#### ✅ Do this
+
+```kotlin
+// Explanation or link about why we picked 42
+const val SUPER_IMPORTANT_THRESHOLD = 42
+
+if (value == SUPER_IMPORTANT_THRESHOLD) {
+    // Do something
+}
+```
+
+### Organizing constants
+
+Constants should be organized to ensure clarity, maintainability, and consistency. Follow these guidelines to determine where and how to define constants:
+
+1. If a constant is exposed outside the file, it should be easily identifiable when imported, either by its own name or by its parent’s name.
+2. Most constants should be defined in the same file as the class they are associated with (outside of `companion object` if possible).
+3. If there are too many constants in a file, move them to a dedicated file grouped under an `object` to provide namespacing.
+
+:::note
+This guideline has been introduced recently to standardize the usage of constants across the codebase. As a result, you may encounter instances that break this guideline. Feel free to correct these issues as you come across them to help improve code quality.
+:::
+
+#### Alongside a class
+
+For constants that are tightly coupled to a specific class, define them in the same file as the class. Avoid using `companion object` unless absolutely necessary. Instead, place private constants at the top of the file, outside the class definition. This approach reduces boilerplate and keeps the class focused.
+
+**Example:**
+
+```kotlin
+// filepath: UserRepository.kt
+package io.homeassistant.companion.android.user
+
+private const val DEFAULT_USER_ID = "guest"
+
+class UserRepository {
+    fun getUserById(userId: String = DEFAULT_USER_ID): User {
+        // Implementation here
+    }
+}
+```
+
+:::note
+If you need the constant in tests to avoid exposing it to the rest of the production code, use the `VisibleForTesting` annotation.
+
+```kotlin
+@VisibleForTesting
+const val DEFAULT_USER_ID = "guest"
+```
+
+:::
+
+#### Using companion objects
+
+When to use companion objects:
+
+- **Namespacing for external use**: When constants or utility functions must be accessed externally (e.g., public or internal).
+- **Intentional naming conflicts**: When multiple classes or entities in the same file share the same name for conceptually similar constants (e.g., EMPTY, DEFAULT).
+
+**Example:**
+
+```kotlin
+// filepath: ApiClient.kt
+package io.homeassistant.companion.android.network
+
+class RestApiClient {
+    companion object {
+        val DEFAULT_TIMEOUT = 60.seconds
+    }
+}
+
+class WSClient {
+    companion object {
+        val DEFAULT_TIMEOUT = 10.seconds
+    }
+}
+```
+
+#### Within a dedicated file using an object
+
+If there are too many constants in a file, or if the constants are shared across multiple classes or modules, move them to a dedicated file. Use an object to group related constants and provide namespacing. The file should be suffixed with `*Constants.kt`.
+
+```kotlin
+// filepath: NetworkConstants.kt
+package io.homeassistant.companion.android.network
+
+object NetworkConstants {
+    val TIMEOUT = 30.seconds
+    const val BASE_URL = "https://api.example.com"
+}
+
+object WSConstants {
+    val KEEP_ALIVE_INTERVAL = 5.seconds
+}
+```
