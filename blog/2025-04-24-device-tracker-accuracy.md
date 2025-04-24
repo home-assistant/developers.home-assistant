@@ -5,8 +5,6 @@ authorImageURL: https://avatars.githubusercontent.com/u/7188918?s=96&v=4
 title: Device tracker TrackerEntity location accuracy attribute type change
 ---
 
-## Device tracker TrackerEntity location accuracy attribute type change
-
 The type of `location_accuracy` attribute (short hand `_attr_location_accuracy`) of the `TrackerEntity` class of the `device_tracker` entity component has been changed from `int` to `float`.
 
 Type conversions in case the source value is a `float` are no longer needed.
