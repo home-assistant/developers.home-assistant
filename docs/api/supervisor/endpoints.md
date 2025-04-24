@@ -2055,10 +2055,19 @@ Returns information about available updates
 | version_latest | string | Returns the available version |
 | panel_path | string | Returns path where the UI can be loaded |
 
+This endpoint is currently discouraged.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/reload_updates" method="post">
+This reloads information about main components (OS, Supervisor, Core, and
+Plug-ins).
 </ApiEndpoint>
 
 <ApiEndpoint path="/refresh_updates" method="post">
 This reloads information about add-on repositories and fetches new version files.
+This endpoint is currently discouraged. Use `/reload_updates` or `/store/reload`
+instead.
 </ApiEndpoint>
 
 <ApiEndpoint path="/info" method="get">
