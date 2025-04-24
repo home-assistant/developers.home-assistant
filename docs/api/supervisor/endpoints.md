@@ -2055,8 +2055,6 @@ Returns information about available updates
 | version_latest | string | Returns the available version |
 | panel_path | string | Returns path where the UI can be loaded |
 
-This endpoint is currently discouraged.
-
 </ApiEndpoint>
 
 <ApiEndpoint path="/reload_updates" method="post">
