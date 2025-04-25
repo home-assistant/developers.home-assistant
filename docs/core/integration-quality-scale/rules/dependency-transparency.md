@@ -13,7 +13,7 @@ In order for the project to trust the dependencies, we have a set of requirement
 
 - The source code of the dependency must be available under an OSI-approved license.
 - The dependency must be available on PyPI.
-- The package published to PyPi should be built and published inside a CI pipeline.
+- The package published to PyPI should be built in and published from a public CI pipeline.
 - The version of the dependency published on PyPI should correspond to a tagged release in an open online repository.
 
 ## Exceptions
