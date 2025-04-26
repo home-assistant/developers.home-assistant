@@ -25,15 +25,15 @@ async def async_setup_entry(hass: HomeAssistant, entry: MyIntegrationConfigEntry
     """Set up my integration from a config entry."""
 
     client = MyClient(entry.data[CONF_HOST])
-    
+
     try:
         await client.async_setup()
-    except OfflineException:
-        raise ConfigEntryNotReady("Device is offline")
-    except InvalidAuthException:
-        raise ConfigEntryAuthFailed("Invalid authentication")
-    except AccountClosedException:
-        raise ConfigEntryError("Account closed")
+    except OfflineException as ex:
+        raise ConfigEntryNotReady("Device is offline") from ex
+    except InvalidAuthException as ex:
+        raise ConfigEntryAuthFailed("Invalid authentication") from ex
+    except AccountClosedException as ex:
+        raise ConfigEntryError("Account closed") from ex
 
     entry.runtime_data = client
 
