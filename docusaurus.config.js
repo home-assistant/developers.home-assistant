@@ -123,6 +123,11 @@ module.exports = {
     mermaid: {
       theme: { light: "neutral", dark: "forest" },
     },
+    colorMode: {
+      defaultMode: 'light',
+      respectPrefersColorScheme: true,
+      disableSwitch: false,
+    },
   },
   presets: [
     [
