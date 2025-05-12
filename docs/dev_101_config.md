@@ -29,4 +29,4 @@ On [the hass object](./dev_101_hass.md) there is an instance of the Config class
 | safe_mode | bool | If Home Assistant is running in safe mode |
 | legacy_templates | bool | Use legacy template behavior |
 
-It also provides some helper methods. [See available methods.](https://dev-docs.home-assistant.io/en/dev/api/core.html#homeassistant.core.Config)
+It also provides some helper methods.
