@@ -26,6 +26,15 @@ A few of the most common cases picked up in reviews are listed below:
   - Less content makes tables easier to read.
 - When limiting the amount of text is not possible, consider using other data structures for representing the information. For example, lists or `{% configuration_basic %}` can be used.
 
+## Markdown
+
+A few notes about the use of markdown in this documentation:
+
+### Markdown lists
+
+- For unordered lists, use `-`, not `*`.
+- For ordered lists, use increasing numbers.
+
 ## YAML and templates
 
 We have a separate styling guide for YAML and the use of Jinja2 templates
