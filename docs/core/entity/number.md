@@ -68,6 +68,7 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.PRECIPITATION` | cm, in, mm | Accumulated precipitation
 | `NumberDeviceClass.PRECIPITATION_INTENSITY` | in/d, in/h, mm/d, mm/h | Precipitation intensity
 | `NumberDeviceClass.PRESSURE` | cbar, bar, hPa, mmHg, inHg, kPa, mbar, Pa, psi | Pressure.
+| `NumberDeviceClass.REACTIVE_ENERGY` | varh, kvarh | Reactive energy
 | `NumberDeviceClass.REACTIVE_POWER` | var, kvar | Reactive power
 | `NumberDeviceClass.SIGNAL_STRENGTH` | dB, dBm | Signal strength
 | `NumberDeviceClass.SOUND_PRESSURE` | dB, dBA | Sound pressure
