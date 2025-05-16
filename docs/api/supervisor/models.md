@@ -100,12 +100,12 @@ These models are describing objects that are getting returned from the superviso
 | enabled     | boolean | Return True if the interface is enabled.                                     |
 | connected   | boolean | Return True if the interface is connected to the network.                    |
 | primary     | boolean | `true` if it's the primary network interface.                                |
-| ipv4        | struct or null  | An IP config struct with IPv4 connection details.                            |
-| ipv6        | struct or null  | An IP config struct with IPv6 connection details.                            |
-| wifi        | struct or null  | A Wifi config struct with wireless connection details.                      |
-| vlan        | struct or null  | A Vlan config struct with details about the vlan.                           |
+| ipv4        | struct or null  | An IP config struct with IPv4 connection details.                    |
+| ipv6        | struct or null  | An IP config struct with IPv6 connection details.                    |
+| wifi        | struct or null  | A Wifi config struct with wireless connection details.               |
+| vlan        | struct or null  | A Vlan config struct with details about the vlan.                    |
 
-### IP configuration
+### IPv4 configuration
 
 | key         | type    | description                                                                  |
 | ----------- | ------- | ---------------------------------------------------------------------------- |
@@ -113,6 +113,17 @@ These models are describing objects that are getting returned from the superviso
 | address     | list    | A list with IP address and the netmask in a X.X.X.X/XX format.               |
 | gateway     | string  | The IP address of the gateway.                                               |
 | nameservers | list    | A list containing the IP addresses of the configured nameservers as strings. |
+
+### IPv6 configuration
+
+| key           | type    | description                                                                      |
+| ------------- | ------- | -------------------------------------------------------------------------------- |
+| method        | string  | The method used to set the IP can be `static`, `auto` or `disabled`.             |
+| addr_gen_mode | string  | Address generation mode can be `eui64` or `stable-privacy`.                      |
+| ip6_privacy   | string  | Privacy extensions options are `disabled`, `enabled-prefer-public` or `enabled`. |
+| address       | list    | A list with IP address and the netmask in a ::/XX format.                        |
+| gateway       | string  | The IP address of the gateway.                                                   |
+| nameservers   | list    | A list containing the IP addresses of the configured nameservers as strings.     |
 
 ### Wifi configuration
 
@@ -171,13 +182,13 @@ These models are describing objects that are getting returned from the superviso
 
 | key       | type    | description                                                           |
 | --------- | ------- | --------------------------------------------------------------------- |
-| slug      | string  | A generated slug for the backup                                     |
-| date      | string  | ISO date string representation of the date the backup was created |
-| name      | string  | The name given to the backup                                        |
-| type      | string  | The type of backup (full, partial)                                  |
-| protected | boolean | `true` if the backup is password protected                          |
-| content | dictionary | A dictionary describing the content of the backup                  |
-| compressed | boolean | `true` if the backup is saved in a compressed archive              |
+| slug      | string  | A generated slug for the backup                                       |
+| date      | string  | ISO date string representation of the date the backup was created     |
+| name      | string  | The name given to the backup                                          |
+| type      | string  | The type of backup (full, partial)                                    |
+| protected | boolean | `true` if the backup is password protected                            |
+| content | dictionary | A dictionary describing the content of the backup                    |
+| compressed | boolean | `true` if the backup is saved in a compressed archive                |
 
 ### Backup -> content
 
