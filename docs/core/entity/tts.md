@@ -35,11 +35,30 @@ class MyTextToSpeechEntity(TextToSpeechEntity):
         """Return a list of supported voices for a language."""
 ```
 
-### Generating TTS audio
+### Generating TTS audio in 1-shot
 
-An entity can choose to implement three different ways of generating TTS audio. Only one method can be implemented at a time.
+This method takes a message and language as input and returns the TTS audio. It can be implemented as either synchronous or asynchronous and is mandatory to implement.
 
-The stream TTS audio method allows text to be streamed into the TTS service and audio to be streamed back.
+```python
+class MyTextToSpeechEntity(TextToSpeechEntity):
+    """Represent a Text To Speech entity."""
+
+    def get_tts_audio(
+        self, message: str, language: str, options: dict[str, Any]
+    ) -> TtsAudioType:
+        """Load tts audio file from the engine."""
+
+    async def async_get_tts_audio(
+        self, message: str, language: str, options: dict[str, Any]
+    ) -> TtsAudioType:
+        """Load tts audio file from the engine."""
+```
+
+### Generating TTS audio with message streaming in
+
+Large language models generate text in chunks. The TTS service can be called with a stream of text messages, and the TTS service will return the audio in chunks.
+
+This method is optional. When not implemented, the TTS service will call the 1-shot method with the final message.
 
 ```python
 class MyTextToSpeechEntity(TextToSpeechEntity):
@@ -69,22 +88,4 @@ class TTSAudioResponse:
 
     extension: str
     data_gen: AsyncGenerator[bytes]
-```
-
-If the Text-to-Speech service requires the entire message to be sent at once, the get tts audio method can be used. It can be implemented as either synchronous or asynchronous.
-
-
-```python
-class MyTextToSpeechEntity(TextToSpeechEntity):
-    """Represent a Text To Speech entity."""
-
-    def get_tts_audio(
-        self, message: str, language: str, options: dict[str, Any]
-    ) -> TtsAudioType:
-        """Load tts audio file from the engine."""
-
-    async def async_get_tts_audio(
-        self, message: str, language: str, options: dict[str, Any]
-    ) -> TtsAudioType:
-        """Load tts audio file from the engine."""
 ```
