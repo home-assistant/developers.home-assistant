@@ -92,15 +92,14 @@ You can still send notifications through the WebSocket without using Firebase.
 If you don't need real Firebase functionality, you can use the mock configuration:
 
 1. Copy the file located at `/.github/mock-google-services.json`.
-2. Place it in the following folders as `google-services.json`:
+2. Rename and place a copy of this file as `google-services.json` in each of the following folders:
    - `/app`
    - `/automotive`
    - `/wear`
-3. After this, you should have:
+3. After completing this step, you should have the following files in your project:
    - `/app/google-services.json`
    - `/automotive/google-services.json`
    - `/wear/google-services.json`
-
 
 ### Setting up a real Firebase project
 
