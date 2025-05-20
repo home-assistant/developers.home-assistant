@@ -24,11 +24,14 @@ For example, a PM2.5 sensor entity would not get a custom icon, as the device cl
 
 ## Example implementation
 
+### State-based icon
+
 In this example, we define a sensor entity with a translation key.
 In the `icons.json` file, we define the icon for the sensor entity and a state icon for the state `high`.
 So when the state of the entity is `high`, we will show the icon `mdi:tree-outline`, otherwise we will show `mdi:tree`.
 
 `sensor.py`
+
 ```python {5} showLineNumbers
 class MySensor(SensorEntity):
     """Representation of a sensor."""
@@ -38,6 +41,7 @@ class MySensor(SensorEntity):
 ```
 
 `icons.json`
+
 ```json
 {
   "entity": {
@@ -52,6 +56,49 @@ class MySensor(SensorEntity):
   }
 }
 ```
+
+### Range-based icons
+
+For numeric entities, you can define icons that change based on numeric ranges.
+This is particularly useful for sensors like battery levels or signal strength indicators.
+
+In this example, we define a battery sensor that changes its icon based on the battery percentage.
+The ranges must be numeric values in ascending order.
+
+`icons.json`
+
+```json
+{
+  "entity": {
+    "sensor": {
+      "battery_level": {
+        "default": "mdi:battery",
+        "range": {
+          "0": "mdi:battery-outline",
+          "10": "mdi:battery-10",
+          "20": "mdi:battery-20",
+          "30": "mdi:battery-30",
+          "40": "mdi:battery-40",
+          "50": "mdi:battery-50",
+          "60": "mdi:battery-60",
+          "70": "mdi:battery-70",
+          "80": "mdi:battery-80",
+          "90": "mdi:battery-90",
+          "100": "mdi:battery"
+        }
+      }
+    }
+  }
+}
+```
+
+When using range-based icons:
+
+- The range values must be numeric and in ascending order
+- The icon for a given value will be chosen from the highest range value that's less than or equal to the entity's current value
+- Both integer ("0", "100") and decimal ("0.5", "99.9") range values are supported
+- The default icon is used for values outside the defined ranges, for example, when the entity is unavailable or has an invalid value
+- If there are also state-based icons defined, those will take precedence over the range-based icons
 
 ## Additional resources
 
