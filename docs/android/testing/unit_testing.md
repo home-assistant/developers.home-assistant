@@ -37,7 +37,7 @@ When writing unit tests, you often need to isolate the code under test by mockin
 
 ### Sharing code between Gradle modules
 
-The project includes a Gradle module named `:testing-unit` for sharing code across other Gradle modules. Add code to this module if it is intended to be reused in multiple places. Make sure that `:testing-unit` remains independent from modules like `:common` to avoid circular dependencies.
+The project includes a Gradle module named `:testing-unit` for sharing code across other Gradle modules. Add code to this module if it is used in multiple modules. Make sure that `:testing-unit` remains independent from modules like `:common` to avoid circular dependencies.
 
 ## Testing with Android APIs
 
