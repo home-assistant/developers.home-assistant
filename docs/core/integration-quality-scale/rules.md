@@ -3,8 +3,6 @@ title: "Integration quality scale rules"
 ---
 import RuleOverview from './_includes/rule_overview.jsx'
 
-
-## Integration quality scale rules
 The rules for each tier are defined down below and come with its own page with examples and more information.
 
 ### 🥉 Bronze
