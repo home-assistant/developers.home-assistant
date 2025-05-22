@@ -2383,16 +2383,27 @@ Update the settings for a network interface.
 
 | key     | type   | optional | description                                                            |
 | ------- | ------ | -------- | ---------------------------------------------------------------------- |
-| enabled | bool   | True     | Enable/Disable an ethernet interface / VLAN got removed with disabled   |
-| ipv4    | dict   | True     | A struct with ipv4 interface settings                                  |
+| enabled | bool   | True     | Enable/Disable an ethernet interface / VLAN got removed with disabled  |
 | ipv6    | dict   | True     | A struct with ipv6 interface settings                                  |
+| ipv4    | dict   | True     | A struct with ipv4 interface settings                                  |
 | wifi    | dict   | True     | A struct with Wireless connection settings                             |
 
-**ipv4 / ipv6:**
+**ipv6:**
+
+| key           | type   | optional | description                                                                                         |
+| ------------- | ------ | -------- | --------------------------------------------------------------------------------------------------- |
+| method        | string | True     | Set IP configuration method can be `auto` for DHCP or Router Advertisements, `static` or `disabled` |
+| addr_gen_mode | string | True     | Address generation mode can be `eui64`, `stable-privacy`, `default-or-eui64` or `default`           |
+| ip6_privacy   | string | True     | Privacy extensions options are `disabled`, `enabled-prefer-public`, `enabled` or `default`          |
+| address       | list   | True     | The new IP address for the interface in the ::/XX format as list                                    |
+| nameservers   | list   | True     | List of DNS servers to use                                                                          |
+| gateway       | string | True     | The gateway the interface should use                                                                |
+
+**ipv4:**
 
 | key         | type   | optional | description                                                                           |
 | ----------- | ------ | -------- | ------------------------------------------------------------------------------------- |
-| method      | string | True     | Set IP configuration method can be `auto` for DHCP or Router Advertisements (only IPv6), `static` or `disabled`     |
+| method      | string | True     | Set IP configuration method can be `auto` for DHCP, `static` or `disabled`            |
 | address     | list   | True     | The new IP address for the interface in the X.X.X.X/XX format as list                 |
 | nameservers | list   | True     | List of DNS servers to use                                                            |
 | gateway     | string | True     | The gateway the interface should use                                                  |
@@ -2401,7 +2412,7 @@ Update the settings for a network interface.
 
 | key    | type   | optional | description                                                                    |
 | ------ | ------ | -------- | ------------------------------------------------------------------------------ |
-| mode   | string | True     | Set the mode `infrastructure` (default), `mesh`, `adhoc` or `ap`              |
+| mode   | string | True     | Set the mode `infrastructure` (default), `mesh`, `adhoc` or `ap`               |
 | auth   | string | True     | Set the auth mode: `open` (default), `web`, `wpa-psk`                          |
 | ssid   | string | True     | Set the SSID for connect into                                                  |
 | psk    | string | True     | The shared key which is used with `web` or `wpa-psk`                           |
@@ -2418,7 +2429,7 @@ Return a list of available [Access Points](api/supervisor/models.md#access-point
 
 | key          | description                                                            |
 | ------------ | ---------------------------------------------------------------------- |
-| accesspoints | A list of [Access Points](api/supervisor/models.md#access-points) |
+| accesspoints | A list of [Access Points](api/supervisor/models.md#access-points)      |
 
 **Example response:**
 
@@ -2448,8 +2459,8 @@ Create a new VLAN *id* on this network interface.
 
 | key     | type   | optional | description                                                            |
 | ------- | ------ | -------- | ---------------------------------------------------------------------- |
-| ipv4    | dict   | True     | A struct with ipv4 interface settings                                  |
 | ipv6    | dict   | True     | A struct with ipv6 interface settings                                  |
+| ipv4    | dict   | True     | A struct with ipv4 interface settings                                  |
 
 </ApiEndpoint>
 
@@ -2673,8 +2684,8 @@ Move datadisk to a new location, **This will also reboot the device!**
 
 **Payload:**
 
-| key     | type   | description                                                       |
-| ------- | ------ | ----------------------------------------------------------------- |
+| key     | type   | description                                                                     |
+| ------- | ------ | ------------------------------------------------------------------------------- |
 | device  | string | ID of the disk device which should be used as the target for the data migration |
 
 </ApiEndpoint>
