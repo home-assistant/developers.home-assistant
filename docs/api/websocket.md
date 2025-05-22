@@ -394,12 +394,14 @@ The `result` of the call will always include a `response` to account for service
 
 ## Fetching states
 
-This will get a dump of all the current states in Home Assistant.
+This will retrieve the states in Home Assistant. You can either get a dump containing all the states, or filter on some entities using `entity_ids`.
 
 ```json
 {
   "id": 19,
-  "type": "get_states"
+  "type": "get_states",
+  // Optional
+  "entity_ids": ["light.kitchen"]
 }
 ```
 
