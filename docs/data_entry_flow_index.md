@@ -317,7 +317,7 @@ class ExampleOptionsFlow(config_entries.OptionsFlow):
 
 #### Displaying read-only information
 
-Some integrations have configuration which is frozen after initial configuration. When displaying an options flow, you can show this information in a read-only way, so that users may remember which options were selected during the initial configuration. To show this, define an optional selector in the same manner as the original selector, but add the `read_only=True` flag to its configuration. 
+Some integrations have options which are frozen after initial configuration. When displaying an options flow, you can show this information in a read-only way, so that users may remember which options were selected during the initial configuration. For this, define an optional selector as usual, but with the `read_only` flag set to `True`.
 
 ```python
 # Example Config Flow Schema
