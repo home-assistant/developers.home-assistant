@@ -24,11 +24,14 @@ For example, a PM2.5 sensor entity would not get a custom icon, as the device cl
 
 ## Example implementation
 
+### State-based icon
+
 In this example, we define a sensor entity with a translation key.
 In the `icons.json` file, we define the icon for the sensor entity and a state icon for the state `high`.
 So when the state of the entity is `high`, we will show the icon `mdi:tree-outline`, otherwise we will show `mdi:tree`.
 
 `sensor.py`
+
 ```python {5} showLineNumbers
 class MySensor(SensorEntity):
     """Representation of a sensor."""
@@ -38,6 +41,7 @@ class MySensor(SensorEntity):
 ```
 
 `icons.json`
+
 ```json
 {
   "entity": {
@@ -52,6 +56,67 @@ class MySensor(SensorEntity):
   }
 }
 ```
+
+### Range-based icons
+
+For numeric entities, you can define icons that change based on numeric ranges. This feature eliminates the need for custom logic in your integration code and provides a consistent way to represent varying sensor values visually.
+
+Range-based icon translations are particularly useful for:
+- Battery level indicators
+- Signal strength meters
+- Temperature sensors
+- Air quality indicators
+- Fill level sensors
+
+#### Configuration
+
+In the `icons.json` file, define the ranges and their corresponding icons in ascending order:
+
+```json
+{
+  "entity": {
+    "sensor": {
+      "battery_level": {
+        "default": "mdi:battery",
+        "range": {
+          "0": "mdi:battery-outline",
+          "10": "mdi:battery-10",
+          "20": "mdi:battery-20",
+          "30": "mdi:battery-30",
+          "40": "mdi:battery-40",
+          "50": "mdi:battery-50",
+          "60": "mdi:battery-60",
+          "70": "mdi:battery-70",
+          "80": "mdi:battery-80",
+          "90": "mdi:battery-90",
+          "100": "mdi:battery"
+        }
+      }
+    }
+  }
+}
+```
+
+The system selects the icon associated with the highest range value that's less than or equal to the entity's current numeric state. For example with the above configuration:
+
+- A value of 15 will show the `mdi:battery-10` icon (15 is greater than 10 but less than 20)
+- A value of 45 will show the `mdi:battery-40` icon (45 is greater than 40 but less than 50)
+- A value of 100 will show the `mdi:battery` icon (100 equals the highest defined range)
+- A value of 5 will show the `mdi:battery-outline` icon (5 is greater than 0 but less than 10)
+- A value of -10 will show the `mdi:battery` default icon (value is outside defined ranges)
+- A value of 120 will show the `mdi:battery` default icon (value exceeds all defined ranges)
+
+When implementing range-based icons:
+
+- Range values must be numeric and must be defined in ascending order
+- Both integer ("0", "100") and decimal ("0.5", "99.9") range values are supported
+- The icon for a given state is chosen from the highest range value that's less than or equal to the entity's current value
+- The default icon is used when:
+  - The entity's state value falls outside all defined ranges
+  - The entity is unavailable
+  - The entity's state cannot be parsed as a valid number
+- If both state-based icons and range-based icons are defined in the same translation key, the state-based icons take precedence over the range-based icons
+- There is no limit to how many ranges you can define, but consider performance and readability
 
 ## Additional resources
 
