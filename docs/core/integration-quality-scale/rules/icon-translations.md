@@ -59,13 +59,18 @@ class MySensor(SensorEntity):
 
 ### Range-based icons
 
-For numeric entities, you can define icons that change based on numeric ranges.
-This is particularly useful for sensors like battery levels or signal strength indicators.
+For numeric entities, you can define icons that change based on numeric ranges. This feature eliminates the need for custom logic in your integration code and provides a consistent way to represent varying sensor values visually.
 
-In this example, we define a battery sensor that changes its icon based on the battery percentage.
-The ranges must be numeric values in ascending order.
+Range-based icon translations are particularly useful for:
+- Battery level indicators
+- Signal strength meters
+- Temperature sensors
+- Air quality indicators
+- Fill level sensors
 
-`icons.json`
+#### Configuration
+
+In the `icons.json` file, define the ranges and their corresponding icons in ascending order:
 
 ```json
 {
@@ -92,13 +97,26 @@ The ranges must be numeric values in ascending order.
 }
 ```
 
-When using range-based icons:
+The system selects the icon associated with the highest range value that's less than or equal to the entity's current numeric state. For example with the above configuration:
 
-- The range values must be numeric and in ascending order
-- The icon for a given value will be chosen from the highest range value that's less than or equal to the entity's current value
+- A value of 15 will show the `mdi:battery-10` icon (15 is greater than 10 but less than 20)
+- A value of 45 will show the `mdi:battery-40` icon (45 is greater than 40 but less than 50)
+- A value of 100 will show the `mdi:battery` icon (100 equals the highest defined range)
+- A value of 5 will show the `mdi:battery-outline` icon (5 is greater than 0 but less than 10)
+- A value of -10 will show the `mdi:battery` default icon (value is outside defined ranges)
+- A value of 120 will show the `mdi:battery` default icon (value exceeds all defined ranges)
+
+When implementing range-based icons:
+
+- Range values must be numeric and must be defined in ascending order
 - Both integer ("0", "100") and decimal ("0.5", "99.9") range values are supported
-- The default icon is used for values outside the defined ranges, for example, when the entity is unavailable or has an invalid value
-- If there are also state-based icons defined, those will take precedence over the range-based icons
+- The icon for a given state is chosen from the highest range value that's less than or equal to the entity's current value
+- The default icon is used when:
+  - The entity's state value falls outside all defined ranges
+  - The entity is unavailable
+  - The entity's state cannot be parsed as a valid number
+- If both state-based icons and range-based icons are defined in the same translation key, the state-based icons take precedence over the range-based icons
+- There is no limit to how many ranges you can define, but consider performance and readability
 
 ## Additional resources
 
