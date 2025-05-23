@@ -315,6 +315,31 @@ class ExampleOptionsFlow(config_entries.OptionsFlow):
         )
 ```
 
+#### Displaying read-only information
+
+Some integrations have options which are frozen after initial configuration. When displaying an options flow, you can show this information in a read-only way, so that users may remember which options were selected during the initial configuration. For this, define an optional selector as usual, but with the `read_only` flag set to `True`.
+
+```python
+# Example Config Flow Schema
+DATA_SCHEMA_SETUP = vol.Schema(
+    {
+        vol.Required(CONF_ENTITY_ID): EntitySelector()
+    }
+)
+
+# Example Options Flow Schema
+DATA_SCHEMA_OPTIONS = vol.Schema(
+    {
+        vol.Optional(CONF_ENTITY_ID): EntitySelector(
+            EntitySelectorConfig(read_only=True)
+        ),
+        vol.Optional(CONF_TEMPLATE): TemplateSelector(),
+    }
+)
+```
+
+This will show the entity selected in the initial configuration as a read-only property whenever the options flow is launched. 
+
 #### Validation
 
 After the user has filled in the form, the step method will be called again and the user input is passed in. Your step will only be called if the user input passes your data schema. When the user passes in data, you will have to do extra validation of the data. For example, you can verify that the passed in username and password are valid.
