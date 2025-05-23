@@ -75,7 +75,7 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.SPEED` | ft/s, in/d, in/h, in/s, km/h, kn, m/s, mph, mm/d, mm/s | Generic speed
 | `NumberDeviceClass.SULPHUR_DIOXIDE` | µg/m³ | Concentration of sulphure dioxide
 | `NumberDeviceClass.TEMPERATURE` | °C, °F, K | Temperature.
-| `NumberDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³ | Concentration of volatile organic compounds
+| `NumberDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³, mg/m³ | Concentration of volatile organic compounds
 | `NumberDeviceClass.VOLATILE_ORGANIC_COMPOUNDS_PARTS` | ppm, ppb | Ratio of volatile organic compounds
 | `NumberDeviceClass.VOLTAGE` | V, mV, µV, kV, MV | Voltage
 | `NumberDeviceClass.VOLUME` | L, mL, gal, fl. oz., m³, ft³, CCF | Generic volume, this device class should be used to represent a consumption, for example the amount of fuel consumed by a vehicle.
