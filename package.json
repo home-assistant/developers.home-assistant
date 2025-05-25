@@ -19,6 +19,10 @@
     "@easyops-cn/docusaurus-search-local": "^0.49.2",
     "by-node-env": "^2.0.1",
     "clsx": "^2.1.1",
+    "cookie": "0.7.0",
+    "follow-redirects": "1.15.6",
+    "loader-utils": "3.2.1",
+    "path-to-regexp" : "0.1.12",
     "react-dom": "18.3.1",
     "react": "^18.3.1",
     "yaml-loader": "^0.8.1"
