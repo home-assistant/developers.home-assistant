@@ -35,6 +35,10 @@ The project is configured to use [JUnit 5](https://junit.org/junit5/), which sho
 
 When writing unit tests, you often need to isolate the code under test by mocking its dependencies. The project uses [MockK](https://mockk.io/). Use this tool to create mocks or fakes for external dependencies, ensuring that your tests remain focused on the behavior of your code.
 
+### Sharing code between Gradle modules
+
+The project includes a Gradle module named `:testing-unit` for sharing code across other Gradle modules. Add code to this module if it is used in multiple modules. Make sure that `:testing-unit` remains independent from modules like `:common` to avoid circular dependencies.
+
 ## Testing with Android APIs
 
 For cases where your code interacts with Android APIs that cannot be mocked or faked properly, the project includes [Robolectric](https://robolectric.org/). Robolectric allows you to run Android-specific tests in a JVM environment, avoiding the need for an emulator.
