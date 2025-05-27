@@ -12,4 +12,4 @@ The rounding that was previously applied to the sensor state when a unit convers
 
 It is still recommended that integrations set the `suggested_display_precision` on their sensors. This change is a fallback mechanism to ensure a consistent experience across all numeric sensors.
 
-For more details check the implementation [pull request](https://github.com/home-assistant/core/pull/145013).
+For more details check the implementation [pull request](https://github.com/home-assistant/core/pull/145013) and the [Sensor entity documentation](/docs/core/entity/sensor).
