@@ -114,4 +114,4 @@ update.
 | status | <code>TodoItemStatus &#124; None</code> | `None` | Defines the overall status for the to-do item, either `NEEDS_ACTION` or `COMPLETE`. This field is required for the entity state.
 | due | <code>datetime.date &#124; datetime.datetime &#124; None</code> | `None` | The date and time that a to-do is expected to be completed. As a datetime, must have a timezone.
 | description | <code>string &#124; None</code>  | `None` | A more complete description of the to-do item than that provided by the summary.
-| completed | <code> datetime.datetime &#124; None</code> | `None` | A timestamp indicating the time this item was last marked `COMPLETE`.
+| completed | <code>datetime.datetime &#124; None</code> | `None` | A timestamp indicating the time this item was last marked `COMPLETE`.
