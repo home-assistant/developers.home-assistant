@@ -29,7 +29,8 @@ Minimum change is to simply adjust the decorator
 # Old
 # def register_services(hass: HomeAssistant) -> None:
 #   @verify_domain_control(hass, DOMAIN)
-#   async def do_action(hass: HomeAssistant, call: ServiceCall) -> None:
+#   async def do_action(call: ServiceCall) -> None:
+#     entries = hass.config_entries.async_entries(DOMAIN)
 #     ...
 #   hass.services.async_register(...)
 
@@ -37,6 +38,7 @@ Minimum change is to simply adjust the decorator
 def register_services(hass: HomeAssistant) -> None:
   @verify_domain_entity_control(DOMAIN)
   async def do_action(call: ServiceCall) -> None:
+    entries = hass.config_entries.async_entries(DOMAIN)
     ...
 
   hass.services.async_register(...)
