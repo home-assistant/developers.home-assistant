@@ -6,7 +6,7 @@ title: "Deprecate verify_domain_control service helper"
 
 ### Summary of changes
 
-The `homeassistant.helpers.service.verify_domain_control` helper function is deprecated,
+The `homeassistant.helpers.service.verify_domain_control` service helper is deprecated,
 and has been replaced with `verify_domain_entity_control`.
 
 Since release `2025.1` (via core PR [#133062](https://github.com/home-assistant/core/pull/133062)),
@@ -18,7 +18,7 @@ To update your integration:
 2. Move the nested functions to be module-level (Optional - as shown in the second example below).
 3. Test the changes.
 
-The old `verify_domain_control` function will be removed in Home Assistant 2026.7.
+The old `verify_domain_control` decorator will be removed in Home Assistant 2026.7.
 
 
 ### Examples
