@@ -58,7 +58,7 @@ the definition of an existing term.
 Additionally, we have a terminology tooltip available, that can be added and
 works everywhere in the documentation. This tooltip will show a definition
 of the term when the user hovers over it with a link for more information.
-It provides instant context to terminology an user might not be familiar with.
+It provides instant context to terminology a user might not be familiar with.
 
 The syntax for adding terminology tooltips is:
 
