@@ -14,16 +14,16 @@ a reference to `HomeAssistant` is available as a property of the `ServiceCall` o
 and it became redundant to pass `hass` object to `verify_domain_control`.
 
 To update your integration:
-1. Replace the decorator as shown in the first example below
-2. (Optional) Move the nested functions to be module-level as shown in the second example below
-3. Test the changes
+1. Replace the decorator (as shown in the first example below).
+2. Move the nested functions to be module-level (Optional - as shown in the second example below).
+3. Test the changes.
 
 The old `verify_domain_control` function will be removed in Home Assistant 2026.7.
 
 
 ### Examples
 
-Minimum change is to simply adjust the decorator
+The minimum change is to adjust the decorator
 
 ```python
 # Old
@@ -44,7 +44,7 @@ def register_services(hass: HomeAssistant) -> None:
   hass.services.async_register(...)
 ```
 
-To reduce code complexity, it is now recommended to move the service functions to be module-level functions
+Move the service functions to module-level functions to reduce code complexity.
 
 ```python
 # Old
