@@ -11,7 +11,7 @@ and has been replaced with `verify_domain_entity_control`.
 
 Since release `2025.1` (via core PR [#133062](https://github.com/home-assistant/core/pull/133062)),
 a reference to `HomeAssistant` is available as a property of the `ServiceCall` object,
-and it became redundant to pass `hass` object to `verify_domain_control`.
+and it became redundant to pass the `hass` object to `verify_domain_control`.
 
 To update your integration:
 1. Replace the decorator (as shown in the first example below).
