@@ -143,7 +143,7 @@ This needs to be done manually, even if you are using dev containers. Also, you 
 :::
 
 :::note
-This needs to be done inside dev container if you are using it for development.
+If you are using a development container, run these commands inside the container.
 :::
 
 ## Development
