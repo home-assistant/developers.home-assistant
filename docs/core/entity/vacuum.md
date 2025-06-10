@@ -13,8 +13,6 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| battery_icon | string | function | Battery icon to show in UI.
-| battery_level | int | `none` | Current battery level.
 | fan_speed | string | `none` | The current fan speed.
 | fan_speed_list | list | `NotImplementedError()`| List of available fan speeds.
 | name | string | **Required** | Name of the entity.
@@ -42,7 +40,6 @@ must set the `VacuumEntityFeature.STATE` flag.
 
 | Value          | Description                                          |
 | -------------- | ---------------------------------------------------- |
-| `BATTERY`      | The vacuum supports retrieving battery status.       |
 | `CLEAN_SPOT`   | The vacuum supports spot cleaning.                   |
 | `FAN_SPEED`    | The vacuum supports setting fan speed.               |
 | `LOCATE`       | The vacuum supports locating.                        |
