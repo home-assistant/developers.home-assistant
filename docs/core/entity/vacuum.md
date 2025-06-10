@@ -11,10 +11,6 @@ Derive entity platforms from [`homeassistant.components.vacuum.StateVacuumEntity
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
-:::note
-`VacuumEntity` is deprecated and will be removed in future releases. Please use or migrate to the `StateVacuumEntity`
-:::
-
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | battery_icon | string | function | Battery icon to show in UI.
