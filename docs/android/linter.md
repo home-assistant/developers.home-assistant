@@ -139,7 +139,7 @@ After updating, review the ignored errors to determine if they should be address
 
 ## Extending lint rules
 
-We encourage you to propose new linter rules specific to our project. These rules can help identify misuse of APIs or enforce design patterns that we want to be enforced in the project.
+We encourage you to propose new linter rules specific to our project. These rules can help identify misuse of APIs or enforce design patterns that we want used in the project.
 
 ### Custom lint rules in the project
 
