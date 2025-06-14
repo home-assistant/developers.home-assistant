@@ -139,7 +139,13 @@ After updating, review the ignored errors to determine if they should be address
 
 ## Extending lint rules
 
-We encourage you to propose new linter rules specific to our project. These rules can help identify misuse of APIs or enforce design patterns.
+We encourage you to propose new linter rules specific to our project. These rules can help identify misuse of APIs or enforce design patterns that we want used in the project.
+
+### Custom lint rules in the project
+
+A dedicated Gradle module `:lint` contains all our custom lint rules.
+
+- **MissingSerializableAnnotationIssue**: Detects missing `@Serializable` annotations when working with [Kotlinx.serialization](https://github.com/Kotlin/kotlinx.serialization).
 
 ## Tips for contributors
 
