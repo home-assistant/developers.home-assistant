@@ -146,7 +146,7 @@ If you add a new class that implements `Shape`, the compiler will fail to build 
 
 ### Don't silently ignore exceptions
 
-While it is important to catch exceptions to prevent crashes, silently ignoring them can hide deeper issues and make debugging more difficult. For example, consider a third-party library that requires initialization with an API key. If initialization fails and the exception is caught without proper logging, it can be challenging to identify the root cause if something stops working in production.
+While it is important to catch exceptions to prevent crashes, silently ignoring them can hide deeper issues and make debugging more difficult. For example, consider a third-party library that requires initialization with an API key. If initialization fails and the exception is caught without proper logging, it can be challenging to identify the root cause if something stops working.
 
 **Example:**
 
@@ -158,7 +158,7 @@ fun foo() {
         ExternalThirdPartyJavaAPI.value()    
     } catch (e: Exception) {
         // Fortunately we log the error to help with troubleshooting
-        Timber.w(e,"External third party throw an error. Current state = ${ExternalThirdPartyJavaAPI.state()}")
+        Timber.w(e, "Couldn't get ExternalThirdParty value, current state: ${ExternalThirdPartyJavaAPI.state()}")
         "fallback"
     }
 }
@@ -175,7 +175,8 @@ import io.homeassistant.companion.android.common.util.FailFast
 
 fun foo() {
     
-    // In development, this will crash the app with a message and stack trace instead of silently falling back. In production it will only print and use the fallback.
+    // In case of a failure, this will print a message and stack trace to the logs. In debug builds, it
+    // will also crash the app, while in production it will use the fallback value instead of crashing.
     val value = FailFast.failOnCatch({ "External third party throw an error. Current state = ${ExternalThirdPartyJavaAPI.state()}" }, "fallback") {
         ExternalThirdPartyJavaAPI.value()
     }
