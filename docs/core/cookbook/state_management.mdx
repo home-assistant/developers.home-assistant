@@ -1,0 +1,126 @@
+---
+title: State management
+---
+
+import Tabs from '@theme/Tabs';
+import TabItem from '@theme/TabItem';
+
+Every integration that provides entities to Home Assistant has to manage the state of those entities.
+There are several ways to manage the state, and on this page we will discuss the different options and when to use them.
+
+## Coordinator
+
+The `DataUpdateCoordinator` is a common pattern where the data retrieval is done in a centralized part of the integration.
+It is an easy way to manage the state when there are more entities that depend on the same data.
+The entities that are going to be attached to the coordinator, will have to inherit the `CoordinatorEntity` class.
+This class will take care of making sure the entity will update when the data of the coordinator is updated.
+
+### How to use it
+
+A common practice is to inherit `DataUpdateCoordinator` in an integration specific class and place it in `coordinator.py`.
+Below are examples for both pull and push based integrations.
+<Tabs groupId="push-pull">
+    <TabItem value="pull" label="Pull based coordinator">
+        In the following example, we have an integration that fetches data from an API every 15 minutes.
+        `_async_update_data` is the method that will be called every time the data needs to be updated.
+
+        `coordinator.py`:
+        ```python
+        class ExampleCoordinator(DataUpdateCoordinator[ExampleData]):
+            """Class to manage fetching example data from an API."""
+
+            def __init__(self, hass: HomeAssistant, api: ExampleApi) -> None:
+                """Initialize."""
+                self.api = api
+                super().__init__(
+                    hass,
+                    _LOGGER,
+                    name="example",
+                    update_interval=timedelta(minutes=15),
+                )
+
+            async def _async_update_data(self) -> ExampleData:
+                """Update data via library."""
+                try:
+                    return await self.api.async_get_data()
+                except ExampleApiError as err:
+                    raise UpdateFailed(f"Error communicating with API: {err}") from err
+        ```
+
+        `entity.py`:
+        ```python
+        class ExampleSensor(CoordinatorEntity[ExampleCoordinator], SensorEntity):
+            """Define an example sensor."""
+
+            def __init__(self, coordinator: ExampleCoordinator) -> None:
+                """Initialize."""
+                super().__init__(coordinator)
+
+            @property
+            def native_value(self) -> StateType:
+                """Return the state of the sensor."""
+                return self.coordinator.data.temperature
+        ```
+    </TabItem>
+    <TabItem value="push" label="Push based coordinator">
+        In the following example, we have an integration that listens for data updates from an API.
+        The key function is `self.async_set_updated_data(data)` which will update the data of the coordinator and update every attached entity.
+        In this example this is executed by the API when new data is available.
+
+        `coordinator.py`:
+        ```python
+        class ExampleCoordinator(DataUpdateCoordinator[ExampleData]):
+            """Class to manage fetching example data from an API."""
+
+            def __init__(self, hass: HomeAssistant, api: ExampleApi) -> None:
+                """Initialize."""
+                super().__init__(
+                    hass,
+                    _LOGGER,
+                    name="example",
+                )
+                api.add_listener(self._handle_data_update)
+
+            def _handle_data_update(self, data: ExampleData) -> None:
+                """Handle data update."""
+                self.async_set_updated_data(data)
+        ```
+
+        `entity.py`:
+        ```python
+        class ExampleSensor(CoordinatorEntity[ExampleCoordinator], SensorEntity):
+            """Define an example sensor."""
+
+            def __init__(self, coordinator: ExampleCoordinator) -> None:
+                """Initialize."""
+                super().__init__(coordinator)
+
+            @property
+            def native_value(self) -> StateType:
+                """Return the state of the sensor."""
+                return self.coordinator.data.temperature
+        ```
+    </TabItem>
+</Tabs>
+:::tip
+
+Both examples are using type enhancements using the generics in the `DataUpdateCoordinator` and `CoordinatorEntity` classes.
+`DataUpdateCoordinator[ExampleData]` means that the type of `ExampleCoordinator.data` is of type `ExampleData`.
+`CoordinatorEntity[ExampleCoordinator]` means that the type of `ExampleSensor.coordinator` is of type `ExampleCoordinator`.
+This will help tooling to find type errors and it will help IDEs to provide better autocompletion.
+
+:::
+
+### When to use it
+
+The coordinator is a good choice when you have multiple entities that depend on the same data.
+It is a flexible pattern to manage the state of the entities in a centralized way.
+
+:::tip
+Sometimes it's better to create multiple coordinators.
+Good examples of this are:
+1. When you have multiple data sources that are not related to each other.
+2. When you have data that is updated at different intervals.
+
+This could lead to a coordinator per device or per data source.
+:::
