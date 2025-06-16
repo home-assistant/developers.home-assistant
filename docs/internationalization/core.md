@@ -325,6 +325,8 @@ The following example `strings.json` is for a device with its `translation_key` 
 Integrations can provide translations for names of its entities. To do this, provide an `entity` object, that contains translations of the names and set the entity's `translation_key` property to a key under a domain in the `entity` object.
 If the entity's `translation_key` property is not `None` and the `entity` object provides a translated name, `EntityDescription.name` will be ignored.
 
+Localization of entity names is only supported for entities which set the [`has_entity_name`](/docs/core/entity#has_entity_name-true-mandatory-for-new-integrations) property to `True`.
+
 Entity components, like `sensor`, already have existing translations available that can be reused by referencing those. This includes common translations for entity names based on a device class. For example, it already has translations available for a "Temperature" sensor that can be referenced. Referencing existing translations is preferred, as it prevents translating the same thing multiple times.
 
 It is also supported to use placeholders within the translation. If a placeholder is defined within the translation string, the entity's `translation_placeholders` property has to be set accordingly.
