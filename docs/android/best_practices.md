@@ -174,10 +174,13 @@ To further improve error handling during development, use the `FailFast` API. Th
 import io.homeassistant.companion.android.common.util.FailFast
 
 fun foo() {
-    
+
     // In case of a failure, this will print a message and stack trace to the logs. In debug builds, it
     // will also crash the app, while in production it will use the fallback value instead of crashing.
-    val value = FailFast.failOnCatch({ "External third party throw an error. Current state = ${ExternalThirdPartyJavaAPI.state()}" }, "fallback") {
+    val value = FailFast.failOnCatch(
+        message = { "Couldn't get ExternalThirdParty value, current state: ${ExternalThirdPartyJavaAPI.state()}" },
+        fallback = "fallback",
+    ) {
         ExternalThirdPartyJavaAPI.value()
     }
 }
@@ -201,6 +204,6 @@ When the FailFast API is triggered, it produces a clear and visible log entry, m
 2025-06-12 10:53:20.841 29743-29743 CrashFailFastHandler    io....stant.companion.android.debug  E  ----------------------------------------------------------------
 2025-06-12 10:53:20.841 29743-29743 CrashFailFastHandler    io....stant.companion.android.debug  E  
 2025-06-12 10:53:20.841 29743-29743 CrashFailFastHandler    io....stant.companion.android.debug  E  
-2025-06-12 10:53:20.841 29743-29743 CrashFailFastHandler    io....stant.companion.android.debug  E  io.homeassistant.companion.android.common.util.FailFastException: This should stop the process.
+2025-06-12 10:53:20.841 29743-29743 CrashFailFastHandler    io....stant.companion.android.debug  E  io.homeassistant.companion.android.common.util.FailFastException: Couldn't get ExternalThirdParty value, current state: null
 2025-06-12 10:53:20.841 29743-29743 CrashFailFastHandler    io....stant.companion.android.debug  E  	at io.homeassistant.companion.android.developer.DevPlaygroundActivityKt.DevPlayGroundScreen$lambda$14$lambda$13$lambda$12(DevPlaygroundActivity.kt:80)
 ```
