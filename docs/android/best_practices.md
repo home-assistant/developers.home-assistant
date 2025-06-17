@@ -117,3 +117,93 @@ For more details, see [submit](/docs/android/submit).
 
 - **Testing**: Write [unit tests](/docs/android/testing/unit_testing) for critical functionality to ensure reliability.
 - **Code reviews**: Always review code for adherence to these best practices.
+
+## Fail fast
+
+The further you progress in development, the more difficult it becomes to debug issues. Do not ignore errors, even those you think are unlikely to occur. Always aim to catch errors at build time rather than at runtime. Use Kotlin compiler features whenever possible, and consider adding a [lint rule](/docs/android/linter) if you cannot enforce a check at compile time.
+
+### Leverage Kotlin compiler
+
+The Kotlin compiler can help you catch issues early. For example, using the `when` operator with sealed classes/interfaces ensures that all cases are handled.
+
+**Example:**
+
+```kotlin
+sealed interface Shape {
+    class Rectangle: Shape
+    class Oval: Shape
+}
+
+fun foo(shape: Shape) {
+    when(shape) {
+        is Shape.Oval -> TODO()
+        is Shape.Rectangle -> TODO()
+    }
+}
+```
+
+If you add a new class that implements `Shape`, the compiler will fail to build until you handle the new case. This is especially useful when the interface is used throughout the codebase. Note that this only works if you do not add an `else` branch.
+
+### Don't silently ignore exceptions
+
+While it is important to catch exceptions to prevent crashes, silently ignoring them can hide deeper issues and make debugging more difficult. For example, consider a third-party library that requires initialization with an API key. If initialization fails and the exception is caught without proper logging, it can be challenging to identify the root cause if something stops working.
+
+**Example:**
+
+```kotlin
+fun foo() {
+    
+    // Always catch the error and proceed with fallback value
+    val value = try {
+        ExternalThirdPartyJavaAPI.value()    
+    } catch (e: Exception) {
+        // Fortunately we log the error to help with troubleshooting
+        Timber.w(e, "Couldn't get ExternalThirdParty value, current state: ${ExternalThirdPartyJavaAPI.state()}")
+        "fallback"
+    }
+}
+```
+
+Proper logging ensures that users and developers can spot errors in the logs and report issues effectively.
+
+To further improve error handling during development, use the `FailFast` API. This API applies offensive programming principles by crashing the app in the `debug` flavor when an error occurs, making issues more visible early in the development process.
+
+**Example:**
+
+```kotlin
+import io.homeassistant.companion.android.common.util.FailFast
+
+fun foo() {
+
+    // In case of a failure, this will print a message and stack trace to the logs. In debug builds, it
+    // will also crash the app, while in production it will use the fallback value instead of crashing.
+    val value = FailFast.failOnCatch(
+        message = { "Couldn't get ExternalThirdParty value, current state: ${ExternalThirdPartyJavaAPI.state()}" },
+        fallback = "fallback",
+    ) {
+        ExternalThirdPartyJavaAPI.value()
+    }
+}
+```
+
+By failing fast and logging errors clearly, you make it easier to identify, 
+debug, and fix issues before they reach production.
+
+When the FailFast API is triggered, it produces a clear and visible log entry, making it easy to spot and investigate:
+
+```log
+2025-06-12 10:53:20.841 29743-29743 CrashFailFastHandler    io....stant.companion.android.debug  E  ██████████████████████
+2025-06-12 10:53:20.841 29743-29743 CrashFailFastHandler    io....stant.companion.android.debug  E  !!! CRITICAL FAILURE: FAIL-FAST !!!
+2025-06-12 10:53:20.841 29743-29743 CrashFailFastHandler    io....stant.companion.android.debug  E  ██████████████████████
+2025-06-12 10:53:20.841 29743-29743 CrashFailFastHandler    io....stant.companion.android.debug  E  
+2025-06-12 10:53:20.841 29743-29743 CrashFailFastHandler    io....stant.companion.android.debug  E  An unrecoverable error has occurred, and the FailFast mechanism
+2025-06-12 10:53:20.841 29743-29743 CrashFailFastHandler    io....stant.companion.android.debug  E  has been triggered. The application cannot continue and will now exit.
+2025-06-12 10:53:20.841 29743-29743 CrashFailFastHandler    io....stant.companion.android.debug  E  
+2025-06-12 10:53:20.841 29743-29743 CrashFailFastHandler    io....stant.companion.android.debug  E  ACTION REQUIRED: This error must be investigated and resolved.
+2025-06-12 10:53:20.841 29743-29743 CrashFailFastHandler    io....stant.companion.android.debug  E  Review the accompanying stack trace for details.
+2025-06-12 10:53:20.841 29743-29743 CrashFailFastHandler    io....stant.companion.android.debug  E  ----------------------------------------------------------------
+2025-06-12 10:53:20.841 29743-29743 CrashFailFastHandler    io....stant.companion.android.debug  E  
+2025-06-12 10:53:20.841 29743-29743 CrashFailFastHandler    io....stant.companion.android.debug  E  
+2025-06-12 10:53:20.841 29743-29743 CrashFailFastHandler    io....stant.companion.android.debug  E  io.homeassistant.companion.android.common.util.FailFastException: Couldn't get ExternalThirdParty value, current state: null
+2025-06-12 10:53:20.841 29743-29743 CrashFailFastHandler    io....stant.companion.android.debug  E  	at io.homeassistant.companion.android.developer.DevPlaygroundActivityKt.DevPlayGroundScreen$lambda$14$lambda$13$lambda$12(DevPlaygroundActivity.kt:80)
+```
