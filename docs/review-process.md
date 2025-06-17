@@ -204,6 +204,10 @@ requested the changes that the PR is ready to go!
   don't hesitate to ask for help in our
   [#devs channel in our Discord chat](https://www.home-assistant.io/join-chat).
 
+- Do not put arbitrary data/hashtags in the PR title or commit message as it's
+  unrelated to our projects. You can have the hashtag in the PR description
+  if you describe what it's needed for.
+
 ## My PR has been merged!
 
 Congratulations! 🎉
