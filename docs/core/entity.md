@@ -134,7 +134,10 @@ Avoid setting an entity's name to a hard coded English string, instead, the name
 Some entities are automatically named after their device class, this includes [`binary_sensor`](/docs/core/entity/binary-sensor), [`button`](/docs/core/entity/button), [`number`](/docs/core/entity/number) and [`sensor`](/docs/core/entity/sensor) entities and in many cases don't need to be named.
 For example, an unnamed sensor which has its device class set to `temperature` will be named "Temperature".
 
-*Note: The used entity name depends on the system (backend) language, not the language configured by the user within his UI view! Example: If the **backend** is set to German and such an entity is created, it will use German localization for its name. If the user changes his **UI** to French, he will still see the entity by its German name, as this is the used language as the entity was created. Additionally, if the backend is changed to a different language, the already existing entities will stay at the German name. Only entities which will be created after the language switch of the backend will use that new language for their naming.*
+:::note
+The entity name used for automatically named entities depends on the system (backend) language at creation time, not the user’s UI language.
+For example, if your backend is set to German, new entities will be named in German—even if a user later switches their UI to French. Changing the backend language will only affect entities created after the change; existing entities retain their original names.
+:::
 
 ### `has_entity_name` True (Mandatory for new integrations)
 
