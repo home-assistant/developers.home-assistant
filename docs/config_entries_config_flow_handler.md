@@ -452,7 +452,6 @@ class LocationSubentryFlowHandler(ConfigSubentryFlow):
                     data=user_input,
                 )
             except (SchemaFlowError) as err:
-                _LOGGER.error("Error validating subentry: %s", err)
                 # errors can be attached the base of a form or to a specific field
                 errors["base"] = str(err)
 
@@ -545,7 +544,6 @@ class LocationSubentryFlowHandler(ConfigSubentryFlow):
                         data_updates=user_input,
                     )
             except (SchemaFlowError) as err:
-                _LOGGER.error("Error reconfiguring subentry: %s", err)
                 # errors can be attached the base of a form or to a specific field
                 errors["base"] = str(err)
 
