@@ -531,7 +531,7 @@ class LocationSubentryFlowHandler(ConfigSubentryFlow):
             # validate user_input, possibly with some checks on ther subentries
             # If checking for duplicates remeber to remove the entry you are reconfiguring
             other_subentries = [
-                dict(se.data) for se in self._get_entry().subentries.values()
+                dict(se.data) for se in config_entry.subentries.values()
             ]
             other_subentries.remove(dict(config_subentry.data))
             try:
