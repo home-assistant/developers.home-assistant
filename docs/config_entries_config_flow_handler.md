@@ -488,7 +488,7 @@ Subentries can set a unique ID. The rules are similar to [unique IDs](#unique-id
       "step": {
         "user": {
           "title": "Add location",
-          "description": "Configure the weather location"
+          "description": "Configure a weather location for {parent_entry_title}."
         },
         "reconfigure": {
           "title": "Update location",
