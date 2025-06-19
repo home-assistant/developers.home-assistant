@@ -434,8 +434,42 @@ class LocationSubentryFlowHandler(ConfigSubentryFlow):
     async def async_step_user(
         self, user_input: dict[str, Any] | None = None
     ) -> SubentryFlowResult:
-        """User flow to add a new location."""
-        ...
+        """User flow to add a new location.
+
+        Fnction name must be in the format "async_step_{step_id}"
+        The first step is always "user"
+        """
+
+        errors: dict[str, str] = {}
+
+        # The function is called once to start the step and then again
+        # each time the user submits an input. This handles the latter
+        if user_input is not None:
+            try:
+                user_input = await _validate_subentry(user_input)
+                return self.async_create_entry(
+                    title=user_input.get(CONF_NAME),
+                    data=user_input,
+                )
+            except (SchemaFlowError) as err:
+                _LOGGER.error("Error validating subentry: %s", err)
+                # errors can be attached the base of a form or to a specific field
+                errors["base"] = str(err)
+
+        # This runs when the step starts or after a failed validation
+        return self.async_show_form(
+            step_id=str(ObservationTypes.STATE),
+            data_schema=self.add_suggested_values_to_schema(
+                data_schema=LOCATION_SUBSCHEMA, suggested_values=user_input
+            ),
+            last_step=True,
+            errors=errors,
+            description_placeholders={
+                # the parent config entry can be accessed with self._get_entry()
+                "parent_entry_title": self._get_entry().title,
+            },
+        )
+
 ```
 
 ### Subentry unique ID
@@ -492,7 +526,39 @@ class LocationSubentryFlowHandler(ConfigSubentryFlow):
         config_entry = self._get_reconfigure_entry()
         # Retrieve the specific subentry targeted for update.
         config_subentry = self._get_reconfigure_subentry()
-        ...
+
+        if user_input is not None:
+            # validate user_input, possibly with some checks on ther subentries
+            # If checking for duplicates remeber to remove the entry you are reconfiguring
+            other_subentries = [
+                dict(se.data) for se in self._get_entry().subentries.values()
+            ]
+            other_subentries.remove(dict(config_subentry.data))
+            try:
+                ... #validation
+                return self.async_update_and_abort(
+                        self._get_entry(),
+                        config_subentry,
+                        title=user_input.get(CONF_NAME, config_subentry.data[CONF_NAME]),
+                        data_updates=user_input,
+                    )
+            except (SchemaFlowError) as err:
+                _LOGGER.error("Error reconfiguring subentry: %s", err)
+                # errors can be attached the base of a form or to a specific field
+                errors["base"] = str(err)
+
+        return self.async_show_form(
+            step_id="reconfigure",
+            # You will likely want to fetch original values
+            data_schema=self.add_suggested_values_to_schema(
+                data_schema=SUBENTRY_SCHEMA,
+                suggested_values=config_subentry.data,
+            ),
+            errors=errors,
+            description_placeholders={
+                "parent_entry_title": self._get_entry().title,
+            },
+        )
 
 ```
 
