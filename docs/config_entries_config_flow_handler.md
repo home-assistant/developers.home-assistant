@@ -436,7 +436,7 @@ class LocationSubentryFlowHandler(ConfigSubentryFlow):
     ) -> SubentryFlowResult:
         """User flow to add a new location.
 
-        Fnction name must be in the format "async_step_{step_id}"
+        Function name must be in the format "async_step_{step_id}"
         The first step is always "user"
         """
 
