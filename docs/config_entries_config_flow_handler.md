@@ -538,7 +538,7 @@ class LocationSubentryFlowHandler(ConfigSubentryFlow):
             try:
                 ... #validation
                 return self.async_update_and_abort(
-                        self._get_entry(),
+                        config_entry,
                         config_subentry,
                         title=user_input.get(CONF_NAME, config_subentry.data[CONF_NAME]),
                         data_updates=user_input,
