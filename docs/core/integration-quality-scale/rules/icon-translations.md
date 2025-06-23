@@ -104,7 +104,7 @@ The system selects the icon associated with the highest range value that's less 
 - A value of 100 will show the `mdi:battery` icon (100 equals the highest defined range)
 - A value of 5 will show the `mdi:battery-outline` icon (5 is greater than 0 but less than 10)
 - A value of -10 will show the `mdi:battery-unknown` default icon (value is outside defined ranges)
-- A value of 120 will show the `mdi:battery` icon (any value exceeding the last defined range entry (100) will use the icon associated with that final range value)
+- A value of 120 will show the `mdi:battery` icon (any value exceeding the last defined range entry, 100, will use the icon associated with that final range value)
 
 When implementing range-based icons:
 
