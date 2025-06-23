@@ -75,6 +75,7 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.SPEED` | ft/s, in/d, in/h, in/s, km/h, kn, m/s, mph, mm/d, mm/s | Generic speed
 | `NumberDeviceClass.SULPHUR_DIOXIDE` | µg/m³ | Concentration of sulphure dioxide
 | `NumberDeviceClass.TEMPERATURE` | °C, °F, K | Temperature.
+| `NumberDeviceClass.TEMPERATURE_INTERVAL` | Δ°C, Δ°F, ΔK | Temperature Interval, this device class represents a temperature interval (delta) i.e. the difference between two temperature values. For example it could represent a temperature correction (offset) in a calibration configuration entity. In contrast with `TEMPERATURE` device class, when converting between units the scale origin (0) will not have any bias/offset (i.e. 0 Δ°C <-> 0 Δ°F <-> 0 ΔK).
 | `NumberDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³, mg/m³ | Concentration of volatile organic compounds
 | `NumberDeviceClass.VOLATILE_ORGANIC_COMPOUNDS_PARTS` | ppm, ppb | Ratio of volatile organic compounds
 | `NumberDeviceClass.VOLTAGE` | V, mV, µV, kV, MV | Voltage

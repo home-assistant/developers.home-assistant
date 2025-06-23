@@ -78,6 +78,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.SPEED` | ft/s, in/d, in/h, in/s, km/h, kn, m/s, mph, mm/d, mm/s | Generic speed
 | `SensorDeviceClass.SULPHUR_DIOXIDE` | µg/m³ | Concentration of sulphure dioxide
 | `SensorDeviceClass.TEMPERATURE` | °C, °F, K | Temperature.
+| `SensorDeviceClass.TEMPERATURE_INTERVAL` | Δ°C, Δ°F, ΔK | Temperature Interval, this device class represents a temperature interval (delta) i.e. the difference between two temperature values. For example it could represent a temperature difference between 2 sources, or the variation of temperature over a time interval. In contrast with `TEMPERATURE` device class, when converting between units the scale origin (0) will not have any bias/offset (i.e. 0 Δ°C <-> 0 Δ°F <-> 0 ΔK).
 | `SensorDeviceClass.TIMESTAMP` | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
 | `SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³, mg/m³ | Concentration of volatile organic compounds
 | `SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS_PARTS` | ppm, ppb | Ratio of volatile organic compounds
