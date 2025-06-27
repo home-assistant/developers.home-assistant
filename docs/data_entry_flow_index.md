@@ -315,6 +315,8 @@ class ExampleOptionsFlow(config_entries.OptionsFlow):
         )
 ```
 
+Note: For select type inputs (created from a `vol.In(...)` schema), if no `default` is specified, the first option will be selected by default in the frontend.
+
 #### Displaying read-only information
 
 Some integrations have options which are frozen after initial configuration. When displaying an options flow, you can show this information in a read-only way, so that users may remember which options were selected during the initial configuration. For this, define an optional selector as usual, but with the `read_only` flag set to `True`.
