@@ -272,7 +272,7 @@ The translation strings for repairs issues are defined under the `issues` key. A
       // The title of the issue
       "title": "The tea is cold",
       // Translations for a fixable issue's repair flow, defined in the same way as translation for a configuration flow.
-      // Exactly one of `fix_flow` or `description. must be present.
+      // Exactly one of `fix_flow` or `description`. must be present.
       "fix_flow": {
         "abort": {
           "not_tea_time": "Can not re-heat the tea at this time"
@@ -281,7 +281,7 @@ The translation strings for repairs issues are defined under the `issues` key. A
     },
     "unfixable_problem": {
       "title": "This is not a fixable problem",
-      // Description of the issue, exactly one of `fix_flow` or `description. must be present.
+      // Description of the issue, exactly one of `fix_flow` or `description`. must be present.
       "description": "This issue can't be fixed by a flow."
     }
   }
