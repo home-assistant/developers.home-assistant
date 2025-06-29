@@ -29,7 +29,7 @@ Setting the state should return an enum from `AlarmControlPanelState` in the `al
 | `ARMED_AWAY` | The alarm is armed in away mode.
 | `ARMED_NIGHT` | The alarm is armed in night mode.
 | `ARMED_VACATION` | The alarm is armed in vacation mode.
-| `ARMED_CUSTOM_BYPASS` |  The alarm is armed in bypass mode.
+| `ARMED_CUSTOM_BYPASS` | The alarm is armed in custom bypass mode where one or more zones or sensors are bypassed (disabled) and the resulting combination of bypassed zones and sensors does not correspond to the standard away, home or night modes. Do not use this state to signal a disconnected, malfunctioning or low battery sensor; report those conditions via dedicated sensor entities instead.
 | `PENDING` | The alarm is pending (towards `triggered`).
 | `ARMING` | The alarm is arming.
 | `DISARMING` | The alarm is disarming.

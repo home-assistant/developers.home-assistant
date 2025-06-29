@@ -2083,6 +2083,7 @@ Returns a dict with selected keys from other `/*/info` endpoints.
 | operating_system | string         | The operating system on the host                             |
 | features         | list           | A list ov available features on the host                     |
 | machine          | string         | The machine type                                             |
+| machine_id       | string or null | The machine ID of the underlying operating system            |
 | arch             | string         | The architecture on the host                                 |
 | supported_arch   | list           | A list of supported host architectures                       |
 | supported        | boolean        | `true` if the environment is supported                       |
