@@ -6,7 +6,7 @@ authorTwitter: GJohansson
 title: "Vacuum battery properties are deprecated"
 ---
 
-As of Home Assistant Core 2025.8, the two properties for battery in `StateVacuumEntity`, `battery_level` and `battery_icon`, has been deprecated.
+As of Home Assistant Core 2025.8, the two properties for battery in `StateVacuumEntity`, `battery_level` and `battery_icon`, have been deprecated.
 
 The `battery_level` and `battery_icon` properties should be replaced by a separate sensor with the `battery` sensor device class and optionally a customized icon if the default icon of the battery sensor device class isn't wanted.
 Optionally consider to also provide a binary sensor with the `charging` device class if it's currently charging or not.
