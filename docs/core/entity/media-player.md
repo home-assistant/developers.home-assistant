@@ -90,7 +90,6 @@ The state of a media player is defined by using values in the `MediaPlayerState`
 | `IDLE`      | Entity is turned on and accepting commands, but currently not playing any media. Possibly at some idle home screen. |
 | `PLAYING`   | Entity is currently playing media.                                                                                  |
 | `PAUSED`    | Entity has an active media and is currently paused                                                                |
-| `STANDBY`   | Entity is in a low power state, accepting commands.                              |
 | `BUFFERING` | Entity is preparing to start playback of some media                                                                 |
 
 ## Methods
