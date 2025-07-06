@@ -39,7 +39,11 @@ class MyAITaskEntity(AITaskEntity):
         # Use the chat_log to maintain conversation context. A common
         # pattern is to share an implementation between conversation and AI
         # task entities to process the chat log.
-        # await self._async_handle_chat_log(chat_log)
+        # await self._async_handle_chat_log(
+        #  chat_log,
+        #  task.structure,
+        #  task.attachments
+        # )
 
         text = ...
         if not task.structure:
@@ -63,59 +67,7 @@ A `GenDataTask` object contains the following data:
 | `task_name` | `str` | Name/identifier for the task
 | `instructions` | `str` | Natural language instructions for the AI
 | `structure` | `dict` \| `None` | Optional schema for structured output validation
-
-## Services
-
-### Generate Data
-
-The `ai_task.generate_data` service allows users to request AI-generated content or structured data.
-
-#### Parameters
-
-| Name | Type | Required | Description
-| ---- | ---- | -------- | -----------
-| `task_name` | `str` | Yes | Name/identifier for the task
-| `instructions` | `str` | Yes | Natural language instructions for the AI
-| `entity_id` | `str` | No | Specific AI task entity to use. Falls back to preferred entity if not specified.
-| `structure` | `dict` | No | Schema for structured output validation
-
-#### Service Response
-
-```python
-{
-    "conversation_id": "unique_conversation_id",
-    "data": "generated_content_or_structured_data"
-}
-```
-
-#### Examples
-
-**Basic text generation:**
-```yaml
-service: ai_task.generate_data
-data:
-  task_name: "weather_summary"
-  instructions: "Generate a funny weather notification"
-  entity_id: "ai_task.my_ai_assistant"
-```
-
-**Structured data generation:**
-```yaml
-service: ai_task.generate_data
-data:
-  task_name: "user_profile"
-  instructions: "Create a fake user profile"
-  structure:
-    name:
-      description: "Full name"
-      required: true
-      selector:
-        text: {}
-    email:
-      description: "Email address"
-      selector:
-        text: {}
-```
+| `attachments` | `list[PlayMediaWithId]` | List of attachments to include in the task.
 
 ## Structured Output Schema
 
