@@ -42,8 +42,7 @@ class MyAITaskEntity(AITaskEntity):
         # await self._async_handle_chat_log(chat_log)
 
         text = ...
-
-        if not task.structure
+        if not task.structure:
             return GenDataTaskResult(
                 conversation_id=chat_log.conversation_id,
                 data=text
