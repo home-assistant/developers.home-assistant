@@ -24,6 +24,7 @@ Are you ready to make a difference in the world of smart home technology? The **
 
 We welcome contributions of all kinds! Here are some ways you can get involved:
 
+- **Join the [beta](https://play.google.com/apps/testing/io.homeassistant.companion.android)**: Help us catch issues before they reach production.
 - **Code contributions**: Fix bugs, add features, or improve performance.
 - **Code reviews**: Help others by reviewing their work and providing constructive feedback.
 - **Documentation**: Keep our guides clear, concise, and up-to-date.
