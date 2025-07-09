@@ -263,7 +263,6 @@ This is only needed if you are not using the default images or need additional t
 ```yaml
 build_from:
   armhf: mycustom/base-image:latest
-squash: false
 args:
   my_build_arg: xy
 ```
@@ -271,7 +270,6 @@ args:
 | Key | Required | Description |
 | --- | -------- | ----------- |
 | build_from | no | A dictionary with the hardware architecture as the key and the base Docker image as the value.
-| squash | no | Default `False`. Be careful with this option, as you can not use the image for caching stuff after that!
 | args | no | Allow additional Docker build arguments as a dictionary.
 | labels | no | Allow additional Docker labels as a dictionary.
 | codenotary | no | Enable container signature with codenotary CAS.
