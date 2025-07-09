@@ -135,7 +135,7 @@ Some entities are automatically named after their device class, this includes [`
 For example, an unnamed sensor which has its device class set to `temperature` will be named "Temperature".
 
 :::note
-The entity name used for automatically named entities depends on the system (backend) language at creation time, not the user’s UI language.
+The entity name used for translated or automatically named entities depends on the system (backend) language at creation time, not the user’s UI language.
 For example, if your backend is set to German, new entities will be named in German — even if a user later switches their UI to French. Changing the backend language will only affect entities created after the change; existing entities retain their original names.
 :::
 
