@@ -66,7 +66,7 @@ A `GenDataTask` object contains the following data:
 | ---- | ---- | -----------
 | `task_name` | `str` | Name/identifier for the task
 | `instructions` | `str` | Natural language instructions for the AI
-| `structure` | `dict` \| `None` | Optional schema for structured output validation
+| `structure` | `vol.Schema` \| `None` | Optional schema for structured output validation
 | `attachments` | `list[PlayMediaWithId]` | List of attachments to include in the task.
 
 ## Structured Output Schema
