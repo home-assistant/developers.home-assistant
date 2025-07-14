@@ -152,7 +152,8 @@ The translation for selectors are defined under the `selector` key. It supports 
 ```
 
 The `unit_of_measurement` of a number selector may also be translated with a translation key:
-```
+```json
+{
   // Translations for number selector to be used in option and config flows
   "selector": {
     // The key is linked to the `translation_key` that needs to be set
@@ -164,6 +165,7 @@ The `unit_of_measurement` of a number selector may also be translated with a tra
       }
     }
   }
+}
 ```
 
 ### Service Actions
