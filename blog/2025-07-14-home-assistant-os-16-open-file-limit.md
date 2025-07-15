@@ -18,6 +18,6 @@ For more details on these limits and best practices, see Lennart Poettering's ex
 
 ### What happens if the limit is too low?
 
-If an add-on or its application requires more file descriptors than the default soft limit (1024) and does not raise the limit itself, it may fail to open additional files, sockets, or network connections once the limit is reached. This typically results in errors such as "Too many open files" (`EMFILE`), failing network connections, or malfunctioning services.
+If an add-on or its application requires more file descriptors than the default soft limit (1024) and does not raise the limit itself, it may fail to open additional files, sockets, or network connections once the limit is reached. This typically results in errors such as "Too many open files" or "No file descriptors available" (`EMFILE`), failing network connections, or malfunctioning services.
 
 If you have any questions or encounter issues, please refer to [this GitHub discussion](https://github.com/home-assistant/operating-system/discussions/4166), which also contains more details and background information about this topic.
