@@ -10,13 +10,13 @@ Adding the helper config entry to another integration's device is no longer supp
 
 ### Background
 
-The architecture proposal [home-assistant/architecture#1226]https://github.com/home-assistant/architecture/discussions/1226 limits devices to a single config entry. This is not an issue for most integrations, but helper integrations with config flows are an exception.
+The architecture proposal [home-assistant/architecture#1226](https://github.com/home-assistant/architecture/discussions/1226) limits devices to a single config entry. This is not an issue for most integrations, but helper integrations with config flows are an exception.
 
 ### Suggested change
 
 #### Avoid adding the helper config entry to the source device
 
-To avoid adding the helper integration's config entry to the source entity's device or to a user selected device, set `self.device_entry` instead of setting `self._attr_device_info` or overriding the `device_info` property.
+Set `self.device_entry` to link the helper entity to the correct device; don’t set `self._attr_device_info` and don’t override `device_info` as that will mean the helper config entry is added to the source device.
 
 #### Cleaning up the device registry
 
