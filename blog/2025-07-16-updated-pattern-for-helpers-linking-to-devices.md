@@ -14,9 +14,22 @@ The architecture proposal [home-assistant/architecture#1226](https://github.com/
 
 ### Suggested change
 
+#### Link the helper entity directly to the source integration's device
+
+In the helper entity's constructor, set `self.device_entry` to the source device
+```py
+class HelperEntity(Entity)
+
+    def __init__(hass: HomeAssistant, source_entity_id: str, ...) -> None:
+        self.device_entry = async_entity_id_to_device(
+            hass,
+            source_entity_id,
+        )
+```
+
 #### Do not add the helper config entry to the source device directly
 
-Do not add the config entry to the source device directly, it means this pattern is no longer allowed
+Do not add the config entry to the source device directly, meaning that this pattern is no longer allowed
 ```py
 device_registry.async_update_device(
     source_device.id,
@@ -26,7 +39,7 @@ device_registry.async_update_device(
 
 #### Do not add the helper config entry to the source device implicitly
 
-Set `self.device_entry` in the helper entity to link the helper entity to another integration's device; don’t set `self._attr_device_info` and don’t override `device_info` to return identifiers and connections for a device from another integration as that will mean the helper config entry is added to the source device.
+Don’t set `self._attr_device_info` and don’t override `device_info` to return identifiers and connections for a device from another integration as that will mean the helper config entry is added to the source device. Instead, Set `self.device_entry` in the helper entity to link the helper entity to another integration's device as in the example above.
 
 #### Cleaning up the device registry
 
