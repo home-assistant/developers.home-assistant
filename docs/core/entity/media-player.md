@@ -94,7 +94,7 @@ The state of a media player is defined by using values in the `MediaPlayerState`
 
 :::note
 
-It is common that media players can't be controlled when in a standby state,  If Home Assistant can turn on the device using another protocol or method it should be shown as `OFF` even if the main channel used to control the device is currently unavailable, if Home Assistant has no way to turn on the device it should be shown as `unavailable`, see [entity-unavailable Exceptions](/docs/core/integration-quality-scale/rules/entity-unavailable.md#Exceptions) for more details.
+It is common that media players can't be controlled when in a standby state. If Home Assistant can turn on the device using another protocol or method, it should be shown as `off` even if the main channel used to control the device is currently unavailable. If Home Assistant has no way to turn on the device, it should be shown as `unavailable`. See [entity-unavailable Exceptions](/docs/core/integration-quality-scale/rules/entity-unavailable.md#Exceptions) for more details.
 
 :::
 
