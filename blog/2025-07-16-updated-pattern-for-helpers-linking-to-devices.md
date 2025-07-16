@@ -26,7 +26,7 @@ device_registry.async_update_device(
 
 #### Do not add the helper config entry to the source device implicitly
 
-Set `self.device_entry` in the helper entity to link the helper entity to the correct device; don’t set `self._attr_device_info` and don’t override `device_info` as that will mean the helper config entry is added to the source device.
+Set `self.device_entry` in the helper entity to link the helper entity to another integration's device; don’t set `self._attr_device_info` and don’t override `device_info` to return identifiers and connections for a device from another integration as that will mean the helper config entry is added to the source device.
 
 #### Cleaning up the device registry
 
