@@ -10,7 +10,7 @@ Adding the helper config entry to another integration's device is no longer supp
 
 ### Background
 
-The architecture proposal [home-assistant/architecture#1226](https://github.com/home-assistant/architecture/discussions/1226) limits devices to a single config entry. This is not an issue for most integrations, but helper integrations with config flows are an exception.
+The architecture proposal [home-assistant/architecture#1226](https://github.com/home-assistant/architecture/discussions/1226) makes device connections and identifiers unique per integration domain instead of globally unique. This is not an issue for most integrations, but helper integrations with config flows are an exception.
 
 ### Suggested change
 
