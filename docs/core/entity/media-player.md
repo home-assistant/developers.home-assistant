@@ -92,6 +92,12 @@ The state of a media player is defined by using values in the `MediaPlayerState`
 | `PAUSED`    | Entity has an active media and is currently paused                                                                |
 | `BUFFERING` | Entity is preparing to start playback of some media                                                                 |
 
+:::note
+
+It is common that media players can't be controlled when in a standby state,  If Home Assistant can turn on the device using another protocol or method it should be shown as `OFF` even if the main channel used to control the device is currently unavailable, if Home Assistant has no way to turn on the device it should be shown as `unavailable`, see [entity-unavailable Exceptions](/docs/core/integration-quality-scale/rules/entity-unavailable.md#Exceptions) for more details.
+
+:::
+
 ## Methods
 
 ### Play media
