@@ -151,6 +151,23 @@ The translation for selectors are defined under the `selector` key. It supports 
 
 ```
 
+The `unit_of_measurement` of a number selector may also be translated with a translation key:
+```json
+{
+  // Translations for number selector to be used in option and config flows
+  "selector": {
+    // The key is linked to the `translation_key` that needs to be set
+    // using the NumberSelectorConfig class
+    "round_digits": {
+      // The translations for the number selector unit_of_measurement
+      "unit_of_measurement": {
+        "decimals": "decimals"
+      }
+    }
+  }
+}
+```
+
 ### Service Actions
 
 The translations of service actions strings are defined under the `services` key.

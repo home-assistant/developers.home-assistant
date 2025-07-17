@@ -81,7 +81,13 @@ For more information about managing integration state, see the [documentation](/
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If an integration can turn on a device, either via a user-defined automation trigger or by automatically creating a secondary control channel (e.g., using Wake-on-LAN or infrared blaster), then the device should be reported as `off` when it is in standby and unresponsive to the main channel (e.g., TCP). If no such method exists, and the device cannot be controlled in its current state, it should be reported as `unavailable`.
+
+An example scenario, for a media player that enters standby mode and can only be turned on using an external device (e.g., an IR blaster):
+
+- When first added to Home Assistant, and there's no active connection, the device will be shown as `unavailable`.
+- If the user configures an automation (e.g., using an IR blaster) to turn it on, the device will be shown as `off` while in standby.
+- Once turned on via the external method, and the main connection is established, the state will update to `on`.
 
 ## Related rules
 

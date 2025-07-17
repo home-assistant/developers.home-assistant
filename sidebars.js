@@ -351,6 +351,7 @@ module.exports = {
         "android/tips/sarif_reports",
         "android/tips/release",
         "android/tips/dev_playground",
+        "android/tips/strict_mode",
       ],
     },
     "android/best_practices",
