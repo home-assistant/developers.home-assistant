@@ -142,6 +142,10 @@ script/setup_translations
 This needs to be done manually, even if you are using dev containers. Also, you will be asked to enter a code and authorize the script to fetch the latest translations.
 :::
 
+:::note
+If you are using a development container, run these commands inside the container.
+:::
+
 ## Development
 
 ### Run development server
