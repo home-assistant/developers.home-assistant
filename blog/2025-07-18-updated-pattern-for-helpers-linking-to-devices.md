@@ -43,7 +43,11 @@ Don’t set `self._attr_device_info` and don’t override `device_info` to retur
 
 #### Cleaning up the device registry
 
-A helper function, `homeassistant.helpers.helper_integration.async_remove_helper_config_entry_from_source_device` is available to aid the clean up.
+A helper function, `homeassistant.helpers.helper_integration.async_remove_helper_config_entry_from_source_device` is available to aid the clean up. Core integrations have been modified to call this helper from a config entry migration step.
+
+#### Handling removed devices
+
+It is up to the helper integration to decide how to handle a removed device; most core helpers set `self.device_entry` to `None`. Note that `DeviceRegistry.async_get` returns `None` if passed a `device_id` which doesn't exist.
 
 #### Sample implementations
 
