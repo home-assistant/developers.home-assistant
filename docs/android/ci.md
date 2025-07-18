@@ -92,7 +92,7 @@ We do not guarantee when the applications will be available on F-Droid after a r
 
 ### On tag
 
-When a tag that matches the [CalVer] versioning format is pushed the `onTag.yml` workflow is triggered. This workflow generates a new pull request with an updated `changelog_master.xml` file reflecting the new version. Manual approval of this pull request is required. This process helps keep the changelog version aligned with the app version.
+When a tag that matches the [CalVer] versioning format is pushed, the `onTag.yml` workflow is triggered. This workflow generates a new pull request with an updated `changelog_master.xml` file reflecting the new version. Manual approval of this pull request is required. This process helps keep the changelog version aligned with the app version.
 
 ## Summary of workflows
 
@@ -103,7 +103,7 @@ When a tag that matches the [CalVer] versioning format is pushed the `onTag.yml`
 | `weekly.yml`     | Every Sunday at 4:00 AM     | Create a pre-release and push the beta build to the Play Store.              |
 | `monthly.yml`    | First day of the month      | Create an initial version tag (`YYYY.MM.0`).                           |
 | `release.yml`    | Manual trigger              | Promote the beta build to production.                                  |
-| `onTag.yml`     | On tag pushed         | Update `changelog_master.xml` in a PR.             |
+| `onTag.yml`     | On tag matching [CalVer]         | Update `changelog_master.xml` in a PR.             |
 
 ---
 
