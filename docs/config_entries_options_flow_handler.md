@@ -27,7 +27,7 @@ The Flow handler works just like the config flow handler, except that the first 
 ```python
 from homeassistant.config_entries import OptionsFlow
 
-OPTIONS_SCHEMA=vol.Schema(
+OPTIONS_SCHEMA = vol.Schema(
     {
         vol.Required("show_things"): bool,
     }
@@ -50,14 +50,14 @@ class OptionsFlowHandler(OptionsFlow):
 
 ## Options flow with automatic reload
 
-The most common use-case for adding an update listener to a config entry is to reload the integration when the options has been changed.
+The most common reason to add an update listener is to reload the integration when the options have changed.
 
 Instead of creating an update listener, the integration can subclass `OptionsFlowWithReload` instead and it will automatically help integrations to reload once the config entry options change.
 
 ```python
 from homeassistant.config_entries import OptionsFlowWithReload
 
-OPTIONS_SCHEMA=vol.Schema(
+OPTIONS_SCHEMA = vol.Schema(
     {
         vol.Required("show_things"): bool,
     }
