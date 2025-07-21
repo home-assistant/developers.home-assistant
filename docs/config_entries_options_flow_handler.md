@@ -50,9 +50,9 @@ class OptionsFlowHandler(OptionsFlow):
 
 ## Options flow with automatic reload
 
-The most common reason to add an update listener is to reload the integration when the options have changed.
+If the integration should be reloaded after the config options change, it can subclass from `OptionsFlowWithReload` instead of `OptionsFlow`. `OptionsFlowWithReload` will automatically reload the integration once the options change.
 
-Instead of creating an update listener, the integration can subclass `OptionsFlowWithReload` instead and it will automatically help integrations to reload once the config entry options change.
+Since the most common reason to add an update listener is to reload the integration when the options have changed, `OptionsFlowWithReload` avoids the need for that listener.
 
 ```python
 from homeassistant.config_entries import OptionsFlowWithReload
