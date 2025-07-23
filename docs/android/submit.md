@@ -35,6 +35,14 @@ If you're a new contributor, each CI run must be approved by a maintainer.
 Running CI workflows consumes significant resources. If your work is incomplete, postpone opening the PR (even in draft mode) unless necessary. Let's be mindful of resource usage and our planet. 🌍 But it doesn't prevent you from pushing regularly to avoid losing your work.
 :::
 
+### Update your branch
+
+Sometimes your branch may fall behind `main` for various reasons. In some cases, you will encounter conflicts that must be resolved before your pull request can be merged. There are two common ways to handle this: you can either merge the target branch `main` into your branch and [resolve the conflicts](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-using-the-command-line), or you can [rebase](https://docs.github.com/en/get-started/using-git/about-git-rebase) your branch onto `main`.
+
+In this project, we follow this rule: until your PR has been reviewed by someone, you can rebase. After a review, you should merge instead. This approach makes the review process easier for reviewers, as force-pushing after a rebase can break previous comments and cause valuable information to be lost. However, rebasing is not mandatory—even before review, you can choose to merge.
+
+We offer this flexibility because we use the [squash and merge](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges?versionId=free-pro-team%40latest&productId=get-started&restPage=using-git%2Cabout-git-rebase#squash-and-merge-your-commits) strategy in this repository to maintain meaningful commit names in our git tree.
+
 ### Review process
 
 #### Who can review?
