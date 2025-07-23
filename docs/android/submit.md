@@ -41,7 +41,7 @@ Sometimes your branch may fall behind `main` for various reasons. In some cases,
 
 In this project, we follow this rule: until your PR has been reviewed by someone, you can rebase. After a review, you should merge instead. This approach makes the review process easier for reviewers, as force-pushing after a rebase can break previous comments and cause valuable information to be lost. However, rebasing is not mandatory—even before review, you can choose to merge.
 
-We offer this flexibility because we use the [squash and merge](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges?versionId=free-pro-team%40latest&productId=get-started&restPage=using-git%2Cabout-git-rebase#squash-and-merge-your-commits) strategy in this repository to maintain meaningful commit names in our git tree.
+We offer this flexibility because we use the [squash and merge](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-commits) strategy in this repository to maintain meaningful commit names in our git tree.
 
 ### Review process
 
