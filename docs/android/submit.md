@@ -37,11 +37,17 @@ Running CI workflows consumes significant resources. If your work is incomplete,
 
 ### Update your branch
 
-Sometimes your branch may fall behind `main` for various reasons. In some cases, you will encounter conflicts that must be resolved before your pull request can be merged. There are two common ways to handle this: you can either merge the target branch `main` into your branch and [resolve the conflicts](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-using-the-command-line), or you can [rebase](https://docs.github.com/en/get-started/using-git/about-git-rebase) your branch onto `main`.
+Sometimes your branch may fall behind `main`. Before your pull request can be merged, you may need to resolve conflicts. You can update your branch in one of two ways:
 
-In this project, we follow this rule: until your PR has been reviewed by someone, you can rebase. After a review, you should merge instead. This approach makes the review process easier for reviewers, as force-pushing after a rebase can break previous comments and cause valuable information to be lost. However, rebasing is not mandatory—even before review, you can choose to merge.
+- **Merge** the `main` branch into your branch and [resolve any conflicts](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/addressing-merge-conflicts/resolving-a-merge-conflict-using-the-command-line).
+- **Rebase** your branch onto `main` by following the [Git rebase documentation](https://docs.github.com/en/get-started/using-git/about-git-rebase).
 
-We offer this flexibility because we use the [squash and merge](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-commits) strategy in this repository to maintain meaningful commit names in our git tree.
+Follow these guidelines:
+
+- If your pull request has **not** been reviewed, you can rebase or merge.
+- If your pull request **has been reviewed**, use merge instead of rebase. Rebasing after review can break previous comments and remove valuable feedback.
+
+Rebasing is optional before review; merging is always allowed. This repository uses the [squash and merge](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/incorporating-changes-from-a-pull-request/about-pull-request-merges#squash-and-merge-your-commits) strategy to keep commit history clean and meaningful.
 
 ### Review process
 
