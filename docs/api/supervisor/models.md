@@ -355,3 +355,10 @@ Response only fields will be in responses but cannot be included in requests.
 | name         | string  | Name of the filesystem (if known)                         |
 | system       | boolean | `true` if filesystem considered a system/internal device  |
 | mount_points | list    | List of paths where the filesystem is mounted.            |
+
+## NVMe Device
+
+| key  | type    | description                                      |
+| ---- | ------- | ------------------------------------------------ |
+| id   | string  | Unique UUID for the device                       |
+| path | string  | Device path on host system (e.g. `/dev/nvme0n1`) |

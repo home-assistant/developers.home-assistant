@@ -1693,6 +1693,7 @@ Return information about the host.
 | llmnr_hostname   | string or null | The hostname currently exposed on the network via LLMNR for host |
 | operating_system | string         | The operating system on the host          |
 | startup_time     | float          | The time in seconds it took for last boot |
+| nvme_devices     | list           | A list of [NVMe devices](api/supervisor/models.md#nvme-device) available on host |
 
 **Example response:**
 
@@ -1714,7 +1715,13 @@ Return information about the host.
   "boot_timestamp": 1234567788,
   "startup_time": 12.345,
   "broadcast_llmnr": true,
-  "broadcast_mdns": false
+  "broadcast_mdns": false,
+  "nvme_devices": [
+    {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "path": "/dev/nvme0n1"
+    }
+  ]
 }
 ```
 
@@ -1903,6 +1910,45 @@ Shutdown the host
 | key       | type       | optional | description                                                 |
 | --------- | ---------- | -------- | ----------------------------------------------------------- |
 | force     | boolean    | True     | Force shutdown during a Home Assistant offline db migration |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/host/nvme/<device>/status" method="get">
+
+Returns the status and lifetime information of the specified NVMe device.
+See `nvme_devices` field in `/host/info` for a list of devices. This API supports
+providing either the `id` or `path` as the identifier for an NVMe device.
+
+**Returned data:**
+
+| key                             | type | description                                                                                 |
+| ------------------------------- | ---- | ------------------------------------------------------------------------------------------- |
+| critical_warning                | int  | Critical warnings raised over device lifetime                                               |
+| available_spare                 | int  | Percentage of remaining spare capacity available                                            |
+| data_units_read                 | int  | Thousands of 512 byte data units read by host over device lifetime                          |
+| data_units_written              | int  | Thousands of 512 byte data units written by host over device lifetime                       |
+| percent_used                    | int  | Estimate of percent of device's life used based on manufacturer's prediction                |
+| temperature_kelvin              | int  | Current temperature in Kelvins calculated from sensors                                      |
+| host_read_commands              | int  | Read commands completed over device lifetime                                                |
+| host_write_commands             | int  | Write commands completed over device lifetime                                               |
+| controller_busy_minutes         | int  | Minutes the device was busy with I/O commands over device lifetime                          |
+| power_cycles                    | int  | Power cycles over device lifetime                                                           |
+| power_on_hours                  | int  | Power-on hours over device lifetime                                                         |
+| unsafe_shutdowns                | int  | Unsafe shutdowns over device lifetime                                                       |
+| media_errors                    | int  | Data integrity errors detected over device lifetime                                         |
+| number_error_log_entries        | int  | Error entries in log over device lifetime                                                   |
+| warning_temp_minutes            | int  | Minutes temperature has been greater then warning threshold over device lifetime            |
+| critical_composite_temp_minutes | int  | Minutes temperature has been greater then critical composite threshold over device lifetime |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/host/nvme/status" method="get">
+
+Returns the status and lifetime information of the datadisk if the datadisk is
+an NVMe device and Home Assistant Operating System is in use.
+
+**Returned data:**
+See `/host/nvme/<device>/status` above, response is identical.
 
 </ApiEndpoint>
 
