@@ -1693,6 +1693,7 @@ Return information about the host.
 | llmnr_hostname   | string or null | The hostname currently exposed on the network via LLMNR for host |
 | operating_system | string         | The operating system on the host          |
 | startup_time     | float          | The time in seconds it took for last boot |
+| nvme_devices     | list           | A list of [NVMe devices](api/supervisor/models.md#nvme-device) available on host |
 
 **Example response:**
 
@@ -1714,7 +1715,13 @@ Return information about the host.
   "boot_timestamp": 1234567788,
   "startup_time": 12.345,
   "broadcast_llmnr": true,
-  "broadcast_mdns": false
+  "broadcast_mdns": false,
+  "nvme_devices": [
+    {
+      "id": "00000000-0000-0000-0000-000000000000",
+      "path": "/dev/nvme0n1"
+    }
+  ]
 }
 ```
 
@@ -1903,6 +1910,68 @@ Shutdown the host
 | key       | type       | optional | description                                                 |
 | --------- | ---------- | -------- | ----------------------------------------------------------- |
 | force     | boolean    | True     | Force shutdown during a Home Assistant offline db migration |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/host/nvme/<device>/status" method="get">
+
+Returns the status and lifetime information of the specified NVMe device.
+See `nvme_devices` field in `/host/info` for a list of devices. This API supports
+providing either the `id` or `path` as the identifier for an NVMe device.
+
+**Returned data:**
+
+| key                             | type | description                                                                                     |
+| ------------------------------- | ---- | ----------------------------------------------------------------------------------------------- |
+| critical_warning                | int  | Critical warnings raised over device lifetime                                                   |
+| available_spare                 | int  | Percentage of remaining spare capacity available                                                |
+| data_units_read                 | int  | Thousands of 512 byte data units read by host over device lifetime                              |
+| data_units_written              | int  | Thousands of 512 byte data units written by host over device lifetime                           |
+| percent_used                    | int  | Estimate of percent of device's life used based on manufacturer's prediction                    |
+| temperature_kelvin              | int  | Current temperature in Kelvin calculated from sensors                                           |
+| host_read_commands              | int  | Read commands completed over device lifetime                                                    |
+| host_write_commands             | int  | Write commands completed over device lifetime                                                   |
+| controller_busy_minutes         | int  | Minutes the device was busy with I/O commands over device lifetime                              |
+| power_cycles                    | int  | Power cycles over device lifetime                                                               |
+| power_on_hours                  | int  | Power-on hours over device lifetime                                                             |
+| unsafe_shutdowns                | int  | Unsafe shutdowns over device lifetime                                                           |
+| media_errors                    | int  | Data integrity errors detected over device lifetime                                             |
+| number_error_log_entries        | int  | Error entries in log over device lifetime                                                       |
+| warning_temp_minutes            | int  | Minutes temperature has been greater than the warning threshold over device lifetime            |
+| critical_composite_temp_minutes | int  | Minutes temperature has been greater than the critical composite threshold over device lifetime |
+
+**Example response:**
+
+```json
+{
+  "available_spare": 100,
+  "critical_warning": 0,
+  "data_units_read": 44707691,
+  "data_units_written": 54117388,
+  "percent_used": 1,
+  "temperature_kelvin": 312,
+  "host_read_commands": 428871098,
+  "host_write_commands": 900245782,
+  "controller_busy_minutes": 2678,
+  "power_cycles": 652,
+  "power_on_hours": 3192,
+  "unsafe_shutdowns": 107,
+  "media_errors": 0,
+  "number_error_log_entries": 1069,
+  "warning_temp_minutes": 0,
+  "critical_composite_temp_minutes": 0
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/host/nvme/status" method="get">
+
+Returns the status and lifetime information of the datadisk if the datadisk is
+an NVMe device and Home Assistant Operating System is in use.
+
+**Returned data:**
+See `/host/nvme/<device>/status` above, response is identical.
 
 </ApiEndpoint>
 
@@ -2189,7 +2258,7 @@ Value in `name` must be unique and can only consist of letters, numbers and unde
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/mounts/<name>" method="put">
+<ApiEndpoint path="/mounts/<mount>" method="put">
 Update an existing mount in Supervisor and remount it
 
 **Payload:**
@@ -2213,12 +2282,12 @@ name, it cannot be changed. Delete and re-add the mount to change the name.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/mounts/<name>" method="delete">
+<ApiEndpoint path="/mounts/<mount>" method="delete">
 Unmount and delete an existing mount from Supervisor.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/mounts/<name>/reload" method="post">
+<ApiEndpoint path="/mounts/<mount>/reload" method="post">
 Unmount and remount an existing mount in Supervisor using the same configuration.
 
 </ApiEndpoint>
@@ -2439,7 +2508,7 @@ Return a list of available [Access Points](api/supervisor/models.md#access-point
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/network/interface/<interface>/vlan/<id>" method="post">
+<ApiEndpoint path="/network/interface/<interface>/vlan/<vlan>" method="post">
 
 Create a new VLAN *id* on this network interface.
 
@@ -2885,7 +2954,7 @@ Execute a healthcheck and autofix & notifcation.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/resolution/check/<slug>/options" method="post">
+<ApiEndpoint path="/resolution/check/<check>/options" method="post">
 
 Set options for this check.
 
@@ -2897,7 +2966,7 @@ Set options for this check.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/resolution/check/<slug>/run" method="post">
+<ApiEndpoint path="/resolution/check/<check>/run" method="post">
 
 Execute a specific check right now.
 
@@ -3478,13 +3547,20 @@ Update the supervisor
 
 Some of the endpoints uses placeholders indicated with `<...>` in the endpoint URL.
 
-| placeholder | description                                                                                                                                           |
-| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| addon       | The slug for the addon, to get the slug you can call `/addons`, to call endpoints for the add-on calling the endpoints you can use `self`as the slug. |
+| placeholder | description                                                                                                                                            |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| addon       | The slug for the addon, to get the slug you can call `/addons`, to call endpoints for the add-on calling the endpoints you can use `self` as the slug. |
 | application | The name of an application, call `/audio/info` to get the correct name                                                                                 |
-| interface   | A valid interface name, example `eth0`, to get the interface name you can call `/network/info`. You can use `default` to get the primary interface |
-| registry    | A registry hostname defined in the container registry configuration, to get the hostname you can call `/docker/registries`                            |
-| service     | The service name for a service on the host.                                                                                                           |
-| backup    | A valid backup slug, example `skuwe823`, to get the slug you can call `/backups`                                                                  |
-| suggestion  | A valid suggestion, example `clear_full_backup`, to get the suggestion you can call `/resolution`                                         |
-| uuid        | The UUID of a discovery service, to get the UUID you can call `/discovery`                                                                            |
+| backup      | A valid backup slug, example `skuwe823`, to get the slug you can call `/backups`                                                                       |
+| bootid      | An identifier for a specific boot of host system or an integer offset from the current boot. See `/host/logs/boots/<bootid>` for more details          |
+| check       | The slug for a check in Supervisor's resolution manager, call `/resolution/info` to see the list of options in the `checks` field                      |
+| device      | A UUID or device path for an NVMe device available on the host, call `/host/info` to get a list of options in the `nvme_devices` field                 |
+| identifier  | A syslog identifier from systemd journal, call `/host/logs/identifiers` to get a complete list of options                                              |
+| interface   | A valid interface name, example `eth0`, to get the interface name you can call `/network/info`. You can use `default` to get the primary interface     |
+| mount       | Name of a mount that exists in Supervisor, call `/mounts` to get a list of options                                                                     |
+| registry    | A registry hostname defined in the container registry configuration, to get the hostname you can call `/docker/registries`                             |
+| respository | The slug for a respository in Supervisor's add-on store, call `/store/repositories` to get a list of options                                           | 
+| service     | The service name for a service on the host, call `/host/services` to get a list of options                                                             |
+| suggestion  | A valid suggestion, example `clear_full_backup`, to get the suggestion you can call `/resolution`                                                      |
+| uuid        | The UUID of a discovery service, to get the UUID you can call `/discovery`                                                                             |
+| vlan        | The id for a vlan network device in network manager on the host. Should be an integer                                                                  |
