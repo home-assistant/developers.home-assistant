@@ -2235,7 +2235,7 @@ Value in `name` must be unique and can only consist of letters, numbers and unde
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/mounts/<name>" method="put">
+<ApiEndpoint path="/mounts/<mount>" method="put">
 Update an existing mount in Supervisor and remount it
 
 **Payload:**
@@ -2259,12 +2259,12 @@ name, it cannot be changed. Delete and re-add the mount to change the name.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/mounts/<name>" method="delete">
+<ApiEndpoint path="/mounts/<mount>" method="delete">
 Unmount and delete an existing mount from Supervisor.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/mounts/<name>/reload" method="post">
+<ApiEndpoint path="/mounts/<mount>/reload" method="post">
 Unmount and remount an existing mount in Supervisor using the same configuration.
 
 </ApiEndpoint>
@@ -2485,7 +2485,7 @@ Return a list of available [Access Points](api/supervisor/models.md#access-point
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/network/interface/<interface>/vlan/<id>" method="post">
+<ApiEndpoint path="/network/interface/<interface>/vlan/<vlan>" method="post">
 
 Create a new VLAN *id* on this network interface.
 
@@ -2931,7 +2931,7 @@ Execute a healthcheck and autofix & notifcation.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/resolution/check/<slug>/options" method="post">
+<ApiEndpoint path="/resolution/check/<check>/options" method="post">
 
 Set options for this check.
 
@@ -2943,7 +2943,7 @@ Set options for this check.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/resolution/check/<slug>/run" method="post">
+<ApiEndpoint path="/resolution/check/<check>/run" method="post">
 
 Execute a specific check right now.
 
@@ -3524,13 +3524,20 @@ Update the supervisor
 
 Some of the endpoints uses placeholders indicated with `<...>` in the endpoint URL.
 
-| placeholder | description                                                                                                                                           |
-| ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| addon       | The slug for the addon, to get the slug you can call `/addons`, to call endpoints for the add-on calling the endpoints you can use `self`as the slug. |
+| placeholder | description                                                                                                                                            |
+| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| addon       | The slug for the addon, to get the slug you can call `/addons`, to call endpoints for the add-on calling the endpoints you can use `self` as the slug. |
 | application | The name of an application, call `/audio/info` to get the correct name                                                                                 |
-| interface   | A valid interface name, example `eth0`, to get the interface name you can call `/network/info`. You can use `default` to get the primary interface |
-| registry    | A registry hostname defined in the container registry configuration, to get the hostname you can call `/docker/registries`                            |
-| service     | The service name for a service on the host.                                                                                                           |
-| backup    | A valid backup slug, example `skuwe823`, to get the slug you can call `/backups`                                                                  |
-| suggestion  | A valid suggestion, example `clear_full_backup`, to get the suggestion you can call `/resolution`                                         |
-| uuid        | The UUID of a discovery service, to get the UUID you can call `/discovery`                                                                            |
+| backup      | A valid backup slug, example `skuwe823`, to get the slug you can call `/backups`                                                                       |
+| bootid      | An identifier for a specific boot of host system or an integer offset from the current boot. See `/host/logs/boots/<bootid>` for more details          |
+| check       | The slug for a check in Supervisor's resolution manager, call `/resolution/info` to see the list of options in the `checks` field                      |
+| device      | A UUID or device path for an NVMe device available on the host, call `/host/info` to get a list of options in the `nvme_devices` field                 |
+| identifier  | A syslog identifier from systemd journal, call `/host/logs/identifiers` to get a complete list of options                                              |
+| interface   | A valid interface name, example `eth0`, to get the interface name you can call `/network/info`. You can use `default` to get the primary interface     |
+| mount       | Name of a mount that exists in Supervisor, call `/mounts` to get a list of options                                                                     |
+| registry    | A registry hostname defined in the container registry configuration, to get the hostname you can call `/docker/registries`                             |
+| respository | The slug for a respository in Supervisor's add-on store, call `/store/repositories` to get a list of options                                           | 
+| service     | The service name for a service on the host, call `/host/services` to get a list of options                                                             |
+| suggestion  | A valid suggestion, example `clear_full_backup`, to get the suggestion you can call `/resolution`                                                      |
+| uuid        | The UUID of a discovery service, to get the UUID you can call `/discovery`                                                                             |
+| vlan        | The id for a vlan network device in network manager on the host. Should be an integer                                                                  |
