@@ -1921,24 +1921,47 @@ providing either the `id` or `path` as the identifier for an NVMe device.
 
 **Returned data:**
 
-| key                             | type | description                                                                                 |
-| ------------------------------- | ---- | ------------------------------------------------------------------------------------------- |
-| critical_warning                | int  | Critical warnings raised over device lifetime                                               |
-| available_spare                 | int  | Percentage of remaining spare capacity available                                            |
-| data_units_read                 | int  | Thousands of 512 byte data units read by host over device lifetime                          |
-| data_units_written              | int  | Thousands of 512 byte data units written by host over device lifetime                       |
-| percent_used                    | int  | Estimate of percent of device's life used based on manufacturer's prediction                |
-| temperature_kelvin              | int  | Current temperature in Kelvins calculated from sensors                                      |
-| host_read_commands              | int  | Read commands completed over device lifetime                                                |
-| host_write_commands             | int  | Write commands completed over device lifetime                                               |
-| controller_busy_minutes         | int  | Minutes the device was busy with I/O commands over device lifetime                          |
-| power_cycles                    | int  | Power cycles over device lifetime                                                           |
-| power_on_hours                  | int  | Power-on hours over device lifetime                                                         |
-| unsafe_shutdowns                | int  | Unsafe shutdowns over device lifetime                                                       |
-| media_errors                    | int  | Data integrity errors detected over device lifetime                                         |
-| number_error_log_entries        | int  | Error entries in log over device lifetime                                                   |
-| warning_temp_minutes            | int  | Minutes temperature has been greater then warning threshold over device lifetime            |
-| critical_composite_temp_minutes | int  | Minutes temperature has been greater then critical composite threshold over device lifetime |
+| key                             | type | description                                                                                     |
+| ------------------------------- | ---- | ----------------------------------------------------------------------------------------------- |
+| critical_warning                | int  | Critical warnings raised over device lifetime                                                   |
+| available_spare                 | int  | Percentage of remaining spare capacity available                                                |
+| data_units_read                 | int  | Thousands of 512 byte data units read by host over device lifetime                              |
+| data_units_written              | int  | Thousands of 512 byte data units written by host over device lifetime                           |
+| percent_used                    | int  | Estimate of percent of device's life used based on manufacturer's prediction                    |
+| temperature_kelvin              | int  | Current temperature in Kelvin calculated from sensors                                           |
+| host_read_commands              | int  | Read commands completed over device lifetime                                                    |
+| host_write_commands             | int  | Write commands completed over device lifetime                                                   |
+| controller_busy_minutes         | int  | Minutes the device was busy with I/O commands over device lifetime                              |
+| power_cycles                    | int  | Power cycles over device lifetime                                                               |
+| power_on_hours                  | int  | Power-on hours over device lifetime                                                             |
+| unsafe_shutdowns                | int  | Unsafe shutdowns over device lifetime                                                           |
+| media_errors                    | int  | Data integrity errors detected over device lifetime                                             |
+| number_error_log_entries        | int  | Error entries in log over device lifetime                                                       |
+| warning_temp_minutes            | int  | Minutes temperature has been greater than the warning threshold over device lifetime            |
+| critical_composite_temp_minutes | int  | Minutes temperature has been greater than the critical composite threshold over device lifetime |
+
+**Example response:**
+
+```json
+{
+  "available_spare": 100,
+  "critical_warning": 0,
+  "data_units_read": 44707691,
+  "data_units_written": 54117388,
+  "percent_used": 1,
+  "temperature_kelvin": 312,
+  "host_read_commands": 428871098,
+  "host_write_commands": 900245782,
+  "controller_busy_minutes": 2678,
+  "power_cycles": 652,
+  "power_on_hours": 3192,
+  "unsafe_shutdowns": 107,
+  "media_errors": 0,
+  "number_error_log_entries": 1069,
+  "warning_temp_minutes": 0,
+  "critical_composite_temp_minutes": 0
+}
+```
 
 </ApiEndpoint>
 

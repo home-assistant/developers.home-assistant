@@ -358,7 +358,7 @@ Response only fields will be in responses but cannot be included in requests.
 
 ## NVMe Device
 
-| key  | type    | description                                      |
-| ---- | ------- | ------------------------------------------------ |
-| id   | string  | Unique UUID for the device                       |
-| path | string  | Device path on host system (e.g. `/dev/nvme0n1`) |
+| key  | type    | description                                          |
+| ---- | ------- | ---------------------------------------------------- |
+| id   | string  | UUID (unique identifier) for the device              |
+| path | string  | Device path on the host system (e.g. `/dev/nvme0n1`) |
