@@ -367,6 +367,13 @@ The Data endpoint to get his own rendered configuration.
 
 <ApiEndpoint path="/addons/<addon>/rebuild" method="post">
 Rebuild the add-on, only supported for local build add-ons.
+
+**Payload:**
+
+| key   | type    | optional | description                                                       |
+| ----- | ------- | -------- | ----------------------------------------------------------------- |
+| force | boolean | True     | Force rebuild of the add-on even if pre-built images are provided |
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/restart" method="post">
