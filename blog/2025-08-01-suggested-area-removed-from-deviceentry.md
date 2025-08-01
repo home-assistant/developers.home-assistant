@@ -1,12 +1,15 @@
 ---
 author: Erik Montnemery
 authorURL: https://github.com/emontnemery
-title: "The DeviceEntry.suggested_area attribute has been deprecated and will be removed"
+title: "The DeviceEntry.suggested_area attribute is deprecated and will be removed"
 ---
 
-The `DeviceEntry.suggested_area` attribute has been deprecated and will be removed in HA Core 2026.9. Also, `suggested_area` will no longer be present in `EVENT_DEVICE_REGISTRY_UPDATED` events when HA Core 2026.9 is released.
+The `DeviceEntry.suggested_area` attribute is deprecated and will be removed in HA Core 2026.9. Also, `suggested_area` will no longer be present in `EVENT_DEVICE_REGISTRY_UPDATED` events when HA Core 2026.9 is released.
 
-Custom integrations should not access `DeviceEntry.suggested_area`. If it's important to know which area a device is part of, use `DeviceEntry.area_id` instead.
+Note:
+Setting `suggested_area` in `DeviceInfo`, and passing `suggested_area` to `DeviceRegistry.async_get_or_create` is still supported, although that may change in the future.
+
+Use `DeviceEntry.area_id` to determine a device’s area in custom integrations. Don’t access `DeviceEntry.suggested_area`.
 
 During the deprecation period, accessing `DeviceEntry.suggested_area` will log a warning.
 
