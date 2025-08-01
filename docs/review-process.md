@@ -153,10 +153,10 @@ requested the changes that the PR is ready to go!
 
 2. **Monitor your PR and keep it up to date.**
    Even if your PR is not reviewed, you should actively monitor it. Be sure no
-   merge conflicts have been introduced in the meantime (GitHub
-   will tell you if that is the case), and maybe rebase it onto the latest
-   development branch after a week of inactivity. This ensures your PR is
-   ready to go once the review process starts.
+   merge conflicts have been introduced in the meantime (GitHub will tell you if
+   that is the case), and maybe [update it with the latest development branch](/docs/development_catching_up)
+   after a week of inactivity. This ensures your PR is ready to go once the
+   review process starts.
 
 3. **Add tests.**
    If you are adding new features, make sure to add tests. If you are fixing
@@ -256,9 +256,9 @@ each time you go through the process.
    awaiting a change from you or a review from our project. Please make sure
    the first one isn't the case, in case you are awaiting a review,
    just comment that. By responding to the bot, it will know things are not
-   stale and will back off. In the mean time, it might be a good idea to rebase
-   your PR on the latest development branches to ensure you are fully
-   caught up with recent changes.
+   stale and will back off. In the mean time, it might be a good idea to
+   [update it with the latest development branch](/docs/development_catching_up)
+   to ensure you are fully caught up with recent changes.
 
 5. **I have a PR that should go into a hotfix/patch release, how do I do that?**
    Just create the PR as normal, and make it very clear in the PR description
