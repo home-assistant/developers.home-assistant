@@ -489,7 +489,7 @@ class LocationSubentryFlowHandler(ConfigSubentryFlow):
     ) -> SubentryFlowResult:
         """User flow to modify an existing location."""
         # Retrieve the parent config entry for reference.
-        config_entry = self._get_reconfigure_entry()
+        config_entry = self._get_entry()
         # Retrieve the specific subentry targeted for update.
         config_subentry = self._get_reconfigure_subentry()
         ...
