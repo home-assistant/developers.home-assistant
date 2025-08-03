@@ -87,8 +87,12 @@ The [F-Droid](https://f-droid.org) store builds the applications themselves when
 They use the `version_code.txt` file, which is created on every release from the `main` branch, for the app's versioning.
 
 :::warning
-We do not guarantee when the applications will be available on F-Droid after a release. You can find the app [here](https://f-droid.org/packages/io.homeassistant.companion.android.minimal/).
+We do not guarantee when the applications will be available on F-Droid after a release. You can find the app [on F-Droid](https://f-droid.org/packages/io.homeassistant.companion.android.minimal/).
 :::
+
+### On pre-release or monthly tag
+
+When a release is created in the `pre-release` state or when a monthly tag is pushed, the `prepareNextRelease.yml` workflow is triggered. This workflow creates a pull request that updates the `changelog_master.xml` file to reflect the new version. Manual approval of this pull request is required. This process helps keep the changelog version consistent with the app version.
 
 ## Summary of workflows
 
@@ -99,6 +103,7 @@ We do not guarantee when the applications will be available on F-Droid after a r
 | `weekly.yml`     | Every Sunday at 4:00 AM     | Create a pre-release and push the beta build to the Play Store.              |
 | `monthly.yml`    | First day of the month      | Create an initial version tag (`YYYY.MM.0`).                           |
 | `release.yml`    | Manual trigger              | Promote the beta build to production.                                  |
+| `prepareNextRelease.yml`     | On pre-release or monthly tag        | Update `changelog_master.xml` in a PR.             |
 
 ---
 
