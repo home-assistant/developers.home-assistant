@@ -529,6 +529,57 @@ The server will respond with the validation results. Only fields will be include
 }
 ```
 
+## Expand target
+
+This command allows you to expand one or multiple targets into their constituent entities, devices, and areas.
+
+```json
+{
+  "id": 19,
+  "type": "expand_target",
+  "target": {
+    "entity_id": ["group.kitchen"],
+    "device_id": ["device_abc123"],
+    "area_id": ["kitchen"],
+    "label_id": ["smart_lights"]
+  },
+  // Optional: expand group entities to their members (default: false)
+  "expand_group": true
+}
+```
+
+The target parameter follows the same structure as service call targets.
+
+The server will respond with the expanded target information:
+
+```json
+{
+  "id": 19,
+  "type": "result",
+  "success": true,
+  "result": {
+    "referenced_entities": ["light.kitchen", "switch.kitchen", "light.living_room", "switch.bedroom"],
+    "referenced_devices": ["device_abc123", "device_def456"],
+    "referenced_areas": ["kitchen", "living_room"],
+    "missing_devices": [],
+    "missing_areas": [],
+    "missing_floors": [],
+    "missing_labels": []
+  }
+}
+```
+
+The response includes:
+- `referenced_entities`: All entity IDs that would be targeted (includes entities from devices/areas/labels)
+- `referenced_devices`: All device IDs that were referenced
+- `referenced_areas`: All area IDs that were referenced
+- `missing_devices`: Device IDs that don't exist
+- `missing_areas`: Area IDs that don't exist
+- `missing_floors`: Floor IDs that don't exist
+- `missing_labels`: Label IDs that don't exist
+
+When `expand_group` is set to `true`, group entities will be expanded to include their member entities instead of the group entity itself.
+
 ## Error handling
 
 If an error occurs, the `success` key in the `result` message will be set to `false`. It will contain an `error` key containing an object with two keys: `code` and `message`.
