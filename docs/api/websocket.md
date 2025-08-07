@@ -529,14 +529,14 @@ The server will respond with the validation results. Only fields will be include
 }
 ```
 
-## Expand target
+## Extract from target
 
-This command allows you to expand one or multiple targets into their constituent entities, devices, and areas.
+This command allows you to extract entities, devices, and areas from one or multiple targets.
 
 ```json
 {
   "id": 19,
-  "type": "expand_target",
+  "type": "extract_from_target",
   "target": {
     "entity_id": ["group.kitchen"],
     "device_id": ["device_abc123"],
@@ -550,7 +550,7 @@ This command allows you to expand one or multiple targets into their constituent
 
 The target parameter follows the same structure as service call targets.
 
-The server will respond with the expanded target information:
+The server will respond with the information extracted from the target:
 
 ```json
 {
