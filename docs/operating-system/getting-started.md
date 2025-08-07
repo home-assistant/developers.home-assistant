@@ -48,15 +48,13 @@ The script `scripts/enter.sh` builds the build container image and starts a cont
 HAOS uses a configuration file for each supported target. To build for a specific target (board), the configuration file needs to be passed to `make`. The configuration files are stored in `buildroot-external/configs/`. Note that the ending `_defconfig` will be appended automatically and *must not* be passed to `make`. E.g. to build the Raspberry Pi 4 64-bit configuration `buildroot-external/configs/rpi4_64_defconfig` use the following command:
 
 ```
-$ sudo scripts/enter.sh make rpi4_64
-Sending build context to Docker daemon  159.7kB
-Step 1/8 : FROM debian:bullseye
- ---> a178460bae57
-[...]
-Successfully built 11d679ac51be
-Successfully tagged hassos:local
-[...]
+$ scripts/enter.sh make rpi4_64
+[sudo] password for whoever:
+[+] Building 32.5s (10/10) FINISHED                                                                                                                                                                                                                     [...]
+=== Using rpi4_64_defconfig ===
 /usr/bin/make -C /build/buildroot O=/build/output BR2_EXTERNAL=/build/buildroot-external "rpi4_64_defconfig"
+[...]
+=== Building rpi4_64 ===
 [...]
 ```
 
@@ -82,7 +80,7 @@ To build for multiple targets in a single source directory, separate output dire
 
 
 ```shell
-sudo scripts/enter.sh make O=output_rpi4_64 rpi4_64
+scripts/enter.sh make O=output_rpi4_64 rpi4_64
 ```
 
 ### Use the build container interactively
@@ -90,12 +88,9 @@ sudo scripts/enter.sh make O=output_rpi4_64 rpi4_64
 If no argument to `scripts/enter.sh` is passed, a shell will be presented.
 
 ```bash
-$ sudo scripts/enter.sh
-Sending build context to Docker daemon  159.7kB
-Step 1/8 : FROM debian:bullseye
- ---> a178460bae57
+$ scripts/enter.sh
 [...]
-builder@c6dfb4cd4036:/build$ 
+builder@d3d7577663c9:/build$
 ```
 
 From this shell, the same build above could be started using `make O=output_rpi4_64 rpi4_64`.
@@ -119,7 +114,7 @@ The target OVA (Open Virtual Appliance) contains images for various virtual mach
 Since HAOS requires UEFI support, this is slightly more tricky than with "classic"(/legacy) MBR-based images. On a *Debian* host install the [ovmf package](https://packages.debian.org/stable/ovmf) which provides the "UEFI firmware for 64-bit x86 virtual machines". That package will install a **TianoCore**-derived QEMU UEFI image at `/usr/share/OVMF/OVMF_CODE.fd`, which can be used with QEMU to boot the generated QCOW2 image.
 
 ```bash
-$ sudo scripts/enter.sh make O=output_ova ova
+$ scripts/enter.sh make O=output_ova ova
 [...]
 $ unxz release/haos_ova-7.0.dev20211003.qcow2.xz
 $ qemu-system-x86_64 -enable-kvm -name haos -smp 2 -m 1G -drive file=release/haos_ova-7.0.dev20211003.qcow2,index=0,media=disk,if=virtio,format=qcow2 -drive file=/usr/share/ovmf/x64/OVMF_CODE.fd,if=pflash,format=raw,readonly=on
