@@ -1906,33 +1906,6 @@ Shutdown the host
 
 </ApiEndpoint>
 
-### Ingress
-
-<ApiEndpoint path="/ingress/panels" method="get">
-
-**Returned data:**
-
-| key    | type       | description                                  |
-| ------ | ---------- | -------------------------------------------- |
-| panels | dictionary | dictionary of [Panel models](api/supervisor/models.md#panel) |
-
-**Example response:**
-
-```json
-{
-  "panels": {
-    "addon_slug": {
-      "enable": true,
-      "icon": "mdi:awesome-icon",
-      "title": "Awesome add-on",
-      "admin": true
-    }
-  }
-}
-```
-
-</ApiEndpoint>
-
 <ApiEndpoint path="/host/disk/default/usage" method="get">
 Get detailed disk usage information in bytes.
 
@@ -1968,6 +1941,33 @@ Supports an optional `max_depth` query param. Defaults to 1
     },
     "system": {
       "used_space": 75660903137
+    }
+  }
+}
+```
+
+</ApiEndpoint>
+
+### Ingress
+
+<ApiEndpoint path="/ingress/panels" method="get">
+
+**Returned data:**
+
+| key    | type       | description                                  |
+| ------ | ---------- | -------------------------------------------- |
+| panels | dictionary | dictionary of [Panel models](api/supervisor/models.md#panel) |
+
+**Example response:**
+
+```json
+{
+  "panels": {
+    "addon_slug": {
+      "enable": true,
+      "icon": "mdi:awesome-icon",
+      "title": "Awesome add-on",
+      "admin": true
     }
   }
 }
