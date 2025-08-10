@@ -319,3 +319,71 @@ window.customCards.push({
     "https://developers.home-assistant.io/docs/frontend/custom-ui/custom-card", // Adds a help link in the frontend card editor
 });
 ```
+
+### Using the builtin form editor
+While one way to configure a graphical editor is to supply a custom editor element, another option for cards with relatively simple configuration requirements is to use the builtin frontend form editor. This is done by defining a static `getConfigForm` function in your card class, that returns a form schema, defining the shape of your configuration form. 
+
+Example:
+```js
+  static getConfigForm() {
+    return {
+      schema: [
+        { name: "label", selector: { label: {} } },
+        { name: "entity", required: true, selector: { entity: {} } },
+        {
+          type: "grid",
+          name: "",
+          schema: [
+            { name: "name", selector: { text: {} } },
+            {
+              name: "icon",
+              selector: {
+                icon: {},
+              },
+              context: {
+                icon_entity: "entity",
+              },
+            },
+            {
+              name: "attribute",
+              selector: {
+                attribute: {},
+              },
+              context: {
+                filter_entity: "entity",
+              },
+            },
+            { name: "unit", selector: { text: {} } },
+            { name: "theme", selector: { theme: {} } },
+            { name: "state_color", selector: { boolean: {} } },
+          ],
+        },
+      ],
+      computeLabel: (schema) => {
+        if (schema.name === "icon") return "Special Icon";
+        return undefined;
+      },
+      computeHelper: (schema) => {
+        switch (schema.name) {
+          case "entity":
+            return "This text describes the function of the entity selector";
+          case "unit":
+            return "The unit of measurement for this card";
+        }
+        return undefined;
+      },
+    };
+  }
+```
+
+The object returned by this function has 3 parts:
+
+- `schema`: This is a list of schema objects, one per form field, defining various properties of the field, like the name and selector.
+- `computeLabel`: This function will be called per form field, allowing the card to define the label that will be displayed for the field. If `undefined`, Home Assistant may apply a known translation for generic field names like `entity`, or you can supply your own translations.
+- `computeHelper`: This function will be called per form field, allowing you to define longer helper text for the field, which will be displayed below the field. 
+
+This example then results in the following config form:
+![Screenshot of the config form](/img/en/frontend/dashboard-custom-card-config-form.png)
+
+
+
