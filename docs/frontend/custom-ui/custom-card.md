@@ -372,15 +372,20 @@ Example:
         }
         return undefined;
       },
+      assertConfig: (config) => {
+        if (config.other_option) {
+          throw new Error("'other_option' is unexpected.");
+        }
+      },
     };
   }
 ```
+From this function, you should return an object with up to 4 keys:
 
-The object returned by this function has 3 parts:
-
-- `schema`: This is a list of schema objects, one per form field, defining various properties of the field, like the name and selector.
-- `computeLabel`: This function will be called per form field, allowing the card to define the label that will be displayed for the field. If `undefined`, Home Assistant may apply a known translation for generic field names like `entity`, or you can supply your own translations.
-- `computeHelper`: This function will be called per form field, allowing you to define longer helper text for the field, which will be displayed below the field.
+- `schema` _(required)_: This is a list of schema objects, one per form field, defining various properties of the field, like the name and selector.
+- `computeLabel` _(optional)_: This callback function will be called per form field, allowing the card to define the label that will be displayed for the field. If `undefined`, Home Assistant may apply a known translation for generic field names like `entity`, or you can supply your own translations.
+- `computeHelper` _(optional)_: This callback function will be called per form field, allowing you to define longer helper text for the field, which will be displayed below the field.
+- `assertConfig` _(optional)_: On each update of the configuration, the user's config will be passed to this callback function. If you throw an `Error` during this callback, the visual editor will be disabled. This can be used to disable the visual editor when user enters incompatible data, like entering an object in yaml for a selector that expects a string. If a subsequent execution of this callback does not throw an error, the visual editor will be re-enabled. 
 
 This example then results in the following config form:
 ![Screenshot of the config form](/img/en/frontend/dashboard-custom-card-config-form.png)
