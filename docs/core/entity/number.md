@@ -34,6 +34,7 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.ABSOLUTE_HUMIDITY` | g/m³, mg/m³ | Absolute humidity
 | `NumberDeviceClass.AQI` | None | Air Quality Index
 | `NumberDeviceClass.AREA` | m², cm², km², mm², in², ft², yd², mi², ac, ha | Area
+| `NumberDeviceClass.APPARENT_POWER` | mVA, VA | Apparent power
 | `NumberDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, mmHG, inHg, kPa, mbar, Pa, psi | Atmospheric pressure
 | `NumberDeviceClass.BATTERY` | % | Percentage of battery that is left
 | `NumberDeviceClass.BLOOD_GLUCOSE_CONCENTRATION` | mg/dL, mmol/L | Blood glucose concentration```
