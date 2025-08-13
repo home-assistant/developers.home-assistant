@@ -33,7 +33,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | Constant | Supported units | Description
 | ---- | ---- | -----------
 | `SensorDeviceClass.ABSOLUTE_HUMIDITY` | g/m³, mg/m³ | Absolute humidity
-| `SensorDeviceClass.APPARENT_POWER` | mVA, or VA | Apparent power
+| `SensorDeviceClass.APPARENT_POWER` | mVA, VA | Apparent power
 | `SensorDeviceClass.AQI` | None | Air Quality Index
 | `SensorDeviceClass.AREA` | m², cm², km², mm², in², ft², yd², mi², ac, ha | Area
 | `SensorDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, mmHG, inHg, kPa, mbar, Pa, psi | Atmospheric pressure
