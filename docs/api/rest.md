@@ -136,6 +136,40 @@ curl \
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/api/components" method="get">
+
+Returns a list of currently loaded components.
+
+```
+[
+  "currentcost.sensor",
+  "tapo.switch",
+  "tuya_ble.sensor",
+  "backup",
+  "ble_monitor.binary_sensor",
+  "localtuya.remote",
+  "logger",
+  "http",
+  "hacs",
+  "cast",
+  "device_tracker",
+  "upnp.binary_sensor",
+  "notify",
+  "person",
+  ...
+]
+```
+
+Sample `curl` command:
+
+```shell
+curl \
+  -H "Authorization: Bearer TOKEN" \
+  -H "Content-Type: application/json" http://localhost:8123/api/components
+```
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/api/events" method="get">
 
 Returns an array of event objects. Each event object contains event name and listener count.
