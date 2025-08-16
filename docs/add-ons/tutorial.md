@@ -80,7 +80,7 @@ Now comes the fun part, time to open the Home Assistant UI and install and run y
 - Open the Home Assistant frontend
 - Go to "Settings"
 - Click on "Add-ons"
-- Click "add-on store" in the bottom right corner.
+- Click "Add-on store" in the bottom right corner.
 
 [![Open your Home Assistant instance and show the Supervisor add-on store.](https://my.home-assistant.io/badges/supervisor_store.svg)](https://my.home-assistant.io/redirect/supervisor_store/)
 
@@ -101,7 +101,7 @@ Now comes the fun part, time to open the Home Assistant UI and install and run y
 
 Oops! You clicked "Check for updates" in the store and your add-on didn't show up. Or maybe you just updated an option, clicked refresh and saw your add-on disappear.
 
-When this happens, try refreshing your browser's cache first by pressing `Ctrl + F5`. If that didn't help, it means that your `config.yaml` is invalid. It's either [invalid YAML](http://www.yamllint.com/) or one of the specified options is incorrect. To see what went wrong, go to the Supervisor panel and in the supervisor card click on "View logs". This should bring you to a page with the logs of the supervisor. Scroll to the bottom and you should be able to find the validation error.
+When this happens, try refreshing your browser's cache first by pressing <kbd>Ctrl</kbd> + <kbd>F5</kbd>. If that didn't help, it means that your `config.yaml` is invalid. It's either [invalid YAML](http://www.yamllint.com/) or one of the specified options is incorrect. To see what went wrong, go to ["Settings" → "System" → "Logs" and select "Supervisor" in the top-right drop-down menu](https://my.home-assistant.io/redirect/logs/?provider=supervisor). This should bring you to a page with the logs of the supervisor. Scroll to the bottom and you should be able to find the validation error.
 
 Once you fixed the error, go to the add-on store and click "Check for updates" again.
 
@@ -176,7 +176,7 @@ Now navigate to [http://homeassistant.local:8000](http://homeassistant.local:800
 
 ## Bonus: Working with add-on options
 
-In the screenshot you've probably seen that our server only served up 1 file: `options.json`. This file contains the user configuration for this add-on. Because we specified two empty objects for the keys "options" and "schema" in our `config.yaml`, the resulting file is currently empty.
+In the screenshot you've probably seen that our server only served up 1 file: `options.json`. This file contains the user configuration for this add-on. Because we specified two empty objects for the `options` and `schema` keys in our `config.yaml`, the resulting file is currently empty.
 
 Let's see if we can get some data into that file!
 
