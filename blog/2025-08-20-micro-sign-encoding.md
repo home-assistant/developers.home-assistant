@@ -28,4 +28,5 @@ The `sensor` and `number` entity platforms now include a built-in feature to aut
 To be able find the correct instances in your code using Visual Studio Code, it is important to enable the "Match case" option, or else it will search for all variants. Use the information above to copy a char with desired encoding. Note that this search only works correctly with the global search feature. The page search will still show all cases.
 
 ## New linter
+
 To avoid issues with new or changed code, [#144853](https://github.com/home-assistant/core/pull/144853) adds a linter that warns about incorrect literal assignments using the non-preferred encoding of μ.
