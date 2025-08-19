@@ -2,12 +2,12 @@
 author: Jan Bouwhuis
 authorURL: https://github.com/jbouwh
 authorImageURL: https://avatars.githubusercontent.com/u/7188918?s=96&v=4
-title: Standardization of the encoding for the μ-sign used in init of measurement
+title: Standardize μ-sign encoding for units of measurement
 ---
 
 ## One preferred encoding to represent the μ-sign
 
-Some or of the unit of measurement constants use greek chars like μV and μS.
+Some of the unit of measurement constants use greek chars, like μV and μS.
 The μ-sign is though implemented via two different Unicode representations:
 
 1. The [MICRO SIGN](https://www.compart.com/en/unicode/U+00B5)
@@ -17,9 +17,9 @@ The legacy of the Home Assistant unit of measurements showed that both variants 
 
 With [#144853](https://github.com/home-assistant/core/pull/144853) we have fixed this in the core of Home Assistant by consequently implementing the Greek Small Letter Mu as μ-sign. In Python literal strings this variant is encoded as `"\u03bc"`.
 
-Developers should check if their code and libraries have a dependency with the the ambitious MICRO SIGN (μ) `"\u00b5"`, and migrate their code to use the Greek Small Letter Mu `"\u03bc"` instead to avoid issues.
+Developers should check if their code and libraries have a dependency with the the ambiguous MICRO SIGN (μ) `"\u00b5"`, and migrate their code to use the Greek Small Letter Mu `"\u03bc"` instead to avoid issues.
 
-The `sensor` and `number` entity platforms now have a built in feature to automatically convert units that use the ambitious MICRO SIGN (μ) encoding.
+The `sensor` and `number` entity platforms now include a built-in feature to automatically convert units that use the ambiguous MICRO SIGN (μ) encoding.
 
 ## Finding implementations in Visual Studio Code
 
