@@ -23,10 +23,9 @@ Developers should check if their code and libraries have a dependency with the t
 
 The `sensor` and `number` entity platforms now include a built-in feature to automatically convert units that use the ambiguous MICRO SIGN (μ) encoding.
 
-## Finding implementations in Visual Studio Code
+## Find instances in Visual Studio Code
 
-To be able find the correct instances in your code using Visual Studio Code, it is important to enable the "Match case" option, or else it will search for all variants. Use the information above to copy a char with desired encoding. Note that this search only works correctly with the global search feature. The page search will still show all cases.
-
+In Visual Studio Code, enable **Match Case** in the **Search** (files) panel to find only the chosen encoding. Copy the exact μ character from above and paste it into the search box. The editor’s page search matches all variants; use the global search instead.
 ## New linter
 
 To avoid issues with new or changed code, [#144853](https://github.com/home-assistant/core/pull/144853) adds a linter that warns about incorrect literal assignments using the non-preferred encoding of μ.
