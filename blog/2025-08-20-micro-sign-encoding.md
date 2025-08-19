@@ -2,20 +2,20 @@
 author: Jan Bouwhuis
 authorURL: https://github.com/jbouwh
 authorImageURL: https://avatars.githubusercontent.com/u/7188918?s=96&v=4
-title: Standardize μ-sign encoding for units of measurement
+title: Standardize encoding of μ in units of measurement
 ---
 
-## One preferred encoding to represent the μ-sign
+## One preferred encoding to represent μ in units of measurement
 
-Some unit of measurement constants use greek chars, like μV and μS.
-The μ-sign is though implemented via two different Unicode representations:
+The unit prefix μ is used by unit of measurement constants like μV and μS.
+There are however two different Unicode encodings of μ:
 
 1. The [MICRO SIGN](https://www.compart.com/en/unicode/U+00B5)
 2. The [Greek Small Letter Mu](https://www.compart.com/en/unicode/U+03BC)
 
-The legacy of the Home Assistant unit of measurements showed that both variants were used, but when the unit is to identify its validity, that this leads to issues.
+Home Assistant previously mixed the two encodings, which caused issues because string comparisons between the two encodings would fail causing unit of measurement validations to fail.
 
-With [#144853](https://github.com/home-assistant/core/pull/144853) we have fixed this in the core of Home Assistant by consequently implementing the Greek Small Letter Mu as μ-sign. In Python literal strings this variant is encoded as `"\u03bc"`.
+With [#144853](https://github.com/home-assistant/core/pull/144853) we have fixed this in the core of Home Assistant by consequently using the Greek Small Letter Mu version to encode μ. In Python literal strings this variant is encoded as `"\u03bc"`.
 
 Developers should check if their code and libraries have a dependency with the the ambiguous MICRO SIGN (μ) `"\u00b5"`, and migrate their code to use the Greek Small Letter Mu `"\u03bc"` instead to avoid issues.
 
