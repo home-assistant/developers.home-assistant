@@ -7,7 +7,7 @@ title: Standardize μ-sign encoding for units of measurement
 
 ## One preferred encoding to represent the μ-sign
 
-Some of the unit of measurement constants use greek chars, like μV and μS.
+Some unit of measurement constants use greek chars, like μV and μS.
 The μ-sign is though implemented via two different Unicode representations:
 
 1. The [MICRO SIGN](https://www.compart.com/en/unicode/U+00B5)
