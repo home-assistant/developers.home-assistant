@@ -19,7 +19,7 @@ We chose the "Greek Small Letter Mu" because the "MICRO SIGN" encoding is there 
 
 With [#144853](https://github.com/home-assistant/core/pull/144853) we have fixed this in the core of Home Assistant by consequently using the Greek Small Letter Mu version to encode μ. In Python literal strings this variant is encoded as `"\u03bc"`.
 
-Developers should check if their code and libraries have a dependency with the the ambiguous MICRO SIGN (μ) `"\u00b5"`, and migrate their code to use the Greek Small Letter Mu `"\u03bc"` instead to avoid issues.
+Developers should check if their code and libraries have a dependency with the ambiguous MICRO SIGN (μ) `"\u00b5"`, and migrate their code to use the Greek Small Letter Mu `"\u03bc"` instead to avoid issues.
 
 The `sensor` and `number` entity platforms now include a built-in feature to automatically convert units that use the ambiguous MICRO SIGN (μ) encoding.
 
