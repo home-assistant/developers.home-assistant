@@ -55,6 +55,31 @@ Entity device info is only read if the entity is loaded via a [config entry](con
 Each entity is able to define a device via the `device_info` property. This property is read when an entity is added to Home Assistant via a config entry. A device will be matched up with an existing device via supplied identifiers or connections, like serial numbers or MAC addresses. If identifiers and connections are provided, the device registry will first try to match by identifiers. Each identifier and each connection is matched individually (e.g. only one connection needs to match to be considered the same device).
 
 ```python
+# Definition of DeviceInfo TypedDict
+class DeviceInfo(TypedDict, total=False):
+    """Entity device information for device registry."""
+
+    configuration_url: str | URL | None
+    connections: set[tuple[str, str]]
+    created_at: str
+    default_manufacturer: str
+    default_model: str
+    default_name: str
+    entry_type: DeviceEntryType | None
+    identifiers: set[tuple[str, str]]
+    manufacturer: str | None
+    model: str | None
+    model_id: str | None
+    modified_at: str
+    name: str | None
+    serial_number: str | None
+    suggested_area: str | None
+    sw_version: str | None
+    hw_version: str | None
+    translation_key: str | None
+    translation_placeholders: Mapping[str, str] | None
+    via_device: tuple[str, str]
+
 # Inside a platform
 class HueLight(LightEntity):
     @property
@@ -81,6 +106,41 @@ Besides device properties, `device_info` can also include `default_manufacturer`
 Components are also able to register devices in the case that there are no entities representing them. An example is a hub that communicates with the lights.
 
 ```python
+# Definition of DeviceRegistry.async_get_or_create:
+class DeviceRegistry(BaseRegistry[dict[str, list[dict[str, Any]]]]):
+    ...
+
+    @callback
+    def async_get_or_create(
+        self,
+        *,
+        config_entry_id: str,
+        config_subentry_id: str | None | UndefinedType = UNDEFINED,
+        configuration_url: str | URL | None | UndefinedType = UNDEFINED,
+        connections: set[tuple[str, str]] | None | UndefinedType = UNDEFINED,
+        created_at: str | datetime | UndefinedType = UNDEFINED,  # will be ignored
+        default_manufacturer: str | None | UndefinedType = UNDEFINED,
+        default_model: str | None | UndefinedType = UNDEFINED,
+        default_name: str | None | UndefinedType = UNDEFINED,
+        # To disable a device if it gets created
+        disabled_by: DeviceEntryDisabler | None | UndefinedType = UNDEFINED,
+        entry_type: DeviceEntryType | None | UndefinedType = UNDEFINED,
+        hw_version: str | None | UndefinedType = UNDEFINED,
+        identifiers: set[tuple[str, str]] | None | UndefinedType = UNDEFINED,
+        manufacturer: str | None | UndefinedType = UNDEFINED,
+        model: str | None | UndefinedType = UNDEFINED,
+        model_id: str | None | UndefinedType = UNDEFINED,
+        modified_at: str | datetime | UndefinedType = UNDEFINED,  # will be ignored
+        name: str | None | UndefinedType = UNDEFINED,
+        serial_number: str | None | UndefinedType = UNDEFINED,
+        suggested_area: str | None | UndefinedType = UNDEFINED,
+        sw_version: str | None | UndefinedType = UNDEFINED,
+        translation_key: str | None = None,
+        translation_placeholders: Mapping[str, str] | None = None,
+        via_device: tuple[str, str] | None | UndefinedType = UNDEFINED,
+    ) -> DeviceEntry:
+        ...
+
 # Inside a component
 from homeassistant.helpers import device_registry as dr
 
