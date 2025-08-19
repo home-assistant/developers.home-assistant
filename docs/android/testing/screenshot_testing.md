@@ -56,11 +56,11 @@ Screenshot tests can fail when run on different operating systems due to subtle 
 
 We keep the threshold as low as possible to avoid masking real issues.
 
-A GitHub Action workflow, `update_screenshots.yml`, is available and can be manually triggered by a repository maintainer to update the screenshots so they match the verification host configuration. If your screenshot tests fail because of threshold differences, the maintainer addresses this during the review process.
-
-:::note
-This workflow only works for branches within the repository, not forks. Only people with write access can use it at this time.
+:::info
+The workflow to update screenshots on CI is limited to users with write access and only works for branches within the main repository. It is not available for forks or external contributors at this time.
 :::
+
+A GitHub Action workflow, `update_screenshots.yml`, is available and can be manually triggered by a repository maintainer to update the screenshots so they match the verification host configuration. If your screenshot tests fail because of threshold differences, a maintainer will address this during the review process.
 
 :::note
 This workflow commits directly to the branch, but it does not trigger the pull request workflow automatically. To trigger the workflow, make a new commit to your branch after the update.
