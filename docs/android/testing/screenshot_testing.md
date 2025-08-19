@@ -33,7 +33,7 @@ We use the [Compose Preview Screenshot Testing](https://developer.android.com/st
 The reference screenshots are stored under `src/debug/screenshotTest/reference` in each Gradle module. To update the reference screenshots, run the following command:
 
 ```bash
-./gradlew updateDebugScreenshotTest
+./gradlew updateDebugScreenshotTest updateFullDebugScreenshotTest
 ```
 
 ### CI integration
@@ -54,10 +54,17 @@ Screenshot tests can fail when run on different operating systems due to subtle 
 
 ### Current approach
 
-- We aim to keep the threshold as low as possible to avoid masking real issues.
-- If your tests fail due to minor rendering differences, you may need to adjust the threshold.
+We keep the threshold as low as possible to avoid masking real issues.
 
-To adjust the threshold, update the configuration in your test file to allow for slight variations while still catching significant changes.
+:::info
+The workflow to update screenshots on CI is limited to users with write access and only works for branches within the main repository. It is not available for forks or external contributors at this time.
+:::
+
+A GitHub Action workflow, `update_screenshots.yml`, is available and can be manually triggered by a repository maintainer to update the screenshots so they match the verification host configuration. If your screenshot tests fail because of threshold differences, a maintainer will address this during the review process.
+
+:::note
+This workflow commits directly to the branch, but it does not trigger the pull request workflow automatically. To trigger the workflow, make a new commit to your branch after the update.
+:::
 
 ## Best practices for screenshot testing
 
