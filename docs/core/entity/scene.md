@@ -36,9 +36,11 @@ class MyScene(Scene):
 The activate method can be used to activate the scene towards a device or service.
 It is called by Home Assistant when the user presses the scene `activate` button or when the `scene.turn_on` action is called to activate the scene.
 
-Some integrations can receive external events (for example, physical button presses) that activate scenes outside of Home Assistant. These activations do not originate from the Home Assistant UI or service calls, but from external sources such as hardware controllers or third-party systems.
+Some integrations can receive external events that activate scenes outside of Home Assistant. These activations do not originate from the Home Assistant UI or service calls, but from external sources such as physical buttons.
 
-To support this scenario, integrations should notify Home Assistant when an external scene activation occurs. This ensures the scene entity's state is updated and can be used in automations.
+To support this scenario, integrations should extend from `BaseScene` instead of `Scene`, override `_async_activate()` to handle the scene activation from the Home Assistant side, and call `_async_record_activation()` when an external scene activation occurs.
+
+Also, since these scenes activate outside of Home Assistant, the integration may want to delay updating scene state timestamp until the external scene reports being active, even when it is activated from the Home Assistant UI.
 
 ```python
 # Inherit from BaseScene
