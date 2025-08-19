@@ -1906,7 +1906,7 @@ Shutdown the host
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/host/disk/default/usage" method="get">
+<ApiEndpoint path="/host/disks/default/usage" method="get">
 Get detailed disk usage information in bytes.
 
 Supports an optional `max_depth` query param. Defaults to 1
@@ -1915,34 +1915,52 @@ Supports an optional `max_depth` query param. Defaults to 1
 
 ```json
 {
+  "id": "root",
+  "label": "Default",
   "total_space": 503312781312,
   "used_space": 430245011456,
-  "children": {
-    "addons_data": {
+  "children": [
+    {
+      "id": "system",
+      "label": "System",
+      "used_space": 75660903137
+    },
+    {
+      "id": "addons_data",
+      "label": "Addons data",
       "used_space": 42349200762
     },
-    "addons_config": {
+    {
+      "id": "addons_config",
+      "label": "Addons configuration",
       "used_space": 5283318814
     },
-    "media": {
+    {
+      "id": "media",
+      "label": "Media",
       "used_space": 476680019
     },
-    "share": {
+    {
+      "id": "share",
+      "label": "Share",
       "used_space": 37477206419
     },
-    "backup": {
+    {
+      "id": "backup",
+      "label": "Backup",
       "used_space": 268350699520
     },
-    "ssl": {
+    {
+      "id": "ssl",
+      "label": "SSL",
       "used_space": 202912633
     },
-    "homeassistant": {
+    {
+      "id": "homeassistant",
+      "label": "Home assistant",
       "used_space": 444090152
-    },
-    "system": {
-      "used_space": 75660903137
     }
-  }
+  ]
 }
 ```
 
