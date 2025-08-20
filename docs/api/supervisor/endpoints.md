@@ -1906,8 +1906,10 @@ Shutdown the host
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/host/disks/default/usage" method="get">
+<ApiEndpoint path="/host/disks/<disk>/usage" method="get">
 Get detailed disk usage information in bytes.
+
+The only supported `disk` for now is "default". It will return usage info for the data disk.
 
 Supports an optional `max_depth` query param. Defaults to 1
 
