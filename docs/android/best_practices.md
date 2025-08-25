@@ -38,7 +38,9 @@ Logging is essential but should be used judiciously. As Jake Wharton says in his
 
 When working with time, date, or duration, avoid using primitive types. Instead, use strong types to prevent unit mix-ups.
 
-### ❌ Don't do this
+:::note[Example]
+
+#### ❌ Don't do this
 
 ```kotlin
 const val THRESHOLD = 600000
@@ -52,7 +54,7 @@ fun main() {
 }
 ```
 
-### ✅ Do this
+#### ✅ Do this
 
 ```kotlin
 val THRESHOLD = Instant.ofEpochSecond(60)
@@ -65,6 +67,8 @@ fun main() {
     }
 }
 ```
+
+:::
 
 :::warning
 If you must use primitive types, ensure the variable name includes the unit (e.g., `THRESHOLD_MS` instead of `THRESHOLD`) to reduce ambiguity.
@@ -113,10 +117,55 @@ Naming is hard, but smaller functions make it easier to choose meaningful names.
 
 For more details, see [submit](/docs/android/submit).
 
-## Additional notes
+## Dependency injection (DI)
 
-- **Testing**: Write [unit tests](/docs/android/testing/unit_testing) for critical functionality to ensure reliability.
-- **Code reviews**: Always review code for adherence to these best practices.
+We use Dependency injection (DI) to help write modular, testable, and maintainable code. By using DI, we can decouple the classes from their dependencies, making it easier to swap implementations, write unit tests, and manage complex object graphs. DI also improves code readability and helps enforce the single responsibility principle.
+
+### Use explicit qualifier annotations over `@Named`
+
+When you need to inject multiple implementations of the same type (or primitive types), you must use a qualifier to distinguish between them. While the `@Named` annotation is a common approach, it relies on string identifiers, which can be error-prone and harder to refactor. Using custom qualifier annotations instead of `@Named` offers several advantages:
+
+- **Discoverability**: Custom qualifiers make it easier to find where a specific dependency is used in the codebase.
+- **Refactorability**: Renaming a custom annotation is straightforward and safe, while changing a string identifier requires searching for all string usages.
+- **Type safety**: Custom annotations are checked at compile time, reducing the risk of typos or mismatches that can occur with strings.
+- **Clarity**: Custom qualifiers make the code more self-explanatory and easier to understand.
+
+:::note[Example]
+
+#### ❌ Don't do this
+
+```kotlin
+@Inject
+@Named("keyChainRepository")
+lateinit var keyChainRepository: KeyChainRepository
+```
+
+#### ✅ Do this
+
+```kotlin
+@Inject
+@NamedKeyChain
+lateinit var keyChainRepository: KeyChainRepository
+```
+
+Define the annotation like this:
+
+```kotlin
+package io.homeassistant.companion.android.common.data.keychain
+
+import javax.inject.Qualifier
+
+/**
+ * Qualifier for the [KeyChainRepository] used to select the key chain.
+ */
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+annotation class NamedKeyChain
+```
+
+:::
+
+For a real-world example of migrating from `@Named("keyChainRepository")` to `@NamedKeyChain`, see [this pull request](https://github.com/home-assistant/android/pull/5667).
 
 ## Fail fast
 
