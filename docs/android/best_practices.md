@@ -38,6 +38,8 @@ Logging is essential but should be used judiciously. As Jake Wharton says in his
 
 When working with time, date, or duration, avoid using primitive types. Instead, use strong types to prevent unit mix-ups.
 
+:::note[Example]
+
 ### ❌ Don't do this
 
 ```kotlin
@@ -65,6 +67,8 @@ fun main() {
     }
 }
 ```
+
+:::
 
 :::warning
 If you must use primitive types, ensure the variable name includes the unit (e.g., `THRESHOLD_MS` instead of `THRESHOLD`) to reduce ambiguity.
@@ -126,7 +130,7 @@ When you need to inject multiple implementations of the same type (or primitive 
 - **Type safety**: Custom annotations are checked at compile time, reducing the risk of typos or mismatches that can occur with strings.
 - **Clarity**: Custom qualifiers make the code more self-explanatory and easier to understand.
 
-:::note
+:::note[Example]
 
 #### ❌ Don't do this
 
@@ -159,7 +163,7 @@ import javax.inject.Qualifier
 annotation class NamedKeyChain
 ```
 
-::::
+:::
 
 For a real-world example of migrating from `@Named("keyChainRepository")` to `@NamedKeyChain`, see [this pull request](https://github.com/home-assistant/android/pull/5667).
 
