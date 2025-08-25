@@ -40,7 +40,7 @@ When working with time, date, or duration, avoid using primitive types. Instead,
 
 :::note[Example]
 
-### ❌ Don't do this
+#### ❌ Don't do this
 
 ```kotlin
 const val THRESHOLD = 600000
@@ -54,7 +54,7 @@ fun main() {
 }
 ```
 
-### ✅ Do this
+#### ✅ Do this
 
 ```kotlin
 val THRESHOLD = Instant.ofEpochSecond(60)
