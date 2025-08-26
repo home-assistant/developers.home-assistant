@@ -55,7 +55,7 @@ class MyScene(BaseScene):
     # Record the activation in the callback of your service
     async def _state_received(self, msg: ReceiveMessage) -> None:
         self._async_record_activation()
-        self.async_schedule_update_ha_state()
+        self.async_write_ha_state()
 ```
 
 ### Available device classes
