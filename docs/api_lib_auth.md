@@ -36,7 +36,7 @@ class Auth:
         """Make a request."""
         if headers := kwargs.pop("headers", {}):
             headers = dict(headers)
-        headers["authorization"] = self.access_token
+        headers["authorization"] = f"Bearer {self.access_token}"
 
         return await self.websession.request(
             method, f"{self.host}/{path}", **kwargs, headers=headers,
@@ -83,7 +83,7 @@ class Auth:
         """Make a request."""
         if headers := kwargs.pop("headers", {}):
             headers = dict(headers)
-        headers["authorization"] = self.access_token
+        headers["authorization"] = f"Bearer {self.access_token}"
 
         return requests.request(
             method, f"{self.host}/{path}", **kwargs, headers=headers,
