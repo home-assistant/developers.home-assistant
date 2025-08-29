@@ -129,7 +129,7 @@ fun newInstance(destination: Destination): Intent {
 }
 
 fun onIntent(intent: Intent) {
-    val destination = intent.getParcelableExtra<Destination>(DESTINATION_KEY, Destination::class.java)
+    val destination = IntentCompat.getParcelableExtra(intent,DESTINATION_KEY, Destination::class.java)
     when (destination) {
         Destination.General -> // Handle General
         Destination.Notifications -> // Handle Notifications
@@ -150,6 +150,9 @@ Sealed classes provide more flexibility and safety than enums. With sealed class
 For example, if the `Notifications` destination needs a `title` parameter, define it like this:
 
 ```kotlin
+
+private const val DESTINATION_KEY = "destination"
+
 @Parcelize
 sealed interface Destination : Parcelable {
     data object General : Destination
@@ -158,7 +161,7 @@ sealed interface Destination : Parcelable {
 }
 
 fun onIntent(intent: Intent) {
-    val destination = intent.getParcelableExtra<Destination>(DESTINATION_KEY, Destination::class.java)
+    val destination = IntentCompat.getParcelableExtra(intent,DESTINATION_KEY, Destination::class.java)
     when (destination) {
         Destination.General -> // Handle General
         is Destination.Notifications -> {
