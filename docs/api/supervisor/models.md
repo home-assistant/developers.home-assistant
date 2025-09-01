@@ -169,15 +169,27 @@ These models are describing objects that are getting returned from the superviso
 
 ## Backup
 
-| key       | type    | description                                                           |
-| --------- | ------- | --------------------------------------------------------------------- |
-| slug      | string  | A generated slug for the backup                                     |
-| date      | string  | ISO date string representation of the date the backup was created |
-| name      | string  | The name given to the backup                                        |
-| type      | string  | The type of backup (full, partial)                                  |
-| protected | boolean | `true` if the backup is password protected                          |
-| content | dictionary | A dictionary describing the content of the backup                  |
-| compressed | boolean | `true` if the backup is saved in a compressed archive              |
+| key        | type           | deprecated | description                                                                            |
+| ---------- | -------------- | ---------- | -------------------------------------------------------------------------------------- |
+| slug       | string         | no         | A generated slug for the backup                                                        |
+| date       | string         | no         | ISO date string representation of the date the backup was created                      |
+| name       | string         | no         | The name given to the backup                                                           |
+| type       | string         | no         | The type of backup (full, partial)                                                     |
+| content    | dictionary     | no         | A dictionary describing the content of the backup                                      |
+| compressed | boolean        | no         | `true` if the backup is saved in a compressed archive                                  |
+| location_attributes | dictionary | no    | A dictionary of [`location_attributes`](#backup---location-attributes) keyed by location the backup exists in. `.local` is the key if backup exists is in local `/backup` folder |
+| size       | float          | yes        | Size of the backup in MB (rounded)                                                     |
+| size_bytes | int            | yes        | Size of the backup in bytes                                                            |
+| location   | string or null | yes        | The name of the backup mount it's stored on. `null` if it's stored locally             |
+| locations  | list           | yes        | List of names of all backup mounts it's stored on and/or `null` if it's stored locally |
+| protected  | boolean        | yes        | `true` if the backup is password protected                                             |
+
+### Backup -> location attributes
+
+| key        | type           | description                           |
+| ---------- | -------------- | ------------------------------------- |
+| protected  | boolean        | Backup is password protected          |
+| size_bytes | int            | Size of the backup in bytes           |
 
 ### Backup -> content
 
@@ -191,20 +203,26 @@ The `content` key of a backup object contains the following keys:
 
 ## Backup details
 
-| key                            | type           | description                                                                                                               |
-| ------------------------------ | -------------- | ------------------------------------------------------------------------------------------------------------------------- |
-| slug                           | string         | A generated slug for the backup                                                                                           |
-| type                           | string         | The type of backup (full, partial)                                                                                        |
-| name                           | string         | The name given to the backup                                                                                              |
-| date                           | string         | ISO date string representation of the date the backup was created                                                         |
-| size                           | string         | The size of the backup in MB                                                                                              |
-| protected                      | boolean        | `true` if the backup is password protected                                                                                |
-| location                       | string or null | The name of the backup mount it's stored on.  `null` if it's stored locally.                                              |
-| homeassistant                  | string         | The version of Home Assistant that was in use                                                                             |
-| addons                         | list           | A list of add-ons in the backup. Add-ons are represented as a dictionary with these keys [`slug`,`name`,`version`,`size`] |
-| repositories                   | list           | A list of add-on repository URL's as strings                                                                              |
-| folders                        | list           | A list of strings representing directories                                                                                |
-| homeassistant_exclude_database | boolean        | `true` if the Home Assistant database file was excluded from this backup                                                  |
+| key                            | type           | deprecated | description                                                                                                               |
+| ------------------------------ | -------------- | ---------- | ------------------------------------------------------------------------------------------------------------------------- |
+| slug                           | string         | no         | A generated slug for the backup                                                                                           |
+| type                           | string         | no         | The type of backup (full, partial)                                                                                        |
+| name                           | string         | no         | The name given to the backup                                                                                              |
+| date                           | string         | no         | ISO date string representation of the date the backup was created                                                         |
+| compressed                     | boolean        | no         | `true` if the backup is saved in a compressed archive                                                                     |
+| location_attributes            | dictionary     | no         | A dictionary of [`location_attributes`](#backup---location-attributes) keyed by location the backup exists in. `.local` is the key if backup exists is in local `/backup` folder |
+| supervisor_version             | string         | no         | The version of Supervisor the backup was created on. Backup can only be restored on Supervisor with same version or later |
+| homeassistant                  | string or null | no         | The version of Home Assistant that was in use. `null` if Home Assistant is not included in the backup                     |
+| addons                         | list           | no         | A list of add-ons in the backup. Add-ons are represented as a dictionary with these keys [`slug`,`name`,`version`,`size`] |
+| repositories                   | list           | no         | A list of add-on repository URL's as strings                                                                              |
+| folders                        | list           | no         | A list of strings representing directories                                                                                |
+| homeassistant_exclude_database | boolean        | no         | `true` if the Home Assistant database file was excluded from this backup                                                  |
+| extra                          | dictionary     | no         | A dictionary of extra metadata set by client on creation of the backup                                                    |
+| size                           | float          | yes        | Size of the backup in MB (rounded)                                                                                        |
+| size_bytes                     | int            | yes        | Size of the backup in bytes                                                                                               |
+| location                       | string or null | yes        | The name of the backup mount it's stored on. `null` if it's stored locally                                                |
+| locations                      | list           | yes        | List of names of all backup mounts it's stored on and/or `null` if it's stored locally                                    |
+| protected                      | boolean        | yes        | `true` if the backup is password protected                                                                                |
 
 ## Stats
 
@@ -272,19 +290,20 @@ The `content` key of a backup object contains the following keys:
 
 ## Mount
 
-| key        | type           | description                                                            | request/response |
-| ---------- | -------------- | ---------------------------------------------------------------------- | ---------------- |
-| name       | string         | Name of the mount                                                      | both             |
-| type       | string         | Type of the mount (cifs or nfs)                                        | both             |
-| usage      | string         | Usage of the mount (backup, media, or share)                           | both             |
-| server     | string         | IP address or hostname of the network share server                     | both             |
-| port       | int            | Port to use (if not using the standard one for the mount type)         | both             |
-| read_only  | bool           | Mount is read-only (not available for backup mounts)                   | both             |
-| path       | string         | (nfs mounts only) Path to mount from the network share                 | both             |
-| share      | string         | (cifs mounts only) Share to mount from the network share               | both             |
-| username   | string         | (cifs mounts only) Username to use for authentication                  | request only     |
-| password   | string         | (cifs mounts only) Password to use for authentication                  | request only     |
-| state      | string         | Current state of the mount (active, failed, etc.)                      | response only    |
+| key        | type           | description                                                                                     | request/response |
+| ---------- | -------------- | ----------------------------------------------------------------------------------------------- | ---------------- |
+| name       | string         | Name of the mount                                                                               | both             |
+| type       | string         | Type of the mount (cifs or nfs)                                                                 | both             |
+| usage      | string         | Usage of the mount (backup, media, or share)                                                    | both             |
+| server     | string         | IP address or hostname of the network share server                                              | both             |
+| port       | int            | Port to use (if not using the standard one for the mount type)                                  | both             |
+| read_only  | bool           | Mount is read-only (not available for backup mounts)                                            | both             |
+| path       | string         | (nfs mounts only) Path to mount from the network share                                          | both             |
+| share      | string         | (cifs mounts only) Share to mount from the network share                                        | both             |
+| username   | string         | (cifs mounts only) Username to use for authentication                                           | request only     |
+| password   | string         | (cifs mounts only) Password to use for authentication                                           | request only     |
+| state      | string         | Current state of the mount (active, failed, etc.)                                               | response only    |
+| user_path  | string or null | Path to the mount in add-ons or Home Assistant if it can be made available there, `null` if not | response only    |
 
 Request only fields may be included in requests but will never be in responses.
 Response only fields will be in responses but cannot be included in requests.
