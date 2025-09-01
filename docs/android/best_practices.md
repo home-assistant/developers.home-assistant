@@ -129,7 +129,7 @@ fun newInstance(destination: Destination): Intent {
 }
 
 fun onIntent(intent: Intent) {
-    val destination = IntentCompat.getParcelableExtra(intent,DESTINATION_KEY, Destination::class.java)
+    val destination = IntentCompat.getParcelableExtra(intent, DESTINATION_KEY, Destination::class.java)
     when (destination) {
         Destination.General -> // Handle General
         Destination.Notifications -> // Handle Notifications
@@ -161,7 +161,7 @@ sealed interface Destination : Parcelable {
 }
 
 fun onIntent(intent: Intent) {
-    val destination = IntentCompat.getParcelableExtra(intent,DESTINATION_KEY, Destination::class.java)
+    val destination = IntentCompat.getParcelableExtra(intent, DESTINATION_KEY, Destination::class.java)
     when (destination) {
         Destination.General -> // Handle General
         is Destination.Notifications -> {
