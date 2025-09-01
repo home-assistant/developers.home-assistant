@@ -1516,23 +1516,38 @@ Returns information about the docker instance.
 
 **Returned data:**
 
-key | type | description
--- | -- | --
-version | string | The version of the docker engine
-storage | string | The storage type
-logging | string | The logging type
-registries | dictionary | A dictionary of dictionaries containing `username` and `password` keys for registries.
+| key         | type   | description                        |
+| ----------- | ------ | ---------------------------------- |
+| version     | string | The version of the docker engine   |
+| enable_ipv6 | bool   | Enable/Disable IPv6 for containers |
+| storage     | string | The storage type                   |
+| logging     | string | The logging type                   |
+| registries  | dictionary | A dictionary of dictionaries containing `username` and `password` keys for registries. |
 
 **Example response:**
 
 ```json
 {
   "version": "1.0.1",
+  "enable_ipv6": true,
   "storage": "overlay2",
   "logging": "journald",
   "registries": {}
 }
 ```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/docker/options" method="post">
+Set docker options
+
+**Payload:**
+
+| key         | type | optional | description                        |
+| ----------- | ---- | -------- | ---------------------------------- |
+| enable_ipv6 | bool | True     | Enable/Disable IPv6 for containers |
+
+**You need to supply at least one key in the payload.**
 
 </ApiEndpoint>
 
