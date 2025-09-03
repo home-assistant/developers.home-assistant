@@ -579,6 +579,10 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         "menu_options": {
           "discovery": "Discovery",
           "manual": "Manual ({model})",
+        },
+        "menu_option_descriptions": {
+          "discovery": "Description of discovery",
+          "manual": "Description of manual",
         }
       }
     }
