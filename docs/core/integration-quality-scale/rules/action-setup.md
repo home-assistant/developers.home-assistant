@@ -16,6 +16,8 @@ We rather prefer integrations to set up their service actions in the `async_setu
 This way we can let the user know why the service action did not work, if the targeted configuration entry is not loaded.
 The validation should happen inside the service action, and should raise `ServiceValidationError` if the input is invalid.
 
+Entity service should be registered from the platform's `async_setup_entry`, but they should not be removed when the platform is unloaded.
+
 ## Example implementation
 
 The example below is a snippet where the service action is registered in the `async_setup` method.
