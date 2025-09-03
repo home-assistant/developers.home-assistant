@@ -586,6 +586,8 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
 }
 ```
 
+Passing `sort=True` to async_show_menu will also sort the menu items by their label in the user's language.
+
 ## Initializing a config flow from an external source
 
 You might want to initialize a config flow programmatically. For example, if we discover a device on the network that requires user interaction to finish setup. To do so, pass a source parameter and optional user input when initializing a flow:
