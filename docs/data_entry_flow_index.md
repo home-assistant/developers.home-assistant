@@ -549,7 +549,7 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
 ### Show menu
 
-This will show a navigation menu to the user to easily pick the next step. The menu labels can be hardcoded by specifying a dictionary of `{step_id: label}` or translated via `strings.json` when specifying a list.
+This will show a navigation menu to the user to easily pick the next step. The menu labels can be hardcoded by specifying a dictionary of `{step_id: label}` or translated via `strings.json` under "menu_options" when specifying a list. Additionally menu descriptions can be provided via `strings.json` under "menu_option_descriptions".
 
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
@@ -579,6 +579,10 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         "menu_options": {
           "discovery": "Discovery",
           "manual": "Manual ({model})",
+        },
+        "menu_option_descriptions": {
+          "discovery": "Description of discovery",
+          "manual": "Description of manual",
         }
       }
     }
