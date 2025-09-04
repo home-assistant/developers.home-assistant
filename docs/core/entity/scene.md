@@ -23,7 +23,7 @@ Other properties that are common to all entities such as `icon` and `name` etc a
 Activate the scene.
 
 ```python
-class MySwitch(Scene):
+class MyScene(Scene):
     # Implement one of these methods.
 
     def activate(self, **kwargs: Any) -> None:
@@ -35,6 +35,28 @@ class MySwitch(Scene):
 
 The activate method can be used to activate the scene towards a device or service.
 It is called by Home Assistant when the user presses the scene `activate` button or when the `scene.turn_on` action is called to activate the scene.
+
+Some integrations can receive external events that activate scenes outside of Home Assistant. These activations do not originate from the Home Assistant UI or service calls, but from external sources such as physical buttons.
+
+To support this scenario, integrations should extend from `BaseScene` instead of `Scene`, override `_async_activate()` to handle the scene activation from the Home Assistant side, and call `_async_record_activation()` when an external scene activation occurs.
+
+Also, since these scenes activate outside of Home Assistant, the integration may want to delay updating scene state timestamp until the external scene reports being active, even when it is activated from the Home Assistant UI.
+
+```python
+# Inherit from BaseScene
+class MyScene(BaseScene):
+
+    # Note the leading underscore
+    async def _async_activate(self, **kwargs: Any) -> None:
+        """Activate scene."""
+        # Call a service to activate scene
+        await mqtt.async_publish(self.hass, self._topic, self._payload)
+
+    # Record the activation in the callback of your service
+    async def _state_received(self, msg: ReceiveMessage) -> None:
+        self._async_record_activation()
+        self.async_write_ha_state()
+```
 
 ### Available device classes
 
