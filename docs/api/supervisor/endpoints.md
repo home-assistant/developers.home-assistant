@@ -3229,6 +3229,12 @@ Returns information about a store add-on
 
 Install an add-on from the store.
 
+**Payload:**
+
+| key        | type    | description                                                                                         |
+| ---------- | ------- | --------------------------------------------------------------------------------------------------- |
+| background | boolean | Return `job_id` immediately, do not wait for install to complete. Clients must check job for status |
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/store/addons/<addon>/update" method="post">
@@ -3237,9 +3243,10 @@ Update an add-on from the store.
 
 **Payload:**
 
-| key     | type   | description                                                    |
-| ------- | ------ | -------------------------------------------------------------- |
-| backup | boolean | Create a partial backup of the add-on, default is false |
+| key        | type    | description                                                                                        |
+| ---------- | ------- | -------------------------------------------------------------------------------------------------- |
+| backup     | boolean | Create a partial backup of the add-on, default is false                                            |
+| background | boolean | Return `job_id` immediately, do not wait for update to complete. Clients must check job for status |
 
 </ApiEndpoint>
 
