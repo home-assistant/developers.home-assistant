@@ -2041,7 +2041,7 @@ Validate an ingress session, extending it's validity period.
 ### Jobs
 
 <ApiEndpoint path="/jobs/info" method="get">
-Returns info on ignored job conditions and currently running jobs
+Returns info on ignored job conditions and currently running or completed jobs
 
 **Returned data:**
 
@@ -2062,7 +2062,8 @@ Returns info on ignored job conditions and currently running jobs
     "progress": 0,
     "stage": "addons",
     "done": false,
-    "child_jobs": []
+    "child_jobs": [],
+    "extra": None
   }]
 }
 ```
@@ -2079,6 +2080,35 @@ Set options for job manager
 | ignore_conditions | list       | List of job conditions to ignore (replaces existing list) |
 
 </ApiEndpoint>
+
+<ApiEndpoint path="/jobs/<job_id>" method="get">
+Returns info on a currently running or completed job
+
+**Returned data:**
+
+See [Job](api/supervisor/models.md#job) model
+
+**Example response:**
+
+```json
+{
+  "name": "backup_manager_full_backup",
+  "reference": "a01bc3",
+  "uuid": "123456789",
+  "progress": 0,
+  "stage": "addons",
+  "done": false,
+  "child_jobs": [],
+  "extra": None
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/jobs/<job_id>" method="delete">
+Removes a completed job from Supervisor cache if client is no longer interested in it
+</ApiEndpoint>
+
 
 <ApiEndpoint path="/jobs/reset" method="post">
 Reset job manager to defaults (stops ignoring any ignored job conditions)
@@ -2921,19 +2951,19 @@ If running on a green board, changes one or more of its settings.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/resolution/suggestion/<uuid>" method="post">
+<ApiEndpoint path="/resolution/suggestion/<suggestion>" method="post">
 
 Apply a suggested action
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/resolution/suggestion/<uuid>" method="delete">
+<ApiEndpoint path="/resolution/suggestion/<suggestion>" method="delete">
 
 Dismiss a suggested action
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/resolution/issue/<uuid>/suggestions" method="get">
+<ApiEndpoint path="/resolution/issue/<issue>/suggestions" method="get">
 
 Get suggestions that would fix an issue if applied.
 
@@ -2961,7 +2991,7 @@ Get suggestions that would fix an issue if applied.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/resolution/issue/<uuid>" method="delete">
+<ApiEndpoint path="/resolution/issue/<issue>" method="delete">
 
 Dismiss an issue
 
@@ -2973,7 +3003,7 @@ Execute a healthcheck and autofix & notifcation.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/resolution/check/<slug>/options" method="post">
+<ApiEndpoint path="/resolution/check/<check>/options" method="post">
 
 Set options for this check.
 
@@ -2985,7 +3015,7 @@ Set options for this check.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/resolution/check/<slug>/run" method="post">
+<ApiEndpoint path="/resolution/check/<check>/run" method="post">
 
 Execute a specific check right now.
 
@@ -3580,10 +3610,19 @@ Some of the endpoints uses placeholders indicated with `<...>` in the endpoint U
 | placeholder | description                                                                                                                                           |
 | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | addon       | The slug for the addon, to get the slug you can call `/addons`, to call endpoints for the add-on calling the endpoints you can use `self`as the slug. |
-| application | The name of an application, call `/audio/info` to get the correct name                                                                                 |
-| interface   | A valid interface name, example `eth0`, to get the interface name you can call `/network/info`. You can use `default` to get the primary interface |
+| application | The name of an application, call `/audio/info` to get the correct name                                                                                |
+| backup      | A valid backup slug, example `skuwe823`, to get the slug you can call `/backups`                                                                      |
+| bootid      | An id or offset of a particular boot, used to filter logs. Call `/host/logs/boots` to get a list of boot ids or see `/host/logs/boots/<bootid>` to understand boot offsets |
+| check       | The slug of a system check in Supervisor's resolution manager. Call `/resolution/info` for a list of options from the `checks` field                  |
+| disk        | Identifier of a disk attached to host or `default`. See `/host/disks/<disk>/usage` for more details                                                   |
+| id          | Numeric id of a vlan on a particular interface. See `/network/interface/<interface>/vlan/<id>` for details                                            |         
+| identifier  | A syslog identifier used to filter logs. Call `/host/logs/identifiers` to get a list of options. See `/host/logs/identifiers/<identifier>` for some common examples |
+| interface   | A valid interface name, example `eth0`, to get the interface name you can call `/network/info`. You can use `default` to get the primary interface    |
+| issue       | The UUID of an issue with the system identified by Supervisor. Call `/resolution/info` for a list of options from the `issues` field                  |
+| job_id      | The UUID of a currently running or completed Supervisor job                                                                                           |
+| name        | Name of a mount added to Supervisor. Call `/mounts` to get a list of options from `mounts` field                                                      |
 | registry    | A registry hostname defined in the container registry configuration, to get the hostname you can call `/docker/registries`                            |
+| repository  | The slug of an addon repository added to Supervisor. Call `/store` for a list of options from the `repositories` field                                |
 | service     | The service name for a service on the host.                                                                                                           |
-| backup    | A valid backup slug, example `skuwe823`, to get the slug you can call `/backups`                                                                  |
-| suggestion  | A valid suggestion, example `clear_full_backup`, to get the suggestion you can call `/resolution`                                         |
+| suggestion  | The UUID of a suggestion for a system issue identified by Supervisor. Call `/resolution/info` for a list of options from the `suggestions` field      |
 | uuid        | The UUID of a discovery service, to get the UUID you can call `/discovery`                                                                            |
