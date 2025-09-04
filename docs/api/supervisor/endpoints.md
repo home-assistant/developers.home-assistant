@@ -3259,6 +3259,14 @@ Get the add-on icon
 Get the add-on logo
 </ApiEndpoint>
 
+<ApiEndpoint path="/store/addons/<addon>/availability" method="get">
+
+Returns 200 success status if the latest version of the add-on is able to be
+installed on the current system. Returns a 400 error status if it is not with a
+message explaining why.
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/store/reload" method="post">
 
 Reloads the information stored about add-ons.
