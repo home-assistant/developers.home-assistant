@@ -313,6 +313,7 @@ Response only fields will be in responses but cannot be included in requests.
 | created    | string  | Date and time when job was created in ISO format              |
 | child_jobs | list    | A list of child [jobs](#job) started by this one              |
 | errors     | list    | A list of [errors](#job-error) that occurred during execution |
+| extra      | dict    | A dictionary containing additional metadata relevant to the particular job or stage (if applicable) |
 
 ## Job error
 
