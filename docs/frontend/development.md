@@ -11,6 +11,8 @@ Do not use development mode in production. Home Assistant uses aggressive cachin
 
 ## Setting up the environment
 
+Follow our [devcontainer development environment](/docs/setup_devcontainer_environment) guide to set up a proper development environment first.
+
 ### Getting the code
 
 The first step is to fork the [frontend repository][hass-frontend] and add the upstream remote. You can place the forked repository anywhere on your system.
