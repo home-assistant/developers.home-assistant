@@ -3,7 +3,7 @@ title: "Python library: authentication"
 sidebar_label: Authentication
 ---
 
-This page is intended for general API development, see [Home Assistant REST API api documentation](api/rest.md) for interacting with Home Assistant's API.  
+This page is intended for general API development of a 3rd party library aiming to integrate a 3rd party API. See [Home Assistant REST API documentation](/docs/api/rest.md) for interacting with Home Assistant's API.  
 
 The Authentication part of your library is responsible for acquiring authentication and for making authenticated requests. It should not be aware of what is in the requests.
 
