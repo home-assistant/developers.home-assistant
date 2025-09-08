@@ -255,6 +255,16 @@ We support:
 - `list(val1|val2|...)`: A string from a fixed set (`val1`, `val2`, ...) of values.
 - `device` / `device(filter)`: A string referencing a device path (e.g. `/dev/ttyS0`).
    Device filter can be in the following format: `subsystem=TYPE` (e.g. `subsystem=tty` for serial devices).
+- Lists of some underlying element type:
+  ```yaml
+  random:
+  - "match(^\\w*$)"
+- Nested dictionaries, e.g.:
+  ```yaml
+  logins:
+    - username: str
+      password: str
+  ```
 
 ## Add-on extended build
 
