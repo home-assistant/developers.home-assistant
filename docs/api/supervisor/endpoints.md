@@ -2063,7 +2063,7 @@ Returns info on ignored job conditions and currently running or completed jobs
     "stage": "addons",
     "done": false,
     "child_jobs": [],
-    "extra": None
+    "extra": null
   }]
 }
 ```
@@ -2099,7 +2099,7 @@ See [Job](api/supervisor/models.md#job) model
   "stage": "addons",
   "done": false,
   "child_jobs": [],
-  "extra": None
+  "extra": null
 }
 ```
 
