@@ -3569,7 +3569,7 @@ Update the supervisor
 
 | key     | type   | description                                                    |
 | ------- | ------ | -------------------------------------------------------------- |
-| version | string | The version you want to install, default is the latest version |
+| version | string | The version to install, defaults to latest. This option is only intended for development purposes and does not work outside of the Supervisor dev environment. |
 
 </ApiEndpoint>
 
