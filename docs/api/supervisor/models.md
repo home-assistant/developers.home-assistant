@@ -320,6 +320,7 @@ Response only fields will be in responses but cannot be included in requests.
 | ---------- | ------- | ---------------------------------------------- |
 | type       | string  | Type of error that occurred                    |
 | message    | string  | Human-readable description of what went wrong  |
+| stage      | string  | A name for the stage the job was in at the time the error occurred (if applicable) |
 
 ## Boot slot
 
