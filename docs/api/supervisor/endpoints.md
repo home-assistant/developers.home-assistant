@@ -1708,6 +1708,11 @@ Return information about the host.
 | llmnr_hostname   | string or null | The hostname currently exposed on the network via LLMNR for host |
 | operating_system | string         | The operating system on the host          |
 | startup_time     | float          | The time in seconds it took for last boot |
+| disk_life_time   | float          | Percent of disk life time used based on manufacturer estimate |
+| timezone         | string         | The current timezone of host              |
+| dt_utc           | string         | Current date and time on host in UTC timezone and ISO 8601 format |
+| dt_synchronized  | bool           | True if the host is synchronized with an NTP service |
+| use_ntp          | bool           | True if host is using an NTP service for time synchronization |
 
 **Example response:**
 
@@ -1729,7 +1734,13 @@ Return information about the host.
   "boot_timestamp": 1234567788,
   "startup_time": 12.345,
   "broadcast_llmnr": true,
-  "broadcast_mdns": false
+  "broadcast_mdns": false,
+  "virtualization": "",
+  "disk_life_time": 10.0,
+  "timezone": "Europe/Tomorrowland",
+  "dt_utc": "2025-09-08T12:00:00.000000+00:00",
+  "dt_synchronized": true,
+  "use_ntp": true
 }
 ```
 
