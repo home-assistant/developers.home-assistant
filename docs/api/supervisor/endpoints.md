@@ -1747,6 +1747,23 @@ log record per line.
 | Accept   | true     | Type of data (text/plain or text/x-log)                                       |
 | Range    | true     | Range of log entries. The format is `entries=cursor[[:num_skip]:num_entries]` |
 
+**HTTP Query Parameters**
+
+These are a convenience alternative to the headers shown above as query
+parameters are easier to use in development and with the Home Assistant proxy.
+You should only provide one or the other.
+
+| Query    | type  | description                                                                        |
+| -------- | ----- |----------------------------------------------------------------------------------- |
+| verbose  | N/A   | If included, uses `text/x-log` as log output type (alternative to `Accept` header) |
+| lines    | int   | Number of lines of output to return (alternative to `Range` header)                |
+
+Example query string:
+
+```text
+?verbose&lines=100
+```
+
 :::tip
 To get the last log entries the Range request header supports negative values
 as `num_skip`. E.g. `Range: entries=:-9:` returns the last 10 entries. Or
