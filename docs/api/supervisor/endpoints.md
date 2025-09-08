@@ -2048,7 +2048,7 @@ Returns info on ignored job conditions and currently running or completed jobs
 | key               | type       | description                                                    |
 | ----------------- | ---------- | -------------------------------------------------------------- |
 | ignore_conditions | list       | List of job conditions being ignored                           |
-| jobs              | list       | List of currently running [Jobs](api/supervisor/models.md#job) |
+| jobs              | list       | List of running or completed [Jobs](api/supervisor/models.md#job) |
 
 **Example response:**
 
