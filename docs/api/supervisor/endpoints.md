@@ -1708,7 +1708,7 @@ Return information about the host.
 | llmnr_hostname   | string or null | The hostname currently exposed on the network via LLMNR for host |
 | operating_system | string         | The operating system on the host          |
 | startup_time     | float          | The time in seconds it took for last boot |
-| disk_life_time   | float          | Percentage of estimated disk lifetime used (0–100). |
+| disk_life_time   | float or null  | Percentage of estimated disk lifetime used (0–100). Not all disks provide this information, returns `null` if unavailable. |
 | timezone         | string         | The current timezone of the host. |
 | dt_utc           | string         | Current UTC date/time of the host in ISO 8601 format. |
 | dt_synchronized  | bool           | `true` if the host is synchronized with an NTP service. |
