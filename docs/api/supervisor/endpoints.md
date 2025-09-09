@@ -78,6 +78,14 @@ Identical to `/addons/<addon>/logs` except it continuously returns new log entri
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/addons/<addon>/logs/latest" method="get">
+
+Return all logs of the latest startup of the add-on container.
+
+The `Range` header is ignored but the `lines` query parameter can be used.
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/addons/<addon>/logs/boots/<bootid>" method="get">
 
 Get logs for an add-on related to a specific boot.
@@ -572,6 +580,14 @@ The endpoint accepts the same headers and provides the same functionality as
 <ApiEndpoint path="/audio/logs/follow" method="get">
 
 Identical to `/audio/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/audio/logs/latest" method="get">
+
+Return all logs of the latest startup of the audio plugin container.
+
+The `Range` header is ignored but the `lines` query parameter can be used.
 
 </ApiEndpoint>
 
@@ -1204,6 +1220,14 @@ Identical to `/core/logs` except it continuously returns new log entries.
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/core/logs/latest" method="get">
+
+Return all logs of the latest startup of the Home Assistant Core container.
+
+The `Range` header is ignored but the `lines` query parameter can be used.
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/core/logs/boots/<bootid>" method="get">
 
 Get logs for the Home Assistant Core container related to a specific boot.
@@ -1435,6 +1459,14 @@ The endpoint accepts the same headers and provides the same functionality as
 <ApiEndpoint path="/dns/logs/follow" method="get">
 
 Identical to `/dns/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/dns/logs/latest" method="get">
+
+Return all logs of the latest startup of the DNS plugin container.
+
+The `Range` header is ignored but the `lines` query parameter can be used.
 
 </ApiEndpoint>
 
@@ -2365,6 +2397,14 @@ The endpoint accepts the same headers and provides the same functionality as
 <ApiEndpoint path="/multicast/logs/follow" method="get">
 
 Identical to `/multicast/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/multicast/logs/latest" method="get">
+
+Return all logs of the latest startup of the multicast plugin container.
+
+The `Range` header is ignored but the `lines` query parameter can be used.
 
 </ApiEndpoint>
 
@@ -3503,6 +3543,14 @@ The endpoint accepts the same headers and provides the same functionality as
 <ApiEndpoint path="/supervisor/logs/follow" method="get">
 
 Identical to `/supervisor/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/supervisor/logs/latest" method="get">
+
+Return all logs of the latest startup of the Supervisor container.
+
+The `Range` header is ignored but the `lines` query parameter can be used.
 
 </ApiEndpoint>
 
