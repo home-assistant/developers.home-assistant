@@ -10,7 +10,7 @@ This is a simple "hello world" example to show the basics of registering a servi
 Actions can be called from automations and from the actions "Developer tools" in the frontend.
 
 ```python
-from homeassistant.core import HomeAssistant, ServiceCall
+from homeassistant.core import HomeAssistant, ServiceCall, callback
 from homeassistant.helpers.typing import ConfigType
 
 DOMAIN = "hello_action"
@@ -285,12 +285,13 @@ Example code:
 
 ```python
 import datetime
+
 import voluptuous as vol
+
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, ServiceCall, ServiceResponse, SupportsResponse
 from homeassistant.helpers import config_validation as cv, entity_platform, service
 from homeassistant.util.json import JsonObjectType
-
 
 SEARCH_ITEMS_SERVICE_NAME = "search_items"
 SEARCH_ITEMS_SCHEMA = vol.Schema({
