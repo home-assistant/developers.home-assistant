@@ -262,7 +262,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
          DOMAIN,
          SERVICE_SET_TIMER,
          entity_domain=MEDIA_PLAYER_DOMAIN,
-        schema={vol.Required("sleep_time"): cv.time_period},
+         schema={vol.Required("sleep_time"): cv.time_period},
          func="set_sleep_timer",
      )
     return True
