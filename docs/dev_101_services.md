@@ -10,22 +10,26 @@ This is a simple "hello world" example to show the basics of registering a servi
 Actions can be called from automations and from the actions "Developer tools" in the frontend.
 
 ```python
+from homeassistant.core import HomeAssistant, ServiceCall
+from homeassistant.helpers.typing import ConfigType
+
 DOMAIN = "hello_action"
 
 ATTR_NAME = "name"
 DEFAULT_NAME = "World"
 
 
-def setup(hass, config):
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     """Set up is called when Home Assistant is loading our component."""
 
-    def handle_hello(call):
+    @callback
+    def handle_hello(call: ServiceCall) -> None:
         """Handle the service action call."""
         name = call.data.get(ATTR_NAME, DEFAULT_NAME)
 
-        hass.states.set("hello_action.hello", name)
+        hass.states.async_set("hello_action.hello", name)
 
-    hass.services.register(DOMAIN, "hello", handle_hello)
+    hass.services.async_register(DOMAIN, "hello", handle_hello)
 
     # Return boolean to indicate that initialization was successful.
     return True
