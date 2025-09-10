@@ -256,7 +256,7 @@ SERVICE_SET_TIMER = "set_sleep_timer"
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     """Set up the Sonos integration."""
 
-     # This will call each entity's `set_sleep_timer` method with `sleep_time=VALUE`
+    # This will call each entity's `set_sleep_timer` method with `sleep_time=VALUE`
     service.async_register_platform_entity_service(
          hass,
          DOMAIN,
