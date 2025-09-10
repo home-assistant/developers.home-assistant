@@ -315,13 +315,13 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             ],
         }
 
-      hass.services.async_register(
+       hass.services.async_register(
           DOMAIN,
-          SEARCH_ITEMS_SERVICE_NAME,
-          search_items,
-          schema=SEARCH_ITEMS_SCHEMA,
-          supports_response=SupportsResponse.ONLY,
-      )
+           SEARCH_ITEMS_SERVICE_NAME,
+           search_items,
+           schema=SEARCH_ITEMS_SCHEMA,
+           supports_response=SupportsResponse.ONLY,
+       )
 ```
 
 The use of response data is meant for cases that do not fit the Home Assistant state. For example, a response stream of objects. Conversely, response data should not be used for cases that are a fit for entity state. For example, a temperature value should just be a sensor.
