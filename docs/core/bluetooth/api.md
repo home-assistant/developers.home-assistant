@@ -90,9 +90,23 @@ from homeassistant.components import bluetooth
 count = bluetooth.async_scanner_count(hass, connectable=True)
 ```
 
-### Accessing current scanners
+### Accessing a scanner by source
 
-The `bluetooth.async_current_scanners` API provides access to the list of currently active Bluetooth scanners. This API returns all registered scanners (both connectable and non-connectable) as a list of scanner objects.
+The `bluetooth.async_scanner_by_source` API provides access to a specific Bluetooth scanner by its source (MAC address). This is primarily intended for integrations that implement a Bluetooth client and need to interact with a scanner directly.
+
+```python
+from homeassistant.components import bluetooth
+
+scanner = bluetooth.async_scanner_by_source(hass, "AA:BB:CC:DD:EE:FF")
+if scanner is not None:
+    # Inspect scanner properties (read-only)
+    if scanner.current_mode is not None:
+        _LOGGER.debug("Scanner mode: %s", scanner.current_mode)
+```
+
+### Accessing all current scanners
+
+The `bluetooth.async_current_scanners` API provides access to the list of all currently active Bluetooth scanners for debugging, diagnostics, and introspection of scanner state. This API returns all registered scanners (both connectable and non-connectable) as a list of scanner objects.
 
 ```python
 from homeassistant.components import bluetooth
@@ -104,8 +118,8 @@ for scanner in scanners:
         _LOGGER.debug("Scanner %s is in mode %s", scanner.source, scanner.current_mode)
 ```
 
-:::warning Important
-The scanner objects returned by this API come from the `habluetooth` package and their interfaces are not guaranteed to remain stable across Home Assistant releases. **You should only inspect scanner properties and never modify them.** Modifying scanner objects directly may break Bluetooth functionality in Home Assistant.
+:::warning Important for Scanner APIs
+The scanner objects returned by `async_scanner_by_source` and `async_current_scanners` come from the `habluetooth` package and their interfaces are not guaranteed to remain stable across Home Assistant releases. **You should only inspect scanner properties and never modify them.** Modifying scanner objects directly may break Bluetooth functionality in Home Assistant.
 
 **DO NOT:**
 - Change scanner properties or call methods that modify state
@@ -113,7 +127,7 @@ The scanner objects returned by this API come from the `habluetooth` package and
 - Assume the scanner interface will remain unchanged in future versions
 
 **DO:**
-- Use scanners for read-only inspection only
+- Use scanners for read-only inspection, debugging, and diagnostics only
 - Access simple properties like `source` and `current_mode`
 - Handle cases where properties may be `None`
 :::
