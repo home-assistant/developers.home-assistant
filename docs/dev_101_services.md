@@ -5,7 +5,7 @@ sidebar_label: "Custom actions"
 
 Home Assistant provides ready-made actions for a lot of things, but it doesn't always cover everything. Instead of trying to change Home Assistant, it is preferred to add it as a service action under your own integration first. Once we see a pattern in these service actions, we can talk about generalizing them.
 
-[Service actions should always be registered](/docs/core/integration-quality-scale/rules/action-setup), to ensure automations referencing the service actions can be edited and validated, and that we can generate informative error message when the service is called even if the integration does not have loaded confi entries. This means services should be registered in the integration's `async_setup` or `setup` function], not in the integration's `async_setup_entry` or in a platform's `async_setup_entry`, `async_setup_platform` or `setup_platform`.
+[Service actions should always be registered](/docs/core/integration-quality-scale/rules/action-setup), to ensure automations referencing the service actions can be edited and validated, and that we can generate an informative error message when a service is called even if the integration does not have loaded config entries. This means services should be registered in the integration's `async_setup` or `setup` function], not in the integration's `async_setup_entry` or in a platform's `async_setup_entry`, `async_setup_platform` or `setup_platform`.
 
 This is a simple "hello world" example to show the basics of registering a service action. To use this example, create the file `<config dir>/custom_components/hello_action/__init__.py` and copy the below example code.
 
