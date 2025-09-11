@@ -234,14 +234,14 @@ The following example shows how to provide an icon for the `advanced_options` se
 
 Sometimes you want to provide extra actions to control your entities. For example, the Sonos integration provides action to group and ungroup devices. Entity service actions are special because there are many different ways a user can specify entities. It can use areas, a group or a list of entities.
 
-Register entity service actions with `homeassistant.helpers.service.async_register_platform_entity_service`. Register actions under your integration domain (for example, sonos), not under the platform domain (for example, the media_player domain). You can pass a schema to `async_register_platform_entity_service` if the entity service action has fields. The schema can be:
+Register entity service actions with `homeassistant.helpers.service.async_register_platform_entity_service`. Register actions under your integration domain, e.g. `sonos`, not under the platform domain, e.g. `media_player`. You can pass a schema to `async_register_platform_entity_service` if the entity service action has fields. The schema can be:
 
 - A dictionary which will automatically be passed to `cv._make_entity_service_schema`
 - A validator returned by `cv._make_entity_service_schema`
 - A validator returned by `cv._make_entity_service_schema`, wrapped in a `vol.Schema`
 - A validator returned by `cv._make_entity_service_schema`, wrapped in a `vol.All`
 
-Example code, added to `homeassistant/components/sonos/__init__.py`:
+Example code added to `homeassistant/components/sonos/__init__.py`:
 
 ```python
 from homeassistant.components.media_player import DOMAIN as MEDIA_PLAYER_DOMAIN
