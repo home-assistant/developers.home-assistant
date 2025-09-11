@@ -35,6 +35,18 @@ A few notes about the use of markdown in this documentation:
 - For unordered lists, use `-`, not `*`.
 - For ordered lists, use increasing numbers.
 
+  ```yaml
+  # Good
+  1. List item 1.
+  2. List item 2.
+  3. List item 3.
+
+  # Bad
+  1. List item 1.
+  1. List item 2.
+  1. List item 3.
+  ```
+
 ## YAML and templates
 
 We have a separate styling guide for YAML and the use of Jinja2 templates
