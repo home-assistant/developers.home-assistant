@@ -5,27 +5,33 @@ sidebar_label: "Custom actions"
 
 Home Assistant provides ready-made actions for a lot of things, but it doesn't always cover everything. Instead of trying to change Home Assistant, it is preferred to add it as a service action under your own integration first. Once we see a pattern in these service actions, we can talk about generalizing them.
 
+[Service actions should always be registered](/docs/core/integration-quality-scale/rules/action-setup) to ensure automations referencing them can be edited and validated, and to allow an informative error message when a service is called even if the integration has no loaded config entries. Register services in the integration's `async_setup` or `setup` function, not in the integration's `async_setup_entry` or in a platform's `async_setup_entry`, `async_setup_platform`, or `setup_platform`.
+
 This is a simple "hello world" example to show the basics of registering a service action. To use this example, create the file `<config dir>/custom_components/hello_action/__init__.py` and copy the below example code.
 
 Actions can be called from automations and from the actions "Developer tools" in the frontend.
 
 ```python
+from homeassistant.core import HomeAssistant, ServiceCall, callback
+from homeassistant.helpers.typing import ConfigType
+
 DOMAIN = "hello_action"
 
 ATTR_NAME = "name"
 DEFAULT_NAME = "World"
 
 
-def setup(hass, config):
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     """Set up is called when Home Assistant is loading our component."""
 
-    def handle_hello(call):
+    @callback
+    def handle_hello(call: ServiceCall) -> None:
         """Handle the service action call."""
         name = call.data.get(ATTR_NAME, DEFAULT_NAME)
 
-        hass.states.set("hello_action.hello", name)
+        hass.states.async_set("hello_action.hello", name)
 
-    hass.services.register(DOMAIN, "hello", handle_hello)
+    hass.services.async_register(DOMAIN, "hello", handle_hello)
 
     # Return boolean to indicate that initialization was successful.
     return True
@@ -288,12 +294,13 @@ Example code:
 
 ```python
 import datetime
+
 import voluptuous as vol
+
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, ServiceCall, ServiceResponse, SupportsResponse
 from homeassistant.helpers import config_validation as cv, entity_platform, service
 from homeassistant.util.json import JsonObjectType
-
 
 SEARCH_ITEMS_SERVICE_NAME = "search_items"
 SEARCH_ITEMS_SCHEMA = vol.Schema({
@@ -317,13 +324,13 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             ],
         }
 
-      hass.services.async_register(
-          DOMAIN,
-          SEARCH_ITEMS_SERVICE_NAME,
-          search_items,
-          schema=SEARCH_ITEMS_SCHEMA,
-          supports_response=SupportsResponse.ONLY,
-      )
+        hass.services.async_register(
+            DOMAIN,
+            SEARCH_ITEMS_SERVICE_NAME,
+            search_items,
+            schema=SEARCH_ITEMS_SCHEMA,
+            supports_response=SupportsResponse.ONLY,
+        )
 ```
 
 The use of response data is meant for cases that do not fit the Home Assistant state. For example, a response stream of objects. Conversely, response data should not be used for cases that are a fit for entity state. For example, a temperature value should just be a sensor.
