@@ -90,6 +90,34 @@ from homeassistant.components import bluetooth
 count = bluetooth.async_scanner_count(hass, connectable=True)
 ```
 
+### Accessing current scanners
+
+The `bluetooth.async_current_scanners` API provides access to the list of currently active Bluetooth scanners. This API returns all registered scanners (both connectable and non-connectable) as a list of scanner objects.
+
+```python
+from homeassistant.components import bluetooth
+
+scanners = bluetooth.async_current_scanners(hass)
+for scanner in scanners:
+    # Inspect scanner properties (read-only)
+    if scanner.current_mode is not None:
+        _LOGGER.debug("Scanner %s is in mode %s", scanner.source, scanner.current_mode)
+```
+
+:::warning Important
+The scanner objects returned by this API come from the `habluetooth` package and their interfaces are not guaranteed to remain stable across Home Assistant releases. **You should only inspect scanner properties and never modify them.** Modifying scanner objects directly may break Bluetooth functionality in Home Assistant.
+
+**DO NOT:**
+- Change scanner properties or call methods that modify state
+- Store references to scanners beyond the scope of your immediate use
+- Assume the scanner interface will remain unchanged in future versions
+
+**DO:**
+- Use scanners for read-only inspection only
+- Access simple properties like `source` and `current_mode`
+- Handle cases where properties may be `None`
+:::
+
 ### Subscribing to unavailable callbacks
 
 To get a callback when the Bluetooth stack can no longer see a device, call the `bluetooth.async_track_unavailable` API. For performance reasons, it may take up to five minutes to get a callback once the device is no longer seen.
