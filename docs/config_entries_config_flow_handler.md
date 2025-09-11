@@ -501,7 +501,7 @@ class LocationSubentryFlowHandler(ConfigSubentryFlow):
 A config flow can start another config flow and tell the frontend that it should show the other flow once the first flow is finished. To do this the first flow needs to pass the `next_flow` parameter to the `async_create_entry` method. The argument should be a tuple of the form `(flow_type, flow_id)`.
 
 ```python
-from homeassistant.config_entries import ConfigFlow, FlowType
+from homeassistant.config_entries import SOURCE_USER, ConfigFlow, FlowType
 
 
 class ExampleFlow(ConfigFlow):
@@ -513,7 +513,7 @@ class ExampleFlow(ConfigFlow):
         """Show create entry with next_flow parameter."""
         result = await self.hass.config_entries.flow.async_init(
             "another_integration_domain",
-            context={"source": config_entries.SOURCE_USER},
+            context={"source": SOURCE_USER},
         )
         return self.async_create_entry(
             title="Example",
