@@ -42,7 +42,8 @@ Return overview information about installed add-ons.
       "build": false,
       "url": null,
       "icon": false,
-      "logo": false
+      "logo": false,
+      "system_managed": false
     }
   ]
 }
@@ -116,6 +117,7 @@ Get details about an add-on
 | auto_update         | boolean            | `true` if auto update is enabled                                                       |
 | available           | boolean            | `true` if the add-on is available                                                      |
 | boot                | string             | "auto" or "manual"                                                                     |
+| boot_config         | string             | Default boot mode of addon or "manual_only" if boot mode cannot be auto                |
 | build               | boolean            | `true` if local add-on                                                                 |
 | changelog           | boolean            | `true` if changelog is available                                                       |
 | description         | string             | The add-on description                                                                 |
@@ -164,7 +166,9 @@ Get details about an add-on
 | startup             | string             | The stage when the add-on is started (initialize, system, services, application, once) |
 | state               | string or null     | The state of the add-on (started, stopped)                                             |
 | stdin               | boolean            | `true` if the add-on accepts stdin commands                                            |
-| translations        | dictionary         | A dictionary containing content of translation files for the add-on |
+| system_managed      | boolean            | Indicates whether the add-on is managed by Home Assistant                              |
+| system_managed_config_entry | string     | Provides the configuration entry ID if the add-on is managed by Home Assistant         |
+| translations        | dictionary         | A dictionary containing content of translation files for the add-on                    |
 | udev                | boolean            | `true` if udev access is granted is enabled                                            |
 | update_available    | boolean            | `true` if an update is available                                                       |
 | url                 | string or null     | URL to more information about the add-on                                               |
@@ -191,6 +195,7 @@ Get details about an add-on
   "auto_update": false,
   "available": false,
   "boot": "auto",
+  "boot_config": "auto",
   "build": false,
   "changelog": false,
   "description": "description",
@@ -239,6 +244,8 @@ Get details about an add-on
   "startup": "application",
   "state": "started",
   "stdin": false,
+  "system_managed": true,
+  "system_managed_config_entry": "abc123",
   "translations": {
     "en": {
       "configuration": {
@@ -273,9 +280,7 @@ Get the add-on logo
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/options" method="post">
-Set the protection mode on an add-on.
-
-This function is not callable by itself and you can not use `self` as the slug here.
+Set the options for an add-on.
 
 :::tip
 To reset customized network/audio/options, set it `null`.
@@ -314,6 +319,31 @@ To reset customized network/audio/options, set it `null`.
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/addons/<addon>/sys_options" method="post">
+Change options specific to system managed addons.
+
+This endpoint is only callable by Home Assistant and not by any other client.
+
+**Payload**
+
+| key                         | type          | description                             |
+| --------------------------- | ------------- | --------------------------------------- |
+| system_managed              | boolean       | `true` if managed by Home Assistant     |
+| system_managed_config_entry | boolean       | ID of config entry managing addon       |
+
+**You need to supply at least one key in the payload.**
+
+**Example payload:**
+
+```json
+{
+  "system_managed": true,
+  "system_managed_config_entry": "abc123"
+}
+```
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/addons/<addon>/options/validate" method="post">
 Run a configuration validation against the current stored add-on configuration or payload.
 
@@ -337,6 +367,13 @@ The Data endpoint to get his own rendered configuration.
 
 <ApiEndpoint path="/addons/<addon>/rebuild" method="post">
 Rebuild the add-on, only supported for local build add-ons.
+
+**Payload:**
+
+| key   | type    | optional | description                                                       |
+| ----- | ------- | -------- | ----------------------------------------------------------------- |
+| force | boolean | True     | Force rebuild of the add-on even if pre-built images are provided |
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/restart" method="post">
@@ -1226,6 +1263,7 @@ Rebuild the Home Assistant core container
 | key       | type       | optional | description                      |
 | --------- | ---------- | -------- | -------------------------------- |
 | safe_mode | boolean    | True     | Rebuild Core into safe mode      |
+| force     | boolean    | True     | Force rebuild during a Home Assistant offline db migration |
 
 </ApiEndpoint>
 
@@ -1237,6 +1275,7 @@ Restart the Home Assistant core container
 | key       | type       | optional | description                      |
 | --------- | ---------- | -------- | -------------------------------- |
 | safe_mode | boolean    | True     | Restart Core into safe mode      |
+| force     | boolean    | True     | Force restart during a Home Assistant offline db migration |
 
 </ApiEndpoint>
 
@@ -1267,6 +1306,13 @@ Returns a [Stats model](api/supervisor/models.md#stats) for the Home Assistant c
 
 <ApiEndpoint path="/core/stop" method="post">
 Stop the Home Assistant core container
+
+**Payload:**
+
+| key       | type       | optional | description                      |
+| --------- | ---------- | -------- | -------------------------------- |
+| force     | boolean    | True     | Force stop during a Home Assistant offline db migration |
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/core/update" method="post">
@@ -1477,23 +1523,38 @@ Returns information about the docker instance.
 
 **Returned data:**
 
-key | type | description
--- | -- | --
-version | string | The version of the docker engine
-storage | string | The storage type
-logging | string | The logging type
-registries | dictionary | A dictionary of dictionaries containing `username` and `password` keys for registries.
+| key         | type   | description                        |
+| ----------- | ------ | ---------------------------------- |
+| version     | string | The version of the docker engine   |
+| enable_ipv6 | bool   | Enable/Disable IPv6 for containers |
+| storage     | string | The storage type                   |
+| logging     | string | The logging type                   |
+| registries  | dictionary | A dictionary of dictionaries containing `username` and `password` keys for registries. |
 
 **Example response:**
 
 ```json
 {
   "version": "1.0.1",
+  "enable_ipv6": true,
   "storage": "overlay2",
   "logging": "journald",
   "registries": {}
 }
 ```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/docker/options" method="post">
+Set docker options
+
+**Payload:**
+
+| key         | type | optional | description                        |
+| ----------- | ---- | -------- | ---------------------------------- |
+| enable_ipv6 | bool | True     | Enable/Disable IPv6 for containers |
+
+**You need to supply at least one key in the payload.**
 
 </ApiEndpoint>
 
@@ -1654,6 +1715,11 @@ Return information about the host.
 | llmnr_hostname   | string or null | The hostname currently exposed on the network via LLMNR for host |
 | operating_system | string         | The operating system on the host          |
 | startup_time     | float          | The time in seconds it took for last boot |
+| disk_life_time   | float or null  | Percentage of estimated disk lifetime used (0–100). Not all disks provide this information, returns `null` if unavailable. |
+| timezone         | string         | The current timezone of the host. |
+| dt_utc           | string         | Current UTC date/time of the host in ISO 8601 format. |
+| dt_synchronized  | bool           | `true` if the host is synchronized with an NTP service. |
+| use_ntp          | bool           | `true` if the host is using an NTP service for time synchronization. |
 
 **Example response:**
 
@@ -1675,7 +1741,13 @@ Return information about the host.
   "boot_timestamp": 1234567788,
   "startup_time": 12.345,
   "broadcast_llmnr": true,
-  "broadcast_mdns": false
+  "broadcast_mdns": false,
+  "virtualization": "",
+  "disk_life_time": 10.0,
+  "timezone": "Europe/Brussels",
+  "dt_utc": "2025-09-08T12:00:00.000000+00:00",
+  "dt_synchronized": true,
+  "use_ntp": true
 }
 ```
 
@@ -1692,6 +1764,23 @@ log record per line.
 | -------- | -------- |-------------------------------------------------------------------------------|
 | Accept   | true     | Type of data (text/plain or text/x-log)                                       |
 | Range    | true     | Range of log entries. The format is `entries=cursor[[:num_skip]:num_entries]` |
+
+**HTTP Query Parameters**
+
+These are a convenience alternative to the headers shown above as query
+parameters are easier to use in development and with the Home Assistant proxy.
+You should only provide one or the other.
+
+| Query    | type  | description                                                                        |
+| -------- | ----- |----------------------------------------------------------------------------------- |
+| verbose  | N/A   | If included, uses `text/x-log` as log output type (alternative to `Accept` header) |
+| lines    | int   | Number of lines of output to return (alternative to `Range` header)                |
+
+Example query string:
+
+```text
+?verbose&lines=100
+```
 
 :::tip
 To get the last log entries the Range request header supports negative values
@@ -1805,6 +1894,14 @@ Set host options
 
 <ApiEndpoint path="/host/reboot" method="post">
 Reboot the host
+
+**Payload:**
+
+| key       | type       | optional | description                                               |
+| --------- | ---------- | -------- | --------------------------------------------------------- |
+| force     | boolean    | True     | Force reboot during a Home Assistant offline db migration |
+
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/host/reload" method="post">
@@ -1850,6 +1947,75 @@ Get information about host services.
 
 <ApiEndpoint path="/host/shutdown" method="post">
 Shutdown the host
+
+**Payload:**
+
+| key       | type       | optional | description                                                 |
+| --------- | ---------- | -------- | ----------------------------------------------------------- |
+| force     | boolean    | True     | Force shutdown during a Home Assistant offline db migration |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/host/disks/<disk>/usage" method="get">
+Get detailed disk usage information in bytes.
+
+The only supported `disk` for now is "default". It will return usage info for the data disk.
+
+Supports an optional `max_depth` query param. Defaults to 1
+
+**Example response:**
+
+```json
+{
+  "id": "root",
+  "label": "Default",
+  "total_space": 503312781312,
+  "used_space": 430245011456,
+  "children": [
+    {
+      "id": "system",
+      "label": "System",
+      "used_space": 75660903137
+    },
+    {
+      "id": "addons_data",
+      "label": "Addons data",
+      "used_space": 42349200762
+    },
+    {
+      "id": "addons_config",
+      "label": "Addons configuration",
+      "used_space": 5283318814
+    },
+    {
+      "id": "media",
+      "label": "Media",
+      "used_space": 476680019
+    },
+    {
+      "id": "share",
+      "label": "Share",
+      "used_space": 37477206419
+    },
+    {
+      "id": "backup",
+      "label": "Backup",
+      "used_space": 268350699520
+    },
+    {
+      "id": "ssl",
+      "label": "SSL",
+      "used_space": 202912633
+    },
+    {
+      "id": "homeassistant",
+      "label": "Home assistant",
+      "used_space": 444090152
+    }
+  ]
+}
+```
+
 </ApiEndpoint>
 
 ### Ingress
@@ -2003,8 +2169,15 @@ Returns information about available updates
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/reload_updates" method="post">
+This reloads information about main components (OS, Supervisor, Core, and
+Plug-ins).
+</ApiEndpoint>
+
 <ApiEndpoint path="/refresh_updates" method="post">
 This reloads information about add-on repositories and fetches new version files.
+This endpoint is currently discouraged. Use `/reload_updates` or `/store/reload`
+instead.
 </ApiEndpoint>
 
 <ApiEndpoint path="/info" method="get">
@@ -2022,6 +2195,7 @@ Returns a dict with selected keys from other `/*/info` endpoints.
 | operating_system | string         | The operating system on the host                             |
 | features         | list           | A list ov available features on the host                     |
 | machine          | string         | The machine type                                             |
+| machine_id       | string or null | The machine ID of the underlying operating system            |
 | arch             | string         | The architecture on the host                                 |
 | supported_arch   | list           | A list of supported host architectures                       |
 | supported        | boolean        | `true` if the environment is supported                       |
@@ -2048,7 +2222,7 @@ Returns a dict with selected keys from other `/*/info` endpoints.
   "channel": "stable",
   "logging": "info",
   "state": "running",
-  "timezone": "Europe/Tomorrowland"
+  "timezone": "Europe/Brussels"
 }
 ```
 
@@ -2322,16 +2496,27 @@ Update the settings for a network interface.
 
 | key     | type   | optional | description                                                            |
 | ------- | ------ | -------- | ---------------------------------------------------------------------- |
-| enabled | bool   | True     | Enable/Disable an ethernet interface / VLAN got removed with disabled   |
-| ipv4    | dict   | True     | A struct with ipv4 interface settings                                  |
+| enabled | bool   | True     | Enable/Disable an ethernet interface / VLAN got removed with disabled  |
 | ipv6    | dict   | True     | A struct with ipv6 interface settings                                  |
+| ipv4    | dict   | True     | A struct with ipv4 interface settings                                  |
 | wifi    | dict   | True     | A struct with Wireless connection settings                             |
 
-**ipv4 / ipv6:**
+**ipv6:**
+
+| key           | type   | optional | description                                                                                         |
+| ------------- | ------ | -------- | --------------------------------------------------------------------------------------------------- |
+| method        | string | True     | Set IP configuration method can be `auto` for DHCP or Router Advertisements, `static` or `disabled` |
+| addr_gen_mode | string | True     | Address generation mode can be `eui64`, `stable-privacy`, `default-or-eui64` or `default`           |
+| ip6_privacy   | string | True     | Privacy extensions options are `disabled`, `enabled-prefer-public`, `enabled` or `default`          |
+| address       | list   | True     | The new IP address for the interface in the ::/XX format as list                                    |
+| nameservers   | list   | True     | List of DNS servers to use                                                                          |
+| gateway       | string | True     | The gateway the interface should use                                                                |
+
+**ipv4:**
 
 | key         | type   | optional | description                                                                           |
 | ----------- | ------ | -------- | ------------------------------------------------------------------------------------- |
-| method      | string | True     | Set IP configuration method can be `auto` for DHCP or Router Advertisements (only IPv6), `static` or `disabled`     |
+| method      | string | True     | Set IP configuration method can be `auto` for DHCP, `static` or `disabled`            |
 | address     | list   | True     | The new IP address for the interface in the X.X.X.X/XX format as list                 |
 | nameservers | list   | True     | List of DNS servers to use                                                            |
 | gateway     | string | True     | The gateway the interface should use                                                  |
@@ -2340,7 +2525,7 @@ Update the settings for a network interface.
 
 | key    | type   | optional | description                                                                    |
 | ------ | ------ | -------- | ------------------------------------------------------------------------------ |
-| mode   | string | True     | Set the mode `infrastructure` (default), `mesh`, `adhoc` or `ap`              |
+| mode   | string | True     | Set the mode `infrastructure` (default), `mesh`, `adhoc` or `ap`               |
 | auth   | string | True     | Set the auth mode: `open` (default), `web`, `wpa-psk`                          |
 | ssid   | string | True     | Set the SSID for connect into                                                  |
 | psk    | string | True     | The shared key which is used with `web` or `wpa-psk`                           |
@@ -2357,7 +2542,7 @@ Return a list of available [Access Points](api/supervisor/models.md#access-point
 
 | key          | description                                                            |
 | ------------ | ---------------------------------------------------------------------- |
-| accesspoints | A list of [Access Points](api/supervisor/models.md#access-points) |
+| accesspoints | A list of [Access Points](api/supervisor/models.md#access-points)      |
 
 **Example response:**
 
@@ -2387,8 +2572,8 @@ Create a new VLAN *id* on this network interface.
 
 | key     | type   | optional | description                                                            |
 | ------- | ------ | -------- | ---------------------------------------------------------------------- |
-| ipv4    | dict   | True     | A struct with ipv4 interface settings                                  |
 | ipv6    | dict   | True     | A struct with ipv6 interface settings                                  |
+| ipv4    | dict   | True     | A struct with ipv4 interface settings                                  |
 
 </ApiEndpoint>
 
@@ -2528,6 +2713,40 @@ Change the active boot slot, **This will also reboot the device!**
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/os/config/swap" method="get">
+
+Get current HAOS swap configuration. Unavailable on Supervised.
+
+**Returned data:**
+
+| key        | type   | description                      |
+|------------|--------|----------------------------------|
+| swap_size  | string | Current swap size.               |
+| swappiness | int    | Current kernel swappiness value. |
+
+**Example response:**
+
+```json
+{
+  "swap_size": "2G",
+  "swappiness": 1
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/os/config/swap" method="post">
+
+Set HAOS swap configuration. Unavailable on Supervised.
+
+**Payload:**
+
+| key        | type   | description                                                                                |
+|------------|--------|--------------------------------------------------------------------------------------------|
+| swap_size  | string | New swap siz as number with optional units (K/M/G). Anything lower than 40K disables swap. |
+| swappiness | int    | New swappiness value (0-100).                                                              |
+</ApiEndpoint>
+
 <ApiEndpoint path="/os/datadisk/list" method="get">
 
 Returns possible targets for the new data partition.
@@ -2578,8 +2797,8 @@ Move datadisk to a new location, **This will also reboot the device!**
 
 **Payload:**
 
-| key     | type   | description                                                       |
-| ------- | ------ | ----------------------------------------------------------------- |
+| key     | type   | description                                                                     |
+| ------- | ------ | ------------------------------------------------------------------------------- |
 | device  | string | ID of the disk device which should be used as the target for the data migration |
 
 </ApiEndpoint>
@@ -3045,6 +3264,12 @@ Returns information about a store add-on
 
 Install an add-on from the store.
 
+**Payload:**
+
+| key        | type    | description                                                                                         |
+| ---------- | ------- | --------------------------------------------------------------------------------------------------- |
+| background | boolean | Return `job_id` immediately, do not wait for install to complete. Clients must check job for status |
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/store/addons/<addon>/update" method="post">
@@ -3053,9 +3278,10 @@ Update an add-on from the store.
 
 **Payload:**
 
-| key     | type   | description                                                    |
-| ------- | ------ | -------------------------------------------------------------- |
-| backup | boolean | Create a partial backup of the add-on, default is false |
+| key        | type    | description                                                                                        |
+| ---------- | ------- | -------------------------------------------------------------------------------------------------- |
+| backup     | boolean | Create a partial backup of the add-on, default is false                                            |
+| background | boolean | Return `job_id` immediately, do not wait for update to complete. Clients must check job for status |
 
 </ApiEndpoint>
 
@@ -3073,6 +3299,14 @@ Get the add-on icon
 
 <ApiEndpoint path="/store/addons/<addon>/logo" method="get">
 Get the add-on logo
+</ApiEndpoint>
+
+<ApiEndpoint path="/store/addons/<addon>/availability" method="get">
+
+Returns 200 success status if the latest version of the add-on is able to be
+installed on the current system. Returns a 400 error status if it is not with a
+message explaining why.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/store/reload" method="post">
@@ -3241,6 +3475,7 @@ Returns information about the supervisor
 | diagnostics         | bool or null | Sending diagnostics is enabled                                |
 | addons_repositories | list         | A list of add-on repository URL's as strings                  |
 | auto_update         | bool         | Is auto update enabled for supervisor                         |
+| detect_blocking_io  | bool         | Supervisor raises exceptions for blocking I/O in event loop   |
 
 **Example response:**
 
@@ -3261,7 +3496,8 @@ Returns information about the supervisor
   "debug_block": false,
   "diagnostics": null,
   "addons_repositories": ["https://example.com/addons"],
-  "auto_update": true
+  "auto_update": true,
+  "detect_blocking_io": false
 }
 ```
 
@@ -3318,6 +3554,7 @@ You need to call `/supervisor/reload` after updating the options.
 | logging             | string | Set logging level                                      |
 | addons_repositories | list   | Set a list of URL's as strings for add-on repositories |
 | auto_update         | bool   | Enable/disable auto update for supervisor              |
+| detect_blocking_io  | string | Enable blocking I/O in event loop detection. Valid values are `on`, `off` and `on_at_startup`. |
 
 </ApiEndpoint>
 
@@ -3374,7 +3611,7 @@ Update the supervisor
 
 | key     | type   | description                                                    |
 | ------- | ------ | -------------------------------------------------------------- |
-| version | string | The version you want to install, default is the latest version |
+| version | string | The version to install. Defaults to the latest version. Development only: Only works in the Supervisor development environment. |
 
 </ApiEndpoint>
 

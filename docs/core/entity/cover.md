@@ -5,6 +5,11 @@ sidebar_label: Cover
 
 A cover entity controls an opening or cover, such as a garage door or a window shade. Derive a platform entity from [`homeassistant.components.cover.CoverEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/cover/__init__.py).
 
+:::note
+The cover entity should only be used for devices that control an opening or cover.
+For other types of devices entities such as [Number](/docs/core/entity/number) should be used instead, even if that has not been the case in the past.
+:::
+
 ## Properties
 
 :::tip
@@ -18,6 +23,17 @@ Properties should always only return information from memory and not do I/O (lik
 | is_closed | <code>bool &#124; None</code> | **Required** | If the cover is closed or not. Used to determine `state`.
 | is_closing | <code>bool &#124; None</code> | `None` | If the cover is closing or not. Used to determine `state`.
 | is_opening | <code>bool &#124; None</code> | `None` | If the cover is opening or not. Used to determine `state`.
+
+### States
+
+The state is defined by setting the above properties. The resulting state is using the `CoverState` enum to return one of the below members.
+
+| Value       | Description                                                        |
+|-------------|--------------------------------------------------------------------|
+| `CLOSED`    | The cover is closed.                                                |
+| `CLOSING`   | The cover is closing.                                               |
+| `OPENING`   | The cover is opening.                                               |
+| `OPEN`      | The cover is open.                                                  |
 
 ### Device classes
 
@@ -33,15 +49,6 @@ Properties should always only return information from memory and not do I/O (lik
 | `CoverDeviceClass.SHADE` | Control of shades, which are a continuous plane of material or connected cells that expanded or collapsed over an opening, such as window shades.
 | `CoverDeviceClass.SHUTTER` | Control of shutters, which are linked slats that swing out/in to cover an opening or may be tilted to partially cover an opening, such as indoor or exterior window shutters.
 | `CoverDeviceClass.WINDOW` | Control of a physical window that opens and closes or may tilt.
-
-### States
-
-| Constant | Description
-|----------|------------------------|
-| `STATE_OPENING` | The cover is in the process of opening to reach a set position.
-| `STATE_OPEN` | The cover has reached the open position.
-| `STATE_CLOSING` | The cover is in the process of closing to reach a set position.
-| `STATE_CLOSED` | The cover has reach the closed position.
 
 ## Supported features
 

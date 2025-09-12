@@ -3,6 +3,8 @@ title: "Python library: authentication"
 sidebar_label: Authentication
 ---
 
+This page is intended for general API development of a 3rd party library aiming to integrate a 3rd party API. See [Home Assistant REST API documentation](/docs/api/rest.md) for interacting with Home Assistant's API.  
+
 The Authentication part of your library is responsible for acquiring authentication and for making authenticated requests. It should not be aware of what is in the requests.
 
 Authentication comes in many forms, but it generally boils down to that each request is accompanied by an `authorization` header which contains an access token. The access token is generally a string of random numbers/letters.
@@ -34,13 +36,8 @@ class Auth:
 
     async def request(self, method: str, path: str, **kwargs) -> ClientResponse:
         """Make a request."""
-        headers = kwargs.get("headers")
-
-        if headers is None:
-            headers = {}
-        else:
+        if headers := kwargs.pop("headers", {}):
             headers = dict(headers)
-
         headers["authorization"] = self.access_token
 
         return await self.websession.request(
@@ -86,13 +83,8 @@ class Auth:
 
     def request(self, method: str, path: str, **kwargs) -> requests.Response:
         """Make a request."""
-        headers = kwargs.get("headers")
-
-        if headers is None:
-            headers = {}
-        else:
+        if headers := kwargs.pop("headers", {}):
             headers = dict(headers)
-
         headers["authorization"] = self.access_token
 
         return requests.request(
@@ -142,11 +134,7 @@ class AbstractAuth(ABC):
 
     async def request(self, method, url, **kwargs) -> ClientResponse:
         """Make a request."""
-        headers = kwargs.get("headers")
-
-        if headers is None:
-            headers = {}
-        else:
+        if headers := kwargs.pop("headers", {}):
             headers = dict(headers)
 
         access_token = await self.async_get_access_token()

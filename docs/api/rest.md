@@ -136,6 +136,40 @@ curl \
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/api/components" method="get">
+
+Returns a list of currently loaded components.
+
+```
+[
+  "currentcost.sensor",
+  "tapo.switch",
+  "tuya_ble.sensor",
+  "backup",
+  "ble_monitor.binary_sensor",
+  "localtuya.remote",
+  "logger",
+  "http",
+  "hacs",
+  "cast",
+  "device_tracker",
+  "upnp.binary_sensor",
+  "notify",
+  "person",
+  ...
+]
+```
+
+Sample `curl` command:
+
+```shell
+curl \
+  -H "Authorization: Bearer TOKEN" \
+  -H "Content-Type: application/json" http://localhost:8123/api/components
+```
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/api/events" method="get">
 
 Returns an array of event objects. Each event object contains event name and listener count.
@@ -501,7 +535,7 @@ curl \
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/api/calendars/<calendar entity_id>" method="get">
+<ApiEndpoint path="/api/calendars/<calendar entity_id>?start=<timestamp>&end=<timestamp>" method="get">
 
 Returns the list of [calendar events](/docs/core/entity/calendar/#calendarevent) for the specified calendar `entity_id` between the `start` and `end` times (exclusive).
 
@@ -636,7 +670,7 @@ You can pass an optional JSON object to be used as `service_data`.
 }
 ```
 
-Returns a list of states that have changed while the service was being executed.
+Returns a list of states that have changed while the service was being executed, and optionally response data, if supported by the service.
 
 ```json
 [
@@ -654,6 +688,57 @@ Returns a list of states that have changed while the service was being executed.
     }
 ]
 ```
+
+:::tip
+The result will include any states that changed while the service was being executed, even if their change was the result of something else happening in the system.
+:::
+
+If the service you're calling supports returning response data, you can retrieve it by adding `?return_response` to the URL. Your response will then contain both the list of changed entities and the service response data.
+
+```json
+{
+    "changed_states": [
+        {
+            "attributes": {},
+            "entity_id": "sun.sun",
+            "last_changed": "2024-04-22T20:45:54.418320-04:00",
+            "state": "below_horizon"
+        },
+        {
+            "attributes": {},
+            "entity_id": "binary_sensor.dropbox",
+            "last_changed": "2024-04-22T20:45:54.418320-04:00",
+            "state": "on"
+        }
+    ],
+    "service_response": {
+        "weather.new_york_forecast": {
+            "forecast": [
+                {
+                    "condition": "clear-night",
+                    "datetime": "2024-04-22T20:45:55.173725-04:00",
+                    "precipitation_probability": 0,
+                    "temperature": null,
+                    "templow": 6.0
+                },
+                {
+                    "condition": "rainy",
+                    "datetime": "2024-04-23T20:45:55.173756-04:00",
+                    "precipitation_probability": 60,
+                    "temperature": 16.0,
+                    "templow": 4.0
+                }
+            ]
+        }
+    }
+}
+```
+
+:::note
+Some services return no data, others optionally return response data, and some always return response data.
+
+If you don't use `return_response` when calling a service that must return data, the API will return a 400. Similarly, you will receive a 400 if you use `return_response` when calling a service that doesn't return any data.
+:::
 
 Sample `curl` commands:
 
@@ -692,9 +777,15 @@ curl \
   http://localhost:8123/api/services/mqtt/publish
 ```
 
-:::tip
-The result will include any states that changed while the service was being executed, even if their change was the result of something else happening in the system.
-:::
+Retrieve daily weather forecast information:
+
+```shell
+curl \
+  -H "Content-Type: application/json" \
+  -H "Authorization: Bearer TOKEN" \
+  -d '{"entity_id": "weather.forecast_home", "type": "daily"}' \
+  http://localhost:8123/api/services/weather/get_forecasts?return_response
+```
 
 </ApiEndpoint>
 
@@ -763,6 +854,22 @@ curl \
   -H 'Content-Type: application/json' \
   -d '{ "name": "SetTimer", "data": { "seconds": "30" } }' \
   http://localhost:8123/api/intent/handle
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/api/states/<entity_id>" method="delete">
+
+Deletes an entity with the specified `entity_id`.
+
+Sample `curl` command:
+
+```shell
+curl \
+  -X DELETE \
+  -H "Authorization: Bearer TOKEN" \
+  -H "Content-Type: application/json" \
+  http://localhost:8123/api/states/sensor.kitchen_temperature
 ```
 
 </ApiEndpoint>

@@ -87,6 +87,20 @@ the end-user getting your improvement faster.
    clear, and concise title, and add an extensive description of your change.
    Be sure to add a motivation (or use case) to your PR, so the reviewer can
    understand why you are making this change (or why you make certain decisions).
+   
+7. **Update dependency in a standalone PR.**
+   When you need to bump a dependency, try to do so in a standalone PR. Only
+   compatibility code adjustments or small related bug fixes should be included in the
+   PR. If you have new features that depend on the updated dependency, these can be
+   added in a follow-up. This will also make CI iterations run a lot faster when reviewing
+   the new features or larger bug fixes, as it restricts the tests to a single integration.
+   Ensure that the PR description contains at least one (or multiple) of the following:
+   - A link to the release notes of this package version, and all versions in between.
+   - A link to the changelog of this package.
+   - A link to a Git(Hub) diff/compare view from the current version to the bumped version.
+   This allows us to review upstream changes, which is needed to decide if this change is
+   working as intended and/or if we can include it in, for example, a patch release of
+   Home Assistant.
 
 ## Receiving review comments
 
@@ -139,10 +153,10 @@ requested the changes that the PR is ready to go!
 
 2. **Monitor your PR and keep it up to date.**
    Even if your PR is not reviewed, you should actively monitor it. Be sure no
-   merge conflicts have been introduced in the meantime (GitHub
-   will tell you if that is the case), and maybe rebase it onto the latest
-   development branch after a week of inactivity. This ensures your PR is
-   ready to go once the review process starts.
+   merge conflicts have been introduced in the meantime (GitHub will tell you if
+   that is the case), and maybe [update it with the latest development branch](/docs/development_catching_up)
+   after a week of inactivity. This ensures your PR is ready to go once the
+   review process starts.
 
 3. **Add tests.**
    If you are adding new features, make sure to add tests. If you are fixing
@@ -242,9 +256,9 @@ each time you go through the process.
    awaiting a change from you or a review from our project. Please make sure
    the first one isn't the case, in case you are awaiting a review,
    just comment that. By responding to the bot, it will know things are not
-   stale and will back off. In the mean time, it might be a good idea to rebase
-   your PR on the latest development branches to ensure you are fully
-   caught up with recent changes.
+   stale and will back off. In the mean time, it might be a good idea to
+   [update it with the latest development branch](/docs/development_catching_up)
+   to ensure you are fully caught up with recent changes.
 
 5. **I have a PR that should go into a hotfix/patch release, how do I do that?**
    Just create the PR as normal, and make it very clear in the PR description

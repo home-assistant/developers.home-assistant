@@ -11,29 +11,25 @@ Derive entity platforms from [`homeassistant.components.vacuum.StateVacuumEntity
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
-:::note
-`VacuumEntity` is deprecated and will be removed in future releases. Please use or migrate to the `StateVacuumEntity`
-:::
-
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| battery_icon | string | function | Battery icon to show in UI.
-| battery_level | int | `none` | Current battery level.
 | fan_speed | string | `none` | The current fan speed.
 | fan_speed_list | list | `NotImplementedError()`| List of available fan speeds.
 | name | string | **Required** | Name of the entity.
-| state | string | **Required** | One of the states listed in the states section.
+| activity | VacuumActivity | **Required** | Return one of the states listed in the states section.
 
 ## States
 
-| State | Description
+Setting the state should return an enum from VacuumActivity in the `activity` property.
+
+| Value | Description
 | ----- | -----------
-| `STATE_CLEANING` | The vacuum is currently cleaning.
-| `STATE_DOCKED` | The vacuum is currently docked, it is assumed that docked can also mean charging.
-| `STATE_IDLE` | The vacuum is not paused, not docked and does not have any errors.
-| `STATE_PAUSED` | The vacuum was cleaning but was paused without returning to the dock.
-| `STATE_RETURNING` | The vacuum is done cleaning and is currently returning to the dock, but not yet docked.
-| `STATE_ERROR` | The vacuum encountered an error while cleaning.
+| `CLEANING` | The vacuum is currently cleaning.
+| `DOCKED` | The vacuum is currently docked, it is assumed that docked can also mean charging.
+| `IDLE` | The vacuum is not paused, not docked and does not have any errors.
+| `PAUSED` | The vacuum was cleaning but was paused without returning to the dock.
+| `RETURNING` | The vacuum is done cleaning and is currently returning to the dock, but not yet docked.
+| `ERROR` | The vacuum encountered an error while cleaning.
 
 ## Supported features
 
@@ -44,7 +40,6 @@ must set the `VacuumEntityFeature.STATE` flag.
 
 | Value          | Description                                          |
 | -------------- | ---------------------------------------------------- |
-| `BATTERY`      | The vacuum supports retrieving battery status.       |
 | `CLEAN_SPOT`   | The vacuum supports spot cleaning.                   |
 | `FAN_SPEED`    | The vacuum supports setting fan speed.               |
 | `LOCATE`       | The vacuum supports locating.                        |

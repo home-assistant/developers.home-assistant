@@ -73,7 +73,7 @@ To avoid calculations in a property method, set the corresponding [entity class 
 | ------------------------ | ------------------------------| ------- | -----------
 | assumed_state            | `bool`                        | `False` | Return `True` if the state is based on our assumption instead of reading it from the device.
 | attribution              | <code>str &#124; None</code>  | `None`  | The branding text required by the API provider.
-| available                | `bool`                        | `True`  | Indicate if Home Assistant is able to read the state and control the underlying device.
+| available                | `bool`                        | `True`  | Indicate if Home Assistant is able to read the state or control the underlying device, see [entity-unavailable](/docs/core/integration-quality-scale/rules/entity-unavailable.md) for more details.
 | device_class             | <code>str &#124; None</code>  | `None`  | Extra classification of what the device is. Each domain specifies their own. Device classes can come with extra requirements for unit of measurement and supported features.
 | entity_picture           | <code>str &#124; None</code>  | `None`  | Url of a picture to show for the entity.
 | extra_state_attributes   | <code>dict &#124; None</code> | `None`  | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version.
@@ -101,7 +101,7 @@ The following properties are used to populate the entity and device registries. 
 
 | Name                            | Type                                    | Default | Description
 | ------------------------------- | --------------------------------------- | ------- | -----------
-| device_info                     | <code>dict &#124; None</code>           | `None`  | [Device registry](/docs/device_registry_index) descriptor for [automatic device registration.](/docs/device_registry_index#automatic-registration-through-an-entity)
+| device_info                     | <code>DeviceInfo &#124; None</code>           | `None`  | [Device registry](/docs/device_registry_index) descriptor for [automatic device registration.](/docs/device_registry_index#automatic-registration-through-an-entity)
 | entity_category                 | <code>EntityCategory &#124; None</code> | `None`  | Classification of a non-primary entity. Set to `EntityCategory.CONFIG` for an entity that allows changing the configuration of a device, for example, a switch entity, making it possible to turn the background illumination of a switch on and off. Set to `EntityCategory.DIAGNOSTIC` for an entity exposing some configuration parameter or diagnostics of a device but does not allow changing it, for example, a sensor showing RSSI or MAC address. |
 | entity_registry_enabled_default | `bool` | `True`                         | Indicate if the entity should be enabled or disabled when first added to the entity registry. This includes fast-changing diagnostic entities or, assumingly less commonly used entities. For example, a sensor exposing RSSI or battery voltage should typically be set to `False`; to prevent unneeded (recorded) state changes or UI clutter by these entities. |
 | entity_registry_visible_default | `bool` | `True`                         | Indicate if the entity should be hidden or visible when first added to the entity registry. |
@@ -133,6 +133,10 @@ Avoid setting an entity's name to a hard coded English string, instead, the name
 
 Some entities are automatically named after their device class, this includes [`binary_sensor`](/docs/core/entity/binary-sensor), [`button`](/docs/core/entity/button), [`number`](/docs/core/entity/number) and [`sensor`](/docs/core/entity/sensor) entities and in many cases don't need to be named.
 For example, an unnamed sensor which has its device class set to `temperature` will be named "Temperature".
+
+:::note
+If an entity provides translations for the entity name, the used name depends on the system (backend) language at creation time, not the user’s UI language. For example, if your backend is set to German, new entities will be named in German — even if a user later switches their UI to French. Changing the backend language will only affect entities created after the change; existing entities retain their original names.
+:::
 
 ### `has_entity_name` True (Mandatory for new integrations)
 
@@ -460,6 +464,10 @@ It is not possible to provide icons for state attributes using the `icon` proper
 State attributes which are not suitable for state history recording should be excluded from state history recording by including them in either of `_entity_component_unrecorded_attributes` or `_unrecorded_attributes`.
 - `_entity_component_unrecorded_attributes: frozenset[str]` may be set in a base component class, e.g. in `light.LightEntity`
 - `_unrecorded_attributes: frozenset[str]` may be set in an integration's platform e.g. in an entity class defined in platform `hue.light`.
+
+The `MATCH_ALL` constant can be used to exclude all attributes instead of typing them separately. This can be useful for integrations providing unknown attributes or when you simply want to exclude all without typing them separately.
+
+Using the `MATCH_ALL` constant does not stop recording for `device_class`, `state_class`, `unit_of_measurement`, and `friendly_name` as they might also serve other purposes and, therefore, should not be excluded from recording.
 
 Examples of platform state attributes which are exluded from recording include the `entity_picture` attribute of `image` entities which will not be valid after some time, the `preset_modes` attribute of `fan` entities which is not likely to change.
 Examples of integration specific state attributes which are excluded from recording include `description` and `location` state attributes in platform `trafikverket.camera` which do not change.

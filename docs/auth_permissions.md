@@ -128,9 +128,9 @@ if not user.permissions.check_entity(entity_id, POLICY_CONTROL):
 
 ### The context object
 
-All service calls, fired events and states in Home Assistant have a context object. This object allows us to attribute changes to events and services. These context objects also contain a user id, which is used for checking the permissions.
+All service actions, fired events and states in Home Assistant have a context object. This object allows us to attribute changes to events and actions. These context objects also contain a user id, which is used for checking the permissions.
 
-It's crucial for permission checking that actions taken on behalf of the user are done with a context containing the user ID. If you are in a service handler, you should re-use the incoming context `call.context`. If you are inside a WebSocket API or Rest API endpoint, you should create a context with the correct user:
+It's crucial for permission checking that actions taken on behalf of the user are done with a context containing the user ID. If you are in a service action handler, you should re-use the incoming context `call.context`. If you are inside a WebSocket API or Rest API endpoint, you should create a context with the correct user:
 
 ```python
 from homeassistant.core import Context
@@ -158,15 +158,15 @@ The `Unauthorized` exception has various parameters, to identify the permission 
 | perm_category | The permission category that we tested. Only necessary if we don't have an object ID that the user tried to operate on (like when we create a config entry).
 | permission | The permission that we tested, ie `POLICY_READ`.
 
-### Securing a service call handler
+### Securing a service action handler
 
-Service calls allow a user to control entities or with the integration as a whole. A service call uses the attached context to see which user invoked the command. Because context is used, it is important that you also pass the call context to all service calls.
+Actions allow a user to control entities or with the integration as a whole. A service action uses the attached context to see which user invoked the command. Because context is used, it is important that you also pass the call context to all service action.
 
-All services that are registered via the entity component (`component.async_register_entity_service()`) will automatically have their permissions checked.
+All service actions that are registered via the entity component (`component.async_register_entity_service()`) will automatically have their permissions checked.
 
 #### Checking entity permissions
 
-Your service call handler will need to check the permissions for each entity that it will act on.
+Your service action handler will need to check the permissions for each entity that it will act on.
 
 ```python
 from homeassistant.exceptions import Unauthorized, UnknownUser
@@ -174,7 +174,7 @@ from homeassistant.auth.permissions.const import POLICY_CONTROL
 
 
 async def handle_entity_service(call):
-    """Handle a service call."""
+    """Handle a service action call."""
     entity_ids = call.data["entity_id"]
 
     for entity_id in entity_ids:
@@ -206,12 +206,12 @@ async def async_setup(hass, config):
 #### Checking admin permission
 
 Starting Home Assistant 0.90, there is a special decorator to help protect
-services that require admin access.
+service actions that require admin access.
 
 ```python
 # New in Home Assistant 0.90
 async def handle_admin_service(call):
-    """Handle a service call."""
+    """Handle a service action call."""
     # Do admin action
 
 

@@ -16,11 +16,12 @@ Not all existing platforms follow the requirements in this checklist. This canno
    - Only add new constants to `const.py` if they are widely used. Otherwise keep them on platform level
    - Use `CONF_MONITORED_CONDITIONS` instead of `CONF_MONITORED_VARIABLES`
 
-### 1. Requirements
+### 1. External requirements
 
 1. Requirements have been added to [`manifest.json`](creating_integration_manifest.md). The `REQUIREMENTS` constant is deprecated.
 2. Requirement version should be pinned: `"requirements": ['phue==0.8.1']`
 3. We no longer want requirements hosted on GitHub. Please upload to PyPi.
+4. Each requirement meets the [library requirements](api_lib_index.md#basic-library-requirements).
 
 ### 2. Configuration
 
@@ -54,7 +55,7 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
 
 1. Verify that the passed in configuration (user/pass/host etc.) works.
 2. Group your calls to `add_entities if possible.
-3. If the platform adds extra services, the format should be `<domain of your integration>.<service name>`. So if your integration's domain is "awesome_sauce" and you are making a light platform, you would register services under the `awesome_sauce` domain. Make sure that your services [verify permissions](auth_permissions.md#checking-permissions).
+3. If the platform adds extra actions, the format should be `<domain of your integration>.<service action name>`. So if your integration's domain is "awesome_sauce" and you are making a light platform, you would register service actions under the `awesome_sauce` domain. Make sure that your service actions [verify permissions](auth_permissions.md#checking-permissions).
 
 ### 4. Entity
 

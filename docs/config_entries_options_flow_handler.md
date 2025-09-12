@@ -14,38 +14,66 @@ For an integration to support options it needs to have an `async_get_options_flo
 @staticmethod
 @callback
 def async_get_options_flow(
-    config_entry: config_entries.ConfigEntry,
-) -> config_entries.OptionsFlow:
+    config_entry: ConfigEntry,
+) -> OptionsFlowHandler:
     """Create the options flow."""
-    return OptionsFlowHandler(config_entry)
+    return OptionsFlowHandler()
 ```
 
 ## Flow handler
 
-The Flow handler works just like the config flow handler, except that the first step in the flow will always be `async_step_init`.
+The Flow handler works just like the config flow handler, except that the first step in the flow will always be `async_step_init`. The current config entry details are available through the `self.config_entry` property.
 
 ```python
-class OptionsFlowHandler(config_entries.OptionsFlow):
-    def __init__(self, config_entry: config_entries.ConfigEntry) -> None:
-        """Initialize options flow."""
-        self.config_entry = config_entry
+from homeassistant.config_entries import OptionsFlow
 
+OPTIONS_SCHEMA = vol.Schema(
+    {
+        vol.Required("show_things"): bool,
+    }
+)
+class OptionsFlowHandler(OptionsFlow):
     async def async_step_init(
         self, user_input: dict[str, Any] | None = None
-    ) -> FlowResult:
+    ) -> ConfigFlowResult:
         """Manage the options."""
         if user_input is not None:
-            return self.async_create_entry(title="", data=user_input)
+            return self.async_create_entry(data=user_input)
 
         return self.async_show_form(
             step_id="init",
-            data_schema=vol.Schema(
-                {
-                    vol.Required(
-                        "show_things",
-                        default=self.config_entry.options.get("show_things"),
-                    ): bool
-                }
+            data_schema=self.add_suggested_values_to_schema(
+                OPTIONS_SCHEMA, self.config_entry.options
+            ),
+        )
+```
+
+## Options flow with automatic reload
+
+If the integration should be reloaded after the config options change, it can subclass from `OptionsFlowWithReload` instead of `OptionsFlow`. `OptionsFlowWithReload` will automatically reload the integration once the options change.
+
+Since the most common reason to add an update listener is to reload the integration when the options have changed, `OptionsFlowWithReload` avoids the need for that listener.
+
+```python
+from homeassistant.config_entries import OptionsFlowWithReload
+
+OPTIONS_SCHEMA = vol.Schema(
+    {
+        vol.Required("show_things"): bool,
+    }
+)
+class MyOptionsFlow(OptionsFlowWithReload):
+    async def async_step_init(
+        self, user_input: dict[str, Any] | None = None
+    ) -> ConfigFlowResult:
+        """Manage the options."""
+        if user_input is not None:
+            return self.async_create_entry(data=user_input)
+
+        return self.async_show_form(
+            step_id="init",
+            data_schema=self.add_suggested_values_to_schema(
+                OPTIONS_SCHEMA, self.config_entry.options
             ),
         )
 ```
@@ -61,6 +89,6 @@ entry.async_on_unload(entry.add_update_listener(update_listener))
 Using the above means the Listener is attached when the entry is loaded and detached at unload. The Listener shall be an async function that takes the same input as async_setup_entry. Options can then be accessed from `entry.options`.
 
 ```python
-async def update_listener(hass, entry):
+async def update_listener(hass: HomeAssistant, config_entry: ConfigEntry):
     """Handle options update."""
 ```

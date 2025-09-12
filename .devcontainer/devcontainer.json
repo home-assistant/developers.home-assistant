@@ -4,24 +4,29 @@
     "dockerfile": "Dockerfile",
     "context": ".."
   },
-  "appPort": [3000],
+  "appPort": ["3000:3000"],
   "postCreateCommand": "script/setup",
-  "extensions": [
-    "davidanson.vscode-markdownlint",
-    "editorconfig.editorconfig",
-    "streetsidesoftware.code-spell-checker",
-    "yzhang.markdown-all-in-one",
-    "esbenp.prettier-vscode"
-  ],
-  "settings": {
-    "editor.rulers": [80, 100, 120],
-    "editor.renderWhitespace": "boundary",
-    "errorLens.gutterIconsEnabled": true,
-    "errorLens.addAnnotationTextPrefixes": false,
-    "errorLens.enabledDiagnosticLevels": ["error", "warning"],
-    "[markdown]": {
-      "editor.wordWrap": "wordWrapColumn",
-      "editor.wordWrapColumn": 80
+  "customizations": {
+    "vscode": {
+
+      "extensions": [
+        "davidanson.vscode-markdownlint",
+        "editorconfig.editorconfig",
+        "streetsidesoftware.code-spell-checker",
+        "yzhang.markdown-all-in-one",
+        "esbenp.prettier-vscode"
+      ],
+      "settings": {
+        "editor.rulers": [80, 100, 120],
+        "editor.renderWhitespace": "boundary",
+        "errorLens.gutterIconsEnabled": true,
+        "errorLens.addAnnotationTextPrefixes": false,
+        "errorLens.enabledDiagnosticLevels": ["error", "warning"],
+        "[markdown]": {
+          "editor.wordWrap": "wordWrapColumn",
+          "editor.wordWrapColumn": 80
+        }
+      }
     }
   },
   // Comment out connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.

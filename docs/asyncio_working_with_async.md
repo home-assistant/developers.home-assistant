@@ -6,7 +6,7 @@ Although we have a backwards compatible API, using the async core directly will 
 
 ## Interacting with the core
 
-[All methods in the Home Assistant core][dev-docs] are implemented in two flavors: an async version and a version to be called from other threads. The versions for other are merely wrappers that call the async version in a threadsafe manner.
+All methods in the Home Assistant core are implemented in two flavors: an async version and a version to be called from other threads. The versions for other are merely wrappers that call the async version in a threadsafe manner.
 
 So if you are making calls to the core (the hass object) from within a callback or coroutine, use the methods that start with async_. If you need to call an async_ function that is a coroutine, your task must also be a coroutine.
 
@@ -108,6 +108,3 @@ If you want to spawn a task that will not block the current async context, you c
 ```python
 hass.async_create_task(async_say_hello(hass, target))
 ```
-
-[dev-docs]: https://dev-docs.home-assistant.io/en/dev/api/core.html
-[dev-docs-async]: https://dev-docs.home-assistant.io/en/dev/api/util.html#module-homeassistant.util.async

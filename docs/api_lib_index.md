@@ -5,6 +5,16 @@ sidebar_label: "Introduction"
 
 One of the foundational rules of Home Assistant is that we do not include any protocol specific code. Instead, this code should be put into a standalone Python library and published to PyPI. This guide will describe how to get started with this!
 
+## Basic library requirements
+
+- The library must have source distribution packages available, it's not allowed to rely on packages that only have binary distribution packages.
+- The library versions published on PyPi should correspond to tagged releases in a public online repository.
+- The publishing on PyPi must be automated.
+- Issue trackers must be enabled for external Python libraries that communicate with external devices or services.
+- If the library is mainly used for Home Assistant and you are a code owner of the integration, it is encouraged to use an issue template picker with links to [Home Assistant Core Issues](https://github.com/home-assistant/core/issues). For example: [zwave-js-server-python - New Issue](https://github.com/home-assistant-libs/zwave-js-server-python/issues/new/choose)
+- The library and possible subdependencies of the library must be licensed using an [OSI-approved license](https://opensource.org/license). This should be reflected in the metadata of the library.
+
+
 For this guide we're going to assume that we're building a library for a Rest API that is accessible over HTTP and returning data structured as JSON objects. This is the most common type of API that we see. These APIs can either be accessible on the device itself, or in the cloud.
 
 This guide is not a perfect fit for every API. You might have to tweak the examples.

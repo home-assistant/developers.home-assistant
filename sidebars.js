@@ -5,6 +5,16 @@
  * LICENSE file in the root directory of this source tree.
  */
 
+const iqs_rules_by_tier = require('./docs/core/integration-quality-scale/_includes/tiers.json');
+const iqs_rules = Object.values(iqs_rules_by_tier).flat().map((rule) => {
+    if (typeof rule === "string") {
+        return rule;
+    }
+    return rule.id;
+});
+
+
+
 module.exports = {
   Addons: [
     "add-ons",
@@ -43,6 +53,8 @@ module.exports = {
       label: "Custom UI",
       items: [
         "frontend/custom-ui/custom-card",
+        "frontend/custom-ui/custom-card-feature",
+        "frontend/custom-ui/custom-badge",
         "frontend/custom-ui/custom-strategy",
         "frontend/custom-ui/custom-view",
         "frontend/custom-ui/creating-custom-panels",
@@ -108,6 +120,8 @@ module.exports = {
         "creating_integration_manifest",
         "config_entries_config_flow_handler",
         "config_entries_options_flow_handler",
+        "core/integration_diagnostics",
+        "core/integration_system_health",
         "configuration_yaml_index",
         "dev_101_services",
         "creating_platform_index",
@@ -135,8 +149,23 @@ module.exports = {
         "development_checklist",
         "creating_component_code_review",
         "creating_platform_code_review",
-        "integration_quality_scale_index",
       ],
+    },
+    {
+      type: "category",
+      label: "Integration Quality Scale",
+      link: {type: 'doc', id: 'core/integration-quality-scale/index'},
+      items: [
+        {type: 'doc', id: 'core/integration-quality-scale/checklist'},
+        {
+          type: 'category',
+          label: 'Rules',
+          link: {type: 'doc', id: 'core/integration-quality-scale/rules'},
+          items: iqs_rules.map(rule => ({
+            type: 'doc',
+            id: `core/integration-quality-scale/rules/${rule.toLowerCase()}`
+          }))}
+      ]
     },
     {
       type: "category",
@@ -271,8 +300,10 @@ module.exports = {
       items: [
         "documenting",
         "documenting/standards",
+        "documenting/general-style-guide",
         "documenting/yaml-style-guide",
         "documenting/create-page",
+        "documenting/integration-docs-examples",
       ],
     },
 
@@ -290,7 +321,47 @@ module.exports = {
         "asyncio_categorizing_functions",
         "asyncio_working_with_async",
         "asyncio_thread_safety",
+        "asyncio_blocking_operations",
+        "asyncio_imports",
       ],
     },
   ],
+  Android: [
+    "android",
+    "android/get_started",
+    "android/architecture",
+    "android/targets",
+    "android/app_flavors",
+    {
+      type: "category",
+      label: "Testing",
+      items: [
+        "android/testing/introduction",
+        "android/testing/unit_testing",
+        "android/testing/screenshot_testing",
+        "android/testing/integration_testing",
+      ],
+    },
+    {
+      type: "category",
+      label: "Tips",
+      items: [
+        "android/tips/compose_101",
+        "android/tips/dependencies",
+        "android/tips/leak_canary",
+        "android/tips/lollipop_emulator",
+        "android/tips/fcm_push_notification",
+        "android/tips/sarif_reports",
+        "android/tips/release",
+        "android/tips/dev_playground",
+        "android/tips/strict_mode",
+      ],
+    },
+    "android/best_practices",
+    "android/ci",
+    "android/codestyle",
+    "android/linter",
+    "android/submit",
+    "android/release",
+  ]
 };

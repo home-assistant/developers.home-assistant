@@ -108,7 +108,7 @@ All methods starting with `call` are async methods. This means that they will re
 
 ### `hass.callService(domain, service, data)`
 
-Call a service on the backend.
+Call a service action on the backend.
 
 ```js
 hass.callService('light', 'turn_on', {

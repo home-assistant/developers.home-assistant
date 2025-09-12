@@ -129,20 +129,20 @@ Please note, if you want to use Markdown inside an HTML block, it has to be surr
 </div>
 ```
 
-### Images, icons and logos
+### Images, icons, and logos
 
-Having a logo with the integration, makes an integration quickly identifiable with the end-user.
+Having a logo with the integration makes an integration quickly identifiable with the end-user.
 From the documentation side of things, no specific configuration is needed to enable the use of a logo,
 however, the logo must exist in our Brands repository.
 
-To add a logo and icon for your integration, open up a pull request at: the [Home Assistant Brands](https://github.com/home-assistant/brands).
+- To add a logo and icon for your integration, open up a pull request at: the [Home Assistant Brands](https://github.com/home-assistant/brands).
 
-Other images, displayed on the pages, are stored in various directories according to their purpose:
+- To add other images, displayed on the integration page or any other documentation page, store the image in the corresponding directory according to their purpose:
 
 | Type        | Location                  |
 | :---------- | :------------------------ |
 | blog        | source/images/blog        |
-| screenshots | source/images/integration |
+| screenshots | source/images/integrations/your-integration |
 
 ### Linking from the sidebar
 

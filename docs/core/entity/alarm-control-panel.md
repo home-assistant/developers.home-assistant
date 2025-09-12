@@ -13,26 +13,27 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| state | <code>str &#124; None</code> | **Required** | One of the states listed in the **states**.
+| alarm_state | <code>AlarmControlPanelState &#124; None</code> | **Required** | One of the alarm values listed in the **states**.
 | code_arm_required | bool | `True` | Whether the code is required for arm actions.
 | code_format | <code>CodeFormat &#124; None</code> | `None` | One of the states listed in the **code formats** section.
 | changed_by | <code>str &#124; None</code> | `None` | Last change triggered by.
 
 ### States
 
+Setting the state should return an enum from `AlarmControlPanelState` in the `alarm_state` property.
+
 | Value | Description
 | ----- | -----------
-| `None` | Unknown state.
-| `disarmed` | The alarm is disarmed (`off`).
-| `armed_home` | The alarm is armed in home mode.
-| `armed_away` | The alarm is armed in away mode.
-| `armed_night` | The alarm is armed in night mode.
-| `armed_vacation` | The alarm is armed in vacation mode.
-| `armed_custom_bypass` |  The alarm is armed in bypass mode.
-| `pending` | The alarm is pending (towards `triggered`).
-| `arming` | The alarm is arming.
-| `disarming` | The alarm is disarming.
-| `triggered` | The alarm is triggered.
+| `DISARMED` | The alarm is disarmed (`off`).
+| `ARMED_HOME` | The alarm is armed in home mode.
+| `ARMED_AWAY` | The alarm is armed in away mode.
+| `ARMED_NIGHT` | The alarm is armed in night mode.
+| `ARMED_VACATION` | The alarm is armed in vacation mode.
+| `ARMED_CUSTOM_BYPASS` | The alarm is armed in custom bypass mode where one or more zones or sensors are bypassed (disabled) and the resulting combination of bypassed zones and sensors does not correspond to the standard away, home or night modes. Do not use this state to signal a disconnected, malfunctioning or low battery sensor; report those conditions via dedicated sensor entities instead.
+| `PENDING` | The alarm is pending (towards `triggered`).
+| `ARMING` | The alarm is arming.
+| `DISARMING` | The alarm is disarming.
+| `TRIGGERED` | The alarm is triggered.
 
 ## Supported features
 
@@ -68,10 +69,10 @@ Send disarm command.
 class MyAlarm(AlarmControlPanelEntity):
     # Implement one of these methods.
 
-    def alarm_disarm(self, code=None) -> None:
+    def alarm_disarm(self, code: str | None = None) -> None:
         """Send disarm command."""
 
-    async def async_alarm_disarm(self, code=None) -> None:
+    async def async_alarm_disarm(self, code: str | None = None) -> None:
         """Send disarm command."""
 ```
 
@@ -83,10 +84,10 @@ Send arm home command.
 class MyAlarm(AlarmControlPanelEntity):
     # Implement one of these methods.
 
-    def alarm_arm_home(self, code=None) -> None:
+    def alarm_arm_home(self, code: str | None = None) -> None:
         """Send arm home command."""
 
-    async def async_alarm_arm_home(self, code=None) -> None:
+    async def async_alarm_arm_home(self, code: str | None = None) -> None:
         """Send arm home command."""
 ```
 
@@ -98,10 +99,10 @@ Send arm away command.
 class MyAlarm(AlarmControlPanelEntity):
     # Implement one of these methods.
 
-    def alarm_arm_away(self, code=None) -> None:
+    def alarm_arm_away(self, code: str | None = None) -> None:
         """Send arm away command."""
 
-    async def async_alarm_arm_away(self, code=None) -> None:
+    async def async_alarm_arm_away(self, code: str | None = None) -> None:
         """Send arm away command."""
 ```
 
@@ -113,10 +114,10 @@ Send arm night command.
 class MyAlarm(AlarmControlPanelEntity):
     # Implement one of these methods.
 
-    def alarm_arm_night(self, code=None) -> None:
+    def alarm_arm_night(self, code: str | None = None) -> None:
         """Send arm night command."""
 
-    async def async_alarm_arm_night(self, code=None) -> None:
+    async def async_alarm_arm_night(self, code: str | None = None) -> None:
         """Send arm night command."""
 ```
 
@@ -128,10 +129,10 @@ Send arm vacation command.
 class MyAlarm(AlarmControlPanelEntity):
     # Implement one of these methods.
 
-    def alarm_arm_vacation(self, code=None) -> None:
+    def alarm_arm_vacation(self, code: str | None = None) -> None:
         """Send arm vacation command."""
 
-    async def async_alarm_arm_vacation(self, code=None) -> None:
+    async def async_alarm_arm_vacation(self, code: str | None = None) -> None:
         """Send arm vacation command."""
 ```
 
@@ -143,10 +144,10 @@ Send alarm trigger command.
 class MyAlarm(AlarmControlPanelEntity):
     # Implement one of these methods.
 
-    def alarm_trigger(self, code=None) -> None:
+    def alarm_trigger(self, code: str | None = None) -> None:
         """Send alarm trigger command."""
 
-    async def async_alarm_trigger(self, code=None) -> None:
+    async def async_alarm_trigger(self, code: str | None = None) -> None:
         """Send alarm trigger command."""
 ```
 
@@ -158,9 +159,9 @@ Send arm custom bypass command.
 class MyAlarm(AlarmControlPanelEntity):
     # Implement one of these methods.
 
-    def alarm_arm_custom_bypass(self, code=None) -> None:
+    def alarm_arm_custom_bypass(self, code: str | None = None) -> None:
         """Send arm custom bypass command."""
 
-    async def async_alarm_arm_custom_bypass(self, code=None) -> None:
+    async def async_alarm_arm_custom_bypass(self, code: str | None = None) -> None:
         """Send arm custom bypass command."""
 ```

@@ -47,7 +47,7 @@ Properties should always only return information from memory and not do I/O (lik
 | source_list                     | <code>list[str] &#124; None</code>              | `None`  | The list of possible input sources for the media player. (This list should contain human readable names, suitable for frontend display).
 | state                           | <code>MediaPlayerState &#124; None</code>       | `None`  | State of the media player.
 | volume_level                    | <code>float &#124; None</code>                  | `None`  | Volume level of the media player in the range (0..1).
-| volume_step                     | <code>float &#124; None</code>                  | 0.1     | Volume step to use for the `volume_up` and `volume_down` services.
+| volume_step                     | <code>float &#124; None</code>                  | 0.1     | Volume step to use for the `volume_up` and `volume_down` service actions.
 
 ## Supported features
 
@@ -59,14 +59,15 @@ and are combined using the bitwise or (`|`) operator.
 | `BROWSE_MEDIA`      | Entity allows browsing media.                                      |
 | `CLEAR_PLAYLIST`    | Entity allows clearing the active playlist.                        |
 | `GROUPING`          | Entity can be grouped with other players for synchronous playback. |
-| `MEDIA_ANNOUNCE`    | Entity supports the `play_media` service's announce parameter.     |
-| `MEDIA_ENQUEUE`     | Entity supports the `play_media` service's enqueue parameter.      |
+| `MEDIA_ANNOUNCE`    | Entity supports the `play_media` action's announce parameter.      |
+| `MEDIA_ENQUEUE`     | Entity supports the `play_media` action's enqueue parameter.       |
 | `NEXT_TRACK`        | Entity allows skipping to the next media track.                    |
 | `PAUSE`             | Entity allows pausing the playback of media.                       |
 | `PLAY`              | Entity allows playing/resuming playback of media.                  |
 | `PLAY_MEDIA`        | Entity allows playing media sources.                               |
 | `PREVIOUS_TRACK`    | Entity allows returning back to a previous media track.            |
 | `REPEAT_SET`        | Entity allows setting repeat.                                      |
+| `SEARCH_MEDIA`      | Entity allows searching for media.                                 |
 | `SEEK`              | Entity allows seeking position during playback of media.           |
 | `SELECT_SOUND_MODE` | Entity allows selecting a sound mode.                              |
 | `SELECT_SOURCE`     | Entity allows selecting a source/input.                            |
@@ -89,8 +90,13 @@ The state of a media player is defined by using values in the `MediaPlayerState`
 | `IDLE`      | Entity is turned on and accepting commands, but currently not playing any media. Possibly at some idle home screen. |
 | `PLAYING`   | Entity is currently playing media.                                                                                  |
 | `PAUSED`    | Entity has an active media and is currently paused                                                                |
-| `STANDBY`   | Entity is in a low power state, accepting commands.                              |
 | `BUFFERING` | Entity is preparing to start playback of some media                                                                 |
+
+:::note
+
+It is common that media players can't be controlled when in a standby state. If Home Assistant can turn on the device using another protocol or method, it should be shown as `off` even if the main channel used to control the device is currently unavailable. If Home Assistant has no way to turn on the device, it should be shown as `unavailable`. See [entity-unavailable Exceptions](/docs/core/integration-quality-scale/rules/entity-unavailable.md#Exceptions) for more details.
+
+:::
 
 ## Methods
 
@@ -192,6 +198,32 @@ class MyMediaPlayer(MediaPlayerEntity):
         await self._media_player.play_url(media_id)
 ```
 
+### Search media
+
+If the media player supports searching media, it should implement the following method:
+
+```python
+class MyMediaPlayer(MediaPlayerEntity):
+
+    async def async_search_media(
+        self,
+        query: SearchMediaQuery,
+    ) -> SearchMedia:
+        """Search the media player."""
+        # search for the requested media on your library client.
+        result = await my_client.search(query=query.search_query)
+        return SearchMedia(result=result)
+```
+
+The SearchMediaQuery is a dataclass with the following properties:
+
+| Attribute             | Type                                  | Default     | Description                        |
+|-----------------------|---------------------------------------|-------------|------------------------------------|
+| `search_query`        | `str`                                 | *required*  | The search string or query.        |
+| `media_content_type`  | `MediaType \| str \| None`            | `None`      | The content type to search inside. |
+| `media_content_id`    | `str \| None`                         | `None`      | The content ID to search inside.   |
+| `media_filter_classes`| `list[MediaClass] \| None`            | `None`      | List of media classes to filter.   |
+
 ### Select sound mode
 
 Optional. Switch the sound mode of the media player.
@@ -250,7 +282,7 @@ class MyMediaPlayer(MediaPlayerEntity):
 ```
 
 :::info
-Using the integration name as the `media_content_type` is also acceptable within the `play_media` service if the integration provides handling which does not map to the defined constants.
+Using the integration name as the `media_content_type` is also acceptable within the `play_media` service action if the integration provides handling which does not map to the defined constants.
 :::
 
 ### Available device classes

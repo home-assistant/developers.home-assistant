@@ -21,7 +21,7 @@ The `strings.json` contains translations for different things that the integrati
 | `issues`            | Translations for repairs issues.                  |
 | `options`           | Translations for the options flow.                |
 | `selectors`         | Selectors of the integration.                     |
-| `services`          | Services of the integration.                      |
+| `services`          | Service actions of the integration.               |
 
 ### Title
 
@@ -54,15 +54,26 @@ Strings which are used more than once should be not be duplicated, instead refer
 }
 ```
 
-### Config / Options
+### Config / Options / Subentry flows
 
-The translation strings for the configuration flow handler and the option flow handler are defined under the `config` and `options` keys respectively. An example strings file below describes the different supported keys. Although the example shows translations for a configuration flow, the translations for an option flow is exactly the same.
+The translation strings for the configuration flow handler, the option flow handler and config subentry handlers are defined under the `config`, `options` and `config_subentries` keys respectively.
+
+Note that `config_subentries` is a map of maps, where the keys are the subentry types supported by the integration.
+
+The example strings file below describes the different supported keys. Although the example shows translations for a configuration flow, the options and subentry flow translations follow the same format.
 
 ```json
 {
   "config": {
     // Optional. Title to show in list. Only will be rendered if placeholders required
     "flow_title": "Discovered Device ({host})",
+    // Optional, only needed if the default translations in frontend are misleading
+    "entry_type": "Label explaining what an entry represents",
+    // Optional, only needed if the default translations in frontend are misleading
+    "initiate_flow": {
+        "reconfigure": "Menu or button label for starting a reconfigure flow",
+        "user": "Menu or button label for starting a user flow"
+    },
     "step": {
       "init": {
         // Optional. Will show the integration name if omitted
@@ -71,6 +82,12 @@ The translation strings for the configuration flow handler and the option flow h
         "description": "Markdown that is shown with the step.",
         "data": {
           "api_key": "The label for the `api_key` input field"
+        },
+        // Only needed if the form has sections
+        "sections": {
+          "auth_options": {
+            "name": "The label for the `auth_options` section"
+          }
         }
       }
     },
@@ -82,6 +99,17 @@ The translation strings for the configuration flow handler and the option flow h
     },
     "progress": {
       "slow_task": "This message will be displayed if `slow_task` is returned as `progress_action` for `async_show_progress`."
+    }
+  },
+  "options": {
+    // Same format as for config flow
+  },
+  "config_subentries": {
+    "subentry_type_1": {
+      // Same format as for config flow
+    },
+    "subentry_type_2": {
+      // Same format as for config flow
     }
   }
 }
@@ -123,12 +151,33 @@ The translation for selectors are defined under the `selector` key. It supports 
 
 ```
 
-### Services
+The `unit_of_measurement` of a number selector may also be translated with a translation key:
+```json
+{
+  // Translations for number selector to be used in option and config flows
+  "selector": {
+    // The key is linked to the `translation_key` that needs to be set
+    // using the NumberSelectorConfig class
+    "round_digits": {
+      // The translations for the number selector unit_of_measurement
+      "unit_of_measurement": {
+        "decimals": "decimals"
+      }
+    }
+  }
+}
+```
 
-The translations of service strings are defined under the `services` key.
+### Service Actions
 
-It supports translating the `name` and `description` of each service,
-and the `name` and `description` of each service's `fields`.
+The translations of service actions strings are defined under the `services` key.
+
+It supports translating the `name` and `description` of each action,
+`name` and `description` of each action's `fields`, and the `name` and `description` of
+each collapsible section of fields.
+
+Note that also the translations for `name` and `description` of fields which
+are displayed in a collapsible section should be under the `fields` key.
 
 ```json
 {
@@ -151,6 +200,11 @@ and the `name` and `description` of each service's `fields`.
           "name": "Speed",
           "description": "The speed to set."
         }
+      },
+      "sections": {
+        "advanced_fields": {
+          "name": "Advanced options"
+        }
       }
     }
   }
@@ -158,7 +212,7 @@ and the `name` and `description` of each service's `fields`.
 ```
 
 :::note
-Services may use selectors in their `fields`. The translation of those selectors can be provided using the `translation_key` property on the selector definition in the services.yaml file. See the [Selectors](#selectors) section and the [Service description](/docs/dev_101_services.md#service-descriptions) page for more information.
+Service actions may use selectors in their `fields`. The translation of those selectors can be provided using the `translation_key` property on the selector definition in the services.yaml file. See the [Selectors](#selectors) section and the [Service action description](/docs/dev_101_services.md#service-action-descriptions) page for more information.
 :::
 
 ### Device automations
@@ -207,7 +261,7 @@ The translation strings for exceptions are defined under the `exception` key in 
 
 ```
 
-Example of raising an exception with localization during a service call:
+Example of raising an exception with localization during a service action call:
 
 ```python
 async def async_select_index(hass: HomeAssistant, index: int) -> None:
@@ -235,7 +289,7 @@ The translation strings for repairs issues are defined under the `issues` key. A
       // The title of the issue
       "title": "The tea is cold",
       // Translations for a fixable issue's repair flow, defined in the same way as translation for a configuration flow.
-      // Exactly one of `fix_flow` or `description. must be present.
+      // Exactly one of `fix_flow` or `description`. must be present.
       "fix_flow": {
         "abort": {
           "not_tea_time": "Can not re-heat the tea at this time"
@@ -244,7 +298,7 @@ The translation strings for repairs issues are defined under the `issues` key. A
     },
     "unfixable_problem": {
       "title": "This is not a fixable problem",
-      // Description of the issue, exactly one of `fix_flow` or `description. must be present.
+      // Description of the issue, exactly one of `fix_flow` or `description`. must be present.
       "description": "This issue can't be fixed by a flow."
     }
   }
@@ -287,6 +341,8 @@ The following example `strings.json` is for a device with its `translation_key` 
 #### Name of entities
 Integrations can provide translations for names of its entities. To do this, provide an `entity` object, that contains translations of the names and set the entity's `translation_key` property to a key under a domain in the `entity` object.
 If the entity's `translation_key` property is not `None` and the `entity` object provides a translated name, `EntityDescription.name` will be ignored.
+
+Localization of entity names is only supported for entities which set the [`has_entity_name`](/docs/core/entity#has_entity_name-true-mandatory-for-new-integrations) property to `True`.
 
 Entity components, like `sensor`, already have existing translations available that can be reused by referencing those. This includes common translations for entity names based on a device class. For example, it already has translations available for a "Temperature" sensor that can be referenced. Referencing existing translations is preferred, as it prevents translating the same thing multiple times.
 
@@ -452,6 +508,24 @@ If your integration provides entities under its domain, you will want to transla
             "diffuse": "Diffuse"
           }
         }
+      }
+    }
+  }
+}
+```
+
+#### Unit of measurement of entities
+
+Integrations can provide translations for units of measurement of its entities. To do this, provide an `entity` object, that contains translations for the units and set the entity's `translation_key` property to a key under a domain in the `entity` object.
+If the entity's `translation_key` property is not `None` and the `entity` object provides a translated unit of measurement, `SensorEntityDescription.native_unit_of_measurement` or `NumberEntityDescription.native_unit_of_measurement` should not be defined.
+
+The following example `strings.json` is for a `sensor` entity with its `translation_key` property set to `goal`:
+```json
+{
+  "entity": {
+    "sensor": {
+      "goal": {
+        "unit_of_measurement": "steps"
       }
     }
   }

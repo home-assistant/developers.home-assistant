@@ -119,6 +119,7 @@ For a more detailed explanation of `strings.json` see the [backend tra
 This result type will show a form to the user to fill in. You define the current step, the schema of the data (using a mixture of voluptuous and/or [selectors](https://www.home-assistant.io/docs/blueprint/selectors/)) and optionally a dictionary of errors.
 
 ```python
+from homeassistant.data_entry_flow import section
 from homeassistant.helpers.selector import selector
 
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
@@ -127,10 +128,21 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         data_schema = {
             vol.Required("username"): str,
             vol.Required("password"): str,
+            # Items can be grouped by collapsible sections
+            vol.Required("ssl_options"): section(
+                vol.Schema(
+                    {
+                        vol.Required("ssl", default=True): bool,
+                        vol.Required("verify_ssl", default=True): bool,
+                    }
+                ),
+                # Whether or not the section is initially collapsed (default = False)
+                {"collapsed": False},
+            )
         }
 
         if self.show_advanced_options:
-            data_schema["allow_groups"] = selector({
+            data_schema[vol.Optional("allow_groups")] = selector({
                 "select": {
                     "options": ["all", "light", "switch"],
                 }
@@ -139,16 +151,57 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         return self.async_show_form(step_id="init", data_schema=vol.Schema(data_schema))
 ```
 
+#### Grouping of input fields
+
+As shown in the example above, input fields can be visually grouped in sections. 
+
+Each section has a [translatable name and description](#labels--descriptions), and it's also possible to specify an icon.
+
+Grouping input fields by sections influences both how the inputs are displayed to the user and how user input is structured.
+In the example above, user input will be structured like this:
+
+```python
+{
+    "username": "user",
+    "password": "hunter2",
+    "ssl_options": {
+        "ssl": True,
+        "verify_ssl": False,
+    },
+}
+```
+
+Only a single level of sections is allowed; it's not possible to have sections inside a section.
+
+To specify an icon for a section, update `icons.json` according to this example:
+
+```json
+{
+  "config": {
+    "step": {
+      "user": {
+        "sections": {
+          "ssl_options": "mdi:lock"
+        }
+      }
+    }
+  }
+}
+```
+
 #### Labels & descriptions
 
 Translations for the form are added to `strings.json` in a key for the `step_id`. That object may contain the folowing keys:
 
-|        Key         |       Value        | Notes                                                                                                                                        |
-| :----------------: | :----------------: | :------------------------------------------------------------------------------------------------------------------------------------------- |
-|      `title`       |    Form heading    | Do not include your brand name. It will be automatically injected from your manifest.                                                        |
-|   `description`    | Form instructions  | Optional. Do not link to the documentation as that is linked automatically. Do not include "basic" information like "Here you can set up X". |
-|       `data`       |    Field labels    | Keep succinct and consistent with other integrations whenever appropriate for the best user experience.                                      |
-| `data_description` | Field descriptions | Optional explanatory text to show below the field.                                                                                           |
+|        Key         |       Value         | Notes                                                                                                                                        |
+| :----------------: | :-----------------: | :------------------------------------------------------------------------------------------------------------------------------------------- |
+|      `title`       |    Form heading     | Do not include your brand name. It will be automatically injected from your manifest.                                                        |
+|   `description`    | Form instructions   | Optional. Do not link to the documentation as that is linked automatically. Do not include "basic" information like "Here you can set up X". |
+|       `data`       |    Field labels     | Keep succinct and consistent with other integrations whenever appropriate for the best user experience.                                      |
+| `data_description` | Field descriptions  | Optional explanatory text to show below the field.                                                                                           |
+|     `section`      | Section translation | Translations for sections, each section may have `name` and `description` of the section and `data` and `data_description` for its fields.   |
+
+More details about translating data entry flows can be found in the [core translations documentation](/docs/internationalization/core).
 
 The field labels and descriptions are given as a dictionary with keys corresponding to your schema. Here is a simple example:
 
@@ -160,11 +213,23 @@ The field labels and descriptions are given as a dictionary with keys correspond
           "title": "Add Group",
           "description": "Some description",
           "data": {
-              "entities": "Entities",
+              "entities": "Entities"
           },
           "data_description": {
-              "entities": "The entities to add to the group",
+              "entities": "The entities to add to the group"
           },
+          "sections": {
+              "additional_options": {
+                  "name": "Additional options",
+                  "description": "A description of the section",
+                  "data": {
+                      "advanced_group_option": "Advanced group option"
+                  },
+                  "data_description": {
+                      "advanced_group_option": "A very complicated option which does abc"
+                  },
+              }
+          }
       }
     }
   }
@@ -249,6 +314,33 @@ class ExampleOptionsFlow(config_entries.OptionsFlow):
             )
         )
 ```
+
+Note: For select type inputs (created from a `vol.In(...)` schema), if no `default` is specified, the first option will be selected by default in the frontend.
+
+#### Displaying read-only information
+
+Some integrations have options which are frozen after initial configuration. When displaying an options flow, you can show this information in a read-only way, so that users may remember which options were selected during the initial configuration. For this, define an optional selector as usual, but with the `read_only` flag set to `True`.
+
+```python
+# Example Config Flow Schema
+DATA_SCHEMA_SETUP = vol.Schema(
+    {
+        vol.Required(CONF_ENTITY_ID): EntitySelector()
+    }
+)
+
+# Example Options Flow Schema
+DATA_SCHEMA_OPTIONS = vol.Schema(
+    {
+        vol.Optional(CONF_ENTITY_ID): EntitySelector(
+            EntitySelectorConfig(read_only=True)
+        ),
+        vol.Optional(CONF_TEMPLATE): TemplateSelector(),
+    }
+)
+```
+
+This will show the entity selected in the initial configuration as a read-only property whenever the options flow is launched. 
 
 #### Validation
 
@@ -409,6 +501,7 @@ The flow works as follows:
   * If the task is finished, the flow must call the `async_show_progress_done`, indicating the next step
 5. The frontend will update each time we call show progress or show progress done.
 6. The config flow will automatically advance to the next step when the progress was marked as done. The user is prompted with the next step.
+7. The task can optionally call `async_update_progress(progress)` where progress is a float between 0 and 1, indicating how much of the task is done.
 
 Example configuration flow that includes two show sequential progress tasks.
 
@@ -434,6 +527,7 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
             uncompleted_task = self.task_one
         if not uncompleted_task:
             if not self.task_two:
+                self.async_update_progress(0.5) # tell frontend we are 50% done
                 coro = asyncio.sleep(10)
                 self.task_two = self.hass.async_create_task(coro)
             if not self.task_two.done():
@@ -455,7 +549,7 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
 ### Show menu
 
-This will show a navigation menu to the user to easily pick the next step. The menu labels can be hardcoded by specifying a dictionary of `{step_id: label}` or translated via `strings.json` when specifying a list.
+This will show a navigation menu to the user to easily pick the next step. The menu labels can be hardcoded by specifying a dictionary of `{step_id: label}` or translated via `strings.json` under "menu_options" when specifying a list. Additionally menu descriptions can be provided via `strings.json` under "menu_option_descriptions".
 
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
@@ -485,12 +579,18 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         "menu_options": {
           "discovery": "Discovery",
           "manual": "Manual ({model})",
+        },
+        "menu_option_descriptions": {
+          "discovery": "Description of discovery",
+          "manual": "Description of manual",
         }
       }
     }
   }
 }
 ```
+
+Passing `sort=True` to async_show_menu will also sort the menu items by their label in the user's language.
 
 ## Initializing a config flow from an external source
 
