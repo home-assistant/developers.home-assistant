@@ -1,0 +1,130 @@
+---
+title: "Setting Up a Devcontainer Development Environment"
+---
+
+The easiest way to get started with development is to use Visual Studio Code with [devcontainers](https://code.visualstudio.com/docs/devcontainers/containers). This approach creates a preconfigured development environment with the necessary tools, and is enabled for all Home Assistant repositories. Since the Docker-based devcontainer concept provides a layer of abstraction, the following guides merge at one point.
+
+First, install [Visual Studio Code](https://code.visualstudio.com/), next follow one of the next chapters based on your system.
+
+## Setup on Windows
+
+:::tip
+**Quick start guide**
+
+- Install [WSL2](https://learn.microsoft.com/en-us/windows/wsl/install) and enable [systemd support](https://devblogs.microsoft.com/commandline/systemd-support-is-now-available-in-wsl/).
+- Install the [Docker engine](https://docs.docker.com/engine/install/) based on your selected WSL2 Linux distribution.
+- Fork and clone the desired code repository within the WSL2.
+- [Start the devcontainer](#fork-the-repository-and-start-the-devcontainer).
+
+:::
+
+### Install WSL2
+
+This section outlines the steps for Windows 10 (_version 2004 and later_) and Windows 11. If you're still running an older version, follow these [manual installation steps](https://learn.microsoft.com/en-us/windows/wsl/install-manual).
+
+1. Run the following command in the Windows terminal to install the needed features to run WSL and install the default Ubuntu distribution:
+
+    ```batch
+    wsl --install
+    ```
+
+2. Check the WSL version, if the version is already 2, skip the "set wsl version" step.
+
+    ```batch
+    wsl -l -v
+    ```
+
+3. Set the WSL version to 2 if necessary (_replace `<distro name>` with the installed distribution name; see the output above_).
+
+    ```batch
+    wsl --set-version <distro name> 2
+    ```
+
+### Enable systemd support in WSL2
+
+Since the Docker engine is installed as systemd service, we need to ensure systemd support is enabled in the WSL2.
+
+1. Start the WSL shell by issuing just the `wsl` command in the Windows terminal.
+2. Add the following lines to `/etc/wsl.conf`; you will need to open the file with root privileges (_for example, `sudo nano /etc/wsl.conf`_):
+
+    ```raw
+    [boot]
+    systemd=true
+    ```
+
+3. Shutdown WSL2 with the following command on the Windows terminal:
+
+    ```batch
+    wsl --shutdown
+    ```
+
+4. Start the WSL shell again and run the following command to check that systemd is running:
+
+    ```shell
+    systemctl list-units
+    ```
+
+
+### Follow "Setup on Linux"
+
+From this point on, you can follow the [Setup on Linux](#setup-on-linux) instructions below, note that all steps must be performed within the WSL2 shell. When choosing the correct steps to install the docker engine, use the installed WSL2 distribution (_the default is Ubuntu_).
+
+## Setup on Linux
+
+:::tip
+**Quick start guide**
+
+- Install the [Docker engine](https://docs.docker.com/engine/install/) based on your Linux distribution.
+- Fork and clone the desired code repository.
+- [Start the devcontainer](#fork-the-repository-and-start-the-devcontainer).
+
+:::
+
+### Install Docker Engine
+
+Since these instructions vary depending on your Linux distribution, we only provide a rough overview. For detailed instructions, follow the official [Docker engine](https://docs.docker.com/engine/install/) install guide.
+
+1. Update all installed packages.
+2. Add the Docker repository for your package manager (_like `yum` or `apt`_).
+3. Update your package repository package index.
+4. Install the Docker engine packages.
+5. Follow the [Linux post-installation steps for Docker Engine](https://docs.docker.com/engine/install/linux-postinstall/#manage-docker-as-a-non-root-user) instructions to allow non-root users to use Docker.
+
+## Setup on macOS
+
+:::tip
+**Quick start guide**
+
+- Install [Docker Desktop](https://docs.docker.com/desktop/install/mac-install/).
+- Fork and clone the desired code repository.
+- [Start the devcontainer](#fork-the-repository-and-start-the-devcontainer).
+
+:::
+
+### Install Docker Desktop
+
+Since the installation steps are well documented and may change over time, we refer to the official [Install Docker Desktop on Mac](https://docs.docker.com/desktop/install/mac-install/) guide.
+
+## Fork the repository and start the devcontainer
+
+Since this slightly differs between our code repositories, the following is a generic guide.
+
+1. Open the desired code repository on GitHub (_for example, the [Home Assistant Core repository](https://github.com/home-assistant/core)_), and click on "fork".
+2. Once your fork is created, copy the URL of your fork and clone it to a local directory on your computer.
+
+    ```shell
+    cd $HOME
+    git clone <URL>
+    ```
+
+3. Change into the directory of your fork and start Visual Studio Code from there:
+
+    ```shell
+    cd <FORKNAME>
+    code .
+    ```
+
+4. Visual Studio Code will automatically detect the devcontainer and prompt to "Reopen in Container" (_bottom right corner_) - click on it.
+    <p class='img'>
+    <img src='/img/en/development/reopen_in_container.png' />
+    </p>
