@@ -1516,23 +1516,38 @@ Returns information about the docker instance.
 
 **Returned data:**
 
-key | type | description
--- | -- | --
-version | string | The version of the docker engine
-storage | string | The storage type
-logging | string | The logging type
-registries | dictionary | A dictionary of dictionaries containing `username` and `password` keys for registries.
+| key         | type   | description                        |
+| ----------- | ------ | ---------------------------------- |
+| version     | string | The version of the docker engine   |
+| enable_ipv6 | bool   | Enable/Disable IPv6 for containers |
+| storage     | string | The storage type                   |
+| logging     | string | The logging type                   |
+| registries  | dictionary | A dictionary of dictionaries containing `username` and `password` keys for registries. |
 
 **Example response:**
 
 ```json
 {
   "version": "1.0.1",
+  "enable_ipv6": true,
   "storage": "overlay2",
   "logging": "journald",
   "registries": {}
 }
 ```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/docker/options" method="post">
+Set docker options
+
+**Payload:**
+
+| key         | type | optional | description                        |
+| ----------- | ---- | -------- | ---------------------------------- |
+| enable_ipv6 | bool | True     | Enable/Disable IPv6 for containers |
+
+**You need to supply at least one key in the payload.**
 
 </ApiEndpoint>
 
@@ -1693,6 +1708,11 @@ Return information about the host.
 | llmnr_hostname   | string or null | The hostname currently exposed on the network via LLMNR for host |
 | operating_system | string         | The operating system on the host          |
 | startup_time     | float          | The time in seconds it took for last boot |
+| disk_life_time   | float or null  | Percentage of estimated disk lifetime used (0–100). Not all disks provide this information, returns `null` if unavailable. |
+| timezone         | string         | The current timezone of the host. |
+| dt_utc           | string         | Current UTC date/time of the host in ISO 8601 format. |
+| dt_synchronized  | bool           | `true` if the host is synchronized with an NTP service. |
+| use_ntp          | bool           | `true` if the host is using an NTP service for time synchronization. |
 
 **Example response:**
 
@@ -1714,7 +1734,13 @@ Return information about the host.
   "boot_timestamp": 1234567788,
   "startup_time": 12.345,
   "broadcast_llmnr": true,
-  "broadcast_mdns": false
+  "broadcast_mdns": false,
+  "virtualization": "",
+  "disk_life_time": 10.0,
+  "timezone": "Europe/Brussels",
+  "dt_utc": "2025-09-08T12:00:00.000000+00:00",
+  "dt_synchronized": true,
+  "use_ntp": true
 }
 ```
 
@@ -1731,6 +1757,23 @@ log record per line.
 | -------- | -------- |-------------------------------------------------------------------------------|
 | Accept   | true     | Type of data (text/plain or text/x-log)                                       |
 | Range    | true     | Range of log entries. The format is `entries=cursor[[:num_skip]:num_entries]` |
+
+**HTTP Query Parameters**
+
+These are a convenience alternative to the headers shown above as query
+parameters are easier to use in development and with the Home Assistant proxy.
+You should only provide one or the other.
+
+| Query    | type  | description                                                                        |
+| -------- | ----- |----------------------------------------------------------------------------------- |
+| verbose  | N/A   | If included, uses `text/x-log` as log output type (alternative to `Accept` header) |
+| lines    | int   | Number of lines of output to return (alternative to `Range` header)                |
+
+Example query string:
+
+```text
+?verbose&lines=100
+```
 
 :::tip
 To get the last log entries the Range request header supports negative values
@@ -1903,6 +1946,68 @@ Shutdown the host
 | key       | type       | optional | description                                                 |
 | --------- | ---------- | -------- | ----------------------------------------------------------- |
 | force     | boolean    | True     | Force shutdown during a Home Assistant offline db migration |
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/host/disks/<disk>/usage" method="get">
+Get detailed disk usage information in bytes.
+
+The only supported `disk` for now is "default". It will return usage info for the data disk.
+
+Supports an optional `max_depth` query param. Defaults to 1
+
+**Example response:**
+
+```json
+{
+  "id": "root",
+  "label": "Default",
+  "total_space": 503312781312,
+  "used_space": 430245011456,
+  "children": [
+    {
+      "id": "system",
+      "label": "System",
+      "used_space": 75660903137
+    },
+    {
+      "id": "addons_data",
+      "label": "Addons data",
+      "used_space": 42349200762
+    },
+    {
+      "id": "addons_config",
+      "label": "Addons configuration",
+      "used_space": 5283318814
+    },
+    {
+      "id": "media",
+      "label": "Media",
+      "used_space": 476680019
+    },
+    {
+      "id": "share",
+      "label": "Share",
+      "used_space": 37477206419
+    },
+    {
+      "id": "backup",
+      "label": "Backup",
+      "used_space": 268350699520
+    },
+    {
+      "id": "ssl",
+      "label": "SSL",
+      "used_space": 202912633
+    },
+    {
+      "id": "homeassistant",
+      "label": "Home assistant",
+      "used_space": 444090152
+    }
+  ]
+}
+```
 
 </ApiEndpoint>
 
@@ -2110,7 +2215,7 @@ Returns a dict with selected keys from other `/*/info` endpoints.
   "channel": "stable",
   "logging": "info",
   "state": "running",
-  "timezone": "Europe/Tomorrowland"
+  "timezone": "Europe/Brussels"
 }
 ```
 
@@ -2384,16 +2489,27 @@ Update the settings for a network interface.
 
 | key     | type   | optional | description                                                            |
 | ------- | ------ | -------- | ---------------------------------------------------------------------- |
-| enabled | bool   | True     | Enable/Disable an ethernet interface / VLAN got removed with disabled   |
-| ipv4    | dict   | True     | A struct with ipv4 interface settings                                  |
+| enabled | bool   | True     | Enable/Disable an ethernet interface / VLAN got removed with disabled  |
 | ipv6    | dict   | True     | A struct with ipv6 interface settings                                  |
+| ipv4    | dict   | True     | A struct with ipv4 interface settings                                  |
 | wifi    | dict   | True     | A struct with Wireless connection settings                             |
 
-**ipv4 / ipv6:**
+**ipv6:**
+
+| key           | type   | optional | description                                                                                         |
+| ------------- | ------ | -------- | --------------------------------------------------------------------------------------------------- |
+| method        | string | True     | Set IP configuration method can be `auto` for DHCP or Router Advertisements, `static` or `disabled` |
+| addr_gen_mode | string | True     | Address generation mode can be `eui64`, `stable-privacy`, `default-or-eui64` or `default`           |
+| ip6_privacy   | string | True     | Privacy extensions options are `disabled`, `enabled-prefer-public`, `enabled` or `default`          |
+| address       | list   | True     | The new IP address for the interface in the ::/XX format as list                                    |
+| nameservers   | list   | True     | List of DNS servers to use                                                                          |
+| gateway       | string | True     | The gateway the interface should use                                                                |
+
+**ipv4:**
 
 | key         | type   | optional | description                                                                           |
 | ----------- | ------ | -------- | ------------------------------------------------------------------------------------- |
-| method      | string | True     | Set IP configuration method can be `auto` for DHCP or Router Advertisements (only IPv6), `static` or `disabled`     |
+| method      | string | True     | Set IP configuration method can be `auto` for DHCP, `static` or `disabled`            |
 | address     | list   | True     | The new IP address for the interface in the X.X.X.X/XX format as list                 |
 | nameservers | list   | True     | List of DNS servers to use                                                            |
 | gateway     | string | True     | The gateway the interface should use                                                  |
@@ -2402,7 +2518,7 @@ Update the settings for a network interface.
 
 | key    | type   | optional | description                                                                    |
 | ------ | ------ | -------- | ------------------------------------------------------------------------------ |
-| mode   | string | True     | Set the mode `infrastructure` (default), `mesh`, `adhoc` or `ap`              |
+| mode   | string | True     | Set the mode `infrastructure` (default), `mesh`, `adhoc` or `ap`               |
 | auth   | string | True     | Set the auth mode: `open` (default), `web`, `wpa-psk`                          |
 | ssid   | string | True     | Set the SSID for connect into                                                  |
 | psk    | string | True     | The shared key which is used with `web` or `wpa-psk`                           |
@@ -2419,7 +2535,7 @@ Return a list of available [Access Points](api/supervisor/models.md#access-point
 
 | key          | description                                                            |
 | ------------ | ---------------------------------------------------------------------- |
-| accesspoints | A list of [Access Points](api/supervisor/models.md#access-points) |
+| accesspoints | A list of [Access Points](api/supervisor/models.md#access-points)      |
 
 **Example response:**
 
@@ -2449,8 +2565,8 @@ Create a new VLAN *id* on this network interface.
 
 | key     | type   | optional | description                                                            |
 | ------- | ------ | -------- | ---------------------------------------------------------------------- |
-| ipv4    | dict   | True     | A struct with ipv4 interface settings                                  |
 | ipv6    | dict   | True     | A struct with ipv6 interface settings                                  |
+| ipv4    | dict   | True     | A struct with ipv4 interface settings                                  |
 
 </ApiEndpoint>
 
@@ -2674,8 +2790,8 @@ Move datadisk to a new location, **This will also reboot the device!**
 
 **Payload:**
 
-| key     | type   | description                                                       |
-| ------- | ------ | ----------------------------------------------------------------- |
+| key     | type   | description                                                                     |
+| ------- | ------ | ------------------------------------------------------------------------------- |
 | device  | string | ID of the disk device which should be used as the target for the data migration |
 
 </ApiEndpoint>
@@ -3171,6 +3287,14 @@ Get the add-on icon
 Get the add-on logo
 </ApiEndpoint>
 
+<ApiEndpoint path="/store/addons/<addon>/availability" method="get">
+
+Returns 200 success status if the latest version of the add-on is able to be
+installed on the current system. Returns a 400 error status if it is not with a
+message explaining why.
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/store/reload" method="post">
 
 Reloads the information stored about add-ons.
@@ -3337,6 +3461,7 @@ Returns information about the supervisor
 | diagnostics         | bool or null | Sending diagnostics is enabled                                |
 | addons_repositories | list         | A list of add-on repository URL's as strings                  |
 | auto_update         | bool         | Is auto update enabled for supervisor                         |
+| detect_blocking_io  | bool         | Supervisor raises exceptions for blocking I/O in event loop   |
 
 **Example response:**
 
@@ -3357,7 +3482,8 @@ Returns information about the supervisor
   "debug_block": false,
   "diagnostics": null,
   "addons_repositories": ["https://example.com/addons"],
-  "auto_update": true
+  "auto_update": true,
+  "detect_blocking_io": false
 }
 ```
 
@@ -3414,6 +3540,7 @@ You need to call `/supervisor/reload` after updating the options.
 | logging             | string | Set logging level                                      |
 | addons_repositories | list   | Set a list of URL's as strings for add-on repositories |
 | auto_update         | bool   | Enable/disable auto update for supervisor              |
+| detect_blocking_io  | string | Enable blocking I/O in event loop detection. Valid values are `on`, `off` and `on_at_startup`. |
 
 </ApiEndpoint>
 
@@ -3470,7 +3597,7 @@ Update the supervisor
 
 | key     | type   | description                                                    |
 | ------- | ------ | -------------------------------------------------------------- |
-| version | string | The version you want to install, default is the latest version |
+| version | string | The version to install. Defaults to the latest version. Development only: Only works in the Supervisor development environment. |
 
 </ApiEndpoint>
 

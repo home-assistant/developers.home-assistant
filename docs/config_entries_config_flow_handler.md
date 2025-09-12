@@ -496,6 +496,32 @@ class LocationSubentryFlowHandler(ConfigSubentryFlow):
 
 ```
 
+## Continuing in another flow
+
+A config flow can start another config flow and tell the frontend that it should show the other flow once the first flow is finished. To do this the first flow needs to pass the `next_flow` parameter to the `async_create_entry` method. The argument should be a tuple of the form `(flow_type, flow_id)`.
+
+```python
+from homeassistant.config_entries import SOURCE_USER, ConfigFlow, FlowType
+
+
+class ExampleFlow(ConfigFlow):
+    """Example flow."""
+
+    async def async_step_user(
+        self, user_input: dict[str, Any] | None = None
+    ) -> ConfigFlowResult:
+        """Show create entry with next_flow parameter."""
+        result = await self.hass.config_entries.flow.async_init(
+            "another_integration_domain",
+            context={"source": SOURCE_USER},
+        )
+        return self.async_create_entry(
+            title="Example",
+            data={},
+            next_flow=(FlowType.CONFIG_FLOW, result["flow_id"]),
+        )
+```
+
 ## Testing your config flow
 
 Integrations with a config flow require full test coverage of all code in `config_flow.py` to be accepted into core. [Test your code](development_testing.md#running-a-limited-test-suite) includes more details on how to generate a coverage report.

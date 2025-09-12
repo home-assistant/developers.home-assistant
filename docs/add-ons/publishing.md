@@ -40,7 +40,7 @@ For a git repository:
 docker run \
   --rm \
   --privileged \
-  -v ~/.docker:/root/.docker \
+  -v ~/.docker/config.json:/root/.docker/config.json:ro \
   ghcr.io/home-assistant/amd64-builder \
   --all \
   -t addon-folder \
@@ -54,7 +54,7 @@ For a local repository:
 docker run \
   --rm \
   --privileged \
-  -v ~/.docker:/root/.docker \
+  -v ~/.docker/config.json:/root/.docker/config.json:ro \
   -v /my_addon:/data \
   ghcr.io/home-assistant/amd64-builder \
   --all \
