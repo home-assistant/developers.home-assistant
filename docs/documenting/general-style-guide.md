@@ -46,6 +46,11 @@ A few notes about the use of markdown in this documentation:
   1. List item 2.
   1. List item 3.
   ```
+## Images
+
+If you use images, upload them to the images folder in the documentation repository. Do not link to external images, for example on your private GitHub repository.
+
+See also the [section on images and integration logos](https://developers.home-assistant.io/docs/documenting/create-page#images-icons-and-logos).
 
 ## YAML and templates
 
