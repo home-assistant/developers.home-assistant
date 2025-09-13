@@ -7,7 +7,7 @@ Template sentences are defined in YAML files using the format of [Hassil, our te
  - `_common.yaml` - Lists, expansion rules and skip words to be used across all template sentences.
  - `<domain>_<intent>.yaml` - Template sentences for a [single intent](../../intent_builtin) and domain.
 
-Besides the data in `_common.yaml`, template sentences can also use the lists `name` and `area`. These lists are made available by Home Assistant during intent recognition.
+Besides the data in `_common.yaml`, template sentences can also use the lists `name`, `area`, and `floor`. These lists are made available by Home Assistant during intent recognition.
 
 ``` yaml
 # Example light_HassTurnOn.yaml
