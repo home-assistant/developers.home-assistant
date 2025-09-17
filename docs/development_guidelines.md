@@ -70,22 +70,24 @@ to the `.strict-typing` file in the root of the Home Assistant Core project.
 
 ### Function docstring convention
 
-Thanks to modern type annotations, the function signature is often enough documentation for function parameters.
+Type annotations usually document function parameters.
 
-However, when extended documentation is needed, docstrings which document parameters, return value or exceptions 
-should follow the [Google style](https://google.github.io/styleguide/pyguide.html#383-functions-and-methods)
+When you need extended documentation, follow the [Google style](https://google.github.io/styleguide/pyguide.html#383-functions-and-methods)
+for docstrings that document parameters, return values, or exceptions.
 
 ```python
-def some_method(self, param1: str, param2: str) -> None:
-    """This is an example of Google style.
+def some_method(self, param1: str, param2: str) -> int:
+    """Example Google-style docstring.
 
     Args:
-        param1: This is the first param.
-        param2: This is the second param.
+        param1: The first parameter.
+        param2: The second parameter.
 
     Returns:
-        This is a description of what is returned.
+        An integer result.
 
     Raises:
-        KeyError: Raises an exception when the key doesn't exist.
+        KeyError: If the key doesn't exist.
+    """
+    return 0
 ```
