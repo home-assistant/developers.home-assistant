@@ -11,4 +11,4 @@ The concentration of Carbon Monoxide is often expressed in PPM (parts per millio
 
 Directive 2008/50/EC of the European Parliament and of the Council of 21 May 2008 requires carbon monoxide pollution to be measured in mg/m³.
 
-With [#152456](https://github.com/home-assistant/core/pull/152456) this new unit or measurement is now supported for both `sensor` and `number` entity platforms with the `carbon_monoxide` device class.
+With [#152456](https://github.com/home-assistant/core/pull/152456), this new unit or measurement including unit conversion is now supported for both `sensor` and `number` entity platforms with the `carbon_monoxide` device class.
