@@ -73,7 +73,8 @@ to the `.strict-typing` file in the root of the Home Assistant Core project.
 Type annotations usually document function parameters.
 
 When you need extended documentation, follow the [Google style](https://google.github.io/styleguide/pyguide.html#383-functions-and-methods)
-for docstrings that document parameters, return values, or exceptions.
+for docstrings that document parameters, return values, or exceptions. In such cases, type information for the parameters and the return value
+should already be specified in the type annotations, and should be omitted from the docstrings.
 
 ```python
 def some_method(self, param1: str, param2: str) -> int:
