@@ -66,6 +66,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.PH` | None | Potential hydrogen (pH) of an aqueous solution
 | `SensorDeviceClass.PM1` | µg/m³ | Concentration of particulate matter less than 1 micrometer
 | `SensorDeviceClass.PM25` | µg/m³ | Concentration of particulate matter less than 2.5 micrometers
+| `SensorDeviceClass.PM4` | µg/m³ | Concentration of particulate matter less than 4 micrometers
 | `SensorDeviceClass.PM10` | µg/m³ | Concentration of particulate matter less than 10 micrometers
 | `SensorDeviceClass.POWER` | mW, W, kW, MW, GW, TW | Power.
 | `SensorDeviceClass.POWER_FACTOR` | %, None | Power Factor

@@ -63,6 +63,7 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.PH` | None | Potential hydrogen (pH) of an aqueous solution
 | `NumberDeviceClass.PM1` | µg/m³ | Concentration of particulate matter less than 1 micrometer
 | `NumberDeviceClass.PM25` | µg/m³ | Concentration of particulate matter less than 2.5 micrometers
+| `NumberDeviceClass.PM4` | µg/m³ | Concentration of particulate matter less than 4 micrometers
 | `NumberDeviceClass.PM10` | µg/m³ | Concentration of particulate matter less than 10 micrometers
 | `NumberDeviceClass.POWER` | mW, W, kW, MW, GW, TW | Power.
 | `NumberDeviceClass.POWER_FACTOR` | %, None | Power Factor
