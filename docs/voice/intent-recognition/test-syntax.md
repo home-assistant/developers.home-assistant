@@ -8,7 +8,7 @@ To ensure that the template sentences work as expected, we have an extensive tes
 The tests are stored [on GitHub](https://github.com/home-assistant/intents/tree/main/tests) and are organized by having for each language a directory of files `tests/<language>/`:
 
  - `_fixtures.yaml` - Fake entities and areas that can be referenced during testing
- - `<domain>_<intent>.yaml` - Sentences for a [single intent](../../intent_builtin) and domain. These files should only test sentences that are defined in the [match sentences file](./template-sentence-syntax) with the same name.
+ - `<domain>_<intent>.yaml` - Sentences for a [single intent](/docs/intent_builtin) and domain. These files should only test sentences that are defined in the [match sentences file](/docs/voice/intent-recognition/template-sentence-syntax) with the same name.
 
 ``` yaml
 # Example homeassistant_HassTurnOn.yaml
