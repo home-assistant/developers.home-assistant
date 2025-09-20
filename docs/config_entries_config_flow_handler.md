@@ -522,6 +522,71 @@ class ExampleFlow(ConfigFlow):
         )
 ```
 
+## Use of SchemaConfigFlowHandler for simple flows
+
+For helpers and integrations with simple flows, you can use the `SchemaConfigFlowHandler` instead.
+
+All user input is stored in the `options` dictionary in your config entry, and therefore they could be made available in an options flow.
+
+```python
+
+from homeassistant.helpers.schema_config_entry_flow import (
+    SchemaCommonFlowHandler,
+    SchemaConfigFlowHandler,
+    SchemaFlowError,
+    SchemaFlowFormStep,
+)
+
+async def validate_setup(
+    handler: SchemaCommonFlowHandler, user_input: dict[str, Any]
+) -> dict[str, Any]:
+    """Validate options."""
+    if user_input[CONF_SOME_SETTING] == "error":
+      # 'setup_error' needs to be existing in string.json config errors section
+      raise SchemaFlowError("setup_error") 
+    return user_input
+
+DATA_SCHEMA_SETUP = vol.Schema(
+    {
+        vol.Required(CONF_NAME, default=DEFAULT_NAME): TextSelector()
+    }
+)
+DATA_SCHEMA_OPTIONS = vol.Schema(
+    {
+        vol.Optional(CONF_SOME_SETTING): TextSelector()
+    }
+)
+
+CONFIG_FLOW = {
+    "user": SchemaFlowFormStep(
+        schema=DATA_SCHEMA_SETUP,
+        next_step="options",
+    ),
+    "options": SchemaFlowFormStep(
+        schema=DATA_SCHEMA_OPTIONS,
+        validate_user_input=validate_setup,
+    ),
+}
+OPTIONS_FLOW = {
+    "init": SchemaFlowFormStep(
+        DATA_SCHEMA_OPTIONS,
+        validate_user_input=validate_setup,
+    ),
+}
+
+class MyConfigFlowHandler(SchemaConfigFlowHandler, domain=DOMAIN):
+    """Handle a config flow."""
+
+    config_flow = CONFIG_FLOW
+    options_flow = OPTIONS_FLOW
+    options_flow_reloads = True # Reload without a config entry listener
+
+    def async_config_entry_title(self, options: Mapping[str, Any]) -> str:
+        """Return config entry title from input."""
+        return cast(str, options[CONF_NAME])
+
+```
+
 ## Testing your config flow
 
 Integrations with a config flow require full test coverage of all code in `config_flow.py` to be accepted into core. [Test your code](development_testing.md#running-a-limited-test-suite) includes more details on how to generate a coverage report.
