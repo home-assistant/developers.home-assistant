@@ -31,6 +31,7 @@ ha_config_flow: true
 ha_codeowners:
   - '@balloob'
 ha_domain: awesome
+ha_integration_type: hub
 related:
   - docs: /voice_control/s3_box_voice_assistant/
     title: Creating a ESP32-S3-BOX-3 voice assistant
@@ -47,13 +48,14 @@ Content... Written in markdown.
 Additional keys for the file header:
 
 - `title`: This title should match with the name of the integration as written in the integration manifest file.
-- `ha_release`: The release when the integration was included, e.g., "0.38". If the current release is 0.37, make `ha_release` 0.38. If it's 0.30 or 0.40 please quote it with `' '`.
+- `ha_release`: The release when the integration was included. For example, "0.2025.9". If the current release is 2025.8, make `ha_release` 2025.9. If it end in a `0`, as in 2025.10, quote it with `' '`, otherwise the zero won't be displayed.
 - `ha_category`: This entry is used to group the integration on the [Integration overview](https://www.home-assistant.io/integrations/).
 - `ha_iot_class`: [IoT class](https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things) is the classifier for the device's behavior.
 - `ha_quality_scale`: [Quality scale](https://www.home-assistant.io/docs/quality_scale/) is the representation of the integration's quality.
 - `ha_config_flow`: Set to `true` if the integration has a [Data Entry Flow](/data_entry_flow_index.md), omit otherwise.
 - `ha_codeowners`: GitHub usernames or team names (starting with `@`) of people that are responsible for this integration. This should match with the codeowners as listed in the integration manifest file.
 - `ha_domain`: The domain of the integration in Home Assistant Core. This must match the name from the integration manifest file.
+- `ha_integration_type`: The type of integration in Home Assistant Core. This must match the name from the integration manifest file.
 - `related`: Optional. Adds a section with links to related topics to the end of the page. Use `docs` for local links and `url` for external links. When using `docs`, the `title` key is optional. If not set, the title of the page you point to will be used.
 
 There are [pre-defined variables](https://jekyllrb.com/docs/variables/) available but usually, it's not necessary to use them when writing documentation.
