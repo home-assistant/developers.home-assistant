@@ -58,7 +58,7 @@ Additional keys for the file header:
 
 There are [pre-defined variables](https://jekyllrb.com/docs/variables/) available but usually, it's not necessary to use them when writing documentation.
 
-## Configuration
+### Configuration
 
 Every platform page should contain a configuration sample. This sample must contain only the **required** variables to make it easy to copy and paste it for users into their `configuration.yaml` file.
 
