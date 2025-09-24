@@ -15,7 +15,7 @@ To create a new integration page, follow these steps:
 6. Document the needed steps to retrieve API keys or access token for the third party service or device if needed.
 7. Add the type of the devices (incl. firmware) you have tested when you know that there are multiple out there.
 
-## About the integration page header
+## About the integration page header format
 
 If you start from scratch with a page, you need to add a header. Different sections of the documentation may need different headers.
 
