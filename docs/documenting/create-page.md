@@ -9,7 +9,7 @@ To create a new integration page, follow these steps:
 3. The [Integration overview](https://www.home-assistant.io/integrations/) and the [Examples section](https://www.home-assistant.io/cookbook/) are generated automatically, so there is no need to add a link to those pages.
 4. Make sure to follow the [Standards](documenting/standards.md) we have for the documentation, including:
    - [General style guide](/docs/documenting/general-style-guide).
-   - [YAML Style Guide](documenting/yaml-style-guide.md)
+   - [YAML Style Guide](/docs/documenting/yaml-style-guide.md)
    - [Documentation structure and example text](/docs/documenting/integration-docs-examples)
 5. Make sure to add [icon and logo](#images-icons-and-logos) to the brands repository.
 6. Document the needed steps to retrieve API keys or access token for the third party service or device if needed.
