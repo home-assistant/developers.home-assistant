@@ -2,9 +2,19 @@
 title: "Create a new page"
 ---
 
-For a platform or integration page, the fastest way is to make a copy of an existing page and edit it. The [Integration overview](https://www.home-assistant.io/integrations/) and the [Examples section](https://www.home-assistant.io/cookbook/) are generated automatically, so there is no need to add a link to those pages.
+To create a new integration page, follow these steps:
 
-Please honor the [Standards](documenting/standards.md) we have for the documentation.
+1. The fastest way is to make a copy of the [integration documentation template](https://github.com/home-assistant/home-assistant.io/tree/current/source/_integrations/_integration_docs_template.markdown) and edit it.
+2. Make sure the filename of the integration page matches the domain name of the integration.
+3. The [Integration overview](https://www.home-assistant.io/integrations/) and the [Examples section](https://www.home-assistant.io/cookbook/) are generated automatically, so there is no need to add a link to those pages.
+4. Make sure to follow honor the [Standards](documenting/standards.md) we have for the documentation, including:
+   - [General style guide](/docs/documenting/general-style-guide).
+   - [YAML Style Guide](documenting/yaml-style-guide.md)
+   - [Documentation structure and example text](/docs/documenting/integration-docs-examples)
+5. Document the needed steps to retrieve API keys or access token for the third party service or device if needed.
+6. Add the type of the device(s) (incl. firmware) you have tested when you know that there are multiple out there.
+
+## About the integration page header
 
 If you start from scratch with a page, you need to add a header. Different sections of the documentation may need different headers.
 
@@ -47,13 +57,7 @@ Additional keys for the file header:
 
 There are [pre-defined variables](https://jekyllrb.com/docs/variables/) available but usually, it's not necessary to use them when writing documentation.
 
-A couple of points to remember:
-
-- Document the needed steps to retrieve API keys or access token for the third party service or device if needed.
-- Add screenshots to support the user where it makes sense.
-- Add the type of the device(s) (incl. firmware) you have tested when you know that there are multiple out there.
-
-### Configuration
+## Configuration
 
 Every platform page should contain a configuration sample. This sample must contain only the **required** variables to make it easy to copy and paste it for users into their `configuration.yaml` file.
 
