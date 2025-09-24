@@ -11,8 +11,9 @@ To create a new integration page, follow these steps:
    - [General style guide](/docs/documenting/general-style-guide).
    - [YAML Style Guide](documenting/yaml-style-guide.md)
    - [Documentation structure and example text](/docs/documenting/integration-docs-examples)
-5. Document the needed steps to retrieve API keys or access token for the third party service or device if needed.
-6. Add the type of the device(s) (incl. firmware) you have tested when you know that there are multiple out there.
+5. Make sure to add [icon and logo](#images-icons-and-logos) to the brands repository.
+6. Document the needed steps to retrieve API keys or access token for the third party service or device if needed.
+7. Add the type of the devices (incl. firmware) you have tested when you know that there are multiple out there.
 
 ## About the integration page header
 
