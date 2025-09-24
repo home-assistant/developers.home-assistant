@@ -54,8 +54,8 @@ Additional keys for the file header:
 - `ha_quality_scale`: [Quality scale](https://www.home-assistant.io/docs/quality_scale/) is the representation of the integration's quality.
 - `ha_config_flow`: Set to `true` if the integration has a [Data Entry Flow](/data_entry_flow_index.md), omit otherwise.
 - `ha_codeowners`: GitHub usernames or team names (starting with `@`) of people that are responsible for this integration. This should match with the codeowners as listed in the integration manifest file.
-- `ha_domain`: The domain of the integration in Home Assistant Core. This must match the name from the integration manifest file.
-- `ha_integration_type`: The type of integration in Home Assistant Core. This must match the name from the integration manifest file.
+- `ha_domain`: The domain of the integration in Home Assistant Core. This must match the name from the [integration manifest](/docs/creating_integration_manifest) file.
+- `ha_integration_type`: The type of integration in Home Assistant Core. This must match the name from the [integration manifest](/docs/creating_integration_manifest) file.
 - `related`: Optional. Adds a section with links to related topics to the end of the page. Use `docs` for local links and `url` for external links. When using `docs`, the `title` key is optional. If not set, the title of the page you point to will be used.
 
 There are [pre-defined variables](https://jekyllrb.com/docs/variables/) available but usually, it's not necessary to use them when writing documentation.
