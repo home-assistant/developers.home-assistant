@@ -6,14 +6,14 @@ To create a new integration page, follow these steps:
 
 1. Make a copy of the [integration documentation template](https://github.com/home-assistant/home-assistant.io/tree/current/source/_integrations/_integration_docs_template.markdown) and edit it.
 2. Make sure the filename of the integration page matches the domain name of the integration.
-3. The [Integration overview](https://www.home-assistant.io/integrations/) and the [Examples section](https://www.home-assistant.io/cookbook/) are generated automatically, so there is no need to add a link to those pages.
-4. Make sure to follow the [Standards](documenting/standards.md) we have for the documentation, including:
+   - The [Integration overview](https://www.home-assistant.io/integrations/) and the [Examples section](https://www.home-assistant.io/cookbook/) are generated automatically, so there is no need to add a link to those pages.
+3. Make sure to follow the [Standards](documenting/standards.md) we have for the documentation, including:
    - [General style guide](/docs/documenting/general-style-guide).
    - [YAML Style Guide](/docs/documenting/yaml-style-guide.md)
    - [Documentation structure and example text](/docs/documenting/integration-docs-examples)
-5. Make sure to add [icon and logo](#images-icons-and-logos) to the brands repository.
-6. Document the needed steps to retrieve API keys or access token for the third party service or device if needed.
-7. Add the type of the devices (incl. firmware) you have tested when you know that there are multiple out there.
+4. Make sure to add [icon and logo](#images-icons-and-logos) to the brands repository.
+5. Document the needed steps to retrieve API keys or access token for the third party service or device if needed.
+6. Add the type of the devices (incl. firmware) you have tested when you know that there are multiple out there.
 
 ## About the integration page header format
 
@@ -48,7 +48,9 @@ Content... Written in markdown.
 Additional keys for the file header:
 
 - `title`: This title should match with the name of the integration as written in the integration manifest file.
-- `ha_release`: The release when the integration was included. For example, "0.2025.9". If the current release is 2025.8, make `ha_release` 2025.9. If it end in a `0`, as in 2025.10, quote it with `' '`, otherwise the zero won't be displayed.
+- `ha_release`: The Home Assistant release when the integration was included.
+  - If the current release is 2025.8, make `ha_release` 2025.9.
+  - If it ends in a `0`, as in '2025.10', quote it with `' '`, otherwise the zero won't be displayed.
 - `ha_category`: This entry is used to group the integration on the [Integration overview](https://www.home-assistant.io/integrations/).
 - `ha_iot_class`: [IoT class](https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things) is the classifier for the device's behavior.
 - `ha_quality_scale`: [Quality scale](https://www.home-assistant.io/docs/quality_scale/) is the representation of the integration's quality.
