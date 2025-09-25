@@ -8,4 +8,4 @@ Platform entity services should be registered by calling the helper [`service.as
 
 Existing integrations should be migrated to the new API to ensure loading the services does not depend on platform set up.
 
-For examples of migrating, see [core PR 152172](https://github.com/home-assistant/core/pull/152172) and [core PR 152047](https://github.com/home-assistant/core/issues/152047).
+For examples of migrating, see [core PR 152172](https://github.com/home-assistant/core/pull/152172) and [core PR 152047](https://github.com/home-assistant/core/pull/152047).
