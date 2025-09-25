@@ -547,6 +547,35 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return self.async_create_entry(title="Some title", data={})
 ```
 
+#### Progress decorator
+
+A progress step decorator is provided for convenience. It can be used to change a standard flow step into a progress task. For example:
+
+```python
+import asyncio
+
+from homeassistant import config_entries
+from homeassistant.data_entry_flow import AbortFlow, progress_step
+from .const import DOMAIN
+
+class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
+    VERSION = 1
+
+    @progress_step(
+        # optional description placeholders for the UI
+        description_placeholders=lambda self: {
+            "name": "test,
+        }
+    )
+    async def async_step_user(self, user_input=None):
+        await asyncio.sleep(10)
+        self.async_update_progress(0.5)
+        await asyncio.sleep(10)
+
+        # call the next step when done or raise AbortFlow to abort the flow
+        return await self.async_step_finish()
+```
+
 ### Show menu
 
 This will show a navigation menu to the user to easily pick the next step. The menu labels can be hardcoded by specifying a dictionary of `{step_id: label}` or translated via `strings.json` under "menu_options" when specifying a list. Additionally menu descriptions can be provided via `strings.json` under "menu_option_descriptions".
