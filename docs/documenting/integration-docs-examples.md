@@ -299,13 +299,13 @@ Use the following syntax to reference a video from Youtube. Use `videoStartAt` t
   Screencast showing a reference to Youtube to start at a specific time
 </p>
 
-## Document structure
+## Integration page structure
 
-This section outlines the high-level document structure. To view example text, refer to the integration documentation template in the `homeassistant.io` repository under `/_integrations/_integration_docs_template.md`. The example text includes some reusable text blocks (includes) such as `include integrations/config_flow.md` and styling elements such as `configuration_basic`.
+This section outlines the high-level structure of an integration page. To view example text, refer to the integration documentation template in the `homeassistant.io` repository under `/_integrations/_integration_docs_template.md`. The example text includes some reusable text blocks (includes) such as `include integrations/config_flow.md` and styling elements such as `configuration_basic`.
 
 The examples are taken from the [Integration Quality Scale](/docs/core/integration-quality-scale/).
 
-### Basic structure
+### Basic structure of an integration page
 
 - Introduction
   - Use case
