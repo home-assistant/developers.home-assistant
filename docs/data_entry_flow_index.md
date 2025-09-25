@@ -552,7 +552,21 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
 A progress step decorator is provided for convenience. It can be used to change a standard flow step into a progress task. For example:
 
 ```python
-    @progress_step()
+import asyncio
+
+from homeassistant import config_entries
+from homeassistant.data_entry_flow import AbortFlow, progress_step
+from .const import DOMAIN
+
+class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
+    VERSION = 1
+
+    @progress_step(
+        # optional description placeholders for the UI
+        description_placeholders=lambda self: {
+            "name": "test,
+        }
+    )
     async def async_step_user(self, user_input=None):
         await asyncio.sleep(10)
         self.async_update_progress(0.5)
