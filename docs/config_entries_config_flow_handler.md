@@ -522,11 +522,15 @@ class ExampleFlow(ConfigFlow):
         )
 ```
 
-## Use of SchemaConfigFlowHandler for simple flows
+## Use SchemaConfigFlowHandler for simple flows
 
-For helpers and integrations with simple flows, you can use the `SchemaConfigFlowHandler` instead.
+For helpers and integrations with simple config flows, you can use the `SchemaConfigFlowHandler` instead.
 
-All user input is stored in the `options` dictionary in your config entry, and therefore they could be made available in an options flow.
+Compared to using a full config flow, the `SchemaConfigFlowHandler` comes with certain limitations and needs to be considered. 
+
+- All user input is saved in the `options` dictionary of the resulting config entry. Therefore it's not suitable to use in integrations which uses connection data, api key's or other information that should be stored in the config entry `data`.
+- It may be simpler to use the normal config flow handler if you have extensive validation, setting unique id or checking for duplicated config entries.
+- Starting the flow with other steps besides `user` and `import` is discouraged.
 
 ```python
 
