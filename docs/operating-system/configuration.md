@@ -1,6 +1,6 @@
 ---
 title: "Home Assistant Operating System configuration"
-sidebar_label: OS Configuration
+sidebar_label: Configuration
 ---
 
 ## Automatic

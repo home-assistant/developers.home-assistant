@@ -80,7 +80,7 @@ module.exports = {
     "operating-system/update-system",
     {
       type: "category",
-      label: "Board-specific documentation",
+      label: "Board support",
       items: [
         "operating-system/boards/overview",
         "operating-system/boards/asus",
