@@ -219,7 +219,6 @@ Each add-on starts with a base rating of 5, on a scale of 1 to 6. Depending on d
 |---|---|---|
 | Use `ingress: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | +2 | overrides `auth_api` rating |
 | Use `auth_api: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | +1 | overridden by `ingress` |
-| Add-on is signed with [CodeNotary](https://cas.codenotary.com/)| +1||
 | Use custom [`apparmor.txt`](/docs/add-ons/presentation#apparmor)| +1| Rating applied after installation |
 | Set `apparmor: false` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -1 | |
 | Use `privileged: NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_PTRACE`, `SYS_MODULE`, or `DAC_READ_SEARCH`, or `kernel_modules: ` used in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options)| -1 | Rating applied only once if multiple are used. |
