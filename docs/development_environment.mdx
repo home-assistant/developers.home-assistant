@@ -19,7 +19,7 @@ You'll need to set up a development environment if you want to develop a new fea
 
 ## Developing with Visual Studio Code + devcontainer
 
-The easiest way to get started with development is to use Visual Studio Code with devcontainers. This approach will create a preconfigured development environment with all the tools you need. This approach is enabled for all Home Assistant repositories. [Learn more about devcontainers.](https://code.visualstudio.com/docs/devcontainers/containers)
+Follow our [devcontainer development environment](/docs/setup_devcontainer_environment) guide to set up a proper development environment first.
 
 :::note
 As this approach uses containers, you may face challenges exposing hardware like USB devices & adapters (onboard Bluetooth, Zigbee, ...) into the container for testing. This is possible when developing on a Linux host; however, you cannot directly access such hardware if you are using a Windows or MacOS computer for development.
@@ -48,6 +48,18 @@ As this approach uses containers, you may face challenges exposing hardware like
     4. Navigate a web browser to `http://localhost:8123`, and you should see the Home Assistant setup screen.
 
 In the future, if you want to get back to your development environment: open Visual Studio Code, click on the **Remote Explorer** button in the sidebar, select **Containers** at the top of the sidebar.
+
+**Troubleshooting**
+
+- If your container fails to build due to outdated dependencies or a previously built devcontainer, it might be using a stale fork of your repository. Follow these steps:
+    - Ensure your GitHub fork is up-to-date with the main Home Assistant core repository.
+    - Clean local Docker build files by running `docker buildx prune` in the terminal.
+    - If the build still fails:
+        - Select "Open configuration in recovery devcontainer."
+        - Open a terminal (if not already open).
+        - Run `git pull upstream dev` and ensure it applies the current version.
+        - Open the command palette in Visual Studio Code - `Shift`+`Command`+`P` (Mac) / `Ctrl`+`Shift`+`P` (Windows/Linux).
+        - Select "Dev Containers: Rebuild Container."
 
 ### Tasks
 
@@ -146,7 +158,7 @@ This will create a virtual environment and install all the necessary requirement
 Each time you start a new terminal session, you will need to activate your virtual environment:
 
 ```shell
-source venv/bin/activate
+source .venv/bin/activate
 ```
 
 After that you can run Home Assistant like this:

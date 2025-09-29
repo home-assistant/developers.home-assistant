@@ -78,6 +78,14 @@ Identical to `/addons/<addon>/logs` except it continuously returns new log entri
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/addons/<addon>/logs/latest" method="get">
+
+Return all logs of the latest startup of the add-on container.
+
+The `Range` header is ignored but the `lines` query parameter can be used.
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/addons/<addon>/logs/boots/<bootid>" method="get">
 
 Get logs for an add-on related to a specific boot.
@@ -367,6 +375,13 @@ The Data endpoint to get his own rendered configuration.
 
 <ApiEndpoint path="/addons/<addon>/rebuild" method="post">
 Rebuild the add-on, only supported for local build add-ons.
+
+**Payload:**
+
+| key   | type    | optional | description                                                       |
+| ----- | ------- | -------- | ----------------------------------------------------------------- |
+| force | boolean | True     | Force rebuild of the add-on even if pre-built images are provided |
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/restart" method="post">
@@ -572,6 +587,14 @@ The endpoint accepts the same headers and provides the same functionality as
 <ApiEndpoint path="/audio/logs/follow" method="get">
 
 Identical to `/audio/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/audio/logs/latest" method="get">
+
+Return all logs of the latest startup of the audio plugin container.
+
+The `Range` header is ignored but the `lines` query parameter can be used.
 
 </ApiEndpoint>
 
@@ -1204,6 +1227,14 @@ Identical to `/core/logs` except it continuously returns new log entries.
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/core/logs/latest" method="get">
+
+Return all logs of the latest startup of the Home Assistant Core container.
+
+The `Range` header is ignored but the `lines` query parameter can be used.
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/core/logs/boots/<bootid>" method="get">
 
 Get logs for the Home Assistant Core container related to a specific boot.
@@ -1438,6 +1469,14 @@ Identical to `/dns/logs` except it continuously returns new log entries.
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/dns/logs/latest" method="get">
+
+Return all logs of the latest startup of the DNS plugin container.
+
+The `Range` header is ignored but the `lines` query parameter can be used.
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/dns/logs/boots/<bootid>" method="get">
 
 Get logs for the DNS plugin container related to a specific boot.
@@ -1516,23 +1555,38 @@ Returns information about the docker instance.
 
 **Returned data:**
 
-key | type | description
--- | -- | --
-version | string | The version of the docker engine
-storage | string | The storage type
-logging | string | The logging type
-registries | dictionary | A dictionary of dictionaries containing `username` and `password` keys for registries.
+| key         | type   | description                        |
+| ----------- | ------ | ---------------------------------- |
+| version     | string | The version of the docker engine   |
+| enable_ipv6 | bool   | Enable/Disable IPv6 for containers |
+| storage     | string | The storage type                   |
+| logging     | string | The logging type                   |
+| registries  | dictionary | A dictionary of dictionaries containing `username` and `password` keys for registries. |
 
 **Example response:**
 
 ```json
 {
   "version": "1.0.1",
+  "enable_ipv6": true,
   "storage": "overlay2",
   "logging": "journald",
   "registries": {}
 }
 ```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/docker/options" method="post">
+Set docker options
+
+**Payload:**
+
+| key         | type | optional | description                        |
+| ----------- | ---- | -------- | ---------------------------------- |
+| enable_ipv6 | bool | True     | Enable/Disable IPv6 for containers |
+
+**You need to supply at least one key in the payload.**
 
 </ApiEndpoint>
 
@@ -1693,6 +1747,11 @@ Return information about the host.
 | llmnr_hostname   | string or null | The hostname currently exposed on the network via LLMNR for host |
 | operating_system | string         | The operating system on the host          |
 | startup_time     | float          | The time in seconds it took for last boot |
+| disk_life_time   | float or null  | Percentage of estimated disk lifetime used (0–100). Not all disks provide this information, returns `null` if unavailable. |
+| timezone         | string         | The current timezone of the host. |
+| dt_utc           | string         | Current UTC date/time of the host in ISO 8601 format. |
+| dt_synchronized  | bool           | `true` if the host is synchronized with an NTP service. |
+| use_ntp          | bool           | `true` if the host is using an NTP service for time synchronization. |
 
 **Example response:**
 
@@ -1714,7 +1773,13 @@ Return information about the host.
   "boot_timestamp": 1234567788,
   "startup_time": 12.345,
   "broadcast_llmnr": true,
-  "broadcast_mdns": false
+  "broadcast_mdns": false,
+  "virtualization": "",
+  "disk_life_time": 10.0,
+  "timezone": "Europe/Brussels",
+  "dt_utc": "2025-09-08T12:00:00.000000+00:00",
+  "dt_synchronized": true,
+  "use_ntp": true
 }
 ```
 
@@ -1731,6 +1796,23 @@ log record per line.
 | -------- | -------- |-------------------------------------------------------------------------------|
 | Accept   | true     | Type of data (text/plain or text/x-log)                                       |
 | Range    | true     | Range of log entries. The format is `entries=cursor[[:num_skip]:num_entries]` |
+
+**HTTP Query Parameters**
+
+These are a convenience alternative to the headers shown above as query
+parameters are easier to use in development and with the Home Assistant proxy.
+You should only provide one or the other.
+
+| Query    | type  | description                                                                        |
+| -------- | ----- |----------------------------------------------------------------------------------- |
+| verbose  | N/A   | If included, uses `text/x-log` as log output type (alternative to `Accept` header) |
+| lines    | int   | Number of lines of output to return (alternative to `Range` header)                |
+
+Example query string:
+
+```text
+?verbose&lines=100
+```
 
 :::tip
 To get the last log entries the Range request header supports negative values
@@ -1906,6 +1988,68 @@ Shutdown the host
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/host/disks/<disk>/usage" method="get">
+Get detailed disk usage information in bytes.
+
+The only supported `disk` for now is "default". It will return usage info for the data disk.
+
+Supports an optional `max_depth` query param. Defaults to 1
+
+**Example response:**
+
+```json
+{
+  "id": "root",
+  "label": "Default",
+  "total_space": 503312781312,
+  "used_space": 430245011456,
+  "children": [
+    {
+      "id": "system",
+      "label": "System",
+      "used_space": 75660903137
+    },
+    {
+      "id": "addons_data",
+      "label": "Addons data",
+      "used_space": 42349200762
+    },
+    {
+      "id": "addons_config",
+      "label": "Addons configuration",
+      "used_space": 5283318814
+    },
+    {
+      "id": "media",
+      "label": "Media",
+      "used_space": 476680019
+    },
+    {
+      "id": "share",
+      "label": "Share",
+      "used_space": 37477206419
+    },
+    {
+      "id": "backup",
+      "label": "Backup",
+      "used_space": 268350699520
+    },
+    {
+      "id": "ssl",
+      "label": "SSL",
+      "used_space": 202912633
+    },
+    {
+      "id": "homeassistant",
+      "label": "Home assistant",
+      "used_space": 444090152
+    }
+  ]
+}
+```
+
+</ApiEndpoint>
+
 ### Ingress
 
 <ApiEndpoint path="/ingress/panels" method="get">
@@ -1964,14 +2108,14 @@ Validate an ingress session, extending it's validity period.
 ### Jobs
 
 <ApiEndpoint path="/jobs/info" method="get">
-Returns info on ignored job conditions and currently running jobs
+Returns info on ignored job conditions and currently running or completed jobs
 
 **Returned data:**
 
 | key               | type       | description                                                    |
 | ----------------- | ---------- | -------------------------------------------------------------- |
 | ignore_conditions | list       | List of job conditions being ignored                           |
-| jobs              | list       | List of currently running [Jobs](api/supervisor/models.md#job) |
+| jobs              | list       | List of running or completed [Jobs](api/supervisor/models.md#job) |
 
 **Example response:**
 
@@ -1985,7 +2129,8 @@ Returns info on ignored job conditions and currently running jobs
     "progress": 0,
     "stage": "addons",
     "done": false,
-    "child_jobs": []
+    "child_jobs": [],
+    "extra": null
   }]
 }
 ```
@@ -2002,6 +2147,35 @@ Set options for job manager
 | ignore_conditions | list       | List of job conditions to ignore (replaces existing list) |
 
 </ApiEndpoint>
+
+<ApiEndpoint path="/jobs/<job_id>" method="get">
+Returns info on a currently running or completed job
+
+**Returned data:**
+
+See [Job](api/supervisor/models.md#job) model
+
+**Example response:**
+
+```json
+{
+  "name": "backup_manager_full_backup",
+  "reference": "a01bc3",
+  "uuid": "123456789",
+  "progress": 0,
+  "stage": "addons",
+  "done": false,
+  "child_jobs": [],
+  "extra": null
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/jobs/<job_id>" method="delete">
+Removes a completed job from Supervisor cache if client is no longer interested in it
+</ApiEndpoint>
+
 
 <ApiEndpoint path="/jobs/reset" method="post">
 Reset job manager to defaults (stops ignoring any ignored job conditions)
@@ -2110,7 +2284,7 @@ Returns a dict with selected keys from other `/*/info` endpoints.
   "channel": "stable",
   "logging": "info",
   "state": "running",
-  "timezone": "Europe/Tomorrowland"
+  "timezone": "Europe/Brussels"
 }
 ```
 
@@ -2263,6 +2437,14 @@ Identical to `/multicast/logs` except it continuously returns new log entries.
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/multicast/logs/latest" method="get">
+
+Return all logs of the latest startup of the multicast plugin container.
+
+The `Range` header is ignored but the `lines` query parameter can be used.
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/multicast/logs/boots/<bootid>" method="get">
 
 Get logs for the multicast plugin related to a specific boot.
@@ -2384,16 +2566,27 @@ Update the settings for a network interface.
 
 | key     | type   | optional | description                                                            |
 | ------- | ------ | -------- | ---------------------------------------------------------------------- |
-| enabled | bool   | True     | Enable/Disable an ethernet interface / VLAN got removed with disabled   |
-| ipv4    | dict   | True     | A struct with ipv4 interface settings                                  |
+| enabled | bool   | True     | Enable/Disable an ethernet interface / VLAN got removed with disabled  |
 | ipv6    | dict   | True     | A struct with ipv6 interface settings                                  |
+| ipv4    | dict   | True     | A struct with ipv4 interface settings                                  |
 | wifi    | dict   | True     | A struct with Wireless connection settings                             |
 
-**ipv4 / ipv6:**
+**ipv6:**
+
+| key           | type   | optional | description                                                                                         |
+| ------------- | ------ | -------- | --------------------------------------------------------------------------------------------------- |
+| method        | string | True     | Set IP configuration method can be `auto` for DHCP or Router Advertisements, `static` or `disabled` |
+| addr_gen_mode | string | True     | Address generation mode can be `eui64`, `stable-privacy`, `default-or-eui64` or `default`           |
+| ip6_privacy   | string | True     | Privacy extensions options are `disabled`, `enabled-prefer-public`, `enabled` or `default`          |
+| address       | list   | True     | The new IP address for the interface in the ::/XX format as list                                    |
+| nameservers   | list   | True     | List of DNS servers to use                                                                          |
+| gateway       | string | True     | The gateway the interface should use                                                                |
+
+**ipv4:**
 
 | key         | type   | optional | description                                                                           |
 | ----------- | ------ | -------- | ------------------------------------------------------------------------------------- |
-| method      | string | True     | Set IP configuration method can be `auto` for DHCP or Router Advertisements (only IPv6), `static` or `disabled`     |
+| method      | string | True     | Set IP configuration method can be `auto` for DHCP, `static` or `disabled`            |
 | address     | list   | True     | The new IP address for the interface in the X.X.X.X/XX format as list                 |
 | nameservers | list   | True     | List of DNS servers to use                                                            |
 | gateway     | string | True     | The gateway the interface should use                                                  |
@@ -2402,7 +2595,7 @@ Update the settings for a network interface.
 
 | key    | type   | optional | description                                                                    |
 | ------ | ------ | -------- | ------------------------------------------------------------------------------ |
-| mode   | string | True     | Set the mode `infrastructure` (default), `mesh`, `adhoc` or `ap`              |
+| mode   | string | True     | Set the mode `infrastructure` (default), `mesh`, `adhoc` or `ap`               |
 | auth   | string | True     | Set the auth mode: `open` (default), `web`, `wpa-psk`                          |
 | ssid   | string | True     | Set the SSID for connect into                                                  |
 | psk    | string | True     | The shared key which is used with `web` or `wpa-psk`                           |
@@ -2419,7 +2612,7 @@ Return a list of available [Access Points](api/supervisor/models.md#access-point
 
 | key          | description                                                            |
 | ------------ | ---------------------------------------------------------------------- |
-| accesspoints | A list of [Access Points](api/supervisor/models.md#access-points) |
+| accesspoints | A list of [Access Points](api/supervisor/models.md#access-points)      |
 
 **Example response:**
 
@@ -2449,8 +2642,8 @@ Create a new VLAN *id* on this network interface.
 
 | key     | type   | optional | description                                                            |
 | ------- | ------ | -------- | ---------------------------------------------------------------------- |
-| ipv4    | dict   | True     | A struct with ipv4 interface settings                                  |
 | ipv6    | dict   | True     | A struct with ipv6 interface settings                                  |
+| ipv4    | dict   | True     | A struct with ipv4 interface settings                                  |
 
 </ApiEndpoint>
 
@@ -2674,8 +2867,8 @@ Move datadisk to a new location, **This will also reboot the device!**
 
 **Payload:**
 
-| key     | type   | description                                                       |
-| ------- | ------ | ----------------------------------------------------------------- |
+| key     | type   | description                                                                     |
+| ------- | ------ | ------------------------------------------------------------------------------- |
 | device  | string | ID of the disk device which should be used as the target for the data migration |
 
 </ApiEndpoint>
@@ -2833,19 +3026,19 @@ If running on a green board, changes one or more of its settings.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/resolution/suggestion/<uuid>" method="post">
+<ApiEndpoint path="/resolution/suggestion/<suggestion>" method="post">
 
 Apply a suggested action
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/resolution/suggestion/<uuid>" method="delete">
+<ApiEndpoint path="/resolution/suggestion/<suggestion>" method="delete">
 
 Dismiss a suggested action
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/resolution/issue/<uuid>/suggestions" method="get">
+<ApiEndpoint path="/resolution/issue/<issue>/suggestions" method="get">
 
 Get suggestions that would fix an issue if applied.
 
@@ -2873,7 +3066,7 @@ Get suggestions that would fix an issue if applied.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/resolution/issue/<uuid>" method="delete">
+<ApiEndpoint path="/resolution/issue/<issue>" method="delete">
 
 Dismiss an issue
 
@@ -2885,7 +3078,7 @@ Execute a healthcheck and autofix & notifcation.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/resolution/check/<slug>/options" method="post">
+<ApiEndpoint path="/resolution/check/<check>/options" method="post">
 
 Set options for this check.
 
@@ -2897,7 +3090,7 @@ Set options for this check.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/resolution/check/<slug>/run" method="post">
+<ApiEndpoint path="/resolution/check/<check>/run" method="post">
 
 Execute a specific check right now.
 
@@ -3141,6 +3334,12 @@ Returns information about a store add-on
 
 Install an add-on from the store.
 
+**Payload:**
+
+| key        | type    | description                                                                                         |
+| ---------- | ------- | --------------------------------------------------------------------------------------------------- |
+| background | boolean | Return `job_id` immediately, do not wait for install to complete. Clients must check job for status |
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/store/addons/<addon>/update" method="post">
@@ -3149,9 +3348,10 @@ Update an add-on from the store.
 
 **Payload:**
 
-| key     | type   | description                                                    |
-| ------- | ------ | -------------------------------------------------------------- |
-| backup | boolean | Create a partial backup of the add-on, default is false |
+| key        | type    | description                                                                                        |
+| ---------- | ------- | -------------------------------------------------------------------------------------------------- |
+| backup     | boolean | Create a partial backup of the add-on, default is false                                            |
+| background | boolean | Return `job_id` immediately, do not wait for update to complete. Clients must check job for status |
 
 </ApiEndpoint>
 
@@ -3169,6 +3369,14 @@ Get the add-on icon
 
 <ApiEndpoint path="/store/addons/<addon>/logo" method="get">
 Get the add-on logo
+</ApiEndpoint>
+
+<ApiEndpoint path="/store/addons/<addon>/availability" method="get">
+
+Returns 200 success status if the latest version of the add-on is able to be
+installed on the current system. Returns a 400 error status if it is not with a
+message explaining why.
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/store/reload" method="post">
@@ -3337,6 +3545,7 @@ Returns information about the supervisor
 | diagnostics         | bool or null | Sending diagnostics is enabled                                |
 | addons_repositories | list         | A list of add-on repository URL's as strings                  |
 | auto_update         | bool         | Is auto update enabled for supervisor                         |
+| detect_blocking_io  | bool         | Supervisor raises exceptions for blocking I/O in event loop   |
 
 **Example response:**
 
@@ -3357,7 +3566,8 @@ Returns information about the supervisor
   "debug_block": false,
   "diagnostics": null,
   "addons_repositories": ["https://example.com/addons"],
-  "auto_update": true
+  "auto_update": true,
+  "detect_blocking_io": false
 }
 ```
 
@@ -3377,6 +3587,14 @@ The endpoint accepts the same headers and provides the same functionality as
 <ApiEndpoint path="/supervisor/logs/follow" method="get">
 
 Identical to `/supervisor/logs` except it continuously returns new log entries.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/supervisor/logs/latest" method="get">
+
+Return all logs of the latest startup of the Supervisor container.
+
+The `Range` header is ignored but the `lines` query parameter can be used.
 
 </ApiEndpoint>
 
@@ -3414,6 +3632,7 @@ You need to call `/supervisor/reload` after updating the options.
 | logging             | string | Set logging level                                      |
 | addons_repositories | list   | Set a list of URL's as strings for add-on repositories |
 | auto_update         | bool   | Enable/disable auto update for supervisor              |
+| detect_blocking_io  | string | Enable blocking I/O in event loop detection. Valid values are `on`, `off` and `on_at_startup`. |
 
 </ApiEndpoint>
 
@@ -3470,7 +3689,7 @@ Update the supervisor
 
 | key     | type   | description                                                    |
 | ------- | ------ | -------------------------------------------------------------- |
-| version | string | The version you want to install, default is the latest version |
+| version | string | The version to install. Defaults to the latest version. Development only: Only works in the Supervisor development environment. |
 
 </ApiEndpoint>
 
@@ -3481,10 +3700,19 @@ Some of the endpoints uses placeholders indicated with `<...>` in the endpoint U
 | placeholder | description                                                                                                                                           |
 | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
 | addon       | The slug for the addon, to get the slug you can call `/addons`, to call endpoints for the add-on calling the endpoints you can use `self`as the slug. |
-| application | The name of an application, call `/audio/info` to get the correct name                                                                                 |
-| interface   | A valid interface name, example `eth0`, to get the interface name you can call `/network/info`. You can use `default` to get the primary interface |
+| application | The name of an application, call `/audio/info` to get the correct name                                                                                |
+| backup      | A valid backup slug, example `skuwe823`, to get the slug you can call `/backups`                                                                      |
+| bootid      | An id or offset of a particular boot, used to filter logs. Call `/host/logs/boots` to get a list of boot ids or see `/host/logs/boots/<bootid>` to understand boot offsets |
+| check       | The slug of a system check in Supervisor's resolution manager. Call `/resolution/info` for a list of options from the `checks` field                  |
+| disk        | Identifier of a disk attached to host or `default`. See `/host/disks/<disk>/usage` for more details                                                   |
+| id          | Numeric id of a vlan on a particular interface. See `/network/interface/<interface>/vlan/<id>` for details                                            |         
+| identifier  | A syslog identifier used to filter logs. Call `/host/logs/identifiers` to get a list of options. See `/host/logs/identifiers/<identifier>` for some common examples |
+| interface   | A valid interface name, example `eth0`, to get the interface name you can call `/network/info`. You can use `default` to get the primary interface    |
+| issue       | The UUID of an issue with the system identified by Supervisor. Call `/resolution/info` for a list of options from the `issues` field                  |
+| job_id      | The UUID of a currently running or completed Supervisor job                                                                                           |
+| name        | Name of a mount added to Supervisor. Call `/mounts` to get a list of options from `mounts` field                                                      |
 | registry    | A registry hostname defined in the container registry configuration, to get the hostname you can call `/docker/registries`                            |
+| repository  | The slug of an addon repository added to Supervisor. Call `/store` for a list of options from the `repositories` field                                |
 | service     | The service name for a service on the host.                                                                                                           |
-| backup    | A valid backup slug, example `skuwe823`, to get the slug you can call `/backups`                                                                  |
-| suggestion  | A valid suggestion, example `clear_full_backup`, to get the suggestion you can call `/resolution`                                         |
+| suggestion  | The UUID of a suggestion for a system issue identified by Supervisor. Call `/resolution/info` for a list of options from the `suggestions` field      |
 | uuid        | The UUID of a discovery service, to get the UUID you can call `/discovery`                                                                            |

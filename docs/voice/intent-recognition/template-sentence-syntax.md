@@ -5,9 +5,9 @@ title: "Template sentence syntax"
 Template sentences are defined in YAML files using the format of [Hassil, our template matcher](https://github.com/home-assistant/hassil). Our template sentences are stored [on GitHub](https://github.com/home-assistant/intents/tree/main/sentences) and are organized by having for each language a directory of files in `sentences/<language>/`:
 
  - `_common.yaml` - Lists, expansion rules and skip words to be used across all template sentences.
- - `<domain>_<intent>.yaml` - Template sentences for a [single intent](../../intent_builtin) and domain.
+ - `<domain>_<intent>.yaml` - Template sentences for a [single intent](/docs/intent_builtin) and domain.
 
-Besides the data in `_common.yaml`, template sentences can also use the lists `name` and `area`. These lists are made available by Home Assistant during intent recognition.
+Besides the data in `_common.yaml`, template sentences can also use the lists `name`, `area`, and `floor`. These lists are made available by Home Assistant during intent recognition.
 
 ``` yaml
 # Example light_HassTurnOn.yaml
