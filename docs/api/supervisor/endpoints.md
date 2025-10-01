@@ -3539,11 +3539,9 @@ Returns information about the supervisor
 | supported           | bool         | The environment is supported                                  |
 | logging             | string       | The current log level (debug, info, warning, error, critical) |
 | ip_address          | string       | The internal docker IP address to the supervisor              |
-| wait_boot           | int          | Max time to wait during boot                                  |
 | debug               | bool         | Debug is active                                               |
 | debug_block         | bool         | `true` if debug block is enabled                              |
 | diagnostics         | bool or null | Sending diagnostics is enabled                                |
-| addons_repositories | list         | A list of add-on repository URL's as strings                  |
 | auto_update         | bool         | Is auto update enabled for supervisor                         |
 | detect_blocking_io  | bool         | Supervisor raises exceptions for blocking I/O in event loop   |
 
@@ -3561,11 +3559,9 @@ Returns information about the supervisor
   "supported": false,
   "logging": "debug",
   "ip_address": "172.0.0.2",
-  "wait_boot": 800,
   "debug": false,
   "debug_block": false,
   "diagnostics": null,
-  "addons_repositories": ["https://example.com/addons"],
   "auto_update": true,
   "detect_blocking_io": false
 }
@@ -3626,11 +3622,9 @@ You need to call `/supervisor/reload` after updating the options.
 | ------------------- | ------ | ------------------------------------------------------ |
 | channel             | string | Set the active channel (stable, beta, dev)             |
 | timezone            | string | Set the timezone                                       |
-| wait_boot           | int    | Set the time to wait for boot                          |
 | debug               | bool   | Enable debug                                           |
 | debug_block         | bool   | Enable debug block                                     |
 | logging             | string | Set logging level                                      |
-| addons_repositories | list   | Set a list of URL's as strings for add-on repositories |
 | auto_update         | bool   | Enable/disable auto update for supervisor              |
 | detect_blocking_io  | string | Enable blocking I/O in event loop detection. Valid values are `on`, `off` and `on_at_startup`. |
 
