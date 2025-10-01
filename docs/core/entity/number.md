@@ -39,7 +39,7 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.BATTERY` | % | Percentage of battery that is left
 | `NumberDeviceClass.BLOOD_GLUCOSE_CONCENTRATION` | mg/dL, mmol/L | Blood glucose concentration```
 | `NumberDeviceClass.CO2` | ppm | Concentration of carbon dioxide.
-| `NumberDeviceClass.CO` | ppm, mg/m³ | Concentration of carbon monoxide.
+| `NumberDeviceClass.CO` | ppm | Concentration of carbon monoxide.
 | `NumberDeviceClass.CONDUCTIVITY` | S/cm, mS/cm, µS/cm | Conductivity
 | `NumberDeviceClass.CURRENT` | A, mA | Current
 | `NumberDeviceClass.DATA_RATE` | bit/s, kbit/s, Mbit/s, Gbit/s, B/s, kB/s, MB/s, GB/s, KiB/s, MiB/s, GiB/s | Data rate
