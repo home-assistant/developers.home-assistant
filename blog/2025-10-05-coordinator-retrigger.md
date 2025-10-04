@@ -20,7 +20,7 @@ async def _update():
 
 A user or code that request an updates at timestamp `A` expects that the entities linked will
 all get new data from that time. However, since we previously ignored that request, entities
-would have data for the value of `a` that is from a time before update request that was ignored.
+would have data for the value of `a` that is from a time before the update request that was ignored.
 
 To make sure we avoid this case, the update coordinator will now schedule an additional
 update, if a request is received while currently executing an update.
