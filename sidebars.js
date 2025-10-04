@@ -114,6 +114,7 @@ module.exports = {
   ],
   Core: [
     "development_index",
+    "development_roles",
     {
       type: "category",
       label: "Architecture",
