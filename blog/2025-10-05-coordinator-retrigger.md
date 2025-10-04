@@ -1,10 +1,10 @@
 ---
 author: Joakim Plate
 authorURL: https://github.com/elupus
-title: "Update coordinator now allow retriggering"
+title: "Update coordinator now allows retriggering"
 ---
 
-The update coordinator with debounce:er active will now accept a request for update
+The update coordinator with debouncer active will now accept a request for update
 while an update is currently in progress. The request will be queued up to be performed
 after the current update finishes.
 
