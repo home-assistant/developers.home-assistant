@@ -11,11 +11,11 @@ after the current update finishes.
 Consider the following case:
 
 ```python
-async def _update()
-   a = await get_a()
-   # A: User or other logic request a new update here through async_schedule_update()
-   b = await get_b()
-   return (a,b)
+async def _update():
+    a = await get_a()
+    # A: User or other logic request a new update here through async_schedule_update()
+    b = await get_b()
+    return (a,b)
 ```
 
 The user or code that request an update at `A` expects that the entities
