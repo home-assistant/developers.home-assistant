@@ -25,9 +25,9 @@ Properties should always only return information from memory and not do I/O (lik
 | native_temperature_unit | string | **Required** | The temperature unit; °C or °F.
 | native_visibility | float | `None` | The current visibility in km or mi.
 | native_visibility_unit | string | `None` | The visibility unit; km or mi. Required if native_visibility is set.
-| native_wind_gust_speed | float | `None` | The current wind gust speed in m/s, km/h, mi/h, ft/s or kn.
-| native_wind_speed | float | `None` | The current wind speed in m/s, km/h, mi/h, ft/s or kn.
-| native_wind_speed_unit | string | `None` | The wind speed unit;m/s, km/h, mi/h, ft/s or kn. Required if native_wind_speed is set.
+| native_wind_gust_speed | float | `None` | The current wind gust speed in Beaufort, m/s, km/h, mi/h, ft/s or kn.
+| native_wind_speed | float | `None` | The current wind speed in Beaufort, m/s, km/h, mi/h, ft/s or kn.
+| native_wind_speed_unit | string | `None` | The wind speed unit; Beaufort, m/s, km/h, mi/h, ft/s or kn. Required if native_wind_speed is set.
 | ozone | float | `None` | The current ozone level.
 | uv_index | float | `None` | The current [UV index](https://en.wikipedia.org/wiki/Ultraviolet_index).
 | wind_bearing | float or string | `None` | The current wind bearing in azimuth angle (degrees) or 1-3 letter cardinal direction.
