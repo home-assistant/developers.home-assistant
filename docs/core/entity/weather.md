@@ -98,8 +98,8 @@ The integration should implement one or several of the async methods `async_fore
 | native_pressure | float | `None` | The air pressure in hPa, mbar, inHg or mmHg.
 | native_temperature | float | **Required** | The higher temperature in °C or °F
 | native_templow | float | `None` | The lower daily Temperature in °C or °F
-| native_wind_gust_speed | int | `None` | The wind gust speed in m/s, km/h, mi/h, ft/s or kn.
-| native_wind_speed | int | `None` | The wind speed in m/s, km/h, mi/h, ft/s or kn.
+| native_wind_gust_speed | int | `None` | The wind gust speed in Beaufort, m/s, km/h, mi/h, ft/s or kn.
+| native_wind_speed | int | `None` | The wind speed in Beaufort, m/s, km/h, mi/h, ft/s or kn.
 | precipitation_probability | int | `None` | The probability of precipitation in %.
 | uv_index | float | `None` | The UV index.
 | wind_bearing | float or string | `None` | The wind bearing in azimuth angle (degrees) or 1-3 letter cardinal direction.
