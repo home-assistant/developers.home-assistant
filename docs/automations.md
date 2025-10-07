@@ -13,8 +13,8 @@ Triggers start automations based on events, state changes, or conditions. Implem
 ### Trigger class
 
 Each trigger must inherit from `homeassistant.helpers.trigger.Trigger` and implement `async_validate_config` and `async_attach_runner`.
-`async_validate_config` should validate the configuration dict for the trigger, while
-`async_attach_runner` should set up the trigger to call the provided action runner `run_action` every time the trigger fires.
+`async_validate_config` validates the configuration dict for the trigger, while
+`async_attach_runner` sets up the trigger to call the provided action runner `run_action` every time the trigger fires.
 
 
 Integrations that need to wait for the action to complete can await the `Task` returned by `run_action`: `await run_action(...)`.
