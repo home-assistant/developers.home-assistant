@@ -3,6 +3,10 @@ title: "Device triggers"
 sidebar_label: Triggers
 ---
 
+:::warning
+We are currently exploring alternatives to device automations. Existing device automations will continue to work but new device automations are strongly discouraged.
+:::
+
 Device triggers are automation triggers that are tied to a specific device and an event or state change. Examples are "light turned on" or "water detected".
 
 Device triggers can be provided by the integration that provides the device (e.g. ZHA, deCONZ) or the entity integrations that the device has entities with (e.g. light, switch). An example of the former is events not tied to an entity e.g. key press on a remote control or touch panel, while an example of the latter could be that a light has been turned on.
