@@ -4,7 +4,7 @@ sidebar_label: Actions
 ---
 
 :::warning
-We are currently exploring alternatives to device automations. Existing device automations will continue to work but developing new device automations is strongly discouraged.
+We are currently exploring alternatives to device automations. Existing device automations will continue to work but new device automations won't be accepted.
 :::
 
 Device actions allow a user to have a device do something. Examples are to turn a light on or open a door.
