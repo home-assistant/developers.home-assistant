@@ -4,7 +4,7 @@ sidebar_label: Conditions
 ---
 
 :::warning
-We are currently exploring alternatives to device automations. Existing device automations will continue to work but new device automations are strongly discouraged.
+We are currently exploring alternatives to device automations. Existing device automations will continue to work but new device automations won't be accepted.
 :::
 
 Device conditions allow a user to check if a certain condition is met. Examples are is a light on or is the floor wet.

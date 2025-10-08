@@ -4,7 +4,7 @@ sidebar_label: Triggers
 ---
 
 :::warning
-We are currently exploring alternatives to device automations. Existing device automations will continue to work but new device automations are strongly discouraged.
+We are currently exploring alternatives to device automations. Existing device automations will continue to work but new device automations won't be accepted.
 :::
 
 Device triggers are automation triggers that are tied to a specific device and an event or state change. Examples are "light turned on" or "water detected".
