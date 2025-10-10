@@ -4,20 +4,20 @@ authorURL: https://github.com/emontnemery
 title: "Device filter has been removed from target selector"
 ---
 
-The ability to filter on devices has been removed from the [target selector documentation](https://www.home-assistant.io/docs/blueprint/selectors/#target-selector).
+The device filter option is no longer supported by the target selector and has been removed from the [target selector documentation](https://www.home-assistant.io/docs/blueprint/selectors/#target-selector).
 
 Hassfest has been updated to [fail on services with device filter on targets](https://github.com/home-assistant/core/pull/152794).
 
-In Home Assistant Core 2026.11, validation of target selector with a device filter will fail.
+Validation of target selectors that specify a device filter will fail in Home Assistant Core 2026.11.
 
 ### Background
 
-Device filter on target selectors was not supported by core helpers which extract entities from targets, which meant the device filter was ignored if the user had picked a floor, area, label or category. Also, the device filter was not respected by frontend when picking entities for the target.
+Core helpers that extract entities from targets did not support the device filter. When the user picked a floor, area, label, or category, the filter was ignored. The frontend also ignored the device filter when selecting entities for a target.
 
-All core integrations were reviewed, and there was no case where a target selector with a device filter was correctly used. Hence, it was decided to remove the device filter from the target selector instead of implementing support for it in core and frontend.
+A review of all core integrations found no correct uses of a device filter on target selectors. We removed the device filter from the target selector rather than implement support for it in Core and the frontend.
 
-### Impact on custom integration and blueprint authors
+### Impact on custom integration and blueprints
 
-Custom integrations and blueprints which use target selectors with a device filter need to be updated to remove the device filter.
+Update custom integrations and blueprints to remove device filters from target selectors.
 
-Please reach out on Discord if you have a valid use case for device filter on target selectors.
+If you have a valid use case for device filters on target selectors, reach out on Discord.
