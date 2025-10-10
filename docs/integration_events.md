@@ -2,6 +2,8 @@
 title: "Firing events"
 ---
 
+{% note %} Rather than emitting events directly on the event bus, integrations are generally encouraged to publish them as [event entities](core/entity/event.md) instead. This approach enhances the user experience by making it easier for the user to browse and identify all available events.{% endnote %}
+
 Some integrations represent devices or services that have events, like when motion is detected or a momentary button is pushed. An integration can make these available to users by firing them as events in Home Assistant.
 
 Your integration should fire events of type `<domain>_event`. For example, the ZHA integration fires `zha_event` events.
