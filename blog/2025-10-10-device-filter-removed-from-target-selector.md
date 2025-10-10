@@ -16,7 +16,7 @@ Core helpers that extract entities from targets did not support the device filte
 
 A review of all core integrations found no correct uses of a device filter on target selectors. We removed the device filter from the target selector rather than implement support for it in Core and the frontend.
 
-### Impact on custom integration and blueprints
+### Impact on custom integrations and blueprints
 
 Update custom integrations and blueprints to remove device filters from target selectors.
 
