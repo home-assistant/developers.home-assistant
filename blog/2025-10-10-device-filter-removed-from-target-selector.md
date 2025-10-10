@@ -6,6 +6,8 @@ title: "Device filter has been removed from target selector"
 
 The ability to filter on devices has been removed from the [target selector documentation](https://www.home-assistant.io/docs/blueprint/selectors/#target-selector).
 
+Hassfest has been updated to [fail on services with device filter on targets](https://github.com/home-assistant/core/pull/152794).
+
 In Home Assistant Core 2026.11, validation of target selector with a device filter will fail.
 
 ### Background
