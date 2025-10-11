@@ -40,7 +40,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.BATTERY` | % | Percentage of battery that is left
 | `SensorDeviceClass.BLOOD_GLUCOSE_CONCENTRATION` | mg/dL, mmol/L | Blood glucose concentration
 | `SensorDeviceClass.CO2` | ppm | Concentration of carbon dioxide.
-| `SensorDeviceClass.CO` | ppm, mg/m³, µg/m³ | Concentration of carbon monoxide.
+| `SensorDeviceClass.CO` | ppm, µg/m³, mg/m³ | Concentration of carbon monoxide.
 | `SensorDeviceClass.CONDUCTIVITY` | S/cm, mS/cm, µS/cm | Conductivity
 | `SensorDeviceClass.CURRENT` | A, mA | Current
 | `SensorDeviceClass.DATA_RATE` | bit/s, kbit/s, Mbit/s, Gbit/s, B/s, kB/s, MB/s, GB/s, KiB/s, MiB/s, GiB/s | Data rate
