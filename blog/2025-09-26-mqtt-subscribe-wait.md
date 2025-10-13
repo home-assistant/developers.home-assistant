@@ -34,7 +34,7 @@ Example:
 from homeassistant.components import mqtt
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Setup integration with awaited MQTT subscribe."""
+    """Setup integration with awaited MQTT subscription."""
 
     @callback
     def async_subscribe_callback(msg: ReceiveMessage) -> None:
@@ -42,8 +42,8 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         # Do stuff
 
     # Subscribe and wait
-    unsubscribe_callback = mqtt.async_subscribe(
-        hass, "myintegration/status", async_subscribe_callback, wait=True
+    unsubscribe_callback = await mqtt.async_subscribe(
+        hass, "myintegration/status", async_subscribe_callback, qos=1, wait=True
     )
 
     # Do some stuff
@@ -51,4 +51,22 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
     # Unsubscribe
     unsubscribe_callback()
+```
+
+## Await a possible pending subscription
+
+In case a subscription is already pending, the  `async_await_subscription` can be used to await its subscription. If it checks out the subscription was already completed, the helper will return immediately. Make sure the same QoS is used. If no (pending) subscription was found, or MQTT was not set up correctly, the helper will raise an `HomeAssistantError`.
+
+Example:
+
+```python
+from homeassistant.components import mqtt
+
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Setup integration with awaited pending MQTT subscription."""
+
+    # Await a pending subscription
+    await mqtt.async_await_subscription(
+        hass, "myintegration/status", qos=1, wait=True
+    )
 ```
