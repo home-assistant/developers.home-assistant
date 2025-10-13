@@ -1,0 +1,742 @@
+import java.util.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.io.*;
+import com.google.gson.*;
+
+/**
+ * Bug Tracking System - A comprehensive Java application for managing software bugs
+ * Author: Bug Tracker Team
+ * Date: October 13, 2025
+ */
+
+// ==================== User Class ====================
+class User {
+    private String userId;
+    private String username;
+    private String email;
+    private String passwordHash;
+    private String role;
+    private String createdAt;
+    
+    public User(String username, String email, String password, String role) {
+        this.userId = UUID.randomUUID().toString();
+        this.username = username;
+        this.email = email;
+        this.passwordHash = hashPassword(password);
+        this.role = role;
+        this.createdAt = LocalDateTime.now().toString();
+    }
+    
+    private String hashPassword(String password) {
+        try {
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
+            byte[] hash = digest.digest(password.getBytes());
+            StringBuilder hexString = new StringBuilder();
+            for (byte b : hash) {
+                String hex = Integer.toHexString(0xff & b);
+                if (hex.length() == 1) hexString.append('0');
+                hexString.append(hex);
+            }
+            return hexString.toString();
+        } catch (NoSuchAlgorithmException e) {
+            throw new RuntimeException(e);
+        }
+    }
+    
+    public boolean verifyPassword(String password) {
+        return this.passwordHash.equals(hashPassword(password));
+    }
+    
+    // Getters
+    public String getUserId() { return userId; }
+    public String getUsername() { return username; }
+    public String getEmail() { return email; }
+    public String getRole() { return role; }
+    public String getCreatedAt() { return createdAt; }
+    
+    // Setters
+    public void setUserId(String userId) { this.userId = userId; }
+    public void setUsername(String username) { this.username = username; }
+    public void setEmail(String email) { this.email = email; }
+    public void setPasswordHash(String passwordHash) { this.passwordHash = passwordHash; }
+    public void setRole(String role) { this.role = role; }
+    public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }
+}
+
+// ==================== Comment Class ====================
+class Comment {
+    private String commentId;
+    private String userId;
+    private String text;
+    private String timestamp;
+    
+    public Comment(String userId, String text) {
+        this.commentId = UUID.randomUUID().toString();
+        this.userId = userId;
+        this.text = text;
+        this.timestamp = LocalDateTime.now().toString();
+    }
+    
+    // Getters and Setters
+    public String getCommentId() { return commentId; }
+    public String getUserId() { return userId; }
+    public String getText() { return text; }
+    public String getTimestamp() { return timestamp; }
+    
+    public void setCommentId(String commentId) { this.commentId = commentId; }
+    public void setUserId(String userId) { this.userId = userId; }
+    public void setText(String text) { this.text = text; }
+    public void setTimestamp(String timestamp) { this.timestamp = timestamp; }
+}
+
+// ==================== Environment Class ====================
+class Environment {
+    private String browser;
+    private String os;
+    private String version;
+    private String device;
+    
+    public Environment() {
+        this.browser = "";
+        this.os = "";
+        this.version = "";
+        this.device = "";
+    }
+    
+    public Environment(String browser, String os, String version, String device) {
+        this.browser = browser;
+        this.os = os;
+        this.version = version;
+        this.device = device;
+    }
+    
+    // Getters and Setters
+    public String getBrowser() { return browser; }
+    public String getOs() { return os; }
+    public String getVersion() { return version; }
+    public String getDevice() { return device; }
+    
+    public void setBrowser(String browser) { this.browser = browser; }
+    public void setOs(String os) { this.os = os; }
+    public void setVersion(String version) { this.version = version; }
+    public void setDevice(String device) { this.device = device; }
+}
+
+// ==================== Bug Class ====================
+class Bug {
+    public static final String[] SEVERITIES = {"critical", "high", "medium", "low"};
+    public static final String[] STATUSES = {"open", "in_progress", "resolved", "closed", "reopened"};
+    public static final String[] PRIORITIES = {"urgent", "high", "normal", "low"};
+    
+    private String bugId;
+    private String title;
+    private String description;
+    private String reporterId;
+    private String assigneeId;
+    private String severity;
+    private String priority;
+    private String status;
+    private List<String> tags;
+    private List<Comment> comments;
+    private List<String> attachments;
+    private String createdAt;
+    private String updatedAt;
+    private String resolvedAt;
+    private Environment environment;
+    private List<String> stepsToReproduce;
+    private String expectedBehavior;
+    private String actualBehavior;
+    
+    public Bug(String title, String description, String reporterId, String severity, String priority) {
+        this.bugId = UUID.randomUUID().toString();
+        this.title = title;
+        this.description = description;
+        this.reporterId = reporterId;
+        this.assigneeId = null;
+        this.severity = isValidSeverity(severity) ? severity : "medium";
+        this.priority = isValidPriority(priority) ? priority : "normal";
+        this.status = "open";
+        this.tags = new ArrayList<>();
+        this.comments = new ArrayList<>();
+        this.attachments = new ArrayList<>();
+        this.createdAt = LocalDateTime.now().toString();
+        this.updatedAt = LocalDateTime.now().toString();
+        this.resolvedAt = null;
+        this.environment = new Environment();
+        this.stepsToReproduce = new ArrayList<>();
+        this.expectedBehavior = "";
+        this.actualBehavior = "";
+    }
+    
+    private boolean isValidSeverity(String severity) {
+        return Arrays.asList(SEVERITIES).contains(severity);
+    }
+    
+    private boolean isValidPriority(String priority) {
+        return Arrays.asList(PRIORITIES).contains(priority);
+    }
+    
+    public void addComment(String userId, String commentText) {
+        Comment comment = new Comment(userId, commentText);
+        this.comments.add(comment);
+        this.updatedAt = LocalDateTime.now().toString();
+    }
+    
+    public void updateStatus(String newStatus) {
+        if (Arrays.asList(STATUSES).contains(newStatus)) {
+            this.status = newStatus;
+            this.updatedAt = LocalDateTime.now().toString();
+            if (newStatus.equals("resolved")) {
+                this.resolvedAt = LocalDateTime.now().toString();
+            }
+        }
+    }
+    
+    public void assignTo(String userId) {
+        this.assigneeId = userId;
+        this.updatedAt = LocalDateTime.now().toString();
+    }
+    
+    public void addTag(String tag) {
+        if (!this.tags.contains(tag)) {
+            this.tags.add(tag);
+            this.updatedAt = LocalDateTime.now().toString();
+        }
+    }
+    
+    public void setEnvironment(String browser, String os, String version, String device) {
+        this.environment = new Environment(browser, os, version, device);
+        this.updatedAt = LocalDateTime.now().toString();
+    }
+    
+    public void addSteps(List<String> steps) {
+        this.stepsToReproduce = new ArrayList<>(steps);
+        this.updatedAt = LocalDateTime.now().toString();
+    }
+    
+    // Getters
+    public String getBugId() { return bugId; }
+    public String getTitle() { return title; }
+    public String getDescription() { return description; }
+    public String getReporterId() { return reporterId; }
+    public String getAssigneeId() { return assigneeId; }
+    public String getSeverity() { return severity; }
+    public String getPriority() { return priority; }
+    public String getStatus() { return status; }
+    public List<String> getTags() { return tags; }
+    public List<Comment> getComments() { return comments; }
+    public List<String> getAttachments() { return attachments; }
+    public String getCreatedAt() { return createdAt; }
+    public String getUpdatedAt() { return updatedAt; }
+    public String getResolvedAt() { return resolvedAt; }
+    public Environment getEnvironment() { return environment; }
+    public List<String> getStepsToReproduce() { return stepsToReproduce; }
+    public String getExpectedBehavior() { return expectedBehavior; }
+    public String getActualBehavior() { return actualBehavior; }
+    
+    // Setters
+    public void setBugId(String bugId) { this.bugId = bugId; }
+    public void setTitle(String title) { this.title = title; }
+    public void setDescription(String description) { this.description = description; }
+    public void setReporterId(String reporterId) { this.reporterId = reporterId; }
+    public void setAssigneeId(String assigneeId) { this.assigneeId = assigneeId; }
+    public void setSeverity(String severity) { this.severity = severity; }
+    public void setPriority(String priority) { this.priority = priority; }
+    public void setStatus(String status) { this.status = status; }
+    public void setTags(List<String> tags) { this.tags = tags; }
+    public void setComments(List<Comment> comments) { this.comments = comments; }
+    public void setAttachments(List<String> attachments) { this.attachments = attachments; }
+    public void setCreatedAt(String createdAt) { this.createdAt = createdAt; }
+    public void setUpdatedAt(String updatedAt) { this.updatedAt = updatedAt; }
+    public void setResolvedAt(String resolvedAt) { this.resolvedAt = resolvedAt; }
+    public void setEnvironment(Environment environment) { this.environment = environment; }
+    public void setStepsToReproduce(List<String> stepsToReproduce) { this.stepsToReproduce = stepsToReproduce; }
+    public void setExpectedBehavior(String expectedBehavior) { this.expectedBehavior = expectedBehavior; }
+    public void setActualBehavior(String actualBehavior) { this.actualBehavior = actualBehavior; }
+}
+
+// ==================== Statistics Class ====================
+class Statistics {
+    private int totalBugs;
+    private int openBugs;
+    private int inProgressBugs;
+    private int resolvedBugs;
+    private int closedBugs;
+    private int criticalBugs;
+    private int highBugs;
+    private int mediumBugs;
+    private int lowBugs;
+    
+    public Statistics() {
+        this.totalBugs = 0;
+        this.openBugs = 0;
+        this.inProgressBugs = 0;
+        this.resolvedBugs = 0;
+        this.closedBugs = 0;
+        this.criticalBugs = 0;
+        this.highBugs = 0;
+        this.mediumBugs = 0;
+        this.lowBugs = 0;
+    }
+    
+    // Getters and Setters
+    public int getTotalBugs() { return totalBugs; }
+    public int getOpenBugs() { return openBugs; }
+    public int getInProgressBugs() { return inProgressBugs; }
+    public int getResolvedBugs() { return resolvedBugs; }
+    public int getClosedBugs() { return closedBugs; }
+    public int getCriticalBugs() { return criticalBugs; }
+    public int getHighBugs() { return highBugs; }
+    public int getMediumBugs() { return mediumBugs; }
+    public int getLowBugs() { return lowBugs; }
+    
+    public void setTotalBugs(int totalBugs) { this.totalBugs = totalBugs; }
+    public void setOpenBugs(int openBugs) { this.openBugs = openBugs; }
+    public void setInProgressBugs(int inProgressBugs) { this.inProgressBugs = inProgressBugs; }
+    public void setResolvedBugs(int resolvedBugs) { this.resolvedBugs = resolvedBugs; }
+    public void setClosedBugs(int closedBugs) { this.closedBugs = closedBugs; }
+    public void setCriticalBugs(int criticalBugs) { this.criticalBugs = criticalBugs; }
+    public void setHighBugs(int highBugs) { this.highBugs = highBugs; }
+    public void setMediumBugs(int mediumBugs) { this.mediumBugs = mediumBugs; }
+    public void setLowBugs(int lowBugs) { this.lowBugs = lowBugs; }
+    
+    public void print() {
+        System.out.println("\n" + "=".repeat(40));
+        System.out.println("BUG STATISTICS");
+        System.out.println("=".repeat(40));
+        System.out.println("Total Bugs: " + totalBugs);
+        System.out.println("\nBy Status:");
+        System.out.println("  Open: " + openBugs);
+        System.out.println("  In Progress: " + inProgressBugs);
+        System.out.println("  Resolved: " + resolvedBugs);
+        System.out.println("  Closed: " + closedBugs);
+        System.out.println("\nBy Severity:");
+        System.out.println("  Critical: " + criticalBugs);
+        System.out.println("  High: " + highBugs);
+        System.out.println("  Medium: " + mediumBugs);
+        System.out.println("  Low: " + lowBugs);
+        System.out.println("=".repeat(40));
+    }
+}
+
+// ==================== BugTracker Class ====================
+class BugTracker {
+    private Map<String, User> users;
+    private Map<String, Bug> bugs;
+    private User currentUser;
+    private String dataFile;
+    private Gson gson;
+    
+    public BugTracker(String dataFile) {
+        this.users = new HashMap<>();
+        this.bugs = new HashMap<>();
+        this.currentUser = null;
+        this.dataFile = dataFile;
+        this.gson = new GsonBuilder().setPrettyPrinting().create();
+        loadData();
+    }
+    
+    public void loadData() {
+        File file = new File(dataFile);
+        if (file.exists()) {
+            try (FileReader reader = new FileReader(file)) {
+                JsonObject data = gson.fromJson(reader, JsonObject.class);
+                
+                if (data != null && data.has("users")) {
+                    JsonObject usersObj = data.getAsJsonObject("users");
+                    for (Map.Entry<String, JsonElement> entry : usersObj.entrySet()) {
+                        User user = gson.fromJson(entry.getValue(), User.class);
+                        users.put(entry.getKey(), user);
+                    }
+                }
+                
+                if (data != null && data.has("bugs")) {
+                    JsonObject bugsObj = data.getAsJsonObject("bugs");
+                    for (Map.Entry<String, JsonElement> entry : bugsObj.entrySet()) {
+                        Bug bug = gson.fromJson(entry.getValue(), Bug.class);
+                        bugs.put(entry.getKey(), bug);
+                    }
+                }
+            } catch (IOException e) {
+                System.out.println("Error loading data: " + e.getMessage());
+            }
+        }
+    }
+    
+    public void saveData() {
+        try (FileWriter writer = new FileWriter(dataFile)) {
+            JsonObject data = new JsonObject();
+            
+            JsonObject usersObj = new JsonObject();
+            for (Map.Entry<String, User> entry : users.entrySet()) {
+                usersObj.add(entry.getKey(), gson.toJsonTree(entry.getValue()));
+            }
+            data.add("users", usersObj);
+            
+            JsonObject bugsObj = new JsonObject();
+            for (Map.Entry<String, Bug> entry : bugs.entrySet()) {
+                bugsObj.add(entry.getKey(), gson.toJsonTree(entry.getValue()));
+            }
+            data.add("bugs", bugsObj);
+            
+            gson.toJson(data, writer);
+        } catch (IOException e) {
+            System.out.println("Error saving data: " + e.getMessage());
+        }
+    }
+    
+    public boolean registerUser(String username, String email, String password, String role) {
+        for (User user : users.values()) {
+            if (user.getUsername().equals(username)) {
+                System.out.println("Username already exists!");
+                return false;
+            }
+        }
+        
+        User user = new User(username, email, password, role);
+        users.put(user.getUserId(), user);
+        saveData();
+        System.out.println("User " + username + " registered successfully!");
+        return true;
+    }
+    
+    public boolean login(String username, String password) {
+        for (User user : users.values()) {
+            if (user.getUsername().equals(username) && user.verifyPassword(password)) {
+                currentUser = user;
+                System.out.println("Welcome back, " + username + "!");
+                return true;
+            }
+        }
+        System.out.println("Invalid username or password!");
+        return false;
+    }
+    
+    public void logout() {
+        if (currentUser != null) {
+            System.out.println("Goodbye, " + currentUser.getUsername() + "!");
+            currentUser = null;
+        }
+    }
+    
+    public Bug createBug(String title, String description, String severity, String priority) {
+        if (currentUser == null) {
+            System.out.println("Please login first!");
+            return null;
+        }
+        
+        Bug bug = new Bug(title, description, currentUser.getUserId(), severity, priority);
+        bugs.put(bug.getBugId(), bug);
+        saveData();
+        System.out.println("Bug #" + bug.getBugId().substring(0, 8) + " created successfully!");
+        return bug;
+    }
+    
+    public Bug getBug(String bugId) {
+        return bugs.get(bugId);
+    }
+    
+    public boolean updateBugStatus(String bugId, String newStatus) {
+        Bug bug = getBug(bugId);
+        if (bug == null) {
+            System.out.println("Bug not found!");
+            return false;
+        }
+        
+        bug.updateStatus(newStatus);
+        saveData();
+        System.out.println("Bug status updated to " + newStatus);
+        return true;
+    }
+    
+    public boolean assignBug(String bugId, String assigneeUsername) {
+        Bug bug = getBug(bugId);
+        if (bug == null) {
+            System.out.println("Bug not found!");
+            return false;
+        }
+        
+        User assignee = null;
+        for (User user : users.values()) {
+            if (user.getUsername().equals(assigneeUsername)) {
+                assignee = user;
+                break;
+            }
+        }
+        
+        if (assignee == null) {
+            System.out.println("Assignee not found!");
+            return false;
+        }
+        
+        bug.assignTo(assignee.getUserId());
+        saveData();
+        System.out.println("Bug assigned to " + assigneeUsername);
+        return true;
+    }
+    
+    public boolean addComment(String bugId, String commentText) {
+        if (currentUser == null) {
+            System.out.println("Please login first!");
+            return false;
+        }
+        
+        Bug bug = getBug(bugId);
+        if (bug == null) {
+            System.out.println("Bug not found!");
+            return false;
+        }
+        
+        bug.addComment(currentUser.getUserId(), commentText);
+        saveData();
+        System.out.println("Comment added successfully!");
+        return true;
+    }
+    
+    public List<Bug> listBugs(String status, String severity) {
+        List<Bug> result = new ArrayList<>(bugs.values());
+        
+        if (status != null && !status.isEmpty()) {
+            result.removeIf(bug -> !bug.getStatus().equals(status));
+        }
+        if (severity != null && !severity.isEmpty()) {
+            result.removeIf(bug -> !bug.getSeverity().equals(severity));
+        }
+        
+        return result;
+    }
+    
+    public List<Bug> searchBugs(String keyword) {
+        List<Bug> result = new ArrayList<>();
+        String lowerKeyword = keyword.toLowerCase();
+        
+        for (Bug bug : bugs.values()) {
+            if (bug.getTitle().toLowerCase().contains(lowerKeyword) || 
+                bug.getDescription().toLowerCase().contains(lowerKeyword)) {
+                result.add(bug);
+            }
+        }
+        
+        return result;
+    }
+    
+    public List<Bug> getMyBugs() {
+        if (currentUser == null) return new ArrayList<>();
+        
+        List<Bug> result = new ArrayList<>();
+        for (Bug bug : bugs.values()) {
+            if (bug.getReporterId().equals(currentUser.getUserId())) {
+                result.add(bug);
+            }
+        }
+        return result;
+    }
+    
+    public List<Bug> getAssignedBugs() {
+        if (currentUser == null) return new ArrayList<>();
+        
+        List<Bug> result = new ArrayList<>();
+        for (Bug bug : bugs.values()) {
+            if (currentUser.getUserId().equals(bug.getAssigneeId())) {
+                result.add(bug);
+            }
+        }
+        return result;
+    }
+    
+    public Statistics getStatistics() {
+        Statistics stats = new Statistics();
+        stats.setTotalBugs(bugs.size());
+        
+        for (Bug bug : bugs.values()) {
+            switch (bug.getStatus()) {
+                case "open": stats.setOpenBugs(stats.getOpenBugs() + 1); break;
+                case "in_progress": stats.setInProgressBugs(stats.getInProgressBugs() + 1); break;
+                case "resolved": stats.setResolvedBugs(stats.getResolvedBugs() + 1); break;
+                case "closed": stats.setClosedBugs(stats.getClosedBugs() + 1); break;
+            }
+            
+            switch (bug.getSeverity()) {
+                case "critical": stats.setCriticalBugs(stats.getCriticalBugs() + 1); break;
+                case "high": stats.setHighBugs(stats.getHighBugs() + 1); break;
+                case "medium": stats.setMediumBugs(stats.getMediumBugs() + 1); break;
+                case "low": stats.setLowBugs(stats.getLowBugs() + 1); break;
+            }
+        }
+        
+        return stats;
+    }
+    
+    public void printBugDetails(Bug bug) {
+        User reporter = users.get(bug.getReporterId());
+        User assignee = bug.getAssigneeId() != null ? users.get(bug.getAssigneeId()) : null;
+        
+        System.out.println("\n" + "=".repeat(60));
+        System.out.println("Bug ID: " + bug.getBugId().substring(0, 8));
+        System.out.println("Title: " + bug.getTitle());
+        System.out.println("Description: " + bug.getDescription());
+        System.out.println("Reporter: " + (reporter != null ? reporter.getUsername() : "Unknown"));
+        System.out.println("Assignee: " + (assignee != null ? assignee.getUsername() : "Unassigned"));
+        System.out.println("Severity: " + bug.getSeverity().toUpperCase());
+        System.out.println("Priority: " + bug.getPriority().toUpperCase());
+        System.out.println("Status: " + bug.getStatus().toUpperCase());
+        System.out.println("Tags: " + (bug.getTags().isEmpty() ? "None" : String.join(", ", bug.getTags())));
+        System.out.println("Created: " + bug.getCreatedAt());
+        System.out.println("Updated: " + bug.getUpdatedAt());
+        
+        Environment env = bug.getEnvironment();
+        if (env != null && !env.getBrowser().isEmpty()) {
+            System.out.println("\nEnvironment:");
+            if (!env.getBrowser().isEmpty()) System.out.println("  Browser: " + env.getBrowser());
+            if (!env.getOs().isEmpty()) System.out.println("  OS: " + env.getOs());
+            if (!env.getVersion().isEmpty()) System.out.println("  Version: " + env.getVersion());
+            if (!env.getDevice().isEmpty()) System.out.println("  Device: " + env.getDevice());
+        }
+        
+        if (!bug.getStepsToReproduce().isEmpty()) {
+            System.out.println("\nSteps to Reproduce:");
+            for (int i = 0; i < bug.getStepsToReproduce().size(); i++) {
+                System.out.println("  " + (i + 1) + ". " + bug.getStepsToReproduce().get(i));
+            }
+        }
+        
+        if (!bug.getComments().isEmpty()) {
+            System.out.println("\nComments (" + bug.getComments().size() + "):");
+            for (Comment comment : bug.getComments()) {
+                User commentUser = users.get(comment.getUserId());
+                String username = commentUser != null ? commentUser.getUsername() : "Unknown";
+                System.out.println("  [" + username + "] " + comment.getText());
+            }
+        }
+        
+        System.out.println("=".repeat(60) + "\n");
+    }
+    
+    public User getCurrentUser() {
+        return currentUser;
+    }
+}
+
+// ==================== Main Class ====================
+public class BugTrackingSystem {
+    private static Scanner scanner = new Scanner(System.in);
+    private static BugTracker tracker = new BugTracker("bug_tracker_data.json");
+    
+    public static void main(String[] args) {
+        System.out.println("=".repeat(60));
+        System.out.println("Welcome to BugTrack - Bug Tracking System (Java Edition)");
+        System.out.println("=".repeat(60));
+        
+        while (true) {
+            if (tracker.getCurrentUser() == null) {
+                showLoginMenu();
+            } else {
+                showMainMenu();
+            }
+        }
+    }
+    
+    private static void showLoginMenu() {
+        System.out.println("\n1. Register");
+        System.out.println("2. Login");
+        System.out.println("3. Exit");
+        System.out.print("\nSelect option: ");
+        
+        String choice = scanner.nextLine().trim();
+        
+        switch (choice) {
+            case "1":
+                registerUser();
+                break;
+            case "2":
+                loginUser();
+                break;
+            case "3":
+                System.out.println("Goodbye!");
+                System.exit(0);
+                break;
+            default:
+                System.out.println("Invalid option!");
+        }
+    }
+    
+    private static void showMainMenu() {
+        System.out.println("\nLogged in as: " + tracker.getCurrentUser().getUsername() + 
+                          " (" + tracker.getCurrentUser().getRole() + ")");
+        System.out.println("\n1. Create Bug");
+        System.out.println("2. View All Bugs");
+        System.out.println("3. View My Bugs");
+        System.out.println("4. View Assigned Bugs");
+        System.out.println("5. Search Bugs");
+        System.out.println("6. View Bug Details");
+        System.out.println("7. Update Bug Status");
+        System.out.println("8. Assign Bug");
+        System.out.println("9. Add Comment");
+        System.out.println("10. View Statistics");
+        System.out.println("11. Logout");
+        System.out.print("\nSelect option: ");
+        
+        String choice = scanner.nextLine().trim();
+        
+        switch (choice) {
+            case "1": createBug(); break;
+            case "2": viewAllBugs(); break;
+            case "3": viewMyBugs(); break;
+            case "4": viewAssignedBugs(); break;
+            case "5": searchBugs(); break;
+            case "6": viewBugDetails(); break;
+            case "7": updateBugStatus(); break;
+            case "8": assignBug(); break;
+            case "9": addComment(); break;
+            case "10": viewStatistics(); break;
+            case "11": tracker.logout(); break;
+            default: System.out.println("Invalid option!");
+        }
+    }
+    
+    private static void registerUser() {
+        System.out.print("Username: ");
+        String username = scanner.nextLine().trim();
+        System.out.print("Email: ");
+        String email = scanner.nextLine().trim();
+        System.out.print("Password: ");
+        String password = scanner.nextLine().trim();
+        System.out.print("Role (developer/tester/admin) [developer]: ");
+        String role = scanner.nextLine().trim();
+        if (role.isEmpty()) role = "developer";
+        
+        tracker.registerUser(username, email, password, role);
+    }
+    
+    private static void loginUser() {
+        System.out.print("Username: ");
+        String username = scanner.nextLine().trim();
+        System.out.print("Password: ");
+        String password = scanner.nextLine().trim();
+        
+        tracker.login(username, password);
+    }
+    
+    private static void createBug() {
+        System.out.print("Bug Title: ");
+        String title = scanner.nextLine().trim();
+        System.out.print("Description: ");
+        String description = scanner.nextLine().trim();
+        System.out.print("Severity (critical/high/medium/low) [medium]: ");
+        String severity = scanner.nextLine().trim();
+        if (severity.isEmpty()) severity = "medium";
+        System.out.print("Priority (urgent/high/normal/low) [normal]: ");
+        String priority = scanner.nextLine().trim();
+        if (priority.isEmpty()) priority = "normal";
+        
+        tracker.createBug(title, description, severity, priority);
+    }
+    
+    private static void viewAllBugs() {
+        List<Bug> bugs = tracker.listBugs(null, null);
+        System.out.println("\nTotal Bugs: " + bugs.size());
+        for (Bug bug : bugs) {
+            System.out.println("  [" + bug.getBugId().substring(0, 8) + "] " +
