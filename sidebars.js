@@ -29,6 +29,7 @@ module.exports = {
   ],
   Overview: [
     "architecture_index",
+    "overview/roles",
     "setup_devcontainer_environment"
   ],
   Frontend: [
@@ -93,7 +94,6 @@ module.exports = {
   ],
   Core: [
     "development_index",
-    "development_roles",
     {
       type: "category",
       label: "Architecture",
