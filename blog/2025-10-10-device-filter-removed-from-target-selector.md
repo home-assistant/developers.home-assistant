@@ -14,7 +14,7 @@ Validation of target selectors that specify a device filter will fail in Home As
 
 Core helpers that extract entities from targets did not support the device filter. When the user picked a floor, area, label, or category, the filter was ignored. The frontend also ignored the device filter when selecting entities for a target.
 
-A review of all core integrations found no correct uses of a device filter on target selectors. We removed the device filter from the target selector rather than implement support for it in Core and the frontend.
+A review of all core integrations found no correct use of a device filter on target selectors. We removed the device filter from the target selector rather than implement support for it in Core and the frontend.
 
 ### Impact on custom integrations and blueprints
 
