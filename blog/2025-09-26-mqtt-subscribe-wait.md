@@ -7,7 +7,7 @@ title: Option added to wait for an MQTT subscription
 
 ## Option added to wait for an MQTT subscription
 
-Integrations that use MQTT, might want to wait for an MQTT subscription to be completed. The default behavior is that an MQTT subscription is queued and debounced. In most cases the caller does not need to wait for the subscription to be completed. In some cases though, the integration needs to ensure that the subscription was actually done at the MQTT broker. To support the the `wait` options was added to the MQTT subscribe API.
+Integrations that use MQTT might need to wait for a subscription to complete. The default behavior is that a subscription is queued and debounced, so callers usually do not wait for broker confirmation. Some integrations must guarantee that the broker finished the subscription. To support this requirement, the MQTT subscribe API adds a `wait` option.
 
 The new async signature for MQTT subscribe that supports the new wait option is:
 
