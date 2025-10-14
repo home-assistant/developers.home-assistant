@@ -81,7 +81,7 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.VOLATILE_ORGANIC_COMPOUNDS_PARTS` | ppm, ppb | Ratio of volatile organic compounds
 | `NumberDeviceClass.VOLTAGE` | V, mV, µV, kV, MV | Voltage
 | `NumberDeviceClass.VOLUME` | L, mL, gal, fl. oz., m³, ft³, CCF, MCF | Generic volume, this device class should be used to represent a consumption, for example the amount of fuel consumed by a vehicle.
-| `NumberDeviceClass.VOLUME_FLOW_RATE` | m³/h, m³/min, m³/s, ft³/min, L/h, L/min, L/s, gal/min, mL/s | Volume flow rate, this device class should be used to represent a flow of some volume, for example the amount of water consumed momentarily.
+| `NumberDeviceClass.VOLUME_FLOW_RATE` | m³/h, m³/min, m³/s, ft³/min, L/h, L/min, L/s, gal/h, gal/min, mL/s | Volume flow rate, this device class should be used to represent a flow of some volume, for example the amount of water consumed momentarily.
 | `NumberDeviceClass.VOLUME_STORAGE` | L, mL, gal, fl. oz., m³, ft³, CCF, MCF | Generic stored volume, this device class should be used to represent a stored volume, for example the amount of fuel in a fuel tank.
 | `NumberDeviceClass.WATER` | L, gal, m³, ft³, CCF, MCF | Water consumption
 | `NumberDeviceClass.WEIGHT` | kg, g, mg, µg, oz, lb, st | Generic mass; `weight` is used instead of `mass` to fit with every day language.
