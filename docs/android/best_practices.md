@@ -38,7 +38,9 @@ Logging is essential but should be used judiciously. As Jake Wharton says in his
 
 When working with time, date, or duration, avoid using primitive types. Instead, use strong types to prevent unit mix-ups.
 
-### ❌ Don't do this
+:::note[Example]
+
+#### ❌ Don't do this
 
 ```kotlin
 const val THRESHOLD = 600000
@@ -52,7 +54,7 @@ fun main() {
 }
 ```
 
-### ✅ Do this
+#### ✅ Do this
 
 ```kotlin
 val THRESHOLD = Instant.ofEpochSecond(60)
@@ -65,6 +67,8 @@ fun main() {
     }
 }
 ```
+
+:::
 
 :::warning
 If you must use primitive types, ensure the variable name includes the unit (e.g., `THRESHOLD_MS` instead of `THRESHOLD`) to reduce ambiguity.
@@ -88,6 +92,95 @@ Tie your coroutines to an Android lifecycle (e.g., `viewModelScope` or `lifecycl
 - Debugging concurrency issues (e.g., race conditions) can be extremely challenging, so design carefully.
 
 For more details on race conditions, see [Race Condition](https://en.wikipedia.org/wiki/Race_condition#In_software).
+
+## Use strong types instead of strings for logic
+
+Use strings for storing and displaying text, not for controlling logic or behavior in your code. Relying on strings for logic-such as passing a string to determine a destination or behavior-can introduce errors like typos and make it harder to track or refactor your code. Instead, use strong types, such as a `sealed` class or, if necessary, an `enum`, to represent these concepts. Reserve strings for raw values from third-party sources or for UI display. If you must use strings, define them as `const val` (following our [codestyle](/docs/android/codestyle#avoid-magic-numbers-and-strings)) or wrap them in a strong type, such as an [inline value class](https://kotlinlang.org/docs/inline-classes.html).
+
+:::note[Example]
+
+#### ❌ Avoid this pattern
+
+```kotlin
+fun newInstance(destination: String): Intent {
+    // Logic based on string value
+    return Intent().apply {
+        putExtra("destination", destination)
+    }
+}
+```
+
+#### ✅ Prefer this approach
+
+```kotlin
+private const val DESTINATION_KEY = "destination"
+
+@Parcelize
+sealed interface Destination : Parcelable {
+    data object General : Destination
+    data object Notifications : Destination
+    data object Privacy : Destination
+}
+
+fun newInstance(destination: Destination): Intent {
+    return Intent().apply {
+        putExtra(DESTINATION_KEY, destination)
+    }
+}
+
+fun onIntent(intent: Intent) {
+    val destination = IntentCompat.getParcelableExtra(intent, DESTINATION_KEY, Destination::class.java)
+    when (destination) {
+        Destination.General -> // Handle General
+        Destination.Notifications -> // Handle Notifications
+        Destination.Privacy -> // Handle Privacy
+        null -> // Handle missing destination
+    }
+}
+```
+
+:::
+
+Using strong types for destinations helps prevent errors, improves code navigation, and makes refactoring more reliable. When you use `sealed` classes with `when`, the compiler can catch missing cases, and your IDE can quickly locate all usages of a specific destination, making updates and maintenance easier.
+
+### Why sealed classes are better than enums
+
+Sealed classes provide more flexibility and safety than enums. With sealed classes, you can define subclasses with their own properties, allowing you to pass additional data as needed for each type. This makes your APIs more expressive and adaptable.
+
+For example, if the `Notifications` destination needs a `title` parameter, define it like this:
+
+```kotlin
+
+private const val DESTINATION_KEY = "destination"
+
+@Parcelize
+sealed interface Destination : Parcelable {
+    data object General : Destination
+    data class Notifications(val title: String) : Destination
+    data object Privacy : Destination
+}
+
+fun onIntent(intent: Intent) {
+    val destination = IntentCompat.getParcelableExtra(intent, DESTINATION_KEY, Destination::class.java)
+    when (destination) {
+        Destination.General -> // Handle General
+        is Destination.Notifications -> {
+            val title = destination.title
+            // Handle Notifications with title
+        }
+        Destination.Privacy -> // Handle Privacy
+        null -> // Handle missing destination
+    }
+}
+```
+
+:::note
+When you use `when` with a sealed class, avoid adding an `else` branch. This ensures that if you add a new case, the compiler will require you to handle it, making your code safer and easier to maintain.
+:::
+
+By using sealed classes, you can safely add new destination types with their own required fields, and the compiler will enforce handling all cases. This approach makes your code more robust, maintainable, and less error-prone than using enums or strings for logic control.
+
+Read more about sealed modifier on the [Kotlin documentation](https://kotlinlang.org/docs/sealed-classes.html).
 
 ## Code organization
 
@@ -113,10 +206,55 @@ Naming is hard, but smaller functions make it easier to choose meaningful names.
 
 For more details, see [submit](/docs/android/submit).
 
-## Additional notes
+## Dependency injection (DI)
 
-- **Testing**: Write [unit tests](/docs/android/testing/unit_testing) for critical functionality to ensure reliability.
-- **Code reviews**: Always review code for adherence to these best practices.
+We use Dependency injection (DI) to help write modular, testable, and maintainable code. By using DI, we can decouple the classes from their dependencies, making it easier to swap implementations, write unit tests, and manage complex object graphs. DI also improves code readability and helps enforce the single responsibility principle.
+
+### Use explicit qualifier annotations over `@Named`
+
+When you need to inject multiple implementations of the same type (or primitive types), you must use a qualifier to distinguish between them. While the `@Named` annotation is a common approach, it relies on string identifiers, which can be error-prone and harder to refactor. Using custom qualifier annotations instead of `@Named` offers several advantages:
+
+- **Discoverability**: Custom qualifiers make it easier to find where a specific dependency is used in the codebase.
+- **Refactorability**: Renaming a custom annotation is straightforward and safe, while changing a string identifier requires searching for all string usages.
+- **Type safety**: Custom annotations are checked at compile time, reducing the risk of typos or mismatches that can occur with strings.
+- **Clarity**: Custom qualifiers make the code more self-explanatory and easier to understand.
+
+:::note[Example]
+
+#### ❌ Don't do this
+
+```kotlin
+@Inject
+@Named("keyChainRepository")
+lateinit var keyChainRepository: KeyChainRepository
+```
+
+#### ✅ Do this
+
+```kotlin
+@Inject
+@NamedKeyChain
+lateinit var keyChainRepository: KeyChainRepository
+```
+
+Define the annotation like this:
+
+```kotlin
+package io.homeassistant.companion.android.common.data.keychain
+
+import javax.inject.Qualifier
+
+/**
+ * Qualifier for the [KeyChainRepository] used to select the key chain.
+ */
+@Qualifier
+@Retention(AnnotationRetention.RUNTIME)
+annotation class NamedKeyChain
+```
+
+:::
+
+For a real-world example of migrating from `@Named("keyChainRepository")` to `@NamedKeyChain`, see [this pull request](https://github.com/home-assistant/android/pull/5667).
 
 ## Fail fast
 
@@ -124,7 +262,11 @@ The further you progress in development, the more difficult it becomes to debug 
 
 ### Leverage Kotlin compiler
 
-The Kotlin compiler can help you catch issues early. For example, using the `when` operator with sealed classes/interfaces ensures that all cases are handled.
+The Kotlin compiler can help you catch issues early. For example, using the `when` operator with `sealed` classes/interfaces ensures that all cases are handled.
+
+:::note
+Favor [composition over inheritance](https://en.wikipedia.org/wiki/Composition_over_inheritance) when designing your classes. Composition leads to more flexible, maintainable, and testable code by allowing you to build complex behavior from simpler, reusable components, rather than relying on rigid class hierarchies.
+:::
 
 **Example:**
 

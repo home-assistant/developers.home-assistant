@@ -67,3 +67,28 @@ but also helps fellow contributors making adjustments to your code in the future
 By default, Home Assistant will statically check for type hints in our automated CI process.
 Python modules can be included for strict checking, if they are fully typed, by adding an entry
 to the `.strict-typing` file in the root of the Home Assistant Core project.
+
+### Function docstring convention
+
+Type annotations usually document function parameters.
+
+When you need extended documentation, follow the [Google style](https://google.github.io/styleguide/pyguide.html#383-functions-and-methods)
+for docstrings that document parameters, return values, or exceptions. In such cases, type information for the parameters and the return value
+should already be specified in the type annotations, and should be omitted from the docstrings.
+
+```python
+def some_method(self, param1: str, param2: str) -> int:
+    """Example Google-style docstring.
+
+    Args:
+        param1: The first parameter.
+        param2: The second parameter.
+
+    Returns:
+        An integer result.
+
+    Raises:
+        KeyError: If the key doesn't exist.
+    """
+    return 0
+```

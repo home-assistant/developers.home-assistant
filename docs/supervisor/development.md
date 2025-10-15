@@ -3,7 +3,8 @@ title: "Supervisor development"
 sidebar_label: "Development"
 ---
 
-These instructions are for development of the Supervisor, the Supervisor frontend panel and the `hassio` integration, by interacting with a development or remote supervisor, this assumes that you are using a development machine to do the development, these instructions will also use devcontainer and other tools that rely on Docker, so if you don't have that setup yet, do that before you continue.
+These instructions are for development of the Supervisor, the Supervisor frontend panel and the `hassio` integration, by interacting with a development or remote supervisor, this assumes that you are using a development machine to do the development, these instructions will also use devcontainer and other tools that rely on Docker, follow our [devcontainer development environment](/docs/setup_devcontainer_environment) guide to set up a proper development environment first.
+
 
 ## Supervisor development
 

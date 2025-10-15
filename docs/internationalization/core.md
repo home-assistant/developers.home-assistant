@@ -151,6 +151,23 @@ The translation for selectors are defined under the `selector` key. It supports 
 
 ```
 
+The `unit_of_measurement` of a number selector may also be translated with a translation key:
+```json
+{
+  // Translations for number selector to be used in option and config flows
+  "selector": {
+    // The key is linked to the `translation_key` that needs to be set
+    // using the NumberSelectorConfig class
+    "round_digits": {
+      // The translations for the number selector unit_of_measurement
+      "unit_of_measurement": {
+        "decimals": "decimals"
+      }
+    }
+  }
+}
+```
+
 ### Service Actions
 
 The translations of service actions strings are defined under the `services` key.
@@ -272,7 +289,7 @@ The translation strings for repairs issues are defined under the `issues` key. A
       // The title of the issue
       "title": "The tea is cold",
       // Translations for a fixable issue's repair flow, defined in the same way as translation for a configuration flow.
-      // Exactly one of `fix_flow` or `description. must be present.
+      // Exactly one of `fix_flow` or `description`. must be present.
       "fix_flow": {
         "abort": {
           "not_tea_time": "Can not re-heat the tea at this time"
@@ -281,7 +298,7 @@ The translation strings for repairs issues are defined under the `issues` key. A
     },
     "unfixable_problem": {
       "title": "This is not a fixable problem",
-      // Description of the issue, exactly one of `fix_flow` or `description. must be present.
+      // Description of the issue, exactly one of `fix_flow` or `description`. must be present.
       "description": "This issue can't be fixed by a flow."
     }
   }

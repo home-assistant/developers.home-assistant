@@ -319,3 +319,76 @@ window.customCards.push({
     "https://developers.home-assistant.io/docs/frontend/custom-ui/custom-card", // Adds a help link in the frontend card editor
 });
 ```
+
+### Using the built-in form editor
+While one way to configure a graphical editor is to supply a custom editor element, another option for cards with relatively simple configuration requirements is to use the built-in frontend form editor. This is done by defining a static `getConfigForm` function in your card class, that returns a form schema defining the shape of your configuration form. 
+
+Example:
+```js
+  static getConfigForm() {
+    return {
+      schema: [
+        { name: "label", selector: { label: {} } },
+        { name: "entity", required: true, selector: { entity: {} } },
+        {
+          type: "grid",
+          name: "",
+          schema: [
+            { name: "name", selector: { text: {} } },
+            {
+              name: "icon",
+              selector: {
+                icon: {},
+              },
+              context: {
+                icon_entity: "entity",
+              },
+            },
+            {
+              name: "attribute",
+              selector: {
+                attribute: {},
+              },
+              context: {
+                filter_entity: "entity",
+              },
+            },
+            { name: "unit", selector: { text: {} } },
+            { name: "theme", selector: { theme: {} } },
+            { name: "state_color", selector: { boolean: {} } },
+          ],
+        },
+      ],
+      computeLabel: (schema) => {
+        if (schema.name === "icon") return "Special Icon";
+        return undefined;
+      },
+      computeHelper: (schema) => {
+        switch (schema.name) {
+          case "entity":
+            return "This text describes the function of the entity selector";
+          case "unit":
+            return "The unit of measurement for this card";
+        }
+        return undefined;
+      },
+      assertConfig: (config) => {
+        if (config.other_option) {
+          throw new Error("'other_option' is unexpected.");
+        }
+      },
+    };
+  }
+```
+From this function, you should return an object with up to 4 keys:
+
+- `schema` _(required)_: This is a list of schema objects, one per form field, defining various properties of the field, like the name and selector.
+- `computeLabel` _(optional)_: This callback function will be called per form field, allowing the card to define the label that will be displayed for the field. If `undefined`, Home Assistant may apply a known translation for generic field names like `entity`, or you can supply your own translations.
+- `computeHelper` _(optional)_: This callback function will be called per form field, allowing you to define longer helper text for the field, which will be displayed below the field.
+- `assertConfig` _(optional)_: On each update of the configuration, the user's config will be passed to this callback function. If you throw an `Error` during this callback, the visual editor will be disabled. This can be used to disable the visual editor when the user enters incompatible data, like entering an object in yaml for a selector that expects a string. If a subsequent execution of this callback does not throw an error, the visual editor will be re-enabled. 
+
+This example then results in the following config form:
+![Screenshot of the config form](/img/en/frontend/dashboard-custom-card-config-form.png)
+
+
+

@@ -2,9 +2,20 @@
 title: "Create a new page"
 ---
 
-For a platform or integration page, the fastest way is to make a copy of an existing page and edit it. The [Integration overview](https://www.home-assistant.io/integrations/) and the [Examples section](https://www.home-assistant.io/cookbook/) are generated automatically, so there is no need to add a link to those pages.
+To create a new integration page, follow these steps:
 
-Please honor the [Standards](documenting/standards.md) we have for the documentation.
+1. Make a copy of the [integration documentation template](https://github.com/home-assistant/home-assistant.io/tree/current/source/_integrations/_integration_docs_template.markdown) and edit it.
+2. Make sure the filename of the integration page matches the domain name of the integration.
+   - The [Integration overview](https://www.home-assistant.io/integrations/) and the [Examples section](https://www.home-assistant.io/cookbook/) are generated automatically, so there is no need to add a link to those pages.
+3. Make sure to follow the [Standards](documenting/standards.md) we have for the documentation, including:
+   - [General style guide](/docs/documenting/general-style-guide).
+   - [YAML Style Guide](/docs/documenting/yaml-style-guide.md)
+   - [Documentation structure and example text](/docs/documenting/integration-docs-examples)
+4. Make sure to add [icon and logo](#images-icons-and-logos) to the brands repository.
+5. Document the needed steps to retrieve API keys or access token for the third party service or device if needed.
+6. Add the type of the devices (incl. firmware) you have tested when you know that there are multiple out there.
+
+## About the integration page header format
 
 If you start from scratch with a page, you need to add a header. Different sections of the documentation may need different headers.
 
@@ -20,6 +31,7 @@ ha_config_flow: true
 ha_codeowners:
   - '@balloob'
 ha_domain: awesome
+ha_integration_type: hub
 related:
   - docs: /voice_control/s3_box_voice_assistant/
     title: Creating a ESP32-S3-BOX-3 voice assistant
@@ -36,22 +48,19 @@ Content... Written in markdown.
 Additional keys for the file header:
 
 - `title`: This title should match with the name of the integration as written in the integration manifest file.
-- `ha_release`: The release when the integration was included, e.g., "0.38". If the current release is 0.37, make `ha_release` 0.38. If it's 0.30 or 0.40 please quote it with `' '`.
+- `ha_release`: The Home Assistant release when the integration was included.
+  - If the current release is 2025.8, make `ha_release` 2025.9.
+  - For the October release, as in '2025.10', quote it with `' '`, otherwise the zero won't be displayed.
 - `ha_category`: This entry is used to group the integration on the [Integration overview](https://www.home-assistant.io/integrations/).
 - `ha_iot_class`: [IoT class](https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things) is the classifier for the device's behavior.
 - `ha_quality_scale`: [Quality scale](https://www.home-assistant.io/docs/quality_scale/) is the representation of the integration's quality.
 - `ha_config_flow`: Set to `true` if the integration has a [Data Entry Flow](/data_entry_flow_index.md), omit otherwise.
 - `ha_codeowners`: GitHub usernames or team names (starting with `@`) of people that are responsible for this integration. This should match with the codeowners as listed in the integration manifest file.
-- `ha_domain`: The domain of the integration in Home Assistant Core. This must match the name from the integration manifest file.
+- `ha_domain`: The domain of the integration in Home Assistant Core. This must match the name from the [integration manifest](/docs/creating_integration_manifest) file.
+- `ha_integration_type`: The type of integration in Home Assistant Core. This must match the name from the [integration manifest](/docs/creating_integration_manifest) file.
 - `related`: Optional. Adds a section with links to related topics to the end of the page. Use `docs` for local links and `url` for external links. When using `docs`, the `title` key is optional. If not set, the title of the page you point to will be used.
 
 There are [pre-defined variables](https://jekyllrb.com/docs/variables/) available but usually, it's not necessary to use them when writing documentation.
-
-A couple of points to remember:
-
-- Document the needed steps to retrieve API keys or access token for the third party service or device if needed.
-- Add screenshots to support the user where it makes sense.
-- Add the type of the device(s) (incl. firmware) you have tested when you know that there are multiple out there.
 
 ### Configuration
 
@@ -129,20 +138,20 @@ Please note, if you want to use Markdown inside an HTML block, it has to be surr
 </div>
 ```
 
-### Images, icons and logos
+### Images, icons, and logos
 
-Having a logo with the integration, makes an integration quickly identifiable with the end-user.
+Having a logo with the integration makes an integration quickly identifiable with the end-user.
 From the documentation side of things, no specific configuration is needed to enable the use of a logo,
 however, the logo must exist in our Brands repository.
 
-To add a logo and icon for your integration, open up a pull request at: the [Home Assistant Brands](https://github.com/home-assistant/brands).
+- To add a logo and icon for your integration, open up a pull request at: the [Home Assistant Brands](https://github.com/home-assistant/brands).
 
-Other images, displayed on the pages, are stored in various directories according to their purpose:
+- To add other images, displayed on the integration page or any other documentation page, store the image in the corresponding directory according to their purpose:
 
 | Type        | Location                  |
 | :---------- | :------------------------ |
 | blog        | source/images/blog        |
-| screenshots | source/images/integration |
+| screenshots | source/images/integrations/your-integration |
 
 ### Linking from the sidebar
 

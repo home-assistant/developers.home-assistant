@@ -90,6 +90,48 @@ from homeassistant.components import bluetooth
 count = bluetooth.async_scanner_count(hass, connectable=True)
 ```
 
+### Accessing a scanner by source
+
+The `bluetooth.async_scanner_by_source` API provides access to a specific Bluetooth scanner by its source (MAC address). This is primarily intended for integrations that implement a Bluetooth client and need to interact with a scanner directly.
+
+```python
+from homeassistant.components import bluetooth
+
+scanner = bluetooth.async_scanner_by_source(hass, "AA:BB:CC:DD:EE:FF")
+if scanner is not None:
+    # Inspect scanner properties (read-only)
+    if scanner.current_mode is not None:
+        _LOGGER.debug("Scanner mode: %s", scanner.current_mode)
+```
+
+### Accessing all current scanners
+
+The `bluetooth.async_current_scanners` API provides access to the list of all currently active Bluetooth scanners for debugging, diagnostics, and introspection of scanner state. This API returns all registered scanners (both connectable and non-connectable) as a list of scanner objects.
+
+```python
+from homeassistant.components import bluetooth
+
+scanners = bluetooth.async_current_scanners(hass)
+for scanner in scanners:
+    # Inspect scanner properties (read-only)
+    if scanner.current_mode is not None:
+        _LOGGER.debug("Scanner %s is in mode %s", scanner.source, scanner.current_mode)
+```
+
+:::warning Important for Scanner APIs
+The scanner objects returned by `async_scanner_by_source` and `async_current_scanners` come from the `habluetooth` package and their interfaces are not guaranteed to remain stable across Home Assistant releases. **You should only inspect scanner properties and never modify them.** Modifying scanner objects directly may break Bluetooth functionality in Home Assistant.
+
+**DO NOT:**
+- Change scanner properties or call methods that modify state
+- Store references to scanners beyond the scope of your immediate use
+- Assume the scanner interface will remain unchanged in future versions
+
+**DO:**
+- Use scanners for read-only inspection, debugging, and diagnostics only
+- Access simple properties like `source` and `current_mode`
+- Handle cases where properties may be `None`
+:::
+
 ### Subscribing to unavailable callbacks
 
 To get a callback when the Bluetooth stack can no longer see a device, call the `bluetooth.async_track_unavailable` API. For performance reasons, it may take up to five minutes to get a callback once the device is no longer seen.
@@ -199,6 +241,32 @@ from homeassistant.components import bluetooth
 
 bluetooth.async_rediscover_address(hass, "44:44:33:11:23:42")
 ```
+
+### Clearing match history for rediscovery
+
+The Bluetooth integration tracks which advertisement fields (manufacturer_data UUIDs, service_data UUIDs, service_uuids) have been seen for each device to determine when to trigger discovery. It only checks if the UUIDs have been seen before, not whether their content has changed.
+
+For devices that change state but maintain the same UUIDs (such as devices that are factory reset or transition between operational states), you can clear the match history to allow rediscovery when the device advertises again with different content.
+
+The `bluetooth.async_clear_address_from_match_history` API clears the match history for a specific address without immediately re-triggering discovery. This differs from `async_rediscover_address`, which clears history AND immediately re-triggers discovery with cached data.
+
+Use this API when:
+- A device is factory reset (state changes but UUIDs remain the same)
+- A device transitions between operational states with the same advertisement UUIDs
+- You want to prepare for future rediscovery without immediately triggering a flow
+
+```python
+from homeassistant.components import bluetooth
+
+# Clear match history to allow future advertisements to trigger discovery
+bluetooth.async_clear_address_from_match_history(hass, "44:44:33:11:23:42")
+```
+
+:::warning Performance Considerations
+Do not use this API for devices whose advertisement data changes frequently (e.g., sensors that update temperature readings in advertisement data). Clearing match history for such devices will cause a new discovery flow to be triggered on every advertisement change, which can overwhelm the system and create a poor user experience.
+
+This API is intended for infrequent state changes such as factory resets or major operational mode transitions, not for regular data updates.
+:::
 
 ### Waiting for a specific advertisement
 

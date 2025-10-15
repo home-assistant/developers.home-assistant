@@ -489,10 +489,105 @@ class LocationSubentryFlowHandler(ConfigSubentryFlow):
     ) -> SubentryFlowResult:
         """User flow to modify an existing location."""
         # Retrieve the parent config entry for reference.
-        config_entry = self._get_reconfigure_entry()
+        config_entry = self._get_entry()
         # Retrieve the specific subentry targeted for update.
         config_subentry = self._get_reconfigure_subentry()
         ...
+
+```
+
+## Continuing in another flow
+
+A config flow can start another config flow and tell the frontend that it should show the other flow once the first flow is finished. To do this the first flow needs to pass the `next_flow` parameter to the `async_create_entry` method. The argument should be a tuple of the form `(flow_type, flow_id)`.
+
+```python
+from homeassistant.config_entries import SOURCE_USER, ConfigFlow, FlowType
+
+
+class ExampleFlow(ConfigFlow):
+    """Example flow."""
+
+    async def async_step_user(
+        self, user_input: dict[str, Any] | None = None
+    ) -> ConfigFlowResult:
+        """Show create entry with next_flow parameter."""
+        result = await self.hass.config_entries.flow.async_init(
+            "another_integration_domain",
+            context={"source": SOURCE_USER},
+        )
+        return self.async_create_entry(
+            title="Example",
+            data={},
+            next_flow=(FlowType.CONFIG_FLOW, result["flow_id"]),
+        )
+```
+
+## Use SchemaConfigFlowHandler for simple flows
+
+For helpers and integrations with simple config flows, you can use the `SchemaConfigFlowHandler` instead.
+
+Compared to using a full config flow, the `SchemaConfigFlowHandler` comes with certain limitations and needs to be considered:
+
+- All user input is saved in the `options` dictionary of the resulting config entry. Therefore it's not suitable to use in integrations which uses connection data, api key's or other information that should be stored in the config entry `data`.
+- It may be simpler to use the normal config flow handler if you have extensive validation, setting unique id or checking for duplicated config entries.
+- Starting the flow with other steps besides `user` and `import` is discouraged.
+
+```python
+
+from homeassistant.helpers.schema_config_entry_flow import (
+    SchemaCommonFlowHandler,
+    SchemaConfigFlowHandler,
+    SchemaFlowError,
+    SchemaFlowFormStep,
+)
+
+async def validate_setup(
+    handler: SchemaCommonFlowHandler, user_input: dict[str, Any]
+) -> dict[str, Any]:
+    """Validate options."""
+    if user_input[CONF_SOME_SETTING] == "error":
+      # 'setup_error' needs to be existing in string.json config errors section
+      raise SchemaFlowError("setup_error") 
+    return user_input
+
+DATA_SCHEMA_SETUP = vol.Schema(
+    {
+        vol.Required(CONF_NAME, default=DEFAULT_NAME): TextSelector()
+    }
+)
+DATA_SCHEMA_OPTIONS = vol.Schema(
+    {
+        vol.Optional(CONF_SOME_SETTING): TextSelector()
+    }
+)
+
+CONFIG_FLOW = {
+    "user": SchemaFlowFormStep(
+        schema=DATA_SCHEMA_SETUP,
+        next_step="options",
+    ),
+    "options": SchemaFlowFormStep(
+        schema=DATA_SCHEMA_OPTIONS,
+        validate_user_input=validate_setup,
+    ),
+}
+OPTIONS_FLOW = {
+    "init": SchemaFlowFormStep(
+        DATA_SCHEMA_OPTIONS,
+        validate_user_input=validate_setup,
+    ),
+}
+
+class MyConfigFlowHandler(SchemaConfigFlowHandler, domain=DOMAIN):
+    """Handle a config flow."""
+
+    config_flow = CONFIG_FLOW
+    options_flow = OPTIONS_FLOW
+    options_flow_reloads = True # Reload without a config entry listener
+
+    def async_config_entry_title(self, options: Mapping[str, Any]) -> str:
+        """Return config entry title from input."""
+        return cast(str, options[CONF_NAME])
 
 ```
 

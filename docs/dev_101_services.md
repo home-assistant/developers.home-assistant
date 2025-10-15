@@ -5,27 +5,33 @@ sidebar_label: "Custom actions"
 
 Home Assistant provides ready-made actions for a lot of things, but it doesn't always cover everything. Instead of trying to change Home Assistant, it is preferred to add it as a service action under your own integration first. Once we see a pattern in these service actions, we can talk about generalizing them.
 
+[Service actions should always be registered](/docs/core/integration-quality-scale/rules/action-setup) to ensure automations referencing them can be edited and validated, and to allow an informative error message when a service is called even if the integration has no loaded config entries. Register services in the integration's `async_setup` or `setup` function, not in the integration's `async_setup_entry` or in a platform's `async_setup_entry`, `async_setup_platform`, or `setup_platform`.
+
 This is a simple "hello world" example to show the basics of registering a service action. To use this example, create the file `<config dir>/custom_components/hello_action/__init__.py` and copy the below example code.
 
 Actions can be called from automations and from the actions "Developer tools" in the frontend.
 
 ```python
+from homeassistant.core import HomeAssistant, ServiceCall, callback
+from homeassistant.helpers.typing import ConfigType
+
 DOMAIN = "hello_action"
 
 ATTR_NAME = "name"
 DEFAULT_NAME = "World"
 
 
-def setup(hass, config):
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     """Set up is called when Home Assistant is loading our component."""
 
-    def handle_hello(call):
+    @callback
+    def handle_hello(call: ServiceCall) -> None:
         """Handle the service action call."""
         name = call.data.get(ATTR_NAME, DEFAULT_NAME)
 
-        hass.states.set("hello_action.hello", name)
+        hass.states.async_set("hello_action.hello", name)
 
-    hass.services.register(DOMAIN, "hello", handle_hello)
+    hass.services.async_register(DOMAIN, "hello", handle_hello)
 
     # Return boolean to indicate that initialization was successful.
     return True
@@ -234,31 +240,38 @@ The following example shows how to provide an icon for the `advanced_options` se
 
 Sometimes you want to provide extra actions to control your entities. For example, the Sonos integration provides action to group and ungroup devices. Entity service actions are special because there are many different ways a user can specify entities. It can use areas, a group or a list of entities.
 
-You need to register entity service actions in your platforms, like `<your-domain>/media_player.py`. These service actions will be made available under your domain and not under the platform domain (e.g. media player domain). A schema can be passed to `async_register_entity_service` if the entity service action has fields. The schema must be either of:
+Register entity service actions with `homeassistant.helpers.service.async_register_platform_entity_service`. Register actions under your integration domain, e.g. `sonos`, not under the platform domain, e.g. `media_player`. You can pass a schema to `async_register_platform_entity_service` if the entity service action has fields. The schema can be:
 
 - A dictionary which will automatically be passed to `cv._make_entity_service_schema`
 - A validator returned by `cv._make_entity_service_schema`
 - A validator returned by `cv._make_entity_service_schema`, wrapped in a `vol.Schema`
 - A validator returned by `cv._make_entity_service_schema`, wrapped in a `vol.All`
 
-Example code:
+Example code added to `homeassistant/components/sonos/__init__.py`:
 
 ```python
-from homeassistant.helpers import config_validation as cv, entity_platform, service
+from homeassistant.components.media_player import DOMAIN as MEDIA_PLAYER_DOMAIN
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.typing import ConfigType
+from homeassistant.helpers import config_validation as cv, service
+import voluptuous as vol
 
-async def async_setup_entry(hass, entry):
-    """Set up the media player platform for Sonos."""
+DOMAIN = "sonos"
+SERVICE_SET_TIMER = "set_sleep_timer"
 
-    platform = entity_platform.async_get_current_platform()
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
+    """Set up the Sonos integration."""
 
-    # This will call Entity.set_sleep_timer(sleep_time=VALUE)
-    platform.async_register_entity_service(
-        SERVICE_SET_TIMER,
-        {
-            vol.Required('sleep_time'): cv.time_period,
-        },
-        "set_sleep_timer",
-    )
+    # This will call each targeted entity's `set_sleep_timer` method with `sleep_time=VALUE`
+    service.async_register_platform_entity_service(
+         hass,
+         DOMAIN,
+         SERVICE_SET_TIMER,
+         entity_domain=MEDIA_PLAYER_DOMAIN,
+         schema={vol.Required("sleep_time"): cv.time_period},
+         func="set_sleep_timer",
+     )
+    return True
 ```
 
 If you need more control over the service action call, you can also pass an async function that will be called instead of `"set_sleep_timer"`:
@@ -281,12 +294,13 @@ Example code:
 
 ```python
 import datetime
+
 import voluptuous as vol
+
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, ServiceCall, ServiceResponse, SupportsResponse
 from homeassistant.helpers import config_validation as cv, entity_platform, service
 from homeassistant.util.json import JsonObjectType
-
 
 SEARCH_ITEMS_SERVICE_NAME = "search_items"
 SEARCH_ITEMS_SCHEMA = vol.Schema({
@@ -310,13 +324,13 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             ],
         }
 
-      hass.services.async_register(
-          DOMAIN,
-          SEARCH_ITEMS_SERVICE_NAME,
-          search_items,
-          schema=SEARCH_ITEMS_SCHEMA,
-          supports_response=SupportsResponse.ONLY,
-      )
+        hass.services.async_register(
+            DOMAIN,
+            SEARCH_ITEMS_SERVICE_NAME,
+            search_items,
+            schema=SEARCH_ITEMS_SCHEMA,
+            supports_response=SupportsResponse.ONLY,
+        )
 ```
 
 The use of response data is meant for cases that do not fit the Home Assistant state. For example, a response stream of objects. Conversely, response data should not be used for cases that are a fit for entity state. For example, a temperature value should just be a sensor.

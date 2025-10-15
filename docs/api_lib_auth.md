@@ -3,6 +3,8 @@ title: "Python library: authentication"
 sidebar_label: Authentication
 ---
 
+This page is intended for general API development of a 3rd party library aiming to integrate a 3rd party API. See [Home Assistant REST API documentation](/docs/api/rest.md) for interacting with Home Assistant's API.  
+
 The Authentication part of your library is responsible for acquiring authentication and for making authenticated requests. It should not be aware of what is in the requests.
 
 Authentication comes in many forms, but it generally boils down to that each request is accompanied by an `authorization` header which contains an access token. The access token is generally a string of random numbers/letters.

@@ -73,7 +73,7 @@ To avoid calculations in a property method, set the corresponding [entity class 
 | ------------------------ | ------------------------------| ------- | -----------
 | assumed_state            | `bool`                        | `False` | Return `True` if the state is based on our assumption instead of reading it from the device.
 | attribution              | <code>str &#124; None</code>  | `None`  | The branding text required by the API provider.
-| available                | `bool`                        | `True`  | Indicate if Home Assistant is able to read the state and control the underlying device.
+| available                | `bool`                        | `True`  | Indicate if Home Assistant is able to read the state or control the underlying device, see [entity-unavailable](/docs/core/integration-quality-scale/rules/entity-unavailable.md) for more details.
 | device_class             | <code>str &#124; None</code>  | `None`  | Extra classification of what the device is. Each domain specifies their own. Device classes can come with extra requirements for unit of measurement and supported features.
 | entity_picture           | <code>str &#124; None</code>  | `None`  | Url of a picture to show for the entity.
 | extra_state_attributes   | <code>dict &#124; None</code> | `None`  | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version.
@@ -133,6 +133,10 @@ Avoid setting an entity's name to a hard coded English string, instead, the name
 
 Some entities are automatically named after their device class, this includes [`binary_sensor`](/docs/core/entity/binary-sensor), [`button`](/docs/core/entity/button), [`number`](/docs/core/entity/number) and [`sensor`](/docs/core/entity/sensor) entities and in many cases don't need to be named.
 For example, an unnamed sensor which has its device class set to `temperature` will be named "Temperature".
+
+:::note
+If an entity provides translations for the entity name, the used name depends on the system (backend) language at creation time, not the user’s UI language. For example, if your backend is set to German, new entities will be named in German — even if a user later switches their UI to French. Changing the backend language will only affect entities created after the change; existing entities retain their original names.
+:::
 
 ### `has_entity_name` True (Mandatory for new integrations)
 

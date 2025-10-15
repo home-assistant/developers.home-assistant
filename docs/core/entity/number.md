@@ -31,14 +31,15 @@ If specifying a device class, your number entity will need to also return the co
 
 | Constant | Supported units | Description
 | ---- | ---- | -----------
-| `NumberDeviceClass.APPARENT_POWER` | VA | Apparent power
+| `NumberDeviceClass.ABSOLUTE_HUMIDITY` | g/m³, mg/m³ | Absolute humidity
+| `NumberDeviceClass.APPARENT_POWER` | mVA, VA, kVA | Apparent power
 | `NumberDeviceClass.AQI` | None | Air Quality Index
 | `NumberDeviceClass.AREA` | m², cm², km², mm², in², ft², yd², mi², ac, ha | Area
-| `NumberDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, mmHG, inHg, kPa, mbar, Pa, psi | Atmospheric pressure
+| `NumberDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, mmHG, inHg, inH₂O, kPa, mbar, Pa, psi | Atmospheric pressure
 | `NumberDeviceClass.BATTERY` | % | Percentage of battery that is left
 | `NumberDeviceClass.BLOOD_GLUCOSE_CONCENTRATION` | mg/dL, mmol/L | Blood glucose concentration```
 | `NumberDeviceClass.CO2` | ppm | Concentration of carbon dioxide.
-| `NumberDeviceClass.CO` | ppm | Concentration of carbon monoxide.
+| `NumberDeviceClass.CO` | ppm, mg/m³ | Concentration of carbon monoxide.
 | `NumberDeviceClass.CONDUCTIVITY` | S/cm, mS/cm, µS/cm | Conductivity
 | `NumberDeviceClass.CURRENT` | A, mA | Current
 | `NumberDeviceClass.DATA_RATE` | bit/s, kbit/s, Mbit/s, Gbit/s, B/s, kB/s, MB/s, GB/s, KiB/s, MiB/s, GiB/s | Data rate
@@ -49,7 +50,7 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.ENERGY_DISTANCE` | kWh/100km, Wh/km, mi/kWh, km/kWh | Energy per distance, this device class should be used to represent energy consumption by distance, for example the amount of electric energy consumed by an electric car.
 | `NumberDeviceClass.ENERGY_STORAGE` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal | Stored energy, this device class should be used to represent stored energy, for example the amount of electric energy currently stored in a battery or the capacity of a battery. Represents _power_ over _time_. Not to be confused with `power`.
 | `NumberDeviceClass.FREQUENCY` | Hz, kHz, MHz, GHz | Frequency
-| `NumberDeviceClass.GAS` | L, m³, ft³, CCF | Volume of gas. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
+| `NumberDeviceClass.GAS` | L, m³, ft³, CCF, MCF | Volume of gas. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
 | `NumberDeviceClass.HUMIDITY` | % | Relative humidity
 | `NumberDeviceClass.ILLUMINANCE` | lx | Light level
 | `NumberDeviceClass.IRRADIANCE` | W/m², BTU/(h⋅ft²) | Irradiance
@@ -62,14 +63,15 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.PH` | None | Potential hydrogen (pH) of an aqueous solution
 | `NumberDeviceClass.PM1` | µg/m³ | Concentration of particulate matter less than 1 micrometer
 | `NumberDeviceClass.PM25` | µg/m³ | Concentration of particulate matter less than 2.5 micrometers
+| `NumberDeviceClass.PM4` | µg/m³ | Concentration of particulate matter less than 4 micrometers
 | `NumberDeviceClass.PM10` | µg/m³ | Concentration of particulate matter less than 10 micrometers
 | `NumberDeviceClass.POWER` | mW, W, kW, MW, GW, TW | Power.
 | `NumberDeviceClass.POWER_FACTOR` | %, None | Power Factor
 | `NumberDeviceClass.PRECIPITATION` | cm, in, mm | Accumulated precipitation
 | `NumberDeviceClass.PRECIPITATION_INTENSITY` | in/d, in/h, mm/d, mm/h | Precipitation intensity
-| `NumberDeviceClass.PRESSURE` | cbar, bar, hPa, mmHg, inHg, kPa, mbar, Pa, psi | Pressure.
+| `NumberDeviceClass.PRESSURE` | cbar, bar, hPa, mmHg, inHg, kPa, mbar, Pa, psi, mPa | Pressure.
 | `NumberDeviceClass.REACTIVE_ENERGY` | varh, kvarh | Reactive energy
-| `NumberDeviceClass.REACTIVE_POWER` | var, kvar | Reactive power
+| `NumberDeviceClass.REACTIVE_POWER` | mvar, var, kvar | Reactive power
 | `NumberDeviceClass.SIGNAL_STRENGTH` | dB, dBm | Signal strength
 | `NumberDeviceClass.SOUND_PRESSURE` | dB, dBA | Sound pressure
 | `NumberDeviceClass.SPEED` | ft/s, in/d, in/h, in/s, km/h, kn, m/s, mph, mm/d, mm/s | Generic speed
@@ -79,10 +81,10 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³, mg/m³ | Concentration of volatile organic compounds
 | `NumberDeviceClass.VOLATILE_ORGANIC_COMPOUNDS_PARTS` | ppm, ppb | Ratio of volatile organic compounds
 | `NumberDeviceClass.VOLTAGE` | V, mV, µV, kV, MV | Voltage
-| `NumberDeviceClass.VOLUME` | L, mL, gal, fl. oz., m³, ft³, CCF | Generic volume, this device class should be used to represent a consumption, for example the amount of fuel consumed by a vehicle.
-| `NumberDeviceClass.VOLUME_FLOW_RATE` | m³/h, ft³/min, L/min, gal/min, mL/s | Volume flow rate, this device class should be used to represent a flow of some volume, for example the amount of water consumed momentarily.
-| `NumberDeviceClass.VOLUME_STORAGE` | L, mL, gal, fl. oz., m³, ft³, CCF | Generic stored volume, this device class should be used to represent a stored volume, for example the amount of fuel in a fuel tank.
-| `NumberDeviceClass.WATER` | L, gal, m³, ft³, CCF | Water consumption
+| `NumberDeviceClass.VOLUME` | L, mL, gal, fl. oz., m³, ft³, CCF, MCF | Generic volume, this device class should be used to represent a consumption, for example the amount of fuel consumed by a vehicle.
+| `NumberDeviceClass.VOLUME_FLOW_RATE` | m³/h, m³/min, m³/s, ft³/min, L/h, L/min, L/s, gal/h, gal/min, mL/s | Volume flow rate, this device class should be used to represent a flow of some volume, for example the amount of water consumed momentarily.
+| `NumberDeviceClass.VOLUME_STORAGE` | L, mL, gal, fl. oz., m³, ft³, CCF, MCF | Generic stored volume, this device class should be used to represent a stored volume, for example the amount of fuel in a fuel tank.
+| `NumberDeviceClass.WATER` | L, gal, m³, ft³, CCF, MCF | Water consumption
 | `NumberDeviceClass.WEIGHT` | kg, g, mg, µg, oz, lb, st | Generic mass; `weight` is used instead of `mass` to fit with every day language.
 | `NumberDeviceClass.WIND_DIRECTION` | ° | Wind direction
 | `NumberDeviceClass.WIND_SPEED` | ft/s, km/h, kn, m/s, mph | Wind speed
