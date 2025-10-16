@@ -4,7 +4,7 @@ authorURL: https://github.com/emontnemery
 title: "Changes to the recorder statistics API"
 ---
 
-The Python and WS API for injecting and modifying statistics has changed.
+The Python and WS APIs for injecting and modifying statistics have changed.
 
 The following changes have been made to the WS API:
 - The WS command `recorder/update_statistics_metadata` accepts a `unit_class` which points to the unit converter to be used for unit conversions. If there is no compatible unit converter, `unit_class` should be set to `null`. Not specifying the `unit_class` is deprecated and will stop working in Home Assistant Core 2026.11.
