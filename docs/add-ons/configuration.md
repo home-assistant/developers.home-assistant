@@ -173,7 +173,6 @@ Avoid using `config.yaml` as filename in your add-on for anything other than the
 | `options` | dict | | Default options value of the add-on.
 | `schema` | dict | | Schema for options value of the add-on. It can be `false` to disable schema validation and options.
 | `image` | string | | For use with Docker Hub and other container registries. This should be set to the name of the image only (E.g, `ghcr.io/home-assistant/{arch}-addon-example`). If you use this option, set the active docker tag using the `version` option.
-| `codenotary` | string | | For use with Codenotary CAS. This is the E-Mail address used to verify your image with Codenotary (E.g, `example@home-assistant.io`). This should match the E-Mail address used as the signer in the [add-on's extended build options](#add-on-extended-build)
 | `timeout` | integer | 10 | Default 10 (seconds). The timeout to wait until the Docker daemon is done or will be killed.
 | `tmpfs` | bool | `false` | If this is set to `true`, the containers `/tmp` uses tmpfs, a memory file system.
 | `discovery` | list | | A list of services that this add-on provides for Home Assistant.
@@ -272,9 +271,6 @@ args:
 | build_from | no | A dictionary with the hardware architecture as the key and the base Docker image as the value.
 | args | no | Allow additional Docker build arguments as a dictionary.
 | labels | no | Allow additional Docker labels as a dictionary.
-| codenotary | no | Enable container signature with codenotary CAS.
-| codenotary.signer | no | Owner signer E-Mail address for this image.
-| codenotary.base_image | no | Verify the base container image. If you use our official images, use `notary@home-assistant.io`
 
 We provide a set of [base images][docker-base] which should cover a lot of needs. If you don't want to use the Alpine based version or need a specific image tag, feel free to pin this requirement for your build with the `build_from` option.
 
