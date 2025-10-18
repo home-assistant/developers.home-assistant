@@ -44,30 +44,36 @@ You are only allowed to use the built-in HVAC modes, provided by the `HVACMode`
 enum. If you want another mode, add a preset instead.
 
 
-| Name                 | Description                                                         |
-| -------------------- | ------------------------------------------------------------------- |
-| `HVACMode.OFF`       | The device is turned off.                                           |
-| `HVACMode.HEAT`      | The device is set to heat to a target temperature.                  |
-| `HVACMode.COOL`      | The device is set to cool to a target temperature.                  |
-| `HVACMode.HEAT_COOL` | The device is set to heat/cool to a target temperature range.       |
-| `HVACMode.AUTO`      | The device is set to a schedule, learned behavior, AI.              |
-| `HVACMode.DRY`       | The device is set to dry/humidity mode.                             |
-| `HVACMode.FAN_ONLY`  | The device only has the fan on. No heating or cooling taking place. |
+| Name                                | Description                                                                        |
+| ----------------------------------- | ---------------------------------------------------------------------------------- |
+| `HVACMode.OFF`                      | The device is turned off.                                                          |
+| `HVACMode.HEAT`                     | The device is set to heat to a target temperature.                                 |
+| `HVACMode.COOL`                     | The device is set to cool to a target temperature.                                 |
+| `HVACMode.HEAT_COOL`                | The device is set to heat/cool to a target temperature range.                      |
+| `HVACMode.AUTO`                     | The device is set to a schedule, learned behavior, AI.                             |
+| `HVACMode.DRY`                      | The device is set to dry/humidity mode.                                            |
+| `HVACMode.FAN_ONLY`                 | The device only has the fan on. No heating or cooling taking place.                |
+| `HVACMode.UNDERFLOOR_HEAT`          | The device is set to underfloor heat to a target temperature.                      |
+| `HVACMode.HEAT_AND_UNDERFLOOR_HEAT` | The device is set to heating + floor heating mode to reach the target temperature. |
+| `HVACMode.COOL_AND_UNDERFLOOR_COOL` | The device is set to cooling + floor cooling mode to reach the target temperature. |
 
 ### HVAC action
 
 The HVAC action describes the _current_ action. This is different from the mode, because if a device is set to heat, and the target temperature is already achieved, the device will not be actively heating anymore. It is only allowed to use the built-in HVAC actions, provided by the `HVACAction` enum.
 
-| Name                    | Description           |
-| ----------------------- | --------------------- |
-| `HVACAction.OFF`        | Device is turned off. |
-| `HVACAction.PREHEATING` | Device is preheating. |
-| `HVACAction.HEATING`    | Device is heating.    |
-| `HVACAction.COOLING`    | Device is cooling.    |
-| `HVACAction.DRYING`     | Device is drying.     |
-| `HVACAction.FAN`        | Device has fan on.    |
-| `HVACAction.IDLE`       | Device is idle.       |
-| `HVACAction.DEFROSTING` | Device is defrosting. |
+| Name                                        | Description                             |
+| ------------------------------------------- | --------------------------------------- |
+| `HVACAction.OFF`                            | Device is turned off.                   |
+| `HVACAction.PREHEATING`                     | Device is preheating.                   |
+| `HVACAction.HEATING`                        | Device is heating.                      |
+| `HVACAction.COOLING`                        | Device is cooling.                      |
+| `HVACAction.DRYING`                         | Device is drying.                       |
+| `HVACAction.FAN`                            | Device has fan on.                      |
+| `HVACAction.IDLE`                           | Device is idle.                         |
+| `HVACAction.DEFROSTING`                     | Device is defrosting.                   |
+| `HVACAction.UNDERFLOOR_HEATING`             | Device is underfloor heating.           |
+| `HVACAction.HEATING_AND_UNDERFLOOR_HEATING` | Device is heating + floor heating mode. |
+| `HVACAction.COOLING_AND_UNDERFLOOR_COOLING` | Device is cooling + floor cooling mode. |
 
 ### Presets
 
@@ -99,6 +105,7 @@ A device's fan can have different states. There are a couple of built-in fan mod
 | `FAN_MIDDLE`  |
 | `FAN_FOCUS`   |
 | `FAN_DIFFUSE` |
+| `FAN_SLEEP` |
 
 ### Swing modes
 
