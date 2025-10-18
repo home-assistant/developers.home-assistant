@@ -21,7 +21,7 @@ however manual intervention is necessary:
 
  1. Set the jumper between Micro-USB and HDMI the maskrom mode
  2. Insert SD card and connect the board via Micro-USB to your PC
- 3. Continusly press Ctrl+C to interrupt boot
+ 3. Continuously press Ctrl+C to interrupt boot
  4. Set the jumper back to the park position
  5. Start UMS using:
 ```

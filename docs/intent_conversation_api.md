@@ -143,7 +143,7 @@ An intent can have multiple targets which are applied on top of each other. The 
 * `custom`
   * A custom target
 
-Most intents end up with 0, 1 or 2 targets. 3 targets currenly only happens when device classes are involved. Examples of target combinations:
+Most intents end up with 0, 1 or 2 targets. 3 targets currently only happens when device classes are involved. Examples of target combinations:
 
  * "Turn off all lights"
      * 1 target: `domain:light`

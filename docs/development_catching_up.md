@@ -3,7 +3,7 @@ title: "Catching up with reality"
 ---
 
 If it's taking a while to develop your feature, and you want to catch up with what's in the current Home Assistant `dev` branch, you can either use `git merge` or `git rebase`.
-Bellow you can find instructions on how to do it using `git merge`. This will pull the latest Home Assistant changes locally, and merge them into your branch by creating a merge commit.
+Below you can find instructions on how to do it using `git merge`. This will pull the latest Home Assistant changes locally, and merge them into your branch by creating a merge commit.
 
 You should have added an additional `remote` after you clone your fork. If you did not, do it now before proceeding:
 
@@ -21,7 +21,7 @@ If git detects any conflicts do the following to solve them:
 
 1. Use `git status` to see the file with the conflict; edit the file and resolve the lines between `<<<< | >>>>`
 2. Add the modified file: `git add <file>` or `git add .`
-3. Finish the merge by commiting it (you can leave the default merge commit message unchanged): `git commit`
+3. Finish the merge by committing it (you can leave the default merge commit message unchanged): `git commit`
 
 Finally, just push your changes as normal:
 
