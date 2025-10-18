@@ -1,4 +1,4 @@
-<img width="425" height="263" alt="image" src="https://github.com/user-attachments/assets/c656232c-d00e-4504-943b-496b0a9ad445" />---
+---
 title: "Backend localization"
 ---
 
