@@ -268,7 +268,7 @@ each time you go through the process.
 
 ## Repository specific information
 
-Some of our respositories have specific requirements or guidelines that are
+Some of our repositories have specific requirements or guidelines that are
 applied on top of this general guide.
 
 ### Home Assistant Core

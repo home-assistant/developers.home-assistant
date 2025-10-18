@@ -191,7 +191,7 @@ To specify an icon for a section, update `icons.json` according to this example:
 
 #### Labels & descriptions
 
-Translations for the form are added to `strings.json` in a key for the `step_id`. That object may contain the folowing keys:
+Translations for the form are added to `strings.json` in a key for the `step_id`. That object may contain the following keys:
 
 |        Key         |       Value         | Notes                                                                                                                                        |
 | :----------------: | :-----------------: | :------------------------------------------------------------------------------------------------------------------------------------------- |

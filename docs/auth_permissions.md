@@ -130,7 +130,7 @@ if not user.permissions.check_entity(entity_id, POLICY_CONTROL):
 
 All service actions, fired events and states in Home Assistant have a context object. This object allows us to attribute changes to events and actions. These context objects also contain a user id, which is used for checking the permissions.
 
-It's crucial for permission checking that actions taken on behalf of the user are done with a context containing the user ID. If you are in a service action handler, you should re-use the incoming context `call.context`. If you are inside a WebSocket API or Rest API endpoint, you should create a context with the correct user:
+It's crucial for permission checking that actions taken on behalf of the user are done with a context containing the user ID. If you are in a service action handler, you should reuse the incoming context `call.context`. If you are inside a WebSocket API or Rest API endpoint, you should create a context with the correct user:
 
 ```python
 from homeassistant.core import Context
