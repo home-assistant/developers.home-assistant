@@ -17,7 +17,7 @@ For example if the device we connect to has known problems handling too many req
 ## Data updates
 
 My integration fetches data from the device every 5 minutes by default.
-Newer devices (the ones running MyOS) have the possibility to {% term push %} data.
+Newer devices (the ones running MyOS) have the possibility to push data.
 At the start of the integration we try to enable that, and if it fails we fall back to {% term polling %}.
 ```
 
