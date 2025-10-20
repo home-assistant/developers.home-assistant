@@ -3,6 +3,10 @@ title: "Device actions"
 sidebar_label: Actions
 ---
 
+:::warning
+We are currently exploring alternatives to device automations. Existing device automations will continue to work but new device automations won't be accepted.
+:::
+
 Device actions allow a user to have a device do something. Examples are to turn a light on or open a door.
 
 Device actions are defined as dictionaries. These dictionaries are created by your integration and are passed to your integration to create a function that performs the action.

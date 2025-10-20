@@ -51,7 +51,7 @@ When the width and height are passed, scaling should be done on a best-effort ba
 
 - Return the smallest image that meets the minimum width and minimum height.
 
-- When scaling the image, aspect ratio must be preserved. If the aspect ratio is not the same as the requsted height or width, it is expected that the width and/or height of the returned image will be larger than requested.
+- When scaling the image, aspect ratio must be preserved. If the aspect ratio is not the same as the requested height or width, it is expected that the width and/or height of the returned image will be larger than requested.
 
 - Pass on the width and height if the underlying camera is capable of scaling the image.
 

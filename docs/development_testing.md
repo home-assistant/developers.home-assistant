@@ -40,7 +40,7 @@ It might be required that you install additional packages depending on your dist
 
 :::info Important
 Run `pytest` & `pre-commit` before you create your pull request to avoid annoying fixes.
-`pre-commit` will be invoked automatically by git when commiting changes.
+`pre-commit` will be invoked automatically by git when committing changes.
 :::
 
 :::note

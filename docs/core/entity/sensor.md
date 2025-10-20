@@ -40,7 +40,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.BATTERY` | % | Percentage of battery that is left
 | `SensorDeviceClass.BLOOD_GLUCOSE_CONCENTRATION` | mg/dL, mmol/L | Blood glucose concentration
 | `SensorDeviceClass.CO2` | ppm | Concentration of carbon dioxide.
-| `SensorDeviceClass.CO` | ppm | Concentration of carbon monoxide.
+| `SensorDeviceClass.CO` | ppm, mg/m³ | Concentration of carbon monoxide.
 | `SensorDeviceClass.CONDUCTIVITY` | S/cm, mS/cm, µS/cm | Conductivity
 | `SensorDeviceClass.CURRENT` | A, mA | Current
 | `SensorDeviceClass.DATA_RATE` | bit/s, kbit/s, Mbit/s, Gbit/s, B/s, kB/s, MB/s, GB/s, KiB/s, MiB/s, GiB/s | Data rate
@@ -72,7 +72,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.POWER_FACTOR` | %, None | Power Factor
 | `SensorDeviceClass.PRECIPITATION` | cm, in, mm | Accumulated precipitation
 | `SensorDeviceClass.PRECIPITATION_INTENSITY` | in/d, in/h, mm/d, mm/h | Precipitation intensity
-| `SensorDeviceClass.PRESSURE` | cbar, bar, hPa, mmHg, inHg, kPa, mbar, Pa, psi | Pressure.
+| `SensorDeviceClass.PRESSURE` | cbar, bar, hPa, mmHg, inHg, kPa, mbar, Pa, psi, mPa | Pressure.
 | `SensorDeviceClass.REACTIVE_ENERGY` | varh, kvarh | Reactive energy
 | `SensorDeviceClass.REACTIVE_POWER` | mvar, var, kvar | Reactive power
 | `SensorDeviceClass.SIGNAL_STRENGTH` | dB, dBm | Signal strength
@@ -85,7 +85,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS_PARTS` | ppm, ppb | Ratio of volatile organic compounds
 | `SensorDeviceClass.VOLTAGE` | V, mV, µV, kV, MV | Voltage
 | `SensorDeviceClass.VOLUME` | L, mL, gal, fl. oz., m³, ft³, CCF, MCF | Generic volume, this device class should be used for sensors representing a consumption, for example the amount of fuel consumed by a vehicle.
-| `SensorDeviceClass.VOLUME_FLOW_RATE` | m³/h, m³/min, m³/s, ft³/min, L/h, L/min, L/s, gal/min, mL/s | Volume flow rate, this device class should be used for sensors representing a flow of some volume, for example the amount of water consumed momentarily.
+| `SensorDeviceClass.VOLUME_FLOW_RATE` | m³/h, m³/min, m³/s, ft³/min, L/h, L/min, L/s, gal/h, gal/min, mL/s | Volume flow rate, this device class should be used for sensors representing a flow of some volume, for example the amount of water consumed momentarily.
 | `SensorDeviceClass.VOLUME_STORAGE` | L, mL, gal, fl. oz., m³, ft³, CCF, MCF | Generic stored volume, this device class should be used for sensors representing a stored volume, for example the amount of fuel in a fuel tank.
 | `SensorDeviceClass.WATER` | L, gal, m³, ft³, CCF, MCF | Water consumption
 | `SensorDeviceClass.WEIGHT` | kg, g, mg, µg, oz, lb, st | Generic mass; `weight` is used instead of `mass` to fit with every day language.

@@ -235,6 +235,9 @@ logins:
     password: str
 random:
   - "match(^\\w*$)"
+ssh:
+  private_key: str
+  public_key: str
 link: url
 size: "int(5,20)"
 count: float
@@ -297,6 +300,16 @@ configuration:
   ssl:
     name: Enable SSL
     description: Enable usage of SSL on the webserver inside the add-on
+  ssh:
+    name: SSH Options
+    description: Configure SSH authentication options
+    fields:
+      public_key:
+        name: Public Key
+        description: Client Public Key
+      private_key:
+        name: Private Key
+        description: Client Private Key
 ```
 
 _The key under `configuration` (`ssl`) in this case, needs to match a key in your `schema` configuration (in [`config.yaml`](#add-on-configuration))._

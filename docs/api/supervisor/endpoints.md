@@ -3074,7 +3074,7 @@ Dismiss an issue
 
 <ApiEndpoint path="/resolution/healthcheck" method="post">
 
-Execute a healthcheck and autofix & notifcation.
+Execute a healthcheck and autofix & notification.
 
 </ApiEndpoint>
 

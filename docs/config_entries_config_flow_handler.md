@@ -238,7 +238,7 @@ When the translations are merged into Home Assistant, they will be automatically
 
 As mentioned above - each Config Entry has a version assigned to it. This is to be able to migrate Config Entry data to new formats when Config Entry schema changes.
 
-Migration can be handled programatically by implementing function `async_migrate_entry` in your integration's `__init__.py` file. The function should return `True` if migration is successful.
+Migration can be handled programmatically by implementing function `async_migrate_entry` in your integration's `__init__.py` file. The function should return `True` if migration is successful.
 
 The version is made of a major and minor version. If minor versions differ but major versions are the same, integration setup will be allowed to continue even if the integration does not implement `async_migrate_entry`. This means a minor version bump is backwards compatible unlike a major version bump which causes the integration to fail setup if the user downgrades Home Assistant Core without restoring their configuration from backup.
 
@@ -520,6 +520,75 @@ class ExampleFlow(ConfigFlow):
             data={},
             next_flow=(FlowType.CONFIG_FLOW, result["flow_id"]),
         )
+```
+
+## Use SchemaConfigFlowHandler for simple flows
+
+For helpers and integrations with simple config flows, you can use the `SchemaConfigFlowHandler` instead.
+
+Compared to using a full config flow, the `SchemaConfigFlowHandler` comes with certain limitations and needs to be considered:
+
+- All user input is saved in the `options` dictionary of the resulting config entry. Therefore it's not suitable to use in integrations which uses connection data, api key's or other information that should be stored in the config entry `data`.
+- It may be simpler to use the normal config flow handler if you have extensive validation, setting unique id or checking for duplicated config entries.
+- Starting the flow with other steps besides `user` and `import` is discouraged.
+
+```python
+
+from homeassistant.helpers.schema_config_entry_flow import (
+    SchemaCommonFlowHandler,
+    SchemaConfigFlowHandler,
+    SchemaFlowError,
+    SchemaFlowFormStep,
+)
+
+async def validate_setup(
+    handler: SchemaCommonFlowHandler, user_input: dict[str, Any]
+) -> dict[str, Any]:
+    """Validate options."""
+    if user_input[CONF_SOME_SETTING] == "error":
+      # 'setup_error' needs to be existing in string.json config errors section
+      raise SchemaFlowError("setup_error") 
+    return user_input
+
+DATA_SCHEMA_SETUP = vol.Schema(
+    {
+        vol.Required(CONF_NAME, default=DEFAULT_NAME): TextSelector()
+    }
+)
+DATA_SCHEMA_OPTIONS = vol.Schema(
+    {
+        vol.Optional(CONF_SOME_SETTING): TextSelector()
+    }
+)
+
+CONFIG_FLOW = {
+    "user": SchemaFlowFormStep(
+        schema=DATA_SCHEMA_SETUP,
+        next_step="options",
+    ),
+    "options": SchemaFlowFormStep(
+        schema=DATA_SCHEMA_OPTIONS,
+        validate_user_input=validate_setup,
+    ),
+}
+OPTIONS_FLOW = {
+    "init": SchemaFlowFormStep(
+        DATA_SCHEMA_OPTIONS,
+        validate_user_input=validate_setup,
+    ),
+}
+
+class MyConfigFlowHandler(SchemaConfigFlowHandler, domain=DOMAIN):
+    """Handle a config flow."""
+
+    config_flow = CONFIG_FLOW
+    options_flow = OPTIONS_FLOW
+    options_flow_reloads = True # Reload without a config entry listener
+
+    def async_config_entry_title(self, options: Mapping[str, Any]) -> str:
+        """Return config entry title from input."""
+        return cast(str, options[CONF_NAME])
+
 ```
 
 ## Testing your config flow
