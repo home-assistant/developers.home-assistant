@@ -233,6 +233,7 @@ module.exports = {
     },
     "config_entries_index",
     "data_entry_flow_index",
+    "automations",
     {
       type: "category",
       label: "Device Automations",

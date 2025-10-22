@@ -36,7 +36,7 @@ The message describes an action or a piece of information that the sender wants 
 
 The format of a message that contains or provides information is the same. It contains an identifier, a type and an optional payload (depending on the type).
 
-A result message will re-use the identifier in the response, to indicate to which action the response is related.
+A result message will reuse the identifier in the response, to indicate to which action the response is related.
 
 The basic format of a message is the following:
 
