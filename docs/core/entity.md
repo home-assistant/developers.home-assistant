@@ -137,7 +137,7 @@ Some general guidance to consider how to handle it:
 - It is essential to automation on? Can it be standalone as its own entity? -> Not an attribute.
 - It is static, e.g., from configuration; doesn't belong in the state machine -> Not an attribute.
 - Do we want to track long term statistics of the value? -> Not an attribute.
-- Does is have historical value? If not, can be an attribute and exclude it from being recorded.
+- Does it have historical value? If not, it can be an attribute and exclude it from being recorded.
 
 ## System properties
 
