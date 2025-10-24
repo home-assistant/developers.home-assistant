@@ -16,10 +16,11 @@ Derive entity platforms from [`homeassistant.components.remote.RemoteEntity`](ht
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
-| Name | Type | Default | Description
-| ---- | ---- | ------- | -----------
-| current_activity | str | None | Return the current active activity |
-| activity_list | list | None | Return the list of available activities |
+| Name | Type | Default | Description |
+| ---- | ---- | ------- | ----------- |
+| is_on | boolean | `None` | If the device is currently on or off. |
+| current_activity | str | `None` | Return the current active activity. |
+| activity_list | list | `None` | Return the list of available activities. |
 
 ### Activity
 
