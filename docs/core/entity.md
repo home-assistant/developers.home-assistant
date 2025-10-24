@@ -126,9 +126,18 @@ This should be done by providing a dictionary with keys and values to the `extra
 
 Providing state attributes comes with the following rules:
 
-- If an attribute is expected, it should be in the dictionary. Attributes should not "come and go".
-- If an attribute is expected, but it's not providing a value right now, its value should be `None` and remain in the dictionary.
+- If an attribute is expected, it should be in the dictionary. Attributes should not "come and go". If it's not currently providing a value it should set it to `None`.
 - If an attribute is not expected, it should not be in the dictionary. An attribute is expected if supported by the entity, for example as indicated by `supported_features`.
+
+Most often, the use of state attributes should be limited and in general it's often better to use another sensor than providing data as attributes.
+
+Some general guidance to consider how to handle it:
+
+- Would someone extract it using a template into an other (binary) sensor -> Not an attribute.
+- It is essential to automation on? Can it be standalone as its own entity? -> Not an attribute.
+- It is static, e.g., from configuration; doesn't belong in the state machine -> Not an attribute.
+- Do we want to track long term statistics of the value? -> Not an attribute.
+- Does is have historical value? If not, can be an attribute and exclude it from being recorded.
 
 ## System properties
 
