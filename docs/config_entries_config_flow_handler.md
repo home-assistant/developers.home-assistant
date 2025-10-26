@@ -522,6 +522,48 @@ class ExampleFlow(ConfigFlow):
         )
 ```
 
+### Use async_on_create_entry
+
+The `async_on_create_entry` provides an option to modify the final `ConfigFlowResult` after the config entry has been created and the flow finalizes.
+
+As subentry flows and option flows are dependent on that the main config entry exist before they can be started, it is suitable to use for this purpose as provided in the following example:
+
+```python
+from homeassistant.config_entries import (
+    ConfigFlow,
+    FlowType,
+    SOURCE_USER,
+    SubentryFlowContext,
+)
+
+
+class ExampleFlow(ConfigFlow):
+    """Example flow."""
+
+    async def async_on_create_entry(
+        self, result: ConfigFlowResult
+    ) -> ConfigFlowResult:
+        """Create subentry flow after creating the main entry."""
+        subentry_result = await self.hass.config_entries.subentries.async_init(
+            (result["result"].entry_id, "subentry_type"),
+            context=SubentryFlowContext(source=SOURCE_USER),
+        )
+        result["next_flow"] = (
+            FlowType.CONFIG_SUBENTRIES_FLOW,
+            subentry_result["flow_id"],
+        )
+        return result
+
+    async def async_step_user(
+        self, user_input: dict[str, Any] | None = None
+    ) -> ConfigFlowResult:
+        """Create entry."""
+        return self.async_create_entry(
+            title="Example",
+            data={},
+        )
+```
+
 ## Use SchemaConfigFlowHandler for simple flows
 
 For helpers and integrations with simple config flows, you can use the `SchemaConfigFlowHandler` instead.
