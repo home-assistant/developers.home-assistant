@@ -183,7 +183,7 @@ each collapsible section of fields.
 Note that also the translations for `name` and `description` of fields which
 are displayed in a collapsible section should be under the `fields` key.
 
-Description placeholders can be when the service action is registered.
+Any description placeholders should be set be when the service action is registered.
 
 ```json
 {
