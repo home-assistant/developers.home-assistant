@@ -183,6 +183,8 @@ each collapsible section of fields.
 Note that also the translations for `name` and `description` of fields which
 are displayed in a collapsible section should be under the `fields` key.
 
+Description placeholders can be when the service action is registered.
+
 ```json
 {
   "selector": {
@@ -198,7 +200,7 @@ are displayed in a collapsible section should be under the `fields` key.
   "services": {
     "set_speed": {
       "name": "Set speed",
-      "description": "Sets fan speed.",
+      "description": "Sets fan speed. [Learn more.]({docs_url})",
       "fields": {
         "speed": {
           "name": "Speed",
