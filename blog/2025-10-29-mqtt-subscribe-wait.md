@@ -2,12 +2,12 @@
 author: Jan Bouwhuis
 authorURL: https://github.com/jbouwh
 authorImageURL: https://avatars.githubusercontent.com/u/7188918?s=96&v=4
-title: Option added to add a callback for status updates for an MQTT subscription
+title: Option added to add a callback for status updates on an MQTT subscription
 ---
 
-## Option added to add a callback for an MQTT subscription
+## Option added to add a callback on an MQTT subscription
 
-Integrations that use MQTT might need to wait for a subscription to complete. The default behavior is that a subscription is queued and debounced, so callers usually do not wait for broker confirmation. Some integrations must guarantee that the broker finished the subscription. To support this requirement, the MQTT subscribe API adds a `on_subscribe_status` callback option.
+Integrations that use MQTT might need to wait for a subscription to complete before they initiate actions. The default behavior is that a subscription is queued and debounced, so callers usually do not wait for broker confirmation. Some integrations must guarantee that the broker finished the subscription. To support this requirement, the MQTT subscribe API adds a `on_subscribe_status` callback option.
 
 The new async signature for MQTT subscribe that supports the new wait option is:
 
