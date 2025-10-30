@@ -325,6 +325,7 @@ module.exports = {
         "documenting/general-style-guide",
         "documenting/yaml-style-guide",
         "documenting/create-page",
+        "documenting/remove-page",
         "documenting/integration-docs-examples",
       ],
     },
