@@ -25,6 +25,7 @@ A reliable way of reflashing the eMMC in this case is to use HAOS booted from an
 ```sh
 curl https://dn.odroid.com/RK3566/ODROID-M1S/Installer/ODROID-M1S_EMMC2UMS.img | dd of=/dev/mmcblk0
 ```
+**Warning:** As the odroid.com page has robot detection, the curl command above might NOT download the actual content! If you run this command, it will overwrite the boot partition of your odroid with HTML page instead and will brick your device! It is strongly recommended to use different approach to get the .img file to your Home Assistant system (e.g. download to different PC running ssh server and then scp the file to /tmp/ of your HA and run the dd if=/tmp/ODROID-M1S_EMMC2UMS.img of=/dev/mmcblk0).
 
 This way the device will start in the UMS mode on the next boot with the SD card removed. Alternatively you can use the [Hardkernel installer image][2] directly instead of the EMMC2UMS image.
 
