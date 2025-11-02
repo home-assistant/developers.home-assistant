@@ -20,11 +20,12 @@ HAOS can be installed directly to the eMMC using a special boot image, to do tha
 
 Installing HAOS replaces the firmware and SPL on the eMMC with the mainline version provided by HAOS. As a result, it is not possible to use the SD card with the EMMC2UMS image anymore, because the mainline SPL is not compatible with U-Boot in the EMMC2UMS image at this time (February 2024). This does not pose any problem for standard use, just makes it more complicated in case you want to return to the Hardkernel-provided OS.
 
-A reliable way of reflashing the eMMC in this case is to use HAOS booted from an SD card. To do that, insert the SD card with HAOS to the micro SD slot and plug the board in. Once the device boots to the HA CLI, enter `login` to enter the root shell and use `curl` to download an image and `dd` it to the eMMC block device:
+A reliable way of reflashing the eMMC in this case is to download [the binary](https://dn.odroid.com/RK3566/ODROID-M1S/Installer/ODROID-M1S_EMMC2UMS.img) from Odroid onto a PC running ssh server.
+Then, on the Odroid M1S device use the HA CLI, enter `login` command to reach the root shell.
+From there, copy the binary file from your PC (e.g. `ssh user@mypc.local:/path_to/ODROID-M1S_EMMC2UMS.img /tmp` - replace the user with your username on the PC, the mypc.local with your computer name or IP address and the path_to with the actual path to your downloaded binary). This command will then copy the binary to /tmp/ on your HAOS.
+Next, run `dd if=/tmp/ORDOID-M1S_EMMC2UMS.img of=/dev/mmcblk0` - this will write the binary image into the boot part of your eMMC.
 
-```sh
-curl https://dn.odroid.com/RK3566/ODROID-M1S/Installer/ODROID-M1S_EMMC2UMS.img | dd of=/dev/mmcblk0
-```
+**Warning:** As the odroid.com page has robot detection, do not use the curl command as it will NOT download the actual; risking your device to be bricked!
 
 This way the device will start in the UMS mode on the next boot with the SD card removed. Alternatively you can use the [Hardkernel installer image][2] directly instead of the EMMC2UMS image.
 
