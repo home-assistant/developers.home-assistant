@@ -1,5 +1,5 @@
 ---
-title: "Create a new page"
+title: "Adding an integration page"
 ---
 
 To create a new integration page, follow these steps:
