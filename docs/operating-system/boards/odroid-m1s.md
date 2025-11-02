@@ -25,6 +25,8 @@ Then, on the Odroid M1S device use the HA CLI, enter `login` command to reach th
 From there, copy the binary file from your PC (e.g. `ssh user@mypc.local:/path_to/ODROID-M1S_EMMC2UMS.img /tmp` - replace the user with your username on the PC, the mypc.local with your computer name or IP address and the path_to with the actual path to your downloaded binary). This command will then copy the binary to /tmp/ on your HAOS.
 Next, run `dd if=/tmp/ORDOID-M1S_EMMC2UMS.img of=/dev/mmcblk0` - this will write the binary image into the boot part of your eMMC.
 
+**Warning:** As the odroid.com page has robot detection, do not use the curl command as it will NOT download the actual; risking your device to be bricked!
+
 This way the device will start in the UMS mode on the next boot with the SD card removed. Alternatively you can use the [Hardkernel installer image][2] directly instead of the EMMC2UMS image.
 
 ## NVMe
