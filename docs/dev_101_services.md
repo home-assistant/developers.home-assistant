@@ -309,8 +309,8 @@ SEARCH_ITEMS_SCHEMA = vol.Schema({
 })
 
 
-async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Set up the platform."""
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
+    """Set up the integration."""
 
     async def search_items(call: ServiceCall) -> ServiceResponse:
         """Search in the date range and return the matching items."""
