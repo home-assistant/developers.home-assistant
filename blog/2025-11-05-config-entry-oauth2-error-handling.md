@@ -7,6 +7,7 @@ title: "Improved error handling for oauth2 configuration without internet"
 Integrations using [Application Credentials](https://developers.home-assistant.io/docs/core/platform/application_credentials/) and [Configuration via OAuth2](https://developers.home-assistant.io/docs/config_entries_config_flow_handler/#configuration-via-oauth2) need to update their error handling to correctly handle configuration when the internet is down.
 
 Currently integrations using configuration via OAuth2 call `config_entry_oauth2_flow.async_get_config_entry_implementation` in `async_setup_entry` in their `__init__.py`. Previously when there was no network, this would raise `ValueError: Implementation not available`, which was a non-retryable error, resulting in the integration needing to be manually reconfigured after internet was restored (see Issues [153956](https://github.com/home-assistant/core/issues/153956) and [144582](https://github.com/home-assistant/core/issues/144582)). [core PR 154579](https://github.com/home-assistant/core/pull/154579) added `config_entry_oauth2_flow.ImplementationUnavailableError` and raises it in `config_entry_oauth2_flow.async_get_config_entry_implementation` when OAuth2 configuration is unavailable because of missing internet. Integrations should catch this error and raise `ConfigEntryNotReady`.
+The changed behavior with the new exception will be released in 2025.12.
 
 Here is an example of the migration,
 ```diff
