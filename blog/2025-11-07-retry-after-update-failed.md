@@ -20,4 +20,4 @@ except APIClientRateLimited as err:
 ```
 
 #### ConfigEntryNotReady
-The `retry_after parameter` is ignored during the setup phase (`async_config_entry_first_refresh`). If the first refresh fails, Home Assistant raises a `ConfigEntryNotReady`, allowing setup to retry automatically using the built-in retry. Once the setup succeeds, `retry_after` applies to following refreshes.
+The `retry_after` parameter is ignored during the setup phase (`async_config_entry_first_refresh`). If the first refresh fails, Home Assistant raises a `ConfigEntryNotReady`, allowing setup to retry automatically using the built-in retry. Once the setup succeeds, `retry_after` applies to following refreshes.
