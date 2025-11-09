@@ -44,7 +44,12 @@ To better understand which severity level to choose, see the list below.
 | ERROR         | Something is currently broken and needs immediate attention        |
 | WARNING       | Something breaks in the future (e.g., API shutdown) and needs attention |
 
-## Offering a repair
+## Fixing an issue
+
+If an issue has the `is_fixable` issue set to `True`, the user will be allowed to fix the issue. An issue which is successfully fixed will be removed from the issue registry.
+If an automatic repair is possible, it should be implemented using a RepairsFlow.
+
+### Offering an automatic repair
 
 Create a new platform file in your integration folder called `repairs.py` and add code according to the pattern below.
 
@@ -114,6 +119,3 @@ from homeassistant.helpers import issue_registry as ir
 ir.async_delete_issue(hass, DOMAIN, "manual_migration")
 ```
 
-## Fixing an issue
-
-If an issue has the `is_fixable` issue set to `True`, the user will be allowed to fix the issue. An issue which is successfully fixed will be removed from the issue registry.
