@@ -197,7 +197,7 @@ Avoid using `config.yaml` as filename in your add-on for anything other than the
 | `realtime` | bool | `false` | Give add-on access to host schedule including `SYS_NICE` for change execution time/priority.
 | `journald` | bool | `false` | If set to `true`, the host's system journal will be mapped read-only into the add-on. Most of the time the journal will be in `/var/log/journal` however on some hosts you will find it in `/run/log/journal`. Add-ons relying on this capability should check if the directory `/var/log/journal` is populated and fallback on `/run/log/journal` if not.
 | `breaking_versions` | list | | List of breaking versions of the addon. A manual update will always be required if the update is to a breaking version or would cross a breaking version, even if users have auto-update enabled for the addon.
-| `ulimits` | dict | | Dictionary of resource limit (ulimit) settings for the add-on container. Each limit can be either a plain integer value or a dictionary with the `{"soft": int, "hard": int}` schema for fine-grained control. Individual values must not be larger than the host's hard limit (inspectable by `ulimit -Ha`; e.g. 524288 in case of the `nofile` limit in the Home Assistant Operating System). |
+| `ulimits` | dict | | Dictionary of resource limit (ulimit) settings for the add-on container. Each limit can be either a plain integer value or a dictionary with the keys `soft` and `hard`, each taking a plain integer for fine-grained control. Individual values must not be larger than the host's hard limit (inspectable by `ulimit -Ha`; e.g. 524288 in case of the `nofile` limit in the Home Assistant Operating System). |
 
 ### Options / Schema
 
