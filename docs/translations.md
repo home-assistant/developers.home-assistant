@@ -47,7 +47,7 @@ Region specific translations (`en-US`, `fr-CA`) will only be included if transla
 
 1. Language tags  have to follow [BCP 47](https://tools.ietf.org/html/bcp47). A list of most language tags can be found here: [IANA subtag registry](http://www.iana.org/assignments/language-subtag-registry/language-subtag-registry). Examples: `fr`, `fr-CA`, `zh-Hans`. Only include the country code if country specific overrides are being included, and the base language is already translated.
 2. Add the language tag and native name in `src/translations/translationMetadata.json`.  Examples: "Français", "Français (CA)"
-3. Add the new language in Lokalize.
+3. Add the new language in Lokalise.
 Note: Sometimes you have to change the tag in Lokalise (Language -> Language settings -> custom ISO code).
 
 ## Language specific guidelines
