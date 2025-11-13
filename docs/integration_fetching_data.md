@@ -125,6 +125,9 @@ class MyCoordinator(DataUpdateCoordinator):
             raise ConfigEntryAuthFailed from err
         except ApiError as err:
             raise UpdateFailed(f"Error communicating with API: {err}")
+        except ApiRateLimited as err:
+            # If the API is providing backoff signals, these can be honored via the retry_after parameter
+            raise UpdateFailed(retry_after=60)
 
 
 class MyEntity(CoordinatorEntity, LightEntity):
