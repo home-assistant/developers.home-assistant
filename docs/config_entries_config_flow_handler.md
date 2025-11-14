@@ -528,7 +528,7 @@ class ExampleFlow(ConfigFlow):
 
 ### Continuing to a subentry flow
 
-To continue to a subentry flow, the `next_flow` tuple should contain `FlowType.CONFIG_SUBENTRIES_FLOW` and the `subentry_type` string. Home Assistant will then automatically create the subentry flow for the newly created config entry.
+To continue to a subentry flow, the `next_flow` tuple should contain `FlowType.CONFIG_SUBENTRIES_FLOW` and the `subentry_type` string (a key from `async_get_supported_subentry_types`). Home Assistant will then automatically create the subentry flow for the newly created config entry.
 
 ```python
 from homeassistant.config_entries import ConfigFlow, FlowType
