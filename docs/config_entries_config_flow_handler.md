@@ -500,6 +500,10 @@ class LocationSubentryFlowHandler(ConfigSubentryFlow):
 
 A config flow can start another config flow and tell the frontend that it should show the other flow once the first flow is finished. To do this the first flow needs to pass the `next_flow` parameter to the `async_create_entry` method. The argument should be a tuple of the form `(flow_type, flow_id)`.
 
+The `flow_type` can be either `FlowType.CONFIG_FLOW` to continue to another top-level config flow, or `FlowType.CONFIG_SUBENTRIES_FLOW` to continue to a subentry flow for the config entry being created.
+
+### Continuing to another config flow
+
 ```python
 from homeassistant.config_entries import SOURCE_USER, ConfigFlow, FlowType
 
@@ -519,6 +523,28 @@ class ExampleFlow(ConfigFlow):
             title="Example",
             data={},
             next_flow=(FlowType.CONFIG_FLOW, result["flow_id"]),
+        )
+```
+
+### Continuing to a subentry flow
+
+To continue to a subentry flow, the `next_flow` tuple should contain `FlowType.CONFIG_SUBENTRIES_FLOW` and the `subentry_type` string. Home Assistant will then automatically create the subentry flow for the newly created config entry.
+
+```python
+from homeassistant.config_entries import ConfigFlow, FlowType
+
+
+class ExampleFlow(ConfigFlow):
+    """Example flow."""
+
+    async def async_step_user(
+        self, user_input: dict[str, Any] | None = None
+    ) -> ConfigFlowResult:
+        """Create an entry and then start a subentry flow to add a location."""
+        return self.async_create_entry(
+            title="Example",
+            data={},
+            next_flow=(FlowType.CONFIG_SUBENTRIES_FLOW, "location"),
         )
 ```
 
