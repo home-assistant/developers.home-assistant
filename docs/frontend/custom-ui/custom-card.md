@@ -396,14 +396,14 @@ The form schema can have individual controls, grids, or expansion panels, config
 
 Controls:
 - `name` _(required)_: The name of the control.
-- `selector` _(optional)_: The selector configuration for this control (see https://www.home-assistant.io/docs/blueprint/selectors/ for available options)
+- `selector` _(optional)_: The selector configuration for this control (see [selectors](https://www.home-assistant.io/docs/blueprint/selectors/) for available options)
 - `type` _(optional)_: If selector is not defined, there are native form types like `float` and `boolean`, though using selectors is preferred.
 
 Grids:
 - `type` _(required)_: `grid`
 - `name` _(required)_: Key for this grid in the form data object (see `flatten`)
 - `schema` _(required)_: A list of child controls in the grid
-- `flatten` _(optional)_: `true`/`false` if child control data should be flattened into the main data dictonary, or under a sub-dictionary with the name of this grid 
+- `flatten` _(optional)_: `true`/`false` if child control data should be flattened into the main data dictionary, or under a sub-dictionary with the name of this grid 
 - `column_min_width` _(optional)_: CSS property for the minimum width of the cells in the grid (e.g. `200px`)
 
 Expansion Panel:
@@ -411,8 +411,8 @@ Expansion Panel:
 - `name` _(required)_: Key for this panel in the form data object (see `flatten`)
 - `schema` _(required)_: A list of child controls in the expansion panel
 - `title` _(optional)_: A heading on the panel
-- `flatten` _(optional)_: `true`/`false` if child control data should be flattened into the main data dictonary, or under a sub-dictionary with the name of this panel
+- `flatten` _(optional)_: `true`/`false` if child control data should be flattened into the main data dictionary, or under a sub-dictionary with the name of this panel
 
-This is not an exhaustive list of all options, more configuration options are listed at https://github.com/home-assistant/frontend/blob/master/src/components/ha-form/types.ts
+This is not an exhaustive list of all options, more configuration options are listed at [ha-form/types.ts](https://github.com/home-assistant/frontend/blob/master/src/components/ha-form/types.ts)
 
 
