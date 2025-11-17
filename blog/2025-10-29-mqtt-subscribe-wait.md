@@ -41,7 +41,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         """Callback example."""
         # Do stuff
 
-    def _on_subscribe() -> None:
+    def _on_subscribe_status() -> None:
         """Publish an online state when we are ready to receive updates."""
         hass.async_create_task(
             mqtt.async_publish(
