@@ -12,12 +12,12 @@ The integration and API client must detect these backoff signals and sanitize th
 Example of the usage:
 ```py
 try:
-	request = await self.client.get_information()
+    request = await self.client.get_information()
 except APIClientRateLimited as err:
-	raise UpdateFailed(
-		retry_after=60  # This can also be retrieved from the API response itself, or provide a default
-	) from err
+    raise UpdateFailed(
+        retry_after=60  # This can also be retrieved from the API response itself, or provide a default
+    ) from err
 ```
 
 #### ConfigEntryNotReady
-The `retry_after` parameter is ignored during the setup phase (`async_config_entry_first_refresh`). If the first refresh fails, Home Assistant raises a `ConfigEntryNotReady`, allowing setup to retry automatically using the built-in retry. Once the setup succeeds, `retry_after` applies to following refreshes.
+The `retry_after` parameter is ignored during the Update Coordinator setup phase (`async_config_entry_first_refresh`). If the first refresh fails, Home Assistant raises a `ConfigEntryNotReady` exception, allowing config entry setup to retry automatically using the built-in retry. Once the coordinator setup succeeds, `retry_after` applies to following refreshes.
