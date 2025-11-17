@@ -2,10 +2,10 @@
 author: Jan Bouwhuis
 authorURL: https://github.com/jbouwh
 authorImageURL: https://avatars.githubusercontent.com/u/7188918?s=96&v=4
-title: Option added to add a callback for status updates on an MQTT subscription
+title: Add a status callback for MQTT subscriptions
 ---
 
-## Option added to add a callback on an MQTT subscription
+## Add a status callback for MQTT subscriptions
 
 Integrations that use MQTT might need to wait for a subscription to complete before they initiate actions. The default behavior is that a subscription is queued and debounced, so callers usually do not wait for broker confirmation. Some integrations must guarantee that the broker finished the subscription. To support this requirement, the MQTT subscribe API adds a `on_subscribe_status` callback option.
 
@@ -62,7 +62,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     ...
 ```
 
-## Receive status updates on for as specific MQTT subscription
+## Monitor subscription status with the helper function
 
 In case a subscription is already pending, or when we want to keep monitoring, the  `mqtt.async_on_subscribe_done` helper can be used to monitor its subscription, to allow doing additional task. Make sure the same QoS is used.
 
@@ -75,10 +75,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Setup integration MQTT subscription monitoring."""
 
     def _on_subscribe_status() -> None:
-        """Integration ."""
+        """Handle subscription ready signal."""
         # Do stuff
 
-    # Await a pending subscription
+    # Handle subscription ready status update
     await mqtt.async_on_subscribe_done(
         hass,
         "myintegration/status",
