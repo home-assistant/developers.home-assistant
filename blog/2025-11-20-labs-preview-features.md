@@ -5,7 +5,7 @@ authorImageURL: https://avatars.githubusercontent.com/u/195327?v=4
 title: "Introducing Labs: Preview features before they become standard"
 ---
 
-We're excited to announce a new system for shipping preview features in Home Assistant: **Labs**. Labs provides a standardized way for integrations to offer critical bug free features that users can opt into before they become standard.
+We're excited to announce a new system for shipping preview features in Home Assistant: **Labs**. Labs provides a standardized way for integrations to offer critical bug-free features that users can opt into before they become standard.
 
 ## What are Labs preview features?
 
