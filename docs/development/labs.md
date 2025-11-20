@@ -503,6 +503,6 @@ If the feature doesn't work out:
 
 ✅ **Do** actively engage with user feedback
 
-✅ **Do** ensure the feature is critical bug free before adding it to Labs
+✅ **Do** ensure the feature is critical bug-free before adding it to Labs
 
 ✅ **Do** communicate if the feature set may be extended based on feedback
