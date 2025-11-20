@@ -46,7 +46,7 @@ Many of our most significant improvements benefit from real-world testing before
 
 ## Example: Kitchen Sink special repair
 
-The [Kitchen Sink](https://www.home-assistant.io/integrations/kitchen_sink/) demo integration includes a working example. When enabled, the "special repair" feature creates a repair issue to demonstrate how Labs features can interact with other Home Assistant systems.
+The [Kitchen Sink](https://www.home-assistant.io/integrations/kitchen_sink/) demo integration includes a working example. When enabled, the "special repair" feature creates a repair issue to demonstrate how Labs features can interact with other Home Assistant components.
 
 Here's how it's implemented:
 
