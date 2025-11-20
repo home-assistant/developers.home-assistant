@@ -9,7 +9,7 @@ We're excited to announce a new system for shipping preview features in Home Ass
 
 ## What are Labs preview features?
 
-Labs preview features are different from beta testing. While beta testing evaluates release stability, Labs features are already critical bug free and fully functional. However, their feature set may still be extended or refined as we gather real-world usage and feedback before graduating them to standard.
+Labs preview features are different from beta testing. While beta testing evaluates release stability, Labs features are already critical bug-free and fully functional. However, their feature set may still be extended or refined as we gather real-world usage and feedback before graduating them to standard.
 
 Think of it this way:
 
