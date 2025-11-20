@@ -40,7 +40,7 @@ Users can enable preview features in **Settings** → **System** → **Labs**, a
 Many of our most significant improvements benefit from real-world testing before becoming standard. Labs provides:
 
 1. **Structured feedback channels**: Each feature has dedicated URLs for feedback, documentation, and issue reporting
-2. **Runtime activation**: Features enable and disable instantly, no restart required
+2. **Runtime activation**: Features enable and disable instantly, no configuration updates or restart required
 3. **Clear expectations**: Users know they're trying a critical bug free preview feature that may have its feature set extended or refined
 4. **Iterative development**: Integrate user feedback directly into the development process
 
