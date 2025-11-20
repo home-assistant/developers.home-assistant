@@ -33,6 +33,7 @@ module.exports = {
             { to: "docs/operating-system", label: "Operating System" },
             { to: "docs/voice/overview", label: "Voice" },
             { to: "docs/translations", label: "Translations" },
+            { to: "docs/android", label: "Android" },
           ],
         },
         { to: "docs/misc", label: "Misc", position: "left" },
@@ -81,12 +82,40 @@ module.exports = {
               href: "https://github.com/home-assistant",
             },
             {
-              label: "Twitter",
-              href: "https://twitter.com/hass_devs",
+              label: "X (Twitter)",
+              href: "https://x.com/hass_devs",
             },
             {
               label: "Discord chat",
               href: "https://www.home-assistant.io/join-chat",
+            },
+            {
+              label: "YouTube",
+              href: "https://youtube.com/@home_assistant",
+            },
+            {
+              label: "Reddit",
+              href: "https://reddit.com/r/homeassistant",
+            },
+            {
+              label: "Mastodon",
+              href: "https://fosstodon.org/@homeassistant",
+            },
+            {
+              label: "Bluesky",
+              href: "https://bsky.app/profile/home-assistant.io",
+            },
+            {
+              label: "Facebook",
+              href: "https://www.facebook.com/homeassistantio/",
+            },
+            {
+              label: "Instagram",
+              href: "https://www.instagram.com/homeassistant/",
+            },
+            {
+              label: "LinkedIn",
+              href: "https://www.linkedin.com/company/home-assistant",
             },
           ],
         },
@@ -121,6 +150,11 @@ module.exports = {
     image: "img/default-social.png",
     mermaid: {
       theme: { light: "neutral", dark: "forest" },
+    },
+    colorMode: {
+      defaultMode: 'light',
+      respectPrefersColorScheme: true,
+      disableSwitch: false,
     },
   },
   presets: [

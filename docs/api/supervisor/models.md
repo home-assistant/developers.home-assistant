@@ -21,6 +21,7 @@ These models are describing objects that are getting returned from the superviso
 | icon             | bool           | The add-on has an icon file                            |
 | logo             | bool           | The add-on has a logo file                            |
 | state            | string         | The state of the add-on (started, stopped)            |
+| system_managed   | bool           | Indicates whether the add-on is managed by Home Assistant |
 
 ## Application
 
@@ -92,19 +93,30 @@ These models are describing objects that are getting returned from the superviso
 
 ## Network interface
 
-| key         | type    | description                                                                  |
-| ----------- | ------- | ---------------------------------------------------------------------------- |
-| interface   | string  | The interface name i.e eth0.                                                 |
-| type        | string  | The interface type: `ethernet`, `wireless` or `vlan`.                        |
-| enabled     | boolean | Return True if the interface is enabled.                                     |
-| connected   | boolean | Return True if the interface is connected to the network.                    |
-| primary     | boolean | `true` if it's the primary network interface.                                |
-| ipv4        | struct or null  | An IP config struct with IPv4 connection details.                            |
-| ipv6        | struct or null  | An IP config struct with IPv6 connection details.                            |
-| wifi        | struct or null  | A Wifi config struct with wireless connection details.                      |
-| vlan        | struct or null  | A Vlan config struct with details about the vlan.                           |
+| key         | type    | description                                                                                   |
+| ----------- | ------- | --------------------------------------------------------------------------------------------- |
+| interface   | string  | The interface name i.e eth0.                                                                  |
+| type        | string  | The interface type: `ethernet`, `wireless` or `vlan`.                                         |
+| enabled     | boolean | Return True if the interface is enabled.                                                      |
+| connected   | boolean | Return True if the interface is connected to the network.                                     |
+| primary     | boolean | `true` if it's the primary network interface.                                                 |
+| ipv6        | struct or null  | An [IPv6 configuration](#ipv6-configuration) struct with IPv6 connection details.     |
+| ipv4        | struct or null  | An [IPv4 configuration](#ipv4-configuration) struct with IPv4 connection details.     |
+| wifi        | struct or null  | A [Wifi configuration](#wifi-configuration) struct with wireless connection details.  |
+| vlan        | struct or null  | A [VLAN configuration](#vlan-configuration) struct with details about the vlan.       |
 
-### IP configuration
+### IPv6 configuration
+
+| key           | type    | description                                                                                 |
+| ------------- | ------- | ------------------------------------------------------------------------------------------- |
+| method        | string  | The method used to set the IP can be `static`, `auto` or `disabled`.                        |
+| addr_gen_mode | string  | Address generation mode can be `eui64` or `stable-privacy`, `default-or-eui64` or `default` |
+| ip6_privacy   | string  | Privacy extensions options are `disabled`, `enabled-prefer-public`, `enabled` or `default`  |
+| address       | list    | A list with IP address and the netmask in a ::/XXX format.                                  |
+| gateway       | string  | The IP address of the gateway.                                                              |
+| nameservers   | list    | A list containing the IP addresses of the configured nameservers as strings.                |
+
+### IPv4 configuration
 
 | key         | type    | description                                                                  |
 | ----------- | ------- | ---------------------------------------------------------------------------- |
@@ -168,15 +180,15 @@ These models are describing objects that are getting returned from the superviso
 
 ## Backup
 
-| key       | type    | description                                                           |
-| --------- | ------- | --------------------------------------------------------------------- |
-| slug      | string  | A generated slug for the backup                                     |
-| date      | string  | ISO date string representation of the date the backup was created |
-| name      | string  | The name given to the backup                                        |
-| type      | string  | The type of backup (full, partial)                                  |
-| protected | boolean | `true` if the backup is password protected                          |
-| content | dictionary | A dictionary describing the content of the backup                  |
-| compressed | boolean | `true` if the backup is saved in a compressed archive              |
+| key       | type    | description                                                                |
+| --------- | ------- | -------------------------------------------------------------------------- |
+| slug      | string  | A generated slug for the backup                                            |
+| date      | string  | ISO date string representation of the date the backup was created          |
+| name      | string  | The name given to the backup                                               |
+| type      | string  | The type of backup (full, partial)                                         |
+| protected | boolean | `true` if the backup is password protected                                 |
+| content | dictionary | Details of the backup content. See [Backup -> content](#backup---content) |
+| compressed | boolean | `true` if the backup is saved in a compressed archive                     |
 
 ### Backup -> content
 
@@ -301,6 +313,7 @@ Response only fields will be in responses but cannot be included in requests.
 | created    | string  | Date and time when job was created in ISO format              |
 | child_jobs | list    | A list of child [jobs](#job) started by this one              |
 | errors     | list    | A list of [errors](#job-error) that occurred during execution |
+| extra      | dictionary or null | Additional metadata relevant to the job or stage (if applicable) |
 
 ## Job error
 
@@ -308,6 +321,7 @@ Response only fields will be in responses but cannot be included in requests.
 | ---------- | ------- | ---------------------------------------------- |
 | type       | string  | Type of error that occurred                    |
 | message    | string  | Human-readable description of what went wrong  |
+| stage      | string  | A name for the stage the job was in at the time the error occurred (if applicable) |
 
 ## Boot slot
 

@@ -52,6 +52,7 @@ and are combined using the bitwise or (`|`) operator.
 | `TARGET_TEMPERATURE` | Temperature can be set    |
 | `OPERATION_MODE`     | Operation mode can be set |
 | `AWAY_MODE`          | Away mode can be set      |
+| `ON_OFF`             | Can be turned on or off   |
 
 ## Methods
 

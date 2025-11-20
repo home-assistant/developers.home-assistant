@@ -84,3 +84,7 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) ->
 ## Modifying a config entry
 
 A `ConfigEntry` object, including the data and options, must never be mutated directly by integrations, instead integrations must call `async_update_entry`, the use of which is illustrated in the [config flow documentation](/config_entries_config_flow_handler.md#config-entry-migration).
+
+## Subscribing to config entry state changes
+
+If you want to be notified about a `ConfigEntry` changing its `state` (e.g. from `ConfigEntryState.LOADED` to `ConfigEntryState.UNLOAD_IN_PROGRESS`), you can add a listener which will be notified to `async_on_state_change`. This helper also returns a callback you can call to remove the listener again. Subscribing to changes until the entry is unloaded would therefore be `entry.async_on_unload(entry.async_on_state_change(notify_me))`.

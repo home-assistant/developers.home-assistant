@@ -8,15 +8,21 @@ This page provides some tips and tricks that may help you as a contributor to Ho
 
 ### Keep PRs simple
 
-See the [Component Checklist](creating_component_code_review#5-make-your-pull-request-as-small-as-possible) for PR expectations.
+See the [Component Checklist](/docs/creating_component_code_review#5-make-your-pull-request-as-small-as-possible) for PR expectations.
 
 ### Test package dependency changes in Home Assistant
 
-See the [API library docs](api_lib_index#trying-your-library-inside-home-assistant) for more information.
+See the [API library docs](/docs/api_lib_index#trying-your-library-inside-home-assistant) for more information.
 
 ### Test Core integration changes in your production Home Assistant environment
 
-If you made a change to a core integration and you want to test it in your production Home Assistant environment, copy the integration folder into `/config/custom_components`, add a version to the `manifest.json` (e.g. "version": "0.0.0"), and restart Home Assistant. Home Assistant will always prioritize integrations in `custom_components` over the core integration. Don't forget to remove it once you are done testing; otherwise, you will be stuck on that version.
+To test a core integration change in your production Home Assistant environment:
+1. Copy the integration folder into `/config/custom_components`.
+2. Add a **version** field to `manifest.json` (for example, `"version": "0.0.0"`).
+3. If the integration uses localized strings, copy `strings.json` into `translations/en.json` under the integration folder as described in [Custom integration localization](/docs/internationalization/custom_integration).
+4. Restart Home Assistant.
+
+Home Assistant will always prioritize integrations in `custom_components` over the core integration. Don't forget to remove it once you are done testing; otherwise, you will be stuck on that version.
 
 ### When adding a config flow to an integration, be aware of the frontend
 

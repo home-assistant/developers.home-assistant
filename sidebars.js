@@ -27,7 +27,10 @@ module.exports = {
     "add-ons/repository",
     "add-ons/security",
   ],
-  Overview: ["architecture_index"],
+  Overview: [
+    "architecture_index",
+    "setup_devcontainer_environment"
+  ],
   Frontend: [
     "frontend",
     "frontend/architecture",
@@ -68,11 +71,32 @@ module.exports = {
   OperatingSystem: [
     "operating-system",
     "operating-system/getting-started",
+    "operating-system/configuration",
     "operating-system/debugging",
     "operating-system/partition",
     "operating-system/board-metadata",
+    "operating-system/network",
     "operating-system/deployment",
     "operating-system/update-system",
+    {
+      type: "category",
+      label: "Board support",
+      items: [
+        "operating-system/boards/overview",
+        "operating-system/boards/asus",
+        "operating-system/boards/generic-aarch64",
+        "operating-system/boards/generic-x86-64",
+        "operating-system/boards/hardkernel",
+        "operating-system/boards/odroid-c2",
+        "operating-system/boards/odroid-c4",
+        "operating-system/boards/odroid-m1",
+        "operating-system/boards/odroid-m1s",
+        "operating-system/boards/odroid-n2",
+        "operating-system/boards/odroid-xu4",
+        "operating-system/boards/raspberrypi",
+        "operating-system/boards/ova",
+      ],
+    },
   ],
   Supervisor: [
     "supervisor",
@@ -154,12 +178,15 @@ module.exports = {
       link: {type: 'doc', id: 'core/integration-quality-scale/index'},
       items: [
         {type: 'doc', id: 'core/integration-quality-scale/checklist'},
-        {type: 'category', label: 'Rules', items: iqs_rules.map(rule => ({
-                type: 'doc',
-                id: `core/integration-quality-scale/rules/${rule.toLowerCase()}`
-              })
-          )}
-          ]
+        {
+          type: 'category',
+          label: 'Rules',
+          link: {type: 'doc', id: 'core/integration-quality-scale/rules'},
+          items: iqs_rules.map(rule => ({
+            type: 'doc',
+            id: `core/integration-quality-scale/rules/${rule.toLowerCase()}`
+          }))}
+      ]
     },
     {
       type: "category",
@@ -206,6 +233,7 @@ module.exports = {
     },
     "config_entries_index",
     "data_entry_flow_index",
+    "automations",
     {
       type: "category",
       label: "Device Automations",
@@ -294,8 +322,10 @@ module.exports = {
       items: [
         "documenting",
         "documenting/standards",
+        "documenting/general-style-guide",
         "documenting/yaml-style-guide",
         "documenting/create-page",
+        "documenting/remove-page",
         "documenting/integration-docs-examples",
       ],
     },
@@ -315,7 +345,46 @@ module.exports = {
         "asyncio_working_with_async",
         "asyncio_thread_safety",
         "asyncio_blocking_operations",
+        "asyncio_imports",
       ],
     },
   ],
+  Android: [
+    "android",
+    "android/get_started",
+    "android/architecture",
+    "android/targets",
+    "android/app_flavors",
+    {
+      type: "category",
+      label: "Testing",
+      items: [
+        "android/testing/introduction",
+        "android/testing/unit_testing",
+        "android/testing/screenshot_testing",
+        "android/testing/integration_testing",
+      ],
+    },
+    {
+      type: "category",
+      label: "Tips",
+      items: [
+        "android/tips/compose_101",
+        "android/tips/dependencies",
+        "android/tips/leak_canary",
+        "android/tips/lollipop_emulator",
+        "android/tips/fcm_push_notification",
+        "android/tips/sarif_reports",
+        "android/tips/release",
+        "android/tips/dev_playground",
+        "android/tips/strict_mode",
+      ],
+    },
+    "android/best_practices",
+    "android/ci",
+    "android/codestyle",
+    "android/linter",
+    "android/submit",
+    "android/release",
+  ]
 };

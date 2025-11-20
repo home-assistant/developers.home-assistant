@@ -32,27 +32,28 @@ If specifying a device class, your sensor entity will need to also return the co
 
 | Constant | Supported units | Description
 | ---- | ---- | -----------
-| `SensorDeviceClass.APPARENT_POWER` | VA | Apparent power
+| `SensorDeviceClass.ABSOLUTE_HUMIDITY` | g/m³, mg/m³ | Absolute humidity
+| `SensorDeviceClass.APPARENT_POWER` | mVA, VA, kVA | Apparent power
 | `SensorDeviceClass.AQI` | None | Air Quality Index
 | `SensorDeviceClass.AREA` | m², cm², km², mm², in², ft², yd², mi², ac, ha | Area
-| `SensorDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, mmHG, inHg, kPa, mbar, Pa, psi | Atmospheric pressure
+| `SensorDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, mmHG, inHg, inH₂O, kPa, mbar, Pa, psi | Atmospheric pressure
 | `SensorDeviceClass.BATTERY` | % | Percentage of battery that is left
-| `SensorDeviceClass.BLOOD_GLUCOSE_CONCENTRATION` | mg/dL, mmol/L | Blood glucose concentration```
+| `SensorDeviceClass.BLOOD_GLUCOSE_CONCENTRATION` | mg/dL, mmol/L | Blood glucose concentration
 | `SensorDeviceClass.CO2` | ppm | Concentration of carbon dioxide.
-| `SensorDeviceClass.CO` | ppm | Concentration of carbon monoxide.
+| `SensorDeviceClass.CO` | ppm, µg/m³, mg/m³ | Concentration of carbon monoxide.
 | `SensorDeviceClass.CONDUCTIVITY` | S/cm, mS/cm, µS/cm | Conductivity
 | `SensorDeviceClass.CURRENT` | A, mA | Current
 | `SensorDeviceClass.DATA_RATE` | bit/s, kbit/s, Mbit/s, Gbit/s, B/s, kB/s, MB/s, GB/s, KiB/s, MiB/s, GiB/s | Data rate
 | `SensorDeviceClass.DATA_SIZE` | bit, kbit, Mbit, Gbit, B, kB, MB, GB, TB, PB, EB, ZB, YB, KiB, MiB, GiB, TiB, PiB, EiB, ZiB, YiB | Data size
 | `SensorDeviceClass.DATE` | | Date. Requires `native_value` to be a Python `datetime.date` object, or `None`.
 | `SensorDeviceClass.DISTANCE` | km, m, cm, mm, mi, nmi, yd, in | Generic distance
-| `SensorDeviceClass.DURATION` | d, h, min, s, ms | Time period. Should not update only due to time passing. The device or service needs to give a new data point to update.
+| `SensorDeviceClass.DURATION` | d, h, min, s, ms, µs | Time period. Should not update only due to time passing. The device or service needs to give a new data point to update.
 | `SensorDeviceClass.ENERGY` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal | Energy, this device class should be used for sensors representing energy consumption, for example an electricity meter. Represents _power_ over _time_. Not to be confused with `power`.
-| `SensorDeviceClass.ENERGY_DISTANCE` | kWh/100km, mi/kWh, km/kWh | Energy per distance, this device class should be used to represent energy consumption by distance, for example the amount of electric energy consumed by an electric car.
+| `SensorDeviceClass.ENERGY_DISTANCE` | kWh/100km, Wh/km, mi/kWh, km/kWh | Energy per distance, this device class should be used to represent energy consumption by distance, for example the amount of electric energy consumed by an electric car.
 | `SensorDeviceClass.ENERGY_STORAGE` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal | Stored energy, this device class should be used for sensors representing stored energy, for example the amount of electric energy currently stored in a battery or the capacity of a battery. Represents _power_ over _time_. Not to be confused with `power`.
 | `SensorDeviceClass.ENUM` | | The sensor has a limited set of (non-numeric) states. The `options` property must be set to a list of possible states when using this device class.
 | `SensorDeviceClass.FREQUENCY` | Hz, kHz, MHz, GHz | Frequency
-| `SensorDeviceClass.GAS` | m³, ft³, CCF | Volume of gas. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
+| `SensorDeviceClass.GAS` | L, m³, ft³, CCF, MCF | Volume of gas. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
 | `SensorDeviceClass.HUMIDITY` | % | Relative humidity
 | `SensorDeviceClass.ILLUMINANCE` | lx | Light level
 | `SensorDeviceClass.IRRADIANCE` | W/m², BTU/(h⋅ft²) | Irradiance
@@ -65,28 +66,31 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.PH` | None | Potential hydrogen (pH) of an aqueous solution
 | `SensorDeviceClass.PM1` | µg/m³ | Concentration of particulate matter less than 1 micrometer
 | `SensorDeviceClass.PM25` | µg/m³ | Concentration of particulate matter less than 2.5 micrometers
+| `SensorDeviceClass.PM4` | µg/m³ | Concentration of particulate matter less than 4 micrometers
 | `SensorDeviceClass.PM10` | µg/m³ | Concentration of particulate matter less than 10 micrometers
 | `SensorDeviceClass.POWER` | mW, W, kW, MW, GW, TW | Power.
 | `SensorDeviceClass.POWER_FACTOR` | %, None | Power Factor
 | `SensorDeviceClass.PRECIPITATION` | cm, in, mm | Accumulated precipitation
 | `SensorDeviceClass.PRECIPITATION_INTENSITY` | in/d, in/h, mm/d, mm/h | Precipitation intensity
-| `SensorDeviceClass.PRESSURE` | cbar, bar, hPa, mmHg, inHg, kPa, mbar, Pa, psi | Pressure.
-| `SensorDeviceClass.REACTIVE_POWER` | var | Reactive power
+| `SensorDeviceClass.PRESSURE` | cbar, bar, hPa, mmHg, inHg, kPa, mbar, Pa, psi, mPa | Pressure.
+| `SensorDeviceClass.REACTIVE_ENERGY` | varh, kvarh | Reactive energy
+| `SensorDeviceClass.REACTIVE_POWER` | mvar, var, kvar | Reactive power
 | `SensorDeviceClass.SIGNAL_STRENGTH` | dB, dBm | Signal strength
 | `SensorDeviceClass.SOUND_PRESSURE` | dB, dBA | Sound pressure
 | `SensorDeviceClass.SPEED` | ft/s, in/d, in/h, in/s, km/h, kn, m/s, mph, mm/d, mm/s | Generic speed
 | `SensorDeviceClass.SULPHUR_DIOXIDE` | µg/m³ | Concentration of sulphure dioxide
 | `SensorDeviceClass.TEMPERATURE` | °C, °F, K | Temperature.
+| `SensorDeviceClass.TEMPERATURE_DELTA` | °C, °F, K | This device class represents a temperature interval (delta), i.e. the difference between two temperature values.
 | `SensorDeviceClass.TIMESTAMP` | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
-| `SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³ | Concentration of volatile organic compounds
+| `SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³, mg/m³ | Concentration of volatile organic compounds
 | `SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS_PARTS` | ppm, ppb | Ratio of volatile organic compounds
 | `SensorDeviceClass.VOLTAGE` | V, mV, µV, kV, MV | Voltage
-| `SensorDeviceClass.VOLUME` | L, mL, gal, fl. oz., m³, ft³, CCF | Generic volume, this device class should be used for sensors representing a consumption, for example the amount of fuel consumed by a vehicle.
-| `SensorDeviceClass.VOLUME_FLOW_RATE` | m³/h, ft³/min, L/min, gal/min, mL/s | Volume flow rate, this device class should be used for sensors representing a flow of some volume, for example the amount of water consumed momentarily.
-| `SensorDeviceClass.VOLUME_STORAGE` | L, mL, gal, fl. oz., m³, ft³, CCF | Generic stored volume, this device class should be used for sensors representing a stored volume, for example the amount of fuel in a fuel tank.
-| `SensorDeviceClass.WATER` | L, gal, m³, ft³, CCF | Water consumption
+| `SensorDeviceClass.VOLUME` | L, mL, gal, fl. oz., m³, ft³, CCF, MCF | Generic volume, this device class should be used for sensors representing a consumption, for example the amount of fuel consumed by a vehicle.
+| `SensorDeviceClass.VOLUME_FLOW_RATE` | m³/h, m³/min, m³/s, ft³/min, L/h, L/min, L/s, gal/h, gal/min, mL/s | Volume flow rate, this device class should be used for sensors representing a flow of some volume, for example the amount of water consumed momentarily.
+| `SensorDeviceClass.VOLUME_STORAGE` | L, mL, gal, fl. oz., m³, ft³, CCF, MCF | Generic stored volume, this device class should be used for sensors representing a stored volume, for example the amount of fuel in a fuel tank.
+| `SensorDeviceClass.WATER` | L, gal, m³, ft³, CCF, MCF | Water consumption
 | `SensorDeviceClass.WEIGHT` | kg, g, mg, µg, oz, lb, st | Generic mass; `weight` is used instead of `mass` to fit with every day language.
-| `SensorDeviceClass.WIND_DIRECTION` | ° | Wind direction
+| `SensorDeviceClass.WIND_DIRECTION` | ° | Wind direction, should be set to `None` if the wind speed is 0 or too low to accurately measure the wind direction.
 | `SensorDeviceClass.WIND_SPEED` | ft/s, km/h, kn, m/s, mph | Wind speed
 
 ### Available state classes
@@ -98,6 +102,7 @@ Choose the state class for a sensor with care. In most cases, state class `Senso
 | Type | Description
 | ---- | -----------
 | `SensorStateClass.MEASUREMENT` | The state represents _a measurement in present time_, not a historical aggregation such as statistics or a prediction of the future. Examples of what should be classified `SensorStateClass.MEASUREMENT` are: current temperature, humidity or electric power.  Examples of what should not be classified as `SensorStateClass.MEASUREMENT`: Forecasted temperature for tomorrow, yesterday's energy consumption or anything else that doesn't include the _current_ measurement. For supported sensors, statistics of hourly min, max and average sensor readings is updated every 5 minutes.
+| `SensorStateClass.MEASUREMENT_ANGLE` | Similar to the above `SensorStateClass.MEASUREMENT`, the state represents _a measurement in present time_ for angles measured in degrees (`°`). An example of what should be classified `SensorStateClass.MEASUREMENT_ANGLE` is current wind direction
 | `SensorStateClass.TOTAL` | The state represents a total amount that can both increase and decrease, e.g. a net energy meter. Statistics of the accumulated growth or decline of the sensor's value since it was first added is updated every 5 minutes. This state class should not be used for sensors where the absolute value is interesting instead of the accumulated growth or decline, for example remaining battery capacity or CPU load; in such cases state class `SensorStateClass.MEASUREMENT` should be used instead.
 | `SensorStateClass.TOTAL_INCREASING` | Similar to `SensorStateClass.TOTAL`, with the restriction that the state represents a monotonically increasing positive total which periodically restarts counting from 0, e.g. a daily amount of consumed gas, weekly water consumption or lifetime energy consumption. Statistics of the accumulated growth of the sensor's value since it was first added is updated every 5 minutes. A decreasing value is interpreted as the start of a new meter cycle or the replacement of the meter.
 

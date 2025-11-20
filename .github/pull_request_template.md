@@ -19,10 +19,18 @@
 -->
 
 - [ ] Document existing features within Home Assistant
-- [ ] Document new or changing features which there is an existing pull request elsewhere
+- [ ] Document new or changing features for which there is an existing pull request elsewhere
 - [ ] Spelling or grammatical corrections, or rewording for improved clarity
 - [ ] Changes to the backend of this documentation
-- [ ] Removed stale or deprecated documentation
+- [ ] Remove stale or deprecated documentation
+
+## Checklist
+<!--
+  Ensure your pull request meets the following requirements. This helps speed up the review process.
+-->
+
+- [ ] I have read and followed the [documentation guidelines](https://developers.home-assistant.io/docs/documenting/standards).
+- [ ] I have verified that my changes render correctly in the documentation.
 
 ## Additional information
 <!--

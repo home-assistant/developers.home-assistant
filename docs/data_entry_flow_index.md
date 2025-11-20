@@ -191,7 +191,7 @@ To specify an icon for a section, update `icons.json` according to this example:
 
 #### Labels & descriptions
 
-Translations for the form are added to `strings.json` in a key for the `step_id`. That object may contain the folowing keys:
+Translations for the form are added to `strings.json` in a key for the `step_id`. That object may contain the following keys:
 
 |        Key         |       Value         | Notes                                                                                                                                        |
 | :----------------: | :-----------------: | :------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -314,6 +314,33 @@ class ExampleOptionsFlow(config_entries.OptionsFlow):
             )
         )
 ```
+
+Note: For select type inputs (created from a `vol.In(...)` schema), if no `default` is specified, the first option will be selected by default in the frontend.
+
+#### Displaying read-only information
+
+Some integrations have options which are frozen after initial configuration. When displaying an options flow, you can show this information in a read-only way, so that users may remember which options were selected during the initial configuration. For this, define an optional selector as usual, but with the `read_only` flag set to `True`.
+
+```python
+# Example Config Flow Schema
+DATA_SCHEMA_SETUP = vol.Schema(
+    {
+        vol.Required(CONF_ENTITY_ID): EntitySelector()
+    }
+)
+
+# Example Options Flow Schema
+DATA_SCHEMA_OPTIONS = vol.Schema(
+    {
+        vol.Optional(CONF_ENTITY_ID): EntitySelector(
+            EntitySelectorConfig(read_only=True)
+        ),
+        vol.Optional(CONF_TEMPLATE): TemplateSelector(),
+    }
+)
+```
+
+This will show the entity selected in the initial configuration as a read-only property whenever the options flow is launched. 
 
 #### Validation
 
@@ -474,6 +501,7 @@ The flow works as follows:
   * If the task is finished, the flow must call the `async_show_progress_done`, indicating the next step
 5. The frontend will update each time we call show progress or show progress done.
 6. The config flow will automatically advance to the next step when the progress was marked as done. The user is prompted with the next step.
+7. The task can optionally call `async_update_progress(progress)` where progress is a float between 0 and 1, indicating how much of the task is done.
 
 Example configuration flow that includes two show sequential progress tasks.
 
@@ -499,6 +527,7 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
             uncompleted_task = self.task_one
         if not uncompleted_task:
             if not self.task_two:
+                self.async_update_progress(0.5) # tell frontend we are 50% done
                 coro = asyncio.sleep(10)
                 self.task_two = self.hass.async_create_task(coro)
             if not self.task_two.done():
@@ -518,9 +547,38 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
         return self.async_create_entry(title="Some title", data={})
 ```
 
+#### Progress decorator
+
+A progress step decorator is provided for convenience. It can be used to change a standard flow step into a progress task. For example:
+
+```python
+import asyncio
+
+from homeassistant import config_entries
+from homeassistant.data_entry_flow import AbortFlow, progress_step
+from .const import DOMAIN
+
+class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
+    VERSION = 1
+
+    @progress_step(
+        # optional description placeholders for the UI
+        description_placeholders=lambda self: {
+            "name": "test,
+        }
+    )
+    async def async_step_user(self, user_input=None):
+        await asyncio.sleep(10)
+        self.async_update_progress(0.5)
+        await asyncio.sleep(10)
+
+        # call the next step when done or raise AbortFlow to abort the flow
+        return await self.async_step_finish()
+```
+
 ### Show menu
 
-This will show a navigation menu to the user to easily pick the next step. The menu labels can be hardcoded by specifying a dictionary of `{step_id: label}` or translated via `strings.json` when specifying a list.
+This will show a navigation menu to the user to easily pick the next step. The menu labels can be hardcoded by specifying a dictionary of `{step_id: label}` or translated via `strings.json` under "menu_options" when specifying a list. Additionally menu descriptions can be provided via `strings.json` under "menu_option_descriptions".
 
 ```python
 class ExampleConfigFlow(data_entry_flow.FlowHandler):
@@ -550,12 +608,18 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         "menu_options": {
           "discovery": "Discovery",
           "manual": "Manual ({model})",
+        },
+        "menu_option_descriptions": {
+          "discovery": "Description of discovery",
+          "manual": "Description of manual",
         }
       }
     }
   }
 }
 ```
+
+Passing `sort=True` to async_show_menu will also sort the menu items by their label in the user's language.
 
 ## Initializing a config flow from an external source
 

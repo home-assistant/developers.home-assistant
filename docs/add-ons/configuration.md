@@ -155,7 +155,7 @@ Avoid using `config.yaml` as filename in your add-on for anything other than the
 | `hassio_api` | bool | `false` | This add-on can access the Supervisor's REST API. Use `http://supervisor`.
 | `homeassistant_api` | bool | `false` | This add-on can access the Home Assistant REST API proxy. Use `http://supervisor/core/api`.
 | `docker_api` | bool | `false` | Allow read-only access to the Docker API for the add-on. Works only for not protected add-ons.
-| `privileged` | list | | Privilege for access to hardware/system. Available access: `BPF`, `DAC_READ_SEARCH`, `IPC_LOCK`, `NET_ADMIN`, `NET_RAW`, `PERFMON`, `SYS_ADMIN`, `SYS_MODULE`, `SYS_NICE`, `SYS_PTRACE`, `SYS_RAWIO`, `SYS_RESOURCE` or `SYS_TIME`.
+| `privileged` | list | | Privilege for access to hardware/system. Available access: `BPF`, `CHECKPOINT_RESTORE`, `DAC_READ_SEARCH`, `IPC_LOCK`, `NET_ADMIN`, `NET_RAW`, `PERFMON`, `SYS_ADMIN`, `SYS_MODULE`, `SYS_NICE`, `SYS_PTRACE`, `SYS_RAWIO`, `SYS_RESOURCE` or `SYS_TIME`.
 | `full_access` | bool | `false` | Give full access to hardware like the privileged mode in Docker. Works only for not protected add-ons. Consider using other add-on options instead of this, like `devices`. If you enable this option, don't add `devices`, `uart`, `usb` or `gpio` as this is not needed.
 | `apparmor` | bool/string | `true` | Enable or disable AppArmor support. If it is enabled, you can also use custom profiles with the name of the profile.
 | `map` | list | | List of Home Assistant directory types to bind mount into your container. Possible values: `homeassistant_config`, `addon_config`, `ssl`, `addons`, `backup`, `share`, `media`, `all_addon_configs`, and `data`. Defaults to read-only, which you can change by adding the property `read_only: false`. By default, all paths map to `/<type-name>` inside the addon container, but an optional `path` property can also be supplied to configure the path (Example: `path: /custom/config/path`). If used, the path must not be empty, unique from any other path defined for the addon, and not the root path. Note that the `data` directory is always mapped and writable, but the `path` property can be set using the same conventions.
@@ -197,6 +197,7 @@ Avoid using `config.yaml` as filename in your add-on for anything other than the
 | `realtime` | bool | `false` | Give add-on access to host schedule including `SYS_NICE` for change execution time/priority.
 | `journald` | bool | `false` | If set to `true`, the host's system journal will be mapped read-only into the add-on. Most of the time the journal will be in `/var/log/journal` however on some hosts you will find it in `/run/log/journal`. Add-ons relying on this capability should check if the directory `/var/log/journal` is populated and fallback on `/run/log/journal` if not.
 | `breaking_versions` | list | | List of breaking versions of the addon. A manual update will always be required if the update is to a breaking version or would cross a breaking version, even if users have auto-update enabled for the addon.
+| `ulimits` | dict | | Dictionary of resource limit (ulimit) settings for the add-on container. Each limit can be either a plain integer value or a dictionary with the keys `soft` and `hard`, each taking a plain integer for fine-grained control. Individual values must not be larger than the host's hard limit (inspectable by `ulimit -Ha`; e.g. 524288 in case of the `nofile` limit in the Home Assistant Operating System). |
 
 ### Options / Schema
 
@@ -222,7 +223,17 @@ count: 1.2
 :::note
 If you remove a configuration option from an add-on already deployed to users, it is recommended to delete the option to avoid a warning like `Option '<options_key>' does not exist in the schema for <Add-on Name> (<add-on slug>)`.
 
-To remove an option the Supervisor addons API can be used. Using bashio this boils down to `bashio::addon.option '<options_key>'` (without additional argument to delete this option key). Typically this should be called inside an if block checking if the option is still set using `bashio::config.exists '<options_key>'`.
+To remove an option the Supervisor addons API can be used. Using bashio this boils down to `bashio::addon.option '<options_key>'` (without additional argument to delete this option key). To check if the option is still set, check the content of the options dictionary like so:
+
+```sh
+options=$(bashio::addon.options)
+old_key='test'
+if bashio::jq.exists "${options}" ".${old_key}"; then
+    bashio::log.info "Removing ${old_key}"
+    bashio::addon.option "${old_key}"
+fi
+```
+
 :::
 
 
@@ -235,6 +246,9 @@ logins:
     password: str
 random:
   - "match(^\\w*$)"
+ssh:
+  private_key: str
+  public_key: str
 link: url
 size: "int(5,20)"
 count: float
@@ -263,7 +277,6 @@ This is only needed if you are not using the default images or need additional t
 ```yaml
 build_from:
   armhf: mycustom/base-image:latest
-squash: false
 args:
   my_build_arg: xy
 ```
@@ -271,7 +284,6 @@ args:
 | Key | Required | Description |
 | --- | -------- | ----------- |
 | build_from | no | A dictionary with the hardware architecture as the key and the base Docker image as the value.
-| squash | no | Default `False`. Be careful with this option, as you can not use the image for caching stuff after that!
 | args | no | Allow additional Docker build arguments as a dictionary.
 | labels | no | Allow additional Docker labels as a dictionary.
 | codenotary | no | Enable container signature with codenotary CAS.
@@ -299,6 +311,16 @@ configuration:
   ssl:
     name: Enable SSL
     description: Enable usage of SSL on the webserver inside the add-on
+  ssh:
+    name: SSH Options
+    description: Configure SSH authentication options
+    fields:
+      public_key:
+        name: Public Key
+        description: Client Public Key
+      private_key:
+        name: Private Key
+        description: Client Private Key
 ```
 
 _The key under `configuration` (`ssl`) in this case, needs to match a key in your `schema` configuration (in [`config.yaml`](#add-on-configuration))._

@@ -49,7 +49,7 @@ class MyConfigFlow(ConfigFlow, domain=DOMAIN):
         )
 ```
 
-`string.json`: 
+`strings.json`: 
 ```json
 {
   "config": {

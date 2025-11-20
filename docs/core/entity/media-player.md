@@ -67,6 +67,7 @@ and are combined using the bitwise or (`|`) operator.
 | `PLAY_MEDIA`        | Entity allows playing media sources.                               |
 | `PREVIOUS_TRACK`    | Entity allows returning back to a previous media track.            |
 | `REPEAT_SET`        | Entity allows setting repeat.                                      |
+| `SEARCH_MEDIA`      | Entity allows searching for media.                                 |
 | `SEEK`              | Entity allows seeking position during playback of media.           |
 | `SELECT_SOUND_MODE` | Entity allows selecting a sound mode.                              |
 | `SELECT_SOURCE`     | Entity allows selecting a source/input.                            |
@@ -89,8 +90,13 @@ The state of a media player is defined by using values in the `MediaPlayerState`
 | `IDLE`      | Entity is turned on and accepting commands, but currently not playing any media. Possibly at some idle home screen. |
 | `PLAYING`   | Entity is currently playing media.                                                                                  |
 | `PAUSED`    | Entity has an active media and is currently paused                                                                |
-| `STANDBY`   | Entity is in a low power state, accepting commands.                              |
 | `BUFFERING` | Entity is preparing to start playback of some media                                                                 |
+
+:::note
+
+It is common that media players can't be controlled when in a standby state. If Home Assistant can turn on the device using another protocol or method, it should be shown as `off` even if the main channel used to control the device is currently unavailable. If Home Assistant has no way to turn on the device, it should be shown as `unavailable`. See [entity-unavailable Exceptions](/docs/core/integration-quality-scale/rules/entity-unavailable.md#Exceptions) for more details.
+
+:::
 
 ## Methods
 
@@ -191,6 +197,32 @@ class MyMediaPlayer(MediaPlayerEntity):
         # Replace this with calling your media player play media function.
         await self._media_player.play_url(media_id)
 ```
+
+### Search media
+
+If the media player supports searching media, it should implement the following method:
+
+```python
+class MyMediaPlayer(MediaPlayerEntity):
+
+    async def async_search_media(
+        self,
+        query: SearchMediaQuery,
+    ) -> SearchMedia:
+        """Search the media player."""
+        # search for the requested media on your library client.
+        result = await my_client.search(query=query.search_query)
+        return SearchMedia(result=result)
+```
+
+The SearchMediaQuery is a dataclass with the following properties:
+
+| Attribute             | Type                                  | Default     | Description                        |
+|-----------------------|---------------------------------------|-------------|------------------------------------|
+| `search_query`        | `str`                                 | *required*  | The search string or query.        |
+| `media_content_type`  | `MediaType \| str \| None`            | `None`      | The content type to search inside. |
+| `media_content_id`    | `str \| None`                         | `None`      | The content ID to search inside.   |
+| `media_filter_classes`| `list[MediaClass] \| None`            | `None`      | List of media classes to filter.   |
 
 ### Select sound mode
 

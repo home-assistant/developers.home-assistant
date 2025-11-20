@@ -52,12 +52,12 @@ class ContentCardExample extends HTMLElement {
   }
 
   // The rules for sizing your card in the grid in sections view
-  getLayoutOptions() {
+  getGridOptions() {
     return {
-      grid_rows: 3,
-      grid_columns: 2,
-      grid_min_rows: 3,
-      grid_max_rows: 3,
+      rows: 3,
+      columns: 6,
+      min_rows: 3,
+      max_rows: 3,
     };
   }
 }
@@ -106,37 +106,39 @@ return customElements
 
 ### Sizing in sections view
 
-You can define a `getLayoutOptions` method that returns the min, max and default number of cells your card will take in the grid if your card is used in the [sections view](https://www.home-assistant.io/dashboards/sections/).
-If you don't define this method, the card will take 4 columns (full width) and will ignore the rows of the grid.
+You can define a `getGridOptions` method that returns the min, max and default number of cells your card will take in the grid if your card is used in the [sections view](https://www.home-assistant.io/dashboards/sections/). Each section is divided in 12 columns.
+If you don't define this method, the card will take 12 columns and will ignore the rows of the grid.
 
 A cell of the grid is defined with the following dimension:
 
-- width: between `80px` and `120px` depending on the screen size
+- width: width of the section divided by 12 (approximately `30px`)
 - height: `56px`
 - gap between cells: `8px`
 
-The different layout options are:
+The different grid options are:
 
-- `grid_rows`: Default number of rows the card takes
-- `grid_min_rows`: Minimal number of rows the card takes
-- `grid_max_rows`: Maximal number of rows the card takes
-- `grid_columns`: Default number of columns the card takes
-- `grid_min_columns`: Minimal number of columns the card takes
-- `grid_max_columns`: Maximal number of columns the card takes
+- `rows`: Default number of rows the card takes. Do not define this value if you want your card to ignore the rows of the grid (not defined by default)
+- `min_rows`: Minimal number of rows the card takes (`1` by default)
+- `max_rows`: Maximal number of rows the card takes (not defined by default)
+- `columns`: Default number of columns the card takes. Set it to `full` to enforce your card to be full width, (`12` by default)
+- `min_columns`: Minimal number of columns the card takes (`1` by default)
+- `max_columns`: Maximal number of columns the card takes (not defined by default)
+
+For the number of columns, it's `highly` recommended to use multiple of 3 for the default value (`3`, `6`, `9` or `12`) so your card will have better looking on the dashboard by default.
 
 Example of implementation:
 
 ```js
-public getLayoutOptions() {
+public getGridOptions() {
   return {
-    grid_rows: 2,
-    grid_columns: 2,
-    grid_min_rows: 2,
+    rows: 2,
+    columns: 6,
+    min_rows: 2,
   };
 }
 ```
 
-In this example, the card will take 2 x 2 cells by default. The height of the card cannot be smaller than 2 rows. According to the cell dimension, the card will have a height of `120px` (`2` * `56px` + `8px`).
+In this example, the card will take 6 x 2 cells by default. The height of the card cannot be smaller than 2 rows. According to the cell dimension, the card will have a height of `120px` (`2` * `56px` + `8px`).
 
 ## Advanced example
 
@@ -317,3 +319,100 @@ window.customCards.push({
     "https://developers.home-assistant.io/docs/frontend/custom-ui/custom-card", // Adds a help link in the frontend card editor
 });
 ```
+
+### Using the built-in form editor
+While one way to configure a graphical editor is to supply a custom editor element, another option for cards with relatively simple configuration requirements is to use the built-in frontend form editor. This is done by defining a static `getConfigForm` function in your card class, that returns a form schema defining the shape of your configuration form. 
+
+Example:
+```js
+  static getConfigForm() {
+    return {
+      schema: [
+        { name: "label", selector: { label: {} } },
+        { name: "entity", required: true, selector: { entity: {} } },
+        {
+          type: "grid",
+          name: "",
+          schema: [
+            { name: "name", selector: { text: {} } },
+            {
+              name: "icon",
+              selector: {
+                icon: {},
+              },
+              context: {
+                icon_entity: "entity",
+              },
+            },
+            {
+              name: "attribute",
+              selector: {
+                attribute: {},
+              },
+              context: {
+                filter_entity: "entity",
+              },
+            },
+            { name: "unit", selector: { text: {} } },
+            { name: "theme", selector: { theme: {} } },
+            { name: "state_color", selector: { boolean: {} } },
+          ],
+        },
+      ],
+      computeLabel: (schema) => {
+        if (schema.name === "icon") return "Special Icon";
+        return undefined;
+      },
+      computeHelper: (schema) => {
+        switch (schema.name) {
+          case "entity":
+            return "This text describes the function of the entity selector";
+          case "unit":
+            return "The unit of measurement for this card";
+        }
+        return undefined;
+      },
+      assertConfig: (config) => {
+        if (config.other_option) {
+          throw new Error("'other_option' is unexpected.");
+        }
+      },
+    };
+  }
+```
+From this function, you should return an object with up to 4 keys:
+
+- `schema` _(required)_: This is a list of schema objects, one per form field, defining various properties of the field, like the name and selector.
+- `computeLabel` _(optional)_: This callback function will be called per form field, allowing the card to define the label that will be displayed for the field. If `undefined`, Home Assistant may apply a known translation for generic field names like `entity`, or you can supply your own translations.
+- `computeHelper` _(optional)_: This callback function will be called per form field, allowing you to define longer helper text for the field, which will be displayed below the field.
+- `assertConfig` _(optional)_: On each update of the configuration, the user's config will be passed to this callback function. If you throw an `Error` during this callback, the visual editor will be disabled. This can be used to disable the visual editor when the user enters incompatible data, like entering an object in yaml for a selector that expects a string. If a subsequent execution of this callback does not throw an error, the visual editor will be re-enabled.
+
+This example then results in the following config form:
+![Screenshot of the config form](/img/en/frontend/dashboard-custom-card-config-form.png)
+
+#### Form Schema Elements
+
+The form schema can have individual controls, grids, or expansion panels, configured with the following options:
+
+Controls:
+- `name` _(required)_: The name of the control.
+- `selector` _(optional)_: The selector configuration for this control (see [selectors](https://www.home-assistant.io/docs/blueprint/selectors/) for available options)
+- `type` _(optional)_: If selector is not defined, there are native form types like `float` and `boolean`, though using selectors is preferred.
+
+Grids:
+- `type` _(required)_: `grid`
+- `name` _(required)_: Key for this grid in the form data object (see `flatten`)
+- `schema` _(required)_: A list of child controls in the grid
+- `flatten` _(optional)_: `true`/`false` if child control data should be flattened into the main data dictionary, or under a sub-dictionary with the name of this grid 
+- `column_min_width` _(optional)_: CSS property for the minimum width of the cells in the grid (e.g. `200px`)
+
+Expansion Panel:
+- `type` _(required)_: `expandable`
+- `name` _(required)_: Key for this panel in the form data object (see `flatten`)
+- `schema` _(required)_: A list of child controls in the expansion panel
+- `title` _(optional)_: A heading on the panel
+- `flatten` _(optional)_: `true`/`false` if child control data should be flattened into the main data dictionary, or under a sub-dictionary with the name of this panel
+
+This is not an exhaustive list of all options, more configuration options are listed at [ha-form/types.ts](https://github.com/home-assistant/frontend/blob/master/src/components/ha-form/types.ts)
+
+

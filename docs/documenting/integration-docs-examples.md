@@ -6,9 +6,10 @@ This page shows examples of the available documentation features (such as inline
 
 Use this template together with the following documentation:
 
-- The integration documentation template on under [/_integrations/_integration_docs_template.markdown](https://github.com/home-assistant/home-assistant.io/tree/current/source/_integrations/_integration_docs_template.markdown).
-- [Documentation standard](https://developers.home-assistant.io/docs/documenting/standards).
-- The documentation rules of the [Integration Quality Scale](https://developers.home-assistant.io/docs/core/integration-quality-scale/rules/).
+- The integration documentation template in the home-assistant.io repository under [/_integrations/_integration_docs_template.markdown](https://github.com/home-assistant/home-assistant.io/tree/current/source/_integrations/_integration_docs_template.markdown).
+- [Documentation standard](/docs/documenting/standards).
+- [General style guide](/docs/documenting/general-style-guide).
+- The documentation rules of the [Integration Quality Scale](/docs/core/integration-quality-scale/).
 
 ## Inline text elements
 
@@ -16,16 +17,19 @@ This section shows elements you can use within your text.
 
 ### My links
 
-To indicate a location in the UI, you can use a [My link](https://www.home-assistant.io/docs/tools/quick-bar/#my-links). If the reader selects that link, that page opens in their installation. For example: `"Go to {% my integrations title="**Settings** > **Devices & services**" %} and select your integration."`
+To indicate a location in the UI, you can use a [My link](https://www.home-assistant.io/docs/tools/quick-bar/#my-links). Selecting a My link opens that page in their own Home Assistant installation.
 
-Screenshot showing the styling of my links:
+For example: `"Go to {% my integrations title="**Settings** > **Devices & services**" %} and select your integration."`
 
+<p class='img'>
 <img class='invertDark'
     src='/img/en/documentation/my-links_formatting.png'
     alt='Screenshot showing the styling of my links'
   />
+  Screenshot showing the styling of my links
+</p>
 
-Here are a few examples:
+#### Examples
 
 ```markdown
 - {% my areas title="**Settings** > **Areas, labels & zones**" %}
@@ -48,14 +52,15 @@ To identify a My link, in Home Assistant, open the page of interest and press th
 
 Some Home Assistant terms and concepts are explained in a Glossary. If you add a reference to the definition of such a term, the term definition is shown as a tooltip.
 
-Screenshot showing the styling of a glossary term tooltip:
-
+<p class='img'>
 <img class='invertDark'
     src='/img/en/documentation/glossary-term_tooltip.png'
     alt='Screenshot showing the styling of a glossary term tooltip'
   />
+  Screenshot showing the styling of a glossary term tooltip
+</p>
 
-For example:
+#### Examples
 
 ```markdown
 {% term integration %}
@@ -72,14 +77,15 @@ If possible, try to avoid using abbreviations and acronyms.
 
 If you want to use an acronym or abbreviation, you can add an abbreviation tag to show the full term as a tooltip.
 
-Screenshot showing the styling of an abbreviation tooltip:
-
+<p class='img'>
 <img class='invertDark'
     src='/img/en/documentation/abbreviation_tooltip.png'
     alt='Screenshot showing the styling of an abbreviation tooltip'
   />
+  Screenshot showing the styling of an abbreviation tooltip
+</p>
 
-Here a few examples:
+#### Examples
 
 ```markdown
 <abbr title="Audio & video">A/V</abbr>,
@@ -99,14 +105,15 @@ or <abbr title="USB-On-The-Go">USB-OTG</abbr>.
 
 To refer to an icon in the UI, you can use icons from the [Iconify library](https://icon-sets.iconify.design/mdi/).
 
-Screenshot showing some inline icons:
-
+<p class='img'>
 <img class='invertDark'
     src='/img/en/documentation/inline_icons.png'
     alt='Screenshot showing some inline icons'
   />
+  Screenshot showing some inline icons
+</p>
 
-Here are some examples:
+#### Examples
 
 ```markdown
 - Three dots menu: {% icon "mdi:dots-vertical" %}
@@ -131,14 +138,15 @@ Here are some examples:
 
 Use a details block to make a text block collapsible:
 
-Screenshot showing a collapsible text block:
-
+<p class='img'>
 <img class='invertDark'
     src='/img/en/documentation/collapsible_text_block.webp'
     alt='Screenshot showing a collapsible text block'
   />
+  Screenshot showing a collapsible text block
+</p>
 
-Example:
+### Example
 
 ```markdown
 {% details "Generate Client ID and Client Secret" %}
@@ -152,16 +160,22 @@ Example:
 
 ## Text boxes
 
-Screenshot showing text boxes:
+<p class='img'>
+  <img class='invertDark'
+      src='/img/en/documentation/text_boxes.png'
+      alt='Screenshot showing text boxes'
+    />
+    Screenshot showing text boxes:
+</p>
 
-<img class='invertDark'
-    src='/img/en/documentation/text_boxes.png'
-    alt='Screenshot showing text boxes'
-  />
-
-Example:
+### Examples
 
 ```markdown
+
+{% tip %}
+You can use a tip to feature a recommendation.
+{% endtip %}
+
 {% note %}
 You can use a note to highlight a section.
 {% endnote %}
@@ -177,12 +191,13 @@ For some topics, there are predefined text elements that you can reuse.
 
 ### Configuration
 
-Screenshot showing the predefined configuration text block:
-
+<p class='img'>
 <img class='invertDark'
     src='/img/en/documentation/config_flow.png'
     alt='Screenshot showing predefined configuration text block'
   />
+  Screenshot showing the predefined configuration text block
+</p>
 
 To use this element, add the following line:
 
@@ -190,9 +205,55 @@ To use this element, add the following line:
 {% include integrations/config_flow.md %}
 ```
 
+#### Configuration_basic block
+
+Use the `configuration_basic` block to describe configuration options if your integration is set up via a config flow.
+
+<p class='img'>
+  <img class='invertDark'
+      src='/img/en/documentation/configuration_variables_ui.png'
+      alt='Screenshot showing a configuration variable block for integrations that are set up in the UI'
+    />
+    Screenshot showing a configuration variable block for integrations that are set up in the UI
+</p>
+
+```markdown
+{% configuration_basic %}
+Host:
+    description: "The IP address of your bridge. You can find it in your router or in the Integration app under **Bridge Settings** > **Local API**."
+Local access token:
+    description: "The local access token for your bridge. You can find it in the Integration app under **Bridge Settings** > **Local API**."
+{% endconfiguration_basic %}
+```
+
+#### Configuration block for YAML integrations
+
+Use the `configuration` block to describe configuration options if your integration is set up via YAML only.
+
+<p class='img'>
+  <img class='invertDark'
+      src='/img/en/documentation/configuration_variables_yaml.png'
+      alt='Screenshot showing a configuration variable block for YAML integrations'
+    />
+    Screenshot showing a configuration variable block for YAML integrations
+</p>
+
+```markdown
+{% configuration %}
+Host:
+    description: "The IP address of your bridge. You can find it in your router or in the Integration app under **Bridge Settings** > **Local API**."
+    required: false
+    type: string
+Local access token:
+    description: "The local access token for your bridge. You can find it in the Integration app under **Bridge Settings** > **Local API**."
+    required: false
+    type: string
+{% endconfiguration %}
+```
+
 ## Images
 
-You can use an image to illustrate a step:
+In general, use the Markdown syntax to add images. For example, when adding an image to illustrate a step:
 
 <img class='invertDark'
     src='/img/en/documentation/image_in_step.png'
@@ -207,7 +268,7 @@ Markdown syntax to add an image:
 2. Then do this ...
 ```
 
-You can add an image with caption:
+To add an image with caption, you can use HTML syntax:
 
 <img class='invertDark'
     src='/img/en/documentation/image_with_legend.png'
@@ -230,18 +291,21 @@ Use the following syntax to reference a video from Youtube. Use `videoStartAt` t
 <lite-youtube videoid="ZgoaoTpIhm8" videoStartAt="3907" videotitle="Introducing the Home Assistant Voice Preview Edition - Voice: Chapter 8"></lite-youtube>
 ```
 
+<p class='img'>
 <img class='invertDark'
     src='/img/en/documentation/youtube_ref_start_at.webp'
-    alt='Screencast showing a refernce to Youtube to start at a specific time'
+    alt='Screencast showing a reference to Youtube to start at a specific time'
   />
+  Screencast showing a reference to Youtube to start at a specific time
+</p>
 
-## Document structure with example text
+## Integration page structure
 
-This section outlines the document structure. To view example text, refer to the integration documentation template in the `homeassistant.io` repository under `/_integrations/_integration_docs_template.md`. The example text includes some reusable text blocks (includes) such as `include integrations/config_flow.md` and styling elements such as `configuration_basic`.
+This section outlines the high-level structure of an integration page. To view example text, refer to the integration documentation template in the `homeassistant.io` repository under `/_integrations/_integration_docs_template.md`. The example text includes some reusable text blocks (includes) such as `include integrations/config_flow.md` and styling elements such as `configuration_basic`.
 
 The examples are taken from the [Integration Quality Scale](/docs/core/integration-quality-scale/).
 
-### Basic structure
+### Basic structure of an integration page
 
 - Introduction
   - Use case

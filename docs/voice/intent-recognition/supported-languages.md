@@ -7,7 +7,7 @@ import intents from '!!yaml-loader!../../../intents/intents.yaml';
 
 If you don't see your language below, [help us translate!](/docs/voice/intent-recognition/contributing)
 
-For a full progress report per language, [click here.](https://home-assistant.github.io/intents/)
+For a full progress report per language, [click here.](https://ohf-voice.github.io/intents/)
 
 <>
   <table>

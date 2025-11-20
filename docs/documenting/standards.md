@@ -4,29 +4,14 @@ title: "Standards"
 
 To ensure that the documentation for Home Assistant is consistent and easy to follow for both novice and expert users, we ask that you follow a very strict set of standards for developing the documentation.
 
-## General documentation
+## Style guide
 
-Broadly speaking, documentation should be written following the [Microsoft Style Guide](https://learn.microsoft.com/style-guide/welcome/).
-
-A few of the most common cases picked up in reviews are listed below:
-
-- The language of the documentation should be American-English.
-- Don't put two spaces after a period.
-- Use a serial comma (also known as the Oxford comma) before the conjunction in a list of three or more items. For example, "Through the use of additional adapters, Home Assistant allows the use of Zigbee, Z-Wave, and other protocols".
-- There is no limit for the line length. You are allowed to write in a flowing text style. This will make it easier to use the GitHub online editor in the future.
-- Be objective and not gender favoring, polarizing, race related or religion inconsiderate. Contributions which do not follow this may be in breach of our [Code of Conduct](https://github.com/home-assistant/core/blob/master/CODE_OF_CONDUCT.md).
-- The case of brand names, services, protocols, integrations and platforms must match its respective counterpart. For example, "Z-Wave" _not_ "Zwave", "Z-wave", "Z Wave" or "ZWave". Also, "Input Select" _not_ "input select" or "Input select".
-- Do not use ALL CAPITALS for emphasis - use _italics_ instead.
-- Use [sentence-style capitalization](https://learn.microsoft.com/en-us/style-guide/capitalization), also in headings.
-- Use **bold** to markup UI strings, for example:
-  - Under **Settings**, select the three dots menu. Then, select **Restart Home Assistant** > **Quick reload**.
-- Don't use "e.g.". Instead, use _for example_, _such as_, or _like_.
-- All examples containing Jinja2 templates should be wrapped _outside_ of the code markdown with the `{% raw %}` tag.
+Documentation should follow the [Microsoft Style Guide](https://learn.microsoft.com/style-guide/welcome/). For more details, refer to the section [General style guide](documenting/general-style-guide.md) and the [YAML style guide](documenting/yaml-style-guide.md).
 
 ## Integration and platform pages
 
 - All examples should be formatted to be included in `configuration.yaml` unless explicitly stated.
-  - Use capital letters and `_` to indicate that the value needs to be replaced. E.g., `api_key: YOUR_API_KEY` or `api_key: REPLACE_ME`.
+  - Use capital letters and `_` to indicate that the value needs to be replaced. For example, `api_key: YOUR_API_KEY` or `api_key: REPLACE_ME`.
 - Integration and platform names should be a link to their respective documentation pages.
 
 ### Configuration variables
@@ -35,7 +20,7 @@ A few of the most common cases picked up in reviews are listed below:
 - The **Configuration Variables** section must use the `{% configuration %}` tag.
 - Configuration variables must document the requirement status (`false` or `true`).
 - Configuration variables must document the default value, if any.
-- Configuration variables must document the accepted value types (see [Configuration variables details](documenting/create-page.md#configuration)).
+- Configuration variables must document the accepted value types (see [configuration variables details](documenting/create-page.md#configuration)).
   - For configuration variables that accept multiple types, separate the types with a comma (i.e. `string, integer`).
 
 #### Example configuration variables block
@@ -53,13 +38,6 @@ some_key:
 ### UI variables
 
 - For describing **UI Variables** the `{% configuration_basic %}` section can be used.
-
-### Tables
-
-- Be succinct. Minimize the number of columns and keep the amount of text as short as possible:
-  - Tables that are too wide can be difficult to browse on handheld devices
-  - Less content makes tables easier to read
-- When limiting the amount of text is not possible, consider using other data structures for representing the information. For example, lists or `{% configuration_basic %}` can be used.
 
 ## YAML and templates
 
@@ -80,7 +58,7 @@ the definition of an existing term.
 Additionally, we have a terminology tooltip available, that can be added and
 works everywhere in the documentation. This tooltip will show a definition
 of the term when the user hovers over it with a link for more information.
-It provides instant context to terminology an user might not be familiar with.
+It provides instant context to terminology a user might not be familiar with.
 
 The syntax for adding terminology tooltips is:
 

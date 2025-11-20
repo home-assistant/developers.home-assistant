@@ -124,7 +124,7 @@ Should the config flow then abort, the text resource with the key `already_confi
 {
   "config": {
     "abort": {
-      "already_configured": "Device is already configured"
+      "already_configured": "[%key:common::config_flow::abort::already_configured_device%]"
     }
   }
 }
@@ -192,7 +192,7 @@ To get started, run `python3 -m script.scaffold config_flow_discovery` and follo
 
 Home Assistant has built-in support for integrations that offer account linking using [the OAuth2 authorization framework](https://www.rfc-editor.org/rfc/rfc6749). To be able to leverage this, you will need to structure your Python API library in a way that allows Home Assistant to be responsible for refreshing tokens. See our [API library guide](api_lib_index.md) on how to do this.
 
-The built-in OAuth2 support works out of the box with locally configured client ID / secret using the [Application Credentials platform](/docs/core/platform/application_credentials) and with the Home Assistant Cloud Account Linking service. This service allows users to link their account with a centrally managed client ID/secret. If you want your integration to be part of this service, reach out to us at [hello@home-assistant.io](mailto:hello@home-assistant.io).
+The built-in OAuth2 support works out of the box with locally configured client ID / secret using the [Application Credentials platform](/docs/core/platform/application_credentials) and with the Home Assistant Cloud Account Linking service. This service allows users to link their account with a centrally managed client ID/secret. If you want your integration to be part of this service, reach out to us at [partner@openhomefoundation.org](mailto:partner@openhomefoundation.org).
 
 To get started, run `python3 -m script.scaffold config_flow_oauth2` and follow the instructions. This will create all the boilerplate necessary to configure your integration using OAuth2.
 
@@ -238,7 +238,7 @@ When the translations are merged into Home Assistant, they will be automatically
 
 As mentioned above - each Config Entry has a version assigned to it. This is to be able to migrate Config Entry data to new formats when Config Entry schema changes.
 
-Migration can be handled programatically by implementing function `async_migrate_entry` in your integration's `__init__.py` file. The function should return `True` if migration is successful.
+Migration can be handled programmatically by implementing function `async_migrate_entry` in your integration's `__init__.py` file. The function should return `True` if migration is successful.
 
 The version is made of a major and minor version. If minor versions differ but major versions are the same, integration setup will be allowed to continue even if the integration does not implement `async_migrate_entry`. This means a minor version bump is backwards compatible unlike a major version bump which causes the integration to fail setup if the user downgrades Home Assistant Core without restoring their configuration from backup.
 
@@ -489,10 +489,105 @@ class LocationSubentryFlowHandler(ConfigSubentryFlow):
     ) -> SubentryFlowResult:
         """User flow to modify an existing location."""
         # Retrieve the parent config entry for reference.
-        config_entry = self._get_reconfigure_entry()
+        config_entry = self._get_entry()
         # Retrieve the specific subentry targeted for update.
         config_subentry = self._get_reconfigure_subentry()
         ...
+
+```
+
+## Continuing in another flow
+
+A config flow can start another config flow and tell the frontend that it should show the other flow once the first flow is finished. To do this the first flow needs to pass the `next_flow` parameter to the `async_create_entry` method. The argument should be a tuple of the form `(flow_type, flow_id)`.
+
+```python
+from homeassistant.config_entries import SOURCE_USER, ConfigFlow, FlowType
+
+
+class ExampleFlow(ConfigFlow):
+    """Example flow."""
+
+    async def async_step_user(
+        self, user_input: dict[str, Any] | None = None
+    ) -> ConfigFlowResult:
+        """Show create entry with next_flow parameter."""
+        result = await self.hass.config_entries.flow.async_init(
+            "another_integration_domain",
+            context={"source": SOURCE_USER},
+        )
+        return self.async_create_entry(
+            title="Example",
+            data={},
+            next_flow=(FlowType.CONFIG_FLOW, result["flow_id"]),
+        )
+```
+
+## Use SchemaConfigFlowHandler for simple flows
+
+For helpers and integrations with simple config flows, you can use the `SchemaConfigFlowHandler` instead.
+
+Compared to using a full config flow, the `SchemaConfigFlowHandler` comes with certain limitations and needs to be considered:
+
+- All user input is saved in the `options` dictionary of the resulting config entry. Therefore it's not suitable to use in integrations which uses connection data, api key's or other information that should be stored in the config entry `data`.
+- It may be simpler to use the normal config flow handler if you have extensive validation, setting unique id or checking for duplicated config entries.
+- Starting the flow with other steps besides `user` and `import` is discouraged.
+
+```python
+
+from homeassistant.helpers.schema_config_entry_flow import (
+    SchemaCommonFlowHandler,
+    SchemaConfigFlowHandler,
+    SchemaFlowError,
+    SchemaFlowFormStep,
+)
+
+async def validate_setup(
+    handler: SchemaCommonFlowHandler, user_input: dict[str, Any]
+) -> dict[str, Any]:
+    """Validate options."""
+    if user_input[CONF_SOME_SETTING] == "error":
+      # 'setup_error' needs to be existing in string.json config errors section
+      raise SchemaFlowError("setup_error") 
+    return user_input
+
+DATA_SCHEMA_SETUP = vol.Schema(
+    {
+        vol.Required(CONF_NAME, default=DEFAULT_NAME): TextSelector()
+    }
+)
+DATA_SCHEMA_OPTIONS = vol.Schema(
+    {
+        vol.Optional(CONF_SOME_SETTING): TextSelector()
+    }
+)
+
+CONFIG_FLOW = {
+    "user": SchemaFlowFormStep(
+        schema=DATA_SCHEMA_SETUP,
+        next_step="options",
+    ),
+    "options": SchemaFlowFormStep(
+        schema=DATA_SCHEMA_OPTIONS,
+        validate_user_input=validate_setup,
+    ),
+}
+OPTIONS_FLOW = {
+    "init": SchemaFlowFormStep(
+        DATA_SCHEMA_OPTIONS,
+        validate_user_input=validate_setup,
+    ),
+}
+
+class MyConfigFlowHandler(SchemaConfigFlowHandler, domain=DOMAIN):
+    """Handle a config flow."""
+
+    config_flow = CONFIG_FLOW
+    options_flow = OPTIONS_FLOW
+    options_flow_reloads = True # Reload without a config entry listener
+
+    def async_config_entry_title(self, options: Mapping[str, Any]) -> str:
+        """Return config entry title from input."""
+        return cast(str, options[CONF_NAME])
 
 ```
 
