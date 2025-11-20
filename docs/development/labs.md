@@ -14,7 +14,7 @@ Labs preview features are critical bug free features that are being refined thro
 Labs is appropriate for:
 
 - Major UI changes or redesigns that benefit from user feedback
-- New subsystems or significant architectural changes
+- Significant architectural changes
 - Features that need real-world testing to refine the user experience
 - Functionality where user feedback will shape the final design
 
