@@ -1803,15 +1803,16 @@ These are a convenience alternative to the headers shown above as query
 parameters are easier to use in development and with the Home Assistant proxy.
 You should only provide one or the other.
 
-| Query    | type  | description                                                                        |
-| -------- | ----- |----------------------------------------------------------------------------------- |
-| verbose  | N/A   | If included, uses `text/x-log` as log output type (alternative to `Accept` header) |
-| lines    | int   | Number of lines of output to return (alternative to `Range` header)                |
+| Query     | type  | description                                                                           |
+| --------  | ----- | -----------------------------------------------------------------------------------   |
+| verbose   | N/A   | If included, uses `text/x-log` as log output type (alternative to `Accept` header)    |
+| lines     | int   | Number of lines of output to return (alternative to `Range` header)                   |
+| no_colors | N/A   | If included, ANSI escape codes for terminal coloring will be stripped from the output |
 
 Example query string:
 
 ```text
-?verbose&lines=100
+?verbose&lines=100&no_colors
 ```
 
 :::tip
