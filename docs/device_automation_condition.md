@@ -3,6 +3,10 @@ title: "Device conditions"
 sidebar_label: Conditions
 ---
 
+:::warning
+We are currently exploring alternatives to device automations. Existing device automations will continue to work but new device automations won't be accepted.
+:::
+
 Device conditions allow a user to check if a certain condition is met. Examples are is a light on or is the floor wet.
 
 Device conditions are defined as dictionaries. These dictionaries are created by your integration and are passed to your integration to create a function that checks the condition.

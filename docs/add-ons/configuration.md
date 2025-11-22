@@ -197,6 +197,7 @@ Avoid using `config.yaml` as filename in your add-on for anything other than the
 | `realtime` | bool | `false` | Give add-on access to host schedule including `SYS_NICE` for change execution time/priority.
 | `journald` | bool | `false` | If set to `true`, the host's system journal will be mapped read-only into the add-on. Most of the time the journal will be in `/var/log/journal` however on some hosts you will find it in `/run/log/journal`. Add-ons relying on this capability should check if the directory `/var/log/journal` is populated and fallback on `/run/log/journal` if not.
 | `breaking_versions` | list | | List of breaking versions of the addon. A manual update will always be required if the update is to a breaking version or would cross a breaking version, even if users have auto-update enabled for the addon.
+| `ulimits` | dict | | Dictionary of resource limit (ulimit) settings for the add-on container. Each limit can be either a plain integer value or a dictionary with the keys `soft` and `hard`, each taking a plain integer for fine-grained control. Individual values must not be larger than the host's hard limit (inspectable by `ulimit -Ha`; e.g. 524288 in case of the `nofile` limit in the Home Assistant Operating System). |
 
 ### Options / Schema
 
@@ -222,7 +223,17 @@ count: 1.2
 :::note
 If you remove a configuration option from an add-on already deployed to users, it is recommended to delete the option to avoid a warning like `Option '<options_key>' does not exist in the schema for <Add-on Name> (<add-on slug>)`.
 
-To remove an option the Supervisor addons API can be used. Using bashio this boils down to `bashio::addon.option '<options_key>'` (without additional argument to delete this option key). Typically this should be called inside an if block checking if the option is still set using `bashio::config.exists '<options_key>'`.
+To remove an option the Supervisor addons API can be used. Using bashio this boils down to `bashio::addon.option '<options_key>'` (without additional argument to delete this option key). To check if the option is still set, check the content of the options dictionary like so:
+
+```sh
+options=$(bashio::addon.options)
+old_key='test'
+if bashio::jq.exists "${options}" ".${old_key}"; then
+    bashio::log.info "Removing ${old_key}"
+    bashio::addon.option "${old_key}"
+fi
+```
+
 :::
 
 
@@ -235,6 +246,9 @@ logins:
     password: str
 random:
   - "match(^\\w*$)"
+ssh:
+  private_key: str
+  public_key: str
 link: url
 size: "int(5,20)"
 count: float
@@ -297,6 +311,16 @@ configuration:
   ssl:
     name: Enable SSL
     description: Enable usage of SSL on the webserver inside the add-on
+  ssh:
+    name: SSH Options
+    description: Configure SSH authentication options
+    fields:
+      public_key:
+        name: Public Key
+        description: Client Public Key
+      private_key:
+        name: Private Key
+        description: Client Private Key
 ```
 
 _The key under `configuration` (`ssl`) in this case, needs to match a key in your `schema` configuration (in [`config.yaml`](#add-on-configuration))._

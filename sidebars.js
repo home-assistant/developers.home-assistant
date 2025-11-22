@@ -27,7 +27,10 @@ module.exports = {
     "add-ons/repository",
     "add-ons/security",
   ],
-  Overview: ["architecture_index"],
+  Overview: [
+    "architecture_index",
+    "setup_devcontainer_environment"
+  ],
   Frontend: [
     "frontend",
     "frontend/architecture",
@@ -68,11 +71,32 @@ module.exports = {
   OperatingSystem: [
     "operating-system",
     "operating-system/getting-started",
+    "operating-system/configuration",
     "operating-system/debugging",
     "operating-system/partition",
     "operating-system/board-metadata",
+    "operating-system/network",
     "operating-system/deployment",
     "operating-system/update-system",
+    {
+      type: "category",
+      label: "Board support",
+      items: [
+        "operating-system/boards/overview",
+        "operating-system/boards/asus",
+        "operating-system/boards/generic-aarch64",
+        "operating-system/boards/generic-x86-64",
+        "operating-system/boards/hardkernel",
+        "operating-system/boards/odroid-c2",
+        "operating-system/boards/odroid-c4",
+        "operating-system/boards/odroid-m1",
+        "operating-system/boards/odroid-m1s",
+        "operating-system/boards/odroid-n2",
+        "operating-system/boards/odroid-xu4",
+        "operating-system/boards/raspberrypi",
+        "operating-system/boards/ova",
+      ],
+    },
   ],
   Supervisor: [
     "supervisor",
@@ -209,6 +233,7 @@ module.exports = {
     },
     "config_entries_index",
     "data_entry_flow_index",
+    "automations",
     {
       type: "category",
       label: "Device Automations",
@@ -300,6 +325,7 @@ module.exports = {
         "documenting/general-style-guide",
         "documenting/yaml-style-guide",
         "documenting/create-page",
+        "documenting/remove-page",
         "documenting/integration-docs-examples",
       ],
     },
@@ -351,6 +377,7 @@ module.exports = {
         "android/tips/sarif_reports",
         "android/tips/release",
         "android/tips/dev_playground",
+        "android/tips/strict_mode",
       ],
     },
     "android/best_practices",

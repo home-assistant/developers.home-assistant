@@ -64,10 +64,11 @@ def async_get_options_schema(
 When interacting with the LLM, the provided `ChatLog` will make any selected tools available from the selected API and the conversation entity should pass them to the LLM together with the extra prompt provided by the API.
 
 ```python
-from homeassistant.const import CONF_LLM_HASS_API
+from homeassistant.const import CONF_LLM_HASS_API, CONF_PROMPT
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.components import conversation
 from homeassistant.helpers import intent, llm
+from .const import DOMAIN
 
 
 class MyConversationEntity(conversation.ConversationEntity):
@@ -86,11 +87,11 @@ class MyConversationEntity(conversation.ConversationEntity):
         """Call the API."""
 
         try:
-            await chat_log.async_update_llm_data(
-                DOMAIN,
-                user_input,
+            await chat_log.async_provide_llm_data(
+                user_input.as_llm_context(DOMAIN),
                 self.entry.options.get(CONF_LLM_HASS_API),
                 self.entry.options.get(CONF_PROMPT),
+                user_input.extra_system_prompt,
             )
         except conversation.ConverseError as err:
             return err.as_conversation_result()

@@ -95,10 +95,14 @@ The example strings file below describes the different supported keys. Although 
       "invalid_api_key": "This message will be displayed if `invalid_api_key` is returned as a flow error."
     },
     "abort": {
-      "stale_api_key": "This message will be displayed if `stale_api_key` is returned as the abort reason."
+      "stale_api_key": "This message will be displayed if `stale_api_key` is returned as the abort reason. Supports Markdown."
     },
     "progress": {
-      "slow_task": "This message will be displayed if `slow_task` is returned as `progress_action` for `async_show_progress`."
+      "slow_task": "This message will be displayed if `slow_task` is returned as `progress_action` for `async_show_progress`. Supports Markdown."
+    },
+    "create_entry": {
+      "default": "This message will be displayed in the success dialog if `async_create_entry` is called with `description=None`. Supports Markdown.",
+      "custom": "This message will be displayed in the success dialog if `async_create_entry` is called with `description='custom'`. Supports Markdown."
     }
   },
   "options": {
@@ -149,6 +153,23 @@ The translation for selectors are defined under the `selector` key. It supports 
   }
 }
 
+```
+
+The `unit_of_measurement` of a number selector may also be translated with a translation key:
+```json
+{
+  // Translations for number selector to be used in option and config flows
+  "selector": {
+    // The key is linked to the `translation_key` that needs to be set
+    // using the NumberSelectorConfig class
+    "round_digits": {
+      // The translations for the number selector unit_of_measurement
+      "unit_of_measurement": {
+        "decimals": "decimals"
+      }
+    }
+  }
+}
 ```
 
 ### Service Actions

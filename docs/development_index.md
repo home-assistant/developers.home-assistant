@@ -7,4 +7,5 @@ The core of Home Assistant is built from the ground up to be easily extensible u
 
 Before you start, make sure that you have read up on the overall [Home Assistant architecture](architecture_index.md) so that you are familiar with the concepts that make up Home Assistant.
 
-If you run into trouble following this documentation, don't hesitate to join our #devs_core channel on [Discord](https://www.home-assistant.io/join-chat/).
+For support or questions about contributing to Home Assistant development, join **#developers** or create a thread in **#support** on [Discord](https://www.home-assistant.io/join-chat/).
+Assign the Developer role: in the sidebar, select **Channels & Roles**, then choose **I want to contribute dev skills to Home Assistant** to gain access to these channels.

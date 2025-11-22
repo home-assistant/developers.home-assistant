@@ -4,10 +4,10 @@ title: "Contributing translation"
 
 Translations for Home Assistant are managed through [Lokalise](https://lokalise.com/), an online translation management tool. Our translations are split between four projects: a backend project for platform-specific translations, a frontend project for UI translations, and two for the official companion apps. Click the links below to join the projects! Even if your language is completely translated, extra proofreading is a big help! Please feel free to review the existing translations, and vote for alternatives that might be more appropriate.
 
-- [Join the frontend translation team](https://lokalise.com/signup/3420425759f6d6d241f598.13594006/all/)
-- [Join the backend translation team](https://lokalise.com/signup/130246255a974bd3b5e8a1.51616605/all/)
-- [Join the iOS translation team](https://lokalise.com/signup/834452985a05254348aee2.46389241/all/)
-- [Join the Android translation team](https://lokalise.com/public/145814835dd655bc5ab0d0.36753359/)
+- [Join the frontend translation team](https://app.lokalise.com/public/3420425759f6d6d241f598.13594006/)
+- [Join the backend translation team](https://app.lokalise.com/public/130246255a974bd3b5e8a1.51616605/)
+- [Join the iOS translation team](https://app.lokalise.com/public/834452985a05254348aee2.46389241/)
+- [Join the Android translation team](https://app.lokalise.com/public/145814835dd655bc5ab0d0.36753359/)
 
 For more information about the translation editor and tools, please see the [Lokalise translate and collaborate documents](https://docs.lokalise.com/en/collections/2909016-translate-and-collaborate).
 
@@ -47,7 +47,7 @@ Region specific translations (`en-US`, `fr-CA`) will only be included if transla
 
 1. Language tags  have to follow [BCP 47](https://tools.ietf.org/html/bcp47). A list of most language tags can be found here: [IANA subtag registry](http://www.iana.org/assignments/language-subtag-registry/language-subtag-registry). Examples: `fr`, `fr-CA`, `zh-Hans`. Only include the country code if country specific overrides are being included, and the base language is already translated.
 2. Add the language tag and native name in `src/translations/translationMetadata.json`.  Examples: "Français", "Français (CA)"
-3. Add the new language in Lokalize.
+3. Add the new language in Lokalise.
 Note: Sometimes you have to change the tag in Lokalise (Language -> Language settings -> custom ISO code).
 
 ## Language specific guidelines

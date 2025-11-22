@@ -12,15 +12,15 @@
     "deploy": "docusaurus deploy"
   },
   "dependencies": {
-    "@docusaurus/core": "^3.8.1",
-    "@docusaurus/preset-classic": "^3.8.1",
-    "@docusaurus/theme-mermaid": "^3.8.1",
-    "@mdx-js/react": "^3.1.0",
-    "@easyops-cn/docusaurus-search-local": "^0.51.1",
+    "@docusaurus/core": "^3.9.2",
+    "@docusaurus/preset-classic": "^3.9.2",
+    "@docusaurus/theme-mermaid": "^3.9.2",
+    "@mdx-js/react": "^3.1.1",
+    "@easyops-cn/docusaurus-search-local": "^0.52.1",
     "by-node-env": "^2.0.1",
     "clsx": "^2.1.1",
-    "react-dom": "19.1.0",
-    "react": "^19.1.0",
+    "react-dom": "^19.2.0",
+    "react": "^19.2.0",
     "yaml-loader": "^0.8.1"
   },
   "resolutions": {},
