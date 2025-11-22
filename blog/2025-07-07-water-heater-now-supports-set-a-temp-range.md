@@ -11,8 +11,15 @@ As of Home Assistant Core 2025.8, the `WaterHeaterEntity` now also supports sett
 Entities needs to set the `TARGET_TEMPERATURE_RANGE` supported feature to enable use of setting a target temperature range.
 
 ```python
-
-from homeassistant.components.water_heater import WaterHeaterEntity, WaterHeaterEntityFeature
+from typing import Any
+from homeassistant.components.water_heater import (
+    WaterHeaterEntity,
+    WaterHeaterEntityFeature,
+)
+from homeassistant.components.water_heater.const import (
+    ATTR_TARGET_TEMP_LOW,
+    ATTR_TARGET_TEMP_HIGH,
+)
 
 class MyWaterHeater(WaterHeaterEntity):
     """My water heater."""
