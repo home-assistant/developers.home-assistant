@@ -6,7 +6,7 @@ authorTwitter: GJohansson
 title: "Water heater now supports setting a temperature range"
 ---
 
-As of Home Assistant Core 2025.8, the `WaterHeaterEntity` now also supports setting a temperature range in addition to only setting a temperature.
+As of Home Assistant Core 2025.12, the `WaterHeaterEntity` now also supports setting a temperature range in addition to only setting a temperature.
 
 Entities needs to set the `TARGET_TEMPERATURE_RANGE` supported feature to enable use of setting a target temperature range.
 
