@@ -47,13 +47,13 @@ Properties have to follow the units defined in the `temperature_unit`.
 Supported features are defined by using values in the `WaterHeaterEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.
 
-| Value                       | Description                    |
-| --------------------------- | ------------------------------ |
-| `TARGET_TEMPERATURE`        | Temperature can be set         |
-| `OPERATION_MODE`            | Operation mode can be set      |
-| `AWAY_MODE`                 | Away mode can be set           |
-| `ON_OFF`                    | Can be turned on or off        |
-| `TARGET_TEMPERATURE_RANGE`  | Temperature range can be set   |
+| Value                       | Description
+| --------------------------- | ----------------------------
+| `TARGET_TEMPERATURE`        | Temperature can be set
+| `OPERATION_MODE`            | Operation mode can be set
+| `AWAY_MODE`                 | Away mode can be set
+| `ON_OFF`                    | Can be turned on or off
+| `TARGET_TEMPERATURE_RANGE`  | Temperature range can be set
 
 ## Methods
 
