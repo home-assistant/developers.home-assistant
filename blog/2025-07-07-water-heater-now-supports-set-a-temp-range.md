@@ -26,7 +26,7 @@ class MyWaterHeater(WaterHeaterEntity):
         """Set new target temperature."""
         min_temp = kwargs[ATTR_TARGET_TEMP_LOW]
         max_temp = kwargs[ATTR_TARGET_TEMP_HIGH]
-        self.my_device.set_temperature(min_tenp, max_temp)
+        self.my_device.set_temperature(min_temp, max_temp)
 
 ```
 
