@@ -7,7 +7,7 @@ title: Add a status callback for MQTT subscriptions
 
 ## Add a status callback for MQTT subscriptions
 
-Integrations that use MQTT might need to wait for a subscription to complete before they initiate actions. The default behavior is that a subscription is queued and debounced, so callers usually do not wait for broker confirmation. Some integrations must guarantee that the broker finished the subscription. To support this requirement, the MQTT subscribe API adds a `on_subscribe_status` callback option.
+Integrations that use MQTT might need to wait for a subscription to complete before they initiate actions. The default behavior is that a subscription is queued and debounced, so callers usually do not wait for broker confirmation. Some integrations must guarantee that the broker finished the subscription. To support this requirement, the MQTT subscribe API adds a `on_subscribe` callback option.
 
 The new async signature for MQTT subscribe that supports the new callback option is:
 
@@ -19,7 +19,7 @@ async def async_subscribe(
     msg_callback: Callable[[ReceiveMessage], Coroutine[Any, Any, None] | None],
     qos: int = DEFAULT_QOS,
     encoding: str | None = DEFAULT_ENCODING,
-    on_subscribe_status: CALLBACK_TYPE,
+    on_subscribe: CALLBACK_TYPE,
 ) -> CALLBACK_TYPE:
     """Subscribe to an MQTT topic.
 
@@ -55,7 +55,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         "myintegration/updates",
         async_subscribe_callback,
         qos=1,
-        on_subscribe_status=_on_subscribe_status
+        on_subscribe=_on_subscribe_status
     )
 
     # Do some stuff
