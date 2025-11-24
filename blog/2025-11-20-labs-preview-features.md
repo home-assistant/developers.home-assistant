@@ -18,22 +18,7 @@ Think of it this way:
 
 ## How it works
 
-Labs features are defined in an integration's `manifest.json`:
-
-```json
-{
-  "domain": "my_integration",
-  "preview_features": {
-    "my_preview_feature": {
-      "feedback_url": "https://community.home-assistant.io/t/...",
-      "learn_more_url": "https://www.home-assistant.io/integrations/my_integration",
-      "report_issue_url": "https://github.com/home-assistant/core/issues/new"
-    }
-  }
-}
-```
-
-Users can enable preview features in **Settings** → **System** → **Labs**, and the features activate immediately without requiring a restart.
+Integrations declare preview features in their `manifest.json` with links for feedback, documentation, and issue reporting. Users can then enable these features in **Settings** → **System** → **Labs**, and they activate immediately without requiring a restart. The integration code checks whether a feature is enabled and responds accordingly.
 
 ## Why Labs?
 
