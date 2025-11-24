@@ -14,6 +14,7 @@ To create a new integration page, follow these steps:
 4. Make sure to add [icon and logo](#images-icons-and-logos) to the brands repository.
 5. Document the needed steps to retrieve API keys or access token for the third party service or device if needed.
 6. Add the type of the devices (incl. firmware) you have tested when you know that there are multiple out there.
+7. Before marking your PR as **Ready for review**, remove the comments.
 
 ## About the integration page header format
 
