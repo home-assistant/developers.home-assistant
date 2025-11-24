@@ -5,16 +5,16 @@ authorImageURL: https://avatars.githubusercontent.com/u/195327?v=4
 title: "Introducing Labs: Preview features before they become standard"
 ---
 
-We're excited to announce a new system for shipping preview features in Home Assistant: **Labs**. Labs provides a standardized way for integrations to offer features that are free of critical bugs and that users can opt into before they become standard.
+We're excited to announce a new system for shipping preview features in Home Assistant: **Labs**. Labs provides a standardized way for integrations to offer fully tested features that users can opt into before they become standard, allowing us to gather feedback and refine the design based on real-world usage.
 
 ## What are Labs preview features?
 
-Labs preview features are different from beta testing. While beta testing evaluates the stability of upcoming Home Assistant releases, Labs features are already fully functional and free of critical bugs. However, their design and behavior may still change as we gather real-world usage and feedback. This means they might have breaking changes, be extended with new functionality, or even be removed if they don't work out.
+Labs preview features are different from beta testing. While beta testing evaluates the stability of upcoming Home Assistant releases, Labs is about refining user interfaces and design. Labs features are fully tested and functional, but their design and behavior may still change as we gather real-world usage and feedback. This means they might have breaking changes, be extended with new functionality, or even be removed if they don't work out.
 
 Think of it this way:
 
 - **Beta**: Evaluates the stability of upcoming Home Assistant releases
-- **Labs**: Preview features that are free of critical bugs, being refined through real-world usage and feedback
+- **Labs**: Fully tested features with evolving design and user interface, refined through real-world usage and feedback
 
 ## How it works
 
@@ -41,7 +41,7 @@ Many of our most significant improvements benefit from real-world testing before
 
 1. **Structured feedback channels**: Each feature has dedicated URLs for feedback, documentation, and issue reporting
 2. **Runtime activation**: Features enable and disable instantly, no configuration updates or restart required
-3. **Clear expectations**: Users know they're trying preview features that are free of critical bugs but may change based on feedback
+3. **Clear expectations**: Users know they're trying fully tested features whose design may change based on feedback
 4. **Iterative development**: Integrate user feedback directly into the development process
 
 ## Example: Kitchen Sink special repair

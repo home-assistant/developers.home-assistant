@@ -7,14 +7,14 @@ Home Assistant Labs provides a standardized way to ship preview features that us
 
 ## What are Labs preview features?
 
-Labs preview features are fully functional features that are free of critical bugs and are being refined through real-world usage and feedback before becoming standard in Home Assistant. These features are:
+Labs preview features are fully tested and functional features whose user interface and design are being refined through real-world usage and feedback before becoming standard in Home Assistant. These features are:
 
 - **Optional**: Disabled by default, users must explicitly enable them
-- **Free of critical bugs**: Stable enough for daily use
+- **Fully tested**: Production-ready code, not experimental or incomplete implementations
 - **Subject to change**: May have breaking changes, be extended with new functionality, or be removed based on feedback
 - **Reversible**: Can be disabled at any time without requiring a restart
 
-Labs differs from beta testing, which evaluates the stability of upcoming Home Assistant releases.
+Labs is about refining user interfaces and design, not about testing for bugs. This differs from beta testing, which evaluates the stability of upcoming Home Assistant releases.
 
 ## When to use Labs
 
@@ -516,6 +516,6 @@ If the feature doesn't work out:
 
 ✅ **Do** actively engage with user feedback
 
-✅ **Do** ensure the feature is free of critical bugs before adding it to Labs
+✅ **Do** ensure the feature is fully tested and production-ready before adding it to Labs
 
 ✅ **Do** communicate if the feature set may be extended based on feedback
