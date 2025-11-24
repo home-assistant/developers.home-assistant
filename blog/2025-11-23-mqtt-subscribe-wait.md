@@ -7,7 +7,10 @@ title: Add a status callback for MQTT subscriptions
 
 ## Add a status callback for MQTT subscriptions
 
-Integrations that use MQTT might need to wait for a subscription to complete before they initiate actions. The default behavior is that a subscription is queued and debounced, so callers usually do not wait for broker confirmation. Some integrations must guarantee that the broker finished the subscription. The  `mqtt.async_on_subscribe_done` helper can be used to monitor  MQTT subscriptions, to allow doing additional task. Make sure the same QoS is used as in the MQTT subscription.
+Integrations that use MQTT might need to wait for a subscription to complete before they initiate actions. The default behavior is that a subscription is queued and debounced, so callers usually do not wait for broker confirmation. Some integrations must guarantee that the broker finished the subscription.
+
+The new `mqtt.async_on_subscribe_done` helper can be used to monitor MQTT subscriptions, to allow doing additional tasks.
+Make sure the same QoS is used as in the MQTT subscription.
 
 Example:
 
