@@ -11,7 +11,7 @@ Labs preview features are fully functional features that are free of critical bu
 
 - **Optional**: Disabled by default, users must explicitly enable them
 - **Free of critical bugs**: Stable enough for daily use
-- **Subject to change**: Feature set and behavior may be extended or refined based on feedback
+- **Subject to change**: May have breaking changes, be extended with new functionality, or be removed based on feedback
 - **Reversible**: Can be disabled at any time without requiring a restart
 
 Labs differs from beta testing, which evaluates the stability of upcoming Home Assistant releases.
@@ -26,8 +26,7 @@ Labs is appropriate for:
 
 Labs is **not** appropriate for:
 
-- Permanent configuration options (use integration options instead)
-- Integration-specific settings (use the integration's config flow)
+- Configuration options that should be standard functionality (use integration options or config flow instead)
 - Minor changes that can go directly into releases
 - Features that can't be toggled at runtime
 - Features with critical bugs or that are fundamentally incomplete (these should remain in development)
@@ -80,7 +79,6 @@ Guidelines for descriptions:
 - Clearly explain what the feature does
 - Keep it concise but informative
 - Mention if the feature set may be extended in future releases
-- Use sentence case
 - You can use Markdown formatting (bold, links, etc.)
 
 #### Custom confirmation messages (optional)
@@ -92,9 +90,9 @@ You can customize the confirmation messages shown when users enable or disable y
   "preview_features": {
     "my_preview_feature": {
       "name": "My preview feature",
-      "description": "Enables the new preview feature that does X, Y, and Z.\n\nThis feature is stable but may change based on user feedback.",
-      "enable_confirmation": "Enabling this feature will migrate your existing configuration to a new format. You can disable it later, but the configuration will remain in the new format.",
-      "disable_confirmation": "Disabling this feature will stop the new behavior, but your configuration will remain in the migrated format. You may need to manually adjust settings if you re-enable it."
+      "description": "Enables the new preview feature that does X, Y, and Z.\n\n**Note:** Enabling this feature will migrate your configuration to a new format. The configuration will remain in the new format even if you disable the feature later.\n\nThis feature is stable but may change based on user feedback.",
+      "enable_confirmation": "This will migrate your existing configuration to the new format. You can disable the feature later, but the configuration will remain migrated.",
+      "disable_confirmation": "This will stop the new behavior, but your configuration will remain in the migrated format."
     }
   }
 }
@@ -109,10 +107,10 @@ You can customize the confirmation messages shown when users enable or disable y
 
 **Guidelines:**
 
+- **Include important consequences in the description**: Users should be able to understand what happens by reading the description, not just the confirmation
+- Use confirmations to remind users of key points at the moment of action
 - Be specific about what will happen when enabling/disabling
-- Mention if changes persist after disabling
 - Keep messages concise but informative
-- Use sentence case
 - Don't repeat generic information (users already see standard warnings)
 
 ### 3. Implement the feature
@@ -219,10 +217,9 @@ Create appropriate feedback channels before releasing your feature:
 
 1. **Community forum**: Create a topic in the "Beta" or "Feature Requests" category
 2. **GitHub**: Optionally create a discussion or designate an issue for feedback
-3. **Feedback form**: Use Google Forms, Typeform, or similar to collect structured feedback
-4. Link these in your feature definition's `feedback_url`
+3. Link these in your feature definition's `feedback_url`
 
-Choose the channel that best fits your needs. Community forum threads work well for open discussion, GitHub for technical feedback, and forms for structured data collection.
+Choose the channel that best fits your needs. Community forum threads work well for open discussion, while GitHub is better suited for technical feedback and issue tracking.
 
 ### 6. Update generated files
 
@@ -384,6 +381,15 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 - Log appropriately (use debug level for non-critical info)
 - Make the feature fully reversible
 
+### Handling changes
+
+While Labs features can have breaking changes:
+
+- **Avoid breaking changes when possible**: Even in preview, try to maintain compatibility
+- **Provide automatic migration when possible**: When breaking changes are necessary, migrate user data and settings automatically if feasible
+- **Communicate changes**: Update the feature description and notify users through appropriate channels
+- **Take care of users**: Even though it's a preview, users are relying on these features in their homes
+
 ### Code organization
 
 ```python
@@ -464,6 +470,8 @@ async def test_feature_toggle(hass, mock_config_entry, hass_ws_client):
 - Monitor feedback channels regularly
 - Iterate based on user feedback
 - Update the feature as needed (it's a preview!)
+- Breaking changes are acceptable if they improve the feature, but avoid them when possible
+- When breaking changes are necessary, provide automatic migration for users when possible
 - Keep the feature description accurate
 - Respond to bug reports promptly
 

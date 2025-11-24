@@ -9,7 +9,7 @@ We're excited to announce a new system for shipping preview features in Home Ass
 
 ## What are Labs preview features?
 
-Labs preview features are different from beta testing. While beta testing evaluates the stability of upcoming Home Assistant releases, Labs features are already fully functional and free of critical bugs. However, their feature set and behavior may still be extended or refined as we gather real-world usage and feedback before they become standard.
+Labs preview features are different from beta testing. While beta testing evaluates the stability of upcoming Home Assistant releases, Labs features are already fully functional and free of critical bugs. However, their design and behavior may still change as we gather real-world usage and feedback. This means they might have breaking changes, be extended with new functionality, or even be removed if they don't work out.
 
 Think of it this way:
 
