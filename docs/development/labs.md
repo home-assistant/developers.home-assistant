@@ -7,16 +7,22 @@ Home Assistant Labs provides a standardized way to ship preview features that us
 
 ## What are Labs preview features?
 
-Labs preview features are critical bug free features that are being refined through real-world usage and feedback before becoming standard in Home Assistant. While fully functional, their feature set may still be extended or refined based on user feedback. They differ from beta testing, which evaluates release stability.
+Labs preview features are fully functional features that are free of critical bugs and are being refined through real-world usage and feedback before becoming standard in Home Assistant. These features are:
+
+- **Optional**: Disabled by default, users must explicitly enable them
+- **Free of critical bugs**: Stable enough for daily use
+- **Subject to change**: Feature set and behavior may be extended or refined based on feedback
+- **Reversible**: Can be disabled at any time without requiring a restart
+
+Labs differs from beta testing, which evaluates the stability of upcoming Home Assistant releases.
 
 ## When to use Labs
 
 Labs is appropriate for:
 
-- Major UI changes or redesigns that benefit from user feedback
+- Major UI changes or redesigns
 - Significant architectural changes
-- Features that need real-world testing to refine the user experience
-- Functionality where user feedback will shape the final design
+- Features where user feedback will shape the final design and implementation
 
 Labs is **not** appropriate for:
 
@@ -148,43 +154,46 @@ if (featureEnabled) {
 
 #### React to feature toggles
 
-Subscribe to the `EVENT_LABS_UPDATED` event to react when users toggle your feature:
+Use the `async_listen()` helper to easily subscribe to feature toggle events:
 
 ```python
-from homeassistant.components.labs import EVENT_LABS_UPDATED, EventLabsUpdatedData
-from homeassistant.core import Event, callback
-
-@callback
-def _async_labs_updated(event: Event[EventLabsUpdatedData]) -> None:
-    """Handle labs feature update event."""
-    if (
-        event.data["domain"] == DOMAIN
-        and event.data["preview_feature"] == "my_preview_feature"
-    ):
-        _async_update_my_preview_feature(hass)
+from homeassistant.components.labs import async_listen, async_is_preview_feature_enabled
+from homeassistant.core import HomeAssistant, callback
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up the integration."""
-    # Subscribe to changes
-    entry.async_on_unload(
-        hass.bus.async_listen(EVENT_LABS_UPDATED, _async_labs_updated)
-    )
-    
-    # Check current state and apply
-    _async_update_my_preview_feature(hass)
-    
-    return True
 
-@callback
-def _async_update_my_preview_feature(hass: HomeAssistant) -> None:
-    """Enable or disable the preview feature based on current state."""
-    if async_is_preview_feature_enabled(hass, DOMAIN, "my_preview_feature"):
-        # Enable feature
-        enable_my_feature(hass)
-    else:
-        # Disable feature
-        disable_my_feature(hass)
+    @callback
+    def _async_update_my_preview_feature() -> None:
+        """Enable or disable the preview feature based on current state."""
+        if async_is_preview_feature_enabled(hass, DOMAIN, "my_preview_feature"):
+            # Enable feature
+            enable_my_feature(hass)
+        else:
+            # Disable feature
+            disable_my_feature(hass)
+
+    # Subscribe to changes for this specific feature
+    entry.async_on_unload(
+        async_listen(
+            hass,
+            DOMAIN,
+            "my_preview_feature",
+            _async_update_my_preview_feature,
+        )
+    )
+
+    # Check current state and apply
+    _async_update_my_preview_feature()
+
+    return True
 ```
+
+The `async_listen()` helper automatically filters events for your domain and feature, simplifying the event handling code.
+
+:::info
+For more complex scenarios or multiple preview features, you can still use the lower-level `EVENT_LABS_UPDATED` event directly. The `async_listen()` helper is recommended for most use cases as it reduces boilerplate and improves code readability.
+:::
 
 ### 4. Runtime activation required
 
@@ -316,57 +325,53 @@ See the Kitchen Sink integration for a complete working example:
 
 ```python
 from homeassistant.components.labs import (
-    EVENT_LABS_UPDATED,
-    EventLabsUpdatedData,
+    async_listen,
     async_is_preview_feature_enabled,
 )
-from homeassistant.core import Event, callback
+from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.issue_registry import (
     IssueSeverity,
     async_create_issue,
     async_delete_issue,
 )
 
-@callback
-def _async_labs_updated(event: Event[EventLabsUpdatedData]) -> None:
-    """Handle labs feature update event."""
-    if (
-        event.data["domain"] == "kitchen_sink"
-        and event.data["preview_feature"] == "special_repair"
-    ):
-        _async_update_special_repair(hass)
-
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up the integration."""
-    # Subscribe to labs feature updates
-    entry.async_on_unload(
-        hass.bus.async_listen(EVENT_LABS_UPDATED, _async_labs_updated)
-    )
-    
-    # Check if lab feature is currently enabled and create repair if so
-    _async_update_special_repair(hass)
-    
-    return True
 
-@callback
-def _async_update_special_repair(hass: HomeAssistant) -> None:
-    """Create or delete the special repair issue.
-    
-    Creates a repair issue when the special_repair lab feature is enabled,
-    and deletes it when disabled. This demonstrates how lab features can interact
-    with Home Assistant's repair system.
-    """
-    if async_is_preview_feature_enabled(hass, DOMAIN, "special_repair"):
-        async_create_issue(
+    @callback
+    def _async_update_special_repair() -> None:
+        """Create or delete the special repair issue.
+
+        Creates a repair issue when the special_repair lab feature is enabled,
+        and deletes it when disabled. This demonstrates how lab features can interact
+        with Home Assistant's repair system.
+        """
+        if async_is_preview_feature_enabled(hass, DOMAIN, "special_repair"):
+            async_create_issue(
+                hass,
+                DOMAIN,
+                "kitchen_sink_special_repair_issue",
+                is_fixable=False,
+                severity=IssueSeverity.WARNING,
+                translation_key="special_repair",
+            )
+        else:
+            async_delete_issue(hass, DOMAIN, "kitchen_sink_special_repair_issue")
+
+    # Subscribe to labs feature updates using the async_listen helper
+    entry.async_on_unload(
+        async_listen(
             hass,
             DOMAIN,
-            "kitchen_sink_special_repair_issue",
-            is_fixable=False,
-            severity=IssueSeverity.WARNING,
-            translation_key="special_repair",
+            "special_repair",
+            _async_update_special_repair,
         )
-    else:
-        async_delete_issue(hass, DOMAIN, "kitchen_sink_special_repair_issue")
+    )
+
+    # Check if lab feature is currently enabled and create repair if so
+    _async_update_special_repair()
+
+    return True
 ```
 
 ## Best practices
@@ -503,6 +508,6 @@ If the feature doesn't work out:
 
 ✅ **Do** actively engage with user feedback
 
-✅ **Do** ensure the feature is critical bug-free before adding it to Labs
+✅ **Do** ensure the feature is free of critical bugs before adding it to Labs
 
 ✅ **Do** communicate if the feature set may be extended based on feedback

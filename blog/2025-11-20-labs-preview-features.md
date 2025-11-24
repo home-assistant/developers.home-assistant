@@ -5,16 +5,16 @@ authorImageURL: https://avatars.githubusercontent.com/u/195327?v=4
 title: "Introducing Labs: Preview features before they become standard"
 ---
 
-We're excited to announce a new system for shipping preview features in Home Assistant: **Labs**. Labs provides a standardized way for integrations to offer critical bug-free features that users can opt into before they become standard.
+We're excited to announce a new system for shipping preview features in Home Assistant: **Labs**. Labs provides a standardized way for integrations to offer features that are free of critical bugs and that users can opt into before they become standard.
 
 ## What are Labs preview features?
 
-Labs preview features are different from beta testing. While beta testing evaluates release stability, Labs features are already critical bug-free and fully functional. However, their feature set may still be extended or refined as we gather real-world usage and feedback before graduating them to standard.
+Labs preview features are different from beta testing. While beta testing evaluates the stability of upcoming Home Assistant releases, Labs features are already fully functional and free of critical bugs. However, their feature set and behavior may still be extended or refined as we gather real-world usage and feedback before they become standard.
 
 Think of it this way:
 
-- **Beta**: Testing for stability and bugs
-- **Labs**: Critical bug free features with potentially incomplete feature sets, gathering feedback to refine user experience and extend functionality
+- **Beta**: Evaluates the stability of upcoming Home Assistant releases
+- **Labs**: Preview features that are free of critical bugs, being refined through real-world usage and feedback
 
 ## How it works
 
@@ -41,7 +41,7 @@ Many of our most significant improvements benefit from real-world testing before
 
 1. **Structured feedback channels**: Each feature has dedicated URLs for feedback, documentation, and issue reporting
 2. **Runtime activation**: Features enable and disable instantly, no configuration updates or restart required
-3. **Clear expectations**: Users know they're trying a critical bug free preview feature that may have its feature set extended or refined
+3. **Clear expectations**: Users know they're trying preview features that are free of critical bugs but may change based on feedback
 4. **Iterative development**: Integrate user feedback directly into the development process
 
 ## Example: Kitchen Sink special repair
@@ -76,61 +76,57 @@ Here's how it's implemented:
 }
 ```
 
-**__init__.py** (excerpt):
+`__init__.py` (excerpt):
 
 ```python
 from homeassistant.components.labs import (
-    EVENT_LABS_UPDATED,
-    EventLabsUpdatedData,
+    async_listen,
     async_is_preview_feature_enabled,
 )
-from homeassistant.core import Event
+from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.issue_registry import (
     IssueSeverity,
     async_create_issue,
     async_delete_issue,
 )
 
-@callback
-def _async_labs_updated(event: Event[EventLabsUpdatedData]) -> None:
-    """Handle labs feature update event."""
-    if (
-        event.data["domain"] == "kitchen_sink"
-        and event.data["preview_feature"] == "special_repair"
-    ):
-        _async_update_special_repair(hass)
-
-@callback
-def _async_update_special_repair(hass: HomeAssistant) -> None:
-    """Update special repair based on feature state."""
-    if async_is_preview_feature_enabled(hass, DOMAIN, "special_repair"):
-        # Feature is enabled - create the repair issue
-        async_create_issue(
-            hass,
-            DOMAIN,
-            "kitchen_sink_special_repair_issue",
-            is_fixable=False,
-            severity=IssueSeverity.WARNING,
-            translation_key="special_repair",
-        )
-    else:
-        # Feature is disabled - remove the repair issue
-        async_delete_issue(hass, DOMAIN, "kitchen_sink_special_repair_issue")
-
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up the integration."""
+
+    @callback
+    def _async_update_special_repair() -> None:
+        """Update special repair based on feature state."""
+        if async_is_preview_feature_enabled(hass, DOMAIN, "special_repair"):
+            # Feature is enabled - create the repair issue
+            async_create_issue(
+                hass,
+                DOMAIN,
+                "kitchen_sink_special_repair_issue",
+                is_fixable=False,
+                severity=IssueSeverity.WARNING,
+                translation_key="special_repair",
+            )
+        else:
+            # Feature is disabled - remove the repair issue
+            async_delete_issue(hass, DOMAIN, "kitchen_sink_special_repair_issue")
+
     # Subscribe to labs feature updates for runtime toggling
     entry.async_on_unload(
-        hass.bus.async_listen(EVENT_LABS_UPDATED, _async_labs_updated)
+        async_listen(
+            hass,
+            DOMAIN,
+            "special_repair",
+            _async_update_special_repair,
+        )
     )
-    
+
     # Check current state and apply
-    _async_update_special_repair(hass)
-    
+    _async_update_special_repair()
+
     return True
 ```
 
-The feature listens for `EVENT_LABS_UPDATED` to react when users toggle it, and creates or removes a repair issue accordingly.
+The feature uses the `async_listen()` helper to react when users toggle it, and creates or removes a repair issue accordingly.
 
 ## Getting started
 
@@ -148,7 +144,7 @@ Ready to add a Labs preview feature to your integration? Check out our [comprehe
 We encourage integration developers to consider Labs for:
 
 - Major UI changes or redesigns
-- New subsystems that benefit from real-world testing
+- Significant architectural changes that benefit from real-world testing
 - Features where user feedback will shape the final design
 
 Labs is **not** for:
