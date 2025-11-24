@@ -19,7 +19,7 @@ async def async_subscribe(
     msg_callback: Callable[[ReceiveMessage], Coroutine[Any, Any, None] | None],
     qos: int = DEFAULT_QOS,
     encoding: str | None = DEFAULT_ENCODING,
-    on_subscribe: CALLBACK_TYPE,
+    on_subscribe: CALLBACK_TYPE | None = None,
 ) -> CALLBACK_TYPE:
     """Subscribe to an MQTT topic.
 
