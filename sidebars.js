@@ -233,6 +233,7 @@ module.exports = {
     },
     "config_entries_index",
     "data_entry_flow_index",
+    "development/labs",
     "automations",
     {
       type: "category",
