@@ -149,7 +149,7 @@ The name and description of the service actions are set in our [translations](/d
 ...
     hass.services.async_register(
       DOMAIN,
-      "hello",handle_hello,
+      "hello", handle_hello,
       description_placeholders={"docs_url": "https://example.com/hello_world"},
     )
 ...
