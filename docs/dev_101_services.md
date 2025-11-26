@@ -143,7 +143,7 @@ set_speed:
 ```
 
 :::info
-The name and description of the service actions are set in our [translations](/docs/internationalization/core#services) and not in the service action description. Each service action and service action field must have a matching translation defined. Description placeholders can be used to keep out elements like URLs.
+The name and description of the service actions are set in our [translations](/docs/internationalization/core#services) and not in the service action description. Each service action and service action field must have a matching translation defined. Description placeholders allow you to exclude elements like URLs from translations.
 
 ```python
 ...
