@@ -22,7 +22,7 @@ The example below is a snippet where the service action is registered in the `as
 In this example, the service call requires a configuration entry id as parameter.
 This is used to first fetch the configuration entry, and then check if it is loaded.
 If the configuration entry does not exist or the configuration entry that we found is not loaded, we raise a relevant error which is shown to the user.
-Supply description placeholders to enable translation of service parameters—for example, to reference external resources like documentation URLs that need to be localized or updated independently of the service description.
+Supply description placeholders to enable translation of service parameters, for example, to reference external resources like documentation URLs that need to be localized or updated independently of the service description.
 
 `__init__py`:
 ```python {13-20} showLineNumbers
