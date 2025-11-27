@@ -5,7 +5,7 @@ sidebar_label: "System health"
 
 The system health platform allows integrations to provide information that helps users understand the state of the integration. This can include details such as the availability of an endpoint, the current server that the integration is connected to, how much of a request quota is still available, etc.
 
-Users can find the aggregated system health by going to **Settings** > **Repairs** and selecting **System information** in the three dots menu.
+Users can find the aggregated system health by going to **Settings** -> **System** -> **Repairs** and selecting **System information** in the overflow menu (top right).
 
 ## Implementing the system health platform
 
