@@ -1653,7 +1653,7 @@ This endpoint requires Home Assistant OS 17.0 or newer. A `404` error will be re
 **Payload:**
 
 | key            | type   | optional | description                                           |
-| -------------- | ------ | -------- |-------------------------------------------------------|
+| -------------- | ------ | -------- | ----------------------------------------------------- |
 | storage_driver | string | False    | The target storage driver (`overlayfs` or `overlay2`) |
 
 **Example payload:**
