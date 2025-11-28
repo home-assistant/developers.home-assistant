@@ -84,7 +84,7 @@ Now comes the fun part, time to open the Home Assistant UI and install and run y
 
 [![Open your Home Assistant instance and show the Supervisor add-on store.](https://my.home-assistant.io/badges/supervisor_store.svg)](https://my.home-assistant.io/redirect/supervisor_store/)
 
-- On the top right overflow menu, click the "Check for updates" button
+- On the top three dots menu, click the "Check for updates" button
 - Refresh your webpage when needed
 - You should now see a new section at the top of the store called "Local add-ons" that lists your add-on!
 
