@@ -126,7 +126,7 @@ from homeassistant.helpers.typing import ConfigType, TemplateVarsType
 
 STATE_CONDITION_SCHEMA = vol.Schema(
     {
-        vol.Required(CONF_STATE): vol.In(STATE_ON, STATE_OFF),
+        vol.Required(CONF_STATE): vol.In([STATE_ON, STATE_OFF]),
     }
 )
 
