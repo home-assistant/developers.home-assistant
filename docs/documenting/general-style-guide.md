@@ -7,6 +7,7 @@ Documentation should follow the [Microsoft Style Guide](https://learn.microsoft.
 A few of the most common cases picked up in reviews are listed below:
 
 - The language of the documentation should be American-English.
+- Follow grammar and syntax rules. For example, end sentences with a period.
 - Don't put two spaces after a period.
 - Use a serial comma (also known as the Oxford comma) before the conjunction in a list of three or more items. For example, "Through the use of additional adapters, Home Assistant allows the use of Zigbee, Z-Wave, and other protocols".
 - There is no limit for the line length. You are allowed to write in a flowing text style. This will make it easier to use the GitHub online editor in the future.
@@ -14,7 +15,7 @@ A few of the most common cases picked up in reviews are listed below:
 - The case of brand names, services, protocols, integrations, and platforms must match their respective counterparts. For example, "Z-Wave" _not_ "Zwave", "Z-wave", "Z Wave", or "ZWave". Also, "Input Select" _not_ "input select" or "Input select".
 - Do not use ALL CAPITALS for emphasis - use _italics_ instead.
 - Use [sentence-style capitalization](https://learn.microsoft.com/en-us/style-guide/capitalization), also in headings.
-- Use **bold** to markup UI strings, for example:
+- Use **bold** to markup UI strings and use > in breadcrumbs. For example:
   - Under **Settings**, select the three dots menu. Then, select **Restart Home Assistant** > **Quick reload**.
 - Don't use "e.g.". Instead, use _for example_, _such as_, or _like_.
 - All examples containing Jinja2 templates should be wrapped _outside_ of the code markdown with the `{% raw %}` tag.
