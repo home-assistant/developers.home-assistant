@@ -1187,6 +1187,7 @@ Returns information about the Home Assistant core
 | audio_input              | string or null | The description of the audio input device                  |
 | audio_output             | string or null | The description of the audio output device                 |
 | backups_exclude_database | boolean        | Backups exclude Home Assistant database file by default    |
+| duplicate_log_file       | boolean        | Home Assistant duplicates logs to a file                   |
 
 
 **Example response:**
@@ -1274,6 +1275,7 @@ Passing `image`, `refresh_token`, `audio_input` or `audio_output` with `null` re
 | audio_input              | string or null | Profile name for audio input                                |
 | audio_output             | string or null | Profile name for audio output                               |
 | backups_exclude_database | boolean        | `true` to exclude Home Assistant database file from backups |
+| duplicate_log_file       | boolean        | `true` to duplicate Home Assistant logs to a file           |
 
 **You need to supply at least one key in the payload.**
 
