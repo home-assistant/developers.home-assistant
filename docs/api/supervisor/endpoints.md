@@ -1639,6 +1639,37 @@ To login to the default container registry (Docker Hub), use `hub.docker.com` as
 Delete a registry from the configured container registries.
 </ApiEndpoint>
 
+<ApiEndpoint path="/docker/migrate-storage-driver" method="post">
+Schedule a Docker storage driver migration. The migration will be applied on the next system reboot.
+
+This endpoint allows migrating to either:
+- `overlayfs`: The Containerd overlayfs driver
+- `overlay2`: The Docker graph overlay2 driver
+
+:::note
+
+This endpoint requires Home Assistant OS 17.0 or newer. A `404` error will be returned on older versions or non-HAOS installations.
+
+:::
+
+**Payload:**
+
+| key            | type   | optional | description                                           |
+| -------------- | ------ | -------- | ----------------------------------------------------- |
+| storage_driver | string | False    | The target storage driver (`overlayfs` or `overlay2`) |
+
+**Example payload:**
+
+```json
+{
+  "storage_driver": "overlayfs"
+}
+```
+
+After calling this endpoint, a reboot is required to apply the migration. The response will create a `reboot_required` issue in the resolution center.
+
+</ApiEndpoint>
+
 ### Hardware
 
 <ApiEndpoint path="/hardware/info" method="get">
