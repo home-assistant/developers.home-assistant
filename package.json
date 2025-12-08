@@ -19,8 +19,8 @@
     "@easyops-cn/docusaurus-search-local": "^0.52.2",
     "by-node-env": "^2.0.1",
     "clsx": "^2.1.1",
-    "react-dom": "^19.2.0",
-    "react": "^19.2.0",
+    "react-dom": "^19.2.1",
+    "react": "^19.2.1",
     "yaml-loader": "^0.8.1"
   },
   "resolutions": {},
