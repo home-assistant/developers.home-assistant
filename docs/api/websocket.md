@@ -582,7 +582,7 @@ When `expand_group` is set to `true`, group entities will be expanded to include
 
 ## Get triggers/conditions/services for target
 
-The `get_triggers_for_target`, `get_conditions_for_target`, and `get_services_for_target` commands allows you to get all applicable triggers, conditions, and services for entities within a given target. The three services share the same input and output format.
+The `get_triggers_for_target`, `get_conditions_for_target`, and `get_services_for_target` commands allows you to get all applicable triggers, conditions, and services for entities of a given target. The three services share the same input and output format.
 
 ```json
 {
@@ -601,7 +601,7 @@ The `get_triggers_for_target`, `get_conditions_for_target`, and `get_services_fo
 
 The target parameter follows the same structure as service call targets.
 
-The server will respond with a set of trigger/condition/service identifiers that are applicable to any of the entities in the target, in the format `domain.trigger_name`:
+The server will respond with a set of trigger/condition/service identifiers that are applicable to any of the entities of the target, in the format `domain.trigger_name`:
 
 ```json
 {
