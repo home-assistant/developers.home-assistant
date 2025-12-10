@@ -7,9 +7,8 @@ sidebar_label: Raspberry Pi
 
 | Device              | Release Date  | Support         | Config             |
 |---------------------|---------------|-----------------|--------------------|
-| Raspberry Pi 2 B    |2015           | not recommended | [rpi2](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/configs/rpi2_defconfig)             |
-| Raspberry Pi 3 B/B+ |2016/2018      | yes             | [rpi3](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/configs/rpi3_defconfig) / [rpi3_64](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/configs/rpi3_64_defconfig) |
-| Raspberry Pi 4 B    |2019           | yes             | [rpi4](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/configs/rpi4_defconfig) / [rpi4_64](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/configs/rpi4_64_defconfig) |
+| Raspberry Pi 3 B/B+ |2016/2018      | yes             | [rpi3_64](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/configs/rpi3_64_defconfig) |
+| Raspberry Pi 4 B    |2019           | yes             | [rpi4_64](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/configs/rpi4_64_defconfig) |
 | Raspberry Pi 5      |2023           | yes (beta)      | [rpi5_64](https://github.com/home-assistant/operating-system/tree/dev/buildroot-external/configs/rpi5_64_defconfig) |
 
 ## Serial console
@@ -28,11 +27,11 @@ i2c-bcm2708
 
 ## USB Boot
 
-USB mass storage boot is available on Raspberry Pi 4 (64-bit only), 3B, 3B+, 3A+, and 2B v1.2.
+USB mass storage boot is available on Raspberry Pi 4 (64-bit only), 3B, 3B+ and 3A+.
 
-For Raspberry 3B, 3A+ and 2B v1.2, to enable USB boot, add `program_usb_boot_mode=1` into `config.txt`. Note that this **permanently** alters the one-time programmable memory of the device.
+For Raspberry Pi 3B and 3A+, to enable USB boot, add `program_usb_boot_mode=1` into `config.txt`. Note that this **permanently** alters the one-time programmable memory of the device.
 
-For Raspberry 4
+For Raspberry Pi 4
 
 * Make sure to update the bootloader to a stable release supporting USB mass storage boot (see [bcm2711_bootloader_config.md](https://www.raspberrypi.org/documentation/hardware/raspberrypi/bcm2711_bootloader_config.md#usbmassstorageboot)). 
 * If no SD card is used add `sd_poll_once=on` to `dtparam` in `config.txt` (comma separated). This gets rid of `mmc0: timeout waiting for hardware interrupt` kernel errors.
