@@ -580,6 +580,46 @@ The response includes:
 
 When `expand_group` is set to `true`, group entities will be expanded to include their member entities instead of the group entity itself.
 
+## Get triggers/conditions/services for target
+
+The `get_triggers_for_target`, `get_conditions_for_target`, and `get_services_for_target` commands allow you to get all applicable triggers, conditions, and services for entities of a given target. The three commands share the same input and output format.
+
+```json
+{
+  "id": 20,
+  "type": "get_triggers_for_target",
+  "target": {
+    "entity_id": ["light.kitchen", "light.living_room"],
+    "device_id": ["device_abc123"],
+    "area_id": ["bedroom"],
+    "label_id": ["smart_lights"]
+  },
+  // Optional: expand group entities to their members (default: true)
+  "expand_group": true
+}
+```
+
+The target parameter follows the same structure as service call targets.
+
+The server will respond with a set of trigger/condition/service identifiers that are applicable to any of the entities of the target, in the format `domain.trigger_name`:
+
+```json
+{
+  "id": 20,
+  "type": "result",
+  "success": true,
+  "result": [
+    "homeassistant.event",
+    "homeassistant.state",
+    "light.turned_on",
+    "light.turned_off",
+    "light.toggle"
+  ]
+}
+```
+
+When `expand_group` is set to `true` (default), group entities will be expanded to include their member entities, and triggers applicable to any member will be included in the results. Otherwise, only triggers applicable to the group entities themselves will be included.
+
 ## Error handling
 
 If an error occurs, the `success` key in the `result` message will be set to `false`. It will contain an `error` key containing an object with two keys: `code` and `message`.
