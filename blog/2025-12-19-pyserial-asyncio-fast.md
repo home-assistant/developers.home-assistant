@@ -23,7 +23,6 @@ Library maintainers and custom integrations are adviced to migrate to `pyserial-
 #### Requirements
 
 ```python
-```python
 # Old
   install_requires=[
     'pyserial-asyncio'
