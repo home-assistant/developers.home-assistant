@@ -45,6 +45,10 @@ Only one workflow runs at a time for a given PR. If multiple commits are pushed 
 
 To build the application in debug on CI, we use a mock Google services file located at `/.github/mock-google-services.json`.
 
+#### Downloading APKs from a PR
+
+See the [Testing PR builds](/docs/android/tips/testing_pr_builds) tip for instructions on how to download and install APKs from a pull request.
+
 ### On push to `main`
 
 When a commit is pushed to the `main` branch, the `onPush.yml` workflow is triggered. Its goals are:

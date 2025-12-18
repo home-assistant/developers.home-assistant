@@ -379,6 +379,7 @@ module.exports = {
         "android/tips/release",
         "android/tips/dev_playground",
         "android/tips/strict_mode",
+        "android/tips/testing_pr_builds",
       ],
     },
     "android/best_practices",
