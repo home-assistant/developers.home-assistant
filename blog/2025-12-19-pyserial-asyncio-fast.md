@@ -6,7 +6,7 @@ title: "Block pyserial-asyncio in favor of pyserial-asyncio-fast"
 
 ### Summary of changes
 
-Starting in `2026.1`, installation of `pyserial-asyncio` will be blocked on Home Assistant.
+Starting in `2026.4`, installation of `pyserial-asyncio` will be blocked on Home Assistant.
 
 Library maintainers and custom integrations are advised to migrate to `pyserial-asyncio-fast`.
 
@@ -25,12 +25,12 @@ Library maintainers and custom integrations are advised to migrate to `pyserial-
 ```python
 # Old
   install_requires=[
-    'pyserial-asyncio'
+    "pyserial-asyncio"
   ]
 
 # New
   install_requires=[
-    'pyserial-asyncio-fast'
+    "pyserial-asyncio-fast"
   ]
 ```
 
