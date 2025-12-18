@@ -35,7 +35,7 @@ Library maintainers and custom integrations are adviced to migrate to `pyserial-
 ```
 
 
-#### Use
+#### Usage
 
 ```python
 # Old
@@ -50,3 +50,5 @@ import serial_asyncio_fast
 def connect():
   conn = serial_asyncio_fast.open_serial_connection(**self.serial_settings)
 ```
+
+More examples can be seen in the linked pull requests linked to https://github.com/home-assistant/core/pull/116635
