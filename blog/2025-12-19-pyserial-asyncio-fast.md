@@ -41,14 +41,14 @@ Library maintainers and custom integrations are advised to migrate to `pyserial-
 # Old
 import serial_asyncio
 
-def connect():
-    conn = serial_asyncio.open_serial_connection(**self.serial_settings)
+async def connect():
+    conn = await serial_asyncio.open_serial_connection(**self.serial_settings)
 
 # New
 import serial_asyncio_fast
 
-def connect():
-    conn = serial_asyncio_fast.open_serial_connection(**self.serial_settings)
+async def connect():
+    conn = await serial_asyncio_fast.open_serial_connection(**self.serial_settings)
 ```
 
-More examples can be seen in the linked pull requests linked to https://github.com/home-assistant/core/pull/116635
+More examples are available in [the tracking pull request](https://github.com/home-assistant/core/pull/116635).
