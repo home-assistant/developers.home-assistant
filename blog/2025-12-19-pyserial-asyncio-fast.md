@@ -12,7 +12,7 @@ Library maintainers and custom integrations are advised to migrate to `pyserial-
 
 ### Background
 
-`pyserial-asyncio` does blocking I/O (actually it's a `sleep`, but falls under the same class of issue) in asyncio loop and is not maintained.
+`pyserial-asyncio` blocks the event loop because it does a blocking `sleep` and is not maintained.
 
 `pyserial-asyncio-fast` was created as a drop-in replacement (see [the repository](https://github.com/home-assistant-libs/pyserial-asyncio-fast)), and all core integrations have now been migrated.
 
