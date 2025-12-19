@@ -1,7 +1,7 @@
 ---
 author: epenet
 authorURL: https://github.com/epenet
-title: "Block pyserial-asyncio in favor of pyserial-asyncio-fast"
+title: "Solving pyserial-asyncio blocking the event loop"
 ---
 
 ### Summary of changes
