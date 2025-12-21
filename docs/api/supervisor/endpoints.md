@@ -1187,6 +1187,7 @@ Returns information about the Home Assistant core
 | audio_input              | string or null | The description of the audio input device                  |
 | audio_output             | string or null | The description of the audio output device                 |
 | backups_exclude_database | boolean        | Backups exclude Home Assistant database file by default    |
+| duplicate_log_file       | boolean        | Home Assistant duplicates logs to a file                   |
 
 
 **Example response:**
@@ -1274,6 +1275,7 @@ Passing `image`, `refresh_token`, `audio_input` or `audio_output` with `null` re
 | audio_input              | string or null | Profile name for audio input                                |
 | audio_output             | string or null | Profile name for audio output                               |
 | backups_exclude_database | boolean        | `true` to exclude Home Assistant database file from backups |
+| duplicate_log_file       | boolean        | `true` to duplicate Home Assistant logs to a file           |
 
 **You need to supply at least one key in the payload.**
 
@@ -1635,6 +1637,37 @@ To login to the default container registry (Docker Hub), use `hub.docker.com` as
 
 <ApiEndpoint path="/docker/registries/<registry>" method="delete">
 Delete a registry from the configured container registries.
+</ApiEndpoint>
+
+<ApiEndpoint path="/docker/migrate-storage-driver" method="post">
+Schedule a Docker storage driver migration. The migration will be applied on the next system reboot.
+
+This endpoint allows migrating to either:
+- `overlayfs`: The Containerd overlayfs driver
+- `overlay2`: The Docker graph overlay2 driver
+
+:::note
+
+This endpoint requires Home Assistant OS 17.0 or newer. A `404` error will be returned on older versions or non-HAOS installations.
+
+:::
+
+**Payload:**
+
+| key            | type   | optional | description                                           |
+| -------------- | ------ | -------- | ----------------------------------------------------- |
+| storage_driver | string | False    | The target storage driver (`overlayfs` or `overlay2`) |
+
+**Example payload:**
+
+```json
+{
+  "storage_driver": "overlayfs"
+}
+```
+
+After calling this endpoint, a reboot is required to apply the migration. The response will create a `reboot_required` issue in the resolution center.
+
 </ApiEndpoint>
 
 ### Hardware
