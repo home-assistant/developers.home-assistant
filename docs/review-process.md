@@ -70,15 +70,15 @@ the end-user getting your improvement faster.
    and physically test your changes. Ensure they work (or, in the case
    of documentation: look) as intended.
 
-4. **Ensure your PR is based on the latest version of the main upstream branch.**
+4. **Ensure your PR is based on the latest version of the dev upstream branch.**
    Make sure to pull in the latest upstream changes before creating your PR.
    While you wrote your changes, upstream may have changed. This can lead to
    merge conflicts, failing tests, or your changes not working as expected.
 
 5. **Create a (feature) branch.**
-   When you create a PR, it is based on a branch (usually the main branch).
+   When you create a PR, it is based on a branch (usually the dev branch).
    You must create a new feature branch for each PR you create. This
-   makes it easier to keep your main branch up to date with the upstream
+   makes it easier to keep your dev branch up to date with the upstream
    branch, and it makes it easier to delete the branch after the PR
    has been merged.
 
