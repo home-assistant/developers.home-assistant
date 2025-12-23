@@ -89,7 +89,9 @@ Voice interaction with streaming intent progress updates during processing.
 flowchart TD
     B1[run-start] --> B2[wake_word-start] --> B3[wake_word-end]
     B3 --> B4[stt-start] --> B5[stt-vad-start] --> B6[stt-vad-end] --> B7[stt-end]
-    B7 --> B8[intent-start] --> B9[intent-progress...] --> B10[intent-end]
+    B7 --> B8[intent-start] --> B9[intent-progress]
+    B9 --> B9
+    B9 --> B10[intent-end]
     B10 --> B11[tts-start] --> B12[tts-end] --> B13[run-end]
 ```
 
@@ -102,7 +104,9 @@ Text-only interaction that skips wake word detection and speech-to-text stages.
 ```mermaid
 %%{init: {'theme':'base', 'themeVariables': { 'background':'#f8f9fa', 'primaryColor':'#0288d1', 'primaryTextColor':'#000', 'lineColor':'#333', 'primaryBorderColor':'#0277bd'}}}%%
 flowchart TD
-    C1[run-start] --> C2[intent-start] --> C3[intent-progress...] --> C4[intent-end]
+    C1[run-start] --> C2[intent-start] --> C3[intent-progress]
+    C3 --> C3
+    C3 --> C4[intent-end]
     C4 --> C5[tts-start] --> C6[tts-end] --> C7[run-end]
 ```
 
