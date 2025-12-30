@@ -10,7 +10,7 @@ In situations where polling API's would return a sign of being overwhelmed, by t
 The integration and API client must detect these backoff signals and sanitize the API's desired backoff period. The `UpdateFailed` exception accepts a `retry_after` parameter (a float in seconds) to delay the next scheduled refresh. Once the API recovers and `UpdateFailed` is no longer raised, the integration resumes its normal `update_interval`.
 
 Example of the usage:
-```py
+```python
 try:
     request = await self.client.get_information()
 except APIClientRateLimited as err:
