@@ -92,7 +92,7 @@ set_speed:
   target:
     entity:
       domain: fan
-      # If not all entities from the action's domain support a action, entities
+      # If not all entities from the action's domain support an action, entities
       # can be further filtered by the `supported_features` state attribute. An
       # entity will only be possible to select if it supports at least one of the
       # listed supported features.
@@ -169,7 +169,7 @@ The service action data for the service in the example is `{"speed_pct": 50}`, n
 
 ### Filtering service action fields
 
-In some cases, entities from a action's domain may not support all service action fields.
+In some cases, entities from an action's domain may not support all service action fields.
 By providing a `filter` for the field description, the field will only be shown if at
 least one selected entity supports the field according to the configured filter.
 

@@ -390,7 +390,7 @@ The server will indicate with a message indicating that the action is done execu
 }
 ```
 
-The `result` of the call will always include a `response` to account for service actions that support responses. When a action that doesn't support responses is called, the value of `response` will be `null`.
+The `result` of the call will always include a `response` to account for service actions that support responses. When an action that doesn't support responses is called, the value of `response` will be `null`.
 
 ## Fetching states
 
