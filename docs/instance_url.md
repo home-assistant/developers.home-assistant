@@ -14,7 +14,7 @@ bunch of different URLs available:
 - A user-configured internal home network URL.
 - An automatically detected internal home network URL.
 - A user-configured, public accessible, external URL that works from the internet.
-- An URL provided by Home Assistant Cloud by Nabu Casa, in case the user has a subscription.
+- A URL provided by Home Assistant Cloud by Nabu Casa, in case the user has a subscription.
 
 Extra complexity is added by the fact that URLs can be served on non-standard ports
 (e.g., not 80 or 443) and with or without SSL (`http://` vs `https://`).
@@ -72,7 +72,7 @@ The different parameters of the method:
   requires anything but a Cloud URL.
 
 - `allow_ip`:
-  Allow the host part of an URL to be an IP address, set to `False` in case
+  Allow the host part of a URL to be an IP address, set to `False` in case
   that is not usable for the use case.
 
 - `prefer_external`:

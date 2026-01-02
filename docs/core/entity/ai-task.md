@@ -5,7 +5,7 @@ sidebar_label: AI Task
 
 An AI Task entity provides a framework for AI-powered task execution in Home Assistant. It enables integrations to offer AI capabilities for generating data, content, or performing structured tasks based on natural language instructions.
 
-A AI Task entity is derived from the [`homeassistant.components.ai_task.AITaskEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/ai_task/entity.py). The entity state tracks the timestamp of the last activity for monitoring purposes.
+An AI Task entity is derived from the [`homeassistant.components.ai_task.AITaskEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/ai_task/entity.py). The entity state tracks the timestamp of the last activity for monitoring purposes.
 
 ## Properties
 
