@@ -114,7 +114,7 @@ required: any string here #=> Any string here
 - The **Configuration variables** section must use the `{% configuration %}` tag.
 - Configuration variables must document the requirement status (`false` or `true`).
 - Configuration variables must document the default value, if any.
-- Configuration variables must document the accepted value types (see [configuration variables details](documenting/create-page.md#configuration)).
+- Configuration variables must document the accepted value types (see [configuration variables details](#configuration)).
   - For configuration variables that accept multiple types, separate the types with a comma (i.e. `string, integer`).
 
 #### Example configuration variables block
