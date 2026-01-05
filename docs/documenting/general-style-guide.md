@@ -47,6 +47,14 @@ A few notes about the use of markdown in this documentation:
   1. List item 2.
   1. List item 3.
   ```
+
+## Links
+
+- Use relative links for links on `homeassistant.io`:
+  - For example:
+    - `/connect/zbt-2/` instead of `https://www.home-assistant.io/connect/zbt-2/`
+- Do not use affiliate or tracking links.
+
 ## Images
 
 If you use images, upload them to the images folder in the documentation repository. Do not link to external images, for example on your private GitHub repository.
