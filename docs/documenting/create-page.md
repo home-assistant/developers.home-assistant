@@ -66,9 +66,13 @@ There are [pre-defined variables](https://jekyllrb.com/docs/variables/) availabl
 
 ### Configuration
 
-Every integration page should contain a configuration sample. This sample must contain only the **required** variables to make it easy to copy and paste it for users into their `configuration.yaml` file.
+Every integration page should contain a configuration sample.
 
-## About configuration variables
+### UI variables
+
+- For describing **UI variables** use the `{% configuration_basic %}` section.
+
+### About configuration variables
 
 - The **Configuration variables** section is only used for YAML configuration.
 - The **Configuration variables** section must use the `{% configuration %}` tag.
@@ -126,10 +130,6 @@ required: any string here #=> Any string here
 ```
 
 - **`type:`**: The type of the variable. Allowed entries: `action`, `boolean`, `string`, `integer`, `float`, `time`, `template`, `device_class`, `icon`, `map`/`list` (for a list of entries), `date`, `datetime`, `selector`, and `any`. For multiple possibilities use `[string, integer]`. If you use `map`/`list` then should define `keys:` (see the [`template` sensor](https://www.home-assistant.io/integrations/sensor.template/) for an example). If you use `boolean`, then `default:` must be defined.
-
-### UI variables
-
-- For describing **UI variables** use the `{% configuration_basic %}` section.
 
 ### Embedding code
 
