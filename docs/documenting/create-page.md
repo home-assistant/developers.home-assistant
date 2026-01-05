@@ -66,7 +66,7 @@ There are [pre-defined variables](https://jekyllrb.com/docs/variables/) availabl
 
 ### Configuration
 
-Every integration page should contain a configuration sample.
+Every integration page should contain a configuration example. This includes UI variable descriptions for integrations with a configuration flow, and YAML configuration for integrations that don't yet support a configuration flow.
 
 ### UI variables
 
