@@ -68,7 +68,26 @@ There are [pre-defined variables](https://jekyllrb.com/docs/variables/) availabl
 
 Every integration page should contain a configuration sample. This sample must contain only the **required** variables to make it easy to copy and paste it for users into their `configuration.yaml` file.
 
-The **Configuration variables** section must use the `{% configuration %} ... {% endconfiguration %}` tag.
+## About configuration variables
+
+- The **Configuration variables** section is only used for YAML configuration.
+- The **Configuration variables** section must use the `{% configuration %}` tag.
+- Configuration variables must document the requirement status (`false` or `true`).
+- Configuration variables must document the default value, if any.
+- Configuration variables must document the accepted value types (see [configuration variables details](#configuration)).
+  - For configuration variables that accept multiple types, separate the types with a comma (i.e. `string, integer`).
+
+### Example configuration variables block
+
+```yaml
+{% configuration %}
+some_key:
+  description: This is a description of what this key is for.
+  required: false
+  type: string
+  default: Optional default value - leave out if there isn't one
+{% endconfiguration %}
+```
 
 ```text
 {% configuration %}
@@ -107,27 +126,6 @@ required: any string here #=> Any string here
 ```
 
 - **`type:`**: The type of the variable. Allowed entries: `action`, `boolean`, `string`, `integer`, `float`, `time`, `template`, `device_class`, `icon`, `map`/`list` (for a list of entries), `date`, `datetime`, `selector`, and `any`. For multiple possibilities use `[string, integer]`. If you use `map`/`list` then should define `keys:` (see the [`template` sensor](https://www.home-assistant.io/integrations/sensor.template/) for an example). If you use `boolean`, then `default:` must be defined.
-
-### About configuration variables
-
-- The **Configuration variables** section is only used for YAML configuration.
-- The **Configuration variables** section must use the `{% configuration %}` tag.
-- Configuration variables must document the requirement status (`false` or `true`).
-- Configuration variables must document the default value, if any.
-- Configuration variables must document the accepted value types (see [configuration variables details](#configuration)).
-  - For configuration variables that accept multiple types, separate the types with a comma (i.e. `string, integer`).
-
-#### Example configuration variables block
-
-```yaml
-{% configuration %}
-some_key:
-  description: This is a description of what this key is for.
-  required: false
-  type: string
-  default: Optional default value - leave out if there isn't one
-{% endconfiguration %}
-```
 
 ### UI variables
 
