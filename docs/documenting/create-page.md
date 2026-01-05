@@ -76,7 +76,7 @@ Every integration page should contain a configuration sample.
 
 - The **Configuration variables** section is only used for YAML configuration.
 - The **Configuration variables** section must use the `{% configuration %}` tag.
-- Configuration variables must document the requirement status (`false` or `true`).
+- Configuration variables must document if the variable is required (`false` or `true`).
 - Configuration variables must document the default value, if any.
 - Configuration variables must document the accepted value types (see [configuration variables details](#configuration)).
   - For configuration variables that accept multiple types, separate the types with a comma (i.e. `string, integer`).
@@ -129,7 +129,7 @@ required: exclusive       #=> Exclusive
 required: any string here #=> Any string here
 ```
 
-- **`type:`**: The type of the variable. Allowed entries: `action`, `boolean`, `string`, `integer`, `float`, `time`, `template`, `device_class`, `icon`, `map`/`list` (for a list of entries), `date`, `datetime`, `selector`, and `any`. For multiple possibilities use `[string, integer]`. If you use `map`/`list` then should define `keys:` (see the [`template` sensor](https://www.home-assistant.io/integrations/sensor.template/) for an example). If you use `boolean`, then `default:` must be defined.
+- **`type:`**: The type of the variable. Allowed entries: `action`, `boolean`, `string`, `integer`, `float`, `time`, `template`, `device_class`, `icon`, `map`/`list` (for a list of entries), `date`, `datetime`, `selector`, and `any`. For multiple possibilities use `[string, integer]`. If you use `map`/`list` then you should define `keys:` (see the [`template` sensor](https://www.home-assistant.io/integrations/sensor.template/) for an example). If you use `boolean`, then `default:` must be defined.
 
 ### Embedding code
 
