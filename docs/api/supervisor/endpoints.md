@@ -3483,6 +3483,12 @@ Remove an unused addon repository from the store.
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/store/repositories/<repository>/repair" method="post">
+
+Repair/reset an addon repository in the store that is missing or showing incorrect information.
+
+</ApiEndpoint>
+
 ### Security
 
 <ApiEndpoint path="/security/info" method="get">
