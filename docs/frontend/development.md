@@ -142,6 +142,8 @@ script/setup_translations
 
 :::note
 This needs to be done manually, even if you are using dev containers. Also, you will be asked to enter a code and authorize the script to fetch the latest translations.
+
+In case a previous authorization no longer works (e.g. you see a "Bad Credentials" error during translation fetching), delete the `token.json` file in the `translations` folder and execute `script/setup_translations` again to retrigger the authorization process.
 :::
 
 :::note
