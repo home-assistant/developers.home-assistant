@@ -12,6 +12,7 @@ To create a new integration page, follow these steps:
    - [YAML Style Guide](/docs/documenting/yaml-style-guide.md)
    - [Documentation structure and example text](/docs/documenting/integration-docs-examples)
 4. Make sure to add [icon and logo](#images-icons-and-logos) to the brands repository.
+   - If your integration was a custom integration (HACS), move the brand files into the `core_integrations` folder.
 5. Document the needed steps to retrieve API keys or access token for the third party service or device if needed.
 6. Make sure the documentation does not refer to custom integrations. The steps and examples, including automation examples, should not depend on custom cards or custom integrations.
 7. Add the type of the devices (including firmware) you have tested when you know that there are multiple out there.
