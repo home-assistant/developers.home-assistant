@@ -31,8 +31,8 @@ except ConfigEntryRefreshTokenFailed as err:
     if isinstance((cause := err.__cause__), ClientResponseError):
         match cause.status:
             case HTTPStatus.TOO_MANY_REQUESTS:
-                return UpdateFailed("Being rate limited here") from err
+                raise UpdateFailed("Being rate limited here") from err
             case HTTPStatus.UNAUTHORIZED:
-                return ConfigEntryAuthFailed("Not authorized") from err
+                raise ConfigEntryAuthFailed("Not authorized") from err
     return self.async_abort(reason="oauth_failed")
 ```
