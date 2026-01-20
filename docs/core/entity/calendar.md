@@ -158,3 +158,60 @@ A `CalendarEvent` represents an individual event on a calendar.
 | uid | string | `None` | A unique identifier for the event (required for mutations) |
 | recurrence_id | string | `None` | An optional identifier for a specific instance of a recurring event (required for mutations of recurring events) |
 | rrule |  string | `None` | A recurrence rule string e.g. `FREQ=DAILY` |
+## Color management
+
+Calendar entities can have associated colors that are used in the frontend (calendar panel, calendar card). The color is stored as an entity option in the entity registry, allowing users to customize the calendar color through the UI.
+
+### How colors work
+
+The color management lifecycle works as follows:
+
+1. **Storage**: The color is stored in the entity registry as an entity option (not in the entity's state attributes).
+2. **Reading**: The frontend reads the color directly from entity registry options when displaying the calendar. The calendar entity itself does not need to read or access the color value.
+3. **User modification**: Users can change the color through the entity settings in the UI, which updates the entity registry options.
+
+### Providing a default color
+
+If a calendar integration wants to provide a default color (for example, a color retrieved from the calendar service API), it should override the `get_initial_entity_options` method. This method is called when the entity is added to Home Assistant and provides initial values for entity options:
+
+```python
+from typing import Any
+
+from homeassistant.components.calendar import CalendarEntity
+from homeassistant.helpers import entity_registry as er
+from homeassistant.util.color import RGBColor
+
+
+class MyCalendar(CalendarEntity):
+
+    def __init__(self, name: str, calendar_color: tuple[int, int, int] | None = None) -> None:
+        """Initialize the calendar entity."""
+        self._attr_name = name
+        self._calendar_color = calendar_color  # Color from calendar service API
+
+    def get_initial_entity_options(self) -> er.EntityOptionsType | None:
+        """Return initial entity options.
+        
+        This is called when the entity is first registered to provide
+        default values for entity options. The color from the calendar
+        service will be used as the initial color, but users can override
+        it later through the UI.
+        """
+        if self._calendar_color is None:
+            return None
+            
+        # Return the color in the calendar domain entity options
+        return {
+            "calendar": {
+                "color": list(self._calendar_color),  # RGB as list [R, G, B]
+            }
+        }
+```
+
+### Important notes
+
+- The color is **only used by the frontend** for display purposes. The calendar entity does not need to read, store, or access the color value.
+- Integrations only need to implement `get_initial_entity_options` if they want to provide a default color from the calendar service.
+- Users can override the default color at any time through the entity settings UI.
+- The color must be stored as a list of RGB values in the range 0-255, e.g., `[66, 133, 244]`.
+- The frontend will automatically read the color from entity registry options when displaying the calendar.
