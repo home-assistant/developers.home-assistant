@@ -32,7 +32,7 @@ Properties should always only return information from memory and not do I/O (lik
 | swing_horizontal_mode   | <code>str &#124; None</code>        | **Required by SUPPORT_SWING_HORIZONTAL_MODE**   | The horizontal swing setting.                                   |
 | swing_horizontal_modes  | <code>list[str] &#124; None</code>  | **Required by SUPPORT_SWING_HORIZONTAL_MODE**  | Returns the list of available horizontal swing modes.            |
 | target_humidity         | <code>float &#124; None</code>      | `None`                               | The target humidity the device is trying to reach.                         |
-| target_humidity_step    | <code>int &#124; None</code>        | `None`                               | The supported step size a target humidity can be increased or decreased    |
+| target_humidity_step    | <code>int &#124; None</code>        | `None`                               | The supported step size a target humidity can be increased or decreased in an action call targeting the device. |
 | target_temperature      | <code>float &#124; None</code>      | `None`                               | The temperature currently set to be reached.                               |
 | target_temperature_high | <code>float &#124; None</code>      | **Required by TARGET_TEMPERATURE_RANGE** | The upper bound target temperature                                     |
 | target_temperature_low  | <code>float &#124; None</code>      | **Required by TARGET_TEMPERATURE_RANGE** | The lower bound target temperature                                     |
