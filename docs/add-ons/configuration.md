@@ -257,17 +257,28 @@ not_need: "str?"
 
 We support:
 
-- `str` / `str(min,)` / `str(,max)` / `str(min,max)`
-- `bool`
-- `int` / `int(min,)` / `int(,max)` / `int(min,max)`
-- `float` / `float(min,)` / `float(,max)` / `float(min,max)`
-- `email`
-- `url`
-- `password`
-- `port`
-- `match(REGEX)`
-- `list(val1|val2|...)`
-- `device` / `device(filter)`: Device filter can be in the following format: `subsystem=TYPE` i.e. `subsystem=tty` for serial devices.
+- `str` / `str(min,)` / `str(,max)` / `str(min,max)`: Arbitrary string with optional min/max length.
+- `bool`: Boolean (`true`/`false`).
+- `int` / `int(min,)` / `int(,max)` / `int(min,max)`: Integer with optional lower/upper bound (inclusive).
+- `float` / `float(min,)` / `float(,max)` / `float(min,max)`: Floating point number with optional lower/upper bound (inclusive).
+- `email`: A string representing an email address.
+- `url`: A string representing an URL.
+- `password`: A string representing a password.
+- `port`: An integer representing a TCP/UDP port (1 – 65535).
+- `match(REGEX)`: A string matching the specified regular expression.
+- `list(val1|val2|...)`: A string from a fixed set (`val1`, `val2`, ...) of values.
+- `device` / `device(filter)`: A string referencing a device path (e.g. `/dev/ttyS0`).
+   Device filter can be in the following format: `subsystem=TYPE` (e.g. `subsystem=tty` for serial devices).
+- Lists of some underlying element type. For example:
+  ```yaml
+  random:
+  - "match(^\\w*$)"
+- Nested dictionaries. For example:
+  ```yaml
+  logins:
+    - username: str
+      password: str
+  ```
 
 ## Add-on extended build
 
