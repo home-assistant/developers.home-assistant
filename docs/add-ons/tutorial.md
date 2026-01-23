@@ -56,7 +56,6 @@ arch:
   - amd64
   - armhf
   - armv7
-  - i386
 ```
 
 ### The `run.sh` file
