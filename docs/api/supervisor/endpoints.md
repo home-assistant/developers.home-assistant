@@ -2615,15 +2615,17 @@ Update the settings for a network interface.
 | address       | list   | True     | The new IP address for the interface in the ::/XX format as list                                    |
 | nameservers   | list   | True     | List of DNS servers to use                                                                          |
 | gateway       | string | True     | The gateway the interface should use                                                                |
+| route_metric  | int    | True     | Route metric. Lower value has higher priority. The kernel accepts zero (0) but coerces it to 1024 (user default) |
 
 **ipv4:**
 
-| key         | type   | optional | description                                                                           |
-| ----------- | ------ | -------- | ------------------------------------------------------------------------------------- |
-| method      | string | True     | Set IP configuration method can be `auto` for DHCP, `static` or `disabled`            |
-| address     | list   | True     | The new IP address for the interface in the X.X.X.X/XX format as list                 |
-| nameservers | list   | True     | List of DNS servers to use                                                            |
-| gateway     | string | True     | The gateway the interface should use                                                  |
+| key          | type   | optional | description                                                                           |
+| ------------ | ------ | -------- | ------------------------------------------------------------------------------------- |
+| method       | string | True     | Set IP configuration method can be `auto` for DHCP, `static` or `disabled`            |
+| address      | list   | True     | The new IP address for the interface in the X.X.X.X/XX format as list                 |
+| nameservers  | list   | True     | List of DNS servers to use                                                            |
+| gateway      | string | True     | The gateway the interface should use                                                  |
+| route_metric | int    | True     | Route metric. Lower value has higher priority                                         |
 
 **wifi:**
 
