@@ -73,16 +73,19 @@ The HVAC action describes the _current_ action. This is different from the mode,
 
 A device can have different presets that it might want to show to the user. Common presets are "Away" or "Eco". There are a couple of built-in presets that will offer translations, but you're also allowed to add custom presets.
 
-| Name       | Description                                            |
-| ---------- | ------------------------------------------------------ |
-| `NONE`     | No preset is active                                    |
-| `ECO`      | Device is running an energy-saving mode                |
-| `AWAY`     | Device is in away mode                                 |
-| `BOOST`    | Device turn all valve full up                          |
-| `COMFORT`  | Device is in comfort mode                              |
-| `HOME`     | Device is in home mode                                 |
-| `SLEEP`    | Device is prepared for sleep                           |
-| `ACTIVITY` | Device is reacting to activity (e.g. movement sensors) |
+| Name              | Description                                            |
+| ----------------- | ------------------------------------------------------ |
+| `ACTIVITY`        | Device is reacting to activity (e.g. movement sensors) |
+| `AWAY`            | Device is in away mode                                 |
+| `BOOST`           | Device turn all valve full up                          |
+| `COMFORT`         | Device is in comfort mode                              |
+| `ECO`             | Device is running an energy-saving mode                |
+| `GOING_TO_SLEEP`  | Device is transitioning toward a sleep profile         |
+| `HOME`            | Device is in home mode                                 |
+| `NONE`            | No preset is active                                    |
+| `SLEEP`           | Device is prepared for sleep                           |
+| `VACATION`        | Device is in an extended away or vacation mode         |
+| `WAKE`            | Device is transitioning out of sleep toward wake state |
 
 ### Fan modes
 
