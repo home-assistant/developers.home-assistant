@@ -166,52 +166,50 @@ Calendar entities can have associated colors that are used in the frontend (cale
 
 The color management lifecycle works as follows:
 
-1. **Storage**: The color is stored in the entity registry as an entity option (not in the entity's state attributes).
-2. **Reading**: The frontend reads the color directly from entity registry options when displaying the calendar. The calendar entity itself does not need to read or access the color value.
-3. **User modification**: Users can change the color through the entity settings in the UI, which updates the entity registry options.
+1. **Initial color**: Integrations can provide a default color by setting `_attr_initial_color` to a hex color string (e.g., `#16a765`).
+2. **Storage**: When the entity is first added to Home Assistant, the initial color is automatically stored in the entity registry as an entity option.
+3. **Reading**: The frontend reads the color directly from entity registry options when displaying the calendar.
+4. **User modification**: Users can change the color through the entity settings in the UI, which updates the entity registry options.
 
 ### Providing a default color
 
-If a calendar integration wants to provide a default color (for example, a color retrieved from the calendar service API), it should override the `get_initial_entity_options` method. This method is called when the entity is added to Home Assistant and provides initial values for entity options:
+If a calendar integration wants to provide a default color (for example, a color retrieved from the calendar service API), it should set the `_attr_initial_color` attribute to a hex color string. This value will be used as the initial color and stored in entity registry options when the entity is first added:
 
 ```python
-from typing import Any
-
 from homeassistant.components.calendar import CalendarEntity
-from homeassistant.helpers import entity_registry as er
-from homeassistant.util.color import RGBColor
 
 
 class MyCalendar(CalendarEntity):
 
-    def __init__(self, name: str, calendar_color: tuple[int, int, int] | None = None) -> None:
+    def __init__(self, name: str, calendar_color: str | None = None) -> None:
         """Initialize the calendar entity."""
         self._attr_name = name
-        self._calendar_color = calendar_color  # Color from calendar service API
+        self._attr_initial_color = calendar_color  # Hex color from calendar service API, e.g., "#16a765"
+```
 
-    def get_initial_entity_options(self) -> er.EntityOptionsType | None:
-        """Return initial entity options.
+Example with color retrieved from a calendar service:
+
+```python
+from homeassistant.components.calendar import CalendarEntity
+
+
+class MyCalendar(CalendarEntity):
+
+    def __init__(self, name: str, calendar_data: dict) -> None:
+        """Initialize the calendar entity."""
+        self._attr_name = name
         
-        This is called when the entity is first registered to provide
-        default values for entity options. The color from the calendar
-        service will be used as the initial color, but users can override
-        it later through the UI.
-        """
-        if self._calendar_color is None:
-            return None
-            
-        # Return the color in the calendar domain entity options
-        return {
-            "calendar": {
-                "color": list(self._calendar_color),  # RGB as list [R, G, B]
-            }
-        }
+        # Set color from calendar service API if available
+        # The color should be in hex format with # prefix, e.g., "#16a765"
+        if "backgroundColor" in calendar_data:
+            self._attr_initial_color = calendar_data["backgroundColor"]
 ```
 
 ### Important notes
 
-- The color is **only used by the frontend** for display purposes. The calendar entity does not need to read, store, or access the color value.
-- Integrations only need to implement `get_initial_entity_options` if they want to provide a default color from the calendar service.
-- Users can override the default color at any time through the entity settings UI.
-- The color must be stored as a list of RGB values in the range 0-255, e.g., `[66, 133, 244]`.
-- The frontend will automatically read the color from entity registry options when displaying the calendar.
+- The `_attr_initial_color` must be a **hex color string** with the `#` prefix (e.g., `"#16a765"`), not an RGB tuple.
+- The color is automatically validated and stored in entity registry options when the entity is first registered through the `get_initial_entity_options()` method (handled by the `CalendarEntity` base class).
+- The initial color is **only set once** when the entity is first added to Home Assistant. After that, the value is read from entity registry options.
+- Users can override the initial color at any time through the entity settings UI, and their preference will be stored in the entity registry.
+- The color is **only used by the frontend** for display purposes. The calendar entity does not need to read or access the color value after setting `_attr_initial_color`.
+- Integrations only need to set `_attr_initial_color` in the entity's `__init__()` method if they want to provide a default color from the calendar service.
