@@ -10,7 +10,7 @@ The token is available for apps (formerly known as add-ons) and Home Assistant u
 
 To see more details about each endpoint, click on it to expand it.
 
-### Add-ons
+### Apps
 
 <ApiEndpoint path="/addons" method="get">
 Return overview information about installed apps.
