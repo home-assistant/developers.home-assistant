@@ -24,7 +24,7 @@ You can sign your images and also verify our base image which you build from to 
 
 ## Protection
 
-Default, all apps run in protection enabled mode. This mode prevents the app from getting any rights on the system. If an app requires more rights, you can disable this protection via the API app options for that app. But be careful, an app with disabled protection can destroy your system!
+By default, all apps run in protection-enabled mode. This mode prevents the app from getting any rights on the system. If an app requires more rights, you can disable this protection via the API app options for that app. But be careful, an app with disabled protection can destroy your system!
 
 ## Making a secure app
 
