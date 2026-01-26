@@ -2,7 +2,7 @@
 title: "App configuration"
 ---
 
-Each app (formerly know as add-on) is stored in a folder. The file structure looks like this:
+Each app (formerly known as add-on) is stored in a folder. The file structure looks like this:
 
 ```text
 addon_name/
