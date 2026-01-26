@@ -222,7 +222,7 @@ Each app starts with a base rating of 5, on a scale of 1 to 6. Depending on deci
 | App is signed with [CodeNotary](https://cas.codenotary.com/)| +1||
 | Use custom [`apparmor.txt`](/docs/apps/presentation#apparmor)| +1| Rating applied after installation |
 | Set `apparmor: false` in [`config.yaml`](/docs/apps/configuration#optional-configuration-options) | -1 | |
-| Use `privileged: NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_PTRACE`, `SYS_MODULE`, or `DAC_READ_SEARCH`, or `kernel_modules: ` used in [`config.yaml`](/docs/apps/configuration#optional-configuration-options)| -1 | Rating applied only once if multiple are used. |
+| Use `privileged: NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_PTRACE`, `SYS_MODULE`, or `DAC_READ_SEARCH`, or `kernel_modules:` used in [`config.yaml`](/docs/apps/configuration#optional-configuration-options)| -1 | Rating applied only once if multiple are used. |
 | Use `hassio_role: manager` in [`config.yaml`](/docs/apps/configuration#optional-configuration-options) | -1 | |
 | Use `host_network: true` in [`config.yaml`](/docs/apps/configuration#optional-configuration-options) | -1 | |
 | Use `hassio_role: admin` in [`config.yaml`](/docs/apps/configuration#optional-configuration-options) | -2 | |
