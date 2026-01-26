@@ -1,32 +1,32 @@
 ---
-title: "Presenting your addon"
+title: "Presenting your app"
 ---
 
-If you choose to make your add-on available to the public, providing clear information, graphics and security reassurances will help attract users.  The recommendations below are a guideline for presenting your add-on.
+If you choose to make your app (formerly known as add-on) available to the public, providing clear information, graphics and security reassurances will help attract users. The recommendations below are a guideline for presenting your app.
 
 ## Adding intro
 
-This shows in the add-on store and gives the user a short description of what the add-on can do.
+This shows in the app store and gives the user a short description of what the app can do.
 
 This file containing the intro is usually referred to as the "README", which is generally published as the `README.md` file.
 
 ## Adding documentation
 
-Good documentation helps the consumer of your add-on to understand its usage, explains configuration options, points users in the right direction in the case they have questions or issues, and contains the license under which the add-on was published.
+Good documentation helps the consumer of your app to understand its usage, explains configuration options, points users in the right direction in the case they have questions or issues, and contains the license under which the app was published.
 
 This file containing the documentation is usually referred to as the "DOCS", which is generally published as the `DOCS.md` file.
 
-## Add-on icon & logo
+## App icon & logo
 
-A picture is worth a thousand words. Therefore, your add-on can be improved by adding a proper image icon and logo. These images are used when showing your add-on in the Home Assistant Supervisor panel and will significantly improve the visual representation of your add-on.
+A picture is worth a thousand words. Therefore, your app can be improved by adding a proper image icon and logo. These images are used when showing your app in the Home Assistant Supervisor panel and will significantly improve the visual representation of your app.
 
-Requirements for the logo of your add-on:
+Requirements for the logo of your app:
 
 - The logo must be in the Portable Network Graphics format (`.png`).
 - The filename must be `logo.png`.
-- It is recommended to keep the logo size around 250x100px. You may choose to use a different size or aspect ratio as you see fit for your add-on.
+- It is recommended to keep the logo size around 250x100px. You may choose to use a different size or aspect ratio as you see fit for your app.
 
-Requirements for the icon of your add-on:
+Requirements for the icon of your app:
 
 - The icon must be in the Portable Network Graphics format (`.png`).
 - The filename must be `icon.png`.
@@ -35,33 +35,33 @@ Requirements for the icon of your add-on:
 
 ## Keeping a changelog
 
-It is likely you are going to release newer versions of your add-on in the future. In case that happens, the users of your add-on will see an upgrade notice and probably want to know what changes were made in the latest version.
+It is likely you are going to release newer versions of your app in the future. In case that happens, the users of your app will see an upgrade notice and probably want to know what changes were made in the latest version.
 
-A changelog is a file which contains a curated, chronologically ordered list of notable changes for each version of your add-on and is generally published as the `CHANGELOG.md` file.
+A changelog is a file which contains a curated, chronologically ordered list of notable changes for each version of your app and is generally published as the `CHANGELOG.md` file.
 
 For guidance on keeping a changelog, we recommend the [keep a changelog](http://keepachangelog.com) website. They have developed a standard used by many open source projects around the world.
 
 ## Offering stable and canary version
 
-You may consider to offer a stable and a "next" or "canary" branch. These can be provided using different branches. When adding the add-on in Home Assistant, the user can select the wanted branch from a given repository by appending its name following a hashtag.
+You may consider to offer a stable and a "next" or "canary" branch. These can be provided using different branches. When adding the app in Home Assistant, the user can select the wanted branch from a given repository by appending its name following a hashtag.
 
 ```text
 https://github.com/home-assistant/hassio-addons-example#next
 ```
 
-You should add this information to your documentation. Also, you should consider having different [names for the repositories](/docs/add-ons/repository#repository-configuration) in every branch, for example, "Super add-on (stable)" and "Super add-on (beta)".
+You should add this information to your documentation. Also, you should consider having different [names for the repositories](/docs/add-ons/repository#repository-configuration) in every branch, for example, "Super app (stable)" and "Super app (beta)".
 
 ## AppArmor
 
-In the event that an API call returns something you, as a developer were not expecting, access to too many resources could be a liability for your users. As an add-on developer, it is your responsibility to ensure your add-on will not ruin your user's machine, or perform actions that you would never expect. That's where AppArmor comes in.
+In the event that an API call returns something you, as a developer were not expecting, access to too many resources could be a liability for your users. As an app developer, it is your responsibility to ensure your app will not ruin your user's machine, or perform actions that you would never expect. That's where AppArmor comes in.
 
-While your talents in input validation, handling sensitive data and other defensive programming tactics are not being judged here, AppArmor is your add-on's second line of defense against malicious API calls, malformed settings or other forms of system hijacking.
+While your talents in input validation, handling sensitive data and other defensive programming tactics are not being judged here, AppArmor is your app's second line of defense against malicious API calls, malformed settings or other forms of system hijacking.
 
 By default, AppArmor gives you a certain level of security by restricting some general actions that are deemed inappropriate for a Docker container. You can read more about Docker's AppArmor implementation on the [Docker Security page](https://docs.docker.com/engine/security/apparmor/).
 
-As for Home Assistant's implementation, you can activate your own custom AppArmor profile by putting an `apparmor.txt` file into your add-on folder. Adding your own `apparmor.txt` will load that file as the primary AppArmor profile instead of the default implementation. On top of knowing your add-on will run in a constrained and effective manner, writing your own custom `apparmor.txt` file will earn your add-on a security point after your add-on is installed, thus improving your user's confidence and perception of your add-on.
+As for Home Assistant's implementation, you can activate your own custom AppArmor profile by putting an `apparmor.txt` file into your app folder. Adding your own `apparmor.txt` will load that file as the primary AppArmor profile instead of the default implementation. On top of knowing your app will run in a constrained and effective manner, writing your own custom `apparmor.txt` file will earn your app a security point after your app is installed, thus improving your user's confidence and perception of your app.
 
-An `apparmor.txt` goes in the same folder as your `config.yaml` file. Below is an example `apparmor.txt`. Replace `ADDON_SLUG` with the slug defined in your add-on configuration.
+An `apparmor.txt` goes in the same folder as your `config.yaml` file. Below is an example `apparmor.txt`. Replace `ADDON_SLUG` with the slug defined in your app configuration.
 
 apparmor.txt
 
@@ -120,30 +120,30 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
 }
 ```
 
-When working on this for your own add-ons, the following tips should help you get started:
+When working on this for your own apps, the following tips should help you get started:
 
 1. The S6 part of this is fairly standard. You may need to add things to accommodate your setup scripts but generally don't remove anything.
 2. If a service being run provides an AppArmor profile, apply that to the service. Always prefer one written by the developers.
 3. If there isn't one for a service and you want to make one then do the following:
   a. Add minimum required access you're aware of. Things you definitely know the service needs
   b. Add `complain` as a flag to the profile
-  c. Run the add-on and review the audit log with `journalctl _TRANSPORT="audit" -g 'apparmor="ALLOWED"'`
-  d. Add access as necessary until using the add-on does not generate any audit warnings
+  c. Run the app and review the audit log with `journalctl _TRANSPORT="audit" -g 'apparmor="ALLOWED"'`
+  d. Add access as necessary until using the app does not generate any audit warnings
   e. Remove the `complain` flag so ungranted access is DENIED not ALLOWED
 4. Repeat #3 when updating the service as new access may be required
 
 ## Ingress
 
-Ingress allows users to access the add-on web interface via the Home Assistant UI. Authentication is handled by Home Assistant, so neither the user nor the add-on developer will need to care about the security or port forwarding. Users love this feature! It connects your user directly to the add-on, can provide a seamless UX within Home Assistant and grants your add-on 2 points of security.
+Ingress allows users to access the app web interface via the Home Assistant UI. Authentication is handled by Home Assistant, so neither the user nor the app developer will need to care about the security or port forwarding. Users love this feature! It connects your user directly to the app, can provide a seamless UX within Home Assistant and grants your app 2 points of security.
 
 Here are the requirements of Ingress:
 - Ingress must be enabled. Set `ingress: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options).
-- Your server may run on port 8099. If it does not run on 8099, you must set `ingress_port: PORT_NUMBER` in [`config.yaml`](/docs/add-ons/configuration/#add-on-config) to match your configuration.
-- Only connections from `172.30.32.2` must be allowed. You should deny access to all other IP addresses within your add-on server. 
+- Your server may run on port 8099. If it does not run on 8099, you must set `ingress_port: PORT_NUMBER` in [`config.yaml`](/docs/add-ons/configuration/#app-config) to match your configuration.
+- Only connections from `172.30.32.2` must be allowed. You should deny access to all other IP addresses within your app server. 
 - Users are previously authenticated via Home Assistant. Authentication is not required. 
 
 :::tip
-Configuration of path and port information may be queried via [add-ons info API endpoint](/docs/api/supervisor/endpoints/#addons). If the Home Assistant URL is required by your addon, Ingress adds a request header `X-Ingress-Path` which may be filtered to obtain the base URL. 
+Configuration of path and port information may be queried via [apps info API endpoint](/docs/api/supervisor/endpoints/#addons). If the Home Assistant URL is required by your addon, Ingress adds a request header `X-Ingress-Path` which may be filtered to obtain the base URL. 
 :::
 
 Ingress API gateway supports the following:
@@ -168,7 +168,7 @@ server {
 }
 ```
 
-Our example `Dockerfile` is configured to support only our Nginx server and does not support a `run.sh` like most add-ons. You may replace the `CMD` with your own command to allow more configuration options while launching your add-on. This Dockerfile will `RUN` to install our Nginx dependencies, `COPY` our example `ingress.conf` from above to the add-on container, then `CMD` start Nginx.
+Our example `Dockerfile` is configured to support only our Nginx server and does not support a `run.sh` like most apps. You may replace the `CMD` with your own command to allow more configuration options while launching your app. This Dockerfile will `RUN` to install our Nginx dependencies, `COPY` our example `ingress.conf` from above to the app container, then `CMD` start Nginx.
 
 Dockerfile
 
@@ -207,22 +207,22 @@ arch:
 ingress: true
 ```
 
-After the add-on is started, you should be able to view your Ingress server by clicking "OPEN WEB UI" within the add-on info screen.
+After the app is started, you should be able to view your Ingress server by clicking "OPEN WEB UI" within the app info screen.
 
 ## Security
 
-Add-on security should be a matter of pride. You should strive for the highest level of security you can possibly attain. If your add-on has a lower security rating, then users will be less likely to trust it.
+App security should be a matter of pride. You should strive for the highest level of security you can possibly attain. If your app has a lower security rating, then users will be less likely to trust it.
 
-Each add-on starts with a base rating of 5, on a scale of 1 to 6. Depending on decisions made during development, you will be assigned a score based on certain actions. There are some actions that have additional consequences. These additional consequences appear in the Notes section of the following table.
+Each app starts with a base rating of 5, on a scale of 1 to 6. Depending on decisions made during development, you will be assigned a score based on certain actions. There are some actions that have additional consequences. These additional consequences appear in the Notes section of the following table.
 
 | Action | Change | Notes |
 |---|---|---|
 | Use `ingress: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | +2 | overrides `auth_api` rating |
 | Use `auth_api: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | +1 | overridden by `ingress` |
-| Add-on is signed with [CodeNotary](https://cas.codenotary.com/)| +1||
+| App is signed with [CodeNotary](https://cas.codenotary.com/)| +1||
 | Use custom [`apparmor.txt`](/docs/add-ons/presentation#apparmor)| +1| Rating applied after installation |
 | Set `apparmor: false` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -1 | |
-| Use `privileged: NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_PTRACE`, `SYS_MODULE`, or `DAC_READ_SEARCH`, or `kernel_modules: ` used in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options)| -1 | Rating applied only once if multiple are used. |
+| Use `privileged: NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_PTRACE`, `SYS_MODULE`, or `DAC_READ_SEARCH`, or `kernel_modules:` used in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options)| -1 | Rating applied only once if multiple are used. |
 | Use `hassio_role: manager` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -1 | |
 | Use `host_network: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -1 | |
 | Use `hassio_role: admin` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -2 | |
