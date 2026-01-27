@@ -138,7 +138,7 @@ Ingress allows users to access the app web interface via the Home Assistant UI. 
 
 Here are the requirements of Ingress:
 - Ingress must be enabled. Set `ingress: true` in [`config.yaml`](/docs/apps/configuration#optional-configuration-options).
-- Your server may run on port 8099. If it does not run on 8099, you must set `ingress_port: PORT_NUMBER` in [`config.yaml`](/docs/apps/configuration/#app-config) to match your configuration.
+- Your server may run on port 8099. If it does not run on 8099, you must set `ingress_port: PORT_NUMBER` in [`config.yaml`](/docs/apps/configuration#app-config) to match your configuration.
 - Only connections from `172.30.32.2` must be allowed. You should deny access to all other IP addresses within your app server. 
 - Users are previously authenticated via Home Assistant. Authentication is not required. 
 
