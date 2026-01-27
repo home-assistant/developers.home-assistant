@@ -7,14 +7,14 @@ Add-ons for Home Assistant allow the user to extend the functionality around Hom
 
 Under the hood, add-ons are container images published to a container registry like [GitHub container registry](https://github.com/features/packages) and [Docker Hub](https://hub.docker.com/). Developers can create [GitHub](https://github.com) repositories that contain multiple add-ons for easy sharing with the community.
 
-- [Tutorial: Making your first add-on](add-ons/tutorial.md)
-- [Configuration](add-ons/configuration.md)
-- [Communication](add-ons/communication.md)
-- [Local Testing](add-ons/testing.md)
-- [Publishing](add-ons/publishing.md)
-- [Presentation](add-ons/presentation.md)
-- [Repositories](add-ons/repository.md)
-- [Security](add-ons/security.md)
+- [Tutorial: Making your first add-on](apps/tutorial.md)
+- [Configuration](apps/configuration.md)
+- [Communication](apps/communication.md)
+- [Local Testing](apps/testing.md)
+- [Publishing](apps/publishing.md)
+- [Presentation](apps/presentation.md)
+- [Repositories](apps/repository.md)
+- [Security](apps/security.md)
 
 Useful links:
 

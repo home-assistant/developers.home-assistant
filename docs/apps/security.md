@@ -20,7 +20,7 @@ For access to the Supervisor API you need to define a role or run in default mod
 
 ## Codenotary CAS
 
-You can sign your images and also verify our base image which you build from to provide a full chain of trust. This feature is supported by our [Builder](https://github.com/home-assistant/builder) and the [build config](/docs/add-ons/configuration#app-extended-build). To enable this feature on the Supervisor for your app, you simply need to add your email address to the app configuration `codenotary`.
+You can sign your images and also verify our base image which you build from to provide a full chain of trust. This feature is supported by our [Builder](https://github.com/home-assistant/builder) and the [build config](/docs/apps/configuration#app-extended-build). To enable this feature on the Supervisor for your app, you simply need to add your email address to the app configuration `codenotary`.
 
 ## Protection
 
