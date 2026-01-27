@@ -29,7 +29,7 @@ module.exports = {
             },
             { to: "docs/frontend", label: "Frontend" },
             { to: "docs/supervisor", label: "Supervisor" },
-            { to: "docs/add-ons", label: "Add-ons" },
+            { to: "docs/apps", label: "Apps" },
             { to: "docs/operating-system", label: "Operating System" },
             { to: "docs/voice/overview", label: "Voice" },
             { to: "docs/translations", label: "Translations" },

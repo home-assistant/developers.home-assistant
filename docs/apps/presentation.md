@@ -49,7 +49,7 @@ You may consider to offer a stable and a "next" or "canary" branch. These can be
 https://github.com/home-assistant/hassio-addons-example#next
 ```
 
-You should add this information to your documentation. Also, you should consider having different [names for the repositories](/docs/add-ons/repository#repository-configuration) in every branch, for example, "Super app (stable)" and "Super app (beta)".
+You should add this information to your documentation. Also, you should consider having different [names for the repositories](/docs/apps/repository#repository-configuration) in every branch, for example, "Super app (stable)" and "Super app (beta)".
 
 ## AppArmor
 
@@ -137,8 +137,8 @@ When working on this for your own apps, the following tips should help you get s
 Ingress allows users to access the app web interface via the Home Assistant UI. Authentication is handled by Home Assistant, so neither the user nor the app developer will need to care about the security or port forwarding. Users love this feature! It connects your user directly to the app, can provide a seamless UX within Home Assistant and grants your app 2 points of security.
 
 Here are the requirements of Ingress:
-- Ingress must be enabled. Set `ingress: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options).
-- Your server may run on port 8099. If it does not run on 8099, you must set `ingress_port: PORT_NUMBER` in [`config.yaml`](/docs/add-ons/configuration/#app-config) to match your configuration.
+- Ingress must be enabled. Set `ingress: true` in [`config.yaml`](/docs/apps/configuration#optional-configuration-options).
+- Your server may run on port 8099. If it does not run on 8099, you must set `ingress_port: PORT_NUMBER` in [`config.yaml`](/docs/apps/configuration/#app-config) to match your configuration.
 - Only connections from `172.30.32.2` must be allowed. You should deny access to all other IP addresses within your app server. 
 - Users are previously authenticated via Home Assistant. Authentication is not required. 
 
@@ -217,16 +217,16 @@ Each app starts with a base rating of 5, on a scale of 1 to 6. Depending on deci
 
 | Action | Change | Notes |
 |---|---|---|
-| Use `ingress: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | +2 | overrides `auth_api` rating |
-| Use `auth_api: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | +1 | overridden by `ingress` |
+| Use `ingress: true` in [`config.yaml`](/docs/apps/configuration#optional-configuration-options) | +2 | overrides `auth_api` rating |
+| Use `auth_api: true` in [`config.yaml`](/docs/apps/configuration#optional-configuration-options) | +1 | overridden by `ingress` |
 | App is signed with [CodeNotary](https://cas.codenotary.com/)| +1||
-| Use custom [`apparmor.txt`](/docs/add-ons/presentation#apparmor)| +1| Rating applied after installation |
-| Set `apparmor: false` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -1 | |
-| Use `privileged: NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_PTRACE`, `SYS_MODULE`, or `DAC_READ_SEARCH`, or `kernel_modules:` used in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options)| -1 | Rating applied only once if multiple are used. |
-| Use `hassio_role: manager` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -1 | |
-| Use `host_network: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -1 | |
-| Use `hassio_role: admin` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -2 | |
-| Use `host_pid: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -2 | |
-| Use `host_uts: true` and `privileged: SYS_ADMIN` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | -1 | |
-| Use `full_access: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | Security set to 1 | Overrides all other adjustments |
-| Use `docker_api: true` in [`config.yaml`](/docs/add-ons/configuration#optional-configuration-options) | Security set to 1 | Overrides all other adjustments |
+| Use custom [`apparmor.txt`](/docs/apps/presentation#apparmor)| +1| Rating applied after installation |
+| Set `apparmor: false` in [`config.yaml`](/docs/apps/configuration#optional-configuration-options) | -1 | |
+| Use `privileged: NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_PTRACE`, `SYS_MODULE`, or `DAC_READ_SEARCH`, or `kernel_modules:` used in [`config.yaml`](/docs/apps/configuration#optional-configuration-options)| -1 | Rating applied only once if multiple are used. |
+| Use `hassio_role: manager` in [`config.yaml`](/docs/apps/configuration#optional-configuration-options) | -1 | |
+| Use `host_network: true` in [`config.yaml`](/docs/apps/configuration#optional-configuration-options) | -1 | |
+| Use `hassio_role: admin` in [`config.yaml`](/docs/apps/configuration#optional-configuration-options) | -2 | |
+| Use `host_pid: true` in [`config.yaml`](/docs/apps/configuration#optional-configuration-options) | -2 | |
+| Use `host_uts: true` and `privileged: SYS_ADMIN` in [`config.yaml`](/docs/apps/configuration#optional-configuration-options) | -1 | |
+| Use `full_access: true` in [`config.yaml`](/docs/apps/configuration#optional-configuration-options) | Security set to 1 | Overrides all other adjustments |
+| Use `docker_api: true` in [`config.yaml`](/docs/apps/configuration#optional-configuration-options) | Security set to 1 | Overrides all other adjustments |
