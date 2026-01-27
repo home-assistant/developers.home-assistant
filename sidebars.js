@@ -17,7 +17,7 @@ const iqs_rules = Object.values(iqs_rules_by_tier).flat().map((rule) => {
 
 module.exports = {
   Addons: [
-    "apps"
+    "apps",
     "apps/tutorial",
     "apps/configuration",
     "apps/communication",
