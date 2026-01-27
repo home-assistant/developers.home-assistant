@@ -2,7 +2,7 @@
 title: "Presenting your app"
 ---
 
-If you choose to make your app (formerly known as add-on) available to the public, providing clear information, graphics and security reassurances will help attract users. The recommendations below are a guideline for presenting your app.
+If you choose to make your app (formerly known as an add-on) available to the public, providing clear information, graphics and security reassurances will help attract users. The recommendations below are a guideline for presenting your app.
 
 ## Adding intro
 

@@ -4,7 +4,7 @@ sidebar_label: Debugging
 ---
 
 :::info
-This section is not for end users. End users should use the [SSH app (formerly known as add-on)] to SSH into Home Assistant. This is for **developers** of Home Assistant. Do not ask for support if you are using these options.
+This section is not for end users. End users should use the [SSH app (formerly known as an add-on)] to SSH into Home Assistant. This is for **developers** of Home Assistant. Do not ask for support if you are using these options.
 :::
 
 [SSH app]: https://github.com/home-assistant/addons/tree/master/ssh
