@@ -46,7 +46,7 @@
 /docs/frontend_index /docs/frontend
 /docs/hassio_addon_communication /docs/apps/communication
 /docs/hassio_addon_config /docs/apps/configuration
-/docs/hassio_addon_index /docs/add-ons
+/docs/hassio_addon_index /docs/apps
 /docs/hassio_addon_presentation /docs/apps/presentation
 /docs/hassio_addon_publishing /docs/apps/publishing
 /docs/hassio_addon_repository /docs/apps/repository
