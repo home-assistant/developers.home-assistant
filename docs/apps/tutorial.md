@@ -43,7 +43,7 @@ CMD [ "/run.sh" ]
 
 This is your app configuration, which tells the Supervisor what to do and how to present your app.
 
-For an overview of all valid app configuration options have a look [here](/docs/apps/configuration#app-configuration)
+For an overview of all valid app configuration options, see [App configuration options](/docs/apps/configuration#app-configuration).
 
 ```yaml
 name: "Hello world"
