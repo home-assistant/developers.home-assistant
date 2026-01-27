@@ -39,7 +39,7 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.BATTERY` | % | Percentage of battery that is left
 | `NumberDeviceClass.BLOOD_GLUCOSE_CONCENTRATION` | mg/dL, mmol/L | Blood glucose concentration```
 | `NumberDeviceClass.CO2` | ppm | Concentration of carbon dioxide.
-| `NumberDeviceClass.CO` | ppm, µg/m³, mg/m³ | Concentration of carbon monoxide.
+| `NumberDeviceClass.CO` | ppb, ppm, µg/m³, mg/m³ | Concentration of carbon monoxide.
 | `NumberDeviceClass.CONDUCTIVITY` | S/cm, mS/cm, µS/cm | Conductivity
 | `NumberDeviceClass.CURRENT` | A, mA | Current
 | `NumberDeviceClass.DATA_RATE` | bit/s, kbit/s, Mbit/s, Gbit/s, B/s, kB/s, MB/s, GB/s, KiB/s, MiB/s, GiB/s | Data rate
@@ -56,10 +56,10 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.IRRADIANCE` | W/m², BTU/(h⋅ft²) | Irradiance
 | `NumberDeviceClass.MOISTURE` | % | Moisture
 | `NumberDeviceClass.MONETARY` | [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) | Monetary value with a currency.
-| `NumberDeviceClass.NITROGEN_DIOXIDE` | µg/m³ | Concentration of nitrogen dioxide
-| `NumberDeviceClass.NITROGEN_MONOXIDE` | µg/m³ | Concentration of nitrogen monoxide
+| `NumberDeviceClass.NITROGEN_DIOXIDE` | ppb, µg/m³ | Concentration of nitrogen dioxide
+| `NumberDeviceClass.NITROGEN_MONOXIDE` | ppb, µg/m³ | Concentration of nitrogen monoxide
 | `NumberDeviceClass.NITROUS_OXIDE` | µg/m³ | Concentration of nitrous oxide
-| `NumberDeviceClass.OZONE` | µg/m³ | Concentration of ozone
+| `NumberDeviceClass.OZONE` | ppb, µg/m³ | Concentration of ozone
 | `NumberDeviceClass.PH` | None | Potential hydrogen (pH) of an aqueous solution
 | `NumberDeviceClass.PM1` | µg/m³ | Concentration of particulate matter less than 1 micrometer
 | `NumberDeviceClass.PM25` | µg/m³ | Concentration of particulate matter less than 2.5 micrometers
