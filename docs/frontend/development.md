@@ -130,7 +130,7 @@ hass --skip-pip-packages home-assistant-frontend
 
 Sometimes you need to test frontend changes on different environments or without setting up a full development environment. For example, you may want to test changes on a Home Assistant OS instance, or verify a fix works in your specific setup before the PR is merged.
 
-The `development_pr` option allows you to easily test frontend PRs by automatically downloading and using the built frontend artifact from GitHub.
+The `development_pr` option allows you to easily test frontend PRs by automatically downloading and using the frontend artifact from GitHub.
 
 ### Configuration
 
