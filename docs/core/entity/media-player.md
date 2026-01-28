@@ -323,7 +323,7 @@ class MyMediaPlayer(MediaPlayerEntity):
 
 ### Grouping player entities together
 
-Optional. If your player has support for grouping player entities together for synchronous playback (indicated by `SUPPORT_GROUPING`) one join and one unjoin method needs to be defined.
+Optional. If your player supports grouping for synchronous playback (indicated by `MediaPlayerEntityFeature.GROUPING` in `supported_features`) one join and one unjoin method needs to be defined.
 
 ```python
 class MyMediaPlayer(MediaPlayerEntity):
@@ -373,5 +373,5 @@ class MyMediaPlayer(MediaPlayerEntity):
 - Do not include the current entity.
 - Only include entities that actually support grouping with this player.
 
-> **Note:** The `media_player.get_groupable_players` service is registered automatically when `SUPPORT_GROUPING` is present in `supported_features`.
+> **Note:** The `media_player.get_groupable_players` service is registered automatically when `MediaPlayerEntityFeature.GROUPING` is present in `supported_features`.
 > If your method returns `None`, Home Assistant will use the default implementation.
