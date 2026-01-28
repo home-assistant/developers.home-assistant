@@ -4,7 +4,7 @@ title: "Models"
 
 These models are describing objects that are getting returned from the supervisor API.
 
-## App (formerly known as add-on)
+## App (formerly known as an add-on)
 
 | key              | type           | description                                           |
 | ---------------- | -------------- | ----------------------------------------------------- |

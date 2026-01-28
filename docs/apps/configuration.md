@@ -2,7 +2,7 @@
 title: "App configuration"
 ---
 
-Each app (formerly known as add-on) is stored in a folder. The file structure looks like this:
+Each app (formerly known as an add-on) is stored in a folder. The file structure looks like this:
 
 ```text
 addon_name/
@@ -55,7 +55,7 @@ then there will be a variable `TARGET` containing `beer` in the environment of y
 
 ## App Dockerfile
 
-All apps (formerly known as add-on) are based on the latest Alpine Linux image. Home Assistant will automatically substitute the right base image based on the machine architecture. Add `tzdata` if you need to run in a different timezone. `tzdata` Is is already added to our base images.
+All apps (formerly known as an add-on) are based on the latest Alpine Linux image. Home Assistant will automatically substitute the right base image based on the machine architecture. Add `tzdata` if you need to run in a different timezone. `tzdata` Is is already added to our base images.
 
 ```dockerfile
 ARG BUILD_FROM
@@ -96,7 +96,7 @@ We support the following build arguments by default:
 
 ## App configuration
 
-The configuration for an app (formerly known as add-on) is stored in `config.yaml`.
+The configuration for an app (formerly known as an add-on) is stored in `config.yaml`.
 
 ```yaml
 name: "Hello world"
@@ -201,7 +201,7 @@ Avoid using `config.yaml` as filename in your app for anything other than the ap
 
 ### Options / Schema
 
-The `options` dictionary contains all available options and their default value. Set the default value to `null` or define the data type in the `schema` dictionary to make an option mandatory. This way, the option needs to be given by the user before the app (formerly known as add-on) can start. Nested arrays and dictionaries are supported with a maximum depth of two.
+The `options` dictionary contains all available options and their default value. Set the default value to `null` or define the data type in the `schema` dictionary to make an option mandatory. This way, the option needs to be given by the user before the app (formerly known as an add-on) can start. Nested arrays and dictionaries are supported with a maximum depth of two.
 
 To make an option truly optional (without default value), the `schema` dictionary needs to be used. Put a `?` at the end of the data type and *do not* define any default value in the `options` dictionary. If any default value is given, the option becomes a required value.
 

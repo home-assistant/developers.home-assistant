@@ -2,7 +2,7 @@
 title: "App security"
 ---
 
-Home Assistant rates every app (formerly known as add-on) based on the wanted rights. An app with a rating of 6 is very secure. If an app has a rating of 1, you shouldn't run this app unless you are 100% sure that you can trust the source.
+Home Assistant rates every app (formerly known as an add-on) based on the wanted rights. An app with a rating of 6 is very secure. If an app has a rating of 1, you shouldn't run this app unless you are 100% sure that you can trust the source.
 
 ## API role
 
