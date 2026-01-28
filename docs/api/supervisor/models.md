@@ -4,24 +4,24 @@ title: "Models"
 
 These models are describing objects that are getting returned from the supervisor API.
 
-## Addon
+## App (formerly known as add-on)
 
 | key              | type           | description                                           |
 | ---------------- | -------------- | ----------------------------------------------------- |
-| name             | string         | The name of the add-on                                |
-| slug             | string         | The slug for the add-on                               |
+| name             | string         | The name of the app                                |
+| slug             | string         | The slug for the app                               |
 | advanced         | boolean        | `true` if it should only be visible to advanced users |
-| description      | string         | The description of the add-on                         |
-| repository       | string         | The repository the add-on came from                   |
-| version          | string or null | The installed version of the add-on                   |
-| version_latest   | string         | The latest published version of the add-on            |
+| description      | string         | The description of the app                         |
+| repository       | string         | The repository the app came from                   |
+| version          | string or null | The installed version of the app                   |
+| version_latest   | string         | The latest published version of the app            |
 | update_available | boolean        | `true` if an update is available                      |
-| installed        | string         | `true` if the the add-on is installed                 |
-| available        | boolean        | `false` if you can not install the add-on             |
-| icon             | bool           | The add-on has an icon file                            |
-| logo             | bool           | The add-on has a logo file                            |
-| state            | string         | The state of the add-on (started, stopped)            |
-| system_managed   | bool           | Indicates whether the add-on is managed by Home Assistant |
+| installed        | string         | `true` if the the app is installed                 |
+| available        | boolean        | `false` if you can not install the app             |
+| icon             | bool           | The app has an icon file                            |
+| logo             | bool           | The app has a logo file                            |
+| state            | string         | The state of the app (started, stopped)            |
+| system_managed   | bool           | Indicates whether the app is managed by Home Assistant |
 
 ## Application
 
@@ -33,7 +33,7 @@ These models are describing objects that are getting returned from the superviso
 | stream_type  | string  | The type of the stream (INPUT, OUTPUT) |
 | volume       | float   | The current volume                     |
 | mute         | boolean | `true` if the application is muted     |
-| addon        | string  | The add-on slug                        |
+| addon        | string  | The app slug                        |
 
 ## Audio
 
@@ -78,7 +78,7 @@ These models are describing objects that are getting returned from the superviso
 
 | key     | type   | description               |
 | ------- | ------ | ------------------------- |
-| addon   | string | The add-on slug           |
+| addon   | string | The app slug           |
 | service | string | The service name          |
 | uuid    | string | The UUID of the discovery |
 | config  | dict   | The configuration         |
@@ -197,7 +197,7 @@ The `content` key of a backup object contains the following keys:
 | key       | type    | description                                                           |
 | --------- | ------- | --------------------------------------------------------------------- |
 | homeassistant      | boolean  | `true` if the backup contains homeassistant
-| addons      | list  | A list of add-on slugs included in the backup
+| addons      | list  | A list of app slugs included in the backup
 | folders      | list  | A list of folder names included in the backup
 
 ## Backup details
@@ -212,8 +212,8 @@ The `content` key of a backup object contains the following keys:
 | protected                      | boolean        | `true` if the backup is password protected                                                                                |
 | location                       | string or null | The name of the backup mount it's stored on.  `null` if it's stored locally.                                              |
 | homeassistant                  | string         | The version of Home Assistant that was in use                                                                             |
-| addons                         | list           | A list of add-ons in the backup. Add-ons are represented as a dictionary with these keys [`slug`,`name`,`version`,`size`] |
-| repositories                   | list           | A list of add-on repository URL's as strings                                                                              |
+| addons                         | list           | A list of apps in the backup. Apps are represented as a dictionary with these keys [`slug`,`name`,`version`,`size`] |
+| repositories                   | list           | A list of app repository URL's as strings                                                                              |
 | folders                        | list           | A list of strings representing directories                                                                                |
 | homeassistant_exclude_database | boolean        | `true` if the Home Assistant database file was excluded from this backup                                                  |
 

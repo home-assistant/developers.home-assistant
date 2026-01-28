@@ -16,16 +16,16 @@ const iqs_rules = Object.values(iqs_rules_by_tier).flat().map((rule) => {
 
 
 module.exports = {
-  Addons: [
-    "add-ons",
-    "add-ons/tutorial",
-    "add-ons/configuration",
-    "add-ons/communication",
-    "add-ons/testing",
-    "add-ons/publishing",
-    "add-ons/presentation",
-    "add-ons/repository",
-    "add-ons/security",
+  Apps: [
+    "apps",
+    "apps/tutorial",
+    "apps/configuration",
+    "apps/communication",
+    "apps/testing",
+    "apps/publishing",
+    "apps/presentation",
+    "apps/repository",
+    "apps/security",
   ],
   Overview: [
     "architecture_index",

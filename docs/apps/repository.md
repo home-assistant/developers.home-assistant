@@ -1,10 +1,10 @@
 ---
-title: "Create an add-on repository"
+title: "Create an app repository"
 ---
 
-An add-on repository can contain one or more add-ons. Each add-on is stored in its own unique folder. To be identified as a repository, the repository must contain a configuration file.
+An app repository can contain one or more apps (formerly known as add-ons). Each app is stored in its own unique folder. To be identified as a repository, the repository must contain a configuration file.
 
-Check the [Example add-on repository](https://github.com/home-assistant/addons-example) for further details.
+Check the [Example app repository](https://github.com/home-assistant/addons-example) for further details.
 
 ## Installing a repository
 
@@ -27,5 +27,5 @@ maintainer: HomeAssistant Team <info@home-assistant.io>
 | Key | Required | Description |
 | --- | -------- | ----------- |
 | `name` | yes | Name of the repository
-| `url` | no | Homepage of the repository. Here you can explain the various add-ons.
+| `url` | no | Homepage of the repository. Here you can explain the various apps.
 | `maintainer` | no | Contact info of the maintainer.

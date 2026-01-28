@@ -22,7 +22,7 @@ at `/addon_configs/<your addon slug>` and map that to `/config` within the add-o
 container. If your addon needs to be able to create and modify files in this folder
 in addition to collecting files from users, use `addon_config:rw` instead.
 
-To read more about this feature and some of the use cases, see [Add-on advanced options](/docs/add-ons/configuration#add-on-advanced-options).
+To read more about this feature and some of the use cases, see [Add-on advanced options](/docs/apps/configuration#add-on-advanced-options).
 
 ## Backwards compatibility with `/config`
 
