@@ -358,20 +358,17 @@ Override this method only if you need to:
 ```python
 class MyMediaPlayer(MediaPlayerEntity):
 
-    async def async_get_groupable_players(self) -> dict[str, Any] | None:
+    async def async_get_groupable_players(self) -> dict[str, Any]:
         """Return players that can be grouped with this player.
 
-        Return a dict with a `result` list of entity IDs,
-        or `None` to fall back to the default behavior.
+        Return a dict with a `result` list of entity IDs.
         """
         return {"result": ["media_player.living_room", "media_player.kitchen"]}
 ```
 
 #### Requirements
 
-- The return value **must** be:
-  - A dictionary with a `result` key containing a list of entity IDs, **or**
-  - `None` to use Home Assistant’s default logic.
+- The return value **must** be a dictionary with a `result` key containing a list of entity IDs
 - `result` must be a list of media player entity IDs.
 - Do not include the current entity.
 - Only include entities that actually support grouping with this player.
