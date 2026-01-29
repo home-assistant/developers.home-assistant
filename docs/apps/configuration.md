@@ -55,7 +55,7 @@ then there will be a variable `TARGET` containing `beer` in the environment of y
 
 ## App Dockerfile
 
-All apps (formerly known as an add-on) are based on the latest Alpine Linux image. Home Assistant will automatically substitute the right base image based on the machine architecture. Add `tzdata` if you need to run in a different timezone. `tzdata` Is is already added to our base images.
+All apps (formerly known as add-ons) are based on the latest Alpine Linux image. Home Assistant will automatically substitute the right base image based on the machine architecture. Add `tzdata` if you need to run in a different timezone. `tzdata` Is is already added to our base images.
 
 ```dockerfile
 ARG BUILD_FROM
