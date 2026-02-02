@@ -54,8 +54,6 @@ init: false
 arch:
   - aarch64
   - amd64
-  - armhf
-  - armv7
 ```
 
 ### The `run.sh` file
