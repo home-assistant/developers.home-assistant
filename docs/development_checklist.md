@@ -15,3 +15,4 @@ Before you commit any changes, check your work against these requirements:
 - The code is formatted using Ruff (`ruff format`).
 - Documentation is developed for [home-assistant.io](https://home-assistant.io/)
   - Visit the [website documentation](/documenting.md) for more information about contributing to [home-assistant.io](https://github.com/home-assistant/home-assistant.io).
+- You may wish to review existing pull requests and review comments for [core](https://github.com/home-assistant/core/pulls), [frontend](https://github.com/home-assistant/frontend/pulls) etc to look for similar proposed work, conflcting work, ideas, do's and dont's.
