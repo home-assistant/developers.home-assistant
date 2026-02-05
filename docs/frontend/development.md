@@ -138,7 +138,7 @@ To use this feature, you need both a PR number and a GitHub token.
 
 #### Creating a GitHub token
 
-1. Go to [GitHub Settings > Developer Settings > Personal Access Tokens > Fine grained tokens](https://github.com/settings/personal-access-tokens)
+1. Go to [GitHub Settings > Developer Settings > Personal Access Tokens > Fine-grained tokens](https://github.com/settings/personal-access-tokens)
 2. Click "Generate new token"
 3. Give it a descriptive name like "Home Assistant Frontend Testing"
 4. Set the expiration date (recommended: 90 days or less)
