@@ -138,12 +138,12 @@ To use this feature, you need both a PR number and a GitHub token.
 
 #### Creating a GitHub token
 
-1. Go to [GitHub Settings > Developer Settings > Personal Access Tokens](https://github.com/settings/personal-access-tokens)
+1. Go to [GitHub Settings > Developer Settings > Personal Access Tokens > Fine grained tokens](https://github.com/settings/personal-access-tokens)
 2. Click "Generate new token"
 3. Give it a descriptive name like "Home Assistant Frontend Testing"
 4. Set the expiration date (recommended: 90 days or less)
 5. Under "Repository access", select "Public Repositories (read-only)"
-6. Under "Permissions", leave empty
+6. Skip the 'Permissions' section (leave it empty)
 7. Click "Generate token"
 8. Copy the token immediately (you won't be able to see it again)
 
@@ -182,11 +182,7 @@ Home Assistant will automatically return to using the built-in production fronte
 
 ### How it works
 
-When you configure `development_pr`:
-
-1. Home Assistant will download the frontend build artifact from the specified PR on GitHub
-2. The downloaded frontend will be used instead of the production version
-3. This happens automatically on startup
+When you configure `development_pr`, Home Assistant downloads the frontend build artifact from the specified PR on GitHub during startup and uses it instead of the production version. The artifact is cached locally, and on subsequent restarts, Home Assistant checks if the PR has new commits by comparing SHA sums. If a newer version is found, it downloads the updated artifact automatically.
 
 :::info
 If you have both `development_repo` and `development_pr` configured, `development_repo` takes precedence. The local development repository will be used instead of the PR build.
