@@ -2,6 +2,14 @@
 title: "Custom integration localization"
 ---
 
+:::caution Strings.json vs. Translations
+**Do not use `strings.json` for custom components.**
+
+The `strings.json` file and the placeholder syntax (e.g., `[%key:common::config_flow::data::email%]`) are **build-time features** used only by Home Assistant Core.
+
+Custom integrations do not run through the internal translation build script. You must manually create the `translations/en.json` file and include the full, flat English text for every key. If you use `strings.json` or placeholders, your config flow will fail to load translations and show raw keys (e.g., `username` rather than the translated value `Enter Username`).
+:::
+
 ## Translation strings
 
 Unlike localized strings merged in the `home-assistant` repository, custom integrations cannot take advantage of Lokalise for user-submitted translations. However, custom integration authors can still include translations with their integrations. These will be read from the `translations` directory, adjacent to the integration source. They are named `<language_code>.json` in the `translations` directory, e.g., for the German translation `de.json`.
