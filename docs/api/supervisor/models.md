@@ -129,12 +129,13 @@ These models are describing objects that are getting returned from the superviso
 
 ### Wifi configuration
 
-| key         | type    | description                                                                  |
-| ----------- | ------- | ---------------------------------------------------------------------------- |
-| mode        | string  | Set the mode `infrastructure`, `mesh`, `adhoc` or `ap`.                      |
-| auth        | string  | Set the auth mode: `open`, `web` or `wpa-psk`.                               |
-| ssid        | string  | Set the SSID for the Wireless.                                               |
-| signal      | integer | Percentage of signal strength.                                               |
+| key         | type            | description                                                             |
+| ----------- | --------------- | ----------------------------------------------------------------------- |
+| mode        | string          | Set the mode `infrastructure`, `mesh`, `adhoc` or `ap`.                 |
+| auth        | string          | Set the auth mode: `open`, `web` or `wpa-psk`.                          |
+| ssid        | string          | Set the SSID for the Wireless.                                          |
+| signal      | integer         | Percentage of signal strength.                                          |
+| powersave   | integer or null | WiFi powersave mode: `0`=default, `1`=ignore, `2`=disable, `3`=enable.  |
 
 ### VLAN configuration
 

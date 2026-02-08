@@ -2629,12 +2629,13 @@ Update the settings for a network interface.
 
 **wifi:**
 
-| key    | type   | optional | description                                                                    |
-| ------ | ------ | -------- | ------------------------------------------------------------------------------ |
-| mode   | string | True     | Set the mode `infrastructure` (default), `mesh`, `adhoc` or `ap`               |
-| auth   | string | True     | Set the auth mode: `open` (default), `web`, `wpa-psk`                          |
-| ssid   | string | True     | Set the SSID for connect into                                                  |
-| psk    | string | True     | The shared key which is used with `web` or `wpa-psk`                           |
+| key       | type   | optional | description                                                                    |
+| --------- | ------ | -------- | ------------------------------------------------------------------------------ |
+| mode      | string | True     | Set the mode `infrastructure` (default), `mesh`, `adhoc` or `ap`               |
+| auth      | string | True     | Set the auth mode: `open` (default), `web`, `wpa-psk`                          |
+| ssid      | string | True     | Set the SSID for connect into                                                  |
+| psk       | string | True     | The shared key which is used with `web` or `wpa-psk`                           |
+| powersave | int    | True     | WiFi powersave: `0`=default, `1`=ignore, `2`=disable, `3`=enable               |
 
 </ApiEndpoint>
 
