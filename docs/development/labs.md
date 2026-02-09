@@ -327,7 +327,7 @@ from homeassistant.components.labs import (
     async_is_preview_feature_enabled,
     async_subscribe_preview_feature,
 )
-from homeassistant.core import HomeAssistant, callback
+from homeassistant.core import HomeAssistant
 from homeassistant.helpers.issue_registry import (
     IssueSeverity,
     async_create_issue,
@@ -337,14 +337,21 @@ from homeassistant.helpers.issue_registry import (
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up the integration."""
 
-    @callback
-    def _async_update_special_repair(enabled: bool) -> None:
+    async def _async_update_special_repair(
+        event_data: EventLabsUpdatedData | None = None,
+    ) -> None:
         """Create or delete the special repair issue.
 
         Creates a repair issue when the special_repair lab feature is enabled,
         and deletes it when disabled. This demonstrates how lab features can interact
         with Home Assistant's repair system.
         """
+        enabled = (
+            event_data["enabled"]
+            if event_data is not None
+            else async_is_preview_feature_enabled(hass, DOMAIN, "special_repair")
+        )
+
         if enabled:
             async_create_issue(
                 hass,
@@ -357,26 +364,18 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         else:
             async_delete_issue(hass, DOMAIN, "kitchen_sink_special_repair_issue")
 
-    async def _async_handle_special_repair_update(
-        event_data: EventLabsUpdatedData,
-    ) -> None:
-        """Handle special_repair lab feature toggle."""
-        _async_update_special_repair(event_data["enabled"])
-
     # Subscribe to labs feature updates
     entry.async_on_unload(
         async_subscribe_preview_feature(
             hass,
             DOMAIN,
             "special_repair",
-            _async_handle_special_repair_update,
+            _async_update_special_repair,
         )
     )
 
     # Check if lab feature is currently enabled and create repair if so
-    _async_update_special_repair(
-        async_is_preview_feature_enabled(hass, DOMAIN, "special_repair")
-    )
+    await _async_update_special_repair()
 
     return True
 ```
