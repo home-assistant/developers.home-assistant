@@ -152,28 +152,32 @@ if (featureEnabled) {
 
 #### React to feature toggles
 
-Use the `async_listen()` helper to easily subscribe to feature toggle events:
+Use the `async_subscribe_preview_feature()` helper to subscribe to feature toggle events. The listener receives the event data as an argument and supports async functions:
 
 ```python
-from homeassistant.components.labs import async_listen, async_is_preview_feature_enabled
-from homeassistant.core import HomeAssistant, callback
+from homeassistant.components.labs import (
+    EventLabsUpdatedData,
+    async_subscribe_preview_feature,
+)
+from homeassistant.core import HomeAssistant
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up the integration."""
 
-    @callback
-    def _async_update_my_preview_feature() -> None:
+    async def _async_update_my_preview_feature(
+        event_data: EventLabsUpdatedData,
+    ) -> None:
         """Enable or disable the preview feature based on current state."""
-        if async_is_preview_feature_enabled(hass, DOMAIN, "my_preview_feature"):
+        if event_data["enabled"]:
             # Enable feature
-            enable_my_feature(hass)
+            await async_enable_my_feature(hass)
         else:
             # Disable feature
-            disable_my_feature(hass)
+            await async_disable_my_feature(hass)
 
     # Subscribe to changes for this specific feature
     entry.async_on_unload(
-        async_listen(
+        async_subscribe_preview_feature(
             hass,
             DOMAIN,
             "my_preview_feature",
@@ -181,16 +185,13 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         )
     )
 
-    # Check current state and apply
-    _async_update_my_preview_feature()
-
     return True
 ```
 
-The `async_listen()` helper automatically filters events for your domain and feature, simplifying the event handling code.
+The `async_subscribe_preview_feature()` helper automatically filters events for your domain and feature, and passes the event data (including the `enabled` state) directly to your listener.
 
 :::info
-For more complex scenarios or multiple preview features, you can still use the lower-level `EVENT_LABS_UPDATED` event directly. The `async_listen()` helper is recommended for most use cases as it reduces boilerplate and improves code readability.
+For more complex scenarios or multiple preview features, you can still use the lower-level `EVENT_LABS_UPDATED` event directly. The `async_subscribe_preview_feature()` helper is recommended for most use cases as it reduces boilerplate and improves code readability.
 :::
 
 ### 4. Runtime activation required
@@ -322,8 +323,9 @@ See the Kitchen Sink integration for a complete working example:
 
 ```python
 from homeassistant.components.labs import (
-    async_listen,
+    EventLabsUpdatedData,
     async_is_preview_feature_enabled,
+    async_subscribe_preview_feature,
 )
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.issue_registry import (
@@ -336,14 +338,14 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     """Set up the integration."""
 
     @callback
-    def _async_update_special_repair() -> None:
+    def _async_update_special_repair(enabled: bool) -> None:
         """Create or delete the special repair issue.
 
         Creates a repair issue when the special_repair lab feature is enabled,
         and deletes it when disabled. This demonstrates how lab features can interact
         with Home Assistant's repair system.
         """
-        if async_is_preview_feature_enabled(hass, DOMAIN, "special_repair"):
+        if enabled:
             async_create_issue(
                 hass,
                 DOMAIN,
@@ -355,18 +357,26 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         else:
             async_delete_issue(hass, DOMAIN, "kitchen_sink_special_repair_issue")
 
-    # Subscribe to labs feature updates using the async_listen helper
+    async def _async_handle_special_repair_update(
+        event_data: EventLabsUpdatedData,
+    ) -> None:
+        """Handle special_repair lab feature toggle."""
+        _async_update_special_repair(event_data["enabled"])
+
+    # Subscribe to labs feature updates
     entry.async_on_unload(
-        async_listen(
+        async_subscribe_preview_feature(
             hass,
             DOMAIN,
             "special_repair",
-            _async_update_special_repair,
+            _async_handle_special_repair_update,
         )
     )
 
     # Check if lab feature is currently enabled and create repair if so
-    _async_update_special_repair()
+    _async_update_special_repair(
+        async_is_preview_feature_enabled(hass, DOMAIN, "special_repair")
+    )
 
     return True
 ```
