@@ -152,7 +152,7 @@ if (featureEnabled) {
 
 #### React to feature toggles
 
-Use the `async_subscribe_preview_feature()` helper to subscribe to feature toggle events. The listener receives the event data as an argument and supports async functions:
+Use the `async_subscribe_preview_feature()` helper to subscribe to feature toggle events. The listener receives the event data as an argument and supports async coroutine functions:
 
 ```python
 from homeassistant.components.labs import (
