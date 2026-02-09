@@ -102,16 +102,26 @@ We do not guarantee when the applications will be available on F-Droid after a r
 
 When a release is created in the `pre-release` state or when a monthly tag is pushed, the `prepareNextRelease.yml` workflow is triggered. This workflow creates a pull request that updates the `changelog_master.xml` file to reflect the new version. Manual approval of this pull request is required. This process helps keep the changelog version consistent with the app version.
 
+### Renovate lockfile updates
+
+The `renovate-lockfiles.yml` workflow is automatically triggered when Renovate creates a pull request (branches matching `renovate/**`). It updates dependency lockfiles using `./gradlew alldependencies --write-locks` and commits the changes to the Renovate branch.
+
+### Screenshot updates
+
+The `updateScreenshot.yml` workflow can be manually triggered via workflow dispatch. It commits screenshot reference images for visual regression testing. Generating screenshots on CI infrastructure prevents rendering differences due to different configuration like the OS or hardware.
+
 ## Summary of workflows
 
-| Workflow         | Trigger                     | Goals                                                                 |
-|-------------------|-----------------------------|----------------------------------------------------------------------|
-| `pr.yml`         | On PR open or update        | Lint, build, test, and persist APKs.                                |
-| `onPush.yml`     | On push to `main`         | Build, deploy, and publish to Firebase and the Play Store.              |
-| `weekly.yml`     | Every Sunday at 4:00 AM     | Create a pre-release and push the beta build to the Play Store.              |
-| `monthly.yml`    | First day of the month      | Create an initial version tag (`YYYY.MM.0`).                           |
-| `release.yml`    | Manual trigger              | Promote the beta build to production.                                  |
-| `prepareNextRelease.yml`     | On pre-release or monthly tag        | Update `changelog_master.xml` in a PR.             |
+| Workflow                     | Trigger                            | Goals                                                                      |
+|------------------------------|------------------------------------|---------------------------------------------------------------------------:|
+| `pr.yml`                     | On PR open or update               | Lint, build, test, and persist APKs.                                       |
+| `onPush.yml`                 | On push to `main`                  | Build, deploy, and publish to Firebase and the Play Store.                 |
+| `weekly.yml`                 | Every Sunday at 4:00 AM            | Create a pre-release and push the beta build to the Play Store.            |
+| `monthly.yml`                | First day of the month             | Create an initial version tag (`YYYY.MM.0`).                               |
+| `release.yml`                | Manual trigger                     | Promote the beta build to production.                                      |
+| `prepareNextRelease.yml`     | On pre-release or monthly tag      | Update `changelog_master.xml` in a PR.                                     |
+| `renovate-lockfiles.yml`     | On push to `renovate/**` branches  | Update dependency lockfiles using Gradle and commit changes.               |
+| `updateScreenshot.yml`       | Manual trigger (workflow dispatch) | Update screenshot references and commit changes.                           |
 
 ---
 

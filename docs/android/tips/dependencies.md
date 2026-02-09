@@ -45,7 +45,7 @@ To streamline dependency management, we've integrated [Renovate](https://docs.re
 ### How Renovate works
 
 - **Automated updates**: Renovate scans the project for outdated dependencies and creates pull requests to update them.
-- **Lockfile updates**: Renovate ensures that lockfiles are updated alongside the dependencies.
+- **Lockfile updates**: Each time Renovate open a PR a Github Action workflow is triggered and it updates the Gradle lockfiles if needed. See the [renovate-lockfiles.yml workflow](/docs/android/ci#renovate-lockfile-updates) for more details.
 - **Custom configuration**: Renovate is configured to respect the project's versioning policies and update strategies.
 
 :::note
