@@ -4,10 +4,12 @@ title: "The documentation provides automation examples the user can use."
 
 ## Reasoning
 
-To show how the integration can be used, we should provide a limited set of blueprints, containing common or useful ones.
+To show how the integration can be used, provide a limited set of blueprints, containing common or useful ones.
 This will help users to get started with the integration faster and easier.
 
-The documentation pages should not be used as a collection or as a replacement of the blueprint exchange on the forums.
+Upload the blueprints to the [blueprint exchange on the forums](https://community.home-assistant.io/c/blueprints-exchange) and on the integration page, add a link to the blueprint exchange.
+
+Don't use the documentation pages as a collection or as a replacement of the blueprint exchange.
 
 ## Example implementation
 
