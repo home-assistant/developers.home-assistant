@@ -11,7 +11,7 @@ Starting as of `2026.3`, we're enhancing how the OAuth 2.0 helper handles token 
 
 ## What changes
 
-When an OAuth 2.0 refresh token failed, Home Assistant would allow the underlying `aiohttp.ClientResponseError` to propagate directly to the integration. This behavior is being changed and enhanced. 
+When an OAuth 2.0 request token or refresh token failed, Home Assistant would allow the underlying `aiohttp.ClientResponseError` to propagate directly to the integration. This behavior is being changed and enhanced. 
 
 We're introducing three new exceptions that provide clearer semantics:
 - `OAuth2TokenRequestTransientError` - Recoverable errors, that can be retried.
@@ -20,7 +20,7 @@ We're introducing three new exceptions that provide clearer semantics:
 
 ### Data Update Coordinator
 
-Most integrations that use the OAuth 2.0 helper, also use the Data Update Coordinator. When a token request or refresh token fails, the exceptions will bubble in the Data Update Coordinator triggers the following automatic error handling:
+Most integrations that use the OAuth 2.0 helper, also use the Data Update Coordinator. When a token request or refresh token fails, the exceptions will bubble up in the Data Update Coordinator and now triggers the following error handling:
 
 For unrecoverable errors (400+, except 429 (rate limit)):
 
@@ -32,7 +32,7 @@ For transient errors (500+ and 429):
 - Raises `OAuth2TokenRequestTransientError`.
 - Data Update Coordinator treats it as an `UpdateFailed` and the retry mechanism will be triggered.
 
-This means most integrations that use the OAuth 2.0 helper in combination with the DUC, don't have to change any code. The integrations who use the OAuth 2.0 helper, yet don't use the Data Update Coordinator, will be asked to refactor their code. 
+This means that integrations that use the OAuth 2.0 helper in combination with the DUC, don't have to change any code. The integrations who use the OAuth 2.0 helper, yet don't use the Data Update Coordinator, will be asked to refactor their code. 
 
 ### Code example of migration
 
