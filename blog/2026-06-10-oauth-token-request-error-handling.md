@@ -11,7 +11,7 @@ Starting as of `2026.3`, we're enhancing how the OAuth 2.0 helper handles token 
 
 ## What changes
 
-When an OAuth 2.0 request token or refresh token failed, Home Assistant would allow the underlying `aiohttp.ClientResponseError` to propagate directly to the integration. This behavior is being changed and enhanced. 
+When an OAuth 2.0 token request or token refresh failed, Home Assistant would allow the underlying `aiohttp.ClientResponseError` to propagate directly to the integration. This behavior is being changed and enhanced. 
 
 We're introducing three new exceptions that provide clearer semantics:
 - `OAuth2TokenRequestTransientError` - Recoverable errors, that can be retried.
