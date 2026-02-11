@@ -32,7 +32,7 @@ For transient errors (500+ and 429):
 - Raises `OAuth2TokenRequestTransientError`.
 - Data Update Coordinator treats it as an `UpdateFailed` and the retry mechanism will be triggered.
 
-This means that integrations that use the OAuth 2.0 helper in combination with the DUC, don't have to change any code. The integrations who use the OAuth 2.0 helper, yet don't use the Data Update Coordinator, will be asked to refactor their code. 
+This means that integrations that use the OAuth 2.0 helper in combination with the Data Update Coordinator, don't do special handling of the new exceptions. If one of these integrations are already handling aiohttp exceptions from token requests, the integration may be able to simplify this since the coordinator will handle it by default. The integrations who use the OAuth 2.0 helper, yet don't use the Data Update Coordinator, should adjust to handle the new exceptions.
 
 ### Code example of migration
 
