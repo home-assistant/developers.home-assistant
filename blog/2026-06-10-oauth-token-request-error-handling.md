@@ -30,9 +30,13 @@ For transient errors (500+ and 429):
 
 - `OAuth2TokenRequestTransientError`: Data Update Coordinator treats it as an `UpdateFailed` and the retry mechanism will be triggered.
 
-This means that integrations that use the OAuth 2.0 helper in combination with the Data Update Coordinator, don't do special handling of the new exceptions. If one of these integrations are already handling aiohttp exceptions from token requests, the integration may be able to simplify this since the coordinator will handle it by default. The integrations who use the OAuth 2.0 helper, yet don't use the Data Update Coordinator, should adjust to handle the new exceptions.
+This means that integrations that use the OAuth 2.0 helper in combination with the Data Update Coordinator don’t need to do any special handling of the new exceptions.
 
-### Code example of migration
+### Migration
+
+Integrations that use the OAuth 2.0 helper without the Data Update Coordinator will need to adjust their error handling to deal with the new exceptions. To ease this transition, we have added a compatibility layer by having the new OAuth exceptions inherit from `aiohttp.ClientResponseError`. Existing code that catches this exception type may continue to work during migration. It is however encouraged to refactor code to use the new exceptions. See the code example for details.
+
+#### Code example of migration
 
 Update the exception handling and then continue to work out if it's a (non-)recoverable error in the integration. For example:
 
