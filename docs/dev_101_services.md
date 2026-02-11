@@ -246,6 +246,19 @@ The following example shows how to provide an icon for the `advanced_options` se
 }
 ```
 
+## Choosing the right target for service actions
+
+When registering a service action, target it at the level of the [data hierarchy](/docs/architecture/devices-and-services#entity-data-hierarchy) that the action actually needs to function. Do not target a higher or lower level than necessary, even if the levels can be resolved to each other.
+
+- **Entity level** — If the service action operates on or requires a specific entity to function, use `entity_id` as the target. For example controlling a light. Register these as [entity service actions](#entity-service-actions).
+
+- **Device level** — If the service action operates on a device as a whole and requires a device entry (not a specific entity) to function, use a `device_id` field as the target. Do not use `entity_id` as a substitute, even if an entity could be resolved to its parent device. For example, an action that reboots a device applies to the device itself, not to any specific entity it exposes, so it should target the device.
+
+- **Config entry level** — If the service action operates on the integration instance and requires a config entry to function, use `config_entry_id` as the target. Do not use a `device_id` or `entity_id` as a substitute, even if they could be resolved back to the config entry. For example, an action that creates a new resource, that is common for the whole account or connection, in an external API should target the config entry that represents the account or connection, not a device or entity under it.
+
+:::tip
+The guiding principle is: **target the thing the action actually acts on.** If the action needs a device, target the device. If it needs a config entry, target the config entry. Resolving from a lower level (e.g., looking up a config entry from an entity) adds unnecessary indirection, couples the action interface to assumptions about the data hierarchy in the integration, and makes it harder for users to understand what the action operates on.
+:::
 
 ## Entity service actions
 
