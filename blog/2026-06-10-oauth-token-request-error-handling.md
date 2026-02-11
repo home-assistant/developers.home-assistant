@@ -16,7 +16,7 @@ When an OAuth 2.0 token request or token refresh failed, Home Assistant would al
 We're introducing three new exceptions that provide clearer semantics:
 - `OAuth2TokenRequestTransientError` - Recoverable errors, that can be retried.
 - `OAuth2TokenRequestReauthError` - Non-recoverable errors, that require a reauthentication.
-- `OAuth2TokenRequestError` - Base exception for when the above two criteria aren't met.
+- `OAuth2TokenRequestError` - Base exception for when the above two criteria aren't met or to enable the integration to catch all token request exceptions.
 
 ### Data Update Coordinator
 
