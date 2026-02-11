@@ -70,7 +70,7 @@ to the `.strict-typing` file in the root of the Home Assistant Core project.
 
 #### Using `assert` to narrow types
 
-Sometimes you may have a variable that the type checker considers potentially `None`, but you know at that point in the code it will never be `None`. In these cases, you can use an `assert` statement to help the type checker narrow the type. However, they should **only** be used inside a `TYPE_CHECKING` block so they exist solely for the benefit of the type checker and do not affect runtime behavior.
+Sometimes the type checker cannot determine the exact type of a variable at a certain point in the code, even though you know it to be more specific. In these cases, you can use an `assert` statement inside a `TYPE_CHECKING` block to help the type checker narrow the type. These asserts should **only** be used inside a `TYPE_CHECKING` block so they exist solely for the type checker and do not affect runtime behavior.
 
 ```python
 from typing import TYPE_CHECKING
