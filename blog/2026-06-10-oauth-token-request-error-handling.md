@@ -34,7 +34,7 @@ This means that integrations that use the OAuth 2.0 helper in combination with t
 
 ### Migration
 
-Integrations that use the OAuth 2.0 helper without the Data Update Coordinator will need to adjust their error handling to deal with the new exceptions. To ease this transition, we have added a compatibility layer by having the new OAuth exceptions inherit from `aiohttp.ClientResponseError`. Existing code that catches this exception type may continue to work during migration. It is however encouraged to refactor code to use the new exceptions. See the code example for details.
+Integrations that today use the OAuth 2.0 helper and handle `aiohttp.ClientResponseError` explicitly should adjust their error handling to deal with the new exceptions. To ease this transition, we have added a compatibility layer by having the new OAuth exceptions inherit from `aiohttp.ClientResponseError`. Existing code that catches this exception type should continue to work. It is however encouraged to refactor the code to use the new exceptions. See the code example for details.
 
 #### Code example of migration
 
