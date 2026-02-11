@@ -45,7 +45,7 @@ Update the exception handling and then continue to work out if it's a (non-)reco
         raise ConfigEntryAuthFailed(
             translation_domain=DOMAIN, translation_key="reauth_required"
         ) from err
-    except (OAuth2TokenRequestTransientError, OAuth2TokenRequestError, ClientError) as err:
+    except (OAuth2TokenRequestError, ClientError) as err:
         raise ConfigEntryNotReady(
             translation_domain=DOMAIN, translation_key="auth_server_error"
         ) from err
