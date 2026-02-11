@@ -68,6 +68,19 @@ By default, Home Assistant will statically check for type hints in our automated
 Python modules can be included for strict checking, if they are fully typed, by adding an entry
 to the `.strict-typing` file in the root of the Home Assistant Core project.
 
+#### Using `assert` to narrow types
+
+Sometimes you may have a variable that the type checker considers potentially `None`, but you know at that point in the code it will never be `None`. In these cases, you can use an `assert` statement to help the type checker narrow the type. However, they should **only** be used inside a `TYPE_CHECKING` block so they exist solely for the benefit of the type checker and do not affect runtime behavior.
+
+```python
+from typing import TYPE_CHECKING
+
+if TYPE_CHECKING:
+    assert something is not None
+
+something.do_work()
+```
+
 ### Function docstring convention
 
 Type annotations usually document function parameters.
