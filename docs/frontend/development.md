@@ -201,3 +201,9 @@ This is particularly useful for:
 - The PR must have a successful build with artifacts available on GitHub
 - Frontend artifacts are only available for 7 days after the PR build completes
 - This is intended for testing only and should not be used in production
+
+#### Recreating the artifact
+
+If you are the author of the PR, you can trigger a new build by updating your branch — either by merging the `dev` branch into it or rebasing on top of the latest `dev` branch. This will trigger the build pipeline and create a new artifact that Home Assistant can download.
+
+If you are not the author, you can ask them to update their PR branch to trigger a new build.
