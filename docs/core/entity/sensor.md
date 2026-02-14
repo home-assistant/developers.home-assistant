@@ -59,7 +59,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.IRRADIANCE` | W/m², BTU/(h⋅ft²) | Irradiance
 | `SensorDeviceClass.MOISTURE` | % | Moisture
 | `SensorDeviceClass.MONETARY` | [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) | Monetary value with a currency.
-| `SensorDeviceClass.NITROGEN_DIOXIDE` | ppb, µg/m³ | Concentration of nitrogen dioxide
+| `SensorDeviceClass.NITROGEN_DIOXIDE` | ppb, ppm, µg/m³ | Concentration of nitrogen dioxide
 | `SensorDeviceClass.NITROGEN_MONOXIDE` | ppb, µg/m³ | Concentration of nitrogen monoxide
 | `SensorDeviceClass.NITROUS_OXIDE` | µg/m³ | Concentration of nitrous oxide
 | `SensorDeviceClass.OZONE` | ppb, µg/m³ | Concentration of ozone
