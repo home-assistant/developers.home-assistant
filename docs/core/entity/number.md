@@ -59,7 +59,7 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.NITROGEN_DIOXIDE` | ppb, ppm, µg/m³ | Concentration of nitrogen dioxide
 | `NumberDeviceClass.NITROGEN_MONOXIDE` | ppb, µg/m³ | Concentration of nitrogen monoxide
 | `NumberDeviceClass.NITROUS_OXIDE` | µg/m³ | Concentration of nitrous oxide
-| `NumberDeviceClass.OZONE` | ppb, µg/m³ | Concentration of ozone
+| `NumberDeviceClass.OZONE` | ppb, ppm, µg/m³ | Concentration of ozone
 | `NumberDeviceClass.PH` | None | Potential hydrogen (pH) of an aqueous solution
 | `NumberDeviceClass.PM1` | µg/m³ | Concentration of particulate matter less than 1 micrometer
 | `NumberDeviceClass.PM25` | µg/m³ | Concentration of particulate matter less than 2.5 micrometers
