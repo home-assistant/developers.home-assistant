@@ -40,6 +40,7 @@ must set the `VacuumEntityFeature.STATE` flag.
 
 | Value          | Description                                          |
 | -------------- | ---------------------------------------------------- |
+| `CLEAN_AREA`   | The vacuum supports area-based cleaning.             |
 | `CLEAN_SPOT`   | The vacuum supports spot cleaning.                   |
 | `FAN_SPEED`    | The vacuum supports setting fan speed.               |
 | `LOCATE`       | The vacuum supports locating.                        |
@@ -52,6 +53,14 @@ must set the `VacuumEntityFeature.STATE` flag.
 | `STOP`         | The vacuum supports the stop command.                |
 
 ## Methods
+
+### `async_clean_segments`
+
+Clean specific segments (areas) of the home. This method is called by the `clean_area` action, which maps Home Assistant areas to the vacuum's internal segment IDs.
+
+### `async_get_segments`
+
+Return a list of available segments (areas) that the vacuum can clean.
 
 ### `clean_spot` or `async_clean_spot`
 
