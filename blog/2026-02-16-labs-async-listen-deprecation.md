@@ -4,7 +4,7 @@ authorURL: https://github.com/arturpragacz
 title: "async_listen in Labs is deprecated"
 ---
 
-The `async_listen` helper in the `labs` component has been deprecated in favor of `async_subscribe_preview_feature`.
+The `async_listen` helper in the `labs` integration has been deprecated in favor of `async_subscribe_preview_feature`.
 
 The new `async_subscribe_preview_feature` function provides a more consistent API, where the listener callback receives an `EventLabsUpdatedData` parameter containing the updated feature state. This eliminates the need to separately call `async_is_preview_feature_enabled` inside the listener to check the current value.
 
@@ -44,7 +44,7 @@ async_subscribe_preview_feature(
 )
 ```
 
-Note that the new listener is an `async` function and receives `EventLabsUpdatedData` as a parameter.
+Note that the new listener is a coroutine function and receives `EventLabsUpdatedData` as a parameter.
 
 `async_listen` will be removed in Home Assistant 2027.3.
 
