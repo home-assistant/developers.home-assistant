@@ -62,7 +62,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.NITROGEN_DIOXIDE` | ppb, ppm, µg/m³ | Concentration of nitrogen dioxide
 | `SensorDeviceClass.NITROGEN_MONOXIDE` | ppb, µg/m³ | Concentration of nitrogen monoxide
 | `SensorDeviceClass.NITROUS_OXIDE` | µg/m³ | Concentration of nitrous oxide
-| `SensorDeviceClass.OZONE` | ppb, µg/m³ | Concentration of ozone
+| `SensorDeviceClass.OZONE` | ppb, ppm, µg/m³ | Concentration of ozone
 | `SensorDeviceClass.PH` | None | Potential hydrogen (pH) of an aqueous solution
 | `SensorDeviceClass.PM1` | µg/m³ | Concentration of particulate matter less than 1 micrometer
 | `SensorDeviceClass.PM25` | µg/m³ | Concentration of particulate matter less than 2.5 micrometers

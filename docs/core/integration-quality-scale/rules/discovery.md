@@ -12,7 +12,7 @@ import RelatedRules from './_includes/related_rules.jsx'
 
 A lot of devices have the ability to be discovered.
 This can happen using one of the following methods:
-- Add-on
+- App (formerly known as add-ons)
 - Bluetooth
 - DHCP
 - HomeKit
