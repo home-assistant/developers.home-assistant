@@ -89,7 +89,7 @@ The Wear OS app communicates with the mobile app to retrieve credentials for the
 
 ## WebView communication architecture
 
-The Android app's WebView acts as a bridge between the Home Assistant frontend and native Android capabilities. This architecture enables [external authentication](/docs/api/native-app-integration/frontend/external-authentication) and [external bus](/docs/api/native-app-integration/frontend/external-bus) messaging between the frontend and native code.
+The Android app's WebView acts as a bridge between the Home Assistant frontend and native Android capabilities. This architecture enables [external authentication](docs/frontend/external-authentication.md) and [external bus](/docs/frontend/external-bus) messaging between the frontend and native code.
 
 ### Architecture overview
 
