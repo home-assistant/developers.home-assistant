@@ -7,7 +7,7 @@ title: "The documentation provides automation examples the user can use."
 To show how the integration can be used, provide a limited set of blueprints, containing common or useful ones.
 This will help users to get started with the integration faster and easier.
 
-Upload the blueprints to the  either into the blueprints folder under [`https://github.com/home-assistant/home-assistant.io/tree/current/source/blueprints/integrations`](https://github.com/home-assistant/home-assistant.io/tree/current/source/blueprints/integrations), or to the [blueprint exchange on the forums](https://community.home-assistant.io/c/blueprints-exchange). On the integration page, add a link to the blueprint.
+Upload the blueprints to them either to the blueprints folder under [`https://github.com/home-assistant/home-assistant.io/tree/current/source/blueprints/integrations`](https://github.com/home-assistant/home-assistant.io/tree/current/source/blueprints/integrations), or to the [blueprint exchange on the forums](https://community.home-assistant.io/c/blueprints-exchange). On the integration page, add a link to the blueprint.
 
 Don't use the documentation pages as a collection or as a replacement of the blueprint folder or the blueprint exchange.
 
