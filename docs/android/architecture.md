@@ -86,3 +86,54 @@ The automotive application reuses the sources of the `:app` module, simplifying 
 ### Wear OS
 
 The Wear OS app communicates with the mobile app to retrieve credentials for the Home Assistant server and other configurations using the [Messaging API](https://developer.android.com/training/wearables/data/messages). It only works with the `full` flavor, as it requires Google Play Services. Once the initial setup is complete, all further communication is handled directly with Home Assistant through the WebSocket and the [webhook](/docs/api/native-app-integration/sending-data) that is created for the app.
+
+## WebView communication architecture
+
+The Android app's WebView acts as a bridge between the Home Assistant frontend and native Android capabilities. This architecture enables [external authentication](/docs/api/native-app-integration/frontend/external-authentication) and [external bus](/docs/api/native-app-integration/frontend/external-bus) messaging between the frontend and native code.
+
+### Architecture overview
+
+```mermaid
+flowchart TB
+    subgraph WebView
+        JS[Home Assistant Frontend JS]
+    end
+
+    subgraph Bridge
+        JsBridge[FrontendJsBridge]
+    end
+
+    subgraph Handler
+        MsgHandler[FrontendMessageHandler]
+    end
+
+    subgraph Repositories
+        ExternalBusRepo[FrontendExternalBusRepository]
+        SessionMgr[ServerSessionManager]
+    end
+
+    JS -->|"getExternalAuth()"| JsBridge
+    JS -->|"revokeExternalAuth()"| JsBridge
+    JS -->|"externalBus()"| JsBridge
+
+    JsBridge -->|"FrontendJsHandler"| MsgHandler
+
+    MsgHandler -->|"onMessageReceived()"| ExternalBusRepo
+    MsgHandler -->|"getExternalAuth()"| SessionMgr
+    MsgHandler -->|"revokeExternalAuth()"| SessionMgr
+
+    SessionMgr -->|"ExternalAuthResult"| MsgHandler
+    SessionMgr -->|"RevokeAuthResult"| MsgHandler
+    ExternalBusRepo -->|"incomingMessages()"| MsgHandler
+    MsgHandler -->|"send()"| ExternalBusRepo
+
+    ExternalBusRepo -->|"scriptsToEvaluate()"| JS
+    MsgHandler -->|"evaluateScript()"| ExternalBusRepo
+```
+
+### Component responsibilities
+
+- **FrontendJsBridge**: JavaScript interface exposed to the WebView that receives calls from the frontend
+- **FrontendMessageHandler**: Central message handler that routes requests between the frontend and native components
+- **FrontendExternalBusRepository**: Manages bidirectional message passing for the external bus protocol, parsing JSON messages into strongly-typed data structures
+- **ServerSessionManager**: Handles authentication token management for external authentication
