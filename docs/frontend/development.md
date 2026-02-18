@@ -182,7 +182,7 @@ Home Assistant will automatically return to using the built-in production fronte
 
 ### How it works
 
-When you configure `development_pr`, Home Assistant downloads the frontend build artifact from the specified PR on GitHub during startup and uses it instead of the production version. The artifact is cached locally, and on subsequent restarts, Home Assistant checks if the PR has new commits by comparing SHA sums. If a newer version is found, it downloads the updated artifact automatically.
+When you configure `development_pr`, Home Assistant downloads the frontend build artifact from the specified PR on GitHub during startup and uses it instead of the production version. The artifact is cached locally and, on subsequent restarts, Home Assistant checks if the PR has new commits by comparing SHA sums. If a newer version is found, it downloads the updated artifact automatically.
 
 :::info
 If you have both `development_repo` and `development_pr` configured, `development_repo` takes precedence. The local development repository will be used instead of the PR build.
