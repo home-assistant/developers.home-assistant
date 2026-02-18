@@ -24,7 +24,7 @@ Most integrations that use the OAuth 2.0 helper, also use the Data Update Coordi
 
 For unrecoverable errors (400+, except 429 (rate limit)):
 
-- `OAuth2TokenRequestReauthError`: Data Update Coordinator raises `ConfigEntryAuthFailed`.
+- `OAuth2TokenRequestReauthError`: Data Update Coordinator raises `ConfigEntryAuthFailed` if exceptions should be raised or starts a reauthentication flow.
 
 For transient errors (500+ and 429):
 
