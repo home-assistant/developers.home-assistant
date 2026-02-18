@@ -204,6 +204,15 @@ This is particularly useful for:
 
 #### Recreating the artifact
 
-If you are the author of the PR, you can trigger a new build by updating your branch — either by merging the `dev` branch into it or rebasing on top of the latest `dev` branch. This will trigger the build pipeline and create a new artifact that Home Assistant can download.
+This can be useful if the artifact isn't available anymore, because it's older then 7 days or you want to test new upstream changes in the PR.
+
+If you are the author of the PR, you can trigger a new artifact by:
+
+- Update your branch — either by merging the `dev` branch into it or rebasing on top of the latest `dev` branch. This will trigger the build pipeline and create a new artifact that Home Assistant can download.
+- Close and reopen the PR to trigger a new build.
 
 If you are not the author, you can ask them to update their PR branch to trigger a new build.
+
+:::info
+To use the new artifact you have to restart Home Assistant core
+:::
