@@ -26,3 +26,5 @@ Custom integrations using the webhook config flow helper must add translation st
   }
 }
 ```
+
+For more details, see [core PR #151729](https://github.com/home-assistant/core/pull/151729).
