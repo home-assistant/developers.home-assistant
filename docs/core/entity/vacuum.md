@@ -56,7 +56,7 @@ must set the `VacuumEntityFeature.STATE` flag.
 
 ### `async_get_segments`
 
-Return a list of `Segment` objects representing the cleanable segments reported by the vacuum. Required when supporting `CLEAN_AREA`.
+Return a list of `Segment` objects representing the cleanable segments reported by the vacuum. Integration platforms are required to implement this method when supporting `CLEAN_AREA`.
 
 ```python
 async def async_get_segments(self) -> list[Segment]:
@@ -79,7 +79,7 @@ The `id` must be globally unique across all segments for a given vacuum entity, 
 
 ### `clean_segments` or `async_clean_segments`
 
-Clean the specified segments by their IDs. Required when supporting `CLEAN_AREA`. This is the method integrations should implement. It is called internally by the `clean_area` service after mapping Home Assistant areas to vacuum segments.
+Clean the specified segments by their IDs. Integration platforms are required to implement this method when supporting `CLEAN_AREA`. It is called internally by the `clean_area` service after mapping Home Assistant areas to vacuum segments.
 
 ```python
 async def async_clean_segments(self, segment_ids: list[str], **kwargs: Any) -> None:
