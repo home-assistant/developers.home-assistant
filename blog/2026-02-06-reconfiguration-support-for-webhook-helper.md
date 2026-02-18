@@ -15,12 +15,12 @@ Custom integrations using the webhook config flow helper must add translation st
 {
   "config": {
     "abort": {
-      "reconfigure_successful": "**Re-configuration was successful**\n\nIn Sleep as Android go to *Settings → Services → Automation → Webhooks* and update the webhook with the following URL:\n\n`{webhook_url}`"
+      "reconfigure_successful": "**Reconfiguration was successful**\n\nIn Sleep as Android go to *Settings → Services → Automation → Webhooks* and update the webhook with the following URL:\n\n`{webhook_url}`"
     },
     "step": {
       "reconfigure": {
         "description": "Are you sure you want to re-configure the Sleep as Android integration?",
-        "title": "Re-configure Sleep as Android"
+        "title": "Reconfigure Sleep as Android"
       }
     }
   }
