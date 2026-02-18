@@ -29,6 +29,6 @@ The Air Quality entity does not support attribute shorthand for [property implem
 | sulphur_dioxide | <code>str &#124; int &#124; float &#124; None</code> | `None` | The SO2 (sulphur dioxide) level.
 | nitrogen_oxide | <code>str &#124; int &#124; float &#124; None</code> | `None` | The N2O (nitrogen oxide) level.
 | nitrogen_monoxide | <code>str &#124; int &#124; float &#124; None</code> | `None` | The NO (nitrogen monoxide) level.
-| nitrogen_dioxide | <code>str &#124; int &#124; float &#124; None</code> | `None` | The NO2 (nitrogen dioxide) level.
+| nitrogen_dioxide | <code>str &#124; int &#124; float &#124; None</code> | `None` | The NO2 (nitrogen dioxide) level. Supported units: `ppb`, `ppm`, `µg/m³`.
 
 Properties have to follow the units defined in the `unit_system`.
