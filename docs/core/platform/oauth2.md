@@ -19,16 +19,15 @@ Home Assistant's OAuth 2.0 helper provides:
 
 The helper supports two credential approaches, both of which require `application_credentials` support.
 
-It's encouraged to use the built-in `config_entry_oauth2_flow` for standard Authorization Code flows, but the underlying `AbstractOAuth2Implementation` can be extended to support any OAuth 2.0 flow.
+It's encouraged to use the built-in `config_entry_oauth2_flow` for standard Authorization Code flows, but the underlying `AbstractOAuth2Implementation` can be extended to suit specific needs.
 
 ## Supported OAuth 2.0 flows
 
-| Flow                         | Class                                               | When to use                     |
-| ---------------------------- | --------------------------------------------------- | ------------------------------- |
-| Client Credentials           | `LocalOAuth2Implementation`                         | Standard browser-based flow     |
-| Client Credentials with PKCE | `LocalOAuth2ImplementationWithPkce`                 | When the provider requires PKCE |
-| Device Authorization         | `AbstractOAuth2Implementation` (under construction) | For devices without a browser   |
-| Custom                       | `AbstractOAuth2Implementation`                      | Any non-standard flow           |
+| Flow                         | Class                               | When to use                     |
+| ---------------------------- | ----------------------------------- | ------------------------------- |
+| Authorization code           | `LocalOAuth2Implementation`         | Standard browser-based flow     |
+| Authorization code with PKCE | `LocalOAuth2ImplementationWithPkce` | When the provider requires PKCE |
+| Custom                       | `AbstractOAuth2Implementation`      | Any non-standard flow           |
 
 _Note:_ If a service prodiver offers both a Client Credentials flow and Device Authorization flow, the Client Credentials flow is overpreferred and should be used. The Device Authorization flow is only intended for devices that cannot display a browser. Currently a QR code is not supported in the Device Authorization.
 
@@ -64,7 +63,7 @@ The `extra_authorize_data` property is where you define the OAuth scopes and any
 
 ### Reauthentication
 
-By default, Home Assistant will handle the token refresh lifecycle and automatically attempt to refresh tokens when they expire. However, if a token becomes permanently invalid (for example, if the user revokes access from the provider's website), Home Assistant will trigger a reauthentication flow. To support this, add `async_step_reauth` in your config flow:
+Home Assistant can will handle the token refresh lifecycle, by calling `async_ensure_token_valid`. However, if a token becomes permanently invalid (for example, if the user revokes access from the provider's website), Home Assistant will trigger a reauthentication flow. To support this, add `async_step_reauth` in your config flow:
 
 ```python
 async def async_step_reauth(
@@ -91,11 +90,11 @@ from homeassistant.helpers import config_entry_oauth2_flow
 
 session = config_entry_oauth2_flow.OAuth2Session(hass, entry, implementation)
 
-# The session handles token refresh automatically
+# The session handles token refresh, inside the library, automatically
 response = await session.async_request("GET", "https://api.example.com/data")
 ```
 
-For integrations that use an external API client library, pass the token directly:
+For all integrations that use an external API client library, pass the token directly:
 
 ```python
 access_token = await session.async_get_access_token()
@@ -106,8 +105,7 @@ client = ExternalApiClient(token=access_token)
 
 Both methods ensure a valid token is available, but behave differently:
 
-- `async_get_access_token()` — refreshes the token if needed and **returns** the access token string. Use this when you need to pass the token to an external client.
-- `async_ensure_token_valid()` — refreshes the token if needed but does **not** return the token. Use this when the session handles injection automatically and you just need to guarantee validity before proceeding.
+- `async_ensure_token_valid()` - refreshes the token if needed but does **not** return the token. This needs to done before every request to ensure there's a valid token.
 
 Both methods raise the same exceptions on failure (see [Error handling](#error-handling) below).
 
@@ -154,28 +152,6 @@ except (OAuth2TokenRequestTransientError, OAuth2TokenRequestError) as err:
         translation_domain=DOMAIN,
         translation_key="auth_server_error",
     ) from err
-```
-
-### Migration from `aiohttp.ClientResponseError`
-
-Prior to `2026.3`, integrations were expected to catch `aiohttp.ClientResponseError` directly. A compatibility shim means existing code will continue to work, but integrations should be updated to use the new exceptions:
-
-```python
-# Before, still works but discouraged
-try:
-    await session.async_get_access_token()
-except aiohttp.ClientResponseError as err:
-    if err.status in (401, 403):
-        raise ConfigEntryAuthFailed(...) from err
-    raise ConfigEntryNotReady(...) from err
-
-# Preferred
-try:
-    await session.async_get_access_token()
-except OAuth2TokenRequestReauthError as err:
-    raise ConfigEntryAuthFailed(...) from err
-except (OAuth2TokenRequestTransientError, OAuth2TokenRequestError) as err:
-    raise ConfigEntryNotReady(...) from err
 ```
 
 ## Complete examples
@@ -260,10 +236,9 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 - Use the Data Update Coordinator where possible. It handles token refresh errors automatically and reduces the amount of boilerplate in each integration.
 - Don't put token logic in entity classes. Token management belongs in `async_setup_entry` or the coordinator, not in individual entity `async_update` methods.
 - Always handle `OAuth2TokenRequestReauthError` explicitly in integrations that don't use a coordinator. Failing to do so means the user will never be prompted to reauthenticate.
-- Raise `ConfigEntryNotReady` for transient errors. Transient errors are temporary and should be retried. Raise `ConfgEntryError` for non-recoverable errors. {MIGHT NEED TO EXPAND THIS WITH DUC METHODS}
+- Raise `ConfigEntryNotReady` for transient errors. Transient errors are temporary and should be retried. Raise `ConfgEntryAuthFailed` for non-recoverable errors.
 - Always implement reauthentication (`async_step_reauth`) in your config flow so Home Assistant can prompt the user to re-link their account.
 - Use `extra_authorize_data` to specify scopes and parameters required by the provider during authorization. This keeps your implementation clean and focused on the provider's requirements.
-- Enfore JSON output from the token endpoint by setting `token_request_headers={"Accept": "application/json"}` in your implementation. This ensures consistent error handling across providers, as some return non-JSON responses on error by default. {WE STILL NEED TO BUILD THIS IN, THOUGH. CHECK THE PR UNDER REVIEW BY ALLENPORTER.}
 
 ## Reference
 
