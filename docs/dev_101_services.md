@@ -92,7 +92,7 @@ set_speed:
   target:
     entity:
       domain: fan
-      # If not all entities from the action's domain support a action, entities
+      # If not all entities from the action's domain support an action, entities
       # can be further filtered by the `supported_features` state attribute. An
       # entity will only be possible to select if it supports at least one of the
       # listed supported features.
@@ -143,7 +143,18 @@ set_speed:
 ```
 
 :::info
-The name and description of the service actions are set in our [translations](/docs/internationalization/core#services) and not in the service action description. Each service action and service action field must have a matching translation defined.
+The name and description of the service actions are set in our [translations](/docs/internationalization/core#services) and not in the service action description. Each service action and service action field must have a matching translation defined. Description placeholders allow you to exclude elements like URLs from translations.
+
+```python
+...
+    hass.services.async_register(
+      DOMAIN,
+      "hello", handle_hello,
+      description_placeholders={"docs_url": "https://example.com/hello_world"},
+    )
+...
+```
+
 :::
 
 ### Grouping of service action fields
@@ -158,7 +169,7 @@ The service action data for the service in the example is `{"speed_pct": 50}`, n
 
 ### Filtering service action fields
 
-In some cases, entities from a action's domain may not support all service action fields.
+In some cases, entities from an action's domain may not support all service action fields.
 By providing a `filter` for the field description, the field will only be shown if at
 least one selected entity supports the field according to the configured filter.
 
@@ -235,6 +246,19 @@ The following example shows how to provide an icon for the `advanced_options` se
 }
 ```
 
+## Choosing the right target for service actions
+
+When registering a service action, target it at the level of the [data hierarchy](/docs/architecture/devices-and-services#entity-data-hierarchy) that the action actually needs to function. Do not target a higher or lower level than necessary, even if the levels can be resolved to each other.
+
+- **Entity level** — If the service action operates on or requires a specific entity to function, use `entity_id` as the target. For example controlling a light. Register these as [entity service actions](#entity-service-actions).
+
+- **Device level** — If the service action operates on a device as a whole and requires a device entry (not a specific entity) to function, use a `device_id` field as the target. Do not use `entity_id` as a substitute, even if an entity could be resolved to its parent device. For example, an action that reboots a device applies to the device itself, not to any specific entity it exposes, so it should target the device.
+
+- **Config entry level** — If the service action operates on the integration instance and requires a config entry to function, use `config_entry_id` as the target. Do not use a `device_id` or `entity_id` as a substitute, even if they could be resolved back to the config entry. For example, an action that creates a new resource, that is common for the whole account or connection, in an external API should target the config entry that represents the account or connection, not a device or entity under it.
+
+:::tip
+The guiding principle is: **target the thing the action actually acts on.** If the action needs a device, target the device. If it needs a config entry, target the config entry. Resolving from a lower level (e.g., looking up a config entry from an entity) adds unnecessary indirection, couples the action interface to assumptions about the data hierarchy in the integration, and makes it harder for users to understand what the action operates on.
+:::
 
 ## Entity service actions
 
@@ -309,8 +333,8 @@ SEARCH_ITEMS_SCHEMA = vol.Schema({
 })
 
 
-async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Set up the platform."""
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
+    """Set up the integration."""
 
     async def search_items(call: ServiceCall) -> ServiceResponse:
         """Search in the date range and return the matching items."""
@@ -324,13 +348,13 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             ],
         }
 
-        hass.services.async_register(
-            DOMAIN,
-            SEARCH_ITEMS_SERVICE_NAME,
-            search_items,
-            schema=SEARCH_ITEMS_SCHEMA,
-            supports_response=SupportsResponse.ONLY,
-        )
+    hass.services.async_register(
+        DOMAIN,
+        SEARCH_ITEMS_SERVICE_NAME,
+        search_items,
+        schema=SEARCH_ITEMS_SCHEMA,
+        supports_response=SupportsResponse.ONLY,
+    )
 ```
 
 The use of response data is meant for cases that do not fit the Home Assistant state. For example, a response stream of objects. Conversely, response data should not be used for cases that are a fit for entity state. For example, a temperature value should just be a sensor.

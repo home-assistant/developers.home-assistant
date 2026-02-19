@@ -67,7 +67,7 @@ it thus will become mandatory in the future.
 | ---- | -----------
 | `device` | Provides a single device like, for example, ESPHome. |
 | `entity` | Provides a basic entity platform, like sensor or light. This should generally not be used. |
-| `hardware` | Provides a hardware integration, like Raspbery Pi or Hardkernel. This should generally not be used. |
+| `hardware` | Provides a hardware integration, like Raspberry Pi or Hardkernel. This should generally not be used. |
 | `helper` | Provides an entity to help the user with automations like input boolean, derivative or group. |
 | `hub` | Provides a hub integration, with multiple devices or services, like Philips Hue. |
 | `service` | Provides a single service, like DuckDNS or AdGuard. |
@@ -370,10 +370,10 @@ Example with setting `registered_devices` to `true`:
 
 ## USB
 
-If your integration supports discovery via usb, you can add the type to your manifest. If the user has the `usb` integration loaded, it will load the `usb` step of your integration's config flow when it is discovered. We support discovery by VID (Vendor ID), PID (Device ID), Serial Number, Manufacturer, and Description by extracting these values from the USB descriptor. For help identifiying these values see [How To Identify A Device](https://wiki.debian.org/HowToIdentifyADevice/USB). The manifest value is a list of matcher dictionaries. Your integration is discovered if all items of any of the specified matchers are found in the USB data. It's up to your config flow to filter out duplicates.
+If your integration supports discovery via usb, you can add the type to your manifest. If the user has the `usb` integration loaded, it will load the `usb` step of your integration's config flow when it is discovered. We support discovery by VID (Vendor ID), PID (Device ID), Serial Number, Manufacturer, and Description by extracting these values from the USB descriptor. For help identifying these values see [How To Identify A Device](https://wiki.debian.org/HowToIdentifyADevice/USB). The manifest value is a list of matcher dictionaries. Your integration is discovered if all items of any of the specified matchers are found in the USB data. It's up to your config flow to filter out duplicates.
 
 :::warning
-Some VID and PID combinations are used by many unrelated devices. For example VID `10C4` and PID `EA60` matches any Silicon Labs CP2102 USB-Serial bridge chip. When matching these type of devices, it is important to match on `description` or another identifer to avoid an unexpected discovery.
+Some VID and PID combinations are used by many unrelated devices. For example VID `10C4` and PID `EA60` matches any Silicon Labs CP2102 USB-Serial bridge chip. When matching these type of devices, it is important to match on `description` or another identifier to avoid an unexpected discovery.
 :::
 
 The following example has two matchers consisting of two items. All of the items in any of the two matchers must match for discovery to happen by this config.

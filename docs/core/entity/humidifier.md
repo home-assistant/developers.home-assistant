@@ -22,6 +22,7 @@ Properties should always only return information from memory and not do I/O (lik
 | min_humidity            | `float`                                          | `DEFAULT_MIN_HUMIDITY` (value == 0)   | The minimum humidity.                              |
 | mode                    | <code>str &#124; None</code>                   | **Required**                          | The current active mode. Requires `SUPPORT_MODES`. |
 | target_humidity         | <code>float &#124; None</code>                   | `None`                                | The target humidity the device is trying to reach. |
+| target_humidity_step    | <code>float &#124; None</code>                   | `None`                                | The supported step size a target humidity can be increased or decreased. |
 
 ### Available device classes
 

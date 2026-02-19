@@ -390,7 +390,7 @@ The server will indicate with a message indicating that the action is done execu
 }
 ```
 
-The `result` of the call will always include a `response` to account for service actions that support responses. When a action that doesn't support responses is called, the value of `response` will be `null`.
+The `result` of the call will always include a `response` to account for service actions that support responses. When an action that doesn't support responses is called, the value of `response` will be `null`.
 
 ## Fetching states
 
@@ -528,6 +528,97 @@ The server will respond with the validation results. Only fields will be include
   }
 }
 ```
+
+## Extract from target
+
+This command allows you to extract entities, devices, and areas from one or multiple targets.
+
+```json
+{
+  "id": 19,
+  "type": "extract_from_target",
+  "target": {
+    "entity_id": ["group.kitchen"],
+    "device_id": ["device_abc123"],
+    "area_id": ["kitchen"],
+    "label_id": ["smart_lights"]
+  },
+  // Optional: expand group entities to their members (default: false)
+  "expand_group": true
+}
+```
+
+The target parameter follows the same structure as service call targets.
+
+The server will respond with the information extracted from the target:
+
+```json
+{
+  "id": 19,
+  "type": "result",
+  "success": true,
+  "result": {
+    "referenced_entities": ["light.kitchen", "switch.kitchen", "light.living_room", "switch.bedroom"],
+    "referenced_devices": ["device_abc123", "device_def456"],
+    "referenced_areas": ["kitchen", "living_room"],
+    "missing_devices": [],
+    "missing_areas": [],
+    "missing_floors": [],
+    "missing_labels": []
+  }
+}
+```
+
+The response includes:
+- `referenced_entities`: All entity IDs that would be targeted (includes entities from devices/areas/labels)
+- `referenced_devices`: All device IDs that were referenced
+- `referenced_areas`: All area IDs that were referenced
+- `missing_devices`: Device IDs that don't exist
+- `missing_areas`: Area IDs that don't exist
+- `missing_floors`: Floor IDs that don't exist
+- `missing_labels`: Label IDs that don't exist
+
+When `expand_group` is set to `true`, group entities will be expanded to include their member entities instead of the group entity itself.
+
+## Get triggers/conditions/services for target
+
+The `get_triggers_for_target`, `get_conditions_for_target`, and `get_services_for_target` commands allow you to get all applicable triggers, conditions, and services for entities of a given target. The three commands share the same input and output format.
+
+```json
+{
+  "id": 20,
+  "type": "get_triggers_for_target",
+  "target": {
+    "entity_id": ["light.kitchen", "light.living_room"],
+    "device_id": ["device_abc123"],
+    "area_id": ["bedroom"],
+    "label_id": ["smart_lights"]
+  },
+  // Optional: expand group entities to their members (default: true)
+  "expand_group": true
+}
+```
+
+The target parameter follows the same structure as service call targets.
+
+The server will respond with a set of trigger/condition/service identifiers that are applicable to any of the entities of the target, in the format `domain.trigger_name`:
+
+```json
+{
+  "id": 20,
+  "type": "result",
+  "success": true,
+  "result": [
+    "homeassistant.event",
+    "homeassistant.state",
+    "light.turned_on",
+    "light.turned_off",
+    "light.toggle"
+  ]
+}
+```
+
+When `expand_group` is set to `true` (default), group entities will be expanded to include their member entities, and triggers applicable to any member will be included in the results. Otherwise, only triggers applicable to the group entities themselves will be included.
 
 ## Error handling
 

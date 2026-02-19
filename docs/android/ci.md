@@ -45,6 +45,10 @@ Only one workflow runs at a time for a given PR. If multiple commits are pushed 
 
 To build the application in debug on CI, we use a mock Google services file located at `/.github/mock-google-services.json`.
 
+#### Downloading APKs from a pull request
+
+See the [Testing pull request builds](/docs/android/tips/testing_pr_builds) tip for instructions on how to download and install APKs from a pull request.
+
 ### On push to `main`
 
 When a commit is pushed to the `main` branch, the `onPush.yml` workflow is triggered. Its goals are:
@@ -84,7 +88,11 @@ The `release.yml` workflow is triggered manually to promote the latest beta buil
 
 The [F-Droid](https://f-droid.org) store builds the applications themselves when we push a GitHub release. This process uses [metadata](https://gitlab.com/fdroid/fdroiddata/-/blob/master/metadata/io.homeassistant.companion.android.minimal.yml).
 
-They use the `version_code.txt` file, which is created on every release from the `main` branch, for the app's versioning.
+Each GitHub release includes the following files used by F-Droid:
+
+- `version_code.txt` - Used for the app's versioning (created on every release from the `main` branch)
+- `strings.zip` - Contains all app translations from Lokalise at build time
+- `locales_config.xml` - Generated [locales configuration](https://developer.android.com/guide/topics/resources/app-languages#use-localeconfig) from the downloaded app translations
 
 :::warning
 We do not guarantee when the applications will be available on F-Droid after a release. You can find the app [on F-Droid](https://f-droid.org/packages/io.homeassistant.companion.android.minimal/).

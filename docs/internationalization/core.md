@@ -95,10 +95,14 @@ The example strings file below describes the different supported keys. Although 
       "invalid_api_key": "This message will be displayed if `invalid_api_key` is returned as a flow error."
     },
     "abort": {
-      "stale_api_key": "This message will be displayed if `stale_api_key` is returned as the abort reason."
+      "stale_api_key": "This message will be displayed if `stale_api_key` is returned as the abort reason. Supports Markdown."
     },
     "progress": {
-      "slow_task": "This message will be displayed if `slow_task` is returned as `progress_action` for `async_show_progress`."
+      "slow_task": "This message will be displayed if `slow_task` is returned as `progress_action` for `async_show_progress`. Supports Markdown."
+    },
+    "create_entry": {
+      "default": "This message will be displayed in the success dialog if `async_create_entry` is called with `description=None`. Supports Markdown.",
+      "custom": "This message will be displayed in the success dialog if `async_create_entry` is called with `description='custom'`. Supports Markdown."
     }
   },
   "options": {
@@ -179,6 +183,8 @@ each collapsible section of fields.
 Note that also the translations for `name` and `description` of fields which
 are displayed in a collapsible section should be under the `fields` key.
 
+Set description placeholders when the [service action is registered](/docs/dev_101_services/#service-action-description-example).
+
 ```json
 {
   "selector": {
@@ -194,7 +200,7 @@ are displayed in a collapsible section should be under the `fields` key.
   "services": {
     "set_speed": {
       "name": "Set speed",
-      "description": "Sets fan speed.",
+      "description": "Sets fan speed. [Learn more.]({docs_url})",
       "fields": {
         "speed": {
           "name": "Speed",

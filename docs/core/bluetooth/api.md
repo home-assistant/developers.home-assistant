@@ -242,6 +242,32 @@ from homeassistant.components import bluetooth
 bluetooth.async_rediscover_address(hass, "44:44:33:11:23:42")
 ```
 
+### Clearing match history for rediscovery
+
+The Bluetooth integration tracks which advertisement fields (manufacturer_data UUIDs, service_data UUIDs, service_uuids) have been seen for each device to determine when to trigger discovery. It only checks if the UUIDs have been seen before, not whether their content has changed.
+
+For devices that change state but maintain the same UUIDs (such as devices that are factory reset or transition between operational states), you can clear the match history to allow rediscovery when the device advertises again with different content.
+
+The `bluetooth.async_clear_address_from_match_history` API clears the match history for a specific address without immediately re-triggering discovery. This differs from `async_rediscover_address`, which clears history AND immediately re-triggers discovery with cached data.
+
+Use this API when:
+- A device is factory reset (state changes but UUIDs remain the same)
+- A device transitions between operational states with the same advertisement UUIDs
+- You want to prepare for future rediscovery without immediately triggering a flow
+
+```python
+from homeassistant.components import bluetooth
+
+# Clear match history to allow future advertisements to trigger discovery
+bluetooth.async_clear_address_from_match_history(hass, "44:44:33:11:23:42")
+```
+
+:::warning Performance Considerations
+Do not use this API for devices whose advertisement data changes frequently (e.g., sensors that update temperature readings in advertisement data). Clearing match history for such devices will cause a new discovery flow to be triggered on every advertisement change, which can overwhelm the system and create a poor user experience.
+
+This API is intended for infrequent state changes such as factory resets or major operational mode transitions, not for regular data updates.
+:::
+
 ### Waiting for a specific advertisement
 
 To wait for a specific advertisement, call the `bluetooth.async_process_advertisements` API.

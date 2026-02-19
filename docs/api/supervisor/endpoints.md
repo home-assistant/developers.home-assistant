@@ -5,15 +5,15 @@ import ApiEndpoint from '@site/static/js/api_endpoint.jsx'
 
 For API endpoints marked with :lock: you need use an authorization header with a `Bearer` token.
 
-The token is available for add-ons and Home Assistant using the
+The token is available for apps (formerly known as add-ons) and Home Assistant using the
 `SUPERVISOR_TOKEN` environment variable.
 
 To see more details about each endpoint, click on it to expand it.
 
-### Add-ons
+### Apps
 
 <ApiEndpoint path="/addons" method="get">
-Return overview information about installed add-ons.
+Return overview information about installed apps.
 
 **Payload:**
 
@@ -27,9 +27,9 @@ Return overview information about installed add-ons.
 {
   "addons": [
     {
-      "name": "Awesome add-on",
+      "name": "Awesome app",
       "slug": "awesome_addon",
-      "description": "My awesome add-on",
+      "description": "My awesome app",
       "advanced": false,
       "stage": "stable",
       "repository": "core",
@@ -52,20 +52,20 @@ Return overview information about installed add-ons.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/reload" method="post">
-Reloads the information stored about add-ons.
+Reloads the information stored about apps.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/changelog" method="get">
-Get the changelog for an add-on.
+Get the changelog for an app.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/documentation" method="get">
-Get the documentation for an add-on.
+Get the documentation for an app.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/logs" method="get">
 
-Get logs for an add-on via the Systemd journal backend.
+Get logs for an app via the Systemd journal backend.
 
 The endpoint accepts the same headers and provides the same functionality as
 `/host/logs`.
@@ -80,7 +80,7 @@ Identical to `/addons/<addon>/logs` except it continuously returns new log entri
 
 <ApiEndpoint path="/addons/<addon>/logs/latest" method="get">
 
-Return all logs of the latest startup of the add-on container.
+Return all logs of the latest startup of the app container.
 
 The `Range` header is ignored but the `lines` query parameter can be used.
 
@@ -88,7 +88,7 @@ The `Range` header is ignored but the `lines` query parameter can be used.
 
 <ApiEndpoint path="/addons/<addon>/logs/boots/<bootid>" method="get">
 
-Get logs for an add-on related to a specific boot.
+Get logs for an app related to a specific boot.
 
 The `bootid` parameter is interpreted in the same way as in
 `/host/logs/boots/<bootid>` and the endpoint otherwise provides the same
@@ -104,11 +104,11 @@ new log entries.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/icon" method="get">
-Get the add-on icon
+Get the app icon
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/info" method="get">
-Get details about an add-on
+Get details about an app
 
 **Returned data:**
 
@@ -116,24 +116,24 @@ Get details about an add-on
 | ------------------- | ------------------ | -------------------------------------------------------------------------------------- |
 | advanced            | boolean            | `true` if advanced mode is enabled                                                     |
 | apparmor            | string             | disabled, default or the name of the profile                                           |
-| arch                | list               | A list of supported architectures for the add-on                                       |
+| arch                | list               | A list of supported architectures for the app                                       |
 | audio               | boolean            | `true` if audio is enabled                                                             |
 | audio_input         | float or null      | The device index                                                                       |
 | audio_output        | float or null      | The device index                                                                       |
 | auth_api            | boolean            | `true` if auth api access is granted is enabled                                        |
 | auto_uart           | boolean            | `true` if auto_uart access is granted is enabled                                       |
 | auto_update         | boolean            | `true` if auto update is enabled                                                       |
-| available           | boolean            | `true` if the add-on is available                                                      |
+| available           | boolean            | `true` if the app is available                                                      |
 | boot                | string             | "auto" or "manual"                                                                     |
 | boot_config         | string             | Default boot mode of addon or "manual_only" if boot mode cannot be auto                |
-| build               | boolean            | `true` if local add-on                                                                 |
+| build               | boolean            | `true` if local app                                                                 |
 | changelog           | boolean            | `true` if changelog is available                                                       |
-| description         | string             | The add-on description                                                                 |
-| detached            | boolean            | `true` if the add-on is running detached                                               |
+| description         | string             | The app description                                                                 |
+| detached            | boolean            | `true` if the app is running detached                                               |
 | devices             | list               | A list of attached devices                                                             |
 | devicetree          | boolean            | `true` if devicetree access is granted is enabled                                      |
 | discovery           | list               | A list of discovery services                                                           |
-| dns                 | list               | A list of DNS servers used by the add-on                                               |
+| dns                 | list               | A list of DNS servers used by the app                                               |
 | docker_api          | boolean            | `true` if docker_api access is granted is enabled                                      |
 | documentation       | boolean            | `true` if documentation is available                                                   |
 | full_access         | boolean            | `true` if full access access is granted is enabled                                     |
@@ -147,45 +147,45 @@ Get details about an add-on
 | host_network        | boolean            | `true` if host network access is granted is enabled                                    |
 | host_pid            | boolean            | `true` if host pid access is granted is enabled                                        |
 | host_uts            | boolean            | `true` if host UTS namespace access is enabled.                                        |
-| hostname            | string             | The host name of the add-on                                                            |
+| hostname            | string             | The host name of the app                                                            |
 | icon                | boolean            | `true` if icon is available                                                            |
 | ingress             | boolean            | `true` if ingress is enabled                                                           |
 | ingress_entry       | string or null     | The ingress entrypoint                                                                 |
 | ingress_panel       | boolean or null    | `true` if ingress_panel is enabled                                                     |
 | ingress_port        | int or null        | The ingress port                                                                       |
 | ingress_url         | string or null     | The ingress URL                                                                        |
-| ip_address          | string             | The IP address of the add-on                                                           |
+| ip_address          | string             | The IP address of the app                                                           |
 | kernel_modules      | boolean            | `true` if kernel module access is granted is enabled                                   |
 | logo                | boolean            | `true` if logo is available                                                            |
-| long_description    | string             | The long add-on description                                                            |
-| machine             | list               | A list of supported machine types for the add-on                                       |
-| name                | string             | The name of the add-on                                                                 |
-| network             | dictionary or null | The network configuration for the add-on                                               |
+| long_description    | string             | The long app description                                                            |
+| machine             | list               | A list of supported machine types for the app                                       |
+| name                | string             | The name of the app                                                                 |
+| network             | dictionary or null | The network configuration for the app                                               |
 | network_description | dictionary or null | The description for the network configuration                                          |
-| options             | dictionary         | The add-on configuration                                                               |
-| privileged          | list               | A list of hardwars/system attributes the add-onn has access to                         |
+| options             | dictionary         | The app configuration                                                               |
+| privileged          | list               | A list of hardwars/system attributes the app has access to                         |
 | protected           | boolean            | `true` if protection mode is enabled                                                   |
 | rating              | int                | The addon rating                                                                       |
-| repository          | string             | The URL to the add-on repository                                                       |
-| schema              | dictionary or null | The schema for the add-on configuration                                                |
-| services_role       | list               | A list of services and the add-ons role for that service                               |
-| slug                | string             | The add-on slug                                                                        |
-| stage               | string             | The add-on stage (stable, experimental, deprecated)                                    |
-| startup             | string             | The stage when the add-on is started (initialize, system, services, application, once) |
-| state               | string or null     | The state of the add-on (started, stopped)                                             |
-| stdin               | boolean            | `true` if the add-on accepts stdin commands                                            |
-| system_managed      | boolean            | Indicates whether the add-on is managed by Home Assistant                              |
-| system_managed_config_entry | string     | Provides the configuration entry ID if the add-on is managed by Home Assistant         |
-| translations        | dictionary         | A dictionary containing content of translation files for the add-on                    |
+| repository          | string             | The URL to the app repository                                                       |
+| schema              | dictionary or null | The schema for the app configuration                                                |
+| services_role       | list               | A list of services and the apps role for that service                               |
+| slug                | string             | The app slug                                                                        |
+| stage               | string             | The app stage (stable, experimental, deprecated)                                    |
+| startup             | string             | The stage when the app is started (initialize, system, services, application, once) |
+| state               | string or null     | The state of the app (started, stopped)                                             |
+| stdin               | boolean            | `true` if the app accepts stdin commands                                            |
+| system_managed      | boolean            | Indicates whether the app is managed by Home Assistant                              |
+| system_managed_config_entry | string     | Provides the configuration entry ID if the app is managed by Home Assistant         |
+| translations        | dictionary         | A dictionary containing content of translation files for the app                    |
 | udev                | boolean            | `true` if udev access is granted is enabled                                            |
 | update_available    | boolean            | `true` if an update is available                                                       |
-| url                 | string or null     | URL to more information about the add-on                                               |
+| url                 | string or null     | URL to more information about the app                                               |
 | usb                 | list               | A list of attached USB devices                                                         |
-| version             | string             | The installed version of the add-on                                                    |
-| version_latest      | string             | The latest version of the add-on                                                       |
+| version             | string             | The installed version of the app                                                    |
+| version_latest      | string             | The latest version of the app                                                       |
 | video               | boolean            | `true` if video is enabled                                                             |
 | watchdog            | boolean            | `true` if watchdog is enabled                                                          |
-| webui               | string or null     | The URL to the web UI for the add-on                                                   |
+| webui               | string or null     | The URL to the web UI for the app                                                   |
 | signed              | boolean            | True if the image is signed and trust                                                  |
 
 **Example response:**
@@ -237,7 +237,7 @@ Get details about an add-on
   "logo": false,
   "long_description": "Long description",
   "machine": ["raspberrypi2", "tinker"],
-  "name": "Awesome add-on",
+  "name": "Awesome app",
   "network_description": "{}|null",
   "network": {},
   "options": {},
@@ -277,18 +277,18 @@ Get details about an add-on
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/install" method="post">
-Install an add-on
+Install an app
 
 **Deprecated!** Use [`/store/addons/<addon>/install`](#store) instead.
 
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/logo" method="get">
-Get the add-on logo
+Get the app logo
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/options" method="post">
-Set the options for an add-on.
+Set the options for an app.
 
 :::tip
 To reset customized network/audio/options, set it `null`.
@@ -299,9 +299,9 @@ To reset customized network/audio/options, set it `null`.
 | key           | type          | description                             |
 | ------------- | ------------- | --------------------------------------- |
 | boot          | string        | (auto, manual)                          |
-| auto_update   | boolean       | `true` if the add-on should auto update |
+| auto_update   | boolean       | `true` if the app should auto update |
 | network       | dictionary    | A map of network configuration.         |
-| options       | dictionary    | The add-on configuration                |
+| options       | dictionary    | The app configuration                |
 | audio_output  | float or null | The index of the audio output device    |
 | audio_input   | float or null | The index of the audio input device     |
 | ingress_panel | boolean       | `true` if ingress_panel is enabled      |
@@ -353,11 +353,11 @@ This endpoint is only callable by Home Assistant and not by any other client.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/options/validate" method="post">
-Run a configuration validation against the current stored add-on configuration or payload.
+Run a configuration validation against the current stored app configuration or payload.
 
 **Payload:**
 
-Optional the raw add-on options.
+Optional the raw app options.
 
 **Returned data:**
 
@@ -374,22 +374,22 @@ The Data endpoint to get his own rendered configuration.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/rebuild" method="post">
-Rebuild the add-on, only supported for local build add-ons.
+Rebuild the app, only supported for local build apps.
 
 **Payload:**
 
 | key   | type    | optional | description                                                       |
 | ----- | ------- | -------- | ----------------------------------------------------------------- |
-| force | boolean | True     | Force rebuild of the add-on even if pre-built images are provided |
+| force | boolean | True     | Force rebuild of the app even if pre-built images are provided |
 
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/restart" method="post">
-Restart an add-on
+Restart an app
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/security" method="post">
-Set the protection mode on an add-on.
+Set the protection mode on an app.
 
 This function is not callable by itself and you can not use `self` as the slug here.
 
@@ -402,12 +402,12 @@ This function is not callable by itself and you can not use `self` as the slug h
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/start" method="post">
-Start an add-on
+Start an app
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/stats" method="get">
 
-Returns a [Stats model](api/supervisor/models.md#stats) for the add-on.
+Returns a [Stats model](api/supervisor/models.md#stats) for the app.
 
 **Example response:**
 
@@ -427,17 +427,17 @@ Returns a [Stats model](api/supervisor/models.md#stats) for the add-on.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/stdin" method="post">
-Write data to add-on stdin.
+Write data to app stdin.
 
 The payload you want to pass into the addon you give the endpoint as the body of the request.
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/stop" method="post">
-Stop an add-on
+Stop an app
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/uninstall" method="post">
-Uninstall an add-on
+Uninstall an app
 
 **Payload:**
 
@@ -448,7 +448,7 @@ Uninstall an add-on
 </ApiEndpoint>
 
 <ApiEndpoint path="/addons/<addon>/update" method="post">
-Update an add-on
+Update an app
 
 **Deprecated!** Use [`/store/addons/<addon>/update`](#store) instead.
 
@@ -943,7 +943,7 @@ Create a partial backup.
 | name                           | string         | True     | The name you want to give the backup                 |
 | password                       | string         | True     | The password you want to give the backup             |
 | homeassistant                  | boolean        | True     | Add home assistant core settings to the backup       |
-| addons                         | list           | True     | A list of strings representing add-on slugs          |
+| addons                         | list           | True     | A list of strings representing app slugs          |
 | folders                        | list           | True     | A list of strings representing directories           |
 | compressed                     | boolean        | True     | `false` to create uncompressed backups               |
 | location                       | string or null | True     | Name of a backup mount or `null` for /backup         |
@@ -1023,7 +1023,7 @@ Download the backup file with the given slug.
 
 <ApiEndpoint path="/backups/<backup>/info" method="get">
 
-Returns a [Backup details model](api/supervisor/models.md#backup-details) for the add-on.
+Returns a [Backup details model](api/supervisor/models.md#backup-details) for the app.
 
 </ApiEndpoint>
 
@@ -1070,7 +1070,7 @@ Does a partial restore of the backup with the given slug.
 | key           | type    | optional | description                                    |
 | ------------- | ------- | -------- | ---------------------------------------------- |
 | homeassistant | boolean | True     | `true` if Home Assistant should be restored    |
-| addons        | list    | True     | A list of add-on slugs that should be restored |
+| addons        | list    | True     | A list of app slugs that should be restored |
 | folders       | list    | True     | A list of directories that should be restored  |
 | password      | string  | True     | The password for the backup if any             |
 | background    | boolean | True     | Return `job_id` immediately, do not wait for restore to complete. Clients must check job for status. |
@@ -1187,6 +1187,7 @@ Returns information about the Home Assistant core
 | audio_input              | string or null | The description of the audio input device                  |
 | audio_output             | string or null | The description of the audio output device                 |
 | backups_exclude_database | boolean        | Backups exclude Home Assistant database file by default    |
+| duplicate_log_file       | boolean        | Home Assistant duplicates logs to a file                   |
 
 
 **Example response:**
@@ -1274,6 +1275,7 @@ Passing `image`, `refresh_token`, `audio_input` or `audio_output` with `null` re
 | audio_input              | string or null | Profile name for audio input                                |
 | audio_output             | string or null | Profile name for audio output                               |
 | backups_exclude_database | boolean        | `true` to exclude Home Assistant database file from backups |
+| duplicate_log_file       | boolean        | `true` to duplicate Home Assistant logs to a file           |
 
 **You need to supply at least one key in the payload.**
 
@@ -1365,7 +1367,7 @@ Return information about enabled discoveries.
 | key       | type       | description                                                                     |
 | --------- | ---------- | ------------------------------------------------------------------------------- |
 | discovery | list       | A list of [Discovery models](api/supervisor/models.md#discovery)                                |
-| services  | dictionary | A dictionary of services that contains a list of add-ons that have that service. |
+| services  | dictionary | A dictionary of services that contains a list of apps that have that service. |
 
 **Example response:**
 
@@ -1637,6 +1639,37 @@ To login to the default container registry (Docker Hub), use `hub.docker.com` as
 Delete a registry from the configured container registries.
 </ApiEndpoint>
 
+<ApiEndpoint path="/docker/migrate-storage-driver" method="post">
+Schedule a Docker storage driver migration. The migration will be applied on the next system reboot.
+
+This endpoint allows migrating to either:
+- `overlayfs`: The Containerd overlayfs driver
+- `overlay2`: The Docker graph overlay2 driver
+
+:::note
+
+This endpoint requires Home Assistant OS 17.0 or newer. A `404` error will be returned on older versions or non-HAOS installations.
+
+:::
+
+**Payload:**
+
+| key            | type   | optional | description                                           |
+| -------------- | ------ | -------- | ----------------------------------------------------- |
+| storage_driver | string | False    | The target storage driver (`overlayfs` or `overlay2`) |
+
+**Example payload:**
+
+```json
+{
+  "storage_driver": "overlayfs"
+}
+```
+
+After calling this endpoint, a reboot is required to apply the migration. The response will create a `reboot_required` issue in the resolution center.
+
+</ApiEndpoint>
+
 ### Hardware
 
 <ApiEndpoint path="/hardware/info" method="get">
@@ -1803,15 +1836,16 @@ These are a convenience alternative to the headers shown above as query
 parameters are easier to use in development and with the Home Assistant proxy.
 You should only provide one or the other.
 
-| Query    | type  | description                                                                        |
-| -------- | ----- |----------------------------------------------------------------------------------- |
-| verbose  | N/A   | If included, uses `text/x-log` as log output type (alternative to `Accept` header) |
-| lines    | int   | Number of lines of output to return (alternative to `Range` header)                |
+| Query     | type  | description                                                                           |
+| --------  | ----- | -----------------------------------------------------------------------------------   |
+| verbose   | N/A   | If included, uses `text/x-log` as log output type (alternative to `Accept` header)    |
+| lines     | int   | Number of lines of output to return (alternative to `Range` header)                   |
+| no_colors | N/A   | If included, ANSI escape codes for terminal coloring will be stripped from the output |
 
 Example query string:
 
 ```text
-?verbose&lines=100
+?verbose&lines=100&no_colors
 ```
 
 :::tip
@@ -2068,7 +2102,7 @@ Supports an optional `max_depth` query param. Defaults to 1
     "addon_slug": {
       "enable": true,
       "icon": "mdi:awesome-icon",
-      "title": "Awesome add-on",
+      "title": "Awesome app",
       "admin": true
     }
   }
@@ -2237,7 +2271,7 @@ Plug-ins).
 </ApiEndpoint>
 
 <ApiEndpoint path="/refresh_updates" method="post">
-This reloads information about add-on repositories and fetches new version files.
+This reloads information about app repositories and fetches new version files.
 This endpoint is currently discouraged. Use `/reload_updates` or `/store/reload`
 instead.
 </ApiEndpoint>
@@ -2581,15 +2615,17 @@ Update the settings for a network interface.
 | address       | list   | True     | The new IP address for the interface in the ::/XX format as list                                    |
 | nameservers   | list   | True     | List of DNS servers to use                                                                          |
 | gateway       | string | True     | The gateway the interface should use                                                                |
+| route_metric  | int    | True     | Route metric. Lower value has higher priority. The kernel accepts zero (0) but coerces it to 1024 (user default) |
 
 **ipv4:**
 
-| key         | type   | optional | description                                                                           |
-| ----------- | ------ | -------- | ------------------------------------------------------------------------------------- |
-| method      | string | True     | Set IP configuration method can be `auto` for DHCP, `static` or `disabled`            |
-| address     | list   | True     | The new IP address for the interface in the X.X.X.X/XX format as list                 |
-| nameservers | list   | True     | List of DNS servers to use                                                            |
-| gateway     | string | True     | The gateway the interface should use                                                  |
+| key          | type   | optional | description                                                                           |
+| ------------ | ------ | -------- | ------------------------------------------------------------------------------------- |
+| method       | string | True     | Set IP configuration method can be `auto` for DHCP, `static` or `disabled`            |
+| address      | list   | True     | The new IP address for the interface in the X.X.X.X/XX format as list                 |
+| nameservers  | list   | True     | List of DNS servers to use                                                            |
+| gateway      | string | True     | The gateway the interface should use                                                  |
+| route_metric | int    | True     | Route metric. Lower value has higher priority                                         |
 
 **wifi:**
 
@@ -3074,7 +3110,7 @@ Dismiss an issue
 
 <ApiEndpoint path="/resolution/healthcheck" method="post">
 
-Execute a healthcheck and autofix & notifcation.
+Execute a healthcheck and autofix & notification.
 
 </ApiEndpoint>
 
@@ -3128,7 +3164,7 @@ Execute a specific check right now.
 
 | key      | type    | description                             |
 | -------- | ------- | --------------------------------------- |
-| addon    | string  | The add-on slug                         |
+| addon    | string  | The app slug                         |
 | host     | string  | The IP of the addon running the service |
 | port     | string  | The port the service is running on      |
 | ssl      | boolean | `true` if SSL is in use                 |
@@ -3181,7 +3217,7 @@ Deletes the service definitions
 
 | key      | type    | description                             |
 | -------- | ------- | --------------------------------------- |
-| addon    | string  | The add-on slug                         |
+| addon    | string  | The app slug                         |
 | host     | string  | The IP of the addon running the service |
 | port     | string  | The port the service is running on      |
 | ssl      | boolean | `true` if SSL is in use                 |
@@ -3228,7 +3264,7 @@ Deletes the service definitions
 
 <ApiEndpoint path="/store" method="get">
 
-Returns add-on store information.
+Returns app store information.
 
 **Example response:**
 
@@ -3236,7 +3272,7 @@ Returns add-on store information.
 { "addons":
   [
     {
-      "name": "Awesome add-on",
+      "name": "Awesome app",
       "slug": "7kshd7_awesome",
       "description": "Awesome description",
       "repository": "https://example.com/addons",
@@ -3263,14 +3299,14 @@ Returns add-on store information.
 
 <ApiEndpoint path="/store/addons" method="get">
 
-Returns a list of store add-ons
+Returns a list of store apps
 
 **Example response:**
 
 ```json
 [
   {
-    "name": "Awesome add-on",
+    "name": "Awesome app",
     "slug": "7kshd7_awesome",
     "description": "Awesome description",
     "repository": "https://example.com/addons",
@@ -3287,7 +3323,7 @@ Returns a list of store add-ons
 
 <ApiEndpoint path="/store/addons/<addon>" method="get">
 
-Returns information about a store add-on
+Returns information about a store app
 
 **Example response:**
 
@@ -3315,7 +3351,7 @@ Returns information about a store add-on
   "installed": false,
   "logo": true,
   "long_description": "lorem ipsum",
-  "name": "Awesome add-on",
+  "name": "Awesome app",
   "rating": 5,
   "repository": "core",
   "signed": false,
@@ -3332,7 +3368,7 @@ Returns information about a store add-on
 
 <ApiEndpoint path="/store/addons/<addon>/install" method="post">
 
-Install an add-on from the store.
+Install an app from the store.
 
 **Payload:**
 
@@ -3344,36 +3380,36 @@ Install an add-on from the store.
 
 <ApiEndpoint path="/store/addons/<addon>/update" method="post">
 
-Update an add-on from the store.
+Update an app from the store.
 
 **Payload:**
 
 | key        | type    | description                                                                                        |
 | ---------- | ------- | -------------------------------------------------------------------------------------------------- |
-| backup     | boolean | Create a partial backup of the add-on, default is false                                            |
+| backup     | boolean | Create a partial backup of the app, default is false                                            |
 | background | boolean | Return `job_id` immediately, do not wait for update to complete. Clients must check job for status |
 
 </ApiEndpoint>
 
 <ApiEndpoint path="/store/addons/<addon>/changelog" method="get">
-Get the changelog for an add-on.
+Get the changelog for an app.
 </ApiEndpoint>
 
 <ApiEndpoint path="/store/addons/<addon>/documentation" method="get">
-Get the documentation for an add-on.
+Get the documentation for an app.
 </ApiEndpoint>
 
 <ApiEndpoint path="/store/addons/<addon>/icon" method="get">
-Get the add-on icon
+Get the app icon
 </ApiEndpoint>
 
 <ApiEndpoint path="/store/addons/<addon>/logo" method="get">
-Get the add-on logo
+Get the app logo
 </ApiEndpoint>
 
 <ApiEndpoint path="/store/addons/<addon>/availability" method="get">
 
-Returns 200 success status if the latest version of the add-on is able to be
+Returns 200 success status if the latest version of the app is able to be
 installed on the current system. Returns a 400 error status if it is not with a
 message explaining why.
 
@@ -3381,7 +3417,7 @@ message explaining why.
 
 <ApiEndpoint path="/store/reload" method="post">
 
-Reloads the information stored about add-ons.
+Reloads the information stored about apps.
 
 </ApiEndpoint>
 
@@ -3446,6 +3482,12 @@ Returns information about a store repository
 <ApiEndpoint path="/store/repositories/<repository>" method="delete">
 
 Remove an unused addon repository from the store.
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/store/repositories/<repository>/repair" method="post">
+
+Repair/reset an addon repository in the store that is missing or showing incorrect information.
 
 </ApiEndpoint>
 
@@ -3543,7 +3585,7 @@ Returns information about the supervisor
 | debug               | bool         | Debug is active                                               |
 | debug_block         | bool         | `true` if debug block is enabled                              |
 | diagnostics         | bool or null | Sending diagnostics is enabled                                |
-| addons_repositories | list         | A list of add-on repository URL's as strings                  |
+| addons_repositories | list         | A list of app repository URL's as strings                  |
 | auto_update         | bool         | Is auto update enabled for supervisor                         |
 | detect_blocking_io  | bool         | Supervisor raises exceptions for blocking I/O in event loop   |
 
@@ -3630,7 +3672,7 @@ You need to call `/supervisor/reload` after updating the options.
 | debug               | bool   | Enable debug                                           |
 | debug_block         | bool   | Enable debug block                                     |
 | logging             | string | Set logging level                                      |
-| addons_repositories | list   | Set a list of URL's as strings for add-on repositories |
+| addons_repositories | list   | Set a list of URL's as strings for app repositories |
 | auto_update         | bool   | Enable/disable auto update for supervisor              |
 | detect_blocking_io  | string | Enable blocking I/O in event loop detection. Valid values are `on`, `off` and `on_at_startup`. |
 
@@ -3699,7 +3741,7 @@ Some of the endpoints uses placeholders indicated with `<...>` in the endpoint U
 
 | placeholder | description                                                                                                                                           |
 | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| addon       | The slug for the addon, to get the slug you can call `/addons`, to call endpoints for the add-on calling the endpoints you can use `self`as the slug. |
+| addon       | The slug for the addon, to get the slug you can call `/addons`, to call endpoints for the app calling the endpoints you can use `self`as the slug. |
 | application | The name of an application, call `/audio/info` to get the correct name                                                                                |
 | backup      | A valid backup slug, example `skuwe823`, to get the slug you can call `/backups`                                                                      |
 | bootid      | An id or offset of a particular boot, used to filter logs. Call `/host/logs/boots` to get a list of boot ids or see `/host/logs/boots/<bootid>` to understand boot offsets |

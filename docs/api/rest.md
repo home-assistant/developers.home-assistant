@@ -79,6 +79,8 @@ curl \
   -H "Content-Type: application/json" http://localhost:8123/api/
 ```
 
+Note: make sure you include the trailing `/`, the full path is `/api/`, NOT `/api`
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/api/config" method="get">

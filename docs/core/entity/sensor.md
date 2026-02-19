@@ -40,7 +40,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.BATTERY` | % | Percentage of battery that is left
 | `SensorDeviceClass.BLOOD_GLUCOSE_CONCENTRATION` | mg/dL, mmol/L | Blood glucose concentration
 | `SensorDeviceClass.CO2` | ppm | Concentration of carbon dioxide.
-| `SensorDeviceClass.CO` | ppm, mg/m³ | Concentration of carbon monoxide.
+| `SensorDeviceClass.CO` | ppb, ppm, µg/m³, mg/m³ | Concentration of carbon monoxide.
 | `SensorDeviceClass.CONDUCTIVITY` | S/cm, mS/cm, µS/cm | Conductivity
 | `SensorDeviceClass.CURRENT` | A, mA | Current
 | `SensorDeviceClass.DATA_RATE` | bit/s, kbit/s, Mbit/s, Gbit/s, B/s, kB/s, MB/s, GB/s, KiB/s, MiB/s, GiB/s | Data rate
@@ -59,10 +59,10 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.IRRADIANCE` | W/m², BTU/(h⋅ft²) | Irradiance
 | `SensorDeviceClass.MOISTURE` | % | Moisture
 | `SensorDeviceClass.MONETARY` | [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) | Monetary value with a currency.
-| `SensorDeviceClass.NITROGEN_DIOXIDE` | µg/m³ | Concentration of nitrogen dioxide
-| `SensorDeviceClass.NITROGEN_MONOXIDE` | µg/m³ | Concentration of nitrogen monoxide
+| `SensorDeviceClass.NITROGEN_DIOXIDE` | ppb, ppm, µg/m³ | Concentration of nitrogen dioxide
+| `SensorDeviceClass.NITROGEN_MONOXIDE` | ppb, µg/m³ | Concentration of nitrogen monoxide
 | `SensorDeviceClass.NITROUS_OXIDE` | µg/m³ | Concentration of nitrous oxide
-| `SensorDeviceClass.OZONE` | µg/m³ | Concentration of ozone
+| `SensorDeviceClass.OZONE` | ppb, ppm, µg/m³ | Concentration of ozone
 | `SensorDeviceClass.PH` | None | Potential hydrogen (pH) of an aqueous solution
 | `SensorDeviceClass.PM1` | µg/m³ | Concentration of particulate matter less than 1 micrometer
 | `SensorDeviceClass.PM25` | µg/m³ | Concentration of particulate matter less than 2.5 micrometers
@@ -72,20 +72,21 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.POWER_FACTOR` | %, None | Power Factor
 | `SensorDeviceClass.PRECIPITATION` | cm, in, mm | Accumulated precipitation
 | `SensorDeviceClass.PRECIPITATION_INTENSITY` | in/d, in/h, mm/d, mm/h | Precipitation intensity
-| `SensorDeviceClass.PRESSURE` | cbar, bar, hPa, mmHg, inHg, kPa, mbar, Pa, psi | Pressure.
+| `SensorDeviceClass.PRESSURE` | cbar, bar, hPa, mmHg, inHg, kPa, mbar, Pa, psi, mPa | Pressure.
 | `SensorDeviceClass.REACTIVE_ENERGY` | varh, kvarh | Reactive energy
 | `SensorDeviceClass.REACTIVE_POWER` | mvar, var, kvar | Reactive power
 | `SensorDeviceClass.SIGNAL_STRENGTH` | dB, dBm | Signal strength
 | `SensorDeviceClass.SOUND_PRESSURE` | dB, dBA | Sound pressure
 | `SensorDeviceClass.SPEED` | ft/s, in/d, in/h, in/s, km/h, kn, m/s, mph, mm/d, mm/s | Generic speed
-| `SensorDeviceClass.SULPHUR_DIOXIDE` | µg/m³ | Concentration of sulphure dioxide
+| `SensorDeviceClass.SULPHUR_DIOXIDE` | ppb, µg/m³ | Concentration of sulphure dioxide
 | `SensorDeviceClass.TEMPERATURE` | °C, °F, K | Temperature.
+| `SensorDeviceClass.TEMPERATURE_DELTA` | °C, °F, K | This device class represents a temperature interval (delta), i.e. the difference between two temperature values.
 | `SensorDeviceClass.TIMESTAMP` | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
 | `SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³, mg/m³ | Concentration of volatile organic compounds
 | `SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS_PARTS` | ppm, ppb | Ratio of volatile organic compounds
 | `SensorDeviceClass.VOLTAGE` | V, mV, µV, kV, MV | Voltage
 | `SensorDeviceClass.VOLUME` | L, mL, gal, fl. oz., m³, ft³, CCF, MCF | Generic volume, this device class should be used for sensors representing a consumption, for example the amount of fuel consumed by a vehicle.
-| `SensorDeviceClass.VOLUME_FLOW_RATE` | m³/h, m³/min, m³/s, ft³/min, L/h, L/min, L/s, gal/min, mL/s | Volume flow rate, this device class should be used for sensors representing a flow of some volume, for example the amount of water consumed momentarily.
+| `SensorDeviceClass.VOLUME_FLOW_RATE` | m³/h, m³/min, m³/s, ft³/min, L/h, L/min, L/s, gal/d, gal/h, gal/min, mL/s | Volume flow rate, this device class should be used for sensors representing a flow of some volume, for example the amount of water consumed momentarily.
 | `SensorDeviceClass.VOLUME_STORAGE` | L, mL, gal, fl. oz., m³, ft³, CCF, MCF | Generic stored volume, this device class should be used for sensors representing a stored volume, for example the amount of fuel in a fuel tank.
 | `SensorDeviceClass.WATER` | L, gal, m³, ft³, CCF, MCF | Water consumption
 | `SensorDeviceClass.WEIGHT` | kg, g, mg, µg, oz, lb, st | Generic mass; `weight` is used instead of `mass` to fit with every day language.

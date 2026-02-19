@@ -39,7 +39,7 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.BATTERY` | % | Percentage of battery that is left
 | `NumberDeviceClass.BLOOD_GLUCOSE_CONCENTRATION` | mg/dL, mmol/L | Blood glucose concentration```
 | `NumberDeviceClass.CO2` | ppm | Concentration of carbon dioxide.
-| `NumberDeviceClass.CO` | ppm, mg/m³ | Concentration of carbon monoxide.
+| `NumberDeviceClass.CO` | ppb, ppm, µg/m³, mg/m³ | Concentration of carbon monoxide.
 | `NumberDeviceClass.CONDUCTIVITY` | S/cm, mS/cm, µS/cm | Conductivity
 | `NumberDeviceClass.CURRENT` | A, mA | Current
 | `NumberDeviceClass.DATA_RATE` | bit/s, kbit/s, Mbit/s, Gbit/s, B/s, kB/s, MB/s, GB/s, KiB/s, MiB/s, GiB/s | Data rate
@@ -56,10 +56,10 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.IRRADIANCE` | W/m², BTU/(h⋅ft²) | Irradiance
 | `NumberDeviceClass.MOISTURE` | % | Moisture
 | `NumberDeviceClass.MONETARY` | [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) | Monetary value with a currency.
-| `NumberDeviceClass.NITROGEN_DIOXIDE` | µg/m³ | Concentration of nitrogen dioxide
-| `NumberDeviceClass.NITROGEN_MONOXIDE` | µg/m³ | Concentration of nitrogen monoxide
+| `NumberDeviceClass.NITROGEN_DIOXIDE` | ppb, ppm, µg/m³ | Concentration of nitrogen dioxide
+| `NumberDeviceClass.NITROGEN_MONOXIDE` | ppb, µg/m³ | Concentration of nitrogen monoxide
 | `NumberDeviceClass.NITROUS_OXIDE` | µg/m³ | Concentration of nitrous oxide
-| `NumberDeviceClass.OZONE` | µg/m³ | Concentration of ozone
+| `NumberDeviceClass.OZONE` | ppb, ppm, µg/m³ | Concentration of ozone
 | `NumberDeviceClass.PH` | None | Potential hydrogen (pH) of an aqueous solution
 | `NumberDeviceClass.PM1` | µg/m³ | Concentration of particulate matter less than 1 micrometer
 | `NumberDeviceClass.PM25` | µg/m³ | Concentration of particulate matter less than 2.5 micrometers
@@ -69,19 +69,20 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.POWER_FACTOR` | %, None | Power Factor
 | `NumberDeviceClass.PRECIPITATION` | cm, in, mm | Accumulated precipitation
 | `NumberDeviceClass.PRECIPITATION_INTENSITY` | in/d, in/h, mm/d, mm/h | Precipitation intensity
-| `NumberDeviceClass.PRESSURE` | cbar, bar, hPa, mmHg, inHg, kPa, mbar, Pa, psi | Pressure.
+| `NumberDeviceClass.PRESSURE` | cbar, bar, hPa, mmHg, inHg, kPa, mbar, Pa, psi, mPa | Pressure.
 | `NumberDeviceClass.REACTIVE_ENERGY` | varh, kvarh | Reactive energy
 | `NumberDeviceClass.REACTIVE_POWER` | mvar, var, kvar | Reactive power
 | `NumberDeviceClass.SIGNAL_STRENGTH` | dB, dBm | Signal strength
 | `NumberDeviceClass.SOUND_PRESSURE` | dB, dBA | Sound pressure
 | `NumberDeviceClass.SPEED` | ft/s, in/d, in/h, in/s, km/h, kn, m/s, mph, mm/d, mm/s | Generic speed
-| `NumberDeviceClass.SULPHUR_DIOXIDE` | µg/m³ | Concentration of sulphure dioxide
+| `NumberDeviceClass.SULPHUR_DIOXIDE` | ppb, µg/m³ | Concentration of sulphure dioxide
 | `NumberDeviceClass.TEMPERATURE` | °C, °F, K | Temperature.
+| `NumberDeviceClass.TEMPERATURE_DELTA` | °C, °F, K | This device class represents a temperature interval (delta), i.e. the difference between two temperature values.
 | `NumberDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³, mg/m³ | Concentration of volatile organic compounds
 | `NumberDeviceClass.VOLATILE_ORGANIC_COMPOUNDS_PARTS` | ppm, ppb | Ratio of volatile organic compounds
 | `NumberDeviceClass.VOLTAGE` | V, mV, µV, kV, MV | Voltage
 | `NumberDeviceClass.VOLUME` | L, mL, gal, fl. oz., m³, ft³, CCF, MCF | Generic volume, this device class should be used to represent a consumption, for example the amount of fuel consumed by a vehicle.
-| `NumberDeviceClass.VOLUME_FLOW_RATE` | m³/h, m³/min, m³/s, ft³/min, L/h, L/min, L/s, gal/min, mL/s | Volume flow rate, this device class should be used to represent a flow of some volume, for example the amount of water consumed momentarily.
+| `NumberDeviceClass.VOLUME_FLOW_RATE` | m³/h, m³/min, m³/s, ft³/min, L/h, L/min, L/s, gal/d, gal/h, gal/min, mL/s | Volume flow rate, this device class should be used to represent a flow of some volume, for example the amount of water consumed momentarily.
 | `NumberDeviceClass.VOLUME_STORAGE` | L, mL, gal, fl. oz., m³, ft³, CCF, MCF | Generic stored volume, this device class should be used to represent a stored volume, for example the amount of fuel in a fuel tank.
 | `NumberDeviceClass.WATER` | L, gal, m³, ft³, CCF, MCF | Water consumption
 | `NumberDeviceClass.WEIGHT` | kg, g, mg, µg, oz, lb, st | Generic mass; `weight` is used instead of `mass` to fit with every day language.
@@ -90,7 +91,7 @@ If specifying a device class, your number entity will need to also return the co
 
 ## Restoring number states
 
-Numbers which restore the state after restart or reload should not extend `RestoreEntity` because  that does not store the `native_value`, but instead the `state` which may have been modifed by the number base entity. Numbers which restore the state should extend `RestoreNumber` and call `await self.async_get_last_number_data` from `async_added_to_hass` to get access to the stored `native_min_value`,  `native_max_value`,  `native_step`,  `native_unit_of_measurement` and `native_value`.
+Numbers which restore the state after restart or reload should not extend `RestoreEntity` because  that does not store the `native_value`, but instead the `state` which may have been modified by the number base entity. Numbers which restore the state should extend `RestoreNumber` and call `await self.async_get_last_number_data` from `async_added_to_hass` to get access to the stored `native_min_value`,  `native_max_value`,  `native_step`,  `native_unit_of_measurement` and `native_value`.
 
 ## Methods
 

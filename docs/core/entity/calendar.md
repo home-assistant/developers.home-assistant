@@ -52,13 +52,13 @@ and are combined using the bitwise or (`|`) operator.
 
 ### Get events
 
-A calendar entity can return events that occur during a particular time range. Some notes for implementors:
+A calendar entity can return events that occur during a particular time range. Some notes for implementers:
 
 - The `start_date` is the lower bound and applied to the event's `end` (exclusive). This has a `tzinfo` of the local Home Assistant timezone.
 - The `end_date` is the upper bound and applied to the event's `start` (exclusive). This has the same `tzinfo` as `start_date`.
 - Recurring events should be flattened and returned as individual `CalendarEvent`.
 
-An calendar entity is responsible for returning the events in order including correctly
+A calendar entity is responsible for returning the events in order including correctly
 ordering all day events. An all day event should be ordered to start at midnight in
 the Home Assistant timezone (e.g. from the start/end time argument `tzinfo`, 
 or using `homeassistant.util.dt.start_of_local_day`). Note that all day events should still

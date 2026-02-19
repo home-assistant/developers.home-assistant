@@ -308,7 +308,7 @@ Only use a proxy for the thumbnail if the web request originated from outside th
 In `async_get_browse_image`, use `self._async_fetch_image(url)` to fetch the image from the local network. Do not use `self._async_fetch_image_from_cache(url)` which should only be used to for the currently playing artwork.
 
 :::info
-Do not pass an url as `media_image_id`. This can allow an attacker to fetch any data from the local network.
+Do not pass a URL as `media_image_id`. This can allow an attacker to fetch any data from the local network.
 :::
 
 ```python
