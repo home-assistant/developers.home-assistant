@@ -93,7 +93,7 @@ A property that returns the segments reported by the vacuum that were available 
 ```python
 @property
 def last_seen_segments(self) -> list[Segment] | None:
-    """Return segments as seen when last configuring the area mapping."""
+    """Return segments as seen by the user, when last mapping the areas."""
 ```
 
 ### `async_create_segments_issue`
