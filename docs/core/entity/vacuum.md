@@ -56,7 +56,7 @@ must set the `VacuumEntityFeature.STATE` flag.
 
 ### `async_get_segments`
 
-Return a list of `Segment` objects representing the cleanable segments reported by the vacuum. Integration platforms are required to implement this method when supporting `CLEAN_AREA`.
+Return a list of `Segment` objects representing the cleanable segments reported by the vacuum. Integration platforms are required to implement this method when supporting `CLEAN_AREA`. It is called when configuring the area mapping, so it should return fully up-to-date information.
 
 ```python
 async def async_get_segments(self) -> list[Segment]:
@@ -79,7 +79,7 @@ The `id` must be globally unique across all segments for a given vacuum entity, 
 
 ### `clean_segments` or `async_clean_segments`
 
-Clean the specified segments by their IDs. Integration platforms are required to implement this method when supporting `CLEAN_AREA`. It is called internally by the `clean_area` service after mapping Home Assistant areas to vacuum segments.
+Clean the specified segments by their IDs. Integration platforms are required to implement this method when supporting `CLEAN_AREA`. It is called internally by the `clean_area` service after resolving targeted areas to segments using the area mapping.
 
 ```python
 async def async_clean_segments(self, segment_ids: list[str], **kwargs: Any) -> None:
@@ -88,17 +88,17 @@ async def async_clean_segments(self, segment_ids: list[str], **kwargs: Any) -> N
 
 ### `last_seen_segments`
 
-A property that returns the segments reported by the vacuum that were available to the user when they last configured their area mapping. Returns `None` if no mapping has been saved yet.
+A property that returns the segments reported by the vacuum that were available when last configuring the area mapping. Returns `None` if no mapping has been saved yet.
 
 ```python
 @property
 def last_seen_segments(self) -> list[Segment] | None:
-    """Return segments as seen by the user, when last mapping the areas."""
+    """Return segments as seen when last configuring the area mapping."""
 ```
 
 ### `async_create_segments_issue`
 
-A helper method that creates a repair issue when the vacuum reports different segments than what was previously available to users when mapping areas. Integrations should call this when segment changes require users to adjust the area mapping.
+A helper method that creates a repair issue when the vacuum reports different segments than what was available when last configuring the area mapping. Integrations should call this when segment changes require the area mapping to be adjusted.
 
 ```python
 @callback
