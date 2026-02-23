@@ -17,7 +17,7 @@ It is now time to cleanup the legacy code and remove the corresponding attribute
 * Remove state attributes `ATTR_COLOR_TEMP`, `ATTR_MIN_MIREDS` and `ATTR_MAX_MIREDS`
 * Remove support for `ATTR_KELVIN` and `ATTR_COLOR_TEMP` arguments from the `light.turn_on` service call
 * Remove support for `LightEntity.color_temp`, `LightEntity.min_mireds` and `LightEntity.max_mireds` properties from the entity
-* Remove support for `LightEntity._attr_color_temp`, `LightEntity._attr_min_mired` and `LightEntity._attr_max_mired` shorthand attributes from the entity
+* Remove support for `LightEntity._attr_color_temp`, `LightEntity._attr_min_mireds` and `LightEntity._attr_max_mireds` shorthand attributes from the entity
 
 Additionally, failing to provide valid `supported_color_modes` and `color_mode` properties no longer works and will raise an error.
 
