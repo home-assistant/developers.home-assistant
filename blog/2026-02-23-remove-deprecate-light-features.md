@@ -8,16 +8,16 @@ title: "Remove deprecated light features"
 
 In October 2022, Home Assistant migrated the preferred color temperature unit from mired to kelvin.
 
-In [March 2024](/blog/2024-02-12-light-color-mode-mandatory), Home Assistant requested explicit `supported_color_modes` and `color_mode` properties (triggering deprecation of legacy fallback color mode support).
+In [February 2024](/blog/2024-02-12-light-color-mode-mandatory), Home Assistant requested explicit `supported_color_modes` and `color_mode` properties (triggering deprecation of legacy fallback color mode support).
 
-In [January 2025](/blog/2024-12-14-kelvin-preferred-color-temperature-unit), Home Assistant requested explicit Kelvin support (triggering deprecation of mired support).
+In [December 2024](/blog/2024-12-14-kelvin-preferred-color-temperature-unit), Home Assistant requested explicit Kelvin support (triggering deprecation of mired support).
 
 It is now time to cleanup the legacy code and remove the corresponding attributes, constants and properties:
-* Remove deprected `ATTR_COLOR_TEMP`, `ATTR_MIN_MIREDS` `ATTR_MAX_MIREDS`, `ATTR_KELVIN`, `COLOR_MODE_***` and `SUPPORT_***` constants
-* Remove state attributes `ATTR_COLOR_TEMP`, `ATTR_MIN_MIREDS` and `ATTR_MAX_MIREDS`
-* Remove support for `ATTR_KELVIN` and `ATTR_COLOR_TEMP` arguments from the `light.turn_on` service call
-* Remove support for `LightEntity.color_temp`, `LightEntity.min_mireds` and `LightEntity.max_mireds` properties from the entity
-* Remove support for `LightEntity._attr_color_temp`, `LightEntity._attr_min_mireds` and `LightEntity._attr_max_mireds` shorthand attributes from the entity
+* Remove deprecated `ATTR_COLOR_TEMP`, `ATTR_MIN_MIREDS`, `ATTR_MAX_MIREDS`, `ATTR_KELVIN`, `COLOR_MODE_***`, and `SUPPORT_***` constants
+* Remove deprecated state attributes `ATTR_COLOR_TEMP`, `ATTR_MIN_MIREDS` and `ATTR_MAX_MIREDS`
+* Remove deprecated support for `ATTR_KELVIN` and `ATTR_COLOR_TEMP` arguments from the `light.turn_on` service call
+* Remove deprecated support for `LightEntity.color_temp`, `LightEntity.min_mireds` and `LightEntity.max_mireds` properties from the entity
+* Remove deprecated support for `LightEntity._attr_color_temp`, `LightEntity._attr_min_mireds` and `LightEntity._attr_max_mireds` shorthand attributes from the entity
 
 Additionally, failing to provide valid `supported_color_modes` and `color_mode` properties no longer works and will raise an error.
 
