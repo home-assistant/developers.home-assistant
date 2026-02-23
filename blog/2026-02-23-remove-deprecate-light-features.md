@@ -15,9 +15,9 @@ In [January 2025](/docs/blog/2024-12-14-kelvin-preferred-color-temperature-unit)
 It is now time to cleanup the legacy code and remove the corresponding attributes, constants and properties:
 * Remove deprected `ATTR_COLOR_TEMP`, `ATTR_MIN_MIREDS` `ATTR_MAX_MIREDS`, `ATTR_KELVIN`, `COLOR_MODE_***` and `SUPPORT_***` constants
 * Remove state attributes `ATTR_COLOR_TEMP`, `ATTR_MIN_MIREDS` and `ATTR_MAX_MIREDS`
-* Remove `ATTR_KELVIN` and `ATTR_COLOR_TEMP` argument support from the `light.turn_on` service call
-* Remove `LightEntity.color_temp`, `LightEntity.min_mireds` and `LightEntity.max_mireds` properties support from the entity
-* Remove `LightEntity._attr_color_temp`, `LightEntity._attr_min_mired` and `LightEntity._attr_max_mired` shorthand attributes from the entity
+* Remove support for `ATTR_KELVIN` and `ATTR_COLOR_TEMP` arguments from the `light.turn_on` service call
+* Remove support for `LightEntity.color_temp`, `LightEntity.min_mireds` and `LightEntity.max_mireds` properties from the entity
+* Remove support for `LightEntity._attr_color_temp`, `LightEntity._attr_min_mired` and `LightEntity._attr_max_mired` shorthand attributes from the entity
 
 Additionally, failing to provide valid `supported_color_modes` and `color_mode` properties no longer works and will raise an error.
 
