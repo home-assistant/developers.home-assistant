@@ -79,7 +79,7 @@ class MyLight(LightEntity):
         return color_util.color_temperature_mired_to_kelvin(device.coldest_temperature)
 ```
 
-#### Service call
+#### Checking color temperature in service call
 
 ```python
 from homeassistant.components.light import ATTR_COLOR_TEMP_KELVIN
