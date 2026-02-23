@@ -7,13 +7,17 @@ title: "Remove Mired as a color temperature unit"
 ### Summary of changes
 
 In October 2022, Home Assistant migrated the preferred color temperature unit from mired to kelvin.
-In January 2025, Home Assistant formally deprecated mired support.
+In [March 2024](/docs/blog/2024-02-12-light-color-mode-mandatory), Home Assistant requested explicit `supported_color_modes` and `color_mode` properties (triggering deprecation of legacy fallback color mode support).
+In [January 2025](/docs/blog/2024-12-14-kelvin-preferred-color-temperature-unit), Home Assistant requested explicit Kelvin support (triggering deprecation of mired support).
 
-It is now time to cleanup the deprecated mired support and remove the corresponding attributes, constants and properties:
-* Remove state and capability attributes `ATTR_COLOR_TEMP`, `ATTR_MIN_MIREDS` and `ATTR_MAX_MIREDS`
+It is now time to cleanup the legacy code and remove the corresponding attributes, constants and properties:
+* Remove deprected `ATTR_COLOR_TEMP`, `ATTR_MIN_MIREDS` `ATTR_MAX_MIREDS`, `ATTR_KELVIN`, `COLOR_MODE_***` and `SUPPORT_***` constants
+* Remove state attributes `ATTR_COLOR_TEMP`, `ATTR_MIN_MIREDS` and `ATTR_MAX_MIREDS`
 * Remove `ATTR_KELVIN` and `ATTR_COLOR_TEMP` argument support from the `light.turn_on` service call
-* Remove `LightEntity.color_temp`, `LightEntity.min_mireds` and `LightEntity.max_mireds` propeties support from the entity
+* Remove `LightEntity.color_temp`, `LightEntity.min_mireds` and `LightEntity.max_mireds` properties support from the entity
 * Remove `LightEntity._attr_color_temp`, `LightEntity._attr_min_mired` and `LightEntity._attr_max_mired` shorthand attributes from the entity
+
+Additionally, failing to provide valid `supported_color_modes` and `color_mode` properties will no longer work.
 
 ### Examples
 
@@ -104,3 +108,4 @@ class MyLight(LightEntity):
 * [Community discussion about Kelvin temperature](https://community.home-assistant.io/t/wth-is-light-temperature-not-in-kelvin/467449/6)
 * [Core PR #79591: Migration to Kelvin](https://github.com/home-assistant/core/pull/79591)
 * [Architecture discussion #564](https://github.com/home-assistant/architecture/discussions/564)
+* [Color modes documentation](/docs/core/entity/light#color-modes)
