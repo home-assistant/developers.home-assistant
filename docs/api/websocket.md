@@ -663,6 +663,14 @@ This endpoint is designed for:
         "di": "abc123def456",
         "en": "Living Room",
         "hn": true
+      },
+      {
+        "ei": "switch.setting",
+        "pl": "esphome",
+        "di": "cde83923",
+        "en": "Setting for something",
+        "hn": true,
+        "ec": 0
       }
     ]
   }
