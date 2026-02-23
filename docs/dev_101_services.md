@@ -261,9 +261,9 @@ The guiding principle is: **target the thing the action actually acts on.** If t
 :::
 
 :::caution
-When a service action requires a target, this target always has to be provided. Do not fall back to a default target when none is specified. This might be especially tempting for service actions targeting a config entry, where users often only have one entry of the same integration.
+When a service action requires a target, this target can not be optional. Do not implement a default target when none is specified.
 
-Making the targets optional may seem convenient, but it will make automations and scripts unpredictable when the configuration changes by adding entities or entries. Requiring an explicit target keeps action calls predictable and consistent regardless of the user's current configuration.
+Making the target optional seems convenient, but it makes automations and scripts unpredictable when the configuration changes by adding entities or entries. Requiring an explicit target keeps action calls predictable and consistent regardless of the user's current configuration.
 :::
 
 ## Entity service actions
