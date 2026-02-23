@@ -7,7 +7,9 @@ title: "Remove Mired as a color temperature unit"
 ### Summary of changes
 
 In October 2022, Home Assistant migrated the preferred color temperature unit from mired to kelvin.
+
 In [March 2024](/docs/blog/2024-02-12-light-color-mode-mandatory), Home Assistant requested explicit `supported_color_modes` and `color_mode` properties (triggering deprecation of legacy fallback color mode support).
+
 In [January 2025](/docs/blog/2024-12-14-kelvin-preferred-color-temperature-unit), Home Assistant requested explicit Kelvin support (triggering deprecation of mired support).
 
 It is now time to cleanup the legacy code and remove the corresponding attributes, constants and properties:
