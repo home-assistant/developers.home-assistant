@@ -1,7 +1,7 @@
 ---
 author: epenet
 authorURL: https://github.com/epenet
-title: "Remove Mired as a color temperature unit"
+title: "Remove deprecated light features"
 ---
 
 ### Summary of changes
