@@ -43,7 +43,7 @@ The domain is a short name consisting of characters and underscores. This domain
 
 ## Name
 
-The name of the integration.
+The name of the integration. Integrations that communicate via the cloud should append "Cloud" to the name (e.g., "LIFX Cloud"). If the integration communicates locally, or both locally and via the cloud, it should just use the name (e.g., "LIFX").
 
 ## Version
 
