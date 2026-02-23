@@ -8,9 +8,9 @@ title: "Remove deprecated light features"
 
 In October 2022, Home Assistant migrated the preferred color temperature unit from mired to kelvin.
 
-In [February 2024](/blog/2024-02-12-light-color-mode-mandatory), Home Assistant requested explicit `supported_color_modes` and `color_mode` properties (triggering deprecation of legacy fallback color mode support).
+In [February 2024](/blog/2024/02/12/light-color-mode-mandatory), Home Assistant requested explicit `supported_color_modes` and `color_mode` properties (triggering deprecation of legacy fallback color mode support).
 
-In [December 2024](/blog/2024-12-14-kelvin-preferred-color-temperature-unit), Home Assistant requested explicit Kelvin support (triggering deprecation of mired support).
+In [December 2024](/blog/2024/12/14/kelvin-preferred-color-temperature-unit), Home Assistant requested explicit Kelvin support (triggering deprecation of mired support).
 
 It is now time to clean up the legacy code and remove the corresponding attributes, constants and properties:
 * Remove deprecated `ATTR_COLOR_TEMP`, `ATTR_MIN_MIREDS`, `ATTR_MAX_MIREDS`, `ATTR_KELVIN`, `COLOR_MODE_***`, and `SUPPORT_***` constants
