@@ -12,7 +12,7 @@ In [February 2024](/blog/2024-02-12-light-color-mode-mandatory), Home Assistant 
 
 In [December 2024](/blog/2024-12-14-kelvin-preferred-color-temperature-unit), Home Assistant requested explicit Kelvin support (triggering deprecation of mired support).
 
-It is now time to cleanup the legacy code and remove the corresponding attributes, constants and properties:
+It is now time to clean up the legacy code and remove the corresponding attributes, constants and properties:
 * Remove deprecated `ATTR_COLOR_TEMP`, `ATTR_MIN_MIREDS`, `ATTR_MAX_MIREDS`, `ATTR_KELVIN`, `COLOR_MODE_***`, and `SUPPORT_***` constants
 * Remove deprecated state attributes `ATTR_COLOR_TEMP`, `ATTR_MIN_MIREDS` and `ATTR_MAX_MIREDS`
 * Remove deprecated support for `ATTR_KELVIN` and `ATTR_COLOR_TEMP` arguments from the `light.turn_on` service call
