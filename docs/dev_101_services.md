@@ -260,6 +260,12 @@ When registering a service action, target it at the level of the [data hierarchy
 The guiding principle is: **target the thing the action actually acts on.** If the action needs a device, target the device. If it needs a config entry, target the config entry. Resolving from a lower level (e.g., looking up a config entry from an entity) adds unnecessary indirection, couples the action interface to assumptions about the data hierarchy in the integration, and makes it harder for users to understand what the action operates on.
 :::
 
+:::caution
+When a service action requires a target, this target always has to be provided. Do not fall back to a default target when none is specified. This might be especially tempting for service actions targeting a config entry, where users often only have one entry of the same integration.
+
+Making the targets optional may seem convenient, but it will make automations and scripts unpredictable when the configuration changes by adding entities or entries. Requiring an explicit target keeps action calls predictable and consistent regardless of the user's current configuration.
+:::
+
 ## Entity service actions
 
 Sometimes you want to provide extra actions to control your entities. For example, the Sonos integration provides action to group and ungroup devices. Entity service actions are special because there are many different ways a user can specify entities. It can use areas, a group or a list of entities.
