@@ -19,7 +19,7 @@ It is now time to cleanup the legacy code and remove the corresponding attribute
 * Remove `LightEntity.color_temp`, `LightEntity.min_mireds` and `LightEntity.max_mireds` properties support from the entity
 * Remove `LightEntity._attr_color_temp`, `LightEntity._attr_min_mired` and `LightEntity._attr_max_mired` shorthand attributes from the entity
 
-Additionally, failing to provide valid `supported_color_modes` and `color_mode` properties will no longer work.
+Additionally, failing to provide valid `supported_color_modes` and `color_mode` properties no longer works and will raise an error.
 
 ### Examples
 
