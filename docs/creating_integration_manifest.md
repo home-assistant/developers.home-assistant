@@ -43,7 +43,11 @@ The domain is a short name consisting of characters and underscores. This domain
 
 ## Name
 
-The name of the integration. If a product or service offers both local and cloud communication, the cloud integration should append "Cloud" to the name (for example, "LIFX Cloud"). The local integration, or one that offers both cloud and local communication, should just use the same name (for example, "LIFX"). Integrations for inherently cloud-based services should also just use the name (for example, "iCloud").
+The name of the integration must follow these rules:
+
+- If a product or service offers both local and cloud integrations, the cloud variant should append "Cloud" to the name (for example, **LIFX Cloud**).
+- The local variant (or one that supports both local and cloud communication) should use the plain product or service name with no suffix (for example, **LIFX**). Do not append "Local".
+- Integrations for inherently cloud-based products or services should use the name as-is, without any suffix (for example, **iCloud** not **iCloud Cloud**).
 
 ## Version
 
