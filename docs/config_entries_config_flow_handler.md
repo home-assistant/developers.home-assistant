@@ -23,10 +23,6 @@ from .const import DOMAIN
 
 class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     """Example config flow."""
-    # The schema version of the entries that it creates
-    # Home Assistant will call your migrate method if the version changes
-    VERSION = 1
-    MINOR_VERSION = 1
 ```
 
 Once you have updated your manifest and created the `config_flow.py`, you will need to run `python3 -m script.hassfest` (one time only) for Home Assistant to activate the config entry for your integration.
@@ -236,11 +232,21 @@ When the translations are merged into Home Assistant, they will be automatically
 
 ## Config entry migration
 
-As mentioned above - each Config Entry has a version assigned to it. This is to be able to migrate Config Entry data to new formats when Config Entry schema changes.
+Each config entry has a version assigned to it, made up of a major and a minor version. This is to be able to migrate config entry data to new formats when the config entry schema changes. Both `VERSION` and `MINOR_VERSION` default to `1` if not explicitly set in the config flow, so integrations only need to set them when implementing a migration.
 
 Migration can be handled programmatically by implementing function `async_migrate_entry` in your integration's `__init__.py` file. The function should return `True` if migration is successful.
 
-The version is made of a major and minor version. If minor versions differ but major versions are the same, integration setup will be allowed to continue even if the integration does not implement `async_migrate_entry`. This means a minor version bump is backwards compatible unlike a major version bump which causes the integration to fail setup if the user downgrades Home Assistant Core without restoring their configuration from backup.
+If minor versions differ but major versions are the same, integration setup will be allowed to continue even if the integration does not implement `async_migrate_entry`. This means a minor version bump is backwards compatible unlike a major version bump which causes the integration to fail setup if the user downgrades Home Assistant Core without restoring their configuration from backup.
+
+To set a new version, add `VERSION` and/or `MINOR_VERSION` to your config flow class:
+
+```python
+class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
+    """Example config flow."""
+
+    VERSION = 2
+    MINOR_VERSION = 2
+```
 
 ```python
 # Example migration function
