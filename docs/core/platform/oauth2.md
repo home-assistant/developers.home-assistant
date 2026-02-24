@@ -61,7 +61,7 @@ The `extra_authorize_data` property is where you define the OAuth scopes and any
 
 ### Reauthentication
 
-Home Assistant can will handle the token refresh lifecycle, by calling `async_ensure_token_valid`. However, if a token becomes permanently invalid (for example, if the user revokes access from the provider's website), Home Assistant will trigger a reauthentication flow. To support this, add `async_step_reauth` in your config flow:
+Home Assistant will refresh the access token when `async_ensure_token_valid` is called. However, if a token becomes permanently invalid (for example, if the user revokes access from the provider's website), Home Assistant will trigger a reauthentication flow. To support this, add `async_step_reauth` in your config flow:
 
 ```python
 async def async_step_reauth(
