@@ -88,7 +88,7 @@ from homeassistant.helpers import config_entry_oauth2_flow
 
 session = config_entry_oauth2_flow.OAuth2Session(hass, entry, implementation)
 
-# The session handles token refresh, inside the library, automatically
+# The session handles token refresh, inside the library, when `async_ensure_token_valid` is called. This must be called before every request.
 response = await session.async_request("GET", "https://api.example.com/data")
 ```
 
