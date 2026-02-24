@@ -94,7 +94,7 @@ response = await session.async_request("GET", "https://api.example.com/data")
 ```
 
 
-- `async_ensure_token_valid()` - refreshes the token if needed but does **not** return the token. This needs to done before every request to ensure there's a valid token.
+- `async_ensure_token_valid()` - refreshes the token if needed but does **not** return the token. This needs to done before every request to ensure there's a valid token. The token can be obtained from the property, stored in `OAuth2Session`.
 
 See [Error handling](#error-handling) below for how to handle errors during token requests.
 
