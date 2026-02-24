@@ -105,7 +105,7 @@ Both methods ensure a valid token is available, but behave differently:
 
 - `async_ensure_token_valid()` - refreshes the token if needed but does **not** return the token. This needs to done before every request to ensure there's a valid token.
 
-Both methods raise the same exceptions on failure (see [Error handling](#error-handling) below).
+See [Error handling](#error-handling) below for how to handle errors during token requests.
 
 ## Error handling
 
