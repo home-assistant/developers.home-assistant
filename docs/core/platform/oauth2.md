@@ -29,8 +29,6 @@ It's encouraged to use the built-in `config_entry_oauth2_flow` for standard Auth
 | Authorization code with PKCE | `LocalOAuth2ImplementationWithPkce` | When the provider requires PKCE |
 | Custom                       | `AbstractOAuth2Implementation`      | Any non-standard flow           |
 
-_Note:_ If a service prodiver offers both a Client Credentials flow and Device Authorization flow, the Client Credentials flow is overpreferred and should be used. The Device Authorization flow is only intended for devices that cannot display a browser. Currently a QR code is not supported in the Device Authorization.
-
 ## Implementing the config flow
 
 The integration's config flow must extend `AbstractOAuth2FlowHandler`:
