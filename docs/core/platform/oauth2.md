@@ -92,16 +92,6 @@ session = config_entry_oauth2_flow.OAuth2Session(hass, entry, implementation)
 response = await session.async_request("GET", "https://api.example.com/data")
 ```
 
-For all integrations that use an external API client library, pass the token directly:
-
-```python
-access_token = await session.async_get_access_token()
-client = ExternalApiClient(token=access_token)
-```
-
-### `async_get_access_token` vs `async_ensure_token_valid`
-
-Both methods ensure a valid token is available, but behave differently:
 
 - `async_ensure_token_valid()` - refreshes the token if needed but does **not** return the token. This needs to done before every request to ensure there's a valid token.
 
