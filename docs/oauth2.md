@@ -19,7 +19,7 @@ Home Assistant's OAuth 2.0 helper provides:
 
 The helper supports two credential approaches, both of which require `application_credentials` support.
 
-It's encouraged to use the built-in `config_entry_oauth2_flow` for standard Authorization Code flows, but the underlying `AbstractOAuth2Implementation` can be extended to suit specific needs.
+It's encouraged to use the built-in `config_entry_oauth2_flow` for standard Authorization Code flows. Use the existing template flows that inherit from `AbstractOAuth2FlowHandler`. As a last resort, only build own child flows if it's needed.
 
 ## Supported OAuth 2.0 flows
 
@@ -147,6 +147,8 @@ except (OAuth2TokenRequestTransientError, OAuth2TokenRequestError) as err:
 
 ### With Data Update Coordinator
 
+Look at the [library guide](/docs/api_lib_auth) on authentication for more information on building guidelines. The following examples act merely as an example how to interlink a library with OAuth2.0 in the Data Update Coordinator.
+
 ```python
 from homeassistant.helpers import config_entry_oauth2_flow
 from homeassistant.helpers.update_coordinator import DataUpdateCoordinator, UpdateFailed
@@ -160,6 +162,7 @@ class ExampleCoordinator(DataUpdateCoordinator[MyData]):
         hass: HomeAssistant,
         entry: ConfigEntry,
         session: config_entry_oauth2_flow.OAuth2Session,
+        client: LibraryClient
     ) -> None:
         """Initialize the coordinator."""
         super().__init__(
@@ -169,13 +172,17 @@ class ExampleCoordinator(DataUpdateCoordinator[MyData]):
             update_interval=timedelta(minutes=30),
         )
         self.session = session
+        self.client = client
+
+    async def _async_setup(self) -> None:
+        """Setup the coordinator."""
+        try:
+            self.client = ExampleApiClient(session=session)
+        except ApiClientAuthenticationError as err:
+            raise ConfigEntryAuthFailed(f"Error authenticating with library: {err}") from err
 
     async def _async_update_data(self) -> MyData:
-        """Fetch data from the API."""
-        # Token refresh and OAuth exceptions are handled automatically
-        # by the coordinator; no explicit try/except needed here
-        access_token = await self.session.async_get_access_token()
-        client = ExampleApiClient(token=access_token)
+        """Fetch data from the API."""       
         try:
             return await client.async_get_data()
         except ApiClientError as err:
