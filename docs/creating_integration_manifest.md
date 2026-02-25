@@ -60,7 +60,7 @@ focus.
 :::warning
 Setting an `integration_type` is required for core integrations with a config
 flow. For custom and YAML-based integrations, if the `integration_type` is
-not set, it will default to `hub` but it is recommended to set it to the correct type.
+not set, it will default to `hub`, but it is recommended to set the correct type explicitly.
 :::
 
 | Type |  Description
