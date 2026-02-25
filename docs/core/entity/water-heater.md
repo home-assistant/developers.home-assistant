@@ -47,18 +47,19 @@ Properties have to follow the units defined in the `temperature_unit`.
 Supported features are defined by using values in the `WaterHeaterEntityFeature` enum
 and are combined using the bitwise or (`|`) operator.
 
-| Value                | Description               |
-| -------------------- | ------------------------- |
-| `TARGET_TEMPERATURE` | Temperature can be set    |
-| `OPERATION_MODE`     | Operation mode can be set |
-| `AWAY_MODE`          | Away mode can be set      |
-| `ON_OFF`             | Can be turned on or off   |
+| Value                       | Description
+| --------------------------- | ----------------------------
+| `TARGET_TEMPERATURE`        | Temperature can be set
+| `OPERATION_MODE`            | Operation mode can be set
+| `AWAY_MODE`                 | Away mode can be set
+| `ON_OFF`                    | Can be turned on or off
+| `TARGET_TEMPERATURE_RANGE`  | Temperature range can be set
 
 ## Methods
 
 ### `set_temperature` or `async_set_temperature`
 
-Sets the temperature the water heater should heat water to.
+Sets the temperature or temperature range the water heater should heat water to.
 
 ### `set_operation_mode`or `async_set_operation_mode`
 
