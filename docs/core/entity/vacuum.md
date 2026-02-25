@@ -88,7 +88,7 @@ async def async_clean_segments(self, segment_ids: list[str], **kwargs: Any) -> N
 
 ### `last_seen_segments`
 
-A property that returns the segments reported by the vacuum that were available when last configuring the area mapping. Returns `None` if no mapping has been saved yet.
+A property that returns the segments reported by the vacuum that were available when last configuring the area mapping. Integrations can compare this against current device segments during their update cycle to detect changes and call `async_create_segments_issue` when appropriate. Returns `None` if no mapping has been saved yet, in which case the issue should not be raised.
 
 ```python
 @property
@@ -98,7 +98,7 @@ def last_seen_segments(self) -> list[Segment] | None:
 
 ### `async_create_segments_issue`
 
-A helper method that creates a repair issue when the vacuum reports different segments than what was available when last configuring the area mapping. Integrations should call this when segment changes require the area mapping to be adjusted.
+A helper method that creates a repair issue when the vacuum reports different segments than what was available when last configuring the area mapping. Integrations should call this when segment changes require the area mapping to be adjusted. The resulting repair issue prompts the user to re-configure the area mapping, which will update `last_seen_segments` accordingly.
 
 ```python
 @callback
