@@ -42,7 +42,7 @@ The available API endpoints are:
 - `/api/brands/integration/{domain}/{image}` - Integration icons and logos
 - `/api/brands/hardware/{category}/{image}` - Hardware images
 
-All endpoints accept an optional `?fallback=placeholder` query parameter. When set, a generic placeholder image is returned instead of a 404 if the requested image does not exist.
+All endpoints return a generic placeholder image by default if the requested image does not exist. To opt out and receive a 404 instead, add the `?placeholder=no` query parameter.
 
 These endpoints require authentication. Requests can authenticate using either a standard authenticated session (Bearer token) or by passing an access token in a `token` query parameter. The frontend obtains this access token via the `brands/access_token` WebSocket command and appends it to all brand image URLs automatically.
 
