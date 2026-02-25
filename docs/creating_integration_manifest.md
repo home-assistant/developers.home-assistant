@@ -58,9 +58,9 @@ must provide an `integration_type` in their manifest, that describes its main
 focus.
 
 :::warning
-When not set, we currently default to `hub`. This default is temporary during
-our transition period, every integration should set an `integration_type` and
-it thus will become mandatory in the future.
+Setting an `integration_type` is required for core integrations with a config
+flow. For custom and YAML-based integrations, if the `integration_type` is
+not set, it will default to `hub` but it is recommended to set it to the correct type.
 :::
 
 | Type |  Description
