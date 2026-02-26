@@ -29,7 +29,6 @@ The infrared entity integration creates a separation between:
 │                     infrared domain                          │
 │                                                              │
 │  • InfraredEntity base class                                 │
-│  • Protocol definitions (NEC, etc.)                          │
 │  • Helper functions (async_get_emitters, async_send_command) │
 └───────────────────────┬──────────────────────────────────────┘
                         │ Implemented by
@@ -58,7 +57,7 @@ The `async_send_command` method must be implemented by emitter integrations to h
 class MyInfraredEntity(InfraredEntity):
     """My infrared entity."""
 
-    async def async_send_command(self, command: InfraredCommand) -> None:
+    async def async_send_command(self, command: infrared_protocols.Command) -> None:
         """Send an IR command.
 
         Args:
@@ -92,10 +91,10 @@ emitters = infrared.async_get_emitters(hass)
 Sends an IR command to a specific infrared entity.
 
 ```python
+from infrared_protocols import NECCommand
 from homeassistant.components import infrared
-from homeassistant.components.infrared import NECInfraredCommand
 
-command = NECInfraredCommand(
+command = NECCommand(
     address=0x04,
     command=0x08,
     modulation=38000,  # 38 kHz carrier frequency
@@ -103,7 +102,7 @@ command = NECInfraredCommand(
 
 await infrared.async_send_command(
     hass,
-    ir_entity_uuid,
+    ir_entity_id,
     command,
     context=context,  # Optional context for logbook tracking
 )
@@ -111,22 +110,6 @@ await infrared.async_send_command(
 
 ## IR commands
 
-The infrared domain provides base classes for IR commands that convert protocol-specific data to raw timings.
+The [infrared-protocols library](https://github.com/home-assistant-libs/infrared-protocols) provides base classes for IR commands that convert protocol-specific data to raw timings.
 
-### Base command
-
-All IR commands inherit from `InfraredCommand` and must implement the `get_raw_timings()` method:
-
-```python
-from homeassistant.components.infrared import InfraredCommand, Timing
-
-class InfraredCommand:
-    """Base class for IR commands."""
-
-    repeat_count: int  # Number of times to repeat the command
-    modulation: int    # Modulation frequency in Hz (e.g., 38000 for 38 kHz)
-
-    def get_raw_timings(self) -> list[Timing]:
-        """Get raw timings for the command."""
-```
-
+All IR commands must inherit from `infrared_protocols.Command` and implement the `get_raw_timings()` method.
