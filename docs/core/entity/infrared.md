@@ -14,33 +14,29 @@ The infrared entity integration creates a separation between:
 1. **Emitter integrations** (like ESPHome, Broadlink): These implement the `InfraredEntity` to provide the hardware-specific IR transmission capability.
 2. **Consumer integrations** (like LG, Samsung): These use the infrared helper functions to send device-specific IR commands through available emitters.
 
-```text
-┌──────────────────────────────────────────────────────────────┐
-│                   Consumer Integrations                      │
-│           (Device-specific IR codes and entity types)        │
-│                                                              │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐           │
-│  │     LG      │  │  Samsung    │  │  Daikin     │   ...     │
-│  └─────────────┘  └─────────────┘  └─────────────┘           │
-└───────────────────────┬──────────────────────────────────────┘
-                        │ Use helper functions
-                        ▼
-┌──────────────────────────────────────────────────────────────┐
-│                     infrared domain                          │
-│                                                              │
-│  • InfraredEntity base class                                 │
-│  • Helper functions (async_get_emitters, async_send_command) │
-└───────────────────────┬──────────────────────────────────────┘
-                        │ Implemented by
-                        ▼
-┌──────────────────────────────────────────────────────────────┐
-│                  Emitter Integrations                        │
-│            (Hardware-specific implementations)               │
-│                                                              │
-│  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐           │
-│  │   ESPHome   │  │  Broadlink  │  │    ZHA      │   ...     │
-│  └─────────────┘  └─────────────┘  └─────────────┘           │
-└──────────────────────────────────────────────────────────────┘
+```mermaid
+flowchart TD
+    subgraph consumers["Consumer integrations"]
+        direction LR
+        LG["LG"] ~~~ Samsung["Samsung"] ~~~ Daikin["Daikin"] ~~~ more1["..."]
+    end
+
+    subgraph infrared["infrared domain"]
+        direction LR
+        base["InfraredEntity base class"]
+        subgraph helpers["Helper functions"]
+          direction TB
+          async_get_emitters ~~~ async_send_command
+        end
+    end
+
+    subgraph emitters["Emitter integrations"]
+        direction LR
+        ESPHome["ESPHome"] ~~~ Broadlink["Broadlink"] ~~~ ZHA["ZHA"] ~~~ more2["..."]
+    end
+
+    consumers -->|"Use helper functions"| helpers
+    base -->|"Implemented by"| emitters
 ```
 
 ## InfraredEntity class
@@ -51,7 +47,7 @@ The infrared entity state represents the timestamp of when the last IR command w
 
 ### Send command method
 
-The `async_send_command` method must be implemented by emitter integrations to handle the actual IR transmission.
+The `InfraredEntity.async_send_command` method must be implemented by emitter integrations to handle the actual IR transmission.
 
 ```python
 class MyInfraredEntity(InfraredEntity):
@@ -69,7 +65,7 @@ class MyInfraredEntity(InfraredEntity):
 ```
 
 :::important
-Consumer integrations should not call `async_send_command` directly. Use the [`infrared.async_send_command`](#send-command) helper function instead, which handles state updates and context management automatically.
+Consumer integrations should not call `InfraredEntity.async_send_command` directly. Use the [`infrared.async_send_command`](#send-command) helper function instead, which handles state updates and context management automatically.
 :::
 
 ## Helper functions
