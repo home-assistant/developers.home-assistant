@@ -323,7 +323,7 @@ class MyMediaPlayer(MediaPlayerEntity):
 
 ### Grouping player entities together
 
-Optional. If your player has support for grouping player entities together for synchronous playback (indicated by `SUPPORT_GROUPING`) one join and one unjoin method needs to be defined.
+Optional. If your player supports grouping for synchronous playback (indicated by `MediaPlayerEntityFeature.GROUPING` in `supported_features`) one join and one unjoin method needs to be defined.
 
 ```python
 class MyMediaPlayer(MediaPlayerEntity):
@@ -343,3 +343,35 @@ class MyMediaPlayer(MediaPlayerEntity):
     async def async_unjoin_player(self):
         """Remove this player from any group."""
 ```
+
+### Returning groupable players
+
+Optional. By default, Home Assistant provides the
+`media_player.get_groupable_players` service, which returns other media players
+from the same platform that support grouping and excludes the current entity.
+
+Override this method only if you need to:
+
+- Filter players differently
+- Include players from other integrations that can be grouped with this player
+
+```python
+class MyMediaPlayer(MediaPlayerEntity):
+
+    async def async_get_groupable_players(self) -> dict[str, Any]:
+        """Return players that can be grouped with this player.
+
+        Return a dict with a `result` list of entity IDs.
+        """
+        return {"result": ["media_player.living_room", "media_player.kitchen"]}
+```
+
+#### Requirements
+
+- The return value **must** be a dictionary with a `result` key containing a list of entity IDs
+- `result` must be a list of media player entity IDs.
+- Do not include the current entity.
+- Only include entities that actually support grouping with this player.
+
+> **Note:** The `media_player.get_groupable_players` service is registered automatically when `MediaPlayerEntityFeature.GROUPING` is present in `supported_features`.
+> If your method returns `None`, Home Assistant will use the default implementation.
