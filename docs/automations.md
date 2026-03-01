@@ -31,7 +31,9 @@ from homeassistant.helpers.trigger import Trigger, TriggerActionRunner, TriggerC
 from homeassistant.helpers.typing import ConfigType
 
 _OPTIONS_SCHEMA = vol.Schema({
-    vol.Required("event_type"): cv.string,
+    vol.Required("behavior", default="any"): vol.In(
+        ["first", "last", "any"]
+    ),
 })
 
 _CONFIG_SCHEMA = vol.Schema({
@@ -94,5 +96,32 @@ async def async_get_triggers(hass: HomeAssistant) -> dict[str, type[Trigger]]:
         "event": EventTrigger,
     }
 ```
+
+### Trigger schema
+
+The frontend uses the `triggers.yaml` file to know the structure of the triggers.
+This file is similar to `services.yaml`.
+
+For example, the following snippet shows a trigger that takes a target binary sensor with a specific device class and a select selector with a predefined set of options.
+
+```yaml
+occupancy_cleared:
+  target:
+    entity:
+      domain: binary_sensor
+      device_class: presence
+  fields:
+    behavior:
+      required: true
+      default: any
+      selector:
+        select:
+          translation_key: trigger_behavior
+          options:
+            - first
+            - last
+            - any
+```
+
 
 
