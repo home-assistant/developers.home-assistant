@@ -17,6 +17,7 @@ Properties should always only return information from memory and not do I/O (lik
 | Name  | Type          | Default               | Description                                             |
 | ----- | ------------- | --------------------- | ------------------------------------------------------- |
 | event | <code>CalendarEvent &#124; None</code> | **Required** | The current or next upcoming `CalendarEvent` or `None`. |
+| initial_color | `str` | `None` | A hex color string (e.g., `"#16a765"`) used as the initial color for the calendar in the frontend. |
 
 ### States
 
@@ -158,3 +159,7 @@ A `CalendarEvent` represents an individual event on a calendar.
 | uid | string | `None` | A unique identifier for the event (required for mutations) |
 | recurrence_id | string | `None` | An optional identifier for a specific instance of a recurring event (required for mutations of recurring events) |
 | rrule |  string | `None` | A recurrence rule string e.g. `FREQ=DAILY` |
+
+## Color management
+
+Calendar entities can optionally provide a default color for display in the frontend by setting `initial_color` to a hex color string (e.g., `"#16a765"`). This color is automatically stored in entity registry options when the entity is first added and can be customized by users through the entity settings UI.
