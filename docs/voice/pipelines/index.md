@@ -56,6 +56,76 @@ The following events can be emitted:
 | `tts-end`      | End of text to speech        | audio only | `token` - Token of the generated audio<br />`url` - URL to the generated audio<br />`mime_type` - MIME type of the generated audio<br />                                                                                                                   |
 | `error`        | Error in pipeline            | on error   | `code` - Error code ([see below](#error-codes))<br />`message` - Error message                                                                                                                                                                                                                      |
 
+## Event flow examples
+
+The following diagrams show how events flow through different pipeline scenarios:
+
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
+
+<Tabs>
+
+<TabItem value="Full voice pipeline">
+
+A complete voice interaction with wake word detection, speech-to-text, intent recognition, and text-to-speech response.
+
+```mermaid
+%%{init: {'theme':'base', 'themeVariables': { 'background':'#f8f9fa', 'primaryColor':'#0288d1', 'primaryTextColor':'#000', 'lineColor':'#333', 'primaryBorderColor':'#0277bd'}}}%%
+flowchart TD
+    A1[run-start] --> A2[wake_word-start] --> A3[wake_word-end]
+    A3 --> A4[stt-start] --> A5[stt-vad-start] --> A6[stt-vad-end] --> A7[stt-end]
+    A7 --> A8[intent-start] --> A9[intent-end]
+    A9 --> A10[tts-start] --> A11[tts-end] --> A12[run-end]
+```
+
+</TabItem>
+
+<TabItem value="With streaming">
+
+Voice interaction with streaming intent progress updates during processing.
+
+```mermaid
+%%{init: {'theme':'base', 'themeVariables': { 'background':'#f8f9fa', 'primaryColor':'#0288d1', 'primaryTextColor':'#000', 'lineColor':'#333', 'primaryBorderColor':'#0277bd'}}}%%
+flowchart TD
+    B1[run-start] --> B2[wake_word-start] --> B3[wake_word-end]
+    B3 --> B4[stt-start] --> B5[stt-vad-start] --> B6[stt-vad-end] --> B7[stt-end]
+    B7 --> B8[intent-start] --> B9[intent-progress]
+    B9 --> B9
+    B9 --> B10[intent-end]
+    B10 --> B11[tts-start] --> B12[tts-end] --> B13[run-end]
+```
+
+</TabItem>
+
+<TabItem value="Text input">
+
+Text-only interaction that skips wake word detection and speech-to-text stages.
+
+```mermaid
+%%{init: {'theme':'base', 'themeVariables': { 'background':'#f8f9fa', 'primaryColor':'#0288d1', 'primaryTextColor':'#000', 'lineColor':'#333', 'primaryBorderColor':'#0277bd'}}}%%
+flowchart TD
+    C1[run-start] --> C2[intent-start] --> C3[intent-progress]
+    C3 --> C3
+    C3 --> C4[intent-end]
+    C4 --> C5[tts-start] --> C6[tts-end] --> C7[run-end]
+```
+
+</TabItem>
+
+<TabItem value="Error handling">
+
+Pipeline execution interrupted by an error during wake word detection.
+
+```mermaid
+%%{init: {'theme':'base', 'themeVariables': { 'background':'#f8f9fa', 'primaryColor':'#0288d1', 'primaryTextColor':'#000', 'lineColor':'#333', 'primaryBorderColor':'#0277bd'}}}%%
+flowchart TD
+    D1[run-start] --> D2[wake_word-start] --> D3[error] --> D4[run-end]
+```
+
+</TabItem>
+
+</Tabs>
+
 ## Error codes
 
 The following codes are returned from the pipeline `error` event:
