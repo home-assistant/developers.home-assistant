@@ -620,6 +620,110 @@ The server will respond with a set of trigger/condition/service identifiers that
 
 When `expand_group` is set to `true` (default), group entities will be expanded to include their member entities, and triggers applicable to any member will be included in the results. Otherwise, only triggers applicable to the group entities themselves will be included.
 
+## Get Entity Registry entries for display
+
+`config/entity_registry/list_for_display` returns a lightweight, optimized list of entity registry entries suitable for display in the UI. Only enabled (non-disabled) entities are included.
+
+The response contains entity data in a compact format using short property keys to minimize bandwidth and improve performance.
+
+### Use Cases
+
+This endpoint is designed for:
+- Displaying lists of entities in the UI
+- Real-time entity updates for dashboard and UI components
+- Bandwidth-efficient data transfer for mobile clients
+- Rendering entity information in device management interfaces
+
+### Request
+
+```json
+{
+  "id": 1,
+  "type": "config/entity_registry/list_for_display"
+}
+```
+
+### Response
+
+```json
+{
+  "id": 1,
+  "type": "result",
+  "success": true,
+  "result": {
+    "entity_categories": {
+      0: "config",
+      1: "diagnostic"
+    },
+    "entities": [
+      {
+        "ei": "light.living_room",
+        "pl": "hue",
+        "ai": "living_room",
+        "di": "abc123def456",
+        "en": "Living Room",
+        "hn": true
+      },
+      {
+        "ei": "switch.setting",
+        "pl": "esphome",
+        "di": "cde83923",
+        "en": "Setting for something",
+        "hn": true,
+        "ec": 0
+      }
+    ]
+  }
+}
+```
+
+### Response Properties
+
+#### Root Object
+
+| Name | Type | Description |
+|------|------|-------------|
+| `id` | int | Echo of the request ID |
+| `type` | string | Always `"result"` |
+| `success` | boolean | Always `true` for successful responses |
+| `result` | object | The actual response data containing `entity_categories` and `entities` |
+
+#### Entity Categories Mapping
+
+| Name | Type | Description |
+|------|------|-------------|
+| `entity_categories` | object[number, string] | Maps numeric indices to entity category strings for decoding the `ec` property in entities. Allows the UI to interpret category indices back to human-readable names. |
+
+### Entities
+
+#### Filtering and Behavior
+
+- **Disabled Entities Excluded**: Only entities with `disabled_by = null` are included. Disabled entities (by user, integration, device, config entry, or system) are filtered out.
+- **Property Abbreviation**: Property keys are abbreviated to minimize JSON payload size for better performance.
+- **Type Conversion**: Sets (like `labels`) are converted to lists for JSON serialization.
+- **Category Encoding**: Entity categories are sent as numeric indices rather than strings to reduce data size. Use the `entity_categories` mapping to decode them on the UI.
+- **Conditional Properties**: Optional properties are only included in the response if they have meaningful values (non-null, non-empty, or true).
+
+#### Entity Properties
+
+Each entity object in the `entities` array uses abbreviated property names for performance:
+
+| Name | Type | Required | Description | Source |
+|------|------|----------|-------------|--------|
+| `ei` | string | Yes | Entity ID - unique identifier for the entity (e.g., `"light.living_room"`) | `RegistryEntry.entity_id` |
+| `pl` | string | Yes | Platform - the integration that created this entity (e.g., `"hue"`, `"mqtt"`) | `RegistryEntry.platform` |
+| `ai` | string | No | Area ID - the area this entity is assigned to | `RegistryEntry.area_id` (only if not `null`) |
+| `lb` | array[string] | No | Labels - list of label id's assigned to this entity for organization | `RegistryEntry.labels` (converted to list, only if not empty) |
+| `di` | string | No | Device ID - the device this entity belongs to | `RegistryEntry.device_id` (only if not `null`) |
+| `ic` | string | No | Icon - custom icon set by the user (overrides state icon, so if this is set, don't use the attribute value in the state) icons are in the format `"prefix:icon-name"`, for example: `"mdi:lightbulb-on"` | `RegistryEntry.icon` (only if not `null`) |
+| `tk` | string | No | Translation Key - key used for translating entity name from the integration | `RegistryEntry.translation_key` (only if not `null`) |
+| `ec` | integer | No | Entity Category (index) - numeric index into the `entity_categories` mapping | `RegistryEntry.entity_category` (only if not `null`) |
+| `hb` | boolean | No | Hidden By - present (true) if entity is hidden by user or integration | `RegistryEntry.hidden_by` (only present as true if not `null`) |
+| `hn` | boolean | No | Has Entity Name - present (true) if entity uses the integration-provided name | `RegistryEntry.has_entity_name` (only present as true if `true`) |
+| `en` | string | No | Entity Name - display name for the entity (prioritizes user customization) | User-set `RegistryEntry.name` or falls back to `RegistryEntry.original_name` (only if either is set) |
+| `dp` | integer | No | Display Precision - sensor-specific precision for displaying values. The user-configured `display_precision` takes priority; falls back to the integration-provided `suggested_display_precision` | `RegistryEntry.options["sensor"]["display_precision"]` (preferred) or `RegistryEntry.options["sensor"]["suggested_display_precision"]` (sensor domain only, only if set) |
+
+
 ## Error handling
 
 If an error occurs, the `success` key in the `result` message will be set to `false`. It will contain an `error` key containing an object with two keys: `code` and `message`.
