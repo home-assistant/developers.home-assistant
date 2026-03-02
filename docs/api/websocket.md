@@ -724,6 +724,76 @@ Each entity object in the `entities` array uses abbreviated property names for p
 | `dp` | integer | No | Display Precision - sensor-specific precision for displaying values. The user-configured `display_precision` takes priority; falls back to the integration-provided `suggested_display_precision` | `RegistryEntry.options["sensor"]["display_precision"]` (preferred) or `RegistryEntry.options["sensor"]["suggested_display_precision"]` (sensor domain only, only if set) |
 
 
+## Manage exposed entities
+
+These commands manage which entities are exposed to voice assistants (`conversation` for Assist, `cloud.alexa` for Alexa, `cloud.google_assistant` for Google Assistant).
+
+### List exposed entities
+
+Returns the exposure status of all entities across all assistants.
+
+```json
+{
+  "id": 18,
+  "type": "homeassistant/expose_entity/list"
+}
+```
+
+The server will respond with a mapping of entity IDs to their exposure status per assistant:
+
+```json
+{
+  "id": 18,
+  "type": "result",
+  "success": true,
+  "result": {
+    "exposed_entities": {
+      "light.living_room": {
+        "conversation": true,
+        "cloud.alexa": false,
+        "cloud.google_assistant": false
+      },
+      "sensor.temperature": {
+        "conversation": true
+      }
+    }
+  }
+}
+```
+
+Only entities that have been explicitly exposed or unexposed will appear in the result. Entities not present in the response have not been configured and use the default exposure setting.
+
+### Expose or unexpose entities
+
+Expose or unexpose one or more entities to one or more voice assistants. Changes take effect immediately without requiring a Home Assistant restart.
+
+```json
+{
+  "id": 19,
+  "type": "homeassistant/expose_entity",
+  "assistants": ["conversation"],
+  "entity_ids": ["light.living_room", "sensor.temperature"],
+  "should_expose": true
+}
+```
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `assistants` | array[string] | List of assistant identifiers: `"conversation"`, `"cloud.alexa"`, `"cloud.google_assistant"` |
+| `entity_ids` | array[string] | List of entity IDs to expose or unexpose |
+| `should_expose` | boolean | `true` to expose, `false` to unexpose |
+
+The server will respond with a result message:
+
+```json
+{
+  "id": 19,
+  "type": "result",
+  "success": true,
+  "result": null
+}
+```
+
 ## Error handling
 
 If an error occurs, the `success` key in the `result` message will be set to `false`. It will contain an `error` key containing an object with two keys: `code` and `message`.
