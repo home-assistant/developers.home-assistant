@@ -190,8 +190,7 @@ Avoid using `config.yaml` as filename in your app for anything other than the ap
 | `backup_pre` | string | | Command to execute in the context of the app before the backup is taken.
 | `backup_post` | string | | Command to execute in the context of the app after the backup was taken.
 | `backup_exclude` | list | | List of files/paths (with glob support) that are excluded from backups.
-| `advanced` | bool | `false` | Set this to `true` to require the user to have enabled "Advanced" mode for it to show.
-| `stage` | string | `stable` | Flag app with follow attribute: `stable`, `experimental` or `deprecated`. Apps set to `experimental` or `deprecated` will not show up in the store unless the user enables advanced mode.
+| `stage` | string | `stable` | Flag app with follow attribute: `stable`, `experimental` or `deprecated`.
 | `init` | bool | `true` | Set this to `false` to disable the Docker default system init. Use this if the image has its own init system (Like [s6-overlay](https://github.com/just-containers/s6-overlay)). *Note: Starting in V3 of S6 setting this to `false` is required or the addon won't start, see [here](https://developers.home-assistant.io/blog/2022/05/12/s6-overlay-base-images) for more information.*
 | `watchdog` | string | | A URL for monitoring the app health. Like `http://[HOST]:[PORT:2839]/dashboard`, the port needs the internal port, which will be replaced with the effective port. It is also possible to bind the protocol part to a configuration option with: `[PROTO:option_name]://[HOST]:[PORT:2839]/dashboard` and it's looked up if it is `true` and it's going to `https`. For simple TCP port monitoring you can use `tcp://[HOST]:[PORT:80]`. It works for apps on the host or internal network.
 | `realtime` | bool | `false` | Give app access to host schedule including `SYS_NICE` for change execution time/priority.
