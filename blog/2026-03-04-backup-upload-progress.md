@@ -23,9 +23,11 @@ class ExampleBackupAgent(BackupAgent):
     ) -> None:
         """Upload a backup."""
         ...
+        bytes_uploaded = 0
         async for chunk in open_stream():
             await do_upload(chunk)
-            on_progress(bytes_uploaded=len(chunk))
+            bytes_uploaded += len(chunk)
+            on_progress(bytes_uploaded=bytes_uploaded)
         ...
 ```
 
