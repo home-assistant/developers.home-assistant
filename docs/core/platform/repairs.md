@@ -94,6 +94,76 @@ async def async_create_fix_flow(
         return Issue1RepairFlow()
 ```
 
+### Issues that can be repaired via entry/options/subentry reconfiguration
+
+Repair flows can forward issue fixes to config, options, or subentry flows:
+
+```python
+from homeassistant import data_entry_flow
+from homeassistant.components.repairs import ConfirmRepairFlow, RepairsFlow
+from homeassistant.config_entries import (
+    FlowType,
+    SOURCE_RECONFIGURE,
+    SubentryFlowResult,
+)
+from homeassistant.core import HomeAssistant
+
+
+
+class Issue1RepairFlow(RepairsFlow):
+    """Handler for an issue fixing flow."""
+
+    async def async_step_init(
+        self, user_input: dict[str, str] | None = None
+    ) -> data_entry_flow.FlowResult:
+        return await (self.async_step_confirm())
+
+    async def async_step_confirm(
+        self, user_input: dict[str, str] | None = None
+    ) -> data_entry_flow.FlowResult:
+        """Handle the confirm step of a fix flow."""
+        if user_input is not None:
+            next_flow: SubentryFlowResult = (
+                await self.hass.config_entries.subentries.async_init(
+                    (self.data["entry_id"], "subentry_type"),
+                    context=SubentryFlowContext(
+                        subentry_id=self.data["subentry_id"],
+                        source=SOURCE_RECONFIGURE,
+                    ),
+                )
+            )
+            return self.async_create_entry(
+                title="", data={}, 
+                next_flow=(
+                    FlowType.CONFIG_SUBENTRIES_FLOW, 
+                    next_flow["flow_id"]
+                )
+            )
+
+        return self.async_show_form(
+            step_id="confirm",
+            data_schema=vol.Schema({})
+        )
+```
+
+`context = {"source": SOURCE_RECONFIGURE}` is the only context source supported for `next_flow` issue repair flows for `FlowType.CONFIG_FLOW` and `FlowType.SUBENTRIES_FLOW`.  Issue repairs should not be directing to new config/options/subentry flows (which cannot be broken if they do not exist).
+
+#### Example options flow
+
+```python
+next_flow: ConfigFlowResult = (
+    await self.hass.config_entries.options.async_init(
+        config_entry.entry_id
+    )
+)
+return self.async_create_entry(
+    title="", data={}, 
+    next_flow=(
+        FlowType.OPTIONS_FLOW,
+        next_flow["flow_id"]
+    )
+)
+```
 
 ## Issue life cycle
 
