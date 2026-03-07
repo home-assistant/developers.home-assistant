@@ -85,32 +85,11 @@ Your local Home Assistant installation will now connect to a remote Home Assista
 
 ## Frontend development
 
-The instructions here is for development of the Supervisor panel, we're going to assume that you have a [Home Assistant frontend development environment](/frontend/development.md) set up with the devcontainer, and that you have [Supervisor API Access](#supervisor-api-access) set up.
+:::info
+All supervisor frontend panels are deprecated and won't be loaded with Home Assistant core >= 2026.2
+:::
 
-1. Run the "Develop Supervisor panel" task
-2. Run the task "Run HA Core for Supervisor in devcontainer"
-3. When asked for the IP, use the IP of the host that is running [Supervisor API Access](#supervisor-api-access)
-4. When asked for the token, use the token you found [Supervisor API Access](#supervisor-api-access)
-
-### Without frontend devcontainer
-
-Update the `hassio` integration configuration in your `configuration.yaml` file to point at the frontend repository:
-
-```yaml
-# configuration.yaml
-hassio:
-  # Example path. Change it to where you have checked out the frontend repository
-  development_repo: /home/paulus/dev/hass/frontend
-```
-
-To build a local version of the Supervisor panel, go to the frontend repository and run:
-
-```shell
-cd hassio
-script/develop
-```
-
-While `script/develop` is running, the Supervisor panel will be rebuilt whenever you make changes to the source files.
+Home Assistant frontend uses supervisor through a core proxy. Checkout the [Home Assistant frontend development environment](/frontend/development.md) on how to develop the frontend.
 
 ## Supervisor API access
 

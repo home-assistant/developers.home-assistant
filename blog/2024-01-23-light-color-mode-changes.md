@@ -23,6 +23,6 @@ For example, a light which has its supported_color_modes set to `{"hs", "color_t
 ### A special effect `EFFECT_OFF` which means no effect / turn off effect has been added
 
 There was previously no standard way for a light which supports effects to show that no effect is active.
-This has been solved by adding an the pre-defined effect `EFFECT_OFF` to indicate no effect is active.
+This has been solved by adding the pre-defined effect `EFFECT_OFF` to indicate no effect is active.
 
 More details can be found in the [documentation](/docs/core/entity/light#color-modes) and in [architecture discussion #960](https://github.com/home-assistant/architecture/discussions/960).
