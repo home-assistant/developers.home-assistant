@@ -104,6 +104,7 @@ from homeassistant.components.repairs import ConfirmRepairFlow, RepairsFlow
 from homeassistant.config_entries import (
     FlowType,
     SOURCE_RECONFIGURE,
+    SubentryFlowContext,
     SubentryFlowResult,
 )
 from homeassistant.core import HomeAssistant
@@ -146,7 +147,7 @@ class Issue1RepairFlow(RepairsFlow):
         )
 ```
 
-`context = {"source": SOURCE_RECONFIGURE}` is the only context source supported for `next_flow` issue repair flows for `FlowType.CONFIG_FLOW` and `FlowType.SUBENTRIES_FLOW`.  Issue repairs should not be directing to new config/options/subentry flows (which cannot be broken if they do not exist).
+`context = {"source": SOURCE_RECONFIGURE}` is the only context source supported for `next_flow` issue repair flows for `FlowType.CONFIG_FLOW` and `FlowType.CONFIG_SUBENTRIES_FLOW`.  Issue repairs should not be directing to new config/options/subentry flows (which cannot be broken if they do not exist).
 
 #### Example options flow
 
