@@ -100,7 +100,7 @@ Repair flows can forward issue fixes to config, options, or subentry flows:
 
 ```python
 from homeassistant import data_entry_flow
-from homeassistant.components.repairs import ConfirmRepairFlow, RepairsFlow
+from homeassistant.components.repairs import RepairsFlow
 from homeassistant.config_entries import (
     FlowType,
     SOURCE_RECONFIGURE,
