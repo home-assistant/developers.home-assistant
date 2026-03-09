@@ -132,7 +132,7 @@ Backup agents should raise a `BackupAgentError` (or a subclass of `BackupAgentEr
 
 ### Reporting upload progress
 
-The `async_upload_backup` method receives an `on_progress` callback that agents should use to report upload progress. Call the callback with the number of bytes uploaded so far:
+The `async_upload_backup` method receives an `on_progress` callback that agents can use to report upload progress. Call the callback with the number of bytes uploaded so far:
 
 ```python
 on_progress(bytes_uploaded=bytes_sent)
