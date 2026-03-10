@@ -399,6 +399,8 @@ There are two ways to provide a custom icon for an entity, either by providing i
 
 This is the preferred way to provide a custom icon for an entity. Icon translations work similarly to [our regular translations](/docs/internationalization/core#state-of-entities), but instead of translating the state of an entity, they translate the states of an entity to icons.
 
+Note that translated states must be `snake_case` just like all other translation keys.
+
 The `translation_key` property of an entity defines the icon translation to use. This property is used to look up the translation in the `entity` section of the integration's `icons.json` file.
 
 To differentiate entities and their translations, provide different translation keys. The following example shows `icons.json` for a Moon domain `sensor` entity with its `translation_key` property set to phase:
@@ -424,6 +426,8 @@ To differentiate entities and their translations, provide different translation 
 Notice that icons start with `mdi:` plus an [identifier](https://materialdesignicons.com/). The `default` icon is used when the entity's state is not in the `state` section. The `state` section is optional, and if not provided, the `default` icon will be used for all states.
 
 Icons for entity state attributes can also be provided in cases where the frontend shows icons for the state attributes. Examples include climate presets and fan modes. It's not possible to provide icons for other state attributes. The following example provides icons for a `climate` entity with its `translation_key` property set to `ubercool`. This entity has a `preset_mode` state attribute, which can be set to `vacation` or `night`. The frontend will use these in, for example, the climate card.
+
+Note that translated state attributes must be `snake_case` just like all other translation keys.
 
 ```json
 {
