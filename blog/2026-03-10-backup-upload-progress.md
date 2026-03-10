@@ -8,6 +8,8 @@ title: "Backup agents can now report upload progress"
 The `BackupAgent.async_upload_backup` method now receives a new `on_progress` callback parameter. Backup agents can call this callback periodically during upload to report the number of bytes uploaded so far:
 
 ```python
+from collections.abc import AsyncIterator, Callable, Coroutine
+from typing import Any
 from homeassistant.components.backup import BackupAgent, OnProgressCallback
 
 
