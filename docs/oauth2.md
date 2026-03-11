@@ -130,7 +130,7 @@ from homeassistant.helpers.config_entry_oauth2_flow import (
 from homeassistant.exceptions import ConfigEntryAuthFailed, ConfigEntryNotReady
 
 try:
-    await session.async_get_access_token()
+    await session.async_ensure_token_valid()
 except OAuth2TokenRequestReauthError as err:
     raise ConfigEntryAuthFailed(
         translation_domain=DOMAIN,
