@@ -119,7 +119,7 @@ If your integration uses the [Data Update Coordinator](/docs/integration_fetchin
 
 ### Integrations without a Data Update Coordinator
 
-If your integration does **not** use a coordinator, you must handle the exceptions explicitly wherever you call `async_get_access_token()` or `async_ensure_token_valid()`:
+If your integration does **not** use a coordinator, you must handle the exceptions explicitly wherever you do a token request, eg. call `async_ensure_token_valid()`:
 
 ```python
 from homeassistant.helpers.config_entry_oauth2_flow import (
