@@ -19,7 +19,7 @@ A few of the most common cases picked up in reviews are listed below:
   - Under **Settings**, select the three dots menu. Then, select **Restart Home Assistant** > **Quick reload**.
 - Don't use "e.g.". Instead, use _for example_, _such as_, or _like_.
 - Avoid the verb "click". It is specific to using a mouse. Instead, use verbs that work with multiple devices, such as "select". Use "click" when you need to describe mouse actions specifically, for example, in right-click or double-click.
-- [Don't use "master/slave"](https://learn.microsoft.com/en-us/style-guide/a-z-word-list-term-collections/m/master-slave). Instead, use alternatives such as "client"/"server", "leader/follower", "main/replica", or "controller/device".
+- [Don't use "master/slave"](https://learn.microsoft.com/en-us/style-guide/a-z-word-list-term-collections/m/master-slave). Instead, use alternatives such as "client/server", "leader/follower", "main/replica", or "controller/device".
 - All examples containing Jinja2 templates should be wrapped _outside_ of the code markdown with the `{% raw %}` tag.
 
 ## Tables
