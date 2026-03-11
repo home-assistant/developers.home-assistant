@@ -147,7 +147,7 @@ except (OAuth2TokenRequestTransientError, OAuth2TokenRequestError) as err:
 
 ### With Data Update Coordinator
 
-Look at the [library guide](/docs/api_lib_auth) on authentication for more information on building guidelines. The following examples act merely as an example how to interlink a library with OAuth2.0 in the Data Update Coordinator.
+Look at the [library guide](/docs/api_lib_auth) on authentication for more information on building a 3rd party library with OAuth 2.0 for an integration. The following examples act merely as an example how to interlink a library with OAuth2.0 in the Data Update Coordinator.
 
 ```python
 from homeassistant.helpers import config_entry_oauth2_flow
