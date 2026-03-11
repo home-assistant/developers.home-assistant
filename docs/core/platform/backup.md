@@ -62,7 +62,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 A backup agent should implement the abstract interface of the `BackupAgent` base class as shown in this example:
 
 ```python
-from homeassistant.components.backup import BackupAgent, BackupAgentError
+from homeassistant.components.backup import BackupAgent, BackupAgentError, OnProgressCallback
 
 from .const import DOMAIN
 
@@ -92,12 +92,14 @@ class ExampleBackupAgent(BackupAgent):
         *,
         open_stream: Callable[[], Coroutine[Any, Any, AsyncIterator[bytes]]],
         backup: AgentBackup,
+        on_progress: OnProgressCallback,
         **kwargs: Any,
     ) -> None:
         """Upload a backup.
 
         :param open_stream: A function returning an async iterator that yields bytes.
         :param backup: Metadata about the backup that should be uploaded.
+        :param on_progress: A callback to report the number of uploaded bytes.
         """
 
     async def async_delete_backup(
@@ -127,6 +129,16 @@ class ExampleBackupAgent(BackupAgent):
 ```
 
 Backup agents should raise a `BackupAgentError` (or a subclass of `BackupAgentError`) exception on error. Other exceptions are not expected to leave the backup agent.
+
+### Reporting upload progress
+
+The `async_upload_backup` method receives an `on_progress` callback that agents can use to report upload progress. Call the callback with the total, integer number of bytes uploaded so far:
+
+```python
+on_progress(bytes_uploaded=bytes_sent)
+```
+
+The backup manager uses this information to fire `UploadBackupEvent` events, allowing the frontend to display upload progress to the user. Agents should call this callback periodically during the upload, for example after each chunk is sent.
 
 ## Pre- and post-operations
 
