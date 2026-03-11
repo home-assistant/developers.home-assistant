@@ -162,29 +162,21 @@ class ExampleCoordinator(DataUpdateCoordinator[MyData]):
         hass: HomeAssistant,
         entry: ConfigEntry,
         session: config_entry_oauth2_flow.OAuth2Session,
-        client: LibraryClient
     ) -> None:
         """Initialize the coordinator."""
         super().__init__(
             hass,
             logger=logging.getLogger(__name__),
             name=DOMAIN,
+            config_entry=entry,
             update_interval=timedelta(minutes=30),
         )
-        self.session = session
-        self.client = client
-
-    async def _async_setup(self) -> None:
-        """Setup the coordinator."""
-        try:
-            self.client = ExampleApiClient(session=session)
-        except ApiClientAuthenticationError as err:
-            raise ConfigEntryAuthFailed(f"Error authenticating with library: {err}") from err
+        self._client = ExampleApiClient(session=session)
 
     async def _async_update_data(self) -> MyData:
         """Fetch data from the API."""       
         try:
-            return await client.async_get_data()
+            return await self._client.async_get_data()
         except ApiClientError as err:
             raise UpdateFailed(f"Error communicating with API: {err}") from err
 ```
