@@ -213,7 +213,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             translation_key="auth_server_error",
         ) from err
 
-    hass.data.setdefault(DOMAIN, {})[entry.entry_id] = session
+    entry.runtime_data = ExampleApiClient(session=session)
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True
 ```
