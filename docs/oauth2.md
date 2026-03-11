@@ -19,7 +19,7 @@ Home Assistant's OAuth 2.0 helper provides:
 
 The helper supports two credential approaches, both of which require `application_credentials` support.
 
-It's encouraged to use the built-in `config_entry_oauth2_flow` for standard Authorization Code flows. Use the existing template flows that inherit from `AbstractOAuth2FlowHandler`. As a last resort, only build own child flows if it's needed.
+Use the built-in `config_entry_oauth2_flow` helper for Authorization Code flows. In the helper there are existing template flows that inherit from `AbstractOAuth2FlowHandler`. Only build own child flows of `AbstractOAuth2FlowHandler` if it's needed.
 
 ## Supported OAuth 2.0 flows
 
