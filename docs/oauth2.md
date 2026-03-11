@@ -207,7 +207,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             translation_domain=DOMAIN,
             translation_key="reauth_required",
         ) from err
-    except (OAuth2TokenRequestTransientError, OAuth2TokenRequestError) as err:
+    except OAuth2TokenRequestError as err:
         raise ConfigEntryNotReady(
             translation_domain=DOMAIN,
             translation_key="auth_server_error",
