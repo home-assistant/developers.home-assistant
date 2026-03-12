@@ -48,7 +48,11 @@ To test your changes locally, you need to install **Ruby** and its dependencies 
 
     ```shell
     brew install ruby@3.1 && export PATH="/usr/local/opt/ruby@3.1/bin:$PATH"
-    ```
+- Shortcut for Mac if the bundled Ruby doesn't work (make sure to run it in the home-assistant.io directory):
+
+   ```shell
+   brew install ruby@$(cat .ruby-version) && export PATH="/usr/local/opt/ruby@$(cat .ruby-version)/bin:$PATH"
+   ```
 
 
 - Fork the home-assistant.io [git repository](https://github.com/home-assistant/home-assistant.io).
