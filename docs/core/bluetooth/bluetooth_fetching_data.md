@@ -182,7 +182,6 @@ from homeassistant.const import Platform
 from homeassistant.components.bluetooth.active_update_processor import (
     ActiveBluetoothProcessorCoordinator,
 )
-from .const import DOMAIN
 
 PLATFORMS: list[Platform] = [Platform.SENSOR]
 
