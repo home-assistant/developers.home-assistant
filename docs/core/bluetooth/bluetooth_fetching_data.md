@@ -166,6 +166,7 @@ is the same as the `PassiveBluetoothProcessorCoordinator`.
 Example `async_setup_entry` for an integration `__init__.py` using an `ActiveBluetoothProcessorCoordinator`:
 
 ```python
+import logging
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 from homeassistant.core import CoreState, HomeAssistant
