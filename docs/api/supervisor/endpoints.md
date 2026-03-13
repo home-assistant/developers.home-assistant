@@ -114,7 +114,7 @@ Get details about an app
 
 | key                 | type               | description                                                                            |
 | ------------------- | ------------------ | -------------------------------------------------------------------------------------- |
-| advanced            | boolean            | `true` if advanced mode is enabled                                                     |
+| advanced            | boolean            | Deprecated and ignored; always `false` as of Supervisor 2026.03.0                      |
 | apparmor            | string             | disabled, default or the name of the profile                                           |
 | arch                | list               | A list of supported architectures for the app                                       |
 | audio               | boolean            | `true` if audio is enabled                                                             |
