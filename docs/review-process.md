@@ -289,9 +289,14 @@ creating contributions to our Core repository:
 ### Home Assistant Documentation
 
 The [documentation](https://github.com/home-assistant/home-assistant.io) has
-additional guidelines to take into account when contributing. We mainly
-follow the Microsoft Writing Style Guide and have some additional guidelines
-for styling YAML configuration.
+additional guidelines to take into account when contributing.
+
+The documentation repository has two main branches: `current` and `next`:
+
+- If you are documenting a new integration or a feature you are adding to the code, target the `next` branch.
+- If you are improving existing documentation, target the `current` branch.
+
+We mainly follow the Microsoft Writing Style Guide and have some additional guidelines for styling YAML configuration.
 
 - [Documentation standards](/docs/documenting/standards)
 - [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/welcome/)
