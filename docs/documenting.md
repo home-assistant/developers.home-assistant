@@ -28,7 +28,8 @@ It is also possible to set up a more traditional development environment.
 
 To test your changes locally, you need to install **Ruby** and its dependencies (gems):
 
-- [Install Ruby](https://www.ruby-lang.org/en/documentation/installation/) if you don't have it already. Ruby version 3.1 is required.
+- [Install Ruby](https://www.ruby-lang.org/en/documentation/installation/) if you don't have it already.
+  For the current required version, see [.ruby-version](https://github.com/home-assistant/home-assistant.io/blob/current/.ruby-version).
 - Install `bundler`, a dependency manager for Ruby: `gem install bundler` (You might have to run this command as `sudo`).
 
 - Shortcut for Fedora:
@@ -47,7 +48,11 @@ To test your changes locally, you need to install **Ruby** and its dependencies 
 
     ```shell
     brew install ruby@3.1 && export PATH="/usr/local/opt/ruby@3.1/bin:$PATH"
-    ```
+- Shortcut for Mac if the bundled Ruby doesn't work (make sure to run it in the home-assistant.io directory):
+
+   ```shell
+   brew install ruby@$(cat .ruby-version) && export PATH="/usr/local/opt/ruby@$(cat .ruby-version)/bin:$PATH"
+   ```
 
 
 - Fork the home-assistant.io [git repository](https://github.com/home-assistant/home-assistant.io).
