@@ -12,7 +12,7 @@ If the device's primary method to notify of updates is Bluetooth advertisements 
 If the device's primary method to notify of updates is Bluetooth advertisements and its primary function is **not** a sensor, binary sensor, or firing events:
 
 - If all entities are updated via Bluetooth advertisements: [`PassiveBluetoothCoordinator`](#passivebluetoothcoordinator)
-- If active connections are needed: [`ActiveBluetoothCoordinator`](#activebluetoothcoordinator)
+- If active connections are needed: [`ActiveBluetoothDataUpdateCoordinator`](#activebluetoothcoordinator)
 
 If your device only communicates with an active Bluetooth connection and does not use Bluetooth advertisements:
 
@@ -246,7 +246,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 ## BluetoothCoordinator
 
-The `ActiveBluetoothCoordinator` and `PassiveBluetoothCoordinator` coordinators function similar
+The `ActiveBluetoothDataUpdateCoordinator` and `PassiveBluetoothCoordinator` coordinators function similar
 to `DataUpdateCoordinators` except they are driven by incoming advertisement data instead of polling.
 
 ### PassiveBluetoothCoordinator
@@ -308,7 +308,8 @@ class ExamplePassiveBluetoothDataUpdateCoordinator(
 
 ```
 
-### ActiveBluetoothCoordinator
+<a id="activebluetoothcoordinator"></a>
+### ActiveBluetoothDataUpdateCoordinator
 
 Below is an example of an `ActiveBluetoothDataUpdateCoordinator`. Incoming data is received via `_async_handle_bluetooth_event` and processed by the integration's library.
 
