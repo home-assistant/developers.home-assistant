@@ -180,13 +180,13 @@ requested the changes that the PR is ready to go!
 
 ## What not to do
 
-- Don't contact contributors, code owners, core team members, or other
+- Do not contact contributors, code owners, core team members, or other
   reviewers directly about a PR, or ping/mention them in a PR to ask for
   a review. While you probably mean this in a friendly way, it can be
   perceived as annoying or demanding. Instead, our bots will handle the
   pinging of the right people, and: have a bit of patience :)
 
-- Don't ask for a review in the PR description. It would be redundant, as
+- Do not ask for a review in the PR description. It would be redundant, as
   the PR itself already makes that clear 😉. Our bots will notify the
   appropriate people if that is needed; please avoid doing that yourself.
 
@@ -194,11 +194,9 @@ requested the changes that the PR is ready to go!
   still open/unmerged. This will create unneeded pull requests in the queue
   that are not actionable.
 
-- Limit the number of open pull requests you have. We have no hard rule on
-  this, but we recommend limiting it to 5. If you have more than 5 open
-  PRs, we may ask you to close some of them until some others have been merged.
+- Do not open more than 5 pull requests. If you have more than 5 open PRs, we will ask you to close some of them until some others have been merged. Similar to dependent pull requests, wait for a PR to be approved before applying that approach to multiple PRs.
 
-- Don't open a PR if you are not going to work on it. If you cannot
+- Do not open a PR if you are not going to work on it. If you cannot
   continue working on a PR after you have opened it, let us know and close it.
   There is no shame in closing a PR; however, if it is because you are stuck,
   don't hesitate to ask for help in our
