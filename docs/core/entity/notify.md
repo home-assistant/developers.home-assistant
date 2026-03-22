@@ -41,3 +41,27 @@ class MyNotifier(NotifyEntity):
     async def async_send_message(self, message: str, title: str | None = None) -> None:
         """Send a message."""
 ```
+
+### Record notification
+
+Some integrations provide custom actions with extended, integration-specific functionality for sending notifications, or otherwise trigger notifications from within Home Assistant. To track when a notification is sent, integrations can call `_async_record_notification` or `_record_notification`.
+
+:::important
+Only notifications that originate from within Home Assistant should be recorded on the notify entity. Notifications generated externally must not be recorded. Use an event entity for those instead.
+:::
+
+```python
+class MyNotifier(NotifyEntity):
+
+    # Default method to send notification via notify.send_message action
+    async def async_send_message(self, message: str, title: str | None = None) -> None:
+        """Send a message."""
+        await self._publish(message=message, title=title)
+
+    # Integration implements a custom entity action to send notifications
+    async def publish(self, message: str, title: str | None = None, priority: int | None = None) -> None:
+        """Send a message with priority."""
+        await self._publish(message=message, title=title, priority=priority)
+        # Record that a notification was sent
+        self._async_record_notification()
+```
