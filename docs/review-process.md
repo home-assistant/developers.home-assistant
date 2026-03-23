@@ -288,7 +288,7 @@ creating contributions to our Core repository:
 
 ### Home Assistant Documentation
 
-To learn about contributing to the documentation, see [Contributing to documentation](docs/documenting/).
+To learn about contributing to the documentation, see [Contributing to documentation](/docs/documenting/).
 
 ### Home Assistant Frontend
 

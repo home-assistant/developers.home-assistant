@@ -21,7 +21,7 @@ The documentation repository has two main branches: `current` and `next`:
 We mainly follow the Microsoft Writing Style Guide and have some additional guidelines:
 
 - [Documentation standards](/docs/documenting/standards)
-- [Documentation style guide](docs/documenting/general-style-guide/)
+- [Documentation style guide](/docs/documenting/general-style-guide/)
 - [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/welcome/)
 - [YAML Style Guide](/docs/documenting/yaml-style-guide)
 

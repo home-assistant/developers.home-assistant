@@ -1,5 +1,5 @@
 ---
-title: Documentation structure and example text
+title: Integration page structure
 ---
 
 This page shows the recommended structure of an integration page and useful reusable text.
@@ -36,7 +36,7 @@ The examples are taken from the [Integration Quality Scale](/docs/core/integrati
 
 ## Reusable text for integrations
 
-You can [reuse text](general-style-guide.md#reusable-text) that's repeated across many pages.
+You can [reuse text](/docs/documenting/general-style-guide#reusable-text) that's repeated across many pages.
 
 The following snippets are useful for integration pages.
 

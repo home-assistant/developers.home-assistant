@@ -16,7 +16,7 @@ Documentation should follow the [documentation style guide](documenting/general-
 
 ## YAML and templates
 
-For YAML and the use of Jinja2 templates inside that YAML, follow the [YAML Style Guide](documenting/yaml-style-guide.md).
+For YAML and the use of Jinja2 templates inside that YAML, follow the [YAML Style Guide](/docs/documenting/yaml-style-guide).
 
 ## Glossary & terminology tooltips
 

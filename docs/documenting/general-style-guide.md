@@ -218,7 +218,7 @@ To include a snippet from [`source/_includes`](https://github.com/home-assistant
 {% include path/to/file.md %}
 ```
 
-For examples that are useful when documenting integrations, see [Configuration](create-page.md#configuration).
+For examples that are useful when documenting integrations, see [Configuration](/docs/documenting/create-page#configuration).
 
 ## Liquid syntax
 
@@ -266,7 +266,7 @@ Usage examples:
 {% term "Home Assistant Operating System" %}
 ```
 
-For more information on recommended glossary usage, see [Glossary & terminology tooltips](standards.md#glossary--terminology-tooltips).
+For more information on recommended glossary usage, see [Glossary & terminology tooltips](/docs/documenting/standards#glossary--terminology-tooltips).
 
 ### Acronyms and abbreviations
 
