@@ -87,7 +87,7 @@ the end-user getting your improvement faster.
    clear, and concise title, and add an extensive description of your change.
    Be sure to add a motivation (or use case) to your PR, so the reviewer can
    understand why you are making this change (or why you make certain decisions).
-   
+
 7. **Update dependency in a standalone PR.**
    When you need to bump a dependency, try to do so in a standalone PR. Only
    compatibility code adjustments or small related bug fixes should be included in the
@@ -288,23 +288,11 @@ creating contributions to our Core repository:
 
 ### Home Assistant Documentation
 
-The [documentation](https://github.com/home-assistant/home-assistant.io) has
-additional guidelines to take into account when contributing.
-
-The documentation repository has two main branches: `current` and `next`:
-
-- If you are documenting a new integration or a feature you are adding to the code, target the `next` branch.
-- If you are improving existing documentation, target the `current` branch.
-
-We mainly follow the Microsoft Writing Style Guide and have some additional guidelines for styling YAML configuration.
-
-- [Documentation standards](/docs/documenting/standards)
-- [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/welcome/)
-- [YAML Style Guide](/docs/documenting/yaml-style-guide)
+To learn about contributing to the documentation, see [Contributing to documentation](docs/documenting/).
 
 ### Home Assistant Frontend
 
-The [Home Assistant Frontend](https://github.com/home-assistant/frontend) has 
+The [Home Assistant Frontend](https://github.com/home-assistant/frontend) has
 guidance on developing and contributing to the frontend on the
 [Frontend development page](/docs/frontend/development#creating-pull-requests).
 

@@ -6,7 +6,7 @@ To ensure that the documentation for Home Assistant is consistent and easy to fo
 
 ## Style guide
 
-Documentation should follow the [Microsoft Style Guide](https://learn.microsoft.com/style-guide/welcome/). For more details, refer to the section [General style guide](documenting/general-style-guide.md) and the [YAML style guide](documenting/yaml-style-guide.md).
+Documentation should follow the [documentation style guide](documenting/general-style-guide.md) and [Microsoft Style Guide](https://learn.microsoft.com/style-guide/welcome/).
 
 ## Integration and platform pages
 
@@ -16,10 +16,7 @@ Documentation should follow the [Microsoft Style Guide](https://learn.microsoft.
 
 ## YAML and templates
 
-We have a separate styling guide for YAML and the use of Jinja2 templates
-inside that YAML.
-
-[YAML Style Guide](documenting/yaml-style-guide.md)
+For YAML and the use of Jinja2 templates inside that YAML, follow the [YAML Style Guide](documenting/yaml-style-guide.md).
 
 ## Glossary & terminology tooltips
 
@@ -31,7 +28,7 @@ If you use a term that is not in the glossary, feel free to add; or improve
 the definition of an existing term.
 
 Additionally, we have a terminology tooltip available, that can be added and
-works everywhere in the documentation. This tooltip will show a definition
+works everywhere in the documentation. This tooltip shows a definition
 of the term when the user hovers over it with a link for more information.
 It provides instant context to terminology a user might not be familiar with.
 
@@ -61,6 +58,10 @@ example the automation term tooltip is added to the "automate everything" text:
 Awesome, because this allowed me to {% term automation "automate everything" %}
 in my home! I love it!
 ```
+
+### Adding glossary entries
+
+To add an entry to the glossary, edit [`source/_data/glossary.yml`](https://github.com/home-assistant/home-assistant.io/blob/current/source/_data/glossary.yml).
 
 ## Renaming pages
 

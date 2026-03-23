@@ -164,9 +164,9 @@ Please note, if you want to use Markdown inside an HTML block, it has to be surr
 
 ```html
 <div class='note warning'>
-  
+
   You need to enable [**telnet**](https://en.wikipedia.org/wiki/Telnet) on your router.
-  
+
 </div>
 ```
 
@@ -187,4 +187,7 @@ however, the logo must exist in our Brands repository.
 
 ### Linking from the sidebar
 
-If you are adding a new page that requires linking from the sidebar, you need to edit the `docs_navigation.html` file in `source/_includes/asides/docs_navigation.html`.
+If you are adding a new page that requires linking from the sidebar, you edit either:
+
+- [`docs_navigation.html`](https://github.com/home-assistant/home-assistant.io/blob/current/source/_includes/asides/docs_navigation.html)
+- [`docs_sitemap.html`](https://github.com/home-assistant/home-assistant.io/blob/current/source/_includes/asides/docs_sitemap.html)
