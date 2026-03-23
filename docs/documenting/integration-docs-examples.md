@@ -4,20 +4,15 @@ title: Integration page structure
 
 This page shows the recommended structure of an integration page and useful reusable text.
 
-Use this template together with the following documentation:
+This page outlines the high-level structure of an integration page.
+Use this structure together with the following documentation:
 
 - The integration documentation template in the `home-assistant.io` repository under [/_integrations/_integration_docs_template.markdown](https://github.com/home-assistant/home-assistant.io/tree/current/source/_integrations/_integration_docs_template.markdown).
 - [Documentation standards](/docs/documenting/standards).
 - [Documentation style guide](/docs/documenting/general-style-guide).
 - The documentation rules of the [Integration Quality Scale](/docs/core/integration-quality-scale/).
 
-## Integration page structure
-
-This section outlines the high-level structure of an integration page. To view example text, refer to the integration documentation template in the `homeassistant.io` repository under `/_integrations/_integration_docs_template.md`. The example text includes some reusable text blocks (includes) such as `include integrations/config_flow.md` and styling elements such as `configuration_basic`.
-
-The examples are taken from the [Integration Quality Scale](/docs/core/integration-quality-scale/).
-
-### Basic structure of an integration page
+## Basic structure of an integration page
 
 - Introduction
   - Use case
@@ -58,7 +53,7 @@ To use this element, add the following line:
 
 For the current snippet contents, see [`config_flow.md`](https://github.com/home-assistant/home-assistant.io/blob/current/source/_includes/integrations/config_flow.md)
 
-#### Configuration_basic block
+### Configuration_basic block
 
 Use the `configuration_basic` block to describe configuration options if your integration is set up through a config flow.
 
@@ -79,7 +74,7 @@ Local access token:
 {% endconfiguration_basic %}
 ```
 
-#### Configuration block for YAML integrations
+### Configuration block for YAML integrations
 
 Use the `configuration` block to describe configuration options if your integration is set up via YAML only.
 
