@@ -2,7 +2,7 @@
 title: "Contributing to documentation"
 ---
 
-The user documentation is located at <https://www.home-assistant.io>.
+The user documentation is located at [https://www.home-assistant.io](https://www.home-assistant.io).
 This section provides additional details about creating or modifying content.
 
 The [home-assistant.io](https://home-assistant.io) website is built using [Jekyll](https://github.com/jekyll/jekyll).
