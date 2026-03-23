@@ -41,7 +41,7 @@ The easiest way to get started with development is to use Visual Studio Code wit
 When following these instructions, instead of Home Assistant Core repository, link to the `home-assistant.io` repository.
 
 To review the changes, open the VS Code command palette and select **Tasks: Run Task** > **Preview**.
-You should be able to access the documentation website running locally at <http://localhost:4000/>.
+You should be able to access the documentation website running locally at `http://localhost:4000`.
 
 ### Manual environment
 

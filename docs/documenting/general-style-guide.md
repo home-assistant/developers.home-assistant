@@ -163,7 +163,7 @@ content: |
 - When linking to pages in the same repository, use links that start from the repository root.
   For example: `[ZBT-2](/connect/zbt-2/)` instead of `[ZBT-2](https://www.home-assistant.io/connect/zbt-2/)`.
 - Do not use affiliate or tracking links.
-- Do not use bare URLs: `<https://example.org>`.
+- Do not use bare URLs: `https://example.org` or `<https://example.org>`.
 
 ### Images
 
