@@ -164,7 +164,7 @@ content: |
   For example: `[ZBT-2](/connect/zbt-2/)` instead of `[ZBT-2](https://www.home-assistant.io/connect/zbt-2/)`.
 - Do not use affiliate or tracking links.
 
-## Images
+### Images
 
 If you use images, upload them to the `images` folder and related subfolder in the documentation repository.
 Do not link to external images, for example on your private GitHub repository.
@@ -176,7 +176,7 @@ For screenshots, use the Markdown notation:
 
 You can also use HTML:
 
-- To inverted the image colors when the documentation is viewed in dark mode, use HTML with the `invertDark` class.
+- To invert the image colors when the documentation is viewed in dark mode, use HTML with the `invertDark` class.
 - To include a caption, put it in the `<p>` tag.
 
 For example:
@@ -193,7 +193,7 @@ For example:
 
 To learn about images when adding an integration, see [Images, icons, and logos](/docs/documenting/create-page#images-icons-and-logos).
 
-## Videos
+### Videos
 
 Use the following syntax to reference a video from YouTube.
 
@@ -316,7 +316,7 @@ Usage examples:
 - Routes: {% icon "mdi:routes" %}
 ```
 
-### Collapsible text block
+### Collapsible text blocks
 
 Use a details block to make a text block collapsible, don't use the HTML5
 variant, but use our Liquid variant instead.
