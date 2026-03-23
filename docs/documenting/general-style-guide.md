@@ -347,10 +347,6 @@ You can use a tip to feature a recommendation.
 {% endtip %}
 ```
 
-{% tip %}
-You can use a tip to feature a recommendation.
-{% endtip %}
-
 #### Note
 
 ```liquid
@@ -359,10 +355,6 @@ You can use a note to highlight a section.
 {% endnote %}
 ```
 
-{% note %}
-You can use a note to highlight a section.
-{% endnote %}
-
 #### Important
 
 ```liquid
@@ -370,7 +362,3 @@ You can use a note to highlight a section.
 You can use "important" to highlight a section that you feel is very important.
 {% endimportant %}
 ```
-
-{% important %}
-You can use "important" to highlight a section that you feel is very important.
-{% endimportant %}
