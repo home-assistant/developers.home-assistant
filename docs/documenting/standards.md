@@ -6,7 +6,7 @@ To ensure that the documentation for Home Assistant is consistent and easy to fo
 
 ## Style guide
 
-Documentation should follow the [Microsoft Style Guide](https://learn.microsoft.com/style-guide/welcome/). For more details, refer to the section [General style guide](documenting/general-style-guide.md) and the [YAML style guide](documenting/yaml-style-guide.md).
+Documentation should follow the [documentation style guide](/docs/documenting/general-style-guide) and [Microsoft Style Guide](https://learn.microsoft.com/style-guide/welcome/).
 
 ## Integration and platform pages
 
