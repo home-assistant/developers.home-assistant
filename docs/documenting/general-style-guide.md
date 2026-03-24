@@ -2,7 +2,7 @@
 title: "Documentation style guide"
 ---
 
-The Home Assistant documentation is written in Markdown, using the [CommonMark specification](https://spec.commonmark.org/current/).
+The Home Assistant documentation is written in Markdown, using the [GitHub Flavored Markdown specification](https://github.github.com/gfm/).
 
 In general, the documentation should follow the [Microsoft Style Guide](https://learn.microsoft.com/style-guide/welcome/).
 This page collects some more specific guidance we follow additionally.
