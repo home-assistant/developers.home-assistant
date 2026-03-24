@@ -22,7 +22,6 @@ This page collects some more specific guidance we follow additionally.
 The following are the most common formatting issues:
 
 - There is no limit for the line length. Write in a flowing text style.
-  However, starting each sentence on a new line makes reading GitHub diffs and using suggestions easier.
 - Don't put two spaces after a period.
 
 ## Headings
