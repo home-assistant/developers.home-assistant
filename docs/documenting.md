@@ -1,16 +1,35 @@
 ---
-title: "Documentation"
+title: "Contributing to documentation"
 ---
 
-The user documentation is located at [https://www.home-assistant.io](https://www.home-assistant.io). This section is the place where we provide documentation and additional details about creating or modifying content.
+The user documentation is located at [https://www.home-assistant.io](https://www.home-assistant.io).
+This section provides additional details about creating or modifying content.
 
-The [home-assistant.io](https://home-assistant.io) website is built using [Jekyll](https://github.com/jekyll/jekyll) and [these dependencies](https://pages.github.com/versions/). The pages are written in [Markdown](https://daringfireball.net/projects/markdown/). To add a page, you don't need to know HTML.
+The [home-assistant.io](https://home-assistant.io) website is built using [Jekyll](https://github.com/jekyll/jekyll).
+The pages are written in [Markdown](https://spec.commonmark.org/current/). To add a page, you don't need to know HTML.
+
+## Documentation pull request review process
+
+Before you submit a pull request, read through the [general pull request review process](/docs/review-process/).
+In addition, the documentation has the following guidelines to take into account when contributing.
+
+The documentation repository has two main branches: `current` and `next`:
+
+- If you are documenting a new integration or a feature you are adding to the code, target the `next` branch.
+- If you are improving existing documentation, target the `current` branch.
+
+We mainly follow the Microsoft Writing Style Guide and have some additional guidelines:
+
+- [Documentation standards](/docs/documenting/standards)
+- [Documentation style guide](/docs/documenting/general-style-guide/)
+- [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/welcome/)
+- [YAML Style Guide](/docs/documenting/yaml-style-guide)
 
 ## Small changes
 
 You can use the **Edit** button or **Edit this page** link to edit pages, which will automatically create a fork in GitHub and allow you to edit quickly. Keep in mind that you can't upload images while working this way. You work on your change and propose it via a Pull Request (PR).
 
-Once you've created a Pull Request (PR), you can see a preview of the proposed changes by clicking *Details* against Netlify checker in the checkers section of the PR as soon as deployment is complete.
+When you create a pull request (PR), you can see a preview of the proposed changes by clicking the **Deploy Preview** link in the Netlify comment.
 
 ## Larger changes
 
@@ -18,9 +37,11 @@ For larger changes, we suggest that you clone the website repository. This way, 
 
 ### Developing with Visual Studio Code + devcontainer
 
-The easiest way to get started with development is to use Visual Studio Code with devcontainers, in the same way as for working on Home Assistant Core development. Have a look at the [Development Environment](https://developers.home-assistant.io/docs/development_environment) page for instructions.
+The easiest way to get started with development is to use Visual Studio Code with devcontainers, in the same way as for working on Home Assistant Core development. Have a look at the [Development Environment](/docs/development_environment) page for instructions.
+When following these instructions, instead of Home Assistant Core repository, link to the `home-assistant.io` repository.
 
-To review the changes, open the command palette and choose ´Tasks: Run Task´ and then ´Preview´.
+To review the changes, open the VS Code command palette and select **Tasks: Run Task** > **Preview**.
+You should be able to access the documentation website running locally at `http://localhost:4000`.
 
 ### Manual environment
 
@@ -48,12 +69,13 @@ To test your changes locally, you need to install **Ruby** and its dependencies 
 
     ```shell
     brew install ruby@3.1 && export PATH="/usr/local/opt/ruby@3.1/bin:$PATH"
+    ```
+
 - Shortcut for Mac if the bundled Ruby doesn't work (make sure to run it in the home-assistant.io directory):
 
    ```shell
    brew install ruby@$(cat .ruby-version) && export PATH="/usr/local/opt/ruby@$(cat .ruby-version)/bin:$PATH"
    ```
-
 
 - Fork the home-assistant.io [git repository](https://github.com/home-assistant/home-assistant.io).
 - In your home-assistant.io root directory, run `bundle` to install the gems you need.
