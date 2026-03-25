@@ -241,7 +241,7 @@ and implementing the function `async_custom_equivalent_units` to return a mappin
 This mapping will be collected during statistics compilation and enables integrations a smooth transition into Home Assistant's unit system.
 
 Example implementation:
-```
+```python
 def async_custom_equivalent_units(hass: HomeAssistant) -> dict[str, dict[str | None, str]]:
     """Return custom equivalent units per entity id."""
     return {
