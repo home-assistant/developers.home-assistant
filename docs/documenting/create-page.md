@@ -4,20 +4,22 @@ title: "Adding an integration page"
 
 To create a new integration page, follow these steps:
 
-1. Make a copy of the [integration documentation template](https://github.com/home-assistant/home-assistant.io/tree/current/source/_integrations/_integration_docs_template.markdown) and edit it.
-2. Make sure the filename of the integration page matches the domain name of the integration.
+1. The documentation repository has two main branches: `current` and `next`:
+   - If you are documenting a new integration you are adding to the code, switch to the `next` branch.
+2. Make a copy of the [integration documentation template](https://github.com/home-assistant/home-assistant.io/tree/current/source/_integrations/_integration_docs_template.markdown) and edit it.
+3. Make sure the filename of the integration page matches the domain name of the integration.
    - The [Integration overview](https://www.home-assistant.io/integrations/) and the [Examples section](https://www.home-assistant.io/cookbook/) are generated automatically, so there is no need to add a link to those pages.
-3. Make sure to follow the [Standards](documenting/standards.md) we have for the documentation, including:
+4. Make sure to follow the [Standards](documenting/standards.md) we have for the documentation, including:
    - [General style guide](/docs/documenting/general-style-guide).
    - [YAML Style Guide](/docs/documenting/yaml-style-guide.md)
    - [Documentation structure and example text](/docs/documenting/integration-docs-examples)
-4. Make sure to add [icon and logo](#images-icons-and-logos) to the brands repository.
+5. Make sure to add [icon and logo](#images-icons-and-logos) to the brands repository.
    - If your integration was a custom integration (HACS), move the brand files into the `core_integrations` folder.
-5. Document the steps required to retrieve API keys or access token for the third-party service or device, if needed.
-6. Make sure the documentation does not refer to custom integrations. The steps and examples, including automation examples, should not depend on custom cards or custom integrations.
-7. Add the type of the devices (including firmware) you have tested when you know that there are multiple out there.
-8. When adding blueprints, upload them either to the blueprints folder under [`https://github.com/home-assistant/home-assistant.io/tree/current/source/blueprints/integrations`](https://github.com/home-assistant/home-assistant.io/tree/current/source/blueprints/integrations), or to the [blueprint exchange on the forums](https://community.home-assistant.io/c/blueprints-exchange). On the integration page, add a link to the blueprint exchange.
-9. Before marking your PR as **Ready for review**, remove the comments.
+6. Document the steps required to retrieve API keys or access token for the third-party service or device, if needed.
+7. Make sure the documentation does not refer to custom integrations. The steps and examples, including automation examples, should not depend on custom cards or custom integrations.
+8. Add the type of the devices (including firmware) you have tested when you know that there are multiple out there.
+9. When adding blueprints, upload them either to the blueprints folder under [`https://github.com/home-assistant/home-assistant.io/tree/current/source/blueprints/integrations`](https://github.com/home-assistant/home-assistant.io/tree/current/source/blueprints/integrations), or to the [blueprint exchange on the forums](https://community.home-assistant.io/c/blueprints-exchange). On the integration page, add a link to the blueprint exchange.
+10. Before marking your PR as **Ready for review**, remove the comments.
 
 ## About the integration page header format
 
@@ -162,9 +164,9 @@ Please note, if you want to use Markdown inside an HTML block, it has to be surr
 
 ```html
 <div class='note warning'>
-  
+
   You need to enable [**telnet**](https://en.wikipedia.org/wiki/Telnet) on your router.
-  
+
 </div>
 ```
 
@@ -185,4 +187,7 @@ however, the logo must exist in our Brands repository.
 
 ### Linking from the sidebar
 
-If you are adding a new page that requires linking from the sidebar, you need to edit the `docs_navigation.html` file in `source/_includes/asides/docs_navigation.html`.
+If you are adding a new page that requires linking from the sidebar, edit either:
+
+- [`docs_navigation.html`](https://github.com/home-assistant/home-assistant.io/blob/current/source/_includes/asides/docs_navigation.html)
+- [`docs_sitemap.html`](https://github.com/home-assistant/home-assistant.io/blob/current/source/_includes/asides/docs_sitemap.html)
