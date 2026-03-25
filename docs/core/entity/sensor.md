@@ -233,7 +233,7 @@ For sensors that don't make use of Home Assistant's unit system there can be iss
 Specifically when migrating such a sensor to a unit supported by Home Assistant's unit system that doesn't exactly match the previously used unit.
 
 During compilation of long-term statistics this unit change will be detected. Without knowledge of how old and new unit relate to each other,
-collection of statistics is suppressed and a warning about unstable units generated.
+collection of statistics is suppressed and a warning about unstable units is generated.
 
 To facilitate these migration cases, integrations can provide a custom unit mapping to declare any non-supported unit
 equivalent to a supported unit. This is done by creating a recorder platform `recorder.py` in your integration's directory
