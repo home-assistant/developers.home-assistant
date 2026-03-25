@@ -15,6 +15,14 @@ We keep migrating our Material Design based components to Web Awesome based. Thi
 - `ha-input-multi` replaces `ha-multi-textfield`
 - `ha-input-copy` replaces `copy-textfield`
 
+with this component we also introduce new form background semantic theme variables:
+
+```css
+--ha-color-form-background: var(--ha-color-neutral-95);
+--ha-color-form-background-hover: var(--ha-color-neutral-90);
+--ha-color-form-background-disabled: var(--ha-color-neutral-80);
+```
+
 ## Date Picker
 
 We finally removed the Vue 2 dependency by replacing the date and date range picker with [Cally](https://wicky.nillia.ms/cally/).
