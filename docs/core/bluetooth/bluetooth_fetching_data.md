@@ -177,6 +177,7 @@ from homeassistant.components.bluetooth import (
     BluetoothServiceInfoBleak,
     async_ble_device_from_address,
 )
+from .const import DOMAIN
 from homeassistant.const import Platform
 
 from homeassistant.components.bluetooth.active_update_processor import (
