@@ -4,6 +4,10 @@ authorURL: https://github.com/wendevlin
 title: "Frontend component updates 2026.4"
 ---
 
+:::info
+We do not officially support or encourage custom card developers to use our built in components. This component APIs can always change and you should build your card as independent component.
+:::
+
 ## ha-input
 
 We keep migrating our Material Design based components to Web Awesome based. This time we migrated the input components, which leads to an API change but the look and feel stays the same for now.
@@ -15,7 +19,7 @@ We keep migrating our Material Design based components to Web Awesome based. Thi
 - `ha-input-multi` replaces `ha-multi-textfield`
 - `ha-input-copy` replaces `copy-textfield`
 
-with this component we also introduce new form background semantic theme variables:
+This component also introduces new semantic theme variables for form backgrounds:  
 
 ```css
 --ha-color-form-background: var(--ha-color-neutral-95);
@@ -23,6 +27,6 @@ with this component we also introduce new form background semantic theme variabl
 --ha-color-form-background-disabled: var(--ha-color-neutral-80);
 ```
 
-## Date Picker
+## Date picker
 
 We finally removed the Vue 2 dependency by replacing the date and date range picker with [Cally](https://wicky.nillia.ms/cally/).

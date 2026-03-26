@@ -24,7 +24,7 @@ We've introduced a new `LazyContext` pattern that should replace the traditional
 - **Shared state**: Multiple components consuming the same context share a single subscription
 - **Optimized re-renders**: Only components that consume the context re-render when data changes
 
-This approach centralizes data fetching logic and makes it easier to reason about when and how data flows through your application.
+This approach centralizes data-fetching logic and makes it easier to reason about when and how data flows through your application.
 
 ## Examples
 
@@ -39,7 +39,7 @@ new LazyContextProvider(this, {
 })
 ```
 
-### Consuming a Context
+### Consuming a context with lit
 
 To consume a context in a component, use the `@consume` decorator:
 
@@ -49,9 +49,14 @@ To consume a context in a component, use the `@consume` decorator:
 private _labels?: LabelRegistryEntry[];
 ```
 
-### Using @transform for Derived Data
+Checkout the updated custom card example to see how to use it in vanilla JS: [Custom card example](/docs/frontend/custom-ui/custom-card#defining-your-card).
 
-The `@transform` decorator allows you to derive data from a context value, ensuring your component only re-renders when the transformed value actually changes:
+### Using @transform for derived Data
+
+_Only available within the home-assistant frontend codebase_
+
+The `@transform` decorator allows you to derive data from a context value, ensuring your component only re-renders when the transformed value actually changes.
+
 
 ```ts
 @state()
