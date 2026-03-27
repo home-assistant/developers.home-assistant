@@ -12,25 +12,46 @@ Create a new file in your Home Assistant config dir as `<config>/www/content-car
 
 ```js
 class ContentCardExample extends HTMLElement {
-  // Whenever the state changes, a new `hass` object is set. Use this to
-  // update your content.
-  set hass(hass) {
-    // Initialize the content if it's not there yet.
-    if (!this.content) {
-      this.innerHTML = `
-        <ha-card header="Example-card">
-          <div class="card-content"></div>
-        </ha-card>
-      `;
-      this.content = this.querySelector("div");
-    }
+  // card is connected to the DOM
+  connectedCallback() {
+    const event = new CustomEvent('context-request', {
+      bubbles: true,
+      composed: true,
+      cancelable: true,
+    });
+
+    event.context = 'states'; // the key HA's user context provider uses
+    event.subscribe = true; // subscribe to future updates of this context, not just get the current value
+
+    event.callback = this._updateStates;
+
+    this.dispatchEvent(event);
+    
+    // initial render
+    this._render();
+  }
+
+  // receive the states updates and checks if the card needs a rerender
+  _updateStates = (states, unsubscribe) => {
+    // Store the unsubscribe function so we can call it when the card is removed from the DOM
+    this._unsubscribe = unsubscribe;
 
     const entityId = this.config.entity;
-    const state = hass.states[entityId];
-    const stateStr = state ? state.state : "unavailable";
+    console.log("update states", states, entityId)
+    const state = states[entityId];
+    const stateString = state ? state.state : "unavailable";
+    console.log("stateString", stateString, this.stateString)
+    if (this.stateString !== stateString) {
+      console.log("stateString changed, re-rendering")
+      this.stateString = stateString;
+      this._render();
+    }
+  }
 
-    this.content.innerHTML = `
-      The state of ${entityId} is ${stateStr}!
+  // renders the html of the card, just if needed
+  _render = () => {
+    this.innerHTML = `
+      The state of ${this.config.entity || "?"} is ${this.stateString || "unavailable"}!
       <br><br>
       <img src="http://via.placeholder.com/350x150">
     `;
@@ -59,6 +80,13 @@ class ContentCardExample extends HTMLElement {
       min_rows: 3,
       max_rows: 3,
     };
+  }
+
+  disconnectedCallback() {
+    if (this._unsubscribe) {
+      this._unsubscribe();
+      this._unsubscribe = undefined;
+    }
   }
 }
 
@@ -90,7 +118,9 @@ Custom cards are defined as a [custom element](https://developer.mozilla.org/en-
 
 Home Assistant will call `setConfig(config)` when the configuration changes (rare). If you throw an exception if the configuration is invalid, Home Assistant will render an error card to notify the user.
 
-Home Assistant will set [the `hass` property](/docs/frontend/data/) when the state of Home Assistant changes (frequent). Whenever the state changes, the component will have to update itself to represent the latest state.
+### Data context
+
+In the example, you see we use a custom event to request the states of Home Assistant. This is the recommended way to get data from Home Assistant, and to subscribe to future updates of this data. See a detailed documentation [here](/docs/frontend/data#available-contexts).
 
 ### Sizing in masonry view
 

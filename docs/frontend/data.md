@@ -21,6 +21,43 @@ This method of reading the `hass` object should only be used as a reference. In 
 
 ## Data
 
+### Context
+
+The recommended way to get data from Home Assistant is to consume the available contexts. The most common context is the `states` context, which contains the states of all entities in Home Assistant. You can also create your own local contexts to pass data around.
+
+To consume a context you fire a custom event with a callback to get registered at the context provider. The context provider sends you initial data and if you have subscribed to updates it will also send you updates whenever the data changes.
+
+#### Available contexts
+
+- `connection`: hass connection information object
+- `states`: states of all entities in Home Assistant
+- `entities`: entities in Home Assistant
+- `extendedEntities`: entities of Home Assistant with extended context
+- `devices`: devices in Home Assistant
+- `areas`: areas in Home Assistant
+- `floors`: floors in Home Assistant
+- `labels`: labels in Home Assistant
+- `configEntries`: config entries of Home Assistant
+- `auth`: authentication information of Home Assistant
+- `localize`: function to localize a string
+- `locale`: Locale informations
+- `config`: System configuration of Home Assistant
+- `themes`: Themes of Home Assistant
+- `selectedTheme`: Currently selected theme
+- `user`: The logged in user
+- `userData`: CoreFrontendUserData of the logged in user
+- `panels`: available panels of Home Assistant
+
+
+#### Consume a context in lit
+
+```ts
+@consume({ context: labelsContext, subscribe: true })
+@state()
+private _labels?: LabelRegistryEntry[];
+```
+
+
 ### `hass.states`
 
 An object containing the states of all entities in Home Assistant. The key is the entity_id, the value is the state object.
