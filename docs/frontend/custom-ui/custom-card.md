@@ -32,7 +32,10 @@ class ContentCardExample extends HTMLElement {
   }
 
   // receive the states updates and checks if the card needs a rerender
-  _updateStates = (states) => {
+  _updateStates = (states, unsubscribe) => {
+    // Store the unsubscribe function so we can call it when the card is removed from the DOM
+    this._unsubscribe = unsubscribe;
+
     const entityId = this.config.entity;
     console.log("update states", states, entityId)
     const state = states[entityId];
@@ -78,6 +81,13 @@ class ContentCardExample extends HTMLElement {
       max_rows: 3,
     };
   }
+
+  disconnectedCallback() {
+    if (this._unsubscribe) {
+      this._unsubscribe();
+      this._unsubscribe = undefined;
+    }
+  }
 }
 
 customElements.define("content-card-example", ContentCardExample);
@@ -110,7 +120,7 @@ Home Assistant will call `setConfig(config)` when the configuration changes (rar
 
 ### Data context
 
-In the example you see we use a custom event to request the states of Home Assistant. This is the recommended way to get data from Home Assistant, and to subscribe to future updates of this data. See a detailed documentation [here](/docs/frontend/data#available-contexts).
+In the example, you see we use a custom event to request the states of Home Assistant. This is the recommended way to get data from Home Assistant, and to subscribe to future updates of this data. See a detailed documentation [here](/docs/frontend/data#available-contexts).
 
 ### Sizing in masonry view
 

@@ -4,7 +4,7 @@ authorURL: https://github.com/wendevlin
 title: "Frontend lazy context"
 ---
 
-## What is a Context?
+## What is a context?
 
 In the Home Assistant frontend, a [Context](https://lit.dev/docs/data/context/) is a way to share data across the component tree without explicitly passing it through every level as a property. Instead of threading the `hass` object down through multiple layers of components, you can provide specific pieces of data via context and consume them only where needed.
 
@@ -30,7 +30,7 @@ This approach centralizes data-fetching logic and makes it easier to reason abou
 
 ### Defining a LazyContext
 
-To define a lazy context, use `createLazyContext` and provide a fetch function:
+To define a lazy context, use `LazyContextProvider` and provide a fetch function:
 
 ```ts
 new LazyContextProvider(this, {
@@ -49,7 +49,7 @@ To consume a context in a component, use the `@consume` decorator:
 private _labels?: LabelRegistryEntry[];
 ```
 
-Checkout the updated custom card example to see how to use it in vanilla JS: [Custom card example](/docs/frontend/custom-ui/custom-card#defining-your-card).
+Check out the updated custom card example to use it in vanilla JS: [Custom card example](/docs/frontend/custom-ui/custom-card#defining-your-card).
 
 ### Using @transform for derived Data
 
