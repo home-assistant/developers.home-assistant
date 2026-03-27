@@ -226,3 +226,30 @@ Example of state class `SensorStateClass.TOTAL_INCREASING` where the sensor does
 |   2021-08-01T14:00:00  |  1010  |  10
 |   2021-08-01T15:00:00  |     5  |  15
 |   2021-08-01T16:00:00  |    10  |  20
+
+### Handling unsupported units of measurement
+
+For sensors that don't make use of Home Assistant's unit system there can be issues with statistics collection.
+Specifically when migrating such a sensor to a unit supported by Home Assistant's unit system that doesn't exactly match the previously used unit.
+
+During compilation of long-term statistics this unit change will be detected. Without knowledge of how old and new unit relate to each other,
+collection of statistics is suppressed and a warning about unstable units is generated.
+
+To facilitate these migration cases, integrations can provide a custom unit mapping to declare any non-supported unit
+equivalent to a supported unit. This is done by creating a recorder platform `recorder.py` in your integration's directory
+and implementing the function `async_custom_equivalent_units` to return a mapping for any relevant `entity_id` to a dictionary of equivalent units.
+This mapping will be collected during statistics compilation and enables integrations a smooth transition into Home Assistant's unit system.
+
+Example implementation:
+```python
+def async_custom_equivalent_units(hass: HomeAssistant) -> dict[str, dict[str | None, str]]:
+    """Return custom equivalent units per entity id."""
+    return {
+        "sensor.example_sensor_1": {
+            "b/s": UnitOfDataRate.BYTES_PER_SECOND, # B/s
+        },
+        "sensor.example_sensor_2": {
+            "KWh": UnitOfEnergy.KILO_WATT_HOUR, # kWh
+        },
+    }
+```
