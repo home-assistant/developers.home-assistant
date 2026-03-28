@@ -19,8 +19,8 @@ Properties should always only return information from memory and not do I/O (lik
 | native_apparent_temperature | float | `None` | The current apparent (feels-like) temperature in °C or °F.
 | native_dew_point | float | `None` | The dew point temperature in °C or °F.
 | native_precipitation_unit | string | `None` | The precipitation unit; mm or in.
-| native_pressure | float | `None` | The current air pressure in hPa, mbar, inHg or mmHg.
-| native_pressure_unit | string | `None` | The air pressure unit; hPa, mbar, inHg or mmHg. Required if native_pressure is set.
+| native_pressure | float | `None` | The current air pressure in hPa, kPa, mbar, inHg or mmHg.
+| native_pressure_unit | string | `None` | The air pressure unit; hPa, kPa, mbar, inHg or mmHg. Required if native_pressure is set.
 | native_temperature | float | **Required** | The current temperature in °C or °F.
 | native_temperature_unit | string | **Required** | The temperature unit; °C or °F.
 | native_visibility | float | `None` | The current visibility in km or mi.
@@ -95,7 +95,7 @@ The integration should implement one or several of the async methods `async_fore
 | native_apparent_temperature | float | `None` | The apparent (feels-like) temperature in °C or °F
 | native_dew_point | float | `None` | The dew point temperature in °C or °F
 | native_precipitation | float | `None` | The precipitation amount in mm or in.
-| native_pressure | float | `None` | The air pressure in hPa, mbar, inHg or mmHg.
+| native_pressure | float | `None` | The air pressure in hPa, kPa, mbar, inHg or mmHg.
 | native_temperature | float | **Required** | The higher temperature in °C or °F
 | native_templow | float | `None` | The lower daily Temperature in °C or °F
 | native_wind_gust_speed | int | `None` | The wind gust speed in Beaufort, m/s, km/h, mi/h, ft/s or kn.
