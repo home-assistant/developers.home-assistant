@@ -22,7 +22,7 @@ The Supervisor allows the user to manage their Home Assistant installation from 
 -->
 
 - **Home Assistant Core**: home automation platform
-- **Add-ons**: extra applications that the user wants to run on their server
+- **Apps (formerly known as add-ons)**: extra applications that the user wants to run on their server
 - **DNS**: allows core and add-ons to communicate among one another
 - **Audio**: allows core and add-ons to play audio
 - **mDNS**: help discover and connect to devices and services in the network
