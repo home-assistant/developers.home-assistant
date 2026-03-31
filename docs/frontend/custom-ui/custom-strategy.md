@@ -76,10 +76,10 @@ if (
     documentationURL:
       "https://developers.home-assistant.io/docs/frontend/custom-ui/custom-strategy",
     // images: "/local/my-demo/preview.svg" // single image
-    // images: {
-    //   light: "/local/my-demo/preview-light.svg",
-    //   dark: "/local/my-demo/preview-dark.svg",
-    // },
+    images: {
+      light: "/local/my-demo/preview-light.svg",
+      dark: "/local/my-demo/preview-dark.svg",
+    },
   });
 }
 ```
