@@ -18,6 +18,10 @@ For example, brand images for the Philips Hue integration would go in `core_inte
 These images are cached on the server side, so once a pull request is merged, the images might not be immediately available.
 :::
 
+#### Material design icons
+Some integrations, like helpers, don't have a brand to represent.
+In those cases, you can use icons from the Material Design Icons library by having an `icon.txt` file in the folder in `core_integrations/` with the name of the icon to use, prefixed by `mdi:`.
+
 ### Core brands
 Just like core integrations, [core brands] are added by creating a pull request to the [brands repository].
 The images should be added to a directory named after the brand domain inside the `core_brands/` directory.
