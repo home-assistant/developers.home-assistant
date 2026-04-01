@@ -14,7 +14,7 @@ To register your strategy, call `window.customStrategies.push()` with an object 
 - `strategyType`: The type of strategy, e.g. `"dashboard"`.
 - `name` (`optional`): The friendly name of the strategy.
 - `description` (`optional`): A short description of the strategy.
-- `documentationURL` (`optional`): A URL to the documentation for the strategy. This is not shown in the strategy UI yet but may in future.
+- `documentationURL` (`optional`): A URL to the documentation for the strategy. This is not shown in the strategy UI yet but may in the future.
 - `images` (`optional`): A preview image, either a single URL or a light/dark pair.
 
 Example:
