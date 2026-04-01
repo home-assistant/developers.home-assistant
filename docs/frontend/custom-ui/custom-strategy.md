@@ -133,7 +133,6 @@ strategy:
 
 A view strategy generates the configuration of a specific dashboard view. These can be reused in dashboard strategies if needed, as can custom cards be used in view strategies.
 
-> [!NOTE]
 > This section is about view strategies. If you want to build a custom view layout element instead, refer to [custom views](./custom-view.md).
 
 Use the following dashboard configuration to use this strategy:
