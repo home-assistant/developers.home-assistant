@@ -119,6 +119,26 @@ The following properties are also available on entities. However, they are for a
 | state_attributes                | <code>dict &#124; None</code> | `None` | State attributes of a base domain. This property is implemented by the domain base entity and should not be implemented by integrations.
 | unit_of_measurement             | <code>str &#124; None</code> | The unit of measurement that the entity's state is expressed in. In most cases, for example for the `number` and `sensor` domains, this is implemented by the domain base entity and should not be implemented by integrations.
 
+## State attributes
+
+Entities can provide additional state attributes besides the built-in ones, to provide further details to its state.
+This should be done by providing a dictionary with keys and values to the `extra_state_attributes` property.
+
+Providing state attributes comes with the following rules:
+
+- If an attribute is expected, it should be in the dictionary. Attributes should not "come and go". If it's not currently providing a value it should set it to `None`.
+- If an attribute is not expected, it should not be in the dictionary. An attribute is expected if supported by the entity, for example as indicated by `supported_features`.
+
+Most often, the use of state attributes should be limited and in general it's often better to use another sensor than providing data as attributes.
+
+Some general guidance to consider how to handle it:
+
+- Would someone extract it using a template into an other (binary) sensor -> Not an attribute.
+- It is essential to automation on? Can it be standalone as its own entity? -> Not an attribute.
+- It is static, e.g., from configuration; doesn't belong in the state machine -> Not an attribute.
+- Do we want to track long term statistics of the value? -> Not an attribute.
+- Does it have historical value? If not, it can be an attribute and exclude it from being recorded.
+
 ## System properties
 
 The following properties are used and controlled by Home Assistant, and should not be overridden by integrations.
