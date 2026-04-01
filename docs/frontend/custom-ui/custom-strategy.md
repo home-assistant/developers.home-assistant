@@ -131,17 +131,10 @@ strategy:
 
 ## Views
 
-A view strategy is responsible for generating the configuration of a specific dashboard view. The strategy is invoked when the user opens the specific view.
+A view strategy generates the configuration of a specific dashboard view. These can be reused in dashboard strategies if needed, as can custom cards be used in view strategies.
 
-Two parameters are passed to the strategy:
-
-| Key | Description
-| -- | --
-| `config` | View strategy configuration.
-| `hass` | The Home Assistant object.
-
-```ts
-class StrategyDemo {
+> [!NOTE]
+> This section is about view strategies. If you want to build a custom view layout element instead, refer to [custom views](./custom-view.md).
   static async generate(config, hass) {
     return {
       "cards": [
