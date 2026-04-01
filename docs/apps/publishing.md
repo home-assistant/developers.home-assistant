@@ -4,13 +4,13 @@ title: "Publishing your app"
 
 There are two different ways of publishing apps (formerly known as add-ons). One is to publish pre-built containers to a container registry and the other option is to have users build the containers locally on their Home Assistant instance.
 
-### Pre-built containers
+## Pre-built containers
 
 With pre-built containers, the developer is responsible for building the images for each architecture and pushing the results to a container registry. This has a lot of advantages for the user who will only have to download the final container and be up and running once the download finishes. This makes the installation process fast and has almost no chance of failure, so it is the preferred method.
 
 We have automated the process of building and publishing apps via GitHub Actions. See below for the instructions.
 
-### Locally built containers
+## Locally built containers
 
 With the Supervisor, it is possible to distribute apps that will be built on the user's machine. The advantage is that for you as a developer it is easy to test an idea and see if people are interested in your apps. This method includes installing and potentially compiling code. This means that installing such an app is slow and adds more wear and tear to users' SD cards/hard drives than the above-mentioned pre-built solution. It also has a higher chance of failure if one of the dependencies of the container has changed or is no longer available.
 
