@@ -4,7 +4,7 @@ title: "Custom strategies"
 
 _Introduced in Home Assistant 2021.5._
 
-Strategies are elements that generate custom dashboards and/or views. You can create new strategies in the frontend repository, or create custom strategies. Both of which have access to the Home Assistant API similar to [custom cards](./custom-card.md).
+Strategies are elements that generate custom dashboards and/or views. You can create new strategies in the frontend repository, or create custom strategies. Both have access to the Home Assistant API similar to [custom cards](./custom-card.md).
 
 A strategy can generate a single view, or a full dashboard including one or several views.
 
@@ -58,7 +58,7 @@ window.customStrategies.push({
 
 A good example to start from is the [home overview](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace/strategies/home) dashboard or the [energy dashboard](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace/strategies/energy).
 
-Or, for less complex example, the [map dashboard strategy](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/strategies/map/map-dashboard-strategy.ts) which imports the map view strategy. This in term uses a panel view type, which uses a single map card.
+Or, for a less complex example, the [map dashboard strategy](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/strategies/map/map-dashboard-strategy.ts) which imports the map view strategy. This in turn uses a panel view type, which uses a single map card.
 
 #### Basic example
 
