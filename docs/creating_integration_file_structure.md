@@ -33,6 +33,9 @@ Home Assistant will look for an integration when it sees the domain referenced i
 - `<config directory>/custom_components/<domain>`
 - `homeassistant/components/<domain>` (built-in integrations)
 
+You can override a built-in integration by having an integration with the same domain in your `<config directory>/custom_components` folder. [The `manifest.json` file requires a version tag when you override a core integration](creating_integration_manifest/#version). An overridden core integration can be identified by a specific icon in the upper right corner of the integration box in the overview [![Open your Home Assistant instance and show your integrations.](https://my.home-assistant.io/badges/integrations.svg)](https://my.home-assistant.io/redirect/integrations/)
+Note that overriding built-in integrations is not recommended as you will no longer get updates. It is recommended to pick a unique name.
+
 ## Brand images - `brand/`
 
 Brand images (icons and logos) are stored in the [brands repository](https://github.com/home-assistant/brands). Home Assistant Core proxies these images through a local API so that they are served from the same origin as the frontend.
@@ -67,6 +70,3 @@ custom_components/my_integration/
 ```
 
 When a `brand/` directory is present, images are served directly from the local filesystem via the `/api/brands/integration/{domain}/{image}` endpoint. Local images take priority over images fetched from the brands CDN.
-
-You can override a built-in integration by having an integration with the same domain in your `<config directory>/custom_components` folder. [The `manifest.json` file requires a version tag when you override a core integration](creating_integration_manifest/#version). An overridden core integration can be identified by a specific icon in the upper right corner of the integration box in the overview [![Open your Home Assistant instance and show your integrations.](https://my.home-assistant.io/badges/integrations.svg)](https://my.home-assistant.io/redirect/integrations/)
-Note that overriding built-in integrations is not recommended as you will no longer get updates. It is recommended to pick a unique name.
