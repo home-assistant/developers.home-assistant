@@ -35,6 +35,6 @@ window.customStrategies.push({
 });
 ```
 
-This metadata is separate from the custom element itself. Your strategy still needs to be registered with a tag like `ll-strategy-dashboard-my-demo`, and users still need the resource loaded before Home Assistant can discover it. You can use HACS for this as other resource can be added, like custom cards.
+This metadata is separate from the custom element itself. Your strategy still needs to be registered with a tag like `ll-strategy-dashboard-my-demo`, and users still need the resource loaded before Home Assistant can discover it. You can use HACS for this as other resources can be added, like custom cards.
 
 Take a look at the updated [custom strategies](/docs/frontend/custom-ui/custom-strategy) documentation with example code and further details.
