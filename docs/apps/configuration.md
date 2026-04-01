@@ -9,7 +9,6 @@ addon_name/
   translations/
     en.yaml
   apparmor.txt
-  build.yaml
   CHANGELOG.md
   config.yaml
   DOCS.md
@@ -21,7 +20,7 @@ addon_name/
 ```
 
 :::note
-Translation files, `config` and `build` all support `.json`, `.yml` and `.yaml` as the file type.
+Translation files and `config` support `.json`, `.yml` and `.yaml` as the file type.
 
 To keep it simple all examples use `.yaml`
 :::
@@ -58,7 +57,7 @@ then there will be a variable `TARGET` containing `beer` in the environment of y
 All apps (formerly known as add-ons) are based on the latest Alpine Linux image. Home Assistant will automatically substitute the right base image based on the machine architecture. Add `tzdata` if you need to run in a different timezone. `tzdata` Is is already added to our base images.
 
 ```dockerfile
-ARG BUILD_FROM
+ARG BUILD_FROM=ghcr.io/home-assistant/base:latest
 FROM $BUILD_FROM
 
 # Install requirements for app
@@ -73,16 +72,14 @@ RUN chmod a+x /run.sh
 CMD [ "/run.sh" ]
 ```
 
-If you don't use local build on the device or our build script, make sure that the Dockerfile also has a set of labels that include:
+If you are not using Home Assistant GitHub builder actions (see [Publishing your app](/docs/apps/publishing)), make sure that the Dockerfile also has a set of labels that include:
 
 ```dockerfile
 LABEL \
   io.hass.version="VERSION" \
-  io.hass.type="addon" \
-  io.hass.arch="armhf|aarch64|i386|amd64"
+  io.hass.type="app" \
+  io.hass.arch="aarch64|amd64"
 ```
-
-It is possible to use your own base image with `build.yaml` or if you do not need support for automatic multi-arch building you can also use a simple docker `FROM`. You can also suffix the Dockerfile with the specific architecture to use a specific Dockerfile for a particular architecture, i.e. `Dockerfile.amd64`.
 
 ### Build args
 
@@ -116,11 +113,11 @@ map:
   - type: homeassistant_config
     read_only: False
     path: /custom/config/path
-image: repo/{arch}-my-custom-addon
+image: ghcr.io/my-org/my-app
 ```
 
 :::note
-Avoid using `config.yaml` as filename in your app for anything other than the app configuration. The Supervisor does a recursively search for `config.yaml` in the app repository.
+Avoid using `config.yaml` as filename in your app for anything other than the app configuration. The Supervisor does recursively search for `config.yaml` in the app repository.
 :::
 
 ### Required configuration options
@@ -172,8 +169,7 @@ Avoid using `config.yaml` as filename in your app for anything other than the ap
 | `legacy` | bool | `false` | If the Docker image has no `hass.io` labels, you can enable the legacy mode to use the config data.
 | `options` | dict | | Default options value of the app.
 | `schema` | dict | | Schema for options value of the app. It can be `false` to disable schema validation and options.
-| `image` | string | | For use with Docker Hub and other container registries. This should be set to the name of the image only (E.g, `ghcr.io/home-assistant/{arch}-addon-example`). If you use this option, set the active docker tag using the `version` option.
-| `codenotary` | string | | For use with Codenotary CAS. This is the E-Mail address used to verify your image with Codenotary (E.g, `example@home-assistant.io`). This should match the E-Mail address used as the signer in the [app's extended build options](#app-extended-build)
+| `image` | string | | For use with container registries. Set this to the generic (multi-arch) image name, e.g. `ghcr.io/my-org/my-app`. The `{arch}` placeholder is still supported as a compatibility fallback for per-architecture image names (e.g. `ghcr.io/my-org/{arch}-my-app`). If you use this option, set the active Docker tag using the `version` option.
 | `timeout` | integer | 10 | Default 10 (seconds). The timeout to wait until the Docker daemon is done or will be killed.
 | `tmpfs` | bool | `false` | If this is set to `true`, the containers `/tmp` uses tmpfs, a memory file system.
 | `discovery` | list | | A list of services that this app provides for Home Assistant.
@@ -269,30 +265,11 @@ We support:
 - `list(val1|val2|...)`
 - `device` / `device(filter)`: Device filter can be in the following format: `subsystem=TYPE` i.e. `subsystem=tty` for serial devices.
 
-## App extended build
+:::note
 
-Additional build options for an app are stored in `build.yaml`. This file will be read from our build systems.
-This is only needed if you are not using the default images or need additional things.
+Previously, additional build options such as `build_from`, `args`, and `labels` were configured in a separate `build.yaml` file that was read by the legacy builder. This file is no longer used. Base images should be set directly with a `FROM` statement in your `Dockerfile`, labels with a `LABEL` statement, and custom build arguments with `ARG` definitions. See the [builder migration blog post](/blog/2026/04/02/builder-migration) for detailed migration instructions.
 
-```yaml
-build_from:
-  armhf: mycustom/base-image:latest
-args:
-  my_build_arg: xy
-```
-
-| Key | Required | Description |
-| --- | -------- | ----------- |
-| build_from | no | A dictionary with the hardware architecture as the key and the base Docker image as the value.
-| args | no | Allow additional Docker build arguments as a dictionary.
-| labels | no | Allow additional Docker labels as a dictionary.
-| codenotary | no | Enable container signature with codenotary CAS.
-| codenotary.signer | no | Owner signer E-Mail address for this image.
-| codenotary.base_image | no | Verify the base container image. If you use our official images, use `notary@home-assistant.io`
-
-We provide a set of [base images][docker-base] which should cover a lot of needs. If you don't want to use the Alpine based version or need a specific image tag, feel free to pin this requirement for your build with the `build_from` option.
-
-[docker-base]: https://github.com/home-assistant/docker-base
+:::
 
 ## App translations
 

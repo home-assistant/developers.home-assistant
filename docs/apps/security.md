@@ -18,10 +18,6 @@ For access to the Supervisor API you need to define a role or run in default mod
 | `manager` | Is for Apps that run CLIs and need extended rights |
 | `admin` | Have access to every API call. That is the only one they can disable/enable the App protection mode |
 
-## Codenotary CAS
-
-You can sign your images and also verify our base image which you build from to provide a full chain of trust. This feature is supported by our [Builder](https://github.com/home-assistant/builder) and the [build config](/docs/apps/configuration#app-extended-build). To enable this feature on the Supervisor for your app, you simply need to add your email address to the app configuration `codenotary`.
-
 ## Protection
 
 By default, all apps run in protection-enabled mode. This mode prevents the app from getting any rights on the system. If an app requires more rights, you can disable this protection via the API app options for that app. But be careful, an app with disabled protection can destroy your system!
@@ -34,7 +30,7 @@ As a developer, follow the following best practices to make your app secure:
 - Create an AppArmor profile
 - Map folders read only if you don't need write access
 - If you need any API access, make sure that you do not grant permission that aren't needed
-- Sign the image with [Codenotary CAS](https://cas.codenotary.com/)
+- Sign published images (the supported [publishing workflow](/docs/apps/publishing) can sign images with Cosign)
 
 ## Use Home Assistant user backend
 
