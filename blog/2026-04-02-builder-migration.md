@@ -5,11 +5,11 @@ authorImageURL: https://avatars.githubusercontent.com/u/211416?s=96&v=4
 title: "Migrating app builds to Docker BuildKit"
 ---
 
-The legacy `home-assistant/builder` container and the old `home-assistant/builder` GitHub Action have been retired. We recommend to migrate all app (formerly add-on) repositories to allow direct build with Docker BuildKit and to use the new composite actions described in this post.
+The legacy `home-assistant/builder` container and the old `home-assistant/builder` GitHub Action have been retired. We recommend migrating all GitHub workflows and Dockerfiles for apps (formerly add-ons) as described in this post.
 
 ## What changed and why
 
-The old builder ran every architecture build inside a single privileged Docker-in-Docker container using QEMU emulation. This was slow, required elevated privileges, and those who were already familiar with Docker needed to learn how to use the custom Home Assistant's builder container. This also had unnecessary maintenance overhead as the builder can be currently fully replaced with Docker BuildKit, which is natively supported on GitHub Actions runners and has built-in multi-arch support with QEMU emulation when needed.
+The old builder ran every architecture build inside a single privileged Docker-in-Docker container using QEMU emulation. This was slow, required elevated privileges, and those who were already familiar with Docker needed to learn how to use the custom Home Assistant's builder container. The old builder also had unnecessary maintenance overhead. Today, what the builder does can be fully replaced with Docker BuildKit, which is natively supported on GitHub Actions runners and has built-in multi-arch support with QEMU emulation if needed.
 
 For your CI, the replacement is a set of focused [composite GitHub Actions](https://github.com/home-assistant/builder) that delegate building to the runner's native Docker with Docker BuildKit. Outside the CI, the migration means that your `Dockerfile` is now the single source of truth for building your app image, and you can use `docker build` directly to build and test your app locally without needing to use the builder container.
 
