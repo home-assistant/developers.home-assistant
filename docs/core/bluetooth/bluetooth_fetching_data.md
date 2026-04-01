@@ -251,6 +251,10 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 The `ActiveBluetoothDataUpdateCoordinator` and `PassiveBluetoothCoordinator` coordinators function similar
 to `DataUpdateCoordinators` except they are driven by incoming advertisement data instead of polling.
 
+:::note
+The `_async_handle_unavailable` callback relies on the Bluetooth stack detecting that the device has stopped advertising. On macOS, CoreBluetooth caches advertisement data and may not surface device disappearance to the application layer, so `_async_handle_unavailable` may never fire even after the device has stopped broadcasting.
+:::
+
 ### PassiveBluetoothCoordinator
 
 Below is an example of a `PassiveBluetoothDataUpdateCoordinator`. Incoming
