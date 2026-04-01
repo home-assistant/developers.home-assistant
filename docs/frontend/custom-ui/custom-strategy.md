@@ -226,6 +226,25 @@ if (!customElements.get("ll-strategy-view-my-area-dashboard")) {
     MyAreaViewStrategy,
   );
 }
+
+window.customStrategies = window.customStrategies || [];
+
+if (
+  !window.customStrategies.some(
+    (strategy) =>
+      strategy.type === "my-area-dashboard" &&
+      strategy.strategyType === "dashboard",
+  )
+) {
+  window.customStrategies.push({
+    type: "my-area-dashboard",
+    strategyType: "dashboard",
+    name: "Area dashboard",
+    description: "Build one view per area from the Home Assistant registries.",
+    documentationURL:
+      "https://developers.home-assistant.io/docs/frontend/custom-ui/custom-strategy",
+  });
+}
 ```
 
 Use the following dashboard configuration to use this strategy:
