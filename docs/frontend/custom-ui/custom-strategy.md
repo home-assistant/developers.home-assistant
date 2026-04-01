@@ -16,6 +16,44 @@ If you have already built a custom card, the setup will feel familiar. Strategie
 
 A dashboard strategy generates a full dashboard configuration. In most cases, it starts from a small strategy config and returns the full dashboard structure. Think of this like a json/yaml config which is then rendered into a dashboard. Built in dashboards are built with dashboard strategies. You can read the source code for the built in dashboards [here](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace/strategies).
 
+### Show your community dashboard in the new dashboard dialog
+
+__Introduced in Home Assistant 2026.4.__
+
+If you already have a dashboard strategy, you can make it much easier for people to add by registering your strategy in `window.customStrategies`.
+
+Once the resource is loaded, Home Assistant can show your dashboard in the **new dashboard** dialog under the **Community dashboards** section.
+
+The object supports the following keys:
+
+| Key                | Required | Description                                                                    |
+| ------------------ | -------- | ------------------------------------------------------------------------------ |
+| `type`             | Yes      | The strategy type without the `custom:` prefix.                                |
+| `strategyType`     | Yes      | The strategy kind: `dashboard`, `view`, or `section`.                          |
+| `name`             | No       | Friendly name shown in the picker.                                             |
+| `description`      | No       | Short text shown below the name.                                               |
+| `documentationURL` | No       | Link to your documentation. This is not shown in the strategy UI yet. |
+| `images`           | No       | Preview image, either a single URL or a light/dark object.                     |
+
+Example with preview images:
+
+```js
+window.customStrategies = window.customStrategies || [];
+
+window.customStrategies.push({
+  type: "my-demo",
+  strategyType: "dashboard",
+  name: "My demo dashboard",
+  description: "A small starter dashboard generated from JavaScript.",
+  documentationURL: "https://example.com/my-demo-dashboard",
+  // images: "/local/my-demo/preview.svg"
+  images: {
+    light: "/local/my-demo/preview-light.svg",
+    dark: "/local/my-demo/preview-dark.svg",
+  },
+});
+```
+
 ### Examples
 
 A good example to start from is the [home overview](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace/strategies/home) dashboard or the [energy dashboard](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace/strategies/energy).
