@@ -242,6 +242,7 @@ This mapping will be collected during statistics compilation and enables integra
 
 Example implementation:
 ```python
+@callback
 def async_custom_equivalent_units(hass: HomeAssistant) -> dict[str, dict[str | None, str]]:
     """Return custom equivalent units per entity id."""
     return {
