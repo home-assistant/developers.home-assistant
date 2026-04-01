@@ -129,7 +129,7 @@ strategy:
   type: custom:my-demo
 ```
 
-## View strategies
+## Views
 
 A view strategy is responsible for generating the configuration of a specific dashboard view. The strategy is invoked when the user opens the specific view.
 
