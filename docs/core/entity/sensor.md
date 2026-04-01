@@ -227,10 +227,12 @@ Example of state class `SensorStateClass.TOTAL_INCREASING` where the sensor does
 |   2021-08-01T15:00:00  |     5  |  15
 |   2021-08-01T16:00:00  |    10  |  20
 
-### Handling unsupported units of measurement
+### Handling migration from unsupported to supported units of measurement
 
-For sensors that don't make use of Home Assistant's unit system there can be issues with statistics collection.
-Specifically when migrating such a sensor to a unit supported by Home Assistant's unit system that doesn't exactly match the previously used unit.
+Integrations may have sensors which have their own custom units of measurement, i.e. they don't use Home Assistant constants to set the units.  
+When migrating such a sensor to a unit supported by Home Assistant's unit system, the old custom unit must match the value of the Home Assistant constant exactly or Home Assistant will treat this as a unit change.
+
+For example, the integration may have set the unit of an energy sensor to `KWh` which differs from the value of `UnitOfEnergy.KILO_WATT_HOUR` (kWh).
 
 During compilation of long-term statistics this unit change will be detected. Without knowledge of how old and new unit relate to each other,
 collection of statistics is suppressed and a warning about unstable units is generated.
