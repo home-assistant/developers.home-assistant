@@ -135,83 +135,66 @@ A view strategy generates the configuration of a specific dashboard view. These 
 
 > [!NOTE]
 > This section is about view strategies. If you want to build a custom view layout element instead, refer to [custom views](./custom-view.md).
-  static async generate(config, hass) {
-    return {
-      "cards": [
-        {
-          "type": "markdown",
-          "content": `Generated at ${(new Date).toLocaleString()}`
-        }
-      ]
-    };
-  }
-}
-
-customElements.define("ll-strategy-my-demo", StrategyDemo);
-```
 
 Use the following dashboard configuration to use this strategy:
 
 ```yaml
 views:
-- strategy:
-    type: custom:my-demo
+  - strategy:
+      type: custom:my-demo
+      title: Generated view
 ```
 
-## Full example
+## Full strategy example
 
-It's recommended for a dashboard strategy to leave as much work to be done to the view strategies. That way the dashboard will show up for the user as fast as possible. This can be done by having the dashboard generate a configuration with views that rely on its own strategy.
+It is often a good idea to let a dashboard strategy create the list of views, and let a view strategy generate the cards for each view. That keeps the first dashboard load smaller and lets Home Assistant build each view only when it is opened.
 
-Below example will create a view per area, with each view showing all entities in that area in a grid.
+The example below creates one view per area. Each generated view shows the entities for that area in a grid.
 
-```ts
-class StrategyDashboardDemo {
+```js
+class MyAreaDashboardStrategy extends HTMLElement {
   static async generate(config, hass) {
-    // Query all data we need. We will make it available to views by storing it in strategy options.
+    // Query all the data we need. We will make it available to views by storing it in strategy options.
     const [areas, devices, entities] = await Promise.all([
       hass.callWS({ type: "config/area_registry/list" }),
       hass.callWS({ type: "config/device_registry/list" }),
       hass.callWS({ type: "config/entity_registry/list" }),
     ]);
 
-    // Each view is based on a strategy so we delay rendering until it's opened
     return {
+      title: config.title || "Area dashboard",
       views: areas.map((area) => ({
-        strategy: {
-          type: "custom:my-demo",
-          area, 
-          devices, 
-          entities,
-        },
         title: area.name,
         path: area.area_id,
+        strategy: {
+          type: "custom:my-area-dashboard",
+          area: area,
+          devices: devices,
+          entities: entities,
+        },
       })),
     };
   }
 }
 
-class StrategyViewDemo {
+class MyAreaViewStrategy extends HTMLElement {
   static async generate(config, hass) {
-    const { area, devices, entities } = config;
-
     const areaDevices = new Set();
 
-    // Find all devices linked to this area
-    for (const device of devices) {
-      if (device.area_id === area.area_id) {
+    // Find all devices in this area.
+    for (const device of config.devices) {
+      if (device.area_id === config.area.area_id) {
         areaDevices.add(device.id);
       }
     }
 
     const cards = [];
 
-    // Find all entities directly linked to this area
-    // or linked to a device linked to this area.
-    for (const entity of entities) {
+    // Find all entities in this area or belonging to a device in this area.
+    for (const entity of config.entities) {
       if (
-        entity.area_id
-          ? entity.area_id === area.area_id
-          : areaDevices.has(entity.device_id)
+        entity.area_id === config.area.area_id ||
+        (!entity.area_id && areaDevices.has(entity.device_id))
       ) {
         cards.push({
           type: "button",
@@ -231,13 +214,24 @@ class StrategyViewDemo {
   }
 }
 
-customElements.define("ll-strategy-dashboard-my-demo", StrategyDashboardDemo);
-customElements.define("ll-strategy-view-my-demo", StrategyViewDemo);
+if (!customElements.get("ll-strategy-dashboard-my-area-dashboard")) {
+  customElements.define(
+    "ll-strategy-dashboard-my-area-dashboard",
+    MyAreaDashboardStrategy,
+  );
+}
+
+if (!customElements.get("ll-strategy-view-my-area-dashboard")) {
+  customElements.define(
+    "ll-strategy-view-my-area-dashboard",
+    MyAreaViewStrategy,
+  );
+}
 ```
 
 Use the following dashboard configuration to use this strategy:
 
 ```yaml
 strategy:
-  type: custom:my-demo
+  type: custom:my-area-dashboard
 ```
