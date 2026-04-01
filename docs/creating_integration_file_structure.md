@@ -36,7 +36,6 @@ Home Assistant will look for an integration when it sees the domain referenced i
 You can override a built-in integration by having an integration with the same domain in your `<config directory>/custom_components` folder. [The `manifest.json` file requires a version tag when you override a core integration](creating_integration_manifest/#version). An overridden core integration can be identified by a specific icon in the upper right corner of the integration box in the overview [![Open your Home Assistant instance and show your integrations.](https://my.home-assistant.io/badges/integrations.svg)](https://my.home-assistant.io/redirect/integrations/)
 Note that overriding built-in integrations is not recommended as you will no longer get updates. It is recommended to pick a unique name.
 
-
 ## Brand images - `brand/`
 
 Custom integrations can include their own brand images by adding a `brand/` directory inside the integration directory.
