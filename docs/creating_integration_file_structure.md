@@ -38,35 +38,5 @@ Note that overriding built-in integrations is not recommended as you will no lon
 
 ## Brand images - `brand/`
 
-Brand images (icons and logos) are stored in the [brands repository](https://github.com/home-assistant/brands). Home Assistant Core proxies these images through a local API so that they are served from the same origin as the frontend.
-
-The available API endpoints are:
-
-- `/api/brands/integration/{domain}/{image}` - Integration icons and logos
-- `/api/brands/hardware/{category}/{image}` - Hardware images
-
-All endpoints return a generic placeholder image by default if the requested image does not exist. To opt out and receive a 404 instead, add the `?placeholder=no` query parameter.
-
-These endpoints require authentication. Requests can authenticate using either a standard authenticated session (Bearer token) or by passing an access token in a `token` query parameter. The frontend obtains this access token via the `brands/access_token` WebSocket command and appends it to all brand image URLs automatically.
-
-The following image filenames are supported:
-
-- `icon.png` / `dark_icon.png`
-- `logo.png` / `dark_logo.png`
-- `icon@2x.png` / `dark_icon@2x.png`
-- `logo@2x.png` / `dark_logo@2x.png`
-
-### Local brand images for custom integrations
-
-Custom integrations can ship their own brand images by including a `brand/` directory inside the integration directory. For example:
-
-```text
-custom_components/my_integration/
-├── __init__.py
-├── manifest.json
-└── brand/
-    ├── icon.png
-    └── logo.png
-```
-
-When a `brand/` directory is present, images are served directly from the local filesystem via the `/api/brands/integration/{domain}/{image}` endpoint. Local images take priority over images fetched from the brands CDN.
+Custom integrations can include their own brand images by adding a `brand/` directory inside the integration directory.
+For more information on brand images and how they are served, see [Brand images](/docs/core/integration/brand_images.md).

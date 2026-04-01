@@ -152,6 +152,7 @@ module.exports = {
         "integration_events",
         "integration_listen_events",
         "network_discovery",
+        "core/integration/brand_images",
         {
           type: "category",
           label: "Bluetooth",
