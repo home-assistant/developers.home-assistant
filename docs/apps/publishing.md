@@ -38,8 +38,6 @@ image: "ghcr.io/my-org/my-app"
 image: "ghcr.io/my-org/{arch}-my-app"
 ```
 
-Home Assistant assumes that the default branch of your app repository matches the `latest` tag on the container registry. When building a new version, use a separate branch or a PR. After the images are pushed to the registry, merge to main/master.
-
 ### Published images
 
 After a successful run, two types of image references are available:
