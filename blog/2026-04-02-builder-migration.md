@@ -15,28 +15,11 @@ For your CI, the replacement is a set of focused [composite GitHub Actions](http
 
 ## Migration process
 
-### Before (legacy action)
+The migration has two parts: updating your Dockerfiles and updating your GitHub Actions workflows.
 
-Previously, you may have had a single step in your GitHub Actions workflow that looked like this:
+### Update Dockerfiles
 
-```yaml
-- name: Build
-  uses: home-assistant/builder@master
-  with:
-    args: |
-      --all \
-      --target /data \
-      --docker-hub my-org \
-      --docker-user my-org \
-      --docker-password ${{ secrets.DOCKER_PASSWORD }}
-```
-
-### After (composite actions)
-
-Replace the above with the three composite actions. See the [example workflow](https://github.com/home-assistant/apps-example/blob/main/.github/workflows/builder.yaml) in our example app repository for a complete working example. Alternatively, use the [individual actions](https://github.com/home-assistant/builder?tab=readme-ov-file#example-workflow) in a more custom workflow as needed.
-
-
-The new build workflow doesn't use `build.yaml` anymore. You need to migrate the content into the Dockerfile as follows:
+The new build workflow doesn't use `build.yaml` anymore. Move the content into your `Dockerfile` as follows:
 
 - **`build_from`** - replace the `build_from` key in `build.yaml` with a `FROM` statement in your `Dockerfile`:
 
@@ -65,7 +48,13 @@ The new build workflow doesn't use `build.yaml` anymore. You need to migrate the
 
   Default values in `ARG` replace what was previously supplied via `build.yaml`'s `args` dictionary. They can still be overridden at build time with `--build-arg` if needed.
 
-With the content of `build.yaml` migrated you can delete the file from your repository.
+With the content of `build.yaml` migrated, you can delete the file from your repository.
+
+### Update GitHub Actions workflows
+
+Remove any workflow steps using `home-assistant/builder@master` and replace them with the new composite actions. See the [example workflow](https://github.com/home-assistant/apps-example/blob/main/.github/workflows/builder.yaml) in our example app repository for a complete working example. Alternatively, use the [individual actions](https://github.com/home-assistant/builder?tab=readme-ov-file#example-workflow) in a more custom workflow as needed.
+
+If you are creating a custom workflow, note that the legacy builder used to add the `io.hass.type`, `io.hass.name`, `io.hass.description`, and `io.hass.url` labels automatically. The new actions do not infer these values, so add them explicitly via the `labels` input of the `build-image` (or similar) action.
 
 ### Image naming
 
