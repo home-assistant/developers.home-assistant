@@ -59,6 +59,12 @@ The architecture used in `--platform` option is not the same as the one used in 
 docker pull ghcr.io/YOUR_GH_USERNAME/aarch64-hassio-supervisor:latest
 ```
 
+:::note
+
+Docker images uploaded to GHCR are by default private. To download them, you will either need to authenticate using a personal access token on the remote system as well or [change the visibility](https://docs.github.com/en/packages/learn-github-packages/configuring-a-packages-access-control-and-visibility#configuring-visibility-of-packages-for-your-personal-account) of the package on GitHub.
+
+:::
+
 6. Tag your Supervisor image as the expected local name:
 
 ```bash
