@@ -29,16 +29,17 @@ The new build workflow doesn't use `build.yaml` anymore. Move the content into y
 
    As the base images are now published as multi-platform manifests, there is usually no need to define per-arch base images anymore. The `build-image` action still supplies `BUILD_ARCH` as a build argument though, so you can use that in your `Dockerfile` if you need to use it in the template for the base image name.
 
-- **`labels`** - move any custom Docker labels directly into your `Dockerfile` with a `LABEL` statement, with `io.hass.type="addon"` as a minimum to ensure the image is recognized as an app by Supervisor:
+- **`labels`** - move any custom Docker labels directly into your `Dockerfile` with a `LABEL` statement:
 
   ```dockerfile
   LABEL \
-      io.hass.type="addon" \
       org.opencontainers.image.title="Your awesome app" \
       org.opencontainers.image.description="Description of your app." \
       org.opencontainers.image.source="https://github.com/your/repo" \
       org.opencontainers.image.licenses="Apache License 2.0"
     ```
+
+  If you are creating a custom workflow, note that the legacy builder used to add the `io.hass.type`, `io.hass.name`, `io.hass.description`, and `io.hass.url` labels automatically. The new actions do not infer these values, so add them explicitly via the `labels` input of the `build-image` (or similar) action.
 
 - **`args`** - move custom build arguments into your `Dockerfile` as `ARG` definitions with default values:
 
@@ -53,8 +54,6 @@ With the content of `build.yaml` migrated, you can delete the file from your rep
 ### Update GitHub Actions workflows
 
 Remove any workflow steps using `home-assistant/builder@master` and replace them with the new composite actions. See the [example workflow](https://github.com/home-assistant/apps-example/blob/main/.github/workflows/builder.yaml) in our example app repository for a complete working example. Alternatively, use the [individual actions](https://github.com/home-assistant/builder?tab=readme-ov-file#example-workflow) in a more custom workflow as needed.
-
-If you are creating a custom workflow, note that the legacy builder used to add the `io.hass.type`, `io.hass.name`, `io.hass.description`, and `io.hass.url` labels automatically. The new actions do not infer these values, so add them explicitly via the `labels` input of the `build-image` (or similar) action.
 
 ### Image naming
 
