@@ -36,7 +36,7 @@ Previously, you may have had a single step in your GitHub Actions workflow that 
 Replace the above with the three composite actions. See the [example workflow](https://github.com/home-assistant/apps-example/blob/main/.github/workflows/builder.yaml) in our example app repository for a complete working example. Alternatively, use the [individual actions](https://github.com/home-assistant/builder?tab=readme-ov-file#example-workflow) in a more custom workflow as needed.
 
 
-The new build workflow does not read `build.yaml`. You can remove the file from your repository. Its two commonly used sections should be migrated as follows:
+The new build workflow doesn't use `build.yaml` anymore. You need to migrate the content into the Dockerfile as follows:
 
 - **`build_from`** - replace the `build_from` key in `build.yaml` with a `FROM` statement in your `Dockerfile`:
 
@@ -64,6 +64,8 @@ The new build workflow does not read `build.yaml`. You can remove the file from 
   ```
 
   Default values in `ARG` replace what was previously supplied via `build.yaml`'s `args` dictionary. They can still be overridden at build time with `--build-arg` if needed.
+
+With the content of `build.yaml` migrated you can delete the file from your repository.
 
 ### Image naming
 
