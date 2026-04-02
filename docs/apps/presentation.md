@@ -200,10 +200,8 @@ version: "1.0.0"
 slug: "nginx-ingress-example"
 description: "Ingress testing"
 arch:
+  - aarch64
   - amd64
-  - armhf
-  - armv7
-  - i386
 ingress: true
 ```
 

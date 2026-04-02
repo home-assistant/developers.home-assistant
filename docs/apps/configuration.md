@@ -128,7 +128,7 @@ Avoid using `config.yaml` as filename in your app for anything other than the ap
 | `version` | string | Version of the app. If you are using a docker image with the `image` option, this needs to match the tag of the image that will be used.
 | `slug` | string | Slug of the app. This needs to be unique in the scope of the [repository](/docs/apps/repository) that the app is published in and URI friendly. |
 | `description` | string | Description of the app.
-| `arch` | list | A list of supported architectures: `armhf`, `armv7`, `aarch64`, `amd64`, `i386`.
+| `arch` | list | A list of supported architectures: `aarch64`, `amd64`.
 
 ### Optional configuration options
 
