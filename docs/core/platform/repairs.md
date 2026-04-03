@@ -59,7 +59,7 @@ from __future__ import annotations
 
 import voluptuous as vol
 
-from homeassistant.components.repairs import ConfirmRepairFlow, RepairsFlow, RepairsFlowResult
+from homeassistant.components.repairs import RepairsFlow, RepairsFlowResult
 from homeassistant.core import HomeAssistant
 
 
@@ -98,6 +98,8 @@ async def async_create_fix_flow(
 Repair flows can forward issue fixes to config, options, or subentry flows:
 
 ```python
+import voluptuous as vol
+
 from homeassistant import data_entry_flow
 from homeassistant.components.repairs import RepairsFlow, RepairsFlowResult
 from homeassistant.config_entries import (
@@ -131,9 +133,9 @@ class Issue1RepairFlow(RepairsFlow):
                 )
             )
             return self.async_create_entry(
-                title="", data={}, 
+                title="", data={},
                 next_flow=(
-                    FlowType.CONFIG_SUBENTRIES_FLOW, 
+                    FlowType.CONFIG_SUBENTRIES_FLOW,
                     next_flow["flow_id"]
                 )
             )
@@ -153,11 +155,11 @@ When using `next_flow` in `async_create_entry` the issue lifecycle is altered, a
 ```python
 next_flow: ConfigFlowResult = (
     await self.hass.config_entries.options.async_init(
-        config_entry.entry_id
+        self.data["entry_id]
     )
 )
 return self.async_create_entry(
-    title="", data={}, 
+    title="", data={},
     next_flow=(
         FlowType.OPTIONS_FLOW,
         next_flow["flow_id"]
@@ -207,7 +209,6 @@ async def async_step_reconfigure(
             )
             return self.async_update_reload_and_abort(
                 self._get_reconfigure_entry(),
-                title=title,
                 data=data,
             )
 ```
