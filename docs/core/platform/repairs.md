@@ -59,8 +59,7 @@ from __future__ import annotations
 
 import voluptuous as vol
 
-from homeassistant import data_entry_flow
-from homeassistant.components.repairs import ConfirmRepairFlow, RepairsFlow
+from homeassistant.components.repairs import ConfirmRepairFlow, RepairsFlow, RepairsFlowResult
 from homeassistant.core import HomeAssistant
 
 
@@ -69,14 +68,14 @@ class Issue1RepairFlow(RepairsFlow):
 
     async def async_step_init(
         self, user_input: dict[str, str] | None = None
-    ) -> data_entry_flow.FlowResult:
+    ) -> RepairsFlowResult:
         """Handle the first step of a fix flow."""
 
         return await (self.async_step_confirm())
 
     async def async_step_confirm(
         self, user_input: dict[str, str] | None = None
-    ) -> data_entry_flow.FlowResult:
+    ) -> RepairsFlowResult:
         """Handle the confirm step of a fix flow."""
         if user_input is not None:
             return self.async_create_entry(title="", data={})
@@ -100,7 +99,7 @@ Repair flows can forward issue fixes to config, options, or subentry flows:
 
 ```python
 from homeassistant import data_entry_flow
-from homeassistant.components.repairs import RepairsFlow
+from homeassistant.components.repairs import RepairsFlow, RepairsFlowResult
 from homeassistant.config_entries import (
     FlowType,
     SOURCE_RECONFIGURE,
@@ -109,19 +108,17 @@ from homeassistant.config_entries import (
 )
 from homeassistant.core import HomeAssistant
 
-
-
 class Issue1RepairFlow(RepairsFlow):
     """Handler for an issue fixing flow."""
 
     async def async_step_init(
         self, user_input: dict[str, str] | None = None
-    ) -> data_entry_flow.FlowResult:
+    ) -> RepairsFlowResult:
         return await (self.async_step_confirm())
 
     async def async_step_confirm(
         self, user_input: dict[str, str] | None = None
-    ) -> data_entry_flow.FlowResult:
+    ) -> RepairsFlowResult:
         """Handle the confirm step of a fix flow."""
         if user_input is not None:
             next_flow: SubentryFlowResult = (
@@ -147,7 +144,9 @@ class Issue1RepairFlow(RepairsFlow):
         )
 ```
 
-`context = {"source": SOURCE_RECONFIGURE}` is the only context source supported for `next_flow` issue repair flows for `FlowType.CONFIG_FLOW` and `FlowType.CONFIG_SUBENTRIES_FLOW`.  Issue repairs should not be directing to new config/options/subentry flows (which cannot be broken if they do not exist).
+`context = {"source": SOURCE_RECONFIGURE}` is the only context source supported for `next_flow` issue repair flows for `FlowType.CONFIG_FLOW` and `FlowType.CONFIG_SUBENTRIES_FLOW`.  Issue repairs should not be directing to new config/options/subentry flows (which cannot need a repair if they do not exist).
+
+When using `next_flow` in `async_create_entry` the issue lifecycle is altered, and the issue will remain registered until manually removed by the integration. See [Repair flows using `next_flow`](#repair-flows-using-next_flow) for more information and an example.
 
 #### Example options flow
 
@@ -189,4 +188,26 @@ from homeassistant.helpers import issue_registry as ir
 
 ir.async_delete_issue(hass, DOMAIN, "manual_migration")
 ```
+### Repair flows using `next_flow`
 
+Integration repair flows using `next_flow` will have to delete an issue once the repair is completed as the `RepairFlow.async_create_entry` will not remove the issue from the registry when `next_flow` is specified as an argument. Issues can be deleted in `config_flow.py` or in `async_setup_entry`: 
+
+```python
+async def async_step_reconfigure(
+    self, user_input: dict[str, Any] | None = None
+) -> ConfigFlowResult:
+    """Config entry reconfigure
+    if user_input is not None:
+        # Verify user_input is valid
+        if success:
+            ir.async_delete_issue(
+                self.hass,
+                DOMAIN,
+                "url_invalid",
+            )
+            return self.async_update_reload_and_abort(
+                self._get_reconfigure_entry(),
+                title=title,
+                data=data,
+            )
+```
