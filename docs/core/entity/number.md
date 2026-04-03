@@ -41,7 +41,7 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.CO2` | ppm | Concentration of carbon dioxide.
 | `NumberDeviceClass.CO` | ppb, ppm, µg/m³, mg/m³ | Concentration of carbon monoxide.
 | `NumberDeviceClass.CONDUCTIVITY` | S/cm, mS/cm, µS/cm | Conductivity
-| `NumberDeviceClass.CURRENT` | A, mA | Current
+| `NumberDeviceClass.CURRENT` | A, mA, µA | Current
 | `NumberDeviceClass.DATA_RATE` | bit/s, kbit/s, Mbit/s, Gbit/s, B/s, kB/s, MB/s, GB/s, KiB/s, MiB/s, GiB/s | Data rate
 | `NumberDeviceClass.DATA_SIZE` | bit, kbit, Mbit, Gbit, B, kB, MB, GB, TB, PB, EB, ZB, YB, KiB, MiB, GiB, TiB, PiB, EiB, ZiB, YiB | Data size
 | `NumberDeviceClass.DISTANCE` | km, m, cm, mm, mi, nmi, yd, in | Generic distance
