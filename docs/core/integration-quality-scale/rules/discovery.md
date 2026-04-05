@@ -13,13 +13,13 @@ import RelatedRules from './_includes/related_rules.jsx'
 A lot of devices have the ability to be discovered.
 This can happen using one of the following methods:
 - App (formerly known as add-ons)
-- Bluetooth
-- DHCP
-- HomeKit
-- mDNS
-- MQTT
-- SSDP
-- USB
+- [Bluetooth](docs/creating_integration_manifest#bluetooth)
+- [DHCP](docs/creating_integration_manifest#DHCP)
+- [HomeKit](docs/creating_integration_manifest#HomeKit)
+- [mDNS](docs/creating_integration_manifest#Zeroconf)
+- [MQTT](docs/creating_integration_manifest#MQTT)
+- [SSDP](docs/creating_integration_manifest#SSDP)
+- [USB](docs/creating_integration_manifest#USB)
 
 This is a great way to make it easier for users to find and set up devices, since they don't have to manually look up which integration to use and then enter the host.
 This greatly reduces the effort required to set up a device and thus improves the user experience.
@@ -115,6 +115,7 @@ class MyConfigFlow(ConfigFlow, domain=DOMAIN):
 To learn more information about config flows, checkout the [config flow documentation](/docs/config_entries_config_flow_handler).
 To learn more about discovery on network protocols, checkout the [Networking and discovery documentation](/docs/network_discovery).
 To learn more about discovery for bluetooth devices, checkout the [Bluetooth documentation](/docs/bluetooth).
+To learn more about specifying different discovery methods in your manifest checkout the [Integration Manifest Documentation](docs/creating_integration_manifest).
 
 ## Exceptions
 
