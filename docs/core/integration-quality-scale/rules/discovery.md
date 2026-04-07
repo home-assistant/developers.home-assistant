@@ -14,12 +14,12 @@ A lot of devices have the ability to be discovered.
 This can happen using one of the following methods:
 - App (formerly known as add-ons)
 - [Bluetooth](/docs/creating_integration_manifest#bluetooth)
-- [DHCP](/docs/creating_integration_manifest#DHCP)
-- [HomeKit](/docs/creating_integration_manifest#HomeKit)
-- [mDNS](/docs/creating_integration_manifest#Zeroconf)
-- [MQTT](/docs/creating_integration_manifest#MQTT)
-- [SSDP](/docs/creating_integration_manifest#SSDP)
-- [USB](/docs/creating_integration_manifest#USB)
+- [DHCP](/docs/creating_integration_manifest#dhcp)
+- [HomeKit](/docs/creating_integration_manifest#homekit)
+- [mDNS](/docs/creating_integration_manifest#zeroconf)
+- [MQTT](/docs/creating_integration_manifest#mqtt)
+- [SSDP](/docs/creating_integration_manifest#ssdp)
+- [USB](/docs/creating_integration_manifest#usb)
 
 This is a great way to make it easier for users to find and set up devices, since they don't have to manually look up which integration to use and then enter the host.
 This greatly reduces the effort required to set up a device and thus improves the user experience.
