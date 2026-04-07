@@ -9,14 +9,14 @@ As these changes are generally more complex than a feature to an existing integr
 
 ## Is the integration suitable to be included?
 
-As Home Assistant is a popular project we receive a lot of contributions, we want to make sure we spend our time on integrations that users can benefit from today and in the future.
-This means that we have some requirements for an integration to be eligible included in Home Assistant Core:
+As Home Assistant is a popular project we receive a lot of contributions. We want to make sure we spend our time reviewing and maintaining integrations on the ones that users can benefit from today and in the future.
+This means that we have some requirements for an integration to be eligible for inclusion in Home Assistant Core:
 - The product or service that the integration connects to should be available for purchase and use by Home Assistant users. This means we don't accept integrations for products that are not yet released or services that are in private beta, like Kickstarter projects or similar.
 - The product or service should be established. We want to avoid companies using Home Assistant as a marketing platform for their new products, so we require that the product or service has been widely available and has a user base.
 
 ## What requirements does the integration need to meet?
 
-A new integration should meet a set of requirements to ensure that it matches the expected quality for an integration.
+A new integration, that is eligible, should meet a set of requirements to be accepted.
 
 ### Integration quality scale
 
@@ -34,7 +34,7 @@ It's not required to reach a higher level right away, as that will likely only i
 
 An important [integration quality scale rule] to highlight is the requirement to use a Python library for communication with the product or service.
 The Home Assistant codebase would be massive if we had to implement the communication with the product or service in the integration itself, and it would also make it harder to maintain and test the integration.
-By using a Python library, we can keep the integration code focused on the Home Assistant specific parts, such as the entity definitions, and delegate the communication with the product or service to the library.
+By using a Python library, we can keep the integration code focused on the Home Assistant-specific parts, such as the entity definitions, and delegate the communication with the product or service to the library.
 This also allows the library to be reused by other projects and integrations, which improves the overall ecosystem.
 
 To see the requirements for the Python library, check the [dependency transparency] rule in the integration quality scale.
@@ -73,7 +73,7 @@ To read more on how to scope a pull request, check our guide on [creating the pe
 
 Please make sure you have a proper development environment set up and that you have run the code checks locally before opening a pull request.
 If the CI checks fail because of your changes, we can't review and merge your pull request until the checks pass.
-Keep in mind that some tests can be flaky, so if you are sure the failures are unrelated to your code please wait for a maintainer instead of trying to re-run the CI every time it fails.
+Keep in mind that some tests can be flaky, so if you are sure the failures are unrelated to your code, please wait for a maintainer instead of trying to re-run the CI every time it fails.
 
 :::info
 Our pre-commit checks can update files outside the directory of your integration. These changes should be included in your pull request.
