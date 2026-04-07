@@ -65,6 +65,10 @@ For a new integration this means:
   - Reauthentication and reconfiguration flows
 - Ideally keep more complex integration quality scale rules (such as `dynamic-devices` and `stale-devices`) out.
 
+To read more on how to scope a pull request, check our guide on [creating the perfect PR].
+
+[creating the perfect PR]: /docs/review-process.md#creating-the-perfect-pr
+
 ### Make sure the code checks pass
 
 Please make sure you have a proper development environment set up and that you have run the code checks locally before opening a pull request.
