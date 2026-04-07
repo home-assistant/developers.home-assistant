@@ -162,6 +162,7 @@ module.exports = {
             "core/bluetooth/api",
           ],
         },
+        "core/integration/contributing_to_core",
       ],
     },
     {
