@@ -129,24 +129,6 @@ After the opening backticks, you can specify the language used for syntax highli
 
 For all supported languages, see the [list of Rouge lexers](https://github.com/rouge-ruby/rouge/wiki/list-of-supported-languages-and-lexers).
 
-### Examples of Jinja2 templates
-
-All examples containing Jinja2 templates should be wrapped _outside_ of the code markdown with the `{% raw %}` tag.
-
-For example:
-
-````markdown
-{% raw %}
-
-```yaml
-type: markdown
-content: |
-  Hello, {{user}}
-```
-
-{% endraw %}
-````
-
 ## Tables
 
 - Avoid the use of tables. Use lists instead. If you cannot avoid a table, minimize the number of columns and keep the amount of text as short as possible:
