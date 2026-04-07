@@ -10,7 +10,7 @@ These models are describing objects that are getting returned from the superviso
 | ---------------- | -------------- | ----------------------------------------------------- |
 | name             | string         | The name of the app                                |
 | slug             | string         | The slug for the app                               |
-| advanced         | boolean        | `true` if it should only be visible to advanced users |
+| advanced         | boolean        | Deprecated and ignored; always `false` as of Supervisor 2026.03.0 |
 | description      | string         | The description of the app                         |
 | repository       | string         | The repository the app came from                   |
 | version          | string or null | The installed version of the app                   |
