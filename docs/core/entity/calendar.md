@@ -113,15 +113,15 @@ The subscription immediately returns the current events for the requested time r
         "start": "2025-01-15T09:00:00+00:00",
         "end": "2025-01-15T10:00:00+00:00",
         "summary": "Team meeting",
-        "description": null,
-        "location": null
+        "description": "Weekly sync",
+        "location": "Room 1"
       }
     ]
   }
 }
 ```
 
-If an error occurs while fetching events, `events` will be `null`.
+Each event in the list contains only the fields that have a value. The possible fields are `start`, `end`, `summary`, `description`, and `location`. If an error occurs while fetching events, `events` will be `null`.
 
 ### Create events
 
