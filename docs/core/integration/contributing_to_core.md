@@ -39,7 +39,7 @@ This also allows the library to be reused by other projects and integrations, wh
 
 To see the requirements for the Python library, check the [dependency transparency] rule in the integration quality scale.
 
-:::info
+:::tip
 For more information on how to create a Python library, checkout our guide on [creating a Python library].
 :::
 
