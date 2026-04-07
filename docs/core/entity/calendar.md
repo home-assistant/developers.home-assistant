@@ -84,7 +84,11 @@ class MyCalendar(CalendarEntity):
 
 The frontend and other consumers can subscribe to real-time calendar event updates via the `calendar/event/subscribe` WebSocket API. This subscription is handled entirely by the `CalendarEntity` base class — integration developers do not need to implement anything beyond the existing `async_get_events` method.
 
-When a calendar entity's state changes (e.g., an event starts, ends, or is created/updated/deleted), the base class automatically fetches the latest events for the subscribed time range and pushes them to all active subscribers. Updates are debounced to avoid excessive calls to `async_get_events`.
+When a calendar entity's state changes (e.g., an event starts or ends), the base class automatically fetches the latest events for the subscribed time range and pushes them to all active subscribers. Updates are debounced to avoid excessive calls to `async_get_events`.
+
+#### Notifying subscribers
+
+State is not automatically updated when creating, updating, or deleting calendar events. If an integration needs to notify subscribers outside of a state change (e.g., after a CRUD operation), it should call `CalendarEntity.async_update_event_listeners` to push updated events to all active subscribers.
 
 #### WebSocket API
 
@@ -99,7 +103,7 @@ When a calendar entity's state changes (e.g., an event starts, ends, or is creat
 }
 ```
 
-The subscription immediately returns the current events for the requested time range, then pushes updates whenever the entity state changes:
+The subscription immediately returns the current events for the requested time range, then pushes updates whenever the entity state changes. The example below shows only the inner `event` payload; the actual WebSocket frame also includes `id` and `type` fields:
 
 ```json
 {
