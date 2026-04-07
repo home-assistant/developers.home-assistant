@@ -136,6 +136,7 @@ module.exports = {
       label: "Building Integrations",
       items: [
         "creating_component_index",
+        "core/integration/contributing_to_core",
         "creating_integration_file_structure",
         "creating_integration_tests_file_structure",
         "creating_integration_manifest",
@@ -162,7 +163,6 @@ module.exports = {
             "core/bluetooth/api",
           ],
         },
-        "core/integration/contributing_to_core",
       ],
     },
     {
