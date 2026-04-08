@@ -149,8 +149,14 @@ module.exports = {
             "core/integration/yaml_configuration",
           ],
         },
-        "core/integration_diagnostics",
-        "core/integration_system_health",
+        {
+          type: "category",
+          label: "Debugging an integration",
+          items: [
+            "core/integration/diagnostics",
+            "core/integration/system_health",
+          ],
+        },
         "dev_101_services",
         "creating_platform_index",
         "creating_component_generic_discovery",
