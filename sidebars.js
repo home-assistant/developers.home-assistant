@@ -144,7 +144,7 @@ module.exports = {
         "config_entries_options_flow_handler",
         {
           type: "category",
-          label: "Debugging integrations",
+          label: "Debugging an integration",
           items: [
             "core/integration/diagnostics",
             "core/integration/system_health",
