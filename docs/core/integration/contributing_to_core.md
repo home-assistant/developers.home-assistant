@@ -14,7 +14,7 @@ This means that we have some requirements for an integration to be eligible for 
 - The product or service that the integration connects to should be available for purchase and use by Home Assistant users. This means we don't accept integrations for products that are not yet released or services that are in private beta, like Kickstarter projects or similar.
 - The product or service should be established. We want to avoid companies using Home Assistant as a marketing platform for their new products, so we require that the product or service has been widely available and has a user base.
 
-If your integration does not meet these requirements, feel free to publish it as a custom integration on GitHub and HACS.
+If your integration does not meet these requirements, you can instead publish it as a custom integration on GitHub and HACS.
 
 ## What requirements does the integration need to meet?
 
