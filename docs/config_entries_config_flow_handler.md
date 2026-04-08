@@ -228,7 +228,7 @@ To get started, run `python3 -m script.scaffold config_flow_oauth2` and follow t
 }
 ```
 
-When the translations are merged into Home Assistant, they will be automatically uploaded to [Lokalise](https://lokalise.co/) where the translation team will help to translate them in other languages. While developing locally, you will need to run `python3 -m script.translations develop` to see changes made to `strings.json` [More info on translating Home Assistant.](translations.md)
+When the translations are merged into Home Assistant, they will be automatically uploaded to [Lokalise](https://lokalise.com/) where the translation team will help to translate them in other languages. While developing locally, you will need to run `python3 -m script.translations develop` to see changes made to `strings.json` [More info on translating Home Assistant.](translations.md)
 
 ## Config entry migration
 
