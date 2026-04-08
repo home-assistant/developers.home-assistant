@@ -142,6 +142,14 @@ module.exports = {
         "creating_integration_manifest",
         "config_entries_config_flow_handler",
         "config_entries_options_flow_handler",
+        {
+          type: "category",
+          label: "Debugging integrations",
+          items: [
+            "core/integration/diagnostics",
+            "core/integration/system_health",
+          ],
+        },
         "core/integration_diagnostics",
         "core/integration_system_health",
         "configuration_yaml_index",
