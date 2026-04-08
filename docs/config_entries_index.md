@@ -2,9 +2,9 @@
 title: Config entries
 ---
 
-Config entries are configuration data that are persistently stored by Home Assistant. A config entry is created by a user via the UI. The UI flow is powered by a [config flow handler](config_entries_config_flow_handler.md) as defined by the integration.
+Config entries are configuration data that are persistently stored by Home Assistant. A config entry is created by a user via the UI. The UI flow is powered by a [config flow handler](core/integration/config_flow.md) as defined by the integration.
 
-Once created, config entries can be removed by the user. Optionally, config entries can be changed by the user via a [reconfigure step](config_entries_config_flow_handler.md#reconfigure) or [options flow handler](core/integration/options_flow.md), also defined by the integration.
+Once created, config entries can be removed by the user. Optionally, config entries can be changed by the user via a [reconfigure step](core/integration/config_flow.md#reconfigure) or [options flow handler](core/integration/options_flow.md), also defined by the integration.
 
 ### Config subentries
 
@@ -74,7 +74,7 @@ async def async_remove_entry(hass, entry) -> None:
 
 ## Migrating config entries to a new version
 
-If the config entry version is changed, `async_migrate_entry` must be implemented to support the migration of old entries. This is documented in detail in the [config flow documentation](/config_entries_config_flow_handler.md#config-entry-migration)
+If the config entry version is changed, `async_migrate_entry` must be implemented to support the migration of old entries. This is documented in detail in the [config flow documentation](/core/integration/config_flow.md#config-entry-migration)
 
 ```python
 async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) -> bool:
@@ -83,7 +83,7 @@ async def async_migrate_entry(hass: HomeAssistant, config_entry: ConfigEntry) ->
 
 ## Modifying a config entry
 
-A `ConfigEntry` object, including the data and options, must never be mutated directly by integrations, instead integrations must call `async_update_entry`, the use of which is illustrated in the [config flow documentation](/config_entries_config_flow_handler.md#config-entry-migration).
+A `ConfigEntry` object, including the data and options, must never be mutated directly by integrations, instead integrations must call `async_update_entry`, the use of which is illustrated in the [config flow documentation](/core/integration/config_flow.md#config-entry-migration).
 
 ## Subscribing to config entry state changes
 

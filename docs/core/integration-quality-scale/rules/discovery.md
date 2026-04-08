@@ -112,7 +112,7 @@ class MyConfigFlow(ConfigFlow, domain=DOMAIN):
 
 ## Additional resources
 
-To learn more information about config flows, checkout the [config flow documentation](/docs/config_entries_config_flow_handler).
+To learn more information about config flows, checkout the [config flow documentation](/docs/core/integration/config_flow).
 To learn more about discovery on network protocols, checkout the [Networking and discovery documentation](/docs/network_discovery).
 To learn more about discovery for bluetooth devices, checkout the [Bluetooth documentation](/docs/bluetooth).
 To learn more about specifying different discovery methods in your manifest checkout the [Integration Manifest Documentation](/docs/creating_integration_manifest).
