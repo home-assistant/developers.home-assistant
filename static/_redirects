@@ -76,6 +76,8 @@
 /docs/significant_change_index /docs/core/platform/significant_change
 /docs/supervisor/developing /docs/supervisor/development
 /docs/core/conversation/custom_agent /docs/core/entity/conversation
+/docs/core/integration_diagnostics /docs/core/integration/diagnostics
+/docs/core/integration_system_health /docs/core/integration/system_health
 
 # Tidying moved pages
 /docs/creating_platform_example_sensor https://github.com/home-assistant/example-custom-config/tree/master/custom_components/example_sensor
