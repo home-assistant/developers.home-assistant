@@ -1,7 +1,7 @@
 ---
 title: "Logging"
 ---
-A good way to find out what is going on in the integration is having the integration log what it is doing.
+A good way to find out what is going on in an integration is to have it log what it is doing.
 
 :::warning
 Please make sure not to spam the logs, as that will make it harder to find the relevant information and may cause performance issues.
