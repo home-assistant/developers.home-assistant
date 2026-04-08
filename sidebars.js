@@ -147,8 +147,8 @@ module.exports = {
           label: "Debugging an integration",
           items: [
             "core/integration/diagnostics",
-            "core/integration/system_health",
             "core/integration/logging",
+            "core/integration/system_health",
           ],
         },
         "configuration_yaml_index",
