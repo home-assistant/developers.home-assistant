@@ -150,8 +150,6 @@ module.exports = {
             "core/integration/system_health",
           ],
         },
-        "core/integration_diagnostics",
-        "core/integration_system_health",
         "configuration_yaml_index",
         "dev_101_services",
         "creating_platform_index",
