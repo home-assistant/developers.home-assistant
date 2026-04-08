@@ -148,6 +148,7 @@ module.exports = {
           items: [
             "core/integration/diagnostics",
             "core/integration/system_health",
+            "core/integration/logging",
           ],
         },
         "configuration_yaml_index",
