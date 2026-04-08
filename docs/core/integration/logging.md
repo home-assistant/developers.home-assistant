@@ -27,4 +27,9 @@ So when debug logging is enabled for the following integration, it will set the 
 Make sure to not log sensitive information, as debug logs may be shared with others when troubleshooting issues.
 :::
 
+To enable debug logs for a specific module, users can either add `logger` configuration as described in [the logger documentation].
+Or they can use the [`logger.set_level`] service to set the log level for the module to debug.
+
 [user documentation]: https://www.home-assistant.io/docs/configuration/troubleshooting/#enabling-debug-logging
+[`logger.set_level`]: https://www.home-assistant.io/integrations/logger/#action-set-level
+[the logger documentation]: https://www.home-assistant.io/integrations/logger/
