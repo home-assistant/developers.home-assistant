@@ -59,4 +59,4 @@ Custom integrations that wish to drop references to `OptionsFlowWithConfigEntry`
 - if you are updating/mutating the options values inside a single step, then it may be necessary to first copy the options (`options = deepcopy(dict(self.config_entry.options))` (see [PR #129928](https://github.com/home-assistant/core/pull/129928))
 - if you are updating/mutating the options values through multiple step, then it may be necessary to copy the options inside the class initialisation (`self.options = deepcopy(dict(config_entry.options))` (see [PR #129890]( https://github.com/home-assistant/core/pull/129890))
 
-More details can be found in the [options flow](/docs/config_entries_options_flow_handler) documentation.
+More details can be found in the [options flow](/docs/core/integration/options_flow) documentation.

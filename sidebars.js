@@ -140,8 +140,15 @@ module.exports = {
         "creating_integration_file_structure",
         "creating_integration_tests_file_structure",
         "creating_integration_manifest",
-        "config_entries_config_flow_handler",
-        "config_entries_options_flow_handler",
+        {
+          type: "category",
+          label: "Configuring your integration",
+          items: [
+            "core/integration/config_flow",
+            "core/integration/options_flow",
+            "core/integration/yaml_configuration",
+          ],
+        },
         {
           type: "category",
           label: "Debugging an integration",
@@ -150,7 +157,6 @@ module.exports = {
             "core/integration/system_health",
           ],
         },
-        "configuration_yaml_index",
         "dev_101_services",
         "creating_platform_index",
         "creating_component_generic_discovery",
