@@ -48,6 +48,8 @@ Use [sentence-style capitalization](https://learn.microsoft.com/en-us/style-guid
 
 Don't skip heading levels.
 
+Only heading levels 2 and 3 are shown in the right table of contents.
+
 ## Emphasis
 
 To emphasize a word, use `_italics_`. Don't use `*asterisks*`.
