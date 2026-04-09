@@ -4,7 +4,7 @@ title: "OAuth 2.0 support"
 
 Integrations that connect to cloud services often need to authenticate users via OAuth 2.0. Home Assistant provides a set of helpers in `homeassistant.helpers.config_entry_oauth2_flow` that handle the OAuth 2.0 flow, token storage, and token refresh lifecycle — so integrations don't have to implement this themselves.
 
-This page covers how to implement OAuth 2.0 in an integration, how to handle errors and best practices.
+This page covers how to implement OAuth 2.0 in an integration, how to handle errors and best practices. If you are building a third-party library that will be used by an integration, see the [library authentication](/docs/api_lib_auth#oauth2) guide instead.
 
 Before reading this page, make sure you are familiar with [Application credentials](/docs/core/platform/application_credentials) and [Config entries](/docs/config_entries_index).
 
@@ -17,7 +17,7 @@ Home Assistant's OAuth 2.0 helper provides:
 - A session helper (`OAuth2Session`) for making authenticated API requests.
 - Error handling via a set of semantic exceptions
 
-The helper supports two credential approaches, both of which require `application_credentials` support.
+The helper supports two credential approaches, both of which require `application_credentials` support: application provided credentials (where the integration ships its own client ID and  client secret) and user-provided credentials (where the user supplies their own OAuth 2.0 client credentials via the UI).
 
 Use the built-in `config_entry_oauth2_flow` helper for Authorization Code flows. In the helper there are existing template flows that inherit from `AbstractOAuth2FlowHandler`. Only build own child flows of `AbstractOAuth2FlowHandler` if it's needed.
 
@@ -27,7 +27,6 @@ Use the built-in `config_entry_oauth2_flow` helper for Authorization Code flows.
 | ---------------------------- | ----------------------------------- | ------------------------------- |
 | Authorization code           | `LocalOAuth2Implementation`         | Standard browser-based flow     |
 | Authorization code with PKCE | `LocalOAuth2ImplementationWithPkce` | When the provider requires PKCE |
-| Custom                       | `AbstractOAuth2Implementation`      | Any non-standard flow           |
 
 ## Implementing the config flow
 
@@ -64,19 +63,39 @@ The `extra_authorize_data` property is where you define the OAuth scopes and any
 Home Assistant will refresh the access token when `async_ensure_token_valid` is called. However, if a token becomes permanently invalid (for example, if the user revokes access from the provider's website), Home Assistant will trigger a reauthentication flow. To support this, add `async_step_reauth` in your config flow:
 
 ```python
-async def async_step_reauth(
-    self, entry_data: Mapping[str, Any]
-) -> ConfigFlowResult:
-    """Handle reauthentication."""
-    return await self.async_step_reauth_confirm()
+class OAuth2FlowHandler(
+    config_entry_oauth2_flow.AbstractOAuth2FlowHandler, domain=DOMAIN
+):
+    """Config flow to handle OAuth2 authentication."""
 
-async def async_step_reauth_confirm(
-    self, user_input: dict[str, Any] | None = None
-) -> ConfigFlowResult:
-    """Confirm reauthentication."""
-    if user_input is None:
-        return self.async_show_form(step_id="reauth_confirm")
-    return await self.async_step_user()
+    async def async_step_reauth(
+        self, entry_data: Mapping[str, Any]
+    ) -> ConfigFlowResult:
+        """Perform reauth upon an API authentication error."""
+        return await self.async_step_reauth_confirm()
+
+    async def async_step_reauth_confirm(
+        self, user_input: dict[str, Any] | None = None
+    ) -> ConfigFlowResult:
+        """Dialog that informs the user that reauth is required."""
+        if user_input is None:
+            return self.async_show_form(
+                step_id="reauth_confirm",
+                data_schema=vol.Schema({}),
+            )
+        return await self.async_step_user()
+
+    async def async_oauth_create_entry(self, data: dict) -> dict:
+        """Create an oauth config entry or update existing entry for reauth."""
+        self.async_set_unique_id(user_id)
+        if self.source == SOURCE_REAUTH:
+            self._abort_if_unique_id_mismatch()
+            return self.async_update_reload_and_abort(
+                self._get_reauth_entry(),
+                data_updates=data,
+            )
+        self._abort_if_unique_id_configured()
+        return await super().async_oauth_create_entry(data)
 ```
 
 ## Making authenticated API requests
@@ -87,10 +106,14 @@ Use `OAuth2Session` to make authenticated requests. It automatically injects a v
 from homeassistant.helpers import config_entry_oauth2_flow
 
 session = config_entry_oauth2_flow.OAuth2Session(hass, entry, implementation)
+```
 
-# The session handles token refresh, inside the library, when `async_ensure_token_valid` is called. This must be called before every request.
+In the library, use the session to make requests. The library calls `async_ensure_token_valid()` before each request to guarantee a fresh token, then reads the token from `session.token`:
+
+```python
+# Inside the library; called before every API request
 await session.async_ensure_token_valid()
-response = await session.async_request("GET", "https://api.example.com/data")
+access_token = session.token["access_token"]
 ```
 
 
@@ -100,7 +123,7 @@ See [Error handling](#error-handling) below for how to handle errors during toke
 
 ## Error handling
 
-When a token request or refresh fails, the OAuth 2.0 helper raises one of three exceptions defined in `homeassistant.helpers.config_entry_oauth2_flow`:
+When a token request or refresh fails, the OAuth 2.0 helper raises one of three exceptions defined in `homeassistant.exceptions`:
 
 | Exception                          | HTTP status          | Meaning                                                                          |
 | ---------------------------------- | -------------------- | -------------------------------------------------------------------------------- |
@@ -119,7 +142,16 @@ If your integration uses the [Data Update Coordinator](/docs/integration_fetchin
 
 ### Integrations without a Data Update Coordinator
 
-If your integration does **not** use a coordinator, you must handle the exceptions explicitly wherever you do a token request, eg. call `async_ensure_token_valid()`:
+If your integration does **not** use a coordinator, you must handle the exceptions explicitly wherever you do a token request, e.g. call `async_ensure_token_valid()`. The coordinator automatically maps the new exceptions to the correct behavior:
+
+- `OAuth2TokenRequestReauthError` raises ConfigEntryAuthFailed, triggering a reauthentication flow
+- `OAuth2TokenRequestTransientError` is treated as UpdateFailed, triggering the coordinator's retry mechanism
+
+Make sure to do a first coordinator refresh during config entry setup, to ensure the access token is refreshed before entities are set up:
+
+```python
+await coordinator.async_config_entry_first_refresh()
+```
 
 ```python
 from homeassistant.helpers.config_entry_oauth2_flow import (
