@@ -48,7 +48,7 @@ Use [sentence-style capitalization](https://learn.microsoft.com/en-us/style-guid
 
 Don't skip heading levels.
 
-Only heading levels 2 and 3 are shown in the right table of contents.
+Only heading levels 2 and 3 are shown in the right-hand table of contents.
 
 ## Emphasis
 
