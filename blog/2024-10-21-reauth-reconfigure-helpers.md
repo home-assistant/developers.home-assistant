@@ -18,4 +18,4 @@ New helper methods have been added to the ConfigFlow to facilitate management of
 - `self.async_update_reload_and_abort` has a new argument `data_updates` to merge the data updates with the pre-existing data
   - this is preferred over the `data` argument, as it reduces the risk of data loss if the schema is updated
 
-More details can be found in the [reconfigure](/docs/config_entries_config_flow_handler#reconfigure) and [reauthentication](/docs/config_entries_config_flow_handler#reauthentication) documentation.
+More details can be found in the [reconfigure](/docs/core/integration/config_flow#reconfigure) and [reauthentication](/docs/core/integration/config_flow#reauthentication) documentation.

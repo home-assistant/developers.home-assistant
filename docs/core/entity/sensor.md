@@ -42,7 +42,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.CO2` | ppm | Concentration of carbon dioxide.
 | `SensorDeviceClass.CO` | ppb, ppm, µg/m³, mg/m³ | Concentration of carbon monoxide.
 | `SensorDeviceClass.CONDUCTIVITY` | S/cm, mS/cm, µS/cm | Conductivity
-| `SensorDeviceClass.CURRENT` | A, mA | Current
+| `SensorDeviceClass.CURRENT` | A, mA, µA | Current
 | `SensorDeviceClass.DATA_RATE` | bit/s, kbit/s, Mbit/s, Gbit/s, B/s, kB/s, MB/s, GB/s, KiB/s, MiB/s, GiB/s | Data rate
 | `SensorDeviceClass.DATA_SIZE` | bit, kbit, Mbit, Gbit, B, kB, MB, GB, TB, PB, EB, ZB, YB, KiB, MiB, GiB, TiB, PiB, EiB, ZiB, YiB | Data size
 | `SensorDeviceClass.DATE` | | Date. Requires `native_value` to be a Python `datetime.date` object, or `None`.
@@ -52,7 +52,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.ENERGY_DISTANCE` | kWh/100km, Wh/km, mi/kWh, km/kWh | Energy per distance, this device class should be used to represent energy consumption by distance, for example the amount of electric energy consumed by an electric car.
 | `SensorDeviceClass.ENERGY_STORAGE` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal | Stored energy, this device class should be used for sensors representing stored energy, for example the amount of electric energy currently stored in a battery or the capacity of a battery. Represents _power_ over _time_. Not to be confused with `power`.
 | `SensorDeviceClass.ENUM` | | The sensor has a limited set of (non-numeric) states. The `options` property must be set to a list of possible states when using this device class.
-| `SensorDeviceClass.FREQUENCY` | Hz, kHz, MHz, GHz | Frequency
+| `SensorDeviceClass.FREQUENCY` | mHz, Hz, kHz, MHz, GHz | Frequency
 | `SensorDeviceClass.GAS` | L, m³, ft³, CCF, MCF | Volume of gas. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
 | `SensorDeviceClass.HUMIDITY` | % | Relative humidity
 | `SensorDeviceClass.ILLUMINANCE` | lx | Light level
@@ -226,3 +226,33 @@ Example of state class `SensorStateClass.TOTAL_INCREASING` where the sensor does
 |   2021-08-01T14:00:00  |  1010  |  10
 |   2021-08-01T15:00:00  |     5  |  15
 |   2021-08-01T16:00:00  |    10  |  20
+
+### Handling migration from unsupported to supported units of measurement
+
+Integrations may have sensors which have their own custom units of measurement, i.e. they don't use Home Assistant constants to set the units.  
+When migrating such a sensor to a unit supported by Home Assistant's unit system, the old custom unit must match the value of the Home Assistant constant exactly or Home Assistant will treat this as a unit change.
+
+For example, the integration may have set the unit of an energy sensor to `KWh` which differs from the value of `UnitOfEnergy.KILO_WATT_HOUR` (kWh).
+
+During compilation of long-term statistics this unit change will be detected. Without knowledge of how old and new unit relate to each other,
+collection of statistics is suppressed and a warning about unstable units is generated.
+
+To facilitate these migration cases, integrations can provide a custom unit mapping to declare any non-supported unit
+equivalent to a supported unit. This is done by creating a recorder platform `recorder.py` in your integration's directory
+and implementing the function `async_custom_equivalent_units` to return a mapping for any relevant `entity_id` to a dictionary of equivalent units.
+This mapping will be collected during statistics compilation and enables integrations a smooth transition into Home Assistant's unit system.
+
+Example implementation:
+```python
+@callback
+def async_custom_equivalent_units(hass: HomeAssistant) -> dict[str, dict[str | None, str]]:
+    """Return custom equivalent units per entity id."""
+    return {
+        "sensor.example_sensor_1": {
+            "b/s": UnitOfDataRate.BYTES_PER_SECOND, # B/s
+        },
+        "sensor.example_sensor_2": {
+            "KWh": UnitOfEnergy.KILO_WATT_HOUR, # kWh
+        },
+    }
+```

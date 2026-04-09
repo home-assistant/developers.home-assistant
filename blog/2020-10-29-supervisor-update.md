@@ -5,6 +5,10 @@ authorTwitter: ludeeus
 title: "Upcoming changes to add-ons"
 ---
 
+:::note
+The builder action described in this post (`home-assistant/builder@master`) is a legacy workflow. It has since been replaced by dedicated composite actions. See the [builder migration post](/blog/2026/04/02/builder-migration) for the current recommended approach.
+:::
+
 ## GitHub Action
 
 You can now use our [builder][marketplace] as a [GitHub action][github_action]! :tada:

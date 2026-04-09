@@ -106,7 +106,7 @@ If a configuration entry already exists for the same host, the flow will abort a
 
 ## Additional resources
 
-More information about config flows can be found in the [config flow documentation](/docs/config_entries_config_flow_handler).
+More information about config flows can be found in the [config flow documentation](/docs/core/integration/config_flow).
 More information about the requirements for a unique identifier can be found in the [documentation](/docs/entity_registry_index#unique-id-requirements).
 
 ## Exceptions

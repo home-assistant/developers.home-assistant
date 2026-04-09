@@ -54,9 +54,6 @@ init: false
 arch:
   - aarch64
   - amd64
-  - armhf
-  - armv7
-  - i386
 ```
 
 ### The `run.sh` file
@@ -148,9 +145,6 @@ init: false
 arch:
   - aarch64
   - amd64
-  - armhf
-  - armv7
-  - i386
 startup: services
 ports:
   8000/tcp: 8000

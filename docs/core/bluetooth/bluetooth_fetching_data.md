@@ -12,7 +12,7 @@ If the device's primary method to notify of updates is Bluetooth advertisements 
 If the device's primary method to notify of updates is Bluetooth advertisements and its primary function is **not** a sensor, binary sensor, or firing events:
 
 - If all entities are updated via Bluetooth advertisements: [`PassiveBluetoothCoordinator`](#passivebluetoothcoordinator)
-- If active connections are needed: [`ActiveBluetoothCoordinator`](#activebluetoothcoordinator)
+- If active connections are needed: [`ActiveBluetoothDataUpdateCoordinator`](#activebluetoothcoordinator)
 
 If your device only communicates with an active Bluetooth connection and does not use Bluetooth advertisements:
 
@@ -166,6 +166,7 @@ is the same as the `PassiveBluetoothProcessorCoordinator`.
 Example `async_setup_entry` for an integration `__init__.py` using an `ActiveBluetoothProcessorCoordinator`:
 
 ```python
+import logging
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 from homeassistant.core import CoreState, HomeAssistant
@@ -176,6 +177,7 @@ from homeassistant.components.bluetooth import (
     BluetoothServiceInfoBleak,
     async_ble_device_from_address,
 )
+from .const import DOMAIN
 from homeassistant.const import Platform
 
 from homeassistant.components.bluetooth.active_update_processor import (
@@ -246,8 +248,12 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 ## BluetoothCoordinator
 
-The `ActiveBluetoothCoordinator` and `PassiveBluetoothCoordinator` coordinators function similar
+The `ActiveBluetoothDataUpdateCoordinator` and `PassiveBluetoothCoordinator` coordinators function similar
 to `DataUpdateCoordinators` except they are driven by incoming advertisement data instead of polling.
+
+:::note
+The `_async_handle_unavailable` callback relies on the Bluetooth stack detecting that the device has stopped advertising. On macOS, CoreBluetooth caches advertisement data and may not surface device disappearance to the application layer, so `_async_handle_unavailable` may never fire even after the device has stopped broadcasting.
+:::
 
 ### PassiveBluetoothCoordinator
 
@@ -308,7 +314,8 @@ class ExamplePassiveBluetoothDataUpdateCoordinator(
 
 ```
 
-### ActiveBluetoothCoordinator
+<a id="activebluetoothcoordinator"></a>
+### ActiveBluetoothDataUpdateCoordinator
 
 Below is an example of an `ActiveBluetoothDataUpdateCoordinator`. Incoming data is received via `_async_handle_bluetooth_event` and processed by the integration's library.
 
