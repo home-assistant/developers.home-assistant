@@ -385,7 +385,7 @@ Don't overuse them because they can visually overload the documentation.
 
 ```liquid
 {% tip %}
-You can use a tip to feature a recommendation.
+Use a tip to feature a recommendation.
 {% endtip %}
 ```
 
@@ -393,7 +393,7 @@ You can use a tip to feature a recommendation.
 
 ```liquid
 {% note %}
-You can use a note to highlight a section.
+Use a note to highlight a section.
 {% endnote %}
 ```
 
@@ -401,6 +401,22 @@ You can use a note to highlight a section.
 
 ```liquid
 {% important %}
-You can use "important" to highlight a section that you feel is very important.
+Use "important" to highlight a section that you feel is very important.
 {% endimportant %}
+```
+
+#### Caution
+
+```liquid
+{% caution %}
+Use "caution" to advise against actions that may cause data loss, unintended behavior, or other consequences that are difficult to reverse.
+{% endcaution %}
+```
+
+#### Warning
+
+```liquid
+{% warning %}
+Use "warning" to alert users to risks that could compromise the security or integrity of their system, or cause physical harm.
+{% endwarning %}
 ```
