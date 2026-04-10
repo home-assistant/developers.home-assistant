@@ -417,6 +417,6 @@ Use "caution" to advise against actions that may cause data loss, unintended beh
 
 ```liquid
 {% warning %}
-Use "warning" to alert users to risks that could compromise the security or integrity of their system, or cause physical harm.
+Use a warning to alert users to risks that could compromise the security or integrity of their system, or cause physical harm.
 {% endwarning %}
 ```
