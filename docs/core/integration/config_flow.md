@@ -532,7 +532,7 @@ class ExampleFlow(ConfigFlow):
 
 The `async_on_create_entry` provides an option to modify the final `ConfigFlowResult` after the config entry has been created and the flow finalizes.
 
-As subentry flows and option flows are dependent on that the main config entry exist before they can be started, it is suitable to use for this purpose as provided in the following example:
+As subentry flows and option flows are dependent on that the main config entry exist before they can be started, these flow types can only be used with the `async_on_create_entry()` method in your config flow:
 
 ```python
 from homeassistant.config_entries import (
