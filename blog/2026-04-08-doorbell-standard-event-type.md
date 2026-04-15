@@ -39,22 +39,6 @@ class MyDoorbellEvent(EventEntity):
 
 Additional custom event types (e.g., `double_press`, `long_press`) are still allowed alongside the standard `ring` type.
 
-## Migrating from a non-standard event type
-
-If your integration currently uses a different event type for the doorbell press (e.g., `ding`), fire both during the deprecation period:
-
-```python
-_attr_event_types = [DoorbellEventType.RING, "ding"]
-
-@callback
-def _async_handle_event(self) -> None:
-    """Handle the doorbell press event."""
-    self._trigger_event(DoorbellEventType.RING)
-    self.async_write_ha_state()
-    self._trigger_event("ding")
-    self.async_write_ha_state()
-```
-
 Doorbell entities that do not include `DoorbellEventType.RING` will log a deprecation warning and will **stop working in Home Assistant 2027.4**.
 
 For full details, see the [event entity documentation](/docs/core/entity/event).
