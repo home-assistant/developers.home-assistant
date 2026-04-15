@@ -82,12 +82,12 @@ This file is ignored by Git and should stay local.
 
 After dependency installation finishes:
 
-1. Open `HomeAssistant.xcworkspace` in Xcode.
-2. Select the `App-Debug` scheme.
-3. Choose an iOS simulator or a development device.
-4. Build and run.
+1. In Xcode, open **HomeAssistant.xcworkspace**.
+2. In the scheme picker, select **App-Debug**.
+3. In the destination selector, choose an iOS simulator or development device.
+4. In Xcode, build and run.
 
-`App-Debug` is the normal entry point for local development.
+**App-Debug** is the normal entry point for local development.
 
 ## Useful local commands
 
@@ -97,7 +97,7 @@ Run repo quality checks:
 bundle exec fastlane lint
 ```
 
-Autocorrect supported issues:
+Run autocorrect on supported issues:
 
 ```bash
 bundle exec fastlane autocorrect

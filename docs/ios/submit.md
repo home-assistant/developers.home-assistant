@@ -1,5 +1,5 @@
 ---
-title: "iOS submit contribution"
+title: "Submit an iOS contribution"
 sidebar_label: "Submit contribution"
 ---
 

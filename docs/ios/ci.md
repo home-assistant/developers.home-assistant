@@ -41,12 +41,12 @@ CI runs `Tools/detect_unused_strings.py` and comments on pull requests when unus
 
 The `test` job runs on macOS and uses:
 
-- Xcode 26.2
+- the current CI Xcode version
 - Bundler for Ruby dependencies
 - CocoaPods for Apple platform dependencies
 - `bundle exec fastlane test`
 
-The default Fastlane test lane runs the `Tests-Unit` scheme in `HomeAssistant.xcworkspace` on an iPhone 17 simulator running iOS 26.2.
+The default Fastlane test lane runs the `Tests-Unit` scheme in `HomeAssistant.xcworkspace` on the simulator configured for CI. For the exact Xcode and simulator versions, refer to [`ci.yml`](https://github.com/home-assistant/iOS/blob/main/.github/workflows/ci.yml).
 
 CI also uploads:
 

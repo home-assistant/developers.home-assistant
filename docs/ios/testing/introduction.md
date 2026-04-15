@@ -15,7 +15,7 @@ The standard local command is:
 bundle exec fastlane test
 ```
 
-This runs the `Tests-Unit` scheme in `HomeAssistant.xcworkspace` on an iPhone 17 simulator running iOS 26.2.
+This runs the `Tests-Unit` scheme in `HomeAssistant.xcworkspace` on the simulator configured by the local Fastlane test lane.
 
 ## Test layout
 
@@ -58,9 +58,9 @@ swift test
 
 ## Running tests from Xcode
 
-If you prefer Xcode, open `HomeAssistant.xcworkspace` and run the relevant test scheme directly:
+In Xcode, run the relevant test scheme from **HomeAssistant.xcworkspace**:
 
-- `Tests-Unit` for the main automated suite
-- `Tests-UI` for UI automation coverage
+- **Tests-Unit** for the main automated suite
+- **Tests-UI** for UI automation coverage
 
 Using the same workspace and schemes as CI reduces surprises later.
