@@ -9,7 +9,7 @@ If you want to embed the Home Assistant frontend in an external app, you will wa
 To activate this API, load the frontend with `?external_auth=1` appended to the URL. If this is passed in, Home Assistant will expect either `window.externalAppV2` (Android V2, recommended), `window.externalApp` (Android V1, fallback) or `window.webkit.messageHandlers` (iOS) to be defined containing the methods described below.
 
 :::note
-V2 (`window.externalAppV2`) is only available when the WebView supports [`WebViewFeature.WEB_MESSAGE_LISTENER`][web-message-listener]. The app should fall back to V1 otherwise.
+V2 (`window.externalAppV2`) requires the WebView to support [`WebViewFeature.WEB_MESSAGE_LISTENER`][web-message-listener]. The app should fall back to V1 otherwise.
 :::
 
 ## Get access token
@@ -19,7 +19,7 @@ When the frontend loads, it will request an access token from the external authe
 The `force` boolean has been introduced in Home Assistant 0.104 and might not always be available.
 
 ```js
-// V2 (recommended)
+// Android V2 (recommended)
 window.externalAppV2.postMessage(
   JSON.stringify({
     type: "getExternalAuth",
@@ -27,7 +27,7 @@ window.externalAppV2.postMessage(
   })
 );
 
-// V1 (fallback)
+// Android V1 (fallback)
 window.externalApp.getExternalAuth(
   JSON.stringify({ callback: "externalAuthSetToken", force: true })
 );
@@ -59,7 +59,7 @@ The frontend will call this method when the page first loads and whenever it nee
 When the user presses the logout button on the profile page, the external app will have to [revoke the refresh token](auth_api.md#revoking-a-refresh-token), and log the user out.
 
 ```js
-// V2 (recommended)
+// Android V2 (recommended)
 window.externalAppV2.postMessage(
   JSON.stringify({
     type: "revokeExternalAuth",
@@ -67,7 +67,7 @@ window.externalAppV2.postMessage(
   })
 );
 
-// V1 (fallback)
+// Android V1 (fallback)
 window.externalApp.revokeExternalAuth(
   JSON.stringify({ callback: "externalAuthRevokeToken" })
 );

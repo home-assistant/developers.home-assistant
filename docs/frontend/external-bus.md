@@ -12,10 +12,8 @@ Messages are passed to the external app as serialized JSON objects. The function
 
 On Android, the implementation depends on the WebView features:
 
-**V2 (recommended)**: Uses [`WebViewFeature.WEB_MESSAGE_LISTENER`][web-message-listener] for secure origin validation. The frontend sends messages using:
+**V2 (recommended)**: Uses [`WebViewFeature.WEB_MESSAGE_LISTENER`][web-message-listener] for secure origin validation. The frontend sends messages using the injected V2 object:
 
-```ts
-postMessage(JSON.stringify({ type: "externalBus", payload: msg }))
 ```
 
 **V1 (fallback)**: Used when the WebView doesn't support [`WebViewFeature.WEB_MESSAGE_LISTENER`][web-message-listener]. Your app needs to define:
@@ -139,9 +137,9 @@ Expected response:
 - `canCommissionMatter`: Set to true if the app can commission Matter devices
 - `canImportThreadCredentials`: Set to true if the app can import Thread credentials
 - `canTransferThreadCredentialsToKeychain`: Set to true if the app can transfer Thread credentials to the keychain (Apple only)
-- `hasAssist`: Set to true if the app supports the Assist voice assistant interface
-- `hasBarCodeScanner`: Set to 1 if the app has barcode scanning capability, 0 otherwise
-- `canSetupImprov`: Set to true if the app can set up Improv-enabled devices
+- `hasAssist`: Set to true if the app has a native Assist interface, replacing the frontend implementation
+- `hasBarCodeScanner`: Set to `1` if the app has bar code scanning capability, `0` otherwise
+- `canSetupImprov`: Set to true if the app can set up Improv Wi-Fi devices
 - `appVersion`: The version string of the native app
 - `hasEntityAddTo`: Set to true if the app supports adding entities to platform-specific locations (e.g., homescreen widget)
 - `hasAssistSettings`: Set to true if the app has an Assist settings screen
@@ -241,7 +239,7 @@ Payload:
 
 ##### `assist/show`
 
-Show the Assist interface.
+Show the native Assist interface.
 
 Payload (optional):
 
@@ -269,7 +267,7 @@ Payload: None
 
 ##### `bar_code/scan`
 
-Start scanning a barcode.
+Start scanning a bar code.
 
 Payload:
 
@@ -283,17 +281,17 @@ Payload:
 
 - `title`: Title to show in the scanner UI (required)
 - `description`: Description text to show in the scanner UI (required)
-- `alternative_option_label`: Optional label for an alternative action button
+- `alternative_option_label`: Optional label for an alternative action button, if not included the alternative action button should be hidden
 
 ##### `bar_code/close`
 
-Close the barcode scanner.
+Close the bar code scanner.
 
 Payload: None
 
 ##### `bar_code/notify`
 
-Show a notification message in the barcode scanner.
+Show a notification message in the bar code scanner.
 
 Payload:
 
@@ -318,26 +316,28 @@ Payload (optional):
 }
 ```
 
-- `mac_extended_address`: The MAC extended address of the device
-- `extended_pan_id`: The extended PAN ID of the Thread network
+All payload properties describe the preferred Thread network which should be used when commissioning a Matter over Thread device.
+
+- `mac_extended_address`: The MAC extended address 
+- `extended_pan_id`: The extended PAN ID
 - `border_agent_id`: The border agent ID
-- `active_operational_dataset`: The active operational dataset
+- `active_operational_dataset`: The active operational dataset (TLV)
 
 ##### `thread/import_credentials`
 
-Import Thread network credentials.
+Import Thread network credentials from the device. Credentials should be sent using the [WebSocket API](/docs/api/websocket)
 
 Payload: None
 
 ##### `improv/scan`
 
-Start scanning for Improv-enabled devices.
+Start scanning for Improv Wi-Fi devices.
 
 Payload: None
 
 ##### `improv/configure_device`
 
-Configure a discovered Improv device.
+Configure a discovered Improv Wi-Fi device.
 
 Payload:
 
@@ -422,10 +422,10 @@ Payload:
 }
 ```
 
-- `mac_extended_address`: The MAC extended address of the device
+- `mac_extended_address`: The MAC extended address
 - `border_agent_id`: The border agent ID
-- `active_operational_dataset`: The active operational dataset
-- `extended_pan_id`: The extended PAN ID of the Thread network
+- `active_operational_dataset`: The active operational dataset (TLV)
+- `extended_pan_id`: The extended PAN ID
 
 ##### `focus_element`
 
@@ -498,7 +498,7 @@ Payload (optional):
 
 ##### `bar_code/scan_result`
 
-Send a barcode scan result to the frontend.
+Send a bar code scanner result to the frontend.
 
 Payload:
 
@@ -540,7 +540,7 @@ Payload:
 
 ##### `improv/discovered_device`
 
-Notify that an Improv device was discovered.
+Notify that an Improv Wi-Fi device was discovered.
 
 Payload:
 
@@ -552,7 +552,7 @@ Payload:
 
 ##### `improv/device_setup_done`
 
-Notify that Improv device setup is complete.
+Notify that Improv Wi-Fi device setup is complete.
 
 Payload: None
 
