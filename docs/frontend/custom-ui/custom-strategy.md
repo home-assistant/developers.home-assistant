@@ -33,9 +33,8 @@ The object supports the following keys:
 | `name`             | No       | Friendly name shown in the picker.                                             |
 | `description`      | No       | Short text shown below the name.                                               |
 | `documentationURL` | No       | Link to your documentation. This is not shown in the strategy UI yet. |
-| `images`           | No       | Preview image, either a single URL or a light/dark object.                     |
 
-Example with preview images:
+Example:
 
 ```js
 window.customStrategies = window.customStrategies || [];
@@ -46,11 +45,6 @@ window.customStrategies.push({
   name: "My demo dashboard",
   description: "A small starter dashboard generated from JavaScript.",
   documentationURL: "https://example.com/my-demo-dashboard",
-  // images: "/local/my-demo/preview.svg"
-  images: {
-    light: "/local/my-demo/preview-light.svg",
-    dark: "/local/my-demo/preview-dark.svg",
-  },
 });
 ```
 
@@ -113,11 +107,6 @@ if (
     description: "A small starter dashboard generated from JavaScript.",
     documentationURL:
       "https://developers.home-assistant.io/docs/frontend/custom-ui/custom-strategy",
-    // images: "/local/my-demo/preview.svg" // single image
-    images: {
-      light: "/local/my-demo/preview-light.svg",
-      dark: "/local/my-demo/preview-dark.svg",
-    },
   });
 }
 ```
