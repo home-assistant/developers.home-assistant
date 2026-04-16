@@ -58,7 +58,7 @@ Or, for a less complex example, the [map dashboard strategy](https://github.com/
 
 This example is meant to be copied into a JavaScript file and loaded as a module resource. It includes both the strategy registration and the metadata needed to show it in the new dashboard dialog.
 
-It is a good starting point, but we recommend using the [ReactiveElement](https://lit.dev/docs/framework/concepts/reactive-element/) class from Lit instead of HTMLElement and use types whether with TypeScript or JSDoc. See the [frontend repo](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace/strategies) for full code examples.
+It is a good starting point, but we recommend using Lit's [ReactiveElement](https://lit.dev/docs/framework/concepts/reactive-element/) instead of HTMLElement and using types either with TypeScript or JSDoc. See the [frontend repo](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace/strategies) for full code examples.
 
 ```js
 class MyDemoDashboardStrategy extends HTMLElement {
