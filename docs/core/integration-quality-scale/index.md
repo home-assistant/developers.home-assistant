@@ -102,6 +102,8 @@ Besides upgrading an integration to a higher tier on the scale, it is also possi
 This can, for example, happen when there is no longer an active integration code owner.
 In this specific example, the integration will be downgraded to “Bronze”, even if it otherwise fully complies with the “Platinum” tier.
 
+There's no need to create a documentation pull request. The quality scale will be updated automatically in the documentation as part of the next major release of Home Assistant, once the integration's tier has been updated in the codebase.
+
 ### Adjustments to rules contained in each tier
 The world of IoT and all technologies used by Home Assistant are changing at a fast pace; not just in terms of what Home Assistant can support or do, but also in terms of the software on which Home Assistant is built. Home Assistant is pioneering the technology in the industry at a fast pace.
 
