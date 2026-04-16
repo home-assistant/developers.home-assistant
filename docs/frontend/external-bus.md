@@ -14,17 +14,11 @@ On Android, the implementation depends on the WebView features:
 
 **V2 (recommended)**: Uses [`WebViewFeature.WEB_MESSAGE_LISTENER`][web-message-listener] for secure origin validation. The frontend sends messages using the injected V2 object:
 
-```
-
 **V1 (fallback)**: Used when the WebView doesn't support [`WebViewFeature.WEB_MESSAGE_LISTENER`][web-message-listener]. Your app needs to define:
 
 ```ts
 window.externalApp.externalBus(message: string)
 ```
-
-:::note
-The Android app automatically selects V2 when available (Home Assistant 2026.4.2 or later) and falls back to V1 for compatibility with older servers or WebView versions that don't support the [`WebViewFeature.WEB_MESSAGE_LISTENER`][web-message-listener].
-:::
 
 On iOS, your app needs to define the following method:
 
@@ -178,64 +172,11 @@ Expected response:
 
 #### Messages not expecting a response
 
-##### `connection-status`
+##### `assist/settings`
 
-Notify the external app if the frontend is connected to Home Assistant.
-
-Payload:
-
-```ts
-{
-  event: "connected" | "auth-invalid" | "disconnected";
-}
-```
-
-##### `haptic`
-
-Notify the external app to trigger haptic feedback.
-
-Payload:
-
-```ts
-{
-  hapticType:
-    | "success"
-    | "warning"
-    | "failure"
-    | "light"
-    | "medium"
-    | "heavy"
-    | "selection";
-}
-```
-
-##### `theme-update`
-
-Notify the app that the theme has been updated. The app should refresh its status bar and navigation bar colors.
+Open the Assist settings screen.
 
 Payload: None
-
-##### `config_screen/show`
-
-Show the configuration screen of the external app.
-
-Payload: None
-
-##### `tag/write`
-
-Tell the external app to open the UI to write to a tag.
-
-Payload:
-
-```ts
-{
-  tag: string;
-  name: string | null;
-}
-```
-
-- `tag`: The tag ID to write
-- `name`: The name of the tag as entered by the user, or `null` if no name has been set
 
 ##### `assist/show`
 
@@ -252,36 +193,6 @@ Payload (optional):
 
 - `pipeline_id`: The pipeline to use, or "preferred"/"last_used" for automatic selection
 - `start_listening`: Whether to start listening immediately
-
-##### `assist/settings`
-
-Open the Assist settings screen.
-
-Payload: None
-
-##### `sidebar/show`
-
-Show the sidebar.
-
-Payload: None
-
-##### `bar_code/scan`
-
-Start scanning a bar code.
-
-Payload:
-
-```ts
-{
-  title: string;
-  description: string;
-  alternative_option_label?: string;
-}
-```
-
-- `title`: Title to show in the scanner UI (required)
-- `description`: Description text to show in the scanner UI (required)
-- `alternative_option_label`: Optional label for an alternative action button, if not included the alternative action button should be hidden
 
 ##### `bar_code/close`
 
@@ -301,53 +212,57 @@ Payload:
 }
 ```
 
-##### `matter/commission`
+##### `bar_code/scan`
 
-Start the Matter device commissioning flow.
-
-Payload (optional):
-
-```ts
-{
-  mac_extended_address: string | null;
-  extended_pan_id: string | null;
-  border_agent_id: string | null;
-  active_operational_dataset: string | null;
-}
-```
-
-All payload properties describe the preferred Thread network which should be used when commissioning a Matter over Thread device.
-
-- `mac_extended_address`: The MAC extended address 
-- `extended_pan_id`: The extended PAN ID
-- `border_agent_id`: The border agent ID
-- `active_operational_dataset`: The active operational dataset (TLV)
-
-##### `thread/import_credentials`
-
-Import Thread network credentials from the device. Credentials should be sent using the [WebSocket API](/docs/api/websocket)
-
-Payload: None
-
-##### `improv/scan`
-
-Start scanning for Improv Wi-Fi devices.
-
-Payload: None
-
-##### `improv/configure_device`
-
-Configure a discovered Improv Wi-Fi device.
+Start scanning a bar code.
 
 Payload:
 
 ```ts
 {
-  name: string;
+  title: string;
+  description: string;
+  alternative_option_label?: string;
 }
 ```
 
-- `name`: The name of the device to configure
+- `title`: Title to show in the scanner UI (required)
+- `description`: Description text to show in the scanner UI (required)
+- `alternative_option_label`: Optional label for an alternative action button, if not included the alternative action button should be hidden
+
+##### `config_screen/show`
+
+Show the configuration screen of the external app.
+
+Payload: None
+
+##### `connection-status`
+
+Notify the external app if the frontend is connected to Home Assistant.
+
+Payload:
+
+```ts
+{
+  event: "connected" | "auth-invalid" | "disconnected";
+}
+```
+
+##### `entity/add_to`
+
+Add an entity to a platform-specific location (e.g., homescreen widget).
+
+Payload:
+
+```ts
+{
+  entity_id: string;
+  app_payload: string;
+}
+```
+
+- `entity_id`: The entity to add
+- `app_payload`: Opaque string received from `entity/add_to/get_actions`
 
 ##### `exoplayer/play_hls`
 
@@ -364,12 +279,6 @@ Payload:
 
 - `url`: The HLS stream URL
 - `muted`: Whether to start playback muted
-
-##### `exoplayer/stop`
-
-Stop HLS video playback.
-
-Payload: None
 
 ##### `exoplayer/resize`
 
@@ -391,21 +300,120 @@ Payload:
 - `right`: Right coordinate of the player
 - `bottom`: Bottom coordinate of the player
 
-##### `entity/add_to`
+##### `exoplayer/stop`
 
-Add an entity to a platform-specific location (e.g., homescreen widget).
+Stop HLS video playback.
+
+Payload: None
+
+##### `focus_element`
+
+Focus a specific element in the frontend.
 
 Payload:
 
 ```ts
 {
-  entity_id: string;
-  app_payload: string;
+  element_id: string;
 }
 ```
 
-- `entity_id`: The entity to add
-- `app_payload`: Opaque string received from `entity/add_to/get_actions`
+- `element_id`: The ID of the element to focus
+
+##### `haptic`
+
+Notify the external app to trigger haptic feedback.
+
+Payload:
+
+```ts
+{
+  hapticType:
+    | "success"
+    | "warning"
+    | "failure"
+    | "light"
+    | "medium"
+    | "heavy"
+    | "selection";
+}
+```
+
+##### `improv/configure_device`
+
+Configure a discovered Improv Wi-Fi device.
+
+Payload:
+
+```ts
+{
+  name: string;
+}
+```
+
+- `name`: The name of the device to configure
+
+##### `improv/scan`
+
+Start scanning for Improv Wi-Fi devices.
+
+Payload: None
+
+##### `matter/commission`
+
+Start the Matter device commissioning flow.
+
+Payload (optional):
+
+```ts
+{
+  mac_extended_address: string | null;
+  extended_pan_id: string | null;
+  border_agent_id: string | null;
+  active_operational_dataset: string | null;
+}
+```
+
+All payload properties describe the preferred Thread network which should be used when commissioning a Matter over Thread device.
+
+- `mac_extended_address`: The MAC extended address
+- `extended_pan_id`: The extended PAN ID
+- `border_agent_id`: The border agent ID
+- `active_operational_dataset`: The active operational dataset (TLV)
+
+##### `sidebar/show`
+
+Show the sidebar.
+
+Payload: None
+
+##### `tag/write`
+
+Tell the external app to open the UI to write to a tag.
+
+Payload:
+
+```ts
+{
+  tag: string;
+  name: string | null;
+}
+```
+
+- `tag`: The tag ID to write
+- `name`: The name of the tag as entered by the user, or `null` if no name has been set
+
+##### `theme-update`
+
+Notify the app that the theme has been updated. The app should refresh its status bar and navigation bar colors.
+
+Payload: None
+
+##### `thread/import_credentials`
+
+Import Thread network credentials from the device. Credentials should be sent using the [WebSocket API](/docs/api/websocket)
+
+Payload: None
 
 ##### `thread/store_in_platform_keychain`
 
@@ -427,72 +435,61 @@ Payload:
 - `active_operational_dataset`: The active operational dataset (TLV)
 - `extended_pan_id`: The extended PAN ID
 
-##### `focus_element`
-
-Focus a specific element in the frontend.
-
-Payload:
-
-```ts
-{
-  element_id: string;
-}
-```
-
-- `element_id`: The ID of the element to focus
-
 ### Messages from app to frontend
 
-These messages are sent from the external app to the Home Assistant frontend. All messages expect a response.
+These messages are sent from the external app to the Home Assistant frontend.
 
-##### `restart`
+#### Messages expecting a response
 
-Request the frontend to restart.
-
-Payload: None
-
-##### `navigate`
-
-Navigate to a specific path in the frontend.
-
-Payload:
+All commands in this section receive a result message back from the frontend:
 
 ```ts
 {
-  path: string;
-  options?: {
-    replace: boolean;
-  };
+  id: number;
+  type: "result";
+  success: boolean;
+  result: null;
+  error?: { code: string; message: string };
 }
 ```
-
-##### `notifications/show`
-
-Show the notifications panel.
-
-Payload: None
-
-##### `sidebar/toggle`
-
-Toggle the sidebar open/closed.
-
-Payload: None
-
-##### `sidebar/show`
-
-Show the sidebar.
-
-Payload: None
 
 ##### `automation/editor/show`
 
-Open the automation editor.
+Open the automation editor to create a new automation. The config can be used to pre-fill the editor with specific triggers, conditions, and actions.
 
 Payload (optional):
 
 ```ts
 {
-  config?: Partial<AutomationConfig>;
+  config?: {
+    alias?: string;
+    description?: string;
+    triggers?: Trigger | Trigger[];
+    conditions?: Condition | Condition[];
+    actions?: Action | Action[];
+    mode?: "single" | "restart" | "queued" | "parallel";
+    max?: number;
+  };
+}
+```
+
+- `config.alias`: Pre-filled name for the automation
+- `config.description`: Pre-filled description
+- `config.triggers`: One or more triggers to pre-populate
+- `config.conditions`: One or more conditions to pre-populate
+- `config.actions`: One or more actions to pre-populate
+- `config.mode`: Execution mode for the automation
+- `config.max`: Maximum number of concurrent runs (only applies to `queued` and `parallel` modes)
+
+##### `bar_code/aborted`
+
+Notify that barcode scanning was aborted.
+
+Payload:
+
+```ts
+{
+  reason: "canceled" | "alternative_options";
 }
 ```
 
@@ -526,17 +523,11 @@ Payload:
 - `rawValue`: A string decoded from the barcode data
 - `format`: The barcode format as defined by the [Barcode Detection API](https://developer.mozilla.org/en-US/docs/Web/API/Barcode_Detection_API#supported_barcode_formats)
 
-##### `bar_code/aborted`
+##### `improv/device_setup_done`
 
-Notify that barcode scanning was aborted.
+Notify that Improv Wi-Fi device setup is complete.
 
-Payload:
-
-```ts
-{
-  reason: "canceled" | "alternative_options";
-}
-```
+Payload: None
 
 ##### `improv/discovered_device`
 
@@ -550,15 +541,53 @@ Payload:
 }
 ```
 
-##### `improv/device_setup_done`
-
-Notify that Improv Wi-Fi device setup is complete.
-
-Payload: None
-
 ##### `kiosk_mode/set`
 
 Enable or disable kiosk mode.
+
+##### `navigate`
+
+Navigate to a specific path in the frontend.
+
+Payload:
+
+```ts
+{
+  path: string;
+  options?: {
+    replace?: boolean;
+    data?: any;
+  };
+}
+```
+
+- `path`: Absolute path to navigate to (for example, `/config/voice-assistants/assistants`). The path is passed directly to `history.pushState` or `history.replaceState`, so it must start with `/`
+- `options.replace`: If true, replaces the current browser history entry instead of pushing a new one.
+- `options.data`: Optional data to store in the browser history state, accessible via `history.state`
+
+##### `notifications/show`
+
+Show the notifications panel.
+
+Payload: None
+
+##### `restart`
+
+Request the frontend to restart.
+
+Payload: None
+
+##### `sidebar/show`
+
+Show the sidebar. Returns an error response with code `not_allowed` if a dialog is currently open.
+
+Payload: None
+
+##### `sidebar/toggle`
+
+Toggle the sidebar open/closed. Returns an error response with code `not_allowed` if a dialog is currently open.
+
+Payload: None
 
 Payload:
 

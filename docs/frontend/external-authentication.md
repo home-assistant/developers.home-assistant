@@ -14,7 +14,9 @@ V2 (`window.externalAppV2`) requires the WebView to support [`WebViewFeature.WEB
 
 ## Get access token
 
-When the frontend loads, it will request an access token from the external authentication. It does so by calling one of the following methods with an options object. The options object defines the callback method to be called with the response and an optional `force` boolean which is set to `true` if the access token should be refreshed, regardless if it has expired or not.
+When the frontend loads, it will request an access token from the external authentication. It does so by calling one of the following methods. The options include the callback method to be called with the response and an optional `force` boolean which is set to `true` if the access token should be refreshed, regardless if it has expired or not. On Android, the options are passed as a serialized JSON string, while on iOS they are passed as an object.
+
+The callback names are stable and will not change. Apps should verify the callback name matches the expected value to ensure the callback has not been forged.
 
 The `force` boolean has been introduced in Home Assistant 0.104 and might not always be available.
 
@@ -57,6 +59,8 @@ The frontend will call this method when the page first loads and whenever it nee
 ## Revoke token
 
 When the user presses the logout button on the profile page, the external app will have to [revoke the refresh token](auth_api.md#revoking-a-refresh-token), and log the user out.
+
+The callback names are stable and will not change. Apps should verify the callback name matches the expected value to ensure the callback has not been forged.
 
 ```js
 // Android V2 (recommended)
