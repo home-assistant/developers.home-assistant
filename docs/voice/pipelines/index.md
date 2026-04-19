@@ -22,6 +22,8 @@ Pipelines are run via a WebSocket API:
 }
 ```
 
+[Example code](https://github.com/OHF-Voice/websocket-voice-assistant)
+
 The following input fields are available:
 
 | Name              | Type   | Description                                                                                                                                                                                                                                                                                    |
