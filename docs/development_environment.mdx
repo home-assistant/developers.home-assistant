@@ -109,6 +109,38 @@ Install the core dependencies.
 sudo pacman -Sy base-devel python python-pip python-virtualenv autoconf libxml2 libxslt libjpeg-turbo libffi systemd zlib pkgconf ffmpeg gcc cmake
 ```
 
+### Developing on NixOS
+
+Drop a `default.nix` with the contents below in the checked out repository and activate it with e.g.
+[direnv](https://direnv.net/).
+
+```nix
+let
+  pkgs = import <nixpkgs> { };
+in
+pkgs.mkShell {
+  packages = with pkgs; [
+    autoconf
+    clang
+    cmake
+    ffmpeg
+    ffmpeg.dev
+    gammu
+    libffi.dev
+    libjpeg.dev
+    libxml2.dev
+    libxslt.dev
+    openssl_3.dev
+    pkg-config
+    python314
+    zlib.dev
+  ];
+  env = {
+    LD_LIBRARY_PATH = "${pkgs.libjpeg.out}/lib";
+  };
+}
+```
+
 ### Developing on Windows
 
 To develop on Windows, you will need to use the Linux subsystem (WSL). Follow the [WSL installation instructions](https://learn.microsoft.com/windows/wsl/install) and install Ubuntu from the Windows Store. Once you're able to access Linux, follow the Linux instructions.
