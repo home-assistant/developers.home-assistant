@@ -82,9 +82,14 @@ scanner = bluetooth.async_get_scanner(hass)
 If the underlying library needs a detection callback, pass it via the `detection_callback` keyword argument. `bleak` removed `register_detection_callback`, so the callback must be supplied at construction time.
 
 ```python
+from bleak.backends.device import BLEDevice
+from bleak.backends.scanner import AdvertisementData
+
 from homeassistant.components import bluetooth
 
-def _detection_callback(device, advertisement_data):
+def _detection_callback(
+    device: BLEDevice, advertisement_data: AdvertisementData
+) -> None:
     ...
 
 scanner = bluetooth.async_get_scanner(hass, detection_callback=_detection_callback)
