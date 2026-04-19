@@ -48,6 +48,8 @@ Use [sentence-style capitalization](https://learn.microsoft.com/en-us/style-guid
 
 Don't skip heading levels.
 
+Only heading levels 2 and 3 are shown in the right-hand table of contents.
+
 ## Emphasis
 
 To emphasize a word, use `_italics_`. Don't use `*asterisks*`.
@@ -383,7 +385,7 @@ Don't overuse them because they can visually overload the documentation.
 
 ```liquid
 {% tip %}
-You can use a tip to feature a recommendation.
+Use a tip to feature a recommendation.
 {% endtip %}
 ```
 
@@ -391,7 +393,7 @@ You can use a tip to feature a recommendation.
 
 ```liquid
 {% note %}
-You can use a note to highlight a section.
+Use a note to highlight a section.
 {% endnote %}
 ```
 
@@ -399,6 +401,22 @@ You can use a note to highlight a section.
 
 ```liquid
 {% important %}
-You can use "important" to highlight a section that you feel is very important.
+Use "important" to highlight a section that you feel is very important.
 {% endimportant %}
+```
+
+#### Caution
+
+```liquid
+{% caution %}
+Use "caution" to advise against actions that may cause data loss, unintended behavior, or other consequences that are difficult to reverse.
+{% endcaution %}
+```
+
+#### Warning
+
+```liquid
+{% warning %}
+Use a warning to alert users to risks that could compromise the security or integrity of their system, or cause physical harm.
+{% endwarning %}
 ```
