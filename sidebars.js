@@ -402,5 +402,21 @@ module.exports = {
     "android/linter",
     "android/submit",
     "android/release",
+  ],
+  iOS: [
+    "ios",
+    "ios/get_started",
+    "ios/architecture",
+    "ios/targets",
+    {
+      type: "category",
+      label: "Testing",
+      items: [
+        "ios/testing/introduction",
+      ],
+    },
+    "ios/ci",
+    "ios/codestyle",
+    "ios/submit",
   ]
 };
