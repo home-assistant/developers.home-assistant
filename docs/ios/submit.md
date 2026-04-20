@@ -3,8 +3,6 @@ title: "Submit an iOS contribution"
 sidebar_label: "Submit contribution"
 ---
 
-## Submit your first contribution
-
 Thanks for contributing. Once your change is ready, open a pull request against the `main` branch of [home-assistant/iOS](https://github.com/home-assistant/iOS).
 
 ## Checklist for submitting a PR
@@ -17,7 +15,7 @@ Before requesting review, make sure you have covered the basics:
 - **Buildability**: Make sure the relevant scheme still builds locally.
 - **UI changes**: Include screenshots or recordings when the interface changes.
 - **Documentation**: Update developer docs or user docs when the change affects contributor workflow or user-visible behavior.
-- **Cross-target impact**: Check whether your change also affects widgets, watchOS, CarPlay, app extensions, or macOS packaging.
+- **Cross-target impact**: Check whether your change also affects widgets, watchOS, CarPlay, app extensions, or macOS packaging. See the [targets overview](/docs/ios/targets) for each surface.
 
 ## Keep pull requests small
 
@@ -41,7 +39,7 @@ CI is part of the review process, not a replacement for it.
 
 ## Updating your branch
 
-Keep your branch current with `main` so CI and reviews stay meaningful. If your branch has not been reviewed yet, rebasing is usually fine. After review has started, prefer the least disruptive update strategy for the discussion already on the PR.
+You do not need to rebase on every push to `main`. Update your branch when there is a concrete reason — for example, a conflict with `main`, a CI failure caused by recent changes, or a fix on `main` that affects your work. If your branch has not been reviewed yet, rebasing is usually fine. After review has started, prefer the least disruptive update strategy for the discussion already on the PR.
 
 ## Localization and generated files
 

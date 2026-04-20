@@ -1,5 +1,5 @@
 ---
-title: "iOS code style"
+title: "Code style"
 sidebar_label: "Code style"
 ---
 
@@ -60,6 +60,6 @@ Be conservative with `swiftlint:disable`. CI includes a pull request check that 
 
 ## Dependencies and generated code
 
-- Do not edit files under `Pods`.
-- Be careful around generated or localization-related files; some are maintained by scripts and workflows.
+- Do not edit files under `Pods`. This directory is generated from the `Podfile` in the repository root and is refreshed by `bundle exec pod install`.
+- Be careful around generated or localization-related files; some are maintained by scripts and workflows. Generated files usually state so in a header comment at the top of the file (for example, `// This file is auto-generated`) and localization files live alongside `.strings` and `.xcstrings` resources.
 - When changing Ruby or workflow automation, make sure the related lint checks still pass.

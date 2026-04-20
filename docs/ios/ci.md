@@ -3,27 +3,15 @@ title: "iOS continuous integration"
 sidebar_label: "Continuous integration"
 ---
 
-## Overview
-
 The Home Assistant iOS repository uses **GitHub Actions** together with **Fastlane** for linting, testing, building, localization updates, and distribution.
 
 ## Main CI workflow
 
-The primary workflow is `ci.yml`. It runs on:
-
-- Pull requests
-- Pushes to `main`
+CI runs on pull requests and pushes to `main`.
 
 ## Linting jobs
 
-The `lint` job runs on Ubuntu and checks:
-
-- `yamllint --strict --format github .`
-- `bundle exec rubocop --format github`
-- SwiftLint in a Docker container
-- SwiftFormat in a Docker container
-
-This keeps style checks fast and independent from the macOS build environment.
+CI runs the linters described in the [code style guide](/docs/ios/codestyle) on every pull request. This keeps style checks fast and independent from the macOS build environment.
 
 ## Pull request safety checks
 
@@ -67,7 +55,7 @@ Those builds use Fastlane lanes for signing, archiving, export, notarization, an
 
 ### Localization updates
 
-`download_localized_strings.yml` runs on a schedule and can also be triggered manually. It syncs localized strings with Lokalise and opens a pull request when updates are available.
+`download_localized_strings.yml` runs on a schedule and can also be triggered manually by maintainers with write access to the repository. It syncs localized strings with Lokalise and opens a pull request when updates are available.
 
 ### Push server tests
 
@@ -77,9 +65,6 @@ Those builds use Fastlane lanes for signing, archiving, export, notarization, an
 
 `set_version.yml` updates `Configuration/Version.xcconfig` through Fastlane and opens a pull request with the version change.
 
-## What this means for contributors
+## What this means for you
 
-- Run `bundle exec fastlane lint` before pushing.
-- Run `bundle exec fastlane test` for app and shared code changes.
-- If you modify `Sources/PushServer`, also run `swift test` in that package.
-- Expect CI to validate more than just compilation: style, strings, and artifacts are part of the review loop too.
+CI validates more than just compilation: style, strings, and artifacts are part of the review loop too. See the [code style guide](/docs/ios/codestyle) for linting and the [get started guide](/docs/ios/get_started) for running tests locally before pushing.

@@ -9,13 +9,12 @@ This guide walks through the fastest path to cloning the repository, installing 
 
 ## Requirements
 
-Before you begin, install:
+You will need:
 
 - [Xcode 26.2 or later](https://developer.apple.com/xcode/)
-- [CocoaPods](https://cocoapods.org/)
-- Ruby 3.1 with either Homebrew, `rbenv`, or `mise`
+- Ruby 3.1, installed through [Homebrew](https://formulae.brew.sh/formula/ruby), [`rbenv`](https://github.com/rbenv/rbenv), or [`mise`](https://mise.jdx.dev/) (see [Install dependencies](#install-dependencies) below for examples)
 
-The project uses **Bundler** for Ruby tooling and **CocoaPods** for Apple platform dependencies.
+Ruby powers **Bundler** (for Ruby tooling) and **[CocoaPods](https://cocoapods.org/)** (for Apple platform dependencies), both of which are installed as part of the dependency step.
 
 ## Fork, clone, and create a branch
 
@@ -109,12 +108,19 @@ Run the default automated test suite:
 bundle exec fastlane test
 ```
 
-## Testing just the frontend
+## Testing Home Assistant frontend changes
 
-If you only want to validate frontend changes, you can install the simulator app artifact produced by CI and debug the embedded WebView with Safari Web Inspector. The repository README documents that workflow in more detail.
+If you are working on the [Home Assistant frontend](https://github.com/home-assistant/frontend) (the web UI rendered inside the app's WebView) and only need to validate those changes, you can skip building the app yourself:
+
+1. Download the simulator app artifact produced by CI on a recent `main` build.
+2. Install it in an iOS simulator.
+3. Debug the embedded WebView with Safari Web Inspector.
+
+For the exact steps, see the [Testing frontend changes](https://github.com/home-assistant/iOS#testing-frontend-changes) section in the repository README.
 
 ## What's next?
 
 - Read the [architecture guide](/docs/ios/architecture) for the codebase layout.
+- Browse the [targets overview](/docs/ios/targets) to see each surface (iPhone, Watch, CarPlay, widgets, and more).
 - Review the [code style guide](/docs/ios/codestyle) before opening a pull request.
 - Learn how CI works in the [continuous integration guide](/docs/ios/ci).

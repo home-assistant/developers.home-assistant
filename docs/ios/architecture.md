@@ -3,8 +3,6 @@ title: "iOS architecture"
 sidebar_label: "Architecture"
 ---
 
-## Introduction
-
 Home Assistant iOS is a multi-target Apple platform project. It started as a companion app centered around a web experience and has grown into a hybrid codebase with native onboarding, sensors, widgets, Apple Watch support, CarPlay, App Intents, and notification-driven features.
 
 The repository combines app-specific code, shared platform code, extensions, and a small Swift server component in a single workspace.
@@ -13,15 +11,11 @@ The repository combines app-specific code, shared platform code, extensions, and
 
 ### Multi-target by design
 
-The repository is organized to share as much logic as possible across targets while still allowing platform-specific implementations where needed.
+The repository is organized to share as much logic as possible across targets while still allowing platform-specific implementations where needed. Cross-cutting concerns such as database access, networking, design system pieces, notifications, widgets, and shared models live in common modules so multiple targets can reuse them. See the [targets guide](/docs/ios/targets) for an overview of each surface.
 
 ### Hybrid UI stack
 
 The project uses both **SwiftUI** and **UIKit**. Newer flows and components increasingly use SwiftUI, while legacy and platform-specific integrations still rely on UIKit and other Apple frameworks directly.
-
-### Shared infrastructure
-
-Cross-cutting concerns such as database access, networking, design system pieces, notifications, widgets, and shared models live in common modules so multiple targets can reuse them.
 
 ## Repository structure
 
@@ -65,25 +59,25 @@ This area contains code for extensions and system integrations, including:
 
 The current codebase makes heavy use of:
 
-- **Swift**
+- [**Swift**](https://www.swift.org/)
 - **Xcode workspaces and schemes**
-- **CocoaPods**
-- **Fastlane**
-- **WKWebView** for frontend integration
-- **SwiftUI** and **UIKit**
-- **App Intents** and **WidgetKit**
-- **GRDB** for database access
-- **HAKit** for Home Assistant API interactions
+- [**CocoaPods**](https://cocoapods.org/)
+- [**Fastlane**](https://fastlane.tools/)
+- [**WKWebView**](https://developer.apple.com/documentation/webkit/wkwebview) for frontend integration
+- [**SwiftUI**](https://developer.apple.com/xcode/swiftui/) and [**UIKit**](https://developer.apple.com/documentation/uikit)
+- [**App Intents**](https://developer.apple.com/documentation/appintents) and [**WidgetKit**](https://developer.apple.com/documentation/widgetkit)
+- [**GRDB**](https://github.com/groue/GRDB.swift) for database access
+- [**HAKit**](https://github.com/home-assistant/HAKit) for Home Assistant API interactions
 
 ## Architectural patterns in practice
 
 ### Shared environment access
 
-The project uses a shared `Current` environment pattern in many places to access dependencies and services. The codebase treats this carefully enough that SwiftLint has a custom rule to prevent casual reassignment.
+The project uses a shared `Current` environment pattern (see [How to control the world](https://www.pointfree.co/blog/posts/21-how-to-control-the-world)) in many places to access dependencies and services. In practice, this means a single `Current` value groups the dependencies the app needs, which makes them easy to read from anywhere and easy to swap out in tests. The codebase treats this carefully enough that SwiftLint has a custom rule to prevent casual reassignment.
 
 ### Extensions are first-class
 
-Widgets, notifications, CarPlay, watchOS support, and App Intents are not afterthoughts. Many changes need to consider extension-safe code, shared storage, and cross-target reuse from the start.
+We encourage you to take widgets, notifications, CarPlay, watchOS support, and App Intents into account from the start. The app needs to work well across all these surfaces while maintaining code quality, so changes often need to consider extension-safe code, shared storage, and cross-target reuse.
 
 ### App plus platform surfaces
 
@@ -91,9 +85,19 @@ A feature may touch more than the main app. For example, an entity action could 
 
 ## How to navigate the codebase
 
+The iPhone app is the main surface, and most other targets (Apple Watch, CarPlay, widgets, notifications, App Intents) extend or depend on logic that originates there. For that reason, it is usually easiest to orient yourself by starting from the app and following the feature out to the targets it touches.
+
+```mermaid
+flowchart LR
+    App["Sources/App<br/>(iPhone and iPad app)"] --> Shared["Sources/Shared<br/>(cross-target logic)"]
+    Shared --> Extensions["Sources/Extensions<br/>(widgets, App Intents, notifications, …)"]
+    Shared --> CarPlay["Sources/CarPlay"]
+    Shared --> Watch["Sources/Watch and Sources/WatchApp"]
+```
+
 If you are new to the repository, a good way to orient yourself is:
 
-1. Start in `Sources/App` if the feature is clearly app-only.
-2. Move shared logic into `Sources/Shared` when multiple targets need it.
-3. Check `Sources/Extensions`, `Sources/CarPlay`, and `Sources/Watch` when behavior crosses platform surfaces.
+1. Start in `Sources/App` to see how the main iPhone and iPad app is structured. Most features originate here.
+2. Place logic that multiple targets need in `Sources/Shared` so it can be reused by extensions, watch, and CarPlay.
+3. For target-specific features (for example a watch-only or widget-only change), look in `Sources/Extensions`, `Sources/CarPlay`, or `Sources/Watch` for the matching surface.
 4. Look in `Tests/App` and `Tests/Shared` for examples before adding new code.

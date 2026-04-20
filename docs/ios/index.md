@@ -34,4 +34,4 @@ The **Home Assistant iOS app** helps users control and automate their homes acro
 
 1. **[Check out the get started guide](/docs/ios/get_started)** for local setup, signing overrides, and your first build.
 2. **[Read the architecture guide](/docs/ios/architecture)** to understand how the repository is organized.
-3. **[Join the iOS Discord channel](https://discord.com/channels/330944238910963714/1481713628553019392)** if you need help getting unstuck.
+3. **[Join our Discord community](https://discord.gg/c5DvZ4e)**, make sure you select the developer role and head to the **[iOS](https://discord.com/channels/330944238910963714/1481713628553019392)** project thread to connect with other contributors.
