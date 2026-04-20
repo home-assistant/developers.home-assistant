@@ -404,7 +404,7 @@ module.exports = {
     "android/release",
   ],
   iOS: [
-    "ios",
+    "ios/index",
     "ios/get_started",
     "ios/architecture",
     "ios/targets",

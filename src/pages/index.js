@@ -39,7 +39,7 @@ const features = [
         </p>
         <p>
           <b>
-            <a href="docs/ios">iOS</a>.
+            <a href="docs/ios">Apple platforms</a>.
           </b>{" "}
           Explains how to contribute to the iOS companion app.
         </p>
