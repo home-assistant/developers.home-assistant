@@ -66,8 +66,22 @@ The current codebase makes heavy use of:
 - [**WKWebView**](https://developer.apple.com/documentation/webkit/wkwebview) for frontend integration
 - [**SwiftUI**](https://developer.apple.com/xcode/swiftui/) and [**UIKit**](https://developer.apple.com/documentation/uikit)
 - [**App Intents**](https://developer.apple.com/documentation/appintents) and [**WidgetKit**](https://developer.apple.com/documentation/widgetkit)
-- [**GRDB**](https://github.com/groue/GRDB.swift) for database access
-- [**HAKit**](https://github.com/home-assistant/HAKit) for Home Assistant API interactions
+
+## Notable third-party dependencies
+
+Beyond Apple frameworks, the app relies on several open-source libraries. The complete list lives in the [`Podfile`](https://github.com/home-assistant/iOS/blob/main/Podfile), but these are the most commonly touched:
+
+- [**HAKit**](https://github.com/home-assistant/HAKit) — Home Assistant API client (WebSocket and REST)
+- [**GRDB.swift**](https://github.com/groue/GRDB.swift) — SQLite database access
+- [**Alamofire**](https://github.com/Alamofire/Alamofire) — HTTP networking
+- [**PromiseKit**](https://github.com/mxcl/PromiseKit) — promise-based async flows
+- [**Starscream**](https://github.com/daltoniam/Starscream) — WebSocket transport used by HAKit (we track a fork with a specific fix)
+- [**SFSafeSymbols**](https://github.com/SFSafeSymbols/SFSafeSymbols) — type-safe access to SF Symbols
+- [**KeychainAccess**](https://github.com/kishikawakatsumi/KeychainAccess) — keychain storage helper
+- [**Eureka**](https://github.com/xmartlabs/Eureka) — form-based UI in legacy screens
+- [**ObjectMapper**](https://github.com/tristanhimmelman/ObjectMapper) — JSON mapping in legacy models
+- [**XCGLogger**](https://github.com/DaveWoodCom/XCGLogger) — logging
+- [**Improv-iOS**](https://github.com/home-assistant/Improv-iOS) — Improv Bluetooth onboarding
 
 ## Architectural patterns in practice
 
