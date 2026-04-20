@@ -3,7 +3,6 @@ title: "iOS continuous integration"
 sidebar_label: "Continuous integration"
 ---
 
-## Overview
 
 The Home Assistant iOS repository uses **GitHub Actions** together with **Fastlane** for linting, testing, building, localization updates, and distribution.
 
