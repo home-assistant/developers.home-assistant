@@ -103,7 +103,7 @@ The iPhone app is the main surface, and most other targets (Apple Watch, CarPlay
 
 ```mermaid
 graph TD;
-    App[Sources/App - iPhone and iPad app]
+    App[Sources/App - iPhone, iPad and Mac Catalyst app]
     Shared[Sources/Shared - cross-target logic]
     Extensions[Sources/Extensions - widgets, App Intents, notifications]
     CarPlay[Sources/CarPlay]
