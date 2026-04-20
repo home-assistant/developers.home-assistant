@@ -9,7 +9,7 @@ The Home Assistant iOS app spans multiple targets and platform surfaces. Tests h
 
 ## Default test command
 
-The standard local command is:
+To run the default tests in your local environment, execute:
 
 ```bash
 bundle exec fastlane test
