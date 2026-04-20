@@ -64,3 +64,13 @@ Optionally specifies what type of entity it is.
 | `EventDeviceClass.BUTTON`   | A button of a remote control has been pressed.        |
 | `EventDeviceClass.DOORBELL` | Specifically for buttons that are used as a doorbell. |
 | `EventDeviceClass.MOTION`   | For motion events detected by a motion sensor.        |
+
+### Standard event types
+
+Some device classes define standard event types to ensure consistency across integrations, enabling generic automations that work regardless of the underlying integration.
+
+#### Doorbell
+
+- `DoorbellEventType.RING`: represents the standard "doorbell was pressed" event. **This event type is mandatory**.
+
+Other non-standard event types are also allowed.

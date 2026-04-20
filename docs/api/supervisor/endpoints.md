@@ -3554,6 +3554,7 @@ Returns information about the supervisor
 | addons_repositories | list         | A list of app repository URL's as strings                  |
 | auto_update         | bool         | Is auto update enabled for supervisor                         |
 | detect_blocking_io  | bool         | Supervisor raises exceptions for blocking I/O in event loop   |
+| feature_flags       | dict         | Map of development feature flag names to their enabled state  |
 
 **Example response:**
 
@@ -3575,7 +3576,10 @@ Returns information about the supervisor
   "diagnostics": null,
   "addons_repositories": ["https://example.com/addons"],
   "auto_update": true,
-  "detect_blocking_io": false
+  "detect_blocking_io": false,
+  "feature_flags": {
+    "supervisor_v2_api": false
+  }
 }
 ```
 
@@ -3641,6 +3645,7 @@ You need to call `/supervisor/reload` after updating the options.
 | addons_repositories | list   | Set a list of URL's as strings for app repositories |
 | auto_update         | bool   | Enable/disable auto update for supervisor              |
 | detect_blocking_io  | string | Enable blocking I/O in event loop detection. Valid values are `on`, `off` and `on_at_startup`. |
+| feature_flags       | dict   | Partial update of development feature flags. Keys are feature flag names (e.g. `supervisor_v2_api`), values are booleans. Omitted keys are left unchanged. |
 
 </ApiEndpoint>
 
