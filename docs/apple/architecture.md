@@ -99,19 +99,45 @@ A feature may touch more than the main app. For example, an entity action could 
 
 ## How to navigate the codebase
 
-The iPhone app is the main surface, and most other targets (Apple Watch, CarPlay, widgets, notifications, App Intents) extend or depend on logic that originates there. For that reason, it is usually easiest to orient yourself by starting from the app and following the feature out to the targets it touches.
+The diagram below shows the main shipping targets and the source directories each one depends on. Read it in either direction:
+
+- **Starting from a target** (for example, Apple Watch): follow the arrows out to see every source directory that target pulls in.
+- **Starting from a source directory** (for example, `Shared`): follow the inbound arrows to see every target that consumes it.
+
+Click a node to jump to that directory on GitHub. All source paths are relative to [`Sources/`](https://github.com/home-assistant/iOS/tree/main/Sources).
 
 ```mermaid
-graph TD;
-    App[Sources/App - iPhone, iPad and Mac Catalyst app]
-    Shared[Sources/Shared - cross-target logic]
-    Extensions[Sources/Extensions - widgets, App Intents, notifications]
-    CarPlay[Sources/CarPlay]
-    Watch[Sources/Watch and Sources/WatchApp]
-    App --> Shared
-    Shared --> Extensions
-    Shared --> CarPlay
-    Shared --> Watch
+graph TB;
+    subgraph Targets["Targets (what ships)"]
+        AppTarget[iPhone, iPad, and Mac Catalyst app]
+        WatchTarget[Apple Watch app]
+        CarPlayTarget[CarPlay]
+        ExtTarget[Widgets, App Intents, and notifications]
+    end
+
+    subgraph Code["Source directories"]
+        App[App]
+        Shared[Shared]
+        Watch[Watch and WatchApp]
+        CarPlay[CarPlay]
+        Extensions[Extensions]
+    end
+
+    AppTarget --> App
+    AppTarget --> Shared
+    WatchTarget --> Watch
+    WatchTarget --> Extensions
+    WatchTarget --> Shared
+    CarPlayTarget --> CarPlay
+    CarPlayTarget --> Shared
+    ExtTarget --> Extensions
+    ExtTarget --> Shared
+
+    click App "https://github.com/home-assistant/iOS/tree/main/Sources/App" "Open Sources/App on GitHub"
+    click Shared "https://github.com/home-assistant/iOS/tree/main/Sources/Shared" "Open Sources/Shared on GitHub"
+    click Watch "https://github.com/home-assistant/iOS/tree/main/Sources/Watch" "Open Sources/Watch on GitHub"
+    click CarPlay "https://github.com/home-assistant/iOS/tree/main/Sources/CarPlay" "Open Sources/CarPlay on GitHub"
+    click Extensions "https://github.com/home-assistant/iOS/tree/main/Sources/Extensions" "Open Sources/Extensions on GitHub"
 ```
 
 If you are new to the repository, a good way to orient yourself is:
