@@ -4,26 +4,26 @@ authorURL: https://github.com/emontnemery
 title: "Deprecation of legacy device tracker platform API"
 ---
 
-### Summary
+## Summary
 
 The legacy (non config entry) device tracker platform API is deprecated and will be removed in the Home Assistant 2027.5 release.
-By the end of the 12 month deprecation period, all legacy device tracker platforms will be removed from the core repo, and custom integrations implementing the legacy API will stop working.
+By the end of the 12-month deprecation period, all legacy device tracker platforms will be removed from the core repo, and custom integrations implementing the legacy API will stop working.
 
-#### Background
+## Background
 
 Config entry device trackers were introduced in May 2019, which means integration authors have had 8 years to migrate integrations when support is removed in May 2027.
 
 As of today (April 2026) most widely used core device tracker integrations have already been migrated.
 
-Note that the most popular integration which has not yet been migrated, xiaomi_miio, has a wide mix of functionality including other things than device tracker.
+Note that the most popular integration that has not yet been migrated, xiaomi_miio, has a wide mix of functionality including other things than device tracker.
 
-The proposal to deprecate the legacye device tracker API was approved in [architecture proposal 1375](https://github.com/home-assistant/architecture/discussions/1375).
+The proposal to deprecate the legacy device tracker API was approved in [architecture proposal 1375](https://github.com/home-assistant/architecture/discussions/1375).
 
-#### List of core integrations, sorted by reported use
+### List of core integrations, sorted by reported use
 
 The list was generated from https://analytics.home-assistant.io/ in March 2026
 
-```
+```text
 Integration                    Installations  API      Type               Details
 ----------------------------------------------------------------------------------------------------
 mobile_app                           415,204  modern   tracker            TrackerEntity
