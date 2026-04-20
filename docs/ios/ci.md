@@ -11,7 +11,14 @@ CI runs on pull requests and pushes to `main`.
 
 ## Linting jobs
 
-CI runs the linters described in the [code style guide](/docs/ios/codestyle) on every pull request. This keeps style checks fast and independent from the macOS build environment.
+On every pull request, CI runs the same linters described in the [code style guide](/docs/ios/codestyle):
+
+- Check Swift formatting with SwiftFormat
+- Lint Swift code with SwiftLint, including the repository's custom rules
+- Lint Ruby (Fastlane) code with RuboCop
+- Lint YAML files (workflows and configuration)
+
+These run on Linux in containers, which keeps style checks fast and independent from the macOS build environment.
 
 ## Pull request safety checks
 
