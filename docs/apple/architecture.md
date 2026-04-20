@@ -99,46 +99,73 @@ A feature may touch more than the main app. For example, an entity action could 
 
 ## How to navigate the codebase
 
-The diagram below shows the main shipping targets and the source directories each one depends on. Read it in either direction:
+The diagram below shows the actual Xcode shipping products on top and the `Sources/*` directories that feed into each one. Read it in either direction:
 
-- **Starting from a target** (for example, Apple Watch): follow the arrows out to see every source directory that target pulls in.
-- **Starting from a source directory** (for example, `Shared`): follow the inbound arrows to see every target that consumes it.
+- **Starting from a product** (for example, the Apple Watch app): follow the arrows out to see every source directory that ships in it.
+- **Starting from a source directory** (for example, `Shared`): follow the inbound arrows to see every product that consumes it.
 
-Click a node to jump to that directory on GitHub. All source paths are relative to [`Sources/`](https://github.com/home-assistant/iOS/tree/main/Sources).
+Click any node on the bottom row to jump to that directory on GitHub. All source paths are relative to [`Sources/`](https://github.com/home-assistant/iOS/tree/main/Sources).
 
 ```mermaid
 graph TB;
-    subgraph Targets["Targets (what ships)"]
-        AppTarget[iPhone, iPad, and Mac Catalyst app]
-        WatchTarget[Apple Watch app]
-        CarPlayTarget[CarPlay]
-        ExtTarget[Widgets, App Intents, and notifications]
+    subgraph Products["Shipping products (Xcode targets)"]
+        direction LR
+        AppProduct["Home Assistant app<br/>(iPhone, iPad, Mac Catalyst)"]
+        AppExts["App extensions<br/>(widgets, App Intents, Siri intents,<br/>notifications, share, Matter, push provider)"]
+        WatchProduct["Apple Watch app"]
+        LauncherProduct["macOS launcher"]
     end
 
     subgraph Code["Source directories"]
-        App[App]
-        Shared[Shared]
-        Watch[Watch and WatchApp]
-        CarPlay[CarPlay]
-        Extensions[Extensions]
+        direction LR
+        SrcApp[App]
+        SrcCarPlay[CarPlay]
+        SrcImprov[Improv]
+        SrcThread[Thread]
+        SrcMacBridge[MacBridge]
+        SrcExtensions[Extensions]
+        SrcWatchApp[WatchApp]
+        SrcWatch[Watch]
+        SrcLauncher[Launcher]
+        SrcShared[Shared]
+        SrcSharedPush[SharedPush]
     end
 
-    AppTarget --> App
-    AppTarget --> Shared
-    WatchTarget --> Watch
-    WatchTarget --> Extensions
-    WatchTarget --> Shared
-    CarPlayTarget --> CarPlay
-    CarPlayTarget --> Shared
-    ExtTarget --> Extensions
-    ExtTarget --> Shared
+    AppProduct --> SrcApp
+    AppProduct --> SrcCarPlay
+    AppProduct --> SrcImprov
+    AppProduct --> SrcThread
+    AppProduct --> SrcMacBridge
+    AppProduct --> SrcShared
+    AppProduct --> SrcSharedPush
 
-    click App "https://github.com/home-assistant/iOS/tree/main/Sources/App" "Open Sources/App on GitHub"
-    click Shared "https://github.com/home-assistant/iOS/tree/main/Sources/Shared" "Open Sources/Shared on GitHub"
-    click Watch "https://github.com/home-assistant/iOS/tree/main/Sources/Watch" "Open Sources/Watch on GitHub"
-    click CarPlay "https://github.com/home-assistant/iOS/tree/main/Sources/CarPlay" "Open Sources/CarPlay on GitHub"
-    click Extensions "https://github.com/home-assistant/iOS/tree/main/Sources/Extensions" "Open Sources/Extensions on GitHub"
+    AppExts --> SrcExtensions
+    AppExts --> SrcShared
+    AppExts --> SrcSharedPush
+
+    WatchProduct --> SrcWatchApp
+    WatchProduct --> SrcWatch
+    WatchProduct --> SrcShared
+
+    LauncherProduct --> SrcLauncher
+
+    click SrcApp "https://github.com/home-assistant/iOS/tree/main/Sources/App" "Open Sources/App on GitHub"
+    click SrcCarPlay "https://github.com/home-assistant/iOS/tree/main/Sources/CarPlay" "Open Sources/CarPlay on GitHub"
+    click SrcImprov "https://github.com/home-assistant/iOS/tree/main/Sources/Improv" "Open Sources/Improv on GitHub"
+    click SrcThread "https://github.com/home-assistant/iOS/tree/main/Sources/Thread" "Open Sources/Thread on GitHub"
+    click SrcMacBridge "https://github.com/home-assistant/iOS/tree/main/Sources/MacBridge" "Open Sources/MacBridge on GitHub"
+    click SrcExtensions "https://github.com/home-assistant/iOS/tree/main/Sources/Extensions" "Open Sources/Extensions on GitHub"
+    click SrcWatchApp "https://github.com/home-assistant/iOS/tree/main/Sources/WatchApp" "Open Sources/WatchApp on GitHub"
+    click SrcWatch "https://github.com/home-assistant/iOS/tree/main/Sources/Watch" "Open Sources/Watch on GitHub"
+    click SrcLauncher "https://github.com/home-assistant/iOS/tree/main/Sources/Launcher" "Open Sources/Launcher on GitHub"
+    click SrcShared "https://github.com/home-assistant/iOS/tree/main/Sources/Shared" "Open Sources/Shared on GitHub"
+    click SrcSharedPush "https://github.com/home-assistant/iOS/tree/main/Sources/SharedPush" "Open Sources/SharedPush on GitHub"
 ```
+
+A few pieces live outside the main workspace:
+
+- [`Sources/PushServer`](https://github.com/home-assistant/iOS/tree/main/Sources/PushServer) is a standalone Swift package for the server-side push relay.
+- [`Sources/SharedTesting`](https://github.com/home-assistant/iOS/tree/main/Sources/SharedTesting) is a test-only framework used by the test targets.
 
 If you are new to the repository, a good way to orient yourself is:
 
