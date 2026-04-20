@@ -54,11 +54,10 @@ then there will be a variable `TARGET` containing `beer` in the environment of y
 
 ## App Dockerfile
 
-All apps (formerly known as add-ons) are based on the latest Alpine Linux image. Home Assistant will automatically substitute the right base image based on the machine architecture. Add `tzdata` if you need to run in a different timezone. `tzdata` Is is already added to our base images.
+Most of the apps (formerly known as add-ons) are based on the latest Alpine Linux image. Add `tzdata` if you need to run in a different timezone. `tzdata` is already added to our base images.
 
 ```dockerfile
-ARG BUILD_FROM=ghcr.io/home-assistant/base:latest
-FROM $BUILD_FROM
+FROM ghcr.io/home-assistant/base:latest
 
 # Install requirements for app
 RUN \
@@ -71,6 +70,12 @@ RUN chmod a+x /run.sh
 
 CMD [ "/run.sh" ]
 ```
+
+:::note
+
+When Supervisor built an app with no `build.yaml`, it previously passed `BUILD_FROM=ghcr.io/home-assistant/base:latest` automatically. Since Supervisor 2026.04.0 that fallback is no longer applied, make sure your Dockerfile doesn't rely on externally provided base image through the default `BUILD_FROM` argument.
+
+:::
 
 If you are not using Home Assistant GitHub builder actions (see [Publishing your app](/docs/apps/publishing)), make sure that the Dockerfile also has a set of labels that include:
 
@@ -87,9 +92,14 @@ We support the following build arguments by default:
 
 | ARG | Description |
 |-----|-------------|
-| `BUILD_FROM` | Holds the image for dynamic builds or buildings over our systems.
 | `BUILD_VERSION` | App version (read from `config.yaml`).
 | `BUILD_ARCH` | Holds the current build arch inside.
+
+:::note
+
+Since Supervisor 2026.04.0, the `BUILD_FROM` argument is no longer provided by default. Use explicit `FROM ghcr.io/home-assistant/base:latest` in your Dockerfile to achieve the same build result as before. Using a pinned version of the base image is recommended for better build stability.
+
+:::
 
 ## App configuration
 

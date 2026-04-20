@@ -173,8 +173,7 @@ Our example `Dockerfile` is configured to support only our Nginx server and does
 Dockerfile
 
 ```dockerfile
-ARG BUILD_FROM
-FROM $BUILD_FROM
+FROM ghcr.io/home-assistant/base:latest
 
 #Add nginx and create the run folder for nginx.
 RUN \
