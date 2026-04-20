@@ -5,7 +5,7 @@ sidebar_label: "Introduction"
 
 ## Why tests matter
 
-The Home Assistant iOS app spans multiple targets and platform surfaces. Tests help keep app behavior stable while contributors change shared logic, onboarding, widgets, notifications, watch features, and integrations with Home Assistant itself.
+The Home Assistant iOS app covers multiple targets and platforms. Tests help ensure stable behavior as contributors changes shared logic, onboarding, widgets, notifications, watch features, and integrations with Home Assistant.
 
 ## Default test command
 

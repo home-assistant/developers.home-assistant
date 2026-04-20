@@ -13,7 +13,7 @@ Before you begin, install:
 
 - [Xcode 26.2 or later](https://developer.apple.com/xcode/)
 - [CocoaPods](https://cocoapods.org/)
-- Ruby 3.1 with either Homebrew, `rbenv`, or `mise`
+- Ruby 3.1 with either [Homebrew](https://formulae.brew.sh/formula/ruby), `rbenv`, or `mise`
 
 The project uses **Bundler** for Ruby tooling and **CocoaPods** for Apple platform dependencies.
 
