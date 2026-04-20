@@ -51,7 +51,7 @@ CI also uploads:
 
 ## Distribution workflow
 
-The `distribute.yml` workflow runs on pushes to `main` and on manual dispatch. It builds:
+The `distribute.yml` workflow runs on pushes to `main` and on manual dispatch by maintainers with write access to the repository. It builds:
 
 - iOS App Store artifacts
 - macOS artifacts, including Developer ID and App Store packaging
