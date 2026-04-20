@@ -1,9 +1,7 @@
 ---
-title: "iOS get started"
+title: "Get started"
 sidebar_label: "Get started"
 ---
-
-## Getting started with Home Assistant iOS development
 
 This guide walks through the fastest path to cloning the repository, installing dependencies, configuring local signing, and running the app.
 
@@ -120,7 +118,7 @@ For the exact steps, see the [Testing frontend changes](https://github.com/home-
 
 ## What's next?
 
-- Read the [architecture guide](/docs/ios/architecture) for the codebase layout.
-- Browse the [targets overview](/docs/ios/targets) to see each surface (iPhone, Watch, CarPlay, widgets, and more).
-- Review the [code style guide](/docs/ios/codestyle) before opening a pull request.
-- Learn how CI works in the [continuous integration guide](/docs/ios/ci).
+- Read the [architecture guide](/docs/apple/architecture) for the codebase layout.
+- Browse the [targets overview](/docs/apple/targets) to see each surface (iPhone, Watch, CarPlay, widgets, and more).
+- Review the [code style guide](/docs/apple/codestyle) before opening a pull request.
+- Learn how CI works in the [continuous integration guide](/docs/apple/ci).

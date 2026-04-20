@@ -1,5 +1,5 @@
 ---
-title: "iOS architecture"
+title: "Architecture"
 sidebar_label: "Architecture"
 ---
 
@@ -11,7 +11,7 @@ The repository combines app-specific code, shared platform code, extensions, and
 
 ### Multi-target by design
 
-The repository is organized to share as much logic as possible across targets while still allowing platform-specific implementations where needed. Cross-cutting concerns such as database access, networking, design system pieces, notifications, widgets, and shared models live in common modules so multiple targets can reuse them. See the [targets guide](/docs/ios/targets) for an overview of each surface.
+The repository is organized to share as much logic as possible across targets while still allowing platform-specific implementations where needed. Cross-cutting concerns such as database access, networking, design system pieces, notifications, widgets, and shared models live in common modules so multiple targets can reuse them. See the [targets guide](/docs/apple/targets) for an overview of each surface.
 
 ### Hybrid UI stack
 
@@ -102,11 +102,16 @@ A feature may touch more than the main app. For example, an entity action could 
 The iPhone app is the main surface, and most other targets (Apple Watch, CarPlay, widgets, notifications, App Intents) extend or depend on logic that originates there. For that reason, it is usually easiest to orient yourself by starting from the app and following the feature out to the targets it touches.
 
 ```mermaid
-flowchart LR
-    App["Sources/App<br/>(iPhone and iPad app)"] --> Shared["Sources/Shared<br/>(cross-target logic)"]
-    Shared --> Extensions["Sources/Extensions<br/>(widgets, App Intents, notifications, …)"]
-    Shared --> CarPlay["Sources/CarPlay"]
-    Shared --> Watch["Sources/Watch and Sources/WatchApp"]
+graph TD;
+    App[Sources/App - iPhone and iPad app]
+    Shared[Sources/Shared - cross-target logic]
+    Extensions[Sources/Extensions - widgets, App Intents, notifications]
+    CarPlay[Sources/CarPlay]
+    Watch[Sources/Watch and Sources/WatchApp]
+    App --> Shared
+    Shared --> Extensions
+    Shared --> CarPlay
+    Shared --> Watch
 ```
 
 If you are new to the repository, a good way to orient yourself is:

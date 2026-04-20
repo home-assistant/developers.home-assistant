@@ -1,5 +1,5 @@
 ---
-title: "iOS continuous integration"
+title: "Continuous integration"
 sidebar_label: "Continuous integration"
 ---
 
@@ -11,7 +11,7 @@ CI runs on pull requests and pushes to `main`.
 
 ## Linting jobs
 
-On every pull request, CI runs the same linters described in the [code style guide](/docs/ios/codestyle):
+On every pull request, CI runs the same linters described in the [code style guide](/docs/apple/codestyle):
 
 - Check Swift formatting with SwiftFormat
 - Lint Swift code with SwiftLint, including the repository's custom rules
@@ -74,4 +74,4 @@ Those builds use Fastlane lanes for signing, archiving, export, notarization, an
 
 ## What this means for you
 
-CI validates more than just compilation: style, strings, and artifacts are part of the review loop too. See the [code style guide](/docs/ios/codestyle) for linting and the [get started guide](/docs/ios/get_started) for running tests locally before pushing.
+CI validates more than just compilation: style, strings, and artifacts are part of the review loop too. See the [code style guide](/docs/apple/codestyle) for linting and the [get started guide](/docs/apple/get_started) for running tests locally before pushing.

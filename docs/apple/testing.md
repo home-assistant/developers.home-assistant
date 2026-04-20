@@ -1,6 +1,6 @@
 ---
-title: "iOS testing"
-sidebar_label: "Introduction"
+title: "Testing"
+sidebar_label: "Testing"
 ---
 
 ## Why tests matter

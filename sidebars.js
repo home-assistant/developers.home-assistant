@@ -403,20 +403,14 @@ module.exports = {
     "android/submit",
     "android/release",
   ],
-  iOS: [
-    "ios/index",
-    "ios/get_started",
-    "ios/architecture",
-    "ios/targets",
-    {
-      type: "category",
-      label: "Testing",
-      items: [
-        "ios/testing/introduction",
-      ],
-    },
-    "ios/ci",
-    "ios/codestyle",
-    "ios/submit",
+  Apple: [
+    "apple/index",
+    "apple/get_started",
+    "apple/architecture",
+    "apple/targets",
+    "apple/testing",
+    "apple/ci",
+    "apple/codestyle",
+    "apple/submit",
   ]
 };

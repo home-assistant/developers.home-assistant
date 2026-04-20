@@ -1,5 +1,5 @@
 ---
-title: "iOS targets"
+title: "Targets"
 sidebar_label: "Targets"
 ---
 

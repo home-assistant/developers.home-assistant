@@ -1,5 +1,5 @@
 ---
-title: "Submit an iOS contribution"
+title: "Submit a contribution"
 sidebar_label: "Submit contribution"
 ---
 
@@ -15,7 +15,7 @@ Before requesting review, make sure you have covered the basics:
 - **Buildability**: Make sure the relevant scheme still builds locally.
 - **UI changes**: Include screenshots or recordings when the interface changes.
 - **Documentation**: Update developer docs or user docs when the change affects contributor workflow or user-visible behavior.
-- **Cross-target impact**: Check whether your change also affects widgets, watchOS, CarPlay, app extensions, or macOS packaging. See the [targets overview](/docs/ios/targets) for each surface.
+- **Cross-target impact**: Check whether your change also affects widgets, watchOS, CarPlay, app extensions, or macOS packaging. See the [targets overview](/docs/apple/targets) for each surface.
 
 ## Keep pull requests small
 
