@@ -195,29 +195,19 @@ class MyAreaViewStrategy extends HTMLElement {
   }
 }
 
-if (!customElements.get("ll-strategy-dashboard-my-area-dashboard")) {
-  customElements.define(
-    "ll-strategy-dashboard-my-area-dashboard",
-    MyAreaDashboardStrategy,
-  );
-}
+customElements.define(
+  "ll-strategy-dashboard-my-area-dashboard",
+  MyAreaDashboardStrategy,
+);
 
-if (!customElements.get("ll-strategy-view-my-area-dashboard")) {
-  customElements.define(
-    "ll-strategy-view-my-area-dashboard",
-    MyAreaViewStrategy,
-  );
-}
+customElements.define(
+  "ll-strategy-view-my-area-dashboard",
+  MyAreaViewStrategy,
+);
 
 window.customStrategies = window.customStrategies || [];
 
-if (
-  !window.customStrategies.some(
-    (strategy) =>
-      strategy.type === "my-area-dashboard" &&
-      strategy.strategyType === "dashboard",
-  )
-) {
+if (window.customStrategies) {
   window.customStrategies.push({
     type: "my-area-dashboard",
     strategyType: "dashboard",
