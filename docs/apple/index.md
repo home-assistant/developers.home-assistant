@@ -32,4 +32,4 @@ The **Home Assistant Apple Platforms apps** helps users control and automate the
 
 1. **[Check out the get started guide](/docs/apple/get_started)** for local setup, signing overrides, and your first build.
 2. **[Read the architecture guide](/docs/apple/architecture)** to understand how the repository is organized.
-3. **[Join our Discord community](https://discord.gg/c5DvZ4e)**, make sure you select the developer role and head to the **[iOS](https://discord.com/channels/330944238910963714/1481713628553019392)** project thread to connect with other contributors.
+3. **[Join our Discord community](https://www.home-assistant.io/join-chat)**, make sure you select the developer role and head to the **[iOS](https://discord.com/channels/330944238910963714/1481713628553019392)** project thread to connect with other contributors.
