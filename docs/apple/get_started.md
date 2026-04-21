@@ -114,8 +114,6 @@ If you are working on the [Home Assistant frontend](https://github.com/home-assi
 2. Install it in an iOS simulator.
 3. Debug the embedded WebView with Safari Web Inspector.
 
-For the exact steps, see the [Testing frontend changes](https://github.com/home-assistant/iOS#testing-frontend-changes) section in the repository README.
-
 ## What's next?
 
 - Read the [architecture guide](/docs/apple/architecture) for the codebase layout.
