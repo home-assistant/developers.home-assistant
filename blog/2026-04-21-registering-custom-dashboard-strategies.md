@@ -19,15 +19,14 @@ To register your strategy, call `window.customStrategies.push()` with an object 
 Example:
 
 ```js
-if (window.customStrategies) {
-  window.customStrategies.push({
-    type: "my-demo",
-    strategyType: "dashboard",
-    name: "My demo dashboard",
-    description: "A starter dashboard generated from JavaScript.",
-    documentationURL: "https://example.com/my-demo-dashboard",
-  });
-}
+window.customStrategies = window.customStrategies || [];
+window.customStrategies.push({
+  type: "my-demo",
+  strategyType: "dashboard",
+  name: "My demo dashboard",
+  description: "A starter dashboard generated from JavaScript.",
+  documentationURL: "https://example.com/my-demo-dashboard",
+});
 ```
 
 This metadata is separate from the custom element itself. Your strategy still needs to be registered with a tag like `ll-strategy-dashboard-my-demo`, and users still need the resource loaded before Home Assistant can discover it. You can use HACS for this as other resources can be added, like custom cards.
