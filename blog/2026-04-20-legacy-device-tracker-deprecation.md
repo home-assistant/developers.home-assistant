@@ -9,6 +9,8 @@ title: "Deprecation of legacy device tracker platform API"
 The legacy (non-config-entry) device tracker platform API is deprecated and will be removed in the Home Assistant 2027.5 release.
 By the end of the 12-month deprecation period, all remaining legacy device tracker platforms will be removed from the core repository, and custom integrations implementing the legacy API will stop working.
 
+Integrations authors need to update integrations to implement the [modern device tracker platform API](https://developers.home-assistant.io/docs/core/entity/device-tracker).
+
 ## Background
 
 Config entry device trackers were introduced in May 2019, which means integration authors have had 8 years to migrate integrations when support is removed in May 2027.
