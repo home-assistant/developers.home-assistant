@@ -120,3 +120,5 @@ If you are working on the [Home Assistant frontend](https://github.com/home-assi
 - Browse the [targets overview](/docs/apple/targets) to see each surface (iPhone, Watch, CarPlay, widgets, and more).
 - Review the [code style guide](/docs/apple/codestyle) before opening a pull request.
 - Learn how CI works in the [continuous integration guide](/docs/apple/ci).
+- [Join our Discord community](https://www.home-assistant.io/join-chat), make sure you select the developer role and head to the **[iOS](https://discord.com/channels/330944238910963714/1481713628553019392)** project thread to connect with other contributors.
+
