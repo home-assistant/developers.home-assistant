@@ -92,14 +92,7 @@ class MyDemoDashboardStrategy extends HTMLElement {
 
 customElements.define("ll-strategy-dashboard-my-demo", MyDemoDashboardStrategy);
 
-window.customStrategies = window.customStrategies || [];
-
-if (
-  !window.customStrategies.some(
-    (strategy) =>
-      strategy.type === "my-demo" && strategy.strategyType === "dashboard",
-  )
-) {
+if (window.customStrategies) {
   window.customStrategies.push({
     type: "my-demo",
     strategyType: "dashboard",
