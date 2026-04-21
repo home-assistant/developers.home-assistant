@@ -29,7 +29,7 @@ The object supports the following keys:
 | Key                | Required | Description                                                                    |
 | ------------------ | -------- | ------------------------------------------------------------------------------ |
 | `type`             | Yes      | The strategy type without the `custom:` prefix.                                |
-| `strategyType`     | Yes      | The strategy kind: `dashboard`, `view`, or `section`.                          |
+| `strategyType`     | Yes      | Must be `"dashboard"`, matching a `ll-strategy-dashboard-...` element.          |
 | `name`             | No       | Friendly name shown in the picker.                                             |
 | `description`      | No       | Short text shown below the name.                                               |
 | `documentationURL` | No       | Link to your documentation. This is not shown in the strategy UI yet. |
