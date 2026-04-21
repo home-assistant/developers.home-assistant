@@ -37,15 +37,14 @@ The object supports the following keys:
 Example:
 
 ```js
-if (window.customStrategies) {
-  window.customStrategies.push({
-    type: "my-demo",
-    strategyType: "dashboard",
-    name: "My demo dashboard",
-    description: "A starter dashboard generated from JavaScript.",
-    documentationURL: "https://example.com/my-demo-dashboard",
-  });
-}
+window.customStrategies = window.customStrategies || [];
+window.customStrategies.push({
+  type: "my-demo",
+  strategyType: "dashboard",
+  name: "My demo dashboard",
+  description: "A starter dashboard generated from JavaScript.",
+  documentationURL: "https://example.com/my-demo-dashboard",
+});
 ```
 
 ### Examples
@@ -205,16 +204,15 @@ customElements.define(
   MyAreaViewStrategy,
 );
 
-if (window.customStrategies) {
-  window.customStrategies.push({
-    type: "my-area-dashboard",
-    strategyType: "dashboard",
-    name: "Area dashboard",
-    description: "Build one view per area from the Home Assistant registries.",
-    documentationURL:
-      "https://developers.home-assistant.io/docs/frontend/custom-ui/custom-strategy",
-  });
-}
+window.customStrategies = window.customStrategies || [];
+window.customStrategies.push({
+  type: "my-area-dashboard",
+  strategyType: "dashboard",
+  name: "Area dashboard",
+  description: "Build one view per area from the Home Assistant registries.",
+  documentationURL:
+    "https://developers.home-assistant.io/docs/frontend/custom-ui/custom-strategy",
+});
 ```
 
 Use the following dashboard configuration to use this strategy:
