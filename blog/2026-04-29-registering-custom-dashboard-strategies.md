@@ -12,7 +12,7 @@ To register your strategy, call `window.customStrategies.push()` with an object 
 
 - `type`: The strategy type without the `custom:` prefix, for example `"my-demo"`.
 - `strategyType`: Set to `"dashboard"` to register a dashboard strategy.
-- `name` (`optional`): The friendly name of the strategy.
+- `name`: The friendly name of the strategy.
 - `description` (`optional`): A short description of the strategy.
 - `documentationURL` (`optional`): A URL to the documentation for the strategy. This is not shown in the strategy UI yet but may in the future.
 
