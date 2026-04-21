@@ -6,7 +6,7 @@ title: Registering custom dashboard strategies
 
 As of Home Assistant 2026.5, you can now register custom dashboard strategies, just as you can with [custom cards](/docs/frontend/custom-ui/custom-card), making them easier to discover and add using the **new dashboard** dialog under the **Community dashboards** section.
 
-Before you could do this, but had to send users to create a blank dashboard, edit in YAML mode, and paste in your custom strategy. Now you can register a friendly name, description, and documentation.
+Previously, you had to send users to create a blank dashboard, edit in YAML mode, and paste in your custom strategy. Now you can register a friendly name, description, and documentation.
 
 To register your strategy, call `window.customStrategies.push()` with an object containing the following keys:
 

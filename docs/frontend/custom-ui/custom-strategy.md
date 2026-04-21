@@ -4,11 +4,11 @@ title: "Custom strategies"
 
 _Introduced in Home Assistant 2021.5._
 
-Strategies are elements that generate custom dashboards and/or views. You can create new strategies in the frontend repository, or create custom strategies. Both have access to the Home Assistant API similar to [custom cards](./custom-card.md).
+Strategies are custom elements that generate custom dashboards and/or views. You can create new strategies in the frontend repository, or create custom strategies loaded as dashboard resources. Both have access to the Home Assistant API similar to [custom cards](./custom-card.md).
 
 A strategy can generate a single view, or a full dashboard including one or several views.
 
-As with custom cards, strategies need to be loaded as resources. Refer to [registering resources](./registering-resources.md) for more information on how to include strategies as resources.
+As with custom cards, custom strategies need to be loaded as resources. Refer to [registering resources](./registering-resources.md) for more information on how to include strategies as resources.
 
 If you have already built a custom card, the setup will feel familiar. Strategies are loaded the same way, but instead of rendering a single card directly they generate dashboard content. They can also work alongside custom cards when you need them to. You can import custom cards into your strategy as with any other resource/element.
 
