@@ -128,16 +128,15 @@ class MyDemoDashboardStrategy extends HTMLElement {
 
 customElements.define("ll-strategy-dashboard-my-demo", MyDemoDashboardStrategy);
 
-if (window.customStrategies) {
-  window.customStrategies.push({
-    type: "my-demo",
-    strategyType: "dashboard",
-    name: "My demo dashboard",
-    description: "A small starter dashboard generated from JavaScript.",
-    documentationURL:
-      "https://developers.home-assistant.io/docs/frontend/custom-ui/custom-strategy",
-  });
-}
+window.customStrategies = window.customStrategies || [];
+window.customStrategies.push({
+  type: "my-demo",
+  strategyType: "dashboard",
+  name: "My demo dashboard",
+  description: "A small starter dashboard generated from JavaScript.",
+  documentationURL:
+    "https://developers.home-assistant.io/docs/frontend/custom-ui/custom-strategy",
+});
 ```
 
 Use the following dashboard configuration to use this strategy:
