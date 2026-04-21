@@ -47,6 +47,36 @@ window.customStrategies.push({
 });
 ```
 
+### Suggest values in the create dialog
+
+Dashboard strategies can also suggest initial values for the dashboard details form that opens after a user picks the strategy.
+
+To do this, add a static `getCreateSuggestions(hass)` method to your dashboard strategy element. Return an object with any of these optional keys:
+
+| Key     | Description                                |
+| ------- | ------------------------------------------ |
+| `title` | Suggested dashboard title.                 |
+| `icon`  | Suggested dashboard icon, like `mdi:home`. |
+
+Example:
+
+```js
+class MyDemoDashboardStrategy extends HTMLElement {
+  static getCreateSuggestions(_hass) {
+    return {
+      title: "My demo dashboard",
+      icon: "mdi:view-dashboard",
+    };
+  }
+
+  static async generate(config, hass) {
+    // ...
+  }
+}
+```
+
+These values are only defaults for the dialog. Users can still change them before creating the dashboard.
+
 ### Examples
 
 A good example to start from is the [home overview](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace/strategies/home) dashboard or the [energy dashboard](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace/strategies/energy).
@@ -61,6 +91,13 @@ It is a good starting point, but we recommend using Lit's [ReactiveElement](http
 
 ```js
 class MyDemoDashboardStrategy extends HTMLElement {
+  static getCreateSuggestions(_hass) {
+    return {
+      title: "My demo dashboard",
+      icon: "mdi:view-dashboard",
+    };
+  }
+
   static async generate(config, hass) {
     const title = config.title || "My demo dashboard";
     const locationName = hass.config.location_name || "Home Assistant";
