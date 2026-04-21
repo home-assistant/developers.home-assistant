@@ -170,6 +170,13 @@ The example below creates one view per area. Each generated view shows the entit
 
 ```js
 class MyAreaDashboardStrategy extends HTMLElement {
+  static getCreateSuggestions(_hass) {
+    return {
+      title: "Area dashboard",
+      icon: "mdi:floor-plan",
+    };
+  }
+
   static async generate(config, hass) {
     // Query all the data we need. We will make it available to views by storing it in strategy options.
     const [areas, devices, entities] = await Promise.all([
