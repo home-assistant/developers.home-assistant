@@ -37,15 +37,15 @@ The object supports the following keys:
 Example:
 
 ```js
-window.customStrategies = window.customStrategies || [];
-
-window.customStrategies.push({
-  type: "my-demo",
-  strategyType: "dashboard",
-  name: "My demo dashboard",
-  description: "A small starter dashboard generated from JavaScript.",
-  documentationURL: "https://example.com/my-demo-dashboard",
-});
+if (window.customStrategies) {
+  window.customStrategies.push({
+    type: "my-demo",
+    strategyType: "dashboard",
+    name: "My demo dashboard",
+    description: "A starter dashboard generated from JavaScript.",
+    documentationURL: "https://example.com/my-demo-dashboard",
+  });
+}
 ```
 
 ### Examples
@@ -204,8 +204,6 @@ customElements.define(
   "ll-strategy-view-my-area-dashboard",
   MyAreaViewStrategy,
 );
-
-window.customStrategies = window.customStrategies || [];
 
 if (window.customStrategies) {
   window.customStrategies.push({
