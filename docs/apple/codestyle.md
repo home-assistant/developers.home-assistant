@@ -16,7 +16,7 @@ The iOS project uses several automated checks:
 - **RuboCop** for Fastlane and Ruby code
 - **Yamllint** for workflow and other YAML files
 
-These run in pull request checks and should be run locally before you open or update a PR.
+These run in [pull request](/docs/apple/ci) checks and should be run locally before you open or update a PR.
 
 ## Running the checks locally
 

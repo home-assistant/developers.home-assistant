@@ -43,7 +43,7 @@ You do not need to rebase on every push to `main`. Update your branch when there
 
 ## Localization and generated files
 
-- Translations are managed through [Lokalise](https://app.lokalise.com/public/834452985a05254348aee2.46389241/)..
+- Translations are managed through [Lokalise](https://app.lokalise.com/public/834452985a05254348aee2.46389241/)
 - If you touch localized strings or generated outputs, make sure the related workflows and generated files remain consistent.
 - If CI reports unused strings, clean them up before asking for re-review.
 
