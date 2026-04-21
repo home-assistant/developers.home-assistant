@@ -18,7 +18,7 @@ A dashboard strategy generates a full dashboard configuration. In most cases, it
 
 ### Show your community dashboard in the new dashboard dialog
 
-__Introduced in Home Assistant 2026.4.__
+__Introduced in Home Assistant 2026.5.__
 
 If you already have a dashboard strategy, you can make it much easier for people to add by registering your strategy in `window.customStrategies`.
 
