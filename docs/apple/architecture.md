@@ -117,7 +117,7 @@ graph TB;
     end
 
     subgraph Code["Source directories"]
-        direction LR
+        direction TB
         SrcApp[App]
         SrcCarPlay[CarPlay]
         SrcImprov[Improv]
@@ -127,8 +127,38 @@ graph TB;
         SrcWatchApp[WatchApp]
         SrcWatch[Watch]
         SrcLauncher[Launcher]
-        SrcShared[Shared]
         SrcSharedPush[SharedPush]
+
+        subgraph SharedGroup["Shared"]
+            direction LR
+            Shared_API[API]
+            Shared_Networking[Networking]
+            Shared_ExternalMessageModels[ExternalMessageModels]
+            Shared_Database[Database]
+            Shared_Models[Models]
+            Shared_Domain[Domain]
+            Shared_Assist[Assist]
+            Shared_ClientEvents[ClientEvents]
+            Shared_Intents[Intents]
+            Shared_LiveActivity[LiveActivity]
+            Shared_Location[Location]
+            Shared_MagicItem[MagicItem]
+            Shared_Notifications[Notifications]
+            Shared_Panels[Panels]
+            Shared_Settings[Settings]
+            Shared_Widget[Widget]
+            Shared_DesignSystem[DesignSystem]
+            Shared_Assets[Assets]
+            Shared_Iconic[Iconic]
+            Shared_Toast[Toast]
+            Shared_Resources[Resources]
+            Shared_Common[Common]
+            Shared_Environment[Environment]
+            Shared_Extensions[Extensions]
+            Shared_Services[Services]
+            Shared_Utilities[Utilities]
+            Shared_Watch[Watch]
+        end
     end
 
     AppProduct --> SrcApp
@@ -136,16 +166,16 @@ graph TB;
     AppProduct --> SrcImprov
     AppProduct --> SrcThread
     AppProduct --> SrcMacBridge
-    AppProduct --> SrcShared
+    AppProduct --> SharedGroup
     AppProduct --> SrcSharedPush
 
     AppExts --> SrcExtensions
-    AppExts --> SrcShared
+    AppExts --> SharedGroup
     AppExts --> SrcSharedPush
 
     WatchProduct --> SrcWatchApp
     WatchProduct --> SrcWatch
-    WatchProduct --> SrcShared
+    WatchProduct --> SharedGroup
 
     LauncherProduct --> SrcLauncher
 
@@ -158,8 +188,35 @@ graph TB;
     click SrcWatchApp "https://github.com/home-assistant/iOS/tree/main/Sources/WatchApp" "Open Sources/WatchApp on GitHub"
     click SrcWatch "https://github.com/home-assistant/iOS/tree/main/Sources/Watch" "Open Sources/Watch on GitHub"
     click SrcLauncher "https://github.com/home-assistant/iOS/tree/main/Sources/Launcher" "Open Sources/Launcher on GitHub"
-    click SrcShared "https://github.com/home-assistant/iOS/tree/main/Sources/Shared" "Open Sources/Shared on GitHub"
     click SrcSharedPush "https://github.com/home-assistant/iOS/tree/main/Sources/SharedPush" "Open Sources/SharedPush on GitHub"
+
+    click Shared_API "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/API" "Open Sources/Shared/API on GitHub"
+    click Shared_Networking "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/Networking" "Open Sources/Shared/Networking on GitHub"
+    click Shared_ExternalMessageModels "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/ExternalMessageModels" "Open Sources/Shared/ExternalMessageModels on GitHub"
+    click Shared_Database "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/Database" "Open Sources/Shared/Database on GitHub"
+    click Shared_Models "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/Models" "Open Sources/Shared/Models on GitHub"
+    click Shared_Domain "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/Domain" "Open Sources/Shared/Domain on GitHub"
+    click Shared_Assist "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/Assist" "Open Sources/Shared/Assist on GitHub"
+    click Shared_ClientEvents "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/ClientEvents" "Open Sources/Shared/ClientEvents on GitHub"
+    click Shared_Intents "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/Intents" "Open Sources/Shared/Intents on GitHub"
+    click Shared_LiveActivity "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/LiveActivity" "Open Sources/Shared/LiveActivity on GitHub"
+    click Shared_Location "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/Location" "Open Sources/Shared/Location on GitHub"
+    click Shared_MagicItem "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/MagicItem" "Open Sources/Shared/MagicItem on GitHub"
+    click Shared_Notifications "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/Notifications" "Open Sources/Shared/Notifications on GitHub"
+    click Shared_Panels "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/Panels" "Open Sources/Shared/Panels on GitHub"
+    click Shared_Settings "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/Settings" "Open Sources/Shared/Settings on GitHub"
+    click Shared_Widget "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/Widget" "Open Sources/Shared/Widget on GitHub"
+    click Shared_DesignSystem "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/DesignSystem" "Open Sources/Shared/DesignSystem on GitHub"
+    click Shared_Assets "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/Assets" "Open Sources/Shared/Assets on GitHub"
+    click Shared_Iconic "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/Iconic" "Open Sources/Shared/Iconic on GitHub"
+    click Shared_Toast "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/Toast" "Open Sources/Shared/Toast on GitHub"
+    click Shared_Resources "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/Resources" "Open Sources/Shared/Resources on GitHub"
+    click Shared_Common "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/Common" "Open Sources/Shared/Common on GitHub"
+    click Shared_Environment "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/Environment" "Open Sources/Shared/Environment on GitHub"
+    click Shared_Extensions "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/Extensions" "Open Sources/Shared/Extensions on GitHub"
+    click Shared_Services "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/Services" "Open Sources/Shared/Services on GitHub"
+    click Shared_Utilities "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/Utilities" "Open Sources/Shared/Utilities on GitHub"
+    click Shared_Watch "https://github.com/home-assistant/iOS/tree/main/Sources/Shared/Watch" "Open Sources/Shared/Watch on GitHub"
 ```
 
 A few pieces live outside the main workspace:
