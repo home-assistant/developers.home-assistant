@@ -434,7 +434,7 @@ Requires the **Feature Name** Labs preview feature. Enable it at {% my labs titl
 #### Example YAML
 
 Use this text box to provide interactive syntax highlighting for some elements.
-To see the example below rendered, see [Automation: sync a ceiling fan speed to the ceiling light ](https://www.home-assistant.io/triggers/light.brightness_changed/#automation-sync-a-ceiling-fan-speed-to-the-ceiling-light).
+To see the example below rendered, see [Automation: sync a ceiling fan speed to the ceiling light](https://www.home-assistant.io/triggers/light.brightness_changed/#automation-sync-a-ceiling-fan-speed-to-the-ceiling-light).
 
 ```liquid
 {% example %}
