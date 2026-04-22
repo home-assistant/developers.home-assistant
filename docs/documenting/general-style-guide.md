@@ -454,3 +454,30 @@ automation: |
         percentage: "{{ state_attr('light.living_room_ceiling', 'brightness_pct') | int }}"
 {% endexample %}
 ```
+
+The word from the first line (here: `automation`) is rendered above the code block.
+
+Available words (defined in `INPUT_TYPES` in [`plugins/example.rb`](https://github.com/home-assistant/home-assistant.io/blob/current/plugins/example.rb)):
+
+- `action`
+- `automation`
+- `condition`
+- `script`
+- `template`
+- `trigger`
+
+Additionally, you can use `output` to render the result of the code.
+It's useful when documenting templates.
+For example:
+
+```liquid
+{% example %}
+template: |
+  {% from 'formatter.jinja' import format_entity %}
+  {{ format_entity('sensor.outdoor_temperature') }}
+  {{ format_entity('sensor.indoor_temperature') }}
+output: |
+  Outdoor temperature: 22.5
+  Indoor temperature: 21.0
+{% endexample %}
+```liquid
