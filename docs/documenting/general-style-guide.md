@@ -420,3 +420,37 @@ Use "caution" to advise against actions that may cause data loss, unintended beh
 Use a warning to alert users to risks that could compromise the security or integrity of their system, or cause physical harm.
 {% endwarning %}
 ```
+
+#### Labs
+
+Use this text box when documenting features in Labs:
+
+```liquid
+{% labs %}
+Requires the **Feature Name** Labs preview feature. Enable it at {% my labs title="**Settings** > **System** > **Labs**" %}.
+{% endlabs %}
+```
+
+#### Example YAML
+
+Use this text box to provide interactive syntax highlighting for some elements.
+To see the example below rendered, see [Automation: sync a ceiling fan speed to the ceiling light ](https://www.home-assistant.io/triggers/light.brightness_changed/#automation-sync-a-ceiling-fan-speed-to-the-ceiling-light).
+
+```liquid
+{% example %}
+automation: |
+  alias: "Match fan to ceiling light"
+  triggers:
+    - trigger: light.brightness_changed
+      target:
+        entity_id: light.living_room_ceiling
+      options:
+        threshold: 10
+  actions:
+    - action: fan.set_percentage
+      target:
+        entity_id: fan.living_room
+      data:
+        percentage: "{{ state_attr('light.living_room_ceiling', 'brightness_pct') | int }}"
+{% endexample %}
+```
