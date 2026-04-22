@@ -47,6 +47,36 @@ window.customStrategies.push({
 });
 ```
 
+### Suggest values in the create dialog
+
+Dashboard strategies can also suggest initial values for the dashboard details form that opens after a user picks the strategy.
+
+To do this, add a static `getCreateSuggestions(hass)` method to your dashboard strategy element. Return an object with any of these optional keys:
+
+| Key     | Description                                |
+| ------- | ------------------------------------------ |
+| `title` | Suggested dashboard title.                 |
+| `icon`  | Suggested dashboard icon, like `mdi:home`. |
+
+Example:
+
+```js
+class MyDemoDashboardStrategy extends HTMLElement {
+  static getCreateSuggestions(_hass) {
+    return {
+      title: "My demo dashboard",
+      icon: "mdi:view-dashboard",
+    };
+  }
+
+  static async generate(config, hass) {
+    // ...
+  }
+}
+```
+
+These values are only defaults for the dialog. Users can still change them before creating the dashboard.
+
 ### Examples
 
 A good example to start from is the [home overview](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace/strategies/home) dashboard or the [energy dashboard](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace/strategies/energy).
@@ -61,6 +91,13 @@ It is a good starting point, but we recommend using Lit's [ReactiveElement](http
 
 ```js
 class MyDemoDashboardStrategy extends HTMLElement {
+  static getCreateSuggestions(_hass) {
+    return {
+      title: "My demo dashboard",
+      icon: "mdi:view-dashboard",
+    };
+  }
+
   static async generate(config, hass) {
     const title = config.title || "My demo dashboard";
     const locationName = hass.config.location_name || "Home Assistant";
@@ -91,16 +128,15 @@ class MyDemoDashboardStrategy extends HTMLElement {
 
 customElements.define("ll-strategy-dashboard-my-demo", MyDemoDashboardStrategy);
 
-if (window.customStrategies) {
-  window.customStrategies.push({
-    type: "my-demo",
-    strategyType: "dashboard",
-    name: "My demo dashboard",
-    description: "A small starter dashboard generated from JavaScript.",
-    documentationURL:
-      "https://developers.home-assistant.io/docs/frontend/custom-ui/custom-strategy",
-  });
-}
+window.customStrategies = window.customStrategies || [];
+window.customStrategies.push({
+  type: "my-demo",
+  strategyType: "dashboard",
+  name: "My demo dashboard",
+  description: "A small starter dashboard generated from JavaScript.",
+  documentationURL:
+    "https://developers.home-assistant.io/docs/frontend/custom-ui/custom-strategy",
+});
 ```
 
 Use the following dashboard configuration to use this strategy:
@@ -133,6 +169,13 @@ The example below creates one view per area. Each generated view shows the entit
 
 ```js
 class MyAreaDashboardStrategy extends HTMLElement {
+  static getCreateSuggestions(_hass) {
+    return {
+      title: "Area dashboard",
+      icon: "mdi:floor-plan",
+    };
+  }
+
   static async generate(config, hass) {
     // Query all the data we need. We will make it available to views by storing it in strategy options.
     const [areas, devices, entities] = await Promise.all([
