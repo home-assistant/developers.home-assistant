@@ -74,9 +74,11 @@ To use this trigger in an automation:
 2. Open an existing automation, or select **Create automation** > **Create new automation**.
 3. In the **When** section, select **Add trigger**.
 4. From the search box, search for and select **Light: Light brightness changed**.
-5. Under **Targets**, select the light entity, an area, a floor, or a label.
-6. Under **Another field**, set...
-7. Select **Save**.
+5. Select what you want to monitor. Under **By target** (see [Targets](#targets)), pick... You can also select a floor, a device, a specific entity, or a label.
+6. From the triggers shown for that target, select...
+7. Under **Trigger when** (see [Behavior](#behavior-with-multiple-targets)), pick **Any**, **First**, or **Last** to control how multiple targets interact.
+8. Under **Another field**, set...
+9. Select **Save**.
 
 ### Options in the UI
 
@@ -115,6 +117,8 @@ threshold:
 
 <!-- Keep the "include" below if your integration supports targets -->
 {% include triggers/targets.md %}
+
+{% include triggers/behavior.md %}
 
 ## Good to know
 
@@ -191,7 +195,7 @@ To use this condition in an automation:
 3. In the **And if** section, select **Add condition**.
 4. From the search box, search for and select **Light: Light is on**.
 5. Under **Targets**, select the light entity, an area, a floor, or a label.
-6. Under **Condition passes if**, pick... to control how the check behaves when multiple lights are targeted.
+6. Under **Condition passes if** (see [Behavior](#behavior-with-multiple-targets)), pick **Any** or **All**.
 7. Select **Save**.
 
 ### Options in the UI
@@ -228,8 +232,10 @@ behavior:
   default: any
 {% endoptions_yaml %}
 
-<!-- Keep the "include" below if your integration supports targets -->
+<!-- Keep the two "includes" below if your integration supports targets -->
 {% include conditions/targets.md %}
+
+{% include conditions/behavior.md %}
 
 ## Good to know
 
