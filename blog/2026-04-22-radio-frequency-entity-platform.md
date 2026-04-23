@@ -49,7 +49,7 @@ The base class tracks the timestamp of the last sent command as the entity state
 
 ## Building a consumer integration
 
-Consumer integrations control RF devices by sending commands through a transmitter entity. They don't interact with RF hardware directly.
+Consumer integrations control RF devices by sending commands through a transmitter entity. They don't interact with RF hardware directly. The snippets below are adapted from the [`honeywell_string_lights`](https://github.com/home-assistant/core/pull/168450) integration, which uses the platform to drive a Honeywell String Lights set.
 
 **1. Declare the dependency** in `manifest.json`:
 
@@ -59,35 +59,52 @@ Consumer integrations control RF devices by sending commands through a transmitt
 }
 ```
 
-**2. Let the user pick a transmitter** in the config flow, filtered by the frequency the device uses:
+**2. Load the device's commands** from the [`rf-protocols`](https://github.com/home-assistant-libs/rf-protocols) library:
 
 ```python
-from rf_protocols import ModulationType
-from homeassistant.components import radio_frequency
+from rf_protocols import get_codes
 
-transmitters = radio_frequency.async_get_transmitters(
-    hass,
-    frequency=433_920_000,
-    modulation=ModulationType.OOK,
+COMMANDS = get_codes("honeywell/string_lights")
+```
+
+Each loaded command exposes the frequency and modulation the device uses, which the config flow needs in order to filter transmitters.
+
+**3. Let the user pick a transmitter** in the config flow, using a sample command to filter by the frequency and modulation the device requires:
+
+```python
+from rf_protocols import RadioFrequencyCommand
+from homeassistant.components.radio_frequency import async_get_transmitters
+from homeassistant.exceptions import HomeAssistantError
+
+sample_command: RadioFrequencyCommand = await self.hass.async_add_executor_job(
+    COMMANDS.load_command, "turn_on"
 )
-if not transmitters:
+try:
+    transmitters = async_get_transmitters(
+        self.hass, sample_command.frequency, sample_command.modulation
+    )
+except HomeAssistantError:
     return self.async_abort(reason="no_transmitters")
+
+if not transmitters:
+    return self.async_abort(reason="no_compatible_transmitters")
 ```
 
 Only `ModulationType.OOK` (on-off keying) is supported right now; other modulation types may be added later.
 
-**3. Send RF commands** using the helper function and the [`rf-protocols`](https://github.com/home-assistant-libs/rf-protocols) library:
+**4. Send RF commands** using the helper function and the stored transmitter entity:
 
 ```python
-from rf_protocols.codes.garage import make_garage_command
-from homeassistant.components import radio_frequency
+from homeassistant.components.radio_frequency import async_send_command
 
-await radio_frequency.async_send_command(
-    hass,
-    self._rf_entity_id,
-    make_garage_command(...),
-    context=self._context,
-)
+async def async_turn_on(self, **kwargs: Any) -> None:
+    """Turn on the light."""
+    command = await self.hass.async_add_executor_job(
+        COMMANDS.load_command, "turn_on"
+    )
+    await async_send_command(self.hass, self._transmitter, command)
+    self._attr_is_on = True
+    self.async_write_ha_state()
 ```
 
 ## RF protocols and codes
