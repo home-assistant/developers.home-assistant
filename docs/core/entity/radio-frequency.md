@@ -99,11 +99,15 @@ from homeassistant.components import radio_frequency
 transmitters = radio_frequency.async_get_transmitters(
     hass,
     frequency=433_920_000,  # 433.92 MHz
-    modulation=ModulationType.ASK,
+    modulation=ModulationType.OOK,
 )
 ```
 
 An empty list means no compatible transmitters are available.
+
+:::note
+Only `ModulationType.OOK` (on-off keying) is supported at the moment. Additional modulation types may be added in the future.
+:::
 
 ### Send command
 

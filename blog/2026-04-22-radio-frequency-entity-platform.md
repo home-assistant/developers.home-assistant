@@ -68,11 +68,13 @@ from homeassistant.components import radio_frequency
 transmitters = radio_frequency.async_get_transmitters(
     hass,
     frequency=433_920_000,
-    modulation=ModulationType.ASK,
+    modulation=ModulationType.OOK,
 )
 if not transmitters:
     return self.async_abort(reason="no_transmitters")
 ```
+
+Only `ModulationType.OOK` (on-off keying) is supported right now; other modulation types may be added later.
 
 **3. Send RF commands** using the helper function and the [`rf-protocols`](https://github.com/home-assistant-libs/rf-protocols) library:
 
