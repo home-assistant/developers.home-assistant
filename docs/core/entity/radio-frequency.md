@@ -81,7 +81,7 @@ class MyRadioFrequencyTransmitterEntity(RadioFrequencyTransmitterEntity):
 ```
 
 :::important
-Consumer integrations should not call `RadioFrequencyTransmitterEntity.async_send_command` directly. Use the [`radio_frequency.async_send_command`](#send-command) helper function instead, which handles state updates and context management automatically.
+Do not call `RadioFrequencyTransmitterEntity.async_send_command` directly from consumer integrations. Use [`radio_frequency.async_send_command`](#send-command), which handles state updates and context management automatically.
 :::
 
 ## Helper functions
@@ -106,7 +106,7 @@ transmitters = radio_frequency.async_get_transmitters(
 An empty list means no compatible transmitters are available.
 
 :::note
-Only `ModulationType.OOK` (on-off keying) is supported at the moment. Additional modulation types may be added in the future.
+Only `ModulationType.OOK` (on-off keying) is supported at the moment. Future releases can add additional modulation types.
 :::
 
 ### Send command

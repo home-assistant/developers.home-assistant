@@ -67,7 +67,7 @@ from rf_protocols import get_codes
 COMMANDS = get_codes("honeywell/string_lights")
 ```
 
-Each loaded command exposes the frequency and modulation the device uses, which the config flow needs in order to filter transmitters.
+Each loaded command exposes the frequency and modulation the device uses, which the config flow needs to filter transmitters.
 
 **3. Let the user pick a transmitter** in the config flow, using a sample command to filter by the frequency and modulation the device requires:
 
@@ -90,7 +90,7 @@ if not transmitters:
     return self.async_abort(reason="no_compatible_transmitters")
 ```
 
-Only `ModulationType.OOK` (on-off keying) is supported right now; other modulation types may be added later.
+Only `ModulationType.OOK` (on-off keying) is supported right now; later releases can add other modulation types.
 
 **4. Send RF commands** using the helper function and the stored transmitter entity:
 
