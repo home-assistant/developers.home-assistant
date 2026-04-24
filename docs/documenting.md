@@ -56,7 +56,7 @@ To test your changes locally, you need to install **Ruby** and its dependencies 
 - Shortcut for Fedora:
 
     ```shell
-    sudo dnf -y install gcc-c++ ruby ruby-devel rubygem-bundler rubygem-json && bundle
+    sudo dnf -y install gcc-c++ ruby ruby-devel rubygem-bundler rubygem-json rubygem-rake && bundle
     ```
 
 - Shortcut for Debian/Ubuntu:
