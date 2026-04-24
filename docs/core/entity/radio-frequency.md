@@ -5,7 +5,7 @@ sidebar_label: Radio frequency
 
 A radio frequency entity provides an abstraction layer between RF transceiver hardware (like ESPHome, Broadlink, or SDR-based devices) and device-specific integrations that need to send RF commands (like garage door openers, RF remotes, or wireless switches). It acts as a virtual RF transmitter that can be used by other integrations to control RF devices.
 
-A radio frequency entity is derived from the [`homeassistant.components.radio_frequency.RadioFrequencyTransmitterEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/radio_frequency/__init__.py).
+A radio frequency transmitter entity is derived from the [`homeassistant.components.radio_frequency.RadioFrequencyTransmitterEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/radio_frequency/__init__.py).
 
 ## Architecture overview
 
@@ -90,7 +90,7 @@ The `radio_frequency` domain provides helper functions for consumer integrations
 
 ### Get transmitters
 
-Returns the entity IDs of all RF transmitters that support the given frequency. The `modulation` argument is currently accepted for forward compatibility and does not affect filtering yet.
+Returns the entity IDs of all RF transmitters that support the given frequency and modulation.
 
 ```python
 from rf_protocols import ModulationType

@@ -92,7 +92,7 @@ if not transmitters:
 
 Only `ModulationType.OOK` (on-off keying) is supported right now; later releases can add other modulation types.
 
-**4. Send RF commands** using the helper function and the stored transmitter entity:
+**4. Send RF commands** using the helper function and the stored transmitter entity ID:
 
 ```python
 from homeassistant.components.radio_frequency import async_send_command
