@@ -26,7 +26,9 @@ Integration pages follow this structure:
 - Supported functionality
 - Actions
 - Conditions
-- Triggers
+- List of actions
+- List of conditions
+- List of triggers
 - Examples
 - Data updates
 - Known limitations
@@ -77,8 +79,9 @@ To use this trigger in an automation:
 5. Select what you want to monitor. Under **By target** (see [Targets](#targets)), pick... You can also select a floor, a device, a specific entity, or a label.
 6. From the triggers shown for that target, select...
 7. Under **Trigger when** (see [Behavior](#behavior-with-multiple-targets)), pick **Any**, **First**, or **Last** to control how multiple targets interact.
-8. Under **Another field**, set...
-9. Select **Save**.
+8. Under **Threshold type**, set how much the level has to change before the trigger fires.
+9. Under **Another field**, set...
+10. Select **Save**.
 
 ### Options in the UI
 
@@ -99,6 +102,12 @@ trigger: |
     entity_id: light.living_room
   options:
     threshold: 10
+behavior:
+  description: >
+    When multiple sensors are targeted, controls when the trigger fires. Accepts `any`, `first`, or `last`.
+  required: true
+  type: string
+  default: any
 {% endexample %}
 
 This fires whenever the living room light's brightness changes by at least ten percent.
