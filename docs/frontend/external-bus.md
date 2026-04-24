@@ -549,6 +549,14 @@ Payload:
 
 Enable or disable kiosk mode.
 
+Payload:
+
+```ts
+{
+  enable: boolean;
+}
+```
+
 ##### `navigate`
 
 Navigate to a specific path in the frontend.
@@ -592,13 +600,5 @@ Payload: None
 Toggle the sidebar open/closed. Returns an error response with code `not_allowed` if a dialog is currently open.
 
 Payload: None
-
-Payload:
-
-```ts
-{
-  enable: boolean;
-}
-```
 
 [web-message-listener]: https://developer.android.com/reference/androidx/webkit/WebViewCompat.WebMessageListener
