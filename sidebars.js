@@ -402,5 +402,15 @@ module.exports = {
     "android/linter",
     "android/submit",
     "android/release",
+  ],
+  Apple: [
+    "apple/index",
+    "apple/get_started",
+    "apple/architecture",
+    "apple/targets",
+    "apple/testing",
+    "apple/ci",
+    "apple/codestyle",
+    "apple/submit",
   ]
 };
