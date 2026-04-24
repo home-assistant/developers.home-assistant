@@ -192,7 +192,7 @@ class MySwitch(SwitchEntity):
     @property
     def translation_key(self):
         """Return the translation key to translate the entity's name and states."""
-        return my_switch
+        return "my_switch"
 ```
 
 #### Example of an untranslated switch entity which is either not the main feature of a device, or is not part of a device:
