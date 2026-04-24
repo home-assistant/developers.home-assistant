@@ -14,6 +14,10 @@ On Android, the implementation depends on the WebView features:
 
 **V2 (recommended)**: Uses [`WebViewFeature.WEB_MESSAGE_LISTENER`][web-message-listener] for secure origin validation. The frontend sends messages using the injected V2 object:
 
+```ts
+window.externalAppV2.postMessage(message: string)
+```
+
 **V1 (fallback)**: Used when the WebView doesn't support [`WebViewFeature.WEB_MESSAGE_LISTENER`][web-message-listener]. Your app needs to define:
 
 ```ts
