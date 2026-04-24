@@ -411,7 +411,7 @@ Payload: None
 
 ##### `thread/import_credentials`
 
-Import Thread network credentials from the device. Credentials should be sent using the [WebSocket API](/docs/api/websocket)
+Import Thread network credentials from the device. Credentials should be sent using the [WebSocket API](/docs/api/websocket).
 
 Payload: None
 
@@ -483,7 +483,7 @@ Payload (optional):
 
 ##### `bar_code/aborted`
 
-Notify that barcode scanning was aborted.
+Notify that bar code scanning was aborted.
 
 Payload:
 
