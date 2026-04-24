@@ -82,6 +82,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.TEMPERATURE` | °C, °F, K | Temperature.
 | `SensorDeviceClass.TEMPERATURE_DELTA` | °C, °F, K | This device class represents a temperature interval (delta), i.e. the difference between two temperature values.
 | `SensorDeviceClass.TIMESTAMP` | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
+| `SensorDeviceClass.UPTIME` | | Timestamp. Represents the datetime when the device last booted. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
 | `SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³, mg/m³ | Concentration of volatile organic compounds
 | `SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS_PARTS` | ppm, ppb | Ratio of volatile organic compounds
 | `SensorDeviceClass.VOLTAGE` | V, mV, µV, kV, MV | Voltage
