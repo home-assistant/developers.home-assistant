@@ -26,5 +26,5 @@ The migration itself is mechanical, paste the following instructions into your a
 
 <details>
     <summary>Prompt</summary>
-    <blockquote>Migrate my code from pyserial, pyserial-asyncio, and pyserial-asyncio-fast to serialx using https://raw.githubusercontent.com/puddly/serialx/refs/heads/dev/docs/how-to/pyserial-migration.md</blockquote>
+    Migrate my code from pyserial, pyserial-asyncio, and pyserial-asyncio-fast to serialx using https://raw.githubusercontent.com/puddly/serialx/refs/heads/dev/docs/how-to/pyserial-migration.md
 </details>
