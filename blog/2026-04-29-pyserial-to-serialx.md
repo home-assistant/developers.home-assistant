@@ -6,7 +6,7 @@ title: "Migration from pyserial to serialx"
 
 ## Summary
 
-Existing integrations and libraries communicating with serial ports are advised to migrate from `pyserial`, `pyserial-asyncio`, and `pyserial-asyncio-fast` to [`serialx`](https://github.com/puddly/serialx). This new library features native asyncio support on all platforms and will allow your integrations and libraries to take advantage of [ESPHome serial proxies](https://esphome.io/components/serial_proxy/) in Home Assistant, and includes critical fixes for asyncio event loop stability.
+Existing integrations and libraries communicating with serial ports should migrate from `pyserial`, `pyserial-asyncio`, and `pyserial-asyncio-fast` to [`serialx`](https://github.com/puddly/serialx). This new library features native asyncio support on all platforms and will allow your integrations and libraries to take advantage of [ESPHome serial proxies](https://esphome.io/components/serial_proxy/) in Home Assistant, and includes critical fixes for asyncio event loop stability.
 
 ## Background
 
