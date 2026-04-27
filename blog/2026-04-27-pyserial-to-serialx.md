@@ -24,7 +24,5 @@ Packages directly constructing a sync `serial.Serial()` object should migrate to
 
 The migration itself is mechanical, paste the following instructions into your agent of choice:
 
-<details>
-    <summary>Prompt</summary>
-    Migrate my code from pyserial, pyserial-asyncio, and pyserial-asyncio-fast to serialx using https://raw.githubusercontent.com/puddly/serialx/refs/heads/dev/docs/how-to/pyserial-migration.md
-</details>
+> Migrate my code from pyserial, pyserial-asyncio, and pyserial-asyncio-fast to serialx using
+> https://raw.githubusercontent.com/puddly/serialx/refs/heads/dev/docs/how-to/pyserial-migration.md
