@@ -144,7 +144,7 @@ class Issue1RepairFlow(RepairsFlow):
             data_schema=vol.Schema({})
         )
 ```
-If using `next_flow` in the repair flow's `async_abort` it will be the responsiblity of the developer to [delete](#deleting_an_issue) the issue from the registry once the repair (i.e. config entry reconfigured) has been made.
+If using `next_flow` in the repair flow's `async_abort` it will be the responsibility of the developer to [delete](#deleting-an-issue) the issue from the registry once the repair (i.e. config entry reconfigured) has been made.
 
 #### Example `next_flow` options flow
 
@@ -175,7 +175,7 @@ async def async_step_confirm(
     """Handle the confirm step of a fix flow."""
     if user_input is not None:
         repairs_flow_handler:  RepairsFlowManager = async_get(self.hass)
-        next_flow: RepairsFlow = await repairs_flow_handler.async_init(
+        next_flow: RepairsFlowResult = await repairs_flow_handler.async_init(
             DOMAIN, # The domain of the integration containing the `is_fixable = True` issue with corresponding fix flow
             data = {
                 "issue_id": "example_issue_id"
@@ -185,7 +185,7 @@ async def async_step_confirm(
         return self.async_create_entry(
             title="", data={},
             next_flow=(
-                FlowType.REPAIR_FLOW,
+                FlowType.REPAIRS_FLOW,
                 next_flow["flow_id"]
             )
         )
@@ -221,13 +221,13 @@ ir.async_delete_issue(hass, DOMAIN, "manual_migration")
 ```
 ### Repair flows using `next_flow`
 
-Integration repair flows using `next_flow` will have to delete an issue once the repair is completed as the `RepairFlow.async_create_entry` will not remove the issue from the registry when `next_flow` is specified as an argument. Issues can be deleted in `config_flow.py` or in `async_setup_entry`: 
+Integration repair flows using `next_flow` will have to delete an issue once the repair is completed as the `RepairsFlow.async_create_entry` will not remove the issue from the registry when `next_flow` is specified as an argument. Issues can be deleted in `config_flow.py` or in `async_setup_entry`: 
 
 ```python
 async def async_step_reconfigure(
     self, user_input: dict[str, Any] | None = None
 ) -> ConfigFlowResult:
-    """Config entry reconfigure
+    """Config entry reconfigure."""
     if user_input is not None:
         # Verify user_input is valid
         if success:
