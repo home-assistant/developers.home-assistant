@@ -19,3 +19,12 @@ The `serialx` documentation has [an extensive migration guide](https://puddly.gi
 Most packages just need to replace `pyserial`, `pyserial-asyncio`, and `pyserial-asyncio-fast` with `serialx` in their `setup.py` or `pyproject.toml` file and update exception handling to replace broad catching of `SerialException` with more granular error handling (such as `OSError` and `TimeoutError`).
 
 Packages directly constructing a sync `serial.Serial()` object should migrate to using the `serialx.serial_for_url()` helper to ensure automatic compatibility with all supported protocols.
+
+### Prompt for your agent
+
+The migration itself is mechanical, paste the following instructions into your agent of choice:
+
+<details>
+    <summary>Prompt</summary>
+    <blockquote>Migrate my code from pyserial, pyserial-asyncio, and pyserial-asyncio-fast to serialx using https://raw.githubusercontent.com/puddly/serialx/refs/heads/dev/docs/how-to/pyserial-migration.md</blockquote>
+</details>
