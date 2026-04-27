@@ -177,7 +177,7 @@ async def async_step_confirm(
         repairs_flow_handler:  RepairsFlowManager = async_get(self.hass)
         next_flow: RepairsFlowResult = await repairs_flow_handler.async_init(
             DOMAIN, # The domain of the integration containing the `is_fixable = True` issue with corresponding fix flow
-            data = {
+            context = {
                 "issue_id": "example_issue_id"
             }
         )
@@ -192,7 +192,7 @@ async def async_step_confirm(
 
 ```
 > [!TIP]
-> The `RepairsFlowManager` expects the `issue_id` to be passed via `data` as dictionary as with a key of `issue_id` as shown above.
+> The `RepairsFlowManager` expects `context` to contain the `issue_id` in `async_init` as shown in the code snippet above.
 >
 > The `next_flow` argument in `async_abort` or `async_create_entry` expects a tuple: `tuple[homeassistant.components.repairs.FlowType, str]`.
 
