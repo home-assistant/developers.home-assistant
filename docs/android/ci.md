@@ -49,7 +49,7 @@ To build the application in debug on CI, we use a mock Google services file loca
 
 ##### Android on Emulator.wtf
 
-Instrumentation tests for the Android app run on [Emulator.wtf](https://emulator.wtf). On every pull request, the full suite is executed against every Android API level we support, and the whole run completes in just a few seconds making the feedback loop incredibly fast.
+Instrumentation tests for the Android app run on [Emulator.wtf](https://emulator.wtf). On every pull request, the full suite is executed against every Android API level we support, and the whole run completes in just a few seconds, making the feedback loop incredibly fast.
 
 ##### Wear OS and Automotive on GitHub Actions
 
