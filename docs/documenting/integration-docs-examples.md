@@ -375,7 +375,7 @@ transition:
 
 {% include actions/more_examples.md %}
 
-### Action: set a cozy warm white tone
+### Automation: set a cozy warm white tone
 
 When you start winding down in the evening, dim the kitchen light to a warm white tone.
 
