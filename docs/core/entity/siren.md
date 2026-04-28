@@ -37,11 +37,11 @@ Supported features constants are combined using the bitwise or (`|`) operator.
 
 There are three optional input parameters that can be passed into the service action call, each gated by a supported feature flag. If the corresponding flag isn't set when a given input parameter is provided in the service action call, it will be filtered out from the call by the base platform before being passed to the integration.
 
-| Parameter Name 	| Data Validation                       	| Supported Feature Flag 	|
-|----------------	|---------------------------------------	|------------------------	|
-| `tone`         	| `vol.Any(vol.Coerce(int), cv.string)` 	| `SUPPORT_TONES`        	|
-| `duration`     	| `cv.positive_int`                     	| `SUPPORT_DURATIONS`    	|
-| `volume_level` 	| `cv.small_float`                      	| `SUPPORT_VOLUME_SET`   	|
+| Parameter Name 	| Data Validation                       	| Supported Feature Flag 	      |
+|----------------	|---------------------------------------	|-------------------------------  |
+| `tone`         	| `vol.Any(vol.Coerce(int), cv.string)` 	| `SirenEntityFeature.TONES`      |
+| `duration`     	| `cv.positive_int`                     	| `SirenEntityFeature.DURATION`   |
+| `volume_level` 	| `cv.small_float`                      	| `SirenEntityFeature.VOLUME_SET` |
 
 ```python
 class MySirenEntity(SirenEntity):
