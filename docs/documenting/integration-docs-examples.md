@@ -24,11 +24,9 @@ Integration pages follow this structure:
 - Configuration
 - Configuration options
 - Supported functionality
-- Actions
-- Conditions
-- List of actions
-- List of conditions
 - List of triggers
+- List of conditions
+- List of actions
 - Examples
 - Data updates
 - Known limitations
