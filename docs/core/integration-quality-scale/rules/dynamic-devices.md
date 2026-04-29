@@ -66,7 +66,10 @@ async def async_setup_entry(
 
 ## Exceptions
 
-There are no exceptions to this rule.
+Since this rule isn't always reasonable, we have a few exceptions:
+- If there are rate limits applied by the manufacturer, which would degrade the overall user experience.
+- If the device is considered a big purchase that does not happen often for the average household, like a car or smart coffee machine.
+- If adding or replacing a device is a big maintenance task, like adding a new phase to an electricity meter.
 
 ## Related rules
 
