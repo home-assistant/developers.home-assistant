@@ -14,6 +14,10 @@ Documentation should follow the [documentation style guide](/docs/documenting/ge
   - Use capital letters and `_` to indicate that the value needs to be replaced. For example, `api_key: YOUR_API_KEY` or `api_key: REPLACE_ME`.
 - Integration and platform names should be a link to their respective documentation pages.
 
+### Deprecated features
+
+When a feature is deprecated and removed from Home Assistant, remove its documentation at the same time. Do not leave documentation for features that no longer exist in the code.
+
 ## YAML and templates
 
 For YAML and the use of Jinja2 templates inside that YAML, follow the [YAML Style Guide](/docs/documenting/yaml-style-guide).
