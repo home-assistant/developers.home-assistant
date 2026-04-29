@@ -34,6 +34,7 @@ module.exports = {
             { to: "docs/voice/overview", label: "Voice" },
             { to: "docs/translations", label: "Translations" },
             { to: "docs/android", label: "Android" },
+            { to: "docs/apple", label: "Apple platforms" },
           ],
         },
         { to: "docs/misc", label: "Misc", position: "left" },

@@ -37,6 +37,12 @@ const features = [
           </b>{" "}
           Explains how to contribute to the Android companion app.
         </p>
+        <p>
+          <b>
+            <a href="docs/apple">Apple platforms</a>.
+          </b>{" "}
+          Explains how to contribute to the iOS companion app.
+        </p>
       </>
     ),
   },
@@ -71,6 +77,11 @@ const features = [
           <li>
             <a href="https://github.com/home-assistant/android">
               Home Assistant Android
+            </a>
+          </li>
+          <li>
+            <a href="https://github.com/home-assistant/iOS">
+              Home Assistant iOS
             </a>
           </li>
         </ul>
