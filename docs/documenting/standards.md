@@ -14,9 +14,14 @@ Documentation should follow the [documentation style guide](/docs/documenting/ge
   - Use capital letters and `_` to indicate that the value needs to be replaced. For example, `api_key: YOUR_API_KEY` or `api_key: REPLACE_ME`.
 - Integration and platform names should be a link to their respective documentation pages.
 
-### Deprecated features
+### Deprecated features or integrations
 
-When a feature is deprecated and removed from Home Assistant, remove its documentation at the same time. Do not leave documentation for features that no longer exist in the code.
+When a feature or an integration is deprecated and removed from Home Assistant, remove its documentation.
+
+- Do not leave documentation for features that are deprecated in the code base.
+  - If a feature is deprecated, remove the related section from the integration page.
+- Do not add a deprecation notice to the documentation.
+- If an entire integration is deprecated, follow the steps on [removing an integration page](/docs/documenting/remove-page).
 
 ## YAML and templates
 
