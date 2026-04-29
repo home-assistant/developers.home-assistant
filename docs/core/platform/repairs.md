@@ -192,7 +192,7 @@ async def async_step_confirm(
 
 ```
 > [!TIP]
-> The `RepairsFlowManager` expects `context` to contain the `issue_id` in `async_init` as shown in the code snippet above.
+> The `RepairsFlowManager` expects `context` to contain the `issue_id` in `async_init` as shown in the code snippet above.  The prior behavior of passing `issue_id` via `data` (e.g. `data={"issue_id": "example_issue_id"}`) will still work but will generate usage warnings in the logs to prompt developers to shift to using `context` to be consistent with other Data Entry Flows.
 >
 > The `next_flow` argument in `async_abort` or `async_create_entry` expects a tuple: `tuple[homeassistant.components.repairs.FlowType, str]`.
 
@@ -221,7 +221,7 @@ ir.async_delete_issue(hass, DOMAIN, "manual_migration")
 ```
 ### Repair flows using `next_flow`
 
-Integration repair flows using `next_flow` will have to delete an issue once the repair is completed as the `RepairsFlow.async_create_entry` will not remove the issue from the registry when `next_flow` is specified as an argument. Issues can be deleted in `config_flow.py` or in `async_setup_entry`: 
+Integration repair flows using `next_flow` in `RepairsFlow.async_abort` will have to delete an issue once the repair is completed as the `RepairsFlow.async_abort` will not remove the issue from the registry (note that `RepairFlow.async_create_issue` will always remove the issue from the registry). Issues can be deleted in `config_flow.py` or in the integration's `async_setup_entry`: 
 
 ```python
 async def async_step_reconfigure(
@@ -229,7 +229,7 @@ async def async_step_reconfigure(
 ) -> ConfigFlowResult:
     """Config entry reconfigure."""
     if user_input is not None:
-        # Verify user_input is valid
+        ...
         if success:
             ir.async_delete_issue(
                 self.hass,
