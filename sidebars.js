@@ -136,14 +136,27 @@ module.exports = {
       label: "Building Integrations",
       items: [
         "creating_component_index",
+        "core/integration/contributing_to_core",
         "creating_integration_file_structure",
         "creating_integration_tests_file_structure",
         "creating_integration_manifest",
-        "config_entries_config_flow_handler",
-        "config_entries_options_flow_handler",
-        "core/integration_diagnostics",
-        "core/integration_system_health",
-        "configuration_yaml_index",
+        {
+          type: "category",
+          label: "Configuring your integration",
+          items: [
+            "core/integration/config_flow",
+            "core/integration/options_flow",
+            "core/integration/yaml_configuration",
+          ],
+        },
+        {
+          type: "category",
+          label: "Debugging an integration",
+          items: [
+            "core/integration/diagnostics",
+            "core/integration/system_health",
+          ],
+        },
         "dev_101_services",
         "creating_platform_index",
         "creating_component_generic_discovery",
@@ -152,6 +165,7 @@ module.exports = {
         "integration_events",
         "integration_listen_events",
         "network_discovery",
+        "core/integration/brand_images",
         {
           type: "category",
           label: "Bluetooth",

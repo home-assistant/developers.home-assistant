@@ -114,7 +114,7 @@ Get details about an app
 
 | key                 | type               | description                                                                            |
 | ------------------- | ------------------ | -------------------------------------------------------------------------------------- |
-| advanced            | boolean            | `true` if advanced mode is enabled                                                     |
+| advanced            | boolean            | Deprecated and ignored; always `false` as of Supervisor 2026.03.0                      |
 | apparmor            | string             | disabled, default or the name of the profile                                           |
 | arch                | list               | A list of supported architectures for the app                                       |
 | audio               | boolean            | `true` if audio is enabled                                                             |
@@ -3501,7 +3501,6 @@ Returns information about the security features
 
 | key                 | type         | description                                                   |
 | ------------------- | ------------ | ------------------------------------------------------------- |
-| content_trust       | bool         | If content-trust is enabled or disabled on the backend        |
 | pwned               | bool         | If pwned check is enabled or disabled on the backend          |
 | force_security      | bool         | If force-security is enabled or disabled on the backend       |
 
@@ -3509,7 +3508,6 @@ Returns information about the security features
 
 ```json
 {
-  "content_trust": true,
   "pwned": true,
   "force_security": false,
 }
@@ -3523,43 +3521,11 @@ Returns information about the security features
 
 | key                 | type   | description                                            |
 | ------------------- | ------ | ------------------------------------------------------ |
-| content_trust       | bool   | Disable/Enable content-trust                           |
 | pwned               | bool   | Disable/Enable pwned                                   |
 | force_security      | bool   | Disable/Enable force-security                          |
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/security/integrity" method="post">
-
-Run a full platform integrity check.
-
-**Returned data:**
-
-| key | type | description |
-| ----| ---- | ----------- |
-| supervisor | str | `pass`, `error`, `failed`, `untested` |
-| core | str | `pass`, `error`, `failed`, `untested` |
-| plugins | dict | A dictionary with key per plugin as `pass`, `error`, `failed`, `untested` |
-| addons | dict | A dictionary with key per addon as `pass`, `error`, `failed`, `untested` |
-
-**Example response:**
-
-```json
-{
-  "supervisor": "pass",
-  "core": "pass",
-  "plugins": {
-    "audio": "pass",
-    "cli": "pass"
-  },
-  "addons": {
-    "core_ssh": "untested",
-    "xj3493_test": "pass"
-  }
-}
-```
-
-</ApiEndpoint>
 
 ### Supervisor
 
@@ -3588,6 +3554,7 @@ Returns information about the supervisor
 | addons_repositories | list         | A list of app repository URL's as strings                  |
 | auto_update         | bool         | Is auto update enabled for supervisor                         |
 | detect_blocking_io  | bool         | Supervisor raises exceptions for blocking I/O in event loop   |
+| feature_flags       | dict         | Map of development feature flag names to their enabled state  |
 
 **Example response:**
 
@@ -3609,7 +3576,10 @@ Returns information about the supervisor
   "diagnostics": null,
   "addons_repositories": ["https://example.com/addons"],
   "auto_update": true,
-  "detect_blocking_io": false
+  "detect_blocking_io": false,
+  "feature_flags": {
+    "supervisor_v2_api": false
+  }
 }
 ```
 
@@ -3675,6 +3645,7 @@ You need to call `/supervisor/reload` after updating the options.
 | addons_repositories | list   | Set a list of URL's as strings for app repositories |
 | auto_update         | bool   | Enable/disable auto update for supervisor              |
 | detect_blocking_io  | string | Enable blocking I/O in event loop detection. Valid values are `on`, `off` and `on_at_startup`. |
+| feature_flags       | dict   | Partial update of development feature flags. Keys are feature flag names (e.g. `supervisor_v2_api`), values are booleans. Omitted keys are left unchanged. |
 
 </ApiEndpoint>
 

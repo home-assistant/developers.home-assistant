@@ -27,3 +27,7 @@ resources:
   - url: /local/<name of the resource>.js
     type: module
 ```
+
+If you are building a community dashboard, the resource must be loaded before Home Assistant can show it in the new dashboard dialog. After adding or updating the resource, refresh Home Assistant and reopen the dialog.
+
+For the full dashboard strategy and picker registration flow, refer to [custom strategies](./custom-strategy.md).

@@ -29,8 +29,7 @@ Once you have located your app directory, it's time to get started!
 This is the image that will be used to build your app.
 
 ```dockerfile
-ARG BUILD_FROM
-FROM $BUILD_FROM
+FROM ghcr.io/home-assistant/base:latest
 
 # Copy data for app
 COPY run.sh /
@@ -54,9 +53,6 @@ init: false
 arch:
   - aarch64
   - amd64
-  - armhf
-  - armv7
-  - i386
 ```
 
 ### The `run.sh` file
@@ -118,8 +114,7 @@ To do this, we will need to update our files as follows:
 Update your `Dockerfile`:
 
 ```dockerfile
-ARG BUILD_FROM
-FROM $BUILD_FROM
+FROM ghcr.io/home-assistant/base:latest
 
 # Install requirements for app
 RUN \
@@ -148,9 +143,6 @@ init: false
 arch:
   - aarch64
   - amd64
-  - armhf
-  - armv7
-  - i386
 startup: services
 ports:
   8000/tcp: 8000

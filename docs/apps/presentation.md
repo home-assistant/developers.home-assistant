@@ -173,8 +173,7 @@ Our example `Dockerfile` is configured to support only our Nginx server and does
 Dockerfile
 
 ```dockerfile
-ARG BUILD_FROM
-FROM $BUILD_FROM
+FROM ghcr.io/home-assistant/base:latest
 
 #Add nginx and create the run folder for nginx.
 RUN \
@@ -200,10 +199,8 @@ version: "1.0.0"
 slug: "nginx-ingress-example"
 description: "Ingress testing"
 arch:
+  - aarch64
   - amd64
-  - armhf
-  - armv7
-  - i386
 ingress: true
 ```
 
@@ -219,7 +216,6 @@ Each app starts with a base rating of 5, on a scale of 1 to 6. Depending on deci
 |---|---|---|
 | Use `ingress: true` in [`config.yaml`](/docs/apps/configuration#optional-configuration-options) | +2 | overrides `auth_api` rating |
 | Use `auth_api: true` in [`config.yaml`](/docs/apps/configuration#optional-configuration-options) | +1 | overridden by `ingress` |
-| App is signed with [CodeNotary](https://cas.codenotary.com/)| +1||
 | Use custom [`apparmor.txt`](/docs/apps/presentation#apparmor)| +1| Rating applied after installation |
 | Set `apparmor: false` in [`config.yaml`](/docs/apps/configuration#optional-configuration-options) | -1 | |
 | Use `privileged: NET_ADMIN`, `SYS_ADMIN`, `SYS_RAWIO`, `SYS_PTRACE`, `SYS_MODULE`, or `DAC_READ_SEARCH`, or `kernel_modules:` used in [`config.yaml`](/docs/apps/configuration#optional-configuration-options)| -1 | Rating applied only once if multiple are used. |

@@ -10,7 +10,15 @@ Just like external auth, message exchange is achieved by the external app making
 
 Messages are passed to the external app as serialized JSON objects. The function that will be called takes a single parameter: a string. The external app will have to process the message and deal with it accordingly (or ignore it).
 
-On Android, your app needs to define the following method:
+On Android, the implementation depends on the WebView features:
+
+**V2 (recommended)**: Uses [`WebViewFeature.WEB_MESSAGE_LISTENER`][web-message-listener] for secure origin validation. The frontend sends messages using the injected V2 object:
+
+```ts
+window.externalAppV2.postMessage(message: string)
+```
+
+**V1 (fallback)**: Used when the WebView doesn't support [`WebViewFeature.WEB_MESSAGE_LISTENER`][web-message-listener]. Your app needs to define:
 
 ```ts
 window.externalApp.externalBus(message: string)
@@ -86,46 +94,157 @@ interface ErrorResult {
 
 ## Supported messages
 
-### Get external config
+Messages are organized by direction: from frontend to app, and from app to frontend.
 
-Available in: Home Assistant 0.92
-Type: `config/get`
-Direction: frontend to external app.
-Expects answer: yes
+### Messages from frontend to app
+
+These messages are sent from the Home Assistant frontend to the external app.
+
+#### Messages expecting a response
+
+##### `config/get`
 
 Query the external app for the external configuration. The external configuration is used to customize the experience in the frontend.
 
-Expected response payload:
+Payload: None
+
+Expected response:
 
 ```ts
 {
-  hasSettingsScreen: boolean;
-  canWriteTag: boolean;
+  hasSettingsScreen?: boolean;
+  hasSidebar?: boolean;
+  canWriteTag?: boolean;
+  hasExoPlayer?: boolean;
+  canCommissionMatter?: boolean;
+  canImportThreadCredentials?: boolean;
+  canTransferThreadCredentialsToKeychain?: boolean;
+  hasAssist?: boolean;
+  hasBarCodeScanner?: number;
+  canSetupImprov?: boolean;
+  appVersion?: string;
+  hasEntityAddTo?: boolean;
+  hasAssistSettings?: boolean;
 }
 ```
 
-- `hasSettingsScreen` set to true if the external app will show a configuration screen when it receives the command `config_screen/show`. If so, a new option will be added to the sidebar to trigger the configuration screen.
-- `canWriteTag` set to true if the external app is able to write tags and so can support the `tag/write` command.
+- `hasSettingsScreen`: Set to true if the external app will show a configuration screen when it receives `config_screen/show`
+- `hasSidebar`: Set to true if the external app has a sidebar
+- `canWriteTag`: Set to true if the external app can write NFC tags (i.e., the device has NFC hardware)
+- `hasExoPlayer`: Set to true if the app supports HLS video playback via ExoPlayer
+- `canCommissionMatter`: Set to true if the app can commission Matter devices
+- `canImportThreadCredentials`: Set to true if the app can import Thread credentials
+- `canTransferThreadCredentialsToKeychain`: Set to true if the app can transfer Thread credentials to the keychain (Apple only)
+- `hasAssist`: Set to true if the app has a native Assist interface, replacing the frontend implementation
+- `hasBarCodeScanner`: Set to `1` if the app has bar code scanning capability, `0` otherwise
+- `canSetupImprov`: Set to true if the app can set up Improv Wi-Fi devices
+- `appVersion`: The version string of the native app
+- `hasEntityAddTo`: Set to true if the app supports adding entities to platform-specific locations (e.g., homescreen widget)
+- `hasAssistSettings`: Set to true if the app has an Assist settings screen
 
-### Show config screen `config_screen/show`
+##### `entity/add_to/get_actions`
 
-Available in: Home Assistant 0.92
-Type: `config_screen/show`
-Direction: frontend to external app.
-Expect answer: no
+Get available actions for adding an entity to the device (e.g., homescreen, watch face).
+
+Payload:
+
+```ts
+{
+  entity_id: string;
+}
+```
+
+Expected response:
+
+```ts
+{
+  actions: Array<{
+    enabled: boolean;
+    name: string;
+    details?: string;
+    mdi_icon: string;
+    app_payload: string;
+  }>;
+}
+```
+
+- `enabled`: Whether the action is currently available
+- `name`: Display name of the action
+- `details`: Optional additional details about the action
+- `mdi_icon`: Material Design Icon identifier for the action (e.g., "mdi:car")
+- `app_payload`: Opaque string to be sent back in `entity/add_to` to execute the action
+
+#### Messages not expecting a response
+
+##### `assist/settings`
+
+Open the Assist settings screen.
+
+Payload: None
+
+##### `assist/show`
+
+Show the native Assist interface.
+
+Payload (optional):
+
+```ts
+{
+  pipeline_id: "preferred" | "last_used" | string;
+  start_listening: boolean;
+}
+```
+
+- `pipeline_id`: The pipeline to use, or "preferred"/"last_used" for automatic selection
+- `start_listening`: Whether to start listening immediately
+
+##### `bar_code/close`
+
+Close the bar code scanner.
+
+Payload: None
+
+##### `bar_code/notify`
+
+Show a notification message in the bar code scanner.
+
+Payload:
+
+```ts
+{
+  message: string;
+}
+```
+
+##### `bar_code/scan`
+
+Start scanning a bar code.
+
+Payload:
+
+```ts
+{
+  title: string;
+  description: string;
+  alternative_option_label?: string;
+}
+```
+
+- `title`: Title to show in the scanner UI (required)
+- `description`: Description text to show in the scanner UI (required)
+- `alternative_option_label`: Optional label for an alternative action button, if not included the alternative action button should be hidden
+
+##### `config_screen/show`
 
 Show the configuration screen of the external app.
 
-### Connection status update `connection-status`
+Payload: None
 
-Available in: Home Assistant 0.92
-Type: `connection-status`
-Direction: frontend to external app.
-Expect answer: no
+##### `connection-status`
 
 Notify the external app if the frontend is connected to Home Assistant.
 
-Payload structure:
+Payload:
 
 ```ts
 {
@@ -133,16 +252,83 @@ Payload structure:
 }
 ```
 
-### Trigger haptic `haptic`
+##### `entity/add_to`
 
-Available in: Home Assistant 0.92
-Type: `haptic`
-Direction: frontend to external app.
-Expect answer: no
+Add an entity to a platform-specific location (e.g., homescreen widget).
+
+Payload:
+
+```ts
+{
+  entity_id: string;
+  app_payload: string;
+}
+```
+
+- `entity_id`: The entity to add
+- `app_payload`: Opaque string received from `entity/add_to/get_actions`
+
+##### `exoplayer/play_hls`
+
+Play an HLS video stream.
+
+Payload:
+
+```ts
+{
+  url: string;
+  muted: boolean;
+}
+```
+
+- `url`: The HLS stream URL
+- `muted`: Whether to start playback muted
+
+##### `exoplayer/resize`
+
+Resize the HLS video player.
+
+Payload:
+
+```ts
+{
+  left: number;
+  top: number;
+  right: number;
+  bottom: number;
+}
+```
+
+- `left`: Left coordinate of the player
+- `top`: Top coordinate of the player
+- `right`: Right coordinate of the player
+- `bottom`: Bottom coordinate of the player
+
+##### `exoplayer/stop`
+
+Stop HLS video playback.
+
+Payload: None
+
+##### `focus_element`
+
+Focus a specific element in the frontend.
+
+Payload:
+
+```ts
+{
+  element_id: string;
+}
+```
+
+- `element_id`: The ID of the element to focus
+
+##### `haptic`
 
 Notify the external app to trigger haptic feedback.
 
-Payload structure:
+Payload:
 
 ```ts
 {
@@ -154,18 +340,62 @@ Payload structure:
     | "medium"
     | "heavy"
     | "selection";
-
 }
 ```
 
-### Write tag `tag/write`
+##### `improv/configure_device`
 
-Available in: Home Assistant 0.115
-Type: `tag/write`
-Direction: frontend to external app
-Expect answer: yes
+Configure a discovered Improv Wi-Fi device.
 
-Tell the external app to open the UI to write to a tag. Name is the name of the tag as entered by the user. The name is `null` if no name has been set.
+Payload:
+
+```ts
+{
+  name: string;
+}
+```
+
+- `name`: The name of the device to configure
+
+##### `improv/scan`
+
+Start scanning for Improv Wi-Fi devices.
+
+Payload: None
+
+##### `matter/commission`
+
+Start the Matter device commissioning flow.
+
+Payload (optional):
+
+```ts
+{
+  mac_extended_address: string | null;
+  extended_pan_id: string | null;
+  border_agent_id: string | null;
+  active_operational_dataset: string | null;
+}
+```
+
+All payload properties describe the preferred Thread network which should be used when commissioning a Matter over Thread device.
+
+- `mac_extended_address`: The MAC extended address
+- `extended_pan_id`: The extended PAN ID
+- `border_agent_id`: The border agent ID
+- `active_operational_dataset`: The active operational dataset (TLV)
+
+##### `sidebar/show`
+
+Show the sidebar.
+
+Payload: None
+
+##### `tag/write`
+
+Tell the external app to open the UI to write to a tag.
+
+Payload:
 
 ```ts
 {
@@ -174,8 +404,201 @@ Tell the external app to open the UI to write to a tag. Name is the name of the 
 }
 ```
 
-Expected response payload is an empty object for now. We might add more later:
+- `tag`: The tag ID to write
+- `name`: The name of the tag as entered by the user, or `null` if no name has been set
+
+##### `theme-update`
+
+Notify the app that the theme has been updated. The app should refresh its status bar and navigation bar colors.
+
+Payload: None
+
+##### `thread/import_credentials`
+
+Import Thread network credentials from the device. Credentials should be sent using the [WebSocket API](/docs/api/websocket).
+
+Payload: None
+
+##### `thread/store_in_platform_keychain`
+
+Store Thread credentials in the platform keychain.
+
+Payload:
 
 ```ts
-{}
+{
+  mac_extended_address: string | null;
+  border_agent_id: string | null;
+  active_operational_dataset: string;
+  extended_pan_id: string;
+}
 ```
+
+- `mac_extended_address`: The MAC extended address
+- `border_agent_id`: The border agent ID
+- `active_operational_dataset`: The active operational dataset (TLV)
+- `extended_pan_id`: The extended PAN ID
+
+### Messages from app to frontend
+
+These messages are sent from the external app to the Home Assistant frontend.
+
+#### Messages expecting a response
+
+All commands in this section receive a result message back from the frontend:
+
+```ts
+{
+  id: number;
+  type: "result";
+  success: boolean;
+  result: null;
+  error?: { code: string; message: string };
+}
+```
+
+##### `automation/editor/show`
+
+Open the automation editor to create a new automation. The config can be used to pre-fill the editor with specific triggers, conditions, and actions.
+
+Payload (optional):
+
+```ts
+{
+  config?: {
+    alias?: string;
+    description?: string;
+    triggers?: Trigger | Trigger[];
+    conditions?: Condition | Condition[];
+    actions?: Action | Action[];
+    mode?: "single" | "restart" | "queued" | "parallel";
+    max?: number;
+  };
+}
+```
+
+- `config.alias`: Pre-filled name for the automation
+- `config.description`: Pre-filled description
+- `config.triggers`: One or more triggers to pre-populate
+- `config.conditions`: One or more conditions to pre-populate
+- `config.actions`: One or more actions to pre-populate
+- `config.mode`: Execution mode for the automation
+- `config.max`: Maximum number of concurrent runs (only applies to `queued` and `parallel` modes)
+
+##### `bar_code/aborted`
+
+Notify that bar code scanning was aborted.
+
+Payload:
+
+```ts
+{
+  reason: "canceled" | "alternative_options";
+}
+```
+
+##### `bar_code/scan_result`
+
+Send a bar code scanner result to the frontend.
+
+Payload:
+
+```ts
+{
+  rawValue: string;
+  format:
+    | "aztec"
+    | "code_128"
+    | "code_39"
+    | "code_93"
+    | "codabar"
+    | "data_matrix"
+    | "ean_13"
+    | "ean_8"
+    | "itf"
+    | "pdf417"
+    | "qr_code"
+    | "upc_a"
+    | "upc_e"
+    | "unknown";
+}
+```
+
+- `rawValue`: A string decoded from the barcode data
+- `format`: The barcode format as defined by the [Barcode Detection API](https://developer.mozilla.org/en-US/docs/Web/API/Barcode_Detection_API#supported_barcode_formats)
+
+##### `improv/device_setup_done`
+
+Notify that Improv Wi-Fi device setup is complete.
+
+Payload: None
+
+##### `improv/discovered_device`
+
+Notify that an Improv Wi-Fi device was discovered.
+
+Payload:
+
+```ts
+{
+  name: string;
+}
+```
+
+##### `kiosk_mode/set`
+
+Enable or disable kiosk mode.
+
+Payload:
+
+```ts
+{
+  enable: boolean;
+}
+```
+
+##### `navigate`
+
+Navigate to a specific path in the frontend.
+
+Payload:
+
+```ts
+{
+  path: string;
+  options?: {
+    replace?: boolean;
+    data?: any;
+  };
+}
+```
+
+- `path`: Absolute path to navigate to (for example, `/config/voice-assistants/assistants`). The path is passed directly to `history.pushState` or `history.replaceState`, so it must start with `/`
+- `options.replace`: If true, replaces the current browser history entry instead of pushing a new one.
+- `options.data`: Optional data to store in the browser history state, accessible via `history.state`
+
+##### `notifications/show`
+
+Show the notifications panel.
+
+Payload: None
+
+##### `restart`
+
+Request the frontend to restart.
+
+Payload: None
+
+##### `sidebar/show`
+
+Show the sidebar. Returns an error response with code `not_allowed` if a dialog is currently open.
+
+Payload: None
+
+##### `sidebar/toggle`
+
+Toggle the sidebar open/closed. Returns an error response with code `not_allowed` if a dialog is currently open.
+
+Payload: None
+
+[web-message-listener]: https://developer.android.com/reference/androidx/webkit/WebViewCompat.WebMessageListener

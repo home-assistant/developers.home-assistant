@@ -24,45 +24,51 @@ When the initializing is complete you can access the Home Assistant frontend on 
 
 ### Testing on a remote system
 
-For this you first need to create an account at [Docker Hub](https://hub.docker.com/).
-
 1. Access the remote system with SSH or with direct console access.
 2. Check the architecture on the machine with `ha info` or just `info` if it's Home Assistant OS.
-3. On your development machine use our [builder](https://github.com/home-assistant/builder) to build and publish your Supervisor image.
+3. On your development machine, build and push your Supervisor image to a container registry. Using GitHub Container Registry as an example (adjust `YOUR_GH_USERNAME` and the architecture to match what you found in step 2):
 
-Example:
+```bash
+docker build \
+    --platform linux/arm64 \
+    --tag ghcr.io/YOUR_GH_USERNAME/aarch64-hassio-supervisor:latest \
+    --push \
+    .
+```
 
 :::note
 
 All examples will have values you need to adjust.
 
-- Adjust `aarch64` with the architecture you found in step 2.
-- Adjust `awesome-user` to match your Docker Hub username.
-- Adjust `secret-password` to match your Docker Hub password or publish token.
+- Adjust `linux/arm64` and `aarch64` with the architecture you found in step 2.
+- Adjust `YOUR_GH_USERNAME` to match your GitHub username or organization.
+- To push an image to GitHub Container Registry like in the example above, you need to authenticate using a personal access token with appropriate scopes. See the [GitHub Container Registry documentation](https://docs.github.com/en/packages/working-with-a-github-packages-registry/working-with-the-container-registry) for more details.
 
 :::
 
-```bash
-docker run --rm \
-    --privileged \
-    -v /run/docker.sock:/run/docker.sock \
-    -v "$(pwd):/data" \
-    ghcr.io/home-assistant/amd64-builder:dev \
-        --generic latest \
-        --target /data \
-        --aarch64 \
-        --docker-hub awesome-user \
-        --docker-user awesome-user \
-        --docker-password secret-password \
-        --no-cache
-```
+:::note
+
+The architecture used in `--platform` option is not the same as the one used in Home Assistant. While `amd64` in Home Assistant corresponds to  `--platform linux/amd64`, `aarch64` in Home Assistant corresponds to `--platform linux/arm64` in Docker.
+
+:::
 
 4. On your remote system change the channel to `dev` with `ha supervisor --channel dev` or just `supervisor --channel dev` if it's Home Assistant OS.
-5. Pull down your Supervisor image with `docker pull awesome-user/aarch64-hassio-supervisor:latest`
-6. Tag your Supervisor image as `homeassistant/aarch64-hassio-supervisor:latest`
+5. Pull down your Supervisor image:
 
 ```bash
-docker tag awesome-user/aarch64-hassio-supervisor:latest homeassistant/aarch64-hassio-supervisor:latest
+docker pull ghcr.io/YOUR_GH_USERNAME/aarch64-hassio-supervisor:latest
+```
+
+:::note
+
+Docker images uploaded to GHCR are by default private. To download them, you will either need to authenticate using a personal access token on the remote system as well or [change the visibility](https://docs.github.com/en/packages/learn-github-packages/configuring-a-packages-access-control-and-visibility#configuring-visibility-of-packages-for-your-personal-account) of the package on GitHub.
+
+:::
+
+6. Tag your Supervisor image as the expected local name:
+
+```bash
+docker tag ghcr.io/YOUR_GH_USERNAME/aarch64-hassio-supervisor:latest ghcr.io/home-assistant/aarch64-hassio-supervisor:latest
 ```
 
 7. Restart the `hassio-supervisor` service with `systemctl restart hassos-supervisor`

@@ -1,5 +1,6 @@
 ---
 title: Creating Labs preview features
+sidebar_label: "Home Assistant Labs"
 description: Learn how to add preview features to Home Assistant Labs
 ---
 

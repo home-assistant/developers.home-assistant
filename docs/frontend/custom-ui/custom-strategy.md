@@ -4,45 +4,139 @@ title: "Custom strategies"
 
 _Introduced in Home Assistant 2021.5._
 
-Strategies are JavaScript functions that generate dashboard configurations. When a user has not created a dashboard configuration yet, an auto-generated dashboard is shown. That configuration is generated using a built-in strategy.
+Strategies are custom elements that generate custom dashboards and/or views. You can create new strategies in the frontend repository, or create custom strategies loaded as dashboard resources. Both have access to the Home Assistant API similar to [custom cards](./custom-card.md).
 
-It's possible for developers to create their own strategies to generate dashboards. Strategies can use all of Home Assistant's data and the user's dashboard configuration to create something new.
+A strategy can generate a single view, or a full dashboard including one or several views.
 
-A strategy can be applied to the whole configuration or to a specific view.
+As with custom cards, custom strategies need to be loaded as resources. Refer to [registering resources](./registering-resources.md) for more information on how to include strategies as resources.
 
-Strategies are defined as a custom element in a JavaScript file, and included [via dashboard resources](./registering-resources.md). Home Assistant will call static functions on the class instead of rendering it as a custom element.
+If you have already built a custom card, the setup will feel familiar. Strategies are loaded the same way, but instead of rendering a single card directly they generate dashboard content. They can also work alongside custom cards when you need them to. You can import custom cards into your strategy as with any other resource/element.
 
-## Dashboard strategies
+## Dashboards
 
-A dashboard strategy is responsible for generating a full dashboard configuration. This can either be from scratch, or based on an existing dashboard configuration that is passed in.
+A dashboard strategy generates a full dashboard configuration. In most cases, it starts from a small strategy config and returns the full dashboard structure. Think of this like a json/yaml config which is then rendered into a dashboard. Built in dashboards are built with dashboard strategies. You can read the source code for the built in dashboards [here](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace/strategies).
 
-Two parameters are passed to the strategy:
+### Show your community dashboard in the new dashboard dialog
 
-| Key | Description
-| -- | --
-| `config` | Dashboard strategy configuration.
-| `hass` | The Home Assistant object.
+__Introduced in Home Assistant 2026.5.__
 
-```ts
-class StrategyDemo {
-  static async generate(config, hass) {
+If you already have a dashboard strategy, you can make it much easier for people to add by registering your strategy in `window.customStrategies`.
+
+Once the resource is loaded, Home Assistant can show your dashboard in the **new dashboard** dialog under the **Community dashboards** section.
+
+The object supports the following keys:
+
+| Key                | Required | Description                                                                    |
+| ------------------ | -------- | ------------------------------------------------------------------------------ |
+| `type`             | Yes      | The strategy type without the `custom:` prefix.                                |
+| `strategyType`     | Yes      | Set to `"dashboard"` to register a dashboard strategy.                         |
+| `name`             | No       | Friendly name shown in the picker.                                             |
+| `description`      | No       | Short text shown below the name.                                               |
+| `documentationURL` | No       | Link to your documentation. This is not shown in the strategy UI yet.          |
+
+Example:
+
+```js
+window.customStrategies = window.customStrategies || [];
+window.customStrategies.push({
+  type: "my-demo",
+  strategyType: "dashboard",
+  name: "My demo dashboard",
+  description: "A starter dashboard generated from JavaScript.",
+  documentationURL: "https://example.com/my-demo-dashboard",
+});
+```
+
+### Suggest values in the create dialog
+
+Dashboard strategies can also suggest initial values for the dashboard details form that opens after a user picks the strategy.
+
+To do this, add a static `getCreateSuggestions(hass)` method to your dashboard strategy element. Return an object with any of these optional keys:
+
+| Key     | Description                                |
+| ------- | ------------------------------------------ |
+| `title` | Suggested dashboard title.                 |
+| `icon`  | Suggested dashboard icon, like `mdi:home`. |
+
+Example:
+
+```js
+class MyDemoDashboardStrategy extends HTMLElement {
+  static getCreateSuggestions(_hass) {
     return {
-      title: "Generated Dashboard",
+      title: "My demo dashboard",
+      icon: "mdi:view-dashboard",
+    };
+  }
+
+  static async generate(config, hass) {
+    // ...
+  }
+}
+```
+
+These values are only defaults for the dialog. Users can still change them before creating the dashboard.
+
+### Examples
+
+A good example to start from is the [home overview](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace/strategies/home) dashboard or the [energy dashboard](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace/strategies/energy).
+
+Or, for a less complex example, the [map dashboard strategy](https://github.com/home-assistant/frontend/blob/dev/src/panels/lovelace/strategies/map/map-dashboard-strategy.ts) which imports the map view strategy. This in turn uses a panel view type, which uses a single map card.
+
+#### Basic example
+
+This example is meant to be copied into a JavaScript file and loaded as a module resource. It includes both the strategy registration and the metadata needed to show it in the new dashboard dialog.
+
+It is a good starting point, but we recommend using Lit's [ReactiveElement](https://lit.dev/docs/framework/concepts/reactive-element/) instead of HTMLElement and using types either with TypeScript or JSDoc. See the [frontend repo](https://github.com/home-assistant/frontend/tree/dev/src/panels/lovelace/strategies) for full code examples.
+
+```js
+class MyDemoDashboardStrategy extends HTMLElement {
+  static getCreateSuggestions(_hass) {
+    return {
+      title: "My demo dashboard",
+      icon: "mdi:view-dashboard",
+    };
+  }
+
+  static async generate(config, hass) {
+    const title = config.title || "My demo dashboard";
+    const locationName = hass.config.location_name || "Home Assistant";
+
+    return {
+      title,
       views: [
         {
-          "cards": [
+          title: "Home",
+          path: "home",
+          cards: [
             {
-              "type": "markdown",
-              "content": `Generated at ${(new Date).toLocaleString()}`
-            }
-          ]
-        }
-      ]
+              type: "markdown",
+              content:
+                `# ${locationName}\n\n` +
+                "This dashboard was generated by a community dashboard strategy.",
+            },
+            {
+              type: "entities",
+              entities: ["sun.sun"],
+            },
+          ],
+        },
+      ],
     };
   }
 }
 
-customElements.define("ll-strategy-my-demo", StrategyDemo);
+customElements.define("ll-strategy-dashboard-my-demo", MyDemoDashboardStrategy);
+
+window.customStrategies = window.customStrategies || [];
+window.customStrategies.push({
+  type: "my-demo",
+  strategyType: "dashboard",
+  name: "My demo dashboard",
+  description: "A small starter dashboard generated from JavaScript.",
+  documentationURL:
+    "https://developers.home-assistant.io/docs/frontend/custom-ui/custom-strategy",
+});
 ```
 
 Use the following dashboard configuration to use this strategy:
@@ -52,96 +146,78 @@ strategy:
   type: custom:my-demo
 ```
 
-## View strategies
+## Views
 
-A view strategy is responsible for generating the configuration of a specific dashboard view. The strategy is invoked when the user opens the specific view.
+A view strategy generates the configuration of a specific dashboard view. These can be reused in dashboard strategies if needed, as can custom cards be used in view strategies.
 
-Two parameters are passed to the strategy:
-
-| Key | Description
-| -- | --
-| `config` | View strategy configuration.
-| `hass` | The Home Assistant object.
-
-```ts
-class StrategyDemo {
-  static async generate(config, hass) {
-    return {
-      "cards": [
-        {
-          "type": "markdown",
-          "content": `Generated at ${(new Date).toLocaleString()}`
-        }
-      ]
-    };
-  }
-}
-
-customElements.define("ll-strategy-my-demo", StrategyDemo);
-```
+> This section is about view strategies. If you want to build a custom view layout element instead, refer to [custom views](./custom-view.md).
 
 Use the following dashboard configuration to use this strategy:
 
 ```yaml
 views:
-- strategy:
-    type: custom:my-demo
+  - strategy:
+      type: custom:my-demo
+      title: Generated view
 ```
 
-## Full example
+## Full strategy example
 
-It's recommended for a dashboard strategy to leave as much work to be done to the view strategies. That way the dashboard will show up for the user as fast as possible. This can be done by having the dashboard generate a configuration with views that rely on its own strategy.
+It is often a good idea to let a dashboard strategy create the list of views, and let a view strategy generate the cards for each view. That keeps the first dashboard load smaller and lets Home Assistant build each view only when it is opened.
 
-Below example will create a view per area, with each view showing all entities in that area in a grid.
+The example below creates one view per area. Each generated view shows the entities for that area in a grid.
 
-```ts
-class StrategyDashboardDemo {
+```js
+class MyAreaDashboardStrategy extends HTMLElement {
+  static getCreateSuggestions(_hass) {
+    return {
+      title: "Area dashboard",
+      icon: "mdi:floor-plan",
+    };
+  }
+
   static async generate(config, hass) {
-    // Query all data we need. We will make it available to views by storing it in strategy options.
+    // Query all the data we need. We will make it available to views by storing it in strategy options.
     const [areas, devices, entities] = await Promise.all([
       hass.callWS({ type: "config/area_registry/list" }),
       hass.callWS({ type: "config/device_registry/list" }),
       hass.callWS({ type: "config/entity_registry/list" }),
     ]);
 
-    // Each view is based on a strategy so we delay rendering until it's opened
     return {
+      title: config.title || "Area dashboard",
       views: areas.map((area) => ({
-        strategy: {
-          type: "custom:my-demo",
-          area, 
-          devices, 
-          entities,
-        },
         title: area.name,
         path: area.area_id,
+        strategy: {
+          type: "custom:my-area-dashboard",
+          area: area,
+          devices: devices,
+          entities: entities,
+        },
       })),
     };
   }
 }
 
-class StrategyViewDemo {
+class MyAreaViewStrategy extends HTMLElement {
   static async generate(config, hass) {
-    const { area, devices, entities } = config;
-
     const areaDevices = new Set();
 
-    // Find all devices linked to this area
-    for (const device of devices) {
-      if (device.area_id === area.area_id) {
+    // Find all devices in this area.
+    for (const device of config.devices) {
+      if (device.area_id === config.area.area_id) {
         areaDevices.add(device.id);
       }
     }
 
     const cards = [];
 
-    // Find all entities directly linked to this area
-    // or linked to a device linked to this area.
-    for (const entity of entities) {
+    // Find all entities in this area or belonging to a device in this area.
+    for (const entity of config.entities) {
       if (
-        entity.area_id
-          ? entity.area_id === area.area_id
-          : areaDevices.has(entity.device_id)
+        entity.area_id === config.area.area_id ||
+        (!entity.area_id && areaDevices.has(entity.device_id))
       ) {
         cards.push({
           type: "button",
@@ -161,13 +237,30 @@ class StrategyViewDemo {
   }
 }
 
-customElements.define("ll-strategy-dashboard-my-demo", StrategyDashboardDemo);
-customElements.define("ll-strategy-view-my-demo", StrategyViewDemo);
+customElements.define(
+  "ll-strategy-dashboard-my-area-dashboard",
+  MyAreaDashboardStrategy,
+);
+
+customElements.define(
+  "ll-strategy-view-my-area-dashboard",
+  MyAreaViewStrategy,
+);
+
+window.customStrategies = window.customStrategies || [];
+window.customStrategies.push({
+  type: "my-area-dashboard",
+  strategyType: "dashboard",
+  name: "Area dashboard",
+  description: "Build one view per area from the Home Assistant registries.",
+  documentationURL:
+    "https://developers.home-assistant.io/docs/frontend/custom-ui/custom-strategy",
+});
 ```
 
 Use the following dashboard configuration to use this strategy:
 
 ```yaml
 strategy:
-  type: custom:my-demo
+  type: custom:my-area-dashboard
 ```

@@ -5,8 +5,8 @@ title: "Local app testing"
 The fastest and recommended way to develop apps (formerly known as add-ons) is using a local Visual Studio Code devcontainer. We maintain a [devcontainer for this purpose](https://github.com/home-assistant/devcontainer) which is used in all our app repositories. This devcontainer setup for VS Code runs Supervisor and Home Assistant, with all of the apps mapped as local apps inside, making it simple for app developers on Windows, Mac and Linux desktop OS-es.
 
 - Follow the instructions to download and install the [Remote Containers](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers) VS Code extension.
-- Copy the [`devcontainer.json`](https://github.com/home-assistant/devcontainer/raw/main/addons/devcontainer.json) file to `.devcontainer/devcontainer.json` in your repository.
-- Copy the [`tasks.json`](https://github.com/home-assistant/devcontainer/raw/main/addons/tasks.json) file to `.vscode/tasks.json` in your repository.
+- Copy the [`devcontainer.json`](https://github.com/home-assistant/devcontainer/raw/main/apps/devcontainer.json) file to `.devcontainer/devcontainer.json` in your repository.
+- Copy the [`tasks.json`](https://github.com/home-assistant/devcontainer/raw/main/apps/tasks.json) file to `.vscode/tasks.json` in your repository.
 - Open the root folder inside VS Code, and when prompted re-open the window inside the container (or, from the Command Palette, select 'Rebuild and Reopen in Container').
 - When VS Code has opened your folder in the container (which can take some time for the first run) you'll need to run the task (Terminal -> Run Task) 'Start Home Assistant', which will bootstrap Supervisor and Home Assistant.
 - You'll then be able to access the normal onboarding process via the Home Assistant instance at `http://localhost:7123/`.
@@ -20,43 +20,23 @@ Right now apps will work with images that are stored on Docker Hub (using `image
 
 ## Local build
 
-If you don't want to use the devcontainer environment, you can still build apps locally with Docker. The recommended method is to use the [official build tool][hassio-builder] to create the Docker images.
-
-Assuming that your addon is in the folder `/path/to/addon` and your Docker socket is at `/var/run/docker.sock`, you can build the addon for all supported architectures by running the following:
-
-```shell
-docker run \
-  --rm \
-  -it \
-  --name builder \
-  --privileged \
-  -v /path/to/addon:/data \
-  -v /var/run/docker.sock:/var/run/docker.sock:ro \
-  ghcr.io/home-assistant/amd64-builder \
-  -t /data \
-  --all \
-  --test \
-  -i my-test-addon-{arch} \
-  -d local
-```
-
-If you don't want to use the official build tool, you can still build with standalone Docker. If you use `FROM $BUILD_FROM` you'll need to set a base image with build args. Normally you can use following base images:
-
-- armhf: `ghcr.io/home-assistant/armhf-base:latest`
-- aarch64: `ghcr.io/home-assistant/aarch64-base:latest`
-- amd64: `ghcr.io/home-assistant/amd64-base:latest`
-- i386: `ghcr.io/home-assistant/i386-base:latest`
+If you don't want to use the devcontainer environment, you can build apps locally with standalone Docker. This is useful for quick single-architecture checks on the host you are currently working on.
 
 Use `docker` from the directory containing the app files to build the test addon:
 
 ```shell
 docker build \
-  --build-arg BUILD_FROM="ghcr.io/home-assistant/amd64-base:latest" \
-  -t local/my-test-addon \
+  -t local/my-test-app \
   .
 ```
 
-[hassio-builder]: https://github.com/home-assistant/builder
+For a multi-platform build or cross-compilation, you can use the `--platform` flag with the appropriate target platform (e.g. `--platform linux/arm64` to build `aarch64` image in QEMU on an AMD64 host). See the official Docker documentation on [multi-platform builds](https://docs.docker.com/build/building/multi-platform/) for more details.
+
+:::note
+
+The architecture used in `--platform` option is not the same as the one used in Home Assistant. While `amd64` in Home Assistant corresponds to  `--platform linux/amd64`, `aarch64` in Home Assistant corresponds to `--platform linux/arm64` in Docker.
+
+:::
 
 ## Local run
 
@@ -69,7 +49,7 @@ docker run \
   --rm \
   -v /tmp/my_test_data:/data \
   -p PORT_STUFF_IF_NEEDED \
-  local/my-test-addon
+  local/my-test-app
 ```
 
 ## Logs

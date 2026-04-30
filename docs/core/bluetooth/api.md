@@ -268,6 +268,26 @@ Do not use this API for devices whose advertisement data changes frequently (e.g
 This API is intended for infrequent state changes such as factory resets or major operational mode transitions, not for regular data updates.
 :::
 
+### Clearing cached advertisement history
+
+To reduce overhead, the Bluetooth manager drops advertisements when the `manufacturer_data`, `service_data`, `service_uuids`, and `name` fields all match the previously seen advertisement from the same address. This means a device that emits an unchanging "I am awake" advertisement will only deliver the first packet to your callback; subsequent identical packets are silently deduplicated.
+
+The `bluetooth.async_clear_advertisement_history` API clears the cached advertisement state for a single address so the next advertisement is treated as new data and dispatched to callbacks, even if the payload is byte-for-byte identical to the previous one.
+
+This is useful for integrations that connect to a device over GATT to read sensor data and need to know when the device wakes up again; after the GATT session ends, call `async_clear_advertisement_history` so the next wake-up advertisement is delivered.
+
+```python
+from homeassistant.components import bluetooth
+
+# After disconnecting from the device, clear the cached advertisement
+# so the next identical "I am awake" packet is dispatched to callbacks
+bluetooth.async_clear_advertisement_history(hass, "44:44:33:11:23:42")
+```
+
+:::note
+This clears only the advertisement deduplication state; it does not affect the integration matcher history. If you also need future advertisements to re-trigger discovery flows, use `async_clear_address_from_match_history` or `async_rediscover_address`.
+:::
+
 ### Waiting for a specific advertisement
 
 To wait for a specific advertisement, call the `bluetooth.async_process_advertisements` API.

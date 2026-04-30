@@ -56,4 +56,4 @@ A list of IoT standards which are supported by devices of the brand. Possible va
 
 ## Brand images
 
-Brand images (icons and logos) for official integrations are stored in the [brands repository](https://github.com/home-assistant/brands). Custom integrations can also ship their own brand images. For more details on brand images and how they are served, see [Integration file structure: Brand images](creating_integration_file_structure.md#brand-images---brand).
+Brand images (icons and logos) for brands are stored in the [brands repository](https://github.com/home-assistant/brands). For more details on brand images and how they are served, see [Brand images](/docs/core/integration/brand_images.md).

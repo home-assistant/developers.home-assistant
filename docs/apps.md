@@ -22,7 +22,7 @@ Useful links:
 - [Home Assistant Supervisor](https://github.com/home-assistant/supervisor)
 - [Home Assistant Core Apps](https://github.com/home-assistant/addons)
 - [Home Assistant Docker base images](https://github.com/home-assistant/docker-base)
-- [Home Assistant Builder](https://github.com/home-assistant/builder)
+- [Home Assistant Builder actions](https://github.com/home-assistant/builder)
 - [Home Assistant community apps](https://github.com/hassio-addons)
 - [Home Assistant Operating System](https://github.com/home-assistant/operating-system)
 - [Home Assistant Docker images](https://github.com/home-assistant/docker)
