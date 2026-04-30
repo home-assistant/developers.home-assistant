@@ -1,5 +1,6 @@
 ---
-title: "Custom strategies"
+title: "Custom dashboard strategies"
+sidebar_label: "Custom dashboards"
 ---
 
 _Introduced in Home Assistant 2021.5._
@@ -145,6 +146,68 @@ Use the following dashboard configuration to use this strategy:
 strategy:
   type: custom:my-demo
 ```
+
+## Graphical configuration
+
+Your strategy can define a static `getConfigElement` method that returns a custom element for editing the strategy configuration. Home Assistant will display this element in the dashboard settings dialog.
+
+Set `configRequired` to `true` if your strategy requires configuration to work. This prevents Home Assistant from creating a dashboard with this strategy without first showing the configuration editor.
+
+Set `noEditor` to `true` if your strategy does not support graphical configuration.
+
+```js
+class MyDemoDashboardStrategy extends HTMLElement {
+
+  static getConfigElement() {
+    return document.createElement("my-demo-strategy-editor");
+  }
+
+  static configRequired = true;
+
+  static async generate(config, hass) {
+    return {
+      views: [
+        {
+          cards: [
+            {
+              type: "iframe",
+              url: config.url,
+            },
+          ],
+        },
+      ],
+    };
+  }
+
+}
+
+customElements.define("ll-strategy-dashboard-my-demo", MyDemoDashboardStrategy);
+```
+
+```js
+class MyDemoStrategyEditor extends HTMLElement {
+  setConfig(config) {
+    this._config = config;
+  }
+
+  set hass(hass) {
+    this._hass = hass;
+  }
+
+  configChanged(newConfig) {
+    const event = new Event("config-changed", {
+      bubbles: true,
+      composed: true,
+    });
+    event.detail = { config: newConfig };
+    this.dispatchEvent(event);
+  }
+}
+
+customElements.define("my-demo-strategy-editor", MyDemoStrategyEditor);
+```
+
+Home Assistant will call the `setConfig` method of the config element on setup. The `hass` property will be updated on state changes. Changes to the configuration are communicated back by dispatching a `config-changed` event with the new configuration in its detail.
 
 ## Views
 
