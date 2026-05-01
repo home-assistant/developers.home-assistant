@@ -594,11 +594,11 @@ Passing `sort=True` to async_show_menu will also sort the menu items by their la
 
 ### Entity previews
 
-Currently preview entities are only supported for config entry flows, option Flows, subentry config Flows, and repair flows. To implement flow previews in a flow manager you'll need to complete the following basic steps:
+Currently preview entities are only supported for config entry flows, option flows, subentry config flows, and repair flows. To implement flow previews in a flow manager you'll need to complete the following basic steps:
 
 #### 1. Create the websocket endpoint
 
-The below is specific to `ConfigFlow` or `ConfigSubentryFlow` flows. 
+The below is specific to `ConfigFlow` or `ConfigSubentryFlow` flows but is easily adaptable to an `OptionsFlow` or `RepairsFlow`.
 
 ```python
 # In config_flow.py
@@ -682,8 +682,11 @@ async def ws_start_preview(
     )
 ```
 
-> [!NOTE]
-> `domain` in omitted in async_preview_callback refers to the the preview entity's domain (e.g. `"sensor"` or `"select"`). If `domain` is omitted in the event message in `async_preview_callback` above the frontend will fall back first to the flow's current `step_id` which is fine if you want a `SelectEntity` preview and `async_show_form` is being called from `async_step_select`.  If `step_id` doesn't match any domains the frontend will fallback and render a `SensorEntity` with applicable attributes.
+:::tip
+
+ `domain` in omitted in async_preview_callback refers to the the preview entity's domain (e.g. `"sensor"` or `"select"`). If `domain` is omitted in the event message in `async_preview_callback` above the frontend will fall back first to the flow's current `step_id` which is fine if you want a `SelectEntity` preview and `async_show_form` is being called from `async_step_select`.  If `step_id` doesn't match any domains the frontend will fallback and render a `SensorEntity` with applicable attributes.
+
+:::
 
 #### 2. Create the preview entity
 
