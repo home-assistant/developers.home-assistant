@@ -592,6 +592,168 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
 
 Passing `sort=True` to async_show_menu will also sort the menu items by their label in the user's language.
 
+### Entity previews
+
+Currently preview entities are only supported for config entry flows, option Flows, subentry config Flows, and repair flows. To implement flow previews in a flow manager you'll need to complete the following basic steps:
+
+#### 1. Create the websocket endpoint
+
+The below is specific to `ConfigFlow` or `ConfigSubentryFlow` flows. 
+
+```python
+# In config_flow.py
+
+from homeassistant.components import websocket_api
+from homeassistant.config_entry import ConfigFlow, FlowType, SubentryFlowResult, ConfigEntry
+
+@websocket_api.websocket_command(
+    {
+        vol.Required("type"): "preview_name/start_preview", # "preview_name" corresponds to the value in async_show_form(..., preview="preview_name") and needs to be unique so use something like f"{DOMAIN}_my_flow_handler"
+        vol.Required("flow_id"): str,
+        vol.Required("flow_type"): vol.Any(FlowType.CONFIG_FLOW, FlowType.CONFIG_SUBENTRIES_FLOW),
+        vol.Required("user_input"): dict,
+    }
+)
+@websocket_api.async_response
+async def ws_start_preview( 
+    hass: HomeAssistant,
+    connection: websocket_api.ActiveConnection,
+    msg: dict[str, Any],
+) -> None:
+    """Generate a preview.
+    
+    The client sends a message calling this endpoint when the form is rendered and when any field changes.
+    """
+
+    user_input: dict[str, Any] = msg["user_input"] # the current user input on the form
+
+    # Get the partial flow result
+    if msg["flow_type"] is FlowType.CONFIG_SUBENTRIES_FLOW:
+        flow_status: SubentryFlowResult = hass.config_entries.subentries.async_get(msg["flow_id"])
+        # get the config entry (if applicable or needed)
+        entry_id, _ = cur_step["handler"] # handler for subentry flow is a tuple of str of form (entry_id, subentry_flow_type)
+        config_entry: ConfigEntry = hass.config_entries.async_get(entry_id)
+
+    ... # process the data, validate for errors (tip: use the same schema/validation used in the data entry flow step)
+
+    @callback
+    def async_preview_callback(
+        state: str | None,
+        attributes: Mapping[str, Any] | None,
+        error: str | None,
+        domain: str | None,
+    ) -> None:
+        """Forward preview updates to websocket."""
+        # Errors sent here will appear in the preview element on the data entry form.  Note that this isn't required and data input validation errors should be sent using connection.send_message below.  Use this for ValueErrors raised by the entity in _calculate_state for example.
+        if error is not None:
+            connection.send_message(
+                websocket_api.event_message(msg["id"], {"error": error})
+            )
+            return
+        connection.send_message(
+            websocket_api.event_message(
+                msg["id"],
+                {
+                    "attributes": attributes,
+                    "domain": domain, # optional, see note below
+                    "state": state,
+                },
+            )
+        )
+
+    # errors: Mapping[str, str] = {"user_input_key": "error_translation_key"} similar to the value expected by async_show_form(..., errors = errors)
+    if errors is not None:
+        connection.send_message(
+            {
+                "id": msg["id"],
+                "type": websocket_api.TYPE_RESULT,
+                "success": False,
+                "error": {"code": "invalid_user_input", "message": errors},
+            }
+        )
+        return
+    
+    # Create the preview entity.
+    preview = PreviewSensorEntity(hass, value=value, config=config)
+
+    connection.send_result(msg["id"])
+    connection.subscriptions[msg["id"]] = preview.async_show_preview(
+        async_preview_callback
+    )
+```
+
+> [!NOTE]
+> `domain` in omitted in async_preview_callback refers to the the preview entity's domain (e.g. `"sensor"` or `"select"`). If `domain` is omitted in the event message in `async_preview_callback` above the frontend will fall back first to the flow's current `step_id` which is fine if you want a `SelectEntity` preview and `async_show_form` is being called from `async_step_select`.  If `step_id` doesn't match any domains the frontend will fallback and render a `SensorEntity` with applicable attributes.
+
+#### 2. Create the preview entity
+
+Ideally one would leverage an entity class already created for an integration but a simple entity can be created at runtime.
+
+```python
+class PreviewSensorEntity(SensorEntity):
+    """Preview sensor entity for subentry flows."""
+
+    def __init__(value: str, config: dict[str, str]) -> None:
+        self._attr_native_value = value
+        self._attr_device_class = config.get(CONF_DEVICE_CLASS)
+        self._attr_native_unit_of_measurement = config.get(CONF_UNIT_OF_MEASUREMENT)
+        self._attr_state_class = config.get(CONF_STATE_CLASS)
+    
+    @callback
+    def async_show_preview(
+        self,
+        preview_callback: Callable[
+            [
+                str | None,  # state
+                Mapping[str, Any] | None,  # attributes
+                str | None,  # errors
+                str | None,  # domain
+            ],
+            None,
+        ],
+    ) -> CALLBACK_TYPE:
+        """Start a preview."""
+        error: str | None = None
+        try:
+            calculated_state: CalculatedState = self._async_calculate_state()
+            preview_callback(
+                calculated_state.state,
+                calculated_state.attributes,
+                None, # error
+                self.domain,
+            )
+        except ValueError as ex:
+            error = str(ex)
+            if len(error) > 255:
+                error = error[:254]
+        if error:
+            preview_callback(None, None, error, None)
+
+        return self._call_on_remove_callbacks
+```
+
+#### 3. Register the websocket preview command
+
+Add a static method `async_setup_preview` to the flow handler.
+
+```python
+@staticmethod
+async def async_setup_preview(hass: HomeAssistant) -> None:
+    """Set up preview WS API."""
+    websocket_api.async_register_command(hass, ws_start_preview)
+```
+
+#### 4. Specify the preview in `async_show_form`
+
+```python
+return self.async_show_form(
+    step_id="my_step",
+    data_schema=schema,
+    errors=errors,
+    preview="my_integration_subentry_preview", # This same value set in the websocket_command schema in step 1.
+)
+```
+
 ## Initializing a config flow from an external source
 
 You might want to initialize a config flow programmatically. For example, if we discover a device on the network that requires user interaction to finish setup. To do so, pass a source parameter and optional user input when initializing a flow:
