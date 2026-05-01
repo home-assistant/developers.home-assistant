@@ -1663,7 +1663,7 @@
     webpack "^5.95.0"
     webpackbar "^6.0.1"
 
-"@docusaurus/core@3.10.0", "@docusaurus/core@^3.10.0":
+"@docusaurus/core@3.10.0":
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/@docusaurus/core/-/core-3.10.0.tgz#642e71a0209d62c3f5ef275ed9d74a881f40df39"
   integrity sha512-mgLdQsO8xppnQZc3LPi+Mf+PkPeyxJeIx11AXAq/14fsaMefInQiMEZUUmrc7J+956G/f7MwE7tn8KZgi3iRcA==
@@ -1918,7 +1918,7 @@
     tslib "^2.6.0"
     webpack "^5.88.1"
 
-"@docusaurus/preset-classic@^3.10.0":
+"@docusaurus/preset-classic@3.10.0":
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/@docusaurus/preset-classic/-/preset-classic-3.10.0.tgz#74b6facdaf568bcd41ec90cae9aebb7ca0ac8619"
   integrity sha512-kw/Ye02Hc6xP1OdTswy8yxQEHg0fdPpyWAQRxr5b2x3h7LlG2Zgbb5BDFROnXDDMpUxB7YejlocJIE5HIEfpNA==
@@ -1989,7 +1989,7 @@
     tslib "^2.6.0"
     utility-types "^3.10.0"
 
-"@docusaurus/theme-mermaid@^3.10.0":
+"@docusaurus/theme-mermaid@3.10.0":
   version "3.10.0"
   resolved "https://registry.yarnpkg.com/@docusaurus/theme-mermaid/-/theme-mermaid-3.10.0.tgz#6581ccf16d27e4c02fe8c7cf15488862f27be9c8"
   integrity sha512-Y2xrlwhIJ80oOZIO3PXL6A7J869splfcMI87E3NKpYsy3zJxOyV+BP1QMtGi59ajKgU868HPuyyn6J+6BZGOBg==
@@ -2114,7 +2114,7 @@
     cssesc "^3.0.0"
     immediate "^3.2.3"
 
-"@easyops-cn/docusaurus-search-local@^0.55.1":
+"@easyops-cn/docusaurus-search-local@0.55.1":
   version "0.55.1"
   resolved "https://registry.yarnpkg.com/@easyops-cn/docusaurus-search-local/-/docusaurus-search-local-0.55.1.tgz#a0ee40e598c10138d328db04183584b51a8cb0d3"
   integrity sha512-jmBKj1J+tajqNrCvECwKCQYTWwHVZDGApy8lLOYEPe+Dm0/f3Ccdw8BP5/OHNpltr7WDNY2roQXn+TWn2f1kig==
@@ -2345,7 +2345,7 @@
     unist-util-visit "^5.0.0"
     vfile "^6.0.0"
 
-"@mdx-js/react@^3.0.0", "@mdx-js/react@^3.1.1":
+"@mdx-js/react@3.1.1", "@mdx-js/react@^3.0.0":
   version "3.1.1"
   resolved "https://registry.yarnpkg.com/@mdx-js/react/-/react-3.1.1.tgz#24bda7fffceb2fe256f954482123cda1be5f5fef"
   integrity sha512-f++rKLQgUVYDAtECQ6fn/is15GkEH9+nZPM3MS0RcxVqoTfawHvDlSCH7JbMhAM6uJ32v3eXLvLmLvjGu7PTQw==
@@ -3855,9 +3855,9 @@ bundle-name@^4.1.0:
   dependencies:
     run-applescript "^7.0.0"
 
-by-node-env@^2.0.1:
+by-node-env@2.0.1:
   version "2.0.1"
-  resolved "https://registry.npmjs.org/by-node-env/-/by-node-env-2.0.1.tgz"
+  resolved "https://registry.yarnpkg.com/by-node-env/-/by-node-env-2.0.1.tgz#598dc03ea8487615262367c79c645812b934c205"
   integrity sha512-R9SK0qkccuJCR+xJk33WzBveVInqbVcP8b86HHbv/VeuydGJp9xHhHq0OaFi1pFHC4kVAfiJ2MeVk0+9hjg0HQ==
   dependencies:
     commander "^2.20.0"
@@ -4163,7 +4163,7 @@ clone-deep@^4.0.1:
     kind-of "^6.0.2"
     shallow-clone "^3.0.0"
 
-clsx@^2.0.0, clsx@^2.1.1:
+clsx@2.1.1, clsx@^2.0.0, clsx@^2.1.1:
   version "2.1.1"
   resolved "https://registry.npmjs.org/clsx/-/clsx-2.1.1.tgz"
   integrity sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==
@@ -8991,7 +8991,7 @@ rc@1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-dom@^19.2.5:
+react-dom@19.2.5:
   version "19.2.5"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-19.2.5.tgz#b8768b10837d0b8e9ca5b9e2d58dff3d880ea25e"
   integrity sha512-J5bAZz+DXMMwW/wV3xzKke59Af6CHY7G4uYLN1OvBcKEsWOs4pQExj86BBKamxl/Ik5bx9whOrvBlSDfWzgSag==
@@ -9073,7 +9073,7 @@ react-router@5.3.4, react-router@^5.3.4:
     tiny-invariant "^1.0.2"
     tiny-warning "^1.0.0"
 
-react@^19.2.5:
+react@19.2.5:
   version "19.2.5"
   resolved "https://registry.yarnpkg.com/react/-/react-19.2.5.tgz#c888ab8b8ef33e2597fae8bdb2d77edbdb42858b"
   integrity sha512-llUJLzz1zTUBrskt2pwZgLq59AemifIftw4aB7JxOqf1HY2FDaGDxgwpAPVzHU1kdWabH7FauP4i1oEeer2WCA==
@@ -10836,7 +10836,7 @@ yallist@^4.0.0:
   resolved "https://registry.npmjs.org/yallist/-/yallist-4.0.0.tgz"
   integrity sha512-3wdGidZyq5PB084XLES5TpOSRA3wjXAlIWMhum2kRcv/41Sn2emQ0dycQW4uZXLejwKvg6EsvbdlVL+FYEct7A==
 
-yaml-loader@^0.9.0:
+yaml-loader@0.9.0:
   version "0.9.0"
   resolved "https://registry.yarnpkg.com/yaml-loader/-/yaml-loader-0.9.0.tgz#4de1f70dd5fb6965c4c126337729c41fd6ad0aba"
   integrity sha512-N0bPfDR42qCruELfmpF6Q8XnDu1elTULGjvVn7u6rsfDa8WhlmJbjXQRh+x5TGmpOqw8R9qfiUgc3aKP+8Hd4w==
