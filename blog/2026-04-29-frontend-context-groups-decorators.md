@@ -20,7 +20,7 @@ Following context groups have been added:
 
 ## Consume context entry decorators
 
-In the last [blogpost](./2026-03-25-frontend-lazy-context) I showed how to use context with `@transform`. This is a powerful decorator but sometimes you just want to consume a single entry of a context without having to define a transform function. For this we added more decorators that allow you to directly consume a single entry of a context. Via an array you define where the entity id comes from (most of the time from some config property) and the decorator will take care of consuming the right context and transforming the entity id to the right registry entry. Moreover it will watch the defined path to update the entry if needed.
+In the last [blogpost](/blog/2026/03/25/frontend-lazy-context) I showed how to use context with `@transform`. This is a powerful decorator but sometimes you just want to consume a single entry of a context without having to define a transform function. For this we added more decorators that allow you to directly consume a single entry of a context. Via an array you define where the entity id comes from (most of the time from some config property) and the decorator will take care of consuming the right context and transforming the entity id to the right registry entry. Moreover it will watch the defined path to update the entry if needed.
 
 New decorators:
 
