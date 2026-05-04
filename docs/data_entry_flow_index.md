@@ -717,7 +717,8 @@ Ideally one would leverage an entity class already created for an integration bu
 class PreviewSensorEntity(SensorEntity):
     """Preview sensor entity for subentry flows."""
 
-    def __init__(preview_value: str, config: dict[str, str]) -> None:
+    def __init__(hass: HomeAssistant, preview_value: str, config: dict[str, str]) -> None:
+        self.hass = hass
         self._attr_native_value = preview_value
         self._attr_icon = config.get[ATTR_ICON]
         self._attr_name = config.get[ATTR_NAME]
