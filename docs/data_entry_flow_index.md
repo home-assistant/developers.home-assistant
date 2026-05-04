@@ -604,8 +604,16 @@ The below is specific to `ConfigFlow` or `ConfigSubentryFlow` flows but is easil
 # In config_flow.py
 
 from homeassistant.components import websocket_api
-from homeassistant.config_entry import ConfigFlow, FlowType, SubentryFlowResult, ConfigEntry
-
+from homeassistant.config_entry import (
+    ConfigEntry,
+    ConfigFlow,
+    FlowType, 
+    SubentryFlowResult, 
+)
+from homeassistant.const import (
+    ATTR_ICON
+    ATTR_NAME
+)
 @websocket_api.websocket_command(
     {
         vol.Required("type"): "preview_name/start_preview", # "preview_name" corresponds to the value in async_show_form(..., preview="preview_name") and needs to be unique so use something like f"{DOMAIN}_my_flow_handler"
@@ -624,17 +632,27 @@ async def ws_start_preview(
     
     The client sends a message calling this endpoint when the form is rendered and when any field changes.
     """
-
-    user_input: dict[str, Any] = msg["user_input"] # the current user input on the form
+    # the current user input on the form
+    user_input: dict[str, Any] = msg["user_input"] 
 
     # Get the partial flow result
     if msg["flow_type"] is FlowType.CONFIG_SUBENTRIES_FLOW:
         flow_status: SubentryFlowResult = hass.config_entries.subentries.async_get(msg["flow_id"])
-        # get the config entry (if applicable or needed)
-        entry_id, _ = cur_step["handler"] # handler for subentry flow is a tuple of str of form (entry_id, subentry_flow_type)
+        # TODO: get the config entry (if applicable or needed)
+        # handler for subentry flow is a tuple of str of form 
+        # (entry_id, subentry_flow_type)
+        entry_id, _ = cur_step["handler"] 
         config_entry: ConfigEntry = hass.config_entries.async_get(entry_id)
 
-    ... # process the data, validate for errors (tip: use the same schema/validation used in the data entry flow step)
+    # Process the data and validate for errors (tip: use the 
+    # same schema/validation used in the data entry flow step)  
++   errors: dict[str, str] | None = None
+    preview_value: str = ...
+    config: dict[str, str] = {
+        ATTR_ICON = "mdi:eye"
+        ATTR_NAME = "Entity Preview"
+    }
++   ... 
 
     @callback
     def async_preview_callback(
@@ -644,7 +662,10 @@ async def ws_start_preview(
         domain: str | None,
     ) -> None:
         """Forward preview updates to websocket."""
-        # Errors sent here will appear in the preview element on the data entry form.  Note that this isn't required and data input validation errors should be sent using connection.send_message below.  Use this for ValueErrors raised by the entity in _calculate_state for example.
+        # Errors sent here will appear in the preview element on the data 
+        # entry form.  Note that this isn't required and data input validation
+        # errors should be sent using connection.send_message below.  For example: 
+        # Send ValueErrors to the client raised by the entity in _async_calculate_state.
         if error is not None:
             connection.send_message(
                 websocket_api.event_message(msg["id"], {"error": error})
@@ -661,7 +682,7 @@ async def ws_start_preview(
             )
         )
 
-    # errors: Mapping[str, str] = {"user_input_key": "error_translation_key"} similar to the value expected by async_show_form(..., errors = errors)
+    # Send user_input errors to the client. 
     if errors is not None:
         connection.send_message(
             {
@@ -674,7 +695,7 @@ async def ws_start_preview(
         return
     
     # Create the preview entity.
-    preview = PreviewSensorEntity(hass, value=value, config=config)
+    preview = PreviewSensorEntity(hass, preview_value=preview_value, config=config)
 
     connection.send_result(msg["id"])
     connection.subscriptions[msg["id"]] = preview.async_show_preview(
@@ -696,8 +717,10 @@ Ideally one would leverage an entity class already created for an integration bu
 class PreviewSensorEntity(SensorEntity):
     """Preview sensor entity for subentry flows."""
 
-    def __init__(value: str, config: dict[str, str]) -> None:
-        self._attr_native_value = value
+    def __init__(preview_value: str, config: dict[str, str]) -> None:
+        self._attr_native_value = preview_value
+        self._attr_icon = config.get[ATTR_ICON]
+        self._attr_name = config.get[ATTR_NAME]
         self._attr_device_class = config.get(CONF_DEVICE_CLASS)
         self._attr_native_unit_of_measurement = config.get(CONF_UNIT_OF_MEASUREMENT)
         self._attr_state_class = config.get(CONF_STATE_CLASS)
@@ -709,7 +732,7 @@ class PreviewSensorEntity(SensorEntity):
             [
                 str | None,  # state
                 Mapping[str, Any] | None,  # attributes
-                str | None,  # errors
+                str | None,  # error
                 str | None,  # domain
             ],
             None,
@@ -727,8 +750,6 @@ class PreviewSensorEntity(SensorEntity):
             )
         except ValueError as ex:
             error = str(ex)
-            if len(error) > 255:
-                error = error[:254]
         if error:
             preview_callback(None, None, error, None)
 
@@ -753,7 +774,8 @@ return self.async_show_form(
     step_id="my_step",
     data_schema=schema,
     errors=errors,
-    preview="my_integration_subentry_preview", # This same value set in the websocket_command schema in step 1.
+    # Same value set in the websocket_command schema in step 1:
+    preview="my_integration_subentry_preview",
 )
 ```
 
