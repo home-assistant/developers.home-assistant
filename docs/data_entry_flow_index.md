@@ -651,8 +651,8 @@ async def ws_start_preview(
 +   errors: dict[str, str] | None = None
     preview_value: str = ...
     config: dict[str, str] = {
-        ATTR_ICON = "mdi:eye"
-        ATTR_NAME = "Entity Preview"
+        ATTR_ICON: "mdi:eye"
+        ATTR_NAME: "Entity Preview"
     }
 +   ... 
 
