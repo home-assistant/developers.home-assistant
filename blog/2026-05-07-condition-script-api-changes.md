@@ -10,13 +10,13 @@ The condition and script APIs have been changed.
 
 Conditions are now instances of condition classes, which are evaluated by calling the `async_check` method and discarded by calling the `async_unload` method. Also, conditions may optionally implement an `async_setup` method. Note that users of conditions don't need to call the condition's `async_setup` method.
 
-During a deprecation period, which ends with the relase of Home Assistant Core 2027.1, it's possible to use the condition object as a callable.
+During a deprecation period, which ends with the release of Home Assistant Core 2027.1, it's possible to use the condition object as a callable.
 
 Scripts also have an `async_unload` method which must be called when the script is no longer needed.
 
 ## Impact on custom integrations
 
-### Custom integrations which create condtions and scripts
+### Custom integrations which create conditions and scripts
 
 Custom integrations which create conditions should evaluate conditions by calling the `async_check` method and call the `async_unload` method when the condition is no longer needed.
 
@@ -36,7 +36,7 @@ condition = await async_condition_from_config(hass, validated_config)
 
 ...
 
-# Evaluate the condtion
+# Evaluate the condition
 result = condition.async_check(...)
 ...
 
@@ -63,7 +63,7 @@ script = await Script(hass, validated_config, ...)
 ...
 
 # Execute the script
-result = await script_obj.async_run(...)
+result = await script.async_run(...)
 ...
 
 # Discard the script
