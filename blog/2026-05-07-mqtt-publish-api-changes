@@ -4,8 +4,9 @@ authorURL: https://github.com/jbouwh
 authorImageURL: https://avatars.githubusercontent.com/u/7188918?s=96&v=4
 title: MQTT publish API changes
 ---
-The MQTT publish API no longer accepts `None` values as fallback for the `qos` and `retain` args. Custom integrations that use the fallbacks should update their code to accept the defaults, or pass valid typed arguements.
-The fallbacks to `None` for `qos` and `retain` will stop working with HA Core 2027.6.
+In the future, the MQTT publish API will require explicit values for `qos` and `retain`. Passing `None` for either argument will no longer be supported.
+Custom integrations should update their code to accept the defaults, or pass valid typed arguments.
+The fallbacks of `None` to a valid value for `qos` and `retain` will stop working with HA Core 2027.6.
 
 The new API signatures are:
 
