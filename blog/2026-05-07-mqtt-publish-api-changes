@@ -1,0 +1,37 @@
+---
+author: Jan Bouwhuis
+authorURL: https://github.com/jbouwh
+authorImageURL: https://avatars.githubusercontent.com/u/7188918?s=96&v=4
+title: MQTT publish API changes
+---
+The MQTT publish API no longer accepts `None` values as fallback for the `qos` and `retain` args. Custom integrations that use the fallbacks should update their code to accept the defaults, or pass valid typed arguements.
+The fallbacks to `None` for `qos` and `retain` will stop working with HA Core 2027.6.
+
+The new API signatures are:
+
+```python
+def publish(
+    hass: HomeAssistant,
+    topic: str,
+    payload: PublishPayloadType,
+    qos: int = 0,
+    retain: bool = False,
+    encoding: str | None = DEFAULT_ENCODING,
+) -> None:
+    """Publish message to a MQTT topic."""
+    hass.create_task(async_publish(hass, topic, payload, qos, retain, encoding))
+```
+
+and
+
+```python
+async def async_publish(
+    hass: HomeAssistant,
+    topic: str,
+    payload: PublishPayloadType,
+    qos: int = 0,
+    retain: bool = False,
+    encoding: str | None = DEFAULT_ENCODING,
+) -> None:
+    """Publish message to a MQTT topic."""
+```
