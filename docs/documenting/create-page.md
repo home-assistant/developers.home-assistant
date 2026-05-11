@@ -78,13 +78,14 @@ Every integration page should contain a configuration example. This includes UI 
 ### UI variables
 
 - For describing **UI variables** use the `{% configuration_basic %}` section.
+- The `{% configuration_basic %}` block is like the `{% configuration %}` block, but does not have the `required` or `type` fields.
 
 ### About configuration variables
 
 - The **Configuration variables** section is only used for YAML configuration.
 - The **Configuration variables** section must use the `{% configuration %}` tag.
-- Configuration variables must document if the variable is required (`false` or `true`).
 - Configuration variables must document the default value, if any.
+- Configuration variables must document if the variable is required (`false` or `true`). If the variable has a default value, then it is not required and the `required` field should be set to `false`.
 - Configuration variables must document the accepted value types (see [configuration variables details](#configuration)).
   - For configuration variables that accept multiple types, separate the types with a comma (i.e. `string, integer`).
 
