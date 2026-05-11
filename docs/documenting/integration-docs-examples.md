@@ -86,7 +86,6 @@ To use this trigger in an automation:
 {% options_ui %}
 Threshold type:
   description: How much the brightness has to change before the trigger fires, as a percentage of full brightness. Can be a fixed number, or reference a helper entity that provides the value.
-  required: true
 {% endoptions_ui %}
 
 {% include triggers/yaml_header.md %}
@@ -103,7 +102,7 @@ trigger: |
 behavior:
   description: >
     When multiple sensors are targeted, controls when the trigger fires. Accepts `any`, `first`, or `last`.
-  required: true
+  required: false
   type: string
   default: any
 {% endexample %}
@@ -211,7 +210,6 @@ To use this condition in an automation:
 {% options_ui %}
 Condition passes if:
   description: When multiple lights are targeted, controls how results combine. Pick **Any** to pass if at least one targeted light is on, or **All** to pass only when every targeted light is on.
-  required: true
 {% endoptions_ui %}
 
 {% include conditions/yaml_header.md %}
@@ -235,7 +233,7 @@ YAML sometimes provides additional options for more complex use cases that are n
 behavior:
   description: >
     When multiple lights are targeted, controls how results combine. Accepts `all` or `any`.
-  required: true
+  required: false
   type: string
   default: any
 {% endoptions_yaml %}
@@ -336,7 +334,6 @@ To turn a light on from an automation or a script:
 {% options_ui %}
 Transition:
   description: How long, in seconds, it takes to get to the next state. Use this for a smooth fade instead of switching instantly.
-  required: false
 {% endoptions_ui %}
 
 {% include actions/yaml_header.md %}
