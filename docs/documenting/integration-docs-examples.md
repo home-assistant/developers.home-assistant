@@ -150,8 +150,8 @@ threshold:
 When you dim the ceiling light down, slow the fan down too. A classic "scene mood" automation that keeps the room coordinated.
 
 - **Trigger**: Light brightness changed
-- **Target**: Living room ceiling light
-- **Threshold type**: 10
+  - **Target**: Living room ceiling light
+  - **Threshold type**: 10
 - **Action**: Fan: Set speed
 
 {% details "YAML example for a ceiling-light-linked fan" %}
@@ -268,8 +268,8 @@ When the doorbell rings, only announce it through the living room speaker if the
 
 - **Trigger**: State: Doorbell button pressed
 - **Condition**: Light is on
-- **Target**: Living room light
-- **Condition passes if**: Any
+  - **Target**: Living room light
+  - **Condition passes if**: Any
 - **Action**: Media player: Play media
 
 {% details "YAML example for a doorbell announcement gated on lights" %}
