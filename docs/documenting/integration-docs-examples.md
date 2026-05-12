@@ -36,8 +36,15 @@ Integration pages follow this structure:
 
 ## Documenting automation triggers, conditions, and actions
 
-When you document an integration, create a separate file for each of its triggers, conditions, and actions.
-Then include them in the main integration page with:
+When you document an integration, create a separate file for each of its triggers, conditions, and actions. Then include them in the main integration page with:
+
+```liquid
+{% include integrations/triggers.md %}
+{% include integrations/conditions.md %}
+{% include integrations/actions.md %}
+```
+
+If the integration has all three components (trigger, condition, and action), you can use the combined template:
 
 ```liquid
 {% include integrations/triggers_conditions_actions.md %}
