@@ -150,7 +150,7 @@ threshold:
 When you dim the ceiling light down, slow the fan down too. A classic "scene mood" automation that keeps the room coordinated.
 
 - **Trigger**: Light brightness changed
-- **Target**: Living room ceiling light
+  - **Target**: Living room ceiling light
 - **Threshold type**: 10
 - **Action**: Fan: Set speed
 
@@ -268,7 +268,7 @@ When the doorbell rings, only announce it through the living room speaker if the
 
 - **Trigger**: State: Doorbell button pressed
 - **Condition**: Light is on
-- **Target**: Living room light
+  - **Target**: Living room light
 - **Condition passes if**: Any
 - **Action**: Media player: Play media
 
@@ -387,7 +387,7 @@ transition:
 When you start winding down in the evening, dim the kitchen light to a warm white tone.
 
 - **Action**: Light: Turn on
-- **Target**: Kitchen light
+  - **Target**: Kitchen light
 - **Brightness percentage**: 80
 - **Color**: warm_white
 
