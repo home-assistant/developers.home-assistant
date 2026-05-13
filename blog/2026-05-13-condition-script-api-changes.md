@@ -72,4 +72,45 @@ await script.async_unload()
 
 ### Custom integrations which provide a condition platform
 
-Integrations which provide a condition platform don't need to change, but may implement an `async_setup` method if the platform needs to perform async initialization.
+Integrations which provide a condition platform don't need to change, but may implement `async_setup` and `async_unload` method if the platform needs to perform async initialization or do tear down.
+
+Example:
+
+```python
+
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.condition import (
+    Condition,
+    ConditionCheckParams,
+    ConditionConfig,
+)
+from homeassistant.helpers.typing import ConfigType
+
+class CustomCondition(Condition):
+    """A custom condition."""
+
+    @classmethod
+    async def async_validate_config(
+        cls, hass: HomeAssistant, config: ConfigType
+    ) -> ConfigType:
+        """Validate config."""
+        ...
+
+    def __init__(self, hass: HomeAssistant, config: ConditionConfig) -> None:
+        """Initialize condition."""
+        super().__init__(hass, config)
+        ...
+
+    async def async_setup(self) -> None:
+        """Set up the condition checker."""
+        ...
+
+    def async_unload(self) -> None:
+        """Clean up any resources held by the checker."""
+        super().async_unload()
+        ...
+
+    def _async_check(self, **kwargs: Unpack[ConditionCheckParams]) -> bool:
+        """Check the condition."""
+        ...
+```
