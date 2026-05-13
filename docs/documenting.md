@@ -23,6 +23,7 @@ We mainly follow the Microsoft Writing Style Guide and have some additional guid
 - [Documentation standards](/docs/documenting/standards)
 - [Documentation style guide](/docs/documenting/general-style-guide/)
 - [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/welcome/)
+- [Merriam-Webster Dictionary](https://www.merriam-webster.com/)
 - [YAML Style Guide](/docs/documenting/yaml-style-guide)
 
 ## Small changes

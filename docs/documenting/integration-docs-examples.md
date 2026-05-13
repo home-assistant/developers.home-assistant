@@ -387,8 +387,8 @@ transition:
 When you start winding down in the evening, dim the kitchen light to a warm white tone.
 
 - **Action**: Light: Turn on
-- **Target**: Kitchen light
-- **Brightness percentage**: 80
+  - **Target**: Kitchen light
+  - **Brightness percentage**: 80
 - **Color**: warm_white
 
 {% details "YAML example for a cozy warm white scene" %}
