@@ -29,3 +29,7 @@ New component specific tokens:
 --ha-radio-option-checked-icon-scale
 --ha-radio-option-control-margin
 ```
+
+### ha-drawer updates
+
+`ha-drawer` was updated to use the webawesome drawer component. The API is mostly the same it just uses now `--ha-sidebar-width` instead of `--mdc-drawer-width`
