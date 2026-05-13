@@ -72,7 +72,7 @@ await script.async_unload()
 
 ### Custom integrations which provide a condition platform
 
-Integrations which provide a condition platform don't need to change, but may implement `async_setup` and `async_unload` method if the platform needs to perform async initialization or do tear down.
+Integrations which provide a condition platform don't need to change, but may implement `_async_setup` and `_async_unload` method if the platform needs to perform async initialization or do tear down.
 
 Example:
 
@@ -101,13 +101,12 @@ class CustomCondition(Condition):
         super().__init__(hass, config)
         ...
 
-    async def async_setup(self) -> None:
+    async def _async_setup(self) -> None:
         """Set up the condition checker."""
         ...
 
-    def async_unload(self) -> None:
+    def _async_unload(self) -> None:
         """Clean up any resources held by the checker."""
-        super().async_unload()
         ...
 
     def _async_check(self, **kwargs: Unpack[ConditionCheckParams]) -> bool:
