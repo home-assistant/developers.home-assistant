@@ -151,7 +151,7 @@ When you dim the ceiling light down, slow the fan down too. A classic "scene moo
 
 - **Trigger**: Light brightness changed
   - **Target**: Living room ceiling light
-- **Threshold type**: 10
+  - **Threshold type**: 10
 - **Action**: Fan: Set speed
 
 {% details "YAML example for a ceiling-light-linked fan" %}
@@ -269,7 +269,7 @@ When the doorbell rings, only announce it through the living room speaker if the
 - **Trigger**: State: Doorbell button pressed
 - **Condition**: Light is on
   - **Target**: Living room light
-- **Condition passes if**: Any
+  - **Condition passes if**: Any
 - **Action**: Media player: Play media
 
 {% details "YAML example for a doorbell announcement gated on lights" %}
@@ -388,7 +388,7 @@ When you start winding down in the evening, dim the kitchen light to a warm whit
 
 - **Action**: Light: Turn on
   - **Target**: Kitchen light
-- **Brightness percentage**: 80
+  - **Brightness percentage**: 80
 - **Color**: warm_white
 
 {% details "YAML example for a cozy warm white scene" %}
