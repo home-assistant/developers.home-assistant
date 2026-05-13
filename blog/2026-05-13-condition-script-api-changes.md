@@ -8,7 +8,7 @@ title: "Changes to the condition and script APIs"
 
 The condition and script APIs have been changed.
 
-Conditions are now instances of condition classes, which are evaluated by calling the `async_check` method and discarded by calling the `async_unload` method. Also, conditions may optionally implement an `async_setup` method. Note that users of conditions don't need to call the condition's `async_setup` method.
+Conditions are now instances of condition classes, which are evaluated by calling the `async_check` method and discarded by calling the `async_unload` method. Also, conditions may optionally implement an `_async_setup` or `_async_unload` method. Note that users of conditions don't need to call the condition's `async_setup` method.
 
 During a deprecation period, which ends with the release of Home Assistant Core 2027.1, it's possible to use the condition object as a callable.
 
