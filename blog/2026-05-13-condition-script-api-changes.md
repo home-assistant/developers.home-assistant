@@ -16,9 +16,9 @@ Scripts also have an `async_unload` method which must be called when the script 
 
 ## Impact on custom integrations
 
-### Custom integrations which create conditions and scripts
+### Custom integrations which create conditions or scripts
 
-Custom integrations which create conditions should evaluate conditions by calling the `async_check` method and call the `async_unload` method when the condition is no longer needed.
+Custom integrations which create condition objects should evaluate them by calling the `async_check` method and call the `async_unload` method when the condition is no longer needed.
 
 Example:
 
@@ -58,7 +58,7 @@ from homeassistant.helpers.script import (
 validated_config = await async_validate_actions_config(hass, config)
 
 # Create a script
-script = await Script(hass, validated_config, ...)
+script = Script(hass, validated_config, ...)
 
 ...
 
@@ -70,6 +70,6 @@ result = await script.async_run(...)
 await script.async_unload()
 ```
 
-### Custom integrations which implement conditions
+### Custom integrations which provide a condition platform
 
-No change is required, but integrations may choose to implement an `async_setup` method.
+Integrations which provide a condition platform don't need to change, but may implement an `async_setup` method if the platform needs to perform async initialization.
