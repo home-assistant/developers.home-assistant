@@ -195,12 +195,13 @@ class MyDemoStrategyEditor extends HTMLElement {
   }
 
   configChanged(newConfig) {
-    const event = new Event("config-changed", {
-      bubbles: true,
-      composed: true,
-    });
-    event.detail = { config: newConfig };
-    this.dispatchEvent(event);
+    this.dispatchEvent(
+      new CustomEvent("config-changed", {
+        bubbles: true,
+        composed: true,
+        detail: { config: newConfig },
+      })
+    );
   }
 }
 
