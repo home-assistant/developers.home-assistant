@@ -157,6 +157,7 @@ class MyLightEntity(LightEntity):
         ...
 
         value_in_range = math.ceil(brightness_to_value(BRIGHTNESS_SCALE, kwargs[ATTR_BRIGHTNESS]))
+```
 
 :::
 
@@ -170,3 +171,17 @@ class MyLightEntity(LightEntity):
     async def async_turn_off(self, **kwargs):
         """Turn device off."""
 ```
+
+### Toggle Light Device
+
+```python
+class MyLightEntity(LightEntity):
+    async def async_toggle(self, **kwargs):
+        """Toggle the entity."""
+```
+
+:::tip No sync `toggle`
+
+Unlike `turn_on`/`turn_off`, there is no support for synchronously toggling a light.
+
+:::
