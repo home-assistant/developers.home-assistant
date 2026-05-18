@@ -154,6 +154,7 @@ module.exports = {
           label: "Debugging an integration",
           items: [
             "core/integration/diagnostics",
+            "core/integration/logging",
             "core/integration/system_health",
           ],
         },
