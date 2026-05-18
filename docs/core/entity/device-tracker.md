@@ -3,11 +3,31 @@ title: Device tracker entity
 sidebar_label: Device tracker
 ---
 
-A device tracker is a read-only entity that provides presence information. There are two types of device tracker entities, a ScannerEntity and a TrackerEntity.
+A device tracker is a read-only entity that provides presence information. There are three types of device tracker entities available for integrations to extend, `BaseScannerEntity`, `ScannerEntity` and `TrackerEntity`.
+
+## BaseScannerEntity
+
+A BaseScannerEntity reports the connected state of a device, for example to a bluetooth beacon. If the device is connected the ScannerEntity will have state `home` and if the device is not connected the state will be `not_home`.
+
+Derive a platform entity from [`homeassistant.components.device_tracker.config_entry.BaseScannerEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/device_tracker/config_entry.py)
+
+### Properties
+
+:::tip
+Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
+:::
+
+| Name          | Type                         | Default             | Description                         |
+| ------------- | ---------------------------- | ------------------- | ----------------------------------- |
+| battery_level | <code>int &#124; None</code> | `None`              | The battery level of the device.    |
+| is_connected  | `bool`                       | **Required**        | The connection state of the device. |
+| source_type   | `SourceType`                 | `SourceType.ROUTER` | The source type of the device.      |
 
 ## ScannerEntity
 
 A ScannerEntity reports the connected state of a device on the local network. If the device is connected the ScannerEntity will have state `home` and if the device is not connected the state will be `not_home`.
+
+ScannerEntity is based on BaseScannerEntity and is meant for tracking devices which connect to an IP network and can be identified by MAC address.
 
 Derive a platform entity from [`homeassistant.components.device_tracker.config_entry.ScannerEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/device_tracker/config_entry.py)
 
