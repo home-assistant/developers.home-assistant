@@ -7,7 +7,7 @@ A device tracker is a read-only entity that provides presence information. There
 
 ## BaseScannerEntity
 
-A BaseScannerEntity reports the connected state of a device, for example to a bluetooth beacon. If the device is connected the ScannerEntity will have state `home` and if the device is not connected the state will be `not_home`.
+A BaseScannerEntity reports the connected state of a device, for example to a bluetooth beacon. If the device is connected the BaseScannerEntity will have state `home` and if the device is not connected the state will be `not_home`.
 
 Derive a platform entity from [`homeassistant.components.device_tracker.config_entry.BaseScannerEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/device_tracker/config_entry.py)
 
