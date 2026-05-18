@@ -24,24 +24,36 @@ This is used to first fetch the configuration entry, and then check if it is loa
 If the configuration entry does not exist or the configuration entry that we found is not loaded, we raise a relevant error which is shown to the user.
 Supply description placeholders to enable translation of service parameters, for example, to reference external resources like documentation URLs that need to be localized or updated independently of the service description.
 
-`__init__py`:
-```python {13-20} showLineNumbers
+`__init__.py`:
+```python {6} showLineNumbers
+from .services import async_setup_services
+
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     """Set up my integration."""
 
-    async def async_get_schedule(call: ServiceCall) -> ServiceResponse:
-        """Get the schedule for a specific range."""
-        if not (entry := hass.config_entries.async_get_entry(call.data[ATTR_CONFIG_ENTRY_ID])):
-            raise ServiceValidationError("Entry not found")
-        if entry.state is not ConfigEntryState.LOADED:
-            raise ServiceValidationError("Entry not loaded")
-        client = cast(MyConfigEntry, entry).runtime_data
-        ...
+    async_setup_services(hass)
+    return True
+```
+
+`services.py`:
+```python {14-21} showLineNumbers
+async def _async_get_schedule(call: ServiceCall) -> ServiceResponse:
+    """Get the schedule for a specific range."""
+    if not (entry := hass.config_entries.async_get_entry(call.data[ATTR_CONFIG_ENTRY_ID])):
+        raise ServiceValidationError("Entry not found")
+    if entry.state is not ConfigEntryState.LOADED:
+        raise ServiceValidationError("Entry not loaded")
+    client = cast(MyConfigEntry, entry).runtime_data
+    ...
+
+@callback
+def async_setup_services(hass: HomeAssistant) -> None:
+    """Register the services."""
 
     hass.services.async_register(
         DOMAIN,
         SERVICE_GET_SCHEDULE,
-        async_get_schedule,
+        _async_get_schedule,
         schema=SERVICE_GET_SCHEDULE_SCHEMA,
         supports_response=SupportsResponse.ONLY,
         description_placeholders={"example_url": "https://schedule.example.com"}
