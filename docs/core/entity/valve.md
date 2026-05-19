@@ -13,10 +13,10 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ----------------------- | ---- | ------- | -----------
-| current_valve_position | <code>int &#124; None</code> | `None` | The current position of the valve where 0 means closed and 100 is fully open. This attribute is required on valves with `reports_position = True`, where it's used to determine state.
-| is_closed | <code>bool &#124; None</code> | `None` | If the valve is closed or not. Used to determine `state` for valves that don't report position.
-| is_closing | <code>bool &#124; None</code> | `None` | If the valve is closing or not. Used to determine `state`.
-| is_opening | <code>bool &#124; None</code> | `None` | If the valve is opening or not. Used to determine `state`.
+| current_valve_position | `int \| None` | `None` | The current position of the valve where 0 means closed and 100 is fully open. This attribute is required on valves with `reports_position = True`, where it's used to determine state.
+| is_closed | `bool \| None` | `None` | If the valve is closed or not. Used to determine `state` for valves that don't report position.
+| is_closing | `bool \| None` | `None` | If the valve is closing or not. Used to determine `state`.
+| is_opening | `bool \| None` | `None` | If the valve is opening or not. Used to determine `state`.
 | reports_position | <code>bool</code> | **Required** | If the valve knows its position or not.
 
 ### Device classes

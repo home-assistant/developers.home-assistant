@@ -18,11 +18,11 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ----------------------- | ---- | ------- | -----------
-| current_cover_position | <code>int &#124; None</code> | `None` | The current position of cover where 0 means closed and 100 is fully open.
-| current_cover_tilt_position | <code>int &#124; None</code> | `None` | The current tilt position of the cover where 0 means closed/no tilt and 100 means open/maximum tilt.
-| is_closed | <code>bool &#124; None</code> | **Required** | If the cover is closed or not. Used to determine `state`.
-| is_closing | <code>bool &#124; None</code> | `None` | If the cover is closing or not. Used to determine `state`.
-| is_opening | <code>bool &#124; None</code> | `None` | If the cover is opening or not. Used to determine `state`.
+| current_cover_position | `int \| None` | `None` | The current position of cover where 0 means closed and 100 is fully open.
+| current_cover_tilt_position | `int \| None` | `None` | The current tilt position of the cover where 0 means closed/no tilt and 100 means open/maximum tilt.
+| is_closed | `bool \| None` | **Required** | If the cover is closed or not. Used to determine `state`.
+| is_closing | `bool \| None` | `None` | If the cover is closing or not. Used to determine `state`.
+| is_opening | `bool \| None` | `None` | If the cover is opening or not. Used to determine `state`.
 
 ### States
 
