@@ -20,8 +20,8 @@ Properties should always only return information from memory and not do I/O (lik
 | Name          | Type                         | Default             | Description                         |
 | ------------- | ---------------------------- | ------------------- | ----------------------------------- |
 | battery_level | <code>int &#124; None</code> | `None`              | The battery level of the device.    |
-| is_connected  | `bool`                       | **Required**        | The connection state of the device. |
-| source_type   | `SourceType`                 | `SourceType.ROUTER` | The source type of the device.      |
+| is_connected  | `bool \| None`               | **Required**        | The connection state of the device. |
+| source_type   | `SourceType`                 | **Required**        | The source type of the device.      |
 
 ## ScannerEntity
 
@@ -42,7 +42,7 @@ Properties should always only return information from memory and not do I/O (lik
 | battery_level | <code>int &#124; None</code> | `None`              | The battery level of the device.    |
 | hostname      | <code>str &#124; None</code> | `None`              | The hostname of the device.         |
 | ip_address    | <code>str &#124; None</code> | `None`              | The IP address of the device.       |
-| is_connected  | `bool`                       | **Required**        | The connection state of the device. |
+| is_connected  | `bool \| None`               | **Required**        | The connection state of the device. |
 | mac_address   | <code>str &#124; None</code> | `None`              | The MAC address of the device.      |
 | source_type   | `SourceType`                 | `SourceType.ROUTER` | The source type of the device.      |
 
