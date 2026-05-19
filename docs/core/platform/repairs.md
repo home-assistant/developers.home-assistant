@@ -55,7 +55,6 @@ Create a new platform file in your integration folder called `repairs.py` and ad
 
 
 ```python
-from __future__ import annotations
 
 import voluptuous as vol
 
@@ -86,12 +85,14 @@ class Issue1RepairFlow(RepairsFlow):
 async def async_create_fix_flow(
     hass: HomeAssistant,
     issue_id: str,
-    data: dict[str, str | int | float | None] | None,
+    data: dict[str, str | int | float | None] | None, # the arbitrary issue data
 ) -> RepairsFlow:
     """Create flow."""
     if issue_id == "issue_1":
         return Issue1RepairFlow()
 ```
+> [!NOTE]
+> The flow manager creates the `RepairsFlow` and passes the attributes `data` and `issue_id` from the instigating issue. These should not be passed to the `RepairsFlow` in any implementations of `async_create_fix_flow` as these will be overridden by the flow manager.
 
 ### Issues that can be repaired via entry/options/subentry reconfiguration or other repair flows.
 
@@ -167,7 +168,13 @@ return self.async_create_entry(
 
 ```python
 from homeassistant import data_entry_flow
-from homeassistant.components.repairs import FlowType, RepairsFlow, RepairsFlowResult, RepairsFlowManager, async_get
+from homeassistant.components.repairs import (
+    FlowType,
+    RepairsFlow,
+    RepairsFlowResult,
+    RepairsFlowManager,
+    async_get
+)
 
 async def async_step_confirm(
     self, user_input: dict[str, str] | None = None
@@ -176,7 +183,9 @@ async def async_step_confirm(
     if user_input is not None:
         repairs_flow_handler:  RepairsFlowManager = async_get(self.hass)
         next_flow: RepairsFlowResult = await repairs_flow_handler.async_init(
-            DOMAIN, # The domain of the integration containing the `is_fixable = True` issue with corresponding fix flow
+            # The domain of the integration containing the
+            # "fixable issue" with corresponding fix flow
+            DOMAIN, 
             context = {
                 "issue_id": "example_issue_id"
             }
@@ -192,7 +201,7 @@ async def async_step_confirm(
 
 ```
 > [!TIP]
-> The `RepairsFlowManager` expects `context` to contain the `issue_id` in `async_init` as shown in the code snippet above.  The prior behavior of passing `issue_id` via `data` (e.g. `data={"issue_id": "example_issue_id"}`) will still work but will generate usage warnings in the logs to prompt developers to shift to using `context` to be consistent with other Data Entry Flows.
+> The `RepairsFlowManager` expects `context` to contain the `issue_id` in `async_init` as shown in the code snippet above.  The prior behavior of passing `issue_id` via `data` (e.g. `data={"issue_id": "example_issue_id"}`) will still work but will generate usage warnings in the logs to prompt developers to shift to using `context` to be consistent with other data entry flows.
 >
 > The `next_flow` argument in `async_abort` or `async_create_entry` expects a tuple: `tuple[homeassistant.components.repairs.FlowType, str]`.
 
