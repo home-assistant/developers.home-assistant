@@ -1760,31 +1760,31 @@ Return information about the host.
 
 **Returned data**
 
-| key              | type           | description                               |
-| ---------------- | -------------- | ----------------------------------------- |
-| agent_version    | string or null | Agent version running on the Host         |
-| apparmor_version | string or null | The AppArmor version from host            |
-| boot_timestamp   | int            | The timestamp for the last boot in microseconds |
-| broadcast_llmnr  | bool or null   | Host is broadcasting its LLMNR hostname   |
-| broadcast_mdns   | bool or null   | Host is broadcasting its MulticastDNS hostname |
-| chassis          | string or null | The chassis type                          |
-| virtualization   | string or null | Virtualization hypervisor in use (if any) |
-| cpe              | string or null | The local CPE                             |
-| deployment       | string or null | The deployment stage of the OS if any     |
-| disk_total       | float          | Total space of the disk in MB             |
-| disk_used        | float          | Used space of the disk in MB              |
-| disk_free        | float          | Free space of the disk in MB              |
-| features         | list           | A list of features available for the host |
-| hostname         | string or null | The hostname of the host                  |
-| kernel           | string or null | The kernel version on the host            |
-| llmnr_hostname   | string or null | The hostname currently exposed on the network via LLMNR for host |
-| operating_system | string         | The operating system on the host          |
-| startup_time     | float          | The time in seconds it took for last boot |
+| key              | type           | description                                                                                                                |
+| ---------------- | -------------- |----------------------------------------------------------------------------------------------------------------------------|
+| agent_version    | string or null | Agent version running on the Host                                                                                          |
+| apparmor_version | string or null | The AppArmor version from host                                                                                             |
+| boot_timestamp   | int            | The timestamp for the last boot in microseconds                                                                            |
+| broadcast_llmnr  | bool or null   | Host is broadcasting its LLMNR hostname                                                                                    |
+| broadcast_mdns   | bool or null   | Host is broadcasting its MulticastDNS hostname                                                                             |
+| chassis          | string or null | The chassis type                                                                                                           |
+| virtualization   | string or null | Virtualization hypervisor in use (if any)                                                                                  |
+| cpe              | string or null | The local CPE                                                                                                              |
+| deployment       | string or null | The deployment stage of the OS if any                                                                                      |
+| disk_total       | float          | Total space of the disk in GB                                                                                              |
+| disk_used        | float          | Used space of the disk in GB                                                                                               |
+| disk_free        | float          | Free space of the disk in GB                                                                                               |
+| features         | list           | A list of features available for the host                                                                                  |
+| hostname         | string or null | The hostname of the host                                                                                                   |
+| kernel           | string or null | The kernel version on the host                                                                                             |
+| llmnr_hostname   | string or null | The hostname currently exposed on the network via LLMNR for host                                                           |
+| operating_system | string         | The operating system on the host                                                                                           |
+| startup_time     | float          | The time in seconds it took for last boot                                                                                  |
 | disk_life_time   | float or null  | Percentage of estimated disk lifetime used (0–100). Not all disks provide this information, returns `null` if unavailable. |
-| timezone         | string         | The current timezone of the host. |
-| dt_utc           | string         | Current UTC date/time of the host in ISO 8601 format. |
-| dt_synchronized  | bool           | `true` if the host is synchronized with an NTP service. |
-| use_ntp          | bool           | `true` if the host is using an NTP service for time synchronization. |
+| timezone         | string         | The current timezone of the host.                                                                                          |
+| dt_utc           | string         | Current UTC date/time of the host in ISO 8601 format.                                                                      |
+| dt_synchronized  | bool           | `true` if the host is synchronized with an NTP service.                                                                    |
+| use_ntp          | bool           | `true` if the host is using an NTP service for time synchronization.                                                       |
 
 **Example response:**
 
