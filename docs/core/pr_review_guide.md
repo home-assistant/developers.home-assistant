@@ -83,7 +83,7 @@ These are the most review-intensive — averaging **45 comments per reviewed PR*
 Discovery configuration generated **155 review comments across 44 PRs** in our general-PR analysis. It's a frequent source of back-and-forth.
 
 - [ ] 👁️ **Discovery patterns are specific enough.** Zeroconf service types, DHCP hostnames, and SSDP manufacturers should match only the intended devices. Overly broad patterns (e.g., matching `duco` when you mean `duco [`) will accidentally claim unrelated devices. Ask: "Could this pattern match something it shouldn't?"
-- [ ] 🤖 **`raise_on_progress=False` where appropriate.** Discovery steps that show a confirmation form to the user need `raise_on_progress=False` so that multiple discovery events don't stack up error dialogs.
+- [ ] 🤖 **`raise_on_progress=False` where appropriate.** Flows that call `async_set_unique_id` from multiple steps need to pass the `raise_on_progress=False` parameter in the steps where the flow source should take priotity over the discovery flow. For example, a flow that is started by a user should always take precedence over a discovery flow for the same device unique id.
 - [ ] 👁️ **DHCP as fallback.** If the integration supports Zeroconf, consider whether DHCP discovery should also be added as a fallback for networks where mDNS doesn't work well.
 - [ ] 👁️ **`registered_devices` support considered.** For integrations where devices might change hostname/IP, `registered_devices` allows re-discovery of already-configured devices.
 - [ ] 🤖 **Manifest discovery entries match implementation.** If `manifest.json` declares `zeroconf`, `dhcp`, or `ssdp`, verify the config flow actually implements the corresponding `async_step_*` method.
