@@ -441,85 +441,7 @@ Every new integration (and any integration declaring a quality scale) must satis
 
 ---
 
-## 13. Automation Opportunity Summary
-
-Based on analysis of **1,100+ PRs and 8,200+ review comments** across all PR types: 200 new-integration (3,379 comments), 200 dependency (91 comments), 500 general (4,719 comments), 200 closed/unmerged, plus license/supply chain sampling of 1,106 packages.
-
-### Critical: Security & Legal (not caught today at all)
-
-| # | Check | Risk | Implementation |
-|---|-------|------|----------------|
-| 0a | **License compatibility** | GPL-3.0 dep exists today (python-miio). 12% of packages have no license metadata. | Check PyPI license field against compatibility allowlist |
-| 0b | **License identifier vs LICENSE file** | Declared license may not match actual LICENSE text | Download source, compare |
-| 0c | **Upstream diff summary** on dep bumps | Zero reviewers inspect upstream changes today | Fetch+summarize diff between library versions |
-| 0d | **Transitive dependency detection** | New transitive deps are #1 supply chain attack vector | Compare dep tree before/after |
-| 0e | **PyPI maintainer change detection** | Account takeovers threaten 434 single-maintainer libs | Check maintainer list between versions |
-| 0f | **Network behavior changes** in upstream | New `requests`/`aiohttp`/`subprocess`/`socket` imports | Scan library diff for new network-related imports |
-
-### Already Automatable: Rule-Based Checks (14 items)
-
-These can be implemented as static analysis, linting rules, or CI checks with high confidence and low false-positive rates.
-
-| # | Check | Evidence | How |
-|---|-------|----------|-----|
-| 1 | Constants not in `const.py` | 121 comments, 48 PRs | Import analysis: flag CONF_* imports from wrong module |
-| 2 | Snapshot testing not used | 70 comments, 24 PRs | Detect manual assertions in platform test files |
-| 3 | `runtime_data` not used | 69 comments, 40 PRs | Detect `hass.data[DOMAIN]` in non-legacy code |
-| 4 | Broad `except Exception:` | 45 comments, 27 PRs | AST check in except blocks |
-| 5 | Log level misuse | 37 comments, 22 PRs | Pattern matching on `_LOGGER` calls |
-| 6 | `ConfigEntryAuthFailed` misuse | 28+36 comments | AST check in `_async_update_data` |
-| 7 | `HomeAssistantError` missing | 33 comments, 12 PRs | Detect service handlers without error propagation |
-| 8 | Sentence case violations | 28 comments + 6.1% of new-int PRs | Regex on `strings.json` values |
-| 9 | Backtick formatting | 27 comments + 9.1% of new-int PRs | Pattern match on `strings.json` for technical terms |
-| 10 | Commented-out code | 26 comments, 8 PRs | AST check for comment nodes inside function bodies |
-| 11 | Debug entities not disabled | 22 comments, 22 PRs | Keyword match on entity names + EntityCategory check |
-| 12 | Missing conftest fixtures | 17 comments, 12 PRs | Detect fixture definitions outside `conftest.py` |
-| 13 | `has_entity_name` missing | 16 comments, 9 PRs | Structural check on entity classes |
-| 14 | `assert` in production code | 3 comments (but silent prod bug) | Ruff rule banning assert outside test files |
-
-### AI-Assistable: Pattern Matching + Judgment (9 items)
-
-These require understanding context but follow learnable patterns. An AI reviewer with HA-specific training could handle them.
-
-| # | Check | Evidence | Why AI needed |
-|---|-------|----------|---------------|
-| 15 | **Entity category classification** | 425 comments, 76 PRs | AI can understand entity purpose from name/description |
-| 16 | **Config entry migration** | 244 comments, 74 PRs | AI can check VERSION vs schema changes |
-| 17 | **Scope creep detection** | 180 comments, ~80 PRs | AI can detect unrelated file changes |
-| 18 | **Discovery pattern specificity** | 155 comments, 44 PRs | AI can check if pattern is overly broad |
-| 19 | **Test coverage gaps** | 96 comments, 57 PRs | AI can identify untested branches |
-| 20 | **Type annotation gaps** | 84 comments, 42 PRs | AI can suggest concrete types |
-| 21 | **Error handling improvements** | 45 comments, 27 PRs | AI can suggest specific exception types |
-| 22 | **Parametrize opportunities** | 41 comments, 23 PRs | AI can detect similar test functions |
-| 23 | **Dict access patterns** | 68 comments, 37 PRs | AI can check if key is validated upstream |
-
-### Human-Only: Deep Context Required (7 items)
-
-These require understanding device behavior, user-facing contracts, or architectural philosophy that cannot be derived from the code alone.
-
-| # | Check | Evidence | Why human |
-|---|-------|----------|----------|
-| 24 | **None vs unavailable** | 121+41 comments | Requires understanding device behavior and API semantics |
-| 25 | **Optimistic state decisions** | 25 comments, 13 PRs | Requires understanding device communication patterns |
-| 26 | **Breaking change assessment** | 47 comments, 25 PRs | Requires understanding the user-facing contract |
-| 27 | **Extra attributes vs entities** | 8+ comments | Requires understanding the data model |
-| 28 | **Architecture decisions** | 220+ comments | Coordinator design, state management philosophy |
-| 29 | **Naming conventions** | 57 comments, 38 PRs | Requires domain context |
-| 30 | **API design review** | core PRs | Requires framework-level understanding |
-
-### Closed-PR Signals: Preventing Wasted Review (from 200 closed PRs)
-
-| # | Intervention | Impact | Evidence |
-|---|-------------|--------|----------|
-| 31 | **First-time contributor onboarding** | 37.6% of closures were abandoned PRs, mostly from first-timers | Welcome bot with expected timeline, prerequisites, common mistakes |
-| 32 | **Pre-review quality gate** | 14.7% closed for quality issues | Run automated checks before human review |
-| 33 | **Stale PR triage enhancement** | 13.5% closed by stale bot after 60+ days | Check for unaddressed comments, not just time |
-| 34 | **CLA gate before review** | Currently 17 PRs in queue missing CLA | Block review assignment until CLA is signed |
-| 35 | **AI-generated PR detection** | Emerging pattern, explicitly rejected | Heuristics: theoretical problems, generic tests, suspiciously formatted descriptions |
-
----
-
-## 14. Reviewer Workflow
+## 13. Reviewer Workflow
 
 A suggested order for reviewing a PR efficiently:
 
@@ -538,7 +460,7 @@ A suggested order for reviewing a PR efficiently:
 
 ---
 
-## 15. Top Reviewers and Their Focus Areas
+## 14. Top Reviewers and Their Focus Areas
 
 Understanding what each reviewer typically focuses on helps new reviewers know who to consult and helps contributors anticipate feedback.
 
