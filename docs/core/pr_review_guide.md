@@ -1,4 +1,4 @@
-# Home Assistant Core: The PR Review Guide
+# The PR Review Guide
 
 A comprehensive, practical guide for reviewing pull requests on `home-assistant/core`. Built from analysis of **1,100+ PRs and 8,200+ review comments** across new integrations, dependency bumps, bugfixes, features, code quality improvements, and closed/unmerged PRs — plus official developer documentation and repo conventions.
 
