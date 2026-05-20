@@ -707,7 +707,7 @@ async def ws_start_preview(
 
 :::tip
 
- `domain` in async_preview_callback refers to the the preview entity's domain (e.g. `"sensor"` or `"select"`). If `domain` is not provided or `None` the frontend will fallback to render a `SensorEntity` with applicable attributes.
+ `domain` in async_preview_callback refers to the preview entity's domain (e.g. `"sensor"` or `"select"`). If `domain` is not provided or `None` the frontend will fallback to render a `SensorEntity` with applicable attributes.
 
 :::
 
