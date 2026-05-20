@@ -112,7 +112,7 @@ Discovery configuration generated **155 review comments across 44 PRs** in our g
 - [ ] 🤖 **All user-facing strings in `strings.json`.** No hardcoded English strings in Python code.
 - [ ] 🤖 **Sentence case.** All string values in `strings.json` must use sentence case (not Title Case, not ALL CAPS). (Found in 6.1% of new-integration PRs, 28 comments in general PRs.)
 - [ ] 🤖 **Common translation keys used where applicable.** If a string matches an existing common key (e.g., generic names like "Temperature", "Humidity"), reference the common key instead of defining a new one. (130 translation key comments in general PRs.)
-- [ ] 🤖 **Backticks around untranslated terms.** Technical identifiers (model names, protocol names) in translatable strings should be wrapped in backticks so translators know not to translate them. (Found in 9.1% of new-integration PRs.)
+- [ ] 🤖 **Backticks around untranslated terms.** Technical identifiers (model names, protocol names) in translatable strings should be either be wrapped in backticks or Capitalized so translators know not to translate them. (Found in 9.1% of new-integration PRs.)
 - [ ] 🤖 **Integration name not in log messages.** The integration domain is already part of the logger name — don't repeat it in the message text.
 
 ---
