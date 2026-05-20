@@ -18,10 +18,10 @@ Properties should always only return information from memory and not do I/O (lik
 :::
 
 | Name          | Type                         | Default             | Description                         |
-| ------------- | ---------------------------- | ------------------- | ----------------------------------- |
-| battery_level | <code>int &#124; None</code> | `None`              | The battery level of the device.    |
-| is_connected  | `bool \| None`               | **Required**        | The connection state of the device. |
-| source_type   | `SourceType`                 | **Required**        | The source type of the device.      |
+| ------------- | ---------------| ------------------- | ----------------------------------- |
+| battery_level | `int \| None`  | `None`              | The battery level of the device.    |
+| is_connected  | `bool \| None` | **Required**        | The connection state of the device. |
+| source_type   | `SourceType`   | **Required**        | The source type of the device.      |
 
 ## ScannerEntity
 
