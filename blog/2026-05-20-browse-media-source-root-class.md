@@ -21,7 +21,7 @@ Most integrations don't need any changes. If you implement a `media_source.py` p
 
 You only need to act if:
 
-- **You pass `domain=None` to `BrowseMediaSource`.** This is no longer allowed. If you were doing this to build a root-like node, switch to `RootBrowseMediaSource`. If you were doing it by mistake, set your integration domain instead.
+- **You pass `domain=None` to `BrowseMediaSource`.** This is no longer allowed. Set your integration domain instead.
 - **You call `media_source.async_browse_media()` and annotate the result.** Update the type hint to `BrowseMediaSource | RootBrowseMediaSource`, or narrow with `isinstance()` before using domain-specific attributes:
 
   ```python
