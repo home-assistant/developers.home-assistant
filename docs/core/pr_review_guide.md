@@ -20,7 +20,7 @@ Before reading any code, verify these. If any fail, comment and stop — reviewi
 - [ ] 👁️ **PR type checkbox matches content.** The PR template has type checkboxes — verify only one is checked and it matches what the code actually does.
 - [ ] 🤖 **Not dependent on another open PR.** Check for references to other unmerged PRs. Dependent PRs should not be submitted until their dependency merges.
 - [ ] 👁️ **Description is useful.** The "Proposed change" section should explain *why*, not just *what*. For bugfixes, there should be a linked issue. For new integrations, context about the brand/device.
-- [ ] 🤖 **PR description has no unfilled placeholders.** Check for empty Breaking Change sections, unfilled `fixes #` placeholders, and leftover template boilerplate.
+- [ ] 🤖 **PR description has no unfilled placeholders.** Check for empty Breaking Change sections, unfilled `fixes #` placeholders.
 
 ### 1.1 Triage Signals: Is This PR Likely to Complete?
 
