@@ -456,8 +456,6 @@ A suggested order for reviewing a PR efficiently:
 
 **When requesting changes:** Be specific about what needs to change and why. Link to docs when possible. If the PR needs major rework, say so clearly rather than leaving 20 inline comments that add up to "start over." (In our closed-PR analysis, PRs that received specific feedback were more likely to be completed. Vague feedback correlated with abandonment.)
 
-**Reviewer load context:** In our analysis, joostlek alone accounted for 28% of all review comments (1,309 of 4,719 in the general-PR dataset). Automation of the rule-based checks in Section 13 would disproportionately reduce the burden on the most active reviewers.
-
 ---
 
 ## 14. Top Reviewers and Their Focus Areas
