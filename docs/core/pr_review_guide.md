@@ -76,7 +76,6 @@ These are the most review-intensive — averaging **45 comments per reviewed PR*
 - [ ] 👁️ **`unique-config-entry` prevents duplicates.** The flow should call `self._abort_if_unique_id_configured()` or equivalent to prevent adding the same device twice.
 - [ ] 🤖 **No user-configurable names.** Config flows should not ask the user for a name. Names are auto-generated or set via the UI later. Exception: helper integrations. (Found in 7.6% of new-integration PRs.)
 - [ ] 🤖 **No configurable polling intervals.** Never add `scan_interval` or `update_interval` as config flow options. Polling intervals are set by the integration, not the user.
-- [ ] 🤖 **`VERSION` is set.** The config flow class should have `VERSION = 1` (or appropriate version).
 - [ ] 👁️ **Suggested values on reconfigure.** If a reconfigure flow exists (it shouldn't in initial PRs, but for follow-ups): input fields should pre-populate with current values using `suggested_value`.
 
 ### 2.5 Discovery Flows (Zeroconf / DHCP / SSDP)
