@@ -594,11 +594,11 @@ Passing `sort=True` to async_show_menu will also sort the menu items by their la
 
 ### Entity previews
 
-Currently preview entities are only supported for config entry flows, option flows, subentry config flows, and repair flows. To implement flow previews in a flow manager you'll need to complete the following basic steps:
+Currently preview entities are only supported for config entry flows, option flows, subentry config flows, and repair flows. To implement a flow preview in a data entry flow, implement these steps:
 
 #### 1. Create the websocket endpoint
 
-The below is specific to `ConfigFlow` or `ConfigSubentryFlow` flows but is easily adaptable to an `OptionsFlow` or `RepairsFlow`.
+The example is specific to `ConfigFlow` or `ConfigSubentryFlow` flows but it is easily adaptable to an `OptionsFlow` or `RepairsFlow`.
 
 ```python
 # In config_flow.py
