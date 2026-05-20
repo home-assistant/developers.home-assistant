@@ -152,7 +152,7 @@ Bugfixes generate the **most comments per reviewed PR (33.4)** despite being con
 - [ ] 👁️ **Linked issue exists.** Bugfix PRs should reference the issue they fix (`fixes #XXXX`). If there's no issue, ask why — the bug should be confirmed to exist. (PRs for bugs that can't be reproduced sometimes get self-closed — requiring a linked issue validates the bug first.)
 - [ ] 👁️ **Fix is minimal.** The change should fix the reported bug and nothing else. No drive-by refactoring, no "while I'm here" improvements. (Scope discipline is the most common meta-feedback across all PR types.)
 - [ ] 👁️ **Root cause is addressed.** The fix should address the actual cause, not paper over symptoms. If a `TypeError` crashes because `value` is `None`, the fix should handle `None` at the appropriate level — not just wrap everything in `try/except`.
-- [ ] 👁️ **Regression test included.** There should be a test that would have caught this bug. The test should fail without the fix and pass with it.
+- [ ] 👁️ **Regression test included.** There should preferably be a test that would have caught this bug. The test should fail without the fix and pass with it. Not all integrations require tests, but test coverage should always be maintained in existing integrations that have tests.
 - [ ] 🤖 **No unrelated test changes.** Test refactoring (snapshot updates, parametrize rewrites) should not be mixed into bugfix PRs.
 
 ### 4.1 Error Handling in Bugfixes
