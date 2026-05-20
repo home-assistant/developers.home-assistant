@@ -72,18 +72,18 @@ To avoid calculations in a property method, set the corresponding [entity class 
 | Name                     | Type                          | Default | Description
 | ------------------------ | ------------------------------| ------- | -----------
 | assumed_state            | `bool`                        | `False` | Return `True` if the state is based on our assumption instead of reading it from the device.
-| attribution              | <code>str &#124; None</code>  | `None`  | The branding text required by the API provider.
+| attribution              | `str \| None`  | `None`  | The branding text required by the API provider.
 | available                | `bool`                        | `True`  | Indicate if Home Assistant is able to read the state or control the underlying device, see [entity-unavailable](/docs/core/integration-quality-scale/rules/entity-unavailable.md) for more details.
-| device_class             | <code>str &#124; None</code>  | `None`  | Extra classification of what the device is. Each domain specifies their own. Device classes can come with extra requirements for unit of measurement and supported features.
-| entity_picture           | <code>str &#124; None</code>  | `None`  | Url of a picture to show for the entity.
-| extra_state_attributes   | <code>dict &#124; None</code> | `None`  | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version.
+| device_class             | `str \| None`  | `None`  | Extra classification of what the device is. Each domain specifies their own. Device classes can come with extra requirements for unit of measurement and supported features.
+| entity_picture           | `str \| None`  | `None`  | Url of a picture to show for the entity.
+| extra_state_attributes   | `dict \| None` | `None`  | Extra information to store in the state machine. It needs to be information that further explains the state, it should not be static information like firmware version.
 | has_entity_name          | `bool`                        | `False` | Return `True` if the entity's `name` property represents the entity itself (required for new integrations). This is explained in more detail below.
-| name                     | <code>str &#124; None</code>  | `None`  | Name of the entity. Avoid hard coding a natural language name, use a [translated name](/docs/internationalization/core/#name-of-entities) instead.
+| name                     | `str \| None`  | `None`  | Name of the entity. Avoid hard coding a natural language name, use a [translated name](/docs/internationalization/core/#name-of-entities) instead.
 | should_poll              | `bool`                        | `True`  | Should Home Assistant check with the entity for an updated state. If set to `False`, entity will need to notify Home Assistant of new updates by calling one of the [schedule update methods](integration_fetching_data.md#push-vs-poll).
-| state                    | <code>str &#124; int &#124; float &#124; None</code> | `None` | The state of the entity. In most cases this is implemented by the domain base entity and should not be implemented by integrations.
-| supported_features       | <code>int &#124; None</code>  | `None`  | Flag features supported by the entity. Domains specify their own.
-| translation_key         | <code>str &#124; None</code>  | `None`  | A key for looking up translations of the entity's state in [`entity` section of the integration's `strings.json`](/docs/internationalization/core#state-of-entities) and for translating the state into a matching [icon](#icons). |
-| translation_placeholders | <code>dict &#124; None</code> | `None`  | Placeholder definitions for [translated entity name](/docs/internationalization/core/#name-of-entities).
+| state                    | `str \| int \| float \| None` | `None` | The state of the entity. In most cases this is implemented by the domain base entity and should not be implemented by integrations.
+| supported_features       | `int \| None`  | `None`  | Flag features supported by the entity. Domains specify their own.
+| translation_key         | `str \| None`  | `None`  | A key for looking up translations of the entity's state in [`entity` section of the integration's `strings.json`](/docs/internationalization/core#state-of-entities) and for translating the state into a matching [icon](#icons). |
+| translation_placeholders | `dict \| None` | `None`  | Placeholder definitions for [translated entity name](/docs/internationalization/core/#name-of-entities).
 
 :::warning
 It's allowed to change `device_class`, `supported_features` or any property included in a domain's `capability_attributes`. However, since these entity properties often are not expected to change at all and some entity consumers may not be able to update them at a free rate, we recommend only changing them when absolutely required and at a modest interval.
@@ -101,11 +101,11 @@ The following properties are used to populate the entity and device registries. 
 
 | Name                            | Type                                    | Default | Description
 | ------------------------------- | --------------------------------------- | ------- | -----------
-| device_info                     | <code>DeviceInfo &#124; None</code>           | `None`  | [Device registry](/docs/device_registry_index) descriptor for [automatic device registration.](/docs/device_registry_index#automatic-registration-through-an-entity)
-| entity_category                 | <code>EntityCategory &#124; None</code> | `None`  | Classification of a non-primary entity. Set to `EntityCategory.CONFIG` for an entity that allows changing the configuration of a device, for example, a switch entity, making it possible to turn the background illumination of a switch on and off. Set to `EntityCategory.DIAGNOSTIC` for an entity that exposes some configuration parameter or diagnostics of a device but does not allow changing it, for example, a sensor showing RSSI or MAC address. Use it also for button entities that trigger a device identification mechanism (with `IDENTIFY` device class). |
+| device_info                     | `DeviceInfo \| None`                    | `None`  | [Device registry](/docs/device_registry_index) descriptor for [automatic device registration.](/docs/device_registry_index#automatic-registration-through-an-entity)
+| entity_category                 | `EntityCategory \| None`                | `None`  | Classification of a non-primary entity. Set to `EntityCategory.CONFIG` for an entity that allows changing the configuration of a device, for example, a switch entity, making it possible to turn the background illumination of a switch on and off. Set to `EntityCategory.DIAGNOSTIC` for an entity that exposes some configuration parameter or diagnostics of a device but does not allow changing it, for example, a sensor showing RSSI or MAC address. Use it also for button entities that trigger a device identification mechanism (with `IDENTIFY` device class). |
 | entity_registry_enabled_default | `bool` | `True`                         | Indicate if the entity should be enabled or disabled when first added to the entity registry. This includes fast-changing diagnostic entities or, assumingly less commonly used entities. For example, a sensor exposing RSSI or battery voltage should typically be set to `False`; to prevent unneeded (recorded) state changes or UI clutter by these entities. |
 | entity_registry_visible_default | `bool` | `True`                         | Indicate if the entity should be hidden or visible when first added to the entity registry. |
-| unique_id                       | <code>str &#124; None</code>            | `None`  | A unique identifier for this entity. It must be unique within a platform (like `light.hue`). It should not be configurable or changeable by the user. [Learn more.](entity_registry_index.md#unique-id-requirements) |
+| unique_id                       | `str \| None`            | `None`  | A unique identifier for this entity. It must be unique within a platform (like `light.hue`). It should not be configurable or changeable by the user. [Learn more.](entity_registry_index.md#unique-id-requirements) |
 
 ## Advanced properties
 
@@ -113,11 +113,11 @@ The following properties are also available on entities. However, they are for a
 
 | Name                            | Type                         | Default | Description
 | ------------------------------- | ---------------------------- | ------- | -----------
-| capability_attributes           | <code>dict &#124; None</code> | `None` | State attributes which are stored in the entity registry. This property is implemented by the domain base entity and should not be implemented by integrations.
+| capability_attributes           | `dict \| None` | `None` | State attributes which are stored in the entity registry. This property is implemented by the domain base entity and should not be implemented by integrations.
 | force_update                    | `bool`                       | `False` | Write each update to the state machine, even if the data is the same. Example use: when you are directly reading the value from a connected sensor instead of a cache. Use with caution, will spam the state machine. |
-| icon                            | <code>str &#124; None</code> | `None`  | Icon to use in the frontend. Using this property is not recommended. [More information about using icons](#icons). |
-| state_attributes                | <code>dict &#124; None</code> | `None` | State attributes of a base domain. This property is implemented by the domain base entity and should not be implemented by integrations.
-| unit_of_measurement             | <code>str &#124; None</code> | The unit of measurement that the entity's state is expressed in. In most cases, for example for the `number` and `sensor` domains, this is implemented by the domain base entity and should not be implemented by integrations.
+| icon                            | `str \| None` | `None`  | Icon to use in the frontend. Using this property is not recommended. [More information about using icons](#icons). |
+| state_attributes                | `dict \| None` | `None` | State attributes of a base domain. This property is implemented by the domain base entity and should not be implemented by integrations.
+| unit_of_measurement             | `str \| None` | The unit of measurement that the entity's state is expressed in. In most cases, for example for the `number` and `sensor` domains, this is implemented by the domain base entity and should not be implemented by integrations.
 
 ## System properties
 

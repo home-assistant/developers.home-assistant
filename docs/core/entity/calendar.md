@@ -16,7 +16,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name  | Type          | Default               | Description                                             |
 | ----- | ------------- | --------------------- | ------------------------------------------------------- |
-| event | <code>CalendarEvent &#124; None</code> | **Required** | The current or next upcoming `CalendarEvent` or `None`. |
+| event | `CalendarEvent \| None` | **Required** | The current or next upcoming `CalendarEvent` or `None`. |
 
 ### States
 

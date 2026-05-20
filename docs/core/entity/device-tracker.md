@@ -37,14 +37,14 @@ Derive a platform entity from [`homeassistant.components.device_tracker.config_e
 Properties should always only return information from memory and not do I/O (like network requests). Implement `update()` or `async_update()` to fetch data.
 :::
 
-| Name          | Type                         | Default             | Description                         |
-| ------------- | ---------------------------- | ------------------- | ----------------------------------- |
-| battery_level | <code>int &#124; None</code> | `None`              | The battery level of the device.    |
-| hostname      | <code>str &#124; None</code> | `None`              | The hostname of the device.         |
-| ip_address    | <code>str &#124; None</code> | `None`              | The IP address of the device.       |
-| is_connected  | `bool \| None`               | **Required**        | The connection state of the device. |
-| mac_address   | <code>str &#124; None</code> | `None`              | The MAC address of the device.      |
-| source_type   | `SourceType`                 | `SourceType.ROUTER` | The source type of the device.      |
+| Name          | Type           | Default             | Description                         |
+| ------------- | ---------------| ------------------- | ----------------------------------- |
+| battery_level | `int \| None`  | `None`              | The battery level of the device.    |
+| hostname      | `str \| None`  | `None`              | The hostname of the device.         |
+| ip_address    | `str \| None`  | `None`              | The IP address of the device.       |
+| is_connected  | `bool \| None` | **Required**        | The connection state of the device. |
+| mac_address   | `str \| None`  | `None`              | The MAC address of the device.      |
+| source_type   | `SourceType`   | `SourceType.ROUTER` | The source type of the device.      |
 
 ### DHCP discovery
 
@@ -66,9 +66,9 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name              | Type                           | Default          | Description                              |
 | ----------------- | ------------------------------ | ---------------- | ---------------------------------------- |
-| battery_level     | <code>int &#124; None</code>   | `None`           | The battery level of the device.         |
-| latitude          | <code>float &#124; None</code> | `None`           | The latitude coordinate of the device.   |
+| battery_level     | `int \| None`   | `None`           | The battery level of the device.         |
+| latitude          | `float \| None` | `None`           | The latitude coordinate of the device.   |
 | location_accuracy | `float`                        | `0`              | The location accuracy (m) of the device. |
-| location_name     | <code>str &#124; None</code>   | `None`           | The location name of the device.         |
-| longitude         | <code>float &#124; None</code> | `None`           | The longitude coordinate of the device.  |
+| location_name     | `str \| None`   | `None`           | The location name of the device.         |
+| longitude         | `float \| None` | `None`           | The longitude coordinate of the device.  |
 | source_type       | SourceType                     | `SourceType.GPS` | The source type of the device.           |

@@ -13,12 +13,12 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name                     | Type                                | Default | Description                                                                                         |
 | ------------------------ | ------------------------------------| ------- | --------------------------------------------------------------------------------------------------- |
-| brand                    | <code>str &#124; None</code>        | `None`  | The brand (manufacturer) of the camera.                                                             |
+| brand                    | `str \| None`        | `None`  | The brand (manufacturer) of the camera.                                                             |
 | frame_interval           | `float`                             | 0.5     | The interval between frames of the stream.                                                          |
 | is_on                    | `bool`                              | `True`  | Indication of whether the camera is on.                                                             |
 | is_recording             | `bool`                              | `False` | Indication of whether the camera is recording. Used to determine `state`.                           |
 | is_streaming             | `bool`                              | `False` | Indication of whether the camera is streaming. Used to determine `state`.                           |
-| model                    | <code>str &#124; None</code>        | `None`  | The model of the camera.                                                                            |
+| model                    | `str \| None`        | `None`  | The model of the camera.                                                                            |
 | motion_detection_enabled | `bool`                              | `False` | Indication of whether the camera has motion detection enabled.                                      |
 | use_stream_for_stills    | `bool`                              | `False` | Determines whether or not to use the `Stream` integration to generate still images                  |
 

@@ -14,7 +14,7 @@ Properties should only return information from memory and not do I/O (like netwo
 
 | Name  | Type          | Default               | Description                                             |
 | ----- | ------------- | --------------------- | ------------------------------------------------------- |
-| todo_items | <code>list[TodoItem] &#124; None</code> | `None` | **Required.** The ordered contents of the To-do list. |
+| todo_items | `list[TodoItem] \| None` | `None` | **Required.** The ordered contents of the To-do list. |
 
 ### States
 
@@ -109,9 +109,9 @@ update.
 
 | Name        | Type             | Default      | Description                                                                                                                                     |
 | ----------- | ---------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
-| uid | <code>string &#124; None</code> | `None` | A unique identifier for the to-do item. This field is required for updates and the entity state.
-| summary | <code>string &#124; None</code>  | `None` | A title or summary of the to-do item. This field is required for the entity state.
-| status | <code>TodoItemStatus &#124; None</code> | `None` | Defines the overall status for the to-do item, either `NEEDS_ACTION` or `COMPLETE`. This field is required for the entity state.
-| due | <code>datetime.date &#124; datetime.datetime &#124; None</code> | `None` | The date and time that a to-do is expected to be completed. As a datetime, must have a timezone.
-| description | <code>string &#124; None</code>  | `None` | A more complete description of the to-do item than that provided by the summary.
-| completed | <code>datetime.datetime &#124; None</code> | `None` | A timestamp indicating the time this item was last marked `COMPLETE`.
+| uid | `str \| None` | `None` | A unique identifier for the to-do item. This field is required for updates and the entity state.
+| summary | `str \| None`  | `None` | A title or summary of the to-do item. This field is required for the entity state.
+| status | `TodoItemStatus \| None` | `None` | Defines the overall status for the to-do item, either `NEEDS_ACTION` or `COMPLETE`. This field is required for the entity state.
+| due | `datetime.date \| datetime.datetime \| None` | `None` | The date and time that a to-do is expected to be completed. As a datetime, must have a timezone.
+| description | `str \| None`  | `None` | A more complete description of the to-do item than that provided by the summary.
+| completed | `datetime.datetime \| None` | `None` | A timestamp indicating the time this item was last marked `COMPLETE`.

@@ -11,9 +11,9 @@ An Assist satellite entity is derived from the [`homeassistant.components.assist
 
 | Name                 | Type                   | Default           | Description                                                           |
 |----------------------|------------------------|-------------------|-----------------------------------------------------------------------|
-| `pipeline_entity_id` | <code>str; None</code> | <code>None</code> | Id of the `select` entity with the [pipeline id](/docs/voice/pipelines/) or `None`. |
-| `vad_sensitivity_entity_id` | <code>str; None</code> | <code>None</code> | Id of the `select` entity with the [voice activity detection sensitivity](https://github.com/home-assistant/core/blob/dev/homeassistant/components/assist_pipeline/vad.py) or `None`. |
-| `tts_options` | <code>dict; None</code> | <code>None</code> | Options passed to the [text-to-speech system](https://www.home-assistant.io/integrations/tts/) when responding. |
+| `pipeline_entity_id` | `str \| None` | `None` | Id of the `select` entity with the [pipeline id](/docs/voice/pipelines/) or `None`. |
+| `vad_sensitivity_entity_id` | `str \| None` | `None` | Id of the `select` entity with the [voice activity detection sensitivity](https://github.com/home-assistant/core/blob/dev/homeassistant/components/assist_pipeline/vad.py) or `None`. |
+| `tts_options` | `dict \| None` | `None` | Options passed to the [text-to-speech system](https://www.home-assistant.io/integrations/tts/) when responding. |
 
 
 ## States
