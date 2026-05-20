@@ -407,7 +407,7 @@ async def async_turn_on(self, **kwargs):
 
 - [ ] 👁️ **Commits tell a story.** Each commit should be a logical unit. The reviewer should be able to follow the progression.
 - [ ] 🤖 **No amend/squash/rebase after opening.** Per repo policy: "Do NOT amend, squash, or rebase commits that have already been pushed to the PR branch after the PR is opened."
-- [ ] 🤖 **No merge commits from base branch.** If the PR contains merge commits from `dev` (e.g., "Merge branch 'dev' into feature-x"), the git history is corrupted. Ask the author to rebase cleanly or open a fresh PR. (This pattern caused PR closures in our closed-PR analysis.)
+- [ ] 🤖 **No unrelated commits after an unclean merge or rebase from base branch.** If the PR contains unrelated commits from `dev` the git history is corrupted. Ask the author to create a clean branch and open a fresh PR. (This pattern caused PR closures in our closed-PR analysis.)
 - [ ] 👁️ **No commented-out code.** Dead code should be removed, not commented. (26 comments in general PRs.)
 - [ ] 🤖 **Generated files are regenerated.** `requirements_all.txt`, `requirements_test_all.txt`, and any hassfest outputs must be regenerated — not manually edited.
 
