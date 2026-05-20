@@ -661,7 +661,7 @@ async def ws_start_preview(
         state: str | None,
         attributes: Mapping[str, Any] | None,
         error: str | None,
-        domain: str | None,
+        domain: str | None, # e.g. "sensor", "select", "datetime" etc.
     ) -> None:
         """Forward preview updates to websocket."""
         # Errors sent here will appear in the preview element on the data 
@@ -707,7 +707,7 @@ async def ws_start_preview(
 
 :::tip
 
- `domain` in omitted in async_preview_callback refers to the the preview entity's domain (e.g. `"sensor"` or `"select"`). If `domain` is omitted in the event message in `async_preview_callback` above the frontend will fall back first to the flow's current `step_id` which is fine if you want a `SelectEntity` preview and `async_show_form` is being called from `async_step_select`.  If `step_id` doesn't match any domains the frontend will fallback and render a `SensorEntity` with applicable attributes.
+ `domain` in async_preview_callback refers to the the preview entity's domain (e.g. `"sensor"` or `"select"`). If `domain` is not provided or `None` the frontend will fallback to render a `SensorEntity` with applicable attributes.
 
 :::
 
@@ -761,7 +761,7 @@ class PreviewSensorEntity(SensorEntity):
 
 #### 3. Register the websocket preview command
 
-Add a static method `async_setup_preview` to the flow handler.
+Add a static method `async_setup_preview` to the flow handler (the platform integration of `ConfigFlow`):
 
 ```python
 @staticmethod
