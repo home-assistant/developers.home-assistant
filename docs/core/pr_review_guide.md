@@ -309,6 +309,7 @@ The HA project is actively migrating away from `extra_state_attributes`. Reviewe
 - [ ] 🤖 **Narrow exception handling.** `except Exception:` catches everything including programming errors. Catch only the expected connection/API exceptions. Reviewer quote: *"Catch only the expected connection/API exceptions here instead of `Exception`."* (45 error handling comments.)
 - [ ] 🤖 **Narrow try blocks.** Only keep statements in the `try` block that can actually raise the exception you're catching. Wide try blocks make debugging harder because the wrong line can be caught. Reviewer quote: *"Only keep things in the try block if they can raise."* (5 comments, but a fundamental principle.)
 - [ ] 👁️ **`async_unload_entry` is complete.** When a config entry is unloaded, all event listeners, timers, and connections must be cleaned up. Check that everything created in `async_setup_entry` has a corresponding teardown. (36 cleanup comments.)
+- [ ] 👁️ **Close connections on shutdown.** When Home Assistant stops connections should be closed. Listen for the `EVENT_HOMEASSISTANT_STOP` event to schedule the cleanup. Memory is automatically released when the Home Assistant process terminates.
 
 ### 9.3 Strings & Logging
 
