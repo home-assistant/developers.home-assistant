@@ -335,7 +335,7 @@ These patterns come from the "Things AI Would Get Wrong" and "Confusing Internal
 Python's truthiness rules are a common source of bugs in HA integrations:
 
 | Expression | Result | Problem |
-|-----------|--------|---------|
+| ---------- | ------ | ------- |
 | `bool(None)` | `False` | Hides missing data — entity shows "off" instead of "unknown/unavailable" |
 | `bool("0")` | `True` | Non-empty string is truthy — entity shows "on" when value is "0" |
 | `bool(0)` | `False` | Correct, but fragile if API changes to return `"0"` |
