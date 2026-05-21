@@ -147,7 +147,7 @@ Config entry lifecycle generated **244 review comments across 74 PRs** — the 4
 
 ## 4. Bugfix PRs (`bugfix`)
 
-Bugfixes generate the **most comments per reviewed PR (33.4)** despite being conceptually simpler — because reviewers scrutinize whether the fix is actually correct and complete.
+Bugfixes generate the **many comments per reviewed PR (33.4)** despite being conceptually simpler than other changes — because reviewers scrutinize whether the fix is actually correct and complete.
 
 - [ ] 👁️ **Linked issue exists.** Bugfix PRs should reference the issue they fix (`fixes #XXXX`). If there's no issue, ask why — the bug should be confirmed to exist. (PRs for bugs that can't be reproduced sometimes get self-closed — requiring a linked issue validates the bug first.)
 - [ ] 👁️ **Fix is minimal.** The change should fix the reported bug and nothing else. No drive-by refactoring, no "while I'm here" improvements. (Scope discipline is the most common meta-feedback across all PR types.)
