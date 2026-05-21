@@ -177,7 +177,7 @@ The largest category in our general analysis (214 of 500 PRs), often driven by q
 
 ## 6. Dependency PRs (`dependency`)
 
-Dependency PRs generate **37× fewer review comments** than new-integration PRs — 87% merge with zero inline comments. But the patterns that do appear are specific, and the bigger concern is the security blind spot.
+Dependency PRs generate **37× fewer review comments** than new-integration PRs — 87% merge with zero inline comments. But the patterns that do appear are specific, and the bigger concern is the security risk when updating dependencies.
 
 ### 6.1 Scope & Structure
 
@@ -187,8 +187,6 @@ Dependency PRs generate **37× fewer review comments** than new-integration PRs 
 - [ ] 🤖 **Requirements files regenerated.** `requirements_all.txt` should be regenerated via `python3 -m script.gen_requirements_all`.
 
 ### 6.2 Upstream Change Review
-
-**This is the biggest blind spot in the current review process.** Across 200 analyzed dependency PRs, **zero review comments** mentioned inspecting upstream changes for security concerns. Dependency bumps are being rubber-stamped.
 
 - [ ] 👁️ **Changelog/release notes linked.** The PR description should include a link to the library's changelog or a diff between versions so reviewers can see what changed upstream.
 - [ ] 👁️ **Breaking library changes handled.** If the upstream library made breaking changes, verify the integration code adapts correctly.
