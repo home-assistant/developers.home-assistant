@@ -399,7 +399,7 @@ async def async_turn_on(self, **kwargs):
         raise HomeAssistantError(f"Failed to turn on: {err}") from err
 ```
 
-- [ ] 🤖 **Service handlers propagate `HomeAssistantError`.** Check that service/action handlers don't silently swallow exceptions. Errors should reach the user.
+- [ ] 🤖 **Service handlers propagate `HomeAssistantError`.** Check that service/action handlers don't silently swallow exceptions. Errors should reach the user. Make sure to avoid double error logging. The argument passed to the raised `HomeAssistantError` should include the error message which will be logged by default. Don't log this error message separately.
 
 ---
 
