@@ -300,7 +300,7 @@ The HA project is actively migrating away from `extra_state_attributes`. Reviewe
 - [ ] 🤖 **Direct dict access when validated.** When validation guarantees a key exists, use `data["key"]` not `data.get("key")`. Contract violations should be surfaced, not silently masked. (68 dict access comments.)
 - [ ] 👁️ **No unnecessary defensive checks on service actions.** HA's service/action schemas already validate input. Don't add redundant checks for fields that are validated by the schema.
 - [ ] 🤖 **No `.gitignore` files in integration directories.** These occasionally sneak in from contributor's local repos.
-- [ ] 🤖 **Use `runtime_data` not `hass.data[DOMAIN]`.** New code should store integration data in `entry.runtime_data`. The `hass.data[DOMAIN]` pattern is legacy. (69 comments in general PRs.)
+- [ ] 🤖 **Use `runtime_data` not `hass.data[DOMAIN]`.** New code should store integration data in `entry.runtime_data`. The `hass.data[DOMAIN]` pattern is legacy, and only useful in specific cases today. (69 comments in general PRs.)
 - [ ] 🤖 **Use dataclasses for structured data.** When passing multiple related values around, use a dataclass instead of tuples, dicts, or separate variables. (14 comments, 8 PRs.)
 
 ### 9.2 Error Handling
