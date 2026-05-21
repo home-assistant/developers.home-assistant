@@ -294,7 +294,7 @@ The HA project is actively migrating away from `extra_state_attributes`. Reviewe
 
 ### 9.1 Architecture
 
-- [ ] 🤖 **Constants in `const.py`, imported from there.** Integration constants (`CONF_*`, `DOMAIN`, entity keys) belong in `const.py` and should be imported from there — not from `__init__.py` or other re-exporting modules. Magic strings that should be constants should be extracted. (121 comments, 48 PRs in general analysis.)
+- [ ] 🤖 **Constants in `const.py`, imported from there.** Integration constants (`CONF_*`, `DOMAIN`, entity keys) that are shared between more than one module belong in `const.py` and should be imported from there — not from `__init__.py` or other re-exporting modules. If a constant is only used in a single module, it should remain there. Magic strings that should be constants should be extracted. (121 comments, 48 PRs in general analysis.)
 - [ ] 🤖 **Executor jobs are grouped.** Multiple blocking I/O calls should be grouped into a single `async_add_executor_job` call, not called separately. (28 comments, 16 PRs.)
 - [ ] 👁️ **Early exit / guard clauses.** Prefer `if not condition: return` over wrapping the entire function body in `if condition:`. Avoid deep nesting.
 - [ ] 🤖 **Direct dict access when validated.** When validation guarantees a key exists, use `data["key"]` not `data.get("key")`. Contract violations should be surfaced, not silently masked. (68 dict access comments.)
