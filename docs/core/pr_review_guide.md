@@ -358,7 +358,7 @@ Python's `assert` statements are stripped when Python runs with `-O` (optimize).
 The `DataUpdateCoordinator` has two methods that look similar but serve different purposes:
 
 | Method | When it runs | Use for |
-|--------|-------------|---------|
+| ------ | ------------ | ------- |
 | `_async_setup` | **Once**, at coordinator initialization | Auth, connection setup, fetching device info, initial state |
 | `_async_update_data` | **Every poll cycle** (e.g., every 30 seconds) | Fetching current state/data from the device/API |
 
