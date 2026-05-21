@@ -476,4 +476,4 @@ Understanding what each reviewer typically focuses on helps new reviewers know w
 
 ---
 
-*This guide is based on analysis of 1,100+ PRs and 8,200+ review comments from home-assistant/core: 200 new-integration PRs (3,379 comments), 200 dependency PRs (91 comments), 500 general PRs (4,719 comments), 200 closed/unmerged PRs, plus license/supply chain sampling of 1,106 PyPI packages. Data collected April 2026.*
+*This guide is based on analysis of 1,100+ PRs and 8,200+ review comments from home-assistant/core: 200 new-integration PRs (3,379 comments), 200 dependency PRs (91 comments), 500 general PRs (4,719 comments), 200 closed/unmerged PRs, plus license/supply chain sampling of 1,106 PyPI packages. Data collected April 2026. It has been manually curated after AI generation.*
