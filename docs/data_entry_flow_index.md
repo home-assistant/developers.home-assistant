@@ -774,7 +774,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         websocket_api.async_register_command(hass, ws_start_preview)
 
     async def async_step_user(self, user_input: dict[str, Any] | None
-        ) -> FlowResult:
+        ) -> data_entry_flow.FlowResult:
 
         ...
 
