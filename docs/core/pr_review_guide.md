@@ -257,12 +257,13 @@ Entities marked `CONFIG` or `DIAGNOSTIC` are hidden from default dashboards and 
 This is **one of the most important patterns for reviewers to understand** — and one of the hardest for AI to get right (121 comments, 60 PRs).
 
 **The core distinction:**
+
 - **`native_value` returns `None`** = the entity is available, but the current value is unknown → entity shows "unknown" in UI
 - **`_attr_available = False`** = the device/service is unreachable → entity shows "unavailable" in UI
 
 These are very different user experiences. Getting it wrong means either showing incorrect data or hiding real failures.
 
-- [ ] 👁️ **`None` is not masked by type casting.** `bool(None)` returns `False`, which hides the fact that data is missing. `int(None)` raises `TypeError`. When a value from the API could be `None`, the entity property should return `None` (or `bool | None`), not cast it to a concrete value. Reviewer quote: *"If the speaker attribute is None the entity should be unavailable. Let's not mask it via type cast."*
+- [ ] 👁️ **`None` is not masked by type casting.** `bool(None)` returns `False`, which hides the fact that data is missing. `int(None)` raises `TypeError`. When a value from the API could be `None`, the entity property should return `None` (or `bool | None`), not cast it to a concrete value.
 - [ ] 👁️ **Unavailability is signaled correctly.** When the device doesn't respond or the API fails, entities should go unavailable (`_attr_available = False`), not show stale data. Check coordinator error handling: does a failed update mark entities as unavailable?
 - [ ] 👁️ **`None` returns are intentional, not accidental.** If `native_value` can return `None`, verify this is the intended behavior. Sometimes `None` means "the API didn't include this field" and the entity should be unavailable instead.
 
