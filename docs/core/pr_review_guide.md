@@ -240,6 +240,7 @@ Entity-related feedback dominated the general PR analysis. **EntityCategory alon
 The most common review pattern in general PRs. Contributors frequently misclassify entities. The rule:
 
 **Decision tree:**
+
 1. Is this entity something the user would want on their main dashboard? → **No category** (default)
 2. Is it a setting that controls integration behavior? (modes, thresholds, toggles) → **`EntityCategory.CONFIG`**
 3. Is it debug/diagnostic info? (firmware version, signal strength, rate limits, IP address, MAC address) or specifically button entities with device class IDENTIFY → **`EntityCategory.DIAGNOSTIC`**
