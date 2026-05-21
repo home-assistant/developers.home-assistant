@@ -348,9 +348,10 @@ Python's truthiness rules are a common source of bugs in HA integrations:
 
 ### 10.2 `assert` in Production Code
 
-Python's `assert` statements are stripped when Python runs with `-O` (optimize). Contributors use `assert` for validation, not realizing it won't execute in production. Reviewer quote: *"Why's this needed? Keep in mind that an assert won't do much in production code."*
+Python's `assert` statements are stripped when Python runs with `-O` (optimize). Contributors use `assert` for validation, not realizing it won't execute in production. Reviewer quote: *"Why's this needed? Keep in mind that an assert won't do much in production code."* Use `if not condition: raise ValueError(...)` or similar for runtime validation. `assert` is only for tests or type hints.
 
-- [ ] 🤖 **No `assert` outside test files.** Use `if not condition: raise ValueError(...)` or similar for runtime validation. `assert` is for tests only.
+- [ ] 🤖 **`assert` in test files.** Tests use `assert` statements to validate the state of the test at that time.
+- [ ] 🤖 **`assert` for type hints**. Sometimes an `assert` statement may be needed to explain a type to the type checker. It should only be used when it's cumbersome or impossible to adjust the type annotations to achieve the same result. ALWAYS wrap such statements in a `if TYPE_CHECKING:` condition.
 
 ### 10.3 Coordinator Lifecycle Confusion
 
