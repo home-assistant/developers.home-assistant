@@ -205,7 +205,7 @@ Dependency PRs generate **37× fewer review comments** than new-integration PRs 
 
 ## 7. Testing Review (All PR Types)
 
-Testing feedback was the most frequent overall category in new-integration PRs (47 PRs, ~24% touched) and generated 96 test coverage comments in general PRs.
+Testing feedback was the most frequent overall category in new-integration PRs (47 PRs, ~24% touched) and generated many test coverage comments in general PRs.
 
 ### 7.1 Structure
 
