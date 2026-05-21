@@ -181,7 +181,7 @@ Dependency PRs generate **37× fewer review comments** than new-integration PRs 
 
 ### 6.1 Scope & Structure
 
-- [ ] 🤖 **Only the dependency is updated.** The PR should touch `manifest.json` (version bump), `requirements_all.txt` / `requirements_test_all.txt` (regenerated), and minimal code changes required by the new version. Nothing else.
+- [ ] 🤖 **Only the dependency is updated.** The PR should touch `manifest.json` (version bump), and the requirements files that track the dependency, such as `requirements_all.txt` (regenerated), and minimal code changes required by the new version. Nothing else.
 - [ ] 🤖 **No opportunistic refactoring.** If the contributor also refactored tests, cleaned up imports, or made stylistic changes — ask them to split that into a separate PR. (2.5% of dep PRs had scope creep.)
 - [ ] 🤖 **`quality_scale` not accidentally removed.** Check that `manifest.json` didn't lose the `quality_scale` or `loggers` field — this happens surprisingly often in dependency bumps. (2.0% of dep PRs.)
 - [ ] 🤖 **Requirements files regenerated.** `requirements_all.txt` should be regenerated via `python3 -m script.gen_requirements_all`.
