@@ -647,14 +647,14 @@ async def ws_start_preview(
         config_entry: ConfigEntry = hass.config_entries.async_get(entry_id)
 
     # Process the data and validate for errors (tip: use the 
-    # same schema/validation used in the data entry flow step)  
+    # same schema/validation used in the data entry flow step)
     errors: dict[str, str] | None = None
     preview_value: str = ...
     config: dict[str, str] = {
         ATTR_ICON: "mdi:eye",
         ATTR_NAME: "Entity Preview"
     }
-    ... 
+    ...
 
     @callback
     def async_preview_callback(
@@ -678,7 +678,7 @@ async def ws_start_preview(
                 msg["id"],
                 {
                     "attributes": attributes,
-                    "domain": domain, # optional, see note below
+                    "domain": domain, # see note below
                     "state": state,
                 },
             )
@@ -716,6 +716,8 @@ async def ws_start_preview(
 Ideally one would leverage an entity class already created for an integration but a simple entity can be created at runtime.
 
 ```python
+from homeassistant.components.sensor import DOMAIN as SENSOR_DOMAIN
+
 class PreviewSensorEntity(SensorEntity):
     """Preview sensor entity for subentry flows."""
 
@@ -749,7 +751,7 @@ class PreviewSensorEntity(SensorEntity):
                 calculated_state.state,
                 calculated_state.attributes,
                 None, # error
-                self.domain,
+                SENSOR_DOMAIN,
             )
         except ValueError as ex:
             error = str(ex)
@@ -759,27 +761,30 @@ class PreviewSensorEntity(SensorEntity):
         return self._call_on_remove_callbacks
 ```
 
-#### 3. Register the websocket preview command
+#### 3. Register the websocket preview command, and specify preview in `async_show_form`
 
-Add a static method `async_setup_preview` to the flow handler (the platform integration of `ConfigFlow`):
-
-```python
-@staticmethod
-async def async_setup_preview(hass: HomeAssistant) -> None:
-    """Set up preview WS API."""
-    websocket_api.async_register_command(hass, ws_start_preview)
-```
-
-#### 4. Specify the preview in `async_show_form`
+Add a static method `async_setup_preview` to the flow handler and then notify the frontend to use the preview by specifying the preview name in `async_show_form`.
 
 ```python
-return self.async_show_form(
-    step_id="my_step",
-    data_schema=schema,
-    errors=errors,
-    # Same value set in the websocket_command schema in step 1:
-    preview="preview_name",
-)
+class ExampleConfigFlow(data_entry_flow.FlowHandler):
+
+    @staticmethod
+    async def async_setup_preview(hass: HomeAssistant) -> None:
+        """Set up preview WS API."""
+        websocket_api.async_register_command(hass, ws_start_preview)
+
+    async def async_step_user(self, user_input: dict[str, Any] | None
+        ) -> FlowResult:
+
+        ...
+
+        return self.async_show_form(
+            step_id="user",
+            data_schema=FLOW_SCHEMA,
+            errors=errors,
+            # Same value set in the websocket_command schema in step 1:
+            preview="preview_name",
+        )
 ```
 
 ## Initializing a config flow from an external source
