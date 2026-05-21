@@ -638,12 +638,12 @@ async def ws_start_preview(
     user_input: dict[str, Any] = msg["user_input"] 
 
     # Get the partial flow result
-    if msg["flow_type"] is FlowType.CONFIG_SUBENTRIES_FLOW:
+    if msg["flow_type"] == FlowType.CONFIG_SUBENTRIES_FLOW:
         flow_status: SubentryFlowResult = hass.config_entries.subentries.async_get(msg["flow_id"])
         # TODO: get the config entry (if applicable or needed)
         # handler for subentry flow is a tuple of str of form 
         # (entry_id, subentry_flow_type)
-        entry_id, _ = cur_step["handler"] 
+        entry_id, _ = flow_status["handler"] 
         config_entry: ConfigEntry = hass.config_entries.async_get(entry_id)
 
     # Process the data and validate for errors (tip: use the 
@@ -651,7 +651,7 @@ async def ws_start_preview(
     errors: dict[str, str] | None = None
     preview_value: str = ...
     config: dict[str, str] = {
-        ATTR_ICON: "mdi:eye"
+        ATTR_ICON: "mdi:eye",
         ATTR_NAME: "Entity Preview"
     }
     ... 
@@ -719,11 +719,11 @@ Ideally one would leverage an entity class already created for an integration bu
 class PreviewSensorEntity(SensorEntity):
     """Preview sensor entity for subentry flows."""
 
-    def __init__(hass: HomeAssistant, preview_value: str, config: dict[str, str]) -> None:
+    def __init__(self, hass: HomeAssistant, preview_value: str, config: dict[str, str]) -> None:
         self.hass = hass
         self._attr_native_value = preview_value
-        self._attr_icon = config.get[ATTR_ICON]
-        self._attr_name = config.get[ATTR_NAME]
+        self._attr_icon = config.get(ATTR_ICON)
+        self._attr_name = config.get(ATTR_NAME)
         self._attr_device_class = config.get(CONF_DEVICE_CLASS)
         self._attr_native_unit_of_measurement = config.get(CONF_UNIT_OF_MEASUREMENT)
         self._attr_state_class = config.get(CONF_STATE_CLASS)
@@ -778,7 +778,7 @@ return self.async_show_form(
     data_schema=schema,
     errors=errors,
     # Same value set in the websocket_command schema in step 1:
-    preview="my_integration_subentry_preview",
+    preview="preview_name",
 )
 ```
 
