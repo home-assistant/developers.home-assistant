@@ -322,7 +322,7 @@ The HA project is actively migrating away from `extra_state_attributes`. Reviewe
 ### 9.4 Properties & State
 
 - [ ] 👁️ **`@property` vs attributes for values.** Consider if a property or an instance attribute is the right choice. If a value needs to be computed from other data on every access, use `@property` instead of storing it as an instance variable. But check if the value is expensive to compute — if so, consider caching it. If no computation is needed or we can compute it in a single method and the need for computation is driven by the method and not by our access to the value, use an instance attribute. There are `_attr_` prefixed attributes for most `Entity` state properties that are recommended over implementing the properties directly. Don't store the same value in two places. Reviewer quote: *"Why are you storing it twice?"* (27 comments.)
-- [ ] 👁️ **Entity `native_value` returns the right type.** Return `None` when the value is genuinely unknown. Don't return default values (0, `False`, `""`) that mask device communication failures. See Section 8.2.
+- [ ] 👁️ **Entity `native_value` returns the right type.** Return `None` when the value is genuinely unknown. Don't return default values (0, `False`, `""`) that mask an unknown state. See Section 8.2.
 
 ---
 
