@@ -227,7 +227,6 @@ Testing feedback was the most frequent overall category in new-integration PRs (
 ### 7.3 Mocking
 
 - [ ] 👁️ **Mock the library, not HA internals.** Mocks should target the third-party library's API calls, not Home Assistant's internal mechanisms. (10 comments, but a fundamental principle.)
-- [ ] 👁️ **Prefer mock instances over `mock.patch`.** When the library client is dependency-injected (e.g., stored in coordinator), provide a mock object directly rather than patching the import path. This makes tests more resilient to refactoring.
 - [ ] 🤖 **Fixtures are in `conftest.py`.** Shared test fixtures (mock client, config entry setup) belong in the integration's `conftest.py`, not duplicated across test files. (17 conftest fixture comments.)
 
 ---
