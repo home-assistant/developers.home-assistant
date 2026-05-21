@@ -418,14 +418,14 @@ async def async_turn_on(self, **kwargs):
 Every new integration (and any integration declaring a quality scale) must satisfy all of these:
 
 | Rule | What to Check |
-|------|--------------|
+| ---- | ------------- |
 | `action-setup` | Service actions registered in `async_setup` or `async_setup_entry` |
 | `appropriate-polling` | Polling interval is reasonable for the device/service (not too frequent) |
 | `brands` | Brand assets provided (logo, icon) |
 | `common-modules` | Shared patterns in `const.py`, `coordinator.py` etc., not duplicated |
 | `config-flow-test-coverage` | Full test coverage for every config flow path |
 | `config-flow` | UI-based setup via config flow (no YAML-only) |
-| `dependency-transparency` | Dependencies clearly listed in manifest |
+| `dependency-transparency` | Dependencies in manifest are open source and published from an open repository |
 | `docs-actions` | Service actions documented on home-assistant.io |
 | `docs-high-level-description` | Overview of the brand/product/service in docs |
 | `docs-installation-instructions` | Step-by-step setup instructions in docs |
