@@ -29,7 +29,7 @@ If you start from scratch with a page, you need to add a header. Different secti
 ---
 title: "Awesome Sensor"
 description: "home-assistant.io web presence"
-ha_release: "0.38"
+ha_release: 2026.6
 ha_category: Sensor
 ha_platforms:
   - sensor
