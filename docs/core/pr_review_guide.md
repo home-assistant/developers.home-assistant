@@ -36,7 +36,7 @@ From analysis of 200 closed/unmerged PRs: **51% died from author disengagement**
 
 ## 2. New Integration PRs (`new-integration`)
 
-These are the most review-intensive — averaging **45 comments per reviewed PR** (vs 28 for general PRs). The quality scale bronze rules are the baseline — every new integration must satisfy them.
+These are very review-intensive — averaging **45 comments per reviewed PR** (vs 28 for general PRs). The quality scale bronze rules are the baseline — every new integration must satisfy them.
 
 ### 2.1 Scope
 
