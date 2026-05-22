@@ -618,7 +618,7 @@ from homeassistant.const import (
 
 @websocket_api.websocket_command(
     {
-        vol.Required("type"): "preview_name/start_preview", # "preview_name" corresponds to the value in async_show_form(..., preview="preview_name") and needs to be unique so use something like f"{DOMAIN}_my_flow_handler"
+        vol.Required("type"): "preview_name/start_preview", # "preview_name" corresponds to the value in async_show_form(..., preview="preview_name")
         vol.Required("flow_id"): str,
         vol.Required("flow_type"): vol.Any(FlowType.CONFIG_FLOW, FlowType.CONFIG_SUBENTRIES_FLOW),
         vol.Required("user_input"): dict,
@@ -644,7 +644,7 @@ async def ws_start_preview(
         # handler for subentry flow is a tuple of str of form 
         # (entry_id, subentry_flow_type)
         entry_id, _ = flow_status["handler"] 
-        config_entry: ConfigEntry = hass.config_entries.async_get(entry_id)
+        config_entry: ConfigEntry = hass.config_entries.async_get_entry(entry_id)
 
     # Process the data and validate for errors (tip: use the 
     # same schema/validation used in the data entry flow step)
@@ -657,7 +657,7 @@ async def ws_start_preview(
     ...
 
     @callback
-    def async_preview_callback(
+    def async_preview_updated(
         state: str | None,
         attributes: Mapping[str, Any] | None,
         error: str | None,
@@ -700,8 +700,8 @@ async def ws_start_preview(
     preview = PreviewSensorEntity(hass, preview_value=preview_value, config=config)
 
     connection.send_result(msg["id"])
-    connection.subscriptions[msg["id"]] = preview.async_show_preview(
-        async_preview_callback
+    connection.subscriptions[msg["id"]] = preview.async_start_preview(
+        async_preview_updated
     )
 ```
 
@@ -731,7 +731,7 @@ class PreviewSensorEntity(SensorEntity):
         self._attr_state_class = config.get(CONF_STATE_CLASS)
     
     @callback
-    def async_show_preview(
+    def async_start_preview(
         self,
         preview_callback: Callable[
             [
