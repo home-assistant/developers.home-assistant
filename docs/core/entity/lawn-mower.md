@@ -14,7 +14,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name     | Type                                       | Default | Description
 | -------- | ------------------------------------------ | ------- | -----------------
-| activity | <code>LawnMowerActivity &#124; None</code> | `None`  | Current activity.
+| activity | `LawnMowerActivity \| None`                | `None`  | Current activity.
 
 ## Activities
 
