@@ -24,19 +24,18 @@ Before reading any code, verify these. If any fail, comment and stop — reviewi
 
 ### 1.1 Triage Signals: Is This PR Likely to Complete?
 
-From analysis of 200 closed/unmerged PRs: **51% died from author disengagement** (37.6% abandoned + 13.5% stale). Recognizing early signals of at-risk PRs saves reviewer time.
+Recognizing early signals of at-risk PRs saves reviewer time.
 
 **High-risk indicators** (consider deprioritizing review until resolved):
 
-- [ ] 👁️ **First-time contributor with a large PR.** New-integration PRs from first-time contributors have the highest abandonment rate. If the PR is a new integration and the author has no prior merged PRs, consider waiting for CI to pass and initial bot feedback to be addressed before investing deep review time. Proactive interventions help: a welcome comment explaining expected timeline, common first-timer mistakes, and a prereqs checklist significantly reduces abandonment.
-- [ ] 👁️ **Draft PR with no author activity.** PRs submitted as drafts where the author hasn't responded to bot feedback within a week are likely to go stale. 37.6% of closed PRs were abandoned in this exact pattern. A 30-day "here's what's still needed" ping (more specific than the generic 60-day stale warning) catches recoverable PRs earlier.
-- [ ] 🤖 **AI-generated PR signals.** An emerging pattern: PRs that address theoretical rather than actual problems, have suspiciously well-formatted descriptions but code showing fundamental misunderstandings, modify test fixtures without corresponding behavior changes, or add defensive code for conditions that can't actually occur. Maintainers are already identifying and rejecting these. One explicit closure: *"Not needed nor testing: Closing (AI bot expected), is not conformant with HA Guidelines."*
+- [ ] 👁️ **First-time contributor with a large PR.** New-integration PRs from first-time contributors have the highest abandonment rate. If the PR is a new integration and the author has no prior merged PRs, consider waiting for CI to pass and initial bot feedback to be addressed before investing deep review time.
+- [ ] 🤖 **AI-generated PR signals.** Watch for PRs that address theoretical rather than actual problems, have suspiciously well-formatted descriptions but code showing fundamental misunderstandings, modify test fixtures without corresponding behavior changes, or add defensive code for conditions that can't actually occur.
 
 ---
 
 ## 2. New Integration PRs (`new-integration`)
 
-These are very review-intensive — averaging **45 comments per reviewed PR** (vs 28 for general PRs). The quality scale bronze rules are the baseline — every new integration must satisfy them.
+These are very review-intensive. The quality scale bronze rules are the baseline — every new integration must satisfy them.
 
 ### 2.1 Scope
 
