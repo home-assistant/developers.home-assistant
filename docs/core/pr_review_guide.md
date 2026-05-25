@@ -426,11 +426,12 @@ A suggested order for reviewing a PR efficiently:
 1. **Gate checks** (Section 1) — 30 seconds. Stop here if CLA is missing, CI is red, or the PR shows high-risk triage signals.
 2. **Scope check** (Section 2.1 / type-specific section) — 1 minute. Is this PR doing one thing?
 3. **Manifest & metadata** (Section 2.2-2.3) — 1 minute. Quick structural checks.
-4. **Entity patterns** (Section 8) — 2-3 minutes. Entity categories correct? Availability handled properly? No type casting traps?
-5. **Test review** (Section 7) — the bulk of review time. Do the tests actually test what matters? Snapshots used? Error scenarios covered?
-6. **Code review** (Sections 9-10) — Architecture, patterns, style, common pitfalls.
-7. **Strings & translations** (Section 2.8) — Quick pass on `strings.json`.
-8. **Overall assessment** — Approve, request changes, or comment.
+4. **Config flow tests** (Section 7.2) — Reviewing the config flow tests early often surfaces issues in the rest of the code quickly.
+5. **Entity patterns** (Section 8) — 2-3 minutes. Entity categories correct? Availability handled properly? No type casting traps?
+6. **Remaining test review** (Section 7) — the bulk of review time. Do the tests actually test what matters? Snapshots used? Error scenarios covered?
+7. **Code review** (Sections 9-10) — Architecture, patterns, style, common pitfalls.
+8. **Strings & translations** (Section 2.8) — Quick pass on `strings.json`.
+9. **Overall assessment** — Approve, request changes, or comment.
 
 **When requesting changes:** Be specific about what needs to change and why. Link to docs when possible. If the PR needs major rework, say so clearly rather than leaving 20 inline comments that add up to "start over." (In our closed-PR analysis, PRs that received specific feedback were more likely to be completed. Vague feedback correlated with abandonment.)
 
