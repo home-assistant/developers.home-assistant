@@ -8,7 +8,7 @@ Items marked 👁️ require human judgment and are often the hardest to get rig
 
 ## 1. First pass: gate checks
 
-Before reading any code, verify these. If any fail, comment and stop—reviewing further wastes your time.
+Before reading any code, verify these. If any fail, comment and stop. Reviewing further wastes your time.
 
 - **CLA is signed.** Check for the `cla-signed` label. If `cla-needed` is present, comment asking the contributor to sign and move on. Do not review code until CLA is resolved.
 - **CI is green.** All checks must pass. If CI is red due to the contributor's changes, convert to draft and ask them to fix. Don't review broken code.
