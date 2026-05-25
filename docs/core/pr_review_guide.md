@@ -413,30 +413,9 @@ async def async_turn_on(self, **kwargs):
 
 ---
 
-## 12. Quick Reference: Quality Scale Bronze Rules
+## 12. Quality Scale Rules
 
-Every new integration (and any integration declaring a quality scale) must satisfy all of these:
-
-| Rule | What to Check |
-| ---- | ------------- |
-| `action-setup` | Service actions registered in `async_setup` or `async_setup_entry` |
-| `appropriate-polling` | Polling interval is reasonable for the device/service (not too frequent) |
-| `brands` | Brand assets provided (logo, icon) |
-| `common-modules` | Shared patterns in `const.py`, `coordinator.py` etc., not duplicated |
-| `config-flow-test-coverage` | Full test coverage for every config flow path |
-| `config-flow` | UI-based setup via config flow (no YAML-only) |
-| `dependency-transparency` | Dependencies in manifest are open source and published from an open repository |
-| `docs-actions` | Service actions documented on home-assistant.io |
-| `docs-high-level-description` | Overview of the brand/product/service in docs |
-| `docs-installation-instructions` | Step-by-step setup instructions in docs |
-| `docs-removal-instructions` | Uninstall/removal steps in docs |
-| `entity-event-setup` | Event subscriptions in proper lifecycle methods |
-| `entity-unique-id` | All entities have stable unique IDs |
-| `has-entity-name` | `has_entity_name = True` on all entities |
-| `runtime-data` | Runtime data stored in `ConfigEntry.runtime_data` |
-| `test-before-configure` | Config flow validates the connection before saving |
-| `test-before-setup` | Setup verifies the device is reachable |
-| `unique-config-entry` | Prevents duplicate config entries for same device |
+Every new integration (and any integration declaring a quality scale) must satisfy all the rules for its declared tier. See the [integration quality scale rules](/docs/core/integration-quality-scale/rules) for the full and current list.
 
 ---
 
