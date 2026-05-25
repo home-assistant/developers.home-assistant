@@ -69,6 +69,29 @@ entry.async_on_unload(
 )
 ```
 
+#### Requesting on-demand active scanning
+
+When the matcher targets a specific `address` and `mode` is not `PASSIVE`, the callback registration can also opt that address in to the active-scan scheduler used by `AUTO`-mode scanners. This lets an integration ask for short active-scan windows on a cadence that suits its device, without forcing the whole system into continuous active scanning.
+
+Pass `scan_interval` (seconds between window starts) and/or `scan_duration` (seconds per window) as keyword arguments. Both are optional; when omitted, habluetooth's defaults (5 minutes interval, 10 seconds duration) are used. The effective window is clamped to habluetooth's allowed range. Without an `address` in the matcher the active-scan request is skipped; the callback itself still fires normally.
+
+```python
+from homeassistant.components import bluetooth
+
+...
+
+entry.async_on_unload(
+    bluetooth.async_register_callback(
+        hass,
+        _async_specific_device_found,
+        {"address": "44:33:11:22:33:22"},
+        bluetooth.BluetoothScanningMode.ACTIVE,
+        scan_interval=600.0,
+        scan_duration=10.0,
+    )
+)
+```
+
 ### Fetch the shared BleakScanner instance
 
 Integrations that need an instance of a `BleakScanner` should call the `bluetooth.async_get_scanner` API. This API returns a wrapper around a single `BleakScanner` that allows integrations to share without overloading the system.
@@ -309,6 +332,8 @@ service_info = await bluetooth.async_process_advertisements(
     ADDITIONAL_DISCOVERY_TIMEOUT
 )
 ```
+
+When `mode` is not `PASSIVE` and the matcher contains an `address`, `timeout` is also forwarded to the active-scan scheduler as `scan_duration`, so `AUTO`-mode scanners flip ACTIVE for the address while waiting for the advertisement.
 
 ### Registering an external scanner
 
