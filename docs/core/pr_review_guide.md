@@ -457,23 +457,4 @@ A suggested order for reviewing a PR efficiently:
 
 ---
 
-## 14. Top Reviewers and Their Focus Areas
-
-Understanding what each reviewer typically focuses on helps new reviewers know who to consult and helps contributors anticipate feedback.
-
-| Reviewer | Focus Areas |
-|----------|-------------|
-| **joostlek** | Entity patterns, quality scale, scope discipline, config flow, strings |
-| **MartinHjelmare** | Architecture, coordinator patterns, error handling, lifecycle |
-| **abmantis** | Entity naming, discovery patterns, test structure |
-| **erwindouna** | Quality scale, entity descriptions, strings/translations |
-| **emontnemery** | Core framework, lifecycle management, state management |
-| **ronaldvdmeer** | Testing patterns, fixtures, mocking approach |
-| **esciara** | Code quality, type annotations, style |
-| **epenet** | `runtime_data`, platform setup, naming conventions |
-| **gjohansson-ST** | Config flow, quality scale, scope |
-| **balloob** | Architecture, API design, philosophy |
-
----
-
 *This guide is based on analysis of 1,100+ PRs and 8,200+ review comments from home-assistant/core: 200 new-integration PRs (3,379 comments), 200 dependency PRs (91 comments), 500 general PRs (4,719 comments), 200 closed/unmerged PRs, plus license/supply chain sampling of 1,106 PyPI packages. Data collected April 2026. It has been manually curated after AI generation.*
