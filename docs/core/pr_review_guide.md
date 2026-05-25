@@ -90,9 +90,9 @@ Discovery configuration generated **155 review comments across 44 PRs** in our g
 
 ### 2.6 Coordinator & Data Fetching
 
-- [ ] 👁️ **Uses `DataUpdateCoordinator` for polling.** Polling integrations should not implement their own polling loops.
+- [ ] 👁️ **Uses `DataUpdateCoordinator` for polling.** Polling integrations should not implement their own polling loops. An exception is when the integration uses [separate polling for each individual entity](/docs/integration_fetching_data/#separate-polling-for-each-individual-entity).
 - [ ] 🤖 **`_async_setup` for one-time work, `_async_update_data` for polling.** One-time setup work (auth, connection setup, initial device info fetch) belongs in `_async_setup`. The `_async_update_data` method runs on every poll cycle — don't put setup logic here. (This distinction confused contributors in 220 coordinator-related comments.)
-- [ ] 🤖 **`ConfigEntryAuthFailed` for authentication errors.** When the API returns an auth error during data update, the coordinator must raise `ConfigEntryAuthFailed` (not `UpdateFailed`). This triggers a reauth flow instead of just logging errors and retrying forever. (Found in 7.6% of new-integration PRs and 17 general PRs.)
+- [ ] 🤖 **`ConfigEntryAuthFailed` for authentication errors.** When the API returns an auth error during data update, the coordinator must raise `ConfigEntryAuthFailed` (not `UpdateFailed`). This triggers a reauth flow instead of just logging errors and retrying forever. Note that this requires the config flow to have implemented an `async_step_reauth` method. (Found in 7.6% of new-integration PRs and 17 general PRs.)
 - [ ] 👁️ **`runtime_data` is used.** Data stored at setup time should go in `entry.runtime_data` (typed via a dataclass), not in `hass.data[DOMAIN]`. (Found in 11.6% of new-integration PRs.)
 - [ ] 👁️ **Coordinator data is properly typed.** The coordinator should use generics (`DataUpdateCoordinator[MyDataType]`) so entity code gets type-checked access to coordinator data.
 - [ ] 👁️ **Polling frequency is reasonable.** Check the `update_interval` — is it appropriate for the device/service? A weather API doesn't need 10-second polling. A local device might need faster updates.
