@@ -269,7 +269,7 @@ coordinator = ActiveBluetoothProcessorCoordinator(
 )
 ```
 
-Both arguments default to `None`, which leaves the underlying scheduler at its built in cadence. `PASSIVE` and `ACTIVE` scanners are user explicit choices and are not affected; only `AUTO` mode scanners honor the request.
+Both arguments default to `None`, which leaves the underlying scheduler at its built-in cadence. `PASSIVE` and `ACTIVE` scanners are user-explicit choices and are not affected; only `AUTO` mode scanners honor the request.
 
 ## BluetoothCoordinator
 
