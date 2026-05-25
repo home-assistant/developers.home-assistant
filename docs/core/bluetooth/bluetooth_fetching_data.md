@@ -246,6 +246,31 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     return True
 ```
 
+#### Requesting an active scan cadence
+
+`PassiveBluetoothProcessorCoordinator` and `ActiveBluetoothProcessorCoordinator` accept two optional keyword arguments, `scan_interval` and `scan_duration`, that are forwarded to the Bluetooth manager when the coordinator starts. They request a periodic active scan window for the coordinator's address from any `AUTO` mode scanner, so the device keeps emitting advertisements that contain its full payload without having to flip the scanner to `ACTIVE` mode permanently.
+
+This is useful for devices that fall back to a connectable poll when they have not been actively scanned for some time; pick a `scan_interval` shorter than that fallback and a `scan_duration` long enough to capture the next advertisement.
+
+```python
+coordinator = ActiveBluetoothProcessorCoordinator(
+    hass,
+    _LOGGER,
+    address=address,
+    mode=BluetoothScanningMode.PASSIVE,
+    update_method=data.update,
+    needs_poll_method=_needs_poll,
+    poll_method=_async_poll,
+    connectable=False,
+    # Ask AUTO mode scanners to flip ACTIVE for 10 seconds
+    # every 165 seconds for this address.
+    scan_interval=165.0,
+    scan_duration=10.0,
+)
+```
+
+Both arguments default to `None`, which leaves the underlying scheduler at its built-in cadence. `PASSIVE` and `ACTIVE` scanners are user-explicit choices and are not affected; only `AUTO` mode scanners honor the request.
+
 ## BluetoothCoordinator
 
 The `ActiveBluetoothDataUpdateCoordinator` and `PassiveBluetoothCoordinator` coordinators function similar
