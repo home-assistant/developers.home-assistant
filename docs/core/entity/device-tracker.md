@@ -56,7 +56,7 @@ DHCP discover packets to find existing devices.
 
 ## TrackerEntity
 
-A TrackerEntity tracks the location of a device and reports it either as a location name, a zone name or `home` or `not_home` states. A TrackerEntity normally receives GPS coordinates to determine its state. Either `location_name` or `latitude` and `longitude` should be set to report state.
+A TrackerEntity tracks the location of a device and reports it either as a location name, a zone name or `home` or `not_home` states. A TrackerEntity normally receives GPS coordinates to determine its state. Either `in_zones` or `latitude` and `longitude` should be set to report state.
 
 Derive a platform entity from [`homeassistant.components.device_tracker.config_entry.TrackerEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/device_tracker/config_entry.py)
 
