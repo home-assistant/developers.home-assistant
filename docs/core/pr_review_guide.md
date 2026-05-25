@@ -102,7 +102,7 @@ Discovery configuration generated **155 review comments across 44 PRs** in our g
 - [ ] 🤖 **`has_entity_name = True`.** All entity classes must set this.
 - [ ] 🤖 **Stable `unique_id`.** Entity unique IDs must not use IP addresses, hostnames, or anything that can change. Prefer MAC addresses (normalized with `format_mac()`), serial numbers, or device-assigned IDs. (The #1 review pattern in new-integration PRs at 16.2%.)
 - [ ] 🤖 **MAC addresses are normalized.** If a MAC address is used as unique ID or in device info, it must go through `format_mac()` from `homeassistant.helpers.device_registry`.
-- [ ] 🤖 **`EntityDescription` is used.** Entities should be defined using dataclass-based `EntityDescription` (e.g., `SensorEntityDescription`) rather than overriding properties directly. (Found in 6.1% of new-integration PRs.)
+- [ ] 🤖 **Entity description is used.** New entities should be defined using a dataclass-based [entity description](/docs/core/entity#entity-description) (e.g., `SensorEntityDescription`). Other patterns described in the linked docs are also accepted, but the entity description pattern is preferred in new code. (Found in 6.1% of new-integration PRs.)
 - [ ] 🤖 **`PARALLEL_UPDATES` is set.** For coordinator-based integrations, set `PARALLEL_UPDATES = 0` in each platform module (since the coordinator handles synchronization).
 - [ ] 👁️ **Entity categories are correct.** See Section 8 for detailed EntityCategory guidance — this is the #1 review pattern in general PRs (425 comments).
 - [ ] 👁️ **Debug/diagnostic entities disabled by default.** Entities for debugging purposes (signal strength, rate limits, firmware version) should set `entity_registry_enabled_default=False` in addition to `EntityCategory.DIAGNOSTIC`.
