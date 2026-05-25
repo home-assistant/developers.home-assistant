@@ -265,6 +265,18 @@ from homeassistant.components import bluetooth
 bluetooth.async_rediscover_address(hass, "44:44:33:11:23:42")
 ```
 
+### Triggering a one-shot active scan
+
+For config flow discovery and other one-shot probes, `bluetooth.async_request_active_scan` runs an on-demand active sweep across every `AUTO` mode scanner without waiting for the periodic rediscovery cadence. It awaits `duration` seconds so the caller can then read newly discovered advertisements. `duration` is optional; when omitted, habluetooth's on-demand sweep duration is used. The scheduler clamps the value to its allowed range. Concurrent callers dedupe to a single bus wide window.
+
+Only `AUTO` mode scanners are affected; `PASSIVE` and `ACTIVE` scanners are user-explicit choices and are left alone.
+
+```python
+from homeassistant.components import bluetooth
+
+await bluetooth.async_request_active_scan(hass)
+```
+
 ### Clearing match history for rediscovery
 
 The Bluetooth integration tracks which advertisement fields (manufacturer_data UUIDs, service_data UUIDs, service_uuids) have been seen for each device to determine when to trigger discovery. It only checks if the UUIDs have been seen before, not whether their content has changed.
