@@ -13,7 +13,7 @@ Before reading any code, verify these. If any fail, comment and stop. Reviewing 
 - **CLA is signed.** Check for the `cla-signed` label. If `cla-needed` is present, comment asking the contributor to sign and move on. Do not review code until CLA is resolved.
 - **CI is green.** All checks must pass. If CI is red due to the contributor's changes, convert to draft and ask them to fix. Don't review broken code.
 - 👁️ **PR has a single purpose.** One bugfix, one feature, one integration, or one refactor. If the PR mixes concerns (e.g., a dependency bump that also refactors tests), ask the author to split it.
-- 👁️ **PR type checkbox matches content.** The PR template has type checkboxes—verify only one is checked and it matches what the code actually does.
+- 👁️ **PR type checkbox matches content.** The PR template has type checkboxes: verify only one is checked and it matches what the code actually does.
 - **Not dependent on another open PR.** Check for references to other unmerged PRs. Dependent PRs should not be submitted until their dependency merges.
 - 👁️ **Description is useful.** The "Proposed change" section should explain *why*, not just *what*. For bugfixes, there should be a linked issue. For new integrations, context about the brand/device.
 - **PR description has no unfilled placeholders.** Check for empty Breaking Change sections, unfilled `fixes #` placeholders.
@@ -31,7 +31,7 @@ Recognizing early signals of at-risk PRs saves reviewer time.
 
 ## 2. New integration PRs (`new-integration`)
 
-These are very review-intensive. The quality scale bronze rules are the baseline—every new integration must satisfy them.
+These are very review-intensive. The quality scale bronze rules are the baseline: every new integration must satisfy them.
 
 ### 2.1 Scope
 
@@ -63,7 +63,7 @@ These are very review-intensive. The quality scale bronze rules are the baseline
 - **File exists.** Every new integration needs a `quality_scale.yaml`.
 - **All bronze rules are addressed.** Each bronze rule should be marked `done` or `exempt` (with a reason). None should be `todo`.
 - 👁️ **Exempt reasons are valid.** If any rule is marked `exempt`, the reason should be legitimate (e.g., "this integration has no actions" for `action-setup`).
-- 👁️ **Claimed `done` rules are actually done.** Spot-check a few—the quality-scale-rule-verifier agent can help here.
+- 👁️ **Claimed `done` rules are actually done.** Spot-check a few: the quality-scale-rule-verifier agent can help here.
 
 ### 2.4 Config flow
 
@@ -90,7 +90,7 @@ Discovery configuration is a frequent source of back-and-forth.
 - **`ConfigEntryAuthFailed` for authentication errors.** When the API returns an auth error during data update, the coordinator must raise `ConfigEntryAuthFailed` (not `UpdateFailed`). This triggers a reauth flow instead of just logging errors and retrying forever. Note that this requires the config flow to have implemented an `async_step_reauth` method.
 - 👁️ **`runtime_data` is used.** Data stored at setup time should go in `entry.runtime_data` (typed via a dataclass), not in `hass.data[DOMAIN]`.
 - 👁️ **Coordinator data is properly typed.** The coordinator should use generics (`DataUpdateCoordinator[MyDataType]`) so entity code gets type-checked access to coordinator data.
-- 👁️ **Polling frequency is reasonable.** Check the `update_interval`—is it appropriate for the device/service? A weather API doesn't need 10-second polling. A local device might need faster updates.
+- 👁️ **Polling frequency is reasonable.** Check the `update_interval`: is it appropriate for the device/service? A weather API doesn't need 10-second polling. A local device might need faster updates.
 
 ### 2.7 Entities
 
@@ -99,7 +99,7 @@ Discovery configuration is a frequent source of back-and-forth.
 - **MAC addresses are normalized.** If a MAC address is used as unique ID or in device info, it must go through `format_mac()` from `homeassistant.helpers.device_registry`.
 - **Entity description is used.** New entities should be defined using a dataclass-based [entity description](/docs/core/entity#entity-description) (e.g., `SensorEntityDescription`). Other patterns described in the linked docs are also accepted, but the entity description pattern is preferred in new code.
 - **`PARALLEL_UPDATES` is set.** For coordinator-based integrations, set `PARALLEL_UPDATES = 0` in each platform module (since the coordinator handles synchronization).
-- 👁️ **Entity categories are correct.** See Section 8 for detailed `EntityCategory` guidance—this is one of the most common review patterns.
+- 👁️ **Entity categories are correct.** See Section 8 for detailed `EntityCategory` guidance: this is one of the most common review patterns.
 - 👁️ **Debug/diagnostic entities disabled by default.** Entities for debugging purposes (signal strength, rate limits, firmware version) should set `entity_registry_enabled_default=False` in addition to `EntityCategory.DIAGNOSTIC`.
 
 ### 2.8 Strings & translations
@@ -122,14 +122,14 @@ Adding functionality to an existing integration.
 - 👁️ **Consistent with existing integration style.** New code should follow the conventions already established in the integration (naming, structure, patterns).
 - 👁️ **Quality scale level maintained.** If the integration has a quality scale level, the new code must not regress it. Check that new entities follow all applicable rules.
 - **New strings follow translation rules.** Same rules as new integrations: sentence case, common keys, backticks.
-- 👁️ **Breaking changes documented.** If the feature changes existing behavior (renames entities, changes state value formats, modifies service schemas), the PR description must include a "Breaking change" section written for end users. Whether something is "breaking" requires understanding the user-facing contract—this is a human judgment call that AI reviewers consistently get wrong.
+- 👁️ **Breaking changes documented.** If the feature changes existing behavior (renames entities, changes state value formats, modifies service schemas), the PR description must include a "Breaking change" section written for end users. Whether something is "breaking" requires understanding the user-facing contract: this is a human judgment call that AI reviewers consistently get wrong.
 
 ### 3.2 Config entry lifecycle
 
 - 👁️ **Config entry migration if schema changes.** If the feature changes what's stored in a config entry, there must be a migration: bump `VERSION` in the config flow class, implement `async_migrate_entry`, and add tests covering migration from old to new format.
 - **VERSION bump matches schema change.** If config entry data fields are added, removed, or restructured, and the config flow `VERSION` hasn't been bumped, flag it. Conversely, if `VERSION` is bumped, there should be corresponding migration code.
 - 👁️ **`async_unload_entry` cleans up all resources.** When a config entry is unloaded, all event listeners, polling tasks, and connections should be cleaned up. Missing cleanup causes resource leaks and stale state.
-- 👁️ **No access to `runtime_data` after failed setup.** If `async_setup_entry` fails partway through, code in error handlers should not try to access `entry.runtime_data`—it may not have been set yet.
+- 👁️ **No access to `runtime_data` after failed setup.** If `async_setup_entry` fails partway through, code in error handlers should not try to access `entry.runtime_data`: it may not have been set yet.
 
 ### 3.3 Discovery & device registration
 
@@ -142,7 +142,7 @@ Adding functionality to an existing integration.
 
 Bugfixes generate many comments per reviewed PR despite being conceptually simpler than other changes—because reviewers scrutinize whether the fix is actually correct and complete.
 
-- 👁️ **Linked issue exists.** Bugfix PRs should reference the issue they fix (`fixes #XXXX`). If there's no issue, ask why—the bug should be confirmed to exist.
+- 👁️ **Linked issue exists.** Bugfix PRs should reference the issue they fix (`fixes #XXXX`). If there's no issue, ask why: the bug should be confirmed to exist.
 - 👁️ **Fix is minimal.** The change should fix the reported bug and nothing else. No drive-by refactoring, no "while I'm here" improvements.
 - 👁️ **Root cause is addressed.** The fix should address the actual cause, not paper over symptoms. If a `TypeError` crashes because `value` is `None`, the fix should handle `None` at the appropriate level—not just wrap everything in `try/except`.
 - 👁️ **Regression test included.** There should preferably be a test that would have caught this bug. The test should fail without the fix and pass with it. Not all integrations require tests, but test coverage should always be maintained in existing integrations that have tests.
@@ -164,7 +164,7 @@ Often driven by quality-scale improvements.
 - 👁️ **No behavioral changes.** Code quality PRs should not change functionality. If they do, they need to be labeled differently.
 - **Tests updated to match.** If code structure changes, tests should be updated accordingly—but test refactoring should match the code changes, not go beyond them.
 - 👁️ **Breaking changes noted.** Even code-quality PRs can be breaking (e.g., removing a deprecated constant). The "Breaking change" section must be filled out if applicable.
-- 👁️ **Quality scale claims verified.** Verify that all claimed rules are actually satisfied—the quality-scale-rule-verifier agent can automate this.
+- 👁️ **Quality scale claims verified.** Verify that all claimed rules are actually satisfied: the quality-scale-rule-verifier agent can automate this.
 
 ---
 
@@ -176,7 +176,7 @@ Dependency PRs generate few review comments compared to new-integration PRs, but
 
 - **Only the dependency is updated.** The PR should touch `manifest.json` (version bump), and the requirements files that track the dependency, such as `requirements_all.txt` (regenerated), and minimal code changes required by the new version. Nothing else.
 - **No opportunistic refactoring.** If the contributor also refactored tests, cleaned up imports, or made stylistic changes—ask them to split that into a separate PR.
-- **`quality_scale` not accidentally removed.** Check that `manifest.json` didn't lose the `quality_scale` or `loggers` field—this happens surprisingly often in dependency bumps.
+- **`quality_scale` not accidentally removed.** Check that `manifest.json` didn't lose the `quality_scale` or `loggers` field: this happens surprisingly often in dependency bumps.
 - **Requirements files regenerated.** `requirements_all.txt` should be regenerated via `python3 -m script.gen_requirements_all`.
 
 ### 6.2 Upstream change review
@@ -192,7 +192,7 @@ Dependency PRs generate few review comments compared to new-integration PRs, but
 
 - **License hasn't changed between versions.** A license change (e.g., MIT → GPL-3.0) between the old and new version would be a critical issue. Compare the `license` field on PyPI for both versions.
 - **License is still Apache-2.0-compatible.** Same rules as new integrations: GPL-2.0/3.0/AGPL are incompatible with HA Core's Apache-2.0 license.
-- **License identifier still matches LICENSE file.** Verify the declared license identifier matches the actual LICENSE text—this should be re-verified on every bump, not just initial introduction.
+- **License identifier still matches LICENSE file.** Verify the declared license identifier matches the actual LICENSE text: this should be re-verified on every bump, not just initial introduction.
 
 ---
 
@@ -208,10 +208,10 @@ Dependency PRs generate few review comments compared to new-integration PRs, but
 ### 7.2 Patterns
 
 - **Snapshot testing for entity platforms.** Platform tests (sensor, switch, etc.) should use `snapshot_platform` to validate entity state rather than manually asserting individual attributes.
-- **`@pytest.mark.parametrize` for repetitive cases.** If multiple test functions test the same behavior with different inputs, they should be parametrized into one function. But don't over-parametrize—a single test for one scenario doesn't need parametrize.
+- **`@pytest.mark.parametrize` for repetitive cases.** If multiple test functions test the same behavior with different inputs, they should be parametrized into one function. But don't over-parametrize: a single test for one scenario doesn't need parametrize.
 - **`freezer` for time-based tests.** Tests involving time must use the `freezer` fixture—never mock `datetime`, `time`, or `utcnow` directly.
 - **No `mock.patch` on `sys.modules`.** This is fragile and breaks other tests. Use proper mocking patterns instead.
-- 👁️ **Config flow tests have full coverage.** Every branch in the config flow should be tested—happy path, error handling, user abort, each step. Reviewing the config flow tests early is often a fast way to spot bugs in the rest of the code.
+- 👁️ **Config flow tests have full coverage.** Every branch in the config flow should be tested: happy path, error handling, user abort, each step. Reviewing the config flow tests early is often a fast way to spot bugs in the rest of the code.
 - 👁️ **Error/recovery scenarios tested.** Tests should cover what happens when the device/service is unavailable, returns errors, or requires reauthentication. This is the most commonly requested missing test type.
 - 👁️ **Test brittleness minimized.** Avoid hard-coding values that depend on upstream data (e.g., specific holiday dates). Use mocking or select stable test data that won't change when a dependency is bumped.
 
@@ -327,8 +327,8 @@ Python's truthiness rules are a common source of bugs in HA integrations:
 
 | Expression | Result | Problem |
 | ---------- | ------ | ------- |
-| `bool(None)` | `False` | Hides missing data—entity shows "off" instead of "unknown/unavailable" |
-| `bool("0")` | `True` | Non-empty string is truthy—entity shows "on" when value is "0" |
+| `bool(None)` | `False` | Hides missing data: entity shows "off" instead of "unknown/unavailable" |
+| `bool("0")` | `True` | Non-empty string is truthy: entity shows "on" when value is "0" |
 | `bool(0)` | `False` | Correct, but fragile if API changes to return `"0"` |
 | `int(None)` | `TypeError` | Crashes instead of returning `None` |
 | `float("nan")` | `nan` | `nan != nan` is `True`, breaks comparisons silently |
@@ -363,7 +363,7 @@ The most consistently confused error type in coordinators:
 
 | Exception | Effect | When to use |
 |-----------|--------|-------------|
-| `ConfigEntryAuthFailed` | Triggers **reauth flow**—user gets prompted to re-authenticate | API returns 401/403, token expired, credentials invalid |
+| `ConfigEntryAuthFailed` | Triggers **reauth flow**: user gets prompted to re-authenticate | API returns 401/403, token expired, credentials invalid |
 | `UpdateFailed` | Logs error, **retries on next poll** | Temporary network failure, API timeout, rate limiting |
 
 Using `UpdateFailed` for auth errors means the integration retries forever with bad credentials instead of prompting the user to fix them.
@@ -414,15 +414,15 @@ Every new integration (and any integration declaring a quality scale) must satis
 
 A suggested order for reviewing a PR efficiently:
 
-1. **Gate checks** (Section 1)—Stop here if CLA is missing, CI is red, or the PR shows high-risk triage signals.
-2. **Scope check** (Section 2.1 / type-specific section)—Is this PR doing one thing?
-3. **Manifest & metadata** (Sections 2.2-2.3)—Quick structural checks.
-4. **Config flow tests** (Section 7.2)—Reviewing the config flow tests early often surfaces issues in the rest of the code quickly.
-5. **Entity patterns** (Section 8)—Entity categories correct? Availability handled properly? No type casting traps?
-6. **Remaining test review** (Section 7)—Do the tests actually test what matters? Snapshots used? Error scenarios covered?
-7. **Code review** (Sections 9-10)—Architecture, patterns, style, common pitfalls.
-8. **Strings & translations** (Section 2.8)—Quick pass on `strings.json`.
-9. **Overall assessment**—Approve, request changes, or comment.
+1. **Gate checks** (Section 1): Stop here if CLA is missing, CI is red, or the PR shows high-risk triage signals.
+2. **Scope check** (Section 2.1 / type-specific section): Is this PR doing one thing?
+3. **Manifest & metadata** (Sections 2.2-2.3): Quick structural checks.
+4. **Config flow tests** (Section 7.2): Reviewing the config flow tests early often surfaces issues in the rest of the code quickly.
+5. **Entity patterns** (Section 8): Entity categories correct? Availability handled properly? No type casting traps?
+6. **Remaining test review** (Section 7): Do the tests actually test what matters? Snapshots used? Error scenarios covered?
+7. **Code review** (Sections 9-10): Architecture, patterns, style, common pitfalls.
+8. **Strings & translations** (Section 2.8): Quick pass on `strings.json`.
+9. **Overall assessment**: Approve, request changes, or comment.
 
 **When requesting changes:** Be specific about what needs to change and why. Link to docs when possible. If the PR needs major rework, say so clearly rather than leaving many inline comments that add up to "start over."
 
