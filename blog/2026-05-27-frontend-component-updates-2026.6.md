@@ -33,3 +33,30 @@ New component specific tokens:
 ### ha-drawer updates
 
 `ha-drawer` was updated to use the webawesome drawer component. The API is mostly the same it just uses now `--ha-sidebar-width` instead of `--mdc-drawer-width`
+
+## New decorators
+
+### @consumeLocalize
+
+Following up on the [context entry decorators](/blog/2026/05/04/frontend-context-groups-decorators) introduced last release, we added a shortcut for the most common single-field read off `internationalizationContext`: the `localize` function.
+
+Before:
+
+```ts
+@state()
+@consume({ context: internationalizationContext, subscribe: true })
+@transform<HomeAssistantInternationalization, LocalizeFunc>({
+  transformer: ({ localize }) => localize,
+})
+private _localize!: LocalizeFunc;
+```
+
+After:
+
+```ts
+@state()
+@consumeLocalize()
+private _localize!: LocalizeFunc;
+```
+
+Use `@consumeLocalize()` whenever a component only needs the `localize` function. For other single-field reads off `internationalizationContext` (e.g. `locale`, `language`), keep using `@consume` + `@transform`.
