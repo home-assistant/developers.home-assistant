@@ -92,7 +92,7 @@ A receiver entity wraps a piece of IR receiver hardware. The base class is `Infr
 
 ### State
 
-The infrared receiver entity state represents the timestamp of when the last IR signal was receiver. This is implemented in the base InfraredReceiverEntity class and should not be changed by integrations.
+The infrared receiver entity state represents the timestamp of when the last IR signal was received. This is implemented in the base InfraredReceiverEntity class and should not be changed by integrations.
 
 ### Reporting received signals
 
