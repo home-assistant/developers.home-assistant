@@ -122,6 +122,6 @@ class MyHumidifierEntity(HumidifierEntity):
     def turn_off(self, **kwargs: Any) -> None:
         """Turn the device off."""
 
-    aasync def async_turn_off(self, **kwargs: Any) -> None:
+    async def async_turn_off(self, **kwargs: Any) -> None:
         """Turn the device off."""
 ```
