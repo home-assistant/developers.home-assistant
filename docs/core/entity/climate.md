@@ -147,9 +147,9 @@ and are combined using the bitwise or (`|`) operator.
 | `FAN_MODE`                 | The device supports fan modes.                                                              |
 | `PRESET_MODE`              | The device supports presets.                                                                |
 | `SWING_MODE`               | The device supports swing modes.                                                            |
-| `SWING_HORIZONTAL_MODE`    | The device supports horizontal swing modes.                                                            |
-| `TURN_ON`                 | The device supports turn on.                                                      |
-| `TURN_OFF`                 | The device supports turn off.                                                      |
+| `SWING_HORIZONTAL_MODE`    | The device supports horizontal swing modes.                                                 |
+| `TURN_ON`                  | The device supports turn on.                                                                |
+| `TURN_OFF`                 | The device supports turn off.                                                               |
 
 ## Methods
 
@@ -159,10 +159,10 @@ and are combined using the bitwise or (`|`) operator.
 class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
-    def set_hvac_mode(self, hvac_mode):
+    def set_hvac_mode(self, hvac_mode: HVACMode) -> None:
         """Set new target hvac mode."""
 
-    async def async_set_hvac_mode(self, hvac_mode):
+    async def async_set_hvac_mode(self, hvac_mode: HVACMode) -> None:
         """Set new target hvac mode."""
 ```
 
@@ -175,10 +175,10 @@ class MyClimateEntity(ClimateEntity):
     # `HVACMode.OFF` by optimistically setting it from the service action
     # handler or with the next state update
 
-    def turn_on(self):
+    def turn_on(self) -> None:
         """Turn the entity on."""
 
-    async def async_turn_on(self):
+    async def async_turn_on(self) -> None:
         """Turn the entity on."""
 ```
 
@@ -191,10 +191,10 @@ class MyClimateEntity(ClimateEntity):
     # optimistically setting it from the service action handler or with the
     # next state update
 
-    def turn_off(self):
+    def turn_off(self) -> None:
         """Turn the entity off."""
 
-    async def async_turn_off(self):
+    async def async_turn_off(self) -> None:
         """Turn the entity off."""
 ```
 
@@ -209,10 +209,10 @@ class MyClimateEntity(ClimateEntity):
     # optimistically setting it from the service action handler
     # or with the next state update.
 
-    def toggle(self):
+    def toggle(self) -> None:
         """Toggle the entity."""
 
-    async def async_toggle(self):
+    async def async_toggle(self) -> None:
         """Toggle the entity."""
 ```
 
@@ -222,10 +222,10 @@ class MyClimateEntity(ClimateEntity):
 class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
-    def set_preset_mode(self, preset_mode):
+    def set_preset_mode(self, preset_mode: str) -> None:
         """Set new target preset mode."""
 
-    async def async_set_preset_mode(self, preset_mode):
+    async def async_set_preset_mode(self, preset_mode: str) -> None:
         """Set new target preset mode."""
 ```
 
@@ -235,10 +235,10 @@ class MyClimateEntity(ClimateEntity):
 class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
-    def set_fan_mode(self, fan_mode):
+    def set_fan_mode(self, fan_mode: str) -> None:
         """Set new target fan mode."""
 
-    async def async_set_fan_mode(self, fan_mode):
+    async def async_set_fan_mode(self, fan_mode: str) -> None:
         """Set new target fan mode."""
 ```
 
@@ -248,10 +248,10 @@ class MyClimateEntity(ClimateEntity):
 class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
-    def set_humidity(self, humidity):
+    def set_humidity(self, humidity: int) -> None:
         """Set new target humidity."""
 
-    async def async_set_humidity(self, humidity):
+    async def async_set_humidity(self, humidity: int) -> None:
         """Set new target humidity."""
 ```
 
@@ -261,10 +261,10 @@ class MyClimateEntity(ClimateEntity):
 class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
-    def set_swing_mode(self, swing_mode):
+    def set_swing_mode(self, swing_mode: str) -> None:
         """Set new target swing operation."""
 
-    async def async_set_swing_mode(self, swing_mode):
+    async def async_set_swing_mode(self, swing_mode: str) -> None:
         """Set new target swing operation."""
 ```
 
@@ -274,10 +274,10 @@ class MyClimateEntity(ClimateEntity):
 class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
-    def set_swing_horizontal_mode(self, swing_mode):
+    def set_swing_horizontal_mode(self, swing_horizontal_mode: str) -> None:
         """Set new target horizontal swing operation."""
 
-    async def async_set_swing_horizontal_mode(self, swing_mode):
+    async def async_set_swing_horizontal_mode(self, swing_horizontal_mode: str) -> None:
         """Set new target horizontal swing operation."""
 ```
 
@@ -291,9 +291,9 @@ class MyClimateEntity(ClimateEntity):
 class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
-    def set_temperature(self, **kwargs):
+    def set_temperature(self, **kwargs: Any) -> None:
         """Set new target temperature."""
 
-    async def async_set_temperature(self, **kwargs):
+    async def async_set_temperature(self, **kwargs: Any) -> None:
         """Set new target temperature."""
 ```

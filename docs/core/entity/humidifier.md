@@ -78,10 +78,10 @@ Current values for `HumidifierAction`:
 class MyHumidifierEntity(HumidifierEntity):
     # Implement one of these methods.
 
-    def set_mode(self, mode):
+    def set_mode(self, mode: str) -> None:
         """Set new target preset mode."""
 
-    async def async_set_mode(self, mode):
+    async def async_set_mode(self, mode: str) -> None:
         """Set new target preset mode."""
 ```
 
@@ -93,10 +93,10 @@ If the current mode does not allow to adjust target humidity, the device should 
 class MyHumidifierEntity(HumidifierEntity):
     # Implement one of these methods.
 
-    def set_humidity(self, humidity):
+    def set_humidity(self, humidity: int) -> None:
         """Set new target humidity."""
 
-    async def async_set_humidity(self, humidity):
+    async def async_set_humidity(self, humidity: int) -> None:
         """Set new target humidity."""
 ```
 
@@ -106,10 +106,10 @@ class MyHumidifierEntity(HumidifierEntity):
 class MyHumidifierEntity(HumidifierEntity):
     # Implement one of these methods.
 
-    def turn_on(self, **kwargs):
+    def turn_on(self, **kwargs: Any) -> None:
         """Turn the device on."""
 
-    async def async_turn_on(self, **kwargs):
+    async def async_turn_on(self, **kwargs: Any) -> None:
         """Turn the device on."""
 ```
 
@@ -119,9 +119,9 @@ class MyHumidifierEntity(HumidifierEntity):
 class MyHumidifierEntity(HumidifierEntity):
     # Implement one of these methods.
 
-    def turn_off(self, **kwargs):
+    def turn_off(self, **kwargs: Any) -> None:
         """Turn the device off."""
 
-    async def async_turn_off(self, **kwargs):
+    async def async_turn_off(self, **kwargs: Any) -> None:
         """Turn the device off."""
 ```

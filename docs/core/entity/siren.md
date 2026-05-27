@@ -47,10 +47,10 @@ There are three optional input parameters that can be passed into the service ac
 class MySirenEntity(SirenEntity):
     # Implement one of these methods.
 
-    def turn_on(self, **kwargs) -> None:
+    def turn_on(self, **kwargs: Any) -> None:
         """Turn the device on."""
 
-    async def async_turn_on(self, **kwargs) -> None:
+    async def async_turn_on(self, **kwargs: Any) -> None:
         """Turn the device on."""
 ```
 
@@ -60,9 +60,9 @@ class MySirenEntity(SirenEntity):
 class MySirenEntity(SirenEntity):
     # Implement one of these methods.
 
-    def turn_off(self, **kwargs):
+    def turn_off(self, **kwargs: Any) -> None:
         """Turn the device off."""
 
-    async def async_turn_off(self, **kwargs):
+    async def async_turn_off(self, **kwargs: Any) -> None:
         """Turn the device off."""
 ```
