@@ -103,10 +103,10 @@ and are combined using the bitwise or (`|`) operator.
 
 ```python
 class MyLightEntity(LightEntity):
-    def turn_on(self, **kwargs):
+    def turn_on(self, **kwargs: Any) -> None:
         """Turn the device on."""
 
-    async def async_turn_on(self, **kwargs):
+    async def async_turn_on(self, **kwargs: Any) -> None:
         """Turn device on."""
 ```
 
@@ -136,7 +136,7 @@ BRIGHTNESS_SCALE = (1, 1023)
 ...
 
     @property
-    def brightness(self) -> Optional[int]:
+    def brightness(self) -> int | None:
         """Return the current brightness."""
         return value_to_brightness(BRIGHTNESS_SCALE, self._device.brightness)
 
@@ -151,7 +151,7 @@ BRIGHTNESS_SCALE = (1, 1023)
 ...
 
 class MyLightEntity(LightEntity):
-    async def async_turn_on(self, **kwargs) -> None:
+    async def async_turn_on(self, **kwargs: Any) -> None:
         """Turn device on."""
 
         ...
@@ -164,9 +164,9 @@ class MyLightEntity(LightEntity):
 
 ```python
 class MyLightEntity(LightEntity):
-    def turn_off(self, **kwargs):
+    def turn_off(self, **kwargs: Any) -> None:
         """Turn the device off."""
 
-    async def async_turn_off(self, **kwargs):
+    async def async_turn_off(self, **kwargs: Any) -> None:
         """Turn device off."""
 ```
