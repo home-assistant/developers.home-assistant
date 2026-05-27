@@ -232,10 +232,10 @@ Optional. Switch the sound mode of the media player.
 class MyMediaPlayer(MediaPlayerEntity):
     # Implement one of these methods.
 
-    def select_sound_mode(self, sound_mode):
+    def select_sound_mode(self, sound_mode: str) -> None:
         """Switch the sound mode of the entity."""
 
-    def async_select_sound_mode(self, sound_mode):
+    async def async_select_sound_mode(self, sound_mode: str) -> None:
         """Switch the sound mode of the entity."""
 ```
 
@@ -247,10 +247,10 @@ Optional. Switch the selected input source for the media player.
 class MyMediaPlayer(MediaPlayerEntity):
     # Implement one of these methods.
 
-    def select_source(self, source):
+    def select_source(self, source: str) -> None:
         """Select input source."""
 
-    def async_select_source(self, source):
+    async def async_select_source(self, source: str) -> None:
         """Select input source."""
 ```
 
@@ -277,8 +277,8 @@ class MyMediaPlayer(MediaPlayerEntity):
     # Implement the following method.
 
     @property
-    def media_content_type(self):
-    """Content type of current playing media."""
+    def media_content_type(self) -> MediaType | str | None:
+        """Content type of current playing media."""
 ```
 
 :::info
@@ -315,10 +315,15 @@ Do not pass a URL as `media_image_id`. This can allow an attacker to fetch any d
 class MyMediaPlayer(MediaPlayerEntity):
 
     # Implement the following method.
-    async def async_get_browse_image(self, media_content_type, media_content_id, media_image_id=None):
-    """Serve album art. Returns (content, content_type)."""
-    image_url = ...
-    return await self._async_fetch_image(image_url)
+    async def async_get_browse_image(
+        self,
+        media_content_type: str,
+        media_content_id: str,
+        media_image_id: str | None = None,
+    ) -> tuple[bytes | None, str | None]:
+        """Serve album art. Returns (content, content_type)."""
+        image_url = ...
+        return await self._async_fetch_image(image_url)
 ```
 
 ### Grouping player entities together
@@ -329,17 +334,17 @@ Optional. If your player has support for grouping player entities together for s
 class MyMediaPlayer(MediaPlayerEntity):
     # Implement one of these join methods:
 
-    def join_players(self, group_members):
+    def join_players(self, group_members: list[str]) -> None:
         """Join `group_members` as a player group with the current player."""
 
-    async def async_join_players(self, group_members):
+    async def async_join_players(self, group_members: list[str]) -> None:
         """Join `group_members` as a player group with the current player."""
 
     # Implement one of these unjoin methods:
 
-    def unjoin_player(self):
+    def unjoin_player(self) -> None:
         """Remove this player from any group."""
 
-    async def async_unjoin_player(self):
+    async def async_unjoin_player(self) -> None:
         """Remove this player from any group."""
 ```
