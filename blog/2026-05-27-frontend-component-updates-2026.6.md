@@ -34,6 +34,14 @@ New component specific tokens:
 
 `ha-drawer` was updated to use the webawesome drawer component. The API is mostly the same it just uses now `--ha-sidebar-width` instead of `--mdc-drawer-width`
 
+### top bar
+- `ha-top-app-bar` was removed entirely.
+- `ha-top-app-bar-fixed` was migrated from MWC to plain Lit.
+- `ha-two-pane-top-app-bar-fixed` was rewritten to extend the new implementation instead of Material base code.
+- `ha-header-bar` was rewritten from a Material top-app-bar styled wrapper to a native Lit component.
+
+The `--ha-top-app-bar-width` token replaces `--mdc-top-app-bar-width`.
+
 ## New decorators
 
 ### @consumeLocalize
