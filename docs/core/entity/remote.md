@@ -44,10 +44,10 @@ and are combined using the bitwise or (`|`) operator.
 ```python
 class MyRemote(RemoteEntity):
 
-    def turn_on(self, activity: str = None, **kwargs):
+    def turn_on(self, activity: str | None = None, **kwargs: Any) -> None:
          """Send the power on command."""
 
-    async def async_turn_on(self, activity: str = None, **kwargs):
+    async def async_turn_on(self, activity: str | None = None, **kwargs: Any) -> None:
          """Send the power on command."""
 ```
 
@@ -56,10 +56,10 @@ class MyRemote(RemoteEntity):
 ```python
 class MyRemote(RemoteEntity):
 
-    def turn_off(self, activity: str = None, **kwargs):
+    def turn_off(self, activity: str | None = None, **kwargs: Any) -> None:
          """Send the power off command."""
 
-    async def async_turn_off(self, activity: str = None, **kwargs):
+    async def async_turn_off(self, activity: str | None = None, **kwargs: Any) -> None:
          """Send the power off command."""
 ```
 
@@ -68,10 +68,10 @@ class MyRemote(RemoteEntity):
 ```python
 class MyRemote(RemoteEntity):
 
-    def toggle(self, activity: str = None, **kwargs):
+    def toggle(self, activity: str | None = None, **kwargs: Any) -> None:
          """Toggle a device."""
 
-    async def async_toggle(self, activity: str = None, **kwargs):
+    async def async_toggle(self, activity: str | None = None, **kwargs: Any) -> None:
          """Toggle a device."""
 ```
 
@@ -80,10 +80,10 @@ class MyRemote(RemoteEntity):
 ```python
 class MyRemote(RemoteEntity):
 
-    def send_command(self, command: Iterable[str], **kwargs):
+    def send_command(self, command: Iterable[str], **kwargs: Any) -> None:
         """Send commands to a device."""
 
-    async def async_send_command(self, command: Iterable[str], **kwargs):
+    async def async_send_command(self, command: Iterable[str], **kwargs: Any) -> None:
         """Send commands to a device."""
 ```
 
@@ -94,10 +94,10 @@ Only implement this method if the flag `SUPPORT_LEARN_COMMAND` is set.
 ```python
 class MyRemote(RemoteEntity):
 
-    def learn_command(self, **kwargs):
+    def learn_command(self, **kwargs: Any) -> None:
         """Learn a command from a device."""
 
-    async def async_learn_command(self, **kwargs):
+    async def async_learn_command(self, **kwargs: Any) -> None:
         """Learn a command from a device."""
 ```
 
@@ -108,9 +108,9 @@ Only implement this method if the flag `SUPPORT_DELETE_COMMAND` is set.
 ```python
 class MyRemote(RemoteEntity):
 
-    def delete_command(self, **kwargs):
+    def delete_command(self, **kwargs: Any) -> None:
         """Delete a command from a device."""
 
-    async def async_delete_command(self, **kwargs):
+    async def async_delete_command(self, **kwargs: Any) -> None:
         """Delete a command from a device."""
 ```
