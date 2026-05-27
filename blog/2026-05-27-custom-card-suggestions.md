@@ -1,7 +1,7 @@
 ---
 author: Paul Bottein
 authorURL: https://github.com/piitaya
-title: "Custom cards in the entity card picker"
+title: "Custom card suggestions in the card picker"
 ---
 
 As of Home Assistant 2026.6, custom cards can show up as suggestions in the card picker. When a user selects an entity, custom cards that opt in are listed under a **Community** section, below the built-in suggestions.
@@ -24,5 +24,7 @@ window.customCards.push({
 ```
 
 You can also return an array of suggestions to offer several variants, each with its own `label`.
+
+Only suggest your card when it makes sense for the entity. Check the domain, device class, or supported features with the `hass` object, and return `null` otherwise. Suggesting your card for every entity makes the picker noisy.
 
 See the [custom card documentation](/docs/frontend/custom-ui/custom-card#suggesting-your-card-for-an-entity) for the full reference.

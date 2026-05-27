@@ -379,6 +379,8 @@ window.customCards.push({
 - `null` if the entity is not supported by your card.
 - A single suggestion, or an array of suggestions to offer several variants.
 
+Only return a suggestion when your card actually makes sense for that entity. Use the `hass` object to check its domain, device class, or supported features. Suggesting your card for every entity makes the picker noisy and leads users to the wrong card.
+
 Each suggestion is an object with:
 
 - `config` _(required)_: the card configuration to apply if the user picks the suggestion. It must include your `type` (with the `custom:` prefix).
