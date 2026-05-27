@@ -3014,6 +3014,55 @@ If running on a green board, changes one or more of its settings.
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/os/boards/raspberrypi/firmware" method="get">
+
+Returns Raspberry Pi firmware information. Available on Raspberry Pi 4 / 5
+and Home Assistant Yellow when the OS Agent is at least version 1.9.0.
+The reported version covers the bundled firmware payload (bootloader EEPROM,
+and VL805 USB controller where present). Returns `404` if the OS Agent is
+older than 1.9.0 or the running board has no Raspberry Pi firmware interface.
+
+**Returned data:**
+
+| key              | type    | description                                                                                                |
+| ---------------- | ------- | ---------------------------------------------------------------------------------------------------------- |
+| current_version  | string  | The currently installed firmware version                                                                   |
+| latest_version   | string  | The latest firmware version bundled with the OS                                                            |
+| update_available | boolean | `true` if `latest_version` is newer than `current_version`                                                  |
+| update_blocked   | boolean | `true` if the current boot device or board configuration prevents the bundled updater from being applied   |
+| update_pending   | boolean | `true` if a firmware update has been applied but the system has not been rebooted yet                      |
+| blocked_reason   | string  | Blocked reason when `update_blocked` is `true`; `null` otherwise. See note below.                          |
+
+`blocked_reason` is currently always `unsupported_boot_device` whenever
+`update_blocked` is `true`. The underlying cause varies (for example, a
+USB/NVMe boot device, or a board without self-update enabled). More specific
+values may be introduced in the future.
+
+**Example response:**
+
+```json
+{
+  "current_version": "1765222194",
+  "latest_version": "1778498402",
+  "update_available": true,
+  "update_blocked": false,
+  "update_pending": false,
+  "blocked_reason": null
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/os/boards/raspberrypi/firmware/update" method="post">
+
+Apply the bundled Raspberry Pi firmware update (bootloader EEPROM, and VL805
+where present). On success, Supervisor raises the `reboot_required` issue;
+a reboot is required to start running the new firmware. Returns `404` if the
+OS Agent is older than 1.9.0 or the running board has no Raspberry Pi firmware
+interface, and `400` if the update is blocked on this board / boot device.
+
+</ApiEndpoint>
+
 ### Resolution
 
 <ApiEndpoint path="/resolution/info" method="get">
