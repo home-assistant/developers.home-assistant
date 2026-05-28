@@ -96,7 +96,7 @@ async def async_create_fix_flow(
 
 ### Issues that can be repaired via entry/options/subentry reconfiguration or other repair flows.
 
-Repair flows can forward issue fixes to config, options, subentry, or even different repair flows:
+Repair flows can forward issue fixes to config, options, or subentry flows:
 
 ```python
 import voluptuous as vol
@@ -163,47 +163,9 @@ return self.async_create_entry(
     )
 )
 ```
-
-#### Example `next_flow` repair flow
-
-```python
-from homeassistant import data_entry_flow
-from homeassistant.components.repairs import (
-    FlowType,
-    RepairsFlow,
-    RepairsFlowResult,
-    RepairsFlowManager,
-    async_get
-)
-
-async def async_step_confirm(
-    self, user_input: dict[str, str] | None = None
-) -> RepairsFlowResult:
-    """Handle the confirm step of a fix flow."""
-    if user_input is not None:
-        repairs_flow_handler:  RepairsFlowManager = async_get(self.hass)
-        next_flow: RepairsFlowResult = await repairs_flow_handler.async_init(
-            # The domain of the integration containing the
-            # "fixable issue" with corresponding fix flow
-            DOMAIN, 
-            context = {
-                "issue_id": "example_issue_id"
-            }
-        )
-        
-        return self.async_create_entry(
-            title="", data={},
-            next_flow=(
-                FlowType.REPAIRS_FLOW,
-                next_flow["flow_id"]
-            )
-        )
-
-```
 > [!TIP]
-> The `RepairsFlowManager` expects `context` to contain the `issue_id` in `async_init` as shown in the code snippet above.  The prior behavior of passing `issue_id` via `data` (e.g. `data={"issue_id": "example_issue_id"}`) will still work but will generate usage warnings in the logs to prompt developers to shift to using `context` to be consistent with other data entry flows.
 >
-> The `next_flow` argument in `async_abort` or `async_create_entry` expects a tuple: `tuple[homeassistant.components.repairs.FlowType, str]`.
+> The `next_flow` argument in `async_abort` or `async_create_entry` of an implementation of `RepairsFlow` expects a tuple: `tuple[homeassistant.components.repairs.FlowType, str]`.
 
 ## Issue life cycle
 
