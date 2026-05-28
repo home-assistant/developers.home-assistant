@@ -350,6 +350,64 @@ window.customCards.push({
 });
 ```
 
+### Suggesting your card for an entity
+
+_Available since Home Assistant 2026.6._
+
+When a user picks an entity in the card picker, Home Assistant shows a list of suggested cards for that entity. Your card can opt in to this list by defining a `getEntitySuggestion` function on its `window.customCards` entry. Suggested custom cards appear under a **Community** section, below the built-in suggestions.
+
+```js
+window.customCards.push({
+  type: "content-card-example",
+  name: "Content Card",
+  getEntitySuggestion: (hass, entityId) => {
+    // Return null if the entity is not supported
+    const domain = entityId.split(".")[0];
+    if (domain !== "light") {
+      return null;
+    }
+    // Return one suggestion
+    return {
+      config: { type: "custom:content-card-example", entity: entityId },
+    };
+  },
+});
+```
+
+`getEntitySuggestion(hass, entityId)` is called with the `hass` object and the selected entity id. It returns:
+
+- `null` if the entity is not supported by your card.
+- A single suggestion, or an array of suggestions to offer several variants.
+
+Only return a suggestion when your card actually makes sense for that entity. Use the `hass` object to check its domain, device class, or supported features. Suggesting your card for every entity makes the picker noisy and leads users to the wrong card.
+
+Each suggestion is an object with:
+
+- `config` _(required)_: the card configuration to apply if the user picks the suggestion. It must include your `type` (with the `custom:` prefix).
+- `label` _(optional)_: a short label describing the variant. The picker displays the card `name` followed by this label, so only set it when you return several suggestions.
+
+```js
+getEntitySuggestion: (hass, entityId) => {
+  if (entityId.split(".")[0] !== "light") {
+    return null;
+  }
+  return [
+    {
+      label: "Compact",
+      config: { type: "custom:content-card-example", entity: entityId },
+    },
+    {
+      label: "Detailed",
+      config: {
+        type: "custom:content-card-example",
+        entity: entityId,
+        details: true,
+      },
+    },
+  ];
+},
+```
+
 ### Using the built-in form editor
 While one way to configure a graphical editor is to supply a custom editor element, another option for cards with relatively simple configuration requirements is to use the built-in frontend form editor. This is done by defining a static `getConfigForm` function in your card class, that returns a form schema defining the shape of your configuration form. 
 
