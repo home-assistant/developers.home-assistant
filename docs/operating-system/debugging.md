@@ -100,7 +100,7 @@ You will be logged in as `root` with the `/root` folder set as the working direc
 [Home Assistant OS] is a hypervisor for Docker.
 See the [Supervisor Architecture] documentation for information regarding the Supervisor.
 The Supervisor offers an API to manage the host and running the Docker containers.
-Home Assistant itself and all installed addons run in separate Docker containers.
+Home Assistant itself and all installed apps run in separate Docker containers.
 
 [Home Assistant OS]: https://github.com/home-assistant/operating-system
 [Supervisor Architecture]: /architecture_index.md
