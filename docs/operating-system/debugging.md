@@ -13,21 +13,25 @@ This section is not for end users. End users should use the [SSH app (formerly k
 
 ## Enabling SSH access to the host
 
-:::info
-SSH access through the [SSH app] (on port 22 by default) only grants limited privileges, and you will be asked for a username and password when typing the 'login' command. Follow the steps below to enable a separate SSH access on port 22222 that works independently of the app and gives you direct access to the Home Assistant OS (the "host") with full privileges.
-:::
+SSH access through the [SSH app] (on port 22 by default) only grants limited privileges, and you will be asked for a username and password when typing the 'login' command.
+Follow the steps below to enable a separate SSH access on port 22222.
+It works independently of the app.
 
-The following guide uses the [`hassos-config`][hassos-config] script, which enables the SSH server (`dropbear`) on system startup.
+The following guide uses the [`/usr/sbin/hassos-config`][hassos-config] script, which enables the SSH server (`dropbear`) on system startup.
 Further information is provided at [Home Assistant Operating System configuration].
 
 :::warning
-Do not use methods 1 and 2 at the same time.
-Do not mix method 1 and 2 for setup and disable. 
+- This guide enables unconfined access to the Home Assistant OS (the "host") with full `root` privileges.
+- Unplugging power or SD card without a clean shutdown can damage your SD card!
+- Do not use methods 1 and 2 at the same time.
+- Do not mix method 1 and 2 for enabling and disabling SSH access.
 :::
 
-:::tip
-Make sure when you are copying the public key(s) to the root of the USB drive that you correctly name the file `authorized_keys` without a `.pub` file extension.
-:::
+Follow these rules:
+- Check the respective partition layout for [USB-Drive](#partition-layout-usb-drive) or [hassos-boot](#partition-layout-hassos-boot).
+- `authorized_keys` must use POSIX-standard newline control characters, i.e. `LF`, ASCII `\n` (not Windows (CR LF, `\r\n`), not macOS (CR, `\r`))
+- `authorized_keys` must only contain ASCII characters
+- `authorized_keys` must be ASCII-encoded (not `UTF-8`, not Windows `ISO_8859-1`).
 
 ### Method 1: USB Drive
 
