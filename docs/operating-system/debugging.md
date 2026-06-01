@@ -138,15 +138,25 @@ docker logs homeassistant
 docker exec -it homeassistant /bin/bash
 ```
 
+[github-instructions]: https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
 [windows-keys]: https://docs.digitalocean.com/products/droplets/how-to/add-ssh-keys/create-with-putty/
 
 ## Generating SSH Keys
 
-Windows instructions on how to generate and use private/public keys with Putty are found [here][windows-keys]. Instead of the droplet instructions, add the public key as per above instructions.
+Create a separate key named `id_hassos` for Home Assistant.
+Creating SSH keys is as simple as running `ssh-keygen` or `PuTTYgen` on your local machine and following prompts.
+Generating an asymmetric key creates 2 files:
 
-Alternative instructions for Mac, Windows and Linux can be found [here](https://docs.github.com/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent). Follow the steps under *Generating a new SSH key* (the other sections are not applicable to Home Assistant and can be ignored).
+1. `id_XYZ`: This is your private decryption key, which you should _never_ export or upload.
+2. `id_XYZ.pub`: This is your public encryption key, which others use.
 
-Make sure to copy the ***public*** key of the SSH key pair you just created. By default, the public key file is named `id_ed25519.pub` (in case of the Ed25519 elliptic curve algorithm) or `id_rsa.pub` (in case of the older RSA algorithm), i.e. it should have a `.pub` filename suffix. It is saved to the same folder as the private key (which is named `id_ed25519` or `id_rsa` by default).
+This means `authorized_keys` are only _public_ keys `id_XYZ.pub`, _never_ private keys.
+Key filenames are inconsequential and only identify the correct key.
+
+Generate keys on your local machine and add them to your `authorized_keys` file.
+- [`ssh-keygen`][github-instructions] (Linux, WSL, Git for Windows)
+- [`PuTTYgen`][windows-keys]
+- [inbrowser.app](https://inbrowser.app/tools/ssh-key-generator/) (Discouraged, only use if you cannot generate keys on your local machine)
 
 ## Example Workflow
 
