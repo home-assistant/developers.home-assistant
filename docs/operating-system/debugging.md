@@ -4,7 +4,10 @@ sidebar_label: Debugging
 ---
 
 :::info
-This section is not for end users. End users should use the [SSH app (formerly known as an add-on)] to SSH into Home Assistant. This is for **developers** of Home Assistant. Do not ask for support if you are using these options.
+This section is not for end users.
+End users should use the [SSH app (formerly known as an add-on)] to SSH into Home Assistant.
+This is for **developers** of Home Assistant.
+Do not ask for support if you are using these options.
 :::
 
 [SSH app]: https://github.com/home-assistant/addons/tree/master/ssh
@@ -13,7 +16,8 @@ This section is not for end users. End users should use the [SSH app (formerly k
 
 ## Enabling SSH access to the host
 
-SSH access through the [SSH app] (on port 22 by default) only grants limited privileges, and you will be asked for a username and password when typing the 'login' command.
+SSH access through the [SSH app] (on port 22 by default) only grants limited privileges.
+Here, you are asked for a username and password when typing the 'login' command.
 Follow the steps below to enable a separate SSH access on port 22222.
 It works independently of the app.
 
@@ -89,16 +93,23 @@ You should now be able to connect to your device as root over SSH on port 22222.
 ssh root@homeassistant.local -p 22222
 ```
 
-If you have an older installation or have changed your hostname, you may need to adjust the command above accordingly. You can alternatively use the device's IP address instead of the hostname.
+If you have an older installation or have changed your hostname, you may need to adjust the command above accordingly.
+You can alternatively use the device's IP address instead of the hostname.
 
-You will be logged in as root with the `/root` folder set as the working directory. [Home Assistant OS] is a hypervisor for Docker. See the [Supervisor Architecture] documentation for information regarding the Supervisor. The Supervisor offers an API to manage the host and running the Docker containers. Home Assistant itself and all installed addons run in separate Docker containers.
+You will be logged in as `root` with the `/root` folder set as the working directory.
+[Home Assistant OS] is a hypervisor for Docker.
+See the [Supervisor Architecture] documentation for information regarding the Supervisor.
+The Supervisor offers an API to manage the host and running the Docker containers.
+Home Assistant itself and all installed addons run in separate Docker containers.
 
 [Home Assistant OS]: https://github.com/home-assistant/operating-system
 [Supervisor Architecture]: /architecture_index.md
 
 ## Disabling SSH access to the host
 
-1. Use a USB drive with a partition named `CONFIG` (case sensitive) formatted as FAT, ext4, or NTFS. Remove any existing `authorized_keys` file from the root of that partition. Using method 2, delete the file `/CONFIG/authorized_keys` on the partition `hassos-boot`, while keeping `CONFIG`.
+1. Use a USB drive with a partition named `CONFIG` (case sensitive) formatted as FAT, ext4, or NTFS.
+Remove any existing `authorized_keys` file from the root of that partition.
+Using method 2, delete the file `/CONFIG/authorized_keys` on the partition `hassos-boot`, while keeping `CONFIG`.
 
 2. When the Home Assistant OS device reboots with a present `CONFIG` without `authorized_keys`, any existing SSH public keys will be removed and SSH access on port 22222 will be disabled.
 
