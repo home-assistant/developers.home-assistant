@@ -50,6 +50,24 @@ See [Example Workflow](#example-workflow) section below for a complete guide.
 
 Note that this method requires you to remove the file on the physical partition `hassos-boot`, if you want to disable the SSH server!
 
+#### Partition layout hassos-boot
+
+:::warning
+Changing, adding or removing anything other than `CONFIG` can result in physical damage to your device.
+Be aware, that _open & close_ can modify a file, e.g. when Auto-Save is on, which can mess with the encoding
+To be absolutely certain to not change anything else, follow the [Example Workflow](#example-workflow).
+:::
+
+```shell
+/ # Partition: hassos-boot
+├── ...
+├── cmdline.txt
+├── CONFIG
+│   └── authorized_keys
+├── config.txt
+└── ...
+```
+
 ### SSH access
 You should now be able to connect to your device as root over SSH on port 22222. On Mac/Linux, use:
 
@@ -68,7 +86,24 @@ You will be logged in as root with the `/root` folder set as the working directo
 
 1. Use a USB drive with a partition named `CONFIG` (case sensitive) formatted as FAT, ext4, or NTFS. Remove any existing `authorized_keys` file from the root of that partition. Using method 2, delete the file `/CONFIG/authorized_keys` on the partition `hassos-boot`, while keeping `CONFIG`.
 
-2. When the Home Assistant OS device is rebooted with a present `CONFIG` without `authorized_keys`, any existing SSH public keys will be removed and SSH access on port 22222 will be disabled.
+2. When the Home Assistant OS device reboots with a present `CONFIG` without `authorized_keys`, any existing SSH public keys will be removed and SSH access on port 22222 will be disabled.
+
+### Disabling SSH access partition layout USB-Drive
+Remove `authorized_keys` from the partition `CONFIG`.
+```shell
+/ # Partition: CONFIG
+└──
+```
+### Disabling SSH access Partition layout hassos-boot
+Only remove `authorized_keys` from the partition `hassos-boot`.
+Keep `CONFIG`.
+Do not touch any other files.
+```shell
+/ # Partition: hassos-boot
+├── CONFIG
+│   └──
+└── ...
+```
 
 ## Checking the logs
 
