@@ -35,11 +35,21 @@ Follow these rules:
 
 ### Method 1: USB Drive
 
-1. Use a USB drive with a partition named `CONFIG` (case sensitive) formatted as FAT, ext4, or NTFS. Create an `authorized_keys` text file (without a file extension) containing your public key(s), one per line, and place it in the root of the USB drive's `CONFIG` partition. The file must use POSIX-standard newline control characters (LF), not Windows ones (CR LF), and needs to be ASCII character encoded (i.e. mustn't contain any special characters in the comments).
+1. Use a USB drive with a partition named `CONFIG` (case sensitive) formatted as FAT, ext4, or NTFS.
+2. See [Generating SSH Keys](#generating-ssh-keys) section below if you need help generating keys.
+3. Create an `authorized_keys` text file (without a file extension) containing your public key(s), one per line, and place it in the root of the USB drive's `CONFIG` partition.
+4. Connect the USB drive to your Home Assistant OS device
+   - Option 1: while up and running, explicitly import the drive's contents using the `ha os import` command (e.g. via SSH to the [SSH app] on port 22)
+   - Option 2: reboot the device leaving the drive attached, which automatically triggers the import.
 
-   See [Generating SSH Keys](#generating-ssh-keys) section below if you need help generating keys.
+#### Partition layout USB-Drive 
 
-2. Connect the USB drive to your Home Assistant OS device and either explicitly import the drive's contents using the `ha os import` command (e.g. via SSH to the [SSH app] on port 22) or reboot the device leaving the drive attached, which automatically triggers the import.
+Only `/authorized_keys` should be present.
+
+```shell
+/ # Partition: CONFIG
+└── authorized_keys
+```
 
 ### Method 2: hassos-boot
 This method requires writing to the boot partition, e.g. by mounting the SD card.
@@ -47,7 +57,7 @@ This method requires writing to the boot partition, e.g. by mounting the SD card
 See [Example Workflow](#example-workflow) section below for a complete guide.
 
 1. Place the `authorized_keys` file at `/CONFIG/authorized_keys` in the mounted partition `hassos-boot`.
-   - The partition is auto-mounted at different locations dependending on your system (e.g. `/run/media/USER/hassos-boot` or `/mnt/hassos-boot`). 
+   - The partition is auto-mounted at different locations depending on your system (e.g. `/run/media/USER/hassos-boot` or `/mnt/hassos-boot`). 
    - The file will ultimately be mounted at `/boot/CONFIG/authorized_keys`
 2. Eject the SD card, to prevent write faults.
 3. Insert and reboot the Home Assistant device.
