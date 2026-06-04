@@ -28,4 +28,8 @@ The service is registered once the [`frontend`](https://www.home-assistant.io/in
 | `requires_api_password` | Legacy flag. Always advertised as `True`. | `True` |
 | `landingpage` | Present and set to `True` only on the record published by the [landing page](https://github.com/home-assistant/landingpage) before Core is set up. Absent on a running Core instance. | Not set |
 
+:::note
+
 A TXT property value may be at most 230 bytes (`key=value` is capped at 255). Any value exceeding this is suppressed (replaced with an empty string) so it does not break advertisement.
+
+:::
