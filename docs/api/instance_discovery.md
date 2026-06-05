@@ -21,7 +21,7 @@ The service is registered once the [`frontend`](https://www.home-assistant.io/in
 | --- | --- | --- |
 | `location_name` | Friendly instance name, from `hass.config.location_name`. | `Home` if no name is configured |
 | `uuid` | The instance ID (`core.uuid`); a stable, opaque 32-character hex identifier. Also reused as the host name (`<uuid>.local.`). | Generated on first run |
-| `version` | Home Assistant Core version. The landing page shown during initial setup, before Core is running, advertises the same service with the sentinel version `0000.0.0`. | Current Core version |
+| `version` | [Home Assistant Core version](../versioning.md). Optional: Consumers should support missing version number if Core is not yet installed (e.g. landing page shown during initial setup). Currently the landing page advertises with the sentinel version `0000.0.0`. This is not a valid Home Assistant Core version it is merly used to work around limitations of the current Android app. | Current Core version |
 | `internal_url` | Internal/LAN URL, resolved via `get_url(..., allow_external=False)`. | `""` if unavailable |
 | `external_url` | External URL, resolved via `get_url(..., allow_internal=False)`. | `""` if unavailable |
 | `base_url` | Deprecated; kept for backward compatibility. Set to `external_url`, or `internal_url` if there is no external URL. | `""` if neither is available |
