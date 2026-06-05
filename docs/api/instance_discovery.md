@@ -25,7 +25,7 @@ The service is registered once the [`frontend`](https://www.home-assistant.io/in
 | `internal_url` | Internal/LAN URL, resolved via `get_url(..., allow_external=False)`. | `""` if unavailable |
 | `external_url` | External URL, resolved via `get_url(..., allow_internal=False)`. | `""` if unavailable |
 | `base_url` | Deprecated; kept for backward compatibility. Set to `external_url`, or `internal_url` if there is no external URL. | `""` if neither is available |
-| `requires_api_password` | Legacy flag. Always advertised as `True`. | `True` |
+| `requires_api_password` | Legacy flag, always advertised as `True`. The `api_password` authentication mechanism it referred to was [deprecated in 0.90](https://github.com/home-assistant/core/pull/21884) and [removed in 2024.7.0](https://github.com/home-assistant/core/pull/119976), so the flag is now meaningless. Clients should no longer parse it. | `True` |
 | `landingpage` | Present and set to `True` only on the record published by the [landing page](https://github.com/home-assistant/landingpage) before Core is set up. Absent on a running Core instance. | Not set |
 
 :::note
