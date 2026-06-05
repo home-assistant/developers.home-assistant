@@ -303,7 +303,7 @@ module.exports = {
     {
       type: "category",
       label: "Misc",
-      items: ["development_validation", "development_typing", "instance_url"],
+      items: ["development_validation", "development_typing", "instance_url", "versioning"],
     },
   ],
   Voice: [
