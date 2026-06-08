@@ -56,7 +56,7 @@ DHCP discover packets to find existing devices.
 
 ## TrackerEntity
 
-A TrackerEntity tracks the location of a device and reports it either as a location name, a zone name or `home` or `not_home` states. A TrackerEntity normally receives GPS coordinates to determine its state. Either `in_zones` or `latitude` and `longitude` should be set to report state.
+A TrackerEntity tracks the location of a device and reports it either as a zone name or `home` or `not_home` states. A TrackerEntity can use GPS coordinates or a list of `Zone` entity_ids to determine its state. Either `in_zones` or `latitude` and `longitude` should be set to report state. If both `in_zones` and `latitude` + `longitude` are present, `in_zones` has priority. If `in_zones` is not provided, the base class calculates an `in_zones` list, including both active anc passive zone the device is currently in. The state of the entity is the first active zone in the `in_zones` list, `home` if the first active zone is the home zone or `not_home` if there is no active zone in the `in_zones` list.
 
 Derive a platform entity from [`homeassistant.components.device_tracker.config_entry.TrackerEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/device_tracker/config_entry.py)
 
@@ -68,8 +68,8 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name              | Type                | Default          | Description                              |
 | ----------------- | --------------------| ---------------- | ---------------------------------------- |
-| in_zones          | `list[str] \| None` | `None`           | The zones the device is in, ignored if latitude and longitude are not `None` |
-| latitude          | `float \| None`     | `None`           | The latitude coordinate of the device.   |
+| in_zones          | `list[str] \| None` | `None`           | The zones the device is in, including passive zones. |
+| latitude          | `float \| None`     | `None`           | The latitude coordinate of the device, ignored if `in_zones` is not `None`.   |
 | location_accuracy | `float`             | `0`              | The location accuracy (m) of the device. |
-| longitude         | `float \| None`     | `None`           | The longitude coordinate of the device.  |
+| longitude         | `float \| None`     | `None`           | The longitude coordinate of the device, ignored if `in_zones` is not `None`.  |
 | source_type       | SourceType          | `SourceType.GPS` | The source type of the device.           |
