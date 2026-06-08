@@ -8,7 +8,7 @@ The Supervisor allows the user to manage their Home Assistant installation from 
 - Run Home Assistant Core
 - Update Home Assistant Core. Automatically roll back if the update fails.
 - Make and restore backups
-- Add-ons
+- Install and run Home Assistant Apps (formerly known as Home Assistant add-ons)
 - Unified audio system
 - Update the Home Assistant operating system (disabled in a Supervised installation)
 
@@ -22,9 +22,9 @@ The Supervisor allows the user to manage their Home Assistant installation from 
 -->
 
 - **Home Assistant Core**: home automation platform
-- **Add-ons**: extra applications that the user wants to run on their server
-- **DNS**: allows core and add-ons to communicate among one another
-- **Audio**: allows core and add-ons to play audio
+- **Apps (formerly known as add-ons)**: extra applications that the user wants to run on their server
+- **DNS**: allows core and apps (formerly known as add-ons) to communicate among one another
+- **Audio**: allows core and apps (formerly known as add-ons) to play audio
 - **mDNS**: help discover and connect to devices and services in the network
 - **Supervisor**: manages all parts of the system and keeps it up to date
 - **Docker**: container service to run applications.

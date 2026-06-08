@@ -7,14 +7,14 @@ As stated in the [Style guidelines section](development_guidelines.md) all code 
 - All the unit tests pass
 - All code passes the checks from the linting tools
 
-Local testing is done using [pytest](https://docs.pytest.org/) and using [pre-commit](https://pre-commit.com/) for running out linters, which has been installed as part of running `script/setup` in the [virtual environment](development_environment.mdx).
+Local testing is done using [pytest](https://docs.pytest.org/) and using [prek](https://prek.j178.dev/) for running our linters, which has been installed as part of running `script/setup` in the [virtual environment](development_environment.mdx).
 
 Python test requirements need to be installed before tests can be run. This can be achieved by using the VScode devcontainer and the corresponding task. Check the [devcontainer documentation](/docs/development_environment#tasks) for guidance about running tasks.
 
 To run our linters, on the full code base, run the following command:
 
 ```shell
-pre-commit run --all-files
+prek run --all-files
 ```
 
 To run the full test suite, more dependencies are required than what is set up in the devcontainer by default. To install all dependencies, activate the virtual environment and run the command:
@@ -39,8 +39,8 @@ It might be required that you install additional packages depending on your dist
 - Ubuntu: `sudo apt-get install libudev-dev`
 
 :::info Important
-Run `pytest` & `pre-commit` before you create your pull request to avoid annoying fixes.
-`pre-commit` will be invoked automatically by git when committing changes.
+Run `pytest` & `prek` before you create your pull request to avoid annoying fixes.
+`prek` will be invoked automatically by git when committing changes.
 :::
 
 :::note
@@ -95,10 +95,10 @@ Several linters are setup to run automatically when you try to commit as part of
 You can also run these linters manually :
 
 ```shell
-pre-commit run --show-diff-on-failure
+prek run --show-diff-on-failure
 ```
 
-Or, in Visual Studio Code, launch the **Pre-commit** task.
+Or, in Visual Studio Code, launch the **Prek** task.
 
 The linters are also available directly, you can run tests on individual files:
 

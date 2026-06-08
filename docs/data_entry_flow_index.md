@@ -411,7 +411,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         )
 ```
 
-Note: A user can change their password, which technically makes it mutable data, but for changing authentication credentials, you use [reauthentication](/docs/config_entries_config_flow_handler#reauthentication), which can mutate the config entry data.
+Note: A user can change their password, which technically makes it mutable data, but for changing authentication credentials, you use [reauthentication](/docs/core/integration/config_flow#reauthentication), which can mutate the config entry data.
 
 ### Abort
 
@@ -545,35 +545,6 @@ class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
         if not user_input:
             return self.async_show_form(step_id="finish")
         return self.async_create_entry(title="Some title", data={})
-```
-
-#### Progress decorator
-
-A progress step decorator is provided for convenience. It can be used to change a standard flow step into a progress task. For example:
-
-```python
-import asyncio
-
-from homeassistant import config_entries
-from homeassistant.data_entry_flow import AbortFlow, progress_step
-from .const import DOMAIN
-
-class TestFlow(config_entries.ConfigFlow, domain=DOMAIN):
-    VERSION = 1
-
-    @progress_step(
-        # optional description placeholders for the UI
-        description_placeholders=lambda self: {
-            "name": "test,
-        }
-    )
-    async def async_step_user(self, user_input=None):
-        await asyncio.sleep(10)
-        self.async_update_progress(0.5)
-        await asyncio.sleep(10)
-
-        # call the next step when done or raise AbortFlow to abort the flow
-        return await self.async_step_finish()
 ```
 
 ### Show menu

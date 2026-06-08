@@ -16,16 +16,16 @@ const iqs_rules = Object.values(iqs_rules_by_tier).flat().map((rule) => {
 
 
 module.exports = {
-  Addons: [
-    "add-ons",
-    "add-ons/tutorial",
-    "add-ons/configuration",
-    "add-ons/communication",
-    "add-ons/testing",
-    "add-ons/publishing",
-    "add-ons/presentation",
-    "add-ons/repository",
-    "add-ons/security",
+  Apps: [
+    "apps",
+    "apps/tutorial",
+    "apps/configuration",
+    "apps/communication",
+    "apps/testing",
+    "apps/publishing",
+    "apps/presentation",
+    "apps/repository",
+    "apps/security",
   ],
   Overview: [
     "architecture_index",
@@ -136,14 +136,27 @@ module.exports = {
       label: "Building Integrations",
       items: [
         "creating_component_index",
+        "core/integration/contributing_to_core",
         "creating_integration_file_structure",
         "creating_integration_tests_file_structure",
         "creating_integration_manifest",
-        "config_entries_config_flow_handler",
-        "config_entries_options_flow_handler",
-        "core/integration_diagnostics",
-        "core/integration_system_health",
-        "configuration_yaml_index",
+        {
+          type: "category",
+          label: "Configuring your integration",
+          items: [
+            "core/integration/config_flow",
+            "core/integration/options_flow",
+            "core/integration/yaml_configuration",
+          ],
+        },
+        {
+          type: "category",
+          label: "Debugging an integration",
+          items: [
+            "core/integration/diagnostics",
+            "core/integration/system_health",
+          ],
+        },
         "dev_101_services",
         "creating_platform_index",
         "creating_component_generic_discovery",
@@ -152,6 +165,7 @@ module.exports = {
         "integration_events",
         "integration_listen_events",
         "network_discovery",
+        "core/integration/brand_images",
         {
           type: "category",
           label: "Bluetooth",
@@ -276,6 +290,7 @@ module.exports = {
     "creating_integration_brand",
     "core/platform/application_credentials",
     "core/platform/backup",
+    "core/platform/media_source",
     "core/platform/raising_exceptions",
     "core/platform/repairs",
     "core/platform/reproduce_state",
@@ -288,7 +303,7 @@ module.exports = {
     {
       type: "category",
       label: "Misc",
-      items: ["development_validation", "development_typing", "instance_url"],
+      items: ["development_validation", "development_typing", "instance_url", "versioning"],
     },
   ],
   Voice: [
@@ -379,6 +394,7 @@ module.exports = {
         "android/tips/release",
         "android/tips/dev_playground",
         "android/tips/strict_mode",
+        "android/tips/testing_pr_builds",
       ],
     },
     "android/best_practices",
@@ -387,5 +403,15 @@ module.exports = {
     "android/linter",
     "android/submit",
     "android/release",
+  ],
+  Apple: [
+    "apple/index",
+    "apple/get_started",
+    "apple/architecture",
+    "apple/targets",
+    "apple/testing",
+    "apple/ci",
+    "apple/codestyle",
+    "apple/submit",
   ]
 };

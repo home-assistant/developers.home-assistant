@@ -112,7 +112,7 @@ OAuth2 is a [standardized version](https://tools.ietf.org/html/rfc6749) of an au
 
 Refreshing access tokens relies on a client ID and secret, which might be held by an external service. We need to structure the authentication class to be able to allow the developer to implement their own token refresh logic.
 
-Home Assistant ships with the Home Assistant Cloud Account Linking service, a free cloud service to allow users to quickly connect accounts using OAuth2. Home Assistant has easy to use tools built-in to allow users to configure OAuth2-based integrations. For more info, [read here](config_entries_config_flow_handler.md#configuration-via-oauth2). These built-in tools work best if your library is implemented like the examples below.
+Home Assistant ships with the Home Assistant Cloud Account Linking service, a free cloud service to allow users to quickly connect accounts using OAuth2. Home Assistant has easy to use tools built-in to allow users to configure OAuth2-based integrations. For more info, [read here](core/integration/config_flow.md#configuration-via-oauth2). These built-in tools work best if your library is implemented like the examples below.
 
 ### Async example
 

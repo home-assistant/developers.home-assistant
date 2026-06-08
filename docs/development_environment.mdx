@@ -77,7 +77,7 @@ It is also possible to debug a remote Home Assistant instance (e.g., production 
 
 _You only need these instructions if you do not want to use devcontainers._
 
-It is also possible to set up a more traditional development environment. See the section below for your operating system. Make sure your Python version is 3.13.
+It is also possible to set up a more traditional development environment. See the section below for your operating system. Make sure your Python version is 3.14.2 or higher.
 
 :::note
 If you proceed without the correct Python version installed, you will end up with a virtual environment that is incompatible with Home Assistant. Once you have installed the correct version, remove the `venv` directory and continue with the setup to recreate it with the correct version.
@@ -107,6 +107,38 @@ Install the core dependencies.
 
 ```shell
 sudo pacman -Sy base-devel python python-pip python-virtualenv autoconf libxml2 libxslt libjpeg-turbo libffi systemd zlib pkgconf ffmpeg gcc cmake
+```
+
+### Developing on NixOS
+
+Drop a `default.nix` with the contents below in the checked out repository and activate it with e.g.
+[direnv](https://direnv.net/).
+
+```nix
+let
+  pkgs = import <nixpkgs> { };
+in
+pkgs.mkShell {
+  packages = with pkgs; [
+    autoconf
+    clang
+    cmake
+    ffmpeg
+    ffmpeg.dev
+    gammu
+    libffi.dev
+    libjpeg.dev
+    libxml2.dev
+    libxslt.dev
+    openssl_3.dev
+    pkg-config
+    python314
+    zlib.dev
+  ];
+  env = {
+    LD_LIBRARY_PATH = "${pkgs.libjpeg.out}/lib";
+  };
+}
 ```
 
 ### Developing on Windows

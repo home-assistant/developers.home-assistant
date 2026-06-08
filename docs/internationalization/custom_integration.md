@@ -11,3 +11,11 @@ This file will contain the different strings that will be translatable for diffe
 The language codes follow the [BCP47](https://tools.ietf.org/html/bcp47) format.
 
 To make sure that your translation files are correct, test with our integration validator Hassfest. [Set up instructions here.](https://developers.home-assistant.io/blog/2020/04/16/hassfest)
+
+:::caution Strings.json vs. Translations
+**Do not use `strings.json` for custom components.**
+
+The `strings.json` file and the placeholder syntax (e.g., `[%key:common::config_flow::data::email%]`) are **build-time features** used only by Home Assistant Core.
+
+Custom integrations do not run through the internal translation build script. You must manually create the `translations/en.json` file and include the full, flat English text for every key. If you use `strings.json` or placeholders, your config flow will fail to load translations and show raw keys (e.g., `username` rather than the translated value `Enter Username`).
+:::

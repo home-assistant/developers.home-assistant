@@ -44,7 +44,7 @@ class MyCoordinator(DataUpdateCoordinator[dict[str, MyDevice]]):
 async def async_setup_entry(
     hass: HomeAssistant,
     entry: MyConfigEntry,
-    async_add_entities: AddEntitiesCallback,
+    async_add_entities: AddConfigEntryEntitiesCallback,
 ) -> None:
     """Set up My integration from a config entry."""
     coordinator = entry.runtime_data

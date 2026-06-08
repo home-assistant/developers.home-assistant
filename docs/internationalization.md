@@ -16,4 +16,4 @@ There are also localizable strings that exist only on the frontend. These string
 | Device automation | Core     |
 | Text in UI        | Frontend |
 
-Our strings are translated by the community using the online translation tool [Lokalise](https://lokalise.co/).
+Our strings are translated by the community using the online translation tool [Lokalise](https://lokalise.com/).

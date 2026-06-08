@@ -13,29 +13,30 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name                    | Type                                | Default                              | Description                                                                |
 | ----------------------- | ----------------------------------- | ------------------------------------ | -------------------------------------------------------------------------- |
-| current_humidity        | <code>float &#124; None</code>        | `None`                               | The current humidity.                                                      |
-| current_temperature     | <code>float &#124; None</code>      | `None`                               | The current temperature.                                                   |
-| fan_mode                | <code>str &#124; None</code>        | **Required by SUPPORT_FAN_MODE**     | The current fan mode.                                                      |
-| fan_modes               | <code>list[str] &#124; None</code>  | **Required by SUPPORT_FAN_MODE**     | The list of available fan modes.                                           |
-| hvac_action             | <code>HVACAction &#124; None</code> | `None`                               | The current HVAC action (heating, cooling)                                 |
-| hvac_mode               | <code>HVACMode &#124; None</code>   | **Required**                         | The current operation (e.g. heat, cool, idle). Used to determine `state`.  |
-| hvac_modes              | <code>list[HVACMode]</code>         | **Required**                         | List of available operation modes. See below.                              |
-| max_humidity            | `float`                               | `DEFAULT_MAX_HUMIDITY` (value == 99) | The maximum humidity.                                                      |
+| current_humidity        | `float \| None`      | `None`                               | The current humidity.                                                      |
+| current_temperature     | `float \| None`      | `None`                               | The current temperature.                                                   |
+| fan_mode                | `str \| None`        | **Required by SUPPORT_FAN_MODE**     | The current fan mode.                                                      |
+| fan_modes               | `list[str] \| None`  | **Required by SUPPORT_FAN_MODE**     | The list of available fan modes.                                           |
+| hvac_action             | `HVACAction \| None` | `None`                               | The current HVAC action (heating, cooling)                                 |
+| hvac_mode               | `HVACMode \| None`   | **Required**                         | The current operation (e.g. heat, cool, idle). Used to determine `state`.  |
+| hvac_modes              | `list[HVACMode]`         | **Required**                         | List of available operation modes. See below.                              |
+| max_humidity            | `float`                             | `DEFAULT_MAX_HUMIDITY` (value == 99) | The maximum humidity.                                                      |
 | max_temp                | `float`                             | `DEFAULT_MAX_TEMP` (value == 35 °C)  | The maximum temperature in `temperature_unit`.                             |
-| min_humidity            | `float`                               | `DEFAULT_MIN_HUMIDITY` (value == 30) | The minimum humidity.                                                      |
+| min_humidity            | `float`                             | `DEFAULT_MIN_HUMIDITY` (value == 30) | The minimum humidity.                                                      |
 | min_temp                | `float`                             | `DEFAULT_MIN_TEMP` (value == 7 °C)   | The minimum temperature in `temperature_unit`.                             |
 | precision               | `float`                             | According to `temperature_unit`      | The precision of the temperature in the system. Defaults to tenths for TEMP_CELSIUS, whole number otherwise. |
-| preset_mode             | <code>str &#124; None</code>        | **Required by SUPPORT_PRESET_MODE**  | The current active preset.                                                 |
-| preset_modes            | <code>list[str] &#124; None</code>  | **Required by SUPPORT_PRESET_MODE**  | The available presets.                                                     |
-| swing_mode              | <code>str &#124; None</code>        | **Required by SUPPORT_SWING_MODE**   | The swing setting.                                                         |
-| swing_modes             | <code>list[str] &#124; None</code>  | **Required by SUPPORT_SWING_MODE**   | Returns the list of available swing modes, only vertical modes in the case horizontal swing is implemented. |
-| swing_horizontal_mode | <code>str &#124; None</code>        | **Required by SUPPORT_SWING_HORIZONTAL_MODE**   | The horizontal swing setting.                                     |
-| swing_horizontal_modes | <code>list[str] &#124; None</code>  | **Required by SUPPORT_SWING_HORIZONTAL_MODE**  | Returns the list of available horizontal swing modes.                                 |
-| target_humidity         | <code>float &#124; None</code>        | `None`                               | The target humidity the device is trying to reach.                         |
-| target_temperature      | <code>float &#124; None</code>      | `None`                               | The temperature currently set to be reached.                               |
-| target_temperature_high | <code>float &#124; None</code>      | **Required by TARGET_TEMPERATURE_RANGE** | The upper bound target temperature                                     |
-| target_temperature_low  | <code>float &#124; None</code>      | **Required by TARGET_TEMPERATURE_RANGE** | The lower bound target temperature                                     |
-| target_temperature_step | <code>float &#124; None</code>      | `None`                               | The supported step size a target temperature can be increased or decreased |
+| preset_mode             | `str \| None`        | **Required by SUPPORT_PRESET_MODE**  | The current active preset.                                                 |
+| preset_modes            | `list[str] \| None`  | **Required by SUPPORT_PRESET_MODE**  | The available presets.                                                     |
+| swing_mode              | `str \| None`        | **Required by SUPPORT_SWING_MODE**   | The swing setting.                                                         |
+| swing_modes             | `list[str] \| None`  | **Required by SUPPORT_SWING_MODE**   | Returns the list of available swing modes, only vertical modes in the case horizontal swing is implemented. |
+| swing_horizontal_mode   | `str \| None`        | **Required by SUPPORT_SWING_HORIZONTAL_MODE**   | The horizontal swing setting.                                   |
+| swing_horizontal_modes  | `list[str] \| None`  | **Required by SUPPORT_SWING_HORIZONTAL_MODE**  | Returns the list of available horizontal swing modes.            |
+| target_humidity         | `float \| None`      | `None`                               | The target humidity the device is trying to reach.                         |
+| target_humidity_step    | `int \| None`        | `None`                               | The supported step size a target humidity can be increased or decreased in an action call targeting the device. |
+| target_temperature      | `float \| None`      | `None`                               | The temperature currently set to be reached.                               |
+| target_temperature_high | `float \| None`      | **Required by TARGET_TEMPERATURE_RANGE** | The upper bound target temperature                                     |
+| target_temperature_low  | `float \| None`      | **Required by TARGET_TEMPERATURE_RANGE** | The lower bound target temperature                                     |
+| target_temperature_step | `float \| None`      | `None`                               | The supported step size a target temperature can be increased or decreased |
 | temperature_unit        | <code>str</code>                    | **Required**                         | The unit of temperature measurement for the system (`TEMP_CELSIUS` or `TEMP_FAHRENHEIT`).                    |
 
 ### HVAC modes
@@ -146,9 +147,9 @@ and are combined using the bitwise or (`|`) operator.
 | `FAN_MODE`                 | The device supports fan modes.                                                              |
 | `PRESET_MODE`              | The device supports presets.                                                                |
 | `SWING_MODE`               | The device supports swing modes.                                                            |
-| `SWING_HORIZONTAL_MODE`    | The device supports horizontal swing modes.                                                            |
-| `TURN_ON`                 | The device supports turn on.                                                      |
-| `TURN_OFF`                 | The device supports turn off.                                                      |
+| `SWING_HORIZONTAL_MODE`    | The device supports horizontal swing modes.                                                 |
+| `TURN_ON`                  | The device supports turn on.                                                                |
+| `TURN_OFF`                 | The device supports turn off.                                                               |
 
 ## Methods
 
@@ -158,10 +159,10 @@ and are combined using the bitwise or (`|`) operator.
 class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
-    def set_hvac_mode(self, hvac_mode):
+    def set_hvac_mode(self, hvac_mode: HVACMode) -> None:
         """Set new target hvac mode."""
 
-    async def async_set_hvac_mode(self, hvac_mode):
+    async def async_set_hvac_mode(self, hvac_mode: HVACMode) -> None:
         """Set new target hvac mode."""
 ```
 
@@ -174,10 +175,10 @@ class MyClimateEntity(ClimateEntity):
     # `HVACMode.OFF` by optimistically setting it from the service action
     # handler or with the next state update
 
-    def turn_on(self):
+    def turn_on(self) -> None:
         """Turn the entity on."""
 
-    async def async_turn_on(self):
+    async def async_turn_on(self) -> None:
         """Turn the entity on."""
 ```
 
@@ -190,10 +191,10 @@ class MyClimateEntity(ClimateEntity):
     # optimistically setting it from the service action handler or with the
     # next state update
 
-    def turn_off(self):
+    def turn_off(self) -> None:
         """Turn the entity off."""
 
-    async def async_turn_off(self):
+    async def async_turn_off(self) -> None:
         """Turn the entity off."""
 ```
 
@@ -208,10 +209,10 @@ class MyClimateEntity(ClimateEntity):
     # optimistically setting it from the service action handler
     # or with the next state update.
 
-    def toggle(self):
+    def toggle(self) -> None:
         """Toggle the entity."""
 
-    async def async_toggle(self):
+    async def async_toggle(self) -> None:
         """Toggle the entity."""
 ```
 
@@ -221,10 +222,10 @@ class MyClimateEntity(ClimateEntity):
 class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
-    def set_preset_mode(self, preset_mode):
+    def set_preset_mode(self, preset_mode: str) -> None:
         """Set new target preset mode."""
 
-    async def async_set_preset_mode(self, preset_mode):
+    async def async_set_preset_mode(self, preset_mode: str) -> None:
         """Set new target preset mode."""
 ```
 
@@ -234,10 +235,10 @@ class MyClimateEntity(ClimateEntity):
 class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
-    def set_fan_mode(self, fan_mode):
+    def set_fan_mode(self, fan_mode: str) -> None:
         """Set new target fan mode."""
 
-    async def async_set_fan_mode(self, fan_mode):
+    async def async_set_fan_mode(self, fan_mode: str) -> None:
         """Set new target fan mode."""
 ```
 
@@ -247,10 +248,10 @@ class MyClimateEntity(ClimateEntity):
 class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
-    def set_humidity(self, humidity):
+    def set_humidity(self, humidity: int) -> None:
         """Set new target humidity."""
 
-    async def async_set_humidity(self, humidity):
+    async def async_set_humidity(self, humidity: int) -> None:
         """Set new target humidity."""
 ```
 
@@ -260,10 +261,10 @@ class MyClimateEntity(ClimateEntity):
 class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
-    def set_swing_mode(self, swing_mode):
+    def set_swing_mode(self, swing_mode: str) -> None:
         """Set new target swing operation."""
 
-    async def async_set_swing_mode(self, swing_mode):
+    async def async_set_swing_mode(self, swing_mode: str) -> None:
         """Set new target swing operation."""
 ```
 
@@ -273,10 +274,10 @@ class MyClimateEntity(ClimateEntity):
 class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
-    def set_swing_horizontal_mode(self, swing_mode):
+    def set_swing_horizontal_mode(self, swing_horizontal_mode: str) -> None:
         """Set new target horizontal swing operation."""
 
-    async def async_set_swing_horizontal_mode(self, swing_mode):
+    async def async_set_swing_horizontal_mode(self, swing_horizontal_mode: str) -> None:
         """Set new target horizontal swing operation."""
 ```
 
@@ -290,9 +291,9 @@ class MyClimateEntity(ClimateEntity):
 class MyClimateEntity(ClimateEntity):
     # Implement one of these methods.
 
-    def set_temperature(self, **kwargs):
+    def set_temperature(self, **kwargs: Any) -> None:
         """Set new target temperature."""
 
-    async def async_set_temperature(self, **kwargs):
+    async def async_set_temperature(self, **kwargs: Any) -> None:
         """Set new target temperature."""
 ```

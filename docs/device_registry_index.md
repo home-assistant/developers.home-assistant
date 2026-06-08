@@ -11,11 +11,11 @@ The device registry is a registry where Home Assistant keeps track of devices. A
 
 ## What is a device?
 
-A device in Home Assistant represents either a physical device that has its own control unit, or a service. The control unit itself does not have to be smart, but it should be in control of what happens. For example, an Ecobee thermostat with 4 room sensors equals 5 devices in Home Assistant, one for the thermostat including all sensors inside it, and one for each room sensor. Each device exists in a specific geographical area, and may have more than one input or output within that area.
+A device in Home Assistant represents either a physical device that has its own control unit, or a service. The control unit itself does not have to be smart, but it should be in control of what happens. For example, an Ecobee thermostat with 4 room sensors equals 5 devices in Home Assistant, one for the thermostat including all sensors inside it, and one for each room sensor.
 
 If you connect a sensor to another device to read some of its data, it should still be represented as two different devices. The reason for this is that the sensor could be moved to read the data of another device.
 
-A device that offers multiple endpoints, where parts of the device sense or output in different areas, should be split into separate devices and refer back to parent device with the `via_device` attribute. This allows the separate endpoints to be assigned to different areas in the building.
+A device that offers multiple endpoints, may be split into separate devices and refer back to a parent device with the `via_device` attribute. This allows the separate endpoints to be assigned to different areas in the building and it also allows logical grouping of entities. Typical examples of when a device should be split in a parent device and multiple child devices are smart power strips or smart multi-gang wall switches. The parent device will have entities representing the state of the power strip or multi-gang switch, for example network connection status and firmware update. The sub devices will group entities tied to one of the channels, for example a switch entity and energy consumption sensor per channel.
 
 :::info
 Although not currently available, we could consider offering an option to users to merge devices.

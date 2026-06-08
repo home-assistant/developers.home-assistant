@@ -142,6 +142,8 @@ script/setup_translations
 
 :::note
 This needs to be done manually, even if you are using dev containers. Also, you will be asked to enter a code and authorize the script to fetch the latest translations.
+
+In case a previous authorization no longer works (e.g. you see a "Bad Credentials" error during translation fetching), delete the `token.json` file in the `translations` folder and execute `script/setup_translations` again to retrigger the authorization process.
 :::
 
 :::note
@@ -220,3 +222,94 @@ hass --skip-pip-packages home-assistant-frontend
 ```
 
 [hass-frontend]: https://github.com/home-assistant/frontend
+
+## Test an existing PR
+
+Sometimes you need to test frontend changes on different environments or without setting up a full development environment. For example, you may want to test changes on a Home Assistant OS instance, or verify a fix works in your specific setup before the PR is merged.
+
+The `development_pr` option allows you to easily test frontend PRs by automatically downloading and using the frontend artifact from GitHub.
+
+### Configuration
+
+To use this feature, you need both a PR number and a GitHub token.
+
+#### Creating a GitHub token
+
+1. Go to [GitHub Settings > Developer Settings > Personal Access Tokens > Fine-grained tokens](https://github.com/settings/personal-access-tokens)
+2. Click "Generate new token"
+3. Give it a descriptive name like "Home Assistant Frontend Testing"
+4. Set the expiration date (recommended: 90 days or less)
+5. Under "Repository access", select "Public Repositories (read-only)"
+6. Skip the 'Permissions' section (leave it empty)
+7. Click "Generate token"
+8. Copy the token immediately (you won't be able to see it again)
+
+#### Configuration in Home Assistant
+
+Add the following to your `configuration.yaml`:
+
+```yaml
+frontend:
+  development_pr: <PR_NUMBER>
+  github_token: <YOUR_GITHUB_TOKEN>
+```
+
+For example, to test PR #12345:
+
+```yaml
+frontend:
+  development_pr: 12345
+  github_token: ghp_your_token_here
+```
+
+After adding this configuration, restart Home Assistant for the changes to take effect.
+
+:::warning
+Keep your GitHub token secure. Do not commit it to version control or share it publicly.
+:::
+
+#### Reverting to the production frontend
+
+To stop using the PR build and return to the standard Home Assistant frontend:
+
+1. Remove the `development_pr` and `github_token` lines from your `configuration.yaml`
+2. Restart Home Assistant
+
+Home Assistant will automatically return to using the built-in production frontend.
+
+### How it works
+
+When you configure `development_pr`, Home Assistant downloads the frontend build artifact from the specified PR on GitHub during startup and uses it instead of the production version. The artifact is cached locally and, on subsequent restarts, Home Assistant checks if the PR has new commits by comparing SHA sums. If a newer version is found, it downloads the updated artifact automatically.
+
+:::info
+If you have both `development_repo` and `development_pr` configured, `development_repo` takes precedence. The local development repository will be used instead of the PR build.
+:::
+
+### Use cases
+
+This is particularly useful for:
+
+- **Testing on HAOS**: Test PRs on Home Assistant OS without needing a development setup
+- **Environment-specific testing**: Verify that a fix works on your specific hardware, network, or browser configuration
+- **Quick verification**: Test a fix or feature without cloning repositories and building the frontend locally
+
+### Limitations
+
+- The PR must have a successful build with artifacts available on GitHub
+- Frontend artifacts are only available for 7 days after the PR build completes
+- This is intended for testing only and should not be used in production
+
+#### Recreating the artifact
+
+This can be useful if the artifact isn't available anymore, because it's older then 7 days or you want to test new upstream changes in the PR.
+
+If you are the author of the PR, you can trigger a new artifact by:
+
+- Update your branch — either by merging the `dev` branch into it or rebasing on top of the latest `dev` branch. This will trigger the build pipeline and create a new artifact that Home Assistant can download.
+- Close and reopen the PR to trigger a new build.
+
+If you are not the author, you can ask them to update their PR branch to trigger a new build.
+
+:::info
+To use the new artifact you have to restart Home Assistant core
+:::

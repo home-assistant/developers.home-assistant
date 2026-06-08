@@ -63,7 +63,7 @@ This approach allows you to maintain full control over your push notification in
 
 See the next section of this document for an example server implementation of a push notification forwarder that uses Firebase Cloud Functions and Firebase Cloud Messaging.
 
-Your server should accept a HTTP POST payload like this:
+Your server should accept an HTTP POST payload like this:
 
 ```json
 {

@@ -13,14 +13,14 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| device_class | <code>SensorDeviceClass &#124; None</code> | `None` | Type of sensor.
-| last_reset | <code>datetime.datetime &#124; None</code> | `None` | The time when an accumulating sensor such as an electricity usage meter, gas meter, water meter etc. was initialized. If the time of initialization is unknown, set it to `None`. Note that the `datetime.datetime` returned by the `last_reset` property will be converted to an ISO 8601-formatted string when the entity's state attributes are updated. When changing `last_reset`, the `state` must be a valid number.
-| native_unit_of_measurement | <code>str &#124; None</code> | `None` | The unit of measurement that the sensor's value is expressed in. If the `native_unit_of_measurement` is °C or °F, and its `device_class` is temperature, the sensor's `unit_of_measurement` will be the preferred temperature unit configured by the user and the sensor's `state` will be the `native_value` after an optional unit conversion. If a [unit translation is provided](/docs/internationalization/core#unit-of-measurement-of-entities), `native_unit_of_measurement` should not be defined.
-| native_value | <code>str &#124; int &#124; float &#124; date &#124; datetime &#124; Decimal &#124; None</code> | **Required** | The value of the sensor in the sensor's `native_unit_of_measurement`. Using a `device_class` may restrict the types that can be returned by this property.
-| options | <code>list[str] &#124; None</code> | `None` | In case this sensor provides a textual state, this property can be used to provide a list of possible states. Requires the `enum` device class to be set. Cannot be combined with `state_class` or `native_unit_of_measurement`.
-| state_class | <code>SensorStateClass &#124; str &#124; None</code> | `None` | Type of state. If not `None`, the sensor is assumed to be numerical and will be displayed as a line-chart in the frontend instead of as discrete values.
-| suggested_display_precision | <code>int &#124; None</code> | `None` | The number of decimals which should be used in the sensor's state when it's displayed.
-| suggested_unit_of_measurement | <code>str &#124; None</code> | `None` | The unit of measurement to be used for the sensor's state. For sensors with a `unique_id`, this will be used as the initial unit of measurement, which users can then override. For sensors without a `unique_id`, this will be the unit of measurement for the sensor's state. This property is intended to be used by integrations to override automatic unit conversion rules, for example, to make a temperature sensor always display in `°C` regardless of whether the configured unit system prefers `°C` or `°F`, or to make a distance sensor always display in miles even if the configured unit system is metric.
+| device_class | `SensorDeviceClass \| None` | `None` | Type of sensor.
+| last_reset | `datetime.datetime \| None` | `None` | The time when an accumulating sensor such as an electricity usage meter, gas meter, water meter etc. was initialized. If the time of initialization is unknown, set it to `None`. Note that the `datetime.datetime` returned by the `last_reset` property will be converted to an ISO 8601-formatted string when the entity's state attributes are updated. When changing `last_reset`, the `state` must be a valid number.
+| native_unit_of_measurement | `str \| None` | `None` | The unit of measurement that the sensor's value is expressed in. If the `native_unit_of_measurement` is °C or °F, and its `device_class` is temperature, the sensor's `unit_of_measurement` will be the preferred temperature unit configured by the user and the sensor's `state` will be the `native_value` after an optional unit conversion. If a [unit translation is provided](/docs/internationalization/core#unit-of-measurement-of-entities), `native_unit_of_measurement` should not be defined.
+| native_value | `str \| int \| float \| date \| datetime \| Decimal \| None` | **Required** | The value of the sensor in the sensor's `native_unit_of_measurement`. Using a `device_class` may restrict the types that can be returned by this property.
+| options | `list[str] \| None` | `None` | In case this sensor provides a textual state, this property can be used to provide a list of possible states. Requires the `enum` device class to be set. Cannot be combined with `state_class` or `native_unit_of_measurement`.
+| state_class | `SensorStateClass \| str \| None` | `None` | Type of state. If not `None`, the sensor is assumed to be numerical and will be displayed as a line-chart in the frontend instead of as discrete values.
+| suggested_display_precision | `int \| None` | `None` | The number of decimals which should be used in the sensor's state when it's displayed.
+| suggested_unit_of_measurement | `str \| None` | `None` | The unit of measurement to be used for the sensor's state. For sensors with a `unique_id`, this will be used as the initial unit of measurement, which users can then override. For sensors without a `unique_id`, this will be the unit of measurement for the sensor's state. This property is intended to be used by integrations to override automatic unit conversion rules, for example, to make a temperature sensor always display in `°C` regardless of whether the configured unit system prefers `°C` or `°F`, or to make a distance sensor always display in miles even if the configured unit system is metric.
 
 :::tip
 Instead of adding `extra_state_attributes` for a sensor entity, create an additional sensor entity. Attributes that do not change are only saved in the database once. If `extra_state_attributes` and the sensor value both frequently change, this can quickly increase the size of the database.
@@ -40,9 +40,9 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.BATTERY` | % | Percentage of battery that is left
 | `SensorDeviceClass.BLOOD_GLUCOSE_CONCENTRATION` | mg/dL, mmol/L | Blood glucose concentration
 | `SensorDeviceClass.CO2` | ppm | Concentration of carbon dioxide.
-| `SensorDeviceClass.CO` | ppm, µg/m³, mg/m³ | Concentration of carbon monoxide.
+| `SensorDeviceClass.CO` | ppb, ppm, µg/m³, mg/m³ | Concentration of carbon monoxide.
 | `SensorDeviceClass.CONDUCTIVITY` | S/cm, mS/cm, µS/cm | Conductivity
-| `SensorDeviceClass.CURRENT` | A, mA | Current
+| `SensorDeviceClass.CURRENT` | A, mA, µA | Current
 | `SensorDeviceClass.DATA_RATE` | bit/s, kbit/s, Mbit/s, Gbit/s, B/s, kB/s, MB/s, GB/s, KiB/s, MiB/s, GiB/s | Data rate
 | `SensorDeviceClass.DATA_SIZE` | bit, kbit, Mbit, Gbit, B, kB, MB, GB, TB, PB, EB, ZB, YB, KiB, MiB, GiB, TiB, PiB, EiB, ZiB, YiB | Data size
 | `SensorDeviceClass.DATE` | | Date. Requires `native_value` to be a Python `datetime.date` object, or `None`.
@@ -52,17 +52,17 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.ENERGY_DISTANCE` | kWh/100km, Wh/km, mi/kWh, km/kWh | Energy per distance, this device class should be used to represent energy consumption by distance, for example the amount of electric energy consumed by an electric car.
 | `SensorDeviceClass.ENERGY_STORAGE` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal | Stored energy, this device class should be used for sensors representing stored energy, for example the amount of electric energy currently stored in a battery or the capacity of a battery. Represents _power_ over _time_. Not to be confused with `power`.
 | `SensorDeviceClass.ENUM` | | The sensor has a limited set of (non-numeric) states. The `options` property must be set to a list of possible states when using this device class.
-| `SensorDeviceClass.FREQUENCY` | Hz, kHz, MHz, GHz | Frequency
+| `SensorDeviceClass.FREQUENCY` | mHz, Hz, kHz, MHz, GHz | Frequency
 | `SensorDeviceClass.GAS` | L, m³, ft³, CCF, MCF | Volume of gas. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
 | `SensorDeviceClass.HUMIDITY` | % | Relative humidity
 | `SensorDeviceClass.ILLUMINANCE` | lx | Light level
 | `SensorDeviceClass.IRRADIANCE` | W/m², BTU/(h⋅ft²) | Irradiance
 | `SensorDeviceClass.MOISTURE` | % | Moisture
 | `SensorDeviceClass.MONETARY` | [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) | Monetary value with a currency.
-| `SensorDeviceClass.NITROGEN_DIOXIDE` | µg/m³ | Concentration of nitrogen dioxide
-| `SensorDeviceClass.NITROGEN_MONOXIDE` | µg/m³ | Concentration of nitrogen monoxide
+| `SensorDeviceClass.NITROGEN_DIOXIDE` | ppb, ppm, µg/m³ | Concentration of nitrogen dioxide
+| `SensorDeviceClass.NITROGEN_MONOXIDE` | ppb, µg/m³ | Concentration of nitrogen monoxide
 | `SensorDeviceClass.NITROUS_OXIDE` | µg/m³ | Concentration of nitrous oxide
-| `SensorDeviceClass.OZONE` | µg/m³ | Concentration of ozone
+| `SensorDeviceClass.OZONE` | ppb, ppm, µg/m³ | Concentration of ozone
 | `SensorDeviceClass.PH` | None | Potential hydrogen (pH) of an aqueous solution
 | `SensorDeviceClass.PM1` | µg/m³ | Concentration of particulate matter less than 1 micrometer
 | `SensorDeviceClass.PM25` | µg/m³ | Concentration of particulate matter less than 2.5 micrometers
@@ -78,10 +78,11 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.SIGNAL_STRENGTH` | dB, dBm | Signal strength
 | `SensorDeviceClass.SOUND_PRESSURE` | dB, dBA | Sound pressure
 | `SensorDeviceClass.SPEED` | ft/s, in/d, in/h, in/s, km/h, kn, m/s, mph, mm/d, mm/s | Generic speed
-| `SensorDeviceClass.SULPHUR_DIOXIDE` | µg/m³ | Concentration of sulphure dioxide
+| `SensorDeviceClass.SULPHUR_DIOXIDE` | ppb, µg/m³ | Concentration of sulphure dioxide
 | `SensorDeviceClass.TEMPERATURE` | °C, °F, K | Temperature.
 | `SensorDeviceClass.TEMPERATURE_DELTA` | °C, °F, K | This device class represents a temperature interval (delta), i.e. the difference between two temperature values.
 | `SensorDeviceClass.TIMESTAMP` | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
+| `SensorDeviceClass.UPTIME` | | Timestamp. Represents the datetime when the device last booted. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
 | `SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³, mg/m³ | Concentration of volatile organic compounds
 | `SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS_PARTS` | ppm, ppb | Ratio of volatile organic compounds
 | `SensorDeviceClass.VOLTAGE` | V, mV, µV, kV, MV | Voltage
@@ -226,3 +227,33 @@ Example of state class `SensorStateClass.TOTAL_INCREASING` where the sensor does
 |   2021-08-01T14:00:00  |  1010  |  10
 |   2021-08-01T15:00:00  |     5  |  15
 |   2021-08-01T16:00:00  |    10  |  20
+
+### Handling migration from unsupported to supported units of measurement
+
+Integrations may have sensors which have their own custom units of measurement, i.e. they don't use Home Assistant constants to set the units.  
+When migrating such a sensor to a unit supported by Home Assistant's unit system, the old custom unit must match the value of the Home Assistant constant exactly or Home Assistant will treat this as a unit change.
+
+For example, the integration may have set the unit of an energy sensor to `KWh` which differs from the value of `UnitOfEnergy.KILO_WATT_HOUR` (kWh).
+
+During compilation of long-term statistics this unit change will be detected. Without knowledge of how old and new unit relate to each other,
+collection of statistics is suppressed and a warning about unstable units is generated.
+
+To facilitate these migration cases, integrations can provide a custom unit mapping to declare any non-supported unit
+equivalent to a supported unit. This is done by creating a recorder platform `recorder.py` in your integration's directory
+and implementing the function `async_custom_equivalent_units` to return a mapping for any relevant `entity_id` to a dictionary of equivalent units.
+This mapping will be collected during statistics compilation and enables integrations a smooth transition into Home Assistant's unit system.
+
+Example implementation:
+```python
+@callback
+def async_custom_equivalent_units(hass: HomeAssistant) -> dict[str, dict[str | None, str]]:
+    """Return custom equivalent units per entity id."""
+    return {
+        "sensor.example_sensor_1": {
+            "b/s": UnitOfDataRate.BYTES_PER_SECOND, # B/s
+        },
+        "sensor.example_sensor_2": {
+            "KWh": UnitOfEnergy.KILO_WATT_HOUR, # kWh
+        },
+    }
+```

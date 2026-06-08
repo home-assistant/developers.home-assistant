@@ -16,4 +16,4 @@ This can lead to unexpected behavior, and integrations should be adjusted to ins
 In case of manual flows, integrations should implement options, reauth, reconfigure to allow the user to change settings.
 In case of non user visible flows, the integration should optionally update the existing entry before aborting.
 
-More details can be found in the [config flow](/docs/config_entries_config_flow_handler#unique-id-requirements) documentation.
+More details can be found in the [config flow](/docs/core/integration/config_flow#unique-id-requirements) documentation.

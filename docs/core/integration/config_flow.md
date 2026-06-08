@@ -10,11 +10,11 @@ When instantiating the handler, Home Assistant will make sure to load all depend
 
 ## Updating the manifest
 
-You need to update your integrations manifest to inform Home Assistant that your integration has a config flow. This is done by adding `config_flow: true` to your manifest ([docs](creating_integration_manifest.md#config-flow)).
+You need to update your integrations manifest to inform Home Assistant that your integration has a config flow. This is done by adding `config_flow: true` to your manifest ([docs](/docs/creating_integration_manifest.md#config-flow)).
 
 ## Defining your config flow
 
-Config entries use the [data flow entry framework](data_entry_flow_index.md) to define their config flows. The config flow needs to be defined in the file `config_flow.py` in your integration folder, extend `homeassistant.config_entries.ConfigFlow` and pass a `domain` key as part of inheriting `ConfigFlow`.
+Config entries use the [data flow entry framework](/docs/data_entry_flow_index.md) to define their config flows. The config flow needs to be defined in the file `config_flow.py` in your integration folder, extend `homeassistant.config_entries.ConfigFlow` and pass a `domain` key as part of inheriting `ConfigFlow`.
 
 ```python
 from homeassistant import config_entries
@@ -23,10 +23,6 @@ from .const import DOMAIN
 
 class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     """Example config flow."""
-    # The schema version of the entries that it creates
-    # Home Assistant will call your migrate method if the version changes
-    VERSION = 1
-    MINOR_VERSION = 1
 ```
 
 Once you have updated your manifest and created the `config_flow.py`, you will need to run `python3 -m script.hassfest` (one time only) for Home Assistant to activate the config entry for your integration.
@@ -48,7 +44,7 @@ Note that this priority order means that:
 
 ## Defining steps
 
-Your config flow will need to define steps of your configuration flow. Each step is identified by a unique step name (`step_id`). The step callback methods follow the pattern `async_step_<step_id>`. The docs for [Data Entry Flow](data_entry_flow_index.md) describe the different return values of a step. Here is an example of how to define the `user` step:
+Your config flow will need to define steps of your configuration flow. Each step is identified by a unique step name (`step_id`). The step callback methods follow the pattern `async_step_<step_id>`. The docs for [Data Entry Flow](/docs/data_entry_flow_index.md) describe the different return values of a step. Here is an example of how to define the `user` step:
 
 ```python
 import voluptuous as vol
@@ -65,21 +61,21 @@ class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
 There are a few step names reserved for system use:
 
-| Step name   | Description                                                                                                                                                   |
-| ----------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `bluetooth`        | Invoked if your integration has been discovered via Bluetooth as specified [using `bluetooth` in the manifest](creating_integration_manifest.md#bluetooth).             |
-| `discovery` | _DEPRECATED_ Invoked if your integration has been discovered and the matching step has not been defined.             |
-| `dhcp`      | Invoked if your integration has been discovered via DHCP as specified [using `dhcp` in the manifest](creating_integration_manifest.md#dhcp).             |
-| `hassio`    | Invoked if your integration has been discovered via a Supervisor add-on.
-| `homekit`   | Invoked if your integration has been discovered via HomeKit as specified [using `homekit` in the manifest](creating_integration_manifest.md#homekit).         |
-| `mqtt`      | Invoked if your integration has been discovered via MQTT as specified [using `mqtt` in the manifest](creating_integration_manifest.md#mqtt).             |
-| `ssdp`      | Invoked if your integration has been discovered via SSDP/uPnP as specified [using `ssdp` in the manifest](creating_integration_manifest.md#ssdp).             |
-| `usb`       | Invoked if your integration has been discovered via USB as specified [using `usb` in the manifest](creating_integration_manifest.md#usb).             |
-| `user`      | Invoked when a user initiates a flow via the user interface or when discovered and the matching and discovery step are not defined.                                                                                                  |
-| `reconfigure`      | Invoked when a user initiates a flow to reconfigure an existing config entry via the user interface.                                                                                                  |
-| `zeroconf`  | Invoked if your integration has been discovered via Zeroconf/mDNS as specified [using `zeroconf` in the manifest](creating_integration_manifest.md#zeroconf). |
-| `reauth`    | Invoked if your integration indicates it [requires reauthentication, e.g., due to expired credentials](#reauthentication). |
-| `import`    | Reserved for migrating from YAML configuration to config entries. |
+| Step name   | Description                                                                                                                                                         |
+| ----------- |---------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `bluetooth`        | Invoked if your integration has been discovered via Bluetooth as specified [using `bluetooth` in the manifest](/docs/creating_integration_manifest.md#bluetooth).   |
+| `discovery` | _DEPRECATED_ Invoked if your integration has been discovered and the matching step has not been defined.                                                            |
+| `dhcp`      | Invoked if your integration has been discovered via DHCP as specified [using `dhcp` in the manifest](/docs/creating_integration_manifest.md#dhcp).                  |
+| `hassio`    | Invoked if your integration has been discovered via a Supervisor add-on.                                                                                            
+| `homekit`   | Invoked if your integration has been discovered via HomeKit as specified [using `homekit` in the manifest](/docs/creating_integration_manifest.md#homekit).         |
+| `mqtt`      | Invoked if your integration has been discovered via MQTT as specified [using `mqtt` in the manifest](/docs/creating_integration_manifest.md#mqtt).                  |
+| `ssdp`      | Invoked if your integration has been discovered via SSDP/uPnP as specified [using `ssdp` in the manifest](/docs/creating_integration_manifest.md#ssdp).             |
+| `usb`       | Invoked if your integration has been discovered via USB as specified [using `usb` in the manifest](/docs/creating_integration_manifest.md#usb).                     |
+| `user`      | Invoked when a user initiates a flow via the user interface or when discovered and the matching and discovery step are not defined.                                 |
+| `reconfigure`      | Invoked when a user initiates a flow to reconfigure an existing config entry via the user interface.                                                                |
+| `zeroconf`  | Invoked if your integration has been discovered via Zeroconf/mDNS as specified [using `zeroconf` in the manifest](/docs/creating_integration_manifest.md#zeroconf). |
+| `reauth`    | Invoked if your integration indicates it [requires reauthentication, e.g., due to expired credentials](#reauthentication).                                          |
+| `import`    | Reserved for migrating from YAML configuration to config entries.                                                                                                   |
 
 ## Unique IDs
 
@@ -190,7 +186,7 @@ To get started, run `python3 -m script.scaffold config_flow_discovery` and follo
 
 ## Configuration via OAuth2
 
-Home Assistant has built-in support for integrations that offer account linking using [the OAuth2 authorization framework](https://www.rfc-editor.org/rfc/rfc6749). To be able to leverage this, you will need to structure your Python API library in a way that allows Home Assistant to be responsible for refreshing tokens. See our [API library guide](api_lib_index.md) on how to do this.
+Home Assistant has built-in support for integrations that offer account linking using [the OAuth2 authorization framework](https://www.rfc-editor.org/rfc/rfc6749). To be able to leverage this, you will need to structure your Python API library in a way that allows Home Assistant to be responsible for refreshing tokens. See our [API library guide](/docs/api_lib_index.md) on how to do this.
 
 The built-in OAuth2 support works out of the box with locally configured client ID / secret using the [Application Credentials platform](/docs/core/platform/application_credentials) and with the Home Assistant Cloud Account Linking service. This service allows users to link their account with a centrally managed client ID/secret. If you want your integration to be part of this service, reach out to us at [partner@openhomefoundation.org](mailto:partner@openhomefoundation.org).
 
@@ -232,15 +228,25 @@ To get started, run `python3 -m script.scaffold config_flow_oauth2` and follow t
 }
 ```
 
-When the translations are merged into Home Assistant, they will be automatically uploaded to [Lokalise](https://lokalise.co/) where the translation team will help to translate them in other languages. While developing locally, you will need to run `python3 -m script.translations develop` to see changes made to `strings.json` [More info on translating Home Assistant.](translations.md)
+When the translations are merged into Home Assistant, they will be automatically uploaded to [Lokalise](https://lokalise.com/) where the translation team will help to translate them in other languages. While developing locally, you will need to run `python3 -m script.translations develop` to see changes made to `strings.json` [More info on translating Home Assistant.](/docs/translations.md)
 
 ## Config entry migration
 
-As mentioned above - each Config Entry has a version assigned to it. This is to be able to migrate Config Entry data to new formats when Config Entry schema changes.
+Each config entry has a version assigned to it, made up of a major and a minor version. This is to be able to migrate config entry data to new formats when the config entry schema changes. Both `VERSION` and `MINOR_VERSION` default to `1` if not explicitly set in the config flow, so integrations only need to set them when implementing a migration.
 
 Migration can be handled programmatically by implementing function `async_migrate_entry` in your integration's `__init__.py` file. The function should return `True` if migration is successful.
 
-The version is made of a major and minor version. If minor versions differ but major versions are the same, integration setup will be allowed to continue even if the integration does not implement `async_migrate_entry`. This means a minor version bump is backwards compatible unlike a major version bump which causes the integration to fail setup if the user downgrades Home Assistant Core without restoring their configuration from backup.
+If minor versions differ but major versions are the same, integration setup will be allowed to continue even if the integration does not implement `async_migrate_entry`. This means a minor version bump is backwards compatible unlike a major version bump which causes the integration to fail setup if the user downgrades Home Assistant Core without restoring their configuration from backup.
+
+To set a new version, add `VERSION` and/or `MINOR_VERSION` to your config flow class:
+
+```python
+class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
+    """Example config flow."""
+
+    VERSION = 2
+    MINOR_VERSION = 2
+```
 
 ```python
 # Example migration function
@@ -308,8 +314,8 @@ Ensuring that the `unique_id` is unchanged should be done using `await self.asyn
 
 ## Reauthentication
 
-Gracefully handling authentication errors such as invalid, expired, or revoked tokens is needed to advance on the [Integration Quality Scale](core/integration-quality-scale). This example of how to add reauth to the OAuth flow created by `script.scaffold` following the pattern in [Building a Python library](api_lib_auth.md#oauth2).
-If you are looking for how to trigger the reauthentication flow, see [handling expired credentials](integration_setup_failures.md#handling-expired-credentials).
+Gracefully handling authentication errors such as invalid, expired, or revoked tokens is needed to advance on the [Integration Quality Scale](/docs/core/integration-quality-scale). This example of how to add reauth to the OAuth flow created by `script.scaffold` following the pattern in [Building a Python library](/docs/api_lib_auth.md#oauth2).
+If you are looking for how to trigger the reauthentication flow, see [handling expired credentials](/docs/integration_setup_failures.md#handling-expired-credentials).
 
 This example catches an authentication exception in config entry setup in `__init__.py` and instructs the user to visit the integrations page in order to reconfigure the integration.
 
@@ -522,6 +528,48 @@ class ExampleFlow(ConfigFlow):
         )
 ```
 
+### Use async_on_create_entry
+
+The `async_on_create_entry` provides an option to modify the final `ConfigFlowResult` after the config entry has been created and the flow finalizes.
+
+As subentry flows and option flows are dependent on that the main config entry exist before they can be started, these flow types can only be used with the `async_on_create_entry()` method in your config flow:
+
+```python
+from homeassistant.config_entries import (
+    ConfigFlow,
+    FlowType,
+    SOURCE_USER,
+    SubentryFlowContext,
+)
+
+
+class ExampleFlow(ConfigFlow):
+    """Example flow."""
+
+    async def async_on_create_entry(
+        self, result: ConfigFlowResult
+    ) -> ConfigFlowResult:
+        """Create subentry flow after creating the main entry."""
+        subentry_result = await self.hass.config_entries.subentries.async_init(
+            (result["result"].entry_id, "subentry_type"),
+            context=SubentryFlowContext(source=SOURCE_USER),
+        )
+        result["next_flow"] = (
+            FlowType.CONFIG_SUBENTRIES_FLOW,
+            subentry_result["flow_id"],
+        )
+        return result
+
+    async def async_step_user(
+        self, user_input: dict[str, Any] | None = None
+    ) -> ConfigFlowResult:
+        """Create entry."""
+        return self.async_create_entry(
+            title="Example",
+            data={},
+        )
+```
+
 ## Use SchemaConfigFlowHandler for simple flows
 
 For helpers and integrations with simple config flows, you can use the `SchemaConfigFlowHandler` instead.
@@ -593,4 +641,4 @@ class MyConfigFlowHandler(SchemaConfigFlowHandler, domain=DOMAIN):
 
 ## Testing your config flow
 
-Integrations with a config flow require full test coverage of all code in `config_flow.py` to be accepted into core. [Test your code](development_testing.md#running-a-limited-test-suite) includes more details on how to generate a coverage report.
+Integrations with a config flow require full test coverage of all code in `config_flow.py` to be accepted into core. [Test your code](/docs/development_testing.md#running-a-limited-test-suite) includes more details on how to generate a coverage report.

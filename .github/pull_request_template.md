@@ -21,6 +21,7 @@
 - [ ] Document existing features within Home Assistant
 - [ ] Document new or changing features for which there is an existing pull request elsewhere
 - [ ] Spelling or grammatical corrections, or rewording for improved clarity
+- [ ] Editing or restructuring documentation guidelines
 - [ ] Changes to the backend of this documentation
 - [ ] Remove stale or deprecated documentation
 

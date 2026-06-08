@@ -69,6 +69,29 @@ entry.async_on_unload(
 )
 ```
 
+#### Requesting on-demand active scanning
+
+When the matcher targets a specific `address` and `mode` is not `PASSIVE`, the callback registration can also opt that address in to the active-scan scheduler used by `AUTO`-mode scanners. This lets an integration ask for short active-scan windows on a cadence that suits its device, without forcing the whole system into continuous active scanning.
+
+Pass `scan_interval` (seconds between window starts) and/or `scan_duration` (seconds per window) as keyword arguments. Both are optional; when omitted, habluetooth's defaults (5 minutes interval, 10 seconds duration) are used. The effective window is clamped to habluetooth's allowed range. Without an `address` in the matcher the active-scan request is skipped; the callback itself still fires normally.
+
+```python
+from homeassistant.components import bluetooth
+
+...
+
+entry.async_on_unload(
+    bluetooth.async_register_callback(
+        hass,
+        _async_specific_device_found,
+        {"address": "44:33:11:22:33:22"},
+        bluetooth.BluetoothScanningMode.ACTIVE,
+        scan_interval=600.0,
+        scan_duration=10.0,
+    )
+)
+```
+
 ### Fetch the shared BleakScanner instance
 
 Integrations that need an instance of a `BleakScanner` should call the `bluetooth.async_get_scanner` API. This API returns a wrapper around a single `BleakScanner` that allows integrations to share without overloading the system.
@@ -242,6 +265,18 @@ from homeassistant.components import bluetooth
 bluetooth.async_rediscover_address(hass, "44:44:33:11:23:42")
 ```
 
+### Triggering a one-shot active scan
+
+For config flow discovery and other one-shot probes, `bluetooth.async_request_active_scan` runs an on-demand active sweep across every `AUTO` mode scanner without waiting for the periodic rediscovery cadence. It awaits `duration` seconds so the caller can then read newly discovered advertisements. `duration` is optional; when omitted, habluetooth's on-demand sweep duration is used. The scheduler clamps the value to its allowed range. Concurrent callers dedupe to a single bus wide window.
+
+Only `AUTO` mode scanners are affected; `PASSIVE` and `ACTIVE` scanners are user-explicit choices and are left alone.
+
+```python
+from homeassistant.components import bluetooth
+
+await bluetooth.async_request_active_scan(hass)
+```
+
 ### Clearing match history for rediscovery
 
 The Bluetooth integration tracks which advertisement fields (manufacturer_data UUIDs, service_data UUIDs, service_uuids) have been seen for each device to determine when to trigger discovery. It only checks if the UUIDs have been seen before, not whether their content has changed.
@@ -268,6 +303,26 @@ Do not use this API for devices whose advertisement data changes frequently (e.g
 This API is intended for infrequent state changes such as factory resets or major operational mode transitions, not for regular data updates.
 :::
 
+### Clearing cached advertisement history
+
+To reduce overhead, the Bluetooth manager drops advertisements when the `manufacturer_data`, `service_data`, `service_uuids`, and `name` fields all match the previously seen advertisement from the same address. This means a device that emits an unchanging "I am awake" advertisement will only deliver the first packet to your callback; subsequent identical packets are silently deduplicated.
+
+The `bluetooth.async_clear_advertisement_history` API clears the cached advertisement state for a single address so the next advertisement is treated as new data and dispatched to callbacks, even if the payload is byte-for-byte identical to the previous one.
+
+This is useful for integrations that connect to a device over GATT to read sensor data and need to know when the device wakes up again; after the GATT session ends, call `async_clear_advertisement_history` so the next wake-up advertisement is delivered.
+
+```python
+from homeassistant.components import bluetooth
+
+# After disconnecting from the device, clear the cached advertisement
+# so the next identical "I am awake" packet is dispatched to callbacks
+bluetooth.async_clear_advertisement_history(hass, "44:44:33:11:23:42")
+```
+
+:::note
+This clears only the advertisement deduplication state; it does not affect the integration matcher history. If you also need future advertisements to re-trigger discovery flows, use `async_clear_address_from_match_history` or `async_rediscover_address`.
+:::
+
 ### Waiting for a specific advertisement
 
 To wait for a specific advertisement, call the `bluetooth.async_process_advertisements` API.
@@ -289,6 +344,8 @@ service_info = await bluetooth.async_process_advertisements(
     ADDITIONAL_DISCOVERY_TIMEOUT
 )
 ```
+
+When `mode` is not `PASSIVE` and the matcher contains an `address`, `timeout` is also forwarded to the active-scan scheduler as `scan_duration`, so `AUTO`-mode scanners flip ACTIVE for the address while waiting for the advertisement.
 
 ### Registering an external scanner
 
