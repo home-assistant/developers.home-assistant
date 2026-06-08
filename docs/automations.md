@@ -98,7 +98,8 @@ async def async_get_triggers(hass: HomeAssistant) -> dict[str, type[Trigger]]:
 
 ## Conditions
 
-Conditions are checks that must be met in order for an automation to trigger. Implement them in the `condition` platform (`condition.py`) of your integration by creating and registering condition classes.
+When an automation is triggered, it may have conditions that have to be met for the action to be executed.
+Conditions are created in the `condition` platform (`condition.py`) of your integration by creating and registering condition classes.
 
 ### Condition class
 
@@ -109,7 +110,7 @@ Just as with the [trigger class](#trigger-class), `async_validate_config` is use
 In the following snippet we create a condition that can be configured to only pass when `binary_sensor.front_door` has a desired configured state.
 
 ```python
-from typing import TYPE_CHECKING, override
+from typing import TYPE_CHECKING, Unpack, override
 
 import voluptuous as vol
 
@@ -118,7 +119,8 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.condition import (
     Condition,
-    ConditionCheckerType,
+    ConditionChecker,
+    ConditionCheckParams,
     ConditionConfig,
     trace_condition_function,
 )
@@ -146,21 +148,20 @@ class DoorStateConditionBase(Condition):
         self, hass: HomeAssistant, config: ConditionConfig
     ) -> None:
         """Initialize condition."""
-        self._hass = hass
+        super().__init__(hass, config)
         if TYPE_CHECKING:
             assert config.options
         self._state = config.options[CONF_STATE]
 
     @override
-    async def async_get_checker(self) -> ConditionCheckerType:
+    async def async_get_checker(self) -> ConditionChecker:
         """Get the condition checker."""
 
-        @trace_condition_function
-        def test_state(hass: HomeAssistant, _: TemplateVarsType = None) -> bool:
+        def test_state(**kwargs: Unpack[ConditionCheckParams]) -> bool:
             """Test state condition."""
             # In reality this would be more configurable
             # but for the sake of example it's simplified.
-            return hass.states.get("binary_sensor.front_door") == self._state
+            return self._hass.states.get("binary_sensor.front_door") == self._state
 
         return test_state
 ```
