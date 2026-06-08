@@ -99,10 +99,10 @@ async def async_get_triggers(hass: HomeAssistant) -> dict[str, type[Trigger]]:
 
 ### Trigger schema
 
-The frontend uses the `triggers.yaml` file to know the structure of the triggers.
+Triggers should have their description in a `triggers.yaml` file. The description specifies the structure of the triggers and is used by the frontend, for example.
 This file is similar to `services.yaml`.
 
-For example, the following snippet shows a trigger that takes a target binary sensor with a specific device class and a select selector with a predefined set of options.
+The following snippet shows a trigger that takes a target binary sensor with a specific device class and a select selector with a predefined set of options.
 
 ```yaml
 occupancy_cleared:
