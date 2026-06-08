@@ -56,13 +56,18 @@ Only heading levels 2 and 3 are shown in the right-hand table of contents.
 
 ## Emphasis
 
-To emphasize a word, use `_italics_`. Don't use `*asterisks*`.
+To emphasize a word, use italics.
+Use underscores (`_`) for italics, for example: `_emphasized words_`. Don't use asterisks (`*`).
 
 Do not use ALL CAPITALS for emphasis.
 
 ## UI elements and steps
 
-To refer to UI elements, use `**bold**` and use `>` in breadcrumbs.
+To refer to UI elements, use bold.
+Use double asterisks (`**`) for bold, for example: `**bolded words**`.
+
+When writing UI steps, use the greater than character (`>`) in breadcrumbs.
+Do not make it bold.
 
 For example:
 
