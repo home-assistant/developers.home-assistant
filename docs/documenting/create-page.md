@@ -4,17 +4,22 @@ title: "Adding an integration page"
 
 To create a new integration page, follow these steps:
 
-1. Make a copy of the [integration documentation template](https://github.com/home-assistant/home-assistant.io/tree/current/source/_integrations/_integration_docs_template.markdown) and edit it.
-2. Make sure the filename of the integration page matches the domain name of the integration.
+1. The documentation repository has two main branches: `current` and `next`:
+   - If you are documenting a new integration you are adding to the code, switch to the `next` branch.
+2. Make a copy of the [integration documentation template](https://github.com/home-assistant/home-assistant.io/tree/current/source/_integrations/_integration_docs_template.markdown) and edit it.
+3. Make sure the filename of the integration page matches the domain name of the integration.
    - The [Integration overview](https://www.home-assistant.io/integrations/) and the [Examples section](https://www.home-assistant.io/cookbook/) are generated automatically, so there is no need to add a link to those pages.
-3. Make sure to follow the [Standards](documenting/standards.md) we have for the documentation, including:
+4. Make sure to follow the [Standards](documenting/standards.md) we have for the documentation, including:
    - [General style guide](/docs/documenting/general-style-guide).
    - [YAML Style Guide](/docs/documenting/yaml-style-guide.md)
    - [Documentation structure and example text](/docs/documenting/integration-docs-examples)
-4. Make sure to add [icon and logo](#images-icons-and-logos) to the brands repository.
-5. Document the needed steps to retrieve API keys or access token for the third party service or device if needed.
-6. Add the type of the devices (incl. firmware) you have tested when you know that there are multiple out there.
-7. Before marking your PR as **Ready for review**, remove the comments.
+5. Make sure to add [icon and logo](#images-icons-and-logos) to the brands repository.
+   - If your integration was a custom integration (HACS), move the brand files into the `core_integrations` folder.
+6. Document the steps required to retrieve API keys or access token for the third-party service or device, if needed.
+7. Make sure the documentation does not refer to custom integrations. The steps and examples, including automation examples, should not depend on custom cards or custom integrations.
+8. Add the type of the devices (including firmware) you have tested when you know that there are multiple out there.
+9. When adding blueprints, upload them either to the blueprints folder under [`https://github.com/home-assistant/home-assistant.io/tree/current/source/blueprints/integrations`](https://github.com/home-assistant/home-assistant.io/tree/current/source/blueprints/integrations), or to the [blueprint exchange on the forums](https://community.home-assistant.io/c/blueprints-exchange). On the integration page, add a link to the blueprint exchange.
+10. Before marking your PR as **Ready for review**, remove the comments.
 
 ## About the integration page header format
 
@@ -24,8 +29,10 @@ If you start from scratch with a page, you need to add a header. Different secti
 ---
 title: "Awesome Sensor"
 description: "home-assistant.io web presence"
-ha_release: "0.38"
+ha_release: 2026.6
 ha_category: Sensor
+ha_platforms:
+  - sensor
 ha_iot_class: "Local Polling"
 ha_quality_scale: silver
 ha_config_flow: true
@@ -53,6 +60,7 @@ Additional keys for the file header:
   - If the current release is 2025.8, make `ha_release` 2025.9.
   - For the October release, as in '2025.10', quote it with `' '`, otherwise the zero won't be displayed.
 - `ha_category`: This entry is used to group the integration on the [Integration overview](https://www.home-assistant.io/integrations/).
+- `ha_platforms`: This entry lists all implemented [platforms](/docs/creating_platform_index).
 - `ha_iot_class`: [IoT class](https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things) is the classifier for the device's behavior.
 - `ha_quality_scale`: The integration's rating on the [quality scale](https://www.home-assistant.io/docs/quality_scale/) (such as bronze, silver, gold, or platinum). For new integrations, set this to `bronze`. This field is automatically updated when the integration's quality level changes in Core. You don't need to update this manually in the documentation.
 - `ha_config_flow`: Set to `true` if the integration has a [Data Entry Flow](/data_entry_flow_index.md), omit otherwise.
@@ -65,9 +73,33 @@ There are [pre-defined variables](https://jekyllrb.com/docs/variables/) availabl
 
 ### Configuration
 
-Every platform page should contain a configuration sample. This sample must contain only the **required** variables to make it easy to copy and paste it for users into their `configuration.yaml` file.
+Every integration page should contain a configuration example. This includes UI variable descriptions for integrations with a configuration flow, and YAML configuration for integrations that don't yet support a configuration flow.
 
-The **Configuration Variables** section must use the `{% configuration %} ... {% endconfiguration %}` tag.
+### UI variables
+
+- For describing **UI variables** use the `{% configuration_basic %}` section.
+- The `{% configuration_basic %}` block is like the `{% configuration %}` block, but does not have the `required` or `type` fields.
+
+### About configuration variables
+
+- The **Configuration variables** section is only used for YAML configuration.
+- The **Configuration variables** section must use the `{% configuration %}` tag.
+- Configuration variables must document the default value, if any.
+- Configuration variables must document if the variable is required (`false` or `true`). If the variable has a default value, then it is not required and the `required` field should be set to `false`.
+- Configuration variables must document the accepted value types (see [configuration variables details](#configuration)).
+  - For configuration variables that accept multiple types, separate the types with a comma (i.e. `string, integer`).
+
+### Example configuration variables block
+
+```yaml
+{% configuration %}
+some_key:
+  description: This is a description of what this key is for.
+  required: false
+  type: string
+  default: Optional default value - leave out if there isn't one
+{% endconfiguration %}
+```
 
 ```text
 {% configuration %}
@@ -105,7 +137,7 @@ required: exclusive       #=> Exclusive
 required: any string here #=> Any string here
 ```
 
-- **`type:`**: The type of the variable. Allowed entries: `action`, `boolean`, `string`, `integer`, `float`, `time`, `template`, `device_class`, `icon`, `map`/`list` (for a list of entries), `date`, `datetime`, `selector`, and `any`. For multiple possibilities use `[string, integer]`. If you use `map`/`list` then should define `keys:` (see the [`template` sensor](https://www.home-assistant.io/integrations/sensor.template/) for an example). If you use `boolean`, then `default:` must be defined. 
+- **`type:`**: The type of the variable. Allowed entries: `action`, `boolean`, `string`, `integer`, `float`, `time`, `template`, `device_class`, `icon`, `map`/`list` (for a list of entries), `date`, `datetime`, `timedelta`, `selector`, and `any`. For multiple possibilities use `[string, integer]`. If you use `map`/`list` then you should define `keys:` (see the [`template` sensor](https://www.home-assistant.io/integrations/sensor.template/) for an example). If you use `boolean`, then `default:` must be defined.
 
 ### Embedding code
 
@@ -133,9 +165,9 @@ Please note, if you want to use Markdown inside an HTML block, it has to be surr
 
 ```html
 <div class='note warning'>
-  
+
   You need to enable [**telnet**](https://en.wikipedia.org/wiki/Telnet) on your router.
-  
+
 </div>
 ```
 
@@ -156,4 +188,7 @@ however, the logo must exist in our Brands repository.
 
 ### Linking from the sidebar
 
-If you are adding a new page that requires linking from the sidebar, you need to edit the `docs_navigation.html` file in `source/_includes/asides/docs_navigation.html`.
+If you are adding a new page that requires linking from the sidebar, edit either:
+
+- [`docs_navigation.html`](https://github.com/home-assistant/home-assistant.io/blob/current/source/_includes/asides/docs_navigation.html)
+- [`docs_sitemap.html`](https://github.com/home-assistant/home-assistant.io/blob/current/source/_includes/asides/docs_sitemap.html)

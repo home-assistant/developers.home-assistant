@@ -52,10 +52,10 @@ and are combined using the bitwise or (`|`) operator.
 ```python
 class MyLock(LockEntity):
 
-    def lock(self, **kwargs):
+    def lock(self, **kwargs: Any) -> None:
         """Lock all or specified locks. A code to lock the lock with may optionally be specified."""
 
-    async def async_lock(self, **kwargs):
+    async def async_lock(self, **kwargs: Any) -> None:
         """Lock all or specified locks. A code to lock the lock with may optionally be specified."""
 ```
 
@@ -64,10 +64,10 @@ class MyLock(LockEntity):
 ```python
 class MyLock(LockEntity):
 
-    def unlock(self, **kwargs):
+    def unlock(self, **kwargs: Any) -> None:
         """Unlock all or specified locks. A code to unlock the lock with may optionally be specified."""
 
-    async def async_unlock(self, **kwargs):
+    async def async_unlock(self, **kwargs: Any) -> None:
         """Unlock all or specified locks. A code to unlock the lock with may optionally be specified."""
 ```
 
@@ -78,9 +78,9 @@ Only implement this method if the flag `SUPPORT_OPEN` is set.
 ```python
 class MyLock(LockEntity):
 
-    def open(self, **kwargs):
+    def open(self, **kwargs: Any) -> None:
         """Open (unlatch) all or specified locks. A code to open the lock with may optionally be specified."""
 
-    async def async_open(self, **kwargs):
+    async def async_open(self, **kwargs: Any) -> None:
         """Open (unlatch) all or specified locks. A code to open the lock with may optionally be specified."""
 ```

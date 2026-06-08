@@ -10,20 +10,20 @@ A light entity controls the brightness, hue and saturation color value, white va
 
 | Name | Type | Default | Description
 | ---- | ---- | ---- | ----
-| brightness            | <code>int &#124; None</code>                            | `None` | The brightness of this light between 1..255
-| color_mode            | <code>ColorMode &#124; None</code>                      | `None` | The color mode of the light. The returned color mode must be present in the `supported_color_modes` property unless the light is rendering an effect.
-| color_temp_kelvin     | <code>int &#124; None</code>                            | `None` | The CT color value in K. This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.COLOR_TEMP` and ignored otherwise.
-| effect                | <code>str &#124; None</code>                            | `None` | The current effect. Should be `EFFECT_OFF` if the light supports effects and no effect is currently rendered.
-| effect_list           | <code>list[str] &#124; None</code>                      | `None` | The list of supported effects.
-| hs_color              | <code>tuple[float, float] &#124; None</code>            | `None` | The hue and saturation color value (float, float). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.HS` and ignored otherwise.
-| is_on                 | <code>bool &#124; None</code>                           | `None` | If the light entity is on or not.
-| max_color_temp_kelvin | <code>int &#124; None</code>                            | `None` | The coldest color_temp_kelvin that this light supports.
-| min_color_temp_kelvin | <code>int &#124; None</code>                            | `None` | The warmest color_temp_kelvin that this light supports.
-| rgb_color             | <code>tuple[int, int, int] &#124; None</code>           | `None` | The rgb color value (int, int, int). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.RGB` and ignored otherwise.
-| rgbw_color            | <code>tuple[int, int, int, int] &#124; None</code>      | `None` | The rgbw color value (int, int, int, int). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.RGBW` and ignored otherwise.
-| rgbww_color           | <code>tuple[int, int, int, int, int] &#124; None</code> | `None` | The rgbww color value (int, int, int, int, int). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.RGBWW` and ignored otherwise.
-| supported_color_modes | <code>set[ColorMode] &#124; None</code>                 | `None` | Flag supported color modes.
-| xy_color              | <code>tuple[float, float] &#124; None</code>            | `None` | The xy color value (float, float). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.XY` and ignored otherwise.
+| brightness            | `int \| None`                            | `None` | The brightness of this light between 1..255
+| color_mode            | `ColorMode \| None`                      | `None` | The color mode of the light. The returned color mode must be present in the `supported_color_modes` property unless the light is rendering an effect.
+| color_temp_kelvin     | `int \| None`                            | `None` | The CT color value in K. This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.COLOR_TEMP` and ignored otherwise.
+| effect                | `str \| None`                            | `None` | The current effect. Should be `EFFECT_OFF` if the light supports effects and no effect is currently rendered.
+| effect_list           | `list[str] \| None`                      | `None` | The list of supported effects.
+| hs_color              | `tuple[float, float] \| None`            | `None` | The hue and saturation color value (float, float). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.HS` and ignored otherwise.
+| is_on                 | `bool \| None`                           | `None` | If the light entity is on or not.
+| max_color_temp_kelvin | `int \| None`                            | `None` | The coldest color_temp_kelvin that this light supports.
+| min_color_temp_kelvin | `int \| None`                            | `None` | The warmest color_temp_kelvin that this light supports.
+| rgb_color             | `tuple[int, int, int] \| None`           | `None` | The rgb color value (int, int, int). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.RGB` and ignored otherwise.
+| rgbw_color            | `tuple[int, int, int, int] \| None`      | `None` | The rgbw color value (int, int, int, int). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.RGBW` and ignored otherwise.
+| rgbww_color           | `tuple[int, int, int, int, int] \| None` | `None` | The rgbww color value (int, int, int, int, int). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.RGBWW` and ignored otherwise.
+| supported_color_modes | `set[ColorMode] \| None`                 | `None` | Flag supported color modes.
+| xy_color              | `tuple[float, float] \| None`            | `None` | The xy color value (float, float). This property will be copied to the light's state attribute when the light's color mode is set to `ColorMode.XY` and ignored otherwise.
 
 ## Color modes
 
@@ -103,10 +103,10 @@ and are combined using the bitwise or (`|`) operator.
 
 ```python
 class MyLightEntity(LightEntity):
-    def turn_on(self, **kwargs):
+    def turn_on(self, **kwargs: Any) -> None:
         """Turn the device on."""
 
-    async def async_turn_on(self, **kwargs):
+    async def async_turn_on(self, **kwargs: Any) -> None:
         """Turn device on."""
 ```
 
@@ -136,7 +136,7 @@ BRIGHTNESS_SCALE = (1, 1023)
 ...
 
     @property
-    def brightness(self) -> Optional[int]:
+    def brightness(self) -> int | None:
         """Return the current brightness."""
         return value_to_brightness(BRIGHTNESS_SCALE, self._device.brightness)
 
@@ -145,18 +145,18 @@ BRIGHTNESS_SCALE = (1, 1023)
 To scale the brightness to the device range:
 
 ```python
-from homeassistant.util.percentage import percentage_to_ranged_value
+from homeassistant.util.color import brightness_to_value
 BRIGHTNESS_SCALE = (1, 1023)
 
 ...
 
 class MyLightEntity(LightEntity):
-    async def async_turn_on(self, **kwargs) -> None:
+    async def async_turn_on(self, **kwargs: Any) -> None:
         """Turn device on."""
 
         ...
 
-        value_in_range = math.ceil(percentage_to_ranged_value(BRIGHTNESS_SCALE, kwargs[ATTR_BRIGHTNESS]))
+        value_in_range = math.ceil(brightness_to_value(BRIGHTNESS_SCALE, kwargs[ATTR_BRIGHTNESS]))
 
 :::
 
@@ -164,9 +164,9 @@ class MyLightEntity(LightEntity):
 
 ```python
 class MyLightEntity(LightEntity):
-    def turn_off(self, **kwargs):
+    def turn_off(self, **kwargs: Any) -> None:
         """Turn the device off."""
 
-    async def async_turn_off(self, **kwargs):
+    async def async_turn_off(self, **kwargs: Any) -> None:
         """Turn device off."""
 ```

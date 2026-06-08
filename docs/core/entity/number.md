@@ -39,9 +39,9 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.BATTERY` | % | Percentage of battery that is left
 | `NumberDeviceClass.BLOOD_GLUCOSE_CONCENTRATION` | mg/dL, mmol/L | Blood glucose concentration```
 | `NumberDeviceClass.CO2` | ppm | Concentration of carbon dioxide.
-| `NumberDeviceClass.CO` | ppm, µg/m³, mg/m³ | Concentration of carbon monoxide.
+| `NumberDeviceClass.CO` | ppb, ppm, µg/m³, mg/m³ | Concentration of carbon monoxide.
 | `NumberDeviceClass.CONDUCTIVITY` | S/cm, mS/cm, µS/cm | Conductivity
-| `NumberDeviceClass.CURRENT` | A, mA | Current
+| `NumberDeviceClass.CURRENT` | A, mA, µA | Current
 | `NumberDeviceClass.DATA_RATE` | bit/s, kbit/s, Mbit/s, Gbit/s, B/s, kB/s, MB/s, GB/s, KiB/s, MiB/s, GiB/s | Data rate
 | `NumberDeviceClass.DATA_SIZE` | bit, kbit, Mbit, Gbit, B, kB, MB, GB, TB, PB, EB, ZB, YB, KiB, MiB, GiB, TiB, PiB, EiB, ZiB, YiB | Data size
 | `NumberDeviceClass.DISTANCE` | km, m, cm, mm, mi, nmi, yd, in | Generic distance
@@ -49,17 +49,17 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.ENERGY` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal | Energy, this device class should be used to represent energy consumption, for example an electricity meter. Represents _power_ over _time_. Not to be confused with `power`.
 | `NumberDeviceClass.ENERGY_DISTANCE` | kWh/100km, Wh/km, mi/kWh, km/kWh | Energy per distance, this device class should be used to represent energy consumption by distance, for example the amount of electric energy consumed by an electric car.
 | `NumberDeviceClass.ENERGY_STORAGE` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal | Stored energy, this device class should be used to represent stored energy, for example the amount of electric energy currently stored in a battery or the capacity of a battery. Represents _power_ over _time_. Not to be confused with `power`.
-| `NumberDeviceClass.FREQUENCY` | Hz, kHz, MHz, GHz | Frequency
+| `NumberDeviceClass.FREQUENCY` | mHz, Hz, kHz, MHz, GHz | Frequency
 | `NumberDeviceClass.GAS` | L, m³, ft³, CCF, MCF | Volume of gas. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
 | `NumberDeviceClass.HUMIDITY` | % | Relative humidity
 | `NumberDeviceClass.ILLUMINANCE` | lx | Light level
 | `NumberDeviceClass.IRRADIANCE` | W/m², BTU/(h⋅ft²) | Irradiance
 | `NumberDeviceClass.MOISTURE` | % | Moisture
 | `NumberDeviceClass.MONETARY` | [ISO 4217](https://en.wikipedia.org/wiki/ISO_4217#Active_codes) | Monetary value with a currency.
-| `NumberDeviceClass.NITROGEN_DIOXIDE` | µg/m³ | Concentration of nitrogen dioxide
-| `NumberDeviceClass.NITROGEN_MONOXIDE` | µg/m³ | Concentration of nitrogen monoxide
+| `NumberDeviceClass.NITROGEN_DIOXIDE` | ppb, ppm, µg/m³ | Concentration of nitrogen dioxide
+| `NumberDeviceClass.NITROGEN_MONOXIDE` | ppb, µg/m³ | Concentration of nitrogen monoxide
 | `NumberDeviceClass.NITROUS_OXIDE` | µg/m³ | Concentration of nitrous oxide
-| `NumberDeviceClass.OZONE` | µg/m³ | Concentration of ozone
+| `NumberDeviceClass.OZONE` | ppb, ppm, µg/m³ | Concentration of ozone
 | `NumberDeviceClass.PH` | None | Potential hydrogen (pH) of an aqueous solution
 | `NumberDeviceClass.PM1` | µg/m³ | Concentration of particulate matter less than 1 micrometer
 | `NumberDeviceClass.PM25` | µg/m³ | Concentration of particulate matter less than 2.5 micrometers
@@ -75,7 +75,7 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.SIGNAL_STRENGTH` | dB, dBm | Signal strength
 | `NumberDeviceClass.SOUND_PRESSURE` | dB, dBA | Sound pressure
 | `NumberDeviceClass.SPEED` | ft/s, in/d, in/h, in/s, km/h, kn, m/s, mph, mm/d, mm/s | Generic speed
-| `NumberDeviceClass.SULPHUR_DIOXIDE` | µg/m³ | Concentration of sulphure dioxide
+| `NumberDeviceClass.SULPHUR_DIOXIDE` | ppb, µg/m³ | Concentration of sulphure dioxide
 | `NumberDeviceClass.TEMPERATURE` | °C, °F, K | Temperature.
 | `NumberDeviceClass.TEMPERATURE_DELTA` | °C, °F, K | This device class represents a temperature interval (delta), i.e. the difference between two temperature values.
 | `NumberDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³, mg/m³ | Concentration of volatile organic compounds

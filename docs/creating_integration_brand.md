@@ -53,3 +53,7 @@ A list of integration domains implementing offerings of the brand.
 ## IoT standards
 
 A list of IoT standards which are supported by devices of the brand. Possible values are `homekit`, `zigbee` and `zwave`. Note that a certain device may not support any of the listed IoT standards.
+
+## Brand images
+
+Brand images (icons and logos) for brands are stored in the [brands repository](https://github.com/home-assistant/brands). For more details on brand images and how they are served, see [Brand images](/docs/core/integration/brand_images.md).

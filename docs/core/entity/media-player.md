@@ -16,38 +16,38 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name                            | Type                                            | Default | Description
 | ------------------------------- | ----------------------------------------------- | ------- | -----------
-| app_id                          | <code>str &#124; None</code>                    | `None`  | ID of the current running app.
-| app_name                        | <code>str &#124; None</code>                    | `None`  | Name of the current running app.
-| device_class                    | <code>MediaPlayerDeviceClass &#124; None</code> | `None`  | Type of media player.
-| group_members                   | <code>list[str] &#124; None</code>              | `None`  | A dynamic list of player entities which are currently grouped together for synchronous playback. If the platform has a concept of defining a group leader, the leader should be the first element in that list.
-| is_volume_muted                 | <code>bool &#124; None</code>                   | `None`  | `True` if if volume is currently muted.
-| media_album_artist              | <code>str &#124; None</code>                    | `None`  | Album artist of current playing media, music track only.
-| media_album_name                | <code>str &#124; None</code>                    | `None`  | Album name of current playing media, music track only.
-| media_artist                    | <code>str &#124; None</code>                    | `None`  | Artist of current playing media, music track only.
-| media_channel                   | <code>str &#124; None</code>                    | `None`  | Channel currently playing.
-| media_content_id                | <code>str &#124; None</code>                    | `None`  | Content ID of current playing media.
-| media_content_type              | <code>MediaType &#124; str &#124; None</code>   | `None`  | Content type of current playing media.
-| media_duration                  | <code>int &#124; None</code>                    | `None`  | Duration of current playing media in seconds.
-| media_episode                   | <code>str &#124; None</code>                    | `None`  | Episode of current playing media, TV show only.
-| media_image_hash                | <code>str &#124; None</code>                    | `None`  | Hash of media image, defaults to SHA256 of `media_image_url` if `media_image_url` is not `None`.
-| media_image_remotely_accessible | <code>bool &#124; None</code>                   | `False` | `True` if property `media_image_url` is accessible outside of the home network.
-| media_image_url                 | <code>str &#124; None</code>                    | `None`  | Image URL of current playing media.
-| media_playlist                  | <code>str &#124; None</code>                    | `None`  | Title of Playlist currently playing.
-| media_position                  | <code>int &#124; None</code>                    | `None`  | Position of current playing media in seconds.
-| media_position_updated_at       | <code>datetime &#124; None</code>               | `None`  | Timestamp of when `_attr_media_position` was last updated. The timestamp should be set by calling `homeassistant.util.dt.utcnow()`.
-| media_season                    | <code>str &#124; None</code>                    | `None`  | Season of current playing media, TV show only.
-| media_series_title              | <code>str &#124; None</code>                    | `None`  | Title of series of current playing media, TV show only.
-| media_title                     | <code>str &#124; None</code>                    | `None`  | Title of current playing media.
-| media_track                     | <code>int &#124; None</code>                    | `None`  | Track number of current playing media, music track only.
-| repeat                          | <code>RepeatMode &#124; str &#124; None</code>  | `None`  | Current repeat mode.
-| shuffle                         | <code>bool &#124; None</code>                   | `None`  | `True` if shuffle is enabled.
-| sound_mode                      | <code>str &#124; None</code>                    | `None`  | The current sound mode of the media player.
-| sound_mode_list                 | <code>list[str] &#124; None</code>              | `None`  | Dynamic list of available sound modes.
-| source                          | <code>str &#124; None</code>                    | `None`  | The currently selected input source for the media player.
-| source_list                     | <code>list[str] &#124; None</code>              | `None`  | The list of possible input sources for the media player. (This list should contain human readable names, suitable for frontend display).
-| state                           | <code>MediaPlayerState &#124; None</code>       | `None`  | State of the media player.
-| volume_level                    | <code>float &#124; None</code>                  | `None`  | Volume level of the media player in the range (0..1).
-| volume_step                     | <code>float &#124; None</code>                  | 0.1     | Volume step to use for the `volume_up` and `volume_down` service actions.
+| app_id                          | `str \| None`                    | `None`  | ID of the current running app.
+| app_name                        | `str \| None`                    | `None`  | Name of the current running app.
+| device_class                    | `MediaPlayerDeviceClass \| None` | `None`  | Type of media player.
+| group_members                   | `list[str] \| None`              | `None`  | A dynamic list of player entities which are currently grouped together for synchronous playback. If the platform has a concept of defining a group leader, the leader should be the first element in that list.
+| is_volume_muted                 | `bool \| None`                   | `None`  | `True` if if volume is currently muted.
+| media_album_artist              | `str \| None`                    | `None`  | Album artist of current playing media, music track only.
+| media_album_name                | `str \| None`                    | `None`  | Album name of current playing media, music track only.
+| media_artist                    | `str \| None`                    | `None`  | Artist of current playing media, music track only.
+| media_channel                   | `str \| None`                    | `None`  | Channel currently playing.
+| media_content_id                | `str \| None`                    | `None`  | Content ID of current playing media.
+| media_content_type              | `MediaType \| str \| None`   | `None`  | Content type of current playing media.
+| media_duration                  | `int \| None`                    | `None`  | Duration of current playing media in seconds.
+| media_episode                   | `str \| None`                    | `None`  | Episode of current playing media, TV show only.
+| media_image_hash                | `str \| None`                    | `None`  | Hash of media image, defaults to SHA256 of `media_image_url` if `media_image_url` is not `None`.
+| media_image_remotely_accessible | `bool \| None`                   | `False` | `True` if property `media_image_url` is accessible outside of the home network.
+| media_image_url                 | `str \| None`                    | `None`  | Image URL of current playing media.
+| media_playlist                  | `str \| None`                    | `None`  | Title of Playlist currently playing.
+| media_position                  | `int \| None`                    | `None`  | Position of current playing media in seconds.
+| media_position_updated_at       | `datetime \| None`               | `None`  | Timestamp of when `_attr_media_position` was last updated. The timestamp should be set by calling `homeassistant.util.dt.utcnow()`.
+| media_season                    | `str \| None`                    | `None`  | Season of current playing media, TV show only.
+| media_series_title              | `str \| None`                    | `None`  | Title of series of current playing media, TV show only.
+| media_title                     | `str \| None`                    | `None`  | Title of current playing media.
+| media_track                     | `int \| None`                    | `None`  | Track number of current playing media, music track only.
+| repeat                          | `RepeatMode \| str \| None`  | `None`  | Current repeat mode.
+| shuffle                         | `bool \| None`                   | `None`  | `True` if shuffle is enabled.
+| sound_mode                      | `str \| None`                    | `None`  | The current sound mode of the media player.
+| sound_mode_list                 | `list[str] \| None`              | `None`  | Dynamic list of available sound modes.
+| source                          | `str \| None`                    | `None`  | The currently selected input source for the media player.
+| source_list                     | `list[str] \| None`              | `None`  | The list of possible input sources for the media player. (This list should contain human readable names, suitable for frontend display).
+| state                           | `MediaPlayerState \| None`       | `None`  | State of the media player.
+| volume_level                    | `float \| None`                  | `None`  | Volume level of the media player in the range (0..1).
+| volume_step                     | `float \| None`                  | 0.1     | Volume step to use for the `volume_up` and `volume_down` service actions.
 
 ## Supported features
 
@@ -232,10 +232,10 @@ Optional. Switch the sound mode of the media player.
 class MyMediaPlayer(MediaPlayerEntity):
     # Implement one of these methods.
 
-    def select_sound_mode(self, sound_mode):
+    def select_sound_mode(self, sound_mode: str) -> None:
         """Switch the sound mode of the entity."""
 
-    def async_select_sound_mode(self, sound_mode):
+    async def async_select_sound_mode(self, sound_mode: str) -> None:
         """Switch the sound mode of the entity."""
 ```
 
@@ -247,10 +247,10 @@ Optional. Switch the selected input source for the media player.
 class MyMediaPlayer(MediaPlayerEntity):
     # Implement one of these methods.
 
-    def select_source(self, source):
+    def select_source(self, source: str) -> None:
         """Select input source."""
 
-    def async_select_source(self, source):
+    async def async_select_source(self, source: str) -> None:
         """Select input source."""
 ```
 
@@ -277,8 +277,8 @@ class MyMediaPlayer(MediaPlayerEntity):
     # Implement the following method.
 
     @property
-    def media_content_type(self):
-    """Content type of current playing media."""
+    def media_content_type(self) -> MediaType | str | None:
+        """Content type of current playing media."""
 ```
 
 :::info
@@ -308,17 +308,22 @@ Only use a proxy for the thumbnail if the web request originated from outside th
 In `async_get_browse_image`, use `self._async_fetch_image(url)` to fetch the image from the local network. Do not use `self._async_fetch_image_from_cache(url)` which should only be used to for the currently playing artwork.
 
 :::info
-Do not pass an url as `media_image_id`. This can allow an attacker to fetch any data from the local network.
+Do not pass a URL as `media_image_id`. This can allow an attacker to fetch any data from the local network.
 :::
 
 ```python
 class MyMediaPlayer(MediaPlayerEntity):
 
     # Implement the following method.
-    async def async_get_browse_image(self, media_content_type, media_content_id, media_image_id=None):
-    """Serve album art. Returns (content, content_type)."""
-    image_url = ...
-    return await self._async_fetch_image(image_url)
+    async def async_get_browse_image(
+        self,
+        media_content_type: str,
+        media_content_id: str,
+        media_image_id: str | None = None,
+    ) -> tuple[bytes | None, str | None]:
+        """Serve album art. Returns (content, content_type)."""
+        image_url = ...
+        return await self._async_fetch_image(image_url)
 ```
 
 ### Grouping player entities together
@@ -329,17 +334,17 @@ Optional. If your player has support for grouping player entities together for s
 class MyMediaPlayer(MediaPlayerEntity):
     # Implement one of these join methods:
 
-    def join_players(self, group_members):
+    def join_players(self, group_members: list[str]) -> None:
         """Join `group_members` as a player group with the current player."""
 
-    async def async_join_players(self, group_members):
+    async def async_join_players(self, group_members: list[str]) -> None:
         """Join `group_members` as a player group with the current player."""
 
     # Implement one of these unjoin methods:
 
-    def unjoin_player(self):
+    def unjoin_player(self) -> None:
         """Remove this player from any group."""
 
-    async def async_unjoin_player(self):
+    async def async_unjoin_player(self) -> None:
         """Remove this player from any group."""
 ```

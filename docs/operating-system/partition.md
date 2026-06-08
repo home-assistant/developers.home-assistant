@@ -48,7 +48,7 @@ The overlay partition is used to store certain operating system level settings (
 
 ### Data partition
 
-The data partition is the main partition containing all containers (Supervisor/Core/Plug-Ins and Add-Ons) as well as user data. It has by far the most I/O operations and hence benefits most if mounted on a fast storage (e.g. via the data disk feature). It is mounted to `/mnt/data`, and some subdirectories are bind mounted to other places (like `/var/lib/docker`). The file system label `hassos-data` is used to find and mount this partition.
+The data partition is the main partition containing all containers (Supervisor/Core/Plug-Ins and apps (formerly known as add-ons) as well as user data. It has by far the most I/O operations and hence benefits most if mounted on a fast storage (e.g. via the data disk feature). It is mounted to `/mnt/data`, and some subdirectories are bind mounted to other places (like `/var/lib/docker`). The file system label `hassos-data` is used to find and mount this partition.
 
 On a fresh installation, the data partition contains the latest version (at build time) of the Supervisor and its Plug-Ins. There is no Home Assistant Core pre-installed, instead a smaller landing page. The Supervisor downloads the latest version of Home Assistant Core on first boot. This makes sure that users start with the latest version of Home Assistant Core after starting the HAOS the first time.
 

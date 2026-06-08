@@ -14,7 +14,7 @@ The `reconfigure` step does not replace a `reauth` step and they have different 
 
 Reauthentication should be started automatically by the integration in the case of a login/token/etc. is invalidated, so the user has an option to adjust those settings.
 
-Reconfiguration is started by the user from the config entry options menu and should be implemented to update config entry data which are not optional for the integration to work. Authentication issues are handled with a re-authentication flow. ([See reauthentication](/docs/config_entries_config_flow_handler#reauthentication)).
+Reconfiguration is started by the user from the config entry options menu and should be implemented to update config entry data which are not optional for the integration to work. Authentication issues are handled with a re-authentication flow. ([See reauthentication](/docs/core/integration/config_flow#reauthentication)).
 
 ### Example
 

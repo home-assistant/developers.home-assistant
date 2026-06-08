@@ -6,7 +6,7 @@ sidebar_label: Update
 An update entity is an entity that indicates if an update is available for a
 device or service. This can be any update, including update of a firmware
 for a device like a light bulb or router, or software updates for things like
-add-ons or containers.
+apps (formerly known as add-ons) or containers.
 
 It can be used for:
 

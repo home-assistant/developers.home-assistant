@@ -27,7 +27,7 @@ If you use `finish` scripts in your S6-overlay services, for example, to stop th
 
 ## AppArmor
 
-You have to tweak your [AppArmor profile](/docs/add-ons/presentation#apparmor) to get it working with the new s6-Overlay. We updated our documentation with the default profile. The following changes need to be made:
+You have to tweak your [AppArmor profile](/docs/apps/presentation#apparmor) to get it working with the new s6-Overlay. We updated our documentation with the default profile. The following changes need to be made:
 
 ```txt
 # S6-Overlay
@@ -46,7 +46,7 @@ You have to tweak your [AppArmor profile](/docs/add-ons/presentation#apparmor) t
 
 ## `host_pid` option
 
-Addons running without protection mode enabled can set `host_pid: true` in their configuration. As described in the [documentation](https://developers.home-assistant.io/docs/add-ons/configuration#optional-configuration-options):
+Addons running without protection mode enabled can set `host_pid: true` in their configuration. As described in the [documentation](https://developers.home-assistant.io/docs/apps/configuration#optional-configuration-options):
 
 > Allow to run container on host PID namespace. Works only for not protected add-ons.
 

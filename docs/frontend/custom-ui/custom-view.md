@@ -1,5 +1,5 @@
 ---
-title: "Custom view layout"
+title: "Custom views"
 ---
 
 By default Home Assistant will try to show the cards in a masonry layout (like Pinterest). A custom view layout allows developers to override this and define the layout mechanism (like a grid).
@@ -28,21 +28,25 @@ Cards and Badges will be created and maintained by the core code and given to th
 (note: this example does not have all of the properties but the necessities to show the example)
 
 ```js
-import { LitElement, html } from "https://unpkg.com/@polymer/lit-element@^0.6.1/lit-element.js?module";
+import {
+  LitElement,
+  html,
+} from "https://unpkg.com/@polymer/lit-element@^0.6.1/lit-element.js?module";
 
 class MyNewView extends LitElement {
   setConfig(_config) {}
 
   static get properties() {
     return {
-      cards: {type: Array, attribute: false}
+      cards: { type: Array, attribute: false },
     };
   }
 
   render() {
-    if(!this.cards) {
+    if (!this.cards) {
       return html``;
     }
+
     return html`${this.cards.map((card) => html`<div>${card}</div>`)}`;
   }
 }
@@ -95,6 +99,10 @@ Detail: none
 To call an event, you can use:
 
 ```js
-// Delete 4th card in the current view
-this.dispatchEvent(new CustomEvent("ll-edit-card", { detail: { path: [3] } })) // this refers to the card element
+// Delete 4th card in the current view (this refers to the card element)
+this.dispatchEvent(
+  new CustomEvent("ll-edit-card", {
+    detail: { path: [3] },
+  }),
+);
 ```

@@ -399,6 +399,8 @@ The following example `strings.json` is for a `sensor` entity with its `translat
 
 Integrations can provide translations for states of its entities under other integrations like sensor if the base entity component does not provide translations, or if the translation provided by the base entity component do not match the integration's entity. To do this, provide an `entity` object, that contains translations for states and set the entity's `translation_key` property to a key under a domain in the `entity` object.
 
+Note that translated states must be `snake_case` just like all other translation keys.
+
 To differentiate entities and their translations, provide different translation keys. The following example `strings.json` is for a Moon domain `sensor` entity with its `translation_key` property set to `phase`:
 
 ```json
@@ -421,6 +423,8 @@ To differentiate entities and their translations, provide different translation 
 #### Entity state attributes
 
 Integrations can provide translations for its entities' state attributes under other integrations like sensor if the base entity component does not provide translations, or if the translation provided by the base entity component do not match the integration's entity. To do this, provide an `entity` object, that contains translations for entity state attributes and set the entity's `translation_key` property to a key under a domain in the `entity` object.
+
+Note that translated state attributes must be `snake_case` just like all other translation keys.
 
 To differentiate entities and their translations, provide different translation keys. The following example `strings.json` is for a `demo` domain `climate` entity with its `translation_key` property set to `ubercool`, which has custom `fan_mode` and `swing_mode` settings:
 

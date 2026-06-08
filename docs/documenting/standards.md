@@ -6,7 +6,7 @@ To ensure that the documentation for Home Assistant is consistent and easy to fo
 
 ## Style guide
 
-Documentation should follow the [Microsoft Style Guide](https://learn.microsoft.com/style-guide/welcome/). For more details, refer to the section [General style guide](documenting/general-style-guide.md) and the [YAML style guide](documenting/yaml-style-guide.md).
+Documentation should follow the [documentation style guide](/docs/documenting/general-style-guide) and [Microsoft Style Guide](https://learn.microsoft.com/style-guide/welcome/).
 
 ## Integration and platform pages
 
@@ -14,37 +14,17 @@ Documentation should follow the [Microsoft Style Guide](https://learn.microsoft.
   - Use capital letters and `_` to indicate that the value needs to be replaced. For example, `api_key: YOUR_API_KEY` or `api_key: REPLACE_ME`.
 - Integration and platform names should be a link to their respective documentation pages.
 
-### Configuration variables
+### Deprecated features or integrations
 
-- The **Configuration Variables** section is only used for YAML configuration.
-- The **Configuration Variables** section must use the `{% configuration %}` tag.
-- Configuration variables must document the requirement status (`false` or `true`).
-- Configuration variables must document the default value, if any.
-- Configuration variables must document the accepted value types (see [configuration variables details](documenting/create-page.md#configuration)).
-  - For configuration variables that accept multiple types, separate the types with a comma (i.e. `string, integer`).
+When a feature is deprecated or an integration is removed from Home Assistant, remove its documentation.
 
-#### Example configuration variables block
-
-```yaml
-{% configuration %}
-some_key:
-  description: This is a description of what this key is for.
-  required: false
-  type: string
-  default: Optional default value - leave out if there isn't one
-{% endconfiguration %}
-```
-
-### UI variables
-
-- For describing **UI Variables** the `{% configuration_basic %}` section can be used.
+- If a feature is deprecated, remove the related section from the integration page.
+- Do not add a deprecation notice to the documentation.
+- If an entire integration is deprecated, follow the steps on [removing an integration page](/docs/documenting/remove-page).
 
 ## YAML and templates
 
-We have a separate styling guide for YAML and the use of Jinja2 templates
-inside that YAML.
-
-[YAML Style Guide](documenting/yaml-style-guide.md)
+For YAML and the use of Jinja2 templates inside that YAML, follow the [YAML Style Guide](/docs/documenting/yaml-style-guide).
 
 ## Glossary & terminology tooltips
 
@@ -55,8 +35,8 @@ that are used across Home Assistant, including our documentation.
 If you use a term that is not in the glossary, feel free to add; or improve
 the definition of an existing term.
 
-Additionally, we have a terminology tooltip available, that can be added and
-works everywhere in the documentation. This tooltip will show a definition
+Additionally, we have a terminology tooltip available that can be added and
+works everywhere in the documentation. This tooltip shows a definition
 of the term when the user hovers over it with a link for more information.
 It provides instant context to terminology a user might not be familiar with.
 
@@ -86,6 +66,10 @@ example the automation term tooltip is added to the "automate everything" text:
 Awesome, because this allowed me to {% term automation "automate everything" %}
 in my home! I love it!
 ```
+
+### Adding glossary entries
+
+To add an entry to the glossary, edit [`source/_data/glossary.yml`](https://github.com/home-assistant/home-assistant.io/blob/current/source/_data/glossary.yml).
 
 ## Renaming pages
 
