@@ -47,10 +47,10 @@ If you are working on tests for an integration and you changed the dependencies,
 Next you can update all dependencies in your development environment by running:
 
 ```shell
-uv pip install -r requirements_test_all.txt
+uv pip install -r requirements_all.txt -r requirements_test.txt
 ```
 
-Or, in Visual Studio Code, launch the **Install all Test Requirements** task.
+Or, in Visual Studio Code, launch the **Install all (test & production) Requirements** task.
 
 ### Running a limited test suite
 
