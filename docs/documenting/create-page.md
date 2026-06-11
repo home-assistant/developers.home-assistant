@@ -75,8 +75,6 @@ The following keys are available for the integration page file header:
 - `related`: Optional. Adds a section with links to related topics to the end of the page. Use `docs` for local links and `url` for external links. When using `docs`, the `title` key is optional. If not set, the title of the page you point to will be used.
 - `title`: This title should match with the name of the integration as written in the integration manifest file.
 
-There are [pre-defined variables](https://jekyllrb.com/docs/variables/) available but usually, it's not necessary to use them when writing documentation.
-
 ### Configuration
 
 Every integration page should contain a configuration example. This includes UI variable descriptions for integrations with a configuration flow, and YAML configuration for integrations that don't yet support a configuration flow.
