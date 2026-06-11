@@ -23,7 +23,7 @@ To create a new integration page, follow these steps:
 
 ## About the integration page header format
 
-If you start from scratch with a page, you need to add a header. Different sections of the documentation may need different headers.
+Every integration page starts with a YAML front matter header that provides metadata about the integration. This metadata drives the integration overview page, discovery, quality badges, and more. The keys you include depend on the integration's capabilities.
 
 ```text
 ---
@@ -53,21 +53,27 @@ Content... Written in markdown.
 ...
 ```
 
-Additional keys for the file header:
+The following keys are available for the integration page file header:
 
-- `title`: This title should match with the name of the integration as written in the integration manifest file.
+- `description`: A short description of the integration page.
+- `featured`: Set to `true` to feature the integration prominently on the integrations page. This is not an `ha_`-prefixed key. Don't use this.
+- `ha_bluetooth`: Set to `true` if the integration supports discovery via Bluetooth, omit otherwise.
+- `ha_category`: This entry is used to group the integration on the [Integration overview](https://www.home-assistant.io/integrations/).
+- `ha_codeowners`: GitHub usernames or team names (starting with `@`) of people that are responsible for this integration. This should match with the codeowners as listed in the integration manifest file.
+- `ha_config_flow`: Set to `true` if the integration has a [Data Entry Flow](/data_entry_flow_index.md), omit otherwise.
+- `ha_dhcp`: Set to `true` if the integration supports discovery via DHCP, omit otherwise.
+- `ha_domain`: The domain of the integration in Home Assistant Core. This must match the name from the [integration manifest](/docs/creating_integration_manifest) file.
+- `ha_integration_type`: The type of integration in Home Assistant Core. This must match the name from the [integration manifest](/docs/creating_integration_manifest) file.
+- `ha_iot_class`: [IoT class](https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things) is the classifier for the device's behavior.
+- `ha_platforms`: This entry lists all implemented [platforms](/docs/creating_platform_index).
+- `ha_quality_scale`: The integration's rating on the [quality scale](https://www.home-assistant.io/docs/quality_scale/) (such as bronze, silver, gold, platinum, or internal). For new integrations, set this to `bronze`. This field is automatically updated when the integration's quality level changes in Core. You don't need to update this manually in the documentation.
 - `ha_release`: The Home Assistant release when the integration was included.
   - If the current release is 2025.8, make `ha_release` 2025.9.
   - For the October release, as in '2025.10', quote it with `' '`, otherwise the zero won't be displayed.
-- `ha_category`: This entry is used to group the integration on the [Integration overview](https://www.home-assistant.io/integrations/).
-- `ha_platforms`: This entry lists all implemented [platforms](/docs/creating_platform_index).
-- `ha_iot_class`: [IoT class](https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things) is the classifier for the device's behavior.
-- `ha_quality_scale`: The integration's rating on the [quality scale](https://www.home-assistant.io/docs/quality_scale/) (such as bronze, silver, gold, or platinum). For new integrations, set this to `bronze`. This field is automatically updated when the integration's quality level changes in Core. You don't need to update this manually in the documentation.
-- `ha_config_flow`: Set to `true` if the integration has a [Data Entry Flow](/data_entry_flow_index.md), omit otherwise.
-- `ha_codeowners`: GitHub usernames or team names (starting with `@`) of people that are responsible for this integration. This should match with the codeowners as listed in the integration manifest file.
-- `ha_domain`: The domain of the integration in Home Assistant Core. This must match the name from the [integration manifest](/docs/creating_integration_manifest) file.
-- `ha_integration_type`: The type of integration in Home Assistant Core. This must match the name from the [integration manifest](/docs/creating_integration_manifest) file.
+- `ha_ssdp`: Set to `true` if the integration supports discovery via SSDP, omit otherwise.
+- `ha_zeroconf`: Set to `true` if the integration supports discovery via mDNS/Zeroconf, omit otherwise.
 - `related`: Optional. Adds a section with links to related topics to the end of the page. Use `docs` for local links and `url` for external links. When using `docs`, the `title` key is optional. If not set, the title of the page you point to will be used.
+- `title`: This title should match with the name of the integration as written in the integration manifest file.
 
 There are [pre-defined variables](https://jekyllrb.com/docs/variables/) available but usually, it's not necessary to use them when writing documentation.
 
