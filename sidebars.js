@@ -29,6 +29,7 @@ module.exports = {
   ],
   Overview: [
     "architecture_index",
+    "overview/roles",
     "setup_devcontainer_environment"
   ],
   Frontend: [
