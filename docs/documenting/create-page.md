@@ -60,7 +60,7 @@ The following keys are available for the integration page file header:
 - `ha_bluetooth`: Set to `true` if the integration supports discovery via Bluetooth, omit otherwise.
 - `ha_category`: This entry is used to group the integration on the [Integration overview](https://www.home-assistant.io/integrations/).
 - `ha_codeowners`: GitHub usernames or team names (starting with `@`) of people that are responsible for this integration. This should match with the codeowners as listed in the integration manifest file.
-- `ha_config_flow`: Set to `true` if the integration has a [Data Entry Flow](docs/data_entry_flow_index), omit otherwise.
+- `ha_config_flow`: Set to `true` if the integration has a [Data Entry Flow](/docs/data_entry_flow_index), omit otherwise.
 - `ha_dhcp`: Set to `true` if the integration supports discovery via DHCP, omit otherwise.
 - `ha_domain`: The domain of the integration in Home Assistant Core. This must match the name from the [integration manifest](/docs/creating_integration_manifest) file.
 - `ha_integration_type`: The type of integration in Home Assistant Core. This must match the name from the [integration manifest](/docs/creating_integration_manifest) file.
