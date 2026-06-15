@@ -118,7 +118,7 @@ The return value is a function that detaches the trigger.
 
 #### Add text and translations
 
-The Automation user interface will display a human-readable string in the device automation mapped to the event type.  Update `strings.json` with the trigger types and subtypes that you support:
+The Automation user interface will display a human-readable string in the device automation mapped to the event type. Update `strings.json` with the trigger types and subtypes that you support:
 
 ```json
 {

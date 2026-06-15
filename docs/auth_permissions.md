@@ -8,7 +8,7 @@ This is an experimental feature that is not enabled or enforced yet
 
 Permissions limit the things a user has access to or can control. Permissions are attached to groups, of which a user can be a member. The combined permissions of all groups a user is a member of decides what a user can and cannot see or control.
 
-Permissions do not apply to the user that is flagged as "owner". This user  will always have access to everything.
+Permissions do not apply to the user that is flagged as "owner". This user will always have access to everything.
 
 ## General permission structure
 
