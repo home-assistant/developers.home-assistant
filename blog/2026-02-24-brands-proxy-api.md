@@ -29,7 +29,7 @@ The following image filenames are supported:
 
 Local brand images automatically take priority over images from the brands CDN. That's it — no extra configuration needed.
 
-For more details, see the [integration file structure documentation](/docs/creating_integration_file_structure#local-brand-images-for-custom-integrations).
+For more details, see the [integration file structure documentation](/docs/creating_integration_file_structure#brand-images---brand).
 
 ## Brand images now served through a local API
 
