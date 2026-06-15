@@ -104,7 +104,7 @@ class MyUpdate(UpdateEntity):
 
 ### Release notes
 
-This method can be implemented so users can can get the full release notes in the more-info dialog of the Home Assistant Frontend before they install the update.
+This method can be implemented so users can get the full release notes in the more-info dialog of the Home Assistant Frontend before they install the update.
 
 The returned string can contain markdown, and the frontend will format that correctly.
 
