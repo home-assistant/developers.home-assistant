@@ -3,7 +3,7 @@ title: Humidifier entity
 sidebar_label: Humidifier
 ---
 
-A humidifier entity is a device whose main purpose is to control humidity, i.e. a humidifier or dehumidifier. Derive entity platforms from [`homeassistant.components.humidifier.HumidifierEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/humidifier/__init__.py)
+A humidifier entity is a device whose main purpose is to control humidity, that is, a humidifier or dehumidifier. Derive entity platforms from [`homeassistant.components.humidifier.HumidifierEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/humidifier/__init__.py)
 
 ## Properties
 
@@ -34,7 +34,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 ### Modes
 
-A device can have different modes of operation that it might want to show to the user. They could be viewed as presets or some device states with reduced or enhanced functionality for special conditions, i.e. "auto" or "baby". There are a couple of built-in modes that will offer translations, but you're also allowed to add custom modes if that better represents the device.
+A device can have different modes of operation that it might want to show to the user. They could be viewed as presets or some device states with reduced or enhanced functionality for special conditions, that is, "auto" or "baby". There are a couple of built-in modes that will offer translations, but you're also allowed to add custom modes if that better represents the device.
 
 | Name           | Description                              |
 | -------------- | ---------------------------------------  |
