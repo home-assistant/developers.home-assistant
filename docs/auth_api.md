@@ -5,18 +5,18 @@ sidebar_label: API
 
 This page will describe the steps required for your application to authorize against and integrate with Home Assistant instances. [See a demo](https://hass-auth-demo.glitch.me) powered by our helper lib [home-assistant-js-websocket](https://github.com/home-assistant/home-assistant-js-websocket).
 
-Each user has their own instance of Home Assistant which gives each user control over their own data. However, we also wanted to make it easy for third party developers to create applications that allow users to integrate with Home Assistant. To achieve this, we have adopted the [OAuth 2 specification][oauth2-spec] combined with the [OAuth 2 IndieAuth extension][indieauth-spec] for generating clients.
+Each user has their own instance of Home Assistant which gives each user control over their own data. However, we also wanted to make it easy for third-party developers to create applications that allow users to integrate with Home Assistant. To achieve this, we have adopted the [OAuth 2 specification][oauth2-spec] combined with the [OAuth 2 IndieAuth extension][indieauth-spec] for generating clients.
 
 ## Clients
 
 Before you can ask the user to authorize their instance with your application, you will need a client. In traditional OAuth2, the server needs to generate a client before a user can authorize. However, as each server belongs to a user, we've adopted a slightly different approach from [IndieAuth][indieauth-clients].
 
-The client ID you need to use is the website of your application. The redirect url has to be of the same host and port as the client ID. For example:
+The client ID you need to use is the website of your application. The redirect URL has to be of the same host and port as the client ID. For example:
 
-- client id: `https://www.my-application.io`
-- redirect uri: `https://www.my-application.io/hass/auth_callback`
+- client ID: `https://www.my-application.io`
+- redirect URI: `https://www.my-application.io/hass/auth_callback`
 
-If you require a different redirect url (ie, if building a native app), you can add an HTML tag to the content of the website of your application (the client ID) with an approved redirect url. For example, add this to your site to whitelist redirect uri `hass://auth`:
+If you require a different redirect URL (such as when building a native app), you can add an HTML tag to the content of the website of your application (the client ID) with an approved redirect URL. For example, add this to your site to allow the redirect URI `hass://auth`:
 
 ```html
 <link rel='redirect_uri' href='hass://auth'>
@@ -34,7 +34,7 @@ Home Assistant will scan the first 10kB of a website for link tags.
  All example URLs here are shown with extra spaces and new lines for display purposes only.
 :::
 
-The authorize url should contain `client_id` and `redirect_uri` as query parameters.
+The authorize URL should contain `client_id` and `redirect_uri` as query parameters.
 
 ```txt
 http://your-instance.com/auth/authorize?
@@ -42,21 +42,21 @@ http://your-instance.com/auth/authorize?
     redirect_uri=https%3A%2F%2Fhass-auth-demo.glitch.me%2F%3Fauth_callback%3D1
 ```
 
-Optionally you can also include a `state` parameter, this will be added to the redirect uri. The state is perfect to store the instance url that you are authenticating with. Example:
+Optionally you can also include a `state` parameter, this will be added to the redirect URI. The state is perfect to store the instance URL that you are authenticating with. Example:
 
 ```txt
 http://your-instance.com/auth/authorize?
     client_id=https%3A%2F%2Fhass-auth-demo.glitch.me&
     redirect_uri=https%3A%2F%2Fhass-auth-demo.glitch.me%2Fauth_callback&
-    state=http%3A%2F%2Fhassio.local%3A8123
+    state=http%3A%2F%2Fhomeassistant.local%3A8123
 ```
 
-The user will navigate to this link and be presented with instructions to log in and authorize your application. Once authorized, the user will be redirected back to the passed in redirect uri with the authorization code and state as part of the query parameters. Example:
+The user will navigate to this link and be presented with instructions to log in and authorize your application. Once authorized, the user will be redirected back to the passed-in redirect URI with the authorization code and state as part of the query parameters. Example:
 
 ```txt
 https://hass-auth-demo.glitch.me/auth_callback?
     code=12345&
-    state=http%3A%2F%2Fhassio.local%3A8123
+    state=http%3A%2F%2Fhomeassistant.local%3A8123
 ```
 
 This authorization code can be exchanged for tokens by sending it to the token endpoint (see next section).
@@ -92,7 +92,7 @@ The return response will be an access and refresh token:
 }
 ```
 
-The access token is a short lived token that can be used to access the API. The refresh token can be used to fetch new access tokens. The `expires_in` value is seconds that the access token is valid.
+The access token is a short-lived token that can be used to access the API. The refresh token can be used to fetch new access tokens. The `expires_in` value is the number of seconds that the access token is valid.
 
 An HTTP status code of 400 will be returned if an invalid request has been issued. The HTTP status code will be 403 if a token is requested for an inactive user.
 
@@ -144,13 +144,13 @@ token=IJKLMNOPQRST&
 action=revoke
 ```
 
-The request will always respond with an empty body and HTTP status 200, regardless if the request was successful.
+The request will always respond with an empty body and HTTP status 200, regardless of whether the request was successful.
 
 ## Long-lived access token
 
 Long-lived access tokens are valid for 10 years. These are useful for integrating with third-party APIs and webhook-style integrations. Long-lived access tokens can be created using the **"Long-Lived Access Tokens"** section at the bottom of a user's Home Assistant profile page.
 
-You can also generate a long-lived access token using the websocket command `auth/long_lived_access_token`, which will create a long-lived access token for current user. The access token string is not saved in Home Assistant; you must record it in a secure place.
+You can also generate a long-lived access token using the WebSocket command `auth/long_lived_access_token`, which will create a long-lived access token for the current user. The access token string is not saved in Home Assistant; you must record it in a secure place.
 
 ```json
 {
@@ -177,7 +177,7 @@ The response includes a long-lived access token:
 
 Once you have an access token, you can make authenticated requests to the Home Assistant APIs.
 
-For the websocket connection, pass the access token in the [authentication message](/api/websocket.md#authentication-phase).
+For the WebSocket connection, pass the access token in the [authentication message](/api/websocket.md#authentication-phase).
 
 For HTTP requests, pass the token type and access token as the authorization header:
 
@@ -232,11 +232,11 @@ If the access token is no longer valid, you will get a response with HTTP status
 
 Sometimes you want a user to make a GET request to Home Assistant to download data. In this case the normal auth system won't do, as we can't link the user to an API with the auth header attached to it. In that case, a signed path can help.
 
-A signed path is a normal path on our server, like `/api/states`, but with an attached secure authentication signature. The user is able to navigate to this path and will be authorized as the access token that created the signed path. Signed paths can be created via the websocket connection and are meant to be shortlived. The default expiration is 30 seconds.
+A signed path is a normal path on our server, like `/api/states`, but with an attached secure authentication signature. The user is able to navigate to this path and will be authorized as the access token that created the signed path. Signed paths can be created via the WebSocket connection and are meant to be short-lived. The default expiration is 30 seconds.
 
 There are two ways to get a signed path.
 
-If you are creating an integration, import `async_sign_path` from `homeassistant.components.http.auth`. The method will automatically adopt a refresh token if called from inside the context of an HTTP request or a WebSocket connection. If neither available (ie because inside an automation), it will use a special "Home Assistant Content" user.
+If you are creating an integration, import `async_sign_path` from `homeassistant.components.http.auth`. The method will automatically adopt a refresh token if called from inside the context of an HTTP request or a WebSocket connection. If neither is available (for example, because it is inside an automation), it will use a special "Home Assistant Content" user.
 
 If you're working with the frontend, you can create a signed path using the following WebSocket command:
 
@@ -259,7 +259,7 @@ The response will contain the signed path:
 
 Some things to note about a signed path:
 
-- If the refresh token is deleted, the signed url is no longer valid.
-- If the user is deleted, the signed url is no longer valid (because the refresh token will be deleted).
-- If Home Assistant is restarted, the signed url is no longer valid.
-- Access is only validated when the request is received. If a response takes longer than the expiration time (ie, downloading a large file), the download will continue after the expiration date has passed.
+- If the refresh token is deleted, the signed URL is no longer valid.
+- If the user is deleted, the signed URL is no longer valid (because the refresh token will be deleted).
+- If Home Assistant is restarted, the signed URL is no longer valid.
+- Access is only validated when the request is received. If a response takes longer than the expiration time (for example, downloading a large file), the download will continue after the expiration date has passed.
