@@ -19,7 +19,7 @@ Return overview information about installed apps.
 
 | key          | type | description                                        |
 | ------------ | ---- | -------------------------------------------------- |
-| addons       | list | A list of [Addon models](api/supervisor/models.md#addon)           |
+| addons       | list | A list of [Addon models](api/supervisor/models.md#app-formerly-known-as-an-add-on)           |
 
 **Example response:**
 
@@ -3074,7 +3074,7 @@ firmware interface or the update is blocked on this board / boot device.
 | -------- | ---------- | ------------------------------------------------ |
 | unsupported | list | A list of reasons why an installation is marked as unsupported (container, dbus, docker_configuration, docker_version, lxc, network_manager, os, privileged, systemd) |
 | unhealthy | list | A list of reasons why an installation is marked as unhealthy (docker, supervisor, privileged, setup) |
-| issues | list | A list of [Issue models](api/supervisor/models.md#issues) |
+| issues | list | A list of [Issue models](api/supervisor/models.md#issue) |
 | suggestions | list | A list of [Suggestion models](api/supervisor/models.md#suggestion) actions |
 | checks | list | A list of [Check models](api/supervisor/models.md#check) |
 
