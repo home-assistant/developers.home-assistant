@@ -331,7 +331,7 @@ async def async_setup_entry(
     async_add_entities: AddConfigEntryEntitiesCallback,
 ) -> None:
     """Set up Example sensor based on a config entry."""
-    device: ExampleDevice = hass.data[DOMAIN][entry.entry_id]
+    device: ExampleDevice = entry.runtime_data
     async_add_entities(
         ExampleSensorEntity(device, description)
         for description in SENSORS
