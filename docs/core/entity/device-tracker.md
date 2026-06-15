@@ -60,7 +60,7 @@ DHCP discover packets to find existing devices.
 
 ## TrackerEntity
 
-A TrackerEntity tracks the location of a device and reports it either as a zone name or `home` or `not_home` states. A TrackerEntity can use GPS coordinates or a list of `Zone` entity_ids to determine its state. Either `in_zones` or `latitude` and `longitude` should be set to report state. If both `in_zones` and `latitude` + `longitude` are present, `in_zones` has priority. If `in_zones` is not provided, the base class calculates an `in_zones` list, including both active anc passive zone the device is currently in. The state of the entity is the first active zone in the `in_zones` list, `home` if the first active zone is the home zone or `not_home` if there is no active zone in the `in_zones` list.
+A TrackerEntity tracks the location of a device and reports it either as a zone name or `home` or `not_home` states. A TrackerEntity can use GPS coordinates or a list of `Zone` entity_ids to determine its state. Either `in_zones` or `latitude` and `longitude` should be set to report state. If both `in_zones` and `latitude` + `longitude` are present, `in_zones` has priority. If `in_zones` is not provided, the base class calculates an `in_zones` list, including both active and passive zones the device is currently in. The state of the entity is the first active zone in the `in_zones` list, `home` if the first active zone is the home zone or `not_home` if there is no active zone in the `in_zones` list.
 
 The base class sets the `tracking_type` capability attribute to `TrackingType.POSITION`.
 
