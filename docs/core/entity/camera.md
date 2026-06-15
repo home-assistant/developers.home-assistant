@@ -76,7 +76,7 @@ class MyCamera(Camera):
 
 ### Stream source
 
-The stream source should return a url that is usable by ffmpeg (e.g. an RTSP url). Requires `CameraEntityFeature.STREAM`.
+The stream source should return a url that is usable by ffmpeg (for example, an RTSP url). Requires `CameraEntityFeature.STREAM`.
 
 A camera entity with a stream source by default uses `StreamType.HLS` to tell the frontend to use an HLS feed with the `stream` component. This stream source will also be used with `stream` for recording.
 

@@ -341,7 +341,7 @@ Response only fields will be in responses but cannot be included in requests.
 | name       | string  | Name of the user                                              |
 | is_owner   | boolean | Is the user the owner                                         |
 | is_active  | boolean | Is the user active                                            |
-| local_only | boolean | Can the user login from the network (e.g. via http)           |
+| local_only | boolean | Can the user login from the network (for example, via http)           |
 | group_ids  | list    | Role(s) the user has (admin, etc)                             |
 
 ## Drive
@@ -364,7 +364,7 @@ Response only fields will be in responses but cannot be included in requests.
 
 | key          | type    | description                                               |
 | ------------ | ------- | --------------------------------------------------------- |
-| device       | string  | Special device file for the filesystem (e.g. `/dev/sda1`) |
+| device       | string  | Special device file for the filesystem (for example, `/dev/sda1`) |
 | id           | string  | Unique and persistent id for filesystem                   |
 | size         | int     | Size of the filesystem in bytes                           |
 | name         | string  | Name of the filesystem (if known)                         |

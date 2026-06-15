@@ -85,7 +85,7 @@ class EventTrigger(Trigger):
 ### Registering triggers
 
 Implement `async_get_triggers` in the `trigger` platform to register all the integration's triggers.
-Each trigger is identified by a unique string (e.g., `"event"` in the example above).
+Each trigger is identified by a unique string (for example, `"event"` in the example above).
 
 ```python
 async def async_get_triggers(hass: HomeAssistant) -> dict[str, type[Trigger]]:

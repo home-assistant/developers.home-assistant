@@ -1850,7 +1850,7 @@ Example query string:
 
 :::tip
 To get the last log entries the Range request header supports negative values
-as `num_skip`. E.g. `Range: entries=:-9:` returns the last 10 entries. Or
+as `num_skip`. For example, `Range: entries=:-9:` returns the last 10 entries. Or
 `Range: entries=:-200:100` to see 100 entries starting from the one 200 ago.
 :::
 
@@ -3695,7 +3695,7 @@ You need to call `/supervisor/reload` after updating the options.
 | addons_repositories | list   | Set a list of URL's as strings for app repositories |
 | auto_update         | bool   | Enable/disable auto update for supervisor              |
 | detect_blocking_io  | string | Enable blocking I/O in event loop detection. Valid values are `on`, `off` and `on_at_startup`. |
-| feature_flags       | dict   | Partial update of development feature flags. Keys are feature flag names (e.g. `supervisor_v2_api`), values are booleans. Omitted keys are left unchanged. |
+| feature_flags       | dict   | Partial update of development feature flags. Keys are feature flag names (for example, `supervisor_v2_api`), values are booleans. Omitted keys are left unchanged. |
 
 </ApiEndpoint>
 

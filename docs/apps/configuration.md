@@ -156,7 +156,7 @@ Avoid using `config.yaml` as filename in your app for anything other than the ap
 | `host_dbus` | bool | `false` | Map the host D-Bus service into the app.
 | `host_pid` | bool | `false` | Allow the container to run on the host PID namespace. Works only for not protected apps. **Warning:** Does not work with S6 Overlay. If need this to be `true` and you use the normal app base image you disable S6 by overriding `/init`. Or use an alternate base image.
 | `host_uts` | bool | `false` | Use the hosts UTS namespace.
-| `devices` | list | | Device list to map into the app. Format is: `<path_on_host>`. E.g., `/dev/ttyAMA0`
+| `devices` | list | | Device list to map into the app. Format is: `<path_on_host>`. For example, `/dev/ttyAMA0`
 | `homeassistant` | string | | Pin a minimum required Home Assistant Core version for the app. Value is a version string like `2022.10.5`.
 | `hassio_role` | str | `default` |Role-based access to Supervisor API. Available: `default`, `homeassistant`, `backup`, `manager` or `admin`
 | `hassio_api` | bool | `false` | This app can access the Supervisor's REST API. Use `http://supervisor`.
@@ -179,7 +179,7 @@ Avoid using `config.yaml` as filename in your app for anything other than the ap
 | `legacy` | bool | `false` | If the Docker image has no `hass.io` labels, you can enable the legacy mode to use the config data.
 | `options` | dict | | Default options value of the app.
 | `schema` | dict | | Schema for options value of the app. It can be `false` to disable schema validation and options.
-| `image` | string | | For use with container registries. Set this to the generic (multi-arch) image name, e.g. `ghcr.io/my-org/my-app`. The `{arch}` placeholder is still supported as a compatibility fallback for per-architecture image names (e.g. `ghcr.io/my-org/{arch}-my-app`). If you use this option, set the active Docker tag using the `version` option.
+| `image` | string | | For use with container registries. Set this to the generic (multi-arch) image name, for example, `ghcr.io/my-org/my-app`. The `{arch}` placeholder is still supported as a compatibility fallback for per-architecture image names (for example, `ghcr.io/my-org/{arch}-my-app`). If you use this option, set the active Docker tag using the `version` option.
 | `timeout` | integer | 10 | Default 10 (seconds). The timeout to wait until the Docker daemon is done or will be killed.
 | `tmpfs` | bool | `false` | If this is set to `true`, the containers `/tmp` uses tmpfs, a memory file system.
 | `discovery` | list | | A list of services that this app provides for Home Assistant.
@@ -202,7 +202,7 @@ Avoid using `config.yaml` as filename in your app for anything other than the ap
 | `realtime` | bool | `false` | Give app access to host schedule including `SYS_NICE` for change execution time/priority.
 | `journald` | bool | `false` | If set to `true`, the host's system journal will be mapped read-only into the app. Most of the time the journal will be in `/var/log/journal` however on some hosts you will find it in `/run/log/journal`. Apps relying on this capability should check if the directory `/var/log/journal` is populated and fallback on `/run/log/journal` if not.
 | `breaking_versions` | list | | List of breaking versions of the addon. A manual update will always be required if the update is to a breaking version or would cross a breaking version, even if users have auto-update enabled for the addon.
-| `ulimits` | dict | | Dictionary of resource limit (ulimit) settings for the app container. Each limit can be either a plain integer value or a dictionary with the keys `soft` and `hard`, each taking a plain integer for fine-grained control. Individual values must not be larger than the host's hard limit (inspectable by `ulimit -Ha`; e.g. 524288 in case of the `nofile` limit in the Home Assistant Operating System). |
+| `ulimits` | dict | | Dictionary of resource limit (ulimit) settings for the app container. Each limit can be either a plain integer value or a dictionary with the keys `soft` and `hard`, each taking a plain integer for fine-grained control. Individual values must not be larger than the host's hard limit (inspectable by `ulimit -Ha`; for example, 524288 in case of the `nofile` limit in the Home Assistant Operating System). |
 
 ### Options / Schema
 

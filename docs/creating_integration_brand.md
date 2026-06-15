@@ -3,7 +3,7 @@ title: "Brands"
 ---
 
 A commercial brand may have several integrations which provide support for different offerings under that brand. Also, a brand may offer devices which comply with an IoT standard, for example Zigbee or Z-Wave.
-As an example of the first case, there are multiple integrations providing support for different Google products, e.g. Google Calendar by the `google` integration and Google Sheets by the `google_sheets` integration.
+As an example of the first case, there are multiple integrations providing support for different Google products, for example, Google Calendar by the `google` integration and Google Sheets by the `google_sheets` integration.
 As an example of the second case, Innovelli offers Zigbee and Z-Wave devices and doesn't need its own integration.
 
 

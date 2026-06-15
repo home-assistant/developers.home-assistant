@@ -492,7 +492,7 @@ Grids:
 - `name` _(required)_: Key for this grid in the form data object (see `flatten`)
 - `schema` _(required)_: A list of child controls in the grid
 - `flatten` _(optional)_: `true`/`false` if child control data should be flattened into the main data dictionary, or under a sub-dictionary with the name of this grid 
-- `column_min_width` _(optional)_: CSS property for the minimum width of the cells in the grid (e.g. `200px`)
+- `column_min_width` _(optional)_: CSS property for the minimum width of the cells in the grid (for example, `200px`)
 
 Expansion Panel:
 - `type` _(required)_: `expandable`

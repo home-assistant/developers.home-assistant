@@ -425,7 +425,7 @@ New integrations are required to fulfill at least the bronze tier so be sure to 
 
 ## IoT class
 
-The [IoT class][iot_class] describes how an integration connects with, e.g., a device or service. For more information
+The [IoT class][iot_class] describes how an integration connects with, for example, a device or service. For more information
 about IoT Classes, read the blog about ["Classifying the Internet of Things"][iot_class].
 
 The following IoT classes are accepted in the manifest:
