@@ -315,7 +315,7 @@ Ensuring that the `unique_id` is unchanged should be done using `await self.asyn
 Gracefully handling authentication errors such as invalid, expired, or revoked tokens is needed to advance on the [Integration Quality Scale](/docs/core/integration-quality-scale). This example of how to add reauth to the OAuth flow created by `script.scaffold` following the pattern in [Building a Python library](/docs/api_lib_auth.md#oauth2).
 If you are looking for how to trigger the reauthentication flow, see [handling expired credentials](/docs/integration_setup_failures.md#handling-expired-credentials).
 
-This example catches an authentication exception in config entry setup in `__init__.py` and instructs the user to visit the integrations page in order to reconfigure the integration.
+This example catches an authentication exception in config entry setup in `__init__.py` and instructs the user to visit the integrations page to reconfigure the integration.
 
 To allow the user to change config entry data which is not optional (`OptionsFlow`) and not directly related to authentication, for example a changed host name, integrations should implement the [`reconfigure`](#reconfigure) step.
 
