@@ -22,7 +22,7 @@ Right now apps will work with images that are stored on Docker Hub (using `image
 
 If you don't want to use the devcontainer environment, you can build apps locally with standalone Docker. This is useful for quick single-architecture checks on the host you are currently working on.
 
-Use `docker` from the directory containing the app files to build the test addon:
+Use `docker` from the directory containing the app files to build the test app:
 
 ```shell
 docker build \
