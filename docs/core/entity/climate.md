@@ -18,7 +18,7 @@ Properties should always only return information from memory and not do I/O (lik
 | fan_mode                | `str \| None`        | **Required by SUPPORT_FAN_MODE**     | The current fan mode.                                                      |
 | fan_modes               | `list[str] \| None`  | **Required by SUPPORT_FAN_MODE**     | The list of available fan modes.                                           |
 | hvac_action             | `HVACAction \| None` | `None`                               | The current HVAC action (heating, cooling)                                 |
-| hvac_mode               | `HVACMode \| None`   | **Required**                         | The current operation (e.g. heat, cool, idle). Used to determine `state`.  |
+| hvac_mode               | `HVACMode \| None`   | **Required**                         | The current operation (for example, heat, cool, idle). Used to determine `state`.  |
 | hvac_modes              | `list[HVACMode]`         | **Required**                         | List of available operation modes. See below.                              |
 | max_humidity            | `float`                             | `DEFAULT_MAX_HUMIDITY` (value == 99) | The maximum humidity.                                                      |
 | max_temp                | `float`                             | `DEFAULT_MAX_TEMP` (value == 35 °C)  | The maximum temperature in `temperature_unit`.                             |
@@ -83,7 +83,7 @@ A device can have different presets that it might want to show to the user. Comm
 | `COMFORT`  | Device is in comfort mode                              |
 | `HOME`     | Device is in home mode                                 |
 | `SLEEP`    | Device is prepared for sleep                           |
-| `ACTIVITY` | Device is reacting to activity (e.g. movement sensors) |
+| `ACTIVITY` | Device is reacting to activity (for example, movement sensors) |
 
 ### Fan modes
 

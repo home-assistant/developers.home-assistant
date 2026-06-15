@@ -315,7 +315,7 @@ bluetooth.async_clear_address_from_match_history(hass, "44:44:33:11:23:42")
 ```
 
 :::warning Performance Considerations
-Do not use this API for devices whose advertisement data changes frequently (e.g., sensors that update temperature readings in advertisement data). Clearing match history for such devices will cause a new discovery flow to be triggered on every advertisement change, which can overwhelm the system and create a poor user experience.
+Do not use this API for devices whose advertisement data changes frequently (for example, sensors that update temperature readings in advertisement data). Clearing match history for such devices will cause a new discovery flow to be triggered on every advertisement change, which can overwhelm the system and create a poor user experience.
 
 This API is intended for infrequent state changes such as factory resets or major operational mode transitions, not for regular data updates.
 :::

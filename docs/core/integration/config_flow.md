@@ -74,7 +74,7 @@ There are a few step names reserved for system use:
 | `user`      | Invoked when a user initiates a flow via the user interface or when discovered and the matching and discovery step are not defined.                                 |
 | `reconfigure`      | Invoked when a user initiates a flow to reconfigure an existing config entry via the user interface.                                                                |
 | `zeroconf`  | Invoked if your integration has been discovered via Zeroconf/mDNS as specified [using `zeroconf` in the manifest](/docs/creating_integration_manifest.md#zeroconf). |
-| `reauth`    | Invoked if your integration indicates it [requires reauthentication, e.g., due to expired credentials](#reauthentication).                                          |
+| `reauth`    | Invoked if your integration indicates it [requires reauthentication, for example, due to expired credentials](#reauthentication).                                          |
 | `import`    | Reserved for migrating from YAML configuration to config entries.                                                                                                   |
 
 ## Unique IDs
@@ -87,7 +87,7 @@ If the integration uses Bluetooth, DHCP, HomeKit, Zeroconf/mDNS, USB, or SSDP/uP
 If a unique ID isn't available, alternatively, the `bluetooth`, `dhcp`, `zeroconf`, `hassio`, `homekit`, `ssdp`, `usb`, and `discovery` steps can be omitted, even if they are configured in
 the integration manifest. In that case, the `user` step will be called when the item is discovered.
 
-Alternatively, if an integration can't get a unique ID all the time (e.g., multiple devices, some have one, some don't), a helper is available
+Alternatively, if an integration can't get a unique ID all the time (for example, multiple devices, some have one, some don't), a helper is available
 that still allows for discovery, as long as there aren't any instances of the integration configured yet.
 
 Here's an example of how to handle discovery where a unique ID is not always available:

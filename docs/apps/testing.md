@@ -30,7 +30,7 @@ docker build \
   .
 ```
 
-For a multi-platform build or cross-compilation, you can use the `--platform` flag with the appropriate target platform (e.g. `--platform linux/arm64` to build `aarch64` image in QEMU on an AMD64 host). See the official Docker documentation on [multi-platform builds](https://docs.docker.com/build/building/multi-platform/) for more details.
+For a multi-platform build or cross-compilation, you can use the `--platform` flag with the appropriate target platform (for example, `--platform linux/arm64` to build `aarch64` image in QEMU on an AMD64 host). See the official Docker documentation on [multi-platform builds](https://docs.docker.com/build/building/multi-platform/) for more details.
 
 :::note
 

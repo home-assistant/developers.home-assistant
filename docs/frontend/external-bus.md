@@ -139,12 +139,12 @@ Expected response:
 - `hasBarCodeScanner`: Set to `1` if the app has bar code scanning capability, `0` otherwise
 - `canSetupImprov`: Set to true if the app can set up Improv Wi-Fi devices
 - `appVersion`: The version string of the native app
-- `hasEntityAddTo`: Set to true if the app supports adding entities to platform-specific locations (e.g., homescreen widget)
+- `hasEntityAddTo`: Set to true if the app supports adding entities to platform-specific locations (for example, homescreen widget)
 - `hasAssistSettings`: Set to true if the app has an Assist settings screen
 
 ##### `entity/add_to/get_actions`
 
-Get available actions for adding an entity to the device (e.g., homescreen, watch face).
+Get available actions for adding an entity to the device (for example, homescreen, watch face).
 
 Payload:
 
@@ -171,7 +171,7 @@ Expected response:
 - `enabled`: Whether the action is currently available
 - `name`: Display name of the action
 - `details`: Optional additional details about the action
-- `mdi_icon`: Material Design Icon identifier for the action (e.g., "mdi:car")
+- `mdi_icon`: Material Design Icon identifier for the action (for example, "mdi:car")
 - `app_payload`: Opaque string to be sent back in `entity/add_to` to execute the action
 
 #### Messages not expecting a response
@@ -254,7 +254,7 @@ Payload:
 
 ##### `entity/add_to`
 
-Add an entity to a platform-specific location (e.g., homescreen widget).
+Add an entity to a platform-specific location (for example, homescreen widget).
 
 Payload:
 

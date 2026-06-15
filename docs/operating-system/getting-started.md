@@ -45,7 +45,7 @@ The build container needs to get started with privileges since at some point dur
 
 The script `scripts/enter.sh` builds the build container image and starts a container using that image. Arguments passed to the script get executed inside the container.
 
-HAOS uses a configuration file for each supported target. To build for a specific target (board), the configuration file needs to be passed to `make`. The configuration files are stored in `buildroot-external/configs/`. Note that the ending `_defconfig` will be appended automatically and *must not* be passed to `make`. E.g. to build the Raspberry Pi 4 64-bit configuration `buildroot-external/configs/rpi4_64_defconfig` use the following command:
+HAOS uses a configuration file for each supported target. To build for a specific target (board), the configuration file needs to be passed to `make`. The configuration files are stored in `buildroot-external/configs/`. Note that the ending `_defconfig` will be appended automatically and *must not* be passed to `make`. For example, to build the Raspberry Pi 4 64-bit configuration `buildroot-external/configs/rpi4_64_defconfig` use the following command:
 
 ```
 $ scripts/enter.sh make rpi4_64
@@ -95,7 +95,7 @@ builder@d3d7577663c9:/build$
 
 From this shell, the same build above could be started using `make O=output_rpi4_64 rpi4_64`.
 
-This allows to invoke other Buildroot targets, e.g. to [graph dependencies between packages](https://buildroot.org/downloads/manual/manual.html#_graphing_the_dependencies_between_packages). To use other Buildroot targets, make sure to change to the `buildroot/` directory and execute commands from there
+This allows to invoke other Buildroot targets, for example, to [graph dependencies between packages](https://buildroot.org/downloads/manual/manual.html#_graphing_the_dependencies_between_packages). To use other Buildroot targets, make sure to change to the `buildroot/` directory and execute commands from there
 
 ```bash
 builder@c6dfb4cd4036:/build$ cd buildroot/

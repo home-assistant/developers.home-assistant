@@ -77,7 +77,7 @@ and are combined using the bitwise or (`|`) operator.
 
 ## Weather forecasts
 
-A weather platform can optionally provide weather forecasts. Support for weather forecasts is indicated by setting the correct [supported feature](#supported-features). Weather forecasts are not part of the entity's state, they're instead made available by a separate API. Consumers, e.g. frontend, can subscribe to weather forecast updates.
+A weather platform can optionally provide weather forecasts. Support for weather forecasts is indicated by setting the correct [supported feature](#supported-features). Weather forecasts are not part of the entity's state, they're instead made available by a separate API. Consumers, for example, frontend, can subscribe to weather forecast updates.
 
 ### Forecast data
 

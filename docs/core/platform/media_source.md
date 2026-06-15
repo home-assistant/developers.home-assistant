@@ -104,15 +104,15 @@ async def async_browse_media(self, item: MediaSourceItem) -> BrowseMediaSource:
 |---|---|---|
 | `domain` | `str` | Your integration domain. |
 | `identifier` | `str \| None` | Item-specific identifier. Use `None` for root items. |
-| `media_class` | `MediaClass` | The type of media (e.g., `MediaClass.APP`, `MediaClass.DIRECTORY`, `MediaClass.MUSIC`, `MediaClass.VIDEO`, `MediaClass.IMAGE`). |
-| `media_content_type` | `MediaType \| str` | MIME type or media type of the content (e.g., `"audio/mpeg"`). |
+| `media_class` | `MediaClass` | The type of media (for example, `MediaClass.APP`, `MediaClass.DIRECTORY`, `MediaClass.MUSIC`, `MediaClass.VIDEO`, `MediaClass.IMAGE`). |
+| `media_content_type` | `MediaType \| str` | MIME type or media type of the content (for example, `"audio/mpeg"`). |
 | `title` | `str` | Display title shown to the user. |
 | `can_play` | `bool` | Whether the item can be played directly. |
 | `can_expand` | `bool` | Whether the item can be browsed deeper (has children). |
 | `children` | `list[BrowseMediaSource] \| None` | Child items. Only set on the parent item that is browsed. |
 | `children_media_class` | `MediaClass \| None` | Media class of the children. Automatically calculated if not set. |
 | `thumbnail` | `str \| None` | URL to a thumbnail image. |
-| `not_shown` | `int` | Number of children not included (e.g., filtered out). Defaults to `0`. |
+| `not_shown` | `int` | Number of children not included (for example, filtered out). Defaults to `0`. |
 
 ### Hierarchical browsing
 
@@ -172,7 +172,7 @@ async def async_resolve_media(self, item: MediaSourceItem) -> PlayMedia:
 | Field | Type | Description |
 |---|---|---|
 | `url` | `str` | The URL to play. Can be an absolute URL or a relative path served by Home Assistant. |
-| `mime_type` | `str` | The MIME type of the media (e.g., `"audio/mpeg"`, `"video/mp4"`, `"image/jpeg"`). |
+| `mime_type` | `str` | The MIME type of the media (for example, `"audio/mpeg"`, `"video/mp4"`, `"image/jpeg"`). |
 | `path` | `Path \| None` | Optional local filesystem path. Only used for local file sources. |
 
 ### `MediaSourceItem`
@@ -237,7 +237,7 @@ raise Unresolvable(
 
 ## Using media source from other integrations
 
-Other integrations (e.g., media players) can use the media source helpers to browse and resolve media:
+Other integrations (for example, media players) can use the media source helpers to browse and resolve media:
 
 ```python
 from homeassistant.components.media_source import (

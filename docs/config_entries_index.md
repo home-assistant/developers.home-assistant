@@ -87,4 +87,4 @@ A `ConfigEntry` object, including the data and options, must never be mutated di
 
 ## Subscribing to config entry state changes
 
-If you want to be notified about a `ConfigEntry` changing its `state` (e.g. from `ConfigEntryState.LOADED` to `ConfigEntryState.UNLOAD_IN_PROGRESS`), you can add a listener which will be notified to `async_on_state_change`. This helper also returns a callback you can call to remove the listener again. Subscribing to changes until the entry is unloaded would therefore be `entry.async_on_unload(entry.async_on_state_change(notify_me))`.
+If you want to be notified about a `ConfigEntry` changing its `state` (for example, from `ConfigEntryState.LOADED` to `ConfigEntryState.UNLOAD_IN_PROGRESS`), you can add a listener which will be notified to `async_on_state_change`. This helper also returns a callback you can call to remove the listener again. Subscribing to changes until the entry is unloaded would therefore be `entry.async_on_unload(entry.async_on_state_change(notify_me))`.

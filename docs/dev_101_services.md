@@ -257,7 +257,7 @@ When registering a service action, target it at the level of the [data hierarchy
 - **Config entry level** — If the service action operates on the integration instance and requires a config entry to function, use `config_entry_id` as the target. Do not use a `device_id` or `entity_id` as a substitute, even if they could be resolved back to the config entry. For example, an action that creates a new resource, that is common for the whole account or connection, in an external API should target the config entry that represents the account or connection, not a device or entity under it.
 
 :::tip
-The guiding principle is: **target the thing the action actually acts on.** If the action needs a device, target the device. If it needs a config entry, target the config entry. Resolving from a lower level (e.g., looking up a config entry from an entity) adds unnecessary indirection, couples the action interface to assumptions about the data hierarchy in the integration, and makes it harder for users to understand what the action operates on.
+The guiding principle is: **target the thing the action actually acts on.** If the action needs a device, target the device. If it needs a config entry, target the config entry. Resolving from a lower level (for example, looking up a config entry from an entity) adds unnecessary indirection, couples the action interface to assumptions about the data hierarchy in the integration, and makes it harder for users to understand what the action operates on.
 :::
 
 :::caution
@@ -270,7 +270,7 @@ Making the target optional seems convenient, but it makes automations and script
 
 Sometimes you want to provide extra actions to control your entities. For example, the Sonos integration provides action to group and ungroup devices. Entity service actions are special because there are many different ways a user can specify entities. It can use areas, a group or a list of entities.
 
-Register entity service actions with `homeassistant.helpers.service.async_register_platform_entity_service`. Register actions under your integration domain, e.g. `sonos`, not under the platform domain, e.g. `media_player`. You can pass a schema to `async_register_platform_entity_service` if the entity service action has fields. The schema can be:
+Register entity service actions with `homeassistant.helpers.service.async_register_platform_entity_service`. Register actions under your integration domain, for example, `sonos`, not under the platform domain, for example, `media_player`. You can pass a schema to `async_register_platform_entity_service` if the entity service action has fields. The schema can be:
 
 - A dictionary which will automatically be passed to `cv._make_entity_service_schema`
 - A validator returned by `cv._make_entity_service_schema`

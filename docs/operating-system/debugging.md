@@ -19,7 +19,7 @@ SSH access through the [SSH app] (on port 22 by default) only grants limited pri
 
    See [Generating SSH Keys](#generating-ssh-keys) section below if you need help generating keys.
 
-1. Connect the USB drive to your Home Assistant OS device and either explicitly import the drive's contents using the `ha os import` command (e.g. via SSH to the [SSH app] on port 22) or reboot the device leaving the drive attached, which automatically triggers the import.
+1. Connect the USB drive to your Home Assistant OS device and either explicitly import the drive's contents using the `ha os import` command (for example, via SSH to the [SSH app] on port 22) or reboot the device leaving the drive attached, which automatically triggers the import.
 
 :::tip
 Make sure when you are copying the public key(s) to the root of the USB drive that you correctly name the file `authorized_keys` without a `.pub` file extension.
