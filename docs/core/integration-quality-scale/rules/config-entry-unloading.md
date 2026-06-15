@@ -32,7 +32,7 @@ Integrations can use `entry.async_on_unload` to register callbacks which will be
 This can be useful to clean up resources without having to keep track of the removal methods yourself.
 The registered callbacks will be called if :
  - `async_setup_entry` raises either `ConfigEntryError`, `ConfigEntryAuthFailed`, or `ConfigEntryNotReady`
- - `async_unload_entry` succeeds, i.e., it returns True and does not raise.
+ - `async_unload_entry` succeeds, that is, it returns True and does not raise.
 
 Note that integrations always need to implement `async_unload_entry` to support config entry unloading, just calling `entry.async_on_unload` is not enough.
 :::

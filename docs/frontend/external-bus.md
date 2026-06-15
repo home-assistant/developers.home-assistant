@@ -130,7 +130,7 @@ Expected response:
 
 - `hasSettingsScreen`: Set to true if the external app will show a configuration screen when it receives `config_screen/show`
 - `hasSidebar`: Set to true if the external app has a sidebar
-- `canWriteTag`: Set to true if the external app can write NFC tags (i.e., the device has NFC hardware)
+- `canWriteTag`: Set to true if the external app can write NFC tags (that is, the device has NFC hardware)
 - `hasExoPlayer`: Set to true if the app supports HLS video playback via ExoPlayer
 - `canCommissionMatter`: Set to true if the app can commission Matter devices
 - `canImportThreadCredentials`: Set to true if the app can import Thread credentials

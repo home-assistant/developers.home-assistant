@@ -1859,7 +1859,7 @@ logs further in the past.
 
 The `Accept` header can be set to `text/x-log` to get logs annotated with
 extra information, such as the timestamp and Systemd unit name. If no
-identifier is specified (i.e. for the host logs containing logs for multiple
+identifier is specified (that is, for the host logs containing logs for multiple
 identifiers/units), this option is ignored - these logs are always annotated.
 
 </ApiEndpoint>

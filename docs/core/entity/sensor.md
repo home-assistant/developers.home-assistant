@@ -80,7 +80,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.SPEED` | ft/s, in/d, in/h, in/s, km/h, kn, m/s, mph, mm/d, mm/s | Generic speed
 | `SensorDeviceClass.SULPHUR_DIOXIDE` | ppb, µg/m³ | Concentration of sulphure dioxide
 | `SensorDeviceClass.TEMPERATURE` | °C, °F, K | Temperature.
-| `SensorDeviceClass.TEMPERATURE_DELTA` | °C, °F, K | This device class represents a temperature interval (delta), i.e. the difference between two temperature values.
+| `SensorDeviceClass.TEMPERATURE_DELTA` | °C, °F, K | This device class represents a temperature interval (delta), that is, the difference between two temperature values.
 | `SensorDeviceClass.TIMESTAMP` | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
 | `SensorDeviceClass.UPTIME` | | Timestamp. Represents the datetime when the device last booted. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
 | `SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³, mg/m³ | Concentration of volatile organic compounds
@@ -230,7 +230,7 @@ Example of state class `SensorStateClass.TOTAL_INCREASING` where the sensor does
 
 ### Handling migration from unsupported to supported units of measurement
 
-Integrations may have sensors which have their own custom units of measurement, i.e. they don't use Home Assistant constants to set the units.  
+Integrations may have sensors which have their own custom units of measurement, that is, they don't use Home Assistant constants to set the units.  
 When migrating such a sensor to a unit supported by Home Assistant's unit system, the old custom unit must match the value of the Home Assistant constant exactly or Home Assistant will treat this as a unit change.
 
 For example, the integration may have set the unit of an energy sensor to `KWh` which differs from the value of `UnitOfEnergy.KILO_WATT_HOUR` (kWh).

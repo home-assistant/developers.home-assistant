@@ -272,7 +272,7 @@ We support:
 - `port`
 - `match(REGEX)`
 - `list(val1|val2|...)`
-- `device` / `device(filter)`: Device filter can be in the following format: `subsystem=TYPE` i.e. `subsystem=tty` for serial devices.
+- `device` / `device(filter)`: Device filter can be in the following format: `subsystem=TYPE`, that is, `subsystem=tty` for serial devices.
 
 :::note
 
