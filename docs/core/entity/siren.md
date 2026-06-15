@@ -3,7 +3,7 @@ title: Siren entity
 sidebar_label: Siren
 ---
 
-A siren entity is a device whose main purpose is to control siren devices like a doorbell or chime. Derive entity platforms from [`homeassistant.components.siren.SirenEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/siren/__init__.py)
+A siren entity is a device whose main purpose is to control siren devices like a doorbell or chime. Derive entity platforms from [`homeassistant.components.siren.SirenEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/siren/__init__.py)
 
 ## Properties
 

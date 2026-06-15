@@ -188,7 +188,7 @@ The `llm.Tool` class has the following methods:
 
 Perform the actual operation of the tool when called by the LLM. This must be an async method. Its arguments are `hass` and an instance of `llm.ToolInput`.
 
-Response data must be a dict and serializable in JSON [`homeassistant.util.json.JsonObjectType`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/util/json.py).
+Response data must be a dict and serializable in JSON [`homeassistant.util.json.JsonObjectType`](https://github.com/home-assistant/core/blob/dev/homeassistant/util/json.py).
 
 Errors must be raised as `HomeAssistantError` exceptions (or its subclasses). The response data should not contain error codes used for error handling.
 
