@@ -74,7 +74,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name              | Type                | Default          | Description                              |
 | ----------------- | --------------------| ---------------- | ---------------------------------------- |
-| in_zones          | `list[str] \| None` | `None`           | The zones the device is in, including passive zones. Should be sorted by size of the zone, then by distance to center of zones. |
+| in_zones          | `list[str] \| None` | `None`           | The zones the device is in, including passive zones. This list should be sorted by size of the zones, then by distance to center of the zones. |
 | latitude          | `float \| None`     | `None`           | The latitude coordinate of the device, ignored if `in_zones` is not `None`.   |
 | location_accuracy | `float`             | `0`              | The location accuracy (m) of the device. |
 | longitude         | `float \| None`     | `None`           | The longitude coordinate of the device, ignored if `in_zones` is not `None`.  |
