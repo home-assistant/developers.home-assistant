@@ -69,7 +69,7 @@ class MyValve(ValveEntity):
 
 ### Close valve
 
-Only implement this method if the flag `SUPPORT_CLOSE` is set.  For valves that
+Only implement this method if the flag `SUPPORT_CLOSE` is set. For valves that
 can set position, this method should be left unimplemented and only `set_valve_position` is required.
 
 ```python

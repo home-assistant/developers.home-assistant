@@ -155,7 +155,7 @@ pip install -e ./pychromecast
 hass --skip-pip-packages pychromecast
 ```
 
-It is also possible to use a public git repository to install a requirement.  This can be useful, for example, to test changes to a requirement dependency before it's been published to PyPI. Syntax:
+It is also possible to use a public git repository to install a requirement. This can be useful, for example, to test changes to a requirement dependency before it's been published to PyPI. Syntax:
 
 ```json
 {
