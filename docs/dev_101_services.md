@@ -315,7 +315,7 @@ async def custom_set_sleep_timer(entity, service_call):
 
 Actions may respond to an action call with data for powering more advanced automations. There are some additional implementation requirements:
 
-- Response data must be a `dict` and serializable in JSON [`homeassistant.util.json.JsonObjectType`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/util/json.py) in order to interoperate with other parts of the system, such as the frontend.
+- Response data must be a `dict` and serializable in JSON [`homeassistant.util.json.JsonObjectType`](https://github.com/home-assistant/core/blob/dev/homeassistant/util/json.py) in order to interoperate with other parts of the system, such as the frontend.
 - Errors must be raised as exceptions just like any other service action call as
 we do not want end users to need complex error handling in scripts and automations.
 The response data should not contain error codes used for error handling.

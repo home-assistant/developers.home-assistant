@@ -3,7 +3,7 @@ title: Weather entity
 sidebar_label: Weather
 ---
 
-Derive entity platforms from [`homeassistant.components.weather.WeatherEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/weather/__init__.py)
+Derive entity platforms from [`homeassistant.components.weather.WeatherEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/weather/__init__.py)
 
 ## Properties
 
