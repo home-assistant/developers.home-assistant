@@ -136,7 +136,7 @@ Get details about an app
 | dns                 | list               | A list of DNS servers used by the app                                               |
 | docker_api          | boolean            | `true` if docker_api access is granted is enabled                                      |
 | documentation       | boolean            | `true` if documentation is available                                                   |
-| full_access         | boolean            | `true` if full access access is granted is enabled                                     |
+| full_access         | boolean            | `true` if full access is granted                                     |
 | gpio                | boolean            | `true` if gpio access is granted is enabled                                            |
 | hassio_api          | boolean            | `true` if hassio api access is granted is enabled                                      |
 | hassio_role         | string             | The hassio role (default, homeassistant, manager, admin)                               |

@@ -20,7 +20,7 @@ Properties should always only return information from memory and not do I/O (lik
 | app_name                        | `str \| None`                    | `None`  | Name of the current running app.
 | device_class                    | `MediaPlayerDeviceClass \| None` | `None`  | Type of media player.
 | group_members                   | `list[str] \| None`              | `None`  | A dynamic list of player entities which are currently grouped together for synchronous playback. If the platform has a concept of defining a group leader, the leader should be the first element in that list.
-| is_volume_muted                 | `bool \| None`                   | `None`  | `True` if if volume is currently muted.
+| is_volume_muted                 | `bool \| None`                   | `None`  | `True` if volume is currently muted.
 | media_album_artist              | `str \| None`                    | `None`  | Album artist of current playing media, music track only.
 | media_album_name                | `str \| None`                    | `None`  | Album name of current playing media, music track only.
 | media_artist                    | `str \| None`                    | `None`  | Artist of current playing media, music track only.

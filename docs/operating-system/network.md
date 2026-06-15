@@ -151,7 +151,7 @@ powersave=0
 
 ## Using `nmcli` to set a static IPv4 address
 
-Log into the the Home Assistant OS base system via a console:
+Log into the Home Assistant OS base system via a console:
 
 ```bash
 Welcome to Home Assistant
