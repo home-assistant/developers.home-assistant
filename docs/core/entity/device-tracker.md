@@ -9,7 +9,7 @@ A device tracker is a read-only entity that provides presence information. There
 
 A BaseScannerEntity reports the connected state of a device, for example to a bluetooth beacon. If the device is connected the BaseScannerEntity's state will be the name of the associated zone, e.g `home` if associated with the home zone, and if the device is not connected the state will be `not_home`.
 
-The base class sets the `in_zones` state attribute. It will be populated with the `entity_id` of the associated zone and zones containing it when the device is connected and empty when not connected.
+The base class sets the `in_zones` state attribute. It will be populated with the `entity_id` of the associated zone and zones containing it, sorted by size, when the device is connected and empty when not connected.
 
 The base class also sets the `tracking_type` capability attribute to `TrackingType.CONNECTION`.
 
@@ -30,7 +30,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 A ScannerEntity reports the connected state of a device on the local network. If the device is connected the ScannerEntity's state will be the name of the associated zone, e.g `home` if associated with the home zone, and if the device is not connected the state will be `not_home`.
 
-The base class sets the `in_zones` state attribute. It will be populated with the `entity_id` of the associated zone and zones containing it when the device is connected and empty when not connected.
+The base class sets the `in_zones` state attribute. It will be populated with the `entity_id` of the associated zone and zones containing it, sorted by size, when the device is connected and empty when not connected.
 
 The base class also sets the `tracking_type` capability attribute to `TrackingType.CONNECTION`.
 
@@ -74,7 +74,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name              | Type                | Default          | Description                              |
 | ----------------- | --------------------| ---------------- | ---------------------------------------- |
-| in_zones          | `list[str] \| None` | `None`           | The zones the device is in, including passive zones. |
+| in_zones          | `list[str] \| None` | `None`           | The zones the device is in, including passive zones. Should be sorted by size of the zone, then by distance to center of zones. |
 | latitude          | `float \| None`     | `None`           | The latitude coordinate of the device, ignored if `in_zones` is not `None`.   |
 | location_accuracy | `float`             | `0`              | The location accuracy (m) of the device. |
 | longitude         | `float \| None`     | `None`           | The longitude coordinate of the device, ignored if `in_zones` is not `None`.  |
