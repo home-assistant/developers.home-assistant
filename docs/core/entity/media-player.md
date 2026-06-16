@@ -81,7 +81,7 @@ and are combined using the bitwise or (`|`) operator.
 
 ## States
 
-The state of a media player is defined by using values in the `MediaPlayerState` enum, and can take the following possible values.
+Setting the state should return an enum from `MediaPlayerState` in the `state` property. The resulting state value is the lowercase version of the enum member name (for example, `MediaPlayerState.PLAYING` results in the state `playing`).
 
 | Value       | Description                                                                                                         |
 |-------------|---------------------------------------------------------------------------------------------------------------------|
