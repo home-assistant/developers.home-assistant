@@ -2,7 +2,7 @@
 title: "Standards"
 ---
 
-To ensure that the documentation for Home Assistant is consistent and easy to follow for both novice and expert users, we ask that you follow a very strict set of standards for developing the documentation.
+To ensure that the documentation for Home Assistant is consistent and easy to follow for all readers, we ask that you follow a very strict set of standards for developing the documentation.
 
 ## Style guide
 
