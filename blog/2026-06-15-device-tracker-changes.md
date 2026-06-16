@@ -27,9 +27,9 @@ More details can be found in  [architecture proposal #627](https://github.com/ho
 
 ### Deprecation of `location_name`
 
-The `location_name` property of `TrackerEntity` has been deprecated, and will stop workin in Home Assistant Core 2027.7.
+The `location_name` property of `TrackerEntity` has been deprecated, and will stop working in Home Assistant Core 2027.7.
 
-Integrations with device trackers which do not know or do not want to report the exact coordinates and today use `location_name` to report the name of a zone should instead report a list of zone entity ids ghrough the `in_zones` property.
+Integrations with device trackers which do not know or do not want to report the exact coordinates and today use `location_name` to report the name of a zone should instead report a list of zone entity IDs through the `in_zones` property.
 Device trackers which use `location_name` to give extra context can instead do that via a separate sensor or an extra state attribute.
 
 More details can be found in  [architecture proposal #1387](https://github.com/home-assistant/architecture/discussions/1387)
@@ -40,7 +40,7 @@ The [`BaseScannerEntity`](/docs/core/entity/device-tracker#basescannerentity) cl
 
 ### Users can associate `BaseScannerEntity` and `ScannerEntity` with any zone
 
-`BaseScannerEntity` and `ScannerEntity` store the associated zone as an entiy registry option. The base class will set the state of the entity to the name of the associated zone when connected, and the `in_zones` state attribute to all zones which contain the associated zone.
+`BaseScannerEntity` and `ScannerEntity` store the associated zone as an entity registry option. The base class will set the state of the entity to the name of the associated zone when connected, and the `in_zones` state attribute to all zones which contain the associated zone.
 
 More details can be found in  [architecture proposal #1389](https://github.com/home-assistant/architecture/discussions/1389)
 
