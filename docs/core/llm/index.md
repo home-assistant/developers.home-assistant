@@ -3,7 +3,7 @@ title: "Home Assistant API for Large Language Models"
 sidebar_label: "LLM API"
 ---
 
-Home Assistant can interact with large language models (LLMs). By exposing a Home Assistant API to an LLM, the LLM can fetch data or control Home Assistant to better assist the user. Home Assistant comes with a built-in LLM API, but custom integrations can register their own to provide more advanced functionality.
+Home Assistant can interact with large language models (LLMs). By exposing a Home Assistant API to an LLM, the LLM can fetch data or control Home Assistant to better assist the user. Home Assistant comes with a built-in LLM API, but custom integrations can register their own to provide additional functionality.
 
 ## Built-in Assist API
 
