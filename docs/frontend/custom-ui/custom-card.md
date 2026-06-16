@@ -170,7 +170,7 @@ public getGridOptions() {
 
 In this example, the card will take 6 x 2 cells by default. The height of the card cannot be smaller than 2 rows. According to the cell dimension, the card will have a height of `120px` (`2` * `56px` + `8px`).
 
-## Advanced example
+## Example using JS modules
 
 Resources to load in dashboards are imported as a JS module import. Below is an example of a custom card using JS modules that does all the fancy things.
 
