@@ -4,11 +4,11 @@ title: "Entity events are subscribed in the correct lifecycle methods"
 
 ## Reasoning
 
-Entities may need to subscribe to events, eg. from the integration library, and update state when a new event comes in.
+Entities may need to subscribe to events, for example, from the integration library, and update state when a new event comes in.
 In order to do this correctly, the entities should subscribe and register the update callback in the entity method `async_added_to_hass`.
 This entity method is called after the entity has been registered by the entity platform helper and the entity will now have all its interfaces available to call, such as `self.hass` and `self.async_write_ha_state`.
-Registering an update callback before this stage will cause errors if the callback eg. tries to access `self.hass` or write a state update.
-To avoid memory leaks, the entities should unsubscribe from the events, ie. unregister the update callback, in the entity method `async_will_remove_from_hass`.
+Registering an update callback before this stage will cause errors if the callback, for example, tries to access `self.hass` or write a state update.
+To avoid memory leaks, the entities should unsubscribe from the events, that is, unregister the update callback, in the entity method `async_will_remove_from_hass`.
 
 ## Example implementation
 

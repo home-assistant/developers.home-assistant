@@ -84,7 +84,7 @@ With all pieces defined, it's time to register the command. This is done inside 
 from homeassistant.components import websocket_api
 
 async def async_setup(hass, config):
-    """Setup of your component."""
+    """Set up your component."""
     websocket_api.async_register_command(hass, ws_get_panels)
     websocket_api.async_register_command(hass, ws_handle_thumbnail)
 ```

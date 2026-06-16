@@ -326,7 +326,7 @@ from homeassistant.core import HomeAssistant
 from . import api
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
-    """Setup up a config entry."""
+    """Set up a config entry."""
 
     # TODO: Replace with actual API setup and exception
     auth = api.AsyncConfigEntryAuth(...)

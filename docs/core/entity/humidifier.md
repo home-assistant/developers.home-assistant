@@ -87,7 +87,7 @@ class MyHumidifierEntity(HumidifierEntity):
 
 ### Set humidity
 
-If the current mode does not allow to adjust target humidity, the device should automatically change its mode to the one which makes it possible upon this call.
+If the current mode does not allow adjusting target humidity, the device should automatically change its mode to the one which makes it possible upon this call.
 
 ```python
 class MyHumidifierEntity(HumidifierEntity):
