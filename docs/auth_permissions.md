@@ -2,10 +2,6 @@
 title: "Permissions"
 ---
 
-:::info
-This is an experimental feature that is not enabled or enforced yet
-:::
-
 Permissions limit the things a user has access to or can control. Permissions are attached to groups, of which a user can be a member. The combined permissions of all groups a user is a member of decides what a user can and cannot see or control.
 
 Permissions do not apply to the user that is flagged as "owner". This user will always have access to everything.
@@ -113,7 +109,7 @@ To check a permission, you will need to have access to the user object. Once you
 
 ```python
 from homeassistant.exceptions import Unauthorized
-from homeassistant.permissions.const import POLICY_READ, POLICY_CONTROL, POLICY_EDIT
+from homeassistant.auth.permissions.const import POLICY_READ, POLICY_CONTROL, POLICY_EDIT
 
 # Raise error if user is not an admin
 if not user.is_admin:
@@ -145,9 +141,6 @@ await hass.services.async_call(
 When you detect an unauthorized action, you should raise the `homeassistant.exceptions.Unauthorized` exception. This exception will cancel the current action and notifies the user that their action is unauthorized.
 
 The `Unauthorized` exception has various parameters, to identify the permission check that failed. All fields are optional.
-
-| # Not all actions have an ID (like adding config entry)
-| # We then use this fallback to know what category was unauth
 
 | Parameter | Description
 | --------- | -----------
@@ -205,19 +198,21 @@ async def async_setup(hass, config):
 
 #### Checking admin permission
 
-Starting Home Assistant 0.90, there is a special decorator to help protect
-service actions that require admin access.
+There is a special helper to protect service actions that require admin
+access.
 
 ```python
-# New in Home Assistant 0.90
+from homeassistant.helpers.service import async_register_admin_service
+
+
 async def handle_admin_service(call):
     """Handle a service action call."""
     # Do admin action
 
 
 async def async_setup(hass, config):
-    hass.helpers.service.async_register_admin_service(
-        DOMAIN, "my_service", handle_admin_service, vol.Schema({})
+    async_register_admin_service(
+        hass, DOMAIN, "my_service", handle_admin_service, vol.Schema({})
     )
     return True
 ```
