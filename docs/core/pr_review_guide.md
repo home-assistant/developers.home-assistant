@@ -61,8 +61,6 @@ These are very review-intensive. The quality scale bronze rules are the baseline
 
 - 👁️ **`test-before-configure` is implemented.** The config flow must attempt to connect to the device/service and fail gracefully with a user-friendly error if it can't.
 - 👁️ **`unique-config-entry` prevents duplicates.** The flow should call `self._abort_if_unique_id_configured()` or equivalent to prevent adding the same device twice.
-- **No user-configurable names.** Config flows should not ask the user for a name. Names are auto-generated or set via the UI later. Exception: helper integrations.
-- **No configurable polling intervals.** Never add `scan_interval` or `update_interval` as config flow options. Polling intervals are set by the integration, not the user.
 - 👁️ **Suggested values on reconfigure.** If a reconfigure flow exists (it shouldn't in initial PRs, but for follow-ups): input fields should pre-populate with current values using `suggested_value`.
 
 ### 2.5 Discovery flows (Zeroconf / DHCP / SSDP)
@@ -80,13 +78,11 @@ Discovery configuration is a frequent source of back-and-forth.
 - 👁️ **Uses `DataUpdateCoordinator` for polling.** Polling integrations should not implement their own polling loops. An exception is when the integration uses [separate polling for each individual entity](/docs/integration_fetching_data/#separate-polling-for-each-individual-entity).
 - **`_async_setup` for one-time work, `_async_update_data` for polling.** One-time setup work (auth, connection setup, initial device info fetch) belongs in `_async_setup`. The `_async_update_data` method runs on every poll cycle—don't put setup logic here.
 - **`ConfigEntryAuthFailed` for authentication errors.** When the API returns an auth error during data update, the coordinator must raise `ConfigEntryAuthFailed` (not `UpdateFailed`). This triggers a reauth flow instead of just logging errors and retrying forever. Note that this requires the config flow to have implemented an `async_step_reauth` method.
-- 👁️ **`runtime_data` is used.** Data stored at setup time should go in `entry.runtime_data` (typed via a dataclass), not in `hass.data[DOMAIN]`.
 - 👁️ **Coordinator data is properly typed.** The coordinator should use generics (`DataUpdateCoordinator[MyDataType]`) so entity code gets type-checked access to coordinator data.
 - 👁️ **Polling frequency is reasonable.** Check the `update_interval`: is it appropriate for the device/service? A weather API doesn't need 10-second polling. A local device might need faster updates.
 
 ### 2.7 Entities
 
-- **`has_entity_name = True`.** All entity classes must set this.
 - **Stable `unique_id`.** Entity unique IDs must not use IP addresses, hostnames, or anything that can change. Prefer MAC addresses (normalized with `format_mac()`), serial numbers, or device-assigned IDs.
 - **MAC addresses are normalized.** If a MAC address is used as unique ID or in device info, it must go through `format_mac()` from `homeassistant.helpers.device_registry`.
 - **Entity description is used.** New entities should be defined using a dataclass-based [entity description](/docs/core/entity#entity-description) (e.g., `SensorEntityDescription`). Other patterns described in the linked docs are also accepted, but the entity description pattern is preferred in new code.
@@ -194,7 +190,6 @@ Dependency PRs generate few review comments compared to new-integration PRs, but
 - **Tests are in the right location.** Integration tests belong in `tests/components/<domain>/`.
 - **All test function parameters have type annotations.** Use concrete types (`HomeAssistant`, `MockConfigEntry`) not `Any`.
 - 👁️ **Tests exercise HA's public interfaces.** Tests should set up integrations via `async_setup_component()` or `hass.config_entries.async_setup()`, assert state via `hass.states`, and trigger actions via `hass.services`. They should NOT directly instantiate integration classes or call internal methods.
-- **No `if` statements in test functions.** Tests should have deterministic execution paths. Use `getattr` for dynamic attribute access or parametrize different scenarios.
 
 ### 7.2 Patterns
 
@@ -277,7 +272,6 @@ The HA project is actively migrating away from `extra_state_attributes`. Reviewe
 ### 9.1 Architecture
 
 - **Constants in `const.py`, imported from there.** Integration constants (`CONF_*`, `DOMAIN`, entity keys) that are shared between more than one module belong in `const.py` and should be imported from there—not from `__init__.py` or other re-exporting modules. If a constant is only used in a single module, it should remain there. Magic strings that should be constants should be extracted.
-- **Executor jobs are grouped.** Multiple blocking I/O calls should be grouped into a single `async_add_executor_job` call, not called separately.
 - 👁️ **Early exit / guard clauses.** Prefer `if not condition: return` over wrapping the entire function body in `if condition:`. Avoid deep nesting.
 - **Direct dict access when validated.** When validation guarantees a key exists, use `data["key"]` not `data.get("key")`. Contract violations should be surfaced, not silently masked.
 - 👁️ **No unnecessary defensive checks on service actions.** HA's service/action schemas already validate input. Don't add redundant checks for fields that are validated by the schema.
