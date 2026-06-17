@@ -350,7 +350,7 @@ The most consistently confused error type in coordinators:
 
 Using `UpdateFailed` for auth errors means the integration retries forever with bad credentials instead of prompting the user to fix them.
 
-- **Auth errors raise `ConfigEntryAuthFailed`.** In `_async_update_data`, any `except` block catching authentication-related exceptions (401, 403, `InvalidToken`, `AuthenticationError`) should raise `ConfigEntryAuthFailed`, not `UpdateFailed`. Note that raising `ConfigEntryAuthFailed` requires the config flow to have implemented an `async_step_reauth` method.
+- **Auth errors raise `ConfigEntryAuthFailed`.** In `_async_update_data`, any `except` block catching authentication-related exceptions (401, 403, `InvalidToken`, `AuthenticationError`) should raise `ConfigEntryAuthFailed`, not `UpdateFailed`. To allow the user to re-authenticate, the integration also needs to have implemented an `async_step_reauth` method.
 
 ### 10.5 `HomeAssistantError` propagation
 
