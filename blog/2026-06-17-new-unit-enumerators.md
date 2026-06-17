@@ -9,8 +9,8 @@ by a corresponding enum:
 
   - `UnitOfDensity` enumerator replaces mass over volume `CONCENTRATION_***` constants
     (`"g/m³"`, `"mg/m³"`, `"μg/m³"`, `"μg/ft³"`)
-  - `UnitLessRatio` enumerator replaces unit-less ratio `CONCENTRATION_***` constants
+  - `UnitOfProportion` enumerator replaces unit-less ratio `CONCENTRATION_***` constants
     (`"ppm"`, `"ppb"`)
 
-`CONCENTRATION_PARTS_PER_CUBIC_METER` is only used by a single integration and is deprecated
+`CONCENTRATION_PARTS_PER_CUBIC_METER` was only used by a single integration and is deprecated
 without a replacement unit
