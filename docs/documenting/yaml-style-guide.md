@@ -372,7 +372,7 @@ actions:
 ### Templates
 
 Home Assistant templates are powerful, but they can be really confusing or hard
-to understand for a less experienced user. Therefore, the use of templates
+to understand. Therefore, the use of templates
 should be avoided if a pure YAML version is available.
 
 Additionally, the use of templates requires additional escaping in our
