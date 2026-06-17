@@ -43,24 +43,16 @@ These are very review-intensive. The quality scale bronze rules are the baseline
 
 ### 2.2 Manifest (`manifest.json`)
 
-- **`domain` matches directory name.** The domain string must exactly match the integration's directory under `homeassistant/components/`.
-- **`integration_type` is set.** Required for all integrations with config flows. Must be one of: `device`, `entity`, `hardware`, `helper`, `hub`, `service`, `system`, `virtual`.
-- **`codeowners` is populated.** Must contain the contributor's GitHub username (prefixed with `@`).
-- **`documentation` URL is valid.** Should point to the integration's page on home-assistant.io.
 - **`iot_class` is correct.** Must match how the integration actually communicates: `local_polling`, `cloud_push`, etc.
-- **`quality_scale` is set.** New integrations should include `"quality_scale": "bronze"` (or the appropriate level).
-- **`requirements` lists the PyPI package.** The external library must be on PyPI with a source distribution (not binary-only).
 - 👁️ **Library is open source.** The PyPI dependency must have its source code publicly available with an open-source license. Check the repo link.
 - **License is Apache-2.0-compatible.** HA Core is Apache-2.0. Dependencies must use a compatible license (MIT, BSD, Apache-2.0, LGPL, MPL-2.0, ISC, Unlicense are fine). **GPL-2.0, GPL-3.0, and AGPL are NOT compatible.**
 - **License metadata is present.** The library must have a license declared on PyPI. A library with no license is legally "all rights reserved."
 - **License identifier matches LICENSE file.** Verify the `license` field in `pyproject.toml`/`setup.cfg` matches the actual LICENSE file text in the source repo. Mismatches indicate either a mistake or misrepresentation.
 - **Transitive dependency licenses are compatible.** An MIT library pulling in a GPL-3.0 transitive dep creates the same incompatibility. Check the full dependency tree.
 - 👁️ **Library is not abandoned or recently transferred.** Check commit history and PyPI maintainer. A library with no activity in 2+ years that suddenly gets a new maintainer warrants scrutiny.
-- **No `version` field.** Core integrations must not include a `version` key (that's for custom integrations only).
 
 ### 2.3 Quality scale (`quality_scale.yaml`)
 
-- **File exists.** Every new integration needs a `quality_scale.yaml`.
 - **All bronze rules are addressed.** Each bronze rule should be marked `done` or `exempt` (with a reason). None should be `todo`.
 - 👁️ **Exempt reasons are valid.** If any rule is marked `exempt`, the reason should be legitimate (e.g., "this integration has no actions" for `action-setup`).
 - 👁️ **Claimed `done` rules are actually done.** Spot-check a few: the quality-scale-rule-verifier agent can help here.
@@ -177,7 +169,6 @@ Dependency PRs generate few review comments compared to new-integration PRs, but
 - **Only the dependency is updated.** The PR should touch `manifest.json` (version bump), and the requirements files that track the dependency, such as `requirements_all.txt` (regenerated), and minimal code changes required by the new version. Nothing else.
 - **No opportunistic refactoring.** If the contributor also refactored tests, cleaned up imports, or made stylistic changes—ask them to split that into a separate PR.
 - **`quality_scale` not accidentally removed.** Check that `manifest.json` didn't lose the `quality_scale` or `loggers` field: this happens surprisingly often in dependency bumps.
-- **Requirements files regenerated.** `requirements_all.txt` should be regenerated via `python3 -m script.gen_requirements_all`.
 
 ### 6.2 Upstream change review
 
@@ -291,7 +282,6 @@ The HA project is actively migrating away from `extra_state_attributes`. Reviewe
 - **Direct dict access when validated.** When validation guarantees a key exists, use `data["key"]` not `data.get("key")`. Contract violations should be surfaced, not silently masked.
 - 👁️ **No unnecessary defensive checks on service actions.** HA's service/action schemas already validate input. Don't add redundant checks for fields that are validated by the schema.
 - **No `.gitignore` files in integration directories.** These occasionally sneak in from contributor's local repos.
-- **Use `runtime_data` not `hass.data[DOMAIN]`.** New code should store integration data in `entry.runtime_data`. The `hass.data[DOMAIN]` pattern is legacy, and only useful in specific cases today.
 - **Use dataclasses for structured data.** When passing multiple related values around, use a dataclass instead of tuples, dicts, or separate variables.
 
 ### 9.2 Error handling
@@ -304,11 +294,9 @@ The HA project is actively migrating away from `extra_state_attributes`. Reviewe
 
 ### 9.3 Strings & logging
 
-- **No f-strings in log messages.** Use `_LOGGER.debug("Message %s", value)` lazy formatting, not `_LOGGER.debug(f"Message {value}")`.
 - **No integration domain in log messages.** The logger already includes the domain.
 - **Sentence case in all user-facing strings.** Including entity names, config flow labels, error messages.
 - **Correct log levels.** `_LOGGER.error` for things the user should act on, `_LOGGER.warning` for degraded but functional states, `_LOGGER.debug` for developer diagnostics. Don't use `error` for expected conditions like "device offline."
-- **No `print()` statements.** All output should use the logger.
 
 ### 9.4 Properties & state
 
@@ -400,17 +388,10 @@ async def async_turn_on(self, **kwargs):
 - **No amend/squash/rebase after opening.** Per repo policy: "Do NOT amend, squash, or rebase commits that have already been pushed to the PR branch after the PR review has started." Merge commits that pull in the latest changes from `dev` are fine.
 - **No unrelated commits after an unclean merge or rebase from base branch.** If the PR contains unrelated commits from `dev` the git history is corrupted. Ask the author to create a clean branch and open a fresh PR.
 - 👁️ **No commented-out code.** Dead code should be removed, not commented.
-- **Generated files are regenerated.** `requirements_all.txt`, and any hassfest outputs must be regenerated—not manually edited.
 
 ---
 
-## 12. Quality scale rules
-
-Every new integration (and any integration declaring a quality scale) must satisfy all the rules for its declared tier. See the [integration quality scale rules](/docs/core/integration-quality-scale/rules) for the full and current list.
-
----
-
-## 13. Reviewer workflow
+## 12. Reviewer workflow
 
 A suggested order for reviewing a PR efficiently:
 
