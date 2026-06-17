@@ -271,7 +271,7 @@ Example of raising an exception with localization during a service action call:
 
 ```python
 async def async_select_index(hass: HomeAssistant, index: int) -> None:
-    """Setup the config entry for my device."""
+    """Set up the config entry for my device."""
     try:
         check_index(index)
     except ValueError as exc:

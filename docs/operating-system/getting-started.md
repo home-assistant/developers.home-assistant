@@ -33,7 +33,7 @@ git submodule update --init --force
 
 ### Install prerequisites
 
-HAOS is using build containers to run Buildroot. Install the Docker container engine and make sure you have a working `docker` command which allows to run privileged containers. The build scripts are meant to be run as user, but some commands use privileges, hence a working `sudo` command is required as well.
+HAOS is using build containers to run Buildroot. Install the Docker container engine and make sure you have a working `docker` command which allows running privileged containers. The build scripts are meant to be run as user, but some commands use privileges, hence a working `sudo` command is required as well.
 
 While Buildroot can run on most Linux distributions natively, its strongly recommended to use the Debian based build container. This allows for a stable and known build environment with all dependencies pre-installed.
 
@@ -95,7 +95,7 @@ builder@d3d7577663c9:/build$
 
 From this shell, the same build above could be started using `make O=output_rpi4_64 rpi4_64`.
 
-This allows to invoke other Buildroot targets, for example, to [graph dependencies between packages](https://buildroot.org/downloads/manual/manual.html#_graphing_the_dependencies_between_packages). To use other Buildroot targets, make sure to change to the `buildroot/` directory and execute commands from there
+This allows invoking other Buildroot targets, for example, to [graph dependencies between packages](https://buildroot.org/downloads/manual/manual.html#_graphing_the_dependencies_between_packages). To use other Buildroot targets, make sure to change to the `buildroot/` directory and execute commands from there
 
 ```bash
 builder@c6dfb4cd4036:/build$ cd buildroot/

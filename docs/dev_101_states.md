@@ -34,7 +34,7 @@ DOMAIN = "hello_state"
 
 
 def setup(hass: HomeAssistant, config: ConfigType) -> bool:
-    """Setup the Hello State component. """
+    """Set up the Hello State component."""
     _LOGGER.info("The 'hello state' component is ready!")
 
     return True

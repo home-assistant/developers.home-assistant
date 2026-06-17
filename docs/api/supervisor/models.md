@@ -17,7 +17,7 @@ These models are describing objects that are getting returned from the superviso
 | version_latest   | string         | The latest published version of the app            |
 | update_available | boolean        | `true` if an update is available                      |
 | installed        | string         | `true` if the app is installed                 |
-| available        | boolean        | `false` if you can not install the app             |
+| available        | boolean        | `false` if you cannot install the app             |
 | icon             | bool           | The app has an icon file                            |
 | logo             | bool           | The app has a logo file                            |
 | state            | string         | The state of the app (started, stopped)            |
