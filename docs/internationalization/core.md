@@ -208,8 +208,8 @@ Set description placeholders when the [service action is registered](/docs/dev_1
         }
       },
       "sections": {
-        "advanced_fields": {
-          "name": "Advanced options"
+        "additional_fields": {
+          "name": "Additional options"
         }
       }
     }
