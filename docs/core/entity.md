@@ -107,9 +107,9 @@ The following properties are used to populate the entity and device registries. 
 | entity_registry_visible_default | `bool` | `True`                         | Indicate if the entity should be hidden or visible when first added to the entity registry. |
 | unique_id                       | `str \| None`            | `None`  | A unique identifier for this entity. It must be unique within a platform (like `light.hue`). It should not be configurable or changeable by the user. [Learn more.](entity_registry_index.md#unique-id-requirements) |
 
-## Advanced properties
+## Additional properties
 
-The following properties are also available on entities. However, they are for advanced use only and should be used with caution. These properties are always called when the state is written to the state machine.
+The following properties are also available on entities, but should be used with caution. These properties are always called when the state is written to the state machine.
 
 | Name                            | Type                         | Default | Description
 | ------------------------------- | ---------------------------- | ------- | -----------
