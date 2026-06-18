@@ -166,7 +166,7 @@ from homeassistant.exceptions import Unauthorized, UnknownUser
 from homeassistant.auth.permissions.const import POLICY_CONTROL
 
 
-async def handle_entity_service(call):
+async def handle_entity_service(call: ServiceCall) -> None:
     """Handle a service action call."""
     entity_ids = call.data["entity_id"]
 
@@ -191,7 +191,7 @@ async def handle_entity_service(call):
         # Do action on entity
 
 
-async def async_setup(hass, config):
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     hass.services.async_register(DOMAIN, "my_service", handle_entity_service)
     return True
 ```
@@ -205,12 +205,12 @@ access.
 from homeassistant.helpers.service import async_register_admin_service
 
 
-async def handle_admin_service(call):
+async def handle_admin_service(call: ServiceCall) -> None:
     """Handle a service action call."""
     # Do admin action
 
 
-async def async_setup(hass, config):
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     async_register_admin_service(
         hass, DOMAIN, "my_service", handle_admin_service, vol.Schema({})
     )
@@ -256,7 +256,7 @@ built-in `@require_admin` decorator.
 from homeassistant.components import websocket_api
 
 
-async def async_setup(hass, config):
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     websocket_api.async_register_command(hass, websocket_create)
     return True
 
@@ -266,7 +266,11 @@ async def async_setup(hass, config):
 @websocket_api.websocket_command(
     {vol.Required("type"): "my-component/my-action",}
 )
-async def websocket_create(hass, connection, msg):
+async def websocket_create(
+    hass: HomeAssistant,
+    connection: ActiveConnection,
+    msg: dict,
+) -> None:
     """Create a user."""
     # Do action
 ```
