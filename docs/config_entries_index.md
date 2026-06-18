@@ -72,7 +72,7 @@ If you need to clean up resources used by an entity in a platform, have the enti
 If an integration needs to clean up code when an entry is removed, it can define a removal function `async_remove_entry`. The config entry is deleted from `hass.config_entries` before `async_remove_entry` is called.
 
 ```python
-async def async_remove_entry(hass, entry) -> None:
+async def async_remove_entry(hass: HomeAssistant, entry: MyConfigEntry) -> None:
     """Handle removal of an entry."""
 ```
 
