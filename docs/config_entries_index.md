@@ -46,7 +46,11 @@ await hass.config_entries.async_forward_entry_setups(config_entry, ["light", "se
 For a platform to support config entries, it will need to add a setup entry function ([example](https://github.com/home-assistant/core/blob/f18ddb628c3574bc82e21563d9ba901bd75bc8b5/homeassistant/components/hassio/__init__.py#L522)):
 
 ```python
-async def async_setup_entry(hass, config_entry, async_add_entities):
+async def async_setup_entry(
+    hass: HomeAssistant,
+    config_entry: ConfigEntry,
+    async_add_entities: AddConfigEntryEntitiesCallback,
+) -> None:
     """Set up entry."""
 ```
 
