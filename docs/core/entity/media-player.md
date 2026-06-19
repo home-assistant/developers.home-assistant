@@ -329,7 +329,7 @@ class MyMediaPlayer(MediaPlayerEntity):
 
 ### Grouping player entities together
 
-Optional. If your player has support for grouping player entities together for synchronous playback (indicated by `SUPPORT_GROUPING`) one join and one unjoin method needs to be defined.
+Optional. If your player has support for grouping player entities together for synchronous playback (indicated by `MediaPlayerEntityFeature.GROUPING`) one join and one unjoin method needs to be defined.
 
 ```python
 class MyMediaPlayer(MediaPlayerEntity):

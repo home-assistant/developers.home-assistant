@@ -89,7 +89,7 @@ class MyRemote(RemoteEntity):
 
 ### Learn command
 
-Only implement this method if the flag `SUPPORT_LEARN_COMMAND` is set.
+Only implement this method if the flag `RemoteEntityFeature.LEARN_COMMAND` is set.
 
 ```python
 class MyRemote(RemoteEntity):
@@ -103,7 +103,7 @@ class MyRemote(RemoteEntity):
 
 ### Delete command
 
-Only implement this method if the flag `SUPPORT_DELETE_COMMAND` is set.
+Only implement this method if the flag `RemoteEntityFeature.DELETE_COMMAND` is set.
 
 ```python
 class MyRemote(RemoteEntity):
