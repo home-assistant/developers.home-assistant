@@ -187,7 +187,7 @@ When new data arrives, use `coordinator.async_set_updated_data(data)` to pass th
 ## Request parallelism
 
 :::info
-This is an advanced topic.
+Home Assistant manages request parallelism automatically; most integrations do not need to change anything described here.
 :::
 
 Home Assistant has built-in logic to make sure that integrations do not hammer APIs and consume all available resources in Home Assistant. This logic is built around limiting the number of parallel requests. This logic is automatically used during service action calls and entity updates.
