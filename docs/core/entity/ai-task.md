@@ -18,7 +18,7 @@ Supported features are defined by using values in the `AITaskEntityFeature` enum
 | Value | Description
 | ----- | -----------
 | `GENERATE_DATA` | The entity can generate data based on natural language instructions.
-| `SUPPORT_ATTACHMENTS` | The entity supports attachments as part of generate data tasks.
+| `SUPPORT_ATTACHMENTS` | The entity supports attachments as part of generate data and image tasks.
 | `GENERATE_IMAGE` | The entity can generate images based on natural language instructions.
 
 ## Methods
