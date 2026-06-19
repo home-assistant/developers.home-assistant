@@ -27,27 +27,11 @@ A light entity controls the brightness, hue and saturation color value, white va
 
 ## Color modes
 
-New integrations must implement both `color_mode` and `supported_color_modes`. If an integration is upgraded to support color mode, both `color_mode` and `supported_color_modes` should be implemented.
+A light must implement both `color_mode` and `supported_color_modes`. Supported color modes are defined by using values in the `ColorMode` enum, and `color_mode` must be set to one of the modes listed in `supported_color_modes`.
 
-Supported color modes are defined by using values in the `ColorMode` enum.
+Setting `supported_color_modes` is required. A light that does not set it will raise an error when its state is written.
 
-If a light does not implement the `supported_color_modes`, the `LightEntity` will attempt deduce it based on deprecated flags in the `supported_features` property:
-
- - Start with an empty set
- - If `SUPPORT_COLOR_TEMP` is set, add `ColorMode.COLOR_TEMP`
- - If `SUPPORT_COLOR` is set, add `ColorMode.HS`
- - If `SUPPORT_WHITE_VALUE` is set, add `ColorMode.RGBW`
- - If `SUPPORT_BRIGHTNESS` is set and no color modes have yet been added, add `ColorMode.BRIGHTNESS`
- - If no color modes have yet been added, add `ColorMode.ONOFF`
-
-If a light does not implement the `color_mode`, the `LightEntity` will attempt to deduce it based on which of the properties are set and which are `None`:
-
-- If `supported_color_modes` includes `ColorMode.RGBW` and `white_value` and `hs_color` are both not None: `ColorMode.RGBW`
-- Else if `supported_color_modes` includes `ColorMode.HS` and `hs_color` is not None: `ColorMode.HS`
-- Else if `supported_color_modes` includes `ColorMode.COLOR_TEMP` and `color_temp` is not None: `ColorMode.COLOR_TEMP`
-- Else if `supported_color_modes` includes `ColorMode.BRIGHTNESS` and `brightness` is not None: `ColorMode.BRIGHTNESS`
-- Else if `supported_color_modes` includes `ColorMode.ONOFF`: `ColorMode.ONOFF`
-- Else: ColorMode.UNKNOWN
+The available color modes are:
 
 | Value | Description
 |----------|-----------------------
