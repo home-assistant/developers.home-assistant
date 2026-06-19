@@ -2,14 +2,13 @@
 title: "App configuration"
 ---
 
-Each app (formerly known as add-on) is stored in a folder. The file structure looks like this:
+Each app (formerly known as an add-on) is stored in a folder. The file structure looks like this:
 
 ```text
 addon_name/
   translations/
     en.yaml
   apparmor.txt
-  build.yaml
   CHANGELOG.md
   config.yaml
   DOCS.md
@@ -21,7 +20,7 @@ addon_name/
 ```
 
 :::note
-Translation files, `config` and `build` all support `.json`, `.yml` and `.yaml` as the file type.
+Translation files and `config` support `.json`, `.yml` and `.yaml` as the file type.
 
 To keep it simple all examples use `.yaml`
 :::
@@ -55,11 +54,10 @@ then there will be a variable `TARGET` containing `beer` in the environment of y
 
 ## App Dockerfile
 
-All apps (formerly known as add-on) are based on the latest Alpine Linux image. Home Assistant will automatically substitute the right base image based on the machine architecture. Add `tzdata` if you need to run in a different timezone. `tzdata` Is is already added to our base images.
+Most of the apps (formerly known as add-ons) are based on the latest Alpine Linux image. Add `tzdata` if you need to run in a different timezone. `tzdata` is already added to our base images.
 
 ```dockerfile
-ARG BUILD_FROM
-FROM $BUILD_FROM
+FROM ghcr.io/home-assistant/base:latest
 
 # Install requirements for app
 RUN \
@@ -73,16 +71,20 @@ RUN chmod a+x /run.sh
 CMD [ "/run.sh" ]
 ```
 
-If you don't use local build on the device or our build script, make sure that the Dockerfile also has a set of labels that include:
+:::note
+
+When Supervisor built an app with no `build.yaml`, it previously passed `BUILD_FROM=ghcr.io/home-assistant/base:latest` automatically. Since Supervisor 2026.04.0 that fallback is no longer applied, make sure your Dockerfile doesn't rely on externally provided base image through the default `BUILD_FROM` argument.
+
+:::
+
+If you are not using Home Assistant GitHub builder actions (see [Publishing your app](/docs/apps/publishing)), make sure that the Dockerfile also has a set of labels that include:
 
 ```dockerfile
 LABEL \
   io.hass.version="VERSION" \
-  io.hass.type="addon" \
-  io.hass.arch="armhf|aarch64|i386|amd64"
+  io.hass.type="app" \
+  io.hass.arch="aarch64|amd64"
 ```
-
-It is possible to use your own base image with `build.yaml` or if you do not need support for automatic multi-arch building you can also use a simple docker `FROM`. You can also suffix the Dockerfile with the specific architecture to use a specific Dockerfile for a particular architecture, i.e. `Dockerfile.amd64`.
 
 ### Build args
 
@@ -90,13 +92,18 @@ We support the following build arguments by default:
 
 | ARG | Description |
 |-----|-------------|
-| `BUILD_FROM` | Holds the image for dynamic builds or buildings over our systems.
 | `BUILD_VERSION` | App version (read from `config.yaml`).
 | `BUILD_ARCH` | Holds the current build arch inside.
 
+:::note
+
+Since Supervisor 2026.04.0, the `BUILD_FROM` argument is no longer provided by default. Use explicit `FROM ghcr.io/home-assistant/base:latest` in your Dockerfile to achieve the same build result as before. Using a pinned version of the base image is recommended for better build stability.
+
+:::
+
 ## App configuration
 
-The configuration for an app (formerly known as add-on) is stored in `config.yaml`.
+The configuration for an app (formerly known as an add-on) is stored in `config.yaml`.
 
 ```yaml
 name: "Hello world"
@@ -116,11 +123,11 @@ map:
   - type: homeassistant_config
     read_only: False
     path: /custom/config/path
-image: repo/{arch}-my-custom-addon
+image: ghcr.io/my-org/my-app
 ```
 
 :::note
-Avoid using `config.yaml` as filename in your app for anything other than the app configuration. The Supervisor does a recursively search for `config.yaml` in the app repository.
+Avoid using `config.yaml` as filename in your app for anything other than the app configuration. The Supervisor does recursively search for `config.yaml` in the app repository.
 :::
 
 ### Required configuration options
@@ -129,9 +136,9 @@ Avoid using `config.yaml` as filename in your app for anything other than the ap
 | --- | ---- | ----------- |
 | `name` | string | The name of the app.
 | `version` | string | Version of the app. If you are using a docker image with the `image` option, this needs to match the tag of the image that will be used.
-| `slug` | string | Slug of the app. This needs to be unique in the scope of the [repository](/docs/add-ons/repository) that the app is published in and URI friendly.
+| `slug` | string | Slug of the app. This needs to be unique in the scope of the [repository](/docs/apps/repository) that the app is published in and URI friendly. |
 | `description` | string | Description of the app.
-| `arch` | list | A list of supported architectures: `armhf`, `armv7`, `aarch64`, `amd64`, `i386`.
+| `arch` | list | A list of supported architectures: `aarch64`, `amd64`.
 
 ### Optional configuration options
 
@@ -141,7 +148,7 @@ Avoid using `config.yaml` as filename in your app for anything other than the ap
 | `url` | url | | Homepage of the app. Here you can explain the app and options.
 | `startup` | string | `application` | `initialize` will start the app on setup of Home Assistant. `system` is for things like databases and not dependent on other things. `services` will start before Home Assistant, while `application` is started afterwards. Finally `once` is for applications that don't run as a daemon.
 | `webui` | string | | A URL for the web interface of this app. Like `http://[HOST]:[PORT:2839]/dashboard`, the port needs the internal port, which will be replaced with the effective port. It is also possible to bind the protocol part to a configuration option with: `[PROTO:option_name]://[HOST]:[PORT:2839]/dashboard` and it's looked up if it is `true` and it's going to `https`.
-| `boot` | string | `auto` | `auto` start at boot is controlled by the system and `manual` configures the app to only be started manually. If addon should never be started at boot automatically, use `manual_only` to prevent users from changing it.
+| `boot` | string | `auto` | `auto` start at boot is controlled by the system and `manual` configures the app to only be started manually. If the app should never be started at boot automatically, use `manual_only` to prevent users from changing it.
 | `ports` | dict | | Network ports to expose from the container. Format is `"container-port/type": host-port`. If the host port is `null` then the mapping is disabled.
 | `ports_description` | dict | | Network ports description mapping. Format is `"container-port/type": "description of this port"`. Alternatively use [Port description translations](#port-description-translations).
 | `host_network` | bool | `false` | If `true`, the app runs on the host network.
@@ -149,7 +156,7 @@ Avoid using `config.yaml` as filename in your app for anything other than the ap
 | `host_dbus` | bool | `false` | Map the host D-Bus service into the app.
 | `host_pid` | bool | `false` | Allow the container to run on the host PID namespace. Works only for not protected apps. **Warning:** Does not work with S6 Overlay. If need this to be `true` and you use the normal app base image you disable S6 by overriding `/init`. Or use an alternate base image.
 | `host_uts` | bool | `false` | Use the hosts UTS namespace.
-| `devices` | list | | Device list to map into the app. Format is: `<path_on_host>`. E.g., `/dev/ttyAMA0`
+| `devices` | list | | Device list to map into the app. Format is: `<path_on_host>`. For example, `/dev/ttyAMA0`
 | `homeassistant` | string | | Pin a minimum required Home Assistant Core version for the app. Value is a version string like `2022.10.5`.
 | `hassio_role` | str | `default` |Role-based access to Supervisor API. Available: `default`, `homeassistant`, `backup`, `manager` or `admin`
 | `hassio_api` | bool | `false` | This app can access the Supervisor's REST API. Use `http://supervisor`.
@@ -158,7 +165,7 @@ Avoid using `config.yaml` as filename in your app for anything other than the ap
 | `privileged` | list | | Privilege for access to hardware/system. Available access: `BPF`, `CHECKPOINT_RESTORE`, `DAC_READ_SEARCH`, `IPC_LOCK`, `NET_ADMIN`, `NET_RAW`, `PERFMON`, `SYS_ADMIN`, `SYS_MODULE`, `SYS_NICE`, `SYS_PTRACE`, `SYS_RAWIO`, `SYS_RESOURCE` or `SYS_TIME`.
 | `full_access` | bool | `false` | Give full access to hardware like the privileged mode in Docker. Works only for not protected apps. Consider using other app options instead of this, like `devices`. If you enable this option, don't add `devices`, `uart`, `usb` or `gpio` as this is not needed.
 | `apparmor` | bool/string | `true` | Enable or disable AppArmor support. If it is enabled, you can also use custom profiles with the name of the profile.
-| `map` | list | | List of Home Assistant directory types to bind mount into your container. Possible values: `homeassistant_config`, `addon_config`, `ssl`, `addons`, `backup`, `share`, `media`, `all_addon_configs`, and `data`. Defaults to read-only, which you can change by adding the property `read_only: false`. By default, all paths map to `/<type-name>` inside the addon container, but an optional `path` property can also be supplied to configure the path (Example: `path: /custom/config/path`). If used, the path must not be empty, unique from any other path defined for the addon, and not the root path. Note that the `data` directory is always mapped and writable, but the `path` property can be set using the same conventions.
+| `map` | list | | List of Home Assistant directory types to bind mount into your container. Possible values: `homeassistant_config`, `addon_config`, `ssl`, `addons`, `backup`, `share`, `media`, `all_addon_configs`, and `data`. Defaults to read-only, which you can change by adding the property `read_only: false`. By default, all paths map to `/<type-name>` inside the app container, but an optional `path` property can also be supplied to configure the path (Example: `path: /custom/config/path`). If used, the path must not be empty, unique from any other path defined for the app, and not the root path. Note that the `data` directory is always mapped and writable, but the `path` property can be set using the same conventions.
 | `environment` | dict | | A dictionary of environment variables to run the app with.
 | `audio` | bool | `false` | Mark this app to use the internal audio system. We map a working PulseAudio setup into the container. If your application does not support PulseAudio, you may need to install: Alpine Linux `alsa-plugins-pulse` or Debian/Ubuntu `libasound2-plugins`.
 | `video` | bool | `false` | Mark this app to use the internal video system. All available devices will be mapped into the app.
@@ -172,8 +179,7 @@ Avoid using `config.yaml` as filename in your app for anything other than the ap
 | `legacy` | bool | `false` | If the Docker image has no `hass.io` labels, you can enable the legacy mode to use the config data.
 | `options` | dict | | Default options value of the app.
 | `schema` | dict | | Schema for options value of the app. It can be `false` to disable schema validation and options.
-| `image` | string | | For use with Docker Hub and other container registries. This should be set to the name of the image only (E.g, `ghcr.io/home-assistant/{arch}-addon-example`). If you use this option, set the active docker tag using the `version` option.
-| `codenotary` | string | | For use with Codenotary CAS. This is the E-Mail address used to verify your image with Codenotary (E.g, `example@home-assistant.io`). This should match the E-Mail address used as the signer in the [app's extended build options](#app-extended-build)
+| `image` | string | | For use with container registries. Set this to the generic (multi-arch) image name, for example, `ghcr.io/my-org/my-app`. The `{arch}` placeholder is still supported as a compatibility fallback for per-architecture image names (for example, `ghcr.io/my-org/{arch}-my-app`). If you use this option, set the active Docker tag using the `version` option.
 | `timeout` | integer | 10 | Default 10 (seconds). The timeout to wait until the Docker daemon is done or will be killed.
 | `tmpfs` | bool | `false` | If this is set to `true`, the containers `/tmp` uses tmpfs, a memory file system.
 | `discovery` | list | | A list of services that this app provides for Home Assistant.
@@ -190,18 +196,17 @@ Avoid using `config.yaml` as filename in your app for anything other than the ap
 | `backup_pre` | string | | Command to execute in the context of the app before the backup is taken.
 | `backup_post` | string | | Command to execute in the context of the app after the backup was taken.
 | `backup_exclude` | list | | List of files/paths (with glob support) that are excluded from backups.
-| `advanced` | bool | `false` | Set this to `true` to require the user to have enabled "Advanced" mode for it to show.
-| `stage` | string | `stable` | Flag app with follow attribute: `stable`, `experimental` or `deprecated`. Apps set to `experimental` or `deprecated` will not show up in the store unless the user enables advanced mode.
-| `init` | bool | `true` | Set this to `false` to disable the Docker default system init. Use this if the image has its own init system (Like [s6-overlay](https://github.com/just-containers/s6-overlay)). *Note: Starting in V3 of S6 setting this to `false` is required or the addon won't start, see [here](https://developers.home-assistant.io/blog/2022/05/12/s6-overlay-base-images) for more information.*
+| `stage` | string | `stable` | Flag the app with one of the following attributes to give users an idea of its place in the development lifecycle: `stable`, `experimental` or `deprecated`. |
+| `init` | bool | `true` | Set this to `false` to disable the Docker default system init. Use this if the image has its own init system (Like [s6-overlay](https://github.com/just-containers/s6-overlay)). *Note: Starting in V3 of S6 setting this to `false` is required or the app won't start, see [here](https://developers.home-assistant.io/blog/2022/05/12/s6-overlay-base-images) for more information.*
 | `watchdog` | string | | A URL for monitoring the app health. Like `http://[HOST]:[PORT:2839]/dashboard`, the port needs the internal port, which will be replaced with the effective port. It is also possible to bind the protocol part to a configuration option with: `[PROTO:option_name]://[HOST]:[PORT:2839]/dashboard` and it's looked up if it is `true` and it's going to `https`. For simple TCP port monitoring you can use `tcp://[HOST]:[PORT:80]`. It works for apps on the host or internal network.
 | `realtime` | bool | `false` | Give app access to host schedule including `SYS_NICE` for change execution time/priority.
 | `journald` | bool | `false` | If set to `true`, the host's system journal will be mapped read-only into the app. Most of the time the journal will be in `/var/log/journal` however on some hosts you will find it in `/run/log/journal`. Apps relying on this capability should check if the directory `/var/log/journal` is populated and fallback on `/run/log/journal` if not.
-| `breaking_versions` | list | | List of breaking versions of the addon. A manual update will always be required if the update is to a breaking version or would cross a breaking version, even if users have auto-update enabled for the addon.
-| `ulimits` | dict | | Dictionary of resource limit (ulimit) settings for the app container. Each limit can be either a plain integer value or a dictionary with the keys `soft` and `hard`, each taking a plain integer for fine-grained control. Individual values must not be larger than the host's hard limit (inspectable by `ulimit -Ha`; e.g. 524288 in case of the `nofile` limit in the Home Assistant Operating System). |
+| `breaking_versions` | list | | List of breaking versions of the app. A manual update will always be required if the update is to a breaking version or would cross a breaking version, even if users have auto-update enabled for the app.
+| `ulimits` | dict | | Dictionary of resource limit (ulimit) settings for the app container. Each limit can be either a plain integer value or a dictionary with the keys `soft` and `hard`, each taking a plain integer for fine-grained control. Individual values must not be larger than the host's hard limit (inspectable by `ulimit -Ha`; for example, 524288 in case of the `nofile` limit in the Home Assistant Operating System). |
 
 ### Options / Schema
 
-The `options` dictionary contains all available options and their default value. Set the default value to `null` or define the data type in the `schema` dictionary to make an option mandatory. This way, the option needs to be given by the user before the app (formerly known as add-on) can start. Nested arrays and dictionaries are supported with a maximum depth of two.
+The `options` dictionary contains all available options and their default value. Set the default value to `null` or define the data type in the `schema` dictionary to make an option mandatory. This way, the option needs to be given by the user before the app (formerly known as an add-on) can start. Nested arrays and dictionaries are supported with a maximum depth of two.
 
 To make an option truly optional (without default value), the `schema` dictionary needs to be used. Put a `?` at the end of the data type and *do not* define any default value in the `options` dictionary. If any default value is given, the option becomes a required value.
 
@@ -267,32 +272,13 @@ We support:
 - `port`
 - `match(REGEX)`
 - `list(val1|val2|...)`
-- `device` / `device(filter)`: Device filter can be in the following format: `subsystem=TYPE` i.e. `subsystem=tty` for serial devices.
+- `device` / `device(filter)`: Device filter can be in the following format: `subsystem=TYPE`, that is, `subsystem=tty` for serial devices.
 
-## App extended build
+:::note
 
-Additional build options for an app are stored in `build.yaml`. This file will be read from our build systems.
-This is only needed if you are not using the default images or need additional things.
+Previously, additional build options such as `build_from`, `args`, and `labels` were configured in a separate `build.yaml` file that was read by the legacy builder. This file is no longer used. Base images should be set directly with a `FROM` statement in your `Dockerfile`, labels with a `LABEL` statement, and custom build arguments with `ARG` definitions. See the [builder migration blog post](/blog/2026/04/02/builder-migration) for detailed migration instructions.
 
-```yaml
-build_from:
-  armhf: mycustom/base-image:latest
-args:
-  my_build_arg: xy
-```
-
-| Key | Required | Description |
-| --- | -------- | ----------- |
-| build_from | no | A dictionary with the hardware architecture as the key and the base Docker image as the value.
-| args | no | Allow additional Docker build arguments as a dictionary.
-| labels | no | Allow additional Docker labels as a dictionary.
-| codenotary | no | Enable container signature with codenotary CAS.
-| codenotary.signer | no | Owner signer E-Mail address for this image.
-| codenotary.base_image | no | Verify the base container image. If you use our official images, use `notary@home-assistant.io`
-
-We provide a set of [base images][docker-base] which should cover a lot of needs. If you don't want to use the Alpine based version or need a specific image tag, feel free to pin this requirement for your build with the `build_from` option.
-
-[docker-base]: https://github.com/home-assistant/docker-base
+:::
 
 ## App translations
 
@@ -342,13 +328,13 @@ Sometimes app developers may want to allow users to configure to provide their o
 2. Internal service requires a binary file or some file configured externally as part of its config.
 3. Internal service supports live reloading on config change and you want to support that for some or all of its configuration by asking users for a file in its schema to live reload from.
 
-In cases like these you should add `addon_config` to `map` in your addon's configuration file. And then you should direct your users to put this file in the folder `/addon_configs/{REPO}_<your addon's slug>`. If an app is installed locally, `{REPO}` will be `local`. If the app is installed from a GitHub repository, `{REPO}` is a hashed identifier generated from the GitHub repository's URL (ex: `https://github.com/xy/my_hassio_addons`).
-This folder will be mounted at `/config` inside your addon's docker container at runtime. You should either provide an option in your addon's schema that collects a relative path to the file(s) starting from this folder or rely on a fixed filename and include that in your documentation.
+In cases like these you should add `addon_config` to `map` in your app's configuration file. And then you should direct your users to put this file in the folder `/addon_configs/{REPO}_<your addon's slug>`. If an app is installed locally, `{REPO}` will be `local`. If the app is installed from a GitHub repository, `{REPO}` is a hashed identifier generated from the GitHub repository's URL (ex: `https://github.com/xy/my_hassio_addons`).
+This folder will be mounted at `/config` inside your app's docker container at runtime. You should either provide an option in your app's schema that collects a relative path to the file(s) starting from this folder or rely on a fixed filename and include that in your documentation.
 
-Another use case of `addon_config` could be if your addon wants to provide file-based output or give users access to internal files for debugging. Some examples include:
+Another use case of `addon_config` could be if your app wants to provide file-based output or give users access to internal files for debugging. Some examples include:
 
 1. Internal service logs to a file and you wish to allow users access to that log file
 2. Internal service uses a database and you wish to allow users access to that database for debugging
 3. Internal service generates files which are intended to be used in its own config and you wish to allow users to access them as well
 
-In cases like these you should add `addon_config:rw` to `map` so your addon can write to this folder as well as read from it. And then you should write these files out to `/config` during your addon's runtime so users can see and access them.
+In cases like these you should add `addon_config:rw` to `map` so your app can write to this folder as well as read from it. And then you should write these files out to `/config` during your app's runtime so users can see and access them.

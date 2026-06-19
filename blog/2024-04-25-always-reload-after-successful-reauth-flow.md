@@ -11,7 +11,7 @@ To update and reload the entry after a successful reauthentication flow, the hel
 
 For cases where reloading is not wanted in case the entry is not changed, the `reload_even_if_entry_is_unchanged=False` parameter can be passed to the helper.
 
-More about this helper can be found here [here](/docs/config_entries_config_flow_handler/#reauthentication).
+More about this helper can be found here [here](/docs/core/integration/config_flow/#reauthentication).
 
 ### Example
 

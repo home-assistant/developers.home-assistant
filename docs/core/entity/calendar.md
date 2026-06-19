@@ -16,7 +16,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name  | Type          | Default               | Description                                             |
 | ----- | ------------- | --------------------- | ------------------------------------------------------- |
-| event | <code>CalendarEvent &#124; None</code> | **Required** | The current or next upcoming `CalendarEvent` or `None`. |
+| event | `CalendarEvent \| None` | **Required** | The current or next upcoming `CalendarEvent` or `None`. |
 | initial_color | `str` | `None` | A hex color string (e.g., `"#16a765"`) used as the initial color for the calendar in the frontend. |
 
 ### States
@@ -61,7 +61,7 @@ A calendar entity can return events that occur during a particular time range. S
 
 A calendar entity is responsible for returning the events in order including correctly
 ordering all day events. An all day event should be ordered to start at midnight in
-the Home Assistant timezone (e.g. from the start/end time argument `tzinfo`, 
+the Home Assistant timezone (for example, from the start/end time argument `tzinfo`, 
 or using `homeassistant.util.dt.start_of_local_day`). Note that all day events should still
 set a `datetime.date` in the `CalendarEvent` and not a date with a time.
 
@@ -80,6 +80,49 @@ class MyCalendar(CalendarEntity):
     ) -> list[CalendarEvent]:
         """Return calendar events within a datetime range."""
 ```
+
+### Subscribing to calendar events
+
+The frontend and other consumers can subscribe to real-time calendar event updates via the `calendar/event/subscribe` WebSocket API. This subscription is handled entirely by the `CalendarEntity` base class — integration developers do not need to implement anything beyond the existing `async_get_events` method.
+
+When a calendar entity's state changes (for example, an event starts or ends), the base class automatically fetches the latest events for the subscribed time range and pushes them to all active subscribers. Updates are debounced to avoid excessive calls to `async_get_events`.
+
+#### Notifying subscribers
+
+State is not automatically updated when creating, updating, or deleting calendar events. If an integration needs to notify subscribers outside of a state change (for example, after a CRUD operation), it should call `CalendarEntity.async_update_event_listeners` to push updated events to all active subscribers.
+
+#### WebSocket API
+
+**Subscribe to events:**
+
+```json
+{
+  "type": "calendar/event/subscribe",
+  "entity_id": "calendar.my_calendar",
+  "start": "2025-01-01T00:00:00+00:00",
+  "end": "2025-01-31T23:59:59+00:00"
+}
+```
+
+The subscription immediately returns the current events for the requested time range, then pushes updates whenever the entity state changes. The example below shows only the inner `event` payload; the actual WebSocket frame also includes `id` and `type` fields:
+
+```json
+{
+  "event": {
+    "events": [
+      {
+        "start": "2025-01-15T09:00:00+00:00",
+        "end": "2025-01-15T10:00:00+00:00",
+        "summary": "Team meeting",
+        "description": "Weekly sync",
+        "location": "Room 1"
+      }
+    ]
+  }
+}
+```
+
+Each event in the list contains only the fields that have a value. The possible fields are `start`, `end`, `summary`, `description`, and `location`. If an error occurs while fetching events, `events` will be `null`.
 
 ### Create events
 
@@ -158,7 +201,7 @@ A `CalendarEvent` represents an individual event on a calendar.
 | description | string           | `None`       | A detailed description of the event.                                                                                                            |
 | uid | string | `None` | A unique identifier for the event (required for mutations) |
 | recurrence_id | string | `None` | An optional identifier for a specific instance of a recurring event (required for mutations of recurring events) |
-| rrule |  string | `None` | A recurrence rule string e.g. `FREQ=DAILY` |
+| rrule |  string | `None` | A recurrence rule string, for example, `FREQ=DAILY` |
 
 ## Color management
 

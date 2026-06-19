@@ -12,7 +12,7 @@ If the device's primary method to notify of updates is Bluetooth advertisements 
 If the device's primary method to notify of updates is Bluetooth advertisements and its primary function is **not** a sensor, binary sensor, or firing events:
 
 - If all entities are updated via Bluetooth advertisements: [`PassiveBluetoothCoordinator`](#passivebluetoothcoordinator)
-- If active connections are needed: [`ActiveBluetoothCoordinator`](#activebluetoothcoordinator)
+- If active connections are needed: [`ActiveBluetoothDataUpdateCoordinator`](#activebluetoothcoordinator)
 
 If your device only communicates with an active Bluetooth connection and does not use Bluetooth advertisements:
 
@@ -67,7 +67,6 @@ from homeassistant.components.bluetooth import BluetoothScanningMode
 from homeassistant.components.bluetooth.passive_update_processor import (
     PassiveBluetoothProcessorCoordinator,
 )
-from .const import DOMAIN
 from homeassistant.const import Platform
 
 PLATFORMS: list[Platform] = [Platform.SENSOR]
@@ -76,19 +75,21 @@ from your_library import DataParser
 
 _LOGGER = logging.getLogger(__name__)
 
-async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+type ExampleConfigEntry = ConfigEntry[PassiveBluetoothProcessorCoordinator]
+
+
+async def async_setup_entry(hass: HomeAssistant, entry: ExampleConfigEntry) -> bool:
     """Set up example BLE device from a config entry."""
     address = entry.unique_id
     data = DataParser()
-    coordinator = hass.data.setdefault(DOMAIN, {})[
-        entry.entry_id
-    ] = PassiveBluetoothProcessorCoordinator(
+    coordinator = PassiveBluetoothProcessorCoordinator(
         hass,
         _LOGGER,
         address=address,
         mode=BluetoothScanningMode.ACTIVE,
         update_method=data.update,
     )
+    entry.runtime_data = coordinator
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     entry.async_on_unload(
         # only start after all platforms have had a chance to subscribe
@@ -100,19 +101,17 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 Example `sensor.py`:
 
 ```python
-from homeassistant import config_entries
 from homeassistant.components.bluetooth.passive_update_processor import (
     PassiveBluetoothDataProcessor,
     PassiveBluetoothDataUpdate,
     PassiveBluetoothEntityKey,
-    PassiveBluetoothProcessorCoordinator,
     PassiveBluetoothProcessorEntity,
 )
 from homeassistant.components.sensor import SensorEntity
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers.entity_platform import AddEntitiesCallback
+from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 
-from .const import DOMAIN
+from . import ExampleConfigEntry
 
 
 def sensor_update_to_bluetooth_data_update(parsed_data):
@@ -130,13 +129,11 @@ def sensor_update_to_bluetooth_data_update(parsed_data):
 
 async def async_setup_entry(
     hass: HomeAssistant,
-    entry: config_entries.ConfigEntry,
-    async_add_entities: AddEntitiesCallback,
+    entry: ExampleConfigEntry,
+    async_add_entities: AddConfigEntryEntitiesCallback,
 ) -> None:
     """Set up the example BLE sensors."""
-    coordinator: PassiveBluetoothProcessorCoordinator = hass.data[DOMAIN][
-        entry.entry_id
-    ]
+    coordinator = entry.runtime_data
     processor = PassiveBluetoothDataProcessor(sensor_update_to_bluetooth_data_update)
     entry.async_on_unload(
         processor.async_add_entities_listener(
@@ -166,6 +163,7 @@ is the same as the `PassiveBluetoothProcessorCoordinator`.
 Example `async_setup_entry` for an integration `__init__.py` using an `ActiveBluetoothProcessorCoordinator`:
 
 ```python
+import logging
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 from homeassistant.core import CoreState, HomeAssistant
@@ -187,7 +185,10 @@ from your_library import DataParser
 
 _LOGGER = logging.getLogger(__name__)
 
-async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+type ExampleConfigEntry = ConfigEntry[ActiveBluetoothProcessorCoordinator]
+
+
+async def async_setup_entry(hass: HomeAssistant, entry: ExampleConfigEntry) -> bool:
     """Set up example BLE device from a config entry."""
     address = entry.unique_id
     assert address is not None
@@ -221,9 +222,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
             )
         return await data.async_poll(connectable_device)
 
-    coordinator = hass.data.setdefault(DOMAIN, {})[
-        entry.entry_id
-    ] = ActiveBluetoothProcessorCoordinator(
+    coordinator = ActiveBluetoothProcessorCoordinator(
         hass,
         _LOGGER,
         address=address,
@@ -236,6 +235,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         # if we need to poll it
         connectable=False,
     )
+    entry.runtime_data = coordinator
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     entry.async_on_unload(
         # only start after all platforms have had a chance to subscribe
@@ -244,10 +244,39 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
     return True
 ```
 
+#### Requesting an active scan cadence
+
+`PassiveBluetoothProcessorCoordinator` and `ActiveBluetoothProcessorCoordinator` accept two optional keyword arguments, `scan_interval` and `scan_duration`, that are forwarded to the Bluetooth manager when the coordinator starts. They request a periodic active scan window for the coordinator's address from any `AUTO` mode scanner, so the device keeps emitting advertisements that contain its full payload without having to flip the scanner to `ACTIVE` mode permanently.
+
+This is useful for devices that fall back to a connectable poll when they have not been actively scanned for some time; pick a `scan_interval` shorter than that fallback and a `scan_duration` long enough to capture the next advertisement.
+
+```python
+coordinator = ActiveBluetoothProcessorCoordinator(
+    hass,
+    _LOGGER,
+    address=address,
+    mode=BluetoothScanningMode.PASSIVE,
+    update_method=data.update,
+    needs_poll_method=_needs_poll,
+    poll_method=_async_poll,
+    connectable=False,
+    # Ask AUTO mode scanners to flip ACTIVE for 10 seconds
+    # every 165 seconds for this address.
+    scan_interval=165.0,
+    scan_duration=10.0,
+)
+```
+
+Both arguments default to `None`, which leaves the underlying scheduler at its built-in cadence. `PASSIVE` and `ACTIVE` scanners are user-explicit choices and are not affected; only `AUTO` mode scanners honor the request.
+
 ## BluetoothCoordinator
 
-The `ActiveBluetoothCoordinator` and `PassiveBluetoothCoordinator` coordinators function similar
+The `ActiveBluetoothDataUpdateCoordinator` and `PassiveBluetoothCoordinator` coordinators function similar
 to `DataUpdateCoordinators` except they are driven by incoming advertisement data instead of polling.
+
+:::note
+The `_async_handle_unavailable` callback relies on the Bluetooth stack detecting that the device has stopped advertising. On macOS, CoreBluetooth caches advertisement data and may not surface device disappearance to the application layer, so `_async_handle_unavailable` may never fire even after the device has stopped broadcasting.
+:::
 
 ### PassiveBluetoothCoordinator
 
@@ -308,7 +337,8 @@ class ExamplePassiveBluetoothDataUpdateCoordinator(
 
 ```
 
-### ActiveBluetoothCoordinator
+<a id="activebluetoothcoordinator"></a>
+### ActiveBluetoothDataUpdateCoordinator
 
 Below is an example of an `ActiveBluetoothDataUpdateCoordinator`. Incoming data is received via `_async_handle_bluetooth_event` and processed by the integration's library.
 

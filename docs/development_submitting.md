@@ -26,7 +26,7 @@ Submit your improvements, fixes, and new features to Home Assistant one at a tim
      - Write a meaningful commit message and not only something like `Update` or `Fix`.
      - Use a capital letter to start with your commit message and do not finish with a full-stop (period).
      - Don't prefix your commit message with `[bla.bla]` or `platform:`.
-     - Write your commit message using the imperative voice, e.g. `Add some feature` not `Adds some feature`.
+     - Write your commit message using the imperative voice, for example, `Add some feature` not `Adds some feature`.
      
 
 5. Push your committed changes back to your fork on GitHub:
@@ -38,7 +38,7 @@ Submit your improvements, fixes, and new features to Home Assistant one at a tim
     - On GitHub, navigate to the [main page of the Home Assistant repository](https://github.com/home-assistant/core).
     - In the "Branch" menu, choose the branch that contains your commits (from your fork).
     - To the right of the Branch menu, click **New pull request**.
-    - Use the base branch dropdown menu to select the branch you'd like to merge your changes into, then use the compare branch drop-down menu to choose the topic branch you made your  changes in. Make sure the Home Assistant branch matches with your forked branch (`dev`) else you will propose ALL commits between branches.
+    - Use the base branch dropdown menu to select the branch you'd like to merge your changes into, then use the compare branch drop-down menu to choose the topic branch you made your changes in. Make sure the Home Assistant branch matches with your forked branch (`dev`) else you will propose ALL commits between branches.
     - Type a title and complete the provided template for your pull request.
     - Click **Create pull request**.
 

@@ -13,10 +13,10 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ----------------------- | ---- | ------- | -----------
-| current_valve_position | <code>int &#124; None</code> | `None` | The current position of the valve where 0 means closed and 100 is fully open. This attribute is required on valves with `reports_position = True`, where it's used to determine state.
-| is_closed | <code>bool &#124; None</code> | `None` | If the valve is closed or not. Used to determine `state` for valves that don't report position.
-| is_closing | <code>bool &#124; None</code> | `None` | If the valve is closing or not. Used to determine `state`.
-| is_opening | <code>bool &#124; None</code> | `None` | If the valve is opening or not. Used to determine `state`.
+| current_valve_position | `int \| None` | `None` | The current position of the valve where 0 means closed and 100 is fully open. This attribute is required on valves with `reports_position = True`, where it's used to determine state.
+| is_closed | `bool \| None` | `None` | If the valve is closed or not. Used to determine `state` for valves that don't report position.
+| is_closing | `bool \| None` | `None` | If the valve is closing or not. Used to determine `state`.
+| is_opening | `bool \| None` | `None` | If the valve is opening or not. Used to determine `state`.
 | reports_position | <code>bool</code> | **Required** | If the valve knows its position or not.
 
 ### Device classes
@@ -53,7 +53,7 @@ and are combined using the bitwise or (`|`) operator.
 
 ### Open valve
 
-Only implement this method if the flag `SUPPORT_OPEN` is set. For valves that
+Only implement this method if the flag `ValveEntityFeature.OPEN` is set. For valves that
 can set position, this method should be left unimplemented and only `set_valve_position` is required.
 
 ```python
@@ -69,7 +69,7 @@ class MyValve(ValveEntity):
 
 ### Close valve
 
-Only implement this method if the flag `SUPPORT_CLOSE` is set.  For valves that
+Only implement this method if the flag `ValveEntityFeature.CLOSE` is set. For valves that
 can set position, this method should be left unimplemented and only `set_valve_position` is required.
 
 ```python
@@ -85,7 +85,7 @@ class MyValve(ValveEntity):
 
 ### Set valve position
 
-Only implement this method if the flag `SUPPORT_SET_POSITION` is set. This method must be implemented in valves that can set position.
+Only implement this method if the flag `ValveEntityFeature.SET_POSITION` is set. This method must be implemented in valves that can set position.
 
 ```python
 class MyValve(ValveEntity):
@@ -100,7 +100,7 @@ class MyValve(ValveEntity):
 
 ### Stop valve
 
-Only implement this method if the flag `SUPPORT_STOP` is set.
+Only implement this method if the flag `ValveEntityFeature.STOP` is set.
 
 ```python
 class MyValve(ValveEntity):

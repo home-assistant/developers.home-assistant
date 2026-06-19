@@ -22,7 +22,7 @@ async def async_finish_flow(flow, result):
     """Finish flow."""
 ```
 
-This async callback is called when a flow is finished or aborted. i.e. `result['type'] in [FlowResultType.CREATE_ENTRY, FlowResultType.ABORT]`. The callback function can modify result and return it back, if the result type changed to `FlowResultType.FORM`, the flow will continue running, display another form.
+This async callback is called when a flow is finished or aborted, that is, `result['type'] in [FlowResultType.CREATE_ENTRY, FlowResultType.ABORT]`. The callback function can modify result and return it back, if the result type changed to `FlowResultType.FORM`, the flow will continue running, display another form.
 
 If the result type is `FlowResultType.FORM`, the result should look like:
 
@@ -411,7 +411,7 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         )
 ```
 
-Note: A user can change their password, which technically makes it mutable data, but for changing authentication credentials, you use [reauthentication](/docs/config_entries_config_flow_handler#reauthentication), which can mutate the config entry data.
+Note: A user can change their password, which technically makes it mutable data, but for changing authentication credentials, you use [reauthentication](/docs/core/integration/config_flow#reauthentication), which can mutate the config entry data.
 
 ### Abort
 

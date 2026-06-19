@@ -71,13 +71,13 @@ When a task is currently running (like `Preview` for the docs), it can be restar
 
 If the dev container was set up correctly - it supports debugging by default, out-of-the-box. It provides the necessary debug configurations, so hitting F5 should launch Home Assistant. Any breakpoints put in the code should be triggered, and the debugger should stop. 
 
-It is also possible to debug a remote Home Assistant instance (e.g., production instance) by following the procedure described [here](https://www.home-assistant.io/integrations/debugpy/).
+It is also possible to debug a remote Home Assistant instance (for example, production instance) by following the procedure described [here](https://www.home-assistant.io/integrations/debugpy/).
 
 ## Manual Environment
 
 _You only need these instructions if you do not want to use devcontainers._
 
-It is also possible to set up a more traditional development environment. See the section below for your operating system. Make sure your Python version is 3.13.
+It is also possible to set up a more traditional development environment. See the section below for your operating system. Make sure your Python version is 3.14.2 or higher.
 
 :::note
 If you proceed without the correct Python version installed, you will end up with a virtual environment that is incompatible with Home Assistant. Once you have installed the correct version, remove the `venv` directory and continue with the setup to recreate it with the correct version.
@@ -109,6 +109,38 @@ Install the core dependencies.
 sudo pacman -Sy base-devel python python-pip python-virtualenv autoconf libxml2 libxslt libjpeg-turbo libffi systemd zlib pkgconf ffmpeg gcc cmake
 ```
 
+### Developing on NixOS
+
+Drop a `default.nix` with the contents below in the checked out repository and activate it with, for example,
+[direnv](https://direnv.net/).
+
+```nix
+let
+  pkgs = import <nixpkgs> { };
+in
+pkgs.mkShell {
+  packages = with pkgs; [
+    autoconf
+    clang
+    cmake
+    ffmpeg
+    ffmpeg.dev
+    gammu
+    libffi.dev
+    libjpeg.dev
+    libxml2.dev
+    libxslt.dev
+    openssl_3.dev
+    pkg-config
+    python314
+    zlib.dev
+  ];
+  env = {
+    LD_LIBRARY_PATH = "${pkgs.libjpeg.out}/lib";
+  };
+}
+```
+
 ### Developing on Windows
 
 To develop on Windows, you will need to use the Linux subsystem (WSL). Follow the [WSL installation instructions](https://learn.microsoft.com/windows/wsl/install) and install Ubuntu from the Windows Store. Once you're able to access Linux, follow the Linux instructions.
@@ -116,7 +148,7 @@ To develop on Windows, you will need to use the Linux subsystem (WSL). Follow th
 When working in WSL make sure to keep all code/repos in the WSL environment to avoid issues with file permissions.
 
 :::tip
-If you find that you cannot open the development instance via [http://localhost:8123](http://localhost:8123) when using WSL, instead, within a WSL terminal, find the `inet` address of the `eth0` adaptor by running `ip addr show eth0`. Then use this address, excluding the CIDR block, to access the development instance, i.e. if your `inet` is listed as `172.20.37.6/20`, use [http://172.20.37.6:8123](http://172.20.37.6:8123).
+If you find that you cannot open the development instance via [http://localhost:8123](http://localhost:8123) when using WSL, instead, within a WSL terminal, find the `inet` address of the `eth0` adaptor by running `ip addr show eth0`. Then use this address, excluding the CIDR block, to access the development instance, that is, if your `inet` is listed as `172.20.37.6/20`, use [http://172.20.37.6:8123](http://172.20.37.6:8123).
 :::
 
 :::tip

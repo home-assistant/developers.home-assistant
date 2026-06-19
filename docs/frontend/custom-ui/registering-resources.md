@@ -12,14 +12,6 @@ The next step is to register these resources with the Home Assistant interface. 
 
 [![Open your Home Assistant instance and show your resources.](https://my.home-assistant.io/badges/lovelace_resources.svg)](https://my.home-assistant.io/redirect/lovelace_dashboards/) (Note: Once redirected, click the three dots menu in the top-right.)
 
-:::note
-
-This area is only available when the active user's profile has "advanced mode" enabled.
-
-:::
-
-![Screenshot of the Advanced Mode selector found on the Profile page](/img/en/frontend/frontend-profile-advanced-mode.png)
-
 Alternatively, you can also register the resource by adding it to the `resources` section of `lovelace` in the configuration:
 
 ```yaml
@@ -27,3 +19,7 @@ resources:
   - url: /local/<name of the resource>.js
     type: module
 ```
+
+If you are building a community dashboard, the resource must be loaded before Home Assistant can show it in the new dashboard dialog. After adding or updating the resource, refresh Home Assistant and reopen the dialog.
+
+For the full dashboard strategy and picker registration flow, refer to [custom strategies](./custom-strategy.md).

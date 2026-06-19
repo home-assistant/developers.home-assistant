@@ -57,6 +57,15 @@ Once you have the repository cloned locally, you can build the app using Android
 2. Sync the Gradle files.
 3. Click the green **Play** button in the top bar. Android Studio will automatically create an emulator and run the app for you.
 
+:::note
+The project requires the **NDK** (Native Development Kit) and **CMake** to be installed. These are normally installed automatically during project sync. If the automatic installation fails, you can install them manually:
+
+1. Open **Android Studio > Settings > Languages & Frameworks > Android SDK > SDK Tools**.
+2. Check **NDK (Side by side)** and **CMake**.
+3. Install the specific versions defined in the `libs.versions.toml` file in the project root.
+
+:::
+
 ### From the terminal
 
 :::info
@@ -111,4 +120,4 @@ Now that you've built the app, explore the rest of the documentation to deepen y
 
 ## Need help?
 
-If you get stuck, don't hesitate to ask for help! **[Join our Discord community](https://discord.gg/c5DvZ4e)**, make sure you select the developer role and head to the **[Android](https://discord.com/channels/330944238910963714/1346948551892009101)** project thread to connect with other contributors for assistance.
+If you get stuck, don't hesitate to ask for help! **[Join our Discord community](https://www.home-assistant.io/join-chat)**, make sure you select the developer role and head to the **[Android](https://discord.com/channels/330944238910963714/1346948551892009101)** project thread to connect with other contributors for assistance.

@@ -4,20 +4,20 @@ title: "Models"
 
 These models are describing objects that are getting returned from the supervisor API.
 
-## App (formerly known as add-on)
+## App (formerly known as an add-on)
 
 | key              | type           | description                                           |
 | ---------------- | -------------- | ----------------------------------------------------- |
 | name             | string         | The name of the app                                |
 | slug             | string         | The slug for the app                               |
-| advanced         | boolean        | `true` if it should only be visible to advanced users |
+| advanced         | boolean        | Deprecated and ignored; always `false` as of Supervisor 2026.03.0 |
 | description      | string         | The description of the app                         |
 | repository       | string         | The repository the app came from                   |
 | version          | string or null | The installed version of the app                   |
 | version_latest   | string         | The latest published version of the app            |
 | update_available | boolean        | `true` if an update is available                      |
-| installed        | string         | `true` if the the app is installed                 |
-| available        | boolean        | `false` if you can not install the app             |
+| installed        | string         | `true` if the app is installed                 |
+| available        | boolean        | `false` if you cannot install the app             |
 | icon             | bool           | The app has an icon file                            |
 | logo             | bool           | The app has a logo file                            |
 | state            | string         | The state of the app (started, stopped)            |
@@ -115,15 +115,17 @@ These models are describing objects that are getting returned from the superviso
 | address       | list    | A list with IP address and the netmask in a ::/XXX format.                                  |
 | gateway       | string  | The IP address of the gateway.                                                              |
 | nameservers   | list    | A list containing the IP addresses of the configured nameservers as strings.                |
+| route_metric  | int     | Route metric. Lower value has higher priority. The kernel accepts zero (0) but coerces it to 1024 (user default). |
 
 ### IPv4 configuration
 
-| key         | type    | description                                                                  |
-| ----------- | ------- | ---------------------------------------------------------------------------- |
-| method      | string  | The method used to set the IP can be `static`, `auto` or `disabled`.         |
-| address     | list    | A list with IP address and the netmask in a X.X.X.X/XX format.               |
-| gateway     | string  | The IP address of the gateway.                                               |
-| nameservers | list    | A list containing the IP addresses of the configured nameservers as strings. |
+| key          | type    | description                                                                  |
+| ------------ | ------- | ---------------------------------------------------------------------------- |
+| method       | string  | The method used to set the IP can be `static`, `auto` or `disabled`.         |
+| address      | list    | A list with IP address and the netmask in a X.X.X.X/XX format.               |
+| gateway      | string  | The IP address of the gateway.                                               |
+| nameservers  | list    | A list containing the IP addresses of the configured nameservers as strings. |
+| route_metric | int     | Route metric. Lower value has higher priority.                               |
 
 ### Wifi configuration
 
@@ -339,7 +341,7 @@ Response only fields will be in responses but cannot be included in requests.
 | name       | string  | Name of the user                                              |
 | is_owner   | boolean | Is the user the owner                                         |
 | is_active  | boolean | Is the user active                                            |
-| local_only | boolean | Can the user login from the network (e.g. via http)           |
+| local_only | boolean | Can the user login from the network (for example, via http)           |
 | group_ids  | list    | Role(s) the user has (admin, etc)                             |
 
 ## Drive
@@ -362,7 +364,7 @@ Response only fields will be in responses but cannot be included in requests.
 
 | key          | type    | description                                               |
 | ------------ | ------- | --------------------------------------------------------- |
-| device       | string  | Special device file for the filesystem (e.g. `/dev/sda1`) |
+| device       | string  | Special device file for the filesystem (for example, `/dev/sda1`) |
 | id           | string  | Unique and persistent id for filesystem                   |
 | size         | int     | Size of the filesystem in bytes                           |
 | name         | string  | Name of the filesystem (if known)                         |
