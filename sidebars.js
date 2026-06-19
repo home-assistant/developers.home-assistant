@@ -409,6 +409,7 @@ module.exports = {
     "apple/get_started",
     "apple/architecture",
     "apple/targets",
+    "apple/live_activities",
     "apple/testing",
     "apple/ci",
     "apple/codestyle",
