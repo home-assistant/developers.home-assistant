@@ -117,7 +117,7 @@ Since HAOS requires UEFI support, this is slightly more tricky than with "classi
 $ scripts/enter.sh make O=output_ova ova
 [...]
 $ unxz output_ova/images/haos_ova-7.0.dev20211003.qcow2.xz
-$ qemu-system-x86_64 -enable-kvm -name haos -smp 2 -m 1G -drive file=output_ova/images/haos_ova-7.0.dev20211003.qcow2,index=0,media=disk,if=virtio,format=qcow2 -drive file=/usr/share/ovmf/x64/OVMF_CODE.fd,if=pflash,format=raw,readonly=on
+$ qemu-system-x86_64 -enable-kvm -name haos -smp 2 -m 2G -drive file=output_ova/images/haos_ova-18.0.dev0.qcow2,index=0,media=disk,if=virtio,format=qcow2 -drive file=/usr/share/ovmf/x64/OVMF_CODE.fd,if=pflash,format=raw,readonly=on
 ```
 
 This will show QEMU's SDL interface and should boot Home Assistant Operating System. Once the boot completes and the Home Assistant CLI prompt `ha > ` is shown, you can use `login` to access the root shell.
