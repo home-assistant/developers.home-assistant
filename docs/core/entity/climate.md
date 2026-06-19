@@ -24,7 +24,7 @@ Properties should always only return information from memory and not do I/O (lik
 | max_temp                | `float`                             | `DEFAULT_MAX_TEMP` (value == 35 °C)  | The maximum temperature in `temperature_unit`.                             |
 | min_humidity            | `float`                             | `DEFAULT_MIN_HUMIDITY` (value == 30) | The minimum humidity.                                                      |
 | min_temp                | `float`                             | `DEFAULT_MIN_TEMP` (value == 7 °C)   | The minimum temperature in `temperature_unit`.                             |
-| precision               | `float`                             | According to `temperature_unit`      | The precision of the temperature in the system. Defaults to tenths for TEMP_CELSIUS, whole number otherwise. |
+| precision               | `float`                             | According to `temperature_unit`      | The precision of the temperature in the system. Defaults to tenths for `UnitOfTemperature.CELSIUS`, whole number otherwise. |
 | preset_mode             | `str \| None`        | **Required by ClimateEntityFeature.PRESET_MODE**  | The current active preset.                                                 |
 | preset_modes            | `list[str] \| None`  | **Required by ClimateEntityFeature.PRESET_MODE**  | The available presets.                                                     |
 | swing_mode              | `str \| None`        | **Required by ClimateEntityFeature.SWING_MODE**   | The swing setting.                                                         |
@@ -37,7 +37,7 @@ Properties should always only return information from memory and not do I/O (lik
 | target_temperature_high | `float \| None`      | **Required by TARGET_TEMPERATURE_RANGE** | The upper bound target temperature                                     |
 | target_temperature_low  | `float \| None`      | **Required by TARGET_TEMPERATURE_RANGE** | The lower bound target temperature                                     |
 | target_temperature_step | `float \| None`      | `None`                               | The supported step size a target temperature can be increased or decreased |
-| temperature_unit        | <code>str</code>                    | **Required**                         | The unit of temperature measurement for the system (`TEMP_CELSIUS` or `TEMP_FAHRENHEIT`).                    |
+| temperature_unit        | <code>str</code>                    | **Required**                         | The unit of temperature measurement for the system (`UnitOfTemperature.CELSIUS` or `UnitOfTemperature.FAHRENHEIT`).                    |
 
 ### HVAC modes
 
