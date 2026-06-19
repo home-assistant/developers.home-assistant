@@ -66,7 +66,7 @@ A `ConversationInput` object contains the following data:
 | ---- | ---- | -----------
 | `text` | `str` | User input
 | `context` | `Context` | HA context to attach to actions in HA
-| `conversation_id` | `Optional[str]` | Can be used to track a multi-turn conversation. Return None if not supported
+| `conversation_id` | `str \| None` | Can be used to track a multi-turn conversation. Return None if not supported
 | `language` | `str` | Language of the text. If user did not provide one, it's set to the HA configured language.
 | `continue_conversation` | `bool` | If the agent expects the user to respond. If not set, it's assumed to be False.
 
