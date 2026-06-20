@@ -77,7 +77,7 @@ Discovery configuration is a frequent source of back-and-forth.
 
 - 👁️ **Uses `DataUpdateCoordinator` for polling.** Polling integrations should not implement their own polling loops. An exception is when the integration uses [separate polling for each individual entity](/docs/integration_fetching_data/#separate-polling-for-each-individual-entity).
 - **`_async_setup` for one-time work, `_async_update_data` for polling.** One-time setup work (auth, connection setup, initial device info fetch) belongs in `_async_setup`. The `_async_update_data` method runs on every poll cycle—don't put setup logic here.
-- **`ConfigEntryAuthFailed` for authentication errors.** When the API returns an auth error during data update, the coordinator must raise `ConfigEntryAuthFailed` (not `UpdateFailed`). This triggers a reauth flow instead of just logging errors and retrying forever. Note that this requires the config flow to have implemented an `async_step_reauth` method.
+- **`ConfigEntryAuthFailed` for authentication errors.** When the API returns an auth error during data update, the coordinator must raise `ConfigEntryAuthFailed` (not `UpdateFailed`). This triggers a reauth flow instead of just logging errors and retrying forever.
 - 👁️ **Coordinator data is properly typed.** The coordinator should use generics (`DataUpdateCoordinator[MyDataType]`) so entity code gets type-checked access to coordinator data.
 - 👁️ **Polling frequency is reasonable.** Check the `update_interval`: is it appropriate for the device/service? A weather API doesn't need 10-second polling. A local device might need faster updates.
 
@@ -88,7 +88,7 @@ Discovery configuration is a frequent source of back-and-forth.
 - **Entity description is used.** New entities should be defined using a dataclass-based [entity description](/docs/core/entity#entity-description) (e.g., `SensorEntityDescription`). Other patterns described in the linked docs are also accepted, but the entity description pattern is preferred in new code.
 - **`PARALLEL_UPDATES` is set.** For coordinator-based integrations, set `PARALLEL_UPDATES = 0` in each platform module (since the coordinator handles synchronization).
 - 👁️ **Entity categories are correct.** See Section 8 for detailed `EntityCategory` guidance: this is one of the most common review patterns.
-- 👁️ **Debug/diagnostic entities disabled by default.** Entities for debugging purposes (signal strength, rate limits, firmware version) should set `entity_registry_enabled_default=False` in addition to `EntityCategory.DIAGNOSTIC`.
+- 👁️ **Debug entities disabled by default.** Entities for debugging purposes (signal strength, rate limits, firmware version) should set `entity_registry_enabled_default=False`.
 
 ### 2.8 Strings & translations
 
@@ -197,7 +197,7 @@ Dependency PRs generate few review comments compared to new-integration PRs, but
 - **`@pytest.mark.parametrize` for repetitive cases.** If multiple test functions test the same behavior with different inputs, they should be parametrized into one function. But don't over-parametrize: a single test for one scenario doesn't need parametrize.
 - **`freezer` for time-based tests.** Tests involving time must use the `freezer` fixture—never mock `datetime`, `time`, or `utcnow` directly.
 - **No `mock.patch` on `sys.modules`.** This is fragile and breaks other tests. Use proper mocking patterns instead.
-- 👁️ **Config flow tests have full coverage.** Every branch in the config flow should be tested: happy path, error handling, user abort, each step. Reviewing the config flow tests early is often a fast way to spot bugs in the rest of the code.
+- 👁️ **Config flow tests have full coverage.** Every branch in the config flow should be tested: happy path, error handling, user abort, each step. Tests that test step errors should continue the flow to create entry result to show error recovery. Reviewing the config flow tests early is often a fast way to spot bugs in the rest of the code.
 - 👁️ **Error/recovery scenarios tested.** Tests should cover what happens when the device/service is unavailable, returns errors, or requires reauthentication. This is the most commonly requested missing test type.
 - 👁️ **Test brittleness minimized.** Avoid hard-coding values that depend on upstream data (e.g., specific holiday dates). Use mocking or select stable test data that won't change when a dependency is bumped.
 
