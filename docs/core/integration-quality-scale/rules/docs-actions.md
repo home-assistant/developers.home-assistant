@@ -29,3 +29,7 @@ The `my_integration.get_schedule` service is used to fetch a schedule from the i
 ## Exceptions
 
 There are no exceptions to this rule.
+
+## Related rules
+
+<RelatedRules relatedRules={frontMatter.related_rules}></RelatedRules>
