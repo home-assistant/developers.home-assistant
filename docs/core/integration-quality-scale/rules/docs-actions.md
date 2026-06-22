@@ -1,5 +1,8 @@
 ---
 title: "The documentation describes the provided service actions that can be used"
+related_rules:
+  - docs-triggers
+  - docs-conditions
 ---
 
 ## Reasoning
