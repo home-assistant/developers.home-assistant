@@ -4,6 +4,7 @@ related_rules:
   - docs-actions
   - docs-triggers
 ---
+import RelatedRules from './_includes/related_rules.jsx'
 
 ## Reasoning
 
