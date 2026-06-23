@@ -76,7 +76,7 @@ class MyCamera(Camera):
 
 ### Stream source
 
-The stream source should return a url that is usable by ffmpeg (e.g. an RTSP url). Requires `CameraEntityFeature.STREAM`.
+The stream source should return a url that is usable by ffmpeg (for example, an RTSP url). Requires `CameraEntityFeature.STREAM`.
 
 A camera entity with a stream source by default uses `StreamType.HLS` to tell the frontend to use an HLS feed with the `stream` component. This stream source will also be used with `stream` for recording.
 
@@ -93,7 +93,7 @@ A common way for a camera entity to render a camera still image is to pass the s
 ### WebRTC streams
 
 WebRTC enabled cameras can be used by facilitating a direct connection with the home assistant frontend. This usage requires `CameraEntityFeature.STREAM` and the integration must implement the two following methods to support native WebRTC:
-- `async_handle_async_webrtc_offer`: To initialize a WebRTC stream. Any messages/errors coming in async should be forwared to the frontend with the `send_message` callback.
+- `async_handle_async_webrtc_offer`: To initialize a WebRTC stream. Any messages/errors coming in async should be forwarded to the frontend with the `send_message` callback.
 - `async_on_webrtc_candidate`: The frontend will call it with any candidate coming in after the offer is sent.
 The following method can optionally be implemented:
 - `close_webrtc_session` (Optional): The frontend will call it when the stream is closed. Can be used to clean up things.

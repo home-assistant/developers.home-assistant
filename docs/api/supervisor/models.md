@@ -16,8 +16,8 @@ These models are describing objects that are getting returned from the superviso
 | version          | string or null | The installed version of the app                   |
 | version_latest   | string         | The latest published version of the app            |
 | update_available | boolean        | `true` if an update is available                      |
-| installed        | string         | `true` if the the app is installed                 |
-| available        | boolean        | `false` if you can not install the app             |
+| installed        | string         | `true` if the app is installed                 |
+| available        | boolean        | `false` if you cannot install the app             |
 | icon             | bool           | The app has an icon file                            |
 | logo             | bool           | The app has a logo file                            |
 | state            | string         | The state of the app (started, stopped)            |
@@ -341,7 +341,7 @@ Response only fields will be in responses but cannot be included in requests.
 | name       | string  | Name of the user                                              |
 | is_owner   | boolean | Is the user the owner                                         |
 | is_active  | boolean | Is the user active                                            |
-| local_only | boolean | Can the user login from the network (e.g. via http)           |
+| local_only | boolean | Can the user login from the network (for example, via http)           |
 | group_ids  | list    | Role(s) the user has (admin, etc)                             |
 
 ## Drive
@@ -364,7 +364,7 @@ Response only fields will be in responses but cannot be included in requests.
 
 | key          | type    | description                                               |
 | ------------ | ------- | --------------------------------------------------------- |
-| device       | string  | Special device file for the filesystem (e.g. `/dev/sda1`) |
+| device       | string  | Special device file for the filesystem (for example, `/dev/sda1`) |
 | id           | string  | Unique and persistent id for filesystem                   |
 | size         | int     | Size of the filesystem in bytes                           |
 | name         | string  | Name of the filesystem (if known)                         |

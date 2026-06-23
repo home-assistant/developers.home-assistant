@@ -38,7 +38,7 @@ Instead of allowing users to set new login credentials in plain text config, use
 
 ## Authenticating a user when using ingress
 
-When the addon is accessed via the supervisor's ingress, the authorized user can be identified by its session token. The supervisor then adds some headers identifying the user to every request:
+When the app is accessed via the supervisor's ingress, the authorized user can be identified by its session token. The supervisor then adds some headers identifying the user to every request:
 
 | Header name                | Description                                 |
 | -------------------------- | ------------------------------------------- |

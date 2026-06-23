@@ -110,9 +110,6 @@ set_speed:
     speed:
       # Whether or not field is required (default = false)
       required: true
-      # Advanced fields are only shown when the advanced mode is enabled for the user
-      # (default = false)
-      advanced: true
       # Example value that can be passed for this field
       example: "low"
       # The default field value
@@ -128,9 +125,9 @@ set_speed:
             - "medium"
             - "high"
     # Fields can be grouped in collapsible sections, this is useful to initially hide
-    # advanced fields and to group related fields. Note that the collapsible section
+    # less commonly used fields and to group related fields. Note that the collapsible section
     # only affect presentation to the user, service action data will not be nested.
-    advanced_fields:
+    additional_fields:
       # Whether or not the section is initially collapsed (default = false)
       collapsed: true
       # Input fields in this section
@@ -143,7 +140,7 @@ set_speed:
 ```
 
 :::info
-The name and description of the service actions are set in our [translations](/docs/internationalization/core#services) and not in the service action description. Each service action and service action field must have a matching translation defined. Description placeholders allow you to exclude elements like URLs from translations.
+The name and description of the service actions are set in our [translations](/docs/internationalization/core#service-actions) and not in the service action description. Each service action and service action field must have a matching translation defined. Description placeholders allow you to exclude elements like URLs from translations.
 
 ```python
 ...
@@ -163,9 +160,9 @@ Input fields can be visually grouped in sections. Grouping input fields by secti
 only how the inputs are displayed to the user, and not how service action data is structured.
 
 In the [service action description example](#service-action-description-example), the `speed_pct`
-input field is inside an initially collapsed section `advanced_fields`.
+input field is inside an initially collapsed section `additional_fields`.
 The service action data for the service in the example is `{"speed_pct": 50}`, not
-`{"advanced_fields": {"speed_pct": 50}}`.
+`{"additional_fields": {"speed_pct": 50}}`.
 
 ### Filtering service action fields
 
@@ -231,7 +228,7 @@ The following example shows how to provide icons for the `turn_on` and `turn_off
 
 In addition, icons can optionally be specified for collapsible sections.
 
-The following example shows how to provide an icon for the `advanced_options` section:
+The following example shows how to provide an icon for the `additional_options` section:
 
 ```json
 {
@@ -239,7 +236,7 @@ The following example shows how to provide an icon for the `advanced_options` se
     "start_brewing": {
       "service": "mdi:flask",
       "sections": {
-        "advanced_options": "mdi:test-tube"
+        "additional_options": "mdi:test-tube"
       }
     }
   }
@@ -257,7 +254,7 @@ When registering a service action, target it at the level of the [data hierarchy
 - **Config entry level** — If the service action operates on the integration instance and requires a config entry to function, use `config_entry_id` as the target. Do not use a `device_id` or `entity_id` as a substitute, even if they could be resolved back to the config entry. For example, an action that creates a new resource, that is common for the whole account or connection, in an external API should target the config entry that represents the account or connection, not a device or entity under it.
 
 :::tip
-The guiding principle is: **target the thing the action actually acts on.** If the action needs a device, target the device. If it needs a config entry, target the config entry. Resolving from a lower level (e.g., looking up a config entry from an entity) adds unnecessary indirection, couples the action interface to assumptions about the data hierarchy in the integration, and makes it harder for users to understand what the action operates on.
+The guiding principle is: **target the thing the action actually acts on.** If the action needs a device, target the device. If it needs a config entry, target the config entry. Resolving from a lower level (for example, looking up a config entry from an entity) adds unnecessary indirection, couples the action interface to assumptions about the data hierarchy in the integration, and makes it harder for users to understand what the action operates on.
 :::
 
 :::caution
@@ -270,7 +267,7 @@ Making the target optional seems convenient, but it makes automations and script
 
 Sometimes you want to provide extra actions to control your entities. For example, the Sonos integration provides action to group and ungroup devices. Entity service actions are special because there are many different ways a user can specify entities. It can use areas, a group or a list of entities.
 
-Register entity service actions with `homeassistant.helpers.service.async_register_platform_entity_service`. Register actions under your integration domain, e.g. `sonos`, not under the platform domain, e.g. `media_player`. You can pass a schema to `async_register_platform_entity_service` if the entity service action has fields. The schema can be:
+Register entity service actions with `homeassistant.helpers.service.async_register_platform_entity_service`. Register actions under your integration domain, for example, `sonos`, not under the platform domain, for example, `media_player`. You can pass a schema to `async_register_platform_entity_service` if the entity service action has fields. The schema can be:
 
 - A dictionary which will automatically be passed to `cv._make_entity_service_schema`
 - A validator returned by `cv._make_entity_service_schema`
@@ -313,9 +310,9 @@ async def custom_set_sleep_timer(entity, service_call):
 
 ## Response data
 
-Actions may respond to an action call with data for powering more advanced automations. There are some additional implementation requirements:
+Actions may respond to an action call with data for powering more complex automations. There are some additional implementation requirements:
 
-- Response data must be a `dict` and serializable in JSON [`homeassistant.util.json.JsonObjectType`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/util/json.py) in order to interoperate with other parts of the system, such as the frontend.
+- Response data must be a `dict` and serializable in JSON [`homeassistant.util.json.JsonObjectType`](https://github.com/home-assistant/core/blob/dev/homeassistant/util/json.py) in order to interoperate with other parts of the system, such as the frontend.
 - Errors must be raised as exceptions just like any other service action call as
 we do not want end users to need complex error handling in scripts and automations.
 The response data should not contain error codes used for error handling.

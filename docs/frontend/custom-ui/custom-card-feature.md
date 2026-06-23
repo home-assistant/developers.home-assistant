@@ -131,6 +131,6 @@ If you want your feature to better integrate with the default design of home ass
 The main difference with custom cards is the graphical configuration option.
 To have it displayed in the card editor, you must add an object describing it to the array `window.customCardFeatures`.
 
-Required properties of the object are `type` and `name`. It is recommended to define the `isSupported` option with a function `(hass, context) => boolean`, so the editor can only propose the feature if it is compatible with the selected entity in the card. Set `configurable` to `true` if your entity has additional configuration (e.g. `label` option in the example above).
+Required properties of the object are `type` and `name`. It is recommended to define the `isSupported` option with a function `(hass, context) => boolean`, so the editor can only propose the feature if it is compatible with the selected entity in the card. Set `configurable` to `true` if your entity has additional configuration (for example, `label` option in the example above).
 
 Also, the static functions `getConfigElement` and `getStubConfig` work the same as with normal custom cards.

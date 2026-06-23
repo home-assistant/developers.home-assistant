@@ -155,7 +155,7 @@ pip install -e ./pychromecast
 hass --skip-pip-packages pychromecast
 ```
 
-It is also possible to use a public git repository to install a requirement.  This can be useful, for example, to test changes to a requirement dependency before it's been published to PyPI. Syntax:
+It is also possible to use a public git repository to install a requirement. This can be useful, for example, to test changes to a requirement dependency before it's been published to PyPI. Syntax:
 
 ```json
 {
@@ -251,7 +251,7 @@ Zeroconf is a list so you can specify multiple types to match on.
 }
 ```
 
-Certain zeroconf types are very generic (i.e., `_printer._tcp.local.`, `_axis-video._tcp.local.` or `_http._tcp.local`). In such cases you should include a Name (`name`), or Properties (`properties`) filter:
+Certain zeroconf types are very generic (that is, `_printer._tcp.local.`, `_axis-video._tcp.local.` or `_http._tcp.local`). In such cases you should include a Name (`name`), or Properties (`properties`) filter:
 
 ```json
 {
@@ -425,7 +425,7 @@ New integrations are required to fulfill at least the bronze tier so be sure to 
 
 ## IoT class
 
-The [IoT class][iot_class] describes how an integration connects with, e.g., a device or service. For more information
+The [IoT class][iot_class] describes how an integration connects with, for example, a device or service. For more information
 about IoT Classes, read the blog about ["Classifying the Internet of Things"][iot_class].
 
 The following IoT classes are accepted in the manifest:

@@ -15,29 +15,29 @@ Properties should always only return information from memory and not do I/O (lik
 | ----------------------- | ----------------------------------- | ------------------------------------ | -------------------------------------------------------------------------- |
 | current_humidity        | `float \| None`      | `None`                               | The current humidity.                                                      |
 | current_temperature     | `float \| None`      | `None`                               | The current temperature.                                                   |
-| fan_mode                | `str \| None`        | **Required by SUPPORT_FAN_MODE**     | The current fan mode.                                                      |
-| fan_modes               | `list[str] \| None`  | **Required by SUPPORT_FAN_MODE**     | The list of available fan modes.                                           |
+| fan_mode                | `str \| None`        | **Required by ClimateEntityFeature.FAN_MODE**     | The current fan mode.                                                      |
+| fan_modes               | `list[str] \| None`  | **Required by ClimateEntityFeature.FAN_MODE**     | The list of available fan modes.                                           |
 | hvac_action             | `HVACAction \| None` | `None`                               | The current HVAC action (heating, cooling)                                 |
-| hvac_mode               | `HVACMode \| None`   | **Required**                         | The current operation (e.g. heat, cool, idle). Used to determine `state`.  |
+| hvac_mode               | `HVACMode \| None`   | **Required**                         | The current operation (for example, heat, cool, idle). Used to determine `state`.  |
 | hvac_modes              | `list[HVACMode]`         | **Required**                         | List of available operation modes. See below.                              |
 | max_humidity            | `float`                             | `DEFAULT_MAX_HUMIDITY` (value == 99) | The maximum humidity.                                                      |
 | max_temp                | `float`                             | `DEFAULT_MAX_TEMP` (value == 35 °C)  | The maximum temperature in `temperature_unit`.                             |
 | min_humidity            | `float`                             | `DEFAULT_MIN_HUMIDITY` (value == 30) | The minimum humidity.                                                      |
 | min_temp                | `float`                             | `DEFAULT_MIN_TEMP` (value == 7 °C)   | The minimum temperature in `temperature_unit`.                             |
-| precision               | `float`                             | According to `temperature_unit`      | The precision of the temperature in the system. Defaults to tenths for TEMP_CELSIUS, whole number otherwise. |
-| preset_mode             | `str \| None`        | **Required by SUPPORT_PRESET_MODE**  | The current active preset.                                                 |
-| preset_modes            | `list[str] \| None`  | **Required by SUPPORT_PRESET_MODE**  | The available presets.                                                     |
-| swing_mode              | `str \| None`        | **Required by SUPPORT_SWING_MODE**   | The swing setting.                                                         |
-| swing_modes             | `list[str] \| None`  | **Required by SUPPORT_SWING_MODE**   | Returns the list of available swing modes, only vertical modes in the case horizontal swing is implemented. |
-| swing_horizontal_mode   | `str \| None`        | **Required by SUPPORT_SWING_HORIZONTAL_MODE**   | The horizontal swing setting.                                   |
-| swing_horizontal_modes  | `list[str] \| None`  | **Required by SUPPORT_SWING_HORIZONTAL_MODE**  | Returns the list of available horizontal swing modes.            |
+| precision               | `float`                             | According to `temperature_unit`      | The precision of the temperature in the system. Defaults to tenths for `UnitOfTemperature.CELSIUS`, whole number otherwise. |
+| preset_mode             | `str \| None`        | **Required by ClimateEntityFeature.PRESET_MODE**  | The current active preset.                                                 |
+| preset_modes            | `list[str] \| None`  | **Required by ClimateEntityFeature.PRESET_MODE**  | The available presets.                                                     |
+| swing_mode              | `str \| None`        | **Required by ClimateEntityFeature.SWING_MODE**   | The swing setting.                                                         |
+| swing_modes             | `list[str] \| None`  | **Required by ClimateEntityFeature.SWING_MODE**   | Returns the list of available swing modes, only vertical modes in the case horizontal swing is implemented. |
+| swing_horizontal_mode   | `str \| None`        | **Required by ClimateEntityFeature.SWING_HORIZONTAL_MODE**   | The horizontal swing setting.                                   |
+| swing_horizontal_modes  | `list[str] \| None`  | **Required by ClimateEntityFeature.SWING_HORIZONTAL_MODE**  | Returns the list of available horizontal swing modes.            |
 | target_humidity         | `float \| None`      | `None`                               | The target humidity the device is trying to reach.                         |
 | target_humidity_step    | `int \| None`        | `None`                               | The supported step size a target humidity can be increased or decreased in an action call targeting the device. |
 | target_temperature      | `float \| None`      | `None`                               | The temperature currently set to be reached.                               |
 | target_temperature_high | `float \| None`      | **Required by TARGET_TEMPERATURE_RANGE** | The upper bound target temperature                                     |
 | target_temperature_low  | `float \| None`      | **Required by TARGET_TEMPERATURE_RANGE** | The lower bound target temperature                                     |
 | target_temperature_step | `float \| None`      | `None`                               | The supported step size a target temperature can be increased or decreased |
-| temperature_unit        | <code>str</code>                    | **Required**                         | The unit of temperature measurement for the system (`TEMP_CELSIUS` or `TEMP_FAHRENHEIT`).                    |
+| temperature_unit        | <code>str</code>                    | **Required**                         | The unit of temperature measurement for the system (`UnitOfTemperature.CELSIUS` or `UnitOfTemperature.FAHRENHEIT`).                    |
 
 ### HVAC modes
 
@@ -83,7 +83,7 @@ A device can have different presets that it might want to show to the user. Comm
 | `COMFORT`  | Device is in comfort mode                              |
 | `HOME`     | Device is in home mode                                 |
 | `SLEEP`    | Device is prepared for sleep                           |
-| `ACTIVITY` | Device is reacting to activity (e.g. movement sensors) |
+| `ACTIVITY` | Device is reacting to activity (for example, movement sensors) |
 
 ### Fan modes
 

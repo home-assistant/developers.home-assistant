@@ -23,7 +23,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| auto_update | bool | `False` | The device or service that the entity represents has auto update logic. When this is set to `True` you can not skip updates.
+| auto_update | bool | `False` | The device or service that the entity represents has auto update logic. When this is set to `True` you cannot skip updates.
 | display_precision | int | `0` | Number of decimal digits for display of update progress.
 | in_progress | bool | `None` | Update installation progress. Should return a boolean (True if in progress, False if not).
 | installed_version | str | `None` | The currently installed and used version of the software.
@@ -104,7 +104,7 @@ class MyUpdate(UpdateEntity):
 
 ### Release notes
 
-This method can be implemented so users can can get the full release notes in the more-info dialog of the Home Assistant Frontend before they install the update.
+This method can be implemented so users can get the full release notes in the more-info dialog of the Home Assistant Frontend before they install the update.
 
 The returned string can contain markdown, and the frontend will format that correctly.
 

@@ -17,7 +17,7 @@ Properties should always only return information from memory and not do I/O (lik
 | mode | string | `auto` | Defines how the number should be displayed in the UI. It's recommended to use the default `auto`. Can be `box` or `slider` to force a display mode.
 | native_max_value | float | 100 | The maximum accepted value in the number's `native_unit_of_measurement` (inclusive)
 | native_min_value | float | 0 | The minimum accepted value in the number's `native_unit_of_measurement` (inclusive)
-| native_step | float | **See below** | Defines the resolution of the values, i.e. the smallest increment or decrement in the number's | native_unit_of_measurement | string | `None` | The unit of measurement that the number's value is expressed in. If the `native_unit_of_measurement` is °C or °F, and its `device_class` is temperature, the number's `unit_of_measurement` will be the preferred temperature unit configured by the user and the number's `state` will be the `native_value` after an optional unit conversion.
+| native_step | float | **See below** | Defines the resolution of the values, that is, the smallest increment or decrement in the number's | native_unit_of_measurement | string | `None` | The unit of measurement that the number's value is expressed in. If the `native_unit_of_measurement` is °C or °F, and its `device_class` is temperature, the number's `unit_of_measurement` will be the preferred temperature unit configured by the user and the number's `state` will be the `native_value` after an optional unit conversion.
 | native_value | float | **Required** | The value of the number in the number's `native_unit_of_measurement`.
 | native_unit_of_measurement | string | None | The unit of measurement that the sensor's value is expressed in. If the `native_unit_of_measurement` is °C or °F, and its `device_class` is temperature, the sensor's `unit_of_measurement` will be the preferred temperature unit configured by the user and the sensor's `state` will be the `native_value` after an optional unit conversion. If a [unit translation is provided](/docs/internationalization/core#unit-of-measurement-of-entities), `native_unit_of_measurement` should not be defined.
 
@@ -77,7 +77,7 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.SPEED` | ft/s, in/d, in/h, in/s, km/h, kn, m/s, mph, mm/d, mm/s | Generic speed
 | `NumberDeviceClass.SULPHUR_DIOXIDE` | ppb, µg/m³ | Concentration of sulphure dioxide
 | `NumberDeviceClass.TEMPERATURE` | °C, °F, K | Temperature.
-| `NumberDeviceClass.TEMPERATURE_DELTA` | °C, °F, K | This device class represents a temperature interval (delta), i.e. the difference between two temperature values.
+| `NumberDeviceClass.TEMPERATURE_DELTA` | °C, °F, K | This device class represents a temperature interval (delta), that is, the difference between two temperature values.
 | `NumberDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³, mg/m³ | Concentration of volatile organic compounds
 | `NumberDeviceClass.VOLATILE_ORGANIC_COMPOUNDS_PARTS` | ppm, ppb | Ratio of volatile organic compounds
 | `NumberDeviceClass.VOLTAGE` | V, mV, µV, kV, MV | Voltage
@@ -91,7 +91,7 @@ If specifying a device class, your number entity will need to also return the co
 
 ## Restoring number states
 
-Numbers which restore the state after restart or reload should not extend `RestoreEntity` because  that does not store the `native_value`, but instead the `state` which may have been modified by the number base entity. Numbers which restore the state should extend `RestoreNumber` and call `await self.async_get_last_number_data` from `async_added_to_hass` to get access to the stored `native_min_value`,  `native_max_value`,  `native_step`,  `native_unit_of_measurement` and `native_value`.
+Numbers which restore the state after restart or reload should not extend `RestoreEntity` because that does not store the `native_value`, but instead the `state` which may have been modified by the number base entity. Numbers which restore the state should extend `RestoreNumber` and call `await self.async_get_last_number_data` from `async_added_to_hass` to get access to the stored `native_min_value`, `native_max_value`, `native_step`, `native_unit_of_measurement` and `native_value`.
 
 ## Methods
 

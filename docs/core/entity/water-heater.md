@@ -3,7 +3,7 @@ title: Water heater entity
 sidebar_label: Water heater
 ---
 
-Derive entity platforms from [`homeassistant.components.water_heater.WaterHeaterEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/water_heater/__init__.py)
+Derive entity platforms from [`homeassistant.components.water_heater.WaterHeaterEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/water_heater/__init__.py)
 
 ## Properties
 
@@ -20,7 +20,7 @@ Properties should always only return information from memory and not do I/O (lik
 | `target_temperature_high` | `float` | `None`    | Upper bound of the temperature we are trying to reach.
 | `target_temperature_low` | `float`  | `None`    | Lower bound of the temperature we are trying to reach.
 | `target_temperature_step` | `float`  | `None`    | The supported step size a target temperature can be increased or decreased.
-| `temperature_unit`    | `str`       | `NotImplementedError` | One of `TEMP_CELSIUS`, `TEMP_FAHRENHEIT`, or `TEMP_KELVIN`.
+| `temperature_unit`    | `str`       | `NotImplementedError` | One of `UnitOfTemperature.CELSIUS`, `UnitOfTemperature.FAHRENHEIT`, or `UnitOfTemperature.KELVIN`.
 | `current_operation`   | `string`    | `None`    | The current operation mode.
 | `operation_list`      | `List[str]` | `None`    | List of possible operation modes.
 | `supported_features`  | `List[str]` | `NotImplementedError` | List of supported features.

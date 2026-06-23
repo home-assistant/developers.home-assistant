@@ -71,11 +71,11 @@ fun main() {
 :::
 
 :::warning
-If you must use primitive types, ensure the variable name includes the unit (e.g., `THRESHOLD_MS` instead of `THRESHOLD`) to reduce ambiguity.
+If you must use primitive types, ensure the variable name includes the unit (for example, `THRESHOLD_MS` instead of `THRESHOLD`) to reduce ambiguity.
 :::
 
 - Apply the same logic to dates, durations, and timestamps.
-- For APIs that use `long` for timestamps (e.g., milliseconds vs. seconds), convert the values to a strong type as soon as possible to minimize exposure to untyped units.
+- For APIs that use `long` for timestamps (for example, milliseconds vs. seconds), convert the values to a strong type as soon as possible to minimize exposure to untyped units.
 
 ## Concurrency
 
@@ -83,13 +83,13 @@ Concurrency is powerful but requires careful handling to avoid issues like memor
 
 ### Coroutine scope
 
-Tie your coroutines to an Android lifecycle (e.g., `viewModelScope` or `lifecycleScope`) to prevent memory leaks.
+Tie your coroutines to an Android lifecycle (for example, `viewModelScope` or `lifecycleScope`) to prevent memory leaks.
 
 ### Concurrent access
 
 - Ensure that any references accessed outside of a coroutine are thread-safe.
 - If a reference is not safe, either make it safe or don't use it.
-- Debugging concurrency issues (e.g., race conditions) can be extremely challenging, so design carefully.
+- Debugging concurrency issues (for example, race conditions) can be extremely challenging, so design carefully.
 
 For more details on race conditions, see [Race Condition](https://en.wikipedia.org/wiki/Race_condition#In_software).
 

@@ -170,7 +170,7 @@ public getGridOptions() {
 
 In this example, the card will take 6 x 2 cells by default. The height of the card cannot be smaller than 2 rows. According to the cell dimension, the card will have a height of `120px` (`2` * `56px` + `8px`).
 
-## Advanced example
+## Example using JS modules
 
 Resources to load in dashboards are imported as a JS module import. Below is an example of a custom card using JS modules that does all the fancy things.
 
@@ -492,7 +492,7 @@ Grids:
 - `name` _(required)_: Key for this grid in the form data object (see `flatten`)
 - `schema` _(required)_: A list of child controls in the grid
 - `flatten` _(optional)_: `true`/`false` if child control data should be flattened into the main data dictionary, or under a sub-dictionary with the name of this grid 
-- `column_min_width` _(optional)_: CSS property for the minimum width of the cells in the grid (e.g. `200px`)
+- `column_min_width` _(optional)_: CSS property for the minimum width of the cells in the grid (for example, `200px`)
 
 Expansion Panel:
 - `type` _(required)_: `expandable`

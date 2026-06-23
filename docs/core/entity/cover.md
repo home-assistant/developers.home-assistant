@@ -70,7 +70,7 @@ and are combined using the bitwise or (`|`) operator.
 
 ### Open cover
 
-Only implement this method if the flag `SUPPORT_OPEN` is set.
+Only implement this method if the flag `CoverEntityFeature.OPEN` is set.
 
 ```python
 class MyCover(CoverEntity):
@@ -85,7 +85,7 @@ class MyCover(CoverEntity):
 
 ### Close cover
 
-Only implement this method if the flag `SUPPORT_CLOSE` is set.
+Only implement this method if the flag `CoverEntityFeature.CLOSE` is set.
 
 ```python
 class MyCover(CoverEntity):
@@ -100,7 +100,7 @@ class MyCover(CoverEntity):
 
 ### Set cover position
 
-Only implement this method if the flag `SUPPORT_SET_POSITION` is set.
+Only implement this method if the flag `CoverEntityFeature.SET_POSITION` is set.
 
 ```python
 class MyCover(CoverEntity):
@@ -115,7 +115,7 @@ class MyCover(CoverEntity):
 
 ### Stop cover
 
-Only implement this method if the flag `SUPPORT_STOP` is set.
+Only implement this method if the flag `CoverEntityFeature.STOP` is set.
 
 ```python
 class MyCover(CoverEntity):
@@ -130,7 +130,7 @@ class MyCover(CoverEntity):
 
 ### Open cover tilt
 
-Only implement this method if the flag `SUPPORT_OPEN_TILT` is set.
+Only implement this method if the flag `CoverEntityFeature.OPEN_TILT` is set.
 
 ```python
 class MyCover(CoverEntity):
@@ -145,7 +145,7 @@ class MyCover(CoverEntity):
 
 ### Close cover tilt
 
-Only implement this method if the flag `SUPPORT_CLOSE_TILT` is set.
+Only implement this method if the flag `CoverEntityFeature.CLOSE_TILT` is set.
 
 ```python
 class MyCover(CoverEntity):
@@ -160,7 +160,7 @@ class MyCover(CoverEntity):
 
 ### Set cover tilt position
 
-Only implement this method if the flag `SUPPORT_SET_TILT_POSITION` is set.
+Only implement this method if the flag `CoverEntityFeature.SET_TILT_POSITION` is set.
 
 ```python
 class MyCover(CoverEntity):
@@ -175,7 +175,7 @@ class MyCover(CoverEntity):
 
 ### Stop cover tilt
 
-Only implement this method if the flag `SUPPORT_STOP_TILT` is set.
+Only implement this method if the flag `CoverEntityFeature.STOP_TILT` is set.
 
 ```python
 class MyCover(CoverEntity):

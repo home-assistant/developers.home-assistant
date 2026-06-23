@@ -3,7 +3,7 @@ title: Binary sensor entity
 sidebar_label: Binary sensor
 ---
 
-A binary sensor is a sensor that can only have two states. Derive entity platforms from [`homeassistant.components.binary_sensor.BinarySensorEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/binary_sensor/__init__.py)
+A binary sensor is a sensor that can only have two states. Derive entity platforms from [`homeassistant.components.binary_sensor.BinarySensorEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/binary_sensor/__init__.py)
 
 ## Properties
 
