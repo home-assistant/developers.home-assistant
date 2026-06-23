@@ -71,8 +71,6 @@ related_triggers:
 The **Light brightness changed** trigger fires after...
 Use it to...
 
-{% include integrations/labs_entity_triggers_note.md %}
-
 {% include triggers/ui_header.md %}
 
 To use this trigger in an automation:
@@ -200,8 +198,6 @@ related_conditions:
 
 The **Light is on** condition passes when...
 Use it to...
-
-{% include integrations/labs_entity_triggers_note.md %}
 
 {% include conditions/ui_header.md %}
 
