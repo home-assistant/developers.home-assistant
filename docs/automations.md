@@ -103,9 +103,9 @@ Conditions are defined in the `condition` platform (`condition.py`) of your inte
 
 ### Condition class
 
-Conditions inherit from `homeassistant.helpers.condition.Condition` and must implement `async_validate_config` and `async_get_checker`.
+Conditions inherit from `homeassistant.helpers.condition.Condition` and must implement `async_validate_config` and `_async_check`.
 Just as with the [trigger class](#trigger-class), `async_validate_config` is used to validate the condition configuration.
-`async_get_checker` should return a function that will be called whenever the condition needs to be checked.
+`_async_check` is called whenever the condition needs to be checked and should return whether the condition is met.
 
 In the following snippet we create a condition that can be configured to only pass when `binary_sensor.front_door` has a desired configured state.
 
@@ -117,18 +117,15 @@ import voluptuous as vol
 from homeassistant.const import (
     CONF_OPTIONS,
     CONF_STATE,
-    CONF_TARGET,
     STATE_OFF,
     STATE_ON,
 )
 from homeassistant.core import HomeAssistant
-from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.condition import Condition, ConditionConfig
 from homeassistant.helpers.typing import ConfigType, TemplateVarsType
 
 STATE_CONDITION_SCHEMA = vol.Schema(
     {
-        vol.Required(CONF_TARGET): cv.TARGET_FIELDS,
         vol.Required(CONF_OPTIONS, default={}): {
             vol.Required(CONF_STATE): vol.In([STATE_ON, STATE_OFF]),
         },
@@ -136,7 +133,7 @@ STATE_CONDITION_SCHEMA = vol.Schema(
 )
 
 
-class DoorStateConditionBase(Condition):
+class DoorStateCondition(Condition):
     """State condition."""
 
     @override
@@ -160,9 +157,8 @@ class DoorStateConditionBase(Condition):
     ) -> bool:
         """Check the condition."""
 
-        # In reality this would be more configurable
-        # but for the sake of example it's simplified.
-        return self._hass.states.get("binary_sensor.front_door") == self._state
+        # Do your condition checks here
+        return get_example_state() == self._state
 ```
 
 ### Registering conditions
@@ -174,7 +170,7 @@ Each condition is identified by a unique string (e.g., `"door_state"` in the exa
 async def async_get_conditions(hass: HomeAssistant) -> dict[str, type[Condition]]:
     """Return the door state conditions."""
     return {
-        "door_state": DoorStateConditionBase,
+        "door_state": DoorStateCondition,
     }
 ```
 
