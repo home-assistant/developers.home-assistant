@@ -12,6 +12,8 @@ Integrations can register conditions to provide additional ways to trigger autom
 These conditions can be harder to use than the standard conditions, so we want to make sure that the documentation describes both what they do, and what the parameters are.
 To avoid cluttering the integration documentation, we want to have a separate page for each condition, and link to it from the integration documentation.
 
+Each condition page should have a description of what the condition does, a list of the parameters that can be used with it and an overview how to use the condition via the UI and via YAML.
+
 ## Example implementation
 
 ```markdown showLineNumbers
@@ -26,8 +28,6 @@ related_conditions:
 ---
 
 The **Carbon monoxide detected** condition passes when one or more carbon monoxide sensors are actively detecting carbon monoxide (CO). Because CO is colorless and odorless, your sensors are the only way to know it is there. Adding this condition to your automation ensures that safety actions, like sounding an alarm, turning on ventilation, or sending an urgent notification, only happen while the danger is confirmed. It prevents false alarms from a sensor that briefly flickered and keeps your response focused on real threats.
-
-{% include integrations/labs_entity_triggers_note.md %}
 
 {% include conditions/ui_header.md %}
 
@@ -45,7 +45,7 @@ To use this condition in an automation:
 
 {% options_ui %}
 Condition passes if:
-description: When multiple sensors are targeted, controls how results combine. Pick **Any** to pass if at least one targeted sensor detects carbon monoxide, or **All** to pass only when every targeted sensor detects carbon monoxide.
+  description: When multiple sensors are targeted, controls how results combine. Pick **Any** to pass if at least one targeted sensor detects carbon monoxide, or **All** to pass only when every targeted sensor detects carbon monoxide.
 {% endoptions_ui %}
 
 {% include conditions/yaml_header.md %}

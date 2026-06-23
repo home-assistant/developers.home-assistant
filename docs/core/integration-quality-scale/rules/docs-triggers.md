@@ -14,6 +14,8 @@ both what they do, and what the parameters are.
 To avoid cluttering the integration documentation, we want to have a separate page for each trigger, and link to it from
 the integration documentation.
 
+Each trigger page should have a description of what the trigger does, a list of the parameters that can be used with it and an overview how to use the trigger via the UI and via YAML.
+
 ## Example implementation
 
 ```markdown showLineNumbers
@@ -34,8 +36,6 @@ creeps up without anyone noticing. Rising CO2 is one of the clearest signs that 
 Imagine your bedroom ventilation fan spinning up automatically in the middle of the night because CO2 climbed while you
 slept, so you wake up feeling refreshed instead of groggy. Use this trigger to automate ventilation, log indoor air
 quality trends, or remind household members to open a window when CO2 shifts noticeably.
-
-{% include integrations/labs_entity_triggers_note.md %}
 
 {% include triggers/ui_header.md %}
 
