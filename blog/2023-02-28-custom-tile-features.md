@@ -26,4 +26,4 @@ window.customTileFeatures.push({
 });
 ```
 
-For more details, see the [custom tile features](/docs/frontend/custom-ui/custom-card/#tile-features) documentation.
+For more details, see the [custom tile features](/docs/frontend/custom-ui/custom-card-feature) documentation.

@@ -8,7 +8,7 @@ The remote entity can represent two different types of devices:
 1. A physical device that sends commands.
 2. A virtual device in Home Assistant that sends commands to another physical device, eg a television.
 
-Derive entity platforms from [`homeassistant.components.remote.RemoteEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/remote/__init__.py)
+Derive entity platforms from [`homeassistant.components.remote.RemoteEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/remote/__init__.py)
 
 ## Properties
 
@@ -89,7 +89,7 @@ class MyRemote(RemoteEntity):
 
 ### Learn command
 
-Only implement this method if the flag `SUPPORT_LEARN_COMMAND` is set.
+Only implement this method if the flag `RemoteEntityFeature.LEARN_COMMAND` is set.
 
 ```python
 class MyRemote(RemoteEntity):
@@ -103,7 +103,7 @@ class MyRemote(RemoteEntity):
 
 ### Delete command
 
-Only implement this method if the flag `SUPPORT_DELETE_COMMAND` is set.
+Only implement this method if the flag `RemoteEntityFeature.DELETE_COMMAND` is set.
 
 ```python
 class MyRemote(RemoteEntity):

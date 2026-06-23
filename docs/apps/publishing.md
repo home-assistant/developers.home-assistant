@@ -42,8 +42,8 @@ image: "ghcr.io/my-org/{arch}-my-app"
 
 After a successful run, two types of image references are available:
 
-- **Per-architecture images** (e.g. `ghcr.io/my-org/aarch64-my-app:1.0.0`) — pushed by the `build-image` action.
-- **Generic manifest image** (e.g. `ghcr.io/my-org/my-app:1.0.0`) — pushed by the `publish-multi-arch-manifest` action; this is the preferred reference to use in `config.yaml` and to share with users.
+- **Per-architecture images** (for example, `ghcr.io/my-org/aarch64-my-app:1.0.0`) — pushed by the `build-image` action.
+- **Generic manifest image** (for example, `ghcr.io/my-org/my-app:1.0.0`) — pushed by the `publish-multi-arch-manifest` action; this is the preferred reference to use in `config.yaml` and to share with users.
 
 ### Example app repository
 

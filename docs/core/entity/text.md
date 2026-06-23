@@ -3,7 +3,7 @@ title: Text entity
 sidebar_label: Text
 ---
 
-A text entity is an entity that allows the user to input a text value to an integration. Derive entity platforms from [`homeassistant.components.text.TextEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/text/__init__.py)
+A text entity is an entity that allows the user to input a text value to an integration. Derive entity platforms from [`homeassistant.components.text.TextEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/text/__init__.py)
 
 ## Properties
 

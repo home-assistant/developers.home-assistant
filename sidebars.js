@@ -298,7 +298,7 @@ module.exports = {
     {
       type: "category",
       label: "External APIs",
-      items: ["api/websocket", "api/rest"],
+      items: ["api/websocket", "api/rest", "api/instance_discovery"],
     },
     {
       type: "category",

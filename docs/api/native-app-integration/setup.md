@@ -28,7 +28,7 @@ First, you must ensure that the `mobile_app` integration is loaded. There are tw
 - You can publish a Zeroconf/Bonjour record `_hass-mobile-app._tcp.local.` to trigger the automatic load of the `mobile_app` integration. You should wait at least 60 seconds after publishing the record before continuing.
 - You can ask the user to add `mobile_app` to their configuration.yaml and restart Home Assistant. If the user already has `default_config` in their configuration, then `mobile_app` will have been already loaded.
 
-You can confirm the `mobile_app` component has been loaded by checking the `components` array of the [`/api/config` REST API call](/api/rest.md#get-apiconfig). If you continue to device registration and receive a 404 status code, then it most likely hasn't been loaded yet.
+You can confirm the `mobile_app` component has been loaded by checking the `components` array of the [`/api/config` REST API call](/api/rest.md#get-api-config). If you continue to device registration and receive a 404 status code, then it most likely hasn't been loaded yet.
 
 ### Registering the device
 

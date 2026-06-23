@@ -151,8 +151,8 @@ const val DEFAULT_USER_ID = "guest"
 
 When to use companion objects:
 
-- **Namespacing for external use**: When constants or utility functions must be accessed externally (e.g., public or internal).
-- **Intentional naming conflicts**: When multiple classes or entities in the same file share the same name for conceptually similar constants (e.g., EMPTY, DEFAULT).
+- **Namespacing for external use**: When constants or utility functions must be accessed externally (for example, public or internal).
+- **Intentional naming conflicts**: When multiple classes or entities in the same file share the same name for conceptually similar constants (for example, EMPTY, DEFAULT).
 
 **Example:**
 

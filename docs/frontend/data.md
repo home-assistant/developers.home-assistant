@@ -40,7 +40,7 @@ To consume a context you fire a custom event with a callback to get registered a
 - `configEntries`: config entries of Home Assistant
 - `auth`: authentication information of Home Assistant
 - `localize`: function to localize a string
-- `locale`: Locale informations
+- `locale`: Locale information
 - `config`: System configuration of Home Assistant
 - `themes`: Themes of Home Assistant
 - `selectedTheme`: Currently selected theme

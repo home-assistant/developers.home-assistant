@@ -2,7 +2,7 @@
 title: "Contributing your voice"
 ---
 
-You can help us and the rest of the  open voice community develop **speech-to-text** and **text-to-speech** models for your language.
+You can help us and the rest of the open voice community develop **speech-to-text** and **text-to-speech** models for your language.
 
 ## Speech-to-text
 

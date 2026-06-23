@@ -6,7 +6,7 @@ sidebar_label: Media player
 :::info Incomplete
 This entry is incomplete. Contribution welcome.
 :::
-A media player entity controls a media player.  Derive a platform entity from [`homeassistant.components.media_player.MediaPlayerEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/media_player/__init__.py).
+A media player entity controls a media player. Derive a platform entity from [`homeassistant.components.media_player.MediaPlayerEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/media_player/__init__.py).
 
 ## Properties
 
@@ -20,7 +20,7 @@ Properties should always only return information from memory and not do I/O (lik
 | app_name                        | `str \| None`                    | `None`  | Name of the current running app.
 | device_class                    | `MediaPlayerDeviceClass \| None` | `None`  | Type of media player.
 | group_members                   | `list[str] \| None`              | `None`  | A dynamic list of player entities which are currently grouped together for synchronous playback. If the platform has a concept of defining a group leader, the leader should be the first element in that list.
-| is_volume_muted                 | `bool \| None`                   | `None`  | `True` if if volume is currently muted.
+| is_volume_muted                 | `bool \| None`                   | `None`  | `True` if volume is currently muted.
 | media_album_artist              | `str \| None`                    | `None`  | Album artist of current playing media, music track only.
 | media_album_name                | `str \| None`                    | `None`  | Album name of current playing media, music track only.
 | media_artist                    | `str \| None`                    | `None`  | Artist of current playing media, music track only.
@@ -81,7 +81,7 @@ and are combined using the bitwise or (`|`) operator.
 
 ## States
 
-The state of a media player is defined by using values in the `MediaPlayerState` enum, and can take the following possible values.
+Setting the state should return an enum from `MediaPlayerState` in the `state` property. The resulting state value is the lowercase version of the enum member name (for example, `MediaPlayerState.PLAYING` results in the state `playing`).
 
 | Value       | Description                                                                                                         |
 |-------------|---------------------------------------------------------------------------------------------------------------------|
@@ -94,7 +94,7 @@ The state of a media player is defined by using values in the `MediaPlayerState`
 
 :::note
 
-It is common that media players can't be controlled when in a standby state. If Home Assistant can turn on the device using another protocol or method, it should be shown as `off` even if the main channel used to control the device is currently unavailable. If Home Assistant has no way to turn on the device, it should be shown as `unavailable`. See [entity-unavailable Exceptions](/docs/core/integration-quality-scale/rules/entity-unavailable.md#Exceptions) for more details.
+It is common that media players can't be controlled when in a standby state. If Home Assistant can turn on the device using another protocol or method, it should be shown as `off` even if the main channel used to control the device is currently unavailable. If Home Assistant has no way to turn on the device, it should be shown as `unavailable`. See [entity-unavailable Exceptions](/docs/core/integration-quality-scale/rules/entity-unavailable.md#exceptions) for more details.
 
 :::
 
@@ -291,9 +291,10 @@ Optional. What type of media device is this. It will possibly map to google devi
 
 | Value | Description
 | ----- | -----------
-| tv | Device is a television type device.
-| speaker | Device is speakers or stereo type device.
+| projector | Device is a projector type device.
 | receiver | Device is audio video receiver type device taking audio and outputting to speakers and video to some display.
+| speaker | Device is speakers or stereo type device.
+| tv | Device is a television type device.
 
 ### Proxy album art for media browser
 
@@ -328,7 +329,7 @@ class MyMediaPlayer(MediaPlayerEntity):
 
 ### Grouping player entities together
 
-Optional. If your player has support for grouping player entities together for synchronous playback (indicated by `SUPPORT_GROUPING`) one join and one unjoin method needs to be defined.
+Optional. If your player has support for grouping player entities together for synchronous playback (indicated by `MediaPlayerEntityFeature.GROUPING`) one join and one unjoin method needs to be defined.
 
 ```python
 class MyMediaPlayer(MediaPlayerEntity):

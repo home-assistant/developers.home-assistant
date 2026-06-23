@@ -4,8 +4,18 @@ import React from 'react';
 
 export default class ApiEndpoint extends React.Component {
   render() {
+    // Derive a stable anchor ID from the method and path so endpoints can be
+    // linked to directly, for example #get-api-config or
+    // #post-api-services-domain-service.
+    const id =
+      this.props.id ||
+      `${this.props.method}-${this.props.path}`
+        .toLowerCase()
+        .replace(/[^a-z0-9]+/g, '-')
+        .replace(/^-+|-+$/g, '');
+
     return (
-      <details className="api-endpoint">
+      <details className="api-endpoint" id={id}>
         <summary className="api-endpoint-header">
           <div className={`api-endpoint-method ${this.props.method}`}>
             {this.props.method}

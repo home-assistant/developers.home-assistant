@@ -42,7 +42,7 @@ To better understand which severity level to choose, see the list below.
 |---------------|--------------------------------------------------------------------|
 | CRITICAL      | Considered reserved, only used for true panic                      |
 | ERROR         | Something is currently broken and needs immediate attention        |
-| WARNING       | Something breaks in the future (e.g., API shutdown) and needs attention |
+| WARNING       | Something breaks in the future (for example, API shutdown) and needs attention |
 
 ## Fixing an issue
 

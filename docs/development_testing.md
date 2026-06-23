@@ -17,14 +17,6 @@ To run our linters, on the full code base, run the following command:
 prek run --all-files
 ```
 
-To run the full test suite, more dependencies are required than what is set up in the devcontainer by default. To install all dependencies, activate the virtual environment and run the command:
-
-```shell
-uv pip install -r requirements_test_all.txt
-```
-
-Or, in Visual Studio Code, launch the **Install all Test Requirements** task.
-
 To start the tests, and run the full test suite, activate the virtual environment and run the command:
 
 ```shell
@@ -55,10 +47,10 @@ If you are working on tests for an integration and you changed the dependencies,
 Next you can update all dependencies in your development environment by running:
 
 ```shell
-uv pip install -r requirements_test_all.txt
+uv pip install -r requirements_all.txt -r requirements_test.txt
 ```
 
-Or, in Visual Studio Code, launch the **Install all Test Requirements** task.
+Or, in Visual Studio Code, launch the **Install all (test & production) Requirements** task.
 
 ### Running a limited test suite
 

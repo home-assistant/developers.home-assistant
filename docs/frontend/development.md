@@ -97,7 +97,7 @@ http:
     - http://localhost:8124
 ```
 
-After you've setup your frontend development environment so that you can run the `script/develop` script as described in section [Development](#development). You can use the following command as a replacement to develop and run the frontend on http://localhost:8124 and it will connect to the Home Assistant running on http://localhost:8123. Note that if you are running this command from a devcontainer, the url should be accessible from the container host.
+After you've set up your frontend development environment so that you can run the `script/develop` script as described in section [Development](#development). You can use the following command as a replacement to develop and run the frontend on http://localhost:8124 and it will connect to the Home Assistant running on http://localhost:8123. Note that if you are running this command from a devcontainer, the url should be accessible from the container host.
 
 ```shell
 script/develop_and_serve
@@ -143,7 +143,7 @@ script/setup_translations
 :::note
 This needs to be done manually, even if you are using dev containers. Also, you will be asked to enter a code and authorize the script to fetch the latest translations.
 
-In case a previous authorization no longer works (e.g. you see a "Bad Credentials" error during translation fetching), delete the `token.json` file in the `translations` folder and execute `script/setup_translations` again to retrigger the authorization process.
+In case a previous authorization no longer works (for example, you see a "Bad Credentials" error during translation fetching), delete the `token.json` file in the `translations` folder and execute `script/setup_translations` again to retrigger the authorization process.
 :::
 
 :::note
