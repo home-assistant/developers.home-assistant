@@ -40,12 +40,7 @@ Use these when a picker or dialog can render enough rows to affect scrolling or 
 
 Rows expose accessibility metadata with `aria-setsize` and `aria-posinset`, so assistive technologies still get the full list position even though only part of the list is in the DOM.
 
-```ts
-import "../../../components/list/ha-list-virtualized";
-import type { HaListVirtualizedItem } from "../../../components/list/ha-list-virtualized";
-```
-
-For selectable lists, render `ha-list-item-option` rows and keep selection state in the consumer. This keeps filtering and off-screen selections predictable.
+For selectable lists, render `ha-list-item-option` rows.
 
 ## Context and editor infrastructure
 
