@@ -99,7 +99,7 @@ async def async_get_triggers(hass: HomeAssistant) -> dict[str, type[Trigger]]:
 ## Conditions
 
 When an automation is triggered, it may have conditions that have to be met for the action to be executed.
-Conditions are created in the `condition` platform (`condition.py`) of your integration by creating and registering condition classes.
+Conditions are defined in the `condition` platform (`condition.py`) of your integration by creating and registering condition classes.
 
 ### Condition class
 
@@ -110,28 +110,30 @@ Just as with the [trigger class](#trigger-class), `async_validate_config` is use
 In the following snippet we create a condition that can be configured to only pass when `binary_sensor.front_door` has a desired configured state.
 
 ```python
-from typing import TYPE_CHECKING, Unpack, override
+from typing import TYPE_CHECKING, Unpack, override, Any
 
 import voluptuous as vol
 
-from homeassistant.const import STATE_OFF, STATE_ON, CONF_STATE
+from homeassistant.const import STATE_OFF, STATE_ON, CONF_STATE, CONF_TARGET, CONF_OPTIONS
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.condition import (
     Condition,
     ConditionChecker,
     ConditionCheckParams,
+    ConditionCheckerType,
     ConditionConfig,
-    trace_condition_function,
 )
 from homeassistant.helpers.typing import ConfigType, TemplateVarsType
 
 STATE_CONDITION_SCHEMA = vol.Schema(
     {
-        vol.Required(CONF_STATE): vol.In([STATE_ON, STATE_OFF]),
+        vol.Required(CONF_TARGET): cv.TARGET_FIELDS,
+        vol.Required(CONF_OPTIONS, default={}): {
+            vol.Required(CONF_STATE): vol.In([STATE_ON, STATE_OFF]),
+        },
     }
 )
-
 
 class DoorStateConditionBase(Condition):
     """State condition."""
@@ -154,16 +156,12 @@ class DoorStateConditionBase(Condition):
         self._state = config.options[CONF_STATE]
 
     @override
-    async def async_get_checker(self) -> ConditionChecker:
-        """Get the condition checker."""
+    async def _async_check(self, variables: TemplateVarsType = None, **kwargs: Any) -> bool:
+        """Check the condition."""
 
-        def test_state(**kwargs: Unpack[ConditionCheckParams]) -> bool:
-            """Test state condition."""
-            # In reality this would be more configurable
-            # but for the sake of example it's simplified.
-            return self._hass.states.get("binary_sensor.front_door") == self._state
-
-        return test_state
+        # In reality this would be more configurable
+        # but for the sake of example it's simplified.
+        return self._hass.states.get("binary_sensor.front_door") == self._state
 ```
 
 ### Registering conditions
@@ -181,7 +179,7 @@ async def async_get_conditions(hass: HomeAssistant) -> dict[str, type[Condition]
 
 ### Condition schema
 
-The frontend uses the `conditions.yaml` file to know the structure of the conditions.
+Home Assistant uses the `conditions.yaml` file to know the structure of the conditions.
 This file is similar to `triggers.yaml` and `services.yaml`.
 
 For example, the following snippet shows the `door_state` condition described in the previous example.
