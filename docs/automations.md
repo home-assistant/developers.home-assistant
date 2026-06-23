@@ -26,19 +26,13 @@ import voluptuous as vol
 
 from homeassistant.const import CONF_OPTIONS
 from homeassistant.core import CALLBACK_TYPE, HomeAssistant, callback
-from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.trigger import Trigger, TriggerActionRunner, TriggerConfig
 from homeassistant.helpers.typing import ConfigType
 
-_OPTIONS_SCHEMA = vol.Schema({
-    vol.Required("behavior", default="any"): vol.In(
-        ["first", "last", "any"]
-    ),
-})
+_OPTIONS_SCHEMA = vol.Schema({vol.Required("event_type"): vol.In(["open", "close"])})
 
-_CONFIG_SCHEMA = vol.Schema({
-    vol.Required(CONF_OPTIONS): _OPTIONS_SCHEMA,
-})
+_CONFIG_SCHEMA = vol.Schema({vol.Required(CONF_OPTIONS): _OPTIONS_SCHEMA})
+
 
 class EventTrigger(Trigger):
     """Trigger on events."""
@@ -62,6 +56,7 @@ class EventTrigger(Trigger):
         self, run_action: TriggerActionRunner
     ) -> CALLBACK_TYPE:
         """Attach the trigger."""
+
         @callback
         def async_remove() -> None:
             """Remove trigger."""
@@ -70,6 +65,8 @@ class EventTrigger(Trigger):
         @callback
         def async_on_event(event_data: dict) -> None:
             """Handle event."""
+            if event_data["type"] != self._options["event_type"]:
+                return
             payload = {
                 "event_type": event_data["type"],
                 "data": event_data["data"],
