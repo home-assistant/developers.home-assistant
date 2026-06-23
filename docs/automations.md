@@ -29,13 +29,17 @@ from homeassistant.core import CALLBACK_TYPE, HomeAssistant, callback
 from homeassistant.helpers.trigger import Trigger, TriggerActionRunner, TriggerConfig
 from homeassistant.helpers.typing import ConfigType
 
-_OPTIONS_SCHEMA = vol.Schema({vol.Required("event_type"): vol.In(["open", "close"])})
+_OPTIONS_SCHEMA = vol.Schema(
+    {
+        vol.Required("behavior"): vol.In(["first", "last", "any"]),
+    }
+)
 
 _CONFIG_SCHEMA = vol.Schema({vol.Required(CONF_OPTIONS): _OPTIONS_SCHEMA})
 
 
-class EventTrigger(Trigger):
-    """Trigger on events."""
+class OccupancyClearedTrigger(Trigger):
+    """Trigger when occupancy is cleared."""
 
     _options: dict[str, Any]
 
@@ -63,19 +67,17 @@ class EventTrigger(Trigger):
             # Your code to unregister the trigger
 
         @callback
-        def async_on_event(event_data: dict) -> None:
-            """Handle event."""
-            if event_data["type"] != self._options["event_type"]:
-                return
+        def async_on_cleared(entity_id: str) -> None:
+            """Handle occupancy cleared."""
             payload = {
-                "event_type": event_data["type"],
-                "data": event_data["data"],
+                "entity_id": entity_id,
+                "behavior": self._options["behavior"],
             }
-            description = f"Event {event_data['type']} detected"
+            description = f"Occupancy cleared for {entity_id}"
             run_action(payload, description)
 
         # Dummy example method to register your event listener
-        register_for_events(async_on_event)
+        register_for_occupancy_cleared(async_on_cleared)
 
         return async_remove
 ```
@@ -84,20 +86,19 @@ class EventTrigger(Trigger):
 ### Registering triggers
 
 Implement `async_get_triggers` in the `trigger` platform to register all the integration's triggers.
-Each trigger is identified by a unique string (e.g., `"event"` in the example above).
+Each trigger is identified by a unique string (e.g., `"occupancy_cleared"` in the example above).
 
 ```python
 async def async_get_triggers(hass: HomeAssistant) -> dict[str, type[Trigger]]:
     """Return triggers provided by this integration."""
     return {
-        "event": EventTrigger,
+        "occupancy_cleared": OccupancyClearedTrigger,
     }
 ```
 
-### Trigger schema
+### Trigger description
 
 Triggers should have their description in a `triggers.yaml` file. The description specifies the structure of the triggers and is used by the frontend, for example.
-This file is similar to `services.yaml`.
 
 The following snippet shows a trigger that takes a target binary sensor with a specific device class and a select selector with a predefined set of options.
 
@@ -110,7 +111,6 @@ occupancy_cleared:
   fields:
     behavior:
       required: true
-      default: any
       selector:
         select:
           translation_key: trigger_behavior
@@ -119,6 +119,4 @@ occupancy_cleared:
             - last
             - any
 ```
-
-
 
