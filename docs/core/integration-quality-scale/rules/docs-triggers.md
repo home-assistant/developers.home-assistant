@@ -37,6 +37,7 @@ Imagine your bedroom ventilation fan spinning up automatically in the middle of 
 slept, so you wake up feeling refreshed instead of groggy. Use this trigger to automate ventilation, log indoor air
 quality trends, or remind household members to open a window when CO2 shifts noticeably.
 
+<!-- Required. Renders the standard "Using this trigger from the user interface" heading and intro. -->
 {% include triggers/ui_header.md %}
 
 To use this trigger in an automation:
@@ -58,6 +59,7 @@ Threshold type:
   reference a helper entity that provides the value.
 {% endoptions_ui %}
 
+<!-- Required. Renders the standard "Using this trigger in YAML" heading and intro. -->
 {% include triggers/yaml_header.md %}
 
 In YAML, refer to this trigger as `air_quality.co2_changed`. A basic example looks like this:
@@ -86,6 +88,7 @@ threshold:
   type: any
 {% endoptions_yaml %}
 
+<!-- Keep this include if the trigger supports targets. Renders the "Targets of the trigger" section. -->
 {% include triggers/targets.md %}
 
 ## Good to know
@@ -96,8 +99,10 @@ threshold:
 - To react only when CO2 crosses a specific level in one direction,
   use [Carbon dioxide level crossed threshold](/triggers/air_quality.co2_crossed_threshold/) instead.
 
+<!-- Required. Renders the "Try it yourself" section that walks users through testing the trigger. -->
 {% include triggers/try_it.md %}
 
+<!-- Renders the "More examples" heading. Add your automation examples below it. -->
 {% include triggers/more_examples.md %}
 
 ### Automation: ventilate when bedroom CO2 rises
@@ -130,8 +135,10 @@ automation: |
 
 {% enddetails %}
 
+<!-- Required. Renders the "Still stuck?" section pointing to the community support channels. -->
 {% include triggers/stuck.md %}
 
+<!-- Keep this include if you set related_triggers in the front matter. Renders the "Related triggers" section. -->
 {% include triggers/related.md %}
 ```
 

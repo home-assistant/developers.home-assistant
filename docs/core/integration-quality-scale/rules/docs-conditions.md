@@ -29,6 +29,7 @@ related_conditions:
 
 The **Carbon monoxide detected** condition passes when one or more carbon monoxide sensors are actively detecting carbon monoxide (CO). Because CO is colorless and odorless, your sensors are the only way to know it is there. Adding this condition to your automation ensures that safety actions, like sounding an alarm, turning on ventilation, or sending an urgent notification, only happen while the danger is confirmed. It prevents false alarms from a sensor that briefly flickered and keeps your response focused on real threats.
 
+<!-- Required. Renders the standard "Using this condition from the user interface" heading and intro. -->
 {% include conditions/ui_header.md %}
 
 To use this condition in an automation:
@@ -48,6 +49,7 @@ Condition passes if:
   description: When multiple sensors are targeted, controls how results combine. Pick **Any** to pass if at least one targeted sensor detects carbon monoxide, or **All** to pass only when every targeted sensor detects carbon monoxide.
 {% endoptions_ui %}
 
+<!-- Required. Renders the standard "Using this condition in YAML" heading and intro. -->
 {% include conditions/yaml_header.md %}
 
 In YAML, refer to this condition as `air_quality.is_co_detected`. A basic example looks like this:
@@ -74,8 +76,10 @@ behavior:
   default: any
 {% endoptions_yaml %}
 
+<!-- Keep this include if the condition supports targets. Renders the "Targets of the condition" section. -->
 {% include conditions/targets.md %}
 
+<!-- Keep this include if the condition supports multiple targets. Renders the "Behavior with multiple targets" section referenced by the "Condition passes if" option. -->
 {% include conditions/behavior.md %}
 
 ## Good to know
@@ -84,8 +88,10 @@ behavior:
 - To check whether carbon monoxide is no longer detected, use [Carbon monoxide cleared](/conditions/air_quality.is_co_cleared/).
 - To check the actual CO concentration rather than just a binary detection, use [Carbon monoxide value](/conditions/air_quality.is_co_value/).
 
+<!-- Required. Renders the "Try it yourself" section that walks users through testing the condition. -->
 {% include conditions/try_it.md %}
 
+<!-- Renders the "More examples" heading. Add your automation examples below it. -->
 {% include conditions/more_examples.md %}
 
 ### Automation: warn the family when someone arrives home during a CO event
@@ -128,8 +134,10 @@ automation: |
 
 {% enddetails %}
 
+<!-- Required. Renders the "Still stuck?" section pointing to the community support channels. -->
 {% include conditions/stuck.md %}
 
+<!-- Keep this include if you set related_conditions in the front matter. Renders the "Related conditions" section. -->
 {% include conditions/related.md %}
 ```
 
