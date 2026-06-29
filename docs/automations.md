@@ -136,8 +136,8 @@ STATE_CONDITION_SCHEMA = vol.Schema(
 class DoorStateCondition(Condition):
     """State condition."""
 
-    @override
     @classmethod
+    @override
     async def async_validate_config(
         cls, hass: HomeAssistant, config: ConfigType
     ) -> ConfigType:
@@ -189,6 +189,6 @@ door_state:
       selector:
         select:
           options:
-            - on
-            - off
+            - "on"
+            - "off"
 ```
