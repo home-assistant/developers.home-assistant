@@ -20,41 +20,39 @@ Each trigger must inherit from `homeassistant.helpers.trigger.Trigger` and imple
 Integrations that need to wait for the action to complete can await the `Task` returned by `run_action`: `await run_action(...)`.
 
 ```python
-from typing import Any
+from typing import TYPE_CHECKING, cast
 
 import voluptuous as vol
 
-from homeassistant.const import CONF_OPTIONS
+from homeassistant.const import CONF_TARGET
 from homeassistant.core import CALLBACK_TYPE, HomeAssistant, callback
+from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.trigger import Trigger, TriggerActionRunner, TriggerConfig
 from homeassistant.helpers.typing import ConfigType
 
-_OPTIONS_SCHEMA = vol.Schema(
+_CONFIG_SCHEMA = vol.Schema(
     {
-        vol.Required("behavior"): vol.In(["first", "last", "any"]),
+        vol.Required(CONF_TARGET): cv.TARGET_FIELDS,
     }
 )
-
-_CONFIG_SCHEMA = vol.Schema({vol.Required(CONF_OPTIONS): _OPTIONS_SCHEMA})
 
 
 class OccupancyClearedTrigger(Trigger):
     """Trigger when occupancy is cleared."""
-
-    _options: dict[str, Any]
 
     @classmethod
     async def async_validate_config(
         cls, hass: HomeAssistant, config: ConfigType
     ) -> ConfigType:
         """Validate trigger-specific config."""
-        return _CONFIG_SCHEMA(config)
+        return cast(ConfigType, _CONFIG_SCHEMA(config))
 
     def __init__(self, hass: HomeAssistant, config: TriggerConfig) -> None:
         """Initialize trigger."""
         super().__init__(hass, config)
-        assert config.options is not None
-        self._options = config.options
+        if TYPE_CHECKING:
+            assert config.target is not None
+        self._target = config.target
 
     async def async_attach_runner(
         self, run_action: TriggerActionRunner
@@ -69,15 +67,12 @@ class OccupancyClearedTrigger(Trigger):
         @callback
         def async_on_cleared(entity_id: str) -> None:
             """Handle occupancy cleared."""
-            payload = {
-                "entity_id": entity_id,
-                "behavior": self._options["behavior"],
-            }
+            payload = {"entity_id": entity_id}
             description = f"Occupancy cleared for {entity_id}"
             run_action(payload, description)
 
-        # Dummy example method to register your event listener
-        register_for_occupancy_cleared(async_on_cleared)
+        # Dummy example method to register your listener for the target entities
+        register_for_occupancy_cleared(self._target, async_on_cleared)
 
         return async_remove
 ```
@@ -100,7 +95,7 @@ async def async_get_triggers(hass: HomeAssistant) -> dict[str, type[Trigger]]:
 
 Triggers should have their description in a `triggers.yaml` file. The description specifies the structure of the triggers and is used by the frontend, for example.
 
-The following snippet shows a trigger that takes a target binary sensor with a specific device class and a select selector with a predefined set of options.
+The following snippet shows a trigger that takes a target binary sensor with a specific device class.
 
 ```yaml
 occupancy_cleared:
@@ -108,15 +103,5 @@ occupancy_cleared:
     entity:
       domain: binary_sensor
       device_class: presence
-  fields:
-    behavior:
-      required: true
-      selector:
-        select:
-          translation_key: trigger_behavior
-          options:
-            - first
-            - last
-            - any
 ```
 
