@@ -2799,6 +2799,10 @@ Returns information about the OS.
 
 Update Home Assistant OS
 
+A reboot is required after this completes to finish the update. This can be done
+with a follow-up call to `/host/reboot` or let the user complete it on their schedule
+using the repair.
+
 **Payload:**
 
 | key     | type   | description                                                    |
