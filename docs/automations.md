@@ -152,7 +152,7 @@ class DoorStateCondition(Condition):
         self._state = config.options[CONF_STATE]
 
     @override
-    async def _async_check(
+    def _async_check(
         self, variables: TemplateVarsType = None, **kwargs: Any
     ) -> bool:
         """Check the condition."""
