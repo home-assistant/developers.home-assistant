@@ -107,9 +107,9 @@ The following properties are used to populate the entity and device registries. 
 | entity_registry_visible_default | `bool` | `True`                         | Indicate if the entity should be hidden or visible when first added to the entity registry. |
 | unique_id                       | `str \| None`            | `None`  | A unique identifier for this entity. It must be unique within a platform (like `light.hue`). It should not be configurable or changeable by the user. [Learn more.](entity_registry_index.md#unique-id-requirements) |
 
-## Advanced properties
+## Additional properties
 
-The following properties are also available on entities. However, they are for advanced use only and should be used with caution. These properties are always called when the state is written to the state machine.
+The following properties are also available on entities, but should be used with caution. These properties are always called when the state is written to the state machine.
 
 | Name                            | Type                         | Default | Description
 | ------------------------------- | ---------------------------- | ------- | -----------
@@ -478,7 +478,7 @@ The `MATCH_ALL` constant can be used to exclude all attributes instead of typing
 
 Using the `MATCH_ALL` constant does not stop recording for `device_class`, `state_class`, `unit_of_measurement`, and `friendly_name` as they might also serve other purposes and, therefore, should not be excluded from recording.
 
-Examples of platform state attributes which are exluded from recording include the `entity_picture` attribute of `image` entities which will not be valid after some time, the `preset_modes` attribute of `fan` entities which is not likely to change.
+Examples of platform state attributes which are excluded from recording include the `entity_picture` attribute of `image` entities which will not be valid after some time, the `preset_modes` attribute of `fan` entities which is not likely to change.
 Examples of integration specific state attributes which are excluded from recording include `description` and `location` state attributes in platform `trafikverket.camera` which do not change.
 
 :::tip

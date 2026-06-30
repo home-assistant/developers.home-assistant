@@ -25,7 +25,7 @@ to re-enable after running dd:
 ## Console
 
 By default, console access is granted over the serial header and over HDMI. Certain startup messages will only appear on the serial console by default. To show the messages on the HDMI console instead, swap the order of the two consoles in the `cmdline.txt` file on the boot partition. You can also delete the SAC2 console if you don't plan on using the serial adapter.
-eg. `console=tty1 console=ttySAC2,115200`
+For example, `console=tty1 console=ttySAC2,115200`
 
 ## GPIO
 

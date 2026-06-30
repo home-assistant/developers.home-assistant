@@ -33,7 +33,7 @@ git submodule update --init --force
 
 ### Install prerequisites
 
-HAOS is using build containers to run Buildroot. Install the Docker container engine and make sure you have a working `docker` command which allows to run privileged containers. The build scripts are meant to be run as user, but some commands use privileges, hence a working `sudo` command is required as well.
+HAOS is using build containers to run Buildroot. Install the Docker container engine and make sure you have a working `docker` command which allows running privileged containers. The build scripts are meant to be run as user, but some commands use privileges, hence a working `sudo` command is required as well.
 
 While Buildroot can run on most Linux distributions natively, its strongly recommended to use the Debian based build container. This allows for a stable and known build environment with all dependencies pre-installed.
 
@@ -60,7 +60,7 @@ $ scripts/enter.sh make rpi4_64
 
 This invokes make using the `Makefile` in the root of the source repository inside the container. This makefile in turn invokes Buildroot's makefile.
 
-Depending on the speed of your machine the build process takes 0.5 to 1h. The build files (object files, intermediate binaries etc.) are stored in the folder `output/` (used to be in `buildroot/output/` in rel-6 and older branches). The final image files are stored in the `release/` directory.
+Depending on the speed of your machine the build process takes 0.5 to 1h. The build files (object files, intermediate binaries etc.) are stored in the folder `output/`. The final image files are stored in the `output/images/` directory.
 
 ### Rebuild packages
 
@@ -95,7 +95,7 @@ builder@d3d7577663c9:/build$
 
 From this shell, the same build above could be started using `make O=output_rpi4_64 rpi4_64`.
 
-This allows to invoke other Buildroot targets, for example, to [graph dependencies between packages](https://buildroot.org/downloads/manual/manual.html#_graphing_the_dependencies_between_packages). To use other Buildroot targets, make sure to change to the `buildroot/` directory and execute commands from there
+This allows invoking other Buildroot targets, for example, to [graph dependencies between packages](https://buildroot.org/downloads/manual/manual.html#_graphing_the_dependencies_between_packages). To use other Buildroot targets, make sure to change to the `buildroot/` directory and execute commands from there
 
 ```bash
 builder@c6dfb4cd4036:/build$ cd buildroot/
@@ -116,8 +116,8 @@ Since HAOS requires UEFI support, this is slightly more tricky than with "classi
 ```bash
 $ scripts/enter.sh make O=output_ova ova
 [...]
-$ unxz release/haos_ova-7.0.dev20211003.qcow2.xz
-$ qemu-system-x86_64 -enable-kvm -name haos -smp 2 -m 1G -drive file=release/haos_ova-7.0.dev20211003.qcow2,index=0,media=disk,if=virtio,format=qcow2 -drive file=/usr/share/ovmf/x64/OVMF_CODE.fd,if=pflash,format=raw,readonly=on
+$ unxz output_ova/images/haos_ova-7.0.dev20211003.qcow2.xz
+$ qemu-system-x86_64 -enable-kvm -name haos -smp 2 -m 2G -drive file=output_ova/images/haos_ova-18.0.dev0.qcow2,index=0,media=disk,if=virtio,format=qcow2 -drive file=/usr/share/ovmf/x64/OVMF_CODE.fd,if=pflash,format=raw,readonly=on
 ```
 
 This will show QEMU's SDL interface and should boot Home Assistant Operating System. Once the boot completes and the Home Assistant CLI prompt `ha > ` is shown, you can use `login` to access the root shell.

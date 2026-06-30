@@ -391,7 +391,7 @@ Restart an app
 <ApiEndpoint path="/addons/<addon>/security" method="post">
 Set the protection mode on an app.
 
-This function is not callable by itself and you can not use `self` as the slug here.
+This function is not callable by itself and you cannot use `self` as the slug here.
 
 **Payload:**
 
@@ -2849,7 +2849,7 @@ Set HAOS swap configuration. Unavailable on Supervised.
 
 | key        | type   | description                                                                                |
 |------------|--------|--------------------------------------------------------------------------------------------|
-| swap_size  | string | New swap siz as number with optional units (K/M/G). Anything lower than 40K disables swap. |
+| swap_size  | string | New swap size as number with optional units (K/M/G). Anything lower than 40K disables swap. |
 | swappiness | int    | New swappiness value (0-100).                                                              |
 </ApiEndpoint>
 
@@ -3089,8 +3089,9 @@ firmware interface or the update is blocked on this board / boot device.
       "uuid": "A89924620F9A11EBBDC3C403FC2CA371",
       "type": "free_space",
       "context": "system",
-      "reference": null
-     }
+      "reference": null,
+      "reference_extra": null
+    }
   ],
   "suggestions": [
     {
@@ -3098,6 +3099,7 @@ firmware interface or the update is blocked on this board / boot device.
       "type": "clear_backups",
       "context": "system",
       "reference": null,
+      "reference_extra": null,
       "auto": false
     }
   ],
@@ -3144,6 +3146,7 @@ Get suggestions that would fix an issue if applied.
       "type": "clear_backups",
       "context": "system",
       "reference": null,
+      "reference_extra": null,
       "auto": false
     }
   ]

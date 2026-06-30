@@ -47,4 +47,4 @@ If a wake word is detected, a `DetectionResult` is returned with:
 - `timestamp` - the timestamp of the audio chunk when detection occurred
 - `queued_audio` - optional audio chunks that will be forwarded to speech-to-text (see below)
 
-In an [Assist pipeline](/docs/voice/pipelines), the audio stream is shared between wake word detection and speech-to-text. This means that any audio chunk removed during wake word detection **can not be processed** by speech-to-text unless passed back in the `queued_audio` of a `DetectionResult`.
+In an [Assist pipeline](/docs/voice/pipelines), the audio stream is shared between wake word detection and speech-to-text. This means that any audio chunk removed during wake word detection **cannot be processed** by speech-to-text unless passed back in the `queued_audio` of a `DetectionResult`.

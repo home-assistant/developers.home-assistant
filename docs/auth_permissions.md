@@ -2,10 +2,6 @@
 title: "Permissions"
 ---
 
-:::info
-This is an experimental feature that is not enabled or enforced yet
-:::
-
 Permissions limit the things a user has access to or can control. Permissions are attached to groups, of which a user can be a member. The combined permissions of all groups a user is a member of decides what a user can and cannot see or control.
 
 Permissions do not apply to the user that is flagged as "owner". This user will always have access to everything.
@@ -113,7 +109,7 @@ To check a permission, you will need to have access to the user object. Once you
 
 ```python
 from homeassistant.exceptions import Unauthorized
-from homeassistant.permissions.const import POLICY_READ, POLICY_CONTROL, POLICY_EDIT
+from homeassistant.auth.permissions.const import POLICY_READ, POLICY_CONTROL, POLICY_EDIT
 
 # Raise error if user is not an admin
 if not user.is_admin:
@@ -146,9 +142,6 @@ When you detect an unauthorized action, you should raise the `homeassistant.exce
 
 The `Unauthorized` exception has various parameters, to identify the permission check that failed. All fields are optional.
 
-| # Not all actions have an ID (like adding config entry)
-| # We then use this fallback to know what category was unauth
-
 | Parameter | Description
 | --------- | -----------
 | context | The context of the current call.
@@ -173,7 +166,7 @@ from homeassistant.exceptions import Unauthorized, UnknownUser
 from homeassistant.auth.permissions.const import POLICY_CONTROL
 
 
-async def handle_entity_service(call):
+async def handle_entity_service(call: ServiceCall) -> None:
     """Handle a service action call."""
     entity_ids = call.data["entity_id"]
 
@@ -198,26 +191,28 @@ async def handle_entity_service(call):
         # Do action on entity
 
 
-async def async_setup(hass, config):
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     hass.services.async_register(DOMAIN, "my_service", handle_entity_service)
     return True
 ```
 
 #### Checking admin permission
 
-Starting Home Assistant 0.90, there is a special decorator to help protect
-service actions that require admin access.
+There is a special helper to protect service actions that require admin
+access.
 
 ```python
-# New in Home Assistant 0.90
-async def handle_admin_service(call):
+from homeassistant.helpers.service import async_register_admin_service
+
+
+async def handle_admin_service(call: ServiceCall) -> None:
     """Handle a service action call."""
     # Do admin action
 
 
-async def async_setup(hass, config):
-    hass.helpers.service.async_register_admin_service(
-        DOMAIN, "my_service", handle_admin_service, vol.Schema({})
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
+    async_register_admin_service(
+        hass, DOMAIN, "my_service", handle_admin_service, vol.Schema({})
     )
     return True
 ```
@@ -261,7 +256,7 @@ built-in `@require_admin` decorator.
 from homeassistant.components import websocket_api
 
 
-async def async_setup(hass, config):
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     websocket_api.async_register_command(hass, websocket_create)
     return True
 
@@ -271,7 +266,11 @@ async def async_setup(hass, config):
 @websocket_api.websocket_command(
     {vol.Required("type"): "my-component/my-action",}
 )
-async def websocket_create(hass, connection, msg):
+async def websocket_create(
+    hass: HomeAssistant,
+    connection: ActiveConnection,
+    msg: dict,
+) -> None:
     """Create a user."""
     # Do action
 ```

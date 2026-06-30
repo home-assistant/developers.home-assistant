@@ -137,4 +137,4 @@ class MyWeatherEntity(WeatherEntity):
 
 It is strongly recommended that fetched weather forecasts are cached by the weather entity to avoid unnecessary API accesses.
 
-When an updated weather forecast is available, the weather forecast cache should be invalidated and the method `WeatherEntity.async_update_listeners` should be awaited to trigger a push of the updated weather forecast to any active subscriber. If there are active listeners, `WeatherEntity.async_update_listeners` will call the corresponding `async_forecast_xxx` methods. If there are no active listeners, `WeatherEntity.async_update_listeners` will not call any ot the `async_forecast_xxx` methods.
+When an updated weather forecast is available, the weather forecast cache should be invalidated and the method `WeatherEntity.async_update_listeners` should be awaited to trigger a push of the updated weather forecast to any active subscriber. If there are active listeners, `WeatherEntity.async_update_listeners` will call the corresponding `async_forecast_xxx` methods. If there are no active listeners, `WeatherEntity.async_update_listeners` will not call any of the `async_forecast_xxx` methods.

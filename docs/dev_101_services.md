@@ -110,9 +110,6 @@ set_speed:
     speed:
       # Whether or not field is required (default = false)
       required: true
-      # Advanced fields are only shown when the advanced mode is enabled for the user
-      # (default = false)
-      advanced: true
       # Example value that can be passed for this field
       example: "low"
       # The default field value
@@ -128,9 +125,9 @@ set_speed:
             - "medium"
             - "high"
     # Fields can be grouped in collapsible sections, this is useful to initially hide
-    # advanced fields and to group related fields. Note that the collapsible section
+    # less commonly used fields and to group related fields. Note that the collapsible section
     # only affect presentation to the user, service action data will not be nested.
-    advanced_fields:
+    additional_fields:
       # Whether or not the section is initially collapsed (default = false)
       collapsed: true
       # Input fields in this section
@@ -163,9 +160,9 @@ Input fields can be visually grouped in sections. Grouping input fields by secti
 only how the inputs are displayed to the user, and not how service action data is structured.
 
 In the [service action description example](#service-action-description-example), the `speed_pct`
-input field is inside an initially collapsed section `advanced_fields`.
+input field is inside an initially collapsed section `additional_fields`.
 The service action data for the service in the example is `{"speed_pct": 50}`, not
-`{"advanced_fields": {"speed_pct": 50}}`.
+`{"additional_fields": {"speed_pct": 50}}`.
 
 ### Filtering service action fields
 
@@ -231,7 +228,7 @@ The following example shows how to provide icons for the `turn_on` and `turn_off
 
 In addition, icons can optionally be specified for collapsible sections.
 
-The following example shows how to provide an icon for the `advanced_options` section:
+The following example shows how to provide an icon for the `additional_options` section:
 
 ```json
 {
@@ -239,7 +236,7 @@ The following example shows how to provide an icon for the `advanced_options` se
     "start_brewing": {
       "service": "mdi:flask",
       "sections": {
-        "advanced_options": "mdi:test-tube"
+        "additional_options": "mdi:test-tube"
       }
     }
   }
@@ -313,7 +310,7 @@ async def custom_set_sleep_timer(entity, service_call):
 
 ## Response data
 
-Actions may respond to an action call with data for powering more advanced automations. There are some additional implementation requirements:
+Actions may respond to an action call with data for powering more complex automations. There are some additional implementation requirements:
 
 - Response data must be a `dict` and serializable in JSON [`homeassistant.util.json.JsonObjectType`](https://github.com/home-assistant/core/blob/dev/homeassistant/util/json.py) in order to interoperate with other parts of the system, such as the frontend.
 - Errors must be raised as exceptions just like any other service action call as
