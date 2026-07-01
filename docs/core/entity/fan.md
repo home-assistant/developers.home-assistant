@@ -108,7 +108,7 @@ named_speed = percentage_to_ordered_list_item(ORDERED_NAMED_FAN_SPEEDS, 23)
 ...
 
     @property
-    def percentage(self) -> Optional[int]:
+    def percentage(self) -> int | None:
         """Return the current speed percentage."""
         return ordered_list_item_to_percentage(ORDERED_NAMED_FAN_SPEEDS, current_speed)
 
@@ -133,7 +133,7 @@ value_in_range = math.ceil(percentage_to_ranged_value(SPEED_RANGE, 50))
 ...
 
     @property
-    def percentage(self) -> Optional[int]:
+    def percentage(self) -> int | None:
         """Return the current speed percentage."""
         return ranged_value_to_percentage(SPEED_RANGE, current_speed)
 
@@ -152,10 +152,22 @@ Only implement this method if the flag `FanEntityFeature.TURN_ON` is set.
 class FanEntity(ToggleEntity):
     # Implement one of these methods.
 
-    def turn_on(self, speed: Optional[str] = None, percentage: Optional[int] = None, preset_mode: Optional[str] = None, **kwargs: Any) -> None:
+    def turn_on(
+        self,
+        speed: str | None = None,
+        percentage: int | None = None,
+        preset_mode: str | None = None,
+        **kwargs: Any,
+    ) -> None:
         """Turn on the fan."""
 
-    async def async_turn_on(self, speed: Optional[str] = None, percentage: Optional[int] = None, preset_mode: Optional[str] = None, **kwargs: Any) -> None:
+    async def async_turn_on(
+        self,
+        speed: str | None = None,
+        percentage: int | None = None,
+        preset_mode: str | None = None,
+        **kwargs: Any,
+    ) -> None:
         """Turn on the fan."""
 ```
 
