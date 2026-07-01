@@ -73,27 +73,18 @@ Use it to...
 
 {% include triggers/ui_header.md %}
 
-To use this trigger in an automation:
-
-1. Go to {% my automations title="**Settings** > **Automations & scenes**" %}.
-2. Open an existing automation, or select **Create automation** > **Create new automation**.
-3. In the **When** section, select **Add trigger**.
-4. From the search box, search for and select **Light: Light brightness changed**.
-5. Select what you want to monitor. Under **By target** (see [Targets](#targets)), pick... You can also select a floor, a device, a specific entity, or a label.
-6. From the triggers shown for that target, select...
-7. Under **Trigger when** (see [Behavior](#behavior-with-multiple-targets)), pick **Any**, **First**, or **Last** to control how multiple targets interact.
-8. Under **Threshold type**, set how much the level has to change before the trigger fires.
-9. Under **Another field**, set...
-10. Select **Save**.
+{% include triggers/threshold_changed_steps.md
+   title="Light brightness changed"
+   sensor="light"
+   areas="living room or bedroom"
+   unit_phrase_ui="a fixed percentage (0–100%)" %}
 
 ### Options in the UI
 
 <!-- Note that there are no "required" or "type" fields for UI options, as you have in YAML. They are not rendered for the UI options. -->
 
-{% options_ui %}
-Threshold type:
-  description: How much the brightness has to change before the trigger fires, as a percentage of full brightness. Can be a fixed number, or reference a helper entity that provides the value.
-{% endoptions_ui %}
+{% include triggers/threshold_changed_options_ui.md
+   unit_phrase_ui="a fixed percentage (0–100%)" %}
 
 {% include triggers/yaml_header.md %}
 
@@ -105,30 +96,20 @@ trigger: |
   target:
     entity_id: light.living_room
   options:
-    threshold: 10
-behavior:
-  description: >
-    When multiple sensors are targeted, controls when the trigger fires. Accepts `any`, `first`, or `last`.
-  required: false
-  type: string
-  default: any
+    threshold:
+      type: above
+      value:
+        number: 10
 {% endexample %}
 
-This fires whenever the living room light's brightness changes by at least ten percent.
+This fires whenever the living room light's brightness increases more than ten percent.
 
 ### Options in YAML
 
 YAML sometimes provides additional options for more complex use cases that are not available through the UI.
 
-<!-- If the option has a default value, set the required field to false. -->
-
-{% options_yaml %}
-threshold:
-  description: >
-    The minimum amount (in percent) the brightness must change before the trigger fires. Accepts a number, or a reference to an `input_number`, `number`, or `sensor` entity with a percent unit.
-  required: true
-  type: any
-{% endoptions_yaml %}
+{% include triggers/threshold_changed_options_yaml.md
+   unit_phrase_yaml="literal percentage 0–100" %}
 
 <!-- Keep the "include" below if your integration supports targets -->
 {% include triggers/targets.md %}
@@ -149,7 +130,7 @@ When you dim the ceiling light down, slow the fan down too. A classic "scene moo
 
 - **Trigger**: Light brightness changed
   - **Target**: Living room ceiling light
-  - **Threshold type**: 10
+  - **Threshold type**: Above 10
 - **Action**: Fan: Set speed
 
 {% details "YAML example for a ceiling-light-linked fan" %}
@@ -162,7 +143,10 @@ automation: |
       target:
         entity_id: light.living_room_ceiling
       options:
-        threshold: 10
+        threshold:
+          type: above
+          value:
+            number: 10
   actions:
     - action: fan.set_percentage
       target:
@@ -291,6 +275,124 @@ automation: |
         media_content_id: "media-source://tts/cloud?message=Someone+is+at+the+door"
         media_content_type: music
         announce: true
+{% endexample %}
+
+{% enddetails %}
+
+{% include conditions/stuck.md %}
+
+{% include conditions/related.md %}
+
+```
+
+### Template: condition (threshold-based)
+
+Some conditions test a numeric reading against a threshold (above, below, in range, or outside range) instead of a simple on/off state. These use the shared `conditions/threshold_value_*` includes. Adapt this template for that kind of condition:
+
+```md
+---
+title: "Light brightness"
+condition: light.is_brightness
+domain: light
+description: "Tests if the brightness of one or more lights is above, below, or within a range."
+related_conditions:
+  - light.is_on
+  - light.is_off
+---
+
+The **Light brightness** condition passes when...
+Use it to...
+
+{% include integrations/labs_entity_triggers_note.md %}
+
+{% include conditions/ui_header.md %}
+
+{% include conditions/threshold_value_steps.md
+   title="Light brightness"
+   sensor="light"
+   areas="living room or bedroom"
+   value_long="a fixed percentage directly, for example `65` for 65%" %}
+
+### Options in the UI
+
+{% include conditions/threshold_value_options_ui.md
+   value_short="a fixed percentage (0–100)" %}
+
+{% include conditions/yaml_header.md %}
+
+In YAML, refer to this condition as `light.is_brightness`. A basic example looks like this:
+
+{% example %}
+condition: |
+  condition: light.is_brightness
+  target:
+    entity_id: light.living_room
+  options:
+    threshold:
+      type: above
+      value:
+        number: 60
+    behavior: any
+{% endexample %}
+
+This passes when the living room light's brightness is above 60%.
+
+### Options in YAML
+
+YAML sometimes provides additional options for more complex use cases that are not available through the UI.
+
+{% include conditions/threshold_value_options_yaml.md
+   range_note="0–100"
+   number_final="a percentage value (0–100)" %}
+
+<!-- Keep the two "includes" below if your integration supports targets -->
+{% include conditions/targets.md %}
+
+{% include conditions/behavior.md %}
+
+## Good to know
+
+- Add extra information here.
+
+{% include conditions/try_it.md %}
+
+{% include conditions/more_examples.md %}
+
+### Automation: pause a movie if the room is too bright
+
+When you press play, only dim-check the room: if the living room light is brighter than 60%, turn it down first so the screen isn't washed out.
+
+- **Trigger**: State: Media player starts playing
+- **Condition**: Light brightness (above 60%)
+  - **Target**: Living room light
+  - **Condition passes if**: Any
+- **Action**: Light: Turn on (brightness 30%)
+
+{% details "YAML example for dimming a too-bright room on playback" %}
+
+{% example %}
+automation: |
+  alias: "Dim living room when starting a movie"
+  triggers:
+    - trigger: state
+      entity_id: media_player.living_room
+      to: "playing"
+  conditions:
+    - condition: light.is_brightness
+      target:
+        entity_id: light.living_room
+      options:
+        threshold:
+          type: above
+          value:
+            number: 60
+        behavior: any
+  actions:
+    - action: light.turn_on
+      target:
+        entity_id: light.living_room
+      data:
+        brightness_pct: 30
 {% endexample %}
 
 {% enddetails %}
