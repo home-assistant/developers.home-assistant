@@ -9,7 +9,7 @@ Home Assistant provides ready-made actions for a lot of things, but it doesn't a
 
 This is a simple "hello world" example to show the basics of registering a service action. To use this example, create the file `<config dir>/custom_components/hello_action/__init__.py` and copy the below example code.
 
-Actions can be called from automations and from the actions "Developer tools" in the frontend.
+Actions can be called from automations and from the **Actions** tab of **Tools** in the frontend.
 
 ```python
 from homeassistant.core import HomeAssistant, ServiceCall, callback
