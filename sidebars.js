@@ -126,6 +126,7 @@ module.exports = {
         "development_testing",
         "development_catching_up",
         "development_tips",
+        "core/pr_review_guide",
       ],
     },
     {
