@@ -14,12 +14,14 @@ To create a new integration page, follow these steps:
    - [YAML Style Guide](/docs/documenting/yaml-style-guide.md)
    - [Documentation structure and example text](/docs/documenting/integration-docs-examples)
 5. Make sure to add [icon and logo](#images-icons-and-logos) to the brands repository.
-   - If your integration was a custom integration (HACS), move the brand files into the `core_integrations` folder.
-6. Document the steps required to retrieve API keys or access token for the third-party service or device, if needed.
-7. Make sure the documentation does not refer to custom integrations. The steps and examples, including automation examples, should not depend on custom cards or custom integrations.
-8. Add the type of the devices (including firmware) you have tested when you know that there are multiple out there.
-9. When adding blueprints, upload them either to the blueprints folder under [`https://github.com/home-assistant/home-assistant.io/tree/current/source/blueprints/integrations`](https://github.com/home-assistant/home-assistant.io/tree/current/source/blueprints/integrations), or to the [blueprint exchange on the forums](https://community.home-assistant.io/c/blueprints-exchange). On the integration page, add a link to the blueprint exchange.
-10. Before marking your PR as **Ready for review**, remove the comments.
+   - If your integration was a custom integration (HACS) and now became a core integration, move the brand files into the `core_integrations` folder.
+   - In the PR template, add a link to that brands PR.
+6. Add the integration and codeowners to the [codeowners file](https://github.com/home-assistant/home-assistant.io/blob/next/CODEOWNERS).
+7. Document the steps required to retrieve API keys or access token for the third-party service or device, if needed.
+8. Make sure the documentation does not refer to custom integrations. The steps and examples, including automation examples, should not depend on custom cards or custom integrations.
+9. Add the type of the devices (including firmware) you have tested when you know that there are multiple out there.
+10. When adding blueprints, upload them either to the blueprints folder under [`https://github.com/home-assistant/home-assistant.io/tree/current/source/blueprints/integrations`](https://github.com/home-assistant/home-assistant.io/tree/current/source/blueprints/integrations), or to the [blueprint exchange on the forums](https://community.home-assistant.io/c/blueprints-exchange). On the integration page, add a link to the blueprint exchange.
+11. Before marking your PR as **Ready for review**, remove the comments.
 
 ## About the integration page header format
 
