@@ -21,3 +21,21 @@ The connection abstraction underneath `modbus_connection` lives in [`modbus-conn
 This keeps concerns where they belong. A device library is a normal PyPI package that knows how to talk to a specific device, and a consuming integration in Home Assistant wires that library up to a shared connection and exposes entities. Both can be developed and tested independently.
 
 For more background, see our [research](https://gist.github.com/balloob/b9fa91ba1a0914a9787f8f6ceb637b83).
+
+## Let's get building
+
+With these new building blocks in place, it is now possible to turn a collection of YAML configuration for Modbus into manufacturer-specific integrations that people can set up via the UI. If you're (interested in) working on this, stop by the [#modbus channel on the Home Assistant Discord](https://discord.com/channels/330944238910963714/1347329854495916044) and we'll be happy to help.
+
+If you're using an AI agent, you can give it the following prompt:
+
+> I want to create a new integration for Home Assistant using the new Modbus Connection integration as documented here: https://developers.home-assistant.io/docs/modbus/introduction
+> 
+> The YAML we want to turn into a device library can be found here: *TODO INSERT LOCATION OF MODBUS YAML!*
+>
+> The deliverables of this task are going to be 3 folders:
+> 
+> - Start by creating a device library based on the YAML. Follow https://github.com/Tom-Bom-badil/trovis-modbus/ as an exact example, including how to use component models, all GitHub Actions, helper scripts and README. This library is meant as a standalone device library and should not mention Home Assistant. Look at the source of modbus_connection to figure out al supported fields.
+> 
+> - Create an integration that can be contributed to Home Assistant core that follows this example: https://github.com/home-assistant/core/tree/trovis557x-integration/homeassistant/components/trovis557x
+> 
+> - Create a custom integration version where the device library is vendorized so it is ready to be tested by the community via HACS. Follow this template https://github.com/ludeeus/integration_blueprint
