@@ -14,27 +14,44 @@ Properties should always only return information from memory and not do I/O (lik
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | changed_by | string | None | Describes what the last change was triggered by.
-| code_format | string | None | Regex for code format or None if no code is required.
-| is_locked | bool | None | Indication of whether the lock is currently locked. Used to determine `state`.
-| is_locking | bool | None | Indication of whether the lock is currently locking. Used to determine `state`.
-| is_unlocking | bool | None | Indication of whether the lock is currently unlocking. Used to determine `state`.
-| is_jammed | bool | None | Indication of whether the lock is currently jammed. Used to determine `state`.
-| is_opening | bool | None | Indication of whether the lock is currently opening. Used to determine `state`.
-| is_open | bool | None | Indication of whether the lock is currently open. Used to determine `state`.
+| code_format | string | None | Regex used to validate the code supplied to the lock, unlock, and open actions, or None if no code is required.
+| is_locked | bool | None | Whether the lock is secured. Used to determine `state`.
+| is_locking | bool | None | Whether the lock is in the process of being locked. Used to determine `state`.
+| is_unlocking | bool | None | Whether the lock is in the process of being unlocked. Used to determine `state`.
+| is_open | bool | None | Whether the lock is not secured and has released its latch. Only relevant for locks that support `LockEntityFeature.OPEN`. Used to determine `state`.
+| is_opening | bool | None | Whether the lock is in the process of releasing its latch. Used to determine `state`.
+| is_jammed | bool | None | Whether the lock tried to move but got stuck before it finished. Used to determine `state`.
 
 ### States
 
-The state is defined by setting the above properties. The resulting state is using the `LockState` enum to return one of the below members.
+The state is derived from the properties above and is one of the following `LockState` enum members:
 
 | Value       | Description                                                        |
 |-------------|--------------------------------------------------------------------|
-| `LOCKED`    | The lock is locked.                                                |
-| `LOCKING`   | The lock is locking.                                               |
-| `UNLOCKING` | The lock is unlocking.                                             |
-| `UNLOCKED`  | The lock is unlocked.                                             |
-| `JAMMED`    | The lock is currently jammed.                                      |
-| `OPENING`   | The lock is opening.                                               |
-| `OPEN`      | The lock is open.                                                  |
+| `LOCKED`    | The lock is secured.                                               |
+| `LOCKING`   | The lock is in the process of being locked.                        |
+| `UNLOCKED`  | The lock is not secured.                                           |
+| `UNLOCKING` | The lock is in the process of being unlocked.                      |
+| `OPEN`      | The lock is not secured and has released its latch.                |
+| `OPENING`   | The lock is in the process of releasing its latch.                 |
+| `JAMMED`    | The lock tried to move but got stuck before it finished.           |
+
+:::note
+
+The `OPEN` state and the `is_open` property require the lock to be not secured **and** have its latch released. A released latch while the lock is still secured is not the open state.
+
+:::
+
+When more than one of the state properties is set, they are evaluated in a fixed priority order and the first match determines the state:
+
+1. `is_jammed` → `JAMMED`
+2. `is_opening` → `OPENING`
+3. `is_locking` → `LOCKING`
+4. `is_open` → `OPEN`
+5. `is_unlocking` → `UNLOCKING`
+6. `is_locked` → `LOCKED` when `True`, `UNLOCKED` when `False`
+
+If `is_locked` is `None` and none of the other state properties evaluate truthy, the state is `unknown`.
 
 ## Supported features
 
