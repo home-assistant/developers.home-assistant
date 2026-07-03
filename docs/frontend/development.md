@@ -118,6 +118,10 @@ yarn dev:serve -p 8654
 ```
 
 :::note
+If you connect to a production instance of Home Assistant and change the port with `-p`, make sure `cors_allowed_origins` includes the frontend origin with the matching port. For the `yarn dev:serve -p 8654` example above, add `http://localhost:8654` instead of `http://localhost:8124`.
+:::
+
+:::note
 It also accepts the background lifecycle flags described in [Managing the dev server in the background](#managing-the-dev-server-in-the-background).
 :::
 
