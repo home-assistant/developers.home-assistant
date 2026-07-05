@@ -225,13 +225,14 @@ async def async_browse_media(self, item: MediaSourceItem) -> BrowseMediaSource:
     )
 ```
 
-If you want to enable the search support only for specific paths, you can set `can_search=True` on the root `BrowseMediaSource` item returned by `async_browse_media()` based on the current `MediaSourceItem` (_typically browsable directories_) when browsing:
+If you want to enable the search support only for specific paths, you can set `can_search=True` on the `BrowseMediaSource` item returned by `async_browse_media()` based on the current `MediaSourceItem` (_typically browsable directories_) when browsing:
 
 ```python
 async def async_browse_media(self, item: MediaSourceItem) -> BrowseMediaSource:
     """Browse media."""
 
     can_search = False
+    # item.identifier will be None for the root node
     if item.identifier:
         can_search = is_searchable(item.identifier)
 
