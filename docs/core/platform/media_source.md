@@ -214,7 +214,7 @@ async def async_browse_media(self, item: MediaSourceItem) -> BrowseMediaSource:
 
     return BrowseMediaSource(
         domain=DOMAIN,
-        identifier=None,
+        identifier=item.identifier,
         media_class=MediaClass.APP,
         media_content_type="",
         title="My Service",
@@ -238,7 +238,7 @@ async def async_browse_media(self, item: MediaSourceItem) -> BrowseMediaSource:
 
     return BrowseMediaSource(
         domain=DOMAIN,
-        identifier=None,
+        identifier=item.identifier,
         media_class=MediaClass.APP,
         media_content_type="",
         title="My Service",
