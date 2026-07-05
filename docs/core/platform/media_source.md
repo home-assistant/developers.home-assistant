@@ -206,7 +206,7 @@ The `SearchMediaQuery` passed to `async_search_media` has these attributes:
 
 ### Advertising search support
 
-The media browser only shows a search bar for items that advertise it. Set `can_search=True` on the root `BrowseMediaSource` item returned by `async_browse_media()` to support searching when browsing:
+The media browser only shows a search bar for items that advertise it. Set `can_search=True` on the `BrowseMediaSource` item returned by `async_browse_media()` to support searching when browsing:
 
 ```python
 async def async_browse_media(self, item: MediaSourceItem) -> BrowseMediaSource:
