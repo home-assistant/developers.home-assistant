@@ -209,7 +209,6 @@ The `SearchMediaQuery` passed to `async_search_media` has these attributes:
 The media browser only shows a search bar for items that advertise it. Set `can_search=True` on the root `BrowseMediaSource` item returned by `async_browse_media()` to support searching when browsing:
 
 ```python
-@override
 async def async_browse_media(self, item: MediaSourceItem) -> BrowseMediaSource:
     """Browse media."""
 
@@ -229,7 +228,6 @@ async def async_browse_media(self, item: MediaSourceItem) -> BrowseMediaSource:
 If you want to enable the search support only for specific paths, you can set `can_search=True` on the root `BrowseMediaSource` item returned by `async_browse_media()` based on the current `MediaSourceItem` (_typically browsable directories_) when browsing:
 
 ```python
-@override
 async def async_browse_media(self, item: MediaSourceItem) -> BrowseMediaSource:
     """Browse media."""
 
