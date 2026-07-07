@@ -76,7 +76,7 @@ You do not need to catch `ConnectionNotReady`. Because it is a `ConfigEntryNotRe
 
 ## Writing Modbus libraries
 
-We require each integration to implement a library that handles the device-specific communication. To help build these libraries, we maintain [`modbus-connection`](https://github.com/home-assistant-libs/modbus-connection), a Python package. See its [documentation](https://home-assistant-libs.github.io/modbus-connection/) for details.
+We require each integration to implement a library that handles the device-specific communication. To help build these libraries, we maintain [`modbus-connection`](https://home-assistant-libs.github.io/modbus-connection/), a Python package.
 
 `modbus-connection` provides:
 
