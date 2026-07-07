@@ -50,12 +50,13 @@ class MyMediaSource(MediaSource):
 
 ## The `MediaSource` base class
 
-Your media source must subclass `MediaSource` and implement two methods:
+Your media source must subclass `MediaSource` and implement `async_resolve_media` and `async_browse_media`. It can optionally implement `async_search_media` to let users search your media.
 
 | Method | Description |
 |---|---|
 | `async_resolve_media(item)` | Resolve a `MediaSourceItem` to a `PlayMedia` with a playable URL and MIME type. Raise `Unresolvable` if the item cannot be resolved. |
 | `async_browse_media(item)` | Return a `BrowseMediaSource` representing the browsable structure at the given item. Raise `BrowseError` if browsing fails. |
+| `async_search_media(item, query)` | Optional. Return a `SearchMedia` result for the given `SearchMediaQuery`. See [Searching media](#searching-media). |
 
 Set the class attribute `name` to a human-readable name for your source. If not set, it defaults to the integration domain.
 
@@ -109,6 +110,7 @@ async def async_browse_media(self, item: MediaSourceItem) -> BrowseMediaSource:
 | `title` | `str` | Display title shown to the user. |
 | `can_play` | `bool` | Whether the item can be played directly. |
 | `can_expand` | `bool` | Whether the item can be browsed deeper (has children). |
+| `can_search` | `bool` | Whether the item can be searched. When `True`, the media browser shows a search bar for this item. Defaults to `False`. See [Searching media](#searching-media). |
 | `children` | `list[BrowseMediaSource] \| None` | Child items. Only set on the parent item that is browsed. |
 | `children_media_class` | `MediaClass \| None` | Media class of the children. Automatically calculated if not set. |
 | `thumbnail` | `str \| None` | URL to a thumbnail image. |
@@ -150,6 +152,73 @@ async def async_browse_media(self, item: MediaSourceItem) -> BrowseMediaSource:
             ),
         ],
     )
+```
+
+## Searching media
+
+Searching is optional. Implement `async_search_media` to let users search your media source from the media browser. It receives the `MediaSourceItem` that is being searched (the location the search started from) and a `SearchMediaQuery`, and returns a `SearchMedia` result:
+
+```python
+from homeassistant.components.media_player import SearchMedia, SearchMediaQuery
+
+async def async_search_media(
+    self, item: MediaSourceItem, query: SearchMediaQuery
+) -> SearchMedia:
+    """Search media."""
+    tracks = await self.api.search(query.search_query)
+
+    results = [
+        BrowseMediaSource(
+            domain=DOMAIN,
+            identifier=track.id,
+            media_class=MediaClass.MUSIC,
+            media_content_type=track.mime_type,
+            title=track.title,
+            can_play=True,
+            can_expand=False,
+        )
+        for track in tracks
+    ]
+
+    return SearchMedia(result=results)
+```
+
+The `item` argument tells you where the search was started, so you can scope the results to that part of your hierarchy. When `query.media_filter_classes` is set, only return items whose `media_class` is in the list.
+
+### `SearchMediaQuery`
+
+The `SearchMediaQuery` passed to `async_search_media` has these attributes:
+
+| Attribute | Type | Default | Description |
+|---|---|---|---|
+| `search_query` | `str` | *required* | The search string entered by the user. |
+| `media_content_type` | `MediaType \| str \| None` | `None` | The content type to search inside. |
+| `media_content_id` | `str \| None` | `None` | The content ID to search inside. |
+| `media_filter_classes` | `list[MediaClass] \| None` | `None` | When set, only return items whose `media_class` is in this list. |
+
+### `SearchMedia`
+
+`SearchMedia` wraps the list of matched items.
+
+| Field | Type | Description |
+|---|---|---|
+| `result` | `list[BrowseMediaSource]` | The items that matched the query. |
+
+### Advertising search support
+
+The media browser only shows a search bar for items that advertise it. Set `can_search=True` on the `BrowseMediaSource` items that support searching (typically browsable directories) when browsing:
+
+```python
+return BrowseMediaSource(
+    domain=DOMAIN,
+    identifier=None,
+    media_class=MediaClass.APP,
+    media_content_type="",
+    title="My Service",
+    can_play=False,
+    can_expand=True,
+    can_search=True,
+)
 ```
 
 ## Resolving media
@@ -223,7 +292,7 @@ Raise the appropriate exception when something goes wrong:
 | Exception | When to raise |
 |---|---|
 | `Unresolvable` | In `async_resolve_media` when the media item cannot be resolved to a playable URL. |
-| `BrowseError` | In `async_browse_media` when the media structure cannot be retrieved. |
+| `BrowseError` | In `async_browse_media` when the media structure cannot be retrieved, or in `async_search_media` when the search fails. |
 
 Both exceptions support translations:
 
@@ -240,14 +309,23 @@ raise Unresolvable(
 Other integrations (for example, media players) can use the media source helpers to browse and resolve media:
 
 ```python
+from homeassistant.components.media_player import SearchMediaQuery
 from homeassistant.components.media_source import (
     async_browse_media,
     async_resolve_media,
+    async_search_media,
     is_media_source_id,
 )
 
 # Browse media sources
 result = await async_browse_media(hass, "media-source://my_domain")
+
+# Search a media source
+search_result = await async_search_media(
+    hass,
+    "media-source://my_domain",
+    SearchMediaQuery(search_query="jazz"),
+)
 
 # Resolve a media item to a playable URL
 play_media = await async_resolve_media(

@@ -11,6 +11,32 @@ Home Assistant has a built-in API which exposes the Assist API to LLMs. This API
 
 The Assist API is equivalent to the capabilities and exposed entities that are also accessible to the built-in conversation agent. No administrative tasks can be performed.
 
+## Contributing tools
+
+Integrations can contribute tools to an LLM API without owning a full API. The `llm` integration discovers an `<integration>/llm.py` platform that exposes an `async_get_tools` hook. The platform is imported lazily and queried only when an LLM request needs its tools.
+
+`async_get_tools` is a callback that is evaluated for each request with the request's `LLMContext`. It returns the tools to expose, together with an optional prompt fragment that travels with those tools. Because it runs per request, it can return a different set of tools depending on the context, such as the assistant or device making the request.
+
+```python
+# example_integration/llm.py
+from homeassistant.components import llm
+from homeassistant.core import HomeAssistant, callback
+from homeassistant.helpers.llm import LLMContext
+
+
+@callback
+def async_get_tools(hass: HomeAssistant, llm_context: LLMContext) -> llm.LLMTools:
+    """Return the tools to expose to the LLM."""
+    return llm.LLMTools(
+        tools=[MyTool()],
+        prompt="Use MyTool to ...",  # Optional prompt fragment
+    )
+```
+
+The hook is only called once the `llm` integration is set up, so the platform does not need to depend on `llm` itself.
+
+See [Tools](#tools) for how to implement the `Tool` objects returned by the platform.
+
 ## Supporting LLM APIs
 
 The LLM API needs to be integrated in two places in your integration. Users need to be able to configure which APIs should be used, and the tools offered by the APIs should be passed to the LLM when interacting with it.
