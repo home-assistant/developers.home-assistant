@@ -370,6 +370,7 @@ module.exports = {
     "android/get_started",
     "android/architecture",
     "android/ui_architecture",
+    "android/frontend_screen",
     "android/targets",
     "android/app_flavors",
     {

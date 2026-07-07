@@ -150,7 +150,7 @@ module.exports = {
     },
     image: "img/default-social.png",
     mermaid: {
-      theme: { light: "neutral", dark: "dark" },
+      theme: { light: "neutral", dark: "forest" },
     },
     colorMode: {
       defaultMode: 'light',
