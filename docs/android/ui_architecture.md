@@ -66,6 +66,8 @@ val events: SharedFlow<UiEvent>   // one-shot side effects
 val actions: Flow<UiAction>       // only when the view owns an imperative handle
 ```
 
+Re-emitting the same state must be a no-op: a reduction may produce a value equal to the current one, and that must not cause work or a render. `StateFlow` guarantees it by skipping emissions equal to the current value, which is also why the state class must implement structural equality (a data class does).
+
 It never references Compose or platform UI types, so its logic runs as plain JVM unit tests. It also outlives configuration changes: `viewModelScope` is cancelled only when the screen is permanently gone, so a rotation doesn't cancel and restart long-running work such as loading or flow collection.
 
 Keep it thin. A small screen's ViewModel can hold its feature logic directly. As the screen grows, extract cohesive logic into the [blocks below](#blocks) rather than letting the ViewModel mix unrelated concerns. Its own job is coordination: owning the channels and routing inputs, not every feature's internals.
@@ -74,7 +76,7 @@ Keep it thin. A small screen's ViewModel can hold its feature logic directly. As
 
 The single source of truth for what is rendered. The ViewModel holds it in a `StateFlow`, which is what makes it survive recomposition and configuration changes.
 
-The state class must be immutable: use `val` properties and immutable collections, and produce a new instance (via `copy()`) for each change. In-place mutation breaks Compose's change detection and the unidirectional flow. Re-emitting the same state must be a no-op.
+The state class must be immutable: use `val` properties and immutable collections, and produce a new instance (via `copy()`) for each change. In-place mutation breaks Compose's change detection and the unidirectional flow.
 
 The state must also be cheap to read. Compose reads it on the main thread during recomposition, so don't expose a `get()` that computes anything (sorting, filtering, formatting): it would run again on every recomposition. Pre-compute such values when the state is created, in the ViewModel or a block below, where the work can run on a background dispatcher:
 
