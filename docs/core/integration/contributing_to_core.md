@@ -26,8 +26,8 @@ To measure the quality of an integration, we use the [integration quality scale]
 This scale defines a set of rules that an integration should follow to be considered of a certain quality level.
 The rules cover various aspects of an integration, such as documentation, testing, code quality, and more.
 
-New integrations should at least reach the [bronze] level of the integration quality scale.
-It's not required to reach a higher level right away, as that will likely only increase the scope of the pull request and make it harder to review and merge.
+New integrations must address all the [bronze] level rules of the integration quality scale.
+Don't aim to reach a higher level right away — as noted in the [Make your pull request as small as possible](#make-your-pull-request-as-small-as-possible) section, we should keep the pull request small and focused.
 
 [bronze]: /docs/core/integration-quality-scale/rules#-bronze
 [integration quality scale]: /docs/core/integration-quality-scale
