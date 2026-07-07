@@ -16,7 +16,7 @@ The new [`modbus_connection`](https://github.com/home-assistant/core/tree/dev/ho
 
 ## A standalone library
 
-The connection abstraction underneath `modbus_connection` lives in [`modbus-connection`](https://github.com/home-assistant-libs/modbus-connection), a new library we designed for this purpose and published on PyPI. It is not bound to Home Assistant and can be used standalone in any Python project. It presents a common, backend-neutral interface, so device library authors write against one API regardless of the underlying Modbus implementation, and it ships a device-modelling framework and a `pytest` plugin to make building and testing a device library straightforward.
+The connection abstraction underneath `modbus_connection` lives in [`modbus-connection`](https://home-assistant-libs.github.io/modbus-connection/), a new library we designed for this purpose and published on PyPI. It is not bound to Home Assistant and can be used standalone in any Python project. It presents a common, backend-neutral interface, so device library authors write against one API regardless of the underlying Modbus implementation, and it ships a device-modelling framework and a `pytest` plugin to make building and testing a device library straightforward.
 
 This keeps concerns where they belong. A device library is a normal PyPI package that knows how to talk to a specific device, and a consuming integration in Home Assistant wires that library up to a shared connection and exposes entities. Both can be developed and tested independently.
 
