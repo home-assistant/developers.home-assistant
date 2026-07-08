@@ -45,7 +45,7 @@ You can join the beta program directly through the [Google Play Store](https://p
 
 ### Production release
 
-If the beta version is stable and approved by maintainers, it is promoted to **production**, making it available to all users. The detailed checklist is described in [Release process (promoting beta to prod)](#release-process-promoting-beta-to-prod) below.
+If the beta version is stable and approved by maintainers, it is promoted to **production**, making it available to all users. The detailed checklist is described in [Release process (promoting beta to production)](#release-process-promoting-beta-to-production) below.
 
 :::note
 You can find the app on the [Google Play Store](https://play.google.com/store/apps/details?id=io.homeassistant.companion.android).
@@ -75,7 +75,10 @@ The promotion is performed by a maintainer following this checklist:
 
 - Edit the latest beta release on [GitHub](https://github.com/home-assistant/android/releases): keep the generated list of all commits, but manually add a **Highlights of this release** section on top of it matching the content of the in-app changelog XML file (see [2026.6.1](https://github.com/home-assistant/android/releases/tag/2026.6.1) for an example), uncheck the **pre-release** checkbox, and set it as the **latest** release.
 - Unchecking the pre-release checkbox triggers the [`release.yml` workflow](/docs/android/ci#releases) automatically, which uses Fastlane to promote the beta track to production on the Play Store for the mobile, Wear OS, and Automotive apps.
-- Wait for Google approval (this usually takes a few days).
+
+:::note
+The release is not live immediately after the promotion: Google reviews it first, which usually takes a few days. No action is needed during the review; the remaining steps happen [once the release is available](#after-the-release-is-available-on-stores).
+:::
 
 ### Other stores
 
@@ -90,3 +93,7 @@ The Play Store promotion only covers the `full` flavor. The other stores are upd
 
 - Once the release is available on the Play Store, merge the companion docs PR that removes the beta labels.
 - Update the GitHub release notes with the CVE disclosures, if any security issues were fixed in this release since the previous production release. Manually add a **Disclosed security advisories** section to the release notes after the highlights, with a link to each published advisory.
+
+:::note
+If the release contains a major change or a great new feature, ask the community manager to help promote it (blog post, social media, ...).
+:::
