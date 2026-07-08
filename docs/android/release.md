@@ -59,14 +59,14 @@ You can find the app on the [Google Play Store](https://play.google.com/store/ap
   - Since releases are weekly, the previous beta release might still be under validation when a new beta is submitted. If this happens the previous beta is removed and not validated by Google.
 - This delay does not block the release process but requires careful planning to ensure timely updates.
 
-## Release process (promoting beta to prod)
+## Release process (promoting beta to production)
 
 The promotion is performed by a maintainer following this checklist:
 
 ### Before promoting
 
 - Wait a few days after the beta has been released to give beta users time to catch regressions.
-- Check that the in-app changelog (`app/src/main/res/xml/changelog_master.xml`) is up to date and that its version matches the beta being promoted. The version bump is automated through a PR created by the `prepareNextRelease.yml` workflow (see [CI documentation](/docs/android/ci#on-pre-release-or-monthly-tag)), but the content should be verified manually.
+- Check that the in-app changelog (`app/src/main/res/xml/changelog_master.xml`) is up to date and that its version matches the beta being promoted. The version bump is automated through a PR created by the [`prepareNextRelease.yml` workflow](/docs/android/ci#on-pre-release-or-monthly-tag), but the content should be verified manually.
 - Open the Sentry dashboard and look for any abnormally high number of issues on the beta version.
 - Open the [Google Play Console](https://play.google.com/console) and look for any anomalies reported (crashes, ANRs, Android vitals).
 - Prepare a [companion docs](https://github.com/home-assistant/companion.home-assistant) PR removing all beta labels for the features shipped in this release.
@@ -86,7 +86,7 @@ The Play Store promotion only covers the `full` flavor. The other stores are upd
 - Release the `minimal` flavor on the Meta Quest store.
 - F-Droid picks up the release automatically after a few days by building from the GitHub release (see [Release on F-Droid](/docs/android/ci#release-on-f-droid)).
 
-### After the release
+### After the release is available on stores
 
-- Update the GitHub release notes with the CVE disclosures, if any security issues were fixed in this release.
 - Once the release is available on the Play Store, merge the companion docs PR that removes the beta labels.
+- Update the GitHub release notes with the CVE disclosures, if any security issues were fixed in this release since the previous production release. Manually add a **Disclosed security advisories** section to the release notes after the highlights, with a link to each published advisory.
