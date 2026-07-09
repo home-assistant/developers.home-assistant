@@ -22,7 +22,7 @@ The following intents are **supported**:
 
 The following intents are **deprecated**:
 
- * HassOpenCover, HassCloseCover, HassHumidifierSetpoint, HassHumidifierMode, HassShoppingListLastItems
+ * HassOpenCover, HassCloseCover, HassToggle, HassHumidifierSetpoint, HassHumidifierMode, HassShoppingListLastItems
 
 **Slots**
 
@@ -94,6 +94,14 @@ Close a cover.
 | Slot name | Type | Required | Description
 | --------- | ---- | -------- | -----------
 | name | string | Yes | Name of the cover entity to close.
+
+### HassToggle
+
+Toggle the state of an entity.
+
+| Slot name | Type | Required | Description
+| --------- | ---- | -------- | -----------
+| name | string | Yes | Name of the entity to toggle.
 
 ### HassHumidifierSetpoint
 
