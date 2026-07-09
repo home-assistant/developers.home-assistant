@@ -32,7 +32,9 @@ The process audio stream method is used to send audio to an STT service and get 
 class MySpeechToTextEntity(SpeechToTextEntity):
     """Represent a Speech To Text entity."""
 
-    async def async_process_audio_stream(self) -> None:
+    async def async_process_audio_stream(
+        self, metadata: SpeechMetadata, stream: AsyncIterable[bytes]
+    ) -> SpeechResult:
         """Process an audio stream to STT service.
 
         Only streaming content is allowed!
