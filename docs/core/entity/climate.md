@@ -97,6 +97,7 @@ A device's fan can have different states. There are a couple of built-in fan mod
 | `FAN_LOW`     |
 | `FAN_MEDIUM`  |
 | `FAN_HIGH`    |
+| `FAN_TOP`     |
 | `FAN_MIDDLE`  |
 | `FAN_FOCUS`   |
 | `FAN_DIFFUSE` |
