@@ -49,26 +49,19 @@ The JSON response from `/api/conversation/process` contains information about th
     "response_type": "action_done",
     "language": "en",
     "data": {
-      "targets": [
+      "success": [
         {
-          "type": "area",
           "name": "Living Room",
+          "type": "area",
           "id": "living_room"
         },
         {
-          "type": "domain",
-          "name": "light",
-          "id": "light"
-        }
-      ],
-      "success": [
-        {
-          "type": "entity",
           "name": "My Light",
+          "type": "entity",
           "id": "light.my_light"
         }
       ],
-      "failed": [],
+      "failed": []
     },
     "speech": {
       "plain": {
@@ -99,29 +92,26 @@ If `continue_conversation` is set to true, the conversation agent expects a foll
 
 ### Action done
 
-The intent produced an action in Home Assistant, such as turning on a light. The `data` property of the response contains a `targets` list, where each target looks like:
+The intent produced an action in Home Assistant, such as turning on a light. The `data` property of the response contains a `success` list and a `failed` list. Each entry in these lists is a target that was acted on, and looks like:
 
-| Name       | Type    | Description                                                                            |
-|------------|---------|----------------------------------------------------------------------------------------|
-| `type`     | string  | Target type. One of `area`, `domain`, `device_class`, `device`, `entity`, or `custom`. |
-| `name`     | string  | Name of the affected target.                                                           |
-| `id`       | string  | Optional. Id of the target.                                                            |
+| Name       | Type    | Description                                                                                     |
+|------------|---------|-------------------------------------------------------------------------------------------------|
+| `name`     | string  | Name of the affected target.                                                                    |
+| `type`     | string  | Target type. One of `area`, `floor`, `domain`, `device_class`, `device`, `entity`, or `custom`. |
+| `id`       | string  | Optional. Id of the target.                                                                     |
 
-Two additional target lists are included, containing the devices or entities that were a `success` or `failed`:
+The `success` list contains the targets (such as areas, floors, and entities/devices) that were acted on successfully, and the `failed` list contains those that failed:
 
 ```json
 {
   "response": {
     "response_type": "action_done",
     "data": {
-      "targets": [
-        (area or domain)
-      ],
       "success": [
-        (entities/devices that succeeded)
+        (targets that succeeded)
       ],
       "failed": [
-        (entities/devices that failed)
+        (targets that failed)
       ]
     }
   }
@@ -168,21 +158,14 @@ The response is an answer to a question, such as "what is the temperature?". See
       }
     },
     "data": {
-      "targets": [
-        {
-          "type": "domain",
-          "name": "climate",
-          "id": "climate"
-        }
-      ],
       "success": [
         {
-          "type": "entity",
           "name": "Ecobee",
+          "type": "entity",
           "id": "climate.ecobee"
         }
       ],
-      "failed": [],
+      "failed": []
     }
   },
   "conversation_id": "<generated-id-from-ha>",
