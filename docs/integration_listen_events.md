@@ -8,7 +8,7 @@ Your integration may need to take action when a specific event happens inside Ho
 
 Event helpers are available in the `homeassistant.helpers.event` namespace. These functions return a callable that cancels the listener.
 
-Sync versions of the below functions are also available without the `async_` prefix.
+Sync versions of many of these functions are also available without the `async_` prefix.
 
 ### Example
 
@@ -21,7 +21,7 @@ unsub()
 
 | Function                             | Use case
 | ------------------------------------ | --------------------------------------------------------------------------
-| `async_track_state_change`           | Track specific state changes
+| `async_track_state_change`           | Track specific state changes (deprecated, use `async_track_state_change_event`)
 | `async_track_state_change_event`     | Track specific state change events indexed by entity_id
 | `async_track_state_added_domain`     | Track state change events when an entity is added to domains
 | `async_track_state_removed_domain`   | Track state change events when an entity is removed from domains

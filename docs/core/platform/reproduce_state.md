@@ -14,12 +14,17 @@ If you prefer to go the manual route, create a new file in your integration fold
 
 ```python
 import asyncio
-from typing import Iterable, Optional
+from collections.abc import Iterable
+from typing import Any
 from homeassistant.core import Context, HomeAssistant, State
 
 
 async def async_reproduce_states(
-    hass: HomeAssistant, states: Iterable[State], context: Optional[Context] = None
+    hass: HomeAssistant,
+    states: Iterable[State],
+    *,
+    context: Context | None = None,
+    reproduce_options: dict[str, Any] | None = None,
 ) -> None:
     """Reproduce component states."""
     # TODO reproduce states
