@@ -309,7 +309,7 @@ You do not need to do anything special to make your API available over the [Mode
 
 Each API is reachable at its own Streamable HTTP endpoint, addressed by its API ID:
 
-```
+```text
 /api/mcp/<API ID>
 ```
 
