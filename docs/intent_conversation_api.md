@@ -120,6 +120,8 @@ The `success` list contains the targets (such as areas, floors, and entities/dev
 
 An intent can have multiple targets which are applied on top of each other. The targets must be ordered from general to specific:
 
+* `floor`
+  * A registered floor, which groups multiple areas
 * `area`
   * A [registered area](https://developers.home-assistant.io/docs/area_registry_index/)
 * `domain`
