@@ -60,7 +60,7 @@ $ scripts/enter.sh make rpi4_64
 
 This invokes make using the `Makefile` in the root of the source repository inside the container. This makefile in turn invokes Buildroot's makefile.
 
-Depending on the speed of your machine the build process takes 0.5 to 1h. The build files (object files, intermediate binaries etc.) are stored in the folder `output/` (used to be in `buildroot/output/` in rel-6 and older branches). The final image files are stored in the `release/` directory.
+Depending on the speed of your machine the build process takes 0.5 to 1h. The build files (object files, intermediate binaries etc.) are stored in the folder `output/`. The final image files are stored in the `output/images/` directory.
 
 ### Rebuild packages
 
@@ -116,8 +116,8 @@ Since HAOS requires UEFI support, this is slightly more tricky than with "classi
 ```bash
 $ scripts/enter.sh make O=output_ova ova
 [...]
-$ unxz release/haos_ova-7.0.dev20211003.qcow2.xz
-$ qemu-system-x86_64 -enable-kvm -name haos -smp 2 -m 1G -drive file=release/haos_ova-7.0.dev20211003.qcow2,index=0,media=disk,if=virtio,format=qcow2 -drive file=/usr/share/ovmf/x64/OVMF_CODE.fd,if=pflash,format=raw,readonly=on
+$ unxz output_ova/images/haos_ova-7.0.dev20211003.qcow2.xz
+$ qemu-system-x86_64 -enable-kvm -name haos -smp 2 -m 2G -drive file=output_ova/images/haos_ova-18.0.dev0.qcow2,index=0,media=disk,if=virtio,format=qcow2 -drive file=/usr/share/ovmf/x64/OVMF_CODE.fd,if=pflash,format=raw,readonly=on
 ```
 
 This will show QEMU's SDL interface and should boot Home Assistant Operating System. Once the boot completes and the Home Assistant CLI prompt `ha > ` is shown, you can use `login` to access the root shell.

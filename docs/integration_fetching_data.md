@@ -32,10 +32,9 @@ When using the DataUpdateCoordinator, the data being polled is often expected to
 ```python
 """Example integration using DataUpdateCoordinator."""
 
+import asyncio
 from datetime import timedelta
 import logging
-
-import async_timeout
 
 from homeassistant.components.light import LightEntity
 from homeassistant.core import callback
@@ -111,7 +110,7 @@ class MyCoordinator(DataUpdateCoordinator):
         try:
             # Note: asyncio.TimeoutError and aiohttp.ClientError are already
             # handled by the data update coordinator.
-            async with async_timeout.timeout(10):
+            async with asyncio.timeout(10):
                 # Grab active context variables to limit data required to be fetched from API
                 # Note: using context is not required if there is no need or ability to limit
                 # data retrieved from API.
@@ -187,7 +186,7 @@ When new data arrives, use `coordinator.async_set_updated_data(data)` to pass th
 ## Request parallelism
 
 :::info
-This is an advanced topic.
+Home Assistant manages request parallelism automatically; most integrations do not need to change anything described here.
 :::
 
 Home Assistant has built-in logic to make sure that integrations do not hammer APIs and consume all available resources in Home Assistant. This logic is built around limiting the number of parallel requests. This logic is automatically used during service action calls and entity updates.

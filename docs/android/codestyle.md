@@ -72,8 +72,10 @@ TODOs in code tend to be forgotten over time. When someone read them later, they
 ### Example
 
 ```bash
-// TODO Missing feature (linked issue #404)
+// TODO Missing feature https://github.com/home-assistant/android/issues/404
 ```
+
+Always reference GitHub with a full HTTP link, never a bare `#404` — a number is ambiguous and not clickable outside GitHub. When linking to code (a file or line), use a permalink (press <kbd>y</kbd> on GitHub for a commit-pinned URL) so the link survives file moves and edits.
 
 ## Constants
 

@@ -182,7 +182,7 @@ Device info is categorized into Link, Primary and Secondary by finding the first
 | Category             | Keys                 |
 | -------------------- | ---------------------|
 | Link                 | `connections` and `identifiers` |
-| Primary              | `configuration_url`, `connections`, `entry_type`, `hw_version`, `identifiers`, `manufacturer`, `model`, `name`, `suggested_area`, `sw_version`, and `via_device`|
+| Primary              | `configuration_url`, `connections`, `entry_type`, `hw_version`, `identifiers`, `manufacturer`, `model`, `model_id`, `name`, `serial_number`, `suggested_area`, `sw_version`, and `via_device`|
 | Secondary            | `connections`, `default_manufacturer`, `default_model`, `default_name`, and `via_device`|
 
 This categorization is used in sorting the configuration entries to define the main integration to be used by the frontend.
