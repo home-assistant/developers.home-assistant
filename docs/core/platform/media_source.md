@@ -202,23 +202,51 @@ The `SearchMediaQuery` passed to `async_search_media` has these attributes:
 
 | Field | Type | Description |
 |---|---|---|
-| `result` | `list[BrowseMediaSource]` | The items that matched the query. |
+| `result` | `Sequence[BrowseMedia]` | The items that matched the query. |
 
 ### Advertising search support
 
-The media browser only shows a search bar for items that advertise it. Set `can_search=True` on the `BrowseMediaSource` items that support searching (typically browsable directories) when browsing:
+The media browser only shows a search bar for items that advertise it. Set `can_search=True` on the `BrowseMediaSource` item returned by `async_browse_media()` to support searching when browsing:
 
 ```python
-return BrowseMediaSource(
-    domain=DOMAIN,
-    identifier=None,
-    media_class=MediaClass.APP,
-    media_content_type="",
-    title="My Service",
-    can_play=False,
-    can_expand=True,
-    can_search=True,
-)
+async def async_browse_media(self, item: MediaSourceItem) -> BrowseMediaSource:
+    """Browse media."""
+
+    return BrowseMediaSource(
+        domain=DOMAIN,
+        identifier=item.identifier,
+        media_class=MediaClass.APP,
+        media_content_type="",
+        title="My Service",
+        can_play=False,
+        can_expand=True,
+        can_search=True,
+        children=[BrowseMediaSource(...), BrowseMediaSource(...)],
+    )
+```
+
+If you want to enable the search support only for specific paths, you can set `can_search=True` on the `BrowseMediaSource` item returned by `async_browse_media()` based on the current `MediaSourceItem` (_typically browsable directories_) when browsing:
+
+```python
+async def async_browse_media(self, item: MediaSourceItem) -> BrowseMediaSource:
+    """Browse media."""
+
+    can_search = False
+    # item.identifier will be None for the root node
+    if item.identifier:
+        can_search = is_searchable(item.identifier)
+
+    return BrowseMediaSource(
+        domain=DOMAIN,
+        identifier=item.identifier,
+        media_class=MediaClass.APP,
+        media_content_type="",
+        title="My Service",
+        can_play=False,
+        can_expand=True,
+        can_search=can_search,
+        children=[BrowseMediaSource(...), BrowseMediaSource(...)],
+    )
 ```
 
 ## Resolving media
