@@ -20,8 +20,8 @@ Examples:
 
 ```json
 {
-  "domain": "innovelli",
-  "name": "Innovelli",
+  "domain": "inovelli",
+  "name": "Inovelli",
   "iot_standards": ["zigbee", "zwave"]
 }
 ```
