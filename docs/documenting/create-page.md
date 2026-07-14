@@ -60,7 +60,7 @@ The following keys are available for the integration page file header:
 - `description`: A short description of the integration page.
 - `featured`: Set to `true` to feature the integration prominently on the integrations page. This is not an `ha_`-prefixed key. Don't use this.
 - `ha_bluetooth`: Set to `true` if the integration supports discovery via Bluetooth, omit otherwise.
-- `ha_brand`: Set to `true` if the page represents a [brand](/docs/creating_integration_manifest#integration-type) rather than a real integration, omit otherwise. A brand groups multiple integrations or products under a single manufacturer name.
+- `ha_brand`: Set to `true` if the page represents a [brand](/docs/creating_integration_brand) rather than a real integration, omit otherwise. A brand groups several integrations or products from the same manufacturer under a single name, so users can find them more easily. It is not the same as a [virtual integration](/docs/creating_integration_manifest#virtual-integration). For example, the `google` brand page groups the `google` and `google_sheets` integrations, and the `inovelli` brand page points to the Zigbee and Z-Wave IoT standards its devices use. Omit this key for regular integration pages.
 - `ha_category`: This entry is used to group the integration on the [Integration overview](https://www.home-assistant.io/integrations/).
 - `ha_codeowners`: GitHub usernames or team names (starting with `@`) of people that are responsible for this integration. This should match with the codeowners as listed in the integration manifest file.
 - `ha_config_flow`: Set to `true` if the integration has a [Data Entry Flow](/docs/data_entry_flow_index), omit otherwise.
