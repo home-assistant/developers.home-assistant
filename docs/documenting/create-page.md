@@ -71,7 +71,6 @@ The following keys are available for the integration page file header:
 - `ha_iot_class`: [IoT class](https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things) is the classifier for the device's behavior.
 - `ha_iot_standard`: Only used for [virtual integrations](/docs/creating_integration_manifest#virtual-integration) of the "IoT standards" type. The IoT standard the product uses for connectivity. This must match the `iot_standards` value from the virtual integration's [manifest](/docs/creating_integration_manifest) file. It is used to guide you through adding the device with the corresponding standard. One or more of the following standards can be listed:
   - `homekit`: Products connect through HomeKit.
-  - `matter`: Products connect through Matter.
   - `zigbee`: Products connect through Zigbee.
   - `zwave`: Products connect through Z-Wave.
 - `ha_mqtt`: Set to `true` if the integration supports discovery via MQTT, omit otherwise.
