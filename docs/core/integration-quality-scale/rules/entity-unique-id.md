@@ -38,7 +38,7 @@ More information about the requirements for a unique identifier can be found in 
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not have any entities, this rule does not apply.
 
 ## Related rules
 

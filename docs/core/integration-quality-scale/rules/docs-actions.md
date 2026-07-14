@@ -29,7 +29,7 @@ The `my_integration.get_schedule` service is used to fetch a schedule from the i
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not provide any custom service actions, this rule does not apply.
 
 ## Related rules
 

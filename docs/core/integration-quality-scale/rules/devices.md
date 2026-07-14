@@ -49,7 +49,7 @@ More information about devices can be found in the [device](/docs/device_registr
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not create any entities, or it connects to a single service that is not represented as a device, this rule does not apply.
 
 ## Related rules
 

@@ -38,4 +38,4 @@ Local access token:
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not require any parameters during installation, this rule does not apply.

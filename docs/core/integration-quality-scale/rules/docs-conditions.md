@@ -143,7 +143,7 @@ automation: |
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not provide any conditions, this rule does not apply.
 
 ## Related rules
 

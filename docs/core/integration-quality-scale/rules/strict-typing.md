@@ -28,7 +28,7 @@ To read more about the `py.typed` file, see [PEP-561](https://peps.python.org/pe
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration depends on a third-party library that is not PEP-561 compliant, and making it compliant is outside of the integration's control, the integration can be exempt from this rule.
 
 ## Related rules
 

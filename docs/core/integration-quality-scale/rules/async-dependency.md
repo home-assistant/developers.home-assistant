@@ -18,7 +18,7 @@ More information on how to create a library can be found in the [documentation](
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not have any external dependencies, or its dependencies do not perform any I/O, this rule does not apply.
 
 ## Related rules
 

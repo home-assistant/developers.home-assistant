@@ -111,7 +111,7 @@ More information about the requirements for a unique identifier can be found in 
 
 ## Exceptions
 
-There are no exceptions to this rule.
+Integrations that only support a single config entry are exempt from this rule.
 
 ## Related rules
 

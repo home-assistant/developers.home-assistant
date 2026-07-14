@@ -60,7 +60,7 @@ More information about polling can be found in the [documentation](/docs/integra
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not poll for data (for example, it uses a push-based API), this rule does not apply.
 
 ## Related rules
 

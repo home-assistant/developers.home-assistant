@@ -83,7 +83,7 @@ For more info on devices, checkout the [device registry documentation](/docs/dev
 
 ## Exceptions
 
-There are no exceptions to this rule.
+Integrations that manage only a single device per config entry (where the device is removed together with the config entry), or that do not create devices at all, are exempt from this rule.
 
 ## Related rules
 

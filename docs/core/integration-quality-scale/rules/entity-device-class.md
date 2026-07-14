@@ -47,7 +47,7 @@ More information about entity naming can be found in the [entity](/docs/core/ent
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not have any entities, or its entities belong to platforms that do not support device classes (for example, `light`, `tts`, or `conversation`), this rule does not apply.
 
 ## Related rules
 

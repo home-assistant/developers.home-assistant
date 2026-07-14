@@ -81,6 +81,8 @@ For more information about managing integration state, see the [documentation](/
 
 ## Exceptions
 
+If the integration does not have any entities, or its entities are stateless (for example, a text-to-speech or conversation entity), this rule does not apply.
+
 If an integration can turn on a device, either via a user-defined automation trigger or by automatically creating a secondary control channel (for example, using Wake-on-LAN or infrared blaster), then the device should be reported as `off` when it is in standby and unresponsive to the main channel (for example, TCP). If no such method exists, and the device cannot be controlled in its current state, it should be reported as `unavailable`.
 
 An example scenario, for a media player that enters standby mode and can only be turned on using an external device (for example, an IR blaster):

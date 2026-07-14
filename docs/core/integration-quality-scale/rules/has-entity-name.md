@@ -61,7 +61,7 @@ More information about devices can be found in the [device](/docs/device_registr
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not have any entities, this rule does not apply.
 
 ## Related rules
 
