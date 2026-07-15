@@ -372,7 +372,15 @@ module.exports = {
   Android: [
     "android",
     "android/get_started",
-    "android/architecture",
+    {
+      type: "category",
+      label: "Architecture",
+      items: [
+        "android/architecture/overview",
+        "android/architecture/ui_architecture",
+        "android/architecture/frontend_screen",
+      ],
+    },
     "android/targets",
     "android/app_flavors",
     {
