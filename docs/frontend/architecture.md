@@ -21,7 +21,9 @@ The script allows us to start downloading the data while also downloading the re
 
 File: `src/entrypoints/app.ts`
 
-This is everything that is required to render the sidebar and handle the routing.
+This entry point loads the `<home-assistant>` root element and the global styles. The root element is implemented in `src/layouts/home-assistant.ts`. It initializes the application state, handles top-level navigation, and renders `src/layouts/home-assistant-main.ts`.
+
+The main layout renders the sidebar and passes the active route to the panel resolver, which loads and displays the requested panel.
 
 ### Panels
 
@@ -37,9 +39,11 @@ Certain information and data entry is presented to users in flows. Dialogs can b
 
 ## Data flow
 
-The frontend leverages the [Websocket API](api/websocket.md) and the [Rest API](api/rest.md) to interact with Home Assistant.
+The frontend leverages the [WebSocket API](/docs/api/websocket) and the [REST API](/docs/api/rest) to interact with Home Assistant.
 
 The data is made available as the `hass` property which is passed down to every component. The `hass` property contains the core state and has methods to call APIs.
+
+Components that only need part of the Home Assistant state should consume the relevant [Lit context](data.md#context) instead.
 
 Components can subscribe to information that is not available in the core state. Subscriptions run through the websocket API which keeps the data in sync with the backend.
 
