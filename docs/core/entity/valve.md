@@ -53,7 +53,7 @@ and are combined using the bitwise or (`|`) operator.
 
 ### Open valve
 
-Only implement this method if the flag `SUPPORT_OPEN` is set. For valves that
+Only implement this method if the flag `ValveEntityFeature.OPEN` is set. For valves that
 can set position, this method should be left unimplemented and only `set_valve_position` is required.
 
 ```python
@@ -69,7 +69,7 @@ class MyValve(ValveEntity):
 
 ### Close valve
 
-Only implement this method if the flag `SUPPORT_CLOSE` is set.  For valves that
+Only implement this method if the flag `ValveEntityFeature.CLOSE` is set. For valves that
 can set position, this method should be left unimplemented and only `set_valve_position` is required.
 
 ```python
@@ -85,7 +85,7 @@ class MyValve(ValveEntity):
 
 ### Set valve position
 
-Only implement this method if the flag `SUPPORT_SET_POSITION` is set. This method must be implemented in valves that can set position.
+Only implement this method if the flag `ValveEntityFeature.SET_POSITION` is set. This method must be implemented in valves that can set position.
 
 ```python
 class MyValve(ValveEntity):
@@ -100,7 +100,7 @@ class MyValve(ValveEntity):
 
 ### Stop valve
 
-Only implement this method if the flag `SUPPORT_STOP` is set.
+Only implement this method if the flag `ValveEntityFeature.STOP` is set.
 
 ```python
 class MyValve(ValveEntity):

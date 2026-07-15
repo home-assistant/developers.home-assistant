@@ -14,7 +14,7 @@ To create a new screen in the app and iterate quickly, follow these steps:
    After the first build of the app, navigate to your screen. Jetpack Compose provides hot reload capabilities out of the box, allowing you to see changes in real-time. However, note that there are some limitations, such as not being able to reload changes to certain structural elements.
 
 3. **Use previews effectively**:  
-   Use multiple `@Preview` annotations to test your screen in different configurations (e.g., light/dark mode, different screen sizes). This helps ensure your UI adapts well to various scenarios.
+   Use multiple `@Preview` annotations to test your screen in different configurations (for example, light/dark mode, different screen sizes). This helps ensure your UI adapts well to various scenarios.
 
 ## Theme/Design system
 

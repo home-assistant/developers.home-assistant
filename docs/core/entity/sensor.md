@@ -3,7 +3,7 @@ title: Sensor entity
 sidebar_label: Sensor
 ---
 
-A sensor is a read-only entity that provides some information. Information has a value and optionally, a unit of measurement. Derive entity platforms from [`homeassistant.components.sensor.SensorEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/sensor/__init__.py)
+A sensor is a read-only entity that provides some information. Information has a value and optionally, a unit of measurement. Derive entity platforms from [`homeassistant.components.sensor.SensorEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/sensor/__init__.py)
 
 ## Properties
 
@@ -73,6 +73,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.PRECIPITATION` | cm, in, mm | Accumulated precipitation
 | `SensorDeviceClass.PRECIPITATION_INTENSITY` | in/d, in/h, mm/d, mm/h | Precipitation intensity
 | `SensorDeviceClass.PRESSURE` | cbar, bar, hPa, mmHg, inHg, kPa, mbar, Pa, psi, mPa | Pressure.
+| `SensorDeviceClass.RADON` | Bq/m³, pCi/L | Radon concentration
 | `SensorDeviceClass.REACTIVE_ENERGY` | varh, kvarh | Reactive energy
 | `SensorDeviceClass.REACTIVE_POWER` | mvar, var, kvar | Reactive power
 | `SensorDeviceClass.SIGNAL_STRENGTH` | dB, dBm | Signal strength
@@ -80,7 +81,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.SPEED` | ft/s, in/d, in/h, in/s, km/h, kn, m/s, mph, mm/d, mm/s | Generic speed
 | `SensorDeviceClass.SULPHUR_DIOXIDE` | ppb, µg/m³ | Concentration of sulphure dioxide
 | `SensorDeviceClass.TEMPERATURE` | °C, °F, K | Temperature.
-| `SensorDeviceClass.TEMPERATURE_DELTA` | °C, °F, K | This device class represents a temperature interval (delta), i.e. the difference between two temperature values.
+| `SensorDeviceClass.TEMPERATURE_DELTA` | °C, °F, K | This device class represents a temperature interval (delta), that is, the difference between two temperature values.
 | `SensorDeviceClass.TIMESTAMP` | | Timestamp. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
 | `SensorDeviceClass.UPTIME` | | Timestamp. Represents the datetime when the device last booted. Requires `native_value` to return a Python `datetime.datetime` object, with time zone information, or `None`.
 | `SensorDeviceClass.VOLATILE_ORGANIC_COMPOUNDS` | µg/m³, mg/m³ | Concentration of volatile organic compounds
@@ -102,10 +103,10 @@ Choose the state class for a sensor with care. In most cases, state class `Senso
 
 | Type | Description
 | ---- | -----------
-| `SensorStateClass.MEASUREMENT` | The state represents _a measurement in present time_, not a historical aggregation such as statistics or a prediction of the future. Examples of what should be classified `SensorStateClass.MEASUREMENT` are: current temperature, humidity or electric power.  Examples of what should not be classified as `SensorStateClass.MEASUREMENT`: Forecasted temperature for tomorrow, yesterday's energy consumption or anything else that doesn't include the _current_ measurement. For supported sensors, statistics of hourly min, max and average sensor readings is updated every 5 minutes.
+| `SensorStateClass.MEASUREMENT` | The state represents _a measurement in present time_, not a historical aggregation such as statistics or a prediction of the future. Examples of what should be classified `SensorStateClass.MEASUREMENT` are: current temperature, humidity or electric power. Examples of what should not be classified as `SensorStateClass.MEASUREMENT`: Forecasted temperature for tomorrow, yesterday's energy consumption or anything else that doesn't include the _current_ measurement. For supported sensors, statistics of hourly min, max and average sensor readings is updated every 5 minutes.
 | `SensorStateClass.MEASUREMENT_ANGLE` | Similar to the above `SensorStateClass.MEASUREMENT`, the state represents _a measurement in present time_ for angles measured in degrees (`°`). An example of what should be classified `SensorStateClass.MEASUREMENT_ANGLE` is current wind direction
-| `SensorStateClass.TOTAL` | The state represents a total amount that can both increase and decrease, e.g. a net energy meter. Statistics of the accumulated growth or decline of the sensor's value since it was first added is updated every 5 minutes. This state class should not be used for sensors where the absolute value is interesting instead of the accumulated growth or decline, for example remaining battery capacity or CPU load; in such cases state class `SensorStateClass.MEASUREMENT` should be used instead.
-| `SensorStateClass.TOTAL_INCREASING` | Similar to `SensorStateClass.TOTAL`, with the restriction that the state represents a monotonically increasing positive total which periodically restarts counting from 0, e.g. a daily amount of consumed gas, weekly water consumption or lifetime energy consumption. Statistics of the accumulated growth of the sensor's value since it was first added is updated every 5 minutes. A decreasing value is interpreted as the start of a new meter cycle or the replacement of the meter.
+| `SensorStateClass.TOTAL` | The state represents a total amount that can both increase and decrease, for example, a net energy meter. Statistics of the accumulated growth or decline of the sensor's value since it was first added is updated every 5 minutes. This state class should not be used for sensors where the absolute value is interesting instead of the accumulated growth or decline, for example remaining battery capacity or CPU load; in such cases state class `SensorStateClass.MEASUREMENT` should be used instead.
+| `SensorStateClass.TOTAL_INCREASING` | Similar to `SensorStateClass.TOTAL`, with the restriction that the state represents a monotonically increasing positive total which periodically restarts counting from 0, for example, a daily amount of consumed gas, weekly water consumption or lifetime energy consumption. Statistics of the accumulated growth of the sensor's value since it was first added is updated every 5 minutes. A decreasing value is interpreted as the start of a new meter cycle or the replacement of the meter.
 
 ### Entity options
 
@@ -117,7 +118,7 @@ Sensors can be configured by the user, this is done by storing `sensor` entity o
 
 ## Restoring sensor states
 
-Sensors which restore the state after restart or reload should not extend `RestoreEntity` because  that does not store the `native_value`, but instead the `state` which may have been modified by the sensor base entity. Sensors which restore the state should extend `RestoreSensor` and call `await self.async_get_last_sensor_data` from `async_added_to_hass` to get access to the stored `native_value` and `native_unit_of_measurement`.
+Sensors which restore the state after restart or reload should not extend `RestoreEntity` because that does not store the `native_value`, but instead the `state` which may have been modified by the sensor base entity. Sensors which restore the state should extend `RestoreSensor` and call `await self.async_get_last_sensor_data` from `async_added_to_hass` to get access to the stored `native_value` and `native_unit_of_measurement`.
 
 ## Long-term Statistics
 
@@ -147,9 +148,9 @@ It's recommended to use state class `SensorStateClass.TOTAL` without `last_reset
 
 Examples:
 
-- The sensor's value never resets, e.g. a lifetime total energy consumption or production: state_class `SensorStateClass.TOTAL`, `last_reset` not set or set to `None`
-- The sensor's value may reset to 0, and its value can only increase: state class `SensorStateClass.TOTAL_INCREASING`. Examples: energy consumption aligned with a billing cycle, e.g. monthly, an energy meter resetting to 0 every time it's disconnected
-- The sensor's value may reset to 0, and its value can both increase and decrease: state class `SensorStateClass.TOTAL`, `last_reset` updated when the value resets. Examples: net energy consumption aligned with a billing cycle, e.g. monthly.
+- The sensor's value never resets, for example, a lifetime total energy consumption or production: state_class `SensorStateClass.TOTAL`, `last_reset` not set or set to `None`
+- The sensor's value may reset to 0, and its value can only increase: state class `SensorStateClass.TOTAL_INCREASING`. Examples: energy consumption aligned with a billing cycle, for example, monthly, an energy meter resetting to 0 every time it's disconnected
+- The sensor's value may reset to 0, and its value can both increase and decrease: state class `SensorStateClass.TOTAL`, `last_reset` updated when the value resets. Examples: net energy consumption aligned with a billing cycle, for example, monthly.
 - The sensor's state is reset with every state update, for example a sensor updating every minute with the energy consumption during the past minute: state class `SensorStateClass.TOTAL`, `last_reset` updated every state change.
 
 #### State class `SensorStateClass.TOTAL`
@@ -230,7 +231,7 @@ Example of state class `SensorStateClass.TOTAL_INCREASING` where the sensor does
 
 ### Handling migration from unsupported to supported units of measurement
 
-Integrations may have sensors which have their own custom units of measurement, i.e. they don't use Home Assistant constants to set the units.  
+Integrations may have sensors which have their own custom units of measurement, that is, they don't use Home Assistant constants to set the units.  
 When migrating such a sensor to a unit supported by Home Assistant's unit system, the old custom unit must match the value of the Home Assistant constant exactly or Home Assistant will treat this as a unit change.
 
 For example, the integration may have set the unit of an energy sensor to `KWh` which differs from the value of `UnitOfEnergy.KILO_WATT_HOUR` (kWh).

@@ -37,7 +37,7 @@ Below you will find an example Visual Studio Code configuration to attach a Pyth
             "pathMappings": [
                 {
                     "localRoot": "${workspaceFolder}",
-                    "remoteRoot": "/usr/src/hassio"
+                    "remoteRoot": "/usr/src/supervisor"
                 }
             ]
         }

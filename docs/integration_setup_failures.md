@@ -14,7 +14,7 @@ Raise the `ConfigEntryNotReady` exception from `async_setup_entry` in the integr
 
 ```python
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Setup the config entry for my device."""
+    """Set up the config entry for my device."""
     device = MyDevice(entry.data[CONF_HOST])
     try:
         await device.async_setup()
@@ -46,7 +46,7 @@ async def async_setup_platform(
     discovery_info: DiscoveryInfoType | None = None,
 ) -> None:
     """Set up the platform."""
-    device = MyDevice(conf[CONF_HOST])
+    device = MyDevice(config[CONF_HOST])
     try:
         await device.async_setup()
     except ConnectionError as ex:
@@ -56,7 +56,7 @@ async def async_setup_platform(
 #### Handling logging of a retry
 
 Pass the error message to `PlatformNotReady` as the first argument. Home Assistant will log the retry once with a log level of
-`warning`, and subsequent retries will be logged at `debug` level. Suppose you do not set a message when raising `ConfigEntryNotReady`; in that case, Home Assistant will try to extract the reason from the exception that is the cause of `ConfigEntryNotReady` if it was propagated from another exception.
+`warning`, and subsequent retries will be logged at `debug` level. Suppose you do not set a message when raising `PlatformNotReady`; in that case, Home Assistant will try to extract the reason from the exception that is the cause of `PlatformNotReady` if it was propagated from another exception.
 
 The integration should not log any non-debug messages about the retry, and should instead rely on the logic built-in to `PlatformNotReady` to avoid spamming the logs.
 
@@ -74,7 +74,7 @@ The `reauth` flow will be started with the following context variables, which ar
 
 ```python
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    """Setup the config entry for my device."""
+    """Set up the config entry for my device."""
     device = MyDevice(entry.data[CONF_HOST])
     try:
         await device.async_setup()

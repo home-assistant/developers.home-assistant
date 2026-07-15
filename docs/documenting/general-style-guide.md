@@ -4,7 +4,7 @@ title: "Documentation style guide"
 
 The Home Assistant documentation is written in Markdown, using the [GitHub Flavored Markdown specification](https://github.github.com/gfm/).
 
-In general, the documentation should follow the [Microsoft Style Guide](https://learn.microsoft.com/style-guide/welcome/).
+In general, the documentation should follow the [Microsoft Style Guide](https://learn.microsoft.com/style-guide/welcome/). Where more detail is needed, [Merriam-Webster Dictionary](https://www.merriam-webster.com/) is used. Merriam-Webster is also used by the Microsoft Style Guide.
 This page collects some more specific guidance we follow additionally.
 
 ## Language and tone
@@ -12,6 +12,10 @@ This page collects some more specific guidance we follow additionally.
 - The language used in the documentation is American English.
 - Use a serial comma (also known as the Oxford comma) before the conjunction in a list of three or more items. For example, "Through the use of additional adapters, Home Assistant allows the use of Zigbee, Z-Wave, and other protocols".
 - Follow grammar and syntax rules. For example, end sentences with a period.
+- Avoid excessive use of em dashes (often used by AI). If you use an em dash, use the [Merriam-Webster style](https://www.merriam-webster.com/grammar/em-dash-en-dash-how-to-use), without spaces around the em dash.
+  - In general, consider splitting the sentence into shorter sentences.
+  - If the em dash is used to introduce a list, use a colon instead.
+  - If it is used for a parenthetical statement, consider using parentheses instead.
 - Be objective and not gender-favoring, polarizing, race-related or religion inconsiderate. Contributions which do not follow this may be in breach of our [Code of Conduct](https://github.com/home-assistant/core/blob/master/CODE_OF_CONDUCT.md).
 - Don't use "e.g.". Instead, use _for example_, _such as_, or _like_.
 - [Don't use "master/slave"](https://learn.microsoft.com/en-us/style-guide/a-z-word-list-term-collections/m/master-slave). Instead, use alternatives such as "client/server", "leader/follower", "main/replica", or "controller/device".
@@ -52,13 +56,18 @@ Only heading levels 2 and 3 are shown in the right-hand table of contents.
 
 ## Emphasis
 
-To emphasize a word, use `_italics_`. Don't use `*asterisks*`.
+To emphasize a word, use italics.
+Use underscores (`_`) for italics, for example: `_emphasized words_`. Don't use asterisks (`*`).
 
 Do not use ALL CAPITALS for emphasis.
 
 ## UI elements and steps
 
-To refer to UI elements, use `**bold**` and use `>` in breadcrumbs.
+To refer to UI elements, use bold.
+Use double asterisks (`**`) for bold, for example: `**bolded words**`.
+
+When writing UI steps, use the greater than character (`>`) in breadcrumbs.
+Do not make it bold.
 
 For example:
 

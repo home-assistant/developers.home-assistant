@@ -19,7 +19,7 @@ Return overview information about installed apps.
 
 | key          | type | description                                        |
 | ------------ | ---- | -------------------------------------------------- |
-| addons       | list | A list of [Addon models](api/supervisor/models.md#addon)           |
+| addons       | list | A list of [Addon models](api/supervisor/models.md#app-formerly-known-as-an-add-on)           |
 
 **Example response:**
 
@@ -136,7 +136,7 @@ Get details about an app
 | dns                 | list               | A list of DNS servers used by the app                                               |
 | docker_api          | boolean            | `true` if docker_api access is granted is enabled                                      |
 | documentation       | boolean            | `true` if documentation is available                                                   |
-| full_access         | boolean            | `true` if full access access is granted is enabled                                     |
+| full_access         | boolean            | `true` if full access is granted                                     |
 | gpio                | boolean            | `true` if gpio access is granted is enabled                                            |
 | hassio_api          | boolean            | `true` if hassio api access is granted is enabled                                      |
 | hassio_role         | string             | The hassio role (default, homeassistant, manager, admin)                               |
@@ -162,7 +162,7 @@ Get details about an app
 | name                | string             | The name of the app                                                                 |
 | network             | dictionary or null | The network configuration for the app                                               |
 | network_description | dictionary or null | The description for the network configuration                                          |
-| options             | dictionary         | The app configuration                                                               |
+| options             | dictionary         | The app configuration. Redacted (empty dictionary) unless the caller is Home Assistant Core, the app requesting its own info, or an app with the `manager` or `admin` role, since the options may contain secrets such as passwords or API keys |
 | privileged          | list               | A list of hardwars/system attributes the app has access to                         |
 | protected           | boolean            | `true` if protection mode is enabled                                                   |
 | rating              | int                | The addon rating                                                                       |
@@ -391,7 +391,7 @@ Restart an app
 <ApiEndpoint path="/addons/<addon>/security" method="post">
 Set the protection mode on an app.
 
-This function is not callable by itself and you can not use `self` as the slug here.
+This function is not callable by itself and you cannot use `self` as the slug here.
 
 **Payload:**
 
@@ -1850,7 +1850,7 @@ Example query string:
 
 :::tip
 To get the last log entries the Range request header supports negative values
-as `num_skip`. E.g. `Range: entries=:-9:` returns the last 10 entries. Or
+as `num_skip`. For example, `Range: entries=:-9:` returns the last 10 entries. Or
 `Range: entries=:-200:100` to see 100 entries starting from the one 200 ago.
 :::
 
@@ -1859,7 +1859,7 @@ logs further in the past.
 
 The `Accept` header can be set to `text/x-log` to get logs annotated with
 extra information, such as the timestamp and Systemd unit name. If no
-identifier is specified (i.e. for the host logs containing logs for multiple
+identifier is specified (that is, for the host logs containing logs for multiple
 identifiers/units), this option is ignored - these logs are always annotated.
 
 </ApiEndpoint>
@@ -2799,6 +2799,10 @@ Returns information about the OS.
 
 Update Home Assistant OS
 
+A reboot is required after this completes to finish the update. This can be done
+with a follow-up call to `/host/reboot` or let the user complete it on their schedule
+using the repair.
+
 **Payload:**
 
 | key     | type   | description                                                    |
@@ -2849,7 +2853,7 @@ Set HAOS swap configuration. Unavailable on Supervised.
 
 | key        | type   | description                                                                                |
 |------------|--------|--------------------------------------------------------------------------------------------|
-| swap_size  | string | New swap siz as number with optional units (K/M/G). Anything lower than 40K disables swap. |
+| swap_size  | string | New swap size as number with optional units (K/M/G). Anything lower than 40K disables swap. |
 | swappiness | int    | New swappiness value (0-100).                                                              |
 </ApiEndpoint>
 
@@ -2922,7 +2926,7 @@ will be downloaded. Once the process is complete the user will see onboarding, l
 during initial setup.
 
 This wipe also includes network settings. So after the reboot the user may need to
-reconfigure those in order to access Home Assistant again.
+reconfigure those to access Home Assistant again.
 
 The operating system version as well as its boot configuration will be preserved.
 
@@ -3014,6 +3018,56 @@ If running on a green board, changes one or more of its settings.
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/os/boards/raspberrypi/firmware" method="get">
+
+Returns Raspberry Pi firmware information. Available on Raspberry Pi 4 / 5
+and Home Assistant Yellow when the OS Agent is at least version 1.9.0.
+The reported version covers the bundled firmware payload (bootloader EEPROM,
+and VL805 USB controller where present). Returns `404` if the OS Agent is
+older than 1.9.0, or `400` if the running board has no Raspberry Pi firmware
+interface.
+
+**Returned data:**
+
+| key              | type           | description                                                                                              |
+| ---------------- | -------------- | -------------------------------------------------------------------------------------------------------- |
+| current_version  | string         | The currently installed firmware version                                                                 |
+| latest_version   | string         | The latest firmware version bundled with the OS                                                          |
+| update_available | boolean        | `true` if `latest_version` is newer than `current_version`                                               |
+| update_blocked   | boolean        | `true` if the current boot device or board configuration prevents the bundled updater from being applied |
+| update_pending   | boolean        | `true` if a firmware update has been applied but the system has not been rebooted yet                    |
+| blocked_reason   | string or null | Blocked reason when `update_blocked` is `true`; `null` otherwise. See note below.                        |
+
+`blocked_reason` is currently always `unsupported_boot_device` whenever
+`update_blocked` is `true`. The underlying cause varies (for example, a
+USB/NVMe boot device, or a board without self-update enabled). More specific
+values may be introduced in the future.
+
+**Example response:**
+
+```json
+{
+  "current_version": "1765222194",
+  "latest_version": "1778498402",
+  "update_available": true,
+  "update_blocked": false,
+  "update_pending": false,
+  "blocked_reason": null
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/os/boards/raspberrypi/firmware/update" method="post">
+
+Apply the bundled Raspberry Pi firmware update (bootloader EEPROM, and VL805
+where present). On success, Supervisor raises the `reboot_required` issue;
+a reboot is required to start running the new firmware. Returns `404` if the
+OS Agent is older than 1.9.0, or `400` if the running board has no Raspberry Pi
+firmware interface or the update is blocked on this board / boot device.
+
+</ApiEndpoint>
+
 ### Resolution
 
 <ApiEndpoint path="/resolution/info" method="get">
@@ -3024,7 +3078,7 @@ If running on a green board, changes one or more of its settings.
 | -------- | ---------- | ------------------------------------------------ |
 | unsupported | list | A list of reasons why an installation is marked as unsupported (container, dbus, docker_configuration, docker_version, lxc, network_manager, os, privileged, systemd) |
 | unhealthy | list | A list of reasons why an installation is marked as unhealthy (docker, supervisor, privileged, setup) |
-| issues | list | A list of [Issue models](api/supervisor/models.md#issues) |
+| issues | list | A list of [Issue models](api/supervisor/models.md#issue) |
 | suggestions | list | A list of [Suggestion models](api/supervisor/models.md#suggestion) actions |
 | checks | list | A list of [Check models](api/supervisor/models.md#check) |
 
@@ -3039,8 +3093,9 @@ If running on a green board, changes one or more of its settings.
       "uuid": "A89924620F9A11EBBDC3C403FC2CA371",
       "type": "free_space",
       "context": "system",
-      "reference": null
-     }
+      "reference": null,
+      "reference_extra": null
+    }
   ],
   "suggestions": [
     {
@@ -3048,6 +3103,7 @@ If running on a green board, changes one or more of its settings.
       "type": "clear_backups",
       "context": "system",
       "reference": null,
+      "reference_extra": null,
       "auto": false
     }
   ],
@@ -3094,6 +3150,7 @@ Get suggestions that would fix an issue if applied.
       "type": "clear_backups",
       "context": "system",
       "reference": null,
+      "reference_extra": null,
       "auto": false
     }
   ]
@@ -3645,7 +3702,7 @@ You need to call `/supervisor/reload` after updating the options.
 | addons_repositories | list   | Set a list of URL's as strings for app repositories |
 | auto_update         | bool   | Enable/disable auto update for supervisor              |
 | detect_blocking_io  | string | Enable blocking I/O in event loop detection. Valid values are `on`, `off` and `on_at_startup`. |
-| feature_flags       | dict   | Partial update of development feature flags. Keys are feature flag names (e.g. `supervisor_v2_api`), values are booleans. Omitted keys are left unchanged. |
+| feature_flags       | dict   | Partial update of development feature flags. Keys are feature flag names (for example, `supervisor_v2_api`), values are booleans. Omitted keys are left unchanged. |
 
 </ApiEndpoint>
 

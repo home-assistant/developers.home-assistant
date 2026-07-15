@@ -211,6 +211,23 @@ from homeassistant.components import bluetooth
 ble_device = bluetooth.async_ble_device_from_address(hass, "44:44:33:11:23:42", connectable=True)
 ```
 
+### Explaining why a device is unreachable
+
+When `async_ble_device_from_address` returns `None`, or a connection cannot be established, the `bluetooth.async_address_reachability_diagnostics` API returns a human readable string explaining why, suitable for embedding in an error or log message. Pass a `BluetoothReachabilityIntent` describing what you need from the device, since the relevant facts differ: a caller that only consumes advertisements does not care about connectable paths or connection slots, while a caller that wants to connect does.
+
+The string reports whether the address is in the connectable history, only seen via non-connectable advertisements, or has never been seen; which scanners currently see it, with their RSSI and slot allocations; and how many scanners are registered, scanning, and connectable. It also calls out the case where every scanner is paused because it is busy connecting, which means no advertisements can be received at all.
+
+The returned string is for humans only; its wording is not stable, so do not parse it.
+
+```python
+from homeassistant.components import bluetooth
+from homeassistant.components.bluetooth import BluetoothReachabilityIntent
+
+reason = bluetooth.async_address_reachability_diagnostics(
+    hass, "44:44:33:11:23:42", BluetoothReachabilityIntent.CONNECTION
+)
+```
+
 ### Fetching the latest `BluetoothServiceInfoBleak` for a device
 
 The latest advertisement and device data are available with the `bluetooth.async_last_service_info` API, which returns a `BluetoothServiceInfoBleak` from the scanner with the best RSSI of the requested connectable type.
@@ -298,7 +315,7 @@ bluetooth.async_clear_address_from_match_history(hass, "44:44:33:11:23:42")
 ```
 
 :::warning Performance Considerations
-Do not use this API for devices whose advertisement data changes frequently (e.g., sensors that update temperature readings in advertisement data). Clearing match history for such devices will cause a new discovery flow to be triggered on every advertisement change, which can overwhelm the system and create a poor user experience.
+Do not use this API for devices whose advertisement data changes frequently (for example, sensors that update temperature readings in advertisement data). Clearing match history for such devices will cause a new discovery flow to be triggered on every advertisement change, which can overwhelm the system and create a poor user experience.
 
 This API is intended for infrequent state changes such as factory resets or major operational mode transitions, not for regular data updates.
 :::

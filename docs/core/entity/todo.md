@@ -111,7 +111,7 @@ update.
 | ----------- | ---------------- | ------------ | ----------------------------------------------------------------------------------------------------------------------------------------------- |
 | uid | `str \| None` | `None` | A unique identifier for the to-do item. This field is required for updates and the entity state.
 | summary | `str \| None`  | `None` | A title or summary of the to-do item. This field is required for the entity state.
-| status | `TodoItemStatus \| None` | `None` | Defines the overall status for the to-do item, either `NEEDS_ACTION` or `COMPLETE`. This field is required for the entity state.
+| status | `TodoItemStatus \| None` | `None` | Defines the overall status for the to-do item, either `NEEDS_ACTION` or `COMPLETED`. This field is required for the entity state.
 | due | `datetime.date \| datetime.datetime \| None` | `None` | The date and time that a to-do is expected to be completed. As a datetime, must have a timezone.
 | description | `str \| None`  | `None` | A more complete description of the to-do item than that provided by the summary.
-| completed | `datetime.datetime \| None` | `None` | A timestamp indicating the time this item was last marked `COMPLETE`.
+| completed | `datetime.datetime \| None` | `None` | A timestamp indicating the time this item was last marked `COMPLETED`.

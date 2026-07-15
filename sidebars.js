@@ -5,15 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const iqs_rules_by_tier = require('./docs/core/integration-quality-scale/_includes/tiers.json');
-const iqs_rules = Object.values(iqs_rules_by_tier).flat().map((rule) => {
+const iqs_rules_by_tier = require("./docs/core/integration-quality-scale/_includes/tiers.json");
+const iqs_rules = Object.values(iqs_rules_by_tier)
+  .flat()
+  .map((rule) => {
     if (typeof rule === "string") {
-        return rule;
+      return rule;
     }
     return rule.id;
-});
-
-
+  });
 
 module.exports = {
   Apps: [
@@ -27,10 +27,7 @@ module.exports = {
     "apps/repository",
     "apps/security",
   ],
-  Overview: [
-    "architecture_index",
-    "setup_devcontainer_environment"
-  ],
+  Overview: ["architecture_index", "setup_devcontainer_environment"],
   Frontend: [
     "frontend",
     "frontend/architecture",
@@ -175,6 +172,7 @@ module.exports = {
             "core/bluetooth/api",
           ],
         },
+        "modbus/introduction",
       ],
     },
     {
@@ -189,18 +187,19 @@ module.exports = {
     {
       type: "category",
       label: "Integration Quality Scale",
-      link: {type: 'doc', id: 'core/integration-quality-scale/index'},
+      link: { type: "doc", id: "core/integration-quality-scale/index" },
       items: [
-        {type: 'doc', id: 'core/integration-quality-scale/checklist'},
+        { type: "doc", id: "core/integration-quality-scale/checklist" },
         {
-          type: 'category',
-          label: 'Rules',
-          link: {type: 'doc', id: 'core/integration-quality-scale/rules'},
-          items: iqs_rules.map(rule => ({
-            type: 'doc',
-            id: `core/integration-quality-scale/rules/${rule.toLowerCase()}`
-          }))}
-      ]
+          type: "category",
+          label: "Rules",
+          link: { type: "doc", id: "core/integration-quality-scale/rules" },
+          items: iqs_rules.map((rule) => ({
+            type: "doc",
+            id: `core/integration-quality-scale/rules/${rule.toLowerCase()}`,
+          })),
+        },
+      ],
     },
     {
       type: "category",
@@ -298,12 +297,17 @@ module.exports = {
     {
       type: "category",
       label: "External APIs",
-      items: ["api/websocket", "api/rest"],
+      items: ["api/websocket", "api/rest", "api/instance_discovery"],
     },
     {
       type: "category",
       label: "Misc",
-      items: ["development_validation", "development_typing", "instance_url"],
+      items: [
+        "development_validation",
+        "development_typing",
+        "instance_url",
+        "versioning",
+      ],
     },
   ],
   Voice: [
@@ -415,5 +419,5 @@ module.exports = {
     "apple/ci",
     "apple/codestyle",
     "apple/submit",
-  ]
+  ],
 };
