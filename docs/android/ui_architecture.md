@@ -74,7 +74,7 @@ Keep it thin. A small screen's ViewModel can hold its feature logic directly. As
 
 ##### State
 
-The single source of truth for what is rendered. The ViewModel holds it in a `StateFlow`, which is what makes it survive recomposition and configuration changes.
+The single source of truth for what is rendered. The ViewModel holds it in a `StateFlow`.
 
 The state class must be immutable: use `val` properties and immutable collections, and produce a new instance (via `copy()`) for each change. In-place mutation breaks Compose's change detection and the unidirectional flow.
 
@@ -289,7 +289,3 @@ The separation is what makes the screen testable:
 | Screen | Screenshot | Visual regression only (no logic). |
 
 The ViewModel and every block below it are free of Compose and platform UI types, which is why they run as ordinary JVM unit tests. For the project's conventions, see the [testing overview](/docs/android/testing/introduction), [unit tests](/docs/android/testing/unit_testing), and [screenshot tests](/docs/android/testing/screenshot_testing).
-
-## The frontend screen
-
-`FrontendScreen`, which renders the Home Assistant frontend in a WebView, is the reference implementation of this pattern and the most complex screen in the app. It has its own page: [Frontend screen](/docs/android/frontend_screen).
