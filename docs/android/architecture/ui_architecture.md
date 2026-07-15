@@ -3,7 +3,7 @@ title: "UI architecture"
 sidebar_label: "UI architecture"
 ---
 
-This page describes how a screen is structured in the app. It is an MVI-like take on [Google's recommended app architecture](https://developer.android.com/topic/architecture): the same UI, domain, and data layers, with a stricter contract for how a screen's inputs and outputs flow. New UI should follow it, and existing screens are migrated to it over time. The [Frontend screen](/docs/android/frontend_screen) is the reference implementation.
+This page describes how a screen is structured in the app. It is an MVI-like take on [Google's recommended app architecture](https://developer.android.com/topic/architecture): the same UI, domain, and data layers, with a stricter contract for how a screen's inputs and outputs flow. New UI should follow it, and existing screens are migrated to it over time. The [Frontend screen](/docs/android/architecture/frontend_screen) is the reference implementation.
 
 ## The pattern
 
