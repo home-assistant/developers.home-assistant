@@ -136,6 +136,29 @@ entry.async_on_unload(
 ```
 
 
+## DHCP
+
+Home Assistant provides built-in discovery via DHCP.
+
+Before using these helpers, be sure to add `dhcp` to `dependencies` in your integration's [`manifest.json`](creating_integration_manifest.md)
+
+### Obtaining the list of discovered devices
+
+To access the list of current DHCP discoveries, call the `dhcp.async_discovered_service_info` API. Only devices that are still in the DHCP cache are returned.
+
+```python
+from homeassistant.components import dhcp
+
+...
+
+service_infos = dhcp.async_discovered_service_info(hass)
+for service_info in service_infos:
+  ...
+```
+
+Each entry is a `DhcpServiceInfo` with `ip`, `hostname`, and `macaddress` attributes. Note that the `hostname` is always lowercase, and the `macaddress` is formatted as a lowercase string without colons (for example, `AA:BB:CC:12:34:56` is returned as `aabbcc123456`).
+
+
 ## Network
 
 For integrations that use a discovery method that is not built-in and need to access the user's network adapter configuration, the following helper API should be used.
