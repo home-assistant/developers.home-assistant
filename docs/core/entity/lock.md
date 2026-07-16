@@ -15,10 +15,10 @@ Properties should always only return information from memory and not do I/O (lik
 | ---- | ---- | ------- | -----------
 | changed_by | string | None | Describes what the last change was triggered by.
 | code_format | string | None | Regex used to validate the code supplied to the lock, unlock, and open actions, or None if no code is required.
-| is_locked | bool | None | Whether the lock is secured. Used to determine `state`.
+| is_locked | bool | None | Whether the lock is locked. Used to determine `state`.
 | is_locking | bool | None | Whether the lock is in the process of being locked. Used to determine `state`.
 | is_unlocking | bool | None | Whether the lock is in the process of being unlocked. Used to determine `state`.
-| is_open | bool | None | Whether the lock is not secured and has released its latch. Only relevant for locks that support `LockEntityFeature.OPEN`. Used to determine `state`.
+| is_open | bool | None | Whether the lock is unlocked and has released its latch. Only relevant for locks that support `LockEntityFeature.OPEN`. Used to determine `state`.
 | is_opening | bool | None | Whether the lock is in the process of releasing its latch. Used to determine `state`.
 | is_jammed | bool | None | Whether the lock tried to move but got stuck before it finished. Used to determine `state`.
 
