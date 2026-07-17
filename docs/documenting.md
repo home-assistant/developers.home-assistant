@@ -54,24 +54,7 @@ To test your changes locally, you need Ruby and its dependencies, called gems.
 
 1. Fork and clone the home-assistant.io [git repository](https://github.com/home-assistant/home-assistant.io).
 2. In your local `home-assistant.io` directory, install Ruby. For the current required version, see [.ruby-version](https://github.com/home-assistant/home-assistant.io/blob/current/.ruby-version).
-
-   If you manage Ruby with [mise-en-place](https://mise.jdx.dev/), trust the repository configuration so mise reads the required version from `.ruby-version`:
-
-   On Fedora, first install the packages that mise needs to install Ruby:
-
-   ```shell
-   sudo dnf -y install \
-     gcc-c++ make perl-FindBin openssl-devel readline-devel \
-     zlib-ng-compat-devel libyaml-devel gmp-devel
-   ```
-
-   ```shell
-   mise trust
-   mise install ruby
-   gem install bundler
-   ```
-
-3. If you do not manage Ruby with mise, install Ruby and Bundler for your operating system.
+3. Install Ruby and Bundler for your operating system.
 
    - Fedora:
 
@@ -98,6 +81,27 @@ To test your changes locally, you need Ruby and its dependencies, called gems.
 
 4. If you did not already install the gems as part of the previous step, run `bundle` from the `home-assistant.io` directory.
 
+##### Optional: install Ruby with mise-en-place
+
+If you manage Ruby with [mise-en-place](https://mise.jdx.dev/), you can use `mise` instead of step 3 in the main procedure.
+
+On Fedora, first install the packages that `mise` needs to install Ruby:
+
+```shell
+sudo dnf -y install \
+  gcc-c++ make perl-FindBin openssl-devel readline-devel \
+  zlib-ng-compat-devel libyaml-devel gmp-devel
+```
+
+Trust the repository configuration so `mise` reads the required version from `.ruby-version`:
+
+```shell
+mise trust
+mise install ruby
+gem install bundler
+bundle
+```
+
 #### Preview the website locally
 
 1. Generate the first preview:
@@ -114,7 +118,7 @@ To test your changes locally, you need Ruby and its dependencies, called gems.
    bundle exec rake preview
    ```
 
-4. Open [http://127.0.0.1:4000](http://127.0.0.1:4000) in your browser. While the preview is running, changes to files are detected automatically and the affected pages are updated. You need to manually reload the page in your browser.
+4. Open [http://127.0.0.1:4000](http://127.0.0.1:4000) in your browser. While the preview is running, changes to files are detected automatically and the affected pages are rebuilt. Refresh the page in your browser to see the update.
 5. When you are ready to open a pull request (PR), follow the [documentation pull request review process](#documentation-pull-request-review-process).
 
 #### Preview the website from a headless machine
