@@ -28,9 +28,9 @@ The state is derived from the properties above and is one of the following `Lock
 
 | Value       | Description                                                        |
 |-------------|--------------------------------------------------------------------|
-| `LOCKED`    | The lock is secured.                                               |
+| `LOCKED`    | The lock is locked.                                                                 |
 | `LOCKING`   | The lock is in the process of being locked.                        |
-| `UNLOCKED`  | The lock is not secured.                                           |
+| `UNLOCKED`  | The lock is not locked.                                                       |
 | `UNLOCKING` | The lock is in the process of being unlocked.                      |
 | `OPEN`      | The lock is not secured and has released its latch.                |
 | `OPENING`   | The lock is in the process of releasing its latch.                 |
