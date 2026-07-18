@@ -37,8 +37,8 @@ and only the action calls will be relevant to consider for setting an appropriat
 
 :::note
 
-A coordinator only centralizes the inbound data updates, it does not limit outbound action calls.
-This means that even for platforms that use a coordinator, you still need to consider an appropriate number of parallel updates for platforms that have actions (for example switching a `switch` or turning on a `light`).
+A coordinator only centralizes the inbound data updates; it does not limit outbound action calls.
+This means that even for platforms that use a coordinator, you still need to consider an appropriate number of parallel updates for platforms that have actions (for example, switching a `switch` or turning on a `light`).
 
 :::
 

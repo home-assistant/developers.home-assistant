@@ -21,7 +21,7 @@ When the problem is caused by an error in the service action itself (for example
 :::note
 
 This rule is not limited to custom service actions registered by the integration.
-Platform actions (for example switching a `switch` or turning on a `light`) count towards this rule as well and should raise an exception when they encounter a failure.
+Platform actions (for example, switching a `switch` or turning on a `light`) count towards this rule as well and should raise an exception when they encounter a failure.
 
 :::
 
