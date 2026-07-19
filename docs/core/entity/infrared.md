@@ -71,7 +71,7 @@ The `InfraredEmitterEntity.async_send_command` method must be implemented by emi
 class MyInfraredEmitter(InfraredEmitterEntity):
     """My infrared emitter."""
 
-    async def async_send_command(self, command: infrared_protocols.Command) -> None:
+    async def async_send_command(self, command: infrared_protocols.commands.Command) -> None:
         """Send an IR command.
 
         Args:

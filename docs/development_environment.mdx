@@ -37,7 +37,7 @@ As this approach uses containers, you may face challenges exposing hardware like
 2. Copy your fork's URL and paste it below, then click **Open**:
    <RepositoryOpener />
 3. Your browser will prompt you if you want to use Visual Studio Code to open the link, click **Open Link**.
-4. When Visual Studio Code asks if you want to install the Remote - SSH extension, click **Install**.
+4. When Visual Studio Code asks if you want to install the Dev Containers extension, click **Install**.
 5. The dev container image will then be built (this may take a few minutes), after this your development environment will be ready.
 6. You can verify that your dev container is set up properly by the following:
     1. Open the Command Palette in Visual Studio Code:
@@ -164,6 +164,12 @@ Install [Homebrew](https://brew.sh/), then use that to install the dependencies:
 
 ```shell
 brew install python3 autoconf ffmpeg cmake make
+```
+
+Some Python dependencies of Home Assistant, such as `cryptography` and `orjson`, contain extensions written in Rust. If no prebuilt wheel is available for your Python version and platform, pip builds them from source, which requires a [Rust toolchain](https://www.rust-lang.org/tools/install). If the `script/setup` script below fails because `rustc` or `cargo` is missing, install Rust as well:
+
+```shell
+brew install rust
 ```
 
 If you encounter build issues with `cryptography` when running the `script/setup` script below, check the cryptography documentation for [installation instructions](https://cryptography.io/en/latest/installation/#building-cryptography-on-macos).

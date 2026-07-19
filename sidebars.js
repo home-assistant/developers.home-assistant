@@ -343,6 +343,7 @@ module.exports = {
         "documenting",
         "documenting/standards",
         "documenting/general-style-guide",
+        "documenting/testing",
         "documenting/yaml-style-guide",
         "documenting/create-page",
         "documenting/remove-page",
@@ -372,7 +373,15 @@ module.exports = {
   Android: [
     "android",
     "android/get_started",
-    "android/architecture",
+    {
+      type: "category",
+      label: "Architecture",
+      items: [
+        "android/architecture/overview",
+        "android/architecture/ui_architecture",
+        "android/architecture/frontend_screen",
+      ],
+    },
     "android/targets",
     "android/app_flavors",
     {

@@ -375,10 +375,6 @@ Home Assistant templates are powerful, but they can be really confusing or hard
 to understand. Therefore, the use of templates
 should be avoided if a pure YAML version is available.
 
-Additionally, the use of templates requires additional escaping in our
-documentation to avoid our website code to confuse it for the Liquid syntax.
-Avoiding templates in general removes the need of additional escaping.
-
 ```yaml
 # Good
 conditions:
