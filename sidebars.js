@@ -335,6 +335,7 @@ module.exports = {
   Misc: [
     "misc",
     "review-process",
+    "ai_policy",
     // Documenting as a category
     {
       type: "category",
