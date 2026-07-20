@@ -1,5 +1,6 @@
 ---
-title: "exception-translations: Exception messages are translatable"
+title: "Exception messages are translatable"
+sidebar_label: exception-translations
 related_rules:
   - entity-translations
   - action-exceptions

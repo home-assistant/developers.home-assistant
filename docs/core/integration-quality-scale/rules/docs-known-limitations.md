@@ -1,5 +1,6 @@
 ---
-title: "docs-known-limitations: The documentation describes known limitations of the integration (not to be confused with bugs)"
+title: "The documentation describes known limitations of the integration (not to be confused with bugs)"
+sidebar_label: docs-known-limitations
 ---
 
 ## Reasoning

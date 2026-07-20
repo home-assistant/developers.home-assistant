@@ -1,5 +1,6 @@
 ---
-title: "docs-examples: The documentation provides automation examples the user can use."
+title: "The documentation provides automation examples the user can use."
+sidebar_label: docs-examples
 ---
 
 ## Reasoning

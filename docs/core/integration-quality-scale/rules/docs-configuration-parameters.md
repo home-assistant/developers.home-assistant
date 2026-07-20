@@ -1,5 +1,6 @@
 ---
-title: "docs-configuration-parameters: The documentation describes all integration configuration options"
+title: "The documentation describes all integration configuration options"
+sidebar_label: docs-configuration-parameters
 ---
 
 ## Reasoning

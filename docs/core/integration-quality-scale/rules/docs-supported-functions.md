@@ -1,5 +1,6 @@
 ---
-title: "docs-supported-functions: The documentation describes the supported functionality, including entities, and platforms"
+title: "The documentation describes the supported functionality, including entities, and platforms"
+sidebar_label: docs-supported-functions
 ---
 
 ## Reasoning

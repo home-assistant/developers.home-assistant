@@ -1,5 +1,6 @@
 ---
-title: "strict-typing: Strict typing"
+title: "Strict typing"
+sidebar_label: strict-typing
 related_rules:
   - runtime-data
 ---

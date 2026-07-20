@@ -1,5 +1,6 @@
 ---
-title: "config-flow: Integration needs to be able to be set up via the UI"
+title: "Integration needs to be able to be set up via the UI"
+sidebar_label: config-flow
 related_rules:
   - test-before-configure
   - unique-config-entry

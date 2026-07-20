@@ -1,5 +1,6 @@
 ---
-title: "test-before-setup: Check during integration initialization if we are able to set it up correctly"
+title: "Check during integration initialization if we are able to set it up correctly"
+sidebar_label: test-before-setup
 related_rules:
   - runtime-data
 ---

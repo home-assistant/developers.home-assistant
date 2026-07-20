@@ -1,5 +1,6 @@
 ---
-title: "docs-actions: The documentation describes the provided service actions that can be used"
+title: "The documentation describes the provided service actions that can be used"
+sidebar_label: docs-actions
 related_rules:
   - docs-triggers
   - docs-conditions

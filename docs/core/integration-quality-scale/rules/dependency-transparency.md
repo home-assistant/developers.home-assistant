@@ -1,5 +1,6 @@
 ---
-title: "dependency-transparency: Dependency transparency"
+title: "Dependency transparency"
+sidebar_label: dependency-transparency
 related_rules:
   - async-dependency
 ---

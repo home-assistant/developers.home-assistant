@@ -1,5 +1,6 @@
 ---
-title: "entity-unavailable: Mark entity unavailable if appropriate"
+title: "Mark entity unavailable if appropriate"
+sidebar_label: entity-unavailable
 related_rules:
   - log-when-unavailable
 ---

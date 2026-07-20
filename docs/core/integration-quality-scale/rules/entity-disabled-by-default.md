@@ -1,5 +1,6 @@
 ---
-title: "entity-disabled-by-default: Integration disables less popular (or noisy) entities"
+title: "Integration disables less popular (or noisy) entities"
+sidebar_label: entity-disabled-by-default
 related_rules:
   - appropriate-polling
 ---

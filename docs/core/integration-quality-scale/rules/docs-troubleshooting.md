@@ -1,5 +1,6 @@
 ---
-title: "docs-troubleshooting: The documentation provides troubleshooting information"
+title: "The documentation provides troubleshooting information"
+sidebar_label: docs-troubleshooting
 ---
 
 ## Reasoning

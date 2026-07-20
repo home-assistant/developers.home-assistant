@@ -21,10 +21,10 @@ export default function Checklist() {
                         {`## ${tier.charAt(0).toUpperCase() + tier.slice(1)}\n`}
                         {tiers[tier].map((rule) => {
                             if (typeof rule === "string") {
-                                const text = docs[`core/integration-quality-scale/rules/${rule}`].title.replace(`${rule}: `, "");
+                                const text = docs[`core/integration-quality-scale/rules/${rule}`].title;
                                 return `- [ ] \`${rule}\` - ${text}\n`;
                             }
-                            const text = docs[`core/integration-quality-scale/rules/${rule.id}`].title.replace(`${rule.id}: `, "");
+                            const text = docs[`core/integration-quality-scale/rules/${rule.id}`].title;
                             return [
                                 `- [ ] \`${rule.id}\` - ${text}\n`,
                                 ...rule.subchecks.map(subcheck => `    - [ ] ${subcheck}\n`)

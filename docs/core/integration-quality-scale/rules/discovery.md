@@ -1,5 +1,6 @@
 ---
-title: "discovery: Devices can be discovered"
+title: "Devices can be discovered"
+sidebar_label: discovery
 related_rules:
   - config-flow
   - test-before-configure

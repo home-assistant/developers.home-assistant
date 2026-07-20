@@ -1,5 +1,6 @@
 ---
-title: "test-coverage: Above 95% test coverage for all integration modules"
+title: "Above 95% test coverage for all integration modules"
+sidebar_label: test-coverage
 related_rules:
   - config-flow-test-coverage
 ---

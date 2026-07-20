@@ -1,5 +1,6 @@
 ---
-title: "config-flow-test-coverage: Full test coverage for the config flow"
+title: "Full test coverage for the config flow"
+sidebar_label: config-flow-test-coverage
 related_rules:
   - config-flow
   - test-before-configure

@@ -1,5 +1,6 @@
 ---
-title: "action-setup: Service actions are registered in async_setup"
+title: "Service actions are registered in async_setup"
+sidebar_label: action-setup
 related_rules:
   - action-exceptions
 ---

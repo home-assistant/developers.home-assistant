@@ -1,5 +1,6 @@
 ---
-title: "dynamic-devices: Devices added after integration setup"
+title: "Devices added after integration setup"
+sidebar_label: dynamic-devices
 related_rules:
   - stale-devices
 ---

@@ -1,5 +1,6 @@
 ---
-title: "discovery-update-info: Integration uses discovery info to update network information"
+title: "Integration uses discovery info to update network information"
+sidebar_label: discovery-update-info
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 

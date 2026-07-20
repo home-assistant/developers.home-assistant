@@ -1,5 +1,6 @@
 ---
-title: "async-dependency: Dependency is async"
+title: "Dependency is async"
+sidebar_label: async-dependency
 related_rules:
   - inject-websession
 ---

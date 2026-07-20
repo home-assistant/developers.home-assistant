@@ -1,5 +1,6 @@
 ---
-title: "common-modules: Place common patterns in common modules"
+title: "Place common patterns in common modules"
+sidebar_label: common-modules
 ---
 
 ## Reasoning

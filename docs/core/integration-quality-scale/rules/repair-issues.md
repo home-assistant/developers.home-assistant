@@ -1,5 +1,6 @@
 ---
-title: "repair-issues: Repair issues and repair flows are used when user intervention is needed"
+title: "Repair issues and repair flows are used when user intervention is needed"
+sidebar_label: repair-issues
 ---
 
 ## Reasoning

@@ -1,5 +1,6 @@
 ---
-title: "docs-removal-instructions: The documentation provides removal instructions"
+title: "The documentation provides removal instructions"
+sidebar_label: docs-removal-instructions
 ---
 
 ## Reasoning

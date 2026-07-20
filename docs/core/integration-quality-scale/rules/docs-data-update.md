@@ -1,5 +1,6 @@
 ---
-title: "docs-data-update: The documentation describes how data is updated"
+title: "The documentation describes how data is updated"
+sidebar_label: docs-data-update
 ---
 
 ## Reasoning

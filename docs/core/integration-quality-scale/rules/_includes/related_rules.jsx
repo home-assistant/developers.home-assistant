@@ -9,7 +9,7 @@ export default function RelatedRules({relatedRules}) {
         <ul>
             {relatedRules.map((rule) => {
                 const absoluteRulePath = `/docs/core/integration-quality-scale/rules/${rule}`;
-                const relatedRule = docs[`core/integration-quality-scale/rules/${rule}`].title.replace(`${rule}: `, "");
+                const relatedRule = docs[`core/integration-quality-scale/rules/${rule}`].title;
                 return (
                     <li key={rule}>
                         <Link to={absoluteRulePath}><code>{rule}</code></Link>: {relatedRule}

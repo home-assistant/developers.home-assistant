@@ -1,5 +1,6 @@
 ---
-title: "docs-conditions: The documentation describes the provided conditions that can be used"
+title: "The documentation describes the provided conditions that can be used"
+sidebar_label: docs-conditions
 related_rules:
   - docs-actions
   - docs-triggers
