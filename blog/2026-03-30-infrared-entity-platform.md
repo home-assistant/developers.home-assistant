@@ -83,6 +83,6 @@ await infrared.async_send_command(
 
 ## IR protocols and codes
 
-IR protocol encoders and device code sets live outside Home Assistant in the [`infrared-protocols`](https://github.com/home-assistant-libs/infrared-protocols) library. Common protocols (NEC, Samsung, etc.) and well-known device codes should be contributed there. For niche or proprietary protocols, a separate third-party library can also be used.
+IR protocol encoders and device code sets live outside Home Assistant in the [`infrared-protocols`](https://github.com/home-assistant-libs/infrared-protocols) library. Common protocols (NEC, Samsung, etc.) and well-known device codes used by core integrations should be contributed there. For niche or proprietary protocols, a separate third-party library can also be used.
 
 For full details, see the [infrared entity documentation](/docs/core/entity/infrared).
