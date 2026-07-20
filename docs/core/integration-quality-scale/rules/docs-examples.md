@@ -1,5 +1,5 @@
 ---
-title: "The documentation provides automation examples the user can use."
+title: "docs-examples: The documentation provides automation examples the user can use."
 ---
 
 ## Reasoning

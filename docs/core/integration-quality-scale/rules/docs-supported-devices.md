@@ -1,5 +1,5 @@
 ---
-title: "The documentation describes known supported / unsupported devices"
+title: "docs-supported-devices: The documentation describes known supported / unsupported devices"
 ---
 
 ## Reasoning

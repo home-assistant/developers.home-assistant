@@ -1,5 +1,5 @@
 ---
-title: "The documentation provides removal instructions"
+title: "docs-removal-instructions: The documentation provides removal instructions"
 ---
 
 ## Reasoning

@@ -1,5 +1,5 @@
 ---
-title: "Use ConfigEntry.runtime_data to store runtime data"
+title: "runtime-data: Use ConfigEntry.runtime_data to store runtime data"
 related_rules:
   - strict-typing
   - test-before-setup

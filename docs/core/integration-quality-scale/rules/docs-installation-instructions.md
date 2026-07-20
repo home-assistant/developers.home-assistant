@@ -1,5 +1,5 @@
 ---
-title: "The documentation provides step-by-step installation instructions for the integration, including, if needed, prerequisites"
+title: "docs-installation-instructions: The documentation provides step-by-step installation instructions for the integration, including, if needed, prerequisites"
 ---
 
 ## Reasoning

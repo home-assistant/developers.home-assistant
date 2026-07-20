@@ -1,5 +1,5 @@
 ---
-title: "Stale devices are removed"
+title: "stale-devices: Stale devices are removed"
 related_rules:
   - dynamic-devices
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Strict typing"
+title: "strict-typing: Strict typing"
 related_rules:
   - runtime-data
 ---

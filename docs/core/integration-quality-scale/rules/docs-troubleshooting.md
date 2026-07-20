@@ -1,5 +1,5 @@
 ---
-title: "The documentation provides troubleshooting information"
+title: "docs-troubleshooting: The documentation provides troubleshooting information"
 ---
 
 ## Reasoning

@@ -1,5 +1,5 @@
 ---
-title: "Entities use device classes where possible"
+title: "entity-device-class: Entities use device classes where possible"
 related_rules:
   - has-entity-name
   - entity-translations

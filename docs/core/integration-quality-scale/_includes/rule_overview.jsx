@@ -15,9 +15,10 @@ export default function RuleOverview({tier}) {
                 }
                 const absoluteRulePath = `/docs/core/integration-quality-scale/rules/${id}`;
                 const relatedRule = docs[`core/integration-quality-scale/rules/${id}`];
+                const title = relatedRule.title.replace(`${id}: `, "");
                 return (
                     <li key={id}>
-                        <Link to={absoluteRulePath}>{id}</Link> - {relatedRule.title}
+                        <Link to={absoluteRulePath}><code>{id}</code></Link> - {title}
                     </li>
                 );
             })}

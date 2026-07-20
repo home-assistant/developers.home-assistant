@@ -1,5 +1,5 @@
 ---
-title: "Entity events are subscribed in the correct lifecycle methods"
+title: "entity-event-setup: Entity events are subscribed in the correct lifecycle methods"
 ---
 
 ## Reasoning

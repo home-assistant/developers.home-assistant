@@ -1,5 +1,5 @@
 ---
-title: "Integrations should have a reconfigure flow"
+title: "reconfiguration-flow: Integrations should have a reconfigure flow"
 related_rules:
   - config-flow
   - test-before-configure

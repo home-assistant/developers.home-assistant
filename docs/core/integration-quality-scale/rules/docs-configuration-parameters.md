@@ -1,5 +1,5 @@
 ---
-title: "The documentation describes all integration configuration options"
+title: "docs-configuration-parameters: The documentation describes all integration configuration options"
 ---
 
 ## Reasoning

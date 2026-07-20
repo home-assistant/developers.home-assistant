@@ -1,5 +1,5 @@
 ---
-title: "Has branding assets available for the integration"
+title: "brands: Has branding assets available for the integration"
 ---
 
 ## Reasoning

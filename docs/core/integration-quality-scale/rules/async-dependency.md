@@ -1,5 +1,5 @@
 ---
-title: "Dependency is async"
+title: "async-dependency: Dependency is async"
 related_rules:
   - inject-websession
 ---

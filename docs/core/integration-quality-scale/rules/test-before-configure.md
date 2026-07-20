@@ -1,5 +1,5 @@
 ---
-title: "Test a connection in the config flow"
+title: "test-before-configure: Test a connection in the config flow"
 related_rules:
   - config-flow
   - unique-config-entry

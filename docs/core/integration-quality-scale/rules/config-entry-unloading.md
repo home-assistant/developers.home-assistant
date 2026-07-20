@@ -1,5 +1,5 @@
 ---
-title: "Support config entry unloading"
+title: "config-entry-unloading: Support config entry unloading"
 related_rules:
   - entity-event-setup
 ---

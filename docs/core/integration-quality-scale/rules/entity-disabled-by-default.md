@@ -1,5 +1,5 @@
 ---
-title: "Integration disables less popular (or noisy) entities"
+title: "entity-disabled-by-default: Integration disables less popular (or noisy) entities"
 related_rules:
   - appropriate-polling
 ---

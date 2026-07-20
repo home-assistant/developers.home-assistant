@@ -1,5 +1,5 @@
 ---
-title: "Implements diagnostics"
+title: "diagnostics: Implements diagnostics"
 ---
 
 ## Reasoning

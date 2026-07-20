@@ -1,5 +1,5 @@
 ---
-title: "Devices can be discovered"
+title: "discovery: Devices can be discovered"
 related_rules:
   - config-flow
   - test-before-configure

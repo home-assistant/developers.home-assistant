@@ -1,5 +1,5 @@
 ---
-title: "The documentation describes all integration installation parameters"
+title: "docs-installation-parameters: The documentation describes all integration installation parameters"
 ---
 
 ## Reasoning

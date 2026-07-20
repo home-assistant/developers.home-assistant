@@ -1,5 +1,5 @@
 ---
-title: "Entities are assigned an appropriate EntityCategory"
+title: "entity-category: Entities are assigned an appropriate EntityCategory"
 ---
 
 ## Reasoning

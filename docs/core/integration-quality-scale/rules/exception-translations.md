@@ -1,5 +1,5 @@
 ---
-title: "Exception messages are translatable"
+title: "exception-translations: Exception messages are translatable"
 related_rules:
   - entity-translations
   - action-exceptions

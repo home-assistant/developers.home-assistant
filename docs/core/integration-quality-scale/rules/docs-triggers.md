@@ -1,5 +1,5 @@
 ---
-title: "The documentation describes the provided triggers that can be used"
+title: "docs-triggers: The documentation describes the provided triggers that can be used"
 related_rules:
   - docs-actions
   - docs-conditions

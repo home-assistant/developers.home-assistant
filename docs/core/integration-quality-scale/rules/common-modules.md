@@ -1,5 +1,5 @@
 ---
-title: "Place common patterns in common modules"
+title: "common-modules: Place common patterns in common modules"
 ---
 
 ## Reasoning

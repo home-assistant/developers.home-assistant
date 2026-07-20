@@ -1,5 +1,5 @@
 ---
-title: "If internet/device/service is unavailable, log once when unavailable and once when back connected"
+title: "log-when-unavailable: If internet/device/service is unavailable, log once when unavailable and once when back connected"
 related_rules:
   - entity-unavailable
 ---

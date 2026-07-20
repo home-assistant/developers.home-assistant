@@ -1,5 +1,5 @@
 ---
-title: "Devices added after integration setup"
+title: "dynamic-devices: Devices added after integration setup"
 related_rules:
   - stale-devices
 ---

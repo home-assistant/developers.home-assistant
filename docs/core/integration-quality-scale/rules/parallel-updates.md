@@ -1,5 +1,5 @@
 ---
-title: "Number of parallel updates is specified"
+title: "parallel-updates: Number of parallel updates is specified"
 ---
 
 ## Reasoning

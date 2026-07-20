@@ -1,5 +1,5 @@
 ---
-title: "The integration dependency supports passing in a websession"
+title: "inject-websession: The integration dependency supports passing in a websession"
 related_rules:
   - async-dependency
 ---

@@ -1,5 +1,5 @@
 ---
-title: "Service actions raise exceptions when encountering failures"
+title: "action-exceptions: Service actions raise exceptions when encountering failures"
 related_rules:
   - exception-translations
   - action-setup

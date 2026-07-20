@@ -1,5 +1,5 @@
 ---
-title: "Entities have a unique ID"
+title: "entity-unique-id: Entities have a unique ID"
 related_rules:
   - unique-config-entry
 ---
