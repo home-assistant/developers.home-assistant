@@ -1,6 +1,6 @@
 ---
 title: "Number of parallel updates is specified"
-sidebar_label: parallel-updates
+sidebar_label: 🥈 parallel-updates
 ---
 
 ## Reasoning

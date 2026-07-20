@@ -1,6 +1,6 @@
 ---
 title: "Entities have translated names"
-sidebar_label: entity-translations
+sidebar_label: 🥇 entity-translations
 related_rules:
   - has-entity-name
   - entity-device-class

@@ -1,6 +1,6 @@
 ---
 title: "If it's a polling integration, set an appropriate polling interval"
-sidebar_label: appropriate-polling
+sidebar_label: 🥉 appropriate-polling
 related_rules:
   - parallel-updates
 ---

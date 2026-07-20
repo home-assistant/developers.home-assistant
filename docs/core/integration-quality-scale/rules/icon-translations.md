@@ -1,6 +1,6 @@
 ---
 title: "Entities implement icon translations"
-sidebar_label: icon-translations
+sidebar_label: 🥇 icon-translations
 related_rules:
   - entity-translations
   - entity-device-class

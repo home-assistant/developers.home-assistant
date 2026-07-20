@@ -1,6 +1,6 @@
 ---
 title: "The documentation describes known supported / unsupported devices"
-sidebar_label: docs-supported-devices
+sidebar_label: 🥇 docs-supported-devices
 ---
 
 ## Reasoning

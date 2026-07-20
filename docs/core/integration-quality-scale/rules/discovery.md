@@ -1,6 +1,6 @@
 ---
 title: "Devices can be discovered"
-sidebar_label: discovery
+sidebar_label: 🥇 discovery
 related_rules:
   - config-flow
   - test-before-configure

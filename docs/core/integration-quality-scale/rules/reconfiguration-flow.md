@@ -1,6 +1,6 @@
 ---
 title: "Integrations should have a reconfigure flow"
-sidebar_label: reconfiguration-flow
+sidebar_label: 🥇 reconfiguration-flow
 related_rules:
   - config-flow
   - test-before-configure

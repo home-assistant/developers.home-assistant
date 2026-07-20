@@ -1,6 +1,6 @@
 ---
 title: "Strict typing"
-sidebar_label: strict-typing
+sidebar_label: 🏆 strict-typing
 related_rules:
   - runtime-data
 ---

@@ -1,6 +1,6 @@
 ---
 title: "Stale devices are removed"
-sidebar_label: stale-devices
+sidebar_label: 🥇 stale-devices
 related_rules:
   - dynamic-devices
 ---

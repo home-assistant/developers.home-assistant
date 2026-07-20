@@ -1,6 +1,6 @@
 ---
 title: "Support config entry unloading"
-sidebar_label: config-entry-unloading
+sidebar_label: 🥈 config-entry-unloading
 related_rules:
   - entity-event-setup
 ---

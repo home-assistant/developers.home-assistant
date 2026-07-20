@@ -1,6 +1,6 @@
 ---
 title: "Has an integration owner"
-sidebar_label: integration-owner
+sidebar_label: 🥈 integration-owner
 ---
 
 ## Reasoning

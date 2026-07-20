@@ -1,6 +1,6 @@
 ---
 title: "Entities have a unique ID"
-sidebar_label: entity-unique-id
+sidebar_label: 🥉 entity-unique-id
 related_rules:
   - unique-config-entry
 ---

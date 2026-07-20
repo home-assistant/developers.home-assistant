@@ -1,6 +1,6 @@
 ---
 title: "Entities use has_entity_name = True"
-sidebar_label: has-entity-name
+sidebar_label: 🥉 has-entity-name
 related_rules:
   - entity-translations
   - entity-device-class

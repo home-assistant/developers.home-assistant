@@ -1,6 +1,6 @@
 ---
 title: "The documentation describes all integration installation parameters"
-sidebar_label: docs-installation-parameters
+sidebar_label: 🥈 docs-installation-parameters
 ---
 
 ## Reasoning

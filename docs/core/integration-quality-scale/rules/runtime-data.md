@@ -1,6 +1,6 @@
 ---
 title: "Use ConfigEntry.runtime_data to store runtime data"
-sidebar_label: runtime-data
+sidebar_label: 🥉 runtime-data
 related_rules:
   - strict-typing
   - test-before-setup

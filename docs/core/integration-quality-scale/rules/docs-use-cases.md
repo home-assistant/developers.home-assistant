@@ -1,6 +1,6 @@
 ---
 title: "The documentation describes use cases to illustrate how this integration can be used"
-sidebar_label: docs-use-cases
+sidebar_label: 🥇 docs-use-cases
 ---
 
 ## Reasoning
