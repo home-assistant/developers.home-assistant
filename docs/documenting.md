@@ -83,7 +83,7 @@ To test your changes locally, you need Ruby and its dependencies, called gems.
 
 ##### Optional: install Ruby with mise-en-place
 
-If you manage Ruby with [mise-en-place](https://mise.jdx.dev/), you can use `mise` instead of step 3 in the main procedure.
+If you manage Ruby with [mise-en-place](https://mise.jdx.dev/), use `mise` instead of step 3 in the main procedure.
 
 On Fedora, first install the packages that `mise` needs to install Ruby:
 
