@@ -66,7 +66,7 @@ device_registry.async_update_device(
 )
 ```
 
-Moving a device with the old parameters needed a branch to handle the case where the device stays in the same config entry and only changes subentry; a single `async_update_device` call replaces that. In addition, the device registry now clears a `CONFIG_ENTRY` disable when a device is moved to an enabled config entry, so the `disabled_by` flag no longer has to be carried across the move by hand.
+Moving a device with the old parameters took the integration several `async_update_device` calls, adding the device to the new config entry and subentry and then removing it from the old ones, with a separate case for a device that only changed subentry within the same config entry. The single call shown above replaces all of that. In addition, the device registry now clears a `CONFIG_ENTRY` disable when a device is moved to an enabled config entry, so the integration no longer has to carry the `disabled_by` flag across the move by hand.
 
 Relatedly, `async_update_device` now validates the `disabled_by` flag against the owning config entry's disabled state, added in core [PR #176681](https://github.com/home-assistant/core/pull/176681). Setting `disabled_by=None` for a device on a disabled config entry, or `disabled_by=DeviceEntryDisabler.CONFIG_ENTRY` for a device on an enabled config entry, is inconsistent; such a value is ignored and logged now, and will raise from Home Assistant Core 2027.8.
 
