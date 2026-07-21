@@ -139,21 +139,21 @@ def async_remove_helper_devices(
     *,
     helper_config_entry_id: str,
     source_device_id: str | None,
-    sweep_helper_devices: bool = False,
+    remove_all_devices: bool = False,
     keep_device_ids: Collection[str] = (),
 ) -> None:
 ```
 
 ### `helpers.device.async_remove_stale_devices_links_keep_entity_device()` and `async_remove_stale_devices_links_keep_current_device()`
 
-Both are now no-ops. Call `async_remove_helper_devices` with `sweep_helper_devices=True` from the helper's `async_setup_entry` instead:
+Both are now no-ops. Call `async_remove_helper_devices` with `remove_all_devices=True` from the helper's `async_setup_entry` instead:
 
 ```py
 async_remove_helper_devices(
     hass,
     helper_config_entry_id=entry.entry_id,
     source_device_id=entry.options.get(CONF_DEVICE_ID),
-    sweep_helper_devices=True,
+    remove_all_devices=True,
 )
 ```
 
