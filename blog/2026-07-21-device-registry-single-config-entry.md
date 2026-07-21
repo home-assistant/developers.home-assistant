@@ -1,7 +1,7 @@
 ---
 author: Erik Montnemery
 authorURL: https://github.com/emontnemery
-title: "Devices are restricted to a single config entry and subentry"
+title: "Devices are restricted to a single config entry and at most one subentry"
 ---
 
 ## Summary
@@ -10,9 +10,9 @@ Device identifiers and connections are no longer globally unique, they are now u
 
 Devices which are tied to multiple config entries are split into one device per config entry when the device registry is loaded. The entity registry is updated so entities point to the correct device.
 
-Most integrations don't interact directly with the device registry and are not affected. Integrations which do need to handle the deprecations listed below.
+Most integrations don't interact directly with the device registry and are not affected. Integrations which interact with it directly need to handle the deprecations listed below.
 
-This is implemented in core [PR #175785](https://github.com/home-assistant/core/pull/175785), the rationale is described in architecture proposal [home-assistant/architecture#1226](https://github.com/home-assistant/architecture/discussions/1226).
+This is implemented in core [PR #175785](https://github.com/home-assistant/core/pull/175785), the rationale is described in architecture proposal [home-assistant/architecture#1226](https://github.com/home-assistant/architecture/discussions/1226). The changes land in Home Assistant Core 2026.8.
 
 ## Background
 
@@ -22,13 +22,13 @@ This causes a few problems:
 
 - There's no single source of truth for device information such as name or model; conflicting values are discarded instead of preserved.
 - Users get a confusing experience where a device page contains a hodgepodge of entities from multiple integrations.
-- There are long standing bugs where modifying the connections and identifiers of a device causes multiple devices to end up with the same connections, violating the original design of the device registry.
+- There are long-standing bugs where modifying the connections and identifiers of a device causes multiple devices to end up with the same connections, violating the original design of the device registry.
 
 Grouping devices by connection can instead happen in the frontend, if desirable.
 
 ## Deprecations
 
-Deprecation warnings are not yet logged for all of the below, the remaining ones will be added in follow-up PRs. Unless noted otherwise, the deprecated functionality keeps working until Home Assistant Core 2027.8.
+Deprecation warnings are not yet logged for all items below; the remaining warnings will be added in follow-up PRs. Unless noted otherwise, deprecated functionality remains supported until Home Assistant Core 2027.8.
 
 ### `DeviceEntry.config_entries`
 
@@ -99,11 +99,11 @@ Inside an entity, prefer `self.device_entry` over a registry lookup. If you genu
 
 Core integrations are being migrated to the new methods, `heos` in core [PR #176932](https://github.com/home-assistant/core/pull/176932) is an example.
 
-During the deprecation period, `async_get_device` resolves an ambiguous lookup as described in [Backwards compatibility](#backwards-compatibility) below. Note that this backwards compatible resolution only happens through the `DeviceRegistry` lookup methods such as `async_get()` and `async_get_device()`; interacting with the `devices` container directly, for example `DeviceRegistry.devices.get(device_id)`, does not synthesize a composite device.
+During the deprecation period, `async_get_device` resolves an ambiguous lookup as described in [Backwards compatibility](#backwards-compatibility) below. Note that this backwards-compatible resolution only happens through the `DeviceRegistry` lookup methods such as `async_get()` and `async_get_device()`; interacting with the `devices` container directly, for example `DeviceRegistry.devices.get(device_id)`, does not synthesize a composite device.
 
 ### Adding a helper config entry to another integration's device
 
-Helper integrations must not add their config entry to the source entity's device or to a user selected device, they should link their entities to the device instead. This is a direct consequence of the change described here: a device now belongs to a single config entry, so a helper config entry can no longer be added to a device owned by another integration.
+Helper integrations must not add their config entry to the source entity's device or to a user-selected device, they should link their entities to the device instead. This is a direct consequence of the change described here: a device now belongs to a single config entry, so a helper config entry can no longer be added to a device owned by another integration.
 
 This was announced last year in [Updated guidelines for helper integrations linking to other integration's device](/blog/2025/07/18/updated-pattern-for-helpers-linking-to-devices), and stops working in Home Assistant Core 2026.8.
 
@@ -185,11 +185,22 @@ Link entities to one of the split devices instead, looking it up with `async_get
 
 The fields of `DeviceRegistryEntrySnapshot` have been aligned with the new model in core [PR #176654](https://github.com/home-assistant/core/pull/176654): `config_entries` and `config_entries_subentries` are replaced by `config_entry_id` and `config_subentry_id`, and `primary_config_entry` is removed. Integrations with committed device registry snapshots need to re-record them by running the tests with `pytest --snapshot-update`.
 
+## Device registry events
+
+Splitting a pre-migration composite device happens when the registry is loaded from storage, before any listeners run, so it emits no `EVENT_DEVICE_REGISTRY_UPDATED` events; devices are already split at startup.
+
+Two things change for integrations which subscribe to `EVENT_DEVICE_REGISTRY_UPDATED`, or use `async_track_device_registry_updated_event`, and inspect the payload:
+
+- The `changes` dict of an `update` event reports a device move with the keys `config_entry_id` and `config_subentry_id`, replacing the previous `config_entries` and `config_entries_subentries`.
+- Updating or removing a pre-migration composite device id forwards the operation to each split device, so one event is fired per split device rather than a single event for the composite id.
+
+A device now belongs to a single config entry, so it can no longer lose one config entry while staying around for another. Integrations which previously watched `update` events for a change to the `config_entries` or `config_entries_subentries` keys, typically to detect their config entry being removed from a device shared with another integration, probably only need to handle `remove` events now: a device losing its config entry means the device is removed.
+
 ## Backwards compatibility
 
 Splitting devices changes assumptions which custom integrations may rely on, and device ids which are stored in automations and scripts no longer exist as devices. To soften that, the device registry makes a best-effort attempt to keep unmodified custom integrations working, by resolving a pre-migration composite device id to the devices it was split into.
 
-This is best-effort, not a guarantee. The shims can't cover every way a custom integration interacts with the device registry, and an operation which is ambiguous across the split devices can't be applied at all. An AI assisted analysis of 462 custom integrations interacting directly with the device registry suggests at least 90% are expected to work unaffected, which also means some will not. Please migrate your integration to the new API rather than relying on these shims; they are removed in Home Assistant Core 2027.8.
+This is best-effort, not a guarantee. The shims can't cover every way a custom integration interacts with the device registry, and an operation which is ambiguous across the split devices can't be applied at all. An AI-assisted analysis of 462 custom integrations interacting directly with the device registry suggests at least 90% are expected to work unaffected, which also means some will not. Please migrate your integration to the new API rather than relying on these shims; they are removed in Home Assistant Core 2027.8.
 
 During the deprecation period:
 
