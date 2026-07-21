@@ -181,8 +181,6 @@ Entities whose stored device is a composite device with no split owned by the en
 
 Link entities to one of the split devices instead, looking it up with `async_get_device_by_identifier` or `async_get_device_by_connection`.
 
-`ScannerEntity` is a special case: a scanner is automatically attached to the device matching its `mac_address`. If that MAC now maps to the splits of several config entries, the scanner entity attaches to its own config entry's split, or to no device if there is none, instead of crashing. This is fixed in core [PR #176684](https://github.com/home-assistant/core/pull/176684).
-
 ## Updating device registry snapshots in tests
 
 The fields of `DeviceRegistryEntrySnapshot` have been aligned with the new model in core [PR #176654](https://github.com/home-assistant/core/pull/176654): `config_entries` and `config_entries_subentries` are replaced by `config_entry_id` and `config_subentry_id`, and `primary_config_entry` is removed. Integrations with committed device registry snapshots need to re-record them by running the tests with `pytest --snapshot-update`.
