@@ -68,7 +68,7 @@ device_registry.async_update_device(
 
 Moving a device with the old parameters took the integration several `async_update_device` calls, adding the device to the new config entry and subentry and then removing it from the old ones, with a separate case for a device that only changed subentry within the same config entry. The single call shown above replaces all of that. In addition, the device registry now clears a `CONFIG_ENTRY` disable when a device is moved to an enabled config entry, so the integration no longer has to carry the `disabled_by` flag across the move by hand.
 
-Relatedly, `async_update_device` now validates the `disabled_by` flag against the owning config entry's disabled state, added in core [PR #176681](https://github.com/home-assistant/core/pull/176681). Setting `disabled_by=None` for a device on a disabled config entry, or `disabled_by=DeviceEntryDisabler.CONFIG_ENTRY` for a device on an enabled config entry, is inconsistent; such a value is ignored and logged now, and will raise from Home Assistant Core 2027.8.
+Relatedly, `async_update_device` now validates the `disabled_by` flag against the owning config entry's disabled state. Setting `disabled_by=None` for a device on a disabled config entry, or `disabled_by=DeviceEntryDisabler.CONFIG_ENTRY` for a device on an enabled config entry, is inconsistent; such a value is ignored and logged now, and will raise from Home Assistant Core 2027.8.
 
 Core integrations have been updated as examples: `openai_conversation` in [PR #176662](https://github.com/home-assistant/core/pull/176662), `scrape` in [PR #176663](https://github.com/home-assistant/core/pull/176663), `waqi` in [PR #176664](https://github.com/home-assistant/core/pull/176664) and `wolflink` in [PR #176665](https://github.com/home-assistant/core/pull/176665).
 
@@ -84,7 +84,7 @@ Core integrations have been updated to remove devices this way in PRs [#176669](
 
 Deprecated. Identifiers and connections are only unique per config entry, so a lookup by identifiers or connections can by design match more than one device, and what `async_get_device` returns is therefore ambiguous.
 
-When the owning config entry is known, look the device up scoped to that config entry with the new methods `DeviceRegistry.async_get_device_by_identifier()` or `DeviceRegistry.async_get_device_by_connection()`, added in core [PR #176879](https://github.com/home-assistant/core/pull/176879). Each takes a single identifier or connection tuple plus the config entry id, so the lookup can no longer be ambiguous:
+When the owning config entry is known, look the device up scoped to that config entry with the new methods `DeviceRegistry.async_get_device_by_identifier()` or `DeviceRegistry.async_get_device_by_connection()`. Each takes a single identifier or connection tuple plus the config entry id, so the lookup can no longer be ambiguous:
 
 ```py
 # Before
@@ -97,7 +97,7 @@ device = device_registry.async_get_device_by_identifier(
 
 Inside an entity, prefer `self.device_entry` over a registry lookup. If you genuinely need every device matching a key, possibly across config entries, use `DeviceRegistry.async_get_devices()`, which returns a list.
 
-Core integrations are being migrated to the new methods, `heos` in core [PR #176932](https://github.com/home-assistant/core/pull/176932) is an example.
+Core integrations are migrated to the new methods, `heos` in core [PR #176932](https://github.com/home-assistant/core/pull/176932) is an example.
 
 During the deprecation period, `async_get_device` resolves an ambiguous lookup as described in [Backwards compatibility](#backwards-compatibility) below. Note that this backwards-compatible resolution only happens through the `DeviceRegistry` lookup methods such as `async_get()` and `async_get_device()`; interacting with the `devices` container directly, for example `DeviceRegistry.devices.get(device_id)`, does not synthesize a composite device.
 
@@ -109,7 +109,7 @@ This was announced last year in [Updated guidelines for helper integrations link
 
 ### `helpers.device.async_device_info_to_link_from_entity()` and `async_device_info_to_link_from_device_id()`
 
-Deprecated in core [PR #176696](https://github.com/home-assistant/core/pull/176696). Both helpers now always return `None`.
+Both helpers now always return `None`.
 
 They returned a `DeviceInfo` carrying another device's identifiers and connections, which implicitly added the caller's config entry to that device. A device with a single config entry can't represent that, it would silently fork a duplicate device instead.
 
@@ -123,7 +123,7 @@ The helpers are removed in Home Assistant Core 2027.8.
 
 ### `helpers.helper_integration.async_handle_source_entity_changes(add_helper_config_entry_to_device=...)`
 
-Deprecated in core [PR #176701](https://github.com/home-assistant/core/pull/176701). The parameter no longer has any effect and should be removed from the call.
+The parameter no longer has any effect and should be removed from the call.
 
 When the source entity moves to another device, `async_handle_source_entity_changes` now only updates the helper entity to link to the new device, it no longer removes the helper config entry from the old device and adds it to the new one.
 
@@ -146,7 +146,7 @@ def async_remove_helper_devices(
 
 ### `helpers.device.async_remove_stale_devices_links_keep_entity_device()` and `async_remove_stale_devices_links_keep_current_device()`
 
-Deprecated in core [PR #176881](https://github.com/home-assistant/core/pull/176881), both are now no-ops. Call `async_remove_helper_devices` with `sweep_helper_devices=True` from the helper's `async_setup_entry` instead:
+Both are now no-ops. Call `async_remove_helper_devices` with `sweep_helper_devices=True` from the helper's `async_setup_entry` instead:
 
 ```py
 async_remove_helper_devices(
@@ -175,9 +175,9 @@ When [child devices](https://github.com/home-assistant/architecture/discussions/
 
 ## Linking an entity to a split device
 
-A pre-migration composite device id no longer refers to a real device. Attempting to link an entity to such an id, by passing it to `EntityRegistry.async_get_or_create(device_id=...)` or `EntityRegistry.async_update_entity(device_id=...)`, is ignored with a logged warning rather than applied (core PRs [#176650](https://github.com/home-assistant/core/pull/176650) and [#176886](https://github.com/home-assistant/core/pull/176886)). A new entity is then created with no device, and an existing entity keeps its current device. Passing a genuinely non-existent device id still raises `ValueError` as before.
+A pre-migration composite device id no longer refers to a real device. Attempting to link an entity to such an id, by passing it to `EntityRegistry.async_get_or_create(device_id=...)` or `EntityRegistry.async_update_entity(device_id=...)`, is ignored with a logged warning rather than applied. A new entity is then created with no device, and an existing entity keeps its current device. Passing a genuinely non-existent device id still raises `ValueError` as before.
 
-Entities whose stored device is a composite device with no split owned by the entity's config entry are detached from the device when the registry is loaded, in core [PR #176819](https://github.com/home-assistant/core/pull/176819); the owning integration is expected to re-link them.
+Entities whose stored device is a composite device with no split owned by the entity's config entry are detached from the device when the registry is loaded; the owning integration is expected to re-link them.
 
 Link entities to one of the split devices instead, looking it up with `async_get_device_by_identifier` or `async_get_device_by_connection`.
 
@@ -207,4 +207,4 @@ During the deprecation period:
 - Actions targeting a pre-migration composite device id trickle down to the split devices.
 - User customizations (area, floor, labels, name) are kept when a device is split.
 
-A new method `DeviceRegistry.async_get_devices_for_composite_device_id()` returns the devices a pre-migration composite device was split into. `DeviceRegistry.async_is_composite_device_id()` returns whether a device id is a pre-migration composite device id, that is, an id which was split into one device per config entry and no longer refers to a registered device; it is added in core [PR #176923](https://github.com/home-assistant/core/pull/176923).
+A new method `DeviceRegistry.async_get_devices_for_composite_device_id()` returns the devices a pre-migration composite device was split into. `DeviceRegistry.async_is_composite_device_id()` returns whether a device id is a pre-migration composite device id, that is, an id which was split into one device per config entry and no longer refers to a registered device.
