@@ -6,17 +6,17 @@ title: "Devices are restricted to a single config entry and at most one subentry
 
 ## Summary
 
-Device identifiers and connections are no longer globally unique, they are now unique per config entry. A device belongs to exactly one config entry, and to a single (or no) config subentry.
+A device is now owned by a single config entry, and by a single (or no) config subentry. Devices are no longer merged across integrations: a physical device supported by several integrations is now represented by one device per config entry instead of a single shared device.
 
-Devices which are tied to multiple config entries are split into one device per config entry when the device registry is loaded. The entity registry is updated so entities point to the correct device.
+Devices which were previously tied to multiple config entries are split into one device per config entry when the device registry is loaded. The entity registry is updated so entities point to the correct device.
 
-Most integrations don't interact directly with the device registry and are not affected. Integrations which interact with it directly need to handle the deprecations listed below.
+**Most integrations don't interact directly with the device registry and don't need any changes.** Integrations which interact with it directly need to handle the deprecations listed below.
 
 This is implemented in core [PR #175785](https://github.com/home-assistant/core/pull/175785), the rationale is described in architecture proposal [home-assistant/architecture#1226](https://github.com/home-assistant/architecture/discussions/1226). The changes land in Home Assistant Core 2026.8.
 
 ## Background
 
-Devices have until now been identified by connections and identifiers which are globally unique. This means devices from different integrations sharing for example a MAC address are merged into a single device.
+Until now, a physical device supported by several integrations has been merged into a single, shared device. This was achieved by identifying devices by connections and identifiers which are globally unique, so that for example a device tracker and a native integration referring to the same MAC address end up on the same device.
 
 This causes a few problems:
 
@@ -24,11 +24,11 @@ This causes a few problems:
 - Users get a confusing experience where a device page contains a hodgepodge of entities from multiple integrations.
 - There are long-standing bugs where modifying the connections and identifiers of a device causes multiple devices to end up with the same connections, violating the original design of the device registry.
 
-Grouping devices by connection can instead happen in the frontend, if desirable.
+The new behavior is achieved by making identifiers and connections unique per config entry instead of globally unique.
 
 ## Deprecations
 
-Deprecation warnings are not yet logged for all items below; the remaining warnings will be added in follow-up PRs. Unless noted otherwise, deprecated functionality remains supported until Home Assistant Core 2027.8.
+Using the deprecated functionality below logs a warning at runtime. Unless noted otherwise, deprecated functionality remains supported until Home Assistant Core 2027.8.
 
 ### `DeviceEntry.config_entries`
 
@@ -171,7 +171,7 @@ It previously had a single bot device shared by every chat, with each chat's sub
 
 Note that the PR was written before `via_device_id` was added, new code should use `via_device_id` instead of `via_device`.
 
-When [subdevices](https://github.com/home-assistant/architecture/discussions/1414) are introduced, integrations which model this with a via device should migrate to subdevices instead.
+When [child devices](https://github.com/home-assistant/architecture/discussions/1414) are introduced, integrations which model this with a via device should migrate to child devices instead.
 
 ## Linking an entity to a split device
 
@@ -180,10 +180,6 @@ A pre-migration composite device id no longer refers to a real device. Attemptin
 Entities whose stored device is a composite device with no split owned by the entity's config entry are detached from the device when the registry is loaded, in core [PR #176819](https://github.com/home-assistant/core/pull/176819); the owning integration is expected to re-link them.
 
 Link entities to one of the split devices instead, looking it up with `async_get_device_by_identifier` or `async_get_device_by_connection`.
-
-## Updating device registry snapshots in tests
-
-The fields of `DeviceRegistryEntrySnapshot` have been aligned with the new model in core [PR #176654](https://github.com/home-assistant/core/pull/176654): `config_entries` and `config_entries_subentries` are replaced by `config_entry_id` and `config_subentry_id`, and `primary_config_entry` is removed. Integrations with committed device registry snapshots need to re-record them by running the tests with `pytest --snapshot-update`.
 
 ## Device registry events
 
@@ -207,7 +203,6 @@ During the deprecation period:
 - `DeviceRegistry.async_get()` synthesizes a read-only restored composite device when passed the id of a pre-migration composite device. Its identifiers, connections and config entries are the union of the split devices'. The synthesis only happens in `async_get()`; interacting with the `devices` container directly, for example `DeviceRegistry.devices.get(device_id)`, does not synthesize a composite and returns `None` for a pre-migration composite device id.
 - `DeviceRegistry.async_get_device()` resolves a lookup by identifiers or connections matching several config entries to a single device when possible, preferring the device whose config entry domain matches the looked-up identifier. If the remaining matches are the splits of one pre-migration composite device, a read-only composite spanning them is returned. For independent devices sharing an identifier or connection, a device owned by the calling integration is preferred, falling back to the first match.
 - `DeviceRegistry.async_update_device()` and `DeviceRegistry.async_remove_device()` forward the call to each of the split devices. Arguments which rewrite a device's identity or move it are ambiguous across the split devices; they are ignored and reported to the offending integration.
-- `DeviceEntry.composite_primary_config_entry` preserves the pre-migration composite's former primary config entry, so a restored composite device reports it for custom integrations which read `primary_config_entry`.
 - Entity registry `get_entries_for_device_id()` and `async_entries_for_device()` expand a pre-migration composite device id to the entities of the devices it was split into.
 - Actions targeting a pre-migration composite device id trickle down to the split devices.
 - User customizations (area, floor, labels, name) are kept when a device is split.
