@@ -73,4 +73,21 @@ Some device classes define standard event types to ensure consistency across int
 
 - `DoorbellEventType.RING`: represents the standard "doorbell was pressed" event. **This event type is mandatory**.
 
+#### Button
+
+Approved in [architecture#1377](https://github.com/home-assistant/architecture/discussions/1377). Unlike `DoorbellEventType.RING`, none of these are mandatory: integrations map only the interactions their hardware can actually produce and omit the rest.
+
+- `ButtonEventType.PRESS_START`: the button was pressed down.
+- `ButtonEventType.PRESS_END`: the button was released after a brief press (the standard "click").
+- `ButtonEventType.LONG_PRESS_START`: the button was held past a threshold.
+- `ButtonEventType.LONG_PRESS_END`: the button was released after a long hold.
+- `ButtonEventType.MULTI_PRESS_ONGOING`: an intermediate press in a multi-press sequence was detected.
+- `ButtonEventType.MULTI_PRESS_END`: a multi-press sequence completed.
+
+`MULTI_PRESS_ONGOING` and `MULTI_PRESS_END` include a `multi_press_count` attribute in `event_data` with the number of presses.
+
+If a device only emits a single event per interaction, with no separate press and release, map it to the matching `_end` type (`PRESS_END` for short presses, `LONG_PRESS_END` for holds, and so on).
+
+For a button that reports a direction from a single source (for example an up/down paddle), prefer exposing separate entities per direction. A non-standard `direction` attribute is an accepted alternative when splitting into multiple entities isn't practical.
+
 Other non-standard event types are also allowed.
