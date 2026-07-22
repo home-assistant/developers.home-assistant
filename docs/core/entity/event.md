@@ -75,7 +75,6 @@ Some device classes define standard event types to ensure consistency across int
 
 #### Button
 
-Approved in [architecture#1377](https://github.com/home-assistant/architecture/discussions/1377). Unlike `DoorbellEventType.RING`, none of these are mandatory: integrations map only the interactions their hardware can actually produce and omit the rest.
 
 - `ButtonEventType.PRESS_START`: the button was pressed down.
 - `ButtonEventType.PRESS_END`: the button was released after a brief press (the standard "click").
