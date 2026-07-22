@@ -75,8 +75,9 @@ To test your changes locally, you need Ruby and its dependencies, called gems.
    - macOS, if the bundled Ruby doesn't work:
 
        ```shell
-       brew install ruby@$(cat .ruby-version)
-       export PATH="/usr/local/opt/ruby@$(cat .ruby-version)/bin:$PATH"
+       RUBY_FORMULA="ruby@$(cut -d . -f 1,2 .ruby-version)"
+       brew install "$RUBY_FORMULA"
+       export PATH="$(brew --prefix "$RUBY_FORMULA")/bin:$PATH"
        ```
 
 4. If you did not already install the gems as part of the previous step, run `bundle` from the `home-assistant.io` directory.
