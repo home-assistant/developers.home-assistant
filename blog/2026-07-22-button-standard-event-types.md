@@ -23,7 +23,7 @@ The new `ButtonEventType` standard event types solve this by giving every button
 
 - `ButtonEventType.PRESS_START`: the button was pressed down.
 - `ButtonEventType.PRESS_END`: the button was released after a brief press (the standard "click").
-- `ButtonEventType.LONG_PRESS_START`: the button was held past a threshold.
+- `ButtonEventType.LONG_PRESS_START`: the button was held past a duration threshold.
 - `ButtonEventType.LONG_PRESS_END`: the button was released after a long hold.
 - `ButtonEventType.MULTI_PRESS_ONGOING`: an intermediate press in a multi-press sequence was detected.
 - `ButtonEventType.MULTI_PRESS_END`: a multi-press sequence completed.
