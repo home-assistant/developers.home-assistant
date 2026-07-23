@@ -45,6 +45,28 @@ You can use KTLint through Gradle to automatically reformat your code:
 
 If a KTLint error is detected, the CI will fail, and GitHub will report it as a comment in the PR using the generated [SARIF](/docs/android/tips/sarif_reports.md) report.
 
+## Detekt static analysis
+
+While KTLint handles Kotlin formatting and style, [Detekt](https://detekt.dev/) performs static analysis for maintainability and correctness issues.
+
+### Running Detekt
+
+Run Detekt for the entire repository, including the convention plugins in the included build:
+
+```bash
+./gradlew detekt :build-logic:convention:detekt --continue
+```
+
+To analyze a single module, run its `detekt` task:
+
+```bash
+./gradlew :app:detekt
+```
+
+### CI integration
+
+Existing findings are recorded in baselines. New Detekt violations fail CI and are reported using the generated [SARIF](/docs/android/tips/sarif_reports.md) report.
+
 ## Yamllint
 
 We use [Yamllint](https://github.com/adrienverge/yamllint) to enforce YAML formatting. The `github` format is followed for all YAML files in the repository.
