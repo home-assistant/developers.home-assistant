@@ -111,6 +111,7 @@ async def async_browse_media(self, item: MediaSourceItem) -> BrowseMediaSource:
 | `can_play` | `bool` | Whether the item can be played directly. |
 | `can_expand` | `bool` | Whether the item can be browsed deeper (has children). |
 | `can_search` | `bool` | Whether the item can be searched. When `True`, the media browser shows a search bar for this item. Defaults to `False`. See [Searching media](#searching-media). |
+| `search_media_classes` | `list[MediaClass] \| None` | Optional list of media classes to offer as search filters for this item. When set, the media browser lets the user narrow their search to these classes, which are then passed back as `media_filter_classes` in the `SearchMediaQuery`. Defaults to `None`. See [Searching media](#searching-media). |
 | `children` | `list[BrowseMediaSource] \| None` | Child items. Only set on the parent item that is browsed. |
 | `children_media_class` | `MediaClass \| None` | Media class of the children. Automatically calculated if not set. |
 | `thumbnail` | `str \| None` | URL to a thumbnail image. |
@@ -245,6 +246,30 @@ async def async_browse_media(self, item: MediaSourceItem) -> BrowseMediaSource:
         can_play=False,
         can_expand=True,
         can_search=can_search,
+        children=[BrowseMediaSource(...), BrowseMediaSource(...)],
+    )
+```
+
+### Advertising search filters
+
+To let users narrow their search, set `search_media_classes` on the searchable item to the list of `MediaClass` values that make sense for that location. The media browser offers these as filter options, and the classes the user selects are passed back in the [`SearchMediaQuery`](#searchmediaquery) as `media_filter_classes`. Honor that list in `async_search_media` by only returning items whose `media_class` is included:
+
+```python
+from homeassistant.components.media_player import MediaClass
+
+async def async_browse_media(self, item: MediaSourceItem) -> BrowseMediaSource:
+    """Browse media."""
+
+    return BrowseMediaSource(
+        domain=DOMAIN,
+        identifier=item.identifier,
+        media_class=MediaClass.APP,
+        media_content_type="",
+        title="My Service",
+        can_play=False,
+        can_expand=True,
+        can_search=True,
+        search_media_classes=[MediaClass.ALBUM, MediaClass.ARTIST, MediaClass.TRACK],
         children=[BrowseMediaSource(...), BrowseMediaSource(...)],
     )
 ```
