@@ -1,5 +1,6 @@
 ---
 title: "Has branding assets available for the integration"
+sidebar_label: 🥉 brands
 ---
 
 ## Reasoning

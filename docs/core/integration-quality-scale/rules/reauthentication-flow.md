@@ -1,5 +1,6 @@
 ---
 title: "Reauthentication needs to be available via the UI"
+sidebar_label: 🥈 reauthentication-flow
 related_rules:
   - config-flow
   - test-before-configure

@@ -1,5 +1,6 @@
 ---
 title: "Entity events are subscribed in the correct lifecycle methods"
+sidebar_label: 🥉 entity-event-setup
 ---
 
 ## Reasoning

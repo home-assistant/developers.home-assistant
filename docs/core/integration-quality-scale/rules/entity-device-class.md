@@ -1,5 +1,6 @@
 ---
 title: "Entities use device classes where possible"
+sidebar_label: 🥇 entity-device-class
 related_rules:
   - has-entity-name
   - entity-translations

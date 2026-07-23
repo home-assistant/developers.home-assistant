@@ -1,5 +1,6 @@
 ---
 title: "Test a connection in the config flow"
+sidebar_label: 🥉 test-before-configure
 related_rules:
   - config-flow
   - unique-config-entry
