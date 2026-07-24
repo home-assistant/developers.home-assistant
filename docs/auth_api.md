@@ -24,6 +24,17 @@ If you require a different redirect URL (such as when building a native app), yo
 
 Home Assistant will scan the first 10kB of a website for link tags.
 
+Alternatively, your application can serve an [OAuth Client ID Metadata Document](https://datatracker.ietf.org/doc/draft-ietf-oauth-client-id-metadata-document/) at the client ID URL: a JSON document that lists the approved redirect URLs. This is used when no `<link rel="redirect_uri">` tags are found. For example:
+
+```json
+{
+  "client_id": "https://www.my-application.io/oauth/metadata.json",
+  "redirect_uris": ["https://oauth.my-application.io/hass/auth_callback"]
+}
+```
+
+The metadata document is only accepted when the client ID URL uses `https`, the document is served directly with a `200 OK` response (redirects are not followed), its `client_id` matches the URL it was fetched from, and every `redirect_uris` entry is an absolute URI. Redirect URLs are compared by exact string match, and the 10kB scan limit applies to the document as well. Home Assistant advertises this support with `client_id_metadata_document_supported` in its OAuth authorization server metadata.
+
 ## Authorize
 
 <a href='https://www.websequencediagrams.com/?lz=dGl0bGUgQXV0aG9yaXphdGlvbiBGbG93CgpVc2VyIC0-IENsaWVudDogTG9nIGludG8gSG9tZSBBc3Npc3RhbnQKABoGIC0-IFVzZXI6AEMJZSB1cmwgAD4JACgOOiBHbyB0bwAeBWFuZCBhAC0ICgBQDgB1DACBFw5jb2RlAHELAE4RZXQgdG9rZW5zIGZvcgAoBgBBGlQAJQUK&s=qsd'>
