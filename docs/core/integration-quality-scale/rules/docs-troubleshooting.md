@@ -45,4 +45,4 @@ Make sure you turned off the device's power-saving mode.
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not have any known issues that the user can resolve themselves, this rule does not apply.

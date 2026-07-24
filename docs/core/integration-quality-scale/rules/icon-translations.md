@@ -124,7 +124,8 @@ For more information about icon translations, check the [entity](/docs/core/enti
 
 ## Exceptions
 
-There are no exceptions to this rule.
+* If the integration does not have any entities, this rule does not apply.
+* If the integration's entities do not use custom icons (for example, they rely on the icons provided by their device class), this rule does not apply.
 
 ## Related rules
 

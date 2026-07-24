@@ -54,7 +54,7 @@ For more information on how to set up service actions, see the [service document
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not register any custom service actions, this rule does not apply.
 
 ## Related rules
 

@@ -18,4 +18,4 @@ The integration does not provide the ability to reboot, which can instead be don
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not have any known limitations, this rule does not apply.

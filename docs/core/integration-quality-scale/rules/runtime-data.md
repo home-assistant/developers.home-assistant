@@ -46,7 +46,7 @@ More information about configuration entries and their lifecycle can be found in
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not have any runtime data to store, this rule does not apply.
 
 ## Related rules
 

@@ -23,4 +23,4 @@ At the start of the integration we try to enable that, and if it fails we fall b
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not fetch data from a device or service (for example, it does not poll or receive pushed updates), this rule does not apply.

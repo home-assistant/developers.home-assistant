@@ -18,7 +18,7 @@ In order for the project to trust the dependencies, we have a set of requirement
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not have any external dependencies, this rule does not apply.
 
 ## Related rules
 

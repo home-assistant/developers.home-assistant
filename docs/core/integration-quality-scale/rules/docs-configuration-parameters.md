@@ -25,4 +25,4 @@ Timeframe:
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not have any configuration parameters (it has no options flow), this rule does not apply.

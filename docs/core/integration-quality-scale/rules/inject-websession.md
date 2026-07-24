@@ -32,7 +32,7 @@ In that case, you can create a new session using `async_create_clientsession` fo
 
 ## Exceptions
 
-If the integration is not making any HTTP requests, this rule does not apply.
+If the integration is not making any HTTP requests (for example, it communicates over a non-HTTP protocol such as Modbus, Bluetooth, or a raw TCP socket), this rule does not apply.
 
 ## Related rules
 

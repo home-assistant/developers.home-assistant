@@ -25,4 +25,4 @@ link to blueprint
 
 ## Exceptions
 
-There are no exceptions to this rule.
+Integrations that do not create entities or provide actions, or that only extend core functionality (for example, backup-only integrations), are exempt from this rule.

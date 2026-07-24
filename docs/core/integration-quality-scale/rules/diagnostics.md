@@ -39,4 +39,4 @@ To learn more information about diagnostics, check out the [diagnostics document
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration has no data that would be useful for diagnostics (for example, it has no runtime data and its configuration contains only sensitive information), this rule does not apply.

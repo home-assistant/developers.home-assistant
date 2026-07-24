@@ -84,7 +84,7 @@ For more information about managing integration state, see the [documentation](/
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not have any entities, or its entities are stateless (for example, a text-to-speech or conversation entity), this rule does not apply.
 
 ## Related rules
 

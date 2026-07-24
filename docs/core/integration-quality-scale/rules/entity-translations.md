@@ -59,7 +59,9 @@ More information about entity naming can be found in the [entity](/docs/core/ent
 
 ## Exceptions
 
-There are no exceptions to this rule.
+* If the integration does not have any entities, this rule does not apply.
+* If the integration only has user-defined entity names that cannot be translated, this rule does not apply.
+* If the integration only has entities that use the device name by setting `_attr_name` to `None`, this rule does not apply.
 
 ## Related rules
 

@@ -93,7 +93,9 @@ For more information on the reconfiguration flow, see the [reconfigure flow docu
 
 ## Exceptions
 
-Integrations that don't have settings in their configuration flow are exempt from this rule.
+* Integrations that don't have settings in their configuration flow are exempt from this rule.
+* Integrations where the only configurable values are credentials, which are handled by the reauthentication flow, are exempt from this rule.
+* Integrations where any change would force the creation of a new config entry when changed are exempt from this rule.
 
 ## Related rules
 

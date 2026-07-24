@@ -47,7 +47,7 @@ To learn more about the entity registry properties, checkout the [documentation]
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not have any entities, or none of its entities are noisy or less commonly used, this rule does not apply.
 
 ## Related rules
 

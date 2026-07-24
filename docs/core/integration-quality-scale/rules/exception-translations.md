@@ -60,7 +60,7 @@ For more info on raising exceptions, check the [documentation](/docs/core/platfo
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not raise any custom exceptions, this rule does not apply.
 
 ## Related rules
 

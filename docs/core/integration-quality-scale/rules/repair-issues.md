@@ -45,4 +45,4 @@ For more information about repair issues and repair flows, see the [repairs](/do
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not have any cases where raising a repair issue is needed, this rule does not apply.

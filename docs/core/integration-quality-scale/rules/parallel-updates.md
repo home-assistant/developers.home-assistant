@@ -61,4 +61,4 @@ For more information about request parallelism, check the [documentation](/docs/
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not have any entity platforms, this rule does not apply.

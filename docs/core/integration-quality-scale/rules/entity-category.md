@@ -27,4 +27,4 @@ To learn more about the registry properties, checkout the [documentation](/docs/
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not create any entities, or all of its entities are primary entities for which the default category is appropriate, this rule does not apply.

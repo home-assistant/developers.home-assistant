@@ -49,7 +49,7 @@ For more info on raising exceptions, check the [documentation](/docs/core/platfo
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not register any custom service actions and only has read-only platforms (binary sensors & sensors), this rule does not apply.
 
 ## Related rules
 
