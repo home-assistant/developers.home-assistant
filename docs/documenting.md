@@ -48,46 +48,81 @@ You should be able to access the documentation website running locally at `http:
 
 It is also possible to set up a more traditional development environment.
 
-To test your changes locally, you need to install **Ruby** and its dependencies (gems):
+#### Install dependencies
 
-- [Install Ruby](https://www.ruby-lang.org/en/documentation/installation/) if you don't have it already.
-  For the current required version, see [.ruby-version](https://github.com/home-assistant/home-assistant.io/blob/current/.ruby-version).
-- Install `bundler`, a dependency manager for Ruby: `gem install bundler` (You might have to run this command as `sudo`).
+To test your changes locally, you need Ruby and its dependencies, called gems.
 
-- Shortcut for Fedora:
+1. Fork and clone the home-assistant.io [git repository](https://github.com/home-assistant/home-assistant.io).
+2. In your local `home-assistant.io` directory, install Ruby. For the current required version, see [.ruby-version](https://github.com/home-assistant/home-assistant.io/blob/current/.ruby-version).
+3. Install Ruby and Bundler for your operating system.
 
-    ```shell
-    sudo dnf -y install gcc-c++ ruby ruby-devel rubygem-bundler rubygem-json rubygem-rake && bundle
-    ```
+   - Fedora:
 
-- Shortcut for Debian/Ubuntu:
+       ```shell
+       sudo dnf -y install \
+         gcc-c++ ruby ruby-devel rubygem-bundler rubygem-json rubygem-rake
+       bundle
+       ```
 
-    ```shell
-    sudo apt-get install ruby ruby-dev ruby-bundler ruby-json g++ zlib1g-dev && bundle
-    ```
+   - Debian/Ubuntu:
 
-- Shortcut for Mac (if the bundled Ruby doesn't work):
+       ```shell
+       sudo apt-get install \
+         ruby ruby-dev ruby-bundler ruby-json g++ zlib1g-dev
+       bundle
+       ```
 
-    ```shell
-    brew install ruby@3.1 && export PATH="/usr/local/opt/ruby@3.1/bin:$PATH"
-    ```
+   - macOS, if the bundled Ruby doesn't work:
 
-- Shortcut for Mac if the bundled Ruby doesn't work (make sure to run it in the home-assistant.io directory):
+       ```shell
+       RUBY_FORMULA="ruby@$(cut -d . -f 1,2 .ruby-version)"
+       brew install "$RUBY_FORMULA"
+       export PATH="$(brew --prefix "$RUBY_FORMULA")/bin:$PATH"
+       ```
+
+4. If you did not already install the gems as part of the previous step, run `bundle` from the `home-assistant.io` directory.
+
+##### Optional: install Ruby with mise-en-place
+
+If you manage Ruby with [mise-en-place](https://mise.jdx.dev/), use `mise` instead of step 3 in the main procedure.
+
+On Fedora, first install the packages that `mise` needs to install Ruby:
+
+```shell
+sudo dnf -y install \
+  gcc-c++ make perl-FindBin openssl-devel readline-devel \
+  zlib-ng-compat-devel libyaml-devel gmp-devel
+```
+
+Trust the repository configuration so `mise` reads the required version from `.ruby-version`:
+
+```shell
+mise trust
+mise install ruby
+gem install bundler
+bundle
+```
+
+#### Preview the website locally
+
+1. Generate the first preview:
 
    ```shell
-   brew install ruby@$(cat .ruby-version) && export PATH="/usr/local/opt/ruby@$(cat .ruby-version)/bin:$PATH"
+   bundle exec rake generate
    ```
 
-- Fork the home-assistant.io [git repository](https://github.com/home-assistant/home-assistant.io).
-- In your home-assistant.io root directory, run `bundle` to install the gems you need.
+   This can take a minute.
+2. Create, edit, or update a page. The integration documentation is located in `source/_integrations/`. The Home Assistant documentation is located in `source/_docs/`.
+3. Start the local preview:
 
-Then you can work on the documentation:
+   ```shell
+   bundle exec rake preview
+   ```
 
-- Run `bundle exec rake generate` to generate the very first preview. This will take a minute.
-- Create/edit/update a page. The integration/platforms documentation is located in `source/_integrations/`. `source/_docs/` contains the Home Assistant documentation itself.
-- Test your changes to home-assistant.io locally: run `bundle exec rake preview` and navigate to [http://127.0.0.1:4000](http://127.0.0.1:4000). While this command is working, any changes to a file are automatically detected and will update the affected pages. You will have to manually reload them in the browser though.
-- Create a Pull Request (PR) against the **next** branch of home-assistant.io if your documentation is a new feature, platform, or integration.
-- Create a Pull Request (PR) against the **current** branch of home-assistant.io if you fix stuff, create Cookbook entries, or expand existing documentation.
+4. Open [http://127.0.0.1:4000](http://127.0.0.1:4000) in your browser. While the preview is running, changes to files are detected automatically and the affected pages are rebuilt. Refresh the page in your browser to see the update.
+5. When you are ready to open a pull request (PR), follow the [documentation pull request review process](#documentation-pull-request-review-process).
+
+#### Preview the website from a headless machine
 
 The site generated by `bundle exec rake` is only available locally. If you are developing on a headless machine, use port forwarding:
 
