@@ -59,10 +59,11 @@ enum. For behaviour that is not covered by the HVAC modes, add a preset instead.
 
 ### HVAC action
 
-The HVAC action is reported by the device, and describes the _current_ action that the device is performing in order to fulfill the requested HVAC mode, as determined by the device's thermostat, humidistat, and control algorithms.
+The HVAC action describes the _current_ action that the device is performing in order to fulfill the requested HVAC mode as determined by the device's thermostat, humidistat, and control algorithms.
+It should be determined based on information reported by the device if possible, or may be calculated if the behaviour of the device is well understood and predictable.
 
 You are only allowed to use the built-in HVAC actions provided by the `HVACAction` enum.
-If the device does not report enough information to determine the HVAC action then use the default (`None`).
+If not enough information is available to determine the HVAC action then use the default (`None`).
 
 To help you understand when to use the different HVAC actions, here are some example situations:
 
