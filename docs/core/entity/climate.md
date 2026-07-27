@@ -44,7 +44,8 @@ Properties should always only return information from memory and not do I/O (lik
 The HVAC mode is the behaviour that the device is requested to perform.
 
 You are only allowed to use the built-in HVAC modes, provided by the `HVACMode`
-enum. For behaviour that is not covered by the HVAC modes, add a preset instead.
+enum.
+For device options which modify how one or more of the modes behave, add a preset.
 
 
 | Name                 | Description                                                         |
@@ -59,35 +60,21 @@ enum. For behaviour that is not covered by the HVAC modes, add a preset instead.
 
 ### HVAC action
 
-The HVAC action describes the _current_ action that the device is performing in order to fulfill the requested HVAC mode as determined by the device's thermostat, humidistat, and control algorithms.
-It should be determined based on information reported by the device if possible, or may be calculated if the behaviour of the device is well understood and predictable.
+The HVAC action describes the _current_ action that the device is performing in order to fulfill the requested HVAC mode and preset,
+as determined by the device's own control algorithms.
 
 You are only allowed to use the built-in HVAC actions provided by the `HVACAction` enum.
-If not enough information is available to determine the HVAC action then use the default (`None`).
 
-To help you understand when to use the different HVAC actions, here are some example situations:
+:::note
+It might not be possible to accurately determine the correct HVAC action unless the device reports additional information.
+For example:
 
-- **A thermostat with hysteresis is set to `HVACMode.HEAT`.**
-  When the temperature falls to 0.5°C below the target it starts calling for heat, and the action changes to `HVACAction.HEATING`.
-  When the temperature rises to 0.5°C above the target it stops calling for heat, and the action changes to `HVACAction.IDLE`.
-- **A smart TRV uses a PID algorithm to select between multiple valve positions.**
-  When the valve is closed, the action is `HVACAction.IDLE`.
-  When the valve is open at any position, the action is `HVACAction.HEATING`.
-- **A variable speed air conditioner is set to `HVACMode.COOL`.**
-  When the temperature rises above the target, the device increases speed.
-  When the temperature falls below the target, the device reduces speed.
-  The action remains `HVACAction.COOLING` throughout.
-  If temperature continues to stay below the target for an extended time, the device stops the compressor and fan.
-  The action changes to `HVACAction.IDLE`.
-- **A thermostat in a forced air system periodically circulates air.**
-  It is not currently calling for heating or cooling.
-  When the fan starts, the action changes to `HVACAction.FAN`. When the fan stops, the action changes to `HVACAction.IDLE`.
-- **A split heat pump is set to `HVACMode.HEAT`, and detects ice on the outdoor heat exchanger.**
-  It stops the indoor fan and reverses the direction of the refrigeration loop.
-  The action changes to `HVACAction.DEFROSTING`.
-  Defrosting completes, and the device restores the previous loop direction.
-  It does not start the indoor fan yet because the indoor heat exchanger is still cold.
-  The action changes to `HVACAction.PREHEATING`.
+- A thermostat with hysteresis has an ambiguous temperature range near the target temperature where it may be performing an action or may be idle.
+- A variable power device might continue to operate at a reduced power level after the target temperature is reached, rather than becoming idle.
+
+If the HVAC action cannot be accurately determined, use the default `None`.
+:::
+
 
 | Name                    | Description                                                                                                 |
 | ----------------------- | ----------------------------------------------------------------------------------------------------------- |
