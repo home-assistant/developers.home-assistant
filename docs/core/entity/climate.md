@@ -72,7 +72,7 @@ For example:
 - A thermostat with hysteresis has an ambiguous temperature range near the target temperature where it may be performing an action or may be idle.
 - A variable power device might continue to operate at a reduced power level after the target temperature is reached, rather than becoming idle.
 
-If the HVAC action cannot be accurately determined, use the default `None`.
+For devices where the HVAC action cannot be accurately determined, use the default `None`.
 :::
 
 
