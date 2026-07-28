@@ -51,21 +51,23 @@ While KTLint handles Kotlin formatting and style, [Detekt](https://detekt.dev/) 
 
 ### Running Detekt
 
-Run Detekt for the entire repository, including the convention plugins in the included build:
+Run type-resolved analysis for production code across the entire repository, including the convention plugins in the included build:
 
 ```bash
-./gradlew detekt :build-logic:convention:detekt --continue
+./gradlew detektMain :build-logic:convention:detektMain --continue
 ```
 
-To analyze a single module, run its `detekt` task:
+To generate or update the corresponding baselines, run:
 
 ```bash
-./gradlew :app:detekt
+./gradlew detektBaselineMain :build-logic:convention:detektBaselineMain --continue
 ```
 
 ### CI integration
 
-Existing findings are recorded in baselines. New Detekt violations fail CI and are reported using the generated [SARIF](/docs/android/tips/sarif_reports.md) report.
+Existing findings are recorded in baselines. Android modules use per-variant files such as `detekt-baseline-fullDebug.xml`, while JVM modules use source-set-specific files such as `detekt-baseline-main.xml`. New Detekt violations fail CI and are reported using the generated [SARIF](/docs/android/tips/sarif_reports.md) report.
+
+The generic `detekt` task and its baseline remain because the Detekt Gradle plugin includes that task in `check`.
 
 ## Yamllint
 
