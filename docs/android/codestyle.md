@@ -57,10 +57,22 @@ Run type-resolved analysis for production code across the entire repository, inc
 ./gradlew detektMain :build-logic:convention:detektMain --continue
 ```
 
+For focused Android analysis, use `:<module>:detekt<Variant>`. For example:
+
+```bash
+./gradlew :app:detektFullDebug
+```
+
 To generate or update the corresponding baselines, run:
 
 ```bash
 ./gradlew detektBaselineMain :build-logic:convention:detektBaselineMain --continue
+```
+
+To refresh only one Android variant baseline, use `:<module>:detektBaseline<Variant>`. For example:
+
+```bash
+./gradlew :app:detektBaselineFullDebug
 ```
 
 ### CI integration
