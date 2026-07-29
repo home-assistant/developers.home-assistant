@@ -50,6 +50,19 @@ If the integration has all three components (trigger, condition, and action), yo
 {% include integrations/triggers_conditions_actions.md %}
 ```
 
+### Referring to automation triggers, conditions, and actions in UI steps
+
+When you refer to an automation trigger, condition, or action in UI steps or automation examples, use the same name that the UI shows.
+
+For generic or shared integrations that are not tied to a specific brand, product, or service, do not add the integration domain as a prefix. This applies to integrations such as `fan`, `vacuum`, `media_player`, and `climate`.
+
+- Bad: `**Action**: Fan: Turn on fan`
+- Good: `**Action**: Turn on fan`
+
+For integrations tied to a specific brand, product, or service, include the integration name before the trigger, condition, or action name. This helps readers distinguish integration-specific items from generic or shared items with the same name.
+
+- Good: `**Action**: Jellyfin: Play media`
+
 ### Template: trigger
 
 Create a file in the `home-assistant.io` repository in `source/_triggers`.
@@ -78,7 +91,7 @@ To use this trigger in an automation:
 1. Go to {% my automations title="**Settings** > **Automations & scenes**" %}.
 2. Open an existing automation, or select **Create automation** > **Create new automation**.
 3. In the **When** section, select **Add trigger**.
-4. From the search box, search for and select **Light: Light brightness changed**.
+4. From the search box, search for and select **Light brightness changed**.
 5. Select what you want to monitor. Under **By target** (see [Targets](#targets)), pick... You can also select a floor, a device, a specific entity, or a label.
 6. From the triggers shown for that target, select...
 7. Under **Trigger when** (see [Behavior](#behavior-with-multiple-targets)), pick **Any**, **First**, or **Last** to control how multiple targets interact.
@@ -151,7 +164,7 @@ When you dim the ceiling light down, slow the fan down too. A classic "scene moo
 - **Trigger**: Light brightness changed
   - **Target**: Living room ceiling light
   - **Threshold type**: 10
-- **Action**: Fan: Set speed
+- **Action**: Set fan speed
 
 {% details "YAML example for a ceiling-light-linked fan" %}
 
@@ -207,7 +220,7 @@ To use this condition in an automation:
 1. Go to {% my automations title="**Settings** > **Automations & scenes**" %}.
 2. Open an existing automation, or select **Create automation** > **Create new automation**.
 3. In the **And if** section, select **Add condition**.
-4. From the search box, search for and select **Light: Light is on**.
+4. From the search box, search for and select **Light is on**.
 5. Select what you want to check. Under **By target** (see [Targets](#targets)), pick the area your ... is in (like your living room or bedroom).
    You can also select a floor, a device, a specific entity, or a label.
 6. Under **Condition passes if** (see [Behavior](#behavior-with-multiple-targets)), pick **Any** or **All**.
@@ -267,7 +280,7 @@ When the doorbell rings, only announce it through the living room speaker if the
 - **Condition**: Light is on
   - **Target**: Living room light
   - **Condition passes if**: Any
-- **Action**: Media player: Play media
+- **Action**: Play media
 
 {% details "YAML example for a doorbell announcement gated on lights" %}
 
@@ -333,7 +346,7 @@ To turn a light on from an automation or a script:
 2. Open an existing automation or script, or select **Create automation** > **Create new automation**.
 3. If you're setting up a new automation, add a trigger in the **When** section. Scripts don't need a trigger. They run when something else calls them.
 4. In the **Then do** section, select **Add action**.
-5. From the search box, search for and select **Light: Turn on**.
+5. From the search box, search for and select **Turn on light**.
 6. Select what you want to control. Under **By target** (see [Targets](#targets)), pick the area your ... is in (like your hallway or entryway). You can also select a floor, a device, a specific entity, or a label.
 7. Select **Save**.
 
@@ -383,7 +396,7 @@ transition:
 
 When you start winding down in the evening, dim the kitchen light to a warm white tone.
 
-- **Action**: Light: Turn on
+- **Action**: Turn on light
   - **Target**: Kitchen light
   - **Brightness percentage**: 80
 - **Color**: warm_white
