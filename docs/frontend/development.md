@@ -326,7 +326,27 @@ git push -u fork HEAD
 
 ## Building the frontend
 
-If you're making changes to the way the frontend is packaged, it might be necessary to try out a new packaged build of the frontend in the main repository (instead of pointing it at the frontend repo). To do so, first build a production version of the frontend by running `yarn build` (an alias for `script/build_frontend`).
+If you're making changes to the way the frontend is packaged, it might be necessary to try out a new packaged build of the frontend in the main repository (instead of pointing it at the frontend repo). Run a full production build from the frontend repository with:
+
+```shell
+yarn build
+```
+
+Production builds can also run as managed background processes:
+
+```shell
+yarn build --background    # start a full build and detach
+yarn build --status        # report whether a build is running
+yarn build --logs          # print the background build log
+yarn build --logs --follow # follow the background build log
+yarn build --stop          # stop a running background build
+```
+
+Use `yarn build --modern` when packaging, bundle-size, or browser performance work only needs the modern `frontend_latest` bundle. Add `--background` to run the modern-only build as a managed background process.
+
+:::caution
+Production builds cannot run at the same time as `yarn dev` or `yarn dev:serve`. These commands share generated files under `build/` and `hass_frontend/`. Stop the running command with its corresponding `--stop` flag before starting another one.
+:::
 
 To test it out inside Home Assistant, run the following command from the main Home Assistant repository:
 
