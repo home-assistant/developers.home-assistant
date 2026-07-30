@@ -93,7 +93,7 @@ Discovery configuration is a frequent source of back-and-forth.
 - **All user-facing strings in `strings.json`.** No hardcoded English strings in Python code.
 - **Sentence case.** All string values in `strings.json` must use sentence case (not Title Case, not ALL CAPS).
 - **Common translation keys used where applicable.** If a string matches an existing common key (e.g., generic names like "Temperature", "Humidity"), reference the common key instead of defining a new one.
-- **Backticks around untranslated terms.** Technical identifiers (model names, protocol names) in translatable strings should be either be wrapped in backticks or Capitalized so translators know not to translate them.
+- **Backticks around code-like literals.** Translatable strings render as markdown, so wrap code-like literals (entity IDs, action names, file names, state values) in backticks. Protocol and brand names are not backticked; write them with their official capitalization (e.g. MQTT,  Z-Wave, Zigbee).
 - **Integration name not in log messages.** The integration domain is already part of the logger name—don't repeat it in the message text.
 
 ---
@@ -107,7 +107,7 @@ Adding functionality to an existing integration.
 - **Scope is appropriate.** The feature should be a single, coherent addition. Adding three new entity platforms at once is too much—split them.
 - **Consistent with existing integration style.** New code should follow the conventions already established in the integration (naming, structure, patterns).
 - **Quality scale level maintained.** If the integration has a quality scale level, the new code must not regress it. Check that new entities follow all applicable rules.
-- **New strings follow translation rules.** Same rules as new integrations: sentence case, common keys, backticks.
+- **New strings follow translation rules.** Same rules as new integrations: `strings.json`, sentence case, common keys.
 - **Breaking changes documented.** If the feature changes existing behavior (renames entities, changes state value formats, modifies service schemas), the PR description must include a "Breaking change" section written for end users. Whether something is "breaking" requires understanding the user-facing contract: this is a human judgment call that AI reviewers consistently get wrong.
 
 ### 3.2 Config entry lifecycle
