@@ -75,7 +75,7 @@ Discovery configuration is a frequent source of back-and-forth.
 
 - **Uses `DataUpdateCoordinator` for polling.** Polling integrations should not implement their own polling loops. An exception is when the integration uses [separate polling for each individual entity](/docs/integration_fetching_data/#separate-polling-for-each-individual-entity).
 - **`_async_setup` for one-time work, `_async_update_data` for polling.** One-time setup work (auth, connection setup, initial device info fetch) belongs in `_async_setup`. The `_async_update_data` method runs on every poll cycle—don't put setup logic here.
-- **`ConfigEntryAuthFailed` for authentication errors.** When the API returns an auth error during data update, the coordinator must raise `ConfigEntryAuthFailed` (not `UpdateFailed`). This triggers a reauth flow instead of just logging errors and retrying forever.
+- **`ConfigEntryAuthFailed` for authentication errors.** When the API returns an auth error during data update, the coordinator must raise `ConfigEntryAuthFailed` (not `UpdateFailed`). This triggers a reauth flow instead of just logging errors and retrying forever. For the reauth flow to actually start, the integration must have implemented an `async_step_reauth` method; without it the entry just stays in a failed state.
 - **Coordinator data is properly typed.** The coordinator should use generics (`DataUpdateCoordinator[MyDataType]`) so entity code gets type-checked access to coordinator data.
 - **Polling frequency is reasonable.** Check the `update_interval`: is it appropriate for the device/service? A weather API doesn't need 10-second polling. A local device might need faster updates.
 
@@ -168,7 +168,7 @@ Dependency PRs generate few review comments compared to new-integration PRs, but
 
 - **Changelog/release notes linked.** The PR description should include a link to the library's changelog or a diff between versions so reviewers can see what changed upstream.
 - **Breaking library changes handled.** If the upstream library made breaking changes, verify the integration code adapts correctly.
-- **Upstream diff reviewed for security concerns.** Check what actually changed in the library between the old and new version. Look for: new network calls, new imports of `requests`/`aiohttp`/`socket`/`subprocess`/`os.system`, new environment variable access, new file I/O outside expected paths.
+- **Upstream diff reviewed for security concerns.** Check what actually changed in the library between the old and new version. Look for: new network calls, new imports or calls of `requests`/`aiohttp`/`socket`/`subprocess`/`os.system`, new environment variable access, new file I/O outside expected paths.
 - **No new transitive dependencies.** If the library version adds new transitive dependencies, they should be called out explicitly. New transitive deps are the most common supply chain attack vector.
 - **PyPI maintainer hasn't changed.** If the library's PyPI maintainer changed between versions, this is a significant trust event (possible account takeover). Flag it for closer inspection.
 - **Source repo hasn't moved or been archived.** Verify the library still has the same public source repository. A repo transfer, archival, or deletion between versions is a red flag.
@@ -187,7 +187,7 @@ Dependency PRs generate few review comments compared to new-integration PRs, but
 
 - **Tests are in the right location.** Integration tests belong in `tests/components/<domain>/`.
 - **All test function parameters have type annotations.** Use concrete types (`HomeAssistant`, `MockConfigEntry`) not `Any`.
-- **Tests exercise HA's public interfaces.** Tests should set up integrations via `async_setup_component()` or `hass.config_entries.async_setup()`, assert state via `hass.states`, and trigger actions via `hass.services`. They should NOT directly instantiate integration classes or call internal methods.
+- **Tests exercise HA's public interfaces.** Integration behavior tests should set up integrations via `async_setup_component()` or `hass.config_entries.async_setup()`, assert state via `hass.states`, and trigger actions via `hass.services`. They should NOT directly instantiate integration classes or call internal methods. Focused unit tests for isolated helpers and utilities or pure logic may call those directly when that's the intended boundary.
 
 ### 7.2 Patterns
 
@@ -201,7 +201,7 @@ Dependency PRs generate few review comments compared to new-integration PRs, but
 
 ### 7.3 Mocking
 
-- **Mock the library, not HA internals.** Mocks should target the third-party library's API calls, not Home Assistant's internal mechanisms.
+- **Mock the library, not HA internals.** Mocks should target the third-party library's API calls, not Home Assistant's internal mechanisms. For example, mock the client methods the integration calls (or patch the client class in `conftest.py`), rather than patching the `DataUpdateCoordinator`, `hass` helpers, or entity internals. Mocking HA internals makes tests brittle and stops them from exercising the real integration wiring.
 - **Fixtures are in `conftest.py`.** Shared test fixtures (mock client, config entry setup) belong in the integration's `conftest.py`, not duplicated across test files.
 
 ---
@@ -260,8 +260,8 @@ The HA project is actively migrating away from `extra_state_attributes`. Reviewe
 
 ### 8.5 Device class & state class
 
-- **Device class is set and correct.** Sensors, binary sensors, and other typed entities should have an appropriate `device_class`. This determines the UI icon, unit handling, and graph rendering.
-- **State class is set for numeric sensors.** Sensors that report continuous values need `state_class` set (`MEASUREMENT`, `TOTAL`, `TOTAL_INCREASING`) for long-term statistics to work.
+- **Device class is set and correct where applicable.** Sensors, binary sensors, and other typed entities should have an appropriate `device_class` when one fits. This determines the UI icon, unit handling, and graph rendering. `device_class` is optional—omit it when no class matches.
+- **State class is set for numeric sensors that support statistics.** Numeric sensors whose values are eligible for long-term statistics should set `state_class` (`MEASUREMENT`, `TOTAL`, `TOTAL_INCREASING`). Some device classes (e.g., `date`, `timestamp`, `enum`) are not eligible and should not set `state_class`.
 
 ---
 
