@@ -71,6 +71,10 @@ related_triggers:
 The **Light brightness changed** trigger fires after...
 Use it to...
 
+## Prerequisites
+
+- The target light must report brightness changes to Home Assistant.
+
 {% include triggers/ui_header.md %}
 
 To use this trigger in an automation:
@@ -138,7 +142,7 @@ threshold:
 
 ## Good to know
 
-- Add extra information here.
+- Changes smaller than the configured threshold do not fire the trigger.
 
 {% include triggers/try_it.md %}
 
@@ -200,6 +204,10 @@ related_conditions:
 The **Light is on** condition passes when...
 Use it to...
 
+## Prerequisites
+
+- The target light must report its on/off state to Home Assistant.
+
 {% include conditions/ui_header.md %}
 
 To use this condition in an automation:
@@ -253,7 +261,7 @@ behavior:
 
 ## Good to know
 
-- Add extra information here.
+- A light that is `unavailable` or `unknown` does not count as on.
 
 {% include conditions/try_it.md %}
 
@@ -323,7 +331,11 @@ related_actions:
 
 The **Turn on a light** action turns a light on...
 This action works with any light {% term entity %} in Home Assistant...
-If the light is already on, calling the action...
+
+## Prerequisites
+
+- The target light must be available in Home Assistant.
+- To use brightness, color, color temperature, effect, or transition options, the light must support those features.
 
 {% include actions/ui_header.md %}
 
@@ -373,7 +385,7 @@ transition:
 
 ## Good to know
 
-- Add extra information here.
+- If the light is already on, calling this action can change its brightness, color, or other supported settings without turning it off first.
 
 {% include actions/try_it.md %}
 

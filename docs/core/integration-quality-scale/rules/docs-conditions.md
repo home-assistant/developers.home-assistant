@@ -29,6 +29,10 @@ related_conditions:
 
 The **Carbon monoxide detected** condition passes when one or more carbon monoxide sensors are actively detecting carbon monoxide (CO). Because CO is colorless and odorless, your sensors are the only way to know it is there. Adding this condition to your automation ensures that safety actions, like sounding an alarm, turning on ventilation, or sending an urgent notification, only happen while the danger is confirmed. It prevents false alarms from a sensor that briefly flickered and keeps your response focused on real threats.
 
+## Prerequisites
+
+- The target sensor must report carbon monoxide detection to Home Assistant.
+
 <!-- Required. Renders the standard "Using this condition from the user interface" heading and intro. -->
 {% include conditions/ui_header.md %}
 

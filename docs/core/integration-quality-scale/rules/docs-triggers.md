@@ -37,6 +37,10 @@ Imagine your bedroom ventilation fan spinning up automatically in the middle of 
 slept, so you wake up feeling refreshed instead of groggy. Use this trigger to automate ventilation, log indoor air
 quality trends, or remind household members to open a window when CO2 shifts noticeably.
 
+## Prerequisites
+
+- The target sensor must report carbon dioxide readings to Home Assistant.
+
 <!-- Required. Renders the standard "Using this trigger from the user interface" heading and intro. -->
 {% include triggers/ui_header.md %}
 
