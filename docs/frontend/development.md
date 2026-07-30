@@ -216,7 +216,7 @@ Each dev server listens on its own port:
 | `yarn dev:gallery`      | 8100 | The [design gallery](/docs/frontend/design).                             |
 | `yarn test:e2e:app:dev` | 8095 | The stripped-down app used by the [end-to-end tests](#end-to-end-tests). |
 
-Development servers for different suites can run at the same time. Their startup phases are serialised while they regenerate shared files under `build/`, then each server uses a private snapshot of those files. A build or development server cannot start while another process owns the same suite's output directory. In particular, `yarn dev` and `yarn dev:serve` both own the app output under `hass_frontend/` and cannot run together.
+Only one supported build or development workflow can run at a time. If another workflow is active, the command exits without starting a second process and reports the commands to inspect or stop the active workflow.
 
 :::note
 When a coding agent is detected, `yarn dev:*` runs in the background automatically so it does not block the agent's session. Set `HA_DEV_BACKGROUND=0` to force the dev server to run in the foreground.
@@ -347,7 +347,7 @@ yarn build --stop          # stop a running background build
 Use `yarn build --modern` when packaging, bundle-size, or browser performance work only needs the modern `frontend_latest` bundle. Add `--background` to run the modern-only build as a managed background process.
 
 :::caution
-Production builds cannot run at the same time as `yarn dev` or `yarn dev:serve` because they all write the app output under `hass_frontend/`. Stop the running command with its corresponding `--stop` flag before starting another one. Other suites can keep running while a frontend build waits for its turn to regenerate shared files under `build/`.
+Production builds and development servers cannot run at the same time. Stop the active workflow with its corresponding `--stop` command before starting another one.
 :::
 
 To test it out inside Home Assistant, run the following command from the main Home Assistant repository:
