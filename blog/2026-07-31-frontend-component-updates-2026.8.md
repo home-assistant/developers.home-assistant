@@ -11,7 +11,7 @@ title: "Frontend component updates in 2026.8"
 
 We added `ha-split-panel`, a Home Assistant wrapper around the Web Awesome split panel component.
 
-Use it when a page, dialog, or tool needs a resizable two-pane layout.
+Use it when a Home Assistant page, dialog, or tool needs a resizable two-pane layout. Custom card authors can use Home Assistant frontend components, but internal Home Assistant UI APIs may change.
 
 ```html
 <ha-split-panel position="40" snap="50%">
@@ -138,8 +138,6 @@ entities:
 ```
 
 Use `color: state` for the old `state_color: true` behavior, and `color: none` for `state_color: false`.
-
-Existing `state_color` configs are migrated automatically. Custom card configs are not changed, because custom cards own their own config schema.
 
 ## Custom panels and apps
 
