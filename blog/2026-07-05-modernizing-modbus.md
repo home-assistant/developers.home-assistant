@@ -4,6 +4,10 @@ authorURL: https://github.com/balloob
 title: "Modernizing Modbus in Home Assistant"
 ---
 
+:::info Update — July 16, 2026
+We are re-evaluating the Home Assistant side of the approach described in this post. The foundation is unchanged: everything will still be built around the [`modbus-connection`](https://home-assistant-libs.github.io/modbus-connection/) PyPI package, and device libraries built on it remain the right investment. What we are rethinking is how connections surface inside Home Assistant itself, where we want to focus on being able to produce a better user experience. If you are working on a device integration, hold off on wiring it up to the `modbus_connection` integration described below — we will share the updated approach here soon.
+:::
+
 Modbus is everywhere in the modern home: solar inverters, energy meters, heat pumps, and all kinds of industrial equipment that has found its way indoors. Home Assistant has long supported these devices through the YAML-based `modbus` integration, where users hand-write register maps in their configuration. That integration is not going anywhere, and existing setups keep working. But hand-writing register maps puts the burden of understanding a device's protocol on every user, and it does not fit the config-flow, UI-first direction the rest of Home Assistant has taken.
 
 So we are adding a new way to use Modbus: an integration-based approach, where a device integration owns the device-specific knowledge and the user simply picks their device in the UI, the same as any other integration.
@@ -16,7 +20,7 @@ The new [`modbus_connection`](https://github.com/home-assistant/core/tree/dev/ho
 
 ## A standalone library
 
-The connection abstraction underneath `modbus_connection` lives in [`modbus-connection`](https://github.com/home-assistant-libs/modbus-connection), a new library we designed for this purpose and published on PyPI. It is not bound to Home Assistant and can be used standalone in any Python project. It presents a common, backend-neutral interface, so device library authors write against one API regardless of the underlying Modbus implementation, and it ships a device-modelling framework and a `pytest` plugin to make building and testing a device library straightforward.
+The connection abstraction underneath `modbus_connection` lives in [`modbus-connection`](https://home-assistant-libs.github.io/modbus-connection/), a new library we designed for this purpose and published on PyPI. It is not bound to Home Assistant and can be used standalone in any Python project. It presents a common, backend-neutral interface, so device library authors write against one API regardless of the underlying Modbus implementation, and it ships a device-modelling framework and a `pytest` plugin to make building and testing a device library straightforward.
 
 This keeps concerns where they belong. A device library is a normal PyPI package that knows how to talk to a specific device, and a consuming integration in Home Assistant wires that library up to a shared connection and exposes entities. Both can be developed and tested independently.
 

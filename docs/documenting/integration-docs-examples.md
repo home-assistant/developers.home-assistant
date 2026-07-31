@@ -88,11 +88,12 @@ To use this trigger in an automation:
 
 ### Options in the UI
 
-<!-- Note that there are no "required" or "type" fields for UI options, as you have in YAML. They are not rendered for the UI options. -->
+<!-- Note that there are no "type" or "default" fields for UI options, as you have in YAML. They are not rendered for the UI options. -->
 
 {% options_ui %}
 Threshold type:
   description: How much the brightness has to change before the trigger fires, as a percentage of full brightness. Can be a fixed number, or reference a helper entity that provides the value.
+  required: false
 {% endoptions_ui %}
 
 {% include triggers/yaml_header.md %}

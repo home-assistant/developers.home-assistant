@@ -162,7 +162,7 @@ Get details about an app
 | name                | string             | The name of the app                                                                 |
 | network             | dictionary or null | The network configuration for the app                                               |
 | network_description | dictionary or null | The description for the network configuration                                          |
-| options             | dictionary         | The app configuration                                                               |
+| options             | dictionary         | The app configuration. Redacted (empty dictionary) unless the caller is Home Assistant Core, the app requesting its own info, or an app with the `manager` or `admin` role, since the options may contain secrets such as passwords or API keys |
 | privileged          | list               | A list of hardwars/system attributes the app has access to                         |
 | protected           | boolean            | `true` if protection mode is enabled                                                   |
 | rating              | int                | The addon rating                                                                       |

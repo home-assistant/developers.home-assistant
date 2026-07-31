@@ -114,7 +114,7 @@ from homeassistant.components import ssdp
 ...
 
 entry.async_on_unload(
-    ssdp.async_register_callback(
+    await ssdp.async_register_callback(
         hass, _async_discovered_player, {"st": "urn:schemas-upnp-org:device:ZonePlayer:1"}
     )
 )
@@ -129,11 +129,34 @@ from homeassistant.const import MATCH_ALL
 ...
 
 entry.async_on_unload(
-    ssdp.async_register_callback(
+    await ssdp.async_register_callback(
         hass, _async_discovered_player, {"x-rincon-bootseq": MATCH_ALL}
     )
 )
 ```
+
+
+## DHCP
+
+Home Assistant provides built-in discovery via DHCP.
+
+Before using these helpers, be sure to add `dhcp` to `dependencies` in your integration's [`manifest.json`](creating_integration_manifest.md)
+
+### Obtaining the list of discovered devices
+
+To access the list of current DHCP discoveries, call the `dhcp.async_discovered_service_info` API. Only devices that are still in the DHCP cache are returned.
+
+```python
+from homeassistant.components import dhcp
+
+...
+
+service_infos = dhcp.async_discovered_service_info(hass)
+for service_info in service_infos:
+  ...
+```
+
+Each entry is a `DhcpServiceInfo` with `ip`, `hostname`, and `macaddress` attributes. Note that the `hostname` is always lowercase, and the `macaddress` is formatted as a lowercase string without colons (for example, `AA:BB:CC:12:34:56` is returned as `aabbcc123456`).
 
 
 ## Network
@@ -207,20 +230,6 @@ for adapter in adapters:
 
 The USB integration discovers new USB devices at startup, when the integrations page is accessed, and when they are plugged in if the underlying system has support for `pyudev`.
 
-### Checking if a specific adapter is plugged in
-
-Call the `async_is_plugged_in` API to check if a specific adapter is on the system.
-
-```python
-from homeassistant.components import usb
-
-...
-
-if not usb.async_is_plugged_in(hass, {"serial_number": "A1234", "manufacturer": "xtech"}):
-   raise ConfigEntryNotReady("The USB device is missing")
-
-```
-
 ### Knowing when to look for new compatible USB devices
 
 Call the `async_register_scan_request_callback` API to request a callback when new compatible USB devices may be available.
@@ -233,9 +242,9 @@ from homeassistant.core import callback
 
 @callback
 def _async_check_for_usb() -> None:
-    """Check for new compatible bluetooth USB adapters."""
+    """Check for new compatible USB adapters."""
 
 entry.async_on_unload(
-    bluetooth.async_register_scan_request_callback(hass, _async_check_for_usb)
+    usb.async_register_scan_request_callback(hass, _async_check_for_usb)
 )
 ```

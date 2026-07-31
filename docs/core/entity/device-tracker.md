@@ -13,7 +13,7 @@ The base class sets the `in_zones` state attribute. It will be populated with th
 
 The base class also sets the `tracking_type` capability attribute to `TrackingType.CONNECTION`.
 
-Derive a platform entity from [`homeassistant.components.device_tracker.config_entry.BaseScannerEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/device_tracker/config_entry.py)
+Derive a platform entity from [`homeassistant.components.device_tracker.BaseScannerEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/device_tracker/__init__.py)
 
 ### Properties
 
@@ -36,7 +36,7 @@ The base class also sets the `tracking_type` capability attribute to `TrackingTy
 
 ScannerEntity is based on BaseScannerEntity and is meant for tracking devices which connect to an IP network and can be identified by MAC address.
 
-Derive a platform entity from [`homeassistant.components.device_tracker.config_entry.ScannerEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/device_tracker/config_entry.py)
+Derive a platform entity from [`homeassistant.components.device_tracker.ScannerEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/device_tracker/__init__.py)
 
 ### Properties
 
@@ -64,7 +64,7 @@ A TrackerEntity tracks the location of a device and reports it either as a zone 
 
 The base class sets the `tracking_type` capability attribute to `TrackingType.POSITION`.
 
-Derive a platform entity from [`homeassistant.components.device_tracker.config_entry.TrackerEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/device_tracker/config_entry.py)
+Derive a platform entity from [`homeassistant.components.device_tracker.TrackerEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/device_tracker/__init__.py)
 
 ### Properties
 

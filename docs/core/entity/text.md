@@ -14,7 +14,7 @@ Properties should always only return information from memory and not do I/O (lik
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
 | mode | string | `text` | Defines how the text should be displayed in the UI. Can be `text` or `password`.
-| native_max | int | 100 | The maximum number of characters in the text value (inclusive).
+| native_max | int | 255 | The maximum number of characters in the text value (inclusive).
 | native_min | int | 0 | The minimum number of characters in the text value (inclusive).
 | pattern | str | `None` | A regex pattern that the text value must match to be valid.
 | native_value | str | **Required** | The value of the text.

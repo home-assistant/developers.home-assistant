@@ -105,6 +105,54 @@ occupancy_cleared:
       device_class: presence
 ```
 
+### Naming triggers
+
+Naming triggers consistently helps users predict how every integration behaves. A user who has learned how one integration names its triggers should be able to guess how another one does.
+
+The core principle is that a trigger names an event that just happened. It leads with the entity type and reads as a statement.
+
+Use a single, consistent entity type across all of an integration's triggers, conditions, and actions. This is the human-friendly name for the kind of device, for example "light", "fan", "cover", "lock", "alarm", "media player", "vacuum cleaner", "climate-control device", or "lawn mower". Do not mix variants such as "vacuum" and "vacuum cleaner", and always include the entity type, even for sensor-style and zone-style entries.
+
+#### Titles
+
+Lead with the entity type, then describe the event, following the pattern `[Entity type] [event]`. Choose the sub-pattern that fits the kind of event rather than forcing every event into the simple past tense.
+
+- **Punctual transition** — simple past tense, for instantaneous state changes: "Light turned on", "Door opened", "Lock locked", "Alarm armed", "Button pressed".
+- **Start or end of an ongoing activity** — `started` / `stopped` / `paused` plus a present participle, for an activity the device performs over time. Simple past would wrongly imply the activity finished ("Vacuum cleaned" sounds completed, "Vacuum cleaner started cleaning" does not): "Climate-control device started cooling", "Lawn mower started mowing", "Vacuum cleaner paused cleaning", "Battery started charging".
+- **Measurement change or threshold** — `[measurement] changed` or `[measurement] crossed threshold`: "Temperature changed", "Battery level crossed threshold", "Light brightness changed".
+- **Detection (binary sensors)** — `[phenomenon] detected` or `[phenomenon] cleared`: "Motion detected", "Smoke cleared".
+- **Status threshold** — `[Entity type] became [status]` or `[Entity type] no longer [status]`, for a device entering or leaving a status that has no natural past-tense verb. Do not leave these as bare adjectives such as "Battery low", which read as a state rather than an event: "Battery became low", "Battery no longer low", "Update became available", "Satellite became idle".
+
+Lead with the entity type even for sensor and zone triggers. Prefer "Dropdown selection changed" over "Selection changed", and "Zone entered" over "Entered zone".
+
+#### Descriptions
+
+Follow the pattern `Triggers when one or more [entity type plural] [present tense verb phrase].`
+
+- "Triggers when one or more lights turn on."
+- "Triggers when one or more lawn mowers start mowing."
+- "Triggers when one or more locks lock."
+
+Rules:
+
+- Open with "Triggers when". A trigger fires at the moment the event happens, so "when" is more natural and more accurate than "after".
+- Use "one or more [plural]", not "a" or a singular noun.
+- Use present tense verbs ("turn on", "ring", "return"), even though the title is past tense.
+- End with a period.
+
+#### Keys
+
+Keys are lowercase snake_case, and the key should match the meaning of its title.
+
+- **Punctual transition**: `turned_on`, `turned_off`, `opened`, `closed`, `locked`, `armed`, `pressed`.
+- **Activity start or end**: `started_cooling`, `started_mowing`, `paused_cleaning`, `started_charging`, `stopped_charging`.
+- **Measurement**: `level_changed`, `level_crossed_threshold`, `target_temperature_changed`, `target_temperature_crossed_threshold`.
+- **Detection**: `detected`, `cleared`.
+- **Status threshold**: `became_low`, `no_longer_low`, `became_available`. Do not use bare `low` or `not_low`; match the "became" wording of the title.
+- **Subtypes** prefix the noun: `awning_opened`, `blind_closed`, `co2_changed`.
+
+Do not repeat the domain in the key. In the update domain use `became_available`, not `update_became_available`. Do not use placeholder keys such as `_`.
+
 ## Conditions
 
 When an automation is triggered, it may have conditions that have to be met for the action to be executed.
@@ -201,3 +249,38 @@ door_state:
             - "on"
             - "off"
 ```
+
+### Naming conditions
+
+Conditions follow the same consistency principle as [triggers](#naming-triggers), reusing the integration's single, consistent entity type. The difference is that a condition tests a current state rather than naming an event. It leads with the entity type and reads as a statement.
+
+#### Titles
+
+Follow the pattern `[Entity type] is [state]`:
+
+- "Light is on"
+- "Climate-control device is cooling"
+- "Lock is locked"
+
+Use `[Entity type] is not [state]` for negation, for example "Media player is not playing".
+
+For value-based conditions, use the variant `[Entity type] [property]`, for example "Climate-control device target temperature" or "Media player volume". Include the entity type even for value conditions, and avoid bare property names such as "Volume".
+
+#### Descriptions
+
+Follow the pattern `Tests if one or more [entity type plural] are [state].`
+
+- "Tests if one or more lights are on."
+- "Tests if one or more locks are locked."
+
+For the value-based variant, use `Tests the [property] of one or more [entity type plural].`, for example "Tests the temperature of one or more entities."
+
+#### Keys
+
+Use the `is_` prefix for every condition. This keeps conditions visually distinct from triggers and actions.
+
+- **Boolean**: `is_on`, `is_off`, `is_locked`, `is_cooling`, `is_detected`.
+- **Negation**: `is_not_<state>`, such as `is_not_playing`, `is_not_low`, `is_not_detected`.
+- **Mode or specific value**: `is_hvac_mode`, `is_operation_mode`, `is_option_selected`.
+- **Value-based**: `is_<property>`, such as `is_target_temperature`, `is_brightness`, `is_value`. Keep the `is_` prefix here too.
+- **Subtypes**: `[subtype]_is_[state]`, such as `awning_is_closed`, `blind_is_open`.

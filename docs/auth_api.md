@@ -137,14 +137,21 @@ An HTTP status code of 400 will be returned if an invalid request has been issue
 :::tip
 `client_id` is not required to revoke a refresh token
 :::
-The token endpoint is also capable of revoking a refresh token. Revoking a refresh token will immediately revoke the refresh token and all access tokens that it has ever granted. To revoke a refresh token, make the following request:
+
+To revoke a refresh token, make an HTTP POST request to `http://your-instance.com/auth/revoke` with the request body encoded in `application/x-www-form-urlencoded`. Revoking a refresh token will immediately revoke the refresh token and all access tokens that it has ever granted. The request body is:
+
+```txt
+token=IJKLMNOPQRST
+```
+
+The request will always respond with an empty body and HTTP status 200, regardless of whether the request was successful.
+
+Previously, revocation was performed by sending `action=revoke` to the token endpoint (`/auth/token`). This form is deprecated but still works for backwards compatibility:
 
 ```txt
 token=IJKLMNOPQRST&
 action=revoke
 ```
-
-The request will always respond with an empty body and HTTP status 200, regardless of whether the request was successful.
 
 ## Long-lived access token
 
@@ -157,7 +164,6 @@ You can also generate a long-lived access token using the WebSocket command `aut
     "id": 11,
     "type": "auth/long_lived_access_token",
     "client_name": "GPS Logger",
-    "client_icon": null,
     "lifespan": 365
 }
 ```

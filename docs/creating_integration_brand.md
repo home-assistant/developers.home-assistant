@@ -20,8 +20,8 @@ Examples:
 
 ```json
 {
-  "domain": "innovelli",
-  "name": "Innovelli",
+  "domain": "inovelli",
+  "name": "Inovelli",
   "iot_standards": ["zigbee", "zwave"]
 }
 ```
@@ -52,7 +52,7 @@ A list of integration domains implementing offerings of the brand.
 
 ## IoT standards
 
-A list of IoT standards which are supported by devices of the brand. Possible values are `homekit`, `zigbee` and `zwave`. Note that a certain device may not support any of the listed IoT standards.
+A list of IoT standards which are supported by devices of the brand. Possible values are `homekit`, `matter`, `zigbee` and `zwave`. Note that a certain device may not support any of the listed IoT standards.
 
 ## Brand images
 
