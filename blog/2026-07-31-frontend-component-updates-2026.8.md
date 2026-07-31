@@ -2,7 +2,7 @@
 author: Jan-Philipp Benecke
 authorURL: https://github.com/jpbede
 authorImageURL: https://avatars.githubusercontent.com/u/3989428?s=96&v=4
-title: "Frontend component updates in 2026.7"
+title: "Frontend component updates in 2026.8"
 ---
 
 ## Component updates
