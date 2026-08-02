@@ -7,6 +7,10 @@ An image processing entity analyzes images from a camera entity, for example to 
 
 An image processing entity is derived from the [`homeassistant.components.image_processing.ImageProcessingEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/image_processing/__init__.py).
 
+:::tip
+Newer primitives cover many of this platform's historical use cases: AI-driven analysis of camera images is available through the [AI Task](/docs/core/entity/ai-task) platform, whose data generation action accepts image attachments, and devices or services with native detection capabilities typically model their detections with [event](/docs/core/entity/event) or [binary sensor](/docs/core/entity/binary-sensor) entities. Consider whether one of these fits before building new functionality on this platform.
+:::
+
 ## Updates
 
 Home Assistant polls image processing entities every 10 seconds by default. On each update cycle, the platform fetches a still image from the entity's source camera and passes it to the entity's processing method. Users can also trigger an immediate cycle with the `image_processing.scan` action.
