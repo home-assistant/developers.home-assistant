@@ -24,12 +24,12 @@ Properties should always only return information from memory and not do I/O (lik
 | latitude  | `float \| None` | `None`       | Latitude of the event.                                                         |
 | longitude | `float \| None` | `None`       | Longitude of the event.                                                        |
 
-Other properties that are common to all entities such as `icon`, `name` etc are also applicable.
+Other properties that are common to all entities such as `icon`, `name` etc. are also applicable.
 
 The `latitude`, `longitude` and `source` values are exposed as state attributes automatically; coordinates are rounded to five decimals.
 
 ## Lifecycle
 
-Unlike most entities, geolocation entities usually represent short-lived external events rather than devices: integrations add entities as new events appear in the external feed and remove them once the events are no longer reported. A common pattern is a manager that subscribes to feed updates and, on each update, adds entities for new events, updates existing ones, and removes entities for vanished events by calling their `async_remove` method.
+Unlike most entities, geolocation entities usually represent short-lived external events rather than devices: integrations add entities as new events appear in the external feed and remove them once the events are no longer reported. A common pattern is a manager that subscribes to feed updates and, on each update, adds entities for new events, updates existing ones, and removes entities for vanished events by calling their `async_remove(force_remove=True)` method — the `force_remove` flag ensures a registered entity is removed from the state machine entirely instead of lingering as unavailable. Entities created with a unique ID should also remove their entity registry entry.
 
 The [GDACS integration](https://github.com/home-assistant/core/blob/dev/homeassistant/components/gdacs/geo_location.py) is an example of this pattern, and the [demo platform](https://github.com/home-assistant/core/blob/dev/homeassistant/components/demo/geo_location.py) provides a minimal implementation.
