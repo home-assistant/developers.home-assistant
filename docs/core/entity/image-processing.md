@@ -14,6 +14,12 @@ Home Assistant polls image processing entities every 10 seconds by default. On e
 Implement either `process_image` or `async_process_image` to analyze the image and update the entity's state from the result:
 
 ```python
+class MyImageProcessing(ImageProcessingEntity):
+    """Representation of an image processing entity."""
+
+    def process_image(self, image: bytes) -> None:
+        """Process the given image."""
+
     async def async_process_image(self, image: bytes) -> None:
         """Process the given image."""
 ```
@@ -27,7 +33,7 @@ Properties should always only return information from memory and not do I/O (lik
 | Name          | Type            | Default      | Description                                                    |
 | ------------- | --------------- | ------------ | -------------------------------------------------------------- |
 | camera_entity | `str \| None`   | `None`       | Entity ID of the camera that provides the images to process.   |
-| confidence    | `float \| None` | `None`       | Minimum confidence (0-100) for detections to be reported.      |
+| confidence    | `float \| None` | `None`       | Confidence threshold (0-100). The base class does not apply it; how it is used is up to the entity implementation. |
 
 Other properties that are common to all entities such as `device_class`, `icon`, `name` etc are also applicable.
 
@@ -41,6 +47,6 @@ Other properties that are common to all entities such as `device_class`, `icon`,
 
 ## Face processing entities
 
-For face detection and recognition, derive from [`ImageProcessingFaceEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/image_processing/__init__.py) instead. Rather than setting the state directly, call `process_faces` (or `async_process_faces` from the event loop) with the list of detected faces and the total count. The base class manages the entity state from the detections and fires an `image_processing.detect_face` event for each face that meets the entity's `confidence` threshold.
+For face detection and recognition, derive from [`ImageProcessingFaceEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/image_processing/__init__.py) instead. Rather than setting the state directly, call `process_faces` (or `async_process_faces` from the event loop) with the list of detected faces and the total count. The base class manages the entity state from the detections, keeps all detected faces in the entity's state attributes regardless of confidence, and fires an `image_processing.detect_face` event for each face that meets the entity's `confidence` threshold.
 
-The [demo platform](https://github.com/home-assistant/core/blob/dev/homeassistant/components/demo/image_processing.py) provides minimal implementations of both entity types, and the [DOODS integration](https://github.com/home-assistant/core/blob/dev/homeassistant/components/doods/image_processing.py) is a fuller real-world example.
+The [demo platform](https://github.com/home-assistant/core/blob/dev/homeassistant/components/demo/image_processing.py) provides a minimal face-processing entity, and the [DOODS integration](https://github.com/home-assistant/core/blob/dev/homeassistant/components/doods/image_processing.py) is a real-world example of a plain image processing entity.
