@@ -347,7 +347,7 @@ yarn build --stop          # stop a running background build
 Use `yarn build --modern` when packaging, bundle-size, or browser performance work only needs the modern `frontend_latest` bundle. Add `--background` to run the modern-only build as a managed background process.
 
 :::caution
-Managed production builds and development servers cannot run at the same time. Stop the active managed workflow with its corresponding `--stop` command before starting another one.
+A managed production build cannot run at the same time as a managed development server. Before starting a different managed workflow, stop the active workflow with its corresponding `--stop` command.
 :::
 
 To test it out inside Home Assistant, run the following command from the main Home Assistant repository:
