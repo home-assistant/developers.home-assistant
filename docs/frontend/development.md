@@ -139,21 +139,14 @@ nvm install
 
 [Yarn](https://yarnpkg.com/en/) is used as the package manager for node modules. [Install yarn using the instructions here.](https://yarnpkg.com/getting-started/install)
 
-### Install development dependencies and fetch latest translations
+### Install development dependencies
 
-Bootstrap the frontend development environment by installing development dependencies and downloading the latest translations.
+Bootstrap the frontend development environment by installing development dependencies.
 
 ```shell
 nvm use
 script/bootstrap
-script/setup_translations
 ```
-
-:::note
-This needs to be done manually, even if you are using dev containers. Also, you will be asked to enter a code and authorize the script to fetch the latest translations.
-
-In case a previous authorization no longer works (for example, you see a "Bad Credentials" error during translation fetching), delete the `token.json` file in the `translations` folder and execute `script/setup_translations` again to retrigger the authorization process.
-:::
 
 :::note
 If you are using a development container, run these commands inside the container.
@@ -167,7 +160,7 @@ Run this command to build the frontend and run a development server:
 
 ```shell
 nvm use
-yarn dev
+yarn dev --fetch-translations
 ```
 
 When the build has completed, and Home Assistant Core has been set up correctly, the frontend will be accessible at `http://localhost:8123`. The server will automatically rebuild the frontend when you make changes to the source files.
@@ -182,7 +175,7 @@ Run this command to start the development server:
 
 ```shell
 nvm use
-yarn dev:serve -c https://homeassistant.local:8123
+yarn dev:serve --fetch-translations -c https://homeassistant.local:8123
 ```
 
 You may need to replace `https://homeassistant.local:8123` with your local Home Assistant url.
@@ -197,6 +190,10 @@ Both dev servers above (along with the demo, gallery, and end-to-end test app de
 | `--status`          | Report whether the dev server is running.                                                                                   |
 | `--logs [--follow]` | Print the dev server log, or tail it with `--follow`.                                                                       |
 | `--stop`            | Stop a running background dev server.                                                                                       |
+
+The app, locally served app, demo, and gallery commands also accept `--fetch-translations`. This fetches the latest translations before starting the server and prompts for GitHub authorization when no saved token is available. Translation fetching runs under the same workflow lock in foreground and background modes.
+
+If a previous authorization no longer works (for example, you see a "Bad Credentials" error), delete `translations/token.json` and start one of these commands with `--fetch-translations` again.
 
 For example:
 
