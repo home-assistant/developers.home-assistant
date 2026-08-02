@@ -216,6 +216,8 @@ Each dev server listens on its own port:
 | `yarn dev:gallery`      | 8100 | The [design gallery](/docs/frontend/design).                             |
 | `yarn test:e2e:app:dev` | 8095 | The stripped-down app used by the [end-to-end tests](#end-to-end-tests). |
 
+These managed Yarn development workflows, together with `yarn build` and `yarn build --modern`, share one workflow lock. Starting the same development workflow again reports the running server and succeeds. Starting another managed workflow while one is active is blocked and reports the active workflow with the relevant status, logs, or stop command.
+
 :::note
 When a coding agent is detected, `yarn dev:*` runs in the background automatically so it does not block the agent's session. Set `HA_DEV_BACKGROUND=0` to force the dev server to run in the foreground.
 
@@ -345,7 +347,7 @@ yarn build --stop          # stop a running background build
 Use `yarn build --modern` when packaging, bundle-size, or browser performance work only needs the modern `frontend_latest` bundle. Add `--background` to run the modern-only build as a managed background process.
 
 :::caution
-Production builds cannot run at the same time as `yarn dev` or `yarn dev:serve`. These commands share generated files under `build/` and `hass_frontend/`. Stop the running command with its corresponding `--stop` flag before starting another one.
+A managed production build cannot run at the same time as a managed development server. Before starting a different managed workflow, stop the active workflow with its corresponding `--stop` command.
 :::
 
 To test it out inside Home Assistant, run the following command from the main Home Assistant repository:
