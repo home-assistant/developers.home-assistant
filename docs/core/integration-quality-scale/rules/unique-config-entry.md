@@ -1,5 +1,6 @@
 ---
 title: "Don't allow the same device or service to be able to be set up twice"
+sidebar_label: 🥉 unique-config-entry
 related_rules:
   - config-flow
   - test-before-configure

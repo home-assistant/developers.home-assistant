@@ -1,5 +1,6 @@
 ---
 title: "The integration creates devices"
+sidebar_label: 🥇 devices
 related_rules:
   - has-entity-name
 ---

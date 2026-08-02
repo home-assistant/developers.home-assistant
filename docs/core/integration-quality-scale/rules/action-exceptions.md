@@ -1,5 +1,6 @@
 ---
 title: "Service actions raise exceptions when encountering failures"
+sidebar_label: 🥈 action-exceptions
 related_rules:
   - exception-translations
   - action-setup

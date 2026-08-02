@@ -1,5 +1,6 @@
 ---
 title: "The documentation provides troubleshooting information"
+sidebar_label: 🥇 docs-troubleshooting
 ---
 
 ## Reasoning
