@@ -23,6 +23,7 @@ Properties should always only return information from memory and not do I/O (lik
 | is_closed | `bool \| None` | **Required** | If the cover is closed or not. Used to determine `state`.
 | is_closing | `bool \| None` | `None` | If the cover is closing or not. Used to determine `state`.
 | is_opening | `bool \| None` | `None` | If the cover is opening or not. Used to determine `state`.
+| supported_speeds | `list[str] \| None` | `None` | The list of speeds supported for the `open_cover`, `close_cover`, and `set_cover_position` actions. `None` or an empty list means the cover does not support speed selection. When set to a non-empty list, the values are exposed as the `supported_speeds` capability attribute, and the `speed` parameter passed to the open/close/set position methods is validated against this list.
 
 ### States
 
@@ -67,6 +68,10 @@ and are combined using the bitwise or (`|`) operator.
 | `STOP_TILT`         | The cover supports stopping the current tilt action (open, close, set position)  |
 
 ## Methods
+
+:::note
+The `open_cover`, `close_cover`, and `set_cover_position` methods below receive their arguments via `**kwargs`. When the cover defines `supported_speeds`, a `speed` argument may be passed to these methods. The requested speed is automatically validated against `supported_speeds` and a `NotValidSpeedError` is raised if it is not supported. Integrations that support speed selection should read the value from `kwargs.get("speed")` and pass it on to the device.
+:::
 
 ### Open cover
 
