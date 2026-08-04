@@ -126,7 +126,7 @@ class MyUpdate(UpdateEntity):
 
 #### Release notes messages
 
-Use `release_notes_messages` when the update needs static guidance shown before the release notes, for example that a battery powered device may need to be woken up or that power must not be removed during installation. Home Assistant renders these messages as alerts before the value returned by `release_notes()` or `async_release_notes()`.
+Use `release_notes_messages` when the update needs static guidance shown before the release notes, for example that a battery-powered device may need to be woken up or that power must not be removed during installation. Home Assistant renders these messages as alerts before the value returned by `release_notes()` or `async_release_notes()`.
 
 This is only for guidance that accompanies release notes. The release notes themselves should still be returned by `release_notes()` or `async_release_notes()`.
 
@@ -176,7 +176,10 @@ RELEASE_NOTES_MESSAGE_NETWORK_RELIABILITY = UpdateReleaseNotesMessage(
     translation_key="network_reliability",
     severity=UpdateReleaseNotesMessageSeverity.WARNING,
     translation_placeholders={
-        "zha_docs_network_reliability": ZHA_DOCS_NETWORK_RELIABILITY,
+        "zha_docs_network_reliability": (
+            "https://www.home-assistant.io/integrations/zha/"
+            "#zigbee-interference-avoidance-and-network-rangecoverage-optimization"
+        ),
     },
 )
 ```

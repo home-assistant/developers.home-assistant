@@ -5,7 +5,7 @@ authorImageURL: https://avatars.githubusercontent.com/u/3989428?s=96&v=4
 title: "Translated release notes messages for update entities"
 ---
 
-Update entities can now provide translated alert messages that Home Assistant shows before the full release notes. Integrations can use these messages for static update guidance, such as warning users not to interrupt a firmware update or explaining that battery powered devices may need to be woken up before an update can start.
+Update entities can now provide translated alert messages that Home Assistant shows before the full release notes. Integrations can use these messages for static update guidance, such as warning users not to interrupt a firmware update or explaining that battery-powered devices may need to be woken up before an update can start.
 
 Previously, integrations that needed this kind of guidance often built `<ha-alert>` markup directly inside `release_notes()` or `async_release_notes()`. That duplicated wording across integrations, kept the text in English, and mixed static guidance with the actual release notes returned by the device or service.
 
