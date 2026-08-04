@@ -30,6 +30,7 @@ Properties should always only return information from memory and not do I/O (lik
 | latest_version | str | `None` | The latest version of the software available.
 | release_summary | str | `None` | Summary of the release notes or changelog. This is not suitable for long changelogs but merely suitable for a short excerpt update description of max 255 characters.
 | release_url | str | `None` | URL to the full release notes of the latest version available.
+| release_notes_messages | tuple[UpdateReleaseNotesMessage, ...] | `()` | Translated alert messages shown before the full release notes. This is for static update guidance, not for translating the release notes themselves.
 | title | str | `None` | Title of the software. This helps to differentiate between the device or entity name versus the title of the software installed.
 | update_percentage | int, float | `None` | Update installation progress. Can either return a number to indicate the progress from 0 to 100% or None.
 
@@ -122,6 +123,79 @@ class MyUpdate(UpdateEntity):
         """Return the release notes."""
         return "Lorem ipsum"
 ```
+
+#### Release notes messages
+
+Use `release_notes_messages` when the update needs static guidance shown before the release notes, for example that a battery powered device may need to be woken up or that power must not be removed during installation. Home Assistant renders these messages as alerts before the value returned by `release_notes()` or `async_release_notes()`.
+
+This is only for guidance that accompanies release notes. The release notes themselves should still be returned by `release_notes()` or `async_release_notes()`.
+
+For shared update guidance, use the predefined messages exported by the update platform:
+
+```python
+from homeassistant.components.update import (
+    RELEASE_NOTES_MESSAGE_BATTERY_POWERED,
+    RELEASE_NOTES_MESSAGE_DO_NOT_INTERRUPT,
+    UpdateEntity,
+)
+
+
+class MyUpdate(UpdateEntity):
+    _attr_release_notes_messages = (
+        RELEASE_NOTES_MESSAGE_BATTERY_POWERED,
+        RELEASE_NOTES_MESSAGE_DO_NOT_INTERRUPT,
+    )
+```
+
+For static cases, `UpdateEntityDescription` also accepts `release_notes_messages`:
+
+```python
+from homeassistant.components.update import (
+    RELEASE_NOTES_MESSAGE_DO_NOT_INTERRUPT,
+    UpdateEntityDescription,
+)
+
+UPDATE_DESCRIPTION = UpdateEntityDescription(
+    key="firmware",
+    release_notes_messages=(RELEASE_NOTES_MESSAGE_DO_NOT_INTERRUPT,),
+)
+```
+
+Integrations can define their own translated messages with `UpdateReleaseNotesMessage`:
+
+```python
+from homeassistant.components.update import (
+    UpdateReleaseNotesMessage,
+    UpdateReleaseNotesMessageSeverity,
+)
+
+from .const import DOMAIN
+
+RELEASE_NOTES_MESSAGE_NETWORK_RELIABILITY = UpdateReleaseNotesMessage(
+    translation_domain=DOMAIN,
+    translation_key="network_reliability",
+    severity=UpdateReleaseNotesMessageSeverity.WARNING,
+    translation_placeholders={
+        "zha_docs_network_reliability": ZHA_DOCS_NETWORK_RELIABILITY,
+    },
+)
+```
+
+Integration-specific messages are translated from the integration's `strings.json` under `entity.update.release_notes_messages`:
+
+```json
+{
+  "entity": {
+    "update": {
+      "release_notes_messages": {
+        "network_reliability": "If you are having issues updating a specific device, make sure that you have eliminated [common environmental issues]({zha_docs_network_reliability}) that could affect network reliability. OTA updates require a reliable network."
+      }
+    }
+  }
+}
+```
+
+By default, messages render as informational alerts. Set `severity` to `UpdateReleaseNotesMessageSeverity.WARNING` or `UpdateReleaseNotesMessageSeverity.ERROR` when the message needs stronger emphasis.
 
 ### Available device classes
 
