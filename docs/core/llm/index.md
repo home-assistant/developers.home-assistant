@@ -316,3 +316,34 @@ Each API is reachable at its own Streamable HTTP endpoint, addressed by its API 
 For example, the built-in Assist API is available at `/api/mcp/assist`, and a custom API registered with `llm.async_register_api` is available at `/api/mcp/<your API ID>`.
 
 These per-API endpoints require an admin access token, except for the Assist API. The MCP Server integration also exposes a single configured API at `/api/mcp` for clients that do not target a specific API by ID.
+
+### Listing the registered APIs
+
+Because these endpoints are addressed by API ID, clients need a way to find out which IDs exist. The registered APIs can be listed over the [WebSocket API](../../api/websocket):
+
+```json
+{
+  "id": 1,
+  "type": "llm/api/list"
+}
+```
+
+The server responds with the ID and name of every registered API, in registration order:
+
+```json
+{
+  "id": 1,
+  "type": "result",
+  "success": true,
+  "result": {
+    "apis": [
+      {
+        "id": "assist",
+        "name": "Assist"
+      }
+    ]
+  }
+}
+```
+
+The `id` of an API is the value used in `/api/mcp/<API ID>`, and the `name` is the name shown to the user. This command requires an admin user.
