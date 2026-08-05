@@ -17,9 +17,9 @@ Properties should always only return information from memory and not do I/O (lik
 | current_temperature     | `float \| None`      | `None`                               | The current temperature.                                                   |
 | fan_mode                | `str \| None`        | **Required by ClimateEntityFeature.FAN_MODE**     | The current fan mode.                                                      |
 | fan_modes               | `list[str] \| None`  | **Required by ClimateEntityFeature.FAN_MODE**     | The list of available fan modes.                                           |
-| hvac_action             | `HVACAction \| None` | `None`                               | The current HVAC action (heating, cooling)                                 |
-| hvac_mode               | `HVACMode \| None`   | **Required**                         | The current operation (for example, heat, cool, idle). Used to determine `state`.  |
-| hvac_modes              | `list[HVACMode]`         | **Required**                         | List of available operation modes. See below.                              |
+| hvac_action             | `HVACAction \| None` | `None`                               | The action currently being performed. See below.                                        |
+| hvac_mode               | `HVACMode \| None`   | **Required**                         | The selected operation mode. See below. Used to determine `state`.                      |
+| hvac_modes              | `list[HVACMode]`     | **Required**                         | List of available operation modes. See below.                                           |
 | max_humidity            | `float`                             | `DEFAULT_MAX_HUMIDITY` (value == 99) | The maximum humidity.                                                      |
 | max_temp                | `float`                             | `DEFAULT_MAX_TEMP` (value == 35 °C)  | The maximum temperature in `temperature_unit`.                             |
 | min_humidity            | `float`                             | `DEFAULT_MIN_HUMIDITY` (value == 30) | The minimum humidity.                                                      |
@@ -41,8 +41,11 @@ Properties should always only return information from memory and not do I/O (lik
 
 ### HVAC modes
 
+The HVAC mode is the behaviour that the device is requested to perform.
+
 You are only allowed to use the built-in HVAC modes, provided by the `HVACMode`
-enum. If you want another mode, add a preset instead.
+enum.
+For device options which modify how one or more of the modes behave, add a preset.
 
 
 | Name                 | Description                                                         |
@@ -57,18 +60,32 @@ enum. If you want another mode, add a preset instead.
 
 ### HVAC action
 
-The HVAC action describes the _current_ action. This is different from the mode, because if a device is set to heat, and the target temperature is already achieved, the device will not be actively heating anymore. It is only allowed to use the built-in HVAC actions, provided by the `HVACAction` enum.
+The HVAC action describes the _current_ action that the device is performing in order to fulfill the requested HVAC mode and preset,
+as determined by the device's own control algorithms.
 
-| Name                    | Description           |
-| ----------------------- | --------------------- |
-| `HVACAction.OFF`        | Device is turned off. |
-| `HVACAction.PREHEATING` | Device is preheating. |
-| `HVACAction.HEATING`    | Device is heating.    |
-| `HVACAction.COOLING`    | Device is cooling.    |
-| `HVACAction.DRYING`     | Device is drying.     |
-| `HVACAction.FAN`        | Device has fan on.    |
-| `HVACAction.IDLE`       | Device is idle.       |
-| `HVACAction.DEFROSTING` | Device is defrosting. |
+You are only allowed to use the built-in HVAC actions provided by the `HVACAction` enum.
+
+:::note
+It might not be possible to accurately determine the correct HVAC action unless the device reports additional information.
+For example:
+
+- A thermostat with hysteresis has an ambiguous temperature range near the target temperature where it may be performing an action or may be idle.
+- A variable power device might continue to operate at a reduced power level after the target temperature is reached, rather than becoming idle.
+
+For devices where the HVAC action cannot be accurately determined, do not implement `hvac_action`.
+:::
+
+
+| Name                    | Description                                                                                                 |
+| ----------------------- | ----------------------------------------------------------------------------------------------------------- |
+| `HVACAction.OFF`        | HVAC mode is `HVACMode.OFF`. The device will not perform any action unless the mode is changed.             |
+| `HVACAction.PREHEATING` | The device heat source is running, but is not at operating temperature yet.                                 |
+| `HVACAction.HEATING`    | The device is adding heat to the space.                                                                     |
+| `HVACAction.COOLING`    | The device is removing heat from the space.                                                                 |
+| `HVACAction.DRYING`     | The device is removing moisture from the air in the space.                                                  |
+| `HVACAction.FAN`        | The device has fan on to circulate or ventilate air only.                                                   |
+| `HVACAction.IDLE`       | The device is not currently performing any action, but may start performing an action if conditions change. |
+| `HVACAction.DEFROSTING` | The device is removing built up ice.                                                                        |
 
 ### Presets
 
