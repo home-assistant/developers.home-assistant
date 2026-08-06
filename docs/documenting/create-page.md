@@ -75,7 +75,7 @@ The following keys are available for the integration page file header:
   - `zwave`: Products connect through Z-Wave.
 - `ha_mqtt`: Set to `true` if the integration supports discovery via MQTT, omit otherwise.
 - `ha_platforms`: This entry lists all implemented [platforms](/docs/creating_platform_index).
-- `ha_quality_scale`: The integration's rating on the [quality scale](https://www.home-assistant.io/docs/quality_scale/) (such as bronze, silver, gold, platinum, or internal). For new integrations, set this to `bronze`. This field is automatically updated when the integration's quality level changes in Core. You don't need to update this manually in the documentation.
+- `ha_quality_scale`: The integration's rating on the [quality scale](https://www.home-assistant.io/docs/quality_scale/) (such as bronze, silver, gold, platinum, or internal). For new integrations, set this to `bronze`. This field is updated during documentation syncs from the Core codebase. You normally do not need to update it manually in the documentation.
 - `ha_release`: The Home Assistant release when the integration was included.
   - If the current release is 2025.8, make `ha_release` 2025.9.
   - For the October release, as in '2025.10', quote it with `' '`, otherwise the zero won't be displayed.
