@@ -2932,6 +2932,39 @@ The operating system version as well as its boot configuration will be preserved
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/os/ssh/authorized_keys" method="post">
+
+Set the SSH authorized keys for the root user of the Home Assistant Operating
+System debug console (port 22222). This API requires an admin token.
+
+The submitted list replaces the currently configured keys, an empty list
+removes all keys. The configured keys cannot be read back, this API is
+write-only.
+
+Each key must be a plain OpenSSH public key in the
+`<type> <base64-key> [comment]` format. Keys with options prepended and
+certificates are not supported. Supported key types are `ssh-ed25519`,
+`ssh-rsa`, `ecdsa-sha2-nistp256`, `ecdsa-sha2-nistp384`,
+`ecdsa-sha2-nistp521`, `sk-ssh-ed25519@openssh.com` and
+`sk-ecdsa-sha2-nistp256@openssh.com`. If any key fails validation the request
+is rejected and the configured keys remain unchanged.
+
+**Payload:**
+
+| key  | type | description                                              |
+| ---- | ---- | -------------------------------------------------------- |
+| keys | list | List of SSH public keys, replacing the configured keys   |
+
+**Example payload:**
+
+```json
+{
+  "keys": ["ssh-ed25519 AAAAC3NzaC1lZDI1NTE5AAAAIC1DJ0eanFjTRfsQV0EBEKAlSIzXVsxsPGWCk3EqrJ2F user@example.com"]
+}
+```
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/os/boards/{board}" method="get">
 
 Returns information about your board if it has features or settings
