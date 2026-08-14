@@ -234,22 +234,24 @@ The `content` key of a backup object contains the following keys:
 
 ## Issue
 
-| key       | type        | description                                         |
-| ----------| ----------- | --------------------------------------------------- |
-| uuid      | str         | A generated uuid as issue ID                        |
-| type      | str         | Type of the issue                                   |
-| context   | str         | In which context the issue occurs                   |
-| reference | str or null | Depend on the Context, a reference to another Model |
+| key             | type                | description                                                                                  |
+| --------------- | ------------------- | -------------------------------------------------------------------------------------------- |
+| uuid            | str                 | A generated uuid as issue ID                                                                 |
+| type            | str                 | Type of the issue                                                                            |
+| context         | str                 | In which context the issue occurs                                                            |
+| reference       | str or null         | Depends on the context; a reference to another model (e.g. an app slug)                      |
+| reference_extra | dict or null        | Additional context-specific metadata about the issue (e.g. which port is in conflict)        |
 
 ## Suggestion
 
-| key       | type        | description                                         |
-| ----------| ----------- | --------------------------------------------------- |
-| uuid      | str         | A generated uuid as suggestion ID                   |
-| type      | str         | Type of the suggestion                              |
-| context   | str         | In which context the suggestion occurs              |
-| reference | str or null | Depend on the Context, a reference to another Model |
-| auto      | bool        | True if the suggested fix will be auto-applied      |
+| key             | type                | description                                                                                  |
+| --------------- | ------------------- | -------------------------------------------------------------------------------------------- |
+| uuid            | str                 | A generated uuid as suggestion ID                                                            |
+| type            | str                 | Type of the suggestion                                                                       |
+| context         | str                 | In which context the suggestion occurs                                                       |
+| reference       | str or null         | Depends on the context; a reference to another model (e.g. an app slug)                      |
+| reference_extra | dict or null        | Additional context-specific metadata about the suggestion (e.g. which port to clear)         |
+| auto            | bool                | True if the suggested fix will be auto-applied                                               |
 
 ## Check
 

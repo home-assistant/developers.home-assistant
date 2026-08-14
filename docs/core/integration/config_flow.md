@@ -288,7 +288,7 @@ class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_reconfigure(self, user_input: dict[str, Any] | None = None):
         if user_input is not None:
             # TODO: process user input
-            self.async_set_unique_id(user_id)
+            await self.async_set_unique_id(user_id)
             self._abort_if_unique_id_mismatch()
             return self.async_update_reload_and_abort(
                 self._get_reconfigure_entry(),
@@ -366,7 +366,7 @@ class OAuth2FlowHandler(
 
     async def async_oauth_create_entry(self, data: dict) -> dict:
         """Create an oauth config entry or update existing entry for reauth."""
-        self.async_set_unique_id(user_id)
+        await self.async_set_unique_id(user_id)
         if self.source == SOURCE_REAUTH:
             self._abort_if_unique_id_mismatch()
             return self.async_update_reload_and_abort(

@@ -66,10 +66,10 @@ A `GenDataTask` object contains the following data:
 
 | Name | Type | Description
 | ---- | ---- | -----------
-| `task_name` | `str` | Name/identifier for the task
+| `name` | `str` | Name/identifier for the task
 | `instructions` | `str` | Natural language instructions for the AI
 | `structure` | `vol.Schema` \| `None` | Optional schema for structured output validation
-| `attachments` | `list[PlayMediaWithId]` | List of attachments to include in the task.
+| `attachments` | `list[conversation.Attachment]` \| `None` | List of attachments to include in the task.
 
 ### Generate Image
 

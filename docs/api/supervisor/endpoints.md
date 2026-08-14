@@ -162,7 +162,7 @@ Get details about an app
 | name                | string             | The name of the app                                                                 |
 | network             | dictionary or null | The network configuration for the app                                               |
 | network_description | dictionary or null | The description for the network configuration                                          |
-| options             | dictionary         | The app configuration                                                               |
+| options             | dictionary         | The app configuration. Redacted (empty dictionary) unless the caller is Home Assistant Core, the app requesting its own info, or an app with the `manager` or `admin` role, since the options may contain secrets such as passwords or API keys |
 | privileged          | list               | A list of hardwars/system attributes the app has access to                         |
 | protected           | boolean            | `true` if protection mode is enabled                                                   |
 | rating              | int                | The addon rating                                                                       |
@@ -2799,6 +2799,10 @@ Returns information about the OS.
 
 Update Home Assistant OS
 
+A reboot is required after this completes to finish the update. This can be done
+with a follow-up call to `/host/reboot` or let the user complete it on their schedule
+using the repair.
+
 **Payload:**
 
 | key     | type   | description                                                    |
@@ -3089,8 +3093,9 @@ firmware interface or the update is blocked on this board / boot device.
       "uuid": "A89924620F9A11EBBDC3C403FC2CA371",
       "type": "free_space",
       "context": "system",
-      "reference": null
-     }
+      "reference": null,
+      "reference_extra": null
+    }
   ],
   "suggestions": [
     {
@@ -3098,6 +3103,7 @@ firmware interface or the update is blocked on this board / boot device.
       "type": "clear_backups",
       "context": "system",
       "reference": null,
+      "reference_extra": null,
       "auto": false
     }
   ],
@@ -3144,6 +3150,7 @@ Get suggestions that would fix an issue if applied.
       "type": "clear_backups",
       "context": "system",
       "reference": null,
+      "reference_extra": null,
       "auto": false
     }
   ]

@@ -1,5 +1,6 @@
 ---
 title: "The integration dependency supports passing in a websession"
+sidebar_label: 🏆 inject-websession
 related_rules:
   - async-dependency
 ---

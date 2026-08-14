@@ -21,7 +21,7 @@ Other properties that are common to all entities such as `icon`, `name` etc are 
 
 ### Set value
 
-Called when the user or an automation wants to update the value. The input datetime will always be in UTC.
+Called when the user or an automation wants to update the value. The provided datetime will always be timezone-aware; a naive datetime is assumed to be in Home Assistant's configured time zone.
 
 ```python
 class MyDateTime(DateTimeEntity):

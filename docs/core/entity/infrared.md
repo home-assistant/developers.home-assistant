@@ -71,7 +71,7 @@ The `InfraredEmitterEntity.async_send_command` method must be implemented by emi
 class MyInfraredEmitter(InfraredEmitterEntity):
     """My infrared emitter."""
 
-    async def async_send_command(self, command: infrared_protocols.Command) -> None:
+    async def async_send_command(self, command: infrared_protocols.commands.Command) -> None:
         """Send an IR command.
 
         Args:
@@ -219,7 +219,7 @@ class MyRemote(InfraredReceiverConsumerEntity, EventEntity):
 
 ## IR commands
 
-The [`infrared-protocols`](https://github.com/home-assistant-libs/infrared-protocols) library provides command classes that convert protocol-specific data (NEC, RC-5, Pronto, etc.) to raw timings.
+The [`infrared-protocols`](https://github.com/home-assistant-libs/infrared-protocols) library provides command classes that convert protocol-specific data (NEC, RC-5, Kaseikyo, etc.) to raw timings.
 
 
 All IR commands inherit from `infrared_protocols.commands.Command` and implement `get_raw_timings()`.

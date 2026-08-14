@@ -5,6 +5,8 @@ sidebar_label: "Data"
 
 The frontend passes a single `hass` object around. This object contains the latest state, allows you to send commands back to the server and provides helpers to format entity state.
 
+Components that only need part of this data should consume the relevant [context](#context) instead.
+
 Whenever a state changes, a new version of the objects that changed are created. So you can easily see if something has changed by doing a strict equality check:
 
 ```js
@@ -23,31 +25,27 @@ This method of reading the `hass` object should only be used as a reference. In 
 
 ### Context
 
-The recommended way to get data from Home Assistant is to consume the available contexts. The most common context is the `states` context, which contains the states of all entities in Home Assistant. You can also create your own local contexts to pass data around.
+The recommended way for a component to get a specific part of Home Assistant data is to consume one of the available Lit contexts. You can also create local contexts to pass data within a component tree.
 
-To consume a context you fire a custom event with a callback to get registered at the context provider. The context provider sends you initial data and if you have subscribed to updates it will also send you updates whenever the data changes.
+Use Lit's `@consume` decorator to register with the context provider. The provider sends the initial value and, when `subscribe: true` is set, sends updates whenever the value changes.
 
 #### Available contexts
 
-- `connection`: hass connection information object
-- `states`: states of all entities in Home Assistant
-- `entities`: entities in Home Assistant
-- `extendedEntities`: entities of Home Assistant with extended context
-- `devices`: devices in Home Assistant
-- `areas`: areas in Home Assistant
-- `floors`: floors in Home Assistant
-- `labels`: labels in Home Assistant
-- `configEntries`: config entries of Home Assistant
-- `auth`: authentication information of Home Assistant
-- `localize`: function to localize a string
-- `locale`: Locale information
-- `config`: System configuration of Home Assistant
-- `themes`: Themes of Home Assistant
-- `selectedTheme`: Currently selected theme
-- `user`: The logged in user
-- `userData`: CoreFrontendUserData of the logged in user
-- `panels`: available panels of Home Assistant
+Contexts are exported from `src/data/context/index.ts`:
 
+- `statesContext`: states of all entities
+- `servicesContext`: available service actions
+- `registriesContext`: entity, device, area, and floor registries
+- `entitiesContext`, `devicesContext`, `areasContext`, and `floorsContext`: individual registry data
+- `internationalizationContext`: localization, locale settings, translation metadata, and translation loaders
+- `apiContext`: HTTP and WebSocket API methods
+- `connectionContext`: WebSocket connection state
+- `uiContext`: themes, panels, sidebar settings, and other global UI state
+- `configContext`: Home Assistant configuration, authentication, and user data
+- `formattersContext`: entity state, attribute, and name formatting methods
+- `narrowViewportContext`: whether the main viewport uses the narrow layout
+
+Some contexts are loaded only when a component first consumes them. These include `labelsContext`, `fullEntitiesContext`, `configEntriesContext`, `manifestsContext`, `triggerDescriptionsContext`, and `conditionDescriptionsContext`. Their backend subscriptions are removed after the last subscribing component disconnects.
 
 #### Consume a context in lit
 

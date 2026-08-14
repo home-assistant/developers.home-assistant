@@ -1,5 +1,6 @@
 ---
 title: "Entities are assigned an appropriate EntityCategory"
+sidebar_label: 🥇 entity-category
 ---
 
 ## Reasoning
