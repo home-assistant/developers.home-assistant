@@ -4,6 +4,8 @@ title: "Repairs"
 
 Home Assistant keeps track of issues which should be brought to the user's attention. These issues can be created by integrations or by Home Assistant itself. Issues can either be fixable via a RepairsFlow or by linking to a website with information on how the user can solve it themselves.
 
+Repair issues are also how a [deprecation](/docs/deprecating) is announced to users, which is one of their most common uses.
+
 ## Creating an issue
 
 ```python
