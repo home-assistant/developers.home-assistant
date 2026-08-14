@@ -2349,11 +2349,68 @@ Returns information about mounts configured in Supervisor
       "server": "server.local",
       "share": "media",
       "state": "active",
-      "read_only": false
+      "read_only": false,
+      "user_path": "/media/my_share"
+    },
+    {
+      "name": "media_disk",
+      "usage": "media",
+      "type": "disk",
+      "uuid": "d2f4a6c8-3b5e-4079-8a1c-6e9d2f4b7a30",
+      "filesystem": "ext4",
+      "state": "active",
+      "read_only": false,
+      "user_path": "/media/media_disk"
     }
   ]
 }
 ```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/mounts/candidates" method="get">
+Returns the local devices which could be added as a `disk` mount
+
+A device is left out when it holds no filesystem, uses a filesystem Supervisor
+cannot mount, belongs to Home Assistant OS itself, or is already used by another
+mount. A host without UDisks2 has nothing to offer and returns an empty list
+rather than an error.
+
+**Returned data:**
+
+| key        | type | description                                                            |
+| ---------- | ---- | ---------------------------------------------------------------------- |
+| candidates | list | A list of [Mount candidates](api/supervisor/models.md#mount-candidate) |
+
+**Example response:**
+
+```json
+{
+  "candidates": [
+    {
+      "device": "/dev/sdc1",
+      "uuid": "d2f4a6c8-3b5e-4079-8a1c-6e9d2f4b7a30",
+      "label": "Backups",
+      "filesystem": "ext4",
+      "size": 2000397795328,
+      "read_only": false,
+      "drive": {
+        "vendor": "Seagate",
+        "model": "Expansion",
+        "serial": "NA9BQ8X4",
+        "id": "Seagate-Expansion-NA9BQ8X4",
+        "size": 2000398934016,
+        "connection_bus": "usb",
+        "removable": true,
+        "ejectable": true
+      }
+    }
+  ]
+}
+```
+
+Supervisor versions without local disk mount support do not have this endpoint
+and answer 404.
 
 </ApiEndpoint>
 
@@ -2380,6 +2437,13 @@ Accepts a [Mount](api/supervisor/models.md#mount)
 
 Value in `name` must be unique and can only consist of letters, numbers and underscores.
 
+A `disk` mount must identify its device with exactly one of `device` or `uuid`.
+Supplying both, or neither, is rejected. A `filesystem` in the payload is ignored
+rather than rejected, so a value read from `/mounts` can be sent back unchanged:
+the filesystem is probed while the device is resolved through UDisks2, which is
+also what enforces the checks on whether a device may be mounted at all. Call
+`/mounts/candidates` to find the devices on offer.
+
 **Example payload:**
 
 ```json
@@ -2395,6 +2459,18 @@ Value in `name` must be unique and can only consist of letters, numbers and unde
 }
 ```
 
+**Example payload for a disk mount:**
+
+```json
+{
+  "name": "media_disk",
+  "usage": "media",
+  "type": "disk",
+  "device": "/dev/sdc1",
+  "read_only": false
+}
+```
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/mounts/<name>" method="put">
@@ -2406,6 +2482,14 @@ Accepts a [Mount](api/supervisor/models.md#mount).
 
 The `name` field should be omitted. If included the value must match the existing
 name, it cannot be changed. Delete and re-add the mount to change the name.
+
+The full configuration of the mount is validated, so every required field for its
+type must be present. Fields left out are not carried over from the existing
+mount, they take their default.
+
+For a `disk` mount, send back the `uuid` from the mount rather than a `device`: a
+mounted device is not offered as a candidate, and the UUID is what Supervisor
+stored for it.
 
 **Example payload:**
 
