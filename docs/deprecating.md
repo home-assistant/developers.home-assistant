@@ -16,9 +16,9 @@ A deprecation period may be extended if the ecosystem has not caught up, but it 
 Use `IssueSeverity.WARNING` for as long as the old behavior still works, and `IssueSeverity.ERROR` only once it has stopped, because the integration is gone or a migration failed and the user's configuration is no longer in effect. The same split applies to log levels when removing developer-facing features which can't raise a repair issue. 
 
 
-## Deprecating within an integration
+## User-facing deprecations
 
-Removals within an integration affect users, thus we raise a [repair issue](/docs/core/platform/repairs). Scope the `issue_id` per config entry when an integration can be set up more than once, otherwise the issues collide. After the deprecation period has ended, create a follow-up pull request removing the repair issue and old behavior.
+Every deprecation that needs input from the user gets a [repair issue](/docs/core/platform/repairs). Scope the `issue_id` per config entry when an integration can be set up more than once, otherwise the issues collide. After the deprecation period has ended, create a follow-up pull request removing the repair issue and old behavior.
 
 Every issue you register under your own domain needs a matching `issues.<translation_key>` entry in the integration's [`strings.json`](/docs/internationalization/core). Issues registered under `HOMEASSISTANT_DOMAIN`, such as `deprecated_yaml`, reuse text that already lives in core and need nothing locally.
 
@@ -220,9 +220,9 @@ The deprecation is announced through the repair issue and the release notes. Do 
 
 Test with the `issue_registry` fixture that the issue is created, and that it is deleted again when the last config entry unloads.
 
-## Deprecating core APIs
+## Developer-facing deprecations
 
-Deprecations in `homeassistant/` affect custom integration authors, who need a release cycle of their own to react. These get 12 months, and an announcement post on this site's [blog](/blog) naming the replacement if applicable and the removal version.
+Anything other integrations import or subclass counts as a core API, whether it lives in `homeassistant/helpers/`, `homeassistant/const.py`, or an entity platform such as `homeassistant/components/sensor/`. Deprecating one affects custom integration authors, who need a release cycle of their own to react. These get 12 months, and an announcement post on this site's [blog](/blog) naming the replacement if applicable and the removal version.
 
 These mechanisms log a warning attributed to the offending integration. They do **not** create a repair issue, as users cannot fix a custom integration's code.
 
