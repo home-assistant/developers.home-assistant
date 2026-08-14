@@ -8,12 +8,12 @@ Any removals must be deprecated first. This holds even when you believe only a h
 
 | Who is affected | Minimum period |
 | --- | --- |
-| Users (YAML configuration, actions, entities, attributes) | 6 months |
+| Users (YAML configuration, actions, entities, attributes, integrations) | 6 months |
 | Developers (constants, helpers, entity properties, platform APIs used by custom integrations) | 12 months |
 
 A deprecation period may be extended if the ecosystem has not caught up, but it is never shortened. State the release the removal happens in as `breaks_in_ha_version`, in the [calendar version format](/docs/versioning).
 
-Use `IssueSeverity.WARNING` for as long as the old behavior still works, and `IssueSeverity.ERROR` only once it has stopped, because the integration is gone or a migration failed and the user's configuration is no longer in effect. The same split applies to log levels when removing developer facing features which can't raise a repair issue. 
+Use `IssueSeverity.WARNING` for as long as the old behavior still works, and `IssueSeverity.ERROR` only once it has stopped, because the integration is gone or a migration failed and the user's configuration is no longer in effect. The same split applies to log levels when removing developer-facing features which can't raise a repair issue. 
 
 
 ## Deprecating within an integration
@@ -78,6 +78,8 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
             severity=ir.IssueSeverity.WARNING,
             translation_key="deprecated_ipv6",
         )
+
+    ...
 ```
 
 Once the period is over, do not just drop the key from the schema. Leave `cv.removed(CONF_IPV6)` in its place, which tells the user the option is gone instead of failing with a generic validation error.
@@ -173,7 +175,7 @@ The message has to name every place the entity might be used, not just automatio
 },
 "deprecated_entity_used": {
   "title": "[%key:component::example::issues::deprecated_entity::title%]",
-  "description": "The switch `{entity_id}` is deprecated because it has been replaced with `{new_entity_id}`.\n\nThe switch was used in the following automations or scripts:\n{items}\n\nUpdate the above automations or scripts to use the replacement entity, then disable the deprecated switch and restart Home Assistant."
+  "description": "The switch `{entity_id}` is deprecated because it has been replaced with `{new_entity_id}`.\n\nThe switch was used in the following automations or scripts:\n{items}\n\nUpdate the above, along with any dashboards and templates that use it, to use the replacement entity, then disable the deprecated switch and restart Home Assistant."
 }
 ```
 
@@ -204,7 +206,7 @@ The `entries` placeholder is a link to the user's existing config entries:
 ```json
 "integration_removed": {
   "title": "The Example integration has been removed",
-  "description": "The Example integration has been removed from Home Assistant, as the vendor shut down the API it relied on.\n\nTo resolve this issue, please remove the (now defunct) integration entries from your Home Assistant setup. [Click here to see your existing Example integration entries]({entries})."
+  "description": "The Example integration has been removed from Home Assistant, as the vendor shut down the API it relied on.\n\nTo resolve this issue, remove the (now defunct) integration entries from your Home Assistant setup. [Click here to see your existing Example integration entries]({entries})."
 }
 ```
 
@@ -260,6 +262,7 @@ class MediaPlayerState(
 ):
     """State of media player entities."""
 
+    OFF = "off"
     IDLE = "idle"
     STANDBY = "standby"
 ```
@@ -292,12 +295,24 @@ report_usage(
     "calls system_health.async_register_info, which is deprecated; "
     "add a system_health platform instead",
     breaks_in_ha_version="2027.1",
-    core_behavior=ReportBehavior.LOG,
+    core_behavior=ReportBehavior.ERROR,
     exclude_integrations={DOMAIN},
 )
 ```
 
-`what` is inserted into `Detected that integration 'domain' {what}`, so write it as a verb phrase. Pass `integration_domain` when you already know the offender to skip the stack walk, and set `core_integration_behavior=ReportBehavior.IGNORE` while you are still migrating core integrations.
+The first argument, `what`, is inserted into `Detected that integration 'domain' {what}`, so write it as a verb phrase.
+
+`report_usage()` runs in core, so it identifies the responsible integration by walking the call stack. That works when the integration called the deprecated function itself. It does not work when core merely reads something the integration set earlier, such as a deprecated entity property, because by then the integration is no longer on the stack. Pass `integration_domain` in that case, from an object that knows its own origin, such as `self.platform.platform_name` on an entity.
+
+Who gets what is controlled by three separate parameters, each taking a `ReportBehavior` of `IGNORE` (say nothing), `LOG` (log at `level`, once per caller) or `ERROR` (log and raise `RuntimeError`):
+
+| Parameter | Applies to | Default |
+| --- | --- | --- |
+| `core_behavior` | code in `homeassistant/` with no integration in the stack | `ERROR` |
+| `core_integration_behavior` | a built-in integration | `LOG` |
+| `custom_integration_behavior` | a custom integration | `LOG` |
+
+The defaults are what you usually want: core code fails loudly in tests, while integrations only get a warning. Lower `core_integration_behavior` to `IGNORE` while you are still migrating built-in integrations, so the warning reaches custom integration authors without flooding logs with offenders you are already fixing.
 
 ### Testing
 

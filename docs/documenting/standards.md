@@ -16,7 +16,7 @@ Documentation should follow the [documentation style guide](/docs/documenting/ge
 
 ### Deprecated features or integrations
 
-When a feature is deprecated or an integration is removed from Home Assistant, remove its documentation. See [deprecating](/docs/deprecating) for how a deprecation is carried out in the first place.
+When a feature is deprecated or an integration is removed from Home Assistant, remove its documentation. To carry out the deprecation itself, follow [deprecating](/docs/deprecating).
 
 - If a feature is deprecated, remove the related section from the integration page.
 - Do not add a deprecation notice to the documentation.
