@@ -52,7 +52,7 @@ The architecture used in `--platform` option is not the same as the one used in 
 
 :::
 
-4. On your remote system change the channel to `dev` with `ha supervisor --channel dev` or just `supervisor --channel dev` if it's Home Assistant OS.
+4. On your remote system change the channel to `dev` with `ha supervisor options --channel dev` or just `supervisor options --channel dev` if it's Home Assistant OS.
 5. Pull down your Supervisor image:
 
 ```bash
@@ -71,8 +71,8 @@ Docker images uploaded to GHCR are by default private. To download them, you wil
 docker tag ghcr.io/YOUR_GH_USERNAME/aarch64-hassio-supervisor:latest ghcr.io/home-assistant/aarch64-hassio-supervisor:latest
 ```
 
-7. Restart the `hassio-supervisor` service with `systemctl restart hassos-supervisor`
-8. Check for issues with `journalctl -fu hassos-supervisor`
+7. Restart the `haos-supervisor` service with `systemctl restart haos-supervisor`
+8. Check for issues with `journalctl -fu haos-supervisor`
 
 ## Integration development
 
