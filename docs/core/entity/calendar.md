@@ -202,6 +202,7 @@ A `CalendarEvent` represents an individual event on a calendar.
 | uid | string | `None` | A unique identifier for the event (required for mutations) |
 | recurrence_id | string | `None` | An optional identifier for a specific instance of a recurring event (required for mutations of recurring events) |
 | rrule |  string | `None` | A recurrence rule string, for example, `FREQ=DAILY` |
+| status | `CalendarEventStatus` | `None` | The rfc5545 status of the event, one of `confirmed`, `tentative`, or `cancelled`. Leave unset when the calendar does not report a status, which is not the same as a confirmed event. |
 
 ## Color management
 
