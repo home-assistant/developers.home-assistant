@@ -212,8 +212,8 @@ An integration does not hide events because of their status. Whether a cancelled
 
 Calendar systems differ in what a cancelled event means, which affects what an integration is able to report:
 
-- Under rfc5545 a cancelled event stays in the calendar, so CalDAV and iCalendar sources report it with a status of `cancelled`.
-- The Google Calendar API uses `cancelled` to mean deleted, and such events are already dropped before they reach the integration, which therefore only reports `confirmed` or `tentative`.
+- In rfc5545, `CANCELLED` describes the status of an event rather than its removal, so a calendar can keep the event and report that status. CalDAV and iCalendar sources commonly do, and those events are reported with a status of `cancelled`.
+- In the Google Calendar API, `cancelled` marks an event as deleted. `gcal_sync` drops those events when it builds the timeline, so the integration only reports `confirmed` or `tentative`.
 
 ## Color management
 
