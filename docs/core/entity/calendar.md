@@ -204,6 +204,17 @@ A `CalendarEvent` represents an individual event on a calendar.
 | rrule |  string | `None` | A recurrence rule string, for example, `FREQ=DAILY` |
 | status | `CalendarEventStatus` | `None` | The rfc5545 status of the event, one of `confirmed`, `tentative`, or `cancelled`. Leave unset when the calendar does not report a status, which is not the same as a confirmed event. |
 
+### Event status
+
+The `status` of an event is the rfc5545 `STATUS` property. An integration reports the status its calendar reports, and leaves it unset when the calendar does not provide one. An unset status is not the same as a confirmed event, so consumers should not treat it as one.
+
+An integration does not hide events because of their status. Whether a cancelled event is shown, hidden, or styled differently is a presentation decision, and it belongs to the consumer rather than to the integration.
+
+Calendar systems differ in what a cancelled event means, which affects what an integration is able to report:
+
+- Under rfc5545 a cancelled event stays in the calendar, so CalDAV and iCalendar sources report it with a status of `cancelled`.
+- The Google Calendar API uses `cancelled` to mean deleted, and such events are already dropped before they reach the integration, which therefore only reports `confirmed` or `tentative`.
+
 ## Color management
 
 Calendar entities can optionally provide a default color for display in the frontend by setting `initial_color` to a hex color string (e.g., `"#16a765"`). This color is automatically stored in entity registry options when the entity is first added and can be customized by users through the entity settings UI.
