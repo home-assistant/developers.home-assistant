@@ -175,6 +175,7 @@ You can also use HTML:
 
 - To invert the image colors when the documentation is viewed in dark mode, use HTML with the `invertDark` class.
 - To include a caption, put it in the `<p>` tag.
+- To prevent an image from opening in the lightbox, add the `data-no-lightbox` attribute to the `<img>` tag or to a parent element.
 
 For example:
 
