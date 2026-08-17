@@ -2025,58 +2025,106 @@ Shutdown the host
 <ApiEndpoint path="/host/disks/<disk>/usage" method="get">
 Get detailed disk usage information in bytes.
 
-The only supported `disk` for now is "default". It will return usage info for the data disk.
+`disk` selects what is measured. Use `default` for the data disk, or the name of a
+mount to measure that mount. `default` always addresses the data disk, so a mount
+of that name cannot be reached through this endpoint.
 
-Supports an optional `max_depth` query param. Defaults to 1
+Supports an optional `max_depth` query param, which controls how far the breakdown
+goes. It defaults to 1 for the data disk and 0 for a mount.
+
+The data disk reports its known top-level paths as children, and `max_depth`
+controls how far the breakdown continues inside them.
+
+A mount has no such fixed layer, so it is measured by walking its directories, and
+a directory is only listed while more than one level of depth remains. A
+`max_depth` of 0 or 1 therefore returns totals only, the first level of
+directories appears at 2, and every level below that needs one more.
+
+When a mount lists children, an `other` child carries whatever the walk did not
+attribute to a directory: files directly at the mount root, reserved space, and
+entries that could not be read. It is left out when that remainder is not
+positive, so the children of a node always sum to its own `used_bytes`.
+
+Requesting usage for a mount which does not exist returns a `404`. Requesting it
+for a mount which is not active returns a `400`, as does a mount which cannot be
+read or which does not answer within 60 seconds.
 
 **Example response:**
 
 ```json
 {
   "id": "root",
-  "label": "Default",
-  "total_space": 503312781312,
-  "used_space": 430245011456,
+  "label": "Root",
+  "total_bytes": 503312781312,
+  "used_bytes": 430245011456,
   "children": [
     {
       "id": "system",
       "label": "System",
-      "used_space": 75660903137
+      "used_bytes": 75660903137
     },
     {
       "id": "addons_data",
       "label": "Addons data",
-      "used_space": 42349200762
+      "used_bytes": 42349200762
     },
     {
       "id": "addons_config",
       "label": "Addons configuration",
-      "used_space": 5283318814
+      "used_bytes": 5283318814
     },
     {
       "id": "media",
       "label": "Media",
-      "used_space": 476680019
+      "used_bytes": 476680019
     },
     {
       "id": "share",
       "label": "Share",
-      "used_space": 37477206419
+      "used_bytes": 37477206419
     },
     {
       "id": "backup",
       "label": "Backup",
-      "used_space": 268350699520
+      "used_bytes": 268350699520
     },
     {
       "id": "ssl",
       "label": "SSL",
-      "used_space": 202912633
+      "used_bytes": 202912633
     },
     {
       "id": "homeassistant",
       "label": "Home assistant",
-      "used_space": 444090152
+      "used_bytes": 444090152
+    }
+  ]
+}
+```
+
+**Example response for a mount**, requested with `max_depth=2`:
+
+```json
+{
+  "id": "media_nas",
+  "label": "media_nas",
+  "total_bytes": 2000398934016,
+  "used_bytes": 1240247081779,
+  "children": [
+    {
+      "id": "music",
+      "label": "music",
+      "used_bytes": 402653184000
+    },
+    {
+      "id": "movies",
+      "label": "movies",
+      "used_bytes": 800000000000
+    },
+    {
+      "id": "other",
+      "label": "Other",
+      "used_bytes": 37593897779
     }
   ]
 }
