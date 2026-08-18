@@ -1202,7 +1202,7 @@ Returns information about the Home Assistant core
   "ip_address": "172.0.0.15",
   "image": "homeassistant/home-assistant",
   "boot": true,
-  "port": 8123,
+  "port": 80,
   "ssl": false,
   "watchdog": true,
   "wait_boot": 800,
