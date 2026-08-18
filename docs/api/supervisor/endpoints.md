@@ -2042,12 +2042,17 @@ directories appears at 2, and every level below that needs one more.
 
 When a mount lists children, an `other` child carries whatever the walk did not
 attribute to a directory: files directly at the mount root, reserved space, and
-entries that could not be read. It is left out when that remainder is not
-positive, so the children of a node always sum to its own `used_bytes`.
+entries that could not be read. When that remainder is positive, the children of
+a node sum exactly to its own `used_bytes`. If the filesystem changes while it
+is being walked, the directory totals can exceed `used_bytes`; in that case
+`other` is left out.
 
-Requesting usage for a mount which does not exist returns a `404`. Requesting it
-for a mount which is not active returns a `400`, as does a mount which cannot be
-read or which does not answer within 60 seconds.
+Requesting usage for a mount which does not exist returns a `404`. A `400` is
+returned for a mount which is not active, is no longer actually mounted even
+though its unit still reports active, cannot be read, or whose usage probe has
+not completed within 60 seconds. The probe keeps running after that timeout, so
+retrying the request joins the probe already underway instead of starting a new
+one.
 
 **Example response:**
 
