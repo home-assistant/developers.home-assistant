@@ -307,6 +307,7 @@ module.exports = {
         "development_validation",
         "development_typing",
         "instance_url",
+        "deprecating",
         "versioning",
       ],
     },
