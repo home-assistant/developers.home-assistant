@@ -2044,8 +2044,9 @@ When a mount lists children, an `other` child carries whatever the walk did not
 attribute to a directory: files directly at the mount root, reserved space, and
 entries that could not be read. When that remainder is positive, the children of
 a node sum exactly to its own `used_bytes`. If the filesystem changes while it
-is being walked, the directory totals can exceed `used_bytes`; in that case
-`other` is left out.
+is being walked, the directory totals can disagree with `used_bytes`; in that
+case the breakdown is left out entirely and only the totals are reported, so
+the children never sum past their parent.
 
 Requesting usage for a mount which does not exist returns a `404`. A `400` is
 returned for a mount which is not active, is no longer actually mounted even
