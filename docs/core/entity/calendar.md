@@ -202,6 +202,13 @@ A `CalendarEvent` represents an individual event on a calendar.
 | uid | string | `None` | A unique identifier for the event (required for mutations) |
 | recurrence_id | string | `None` | An optional identifier for a specific instance of a recurring event (required for mutations of recurring events) |
 | rrule |  string | `None` | A recurrence rule string, for example, `FREQ=DAILY` |
+| status | `CalendarEventStatus` | `None` | The status of the event, either `confirmed` or `tentative`. Leave unset when the calendar does not report a status, which is not the same as a confirmed event. |
+
+### Event status
+
+The `status` of an event is a subset of the rfc5545 `STATUS` property. An integration reports the status its calendar reports, and leaves it unset when the calendar does not provide one. An unset status is not the same as a confirmed event, so consumers should not treat it as one.
+
+A calendar entity does not return cancelled events, so `cancelled` is not part of the supported set. Where a source keeps cancelled events instead of deleting them, the integration filters them out rather than reporting them with a status.
 
 ## Color management
 
