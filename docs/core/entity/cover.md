@@ -61,6 +61,7 @@ and are combined using the bitwise or (`|`) operator.
 | `OPEN`              | The cover supports being opened.                                                 |
 | `CLOSE`             | The cover supports being closed.                                                 |
 | `SET_POSITION`      | The cover supports moving to a specific position between opened and closed.      |
+| `SPEED`             | The cover supports passing a speed parameter to open, close, set_position actions     |
 | `STOP`              | The cover supports stopping the current action (open, close, set position)       |
 | `OPEN_TILT`         | The cover supports being tilting open.                                           |
 | `CLOSE_TILT`        | The cover supports being tilting closed.                                         |
@@ -70,7 +71,7 @@ and are combined using the bitwise or (`|`) operator.
 ## Methods
 
 :::note
-The `open_cover`, `close_cover`, and `set_cover_position` methods below receive their arguments via `**kwargs`. When the cover defines `supported_speeds`, a `speed` argument may be passed to these methods. The requested speed is automatically validated against `supported_speeds` and a `NotValidSpeedError` is raised if it is not supported. Integrations that support speed selection should read the value from `kwargs.get("speed")` and pass it on to the device.
+The `open_cover`, `close_cover`, and `set_cover_position` methods below receive their arguments via `**kwargs`. When the cover defines `supported_speeds`, a `speed` argument may be passed to these methods. The requested speed is automatically validated against `supported_speeds` and a `ServiceValidationError` is raised if it is not supported. Integrations that support speed selection should read the value from `kwargs.get("speed")` and pass it on to the device.
 :::
 
 ### Open cover
