@@ -2388,6 +2388,7 @@ rather than an error.
 {
   "candidates": [
     {
+      "type": "disk",
       "device": "/dev/sdc1",
       "uuid": "d2f4a6c8-3b5e-4079-8a1c-6e9d2f4b7a30",
       "label": "Backups",
@@ -2397,8 +2398,8 @@ rather than an error.
       "drive": {
         "vendor": "Seagate",
         "model": "Expansion",
-        "serial": "NA9BQ8X4",
-        "id": "Seagate-Expansion-NA9BQ8X4",
+        "serial": "1234567890",
+        "id": "Seagate-Expansion-1234567890",
         "size": 2000398934016,
         "connection_bus": "usb",
         "removable": true,
@@ -2437,12 +2438,14 @@ Accepts a [Mount](api/supervisor/models.md#mount)
 
 Value in `name` must be unique and can only consist of letters, numbers and underscores.
 
-A `disk` mount must identify its device with exactly one of `device` or `uuid`.
-Supplying both, or neither, is rejected. A `filesystem` in the payload is ignored
-rather than rejected, so a value read from `/mounts` can be sent back unchanged:
-the filesystem is probed while the device is resolved through UDisks2, which is
-also what enforces the checks on whether a device may be mounted at all. Call
-`/mounts/candidates` to find the devices on offer.
+A `disk` mount identifies its device with `device`, `uuid`, or both; supplying
+neither is rejected. When both are given the device is resolved by `uuid` and
+the `device` path must agree with it, so an entry from `/mounts/candidates` can
+be sent back as-is with a `name` and `usage` added. A `filesystem` in the
+payload is ignored rather than rejected, so a value read from `/mounts` can be
+sent back unchanged: the filesystem is probed while the device is resolved
+through UDisks2, which is also what enforces the checks on whether a device may
+be mounted at all. Call `/mounts/candidates` to find the devices on offer.
 
 **Example payload:**
 

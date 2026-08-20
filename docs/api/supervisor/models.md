@@ -308,14 +308,16 @@ The `content` key of a backup object contains the following keys:
 Request only fields may be included in requests but will never be in responses.
 Response only fields will be in responses but cannot be included in requests.
 
-A disk mount is identified by exactly one of `device` or `uuid`. `device` is only
-an input: Supervisor resolves it to the UUID it stores, so responses report `uuid`
-and `filesystem` instead.
+A disk mount is identified by `device`, `uuid`, or both — when both are given,
+resolution goes by `uuid` and the `device` path must agree with it. `device` is
+only an input: Supervisor resolves it to the UUID it stores, so responses report
+`uuid` and `filesystem` instead.
 
 ## Mount candidate
 
 | key        | type           | description                                                            |
 | ---------- | -------------- | ---------------------------------------------------------------------- |
+| type       | string         | Mount type the candidate can be added as, currently always `disk`      |
 | device     | string         | Path of the device, such as `/dev/sdc1`                                |
 | uuid       | string         | Filesystem UUID of the device                                          |
 | label      | string         | Filesystem label, empty when the filesystem has none                   |
