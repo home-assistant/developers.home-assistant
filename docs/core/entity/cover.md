@@ -61,7 +61,7 @@ and are combined using the bitwise or (`|`) operator.
 | `OPEN`              | The cover supports being opened.                                                 |
 | `CLOSE`             | The cover supports being closed.                                                 |
 | `SET_POSITION`      | The cover supports moving to a specific position between opened and closed.      |
-| `SPEED`             | The cover supports passing a speed parameter to open, close, set_position actions     |
+| `SPEED`             | The cover supports passing a speed parameter to open, close and set_position actions     |
 | `STOP`              | The cover supports stopping the current action (open, close, set position)       |
 | `OPEN_TILT`         | The cover supports being tilting open.                                           |
 | `CLOSE_TILT`        | The cover supports being tilting closed.                                         |
