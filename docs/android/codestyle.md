@@ -45,6 +45,42 @@ You can use KTLint through Gradle to automatically reformat your code:
 
 If a KTLint error is detected, the CI will fail, and GitHub will report it as a comment in the PR using the generated [SARIF](/docs/android/tips/sarif_reports.md) report.
 
+## Detekt static analysis
+
+While KTLint handles Kotlin formatting and style, [Detekt](https://detekt.dev/) performs static analysis for maintainability and correctness issues.
+
+### Running Detekt
+
+Run type-resolved analysis for production code across the entire repository, including the convention plugins in the included build:
+
+```bash
+./gradlew detektMain :build-logic:convention:detektMain --continue
+```
+
+For focused Android analysis, use `:<module>:detekt<Variant>`. For example:
+
+```bash
+./gradlew :app:detektFullDebug
+```
+
+To generate or update the corresponding baselines, run:
+
+```bash
+./gradlew detektBaselineMain :build-logic:convention:detektBaselineMain --continue
+```
+
+To refresh only one Android variant baseline, use `:<module>:detektBaseline<Variant>`. For example:
+
+```bash
+./gradlew :app:detektBaselineFullDebug
+```
+
+### CI integration
+
+Existing findings are recorded in baselines. Android modules use per-variant files such as `detekt-baseline-fullDebug.xml`, while JVM modules use source-set-specific files such as `detekt-baseline-main.xml`. New Detekt violations fail CI and are reported using the generated [SARIF](/docs/android/tips/sarif_reports.md) report.
+
+The generic `detekt` task and its baseline remain because the Detekt Gradle plugin includes that task in `check`.
+
 ## Yamllint
 
 We use [Yamllint](https://github.com/adrienverge/yamllint) to enforce YAML formatting. The `github` format is followed for all YAML files in the repository.
