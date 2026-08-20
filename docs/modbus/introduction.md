@@ -45,9 +45,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: MyConfigEntry) -> bool:
 
 Two integrations that ask with equal credentials get units over the same
 connection, so their requests serialize behind its lock rather than contending
-for the device. The parameters identify the device by their `endpoint`, which
-excludes link settings such as framing and baud rate, and folds the host's case,
-so `Device.local` and `device.local` are one device rather than two.
+for the device.
 
 Your integration collects its own credentials in its own config flow, and passes
 them here. Nothing is persisted: a connection exists only while somebody holds a
