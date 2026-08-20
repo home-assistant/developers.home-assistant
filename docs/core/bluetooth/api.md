@@ -92,6 +92,35 @@ entry.async_on_unload(
 )
 ```
 
+#### Controlling history replay order
+
+When a callback is registered, the Bluetooth integration replays cached
+advertisements so the new subscriber immediately sees all known devices. The
+order and whether replay happens at all can be controlled with the `replay`
+keyword argument, which accepts a `BluetoothCallbackReplay` value:
+
+| Value | Behavior |
+|---|---|
+| `OLDEST_FIRST` (default) | Replays advertisements in the order they were first seen. |
+| `NEWEST_FIRST` | Replays the most recent advertisement first. Useful when the consumer wants to act on the current device state immediately. |
+| `DISABLED` | Skips replay entirely. Useful for consumers that only care about live advertisements going forward. |
+
+```python
+from homeassistant.components import bluetooth
+
+...
+
+entry.async_on_unload(
+    bluetooth.async_register_callback(
+        hass,
+        _async_discovered_device,
+        {"service_uuid": "cba20d00-224d-11e6-9fb8-0002a5d5c51b", "connectable": False},
+        bluetooth.BluetoothScanningMode.ACTIVE,
+        replay=bluetooth.BluetoothCallbackReplay.NEWEST_FIRST,
+    )
+)
+```
+
 ### Fetch the shared BleakScanner instance
 
 Integrations that need an instance of a `BleakScanner` should call the `bluetooth.async_get_scanner` API. This API returns a wrapper around a single `BleakScanner` that allows integrations to share without overloading the system.

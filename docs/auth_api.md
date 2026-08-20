@@ -48,7 +48,7 @@ Optionally you can also include a `state` parameter, this will be added to the r
 http://your-instance.com/auth/authorize?
     client_id=https%3A%2F%2Fhass-auth-demo.glitch.me&
     redirect_uri=https%3A%2F%2Fhass-auth-demo.glitch.me%2Fauth_callback&
-    state=http%3A%2F%2Fhomeassistant.local%3A8123
+    state=http%3A%2F%2Fhomeassistant.local
 ```
 
 The user will navigate to this link and be presented with instructions to log in and authorize your application. Once authorized, the user will be redirected back to the passed-in redirect URI with the authorization code and state as part of the query parameters. Example:
@@ -56,7 +56,7 @@ The user will navigate to this link and be presented with instructions to log in
 ```txt
 https://hass-auth-demo.glitch.me/auth_callback?
     code=12345&
-    state=http%3A%2F%2Fhomeassistant.local%3A8123
+    state=http%3A%2F%2Fhomeassistant.local
 ```
 
 This authorization code can be exchanged for tokens by sending it to the token endpoint (see next section).
@@ -137,14 +137,21 @@ An HTTP status code of 400 will be returned if an invalid request has been issue
 :::tip
 `client_id` is not required to revoke a refresh token
 :::
-The token endpoint is also capable of revoking a refresh token. Revoking a refresh token will immediately revoke the refresh token and all access tokens that it has ever granted. To revoke a refresh token, make the following request:
+
+To revoke a refresh token, make an HTTP POST request to `http://your-instance.com/auth/revoke` with the request body encoded in `application/x-www-form-urlencoded`. Revoking a refresh token will immediately revoke the refresh token and all access tokens that it has ever granted. The request body is:
+
+```txt
+token=IJKLMNOPQRST
+```
+
+The request will always respond with an empty body and HTTP status 200, regardless of whether the request was successful.
+
+Previously, revocation was performed by sending `action=revoke` to the token endpoint (`/auth/token`). This form is deprecated but still works for backwards compatibility:
 
 ```txt
 token=IJKLMNOPQRST&
 action=revoke
 ```
-
-The request will always respond with an empty body and HTTP status 200, regardless of whether the request was successful.
 
 ## Long-lived access token
 
@@ -157,7 +164,6 @@ You can also generate a long-lived access token using the WebSocket command `aut
     "id": 11,
     "type": "auth/long_lived_access_token",
     "client_name": "GPS Logger",
-    "client_icon": null,
     "lifespan": 365
 }
 ```

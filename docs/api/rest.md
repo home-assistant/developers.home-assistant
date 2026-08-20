@@ -3,7 +3,7 @@ title: "REST API"
 ---
 import ApiEndpoint from '@site/static/js/api_endpoint.jsx'
 
-Home Assistant provides a RESTful API on the same port as the web frontend (default port is port 8123).
+Home Assistant provides a RESTful API on the same port as the web frontend. The default port is 80 on Home Assistant OS installations and 8123 otherwise, unless the port is changed via the `SETUP_PORT` environment variable.
 
 If you are not using the [`frontend`](https://www.home-assistant.io/integrations/frontend/) in your setup then you need to add the [`api` integration](https://www.home-assistant.io/integrations/api/) to your `configuration.yaml` file.
 
