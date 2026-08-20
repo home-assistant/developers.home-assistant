@@ -290,19 +290,54 @@ The `content` key of a backup object contains the following keys:
 | key        | type           | description                                                            | request/response |
 | ---------- | -------------- | ---------------------------------------------------------------------- | ---------------- |
 | name       | string         | Name of the mount                                                      | both             |
-| type       | string         | Type of the mount (cifs or nfs)                                        | both             |
+| type       | string         | Type of the mount (cifs, nfs, or disk)                                 | both             |
 | usage      | string         | Usage of the mount (backup, media, or share)                           | both             |
-| server     | string         | IP address or hostname of the network share server                     | both             |
-| port       | int            | Port to use (if not using the standard one for the mount type)         | both             |
+| server     | string         | (cifs and nfs mounts only) IP address or hostname of the network share server | both      |
+| port       | int            | (cifs and nfs mounts only) Port to use (if not using the standard one for the mount type) | both |
 | read_only  | bool           | Mount is read-only (not available for backup mounts)                   | both             |
 | path       | string         | (nfs mounts only) Path to mount from the network share                 | both             |
 | share      | string         | (cifs mounts only) Share to mount from the network share               | both             |
 | username   | string         | (cifs mounts only) Username to use for authentication                  | request only     |
 | password   | string         | (cifs mounts only) Password to use for authentication                  | request only     |
+| device     | string         | (disk mounts only) Path of the device to mount, such as `/dev/sdc1`    | request only     |
+| uuid       | string         | (disk mounts only) Filesystem UUID of the device to mount              | both             |
+| filesystem | string         | (disk mounts only) Filesystem probed on the device, such as `ext4`     | response only    |
 | state      | string         | Current state of the mount (active, failed, etc.)                      | response only    |
+| user_path  | string or null | Where the mount is available inside managed containers, `null` for backup mounts | response only |
 
 Request only fields may be included in requests but will never be in responses.
 Response only fields will be in responses but cannot be included in requests.
+
+A disk mount is identified by `device`, `uuid`, or both — when both are given,
+resolution goes by `uuid` and the `device` path must agree with it. `device` is
+only an input: Supervisor resolves it to the UUID it stores, so responses report
+`uuid` and `filesystem` instead.
+
+## Mount candidate
+
+| key        | type           | description                                                            |
+| ---------- | -------------- | ---------------------------------------------------------------------- |
+| type       | string         | Mount type the candidate can be added as, currently always `disk`      |
+| device     | string         | Path of the device, such as `/dev/sdc1`                                |
+| uuid       | string         | Filesystem UUID of the device                                          |
+| label      | string         | Filesystem label, empty when the filesystem has none                   |
+| filesystem | string         | Filesystem on the device, such as `ext4`                               |
+| size       | int            | Size of the device in bytes                                            |
+| read_only  | bool           | Device can only be mounted read-only                                   |
+| drive      | dict or null   | The [Candidate drive](#candidate-drive) it belongs to, `null` when unknown |
+
+## Candidate drive
+
+| key            | type   | description                                                        |
+| -------------- | ------ | ------------------------------------------------------------------ |
+| vendor         | string | Vendor of the drive                                                |
+| model          | string | Model of the drive                                                 |
+| serial         | string | Serial number of the drive                                         |
+| id             | string | Unique ID for the drive                                            |
+| size           | int    | Size of the drive in bytes                                         |
+| connection_bus | string | Bus the drive is connected by, such as `usb`                       |
+| removable      | bool   | Drive is removable                                                 |
+| ejectable      | bool   | Drive can be ejected                                               |
 
 ## Job
 
