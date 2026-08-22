@@ -91,17 +91,17 @@ async def async_create_fix_flow(
     if issue_id == "issue_1":
         return Issue1RepairFlow()
 ```
-> [!NOTE]
-> The flow manager creates the `RepairsFlow` and passes the attributes `data` and `issue_id` from the instigating issue. These should not be passed to the `RepairsFlow` in any implementations of `async_create_fix_flow` as these will be overridden by the flow manager.
+:::note
+The flow manager creates the `RepairsFlow` and passes the attributes `data` and `issue_id` from the instigating issue. These should not be passed to the `RepairsFlow` in any implementations of `async_create_fix_flow` as these will be overridden by the flow manager.
+:::
 
-### Issues that can be repaired via entry/options/subentry reconfiguration or other repair flows.
+### Issues that can be repaired via config entry, options, or subentry reconfiguration
 
 Repair flows can forward issue fixes to config, options, or subentry flows:
 
 ```python
 import voluptuous as vol
 
-from homeassistant import data_entry_flow
 from homeassistant.components.repairs import FlowType, RepairsFlow, RepairsFlowResult
 from homeassistant.config_entries import (
     SOURCE_RECONFIGURE,
@@ -133,7 +133,7 @@ class Issue1RepairFlow(RepairsFlow):
                 )
             )
             return self.async_abort(
-                title="", data={},
+                reason="reconfigure",
                 next_flow=(
                     FlowType.CONFIG_SUBENTRIES_FLOW,
                     next_flow["flow_id"]
@@ -150,13 +150,13 @@ If using `next_flow` in the repair flow's `async_abort` it will be the responsib
 #### Example `next_flow` options flow
 
 ```python
-next_flow: ConfigFlowResult = (
+next_flow = (
     await self.hass.config_entries.options.async_init(
         self.data["entry_id"]
     )
 )
-return self.async_create_entry(
-    title="", data={},
+return self.async_abort(
+    reason="reconfigure",
     next_flow=(
         FlowType.OPTIONS_FLOW,
         next_flow["flow_id"]
@@ -192,7 +192,7 @@ ir.async_delete_issue(hass, DOMAIN, "manual_migration")
 ```
 ### Repair flows using `next_flow`
 
-Integration repair flows using `next_flow` in `RepairsFlow.async_abort` will have to delete an issue once the repair is completed as the `RepairsFlow.async_abort` will not remove the issue from the registry (note that `RepairFlow.async_create_issue` will always remove the issue from the registry). Issues can be deleted in `config_flow.py` or in the integration's `async_setup_entry`: 
+Integration repair flows using `next_flow` in `RepairsFlow.async_abort` must delete the issue once the repair is completed because `RepairsFlow.async_abort` does not remove the issue from the registry (note that `RepairsFlow.async_create_entry` always removes the issue from the registry). Issues can be deleted in `config_flow.py` or in the integration's `async_setup_entry`:
 
 ```python
 async def async_step_reconfigure(
