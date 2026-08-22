@@ -45,6 +45,16 @@ Only one workflow runs at a time for a given PR. If multiple commits are pushed 
 
 To build the application in debug on CI, we use a mock Google services file located at `/.github/mock-google-services.json`.
 
+#### Instrumentation tests
+
+##### Android on Emulator.wtf
+
+Instrumentation tests for the Android app run on [Emulator.wtf](https://emulator.wtf). On every pull request, the full suite is executed against every Android API level we support, and the whole run completes in just a few seconds, making the feedback loop incredibly fast.
+
+##### Wear OS and Automotive on GitHub Actions
+
+Wear OS and Automotive instrumentation tests run on the classic Android emulator on [GitHub Actions](https://github.com/features/actions), which is significantly slower, so we only cover a few API levels for those targets.
+
 #### Downloading APKs from a pull request
 
 See the [Testing pull request builds](/docs/android/tips/testing_pr_builds) tip for instructions on how to download and install APKs from a pull request.

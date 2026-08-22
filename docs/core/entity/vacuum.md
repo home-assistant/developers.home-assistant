@@ -3,7 +3,7 @@ title: Vacuum entity
 sidebar_label: Vacuum
 ---
 
-Derive entity platforms from [`homeassistant.components.vacuum.StateVacuumEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/vacuum/__init__.py)
+Derive entity platforms from [`homeassistant.components.vacuum.StateVacuumEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/vacuum/__init__.py)
 
 ## Properties
 

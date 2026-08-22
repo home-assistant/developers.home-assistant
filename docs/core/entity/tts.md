@@ -31,7 +31,7 @@ class MyTextToSpeechEntity(TextToSpeechEntity):
     """Represent a Text To Speech entity."""
 
     @callback
-    def async_get_supported_voices(self, language: str) -> list[str] | None:
+    def async_get_supported_voices(self, language: str) -> list[Voice] | None:
         """Return a list of supported voices for a language."""
 ```
 

@@ -710,8 +710,8 @@ Each entity object in the `entities` array uses abbreviated property names for p
 
 | Name | Type | Required | Description | Source |
 |------|------|----------|-------------|--------|
-| `ei` | string | Yes | Entity ID - unique identifier for the entity (e.g., `"light.living_room"`) | `RegistryEntry.entity_id` |
-| `pl` | string | Yes | Platform - the integration that created this entity (e.g., `"hue"`, `"mqtt"`) | `RegistryEntry.platform` |
+| `ei` | string | Yes | Entity ID - unique identifier for the entity (for example, `"light.living_room"`) | `RegistryEntry.entity_id` |
+| `pl` | string | Yes | Platform - the integration that created this entity (for example, `"hue"`, `"mqtt"`) | `RegistryEntry.platform` |
 | `ai` | string | No | Area ID - the area this entity is assigned to | `RegistryEntry.area_id` (only if not `null`) |
 | `lb` | array[string] | No | Labels - list of label id's assigned to this entity for organization | `RegistryEntry.labels` (converted to list, only if not empty) |
 | `di` | string | No | Device ID - the device this entity belongs to | `RegistryEntry.device_id` (only if not `null`) |

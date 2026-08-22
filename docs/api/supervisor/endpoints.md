@@ -19,7 +19,7 @@ Return overview information about installed apps.
 
 | key          | type | description                                        |
 | ------------ | ---- | -------------------------------------------------- |
-| addons       | list | A list of [Addon models](api/supervisor/models.md#addon)           |
+| addons       | list | A list of [Addon models](api/supervisor/models.md#app-formerly-known-as-an-add-on)           |
 
 **Example response:**
 
@@ -136,7 +136,7 @@ Get details about an app
 | dns                 | list               | A list of DNS servers used by the app                                               |
 | docker_api          | boolean            | `true` if docker_api access is granted is enabled                                      |
 | documentation       | boolean            | `true` if documentation is available                                                   |
-| full_access         | boolean            | `true` if full access access is granted is enabled                                     |
+| full_access         | boolean            | `true` if full access is granted                                     |
 | gpio                | boolean            | `true` if gpio access is granted is enabled                                            |
 | hassio_api          | boolean            | `true` if hassio api access is granted is enabled                                      |
 | hassio_role         | string             | The hassio role (default, homeassistant, manager, admin)                               |
@@ -162,7 +162,7 @@ Get details about an app
 | name                | string             | The name of the app                                                                 |
 | network             | dictionary or null | The network configuration for the app                                               |
 | network_description | dictionary or null | The description for the network configuration                                          |
-| options             | dictionary         | The app configuration                                                               |
+| options             | dictionary         | The app configuration. Redacted (empty dictionary) unless the caller is Home Assistant Core, the app requesting its own info, or an app with the `manager` or `admin` role, since the options may contain secrets such as passwords or API keys |
 | privileged          | list               | A list of hardwars/system attributes the app has access to                         |
 | protected           | boolean            | `true` if protection mode is enabled                                                   |
 | rating              | int                | The addon rating                                                                       |
@@ -391,7 +391,7 @@ Restart an app
 <ApiEndpoint path="/addons/<addon>/security" method="post">
 Set the protection mode on an app.
 
-This function is not callable by itself and you can not use `self` as the slug here.
+This function is not callable by itself and you cannot use `self` as the slug here.
 
 **Payload:**
 
@@ -1202,7 +1202,7 @@ Returns information about the Home Assistant core
   "ip_address": "172.0.0.15",
   "image": "homeassistant/home-assistant",
   "boot": true,
-  "port": 8123,
+  "port": 80,
   "ssl": false,
   "watchdog": true,
   "wait_boot": 800,
@@ -1760,31 +1760,31 @@ Return information about the host.
 
 **Returned data**
 
-| key              | type           | description                               |
-| ---------------- | -------------- | ----------------------------------------- |
-| agent_version    | string or null | Agent version running on the Host         |
-| apparmor_version | string or null | The AppArmor version from host            |
-| boot_timestamp   | int            | The timestamp for the last boot in microseconds |
-| broadcast_llmnr  | bool or null   | Host is broadcasting its LLMNR hostname   |
-| broadcast_mdns   | bool or null   | Host is broadcasting its MulticastDNS hostname |
-| chassis          | string or null | The chassis type                          |
-| virtualization   | string or null | Virtualization hypervisor in use (if any) |
-| cpe              | string or null | The local CPE                             |
-| deployment       | string or null | The deployment stage of the OS if any     |
-| disk_total       | float          | Total space of the disk in MB             |
-| disk_used        | float          | Used space of the disk in MB              |
-| disk_free        | float          | Free space of the disk in MB              |
-| features         | list           | A list of features available for the host |
-| hostname         | string or null | The hostname of the host                  |
-| kernel           | string or null | The kernel version on the host            |
-| llmnr_hostname   | string or null | The hostname currently exposed on the network via LLMNR for host |
-| operating_system | string         | The operating system on the host          |
-| startup_time     | float          | The time in seconds it took for last boot |
+| key              | type           | description                                                                                                                |
+| ---------------- | -------------- |----------------------------------------------------------------------------------------------------------------------------|
+| agent_version    | string or null | Agent version running on the Host                                                                                          |
+| apparmor_version | string or null | The AppArmor version from host                                                                                             |
+| boot_timestamp   | int            | The timestamp for the last boot in microseconds                                                                            |
+| broadcast_llmnr  | bool or null   | Host is broadcasting its LLMNR hostname                                                                                    |
+| broadcast_mdns   | bool or null   | Host is broadcasting its MulticastDNS hostname                                                                             |
+| chassis          | string or null | The chassis type                                                                                                           |
+| virtualization   | string or null | Virtualization hypervisor in use (if any)                                                                                  |
+| cpe              | string or null | The local CPE                                                                                                              |
+| deployment       | string or null | The deployment stage of the OS if any                                                                                      |
+| disk_total       | float          | Total space of the disk in GB                                                                                              |
+| disk_used        | float          | Used space of the disk in GB                                                                                               |
+| disk_free        | float          | Free space of the disk in GB                                                                                               |
+| features         | list           | A list of features available for the host                                                                                  |
+| hostname         | string or null | The hostname of the host                                                                                                   |
+| kernel           | string or null | The kernel version on the host                                                                                             |
+| llmnr_hostname   | string or null | The hostname currently exposed on the network via LLMNR for host                                                           |
+| operating_system | string         | The operating system on the host                                                                                           |
+| startup_time     | float          | The time in seconds it took for last boot                                                                                  |
 | disk_life_time   | float or null  | Percentage of estimated disk lifetime used (0–100). Not all disks provide this information, returns `null` if unavailable. |
-| timezone         | string         | The current timezone of the host. |
-| dt_utc           | string         | Current UTC date/time of the host in ISO 8601 format. |
-| dt_synchronized  | bool           | `true` if the host is synchronized with an NTP service. |
-| use_ntp          | bool           | `true` if the host is using an NTP service for time synchronization. |
+| timezone         | string         | The current timezone of the host.                                                                                          |
+| dt_utc           | string         | Current UTC date/time of the host in ISO 8601 format.                                                                      |
+| dt_synchronized  | bool           | `true` if the host is synchronized with an NTP service.                                                                    |
+| use_ntp          | bool           | `true` if the host is using an NTP service for time synchronization.                                                       |
 
 **Example response:**
 
@@ -1850,7 +1850,7 @@ Example query string:
 
 :::tip
 To get the last log entries the Range request header supports negative values
-as `num_skip`. E.g. `Range: entries=:-9:` returns the last 10 entries. Or
+as `num_skip`. For example, `Range: entries=:-9:` returns the last 10 entries. Or
 `Range: entries=:-200:100` to see 100 entries starting from the one 200 ago.
 :::
 
@@ -1859,7 +1859,7 @@ logs further in the past.
 
 The `Accept` header can be set to `text/x-log` to get logs annotated with
 extra information, such as the timestamp and Systemd unit name. If no
-identifier is specified (i.e. for the host logs containing logs for multiple
+identifier is specified (that is, for the host logs containing logs for multiple
 identifiers/units), this option is ignored - these logs are always annotated.
 
 </ApiEndpoint>
@@ -2025,58 +2025,112 @@ Shutdown the host
 <ApiEndpoint path="/host/disks/<disk>/usage" method="get">
 Get detailed disk usage information in bytes.
 
-The only supported `disk` for now is "default". It will return usage info for the data disk.
+`disk` selects what is measured. Use `default` for the data disk, or the name of a
+mount to measure that mount. `default` always addresses the data disk, so a mount
+of that name cannot be reached through this endpoint.
 
-Supports an optional `max_depth` query param. Defaults to 1
+Supports an optional `max_depth` query param, which controls how far the breakdown
+goes. It defaults to 1 for the data disk and 0 for a mount.
+
+The data disk reports its known top-level paths as children, and `max_depth`
+controls how far the breakdown continues inside them.
+
+A mount has no such fixed layer, so it is measured by walking its directories, and
+a directory is only listed while more than one level of depth remains. A
+`max_depth` of 0 or 1 therefore returns totals only, the first level of
+directories appears at 2, and every level below that needs one more.
+
+When a mount lists children, an `other` child carries whatever the walk did not
+attribute to a directory: files directly at the mount root, reserved space, and
+entries that could not be read. When that remainder is positive, the children of
+a node sum exactly to its own `used_bytes`. If the filesystem changes while it
+is being walked, the directory totals can disagree with `used_bytes`; in that
+case the breakdown is left out entirely and only the totals are reported, so
+the children never sum past their parent.
+
+Requesting usage for a mount which does not exist returns a `404`. A `400` is
+returned for a mount which is not active, is no longer actually mounted even
+though its unit still reports active, cannot be read, or whose usage probe has
+not completed within 60 seconds. The probe keeps running after that timeout, so
+retrying the request joins the probe already underway instead of starting a new
+one.
 
 **Example response:**
 
 ```json
 {
   "id": "root",
-  "label": "Default",
-  "total_space": 503312781312,
-  "used_space": 430245011456,
+  "label": "Root",
+  "total_bytes": 503312781312,
+  "used_bytes": 430245011456,
   "children": [
     {
       "id": "system",
       "label": "System",
-      "used_space": 75660903137
+      "used_bytes": 75660903137
     },
     {
       "id": "addons_data",
       "label": "Addons data",
-      "used_space": 42349200762
+      "used_bytes": 42349200762
     },
     {
       "id": "addons_config",
       "label": "Addons configuration",
-      "used_space": 5283318814
+      "used_bytes": 5283318814
     },
     {
       "id": "media",
       "label": "Media",
-      "used_space": 476680019
+      "used_bytes": 476680019
     },
     {
       "id": "share",
       "label": "Share",
-      "used_space": 37477206419
+      "used_bytes": 37477206419
     },
     {
       "id": "backup",
       "label": "Backup",
-      "used_space": 268350699520
+      "used_bytes": 268350699520
     },
     {
       "id": "ssl",
       "label": "SSL",
-      "used_space": 202912633
+      "used_bytes": 202912633
     },
     {
       "id": "homeassistant",
       "label": "Home assistant",
-      "used_space": 444090152
+      "used_bytes": 444090152
+    }
+  ]
+}
+```
+
+**Example response for a mount**, requested with `max_depth=2`:
+
+```json
+{
+  "id": "media_nas",
+  "label": "media_nas",
+  "total_bytes": 2000398934016,
+  "used_bytes": 1240247081779,
+  "children": [
+    {
+      "id": "music",
+      "label": "music",
+      "used_bytes": 402653184000
+    },
+    {
+      "id": "movies",
+      "label": "movies",
+      "used_bytes": 800000000000
+    },
+    {
+      "id": "other",
+      "label": "Other",
+      "used_bytes": 37593897779
     }
   ]
 }
@@ -2799,6 +2853,10 @@ Returns information about the OS.
 
 Update Home Assistant OS
 
+A reboot is required after this completes to finish the update. This can be done
+with a follow-up call to `/host/reboot` or let the user complete it on their schedule
+using the repair.
+
 **Payload:**
 
 | key     | type   | description                                                    |
@@ -2849,7 +2907,7 @@ Set HAOS swap configuration. Unavailable on Supervised.
 
 | key        | type   | description                                                                                |
 |------------|--------|--------------------------------------------------------------------------------------------|
-| swap_size  | string | New swap siz as number with optional units (K/M/G). Anything lower than 40K disables swap. |
+| swap_size  | string | New swap size as number with optional units (K/M/G). Anything lower than 40K disables swap. |
 | swappiness | int    | New swappiness value (0-100).                                                              |
 </ApiEndpoint>
 
@@ -2922,7 +2980,7 @@ will be downloaded. Once the process is complete the user will see onboarding, l
 during initial setup.
 
 This wipe also includes network settings. So after the reboot the user may need to
-reconfigure those in order to access Home Assistant again.
+reconfigure those to access Home Assistant again.
 
 The operating system version as well as its boot configuration will be preserved.
 
@@ -3014,6 +3072,56 @@ If running on a green board, changes one or more of its settings.
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/os/boards/raspberrypi/firmware" method="get">
+
+Returns Raspberry Pi firmware information. Available on Raspberry Pi 4 / 5
+and Home Assistant Yellow when the OS Agent is at least version 1.9.0.
+The reported version covers the bundled firmware payload (bootloader EEPROM,
+and VL805 USB controller where present). Returns `404` if the OS Agent is
+older than 1.9.0, or `400` if the running board has no Raspberry Pi firmware
+interface.
+
+**Returned data:**
+
+| key              | type           | description                                                                                              |
+| ---------------- | -------------- | -------------------------------------------------------------------------------------------------------- |
+| current_version  | string         | The currently installed firmware version                                                                 |
+| latest_version   | string         | The latest firmware version bundled with the OS                                                          |
+| update_available | boolean        | `true` if `latest_version` is newer than `current_version`                                               |
+| update_blocked   | boolean        | `true` if the current boot device or board configuration prevents the bundled updater from being applied |
+| update_pending   | boolean        | `true` if a firmware update has been applied but the system has not been rebooted yet                    |
+| blocked_reason   | string or null | Blocked reason when `update_blocked` is `true`; `null` otherwise. See note below.                        |
+
+`blocked_reason` is currently always `unsupported_boot_device` whenever
+`update_blocked` is `true`. The underlying cause varies (for example, a
+USB/NVMe boot device, or a board without self-update enabled). More specific
+values may be introduced in the future.
+
+**Example response:**
+
+```json
+{
+  "current_version": "1765222194",
+  "latest_version": "1778498402",
+  "update_available": true,
+  "update_blocked": false,
+  "update_pending": false,
+  "blocked_reason": null
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/os/boards/raspberrypi/firmware/update" method="post">
+
+Apply the bundled Raspberry Pi firmware update (bootloader EEPROM, and VL805
+where present). On success, Supervisor raises the `reboot_required` issue;
+a reboot is required to start running the new firmware. Returns `404` if the
+OS Agent is older than 1.9.0, or `400` if the running board has no Raspberry Pi
+firmware interface or the update is blocked on this board / boot device.
+
+</ApiEndpoint>
+
 ### Resolution
 
 <ApiEndpoint path="/resolution/info" method="get">
@@ -3024,7 +3132,7 @@ If running on a green board, changes one or more of its settings.
 | -------- | ---------- | ------------------------------------------------ |
 | unsupported | list | A list of reasons why an installation is marked as unsupported (container, dbus, docker_configuration, docker_version, lxc, network_manager, os, privileged, systemd) |
 | unhealthy | list | A list of reasons why an installation is marked as unhealthy (docker, supervisor, privileged, setup) |
-| issues | list | A list of [Issue models](api/supervisor/models.md#issues) |
+| issues | list | A list of [Issue models](api/supervisor/models.md#issue) |
 | suggestions | list | A list of [Suggestion models](api/supervisor/models.md#suggestion) actions |
 | checks | list | A list of [Check models](api/supervisor/models.md#check) |
 
@@ -3039,8 +3147,9 @@ If running on a green board, changes one or more of its settings.
       "uuid": "A89924620F9A11EBBDC3C403FC2CA371",
       "type": "free_space",
       "context": "system",
-      "reference": null
-     }
+      "reference": null,
+      "reference_extra": null
+    }
   ],
   "suggestions": [
     {
@@ -3048,6 +3157,7 @@ If running on a green board, changes one or more of its settings.
       "type": "clear_backups",
       "context": "system",
       "reference": null,
+      "reference_extra": null,
       "auto": false
     }
   ],
@@ -3094,6 +3204,7 @@ Get suggestions that would fix an issue if applied.
       "type": "clear_backups",
       "context": "system",
       "reference": null,
+      "reference_extra": null,
       "auto": false
     }
   ]
@@ -3645,7 +3756,7 @@ You need to call `/supervisor/reload` after updating the options.
 | addons_repositories | list   | Set a list of URL's as strings for app repositories |
 | auto_update         | bool   | Enable/disable auto update for supervisor              |
 | detect_blocking_io  | string | Enable blocking I/O in event loop detection. Valid values are `on`, `off` and `on_at_startup`. |
-| feature_flags       | dict   | Partial update of development feature flags. Keys are feature flag names (e.g. `supervisor_v2_api`), values are booleans. Omitted keys are left unchanged. |
+| feature_flags       | dict   | Partial update of development feature flags. Keys are feature flag names (for example, `supervisor_v2_api`), values are booleans. Omitted keys are left unchanged. |
 
 </ApiEndpoint>
 

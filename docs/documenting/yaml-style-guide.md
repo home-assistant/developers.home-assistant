@@ -35,7 +35,7 @@ off people new to YAML. Therefore, we only allow the use of `true` and `false`
 as boolean values, in lower case.
 
 This keeps it compatible with the YAML 1.2 specifications as well, since that
-version dropped support for several unquoted truthy booleans (e.g., `y`, `n`,
+version dropped support for several unquoted truthy booleans (for example, `y`, `n`,
 `yes`, `no`, `on`, `off` and similar).
 
   ```yaml
@@ -245,15 +245,15 @@ As written in the first chapter, strings are preferably enquoted with double
 quotes. However, the following value types are exempted from this rule,
 as is makes our examples more readable:
 
-- Entity IDs (e.g., `binary_sensor.motion`)
-- Entity attributes (e.g., `temperature`)
+- Entity IDs (for example, `binary_sensor.motion`)
+- Entity attributes (for example, `temperature`)
 - Device IDs
 - Area IDs
-- Platform types (e.g., `light`, `switch`)
-- Condition types (e.g., `numeric_state`, `state`)
-- Trigger types (e.g., `state`, `time`)
-- Action names (e.g., `light.turn_on`)
-- Device classes (e.g., `problem`, `motion`)
+- Platform types (for example, `light`, `switch`)
+- Condition types (for example, `numeric_state`, `state`)
+- Trigger types (for example, `state`, `time`)
+- Action names (for example, `light.turn_on`)
+- Device classes (for example, `problem`, `motion`)
 - Event names
 - Values that accept a limited set of possible, hardcoded values.
   For example, `mode` in automations.
@@ -283,23 +283,26 @@ actions:
 If you want to fire a service action call for an entity ID (for example, to turn
 on a light), you can do so in three different ways.
 
-The entity ID can be specified as a property of the action level, part of the
-data that is sent in the service action call or as an entity in a service
-action target.
+The entity ID can be specified as an entity in a service action target, as a
+property of the action level, or as a part of the data that is sent in the 
+service action call.
 
-Service action targets is the most modern way and allows one to target a
+Service action target is the most modern way and allows one to target a
 service action call for an entity, device or area. Therefore, the target is the
 most flexible of the options available and is the one that should be used.
 
 ```yaml
 # Good
 actions:
+  # Service action target is an entity
   - action: light.turn_on
     target:
       entity_id: light.living_room
+  # Service action target is an area
   - action: light.turn_on
     target:
       area_id: light.living_room
+  # Service action target is an area plus an entity plus a device
   - action: light.turn_on
     target:
       area_id: living_room
@@ -372,12 +375,8 @@ actions:
 ### Templates
 
 Home Assistant templates are powerful, but they can be really confusing or hard
-to understand for a less experienced user. Therefore, the use of templates
+to understand. Therefore, the use of templates
 should be avoided if a pure YAML version is available.
-
-Additionally, the use of templates requires additional escaping in our
-documentation to avoid our website code to confuse it for the Liquid syntax.
-Avoiding templates in general removes the need of additional escaping.
 
 ```yaml
 # Good
@@ -479,4 +478,4 @@ two: "{{ states.climate.living_room.attributes.temperature }}"
 
 This applies to  `states()`, `is_state()`, `state_attr()` and `is_state_attr()`,
 to avoid errors and error messages when the entity isn’t ready yet
-(e.g., during Home Assistant startup).
+(for example, during Home Assistant startup).

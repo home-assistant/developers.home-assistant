@@ -22,6 +22,12 @@ If a component defines a variable `CONFIG_SCHEMA`, the config object that is pas
 
 ### PLATFORM_SCHEMA
 
+:::info
+
+The platform-key configuration structure described below (configuration listed under an entity component domain, such as `switch`) is the existing mechanism for entity components. New integrations must not use it. Per [ADR-0007](https://github.com/home-assistant/architecture/blob/master/adr/0007-integration-config-yaml-structure.md), all YAML configuration for an integration, if present, must be placed under the integration's own domain key, with platforms loaded via `discovery.async_load_platform`. YAML configuration in platform sections of existing integrations is frozen until the integration is refactored.
+
+:::
+
 If a component defines a variable `PLATFORM_SCHEMA`, the component will be treated as an entity component. The configuration of entity components is a list of platform configurations.
 
 Home Assistant will gather all platform configurations for this component. It will do so by looking for configuration entries under the domain of the component (ie `light`) but also under any entry of domain + extra text.

@@ -11,6 +11,8 @@ In general, we should follow standard development principles such as:
 - **KISS**: Keep It Simple, Stupid.
 - **DRY**: Don't Repeat Yourself
 - **Community guidelines**: Follow the practices showcased in the [NowInAndroid](https://github.com/android/nowinandroid) repository.
+- **Keep it direct**: Don't introduce an abstraction for a single implementation or a hypothetical future need. Use the proven library or API directly, and abstract only when a second real use appears, or to hide an implementation from outside the module where it lives (for example, a public interface in `common` with an `internal` implementation bound through DI). Likewise, don't store what can be derived from existing state.
+- **Root cause before fix**: A bug fix should state the actual cause and how to reproduce it. Avoid speculative workarounds that patch symptoms.
 
 ## Documentation
 
@@ -71,11 +73,11 @@ fun main() {
 :::
 
 :::warning
-If you must use primitive types, ensure the variable name includes the unit (e.g., `THRESHOLD_MS` instead of `THRESHOLD`) to reduce ambiguity.
+If you must use primitive types, ensure the variable name includes the unit (for example, `THRESHOLD_MS` instead of `THRESHOLD`) to reduce ambiguity.
 :::
 
 - Apply the same logic to dates, durations, and timestamps.
-- For APIs that use `long` for timestamps (e.g., milliseconds vs. seconds), convert the values to a strong type as soon as possible to minimize exposure to untyped units.
+- For APIs that use `long` for timestamps (for example, milliseconds vs. seconds), convert the values to a strong type as soon as possible to minimize exposure to untyped units.
 
 ## Concurrency
 
@@ -83,13 +85,13 @@ Concurrency is powerful but requires careful handling to avoid issues like memor
 
 ### Coroutine scope
 
-Tie your coroutines to an Android lifecycle (e.g., `viewModelScope` or `lifecycleScope`) to prevent memory leaks.
+Tie your coroutines to an Android lifecycle (for example, `viewModelScope` or `lifecycleScope`) to prevent memory leaks.
 
 ### Concurrent access
 
 - Ensure that any references accessed outside of a coroutine are thread-safe.
 - If a reference is not safe, either make it safe or don't use it.
-- Debugging concurrency issues (e.g., race conditions) can be extremely challenging, so design carefully.
+- Debugging concurrency issues (for example, race conditions) can be extremely challenging, so design carefully.
 
 For more details on race conditions, see [Race Condition](https://en.wikipedia.org/wiki/Race_condition#In_software).
 
@@ -202,7 +204,7 @@ Naming is hard, but smaller functions make it easier to choose meaningful names.
 ## Keep your PRs small
 
 - **Why?** Smaller PRs are easier to review, reduce delays, and minimize frustration.
-- **How?** Break down large changes into smaller, logical chunks.
+- **How?** Break down large changes into small mergeable steps that keep the app working at every point. If a rework is too big to ship in one small PR, put the new path behind a flag in the `WIPFeature` object so you can still merge it in small steps while users stay on the legacy path: add a flag there (typically enabled only in debug builds through `BuildConfig.DEBUG`), use it to switch between the new and the legacy path, and remove it once the feature is fully released.
 
 For more details, see [submit](/docs/android/submit).
 
@@ -259,6 +261,8 @@ For a real-world example of migrating from `@Named("keyChainRepository")` to `@N
 ## Fail fast
 
 The further you progress in development, the more difficult it becomes to debug issues. Do not ignore errors, even those you think are unlikely to occur. Always aim to catch errors at build time rather than at runtime. Use Kotlin compiler features whenever possible, and consider adding a [lint rule](/docs/android/linter) if you cannot enforce a check at compile time.
+
+When the same issue keeps coming back in reviews, encode the convention into tooling (a custom [lint rule](/docs/android/linter), a KTLint override, a `FailFast` check, or a test listener) instead of relying on everyone remembering it.
 
 ### Leverage Kotlin compiler
 

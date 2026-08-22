@@ -15,11 +15,11 @@ This section is not for end users. End users should use the [SSH app (formerly k
 SSH access through the [SSH app] (on port 22 by default) only grants limited privileges, and you will be asked for a username and password when typing the 'login' command. Follow the steps below to enable a separate SSH access on port 22222 that works independently of the app and gives you direct access to the Home Assistant OS (the "host") with full privileges.
 :::
 
-1. Use a USB drive with a partition named `CONFIG` (case sensitive) formatted as FAT, ext4, or NTFS. Create an `authorized_keys` text file (without a file extension) containing your public key(s), one per line, and place it in the root of the USB drive's `CONFIG` partition. The file must use POSIX-standard newline control characters (LF), not Windows ones (CR LF), and needs to be ASCII character encoded (i.e. mustn't contain any special characters in the comments).
+1. Use a USB drive with a partition named `CONFIG` (case sensitive) formatted as FAT, ext4, or NTFS. Create an `authorized_keys` text file (without a file extension) containing your public key(s), one per line, and place it in the root of the USB drive's `CONFIG` partition. The file must use POSIX-standard newline control characters (LF), not Windows ones (CR LF), and needs to be ASCII character encoded (that is, mustn't contain any special characters in the comments).
 
    See [Generating SSH Keys](#generating-ssh-keys) section below if you need help generating keys.
 
-1. Connect the USB drive to your Home Assistant OS device and either explicitly import the drive's contents using the `ha os import` command (e.g. via SSH to the [SSH app] on port 22) or reboot the device leaving the drive attached, which automatically triggers the import.
+1. Connect the USB drive to your Home Assistant OS device and either explicitly import the drive's contents using the `ha os import` command (for example, via SSH to the [SSH app] on port 22) or reboot the device leaving the drive attached, which automatically triggers the import.
 
 :::tip
 Make sure when you are copying the public key(s) to the root of the USB drive that you correctly name the file `authorized_keys` without a `.pub` file extension.
@@ -71,4 +71,4 @@ Windows instructions on how to generate and use private/public keys with Putty a
 
 Alternative instructions for Mac, Windows and Linux can be found [here](https://docs.github.com/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent). Follow the steps under *Generating a new SSH key* (the other sections are not applicable to Home Assistant and can be ignored).
 
-Make sure to copy the ***public*** key of the SSH key pair you just created. By default, the public key file is named `id_ed25519.pub` (in case of the Ed25519 elliptic curve algorithm) or `id_rsa.pub` (in case of the older RSA algorithm), i.e. it should have a `.pub` filename suffix. It is saved to the same folder as the private key (which is named `id_ed25519` or `id_rsa` by default).
+Make sure to copy the ***public*** key of the SSH key pair you just created. By default, the public key file is named `id_ed25519.pub` (in case of the Ed25519 elliptic curve algorithm) or `id_rsa.pub` (in case of the older RSA algorithm), that is, it should have a `.pub` filename suffix. It is saved to the same folder as the private key (which is named `id_ed25519` or `id_rsa` by default).

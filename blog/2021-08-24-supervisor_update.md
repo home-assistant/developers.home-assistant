@@ -65,7 +65,7 @@ Until next time 👋
 [discord]: https://discord.gg/c5DvZ4e
 [main_blog]: https://www.home-assistant.io/blog/2021/08/24/supervisor-update/
 [supervisor_api_backups]: /docs/api/supervisor/endpoints#backup
-[supervisor_api_snapshots]: /docs/api/supervisor/endpoints#snapshot
+[supervisor_api_snapshots]: /docs/api/supervisor/endpoints#backup
 [supervised_installation]: https://github.com/home-assistant/architecture/blob/master/adr/0014-home-assistant-supervised.md
 [supervised_script]: https://github.com/home-assistant/supervised-installer
 [os_agent]: https://github.com/home-assistant/os-agent

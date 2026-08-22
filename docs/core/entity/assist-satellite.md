@@ -11,9 +11,9 @@ An Assist satellite entity is derived from the [`homeassistant.components.assist
 
 | Name                 | Type                   | Default           | Description                                                           |
 |----------------------|------------------------|-------------------|-----------------------------------------------------------------------|
-| `pipeline_entity_id` | <code>str; None</code> | <code>None</code> | Id of the `select` entity with the [pipeline id](/docs/voice/pipelines/) or `None`. |
-| `vad_sensitivity_entity_id` | <code>str; None</code> | <code>None</code> | Id of the `select` entity with the [voice activity detection sensitivity](https://github.com/home-assistant/core/blob/dev/homeassistant/components/assist_pipeline/vad.py) or `None`. |
-| `tts_options` | <code>dict; None</code> | <code>None</code> | Options passed to the [text-to-speech system](https://www.home-assistant.io/integrations/tts/) when responding. |
+| `pipeline_entity_id` | `str \| None` | `None` | Id of the `select` entity with the [pipeline id](/docs/voice/pipelines/) or `None`. |
+| `vad_sensitivity_entity_id` | `str \| None` | `None` | Id of the `select` entity with the [voice activity detection sensitivity](https://github.com/home-assistant/core/blob/dev/homeassistant/components/assist_pipeline/vad.py) or `None`. |
+| `tts_options` | `dict \| None` | `None` | Options passed to the [text-to-speech system](https://www.home-assistant.io/integrations/tts/) when responding. |
 
 
 ## States
@@ -63,7 +63,7 @@ A [websocket command](#setting-the-active-wake-words) is available for setting t
 
 ### Announcements
 
-If the device has the `ANNOUNCE` [supported feature](#supported-features), then the `async_announce` method should be implemented to announce the provided `media_id` within `AssistSatelliteAnnouncement`. If `preannouncement_media_id` is provided, it should be played before the `media_id`.
+If the device has the `ANNOUNCE` [supported feature](#supported-features), then the `async_announce` method should be implemented to announce the provided `media_id` within `AssistSatelliteAnnouncement`. If `preannounce_media_id` is provided, it should be played before the `media_id`.
 The `async_announce` method should only return when the announcement is finished playing on the device.
 
 An [announce action](https://home-assistant.io/integrations/assist_satellite#action-assist_satelliteannounce) is available for automating announcements.
@@ -72,7 +72,7 @@ An [announce action](https://home-assistant.io/integrations/assist_satellite#act
 
 If the device has the `START_CONVERSATION` [supported feature](#supported-features), then the `async_start_conversation` method should be implemented to:
 
-1. Announce `preannouncement_media_id` within `AssistSatelliteAnnouncement`, if provided
+1. Announce `preannounce_media_id` within `AssistSatelliteAnnouncement`, if provided
 2. Announce the provided `media_id` within `AssistSatelliteAnnouncement`, then
 3. Listen for one or more follow-up voice commands
 

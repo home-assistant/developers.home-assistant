@@ -1,5 +1,6 @@
 ---
 title: "The documentation includes a high-level description of the integration brand, product, or service"
+sidebar_label: 🥉 docs-high-level-description
 ---
 
 ## Reasoning

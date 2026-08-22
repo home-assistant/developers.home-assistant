@@ -34,6 +34,7 @@ module.exports = {
             { to: "docs/voice/overview", label: "Voice" },
             { to: "docs/translations", label: "Translations" },
             { to: "docs/android", label: "Android" },
+            { to: "docs/apple", label: "Apple platforms" },
           ],
         },
         { to: "docs/misc", label: "Misc", position: "left" },
@@ -149,7 +150,7 @@ module.exports = {
     },
     image: "img/default-social.png",
     mermaid: {
-      theme: { light: "neutral", dark: "forest" },
+      theme: { light: "neutral", dark: "dark" },
     },
     colorMode: {
       defaultMode: 'light',

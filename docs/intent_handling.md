@@ -7,14 +7,17 @@ Any component can register to handle intents. This allows a single component to 
 A component has to register an intent handler for each type that it wants to handle. Intent handlers have to extend `homeassistant.helpers.intent.IntentHandler`
 
 ```python
+from homeassistant.core import HomeAssistant
 from homeassistant.helpers import intent
+from homeassistant.helpers.typing import ConfigType
 
 DATA_KEY = "example_key"
 
 
-async def async_setup(hass, config):
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     hass.data[DATA_KEY] = 0
     intent.async_register(hass, CountInvocationIntent())
+    return True
 
 
 class CountInvocationIntent(intent.IntentHandler):
@@ -30,7 +33,7 @@ class CountInvocationIntent(intent.IntentHandler):
     #     'item': cv.string
     # }
 
-    async def async_handle(self, intent_obj):
+    async def async_handle(self, intent_obj: intent.Intent) -> intent.IntentResponse:
         """Handle the intent."""
         intent_obj.hass.data[DATA_KEY] += 1
         count = intent_obj.hass.data[DATA_KEY]

@@ -1,5 +1,6 @@
 ---
 title: "Creating custom panels"
+sidebar_label: "Custom panels"
 ---
 
 Panels are pages that show information within Home Assistant and can allow controlling it. Panels are linked from the sidebar and rendered full screen. They have real-time access to the Home Assistant object via JavaScript. Examples of panels in the app are dashboards, Map, Logbook and History.

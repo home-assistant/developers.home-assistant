@@ -72,8 +72,10 @@ TODOs in code tend to be forgotten over time. When someone read them later, they
 ### Example
 
 ```bash
-// TODO Missing feature (linked issue #404)
+// TODO Missing feature https://github.com/home-assistant/android/issues/404
 ```
+
+Always reference GitHub with a full HTTP link, never a bare `#404` — a number is ambiguous and not clickable outside GitHub. When linking to code (a file or line), use a permalink (press <kbd>y</kbd> on GitHub for a commit-pinned URL) so the link survives file moves and edits.
 
 ## Constants
 
@@ -151,8 +153,8 @@ const val DEFAULT_USER_ID = "guest"
 
 When to use companion objects:
 
-- **Namespacing for external use**: When constants or utility functions must be accessed externally (e.g., public or internal).
-- **Intentional naming conflicts**: When multiple classes or entities in the same file share the same name for conceptually similar constants (e.g., EMPTY, DEFAULT).
+- **Namespacing for external use**: When constants or utility functions must be accessed externally (for example, public or internal).
+- **Intentional naming conflicts**: When multiple classes or entities in the same file share the same name for conceptually similar constants (for example, EMPTY, DEFAULT).
 
 **Example:**
 

@@ -13,11 +13,21 @@ A wake word detection entity is derived from the  [`homeassistant.components.wak
 Properties should always only return information from memory and not do I/O (like network requests).
 :::
 
-| Name                 | Type           | Default      | Description                                                                                                                 |
-|----------------------|----------------|--------------|-----------------------------------------------------------------------------------------------------------------------------|
-| supported_wake_words | list[WakeWord] | **Required** | The supported wake words of the service with:<ul><li>ww_id - unique identifier</li><li>name - human-readable name</li></ul> |
+Properties that are common to all entities such as `icon`, `name` etc are applicable.
 
 ## Methods
+
+### Get supported wake words
+
+Return the wake words supported by the entity. Each `WakeWord` has an `id` (unique identifier), a `name` (human-readable name), and an optional `phrase`.
+
+```python
+class MyWakeWordDetectionEntity(WakeWordDetectionEntity):
+    """Represent a Wake Word Detection entity."""
+
+    async def get_supported_wake_words(self) -> list[WakeWord]:
+        """Return a list of supported wake words."""
+```
 
 ### Process audio stream
 
@@ -27,8 +37,8 @@ The process audio stream method is used to detect wake words. It must return a `
 class MyWakeWordDetectionEntity(WakeWordDetectionEntity):
     """Represent a Wake Word Detection entity."""
 
-    async def async_process_audio_stream(
-        self, stream: AsyncIterable[tuple[bytes, int]]
+    async def _async_process_audio_stream(
+        self, stream: AsyncIterable[tuple[bytes, int]], wake_word_id: str | None
     ) -> DetectionResult | None:
         """Try to detect wake word(s) in an audio stream with timestamps.
 
@@ -36,15 +46,15 @@ class MyWakeWordDetectionEntity(WakeWordDetectionEntity):
         """
 ```
 
-The audio stream is made of tuples with the form `(timestamp, audio_chunk)` where:
+The audio stream is made of tuples with the form `(audio_chunk, timestamp)` where:
 
-- `timestamp` is the number of milliseconds since the start of the audio stream
 - `audio_chunk` is a chunk of 16-bit signed mono PCM samples at 16Khz
+- `timestamp` is the number of milliseconds since the start of the audio stream
 
 If a wake word is detected, a `DetectionResult` is returned with:
 
-- `ww_id` - the unique identifier of the detected wake word
+- `wake_word_id` - the unique identifier of the detected wake word
 - `timestamp` - the timestamp of the audio chunk when detection occurred
 - `queued_audio` - optional audio chunks that will be forwarded to speech-to-text (see below)
 
-In an [Assist pipeline](/docs/voice/pipelines), the audio stream is shared between wake word detection and speech-to-text. This means that any audio chunk removed during wake word detection **can not be processed** by speech-to-text unless passed back in the `queued_audio` of a `DetectionResult`.
+In an [Assist pipeline](/docs/voice/pipelines), the audio stream is shared between wake word detection and speech-to-text. This means that any audio chunk removed during wake word detection **cannot be processed** by speech-to-text unless passed back in the `queued_audio` of a `DetectionResult`.

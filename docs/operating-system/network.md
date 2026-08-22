@@ -10,7 +10,7 @@ Home Assistant Operating System uses NetworkManager to control the host network.
 By default the device will be in DHCP state.
 
 Basic network settings can be set through the Supervisor frontend in the System
-tab. Advanced configurations such as VLAN are also available through the
+tab. Additional settings such as VLAN are also available through the
 `ha network` CLI command.
 
 To restore the default configuration the `ha network` CLI command can be used as
@@ -20,8 +20,9 @@ well:
 ha network update default --ipv4-method auto
 ```
 
-If more advanced network settings are required network connection files can be
-placed on a USB drive and imported to the host as described in
+For network settings that are not supported by the frontend or CLI, connection
+configuration for the underlying NetworkManager can be placed on a USB drive
+and imported to the host as described in
 [Configuration][configuration-usb].
 
 ## Manual Network Configuration
@@ -151,7 +152,7 @@ powersave=0
 
 ## Using `nmcli` to set a static IPv4 address
 
-Log into the the Home Assistant OS base system via a console:
+Log into the Home Assistant OS base system via a console:
 
 ```bash
 Welcome to Home Assistant

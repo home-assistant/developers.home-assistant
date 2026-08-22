@@ -9,13 +9,13 @@ We are currently exploring alternatives to device automations. Existing device a
 
 Device triggers are automation triggers that are tied to a specific device and an event or state change. Examples are "light turned on" or "water detected".
 
-Device triggers can be provided by the integration that provides the device (e.g. ZHA, deCONZ) or the entity integrations that the device has entities with (e.g. light, switch). An example of the former is events not tied to an entity e.g. key press on a remote control or touch panel, while an example of the latter could be that a light has been turned on.
+Device triggers can be provided by the integration that provides the device (for example, ZHA, deCONZ) or the entity integrations that the device has entities with (for example, light, switch). An example of the former is events not tied to an entity, for example, key press on a remote control or touch panel, while an example of the latter could be that a light has been turned on.
 
 To add support for Device Triggers, an integration needs to have a `device_trigger.py` and:
 
 - *Define a `TRIGGER_SCHEMA`*: A dictionary that represents a trigger, such as a device and an event type
 - *Create triggers*: Create dictionaries containing the device or entity and supported events or state changes as defined by the schema.
-- *Attach triggers*: Associate a trigger config with an event or state change, e.g. a message fired on the event bus.
+- *Attach triggers*: Associate a trigger config with an event or state change, for example, a message fired on the event bus.
 - *Add text and translations*: Give each trigger a human readable name.
 
 Do not apply the static schema manually. The core will apply the schema if the trigger schema is defined as a constant in the `device_trigger.py` module of the integration.
@@ -118,7 +118,7 @@ The return value is a function that detaches the trigger.
 
 #### Add text and translations
 
-The Automation user interface will display a human-readable string in the device automation mapped to the event type.  Update `strings.json` with the trigger types and subtypes that you support:
+The Automation user interface will display a human-readable string in the device automation mapped to the event type. Update `strings.json` with the trigger types and subtypes that you support:
 
 ```json
 {

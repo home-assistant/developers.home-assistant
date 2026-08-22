@@ -15,10 +15,13 @@ To fire an event, you have to interact with the event bus. The event bus is avai
 Example component that will fire an event when loaded. Note that custom event names are prefixed with the component name.
 
 ```python
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.typing import ConfigType
+
 DOMAIN = "example_component"
 
 
-def setup(hass, config):
+def setup(hass: HomeAssistant, config: ConfigType) -> bool:
     """Set up is called when Home Assistant is loading our component."""
 
     # Fire event example_component_my_cool_event with event data answer=42
@@ -33,15 +36,18 @@ def setup(hass, config):
 Most of the times you'll not be firing events but instead listen to events. For example, the state change of an entity is broadcasted as an event.
 
 ```python
+from homeassistant.core import Event, HomeAssistant
+from homeassistant.helpers.typing import ConfigType
+
 DOMAIN = "example_component"
 
 
-def setup(hass, config):
+def setup(hass: HomeAssistant, config: ConfigType) -> bool:
     """Set up is called when Home Assistant is loading our component."""
     count = 0
 
     # Listener to handle fired events
-    def handle_event(event):
+    def handle_event(event: Event) -> None:
         nonlocal count
         count += 1
         print(f"Answer {count} is: {event.data.get('answer')}")

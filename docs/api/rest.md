@@ -3,7 +3,7 @@ title: "REST API"
 ---
 import ApiEndpoint from '@site/static/js/api_endpoint.jsx'
 
-Home Assistant provides a RESTful API on the same port as the web frontend (default port is port 8123).
+Home Assistant provides a RESTful API on the same port as the web frontend. The default port is 80 on Home Assistant OS installations and 8123 otherwise, unless the port is changed via the `SETUP_PORT` environment variable.
 
 If you are not using the [`frontend`](https://www.home-assistant.io/integrations/frontend/) in your setup then you need to add the [`api` integration](https://www.home-assistant.io/integrations/api/) to your `configuration.yaml` file.
 
@@ -583,7 +583,7 @@ curl \
 Updates or creates a state. You can create any state that you want, it does not have to be backed by an entity in Home Assistant.
 
 :::info
-This endpoint sets the representation of a device within Home Assistant and will not communicate with the actual device. To communicate with the device, use the [POST /api/services/&lt;domain>/&lt;service>](#post-apiservicesltdomainltservice) endpoint.
+This endpoint sets the representation of a device within Home Assistant and will not communicate with the actual device. To communicate with the device, use the [POST /api/services/&lt;domain>/&lt;service>](#post-api-services-domain-service) endpoint.
 :::
 
 Expects a JSON object that has at least a state attribute:

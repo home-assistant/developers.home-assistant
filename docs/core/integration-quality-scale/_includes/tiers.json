@@ -14,6 +14,8 @@
     },
     "dependency-transparency",
     "docs-actions",
+    "docs-triggers",
+    "docs-conditions",
     "docs-high-level-description",
     "docs-installation-instructions",
     "docs-removal-instructions",

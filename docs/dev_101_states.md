@@ -25,13 +25,16 @@ https://developers.home-assistant.io/docs/dev_101_states
 """
 import logging
 
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.typing import ConfigType
+
 _LOGGER = logging.getLogger(__name__)
 
 DOMAIN = "hello_state"
 
 
-def setup(hass, config):
-    """Setup the Hello State component. """
+def setup(hass: HomeAssistant, config: ConfigType) -> bool:
+    """Set up the Hello State component."""
     _LOGGER.info("The 'hello state' component is ready!")
 
     return True
@@ -68,6 +71,9 @@ The next step is the introduction of configuration options. A user can pass conf
 ```python
 import logging
 
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.typing import ConfigType
+
 _LOGGER = logging.getLogger(__name__)
 
 DOMAIN = "hello_state"
@@ -76,7 +82,7 @@ CONF_TEXT = "text"
 DEFAULT_TEXT = "No text!"
 
 
-def setup(hass, config):
+def setup(hass: HomeAssistant, config: ConfigType) -> bool:
     """Set up the Hello State component. """
     # Get the text from the configuration. Use DEFAULT_TEXT if no name is provided.
     text = config[DOMAIN].get(CONF_TEXT, DEFAULT_TEXT)

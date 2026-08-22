@@ -3,7 +3,7 @@ title: Lawn mower entity
 sidebar_label: Lawn mower
 ---
 
-Derive entity platforms from [`homeassistant.components.lawn_mower.LawnMowerEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/lawn_mower/__init__.py)
+Derive entity platforms from [`homeassistant.components.lawn_mower.LawnMowerEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/lawn_mower/__init__.py)
 
 ## Properties
 
@@ -14,7 +14,7 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name     | Type                                       | Default | Description
 | -------- | ------------------------------------------ | ------- | -----------------
-| activity | <code>LawnMowerActivity &#124; None</code> | `None`  | Current activity.
+| activity | `LawnMowerActivity \| None`                | `None`  | Current activity.
 
 ## Activities
 

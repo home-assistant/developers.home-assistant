@@ -74,7 +74,7 @@ There are a few step names reserved for system use:
 | `user`      | Invoked when a user initiates a flow via the user interface or when discovered and the matching and discovery step are not defined.                                 |
 | `reconfigure`      | Invoked when a user initiates a flow to reconfigure an existing config entry via the user interface.                                                                |
 | `zeroconf`  | Invoked if your integration has been discovered via Zeroconf/mDNS as specified [using `zeroconf` in the manifest](/docs/creating_integration_manifest.md#zeroconf). |
-| `reauth`    | Invoked if your integration indicates it [requires reauthentication, e.g., due to expired credentials](#reauthentication).                                          |
+| `reauth`    | Invoked if your integration indicates it [requires reauthentication, for example, due to expired credentials](#reauthentication).                                          |
 | `import`    | Reserved for migrating from YAML configuration to config entries.                                                                                                   |
 
 ## Unique IDs
@@ -87,7 +87,7 @@ If the integration uses Bluetooth, DHCP, HomeKit, Zeroconf/mDNS, USB, or SSDP/uP
 If a unique ID isn't available, alternatively, the `bluetooth`, `dhcp`, `zeroconf`, `hassio`, `homekit`, `ssdp`, `usb`, and `discovery` steps can be omitted, even if they are configured in
 the integration manifest. In that case, the `user` step will be called when the item is discovered.
 
-Alternatively, if an integration can't get a unique ID all the time (e.g., multiple devices, some have one, some don't), a helper is available
+Alternatively, if an integration can't get a unique ID all the time (for example, multiple devices, some have one, some don't), a helper is available
 that still allows for discovery, as long as there aren't any instances of the integration configured yet.
 
 Here's an example of how to handle discovery where a unique ID is not always available:
@@ -254,10 +254,6 @@ async def async_migrate_entry(hass, config_entry: ConfigEntry):
     """Migrate old entry."""
     _LOGGER.debug("Migrating configuration from version %s.%s", config_entry.version, config_entry.minor_version)
 
-    if config_entry.version > 1:
-        # This means the user has downgraded from a future version
-        return False
-
     if config_entry.version == 1:
 
         new_data = {**config_entry.data}
@@ -268,7 +264,9 @@ async def async_migrate_entry(hass, config_entry: ConfigEntry):
             # TODO: modify Config Entry data with changes in version 1.3
             pass
 
-        hass.config_entries.async_update_entry(config_entry, data=new_data, minor_version=3, version=1)
+        hass.config_entries.async_update_entry(
+            config_entry, data=new_data, minor_version=3, version=1
+        )
 
     _LOGGER.debug("Migration to configuration version %s.%s successful", config_entry.version, config_entry.minor_version)
 
@@ -290,7 +288,7 @@ class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_reconfigure(self, user_input: dict[str, Any] | None = None):
         if user_input is not None:
             # TODO: process user input
-            self.async_set_unique_id(user_id)
+            await self.async_set_unique_id(user_id)
             self._abort_if_unique_id_mismatch()
             return self.async_update_reload_and_abort(
                 self._get_reconfigure_entry(),
@@ -317,7 +315,7 @@ Ensuring that the `unique_id` is unchanged should be done using `await self.asyn
 Gracefully handling authentication errors such as invalid, expired, or revoked tokens is needed to advance on the [Integration Quality Scale](/docs/core/integration-quality-scale). This example of how to add reauth to the OAuth flow created by `script.scaffold` following the pattern in [Building a Python library](/docs/api_lib_auth.md#oauth2).
 If you are looking for how to trigger the reauthentication flow, see [handling expired credentials](/docs/integration_setup_failures.md#handling-expired-credentials).
 
-This example catches an authentication exception in config entry setup in `__init__.py` and instructs the user to visit the integrations page in order to reconfigure the integration.
+This example catches an authentication exception in config entry setup in `__init__.py` and instructs the user to visit the integrations page to reconfigure the integration.
 
 To allow the user to change config entry data which is not optional (`OptionsFlow`) and not directly related to authentication, for example a changed host name, integrations should implement the [`reconfigure`](#reconfigure) step.
 
@@ -328,7 +326,7 @@ from homeassistant.core import HomeAssistant
 from . import api
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry):
-    """Setup up a config entry."""
+    """Set up a config entry."""
 
     # TODO: Replace with actual API setup and exception
     auth = api.AsyncConfigEntryAuth(...)
@@ -368,7 +366,7 @@ class OAuth2FlowHandler(
 
     async def async_oauth_create_entry(self, data: dict) -> dict:
         """Create an oauth config entry or update existing entry for reauth."""
-        self.async_set_unique_id(user_id)
+        await self.async_set_unique_id(user_id)
         if self.source == SOURCE_REAUTH:
             self._abort_if_unique_id_mismatch()
             return self.async_update_reload_and_abort(

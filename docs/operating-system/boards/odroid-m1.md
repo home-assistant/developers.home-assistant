@@ -48,6 +48,6 @@ The serial console's baudrate is 1500000 by default.
 
 The systemd startup messages will only appear on the serial console by default.
 To show the messages on the HDMI console instead, add the console manually
-to the `cmdline.txt` file on the boot partition (e.g. `console=tty0`).
+to the `cmdline.txt` file on the boot partition (for example, `console=tty0`).
 
 [1]: http://ppa.linuxfactory.or.kr/images/petitboot/odroidm1/

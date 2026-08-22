@@ -18,11 +18,11 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ----------------------- | ---- | ------- | -----------
-| current_cover_position | <code>int &#124; None</code> | `None` | The current position of cover where 0 means closed and 100 is fully open.
-| current_cover_tilt_position | <code>int &#124; None</code> | `None` | The current tilt position of the cover where 0 means closed/no tilt and 100 means open/maximum tilt.
-| is_closed | <code>bool &#124; None</code> | **Required** | If the cover is closed or not. Used to determine `state`.
-| is_closing | <code>bool &#124; None</code> | `None` | If the cover is closing or not. Used to determine `state`.
-| is_opening | <code>bool &#124; None</code> | `None` | If the cover is opening or not. Used to determine `state`.
+| current_cover_position | `int \| None` | `None` | The current position of cover where 0 means closed and 100 is fully open.
+| current_cover_tilt_position | `int \| None` | `None` | The current tilt position of the cover where 0 means closed/no tilt and 100 means open/maximum tilt.
+| is_closed | `bool \| None` | **Required** | If the cover is closed or not. Used to determine `state`.
+| is_closing | `bool \| None` | `None` | If the cover is closing or not. Used to determine `state`.
+| is_opening | `bool \| None` | `None` | If the cover is opening or not. Used to determine `state`.
 
 ### States
 
@@ -70,120 +70,120 @@ and are combined using the bitwise or (`|`) operator.
 
 ### Open cover
 
-Only implement this method if the flag `SUPPORT_OPEN` is set.
+Only implement this method if the flag `CoverEntityFeature.OPEN` is set.
 
 ```python
 class MyCover(CoverEntity):
     # Implement one of these methods.
 
-    def open_cover(self, **kwargs):
+    def open_cover(self, **kwargs: Any) -> None:
         """Open the cover."""
 
-    async def async_open_cover(self, **kwargs):
+    async def async_open_cover(self, **kwargs: Any) -> None:
         """Open the cover."""
 ```
 
 ### Close cover
 
-Only implement this method if the flag `SUPPORT_CLOSE` is set.
+Only implement this method if the flag `CoverEntityFeature.CLOSE` is set.
 
 ```python
 class MyCover(CoverEntity):
     # Implement one of these methods.
 
-    def close_cover(self, **kwargs):
+    def close_cover(self, **kwargs: Any) -> None:
         """Close cover."""
 
-    async def async_close_cover(self, **kwargs):
+    async def async_close_cover(self, **kwargs: Any) -> None:
         """Close cover."""
 ```
 
 ### Set cover position
 
-Only implement this method if the flag `SUPPORT_SET_POSITION` is set.
+Only implement this method if the flag `CoverEntityFeature.SET_POSITION` is set.
 
 ```python
 class MyCover(CoverEntity):
     # Implement one of these methods.
 
-    def set_cover_position(self, **kwargs):
+    def set_cover_position(self, **kwargs: Any) -> None:
         """Move the cover to a specific position."""
 
-    async def async_set_cover_position(self, **kwargs):
+    async def async_set_cover_position(self, **kwargs: Any) -> None:
         """Move the cover to a specific position."""
 ```
 
 ### Stop cover
 
-Only implement this method if the flag `SUPPORT_STOP` is set.
+Only implement this method if the flag `CoverEntityFeature.STOP` is set.
 
 ```python
 class MyCover(CoverEntity):
     # Implement one of these methods.
 
-    def stop_cover(self, **kwargs):
+    def stop_cover(self, **kwargs: Any) -> None:
         """Stop the cover."""
 
-    async def async_stop_cover(self, **kwargs):
+    async def async_stop_cover(self, **kwargs: Any) -> None:
         """Stop the cover."""
 ```
 
 ### Open cover tilt
 
-Only implement this method if the flag `SUPPORT_OPEN_TILT` is set.
+Only implement this method if the flag `CoverEntityFeature.OPEN_TILT` is set.
 
 ```python
 class MyCover(CoverEntity):
     # Implement one of these methods.
 
-    def open_cover_tilt(self, **kwargs):
+    def open_cover_tilt(self, **kwargs: Any) -> None:
         """Open the cover tilt."""
 
-    async def async_open_cover_tilt(self, **kwargs):
+    async def async_open_cover_tilt(self, **kwargs: Any) -> None:
         """Open the cover tilt."""
 ```
 
 ### Close cover tilt
 
-Only implement this method if the flag `SUPPORT_CLOSE_TILT` is set.
+Only implement this method if the flag `CoverEntityFeature.CLOSE_TILT` is set.
 
 ```python
 class MyCover(CoverEntity):
     # Implement one of these methods.
 
-    def close_cover_tilt(self, **kwargs):
+    def close_cover_tilt(self, **kwargs: Any) -> None:
         """Close the cover tilt."""
 
-    async def async_close_cover_tilt(self, **kwargs):
+    async def async_close_cover_tilt(self, **kwargs: Any) -> None:
         """Close the cover tilt."""
 ```
 
 ### Set cover tilt position
 
-Only implement this method if the flag `SUPPORT_SET_TILT_POSITION` is set.
+Only implement this method if the flag `CoverEntityFeature.SET_TILT_POSITION` is set.
 
 ```python
 class MyCover(CoverEntity):
     # Implement one of these methods.
 
-    def set_cover_tilt_position(self, **kwargs):
+    def set_cover_tilt_position(self, **kwargs: Any) -> None:
         """Move the cover tilt to a specific position."""
 
-    async def async_set_cover_tilt_position(self, **kwargs):
+    async def async_set_cover_tilt_position(self, **kwargs: Any) -> None:
         """Move the cover tilt to a specific position."""
 ```
 
 ### Stop cover tilt
 
-Only implement this method if the flag `SUPPORT_STOP_TILT` is set.
+Only implement this method if the flag `CoverEntityFeature.STOP_TILT` is set.
 
 ```python
 class MyCover(CoverEntity):
     # Implement one of these methods.
 
-    def stop_cover_tilt(self, **kwargs):
+    def stop_cover_tilt(self, **kwargs: Any) -> None:
         """Stop the cover."""
 
-    async def async_stop_cover_tilt(self, **kwargs):
+    async def async_stop_cover_tilt(self, **kwargs: Any) -> None:
         """Stop the cover."""
 ```

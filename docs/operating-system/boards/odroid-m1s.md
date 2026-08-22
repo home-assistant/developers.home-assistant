@@ -7,7 +7,7 @@ Home Assistant OS 12 and newer support the ODROID-M1S board.
 
 ## SD-card
 
-ODROID-M1S can boot HAOS directly from an SD card, as it has higher priority than the system on the eMMC. Simply flash the image to the SD card using your favorite tool and insert it to the micro SD slot on the board. This works even when the eMMC is wiped, or when it contains the factory-default U-Boot SPL loader, which is still able to load U-Boot provided in the HAOS image. In the second case, however, if the SD card fails to probe (e.g. due to a hardware failure), the system on the eMMC may be booted instead of HAOS.
+ODROID-M1S can boot HAOS directly from an SD card, as it has higher priority than the system on the eMMC. Simply flash the image to the SD card using your favorite tool and insert it to the micro SD slot on the board. This works even when the eMMC is wiped, or when it contains the factory-default U-Boot SPL loader, which is still able to load U-Boot provided in the HAOS image. In the second case, however, if the SD card fails to probe (for example, due to a hardware failure), the system on the eMMC may be booted instead of HAOS.
 
 ## eMMC
 
@@ -22,7 +22,7 @@ Installing HAOS replaces the firmware and SPL on the eMMC with the mainline vers
 
 A reliable way of reflashing the eMMC in this case is to download [the binary](https://dn.odroid.com/RK3566/ODROID-M1S/Installer/ODROID-M1S_EMMC2UMS.img) from Odroid onto a PC running ssh server.
 Then, on the Odroid M1S device use the HA CLI, enter `login` command to reach the root shell.
-From there, copy the binary file from your PC (e.g. `ssh user@mypc.local:/path_to/ODROID-M1S_EMMC2UMS.img /tmp` - replace the user with your username on the PC, the mypc.local with your computer name or IP address and the path_to with the actual path to your downloaded binary). This command will then copy the binary to /tmp/ on your HAOS.
+From there, copy the binary file from your PC (for example, `ssh user@mypc.local:/path_to/ODROID-M1S_EMMC2UMS.img /tmp` - replace the user with your username on the PC, the mypc.local with your computer name or IP address and the path_to with the actual path to your downloaded binary). This command will then copy the binary to /tmp/ on your HAOS.
 Next, run `dd if=/tmp/ORDOID-M1S_EMMC2UMS.img of=/dev/mmcblk0` - this will write the binary image into the boot part of your eMMC.
 
 **Warning:** As the odroid.com page has robot detection, do not use the curl command as it will NOT download the actual; risking your device to be bricked!
@@ -44,7 +44,7 @@ The serial console's baudrate is 1500000 by default.
 
 The systemd startup messages will only appear on the serial console by default.
 To show the messages on the HDMI console instead, add the console manually
-to the `cmdline.txt` file on the boot partition (e.g. `console=tty0`).
+to the `cmdline.txt` file on the boot partition (for example, `console=tty0`).
 
 ## GPIO
 

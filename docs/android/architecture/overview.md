@@ -1,6 +1,6 @@
 ---
 title: "Android architecture"
-sidebar_label: "Architecture"
+sidebar_label: "Overview"
 ---
 
 ## Introduction
@@ -22,7 +22,7 @@ The entire codebase is written in [Kotlin](https://kotlinlang.org), ensuring mod
 
 ## Application architecture
 
-We follow Google's recommended [Android architecture](https://developer.android.com/topic/architecture) and draw inspiration from the [NowInAndroid repository](https://github.com/android/nowinandroid).
+We follow Google's recommended [Android architecture](https://developer.android.com/topic/architecture) and draw inspiration from the [NowInAndroid repository](https://github.com/android/nowinandroid). How an individual screen is structured (the ViewModel, its outputs, and the blocks below it) is described in [UI architecture](/docs/android/architecture/ui_architecture); it applies to every screen, not just the frontend.
 
 ### Build logic
 
@@ -86,3 +86,7 @@ The automotive application reuses the sources of the `:app` module, simplifying 
 ### Wear OS
 
 The Wear OS app communicates with the mobile app to retrieve credentials for the Home Assistant server and other configurations using the [Messaging API](https://developer.android.com/training/wearables/data/messages). It only works with the `full` flavor, as it requires Google Play Services. Once the initial setup is complete, all further communication is handled directly with Home Assistant through the WebSocket and the [webhook](/docs/api/native-app-integration/sending-data) that is created for the app.
+
+## Frontend communication
+
+The Home Assistant frontend is rendered inside a [WebView](https://developer.android.com/reference/android/webkit/WebView), which the app talks to over [external authentication](/docs/frontend/external-authentication) and the [external bus](/docs/frontend/external-bus). The screen that hosts it, the JavaScript bridge, the message flow, and the V1/V2 protocols are documented in [Frontend screen](/docs/android/architecture/frontend_screen).
