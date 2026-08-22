@@ -192,7 +192,7 @@ ir.async_delete_issue(hass, DOMAIN, "manual_migration")
 ```
 ### Repair flows using `next_flow`
 
-Integration repair flows using `next_flow` in `RepairsFlow.async_abort` must delete the issue once the repair is completed because `RepairsFlow.async_abort` does not remove the issue from the registry (note that `RepairsFlow.async_create_entry` always removes the issue from the registry). Issues can be deleted in `config_flow.py` or in the integration's `async_setup_entry`:
+Integration repair flows using `next_flow` in `RepairsFlow.async_abort` must delete the issue once the repair is completed because `RepairsFlow.async_abort` does not remove the issue from the registry (note that `RepairsFlow.async_create_entry` always removes the issue from the registry). Issues can be later be deleted in the subsequent flow or in the integration's `async_setup_entry`:
 
 ```python
 async def async_step_reconfigure(
