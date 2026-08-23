@@ -19,12 +19,11 @@ For a complete example of the pattern, see [trovis-modbus](https://github.com/To
 
 ## Sharing one connection with other integrations
 
-A Modbus link addresses many units, and a device only answers one request at a
-time. Two integrations that open their own socket to the same device therefore
-compete for it, and neither can see the other's requests to pace itself.
+A Modbus link addresses many units, and a device answers one request at a time.
+Two integrations that each open their own socket to one device compete for it.
 
 The Modbus integration hands out units over connections it shares, so ask it for
-one instead of building your own connection:
+one instead of building your own:
 
 ```python
 from homeassistant.components.modbus import async_get_unit
@@ -43,19 +42,18 @@ async def async_setup_entry(hass: HomeAssistant, entry: MyConfigEntry) -> bool:
     ...
 ```
 
-Two integrations that ask with equal credentials get units over the same
-connection, so their requests serialize behind its lock rather than contending
-for the device.
+Collect the connection details in your own config flow, as you would any other.
+Two integrations that ask with equal details get units over one connection, so
+their requests serialize behind it.
 
-Your integration collects its own credentials in its own config flow, and passes
-them here. Nothing is persisted: a connection exists only while somebody holds a
-unit on it, and it closes when the last consumer's config entry unloads.
+The connection itself is not stored anywhere: it exists while an integration
+holds a unit on it, and closes when the last holder's config entry unloads. Your
+own entry data is untouched.
 
 Asking for a unit performs no I/O, so a device that is powered down does not stop
-your integration setting up. The first read establishes the link, and a dropped
-link re-establishes itself, so do not reload your config entry when the
-connection goes away.
+your integration setting up. The first read opens the link, and a dropped link
+opens again on the next request. Do not reload your entry when a connection
+drops.
 
-Asking for a device that is already in use over different link settings raises
-`HomeAssistantError`: one connection cannot honour two baud rates or framings at
-once.
+Asking for a device already in use over different link settings raises
+`HomeAssistantError`. One connection cannot honour two baud rates at once.
