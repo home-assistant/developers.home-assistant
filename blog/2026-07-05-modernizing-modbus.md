@@ -14,7 +14,7 @@ A Modbus connection is a single, exclusive resource: only one party can talk on 
 
 The `modbus` integration solves this by handing out units over connections it shares. A device integration collects its own connection details in its own config flow, the same as any other integration, and asks `modbus` for a unit on them. Two integrations that ask with equal details get units over one connection, so their requests serialize behind it instead of contending for the bus.
 
-Nothing about the connection is configured separately, and nothing is persisted: a connection exists only while an integration holds a unit on it, and closes when the last one unloads. That keeps the user experience where it belongs — you set up your heat pump, not a bus — while still giving the bus a single owner. The [Modbus developer documentation](/docs/modbus/introduction) covers how to ask for a unit, with example code.
+The shared connection is not configured or persisted separately. It exists only while an integration holds a unit, and it closes when the last consumer's config entry unloads. That keeps the user experience where it belongs — you set up your heat pump, not a bus — while still giving the bus a single owner. The [Modbus developer documentation](/docs/modbus/introduction) covers how to ask for a unit, with example code.
 
 ## A standalone library
 
