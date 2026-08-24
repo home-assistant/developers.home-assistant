@@ -8,9 +8,9 @@ title: "Introducing child devices"
 
 Home Assistant now has a first-class way to model a device that is made up of several logical parts: **child devices**. A child device is a lightweight sub-device that belongs to a single parent device — think of the individual outlets of a smart power strip, or the individual gangs of a multi-gang wall switch.
 
-Until now, integrations expressed this by splitting the product into several devices and linking the parts back to the parent with `via_device`. That works, but `via_device` was designed to describe *connectivity* — how Home Assistant reaches a device, for example a Zigbee bulb reached through a coordinator, or a Bluetooth sensor reached through a proxy. Using it for *composition* — which physical product a logical part belongs to — overloads the field and prevents Home Assistant from treating the two relationships differently.
+Until now, integrations expressed this by splitting the product into several devices and linking the parts back to the parent with `via_device`. That works, but `via_device` was designed to describe *connectivity* — how Home Assistant reaches a device, for example a Zigbee bulb reached through its coordinator, or a Philips Hue lamp reached through a Hue bridge. Using it for *composition* — which physical product a logical part belongs to — overloads the field and prevents Home Assistant from treating the two relationships differently.
 
-Child devices separate the two concepts. **Integrations which currently model sub devices with a via device should migrate to child devices.** Genuine gateway/hub relationships between separate physical products keep using `via_device` (`via_device_id`).
+Child devices separate the two concepts. **Integrations which currently model sub-devices with a `via_device` should migrate to child devices.** Genuine gateway/hub relationships between separate physical products keep using `via_device_id`.
 
 This is implemented in core [PR #178666](https://github.com/home-assistant/core/pull/178666), the rationale is described in architecture proposal [home-assistant/architecture#1414](https://github.com/home-assistant/architecture/discussions/1414). The changes land in Home Assistant Core 2026.9.
 
@@ -149,6 +149,7 @@ Child devices follow their parent:
 - **Area is inherited.** A child with no area of its own reports its parent's area; setting an area on the child overrides that.
 - **Labels are not inherited.** They stay explicit per device.
 - **A parent with children can't be moved** to another config entry or subentry; a child always lives on the same entry and subentry as its parent.
+- **Targeting the parent targets its children.** When a parent device is used as the target of an action, the action resolves to the entities of the parent *and* of all its child devices. Targeting a child device targets only that child.
 
 ## Migration guidance
 
@@ -158,5 +159,7 @@ Integrations which split a product into several devices and link the parts with 
 - Keep the part's existing `identifiers` so the existing device is converted to a child in place and its id is preserved, keeping automations working.
 - Remove the `via_device`/`via_device_id` link between the part and the parent — the parent relationship is now expressed by `parent_device_id`.
 - Drop any parent-name prefix from the child's name.
+
+Another common migration is to break entities out of a single combined device onto per-part child devices — for example moving each channel's entities off one shared device onto a per-channel child device. Keep the original device as the parent, with its id unchanged, and move each part's entities onto a new child device. Moving an entity onto a child device changes its `device_id`, but device-targeted automations and scripts keep working without user intervention: because targeting a device also targets the entities of its child devices, anything that targets the parent device still acts on the moved entities.
 
 Keep using `via_device_id` for genuine connectivity between separate physical products, such as a hub and the devices it talks to.

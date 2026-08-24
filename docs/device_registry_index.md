@@ -41,7 +41,7 @@ Although not currently available, we could consider offering an option to users 
 | name                 | Name of this device                                                                                                                                                                                                                     |
 | name_by_user         | The user configured name of the device.                                                                                                                                                                                                 |
 | manufacturer         | The manufacturer of the device.                                                                                                                                                                                                         |
-| parent_device_id     | For a [child device](#child-devices), the id of its parent device. `None` for a main device.                                                                                                                                            |
+| parent_device_id     | For a [child device](#child-devices), the id of its parent device. Only child devices (`ChildDeviceEntry`) carry this attribute; the serialized (WebSocket) representation additionally reports `parent_device_id` as `null` for main devices.       |
 | model                | The model name of the device.                                                                                                                                                                                                           |
 | model_id             | The model identifier of the device.                                                                                                                                                                                                     |
 | serial_number        | The serial number of the device. Unlike a serial number in the `identifiers` set, this does not need to be unique.                                                                                                                      |
@@ -290,6 +290,7 @@ Child devices follow their parent:
 - **Area is inherited.** A child with no area of its own reports its parent's area; setting an area on the child overrides that. Use `dr.async_get_effective_area_id(hass, device)` to get the effective area of a device or child device.
 - **Labels are not inherited**; they stay explicit per device.
 - **A parent with children can't be moved** to another config entry or subentry.
+- **Targeting a parent targets its children.** When a device is used as the target of an action, target resolution expands a parent device to the entities of the parent and of all its child devices; a child device resolves to only its own entities. This means device-targeted automations keep working when an integration breaks entities out of a device onto child devices.
 
 ### Looking up child devices
 
