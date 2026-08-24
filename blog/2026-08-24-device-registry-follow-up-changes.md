@@ -144,6 +144,10 @@ DeviceInfo(
 )
 ```
 
+## Passing `created_at` or `modified_at` to `async_get_or_create` is deprecated
+
+`created_at` and `modified_at` are managed by the device registry itself, and passing them to `DeviceRegistry.async_get_or_create` never had any effect — the values were ignored. Passing either is now deprecated in core [PR #179998](https://github.com/home-assistant/core/pull/179998): core and core integrations raise `RuntimeError`, while custom integrations only log a warning, until Home Assistant Core 2027.9. Simply drop the arguments.
+
 ## More examples
 
 The changes above land alongside a large number of per-integration adaptations — migrating to `via_device_id`, using the new lookup helpers, and removing device self-references — which can serve as further examples. Search the core repository for pull requests referencing these APIs if you need a concrete migration to follow.
