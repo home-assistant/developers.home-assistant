@@ -61,8 +61,6 @@ async def async_validate_input(
         await device.async_validate()
 ```
 
-Keep all communication with the temporary unit inside the context. It reuses a matching connection that an integration already holds without closing it on exit. If no integration holds the connection, it closes when the context exits, including when probing raises an exception. After the config flow creates its entry, use `async_get_unit` during setup to hold the unit until that entry unloads.
-
 The connection itself is not stored anywhere: it exists while an integration
 holds a unit on it, and closes when the last holder's config entry unloads. Your
 own entry data is untouched.
