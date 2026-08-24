@@ -8,7 +8,7 @@ title: "More device registry deprecations, new helpers and validation"
 
 This is a follow-up to [Devices are restricted to a single config entry and at most one subentry](/blog/2026/07/21/device-registry-single-config-entry), and covers additional device registry deprecations, a few new helper methods, and some stricter validation that landed after that post.
 
-**Most integrations don't interact directly with the device registry and don't need any changes.** Authors of integrations which set `via_device`, look devices up in the registry, or call `async_update_device` directly should read on.
+**Most custom integrations won't be affected by this set of changes.** Read on if your integration sets `via_device` or `default_manufacturer` / `default_model` / `default_name` in `DeviceInfo`, looks devices up in the registry, reads the registry's `devices`, `deleted_devices` or `child_devices` containers, calls `async_update_device` directly, or attaches a device to an entity that has no config entry or unique id.
 
 Unless noted otherwise, deprecated functionality logs a warning at runtime and remains supported until Home Assistant Core 2027.8. As before, deprecations which are only relevant to core and core integrations are enforced more strictly there: those callers raise immediately, while custom integrations keep getting a warning until the removal version.
 
@@ -35,7 +35,7 @@ via_device_id=dr.async_get_device_id_by_identifier(
 )
 ```
 
-The lookup is unambiguous because identifiers are unique within a config entry. It raises `ValueError` if no matching device exists, so only call it once the via device has been created. When the via device is created in the same `async_setup_entry`, use the returned entry's `.id` directly instead of looking it up.
+The lookup is unambiguous because identifiers are unique within a config entry. It raises `ValueError` if no matching device exists, so only call it once the via device has been created. When your integration creates the via device itself, skip the lookup and read `.id` from the `DeviceEntry` that `async_get_or_create` returned for it.
 
 This helper was added in core [PR #177494](https://github.com/home-assistant/core/pull/177494), which also migrated a number of integrations from `via_device` to `via_device_id` as examples.
 
@@ -80,7 +80,7 @@ device, config_entry = dr.async_get_device_and_config_entry_for_domain(
 )
 ```
 
-It returns `(None, None)` for an unknown device id, and `(device, None)` when the device exists but no config entry of `domain` owns it. The helper does not check whether the config entry is loaded, so keep your own `ConfigEntryState.LOADED` check if you need one.
+It returns `(None, None)` for an unknown or child-device id, and `(device, None)` when a main device exists but no config entry of `domain` owns it. For a pre-migration composite id it returns a matching split device and its config entry, or the restored composite device and `None` when no split matches. The helper does not check whether the config entry is loaded, so keep your own `ConfigEntryState.LOADED` check if you need one.
 
 ## The `devices`, `deleted_devices` and `child_devices` containers are protected
 
