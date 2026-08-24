@@ -221,10 +221,8 @@ def async_get_or_create_child(
     *,
     config_entry_id: str,
     config_subentry_id: str | UndefinedType | None = UNDEFINED,
-    created_at: str | datetime | UndefinedType = UNDEFINED,  # will be ignored
     disabled_by: DeviceEntryDisabler | UndefinedType | None = UNDEFINED,
     identifiers: set[tuple[str, str]],
-    modified_at: str | datetime | UndefinedType = UNDEFINED,  # will be ignored
     name: str | UndefinedType | None = UNDEFINED,
     parent_device_id: str,
     suggested_area: str | UndefinedType | None = UNDEFINED,
@@ -257,11 +255,11 @@ outlet = device_registry.async_get_or_create_child(
 
 `config_entry_id`, `identifiers` and `parent_device_id` are required. There is deliberately no `via_device`, `connections`, `manufacturer`, `model` or firmware parameter — a child device does not carry those.
 
-The parent must already exist (the registry never auto-creates it), must be registered by the same config entry, and must belong to the same config subentry. The parent must itself be a main device — passing a child device's id as `parent_device_id` is rejected, since children can't be nested.
+The parent must already exist (the registry never auto-creates it), must be registered by the same config entry, and must belong to the same config subentry. If the parent belongs to a config subentry, pass its `config_subentry_id` explicitly: it is not inherited, and omitting it defaults to no subentry, which raises `DeviceInfoError`. The parent must itself be a main device — passing a child device's id as `parent_device_id` is rejected, since children can't be nested.
 
 ### Converting a device to a child
 
-If the `identifiers` passed to `async_get_or_create_child`, or the `identifiers` of a child's `device_info`, match an existing device, that device is **converted to a child device in place, keeping its id**. This is useful when migrating an already-split integration to child devices: registering each part with the identifiers it already had turns it into a child of the parent without changing its device id, so device-based automations keep working.
+If the `identifiers` passed to `async_get_or_create_child`, or the `identifiers` of a child's `device_info`, match an existing device of the same config entry, that device is **converted to a child device in place, keeping its id**. This is useful when migrating an already-split integration to child devices: registering each part with the identifiers it already had turns it into a child of the parent without changing its device id, so device-based automations keep working.
 
 Converting the other direction — turning a child device back into a main device — is **not supported directly**. There is no `parent_device_id` parameter on `async_update_child_device`, reparenting is rejected, and calling `async_get_or_create` with a live child's identifiers raises rather than promoting the child.
 

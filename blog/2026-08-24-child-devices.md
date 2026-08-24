@@ -112,11 +112,11 @@ outlet = device_registry.async_get_or_create_child(
 )
 ```
 
-The parent must already exist (the registry never auto-creates it), must be registered by the same config entry, and must belong to the same config subentry. The parent must itself be a main device — a child can't be the parent of another child.
+The parent must already exist (the registry never auto-creates it), must be registered by the same config entry, and must belong to the same config subentry. If the parent belongs to a config subentry, pass its `config_subentry_id` explicitly — it is not inherited, and omitting it defaults to no subentry and raises `DeviceInfoError`. The parent must itself be a main device — a child can't be the parent of another child.
 
 ## Converting an existing device to a child
 
-Migrating an already-split integration should preserve the existing device ids so that device-based automations keep working. This happens automatically: if the `identifiers` passed to `async_get_or_create_child` (or the `identifiers` of a child's `device_info`) match an existing device, that device is **converted to a child device in place, keeping its id**. Registering the outlet above with the same identifiers the outlet's standalone device previously used turns it into a child of the power strip without changing its id.
+Migrating an already-split integration should preserve the existing device ids so that device-based automations keep working. This happens automatically: if the `identifiers` passed to `async_get_or_create_child` (or the `identifiers` of a child's `device_info`) match an existing device of the same config entry, that device is **converted to a child device in place, keeping its id**. Registering the outlet above with the same identifiers the outlet's standalone device previously used turns it into a child of the power strip without changing its id.
 
 When migrating, this is also a good moment to drop any parent-name prefix that used to be baked into the sub-device's name — for example rename *"Power strip Outlet 3"* to just *"Outlet 3"*, since the frontend can compose the parent name into the display name when needed.
 
