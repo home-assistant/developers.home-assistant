@@ -165,6 +165,10 @@ device_registry.async_get_or_create(
 
 ## Child devices
 
+:::warning
+Child devices are a new feature and the design is still being finalized. The API and behavior described here may change.
+:::
+
 A child device is a lightweight sub-device that models a logical part of a single physical product, for example one outlet of a smart power strip or one gang of a multi-gang wall switch. Use a child device to split a product whose parts should be grouped separately or placed in different areas, and reserve `via_device` for connectivity between separate physical products, such as a hub and the devices behind it.
 
 A child device:
