@@ -82,6 +82,31 @@ device, config_entry = dr.async_get_device_and_config_entry_for_domain(
 
 It returns `(None, None)` for an unknown device id, and `(device, None)` when the device exists but no config entry of `domain` owns it. The helper does not check whether the config entry is loaded, so keep your own `ConfigEntryState.LOADED` check if you need one.
 
+## The `devices`, `deleted_devices` and `child_devices` containers are protected
+
+The `DeviceRegistry.devices`, `DeviceRegistry.deleted_devices` and `DeviceRegistry.child_devices` attributes used to be dictionaries keyed by device id, and integrations sometimes read them directly — `registry.devices.get(device_id)`, `registry.devices.values()`, or `device_id in registry.devices`. The backing containers are now protected, and the public attributes are narrowed to what an integration legitimately needs.
+
+`devices` (core [PR #179578](https://github.com/home-assistant/core/pull/179578)) is now a read-only collection of the registered devices. Iterating it yields the `DeviceEntry` values directly, and `len()` and value membership (`device_entry in registry.devices`) work as expected. Using it as a mapping — subscription, `.get()`, `.values()`, `.keys()`, or membership by device id (`device_id in registry.devices`) — is deprecated. The mapping surface keeps working as a backwards compatibility shim: core and core integrations raise `RuntimeError`, while custom integrations only log a warning. It is removed in Home Assistant Core 2027.9.
+
+In practice, iterate with `for device in registry.devices` instead of `registry.devices.values()`, and look a device up by id with `registry.async_get(device_id)` instead of `registry.devices.get(device_id)`.
+
+`child_devices` (core [PR #179713](https://github.com/home-assistant/core/pull/179713)) is now a read-only collection of the child devices. It follows the container protocol — you can iterate it (it yields the child device entries), take its `len()`, and test value membership — and offers no dictionary-style access at all: there is no `.get()` or `.values()` and no lookup by device id. There is no backwards compatibility shim.
+
+`deleted_devices` (core [PR #179720](https://github.com/home-assistant/core/pull/179720)) is an internal implementation detail of the device registry, and the whole attribute is now deprecated — there is no supported public use. Accessing it in any way is deprecated: core and core integrations raise `RuntimeError`, while custom integrations only log a warning. It is removed in Home Assistant Core 2027.9.
+
+### Testing what kind of device an id refers to
+
+With direct container access going away, `DeviceRegistry.async_get` gains an `include_composite_devices` parameter to test what an id refers to (core [PR #179594](https://github.com/home-assistant/core/pull/179594)). With `include_composite_devices=False`, a pre-migration composite device id resolves to `None`:
+
+```py
+is_composite = (
+    registry.async_get(device_id) is not None
+    and registry.async_get(device_id, include_composite_devices=False) is None
+)
+```
+
+This complements the existing `include_child_devices` and `include_main_devices` parameters, which similarly resolve — or exclude — child and main devices. `DeviceRegistry.async_is_composite_device_id`, introduced in the previous post, is now redundant and deprecated in the same PR; use `async_get` with `include_composite_devices=False` instead. It keeps working — core and core integrations raise `RuntimeError`, while custom integrations only log a warning — until Home Assistant Core 2027.9.
+
 ## Attaching a device to an entity requires a config entry and a unique id
 
 An entity may only attach a device if it has a unique id and belongs to a config entry. Attempting to attach a device from an entity without a config entry, or without a unique id, is now caught in `entity_platform` (core [PR #177459](https://github.com/home-assistant/core/pull/177459)): the device link is dropped and a warning is logged. This is only a warning for now, and will raise from Home Assistant Core 2027.8.
@@ -95,6 +120,29 @@ The device registry used to classify each `DeviceInfo` as one of a fixed set of 
 - `DeviceInfo` shapes that previously didn't match any type are now accepted. The old error *"device info needs to either describe a device, link to existing device or provide extra information"* is gone; a `DeviceInfo` still needs at least one of `identifiers` or `connections`.
 - Passing both a field and its `default_` counterpart — for example both `name` and `default_name`, or `model` and `default_model` — now raises `DeviceInfoError`.
 - When a new device is created without a name, it now defaults to the config entry title for **all** device infos, not just those that were previously classified as primary. This can change the composed name of entities on devices that previously had no name.
+
+## `default_manufacturer`, `default_model` and `default_name` are deprecated
+
+The `default_manufacturer`, `default_model` and `default_name` members of `DeviceInfo` are deprecated in core [PR #179549](https://github.com/home-assistant/core/pull/179549). Pass the plain `manufacturer`, `model` and `name` fields instead.
+
+These `default_` fields let an integration that wasn't considered the primary one for a shared device suggest a name, manufacturer or model without overwriting the value set by the primary integration. A device now belongs to a single config entry, so there is no longer a primary integration to defer to, and the plain fields can be set directly.
+
+The three fields have been removed from the `DeviceInfo` type, so setting them is a typing error, and passing any of them to `async_get_or_create` logs a warning. As with the other device registry deprecations, core and core integrations raise `RuntimeError`, while custom integrations keep working with a warning until Home Assistant Core 2027.9.
+
+Entities which set these fields — device trackers, for example, set `default_name` — should pass the non-default variant instead:
+
+```py
+# Before
+DeviceInfo(
+    connections={(CONNECTION_NETWORK_MAC, mac)},
+    default_name=f"Device {mac}",
+)
+# After
+DeviceInfo(
+    connections={(CONNECTION_NETWORK_MAC, mac)},
+    name=f"Device {mac}",
+)
+```
 
 ## More examples
 
