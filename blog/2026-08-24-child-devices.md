@@ -144,7 +144,7 @@ The order matters: the child must be removed before the identifiers are free to 
 
 Child devices follow their parent:
 
-- **Deletion cascades.** Removing a parent device removes its child devices with it. A sub-device has no meaning without the physical device it was split from.
+- **Deletion cascades.** Removing a parent device removes its child devices with it. A child device has no meaning without the physical device it was split from.
 - **Disabling cascades.** Disabling a parent disables its children; enabling the parent re-enables the children it disabled. A child of a disabled parent can't be enabled on its own.
 - **Area is inherited.** A child with no area of its own reports its parent's area; setting an area on the child overrides that.
 - **Labels are not inherited.** They stay explicit per device.
