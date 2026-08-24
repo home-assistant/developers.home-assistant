@@ -15,7 +15,9 @@ A device in Home Assistant represents either a physical device that has its own 
 
 If you connect a sensor to another device to read some of its data, it should still be represented as two different devices. The reason for this is that the sensor could be moved to read the data of another device.
 
-A device that offers multiple endpoints, may be split into separate devices and refer back to a parent device with the `via_device` attribute. This allows the separate endpoints to be assigned to different areas in the building and it also allows logical grouping of entities. Typical examples of when a device should be split in a parent device and multiple child devices are smart power strips or smart multi-gang wall switches. The parent device will have entities representing the state of the power strip or multi-gang switch, for example network connection status and firmware update. The sub devices will group entities tied to one of the channels, for example a switch entity and energy consumption sensor per channel.
+A device that offers multiple endpoints may be split into a parent device and multiple **child devices**. Typical examples of when a device should be split this way are smart power strips or smart multi-gang wall switches. The parent device will have entities representing the state of the power strip or multi-gang switch, for example network connection status and firmware update. The child devices will group entities tied to one of the channels, for example a switch entity and energy consumption sensor per channel. This allows the separate endpoints to be assigned to different areas in the building and it also allows logical grouping of entities. See [Child devices](#child-devices) for details.
+
+Splitting one physical product into child devices is different from linking two separate physical products with `via_device`. `via_device` describes *connectivity* — how Home Assistant reaches a device, for example a hub and the devices behind it — whereas child devices describe *composition* — the logical parts of a single product.
 
 :::info
 Although not currently available, we could consider offering an option to users to merge devices.
@@ -39,11 +41,12 @@ Although not currently available, we could consider offering an option to users 
 | name                 | Name of this device                                                                                                                                                                                                                     |
 | name_by_user         | The user configured name of the device.                                                                                                                                                                                                 |
 | manufacturer         | The manufacturer of the device.                                                                                                                                                                                                         |
+| parent_device_id     | For a [child device](#child-devices), the id of its parent device. `None` for a main device.                                                                                                                                            |
 | model                | The model name of the device.                                                                                                                                                                                                           |
 | model_id             | The model identifier of the device.                                                                                                                                                                                                     |
 | serial_number        | The serial number of the device. Unlike a serial number in the `identifiers` set, this does not need to be unique.                                                                                                                      |
 | sw_version           | The firmware version of the device.                                                                                                                                                                                                     |
-| via_device           | Identifier of a device that routes messages between this device and Home Assistant. Examples of such devices are hubs, or parent devices of a sub-device. This is used to show device topology in Home Assistant.                       |
+| via_device           | Identifier of a device that routes messages between this device and Home Assistant. An example of such a device is a hub. This is used to show device topology in Home Assistant. To model the logical parts of a single product, use a [child device](#child-devices) instead.                       |
 
 ## Defining devices
 
@@ -159,6 +162,142 @@ device_registry.async_get_or_create(
     hw_version=config.hwversion,
 )
 ```
+
+## Child devices
+
+A child device is a lightweight sub-device that models a logical part of a single physical product, for example one outlet of a smart power strip or one gang of a multi-gang wall switch. Use a child device to split a product whose parts should be grouped separately or placed in different areas, and reserve `via_device` for connectivity between separate physical products, such as a hub and the devices behind it.
+
+A child device:
+
+- Belongs to a single parent device, referenced by the parent's device id (`parent_device_id`).
+- Belongs to the same config entry and config subentry as its parent.
+- Has no connectivity or hardware identity of its own — it carries no `connections`, `via_device`, `manufacturer`, `model`, firmware versions or serial number. Those belong to the physical parent device.
+- Inherits its parent's area unless it is given an area of its own.
+
+Child devices are a single level: a child device can't be the parent of another child device.
+
+Like any device, a child device is registered either automatically through an entity or manually.
+
+### Registering a child device through an entity
+
+For a child device created implicitly by its entities, return a `ChildDeviceInfo` from the entity's `device_info` property with `parent_device_id` set to the parent's device id. `ChildDeviceInfo` is a lighter counterpart to `DeviceInfo` carrying only the fields that apply to a child:
+
+```python
+# Definition of ChildDeviceInfo TypedDict
+class ChildDeviceInfo(TypedDict, total=False):
+    """Entity device information for a child device in the device registry."""
+
+    created_at: str
+    identifiers: Required[set[tuple[str, str]]]
+    modified_at: str
+    name: str | None
+    parent_device_id: Required[str]
+    suggested_area: str | None
+    translation_key: str | None
+    translation_placeholders: Mapping[str, str] | None
+
+# Inside a platform
+class OutletSwitch(SwitchEntity):
+    @property
+    def device_info(self) -> ChildDeviceInfo:
+        """Return the child device info."""
+        return ChildDeviceInfo(
+            identifiers={(DOMAIN, f"{self._strip_id}_outlet_{self._outlet}")},
+            name=f"Outlet {self._outlet}",
+            parent_device_id=self._parent_device_id,
+        )
+```
+
+`identifiers` and `parent_device_id` are required. An entity's `device_info` may return either a `DeviceInfo` or a `ChildDeviceInfo`; a non-`None` `parent_device_id` is what makes the entity register a child device. The `parent_device_id` is the parent's Home Assistant device id (`DeviceEntry.id`), not its identifiers, so the parent device must already be registered.
+
+### Registering a child device manually
+
+For a child device that isn't represented by an entity, register it on the device registry with `async_get_or_create_child`:
+
+```python
+# Definition of DeviceRegistry.async_get_or_create_child
+def async_get_or_create_child(
+    self,
+    *,
+    config_entry_id: str,
+    config_subentry_id: str | UndefinedType | None = UNDEFINED,
+    created_at: str | datetime | UndefinedType = UNDEFINED,  # will be ignored
+    disabled_by: DeviceEntryDisabler | UndefinedType | None = UNDEFINED,
+    identifiers: set[tuple[str, str]],
+    modified_at: str | datetime | UndefinedType = UNDEFINED,  # will be ignored
+    name: str | UndefinedType | None = UNDEFINED,
+    parent_device_id: str,
+    suggested_area: str | UndefinedType | None = UNDEFINED,
+    translation_key: str | None = None,
+    translation_placeholders: Mapping[str, str] | None = None,
+) -> ChildDeviceEntry:
+    """Get child device. Create if it doesn't exist."""
+
+# Inside a component
+from homeassistant.helpers import device_registry as dr
+
+device_registry = dr.async_get(hass)
+
+# The parent device must be registered first
+parent = device_registry.async_get_or_create(
+    config_entry_id=entry.entry_id,
+    identifiers={(DOMAIN, strip_id)},
+    manufacturer="Example",
+    name="Power strip",
+)
+
+# Register each outlet as a child of the power strip
+outlet = device_registry.async_get_or_create_child(
+    config_entry_id=entry.entry_id,
+    parent_device_id=parent.id,
+    identifiers={(DOMAIN, f"{strip_id}_outlet_1")},
+    name="Outlet 1",
+)
+```
+
+`config_entry_id`, `identifiers` and `parent_device_id` are required. There is deliberately no `via_device`, `connections`, `manufacturer`, `model` or firmware parameter — a child device does not carry those.
+
+The parent must already exist (the registry never auto-creates it), must be registered by the same config entry, and must belong to the same config subentry. The parent must itself be a main device — passing a child device's id as `parent_device_id` is rejected, since children can't be nested.
+
+### Converting a device to a child
+
+If the `identifiers` passed to `async_get_or_create_child`, or the `identifiers` of a child's `device_info`, match an existing device, that device is **converted to a child device in place, keeping its id**. This is useful when migrating an already-split integration to child devices: registering each part with the identifiers it already had turns it into a child of the parent without changing its device id, so device-based automations keep working.
+
+Converting the other direction — turning a child device back into a main device — is **not supported directly**. There is no `parent_device_id` parameter on `async_update_child_device`, reparenting is rejected, and calling `async_get_or_create` with a live child's identifiers raises rather than promoting the child.
+
+To do it indirectly, remove the child device and then recreate it as a main device with `async_get_or_create`, passing the same identifiers the deleted child had:
+
+```python
+# Remove the child device first...
+device_registry.async_remove_device(child.id)
+
+# ...then recreate it as a main device with the same identifiers
+device_registry.async_get_or_create(
+    config_entry_id=entry.entry_id,
+    identifiers={(DOMAIN, outlet_id)},  # same identifiers the child had
+    name="Outlet 1",
+)
+```
+
+The order matters: the child must be removed before its identifiers are free to be registered as a main device.
+
+### Child device lifecycle
+
+Child devices follow their parent:
+
+- **Deletion cascades.** Removing a parent device removes its child devices with it.
+- **Disabling cascades.** Disabling a parent disables its children; enabling the parent re-enables the children it had disabled. A child of a disabled parent can't be enabled on its own.
+- **Area is inherited.** A child with no area of its own reports its parent's area; setting an area on the child overrides that. Use `dr.async_get_effective_area_id(hass, device)` to get the effective area of a device or child device.
+- **Labels are not inherited**; they stay explicit per device.
+- **A parent with children can't be moved** to another config entry or subentry.
+
+### Looking up child devices
+
+Several registry helpers are available for child devices:
+
+- `dr.async_entries_for_parent_device(device_registry, parent_device_id)` returns the children of a device.
+- `device_registry.async_get_child_device_by_identifier(identifier, config_entry_id)` looks up a child device by one of its identifiers, scoped to a config entry.
+- `device_registry.async_get(device_id, include_child_devices=..., include_main_devices=...)` can be scoped to resolve only main devices or only child devices.
 
 ## Removing devices
 
