@@ -177,9 +177,6 @@ module.exports = {
             type: "all",
           },
         },
-        googleAnalytics: {
-          trackingID: "UA-57927901-3",
-        },
       },
     ],
   ],
