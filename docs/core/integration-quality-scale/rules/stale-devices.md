@@ -23,7 +23,7 @@ If so, we remove them from the device registry.
 This also causes all entities associated with the device to be removed.
 
 `coordinator.py`
-```python {13,20-30} showLineNumbers
+```python {13,20-29} showLineNumbers
 class MyCoordinator(DataUpdateCoordinator[dict[str, MyDevice]]):
     """Class to manage fetching data."""
 
@@ -47,12 +47,11 @@ class MyCoordinator(DataUpdateCoordinator[dict[str, MyDevice]]):
         if (stale_devices := self.previous_devices - current_devices):
             device_registry = dr.async_get(self.hass)
             for device_id in stale_devices:
-                device = device_registry.async_get_device(identifiers={(DOMAIN, device_id)})
+                device = device_registry.async_get_device_by_identifier(
+                    (DOMAIN, device_id), self.config_entry.entry_id
+                )
                 if device:
-                    device_registry.async_update_device(
-                        device_id=device.id,
-                        remove_config_entry_id=self.config_entry.entry_id,
-                    )
+                    device_registry.async_remove_device(device.id)
         self.previous_devices = current_devices
         return data
 ```
