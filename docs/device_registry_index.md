@@ -52,12 +52,14 @@ Although not currently available, we could consider offering an option to users 
 
 ## Defining devices
 
+A device is registered automatically from an entity's `device_info` (see below) or manually. In both cases the registry matches the registration against the existing devices of the same config entry, by identifiers first and then by connections. Only one identifier or connection needs to match for the registration to be treated as the same device; any other supplied identifiers and connections are then added to that device. Registering an identifier or connection that already belongs to a different device of the same config entry is a collision and raises an error.
+
 ### Automatic registration through an entity
 :::tip
 Entity device info is only read if the entity is loaded via a [config entry](config_entries_index.md) and the `unique_id` property is defined.
 :::
 
-Each entity is able to define a device via the `device_info` property. This property is read when an entity is added to Home Assistant via a config entry. A device will be matched up with an existing device of the entity's config entry via supplied identifiers or connections, like serial numbers or MAC addresses. Identifiers and connections are unique per config entry, so the match is always scoped to the config entry the entity belongs to. If both identifiers and connections are provided, the device registry first tries to match by identifiers and then by connections. Only one identifier or connection needs to match an existing device of the config entry for it to be treated as the same device; the other supplied identifiers and connections are then added to that device. Supplying an identifier or connection that is already registered to a different device of the same config entry is a collision and raises an error.
+Each entity is able to define a device via the `device_info` property. This property is read when an entity is added to Home Assistant via a config entry. Identifiers and connections are unique per config entry, so the device is always matched within the config entry the entity belongs to, using the supplied identifiers or connections, like serial numbers or MAC addresses.
 
 ```python
 # Definition of DeviceInfo TypedDict
@@ -97,10 +99,45 @@ class HueLight(LightEntity):
             model=self.light.productname,
             model_id=self.light.modelid,
             sw_version=self.light.swversion,
-            # The Home Assistant device id of the bridge. Resolve it from the
-            # bridge's identifiers with async_get_device_id_by_identifier, or read
-            # it from the DeviceEntry returned when the bridge device is created.
-            via_device_id=self.bridge_device_id,
+        )
+```
+
+To link the device to the via device it connects through — such as a hub — set `via_device_id` to the via device's Home Assistant device id. That id isn't known until the via device has been registered, so it is obtained in one of two ways.
+
+Look it up from the via device's identifiers with `async_get_device_id_by_identifier`, for example inside the `device_info` property:
+
+```python
+class HueLight(LightEntity):
+    def __init__(self, config_entry: ConfigEntry, light: Light) -> None:
+        """Initialize the light."""
+        self._config_entry = config_entry
+        self.light = light
+
+    @property
+    def device_info(self) -> DeviceInfo:
+        """Return the device info."""
+        return DeviceInfo(
+            identifiers={(hue.DOMAIN, self.light.unique_id)},
+            name=self.light.name,
+            via_device_id=dr.async_get_device_id_by_identifier(
+                self.hass,
+                (hue.DOMAIN, self.light.bridge_id),
+                config_entry_id=self._config_entry.entry_id,
+            ),
+        )
+```
+
+Or, when the integration already knows the via device's id — typically because it created the via device itself and kept the returned `DeviceEntry` — pass the id to the entity and set `_attr_device_info` in the constructor:
+
+```python
+class HueLight(LightEntity):
+    def __init__(self, light: Light, bridge_device_id: str) -> None:
+        """Initialize the light."""
+        self.light = light
+        self._attr_device_info = DeviceInfo(
+            identifiers={(hue.DOMAIN, light.unique_id)},
+            name=light.name,
+            via_device_id=bridge_device_id,
         )
 ```
 
@@ -185,6 +222,8 @@ device = device_registry.async_get_device_by_connection(
 )
 ```
 
+These methods return main devices. To look up a child device by one of its identifiers, use `async_get_child_device_by_identifier(identifier, config_entry_id)`.
+
 To set `via_device_id`, resolve the via device's Home Assistant device id from its identifiers with the module-level helper `async_get_device_id_by_identifier`. The lookup is unambiguous because identifiers are unique within a config entry, and it raises `ValueError` if no matching device exists, so only call it once the via device has been created. When your integration creates the via device itself, skip the lookup and read `.id` from the `DeviceEntry` that `async_get_or_create` returned.
 
 ```python
@@ -193,15 +232,17 @@ via_device_id = dr.async_get_device_id_by_identifier(
 )
 ```
 
-To find the device together with the config entry a given integration owns for it, use `async_get_device_and_config_entry_for_domain`:
+To find the device together with the config entry a given integration owns for it, use `async_get_device_and_config_entry_for_domain`. It returns `(None, None)` when `device_id` is unknown or refers to a child device, and `(device, None)` when the device exists but no config entry of `domain` owns it, so check both values before using them:
 
 ```python
 device, config_entry = dr.async_get_device_and_config_entry_for_domain(
     hass, device_id, domain=DOMAIN
 )
+if device is not None and config_entry is not None:
+    ...
 ```
 
-To get every device matching an identifier or connection, possibly across config entries, use `DeviceRegistry.async_get_devices()`, which returns a list.
+To get every main device matching an identifier or connection, possibly across config entries, use `DeviceRegistry.async_get_devices()`, which returns a list.
 
 ## Child devices
 

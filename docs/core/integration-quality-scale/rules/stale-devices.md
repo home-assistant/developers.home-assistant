@@ -23,15 +23,18 @@ If so, we remove them from the device registry.
 This also causes all entities associated with the device to be removed.
 
 `coordinator.py`
-```python {13,20-29} showLineNumbers
+```python {16,23-32} showLineNumbers
 class MyCoordinator(DataUpdateCoordinator[dict[str, MyDevice]]):
     """Class to manage fetching data."""
 
-    def __init__(self, hass: HomeAssistant, client: MyClient) -> None:
+    def __init__(
+        self, hass: HomeAssistant, config_entry: MyConfigEntry, client: MyClient
+    ) -> None:
         """Initialize coordinator."""
         super().__init__(
             hass,
             logger=LOGGER,
+            config_entry=config_entry,
             name=DOMAIN,
             update_interval=timedelta(minutes=1),
         )
