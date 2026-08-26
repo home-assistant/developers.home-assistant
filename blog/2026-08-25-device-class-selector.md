@@ -8,7 +8,7 @@ title: New device class selector
 
 Using this in [config flows](/docs/data_entry_flow_index#show-form) will allow frontend to automatically translate device classes into the proper names.
 
-This means that the `SelectSelector` should be beused any to select device classes. When the selector is replaced, stale translations should be removed.
+This means that the `SelectSelector` should not be used anymore to select device classes. When the selector is replaced, stale translations should be removed.
 
 Example:
 
