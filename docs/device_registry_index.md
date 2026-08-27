@@ -15,13 +15,11 @@ A device in Home Assistant represents either a physical device that has its own 
 
 If you connect a sensor to another device to read some of its data, it should still be represented as two different devices. The reason for this is that the sensor could be moved to read the data of another device.
 
+A physical device that is supported by several integrations, and is therefore registered by several config entries, is represented by one device entry per config entry rather than a single shared device. Identifiers and connections, such as serial numbers or MAC addresses, are unique per config entry, so the same identifier registered by two config entries results in two separate device entries.
+
 A device that offers multiple endpoints may be split into a parent device and multiple **child devices**. Typical examples of when a device should be split this way are smart power strips or smart multi-gang wall switches. The parent device will have entities representing the state of the power strip or multi-gang switch, for example network connection status and firmware update. The child devices will group entities tied to one of the channels, for example a switch entity and energy consumption sensor per channel. This allows the separate endpoints to be assigned to different areas in the building and it also allows logical grouping of entities. See [Child devices](#child-devices) for details.
 
 Splitting one physical product into child devices is different from linking two separate physical products with `via_device_id`. `via_device_id` describes *connectivity* — how Home Assistant reaches a device, for example a hub and the devices behind it — whereas child devices describe *composition* — the logical parts of a single product.
-
-:::info
-Although not currently available, we could consider offering an option to users to merge devices.
-:::
 
 ## Device properties
 
