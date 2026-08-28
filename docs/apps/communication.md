@@ -41,6 +41,40 @@ Apps can call some API commands without needing to set `hassio_api: true`:
 
 ***Note:*** For Home Assistant API access requirements, see above.
 
+## Discovery
+
+An app can announce a service it hosts to Home Assistant, so that the user is offered a ready-made configuration for it instead of having to enter connection details by hand.
+
+List the services the app provides in its [configuration](configuration.md):
+
+```yaml
+discovery:
+  - mcp
+```
+
+Then send the connection details to the Supervisor once the service is up:
+
+```bash
+curl -X POST -H "Authorization: Bearer ${SUPERVISOR_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{"service": "mcp", "config": {"url": "http://local-my-app:8099/mcp"}}' \
+  http://supervisor/discovery
+```
+
+The service name selects the integration that handles the message, as it is used as the integration domain. So `mcp` starts a config flow for the [Model Context Protocol](https://www.home-assistant.io/integrations/mcp/) integration. The `config` dictionary is handed to that integration unchanged, and each integration defines which keys it expects.
+
+An app may only announce services that are listed in its own `discovery` configuration.
+
+The Supervisor assigns a UUID to the message and keeps it for as long as the app is installed, so sending the same information again on every app start is fine and does not result in a second configuration. Sending a changed `config` is pushed to Home Assistant, where the integration can update the existing configuration, for example when the app moves to another port. When the app is uninstalled, the message is removed and Home Assistant removes the configuration along with it.
+
+### Service configuration
+
+| Service | Configuration | Description |
+| ------- | ------------- | ----------- |
+| `mcp`   | `url`         | The URL of a [Model Context Protocol](https://www.home-assistant.io/integrations/mcp/) server hosted by the app, for example `http://local-my-app:8099/mcp`. |
+
+This table is not exhaustive. Integrations that accept app discovery but are not listed here document the keys they expect in their own documentation.
+
 ## Services API
 
 We have an internal services API to make services public to other apps without the user needing to add any configuration. An app can get the full configuration for a service to use and to connect to it. The app needs to mark the usage of a service in the app [configuration](configuration.md) to be able to access a service. All supported services, including its available options, are documented in the [API documentation][supervisor-services-api].
