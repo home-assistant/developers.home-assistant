@@ -208,7 +208,7 @@ A `CalendarEvent` represents an individual event on a calendar.
 
 The `status` of an event is a subset of the rfc5545 `STATUS` property. An integration reports the status its calendar reports, and leaves it unset when the calendar does not provide one. An unset status is not the same as a confirmed event, so consumers should not treat it as one.
 
-A calendar entity does not return cancelled events, so `cancelled` is not part of the supported set. Where a source keeps cancelled events instead of deleting them, the integration filters them out rather than reporting them with a status.
+A calendar entity does not return cancelled events, so `cancelled` is not part of the supported set.
 
 ## Color management
 
