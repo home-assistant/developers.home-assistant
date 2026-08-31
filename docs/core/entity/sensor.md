@@ -36,7 +36,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.APPARENT_POWER` | mVA, VA, kVA | Apparent power
 | `SensorDeviceClass.AQI` | None | Air Quality Index
 | `SensorDeviceClass.AREA` | m², cm², km², mm², in², ft², yd², mi², ac, ha | Area
-| `SensorDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, mmHg, inHg, inH₂O, kPa, mbar, Pa, psi, mPa | Atmospheric pressure
+| `SensorDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, mmHg, inHg, inH₂O, kPa, mbar, Pa, psi, mPa, atm | Atmospheric pressure
 | `SensorDeviceClass.BATTERY` | % | Percentage of battery that is left
 | `SensorDeviceClass.BLOOD_GLUCOSE_CONCENTRATION` | mg/dL, mmol/L | Blood glucose concentration
 | `SensorDeviceClass.CO2` | ppm | Concentration of carbon dioxide.
@@ -72,7 +72,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.POWER_FACTOR` | %, None | Power Factor
 | `SensorDeviceClass.PRECIPITATION` | cm, in, mm | Accumulated precipitation
 | `SensorDeviceClass.PRECIPITATION_INTENSITY` | in/d, in/h, mm/d, mm/h | Precipitation intensity
-| `SensorDeviceClass.PRESSURE` | cbar, bar, hPa, mmHg, inHg, kPa, mbar, Pa, psi, mPa | Pressure.
+| `SensorDeviceClass.PRESSURE` | cbar, bar, hPa, mmHg, inHg, inH₂O, kPa, mbar, Pa, psi, mPa, atm | Pressure.
 | `SensorDeviceClass.RADON` | Bq/m³, pCi/L | Radon concentration
 | `SensorDeviceClass.REACTIVE_ENERGY` | varh, kvarh | Reactive energy
 | `SensorDeviceClass.REACTIVE_POWER` | mvar, var, kvar | Reactive power
