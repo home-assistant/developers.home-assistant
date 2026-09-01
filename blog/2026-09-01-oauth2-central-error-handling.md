@@ -9,14 +9,18 @@ As of Home Assistant Core 2026.10, the OAuth2 helper raises exceptions that conf
 
 ## What changed
 
-The OAuth2 exceptions now inherit from the config entry exception that describes what should happen, and carry a translated message from the `homeassistant` integration:
+The OAuth2 exceptions now inherit from the config entry exception that describes what should happen, and carry a translated message from the `homeassistant` integration.
 
-| Uncaught exception | Result |
-| --- | --- |
-| `ImplementationUnavailableError`, `OAuth2TokenRequestError`, `OAuth2TokenRequestTransientError`, `OAuth2TokenRequestConnectionError` | Setup is retried |
-| `UnknownImplementationError`, `OAuth2TokenRequestReauthError` | Reauth flow starts |
+| Exception | Also a | Result when uncaught |
+| --- | --- | --- |
+| `ImplementationUnavailableError` | `ConfigEntryNotReady` | Setup is retried |
+| `UnknownImplementationError` | `ConfigEntryAuthFailed` | Reauth flow starts |
+| `OAuth2TokenRequestError` | `ConfigEntryNotReady` | Setup is retried |
+| `OAuth2TokenRequestTransientError` | `ConfigEntryNotReady` | Setup is retried |
+| `OAuth2TokenRequestConnectionError` | `ConfigEntryNotReady` | Setup is retried |
+| `OAuth2TokenRequestReauthError` | `ConfigEntryAuthFailed` | Reauth flow starts |
 
-`async_refresh_token` now maps every `aiohttp.ClientError` an implementation raises, so implementations that override `_token_request` and end on a bare `raise_for_status()` no longer leak a raw `ClientResponseError`. A request that never gets a response raises the new `OAuth2TokenRequestConnectionError`, which has no HTTP status and is therefore not an `OAuth2TokenRequestError`.
+All of them are importable from `homeassistant.exceptions` and carry a translated user-facing message, so the integration does not need a `strings.json` entry for them.
 
 ## Migration
 

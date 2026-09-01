@@ -192,41 +192,6 @@ The built-in OAuth2 support works out of the box with locally configured client 
 
 To get started, run `python3 -m script.scaffold config_flow_oauth2` and follow the instructions. This will create all the boilerplate necessary to configure your integration using OAuth2.
 
-### OAuth2 error handling
-
-The OAuth2 helper raises exceptions that config entry setup already understands, so an integration does not need to translate them. Letting them propagate out of `async_setup_entry` produces the correct outcome:
-
-| Exception | Also a | Result when uncaught |
-| --- | --- | --- |
-| `ImplementationUnavailableError` | `ConfigEntryNotReady` | Setup is retried |
-| `UnknownImplementationError` | `ConfigEntryAuthFailed` | Reauth flow starts |
-| `OAuth2TokenRequestError` | `ConfigEntryNotReady` | Setup is retried |
-| `OAuth2TokenRequestTransientError` | `ConfigEntryNotReady` | Setup is retried |
-| `OAuth2TokenRequestConnectionError` | `ConfigEntryNotReady` | Setup is retried |
-| `OAuth2TokenRequestReauthError` | `ConfigEntryAuthFailed` | Reauth flow starts |
-
-All of them are importable from `homeassistant.exceptions` and carry a translated user-facing message, so the integration does not need a `strings.json` entry for them.
-
-`ImplementationUnavailableError` means the implementation could not be resolved right now, typically because a remote provider is unreachable. `UnknownImplementationError` means the entry refers to an implementation that no longer exists, which the user has to resolve by reauthenticating. It subclasses `ValueError` for backwards compatibility, so do not catch `ValueError` around `async_get_config_entry_implementation`.
-
-```python
-async def async_setup_entry(hass: HomeAssistant, entry: MyConfigEntry) -> bool:
-    """Set up my integration from a config entry."""
-    implementation = await async_get_config_entry_implementation(hass, entry)
-    session = OAuth2Session(hass, entry, implementation)
-    await session.async_ensure_token_valid()
-
-    entry.runtime_data = MyClient(session)
-
-    await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
-
-    return True
-```
-
-Only add an explicit handler when the integration needs different behavior, such as raising `ConfigEntryError` for a failure it knows is permanent. Catch the most specific exception that applies, and be aware that the OAuth2 token errors are `aiohttp.ClientError` subclasses: a broad `except ClientError` also swallows `OAuth2TokenRequestReauthError` and turns a needed reauth into a retry.
-
-The abort reasons shared by all OAuth2 flows (`authorize_url_timeout`, `missing_credentials`, `no_url_available`, `oauth_error`, `oauth_failed`, `oauth_implementation_unavailable`, `oauth_timeout`, `oauth_unauthorized`, and `user_rejected_authorize`) are translated centrally. Only add them to `config.abort` in `strings.json` if the integration needs different wording.
-
 ## Translations
 
 [Translations for the config flow](/docs/internationalization/core#config--options--subentry-flows) handlers are defined under the `config` key in the integration translation file `strings.json`. Example of the Hue integration:
