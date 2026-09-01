@@ -43,7 +43,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: MyIntegrationConfigEntry
 ```
 
 :::info
-Please note that this may also be implemented implicitly when using a data update coordinator via `await coordinator.async_config_entry_first_refresh()`.
+Please note that this may also be implemented implicitly by awaiting a helper that raises on the integration's behalf, either `await coordinator.async_config_entry_first_refresh()` on a data update coordinator or `await session.async_ensure_token_valid()` on an [OAuth2 session](/docs/core/integration/config_flow#oauth2-error-handling).
 :::
 
 ## Additional resources
