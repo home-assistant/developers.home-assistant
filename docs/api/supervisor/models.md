@@ -301,8 +301,8 @@ The `content` key of a backup object contains the following keys:
 | password   | string         | (cifs mounts only) Password to use for authentication                  | request only     |
 | device     | string         | (disk mounts only) Path of the device to mount, such as `/dev/sdc1`    | request only     |
 | uuid       | string         | (disk mounts only) Filesystem UUID of the device to mount              | both             |
-| filesystem | string         | (disk mounts only) Filesystem probed on the device, such as `ext4`     | response only    |
-| state      | string         | Current state of the mount (active, failed, etc.)                      | response only    |
+| filesystem | string         | (disk mounts only) Filesystem probed on the device, such as `ext4`. May be absent on a mount restored from a backup until it first activates | response only    |
+| state      | string         | Reachability from the last probe: `active` means the mount answered — and for a disk, that its device is still attached. Refreshed on access, reload, and the periodic reconcile | response only    |
 | user_path  | string or null | Where the mount is available inside managed containers, `null` for backup mounts | response only |
 
 Request only fields may be included in requests but will never be in responses.

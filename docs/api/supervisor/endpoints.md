@@ -2438,6 +2438,11 @@ Accepts a [Mount](api/supervisor/models.md#mount)
 
 Value in `name` must be unique and can only consist of letters, numbers and underscores.
 
+A `disk` mount stays configured while its device is away: accessing the mount
+path fails immediately with a clear error (it is never a plain writable
+directory), and plugging the device back in mounts it again on the next
+access — there is no retry interval to wait for.
+
 A `disk` mount identifies its device with `device`, `uuid`, or both; supplying
 neither is rejected. When both are given the device is resolved by `uuid` and
 the `device` path must agree with it, so an entry from `/mounts/candidates` can
