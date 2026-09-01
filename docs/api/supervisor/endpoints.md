@@ -2369,12 +2369,11 @@ Returns information about mounts configured in Supervisor
 </ApiEndpoint>
 
 <ApiEndpoint path="/mounts/candidates" method="get">
-Returns the local devices which could be added as a `disk` mount
+Returns the local devices which could be added as a `disk` mount.
 
-A device is left out when it holds no filesystem, uses a filesystem Supervisor
-cannot mount, belongs to Home Assistant OS itself, or is already used by another
-mount. A host without UDisks2 has nothing to offer and returns an empty list
-rather than an error.
+Devices without a supported filesystem, that belong to Home Assistant OS,
+or that are already in use are omitted. A host without UDisks2 returns an
+empty list rather than an error.
 
 **Returned data:**
 
@@ -2410,8 +2409,8 @@ rather than an error.
 }
 ```
 
-Supervisor versions without local disk mount support do not have this endpoint
-and answer 404.
+Supervisor versions without local disk mounts do not have this endpoint
+and return 404.
 
 </ApiEndpoint>
 
@@ -2438,19 +2437,17 @@ Accepts a [Mount](api/supervisor/models.md#mount)
 
 Value in `name` must be unique and can only consist of letters, numbers and underscores.
 
-A `disk` mount stays configured while its device is away: accessing the mount
-path fails immediately with a clear error (it is never a plain writable
-directory), and plugging the device back in mounts it again on the next
-access — there is no retry interval to wait for.
+A `disk` mount stays configured while its device is away. Accessing the path
+fails immediately (it is never a plain writable directory). Plug the device
+back in and it mounts again on the next access.
 
-A `disk` mount identifies its device with `device`, `uuid`, or both; supplying
-neither is rejected. When both are given the device is resolved by `uuid` and
-the `device` path must agree with it, so an entry from `/mounts/candidates` can
-be sent back as-is with a `name` and `usage` added. A `filesystem` in the
-payload is ignored rather than rejected, so a value read from `/mounts` can be
-sent back unchanged: the filesystem is probed while the device is resolved
-through UDisks2, which is also what enforces the checks on whether a device may
-be mounted at all. Call `/mounts/candidates` to find the devices on offer.
+Identify the device with `device`, `uuid`, or both. Supplying neither is
+rejected. When both are given, resolution uses `uuid` and `device` must
+agree, so a `/mounts/candidates` entry can be posted back with a `name` and
+`usage`. `filesystem` in the payload is ignored so a GET `/mounts` response
+can be sent back unchanged; the filesystem is probed during UDisks2
+resolution, which also enforces whether the device may be mounted. Call
+`/mounts/candidates` to list available devices.
 
 **Example payload:**
 
@@ -2491,13 +2488,12 @@ Accepts a [Mount](api/supervisor/models.md#mount).
 The `name` field should be omitted. If included the value must match the existing
 name, it cannot be changed. Delete and re-add the mount to change the name.
 
-The full configuration of the mount is validated, so every required field for its
-type must be present. Fields left out are not carried over from the existing
-mount, they take their default.
+The full configuration is validated, so every required field for the type must
+be present. Omitted fields take their default rather than keeping the existing
+value.
 
-For a `disk` mount, send back the `uuid` from the mount rather than a `device`: a
-mounted device is not offered as a candidate, and the UUID is what Supervisor
-stored for it.
+For a `disk` mount, send the stored `uuid`, not `device`: a mounted device is
+not offered as a candidate.
 
 **Example payload:**
 

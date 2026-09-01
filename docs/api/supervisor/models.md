@@ -301,23 +301,22 @@ The `content` key of a backup object contains the following keys:
 | password   | string         | (cifs mounts only) Password to use for authentication                  | request only     |
 | device     | string         | (disk mounts only) Path of the device to mount, such as `/dev/sdc1`    | request only     |
 | uuid       | string         | (disk mounts only) Filesystem UUID of the device to mount              | both             |
-| filesystem | string         | (disk mounts only) Filesystem probed on the device, such as `ext4`. May be absent on a mount restored from a backup until it first activates | response only    |
-| state      | string         | Reachability from the last probe: `active` means the mount answered — and for a disk, that its device is still attached. Refreshed on access, reload, and the periodic reconcile | response only    |
+| filesystem | string         | (disk mounts only) Filesystem probed on the device, such as `ext4`. Absent on a restored mount until it first activates | response only    |
+| state      | string         | Last probe result: `active` means the mount answered, and for a disk that its device is still attached | response only    |
 | user_path  | string or null | Where the mount is available inside managed containers, `null` for backup mounts | response only |
 
 Request only fields may be included in requests but will never be in responses.
 Response only fields will be in responses but cannot be included in requests.
 
-A disk mount is identified by `device`, `uuid`, or both — when both are given,
-resolution goes by `uuid` and the `device` path must agree with it. `device` is
-only an input: Supervisor resolves it to the UUID it stores, so responses report
-`uuid` and `filesystem` instead.
+A disk mount is identified by `device`, `uuid`, or both. When both are given,
+resolution uses `uuid` and `device` must agree. `device` is input only:
+responses report `uuid` and `filesystem`.
 
 ## Mount candidate
 
 | key        | type           | description                                                            |
 | ---------- | -------------- | ---------------------------------------------------------------------- |
-| type       | string         | Mount type the candidate can be added as, currently always `disk`      |
+| type       | string         | Mount type this candidate can be added as. Always `disk`               |
 | device     | string         | Path of the device, such as `/dev/sdc1`                                |
 | uuid       | string         | Filesystem UUID of the device                                          |
 | label      | string         | Filesystem label, empty when the filesystem has none                   |
