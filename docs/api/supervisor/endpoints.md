@@ -3843,17 +3843,27 @@ Get the configured NTP servers. Requires Home Assistant OS 18.3 or newer, unavai
 
 **Returned data:**
 
+| key    | type | description                                       |
+|--------|------|---------------------------------------------------|
+| config | dict | The NTP settings written by Supervisor, see below. |
+
+**config:**
+
 | key              | type | description                      |
 |------------------|------|----------------------------------|
 | servers          | list | Configured NTP servers.          |
 | fallback_servers | list | Configured fallback NTP servers. |
 
+These are the settings Supervisor wrote. `systemd-timesyncd` merges them with servers from other sources, such as DHCP, so the servers actually in use can differ.
+
 **Example response:**
 
 ```json
 {
-  "servers": ["time.cloudflare.com"],
-  "fallback_servers": ["time.google.com"]
+  "config": {
+    "servers": ["time.cloudflare.com"],
+    "fallback_servers": ["time.google.com"]
+  }
 }
 ```
 
@@ -3867,10 +3877,10 @@ Omitted keys keep their current value. Pass an empty list to drop the configured
 
 **Payload:**
 
-| key              | type | optional | description                                                                       |
-|------------------|------|----------|-----------------------------------------------------------------------------------|
-| servers          | list | True     | NTP servers to use. An entry must not contain whitespace or `#`.                  |
-| fallback_servers | list | True     | Fallback NTP servers, used when no servers are configured or supplied by DHCP.    |
+| key              | type | optional | description                                                                    |
+|------------------|------|----------|--------------------------------------------------------------------------------|
+| servers          | list | True     | NTP servers to use.                                                            |
+| fallback_servers | list | True     | Fallback NTP servers, used when no servers are configured or supplied by DHCP. |
 
 </ApiEndpoint>
 
