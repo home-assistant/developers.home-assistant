@@ -3,12 +3,13 @@ author: G Johansson
 authorURL: https://github.com/gjohansson-ST
 authorImageURL: https://avatars.githubusercontent.com/u/62932417?v=4
 authorTwitter: GJohansson
-title: "Deprecating config entry listener with reloading methods in config flow"
+title: "Use Config Entry exceptions in integration migration method"
 ---
 
-Integration migration method can now raise config entry exceptions instead of only being limited to return `False`. This is useful to provide more context and additionally being translatable.
+Integration migration method can now raise config entry exceptions instead of only being limited to return `False`. This is preferred over only returning `False` to provide more context and being translatable.
 
-Additionally by raising `ConfigEntryNotReady` it will automatically try again later (same as during setup).
+For integrations collecting information from other services during migration, 
+by raising `ConfigEntryNotReady` it will automatically try again later (same as during setup) which can help for timeouts or other exceptions when it can be useful to just wait a bit and try again.
 
 More info in the [config flow documentation](/docs/core/integration/config_flow#handle-returns-raise-exceptions-in-migrations).
 
