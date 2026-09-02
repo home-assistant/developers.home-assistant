@@ -239,6 +239,7 @@ Migration can be handled programmatically by implementing function `async_migrat
 ### Handle returns, raise exceptions in migrations
 
 | Returns / Raises | Description |
+| ---------------- | ----------- |
 | return `True`               | Migration successful, setup continues                            |
 | return `False`              | Migration not successful, setup stops with config entry state `migration_error` |
 | raise `ConfigEntryNotReady` | Migration not successful, setup stops and will retry later                          |
