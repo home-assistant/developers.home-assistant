@@ -10,7 +10,7 @@ As of Home Assistant Core 2026.10, `modbus.get_hub` is deprecated. It will be re
 
 `get_hub` attaches an integration to a Modbus hub the user configured in YAML, under a name the integration has to be told. The user has to set up the hub by hand before the integration can work, and two integrations that need the same bus cannot share it.
 
-In July we [modernized Modbus in Home Assistant](/blog/2026/07/05/modernizing-modbus) and added `async_get_unit`. An integration collects the connection details in its own config flow, the same as any other integration, and asks the Modbus integration for a unit on them. Integrations that ask with equal details share one connection. Nothing is configured in YAML and nothing extra is persisted.
+In July we announced our plan to [modernize Modbus in Home Assistant](/blog/2026/07/05/modernizing-modbus). Home Assistant Core 2026.9 delivered the first piece: `async_get_unit`. An integration collects the connection details in its own config flow, the same as any other integration, and asks the Modbus integration for a unit on them. Integrations that ask with equal details share one connection. Nothing is configured in YAML and nothing extra is persisted.
 
 ## What to do
 
