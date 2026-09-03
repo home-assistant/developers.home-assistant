@@ -37,6 +37,13 @@ The Home Assistant container runs on the GitHub Actions runner, while the emulat
 
 The flows live in the `.maestro` folder at the root of the repository. Today there is a single flow, described entirely in [`.maestro/onboarding.yaml`](https://github.com/home-assistant/android/blob/main/.maestro/onboarding.yaml): every step the test performs is written there, and that file is the one to edit when the flow needs to change. It covers the most critical path of the application: connecting to a server, logging in, registering the device, reaching the Overview page, and opening the companion app settings.
 
+Short as it is, that path validates a lot. Among other things:
+
+- **Authentication**: the app goes through the real login page of the instance with real credentials, and completes the authorization flow.
+- **Device registration**: the app registers itself on the instance, which is what everything built on the `mobile_app` integration depends on.
+- **The frontend renders in the app**: reaching the Overview page proves the WebView loaded and displayed the frontend on that API level.
+- **The external bus works both ways**: the frontend only offers the **Companion app** entry in its settings once the app has announced itself over the [external bus](/docs/frontend/external-bus), and tapping that entry makes the frontend ask the app to open its native settings screen.
+
 The flow is parameterized so it can run against any instance:
 
 - `HOME_ASSISTANT_URL`
