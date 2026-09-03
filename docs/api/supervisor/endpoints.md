@@ -3833,6 +3833,57 @@ Update the supervisor
 
 </ApiEndpoint>
 
+### Time
+
+<ApiEndpoint path="/time/info" method="get">
+
+Get the configured NTP servers. Requires Home Assistant OS 18.3 or newer, unavailable on Supervised.
+
+`/host/info` lists `ntp` in `features` when these endpoints are available.
+
+**Returned data:**
+
+| key    | type | description                                       |
+|--------|------|---------------------------------------------------|
+| config | dict | The NTP settings written by Supervisor, see below. |
+
+**config:**
+
+| key              | type | description                      |
+|------------------|------|----------------------------------|
+| servers          | list | Configured NTP servers.          |
+| fallback_servers | list | Configured fallback NTP servers. |
+
+These are the settings Supervisor wrote. `systemd-timesyncd` merges them with servers from other sources, such as DHCP, so the servers actually in use can differ.
+
+**Example response:**
+
+```json
+{
+  "config": {
+    "servers": ["time.cloudflare.com"],
+    "fallback_servers": ["time.google.com"]
+  }
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/time/options" method="post">
+
+Set the NTP servers. Requires Home Assistant OS 18.3 or newer, unavailable on Supervised.
+
+Omitted keys keep their current value. Pass an empty list to drop the configured servers and return to the operating system defaults. `systemd-timesyncd` is restarted whenever a value changes.
+
+**Payload:**
+
+| key              | type | optional | description                                                                    |
+|------------------|------|----------|--------------------------------------------------------------------------------|
+| servers          | list | True     | NTP servers to use.                                                            |
+| fallback_servers | list | True     | Fallback NTP servers, used when no servers are configured or supplied by DHCP. |
+
+</ApiEndpoint>
+
 ### Placeholders
 
 Some of the endpoints uses placeholders indicated with `<...>` in the endpoint URL.
