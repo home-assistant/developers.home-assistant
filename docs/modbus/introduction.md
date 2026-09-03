@@ -46,6 +46,21 @@ Collect the connection details in your own config flow, as you would any other.
 Two integrations that ask with equal details get units over one connection, so
 their requests serialize behind it.
 
+If your config flow needs to communicate with the device before creating its config entry, hold a unit temporarily while you probe it:
+
+```python
+from homeassistant.components.modbus import async_get_temporary_unit
+
+
+async def async_validate_input(
+    hass: HomeAssistant, params: ModbusTcpParams, unit_id: int
+) -> None:
+    """Validate that the device can be reached."""
+    async with async_get_temporary_unit(hass, params, unit_id) as unit:
+        device = MyDevice(unit)
+        await device.async_validate()
+```
+
 The connection itself is not stored anywhere: it exists while an integration
 holds a unit on it, and closes when the last holder's config entry unloads. Your
 own entry data is untouched.
