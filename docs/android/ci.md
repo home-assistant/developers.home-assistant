@@ -86,6 +86,10 @@ Every Sunday at 4:00 AM UTC, the `weekly.yml` workflow is triggered automaticall
 
 This ensures that a new version of the applications is pushed to the beta track on the Play Store every week.
 
+### Nightly end-to-end tests
+
+Every night at 05:00 AM UTC, the `e2e.yml` workflow runs the [Maestro](https://maestro.dev/) onboarding flow against a real Home Assistant instance, on one [Emulator.wtf](https://emulator.wtf) emulator per supported API level. The instance runs the `dev` image, the latest development build of Home Assistant, so that a breaking change in core or in the frontend is caught before it reaches a release. It can also be triggered manually on any branch, optionally against another Home Assistant version. See [end-to-end testing](/docs/android/testing/e2e_testing) for the details.
+
 ### Monthly version tags
 
 On the first day of every month, the `monthly.yml` workflow runs to create an initial version tag in the format `YYYY.MM.0`. This aligns with our [CalVer] versioning strategy.
@@ -119,7 +123,7 @@ When a release is created in the `pre-release` state or when a monthly tag is pu
 | `pr.yml`         | On PR open or update        | Lint, build, test, and persist APKs.                                |
 | `onPush.yml`     | On push to `main`         | Build, deploy, and publish to Firebase and the Play Store.              |
 | `weekly.yml`     | Every Sunday at 4:00 AM     | Create a pre-release and push the beta build to the Play Store.              |
-| `monthly.yml`    | First day of the month      | Create an initial version tag (`YYYY.MM.0`).                           |
+| `e2e.yml`             | Every day at 5:00 AM     | Run the end-to-end tests against a real Home Assistant instance. |
 | `release.yml`    | Manual trigger              | Promote the beta build to production.                                  |
 | `prepareNextRelease.yml`     | On pre-release or monthly tag        | Update `changelog_master.xml` in a PR.             |
 
