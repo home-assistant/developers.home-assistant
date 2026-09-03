@@ -42,4 +42,4 @@ Android emulators are notoriously unreliable. Occasionally, a platform may fail 
 
 ## Testing on an emulator with an outdated WebView
 
-If your tests require the WebView, you may need to follow these [tips for emulators with an outdated WebView](/docs/android/tips/outdated_webview_emulator.md).
+If your tests require the WebView, follow the [dedicated tips](/docs/android/tips/outdated_webview_emulator) to update it on the emulator.
