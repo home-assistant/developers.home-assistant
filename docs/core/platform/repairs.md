@@ -147,27 +147,12 @@ class Issue1RepairFlow(RepairsFlow):
             data_schema=vol.Schema({})
         )
 ```
+
 If using `next_flow` in the repair flow's `async_abort` it will be the responsibility of the developer to [delete](#deleting-an-issue) the issue from the registry once the repair (i.e. config entry reconfigured) has been made.
 
-#### Example `next_flow` options flow
-
-```python
-next_flow = (
-    await self.hass.config_entries.options.async_init(
-        self.data["entry_id"]
-    )
-)
-return self.async_abort(
-    reason="reconfigure",
-    next_flow=(
-        FlowType.OPTIONS_FLOW,
-        next_flow["flow_id"]
-    )
-)
-```
-> [!TIP]
->
-> The `next_flow` argument in `async_abort` or `async_create_entry` of an implementation of `RepairsFlow` expects a tuple: `tuple[homeassistant.components.repairs.FlowType, str]`.
+:::tip
+The `next_flow` argument in `async_abort` or `async_create_entry` of an implementation of `RepairsFlow` expects a tuple: `tuple[homeassistant.components.repairs.FlowType, str]`.
+:::
 
 ## Issue life cycle
 
