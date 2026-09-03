@@ -57,10 +57,10 @@ Run type-resolved analysis for production code across the entire repository, inc
 ./gradlew detektMain :build-logic:convention:detektMain --continue
 ```
 
-For focused Android analysis, use `:<module>:detekt<Variant>`. For example:
+For focused Android analysis, use `:<module>:detektMain`. For example:
 
 ```bash
-./gradlew :app:detektFullDebug
+./gradlew :app:detektMain
 ```
 
 To generate or update the corresponding baselines, run:
@@ -69,17 +69,11 @@ To generate or update the corresponding baselines, run:
 ./gradlew detektBaselineMain :build-logic:convention:detektBaselineMain --continue
 ```
 
-To refresh only one Android variant baseline, use `:<module>:detektBaseline<Variant>`. For example:
-
-```bash
-./gradlew :app:detektBaselineFullDebug
-```
 
 ### CI integration
 
-Existing findings are recorded in baselines. Android modules use per-variant files such as `detekt-baseline-fullDebug.xml`, while JVM modules use source-set-specific files such as `detekt-baseline-main.xml`. New Detekt violations fail CI and are reported using the generated [SARIF](/docs/android/tips/sarif_reports.md) report.
+Existing findings are recorded in baselines. Android modules use per-variant files such as `detekt-baseline-release.xml`, while JVM modules use source-set-specific files such as `detekt-baseline-main.xml`. New Detekt violations fail CI and are reported using the generated [SARIF](/docs/android/tips/sarif_reports.md) report.
 
-The generic `detekt` task and its baseline remain because the Detekt Gradle plugin includes that task in `check`.
 
 ## Yamllint
 
