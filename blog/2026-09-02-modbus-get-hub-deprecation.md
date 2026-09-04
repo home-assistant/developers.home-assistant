@@ -33,6 +33,6 @@ async def async_setup_entry(hass: HomeAssistant, entry: MyConfigEntry) -> bool:
     ...
 ```
 
-This is not a one-to-one swap. Your config flow has to collect the host, port, and unit ID that the user used to write in the YAML hub, and the device-specific communication should move into a library built on [`modbus-connection`](https://home-assistant-libs.github.io/modbus-connection/). The [Modbus developer documentation](/docs/modbus/introduction) describes both, with example code and a reference device library.
+This is not a one-to-one swap. Your config flow has to collect the connection details required by the transport, for example host and port, besides unit ID, that the user used to write in the YAML hub, and the device-specific communication should move into a library built on [`modbus-connection`](https://home-assistant-libs.github.io/modbus-connection/). The [Modbus developer documentation](/docs/modbus/introduction) describes both, with example code and a reference device library.
 
 More details can be found in the [core PR](https://github.com/home-assistant/core/pull/179933).
