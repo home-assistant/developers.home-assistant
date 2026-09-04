@@ -11,7 +11,7 @@ sidebar_label: "Integration testing"
 
 During development, you might only test on the latest Android OS version or your locally installed JVM, most likely JDK 21. However, keep in mind the following:
 
-- Android API 21 only partially supports [Java 8 language features](https://developer.android.com/studio/write/java8-support).
+- Android API 24 supports Java 8 language features, but Java 8+ APIs such as `java.time` are only available from API 26 unless [desugaring](https://developer.android.com/studio/write/java8-support) is enabled.
 - Android uses a dedicated [runtime](https://source.android.com/docs/core/runtime) that is different from the one used in your development environment (which is typically used to execute unit tests).
 
 #### Concrete example
@@ -40,6 +40,6 @@ In this scenario, interactions with the core can be replaced using mocks with [m
 
 Android emulators are notoriously unreliable. Occasionally, a platform may fail for unknown reasons. The only solution is to restart the job. Note that only maintainers can re-run a job.
 
-## Testing on Android 5 (API 21)
+## Testing on an emulator with an outdated WebView
 
-If your tests require the WebView, you may need to follow these [tips for the Lollipop emulator](/docs/android/tips/lollipop_emulator.md).
+If your tests require the WebView, follow the [dedicated tips](/docs/android/tips/outdated_webview_emulator) to update it on the emulator.
