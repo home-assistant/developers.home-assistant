@@ -1670,6 +1670,22 @@ After calling this endpoint, a reboot is required to apply the migration. The re
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/docker/reset-storage" method="post">
+
+Schedule a reset of the complete Docker storage. The reset will be applied on the next system reboot.
+
+All container images (Supervisor, Home Assistant Core, plugins and apps) are deleted on the next boot and downloaded again afterwards. Home Assistant and apps' data, backups and settings are kept, they are stored outside of the Docker storage. Internet connectivity is required after the reboot.
+
+After calling this endpoint, a reboot is required to apply the reset, a `reboot_required` issue is created in the resolution center to indicate that.
+
+:::note
+
+This endpoint requires Home Assistant OS 18.3 or newer. A `404` error will be returned on older versions or non-HAOS installations.
+
+:::
+
+</ApiEndpoint>
+
 ### Hardware
 
 <ApiEndpoint path="/hardware/info" method="get">
