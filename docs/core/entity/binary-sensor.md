@@ -28,6 +28,7 @@ Properties should always only return information from memory and not do I/O (lik
 | `BinarySensorDeviceClass.DOOR` | On means open, Off means closed.
 | `BinarySensorDeviceClass.GARAGE_DOOR` | On means open, Off means closed.
 | `BinarySensorDeviceClass.GAS` | On means gas detected, Off means no gas (clear).
+| `BinarySensorDeviceClass.GLASS_BREAK` | On means glass break detected, Off means no glass break (clear).
 | `BinarySensorDeviceClass.HEAT` | On means hot, Off means normal.
 | `BinarySensorDeviceClass.LIGHT` | On means light detected, Off means no light.
 | `BinarySensorDeviceClass.LOCK` | On means open (unlocked), Off means closed (locked).
