@@ -336,5 +336,41 @@ Process a sentence with the conversation integration.
   }
 }
 ```
+## Register a push subscription
+
+This message subscribes the app to silent, best-effort pushes whenever any of the listed entities change state. Home Assistant sends the push to the app's existing push URL. Changes that arrive within a short window (5 seconds) are collapsed into a single push. The registration is idempotent on subscription_id: re-sending it with a new token or entity list updates the existing subscription in place (the common case when a push token rotates). A device may hold up to 50 subscriptions; registering beyond that evicts the oldest first.
+```json
+{
+  "type": "register_push_subscription",
+  "data": {
+    "subscription_id": "lock-widget",
+    "push_token": "6c1e2f...a9",
+    "entity_ids": ["lock.front_door", "cover.garage_door"],
+    "target": "lock-widget"
+  }
+}
+```
+| Key | Type |	Description 
+| --- | ---- | -----------
+`subscription_id`	| string	|Stable identifier the app assigns to this subscription. Re-registering with the same value updates the existing subscription in place. Required.
+`push_token`	| string	| The token the push should be delivered to. Required.
+`entity_ids` |	list |	Entity IDs whose state changes trigger a push. Must contain between 1 and 50 valid entity IDs; duplicates are ignored. Required.
+`target`	| string	| Opaque value echoed back in the push payload so the app can route it to the correct surface. Optional.
+
+## Remove a push subscription
+
+This message removes a previously registered push subscription. The app stops receiving pushes for it.
+
+```json
+{
+  "type": "remove_push_subscription",
+  "data": {
+    "subscription_id": "lock-widget"
+  }
+}
+```
+| Key | Type |	Description 
+| --- | ---- | -----------
+`subscription_id` |	string |	The subscription_id used when the subscription was registered. Required.
 
 For available keys and response, see the [conversation API documentation](../../intent_conversation_api).
