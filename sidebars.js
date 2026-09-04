@@ -155,6 +155,7 @@ module.exports = {
             "core/integration/system_health",
           ],
         },
+        "oauth2",
         "dev_101_services",
         "creating_platform_index",
         "creating_component_generic_discovery",
