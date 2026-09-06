@@ -34,6 +34,7 @@ The object supports the following keys:
 | `name`             | No       | Friendly name shown in the picker.                                             |
 | `description`      | No       | Short text shown below the name.                                               |
 | `documentationURL` | No       | Link to your documentation. This is not shown in the strategy UI yet.          |
+| `images`           | No       | `{ light, dark }` URLs of a 160x160 preview shown on the tile, one per theme mode. |
 
 Example:
 
@@ -45,6 +46,10 @@ window.customStrategies.push({
   name: "My demo dashboard",
   description: "A starter dashboard generated from JavaScript.",
   documentationURL: "https://example.com/my-demo-dashboard",
+  images: {
+    light: "/local/my-demo/preview-light.svg",
+    dark: "/local/my-demo/preview-dark.svg",
+  },
 });
 ```
 
