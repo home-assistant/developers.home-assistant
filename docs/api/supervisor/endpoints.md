@@ -2064,12 +2064,14 @@ is being walked, the directory totals can disagree with `used_bytes`; in that
 case the breakdown is left out entirely and only the totals are reported, so
 the children never sum past their parent.
 
+Usage is measured by probing the path, not from cached mount state. That probe
+activates a dormant automount if needed, so a usage request can change system
+state.
+
 Requesting usage for a mount which does not exist returns a `404`. A `400` is
-returned for a mount which is not active, is no longer actually mounted even
-though its unit still reports active, cannot be read, or whose usage probe has
-not completed within 60 seconds. The probe keeps running after that timeout, so
-retrying the request joins the probe already underway instead of starting a new
-one.
+returned if the path is no longer a mount, cannot be read, or the probe has not
+finished within 60 seconds. The probe keeps running after that timeout, so a
+retry joins the probe already underway instead of starting a new one.
 
 **Example response:**
 
