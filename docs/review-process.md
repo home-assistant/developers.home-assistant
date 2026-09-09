@@ -48,7 +48,7 @@ do to make it easier to review your PR. This will not only help reviewers
 but also you as a contributor to having your change merged quicker, and
 the end-user getting your improvement faster.
 
-1. **Make your PRs as small as possible.**
+1. **Make sure your PRs are well-scoped.**
    A PR should only refactor one thing, fix one thing, add one feature, or
    adjust a single subject in the documentation. If you want to change multiple
    things, please create multiple PRs. Smaller PRs have a smaller scope, need
