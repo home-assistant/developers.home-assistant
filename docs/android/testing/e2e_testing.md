@@ -11,7 +11,7 @@ This is what catches breakages that no other test can see, such as an upstream c
 
 ## The `E2E` workflow
 
-E2E tests run through the [`e2e.yml`](https://github.com/home-assistant/android/blob/main/.github/workflows/e2e.yml) workflow. Each run boots one emulator per API level we support, from 29 up to the latest, and drives the whole flow against a live Home Assistant instance on all of them at once. That breadth is what makes the tests able to detect API level specific issues, but it also makes them expensive, so they are **not** part of the pull request pipeline. Instead, they run:
+E2E tests run through the [`e2e.yml`](https://github.com/home-assistant/android/blob/main/.github/workflows/e2e.yml) workflow. Each run boots one emulator per API level we support, from 29 up to the latest, and drives the whole flow against a live Home Assistant instance on all of them at once. That breadth is what makes the tests able to detect API level-specific issues, but it also makes them expensive, so they are **not** part of the pull request pipeline. Instead, they run:
 
 - Every night at 05:00 UTC on the main branch, using the latest Home Assistant `dev` image tag.
 - Manually, through `workflow_dispatch`, on any branch carrying the workflow. The dispatch takes an optional `home-assistant-version` input, which is the Home Assistant image tag to test against (`dev` by default).
@@ -53,7 +53,7 @@ The flow is parameterized so it can run against any instance:
 The [Maestro documentation](https://docs.maestro.dev/api-reference/commands) describes every available command. A few things are worth keeping in mind when changing `onboarding.yaml`:
 
 - The flow drives the debug application, `io.homeassistant.companion.android.debug`. Changing the `appId` breaks the run, since that is the APK the workflow installs.
-- The flow runs on every API level from 29 up to the latest we support, so anything version specific must stay conditional, the way the existing steps handle the permission dialogs that only exist from a given API level onwards.
+- The flow runs on every API level from 29 up to the latest we support, so anything version-specific must stay conditional, the way the existing steps handle the permission dialogs that only exist from a given API level onwards.
 - Steps match on the text displayed on screen, so renaming a label in the app means updating the flow in the same pull request.
 
 ### Running a flow locally
