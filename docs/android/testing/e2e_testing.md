@@ -13,31 +13,29 @@ This is what catches breakages that no other test can see, such as an upstream c
 
 E2E tests run through the [`e2e.yml`](https://github.com/home-assistant/android/blob/main/.github/workflows/e2e.yml) workflow. Each run boots one emulator per API level we support, from 29 up to the latest, and drives the whole flow against a live Home Assistant instance on all of them at once. That breadth is what makes the tests able to detect API level specific issues, but it also makes them expensive, so they are **not** part of the pull request pipeline. Instead, they run:
 
-- Every night at 05:00 UTC on the main branch.
+- Every night at 05:00 UTC on the main branch, using the latest Home Assistant `dev` image tag.
 - Manually, through `workflow_dispatch`, on any branch carrying the workflow. The dispatch takes an optional `home-assistant-version` input, which is the Home Assistant image tag to test against (`dev` by default).
 
 ### What the workflow does
 
-1. Assembles the `fullDebug` APK for the `x86` and `x86_64` ABIs, with [StrictMode](/docs/android/tips/strict_mode) disabled.
+1. Assembles the `fullDebug` APK for the emulator platforms, with [StrictMode](/docs/android/tips/strict_mode) disabled.
 2. Installs the [Maestro](https://maestro.dev/) CLI, verifying the download against the published checksum.
 3. Builds the device list: one emulator per API level, from 29 up to `androidSdk-target` in `gradle/libs.versions.toml`.
-4. Starts a Home Assistant container from the configuration in `.github/e2e/homeassistant`, and asserts that the `mobile_app` component is loaded before going any further. The image is the `dev` one, so a nightly run always tests against the latest development build of Home Assistant.
-5. Starts the emulators on [Emulator.wtf](https://emulator.wtf), installs the APK on each of them, and runs the Maestro flow sharded across all of them in parallel.
+4. Starts a Home Assistant container from the configuration in `.github/e2e/homeassistant`, and asserts that the `mobile_app` component is loaded before going any further.
+5. Starts the emulators, installs the APK on each of them, and runs the Maestro flow sharded across all of them in parallel.
 6. Uploads the artifacts needed to debug a failure, whatever the outcome of the run.
 
 :::note
-The device list is floored at API 29 even though the app supports older versions. On API 26-28 images, the bundled WebView renders the frontend, but its content never surfaces to Maestro's view-hierarchy polling, so every WebView assertion fails. The [instrumentation tests](/docs/android/testing/integration_testing) in the pull request pipeline still cover the full range down to the app's `minSdk`.
+The device list is floored at API 29 even though the app supports older versions. On older API images, the bundled WebView renders the frontend, but its content never surfaces to Maestro's view-hierarchy polling, so every WebView assertion fails. The [instrumentation tests](/docs/android/testing/integration_testing) in the pull request pipeline still cover the full range down to the app's `minSdk`.
 :::
 
-### Reaching Home Assistant from the emulators
-
+:::note
 The Home Assistant container runs on the GitHub Actions runner, while the emulators run on Emulator.wtf. The workflow bridges the two with an egress tunnel, and a DNS override that resolves `homeassistant.internal` to the forwarded IP inside the emulators.
+:::
 
 ## Maestro flows
 
-The flows live in the `.maestro` folder at the root of the repository. Today there is a single flow, described entirely in [`.maestro/onboarding.yaml`](https://github.com/home-assistant/android/blob/main/.maestro/onboarding.yaml): every step the test performs is written there, and that file is the one to edit when the flow needs to change. It covers the most critical path of the application: connecting to a server, logging in, registering the device, reaching the Overview page, and opening the companion app settings.
-
-Short as it is, that path validates a lot. Among other things:
+The flows live in the `.maestro` folder at the root of the repository. Today there is a single flow, described entirely in [`.maestro/onboarding.yaml`](https://github.com/home-assistant/android/blob/main/.maestro/onboarding.yaml): every step the test performs is written there, and that file is the one to edit when the flow needs to change. It covers the most critical path of the application:
 
 - **Authentication**: the app goes through the real login page of the instance with real credentials, and completes the authorization flow.
 - **Device registration**: the app registers itself on the instance, which is what everything built on the `mobile_app` integration depends on.
@@ -75,11 +73,7 @@ The flow launches the app with `clearState`, so it starts from a fresh onboardin
 
 ## Debugging a failure
 
-Every run uploads an `e2e-artifacts` archive, whether it passed or failed. Download it from the run page, or with the GitHub CLI:
-
-```bash
-gh run download <run-id> --name e2e-artifacts --dir e2e
-```
+Every run uploads an `e2e-artifacts` artifact, whether it passed or failed. It contains the following files:
 
 | Path | Content |
 | --- | --- |
@@ -95,7 +89,7 @@ Only once the app and the flow are ruled out is it worth looking upstream. The `
 
 ## Automated triage
 
-A nightly failure goes unnoticed unless someone checks the workflow results every morning. To avoid that, a failing `E2E` run dispatches an `e2e-triage` agentic workflow, and a successful run closes the issue a previous failure opened. A green night never spends an agent run.
+A nightly failure goes unnoticed unless someone checks the workflow results every morning. To avoid that, a failing workflow run dispatches an `e2e-triage` agentic workflow, and a successful run closes the issue a previous failure opened.
 
 The triage workflow downloads the artifacts of the failed run, and those of the last successful run when one is available, then follows the procedure documented in the `.agents/skills/ha-android-e2e-debugging` skill, which is the source of truth for the triage order, for what each artifact contains, and for the known flake patterns.
 
