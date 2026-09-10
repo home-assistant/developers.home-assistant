@@ -13,18 +13,23 @@ The pages are written in [Markdown](https://spec.commonmark.org/current/). To ad
 Before you submit a pull request, read through the [general pull request review process](/docs/review-process/).
 In addition, the documentation has the following guidelines to take into account when contributing.
 
-The documentation repository has two main branches: `current` and `next`:
+1. Make sure you target the correct branch. The documentation repository has two main branches: `current` and `next`:
 
-- If you are documenting a new integration or a feature you are adding to the code, target the `next` branch.
-- If you are improving existing documentation, target the `current` branch.
+   - If you are documenting a new integration or a feature you are adding to the code, target the `next` branch.
+   - If you are improving existing documentation, target the `current` branch.
 
-We mainly follow the Microsoft Writing Style Guide and have some additional guidelines:
+2. Fill out the [pull request template](https://github.com/home-assistant/home-assistant.io/blob/current/.github/PULL_REQUEST_TEMPLATE.md).
+3. If you are adding new features, create one documentation PR per core PR.
+   - Avoid referencing multiple core PRs in a single documentation PR.
+   - This way, each documentation PR can be merged together with its core PR in the same release.
 
-- [Documentation standards](/docs/documenting/standards)
-- [Documentation style guide](/docs/documenting/general-style-guide/)
-- [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/welcome/)
-- [Merriam-Webster Dictionary](https://www.merriam-webster.com/)
-- [YAML Style Guide](/docs/documenting/yaml-style-guide)
+4. Follow the guidelines. We mainly follow the Microsoft Writing Style Guide and have some additional guidelines:
+
+   - [Documentation standards](/docs/documenting/standards)
+   - [Documentation style guide](/docs/documenting/general-style-guide/)
+   - [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/welcome/)
+   - [Merriam-Webster Dictionary](https://www.merriam-webster.com/)
+   - [YAML Style Guide](/docs/documenting/yaml-style-guide)
 
 ## Small changes
 
