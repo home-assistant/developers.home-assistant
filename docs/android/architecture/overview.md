@@ -18,7 +18,7 @@ The entire codebase is written in [Kotlin](https://kotlinlang.org), ensuring mod
 ### Android version support
 
 - **Target SDK**: We aim to keep up with the latest Android SDK releases and test new versions as they are released.
-- **Min SDK**: To ensure broad compatibility, the app supports Android [Lollipop](https://en.wikipedia.org/wiki/Android_Lollipop) (API 21).
+- **Min SDK**: To ensure broad compatibility, the app supports Android [Nougat](https://en.wikipedia.org/wiki/Android_Nougat) (API 24).
 
 ## Application architecture
 
