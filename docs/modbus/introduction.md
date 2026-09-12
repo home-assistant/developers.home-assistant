@@ -12,10 +12,10 @@ We require each integration to implement a library that handles the device-speci
 `modbus-connection` provides:
 
 - A common, backend-neutral interface on top of [pymodbus](https://github.com/pymodbus-dev/pymodbus) and [tmodbus](https://github.com/wlcrs/tmodbus), two popular Modbus libraries, so you can swap backends without changing your code.
-- A device modelling framework to map a device's data to typed Python attributes and read it in as few requests as possible ([example from Trovis](https://github.com/Tom-Bom-badil/trovis-modbus/blob/main/src/trovis_modbus/heating_circuit.py)).
+- A device modelling framework to map a device's data to typed Python attributes and read it in as few requests as possible ([example from Sofar](https://github.com/darkrain-nl/sofar-modbus/blob/main/src/sofar_modbus/modern/pv.py)).
 - A `pytest` plugin to make testing your library easy.
 
-For a complete example of the pattern, see [trovis-modbus](https://github.com/Tom-Bom-badil/trovis-modbus), a device library built on `modbus-connection`, and [trovis-modbus-hass](https://github.com/Tom-Bom-badil/trovis-modbus-hass), the Home Assistant integration that consumes it.
+For a complete example of the pattern, see [sofar-modbus](https://github.com/darkrain-nl/sofar-modbus), a device library built on `modbus-connection`, and [`sofar`](https://github.com/home-assistant/core/tree/dev/homeassistant/components/sofar), the Home Assistant integration that consumes it.
 
 ## Sharing one connection with other integrations
 
