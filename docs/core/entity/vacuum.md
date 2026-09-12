@@ -127,7 +127,7 @@ Set the vacuum cleaner to return to the dock.
 Send a command to a vacuum cleaner.
 
 :::note
-Using the `send_command` service is discouraged as it requires yaml input from the user and is in general less user-friendly. Preferred option is to create an integration specific service that can provide a nicer UI experience and specific documentation.
+Using the `send_command` service is discouraged as it requires yaml input from the user and is in general less user-friendly. Preferred option is to create an integration-specific service that can provide a nicer UI experience and specific documentation.
 :::
 
 ### `set_fan_speed` or `async_set_fan_speed`
