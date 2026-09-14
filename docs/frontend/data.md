@@ -232,12 +232,12 @@ The `name` argument can be:
 
 - A plain `string` — returned as-is. Use this to honor a user-provided override.
 - A single name item, like `{ type: "entity" }`.
-- An array of name items, joined with the separator. Items can reference registry data (`entity`, `device`, `area`, `floor`) or be literal `text`.
+- An array of name items, joined with the separator. Items can reference registry data (`entity`, `device`, `parent_device`, `area`, `floor`) or be literal `text`.
 - `undefined` — falls back to the entity's friendly name.
 
 ```ts
 type EntityNameItem =
-  | { type: "entity" | "device" | "area" | "floor" }
+  | { type: "entity" | "device" | "parent_device" | "area" | "floor" }
   | { type: "text"; text: string };
 
 interface EntityNameOptions {
@@ -278,6 +278,22 @@ hass.formatEntityName(
   [{ type: "text", text: "Floor:" }, { type: "floor" }]
 ); // "Floor: Ground floor"
 ```
+
+`parent_device` resolves only for entities that belong to a sub-device, and is empty
+for every other entity. For a `switch.power_strip_outlet_1` on the sub-device `Outlet 1`,
+whose parent device is `Power strip`:
+
+```js
+hass.formatEntityName(
+  hass.states["switch.power_strip_outlet_1"],
+  [{ type: "parent_device" }, { type: "device" }, { type: "entity" }]
+); // "Power strip Outlet 1 Switch"
+```
+
+Items that resolve to nothing are dropped, so the same configuration on an entity
+without a parent device returns just "Outlet 1 Switch". That makes
+`[{ type: "parent_device" }, { type: "device" }, { type: "entity" }]` a safe default
+for a card that wants the full device context.
 
 #### Using it in a custom card
 
