@@ -105,7 +105,7 @@ To use this trigger in an automation:
 
 {% options_ui %}
 Threshold type:
-  description: How much the brightness has to change before the trigger fires, as a percentage of full brightness. Can be a fixed number, or reference a helper entity that provides the value.
+  description: How much the brightness must change before the trigger fires, as a percentage of full brightness. Can be a fixed number, or reference a helper entity that provides the value.
   required: false
 {% endoptions_ui %}
 
@@ -421,6 +421,44 @@ action: |
 
 ```
 
+## Blueprint examples
+
+For reusable automation, script, or template examples, you can store a blueprint in the `home-assistant.io` repository and include it in the integration documentation using the `blueprint_example` tag.
+
+Store integration-specific blueprints under:
+
+```text
+source/blueprints/integrations/<domain>/
+```
+
+For example:
+
+```text
+source/blueprints/integrations/example/example_notification.yaml
+```
+
+Reference the blueprint from the integration documentation with:
+
+```liquid
+{% blueprint_example blueprint="example/example_notification.yaml" %}
+```
+
+The blueprint file is the source of truth for the example. The `blueprint_example` tag renders a button to import the blueprint and, for locally maintained blueprints, also generates a manual YAML example from the blueprint. Do not maintain a separate copy of the same YAML in the integration documentation.
+
+Blueprint examples can use the `automation`, `script`, or `template` blueprint domains.
+
+### External blueprints
+
+An externally hosted blueprint can also be referenced by URL:
+
+```liquid
+{% blueprint_example blueprint="https://community.home-assistant.io/t/example/123" %}
+```
+
+For external blueprints, only the import button is rendered. The external blueprint is not fetched during the documentation build and no manual YAML example is generated.
+
+Prefer repository-owned blueprints when the example is part of the official integration documentation and needs to provide a stable, reviewable example.
+
 ## Reusable text for integrations
 
 You can [reuse text](/docs/documenting/general-style-guide#reusable-text) that's repeated across many pages.
@@ -454,7 +492,7 @@ Use the `configuration_basic` block to describe configuration options if your in
       src='/img/en/documentation/configuration_variables_ui.png'
       alt='Screenshot showing a configuration variable block for integrations that are set up in the UI'
     />
-    Screenshot showing a configuration variable block for integrations that are set up in the UI
+    Screenshot showing the predefined configuration variable block
 </p>
 
 ```markdown
@@ -462,7 +500,7 @@ Use the `configuration_basic` block to describe configuration options if your in
 Host:
     description: "The IP address of your bridge. You can find it in your router or in the Integration app under **Bridge Settings** > **Local API**."
 Local access token:
-    description: "The local access token for your bridge. You can find it in the Integration app under **Bridge Settings** > **Local API**."
+    description: "The local access token for your bridge. You can find it in your router or in the Integration app under **Bridge Settings** > **Local API**."
 {% endconfiguration_basic %}
 ```
 
@@ -475,7 +513,7 @@ Use the `configuration` block to describe configuration options if your integrat
       src='/img/en/documentation/configuration_variables_yaml.png'
       alt='Screenshot showing a configuration variable block for YAML integrations'
     />
-    Screenshot showing a configuration variable block for YAML integrations
+    Screenshot showing the predefined configuration variable block
 </p>
 
 ```markdown
