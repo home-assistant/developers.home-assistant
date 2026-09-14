@@ -58,7 +58,7 @@ entry_id = device.config_entry_id
 subentry_id = device.config_subentry_id
 ```
 
-If you loop over a device's config entries to find the one belonging to your integration, use the `async_get_device_and_config_entry_for_domain()` helper introduced in [More device registry deprecations, new helpers and validation](/blog/2026/08/24/device-registry-follow-up-changes#finding-a-devices-config-entry-for-a-domain-async_get_device_and_config_entry_for_domain) instead:
+If you loop over a device's config entries to find the one belonging to your integration, use the `async_get_device_and_config_entry_for_domain()` helper introduced in [More device registry deprecations, new helpers and validation](/blog/2026/08/24/device-registry-follow-up-changes/#finding-a-devices-config-entry-for-a-domain-async_get_device_and_config_entry_for_domain) instead:
 
 ```py
 device, config_entry = dr.async_get_device_and_config_entry_for_domain(
