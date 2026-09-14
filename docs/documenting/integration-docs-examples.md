@@ -105,7 +105,7 @@ To use this trigger in an automation:
 
 {% options_ui %}
 Threshold type:
-  description: How much the brightness must change before the trigger fires, as a percentage of full brightness. Can be a fixed number, or reference a helper entity that provides the value.
+  description: How much the brightness has to change before the trigger fires, as a percentage of full brightness. Can be a fixed number, or reference a helper entity that provides the value.
   required: false
 {% endoptions_ui %}
 
@@ -492,7 +492,7 @@ Use the `configuration_basic` block to describe configuration options if your in
       src='/img/en/documentation/configuration_variables_ui.png'
       alt='Screenshot showing a configuration variable block for integrations that are set up in the UI'
     />
-    Screenshot showing the predefined configuration variable block
+    Screenshot showing a configuration variable block for integrations that are set up in the UI
 </p>
 
 ```markdown
@@ -500,7 +500,7 @@ Use the `configuration_basic` block to describe configuration options if your in
 Host:
     description: "The IP address of your bridge. You can find it in your router or in the Integration app under **Bridge Settings** > **Local API**."
 Local access token:
-    description: "The local access token for your bridge. You can find it in your router or in the Integration app under **Bridge Settings** > **Local API**."
+    description: "The local access token for your bridge. You can find it in the Integration app under **Bridge Settings** > **Local API**."
 {% endconfiguration_basic %}
 ```
 
@@ -513,7 +513,7 @@ Use the `configuration` block to describe configuration options if your integrat
       src='/img/en/documentation/configuration_variables_yaml.png'
       alt='Screenshot showing a configuration variable block for YAML integrations'
     />
-    Screenshot showing the predefined configuration variable block
+    Screenshot showing a configuration variable block for YAML integrations
 </p>
 
 ```markdown
