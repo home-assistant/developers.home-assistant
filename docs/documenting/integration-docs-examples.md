@@ -101,7 +101,7 @@ To use this trigger in an automation:
 
 ### Options in the UI
 
-<!-- Note that there are no "type" or "default" fields for UI options, as you have in YAML. They are not rendered for the UI options. -->
+<!-- Note that there is no "type" field for UI options, as you have in YAML. They are not rendered for the UI options. -->
 
 {% options_ui %}
 Threshold type:

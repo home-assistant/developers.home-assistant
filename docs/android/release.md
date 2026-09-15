@@ -36,7 +36,7 @@ You can download pre-built APKs for every commit on the `main` branch from the [
 ### Weekly beta releases
 
 - Every Saturday at 9pm PST, the latest `main` build is pushed to the **open beta** channel.
-- Before that cutoff (Friday or Saturday), update the beta changelog to highlight new features and breaking changes.
+- Before that cutoff (Friday or Saturday), update the in-app changelog (`ChangelogContent.kt`) to highlight new features and breaking changes.
 - Open beta users help test the application in real-world scenarios and report issues.
 
 :::note
@@ -66,14 +66,14 @@ The promotion is performed by a maintainer following this checklist:
 ### Before promoting
 
 - Wait a few days after the beta has been released to give beta users time to catch regressions.
-- Check that the in-app changelog (`app/src/main/res/xml/changelog_master.xml`) is up to date and that its version matches the beta being promoted. The version bump is automated through a PR created by the [`prepareNextRelease.yml` workflow](/docs/android/ci#on-pre-release-or-monthly-tag), but the content should be verified manually.
+- Check that the in-app changelog (`app/src/main/kotlin/io/homeassistant/companion/android/changelog/ChangelogContent.kt`) is up to date and describes the features shipped in the release being promoted.
 - Open the Sentry dashboard and look for any abnormally high number of issues on the beta version.
 - Open the [Google Play Console](https://play.google.com/console) and look for any anomalies reported (crashes, ANRs, Android vitals).
 - Prepare a [companion docs](https://github.com/home-assistant/companion.home-assistant) PR removing all beta labels for the features shipped in this release.
 
 ### Promoting
 
-- Edit the latest beta release on [GitHub](https://github.com/home-assistant/android/releases): keep the generated list of all commits, but manually add a **Highlights of this release** section on top of it matching the content of the in-app changelog XML file (see [2026.6.1](https://github.com/home-assistant/android/releases/tag/2026.6.1) for an example), uncheck the **pre-release** checkbox, and set it as the **latest** release.
+- Edit the latest beta release on [GitHub](https://github.com/home-assistant/android/releases): keep the generated list of all commits, but manually add a **Highlights of this release** section on top of it matching the content of `ChangelogContent.kt` (see [2026.6.1](https://github.com/home-assistant/android/releases/tag/2026.6.1) for an example), uncheck the **pre-release** checkbox, and set it as the **latest** release.
 - Unchecking the pre-release checkbox triggers the [`release.yml` workflow](/docs/android/ci#releases) automatically, which uses Fastlane to promote the beta track to production on the Play Store for the mobile, Wear OS, and Automotive apps.
 
 :::note

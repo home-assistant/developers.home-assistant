@@ -49,11 +49,17 @@ To build the application in debug on CI, we use a mock Google services file loca
 
 ##### Android on Emulator.wtf
 
-Instrumentation tests for the Android app run on [Emulator.wtf](https://emulator.wtf). On every pull request, the full suite is executed against every Android API level we support, and the whole run completes in just a few seconds, making the feedback loop incredibly fast.
+Instrumentation tests for the `app` module run on [Emulator.wtf](https://emulator.wtf). On every pull request, the full suite is executed against every Android API level we support, from `androidSdk-min` to `androidSdk-target`, and the whole run completes in just a few seconds, making the feedback loop incredibly fast.
+
+This is split across two workflows: `pr.yml` builds the debug and androidTest APKs together with the list of devices to run them on, then `pr-emulator-wtf.yml` picks those up once the pull request workflow completes and runs the tests on Emulator.wtf, reporting the results back as a check on the pull request.
+
+The split exists so that pull requests from forks are covered too. A workflow triggered by a pull request from a fork runs without access to our credentials, which means it could not reach Emulator.wtf. `pr-emulator-wtf.yml` is triggered by the completion of `pr.yml` instead, so it runs in the context of the main repository, where the credentials to authenticate against Emulator.wtf and the permissions to publish the results back on the pull request are available. It never runs code coming from the fork: it only takes the APKs built by `pr.yml` and runs them.
 
 ##### Wear OS and Automotive on GitHub Actions
 
-Wear OS and Automotive instrumentation tests run on the classic Android emulator on [GitHub Actions](https://github.com/features/actions), which is significantly slower, so we only cover a few API levels for those targets.
+Wear OS and Automotive instrumentation tests, along with those of the `common` and `microwakeword` modules, run on the classic Android emulator on [GitHub Actions](https://github.com/features/actions). Emulator.wtf does not offer those targets, so this is the only option for them.
+
+Running an emulator is demanding in terms of resources, and only one of them fits on a runner, which means one job per API level and device profile. Each of those jobs is significantly slower than the whole Emulator.wtf run, so we only cover a few API levels for those targets.
 
 #### Downloading APKs from a pull request
 
@@ -86,6 +92,10 @@ Every Sunday at 4:00 AM UTC, the `weekly.yml` workflow is triggered automaticall
 
 This ensures that a new version of the applications is pushed to the beta track on the Play Store every week.
 
+### Nightly end-to-end tests
+
+Every night at 05:00 AM UTC, the `e2e.yml` workflow runs the [Maestro](https://maestro.dev/) onboarding flow against a real Home Assistant instance, on one [Emulator.wtf](https://emulator.wtf) emulator per supported API level. The instance runs the `dev` image, the latest development build of Home Assistant, so that a breaking change in core or in the frontend is caught before it reaches a release. It can also be triggered manually on any branch, optionally against another Home Assistant version. See [end-to-end testing](/docs/android/testing/e2e_testing) for the details.
+
 ### Monthly version tags
 
 On the first day of every month, the `monthly.yml` workflow runs to create an initial version tag in the format `YYYY.MM.0`. This aligns with our [CalVer] versioning strategy.
@@ -108,20 +118,17 @@ Each GitHub release includes the following files used by F-Droid:
 We do not guarantee when the applications will be available on F-Droid after a release. You can find the app [on F-Droid](https://f-droid.org/packages/io.homeassistant.companion.android.minimal/).
 :::
 
-### On pre-release or monthly tag
-
-When a release is created in the `pre-release` state or when a monthly tag is pushed, the `prepareNextRelease.yml` workflow is triggered. This workflow creates a pull request that updates the `changelog_master.xml` file to reflect the new version. Manual approval of this pull request is required. This process helps keep the changelog version consistent with the app version.
-
 ## Summary of workflows
 
-| Workflow         | Trigger                     | Goals                                                                 |
-|-------------------|-----------------------------|----------------------------------------------------------------------|
-| `pr.yml`         | On PR open or update        | Lint, build, test, and persist APKs.                                |
-| `onPush.yml`     | On push to `main`         | Build, deploy, and publish to Firebase and the Play Store.              |
-| `weekly.yml`     | Every Sunday at 4:00 AM     | Create a pre-release and push the beta build to the Play Store.              |
-| `monthly.yml`    | First day of the month      | Create an initial version tag (`YYYY.MM.0`).                           |
-| `release.yml`    | Manual trigger              | Promote the beta build to production.                                  |
-| `prepareNextRelease.yml`     | On pre-release or monthly tag        | Update `changelog_master.xml` in a PR.             |
+| Workflow              | Trigger                  | Goals                                                            |
+|-----------------------|--------------------------|------------------------------------------------------------------|
+| `pr.yml`              | On PR open or update     | Lint, build, test, and persist APKs.                             |
+| `pr-emulator-wtf.yml` | After `pr.yml` completes | Run the `app` instrumentation tests on Emulator.wtf.             |
+| `onPush.yml`          | On push to `main`        | Build, deploy, and publish to Firebase and the Play Store.       |
+| `weekly.yml`          | Every Sunday at 4:00 AM  | Create a pre-release and push the beta build to the Play Store.  |
+| `e2e.yml`             | Every day at 5:00 AM     | Run the end-to-end tests against a real Home Assistant instance. |
+| `monthly.yml`         | First day of the month   | Create an initial version tag (`YYYY.MM.0`).                     |
+| `release.yml`         | Manual trigger           | Promote the beta build to production.                            |
 
 ---
 

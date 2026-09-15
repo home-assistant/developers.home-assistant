@@ -395,6 +395,7 @@ module.exports = {
         "android/testing/unit_testing",
         "android/testing/screenshot_testing",
         "android/testing/integration_testing",
+        "android/testing/e2e_testing",
       ],
     },
     {

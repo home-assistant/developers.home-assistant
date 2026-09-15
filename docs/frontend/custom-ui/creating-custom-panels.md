@@ -90,12 +90,4 @@ The Home Assistant frontend will pass information to your panel by setting prope
 
 ## JavaScript versions
 
-The Home Assistant user interface is currently served to browsers in modern JavaScript and older JavaScript (ES5). The older version has a wider browser support but that comes at a cost of size and performance.
-
-If you do need to run with ES5 support, you will need to load the ES5 custom elements adapter before defining your element:
-
-```javascript
-window.loadES5Adapter().then(function() {
-  customElements.define('my-panel', MyCustomPanel)
-});
-```
+The Home Assistant user interface is served to browsers as a modern build and a legacy build for older browsers. Custom panels are loaded in both, so define your custom element with standard JavaScript classes (ES2015 or later). ES5-transpiled custom elements are not supported; the previously documented `window.loadES5Adapter()` hook has been removed.

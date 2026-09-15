@@ -23,6 +23,7 @@ Properties should always only return information from memory and not do I/O (lik
 | `MOWING` | The lawn mower is currently mowing.
 | `DOCKED` | The lawn mower is done mowing and is currently docked.
 | `PAUSED` | The lawn mower was active and is now paused.
+| `IDLE` | The lawn mower is stopped, but neither docked nor paused.
 | `RETURNING` | The lawn mower is returning to the dock.
 | `ERROR`  | The lawn mower encountered an error while active and needs assistance.
 
@@ -36,6 +37,7 @@ and are combined using the bitwise or (`|`) operator.
 | `START_MOWING` | The lawn mower supports the start mowing command.    |
 | `PAUSE`        | The lawn mower supports pausing the current task.    |
 | `DOCK`         | The lawn mower supports the return to dock command.  |
+| `STOP`         | The lawn mower supports the stop command.            |
 
 ## Methods
 
@@ -50,3 +52,7 @@ Stop the lawn mower, return to dock.
 ### `pause` or `async_pause`
 
 Pause the lawn mower during current operation.
+
+### `stop` or `async_stop`
+
+Stop the lawn mower and cancel the current task, do not return to dock.

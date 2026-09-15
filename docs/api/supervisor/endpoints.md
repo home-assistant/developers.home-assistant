@@ -1670,6 +1670,22 @@ After calling this endpoint, a reboot is required to apply the migration. The re
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/docker/reset-storage" method="post">
+
+Schedule a reset of the complete Docker storage. The reset will be applied on the next system reboot.
+
+All container images (Supervisor, Home Assistant Core, plugins and apps) are deleted on the next boot and downloaded again afterwards. Home Assistant and apps' data, backups and settings are kept, they are stored outside of the Docker storage. Internet connectivity is required after the reboot.
+
+After calling this endpoint, a reboot is required to apply the reset, a `reboot_required` issue is created in the resolution center to indicate that.
+
+:::note
+
+This endpoint requires Home Assistant OS 18.3 or newer. A `404` error will be returned on older versions or non-HAOS installations.
+
+:::
+
+</ApiEndpoint>
+
 ### Hardware
 
 <ApiEndpoint path="/hardware/info" method="get">
@@ -2048,12 +2064,14 @@ is being walked, the directory totals can disagree with `used_bytes`; in that
 case the breakdown is left out entirely and only the totals are reported, so
 the children never sum past their parent.
 
+Usage is measured by probing the path, not from cached mount state. That probe
+activates a dormant automount if needed, so a usage request can change system
+state.
+
 Requesting usage for a mount which does not exist returns a `404`. A `400` is
-returned for a mount which is not active, is no longer actually mounted even
-though its unit still reports active, cannot be read, or whose usage probe has
-not completed within 60 seconds. The probe keeps running after that timeout, so
-retrying the request joins the probe already underway instead of starting a new
-one.
+returned if the path is no longer a mount, cannot be read, or the probe has not
+finished within 60 seconds. The probe keeps running after that timeout, so a
+retry joins the probe already underway instead of starting a new one.
 
 **Example response:**
 
@@ -3814,6 +3832,57 @@ Update the supervisor
 | key     | type   | description                                                    |
 | ------- | ------ | -------------------------------------------------------------- |
 | version | string | The version to install. Defaults to the latest version. Development only: Only works in the Supervisor development environment. |
+
+</ApiEndpoint>
+
+### Time
+
+<ApiEndpoint path="/time/info" method="get">
+
+Get the configured NTP servers. Requires Home Assistant OS 18.3 or newer, unavailable on Supervised.
+
+`/host/info` lists `ntp` in `features` when these endpoints are available.
+
+**Returned data:**
+
+| key    | type | description                                       |
+|--------|------|---------------------------------------------------|
+| config | dict | The NTP settings written by Supervisor, see below. |
+
+**config:**
+
+| key              | type | description                      |
+|------------------|------|----------------------------------|
+| servers          | list | Configured NTP servers.          |
+| fallback_servers | list | Configured fallback NTP servers. |
+
+These are the settings Supervisor wrote. `systemd-timesyncd` merges them with servers from other sources, such as DHCP, so the servers actually in use can differ.
+
+**Example response:**
+
+```json
+{
+  "config": {
+    "servers": ["time.cloudflare.com"],
+    "fallback_servers": ["time.google.com"]
+  }
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/time/options" method="post">
+
+Set the NTP servers. Requires Home Assistant OS 18.3 or newer, unavailable on Supervised.
+
+Omitted keys keep their current value. Pass an empty list to drop the configured servers and return to the operating system defaults. `systemd-timesyncd` is restarted whenever a value changes.
+
+**Payload:**
+
+| key              | type | optional | description                                                                    |
+|------------------|------|----------|--------------------------------------------------------------------------------|
+| servers          | list | True     | NTP servers to use.                                                            |
+| fallback_servers | list | True     | Fallback NTP servers, used when no servers are configured or supplied by DHCP. |
 
 </ApiEndpoint>
 

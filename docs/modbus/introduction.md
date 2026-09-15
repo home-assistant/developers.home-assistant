@@ -12,10 +12,10 @@ We require each integration to implement a library that handles the device-speci
 `modbus-connection` provides:
 
 - A common, backend-neutral interface on top of [pymodbus](https://github.com/pymodbus-dev/pymodbus) and [tmodbus](https://github.com/wlcrs/tmodbus), two popular Modbus libraries, so you can swap backends without changing your code.
-- A device modelling framework to map a device's data to typed Python attributes and read it in as few requests as possible ([example from Trovis](https://github.com/Tom-Bom-badil/trovis-modbus/blob/main/src/trovis_modbus/heating_circuit.py)).
+- A device modelling framework to map a device's data to typed Python attributes and read it in as few requests as possible ([example from Sofar](https://github.com/darkrain-nl/sofar-modbus/blob/main/src/sofar_modbus/modern/pv.py)).
 - A `pytest` plugin to make testing your library easy.
 
-For a complete example of the pattern, see [trovis-modbus](https://github.com/Tom-Bom-badil/trovis-modbus), a device library built on `modbus-connection`, and [trovis-modbus-hass](https://github.com/Tom-Bom-badil/trovis-modbus-hass), the Home Assistant integration that consumes it.
+For a complete example of the pattern, see [sofar-modbus](https://github.com/darkrain-nl/sofar-modbus), a device library built on `modbus-connection`, and [`sofar`](https://github.com/home-assistant/core/tree/dev/homeassistant/components/sofar), the Home Assistant integration that consumes it.
 
 ## Sharing one connection with other integrations
 
@@ -45,6 +45,21 @@ async def async_setup_entry(hass: HomeAssistant, entry: MyConfigEntry) -> bool:
 Collect the connection details in your own config flow, as you would any other.
 Two integrations that ask with equal details get units over one connection, so
 their requests serialize behind it.
+
+If your config flow needs to communicate with the device before creating its config entry, hold a unit temporarily while you probe it:
+
+```python
+from homeassistant.components.modbus import async_get_temporary_unit
+
+
+async def async_validate_input(
+    hass: HomeAssistant, params: ModbusTcpParams, unit_id: int
+) -> None:
+    """Validate that the device can be reached."""
+    async with async_get_temporary_unit(hass, params, unit_id) as unit:
+        device = MyDevice(unit)
+        await device.async_validate()
+```
 
 The connection itself is not stored anywhere: it exists while an integration
 holds a unit on it, and closes when the last holder's config entry unloads. Your

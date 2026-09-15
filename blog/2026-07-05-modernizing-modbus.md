@@ -36,8 +36,8 @@ If you're using an AI agent, you can give it the following prompt:
 >
 > The deliverables of this task are going to be 3 folders:
 > 
-> - Start by creating a device library based on the YAML. Follow https://github.com/Tom-Bom-badil/trovis-modbus/ as an exact example, including how to use component models, all GitHub Actions, helper scripts and README. This library is meant as a standalone device library and should not mention Home Assistant. Look at the source of modbus_connection to figure out all supported fields.
+> - Start by creating a device library based on the YAML. Follow https://github.com/darkrain-nl/sofar-modbus as an exact example, including how to use component models, all GitHub Actions, helper scripts and README. This library is meant as a standalone device library and should not mention Home Assistant. Look at the source of modbus_connection to figure out all supported fields.
 > 
-> - Create an integration that can be contributed to Home Assistant core that follows this example: https://github.com/home-assistant/core/tree/trovis557x-integration/homeassistant/components/trovis557x
+> - Create an integration that can be contributed to Home Assistant core that follows this example: https://github.com/home-assistant/core/tree/dev/homeassistant/components/sofar
 > 
 > - Create a custom integration version where the device library is vendorized so it is ready to be tested by the community via HACS. Follow this template https://github.com/ludeeus/integration_blueprint
