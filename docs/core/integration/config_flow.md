@@ -236,6 +236,24 @@ Each config entry has a version assigned to it, made up of a major and a minor v
 
 Migration can be handled programmatically by implementing function `async_migrate_entry` in your integration's `__init__.py` file. The function should return `True` if migration is successful.
 
+### Handle returns, raise exceptions in migrations
+
+| Returns / Raises | Description |
+| ---------------- | ----------- |
+| return `True`               | Migration successful, setup continues                            |
+| return `False`              | Migration not successful, setup stops with config entry state `migration_error` |
+| raise `ConfigEntryNotReady` | Migration not successful, setup stops and will retry later                          |
+| raise `Exception`           | Migration not successful, setup stops with config entry state `migration_error` |
+
+:::note
+By raising `ConfigEntryNotReady` (if a retry is wanted) or `ConfigEntryError` instead of returning `False`, you can provide more context to the user by using the translations provided by using those exceptions.
+:::
+
+:::tip
+Config entry state `migration_error` is classified as non-recoverable, if the user can do something to fix the problem, use a repair.
+Once the user acts on the repair, it may call `hass.config_entries.async_retry_migration(entry_id)` which will reload the integration and retry the migration.
+:::
+
 If minor versions differ but major versions are the same, integration setup will be allowed to continue even if the integration does not implement `async_migrate_entry`. This means a minor version bump is backwards compatible unlike a major version bump which causes the integration to fail setup if the user downgrades Home Assistant Core without restoring their configuration from backup.
 
 To set a new version, add `VERSION` and/or `MINOR_VERSION` to your config flow class:
