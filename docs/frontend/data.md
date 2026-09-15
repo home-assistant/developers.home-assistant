@@ -226,7 +226,7 @@ hass.formatEntityAttributeName(hass.states["climate.thermostat"], "current_tempe
 
 _Available since Home Assistant 2026.4._
 
-Format the display name of an entity using its registry context (entity, device, area, floor). This is the same helper used by the built-in cards (tile, entity rows, etc.) so custom cards can produce consistent labels.
+Format the display name of an entity using its registry context (entity, device, parent device, area, floor). This is the same helper used by the built-in cards (tile, entity rows, etc.) so custom cards can produce consistent labels.
 
 The `name` argument can be:
 
