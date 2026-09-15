@@ -9,7 +9,7 @@ This document outlines the various Android targets supported by the Home Assista
 
 ## 📱 Application (main target)
 
-The main target is based on the Gradle `:app` module. It supports a **minimum API level of 21**. This is the primary application used by most users.
+The main target is based on the Gradle `:app` module. It supports a **minimum API level of 24**. This is the primary application used by most users.
 
 ## 🚗 Automotive
 
