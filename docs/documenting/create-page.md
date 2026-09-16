@@ -8,7 +8,7 @@ To create a new integration page, follow these steps:
    - If you are documenting a new integration you are adding to the code, switch to the `next` branch.
 2. Make a copy of the [integration documentation template](https://github.com/home-assistant/home-assistant.io/tree/current/source/_integrations/_integration_docs_template.markdown) and edit it.
 3. Make sure the filename of the integration page matches the domain name of the integration.
-   - The [Integration overview](https://www.home-assistant.io/integrations/) and the [Examples section](https://www.home-assistant.io/cookbook/) are generated automatically, so there is no need to add a link to those pages.
+   - The [Integration overview](https://www.home-assistant.io/integrations/) is generated automatically, so there is no need to add a link to that page.
 4. Make sure to follow the [Standards](documenting/standards.md) we have for the documentation, including:
    - [General style guide](/docs/documenting/general-style-guide).
    - [YAML Style Guide](/docs/documenting/yaml-style-guide.md)
