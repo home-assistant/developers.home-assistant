@@ -25,8 +25,6 @@ Inside the block, start with the observable symptom, add a short explanation onl
 
 This means the device is not currently reachable for local communication.
 
-To resolve the issue:
-
 1. Make sure the device is powered on.
 2. Make sure the device is connected to the network.
 3. Make sure local communication is enabled on the device.
@@ -39,7 +37,7 @@ To resolve the issue:
 
 1. Verify that the device appears in the manufacturer's app.
 2. Check that the device is linked to the same account or hub used during setup.
-3. Reload the integration and verify whether the device appears.
+3. Go to **Settings** > **Devices & services**, select the integration, then select the three-dot menu and choose **Reload**. Verify whether the device appears.
 
 {% enddetails %}
 ```
