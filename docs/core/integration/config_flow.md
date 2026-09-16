@@ -246,11 +246,11 @@ Migration can be handled programmatically by implementing function `async_migrat
 | raise `Exception`           | Migration not successful, setup stops with config entry state `migration_error` |
 
 :::note
-By raising `ConfigEntryNotReady` (if a retry is wanted) or `ConfigEntryError` instead of returning `False`, you can provide more context to the user by using the translations provided by using those exceptions.
+Prefer raising `ConfigEntryNotReady` (when a retry is wanted) or `ConfigEntryError` instead of returning `False`. Both exceptions support translations, so you can give the user more context about what went wrong.
 :::
 
 :::tip
-Config entry state `migration_error` is classified as non-recoverable, if the user can do something to fix the problem, use a repair.
+Config entry state `migration_error` is non-recoverable. When the user can fix the problem, use a repair.
 Once the user acts on the repair, it may call `hass.config_entries.async_retry_migration(entry_id)` which will reload the integration and retry the migration.
 :::
 
