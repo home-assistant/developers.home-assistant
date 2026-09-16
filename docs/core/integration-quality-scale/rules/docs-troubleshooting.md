@@ -6,43 +6,46 @@ sidebar_label: 🥇 docs-troubleshooting
 ## Reasoning
 
 We should provide instructions on how to fix a common issue.
-If possible, a troubleshooting topic should include a description of the symptom and the steps needed to fix the situation.
+A troubleshooting topic should help users recognize the problem they are experiencing and provide concrete steps to resolve or narrow it down.
+When useful, include the exact error message, unavailable state, missing device or entity, repair issue, or other observable symptom.
 This decreases the amount of support requests and improves the user experience.
 
 ## Example implementation
 
-```markdown showLineNumbers
+When an integration has multiple independent troubleshooting cases, use a separate collapsible details block for each recognizable user-facing problem.
+The details title should describe the problem from the user's perspective.
+Inside the block, start with the observable symptom, add a short explanation only when it helps, and then provide actionable resolution steps.
+
+```liquid showLineNumbers
 ## Troubleshooting
 
-### Can’t set up the device
+{% details "Connection error during setup" %}
 
-#### Symptom: “This device can’t be reached”
+**Symptom:** Setup shows the message **This device can't be reached**.
 
-When trying to set up the integration, the form shows the message “This device can’t be reached”.
+This means the device is not currently reachable for local communication.
 
-##### Description
+To resolve the issue:
 
-This means the settings on the device are incorrect, since the device needs to be enabled for local communication.
+1. Make sure the device is powered on.
+2. Make sure the device is connected to the network.
+3. Make sure local communication is enabled on the device.
 
-##### Resolution
+{% enddetails %}
 
-To resolve this issue, try the following steps:
+{% details "Device does not appear after setup" %}
 
-1. Make sure your device is powered up (LEDs are on).
-2. Make sure your device is connected to the internet:
-   - Make sure the app of the manufacturer can see the device.
-3. Make sure the device has the local communication enabled:
-   - Check the device’s settings.
-   - Check the device’s manual.
-...
- 
-### I can't see my devices
-Make sure the devices are visible and controllable via the manufacturer's app.
-If they are not, check the device's power and network connection.
+**Symptom:** Setup completes, but no device appears in Home Assistant.
 
-### The device goes unavailable after a day
-Make sure you turned off the device's power-saving mode.
+1. Verify that the device appears in the manufacturer's app.
+2. Check that the device is linked to the same account or hub used during setup.
+3. Reload the integration and verify whether the device appears.
+
+{% enddetails %}
 ```
+
+For a single, very short troubleshooting note, plain prose under `## Troubleshooting` can be appropriate if a details block would add more markup than clarity.
+Do not add `Description`, `Cause`, or `Resolution` subheadings unless they materially improve the readability of a longer troubleshooting case.
 
 ## Exceptions
 
