@@ -94,16 +94,16 @@ The following keys are available for the integration page file header:
   - Any other value is used as-is (capitalized) in the generated text.
   - You can list multiple values (for example, both `zigbee` and `matter`) when the products are certified for more than one connectivity method.
 
-### Configuration
+## Configuration
 
 Every integration page should contain a configuration example. This includes UI variable descriptions for integrations with a configuration flow, and YAML configuration for integrations that don't yet support a configuration flow.
 
-### UI variables
+## UI variables
 
 - For describing **UI variables** use the `{% configuration_basic %}` section.
 - The `{% configuration_basic %}` block is like the `{% configuration %}` block, but does not have the `required` or `type` fields.
 
-### About configuration variables
+## About configuration variables
 
 - The **Configuration variables** section is only used for YAML configuration.
 - The **Configuration variables** section must use the `{% configuration %}` tag.
@@ -112,7 +112,7 @@ Every integration page should contain a configuration example. This includes UI 
 - Configuration variables must document the accepted value types (see [configuration variables details](#configuration)).
   - For configuration variables that accept multiple types, separate the types with a comma (that is, `string, integer`).
 
-### Example configuration variables block
+## Example configuration variables block
 
 ```yaml
 {% configuration %}
@@ -162,19 +162,19 @@ required: any string here #=> Any string here
 
 - **`type:`**: The type of the variable. Allowed entries: `action`, `boolean`, `string`, `integer`, `float`, `time`, `template`, `device_class`, `icon`, `map`/`list` (for a list of entries), `date`, `datetime`, `timedelta`, `selector`, and `any`. For multiple possibilities use `[string, integer]`. If you use `map`/`list` then you should define `keys:` (see the [`template` sensor](https://www.home-assistant.io/integrations/sensor.template/) for an example). If you use `boolean`, then `default:` must be defined.
 
-### Embedding code
+## Embedding code
 
 You can use the [default markdown syntax](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#code) to generate syntax highlighted code. For inline code wrap your code in back-ticks.
 
 When you're writing code that is to be executed on the terminal, do not prefix them with `$`, since this makes it hard to copy and paste the commands. However, an exception is made when there is a need to distinguish between typed commands and command output. In those cases, prefixing the commands with a `$` is required.
 
-### Templates
+## Templates
 
 For the [configuration templating](https://www.home-assistant.io/docs/configuration/templating/) [Jinja](http://jinja.pocoo.org/) is used. Check the [Documentation Standards](documenting/standards.md) for further details.
 
 If you don't escape templates then they will be rendered and appear blank on the website.
 
-### HTML
+## HTML
 
 The direct usage of HTML is supported but not recommended. The note boxes are an exception.
 
@@ -194,7 +194,7 @@ Please note, if you want to use Markdown inside an HTML block, it has to be surr
 </div>
 ```
 
-### Images, icons, and logos
+## Images, icons, and logos
 
 Having a logo with the integration makes an integration quickly identifiable with the end-user.
 From the documentation side of things, no specific configuration is needed to enable the use of a logo,
@@ -209,7 +209,7 @@ however, the logo must exist in our Brands repository.
 | blog        | source/images/blog        |
 | screenshots | source/images/integrations/your-integration |
 
-### Linking from the sidebar
+## Linking from the sidebar
 
 If you are adding a new page that requires linking from the sidebar, edit either:
 
