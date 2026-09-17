@@ -218,7 +218,7 @@ Four of the available capabilities are part of the container runtime's default s
 If your app needs one of them, list it in `privileged`. Requesting it keeps the capability available no matter which default set the Supervisor applies. `AUDIT_WRITE`, `MKNOD`, and `SETFCAP` do not affect the security rating of your app.
 
 :::note
-The reduced default set matches the "reduced" capability profile that containerd is introducing. The Supervisor currently applies it only when the `app_drop_net_raw` or `app_reduced_capabilities` development feature flag is enabled. Both flags are off by default.
+The reduced default set matches the "reduced" capability profile that containerd is introducing. The Supervisor currently moves toward this set through two development feature flags: `app_drop_net_raw` drops `NET_RAW`, while `app_reduced_capabilities` drops `AUDIT_WRITE`, `MKNOD`, and `SETFCAP`. Both flags are off by default.
 :::
 
 ### Options / Schema
