@@ -251,7 +251,7 @@ Prefer raising `ConfigEntryNotReady` (when a retry is wanted) or `ConfigEntryErr
 
 :::tip
 Config entry state `migration_error` is non-recoverable. When the user can fix the problem, use a repair.
-Once the user acts on the repair, it may call `hass.config_entries.async_retry_migration(entry_id)` which will reload the integration and retry the migration.
+To retry the migration, call `hass.config_entries.async_retry_migration(entry_id)` from the repair flow once the user has fixed the problem.
 :::
 
 If minor versions differ but major versions are the same, integration setup will be allowed to continue even if the integration does not implement `async_migrate_entry`. This means a minor version bump is backwards compatible unlike a major version bump which causes the integration to fail setup if the user downgrades Home Assistant Core without restoring their configuration from backup.
