@@ -271,8 +271,8 @@ Register entity service actions with `homeassistant.helpers.service.async_regist
 
 - A dictionary which will automatically be passed to `cv._make_entity_service_schema`
 - A validator returned by `cv._make_entity_service_schema`
-- A validator returned by `cv._make_entity_service_schema`, wrapped in a `vol.Schema`
-- A validator returned by `cv._make_entity_service_schema`, wrapped in a `vol.All`
+- A validator returned by `cv._make_entity_service_schema`, wrapped in a `probatio.Schema`
+- A validator returned by `cv._make_entity_service_schema`, wrapped in a `probatio.All`
 
 Example code added to `homeassistant/components/sonos/__init__.py`:
 
@@ -281,7 +281,7 @@ from homeassistant.components.media_player import DOMAIN as MEDIA_PLAYER_DOMAIN
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers.typing import ConfigType
 from homeassistant.helpers import config_validation as cv, service
-import voluptuous as vol
+import probatio
 
 DOMAIN = "sonos"
 SERVICE_SET_TIMER = "set_sleep_timer"
@@ -295,7 +295,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
          DOMAIN,
          SERVICE_SET_TIMER,
          entity_domain=MEDIA_PLAYER_DOMAIN,
-         schema={vol.Required("sleep_time"): cv.time_period},
+         schema={probatio.Required("sleep_time"): cv.time_period},
          func="set_sleep_timer",
      )
     return True
@@ -322,7 +322,7 @@ Example code:
 ```python
 import datetime
 
-import voluptuous as vol
+import probatio
 
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant, ServiceCall, ServiceResponse, SupportsResponse
@@ -330,9 +330,9 @@ from homeassistant.helpers import config_validation as cv, entity_platform, serv
 from homeassistant.util.json import JsonObjectType
 
 SEARCH_ITEMS_SERVICE_NAME = "search_items"
-SEARCH_ITEMS_SCHEMA = vol.Schema({
-    vol.Required("start"): datetime.datetime,
-    vol.Required("end"): datetime.datetime,
+SEARCH_ITEMS_SCHEMA = probatio.Schema({
+    probatio.Required("start"): datetime.datetime,
+    probatio.Required("end"): datetime.datetime,
 })
 
 

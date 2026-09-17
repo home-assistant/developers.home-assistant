@@ -23,8 +23,8 @@ Not all existing code follows the requirements in this checklist. This cannot be
 
 ### 2. Configuration
 
-1. Voluptuous schema present for [configuration validation](development_validation.md)
-2. Default parameters specified in voluptuous schema, not in `setup(…)`
+1. Probatio schema present for [configuration validation](development_validation.md)
+2. Default parameters specified in probatio schema, not in `setup(…)`
 3. Schema using as many generic config keys as possible from `homeassistant.const`
 4. If your component has platforms, define a `PLATFORM_SCHEMA` instead of a `CONFIG_SCHEMA`.
 5. If using a `PLATFORM_SCHEMA` to be used with `EntityComponent`, import base from `homeassistant.helpers.config_validation`
