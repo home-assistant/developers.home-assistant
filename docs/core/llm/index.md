@@ -66,7 +66,7 @@ from homeassistant.helpers.selector import (
 def async_get_options_schema(
     hass: HomeAssistant,
     options: MappingProxyType[str, Any],
-) -> vol.Schema:
+) -> probatio.Schema:
     """Return the options schema."""
     apis: list[SelectOptionDict] = [
         SelectOptionDict(
@@ -76,9 +76,9 @@ def async_get_options_schema(
         for api in llm.async_get_apis(hass)
     ]
 
-    return vol.Schema(
+    return probatio.Schema(
         {
-            vol.Optional(
+            probatio.Optional(
                 CONF_LLM_HASS_API,
                 description={"suggested_value": options.get(CONF_LLM_HASS_API)},
             ): SelectSelector(SelectSelectorConfig(options=apis, multiple=True)),
@@ -186,9 +186,9 @@ class TimeTool(llm.Tool):
     name = "GetTime"
     description = "Returns the current time."
 
-    # Optional. A voluptuous schema of the input parameters.
-    parameters = vol.Schema({
-      vol.Optional('timezone'): str,
+    # Optional. A probatio schema of the input parameters.
+    parameters = probatio.Schema({
+      probatio.Optional('timezone'): str,
     })
 
     async def async_call(
@@ -209,7 +209,7 @@ The `llm.Tool` class has the following attributes:
 |---------------------|------------|----------------------------------------------------------------------------------------------------------------|
 | `name`              | string     | The name of the tool. Required.                                                                                |
 | `description`       | string     | Description of the tool to help the LLM understand when and how it should be called. Optional but recommended. |
-| `parameters`        | vol.Schema | The voluptuous schema of the parameters. Defaults to vol.Schema({})                                            |
+| `parameters`        | probatio.Schema | The probatio schema of the parameters. Defaults to probatio.Schema({})                                            |
 
 The `llm.Tool` class has the following methods:
 
@@ -301,7 +301,7 @@ The `llm.APIInstance` class has the following attributes:
 | `api_prompt`      | string  | Instructions for LLM on how to use the LLM tools. Required.                                      |
 | `llm_context`    | LLMContext | The context of the tool call. Required.                                                                 |
 | `tools`           | list[Tool] | The tools that are available in this API. Required.                                                     |
-| `custom_serializer` | Callable | Optional function to convert voluptuous schemas (for example selectors) into the JSON schema the LLM expects. Defaults to `None`. |
+| `custom_serializer` | Callable | Optional function to convert probatio schemas (for example selectors) into the JSON schema the LLM expects. Defaults to `None`. |
 
 ## Exposing an API over MCP
 

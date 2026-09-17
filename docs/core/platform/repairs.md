@@ -58,7 +58,7 @@ Create a new platform file in your integration folder called `repairs.py` and ad
 
 ```python
 
-import voluptuous as vol
+import probatio
 
 from homeassistant.components.repairs import RepairsFlow, RepairsFlowResult
 from homeassistant.core import HomeAssistant
@@ -81,7 +81,7 @@ class Issue1RepairFlow(RepairsFlow):
         if user_input is not None:
             return self.async_create_entry(title="", data={})
 
-        return self.async_show_form(step_id="confirm", data_schema=vol.Schema({}))
+        return self.async_show_form(step_id="confirm", data_schema=probatio.Schema({}))
 
 
 async def async_create_fix_flow(
@@ -102,7 +102,7 @@ The flow manager creates the `RepairsFlow` and passes the attributes `data` and 
 Repair flows can forward issue fixes to config, options, or subentry flows:
 
 ```python
-import voluptuous as vol
+import probatio
 
 from homeassistant.components.repairs import FlowType, RepairsFlow, RepairsFlowResult
 from homeassistant.config_entries import (
@@ -144,7 +144,7 @@ class Issue1RepairFlow(RepairsFlow):
 
         return self.async_show_form(
             step_id="confirm",
-            data_schema=vol.Schema({})
+            data_schema=probatio.Schema({})
         )
 ```
 

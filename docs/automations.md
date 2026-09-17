@@ -22,7 +22,7 @@ Integrations that need to wait for the action to complete can await the `Task` r
 ```python
 from typing import TYPE_CHECKING, cast
 
-import voluptuous as vol
+import probatio
 
 from homeassistant.const import CONF_TARGET
 from homeassistant.core import CALLBACK_TYPE, HomeAssistant, callback
@@ -30,9 +30,9 @@ from homeassistant.helpers import config_validation as cv
 from homeassistant.helpers.trigger import Trigger, TriggerActionRunner, TriggerConfig
 from homeassistant.helpers.typing import ConfigType
 
-_CONFIG_SCHEMA = vol.Schema(
+_CONFIG_SCHEMA = probatio.Schema(
     {
-        vol.Required(CONF_TARGET): cv.TARGET_FIELDS,
+        probatio.Required(CONF_TARGET): cv.TARGET_FIELDS,
     }
 )
 
@@ -169,7 +169,7 @@ In the following snippet we create a condition that can be configured to only pa
 ```python
 from typing import TYPE_CHECKING, Any, override
 
-import voluptuous as vol
+import probatio
 
 from homeassistant.const import (
     CONF_OPTIONS,
@@ -181,10 +181,10 @@ from homeassistant.core import HomeAssistant
 from homeassistant.helpers.condition import Condition, ConditionConfig
 from homeassistant.helpers.typing import ConfigType, TemplateVarsType
 
-STATE_CONDITION_SCHEMA = vol.Schema(
+STATE_CONDITION_SCHEMA = probatio.Schema(
     {
-        vol.Required(CONF_OPTIONS, default={}): {
-            vol.Required(CONF_STATE): vol.In([STATE_ON, STATE_OFF]),
+        probatio.Required(CONF_OPTIONS, default={}): {
+            probatio.Required(CONF_STATE): probatio.In([STATE_ON, STATE_OFF]),
         },
     }
 )

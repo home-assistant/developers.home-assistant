@@ -43,7 +43,7 @@ There are three optional input parameters that can be passed into the service ac
 
 | Parameter Name 	| Data Validation                       	| Supported Feature Flag 	      |
 |----------------	|---------------------------------------	|-------------------------------  |
-| `tone`         	| `vol.Any(vol.Coerce(int), cv.string)` 	| `SirenEntityFeature.TONES`      |
+| `tone`         	| `probatio.Any(probatio.Coerce(int), cv.string)` 	| `SirenEntityFeature.TONES`      |
 | `duration`     	| `cv.positive_int`                     	| `SirenEntityFeature.DURATION`   |
 | `volume_level` 	| `cv.small_float`                      	| `SirenEntityFeature.VOLUME_SET` |
 

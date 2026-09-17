@@ -47,7 +47,7 @@ Note that this priority order means that:
 Your config flow will need to define steps of your configuration flow. Each step is identified by a unique step name (`step_id`). The step callback methods follow the pattern `async_step_<step_id>`. The docs for [Data Entry Flow](/docs/data_entry_flow_index.md) describe the different return values of a step. Here is an example of how to define the `user` step:
 
 ```python
-import voluptuous as vol
+import probatio
 
 class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     async def async_step_user(self, info):
@@ -55,7 +55,8 @@ class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
             pass  # TODO: process info
 
         return self.async_show_form(
-            step_id="user", data_schema=vol.Schema({vol.Required("password"): str})
+            step_id="user",
+            data_schema=probatio.Schema({probatio.Required("password"): str}),
         )
 ```
 
@@ -298,7 +299,7 @@ A config entry can allow reconfiguration by adding a `reconfigure` step. This pr
 This is not meant to handle authentication issues or reconfiguration of such. For that we have the [`reauth`](#reauthentication) step, which should be implemented to automatically start in such case there is an issue with authentication.
 
 ```python
-import voluptuous as vol
+import probatio
 
 class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
     """Config flow for Example integration."""
@@ -315,7 +316,7 @@ class ExampleConfigFlow(config_entries.ConfigFlow, domain=DOMAIN):
 
         return self.async_show_form(
             step_id="reconfigure",
-            data_schema=vol.Schema({vol.Required("input_parameter"): str}),
+            data_schema=probatio.Schema({probatio.Required("input_parameter"): str}),
         )
 ```
 
@@ -378,7 +379,7 @@ class OAuth2FlowHandler(
         if user_input is None:
             return self.async_show_form(
                 step_id="reauth_confirm",
-                data_schema=vol.Schema({}),
+                data_schema=probatio.Schema({}),
             )
         return await self.async_step_user()
 
@@ -614,14 +615,14 @@ async def validate_setup(
       raise SchemaFlowError("setup_error") 
     return user_input
 
-DATA_SCHEMA_SETUP = vol.Schema(
+DATA_SCHEMA_SETUP = probatio.Schema(
     {
-        vol.Required(CONF_NAME, default=DEFAULT_NAME): TextSelector()
+        probatio.Required(CONF_NAME, default=DEFAULT_NAME): TextSelector()
     }
 )
-DATA_SCHEMA_OPTIONS = vol.Schema(
+DATA_SCHEMA_OPTIONS = probatio.Schema(
     {
-        vol.Optional(CONF_SOME_SETTING): TextSelector()
+        probatio.Optional(CONF_SOME_SETTING): TextSelector()
     }
 )
 
