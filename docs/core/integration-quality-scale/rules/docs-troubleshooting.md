@@ -43,6 +43,12 @@ This means the settings on the device are incorrect, since the device needs to b
 
 ### Symptom: The devices do not appear in Home Assistant
 
+After setting up the integration, the devices are visible and controllable in the manufacturer's app, but they do not appear in Home Assistant.
+
+#### Description
+
+Home Assistant can only add devices that are available to the account or hub used during setup.
+
 #### Resolution
 
 Make sure the devices are visible and controllable via the manufacturer's app.
