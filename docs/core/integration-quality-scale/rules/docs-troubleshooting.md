@@ -20,15 +20,15 @@ For a short troubleshooting topic, sections can be omitted when they would add n
 
 {% details "Can’t set up the device" %}
 
-#### Symptom: “This device can’t be reached”
+### Symptom: “This device can’t be reached”
 
 When trying to set up the integration, the form shows the message “This device can’t be reached”.
 
-##### Description
+#### Description
 
 This means the settings on the device are incorrect, since the device needs to be enabled for local communication.
 
-##### Resolution
+#### Resolution
 
 1. Make sure your device is powered up (LEDs are on).
 2. Make sure your device is connected to the internet:
@@ -41,9 +41,9 @@ This means the settings on the device are incorrect, since the device needs to b
 
 {% details "I can't see my devices" %}
 
-#### Symptom: The devices do not appear in Home Assistant
+### Symptom: The devices do not appear in Home Assistant
 
-##### Resolution
+#### Resolution
 
 Make sure the devices are visible and controllable via the manufacturer's app.
 If they are not, check the device's power and network connection.
