@@ -64,4 +64,4 @@ If pairing still fails after verifying the prerequisites, check the following:
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If the integration does not have any known issues that the user can resolve themselves, this rule does not apply.
