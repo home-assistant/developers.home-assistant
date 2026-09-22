@@ -199,6 +199,7 @@ A `CalendarEvent` represents an individual event on a calendar.
 | summary     | string           | **Required** | A title or summary of the event.                                                                                                                |
 | location    | string           | `None`       | A geographic location of the event.                                                                                                             |
 | description | string           | `None`       | A detailed description of the event.                                                                                                            |
+| color | string | `None` | A color for this specific event, which overrides the color of the calendar it belongs to. Leave unset to use the calendar's own color. |
 | uid | string | `None` | A unique identifier for the event (required for mutations) |
 | recurrence_id | string | `None` | An optional identifier for a specific instance of a recurring event (required for mutations of recurring events) |
 | rrule |  string | `None` | A recurrence rule string, for example, `FREQ=DAILY` |
@@ -213,3 +214,7 @@ A calendar entity does not return cancelled events, so `cancelled` is not part o
 ## Color management
 
 Calendar entities can optionally provide a default color for display in the frontend by setting `initial_color` to a hex color string (e.g., `"#16a765"`). This color is automatically stored in entity registry options when the entity is first added and can be customized by users through the entity settings UI.
+
+An individual event can carry its own color, which overrides the color of the calendar it belongs to, by setting `color` on the `CalendarEvent`. This corresponds to the rfc7986 `COLOR` property: as described in [RFC 7986 Section 5.9](https://datatracker.ietf.org/doc/html/rfc7986#section-5.9), the value may be a CSS3 color name, for example `turquoise`, or a hex color, for example `#0088aa`. An integration supplies whichever form its calendar natively provides and does not convert between them.
+
+Leave `color` unset when the calendar does not assign a color to the individual event. The frontend then falls back to the color of the calendar entity, which is also what happens for a value it cannot parse as a valid CSS color.
