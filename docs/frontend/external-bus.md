@@ -202,7 +202,7 @@ Payload:
 - `device_name`: The device's name in Home Assistant, suggested to the other platform
 - `remaining_seconds`: Seconds until the commissioning window closes, if known
 
-Expected response: an empty result once the device was shared, or an error result with `code` set to `cancelled` if the user dismissed the platform's sheet, or `failed` otherwise.
+Expected response: a `SuccessResult` with an empty object once the device was shared, or an `ErrorResult` whose `code` is `cancelled` if the user dismissed the platform's sheet, or `failed` otherwise, with a human readable `message`.
 
 #### Messages not expecting a response
 
