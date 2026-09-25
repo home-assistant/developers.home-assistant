@@ -125,6 +125,7 @@ Expected response:
   appVersion?: string;
   hasEntityAddTo?: boolean;
   hasAssistSettings?: boolean;
+  matterShareTarget?: "apple_home" | "app_chooser";
 }
 ```
 
@@ -141,6 +142,7 @@ Expected response:
 - `appVersion`: The version string of the native app
 - `hasEntityAddTo`: Set to true if the app supports adding entities to platform-specific locations (for example, homescreen widget)
 - `hasAssistSettings`: Set to true if the app has an Assist settings screen
+- `matterShareTarget`: Set if the app can share a Matter device through `matter/share_device`: `apple_home` adds it to Apple Home, `app_chooser` lets the user pick an app from the platform's Matter share sheet
 
 ##### `entity/add_to/get_actions`
 
@@ -173,6 +175,34 @@ Expected response:
 - `details`: Optional additional details about the action
 - `mdi_icon`: Material Design Icon identifier for the action (for example, "mdi:car")
 - `app_payload`: Opaque string to be sent back in `entity/add_to` to execute the action
+
+##### `matter/share_device`
+
+Share a Matter device that is already commissioned to Home Assistant with another platform, using a commissioning window Home Assistant opened for it. Only sent when the app set `matterShareTarget`.
+
+Payload:
+
+```ts
+{
+  setup_qr_code: string;
+  setup_pin_code: number;
+  discriminator?: number;
+  vendor_id?: number;
+  product_id?: number;
+  device_name?: string;
+  remaining_seconds?: number;
+}
+```
+
+- `setup_qr_code`: The QR code payload of the commissioning window (`MT:...`)
+- `setup_pin_code`: The setup passcode of the commissioning window
+- `discriminator`: The long (12-bit) discriminator the device advertises while the window is open, if the Matter server reports it
+- `vendor_id`: The vendor ID of the device, if known
+- `product_id`: The product ID of the device, if known
+- `device_name`: The device's name in Home Assistant, suggested to the other platform
+- `remaining_seconds`: Seconds until the commissioning window closes, if known
+
+Expected response: an empty result once the device was shared, or an error result with `code` set to `cancelled` if the user dismissed the platform's sheet, or `failed` otherwise.
 
 #### Messages not expecting a response
 
