@@ -199,6 +199,21 @@ def _unavailable_callback(info: bluetooth.BluetoothServiceInfoBleak) -> None:
 cancel = bluetooth.async_track_unavailable(hass, _unavailable_callback, "44:44:33:11:23:42", connectable=True)
 ```
 
+### Subscribing to every advertisement of a device
+
+`bluetooth.async_register_callback` only fires when the advertisement data of a device changes. To see every advertisement of one address, including ones identical to the previous one, call `bluetooth.async_register_advertisement_callback`. This is useful to track whether a device is still advertising or to inspect its latest packet, for example while a discovery flow is open.
+
+Only the `raw` bytes are per packet, and they are `None` on backends that do not provide raw advertisements; `service_data`, `manufacturer_data` and `service_uuids` are merged across packets. The callback fires once per scanner that hears a packet, including advertisements that are then discarded in favour of a stronger source, and advertisements dropped by the Apple noise pre-filter are not delivered. The callback runs for every packet from the address, so unsubscribe as soon as it is no longer needed.
+
+```python
+from homeassistant.components import bluetooth
+
+def _advertisement_callback(info: bluetooth.BluetoothServiceInfoBleak) -> None:
+    _LOGGER.debug("%s advertised from %s", info.address, info.source)
+
+cancel = bluetooth.async_register_advertisement_callback(hass, _advertisement_callback, "44:44:33:11:23:42")
+```
+
 ### Finding out the availability timeout
 
 Availability is based on the time since the device's last known broadcast. This timeout is learned automatically based on the device's regular broadcasting pattern. You can find out this with the `bluetooth.async_get_learned_advertising_interval` API.
