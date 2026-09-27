@@ -220,7 +220,7 @@ The `llm.Tool` class has the following attributes:
 | `annotations`       | ToolAnnotations | Properties describing how the tool behaves. Defaults to `ToolAnnotations()`                                  |
 | `integration`       | string     | The domain of the integration that provides the tool. Required.                                                |
 
-A tool that does not set `integration` is reported. A core integration raises an error. A custom integration gets a warning in the log until Home Assistant Core 2027.10, and stops working after that.
+A tool that does not set `integration` is reported. A core integration raises an error. A custom integration gets a warning in the log, and stops working in Home Assistant Core 2027.10.
 
 The `llm.Tool` class has the following methods:
 
@@ -230,7 +230,7 @@ Perform the actual operation of the tool when called by the LLM. This must be an
 
 The method returns an `llm.ToolResult`. Its `data` holds the response of the tool, which must be a dict and serializable in JSON [`homeassistant.util.json.JsonObjectType`](https://github.com/home-assistant/core/blob/dev/homeassistant/util/json.py). Its `error` says whether the call failed.
 
-Returning a plain dict instead of a `ToolResult` is deprecated. It keeps working for custom integrations with a warning in the log until Home Assistant Core 2027.11, and stops working after that.
+Returning a plain dict instead of a `ToolResult` is deprecated. It keeps working for custom integrations with a warning in the log, and stops working in Home Assistant Core 2027.11.
 
 Raise a `HomeAssistantError` (or a subclass) when the tool cannot do its work. Home Assistant catches it and returns a `ToolResult` that names the exception and has `error` set. Return a `ToolResult` with `error` set yourself when you want to word the failure for the LLM:
 
@@ -281,8 +281,6 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import llm
 from homeassistant.helpers.llm import APIInstance, LLMContext
-from homeassistant.util import dt as dt_util
-from homeassistant.util.json import JsonObjectType
 
 
 class MyAPI(llm.API):
