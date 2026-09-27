@@ -1,7 +1,7 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": ["config:recommended"],
-  "enabledManagers": ["npm"],
+  "enabledManagers": ["npm", "nvm"],
   "minimumReleaseAge": "3 days",
   "schedule": ["before 8am on monday"],
   "semanticCommits": "disabled",
