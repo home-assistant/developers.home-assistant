@@ -1,0 +1,43 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:recommended"],
+  "enabledManagers": ["npm"],
+  "minimumReleaseAge": "3 days",
+  "schedule": ["before 8am on monday"],
+  "semanticCommits": "disabled",
+  "labels": ["dependencies", "javascript"],
+  "lockFileMaintenance": {
+    "description": "Refresh yarn.lock weekly, so indirect dependencies (like undici, dompurify or svgo) come in one PR instead of one PR each",
+    "enabled": true,
+    "schedule": ["before 8am on monday"]
+  },
+  "packageRules": [
+    {
+      "description": "Docusaurus with the packages that move along with it: the MDX version it's built on and the local search plugin",
+      "matchPackageNames": [
+        "@docusaurus/**",
+        "@mdx-js/react",
+        "@easyops-cn/docusaurus-search-local"
+      ],
+      "groupName": "Docusaurus",
+      "groupSlug": "docusaurus"
+    },
+    {
+      "description": "React and React DOM share a version",
+      "matchPackageNames": ["react", "react-dom"],
+      "groupName": "React",
+      "groupSlug": "react"
+    },
+    {
+      "description": "Mermaid layout plugin, which depends on the Mermaid version Docusaurus ships",
+      "matchPackageNames": ["@mermaid-js/**"],
+      "groupName": "Mermaid",
+      "groupSlug": "mermaid"
+    },
+    {
+      "description": "Leave the resolutions alone. They set a floor for indirect dependencies for security reasons, and lock file maintenance already keeps them current within their range.",
+      "matchDepTypes": ["resolutions"],
+      "enabled": false
+    }
+  ]
+}
