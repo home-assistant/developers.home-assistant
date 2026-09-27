@@ -220,7 +220,7 @@ The `llm.Tool` class has the following attributes:
 | `annotations`       | ToolAnnotations | Properties describing how the tool behaves. Defaults to `ToolAnnotations()`                                  |
 | `integration`       | string     | The domain of the integration that provides the tool. Required.                                                |
 
-A tool that does not set `integration` is reported. A core integration raises an error. A custom integration gets a warning in the log, and stops working in Home Assistant Core 2027.10.
+A tool that does not set `integration` is reported. A tool from a core integration raises an error. A tool from a custom integration gets a warning in the log, and stops working in Home Assistant Core 2027.10.
 
 The `llm.Tool` class has the following methods:
 
