@@ -6,11 +6,15 @@ title: "Native call providers"
 This contract accompanies experimental Companion and frontend changes. It is not available in released apps merely because an integration implements it. Android is the reference implementation. iOS requires its own CallKit and push implementation and has not been qualified by the Android tests.
 :::
 
-A call provider is a Home Assistant integration that owns routing and call state. Companion supplies the portable device's native communication audio and operating-system call controls. A provider may use SIP, another WebSocket service, or its own media backend. Companion does not need to implement those protocols.
+This API lets a Home Assistant integration deliver incoming calls to the Companion app. The phone rings, the user can answer or decline, and an ongoing-call notification provides a hang-up button. Companion handles microphone and speaker audio through Android's native calling system.
 
-## Discover a compatible app
+The integration remains responsible for deciding which phone should ring and for connecting and ending the call. In this documentation, that integration is called the **call provider**. For example, a SIP integration handles SIP on the Home Assistant side and exchanges audio with Companion through the WebSocket interface described below.
 
-Compatible registrations advertise `app_data.native_calls: 1` through `mobile_app`. Bind a phone to the stable registration and authenticated user, not to the model name or user agent. A display-name change must not create a new phone.
+## Identify phones that support calls
+
+A compatible Companion app includes `native_calls: 1` in the `app_data` it sends when registering with Home Assistant's `mobile_app` integration. Your integration can use this field to recognize app installations that support this calling API.
+
+Associate each phone with its existing app registration and authenticated Home Assistant user. Use the phone's name only for display: renaming it must update its label without creating a second phone or losing its call configuration.
 
 ## Incoming call
 
