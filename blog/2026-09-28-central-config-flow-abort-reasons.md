@@ -5,14 +5,15 @@ authorImageURL: https://avatars.githubusercontent.com/u/24647999?v=4
 title: "Shared config flow abort reasons are translated centrally"
 ---
 
-As of Home Assistant Core 2026.10, the `homeassistant` integration translates the abort reasons that every integration words the same way. You can delete them from your `strings.json`.
+As of Home Assistant Core 2026.10, the `homeassistant` integration can translate abort reasons that every integration words the same way.
 
 ## What to do
 
-* Delete the keys below from the `abort` sections of `strings.json`, including those under `config_subentries`.
-* If your own code raises one of them, pass the translation domain first. See [Raise one yourself](#raise-one-yourself).
+* Delete the keys below from the `abort` sections of `strings.json`, including those under `config_subentries`, only when the abort uses the `homeassistant` translation domain.
+* The helpers listed below use the central translation domain automatically.
+* If your code passes one of these reasons to `async_abort` or `AbortFlow`, pass the `homeassistant` translation domain before deleting the local key. Without that domain, retain the local key. See [Raise one yourself](#raise-one-yourself).
 
-Keys left in place are no longer used, because the frontend resolves the reason from the domain passed with the abort.
+When an abort uses the central translation domain, the frontend resolves the reason from that domain and does not use a local key.
 
 ## Covered reasons
 
