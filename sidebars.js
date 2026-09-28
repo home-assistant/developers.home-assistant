@@ -56,6 +56,7 @@ module.exports = {
         "frontend/custom-ui/custom-view",
         "frontend/custom-ui/creating-custom-panels",
         "frontend/custom-ui/registering-resources",
+        "frontend/custom-ui/dashboard-menu-actions",
       ],
     },
   ],
