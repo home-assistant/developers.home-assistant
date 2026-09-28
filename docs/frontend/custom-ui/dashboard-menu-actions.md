@@ -53,6 +53,6 @@ Actions remain in the overflow menu on wide and narrow displays. They are hidden
 
 Registering the same namespaced ID replaces that action without duplicating it. Call the returned `unregister` function on disposal. Disposing an older registration does not remove a newer registration with the same ID.
 
-The frontend subscribes while the dashboard is connected and releases its listener on disconnect. Exceptions from a resource's visibility or label callback are reported without preventing the other menu entries from rendering. Failed actions use the frontend error dialog.
+The frontend subscribes while the dashboard is connected and releases its listener on disconnect. Exceptions from a resource's visibility or label callback are reported without preventing the other menu entries from rendering. Repeated callback failures are reported once until the action resolves successfully or is replaced. Failed actions use the frontend error dialog.
 
 No manipulation of the dashboard's shadow DOM or replacement of its menu is required.
