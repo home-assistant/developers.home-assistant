@@ -28,7 +28,7 @@ When an abort uses the central translation domain, the frontend resolves the rea
 
 The nine OAuth2 reasons of `AbstractOAuth2FlowHandler` are covered too: `authorize_url_timeout`, `missing_credentials`, `no_url_available`, `oauth_error`, `oauth_failed`, `oauth_implementation_unavailable`, `oauth_timeout`, `oauth_unauthorized`, `user_rejected_authorize`.
 
-## Raise one yourself
+## Explicit translation domain
 
 Pass the domain that owns the string. Both `async_abort` and `AbortFlow` accept it.
 
