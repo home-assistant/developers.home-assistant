@@ -17,16 +17,23 @@ When an abort uses the central translation domain, the frontend resolves the rea
 
 ## Default reasons
 
-| Reason                    | Raised by                                                                      |
-|---------------------------|--------------------------------------------------------------------------------|
-| `already_in_progress`     | `async_set_unique_id`, discovery without a unique ID                           |
-| `single_instance_allowed` | `single_config_entry`, `DiscoveryFlowHandler`, `WebhookFlowHandler`            |
-| `no_devices_found`        | `DiscoveryFlowHandler`                                                         |
-| `cloud_not_connected`     | `WebhookFlowHandler`                                                           |
-| `reauth_successful`       | `async_update_reload_and_abort`, `async_update_and_abort`                      |
-| `reconfigure_successful`  | `async_update_reload_and_abort`, `async_update_and_abort`, also for subentries |
-
-The nine OAuth2 reasons of `AbstractOAuth2FlowHandler` are covered too: `authorize_url_timeout`, `missing_credentials`, `no_url_available`, `oauth_error`, `oauth_failed`, `oauth_implementation_unavailable`, `oauth_timeout`, `oauth_unauthorized`, `user_rejected_authorize`.
+| Reason                             | Raised by                                                                      |
+|------------------------------------|--------------------------------------------------------------------------------|
+| `already_in_progress`              | `async_set_unique_id`, discovery without a unique ID                           |
+| `single_instance_allowed`          | `single_config_entry`, `DiscoveryFlowHandler`, `WebhookFlowHandler`            |
+| `no_devices_found`                 | `DiscoveryFlowHandler`                                                         |
+| `cloud_not_connected`              | `WebhookFlowHandler`                                                           |
+| `reauth_successful`                | `async_update_reload_and_abort`, `async_update_and_abort`                      |
+| `reconfigure_successful`           | `async_update_reload_and_abort`, `async_update_and_abort`, also for subentries |
+| `authorize_url_timeout`            | `AbstractOAuth2FlowHandler`                                                    |
+| `missing_credentials`              | `AbstractOAuth2FlowHandler`                                                    |
+| `no_url_available`                 | `AbstractOAuth2FlowHandler`                                                    |
+| `oauth_error`                      | `AbstractOAuth2FlowHandler`                                                    |
+| `oauth_failed`                     | `AbstractOAuth2FlowHandler`                                                    |
+| `oauth_implementation_unavailable` | `AbstractOAuth2FlowHandler`                                                    |
+| `oauth_timeout`                    | `AbstractOAuth2FlowHandler`                                                    |
+| `oauth_unauthorized`               | `AbstractOAuth2FlowHandler`                                                    |
+| `user_rejected_authorize`          | `AbstractOAuth2FlowHandler`                                                    |
 
 ## Explicit translation domain
 
