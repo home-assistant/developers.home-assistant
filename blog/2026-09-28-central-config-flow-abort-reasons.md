@@ -15,7 +15,7 @@ As of Home Assistant Core 2026.10, the `homeassistant` integration can translate
 
 When an abort uses the central translation domain, the frontend resolves the reason from that domain and does not use a local key.
 
-## Covered reasons
+## Default reasons
 
 | Reason                    | Raised by                                                                      |
 |---------------------------|--------------------------------------------------------------------------------|
