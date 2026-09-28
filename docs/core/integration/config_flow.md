@@ -381,7 +381,7 @@ By default, the `async_update_reload_and_abort` helper method aborts the flow wi
 
 Depending on the details of the integration, there may be additional considerations such as ensuring the same account is used across reauth, or handling multiple config entries.
 
-The reauth confirmation dialog needs additional definitions in `strings.json` for the reauth confirmation and success dialogs:
+The reauth confirmation dialog needs an additional definition in `strings.json`:
 
 ```json
 {
@@ -392,10 +392,8 @@ The reauth confirmation dialog needs additional definitions in `strings.json` fo
         # TODO: Replace with the name of the integration
         "description": "The Example integration needs to re-authenticate your account"
       }
-    },
-    "abort": {
-      "reauth_successful": "[%key:common::config_flow::abort::reauth_successful%]"
-    },
+    }
+  }
 }
 ```
 
