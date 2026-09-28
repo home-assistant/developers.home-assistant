@@ -58,4 +58,4 @@ This saves the need to store the callback function in the entity.
 
 ## Exceptions
 
-If the integration's entities do not subscribe to events (for example, they receive their updates through a coordinator), this rule does not apply.
+If the integration's entities do not subscribe to events, this rule does not apply.
