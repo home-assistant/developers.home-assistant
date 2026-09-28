@@ -36,6 +36,7 @@ module.exports = {
     "frontend/data",
     "frontend/external-authentication",
     "frontend/external-bus",
+    "api/native-calls",
     {
       type: "category",
       label: "Extending the frontend",
