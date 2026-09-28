@@ -38,7 +38,15 @@ module.exports = {
           ],
         },
         { to: "docs/misc", label: "Misc", position: "left" },
-        { to: "blog", label: "Blog", position: "left" },
+        {
+          label: "Blog",
+          to: "blog",
+          position: "left",
+          items: [
+            { to: "blog", label: "Latest posts" },
+            { to: "blog/archive", label: "All posts" },
+          ],
+        },
       ],
     },
     footer: {
@@ -77,6 +85,10 @@ module.exports = {
             {
               label: "Blog",
               to: "blog",
+            },
+            {
+              label: "Blog archive",
+              to: "blog/archive",
             },
             {
               label: "GitHub",
@@ -173,6 +185,8 @@ module.exports = {
         },
         blog: {
           postsPerPage: 10,
+          blogSidebarCount: "ALL",
+          blogSidebarTitle: "All posts",
           feedOptions: {
             type: "all",
           },
