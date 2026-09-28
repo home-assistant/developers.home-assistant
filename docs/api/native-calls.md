@@ -32,6 +32,8 @@ Text messages negotiate `tx_format` and `rx_format`, encoded as `sample_rate:s16
 
 The reference adapter also accepts optional `audio_mode`, defaulting to `full_duplex`. Its `mic_only` and `speaker_only` values describe the remote endpoint and constrain the complementary local path. Providers with explicit direction negotiation can leave it at the default.
 
+Initial negotiation must include `tx_format`, `rx_format`, and an explicit `audio_direction`. Missing direction or malformed field shapes terminate the media session before microphone capture starts.
+
 Binary messages start with byte `1`, followed by signed 16-bit little-endian PCM. A message must fit within 4096 bytes. Negotiate supported rates and frame sizes before allocating audio resources. Queue capacity is bounded. After native audio resources are ready, the app sends `{"type":"audio_ready"}`.
 
 A negotiated 48 kHz stream does not guarantee that every physical or Bluetooth audio route runs at 48 kHz. Report transport format and physical route measurements separately.
