@@ -50,5 +50,5 @@ class MyEntity(CoordinatorEntity[MyCoordinator]):
 
 ## Exceptions
 
-If the integration does not use a coordinator and only has a single platform this rule does not apply.
+There are no exceptions to this rule.
 

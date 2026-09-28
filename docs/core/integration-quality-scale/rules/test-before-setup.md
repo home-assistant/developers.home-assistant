@@ -52,8 +52,7 @@ More information about config entries and their lifecycle can be found in the [c
 
 ## Exceptions
 
-* Integrations that connect to devices which are expected to be offline or asleep for extended periods (for example, some Bluetooth or ESPHome devices), and therefore cannot reliably be tested at setup time, are exempt from this rule.
-* Integrations that do not connect to a device or service (for example, those that only send one-way commands or perform a local calculation) are also exempt from this rule.
+If it is impossible for an integration to validate the configuration during setup, or it's a pure local calculation, the integration is exempt
 
 ## Related rules
 

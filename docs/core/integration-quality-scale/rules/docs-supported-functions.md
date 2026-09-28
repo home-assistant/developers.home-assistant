@@ -85,4 +85,4 @@ Example, sorted by device:
 
 ## Exceptions
 
-If the integration does not provide any entities, this rule does not apply.
+There are no exceptions to this rule.
