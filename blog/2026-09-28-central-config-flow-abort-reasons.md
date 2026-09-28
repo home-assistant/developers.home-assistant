@@ -5,7 +5,7 @@ authorImageURL: https://avatars.githubusercontent.com/u/24647999?v=4
 title: "Shared config flow abort reasons are translated centrally"
 ---
 
-As of Home Assistant Core 2026.10, the `homeassistant` integration can translate abort reasons that every integration words the same way.
+As of Home Assistant Core 2026.10, the `homeassistant` integration can translate abort reasons that every integration words the same way. If you're today linking from a local translation key, for an abort reason, to a shared translation key under the `homeassistant` integration, you can instead just rely on the shared translation key under the `homeassistant` domain directly. This is done by default in some helpers and can also be done explicitly by setting the `translation_domain` parameter when aborting the flow.
 
 ## What to do
 
