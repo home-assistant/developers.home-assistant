@@ -27,4 +27,4 @@ link to blueprint
 
 ## Exceptions
 
-Integrations that do not provide user facing functionality, that can be used as part of an automation, the integration is exempt from this rule.
+Integrations that do not create entities or provide actions, or that only extend core functionality (for example, backup-only integrations), are exempt from this rule.
