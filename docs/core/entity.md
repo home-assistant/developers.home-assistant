@@ -377,13 +377,51 @@ class ExampleSensorEntity(SensorEntity):
 
 Use these lifecycle hooks to execute code when certain events happen to the entity. All lifecycle hooks are async methods.
 
+Adding an entity to Home Assistant does not always succeed. The entity platform aborts the add when, for example, the entity is disabled in the entity registry, or when its `entity_id` or `unique_id` collides with an entity which has already been added. The hooks below differ in whether they run on an aborted add, so it's important to pick the right one.
+
+### `async_prepare_to_add_to_hass()`
+
+Called before the entity is added, on every add attempt, including attempts which will be aborted. At this point the entity has its `hass` and `platform` attributes assigned, but it has not yet been assigned an `entity_id`, its entity registry entry has not yet been created or assigned to `registry_entry`, and its state has not been written to the state machine.
+
+This is the right place for work which must happen before the entity's registry entry is created, or which must happen even if the entity turns out to be disabled. Example uses: seed entity registry options which are read when the registry entry is created, or register data with an integration-level helper so that an entity which is created disabled can be enabled later.
+
+Because the add may still be aborted, code in this hook must not assume that `async_added_to_hass()` will run, and must not assume that `async_will_remove_from_hass()` will be called to clean up. Register the clean up with [`async_on_remove()`](#async_on_removefunc) instead, which runs both when an add is aborted and when a successfully added entity is removed.
+
+Raising an exception from this hook aborts the add.
+
+Most integrations do not need this hook. Prefer `async_added_to_hass()` unless the work genuinely has to happen before the entity is registered.
+
 ### `async_added_to_hass()`
 
-Called when an entity has their entity_id and hass object assigned, before it is written to the state machine for the first time. Example uses: restore the state, subscribe to updates or set callback/dispatch function/listener.
+Called as the last step of a successful add: after the entity has been assigned its `entity_id` and, if it has a `unique_id`, its entity registry entry, and immediately before its state is written to the state machine for the first time. Example uses: restore the state, subscribe to updates or set callback/dispatch function/listener.
+
+This hook is not called when adding the entity is aborted.
 
 ### `async_will_remove_from_hass()`
 
-Called when an entity is about to be removed from Home Assistant. Example use: disconnect from the server or unsubscribe from updates.
+The counterpart of `async_added_to_hass()`: called when an entity which was successfully added is about to be removed from Home Assistant. Use it to undo the work done in `async_added_to_hass()`. Example use: disconnect from the server or unsubscribe from updates.
+
+This hook is not called when adding the entity was aborted before the add finished. On that path, only the callbacks registered with `async_on_remove()` run.
+
+### `async_on_remove(func)`
+
+Not a hook to override, but a helper to register clean up: `async_on_remove()` registers a callback which is called when the entity is removed, and also when adding the entity is aborted. Because it covers both paths, it's the safest way to clean up anything which was set up before the add completed:
+
+```python
+class MySensor(SensorEntity):
+    """Representation of a sensor."""
+
+    async def async_prepare_to_add_to_hass(self) -> None:
+        """Run before the entity is added to hass."""
+        await super().async_prepare_to_add_to_hass()
+        unsubscribe = self._device.subscribe(self._handle_update)
+        # Runs both when the add is aborted and when the entity is removed
+        self.async_on_remove(unsubscribe)
+```
+
+:::warning
+The `Entity.add_to_platform_start()`, `Entity.add_to_platform_finish()` and `Entity.add_to_platform_abort()` methods are implementation details of the entity platform helper and must not be overridden by integrations. Use the lifecycle hooks documented above instead.
+:::
 
 ## Icons
 
