@@ -26,11 +26,11 @@ The Home Assistant instance contains four objects to help you interact with the 
 
 Depending on what you're writing, there are different ways the `hass` object is made available.
 
-**Component**
-Passed into `setup(hass, config)` or `async_setup(hass, config)`.
+**Integration** (`__init__.py`)
+Passed into `async_setup_entry(hass, entry)` when a config entry is set up. Integrations that support YAML configuration also get it passed into `async_setup(hass, config)`.
 
-**Platform**
-Passed into `setup_platform(hass, config, add_entities, discovery_info=None)` or `async_setup_platform(hass, config, async_add_entities, discovery_info=None)`.
+**Platform** (like `light.py`)
+Passed into `async_setup_entry(hass, entry, async_add_entities)`.
 
 **Entity**
-Available as `self.hass` once the entity has been added via the `add_entities` callback inside a platform.
+Available as `self.hass` once the entity has been added via the `async_add_entities` callback in a platform.
