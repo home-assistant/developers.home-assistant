@@ -344,6 +344,45 @@ DATA_SCHEMA_OPTIONS = probatio.Schema(
 
 This will show the entity selected in the initial configuration as a read-only property whenever the options flow is launched. 
 
+#### Filtering selector options on other fields
+
+Some selectors can narrow their options based on the value of another field in the same form. Use `with_context()` on the selector to map a context key to the name of the field that provides its value. The frontend then updates the options as soon as the user changes that field. `with_context()` returns the selector itself and raises a `ValueError` for a context key the selector doesn't support.
+
+For example, the unit of measurement selector supports the `filter_device_class` and `filter_state_class` context keys. These take the name of a field that uses a `device_class` or `state_class` selector.
+
+```python
+from homeassistant.const import (
+    CONF_DEVICE_CLASS,
+    CONF_STATE_CLASS,
+    CONF_UNIT_OF_MEASUREMENT,
+)
+from homeassistant.helpers.selector import (
+    DeviceClassSelector,
+    DeviceClassSelectorConfig,
+    StateClassSelector,
+    UnitOfMeasurementSelector,
+)
+
+DATA_SCHEMA = probatio.Schema(
+    {
+        probatio.Optional(CONF_DEVICE_CLASS): DeviceClassSelector(
+            DeviceClassSelectorConfig(domain="sensor")
+        ),
+        probatio.Optional(CONF_STATE_CLASS): StateClassSelector(),
+        probatio.Optional(
+            CONF_UNIT_OF_MEASUREMENT
+        ): UnitOfMeasurementSelector().with_context(
+            {
+                "filter_device_class": CONF_DEVICE_CLASS,
+                "filter_state_class": CONF_STATE_CLASS,
+            }
+        ),
+    }
+)
+```
+
+The context only affects the frontend. The selector validates the submitted value against its own config, not against the other fields. For example, a unit of measurement selector configured with `UnitOfMeasurementSelectorConfig(device_classes=[SensorDeviceClass.TEMPERATURE])` only accepts temperature units. Without a config, it accepts any unit. Your flow still needs to check that the combination of values the user submitted is valid.
+
 #### Validation
 
 After the user has filled in the form, the step method will be called again and the user input is passed in. Your step will only be called if the user input passes your data schema. When the user passes in data, you will have to do extra validation of the data. For example, you can verify that the passed in username and password are valid.
