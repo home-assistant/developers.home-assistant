@@ -3,14 +3,23 @@ title: "Integration platforms"
 sidebar_label: "Platforms"
 ---
 
-Home Assistant has various built-in integrations that abstract device types. There are [lights](core/entity/light.md), [switches](core/entity/switch.md), [covers](core/entity/cover.md), [climate devices](core/entity/climate.md), and [many more](core/entity.md). Your integration can hook into these integrations by creating a platform. You will need a platform for each integration that you are integrating with.
+Home Assistant has various built-in integrations that abstract device types. There are [lights](core/entity/light.md), [switches](core/entity/switch.md), [covers](core/entity/cover.md), [climate devices](core/entity/climate.md), and [many more](core/entity.md). Your integration provides entities to these by adding a platform for each entity type it supports.
 
-To create a platform, you will need to create a file with the domain name of the integration that you are building a platform for. So if you are building a light, you will add a new file `light.py` to your integration folder.
+To add a platform, create a file named after the entity type in your integration folder. To provide a light, add a `light.py`; to provide a sensor, add a `sensor.py`, and so on.
 
-We have created two example integrations that should give you a look at how this works:
+Each platform file implements an `async_setup_entry` function that creates the entities for a config entry. Your integration forwards its config entry to those platforms from its own `async_setup_entry`:
 
-- [Example sensor platform](https://github.com/home-assistant/example-custom-config/tree/master/custom_components/example_sensor/): hello world of platforms.
-- [Example light platform](https://github.com/home-assistant/example-custom-config/tree/master/custom_components/example_light/): showing best practices.
+```python
+PLATFORMS = [Platform.LIGHT, Platform.SENSOR]
+
+
+async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
+    """Set up the integration from a config entry."""
+    await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
+    return True
+```
+
+See [config entries](config_entries_index.md#for-platforms) for the full platform setup and unload flow. The [`detailed_hello_world_push`](https://github.com/home-assistant/example-custom-config/tree/master/custom_components/detailed_hello_world_push/) example integration shows this in practice, forwarding to a `sensor` and a `cover` platform.
 
 ### Interfacing with devices
 
