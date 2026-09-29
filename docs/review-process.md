@@ -277,7 +277,7 @@ The following pages in our developer documentation might be helpful when
 creating contributions to our Core repository:
 
 - [Development checklist](/docs/development_checklist)
-- [Development checklist for integrations](/docs/creating_component_code_review)
+- [Integration quality scale checklist](/docs/core/integration-quality-scale/checklist)
 - [Submitting your work](/docs/development_submitting)
 - [Style guidelines](/docs/development_guidelines)
 - [Testing your code](/docs/development_testing)
