@@ -283,23 +283,26 @@ actions:
 If you want to fire a service action call for an entity ID (for example, to turn
 on a light), you can do so in three different ways.
 
-The entity ID can be specified as a property of the action level, part of the
-data that is sent in the service action call or as an entity in a service
-action target.
+The entity ID can be specified as an entity in a service action target, as a
+property of the action level, or as a part of the data that is sent in the 
+service action call.
 
-Service action targets is the most modern way and allows one to target a
+Service action target is the most modern way and allows one to target a
 service action call for an entity, device or area. Therefore, the target is the
 most flexible of the options available and is the one that should be used.
 
 ```yaml
 # Good
 actions:
+  # Service action target is an entity
   - action: light.turn_on
     target:
       entity_id: light.living_room
+  # Service action target is an area
   - action: light.turn_on
     target:
       area_id: light.living_room
+  # Service action target is an area plus an entity plus a device
   - action: light.turn_on
     target:
       area_id: living_room
@@ -374,10 +377,6 @@ actions:
 Home Assistant templates are powerful, but they can be really confusing or hard
 to understand. Therefore, the use of templates
 should be avoided if a pure YAML version is available.
-
-Additionally, the use of templates requires additional escaping in our
-documentation to avoid our website code to confuse it for the Liquid syntax.
-Avoiding templates in general removes the need of additional escaping.
 
 ```yaml
 # Good

@@ -1,5 +1,6 @@
 ---
 title: "Implements diagnostics"
+sidebar_label: 🥇 diagnostics
 ---
 
 ## Reasoning

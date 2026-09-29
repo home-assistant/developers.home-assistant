@@ -18,7 +18,7 @@ Home Assistant will do some pre-processing on the config based on the components
 
 ### CONFIG_SCHEMA
 
-If a component defines a variable `CONFIG_SCHEMA`, the config object that is passed in will be the result of running the config through `CONFIG_SCHEMA`. `CONFIG_SCHEMA` should be a voluptuous schema.
+If a component defines a variable `CONFIG_SCHEMA`, the config object that is passed in will be the result of running the config through `CONFIG_SCHEMA`. `CONFIG_SCHEMA` should be a probatio schema.
 
 ### PLATFORM_SCHEMA
 

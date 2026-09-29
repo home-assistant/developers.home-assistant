@@ -92,6 +92,35 @@ entry.async_on_unload(
 )
 ```
 
+#### Controlling history replay order
+
+When a callback is registered, the Bluetooth integration replays cached
+advertisements so the new subscriber immediately sees all known devices. The
+order and whether replay happens at all can be controlled with the `replay`
+keyword argument, which accepts a `BluetoothCallbackReplay` value:
+
+| Value | Behavior |
+|---|---|
+| `OLDEST_FIRST` (default) | Replays advertisements in the order they were first seen. |
+| `NEWEST_FIRST` | Replays the most recent advertisement first. Useful when the consumer wants to act on the current device state immediately. |
+| `DISABLED` | Skips replay entirely. Useful for consumers that only care about live advertisements going forward. |
+
+```python
+from homeassistant.components import bluetooth
+
+...
+
+entry.async_on_unload(
+    bluetooth.async_register_callback(
+        hass,
+        _async_discovered_device,
+        {"service_uuid": "cba20d00-224d-11e6-9fb8-0002a5d5c51b", "connectable": False},
+        bluetooth.BluetoothScanningMode.ACTIVE,
+        replay=bluetooth.BluetoothCallbackReplay.NEWEST_FIRST,
+    )
+)
+```
+
 ### Fetch the shared BleakScanner instance
 
 Integrations that need an instance of a `BleakScanner` should call the `bluetooth.async_get_scanner` API. This API returns a wrapper around a single `BleakScanner` that allows integrations to share without overloading the system.
@@ -168,6 +197,21 @@ def _unavailable_callback(info: bluetooth.BluetoothServiceInfoBleak) -> None:
     _LOGGER.debug("%s is no longer seen", info.address)
 
 cancel = bluetooth.async_track_unavailable(hass, _unavailable_callback, "44:44:33:11:23:42", connectable=True)
+```
+
+### Subscribing to every advertisement of a device
+
+`bluetooth.async_register_callback` only fires when the advertisement data of a device changes. To see every advertisement of one address, including ones identical to the previous one, call `bluetooth.async_register_advertisement_callback`. This is useful to track whether a device is still advertising or to inspect its latest packet, for example while a discovery flow is open.
+
+Only the `raw` bytes are per packet, and they are `None` on backends that do not provide raw advertisements; `service_data`, `manufacturer_data` and `service_uuids` are merged across packets. The callback fires once per scanner that hears a packet, including advertisements that are then discarded in favour of a stronger source, and advertisements dropped by the Apple noise pre-filter are not delivered. The callback runs for every packet from the address, so unsubscribe as soon as it is no longer needed.
+
+```python
+from homeassistant.components import bluetooth
+
+def _advertisement_callback(info: bluetooth.BluetoothServiceInfoBleak) -> None:
+    _LOGGER.debug("%s advertised from %s", info.address, info.source)
+
+cancel = bluetooth.async_register_advertisement_callback(hass, _advertisement_callback, "44:44:33:11:23:42")
 ```
 
 ### Finding out the availability timeout

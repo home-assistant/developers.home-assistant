@@ -13,5 +13,6 @@ Before you commit any changes, check your work against these requirements:
 - New codeowners are added to `CODEOWNERS` (if applicable), using `python3 -m script.hassfest`
 - The `.strict-typing` file is updated to include your code if it provides a fully type hinted source.
 - The code is formatted using Ruff (`ruff format`).
+- Anything that removes or changes existing behavior follows the [deprecation process](/docs/deprecating).
 - Documentation is developed for [home-assistant.io](https://home-assistant.io/)
   - Visit the [website documentation](/documenting.md) for more information about contributing to [home-assistant.io](https://github.com/home-assistant/home-assistant.io).

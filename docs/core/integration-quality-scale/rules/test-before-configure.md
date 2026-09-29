@@ -1,5 +1,6 @@
 ---
 title: "Test a connection in the config flow"
+sidebar_label: 🥉 test-before-configure
 related_rules:
   - config-flow
   - unique-config-entry
@@ -57,7 +58,7 @@ class MyConfigFlow(ConfigFlow, domain=DOMAIN):
                 )
         return self.async_show_form(
             step_id="user",
-            data_schema=vol.Schema({vol.Required(CONF_HOST): TextSelector()}),
+            data_schema=probatio.Schema({probatio.Required(CONF_HOST): TextSelector()}),
             errors=errors,
         )
 ```

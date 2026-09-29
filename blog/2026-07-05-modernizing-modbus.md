@@ -12,11 +12,13 @@ So we are adding a new way to use Modbus: an integration-based approach, where a
 
 A Modbus connection is a single, exclusive resource: only one party can talk on the bus at a time. A serial (RS-485) bus, or a TCP-to-serial gateway, can carry many devices at once, sometimes from different manufacturers. If two integrations each open their own connection to the same bus, they fight over it, and historically Home Assistant did not support sharing a bus between integrations at all.
 
-The new [`modbus_connection`](https://github.com/home-assistant/core/tree/dev/homeassistant/components/modbus_connection) integration solves this by making a connection something device integrations route through rather than own. The user sets up a connection once in the UI, and `modbus_connection` keeps it open and manages its lifecycle, including reconnecting after a drop. Device integrations then borrow what they need from that shared connection instead of managing their own. We have revamped the [Modbus developer documentation](/docs/modbus/introduction) to cover how that works, with example code.
+The `modbus` integration solves this by handing out units over connections it shares. A device integration collects its own connection details in its own config flow, the same as any other integration, and asks `modbus` for a unit on them. Two integrations that ask with equal details get units over one connection, so their requests serialize behind it instead of contending for the bus.
+
+The shared connection is not configured or persisted separately. It exists only while an integration holds a unit, and it closes when the last consumer's config entry unloads. That keeps the user experience where it belongs — you set up your heat pump, not a bus — while still giving the bus a single owner. The [Modbus developer documentation](/docs/modbus/introduction) covers how to ask for a unit, with example code.
 
 ## A standalone library
 
-The connection abstraction underneath `modbus_connection` lives in [`modbus-connection`](https://home-assistant-libs.github.io/modbus-connection/), a new library we designed for this purpose and published on PyPI. It is not bound to Home Assistant and can be used standalone in any Python project. It presents a common, backend-neutral interface, so device library authors write against one API regardless of the underlying Modbus implementation, and it ships a device-modelling framework and a `pytest` plugin to make building and testing a device library straightforward.
+The connection abstraction underneath `modbus` lives in [`modbus-connection`](https://home-assistant-libs.github.io/modbus-connection/), a new library we designed for this purpose and published on PyPI. It is not bound to Home Assistant and can be used standalone in any Python project. It presents a common, backend-neutral interface, so device library authors write against one API regardless of the underlying Modbus implementation, and it ships a device-modelling framework and a `pytest` plugin to make building and testing a device library straightforward.
 
 This keeps concerns where they belong. A device library is a normal PyPI package that knows how to talk to a specific device, and a consuming integration in Home Assistant wires that library up to a shared connection and exposes entities. Both can be developed and tested independently.
 
@@ -34,8 +36,8 @@ If you're using an AI agent, you can give it the following prompt:
 >
 > The deliverables of this task are going to be 3 folders:
 > 
-> - Start by creating a device library based on the YAML. Follow https://github.com/Tom-Bom-badil/trovis-modbus/ as an exact example, including how to use component models, all GitHub Actions, helper scripts and README. This library is meant as a standalone device library and should not mention Home Assistant. Look at the source of modbus_connection to figure out all supported fields.
+> - Start by creating a device library based on the YAML. Follow https://github.com/darkrain-nl/sofar-modbus as an exact example, including how to use component models, all GitHub Actions, helper scripts and README. This library is meant as a standalone device library and should not mention Home Assistant. Look at the source of modbus_connection to figure out all supported fields.
 > 
-> - Create an integration that can be contributed to Home Assistant core that follows this example: https://github.com/home-assistant/core/tree/trovis557x-integration/homeassistant/components/trovis557x
+> - Create an integration that can be contributed to Home Assistant core that follows this example: https://github.com/home-assistant/core/tree/dev/homeassistant/components/sofar
 > 
 > - Create a custom integration version where the device library is vendorized so it is ready to be tested by the community via HACS. Follow this template https://github.com/ludeeus/integration_blueprint

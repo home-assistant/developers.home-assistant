@@ -107,7 +107,7 @@ yarn dev:serve
 You can change the Home Assistant url the frontend connects to by passing the `-c` option. This will also work for existing production core instances. It does not need to be a development version hosted locally. However, if you change the value for this option you will need to logout from your development frontend before it actually switches to the new value. For example:
 
 ```shell
-yarn dev:serve -c https://homeassistant.local:8123
+yarn dev:serve -c http://homeassistant.local
 ```
 
 You can change the port the frontend is served on by passing the `-p` option. Note that if you are running from a devcontainer, you will need to setup
@@ -139,21 +139,14 @@ nvm install
 
 [Yarn](https://yarnpkg.com/en/) is used as the package manager for node modules. [Install yarn using the instructions here.](https://yarnpkg.com/getting-started/install)
 
-### Install development dependencies and fetch latest translations
+### Install development dependencies
 
-Bootstrap the frontend development environment by installing development dependencies and downloading the latest translations.
+Bootstrap the frontend development environment by installing development dependencies.
 
 ```shell
 nvm use
 script/bootstrap
-script/setup_translations
 ```
-
-:::note
-This needs to be done manually, even if you are using dev containers. Also, you will be asked to enter a code and authorize the script to fetch the latest translations.
-
-In case a previous authorization no longer works (for example, you see a "Bad Credentials" error during translation fetching), delete the `token.json` file in the `translations` folder and execute `script/setup_translations` again to retrigger the authorization process.
-:::
 
 :::note
 If you are using a development container, run these commands inside the container.
@@ -167,7 +160,7 @@ Run this command to build the frontend and run a development server:
 
 ```shell
 nvm use
-yarn dev
+yarn dev --fetch-translations
 ```
 
 When the build has completed, and Home Assistant Core has been set up correctly, the frontend will be accessible at `http://localhost:8123`. The server will automatically rebuild the frontend when you make changes to the source files.
@@ -182,10 +175,10 @@ Run this command to start the development server:
 
 ```shell
 nvm use
-yarn dev:serve -c https://homeassistant.local:8123
+yarn dev:serve --fetch-translations -c http://homeassistant.local
 ```
 
-You may need to replace `https://homeassistant.local:8123` with your local Home Assistant url.
+You may need to replace `http://homeassistant.local` with your local Home Assistant url. `http://homeassistant.local` assumes a Home Assistant OS installation using the default port 80; older installations and other installation types typically use port 8123 (e.g. `http://homeassistant.local:8123`).
 
 ### Managing the dev server in the background
 
@@ -197,6 +190,10 @@ Both dev servers above (along with the demo, gallery, and end-to-end test app de
 | `--status`          | Report whether the dev server is running.                                                                                   |
 | `--logs [--follow]` | Print the dev server log, or tail it with `--follow`.                                                                       |
 | `--stop`            | Stop a running background dev server.                                                                                       |
+
+The app, locally served app, demo, and gallery commands also accept `--fetch-translations`. This fetches the latest translations before starting the server and prompts for GitHub authorization when no saved token is available. Translation fetching runs under the same workflow lock in foreground and background modes.
+
+If a previous authorization no longer works (for example, you see a "Bad Credentials" error), delete `translations/token.json` and start one of these commands with `--fetch-translations` again.
 
 For example:
 
@@ -215,6 +212,8 @@ Each dev server listens on its own port:
 | `yarn dev:demo`         | 8090 | The [demo](https://demo.home-assistant.io/).                             |
 | `yarn dev:gallery`      | 8100 | The [design gallery](/docs/frontend/design).                             |
 | `yarn test:e2e:app:dev` | 8095 | The stripped-down app used by the [end-to-end tests](#end-to-end-tests). |
+
+These managed Yarn development workflows, together with `yarn build` and `yarn build --modern`, share one workflow lock. Starting the same development workflow again reports the running server and succeeds. Starting another managed workflow while one is active is blocked and reports the active workflow with the relevant status, logs, or stop command.
 
 :::note
 When a coding agent is detected, `yarn dev:*` runs in the background automatically so it does not block the agent's session. Set `HA_DEV_BACKGROUND=0` to force the dev server to run in the foreground.
@@ -326,7 +325,27 @@ git push -u fork HEAD
 
 ## Building the frontend
 
-If you're making changes to the way the frontend is packaged, it might be necessary to try out a new packaged build of the frontend in the main repository (instead of pointing it at the frontend repo). To do so, first build a production version of the frontend by running `yarn build` (an alias for `script/build_frontend`).
+If you're making changes to the way the frontend is packaged, it might be necessary to try out a new packaged build of the frontend in the main repository (instead of pointing it at the frontend repo). Run a full production build from the frontend repository with:
+
+```shell
+yarn build
+```
+
+Production builds can also run as managed background processes:
+
+```shell
+yarn build --background    # start a full build and detach
+yarn build --status        # report whether a build is running
+yarn build --logs          # print the background build log
+yarn build --logs --follow # follow the background build log
+yarn build --stop          # stop a running background build
+```
+
+Use `yarn build --modern` when packaging, bundle-size, or browser performance work only needs the modern `frontend_latest` bundle. Add `--background` to run the modern-only build as a managed background process.
+
+:::caution
+A managed production build cannot run at the same time as a managed development server. Before starting a different managed workflow, stop the active workflow with its corresponding `--stop` command.
+:::
 
 To test it out inside Home Assistant, run the following command from the main Home Assistant repository:
 

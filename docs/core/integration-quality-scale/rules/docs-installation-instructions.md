@@ -1,5 +1,6 @@
 ---
 title: "The documentation provides step-by-step installation instructions for the integration, including, if needed, prerequisites"
+sidebar_label: 🥉 docs-installation-instructions
 ---
 
 ## Reasoning

@@ -112,12 +112,12 @@ from homeassistant.components.application_credentials import (
 )
 
 # Example configuration.yaml schema for an integration
-CONFIG_SCHEMA = vol.Schema(
+CONFIG_SCHEMA = probatio.Schema(
     {
-        DOMAIN: vol.Schema(
+        DOMAIN: probatio.Schema(
             {
-                vol.Required(CONF_CLIENT_ID): cv.string,
-                vol.Required(CONF_CLIENT_SECRET): cv.string,
+                probatio.Required(CONF_CLIENT_ID): cv.string,
+                probatio.Required(CONF_CLIENT_SECRET): cv.string,
             }
         )
     },

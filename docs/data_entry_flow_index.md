@@ -36,8 +36,8 @@ If the result type is `FlowResultType.FORM`, the result should look like:
     "handler": "hue",
     # name of the step, flow.async_step_[step_id] will be called when form submitted
     "step_id": "init",
-    # a voluptuous schema to build and validate user input
-    "data_schema": vol.Schema(),
+    # a probatio schema to build and validate user input
+    "data_schema": probatio.Schema(),
     # an errors dict, None if no errors
     "errors": errors,
     # a detail information about the step
@@ -116,7 +116,7 @@ For a more detailed explanation of `strings.json` see the [backend tra
 
 ### Show form
 
-This result type will show a form to the user to fill in. You define the current step, the schema of the data (using a mixture of voluptuous and/or [selectors](https://www.home-assistant.io/docs/blueprint/selectors/)) and optionally a dictionary of errors.
+This result type will show a form to the user to fill in. You define the current step, the schema of the data (using a mixture of probatio and/or [selectors](https://www.home-assistant.io/docs/blueprint/selectors/)) and optionally a dictionary of errors.
 
 ```python
 from homeassistant.data_entry_flow import section
@@ -126,14 +126,14 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
     async def async_step_user(self, user_input=None):
         # Specify items in the order they are to be displayed in the UI
         data_schema = {
-            vol.Required("username"): str,
-            vol.Required("password"): str,
+            probatio.Required("username"): str,
+            probatio.Required("password"): str,
             # Items can be grouped by collapsible sections
-            vol.Required("ssl_options"): section(
-                vol.Schema(
+            probatio.Required("ssl_options"): section(
+                probatio.Schema(
                     {
-                        vol.Required("ssl", default=True): bool,
-                        vol.Required("verify_ssl", default=True): bool,
+                        probatio.Required("ssl", default=True): bool,
+                        probatio.Required("verify_ssl", default=True): bool,
                     }
                 ),
                 # Whether or not the section is initially collapsed (default = False)
@@ -142,13 +142,15 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
         }
 
         if self.show_advanced_options:
-            data_schema[vol.Optional("allow_groups")] = selector({
+            data_schema[probatio.Optional("allow_groups")] = selector({
                 "select": {
                     "options": ["all", "light", "switch"],
                 }
             })
 
-        return self.async_show_form(step_id="init", data_schema=vol.Schema(data_schema))
+        return self.async_show_form(
+            step_id="init", data_schema=probatio.Schema(data_schema)
+        )
 ```
 
 #### Grouping of input fields
@@ -240,12 +242,12 @@ The field labels and descriptions are given as a dictionary with keys correspond
 
 Suppose your integration is collecting form data which can be automatically filled by browsers or password managers, such as login credentials or contact information. You should enable autofill whenever possible for the best user experience and accessibility. There are two options to enable this.
 
-The first option is to use Voluptuous with data keys recognized by the frontend. The frontend will recognize the keys `"username"` and `"password"` and add HTML `autocomplete` attribute values of `"username"` and `"current-password"` respectively. Support for autocomplete is limited to `"username"` and `"password"` fields and is supported primarily to quickly enable auto-fill on the many integrations that collect them without converting their schemas to selectors.
+The first option is to use Probatio with data keys recognized by the frontend. The frontend will recognize the keys `"username"` and `"password"` and add HTML `autocomplete` attribute values of `"username"` and `"current-password"` respectively. Support for autocomplete is limited to `"username"` and `"password"` fields and is supported primarily to quickly enable auto-fill on the many integrations that collect them without converting their schemas to selectors.
 
 The second option is to use a [text selector](https://www.home-assistant.io/docs/blueprint/selectors/#text-selector). A text selector gives full control of the input type and allows any permitted value for `autocomplete` to be specified. A hypothetical schema collecting specific fillable data might be:
 
 ```python
-import voluptuous as vol
+import probatio
 from homeassistant.const import CONF_PASSWORD, CONF_USERNAME
 from homeassistant.helpers.selector import (
     TextSelector,
@@ -253,20 +255,20 @@ from homeassistant.helpers.selector import (
     TextSelectorType,
 )
 
-STEP_USER_DATA_SCHEMA = vol.Schema(
+STEP_USER_DATA_SCHEMA = probatio.Schema(
     {
-        vol.Required(CONF_USERNAME): TextSelector(
+        probatio.Required(CONF_USERNAME): TextSelector(
             TextSelectorConfig(type=TextSelectorType.EMAIL, autocomplete="username")
         ),
-        vol.Required(CONF_PASSWORD): TextSelector(
+        probatio.Required(CONF_PASSWORD): TextSelector(
             TextSelectorConfig(
                 type=TextSelectorType.PASSWORD, autocomplete="current-password"
             )
         ),
-        vol.Required("postal_code"): TextSelector(
+        probatio.Required("postal_code"): TextSelector(
             TextSelectorConfig(type=TextSelectorType.TEXT, autocomplete="postal-code")
         ),
-        vol.Required("mobile_number"): TextSelector(
+        probatio.Required("mobile_number"): TextSelector(
             TextSelectorConfig(type=TextSelectorType.TEL, autocomplete="tel")
         ),
     }
@@ -279,7 +281,7 @@ If you'd like to pre-fill data in the form, you have two options. The first is t
 
 ```python
     data_schema = {
-        vol.Optional("field_name", default="default value"): str,
+        probatio.Optional("field_name", default="default value"): str,
     }
 ```
 
@@ -287,7 +289,7 @@ The other alternative is to use a suggested value - this will also pre-fill the 
 
 ```python
     data_schema = {
-        vol.Optional(
+        probatio.Optional(
             "field_name", description={"suggested_value": "suggested value"}
         ): str,
     }
@@ -298,9 +300,9 @@ You can also mix and match - pre-fill through `suggested_value`, and use a diffe
 Using suggested values also make it possible to declare a static schema, and merge suggested values from existing input. A `add_suggested_values_to_schema` helper makes this possible:
 
 ```python
-OPTIONS_SCHEMA = vol.Schema(
+OPTIONS_SCHEMA = probatio.Schema(
     {
-        vol.Optional("field_name", default="default value"): str,
+        probatio.Optional("field_name", default="default value"): str,
     }
 )
 
@@ -315,7 +317,7 @@ class ExampleOptionsFlow(config_entries.OptionsFlow):
         )
 ```
 
-Note: For select type inputs (created from a `vol.In(...)` schema), if no `default` is specified, the first option will be selected by default in the frontend.
+Note: For select type inputs (created from a `probatio.In(...)` schema), if no `default` is specified, the first option will be selected by default in the frontend.
 
 #### Displaying read-only information
 
@@ -323,19 +325,19 @@ Some integrations have options which are frozen after initial configuration. Whe
 
 ```python
 # Example Config Flow Schema
-DATA_SCHEMA_SETUP = vol.Schema(
+DATA_SCHEMA_SETUP = probatio.Schema(
     {
-        vol.Required(CONF_ENTITY_ID): EntitySelector()
+        probatio.Required(CONF_ENTITY_ID): EntitySelector()
     }
 )
 
 # Example Options Flow Schema
-DATA_SCHEMA_OPTIONS = vol.Schema(
+DATA_SCHEMA_OPTIONS = probatio.Schema(
     {
-        vol.Optional(CONF_ENTITY_ID): EntitySelector(
+        probatio.Optional(CONF_ENTITY_ID): EntitySelector(
             EntitySelectorConfig(read_only=True)
         ),
-        vol.Optional(CONF_TEMPLATE): TemplateSelector(),
+        probatio.Optional(CONF_TEMPLATE): TemplateSelector(),
     }
 )
 ```
@@ -363,12 +365,12 @@ class ExampleConfigFlow(data_entry_flow.FlowHandler):
 
         # Specify items in the order they are to be displayed in the UI
         data_schema = {
-            vol.Required("username"): str,
-            vol.Required("password"): str,
+            probatio.Required("username"): str,
+            probatio.Required("password"): str,
         }
 
         return self.async_show_form(
-            step_id="init", data_schema=vol.Schema(data_schema), errors=errors
+            step_id="init", data_schema=probatio.Schema(data_schema), errors=errors
         )
 ```
 

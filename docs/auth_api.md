@@ -48,7 +48,7 @@ Optionally you can also include a `state` parameter, this will be added to the r
 http://your-instance.com/auth/authorize?
     client_id=https%3A%2F%2Fhass-auth-demo.glitch.me&
     redirect_uri=https%3A%2F%2Fhass-auth-demo.glitch.me%2Fauth_callback&
-    state=http%3A%2F%2Fhomeassistant.local%3A8123
+    state=http%3A%2F%2Fhomeassistant.local
 ```
 
 The user will navigate to this link and be presented with instructions to log in and authorize your application. Once authorized, the user will be redirected back to the passed-in redirect URI with the authorization code and state as part of the query parameters. Example:
@@ -56,7 +56,7 @@ The user will navigate to this link and be presented with instructions to log in
 ```txt
 https://hass-auth-demo.glitch.me/auth_callback?
     code=12345&
-    state=http%3A%2F%2Fhomeassistant.local%3A8123
+    state=http%3A%2F%2Fhomeassistant.local
 ```
 
 This authorization code can be exchanged for tokens by sending it to the token endpoint (see next section).

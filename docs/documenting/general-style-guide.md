@@ -190,6 +190,30 @@ For example:
 
 To learn about images when adding an integration, see [Images, icons, and logos](/docs/documenting/create-page#images-icons-and-logos).
 
+#### Lightbox
+
+You can click and open images in documentation pages and blog posts in a lightbox when they are large enough and are not links, buttons, SVGs, inline icons, brand logos, or marked as excluded.
+
+To prevent an image from opening in the lightbox, add the `data-no-lightbox` attribute or the `no-lightbox` class to the `<img>` tag or to a parent element.
+
+For example:
+
+```html
+<img
+  src="/images/example.png"
+  alt="Description of the image"
+  data-no-lightbox
+>
+```
+
+```html
+<img
+  class="no-lightbox"
+  src="/images/example.png"
+  alt="Description of the image"
+>
+```
+
 ### Videos
 
 Use the following syntax to reference a video from YouTube.

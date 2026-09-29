@@ -68,7 +68,7 @@ A `GenDataTask` object contains the following data:
 | ---- | ---- | -----------
 | `name` | `str` | Name/identifier for the task
 | `instructions` | `str` | Natural language instructions for the AI
-| `structure` | `vol.Schema` \| `None` | Optional schema for structured output validation
+| `structure` | `probatio.Schema` \| `None` | Optional schema for structured output validation
 | `attachments` | `list[conversation.Attachment]` \| `None` | List of attachments to include in the task.
 
 ### Generate Image

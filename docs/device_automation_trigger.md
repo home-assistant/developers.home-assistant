@@ -36,7 +36,7 @@ The template will create a new file `device_trigger.py` in your integration fold
 
 Device triggers are defined as dictionaries. These dictionaries are created by your integration and are consumed by your integration to attach the trigger.
 
-This is a voluptuous schema that verifies that a specific trigger dictionary represents a config that your integration can handle. This should extend the TRIGGER_BASE_SCHEMA from `device_automation/__init__.py`.
+This is a probatio schema that verifies that a specific trigger dictionary represents a config that your integration can handle. This should extend the TRIGGER_BASE_SCHEMA from `device_automation/__init__.py`.
 
 ```python
 from homeassistant.const import (
@@ -48,7 +48,7 @@ TRIGGER_TYPES = {"water_detected", "noise_detected"}
 
 TRIGGER_SCHEMA = TRIGGER_BASE_SCHEMA.extend(
     {
-        vol.Required(CONF_TYPE): vol.In(TRIGGER_TYPES),
+        probatio.Required(CONF_TYPE): probatio.In(TRIGGER_TYPES),
     }
 )
 ```
