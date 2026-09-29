@@ -25,3 +25,10 @@
   to = "/docs/:splat"
   status = 301
   force = true
+
+# The legacy platform checklist has been removed; new integrations are
+# reviewed against the integration quality scale.
+[[redirects]]
+  from = "/docs/creating_platform_code_review"
+  to = "/docs/core/integration-quality-scale/checklist"
+  status = 301
