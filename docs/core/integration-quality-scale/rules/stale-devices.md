@@ -86,7 +86,7 @@ For more info on devices, checkout the [device registry documentation](/docs/dev
 
 ## Exceptions
 
-There are no exceptions to this rule.
+Integrations that manage only a single, static device per config entry, that is tied to the lifecycle to the config entry are exempt from this rule.
 
 ## Related rules
 

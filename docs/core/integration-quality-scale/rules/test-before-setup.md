@@ -86,7 +86,7 @@ More information about config entries and their lifecycle can be found in the [c
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If it is impossible for an integration to validate the configuration during setup, or it's a pure local calculation, the integration is exempt
 
 ## Related rules
 
