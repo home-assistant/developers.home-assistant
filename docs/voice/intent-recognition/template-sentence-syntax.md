@@ -2,96 +2,130 @@
 title: "Template sentence syntax"
 ---
 
-Template sentences are defined in YAML files using the format of [Hassil, our template matcher](https://github.com/home-assistant/hassil). Our template sentences are stored [on GitHub](https://github.com/home-assistant/intents/tree/main/sentences) and are organized by having for each language a directory of files in `sentences/<language>/`:
+Template sentences are defined in YAML files using the format of [Hassil, our template matcher](https://github.com/home-assistant/hassil). Our template sentences are stored [on GitHub](https://github.com/home-assistant/intents/tree/main/sentences).
 
- - `_common.yaml` - Lists, expansion rules and skip words to be used across all template sentences.
- - `<domain>_<intent>.yaml` - Template sentences for a [single intent](/docs/intent_builtin) and domain.
+Sentences are grouped by **intent** and by **slot combination**. A slot combination is the set of slots that a sentence fills in: "turn on the kitchen lights" fills `area` and `domain`, while "turn on the overhead light" only fills `name`. Every intent and its slot combinations are declared in [`intents.yaml`](https://github.com/home-assistant/intents/blob/main/intents.yaml) at the root of the repository.
 
-Besides the data in `_common.yaml`, template sentences can also use the lists `name`, `area`, and `floor`. These lists are made available by Home Assistant during intent recognition.
+The repository is laid out as follows:
 
-``` yaml
-# Example light_HassTurnOn.yaml
-language: "en"
-intents:
-  HassTurnOn:  # Intent name
-    data:
-      - sentences:
-          - "<turn> on [all] [the] (light | lights) in [the] {area}"
-          - "<turn> on [all] [the] {area} (light | lights)"
-          - "<turn> [all] [the] (light | lights) in [the] {area} on"
-        # Optional; used to set fixed slot values when the intent is matched
-        slots:
-          domain: "light"
-```
+- `sentences/<language>/<intent>/<slot_combination>.yaml` - Template sentences for a [single intent](/docs/intent_builtin) and slot combination.
+- `sentences/<language>/_common.yaml` - Error responses, skip words, and language settings.
+- `lists/<language>/<group>.yaml` - Slot lists for a single language.
+- `lists/<group>.yaml` - Slot lists shared by all languages (number ranges and wildcards only).
+- `rules/<language>/<group>.yaml` - Expansion rules for a single language.
+- `responses/<language>/<intent>.yaml` - Response templates for a single intent.
+- `tests/<language>/<intent>/<slot_combination>.yaml` - Tests, [documented separately](/docs/voice/intent-recognition/test-syntax).
 
-The above example will match the sentence `turn on all the lights in the living room` to the intent `HassTurnOn` and extract the area `living room`. The domain value is set to `light`. In Home Assistant, when the intent is executed, it will turn on all entities of type `light` in the area `living room`.
+Besides the lists defined in `lists/`, template sentences can also use the lists `name`, `area`, and `floor`. These lists are made available by Home Assistant during intent recognition.
 
-## Responses
+## Slot combinations
 
-A sentence template file may contain a response "key" for a group of sentences:
-
-``` yaml
-# Example light_HassLightSet.yaml
-language: "en"
-intents:
-  HassTurnOn:
-    data:
-      - sentences:
-          - "set {name} brightness to maximum"
-        slots:
-          brightness: 100
-        response: "brightness"
-```
-
-In the example above, the response key "brightness" refers to a template inside the file `responses/en/HassLightSet.yaml`:
+Each slot combination in `intents.yaml` names the slots its sentences must fill, an importance level, and an English example:
 
 ```yaml
-language: en
-responses:
-  intents:
-    HassLightSet:
-      brightness: '{{ slots.name }} brightness set to {{ slots.brightness }}'
+# Example from intents.yaml
+HassTurnOn:
+  slot_combinations:
+    name_only:
+      description: "Turns on a device or opens a cover by name"
+      slots:
+        - "name"
+      name_domains:
+        required:
+          - "light"
+          - "switch"
+          - "cover"
+        optional:
+          - "valve"
+      example:
+        - "turn on the overhead light"
+        - "open sliding door"
 ```
 
-If no response key is provided, then `"default"` is assumed.
+Importance levels are:
 
-Response templates uses [Jinja2 syntax](https://jinja.palletsprojects.com/en/latest/templates/) and may refer to the `slots` object whose attributes are the matched intent's slot values.
+- `required` - the bare minimum; sentences must be provided or validation fails.
+- `usable` - expected by users; a warning is issued if sentences are missing.
+- `complete` - needed for 100% coverage of the language.
+- `optional` - extra, not needed for 100% coverage.
 
-See all [translated responses](https://github.com/home-assistant/intents/tree/main/responses) for more examples.
+When a combination uses the built-in `{name}` slot, the importance levels move into `name_domains`, which lists the entity domains that `{name}` is allowed to match. When the domain of the targeted entities is inferred from the words of the sentence ("turn on the lights in here"), the levels move into `inferred_domains` instead. `context_area: true` means the area comes from the voice satellite rather than from the sentence.
 
-## Sentence templates syntax
+Because `intents.yaml` already describes which entities a slot combination targets, sentence files no longer carry `requires_context`, `excludes_context`, or fixed `slots` values. That part is generated, which keeps it consistent across languages.
 
-* Alternative word, phrases, or parts of a word
-  * `(red | green | blue)`
-  * `turn(ed | ing)`
-* Optional word, phrases, or parts of a word
-  * `[the]`
-  * `[this | that]`
-  * `light[s]`
-* Slot Lists
-  * `{list_name}`
-  * `{list_name:slot_name}` (if intent slot is named different)
-  * Every value of the list is a different option
-  * In YAML, `list_name` should be under `lists`
-  * Use `values` for text lists, `range` for numeric lists
-* Expansion Rules
-  * `<rule_name>`
-  * The body of the rule is substituted for `<rule_name>`
-  * In YAML, `rule_name` should be under `expansion_rules`. If the `rule_name` wraps a slot name, it should match the slot name. Otherwise it should be in the native language.
-* [Permutations](https://en.wikipedia.org/wiki/Permutation) of 2 or more items
-  * `(patience;you must have)`
-  * Permutation items are always padded with spaces to prevent new word formations
-  * Limit the number of items to 2-4, as the number of permutations for `n` items increases very quickly with `n`, this number being `n! == 1 * 2 * ... * n`
+## Sentence files
 
-## The common file
-
-The common file `_common.yaml` contains lists, expansion rules, and skip words that are used across template sentences for all intents and domains.
-
-### Lists
-
-Lists are possible values for a slot. Slots are data that we want to extract from a sentence. For example, we can make a list `color` to match possible colors.
+A sentence file contains the language and one or more groups of sentences under `data`:
 
 ```yaml
+# Example sentences/en/HassTurnOn/name_only.yaml
+language: "en"
+data:
+  # on-able domains
+  - sentences:
+      - "<turn> on [<the>] {name}"
+      - "activate [<the>] {name}"
+    example: "turn on the overhead light"
+    name_domains:
+      - "light"
+      - "switch"
+    response: "default"
+
+  # covers
+  - sentences:
+      - "<open> [<the>] {name}"
+    example: "open the sliding door"
+    name_domains:
+      - "cover"
+    response: "cover"
+```
+
+Every template in the file must fill exactly the slots that `intents.yaml` declares for the combination - no more, no fewer. A slot may be filled directly with `{slot}` or through an expansion rule whose body references it. The `domain` slot is the exception: it is not written in the template, it comes from the group's `inferred_domain`.
+
+Each group in `data` supports:
+
+- `sentences` (required) - the sentence templates.
+- `response` (required) - the [response](#responses) key to speak when these sentences match.
+- `name_domains` - required when the combination uses `{name}`: the entity domains these sentences target. Every domain marked `required` in `intents.yaml` must be covered, but not necessarily by the same group, so you can split sentences in whatever way suits the language. A named group from `name_domain_groups` (such as `"default"`) can be used instead of repeating the list.
+- `inferred_domain` - required when the combination uses the `domain` slot: the domain that the words of these sentences imply. Note the singular, only one domain can be inferred per group. Every domain marked `required` in `intents.yaml` must be covered by some group.
+- `example` - a sentence this group matches, in the language of the file. Keep it localized; an example that is byte-identical to the English one is reported as a warning.
+- `speech_to_phrase` - marks a group for inclusion in the Speech-to-Phrase constrained speech-to-text grammar. When a slot combination has both tagged and untagged groups, the tagged group is a Speech-to-Phrase-only subset of the untagged ones and is stripped from the Home Assistant grammar. When every group is tagged, they serve both.
+
+## Sentence template syntax
+
+- Alternative words, phrases, or parts of a word
+  - `(red | green | blue)`
+  - `turn(ed | ing)`
+- Optional words, phrases, or parts of a word
+  - `[the]`
+  - `[this | that]`
+  - `light[s]`
+- Slot lists
+  - `{list_name}`
+  - `{list_name:slot_name}` (if the intent slot is named differently)
+  - Every value of the list is a different option
+  - Lists are defined under `lists/`, see [lists](#lists)
+  - A list reference may **not** appear inside an alternative or an optional: `(text | {list_name})` and `[{list_name}]` are not allowed, because a template has to always fill the same slots
+- Expansion rules
+  - `<rule_name>`
+  - The body of the rule is substituted for `<rule_name>`
+  - Rules are defined under `rules/<language>/`, see [expansion rules](#expansion-rules)
+- [Permutations](https://en.wikipedia.org/wiki/Permutation) of 2 or more items
+  - `(patience;you must have)`
+  - Permutation items are always padded with spaces to prevent new word formations
+  - Limit the number of items to 2-4, as the number of permutations for `n` items increases very quickly with `n`, this number being `n! == 1 * 2 * ... * n`
+
+## Lists
+
+Lists are the possible values for a slot. Any text matched by a list is put into an intent slot of the same name, or into `slot_name` when the reference is written `{list_name:slot_name}`.
+
+A list is one of three types: fixed values, a range of numbers, or a wildcard.
+
+Lists for a single language live in `lists/<language>/<group>.yaml`, grouped into files however makes sense for that language - a `lights.yaml` file may hold color names and brightness levels, for example. These files declare their language:
+
+```yaml
+# Example lists/en/lights.yaml
+language: "en"
 lists:
   color:
     values:
@@ -103,6 +137,7 @@ lists:
 Intent handlers in Home Assistant expect color to be defined in English. To allow other languages to define colors, lists support the in-out format. This allows you to define a list of values in the native language, but the intent handler will receive the values in English.
 
 ```yaml
+language: "nl"
 lists:
   color:
     values:
@@ -112,133 +147,154 @@ lists:
         out: "orange"
 ```
 
-A list can also be a range of numbers. This is useful for defining a range of brightness values or temperature that you want to match.
+A list can also be a range of numbers. This is useful for defining a range of brightness values or temperatures that you want to match. Number words work too, so both "set brightness to 50 percent" and "set brightness to fifty percent" will match.
 
 ```yaml
+language: "en"
 lists:
   brightness:
     range:
       type: "percentage"
       from: 0
       to: 100
+      step: 1
 ```
 
-Specific numbers can also be matched by a list, like returning 100 from the keyword maximum. To use this list to set the brightness in a sentence, use the following syntax: `{brightness_level:brightness}`. This will get the value from the list but put it in the slot for brightness. 
+A range also accepts `fractions` (`halves` or `tenths`) and a `multiplier`. Because numbers need no translation, ranges are usually defined once as a [shared list](#shared-lists) instead.
+
+Specific numbers can also be matched by a list, like returning 100 from the keyword maximum. To use this list to set the brightness in a sentence, use the following syntax: `{brightness_level:brightness}`. This will get the value from the list but put it in the slot for brightness.
 
 ```yaml
+language: "en"
 lists:
   brightness_level:
     values:
       - in: (max | maximum | highest)
         out: 100
-      - in: ( minimum | lowest)
+      - in: (minimum | lowest)
         out: 1
 ```
 
-#### Inline number ranges
+### Wildcards
 
-A number range list can also be defined inline within a sentence template:
-
-```yaml
-language: en
-intents:
-  SetBrightness:
-    data:
-      - sentences:
-          - set brightness to {0..100:brightness} percent
-```
-
-This will match numbers from 0 to 100 and put the value into a `brightness` slot. Number words will also work, so "set brightness to 50 percent" and "set brightness to fifty percent" will both match and set the `brightness` slot to 50.
-
-#### Wildcards
-
-Wildcard lists can match any text, for example:
+Wildcard lists match any text:
 
 ```yaml
-language: en
-intents:
-  PlayAlbum:
-    data:
-      - sentences:
-          - play {album} by {artist}
+language: "en"
 lists:
-  artist:
-    wildcard: true
   album:
     wildcard: true
+  artist:
+    wildcard: true
 ```
 
-will match sentences such as "play the white album by the beatles". The `PlayAlbum` intent will have an `album` slot with "the white album " (note the trailing whitespace) and an `artist` slot with "the beatles".
+With the template `play {album} by {artist}`, a sentence such as "play the white album by the beatles" will produce an `album` slot with "the white album " (note the trailing whitespace) and an `artist` slot with "the beatles".
 
-#### Local lists
+### Shared lists
 
-Sometimes you don't need a slot list available for all intents and sentences, so you can define one locally, making it usable only in the context of the intent data (like a collection of sentences) where it was defined. For example:
-
-```yaml
-language: en
-intents:
-  AddListItem:
-    data:
-      - sentences:
-          - add {item} to [my] shopping list
-        lists:
-          item:
-            wildcard: true
-```
-
-### Expansion rules
-
-A lot of template sentences can be written in a similar way. To avoid having to repeat the same matching structure multiple times, we can define expansion rules. For example, a user might add "the" in front of the area name, or they might not. We can define an expansion rule to match both cases.
-
-Expansion rules can contain slots, lists, and other expansion rules.
+Number ranges and wildcards do not need translation, so they can be shared across all languages by putting them in `lists/<group>.yaml` at the root. Shared list files have no `language` key:
 
 ```yaml
-expansion_rules:
-  name: "[the] {name}"
-  area: "[the] {area}"
-  what_is: "(what's | whats | what is)"
-  brightness: "{brightness} [percent]"
-  turn: "(turn | switch)"
-```
-
-#### Local expansion rules
-
-Expansion rules can also be defined locally next to a list of sentences, and will only be available within those templates. This allows you to write similar templates for different situations. For example:
-
-```yaml
-language: en
-intents:
-  GetLocked:
-    data:
-      - sentences:
-          - is the door <state>
-        requires_context:
-          domain: binary_sensor
-        expansion_rules:
-          state: "{binary_state}"
-
-      - sentences:
-          - is the door <state>
-        requires_context:
-          domain: lock
-        expansion_rules:
-          state: "{lock_state}"
-
+# Example lists/lights.yaml
 lists:
-  binary_state:
-    values:
-      - in: "locked"
-        out: "off"
-      - in: "unlocked"
-        out: "on"
-  lock_state:
-    values:
-      - "locked"
-      - "unlocked"
-
+  brightness:
+    range:
+      type: "percentage"
+      from: 0
+      to: 100
+  color_temperature:
+    range:
+      from: 1000
+      to: 10000
+      step: 100
 ```
 
-The same template `is the door <state>` is used for both binary sensors and regular locks, but the local `state` expansion rules refer to different lists.
+Value lists cannot be shared, since their values must be translated per language.
+
+## Expansion rules
+
+A lot of template sentences can be written in a similar way. To avoid having to repeat the same matching structure multiple times, we can define expansion rules. For example, a user might add "the" in front of a name, or they might not. We can define an expansion rule to match both cases.
+
+Rules live in `rules/<language>/<group>.yaml`, grouped into files however makes sense for the language - a `verbs.yaml` file may hold the verb groups for turning things on and off, setting timers, and so on:
+
+```yaml
+# Example rules/en/common.yaml
+language: "en"
+expansion_rules:
+  the: "(the|my|our)"
+  here: "([in] here|[in] (this|the|my|our) (room|area|space))"
+  home: "(home|house|apartment|flat)"
+```
+
+```yaml
+# Example rules/en/verbs.yaml
+language: "en"
+expansion_rules:
+  turn: "(turn|switch)"
+  open: "(open|raise|lift) [up]"
+```
+
+A rule must contain some required text; it cannot be entirely optional.
+
+Rules are powerful, but can quickly make sentence templates unreadable or explode their complexity. For these reasons we **recommend** the following restrictions.
+
+### Rules should not contain lists
+
+A rule should not contain `{list_name}`.
+
+While convenient, allowing list references inside rules makes it impossible to know which slots a sentence template will match by just looking at it. A `<name>` rule containing the `{name}` list also tends to produce duplicated optional words, such as `[the] <name>` expanding to `[the] [the] {name}`.
+
+### Rules should not reference other rules
+
+A rule should not contain `<rule_name>`.
+
+Nested rules require readers to follow a chain just to understand what text can be recognized. With alternatives in the rule (for example `(a|b|c)`), the number of possible sentences can also grow very large very quickly with nesting.
+
+## Responses
+
+Every group of sentences names a `response` key, which refers to a template in `responses/<language>/<intent>.yaml`:
+
+```yaml
+# Example sentences/en/HassLightSet/name_brightness.yaml
+language: "en"
+data:
+  - sentences:
+      - "set [the] {name} brightness to {brightness} percent"
+    example: "set the bedroom lamp brightness to 50 percent"
+    name_domains:
+      - "light"
+    response: "brightness"
+```
+
+```yaml
+# Example responses/en/HassLightSet.yaml
+language: "en"
+responses:
+  intents:
+    HassLightSet:
+      brightness: "{{ slots.name }} brightness set to {{ slots.brightness }}"
+```
+
+Response templates use [Jinja2 syntax](https://jinja.palletsprojects.com/en/latest/templates/) and may refer to the `slots` object, whose attributes are the matched intent's slot values. Some intents make extra variables available, such as `state` for the first matched entity or `query` for the entities a state question matched; these are declared under `response_variables` for the intent in `intents.yaml`.
+
+See all [translated responses](https://github.com/home-assistant/intents/tree/main/responses) for more examples.
+
+## The common file
+
+`sentences/<language>/_common.yaml` holds the parts of a language that are not tied to a single intent: error responses, skip words, and matching settings. Lists and expansion rules used to live here too; they are now in [`lists/`](#lists) and [`rules/`](#expansion-rules).
+
+### Error responses
+
+Error responses are spoken when an intent cannot be handled, for example because no matching entity exists:
+
+```yaml
+language: "en"
+responses:
+  errors:
+    no_intent: "Sorry, I couldn't understand that"
+    no_area: "Sorry, I am not aware of any area called {{ area }}"
+    no_entity: "Sorry, I am not aware of any device called {{ entity }}"
+```
 
 ### Skip words
 
@@ -250,64 +306,15 @@ skip_words:
   - "can you"
 ```
 
-### Requires/excludes context
+### Settings
 
-Hassil returns the first intent match it can find, so additional **context** may be required if the same sentence could produce multiple matches. 
-
-For example, consider the following template:
+Languages that are not written with spaces between words can adjust how matching works:
 
 ```yaml
-language: "en"
-intents:
-  HassLightSet:
-    data:
-      - sentences:
-          - "set {name} brightness to maximum"
-          - "set {area} brightness to maximum"
-        slots:
-          brightness: 100
+language: "zh-CN"
+settings:
+  ignore_whitespace: true
 ```
 
-If you have an entity named "kitchen light", then you will be able to say "set kitchen light brightness to maximum". Similarly, "set kitchen brightness to maximum" will work if you have an area named "kitchen".
-
-But what if you have a media player named "kitchen"? The same sentence could match either the area or the media player. Hassil will require more context to know what to do:
-
-```yaml
-language: "en"
-intents:
-  HassLightSet:
-    data:
-      - sentences:
-          - "set {name} brightness to maximum"
-        requires_context:
-          domain: "light"
-        slots:
-          brightness: 100
-      - sentences:
-          - "set {area} brightness to maximum"
-        slots:
-          brightness: 100
-```
-
-We've split the sentences into two groups. The first group is for individual entities, and now has `requires_context` with a `domain` of `light`. This ensures that Hassil will only produce a match if the entity from `{name}` has the correct domain. Since areas do not have domains, we need to move the `{area}` sentence to its own group.
-
-Context is also useful if you want to want different responses within the same intent:
-
-```yaml
-language: "en"
-intents:
-  HassTurnOn:
-    data:
-      - sentences:
-          - "activate {name}"
-        excludes_context:
-          domain: "cover"
-        response: "default"
-      - sentences:
-          - "activate {name}"
-        requires_context:
-          domain: "cover"
-        response: "cover"
-```
-
-The first sentence group uses `excludes_context` to skip over `cover` entities, while the second group specifically matches `cover` entities and uses a different [response](#responses).
+- `ignore_whitespace` - ignore whitespace when matching, for languages such as Chinese and Japanese.
+- `filter_with_regex` - deprecated and ignored. Templates are now pre-filtered by the literal text they require, which never skips a template that could have matched, so languages no longer need to opt out. The key is still accepted so existing files keep loading.
