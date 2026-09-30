@@ -5,7 +5,7 @@ title: "Application credentials"
 Integrations may support [Configuration via OAuth2](/docs/core/integration/config_flow#configuration-via-oauth2) allowing
 users to link their accounts. Integrations may add a `application_credentials.py` file and implement the functions described below.
 
-OAuth2 requires credentials that are shared between an application and provider. In Home Assistant, integration specific OAuth2 credentials are  provided using one or more approaches:
+OAuth2 requires credentials that are shared between an application and provider. In Home Assistant, integration specific OAuth2 credentials are provided using one or more approaches:
 
 - *Local OAuth with Application Credentials Component*: Users create their own credentials with the cloud provider, often acting as an application developer, and register the credentials with Home Assistant and the integration. This approach is *required* by all integrations that support OAuth2.
 - *Cloud Account Linking with Cloud Component*: Nabu Casa registers credentials with the cloud provider, providing a seamless user experience. This approach provides a seamless user experience and is *recommended* ([more info](/docs/core/integration/config_flow#configuration-via-oauth2)).
@@ -112,12 +112,12 @@ from homeassistant.components.application_credentials import (
 )
 
 # Example configuration.yaml schema for an integration
-CONFIG_SCHEMA = vol.Schema(
+CONFIG_SCHEMA = probatio.Schema(
     {
-        DOMAIN: vol.Schema(
+        DOMAIN: probatio.Schema(
             {
-                vol.Required(CONF_CLIENT_ID): cv.string,
-                vol.Required(CONF_CLIENT_SECRET): cv.string,
+                probatio.Required(CONF_CLIENT_ID): cv.string,
+                probatio.Required(CONF_CLIENT_SECRET): cv.string,
             }
         )
     },

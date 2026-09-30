@@ -3,7 +3,7 @@ title: Vacuum entity
 sidebar_label: Vacuum
 ---
 
-Derive entity platforms from [`homeassistant.components.vacuum.StateVacuumEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/vacuum/__init__.py)
+Derive entity platforms from [`homeassistant.components.vacuum.StateVacuumEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/vacuum/__init__.py)
 
 ## Properties
 
@@ -125,6 +125,10 @@ Set the vacuum cleaner to return to the dock.
 ### `send_command` or `async_send_command`
 
 Send a command to a vacuum cleaner.
+
+:::note
+Using the `send_command` service is discouraged as it requires yaml input from the user and is in general less user-friendly. Preferred option is to create an integration-specific service that can provide a nicer UI experience and specific documentation.
+:::
 
 ### `set_fan_speed` or `async_set_fan_speed`
 

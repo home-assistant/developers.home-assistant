@@ -27,10 +27,10 @@ Turn the switch on.
 class MySwitch(SwitchEntity):
     # Implement one of these methods.
 
-    def turn_on(self, **kwargs) -> None:
+    def turn_on(self, **kwargs: Any) -> None:
         """Turn the entity on."""
 
-    async def async_turn_on(self, **kwargs):
+    async def async_turn_on(self, **kwargs: Any) -> None:
         """Turn the entity on."""
 ```
 
@@ -42,10 +42,10 @@ Turn the switch off.
 class MySwitch(SwitchEntity):
     # Implement one of these methods.
 
-    def turn_off(self, **kwargs):
+    def turn_off(self, **kwargs: Any) -> None:
         """Turn the entity off."""
 
-    async def async_turn_off(self, **kwargs):
+    async def async_turn_off(self, **kwargs: Any) -> None:
         """Turn the entity off."""
 ```
 
@@ -57,10 +57,10 @@ Optional. If not implemented will default to checking what method to call using 
 class MySwitch(SwitchEntity):
     # Implement one of these methods.
 
-    def toggle(self, **kwargs):
+    def toggle(self, **kwargs: Any) -> None:
         """Toggle the entity."""
 
-    async def async_toggle(self, **kwargs):
+    async def async_toggle(self, **kwargs: Any) -> None:
         """Toggle the entity."""
 ```
 

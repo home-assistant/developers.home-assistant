@@ -13,12 +13,12 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name                     | Type                                | Default | Description                                                                                         |
 | ------------------------ | ------------------------------------| ------- | --------------------------------------------------------------------------------------------------- |
-| brand                    | <code>str &#124; None</code>        | `None`  | The brand (manufacturer) of the camera.                                                             |
+| brand                    | `str \| None`        | `None`  | The brand (manufacturer) of the camera.                                                             |
 | frame_interval           | `float`                             | 0.5     | The interval between frames of the stream.                                                          |
 | is_on                    | `bool`                              | `True`  | Indication of whether the camera is on.                                                             |
 | is_recording             | `bool`                              | `False` | Indication of whether the camera is recording. Used to determine `state`.                           |
 | is_streaming             | `bool`                              | `False` | Indication of whether the camera is streaming. Used to determine `state`.                           |
-| model                    | <code>str &#124; None</code>        | `None`  | The model of the camera.                                                                            |
+| model                    | `str \| None`        | `None`  | The model of the camera.                                                                            |
 | motion_detection_enabled | `bool`                              | `False` | Indication of whether the camera has motion detection enabled.                                      |
 | use_stream_for_stills    | `bool`                              | `False` | Determines whether or not to use the `Stream` integration to generate still images                  |
 
@@ -76,7 +76,7 @@ class MyCamera(Camera):
 
 ### Stream source
 
-The stream source should return a url that is usable by ffmpeg (e.g. an RTSP url). Requires `CameraEntityFeature.STREAM`.
+The stream source should return a url that is usable by ffmpeg (for example, an RTSP url). Requires `CameraEntityFeature.STREAM`.
 
 A camera entity with a stream source by default uses `StreamType.HLS` to tell the frontend to use an HLS feed with the `stream` component. This stream source will also be used with `stream` for recording.
 
@@ -93,7 +93,7 @@ A common way for a camera entity to render a camera still image is to pass the s
 ### WebRTC streams
 
 WebRTC enabled cameras can be used by facilitating a direct connection with the home assistant frontend. This usage requires `CameraEntityFeature.STREAM` and the integration must implement the two following methods to support native WebRTC:
-- `async_handle_async_webrtc_offer`: To initialize a WebRTC stream. Any messages/errors coming in async should be forwared to the frontend with the `send_message` callback.
+- `async_handle_async_webrtc_offer`: To initialize a WebRTC stream. Any messages/errors coming in async should be forwarded to the frontend with the `send_message` callback.
 - `async_on_webrtc_candidate`: The frontend will call it with any candidate coming in after the offer is sent.
 The following method can optionally be implemented:
 - `close_webrtc_session` (Optional): The frontend will call it when the stream is closed. Can be used to clean up things.

@@ -12,6 +12,7 @@ The `strings.json` contains translations for different things that the integrati
 | ------------------- | ------------------------------------------------- |
 | `title`             | Title of the integration.                         |
 | `common`            | Shared strings.                                   |
+| `conditions`        | Conditions of the integration.                    |
 | `config`            | Translations for the config flow.                 |
 | `device`            | Translations for devices.                         |
 | `device_automation` | Translations for device automations.              |
@@ -22,6 +23,7 @@ The `strings.json` contains translations for different things that the integrati
 | `options`           | Translations for the options flow.                |
 | `selectors`         | Selectors of the integration.                     |
 | `services`          | Service actions of the integration.               |
+| `triggers`          | Triggers of the integration.                      |
 
 ### Title
 
@@ -208,8 +210,8 @@ Set description placeholders when the [service action is registered](/docs/dev_1
         }
       },
       "sections": {
-        "advanced_fields": {
-          "name": "Advanced options"
+        "additional_fields": {
+          "name": "Additional options"
         }
       }
     }
@@ -250,6 +252,60 @@ The translation strings for device automations are defined under the `device_aut
 
 ```
 
+### Triggers
+
+The translations of trigger strings are defined under the `triggers` key. The structure follows the same format as [service actions](#service-actions): each trigger is keyed by its trigger key (the key returned by `async_get_triggers`) and supports translating the `name` and `description` of the trigger, the `name` and `description` of each of the trigger's `fields`, and the `name` and `description` of each collapsible `section` of fields.
+
+The structure of a trigger (its fields, sections and selectors) is defined in the `triggers.yaml` file. See the [Automations](/docs/automations) documentation for more information.
+
+```json
+{
+  "triggers": {
+    "occupancy_cleared": {
+      "name": "Occupancy cleared",
+      "description": "Triggers when occupancy is cleared.",
+      "fields": {
+        "for": {
+          "name": "For",
+          "description": "The duration the occupancy must be cleared before triggering."
+        }
+      }
+    }
+  }
+}
+```
+
+:::note
+Triggers may use selectors in their `fields`. The translation of those selectors can be provided using the `translation_key` property on the selector definition in the `triggers.yaml` file. See the [Selectors](#selectors) section for more information.
+:::
+
+### Conditions
+
+The translations of condition strings are defined under the `conditions` key. Just like [triggers](#triggers), the structure follows the same format as [service actions](#service-actions): each condition is keyed by its condition key (the key returned by `async_get_conditions`) and supports translating the `name` and `description` of the condition, the `name` and `description` of each of the condition's `fields`, and the `name` and `description` of each collapsible `section` of fields.
+
+The structure of a condition (its fields, sections and selectors) is defined in the `conditions.yaml` file. See the [Automations](/docs/automations) documentation for more information.
+
+```json
+{
+  "conditions": {
+    "door_state": {
+      "name": "Door state",
+      "description": "Tests if the door has a specific state.",
+      "fields": {
+        "state": {
+          "name": "State",
+          "description": "The state the door must have for the condition to pass."
+        }
+      }
+    }
+  }
+}
+```
+
+:::note
+Conditions may use selectors in their `fields`. The translation of those selectors can be provided using the `translation_key` property on the selector definition in the `conditions.yaml` file. See the [Selectors](#selectors) section for more information.
+:::
+
 ### Exceptions
 
 Localization is supported for `HomeAssistantError` and its subclasses.
@@ -271,7 +327,7 @@ Example of raising an exception with localization during a service action call:
 
 ```python
 async def async_select_index(hass: HomeAssistant, index: int) -> None:
-    """Setup the config entry for my device."""
+    """Set up the config entry for my device."""
     try:
         check_index(index)
     except ValueError as exc:

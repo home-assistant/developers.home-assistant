@@ -1,5 +1,6 @@
 ---
 title: "Integration needs to be able to be set up via the UI"
+sidebar_label: 🥉 config-flow
 related_rules:
   - test-before-configure
   - unique-config-entry
@@ -44,7 +45,7 @@ class MyConfigFlow(ConfigFlow, domain=DOMAIN):
             )
         return self.async_show_form(
             step_id="user",
-            data_schema=vol.Schema({vol.Required(CONF_HOST): str}),
+            data_schema=probatio.Schema({probatio.Required(CONF_HOST): str}),
             errors=errors,
         )
 ```

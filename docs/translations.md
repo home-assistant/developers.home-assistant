@@ -17,7 +17,7 @@ Translations are downloaded from Lokalise on every build, so all major, minor, b
 
 Some translation strings will contain special placeholders that will be replaced at runtime. 
 
-Placeholders defined in square brackets `[]` (shown in green in Lokalise) are [Lokalise key references](https://docs.lokalise.com/en/articles/1400528-key-referencing). These are primarily used to link translation strings that will be duplicated, rather then redefining the same translation over and over again. Where sensible, the translation should make use of those (the square brackets placeholder value can be easily taken over by clicking on the "Source Alt+0" button in the Lokalise edit mode). Different languages may not have the same duplicates as English, and are welcome to link duplicate translations that are not linked in English. 
+Placeholders defined in square brackets `[]` (shown in green in Lokalise) are [Lokalise key references](https://docs.lokalise.com/en/articles/1400528-key-referencing). These are primarily used to link translation strings that will be duplicated, rather than redefining the same translation over and over again. Where sensible, the translation should make use of those (the square brackets placeholder value can be easily taken over by clicking on the "Source Alt+0" button in the Lokalise edit mode). Different languages may not have the same duplicates as English, and are welcome to link duplicate translations that are not linked in English. 
 
 Placeholders shown in curly brackets `{}` are [translation arguments](https://formatjs.github.io/docs/core-concepts/icu-syntax/) that will be replaced with a live value when Home Assistant is running. Any translation argument placeholders present in the original string must be included in the translated string and must not be translated! These placeholders may include special syntax for defining plurals or other replacement rules. The above linked format.js guide explains the syntax for adding plural definitions and other rules.
 
@@ -27,7 +27,7 @@ Placeholders shown in curly brackets `{}` are [translation arguments](https://fo
 2. Stick to [Material Design guidelines](https://material.io/design/communication/writing.html).
 3. Don't translate or change proper nouns like `Home Assistant`, `Supervisor` or `Hue`.
 4. For a region-specific translation, keys that will be the same as the base translation should clone the source string. You can do this with **Ctrl+Insert** or selecting **Insert Source** in the interface. This helps keep track of what has, or has not been reviewed whilst also simplifying the workflow. 
-5. Translations under the `state_badge` keys will be used for the notification badge display. These translations should be short enough to fit in the badge label without overflowing. This can be tested in the Home Assistant UI either by editing the label text with your browsers development tools, or by using the States tab of developer tools in the Home Assistant UI. In the UI, enter a new entity ID (`device_tracker.test`), and enter the text you want to test in state.
+5. Translations under the `state_badge` keys will be used for the notification badge display. These translations should be short enough to fit in the badge label without overflowing. This can be tested in the Home Assistant UI either by editing the label text with your browsers development tools, or by using the States tab of Tools in the Home Assistant UI. In the UI, enter a new entity ID (`device_tracker.test`), and enter the text you want to test in state.
 6. If text will be duplicated across different translation keys, make use of the Lokalise key reference feature where possible. The base translation provides examples of this underneath the `states` translations. Please see the [Lokalise key referencing](https://docs.lokalise.com/articles/1400528-key-referencing) documentation for more details.
 
 ## Adding a new language
@@ -45,8 +45,8 @@ Region specific translations (`en-US`, `fr-CA`) will only be included if transla
 
 ### Maintainer steps to add a new language
 
-1. Language tags  have to follow [BCP 47](https://tools.ietf.org/html/bcp47). A list of most language tags can be found here: [IANA subtag registry](http://www.iana.org/assignments/language-subtag-registry/language-subtag-registry). Examples: `fr`, `fr-CA`, `zh-Hans`. Only include the country code if country specific overrides are being included, and the base language is already translated.
-2. Add the language tag and native name in `src/translations/translationMetadata.json`.  Examples: "Français", "Français (CA)"
+1. Language tags have to follow [BCP 47](https://tools.ietf.org/html/bcp47). A list of most language tags can be found here: [IANA subtag registry](http://www.iana.org/assignments/language-subtag-registry/language-subtag-registry). Examples: `fr`, `fr-CA`, `zh-Hans`. Only include the country code if country specific overrides are being included, and the base language is already translated.
+2. Add the language tag and native name in `src/translations/translationMetadata.json`. Examples: "Français", "Français (CA)"
 3. Add the new language in Lokalise.
 Note: Sometimes you have to change the tag in Lokalise (Language -> Language settings -> custom ISO code).
 

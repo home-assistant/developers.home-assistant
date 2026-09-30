@@ -3,7 +3,7 @@ title: Weather entity
 sidebar_label: Weather
 ---
 
-Derive entity platforms from [`homeassistant.components.weather.WeatherEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/weather/__init__.py)
+Derive entity platforms from [`homeassistant.components.weather.WeatherEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/weather/__init__.py)
 
 ## Properties
 
@@ -19,8 +19,8 @@ Properties should always only return information from memory and not do I/O (lik
 | native_apparent_temperature | float | `None` | The current apparent (feels-like) temperature in °C or °F.
 | native_dew_point | float | `None` | The dew point temperature in °C or °F.
 | native_precipitation_unit | string | `None` | The precipitation unit; mm or in.
-| native_pressure | float | `None` | The current air pressure in hPa, mbar, inHg or mmHg.
-| native_pressure_unit | string | `None` | The air pressure unit; hPa, mbar, inHg or mmHg. Required if native_pressure is set.
+| native_pressure | float | `None` | The current air pressure in hPa, kPa, mbar, inHg or mmHg.
+| native_pressure_unit | string | `None` | The air pressure unit; hPa, kPa, mbar, inHg or mmHg. Required if native_pressure is set.
 | native_temperature | float | **Required** | The current temperature in °C or °F.
 | native_temperature_unit | string | **Required** | The temperature unit; °C or °F.
 | native_visibility | float | `None` | The current visibility in km or mi.
@@ -38,7 +38,7 @@ Properties have to follow the units mentioned on the respective unit of measurem
 
 To the user, properties will be presented according to the unit system. This is achieved by automatically converting units when creating state objects.
 
-For each weather entity, the user also has the option to override the presentation units, i.e., the units used in the state objects.
+For each weather entity, the user also has the option to override the presentation units, that is, the units used in the state objects.
 
 ### Recommended values for state and condition
 
@@ -77,7 +77,7 @@ and are combined using the bitwise or (`|`) operator.
 
 ## Weather forecasts
 
-A weather platform can optionally provide weather forecasts. Support for weather forecasts is indicated by setting the correct [supported feature](#supported-features). Weather forecasts are not part of the entity's state, they're instead made available by a separate API. Consumers, e.g. frontend, can subscribe to weather forecast updates.
+A weather platform can optionally provide weather forecasts. Support for weather forecasts is indicated by setting the correct [supported feature](#supported-features). Weather forecasts are not part of the entity's state, they're instead made available by a separate API. Consumers, for example, frontend, can subscribe to weather forecast updates.
 
 ### Forecast data
 
@@ -95,7 +95,7 @@ The integration should implement one or several of the async methods `async_fore
 | native_apparent_temperature | float | `None` | The apparent (feels-like) temperature in °C or °F
 | native_dew_point | float | `None` | The dew point temperature in °C or °F
 | native_precipitation | float | `None` | The precipitation amount in mm or in.
-| native_pressure | float | `None` | The air pressure in hPa, mbar, inHg or mmHg.
+| native_pressure | float | `None` | The air pressure in hPa, kPa, mbar, inHg or mmHg.
 | native_temperature | float | **Required** | The higher temperature in °C or °F
 | native_templow | float | `None` | The lower daily Temperature in °C or °F
 | native_wind_gust_speed | int | `None` | The wind gust speed in Beaufort, m/s, km/h, mi/h, ft/s or kn.
@@ -137,4 +137,4 @@ class MyWeatherEntity(WeatherEntity):
 
 It is strongly recommended that fetched weather forecasts are cached by the weather entity to avoid unnecessary API accesses.
 
-When an updated weather forecast is available, the weather forecast cache should be invalidated and the method `WeatherEntity.async_update_listeners` should be awaited to trigger a push of the updated weather forecast to any active subscriber. If there are active listeners, `WeatherEntity.async_update_listeners` will call the corresponding `async_forecast_xxx` methods. If there are no active listeners, `WeatherEntity.async_update_listeners` will not call any ot the `async_forecast_xxx` methods.
+When an updated weather forecast is available, the weather forecast cache should be invalidated and the method `WeatherEntity.async_update_listeners` should be awaited to trigger a push of the updated weather forecast to any active subscriber. If there are active listeners, `WeatherEntity.async_update_listeners` will call the corresponding `async_forecast_xxx` methods. If there are no active listeners, `WeatherEntity.async_update_listeners` will not call any of the `async_forecast_xxx` methods.

@@ -24,7 +24,7 @@ hassos-xy.raucb
 - The `udev` folder is for udev rules files.
 - The `authorized_keys` file activates debug SSH access on port `22222`. See [Debugging Home Assistant][debug-homeassistant].
 - The `timesyncd.conf` file allow you to set different NTP servers. HassOS won't boot without correct working time servers!
-- The `hassos-*.raucb` file is a firmware OTA update which will be installed. These can be found on on the [release][hassos-release] page.
+- The `hassos-*.raucb` file is a firmware OTA update which will be installed. These can be found on the [release][hassos-release] page.
 
 Text files that are on USB stick must have Unix (LF) end of line characters. If you create USB stick on Windows machine, be sure to use Notepad++, Visual Studio Code or any other editor, that supports different line endings. In Notepad++ LF EOL can be enabled with setting `Edit -> EOL Conversion -> Unix (LF)`.
 

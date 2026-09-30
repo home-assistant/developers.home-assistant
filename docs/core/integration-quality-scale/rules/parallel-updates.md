@@ -1,5 +1,6 @@
 ---
 title: "Number of parallel updates is specified"
+sidebar_label: 🥈 parallel-updates
 ---
 
 ## Reasoning
@@ -34,6 +35,13 @@ class MySensor(SensorEntity):
 When using a coordinator, you are already centralizing the data updates.
 This means you can set `PARALLEL_UPDATES = 0` for read-only platforms (`binary_sensor`, `sensor`, `device_tracker`, `event`)
 and only the action calls will be relevant to consider for setting an appropriate number of parallel updates.
+
+:::note
+
+A coordinator only centralizes the inbound data updates; it does not limit outbound action calls.
+This means that even for platforms that use a coordinator, you still need to consider an appropriate number of parallel updates for platforms that have actions (for example, switching a `switch` or turning on a `light`).
+
+:::
 
 `sensor.py`
 ```python {1,2} showLineNumbers

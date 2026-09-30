@@ -23,10 +23,13 @@ Create a file `homeassistant/components/hello_state/__init__.py` with one of the
 - Sync component:
 
 ```python
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.typing import ConfigType
+
 DOMAIN = "hello_state"
 
 
-def setup(hass, config):
+def setup(hass: HomeAssistant, config: ConfigType) -> bool:
     hass.states.set("hello_state.world", "Paulus")
 
     # Return boolean to indicate that initialization was successful.
@@ -36,10 +39,13 @@ def setup(hass, config):
 - And if you prefer an async component:
 
 ```python
+from homeassistant.core import HomeAssistant
+from homeassistant.helpers.typing import ConfigType
+
 DOMAIN = "hello_state"
 
 
-async def async_setup(hass, config):
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     hass.states.async_set("hello_state.world", "Paulus")
 
     # Return boolean to indicate that initialization was successful.

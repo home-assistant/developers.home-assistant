@@ -5,15 +5,15 @@
  * LICENSE file in the root directory of this source tree.
  */
 
-const iqs_rules_by_tier = require('./docs/core/integration-quality-scale/_includes/tiers.json');
-const iqs_rules = Object.values(iqs_rules_by_tier).flat().map((rule) => {
+const iqs_rules_by_tier = require("./docs/core/integration-quality-scale/_includes/tiers.json");
+const iqs_rules = Object.values(iqs_rules_by_tier)
+  .flat()
+  .map((rule) => {
     if (typeof rule === "string") {
-        return rule;
+      return rule;
     }
     return rule.id;
-});
-
-
+  });
 
 module.exports = {
   Apps: [
@@ -27,10 +27,7 @@ module.exports = {
     "apps/repository",
     "apps/security",
   ],
-  Overview: [
-    "architecture_index",
-    "setup_devcontainer_environment"
-  ],
+  Overview: ["architecture_index", "setup_devcontainer_environment"],
   Frontend: [
     "frontend",
     "frontend/architecture",
@@ -129,6 +126,7 @@ module.exports = {
         "development_testing",
         "development_catching_up",
         "development_tips",
+        "core/pr_review_guide",
       ],
     },
     {
@@ -176,6 +174,7 @@ module.exports = {
             "core/bluetooth/api",
           ],
         },
+        "modbus/introduction",
       ],
     },
     {
@@ -184,24 +183,24 @@ module.exports = {
       items: [
         "development_checklist",
         "creating_component_code_review",
-        "creating_platform_code_review",
       ],
     },
     {
       type: "category",
       label: "Integration Quality Scale",
-      link: {type: 'doc', id: 'core/integration-quality-scale/index'},
+      link: { type: "doc", id: "core/integration-quality-scale/index" },
       items: [
-        {type: 'doc', id: 'core/integration-quality-scale/checklist'},
+        { type: "doc", id: "core/integration-quality-scale/checklist" },
         {
-          type: 'category',
-          label: 'Rules',
-          link: {type: 'doc', id: 'core/integration-quality-scale/rules'},
-          items: iqs_rules.map(rule => ({
-            type: 'doc',
-            id: `core/integration-quality-scale/rules/${rule.toLowerCase()}`
-          }))}
-      ]
+          type: "category",
+          label: "Rules",
+          link: { type: "doc", id: "core/integration-quality-scale/rules" },
+          items: iqs_rules.map((rule) => ({
+            type: "doc",
+            id: `core/integration-quality-scale/rules/${rule.toLowerCase()}`,
+          })),
+        },
+      ],
     },
     {
       type: "category",
@@ -291,6 +290,7 @@ module.exports = {
     "creating_integration_brand",
     "core/platform/application_credentials",
     "core/platform/backup",
+    "core/platform/media_source",
     "core/platform/raising_exceptions",
     "core/platform/repairs",
     "core/platform/reproduce_state",
@@ -298,12 +298,18 @@ module.exports = {
     {
       type: "category",
       label: "External APIs",
-      items: ["api/websocket", "api/rest"],
+      items: ["api/websocket", "api/rest", "api/instance_discovery"],
     },
     {
       type: "category",
       label: "Misc",
-      items: ["development_validation", "development_typing", "instance_url"],
+      items: [
+        "development_validation",
+        "development_typing",
+        "instance_url",
+        "deprecating",
+        "versioning",
+      ],
     },
   ],
   Voice: [
@@ -331,6 +337,7 @@ module.exports = {
   Misc: [
     "misc",
     "review-process",
+    "ai_policy",
     // Documenting as a category
     {
       type: "category",
@@ -339,6 +346,7 @@ module.exports = {
         "documenting",
         "documenting/standards",
         "documenting/general-style-guide",
+        "documenting/testing",
         "documenting/yaml-style-guide",
         "documenting/create-page",
         "documenting/remove-page",
@@ -368,7 +376,15 @@ module.exports = {
   Android: [
     "android",
     "android/get_started",
-    "android/architecture",
+    {
+      type: "category",
+      label: "Architecture",
+      items: [
+        "android/architecture/overview",
+        "android/architecture/ui_architecture",
+        "android/architecture/frontend_screen",
+      ],
+    },
     "android/targets",
     "android/app_flavors",
     {
@@ -379,6 +395,7 @@ module.exports = {
         "android/testing/unit_testing",
         "android/testing/screenshot_testing",
         "android/testing/integration_testing",
+        "android/testing/e2e_testing",
       ],
     },
     {
@@ -403,5 +420,15 @@ module.exports = {
     "android/linter",
     "android/submit",
     "android/release",
-  ]
+  ],
+  Apple: [
+    "apple/index",
+    "apple/get_started",
+    "apple/architecture",
+    "apple/targets",
+    "apple/testing",
+    "apple/ci",
+    "apple/codestyle",
+    "apple/submit",
+  ],
 };

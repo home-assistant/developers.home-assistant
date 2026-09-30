@@ -12,7 +12,7 @@ export default function RelatedRules({relatedRules}) {
                 const relatedRule = docs[`core/integration-quality-scale/rules/${rule}`].title;
                 return (
                     <li key={rule}>
-                        <Link to={absoluteRulePath}>{rule}</Link>: {relatedRule}
+                        <Link to={absoluteRulePath}><code>{rule}</code></Link>: {relatedRule}
                     </li>
                 );
             })}

@@ -45,6 +45,36 @@ You can use KTLint through Gradle to automatically reformat your code:
 
 If a KTLint error is detected, the CI will fail, and GitHub will report it as a comment in the PR using the generated [SARIF](/docs/android/tips/sarif_reports.md) report.
 
+## Detekt static analysis
+
+While KTLint handles Kotlin formatting and style, [Detekt](https://detekt.dev/) performs static analysis for maintainability and correctness issues.
+
+### Running Detekt
+
+Run type-resolved analysis for production code across the entire repository, including the convention plugins in the included build:
+
+```bash
+./gradlew detektMain :build-logic:convention:detektMain --continue
+```
+
+For focused Android analysis, use `:<module>:detektMain`. For example:
+
+```bash
+./gradlew :app:detektMain
+```
+
+To generate or update the corresponding baselines, run:
+
+```bash
+./gradlew detektBaselineMain :build-logic:convention:detektBaselineMain --continue
+```
+
+
+### CI integration
+
+Existing findings are recorded in baselines. Android modules use per-variant files such as `detekt-baseline-release.xml`, while JVM modules use source-set-specific files such as `detekt-baseline-main.xml`. New Detekt violations fail CI and are reported using the generated [SARIF](/docs/android/tips/sarif_reports.md) report.
+
+
 ## Yamllint
 
 We use [Yamllint](https://github.com/adrienverge/yamllint) to enforce YAML formatting. The `github` format is followed for all YAML files in the repository.
@@ -72,8 +102,10 @@ TODOs in code tend to be forgotten over time. When someone read them later, they
 ### Example
 
 ```bash
-// TODO Missing feature (linked issue #404)
+// TODO Missing feature https://github.com/home-assistant/android/issues/404
 ```
+
+Always reference GitHub with a full HTTP link, never a bare `#404` — a number is ambiguous and not clickable outside GitHub. When linking to code (a file or line), use a permalink (press <kbd>y</kbd> on GitHub for a commit-pinned URL) so the link survives file moves and edits.
 
 ## Constants
 
@@ -151,8 +183,8 @@ const val DEFAULT_USER_ID = "guest"
 
 When to use companion objects:
 
-- **Namespacing for external use**: When constants or utility functions must be accessed externally (e.g., public or internal).
-- **Intentional naming conflicts**: When multiple classes or entities in the same file share the same name for conceptually similar constants (e.g., EMPTY, DEFAULT).
+- **Namespacing for external use**: When constants or utility functions must be accessed externally (for example, public or internal).
+- **Intentional naming conflicts**: When multiple classes or entities in the same file share the same name for conceptually similar constants (for example, EMPTY, DEFAULT).
 
 **Example:**
 

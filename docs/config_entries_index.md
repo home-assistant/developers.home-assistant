@@ -46,7 +46,11 @@ await hass.config_entries.async_forward_entry_setups(config_entry, ["light", "se
 For a platform to support config entries, it will need to add a setup entry function ([example](https://github.com/home-assistant/core/blob/f18ddb628c3574bc82e21563d9ba901bd75bc8b5/homeassistant/components/hassio/__init__.py#L522)):
 
 ```python
-async def async_setup_entry(hass, config_entry, async_add_entities):
+async def async_setup_entry(
+    hass: HomeAssistant,
+    config_entry: MyConfigEntry,
+    async_add_entities: AddConfigEntryEntitiesCallback,
+) -> None:
     """Set up entry."""
 ```
 
@@ -68,7 +72,7 @@ If you need to clean up resources used by an entity in a platform, have the enti
 If an integration needs to clean up code when an entry is removed, it can define a removal function `async_remove_entry`. The config entry is deleted from `hass.config_entries` before `async_remove_entry` is called.
 
 ```python
-async def async_remove_entry(hass, entry) -> None:
+async def async_remove_entry(hass: HomeAssistant, entry: MyConfigEntry) -> None:
     """Handle removal of an entry."""
 ```
 
@@ -87,4 +91,4 @@ A `ConfigEntry` object, including the data and options, must never be mutated di
 
 ## Subscribing to config entry state changes
 
-If you want to be notified about a `ConfigEntry` changing its `state` (e.g. from `ConfigEntryState.LOADED` to `ConfigEntryState.UNLOAD_IN_PROGRESS`), you can add a listener which will be notified to `async_on_state_change`. This helper also returns a callback you can call to remove the listener again. Subscribing to changes until the entry is unloaded would therefore be `entry.async_on_unload(entry.async_on_state_change(notify_me))`.
+If you want to be notified about a `ConfigEntry` changing its `state` (for example, from `ConfigEntryState.LOADED` to `ConfigEntryState.UNLOAD_IN_PROGRESS`), you can add a listener which will be notified to `async_on_state_change`. This helper also returns a callback you can call to remove the listener again. Subscribing to changes until the entry is unloaded would therefore be `entry.async_on_unload(entry.async_on_state_change(notify_me))`.

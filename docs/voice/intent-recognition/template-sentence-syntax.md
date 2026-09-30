@@ -135,6 +135,21 @@ lists:
         out: 1
 ```
 
+#### Inline number ranges
+
+A number range list can also be defined inline within a sentence template:
+
+```yaml
+language: en
+intents:
+  SetBrightness:
+    data:
+      - sentences:
+          - set brightness to {0..100:brightness} percent
+```
+
+This will match numbers from 0 to 100 and put the value into a `brightness` slot. Number words will also work, so "set brightness to 50 percent" and "set brightness to fifty percent" will both match and set the `brightness` slot to 50.
+
 #### Wildcards
 
 Wildcard lists can match any text, for example:

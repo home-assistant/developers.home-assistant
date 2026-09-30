@@ -2,7 +2,7 @@
 title: "Standards"
 ---
 
-To ensure that the documentation for Home Assistant is consistent and easy to follow for both novice and expert users, we ask that you follow a very strict set of standards for developing the documentation.
+To ensure that the documentation for Home Assistant is consistent and easy to follow for all readers, we ask that you follow a very strict set of standards for developing the documentation.
 
 ## Style guide
 
@@ -13,6 +13,14 @@ Documentation should follow the [documentation style guide](/docs/documenting/ge
 - All examples should be formatted to be included in `configuration.yaml` unless explicitly stated.
   - Use capital letters and `_` to indicate that the value needs to be replaced. For example, `api_key: YOUR_API_KEY` or `api_key: REPLACE_ME`.
 - Integration and platform names should be a link to their respective documentation pages.
+
+### Deprecated features or integrations
+
+When a feature is deprecated or an integration is removed from Home Assistant, remove its documentation. To carry out the deprecation itself, follow [deprecating](/docs/deprecating).
+
+- If a feature is deprecated, remove the related section from the integration page.
+- Do not add a deprecation notice to the documentation.
+- If an entire integration is deprecated, follow the steps on [removing an integration page](/docs/documenting/remove-page).
 
 ## YAML and templates
 

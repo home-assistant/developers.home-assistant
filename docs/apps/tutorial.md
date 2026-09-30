@@ -29,8 +29,7 @@ Once you have located your app directory, it's time to get started!
 This is the image that will be used to build your app.
 
 ```dockerfile
-ARG BUILD_FROM
-FROM $BUILD_FROM
+FROM ghcr.io/home-assistant/base:latest
 
 # Copy data for app
 COPY run.sh /
@@ -115,8 +114,7 @@ To do this, we will need to update our files as follows:
 Update your `Dockerfile`:
 
 ```dockerfile
-ARG BUILD_FROM
-FROM $BUILD_FROM
+FROM ghcr.io/home-assistant/base:latest
 
 # Install requirements for app
 RUN \
@@ -193,7 +191,7 @@ schema:
 ...
 ```
 
-Reload the app store and re-install your app. You will now see the options available in the app config screen. When you now go back to our Python 3 server and download `options.json`, you'll see the options you set. [Example of how options.json can be used inside `run.sh`](https://github.com/home-assistant/addons/blob/master/dhcp_server/data/run.sh#L10-L13)
+Reload the app store and re-install your app. You will now see the options available in the app config screen. When you now go back to our Python 3 server and download `options.json`, you'll see the options you set. [Example of how options.json can be used inside `run.sh`](https://github.com/home-assistant/apps-example/blob/main/example/rootfs/etc/services.d/example/run#L12-L17)
 
 ## Bonus: Template app repository
 

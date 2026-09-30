@@ -1,5 +1,6 @@
 ---
 title: "Has an integration owner"
+sidebar_label: 🥈 integration-owner
 ---
 
 ## Reasoning
@@ -16,7 +17,7 @@ An integration can have more than one owner.
 
 We love integration owners!
 We believe that integrations that have an owner are better maintained.
-During reviews, we see the integration owner as the expert on the integration, and weigh their opinion higher than others.
+During reviews, we see the integration owner as the subject matter expert on the integration, and weigh their opinion higher than others.
 
 ## Example implementation
 

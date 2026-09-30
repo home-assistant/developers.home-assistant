@@ -47,7 +47,7 @@ When possible, devices are automatically discovered for an easy and seamless set
 
 All provided devices and entities are named logically and fully translatable, and they have been properly categorized and enabled for long-term statistical use.
 
-The documentation for these integrations is extensive, and primarily aimed toward end-users and understandable by non-technical consumers. Besides providing general information on the integration, the documentation provides possible example use cases, a list of compatible devices, a list of described entities the integration provides, and extensive descriptions and usage examples of available actions provided by the integration. The use of example automations, dashboards, available Blueprints, and links to additional external resources, is highly encouraged as well.
+The documentation for these integrations is extensive, and primarily aimed toward end-users and easy to understand. Besides providing general information on the integration, the documentation provides possible example use cases, a list of compatible devices, a list of described entities the integration provides, and extensive descriptions and usage examples of available actions provided by the integration. The use of example automations, dashboards, available Blueprints, and links to additional external resources, is highly encouraged as well.
 
 The integration provides means for debugging issues, including downloading diagnostic information and documenting troubleshooting instructions. If needed, the integration can be reconfigured via the UI.
 
@@ -61,7 +61,7 @@ The gold tier has the following characteristics:
 - Can be automatically discovered, simplifying the integration setup.
 - Integration can be reconfigured and adjusted.
 - Supports translations.
-- Extensive documentation, aimed at non-technical users.
+- Extensive documentation, aimed at end-users.
 - It supports updating the software/firmware of devices through Home Assistant when possible.
 - The integration has automated tests covering the entire integration.
 - Required level for integrations providing devices in the Works with Home Assistant program.
@@ -101,6 +101,8 @@ Once the Home Assistant core team reviews and approves it, the integration will 
 Besides upgrading an integration to a higher tier on the scale, it is also possible for an integration to be downgraded to a lower tier.
 This can, for example, happen when there is no longer an active integration code owner.
 In this specific example, the integration will be downgraded to “Bronze”, even if it otherwise fully complies with the “Platinum” tier.
+
+There's no need to create a documentation pull request. The quality scale will be updated automatically in the documentation as part of the next minor release of Home Assistant, once the integration's tier has been updated in the codebase.
 
 ### Adjustments to rules contained in each tier
 The world of IoT and all technologies used by Home Assistant are changing at a fast pace; not just in terms of what Home Assistant can support or do, but also in terms of the software on which Home Assistant is built. Home Assistant is pioneering the technology in the industry at a fast pace.

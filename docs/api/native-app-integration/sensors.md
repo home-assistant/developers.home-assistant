@@ -41,7 +41,7 @@ The valid keys are:
 | name                | string                        | Yes      | The name of the sensor                                                                                                                                                                                          |
 | state               | bool, float, int, string      | Yes      | The state of the sensor                                                                                                                                                                                         |
 | type                | string                        | Yes      | The type of the sensor. Must be one of `binary_sensor` or `sensor`                                                                                                                                              |
-| unique_id           | string                        | Yes      | An identifier unique to this installation of your app. You'll need this later. Usually best when its a safe version of the sensor name                                                                          |
+| unique_id           | string                        | Yes      | An identifier unique to this installation of your app. You'll need this later. Usually best when it's a safe version of the sensor name                                                                          |
 | unit_of_measurement | string                        | No       | The unit of measurement for the sensor                                                                                                                                                                          |
 | state_class | string | No | The [state class](../../core/entity/sensor.md#available-state-classes) of the entity (sensors only)
 | entity_category | string | No | The entity category of the entity
@@ -80,7 +80,7 @@ Only some of the keys are allowed during updates:
 | icon                | Material Design Icon (string) | No       | Must be prefixed `mdi:`                                                                                                               |
 | state               | bool, float, int, string      | Yes      | The state of the sensor                                                                                                               |
 | type                | string                        | Yes      | The type of the sensor. Must be one of `binary_sensor` or `sensor`                                                                    |
-| unique_id           | string                        | Yes      | An identifier unique to this installation of your app. You'll need this later. Usually best when its a safe version of the sensor name |
+| unique_id           | string                        | Yes      | An identifier unique to this installation of your app. You'll need this later. Usually best when it's a safe version of the sensor name |
 
 The response to updating a sensor is a dictionary with unique_id => update result.
 

@@ -17,7 +17,7 @@ export default function RuleOverview({tier}) {
                 const relatedRule = docs[`core/integration-quality-scale/rules/${id}`];
                 return (
                     <li key={id}>
-                        <Link to={absoluteRulePath}>{id}</Link> - {relatedRule.title}
+                        <Link to={absoluteRulePath}><code>{id}</code></Link> - {relatedRule.title}
                     </li>
                 );
             })}

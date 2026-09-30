@@ -17,8 +17,8 @@ from homeassistant.components import websocket_api
 
 @websocket_api.websocket_command(
     {
-        vol.Required("type"): "frontend/get_panels",
-        vol.Optional("preload_panels"): bool,
+        probatio.Required("type"): "frontend/get_panels",
+        probatio.Optional("preload_panels"): bool,
     }
 )
 @callback
@@ -39,8 +39,8 @@ from homeassistant.components import websocket_api
 
 @websocket_api.websocket_command(
     {
-        vol.Required("type"): "camera/get_thumbnail",
-        vol.Optional("entity_id"): str,
+        probatio.Required("type"): "camera/get_thumbnail",
+        probatio.Optional("entity_id"): str,
     }
 )
 @websocket_api.async_response
@@ -83,10 +83,11 @@ With all pieces defined, it's time to register the command. This is done inside 
 ```python
 from homeassistant.components import websocket_api
 
-async def async_setup(hass, config):
-    """Setup of your component."""
+async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
+    """Set up your component."""
     websocket_api.async_register_command(hass, ws_get_panels)
     websocket_api.async_register_command(hass, ws_handle_thumbnail)
+    return True
 ```
 
 ## Calling the command from the frontend (JavaScript)

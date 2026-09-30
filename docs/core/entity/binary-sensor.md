@@ -3,7 +3,7 @@ title: Binary sensor entity
 sidebar_label: Binary sensor
 ---
 
-A binary sensor is a sensor that can only have two states. Derive entity platforms from [`homeassistant.components.binary_sensor.BinarySensorEntity`](https://github.com/home-assistant/home-assistant/blob/master/homeassistant/components/binary_sensor/__init__.py)
+A binary sensor is a sensor that can only have two states. Derive entity platforms from [`homeassistant.components.binary_sensor.BinarySensorEntity`](https://github.com/home-assistant/core/blob/dev/homeassistant/components/binary_sensor/__init__.py)
 
 ## Properties
 
@@ -13,8 +13,8 @@ Properties should always only return information from memory and not do I/O (lik
 
 | Name | Type | Default | Description
 | ---- | ---- | ------- | -----------
-| is_on| <code>bool &#124; None</code> | `None` | **Required**. If the binary sensor is currently on or off.
-| device_class | <code>BinarySensorDeviceClass &#124; None</code> | `None` | Type of binary sensor.
+| is_on| `bool \| None` | `None` | **Required**. If the binary sensor is currently on or off.
+| device_class | `BinarySensorDeviceClass \| None` | `None` | Type of binary sensor.
 
 ### Available device classes
 
@@ -28,6 +28,7 @@ Properties should always only return information from memory and not do I/O (lik
 | `BinarySensorDeviceClass.DOOR` | On means open, Off means closed.
 | `BinarySensorDeviceClass.GARAGE_DOOR` | On means open, Off means closed.
 | `BinarySensorDeviceClass.GAS` | On means gas detected, Off means no gas (clear).
+| `BinarySensorDeviceClass.GLASS_BREAK` | On means glass break detected, Off means no glass break (clear).
 | `BinarySensorDeviceClass.HEAT` | On means hot, Off means normal.
 | `BinarySensorDeviceClass.LIGHT` | On means light detected, Off means no light.
 | `BinarySensorDeviceClass.LOCK` | On means open (unlocked), Off means closed (locked).
