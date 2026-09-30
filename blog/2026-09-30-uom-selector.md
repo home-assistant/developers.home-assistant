@@ -40,7 +40,7 @@ The selector returns the unit as a string, or `None` when the user picks no unit
 
 ## Filter the units on other fields
 
-Often the user picks the device class and state class in the same form as the unit, using the [device class and state class selectors](/blog/2026/09/04/device-and-state-class-selectors). Use the new `Selector.with_context()` method to tell the frontend which fields hold these values. The frontend then narrows the list of units as soon as the user changes one of those fields.
+Often the user picks the device class and state class in the same form as the unit, using the [device class and state class selectors](/blog/2026/09/04/device-and-state-class-selectors). Use the `context` key in the selector config to tell the frontend which fields hold these values. The frontend then narrows the list of units as soon as the user changes one of those fields.
 
 The unit of measurement selector supports these context keys:
 
@@ -62,6 +62,7 @@ from homeassistant.helpers.selector import (
     DeviceClassSelectorConfig,
     StateClassSelector,
     UnitOfMeasurementSelector,
+    UnitOfMeasurementSelectorConfig,
 )
 
 DATA_SCHEMA = probatio.Schema(
@@ -70,21 +71,30 @@ DATA_SCHEMA = probatio.Schema(
             DeviceClassSelectorConfig(domain="sensor")
         ),
         probatio.Optional(CONF_STATE_CLASS): StateClassSelector(),
-        probatio.Optional(
-            CONF_UNIT_OF_MEASUREMENT
-        ): UnitOfMeasurementSelector().with_context(
-            {
-                "filter_device_class": CONF_DEVICE_CLASS,
-                "filter_state_class": CONF_STATE_CLASS,
-            }
+        probatio.Optional(CONF_UNIT_OF_MEASUREMENT): UnitOfMeasurementSelector(
+            UnitOfMeasurementSelectorConfig(
+                context={
+                    "filter_device_class": CONF_DEVICE_CLASS,
+                    "filter_state_class": CONF_STATE_CLASS,
+                }
+            )
         ),
     }
 )
 ```
 
-`with_context()` returns the selector itself, so you can chain it. It raises a `ValueError` if you pass a context key that the selector doesn't support.
+The context is validated with the rest of the selector config. It only accepts the context keys listed above, with a string value. A context key can't be combined with the matching fixed limit: you can't use `filter_device_class` together with `device_classes`, or `filter_state_class` together with `state_classes`.
 
-The context only affects the frontend. The selector validates the submitted unit against its own config, not against the values of the other fields. Your flow still needs to check that the unit is valid for the device class and state class that the user picked, and return an error if it isn't.
+Because the context is part of the selector config, it is serialized with the selector. This means it also works in blueprints and service descriptions, where the value of each context key is the name of another input:
+
+```yaml
+unit_of_measurement:
+  context:
+    filter_device_class: device_class
+    filter_state_class: state_class
+```
+
+The context only affects the frontend. The selector validates the submitted unit against its `device_classes` and `state_classes` config, not against the values of the other fields. Your flow still needs to check that the unit is valid for the device class and state class that the user picked, and return an error if it isn't.
 
 ## Migrating existing unit of measurement selectors
 
