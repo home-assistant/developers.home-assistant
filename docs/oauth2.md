@@ -81,13 +81,13 @@ class OAuth2FlowHandler(
         if user_input is None:
             return self.async_show_form(
                 step_id="reauth_confirm",
-                data_schema=vol.Schema({}),
+                data_schema=probatio.Schema({}),
             )
         return await self.async_step_user()
 
     async def async_oauth_create_entry(self, data: dict) -> dict:
         """Create an oauth config entry or update existing entry for reauth."""
-        self.async_set_unique_id(user_id)
+        await self.async_set_unique_id(user_id)
         if self.source == SOURCE_REAUTH:
             self._abort_if_unique_id_mismatch()
             return self.async_update_reload_and_abort(
@@ -117,35 +117,33 @@ access_token = session.token["access_token"]
 ```
 
 
-- `async_ensure_token_valid` - refreshes the token if needed. This needs to done before every request to ensure there's a valid token. The token can be obtained from the `OAuth2Session.token` property.
+- `async_ensure_token_valid` - refreshes the token if needed. This needs to be done before every request to ensure there's a valid token. The token can be obtained from the `OAuth2Session.token` property.
 
 See [Error handling](#error-handling) below for how to handle errors during token requests.
 
 ## Error handling
 
-When a token request or refresh fails, the OAuth 2.0 helper raises one of three exceptions defined in `homeassistant.exceptions`:
+When a token request fails, the OAuth 2.0 helper raises one of the following exceptions from `homeassistant.exceptions`. Each one is also the config entry exception that describes what should happen, and carries a translated message, so integrations don't need to map them or add them to `strings.json`.
 
-| Exception                          | HTTP status          | Meaning                                                                          |
-| ---------------------------------- | -------------------- | -------------------------------------------------------------------------------- |
-| `OAuth2TokenRequestReauthError`    | 400–499 (except 429) | Non-recoverable. The token is invalid and the user must reauthenticate.          |
-| `OAuth2TokenRequestTransientError` | 500+ and 429         | Transient. The server is temporarily unavailable or rate-limited. Safe to retry. |
-| `OAuth2TokenRequestError`          | Base class           | Catch-all for token request failures not covered by the above two.               |
+| Exception                           | Cause                                                             | Also a                  |
+| ----------------------------------- | ----------------------------------------------------------------- | ----------------------- |
+| `OAuth2TokenRequestReauthError`     | HTTP status 400–499, except 429                                   | `ConfigEntryAuthFailed` |
+| `OAuth2TokenRequestTransientError`  | HTTP status 429 or 500–599                                        | `ConfigEntryNotReady`   |
+| `OAuth2TokenRequestError`           | Any other HTTP status. Base class of the two exceptions above.    | `ConfigEntryNotReady`   |
+| `OAuth2TokenRequestConnectionError` | No response, or a response without a usable token                 | `ConfigEntryNotReady`   |
 
-All three exceptions inherit from `aiohttp.ClientResponseError` for backwards compatibility, but integrations should migrate to catching the new exceptions directly.
+`async_get_config_entry_implementation` works the same way: it raises `ImplementationUnavailableError` (a `ConfigEntryNotReady`) or `UnknownImplementationError` (a `ConfigEntryAuthFailed`).
+
+For backwards compatibility, the token request exceptions also inherit from `aiohttp.ClientResponseError` (`OAuth2TokenRequestConnectionError` from `aiohttp.ClientError`).
+
+When `async_ensure_token_valid` raises `OAuth2TokenRequestReauthError`, it has already started the reauthentication flow.
 
 ### Integrations using the Data Update Coordinator
 
-If your integration uses the [Data Update Coordinator](/docs/integration_fetching_data/#coordinated-single-api-poll-for-data-for-all-entities), no special error handling is required. The coordinator automatically maps the new exceptions to the correct behavior:
+If your integration uses the [Data Update Coordinator](/docs/integration_fetching_data/#coordinated-single-api-poll-for-data-for-all-entities), no special error handling is required. The coordinator handles the exceptions:
 
-- `OAuth2TokenRequestReauthError` raises `ConfigEntryAuthFailed`, triggering a reauthentication flow
-- `OAuth2TokenRequestTransientError` treated as `UpdateFailed`, triggering the coordinator's retry mechanism
-
-### Integrations without a Data Update Coordinator
-
-If your integration does **not** use a coordinator, you must handle the exceptions explicitly wherever you do a token request, e.g. call `async_ensure_token_valid()`. The coordinator automatically maps the new exceptions to the correct behavior:
-
-- `OAuth2TokenRequestReauthError` raises ConfigEntryAuthFailed, triggering a reauthentication flow
-- `OAuth2TokenRequestTransientError` is treated as UpdateFailed, triggering the coordinator's retry mechanism
+- `OAuth2TokenRequestReauthError` starts a reauthentication flow
+- The other token request exceptions are treated as `UpdateFailed`, triggering the coordinator's retry mechanism
 
 Make sure to do a first coordinator refresh during config entry setup, to ensure the access token is refreshed before entities are set up:
 
@@ -153,27 +151,15 @@ Make sure to do a first coordinator refresh during config entry setup, to ensure
 await coordinator.async_config_entry_first_refresh()
 ```
 
-```python
-from homeassistant.helpers.config_entry_oauth2_flow import (
-    OAuth2TokenRequestError,
-    OAuth2TokenRequestReauthError,
-    OAuth2TokenRequestTransientError,
-)
-from homeassistant.exceptions import ConfigEntryAuthFailed, ConfigEntryNotReady
+### Integrations without a Data Update Coordinator
 
-try:
-    await session.async_ensure_token_valid()
-except OAuth2TokenRequestReauthError as err:
-    raise ConfigEntryAuthFailed(
-        translation_domain=DOMAIN,
-        translation_key="reauth_required",
-    ) from err
-except (OAuth2TokenRequestTransientError, OAuth2TokenRequestError) as err:
-    raise ConfigEntryNotReady(
-        translation_domain=DOMAIN,
-        translation_key="auth_server_error",
-    ) from err
+If your integration does **not** use a coordinator, call `async_ensure_token_valid()` in `async_setup_entry` and let the exceptions propagate. Home Assistant then retries the setup or starts a reauthentication flow:
+
+```python
+await session.async_ensure_token_valid()
 ```
+
+Only catch an exception when your integration needs different behavior, for example to raise `ConfigEntryError` for a status that is permanent for this provider. Catch the most specific exception and let the others propagate.
 
 ## Complete examples
 
@@ -216,13 +202,8 @@ class ExampleCoordinator(DataUpdateCoordinator[MyData]):
 ### Without Data Update Coordinator
 
 ```python
-from homeassistant.helpers.config_entry_oauth2_flow import (
-    OAuth2Session,
-    OAuth2TokenRequestError,
-    OAuth2TokenRequestReauthError,
-    OAuth2TokenRequestTransientError,
-)
-from homeassistant.exceptions import ConfigEntryAuthFailed, ConfigEntryNotReady
+from homeassistant.helpers import config_entry_oauth2_flow
+from homeassistant.helpers.config_entry_oauth2_flow import OAuth2Session
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
@@ -231,19 +212,7 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
         hass, entry
     )
     session = OAuth2Session(hass, entry, implementation)
-
-    try:
-        await session.async_ensure_token_valid()
-    except OAuth2TokenRequestReauthError as err:
-        raise ConfigEntryAuthFailed(
-            translation_domain=DOMAIN,
-            translation_key="reauth_required",
-        ) from err
-    except OAuth2TokenRequestError as err:
-        raise ConfigEntryNotReady(
-            translation_domain=DOMAIN,
-            translation_key="auth_server_error",
-        ) from err
+    await session.async_ensure_token_valid()
 
     entry.runtime_data = ExampleApiClient(session=session)
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
@@ -252,14 +221,13 @@ async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
 
 ## Best practices
 
-- Never catch `aiohttp.ClientResponseError` directly. Use the new OAuth exception hierarchy instead. The compatibility shim will eventually be removed.
+- Let the OAuth 2.0 exceptions propagate. The helper and config entry setup already handle them, so don't map them to `ConfigEntryNotReady` or `ConfigEntryAuthFailed` yourself.
 - Use the Data Update Coordinator where possible. It handles token refresh errors automatically and reduces the amount of boilerplate in each integration.
 - Don't put token logic in entity classes. Token management belongs in `async_setup_entry` or the coordinator, not in individual entity `async_update` methods.
-- Always handle `OAuth2TokenRequestReauthError` explicitly in integrations that don't use a coordinator. Failing to do so means the user will never be prompted to reauthenticate.
-- Raise `ConfigEntryNotReady` for transient errors. Transient errors are temporary and should be retried. Raise `ConfgEntryAuthFailed` for non-recoverable errors.
 - Always implement reauthentication (`async_step_reauth`) in your config flow so Home Assistant can prompt the user to re-link their account.
 - Use `extra_authorize_data` to specify scopes and parameters required by the provider during authorization. This keeps your implementation clean and focused on the provider's requirements.
 
 ## Reference
 
 - [Blog post: Changes in OAuth 2.0 helper error handling](https://developers.home-assistant.io/blog/2026/02/19/oauth-token-request-error-handling)
+- [Blog post: OAuth2 error handling moved into the helper](https://developers.home-assistant.io/blog/2026/09/07/oauth2-central-error-handling)
