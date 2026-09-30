@@ -101,24 +101,24 @@ http:
 Once the frontend development environment is set up (see the [Development](#development) section), you can use the following command as a replacement for the standard dev server. It develops and runs the frontend on `http://localhost:8124` and connects to the Home Assistant running on `http://localhost:8123`. Note that if you are running this command from a devcontainer, the url should be accessible from the container host.
 
 ```shell
-yarn dev:serve
+pnpm dev:serve
 ```
 
 You can change the Home Assistant url the frontend connects to by passing the `-c` option. This will also work for existing production core instances. It does not need to be a development version hosted locally. However, if you change the value for this option you will need to logout from your development frontend before it actually switches to the new value. For example:
 
 ```shell
-yarn dev:serve -c http://homeassistant.local
+pnpm dev:serve -c http://homeassistant.local
 ```
 
 You can change the port the frontend is served on by passing the `-p` option. Note that if you are running from a devcontainer, you will need to setup
 port forwarding as well if you want to access it from the container host. For example:
 
 ```shell
-yarn dev:serve -p 8654
+pnpm dev:serve -p 8654
 ```
 
 :::note
-If you connect to a production instance of Home Assistant and change the port with `-p`, make sure `cors_allowed_origins` includes the frontend origin with the matching port. For the `yarn dev:serve -p 8654` example above, add `http://localhost:8654` instead of `http://localhost:8124`.
+If you connect to a production instance of Home Assistant and change the port with `-p`, make sure `cors_allowed_origins` includes the frontend origin with the matching port. For the `pnpm dev:serve -p 8654` example above, add `http://localhost:8654` instead of `http://localhost:8124`.
 :::
 
 :::note
@@ -137,7 +137,13 @@ Node.js is required to build the frontend. The preferred method of installing no
 nvm install
 ```
 
-[Yarn](https://yarnpkg.com/en/) is used as the package manager for node modules. [Install yarn using the instructions here.](https://yarnpkg.com/getting-started/install)
+[pnpm](https://pnpm.io/) is used as the package manager for node modules. The frontend repository pins the version it expects in its `packageManager` field, so enabling [Corepack](https://nodejs.org/api/corepack.html) is enough to get a matching pnpm:
+
+```shell
+corepack enable pnpm
+```
+
+If `corepack` is not available in your Node.js installation, install it with `npm install -g corepack`, or [install pnpm directly](https://pnpm.io/installation).
 
 ### Install development dependencies
 
@@ -160,13 +166,13 @@ Run this command to build the frontend and run a development server:
 
 ```shell
 nvm use
-yarn dev --fetch-translations
+pnpm dev --fetch-translations
 ```
 
 When the build has completed, and Home Assistant Core has been set up correctly, the frontend will be accessible at `http://localhost:8123`. The server will automatically rebuild the frontend when you make changes to the source files.
 
 :::note
-`yarn dev` is a wrapper around the `script/develop` script. Both still work, but `yarn dev` adds the background lifecycle flags described below.
+`pnpm dev` is a wrapper around the `script/develop` script. Both still work, but `pnpm dev` adds the background lifecycle flags described below.
 :::
 
 ### Run development frontend over existing HA instance
@@ -175,7 +181,7 @@ Run this command to start the development server:
 
 ```shell
 nvm use
-yarn dev:serve --fetch-translations -c http://homeassistant.local
+pnpm dev:serve --fetch-translations -c http://homeassistant.local
 ```
 
 You may need to replace `http://homeassistant.local` with your local Home Assistant url. `http://homeassistant.local` assumes a Home Assistant OS installation using the default port 80; older installations and other installation types typically use port 8123 (e.g. `http://homeassistant.local:8123`).
@@ -198,25 +204,25 @@ If a previous authorization no longer works (for example, you see a "Bad Credent
 For example:
 
 ```shell
-yarn dev:serve --background    # start it and detach
-yarn dev:serve --logs --follow # watch the output
-yarn dev:serve --stop          # stop it again
+pnpm dev:serve --background    # start it and detach
+pnpm dev:serve --logs --follow # watch the output
+pnpm dev:serve --stop          # stop it again
 ```
 
 Each dev server listens on its own port:
 
 | Command                 | Port | Purpose                                                                  |
 | ----------------------- | ---- | ------------------------------------------------------------------------ |
-| `yarn dev`              | 8123 | The app, served by a running Home Assistant Core (`development_repo`).   |
-| `yarn dev:serve`        | 8124 | The app, served locally over an existing Home Assistant instance.        |
-| `yarn dev:demo`         | 8090 | The [demo](https://demo.home-assistant.io/).                             |
-| `yarn dev:gallery`      | 8100 | The [design gallery](/docs/frontend/design).                             |
-| `yarn test:e2e:app:dev` | 8095 | The stripped-down app used by the [end-to-end tests](#end-to-end-tests). |
+| `pnpm dev`              | 8123 | The app, served by a running Home Assistant Core (`development_repo`).   |
+| `pnpm dev:serve`        | 8124 | The app, served locally over an existing Home Assistant instance.        |
+| `pnpm dev:demo`         | 8090 | The [demo](https://demo.home-assistant.io/).                             |
+| `pnpm dev:gallery`      | 8100 | The [design gallery](/docs/frontend/design).                             |
+| `pnpm test:e2e:app:dev` | 8095 | The stripped-down app used by the [end-to-end tests](#end-to-end-tests). |
 
-These managed Yarn development workflows, together with `yarn build` and `yarn build --modern`, share one workflow lock. Starting the same development workflow again reports the running server and succeeds. Starting another managed workflow while one is active is blocked and reports the active workflow with the relevant status, logs, or stop command.
+These managed pnpm development workflows, together with `pnpm build` and `pnpm build --modern`, share one workflow lock. Starting the same development workflow again reports the running server and succeeds. Starting another managed workflow while one is active is blocked and reports the active workflow with the relevant status, logs, or stop command.
 
 :::note
-When a coding agent is detected, `yarn dev:*` runs in the background automatically so it does not block the agent's session. Set `HA_DEV_BACKGROUND=0` to force the dev server to run in the foreground.
+When a coding agent is detected, `pnpm dev:*` runs in the background automatically so it does not block the agent's session. Set `HA_DEV_BACKGROUND=0` to force the dev server to run in the foreground.
 
 A cold build waits up to 180 seconds to become ready; override this with `HA_DEV_SERVER_TIMEOUT` (in seconds).
 
@@ -250,13 +256,13 @@ Before opening a pull request, run the linters and tests. These commands are all
 ### Linting and formatting
 
 ```shell
-yarn lint       # ESLint, Prettier, TypeScript, and Lit analyzer
-yarn format     # auto-fix ESLint and Prettier issues
-yarn lint:types # run only the TypeScript compiler
+pnpm lint       # ESLint, Prettier, TypeScript, and Lit analyzer
+pnpm format     # auto-fix ESLint and Prettier issues
+pnpm lint:types # run only the TypeScript compiler
 ```
 
 :::warning
-Always run `yarn lint:types` (and `tsc`) without file arguments. Passing a filename (for example `yarn lint:types src/file.ts`) makes `tsc` ignore `tsconfig.json` and emit a compiled `.js` file next to each `.ts` source in `src/`, polluting the source tree. If this happens, delete the stray files with `git clean -fd src/`.
+Always run `pnpm lint:types` (and `tsc`) without file arguments. Passing a filename (for example `pnpm lint:types src/file.ts`) makes `tsc` ignore `tsconfig.json` and emit a compiled `.js` file next to each `.ts` source in `src/`, polluting the source tree. If this happens, delete the stray files with `git clean -fd src/`.
 :::
 
 ### Unit tests
@@ -264,8 +270,8 @@ Always run `yarn lint:types` (and `tsc`) without file arguments. Passing a filen
 Unit tests run with [Vitest](https://vitest.dev/):
 
 ```shell
-yarn test            # run the unit tests
-yarn test:coverage   # run them with a coverage report
+pnpm test            # run the unit tests
+pnpm test:coverage   # run them with a coverage report
 ```
 
 ### End-to-end tests
@@ -278,34 +284,34 @@ End-to-end tests run with [Playwright](https://playwright.dev/), split into thre
 
 | Suite   | Dev server              | Test command            | Runs on Port |
 | ------- | ----------------------- | ----------------------- | ------------ |
-| App     | `yarn test:e2e:app:dev` | `yarn test:e2e:app`     | 8095         |
-| Demo    | `yarn dev:demo`         | `yarn test:e2e:demo`    | 8090         |
-| Gallery | `yarn dev:gallery`      | `yarn test:e2e:gallery` | 8100         |
+| App     | `pnpm test:e2e:app:dev` | `pnpm test:e2e:app`     | 8095         |
+| Demo    | `pnpm dev:demo`         | `pnpm test:e2e:demo`    | 8090         |
+| Gallery | `pnpm dev:gallery`      | `pnpm test:e2e:gallery` | 8100         |
 
 Start the suite's dev server first (ideally with [background lifecycle flags](#managing-the-dev-server-in-the-background)), then run the suite. Playwright reuses a dev server already running on the port instead of doing a slow full build, and the watcher recompiles on save, so you can iterate without restarting anything:
 
 ```shell
 # App
-yarn test:e2e:app:dev --background   # start the dev server and detach
-yarn test:e2e:app                    # run the suite
+pnpm test:e2e:app:dev --background   # start the dev server and detach
+pnpm test:e2e:app                    # run the suite
 
 # Demo
-yarn dev:demo --background
-yarn test:e2e:demo
+pnpm dev:demo --background
+pnpm test:e2e:demo
 
 # Gallery
-yarn dev:gallery --background
-yarn test:e2e:gallery
+pnpm dev:gallery --background
+pnpm test:e2e:gallery
 ```
 
 Narrow a run to matching tests with `-g`, and to a single project with `--project`:
 
 ```shell
-yarn test:e2e:app -g "more-info" --project=chromium       # Desktop Chromium (matching "more-info")
-yarn test:e2e:app -g "more-info" --project=mobile-chrome  # Pixel 7 (matching "more-info")
+pnpm test:e2e:app -g "more-info" --project=chromium       # Desktop Chromium (matching "more-info")
+pnpm test:e2e:app -g "more-info" --project=mobile-chrome  # Pixel 7 (matching "more-info")
 ```
 
-`yarn test:e2e` runs all three suites, and `yarn test:e2e:show-report` opens the combined HTML report.
+`pnpm test:e2e` runs all three suites, and `pnpm test:e2e:show-report` opens the combined HTML report.
 
 ## Creating pull requests
 
@@ -328,20 +334,20 @@ git push -u fork HEAD
 If you're making changes to the way the frontend is packaged, it might be necessary to try out a new packaged build of the frontend in the main repository (instead of pointing it at the frontend repo). Run a full production build from the frontend repository with:
 
 ```shell
-yarn build
+pnpm build
 ```
 
 Production builds can also run as managed background processes:
 
 ```shell
-yarn build --background    # start a full build and detach
-yarn build --status        # report whether a build is running
-yarn build --logs          # print the background build log
-yarn build --logs --follow # follow the background build log
-yarn build --stop          # stop a running background build
+pnpm build --background    # start a full build and detach
+pnpm build --status        # report whether a build is running
+pnpm build --logs          # print the background build log
+pnpm build --logs --follow # follow the background build log
+pnpm build --stop          # stop a running background build
 ```
 
-Use `yarn build --modern` when packaging, bundle-size, or browser performance work only needs the modern `frontend_latest` bundle. Add `--background` to run the modern-only build as a managed background process.
+Use `pnpm build --modern` when packaging, bundle-size, or browser performance work only needs the modern `frontend_latest` bundle. Add `--background` to run the modern-only build as a managed background process.
 
 :::caution
 A managed production build cannot run at the same time as a managed development server. Before starting a different managed workflow, stop the active workflow with its corresponding `--stop` command.
