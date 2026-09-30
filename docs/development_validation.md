@@ -8,7 +8,16 @@ We test the configuration to ensure that users have a great experience and minim
 
 Besides [probatio](https://pypi.org/project/probatio/) default types, many custom types are available. For an overview, take a look at the [config_validation.py](https://github.com/home-assistant/core/blob/dev/homeassistant/helpers/config_validation.py) helper.
 
-Some of those helpers are now thin aliases for a probatio validator, and core calls the validator directly. `cv.port` is `probatio.Port()` and `cv.ensure_list` is `probatio.EnsureList()`. The `cv` names keep working for custom integrations, but a lint rule stops core from using them, so write the probatio form in an integration meant for core.
+Some of those helpers are now thin aliases for a probatio validator, and core calls the validator directly:
+
+| `config_validation` helper | probatio validator |
+| -------------------------- | ------------------ |
+| `cv.ensure_list`           | `probatio.EnsureList()` |
+| `cv.port`                  | `probatio.Port()` |
+| `cv.has_at_least_one_key`  | `probatio.AtLeastOne` |
+| `cv.has_at_most_one_key`   | `probatio.AtMostOne` |
+
+The `cv` names keep working for custom integrations, but a lint rule stops core from using them, so write the probatio form in an integration meant for core.
 
 - Types: `string`, `byte`, and `boolean`
 - Entity ID: `entity_id` and `entity_ids`
