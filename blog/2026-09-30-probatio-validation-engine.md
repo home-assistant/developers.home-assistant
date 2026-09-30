@@ -36,7 +36,7 @@ The compatibility layer only exposes voluptuous's surface, so reaching any of th
 
 **Typing that survives the call.** Validators that hand their input back keep the caller's type, so `probatio.EnsureList()(names)` on a `list[str]` gives you a `list[str]` rather than a `list[Any]`.
 
-**Dataclass and TypedDict schemas.** Build a schema from annotations and get a typed instance back instead of a dict:
+**Dataclass and TypedDict schemas.** Build schemas from annotations. `DataclassSchema` returns a typed dataclass instance, while `TypedDictSchema` returns a validated dict typed as the `TypedDict`:
 
 ```python
 from dataclasses import dataclass
@@ -59,7 +59,6 @@ schema({"host": "nas", "port": 8080})  # Server(host="nas", port=8080)
 ```python
 probatio.Schema(
     {
-        probatio.Required(CONF_HOST): str,
         probatio.Required(probatio.Secret(CONF_PASSWORD)): str,
     }
 )
