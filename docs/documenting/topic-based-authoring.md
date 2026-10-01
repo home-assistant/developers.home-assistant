@@ -165,7 +165,8 @@ For example:
 - **Alias**: An alternative name that a voice assistant can use to refer to the area.
 ```
 
-Choose the site's supported reference blocks, lists, or tables according to the information.
+Use the site's supported reference blocks or lists according to the information.
+If a table is necessary, follow the style guide's [table guidelines](/docs/documenting/general-style-guide#tables).
 Keep the result easy to scan.
 A short example can clarify a value or show valid syntax without becoming a tutorial.
 
