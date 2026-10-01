@@ -125,7 +125,8 @@ Expected response:
   appVersion?: string;
   hasEntityAddTo?: boolean;
   hasAssistSettings?: boolean;
-  matterShareTarget?: "apple_home" | "app_chooser";
+  canShareMatterDeviceToAppleHome?: boolean;
+  canShareMatterDeviceToOtherApps?: boolean;
 }
 ```
 
@@ -142,7 +143,8 @@ Expected response:
 - `appVersion`: The version string of the native app
 - `hasEntityAddTo`: Set to true if the app supports adding entities to platform-specific locations (for example, homescreen widget)
 - `hasAssistSettings`: Set to true if the app has an Assist settings screen
-- `matterShareTarget`: Set if the app can share a Matter device through `matter/share_device`: `apple_home` adds it to Apple Home, `app_chooser` lets the user pick an app from the platform's Matter share sheet
+- `canShareMatterDeviceToAppleHome`: Set to true if the app can add a Matter device to Apple Home through `matter/share_device`
+- `canShareMatterDeviceToOtherApps`: Set to true if the app can share a Matter device through `matter/share_device` with an app the user picks from the platform's Matter share sheet
 
 ##### `entity/add_to/get_actions`
 
@@ -178,7 +180,7 @@ Expected response:
 
 ##### `matter/share_device`
 
-Share a Matter device that is already commissioned to Home Assistant with another platform, using a commissioning window Home Assistant opened for it. Only sent when the app set `matterShareTarget`.
+Share a Matter device that is already commissioned to Home Assistant with another platform, using a commissioning window Home Assistant opened for it. Only sent when the app set `canShareMatterDeviceToAppleHome`, or set `canShareMatterDeviceToOtherApps` and the Matter server reported the window's `discriminator` and timeout. Apple Home can use the setup code, while the share sheet opens a window of its own from these values.
 
 Payload:
 
@@ -197,12 +199,12 @@ Payload:
 - `setup_qr_code`: The QR code payload of the commissioning window (`MT:...`)
 - `setup_pin_code`: The setup passcode of the commissioning window
 - `discriminator`: The long (12-bit) discriminator the device advertises while the window is open, if the Matter server reports it
-- `vendor_id`: The vendor ID of the device, if known
-- `product_id`: The product ID of the device, if known
+- `vendor_id`: The vendor ID of the device. The Matter server reports it together with `product_id`, or neither
+- `product_id`: The product ID of the device
 - `device_name`: The device's name in Home Assistant, suggested to the other platform
-- `remaining_seconds`: Seconds until the commissioning window closes, if known
+- `remaining_seconds`: Seconds until the commissioning window closes, at least 1. Sent whenever the Matter server reported the window's timeout, so always on the share sheet's path
 
-Expected response: a `SuccessResult` with an empty object once the device was shared, or an `ErrorResult` whose `code` is `cancelled` if the user dismissed the platform's sheet, or `failed` otherwise, with a human readable `message`.
+Expected response: a `SuccessResult` with an empty object once the platform's flow completed, or an `ErrorResult` whose `code` is `canceled` if the user dismissed the platform's sheet, or `failed` otherwise. The frontend treats any code other than `canceled` as a failure. `message` is for the app's log and is not shown to the user.
 
 #### Messages not expecting a response
 
