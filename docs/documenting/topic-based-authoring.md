@@ -11,6 +11,15 @@ You do not need a separate page for every topic.
 For integration, trigger, condition, and action pages, follow the [Integration page structure](/docs/documenting/integration-docs-examples/) guidance and templates.
 Their page structures are documented there rather than repeated here.
 
+## Put the UI first
+
+For every feature configurable from the UI, present the UI as the standard way to configure it.
+This applies across topic types, including tutorials, reference topics, and troubleshooting.
+Present UI instructions and options before YAML or command-line alternatives.
+
+Document YAML or command-line alternatives where they are supported and relevant, under separate headings or tabs, and explain when to use them.
+Do not imply that file editing is part of normal setup when the UI can complete the task.
+
 ## One purpose per section
 
 Keep each section focused on one topic type.
@@ -130,10 +139,6 @@ For example:
 3. Select **Create**.
    - Result: A new area is created.
 ```
-
-Present the UI path first when it is available.
-Put YAML or command-line alternatives under separate headings or tabs, and explain when they are needed.
-Do not imply that file editing is part of normal setup when the UI can complete the task.
 
 Keep steps focused on the goal.
 Avoid lengthy explanations, exhaustive field descriptions, or several unrelated procedures under one task heading.
