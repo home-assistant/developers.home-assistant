@@ -27,6 +27,7 @@ In addition, the documentation has the following guidelines to take into account
 
    - [Documentation standards](/docs/documenting/standards)
    - [Documentation style guide](/docs/documenting/general-style-guide/)
+   - [Topic-based authoring](/docs/documenting/topic-based-authoring)
    - [Microsoft Writing Style Guide](https://learn.microsoft.com/en-us/style-guide/welcome/)
    - [Merriam-Webster Dictionary](https://www.merriam-webster.com/)
    - [YAML Style Guide](/docs/documenting/yaml-style-guide)
