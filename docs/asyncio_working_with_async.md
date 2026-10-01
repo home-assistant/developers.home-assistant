@@ -30,23 +30,16 @@ async def async_setup(hass, config):
 
 ## Implementing an async platform
 
-For platforms we support async setup. Instead of setup_platform you need to have a coroutine async_setup_platform.
+Platforms are set up from a config entry through the `async_setup_entry` coroutine, so their setup runs inside the event loop:
 
 ```python
-def setup_platform(hass, config, add_entities, discovery_info=None):
-    """Set up platform."""
-    # Code for setting up your platform outside of the event loop.
-```
-
-Will turn into:
-
-```python
-async def async_setup_platform(hass, config, async_add_entities, discovery_info=None):
-    """Set up platform."""
+async def async_setup_entry(hass, entry, async_add_entities):
+    """Set up the platform from a config entry."""
     # Code for setting up your platform inside of the event loop.
+    async_add_entities([MyEntity()])
 ```
 
-The only difference with the original parameters is that the `add_entities` function has been replaced by the async friendly callback `async_add_entities`.
+Entities are added through the async friendly `async_add_entities` callback.
 
 ## Implementing an async entity
 
