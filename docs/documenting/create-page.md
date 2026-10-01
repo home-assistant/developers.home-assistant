@@ -61,7 +61,21 @@ The following keys are available for the integration page file header:
 - `featured`: Set to `true` to feature the integration prominently on the integrations page. This is not an `ha_`-prefixed key. Don't use this.
 - `ha_bluetooth`: Set to `true` if the integration supports discovery via Bluetooth, omit otherwise.
 - `ha_brand`: Set to `true` if the page represents a [brand](/docs/creating_integration_brand) rather than a real integration, omit otherwise. A brand groups several integrations or products from the same manufacturer under a single name, so users can find them more easily. It is not the same as a [virtual integration](/docs/creating_integration_manifest#virtual-integration). For example, the `google` brand page groups the `google` and `google_sheets` integrations, and the `inovelli` brand page points to the Zigbee and Z-Wave IoT standards its devices use. Omit this key for regular integration pages.
-- `ha_category`: This entry is used to group the integration on the [Integration overview](https://www.home-assistant.io/integrations/).
+- `ha_category`: This entry is used to group the integration on the [Integration overview](https://www.home-assistant.io/integrations/), where you can see the full list of available categories. Most categories match the name of an entity platform the integration provides, such as `Light`, `Switch`, `Sensor`, `Binary sensor`, `Climate` or `Media player`. Other categories describe the integration's purpose or domain, such as `Hub`, `Energy`, `DIY` or `Weather`.
+
+  **Protocol categories**: Some communication protocols have a pair of categories. The plain protocol name (for example `Serial`) is for integrations that *provide* the connection. The `-controlled` variant (for example `Serial-controlled`) is for integrations that *control a device* over that connection. Pick by the role the integration plays, not by whether the hardware supports the protocol. The following protocol categories are available:
+  - `Infrared`: The integration provides an infrared transmitter or receiver that other integrations can use. Examples: ESPHome, Broadlink, MQTT Infrared.
+  - `Infrared-controlled`: The integration controls a specific device using infrared commands, sent through an `Infrared` provider. Example: LG Infrared.
+  - `Radio frequency`: The integration provides a radio frequency (for example sub-GHz) transmitter or receiver that other integrations can use. Examples: ESPHome, Broadlink.
+  - `Radio frequency-controlled`: The integration controls a specific device using radio frequency commands, sent through a `Radio frequency` provider. Example: KlikAanKlikUit.
+  - `Modbus`: The integration provides a Modbus connection (RTU or TCP) that other integrations can use. Examples: Modbus, ESPHome.
+  - `Modbus-controlled`: The integration controls or reads a specific device over that device's Modbus interface, either directly or through a gateway. Example: Nibe Heat Pump.
+  - `Serial`: The integration provides a serial port (UART, RS-232, RS-485) that other integrations can use, for example by sharing it over the network. Example: ESPHome.
+  - `Serial-controlled`: The integration controls or reads a specific device over that device's serial interface, either directly or through a serial proxy or serial-to-IP adapter. Example: Denon RS-232.
+
+  Don't use these categories when the protocol is only how Home Assistant reaches a gateway for a different technology. For example, a Zigbee coordinator connected over USB serial doesn't get `Serial`.
+
+  A virtual integration should not have a provider category (`Infrared`, `Radio frequency`, `Modbus` or `Serial`) unless the brand itself sells devices that provide that capability. Don't copy these categories from the supporting integration.
 - `ha_codeowners`: GitHub usernames or team names (starting with `@`) of people that are responsible for this integration. This should match with the codeowners as listed in the integration manifest file.
 - `ha_config_flow`: Set to `true` if the integration has a [Data Entry Flow](/docs/data_entry_flow_index), omit otherwise.
 - `ha_dhcp`: Set to `true` if the integration supports discovery via DHCP, omit otherwise.
