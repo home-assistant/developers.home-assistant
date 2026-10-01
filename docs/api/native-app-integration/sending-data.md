@@ -150,6 +150,9 @@ This message will inform Home Assistant of new location information.
 | `altitude` | int | Altitude of the device in meters. Must be greater than 0.
 | `course` | int | The direction in which the device is traveling, measured in degrees and relative to due north. Must be greater than 0.
 | `vertical_accuracy` | int | The accuracy of the altitude value, measured in meters. Must be greater than 0.
+| `location_time` | string | When the device obtained the location, as an ISO 8601 datetime. Requires Home Assistant 2026.11 or later.
+
+The `location_time` can be earlier than the moment Home Assistant receives the update, for example when the operating system delivers a deferred or cached location. Home Assistant stores it as the `location_time` attribute of the device tracker. Only send it to Home Assistant 2026.11 or later, because older versions reject the whole update when it contains a key they don't know.
 
 ## Call a service action
 
