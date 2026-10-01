@@ -181,7 +181,6 @@ module.exports = {
       label: "Development Checklist",
       items: [
         "development_checklist",
-        "creating_component_code_review",
       ],
     },
     {
