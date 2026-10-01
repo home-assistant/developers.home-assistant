@@ -175,16 +175,22 @@ The `llm.Tool` class represents a tool that can be called by the LLM.
 ```python
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import llm
-from homeassistant.helpers.llm import LLMContext, ToolInput
+from homeassistant.helpers.llm import LLMContext, ToolAnnotations, ToolInput, ToolResult
 from homeassistant.util import dt as dt_util
-from homeassistant.util.json import JsonObjectType
+
+from .const import DOMAIN
 
 
 class TimeTool(llm.Tool):
     """Tool to get the current time."""
 
     name = "GetTime"
+    title = "Get the time"
     description = "Returns the current time."
+    integration = DOMAIN
+    annotations = ToolAnnotations(
+        read_only=True, destructive=False, idempotent=True, open_world=False
+    )
 
     # Optional. A probatio schema of the input parameters.
     parameters = probatio.Schema({
@@ -193,14 +199,14 @@ class TimeTool(llm.Tool):
 
     async def async_call(
         self, hass: HomeAssistant, tool_input: ToolInput, llm_context: LLMContext
-    ) -> JsonObjectType:
+    ) -> ToolResult:
         """Call the tool."""
         if "timezone" in tool_input.tool_args:
             tzinfo = dt_util.get_time_zone(tool_input.tool_args["timezone"])
         else:
             tzinfo = dt_util.DEFAULT_TIME_ZONE
 
-        return {"time": dt_util.now(tzinfo).isoformat()}
+        return ToolResult(data={"time": dt_util.now(tzinfo).isoformat()})
 ```
 
 The `llm.Tool` class has the following attributes:
@@ -208,8 +214,13 @@ The `llm.Tool` class has the following attributes:
 | Name                | Type       | Description                                                                                                    |
 |---------------------|------------|----------------------------------------------------------------------------------------------------------------|
 | `name`              | string     | The name of the tool. Required.                                                                                |
+| `title`             | string     | A name for the tool to show to people. Optional.                                                               |
 | `description`       | string     | Description of the tool to help the LLM understand when and how it should be called. Optional but recommended. |
 | `parameters`        | probatio.Schema | The probatio schema of the parameters. Defaults to probatio.Schema({})                                            |
+| `annotations`       | ToolAnnotations | Properties describing how the tool behaves. Defaults to `ToolAnnotations()`                                  |
+| `integration`       | string     | The domain of the integration that provides the tool. Required.                                                |
+
+A tool that does not set `integration` is reported. A tool from a core integration raises an error. A tool from a custom integration gets a warning in the log, and stops working in Home Assistant Core 2027.10.
 
 The `llm.Tool` class has the following methods:
 
@@ -217,9 +228,15 @@ The `llm.Tool` class has the following methods:
 
 Perform the actual operation of the tool when called by the LLM. This must be an async method. Its arguments are `hass`, an instance of `llm.ToolInput`, and the `llm.LLMContext` of the request.
 
-Response data must be a dict and serializable in JSON [`homeassistant.util.json.JsonObjectType`](https://github.com/home-assistant/core/blob/dev/homeassistant/util/json.py).
+The method returns an `llm.ToolResult`. Its `data` holds the response of the tool, which must be a dict and serializable in JSON [`homeassistant.util.json.JsonObjectType`](https://github.com/home-assistant/core/blob/dev/homeassistant/util/json.py). Its `error` says whether the call failed.
 
-Errors must be raised as `HomeAssistantError` exceptions (or its subclasses). The response data should not contain error codes used for error handling.
+Returning a plain dict instead of a `ToolResult` is deprecated. It keeps working for custom integrations with a warning in the log, and stops working in Home Assistant Core 2027.11.
+
+Raise a `HomeAssistantError` (or a subclass) when the tool cannot do its work. Home Assistant catches it and returns a `ToolResult` that names the exception and has `error` set. Return a `ToolResult` with `error` set yourself when you want to word the failure for the LLM:
+
+```python
+return ToolResult(data={"error": "Calendar not found"}, error=True)
+```
 
 The `ToolInput` has following attributes:
 
@@ -242,6 +259,19 @@ The `LLMContext` has following attributes:
 | `assistant`       | string  | The assistant name used to control exposed entities. Currently, only `conversation` is supported.        |
 | `device_id`       | string  | The device_id of the device the user used to initiate the conversation.                                 |
 
+#### `ToolAnnotations`
+
+The annotations tell the LLM how a tool behaves, so it can decide when to call it. They match the tool annotations of the Model Context Protocol, and the MCP Server integration passes them on to MCP clients.
+
+| Name          | Type | Description                                                                                 |
+|---------------|------|-----------------------------------------------------------------------------------------------|
+| `read_only`   | bool | The tool only reads. It changes nothing. Defaults to `False`.                                  |
+| `destructive` | bool | The tool can change or remove something that already exists. Defaults to `True`.               |
+| `idempotent`  | bool | Calling the tool again with the same arguments has no further effect. Defaults to `False`.     |
+| `open_world`  | bool | The tool reaches outside Home Assistant. Defaults to `True`.                                   |
+
+The defaults describe the least safe case. A tool that declares nothing is taken to write, to be destructive, and to reach outside Home Assistant. All fields are keyword-only, and `ToolAnnotations` is immutable.
+
 ### API
 
 The API object allows creating API instances. An API Instance represents a collection of tools that will be made available to the LLM.
@@ -251,8 +281,6 @@ from homeassistant.config_entries import ConfigEntry
 from homeassistant.core import HomeAssistant
 from homeassistant.helpers import llm
 from homeassistant.helpers.llm import APIInstance, LLMContext
-from homeassistant.util import dt as dt_util
-from homeassistant.util.json import JsonObjectType
 
 
 class MyAPI(llm.API):
