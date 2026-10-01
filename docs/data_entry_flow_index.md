@@ -348,7 +348,7 @@ This will show the entity selected in the initial configuration as a read-only p
 
 Some selectors can narrow their options based on the value of another field in the same form. Such a selector takes a `context` key in its config, which maps each context key to the name of the field that provides its value. The frontend then updates the options as soon as the user changes that field. The context is validated with the rest of the selector config, so an unsupported context key raises an error.
 
-For example, the unit of measurement selector supports the `filter_device_class` and `filter_state_class` context keys. These take the name of a field that uses a `device_class` or `state_class` selector. A context key can't be combined with the matching `device_classes` or `state_classes` config option.
+For example, the unit of measurement selector supports the `filter_device_class` and `filter_state_class` context keys. These take the name of a field that uses a `device_class` or `state_class` selector. You can't combine `filter_device_class` with `device_classes`, or `filter_state_class` with `state_classes`, because the selector config rejects those combinations.
 
 ```python
 from homeassistant.const import (
