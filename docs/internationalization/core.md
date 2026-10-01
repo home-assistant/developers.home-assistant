@@ -359,13 +359,19 @@ The translation strings for repairs issues are defined under the `issues` key. A
       }
     },
     "unfixable_problem": {
-      "title": "This is not a fixable problem",
+      "title": "The tea {name} is not a fixable problem",
+      // Shorter title, used when the issue is shown together with its description
+      "short_title": "Not a fixable problem",
       // Description of the issue, exactly one of `fix_flow` or `description`. must be present.
-      "description": "This issue can't be fixed by a flow."
+      "description": "The tea {name} can't be fixed by a flow."
     }
   }
 }
 ```
+
+The `title` is used where the issue is shown without its description, for example in a list of issues. It should identify the problem on its own, for example by including the name of the affected item.
+
+The `short_title` is used where the issue is shown together with its `description`. It only needs to say what kind of problem it is, so the `description` must contain all the details, including the affected item. New issues should provide a `short_title`. If `short_title` is absent, the dialog uses a generic heading and shows `title` above the description.
 
 ### Devices
 
