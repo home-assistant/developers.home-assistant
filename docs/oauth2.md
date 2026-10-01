@@ -123,7 +123,7 @@ See [Error handling](#error-handling) below for how to handle errors during toke
 
 ## Error handling
 
-When a token request fails, the OAuth 2.0 helper raises one of the following exceptions from `homeassistant.exceptions`. Each one is also the config entry exception that describes what should happen, and carries a translated message, so integrations don't need to map them or add them to `strings.json`.
+When a token request fails, the OAuth 2.0 helper raises one of the following exceptions from `homeassistant.exceptions`. Each one is also a config entry exception that describes what should happen, and carries a translated message, so integrations don't need to map them or add them to `strings.json`.
 
 | Exception                           | Cause                                                             | Also a                  |
 | ----------------------------------- | ----------------------------------------------------------------- | ----------------------- |
