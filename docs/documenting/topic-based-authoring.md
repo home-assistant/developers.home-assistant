@@ -45,7 +45,7 @@ Keep that context close to the instruction.
 Move extended background and complete option lists into their own sections.
 
 A parent heading can group several topics under subheadings.
-For example, a troubleshooting section can contain a separate subsection for each symptom.
+A troubleshooting section can group separate details blocks for individual symptoms.
 Keep the text under each heading focused on its stated purpose.
 
 ## Choosing a topic type
@@ -225,10 +225,11 @@ It can be a section on a feature page or a dedicated page covering related probl
 
 ### Headings for troubleshooting topics
 
-Use the symptom or exact error message as the heading, such as `Can't access Home Assistant in my browser` or `Stuck at "Preparing Home Assistant"`.
+Use a separate collapsible details block for each problem.
+Use the symptom or exact error message as the block title, such as `Can't access Home Assistant in my browser` or `Stuck at "Preparing Home Assistant"`.
 For a page containing several problems, use `Troubleshooting` followed by the subject, such as `Troubleshooting Assist`.
 
-Avoid headings that require the reader to know the cause before they can find the solution.
+Avoid titles that require the reader to know the cause before they can find the solution.
 
 ### Content for troubleshooting topics
 
@@ -241,4 +242,4 @@ If the checks do not resolve it, link to the appropriate support channel and sta
 
 Avoid presenting a possible cause as certain.
 Links to community support alone are not troubleshooting instructions.
-Keep normal setup instructions in task topics and link to them when a missed prerequisite may explain the problem.
+Keep normal setup instructions in task topics and link to them when a missed prerequisite might explain the problem.
