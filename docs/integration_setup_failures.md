@@ -34,13 +34,13 @@ The integration should not log any non-debug messages about the retry, and shoul
 
 #### Delaying the retry
 
-If the device or service reports when it will be available again, for example with a rate limit reset time or a `Retry-After` header, pass the number of seconds until then as `retry_after`. Home Assistant then waits that long before the next attempt, but never less than its regular backoff and never more than one day.
+If the device or service reports when it will be available again, for example with a rate limit reset time or a `Retry-After` header, pass the number of seconds until then as `retry_after`. Home Assistant uses that delay for the next attempt when it is longer than the regular backoff, up to one day.
 
 ```python
-    except RateLimitError as ex:
-        raise ConfigEntryNotReady(
-            "Rate limit reached", retry_after=ex.retry_after
-        ) from ex
+try:
+    await device.async_setup()
+except RateLimitError as ex:
+    raise ConfigEntryNotReady("Rate limit reached", retry_after=ex.retry_after) from ex
 ```
 
 ### Integrations using `async_setup_platform`
