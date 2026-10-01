@@ -32,6 +32,17 @@ Pass the error message to `ConfigEntryNotReady` as the first argument. Home Assi
 
 The integration should not log any non-debug messages about the retry, and should instead rely on the logic built-in to `ConfigEntryNotReady` to avoid spamming the logs.
 
+#### Delaying the retry
+
+If the device or service reports when it will be available again, for example with a rate limit reset time or a `Retry-After` header, pass the number of seconds until then as `retry_after`. Home Assistant uses that delay for the next attempt when it is longer than the regular backoff, up to one day.
+
+```python
+try:
+    await device.async_setup()
+except RateLimitError as ex:
+    raise ConfigEntryNotReady("Rate limit reached", retry_after=ex.retry_after) from ex
+```
+
 ### Integrations using `async_setup_platform`
 
 Raise the `PlatformNotReady` exception from `async_setup_platform`, and Home Assistant will automatically take care of retrying set up later.
