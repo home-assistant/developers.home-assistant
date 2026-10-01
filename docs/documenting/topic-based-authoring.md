@@ -125,7 +125,7 @@ For example:
 ```markdown
 ## Creating an area
 
-1. Go to **Settings** > **Areas, labels & zones** and select **Create area**.
+1. Go to {% my areas title="**Settings** > **Areas, labels & zones**" %} and select **Create area**.
 2. Enter a **Name** for the area.
 3. Select **Create**.
    - Result: A new area is created.
