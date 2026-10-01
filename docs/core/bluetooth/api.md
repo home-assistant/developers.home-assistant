@@ -211,7 +211,11 @@ from homeassistant.components import bluetooth
 def _advertisement_callback(info: bluetooth.BluetoothServiceInfoBleak) -> None:
     _LOGGER.debug("%s advertised from %s", info.address, info.source)
 
-cancel = bluetooth.async_register_advertisement_callback(hass, _advertisement_callback, "44:44:33:11:23:42")
+entry.async_on_unload(
+    bluetooth.async_register_advertisement_callback(
+        hass, _advertisement_callback, "44:44:33:11:23:42"
+    )
+)
 ```
 
 ### Finding out the availability timeout
