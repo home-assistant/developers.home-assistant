@@ -28,6 +28,7 @@ Properties should always only return information from memory and not do I/O (lik
 | in_progress | bool | `False` | Update installation progress. Should return a boolean (True if in progress, False if not).
 | installed_version | str | `None` | The currently installed and used version of the software.
 | latest_version | str | `None` | The latest version of the software available.
+| post_restart_required | bool | `False` | Home Assistant needs a restart after this update is installed. When set, a successful install asks for the restart for you. See [asking for a restart](/docs/core/platform/restart_required).
 | release_summary | str | `None` | Summary of the release notes or changelog. This is not suitable for long changelogs but merely suitable for a short excerpt update description of max 255 characters.
 | release_url | str | `None` | URL to the full release notes of the latest version available.
 | title | str | `None` | Title of the software. This helps to differentiate between the device or entity name versus the title of the software installed.
@@ -101,6 +102,11 @@ class MyUpdate(UpdateEntity):
         installing the update.
         """
 ```
+
+If the installed update only takes effect after Home Assistant restarts, set
+`post_restart_required` to `True`. Once the install finishes without raising, the
+update entity asks for the restart on behalf of your integration. A failed install
+does not.
 
 ### Release notes
 
