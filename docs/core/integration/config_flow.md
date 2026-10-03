@@ -193,6 +193,8 @@ The built-in OAuth2 support works out of the box with locally configured client 
 
 To get started, run `python3 -m script.scaffold config_flow_oauth2` and follow the instructions. This will create all the boilerplate necessary to configure your integration using OAuth2.
 
+See [OAuth 2.0 support](/docs/oauth2) for how to implement the config flow, handle reauthentication and errors, and make authenticated API requests.
+
 ## Translations
 
 [Translations for the config flow](/docs/internationalization/core#config--options--subentry-flows) handlers are defined under the `config` key in the integration translation file `strings.json`. Example of the Hue integration:
