@@ -309,6 +309,11 @@ module.exports = {
         "versioning",
       ],
     },
+    {
+      type: "category",
+      label: "Cookbook",
+      items: ["core/cookbook/state_management"]
+    }
   ],
   Voice: [
     "voice/overview",
