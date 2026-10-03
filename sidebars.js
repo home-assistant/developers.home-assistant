@@ -344,6 +344,7 @@ module.exports = {
         "documenting",
         "documenting/standards",
         "documenting/general-style-guide",
+        "documenting/topic-based-authoring",
         "documenting/testing",
         "documenting/yaml-style-guide",
         "documenting/create-page",
