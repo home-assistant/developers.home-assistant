@@ -82,9 +82,7 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
   /run/{s6,s6-rc*,service}/** ix,
   /package/** ix,
   /command/** ix,
-  /etc/services.d/** rwix,
-  /etc/cont-init.d/** rwix,
-  /etc/cont-finish.d/** rwix,
+  /etc/s6-overlay/** rwix,
   /run/{,**} rwk,
   /dev/tty rw,
 
@@ -92,7 +90,7 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
   /usr/lib/bashio/** ix,
   /tmp/** rwk,
 
-  # Access to options.json and other files within your addon
+  # Access to options.json and other files within your app
   /data/** rw,
 
   # Start new profile for service
