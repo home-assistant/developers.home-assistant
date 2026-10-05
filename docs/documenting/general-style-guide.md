@@ -30,6 +30,8 @@ The following are the most common formatting issues:
 
 ## Headings
 
+For guidance on choosing headings and keeping each section focused on one purpose, see [Topic-based authoring](/docs/documenting/topic-based-authoring).
+
 The first heading on a page is its title, defined in the front matter at the top of the page:
 
 ```markdown

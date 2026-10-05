@@ -8,6 +8,8 @@ To ensure that the documentation for Home Assistant is consistent and easy to fo
 
 Documentation should follow the [documentation style guide](/docs/documenting/general-style-guide) and [Microsoft Style Guide](https://learn.microsoft.com/style-guide/welcome/).
 
+For guidance on organizing content into concept, task, reference, tutorial, and troubleshooting topics, see [Topic-based authoring](/docs/documenting/topic-based-authoring).
+
 ## Integration and platform pages
 
 - All examples should be formatted to be included in `configuration.yaml` unless explicitly stated.
