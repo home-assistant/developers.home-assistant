@@ -285,6 +285,33 @@ The `content` key of a backup object contains the following keys:
 | id         | string         | Unique ID for the disk device (either UDisks2 drive ID or device path) |
 | dev_path   | string         | Device path for the disk device                                        |
 
+## Host disk
+
+All keys of a [Disk](#disk), plus:
+
+| key            | type   | description                                                 |
+| -------------- | ------ | ----------------------------------------------------------- |
+| connection_bus | string | Physical connection bus of the disk device, such as `usb`   |
+| removable      | bool   | Disk device is removable by the user                        |
+| ejectable      | bool   | Disk device can be ejected by the system                    |
+| partitions     | list   | A list of [Host disk partitions](#host-disk-partition)      |
+
+When UDisks2 cannot attribute a disk to a drive, `name` and `id` equal
+`dev_path`. `vendor`, `model`, `serial` and `connection_bus` are then empty,
+and `removable` and `ejectable` are `false`.
+
+## Host disk partition
+
+| key        | type   | description                                                               |
+| ---------- | ------ | ------------------------------------------------------------------------- |
+| device     | string | Path of the partition device, such as `/dev/sdc1`                         |
+| uuid       | string | Filesystem UUID of the partition                                          |
+| label      | string | Filesystem label, empty when the filesystem has none                      |
+| filesystem | string | Filesystem on the partition, such as `ext4`                               |
+| size       | int    | Size of the partition in bytes                                            |
+| read_only  | bool   | Partition can only be mounted read-only                                   |
+| mountable  | bool   | Partition can be added as a `disk` [Mount](#mount). Always `true` for now |
+
 ## Mount
 
 | key        | type           | description                                                            | request/response |
@@ -311,32 +338,6 @@ Response only fields will be in responses but cannot be included in requests.
 A disk mount is identified by `device`, `uuid`, or both. When both are given,
 resolution uses `uuid` and `device` must agree. `device` is input only:
 responses report `uuid` and `filesystem`.
-
-## Mount candidate
-
-| key        | type           | description                                                            |
-| ---------- | -------------- | ---------------------------------------------------------------------- |
-| type       | string         | Mount type this candidate can be added as. Always `disk`               |
-| device     | string         | Path of the device, such as `/dev/sdc1`                                |
-| uuid       | string         | Filesystem UUID of the device                                          |
-| label      | string         | Filesystem label, empty when the filesystem has none                   |
-| filesystem | string         | Filesystem on the device, such as `ext4`                               |
-| size       | int            | Size of the device in bytes                                            |
-| read_only  | bool           | Device can only be mounted read-only                                   |
-| drive      | dict or null   | The [Candidate drive](#candidate-drive) it belongs to, `null` when unknown |
-
-## Candidate drive
-
-| key            | type   | description                                                        |
-| -------------- | ------ | ------------------------------------------------------------------ |
-| vendor         | string | Vendor of the drive                                                |
-| model          | string | Model of the drive                                                 |
-| serial         | string | Serial number of the drive                                         |
-| id             | string | Unique ID for the drive                                            |
-| size           | int    | Size of the drive in bytes                                         |
-| connection_bus | string | Bus the drive is connected by, such as `usb`                       |
-| removable      | bool   | Drive is removable                                                 |
-| ejectable      | bool   | Drive can be ejected                                               |
 
 ## Job
 
