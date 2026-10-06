@@ -45,8 +45,16 @@ Integrations do not need to read the state; it is meant for the frontend and for
 
 ```json
 {
+  "home_assistant_restart_dismissed": false,
   "home_assistant_restart_required": true,
   "home_assistant_restart_sources": ["demo", "hacs"],
+  "host_reboot_dismissed": false,
   "host_reboot_required": false
 }
 ```
+
+## Putting it off
+
+An admin can put off what is pending with the `dismiss_system_state` WebSocket command. That only hides it from the interface: the restart or reboot stays required, and automations still see it. The `*_dismissed` fields tell subscribers it was put off.
+
+A put off restart comes back once another integration asks; asking again for the same integration does not bring it back. A put off reboot comes back once Supervisor raises a new one. Nothing is stored, so a restart of Home Assistant forgets it.
