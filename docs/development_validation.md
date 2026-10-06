@@ -2,9 +2,9 @@
 title: "Validate the input"
 ---
 
-The `configuration.yaml` file contains the configuration options for components and platforms. We use [probatio](https://pypi.org/project/probatio/) to make sure that the configuration provided by the user is valid. Some entries are optional or could be required to set up a platform or a component. Others must be a defined type or from an already-defined list.
+Validate the input your integration receives from users, whether it comes from a [config flow](core/integration/config_flow.md) or from YAML. We use [probatio](https://pypi.org/project/probatio/) to make sure the configuration provided by the user is valid. Some entries are optional, others are required. Others must be a defined type or come from an already-defined list.
 
-We test the configuration to ensure that users have a great experience and minimize notifications if something is wrong with a platform or component setup before Home Assistant runs.
+Validating input up front gives users a clear error when something is wrong, instead of a confusing failure later during setup.
 
 Besides [probatio](https://pypi.org/project/probatio/) default types, many custom types are available. For an overview, take a look at the [config_validation.py](https://github.com/home-assistant/core/blob/dev/homeassistant/helpers/config_validation.py) helper.
 
@@ -25,18 +25,19 @@ The `cv` names keep working for custom integrations, but a lint rule stops core 
 - Time: `time`, `time_zone`
 - Misc: `template`, `slug`, `temperature_unit`, `latitude`, `longitude`, `isfile`, `sun_event`, `url`, and `icon`
 
-To validate platforms using [MQTT](https://www.home-assistant.io/components/mqtt/), `valid_subscribe_topic` and `valid_publish_topic` are available.
+For integrations using [MQTT](https://www.home-assistant.io/components/mqtt/), `valid_subscribe_topic` and `valid_publish_topic` are available.
 
 Some things to keep in mind:
 
 - Use the constants defined in `const.py`
-- Import `PLATFORM_SCHEMA` from the integration you are integrating with and extend it.
+- In a config flow, pass a `probatio.Schema` as the `data_schema` for each step (see [config flow](core/integration/config_flow.md))
+- For YAML configuration, validate with a `CONFIG_SCHEMA` (see [YAML configuration](core/integration/yaml_configuration.md))
 - Preferred order is `required` first and `optional` second
 - Default values for optional configuration keys need to be valid values. Don't use a default which is `None` like `probatio.Optional(CONF_SOMETHING, default=None): cv.string`, set the default to `default=''` if required.
 
 ### Snippets
 
-This section contains snippets for the validation we use.
+These snippets show validation techniques you can use in any probatio schema, such as a config flow's `data_schema`.
 
 #### Default name
 
@@ -45,9 +46,8 @@ It's common to set a default for a sensor if the user doesn't provide a name to 
 ```python
 DEFAULT_NAME = "Sensor name"
 
-PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
+DATA_SCHEMA = probatio.Schema(
     {
-        # ...
         probatio.Optional(CONF_NAME, default=DEFAULT_NAME): cv.string,
     }
 )
@@ -60,9 +60,8 @@ You might want to limit the user's input to a couple of options.
 ```python
 DEFAULT_METHOD = "GET"
 
-PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
+DATA_SCHEMA = probatio.Schema(
     {
-        # ...
         probatio.Optional(CONF_METHOD, default=DEFAULT_METHOD): probatio.In(
             ["POST", "GET"]
         ),
@@ -77,9 +76,8 @@ All port numbers are from a range of 1 to 65535.
 ```python
 DEFAULT_PORT = 993
 
-PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
+DATA_SCHEMA = probatio.Schema(
     {
-        # ...
         probatio.Optional(CONF_PORT, default=DEFAULT_PORT): probatio.Port(),
     }
 )
@@ -90,9 +88,8 @@ PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
 When a key holds a credential, wrap it in `probatio.Secret`. A validation failure then reports the path and the reason without the value, so a password does not end up in the log.
 
 ```python
-PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
+DATA_SCHEMA = probatio.Schema(
     {
-        # ...
         probatio.Required(CONF_HOST): cv.string,
         probatio.Required(probatio.Secret(CONF_PASSWORD)): cv.string,
     }
@@ -117,9 +114,8 @@ SENSOR_TYPES = {
     "average_download_rate": ("Average Speed", "MB/s"),
 }
 
-PLATFORM_SCHEMA = PLATFORM_SCHEMA.extend(
+DATA_SCHEMA = probatio.Schema(
     {
-        # ...
         probatio.Optional(CONF_MONITORED_VARIABLES, default=[]): probatio.All(
             probatio.EnsureList(), [probatio.In(SENSOR_TYPES)]
         ),
