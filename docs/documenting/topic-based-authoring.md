@@ -127,11 +127,46 @@ For example, use `Backup locations` as the parent heading and `Defining the back
 
 Avoid vague headings such as `Usage`, `Configuration`, or `Working with areas` when the task has a more specific outcome.
 
+### Prerequisites
+
+Use a separate `## Prerequisites` section only when its requirements apply to the whole page.
+When requirements apply to an individual task, list them directly before that task's numbered steps under a `Prerequisites:` lead-in.
+Include required hardware, permissions, or prior setup.
+Omit prerequisites when there are none worth stating.
+
+When a page contains several task topics with different requirements, a `## Prerequisites` heading at the top does not clearly show which requirements apply to which task.
+
+For example:
+
+```markdown
+<!-- On page "Areas" -->
+
+## Creating an area
+
+Prerequisites:
+
+- You have permission to manage areas.
+- Your Home Assistant instance is set up.
+
+1. Go to {% my areas title="**Settings** > **Areas, labels & zones**" %} and select **Create area**.
+2. Enter a **Name** for the area.
+3. Select **Create**.
+
+## Assigning a device to an area
+
+Prerequisites:
+
+- You have already created the area.
+- The device is already added to Home Assistant.
+
+1. Go to {% my areas title="**Settings** > **Areas, labels & zones**" %} and select the area.
+2. Select **Add device**.
+3. Select the device.
+```
+
 ### Content for task topics
 
 Briefly state when or why to do the task if the heading does not make that clear.
-List prerequisites, including required hardware, permissions, or prior setup, in a **Prerequisites** subsection before the steps.
-Omit the subsection when there are no prerequisites worth stating.
 
 Use a numbered list for sequential actions.
 Start each step with an instruction, and place supporting explanations or expected results beneath it.
