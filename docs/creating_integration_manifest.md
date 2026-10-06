@@ -439,6 +439,44 @@ The following IoT classes are accepted in the manifest:
 
 [iot_class]: https://www.home-assistant.io/blog/2016/02/12/classifying-the-internet-of-things/#classifiers
 
+## Preview features
+
+The `preview_features` key declares [Labs preview features](/docs/development/labs) your integration offers: experimental functionality that users opt into before it graduates to a standard part of the integration. Each entry is keyed by a feature slug and provides URLs for giving feedback, learning more, and reporting issues.
+
+```json
+{
+  "preview_features": {
+    "my_preview_feature": {
+      "feedback_url": "https://community.home-assistant.io/t/...",
+      "learn_more_url": "https://www.home-assistant.io/integrations/my_integration",
+      "report_issue_url": "https://github.com/home-assistant/core/issues/new?template=bug_report.yml"
+    }
+  }
+}
+```
+
+See [Labs](/docs/development/labs) for the full workflow of adding a preview feature.
+
+## Import executor
+
+By default (`true`), Home Assistant imports the integration in an executor so a slow import does not block the event loop. Set `import_executor` to `false` only if the integration must be imported on the event loop; Home Assistant logs a warning when it is.
+
+```json
+{
+  "import_executor": false
+}
+```
+
+## Disabled
+
+The `disabled` key marks an integration as disabled and keeps it from loading. The value is a short reason that Home Assistant logs to explain why, for example when an integration is temporarily broken.
+
+```json
+{
+  "disabled": "Integration is temporarily broken"
+}
+```
+
 ## Virtual integration
 
 Some products are supported by integrations that are not named after the product. For example, Yale Home locks are integrated via the August integration, and the IKEA SYMFONISK product line can be used with the Sonos integration.
