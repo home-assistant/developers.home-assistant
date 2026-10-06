@@ -39,7 +39,10 @@ Keep steps that contribute directly to the original task's outcome together.
 For example, a page about areas can contain:
 
 ```markdown
-## Areas
+---
+title: "Areas"
+---
+
 <!-- Concept: what an area is and why you would use one. -->
 
 ## Creating an area
@@ -54,7 +57,7 @@ Keep that context close to the instruction.
 Move extended background and complete option lists into their own sections.
 
 A parent heading can group several topics under subheadings.
-A troubleshooting section can group separate details blocks for individual symptoms.
+A troubleshooting section can group separate details blocks for individual symptoms, descriptions, and resolutions.
 Keep the text under each heading focused on its stated purpose.
 
 ## Choosing a topic type
@@ -100,6 +103,7 @@ An area groups devices and entities that belong to a room or another part of you
 Keep setup instructions in a task topic.
 Link to that task when it helps the reader act on the explanation.
 Avoid turning a concept into an option catalog or a long sequence of UI steps.
+Instead, create a reference topic for the options list and link to it.
 
 ## Task
 
@@ -117,13 +121,17 @@ Prefer an `-ing` phrase, such as `Creating an area` or `Updating Home Assistant`
 Imperative headings, such as `Write the image to your SD card`, also work for stages in a larger procedure.
 Keep sibling headings parallel.
 
+For a parent heading that groups nested procedures, use a noun or descriptive phrase for the shared subject.
+Use an `-ing` phrase for each procedure below it.
+For example, use `Backup locations` as the parent heading and `Defining the backup location for automatic backups` as the procedure heading.
+
 Avoid vague headings such as `Usage`, `Configuration`, or `Working with areas` when the task has a more specific outcome.
 
 ### Content for task topics
 
 Briefly state when or why to do the task if the heading does not make that clear.
-List prerequisites before the steps, including required hardware, permissions, or prior setup.
-Omit a prerequisites section when there are none worth stating.
+List prerequisites, including required hardware, permissions, or prior setup, in a **Prerequisites** subsection before the steps.
+Omit the subsection when there are no prerequisites worth stating.
 
 Use a numbered list for sequential actions.
 Start each step with an instruction, and place supporting explanations or expected results beneath it.
