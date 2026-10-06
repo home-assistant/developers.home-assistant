@@ -16,27 +16,9 @@ This example repository shows custom integrations that live in the `<config_dir>
 
 ## The minimum
 
-The scaffold integration contains a bit more than just the bare minimum. The minimum is that you define a `DOMAIN` constant that contains the domain of the integration. The second part is that it needs to define a setup method that returns a boolean if the set-up was successful.
+The scaffold integration contains a bit more than just the bare minimum. The minimum is that you define a `DOMAIN` constant that contains the domain of the integration. The second part is that it needs to define an `async_setup` function that returns a boolean indicating whether the setup was successful.
 
-Create a file `homeassistant/components/hello_state/__init__.py` with one of the two following codeblocks, depending on what you need:
-
-- Sync component:
-
-```python
-from homeassistant.core import HomeAssistant
-from homeassistant.helpers.typing import ConfigType
-
-DOMAIN = "hello_state"
-
-
-def setup(hass: HomeAssistant, config: ConfigType) -> bool:
-    hass.states.set("hello_state.world", "Paulus")
-
-    # Return boolean to indicate that initialization was successful.
-    return True
-```
-
-- And if you prefer an async component:
+Create a file `homeassistant/components/hello_state/__init__.py` with the following:
 
 ```python
 from homeassistant.core import HomeAssistant
