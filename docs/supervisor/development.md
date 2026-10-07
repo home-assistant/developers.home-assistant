@@ -80,7 +80,7 @@ The instructions here is for development of the `hassio` integration, we're goin
 
 To configure Home Assistant Core to connect to a remote supervisor, set the following environment variables when starting Home Assistant:
 
-- `SUPERVISOR`: Set to the IP of the machine running Home Assistant and port 8880 (the API proxy add-on)
+- `SUPERVISOR`: Set to the IP of the machine running Home Assistant and port 8880 (the API proxy app)
 - `SUPERVISOR_TOKEN`: Set this to the token that you found [Supervisor API Access](#supervisor-api-access)
 
 ```shell
@@ -99,17 +99,17 @@ Home Assistant frontend uses supervisor through a core proxy. Checkout the [Home
 
 ## Supervisor API access
 
-To develop for the `hassio` integration and the Supervisor panel, we're going to need API access to the supervisor. This API is protected by a token that we can extract using a special add-on. This can be done on a running system or with the [devcontainer](#local-testing).
+To develop for the `hassio` integration and the Supervisor panel, we're going to need API access to the supervisor. This API is protected by a token that we can extract using a special app. This can be done on a running system or with the [devcontainer](#local-testing).
 
-[![Open your Home Assistant instance and show the add-on repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fhome-assistant%2Faddons-development)
-[![Open your Home Assistant instance and show the dashboard of a Supervisor add-on.](https://my.home-assistant.io/badges/supervisor_addon.svg)](https://my.home-assistant.io/redirect/supervisor_addon/?addon=ae6e943c_remote_api)
+[![Open your Home Assistant instance and show the app repository dialog with the `home-assistant/apps-development` repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2Fhome-assistant%2Fapps-development)
+[![Open your Home Assistant instance and show the dashboard of a Supervisor app.](https://my.home-assistant.io/badges/supervisor_app.svg)](https://my.home-assistant.io/redirect/supervisor_app/?app=ae6e943c_remote_api)
 
-1. Add our developer Add-on repository: [https://github.com/home-assistant/addons-development](https://github.com/home-assistant/addons-development)
-2. Install the Add-on "Remote API proxy"
+1. Add our development apps repository: [https://github.com/home-assistant/apps-development](https://github.com/home-assistant/apps-development)
+2. Install the app "Remote API proxy"
 3. Click Start
 4. The token will be printed in the logs
 
-The add-on needs to keep running to allow Home Assistant Core to connect.
+The app needs to keep running to allow Home Assistant Core to connect.
 
 The Remote API proxy token has slightly less privileges than Home Assistant Core has in production. To get the actual token with full privileges, you need to SSH into the host system and run:
 

@@ -16,8 +16,8 @@ ha su reload
 ```
 
 If you are running Supervisor on a remote host, you won't be able to access the
-Supervisor container directly. The "Remote ptvsd debugger" add-on (available
-from the [Development Add-On Repository](https://github.com/home-assistant/addons-development)
+Supervisor container directly. The "Remote ptvsd debugger" app (available
+from the [development apps repository](https://github.com/home-assistant/apps-development)
 exposes the debugging port on your host IP address allowing to debug the
 Supervisor remotely.
 

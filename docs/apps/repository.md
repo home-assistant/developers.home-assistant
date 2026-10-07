@@ -4,7 +4,7 @@ title: "Create an app repository"
 
 An app repository can contain one or more apps (formerly known as add-ons). Each app is stored in its own unique folder. To be identified as a repository, the repository must contain a configuration file.
 
-Check the [Example app repository](https://github.com/home-assistant/addons-example) for further details.
+Check the [Example app repository](https://github.com/home-assistant/apps-example) for further details.
 
 ## Installing a repository
 
@@ -20,8 +20,8 @@ Each repository is required to contain `repository.yaml` at the root in the git 
 
 ```yaml
 name: Name of repository
-url: http://www.example/addons
-maintainer: HomeAssistant Team <info@home-assistant.io>
+url: https://github.com/xyz/my_ha_apps
+maintainer: Name of maintainer <info@example.com>
 ```
 
 | Key | Required | Description |

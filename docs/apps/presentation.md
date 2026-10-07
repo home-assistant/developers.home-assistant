@@ -46,7 +46,7 @@ For guidance on keeping a changelog, we recommend the [keep a changelog](http://
 You may consider to offer a stable and a "next" or "canary" branch. These can be provided using different branches. When adding the app in Home Assistant, the user can select the wanted branch from a given repository by appending its name following a hashtag.
 
 ```text
-https://github.com/home-assistant/hassio-addons-example#next
+https://github.com/home-assistant/apps-example#next
 ```
 
 You should add this information to your documentation. Also, you should consider having different [names for the repositories](/docs/apps/repository#repository-configuration) in every branch, for example, "Super app (stable)" and "Super app (beta)".
@@ -61,14 +61,12 @@ By default, AppArmor gives you a certain level of security by restricting some g
 
 As for Home Assistant's implementation, you can activate your own custom AppArmor profile by putting an `apparmor.txt` file into your app folder. Adding your own `apparmor.txt` will load that file as the primary AppArmor profile instead of the default implementation. On top of knowing your app will run in a constrained and effective manner, writing your own custom `apparmor.txt` file will earn your app a security point after your app is installed, thus improving your user's confidence and perception of your app.
 
-An `apparmor.txt` goes in the same folder as your `config.yaml` file. Below is an example `apparmor.txt`. Replace `ADDON_SLUG` with the slug defined in your app configuration.
-
-apparmor.txt
+An `apparmor.txt` goes in the same folder as your `config.yaml` file. Below is an example `apparmor.txt`. Replace `APP_SLUG` with the slug defined in your app configuration.
 
 ```txt
 #include <tunables/global>
 
-profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
+profile APP_SLUG flags=(attach_disconnected,mediate_deleted) {
   #include <abstractions/base>
 
   # Capabilities
@@ -100,9 +98,9 @@ profile ADDON_SLUG flags=(attach_disconnected,mediate_deleted) {
     #include <abstractions/base>
 
     # Receive signals from S6-Overlay
-    signal (receive) peer=*_ADDON_SLUG,
+    signal (receive) peer=*_APP_SLUG,
 
-    # Access to options.json and other files within your addon
+    # Access to options.json and other files within your app
     /data/** rw,
 
     # Access to mapped volumes specified in config.json

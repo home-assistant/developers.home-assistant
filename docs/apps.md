@@ -18,7 +18,7 @@ Under the hood, apps are container images published to a container registry like
 
 Useful links:
 
-- [Example App repository](https://github.com/home-assistant/addons-example)
+- [Example App repository](https://github.com/home-assistant/apps-example)
 - [Home Assistant Supervisor](https://github.com/home-assistant/supervisor)
 - [Home Assistant Core Apps](https://github.com/home-assistant/addons)
 - [Home Assistant Docker base images](https://github.com/home-assistant/docker-base)
