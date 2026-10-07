@@ -14,17 +14,21 @@ Properties should always only return information from memory and not do I/O (lik
 | Name                    | Type                                | Default                              | Description                                                                |
 | ----------------------- | ----------------------------------- | ------------------------------------ | -------------------------------------------------------------------------- |
 | current_humidity        | `float \| None`      | `None`                               | The current humidity.                                                      |
-| current_temperature     | `float \| None`      | `None`                               | The current temperature.                                                   |
 | fan_mode                | `str \| None`        | **Required by ClimateEntityFeature.FAN_MODE**     | The current fan mode.                                                      |
 | fan_modes               | `list[str] \| None`  | **Required by ClimateEntityFeature.FAN_MODE**     | The list of available fan modes.                                           |
 | hvac_action             | `HVACAction \| None` | `None`                               | The action currently being performed. See below.                                        |
 | hvac_mode               | `HVACMode \| None`   | **Required**                         | The selected operation mode. See below. Used to determine `state`.                      |
 | hvac_modes              | `list[HVACMode]`     | **Required**                         | List of available operation modes. See below.                                           |
 | max_humidity            | `float`                             | `DEFAULT_MAX_HUMIDITY` (value == 99) | The maximum humidity.                                                      |
-| max_temp                | `float`                             | `DEFAULT_MAX_TEMP` (value == 35 °C)  | The maximum temperature in `temperature_unit`.                             |
+| max_temp                | `float`                             | `DEFAULT_MAX_TEMP` (value == 35 °C)  | The maximum temperature in `native_temperature_unit`.                             |
 | min_humidity            | `float`                             | `DEFAULT_MIN_HUMIDITY` (value == 30) | The minimum humidity.                                                      |
-| min_temp                | `float`                             | `DEFAULT_MIN_TEMP` (value == 7 °C)   | The minimum temperature in `temperature_unit`.                             |
-| precision               | `float`                             | According to `temperature_unit`      | The precision of the temperature in the system. Defaults to tenths for `UnitOfTemperature.CELSIUS`, whole number otherwise. |
+| min_temp                | `float`                             | `DEFAULT_MIN_TEMP` (value == 7 °C)   | The minimum temperature in `native_temperature_unit`.                             |
+| native_current_temperature | `float \| None`   | `None`                               | The current temperature in `native_temperature_unit`.                      |
+| native_target_temperature | `float \| None`    | `None`                               | The temperature currently set to be reached, in `native_temperature_unit`. |
+| native_target_temperature_high | `float \| None` | **Required by TARGET_TEMPERATURE_RANGE** | The upper bound target temperature, in `native_temperature_unit`.  |
+| native_target_temperature_low | `float \| None` | **Required by TARGET_TEMPERATURE_RANGE** | The lower bound target temperature, in `native_temperature_unit`.   |
+| native_temperature_unit | <code>str</code>                    | **Required**                         | The unit the entity reports temperatures in (`UnitOfTemperature.CELSIUS` or `UnitOfTemperature.FAHRENHEIT`). See [Temperature units](#temperature-units). |
+| precision               | `float`                             | According to `native_temperature_unit` | The precision of the temperature in the system. Defaults to tenths for `UnitOfTemperature.CELSIUS`, whole number otherwise. |
 | preset_mode             | `str \| None`        | **Required by ClimateEntityFeature.PRESET_MODE**  | The current active preset.                                                 |
 | preset_modes            | `list[str] \| None`  | **Required by ClimateEntityFeature.PRESET_MODE**  | The available presets.                                                     |
 | swing_mode              | `str \| None`        | **Required by ClimateEntityFeature.SWING_MODE**   | The swing setting.                                                         |
@@ -33,11 +37,17 @@ Properties should always only return information from memory and not do I/O (lik
 | swing_horizontal_modes  | `list[str] \| None`  | **Required by ClimateEntityFeature.SWING_HORIZONTAL_MODE**  | Returns the list of available horizontal swing modes.            |
 | target_humidity         | `float \| None`      | `None`                               | The target humidity the device is trying to reach.                         |
 | target_humidity_step    | `int \| None`        | `None`                               | The supported step size a target humidity can be increased or decreased in an action call targeting the device. |
-| target_temperature      | `float \| None`      | `None`                               | The temperature currently set to be reached.                               |
-| target_temperature_high | `float \| None`      | **Required by TARGET_TEMPERATURE_RANGE** | The upper bound target temperature                                     |
-| target_temperature_low  | `float \| None`      | **Required by TARGET_TEMPERATURE_RANGE** | The lower bound target temperature                                     |
 | target_temperature_step | `float \| None`      | `None`                               | The supported step size a target temperature can be increased or decreased |
-| temperature_unit        | <code>str</code>                    | **Required**                         | The unit of temperature measurement for the system (`UnitOfTemperature.CELSIUS` or `UnitOfTemperature.FAHRENHEIT`).                    |
+
+### Temperature units
+
+Integrations provide temperatures in the unit the device uses, and set `native_temperature_unit` to that unit. The climate entity converts the temperatures to the unit system configured by the user before writing them to the state machine, and adds a `temperature_unit` state attribute that holds the unit of the converted temperatures. The `temperature_unit` state attribute is set by the base class and can't be overridden by integrations.
+
+Temperatures passed to `set_temperature` are converted to `native_temperature_unit` before the method is called.
+
+:::info
+The `current_temperature`, `target_temperature`, `target_temperature_high`, `target_temperature_low` and `temperature_unit` properties, and the corresponding `_attr_` attributes, are deprecated and will stop working in Home Assistant 2027.11. Use the `native_` prefixed properties and `_attr_native_` prefixed attributes instead.
+:::
 
 ### HVAC modes
 
