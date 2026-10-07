@@ -105,9 +105,9 @@ To develop for the `hassio` integration and the Supervisor panel, we're going to
 [![Open your Home Assistant instance and show the dashboard of a Supervisor app.](https://my.home-assistant.io/badges/supervisor_app.svg)](https://my.home-assistant.io/redirect/supervisor_app/?app=ae6e943c_remote_api)
 
 1. Add our development apps repository: [https://github.com/home-assistant/apps-development](https://github.com/home-assistant/apps-development)
-2. Install the app "Remote API proxy"
-3. Click Start
-4. The token will be printed in the logs
+2. Install the **Remote API proxy** app.
+3. Click **Start**.
+4. The token will be printed in the logs.
 
 The app needs to keep running to allow Home Assistant Core to connect.
 

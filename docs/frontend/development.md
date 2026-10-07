@@ -375,12 +375,12 @@ To use this feature, you need both a PR number and a GitHub token.
 #### Creating a GitHub token
 
 1. Go to [GitHub Settings > Developer Settings > Personal Access Tokens > Fine-grained tokens](https://github.com/settings/personal-access-tokens)
-2. Click "Generate new token"
+2. Click **Generate new token**
 3. Give it a descriptive name like "Home Assistant Frontend Testing"
 4. Set the expiration date (recommended: 90 days or less)
 5. Under "Repository access", select "Public Repositories (read-only)"
 6. Skip the 'Permissions' section (leave it empty)
-7. Click "Generate token"
+7. Click **Generate token**
 8. Copy the token immediately (you won't be able to see it again)
 
 #### Configuration in Home Assistant
