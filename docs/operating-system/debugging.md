@@ -33,7 +33,7 @@ ssh root@homeassistant.local -p 22222
 
 If you have an older installation or have changed your hostname, you may need to adjust the command above accordingly. You can alternatively use the device's IP address instead of the hostname.
 
-You will be logged in as root with the `/root` folder set as the working directory. [Home Assistant OS] is a hypervisor for Docker. See the [Supervisor Architecture] documentation for information regarding the Supervisor. The Supervisor offers an API to manage the host and running the Docker containers. Home Assistant itself and all installed addons run in separate Docker containers.
+You will be logged in as root with the `/root` folder set as the working directory. [Home Assistant OS] is a hypervisor for Docker. See the [Supervisor Architecture] documentation for information regarding the Supervisor. The Supervisor offers an API to manage the host and running the Docker containers. Home Assistant itself and all installed apps run in separate Docker containers.
 
 [Home Assistant OS]: https://github.com/home-assistant/operating-system
 [Supervisor Architecture]: /architecture_index.md

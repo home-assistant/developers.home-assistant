@@ -245,7 +245,7 @@ count: 1.2
 :::note
 If you remove a configuration option from an app already deployed to users, it is recommended to delete the option to avoid a warning like `Option '<options_key>' does not exist in the schema for <App Name> (<app slug>)`.
 
-To remove an option the Supervisor addons API can be used. Using bashio this boils down to `bashio::addon.option '<options_key>'` (without additional argument to delete this option key). To check if the option is still set, check the content of the options dictionary like so:
+To remove an option the Supervisor `addons` API can be used. Using bashio this boils down to `bashio::addon.option '<options_key>'` (without additional argument to delete this option key). To check if the option is still set, check the content of the options dictionary like so:
 
 ```sh
 options=$(bashio::addon.options)
@@ -345,7 +345,7 @@ Sometimes app developers may want to allow users to configure to provide their o
 2. Internal service requires a binary file or some file configured externally as part of its config.
 3. Internal service supports live reloading on config change and you want to support that for some or all of its configuration by asking users for a file in its schema to live reload from.
 
-In cases like these you should add `app_config` to `map` in your app's configuration file. And then you should direct your users to put this file in the folder `/addon_configs/{REPO}_<your app's slug>`. If an app is installed locally, `{REPO}` will be `local`. If the app is installed from a GitHub repository, `{REPO}` is a hashed identifier generated from the GitHub repository's URL (ex: `https://github.com/xy/my_hassio_apps`).
+In cases like these you should add `app_config` to `map` in your app's configuration file. And then you should direct your users to put this file in the folder `/app_configs/{REPO}_<your app's slug>`. If an app is installed locally, `{REPO}` will be `local`. If the app is installed from a GitHub repository, `{REPO}` is a hashed identifier generated from the GitHub repository's URL (ex: `https://github.com/xyz/my_ha_apps`).
 This folder will be mounted at `/config` inside your app's docker container at runtime. You should either provide an option in your app's schema that collects a relative path to the file(s) starting from this folder or rely on a fixed filename and include that in your documentation.
 
 Another use case of `app_config` could be if your app wants to provide file-based output or give users access to internal files for debugging. Some examples include:
