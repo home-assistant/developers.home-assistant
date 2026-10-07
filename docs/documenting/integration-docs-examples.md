@@ -101,7 +101,7 @@ To use this trigger in an automation:
 
 ### Options in the UI
 
-<!-- Note that there are no "type" or "default" fields for UI options, as you have in YAML. They are not rendered for the UI options. -->
+<!-- Note that there is no "type" field for UI options, as you have in YAML. They are not rendered for the UI options. -->
 
 {% options_ui %}
 Threshold type:
@@ -420,6 +420,25 @@ action: |
 {% include actions/related.md %}
 
 ```
+
+### About the options_ui block
+
+This block uses the `{% options_ui %}` tag and:
+
+- Must list the UI options of a trigger, condition, or action.
+- Must document the name and description of each option, as well as if the option is required (`required: false` or `required: true`).
+- Renders the name, an optional or required indicator, and the description of each option.
+
+### About the options_yaml block
+
+This block uses the `{% options_yaml %}` tag and:
+
+- Must list the YAML options of a trigger, condition, or action.
+- Must document the following for each option:
+  - The default value, if any.
+  - If it is required (`required: false` or `required: true`). If the variable has a default value, then it is not required and the required field should be set to false.
+  - The accepted value types. If multiple types are accepted, separate the types with a comma (for example string, integer).
+- Renders the name, an optional or required indicator, the value type, the default value, if any, and the description of each option.
 
 ## Reusable text for integrations
 

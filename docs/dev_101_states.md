@@ -100,15 +100,16 @@ hello_state:
   text: 'Hello, World!'
 ```
 
-Thanks to `DEFAULT_TEXT` variable the component will launch even if no `text:` field is used in the `configuration.yaml` file. Quite often there are variables which are required. It's important to check if all mandatory configuration variables are provided. If not, the setup should fail. We will use `voluptuous` as a helper to achieve this. The next listing shows the essential parts.
+Thanks to `DEFAULT_TEXT` variable the component will launch even if no `text:` field is used in the `configuration.yaml` file. Quite often there are variables which are required. It's important to check if all mandatory configuration variables are provided. If not, the setup should fail. We will use `probatio` as a helper to achieve this. The next listing shows the essential parts.
 
 ```python
-import voluptuous as vol
+import probatio
 
 import homeassistant.helpers.config_validation as cv
 
-CONFIG_SCHEMA = vol.Schema(
-    {DOMAIN: vol.Schema({vol.Required(CONF_TEXT): cv.string,})}, extra=vol.ALLOW_EXTRA
+CONFIG_SCHEMA = probatio.Schema(
+    {DOMAIN: probatio.Schema({probatio.Required(CONF_TEXT): cv.string})},
+    extra=probatio.ALLOW_EXTRA,
 )
 ```
 

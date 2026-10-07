@@ -1,0 +1,18 @@
+.monthGroup {
+  margin-top: 0.8rem;
+}
+
+.monthGroup + .monthGroup {
+  margin-top: 1.75rem;
+}
+
+.monthHeading {
+  margin: 0 0 0.3rem;
+  font-size: 1.1rem;
+  font-weight: var(--ifm-font-weight-semibold);
+  color: var(--ifm-color-emphasis-700);
+}
+
+.monthGroup ul {
+  margin-bottom: 0;
+}

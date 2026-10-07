@@ -155,6 +155,7 @@ module.exports = {
             "core/integration/system_health",
           ],
         },
+        "oauth2",
         "dev_101_services",
         "creating_platform_index",
         "creating_component_generic_discovery",
@@ -181,8 +182,6 @@ module.exports = {
       label: "Development Checklist",
       items: [
         "development_checklist",
-        "creating_component_code_review",
-        "creating_platform_code_review",
       ],
     },
     {
@@ -307,6 +306,7 @@ module.exports = {
         "development_validation",
         "development_typing",
         "instance_url",
+        "deprecating",
         "versioning",
       ],
     },
@@ -345,6 +345,7 @@ module.exports = {
         "documenting",
         "documenting/standards",
         "documenting/general-style-guide",
+        "documenting/topic-based-authoring",
         "documenting/testing",
         "documenting/yaml-style-guide",
         "documenting/create-page",
@@ -394,6 +395,7 @@ module.exports = {
         "android/testing/unit_testing",
         "android/testing/screenshot_testing",
         "android/testing/integration_testing",
+        "android/testing/e2e_testing",
       ],
     },
     {

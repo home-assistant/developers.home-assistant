@@ -19,13 +19,13 @@ In this example, there is a sensor entity that defines which device it should be
 This will provide a rich device info page, where the user can recognize the device by its name, serial number, and other fields.
 
 `sensor.py`:
-```python {8-18} showLineNumbers
+```python {8-19} showLineNumbers
 class MySensor(SensorEntity):
     """Representation of a sensor."""
 
     _attr_has_entity_name = True
 
-    def __init__(self, device: MyDevice) -> None:
+    def __init__(self, device: MyDevice, via_device_id: str) -> None:
         """Initialize the sensor."""
         self._attr_device_info = DeviceInfo(
             connections={(CONNECTION_NETWORK_MAC, device.mac)},
@@ -36,7 +36,8 @@ class MySensor(SensorEntity):
             manufacturer="My Company",
             model="My Sensor",
             model_id="ABC-123",
-            via_device=(DOMAIN, device.hub_id),
+            # The hub's Home Assistant device id (see the device registry docs).
+            via_device_id=via_device_id,
         )
 ```
 

@@ -59,7 +59,7 @@ If it does, the flow will abort and show an error message to the user.
                 )
         return self.async_show_form(
             step_id="user",
-            data_schema=vol.Schema({vol.Required(CONF_HOST): TextSelector()}),
+            data_schema=probatio.Schema({probatio.Required(CONF_HOST): TextSelector()}),
             errors=errors,
         )
 ```
@@ -94,10 +94,10 @@ If a configuration entry already exists for the same host, the flow will abort a
                 )
         return self.async_show_form(
             step_id="user",
-            data_schema=vol.Schema(
+            data_schema=probatio.Schema(
                 {
-                    vol.Required(CONF_HOST): TextSelector(),
-                    vol.Required(CONF_PASSWORD): TextSelector(),
+                    probatio.Required(CONF_HOST): TextSelector(),
+                    probatio.Required(CONF_PASSWORD): TextSelector(),
                 }
             ),
             errors=errors,
@@ -112,7 +112,7 @@ More information about the requirements for a unique identifier can be found in 
 
 ## Exceptions
 
-There are no exceptions to this rule.
+Integrations that only support a single config entry are exempt from this rule.
 
 ## Related rules
 

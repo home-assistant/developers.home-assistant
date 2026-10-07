@@ -212,7 +212,7 @@ async def handle_admin_service(call: ServiceCall) -> None:
 
 async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
     async_register_admin_service(
-        hass, DOMAIN, "my_service", handle_admin_service, vol.Schema({})
+        hass, DOMAIN, "my_service", handle_admin_service, probatio.Schema({})
     )
     return True
 ```
@@ -264,7 +264,7 @@ async def async_setup(hass: HomeAssistant, config: ConfigType) -> bool:
 @websocket_api.require_admin
 @websocket_api.async_response
 @websocket_api.websocket_command(
-    {vol.Required("type"): "my-component/my-action",}
+    {probatio.Required("type"): "my-component/my-action",}
 )
 async def websocket_create(
     hass: HomeAssistant,

@@ -13,7 +13,7 @@ The service is registered once the [`frontend`](https://www.home-assistant.io/in
 | Service type | `_home-assistant._tcp.local.` |
 | Instance name | `<location_name>.<service type>`. The `location_name` has `.` replaced with a space and is truncated to fit the 63-byte DNS label limit. On a name collision, Zeroconf appends a suffix (`allow_name_change`). |
 | Host (server) | `<uuid>.local.`, where `<uuid>` is the instance ID. |
-| Port | The HTTP server port (`8123` by default). |
+| Port | The HTTP server port. By default `80` on Home Assistant OS installations and `8123` otherwise, unless changed via the `SETUP_PORT` environment variable. |
 
 ## TXT properties
 

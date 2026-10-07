@@ -58,7 +58,9 @@ class MyConfigFlow(ConfigFlow, domain=DOMAIN):
                 )
         return self.async_show_form(
             step_id="reauth_confirm",
-            data_schema=vol.Schema({vol.Required(CONF_API_TOKEN): TextSelector()}),
+            data_schema=probatio.Schema(
+                {probatio.Required(CONF_API_TOKEN): TextSelector()}
+            ),
             errors=errors,
         )
 
@@ -82,10 +84,10 @@ class MyConfigFlow(ConfigFlow, domain=DOMAIN):
                 )
         return self.async_show_form(
             step_id="user",
-            data_schema=vol.Schema(
+            data_schema=probatio.Schema(
                 {
-                    vol.Required(CONF_HOST): TextSelector(),
-                    vol.Required(CONF_API_TOKEN): TextSelector(),
+                    probatio.Required(CONF_HOST): TextSelector(),
+                    probatio.Required(CONF_API_TOKEN): TextSelector(),
                 }
             ),
             errors=errors,

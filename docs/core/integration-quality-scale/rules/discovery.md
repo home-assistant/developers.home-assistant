@@ -102,9 +102,9 @@ class MyConfigFlow(ConfigFlow, domain=DOMAIN):
                 )
         return self.async_show_form(
             step_id="user",
-            data_schema=vol.Schema(
+            data_schema=probatio.Schema(
                 {
-                    vol.Required(CONF_HOST): TextSelector(),
+                    probatio.Required(CONF_HOST): TextSelector(),
                 }
             ),
             errors=errors,

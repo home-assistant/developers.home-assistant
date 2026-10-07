@@ -1,0 +1,45 @@
+.yearGroup {
+  margin-top: 1rem;
+}
+
+.yearSummary {
+  display: flex;
+  align-items: baseline;
+  gap: 0.5rem;
+  cursor: pointer;
+  list-style-position: outside;
+}
+
+.yearSummary h3 {
+  display: inline;
+  margin: 0;
+}
+
+.count {
+  font-size: 0.8rem;
+  color: var(--ifm-color-emphasis-600);
+}
+
+.monthGroup {
+  margin-top: 0.8rem;
+  padding-left: 0.75rem;
+}
+
+.monthGroup + .monthGroup {
+  margin-top: 1.75rem;
+}
+
+.monthHeading {
+  margin: 0;
+  font-size: 1.1rem;
+  font-weight: var(--ifm-font-weight-semibold);
+  color: var(--ifm-color-emphasis-700);
+}
+
+.monthGroup ul {
+  margin-top: 0;
+}
+
+.monthGroup li:first-child {
+  margin-top: 0.3rem;
+}

@@ -5,7 +5,7 @@ title: "App configuration"
 Each app (formerly known as an add-on) is stored in a folder. The file structure looks like this:
 
 ```text
-addon_name/
+app_name/
   translations/
     en.yaml
   apparmor.txt
@@ -162,10 +162,10 @@ Avoid using `config.yaml` as filename in your app for anything other than the ap
 | `hassio_api` | bool | `false` | This app can access the Supervisor's REST API. Use `http://supervisor`.
 | `homeassistant_api` | bool | `false` | This app can access the Home Assistant REST API proxy. Use `http://supervisor/core/api`.
 | `docker_api` | bool | `false` | Allow read-only access to the Docker API for the app. Works only for not protected apps.
-| `privileged` | list | | Privilege for access to hardware/system. Available access: `BPF`, `CHECKPOINT_RESTORE`, `DAC_READ_SEARCH`, `IPC_LOCK`, `NET_ADMIN`, `NET_RAW`, `PERFMON`, `SYS_ADMIN`, `SYS_MODULE`, `SYS_NICE`, `SYS_PTRACE`, `SYS_RAWIO`, `SYS_RESOURCE` or `SYS_TIME`.
+| `privileged` | list | | Linux capabilities the app needs for access to hardware or system functions. Available access: `AUDIT_WRITE`, `BPF`, `CHECKPOINT_RESTORE`, `DAC_READ_SEARCH`, `IPC_LOCK`, `MKNOD`, `NET_ADMIN`, `NET_RAW`, `PERFMON`, `SETFCAP`, `SYS_ADMIN`, `SYS_MODULE`, `SYS_NICE`, `SYS_PTRACE`, `SYS_RAWIO`, `SYS_RESOURCE` or `SYS_TIME`. See [Privileged capabilities](#privileged-capabilities).
 | `full_access` | bool | `false` | Give full access to hardware like the privileged mode in Docker. Works only for not protected apps. Consider using other app options instead of this, like `devices`. If you enable this option, don't add `devices`, `uart`, `usb` or `gpio` as this is not needed.
 | `apparmor` | bool/string | `true` | Enable or disable AppArmor support. If it is enabled, you can also use custom profiles with the name of the profile.
-| `map` | list | | List of Home Assistant directory types to bind mount into your container. Possible values: `homeassistant_config`, `addon_config`, `ssl`, `addons`, `backup`, `share`, `media`, `all_addon_configs`, and `data`. Defaults to read-only, which you can change by adding the property `read_only: false`. By default, all paths map to `/<type-name>` inside the app container, but an optional `path` property can also be supplied to configure the path (Example: `path: /custom/config/path`). If used, the path must not be empty, unique from any other path defined for the app, and not the root path. Note that the `data` directory is always mapped and writable, but the `path` property can be set using the same conventions.
+| `map` | list | | List of Home Assistant directory types to bind mount into your container. Possible values: `homeassistant_config`, `app_config`, `all_app_configs`, `local_apps`, `ssl`, `backup`, `share`, `media`, and `data`. Defaults to read-only, which you can change by adding the property `read_only: false`. By default, all paths map to `/<type-name>` inside the app container, but an optional `path` property can also be supplied to configure the path (Example: `path: /custom/config/path`). If used, the path must not be empty, unique from any other path defined for the app, and not the root path. Note that the `data` directory is always mapped and writable, but the `path` property can be set using the same conventions.
 | `environment` | dict | | A dictionary of environment variables to run the app with.
 | `audio` | bool | `false` | Mark this app to use the internal audio system. We map a working PulseAudio setup into the container. If your application does not support PulseAudio, you may need to install: Alpine Linux `alsa-plugins-pulse` or Debian/Ubuntu `libasound2-plugins`.
 | `video` | bool | `false` | Mark this app to use the internal video system. All available devices will be mapped into the app.
@@ -203,6 +203,23 @@ Avoid using `config.yaml` as filename in your app for anything other than the ap
 | `journald` | bool | `false` | If set to `true`, the host's system journal will be mapped read-only into the app. Most of the time the journal will be in `/var/log/journal` however on some hosts you will find it in `/run/log/journal`. Apps relying on this capability should check if the directory `/var/log/journal` is populated and fallback on `/run/log/journal` if not.
 | `breaking_versions` | list | | List of breaking versions of the app. A manual update will always be required if the update is to a breaking version or would cross a breaking version, even if users have auto-update enabled for the app.
 | `ulimits` | dict | | Dictionary of resource limit (ulimit) settings for the app container. Each limit can be either a plain integer value or a dictionary with the keys `soft` and `hard`, each taking a plain integer for fine-grained control. Individual values must not be larger than the host's hard limit (inspectable by `ulimit -Ha`; for example, 524288 in case of the `nofile` limit in the Home Assistant Operating System). |
+
+### Privileged capabilities
+
+The `privileged` option lists the Linux capabilities your app container gets in addition to the container runtime's default set. Only request what your app actually needs. Most of these capabilities lower the [security rating](/docs/apps/security) of your app.
+
+Four of the available capabilities are part of the container runtime's default set today, but the Supervisor is moving towards a reduced default set that no longer includes them:
+
+- `AUDIT_WRITE`: writing to the kernel audit log, for example by `sshd` or PAM builds that use libaudit.
+- `MKNOD`: creating device nodes inside the container with `mknod`.
+- `NET_RAW`: raw and packet sockets, for example for `ping`, `arping`, `dhclient`, or `tcpdump`.
+- `SETFCAP`: setting file capabilities, for example when installing packages that ship file capabilities at runtime.
+
+If your app needs one of them, list it in `privileged`. Requesting it keeps the capability available no matter which default set the Supervisor applies. `AUDIT_WRITE`, `MKNOD`, and `SETFCAP` do not affect the security rating of your app.
+
+:::note
+The reduced default set matches the "reduced" capability profile that containerd is introducing. The Supervisor currently moves toward this set through two development feature flags: `app_drop_net_raw` drops `NET_RAW`, while `app_reduced_capabilities` drops `AUDIT_WRITE`, `MKNOD`, and `SETFCAP`. Both flags are off by default.
+:::
 
 ### Options / Schema
 
@@ -284,7 +301,7 @@ Previously, additional build options such as `build_from`, `args`, and `labels` 
 
 Apps (formerly known as add-ons) can provide translation files for configuration options that are used in the UI.
 
-Example path to translation file: `addon/translations/{language_code}.yaml`
+Example path to translation file: `app_name/translations/{language_code}.yaml`
 
 For `{language_code}` use a valid language code, like `en`, for a [full list have a look here](https://github.com/home-assistant/frontend/blob/dev/src/translations/translationMetadata.json), `en.yaml` would be a valid filename.
 
@@ -328,13 +345,13 @@ Sometimes app developers may want to allow users to configure to provide their o
 2. Internal service requires a binary file or some file configured externally as part of its config.
 3. Internal service supports live reloading on config change and you want to support that for some or all of its configuration by asking users for a file in its schema to live reload from.
 
-In cases like these you should add `addon_config` to `map` in your app's configuration file. And then you should direct your users to put this file in the folder `/addon_configs/{REPO}_<your addon's slug>`. If an app is installed locally, `{REPO}` will be `local`. If the app is installed from a GitHub repository, `{REPO}` is a hashed identifier generated from the GitHub repository's URL (ex: `https://github.com/xy/my_hassio_addons`).
+In cases like these you should add `app_config` to `map` in your app's configuration file. And then you should direct your users to put this file in the folder `/addon_configs/{REPO}_<your app's slug>`. If an app is installed locally, `{REPO}` will be `local`. If the app is installed from a GitHub repository, `{REPO}` is a hashed identifier generated from the GitHub repository's URL (ex: `https://github.com/xy/my_hassio_apps`).
 This folder will be mounted at `/config` inside your app's docker container at runtime. You should either provide an option in your app's schema that collects a relative path to the file(s) starting from this folder or rely on a fixed filename and include that in your documentation.
 
-Another use case of `addon_config` could be if your app wants to provide file-based output or give users access to internal files for debugging. Some examples include:
+Another use case of `app_config` could be if your app wants to provide file-based output or give users access to internal files for debugging. Some examples include:
 
 1. Internal service logs to a file and you wish to allow users access to that log file
 2. Internal service uses a database and you wish to allow users access to that database for debugging
 3. Internal service generates files which are intended to be used in its own config and you wish to allow users to access them as well
 
-In cases like these you should add `addon_config:rw` to `map` so your app can write to this folder as well as read from it. And then you should write these files out to `/config` during your app's runtime so users can see and access them.
+In cases like these you should add `app_config:rw` to `map` so your app can write to this folder as well as read from it. And then you should write these files out to `/config` during your app's runtime so users can see and access them.

@@ -1202,7 +1202,7 @@ Returns information about the Home Assistant core
   "ip_address": "172.0.0.15",
   "image": "homeassistant/home-assistant",
   "boot": true,
-  "port": 8123,
+  "port": 80,
   "ssl": false,
   "watchdog": true,
   "wait_boot": 800,
@@ -1670,6 +1670,22 @@ After calling this endpoint, a reboot is required to apply the migration. The re
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/docker/reset-storage" method="post">
+
+Schedule a reset of the complete Docker storage. The reset will be applied on the next system reboot.
+
+All container images (Supervisor, Home Assistant Core, plugins and apps) are deleted on the next boot and downloaded again afterwards. Home Assistant and apps' data, backups and settings are kept, they are stored outside of the Docker storage. Internet connectivity is required after the reboot.
+
+After calling this endpoint, a reboot is required to apply the reset, a `reboot_required` issue is created in the resolution center to indicate that.
+
+:::note
+
+This endpoint requires Home Assistant OS 18.3 or newer. A `404` error will be returned on older versions or non-HAOS installations.
+
+:::
+
+</ApiEndpoint>
+
 ### Hardware
 
 <ApiEndpoint path="/hardware/info" method="get">
@@ -2081,58 +2097,114 @@ and return 404.
 <ApiEndpoint path="/host/disks/<disk>/usage" method="get">
 Get detailed disk usage information in bytes.
 
-The only supported `disk` for now is "default". It will return usage info for the data disk.
+`disk` selects what is measured. Use `default` for the data disk, or the name of a
+mount to measure that mount. `default` always addresses the data disk, so a mount
+of that name cannot be reached through this endpoint.
 
-Supports an optional `max_depth` query param. Defaults to 1
+Supports an optional `max_depth` query param, which controls how far the breakdown
+goes. It defaults to 1 for the data disk and 0 for a mount.
+
+The data disk reports its known top-level paths as children, and `max_depth`
+controls how far the breakdown continues inside them.
+
+A mount has no such fixed layer, so it is measured by walking its directories, and
+a directory is only listed while more than one level of depth remains. A
+`max_depth` of 0 or 1 therefore returns totals only, the first level of
+directories appears at 2, and every level below that needs one more.
+
+When a mount lists children, an `other` child carries whatever the walk did not
+attribute to a directory: files directly at the mount root, reserved space, and
+entries that could not be read. When that remainder is positive, the children of
+a node sum exactly to its own `used_bytes`. If the filesystem changes while it
+is being walked, the directory totals can disagree with `used_bytes`; in that
+case the breakdown is left out entirely and only the totals are reported, so
+the children never sum past their parent.
+
+Usage is measured by probing the path, not from cached mount state. That probe
+activates a dormant automount if needed, so a usage request can change system
+state.
+
+Requesting usage for a mount which does not exist returns a `404`. A `400` is
+returned if the path is no longer a mount, cannot be read, or the probe has not
+finished within 60 seconds. The probe keeps running after that timeout, so a
+retry joins the probe already underway instead of starting a new one.
 
 **Example response:**
 
 ```json
 {
   "id": "root",
-  "label": "Default",
-  "total_space": 503312781312,
-  "used_space": 430245011456,
+  "label": "Root",
+  "total_bytes": 503312781312,
+  "used_bytes": 430245011456,
   "children": [
     {
       "id": "system",
       "label": "System",
-      "used_space": 75660903137
+      "used_bytes": 75660903137
     },
     {
       "id": "addons_data",
       "label": "Addons data",
-      "used_space": 42349200762
+      "used_bytes": 42349200762
     },
     {
       "id": "addons_config",
       "label": "Addons configuration",
-      "used_space": 5283318814
+      "used_bytes": 5283318814
     },
     {
       "id": "media",
       "label": "Media",
-      "used_space": 476680019
+      "used_bytes": 476680019
     },
     {
       "id": "share",
       "label": "Share",
-      "used_space": 37477206419
+      "used_bytes": 37477206419
     },
     {
       "id": "backup",
       "label": "Backup",
-      "used_space": 268350699520
+      "used_bytes": 268350699520
     },
     {
       "id": "ssl",
       "label": "SSL",
-      "used_space": 202912633
+      "used_bytes": 202912633
     },
     {
       "id": "homeassistant",
       "label": "Home assistant",
-      "used_space": 444090152
+      "used_bytes": 444090152
+    }
+  ]
+}
+```
+
+**Example response for a mount**, requested with `max_depth=2`:
+
+```json
+{
+  "id": "media_nas",
+  "label": "media_nas",
+  "total_bytes": 2000398934016,
+  "used_bytes": 1240247081779,
+  "children": [
+    {
+      "id": "music",
+      "label": "music",
+      "used_bytes": 402653184000
+    },
+    {
+      "id": "movies",
+      "label": "movies",
+      "used_bytes": 800000000000
+    },
+    {
+      "id": "other",
+      "label": "Other",
+      "used_bytes": 37593897779
     }
   ]
 }
@@ -3860,6 +3932,57 @@ Update the supervisor
 | key     | type   | description                                                    |
 | ------- | ------ | -------------------------------------------------------------- |
 | version | string | The version to install. Defaults to the latest version. Development only: Only works in the Supervisor development environment. |
+
+</ApiEndpoint>
+
+### Time
+
+<ApiEndpoint path="/time/info" method="get">
+
+Get the configured NTP servers. Requires Home Assistant OS 18.3 or newer, unavailable on Supervised.
+
+`/host/info` lists `ntp` in `features` when these endpoints are available.
+
+**Returned data:**
+
+| key    | type | description                                       |
+|--------|------|---------------------------------------------------|
+| config | dict | The NTP settings written by Supervisor, see below. |
+
+**config:**
+
+| key              | type | description                      |
+|------------------|------|----------------------------------|
+| servers          | list | Configured NTP servers.          |
+| fallback_servers | list | Configured fallback NTP servers. |
+
+These are the settings Supervisor wrote. `systemd-timesyncd` merges them with servers from other sources, such as DHCP, so the servers actually in use can differ.
+
+**Example response:**
+
+```json
+{
+  "config": {
+    "servers": ["time.cloudflare.com"],
+    "fallback_servers": ["time.google.com"]
+  }
+}
+```
+
+</ApiEndpoint>
+
+<ApiEndpoint path="/time/options" method="post">
+
+Set the NTP servers. Requires Home Assistant OS 18.3 or newer, unavailable on Supervised.
+
+Omitted keys keep their current value. Pass an empty list to drop the configured servers and return to the operating system defaults. `systemd-timesyncd` is restarted whenever a value changes.
+
+**Payload:**
+
+| key              | type | optional | description                                                                    |
+|------------------|------|----------|--------------------------------------------------------------------------------|
+| servers          | list | True     | NTP servers to use.                                                            |
+| fallback_servers | list | True     | Fallback NTP servers, used when no servers are configured or supplied by DHCP. |
 
 </ApiEndpoint>
 

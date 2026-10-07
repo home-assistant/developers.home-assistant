@@ -36,7 +36,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.APPARENT_POWER` | mVA, VA, kVA | Apparent power
 | `SensorDeviceClass.AQI` | None | Air Quality Index
 | `SensorDeviceClass.AREA` | m², cm², km², mm², in², ft², yd², mi², ac, ha | Area
-| `SensorDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, mmHG, inHg, inH₂O, kPa, mbar, Pa, psi | Atmospheric pressure
+| `SensorDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, mmHg, inHg, inH₂O, kPa, mbar, Pa, psi, mPa, atm | Atmospheric pressure
 | `SensorDeviceClass.BATTERY` | % | Percentage of battery that is left
 | `SensorDeviceClass.BLOOD_GLUCOSE_CONCENTRATION` | mg/dL, mmol/L | Blood glucose concentration
 | `SensorDeviceClass.CO2` | ppm | Concentration of carbon dioxide.
@@ -48,9 +48,9 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.DATE` | | Date. Requires `native_value` to be a Python `datetime.date` object, or `None`.
 | `SensorDeviceClass.DISTANCE` | km, m, cm, mm, mi, nmi, yd, in | Generic distance
 | `SensorDeviceClass.DURATION` | d, h, min, s, ms, µs | Time period. Should not update only due to time passing. The device or service needs to give a new data point to update.
-| `SensorDeviceClass.ENERGY` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal | Energy, this device class should be used for sensors representing energy consumption, for example an electricity meter. Represents _power_ over _time_. Not to be confused with `power`.
+| `SensorDeviceClass.ENERGY` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal, thm | Energy, this device class should be used for sensors representing energy consumption, for example an electricity meter. Represents _power_ over _time_. Not to be confused with `power`.
 | `SensorDeviceClass.ENERGY_DISTANCE` | kWh/100km, Wh/km, mi/kWh, km/kWh | Energy per distance, this device class should be used to represent energy consumption by distance, for example the amount of electric energy consumed by an electric car.
-| `SensorDeviceClass.ENERGY_STORAGE` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal | Stored energy, this device class should be used for sensors representing stored energy, for example the amount of electric energy currently stored in a battery or the capacity of a battery. Represents _power_ over _time_. Not to be confused with `power`.
+| `SensorDeviceClass.ENERGY_STORAGE` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal, thm | Stored energy, this device class should be used for sensors representing stored energy, for example the amount of electric energy currently stored in a battery or the capacity of a battery. Represents _power_ over _time_. Not to be confused with `power`.
 | `SensorDeviceClass.ENUM` | | The sensor has a limited set of (non-numeric) states. The `options` property must be set to a list of possible states when using this device class.
 | `SensorDeviceClass.FREQUENCY` | mHz, Hz, kHz, MHz, GHz | Frequency
 | `SensorDeviceClass.GAS` | L, m³, ft³, CCF, MCF | Volume of gas. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
@@ -72,7 +72,7 @@ If specifying a device class, your sensor entity will need to also return the co
 | `SensorDeviceClass.POWER_FACTOR` | %, None | Power Factor
 | `SensorDeviceClass.PRECIPITATION` | cm, in, mm | Accumulated precipitation
 | `SensorDeviceClass.PRECIPITATION_INTENSITY` | in/d, in/h, mm/d, mm/h | Precipitation intensity
-| `SensorDeviceClass.PRESSURE` | cbar, bar, hPa, mmHg, inHg, kPa, mbar, Pa, psi, mPa | Pressure.
+| `SensorDeviceClass.PRESSURE` | cbar, bar, hPa, mmHg, inHg, inH₂O, kPa, mbar, Pa, psi, mPa, atm | Pressure.
 | `SensorDeviceClass.RADON` | Bq/m³, pCi/L | Radon concentration
 | `SensorDeviceClass.REACTIVE_ENERGY` | varh, kvarh | Reactive energy
 | `SensorDeviceClass.REACTIVE_POWER` | mvar, var, kvar | Reactive power

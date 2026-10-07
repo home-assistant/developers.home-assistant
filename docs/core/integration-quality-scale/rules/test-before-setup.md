@@ -3,6 +3,7 @@ title: "Check during integration initialization if we are able to set it up corr
 sidebar_label: 🥉 test-before-setup
 related_rules:
   - runtime-data
+  - entity-unavailable
 ---
 import RelatedRules from './_includes/related_rules.jsx'
 
@@ -13,6 +14,14 @@ This way we can immediately let the user know that it doesn't work.
 
 Implementing these checks increases the confidence that the integration will work correctly and provides a user-friendly way to show errors.
 This will improve the user experience.
+
+When the device or service is temporarily unreachable during setup, the integration can choose between two approaches:
+
+- **Defer setup** until the device or service is reachable, by raising `ConfigEntryNotReady`. Home Assistant will then retry the setup later. This is usually the simplest approach to implement.
+- **Continue setup** without contacting the device or service, and create the entities anyway. This can be a better fit for devices that are expected to be offline regularly, like a solar inverter that shuts down at night or a TV that is turned off. If the integration chooses this approach, the entities must be marked as unavailable until the device or service can be reached, and any information that couldn't be fetched during setup (like device info) must be fetched once the device or service becomes reachable.
+
+Errors that are not temporary must always be reported during setup when they are detected.
+If the password is incorrect or the API key is invalid, raise `ConfigEntryAuthFailed`, and if we don't expect the integration to work in the foreseeable future, raise `ConfigEntryError`.
 
 ## Example implementation
 
@@ -44,8 +53,32 @@ async def async_setup_entry(hass: HomeAssistant, entry: MyIntegrationConfigEntry
 ```
 
 :::info
-Please note that this may also be implemented implicitly when using a data update coordinator via `await coordinator.async_config_entry_first_refresh()`.
+Please note that this may also be implemented implicitly by awaiting a helper that raises on the integration's behalf, either `await coordinator.async_config_entry_first_refresh()` on a data update coordinator or `await session.async_ensure_token_valid()` on an [OAuth2 session](/docs/core/integration/config_flow#oauth2-error-handling).
 :::
+
+### Example of continuing setup when the device is offline
+
+In this example, the device is regularly offline, so the integration continues setup when it can't be reached.
+Instead of `async_config_entry_first_refresh()`, the coordinator is refreshed with `async_refresh()`, which doesn't raise when the update fails.
+Entities based on `CoordinatorEntity` are then marked as unavailable until the coordinator successfully fetches data.
+Authentication errors raised from the coordinator's update method still start the reauthentication flow.
+
+`__init__.py`:
+```python {7} showLineNumbers
+async def async_setup_entry(hass: HomeAssistant, entry: MyIntegrationConfigEntry) -> bool:
+    """Set up my integration from a config entry."""
+
+    client = MyClient(entry.data[CONF_HOST])
+    coordinator = MyCoordinator(hass, entry, client)
+
+    await coordinator.async_refresh()
+
+    entry.runtime_data = coordinator
+
+    await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
+
+    return True
+```
 
 ## Additional resources
 
@@ -53,7 +86,7 @@ More information about config entries and their lifecycle can be found in the [c
 
 ## Exceptions
 
-There are no exceptions to this rule.
+If it is impossible for an integration to validate the configuration during setup, or it's a pure local calculation, the integration is exempt
 
 ## Related rules
 

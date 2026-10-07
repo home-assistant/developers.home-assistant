@@ -8,7 +8,7 @@ To create a new integration page, follow these steps:
    - If you are documenting a new integration you are adding to the code, switch to the `next` branch.
 2. Make a copy of the [integration documentation template](https://github.com/home-assistant/home-assistant.io/tree/current/source/_integrations/_integration_docs_template.markdown) and edit it.
 3. Make sure the filename of the integration page matches the domain name of the integration.
-   - The [Integration overview](https://www.home-assistant.io/integrations/) and the [Examples section](https://www.home-assistant.io/cookbook/) are generated automatically, so there is no need to add a link to those pages.
+   - The [Integration overview](https://www.home-assistant.io/integrations/) is generated automatically, so there is no need to add a link to that page.
 4. Make sure to follow the [Standards](documenting/standards.md) we have for the documentation, including:
    - [General style guide](/docs/documenting/general-style-guide).
    - [YAML Style Guide](/docs/documenting/yaml-style-guide.md)
@@ -61,7 +61,21 @@ The following keys are available for the integration page file header:
 - `featured`: Set to `true` to feature the integration prominently on the integrations page. This is not an `ha_`-prefixed key. Don't use this.
 - `ha_bluetooth`: Set to `true` if the integration supports discovery via Bluetooth, omit otherwise.
 - `ha_brand`: Set to `true` if the page represents a [brand](/docs/creating_integration_brand) rather than a real integration, omit otherwise. A brand groups several integrations or products from the same manufacturer under a single name, so users can find them more easily. It is not the same as a [virtual integration](/docs/creating_integration_manifest#virtual-integration). For example, the `google` brand page groups the `google` and `google_sheets` integrations, and the `inovelli` brand page points to the Zigbee and Z-Wave IoT standards its devices use. Omit this key for regular integration pages.
-- `ha_category`: This entry is used to group the integration on the [Integration overview](https://www.home-assistant.io/integrations/).
+- `ha_category`: This entry is used to group the integration on the [Integration overview](https://www.home-assistant.io/integrations/), where you can see the full list of available categories. Most categories match the name of an entity platform the integration provides, such as `Light`, `Switch`, `Sensor`, `Binary sensor`, `Climate` or `Media player`. Other categories describe the integration's purpose or domain, such as `Hub`, `Energy`, `DIY` or `Weather`.
+
+  **Protocol categories**: Some communication protocols have a pair of categories. The plain protocol name (for example `Serial`) is for integrations that *provide* the connection. The `-controlled` variant (for example `Serial-controlled`) is for integrations that *communicate with a specific device* over that connection, whether they control it, read from it, or both. Pick by the role the integration plays, not by whether the hardware supports the protocol. The following protocol categories are available:
+  - `Infrared`: The integration provides an infrared transmitter or receiver that other integrations can use. Examples: ESPHome, Broadlink, MQTT Infrared.
+  - `Infrared-controlled`: The integration communicates with a specific device using infrared, through an `Infrared` provider. Example: LG Infrared.
+  - `Radio frequency`: The integration provides a radio frequency (for example sub-GHz) transmitter or receiver that other integrations can use. Examples: ESPHome, Broadlink.
+  - `Radio frequency-controlled`: The integration communicates with a specific device using radio frequency, through a `Radio frequency` provider. Example: KlikAanKlikUit.
+  - `Modbus`: The integration provides a Modbus connection (RTU or TCP) that other integrations can use. Example: Modbus.
+  - `Modbus-controlled`: The integration controls or reads a specific device over that device's Modbus interface, either directly or through a gateway. Example: Nibe Heat Pump.
+  - `Serial`: The integration provides a serial port (UART, RS-232, RS-485) that other integrations can use, for example by sharing it over the network. Example: ESPHome.
+  - `Serial-controlled`: The integration controls or reads a specific device over that device's serial interface, either directly or through a serial proxy or serial-to-IP adapter. Example: Denon RS-232.
+
+  Don't use these categories when the protocol is only how Home Assistant reaches a gateway for a different technology. For example, a Zigbee coordinator connected over USB serial doesn't get `Serial`.
+
+  A virtual integration should not have a provider category (`Infrared`, `Radio frequency`, `Modbus` or `Serial`) unless the brand itself sells devices that provide that capability. Don't copy these categories from the supporting integration.
 - `ha_codeowners`: GitHub usernames or team names (starting with `@`) of people that are responsible for this integration. This should match with the codeowners as listed in the integration manifest file.
 - `ha_config_flow`: Set to `true` if the integration has a [Data Entry Flow](/docs/data_entry_flow_index), omit otherwise.
 - `ha_dhcp`: Set to `true` if the integration supports discovery via DHCP, omit otherwise.
@@ -94,16 +108,16 @@ The following keys are available for the integration page file header:
   - Any other value is used as-is (capitalized) in the generated text.
   - You can list multiple values (for example, both `zigbee` and `matter`) when the products are certified for more than one connectivity method.
 
-### Configuration
+## Configuration
 
 Every integration page should contain a configuration example. This includes UI variable descriptions for integrations with a configuration flow, and YAML configuration for integrations that don't yet support a configuration flow.
 
-### UI variables
+## UI variables
 
 - For describing **UI variables** use the `{% configuration_basic %}` section.
 - The `{% configuration_basic %}` block is like the `{% configuration %}` block, but does not have the `required` or `type` fields.
 
-### About configuration variables
+## About configuration variables
 
 - The **Configuration variables** section is only used for YAML configuration.
 - The **Configuration variables** section must use the `{% configuration %}` tag.
@@ -112,7 +126,7 @@ Every integration page should contain a configuration example. This includes UI 
 - Configuration variables must document the accepted value types (see [configuration variables details](#configuration)).
   - For configuration variables that accept multiple types, separate the types with a comma (that is, `string, integer`).
 
-### Example configuration variables block
+## Example configuration variables block
 
 ```yaml
 {% configuration %}
@@ -162,19 +176,19 @@ required: any string here #=> Any string here
 
 - **`type:`**: The type of the variable. Allowed entries: `action`, `boolean`, `string`, `integer`, `float`, `time`, `template`, `device_class`, `icon`, `map`/`list` (for a list of entries), `date`, `datetime`, `timedelta`, `selector`, and `any`. For multiple possibilities use `[string, integer]`. If you use `map`/`list` then you should define `keys:` (see the [`template` sensor](https://www.home-assistant.io/integrations/sensor.template/) for an example). If you use `boolean`, then `default:` must be defined.
 
-### Embedding code
+## Embedding code
 
 You can use the [default markdown syntax](https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet#code) to generate syntax highlighted code. For inline code wrap your code in back-ticks.
 
 When you're writing code that is to be executed on the terminal, do not prefix them with `$`, since this makes it hard to copy and paste the commands. However, an exception is made when there is a need to distinguish between typed commands and command output. In those cases, prefixing the commands with a `$` is required.
 
-### Templates
+## Templates
 
 For the [configuration templating](https://www.home-assistant.io/docs/configuration/templating/) [Jinja](http://jinja.pocoo.org/) is used. Check the [Documentation Standards](documenting/standards.md) for further details.
 
 If you don't escape templates then they will be rendered and appear blank on the website.
 
-### HTML
+## HTML
 
 The direct usage of HTML is supported but not recommended. The note boxes are an exception.
 
@@ -194,7 +208,7 @@ Please note, if you want to use Markdown inside an HTML block, it has to be surr
 </div>
 ```
 
-### Images, icons, and logos
+## Images, icons, and logos
 
 Having a logo with the integration makes an integration quickly identifiable with the end-user.
 From the documentation side of things, no specific configuration is needed to enable the use of a logo,
@@ -209,7 +223,7 @@ however, the logo must exist in our Brands repository.
 | blog        | source/images/blog        |
 | screenshots | source/images/integrations/your-integration |
 
-### Linking from the sidebar
+## Linking from the sidebar
 
 If you are adding a new page that requires linking from the sidebar, edit either:
 

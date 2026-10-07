@@ -49,10 +49,10 @@ class MyConfigFlow(ConfigFlow, domain=DOMAIN):
                 )
         return self.async_show_form(
             step_id="reconfigure",
-            data_schema=vol.Schema(
+            data_schema=probatio.Schema(
                 {
-                    vol.Required(CONF_HOST): TextSelector(),
-                    vol.Required(CONF_API_TOKEN): TextSelector(),
+                    probatio.Required(CONF_HOST): TextSelector(),
+                    probatio.Required(CONF_API_TOKEN): TextSelector(),
                 }
             ),
             errors=errors,
@@ -78,10 +78,10 @@ class MyConfigFlow(ConfigFlow, domain=DOMAIN):
                 )
         return self.async_show_form(
             step_id="user",
-            data_schema=vol.Schema(
+            data_schema=probatio.Schema(
                 {
-                    vol.Required(CONF_HOST): TextSelector(),
-                    vol.Required(CONF_API_TOKEN): TextSelector(),
+                    probatio.Required(CONF_HOST): TextSelector(),
+                    probatio.Required(CONF_API_TOKEN): TextSelector(),
                 }
             ),
             errors=errors,
@@ -94,7 +94,9 @@ For more information on the reconfiguration flow, see the [reconfigure flow docu
 
 ## Exceptions
 
-Integrations that don't have settings in their configuration flow are exempt from this rule.
+* Integrations that don't have settings in their configuration flow are exempt from this rule.
+* Integrations where the only configurable values are credentials, which are handled by the reauthentication flow, are exempt from this rule.
+* Integrations where any change would force the creation of a new config entry when changed are exempt from this rule.
 
 ## Related rules
 

@@ -38,7 +38,18 @@ module.exports = {
           ],
         },
         { to: "docs/misc", label: "Misc", position: "left" },
-        { to: "blog", label: "Blog", position: "left" },
+        {
+          label: "Blog",
+          to: "blog",
+          position: "left",
+          items: [
+            { to: "blog", label: "Latest posts" },
+            { to: "blog/archive", label: "All posts" },
+            { href: "pathname:///blog/rss.xml", label: "RSS feed" },
+            { href: "pathname:///blog/atom.xml", label: "Atom feed" },
+            { href: "pathname:///blog/feed.json", label: "JSON feed" },
+          ],
+        },
       ],
     },
     footer: {
@@ -77,6 +88,22 @@ module.exports = {
             {
               label: "Blog",
               to: "blog",
+            },
+            {
+              label: "Blog archive",
+              to: "blog/archive",
+            },
+            {
+              label: "Blog RSS feed",
+              href: "pathname:///blog/rss.xml",
+            },
+            {
+              label: "Blog Atom feed",
+              href: "pathname:///blog/atom.xml",
+            },
+            {
+              label: "Blog JSON feed",
+              href: "pathname:///blog/feed.json",
             },
             {
               label: "GitHub",
@@ -173,12 +200,12 @@ module.exports = {
         },
         blog: {
           postsPerPage: 10,
+          blogSidebarCount: "ALL",
+          blogSidebarTitle: "All posts",
           feedOptions: {
             type: "all",
+            xslt: true,
           },
-        },
-        googleAnalytics: {
-          trackingID: "UA-57927901-3",
         },
       },
     ],

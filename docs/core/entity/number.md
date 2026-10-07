@@ -35,7 +35,7 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.APPARENT_POWER` | mVA, VA, kVA | Apparent power
 | `NumberDeviceClass.AQI` | None | Air Quality Index
 | `NumberDeviceClass.AREA` | m², cm², km², mm², in², ft², yd², mi², ac, ha | Area
-| `NumberDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, mmHG, inHg, inH₂O, kPa, mbar, Pa, psi | Atmospheric pressure
+| `NumberDeviceClass.ATMOSPHERIC_PRESSURE` | cbar, bar, hPa, mmHg, inHg, inH₂O, kPa, mbar, Pa, psi, mPa, atm | Atmospheric pressure
 | `NumberDeviceClass.BATTERY` | % | Percentage of battery that is left
 | `NumberDeviceClass.BLOOD_GLUCOSE_CONCENTRATION` | mg/dL, mmol/L | Blood glucose concentration```
 | `NumberDeviceClass.CO2` | ppm | Concentration of carbon dioxide.
@@ -46,9 +46,9 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.DATA_SIZE` | bit, kbit, Mbit, Gbit, B, kB, MB, GB, TB, PB, EB, ZB, YB, KiB, MiB, GiB, TiB, PiB, EiB, ZiB, YiB | Data size
 | `NumberDeviceClass.DISTANCE` | km, m, cm, mm, mi, nmi, yd, in | Generic distance
 | `NumberDeviceClass.DURATION` | d, h, min, s, ms, µs | Time period. Should not update only due to time passing. The device or service needs to give a new data point to update.
-| `NumberDeviceClass.ENERGY` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal | Energy, this device class should be used to represent energy consumption, for example an electricity meter. Represents _power_ over _time_. Not to be confused with `power`.
+| `NumberDeviceClass.ENERGY` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal, thm | Energy, this device class should be used to represent energy consumption, for example an electricity meter. Represents _power_ over _time_. Not to be confused with `power`.
 | `NumberDeviceClass.ENERGY_DISTANCE` | kWh/100km, Wh/km, mi/kWh, km/kWh | Energy per distance, this device class should be used to represent energy consumption by distance, for example the amount of electric energy consumed by an electric car.
-| `NumberDeviceClass.ENERGY_STORAGE` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal | Stored energy, this device class should be used to represent stored energy, for example the amount of electric energy currently stored in a battery or the capacity of a battery. Represents _power_ over _time_. Not to be confused with `power`.
+| `NumberDeviceClass.ENERGY_STORAGE` | J, kJ, MJ, GJ, mWh, Wh, kWh, MWh, GWh, TWh, cal, kcal, Mcal, Gcal, thm | Stored energy, this device class should be used to represent stored energy, for example the amount of electric energy currently stored in a battery or the capacity of a battery. Represents _power_ over _time_. Not to be confused with `power`.
 | `NumberDeviceClass.FREQUENCY` | mHz, Hz, kHz, MHz, GHz | Frequency
 | `NumberDeviceClass.GAS` | L, m³, ft³, CCF, MCF | Volume of gas. Gas consumption measured as energy in kWh instead of a volume should be classified as energy.
 | `NumberDeviceClass.HUMIDITY` | % | Relative humidity
@@ -69,7 +69,7 @@ If specifying a device class, your number entity will need to also return the co
 | `NumberDeviceClass.POWER_FACTOR` | %, None | Power Factor
 | `NumberDeviceClass.PRECIPITATION` | cm, in, mm | Accumulated precipitation
 | `NumberDeviceClass.PRECIPITATION_INTENSITY` | in/d, in/h, mm/d, mm/h | Precipitation intensity
-| `NumberDeviceClass.PRESSURE` | cbar, bar, hPa, mmHg, inHg, kPa, mbar, Pa, psi, mPa | Pressure.
+| `NumberDeviceClass.PRESSURE` | cbar, bar, hPa, mmHg, inHg, inH₂O, kPa, mbar, Pa, psi, mPa, atm | Pressure.
 | `NumberDeviceClass.RADON` | Bq/m³, pCi/L | Radon concentration
 | `NumberDeviceClass.REACTIVE_ENERGY` | varh, kvarh | Reactive energy
 | `NumberDeviceClass.REACTIVE_POWER` | mvar, var, kvar | Reactive power
