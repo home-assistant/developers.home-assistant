@@ -375,33 +375,66 @@ class ExampleSensorEntity(SensorEntity):
 
 ## Lifecycle hooks
 
-Use these lifecycle hooks to execute code when certain events happen to the entity. All lifecycle hooks are async methods.
+Use these lifecycle hooks to execute code when certain events happen to the entity. The hooks which run when the entity is added or removed are async methods, the hooks which run when the entity's `entity_id` is changed are callbacks which run in the event loop.
 
 Adding an entity to Home Assistant does not always succeed. The entity platform aborts the add when, for example, the entity is disabled in the entity registry, or when its `entity_id` or `unique_id` collides with an entity which has already been added. The hooks below differ in whether they run on an aborted add, so it's important to pick the right one.
 
 ### `async_prepare_to_add_to_hass()`
 
-Called before the entity is added, on every add attempt, including attempts which will be aborted. At this point the entity has its `hass` and `platform` attributes assigned, but it has not yet been assigned an `entity_id`, its entity registry entry has not yet been created or assigned to `registry_entry`, and its state has not been written to the state machine.
+Called before the entity is added, on every add attempt, including attempts which will be aborted. At this point the entity has its `hass` and `platform` attributes assigned, but the entity platform has not yet processed the entity's registry entry for this add attempt, and the entity's state has not been written to the state machine. Do not rely on `entity_id` or `registry_entry` in this hook: depending on how the entity is added, they may be unset, set by the integration, or left over from an earlier add.
 
-This is the right place for work which must happen before the entity's registry entry is created, or which must happen even if the entity turns out to be disabled. Example uses: seed entity registry options which are read when the registry entry is created, or register data with an integration-level helper so that an entity which is created disabled can be enabled later.
+This is the right place for work which must happen before the entity platform processes the entity's registry entry, or which must happen even if the entity turns out to be disabled. Example uses: seed entity registry options which are read when the registry entry is created or looked up, or register data with an integration-level helper so that an entity which is created disabled can be enabled later.
 
 Because the add may still be aborted, code in this hook must not assume that `async_added_to_hass()` will run, and must not assume that `async_will_remove_from_hass()` will be called to clean up. Register the clean up with [`async_on_remove()`](#async_on_removefunc) instead, which runs both when an add is aborted and when a successfully added entity is removed.
 
 Raising an exception from this hook aborts the add.
 
-Most integrations do not need this hook. Prefer `async_added_to_hass()` unless the work genuinely has to happen before the entity is registered.
+Most integrations do not need this hook. Prefer `async_added_to_hass()` unless the work genuinely has to happen before the entity platform processes the entity's registry entry.
 
 ### `async_added_to_hass()`
 
-Called as the last step of a successful add: after the entity has been assigned its `entity_id` and, if it has a `unique_id`, its entity registry entry, and immediately before its state is written to the state machine for the first time. Example uses: restore the state, subscribe to updates or set callback/dispatch function/listener.
+Called as the last step of an add attempt: after the entity has been assigned its `entity_id` and, if it has a `unique_id`, its entity registry entry, and before the entity is marked as added and its state is written to the state machine for the first time. Example uses: restore the state, subscribe to updates or set callback/dispatch function/listener.
 
-This hook is not called when adding the entity is aborted.
+This hook is not called when adding the entity is aborted before this point, for example because the entity is disabled or its `entity_id` or `unique_id` collides with an entity which has already been added. The add can however still fail after this hook has started: if the hook raises, if the add is cancelled, or if writing the first state raises. In that case `async_will_remove_from_hass()` is not called, so register clean up of anything set up in this hook with [`async_on_remove()`](#async_on_removefunc), which runs both when the add fails and when the entity is removed.
+
+This hook is not called again when the entity's `entity_id` is changed; see [`async_entity_id_changed()`](#async_entity_id_changedold_entity_id).
 
 ### `async_will_remove_from_hass()`
 
 The counterpart of `async_added_to_hass()`: called when an entity which was successfully added is about to be removed from Home Assistant. Use it to undo the work done in `async_added_to_hass()`. Example use: disconnect from the server or unsubscribe from updates.
 
-This hook is not called when adding the entity was aborted before the add finished. On that path, only the callbacks registered with `async_on_remove()` run.
+This hook is not called when adding the entity was aborted or failed before the add finished, even if `async_added_to_hass()` had already run. On that path, only the callbacks registered with `async_on_remove()` run. It's also not called when the entity's `entity_id` is changed, because the entity is not removed.
+
+### `async_entity_id_changed(old_entity_id)`
+
+Called when the entity's `entity_id` is changed in the entity registry, for example by the user. The entity is not removed and added again; instead it's updated in place under its new `entity_id`, and `async_will_remove_from_hass()` and `async_added_to_hass()` are not called.
+
+When this callback runs, `self.entity_id` is already the new `entity_id`, and the previous `entity_id` is passed as `old_entity_id`. The state under the old `entity_id` has already been removed, and Home Assistant has already moved its own bookkeeping, such as entity registry and device registry tracking, entity sources and restore state, to the new `entity_id`. `async_registry_entry_updated()` has already run. The state has not yet been written under the new `entity_id`.
+
+Implement it to update anything the entity has set up which depends on its own `entity_id`, in particular anything the state or attributes are derived from. Example uses: re-subscribe state change listeners or dispatcher signals which are keyed on `self.entity_id`, or update a lookup table which maps entity IDs to entities. Do not write the state from this callback; Home Assistant writes it after the callback returns. Always call `super()`, so base classes can do the same.
+
+```python
+@callback
+def async_entity_id_changed(self, old_entity_id: str) -> None:
+    """Run when the entity_id has been changed."""
+    super().async_entity_id_changed(old_entity_id)
+    self._unsub_signal()
+    self._unsub_signal = async_dispatcher_connect(
+        self.hass, f"{DOMAIN}_{self.entity_id}", self._handle_signal
+    )
+```
+
+Entities which don't set up anything keyed on their own `entity_id` don't need to implement this callback.
+
+### `async_entity_id_change_finished(old_entity_id)`
+
+Called after `async_entity_id_changed()`, once the state has been written under the new `entity_id`. Only use it for work which needs to read the entity's own state under its new `entity_id`, for example rendering templates which reference `this`, or for work which may write the state. Anything else belongs in `async_entity_id_changed()`. Always call `super()`.
+
+Work which must be awaited can be done in a task. Entity registry updates are not serialized with such a task, so after each `await`, check that the entity is still added and that `self.entity_id` has not changed again.
+
+:::info
+To give custom integrations time to migrate, an entity is still removed and added again when its `entity_id` is changed if its class, or one of its base classes other than `Entity`, implements `async_prepare_to_add_to_hass()`, `async_added_to_hass()` or `async_will_remove_from_hass()`, unless that same class or a subclass of it also implements `async_entity_id_changed()` or `async_entity_id_change_finished()`. Implementing `async_entity_id_changed()`, even as a method which only calls `super()`, opts the class in to having its `entity_id` changed in place. This backwards compatibility will be removed in Home Assistant Core 2027.11.
+:::
 
 ### `async_on_remove(func)`
 
