@@ -333,7 +333,7 @@ and `removable` and `ejectable` are `false`.
 | user_path  | string or null | Where the mount is available inside managed containers, `null` for backup mounts | response only |
 
 Request only fields may be included in requests but will never be in responses.
-Response only fields will be in responses and are ignored in requests.
+Response only fields may be present in responses and are ignored in requests.
 
 A disk mount is identified by `device`, `uuid`, or both. When both are given,
 resolution uses `uuid` and `device` must agree. `device` is input only:
