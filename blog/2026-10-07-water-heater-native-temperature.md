@@ -4,7 +4,7 @@ authorURL: https://github.com/emontnemery
 title: "Water heater entities now expose their temperature unit"
 ---
 
-As of Home Assistant Core 2026.11, water heater entities have a new `temperature_unit` state attribute, and the temperature properties integrations implement have been renamed with a `native_` prefix. This is the same change as the one [made to climate entities](/blog/2026/10/07/climate-native-temperature).
+As of Home Assistant Core 2026.11, water heater entities have a new `temperature_unit` state attribute, and the temperature properties integrations implement have been renamed with a `native_` prefix.
 
 ### Background
 
