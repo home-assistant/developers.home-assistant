@@ -3892,7 +3892,7 @@ Some of the endpoints uses placeholders indicated with `<...>` in the endpoint U
 
 | placeholder | description                                                                                                                                           |
 | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| addon       | The slug for the app, to get the slug you can call `/addons`, to call endpoints for the app calling the endpoints you can use `self` as the slug. |
+| app         | The slug for the app, to get the slug you can call `/addons`, to call endpoints for the app calling the endpoints you can use `self` as the slug. |
 | application | The name of an application, call `/audio/info` to get the correct name                                                                                |
 | backup      | A valid backup slug, example `skuwe823`, to get the slug you can call `/backups`                                                                      |
 | bootid      | An id or offset of a particular boot, used to filter logs. Call `/host/logs/boots` to get a list of boot ids or see `/host/logs/boots/<bootid>` to understand boot offsets |
