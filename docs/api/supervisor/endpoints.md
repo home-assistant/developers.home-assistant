@@ -2044,9 +2044,12 @@ mount with POST `/mounts`. Disks are described like the ones from
 `/os/datadisk/list`. A disk's `id` is not a `disk` value for
 `/host/disks/<disk>/usage`, which takes `default` or a mount name.
 
-Partitions without a supported filesystem, that belong to Home Assistant OS,
-or that are already in use are omitted, and so are disks left without
-partitions. Every listed partition currently has `mountable` set to `true`.
+Partitions without a supported filesystem or a filesystem UUID, that UDisks2
+hides, that belong to Home Assistant OS, or that are already in use are
+omitted, and so are disks left without partitions. A filesystem on a disk
+without a partition table is listed as that disk's only partition, with
+`device` equal to `dev_path`. Every listed partition currently has `mountable`
+set to `true`.
 Partitions that cannot be mounted may be listed with `mountable` set to
 `false` in the future, so only offer partitions where it is `true`. A host
 without UDisks2 returns an empty list rather than an error.
@@ -2520,17 +2523,21 @@ Accepts a [Mount](api/supervisor/models.md#mount)
 Value in `name` must be unique and can only consist of letters, numbers and underscores.
 
 A `disk` mount stays configured while its device is away. Accessing the path
-fails immediately (it is never a plain writable directory). Plug the device
-back in and it mounts again on the next access.
+fails immediately (it is never a plain writable directory), and plugging the
+device back in mounts it again on the next access. A disk pulled or replugged
+while mounted stays bound to the old device until the next health check
+(every 15 minutes), POST `/mounts/<name>/reload`, or a Supervisor restart. A
+`btrfs` disk replugged between health checks is not detected; update the
+mount or reboot the host to rebind it.
 
 Identify the device with `device`, `uuid`, or both. Supplying neither is
 rejected. When both are given, resolution uses `uuid` and `device` must
 agree, so a partition from GET `/host/disks` can be posted back with `name`
 and `usage` added and `type` set to `disk`. Keys that are not part of a mount,
 such as `label` and `mountable`, are dropped. `filesystem` in the payload is
-ignored so a GET `/mounts` response can be sent back unchanged; the
-filesystem is probed during UDisks2 resolution, which also enforces whether
-the device may be mounted.
+ignored, as are the response-only `state` and `user_path`, so a mount object
+from GET `/mounts` can be sent back unchanged; the filesystem is probed during
+UDisks2 resolution, which also enforces whether the device may be mounted.
 
 **Example payload:**
 
@@ -2576,8 +2583,14 @@ The full configuration is validated, so every required field for the type must
 be present. Omitted fields take their default rather than keeping the existing
 value.
 
+The existing mount is unmounted before the new configuration is mounted. If
+that fails, the mount keeps its old configuration, but its path is not covered
+until the next health check (every 15 minutes), POST `/mounts/<name>/reload`,
+or a Supervisor restart.
+
 For a `disk` mount, send the stored `uuid`, not `device`: GET `/host/disks`
-does not offer a partition that is already mounted.
+does not offer a partition that is already mounted. The device is resolved
+again, so an update fails while it is away.
 
 **Example payload:**
 
@@ -2599,7 +2612,10 @@ Unmount and delete an existing mount from Supervisor.
 </ApiEndpoint>
 
 <ApiEndpoint path="/mounts/<name>/reload" method="post">
-Unmount and remount an existing mount in Supervisor using the same configuration.
+Probe an existing mount. A mount that answers is left alone. Otherwise it is
+remounted using the same configuration, including a `disk` mount bound to a
+removed or replugged device, and an error is returned if it still cannot be
+reached.
 
 </ApiEndpoint>
 

@@ -307,10 +307,10 @@ and `removable` and `ejectable` are `false`.
 | device     | string | Path of the partition device, such as `/dev/sdc1`                         |
 | uuid       | string | Filesystem UUID of the partition                                          |
 | label      | string | Filesystem label, empty when the filesystem has none                      |
-| filesystem | string | Filesystem on the partition, such as `ext4`                               |
+| filesystem | string | Filesystem on the partition: `btrfs`, `exfat`, `ext2`, `ext3`, `ext4`, `f2fs`, `ntfs` or `vfat` |
 | size       | int    | Size of the partition in bytes                                            |
 | read_only  | bool   | Partition can only be mounted read-only                                   |
-| mountable  | bool   | Partition can be added as a `disk` [Mount](#mount). Always `true` for now |
+| mountable  | bool   | Partition can be added as a `disk` [Mount](#mount). Always `true` for now. The host kernel must support the filesystem; `f2fs` needs Home Assistant OS 18.3 or later |
 
 ## Mount
 
@@ -328,16 +328,20 @@ and `removable` and `ejectable` are `false`.
 | password   | string         | (cifs mounts only) Password to use for authentication                  | request only     |
 | device     | string         | (disk mounts only) Path of the device to mount, such as `/dev/sdc1`    | request only     |
 | uuid       | string         | (disk mounts only) Filesystem UUID of the device to mount              | both             |
-| filesystem | string         | (disk mounts only) Filesystem probed on the device, such as `ext4`. Absent on a restored mount until it first activates | response only    |
-| state      | string         | Last probe result: `active` means the mount answered, and for a disk that its device is still attached | response only    |
+| filesystem | string         | (disk mounts only) Filesystem probed on the device, such as `ext4`. Absent after a restore until the device is resolved again | response only    |
+| state      | string or null | Result of the last health check, run at least every 15 minutes: `active` or `inactive`. For a disk, `active` also means its device was attached, so a disk pulled since the last check still shows `active`. `null` when the mount could not be set up | response only    |
 | user_path  | string or null | Where the mount is available inside managed containers, `null` for backup mounts | response only |
 
 Request only fields may be included in requests but will never be in responses.
-Response only fields will be in responses but cannot be included in requests.
+Response only fields will be in responses and are ignored in requests.
 
 A disk mount is identified by `device`, `uuid`, or both. When both are given,
 resolution uses `uuid` and `device` must agree. `device` is input only:
 responses report `uuid` and `filesystem`.
+
+A disk mount restored from a backup whose device is not found is not set up,
+so its path is not covered, until a health check (every 15 minutes), POST
+`/mounts/<name>/reload`, or a Supervisor restart finds the device.
 
 ## Job
 
