@@ -11,7 +11,7 @@ Three new entity lifecycle hooks have been added:
 - `Entity.async_prepare_to_add_to_hass` allows integrations to run code *before* an entity is added to Home Assistant. It's available from Home Assistant Core 2026.10.
 - `Entity.async_entity_id_changed` and `Entity.async_entity_id_change_finished` are called when an entity's `entity_id` is changed in the entity registry. From Home Assistant Core 2026.11, an entity is no longer removed and added again when its `entity_id` is changed; it's updated in place instead.
 
-Custom integrations which implement `async_prepare_to_add_to_hass`, `async_added_to_hass` or `async_will_remove_from_hass` need to opt in to in-place `entity_id` changes by implementing `async_entity_id_changed`. Until they do, their entities are still removed and added again when the `entity_id` changes. This backwards compatibility will be removed in Home Assistant Core 2027.11.
+Custom integrations which implement `async_prepare_to_add_to_hass`, `async_added_to_hass` or `async_will_remove_from_hass` need to opt in to in-place `entity_id` changes by implementing `async_entity_id_changed` or `async_entity_id_change_finished`. Until they do, their entities are still removed and added again when the `entity_id` changes. This backwards compatibility will be removed in Home Assistant Core 2027.11.
 
 The lifecycle hooks are documented in [entity lifecycle hooks](/docs/core/entity#lifecycle-hooks).
 
