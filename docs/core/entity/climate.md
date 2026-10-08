@@ -28,7 +28,7 @@ Properties should always only return information from memory and not do I/O (lik
 | native_target_temperature_high | `float \| None` | **Required by TARGET_TEMPERATURE_RANGE** | The upper bound target temperature, in `native_temperature_unit`.  |
 | native_target_temperature_low | `float \| None` | **Required by TARGET_TEMPERATURE_RANGE** | The lower bound target temperature, in `native_temperature_unit`.   |
 | native_temperature_unit | <code>str</code>                    | **Required**                         | The unit the entity reports temperatures in (`UnitOfTemperature.CELSIUS` or `UnitOfTemperature.FAHRENHEIT`). See [Temperature units](#temperature-units). |
-| precision               | `float`                             | According to `native_temperature_unit` | The precision of the temperature in the system. Defaults to tenths for `UnitOfTemperature.CELSIUS`, whole number otherwise. |
+| precision               | `float`                             | According to the configured unit system | The precision of the temperature in the system. Defaults to tenths when the configured unit system uses `UnitOfTemperature.CELSIUS`, whole number otherwise. |
 | preset_mode             | `str \| None`        | **Required by ClimateEntityFeature.PRESET_MODE**  | The current active preset.                                                 |
 | preset_modes            | `list[str] \| None`  | **Required by ClimateEntityFeature.PRESET_MODE**  | The available presets.                                                     |
 | swing_mode              | `str \| None`        | **Required by ClimateEntityFeature.SWING_MODE**   | The swing setting.                                                         |
@@ -37,17 +37,13 @@ Properties should always only return information from memory and not do I/O (lik
 | swing_horizontal_modes  | `list[str] \| None`  | **Required by ClimateEntityFeature.SWING_HORIZONTAL_MODE**  | Returns the list of available horizontal swing modes.            |
 | target_humidity         | `float \| None`      | `None`                               | The target humidity the device is trying to reach.                         |
 | target_humidity_step    | `int \| None`        | `None`                               | The supported step size a target humidity can be increased or decreased in an action call targeting the device. |
-| target_temperature_step | `float \| None`      | `None`                               | The supported step size a target temperature can be increased or decreased |
+| target_temperature_step | `float \| None`      | `None`                               | The supported step size a target temperature can be increased or decreased, in `native_temperature_unit`. |
 
 ### Temperature units
 
 Integrations provide temperatures in the unit the device uses, and set `native_temperature_unit` to that unit. The climate entity converts the temperatures to the unit system configured by the user before writing them to the state machine, and adds a `temperature_unit` state attribute that holds the unit of the converted temperatures. The `temperature_unit` state attribute is set by the base class and can't be overridden by integrations.
 
 Temperatures passed to `set_temperature` are converted to `native_temperature_unit` before the method is called.
-
-:::info
-The `current_temperature`, `target_temperature`, `target_temperature_high`, `target_temperature_low` and `temperature_unit` properties, and the corresponding `_attr_` attributes, are deprecated and will stop working in Home Assistant 2027.11. Use the `native_` prefixed properties and `_attr_native_` prefixed attributes instead.
-:::
 
 ### HVAC modes
 
