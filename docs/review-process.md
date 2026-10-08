@@ -132,7 +132,7 @@ review again by clicking the "Ready for review button":
 
 ![The ready for review button in the bottom of a PR in draft mode](/img/en/blog/2023-02-07-introducing-PR-drafting-in-reviews/ready-for-review.png)
 
-Before you click the "Ready for review" button, ensure you have addressed
+Before you click the **Ready for review** button, ensure you have addressed
 all requested changes and that all our CI jobs and checks are passing
 successfully.
 

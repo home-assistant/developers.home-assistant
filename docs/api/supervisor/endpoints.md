@@ -19,7 +19,7 @@ Return overview information about installed apps.
 
 | key          | type | description                                        |
 | ------------ | ---- | -------------------------------------------------- |
-| addons       | list | A list of [Addon models](api/supervisor/models.md#app-formerly-known-as-an-add-on)           |
+| addons       | list | A list of [app models](api/supervisor/models.md#app-formerly-known-as-an-add-on)           |
 
 **Example response:**
 
@@ -28,7 +28,7 @@ Return overview information about installed apps.
   "addons": [
     {
       "name": "Awesome app",
-      "slug": "awesome_addon",
+      "slug": "awesome_app",
       "description": "My awesome app",
       "advanced": false,
       "stage": "stable",
@@ -55,15 +55,15 @@ Return overview information about installed apps.
 Reloads the information stored about apps.
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/changelog" method="get">
+<ApiEndpoint path="/addons/<app>/changelog" method="get">
 Get the changelog for an app.
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/documentation" method="get">
+<ApiEndpoint path="/addons/<app>/documentation" method="get">
 Get the documentation for an app.
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/logs" method="get">
+<ApiEndpoint path="/addons/<app>/logs" method="get">
 
 Get logs for an app via the Systemd journal backend.
 
@@ -72,13 +72,13 @@ The endpoint accepts the same headers and provides the same functionality as
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/logs/follow" method="get">
+<ApiEndpoint path="/addons/<app>/logs/follow" method="get">
 
-Identical to `/addons/<addon>/logs` except it continuously returns new log entries.
+Identical to `/addons/<app>/logs` except it continuously returns new log entries.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/logs/latest" method="get">
+<ApiEndpoint path="/addons/<app>/logs/latest" method="get">
 
 Return all logs of the latest startup of the app container.
 
@@ -86,7 +86,7 @@ The `Range` header is ignored but the `lines` query parameter can be used.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/logs/boots/<bootid>" method="get">
+<ApiEndpoint path="/addons/<app>/logs/boots/<bootid>" method="get">
 
 Get logs for an app related to a specific boot.
 
@@ -96,18 +96,18 @@ functionality as `/host/logs`.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/logs/boots/<bootid>/follow" method="get">
+<ApiEndpoint path="/addons/<app>/logs/boots/<bootid>/follow" method="get">
 
-Identical to `/addons/<addon>/logs/boots/<bootid>` except it continuously returns
+Identical to `/addons/<app>/logs/boots/<bootid>` except it continuously returns
 new log entries.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/icon" method="get">
+<ApiEndpoint path="/addons/<app>/icon" method="get">
 Get the app icon
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/info" method="get">
+<ApiEndpoint path="/addons/<app>/info" method="get">
 Get details about an app
 
 **Returned data:**
@@ -125,7 +125,7 @@ Get details about an app
 | auto_update         | boolean            | `true` if auto update is enabled                                                       |
 | available           | boolean            | `true` if the app is available                                                      |
 | boot                | string             | "auto" or "manual"                                                                     |
-| boot_config         | string             | Default boot mode of addon or "manual_only" if boot mode cannot be auto                |
+| boot_config         | string             | The app's default boot mode or `manual_only` if boot mode cannot be auto                |
 | build               | boolean            | `true` if local app                                                                 |
 | changelog           | boolean            | `true` if changelog is available                                                       |
 | description         | string             | The app description                                                                 |
@@ -165,7 +165,7 @@ Get details about an app
 | options             | dictionary         | The app configuration. Redacted (empty dictionary) unless the caller is Home Assistant Core, the app requesting its own info, or an app with the `manager` or `admin` role, since the options may contain secrets such as passwords or API keys |
 | privileged          | list               | A list of hardwars/system attributes the app has access to                         |
 | protected           | boolean            | `true` if protection mode is enabled                                                   |
-| rating              | int                | The addon rating                                                                       |
+| rating              | int                | The app rating                                                                       |
 | repository          | string             | The URL to the app repository                                                       |
 | schema              | dictionary or null | The schema for the app configuration                                                |
 | services_role       | list               | A list of services and the apps role for that service                               |
@@ -247,7 +247,7 @@ Get details about an app
   "repository": "12345678",
   "schema": {},
   "services_role": ["service:access"],
-  "slug": "awesome_addon",
+  "slug": "awesome_app",
   "stage": "stable",
   "startup": "application",
   "state": "started",
@@ -276,18 +276,18 @@ Get details about an app
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/install" method="post">
+<ApiEndpoint path="/addons/<app>/install" method="post">
 Install an app
 
-**Deprecated!** Use [`/store/addons/<addon>/install`](#store) instead.
+**Deprecated!** Use [`/store/addons/<app>/install`](#store) instead.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/logo" method="get">
+<ApiEndpoint path="/addons/<app>/logo" method="get">
 Get the app logo
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/options" method="post">
+<ApiEndpoint path="/addons/<app>/options" method="post">
 Set the options for an app.
 
 :::tip
@@ -327,8 +327,8 @@ To reset customized network/audio/options, set it `null`.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/sys_options" method="post">
-Change options specific to system managed addons.
+<ApiEndpoint path="/addons/<app>/sys_options" method="post">
+Change options specific to system managed apps.
 
 This endpoint is only callable by Home Assistant and not by any other client.
 
@@ -337,7 +337,7 @@ This endpoint is only callable by Home Assistant and not by any other client.
 | key                         | type          | description                             |
 | --------------------------- | ------------- | --------------------------------------- |
 | system_managed              | boolean       | `true` if managed by Home Assistant     |
-| system_managed_config_entry | boolean       | ID of config entry managing addon       |
+| system_managed_config_entry | boolean       | ID of config entry managing app         |
 
 **You need to supply at least one key in the payload.**
 
@@ -352,7 +352,7 @@ This endpoint is only callable by Home Assistant and not by any other client.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/options/validate" method="post">
+<ApiEndpoint path="/addons/<app>/options/validate" method="post">
 Run a configuration validation against the current stored app configuration or payload.
 
 **Payload:**
@@ -369,11 +369,11 @@ Optional the raw app options.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/options/config" method="get">
+<ApiEndpoint path="/addons/<app>/options/config" method="get">
 The Data endpoint to get his own rendered configuration.
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/rebuild" method="post">
+<ApiEndpoint path="/addons/<app>/rebuild" method="post">
 Rebuild the app, only supported for local build apps.
 
 **Payload:**
@@ -384,11 +384,11 @@ Rebuild the app, only supported for local build apps.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/restart" method="post">
+<ApiEndpoint path="/addons/<app>/restart" method="post">
 Restart an app
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/security" method="post">
+<ApiEndpoint path="/addons/<app>/security" method="post">
 Set the protection mode on an app.
 
 This function is not callable by itself and you cannot use `self` as the slug here.
@@ -401,11 +401,11 @@ This function is not callable by itself and you cannot use `self` as the slug he
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/start" method="post">
+<ApiEndpoint path="/addons/<app>/start" method="post">
 Start an app
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/stats" method="get">
+<ApiEndpoint path="/addons/<app>/stats" method="get">
 
 Returns a [Stats model](api/supervisor/models.md#stats) for the app.
 
@@ -426,31 +426,31 @@ Returns a [Stats model](api/supervisor/models.md#stats) for the app.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/stdin" method="post">
+<ApiEndpoint path="/addons/<app>/stdin" method="post">
 Write data to app stdin.
 
-The payload you want to pass into the addon you give the endpoint as the body of the request.
+The payload you want to pass into the app you give the endpoint as the body of the request.
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/stop" method="post">
+<ApiEndpoint path="/addons/<app>/stop" method="post">
 Stop an app
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/uninstall" method="post">
+<ApiEndpoint path="/addons/<app>/uninstall" method="post">
 Uninstall an app
 
 **Payload:**
 
 | key           | type    | optional | description                            |
 | ------------- | ------- | -------- | -------------------------------------- |
-| remove_config | boolean | True     | Delete addon's config folder (if used) |
+| remove_config | boolean | True     | Delete app's config folder (if used) |
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/addons/<addon>/update" method="post">
+<ApiEndpoint path="/addons/<app>/update" method="post">
 Update an app
 
-**Deprecated!** Use [`/store/addons/<addon>/update`](#store) instead.
+**Deprecated!** Use [`/store/addons/<app>/update`](#store) instead.
 
 </ApiEndpoint>
 
@@ -531,7 +531,7 @@ Return information about the audio plugin.
             "stream_type": "INPUT",
             "volume": 0.3,
             "mute": false,
-            "addon": "awesome_addon"
+            "addon": "awesome_app"
           }
         ]
       }
@@ -553,7 +553,7 @@ Return information about the audio plugin.
             "stream_type": "INPUT",
             "volume": 0.3,
             "mute": false,
-            "addon": "awesome_addon"
+            "addon": "awesome_app"
           }
         ]
       }
@@ -566,7 +566,7 @@ Return information about the audio plugin.
         "stream_type": "OUTPUT",
         "volume": 0.3,
         "mute": false,
-        "addon": "awesome_addon"
+        "addon": "awesome_app"
       }
     ]
   }
@@ -837,7 +837,7 @@ Return a list of [Backups](api/supervisor/models.md#backup)
       "compressed": true,
       "content": {
         "homeassistant": true,
-        "addons": ["awesome_addon"],
+        "addons": ["awesome_app"],
         "folders": ["ssl", "media"]
       }
     }
@@ -874,7 +874,7 @@ Return information about backup manager.
       "location": null,
       "content": {
         "homeassistant": true,
-        "addons": ["awesome_addon"],
+        "addons": ["awesome_app"],
         "folders": ["ssl", "media"]
       }
     }
@@ -991,11 +991,11 @@ Reload backup from storage.
 
 <ApiEndpoint path="/backups/freeze" method="post">
 
-Put Supervisor in a freeze state and prepare Home Assistant and addons for an external backup.
+Put Supervisor in a freeze state and prepare Home Assistant and apps for an external backup.
 
 :::note
 
-This does not take a backup. It prepares Home Assistant and addons for one but the expectation
+This does not take a backup. It prepares Home Assistant and apps for one but the expectation
 is that the user is using an external tool to make the backup. Such as the snapshot feature in
 KVM or Proxmox. The caller should call `/backups/thaw` when done.
 
@@ -1011,7 +1011,7 @@ KVM or Proxmox. The caller should call `/backups/thaw` when done.
 
 <ApiEndpoint path="/backups/thaw" method="post">
 
-End a freeze initiated by `/backups/freeze` and resume normal behavior in Home Assistant and addons.
+End a freeze initiated by `/backups/freeze` and resume normal behavior in Home Assistant and apps.
 
 </ApiEndpoint>
 
@@ -1375,14 +1375,14 @@ Return information about enabled discoveries.
 {
   "discovery": [
     {
-      "addon": "awesome_addon",
+      "addon": "awesome_app",
       "service": "awesome.service",
       "uuid": "fh874r-fj9o37yr3-fehsf7o3-fd798",
       "config": {}
     }
   ],
   "services": {
-    "awesome": ["awesome_addon"]
+    "awesome": ["awesome_app"]
   }
 }
 ```
@@ -2375,8 +2375,8 @@ Returns information about available updates
     },
     {
       "name": "Awesome addon",
-      "icon": "/addons/awesome_addon/icon",
-      "panel_path": "/update-available/awesome_addon",
+      "icon": "/addons/awesome_app/icon",
+      "panel_path": "/update-available/awesome_app",
       "update_type": "addon",
       "version_latest": "321",
     }
@@ -3105,7 +3105,7 @@ Move datadisk to a new location, **This will also reboot the device!**
 
 Wipe the datadisk including all user data and settings, **This will also reboot the device!** This API requires an admin token
 
-This API will wipe all config/settings for addons, Home Assistant and the Operating
+This API will wipe all config/settings for apps, Home Assistant and the Operating
 System and any locally stored data in config, backups, media, etc. The machine will
 reboot during this.
 
@@ -3395,7 +3395,7 @@ Execute a specific check right now.
     {
       "slug": "name",
       "available": true,
-      "providers": ["awesome_addon"]
+      "providers": ["awesome_app"]
     }
   ]
 }
@@ -3410,7 +3410,7 @@ Execute a specific check right now.
 | key      | type    | description                             |
 | -------- | ------- | --------------------------------------- |
 | addon    | string  | The app slug                         |
-| host     | string  | The IP of the addon running the service |
+| host     | string  | The IP of the app running the service |
 | port     | string  | The port the service is running on      |
 | ssl      | boolean | `true` if SSL is in use                 |
 | username | string  | The username for the service            |
@@ -3441,7 +3441,7 @@ Create a service definition
 
 | key      | type    | description                             |
 | -------- | ------- | --------------------------------------- |
-| host     | string  | The IP of the addon running the service |
+| host     | string  | The IP of the app running the service |
 | port     | string  | The port the service is running on      |
 | ssl      | boolean | `true` if SSL is in use                 |
 | username | string  | The username for the service            |
@@ -3463,7 +3463,7 @@ Deletes the service definitions
 | key      | type    | description                             |
 | -------- | ------- | --------------------------------------- |
 | addon    | string  | The app slug                         |
-| host     | string  | The IP of the addon running the service |
+| host     | string  | The IP of the app running the service |
 | port     | string  | The port the service is running on      |
 | ssl      | boolean | `true` if SSL is in use                 |
 | username | string  | The username for the service            |
@@ -3492,7 +3492,7 @@ Create a service definition
 
 | key      | type   | description                             |
 | -------- | ------ | --------------------------------------- |
-| host     | string | The IP of the addon running the service |
+| host     | string | The IP of the app running the service |
 | port     | string | The port the service is running on      |
 | username | string | The username for the service            |
 | password | string | The password for the service            |
@@ -3520,7 +3520,7 @@ Returns app store information.
       "name": "Awesome app",
       "slug": "7kshd7_awesome",
       "description": "Awesome description",
-      "repository": "https://example.com/addons",
+      "repository": "https://example.com/awesome-ha-apps",
       "version": "1.0.0",
       "installed": "1.0.0",
       "icon": false,
@@ -3530,10 +3530,10 @@ Returns app store information.
   ],
   "repositories": [
     {
-      "slug": "awesom_repository",
+      "slug": "awesome_repository",
       "name": "Awesome Repository",
-      "source": "https://example.com/addons",
-      "url": "https://example.com/addons",
+      "source": "https://example.com/awesome-ha-apps",
+      "url": "https://example.com/awesome-ha-apps",
       "maintainer": "Awesome Maintainer"
     }
   ]
@@ -3554,7 +3554,7 @@ Returns a list of store apps
     "name": "Awesome app",
     "slug": "7kshd7_awesome",
     "description": "Awesome description",
-    "repository": "https://example.com/addons",
+    "repository": "https://example.com/awesome-ha-apps",
     "version": "1.0.0",
     "installed": "1.0.0",
     "icon": false,
@@ -3566,7 +3566,7 @@ Returns a list of store apps
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/store/addons/<addon>" method="get">
+<ApiEndpoint path="/store/addons/<app>" method="get">
 
 Returns information about a store app
 
@@ -3603,7 +3603,7 @@ Returns information about a store app
   "slug": "7kshd7_awesome",
   "stage": "stable",
   "update_available": false,
-  "url": "https://example.com/addons/tree/main/awesome_addon",
+  "url": "https://example.com/awesome-ha-apps/tree/main/awesome_app",
   "version_latest": "1.0.0",
   "version": "1.0.0"
 }
@@ -3611,7 +3611,7 @@ Returns information about a store app
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/store/addons/<addon>/install" method="post">
+<ApiEndpoint path="/store/addons/<app>/install" method="post">
 
 Install an app from the store.
 
@@ -3623,7 +3623,7 @@ Install an app from the store.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/store/addons/<addon>/update" method="post">
+<ApiEndpoint path="/store/addons/<app>/update" method="post">
 
 Update an app from the store.
 
@@ -3636,23 +3636,23 @@ Update an app from the store.
 
 </ApiEndpoint>
 
-<ApiEndpoint path="/store/addons/<addon>/changelog" method="get">
+<ApiEndpoint path="/store/addons/<app>/changelog" method="get">
 Get the changelog for an app.
 </ApiEndpoint>
 
-<ApiEndpoint path="/store/addons/<addon>/documentation" method="get">
+<ApiEndpoint path="/store/addons/<app>/documentation" method="get">
 Get the documentation for an app.
 </ApiEndpoint>
 
-<ApiEndpoint path="/store/addons/<addon>/icon" method="get">
+<ApiEndpoint path="/store/addons/<app>/icon" method="get">
 Get the app icon
 </ApiEndpoint>
 
-<ApiEndpoint path="/store/addons/<addon>/logo" method="get">
+<ApiEndpoint path="/store/addons/<app>/logo" method="get">
 Get the app logo
 </ApiEndpoint>
 
-<ApiEndpoint path="/store/addons/<addon>/availability" method="get">
+<ApiEndpoint path="/store/addons/<app>/availability" method="get">
 
 Returns 200 success status if the latest version of the app is able to be
 installed on the current system. Returns a 400 error status if it is not with a
@@ -3675,10 +3675,10 @@ Returns a list of store repositories
 ```json
 [
   {
-    "slug": "awesom_repository",
+    "slug": "awesome_repository",
     "name": "Awesome Repository",
-    "source": "https://example.com/addons",
-    "url": "https://example.com/addons",
+    "source": "https://example.com/awesome-ha-apps",
+    "url": "https://example.com/awesome-ha-apps",
     "maintainer": "Awesome Maintainer"
   }
 ]
@@ -3688,19 +3688,19 @@ Returns a list of store repositories
 
 <ApiEndpoint path="/store/repositories" method="post">
 
-Add an addon repository to the store
+Add an app repository to the store
 
 **Payload:**
 
 | key        | type   | description                                      |
 | ---------- | ------ | ------------------------------------------------ |
-| repository | string | URL of the addon repository to add to the store. |
+| repository | string | URL of the app repository to add to the store. |
 
 **Example payload:**
 
 ```json
 {
-  "repository": "https://example.com/addons"
+  "repository": "https://example.com/awesome-ha-apps"
 }
 ```
 
@@ -3714,10 +3714,10 @@ Returns information about a store repository
 
 ```json
 {
-  "slug": "awesom_repository",
+  "slug": "awesome_repository",
   "name": "Awesome Repository",
-  "source": "https://example.com/addons",
-  "url": "https://example.com/addons",
+  "source": "https://example.com/awesome-ha-apps",
+  "url": "https://example.com/awesome-ha-apps",
   "maintainer": "Awesome Maintainer"
 }
 ```
@@ -3726,13 +3726,13 @@ Returns information about a store repository
 
 <ApiEndpoint path="/store/repositories/<repository>" method="delete">
 
-Remove an unused addon repository from the store.
+Remove an unused app repository from the store.
 
 </ApiEndpoint>
 
 <ApiEndpoint path="/store/repositories/<repository>/repair" method="post">
 
-Repair/reset an addon repository in the store that is missing or showing incorrect information.
+Repair/reset an app repository in the store that is missing or showing incorrect information.
 
 </ApiEndpoint>
 
@@ -3819,7 +3819,7 @@ Returns information about the supervisor
   "debug": false,
   "debug_block": false,
   "diagnostics": null,
-  "addons_repositories": ["https://example.com/addons"],
+  "addons_repositories": ["https://example.com/awesome-ha-apps"],
   "auto_update": true,
   "detect_blocking_io": false,
   "feature_flags": {
@@ -4008,20 +4008,20 @@ Some of the endpoints uses placeholders indicated with `<...>` in the endpoint U
 
 | placeholder | description                                                                                                                                           |
 | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
-| addon       | The slug for the addon, to get the slug you can call `/addons`, to call endpoints for the app calling the endpoints you can use `self`as the slug. |
+| app         | The slug for the app, to get the slug you can call `/addons`, to call endpoints for the app calling the endpoints you can use `self` as the slug. |
 | application | The name of an application, call `/audio/info` to get the correct name                                                                                |
 | backup      | A valid backup slug, example `skuwe823`, to get the slug you can call `/backups`                                                                      |
 | bootid      | An id or offset of a particular boot, used to filter logs. Call `/host/logs/boots` to get a list of boot ids or see `/host/logs/boots/<bootid>` to understand boot offsets |
 | check       | The slug of a system check in Supervisor's resolution manager. Call `/resolution/info` for a list of options from the `checks` field                  |
 | disk        | `default` for the data disk, or the name of a mount. See `/host/disks/<disk>/usage` for more details                                                  |
-| id          | Numeric id of a vlan on a particular interface. See `/network/interface/<interface>/vlan/<id>` for details                                            |         
+| id          | Numeric id of a vlan on a particular interface. See `/network/interface/<interface>/vlan/<id>` for details                                            |
 | identifier  | A syslog identifier used to filter logs. Call `/host/logs/identifiers` to get a list of options. See `/host/logs/identifiers/<identifier>` for some common examples |
 | interface   | A valid interface name, example `eth0`, to get the interface name you can call `/network/info`. You can use `default` to get the primary interface    |
 | issue       | The UUID of an issue with the system identified by Supervisor. Call `/resolution/info` for a list of options from the `issues` field                  |
 | job_id      | The UUID of a currently running or completed Supervisor job                                                                                           |
 | name        | Name of a mount added to Supervisor. Call `/mounts` to get a list of options from `mounts` field                                                      |
 | registry    | A registry hostname defined in the container registry configuration, to get the hostname you can call `/docker/registries`                            |
-| repository  | The slug of an addon repository added to Supervisor. Call `/store` for a list of options from the `repositories` field                                |
+| repository  | The slug of an app repository added to Supervisor. Call `/store` for a list of options from the `repositories` field                                |
 | service     | The service name for a service on the host.                                                                                                           |
 | suggestion  | The UUID of a suggestion for a system issue identified by Supervisor. Call `/resolution/info` for a list of options from the `suggestions` field      |
 | uuid        | The UUID of a discovery service, to get the UUID you can call `/discovery`                                                                            |

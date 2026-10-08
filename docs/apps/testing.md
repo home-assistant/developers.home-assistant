@@ -14,7 +14,7 @@ The fastest and recommended way to develop apps (formerly known as add-ons) is u
 
 ## Remote development
 
-If you require access to physical hardware or other resources that cannot be locally emulated (for example, serial ports), the next best option to develop apps is by adding them to the local app repository on a real device running Home Assistant. To access the local app repository on a remote device, install either the [Samba](https://my.home-assistant.io/redirect/supervisor_addon/?addon=core_samba) or the [SSH](https://my.home-assistant.io/redirect/supervisor_addon/?addon=core_ssh) apps and copy the app files to a subdirectory of `/addons`.
+If you require access to physical hardware or other resources that cannot be locally emulated (for example, serial ports), the next best option to develop apps is by adding them to the local app repository on a real device running Home Assistant. To access the local app repository on a remote device, install either the [Samba](https://my.home-assistant.io/redirect/supervisor_app/?app=core_samba) or the [SSH](https://my.home-assistant.io/redirect/supervisor_app/?app=core_ssh) apps and copy the app files to a subdirectory of `/local_apps`.
 
 Right now apps will work with images that are stored on Docker Hub (using `image` from app config). To ensure that the app is built locally and not fetched from an upstream repository, ensure that the `image` key is commented out in your `config.yaml` file (You can do that by adding a `#` in front of it, like `#image: xxx`).
 
