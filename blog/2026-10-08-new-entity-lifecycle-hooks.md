@@ -100,18 +100,33 @@ def async_entity_id_change_finished(self, old_entity_id: str) -> None:
 
 Both hooks must call `super()`, so base classes can update their own bookkeeping.
 
+Exceptions raised by either hook are caught and logged by Home Assistant, and the `entity_id` change still completes: the state is written under the new `entity_id`. This is unlike `async_prepare_to_add_to_hass`, where raising an exception aborts the add.
+
 Example:
 
 ```python
+async def async_added_to_hass(self) -> None:
+    """Run when the entity has been added to hass."""
+    await super().async_added_to_hass()
+    self._subscribe_signal()
+    self.async_on_remove(lambda: self._unsub_signal())
+
+@callback
+def _subscribe_signal(self) -> None:
+    """Subscribe to the signal for the current entity_id."""
+    self._unsub_signal = async_dispatcher_connect(
+        self.hass, f"{DOMAIN}_{self.entity_id}", self._handle_signal
+    )
+
 @callback
 def async_entity_id_changed(self, old_entity_id: str) -> None:
     """Run when the entity_id has been changed in the entity registry."""
     super().async_entity_id_changed(old_entity_id)
     self._unsub_signal()
-    self._unsub_signal = async_dispatcher_connect(
-        self.hass, f"{DOMAIN}_{self.entity_id}", self._handle_signal
-    )
+    self._subscribe_signal()
 ```
+
+Note that the callback registered with `async_on_remove` calls whatever the current unsubscribe function is. Passing the unsubscribe function itself, as in `self.async_on_remove(self._unsub_signal)`, registers the initial subscription's unsubscribe function: after the `entity_id` has changed, removing the entity calls that stale function again, and the new subscription leaks.
 
 ### Backwards compatibility
 

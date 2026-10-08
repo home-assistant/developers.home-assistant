@@ -413,16 +413,33 @@ When this callback runs, `self.entity_id` is already the new `entity_id`, and th
 
 Implement it to update anything the entity has set up which depends on its own `entity_id`, in particular anything the state or attributes are derived from. Example uses: re-subscribe state change listeners or dispatcher signals which are keyed on `self.entity_id`, or update a lookup table which maps entity IDs to entities. Do not write the state from this callback; Home Assistant writes it after the callback returns. Always call `super()`, so base classes can do the same.
 
+Make sure anything which is re-subscribed is still cleaned up when the entity is removed. Passing the unsubscribe function itself to `async_on_remove()`, as in `self.async_on_remove(self._unsub_signal)`, registers the *initial* subscription's unsubscribe function: after the `entity_id` has changed, removing the entity calls that stale function again, and the new subscription leaks. Instead, register a callback once which calls whatever the current unsubscribe function is:
+
 ```python
+async def async_added_to_hass(self) -> None:
+    """Run when the entity has been added to hass."""
+    await super().async_added_to_hass()
+    self._subscribe_signal()
+    self.async_on_remove(lambda: self._unsub_signal())
+
+@callback
+def _subscribe_signal(self) -> None:
+    """Subscribe to the signal for the current entity_id."""
+    self._unsub_signal = async_dispatcher_connect(
+        self.hass, f"{DOMAIN}_{self.entity_id}", self._handle_signal
+    )
+
 @callback
 def async_entity_id_changed(self, old_entity_id: str) -> None:
     """Run when the entity_id has been changed."""
     super().async_entity_id_changed(old_entity_id)
     self._unsub_signal()
-    self._unsub_signal = async_dispatcher_connect(
-        self.hass, f"{DOMAIN}_{self.entity_id}", self._handle_signal
-    )
+    self._subscribe_signal()
 ```
+
+Unsubscribing in `async_will_remove_from_hass()` also avoids the stale function, but unlike `async_on_remove()` it's not called if the add fails after `async_added_to_hass()` has run.
+
+Exceptions raised by this callback are caught and logged by Home Assistant, and the `entity_id` change still completes: the state is written under the new `entity_id`. This is unlike `async_prepare_to_add_to_hass()`, where raising an exception aborts the add.
 
 Entities which don't set up anything keyed on their own `entity_id` don't need to implement this callback.
 
@@ -431,6 +448,8 @@ Entities which don't set up anything keyed on their own `entity_id` don't need t
 Called after `async_entity_id_changed()`, once the state has been written under the new `entity_id`. Only use it for work which needs to read the entity's own state under its new `entity_id`, for example rendering templates which reference `this`, or for work which may write the state. Anything else belongs in `async_entity_id_changed()`. Always call `super()`.
 
 Work which must be awaited can be done in a task. Entity registry updates are not serialized with such a task, so after each `await`, check that the entity is still added and that `self.entity_id` has not changed again.
+
+As with `async_entity_id_changed()`, exceptions raised by this callback are caught and logged by Home Assistant.
 
 :::info
 To give custom integrations time to migrate, an entity is still removed and added again when its `entity_id` is changed if its class, or one of its base classes other than `Entity`, implements `async_prepare_to_add_to_hass()`, `async_added_to_hass()` or `async_will_remove_from_hass()`, unless that same class or a subclass of it also implements `async_entity_id_changed()` or `async_entity_id_change_finished()`. Implementing `async_entity_id_changed()`, even as a method which only calls `super()`, opts the class in to having its `entity_id` changed in place. This backwards compatibility will be removed in Home Assistant Core 2027.11.
