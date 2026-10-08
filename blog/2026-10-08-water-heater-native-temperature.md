@@ -26,7 +26,7 @@ Integrations specify temperatures in the unit used by the device, and the base c
 | `target_temperature_low` | `native_target_temperature_low` |
 | `temperature_unit` | `native_temperature_unit` |
 
-The old names keep working, but implementing, setting or reading them logs a warning. Support for the old names will be removed in Home Assistant Core 2027.11.
+The old names keep working, but implementing them, setting the `_attr_` attributes or reading them logs a warning. Support for the old names will be removed in Home Assistant Core 2027.11.
 
 `min_temp`, `max_temp` and `target_temperature_step` are not renamed, and are still specified in the native unit.
 
@@ -44,9 +44,8 @@ class MyWaterHeaterEntity(WaterHeaterEntity):
     def current_temperature(self) -> float | None:
         return self.device.temperature
 
-    def _handle_coordinator_update(self) -> None:
-        self._attr_target_temperature = self.device.setpoint
-        super()._handle_coordinator_update()
+    async def async_update(self) -> None:
+        self._attr_target_temperature = await self.device.get_setpoint()
 ```
 
 New:
@@ -59,7 +58,6 @@ class MyWaterHeaterEntity(WaterHeaterEntity):
     def native_current_temperature(self) -> float | None:
         return self.device.temperature
 
-    def _handle_coordinator_update(self) -> None:
-        self._attr_native_target_temperature = self.device.setpoint
-        super()._handle_coordinator_update()
+    async def async_update(self) -> None:
+        self._attr_native_target_temperature = await self.device.get_setpoint()
 ```

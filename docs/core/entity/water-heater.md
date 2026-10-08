@@ -19,7 +19,7 @@ Properties should always only return information from memory and not do I/O (lik
 | `native_target_temperature` | `float` | `None` | The temperature we are trying to reach.
 | `native_target_temperature_high` | `float` | `None` | Upper bound of the temperature we are trying to reach.
 | `native_target_temperature_low` | `float` | `None` | Lower bound of the temperature we are trying to reach.
-| `target_temperature_step` | `float`  | `None`    | The supported step size a target temperature can be increased or decreased.
+| `target_temperature_step` | `float`  | `None`    | The supported step size a target temperature can be increased or decreased, in `native_temperature_unit`.
 | `native_temperature_unit` | `str`   | `NotImplementedError` | The unit the entity reports temperatures in. One of `UnitOfTemperature.CELSIUS`, `UnitOfTemperature.FAHRENHEIT`, or `UnitOfTemperature.KELVIN`.
 | `current_operation`   | `string`    | `None`    | The current operation mode.
 | `operation_list`      | `List[str]` | `None`    | List of possible operation modes.
@@ -33,10 +33,6 @@ The allowed operation modes are the states specified in the base component and i
 Temperature properties, including `min_temp` and `max_temp`, have to follow the unit defined in `native_temperature_unit`. The water heater entity converts the temperatures to the unit system configured by the user before writing them to the state machine, and adds a `temperature_unit` state attribute that holds the unit of the converted temperatures. The `temperature_unit` state attribute is set by the base class and can't be overridden by integrations.
 
 Temperatures passed to `set_temperature` are converted to `native_temperature_unit` before the method is called.
-
-:::info
-The `current_temperature`, `target_temperature`, `target_temperature_high`, `target_temperature_low` and `temperature_unit` properties, and the corresponding `_attr_` attributes, are deprecated and will stop working in Home Assistant 2027.11. Use the `native_` prefixed properties and `_attr_native_` prefixed attributes instead.
-:::
 
 ## States
 
