@@ -37,29 +37,27 @@ More details can be found in the [climate entity documentation](/docs/core/entit
 Old:
 
 ```python
-class MyClimateEntity(CoordinatorEntity[MyCoordinator], ClimateEntity):
+class MyClimateEntity(ClimateEntity):
     _attr_temperature_unit = UnitOfTemperature.CELSIUS
 
     @property
     def current_temperature(self) -> float | None:
         return self.device.temperature
 
-    def _handle_coordinator_update(self) -> None:
-        self._attr_target_temperature = self.device.setpoint
-        super()._handle_coordinator_update()
+    async def async_update(self) -> None:
+        self._attr_target_temperature = await self.device.get_setpoint()
 ```
 
 New:
 
 ```python
-class MyClimateEntity(CoordinatorEntity[MyCoordinator], ClimateEntity):
+class MyClimateEntity(ClimateEntity):
     _attr_native_temperature_unit = UnitOfTemperature.CELSIUS
 
     @property
     def native_current_temperature(self) -> float | None:
         return self.device.temperature
 
-    def _handle_coordinator_update(self) -> None:
-        self._attr_native_target_temperature = self.device.setpoint
-        super()._handle_coordinator_update()
+    async def async_update(self) -> None:
+        self._attr_native_target_temperature = await self.device.get_setpoint()
 ```
