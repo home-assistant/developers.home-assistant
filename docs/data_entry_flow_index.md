@@ -351,6 +351,8 @@ Some selectors can narrow their options based on the value of another field in t
 For example, the unit of measurement selector supports the `filter_device_class` and `filter_state_class` context keys. These take the name of a field that uses a `device_class` or `state_class` selector. You can't combine `filter_device_class` with `device_classes`, or `filter_state_class` with `state_classes`, because the selector config rejects those combinations.
 
 ```python
+import probatio
+
 from homeassistant.const import (
     CONF_DEVICE_CLASS,
     CONF_STATE_CLASS,
