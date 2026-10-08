@@ -6,12 +6,12 @@ title: "New entity lifecycle hooks"
 
 ## Summary
 
-Three new entity lifecycle hooks have been added:
+Two new entity lifecycle hooks have been added:
 
 - `Entity.async_prepare_to_add_to_hass` allows integrations to run code *before* an entity is added to Home Assistant. It's available from Home Assistant Core 2026.10.
-- `Entity.async_entity_id_changed` and `Entity.async_entity_id_change_finished` are called when an entity's `entity_id` is changed in the entity registry. From Home Assistant Core 2026.11, an entity is no longer removed and added again when its `entity_id` is changed; it's updated in place instead.
+- `Entity.async_entity_id_changed` is called when an entity's `entity_id` is changed in the entity registry. From Home Assistant Core 2026.11, an entity is no longer removed and added again when its `entity_id` is changed; it's updated in place instead.
 
-Custom integrations which implement `async_prepare_to_add_to_hass`, `async_added_to_hass` or `async_will_remove_from_hass` need to opt in to in-place `entity_id` changes by implementing `async_entity_id_changed` or `async_entity_id_change_finished`. Until they do, their entities are still removed and added again when the `entity_id` changes. This backwards compatibility will be removed in Home Assistant Core 2027.11.
+Custom integrations which implement `async_prepare_to_add_to_hass`, `async_added_to_hass` or `async_will_remove_from_hass` need to opt in to in-place `entity_id` changes by implementing `async_entity_id_changed`. Until they do, their entities are still removed and added again when the `entity_id` changes. This backwards compatibility will be removed in Home Assistant Core 2027.11.
 
 The lifecycle hooks are documented in [entity lifecycle hooks](/docs/core/entity#lifecycle-hooks).
 
@@ -78,29 +78,27 @@ Until now, an entity was removed and then added again under its new `entity_id` 
 
 From Home Assistant Core 2026.11, the entity is instead updated in place. Home Assistant removes the state under the old `entity_id`, sets `self.entity_id` to the new `entity_id`, moves its own bookkeeping (entity registry and device registry tracking, entity sources, restore state and entity groups) to the new `entity_id`, and writes the state under the new `entity_id`. `async_will_remove_from_hass` and `async_added_to_hass` are not called.
 
-This is implemented in core [PR #183946](https://github.com/home-assistant/core/pull/183946), the rationale is described in architecture proposal [home-assistant/architecture#1393](https://github.com/home-assistant/architecture/discussions/1393).
+This is implemented in core [PR #183946](https://github.com/home-assistant/core/pull/183946) and [PR #184943](https://github.com/home-assistant/core/pull/184943), the rationale is described in architecture proposal [home-assistant/architecture#1393](https://github.com/home-assistant/architecture/discussions/1393).
 
-### The new hooks
+### The new hook
 
-Entities which have set up anything keyed on their own `entity_id` can implement two new callbacks to update it:
+Entities which have set up anything keyed on their own `entity_id` can implement a new callback to update it:
 
 ```python
 @callback
 def async_entity_id_changed(self, old_entity_id: str) -> None:
     """Run when the entity_id has been changed in the entity registry."""
-
-@callback
-def async_entity_id_change_finished(self, old_entity_id: str) -> None:
-    """Run when the state has been written under the new entity_id."""
 ```
 
-`async_entity_id_changed` is called after Home Assistant has moved its own bookkeeping and `async_registry_entry_updated` has run, but before the state is written under the new `entity_id`. `self.entity_id` is already the new `entity_id`, the previous `entity_id` is passed as `old_entity_id`. Use it to update anything the state or attributes are derived from, for example state change listeners or dispatcher signals keyed on `self.entity_id`. Do not write the state from this callback; Home Assistant writes it after the callback returns.
+`async_entity_id_changed` is called after Home Assistant has removed the state under the old `entity_id`, moved its own bookkeeping and run `async_registry_entry_updated`. `self.entity_id` is already the new `entity_id`, the previous `entity_id` is passed as `old_entity_id`. Use it to update anything the state or attributes are derived from, for example state change listeners or dispatcher signals keyed on `self.entity_id`.
 
-`async_entity_id_change_finished` is called after the state has been written under the new `entity_id`. It's only meant for work which reads the entity's own state under the new `entity_id`, for example rendering templates which reference `this`, or for work which may write the state. Work which must be awaited can be done in a task; since entity registry updates are not serialized with it, check after each `await` that the entity is still added and that `self.entity_id` has not changed again.
+Writing the state from the hook is optional: if the state has not been written under the new `entity_id` when the hook returns, Home Assistant writes it. Work which needs the entity's own state under its new `entity_id`, for example rendering templates which reference `this`, should first write the state with `self.async_write_ha_state()`.
 
-Both hooks must call `super()`, so base classes can update their own bookkeeping.
+The hook must not await. Work which must be awaited can be done in a task; since entity registry updates are not serialized with it, check after each `await` that the entity is still added and that `self.entity_id` has not changed again.
 
-Exceptions raised by either hook are caught and logged by Home Assistant, and the `entity_id` change still completes: the state is written under the new `entity_id`. This is unlike `async_prepare_to_add_to_hass`, where raising an exception aborts the add.
+The hook must call `super()`, so base classes can update their own bookkeeping.
+
+Exceptions raised by the hook are caught and logged by Home Assistant, and the `entity_id` change still completes: the state is written under the new `entity_id`. This is unlike `async_prepare_to_add_to_hass`, where raising an exception aborts the add.
 
 Example:
 
@@ -130,7 +128,7 @@ Note that the callback registered with `async_on_remove` calls whatever the curr
 
 ### Backwards compatibility
 
-An entity whose add and remove hooks depend on its `entity_id` would break if it was silently changed in place. To give custom integrations time to migrate, an entity is still removed and added again when its `entity_id` changes if its class, or one of its base classes other than `Entity`, implements `async_prepare_to_add_to_hass`, `async_added_to_hass` or `async_will_remove_from_hass`, unless that same class or a subclass of it also implements `async_entity_id_changed` or `async_entity_id_change_finished`.
+An entity whose add and remove hooks depend on its `entity_id` would break if it was silently changed in place. To give custom integrations time to migrate, an entity is still removed and added again when its `entity_id` changes if its class, or one of its base classes other than `Entity`, implements `async_prepare_to_add_to_hass`, `async_added_to_hass` or `async_will_remove_from_hass`, unless that same class or a subclass of it also implements `async_entity_id_changed`.
 
 Custom integration authors should check whether their entities set up anything keyed on their own `entity_id`, and then implement `async_entity_id_changed`. If nothing needs to be updated, implementing it as a method which only calls `super()` is enough to opt in:
 
@@ -151,5 +149,5 @@ As a rule of thumb:
 - Use `async_will_remove_from_hass` to undo work done in `async_added_to_hass` when a successfully added entity is removed. It's not called when the add fails.
 - Use `async_prepare_to_add_to_hass` only when the work genuinely has to happen before the entity platform processes the entity's registry entry, or has to happen even if the entity is disabled.
 - Use `async_on_remove` for clean up which must run both when an add is aborted or fails and when the entity is removed. This is the safe choice for anything set up in `async_prepare_to_add_to_hass` or `async_added_to_hass`.
-- Use `async_entity_id_changed` to update anything keyed on the entity's own `entity_id` when it changes, and `async_entity_id_change_finished` only for work which needs the state written under the new `entity_id`.
+- Use `async_entity_id_changed` to update anything keyed on the entity's own `entity_id` when it changes. If the work needs the state under the new `entity_id`, write it with `self.async_write_ha_state()` first.
 - Do not override `add_to_platform_start`, `add_to_platform_finish` or `add_to_platform_abort`.
