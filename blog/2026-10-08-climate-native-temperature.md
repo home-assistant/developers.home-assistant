@@ -28,10 +28,6 @@ Integrations specify temperatures in the unit used by the device, and the base c
 
 The old names keep working, but implementing them, setting the `_attr_` attributes or reading them logs a warning. Support for the old names will be removed in Home Assistant Core 2027.11.
 
-:::warning
-Assigning the deprecated public properties directly on the entity, for example `self.temperature_unit = UnitOfTemperature.CELSIUS` in `__init__`, is not covered by the deprecation period and now raises an `AttributeError`. Assign the `_attr_native_` prefixed attributes instead, for example `self._attr_native_temperature_unit = UnitOfTemperature.CELSIUS`.
-:::
-
 `min_temp`, `max_temp` and `target_temperature_step` are not renamed, and are still specified in the native unit.
 
 More details can be found in the [climate entity documentation](/docs/core/entity/climate#temperature-units).
