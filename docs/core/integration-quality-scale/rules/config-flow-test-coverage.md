@@ -61,6 +61,49 @@ async def test_full_flow(
     assert result["result"].unique_id == "ABC123"
 ```
 
+The example below shows how the flow handles errors.
+After each error, the test fixes the cause and finishes the flow, to show the user can recover from the error.
+
+`test_config_flow.py`:
+```python showLineNumbers
+@pytest.mark.parametrize(
+    ("exception", "error"),
+    [
+        (MyConnectionError, "cannot_connect"),
+        (Exception, "unknown"),
+    ],
+)
+async def test_flow_errors(
+    hass: HomeAssistant,
+    mock_my_client: AsyncMock,
+    mock_setup_entry: AsyncMock,
+    exception: Exception,
+    error: str,
+) -> None:
+    """Test we handle errors and recover from them."""
+    result = await hass.config_entries.flow.async_init(
+        DOMAIN,
+        context={"source": SOURCE_USER},
+    )
+
+    mock_my_client.get_data.side_effect = exception
+
+    result = await hass.config_entries.flow.async_configure(
+        result["flow_id"],
+        {CONF_HOST: "10.0.0.131"},
+    )
+    assert result["type"] is FlowResultType.FORM
+    assert result["errors"] == {"base": error}
+
+    mock_my_client.get_data.side_effect = None
+
+    result = await hass.config_entries.flow.async_configure(
+        result["flow_id"],
+        {CONF_HOST: "10.0.0.131"},
+    )
+    assert result["type"] is FlowResultType.CREATE_ENTRY
+```
+
 ## Additional resources
 
 More information about config flows can be found in the [config flow documentation](/docs/core/integration/config_flow).
