@@ -285,24 +285,63 @@ The `content` key of a backup object contains the following keys:
 | id         | string         | Unique ID for the disk device (either UDisks2 drive ID or device path) |
 | dev_path   | string         | Device path for the disk device                                        |
 
+## Host disk
+
+All keys of a [Disk](#disk), plus:
+
+| key            | type   | description                                                 |
+| -------------- | ------ | ----------------------------------------------------------- |
+| connection_bus | string | Physical connection bus of the disk device, such as `usb`   |
+| removable      | bool   | Disk device is removable by the user                        |
+| ejectable      | bool   | Disk device can be ejected by the system                    |
+| partitions     | list   | A list of [Host disk partitions](#host-disk-partition)      |
+
+When UDisks2 cannot attribute a disk to a drive, `name` and `id` equal
+`dev_path`. `vendor`, `model`, `serial` and `connection_bus` are then empty,
+and `removable` and `ejectable` are `false`.
+
+## Host disk partition
+
+| key        | type   | description                                                               |
+| ---------- | ------ | ------------------------------------------------------------------------- |
+| device     | string | Path of the partition device, such as `/dev/sdc1`                         |
+| uuid       | string | Filesystem UUID of the partition                                          |
+| label      | string | Filesystem label, empty when the filesystem has none                      |
+| filesystem | string | Filesystem on the partition: `btrfs`, `exfat`, `ext2`, `ext3`, `ext4`, `f2fs`, `ntfs` or `vfat` |
+| size       | int    | Size of the partition in bytes                                            |
+| read_only  | bool   | Partition can only be mounted read-only                                   |
+| mountable  | bool   | Partition can be added as a `disk` [Mount](#mount). Always `true` for now. The host kernel must support the filesystem; `f2fs` needs Home Assistant OS 18.3 or later |
+
 ## Mount
 
 | key        | type           | description                                                            | request/response |
 | ---------- | -------------- | ---------------------------------------------------------------------- | ---------------- |
 | name       | string         | Name of the mount                                                      | both             |
-| type       | string         | Type of the mount (cifs or nfs)                                        | both             |
+| type       | string         | Type of the mount (cifs, nfs, or disk)                                 | both             |
 | usage      | string         | Usage of the mount (backup, media, or share)                           | both             |
-| server     | string         | IP address or hostname of the network share server                     | both             |
-| port       | int            | Port to use (if not using the standard one for the mount type)         | both             |
+| server     | string         | (cifs and nfs mounts only) IP address or hostname of the network share server | both      |
+| port       | int            | (cifs and nfs mounts only) Port to use (if not using the standard one for the mount type) | both |
 | read_only  | bool           | Mount is read-only (not available for backup mounts)                   | both             |
 | path       | string         | (nfs mounts only) Path to mount from the network share                 | both             |
 | share      | string         | (cifs mounts only) Share to mount from the network share               | both             |
 | username   | string         | (cifs mounts only) Username to use for authentication                  | request only     |
 | password   | string         | (cifs mounts only) Password to use for authentication                  | request only     |
-| state      | string         | Current state of the mount (active, failed, etc.)                      | response only    |
+| device     | string         | (disk mounts only) Path of the device to mount, such as `/dev/sdc1`    | request only     |
+| uuid       | string         | (disk mounts only) Filesystem UUID of the device to mount              | both             |
+| filesystem | string         | (disk mounts only) Filesystem probed on the device, such as `ext4`. Absent after a restore until the device is resolved again | response only    |
+| state      | string or null | Result of the last health check, run at least every 15 minutes: `active` or `inactive`. For a disk, `active` also means its device was attached, so a disk pulled since the last check still shows `active`. `null` when the mount could not be set up | response only    |
+| user_path  | string or null | Where the mount is available inside managed containers, `null` for backup mounts | response only |
 
 Request only fields may be included in requests but will never be in responses.
-Response only fields will be in responses but cannot be included in requests.
+Response only fields may be present in responses and are ignored in requests.
+
+A disk mount is identified by `device`, `uuid`, or both. When both are given,
+resolution uses `uuid` and `device` must agree. `device` is input only:
+responses report `uuid` and `filesystem`.
+
+A disk mount restored from a backup whose device is not found is not set up,
+so its path is not covered, until a health check (every 15 minutes), POST
+`/mounts/<name>/reload`, or a Supervisor restart finds the device.
 
 ## Job
 

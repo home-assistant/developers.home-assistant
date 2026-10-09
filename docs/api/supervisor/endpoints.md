@@ -2038,6 +2038,65 @@ Shutdown the host
 
 </ApiEndpoint>
 
+<ApiEndpoint path="/host/disks" method="get">
+Returns the local disks with the partitions that can be added as a `disk`
+mount with POST `/mounts`. Disks are described like the ones from
+`/os/datadisk/list`. A disk's `id` is not a `disk` value for
+`/host/disks/<disk>/usage`, which takes `default` or a mount name.
+
+Partitions without a supported filesystem or a filesystem UUID, that UDisks2
+hides, that belong to Home Assistant OS, or that are already in use are
+omitted, and so are disks left without partitions. A filesystem on a disk
+without a partition table is listed as that disk's only partition, with
+`device` equal to `dev_path`. Every listed partition currently has `mountable`
+set to `true`.
+Partitions that cannot be mounted may be listed with `mountable` set to
+`false` in the future, so only offer partitions where it is `true`. A host
+without UDisks2 returns an empty list rather than an error.
+
+**Returned data:**
+
+| key   | type | description                                                |
+| ----- | ---- | ---------------------------------------------------------- |
+| disks | list | A list of [Host disks](api/supervisor/models.md#host-disk) |
+
+**Example response:**
+
+```json
+{
+  "disks": [
+    {
+      "name": "Seagate Expansion (1234567890)",
+      "vendor": "Seagate",
+      "model": "Expansion",
+      "serial": "1234567890",
+      "size": 2000398934016,
+      "id": "Seagate-Expansion-1234567890",
+      "dev_path": "/dev/sdc",
+      "connection_bus": "usb",
+      "removable": true,
+      "ejectable": true,
+      "partitions": [
+        {
+          "device": "/dev/sdc1",
+          "uuid": "d2f4a6c8-3b5e-4079-8a1c-6e9d2f4b7a30",
+          "label": "Backups",
+          "filesystem": "ext4",
+          "size": 2000397795328,
+          "read_only": false,
+          "mountable": true
+        }
+      ]
+    }
+  ]
+}
+```
+
+Supervisor versions without local disk mounts do not have this endpoint
+and return 404.
+
+</ApiEndpoint>
+
 <ApiEndpoint path="/host/disks/<disk>/usage" method="get">
 Get detailed disk usage information in bytes.
 
@@ -2421,7 +2480,18 @@ Returns information about mounts configured in Supervisor
       "server": "server.local",
       "share": "media",
       "state": "active",
-      "read_only": false
+      "read_only": false,
+      "user_path": "/media/my_share"
+    },
+    {
+      "name": "media_disk",
+      "usage": "media",
+      "type": "disk",
+      "uuid": "d2f4a6c8-3b5e-4079-8a1c-6e9d2f4b7a30",
+      "filesystem": "ext4",
+      "state": "active",
+      "read_only": false,
+      "user_path": "/media/media_disk"
     }
   ]
 }
@@ -2452,6 +2522,23 @@ Accepts a [Mount](api/supervisor/models.md#mount)
 
 Value in `name` must be unique and can only consist of letters, numbers and underscores.
 
+A `disk` mount stays configured while its device is away. Accessing the path
+fails immediately (it is never a plain writable directory), and plugging the
+device back in mounts it again on the next access. A disk pulled or replugged
+while mounted stays bound to the old device until the next health check
+(every 15 minutes), POST `/mounts/<name>/reload`, or a Supervisor restart. A
+`btrfs` disk replugged between health checks is not detected; update the
+mount or reboot the host to rebind it.
+
+Identify the device with `device`, `uuid`, or both. Supplying neither is
+rejected. When both are given, resolution uses `uuid` and `device` must
+agree, so a partition from GET `/host/disks` can be posted back with `name`
+and `usage` added and `type` set to `disk`. Keys that are not part of a mount,
+such as `label` and `mountable`, are dropped. `filesystem` in the payload is
+ignored, as are the response-only `state` and `user_path`, so a mount object
+from GET `/mounts` can be sent back unchanged; the filesystem is probed during
+UDisks2 resolution, which also enforces whether the device may be mounted.
+
 **Example payload:**
 
 ```json
@@ -2467,6 +2554,19 @@ Value in `name` must be unique and can only consist of letters, numbers and unde
 }
 ```
 
+**Example payload for a disk mount:**
+
+```json
+{
+  "name": "media_disk",
+  "usage": "media",
+  "type": "disk",
+  "device": "/dev/sdc1",
+  "uuid": "d2f4a6c8-3b5e-4079-8a1c-6e9d2f4b7a30",
+  "read_only": false
+}
+```
+
 </ApiEndpoint>
 
 <ApiEndpoint path="/mounts/<name>" method="put">
@@ -2478,6 +2578,19 @@ Accepts a [Mount](api/supervisor/models.md#mount).
 
 The `name` field should be omitted. If included the value must match the existing
 name, it cannot be changed. Delete and re-add the mount to change the name.
+
+The full configuration is validated, so every required field for the type must
+be present. Omitted fields take their default rather than keeping the existing
+value.
+
+The existing mount is unmounted before the new configuration is mounted. If
+that fails, the mount keeps its old configuration, but its path is not covered
+until the next health check (every 15 minutes), POST `/mounts/<name>/reload`,
+or a Supervisor restart.
+
+For a `disk` mount, send the stored `uuid`, not `device`: GET `/host/disks`
+does not offer a partition that is already mounted. The device is resolved
+again, so an update fails while it is away.
 
 **Example payload:**
 
@@ -2499,7 +2612,10 @@ Unmount and delete an existing mount from Supervisor.
 </ApiEndpoint>
 
 <ApiEndpoint path="/mounts/<name>/reload" method="post">
-Unmount and remount an existing mount in Supervisor using the same configuration.
+Probe an existing mount. A mount that answers is left alone. Otherwise it is
+remounted using the same configuration, including a `disk` mount bound to a
+removed or replugged device, and an error is returned if it still cannot be
+reached.
 
 </ApiEndpoint>
 
@@ -3897,7 +4013,7 @@ Some of the endpoints uses placeholders indicated with `<...>` in the endpoint U
 | backup      | A valid backup slug, example `skuwe823`, to get the slug you can call `/backups`                                                                      |
 | bootid      | An id or offset of a particular boot, used to filter logs. Call `/host/logs/boots` to get a list of boot ids or see `/host/logs/boots/<bootid>` to understand boot offsets |
 | check       | The slug of a system check in Supervisor's resolution manager. Call `/resolution/info` for a list of options from the `checks` field                  |
-| disk        | Identifier of a disk attached to host or `default`. See `/host/disks/<disk>/usage` for more details                                                   |
+| disk        | `default` for the data disk, or the name of a mount. See `/host/disks/<disk>/usage` for more details                                                  |
 | id          | Numeric id of a vlan on a particular interface. See `/network/interface/<interface>/vlan/<id>` for details                                            |
 | identifier  | A syslog identifier used to filter logs. Call `/host/logs/identifiers` to get a list of options. See `/host/logs/identifiers/<identifier>` for some common examples |
 | interface   | A valid interface name, example `eth0`, to get the interface name you can call `/network/info`. You can use `default` to get the primary interface    |
