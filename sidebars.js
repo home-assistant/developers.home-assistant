@@ -293,6 +293,7 @@ module.exports = {
     "core/platform/raising_exceptions",
     "core/platform/repairs",
     "core/platform/reproduce_state",
+    "core/platform/restart_required",
     "core/platform/significant_change",
     {
       type: "category",
