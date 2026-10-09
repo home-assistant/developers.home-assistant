@@ -168,7 +168,7 @@ The message flow is decoupled from the WebView through `Flow`s. The ViewModel an
 - Outbound (native → frontend): a component calls `FrontendExternalBusRepository.send()` with a typed `OutgoingExternalBusMessage` → it is serialized into an `externalBus(...)` script wrapped in `WebViewAction.EvaluateScript` → surfaces through `webViewActions()` → the `FrontendScreen` evaluates it in the WebView, invoking `window.externalBus`.
 - Authentication (a separate channel): the frontend calls `getExternalAuth`/`revokeExternalAuth` → the handler asks `ServerSessionManager` → the resulting callback script is evaluated in the WebView, invoking the validated frontend callback (`externalAuthSetToken`/`externalAuthRevokeToken`).
 
-The action and event flows are buffered `SharedFlow`s, so commands aren't dropped while the WebView is momentarily unavailable.
+The action flow is a buffered `SharedFlow`, so commands aren't dropped while the WebView is momentarily unavailable. The event flow is a `Channel`, so a result emitted before the ViewModel subscribes is delivered to its single consumer rather than dropped.
 
 `FrontendJsBridge` registers one of two protocols depending on the server version:
 

@@ -62,7 +62,7 @@ The ViewModel owns the screen's output channels and wires the blocks below toget
 
 ```kotlin
 val viewState: StateFlow<UiState> // what to render
-val events: SharedFlow<UiEvent>   // one-shot side effects
+val events: Flow<UiEvent>         // one-shot side effects, Channel-backed
 val actions: Flow<UiAction>       // only when the view owns an imperative handle
 ```
 
@@ -118,7 +118,7 @@ sealed interface UiEvent {
 }
 ```
 
-Emit them on a `Flow` and consume each exactly once, usually in the navigation layer, which holds the navigation controller and host callbacks. Events must not be persisted or replayed: replaying a "navigate" on recomposition would navigate twice. If the UI must be able to show it again after a configuration change, it is state, not an event.
+Emit them on a `Channel` exposed as a `Flow` with `receiveAsFlow()`, and consume each exactly once, usually in the navigation layer, which holds the navigation controller and host callbacks. A `Channel` buffers an event until a consumer is present, so one emitted before the collector subscribes is delivered rather than dropped, unlike a `SharedFlow` with no replay. Events must not be persisted or replayed: replaying a "navigate" on recomposition would navigate twice. If the UI must be able to show it again after a configuration change, it is state, not an event.
 
 ##### Actions
 
