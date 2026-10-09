@@ -18,6 +18,7 @@ It is important to ensure that the config flow is working as expected and that t
 
 This means that we want to have **100%** test coverage for the config flow.
 In those tests, we require verification that the flow is able to recover from an error to confirm that the user is able to finish the flow even if something goes wrong.
+The happy flow tests should also assert the unique ID of the created config entry, so a change in how the unique ID is derived doesn't go unnoticed.
 
 Since we want the user to have a smooth experience using other integration flows, this rule also applies to the reconfigure, reauthentication, and options flows.
 
@@ -57,6 +58,7 @@ async def test_full_flow(
     assert result["data"] == {
         CONF_HOST: "10.0.0.131",
     }
+    assert result["result"].unique_id == "ABC123"
 ```
 
 ## Additional resources
