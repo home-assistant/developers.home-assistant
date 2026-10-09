@@ -56,6 +56,18 @@ We use [Hilt](https://developer.android.com/training/dependency-injection/hilt-a
 
 All concurrency is handled using [Kotlin Coroutines](https://kotlinlang.org/docs/coroutines-overview.html), providing a structured and efficient way to manage asynchronous tasks.
 
+When exposing a stream, pick its type by what must happen to a value while nobody is collecting:
+
+| What it is | Use |
+| --- | --- |
+| State: the latest value is what matters and re-rendering it is fine (screen state, modes) | `StateFlow` |
+| An event every collector must receive, or one that is meaningless once its context is gone and so must be dropped when nobody listens (for example WebView actions, bound to the loaded page) | `SharedFlow` |
+| An event a single consumer must handle exactly once, never lost nor repeated (navigation, snackbar, opening a link) | `Channel` + `receiveAsFlow()` |
+
+:::info
+A `Channel` buffers the value until a consumer is present, so an event emitted before anyone subscribes is still delivered rather than dropped.
+:::
+
 ### Services
 
 We use [Foreground Services](https://developer.android.com/develop/background-work/services/fgs) for retrieving sensor values and uploading them to Home Assistant Core asynchronously.
