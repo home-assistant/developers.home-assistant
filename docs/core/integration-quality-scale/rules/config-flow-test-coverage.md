@@ -61,8 +61,10 @@ async def test_full_flow(
     assert result["result"].unique_id == "ABC123"
 ```
 
-The example below shows how the flow handles errors.
+Every error the flow can show needs a test, for example a connection error, invalid credentials, an invalid field value or an unexpected exception.
 After each error, the test fixes the cause and finishes the flow, to show the user can recover from the error.
+The flow is finished when it creates the entry, or for the reauthentication and reconfigure flows, when it aborts with `reauth_successful` or `reconfigure_successful`.
+The example below shows this for the user step.
 
 `test_config_flow.py`:
 ```python showLineNumbers
@@ -70,6 +72,7 @@ After each error, the test fixes the cause and finishes the flow, to show the us
     ("exception", "error"),
     [
         (MyConnectionError, "cannot_connect"),
+        (MyAuthenticationError, "invalid_auth"),
         (Exception, "unknown"),
     ],
 )
