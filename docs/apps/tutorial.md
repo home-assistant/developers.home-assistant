@@ -4,15 +4,15 @@ title: "Tutorial: Making your first app"
 
 So you've got Home Assistant going and you've been enjoying the built-in apps but you're missing this one application. Time to make your own app!
 
-To get started with developing apps, we first need access to where Home Assistant looks for local apps. For this you can use the [Samba](https://my.home-assistant.io/redirect/supervisor_addon/?addon=core_samba) or the [SSH](https://my.home-assistant.io/redirect/supervisor_addon/?addon=core_ssh) apps.
+To get started with developing apps, we first need access to where Home Assistant looks for local apps. For this you can use the [Samba](https://my.home-assistant.io/redirect/supervisor_app/?app=core_samba) or the [SSH](https://my.home-assistant.io/redirect/supervisor_app/?app=core_ssh) apps.
 
-For Samba, once you have enabled and started it, your Home Assistant instance will show up in your local network tab and share a folder called "addons". This is the folder to store your custom apps.
+For Samba, once you have enabled and started it, your Home Assistant instance will show up in your local network tab and share a folder called `local_apps`. This is the folder to store your custom apps.
 
 :::tip
 If you are on macOS and the folder is not showing up automatically, go to Finder and press CMD+K then enter `smb://homeassistant.local`
 :::
 
-For SSH, you will have to install it. Before you can start it, you will have to have a private/public key pair and store your public key in the app config ([see docs for more info](https://github.com/home-assistant/addons/blob/master/ssh/DOCS.md#configuration)). Once started, you can SSH to Home Assistant and store your custom apps in the `/addons` directory.
+For SSH, you will have to install it. Before you can start it, you will have to have a private/public key pair and store your public key in the app config ([see docs for more info](https://github.com/home-assistant/addons/blob/master/ssh/DOCS.md#configuration)). Once started, you can SSH to Home Assistant and store your custom apps in the `/local_apps` directory.
 
 Once you have located your app directory, it's time to get started!
 
@@ -195,4 +195,4 @@ Reload the app store and re-install your app. You will now see the options avail
 
 ## Bonus: Template app repository
 
-We maintain a full template example repository for apps you can use to get started. You can find that in the [`home-assistant/addons-example` repository](https://github.com/home-assistant/addons-example).
+We maintain a full template example repository for apps you can use to get started. You can find that in the [`home-assistant/apps-example` repository](https://github.com/home-assistant/apps-example).

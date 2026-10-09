@@ -15,12 +15,12 @@ Properties should always only return information from memory and not do I/O (lik
 | --------------------- | ----------- | --------- | -----------
 | `min_temp`            | `float`     | 110°F     | The minimum temperature that can be set.
 | `max_temp`            | `float`     | 140°F     | The maximum temperature that can be set.
-| `current_temperature` | `float`     | `None`    | The current temperature.
-| `target_temperature`  | `float`     | `None`    | The temperature we are trying to reach.
-| `target_temperature_high` | `float` | `None`    | Upper bound of the temperature we are trying to reach.
-| `target_temperature_low` | `float`  | `None`    | Lower bound of the temperature we are trying to reach.
-| `target_temperature_step` | `float`  | `None`    | The supported step size a target temperature can be increased or decreased.
-| `temperature_unit`    | `str`       | `NotImplementedError` | One of `UnitOfTemperature.CELSIUS`, `UnitOfTemperature.FAHRENHEIT`, or `UnitOfTemperature.KELVIN`.
+| `native_current_temperature` | `float` | `None` | The current temperature.
+| `native_target_temperature` | `float` | `None` | The temperature we are trying to reach.
+| `native_target_temperature_high` | `float` | `None` | Upper bound of the temperature we are trying to reach.
+| `native_target_temperature_low` | `float` | `None` | Lower bound of the temperature we are trying to reach.
+| `target_temperature_step` | `float`  | `None`    | The supported step size a target temperature can be increased or decreased, in `native_temperature_unit`.
+| `native_temperature_unit` | `str`   | `NotImplementedError` | The unit the entity reports temperatures in. One of `UnitOfTemperature.CELSIUS`, `UnitOfTemperature.FAHRENHEIT`, or `UnitOfTemperature.KELVIN`.
 | `current_operation`   | `string`    | `None`    | The current operation mode.
 | `operation_list`      | `List[str]` | `None`    | List of possible operation modes.
 | `supported_features`  | `WaterHeaterEntityFeature` | `WaterHeaterEntityFeature(0)` (no features) | List of supported features.
@@ -28,7 +28,11 @@ Properties should always only return information from memory and not do I/O (lik
 
 The allowed operation modes are the states specified in the base component and implementations of the water_heater component cannot differ.
 
-Properties have to follow the units defined in the `temperature_unit`.
+### Temperature units
+
+Temperature properties, including `min_temp` and `max_temp`, have to follow the unit defined in `native_temperature_unit`. The water heater entity converts the temperatures to the unit system configured by the user before writing them to the state machine, and adds a `temperature_unit` state attribute that holds the unit of the converted temperatures. The `temperature_unit` state attribute is set by the base class and can't be overridden by integrations.
+
+Temperatures passed to `set_temperature` are converted to `native_temperature_unit` before the method is called.
 
 ## States
 

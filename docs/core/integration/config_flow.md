@@ -67,7 +67,7 @@ There are a few step names reserved for system use:
 | `bluetooth`        | Invoked if your integration has been discovered via Bluetooth as specified [using `bluetooth` in the manifest](/docs/creating_integration_manifest.md#bluetooth).   |
 | `discovery` | _DEPRECATED_ Invoked if your integration has been discovered and the matching step has not been defined.                                                            |
 | `dhcp`      | Invoked if your integration has been discovered via DHCP as specified [using `dhcp` in the manifest](/docs/creating_integration_manifest.md#dhcp).                  |
-| `hassio`    | Invoked if your integration has been discovered via a Supervisor add-on.                                                                                            
+| `hassio`    | Invoked if your integration has been discovered via a Supervisor app.                                                                                            
 | `homekit`   | Invoked if your integration has been discovered via HomeKit as specified [using `homekit` in the manifest](/docs/creating_integration_manifest.md#homekit).         |
 | `mqtt`      | Invoked if your integration has been discovered via MQTT as specified [using `mqtt` in the manifest](/docs/creating_integration_manifest.md#mqtt).                  |
 | `ssdp`      | Invoked if your integration has been discovered via SSDP/uPnP as specified [using `ssdp` in the manifest](/docs/creating_integration_manifest.md#ssdp).             |
