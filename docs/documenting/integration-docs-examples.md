@@ -132,8 +132,6 @@ This fires whenever the living room light's brightness changes by at least ten p
 
 ### Options in YAML
 
-YAML sometimes provides additional options for more complex use cases that are not available through the UI.
-
 <!-- If the option has a default value, set the required field to false. -->
 
 {% options_yaml %}
@@ -247,8 +245,6 @@ condition: |
 This passes when the living room light is currently on.
 
 ### Options in YAML
-
-YAML sometimes provides additional options for more complex use cases that are not available through the UI.
 
 {% options_yaml %}
 behavior:
@@ -371,8 +367,6 @@ action: |
 This turns on `light.kitchen` at its previous brightness and color.
 
 ### Options in YAML
-
-YAML sometimes provides additional options for more complex use cases that are not available through the UI.
 
 {% options_yaml %}
 transition:
