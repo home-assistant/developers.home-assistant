@@ -25,3 +25,20 @@ The chips no longer use the Material Web property names. Rename the properties y
 ```
 
 `--md-sys-color-on-surface` no longer colors the assist chip label; use `--ha-assist-chip-label-text-color`.
+
+### Removed ha-formfield
+
+`ha-formfield` was removed, so a leftover `ha-formfield` no longer renders its label. `ha-switch` and `ha-checkbox` render their own label, so put the label in the control's default slot:
+
+```diff
+-<ha-formfield .label=${label}>
+-  <ha-switch .checked=${checked}></ha-switch>
+-</ha-formfield>
++<ha-switch .checked=${checked}>${label}</ha-switch>
+```
+
+The label is now a real `<label>` around the input, so clicking it toggles the control. When `ha-switch` is disabled, only the control is dimmed; the label uses `--disabled-text-color`.
+
+### Removed --mdc-typography-* properties
+
+The frontend stopped reading the `--mdc-typography-*` CSS properties. Setting them in a theme or on a component no longer has any effect; use the `--ha-font-*` theme variables, such as `--ha-font-size-m` and `--ha-font-family-body`, instead.
