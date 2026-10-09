@@ -96,3 +96,6 @@
 
 # Android architecture restructure
 /docs/android/architecture /docs/android/architecture/overview
+
+# Android tips renamed
+/docs/android/tips/lollipop_emulator /docs/android/tips/outdated_webview_emulator
