@@ -49,6 +49,24 @@ Supported features are defined by using values in the `UpdateEntityFeature` enum
 
 ## Methods
 
+### Determine update availability
+
+The `has_update` method can be implemented to use custom logic to determine
+whether an update is available. This is useful when the device or service
+provides update availability directly instead of versions that Home Assistant
+can compare.
+
+```python
+def has_update(self) -> bool:
+    """Return whether an update is available."""
+    return self.device.update_available
+```
+
+Home Assistant only calls this method when both `installed_version` and
+`latest_version` are known and differ, and the latest version has not been
+skipped. The default implementation compares the versions by calling
+`version_is_newer`.
+
 ### Compare versions
 
 This method should be implemented when needed to override the default version comparison logic.
