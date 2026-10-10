@@ -65,12 +65,6 @@ The provider owns authentication, reconnection, and transport shutdown:
 - On connection loss, `lorawan` withdraws the registration. The provider must recover or reload its entry, then register the replacement connection with the same `network_id`.
 - On unload and Home Assistant shutdown, remove recovery listeners, withdraw the registration, and close the backend. Remove recovery listeners before intentional closure to avoid scheduling a reload.
 
-### Observe registered connections
-
-Most device integrations should use `DeviceManager`. Other consumers can call `async_subscribe_connections(hass, listener)` from `homeassistant.components.lorawan`. It immediately replays active connections, then calls `listener(entry_id, connection)` for registrations and `listener(entry_id, None)` for withdrawals. It returns an unsubscribe callback.
-
-Callbacks are synchronous and run on the event loop. Register the unsubscribe callback with `entry.async_on_unload`. Consumers own any device-event subscriptions they create on a connection and must release them on withdrawal or unload.
-
 ## Device integrations
 
 ### Declare discovery matchers
