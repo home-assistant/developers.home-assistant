@@ -16,8 +16,8 @@ Both declare `"dependencies": ["lorawan"]` in their manifests. Backend communica
 
 A backend implements the `Connection` protocol from `lorawan-connection`:
 
-- `async_subscribe(*, brands, callback)` delivers the complete matching inventory before returning an unsubscribe callback, then delivers live device events. `brands` is a `frozenset` of `(stack, brand_id)` pairs; `None` selects all devices, and an empty set selects none.
-- `on_disconnect(callback)` reports connection loss and returns an unsubscribe callback.
+- `async_subscribe(*, brands, listener)` delivers the complete matching inventory before returning an unsubscribe callback, then delivers live device events. `brands` is a `frozenset` of `(stack, brand_id)` pairs; `None` selects all devices, and an empty set selects none.
+- `on_disconnect(listener)` reports connection loss and returns an unsubscribe callback.
 - `async_send_downlink(downlink)` queues a command and returns its queue ID.
 
 Use the provider's config entry ID as the backend's `network_id`. Include the backend's native `stack`, `brand_id`, and `model_id` in device descriptors so discovery and model selection can match them.
@@ -29,7 +29,7 @@ Declare the backend's dependencies in the server integration's `requirements`. F
 ```json
 {
   "dependencies": ["lorawan"],
-  "requirements": ["lorawan-connection[chirpstack]==0.12.0"]
+  "requirements": ["lorawan-connection[chirpstack]==0.13.0"]
 }
 ```
 
