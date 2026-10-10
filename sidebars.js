@@ -174,6 +174,7 @@ module.exports = {
             "core/bluetooth/api",
           ],
         },
+        "lorawan",
         "modbus/introduction",
       ],
     },
