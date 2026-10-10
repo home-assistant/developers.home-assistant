@@ -67,10 +67,7 @@ The provider owns authentication, reconnection, and transport shutdown:
 
 ### Observe registered connections
 
-Most device integrations should use `DeviceManager`. Other consumers can use these public functions from `homeassistant.components.lorawan`:
-
-- `async_get_connections(hass)` returns a snapshot mapping provider entry IDs to active `Connection` objects.
-- `async_subscribe_connections(hass, listener)` immediately replays active connections, then calls `listener(entry_id, connection)` for registrations and `listener(entry_id, None)` for withdrawals. It returns an unsubscribe callback.
+Most device integrations should use `DeviceManager`. Other consumers can call `async_subscribe_connections(hass, listener)` from `homeassistant.components.lorawan`. It immediately replays active connections, then calls `listener(entry_id, connection)` for registrations and `listener(entry_id, None)` for withdrawals. It returns an unsubscribe callback.
 
 Callbacks are synchronous and run on the event loop. Register the unsubscribe callback with `entry.async_on_unload`. Consumers own any device-event subscriptions they create on a connection and must release them on withdrawal or unload.
 
