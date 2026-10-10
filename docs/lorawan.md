@@ -80,6 +80,8 @@ Callbacks are synchronous and run on the event loop. Register the unsubscribe ca
 
 The manifest's [`lorawan` field](creating_integration_manifest.md#lorawan) lists `(stack, brand_id)` pairs. A matching device starts `async_step_integration_discovery` with an empty discovery dictionary. The integration must have a config flow and depend on `lorawan`.
 
+Only device-addition events trigger discovery. Each integration domain is discovered once per Home Assistant run, across all connections and reconnects. Device updates and activity events still reach subscribed device libraries.
+
 Use one config entry for the vendor, with the integration domain as its unique ID. Handle both user setup and integration discovery through a confirmation step, and abort duplicates with `_abort_if_unique_id_configured()`. The manager finds devices across all connections, so this entry needs no server selection.
 
 The device library supplies `Device` subclasses and a `DeviceCollection` subclass whose `DEVICES` lists its supported models. Models declare identities as `stack: (brand_id, model_id)` pairs. Manifest matchers discover the integration by brand; the collection selects supported models. See [writing a device library](https://home-assistant-libs.github.io/lorawan-connection/patterns/library/).
