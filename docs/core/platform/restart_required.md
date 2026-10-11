@@ -6,14 +6,14 @@ Some changes only take effect after Home Assistant restarts. Think of an update 
 
 ## Updates
 
-For an update entity, set `post_restart_required` and you are done. Once an install finishes without raising, the update entity asks for the restart for you.
+For an update entity, set `restart_required` and you are done. Once an install finishes without raising, the update entity asks for the restart for you.
 
 ```python
 class MyUpdate(UpdateEntity):
-    _attr_post_restart_required = True
+    _attr_restart_required = True
 ```
 
-It can also be set on the entity description, with `UpdateEntityDescription(post_restart_required=True)`. See the [update entity](/docs/core/entity/update) for the details.
+It can also be set on the entity description, with `UpdateEntityDescription(restart_required=True)`. See the [update entity](/docs/core/entity/update) for the details.
 
 ## Anything else
 

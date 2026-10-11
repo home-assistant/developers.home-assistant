@@ -12,7 +12,7 @@ For update entities, it is one attribute:
 
 ```python
 class MyUpdate(UpdateEntity):
-    _attr_post_restart_required = True
+    _attr_restart_required = True
 ```
 
 Once an install finishes, the update entity asks for the restart on your behalf.
