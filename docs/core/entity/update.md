@@ -25,6 +25,7 @@ Properties should always only return information from memory and not do I/O (lik
 | ---- | ---- | ------- | -----------
 | auto_update | bool | `False` | The device or service that the entity represents has auto update logic. When this is set to `True` you cannot skip updates.
 | display_precision | int | `0` | Number of decimal digits for display of update progress.
+| has_update | bool | Version comparison | Whether an update is available. Can be overridden to use custom logic; see [Determine update availability](#determine-update-availability).
 | in_progress | bool | `False` | Update installation progress. Should return a boolean (True if in progress, False if not).
 | installed_version | str | `None` | The currently installed and used version of the software.
 | latest_version | str | `None` | The latest version of the software available.
@@ -34,6 +35,25 @@ Properties should always only return information from memory and not do I/O (lik
 | update_percentage | int, float | `None` | Update installation progress. Can either return a number to indicate the progress from 0 to 100% or None.
 
 Other properties that are common to all entities such as `device_class`, `entity_category`, `icon`, `name` etc are still applicable.
+
+### Determine update availability
+
+The `has_update` property can be implemented to use custom logic to determine
+whether an update is available. This is useful when the device or service
+provides update availability directly instead of versions that Home Assistant
+can compare.
+
+```python
+@property
+def has_update(self) -> bool:
+    """Return whether an update is available."""
+    return self.device.update_available
+```
+
+Home Assistant only reads this property when both `installed_version` and
+`latest_version` are known and differ, and the latest version has not been
+skipped. The default implementation compares the versions by calling
+`version_is_newer`.
 
 ## Supported features
 
@@ -48,24 +68,6 @@ Supported features are defined by using values in the `UpdateEntityFeature` enum
 | 'RELEASE_NOTES' | The entity provides methods to fetch a complete changelog.
 
 ## Methods
-
-### Determine update availability
-
-The `has_update` method can be implemented to use custom logic to determine
-whether an update is available. This is useful when the device or service
-provides update availability directly instead of versions that Home Assistant
-can compare.
-
-```python
-def has_update(self) -> bool:
-    """Return whether an update is available."""
-    return self.device.update_available
-```
-
-Home Assistant only calls this method when both `installed_version` and
-`latest_version` are known and differ, and the latest version has not been
-skipped. The default implementation compares the versions by calling
-`version_is_newer`.
 
 ### Compare versions
 
