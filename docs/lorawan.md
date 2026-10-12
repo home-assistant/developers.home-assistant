@@ -70,7 +70,7 @@ The provider owns authentication, reconnection, and transport shutdown:
 
 ### Declare discovery matchers
 
-The manifest's [`lorawan` field](creating_integration_manifest.md#lorawan) lists `(stack, brand_id)` pairs. A matching device starts `async_step_integration_discovery` with an empty discovery dictionary. The integration must have a config flow and depend on `lorawan`.
+The manifest's [`lorawan` field](creating_integration_manifest.md#lorawan) lists `(stack, brand_id)` pairs. A matching device starts `async_step_integration_discovery` with a `LoRaWANDiscoveryInfo` instance from `homeassistant.components.lorawan`. This type currently has no fields. The integration must have a config flow and depend on `lorawan`.
 
 Only device-addition events trigger discovery. Each integration domain is discovered once per Home Assistant run, across all connections and reconnects. Device updates and activity events still reach subscribed device libraries.
 

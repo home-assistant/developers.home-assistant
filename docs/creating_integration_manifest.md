@@ -315,7 +315,7 @@ The `lorawan` field enables discovery by matching a device's stack and native br
 }
 ```
 
-The integration must declare a config flow and a dependency on `lorawan`. When a device matches any pair, Home Assistant starts the config flow's `integration_discovery` step with an empty discovery dictionary. The flow should confirm setup and prevent duplicate entries. Matching selects the device integration; its library determines which models it supports.
+The integration must declare a config flow and a dependency on `lorawan`. When a device matches any pair, Home Assistant starts the config flow's `integration_discovery` step with a `LoRaWANDiscoveryInfo` instance. The flow should confirm setup and prevent duplicate entries. Matching selects the device integration; its library determines which models it supports.
 
 See [LoRaWAN integrations](lorawan.md) for connection registration and device helpers.
 
