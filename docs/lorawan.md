@@ -3,14 +3,14 @@ title: "LoRaWAN integrations"
 sidebar_label: LoRaWAN
 ---
 
-The `lorawan` integration connects server integrations to device integrations through the [`lorawan-connection`](https://home-assistant-libs.github.io/lorawan-connection/) Python package.
+The `lorawan` integration connects connection integrations to device integrations through the [`lorawan-connection`](https://home-assistant-libs.github.io/lorawan-connection/) Python package.
 
-- **Server integrations** configure a backend and register its connection with Home Assistant.
+- **Connection integrations** configure a backend and register its connection with Home Assistant.
 - **Device integrations** use `DeviceManager` to access matching devices on all available LoRaWAN connections and expose their entities.
 
 Both declare `"dependencies": ["lorawan"]` in their manifests. Backend communication and device decoding belong in Python libraries; Home Assistant integrations handle configuration, discovery, and entities.
 
-## Connection providers
+## Connection integrations
 
 ### Implement the backend
 
@@ -21,11 +21,11 @@ A backend implements the `Connection` protocol from `lorawan-connection`:
 - `on_disconnect(listener)` reports connection loss and returns an unsubscribe callback.
 - `async_send_downlink(downlink)` queues a command and returns its queue ID.
 
-Use the provider's config entry ID as the backend's `network_id`. Set each descriptor's `stack` to `connection.stack_type` and include its native `brand_id` and `model_id` so discovery and model selection can match them.
+Use the connection integration's config entry ID as the backend's `network_id`. Set each descriptor's `stack` to `connection.stack_type` and include its native `brand_id` and `model_id` so discovery and model selection can match them.
 
 See the library's [backend implementation guide](https://home-assistant-libs.github.io/lorawan-connection/connection/adding-a-backend/) for event ordering, filtering, and downlink requirements.
 
-Declare the backend's dependencies in the server integration's `requirements`. For an adapter distributed as a `lorawan-connection` extra, pin the same version as the shared integration. For example, these manifest fields select the ChirpStack adapter:
+Declare the backend's dependencies in the connection integration's `requirements`. For an adapter distributed as a `lorawan-connection` extra, pin the same version as the shared integration. For example, these manifest fields select the ChirpStack adapter:
 
 ```json
 {
@@ -34,7 +34,7 @@ Declare the backend's dependencies in the server integration's `requirements`. F
 }
 ```
 
-Import the adapter in the server integration. Device integrations use the shared connection interface and do not need the backend's optional dependencies.
+Import the adapter in the connection integration. Device integrations use the shared connection interface and do not need the backend's optional dependencies.
 
 ### Register a connection
 
@@ -58,12 +58,12 @@ async def async_register_server(
     entry.async_on_unload(unsubscribe)
 ```
 
-Registration waits for the discovery subscription's initial inventory. Only one connection can be registered per provider entry. The returned callback withdraws the connection and removes discovery subscriptions; it does not close the backend.
+Registration waits for the discovery subscription's initial inventory. Only one connection can be registered per connection entry. The returned callback withdraws the connection and removes discovery subscriptions; it does not close the backend.
 
-The provider owns authentication, reconnection, and transport shutdown:
+The connection integration owns authentication, reconnection, and transport shutdown:
 
 - Close the backend if setup fails or is canceled. Translate authentication failures to `ConfigEntryAuthFailed` and temporary connection failures to `ConfigEntryNotReady`.
-- On connection loss, `lorawan` withdraws the registration. The provider must recover or reload its entry, then register the replacement connection with the same `network_id`.
+- On connection loss, `lorawan` withdraws the registration. The connection integration must recover or reload its entry, then register the replacement connection with the same `network_id`.
 - On unload and Home Assistant shutdown, remove recovery listeners, withdraw the registration, and close the backend. Remove recovery listeners before intentional closure to avoid scheduling a reload.
 
 ## Device integrations
@@ -201,7 +201,7 @@ class ExampleEntity(LoRaWANEntity[ExampleDevice]):
         )
 ```
 
-This identifier includes the integration domain, provider entry ID, and DevEUI. Include the provider entry ID and DevEUI in entity unique IDs too, followed by the channel or measurement key. This keeps devices on separate servers distinct even when they have the same DevEUI.
+This identifier includes the integration domain, connection entry ID, and DevEUI. Include the connection entry ID and DevEUI in entity unique IDs too, followed by the channel or measurement key. This keeps devices on separate servers distinct even when they have the same DevEUI.
 
 Keep payload decoding and command encoding in the device library. Entity properties read model state; entity actions call model methods and translate command failures to Home Assistant exceptions.
 
@@ -209,7 +209,7 @@ Keep payload decoding and command encoding in the device library. Entity propert
 
 `DeviceManager` retains models and registry records during temporary connection loss and marks the affected coordinators unavailable. When a replacement connection registers, it reconciles the complete inventory and reuses models for devices that remain. A sleeping device does not become unavailable just because no uplink has arrived recently.
 
-When a device is removed or its provider entry is deleted, the manager removes its device registry record and shuts down its coordinator. Home Assistant removes the associated entities. Normal vendor unload closes collections and coordinators while preserving registry records and leaving server transports open.
+When a device is removed or its connection entry is deleted, the manager removes its device registry record and shuts down its coordinator. Home Assistant removes the associated entities. Normal vendor unload closes collections and coordinators while preserving registry records and leaving server transports open.
 
 ## Testing
 
@@ -219,6 +219,6 @@ Use `lorawan_connection.mock.MockConnection` with the real device collections to
 - Two connections containing the same DevEUI, with independent availability and commands.
 - Disconnect and reconnect, including devices removed while offline.
 - Setup failure, cancellation, and shutdown releasing subscriptions and transports.
-- Device registry cleanup, including disabled entities and provider entries deleted while the device integration was unloaded.
+- Device registry cleanup, including disabled entities and connection entries deleted while the device integration was unloaded.
 
 Keep decoder tests in the device library. Backend tests should separately exercise real server authentication, inventory, event delivery, and downlinks.
