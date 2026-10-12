@@ -16,11 +16,12 @@ Both declare `"dependencies": ["lorawan"]` in their manifests. Backend communica
 
 A backend implements the `Connection` protocol from `lorawan-connection`:
 
+- `stack_type` identifies the backend's catalog namespace, such as `"chirpstack"` or `"tts"`. It is available before connecting.
 - `async_subscribe(*, brands, listener)` delivers the complete matching inventory before returning an unsubscribe callback, then delivers live device events. `brands` is a `frozenset` of `(stack, brand_id)` pairs; `None` selects all devices, and an empty set selects none.
 - `on_disconnect(listener)` reports connection loss and returns an unsubscribe callback.
 - `async_send_downlink(downlink)` queues a command and returns its queue ID.
 
-Use the provider's config entry ID as the backend's `network_id`. Include the backend's native `stack`, `brand_id`, and `model_id` in device descriptors so discovery and model selection can match them.
+Use the provider's config entry ID as the backend's `network_id`. Set each descriptor's `stack` to `connection.stack_type` and include its native `brand_id` and `model_id` so discovery and model selection can match them.
 
 See the library's [backend implementation guide](https://home-assistant-libs.github.io/lorawan-connection/connection/adding-a-backend/) for event ordering, filtering, and downlink requirements.
 
@@ -29,7 +30,7 @@ Declare the backend's dependencies in the server integration's `requirements`. F
 ```json
 {
   "dependencies": ["lorawan"],
-  "requirements": ["lorawan-connection[chirpstack]==0.13.0"]
+  "requirements": ["lorawan-connection[chirpstack]==0.14.0"]
 }
 ```
 
