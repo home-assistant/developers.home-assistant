@@ -61,7 +61,7 @@ The connection integration owns authentication, reconnection, and transport shut
 
 The manifest's [`lorawan` field](creating_integration_manifest.md#lorawan) lists `(stack, brand_id)` pairs. A matching device starts `async_step_integration_discovery` with a `LoRaWANDiscoveryInfo` instance from `homeassistant.components.lorawan`. This type currently has no fields. The integration must have a config flow and depend on `lorawan`.
 
-Only device-addition events trigger discovery. Each integration domain is discovered once per Home Assistant run, across all connections and reconnects. Device updates and activity events still reach subscribed device libraries.
+Only device-addition events trigger discovery. Each connection's initial device replay requests discovery once per matching integration domain. Devices added afterward each request discovery again. Home Assistant suppresses duplicate flows; the device integration's unique ID check handles configured and ignored entries. Device updates and activity events still reach subscribed device libraries.
 
 Use one config entry for the vendor, with the integration domain as its unique ID. Handle both user setup and integration discovery through a confirmation step, and abort duplicates with `_abort_if_unique_id_configured()`. The manager finds devices across all connections, so this entry needs no server selection.
 
