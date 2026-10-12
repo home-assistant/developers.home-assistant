@@ -176,9 +176,9 @@ async def async_setup_entry(
 
 ### Entities and device identity
 
-Derive entity classes from `LoRaWANEntity[ExampleDevice]` and the relevant platform entity class. `LoRaWANEntity` extends `CoordinatorEntity`, exposes the model as `self.device`, marks closed models unavailable, and prevents pending entity additions from recreating removed devices. Its `async_update()` is a no-op because updates arrive through subscriptions.
+Derive entity classes from `LoRaWANEntity[ExampleDevice]` and the relevant platform entity class. `LoRaWANEntity` extends `CoordinatorEntity`, exposes the model as `self.device`, and marks closed models unavailable. Its `async_update()` is a no-op because updates arrive through subscriptions.
 
-Use `device_identifier` from `homeassistant.components.lorawan` in your entity's `DeviceInfo`:
+Device integrations provide device names and other metadata through their entities' `DeviceInfo`. Home Assistant creates the registry entries when it adds the entities. Use `device_identifier` to identify the device:
 
 ```python
 from typing import override
@@ -195,7 +195,10 @@ class ExampleEntity(LoRaWANEntity[ExampleDevice]):
     @property
     @override
     def device_info(self) -> DeviceInfo:
-        return DeviceInfo(identifiers={device_identifier(DOMAIN, self.device)})
+        return DeviceInfo(
+            identifiers={device_identifier(DOMAIN, self.device)},
+            name=self.device.descriptor.name,
+        )
 ```
 
 This identifier includes the integration domain, provider entry ID, and DevEUI. Include the provider entry ID and DevEUI in entity unique IDs too, followed by the channel or measurement key. This keeps devices on separate servers distinct even when they have the same DevEUI.
