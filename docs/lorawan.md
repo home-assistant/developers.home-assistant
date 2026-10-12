@@ -25,17 +25,6 @@ Use the connection integration's config entry ID as the backend's `network_id`. 
 
 See the library's [backend implementation guide](https://home-assistant-libs.github.io/lorawan-connection/connection/adding-a-backend/) for event ordering, filtering, and downlink requirements.
 
-Declare the backend's dependencies in the connection integration's `requirements`. For an adapter distributed as a `lorawan-connection` extra, pin the same version as the shared integration. For example, these manifest fields select the ChirpStack adapter:
-
-```json
-{
-  "dependencies": ["lorawan"],
-  "requirements": ["lorawan-connection[chirpstack]==0.14.0"]
-}
-```
-
-Import the adapter in the connection integration. Device integrations use the shared connection interface and do not need the backend's optional dependencies.
-
 ### Register a connection
 
 After connecting the backend in `async_setup_entry`, register it with `lorawan.async_register_connection`. The `connection` object implements `Connection` from the `lorawan-connection` package:
