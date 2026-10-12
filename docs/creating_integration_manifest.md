@@ -305,7 +305,7 @@ When a discovery info is routed to your integration because of this entry in you
 
 ## LoRaWAN
 
-The `lorawan` field enables discovery by matching a device's stack and native brand ID. Each matcher is a two-item array containing a nonempty stack name and a nonempty string or nonnegative integer brand ID. Matchers must be unique; booleans are not valid brand IDs.
+The `lorawan` field enables discovery by matching a device's stack and native brand ID. Each matcher is a two-item array containing a stack name and a string or integer brand ID.
 
 ```json
 {
