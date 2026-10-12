@@ -78,7 +78,7 @@ Until now, an entity was removed and then added again under its new `entity_id` 
 
 From Home Assistant Core 2026.11, the entity is instead updated in place. Home Assistant removes the state under the old `entity_id`, sets `self.entity_id` to the new `entity_id`, moves its own bookkeeping (entity registry and device registry tracking, entity sources, restore state and entity groups) to the new `entity_id`, and writes the state under the new `entity_id`. `async_will_remove_from_hass` and `async_added_to_hass` are not called.
 
-This is implemented in core [PR #183946](https://github.com/home-assistant/core/pull/183946) and [PR #184943](https://github.com/home-assistant/core/pull/184943), the rationale is described in architecture proposal [home-assistant/architecture#1393](https://github.com/home-assistant/architecture/discussions/1393).
+This is implemented in core [PR #183946](https://github.com/home-assistant/core/pull/183946), [PR #184943](https://github.com/home-assistant/core/pull/184943) and [PR #185462](https://github.com/home-assistant/core/pull/185462), the rationale is described in architecture proposal [home-assistant/architecture#1393](https://github.com/home-assistant/architecture/discussions/1393).
 
 ### The new hook
 
@@ -94,9 +94,9 @@ def async_entity_id_changed(self, old_entity_id: str) -> None:
 
 Writing the state from the hook is optional: if the state has not been written under the new `entity_id` when the hook returns, Home Assistant writes it. Work which needs the entity's own state under its new `entity_id`, for example rendering templates which reference `this`, should first write the state with `self.async_write_ha_state()`.
 
-The hook must not await. Work which must be awaited can be done in a task; since entity registry updates are not serialized with it, check after each `await` that the entity is still added and that `self.entity_id` has not changed again.
+Work which must be awaited can be done in a task; since entity registry updates are not serialized with it, check after each `await` that the entity is still added and that `self.entity_id` has not changed again.
 
-The hook must call `super()`, so base classes can update their own bookkeeping.
+The hook must call `super()`, so base classes can update their own bookkeeping. If the hook writes the state, it must call `super()` before doing so.
 
 Exceptions raised by the hook are caught and logged by Home Assistant, and the `entity_id` change still completes: the state is written under the new `entity_id`. This is unlike `async_prepare_to_add_to_hass`, where raising an exception aborts the add.
 
@@ -128,7 +128,7 @@ Note that the callback registered with `async_on_remove` calls whatever the curr
 
 ### Backwards compatibility
 
-An entity whose add and remove hooks depend on its `entity_id` would break if it was silently changed in place. To give custom integrations time to migrate, an entity is still removed and added again when its `entity_id` changes if its class, or one of its base classes other than `Entity`, implements `async_prepare_to_add_to_hass`, `async_added_to_hass` or `async_will_remove_from_hass`, unless that same class or a subclass of it also implements `async_entity_id_changed`.
+An entity whose add and remove hooks depend on its `entity_id` would break if it was silently changed in place. To give custom integrations time to migrate, an entity of a custom integration is still removed and added again when its `entity_id` changes if one of the custom integration's own classes in its class hierarchy implements `async_prepare_to_add_to_hass`, `async_added_to_hass` or `async_will_remove_from_hass`, unless that same class or a subclass of it also implements `async_entity_id_changed`. Base classes provided by Home Assistant Core, such as `SensorEntity` or `CoordinatorEntity`, don't count, and entities of core integrations are always changed in place.
 
 Custom integration authors should check whether their entities set up anything keyed on their own `entity_id`, and then implement `async_entity_id_changed`. If nothing needs to be updated, implementing it as a method which only calls `super()` is enough to opt in:
 

@@ -413,7 +413,7 @@ When this callback runs, `self.entity_id` is already the new `entity_id`, and th
 
 Implement it to update anything the entity has set up which depends on its own `entity_id`, in particular anything the state or attributes are derived from. Example uses: re-subscribe state change listeners or dispatcher signals which are keyed on `self.entity_id`, or update a lookup table which maps entity IDs to entities. Always call `super()`, so base classes can do the same.
 
-Writing the state from this callback is optional: if the state has not been written under the new `entity_id` when the callback returns, Home Assistant writes it. Work which needs the entity's own state under its new `entity_id`, for example rendering templates which reference `this`, should first write the state with `self.async_write_ha_state()`.
+Writing the state from this callback is optional: if the state has not been written under the new `entity_id` when the callback returns, Home Assistant writes it. Work which needs the entity's own state under its new `entity_id`, for example rendering templates which reference `this`, should first write the state with `self.async_write_ha_state()`. If the callback writes the state, it must call `super()` before doing so, so that base classes have updated anything the state depends on before it's written.
 
 Work which must be awaited can be done in a task. Entity registry updates are not serialized with such a task, so after each `await`, check that the entity is still added and that `self.entity_id` has not changed again.
 
