@@ -158,6 +158,25 @@ This should only be implemented if the integration has independent control of ve
 | `SWING_OFF`        | The fan is not swinging.                          |
 | `SWING_ON`         | The fan is swinging.                              |
 
+## Restoring climate states
+
+Climate entities which restore temperatures after restart or reload should not read them from the state attributes restored by `RestoreEntity`, because those are converted to the unit system configured by the user and rounded for display. Climate entities which restore temperatures should extend `RestoreClimate` and call `await self.async_get_last_climate_data()` from `async_added_to_hass` to get access to the stored `native_current_temperature`, `native_target_temperature`, `native_target_temperature_high` and `native_target_temperature_low`, converted to the entity's current `native_temperature_unit`. Temperatures which are not valid numbers are returned as `None`.
+
+Pass `validate_range=True` when the restored target temperatures are sent to the device, for example by an entity which can't read its state back from the device. Target temperatures outside `min_temp` and `max_temp` are then returned as `None`, and the entity should fall back to a default. Target temperatures at most half a degree outside the range, which can be caused by rounding, are clamped to the range instead.
+
+```python
+class MyClimateEntity(RestoreClimate):
+    async def async_added_to_hass(self) -> None:
+        """Restore the target temperature."""
+        await super().async_added_to_hass()
+        if (
+            climate_data := await self.async_get_last_climate_data(validate_range=True)
+        ) is not None and (
+            temperature := climate_data.native_target_temperature
+        ) is not None:
+            self._attr_native_target_temperature = temperature
+```
+
 ## Supported features
 
 Supported features are defined by using values in the `ClimateEntityFeature` enum
