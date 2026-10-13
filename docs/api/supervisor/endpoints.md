@@ -1848,20 +1848,21 @@ log record per line.
 
 **HTTP Query Parameters**
 
-These are a convenience alternative to the headers shown above as query
-parameters are easier to use in development and with the Home Assistant proxy.
-You should only provide one or the other.
+The `verbose` and `lines` query parameters are convenient alternatives to the
+`Accept` and `Range` headers, respectively, especially when using the Home
+Assistant proxy.
 
-| Query     | type  | description                                                                           |
-| --------  | ----- | -----------------------------------------------------------------------------------   |
-| verbose   | N/A   | If included, uses `text/x-log` as log output type (alternative to `Accept` header)    |
-| lines     | int   | Number of lines of output to return (alternative to `Range` header)                   |
-| no_colors | N/A   | If included, ANSI escape codes for terminal coloring will be stripped from the output |
+| Query     | type   | description                                                                           |
+| --------- | ------ | ------------------------------------------------------------------------------------- |
+| format    | string | Log format: `plain`, `timestamp`, or `verbose` (see below)                            |
+| verbose   | N/A    | If included, selects the verbose format unless `format` is specified                  |
+| lines     | int    | Number of lines of output to return (alternative to `Range` header)                   |
+| no_colors | N/A    | If included, ANSI escape codes for terminal coloring will be stripped from the output |
 
 Example query string:
 
 ```text
-?verbose&lines=100&no_colors
+?format=timestamp&lines=100&no_colors
 ```
 
 :::tip
@@ -1873,10 +1874,17 @@ as `num_skip`. For example, `Range: entries=:-9:` returns the last 10 entries. O
 API returns the last 100 lines by default. Provide a value for `Range` to see
 logs further in the past.
 
-The `Accept` header can be set to `text/x-log` to get logs annotated with
-extra information, such as the timestamp and Systemd unit name. If no
-identifier is specified (that is, for the host logs containing logs for multiple
-identifiers/units), this option is ignored - these logs are always annotated.
+The `format` query parameter selects how each journal entry is displayed:
+
+| Format      | Example output                                                     |
+| ----------- | ------------------------------------------------------------------ |
+| `plain`     | `Hello, world!`                                                    |
+| `timestamp` | `2013-09-17 07:32:51.123 Hello, world!`                            |
+| `verbose`   | `2013-09-17 07:32:51.123 homeassistant python[666]: Hello, world!` |
+
+An explicit `format` overrides `verbose` and `Accept: text/x-log`. Without
+`format`, either option selects verbose output, otherwise, the endpoint default
+applies.
 
 </ApiEndpoint>
 
