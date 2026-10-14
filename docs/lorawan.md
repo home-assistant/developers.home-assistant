@@ -65,6 +65,8 @@ Only device-addition events trigger discovery. Each connection's initial device 
 
 Use one config entry for the vendor, with the integration domain as its unique ID. Handle both user setup and integration discovery through a confirmation step, and abort duplicates with `_abort_if_unique_id_configured()`. The manager finds devices across all connections, so this entry needs no server selection.
 
+Config flows can use `lorawan.async_get_connections(hass)` to get the currently registered connections and check for supported devices with temporary device collections. Close those collections after checking; the connection integration owns the connections themselves.
+
 The device library supplies `Device` subclasses and a `DeviceCollection` subclass whose `DEVICES` lists its supported models. Models declare identities as `stack: (brand_id, model_id)` pairs. Manifest matchers discover the integration by brand; the collection selects supported models. See [writing a device library](https://home-assistant-libs.github.io/lorawan-connection/patterns/library/).
 
 ### Set up the device manager
