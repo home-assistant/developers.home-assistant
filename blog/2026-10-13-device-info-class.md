@@ -16,7 +16,7 @@ name = device_info.name
 
 This change is included in Home Assistant Core 2026.11.
 
-Dict-style access still works for now, so your integration keeps running, but it is a compatibility layer which will be deprecated and removed in a later version. Integrations should move to attributes.
+Reading and writing fields with `[]`, `.get()`, and `.update()` still works for now, but it is a compatibility layer which will be deprecated and removed in a later version. Integrations should move to attributes. Some other dict behavior is already gone, as described in [what no longer works](#what-no-longer-works).
 
 ### Migrating your integration
 
@@ -56,6 +56,8 @@ self._attr_device_info = DeviceInfo(
 ```
 
 ```python
+import copy
+
 # Old
 new_device_info = device_info.copy()
 new_device_info["name"] = "Other name"
@@ -147,7 +149,7 @@ To check whether a field exists, for example to support older Home Assistant ver
 
 #### Modifying a converted sensor device info
 
-`sensor_device_info_to_hass_device_info()` now returns a cached device info, shared by all devices with the same name, manufacturer, and model. It cannot be modified, and raises a `TypeError` if you try. Copy it first, with `copy.copy(device_info)`. If you add the same fields for every advertisement, build and cache your own `DeviceInfo` instead, so that it is not copied every time.
+`sensor_device_info_to_hass_device_info()` now returns a cached device info, which can be shared with other devices. It cannot be modified, and raises a `TypeError` if you try. Copy it first, with `copy.copy(device_info)`. If you add the same fields for every advertisement, build and cache your own `DeviceInfo` instead, so that it is not copied every time.
 
 ### Deprecated fields
 
