@@ -83,6 +83,20 @@ It is also possible to set up a more traditional development environment. See th
 If you proceed without the correct Python version installed, you will end up with a virtual environment that is incompatible with Home Assistant. Once you have installed the correct version, remove the `venv` directory and continue with the setup to recreate it with the correct version.
 :::
 
+### Optional: manage Python with mise
+
+If you use [mise-en-place](https://mise.jdx.dev/) to manage development tools, the Core repository configuration reads the required Python version from `.python-version`.
+
+1. [Install mise](https://mise.jdx.dev/getting-started.html).
+2. From the root of your Core repository, trust its configuration and install Python:
+
+   ```shell
+   mise trust
+   mise install python
+   ```
+
+Continue with the instructions for your operating system to install the required system dependencies.
+
 ### Developing on Ubuntu / Debian
 
 Install the core dependencies.
