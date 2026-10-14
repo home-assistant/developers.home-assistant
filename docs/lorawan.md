@@ -207,7 +207,7 @@ Use `lorawan_connection.mock.MockConnection` with the real device collections to
 - A connection registered after the device integration has loaded.
 - Two connections containing the same DevEUI, with independent availability and commands.
 - Disconnect and reconnect, including devices removed while offline.
-- Setup failure, cancellation, and shutdown releasing subscriptions and transports.
+- Setup failure, cancellation, and shutdown releasing Home Assistant subscriptions and collections.
 - Device registry cleanup, including disabled entities and connection entries deleted while the device integration was unloaded.
 
-Keep decoder tests in the device library. Backend tests should separately exercise real server authentication, inventory, event delivery, and downlinks.
+Keep decoder tests in the device library. Backend tests should separately exercise real server authentication, inventory, event delivery, downlinks, and transport cleanup after setup failure, cancellation, and shutdown.
