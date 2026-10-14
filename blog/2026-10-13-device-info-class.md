@@ -4,7 +4,7 @@ authorURL: https://github.com/epenet
 title: "DeviceInfo is now a dataclass"
 ---
 
-### Summary of changes
+## Summary of changes
 
 `DeviceInfo` and `ChildDeviceInfo` are no longer `TypedDict`s. They are dataclasses with typed fields, which are read and written as attributes:
 
@@ -18,7 +18,7 @@ This change is included in Home Assistant Core 2026.11.
 
 Reading and writing fields with `[]`, `.get()`, and `.update()` still works for now, but it is a compatibility layer which will be deprecated and removed in a later version. Integrations should move to attributes. Some other dict behavior is already gone, as described in [what no longer works](#what-no-longer-works).
 
-### Migrating your integration
+## Migrating your integration
 
 ```python
 # Old
@@ -79,7 +79,7 @@ device_registry.async_get_or_create(
 )
 ```
 
-### Unset fields
+## Unset fields
 
 A field which has not been set reads as `UNDEFINED`, not as `None`, and `None` is a value like any other. Note that `UNDEFINED` is truthy, so test it explicitly:
 
@@ -107,7 +107,7 @@ device_info.name = UNDEFINED
 
 Only the fields which are set are passed on to the device registry, so an unset field leaves the corresponding value on the device unchanged.
 
-### Serializing a device info
+## Serializing a device info
 
 A dataclass is serialized field by field, unset fields included. orjson, which the Home Assistant JSON helpers use, writes every unset field as `0`. `dataclasses.asdict` keeps them as `UNDEFINED`. Whenever a device info is stored, sent in event data or a WebSocket message, or held by a dataclass which is serialized, use `device_info.as_dict()`, which returns the fields which are set:
 
@@ -119,9 +119,9 @@ await store.async_save({"device_info": device_info})
 await store.async_save({"device_info": device_info.as_dict()})
 ```
 
-### What no longer works
+## What no longer works
 
-#### Keys which are not device info fields
+### Keys which are not device info fields
 
 Keys which are not device info fields are rejected. Previously they were silently kept, and either ignored or raised a `TypeError` later, when the device registry was called:
 
@@ -135,11 +135,11 @@ device_info["config_entry_id"] = entry.entry_id
 
 Arguments of `async_get_or_create` which are not device info fields, such as `config_entry_id`, are passed to the method directly.
 
-#### Building from a mapping
+### Building from a mapping
 
 `DeviceInfo({...})` raises a `TypeError`: pass the fields as keyword arguments.
 
-#### Dict behavior
+### Dict behavior
 
 Some rarely used dict behavior is gone: `copy`, `setdefault`, `values`, `clear`, `popitem`, `pop`, `del device_info[key]`, merging with `|` or `|=`, iterating over a device info, and `len()`. Testing a field with `in` keeps working.
 
@@ -147,15 +147,15 @@ A device info is no longer a `dict`: `isinstance(device_info, dict)` returns `Fa
 
 To check whether a field exists, for example to support older Home Assistant versions, use `"via_device_id" in DeviceInfo.__annotations__`. `__optional_keys__` and `__required_keys__` still work, but are part of the compatibility layer.
 
-#### Modifying a converted sensor device info
+### Modifying a converted sensor device info
 
 `sensor_device_info_to_hass_device_info()` now returns a cached device info, which can be shared with other devices. It cannot be modified, and raises a `TypeError` if you try. Copy it first, with `copy.copy(device_info)`. If you add the same fields for every advertisement, build and cache your own `DeviceInfo` instead, so that it is not copied every time.
 
-### Deprecated fields
+## Deprecated fields
 
 `created_at`, `default_manufacturer`, `default_model`, `default_name`, `modified_at`, and `via_device` are still accepted, and still log a deprecation warning when the device is created. They are not part of the typed fields, and will be removed in Home Assistant Core 2027.8 (`via_device`) and 2027.9 (the others). Use `manufacturer`, `model`, `name`, and `via_device_id` instead.
 
-### Child devices
+## Child devices
 
 `ChildDeviceInfo` is a dataclass in the same way. An entity registers a child device by returning a `ChildDeviceInfo`, rather than by adding a `parent_device_id` key to a `DeviceInfo`:
 
