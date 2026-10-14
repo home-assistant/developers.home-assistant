@@ -67,6 +67,22 @@ Use one config entry for the vendor, with the integration domain as its unique I
 
 The device library supplies `Device` subclasses and a `DeviceCollection` subclass whose `DEVICES` lists its supported models. Models declare identities as `stack: (brand_id, model_id)` pairs. Manifest matchers discover the integration by brand; the collection selects supported models. See [writing a device library](https://home-assistant-libs.github.io/lorawan-connection/patterns/library/).
 
+### Check for supported devices
+
+Use `lorawan.async_validate_devices` in the config flow to require a supported device before creating an entry. Pass a collection factory, such as the device library's collection class:
+
+```python
+from example_lorawan import ExampleDevices
+
+from homeassistant.components import lorawan
+
+await lorawan.async_validate_devices(hass, create_collection=ExampleDevices)
+```
+
+The helper returns normally when it finds a matching device. It raises `lorawan.NoConnectionsError` if no connection can be checked, or `lorawan.NoSupportedDevicesError` if the checked connections have no match. Map these exceptions to config flow abort messages.
+
+If the integration supports only some of the collection's models, pass an `is_supported` predicate that accepts a device and returns a boolean. The helper closes each temporary collection after checking it, including on failure or cancellation. It does not create coordinators or registry entries, retain subscriptions, or close backend connections.
+
 ### Set up the device manager
 
 `DeviceManager` creates a collection per connection and a coordinator per matching device. Its collection factory receives a `Connection`; its coordinator factory receives `hass` and the device model. It also subscribes to connections registered after setup.
