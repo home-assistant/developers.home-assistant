@@ -174,7 +174,7 @@ The `unit_of_measurement` of a number selector may also be translated with a tra
 }
 ```
 
-The fields of an object selector may also be translated with a translation key. Each field supports a `name`, an optional `description`, and an optional `overview_label`. The `overview_label` is shown for the field's value in the overview of the object selector in config, options, subentry and repair flows. It must contain the `{value}` placeholder, which is replaced with the formatted field value, and no other placeholders. When no `overview_label` is set, only the value is shown.
+The fields of an object selector may also be translated with a translation key. Each field supports a `name`, an optional `description`, and an optional `overview_label`. The `overview_label` is shown for the field's value in the overview of the object selector. It must contain the `{value}` placeholder, which is replaced with the formatted field value, and no other placeholders. When no `overview_label` is set, only the value is shown.
 ```json
 {
   // Translations for object selector to be used in option and config flows
