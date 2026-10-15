@@ -160,6 +160,7 @@ class ExampleCoordinator(DataUpdateCoordinator[ExampleDevice]):
 Each entity platform subscribes to `manager.subscribe_coordinator_added(callback)`. This immediately delivers existing coordinators and reports future additions. Register its returned unsubscribe callback on entry unload. For example, in `sensor.py`, where `ExampleSensor` is your sensor entity:
 
 ```python
+from homeassistant.components.sensor import SensorEntityDescription
 from homeassistant.core import HomeAssistant, callback
 from homeassistant.helpers.entity_platform import AddConfigEntryEntitiesCallback
 
@@ -174,7 +175,14 @@ async def async_setup_entry(
 ) -> None:
     @callback
     def added(coordinator: ExampleCoordinator) -> None:
-        async_add_entities([ExampleSensor(coordinator)])
+        async_add_entities(
+            [
+                ExampleSensor(
+                    coordinator,
+                    SensorEntityDescription(key="temperature", name="Temperature"),
+                )
+            ]
+        )
 
     entry.async_on_unload(entry.runtime_data.subscribe_coordinator_added(added))
 ```
@@ -182,6 +190,8 @@ async def async_setup_entry(
 ### Entities and device identity
 
 Derive entity classes from `LoRaWANEntity[ExampleDevice]` and the relevant platform entity class. `LoRaWANEntity` extends `CoordinatorEntity`, exposes the model as `self.device`, and marks closed models unavailable. Its `async_update()` is a no-op because updates arrive through subscriptions.
+
+Pass the coordinator and entity description to the constructor. The base class stores `entity_description` and builds the unique ID as `network_id:dev_eui:description.key`. Use a distinct description key for each datapoint on a device.
 
 Device integrations provide device names and other metadata through their entities' `DeviceInfo`. Home Assistant creates the registry entries when it adds the entities. Use `device_identifier` to identify the device:
 
@@ -206,7 +216,7 @@ class ExampleEntity(LoRaWANEntity[ExampleDevice]):
         )
 ```
 
-This identifier includes the integration domain, connection entry ID, and DevEUI. Include the connection entry ID and DevEUI in entity unique IDs too, followed by the channel or measurement key. This keeps devices on separate servers distinct even when they have the same DevEUI.
+The device identifier includes the integration domain, connection entry ID, and DevEUI. The base entity's unique ID also includes the connection entry ID, keeping devices on separate connections distinct even when they have the same DevEUI.
 
 Keep payload decoding and command encoding in the device library. Entity properties read model state; entity actions call model methods and translate command failures to Home Assistant exceptions.
 
