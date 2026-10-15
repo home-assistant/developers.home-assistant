@@ -174,6 +174,27 @@ The `unit_of_measurement` of a number selector may also be translated with a tra
 }
 ```
 
+The fields of an object selector may also be translated with a translation key. Each field supports a `name`, an optional `description`, and an optional `overview_label`. The `overview_label` is shown for the field's value in the overview of the object selector in config, options, subentry and repair flows. It must contain the `{value}` placeholder, which is replaced with the formatted field value, and no other placeholders. When no `overview_label` is set, only the value is shown.
+```json
+{
+  // Translations for object selector to be used in option and config flows
+  "selector": {
+    // The key is linked to the `translation_key` that needs to be set
+    // using the ObjectSelectorConfig class
+    "sensor_offsets": {
+      // The translations for the object selector fields
+      "fields": {
+        "uncompensated": {
+          "name": "Uncompensated value",
+          "description": "The value before the offset is applied.",
+          "overview_label": "Uncompensated value: {value}"
+        }
+      }
+    }
+  }
+}
+```
+
 ### Service Actions
 
 The translations of service actions strings are defined under the `services` key.
