@@ -81,6 +81,19 @@ await lorawan.async_validate_devices(hass, create_collection=ExampleDevices)
 
 The helper returns normally when it finds a matching device. It raises `lorawan.NoConnectionsError` if no connection can be checked, or `lorawan.NoSupportedDevicesError` if the checked connections have no match. Map these exceptions to config flow abort messages.
 
+Reference LoRaWAN's shared abort messages in the device integration's `strings.json`:
+
+```json
+{
+  "config": {
+    "abort": {
+      "no_lorawan_connections": "[%key:component::lorawan::common::no_lorawan_connections%]",
+      "no_supported_devices": "[%key:component::lorawan::common::no_supported_devices%]"
+    }
+  }
+}
+```
+
 If the integration supports only some of the collection's models, pass an `is_supported` predicate that accepts a device and returns a boolean. The helper closes each temporary collection after checking it, including on failure or cancellation. It does not create coordinators or registry entries, retain subscriptions, or close backend connections.
 
 ### Set up the device manager
